@@ -1,26 +1,23 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { CommonAddAdministrativeAreasLevel2ContextEvent, CommonAdministrativeAreaLevel2, CommonIAdministrativeAreaLevel2Repository } from '@app/common/administrative-area-level-2';
 import {
-    CommonAdministrativeAreaLevel2Id,
-    CommonAdministrativeAreaLevel2CountryId,
     CommonAdministrativeAreaLevel2AdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel2Code,
+    CommonAdministrativeAreaLevel2CountryId,
+    CommonAdministrativeAreaLevel2CreatedAt,
     CommonAdministrativeAreaLevel2CustomCode,
-    CommonAdministrativeAreaLevel2Name,
-    CommonAdministrativeAreaLevel2Slug,
+    CommonAdministrativeAreaLevel2DeletedAt,
+    CommonAdministrativeAreaLevel2Id,
     CommonAdministrativeAreaLevel2Latitude,
     CommonAdministrativeAreaLevel2Longitude,
-    CommonAdministrativeAreaLevel2Zoom,
     CommonAdministrativeAreaLevel2MapType,
-    CommonAdministrativeAreaLevel2CreatedAt,
+    CommonAdministrativeAreaLevel2Name,
+    CommonAdministrativeAreaLevel2Slug,
     CommonAdministrativeAreaLevel2UpdatedAt,
-    CommonAdministrativeAreaLevel2DeletedAt,
-} from '../../domain/value-objects';
-import { CommonIAdministrativeAreaLevel2Repository } from '../../domain/common-administrative-area-level-2.repository';
-import { CommonAdministrativeAreaLevel2 } from '../../domain/common-administrative-area-level-2.aggregate';
-import { CommonAddAdministrativeAreasLevel2ContextEvent } from '../events/common-add-administrative-areas-level-2-context.event';
+    CommonAdministrativeAreaLevel2Zoom,
+} from '@app/common/administrative-area-level-2/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class CommonUpdateAdministrativeAreasLevel2Service
@@ -66,7 +63,6 @@ export class CommonUpdateAdministrativeAreasLevel2Service
             new CommonAdministrativeAreaLevel2UpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

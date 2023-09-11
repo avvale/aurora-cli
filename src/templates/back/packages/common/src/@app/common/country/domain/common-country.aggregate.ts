@@ -1,35 +1,33 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CommonCreatedCountryEvent, CommonDeletedCountryEvent, CommonUpdatedCountryEvent } from '@app/common/country';
 import {
-    CommonCountryId,
-    CommonCountryIso3166Alpha2,
-    CommonCountryIso3166Alpha3,
-    CommonCountryIso3166Numeric,
-    CommonCountryCustomCode,
-    CommonCountryPrefix,
-    CommonCountryImage,
-    CommonCountrySort,
     CommonCountryAdministrativeAreas,
-    CommonCountryLatitude,
-    CommonCountryLongitude,
-    CommonCountryZoom,
-    CommonCountryMapType,
     CommonCountryAvailableLangs,
     CommonCountryCreatedAt,
-    CommonCountryUpdatedAt,
+    CommonCountryCustomCode,
     CommonCountryDeletedAt,
-    CommonCountryI18nLangId,
-    CommonCountryI18nName,
-    CommonCountryI18nSlug,
     CommonCountryI18nAdministrativeAreaLevel1,
     CommonCountryI18nAdministrativeAreaLevel2,
     CommonCountryI18nAdministrativeAreaLevel3,
-} from './value-objects';
-import { CommonCreatedCountryEvent } from '../application/events/common-created-country.event';
-import { CommonUpdatedCountryEvent } from '../application/events/common-updated-country.event';
-import { CommonDeletedCountryEvent } from '../application/events/common-deleted-country.event';
+    CommonCountryI18nLangId,
+    CommonCountryI18nName,
+    CommonCountryI18nSlug,
+    CommonCountryId,
+    CommonCountryImage,
+    CommonCountryIso3166Alpha2,
+    CommonCountryIso3166Alpha3,
+    CommonCountryIso3166Numeric,
+    CommonCountryLatitude,
+    CommonCountryLongitude,
+    CommonCountryMapType,
+    CommonCountryPrefix,
+    CommonCountrySort,
+    CommonCountryUpdatedAt,
+    CommonCountryZoom,
+} from '@app/common/country/domain/value-objects';
 import { CommonLang } from '@app/common/lang';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonCountry extends AggregateRoot
 {
@@ -56,8 +54,6 @@ export class CommonCountry extends AggregateRoot
     administrativeAreaLevel1: CommonCountryI18nAdministrativeAreaLevel1;
     administrativeAreaLevel2: CommonCountryI18nAdministrativeAreaLevel2;
     administrativeAreaLevel3: CommonCountryI18nAdministrativeAreaLevel3;
-
-    // eager relationship
     lang: CommonLang;
 
     constructor(
@@ -84,7 +80,6 @@ export class CommonCountry extends AggregateRoot
         administrativeAreaLevel1: CommonCountryI18nAdministrativeAreaLevel1,
         administrativeAreaLevel2: CommonCountryI18nAdministrativeAreaLevel2,
         administrativeAreaLevel3: CommonCountryI18nAdministrativeAreaLevel3,
-
         lang?: CommonLang,
     )
     {
@@ -112,8 +107,6 @@ export class CommonCountry extends AggregateRoot
         this.administrativeAreaLevel1 = administrativeAreaLevel1;
         this.administrativeAreaLevel2 = administrativeAreaLevel2;
         this.administrativeAreaLevel3 = administrativeAreaLevel3;
-
-        // eager relationship
         this.lang = lang;
     }
 
@@ -141,7 +134,6 @@ export class CommonCountry extends AggregateRoot
         administrativeAreaLevel1: CommonCountryI18nAdministrativeAreaLevel1,
         administrativeAreaLevel2: CommonCountryI18nAdministrativeAreaLevel2,
         administrativeAreaLevel3: CommonCountryI18nAdministrativeAreaLevel3,
-
         lang?: CommonLang,
     ): CommonCountry
     {
@@ -169,7 +161,6 @@ export class CommonCountry extends AggregateRoot
             administrativeAreaLevel1,
             administrativeAreaLevel2,
             administrativeAreaLevel3,
-
             lang,
         );
     }
@@ -293,8 +284,6 @@ export class CommonCountry extends AggregateRoot
             administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
             administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
             administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
-
-            // eager relationship
             lang: this.lang?.toDTO(),
         };
     }
@@ -343,8 +332,6 @@ export class CommonCountry extends AggregateRoot
             administrativeAreaLevel1: this.administrativeAreaLevel1?.value,
             administrativeAreaLevel2: this.administrativeAreaLevel2?.value,
             administrativeAreaLevel3: this.administrativeAreaLevel3?.value,
-
-            // eager relationship
             lang: this.lang?.toDTO(),
         };
     }

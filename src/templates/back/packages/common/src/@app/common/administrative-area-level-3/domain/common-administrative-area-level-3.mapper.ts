@@ -1,26 +1,25 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { CommonAdministrativeAreaLevel3 } from './common-administrative-area-level-3.aggregate';
-import { CommonAdministrativeAreaLevel3Response } from './common-administrative-area-level-3.response';
+import { CommonAdministrativeAreaLevel1Mapper } from '@app/common/administrative-area-level-1';
+import { CommonAdministrativeAreaLevel2Mapper } from '@app/common/administrative-area-level-2';
+import { CommonAdministrativeAreaLevel3, CommonAdministrativeAreaLevel3Response } from '@app/common/administrative-area-level-3';
 import {
-    CommonAdministrativeAreaLevel3Id,
-    CommonAdministrativeAreaLevel3CountryId,
     CommonAdministrativeAreaLevel3AdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel3AdministrativeAreaLevel2Id,
     CommonAdministrativeAreaLevel3Code,
+    CommonAdministrativeAreaLevel3CountryId,
+    CommonAdministrativeAreaLevel3CreatedAt,
     CommonAdministrativeAreaLevel3CustomCode,
-    CommonAdministrativeAreaLevel3Name,
-    CommonAdministrativeAreaLevel3Slug,
+    CommonAdministrativeAreaLevel3DeletedAt,
+    CommonAdministrativeAreaLevel3Id,
     CommonAdministrativeAreaLevel3Latitude,
     CommonAdministrativeAreaLevel3Longitude,
-    CommonAdministrativeAreaLevel3Zoom,
     CommonAdministrativeAreaLevel3MapType,
-    CommonAdministrativeAreaLevel3CreatedAt,
+    CommonAdministrativeAreaLevel3Name,
+    CommonAdministrativeAreaLevel3Slug,
     CommonAdministrativeAreaLevel3UpdatedAt,
-    CommonAdministrativeAreaLevel3DeletedAt,
-} from './value-objects';
+    CommonAdministrativeAreaLevel3Zoom,
+} from '@app/common/administrative-area-level-3/domain/value-objects';
 import { CommonCountryMapper } from '@app/common/country';
-import { CommonAdministrativeAreaLevel1Mapper } from '@app/common/administrative-area-level-1';
-import { CommonAdministrativeAreaLevel2Mapper } from '@app/common/administrative-area-level-2';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class CommonAdministrativeAreaLevel3Mapper implements IMapper
 {

@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { CommonResource } from './common-resource.aggregate';
 import { CommonResourceId } from './value-objects';
+import { CommonResource } from '@app/common/resource';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class CommonIResourceRepository implements IRepository<CommonResource>
 {

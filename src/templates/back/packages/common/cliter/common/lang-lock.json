@@ -183,7 +183,7 @@
         },
         {
             "path": "src/@app/common/lang/application/get/common-get-langs.query-handler.ts",
-            "integrity": "sha1:9c1d01aa4c822887bd3bc352c92db3db5192910c"
+            "integrity": "sha1:b53ebd1046bb6f2bf9a6c2e19c7cfdb3f56b86f5"
         },
         {
             "path": "src/@app/common/lang/application/get/common-get-langs.query.ts",
@@ -279,15 +279,15 @@
         },
         {
             "path": "src/@app/common/lang/application/update/common-update-langs.service.ts",
-            "integrity": "sha1:1f0b0de9baa19ed4d8b3ff41226f43c4d189fc0c"
+            "integrity": "sha1:37a151aa9a4a07ac61b19dc5c91958f81182e5f8"
         },
         {
             "path": "src/@app/common/lang/application/upsert/common-upsert-lang.command-handler.spec.ts",
-            "integrity": "sha1:8095cef4449b2801bd9fde0e36c025251d5d4241"
+            "integrity": "sha1:879e5a73786842012b4ee1c72126a35f6931c158"
         },
         {
             "path": "src/@app/common/lang/application/upsert/common-upsert-lang.command-handler.ts",
-            "integrity": "sha1:3676b8f41da7a4040859552667775493df312d9d"
+            "integrity": "sha1:d022b2264ccb8932d409baa2bb46d1b34a992242"
         },
         {
             "path": "src/@app/common/lang/application/upsert/common-upsert-lang.command.ts",
@@ -295,7 +295,7 @@
         },
         {
             "path": "src/@app/common/lang/application/upsert/common-upsert-lang.service.spec.ts",
-            "integrity": "sha1:9a606907717364a5ba01a3a3f7085cf28f846b27"
+            "integrity": "sha1:0f4cf06bcf25e0dcd7fcdf2da812b46c45efbb7e"
         },
         {
             "path": "src/@app/common/lang/application/upsert/common-upsert-lang.service.ts",
@@ -303,15 +303,15 @@
         },
         {
             "path": "src/@app/common/lang/domain/common-lang.aggregate.ts",
-            "integrity": "sha1:d357a5cd01f25aa7d51bb9aee910e1ba20c5dad3"
+            "integrity": "sha1:d09253dac28bbb9846b020c1144c09aeaa1c6382"
         },
         {
             "path": "src/@app/common/lang/domain/common-lang.mapper.ts",
-            "integrity": "sha1:257ca78c440bd133b72023335302369fc941a133"
+            "integrity": "sha1:c9d993ccf166c087e1ac2c9f8cd1c47cf8c481a7"
         },
         {
             "path": "src/@app/common/lang/domain/common-lang.repository.ts",
-            "integrity": "sha1:5c85759d89f489225a72b8d9a08ed31a6949d678"
+            "integrity": "sha1:e21ebdf0e36ab8bef44d2f0c341d3e08398b1827"
         },
         {
             "path": "src/@app/common/lang/domain/common-lang.response.ts",
@@ -327,19 +327,19 @@
         },
         {
             "path": "src/@app/common/lang/infrastructure/mock/common-mock-lang.data.ts",
-            "integrity": "sha1:bbe9e55782f21d3f58536ec3c20906d297d572f9"
+            "integrity": "sha1:4432e87b75da3a9a2d63fd9cab828dc0b074cbcb"
         },
         {
             "path": "src/@app/common/lang/infrastructure/mock/common-mock-lang.repository.ts",
-            "integrity": "sha1:3fcbbd1ed1d4fd814a781854bde2bd9da0182384"
+            "integrity": "sha1:4bacf59da0ddedd35ee68671e04291e2c4c349a7"
         },
         {
             "path": "src/@app/common/lang/infrastructure/mock/common-mock-lang.seeder.ts",
-            "integrity": "sha1:14d4b9619991971c3065f8cce05338a22f8d49f1"
+            "integrity": "sha1:45bd23904b4254d0162f4927e6e04265b425d128"
         },
         {
             "path": "src/@app/common/lang/infrastructure/sequelize/common-sequelize-lang.model.ts",
-            "integrity": "sha1:92ea37301f5ba93f259129b9e56c7170e52eeea4"
+            "integrity": "sha1:a57fb623d459356f8ca5d75a658235d0aa046ff5"
         },
         {
             "path": "src/@app/common/lang/infrastructure/sequelize/common-sequelize-lang.repository.ts",
@@ -491,7 +491,7 @@
         },
         {
             "path": "src/@api/common/lang/dto/common-lang.dto.ts",
-            "integrity": "sha1:8affb0e02cfe6c8272199062cb8c98329d3ee20b"
+            "integrity": "sha1:1cf983e1a437e85d878a8c1e78009847fa1783d8"
         },
         {
             "path": "src/@api/common/lang/dto/common-create-lang.dto.ts",
@@ -699,11 +699,11 @@
         },
         {
             "path": "test/acceptance/common/lang.e2e-spec.ts",
-            "integrity": "sha1:4a97340427dbb503f12d7a3cd4e74a89e3b29057"
+            "integrity": "sha1:0f5645fc91c91a199a5e5e4de63ab163b91634a9"
         },
         {
             "path": "postman/common/common.lang.postman.json",
-            "integrity": "sha1:0527636604b2212a3955dab980ea6d550fc3bf40"
+            "integrity": "sha1:c700c2a10bf646251169b923b8728efd0cfa86fb"
         }
     ]
 }

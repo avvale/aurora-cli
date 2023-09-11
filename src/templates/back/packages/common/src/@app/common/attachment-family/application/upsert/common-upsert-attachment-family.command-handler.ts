@@ -1,21 +1,18 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonUpsertAttachmentFamilyCommand } from './common-upsert-attachment-family.command';
-import { CommonUpsertAttachmentFamilyService } from './common-upsert-attachment-family.service';
+import { CommonUpsertAttachmentFamilyCommand } from '@app/common/attachment-family';
+import { CommonUpsertAttachmentFamilyService } from '@app/common/attachment-family/application/upsert/common-upsert-attachment-family.service';
 import {
-    CommonAttachmentFamilyId,
-    CommonAttachmentFamilyResourceId,
-    CommonAttachmentFamilyName,
-    CommonAttachmentFamilyWidth,
-    CommonAttachmentFamilyHeight,
     CommonAttachmentFamilyFitType,
-    CommonAttachmentFamilyQuality,
-    CommonAttachmentFamilySizes,
     CommonAttachmentFamilyFormat,
-    CommonAttachmentFamilyCreatedAt,
-    CommonAttachmentFamilyUpdatedAt,
-    CommonAttachmentFamilyDeletedAt,
-} from '../../domain/value-objects';
+    CommonAttachmentFamilyHeight,
+    CommonAttachmentFamilyId,
+    CommonAttachmentFamilyName,
+    CommonAttachmentFamilyQuality,
+    CommonAttachmentFamilyResourceId,
+    CommonAttachmentFamilySizes,
+    CommonAttachmentFamilyWidth,
+} from '@app/common/attachment-family/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonUpsertAttachmentFamilyCommand)
 export class CommonUpsertAttachmentFamilyCommandHandler implements ICommandHandler<CommonUpsertAttachmentFamilyCommand>

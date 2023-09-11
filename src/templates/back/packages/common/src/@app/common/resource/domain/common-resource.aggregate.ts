@@ -1,19 +1,17 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CommonCreatedResourceEvent, CommonDeletedResourceEvent, CommonUpdatedResourceEvent } from '@app/common/resource';
 import {
-    CommonResourceId,
     CommonResourceCode,
-    CommonResourceName,
-    CommonResourceIsActive,
-    CommonResourceHasAttachments,
     CommonResourceCreatedAt,
-    CommonResourceUpdatedAt,
     CommonResourceDeletedAt,
-} from './value-objects';
-import { CommonCreatedResourceEvent } from '../application/events/common-created-resource.event';
-import { CommonUpdatedResourceEvent } from '../application/events/common-updated-resource.event';
-import { CommonDeletedResourceEvent } from '../application/events/common-deleted-resource.event';
+    CommonResourceHasAttachments,
+    CommonResourceId,
+    CommonResourceIsActive,
+    CommonResourceName,
+    CommonResourceUpdatedAt,
+} from '@app/common/resource/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonResource extends AggregateRoot
 {
@@ -26,8 +24,6 @@ export class CommonResource extends AggregateRoot
     updatedAt: CommonResourceUpdatedAt;
     deletedAt: CommonResourceDeletedAt;
 
-    // eager relationship
-
     constructor(
         id: CommonResourceId,
         code: CommonResourceCode,
@@ -37,7 +33,6 @@ export class CommonResource extends AggregateRoot
         createdAt: CommonResourceCreatedAt,
         updatedAt: CommonResourceUpdatedAt,
         deletedAt: CommonResourceDeletedAt,
-
     )
     {
         super();
@@ -49,8 +44,6 @@ export class CommonResource extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
     }
 
     static register(
@@ -62,7 +55,6 @@ export class CommonResource extends AggregateRoot
         createdAt: CommonResourceCreatedAt,
         updatedAt: CommonResourceUpdatedAt,
         deletedAt: CommonResourceDeletedAt,
-
     ): CommonResource
     {
         return new CommonResource(
@@ -74,7 +66,6 @@ export class CommonResource extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
         );
     }
 
@@ -137,8 +128,6 @@ export class CommonResource extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 
@@ -154,8 +143,6 @@ export class CommonResource extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 }

@@ -1,21 +1,20 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { CommonAttachmentFamily } from './common-attachment-family.aggregate';
-import { CommonAttachmentFamilyResponse } from './common-attachment-family.response';
+import { CommonAttachmentFamily, CommonAttachmentFamilyResponse } from '@app/common/attachment-family';
 import {
-    CommonAttachmentFamilyId,
-    CommonAttachmentFamilyResourceId,
-    CommonAttachmentFamilyName,
-    CommonAttachmentFamilyWidth,
-    CommonAttachmentFamilyHeight,
-    CommonAttachmentFamilyFitType,
-    CommonAttachmentFamilyQuality,
-    CommonAttachmentFamilySizes,
-    CommonAttachmentFamilyFormat,
     CommonAttachmentFamilyCreatedAt,
-    CommonAttachmentFamilyUpdatedAt,
     CommonAttachmentFamilyDeletedAt,
-} from './value-objects';
+    CommonAttachmentFamilyFitType,
+    CommonAttachmentFamilyFormat,
+    CommonAttachmentFamilyHeight,
+    CommonAttachmentFamilyId,
+    CommonAttachmentFamilyName,
+    CommonAttachmentFamilyQuality,
+    CommonAttachmentFamilyResourceId,
+    CommonAttachmentFamilySizes,
+    CommonAttachmentFamilyUpdatedAt,
+    CommonAttachmentFamilyWidth,
+} from '@app/common/attachment-family/domain/value-objects';
 import { CommonResourceMapper } from '@app/common/resource';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class CommonAttachmentFamilyMapper implements IMapper
 {

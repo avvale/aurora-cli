@@ -1,23 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { CommonAdministrativeAreaLevel2, commonMockAdministrativeAreaLevel2Data } from '@app/common/administrative-area-level-2';
 import {
-    CommonAdministrativeAreaLevel2Id,
-    CommonAdministrativeAreaLevel2CountryId,
     CommonAdministrativeAreaLevel2AdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel2Code,
+    CommonAdministrativeAreaLevel2CountryId,
+    CommonAdministrativeAreaLevel2CreatedAt,
     CommonAdministrativeAreaLevel2CustomCode,
-    CommonAdministrativeAreaLevel2Name,
-    CommonAdministrativeAreaLevel2Slug,
+    CommonAdministrativeAreaLevel2DeletedAt,
+    CommonAdministrativeAreaLevel2Id,
     CommonAdministrativeAreaLevel2Latitude,
     CommonAdministrativeAreaLevel2Longitude,
-    CommonAdministrativeAreaLevel2Zoom,
     CommonAdministrativeAreaLevel2MapType,
-    CommonAdministrativeAreaLevel2CreatedAt,
+    CommonAdministrativeAreaLevel2Name,
+    CommonAdministrativeAreaLevel2Slug,
     CommonAdministrativeAreaLevel2UpdatedAt,
-    CommonAdministrativeAreaLevel2DeletedAt,
-} from '../../domain/value-objects';
-import { CommonAdministrativeAreaLevel2 } from '../../domain/common-administrative-area-level-2.aggregate';
-import { commonMockAdministrativeAreaLevel2Data } from './common-mock-administrative-area-level-2.data';
+    CommonAdministrativeAreaLevel2Zoom,
+} from '@app/common/administrative-area-level-2/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

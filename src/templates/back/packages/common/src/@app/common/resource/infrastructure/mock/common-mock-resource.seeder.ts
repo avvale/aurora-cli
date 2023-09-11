@@ -1,17 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { commonMockResourceData, CommonResource } from '@app/common/resource';
 import {
-    CommonResourceId,
     CommonResourceCode,
-    CommonResourceName,
-    CommonResourceIsActive,
-    CommonResourceHasAttachments,
     CommonResourceCreatedAt,
-    CommonResourceUpdatedAt,
     CommonResourceDeletedAt,
-} from '../../domain/value-objects';
-import { CommonResource } from '../../domain/common-resource.aggregate';
-import { commonMockResourceData } from './common-mock-resource.data';
+    CommonResourceHasAttachments,
+    CommonResourceId,
+    CommonResourceIsActive,
+    CommonResourceName,
+    CommonResourceUpdatedAt,
+} from '@app/common/resource/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

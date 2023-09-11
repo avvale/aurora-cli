@@ -13,10 +13,12 @@ export class CommonGetAttachmentFamiliesQueryHandler implements IQueryHandler<Co
 
     async execute(query: CommonGetAttachmentFamiliesQuery): Promise<CommonAttachmentFamilyResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getAttachmentFamiliesService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getAttachmentFamiliesService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

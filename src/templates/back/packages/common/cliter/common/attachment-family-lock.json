@@ -183,7 +183,7 @@
         },
         {
             "path": "src/@app/common/attachment-family/application/get/common-get-attachment-families.query-handler.ts",
-            "integrity": "sha1:c30c9523e9caf614c6bb93bd657cf2f5fe9c772a"
+            "integrity": "sha1:88f29bcdd26bd58ecf7404392522bb2fcd8b215f"
         },
         {
             "path": "src/@app/common/attachment-family/application/get/common-get-attachment-families.query.ts",
@@ -279,15 +279,15 @@
         },
         {
             "path": "src/@app/common/attachment-family/application/update/common-update-attachment-families.service.ts",
-            "integrity": "sha1:3b28b85296df3ffcdc5bd270c7e676474d4d7321"
+            "integrity": "sha1:c89a890dc8b508d07efc55de9b8a5722a43cc54b"
         },
         {
             "path": "src/@app/common/attachment-family/application/upsert/common-upsert-attachment-family.command-handler.spec.ts",
-            "integrity": "sha1:eb4f420361cbe9cee41d5834a4b517a480c35113"
+            "integrity": "sha1:50ae627813e4b74f5ed3fa0cfe03e1aaebfc6adf"
         },
         {
             "path": "src/@app/common/attachment-family/application/upsert/common-upsert-attachment-family.command-handler.ts",
-            "integrity": "sha1:cc1cc7eb762c02c7333ce0a1849651898be0e69c"
+            "integrity": "sha1:f15a0a055e45299cfeed66780f2249be881841c8"
         },
         {
             "path": "src/@app/common/attachment-family/application/upsert/common-upsert-attachment-family.command.ts",
@@ -295,7 +295,7 @@
         },
         {
             "path": "src/@app/common/attachment-family/application/upsert/common-upsert-attachment-family.service.spec.ts",
-            "integrity": "sha1:2f6d560953acf7fbab3641e2ace0ae7971bbe831"
+            "integrity": "sha1:40d80a33f9972e0333aec09f395e1d6ceb4aeb08"
         },
         {
             "path": "src/@app/common/attachment-family/application/upsert/common-upsert-attachment-family.service.ts",
@@ -303,15 +303,15 @@
         },
         {
             "path": "src/@app/common/attachment-family/domain/common-attachment-family.aggregate.ts",
-            "integrity": "sha1:91be78a5928980515bf3e56619d612a3e83a6e55"
+            "integrity": "sha1:cc2a1e7d7e2653b3a28ab933ad31e3b79ec7cd54"
         },
         {
             "path": "src/@app/common/attachment-family/domain/common-attachment-family.mapper.ts",
-            "integrity": "sha1:5f4267c2ce9f8ca2a814acdabcb6a76e0a6c6bf0"
+            "integrity": "sha1:f59c65ffd2bb50b3a37f9cbdb54d27a6a1afb457"
         },
         {
             "path": "src/@app/common/attachment-family/domain/common-attachment-family.repository.ts",
-            "integrity": "sha1:bc967bb0a8f5f6b4d3342289ff839fdff3da6e19"
+            "integrity": "sha1:9b160c95f4c8d1120d4856a1256e5d8bd297f37e"
         },
         {
             "path": "src/@app/common/attachment-family/domain/common-attachment-family.response.ts",
@@ -327,19 +327,19 @@
         },
         {
             "path": "src/@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.data.ts",
-            "integrity": "sha1:72e90a005e67cd2a1bad91cf074c6e873485078f"
+            "integrity": "sha1:55ef1a7281d7eef93e1f0fd458ad8015f9468d5c"
         },
         {
             "path": "src/@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.repository.ts",
-            "integrity": "sha1:e7e290ccdf90eb5d0e1708079a06f2486f99a1fa"
+            "integrity": "sha1:5a8cf077d47ff30ab727262a8ca4e3ac6ffa2427"
         },
         {
             "path": "src/@app/common/attachment-family/infrastructure/mock/common-mock-attachment-family.seeder.ts",
-            "integrity": "sha1:188828a91cf4c09554b1c00b3befa0c57069987a"
+            "integrity": "sha1:e148b5ee8b04883421470770638ded2a781f9ec2"
         },
         {
             "path": "src/@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model.ts",
-            "integrity": "sha1:f0f945ab22c2e0661955e9ec7c1f053fbff76645"
+            "integrity": "sha1:0560cd4b413cc210666b2129ea1c0cb82ca8e431"
         },
         {
             "path": "src/@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.repository.ts",
@@ -487,7 +487,7 @@
         },
         {
             "path": "src/@api/common/attachment-family/dto/common-attachment-family.dto.ts",
-            "integrity": "sha1:132578556c1d56d2f1d04d721356e7119b05f721"
+            "integrity": "sha1:31b44d2befb255cfb9f0d01a05ee0aa65f8c26e5"
         },
         {
             "path": "src/@api/common/attachment-family/dto/common-create-attachment-family.dto.ts",
@@ -699,7 +699,7 @@
         },
         {
             "path": "postman/common/common.attachment-family.postman.json",
-            "integrity": "sha1:e4bc0cbf38a0578c644ae8ddd522f0be940b6bc8"
+            "integrity": "sha1:21b8d9dd144575a8645b548d487638e93982316b"
         }
     ]
 }

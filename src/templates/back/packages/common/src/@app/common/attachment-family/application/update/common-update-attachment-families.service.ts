@@ -1,24 +1,21 @@
+import { CommonAddAttachmentFamiliesContextEvent, CommonAttachmentFamily, CommonIAttachmentFamilyRepository } from '@app/common/attachment-family';
+import {
+    CommonAttachmentFamilyCreatedAt,
+    CommonAttachmentFamilyDeletedAt,
+    CommonAttachmentFamilyFitType,
+    CommonAttachmentFamilyFormat,
+    CommonAttachmentFamilyHeight,
+    CommonAttachmentFamilyId,
+    CommonAttachmentFamilyName,
+    CommonAttachmentFamilyQuality,
+    CommonAttachmentFamilyResourceId,
+    CommonAttachmentFamilySizes,
+    CommonAttachmentFamilyUpdatedAt,
+    CommonAttachmentFamilyWidth,
+} from '@app/common/attachment-family/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import {
-    CommonAttachmentFamilyId,
-    CommonAttachmentFamilyResourceId,
-    CommonAttachmentFamilyName,
-    CommonAttachmentFamilyWidth,
-    CommonAttachmentFamilyHeight,
-    CommonAttachmentFamilyFitType,
-    CommonAttachmentFamilyQuality,
-    CommonAttachmentFamilySizes,
-    CommonAttachmentFamilyFormat,
-    CommonAttachmentFamilyCreatedAt,
-    CommonAttachmentFamilyUpdatedAt,
-    CommonAttachmentFamilyDeletedAt,
-} from '../../domain/value-objects';
-import { CommonIAttachmentFamilyRepository } from '../../domain/common-attachment-family.repository';
-import { CommonAttachmentFamily } from '../../domain/common-attachment-family.aggregate';
-import { CommonAddAttachmentFamiliesContextEvent } from '../events/common-add-attachment-families-context.event';
 
 @Injectable()
 export class CommonUpdateAttachmentFamiliesService
@@ -60,7 +57,6 @@ export class CommonUpdateAttachmentFamiliesService
             new CommonAttachmentFamilyUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

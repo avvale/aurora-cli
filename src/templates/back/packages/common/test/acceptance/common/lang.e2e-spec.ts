@@ -2,8 +2,9 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { CommonModule } from '@api/common/common.module';
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { CommonILangRepository, commonMockLangData, CommonMockLangSeeder } from '@app/common/lang';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('lang', () =>
                 CommonMockLangSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonLangId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonLangName must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIso6392 must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonLangIso6392 must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIso6393 must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonLangIso6393 must be defined, can not be null');
             });
     });
 
@@ -150,7 +153,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIetf must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonLangIetf must be defined, can not be null');
             });
     });
 
@@ -166,7 +169,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangDir must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonLangDir must be defined, can not be null');
             });
     });
 
@@ -182,7 +185,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIsActive must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonLangIsActive must be defined, can not be null');
             });
     });
 
@@ -198,7 +201,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonLangId must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +217,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonLangName must be defined, can not be undefined');
             });
     });
 
@@ -230,7 +233,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIso6392 must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonLangIso6392 must be defined, can not be undefined');
             });
     });
 
@@ -246,7 +249,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIso6393 must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonLangIso6393 must be defined, can not be undefined');
             });
     });
 
@@ -262,7 +265,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIetf must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonLangIetf must be defined, can not be undefined');
             });
     });
 
@@ -278,7 +281,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangDir must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonLangDir must be defined, can not be undefined');
             });
     });
 
@@ -294,7 +297,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIsActive must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonLangIsActive must be defined, can not be undefined');
             });
     });
 
@@ -310,7 +313,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for CommonLangId is not allowed, must be a length of 36');
             });
     });
 
@@ -326,7 +329,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIso6392 is not allowed, must be a length of 2');
+                expect(res.body.message).toContain('Value for CommonLangIso6392 is not allowed, must be a length of 2');
             });
     });
 
@@ -342,7 +345,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIso6393 is not allowed, must be a length of 3');
+                expect(res.body.message).toContain('Value for CommonLangIso6393 is not allowed, must be a length of 3');
             });
     });
 
@@ -358,7 +361,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIetf is not allowed, must be a length of 5');
+                expect(res.body.message).toContain('Value for CommonLangIetf is not allowed, must be a length of 5');
             });
     });
 
@@ -374,7 +377,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangName is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonLangName is too large, has a maximum length of 100');
             });
     });
 
@@ -390,7 +393,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangCustomCode is too large, has a maximum length of 10');
+                expect(res.body.message).toContain('Value for CommonLangCustomCode is too large, has a maximum length of 10');
             });
     });
 
@@ -406,7 +409,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangSort is too large, has a maximum length of 6');
+                expect(res.body.message).toContain('Value for CommonLangSort is too large, has a maximum length of 6');
             });
     });
 
@@ -422,7 +425,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangIsActive has to be a boolean value');
+                expect(res.body.message).toContain('Value for CommonLangIsActive has to be a boolean value');
             });
     });
     test('/REST:POST common/lang/create - Got 400 Conflict, LangDir has to be a enum option of LTR, RTL', () =>
@@ -437,7 +440,7 @@ describe('lang', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for LangDir has to be any of this options: LTR, RTL');
+                expect(res.body.message).toContain('Value for CommonLangDir has to be any of this options: LTR, RTL');
             });
     });
 

@@ -13,10 +13,12 @@ export class CommonGetLangsQueryHandler implements IQueryHandler<CommonGetLangsQ
 
     async execute(query: CommonGetLangsQuery): Promise<CommonLangResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getLangsService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getLangsService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

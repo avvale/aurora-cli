@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { CommonLang } from './common-lang.aggregate';
 import { CommonLangId } from './value-objects';
+import { CommonLang } from '@app/common/lang';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class CommonILangRepository implements IRepository<CommonLang>
 {

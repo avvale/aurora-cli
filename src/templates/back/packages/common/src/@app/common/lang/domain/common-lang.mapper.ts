@@ -1,21 +1,20 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { CommonLang } from './common-lang.aggregate';
-import { CommonLangResponse } from './common-lang.response';
+import { CommonLang, CommonLangResponse } from '@app/common/lang';
 import {
+    CommonLangCreatedAt,
+    CommonLangCustomCode,
+    CommonLangDeletedAt,
+    CommonLangDir,
     CommonLangId,
-    CommonLangName,
+    CommonLangIetf,
     CommonLangImage,
+    CommonLangIsActive,
     CommonLangIso6392,
     CommonLangIso6393,
-    CommonLangIetf,
-    CommonLangCustomCode,
-    CommonLangDir,
+    CommonLangName,
     CommonLangSort,
-    CommonLangIsActive,
-    CommonLangCreatedAt,
     CommonLangUpdatedAt,
-    CommonLangDeletedAt,
-} from './value-objects';
+} from '@app/common/lang/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class CommonLangMapper implements IMapper
 {

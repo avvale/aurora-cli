@@ -1,21 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { CommonAttachmentFamily, commonMockAttachmentFamilyData } from '@app/common/attachment-family';
 import {
-    CommonAttachmentFamilyId,
-    CommonAttachmentFamilyResourceId,
-    CommonAttachmentFamilyName,
-    CommonAttachmentFamilyWidth,
-    CommonAttachmentFamilyHeight,
-    CommonAttachmentFamilyFitType,
-    CommonAttachmentFamilyQuality,
-    CommonAttachmentFamilySizes,
-    CommonAttachmentFamilyFormat,
     CommonAttachmentFamilyCreatedAt,
-    CommonAttachmentFamilyUpdatedAt,
     CommonAttachmentFamilyDeletedAt,
-} from '../../domain/value-objects';
-import { CommonAttachmentFamily } from '../../domain/common-attachment-family.aggregate';
-import { commonMockAttachmentFamilyData } from './common-mock-attachment-family.data';
+    CommonAttachmentFamilyFitType,
+    CommonAttachmentFamilyFormat,
+    CommonAttachmentFamilyHeight,
+    CommonAttachmentFamilyId,
+    CommonAttachmentFamilyName,
+    CommonAttachmentFamilyQuality,
+    CommonAttachmentFamilyResourceId,
+    CommonAttachmentFamilySizes,
+    CommonAttachmentFamilyUpdatedAt,
+    CommonAttachmentFamilyWidth,
+} from '@app/common/attachment-family/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

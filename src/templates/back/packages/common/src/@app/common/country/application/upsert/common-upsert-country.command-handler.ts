@@ -1,32 +1,29 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonUpsertCountryCommand } from './common-upsert-country.command';
-import { CommonUpsertCountryService } from './common-upsert-country.service';
+import { CommonUpsertCountryCommand } from '@app/common/country';
+import { CommonUpsertCountryService } from '@app/common/country/application/upsert/common-upsert-country.service';
 import {
-    CommonCountryId,
-    CommonCountryIso3166Alpha2,
-    CommonCountryIso3166Alpha3,
-    CommonCountryIso3166Numeric,
-    CommonCountryCustomCode,
-    CommonCountryPrefix,
-    CommonCountryImage,
-    CommonCountrySort,
     CommonCountryAdministrativeAreas,
-    CommonCountryLatitude,
-    CommonCountryLongitude,
-    CommonCountryZoom,
-    CommonCountryMapType,
     CommonCountryAvailableLangs,
-    CommonCountryCreatedAt,
-    CommonCountryUpdatedAt,
-    CommonCountryDeletedAt,
-    CommonCountryI18nLangId,
-    CommonCountryI18nName,
-    CommonCountryI18nSlug,
+    CommonCountryCustomCode,
     CommonCountryI18nAdministrativeAreaLevel1,
     CommonCountryI18nAdministrativeAreaLevel2,
     CommonCountryI18nAdministrativeAreaLevel3,
-} from '../../domain/value-objects';
+    CommonCountryI18nLangId,
+    CommonCountryI18nName,
+    CommonCountryI18nSlug,
+    CommonCountryId,
+    CommonCountryImage,
+    CommonCountryIso3166Alpha2,
+    CommonCountryIso3166Alpha3,
+    CommonCountryIso3166Numeric,
+    CommonCountryLatitude,
+    CommonCountryLongitude,
+    CommonCountryMapType,
+    CommonCountryPrefix,
+    CommonCountrySort,
+    CommonCountryZoom,
+} from '@app/common/country/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonUpsertCountryCommand)
 export class CommonUpsertCountryCommandHandler implements ICommandHandler<CommonUpsertCountryCommand>

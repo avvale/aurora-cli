@@ -1,32 +1,31 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { CommonCountry } from './common-country.aggregate';
-import { CommonCountryResponse } from './common-country.response';
+import { CommonCountry, CommonCountryResponse } from '@app/common/country';
 import {
-    CommonCountryId,
-    CommonCountryIso3166Alpha2,
-    CommonCountryIso3166Alpha3,
-    CommonCountryIso3166Numeric,
-    CommonCountryCustomCode,
-    CommonCountryPrefix,
-    CommonCountryImage,
-    CommonCountrySort,
     CommonCountryAdministrativeAreas,
-    CommonCountryLatitude,
-    CommonCountryLongitude,
-    CommonCountryZoom,
-    CommonCountryMapType,
     CommonCountryAvailableLangs,
     CommonCountryCreatedAt,
-    CommonCountryUpdatedAt,
+    CommonCountryCustomCode,
     CommonCountryDeletedAt,
-    CommonCountryI18nLangId,
-    CommonCountryI18nName,
-    CommonCountryI18nSlug,
     CommonCountryI18nAdministrativeAreaLevel1,
     CommonCountryI18nAdministrativeAreaLevel2,
     CommonCountryI18nAdministrativeAreaLevel3,
-} from './value-objects';
+    CommonCountryI18nLangId,
+    CommonCountryI18nName,
+    CommonCountryI18nSlug,
+    CommonCountryId,
+    CommonCountryImage,
+    CommonCountryIso3166Alpha2,
+    CommonCountryIso3166Alpha3,
+    CommonCountryIso3166Numeric,
+    CommonCountryLatitude,
+    CommonCountryLongitude,
+    CommonCountryMapType,
+    CommonCountryPrefix,
+    CommonCountrySort,
+    CommonCountryUpdatedAt,
+    CommonCountryZoom,
+} from '@app/common/country/domain/value-objects';
 import { CommonLangMapper } from '@app/common/lang';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class CommonCountryMapper implements IMapper
 {

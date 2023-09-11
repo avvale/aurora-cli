@@ -1,27 +1,25 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CommonAdministrativeAreaLevel1 } from '@app/common/administrative-area-level-1';
+import { CommonCreatedAdministrativeAreaLevel2Event, CommonDeletedAdministrativeAreaLevel2Event, CommonUpdatedAdministrativeAreaLevel2Event } from '@app/common/administrative-area-level-2';
 import {
-    CommonAdministrativeAreaLevel2Id,
-    CommonAdministrativeAreaLevel2CountryId,
     CommonAdministrativeAreaLevel2AdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel2Code,
+    CommonAdministrativeAreaLevel2CountryId,
+    CommonAdministrativeAreaLevel2CreatedAt,
     CommonAdministrativeAreaLevel2CustomCode,
-    CommonAdministrativeAreaLevel2Name,
-    CommonAdministrativeAreaLevel2Slug,
+    CommonAdministrativeAreaLevel2DeletedAt,
+    CommonAdministrativeAreaLevel2Id,
     CommonAdministrativeAreaLevel2Latitude,
     CommonAdministrativeAreaLevel2Longitude,
-    CommonAdministrativeAreaLevel2Zoom,
     CommonAdministrativeAreaLevel2MapType,
-    CommonAdministrativeAreaLevel2CreatedAt,
+    CommonAdministrativeAreaLevel2Name,
+    CommonAdministrativeAreaLevel2Slug,
     CommonAdministrativeAreaLevel2UpdatedAt,
-    CommonAdministrativeAreaLevel2DeletedAt,
-} from './value-objects';
-import { CommonCreatedAdministrativeAreaLevel2Event } from '../application/events/common-created-administrative-area-level-2.event';
-import { CommonUpdatedAdministrativeAreaLevel2Event } from '../application/events/common-updated-administrative-area-level-2.event';
-import { CommonDeletedAdministrativeAreaLevel2Event } from '../application/events/common-deleted-administrative-area-level-2.event';
+    CommonAdministrativeAreaLevel2Zoom,
+} from '@app/common/administrative-area-level-2/domain/value-objects';
 import { CommonCountry } from '@app/common/country';
-import { CommonAdministrativeAreaLevel1 } from '@app/common/administrative-area-level-1';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonAdministrativeAreaLevel2 extends AggregateRoot
 {
@@ -39,8 +37,6 @@ export class CommonAdministrativeAreaLevel2 extends AggregateRoot
     createdAt: CommonAdministrativeAreaLevel2CreatedAt;
     updatedAt: CommonAdministrativeAreaLevel2UpdatedAt;
     deletedAt: CommonAdministrativeAreaLevel2DeletedAt;
-
-    // eager relationship
     country: CommonCountry;
     administrativeAreaLevel1: CommonAdministrativeAreaLevel1;
 
@@ -59,7 +55,6 @@ export class CommonAdministrativeAreaLevel2 extends AggregateRoot
         createdAt: CommonAdministrativeAreaLevel2CreatedAt,
         updatedAt: CommonAdministrativeAreaLevel2UpdatedAt,
         deletedAt: CommonAdministrativeAreaLevel2DeletedAt,
-
         country?: CommonCountry,
         administrativeAreaLevel1?: CommonAdministrativeAreaLevel1,
     )
@@ -79,8 +74,6 @@ export class CommonAdministrativeAreaLevel2 extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.country = country;
         this.administrativeAreaLevel1 = administrativeAreaLevel1;
     }
@@ -100,7 +93,6 @@ export class CommonAdministrativeAreaLevel2 extends AggregateRoot
         createdAt: CommonAdministrativeAreaLevel2CreatedAt,
         updatedAt: CommonAdministrativeAreaLevel2UpdatedAt,
         deletedAt: CommonAdministrativeAreaLevel2DeletedAt,
-
         country?: CommonCountry,
         administrativeAreaLevel1?: CommonAdministrativeAreaLevel1,
     ): CommonAdministrativeAreaLevel2
@@ -120,7 +112,6 @@ export class CommonAdministrativeAreaLevel2 extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             country,
             administrativeAreaLevel1,
         );
@@ -209,8 +200,6 @@ export class CommonAdministrativeAreaLevel2 extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             country: this.country?.toDTO(),
             administrativeAreaLevel1: this.administrativeAreaLevel1?.toDTO(),
         };
@@ -234,8 +223,6 @@ export class CommonAdministrativeAreaLevel2 extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             country: this.country?.toDTO(),
             administrativeAreaLevel1: this.administrativeAreaLevel1?.toDTO(),
         };

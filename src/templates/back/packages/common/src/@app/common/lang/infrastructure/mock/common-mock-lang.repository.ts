@@ -1,23 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { CommonILangRepository } from '@app/common/lang/domain/common-lang.repository';
+import { CommonILangRepository, CommonLang, commonMockLangData } from '@app/common/lang';
 import {
+    CommonLangCreatedAt,
+    CommonLangCustomCode,
+    CommonLangDeletedAt,
+    CommonLangDir,
     CommonLangId,
-    CommonLangName,
+    CommonLangIetf,
     CommonLangImage,
+    CommonLangIsActive,
     CommonLangIso6392,
     CommonLangIso6393,
-    CommonLangIetf,
-    CommonLangCustomCode,
-    CommonLangDir,
+    CommonLangName,
     CommonLangSort,
-    CommonLangIsActive,
-    CommonLangCreatedAt,
     CommonLangUpdatedAt,
-    CommonLangDeletedAt,
 } from '@app/common/lang/domain/value-objects';
-import { CommonLang } from '../../domain/common-lang.aggregate';
-import { commonMockLangData } from './common-mock-lang.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonMockLangRepository extends MockRepository<CommonLang> implements CommonILangRepository

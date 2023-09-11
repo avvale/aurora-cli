@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { CommonAdministrativeAreaLevel1 } from './common-administrative-area-level-1.aggregate';
 import { CommonAdministrativeAreaLevel1Id } from './value-objects';
+import { CommonAdministrativeAreaLevel1 } from '@app/common/administrative-area-level-1';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class CommonIAdministrativeAreaLevel1Repository implements IRepository<CommonAdministrativeAreaLevel1>
 {

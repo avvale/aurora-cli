@@ -1,24 +1,22 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CommonCreatedLangEvent, CommonDeletedLangEvent, CommonUpdatedLangEvent } from '@app/common/lang';
 import {
+    CommonLangCreatedAt,
+    CommonLangCustomCode,
+    CommonLangDeletedAt,
+    CommonLangDir,
     CommonLangId,
-    CommonLangName,
+    CommonLangIetf,
     CommonLangImage,
+    CommonLangIsActive,
     CommonLangIso6392,
     CommonLangIso6393,
-    CommonLangIetf,
-    CommonLangCustomCode,
-    CommonLangDir,
+    CommonLangName,
     CommonLangSort,
-    CommonLangIsActive,
-    CommonLangCreatedAt,
     CommonLangUpdatedAt,
-    CommonLangDeletedAt,
-} from './value-objects';
-import { CommonCreatedLangEvent } from '../application/events/common-created-lang.event';
-import { CommonUpdatedLangEvent } from '../application/events/common-updated-lang.event';
-import { CommonDeletedLangEvent } from '../application/events/common-deleted-lang.event';
+} from '@app/common/lang/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonLang extends AggregateRoot
 {
@@ -36,8 +34,6 @@ export class CommonLang extends AggregateRoot
     updatedAt: CommonLangUpdatedAt;
     deletedAt: CommonLangDeletedAt;
 
-    // eager relationship
-
     constructor(
         id: CommonLangId,
         name: CommonLangName,
@@ -52,7 +48,6 @@ export class CommonLang extends AggregateRoot
         createdAt: CommonLangCreatedAt,
         updatedAt: CommonLangUpdatedAt,
         deletedAt: CommonLangDeletedAt,
-
     )
     {
         super();
@@ -69,8 +64,6 @@ export class CommonLang extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
     }
 
     static register(
@@ -87,7 +80,6 @@ export class CommonLang extends AggregateRoot
         createdAt: CommonLangCreatedAt,
         updatedAt: CommonLangUpdatedAt,
         deletedAt: CommonLangDeletedAt,
-
     ): CommonLang
     {
         return new CommonLang(
@@ -104,7 +96,6 @@ export class CommonLang extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
         );
     }
 
@@ -187,8 +178,6 @@ export class CommonLang extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 
@@ -209,8 +198,6 @@ export class CommonLang extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 }

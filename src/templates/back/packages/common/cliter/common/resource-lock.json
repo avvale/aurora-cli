@@ -183,7 +183,7 @@
         },
         {
             "path": "src/@app/common/resource/application/get/common-get-resources.query-handler.ts",
-            "integrity": "sha1:71b2235fec102f52f551be1988fcad4ee17aec16"
+            "integrity": "sha1:914d540630308071a6c6aab334939196237d53a3"
         },
         {
             "path": "src/@app/common/resource/application/get/common-get-resources.query.ts",
@@ -279,15 +279,15 @@
         },
         {
             "path": "src/@app/common/resource/application/update/common-update-resources.service.ts",
-            "integrity": "sha1:f5f26b040c90c46e82570f95428e914354476175"
+            "integrity": "sha1:7ccaf882ae5c67c7484267e02c16936b475c4cf4"
         },
         {
             "path": "src/@app/common/resource/application/upsert/common-upsert-resource.command-handler.spec.ts",
-            "integrity": "sha1:bba6d4644c2d4db575045def3bc416f823444659"
+            "integrity": "sha1:ec1c43e4c982d8f8be9f5dfb3ef2ae7525c939a7"
         },
         {
             "path": "src/@app/common/resource/application/upsert/common-upsert-resource.command-handler.ts",
-            "integrity": "sha1:52a49997fb73d2555147b3e39977424fdd369f78"
+            "integrity": "sha1:9a63fd15467c210c97a41fa970a29a25eda197eb"
         },
         {
             "path": "src/@app/common/resource/application/upsert/common-upsert-resource.command.ts",
@@ -295,7 +295,7 @@
         },
         {
             "path": "src/@app/common/resource/application/upsert/common-upsert-resource.service.spec.ts",
-            "integrity": "sha1:84cf471ae4f203edfc021da90b8d6432f075bc02"
+            "integrity": "sha1:c2f00aa24e922980264c04720964ecbf9071db33"
         },
         {
             "path": "src/@app/common/resource/application/upsert/common-upsert-resource.service.ts",
@@ -303,15 +303,15 @@
         },
         {
             "path": "src/@app/common/resource/domain/common-resource.aggregate.ts",
-            "integrity": "sha1:355d032decd5b45917f115377848004c6cb7c95c"
+            "integrity": "sha1:d9bc8caef283552352da8ba8c02fd6664a550dfe"
         },
         {
             "path": "src/@app/common/resource/domain/common-resource.mapper.ts",
-            "integrity": "sha1:40a86202876ac25d75e243d86aa4caf4c259d0b3"
+            "integrity": "sha1:a1b2326476acb474b4b583e2cab8b8a92dd3faa9"
         },
         {
             "path": "src/@app/common/resource/domain/common-resource.repository.ts",
-            "integrity": "sha1:0a7e80af676ca2cc98f0ae918cf7ad1dc9cf10a6"
+            "integrity": "sha1:68412d4e81cfdab1523854e8382583393af826e9"
         },
         {
             "path": "src/@app/common/resource/domain/common-resource.response.ts",
@@ -327,19 +327,19 @@
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.data.ts",
-            "integrity": "sha1:c5f11b13110302b22ca486f4990db02d15ff3479"
+            "integrity": "sha1:17e64a459c65b1398a42f875ec0cf4670e434fcc"
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.repository.ts",
-            "integrity": "sha1:88631f5bf7066d89634ae3e1c3cd257da17a77ba"
+            "integrity": "sha1:64c977822f6aa6720a643fceba00bb62032e5cdf"
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.seeder.ts",
-            "integrity": "sha1:d780898e9e5b2095481bd9099ea7d20f79abc94f"
+            "integrity": "sha1:cb0dbb7cd0850a11dd4d1ebcb65abece93f9042a"
         },
         {
             "path": "src/@app/common/resource/infrastructure/sequelize/common-sequelize-resource.model.ts",
-            "integrity": "sha1:dc95bc8caee65a6ce488d7e04e9267205143cee2"
+            "integrity": "sha1:c38cfd9db410fe178058ac665ccefe90d8cd9b8d"
         },
         {
             "path": "src/@app/common/resource/infrastructure/sequelize/common-sequelize-resource.repository.ts",
@@ -471,7 +471,7 @@
         },
         {
             "path": "src/@api/common/resource/dto/common-resource.dto.ts",
-            "integrity": "sha1:5d9bdcb0cd1441599bb7ef2a350141690c6926b4"
+            "integrity": "sha1:5fd6fb0eb57550a889f39c4d6d18262739208ebf"
         },
         {
             "path": "src/@api/common/resource/dto/common-create-resource.dto.ts",
@@ -683,7 +683,7 @@
         },
         {
             "path": "postman/common/common.resource.postman.json",
-            "integrity": "sha1:fd67a646a96ea0ffb823da36aff259e439a5c442"
+            "integrity": "sha1:e5abd46a667e920808b7156f56d6446ecb4786bd"
         }
     ]
 }

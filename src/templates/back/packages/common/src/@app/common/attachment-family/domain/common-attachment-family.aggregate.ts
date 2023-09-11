@@ -1,24 +1,22 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CommonCreatedAttachmentFamilyEvent, CommonDeletedAttachmentFamilyEvent, CommonUpdatedAttachmentFamilyEvent } from '@app/common/attachment-family';
 import {
-    CommonAttachmentFamilyId,
-    CommonAttachmentFamilyResourceId,
-    CommonAttachmentFamilyName,
-    CommonAttachmentFamilyWidth,
-    CommonAttachmentFamilyHeight,
-    CommonAttachmentFamilyFitType,
-    CommonAttachmentFamilyQuality,
-    CommonAttachmentFamilySizes,
-    CommonAttachmentFamilyFormat,
     CommonAttachmentFamilyCreatedAt,
-    CommonAttachmentFamilyUpdatedAt,
     CommonAttachmentFamilyDeletedAt,
-} from './value-objects';
-import { CommonCreatedAttachmentFamilyEvent } from '../application/events/common-created-attachment-family.event';
-import { CommonUpdatedAttachmentFamilyEvent } from '../application/events/common-updated-attachment-family.event';
-import { CommonDeletedAttachmentFamilyEvent } from '../application/events/common-deleted-attachment-family.event';
+    CommonAttachmentFamilyFitType,
+    CommonAttachmentFamilyFormat,
+    CommonAttachmentFamilyHeight,
+    CommonAttachmentFamilyId,
+    CommonAttachmentFamilyName,
+    CommonAttachmentFamilyQuality,
+    CommonAttachmentFamilyResourceId,
+    CommonAttachmentFamilySizes,
+    CommonAttachmentFamilyUpdatedAt,
+    CommonAttachmentFamilyWidth,
+} from '@app/common/attachment-family/domain/value-objects';
 import { CommonResource } from '@app/common/resource';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonAttachmentFamily extends AggregateRoot
 {
@@ -34,8 +32,6 @@ export class CommonAttachmentFamily extends AggregateRoot
     createdAt: CommonAttachmentFamilyCreatedAt;
     updatedAt: CommonAttachmentFamilyUpdatedAt;
     deletedAt: CommonAttachmentFamilyDeletedAt;
-
-    // eager relationship
     resource: CommonResource;
 
     constructor(
@@ -51,7 +47,6 @@ export class CommonAttachmentFamily extends AggregateRoot
         createdAt: CommonAttachmentFamilyCreatedAt,
         updatedAt: CommonAttachmentFamilyUpdatedAt,
         deletedAt: CommonAttachmentFamilyDeletedAt,
-
         resource?: CommonResource,
     )
     {
@@ -68,8 +63,6 @@ export class CommonAttachmentFamily extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.resource = resource;
     }
 
@@ -86,7 +79,6 @@ export class CommonAttachmentFamily extends AggregateRoot
         createdAt: CommonAttachmentFamilyCreatedAt,
         updatedAt: CommonAttachmentFamilyUpdatedAt,
         deletedAt: CommonAttachmentFamilyDeletedAt,
-
         resource?: CommonResource,
     ): CommonAttachmentFamily
     {
@@ -103,7 +95,6 @@ export class CommonAttachmentFamily extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             resource,
         );
     }
@@ -183,8 +174,6 @@ export class CommonAttachmentFamily extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             resource: this.resource?.toDTO(),
         };
     }
@@ -205,8 +194,6 @@ export class CommonAttachmentFamily extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             resource: this.resource?.toDTO(),
         };
     }

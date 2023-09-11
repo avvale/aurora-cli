@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { CommonAttachmentFamily } from './common-attachment-family.aggregate';
 import { CommonAttachmentFamilyId } from './value-objects';
+import { CommonAttachmentFamily } from '@app/common/attachment-family';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class CommonIAttachmentFamilyRepository implements IRepository<CommonAttachmentFamily>
 {

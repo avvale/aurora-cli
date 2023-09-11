@@ -1,24 +1,23 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { CommonAdministrativeAreaLevel2 } from './common-administrative-area-level-2.aggregate';
-import { CommonAdministrativeAreaLevel2Response } from './common-administrative-area-level-2.response';
+import { CommonAdministrativeAreaLevel1Mapper } from '@app/common/administrative-area-level-1';
+import { CommonAdministrativeAreaLevel2, CommonAdministrativeAreaLevel2Response } from '@app/common/administrative-area-level-2';
 import {
-    CommonAdministrativeAreaLevel2Id,
-    CommonAdministrativeAreaLevel2CountryId,
     CommonAdministrativeAreaLevel2AdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel2Code,
+    CommonAdministrativeAreaLevel2CountryId,
+    CommonAdministrativeAreaLevel2CreatedAt,
     CommonAdministrativeAreaLevel2CustomCode,
-    CommonAdministrativeAreaLevel2Name,
-    CommonAdministrativeAreaLevel2Slug,
+    CommonAdministrativeAreaLevel2DeletedAt,
+    CommonAdministrativeAreaLevel2Id,
     CommonAdministrativeAreaLevel2Latitude,
     CommonAdministrativeAreaLevel2Longitude,
-    CommonAdministrativeAreaLevel2Zoom,
     CommonAdministrativeAreaLevel2MapType,
-    CommonAdministrativeAreaLevel2CreatedAt,
+    CommonAdministrativeAreaLevel2Name,
+    CommonAdministrativeAreaLevel2Slug,
     CommonAdministrativeAreaLevel2UpdatedAt,
-    CommonAdministrativeAreaLevel2DeletedAt,
-} from './value-objects';
+    CommonAdministrativeAreaLevel2Zoom,
+} from '@app/common/administrative-area-level-2/domain/value-objects';
 import { CommonCountryMapper } from '@app/common/country';
-import { CommonAdministrativeAreaLevel1Mapper } from '@app/common/administrative-area-level-1';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class CommonAdministrativeAreaLevel2Mapper implements IMapper
 {

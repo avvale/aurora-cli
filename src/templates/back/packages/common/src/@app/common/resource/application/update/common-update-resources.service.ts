@@ -1,20 +1,17 @@
+import { CommonAddResourcesContextEvent, CommonIResourceRepository, CommonResource } from '@app/common/resource';
+import {
+    CommonResourceCode,
+    CommonResourceCreatedAt,
+    CommonResourceDeletedAt,
+    CommonResourceHasAttachments,
+    CommonResourceId,
+    CommonResourceIsActive,
+    CommonResourceName,
+    CommonResourceUpdatedAt,
+} from '@app/common/resource/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import {
-    CommonResourceId,
-    CommonResourceCode,
-    CommonResourceName,
-    CommonResourceIsActive,
-    CommonResourceHasAttachments,
-    CommonResourceCreatedAt,
-    CommonResourceUpdatedAt,
-    CommonResourceDeletedAt,
-} from '../../domain/value-objects';
-import { CommonIResourceRepository } from '../../domain/common-resource.repository';
-import { CommonResource } from '../../domain/common-resource.aggregate';
-import { CommonAddResourcesContextEvent } from '../events/common-add-resources-context.event';
 
 @Injectable()
 export class CommonUpdateResourcesService
@@ -48,7 +45,6 @@ export class CommonUpdateResourcesService
             new CommonResourceUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

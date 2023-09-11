@@ -13,10 +13,12 @@ export class CommonGetAdministrativeAreasLevel3QueryHandler implements IQueryHan
 
     async execute(query: CommonGetAdministrativeAreasLevel3Query): Promise<CommonAdministrativeAreaLevel3Response[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getAdministrativeAreasLevel3Service.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getAdministrativeAreasLevel3Service.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

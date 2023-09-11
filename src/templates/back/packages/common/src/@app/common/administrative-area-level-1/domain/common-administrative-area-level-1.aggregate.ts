@@ -1,25 +1,23 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CommonCreatedAdministrativeAreaLevel1Event, CommonDeletedAdministrativeAreaLevel1Event, CommonUpdatedAdministrativeAreaLevel1Event } from '@app/common/administrative-area-level-1';
 import {
-    CommonAdministrativeAreaLevel1Id,
-    CommonAdministrativeAreaLevel1CountryId,
     CommonAdministrativeAreaLevel1Code,
+    CommonAdministrativeAreaLevel1CountryId,
+    CommonAdministrativeAreaLevel1CreatedAt,
     CommonAdministrativeAreaLevel1CustomCode,
-    CommonAdministrativeAreaLevel1Name,
-    CommonAdministrativeAreaLevel1Slug,
+    CommonAdministrativeAreaLevel1DeletedAt,
+    CommonAdministrativeAreaLevel1Id,
     CommonAdministrativeAreaLevel1Latitude,
     CommonAdministrativeAreaLevel1Longitude,
-    CommonAdministrativeAreaLevel1Zoom,
     CommonAdministrativeAreaLevel1MapType,
-    CommonAdministrativeAreaLevel1CreatedAt,
+    CommonAdministrativeAreaLevel1Name,
+    CommonAdministrativeAreaLevel1Slug,
     CommonAdministrativeAreaLevel1UpdatedAt,
-    CommonAdministrativeAreaLevel1DeletedAt,
-} from './value-objects';
-import { CommonCreatedAdministrativeAreaLevel1Event } from '../application/events/common-created-administrative-area-level-1.event';
-import { CommonUpdatedAdministrativeAreaLevel1Event } from '../application/events/common-updated-administrative-area-level-1.event';
-import { CommonDeletedAdministrativeAreaLevel1Event } from '../application/events/common-deleted-administrative-area-level-1.event';
+    CommonAdministrativeAreaLevel1Zoom,
+} from '@app/common/administrative-area-level-1/domain/value-objects';
 import { CommonCountry } from '@app/common/country';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class CommonAdministrativeAreaLevel1 extends AggregateRoot
 {
@@ -36,8 +34,6 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
     createdAt: CommonAdministrativeAreaLevel1CreatedAt;
     updatedAt: CommonAdministrativeAreaLevel1UpdatedAt;
     deletedAt: CommonAdministrativeAreaLevel1DeletedAt;
-
-    // eager relationship
     country: CommonCountry;
 
     constructor(
@@ -54,7 +50,6 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
         createdAt: CommonAdministrativeAreaLevel1CreatedAt,
         updatedAt: CommonAdministrativeAreaLevel1UpdatedAt,
         deletedAt: CommonAdministrativeAreaLevel1DeletedAt,
-
         country?: CommonCountry,
     )
     {
@@ -72,8 +67,6 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.country = country;
     }
 
@@ -91,7 +84,6 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
         createdAt: CommonAdministrativeAreaLevel1CreatedAt,
         updatedAt: CommonAdministrativeAreaLevel1UpdatedAt,
         deletedAt: CommonAdministrativeAreaLevel1DeletedAt,
-
         country?: CommonCountry,
     ): CommonAdministrativeAreaLevel1
     {
@@ -109,7 +101,6 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             country,
         );
     }
@@ -193,8 +184,6 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             country: this.country?.toDTO(),
         };
     }
@@ -216,8 +205,6 @@ export class CommonAdministrativeAreaLevel1 extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             country: this.country?.toDTO(),
         };
     }

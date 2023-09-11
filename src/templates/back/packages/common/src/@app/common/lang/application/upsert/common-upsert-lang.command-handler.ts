@@ -1,22 +1,19 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonUpsertLangCommand } from './common-upsert-lang.command';
-import { CommonUpsertLangService } from './common-upsert-lang.service';
+import { CommonUpsertLangCommand } from '@app/common/lang';
+import { CommonUpsertLangService } from '@app/common/lang/application/upsert/common-upsert-lang.service';
 import {
-    CommonLangId,
-    CommonLangName,
-    CommonLangImage,
-    CommonLangIso6392,
-    CommonLangIso6393,
-    CommonLangIetf,
     CommonLangCustomCode,
     CommonLangDir,
-    CommonLangSort,
+    CommonLangId,
+    CommonLangIetf,
+    CommonLangImage,
     CommonLangIsActive,
-    CommonLangCreatedAt,
-    CommonLangUpdatedAt,
-    CommonLangDeletedAt,
-} from '../../domain/value-objects';
+    CommonLangIso6392,
+    CommonLangIso6393,
+    CommonLangName,
+    CommonLangSort,
+} from '@app/common/lang/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonUpsertLangCommand)
 export class CommonUpsertLangCommandHandler implements ICommandHandler<CommonUpsertLangCommand>

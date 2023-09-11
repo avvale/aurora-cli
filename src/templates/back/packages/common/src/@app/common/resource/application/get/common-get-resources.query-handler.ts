@@ -13,10 +13,12 @@ export class CommonGetResourcesQueryHandler implements IQueryHandler<CommonGetRe
 
     async execute(query: CommonGetResourcesQuery): Promise<CommonResourceResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getResourcesService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getResourcesService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

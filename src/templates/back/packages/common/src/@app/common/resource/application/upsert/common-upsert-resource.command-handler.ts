@@ -1,17 +1,14 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CommonUpsertResourceCommand } from './common-upsert-resource.command';
-import { CommonUpsertResourceService } from './common-upsert-resource.service';
+import { CommonUpsertResourceCommand } from '@app/common/resource';
+import { CommonUpsertResourceService } from '@app/common/resource/application/upsert/common-upsert-resource.service';
 import {
-    CommonResourceId,
     CommonResourceCode,
-    CommonResourceName,
-    CommonResourceIsActive,
     CommonResourceHasAttachments,
-    CommonResourceCreatedAt,
-    CommonResourceUpdatedAt,
-    CommonResourceDeletedAt,
-} from '../../domain/value-objects';
+    CommonResourceId,
+    CommonResourceIsActive,
+    CommonResourceName,
+} from '@app/common/resource/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonUpsertResourceCommand)
 export class CommonUpsertResourceCommandHandler implements ICommandHandler<CommonUpsertResourceCommand>

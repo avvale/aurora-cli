@@ -1,18 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { CommonIResourceRepository } from '@app/common/resource/domain/common-resource.repository';
+import { CommonIResourceRepository, commonMockResourceData, CommonResource } from '@app/common/resource';
 import {
-    CommonResourceId,
     CommonResourceCode,
-    CommonResourceName,
-    CommonResourceIsActive,
-    CommonResourceHasAttachments,
     CommonResourceCreatedAt,
-    CommonResourceUpdatedAt,
     CommonResourceDeletedAt,
+    CommonResourceHasAttachments,
+    CommonResourceId,
+    CommonResourceIsActive,
+    CommonResourceName,
+    CommonResourceUpdatedAt,
 } from '@app/common/resource/domain/value-objects';
-import { CommonResource } from '../../domain/common-resource.aggregate';
-import { commonMockResourceData } from './common-mock-resource.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonMockResourceRepository extends MockRepository<CommonResource> implements CommonIResourceRepository

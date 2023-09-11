@@ -1,5 +1,5 @@
-import { CommonCountryResponse } from '@app/common/country';
 import { CommonAdministrativeAreaLevel1Response } from '@app/common/administrative-area-level-1';
+import { CommonCountryResponse } from '@app/common/country';
 
 export class CommonAdministrativeAreaLevel2Response
 {

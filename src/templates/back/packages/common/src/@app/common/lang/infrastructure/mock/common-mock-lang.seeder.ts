@@ -1,22 +1,21 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { CommonLang, commonMockLangData } from '@app/common/lang';
 import {
+    CommonLangCreatedAt,
+    CommonLangCustomCode,
+    CommonLangDeletedAt,
+    CommonLangDir,
     CommonLangId,
-    CommonLangName,
+    CommonLangIetf,
     CommonLangImage,
+    CommonLangIsActive,
     CommonLangIso6392,
     CommonLangIso6393,
-    CommonLangIetf,
-    CommonLangCustomCode,
-    CommonLangDir,
+    CommonLangName,
     CommonLangSort,
-    CommonLangIsActive,
-    CommonLangCreatedAt,
     CommonLangUpdatedAt,
-    CommonLangDeletedAt,
-} from '../../domain/value-objects';
-import { CommonLang } from '../../domain/common-lang.aggregate';
-import { commonMockLangData } from './common-mock-lang.data';
+} from '@app/common/lang/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

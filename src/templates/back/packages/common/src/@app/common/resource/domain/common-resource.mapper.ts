@@ -1,16 +1,15 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { CommonResource } from './common-resource.aggregate';
-import { CommonResourceResponse } from './common-resource.response';
+import { CommonResource, CommonResourceResponse } from '@app/common/resource';
 import {
-    CommonResourceId,
     CommonResourceCode,
-    CommonResourceName,
-    CommonResourceIsActive,
-    CommonResourceHasAttachments,
     CommonResourceCreatedAt,
-    CommonResourceUpdatedAt,
     CommonResourceDeletedAt,
-} from './value-objects';
+    CommonResourceHasAttachments,
+    CommonResourceId,
+    CommonResourceIsActive,
+    CommonResourceName,
+    CommonResourceUpdatedAt,
+} from '@app/common/resource/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class CommonResourceMapper implements IMapper
 {

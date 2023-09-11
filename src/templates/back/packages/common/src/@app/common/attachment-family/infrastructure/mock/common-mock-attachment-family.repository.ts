@@ -1,22 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { CommonIAttachmentFamilyRepository } from '@app/common/attachment-family/domain/common-attachment-family.repository';
+import { CommonAttachmentFamily, CommonIAttachmentFamilyRepository, commonMockAttachmentFamilyData } from '@app/common/attachment-family';
 import {
-    CommonAttachmentFamilyId,
-    CommonAttachmentFamilyResourceId,
-    CommonAttachmentFamilyName,
-    CommonAttachmentFamilyWidth,
-    CommonAttachmentFamilyHeight,
-    CommonAttachmentFamilyFitType,
-    CommonAttachmentFamilyQuality,
-    CommonAttachmentFamilySizes,
-    CommonAttachmentFamilyFormat,
     CommonAttachmentFamilyCreatedAt,
-    CommonAttachmentFamilyUpdatedAt,
     CommonAttachmentFamilyDeletedAt,
+    CommonAttachmentFamilyFitType,
+    CommonAttachmentFamilyFormat,
+    CommonAttachmentFamilyHeight,
+    CommonAttachmentFamilyId,
+    CommonAttachmentFamilyName,
+    CommonAttachmentFamilyQuality,
+    CommonAttachmentFamilyResourceId,
+    CommonAttachmentFamilySizes,
+    CommonAttachmentFamilyUpdatedAt,
+    CommonAttachmentFamilyWidth,
 } from '@app/common/attachment-family/domain/value-objects';
-import { CommonAttachmentFamily } from '../../domain/common-attachment-family.aggregate';
-import { commonMockAttachmentFamilyData } from './common-mock-attachment-family.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CommonMockAttachmentFamilyRepository extends MockRepository<CommonAttachmentFamily> implements CommonIAttachmentFamilyRepository

@@ -13,10 +13,12 @@ export class CommonGetCountriesQueryHandler implements IQueryHandler<CommonGetCo
 
     async execute(query: CommonGetCountriesQuery): Promise<CommonCountryResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getCountriesService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getCountriesService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }
