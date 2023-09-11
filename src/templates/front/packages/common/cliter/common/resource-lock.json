@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource-detail.component.html",
-            "integrity": "sha1:30d43cec2511cff401241418c9be83d0c07d512e"
+            "integrity": "sha1:79293b0e6f3229e088d671f6209692b8fb116aa1"
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource-detail.component.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource-list.component.html",
-            "integrity": "sha1:72c9b855dfa788572e62ed52eb9af55f6f199e9f"
+            "integrity": "sha1:f8074a8d0bde64c6d8a983b449a9a6450b516b73"
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource-list.component.ts",

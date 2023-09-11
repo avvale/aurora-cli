@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/administrative-area-level-1/administrative-area-level-1-detail.component.html",
-            "integrity": "sha1:4cda6a985114220595b2b444b778f540be4902e8"
+            "integrity": "sha1:10bb69fda87cd707507af6140e3b4df1afa54f4e"
         },
         {
             "path": "src/app/modules/admin/apps/common/administrative-area-level-1/administrative-area-level-1-detail.component.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/administrative-area-level-1/administrative-area-level-1-list.component.html",
-            "integrity": "sha1:2ee86c6da197b41f7c0d654d79db9aa80eec0f58"
+            "integrity": "sha1:3d47fb24cead0e1aa63e52fb2c725083ec0bc82e"
         },
         {
             "path": "src/app/modules/admin/apps/common/administrative-area-level-1/administrative-area-level-1-list.component.ts",

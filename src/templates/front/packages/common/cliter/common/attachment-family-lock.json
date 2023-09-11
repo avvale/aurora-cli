@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-detail.component.html",
-            "integrity": "sha1:05d212046bb9015cbc767f4bfb325ba653750932"
+            "integrity": "sha1:68a1d53b68b1f1ea2c86e2722ab8662968f13a72"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-detail.component.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-list.component.html",
-            "integrity": "sha1:df9c1d429e4cb9b700cb8afd3598add293c4b59a"
+            "integrity": "sha1:a45c6cf1c5a335b5a758d28cbddafd64f8b1c5dd"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-list.component.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.service.ts",
-            "integrity": "sha1:ec8103ef29a479ed19369663c5d22fd1c24c65db"
+            "integrity": "sha1:b0c297138adec26d23f882f6390136f00c3d4668"
         }
     ]
 }

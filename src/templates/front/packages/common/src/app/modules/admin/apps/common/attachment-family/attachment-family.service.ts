@@ -270,6 +270,9 @@ export class AttachmentFamilyService
                     queryResources,
                     constraintResources,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(

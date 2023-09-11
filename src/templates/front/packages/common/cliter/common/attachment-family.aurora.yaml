@@ -6,6 +6,8 @@ aggregateName: CommonAttachmentFamily
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+solidIcon: mat_solid:hide_image
+outlineIcon: mat_outline:hide_image
 aggregateProperties:
   - name: id
     type: id

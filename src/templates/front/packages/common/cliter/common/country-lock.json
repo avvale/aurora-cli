@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-detail.component.html",
-            "integrity": "sha1:f81aa2e16253fb701538f3e46419a2f637631f35"
+            "integrity": "sha1:b90fa0be38633ed33e1ca038ddff102a88644619"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-detail.component.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-list.component.html",
-            "integrity": "sha1:2db244b30a3ce2e5e4eff8fcae8b9ea2c48462bb"
+            "integrity": "sha1:0e1514152229fd49d42cb2ac5a31ee537f155896"
         },
         {
             "path": "src/app/modules/admin/apps/common/country/country-list.component.ts",

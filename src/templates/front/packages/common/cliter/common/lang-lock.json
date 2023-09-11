@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.html",
-            "integrity": "sha1:128c88f33493a9627ffad3a884766cbffafcf3df"
+            "integrity": "sha1:6ce42a6ad97931ad06169553cb408eec3eb320eb"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.html",
-            "integrity": "sha1:9e2b898b93e5e490be5039d76b18d1433eb44336"
+            "integrity": "sha1:672a3e0859980ac1129953be47c3540412ce8f96"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.ts",

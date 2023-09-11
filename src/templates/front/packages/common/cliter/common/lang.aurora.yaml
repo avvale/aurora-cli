@@ -6,6 +6,8 @@ aggregateName: CommonLang
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+solidIcon: mat_solid:language
+outlineIcon: mat_outline:language
 aggregateProperties:
   - name: id
     type: id
