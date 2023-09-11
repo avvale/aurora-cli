@@ -75,8 +75,10 @@ export interface ModuleDefinitionSchema
     hasOAuth: boolean;
     hasTenant: boolean;
     hasAuditing: boolean;
-    solidIcon?: string;
-    outlineIcon?: string;
+    front?: {
+        solidIcon?: string;
+        outlineIcon?: string;
+    }
     aggregateProperties: Property[];
     additionalApis?: AdditionalApi[];
     excluded?: string[];                // set files to avoid create
