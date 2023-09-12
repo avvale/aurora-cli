@@ -510,16 +510,19 @@ export class Add extends Command
 
                 case 'environments': {
                     const project = CommonDriver.createProject(['tsconfig.json']);
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.module.ts']);
-                    DecoratorDriver.removeDecoratorAdapter(
-                        appModuleSourceFile,
-                        'AppModule',
-                        'NgModule',
-                        'providers',
+
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
+                    ArrayDriver.removeProviderArray(
+                        returnArray,
                         'EnvironmentsInformationService',
                     );
 
-                    appModuleSourceFile.saveSync();
+                    auroraProviderSourceFile.saveSync();
                     break;
                 }
 
