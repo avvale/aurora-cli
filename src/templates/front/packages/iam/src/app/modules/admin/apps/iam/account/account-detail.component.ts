@@ -191,6 +191,9 @@ export class AccountDetailComponent extends ViewDetailComponent
             case IamAccountType.USER:
                 if (this.currentViewAction.id === 'iam::account.detail.new')
                 {
+                    this.fg.get('user.name').setValidators([Validators.required, Validators.maxLength(255)]);
+                    this.fg.get('user.surname').setValidators([Validators.required, Validators.maxLength(255)]);
+                    this.fg.get('user.username').setValidators([Validators.required, Validators.email, Validators.maxLength(120)]);
                     this.fg.get('user.password').setValidators([Validators.required, Validators.maxLength(50)]);
                     this.fg.get('user.repeatPassword').setValidators([Validators.required, Validators.maxLength(50), RxwebValidators.compare({ fieldName: 'password' })]);
                     this.fg.get('user.repeatPassword').updateValueAndValidity();
@@ -203,6 +206,12 @@ export class AccountDetailComponent extends ViewDetailComponent
                 break;
 
             case IamAccountType.SERVICE:
+                this.fg.get('user.name').clearValidators();
+                this.fg.get('user.name').updateValueAndValidity();
+                this.fg.get('user.surname').clearValidators();
+                this.fg.get('user.surname').updateValueAndValidity();
+                this.fg.get('user.username').clearValidators();
+                this.fg.get('user.username').updateValueAndValidity();
                 this.fg.get('user.repeatPassword').clearValidators();
                 this.fg.get('user.repeatPassword').updateValueAndValidity();
                 break;

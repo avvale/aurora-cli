@@ -108,7 +108,9 @@
                         <mat-error>{{ formErrors?.code | async }}</mat-error>
                     </mat-form-field>
 
-                    <ng-container *ngIf="(clients$ | async).length > 1 && currentViewAction.id === 'iam::account.detail.new'">
+                    <ng-container
+                        *ngIf="currentViewAction.id === 'iam::account.detail.new'"
+                    >
                         <mat-form-field
                             appearance="outline"
                             class="col-start-1 col-8"
