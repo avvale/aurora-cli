@@ -1,7 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '{{ config.auroraCorePackage }}';
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto } from '../dto';
 {{else}}
@@ -21,6 +18,24 @@ import { CurrentAccount } from '../../../shared/decorators/current-account.decor
 // {{ config.appContainer }}
 import { {{ getClassNameAdditionalApi currentAdditionalApi }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
 
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Body' 'Controller' 'Post') path='@nestjs/common')
+            (object items=(array 'ApiTags' 'ApiCreatedResponse' 'ApiOperation') path='@nestjs/swagger')
+            (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Controller')
+                            (sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler')
+                    )
+                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+    )
+~}}
 @ApiTags('[{{ toKebabCase schema.boundedContextName }}] {{ toKebabCase schema.moduleName }}')
 @Controller('{{ currentAdditionalApi.path }}')
 {{#if schema.hasOAuth}}

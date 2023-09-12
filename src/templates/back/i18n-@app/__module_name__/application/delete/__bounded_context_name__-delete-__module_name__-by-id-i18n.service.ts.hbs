@@ -1,11 +1,38 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '{{ config.auroraCorePackage }}';
-import { CQMetadata } from '{{ config.auroraCorePackage }}';
-import { {{#if (hasI18nProperties schema.aggregateProperties) }}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs, {{/if}}{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Id } from '../../domain/value-objects';
-import { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from '../../domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
-{{> importI18nRepository}}
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'EventPublisher') path='@nestjs/cqrs')
+            (object items=(array 'CQMetadata' 'Querystatement') path=config.auroraCorePackage)
+            (object items=(ternary (hasI18nProperties schema.aggregateProperties) (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.modelName) 'AvailableLangs') (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.modelName) 'Id') ) path='../../domain/value-objects')
+            (object
+                items=(
+                    array
+                        schema.aggregateName
+                        (sumStrings schema.aggregateName 'I18nModel')
+                        (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository')
+                        (sumStrings schema.aggregateName 'Mapper')
+                )
+                path=(
+                    sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)
+                )
+            )
+    )
+~}}
+{{#each (getValueObjectsProperties schema.aggregateProperties) }}
+{{#if (isAllowProperty ../schema.moduleName this) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=(sumStrings ../schema.aggregateName (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings ../config.appContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/domain/value-objects')
+                oneRowByItem=true
+        )
+~}}
+{{/if}}
+{{/each}}
+{{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdI18nService
 {
