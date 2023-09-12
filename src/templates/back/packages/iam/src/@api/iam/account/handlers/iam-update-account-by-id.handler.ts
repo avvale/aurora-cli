@@ -5,8 +5,7 @@ import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/a
 import { IamGetRolesQuery } from '@app/iam/role';
 import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
 import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-import { Injectable, Logger } from '@nestjs/common';
-import { Sequelize } from 'sequelize-typescript';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateAccountByIdHandler
@@ -15,7 +14,6 @@ export class IamUpdateAccountByIdHandler
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
         private readonly createPermissionsFromRolesService: IamCreatePermissionsFromRolesService,
-        private readonly sequelize: Sequelize,
     ) {}
 
     async main(
@@ -48,71 +46,52 @@ export class IamUpdateAccountByIdHandler
             dataToUpdate['dPermissions'] = this.createPermissionsFromRolesService.main(roles);
         }
 
-        const transaction = await this.sequelize.transaction({
-            logging: message => Logger.log(message, [
-                'IamUpdateAccountByIdHandler',
-                `IamAccount.id: ${payload.id}`,
-            ]),
-        });
+        const operationId = Utils.uuid();
 
-        try
+        await this.commandBus.dispatch(new IamUpdateAccountByIdCommand(
+            {
+                ...dataToUpdate,
+                id: payload.id,
+            },
+            constraint,
+            {
+                timezone,
+                repositoryOptions: {
+                    auditing: {
+                        ...auditing,
+                        operationId,
+                        operationSort: 1,
+                    },
+                },
+            },
+        ));
+
+        if (account.type === IamAccountType.USER)
         {
-            const operationId = Utils.uuid();
+            const user = await this.queryBus.ask(new IamFindUserByIdQuery(payload.user.id, constraint, { timezone }));
 
-            await this.commandBus.dispatch(new IamUpdateAccountByIdCommand(
+            const dataToUpdate = Utils.diff(payload.user, user);
+
+            // always password will be empty unless is changed
+            if (dataToUpdate.password === '') delete dataToUpdate.password;
+
+            await this.commandBus.dispatch(new IamUpdateUserByIdCommand(
                 {
                     ...dataToUpdate,
-                    id: payload.id,
+                    id: payload.user.id,
                 },
                 constraint,
                 {
                     timezone,
                     repositoryOptions: {
-                        transaction,
                         auditing: {
                             ...auditing,
                             operationId,
-                            operationSort: 1,
+                            operationSort: 2,
                         },
                     },
                 },
             ));
-
-            if (account.type === IamAccountType.USER)
-            {
-                const user = await this.queryBus.ask(new IamFindUserByIdQuery(payload.user.id, constraint, { timezone }));
-
-                const dataToUpdate = Utils.diff(payload.user, user);
-
-                // always password will be empty unless is changed
-                if (dataToUpdate.password === '') delete dataToUpdate.password;
-
-                await this.commandBus.dispatch(new IamUpdateUserByIdCommand(
-                    {
-                        ...dataToUpdate,
-                        id: payload.user.id,
-                    },
-                    constraint,
-                    {
-                        timezone,
-                        repositoryOptions: {
-                            transaction,
-                            auditing: {
-                                ...auditing,
-                                operationId,
-                                operationSort: 2,
-                            },
-                        },
-                    },
-                ));
-            }
-
-            await transaction.commit();
-        }
-        catch (error)
-        {
-            await transaction.rollback();
-            throw error;
         }
 
         return await this.queryBus.ask(new IamFindAccountByIdQuery(
