@@ -1,10 +1,8 @@
+import { CommonICountryI18nRepository, CommonICountryRepository } from '@app/common/country';
+import { CommonCountryAvailableLangs, CommonCountryId } from '@app/common/country/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { CommonCountryAvailableLangs, CommonCountryId } from '../../domain/value-objects';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonICountryI18nRepository } from '../../domain/common-country-i18n.repository';
 
 @Injectable()
 export class CommonDeleteCountryByIdI18nService

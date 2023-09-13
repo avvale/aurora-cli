@@ -1,10 +1,7 @@
+import { CommonDeleteCountryByIdI18nCommand, commonMockCountryData } from '@app/common/country';
+import { CommonDeleteCountryByIdI18nCommandHandler } from '@app/common/country/application/delete/common-delete-country-by-id-i18n.command-handler';
+import { CommonDeleteCountryByIdI18nService } from '@app/common/country/application/delete/common-delete-country-by-id-i18n.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { CommonDeleteCountryByIdI18nCommandHandler } from './common-delete-country-by-id-i18n.command-handler';
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { CommonDeleteCountryByIdI18nCommand } from './common-delete-country-by-id-i18n.command';
-import { CommonDeleteCountryByIdI18nService } from './common-delete-country-by-id-i18n.service';
 
 describe('CommonDeleteCountryByIdI18nCommandHandler', () =>
 {

@@ -1,7 +1,6 @@
-import { IRepository, QueryStatement, LiteralObject } from '@aurorajs.dev/core';
-import { CQMetadata, Pagination } from '@aurorajs.dev/core';
 import { CommonCountry } from './common-country.aggregate';
 import { CommonCountryId } from './value-objects';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class CommonICountryI18nRepository implements IRepository<CommonCountry>
 {

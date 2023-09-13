@@ -1,14 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CommonICountryI18nRepository, CommonICountryRepository, commonMockCountryData, CommonMockCountryRepository } from '@app/common/country';
+import { CommonDeleteCountryByIdI18nService } from '@app/common/country/application/delete/common-delete-country-by-id-i18n.service';
+import { CommonCountryId } from '@app/common/country/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { commonMockCountryData } from '@app/common/country/infrastructure/mock/common-mock-country.data';
-import { CommonDeleteCountryByIdI18nService } from './common-delete-country-by-id-i18n.service';
-import { CommonCountryId } from '../../domain/value-objects';
-import { CommonICountryRepository } from '../../domain/common-country.repository';
-import { CommonICountryI18nRepository } from '../../domain/common-country-i18n.repository';
-import { CommonMockCountryRepository } from '../../infrastructure/mock/common-mock-country.repository';
 
 describe('DeleteCountryByIdI18nService', () =>
 {

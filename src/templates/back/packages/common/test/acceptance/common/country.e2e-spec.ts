@@ -2,8 +2,9 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { CommonModule } from '@api/common/common.module';
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { CommonICountryI18nRepository, CommonICountryRepository, commonMockCountryData, CommonMockCountrySeeder } from '@app/common/country';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { CoreAddI18nConstraintService } from '@aurorajs.dev/core';
 import { INestApplication } from '@nestjs/common';
@@ -61,7 +62,9 @@ describe('country', () =>
                 CommonMockCountrySeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .overrideProvider(CoreAddI18nConstraintService)
             .useValue({
@@ -101,7 +104,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonCountryId must be defined, can not be null');
             });
     });
 
@@ -117,7 +120,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Alpha2 must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Alpha2 must be defined, can not be null');
             });
     });
 
@@ -133,7 +136,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Alpha3 must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Alpha3 must be defined, can not be null');
             });
     });
 
@@ -149,7 +152,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Numeric must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Numeric must be defined, can not be null');
             });
     });
 
@@ -165,7 +168,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryMapType must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonCountryMapType must be defined, can not be null');
             });
     });
 
@@ -181,7 +184,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nLangId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonCountryI18nLangId must be defined, can not be null');
             });
     });
 
@@ -197,7 +200,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonCountryI18nName must be defined, can not be null');
             });
     });
 
@@ -213,7 +216,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nSlug must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonCountryI18nSlug must be defined, can not be null');
             });
     });
 
@@ -229,7 +232,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonCountryId must be defined, can not be undefined');
             });
     });
 
@@ -245,7 +248,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Alpha2 must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Alpha2 must be defined, can not be undefined');
             });
     });
 
@@ -261,7 +264,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Alpha3 must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Alpha3 must be defined, can not be undefined');
             });
     });
 
@@ -277,7 +280,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Numeric must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Numeric must be defined, can not be undefined');
             });
     });
 
@@ -293,7 +296,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryMapType must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonCountryMapType must be defined, can not be undefined');
             });
     });
 
@@ -309,7 +312,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nLangId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonCountryI18nLangId must be defined, can not be undefined');
             });
     });
 
@@ -325,7 +328,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonCountryI18nName must be defined, can not be undefined');
             });
     });
 
@@ -341,7 +344,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nSlug must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonCountryI18nSlug must be defined, can not be undefined');
             });
     });
 
@@ -357,7 +360,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for CommonCountryId is not allowed, must be a length of 36');
             });
     });
 
@@ -373,7 +376,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Alpha2 is not allowed, must be a length of 2');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Alpha2 is not allowed, must be a length of 2');
             });
     });
 
@@ -389,7 +392,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Alpha3 is not allowed, must be a length of 3');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Alpha3 is not allowed, must be a length of 3');
             });
     });
 
@@ -405,7 +408,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryIso3166Numeric is not allowed, must be a length of 3');
+                expect(res.body.message).toContain('Value for CommonCountryIso3166Numeric is not allowed, must be a length of 3');
             });
     });
 
@@ -421,7 +424,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nLangId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for CommonCountryI18nLangId is not allowed, must be a length of 36');
             });
     });
 
@@ -437,7 +440,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryCustomCode is too large, has a maximum length of 10');
+                expect(res.body.message).toContain('Value for CommonCountryCustomCode is too large, has a maximum length of 10');
             });
     });
 
@@ -453,7 +456,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryPrefix is too large, has a maximum length of 5');
+                expect(res.body.message).toContain('Value for CommonCountryPrefix is too large, has a maximum length of 5');
             });
     });
 
@@ -469,7 +472,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryImage is too large, has a maximum length of 1024');
+                expect(res.body.message).toContain('Value for CommonCountryImage is too large, has a maximum length of 1024');
             });
     });
 
@@ -485,7 +488,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountrySort is too large, has a maximum length of 6');
+                expect(res.body.message).toContain('Value for CommonCountrySort is too large, has a maximum length of 6');
             });
     });
 
@@ -501,7 +504,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryZoom is too large, has a maximum length of 2');
+                expect(res.body.message).toContain('Value for CommonCountryZoom is too large, has a maximum length of 2');
             });
     });
 
@@ -517,7 +520,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nName is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonCountryI18nName is too large, has a maximum length of 100');
             });
     });
 
@@ -533,7 +536,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nSlug is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonCountryI18nSlug is too large, has a maximum length of 100');
             });
     });
 
@@ -549,7 +552,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 50');
             });
     });
 
@@ -565,7 +568,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 50');
             });
     });
 
@@ -581,7 +584,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 50');
             });
     });
 
@@ -597,7 +600,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('The numerical value for CountryZoom must have a positive sign, this field does not accept negative values');
+                expect(res.body.message).toContain('The numerical Value for CommonCountryZoom must have a positive sign, this field does not accept negative values');
             });
     });
     test('/REST:POST common/country/create - Got 400 Conflict, CountryMapType has to be a enum option of ROADMAP, SATELLITE, HYBRID, TERRAIN', () =>
@@ -612,7 +615,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryMapType has to be any of this options: ROADMAP, SATELLITE, HYBRID, TERRAIN');
+                expect(res.body.message).toContain('Value for CommonCountryMapType has to be any of this options: ROADMAP, SATELLITE, HYBRID, TERRAIN');
             });
     });
     test('/REST:POST common/country/create - Got 400 Conflict, CountryLatitude is too large, has a maximum decimal integers length of 2', () =>
@@ -627,7 +630,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryLatitude is too large, has a maximum length of 2 integers in');
+                expect(res.body.message).toContain('Value for CommonCountryLatitude is too large, has a maximum length of 2 integers in');
             });
     });
     test('/REST:POST common/country/create - Got 400 Conflict, CountryLongitude is too large, has a maximum decimal integers length of 3', () =>
@@ -642,7 +645,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryLongitude is too large, has a maximum length of 3 integers in');
+                expect(res.body.message).toContain('Value for CommonCountryLongitude is too large, has a maximum length of 3 integers in');
             });
     });
     test('/REST:POST common/country/create - Got 400 Conflict, CountryLatitude is too large, has a maximum decimals length of 14', () =>
@@ -657,7 +660,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryLatitude is too large, has a maximum length of 14 decimals in');
+                expect(res.body.message).toContain('Value for CommonCountryLatitude is too large, has a maximum length of 14 decimals in');
             });
     });
     test('/REST:POST common/country/create - Got 400 Conflict, CountryLongitude is too large, has a maximum decimals length of 14', () =>
@@ -672,7 +675,7 @@ describe('country', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CountryLongitude is too large, has a maximum length of 14 decimals in');
+                expect(res.body.message).toContain('Value for CommonCountryLongitude is too large, has a maximum length of 14 decimals in');
             });
     });
 

@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/common/country/infrastructure/mock/common-mock-country.data.ts",
-            "integrity": "sha1:41ceb648969f9831ad562b5285600f14efaf8c24"
+            "integrity": "sha1:59bfce59a55ae21d3f2cab91f03b946673600578"
         },
         {
             "path": "src/@app/common/country/infrastructure/mock/common-mock-country.repository.ts",
@@ -459,31 +459,31 @@
         },
         {
             "path": "src/@app/common/country/application/delete/common-delete-country-by-id-i18n.command-handler.spec.ts",
-            "integrity": "sha1:082b0836b22dd4ce3621484c3990ccec5a1651ba"
+            "integrity": "sha1:16e55cfdb8c81c483d5a400fc3e99fb08932a830"
         },
         {
             "path": "src/@app/common/country/application/delete/common-delete-country-by-id-i18n.command-handler.ts",
-            "integrity": "sha1:38ea2162a4d6ac92b5b1b518ce63a5dabf801d0f"
+            "integrity": "sha1:d9af90f71468e96fa294746a9ba317d2209affd6"
         },
         {
             "path": "src/@app/common/country/application/delete/common-delete-country-by-id-i18n.command.ts",
-            "integrity": "sha1:eb99017eefeeea188189baa14d31712a9096c442"
+            "integrity": "sha1:b8586ebc439af6e0e9bab8520e58d42b65c2ae6f"
         },
         {
             "path": "src/@app/common/country/application/delete/common-delete-country-by-id-i18n.service.spec.ts",
-            "integrity": "sha1:60adf94fe35f911bd5298d47ded004c1215b11a0"
+            "integrity": "sha1:75052acaaee296a003a45c98256cc410d9ce8a3c"
         },
         {
             "path": "src/@app/common/country/application/delete/common-delete-country-by-id-i18n.service.ts",
-            "integrity": "sha1:9431cc025c87462d0f1ff1d9c4a0927a856dc932"
+            "integrity": "sha1:c4d04e71d19f5765b29246e70c41e4c1ec07fd14"
         },
         {
             "path": "src/@app/common/country/domain/common-country-i18n.repository.ts",
-            "integrity": "sha1:11a5a7a665704e4111bf8e190dcd342462c78504"
+            "integrity": "sha1:c4cd4142d7ace3a23b1bb3dca4ce3755d064de1d"
         },
         {
             "path": "src/@app/common/country/infrastructure/sequelize/common-sequelize-country-i18n.model.ts",
-            "integrity": "sha1:f1905ec45f3fc8b840e13806845311064dbd2bca"
+            "integrity": "sha1:868318bf32e83b63ba63c8c67949dd41d9975243"
         },
         {
             "path": "src/@app/common/country/infrastructure/sequelize/common-sequelize-country-i18n.repository.ts",
@@ -791,11 +791,11 @@
         },
         {
             "path": "test/acceptance/common/country.e2e-spec.ts",
-            "integrity": "sha1:9a919f054ee85643b8fc72a6a3f5a4cf23abedb3"
+            "integrity": "sha1:73507fd5a677ad0105ea49154280b13d3d0a9e71"
         },
         {
             "path": "postman/common/common.country.postman.json",
-            "integrity": "sha1:2ed51df5af1fc2bb997db16ab680793514aa1560"
+            "integrity": "sha1:1627a3ad49dc3226ec229e17a006a9e62068b228"
         }
     ]
 }
