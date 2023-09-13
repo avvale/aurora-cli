@@ -7,8 +7,10 @@ handlebars.registerHelper('isAllowProperty', function(
     property: Property,
     {
         allowOneToManyRelationShip = false,
+        allowManyToManyRelationShip = true,
     }: {
         allowOneToManyRelationShip: boolean;
+        allowManyToManyRelationShip: boolean;
     },
 ): boolean
 {
@@ -23,6 +25,7 @@ handlebars.registerHelper('isAllowProperty', function(
 
     // avoid print property of relationship
     if (isRelationshipProperty(property) && property.relationship?.type === RelationshipType.ONE_TO_MANY) return allowOneToManyRelationShip;
+    if (isRelationshipProperty(property) && property.relationship?.type === RelationshipType.MANY_TO_MANY) return allowManyToManyRelationShip;
 
     return true;
 });

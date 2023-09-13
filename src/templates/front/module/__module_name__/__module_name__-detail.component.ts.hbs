@@ -139,6 +139,18 @@
 ~}}
 {{/eq}}
 {{/each}}
+{{#if (hasBooleanProperties schema.aggregateProperties) }}
+{{
+    push importsArray
+        (object items='MatCheckboxModule' path='@angular/material/checkbox')
+~}}
+{{/if}}
+{{#if (hasEnumProperties schema.aggregateProperties) }}
+{{
+    push importsArray
+        (object items='MatSelectModule' path='@angular/material/select')
+~}}
+{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-detail',
@@ -148,6 +160,7 @@
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
+        {{{ importWebComponentsManager (object properties=schema.aggregateProperties) }}}
     ],
 })
 export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDetailComponent

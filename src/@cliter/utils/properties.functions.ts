@@ -18,6 +18,13 @@ export const hasEnumProperties = (
     return properties.some(property => property.type === PropertyType.ENUM);
 };
 
+export const hasBooleanProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property => property.type === PropertyType.BOOLEAN);
+};
+
 // replace by Properties hasIndexI18n
 export const hasIndexI18nProperties = (
     properties: Property[],

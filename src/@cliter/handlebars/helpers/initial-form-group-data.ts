@@ -1,4 +1,4 @@
-import { Property, PropertyType } from '../..';
+import { Property, PropertyType, RelationshipType } from '../..';
 import * as handlebars from 'handlebars';
 
 handlebars.registerHelper('initialFormGroupData', function(property: Property)
@@ -10,7 +10,7 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
         case PropertyType.TEXT:
         case PropertyType.TIMESTAMP:
         case PropertyType.VARCHAR:
-            return `''`;
+            return '\'\'';
 
         case PropertyType.ENUM:
         case PropertyType.TINYINT:
@@ -22,9 +22,13 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
         case PropertyType.DATE:
         case PropertyType.DECIMAL:
         case PropertyType['SMALLINT.UNSIGNED']:
-            return `null`;
+            return 'null';
 
         case PropertyType.BOOLEAN:
-            return `false`;
+            return 'false';
+
+        case PropertyType.RELATIONSHIP:
+            if (property.relationship?.type === RelationshipType.MANY_TO_MANY)
+                return '[]';
     }
 });
