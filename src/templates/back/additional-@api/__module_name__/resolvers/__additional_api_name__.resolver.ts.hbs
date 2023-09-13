@@ -24,7 +24,6 @@
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
-// tenant
 {{
     push importsArray
         (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
@@ -32,7 +31,6 @@
         (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
-// {{ config.appContainer }}
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
 {{
     push importsArray
