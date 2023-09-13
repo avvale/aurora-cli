@@ -1,13 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Controller') path=(sumStrings './' (currentAdditionalApi.getApiFileName) '.controller'))
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings '../handlers/' (currentAdditionalApi.getApiFileName) '.handler'))
+    )
+~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
-import { CacheModule } from '@nestjs/cache-manager';
+{{
+    push importsArray
+        (object items=(array 'CacheModule') path='@nestjs/cache-manager')
+~}}
 {{/if}}
-
-// custom items
-import { {{ getClassNameAdditionalApi currentAdditionalApi }}Controller } from './{{ currentAdditionalApi.getApiFileName }}.controller';
-import { {{ getClassNameAdditionalApi currentAdditionalApi }}Handler } from '../handlers/{{ currentAdditionalApi.getApiFileName }}.handler';
-
+{{{ importManager (object imports=importsArray) }}}
 describe('{{ getClassNameAdditionalApi currentAdditionalApi }}Controller', () =>
 {
     let controller: {{ getClassNameAdditionalApi currentAdditionalApi }}Controller;

@@ -1,13 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '{{ config.auroraCorePackage }}';
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
+            (object items=(array 'ICommandBus' 'IQueryBus') path=config.auroraCorePackage)
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings './' (currentAdditionalApi.getApiFileName) '.handler'))
+    )
+~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
-import { CacheModule } from '@nestjs/cache-manager';
+{{
+    push importsArray
+        (object items='CacheModule' path='@nestjs/cache-manager')
+~}}
 {{/if}}
-
-// custom items
-import { {{ getClassNameAdditionalApi currentAdditionalApi }}Handler } from './{{ currentAdditionalApi.getApiFileName }}.handler';
-
+{{{ importManager (object imports=importsArray) }}}
 describe('{{ getClassNameAdditionalApi currentAdditionalApi }}Handler', () =>
 {
     let handler: {{ getClassNameAdditionalApi currentAdditionalApi }}Handler;
