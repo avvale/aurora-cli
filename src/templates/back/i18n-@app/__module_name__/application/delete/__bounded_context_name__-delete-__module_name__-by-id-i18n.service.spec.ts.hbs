@@ -4,12 +4,12 @@
         array
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
             (object items=(array 'EventPublisher' 'EventBus' 'CommandBus' 'UnhandledExceptionBus') path='@nestjs/cqrs')
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id') path='../../domain/value-objects')
             (object
                 items=(
                     array
-                        (sumStrings (toPascalCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')
+                        (sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Delete' (toPascalCase schema.moduleName) 'ByIdI18nService')
-                        (sumStrings (toPascalCase schema.boundedContextName) (toPascalCase schema.moduleName) 'Id')
                         (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
                         (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository')
                         (sumStrings (toPascalCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Repository')

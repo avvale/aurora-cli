@@ -3,16 +3,8 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
-            (
-                object
-                    items=
-                    (
-                        array
-                            (sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Resolver')
-                            (sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler')
-                    )
-                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-            )
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Resolver') path=(sumStrings './' (currentAdditionalApi.getApiFileName) '.resolver'))
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings '../handlers/' (currentAdditionalApi.getApiFileName) '.handler'))
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}

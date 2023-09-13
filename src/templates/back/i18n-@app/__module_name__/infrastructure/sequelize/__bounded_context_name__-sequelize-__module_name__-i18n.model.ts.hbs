@@ -19,13 +19,12 @@
     push ../importsArray
         (
             object
-                items=(sumStrings relationship.aggregateName 'Model')
+                items=(sumStrings (relationship.aggregateName) 'Model')
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
 {{/each}}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
-{{#unless (isI18nRelationProperty ../schema.moduleName this)}}
 {{
     push ../importsArray
         (
@@ -34,7 +33,6 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
-{{/unless}}
 {{/each}}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 {{
