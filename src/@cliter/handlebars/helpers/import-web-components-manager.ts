@@ -1,5 +1,6 @@
 import * as handlebars from 'handlebars';
 import { Property, PropertyType } from '../../types';
+import { hasI18nProperties } from '../../utils';
 
 handlebars.registerHelper('importWebComponentsManager', function(
     {
@@ -13,6 +14,8 @@ handlebars.registerHelper('importWebComponentsManager', function(
 )
 {
     const importWebComponents = new Set();
+
+    if (hasI18nProperties(properties)) importWebComponents.add('FlagLangComponent');
 
     for (const property of properties)
     {

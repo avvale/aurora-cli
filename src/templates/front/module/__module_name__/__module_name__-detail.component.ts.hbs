@@ -12,7 +12,7 @@
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
     push importsArray
-        (object items=(array 'CoreCurrentLangService' 'CoreLang') path='@aurora')
+        (object items=(array 'CoreCurrentLangService' 'CoreLang' 'FlagLangComponent') path='@aurora')
 ~}}
 {{/if}}
 {{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
