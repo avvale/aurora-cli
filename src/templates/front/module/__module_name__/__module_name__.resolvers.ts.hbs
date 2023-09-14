@@ -167,7 +167,20 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>;
     {{/eq}}
     {{/each}}
-}> = (
+}{{#if (hasI18nProperties schema.aggregateProperties) }} | {
+    object: {{ schema.aggregateName }};
+    {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+    {{#eq webComponent.type 'select'}}
+    {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
+    {{/eq}}
+    {{#eq webComponent.type 'multiple-select'}}
+    {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
+    {{/eq}}
+    {{#eq webComponent.type 'grid-select-element'}}
+    {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>;
+    {{/eq}}
+    {{/each}}
+}{{/if}}> = (
 {{/and}}
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
@@ -239,7 +252,15 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     if (route.paramMap.get('id') && route.paramMap.get('langId'))
     {
         return {{ toCamelCase schema.moduleName }}Service
+            {{#or
+                (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+                (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+                (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+            }}
+            .findByIdWithRelations({
+            {{else}}
             .findById({
+            {{/or}}
                 id        : route.paramMap.get('id'),
                 constraint: {
                     include: [{
@@ -252,6 +273,15 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
                         },
                     }],
                 },
+                {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
+                queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatementHandler
+                    .init({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                    .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                    .setSort(gridStateService.getSort({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                    .setPage(gridStateService.getPage({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                    .setSearch(gridStateService.getSearchState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                    .getQueryStatement(),
+                {{/each}}
                 headers: {
                     'Content-Language': route.paramMap.get('langId'),
                 },
