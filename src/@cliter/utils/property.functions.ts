@@ -351,7 +351,6 @@ export const getGraphqlTypeProperty = (
 export const getGraphqlCreateTypeProperty = (
     property: Property,
     config: CliterConfig,
-    schema: ModuleDefinitionSchema,
 ): string =>
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)                                  return config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
@@ -363,7 +362,6 @@ export const getGraphqlCreateTypeProperty = (
 export const getGraphqlUpdateTypeProperty = (
     property: Property,
     config: CliterConfig,
-    schema: ModuleDefinitionSchema,
 ): string =>
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)                                  return config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
@@ -373,6 +371,27 @@ export const getGraphqlUpdateTypeProperty = (
 
 // replace by Property getJavascriptType
 export const getPropertyJavascriptType = (
+    property: Property,
+    config: CliterConfig,
+): string =>
+{
+    if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
+
+    return config.propertyTypesEquivalenceJavascriptTypes[property.type];
+};
+
+export const getPropertyJavascriptCreateType = (
+    property: Property,
+    config: CliterConfig,
+): string =>
+{
+    if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
+    if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
+
+    return config.propertyTypesEquivalenceJavascriptTypes[property.type];
+};
+
+export const getPropertyJavascriptUpdateType = (
     property: Property,
     config: CliterConfig,
 ): string =>

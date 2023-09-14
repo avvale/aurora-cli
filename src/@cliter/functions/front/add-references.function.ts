@@ -19,7 +19,9 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
 
     codeWriter.generateFrontInterface(
         generateCommandState.schema.aggregateProperties,
-        { overwrite: generateCommandState.flags.overwriteInterface },
+        {
+            overwrite: generateCommandState.flags.overwriteInterface,
+        },
     );
     codeWriter.generateFrontRoutes();
     codeWriter.declareFrontBoundedContext();

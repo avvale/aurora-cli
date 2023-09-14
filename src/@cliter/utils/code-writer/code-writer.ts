@@ -9,7 +9,7 @@ import { ExportDriver } from './drivers/export.driver';
 import { ImportDriver } from './drivers/import.driver';
 import { InterfaceDriver } from './drivers/interface.driver';
 import { getForeignRelationshipProperties, getGraphqlInputProperties, getGraphqlProperties, getRelationshipManyToManyProperties, getWithoutTimestampsProperties, hasI18nProperties } from '../properties.functions';
-import { getPropertyJavascriptType } from '../property.functions';
+import { getPropertyJavascriptCreateType, getPropertyJavascriptType, getPropertyJavascriptUpdateType } from '../property.functions';
 import { Property } from '../../types';
 
 export class CodeWriter
@@ -392,7 +392,10 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: getPropertyJavascriptType(property, cliterConfig) })),
+                .map(property => ({
+                    name: property.name.toCamelCase() + (property.nullable ? '?' : ''),
+                    type: getPropertyJavascriptType(property, cliterConfig),
+                })),
             { overwrite },
         );
 
@@ -410,7 +413,10 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.nullable ? '?' : ''), type: getPropertyJavascriptType(property, cliterConfig) })),
+                .map(property => ({
+                    name: property.name.toCamelCase() + (property.nullable ? '?' : ''),
+                    type: getPropertyJavascriptCreateType(property, cliterConfig),
+                })),
             { overwrite },
         );
 
@@ -428,7 +434,10 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'), type: getPropertyJavascriptType(property, cliterConfig) })),
+                .map(property => ({
+                    name: property.name.toCamelCase() + (property.name === 'id' ? '' : '?'),
+                    type: getPropertyJavascriptType(property, cliterConfig),
+                })),
             { overwrite },
         );
 
@@ -446,7 +455,10 @@ export class CodeWriter
                         )
                     ),
                 )
-                .map(property => ({ name: property.name.toCamelCase() + '?', type: getPropertyJavascriptType(property, cliterConfig) })),
+                .map(property => ({
+                    name: property.name.toCamelCase() + '?',
+                    type: getPropertyJavascriptUpdateType(property, cliterConfig),
+                })),
             { overwrite },
         );
 

@@ -20,6 +20,7 @@ handlebars.registerHelper('importWebComponentsManager', function(
         {
             case PropertyType.BOOLEAN:
                 importWebComponents.add('MatCheckboxModule');
+                importWebComponents.add('NgForOf');
                 break;
 
             case PropertyType.ENUM:
