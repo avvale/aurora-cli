@@ -152,6 +152,12 @@
         (object items='NgForOf' path='@angular/common')
 ~}}
 {{/if}}
+{{#if (hasSelectWebComponentsProperties schema.aggregateProperties) }}
+{{
+    push importsArray
+        (object items='MatSelectModule' path='@angular/material/select')
+~}}
+{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-detail',

@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { Property, PropertyType, RelationshipType } from '../..';
 import * as handlebars from 'handlebars';
 
@@ -6,7 +7,6 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
     switch (property.type)
     {
         case PropertyType.CHAR:
-        case PropertyType.ID:
         case PropertyType.TEXT:
         case PropertyType.TIMESTAMP:
         case PropertyType.VARCHAR:
@@ -26,6 +26,11 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
 
         case PropertyType.BOOLEAN:
             return 'false';
+
+        case PropertyType.ID:
+            if (property.relationship?.type === RelationshipType.MANY_TO_ONE)
+                return 'null';
+            return '\'\'';
 
         case PropertyType.RELATIONSHIP:
             if (property.relationship?.type === RelationshipType.MANY_TO_MANY)

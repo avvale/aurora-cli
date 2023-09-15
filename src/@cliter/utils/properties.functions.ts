@@ -919,6 +919,14 @@ export const getSelectWebComponentsProperties = (
         .filter(property => property.webComponent?.type === WebComponentType.SELECT);
 };
 
+export const hasSelectWebComponentsProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties
+        .some(property => property.webComponent?.type === WebComponentType.SELECT);
+};
+
 export const getMultipleSelectWebComponentsProperties = (
     properties: Property[],
 ): Property[] =>

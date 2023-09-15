@@ -125,6 +125,7 @@ import './has-index-i18n-properties';
 import './has-index-properties';
 import './has-items';
 import './has-pivot-properties';
+import './has-select-web-components-properties';
 import './has-validation-form-control';
 import './import-manager';
 import './import-web-components-manager';
