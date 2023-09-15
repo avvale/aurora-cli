@@ -25,7 +25,14 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
     );
     codeWriter.generateFrontRoutes();
     codeWriter.declareFrontBoundedContext();
-    codeWriter.generateFrontNavigation();
+    codeWriter.generateFrontNavigation(
+        cliterConfig,
+        path.join('src'),
+        generateCommandState.schema.boundedContextName,
+        generateCommandState.schema.moduleName,
+        generateCommandState.schema.moduleNames,
+        generateCommandState.schema.front?.outlineIcon,
+    );
     codeWriter.registerFrontNavigation();
     codeWriter.generateFrontTranslations(generateCommandState.schema.aggregateProperties, 'en');
     codeWriter.generateFrontTranslations(generateCommandState.schema.aggregateProperties, 'es');

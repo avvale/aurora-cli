@@ -2,13 +2,13 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, InitializerExpressionGetableNode, ObjectLiteralExpression, Project, QuoteKind, SourceFile } from 'ts-morph';
 import { NewLineKind, SyntaxKind } from 'typescript';
-import { cliterConfig } from '../../config';
+import { CliterConfig, cliterConfig } from '../../config';
 import { ObjectTools } from '../object-tools';
 import { ArrayDriver } from './drivers/array.driver';
 import { ExportDriver } from './drivers/export.driver';
 import { ImportDriver } from './drivers/import.driver';
 import { InterfaceDriver } from './drivers/interface.driver';
-import { getForeignRelationshipProperties, getGraphqlInputProperties, getGraphqlProperties, getRelationshipManyToManyProperties, getWithoutTimestampsProperties, hasI18nProperties } from '../properties.functions';
+import { getForeignRelationshipProperties, getGraphqlInputProperties, getGraphqlProperties, getWithoutTimestampsProperties, hasI18nProperties } from '../properties.functions';
 import { getPropertyJavascriptCreateType, getPropertyJavascriptType, getPropertyJavascriptUpdateType } from '../property.functions';
 import { Property } from '../../types';
 
@@ -676,10 +676,19 @@ export class CodeWriter
         sourceFile?.saveSync();
     }
 
-    generateFrontNavigation(): void
+    // eslint-disable-next-line max-params
+    // TODO, refactorizar a función
+    generateFrontNavigation(
+        cliterConfig: CliterConfig,
+        srcDirectory: string,
+        boundedContextName: string,
+        moduleName: string,
+        moduleNames: string,
+        outlineIcon?: string,
+    ): void
     {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.navigation.ts`));
-        const navigation = sourceFile.getVariableDeclarationOrThrow(this.boundedContextName.toCamelCase() + 'Navigation');
+        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), srcDirectory, cliterConfig.dashboardContainer, boundedContextName.toKebabCase(), `${boundedContextName.toKebabCase()}.navigation.ts`));
+        const navigation = sourceFile.getVariableDeclarationOrThrow(boundedContextName.toCamelCase() + 'Navigation');
         const navigationObject = navigation.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
         const childrenProperty = navigationObject.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
         const childrenArrayNavigation = childrenProperty.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
@@ -691,28 +700,28 @@ export class CodeWriter
             const pathProperty = element.getPropertyOrThrow('id') as InitializerExpressionGetableNode;
             const pathString = pathProperty.getInitializerIfKindOrThrow(SyntaxKind.StringLiteral);
 
-            if (pathString.getText() === `'${this.moduleName.toCamelCase()}'`) return;
+            if (pathString.getText() === `'${moduleName.toCamelCase()}'`) return;
         }
 
         // set routes
         ArrayDriver.addArrayItem(
             sourceFile,
             `{
-    id   : '${this.moduleNames.toCamelCase()}',
-    title: '${this.moduleName.toPascalCase()}',
+    id   : '${moduleNames.toCamelCase()}',
+    title: '${moduleName.toPascalCase()}',
     type : 'basic',
-    icon : 'heroicons_outline:tag',
-    link : '/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}',
+    icon : '${outlineIcon || 'heroicons_outline:tag'}',
+    link : '/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}',
 },`,
             childrenArrayNavigation,
             (item: string, array: ArrayLiteralExpression | undefined) =>
             {
                 const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
                 {
-                    return `'${this.moduleNames.toCamelCase()}'` === (item.getPropertyOrThrow('id') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                    return `'${moduleNames.toCamelCase()}'` === (item.getPropertyOrThrow('id') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
                 });
 
-                return !!foundItem;
+                return Boolean(foundItem);
             },
         );
 
