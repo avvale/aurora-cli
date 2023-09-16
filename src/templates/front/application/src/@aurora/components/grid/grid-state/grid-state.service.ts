@@ -101,7 +101,10 @@ export class GridStateService
         };
     }
 
-    getSort(id: string, defaultGridSortState?: GridSortState): GridSortState
+    getSort(
+        id: string,
+        defaultGridSortState?: GridSortState,
+    ): GridSortState
     {
         const sort = this.getSortState(id);
 

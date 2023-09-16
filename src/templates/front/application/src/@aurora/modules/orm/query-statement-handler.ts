@@ -60,8 +60,8 @@ export class QueryStatementHandler
 
     setSort(
         {
-            active = 'createdAt',
-            direction = 'desc',
+            active = null,
+            direction = null,
         }: GridSortState = {},
         ...additionalSort
     ): QueryStatementHandler
@@ -69,13 +69,16 @@ export class QueryStatementHandler
         // set default order if is nor defined or invalid order statement
         if (!isValidOrderStatement(this.queryStatement.order))
         {
-            if (active.includes('.'))
+            if (active)
             {
-                this.queryStatement.order = [[...active.split('.')]];
-            }
-            else
-            {
-                this.queryStatement.order = [[active]];
+                if (active.includes('.'))
+                {
+                    this.queryStatement.order = [[...active.split('.')]];
+                }
+                else
+                {
+                    this.queryStatement.order = [[active]];
+                }
             }
 
             if (direction)
@@ -85,7 +88,7 @@ export class QueryStatementHandler
         }
 
         // adds an additional order, intended to sort the relationships
-        if (Array.isArray(additionalSort)) this.queryStatement.order.push(...additionalSort);
+        if (Array.isArray(additionalSort) && additionalSort.length > 0) this.queryStatement.order.push(...additionalSort);
 
         return this;
     }
