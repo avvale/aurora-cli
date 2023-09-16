@@ -28,7 +28,7 @@
         "@angular/platform-browser-dynamic": "16.0.3",
         "@angular/router": "16.0.3",
         "@apollo/client": "^3.7.16",
-        "@ng-matero/extensions": "^16.0.3",
+        "@ng-matero/extensions": "^16.1.0",
         "@ngneat/transloco": "4.2.7",
         "@rxweb/reactive-form-validators": "^13.0.1",
         "apexcharts": "3.40.0",
