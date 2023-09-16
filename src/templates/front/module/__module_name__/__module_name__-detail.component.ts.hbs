@@ -158,6 +158,12 @@
         (object items='MatSelectModule' path='@angular/material/select')
 ~}}
 {{/if}}
+{{#if (hasTimestampProperties schema.aggregateProperties) }}
+{{
+    push importsArray
+        (object items='MtxDatetimepickerModule' path='@ng-matero/extensions/datetimepicker')
+~}}
+{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-detail',

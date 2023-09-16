@@ -1,6 +1,6 @@
 import * as handlebars from 'handlebars';
 import { Property, PropertyType } from '../../types';
-import { hasI18nProperties } from '../../utils';
+import { hasI18nProperties, timestampProperties } from '../../utils';
 
 handlebars.registerHelper('importWebComponentsManager', function(
     {
@@ -19,6 +19,9 @@ handlebars.registerHelper('importWebComponentsManager', function(
 
     for (const property of properties)
     {
+        // avoid evaluating timestamp properties
+        if (timestampProperties.includes(property.name)) continue;
+
         switch (property.type)
         {
             case PropertyType.BOOLEAN:
@@ -28,6 +31,10 @@ handlebars.registerHelper('importWebComponentsManager', function(
 
             case PropertyType.ENUM:
                 importWebComponents.add('MatSelectModule');
+                break;
+
+            case PropertyType.TIMESTAMP:
+                importWebComponents.add('MtxDatetimepickerModule');
                 break;
         }
     }

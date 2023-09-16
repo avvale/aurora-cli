@@ -25,6 +25,15 @@ export const hasBooleanProperties = (
     return properties.some(property => property.type === PropertyType.BOOLEAN);
 };
 
+export const hasTimestampProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties
+        .filter(property => !timestampProperties.includes(property.name))
+        .some(property => property.type === PropertyType.TIMESTAMP);
+};
+
 // replace by Properties hasIndexI18n
 export const hasIndexI18nProperties = (
     properties: Property[],

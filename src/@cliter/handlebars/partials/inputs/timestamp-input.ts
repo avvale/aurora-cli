@@ -19,7 +19,7 @@ handlebars.registerPartial('timestampInput',
     </mtx-datetimepicker-toggle>
     <mtx-datetimepicker
         #{{ toCamelCase property.name }}Picker
-        type="month"
+        type="datetime"
         mode="landscape"
         [multiYearSelector]="false"
         startView="month"
