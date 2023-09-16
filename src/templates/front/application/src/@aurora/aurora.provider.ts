@@ -1,5 +1,7 @@
 import { APP_INITIALIZER, EnvironmentProviders, Provider } from '@angular/core';
-import { AuroraGridManagerService, AuthenticationAuroraAdapterService, AuthenticationDisabledAdapterGuard, AuthenticationMockAdapterService, AuthenticationService, AuthorizationDisabledService, AuthorizationService, BootstrapService, COMPACT_NAVIGATION, DEFAULT_NAVIGATION, EnvironmentsInformationMockAdapterService, EnvironmentsInformationService, FUTURISTIC_NAVIGATION, GridManagerService, HORIZONTAL_NAVIGATION, IamAuroraAdapterService, IamMockAdapterService, IamService, SessionLocalStorageService, SessionService, UserMetaStorageLocalStorageAdapterService, UserMetaStorageService, compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation, provideApollo, provideValidationMessages } from '@aurora';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { AuroraGridManagerService, AuthenticationAuroraAdapterService, AuthenticationDisabledAdapterGuard, AuthenticationMockAdapterService, AuthenticationService, AuthorizationDisabledService, AuthorizationService, BootstrapService, COMPACT_NAVIGATION, DEFAULT_NAVIGATION, DatePickerDayjsAdapter, DatePickerDayjsFormats, DateTimePickerDayjsAdapter, DatetimePickerDayjsFormats, EnvironmentsInformationMockAdapterService, EnvironmentsInformationService, FUTURISTIC_NAVIGATION, GridManagerService, HORIZONTAL_NAVIGATION, IamAuroraAdapterService, IamMockAdapterService, IamService, SessionLocalStorageService, SessionService, UserMetaStorageLocalStorageAdapterService, UserMetaStorageService, compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation, provideApollo, provideValidationMessages } from '@aurora';
+import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import './aurora.prototypes';
 
@@ -49,6 +51,23 @@ export const provideAurora = (): Array<Provider | EnvironmentProviders> =>
         {
             provide : HORIZONTAL_NAVIGATION,
             useValue: horizontalNavigation,
+        },
+        {
+            provide : DateAdapter,
+            useClass: DatePickerDayjsAdapter,
+            deps    : [MAT_DATE_LOCALE],
+        },
+        {
+            provide : MAT_DATE_FORMATS,
+            useValue: DatePickerDayjsFormats,
+        },
+        {
+            provide : DatetimeAdapter,
+            useClass: DateTimePickerDayjsAdapter,
+        },
+        {
+            provide : MTX_DATETIME_FORMATS,
+            useValue: DatetimePickerDayjsFormats,
         },
         {
             provide : EnvironmentsInformationService,
