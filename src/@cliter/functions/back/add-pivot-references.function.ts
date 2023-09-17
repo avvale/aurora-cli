@@ -1,11 +1,11 @@
 import { GenerateCommandState } from '../../types';
 import { cliterConfig } from '../../config';
-import { CodeWriter, getRelationshipManyToManyProperties, hasI18nProperties } from '../../utils';
+import { CodeWriter, getManyToManyRelationshipProperties, hasI18nProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const addPivotReferences = (generateCommandState: GenerateCommandState): void =>
 {
-    for (const property of getRelationshipManyToManyProperties(generateCommandState.schema.aggregateProperties))
+    for (const property of getManyToManyRelationshipProperties(generateCommandState.schema.aggregateProperties))
     {
         if (!property.relationship?.pivot) throw new Error('Pivot property is not defined in relationship many to many property ' + property.name);
 

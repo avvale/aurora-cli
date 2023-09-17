@@ -1,12 +1,12 @@
 /* eslint-disable no-await-in-loop */
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
-import { TemplateGenerator, getRelationshipManyToManyProperties, getValueObjectsProperties } from '../../utils';
+import { TemplateGenerator, getManyToManyRelationshipProperties, getValueObjectsProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const generateAppPivotFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    for (const property of getRelationshipManyToManyProperties(generateCommandState.schema.aggregateProperties))
+    for (const property of getManyToManyRelationshipProperties(generateCommandState.schema.aggregateProperties))
     {
         if (!property.relationship?.pivot) throw new Error('Pivot property is not defined in relationship many to many property ' + property.name);
 

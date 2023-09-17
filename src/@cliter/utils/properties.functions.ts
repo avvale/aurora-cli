@@ -250,7 +250,7 @@ export const getForeignRelationshipProperties = (
 };
 
 // replace by Properties withRelationshipManyToMany
-export const getRelationshipManyToManyProperties = (
+export const getManyToManyRelationshipProperties = (
     properties: Property[],
 ): Property[] =>
 {

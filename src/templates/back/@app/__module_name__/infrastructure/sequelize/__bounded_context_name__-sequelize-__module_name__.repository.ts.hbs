@@ -18,7 +18,7 @@
             )
     )
 ~}}
-{{#hasItems (getRelationshipManyToManyProperties schema.aggregateProperties)  }}
+{{#hasItems (getManyToManyRelationshipProperties schema.aggregateProperties)  }}
 {{
     push importsArray
         (object items='LiteralObject' path=config.auroraCorePackage)
@@ -40,7 +40,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     {
         super();
     }
-    {{#hasItems (getRelationshipManyToManyProperties schema.aggregateProperties)  }}
+    {{#hasItems (getManyToManyRelationshipProperties schema.aggregateProperties)  }}
 
     // hook called after create aggregate
     async createdAggregateHook(
@@ -50,7 +50,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     ): Promise<void>
     {
         // add many to many relation
-        {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+        {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
         if (aggregate.{{ toCamelCase (getPropertyName this) }}.length > 0)
         {
             await model.$add(
@@ -70,7 +70,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     ): Promise<void>
     {
         // set many to many relation
-        {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+        {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
         if (aggregate.{{ toCamelCase (getPropertyName this) }}.isArray())
         {
             await model.$set(

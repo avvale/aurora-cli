@@ -136,7 +136,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     {{ toCamelCase name }}: {{ toPascalCase relationship.aggregateName }}[];
     {{/each}}
     {{! MANY TO MANY Relationship }}
-    {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+    {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
     {{ toCamelCase name }}: {{ toPascalCase relationship.aggregateName }}[];
     {{/each}}
     {{! PIVOT TABLE Relationship }}
@@ -170,7 +170,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{ toCamelCase name }}?: {{ toPascalCase relationship.aggregateName }}[],
         {{/each}}
         {{! MANY TO MANY Relationship }}
-        {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+        {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
         {{ toCamelCase name }}?: {{ toPascalCase relationship.aggregateName }}[],
         {{/each}}
         {{! PIVOT TABLE Relationship }}
@@ -205,7 +205,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         this.{{ toCamelCase name }} = {{ toCamelCase name }};
         {{/each}}
         {{! MANY TO MANY Relationship }}
-        {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+        {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
         this.{{ toCamelCase name }} = {{ toCamelCase name }};
         {{/each}}
         {{! PIVOT TABLE Relationship }}
@@ -240,7 +240,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         {{ toCamelCase name }}?: {{ toPascalCase relationship.aggregateName }}[],
         {{/each}}
         {{! MANY TO MANY Relationship }}
-        {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+        {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
         {{ toCamelCase name }}?: {{ toPascalCase relationship.aggregateName }}[],
         {{/each}}
         {{! PIVOT TABLE Relationship }}
@@ -275,7 +275,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{ toCamelCase name }},
             {{/each}}
             {{! MANY TO MANY Relationship }}
-            {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+            {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
             {{ toCamelCase name }},
             {{/each}}
             {{! PIVOT TABLE Relationship }}
@@ -358,7 +358,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toDTO()),
             {{/each}}
             {{! MANY TO MANY Relationship }}
-            {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+            {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toDTO()),
             {{/each}}
             {{! PIVOT TABLE Relationship }}
@@ -422,7 +422,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toDTO()),
             {{/each}}
             {{! MANY TO MANY Relationship }}
-            {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+            {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
             {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toDTO()),
             {{/each}}
             {{! PIVOT TABLE Relationship }}

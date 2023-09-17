@@ -2,11 +2,18 @@ import gql from 'graphql-tag';
 
 export const fields = `
     {{#each (getWithoutDeletedAtProperties schema.aggregateProperties) }}
-    {{#if (isAllowProperty ../schema.moduleName this) }}
+    {{~ setVar 'printProperty' true ~}}
+    {{#if (isManyToManyRelationshipProperty this) }}
+    {{ toCamelCase name }} {
+
+    }
+    {{~ setVar 'printProperty' false }}
+    {{/if}}
+    {{#and ../printProperty (isAllowProperty ../schema.moduleName this) }}
     {{#unlessEq (getPropertyName this) 'id'}}
     {{ toCamelCase (getPropertyName this) }}
     {{/unlessEq}}
-    {{/if}}
+    {{/and}}
     {{/each}}
 `;
 

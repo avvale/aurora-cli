@@ -170,7 +170,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
             {{/each}}
             {{! MANY TO MANY Relationship }}
-            {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+            {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
             this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapModelsToAggregates({{ toCamelCase ../schema.moduleName }}.{{#if isI18n}}{{ toCamelCase ../schema.moduleName }}I18n.{{/if}}{{ toCamelCase name }}, cQMetadata) : undefined,
             {{/each}}
             {{! PIVOT TABLE Relationship }}
@@ -210,7 +210,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
             this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
             {{/each}}
             {{! MANY TO MANY Relationship }}
-            {{#each (getRelationshipManyToManyProperties schema.aggregateProperties) }}
+            {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
             this.options.eagerLoading ? new {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Mapper({ eagerLoading: true }).mapAggregatesToResponses({{ toCamelCase ../schema.moduleName }}.{{ toCamelCase name }}) : undefined,
             {{/each}}
             {{! PIVOT TABLE Relationship }}

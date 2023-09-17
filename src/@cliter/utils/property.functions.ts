@@ -96,6 +96,27 @@ export const isRelationshipProperty = (
     return property.type === PropertyType.RELATIONSHIP;
 };
 
+export const isOneToManyRelationshipProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.relationship?.type === RelationshipType.ONE_TO_MANY;
+};
+
+export const isManyToOneRelationshipProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.relationship?.type === RelationshipType.MANY_TO_ONE;
+};
+
+export const isManyToManyRelationshipProperty = (
+    property: Property,
+): boolean =>
+{
+    return property.relationship?.type === RelationshipType.MANY_TO_MANY;
+};
+
 // replace by Property isBinary
 export const isBinaryProperty = (
     property: Property,
