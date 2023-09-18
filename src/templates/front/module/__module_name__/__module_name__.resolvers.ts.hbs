@@ -431,7 +431,18 @@ export const {{ toCamelCase schema.moduleName }}EditResolver: ResolveFn<{
             constraint: {
                 include: [
                     {{#each (getMultipleSelectWebComponentsProperties schema.aggregateProperties) }}
-                    { association: '{{ name }}' },
+                    {
+                        association: '{{ name }}',
+                        {{#if (hasI18nProperties (getPropertiesFromPropertyRelationship relationship.modulePath)) }}
+                        include: [
+                            {
+                                association: '{{ relationship.singularName }}I18n',
+                                required: true,
+                                where: { langId: coreCurrentLangService.currentLang.id },
+                            },
+                        ],
+                        {{/if}}
+                    },
                     {{/each}}
                 ],
             },
