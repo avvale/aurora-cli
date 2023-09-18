@@ -5,7 +5,8 @@ export const fields = `
     {{~ setVar 'printProperty' true ~}}
     {{#if (isManyToManyRelationshipProperty this) }}
     {{ toCamelCase name }} {
-
+        {{! we just add id field to get the many-to-many relationship ids }}
+        id
     }
     {{~ setVar 'printProperty' false }}
     {{/if}}
