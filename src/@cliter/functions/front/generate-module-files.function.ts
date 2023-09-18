@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { cliterConfig } from '../../config';
-import { GenerateCommandState, TemplateElement } from '../../types';
+import { GenerateCommandState, PropertyType, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
 
 export const generateModuleFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
@@ -27,6 +27,7 @@ export const generateModuleFiles = async (generateCommandState: GenerateCommandS
             lockFiles         : generateCommandState.lockFiles,
             templateData      : {
                 ...generateCommandState,
+                propertyType: PropertyType,
             },
         },
     );
