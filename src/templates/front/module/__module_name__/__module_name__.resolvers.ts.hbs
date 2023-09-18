@@ -3,7 +3,7 @@
         array
             (object items='inject' path='@angular/core')
             (object items=(array 'ActivatedRouteSnapshot' 'ResolveFn' 'RouterStateSnapshot') path='@angular/router')
-            (object items=(array 'Action' 'ActionService' 'GridData' 'GridFiltersStorageService' 'GridStateService' 'QueryStatementHandler') path='@aurora')
+            (object items=(array 'ActionService' 'GridData' 'GridFiltersStorageService' 'GridStateService' 'QueryStatementHandler') path='@aurora')
             (object items=schema.aggregateName path=(sumStrings '../' toKebabCase schema.boundedContextName '.types'))
             (object items=(sumStrings (toCamelCase schema.moduleName) 'ColumnsConfig') path=(sumStrings './' (toKebabCase schema.moduleName) '.columns-config'))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' (toKebabCase schema.moduleName) '.service'))
@@ -36,6 +36,16 @@
 ~}}
 {{/eq}}
 {{/each}}
+{{! add Action import if there is no web component, when there is a web component, return observable with relations }}
+{{#and
+    (eq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    (eq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+    (eq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+}}
+{{
+    push importsArray (object items='Action' path='@aurora')
+~}}
+{{/and}}
 {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
 {{
