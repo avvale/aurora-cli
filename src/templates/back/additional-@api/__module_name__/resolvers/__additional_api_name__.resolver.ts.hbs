@@ -3,7 +3,11 @@
         array
             (object items=(array 'Resolver' 'Args' 'Mutation') path='@nestjs/graphql')
             (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
-            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings '..handlers/' (currentAdditionalApi.getApiFileName) '.handler'))
+            (
+                object
+                    items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler')
+                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
     )
 ~}}
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY}}

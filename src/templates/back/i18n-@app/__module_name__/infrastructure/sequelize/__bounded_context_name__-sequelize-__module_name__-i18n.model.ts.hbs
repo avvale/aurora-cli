@@ -14,6 +14,7 @@
         (object items=(array 'AuditingSideEffectEvent' 'SequelizeAuditingAgent') path=config.auroraCorePackage)
 ~}}
 {{/if}}
+{{! ONE TO ONE Relationship }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -24,7 +25,9 @@
         )
 ~}}
 {{/each}}
+{{! MANY TO ONE Relationship }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
+{{#if (isI18nRelationProperty ../schema.moduleName this)}}
 {{
     push ../importsArray
         (
@@ -33,7 +36,9 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
+{{/if}}
 {{/each}}
+{{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -44,6 +49,7 @@
         )
 ~}}
 {{/each}}
+{{! MANY TO MANY Relationship }}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
 {{
     push ../importsArray
@@ -78,6 +84,7 @@
 })
 export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggregateName }}I18nModel>
 {
+    {{! start auditing }}
     {{#if schema.hasAuditing}}
     @AfterCreate
     static auditingCreate(instance: {{ schema.aggregateName }}Model, options): void

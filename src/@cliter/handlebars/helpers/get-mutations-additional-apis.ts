@@ -1,6 +1,5 @@
 import * as handlebars from 'handlebars';
-import { getMutationsAdditionalApis } from '../..';
-import { AdditionalApi } from '../../utils/additional-api';
+import { AdditionalApi, getMutationsAdditionalApis } from '../..';
 
 handlebars.registerHelper('getMutationsAdditionalApis', function(
     additionalApis: AdditionalApi[],

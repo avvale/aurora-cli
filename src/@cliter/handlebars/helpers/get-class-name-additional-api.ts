@@ -1,6 +1,5 @@
 import * as handlebars from 'handlebars';
-import { getClassNameAdditionalApi } from '../..';
-import { AdditionalApi } from '../../utils/additional-api';
+import { AdditionalApi, getClassNameAdditionalApi } from '../..';
 
 handlebars.registerHelper('getClassNameAdditionalApi', function(
     additionalApi: AdditionalApi,
