@@ -27,20 +27,26 @@
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 {{ push importsArray
     (object items='CoreAddI18nConstraintService' path=config.auroraCorePackage)
-    (object items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+    (
+        object
+            items=(sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'I18nRepository')
+            path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+    )
 ~}}
 {{/if}}
 {{#if schema.hasOAuth}}
-{{ push importsArray
-    (object items='AuthenticationJwtGuard' path='@api/o-auth/shared/guards/authentication-jwt.guard')
-    (object items='AuthorizationPermissionsGuard' path='@api/iam/shared/guards/authorization-permissions.guard')
+{{
+    push importsArray
+        (object items='AuthenticationJwtGuard' path='@api/o-auth/shared/guards/authentication-jwt.guard')
+        (object items='AuthorizationPermissionsGuard' path='@api/iam/shared/guards/authorization-permissions.guard')
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
-{{ push importsArray
-    (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
-    (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
-    (object items='CurrentAccount' path=config.auroraCorePackage)
+{{
+    push importsArray
+        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

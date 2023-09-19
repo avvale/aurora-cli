@@ -24,7 +24,9 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
         },
     );
 
-    const codeWriter = new CodeWriter(
+    // TODO, revisar si es necesrios agregar las referencias los modulos de las relaciones
+    // pare que aunque no de modifique el fichero lo detecta como cambiado cuando revisamos los cambios
+    /* const codeWriter = new CodeWriter(
         path.join('src'),
         path.join(cliterConfig.appContainer),
         cliterConfig.apiContainer,
@@ -33,7 +35,7 @@ export const generateTestingFiles = async (generateCommandState: GenerateCommand
         generateCommandState.schema.moduleNames.toLowerCase(),
         generateCommandState.schema.aggregateName,
         hasI18nProperties(generateCommandState.schema.aggregateProperties),
-    );
+    ); */
 
-    codeWriter.generateBackTestingForeignReferences(generateCommandState.schema.aggregateProperties);
+    // codeWriter.generateBackTestingForeignReferences(generateCommandState.schema.aggregateProperties);
 };

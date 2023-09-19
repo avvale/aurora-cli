@@ -247,7 +247,7 @@ export class CodeWriter
                     const sourceFile = this.project.addSourceFileAtPath(e2eTestPath);
 
                     // register import in e2e test
-                    ImportDriver.createImportItems(
+                    /* ImportDriver.createImportItems(
                         sourceFile,
                         foreignRelationship.relationship.packageName ?
                             foreignRelationship.relationship.packageName :
@@ -255,7 +255,7 @@ export class CodeWriter
                         [
                             `${foreignBoundedContextName.toPascalCase()}Module`,
                         ],
-                    );
+                    ); */
 
                     // disable import foreign modules, can be micro-services
                     // register import in import array
