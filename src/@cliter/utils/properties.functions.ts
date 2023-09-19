@@ -1,5 +1,5 @@
 import { Property, PropertyIndex, PropertyType, RelationshipType, WebComponentType } from '../types';
-import { isPivotProperty } from './property.functions';
+import { hasBelongsToDecoratorProperty, hasBelongsToManyDecoratorProperty, hasColumnDecoratorProperty, hasHasManyDecoratorProperty, hasHasOneDecoratorProperty, isPivotProperty } from './property.functions';
 
 /*********
  * CONST *
@@ -10,6 +10,45 @@ export const deletedAtProperty: string[] = ['deletedAt'];
 /**************
  * PROPERTIES *
  **************/
+
+export const hasForeignKeyDecoratorProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property =>
+        (hasColumnDecoratorProperty(property) && property.relationship?.type === RelationshipType.ONE_TO_ONE) ||
+        (hasColumnDecoratorProperty(property) && property.relationship?.type === RelationshipType.MANY_TO_ONE),
+    );
+};
+
+export const hasBelongsToManyDecoratorProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property => hasBelongsToManyDecoratorProperty(property));
+};
+
+export const hasHasManyDecoratorProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property => hasHasManyDecoratorProperty(property));
+};
+
+export const hasHasOneDecoratorProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property => hasHasOneDecoratorProperty(property));
+};
+
+export const hasBelongsToDecoratorProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties.some(property => hasBelongsToDecoratorProperty(property));
+};
+
 // replace by Properties hasEnum
 export const hasEnumProperties = (
     properties: Property[],
@@ -112,6 +151,20 @@ export const hasI18nProperties = (
 ): boolean =>
 {
     return properties.some(property => property.isI18n);
+};
+
+export const getI18nProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => property.isI18n);
+};
+
+export const getNotI18nProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties.filter(property => !property.isI18n);
 };
 
 // replace by Properties hasIndex

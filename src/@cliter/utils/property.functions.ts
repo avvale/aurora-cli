@@ -165,13 +165,6 @@ export const hasBelongsToDecoratorProperty = (
     );
 };
 
-export const isPivotProperty = (
-    property: Property,
-): boolean =>
-{
-    return Boolean(property.aggregateName && property.modulePath);
-};
-
 // replace by Property hasHasManyDecorator
 export const hasHasManyDecoratorProperty = (
     property: Property,
@@ -181,11 +174,18 @@ export const hasHasManyDecoratorProperty = (
 };
 
 // replace by Property hasBelongsToManyDecorator
-export const hasHasBelongsToManyDecoratorProperty = (
+export const hasBelongsToManyDecoratorProperty = (
     property: Property,
 ): boolean =>
 {
     return property.relationship?.type === RelationshipType.MANY_TO_MANY;
+};
+
+export const isPivotProperty = (
+    property: Property,
+): boolean =>
+{
+    return Boolean(property.aggregateName && property.modulePath);
 };
 
 /****************

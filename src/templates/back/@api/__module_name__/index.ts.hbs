@@ -82,7 +82,7 @@ export { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 export { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Controller } from './controllers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.controller';
 {{/notInArray}}
 
-// exports resolvers
+// export resolvers
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.resolver';
 {{/notInArray}}
@@ -116,8 +116,17 @@ export { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.resolver';
 {{/notInArray}}
+{{#unlessEq (length schema.additionalApis) 0 }}
 
-// controllers
+// export additionalApis
+{{#each schema.additionalApis}}
+export { {{ getClassNameAdditionalApi this }}Controller } from './controllers/{{ getAdditionalApiFileName this }}.controller';
+export { {{ getClassNameAdditionalApi this }}Handler } from './handlers/{{ getAdditionalApiFileName this }}.handler';
+export { {{ getClassNameAdditionalApi this }}Resolver } from './resolvers/{{ getAdditionalApiFileName this }}.resolver';
+{{/each}}
+{{/unlessEq}}
+
+// import controllers
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/controllers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.controller.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller } from './controllers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.controller';
 {{/notInArray}}
@@ -151,15 +160,8 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/controllers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.controller.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Controller } from './controllers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.controller';
 {{/notInArray}}
-{{#unlessEq (length schema.additionalApis) 0 }}
 
-// additionalApis
-{{#each schema.additionalApis}}
-import { {{ getClassNameAdditionalApi this }}Controller } from './controllers/{{ getApiFileName }}.controller';
-{{/each}}
-{{/unlessEq}}
-
-// resolvers
+// import resolvers
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.resolver';
 {{/notInArray}}
@@ -193,15 +195,8 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.resolver';
 {{/notInArray}}
-{{#unlessEq (length schema.additionalApis) 0 }}
 
-// additionalApis
-{{#each schema.additionalApis}}
-import { {{ getClassNameAdditionalApi this }}Resolver } from './resolvers/{{ getApiFileName }}.resolver';
-{{/each}}
-{{/unlessEq}}
-
-// handlers
+// import handlers
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/handlers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.handler';
 {{/notInArray}}
@@ -236,15 +231,17 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleNames }}.handler';
 {{/notInArray}}
 
-// seeder
+// import seeder
 {{#notInArray schema.excluded 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/seeder/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.seeder.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Seeder } from './seeder/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.seeder';
 {{/notInArray}}
 {{#unlessEq (length schema.additionalApis) 0 }}
 
-// additionalApis
+// import additionalApis
 {{#each schema.additionalApis}}
-import { {{ getClassNameAdditionalApi this }}Handler } from './handlers/{{ getApiFileName }}.handler';
+import { {{ getClassNameAdditionalApi this }}Controller } from './controllers/{{ getAdditionalApiFileName this }}.controller';
+import { {{ getClassNameAdditionalApi this }}Handler } from './handlers/{{ getAdditionalApiFileName this }}.handler';
+import { {{ getClassNameAdditionalApi this }}Resolver } from './resolvers/{{ getAdditionalApiFileName this }}.resolver';
 {{/each}}
 {{/unlessEq}}
 

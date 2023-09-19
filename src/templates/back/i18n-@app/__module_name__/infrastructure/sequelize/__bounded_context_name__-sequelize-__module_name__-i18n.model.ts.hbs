@@ -4,7 +4,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'DataTypes') path='sequelize')
-            (object items=(array 'Column' 'Model' 'Table' 'ForeignKey' 'BelongsTo' 'HasMany' 'BelongsToMany' 'HasOne') path='sequelize-typescript')
+            (object items=(array 'Column' 'Model' 'Table') path='sequelize-typescript')
     )
 ~}}
 {{#if schema.hasAuditing}}
@@ -14,8 +14,38 @@
         (object items=(array 'AuditingSideEffectEvent' 'SequelizeAuditingAgent') path=config.auroraCorePackage)
 ~}}
 {{/if}}
+{{! ADD BelongsTo }}
+{{#if (hasBelongsToDecoratorProperties (getI18nProperties schema.aggregateProperties)) }}
+{{
+    push importsArray (object items='BelongsTo' path='sequelize-typescript')
+~}}
+{{/if}}
+{{! ADD  HasOne }}
+{{#if (hasHasOneDecoratorProperties (getI18nProperties schema.aggregateProperties)) }}
+{{
+    push importsArray (object items='HasOne' path='sequelize-typescript')
+~}}
+{{/if}}
+{{! ADD  HasMany }}
+{{#if (hasHasManyDecoratorProperties (getI18nProperties schema.aggregateProperties)) }}
+{{
+    push importsArray (object items='HasMany' path='sequelize-typescript')
+~}}
+{{/if}}
+{{! ADD  BelongsToMany }}
+{{#if (hasBelongsToManyDecoratorProperties (getI18nProperties schema.aggregateProperties)) }}
+{{
+    push importsArray (object items='BelongsToMany' path='sequelize-typescript')
+~}}
+{{/if}}
+{{! ADD  ForeignKey }}
+{{#if (hasForeignKeyDecoratorProperties (getI18nProperties schema.aggregateProperties)) }}
+{{
+    push importsArray (object items='ForeignKey' path='sequelize-typescript')
+~}}
+{{/if}}
 {{! ONE TO ONE Relationship }}
-{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
+{{#each (getWithImportRelationshipOneToOneProperties (getI18nProperties schema.aggregateProperties)) }}
 {{
     push ../importsArray
         (
@@ -26,8 +56,7 @@
 ~}}
 {{/each}}
 {{! MANY TO ONE Relationship }}
-{{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
-{{#if (isI18nRelationProperty ../schema.moduleName this)}}
+{{#each (getWithImportRelationshipManyToOneProperties (getI18nProperties schema.aggregateProperties)) }}
 {{
     push ../importsArray
         (
@@ -36,10 +65,9 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
-{{/if}}
 {{/each}}
 {{! ONE TO MANY Relationship }}
-{{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
+{{#each (getWithImportRelationshipOneToManyProperties (getI18nProperties schema.aggregateProperties)) }}
 {{
     push ../importsArray
         (
@@ -50,7 +78,7 @@
 ~}}
 {{/each}}
 {{! MANY TO MANY Relationship }}
-{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
+{{#each (getWithImportRelationshipManyToManyProperties (getI18nProperties schema.aggregateProperties)) }}
 {{
     push ../importsArray
         (
@@ -195,8 +223,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     }
 
     {{/if}}
-    {{#each schema.aggregateProperties }}
-    {{#if isI18n }}
+    {{#each (getI18nProperties schema.aggregateProperties) }}
     {{#if (hasColumnDecoratorProperty this) }}
     {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     @ForeignKey(() => {{ relationship.aggregateName }}Model)
@@ -260,7 +287,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     }{{/or}})
     {{ toCamelCase (getPropertyName this) }}: {{ relationship.aggregateName }}Model[];
     {{/if}}
-    {{#if (hasHasBelongsToManyDecoratorProperty this) }}
+    {{#if (hasBelongsToManyDecoratorProperty this) }}
 
     {{#if relationship.pivot.aggregateName }}
     @BelongsToMany(() => {{ relationship.aggregateName }}Model, {
@@ -294,6 +321,5 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     {{/if}}
     {{/if}}
 
-    {{/if}}
     {{/each}}
 }
