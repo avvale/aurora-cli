@@ -4,9 +4,8 @@ import { singleton } from 'tsyringe';
 
 // imports
 import { Command } from '@oclif/core';
-import { LiteralObject, LockFile, ModuleDefinitionSchema, ResolverType, RelationshipType, PropertyType } from '../types';
+import { LiteralObject, LockFile, ModuleDefinitionSchema, ResolverType, RelationshipType, PropertyType, AdditionalApi } from '../types';
 import { CliterConfig, cliterConfig } from '../config/cliter.config';
-import { AdditionalApi } from '../utils/additional-api';
 import { v4 as uuidv4 } from 'uuid';
 import * as crypto from 'crypto';
 import * as fs from 'node:fs';

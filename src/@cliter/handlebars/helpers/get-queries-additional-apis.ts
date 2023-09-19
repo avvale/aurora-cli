@@ -1,6 +1,5 @@
 import * as handlebars from 'handlebars';
-import { getQueriesAdditionalApis } from '../..';
-import { AdditionalApi } from '../../utils/additional-api';
+import { AdditionalApi, getQueriesAdditionalApis } from '../..';
 
 handlebars.registerHelper('getQueriesAdditionalApis', function(
     additionalApis: AdditionalApi[],

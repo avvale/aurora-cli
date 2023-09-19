@@ -106,7 +106,7 @@
 })
 export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateName }}Model>
 {
-    {{! Start auditing }}
+    {{! start auditing }}
     {{#if schema.hasAuditing}}
     @AfterCreate
     static auditingCreate(instance: {{ schema.aggregateName }}Model, options): void

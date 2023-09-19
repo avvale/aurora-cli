@@ -4,7 +4,7 @@
         array
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
             (object items=(array 'ICommandBus' 'IQueryBus') path=config.auroraCorePackage)
-            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings './' (currentAdditionalApi.getApiFileName) '.handler'))
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings './' (getAdditionalApiFileName currentAdditionalApi) '.handler'))
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}

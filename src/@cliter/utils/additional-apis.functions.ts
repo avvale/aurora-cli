@@ -1,5 +1,4 @@
-import { ResolverType } from '../types';
-import { AdditionalApi } from './additional-api';
+import { AdditionalApi, ResolverType } from '../types';
 
 // replace by AdditionalApis queries
 export const getQueriesAdditionalApis = (

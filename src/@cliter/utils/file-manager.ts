@@ -6,15 +6,15 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { cliterConfig } from '../config/cliter.config';
 import { GlobalState } from '../store';
-import { LockFile, Property } from '../types';
-import { AdditionalApi } from './additional-api';
+import { AdditionalApi, LockFile, Property } from '../types';
+import { getAdditionalApiFileName } from './additional-api.functions';
 import { Cypher } from './cypher';
 import templateEngine from './template-engine';
 
 export class FileManager
 {
     /**
-     * Render filename and folder name
+     * Render file name and folder name
      * @param {string} name - name that include key to replace
      * @param {string} currentProperty - property to render value object or pivot table
      * @return {string} - replaced name
@@ -49,25 +49,25 @@ export class FileManager
 
         if (name.includes('__bounded_context_name__'))
         {
-            if (boundedContextName === '') throw new Error('Variable boundedContextName is required to replace __bounded_context_name__ in filename');
+            if (boundedContextName === '') throw new Error('Variable boundedContextName is required to replace __bounded_context_name__ in file name');
             name = name.replace(/__bounded_context_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + boundedContextName.toKebabCase() + (boundedContextSuffix ? '-' + boundedContextSuffix : ''));
         }
 
         if (name.includes('__module_name__'))
         {
-            if (moduleName === '') throw new Error('Variable moduleName is required to replace __module_name__ in filename');
+            if (moduleName === '') throw new Error('Variable moduleName is required to replace __module_name__ in file name');
             name = name.replace(/__module_name__/gi, (moduleNamePrefix ? moduleNamePrefix + '-' : '') + moduleName.toKebabCase() + (moduleNameSuffix ? '-' + moduleNameSuffix : ''));
         }
 
         if (name.includes('__module_names__'))
         {
-            if (moduleNames === '') throw new Error('Variable moduleNames is required to replace __module_names__ in filename');
+            if (moduleNames === '') throw new Error('Variable moduleNames is required to replace __module_names__ in file name');
             name = name.replace(/__module_names__/gi, moduleNames.toKebabCase());
         }
 
         if (name.includes('__additional_api_name__'))
         {
-            name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (additionalApi ? additionalApi.getApiFileName : ''));
+            name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (additionalApi ? getAdditionalApiFileName(additionalApi) : ''));
         }
 
         if (name.includes('__property_name__') && currentProperty)
@@ -174,7 +174,7 @@ export class FileManager
         {
             const originFilePath = path.join(originPath, file);
 
-            // replace filename wildcards by bounded context name and module name, and remove .hbs extension
+            // replace file name wildcards by bounded context name and module name, and remove .hbs extension
             const nameReplaced = FileManager.replaceFilename(
                 file,
                 {
@@ -315,7 +315,7 @@ export class FileManager
         } = {},
     ): void
     {
-        // replace filename wildcards by bounded context name and module name, and remove .hbs extension
+        // replace file name wildcards by bounded context name and module name, and remove .hbs extension
         const nameReplaced = FileManager.replaceFilename(
             file,
             {

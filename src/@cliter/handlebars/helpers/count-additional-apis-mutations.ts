@@ -1,6 +1,5 @@
 import * as handlebars from 'handlebars';
-import { countAdditionalApisMutations } from '../..';
-import { AdditionalApi } from '../../utils/additional-api';
+import { AdditionalApi, countAdditionalApisMutations } from '../..';
 
 handlebars.registerHelper('countAdditionalApisMutations', function(
     additionalApis: AdditionalApi[],

@@ -1,15 +1,28 @@
 import { Command } from '@oclif/core';
-import { AdditionalApi } from '../utils/additional-api';
+
+export interface AddCommandState extends CommandState
+{
+    packageName: string;
+}
+
+export interface AdditionalApi
+{
+    path: string;
+    resolverType: ResolverType;
+    httpMethod: HttpMethodType;
+}
+
+export interface AdditionalApiPaths
+{
+    pathBoundedContext: string;
+    pathAction: string;
+    pathSegments: string[];
+}
 
 export interface CommandState
 {
     command: Command;
     flags: LiteralObject;
-}
-
-export interface AddCommandState extends CommandState
-{
-    packageName: string;
 }
 
 export interface ConstructorInjectionStatement

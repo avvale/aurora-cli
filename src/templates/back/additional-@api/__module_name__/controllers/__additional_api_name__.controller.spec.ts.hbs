@@ -3,8 +3,8 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Test' 'TestingModule') path='@nestjs/testing')
-            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Controller') path=(sumStrings './' (currentAdditionalApi.getApiFileName) '.controller'))
-            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings '../handlers/' (currentAdditionalApi.getApiFileName) '.handler'))
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Controller') path=(sumStrings './' (getAdditionalApiFileName currentAdditionalApi) '.controller'))
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings '../handlers/' (getAdditionalApiFileName currentAdditionalApi) '.handler'))
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}

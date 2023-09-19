@@ -1,6 +1,5 @@
 import * as handlebars from 'handlebars';
-import { getResolverNameAdditionalApi } from '../..';
-import { AdditionalApi } from '../../utils/additional-api';
+import { AdditionalApi, getResolverNameAdditionalApi } from '../..';
 
 handlebars.registerHelper('getResolverNameAdditionalApi', function(
     additionalApi: AdditionalApi,

@@ -3,8 +3,7 @@ import { Command } from '@oclif/core';
 import * as chalk from 'chalk';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { LockFile, Property, TemplateElement } from '../types';
-import { AdditionalApi } from './additional-api';
+import { AdditionalApi, LockFile, Property, TemplateElement } from '../types';
 import { FileManager } from './file-manager';
 
 export class TemplateGenerator

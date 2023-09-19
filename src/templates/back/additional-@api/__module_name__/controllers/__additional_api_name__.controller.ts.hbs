@@ -5,7 +5,7 @@
             (object items=(array 'Body' 'Controller' 'Post') path='@nestjs/common')
             (object items=(array 'ApiTags' 'ApiCreatedResponse' 'ApiOperation') path='@nestjs/swagger')
             (object items=(array 'Auditing' 'AuditingMeta' 'QueryStatement' 'Timezone') path=config.auroraCorePackage)
-            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings '../handlers/' (currentAdditionalApi.getApiFileName) '.handler'))
+            (object items=(sumStrings (getClassNameAdditionalApi currentAdditionalApi) 'Handler') path=(sumStrings '../handlers/' (getAdditionalApiFileName currentAdditionalApi) '.handler'))
     )
 ~}}
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
