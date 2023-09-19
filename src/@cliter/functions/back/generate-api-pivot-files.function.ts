@@ -24,11 +24,16 @@ export const generateApiPivotFiles = (generateCommandState: GenerateCommandState
                 boundedContextName: property.relationship.pivot.boundedContextName,
                 moduleName        : property.relationship.pivot.moduleName,
                 moduleNames       : property.relationship.pivot.moduleNames,
-                excludeFiles      : generateCommandState.schema.excluded,
-                force             : generateCommandState.flags.force,
-                verbose           : generateCommandState.flags.verbose,
-                lockFiles         : generateCommandState.lockFiles,
-                templateData      : {
+                excludeFiles      : [
+                    ...(Array.isArray(generateCommandState.schema.excluded) ? generateCommandState.schema.excluded : []),
+                    // avoid creating files for pivot only with delimited context name, these files have been created with an earlier module
+                    `src/@api/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.module.ts`,
+                    `src/@api/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.seeder.ts`,
+                ],
+                force       : generateCommandState.flags.force,
+                verbose     : generateCommandState.flags.verbose,
+                lockFiles   : generateCommandState.lockFiles,
+                templateData: {
                     ...generateCommandState,
                     propertyType    : PropertyType,
                     relationshipType: RelationshipType,
