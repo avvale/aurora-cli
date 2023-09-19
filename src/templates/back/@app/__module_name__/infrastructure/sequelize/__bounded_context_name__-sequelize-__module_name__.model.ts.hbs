@@ -15,11 +15,14 @@
 ~}}
 {{/if}}
 {{! ADD BelongsTo }}
-{{#if (hasBelongsToDecoratorProperties (getNotI18nProperties schema.aggregateProperties)) }}
+{{#or
+    (hasBelongsToDecoratorProperties (getNotI18nProperties schema.aggregateProperties))
+    (hasPivotProperties (getNotI18nProperties schema.aggregateProperties))
+}}
 {{
     push importsArray (object items='BelongsTo' path='sequelize-typescript')
 ~}}
-{{/if}}
+{{/or}}
 {{! ADD  HasOne }}
 {{#or
     (hasHasOneDecoratorProperties (getNotI18nProperties schema.aggregateProperties))
@@ -42,11 +45,14 @@
 ~}}
 {{/if}}
 {{! ADD  ForeignKey }}
-{{#if (hasForeignKeyDecoratorProperties (getNotI18nProperties schema.aggregateProperties)) }}
+{{#or
+    (hasForeignKeyDecoratorProperties (getNotI18nProperties schema.aggregateProperties))
+    (eq ../currentProperty.relationship.type ../relationshipType.MANY_TO_MANY)
+}}
 {{
     push importsArray (object items='ForeignKey' path='sequelize-typescript')
 ~}}
-{{/if}}
+{{/or}}
 {{! ONE TO ONE Relationship }}
 {{#each (getWithImportRelationshipOneToOneProperties (getNotI18nProperties schema.aggregateProperties)) }}
 {{
