@@ -5,7 +5,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
 {
     constructor(
         {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
-        public readonly {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        public readonly {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptDeleteType this ../config }},
         {{/each}}
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

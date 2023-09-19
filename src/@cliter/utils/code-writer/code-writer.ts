@@ -235,7 +235,7 @@ export class CodeWriter
 
             for (const yamlFile of yamlFiles)
             {
-                // get filename of e2e test
+                // get file name of e2e test
                 const e2eTestFile = yamlFile.replace(cliterConfig.schemaDefinitionExtension, '.e2e-spec.ts');
 
                 const e2eTestPath = path.join(process.cwd(), 'test', 'acceptance', this.boundedContextName.toKebabCase(), e2eTestFile);

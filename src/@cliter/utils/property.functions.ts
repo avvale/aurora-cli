@@ -423,6 +423,28 @@ export const getPropertyJavascriptUpdateType = (
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
 
+export const getPropertyJavascriptDeleteType = (
+    property: Property,
+    config: CliterConfig,
+): string =>
+{
+    if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
+    if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
+
+    return config.propertyTypesEquivalenceJavascriptTypes[property.type];
+};
+
+export const getPropertyJavascriptResponseType = (
+    property: Property,
+    config: CliterConfig,
+): string =>
+{
+    if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
+    if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
+
+    return config.propertyTypesEquivalenceJavascriptTypes[property.type];
+};
+
 /*********
  * FRONT *
  *********/

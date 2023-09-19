@@ -54,7 +54,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     {{/if}}
     async main(
         {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
-        @Args('{{ toCamelCase (getPropertyName this) }}') {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        @Args('{{ toCamelCase (getPropertyName this) }}') {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptDeleteType this ../config }},
         {{/each}}
         {{#if schema.hasTenant}}
         @CurrentAccount() account: AccountResponse,
