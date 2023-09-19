@@ -6,14 +6,14 @@ import { cliterConfig } from '../../config';
 import { GenerateCommandState, RelationshipType, PropertyType, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
 
-export const generateApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
+export const generateApiFiles = (generateCommandState: GenerateCommandState): void =>
 {
-    await TemplateGenerator.createDirectory(
+    TemplateGenerator.createDirectory(
         path.join('src', cliterConfig.apiContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
     );
 
-    await TemplateGenerator.generateStaticContents(
+    TemplateGenerator.generateStaticContents(
         generateCommandState.command,
         TemplateElement.BACK_API,
         path.join('src', cliterConfig.apiContainer),

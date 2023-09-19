@@ -18,9 +18,9 @@ const templateEngine =
      * Render templates with handlebars template engine.
      * @param {string} content - Template content
      * @param {any} data - Data helper to render templates
-     * @return {Promise<string>} Rendered template
+     * @return {string} Rendered template
      */
-    async render(content: string, data: any): Promise<string>
+    render(content: string, data: any): string
     {
         // add helpers to handlebars template engine
         handlebarsHelpers({ handlebars });

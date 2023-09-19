@@ -275,7 +275,7 @@ export class FileManager
      * @param {string} currentProperty - property to render value object or pivot table
      * @returns void
      */
-    static async manageTemplateFile(
+    static manageTemplateFile(
         command: Command,
         originFilePath: string,
         file: string,
@@ -313,7 +313,7 @@ export class FileManager
             currentProperty?: Property;
             useTemplateEngine?: boolean;
         } = {},
-    ): Promise<void>
+    ): void
     {
         // replace filename wildcards by bounded context name and module name, and remove .hbs extension
         const nameReplaced = FileManager.replaceFilename(
@@ -362,7 +362,7 @@ export class FileManager
         if (useTemplateEngine)
         {
             // replace variables with handlebars template engine
-            contents = await templateEngine
+            contents = templateEngine
                 .render(
                     contents,
                     {

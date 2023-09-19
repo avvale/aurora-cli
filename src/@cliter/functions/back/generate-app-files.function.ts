@@ -3,16 +3,16 @@ import { GenerateCommandState, RelationshipType, TemplateElement } from '../../t
 import { TemplateGenerator, getValueObjectsProperties } from '../../utils';
 import * as path from 'node:path';
 
-export const generateAppFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
+export const generateAppFiles = (generateCommandState: GenerateCommandState): void =>
 {
     // create directory application container, normally src/@app
-    await TemplateGenerator.createDirectory(
+    TemplateGenerator.createDirectory(
         path.join('src', cliterConfig.appContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
     );
 
     // create module files
-    await TemplateGenerator.generateStaticContents(
+    TemplateGenerator.generateStaticContents(
         generateCommandState.command,
         TemplateElement.BACK_APP,
         path.join('src', cliterConfig.appContainer),
@@ -33,7 +33,7 @@ export const generateAppFiles = async (generateCommandState: GenerateCommandStat
     );
 
     // create value objects in module folder
-    await TemplateGenerator.generateValueObjects(
+    TemplateGenerator.generateValueObjects(
         generateCommandState.command,
         path.join('src', cliterConfig.appContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),

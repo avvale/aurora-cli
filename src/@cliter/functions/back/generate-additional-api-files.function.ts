@@ -3,7 +3,7 @@ import { cliterConfig } from '../../config';
 import { TemplateGenerator } from '../../utils';
 import { GenerateCommandState, ResolverType, TemplateElement } from '../../types';
 
-export const generateAdditionalApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
+export const generateAdditionalApiFiles = (generateCommandState: GenerateCommandState): void =>
 {
     if (!generateCommandState.schema.additionalApis) return;
 

@@ -4,18 +4,18 @@ import { GenerateCommandState, RelationshipType, PropertyType, TemplateElement }
 import { TemplateGenerator, getManyToManyRelationshipProperties } from '../../utils';
 import * as path from 'node:path';
 
-export const generateApiPivotFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
+export const generateApiPivotFiles = (generateCommandState: GenerateCommandState): void =>
 {
     for (const property of getManyToManyRelationshipProperties(generateCommandState.schema.aggregateProperties))
     {
         if (!property.relationship?.pivot) throw new Error('Pivot property is not defined in relationship many to many property ' + property.name);
 
-        await TemplateGenerator.createDirectory(
+        TemplateGenerator.createDirectory(
             path.join('src', cliterConfig.apiContainer),
             property.relationship.pivot.boundedContextName.toLowerCase().toKebabCase(),
         );
 
-        await TemplateGenerator.generateStaticContents(
+        TemplateGenerator.generateStaticContents(
             generateCommandState.command,
             TemplateElement.BACK_API,
             path.join('src', cliterConfig.apiContainer),
