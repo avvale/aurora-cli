@@ -1,4 +1,4 @@
-import { CommonCountry, CommonCountryMapType } from '../common.types';
+import { CommonAdministrativeArea, CommonCountry, CommonCountryMapType } from '../common.types';
 import { CountryService } from './country.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
@@ -22,6 +22,7 @@ export class CountryDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
     commonCountryMapType = CommonCountryMapType;
+    commonAdministrativeArea = CommonAdministrativeArea;
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
@@ -96,7 +97,7 @@ export class CountryDetailComponent extends ViewDetailComponent
             prefix: ['', [Validators.maxLength(5)]],
             image: ['', [Validators.maxLength(1024)]],
             sort: [null, [Validators.maxLength(6)]],
-            administrativeAreas: null,
+            administrativeAreas: [],
             latitude: null,
             longitude: null,
             zoom: [null, [Validators.maxLength(2)]],

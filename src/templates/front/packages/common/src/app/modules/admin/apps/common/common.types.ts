@@ -1,3 +1,9 @@
+export enum CommonAdministrativeArea {
+    ADMINISTRATIVE_AREA_1 = 'ADMINISTRATIVE_AREA_1',
+    ADMINISTRATIVE_AREA_2 = 'ADMINISTRATIVE_AREA_2',
+    ADMINISTRATIVE_AREA_3 = 'ADMINISTRATIVE_AREA_3',
+}
+
 export interface CommonLang {
     id: string;
     name: string;

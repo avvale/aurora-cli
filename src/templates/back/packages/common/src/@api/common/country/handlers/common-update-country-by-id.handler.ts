@@ -44,6 +44,9 @@ export class CommonUpdateCountryByIdHandler
 
         const dataToUpdate = Utils.diff(payload, country);
 
+        // diff method get only new items to load in JSON, not deleted items. We need items from payload to update
+        if ('administrativeAreas' in dataToUpdate) dataToUpdate.administrativeAreas = payload.administrativeAreas;
+
         const contentLanguageObject = await this.coreGetContentLanguageObjectService.get(contentLanguage);
 
         await this.commandBus.dispatch(new CommonUpdateCountryByIdCommand(

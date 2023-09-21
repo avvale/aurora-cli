@@ -277,6 +277,24 @@
                         appearance="outline"
                         class="col-6"
                     >
+                        <mat-label>{{ t('common.AdministrativeAreas') }}</mat-label>
+                        <mat-select
+                            formControlName="administrativeAreas"
+                            multiple
+                        >
+                            <mat-option
+                                *ngFor="let administrativeArea  of commonAdministrativeArea | keyvalue"
+                                [value]="administrativeArea.key"
+                            >
+                                {{ administrativeArea.value }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.administrativeAreas | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-6"
+                    >
                         <mat-label>{{ t('common.AdministrativeAreaLevel1') }}</mat-label>
                         <input
                             matInput
