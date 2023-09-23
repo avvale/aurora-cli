@@ -30,7 +30,7 @@ export { CommonUpsertCountryController } from './controllers/common-upsert-count
 export { CommonDeleteCountryByIdController } from './controllers/common-delete-country-by-id.controller';
 export { CommonDeleteCountriesController } from './controllers/common-delete-countries.controller';
 
-// exports resolvers
+// export resolvers
 export { CommonCreateCountryResolver } from './resolvers/common-create-country.resolver';
 export { CommonCreateCountriesResolver } from './resolvers/common-create-countries.resolver';
 export { CommonPaginateCountriesResolver } from './resolvers/common-paginate-countries.resolver';
@@ -43,7 +43,12 @@ export { CommonUpsertCountryResolver } from './resolvers/common-upsert-country.r
 export { CommonDeleteCountryByIdResolver } from './resolvers/common-delete-country-by-id.resolver';
 export { CommonDeleteCountriesResolver } from './resolvers/common-delete-countries.resolver';
 
-// controllers
+// export additionalApis
+export { CommonAdministrativeAreasCountryController } from './controllers/common-administrative-areas-country.controller';
+export { CommonAdministrativeAreasCountryHandler } from './handlers/common-administrative-areas-country.handler';
+export { CommonAdministrativeAreasCountryResolver } from './resolvers/common-administrative-areas-country.resolver';
+
+// import controllers
 import { CommonCreateCountryController } from './controllers/common-create-country.controller';
 import { CommonCreateCountriesController } from './controllers/common-create-countries.controller';
 import { CommonPaginateCountriesController } from './controllers/common-paginate-countries.controller';
@@ -56,7 +61,7 @@ import { CommonUpsertCountryController } from './controllers/common-upsert-count
 import { CommonDeleteCountryByIdController } from './controllers/common-delete-country-by-id.controller';
 import { CommonDeleteCountriesController } from './controllers/common-delete-countries.controller';
 
-// resolvers
+// import resolvers
 import { CommonCreateCountryResolver } from './resolvers/common-create-country.resolver';
 import { CommonCreateCountriesResolver } from './resolvers/common-create-countries.resolver';
 import { CommonPaginateCountriesResolver } from './resolvers/common-paginate-countries.resolver';
@@ -69,7 +74,7 @@ import { CommonUpsertCountryResolver } from './resolvers/common-upsert-country.r
 import { CommonDeleteCountryByIdResolver } from './resolvers/common-delete-country-by-id.resolver';
 import { CommonDeleteCountriesResolver } from './resolvers/common-delete-countries.resolver';
 
-// handlers
+// import handlers
 import { CommonCreateCountryHandler } from './handlers/common-create-country.handler';
 import { CommonCreateCountriesHandler } from './handlers/common-create-countries.handler';
 import { CommonPaginateCountriesHandler } from './handlers/common-paginate-countries.handler';
@@ -82,8 +87,13 @@ import { CommonUpsertCountryHandler } from './handlers/common-upsert-country.han
 import { CommonDeleteCountryByIdHandler } from './handlers/common-delete-country-by-id.handler';
 import { CommonDeleteCountriesHandler } from './handlers/common-delete-countries.handler';
 
-// seeder
+// import seeder
 import { CommonCountrySeeder } from './seeder/common-country.seeder';
+
+// import additionalApis
+import { CommonAdministrativeAreasCountryController } from './controllers/common-administrative-areas-country.controller';
+import { CommonAdministrativeAreasCountryHandler } from './handlers/common-administrative-areas-country.handler';
+import { CommonAdministrativeAreasCountryResolver } from './resolvers/common-administrative-areas-country.resolver';
 
 export const CommonCountryApiControllers = [
     CommonCreateCountryController,
@@ -97,6 +107,9 @@ export const CommonCountryApiControllers = [
     CommonUpsertCountryController,
     CommonDeleteCountryByIdController,
     CommonDeleteCountriesController,
+
+    // additionalApis
+    CommonAdministrativeAreasCountryController,
 ];
 
 export const CommonCountryApiResolvers = [
@@ -111,6 +124,9 @@ export const CommonCountryApiResolvers = [
     CommonUpsertCountryResolver,
     CommonDeleteCountryByIdResolver,
     CommonDeleteCountriesResolver,
+
+    // additionalApis
+    CommonAdministrativeAreasCountryResolver,
 ];
 
 export const CommonCountryApiHandlers = [
@@ -125,6 +141,9 @@ export const CommonCountryApiHandlers = [
     CommonUpsertCountryHandler,
     CommonDeleteCountryByIdHandler,
     CommonDeleteCountriesHandler,
+
+    // additionalApis
+    CommonAdministrativeAreasCountryHandler,
 ];
 
 export const CommonCountryApiServices = [

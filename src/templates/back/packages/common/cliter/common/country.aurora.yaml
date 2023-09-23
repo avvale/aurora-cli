@@ -159,3 +159,7 @@ aggregateProperties:
     isI18n: true
     type: timestamp
     nullable: true
+additionalApis:
+  - path: common/country/administrative-areas
+    resolverType: query
+    httpMethod: post

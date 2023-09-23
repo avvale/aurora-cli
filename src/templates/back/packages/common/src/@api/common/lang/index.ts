@@ -30,7 +30,7 @@ export { CommonUpsertLangController } from './controllers/common-upsert-lang.con
 export { CommonDeleteLangByIdController } from './controllers/common-delete-lang-by-id.controller';
 export { CommonDeleteLangsController } from './controllers/common-delete-langs.controller';
 
-// exports resolvers
+// export resolvers
 export { CommonCreateLangResolver } from './resolvers/common-create-lang.resolver';
 export { CommonCreateLangsResolver } from './resolvers/common-create-langs.resolver';
 export { CommonPaginateLangsResolver } from './resolvers/common-paginate-langs.resolver';
@@ -43,7 +43,7 @@ export { CommonUpsertLangResolver } from './resolvers/common-upsert-lang.resolve
 export { CommonDeleteLangByIdResolver } from './resolvers/common-delete-lang-by-id.resolver';
 export { CommonDeleteLangsResolver } from './resolvers/common-delete-langs.resolver';
 
-// controllers
+// import controllers
 import { CommonCreateLangController } from './controllers/common-create-lang.controller';
 import { CommonCreateLangsController } from './controllers/common-create-langs.controller';
 import { CommonPaginateLangsController } from './controllers/common-paginate-langs.controller';
@@ -56,7 +56,7 @@ import { CommonUpsertLangController } from './controllers/common-upsert-lang.con
 import { CommonDeleteLangByIdController } from './controllers/common-delete-lang-by-id.controller';
 import { CommonDeleteLangsController } from './controllers/common-delete-langs.controller';
 
-// resolvers
+// import resolvers
 import { CommonCreateLangResolver } from './resolvers/common-create-lang.resolver';
 import { CommonCreateLangsResolver } from './resolvers/common-create-langs.resolver';
 import { CommonPaginateLangsResolver } from './resolvers/common-paginate-langs.resolver';
@@ -69,7 +69,7 @@ import { CommonUpsertLangResolver } from './resolvers/common-upsert-lang.resolve
 import { CommonDeleteLangByIdResolver } from './resolvers/common-delete-lang-by-id.resolver';
 import { CommonDeleteLangsResolver } from './resolvers/common-delete-langs.resolver';
 
-// handlers
+// import handlers
 import { CommonCreateLangHandler } from './handlers/common-create-lang.handler';
 import { CommonCreateLangsHandler } from './handlers/common-create-langs.handler';
 import { CommonPaginateLangsHandler } from './handlers/common-paginate-langs.handler';
@@ -82,7 +82,7 @@ import { CommonUpsertLangHandler } from './handlers/common-upsert-lang.handler';
 import { CommonDeleteLangByIdHandler } from './handlers/common-delete-lang-by-id.handler';
 import { CommonDeleteLangsHandler } from './handlers/common-delete-langs.handler';
 
-// seeder
+// import seeder
 import { CommonLangSeeder } from './seeder/common-lang.seeder';
 
 export const CommonLangApiControllers = [

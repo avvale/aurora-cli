@@ -5,6 +5,19 @@ enum CommonCountryMapType {
     TERRAIN
 }
 
+enum CommonAdministrativeArea {
+    ADMINISTRATIVE_AREA_LEVEL_1
+    ADMINISTRATIVE_AREA_LEVEL_2
+    ADMINISTRATIVE_AREA_LEVEL_3
+}
+
+type CommonAdministrativeAreasCountry
+{
+    commonCountry: CommonCountry
+    commonGetAdministrativeAreasLevel1: [CommonAdministrativeAreaLevel1]
+    commonGetAdministrativeAreasLevel2: [CommonAdministrativeAreaLevel2]
+    commonGetAdministrativeAreasLevel3: [CommonAdministrativeAreaLevel3]
+}
 
 type CommonCountry
 {
@@ -128,6 +141,13 @@ type Query
         constraint: QueryStatement
     ): Pagination!
 
+
+    # additionalApis
+    commonAdministrativeAreasCountry(
+        countryId: GraphQLString!
+        administrativeAreaLevel1Id: GraphQLString
+        administrativeAreaLevel2Id: GraphQLString
+    ): CommonAdministrativeAreasCountry
 }
 
 type Mutation
