@@ -2,6 +2,7 @@ import * as path from 'node:path';
 
 export interface CliterConfig
 {
+    appsContainer: string;
     dashboardContainer: string;
     dashboardTranslations: string;
     adminContainer: string;
@@ -38,6 +39,7 @@ export interface CliterConfig
 export const cliterConfig: CliterConfig =
 {
     // front
+    appsContainer        : '@apps',
     dashboardContainer   : path.join('app', 'modules', 'admin', 'apps'),
     adminContainer       : path.join('app', 'modules', 'admin'),
     dashboardTranslations: path.join('assets', 'i18n'),

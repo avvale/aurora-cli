@@ -1,12 +1,20 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'ChangeDetectionStrategy' 'Component' 'Injector' 'ViewEncapsulation') path='@angular/core')
+            (object items=(array 'ChangeDetectionStrategy' 'Component' 'ViewEncapsulation') path='@angular/core')
             (object items=(array 'Action' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'defaultListImports' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService'  'log' 'QueryStatementHandler' 'ViewBaseComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'Observable' 'takeUntil') path='rxjs')
-            (object items=schema.aggregateName path=(sumStrings '../' (toKebabCase schema.boundedContextName) '.types'))
-            (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' toKebabCase schema.moduleName '.service'))
-            (object items=(sumStrings (toCamelCase schema.moduleName) 'ColumnsConfig') path=(sumStrings './' toKebabCase schema.moduleName '.columns-config'))
+            (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.boundedContextName '.types'))
+            (
+                object
+                    items=
+                        (
+                            array
+                                (sumStrings (toPascalCase schema.moduleName) 'Service')
+                                (sumStrings (toCamelCase schema.moduleName) 'ColumnsConfig')
+                        )
+                    path=(sumStrings sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName)
+            )
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
@@ -116,14 +124,13 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly {{ toCamelCase schema.moduleName }}Service: {{ toPascalCase schema.moduleName }}Service,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

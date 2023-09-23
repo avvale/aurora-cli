@@ -1,12 +1,12 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'ChangeDetectionStrategy' 'Component' 'Injector' 'ViewEncapsulation') path='@angular/core')
+            (object items=(array 'ChangeDetectionStrategy' 'Component' 'ViewEncapsulation') path='@angular/core')
             (object items='Validators' path='@angular/forms')
             (object items=(array 'Action' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'Utils' 'ViewDetailComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
-            (object items=schema.aggregateName path=(sumStrings '../' toKebabCase schema.boundedContextName '.types'))
-            (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings './' toKebabCase schema.moduleName '.service'))
+            (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.boundedContextName '.types'))
+            (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName))
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
@@ -363,7 +363,6 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 {{
     setVar 'injectionsArray' (
         array
-            (object scope='protected' variableName='injector' className='Injector')
             (object variableName=(sumStrings (toCamelCase schema.moduleName) 'Service') className=(sumStrings (toPascalCase schema.moduleName) 'Service'))
     )
 ~}}
@@ -451,7 +450,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 {{{ constructorInjectorManager (object injections=injectionsArray) }}}
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

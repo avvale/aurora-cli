@@ -15,7 +15,7 @@
                             (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ById')
                             (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames))
                     )
-                    path=(sumStrings '../' (toKebabCase schema.boundedContextName) '.types')
+                    path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.boundedContextName '.types')
             )
             (
                 object
@@ -33,7 +33,7 @@
                             'deleteByIdMutation'
                             'deleteMutation'
                     )
-                    path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql')
+                    path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName)
             )
     )
 ~}}
