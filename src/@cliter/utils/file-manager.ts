@@ -9,6 +9,7 @@ import { GlobalState } from '../store';
 import { AdditionalApi, LockFile, Property } from '../types';
 import { getAdditionalApiFileName } from './additional-api.functions';
 import { Cypher } from './cypher';
+import { getPropertyName } from './property.functions';
 import templateEngine from './template-engine';
 
 export class FileManager
@@ -72,7 +73,7 @@ export class FileManager
 
         if (name.includes('__property_name__') && currentProperty)
         {
-            name = name.replace(/__property_name__/gi, currentProperty.name.toKebabCase());
+            name = name.replace(/__property_name__/gi, getPropertyName(currentProperty).toKebabCase());
         }
 
         if (name.includes('__property_origin_name__') && currentProperty)
