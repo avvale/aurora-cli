@@ -167,6 +167,23 @@ export const getNotI18nProperties = (
     return properties.filter(property => !property.isI18n);
 };
 
+export const getI18nSearchableProperties = (
+    properties: Property[],
+    avoid: string[] = [],
+): Property[] =>
+{
+    return properties
+        .filter(property => property.isI18n)
+        .filter(property =>
+            property.name !== 'id' &&
+            property.name !== 'langId' &&
+            property.name !== 'createdAt' &&
+            property.name !== 'updatedAt' &&
+            property.name !== 'deletedAt' &&
+            !avoid.includes(property.name),
+        );
+};
+
 // replace by Properties hasIndex
 export const hasIndexProperties = (
     properties: Property[],

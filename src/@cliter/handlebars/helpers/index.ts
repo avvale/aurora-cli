@@ -46,6 +46,7 @@ import './get-grid-fields-properties';
 import './get-grid-select-element-web-components-properties';
 import './get-grid-select-multiple-elements-web-components-properties';
 import './get-i18n-properties';
+import './get-i18n-searchable-properties';
 import './get-indexes-properties';
 import './get-integer-properties';
 import './get-integer-unsigned-properties';

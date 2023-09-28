@@ -31,6 +31,7 @@ handlebars.registerHelper('importWebComponentsManager', function(
 
             case PropertyType.ENUM:
                 importWebComponents.add('MatSelectModule');
+                importWebComponents.add('NgForOf');
                 break;
 
             case PropertyType.TIMESTAMP:

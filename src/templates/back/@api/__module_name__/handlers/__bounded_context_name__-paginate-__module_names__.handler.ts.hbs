@@ -11,7 +11,7 @@
 {{
     push importsArray
         (object items=(array 'BadRequestException') path='@nestjs/common')
-        (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService') path=config.auroraCorePackage)
+        (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService' 'Utils') path=config.auroraCorePackage)
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
@@ -24,6 +24,12 @@
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Handler
 {
+    {{#if (hasI18nProperties schema.aggregateProperties) }}
+    i18nColumns: string[] = [{{#each (getI18nSearchableProperties schema.aggregateProperties (array (sumStrings (toCamelCase schema.moduleName) 'Id'))) }}'{{ toCamelCase (getPropertyName this) }}'{{#unless @last}}, {{/unless}}{{/each}}];
+    i18nRelationship: string = '{{ toCamelCase schema.moduleName }}I18n';
+    i18nFunctionReplace = (key: string): string => this.i18nColumns.includes(key) ? `$${this.i18nRelationship}.${key}$` : key;
+
+    {{/if}}
     constructor(
         private readonly queryBus: IQueryBus,
         {{#if (hasI18nProperties schema.aggregateProperties) }}
@@ -49,12 +55,16 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
 
         constraint = await this.coreAddI18nConstraintService.add(
             constraint,
-            '{{ toCamelCase schema.moduleName }}I18n',
+            this.i18nRelationship,
             contentLanguage,
             {
                 searchKeyLang: this.coreGetSearchKeyLangService.get(),
             },
         );
+
+        // Replace all i18n keys by ${{ toCamelCase schema.moduleName }}I18n.key$
+        queryStatement = Utils.deepMapKeys(queryStatement, this.i18nFunctionReplace);
+        constraint = Utils.deepMapKeys(constraint, this.i18nFunctionReplace);
 
         {{/if}}
         return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Query(
