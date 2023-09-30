@@ -127,6 +127,7 @@ import './has-belongs-to-many-decorator-property';
 import './has-boolean-properties';
 import './has-column-decorator-property';
 import './has-comma-in-validation-form-control';
+import './has-date-properties';
 import './has-enum-properties';
 import './has-foreign-key-decorator-properties';
 import './has-has-many-decorator-properties';

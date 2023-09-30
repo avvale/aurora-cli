@@ -37,6 +37,10 @@ handlebars.registerHelper('importWebComponentsManager', function(
             case PropertyType.TIMESTAMP:
                 importWebComponents.add('MtxDatetimepickerModule');
                 break;
+
+            case PropertyType.DATE:
+                importWebComponents.add('MatDatepickerModule');
+                break;
         }
     }
 

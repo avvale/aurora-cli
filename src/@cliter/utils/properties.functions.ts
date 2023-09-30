@@ -73,6 +73,14 @@ export const hasTimestampProperties = (
         .some(property => property.type === PropertyType.TIMESTAMP);
 };
 
+export const hasDateProperties = (
+    properties: Property[],
+): boolean =>
+{
+    return properties
+        .some(property => property.type === PropertyType.DATE);
+};
+
 // replace by Properties hasIndexI18n
 export const hasIndexI18nProperties = (
     properties: Property[],
