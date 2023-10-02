@@ -1,4 +1,4 @@
-import { Directive, Injector, OnDestroy, OnInit } from '@angular/core';
+import { Directive, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoService } from '@ngneat/transloco';
@@ -25,20 +25,18 @@ export class ViewBaseComponent implements OnInit, OnDestroy
     currentViewAction: Action;
     currentAction: Action;
 
-    constructor(
-        protected injector: Injector,
-    )
+    constructor()
     {
-        this.actionService          = this.injector.get(ActionService);
-        this.sessionService         = this.injector.get(SessionService);
-        this.router                 = this.injector.get(Router);
-        this.activatedRoute         = this.injector.get(ActivatedRoute);
+        this.actionService          = inject(ActionService);
+        this.sessionService         = inject(SessionService);
+        this.router                 = inject(Router);
+        this.activatedRoute         = inject(ActivatedRoute);
 
         // UI
-        this.confirmationService    = this.injector.get(FuseConfirmationService);
-        this.snackBar               = this.injector.get(MatSnackBar);
-        this.spinnerManagerService  = this.injector.get(SpinnerManagerService);
-        this.translocoService       = this.injector.get(TranslocoService);
+        this.confirmationService    = inject(FuseConfirmationService);
+        this.snackBar               = inject(MatSnackBar);
+        this.spinnerManagerService  = inject(SpinnerManagerService);
+        this.translocoService       = inject(TranslocoService);
     }
 
     ngOnInit(): void

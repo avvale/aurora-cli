@@ -1,4 +1,4 @@
-import { Directive, Injector, OnDestroy, OnInit } from '@angular/core';
+import { Directive, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormMessageErrors, ValidationMessagesService } from '@aurora';
 import { ViewBaseComponent } from './view-base.component';
@@ -11,14 +11,12 @@ export class ViewFormComponent extends ViewBaseComponent implements OnInit, OnDe
     validationMessagesService: ValidationMessagesService;
     formErrors: FormMessageErrors = {};
 
-    constructor(
-        protected injector: Injector,
-    )
+    constructor()
     {
-        super(injector);
+        super();
 
-        this.fb = this.injector.get(FormBuilder);
-        this.validationMessagesService = this.injector.get(ValidationMessagesService);
+        this.fb = inject(FormBuilder);
+        this.validationMessagesService = inject(ValidationMessagesService);
 
         // this method will be overwrite by child class
         this.createForm();

@@ -106,8 +106,6 @@ export interface UserMetaStorage {
 
 
 
-
-
 // TODO, tipos por revisar
 export enum FieldAppearance
 {

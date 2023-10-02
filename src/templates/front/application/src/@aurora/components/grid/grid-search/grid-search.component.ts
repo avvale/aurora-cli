@@ -24,7 +24,9 @@ export class GridSearchComponent implements OnInit
     @Input() value: string;
     @Input() isOpen: boolean = false;
     @Input() searchState: GridSearchState;
+    // emit event only when change the value
     @Output() search: EventEmitter<GridSearchState> = new EventEmitter<GridSearchState>();
+    // emit event only when the search field is opened or closed and change the value
     @Output() searchChange: EventEmitter<GridSearchState> = new EventEmitter<GridSearchState>();
 
     opened: boolean = false;
@@ -50,7 +52,6 @@ export class GridSearchComponent implements OnInit
             )
             .subscribe(value =>
             {
-                console.log('value', value);
                 this.search.emit({
                     value,
                     isOpen: this.opened,

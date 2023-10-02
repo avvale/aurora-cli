@@ -18,7 +18,10 @@
         "lib": [
             "ES2022",
             "dom"
-        ]
+        ],
+        "paths": {
+            "@apps/*": [ "./app/modules/admin/apps/*" ],
+        }
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false

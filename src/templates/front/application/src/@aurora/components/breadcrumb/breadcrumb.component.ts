@@ -27,8 +27,8 @@ export const loader = ['en', 'es']
             multi: true,
         },
     ],
-    standalone     : true,
-    imports        : [MatIconModule, NgForOf, NgIf, RouterModule, TranslocoModule],
+    standalone: true,
+    imports   : [MatIconModule, NgForOf, NgIf, RouterModule, TranslocoModule],
 })
 export class BreadcrumbComponent
 {
