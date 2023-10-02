@@ -1,3 +1,4 @@
+import { CoreFileUploaderService } from '@aurora/modules/file-uploader';
 import { CoreGetFallbackLangFromJsonService, CoreGetLangsFromJsonService } from '@aurora/modules/lang';
 import { AuditingRunner, AuditingRunnerDisabledImplementationService, AuroraMetadataModule, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetLangsService, CoreGetSearchKeyLangService, CoreModule } from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
@@ -16,6 +17,7 @@ import { CqrsConfigModule } from './cqrs-config.module';
         CqrsModule
     ],
     providers: [
+        CoreFileUploaderService,
         CoreAddI18nConstraintService,
         CoreGetContentLanguageObjectService,
         CoreGetSearchKeyLangService,
@@ -38,6 +40,7 @@ import { CqrsConfigModule } from './cqrs-config.module';
         CacheModule,
         ConfigModule,
         CoreAddI18nConstraintService,
+        CoreFileUploaderService,
         CoreGetContentLanguageObjectService,
         CoreGetFallbackLangService,
         CoreGetLangsService,

@@ -1,0 +1,14 @@
+type CoreFile
+{
+    id: ID!
+    filename: GraphQLString!
+    mimetype: GraphQLString!
+    encoding: GraphQLString!
+}
+
+input CoreFileUploaded
+{
+    id: ID!
+    file: Upload!
+    relativePathSegments: [GraphQLString]
+}
