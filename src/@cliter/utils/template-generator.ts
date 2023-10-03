@@ -128,6 +128,8 @@ export class TemplateGenerator
         } = {},
     ): void
     {
+        if (!Array.isArray(valueObjects)) return;
+
         // iterate properties to generate ValueObjects
         for (const property of valueObjects)
         {

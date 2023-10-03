@@ -6,6 +6,8 @@ import * as path from 'node:path';
 
 export const generateApiPivotFiles = (generateCommandState: GenerateCommandState): void =>
 {
+    if (!Array.isArray(generateCommandState.schema.aggregateProperties)) return;
+
     for (const property of getManyToManyRelationshipProperties(generateCommandState.schema.aggregateProperties))
     {
         if (!property.relationship?.pivot) throw new Error('Pivot property is not defined in relationship many to many property ' + property.name);

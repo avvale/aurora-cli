@@ -84,16 +84,16 @@ export { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase sche
 // can not export application services, because Nest can't resolve dependencies
 
 // domain
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.aggregate.ts'}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.aggregate.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.aggregate';
 {{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.mapper.ts'}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.mapper.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.mapper';
 {{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.repository.ts'}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.repository.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.repository';
 {{/notInArray}}
-{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.response.ts'}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/domain/' (toKebabCase schema.boundedContextName) '-' (toKebabCase schema.moduleName) '.response.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response } from './domain/{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}.response';
 {{/notInArray}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}

@@ -665,8 +665,7 @@ export class {{ toPascalCase schema.moduleName }}Service
                 },
             });
     }
-{{#if (isArray schema.additionalApis) }}
-{{#unlessEq (countAdditionalApisQueries schema.additionalApis) 0 }}
+{{#if (hasAdditionalApiQueries schema.additionalApis) }}
 
     // Queries additionalApis
 {{#each schema.additionalApis.queries}}
@@ -706,10 +705,8 @@ export class {{ toPascalCase schema.moduleName }}Service
             );
     }
 {{/each}}
-{{/unlessEq}}
 {{/if}}
-{{#if (isArray schema.additionalApis) }}
-{{#unlessEq (countAdditionalApisMutations schema.additionalApis) 0 }}
+{{#if (hasAdditionalApiMutations schema.additionalApis) }}
 
     // Mutation additionalApis
 {{#each schema.additionalApis.mutations}}
@@ -734,6 +731,5 @@ export class {{ toPascalCase schema.moduleName }}Service
             });
     }
 {{/each}}
-{{/unlessEq}}
 {{/if}}
 }

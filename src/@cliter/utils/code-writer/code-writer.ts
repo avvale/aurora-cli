@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, InitializerExpressionGetableNode, ObjectLiteralExpression, Project, QuoteKind, SourceFile } from 'ts-morph';
@@ -297,68 +298,6 @@ export class CodeWriter
             const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
             importsArray.addElement(`${this.boundedContextName.toPascalCase()}Module`, { useNewLines: true });
         }
-
-        sourceFile?.saveSync();
-    }
-
-    /****************************************************************
-     * Add exports of principal application elements to src/index.ts
-     * this is to have access to all elements from index.ts
-     *
-     * @return void
-     ****************************************************************/
-    declareBackApplicationItemsExports(): void
-    {
-        const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'index.ts'));
-
-        // export module
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
-            [`${this.boundedContextName.toPascalCase()}Module`],
-        );
-
-        // export DTO
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/dto/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.dto`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Dto`],
-        );
-
-        // export aggregate
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.aggregate`,
-            [`${this.aggregateName}`],
-        );
-
-        // export model
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Model`],
-        );
-
-        // export response
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.response`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Response`],
-        );
-
-        // export mapper
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/domain/${this.boundedContextName.toKebabCase()}-${this.moduleName.toKebabCase()}.mapper`,
-            [`${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}Mapper`],
-        );
-
-        // export seed
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}/${this.moduleName.toKebabCase()}/infrastructure/mock/${this.boundedContextName.toKebabCase()}-mock-${this.moduleName.toKebabCase()}.data`,
-            [`${this.boundedContextName.toCamelCase()}Mock${this.moduleName.toPascalCase()}Data`],
-        );
 
         sourceFile?.saveSync();
     }

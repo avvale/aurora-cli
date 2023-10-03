@@ -4,7 +4,7 @@ import * as fs from 'node:fs';
 import { ArrayLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
 import { exec } from '../@cliter/functions/common';
-import { ArrayDriver, ArrowFunctionDriver, CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from '../@cliter/utils/code-writer';
+import { ArrayDriver, ArrowFunctionDriver, CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from '../@cliter/utils/code-writer/public-api';
 
 export class Add extends Command
 {

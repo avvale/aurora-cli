@@ -1,6 +1,6 @@
 export * from './additional-api.functions';
 export * from './additional-apis.functions';
-export * from './code-writer';
+export * from './code-writer/public-api';
 export * from './cypher';
 export * from './file-manager';
 export * from './fs-extend';

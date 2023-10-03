@@ -1,10 +1,12 @@
 import { GenerateCommandState } from '../../types';
 import { cliterConfig } from '../../config';
-import { CodeWriter, getManyToManyRelationshipProperties, hasI18nProperties } from '../../utils';
+import { CodeWriter, createProject, declareBackApplicationItemsExports, getManyToManyRelationshipProperties, hasI18nProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const addPivotReferences = (generateCommandState: GenerateCommandState): void =>
 {
+    if (!Array.isArray(generateCommandState.schema.aggregateProperties)) return;
+
     for (const property of getManyToManyRelationshipProperties(generateCommandState.schema.aggregateProperties))
     {
         if (!property.relationship?.pivot) throw new Error('Pivot property is not defined in relationship many to many property ' + property.name);
@@ -22,6 +24,16 @@ export const addPivotReferences = (generateCommandState: GenerateCommandState): 
         codeWriter.generateBackBoundedContextReferences(property.relationship.pivot.aggregateProperties);
         codeWriter.declareBackApplicationItemsInModule();
         codeWriter.declareBackBoundedContextModuleInApplicationModule();
-        codeWriter.declareBackApplicationItemsExports();
+
+        const project = createProject();
+
+        declareBackApplicationItemsExports(
+            project,
+            path.join('src'),
+            property.relationship.pivot.boundedContextName.toLowerCase(),
+            property.relationship.pivot.moduleName.toLowerCase(),
+            property.relationship.pivot.aggregateName,
+            generateCommandState.schema.excluded,
+        );
     }
 };
