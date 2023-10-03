@@ -45,7 +45,7 @@ export class CountryDetailComponent extends ViewDetailComponent
         protected readonly injector: Injector,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

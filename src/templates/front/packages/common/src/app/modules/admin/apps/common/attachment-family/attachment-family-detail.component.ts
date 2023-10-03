@@ -1,10 +1,11 @@
-import { NgForOf } from '@angular/common';
-import { CommonAttachmentFamily, CommonResource } from '../common.types';
+import { CommonResource } from '../common.types';
 import { ResourceService } from '../resource/resource.service';
-import { AttachmentFamilyService } from './attachment-family.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { AttachmentFamilyService } from '@apps/common/attachment-family';
+import { CommonAttachmentFamily } from '@apps/common/common.types';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -42,11 +43,10 @@ export class AttachmentFamilyDetailComponent extends ViewDetailComponent
 
     constructor(
         private readonly attachmentFamilyService: AttachmentFamilyService,
-        protected readonly injector: Injector,
         private readonly resourceService: ResourceService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of
@@ -92,7 +92,7 @@ export class AttachmentFamilyDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            resourceId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            resourceIds: [],
             name: ['', [Validators.required, Validators.maxLength(100)]],
             width: [null, [Validators.maxLength(5)]],
             height: [null, [Validators.maxLength(5)]],
@@ -121,6 +121,9 @@ export class AttachmentFamilyDetailComponent extends ViewDetailComponent
                     {
                         this.managedObject = item;
                         this.fg.patchValue(item);
+
+                        // set many to many resources associations
+                        this.fg.get('resourceIds').setValue(item.resources.map(resource => resource.id));
                     });
                 break;
 

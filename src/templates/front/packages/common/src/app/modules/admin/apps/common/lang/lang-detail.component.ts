@@ -1,13 +1,12 @@
-import { CommonLang } from '../common.types';
-import { LangService } from './lang.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonLang } from '@apps/common/common.types';
+import { LangService } from '@apps/common/lang';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
-
-// ---- customizations ----
-import { MatSelectModule } from '@angular/material/select';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector       : 'common-lang-detail',
@@ -17,7 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatCheckboxModule, MatSelectModule,
+        MatCheckboxModule, MatSelectModule, NgForOf,
     ],
 })
 export class LangDetailComponent extends ViewDetailComponent
@@ -39,11 +38,10 @@ export class LangDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly langService: LangService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

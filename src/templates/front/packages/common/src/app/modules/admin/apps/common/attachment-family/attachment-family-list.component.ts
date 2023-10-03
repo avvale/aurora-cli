@@ -1,7 +1,6 @@
-import { CommonAttachmentFamily } from '../common.types';
-import { attachmentFamilyColumnsConfig } from './attachment-family.columns-config';
-import { AttachmentFamilyService } from './attachment-family.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { attachmentFamilyColumnsConfig, AttachmentFamilyService } from '@apps/common/attachment-family';
+import { CommonAttachmentFamily } from '@apps/common/common.types';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -59,14 +58,13 @@ export class AttachmentFamilyListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly attachmentFamilyService: AttachmentFamilyService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

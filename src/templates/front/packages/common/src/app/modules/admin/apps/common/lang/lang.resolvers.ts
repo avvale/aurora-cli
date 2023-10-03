@@ -1,8 +1,7 @@
-import { CommonLang } from '../common.types';
-import { langColumnsConfig } from './lang.columns-config';
-import { LangService } from './lang.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { CommonLang } from '@apps/common/common.types';
+import { langColumnsConfig, LangService } from '@apps/common/lang';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const langPaginationResolver: ResolveFn<GridData<CommonLang>> = (

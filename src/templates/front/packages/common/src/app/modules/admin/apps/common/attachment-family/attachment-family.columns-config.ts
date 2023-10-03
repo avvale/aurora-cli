@@ -3,12 +3,6 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 export const attachmentFamilyColumnsConfig: ColumnConfig[] = [
     {
         type       : ColumnDataType.STRING,
-        field      : 'resourceId',
-        sort       : 'resourceId',
-        translation: 'common.ResourceId',
-    },
-    {
-        type       : ColumnDataType.STRING,
         field      : 'name',
         sort       : 'name',
         translation: 'common.Name',

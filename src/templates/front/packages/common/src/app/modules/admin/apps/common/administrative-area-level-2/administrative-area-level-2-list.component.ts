@@ -66,7 +66,7 @@ export class AdministrativeAreaLevel2ListComponent extends ViewBaseComponent
         private readonly administrativeAreaLevel2Service: AdministrativeAreaLevel2Service,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

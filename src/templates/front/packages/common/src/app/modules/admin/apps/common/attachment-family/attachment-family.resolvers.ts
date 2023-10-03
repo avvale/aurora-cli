@@ -1,10 +1,9 @@
-import { CommonAttachmentFamily, CommonResource } from '../common.types';
-import { ResourceService } from '../resource/resource.service';
-import { attachmentFamilyColumnsConfig } from './attachment-family.columns-config';
-import { AttachmentFamilyService } from './attachment-family.service';
+import { CommonResource } from '../common.types';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { attachmentFamilyColumnsConfig, AttachmentFamilyService } from '@apps/common/attachment-family';
+import { CommonAttachmentFamily } from '@apps/common/common.types';
+import { ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const attachmentFamilyPaginationResolver: ResolveFn<GridData<CommonAttachmentFamily>> = (
     route: ActivatedRouteSnapshot,
@@ -55,7 +54,6 @@ export const attachmentFamilyNewResolver: ResolveFn<{
 };
 
 export const attachmentFamilyEditResolver: ResolveFn<{
-    commonGetResources: CommonResource[];
     object: CommonAttachmentFamily;
 }> = (
     route: ActivatedRouteSnapshot,
@@ -73,5 +71,12 @@ export const attachmentFamilyEditResolver: ResolveFn<{
     return attachmentFamilyService
         .findByIdWithRelations({
             id: route.paramMap.get('id'),
+            constraint: {
+                include: [
+                    {
+                        association: 'resources',
+                    },
+                ],
+            },
         });
 };

@@ -1,0 +1,99 @@
+version: 0.0.1
+boundedContextName: common
+moduleName: attachment
+moduleNames: attachments
+aggregateName: CommonAttachment
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+front:
+  solidIcon: mat_solid:paper-clip
+  outlineIcon: mat_outline:paper-clip
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: familyId
+    type: id
+    length: 36
+    nullable: true
+    relationship:
+      type: many-to-one
+      aggregateName: CommonAttachmentFamily
+      modulePath: common/attachment-family
+      key: id
+      field: family
+      avoidConstraint: true
+  - name: sort
+    type: smallint.unsigned
+    maxLength: 6
+    nullable: true
+  - name: alt
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: title
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: path
+    type: varchar
+    maxLength: 2047
+    nullable: false
+  - name: filename
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: url
+    type: varchar
+    maxLength: 2047
+    nullable: false
+  - name: mime
+    type: varchar
+    maxLength: 50
+    nullable: false
+  - name: extension
+    type: varchar
+    maxLength: 10
+    nullable: false
+  - name: size
+    type: int.unsigned
+    maxLength: 10
+    nullable: false
+  - name: width
+    type: smallint.unsigned
+    maxLength: 5
+    nullable: true
+  - name: height
+    type: smallint.unsigned
+    maxLength: 5
+    nullable: true
+  - name: libraryId
+    type: id
+    length: 36
+    nullable: true
+    relationship:
+      type: many-to-one
+      aggregateName: CommonAttachmentLibrary
+      modulePath: common/attachment-library
+      key: id
+      field: library
+      avoidConstraint: true
+  - name: libraryFilename
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: meta
+    type: json
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true

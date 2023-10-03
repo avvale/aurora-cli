@@ -1,7 +1,6 @@
-import { CommonLang } from '../common.types';
-import { langColumnsConfig } from './lang.columns-config';
-import { LangService } from './lang.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CommonLang } from '@apps/common/common.types';
+import { langColumnsConfig, LangService } from '@apps/common/lang';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -59,14 +58,13 @@ export class LangListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly langService: LangService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

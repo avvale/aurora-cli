@@ -111,7 +111,7 @@ export class CountryListComponent extends ViewBaseComponent
         private readonly countryService: CountryService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

@@ -40,7 +40,7 @@ export class ResourceDetailComponent extends ViewDetailComponent
         private readonly resourceService: ResourceService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

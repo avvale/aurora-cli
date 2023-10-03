@@ -1,8 +1,10 @@
-import { CommonAttachmentFamily, CommonCreateAttachmentFamily, CommonResource, CommonUpdateAttachmentFamilies, CommonUpdateAttachmentFamilyById } from '../common.types';
+import { CommonResource } from '../common.types';
 import { ResourceService } from '../resource/resource.service';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, getRelations, paginationQuery, updateByIdMutation, updateMutation } from './attachment-family.graphql';
+import { findByIdWithRelationsQuery, getRelations } from './attachment-family.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/common/attachment-family';
+import { CommonAttachmentFamily, CommonCreateAttachmentFamily, CommonUpdateAttachmentFamilies, CommonUpdateAttachmentFamilyById } from '@apps/common/common.types';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 

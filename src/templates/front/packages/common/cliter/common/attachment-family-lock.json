@@ -11,11 +11,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-detail.component.html",
-            "integrity": "sha1:68a1d53b68b1f1ea2c86e2722ab8662968f13a72"
+            "integrity": "sha1:19ae28481a23b23aac117999448dac4b9ae0a4b3"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-detail.component.ts",
-            "integrity": "sha1:7199d12bf14f13cc54c9ffecad3a7465b902f18d"
+            "integrity": "sha1:c977f3aebb94827f1076a943c62ec8cc52f4a8ed"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-list.component.html",
@@ -23,23 +23,31 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-list.component.ts",
-            "integrity": "sha1:2af5406f09390821492fd6d189768d754a17956a"
+            "integrity": "sha1:9d06b4c7e3a920b1761bf96bd1c97f23c9f93033"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.columns-config.ts",
-            "integrity": "sha1:193574dfa3b66655847d4ad648252aaf555db42a"
+            "integrity": "sha1:6cb23e4fca1621d7432c25423446855826ac8499"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.graphql.ts",
-            "integrity": "sha1:b8e2402b614ea6847d631a865a34d1814de45756"
+            "integrity": "sha1:be12091b9ac784c36855ba4fc294a6b595c3e551"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.resolvers.ts",
-            "integrity": "sha1:a1a620105ba6bbdb737403a23661aa2d6fbabbcc"
+            "integrity": "sha1:28e76d93c50c08128b226fd4b5fef489a92972d4"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.service.ts",
-            "integrity": "sha1:b0c297138adec26d23f882f6390136f00c3d4668"
+            "integrity": "sha1:549ac1df1c92c0922706f23a4fb32e1c8350edb4"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/attachment-family/public-api.ts",
+            "integrity": "sha1:4eaa4b01517af6e6827c8a6b91af50e40a0d5605"
         }
     ]
 }
