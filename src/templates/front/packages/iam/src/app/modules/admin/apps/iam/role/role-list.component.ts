@@ -66,7 +66,7 @@ export class RoleListComponent extends ViewBaseComponent
         private readonly roleService: RoleService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

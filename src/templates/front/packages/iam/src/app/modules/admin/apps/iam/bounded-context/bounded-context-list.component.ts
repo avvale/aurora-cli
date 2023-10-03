@@ -66,7 +66,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
         private readonly boundedContextService: BoundedContextService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

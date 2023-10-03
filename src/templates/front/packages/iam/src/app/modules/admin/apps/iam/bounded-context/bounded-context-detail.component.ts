@@ -85,7 +85,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
         private readonly permissionService: PermissionService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

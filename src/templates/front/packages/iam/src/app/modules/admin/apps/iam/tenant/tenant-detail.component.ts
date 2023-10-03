@@ -40,7 +40,7 @@ export class TenantDetailComponent extends ViewDetailComponent
         private readonly tenantService: TenantService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

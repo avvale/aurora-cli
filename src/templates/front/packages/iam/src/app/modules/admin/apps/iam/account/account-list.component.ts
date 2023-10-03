@@ -66,7 +66,7 @@ export class AccountListComponent extends ViewBaseComponent
         private readonly accountService: AccountService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of
