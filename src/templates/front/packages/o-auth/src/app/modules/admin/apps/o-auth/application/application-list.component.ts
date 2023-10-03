@@ -66,7 +66,7 @@ export class ApplicationListComponent extends ViewBaseComponent
         private readonly applicationService: ApplicationService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

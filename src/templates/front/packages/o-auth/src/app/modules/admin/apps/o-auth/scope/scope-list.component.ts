@@ -66,7 +66,7 @@ export class ScopeListComponent extends ViewBaseComponent
         private readonly scopeService: ScopeService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

@@ -66,7 +66,7 @@ export class ClientListComponent extends ViewBaseComponent
         private readonly clientService: ClientService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

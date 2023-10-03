@@ -66,7 +66,7 @@ export class RefreshTokenListComponent extends ViewBaseComponent
         private readonly refreshTokenService: RefreshTokenService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

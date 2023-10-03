@@ -40,7 +40,7 @@ export class RefreshTokenDetailComponent extends ViewDetailComponent
         private readonly refreshTokenService: RefreshTokenService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

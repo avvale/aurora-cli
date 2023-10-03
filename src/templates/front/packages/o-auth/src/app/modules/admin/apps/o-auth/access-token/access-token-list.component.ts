@@ -66,7 +66,7 @@ export class AccessTokenListComponent extends ViewBaseComponent
         private readonly accessTokenService: AccessTokenService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of
