@@ -1,5 +1,6 @@
 <div
-    #attachmentFrame id="attachment-library"
+    #attachmentFrame
+    id="attachment-library"
     [formGroup]="form"
 >
     <div
@@ -13,19 +14,22 @@
         cdkDropList
         cdkDropListOrientation="horizontal"
         (cdkDropListDropped)="drop($event)"
+        formArrayName="attachments"
     >
-        <hr-attachment-item
-            *ngFor="let attachment of this.attachments.controls; let i=index"
-            cdkDrag
-            [attachment]="attachment"
-            [index]="i"
-            [form]="form"
-            [name]="name"
-            [attachmentFamilies]="attachmentFamilies"
-            (enableCrop)="onEnableCrop($event)"
-            (removeItem)="onRemoveItem($event)"
-            class="col-12"
+        <ng-container
+            *ngFor="let attachment of files$ | async; let i=index"
         >
-        </hr-attachment-item>
+            <au-attachment-item
+                class="col-12 col-md-6 col-lg-4 px-16"
+                [formControlName]="i"
+                cdkDrag
+
+                [attachmentFamilies]="attachmentFamilies"
+                (enableCrop)="onEnableCrop($event)"
+                (removeItem)="onRemoveItem($event)"
+                
+            >
+            </au-attachment-item>
+        </ng-container>
     </div>
 </div>

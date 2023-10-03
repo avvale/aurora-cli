@@ -1,11 +1,65 @@
-/**
- * Types of crop for cropper component
- */
+export interface Attachment
+{
+    id: number;
+    familyId: string;
+    sort: number;
+    alt: string;
+    title: string;
+    path: string;
+    filename: string;
+    url: string;
+    mime: string;
+    extension: string;
+    size: number;
+    width: number;
+    height: number;
+    libraryId: string;
+    libraryFilename: string;
+    meta: any;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string;
+}
+
+export interface AttachmentFamily
+{
+    id: number;
+    name: string;
+    code: string;
+    width: number;
+    height: number;
+    fitType: CropType;
+    quality: number;
+    sizes: number[];
+    format: ImageFormat;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string;
+}
+
 export enum CropType
 {
-    FIT_CROP                = 'c7402ae0-84f2-4fd2-bc80-871a3c2fab38',
-    FIT_WIDTH               = '609b5b79-f5cb-45cb-ba08-1c2220b54b91',
-    FIT_HEIGHT              = '7a1d9ebf-db57-4e3b-89d1-3feef931e75b',
-    FIT_WIDTH_FREE_CROP     = 'ca2f4e27-8b74-4543-b2a8-c8fa6fda3fa4',
-    FIT_HEIGHT_FREE_CROP    = '066bdff2-0ea4-497c-893b-7e13a60f21d1'
+    FIT_CROP                = 'FIT_CROP',
+    FIT_WIDTH               = 'FIT_WIDTH',
+    FIT_HEIGHT              = 'FIT_HEIGHT',
+    FIT_WIDTH_FREE_CROP     = 'FIT_WIDTH_FREE_CROP',
+    FIT_HEIGHT_FREE_CROP    = 'FIT_HEIGHT_FREE_CROP',
+}
+
+export interface File
+{
+    url: string;
+    filename: string;
+    path: string;
+    mime: string;
+    size: number;
+}
+
+export enum ImageFormat
+{
+    JPG = 'JPG',
+    PNG = 'PNG',
+    GIF = 'GIF',
+    TIF = 'TIF',
+    BMP = 'BMP',
 }

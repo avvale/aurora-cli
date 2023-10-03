@@ -1,5 +1,4 @@
 :host {
-    
     #attachment-library {
         display:block;
         position: relative;
@@ -65,7 +64,7 @@
         border: 2px dashed  rgb(120,120,120);
     }
 
-    #attachment-library.has-attachment 
+    #attachment-library.has-attachment
     {
         #attachment-library-mask {
             background-color: rgba(96, 125, 139, 0.85);
@@ -85,7 +84,7 @@
         }
     }
 
-    #attachment-library:not(.has-attachment) 
+    #attachment-library:not(.has-attachment)
     {
         #attachment-library-mask.active-mask {
             background-color: rgba(96, 125, 139, 0.85);

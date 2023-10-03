@@ -1,5 +1,5 @@
-import { Component, ViewChildren, QueryList, Input, OnInit, OnChanges, ViewChild, Renderer2, forwardRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, ViewChildren, QueryList, Input, OnInit, OnChanges, ViewChild, Renderer2, Output, EventEmitter, Optional, forwardRef, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule, ControlContainer, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,49 +7,53 @@ import { AttachmentsService } from './../attachments.service';
 import { AttachmentItemComponent } from './../attachment-item/attachment-item.component';
 import { CropperDialogComponent } from './../cropper-dialog.component';
 // import { ConfigService } from '@horus/services/config.service';
-import { AdminAttachmentFamily, AdminAttachment } from 'app/main/admin/admin.types';
 import { environment } from 'environments/environment';
 import * as _ from 'lodash';
+import { Attachment, AttachmentFamily } from '../attachments.types';
+import { log } from '@aurora';
+import { AsyncPipe, NgForOf } from '@angular/common';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
-    selector   : 'au-attachments',
-    templateUrl: './attachments.component.html',
-    styleUrls  : ['./attachments.component.scss'],
-    providers  : [
+    selector       : 'au-attachments',
+    templateUrl    : './attachments.component.html',
+    styleUrls      : ['./attachments.component.scss'],
+    standalone     : true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports        : [
+        NgForOf, ReactiveFormsModule,
+        AsyncPipe,
+    ],
+    providers: [
         {
             provide    : NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => AttachmentsComponent),
             multi      : true,
         },
     ],
-    standalone: true,
 })
 export class AttachmentsComponent implements OnInit, OnChanges
 {
-    @Input() placeholder: string;
-    @Input('value')
-    set value(val: any[])
+    @Output('files') files = new EventEmitter<File[]>();
+    filesContainer: File[] = []; // files uploaded across XMLHttpRequest
+
+    private filesSubject$: BehaviorSubject<File[]> = new BehaviorSubject([]);
+    get files$(): Observable<File[]>
     {
-        this._value = val;
+        return this.filesSubject$.asObservable();
     }
 
-    get value(): any[] | null
-    {
-        return this._value;
-    }
-    private _value: any[] | null;
 
-    isDisabled: boolean;
+    @Input() endpoint: string; // API url where call once drop elements
+
 
     // OLD
     // Input elements
-    
-    @Input() form: FormGroup;
-    @Input() name: string;                                      // name of input that contain attachments FormArray
-    @Input() value: AdminAttachment[];                          // array of attachments to init component
-    @Input() attachmentFamilies: AdminAttachmentFamily[] = [];  // families for AttachmentItemComponent
-    @Input() endpoint: string;                                  // API url where call once drop elements
-    // @Input() withCredentials: boolean;                       // property for XMLHttpRequest object
+    @Input() placeholder: string;
+    //@Input() form: FormGroup;
+    @Input() name: string;                                 // name of input that contain attachments FormArray
+    @Input() value: Attachment[];                          // array of attachments to init component
+    @Input() attachmentFamilies: AttachmentFamily[] = [];  // families for AttachmentItemComponent
 
     // View elements
     @ViewChild('attachmentFrame', { static: true })  attachmentFrame;
@@ -57,75 +61,80 @@ export class AttachmentsComponent implements OnInit, OnChanges
     @ViewChildren(AttachmentItemComponent) attachmentItems: QueryList<AttachmentItemComponent>;
 
     items: FormArray;
-    files: File[];                              // files uploaded across XMLHttpRequest
     attachment: FormGroup;                      // formGroup that contain attachment that will be crop
-    attachmentFamily: AdminAttachmentFamily;    // variable to contain attachment family where we take crop properties
+    attachmentFamily: AttachmentFamily;    // variable to contain attachment family where we take crop properties
     progress = 0;
 
     constructor(
-        private _fb: FormBuilder,
-        private renderer: Renderer2,
-        private _sanitizer: DomSanitizer,
+        private readonly fb: FormBuilder,
+        private readonly renderer: Renderer2,
+        private readonly sanitizer: DomSanitizer,
         private _attachmentsService: AttachmentsService,
         private _dialog: MatDialog,
-        //private _configService: ConfigService,
-    ) { }
+        @Optional() private controlContainer: ControlContainer,
+    )
+    { }
 
-    registerOnTouched = (): void => { /**/ };
-    propagateChange = (_: any): void => { /**/ };
-    registerOnChange = (fn: (value: any) => void): void => { this.propagateChange = fn; };
-    setDisabledState = (isDisabled: boolean): void => { this.isDisabled = isDisabled; };
+    private propagateChange: (value: any) => void;
+    private onTouched: () => void;
 
-    writeValue(value: any): void
+    writeValue(attachments: Attachment[]): void
     {
-        this._value = value;
+        // if (attachment) this.attachment = attachment;
+    }
+
+    // registers a callback function is called by the forms API on initialization
+    registerOnChange(fn: (value: any) => void): void
+    {
+        this.propagateChange = fn;
+    }
+
+    registerOnTouched(fn: any): void
+    {
+        this.onTouched = fn;
     }
 
 
-
-
-
-
-
-
-    /// OLD
-
     ngOnInit(): void
     {
-        // TODO, use drag and drop angular native
-        this.renderer
-            .listen(
-                this.attachmentFrame.nativeElement,
-                'dragenter',
-                $event => this._dragEnterHandler($event),
-            );
+        this.renderer.listen(this.attachmentFrame.nativeElement, 'dragenter', $event =>
+        {
+            this.dragEnterHandler($event);
+        });
+        this.renderer.listen(this.attachmentFrame.nativeElement, 'dragover', $event =>
+        {
+            this._dragOverHandler($event);
+        });
+        this.renderer.listen(this.attachmentFrame.nativeElement, 'dragleave', $event =>
+        {
+            this._dragLeaveHandler($event);
+        });
+        this.renderer.listen(this.attachmentFrame.nativeElement, 'drop', $event =>
+        {
+            this.dropHandler($event);
+        });
 
-        this.renderer
-            .listen(
-                this.attachmentFrame.nativeElement,
-                'dragover',
-                $event => this._dragOverHandler($event),
-            );
+        // if (! this.endpoint) this.endpoint = this._configService.config.restUrl + '/api/v1/admin/attachment/upload';
+        if (! this.endpoint) this.endpoint = environment.api.graphql;
 
-        this.renderer
-            .listen(
-                this.attachmentFrame.nativeElement,
-                'dragleave',
-                $event => this._dragLeaveHandler($event),
-            );
+        //        this.form = this.form2;
+        console.log('[DEBUG] AttachmentsComponent: ', this.form);
+    }
 
-        this.renderer
-            .listen(
-                this.attachmentFrame.nativeElement,
-                'drop',
-                $event => this._dropHandler($event),
-            );
 
-        //if (! this.endpoint) this.endpoint = this._configService.config.restUrl + '/api/v1/admin/attachment/upload';
+    get form(): FormGroup
+    {
+        return this.controlContainer.control as FormGroup;
+    }
+
+    get control(): FormControl
+    {
+        return this.form.get('attachments') as FormControl;
     }
 
     ngOnChanges(): void
     {
+        console.log('[DEBUG] ngOnChanges: ');
         // load values from input
         // set value from component, to init with values only
         // when the component is created or change value input
@@ -148,7 +157,7 @@ export class AttachmentsComponent implements OnInit, OnChanges
         }
         this._touchFormAttachments();
 
-        if (environment.debug) console.log('DEBUG - attachments: ', this.attachments.controls);
+        log('[DEBUG] attachments: ', this.attachments.controls);
     }
 
     get attachments(): FormArray
@@ -156,19 +165,19 @@ export class AttachmentsComponent implements OnInit, OnChanges
         return this.form.get(this.name) as FormArray;
     }
 
-    private _setValue(attachments: AdminAttachment[]): void
+    private _setValue(attachments: Attachment[]): void
     {
         // create and set attachments FormGroup
-        for (const attachment of attachments) this._createAttachment(attachment);
+        for (const attachment of attachments) this.attachmentItemFormGroupFactory(attachment);
 
         if (this.attachments.length > 0) this._disablePlaceholder();
     }
 
-    private _createAttachment(attachment?): void
+    private attachmentItemFormGroupFactory(attachment?): FormGroup
     {
         // add attachment FormGroup to attachments FormArray
         // with function attachments get FormArray
-        const attachmentFg = this._fb.group({
+        const attachmentItemFormGroup = this.fb.group({
             id             : '',
             uuid           : '',
             langUuid       : '',
@@ -190,8 +199,8 @@ export class AttachmentsComponent implements OnInit, OnChanges
             libraryFilename: '',
 
             // need implement attachment library fields to avoid send __typename field that is included in response from graphQL
-            // this field contain AdminAttachmentLibrary value, when we try send values GraphQL expect to obtain AdminAttachmentLibraryInput
-            library: this._fb.group({
+            // this field contain AttachmentLibrary value, when we try send values GraphQL expect to obtain AttachmentLibraryInput
+            library: this.fb.group({
                 id       : '',
                 uuid     : '',
                 name     : '',
@@ -210,95 +219,50 @@ export class AttachmentsComponent implements OnInit, OnChanges
             isChanged : false,
         });
 
-        if (attachment !== undefined) attachmentFg.patchValue(attachment);
+        if (attachment !== undefined) attachmentItemFormGroup.patchValue(attachment);
 
-        this.attachments.push(attachmentFg);
+        this.attachments.push(attachmentItemFormGroup);
+
+        return attachmentItemFormGroup;
     }
 
     /**
      * Methods to upload files
      */
-    private _dropFile($event): void
+    private dropFile($event): void
     {
-        this.files = [];
-
         // get files after drop files on active area
-        const files = $event.dataTransfer ? $event.dataTransfer.files : $event.target.files;
+        const files: File[] = $event.dataTransfer ? $event.dataTransfer.files : $event.target.files;
 
-        for (let i = 0; i < files.length; i++)
-        {
-            const file = files[i];
+        this.filesSubject$.next([...this.filesSubject$.value, ...files]);
+
+        this.files.emit(this.filesSubject$.value);
+
+        //for (const file of files)
+        //{
             // get urls across sanitizer to avoid security cross domain
-            file.objectURL = this._sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(files[i]));
-            this.files.push(files[i]);
-        }
+            /* file.objectURL = this.sanitizer
+                .bypassSecurityTrustUrl(
+                    window.URL.createObjectURL(file),
+                );
 
-        if (this.files && this.files.length > 0) this._upload();
-    }
+                console.log('[DEBUG] File: ', tt); */
 
-    private _upload(): void
-    {
-        const xhr = new XMLHttpRequest();
-        const formData = new FormData(); // create forma data to add files and inputs
+            //this.filesContainer.push(file);
+       // }
 
-        // this.onBeforeUpload.emit({
-        //    'xhr': xhr,
-        //    'formData': formData
-        // });
+        //console.log('[DEBUG] Files to upload: ', this.filesContainer);
+        //this.files.emit(this.filesContainer);
 
-        // add files to formData to send to server
-        for (const file of this.files)
-        {
-            formData.append('files[]', file, file.name);
-            if (environment.debug) console.log('DEBUG - append file: ', file);
-        }
+        /* this.fileUploaderService
+            .uploadFiles(this.filesContainer) */
 
-        // progress var
-        /*xhr.upload.addEventListener('progress', (e: ProgressEvent) => {
-            if (e.lengthComputable) {
-              this.progress = Math.round((e.loaded * 100) / e.total);
-            }
-          }, false);*/
-
-        // set function  onreadystatechange that will be called
-        xhr.onreadystatechange = () =>
-        {
-            if (xhr.readyState === 4)
-            {
-                // this.progress = 0;
-
-                if (xhr.status >= 200 && xhr.status < 300)
-                {
-                    const response = <any>JSON.parse(xhr.response);
-
-                    // save attachments from file uploaded
-                    for (const attachment of response.data.tmpAttachments)
-                    {
-                        attachment.isUploaded   = true;                                     // mark all attachments that have been loaded
-                        attachment.sort         = this.attachments.controls.length + 1;     // set sort value
-                        this._createAttachment(attachment);                                 // create formGroup and patch value
-                        this._touchFormAttachments();
-                    }
-                }
-                else
-                {
-                    // this.onError.emit({xhr: xhr, files: this.files});
-                }
-
-                // when finish xhr request, empty files array for the following uploads
-                this.files = [];
-            }
-        };
-
-        xhr.open('POST', this.endpoint, true);
-        // xhr.withCredentials = this.withCredentials;
-
-        xhr.send(formData);
+        // if (this.files && this.files.length > 0) this.upload();
     }
 
     onEnableCrop($event): void
     {
-        if (environment.debug) console.log('DEBUG - trigger enableCropHandler with this event: ', $event);
+        if (environment.debug) log('[DEBUG] Trigger enableCropHandler with this event: ', $event);
 
         // show dialog image
         const dialog = this._dialog.open(CropperDialogComponent, {
@@ -352,12 +316,12 @@ export class AttachmentsComponent implements OnInit, OnChanges
     }
 
     // methods to manage layers
-    private _dragEnterHandler($event): void
+    private dragEnterHandler($event): void
     {
         $event.preventDefault();
         if ($event.currentTarget === this.attachmentFrame.nativeElement)
         {
-            if (! this.attachmentMask.nativeElement.classList.contains('active-mask')) this._activateMask();
+            if (!this.attachmentMask.nativeElement.classList.contains('active-mask')) this._activateMask();
         }
     }
 
@@ -383,7 +347,7 @@ export class AttachmentsComponent implements OnInit, OnChanges
         }
     }
 
-    private _dropHandler($event): void
+    private dropHandler($event): void
     {
         $event.preventDefault();
         if (this.attachmentMask.nativeElement.classList.contains('active-mask'))
@@ -391,7 +355,7 @@ export class AttachmentsComponent implements OnInit, OnChanges
             this._deactivateMask();
             this._disablePlaceholder();
         }
-        this._dropFile($event);
+        this.dropFile($event);
     }
 
     private _enablePlaceholder(): void

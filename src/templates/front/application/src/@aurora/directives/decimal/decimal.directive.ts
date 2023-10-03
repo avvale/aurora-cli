@@ -123,21 +123,25 @@ export class DecimalDirective implements OnChanges, OnInit
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    propagateChange = (_: any) => { /**/ };
+    private propagateChange: (value: any) => void;
+    private onTouched: () => void;
 
     writeValue(value: any): void
     {
         this._value = value;
     }
 
+    // registers a callback function is called by
+    // the forms API on initialization
     registerOnChange(fn: (value: any) => void): void
     {
         this.propagateChange = fn;
     }
 
-    registerOnTouched(): void
-    {/**/}
+    registerOnTouched(fn: any): void
+    {
+        this.onTouched = fn;
+    }
 
     @HostListener('beforeinput', ['$event'])
     onBeforeInput(e: InputEvent): any

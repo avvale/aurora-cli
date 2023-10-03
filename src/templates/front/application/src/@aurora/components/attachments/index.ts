@@ -1,0 +1,1 @@
+export * from '@aurora/components/attachments/public-api';

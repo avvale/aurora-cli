@@ -13,5 +13,5 @@ const fields = `
 `;
 
 export const graphQL = {
-    fields
+    fields,
 };

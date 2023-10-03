@@ -1,3 +1,5 @@
+import gql from 'graphql-tag';
+
 const fields = `
     id
     uuid
@@ -36,5 +38,21 @@ const relationsFields = `
 
 export const graphQL = {
     fields,
-    relationsFields
+    relationsFields,
 };
+
+export const uploadFilesMutation = gql`
+    mutation CommonUploadFiles (
+        $files: [CoreFileUploaded!]!
+    ) {
+        commonUploadFiles (
+            files: $files
+        )
+        {
+            id
+            filename
+            mimetype
+            encoding
+        }
+    }
+`;
