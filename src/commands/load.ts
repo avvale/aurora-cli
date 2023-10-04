@@ -1,6 +1,4 @@
 import { Args, Command, Flags } from '@oclif/core';
-import * as fs from 'node:fs';
-import * as path from 'node:path';
 import { BackHandler, ModuleDefinitionSchema, Prompter, Scope, ScopeElement, YamlManager, cliterConfig } from '../@cliter';
 import { generateGraphqlTypes } from '../@cliter/functions/back';
 import { getBoundedContextModuleFromFlag, loadJsonLockFile, reviewOverwrites } from '../@cliter/functions/common';

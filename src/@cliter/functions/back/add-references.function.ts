@@ -1,6 +1,6 @@
 import { GenerateCommandState } from '../../types';
 import { cliterConfig } from '../../config';
-import { CodeWriter, createProject, declareBackApplicationItemsExports, hasI18nProperties } from '../../utils';
+import { CodeWriter, createProject, declareBackApiItemsExports, declareBackAppItemsExports, hasI18nProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const addReferences = (generateCommandState: GenerateCommandState): void =>
@@ -15,19 +15,31 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
         generateCommandState.schema.aggregateName,
         hasI18nProperties(generateCommandState.schema.aggregateProperties),
     );
-    codeWriter.generateBackBoundedContextReferences(generateCommandState.schema.aggregateProperties);
+
+    codeWriter.generateBackAppBoundedContextReferences(
+        generateCommandState.schema.aggregateProperties,
+        generateCommandState.schema.excluded,
+    );
+
     codeWriter.declareBackApplicationItemsInModule();
     codeWriter.declareBackBoundedContextModuleInApplicationModule();
 
-
     const project = createProject();
 
-    declareBackApplicationItemsExports(
+    declareBackAppItemsExports(
         project,
         path.join('src'),
         generateCommandState.schema.boundedContextName.toLowerCase(),
         generateCommandState.schema.moduleName.toLowerCase(),
         generateCommandState.schema.aggregateName,
+        generateCommandState.schema.excluded,
+    );
+
+    declareBackApiItemsExports(
+        project,
+        path.join('src'),
+        generateCommandState.schema.boundedContextName.toLowerCase(),
+        generateCommandState.schema.moduleName.toLowerCase(),
         generateCommandState.schema.excluded,
     );
 };

@@ -5,6 +5,8 @@ import * as path from 'node:path';
 
 export const generateAppI18nFiles = (generateCommandState: GenerateCommandState): void =>
 {
+    if (generateCommandState.schema.excluded?.includes('src/@app/**')) return;
+
     if (hasI18nProperties(generateCommandState.schema.aggregateProperties))
     {
         TemplateGenerator.generateStaticContents(

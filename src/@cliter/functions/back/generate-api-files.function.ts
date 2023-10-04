@@ -8,6 +8,8 @@ import { TemplateGenerator } from '../../utils';
 
 export const generateApiFiles = (generateCommandState: GenerateCommandState): void =>
 {
+    if (generateCommandState.schema.excluded?.includes('src/@api/**')) return;
+
     TemplateGenerator.createDirectory(
         path.join('src', cliterConfig.apiContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),

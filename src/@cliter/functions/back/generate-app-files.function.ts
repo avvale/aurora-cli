@@ -5,6 +5,8 @@ import * as path from 'node:path';
 
 export const generateAppFiles = (generateCommandState: GenerateCommandState): void =>
 {
+    if (generateCommandState.schema.excluded?.includes('src/@app/**')) return;
+
     // create directory application container, normally src/@app
     TemplateGenerator.createDirectory(
         path.join('src', cliterConfig.appContainer),

@@ -6,6 +6,7 @@ import * as path from 'node:path';
 
 export const generateApiPivotFiles = (generateCommandState: GenerateCommandState): void =>
 {
+    if (generateCommandState.schema.excluded?.includes('src/@api/**')) return;
     if (!Array.isArray(generateCommandState.schema.aggregateProperties)) return;
 
     for (const property of getManyToManyRelationshipProperties(generateCommandState.schema.aggregateProperties))

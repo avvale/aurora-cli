@@ -40,7 +40,7 @@ export const createProject = (): Project =>
  * @param {string[]} excluded - Files avoid create references by to be excluded.
  * @return {void}
  ****************************************************************/
-export const declareBackApplicationItemsExports = (
+export const declareBackAppItemsExports = (
     project: Project,
     srcDirectory: string,
     boundedContextName: string,
@@ -49,27 +49,9 @@ export const declareBackApplicationItemsExports = (
     excluded: string[] = [],
 ): void =>
 {
+    if (excluded.includes('src/@app/**')) return;
+
     const sourceFile = project.addSourceFileAtPath(path.join(process.cwd(), srcDirectory, 'index.ts'));
-
-    if (!excluded.includes(`src/${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${boundedContextName.toKebabCase()}.module.ts`))
-    {
-        // export module
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${boundedContextName.toKebabCase()}.module`,
-            [`${boundedContextName.toPascalCase()}Module`],
-        );
-    }
-
-    if (!excluded.includes(`src/${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}/dto/${boundedContextName.toKebabCase()}-${moduleName.toKebabCase()}.dto.ts`))
-    {
-        // export DTO
-        ExportDriver.createExportItems(
-            sourceFile,
-            `./${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}/dto/${boundedContextName.toKebabCase()}-${moduleName.toKebabCase()}.dto`,
-            [`${boundedContextName.toPascalCase()}${moduleName.toPascalCase()}Dto`],
-        );
-    }
 
     if (!excluded.includes(`src/${cliterConfig.appContainer}/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}/domain/${boundedContextName.toKebabCase()}-${moduleName.toKebabCase()}.aggregate.ts`))
     {
@@ -118,6 +100,52 @@ export const declareBackApplicationItemsExports = (
             sourceFile,
             `./${cliterConfig.appContainer}/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}/infrastructure/mock/${boundedContextName.toKebabCase()}-mock-${moduleName.toKebabCase()}.data`,
             [`${boundedContextName.toCamelCase()}Mock${moduleName.toPascalCase()}Data`],
+        );
+    }
+
+    sourceFile?.saveSync();
+};
+
+/****************************************************************
+ * Add exports of principal application elements to src/index.ts
+ * this is to have access to all elements from index.ts
+ *
+ * @param {Project} project - ts morph project.
+ * @param {string} srcDirectory - The source directory path.
+ * @param {string} boundedContextName - The bounded context name.
+ * @param {string} moduleName - The module name.
+ * @param {string[]} excluded - Files avoid create references by to be excluded.
+ * @return {void}
+ ****************************************************************/
+export const declareBackApiItemsExports = (
+    project: Project,
+    srcDirectory: string,
+    boundedContextName: string,
+    moduleName: string,
+    excluded: string[] = [],
+): void =>
+{
+    if (excluded.includes('src/@api/**')) return;
+
+    const sourceFile = project.addSourceFileAtPath(path.join(process.cwd(), srcDirectory, 'index.ts'));
+
+    if (!excluded.includes(`src/${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${boundedContextName.toKebabCase()}.module.ts`))
+    {
+        // export module
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${boundedContextName.toKebabCase()}.module`,
+            [`${boundedContextName.toPascalCase()}Module`],
+        );
+    }
+
+    if (!excluded.includes(`src/${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}/dto/${boundedContextName.toKebabCase()}-${moduleName.toKebabCase()}.dto.ts`))
+    {
+        // export DTO
+        ExportDriver.createExportItems(
+            sourceFile,
+            `./${cliterConfig.apiContainer}/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}/dto/${boundedContextName.toKebabCase()}-${moduleName.toKebabCase()}.dto`,
+            [`${boundedContextName.toPascalCase()}${moduleName.toPascalCase()}Dto`],
         );
     }
 

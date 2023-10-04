@@ -50,8 +50,13 @@ export class CodeWriter
     }
 
     // back
-    generateBackBoundedContextReferences(properties: Property[]): void
+    generateBackAppBoundedContextReferences(
+        properties: Property[],
+        excluded: string[] = [],
+    ): void
     {
+        if (excluded.includes('src/@app/**')) return;
+
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, this.appDirectory, this.boundedContextName.toKebabCase(), 'index.ts'));
 
         // register import in @app/boundedContext/index.ts

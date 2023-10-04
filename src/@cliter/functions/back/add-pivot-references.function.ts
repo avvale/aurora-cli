@@ -1,6 +1,6 @@
 import { GenerateCommandState } from '../../types';
 import { cliterConfig } from '../../config';
-import { CodeWriter, createProject, declareBackApplicationItemsExports, getManyToManyRelationshipProperties, hasI18nProperties } from '../../utils';
+import { CodeWriter, createProject, declareBackApiItemsExports, declareBackAppItemsExports, getManyToManyRelationshipProperties, hasI18nProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const addPivotReferences = (generateCommandState: GenerateCommandState): void =>
@@ -21,18 +21,29 @@ export const addPivotReferences = (generateCommandState: GenerateCommandState): 
             property.relationship.pivot.aggregateName,
             hasI18nProperties(property.relationship.pivot.aggregateProperties),
         );
-        codeWriter.generateBackBoundedContextReferences(property.relationship.pivot.aggregateProperties);
+        codeWriter.generateBackAppBoundedContextReferences(
+            property.relationship.pivot.aggregateProperties,
+            generateCommandState.schema.excluded,
+        );
         codeWriter.declareBackApplicationItemsInModule();
         codeWriter.declareBackBoundedContextModuleInApplicationModule();
 
         const project = createProject();
 
-        declareBackApplicationItemsExports(
+        declareBackAppItemsExports(
             project,
             path.join('src'),
             property.relationship.pivot.boundedContextName.toLowerCase(),
             property.relationship.pivot.moduleName.toLowerCase(),
             property.relationship.pivot.aggregateName,
+            generateCommandState.schema.excluded,
+        );
+
+        declareBackApiItemsExports(
+            project,
+            path.join('src'),
+            property.relationship.pivot.boundedContextName.toLowerCase(),
+            property.relationship.pivot.moduleName.toLowerCase(),
             generateCommandState.schema.excluded,
         );
     }
