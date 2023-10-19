@@ -722,6 +722,9 @@ export class CodeWriter
         const importsArray: ArrayLiteralExpression = importsArgument.getInitializer() as ArrayLiteralExpression;
         const importsElements = importsArray.getElements();
         const SequelizeModuleElement: CallExpression = importsElements.find(el => el.getText().indexOf('SequelizeModule.forFeature') === 0) as CallExpression;
+
+        if (!SequelizeModuleElement) throw new Error('SequelizeModule.forFeature is not defined in the module, it has to be defined to get it.');
+
         return SequelizeModuleElement.getArguments()[0] as ArrayLiteralExpression;
     }
 
