@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingCreateHttpCommunicationController, AuditingCreateHttpCommunicationHandler } from '@api/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingCreateHttpCommunicationController } from './auditing-create-http-communication.controller';
-import { AuditingCreateHttpCommunicationHandler } from '../handlers/auditing-create-http-communication.handler';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingCreateHttpCommunicationController', () =>
 {
@@ -45,8 +39,13 @@ describe('AuditingCreateHttpCommunicationController', () =>
 
         test('should return an httpCommunication created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(httpCommunications[0])));
-            expect(await controller.main(httpCommunications[0])).toBe(httpCommunications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+            expect(
+                await controller.main(
+                    auditingMockHttpCommunicationData[0],
+                ),
+            )
+                .toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

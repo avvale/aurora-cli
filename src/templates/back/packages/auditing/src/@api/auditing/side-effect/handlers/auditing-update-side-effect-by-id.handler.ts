@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindSideEffectByIdQuery } from '@app/auditing/side-effect/application/find/find-side-effect-by-id.query';
-import { UpdateSideEffectByIdCommand } from '@app/auditing/side-effect/application/update/update-side-effect-by-id.command';
+import { AuditingSideEffectDto, AuditingUpdateSideEffectByIdDto } from '@api/auditing/side-effect';
 import { AuditingSideEffect, AuditingUpdateSideEffectByIdInput } from '@api/graphql';
-import { AuditingSideEffectDto, AuditingUpdateSideEffectByIdDto } from '../dto';
+import { AuditingFindSideEffectByIdQuery, AuditingUpdateSideEffectByIdCommand } from '@app/auditing/side-effect';
+import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingUpdateSideEffectByIdHandler
@@ -21,7 +18,7 @@ export class AuditingUpdateSideEffectByIdHandler
         timezone?: string,
     ): Promise<AuditingSideEffect | AuditingSideEffectDto>
     {
-        const sideEffect = await this.queryBus.ask(new FindSideEffectByIdQuery(
+        const sideEffect = await this.queryBus.ask(new AuditingFindSideEffectByIdQuery(
             payload.id,
             constraint,
             {
@@ -31,7 +28,7 @@ export class AuditingUpdateSideEffectByIdHandler
 
         const dataToUpdate = Utils.diff(payload, sideEffect);
 
-        await this.commandBus.dispatch(new UpdateSideEffectByIdCommand(
+        await this.commandBus.dispatch(new AuditingUpdateSideEffectByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -42,7 +39,7 @@ export class AuditingUpdateSideEffectByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindSideEffectByIdQuery(
+        return await this.queryBus.ask(new AuditingFindSideEffectByIdQuery(
             payload.id,
             constraint,
             {

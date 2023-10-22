@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingPaginateHttpCommunicationsHandler, AuditingPaginateHttpCommunicationsResolver } from '@api/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingPaginateHttpCommunicationsResolver } from './auditing-paginate-http-communications.resolver';
-import { AuditingPaginateHttpCommunicationsHandler } from '../handlers/auditing-paginate-http-communications.handler';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingPaginateHttpCommunicationsResolver', () =>
 {
@@ -46,17 +41,17 @@ describe('AuditingPaginateHttpCommunicationsResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return a httpCommunications', async () =>
+        test('should return a auditingMockHttpCommunicationData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : httpCommunications,
+                rows : auditingMockHttpCommunicationData,
             })));
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : httpCommunications,
+                rows : auditingMockHttpCommunicationData,
             });
         });
     });

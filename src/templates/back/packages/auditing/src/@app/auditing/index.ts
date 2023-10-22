@@ -1,5 +1,5 @@
-import { AuditingSideEffectHandlers, AuditingSideEffectServices, AuditingSideEffectModel, ISideEffectRepository, SequelizeSideEffectRepository, SideEffectSagas } from './side-effect';
-import { AuditingHttpCommunicationHandlers, AuditingHttpCommunicationServices, AuditingHttpCommunicationModel, IHttpCommunicationRepository, SequelizeHttpCommunicationRepository, HttpCommunicationSagas } from './http-communication';
+import { AuditingSideEffectHandlers, AuditingSideEffectServices, AuditingSideEffectModel, AuditingISideEffectRepository, AuditingSequelizeSideEffectRepository, AuditingSideEffectSagas } from './side-effect';
+import { AuditingHttpCommunicationHandlers, AuditingHttpCommunicationServices, AuditingHttpCommunicationModel,  AuditingIHttpCommunicationRepository, AuditingSequelizeHttpCommunicationRepository, AuditingHttpCommunicationSagas } from './http-communication';
 
 export const AuditingHandlers = [
     ...AuditingSideEffectHandlers,
@@ -15,15 +15,15 @@ export const AuditingModels = [
 ];
 export const AuditingRepositories = [
     {
-        provide : ISideEffectRepository,
-        useClass: SequelizeSideEffectRepository
+        provide : AuditingIHttpCommunicationRepository,
+        useClass: AuditingSequelizeHttpCommunicationRepository
     },
     {
-        provide : IHttpCommunicationRepository,
-        useClass: SequelizeHttpCommunicationRepository
+        provide : AuditingISideEffectRepository,
+        useClass: AuditingSequelizeSideEffectRepository
     }
 ];
 export const AuditingSagas = [
-    SideEffectSagas,
-    HttpCommunicationSagas
+    AuditingHttpCommunicationSagas,
+    AuditingSideEffectSagas
 ];

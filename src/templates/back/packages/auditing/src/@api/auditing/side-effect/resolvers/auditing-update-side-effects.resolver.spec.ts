@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingUpdateSideEffectsResolver } from './auditing-update-side-effects.resolver';
-import { AuditingUpdateSideEffectsHandler } from '../handlers/auditing-update-side-effects.handler';
+import { AuditingUpdateSideEffectsHandler, AuditingUpdateSideEffectsResolver } from '@api/auditing/side-effect';
 import { AuditingUpdateSideEffectsInput } from '@api/graphql';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingUpdateSideEffectsResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('AuditingUpdateSideEffectsResolver', () =>
 
         test('should return a sideEffects updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(sideEffects[0])));
-            expect(await resolver.main(<AuditingUpdateSideEffectsInput>sideEffects[0])).toBe(sideEffects[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
+            expect(await resolver.main(<AuditingUpdateSideEffectsInput>auditingMockSideEffectData[0])).toBe(auditingMockSideEffectData[0]);
         });
     });
 });

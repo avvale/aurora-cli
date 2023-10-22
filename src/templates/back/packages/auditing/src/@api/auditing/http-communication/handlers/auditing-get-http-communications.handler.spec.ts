@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingGetHttpCommunicationsHandler } from '@api/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingGetHttpCommunicationsHandler } from './auditing-get-http-communications.handler';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingGetHttpCommunicationsHandler', () =>
 {
     let handler: AuditingGetHttpCommunicationsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('AuditingGetHttpCommunicationsHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<AuditingGetHttpCommunicationsHandler>(AuditingGetHttpCommunicationsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingGetHttpCommunicationsHandler should be defined', () =>
@@ -54,10 +42,17 @@ describe('AuditingGetHttpCommunicationsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return a httpCommunications', async () =>
+        test('should return a auditingMockHttpCommunicationData', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(httpCommunications)));
-            expect(await handler.main()).toBe(httpCommunications);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(auditingMockHttpCommunicationData);
         });
     });
 });

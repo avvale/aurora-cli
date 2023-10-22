@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingUpdateSideEffectsHandler } from './auditing-update-side-effects.handler';
+import { AuditingUpdateSideEffectsHandler } from '@api/auditing/side-effect';
 import { AuditingUpdateSideEffectsInput } from '@api/graphql';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingUpdateSideEffectsHandler', () =>
 {
     let handler: AuditingUpdateSideEffectsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -40,7 +35,6 @@ describe('AuditingUpdateSideEffectsHandler', () =>
 
         handler = module.get<AuditingUpdateSideEffectsHandler>(AuditingUpdateSideEffectsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingUpdateSideEffectsHandler should be defined', () =>
@@ -57,8 +51,16 @@ describe('AuditingUpdateSideEffectsHandler', () =>
 
         test('should return a sideEffects updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sideEffects[0])));
-            expect(await handler.main(<AuditingUpdateSideEffectsInput>sideEffects[0])).toBe(sideEffects[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
+            expect(
+                await handler.main(
+                    <AuditingUpdateSideEffectsInput>auditingMockSideEffectData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(auditingMockSideEffectData[0]);
         });
     });
 });

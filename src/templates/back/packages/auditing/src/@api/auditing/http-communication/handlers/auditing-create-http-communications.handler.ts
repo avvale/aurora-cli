@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateHttpCommunicationsCommand } from '@app/auditing/http-communication/application/create/create-http-communications.command';
+import { AuditingCreateHttpCommunicationDto } from '@api/auditing/http-communication';
 import { AuditingCreateHttpCommunicationInput } from '@api/graphql';
-import { AuditingCreateHttpCommunicationDto } from '../dto';
+import { AuditingCreateHttpCommunicationsCommand } from '@app/auditing/http-communication';
+import { ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingCreateHttpCommunicationsHandler
@@ -18,12 +16,13 @@ export class AuditingCreateHttpCommunicationsHandler
         timezone?: string,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateHttpCommunicationsCommand(
+        await this.commandBus.dispatch(new AuditingCreateHttpCommunicationsCommand(
             payload,
             {
                 timezone,
             },
         ));
+
         return true;
     }
 }

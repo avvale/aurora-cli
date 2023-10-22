@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingFindHttpCommunicationByIdController, AuditingFindHttpCommunicationByIdHandler } from '@api/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingFindHttpCommunicationByIdController } from './auditing-find-http-communication-by-id.controller';
-import { AuditingFindHttpCommunicationByIdHandler } from '../handlers/auditing-find-http-communication-by-id.handler';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingFindHttpCommunicationByIdController', () =>
 {
@@ -45,8 +39,8 @@ describe('AuditingFindHttpCommunicationByIdController', () =>
 
         test('should return an httpCommunication by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(httpCommunications[0])));
-            expect(await controller.main(httpCommunications[0].id)).toBe(httpCommunications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+            expect(await controller.main(auditingMockHttpCommunicationData[0].id)).toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

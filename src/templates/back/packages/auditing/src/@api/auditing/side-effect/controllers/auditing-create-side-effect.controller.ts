@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { AuditingSideEffectDto, AuditingCreateSideEffectDto } from '../dto';
+import { AuditingCreateSideEffectDto, AuditingCreateSideEffectHandler, AuditingSideEffectDto } from '@api/auditing/side-effect';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { AuditingCreateSideEffectHandler } from '../handlers/auditing-create-side-effect.handler';
+import { Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[auditing] side-effect')
 @Controller('auditing/side-effect/create')

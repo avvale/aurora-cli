@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingFindSideEffectByIdHandler, AuditingFindSideEffectByIdResolver } from '@api/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingFindSideEffectByIdResolver } from './auditing-find-side-effect-by-id.resolver';
-import { AuditingFindSideEffectByIdHandler } from '../handlers/auditing-find-side-effect-by-id.handler';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingFindSideEffectByIdResolver', () =>
 {
@@ -48,8 +43,8 @@ describe('AuditingFindSideEffectByIdResolver', () =>
 
         test('should return an sideEffect by id', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(sideEffects[0])));
-            expect(await resolver.main(sideEffects[0].id)).toBe(sideEffects[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
+            expect(await resolver.main(auditingMockSideEffectData[0].id)).toBe(auditingMockSideEffectData[0]);
         });
     });
 });

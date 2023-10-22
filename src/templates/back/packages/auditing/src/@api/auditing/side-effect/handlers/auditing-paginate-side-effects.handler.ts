@@ -1,9 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { PaginateSideEffectsQuery } from '@app/auditing/side-effect/application/paginate/paginate-side-effects.query';
 import { Pagination } from '@api/graphql';
+import { AuditingPaginateSideEffectsQuery } from '@app/auditing/side-effect';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingPaginateSideEffectsHandler
@@ -18,7 +16,7 @@ export class AuditingPaginateSideEffectsHandler
         timezone?: string,
     ): Promise<Pagination>
     {
-        return await this.queryBus.ask(new PaginateSideEffectsQuery(
+        return await this.queryBus.ask(new AuditingPaginateSideEffectsQuery(
             queryStatement,
             constraint,
             {

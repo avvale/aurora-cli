@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindHttpCommunicationByIdQuery } from '@app/auditing/http-communication/application/find/find-http-communication-by-id.query';
-import { DeleteHttpCommunicationByIdCommand } from '@app/auditing/http-communication/application/delete/delete-http-communication-by-id.command';
+import { AuditingHttpCommunicationDto } from '@api/auditing/http-communication';
 import { AuditingHttpCommunication } from '@api/graphql';
-import { AuditingHttpCommunicationDto } from '../dto';
+import { AuditingDeleteHttpCommunicationByIdCommand, AuditingFindHttpCommunicationByIdQuery } from '@app/auditing/http-communication';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingDeleteHttpCommunicationByIdHandler
@@ -21,7 +18,7 @@ export class AuditingDeleteHttpCommunicationByIdHandler
         timezone?: string,
     ): Promise<AuditingHttpCommunication | AuditingHttpCommunicationDto>
     {
-        const httpCommunication = await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
+        const httpCommunication = await this.queryBus.ask(new AuditingFindHttpCommunicationByIdQuery(
             id,
             constraint,
             {
@@ -29,7 +26,7 @@ export class AuditingDeleteHttpCommunicationByIdHandler
             },
         ));
 
-        await this.commandBus.dispatch(new DeleteHttpCommunicationByIdCommand(
+        await this.commandBus.dispatch(new AuditingDeleteHttpCommunicationByIdCommand(
             id,
             constraint,
             {

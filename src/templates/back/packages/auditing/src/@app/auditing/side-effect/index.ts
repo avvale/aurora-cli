@@ -1,88 +1,127 @@
-// commands
-import { CreateSideEffectCommandHandler } from './application/create/create-side-effect.command-handler';
-import { CreateSideEffectsCommandHandler } from './application/create/create-side-effects.command-handler';
-import { UpdateSideEffectByIdCommandHandler } from './application/update/update-side-effect-by-id.command-handler';
-import { UpdateSideEffectsCommandHandler } from './application/update/update-side-effects.command-handler';
-import { UpsertSideEffectCommandHandler } from './application/upsert/upsert-side-effect.command-handler';
-import { DeleteSideEffectByIdCommandHandler } from './application/delete/delete-side-effect-by-id.command-handler';
-import { DeleteSideEffectsCommandHandler } from './application/delete/delete-side-effects.command-handler';
+// export commands
+export { AuditingCreateSideEffectCommand } from './application/create/auditing-create-side-effect.command';
+export { AuditingCreateSideEffectsCommand } from './application/create/auditing-create-side-effects.command';
+export { AuditingUpdateSideEffectByIdCommand } from './application/update/auditing-update-side-effect-by-id.command';
+export { AuditingUpdateSideEffectsCommand } from './application/update/auditing-update-side-effects.command';
+export { AuditingUpsertSideEffectCommand } from './application/upsert/auditing-upsert-side-effect.command';
+export { AuditingDeleteSideEffectByIdCommand } from './application/delete/auditing-delete-side-effect-by-id.command';
+export { AuditingDeleteSideEffectsCommand } from './application/delete/auditing-delete-side-effects.command';
 
-// queries
-import { PaginateSideEffectsQueryHandler } from './application/paginate/paginate-side-effects.query-handler';
-import { GetSideEffectsQueryHandler } from './application/get/get-side-effects.query-handler';
-import { FindSideEffectQueryHandler } from './application/find/find-side-effect.query-handler';
-import { FindSideEffectByIdQueryHandler } from './application/find/find-side-effect-by-id.query-handler';
-import { RawSQLSideEffectsQueryHandler } from './application/raw-sql/raw-sql-side-effects.query-handler';
+// export queries
+export { AuditingPaginateSideEffectsQuery } from './application/paginate/auditing-paginate-side-effects.query';
+export { AuditingGetSideEffectsQuery } from './application/get/auditing-get-side-effects.query';
+export { AuditingFindSideEffectQuery } from './application/find/auditing-find-side-effect.query';
+export { AuditingFindSideEffectByIdQuery } from './application/find/auditing-find-side-effect-by-id.query';
+export { AuditingRawSQLSideEffectsQuery } from './application/raw-sql/auditing-raw-sql-side-effects.query';
 
-// events
-import { CreatedSideEffectEventHandler } from './application/events/created-side-effect.event-handler';
-import { CreatedSideEffectsEventHandler } from './application/events/created-side-effects.event-handler';
-import { UpdatedSideEffectEventHandler } from './application/events/updated-side-effect.event-handler';
-import { UpdatedSideEffectsEventHandler } from './application/events/updated-side-effects.event-handler';
-import { DeletedSideEffectEventHandler } from './application/events/deleted-side-effect.event-handler';
-import { DeletedSideEffectsEventHandler } from './application/events/deleted-side-effects.event-handler';
+// export mocks
+export { auditingMockSideEffectData } from './infrastructure/mock/auditing-mock-side-effect.data';
+export { AuditingMockSideEffectSeeder } from './infrastructure/mock/auditing-mock-side-effect.seeder';
+export { AuditingMockSideEffectRepository } from './infrastructure/mock/auditing-mock-side-effect.repository';
 
-// services
-import { CreateSideEffectService } from './application/create/create-side-effect.service';
-import { CreateSideEffectsService } from './application/create/create-side-effects.service';
-import { PaginateSideEffectsService } from './application/paginate/paginate-side-effects.service';
-import { GetSideEffectsService } from './application/get/get-side-effects.service';
-import { FindSideEffectService } from './application/find/find-side-effect.service';
-import { FindSideEffectByIdService } from './application/find/find-side-effect-by-id.service';
-import { RawSQLSideEffectsService } from './application/raw-sql/raw-sql-side-effects.service';
-import { UpdateSideEffectByIdService } from './application/update/update-side-effect-by-id.service';
-import { UpdateSideEffectsService } from './application/update/update-side-effects.service';
-import { UpsertSideEffectService } from './application/upsert/upsert-side-effect.service';
-import { DeleteSideEffectByIdService } from './application/delete/delete-side-effect-by-id.service';
-import { DeleteSideEffectsService } from './application/delete/delete-side-effects.service';
+// export events
+export { AuditingAddSideEffectsContextEvent } from './application/events/auditing-add-side-effects-context.event';
+export { AuditingCreatedSideEffectsEvent } from './application/events/auditing-created-side-effects.event';
+export { AuditingCreatedSideEffectEvent } from './application/events/auditing-created-side-effect.event';
+export { AuditingDeletedSideEffectsEvent } from './application/events/auditing-deleted-side-effects.event';
+export { AuditingDeletedSideEffectEvent } from './application/events/auditing-deleted-side-effect.event';
+export { AuditingUpdatedSideEffectsEvent } from './application/events/auditing-updated-side-effects.event';
+export { AuditingUpdatedSideEffectEvent } from './application/events/auditing-updated-side-effect.event';
 
-// models
-export { AuditingSideEffectModel } from './infrastructure/sequelize/sequelize-side-effect.model';
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
 
-// repository
-export { ISideEffectRepository } from './domain/side-effect.repository';
-export { SequelizeSideEffectRepository } from './infrastructure/sequelize/sequelize-side-effect.repository';
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
+// domain
+export { AuditingSideEffect } from './domain/auditing-side-effect.aggregate';
+export { AuditingSideEffectMapper } from './domain/auditing-side-effect.mapper';
+export { AuditingISideEffectRepository } from './domain/auditing-side-effect.repository';
+export { AuditingSideEffectResponse } from './domain/auditing-side-effect.response';
+
+// infrastructure
+export { AuditingSideEffectModel } from './infrastructure/sequelize/auditing-sequelize-side-effect.model';
+export { AuditingSequelizeSideEffectRepository } from './infrastructure/sequelize/auditing-sequelize-side-effect.repository';
 
 // sagas
-export { SideEffectSagas } from './application/sagas/side-effect.sagas';
+export { AuditingSideEffectSagas } from './application/sagas/auditing-side-effect.sagas';
+
+// command handlers
+import { AuditingCreateSideEffectCommandHandler } from './application/create/auditing-create-side-effect.command-handler';
+import { AuditingCreateSideEffectsCommandHandler } from './application/create/auditing-create-side-effects.command-handler';
+import { AuditingUpdateSideEffectByIdCommandHandler } from './application/update/auditing-update-side-effect-by-id.command-handler';
+import { AuditingUpdateSideEffectsCommandHandler } from './application/update/auditing-update-side-effects.command-handler';
+import { AuditingUpsertSideEffectCommandHandler } from './application/upsert/auditing-upsert-side-effect.command-handler';
+import { AuditingDeleteSideEffectByIdCommandHandler } from './application/delete/auditing-delete-side-effect-by-id.command-handler';
+import { AuditingDeleteSideEffectsCommandHandler } from './application/delete/auditing-delete-side-effects.command-handler';
+
+// query handlers
+import { AuditingPaginateSideEffectsQueryHandler } from './application/paginate/auditing-paginate-side-effects.query-handler';
+import { AuditingGetSideEffectsQueryHandler } from './application/get/auditing-get-side-effects.query-handler';
+import { AuditingFindSideEffectQueryHandler } from './application/find/auditing-find-side-effect.query-handler';
+import { AuditingFindSideEffectByIdQueryHandler } from './application/find/auditing-find-side-effect-by-id.query-handler';
+import { AuditingRawSQLSideEffectsQueryHandler } from './application/raw-sql/auditing-raw-sql-side-effects.query-handler';
+
+// event handlers
+import { AuditingCreatedSideEffectEventHandler } from './application/events/auditing-created-side-effect.event-handler';
+import { AuditingCreatedSideEffectsEventHandler } from './application/events/auditing-created-side-effects.event-handler';
+import { AuditingUpdatedSideEffectEventHandler } from './application/events/auditing-updated-side-effect.event-handler';
+import { AuditingUpdatedSideEffectsEventHandler } from './application/events/auditing-updated-side-effects.event-handler';
+import { AuditingDeletedSideEffectEventHandler } from './application/events/auditing-deleted-side-effect.event-handler';
+import { AuditingDeletedSideEffectsEventHandler } from './application/events/auditing-deleted-side-effects.event-handler';
+
+// services
+import { AuditingCreateSideEffectService } from './application/create/auditing-create-side-effect.service';
+import { AuditingCreateSideEffectsService } from './application/create/auditing-create-side-effects.service';
+import { AuditingPaginateSideEffectsService } from './application/paginate/auditing-paginate-side-effects.service';
+import { AuditingGetSideEffectsService } from './application/get/auditing-get-side-effects.service';
+import { AuditingFindSideEffectService } from './application/find/auditing-find-side-effect.service';
+import { AuditingFindSideEffectByIdService } from './application/find/auditing-find-side-effect-by-id.service';
+import { AuditingRawSQLSideEffectsService } from './application/raw-sql/auditing-raw-sql-side-effects.service';
+import { AuditingUpdateSideEffectByIdService } from './application/update/auditing-update-side-effect-by-id.service';
+import { AuditingUpdateSideEffectsService } from './application/update/auditing-update-side-effects.service';
+import { AuditingUpsertSideEffectService } from './application/upsert/auditing-upsert-side-effect.service';
+import { AuditingDeleteSideEffectByIdService } from './application/delete/auditing-delete-side-effect-by-id.service';
+import { AuditingDeleteSideEffectsService } from './application/delete/auditing-delete-side-effects.service';
 
 export const AuditingSideEffectHandlers = [
     // commands
-    CreateSideEffectCommandHandler,
-    CreateSideEffectsCommandHandler,
-    UpdateSideEffectByIdCommandHandler,
-    UpdateSideEffectsCommandHandler,
-    UpsertSideEffectCommandHandler,
-    DeleteSideEffectByIdCommandHandler,
-    DeleteSideEffectsCommandHandler,
+    AuditingCreateSideEffectCommandHandler,
+    AuditingCreateSideEffectsCommandHandler,
+    AuditingUpdateSideEffectByIdCommandHandler,
+    AuditingUpdateSideEffectsCommandHandler,
+    AuditingUpsertSideEffectCommandHandler,
+    AuditingDeleteSideEffectByIdCommandHandler,
+    AuditingDeleteSideEffectsCommandHandler,
 
     // queries
-    PaginateSideEffectsQueryHandler,
-    GetSideEffectsQueryHandler,
-    FindSideEffectQueryHandler,
-    FindSideEffectByIdQueryHandler,
-    RawSQLSideEffectsQueryHandler,
+    AuditingPaginateSideEffectsQueryHandler,
+    AuditingGetSideEffectsQueryHandler,
+    AuditingFindSideEffectQueryHandler,
+    AuditingFindSideEffectByIdQueryHandler,
+    AuditingRawSQLSideEffectsQueryHandler,
 
     // events
-    CreatedSideEffectEventHandler,
-    CreatedSideEffectsEventHandler,
-    UpdatedSideEffectEventHandler,
-    UpdatedSideEffectsEventHandler,
-    DeletedSideEffectEventHandler,
-    DeletedSideEffectsEventHandler,
+    AuditingCreatedSideEffectEventHandler,
+    AuditingCreatedSideEffectsEventHandler,
+    AuditingUpdatedSideEffectEventHandler,
+    AuditingUpdatedSideEffectsEventHandler,
+    AuditingDeletedSideEffectEventHandler,
+    AuditingDeletedSideEffectsEventHandler,
 ];
 
 export const AuditingSideEffectServices = [
-    CreateSideEffectService,
-    CreateSideEffectsService,
-    PaginateSideEffectsService,
-    GetSideEffectsService,
-    FindSideEffectService,
-    FindSideEffectByIdService,
-    RawSQLSideEffectsService,
-    UpdateSideEffectByIdService,
-    UpdateSideEffectsService,
-    UpsertSideEffectService,
-    DeleteSideEffectByIdService,
-    DeleteSideEffectsService,
+    AuditingCreateSideEffectService,
+    AuditingCreateSideEffectsService,
+    AuditingPaginateSideEffectsService,
+    AuditingGetSideEffectsService,
+    AuditingFindSideEffectService,
+    AuditingFindSideEffectByIdService,
+    AuditingRawSQLSideEffectsService,
+    AuditingUpdateSideEffectByIdService,
+    AuditingUpdateSideEffectsService,
+    AuditingUpsertSideEffectService,
+    AuditingDeleteSideEffectByIdService,
+    AuditingDeleteSideEffectsService,
 ];

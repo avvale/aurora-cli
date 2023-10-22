@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
-
-// @app
-import { CreateSideEffectsCommand } from '@app/auditing/side-effect/application/create/create-side-effects.command';
+import { AuditingCreateSideEffectDto } from '@api/auditing/side-effect';
 import { AuditingCreateSideEffectInput } from '@api/graphql';
-import { AuditingCreateSideEffectDto } from '../dto';
+import { AuditingCreateSideEffectsCommand } from '@app/auditing/side-effect';
+import { ICommandBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingCreateSideEffectsHandler
@@ -18,12 +16,13 @@ export class AuditingCreateSideEffectsHandler
         timezone?: string,
     ): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateSideEffectsCommand(
+        await this.commandBus.dispatch(new AuditingCreateSideEffectsCommand(
             payload,
             {
                 timezone,
             },
         ));
+
         return true;
     }
 }

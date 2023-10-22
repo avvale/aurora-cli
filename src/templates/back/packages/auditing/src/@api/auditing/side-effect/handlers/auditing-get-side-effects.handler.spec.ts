@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingGetSideEffectsHandler } from '@api/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingGetSideEffectsHandler } from './auditing-get-side-effects.handler';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingGetSideEffectsHandler', () =>
 {
     let handler: AuditingGetSideEffectsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('AuditingGetSideEffectsHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<AuditingGetSideEffectsHandler>(AuditingGetSideEffectsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingGetSideEffectsHandler should be defined', () =>
@@ -54,10 +42,17 @@ describe('AuditingGetSideEffectsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return a sideEffects', async () =>
+        test('should return a auditingMockSideEffectData', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sideEffects)));
-            expect(await handler.main()).toBe(sideEffects);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(auditingMockSideEffectData);
         });
     });
 });

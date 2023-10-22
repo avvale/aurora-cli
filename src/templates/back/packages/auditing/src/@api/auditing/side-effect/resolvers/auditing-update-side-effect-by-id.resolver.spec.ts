@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingUpdateSideEffectByIdResolver } from './auditing-update-side-effect-by-id.resolver';
-import { AuditingUpdateSideEffectByIdHandler } from '../handlers/auditing-update-side-effect-by-id.handler';
+import { AuditingUpdateSideEffectByIdHandler, AuditingUpdateSideEffectByIdResolver } from '@api/auditing/side-effect';
 import { AuditingUpdateSideEffectByIdInput } from '@api/graphql';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingUpdateSideEffectByIdResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('AuditingUpdateSideEffectByIdResolver', () =>
 
         test('should return a sideEffect by id updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(sideEffects[0])));
-            expect(await resolver.main(<AuditingUpdateSideEffectByIdInput>sideEffects[0])).toBe(sideEffects[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
+            expect(await resolver.main(<AuditingUpdateSideEffectByIdInput>auditingMockSideEffectData[0])).toBe(auditingMockSideEffectData[0]);
         });
     });
 });

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { ICommandBus, Operator } from '@aurorajs.dev/core';
-import { DeleteSideEffectsCommand } from '@app/auditing/side-effect/application/delete/delete-side-effects.command';
+import { AuditingDeleteSideEffectsCommand } from '@app/auditing/side-effect';
 import * as dayjs from 'dayjs';
 
 @Injectable()
@@ -19,9 +19,11 @@ export class AuditingDeleteHttpCommunicationTasksService
     {
         try
         {
-            const deleteBeforeAt = dayjs().subtract(1, 'month').format('YYYY-MM-DD HH:mm:ss');
+            const deleteBeforeAt = dayjs()
+                .subtract(1, 'month')
+                .format('YYYY-MM-DD HH:mm:ss');
 
-            await this.commandBus.dispatch(new DeleteSideEffectsCommand(
+            await this.commandBus.dispatch(new AuditingDeleteSideEffectsCommand(
                 {
                     where: {
                         createdAt: {

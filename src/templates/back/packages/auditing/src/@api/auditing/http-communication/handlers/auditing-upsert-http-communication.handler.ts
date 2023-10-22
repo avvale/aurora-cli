@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindHttpCommunicationByIdQuery } from '@app/auditing/http-communication/application/find/find-http-communication-by-id.query';
-import { UpsertHttpCommunicationCommand } from '@app/auditing/http-communication/application/upsert/upsert-http-communication.command';
+import { AuditingHttpCommunicationDto, AuditingUpdateHttpCommunicationByIdDto } from '@api/auditing/http-communication';
 import { AuditingHttpCommunication, AuditingUpdateHttpCommunicationByIdInput } from '@api/graphql';
-import { AuditingHttpCommunicationDto, AuditingUpdateHttpCommunicationByIdDto } from '../dto';
+import { AuditingFindHttpCommunicationByIdQuery, AuditingUpsertHttpCommunicationCommand } from '@app/auditing/http-communication';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingUpsertHttpCommunicationHandler
@@ -20,14 +17,14 @@ export class AuditingUpsertHttpCommunicationHandler
         timezone?: string,
     ): Promise<AuditingHttpCommunication | AuditingHttpCommunicationDto>
     {
-        await this.commandBus.dispatch(new UpsertHttpCommunicationCommand(
+        await this.commandBus.dispatch(new AuditingUpsertHttpCommunicationCommand(
             payload,
             {
                 timezone,
             },
         ));
 
-        return await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
+        return await this.queryBus.ask(new AuditingFindHttpCommunicationByIdQuery(
             payload.id,
             {},
             {

@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { AuditingCreateSideEffectHandler } from '@api/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingCreateSideEffectHandler } from './auditing-create-side-effect.handler';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingCreateSideEffectHandler', () =>
 {
     let handler: AuditingCreateSideEffectHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('AuditingCreateSideEffectHandler', () =>
 
         handler = module.get<AuditingCreateSideEffectHandler>(AuditingCreateSideEffectHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,14 @@ describe('AuditingCreateSideEffectHandler', () =>
 
         test('should return an sideEffect created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sideEffects[0])));
-            expect(await handler.main(sideEffects[0])).toBe(sideEffects[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
+            expect(
+                await handler.main(
+                    auditingMockSideEffectData[0],
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(auditingMockSideEffectData[0]);
         });
     });
 });

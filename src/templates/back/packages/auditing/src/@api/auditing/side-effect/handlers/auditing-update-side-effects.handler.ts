@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetSideEffectsQuery } from '@app/auditing/side-effect/application/get/get-side-effects.query';
-import { UpdateSideEffectsCommand } from '@app/auditing/side-effect/application/update/update-side-effects.command';
+import { AuditingSideEffectDto, AuditingUpdateSideEffectsDto } from '@api/auditing/side-effect';
 import { AuditingSideEffect, AuditingUpdateSideEffectsInput } from '@api/graphql';
-import { AuditingSideEffectDto, AuditingUpdateSideEffectsDto } from '../dto';
+import { AuditingGetSideEffectsQuery, AuditingUpdateSideEffectsCommand } from '@app/auditing/side-effect';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingUpdateSideEffectsHandler
@@ -22,7 +19,7 @@ export class AuditingUpdateSideEffectsHandler
         timezone?: string,
     ): Promise<AuditingSideEffect | AuditingSideEffectDto>
     {
-        await this.commandBus.dispatch(new UpdateSideEffectsCommand(
+        await this.commandBus.dispatch(new AuditingUpdateSideEffectsCommand(
             payload,
             queryStatement,
             constraint,
@@ -31,7 +28,7 @@ export class AuditingUpdateSideEffectsHandler
             },
         ));
 
-        return await this.queryBus.ask(new GetSideEffectsQuery(
+        return await this.queryBus.ask(new AuditingGetSideEffectsQuery(
             queryStatement,
             constraint,
             {

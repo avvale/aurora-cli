@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingUpdateSideEffectByIdHandler } from './auditing-update-side-effect-by-id.handler';
+import { AuditingUpdateSideEffectByIdHandler } from '@api/auditing/side-effect';
 import { AuditingUpdateSideEffectByIdInput } from '@api/graphql';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingUpdateSideEffectByIdHandler', () =>
 {
     let handler: AuditingUpdateSideEffectByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -40,7 +35,6 @@ describe('AuditingUpdateSideEffectByIdHandler', () =>
 
         handler = module.get<AuditingUpdateSideEffectByIdHandler>(AuditingUpdateSideEffectByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingUpdateSideEffectByIdHandler should be defined', () =>
@@ -57,8 +51,14 @@ describe('AuditingUpdateSideEffectByIdHandler', () =>
 
         test('should return a sideEffect updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sideEffects[0])));
-            expect(await handler.main(<AuditingUpdateSideEffectByIdInput>sideEffects[0])).toBe(sideEffects[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
+            expect(
+                await handler.main(
+                    <AuditingUpdateSideEffectByIdInput>auditingMockSideEffectData[0],
+                    {},
+                    'Europe/Madrid',
+                ))
+                .toBe(auditingMockSideEffectData[0]);
         });
     });
 });

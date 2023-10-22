@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiTags, ApiOkResponse, ApiOperation, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { AuditingHttpCommunicationDto } from '../dto';
+import { AuditingFindHttpCommunicationHandler, AuditingHttpCommunicationDto } from '@api/auditing/http-communication';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { AuditingFindHttpCommunicationHandler } from '../handlers/auditing-find-http-communication.handler';
+import { QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[auditing] http-communication')
 @Controller('auditing/http-communication/find')

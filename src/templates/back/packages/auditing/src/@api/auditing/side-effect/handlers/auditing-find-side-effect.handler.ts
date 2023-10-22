@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { FindSideEffectQuery } from '@app/auditing/side-effect/application/find/find-side-effect.query';
+import { AuditingSideEffectDto } from '@api/auditing/side-effect';
 import { AuditingSideEffect } from '@api/graphql';
-import { AuditingSideEffectDto } from '../dto';
+import { AuditingFindSideEffectQuery } from '@app/auditing/side-effect';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingFindSideEffectHandler
@@ -19,7 +17,7 @@ export class AuditingFindSideEffectHandler
         timezone?: string,
     ): Promise<AuditingSideEffect | AuditingSideEffectDto>
     {
-        return await this.queryBus.ask(new FindSideEffectQuery(
+        return await this.queryBus.ask(new AuditingFindSideEffectQuery(
             queryStatement,
             constraint,
             {

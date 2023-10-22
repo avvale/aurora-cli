@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
-import { Auth } from '@aurora/decorators';
-
-// @app
-import { AuditingCreateSideEffectsHandler } from '../handlers/auditing-create-side-effects.handler';
+import { AuditingCreateSideEffectsHandler } from '@api/auditing/side-effect';
 import { AuditingCreateSideEffectInput } from '@api/graphql';
+import { Auth } from '@aurora/decorators';
+import { Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('auditing.sideEffect.create')

@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingUpdateHttpCommunicationsResolver } from './auditing-update-http-communications.resolver';
-import { AuditingUpdateHttpCommunicationsHandler } from '../handlers/auditing-update-http-communications.handler';
+import { AuditingUpdateHttpCommunicationsHandler, AuditingUpdateHttpCommunicationsResolver } from '@api/auditing/http-communication';
 import { AuditingUpdateHttpCommunicationsInput } from '@api/graphql';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingUpdateHttpCommunicationsResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('AuditingUpdateHttpCommunicationsResolver', () =>
 
         test('should return a httpCommunications updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(httpCommunications[0])));
-            expect(await resolver.main(<AuditingUpdateHttpCommunicationsInput>httpCommunications[0])).toBe(httpCommunications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+            expect(await resolver.main(<AuditingUpdateHttpCommunicationsInput>auditingMockHttpCommunicationData[0])).toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

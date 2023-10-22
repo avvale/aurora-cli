@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { AuditingDeleteSideEffectsHandler } from '@api/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingDeleteSideEffectsHandler } from './auditing-delete-side-effects.handler';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingDeleteSideEffectsHandler', () =>
 {
     let handler: AuditingDeleteSideEffectsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('AuditingDeleteSideEffectsHandler', () =>
 
         handler = module.get<AuditingDeleteSideEffectsHandler>(AuditingDeleteSideEffectsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingDeleteSideEffectsHandler should be defined', () =>
@@ -54,10 +48,17 @@ describe('AuditingDeleteSideEffectsHandler', () =>
             expect(handler).toBeDefined();
         });
 
-        test('should return an sideEffects deleted', async () =>
+        test('should return an auditingMockSideEffectData deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(sideEffects)));
-            expect(await handler.main()).toBe(sideEffects);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData)));
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(auditingMockSideEffectData);
         });
     });
 });

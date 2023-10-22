@@ -1,88 +1,127 @@
-// commands
-import { CreateHttpCommunicationCommandHandler } from './application/create/create-http-communication.command-handler';
-import { CreateHttpCommunicationsCommandHandler } from './application/create/create-http-communications.command-handler';
-import { UpdateHttpCommunicationByIdCommandHandler } from './application/update/update-http-communication-by-id.command-handler';
-import { UpdateHttpCommunicationsCommandHandler } from './application/update/update-http-communications.command-handler';
-import { UpsertHttpCommunicationCommandHandler } from './application/upsert/upsert-http-communication.command-handler';
-import { DeleteHttpCommunicationByIdCommandHandler } from './application/delete/delete-http-communication-by-id.command-handler';
-import { DeleteHttpCommunicationsCommandHandler } from './application/delete/delete-http-communications.command-handler';
+// export commands
+export { AuditingCreateHttpCommunicationCommand } from './application/create/auditing-create-http-communication.command';
+export { AuditingCreateHttpCommunicationsCommand } from './application/create/auditing-create-http-communications.command';
+export { AuditingUpdateHttpCommunicationByIdCommand } from './application/update/auditing-update-http-communication-by-id.command';
+export { AuditingUpdateHttpCommunicationsCommand } from './application/update/auditing-update-http-communications.command';
+export { AuditingUpsertHttpCommunicationCommand } from './application/upsert/auditing-upsert-http-communication.command';
+export { AuditingDeleteHttpCommunicationByIdCommand } from './application/delete/auditing-delete-http-communication-by-id.command';
+export { AuditingDeleteHttpCommunicationsCommand } from './application/delete/auditing-delete-http-communications.command';
 
-// queries
-import { PaginateHttpCommunicationsQueryHandler } from './application/paginate/paginate-http-communications.query-handler';
-import { GetHttpCommunicationsQueryHandler } from './application/get/get-http-communications.query-handler';
-import { FindHttpCommunicationQueryHandler } from './application/find/find-http-communication.query-handler';
-import { FindHttpCommunicationByIdQueryHandler } from './application/find/find-http-communication-by-id.query-handler';
-import { RawSQLHttpCommunicationsQueryHandler } from './application/raw-sql/raw-sql-http-communications.query-handler';
+// export queries
+export { AuditingPaginateHttpCommunicationsQuery } from './application/paginate/auditing-paginate-http-communications.query';
+export { AuditingGetHttpCommunicationsQuery } from './application/get/auditing-get-http-communications.query';
+export { AuditingFindHttpCommunicationQuery } from './application/find/auditing-find-http-communication.query';
+export { AuditingFindHttpCommunicationByIdQuery } from './application/find/auditing-find-http-communication-by-id.query';
+export { AuditingRawSQLHttpCommunicationsQuery } from './application/raw-sql/auditing-raw-sql-http-communications.query';
 
-// events
-import { CreatedHttpCommunicationEventHandler } from './application/events/created-http-communication.event-handler';
-import { CreatedHttpCommunicationsEventHandler } from './application/events/created-http-communications.event-handler';
-import { UpdatedHttpCommunicationEventHandler } from './application/events/updated-http-communication.event-handler';
-import { UpdatedHttpCommunicationsEventHandler } from './application/events/updated-http-communications.event-handler';
-import { DeletedHttpCommunicationEventHandler } from './application/events/deleted-http-communication.event-handler';
-import { DeletedHttpCommunicationsEventHandler } from './application/events/deleted-http-communications.event-handler';
+// export mocks
+export { auditingMockHttpCommunicationData } from './infrastructure/mock/auditing-mock-http-communication.data';
+export { AuditingMockHttpCommunicationSeeder } from './infrastructure/mock/auditing-mock-http-communication.seeder';
+export { AuditingMockHttpCommunicationRepository } from './infrastructure/mock/auditing-mock-http-communication.repository';
 
-// services
-import { CreateHttpCommunicationService } from './application/create/create-http-communication.service';
-import { CreateHttpCommunicationsService } from './application/create/create-http-communications.service';
-import { PaginateHttpCommunicationsService } from './application/paginate/paginate-http-communications.service';
-import { GetHttpCommunicationsService } from './application/get/get-http-communications.service';
-import { FindHttpCommunicationService } from './application/find/find-http-communication.service';
-import { FindHttpCommunicationByIdService } from './application/find/find-http-communication-by-id.service';
-import { RawSQLHttpCommunicationsService } from './application/raw-sql/raw-sql-http-communications.service';
-import { UpdateHttpCommunicationByIdService } from './application/update/update-http-communication-by-id.service';
-import { UpdateHttpCommunicationsService } from './application/update/update-http-communications.service';
-import { UpsertHttpCommunicationService } from './application/upsert/upsert-http-communication.service';
-import { DeleteHttpCommunicationByIdService } from './application/delete/delete-http-communication-by-id.service';
-import { DeleteHttpCommunicationsService } from './application/delete/delete-http-communications.service';
+// export events
+export { AuditingAddHttpCommunicationsContextEvent } from './application/events/auditing-add-http-communications-context.event';
+export { AuditingCreatedHttpCommunicationsEvent } from './application/events/auditing-created-http-communications.event';
+export { AuditingCreatedHttpCommunicationEvent } from './application/events/auditing-created-http-communication.event';
+export { AuditingDeletedHttpCommunicationsEvent } from './application/events/auditing-deleted-http-communications.event';
+export { AuditingDeletedHttpCommunicationEvent } from './application/events/auditing-deleted-http-communication.event';
+export { AuditingUpdatedHttpCommunicationsEvent } from './application/events/auditing-updated-http-communications.event';
+export { AuditingUpdatedHttpCommunicationEvent } from './application/events/auditing-updated-http-communication.event';
 
-// models
-export { AuditingHttpCommunicationModel } from './infrastructure/sequelize/sequelize-http-communication.model';
+// export command handlers
+// can not export application command handlers, because Nest can't resolve dependencies
 
-// repository
-export { IHttpCommunicationRepository } from './domain/http-communication.repository';
-export { SequelizeHttpCommunicationRepository } from './infrastructure/sequelize/sequelize-http-communication.repository';
+// export command services
+// can not export application services, because Nest can't resolve dependencies
+
+// domain
+export { AuditingHttpCommunication } from './domain/auditing-http-communication.aggregate';
+export { AuditingHttpCommunicationMapper } from './domain/auditing-http-communication.mapper';
+export { AuditingIHttpCommunicationRepository } from './domain/auditing-http-communication.repository';
+export { AuditingHttpCommunicationResponse } from './domain/auditing-http-communication.response';
+
+// infrastructure
+export { AuditingHttpCommunicationModel } from './infrastructure/sequelize/auditing-sequelize-http-communication.model';
+export { AuditingSequelizeHttpCommunicationRepository } from './infrastructure/sequelize/auditing-sequelize-http-communication.repository';
 
 // sagas
-export { HttpCommunicationSagas } from './application/sagas/http-communication.sagas';
+export { AuditingHttpCommunicationSagas } from './application/sagas/auditing-http-communication.sagas';
+
+// command handlers
+import { AuditingCreateHttpCommunicationCommandHandler } from './application/create/auditing-create-http-communication.command-handler';
+import { AuditingCreateHttpCommunicationsCommandHandler } from './application/create/auditing-create-http-communications.command-handler';
+import { AuditingUpdateHttpCommunicationByIdCommandHandler } from './application/update/auditing-update-http-communication-by-id.command-handler';
+import { AuditingUpdateHttpCommunicationsCommandHandler } from './application/update/auditing-update-http-communications.command-handler';
+import { AuditingUpsertHttpCommunicationCommandHandler } from './application/upsert/auditing-upsert-http-communication.command-handler';
+import { AuditingDeleteHttpCommunicationByIdCommandHandler } from './application/delete/auditing-delete-http-communication-by-id.command-handler';
+import { AuditingDeleteHttpCommunicationsCommandHandler } from './application/delete/auditing-delete-http-communications.command-handler';
+
+// query handlers
+import { AuditingPaginateHttpCommunicationsQueryHandler } from './application/paginate/auditing-paginate-http-communications.query-handler';
+import { AuditingGetHttpCommunicationsQueryHandler } from './application/get/auditing-get-http-communications.query-handler';
+import { AuditingFindHttpCommunicationQueryHandler } from './application/find/auditing-find-http-communication.query-handler';
+import { AuditingFindHttpCommunicationByIdQueryHandler } from './application/find/auditing-find-http-communication-by-id.query-handler';
+import { AuditingRawSQLHttpCommunicationsQueryHandler } from './application/raw-sql/auditing-raw-sql-http-communications.query-handler';
+
+// event handlers
+import { AuditingCreatedHttpCommunicationEventHandler } from './application/events/auditing-created-http-communication.event-handler';
+import { AuditingCreatedHttpCommunicationsEventHandler } from './application/events/auditing-created-http-communications.event-handler';
+import { AuditingUpdatedHttpCommunicationEventHandler } from './application/events/auditing-updated-http-communication.event-handler';
+import { AuditingUpdatedHttpCommunicationsEventHandler } from './application/events/auditing-updated-http-communications.event-handler';
+import { AuditingDeletedHttpCommunicationEventHandler } from './application/events/auditing-deleted-http-communication.event-handler';
+import { AuditingDeletedHttpCommunicationsEventHandler } from './application/events/auditing-deleted-http-communications.event-handler';
+
+// services
+import { AuditingCreateHttpCommunicationService } from './application/create/auditing-create-http-communication.service';
+import { AuditingCreateHttpCommunicationsService } from './application/create/auditing-create-http-communications.service';
+import { AuditingPaginateHttpCommunicationsService } from './application/paginate/auditing-paginate-http-communications.service';
+import { AuditingGetHttpCommunicationsService } from './application/get/auditing-get-http-communications.service';
+import { AuditingFindHttpCommunicationService } from './application/find/auditing-find-http-communication.service';
+import { AuditingFindHttpCommunicationByIdService } from './application/find/auditing-find-http-communication-by-id.service';
+import { AuditingRawSQLHttpCommunicationsService } from './application/raw-sql/auditing-raw-sql-http-communications.service';
+import { AuditingUpdateHttpCommunicationByIdService } from './application/update/auditing-update-http-communication-by-id.service';
+import { AuditingUpdateHttpCommunicationsService } from './application/update/auditing-update-http-communications.service';
+import { AuditingUpsertHttpCommunicationService } from './application/upsert/auditing-upsert-http-communication.service';
+import { AuditingDeleteHttpCommunicationByIdService } from './application/delete/auditing-delete-http-communication-by-id.service';
+import { AuditingDeleteHttpCommunicationsService } from './application/delete/auditing-delete-http-communications.service';
 
 export const AuditingHttpCommunicationHandlers = [
     // commands
-    CreateHttpCommunicationCommandHandler,
-    CreateHttpCommunicationsCommandHandler,
-    UpdateHttpCommunicationByIdCommandHandler,
-    UpdateHttpCommunicationsCommandHandler,
-    UpsertHttpCommunicationCommandHandler,
-    DeleteHttpCommunicationByIdCommandHandler,
-    DeleteHttpCommunicationsCommandHandler,
+    AuditingCreateHttpCommunicationCommandHandler,
+    AuditingCreateHttpCommunicationsCommandHandler,
+    AuditingUpdateHttpCommunicationByIdCommandHandler,
+    AuditingUpdateHttpCommunicationsCommandHandler,
+    AuditingUpsertHttpCommunicationCommandHandler,
+    AuditingDeleteHttpCommunicationByIdCommandHandler,
+    AuditingDeleteHttpCommunicationsCommandHandler,
 
     // queries
-    PaginateHttpCommunicationsQueryHandler,
-    GetHttpCommunicationsQueryHandler,
-    FindHttpCommunicationQueryHandler,
-    FindHttpCommunicationByIdQueryHandler,
-    RawSQLHttpCommunicationsQueryHandler,
+    AuditingPaginateHttpCommunicationsQueryHandler,
+    AuditingGetHttpCommunicationsQueryHandler,
+    AuditingFindHttpCommunicationQueryHandler,
+    AuditingFindHttpCommunicationByIdQueryHandler,
+    AuditingRawSQLHttpCommunicationsQueryHandler,
 
     // events
-    CreatedHttpCommunicationEventHandler,
-    CreatedHttpCommunicationsEventHandler,
-    UpdatedHttpCommunicationEventHandler,
-    UpdatedHttpCommunicationsEventHandler,
-    DeletedHttpCommunicationEventHandler,
-    DeletedHttpCommunicationsEventHandler,
+    AuditingCreatedHttpCommunicationEventHandler,
+    AuditingCreatedHttpCommunicationsEventHandler,
+    AuditingUpdatedHttpCommunicationEventHandler,
+    AuditingUpdatedHttpCommunicationsEventHandler,
+    AuditingDeletedHttpCommunicationEventHandler,
+    AuditingDeletedHttpCommunicationsEventHandler,
 ];
 
 export const AuditingHttpCommunicationServices = [
-    CreateHttpCommunicationService,
-    CreateHttpCommunicationsService,
-    PaginateHttpCommunicationsService,
-    GetHttpCommunicationsService,
-    FindHttpCommunicationService,
-    FindHttpCommunicationByIdService,
-    RawSQLHttpCommunicationsService,
-    UpdateHttpCommunicationByIdService,
-    UpdateHttpCommunicationsService,
-    UpsertHttpCommunicationService,
-    DeleteHttpCommunicationByIdService,
-    DeleteHttpCommunicationsService,
+    AuditingCreateHttpCommunicationService,
+    AuditingCreateHttpCommunicationsService,
+    AuditingPaginateHttpCommunicationsService,
+    AuditingGetHttpCommunicationsService,
+    AuditingFindHttpCommunicationService,
+    AuditingFindHttpCommunicationByIdService,
+    AuditingRawSQLHttpCommunicationsService,
+    AuditingUpdateHttpCommunicationByIdService,
+    AuditingUpdateHttpCommunicationsService,
+    AuditingUpsertHttpCommunicationService,
+    AuditingDeleteHttpCommunicationByIdService,
+    AuditingDeleteHttpCommunicationsService,
 ];

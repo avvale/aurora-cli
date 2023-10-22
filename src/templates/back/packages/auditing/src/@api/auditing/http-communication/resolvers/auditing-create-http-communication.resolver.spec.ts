@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingCreateHttpCommunicationResolver } from './auditing-create-http-communication.resolver';
-import { AuditingCreateHttpCommunicationHandler } from '../handlers/auditing-create-http-communication.handler';
+import { AuditingCreateHttpCommunicationHandler, AuditingCreateHttpCommunicationResolver } from '@api/auditing/http-communication';
 import { AuditingCreateHttpCommunicationInput } from '@api/graphql';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingCreateHttpCommunicationResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('AuditingCreateHttpCommunicationResolver', () =>
 
         test('should return an httpCommunication created', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(httpCommunications[0])));
-            expect(await resolver.main(<AuditingCreateHttpCommunicationInput>httpCommunications[0])).toBe(httpCommunications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+            expect(await resolver.main(<AuditingCreateHttpCommunicationInput>auditingMockHttpCommunicationData[0])).toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

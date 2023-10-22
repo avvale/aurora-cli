@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingUpdateHttpCommunicationByIdResolver } from './auditing-update-http-communication-by-id.resolver';
-import { AuditingUpdateHttpCommunicationByIdHandler } from '../handlers/auditing-update-http-communication-by-id.handler';
+import { AuditingUpdateHttpCommunicationByIdHandler, AuditingUpdateHttpCommunicationByIdResolver } from '@api/auditing/http-communication';
 import { AuditingUpdateHttpCommunicationByIdInput } from '@api/graphql';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingUpdateHttpCommunicationByIdResolver', () =>
 {
@@ -49,8 +44,8 @@ describe('AuditingUpdateHttpCommunicationByIdResolver', () =>
 
         test('should return a httpCommunication by id updated', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(httpCommunications[0])));
-            expect(await resolver.main(<AuditingUpdateHttpCommunicationByIdInput>httpCommunications[0])).toBe(httpCommunications[0]);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+            expect(await resolver.main(<AuditingUpdateHttpCommunicationByIdInput>auditingMockHttpCommunicationData[0])).toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

@@ -1,19 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingUpdateHttpCommunicationsHandler } from './auditing-update-http-communications.handler';
+import { AuditingUpdateHttpCommunicationsHandler } from '@api/auditing/http-communication';
 import { AuditingUpdateHttpCommunicationsInput } from '@api/graphql';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingUpdateHttpCommunicationsHandler', () =>
 {
     let handler: AuditingUpdateHttpCommunicationsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -40,7 +35,6 @@ describe('AuditingUpdateHttpCommunicationsHandler', () =>
 
         handler = module.get<AuditingUpdateHttpCommunicationsHandler>(AuditingUpdateHttpCommunicationsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingUpdateHttpCommunicationsHandler should be defined', () =>
@@ -57,8 +51,16 @@ describe('AuditingUpdateHttpCommunicationsHandler', () =>
 
         test('should return a httpCommunications updated', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(httpCommunications[0])));
-            expect(await handler.main(<AuditingUpdateHttpCommunicationsInput>httpCommunications[0])).toBe(httpCommunications[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+            expect(
+                await handler.main(
+                    <AuditingUpdateHttpCommunicationsInput>auditingMockHttpCommunicationData[0],
+                    {},
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

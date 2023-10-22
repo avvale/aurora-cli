@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingGetHttpCommunicationsHandler, AuditingGetHttpCommunicationsResolver } from '@api/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingGetHttpCommunicationsResolver } from './auditing-get-http-communications.resolver';
-import { AuditingGetHttpCommunicationsHandler } from '../handlers/auditing-get-http-communications.handler';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingGetHttpCommunicationsResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('AuditingGetHttpCommunicationsResolver', () =>
             expect(resolver).   toBeDefined();
         });
 
-        test('should return a httpCommunications', async () =>
+        test('should return a auditingMockHttpCommunicationData', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(httpCommunications)));
-            expect(await resolver.main()).toBe(httpCommunications);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData)));
+            expect(await resolver.main()).toBe(auditingMockHttpCommunicationData);
         });
     });
 });

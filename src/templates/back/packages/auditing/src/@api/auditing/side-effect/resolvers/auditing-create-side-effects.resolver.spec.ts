@@ -1,17 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingCreateSideEffectsResolver } from './auditing-create-side-effects.resolver';
-import { AuditingCreateSideEffectsHandler } from '../handlers/auditing-create-side-effects.handler';
+import { AuditingCreateSideEffectsHandler, AuditingCreateSideEffectsResolver } from '@api/auditing/side-effect';
 import { AuditingCreateSideEffectInput } from '@api/graphql';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingCreateSideEffectsResolver', () =>
 {
     let resolver: AuditingCreateSideEffectsResolver;
-    let handler: AuditingCreateSideEffectsHandler;
 
     beforeAll(async () =>
     {
@@ -29,7 +23,6 @@ describe('AuditingCreateSideEffectsResolver', () =>
             .compile();
 
         resolver = module.get<AuditingCreateSideEffectsResolver>(AuditingCreateSideEffectsResolver);
-        handler = module.get<AuditingCreateSideEffectsHandler>(AuditingCreateSideEffectsHandler);
     });
 
     test('AuditingCreateSideEffectsResolver should be defined', () =>
@@ -46,7 +39,7 @@ describe('AuditingCreateSideEffectsResolver', () =>
 
         test('should return an sideEffects created', async () =>
         {
-            expect(await resolver.main(<AuditingCreateSideEffectInput[]>sideEffects)).toBe(undefined);
+            expect(await resolver.main(<AuditingCreateSideEffectInput[]>auditingMockSideEffectData)).toBe(undefined);
         });
     });
 });

@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// @app
-import { FindSideEffectByIdQuery } from '@app/auditing/side-effect/application/find/find-side-effect-by-id.query';
-import { UpsertSideEffectCommand } from '@app/auditing/side-effect/application/upsert/upsert-side-effect.command';
+import { AuditingSideEffectDto, AuditingUpdateSideEffectByIdDto } from '@api/auditing/side-effect';
 import { AuditingSideEffect, AuditingUpdateSideEffectByIdInput } from '@api/graphql';
-import { AuditingSideEffectDto, AuditingUpdateSideEffectByIdDto } from '../dto';
+import { AuditingFindSideEffectByIdQuery, AuditingUpsertSideEffectCommand } from '@app/auditing/side-effect';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingUpsertSideEffectHandler
@@ -20,14 +17,14 @@ export class AuditingUpsertSideEffectHandler
         timezone?: string,
     ): Promise<AuditingSideEffect | AuditingSideEffectDto>
     {
-        await this.commandBus.dispatch(new UpsertSideEffectCommand(
+        await this.commandBus.dispatch(new AuditingUpsertSideEffectCommand(
             payload,
             {
                 timezone,
             },
         ));
 
-        return await this.queryBus.ask(new FindSideEffectByIdQuery(
+        return await this.queryBus.ask(new AuditingFindSideEffectByIdQuery(
             payload.id,
             {},
             {

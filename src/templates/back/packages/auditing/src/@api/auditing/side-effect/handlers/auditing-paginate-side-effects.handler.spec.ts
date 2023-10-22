@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingPaginateSideEffectsHandler } from '@api/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingPaginateSideEffectsHandler } from './auditing-paginate-side-effects.handler';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingPaginateSideEffectsHandler', () =>
 {
     let handler: AuditingPaginateSideEffectsHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -27,19 +22,12 @@ describe('AuditingPaginateSideEffectsHandler', () =>
                         ask: () => { /**/ },
                     },
                 },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
             ],
         })
             .compile();
 
         handler = module.get<AuditingPaginateSideEffectsHandler>(AuditingPaginateSideEffectsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     test('AuditingPaginateSideEffectsHandler should be defined', () =>
@@ -57,15 +45,21 @@ describe('AuditingPaginateSideEffectsHandler', () =>
         test('should return a sideEffects', async () =>
         {
             jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: sideEffects.length,
-                count: sideEffects.length,
-                rows : sideEffects,
+                total: auditingMockSideEffectData.length,
+                count: auditingMockSideEffectData.length,
+                rows : auditingMockSideEffectData,
             })));
-            expect(await handler.main()).toEqual({
-                total: sideEffects.length,
-                count: sideEffects.length,
-                rows : sideEffects,
-            });
+            expect(
+                await handler.main(
+                    {},
+                    {},
+                ),
+            )
+                .toEqual({
+                    total: auditingMockSideEffectData.length,
+                    count: auditingMockSideEffectData.length,
+                    rows : auditingMockSideEffectData,
+                });
         });
     });
 });

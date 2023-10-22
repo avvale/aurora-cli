@@ -1,16 +1,10 @@
+import { AuditingCreateSideEffectsController, AuditingCreateSideEffectsHandler } from '@api/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingCreateSideEffectsController } from './auditing-create-side-effects.controller';
-import { AuditingCreateSideEffectsHandler } from '../handlers/auditing-create-side-effects.handler';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingCreateSideEffectsController', () =>
 {
     let controller: AuditingCreateSideEffectsController;
-    let handler: AuditingCreateSideEffectsHandler;
 
     beforeAll(async () =>
     {
@@ -30,7 +24,6 @@ describe('AuditingCreateSideEffectsController', () =>
             .compile();
 
         controller = module.get<AuditingCreateSideEffectsController>(AuditingCreateSideEffectsController);
-        handler = module.get<AuditingCreateSideEffectsHandler>(AuditingCreateSideEffectsHandler);
     });
 
     describe('main', () =>
@@ -40,9 +33,14 @@ describe('AuditingCreateSideEffectsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an sideEffects created', async () =>
+        test('should return an auditingMockSideEffectData created', async () =>
         {
-            expect(await controller.main(sideEffects)).toBe(undefined);
+            expect(
+                await controller.main(
+                    auditingMockSideEffectData,
+                ),
+            )
+                .toBe(undefined);
         });
     });
 });

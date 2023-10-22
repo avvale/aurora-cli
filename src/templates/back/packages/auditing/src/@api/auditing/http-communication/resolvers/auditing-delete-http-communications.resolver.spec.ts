@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingDeleteHttpCommunicationsHandler, AuditingDeleteHttpCommunicationsResolver } from '@api/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingDeleteHttpCommunicationsResolver } from './auditing-delete-http-communications.resolver';
-import { AuditingDeleteHttpCommunicationsHandler } from '../handlers/auditing-delete-http-communications.handler';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
 
 describe('AuditingDeleteHttpCommunicationsResolver', () =>
 {
@@ -46,10 +41,10 @@ describe('AuditingDeleteHttpCommunicationsResolver', () =>
             expect(resolver).toBeDefined();
         });
 
-        test('should return an httpCommunications deleted', async () =>
+        test('should return an auditingMockHttpCommunicationData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(httpCommunications)));
-            expect(await resolver.main()).toBe(httpCommunications);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData)));
+            expect(await resolver.main()).toBe(auditingMockHttpCommunicationData);
         });
     });
 });

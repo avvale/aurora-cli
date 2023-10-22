@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { AuditingCreateHttpCommunicationHandler } from '@api/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingCreateHttpCommunicationHandler } from './auditing-create-http-communication.handler';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingCreateHttpCommunicationHandler', () =>
 {
     let handler: AuditingCreateHttpCommunicationHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('AuditingCreateHttpCommunicationHandler', () =>
 
         handler = module.get<AuditingCreateHttpCommunicationHandler>(AuditingCreateHttpCommunicationHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,14 @@ describe('AuditingCreateHttpCommunicationHandler', () =>
 
         test('should return an httpCommunication created', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(httpCommunications[0])));
-            expect(await handler.main(httpCommunications[0])).toBe(httpCommunications[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+            expect(
+                await handler.main(
+                    auditingMockHttpCommunicationData[0],
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

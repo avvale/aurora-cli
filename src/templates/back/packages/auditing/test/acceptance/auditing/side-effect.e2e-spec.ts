@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { AuditingModule } from '@api/auditing/auditing.module';
+import { AuditingISideEffectRepository, auditingMockSideEffectData, AuditingMockSideEffectSeeder } from '@app/auditing/side-effect';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { ISideEffectRepository } from '@app/auditing/side-effect/domain/side-effect.repository';
-import { MockSideEffectSeeder } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.seeder';
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { AuditingModule } from '@api/auditing/auditing.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,8 +18,8 @@ const importForeignModules = [];
 describe('side-effect', () =>
 {
     let app: INestApplication;
-    let sideEffectRepository: ISideEffectRepository;
-    let sideEffectSeeder: MockSideEffectSeeder;
+    let sideEffectRepository: AuditingISideEffectRepository;
+    let sideEffectSeeder: AuditingMockSideEffectSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -58,17 +56,17 @@ describe('side-effect', () =>
                 }),
             ],
             providers: [
-                MockSideEffectSeeder,
+                AuditingMockSideEffectSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = sideEffects;
+        mockData = auditingMockSideEffectData;
         app = module.createNestApplication();
-        sideEffectRepository = module.get<ISideEffectRepository>(ISideEffectRepository);
-        sideEffectSeeder = module.get<MockSideEffectSeeder>(MockSideEffectSeeder);
+        sideEffectRepository = module.get<AuditingISideEffectRepository>(AuditingISideEffectRepository);
+        sideEffectSeeder = module.get<AuditingMockSideEffectSeeder>(AuditingMockSideEffectSeeder);
 
         // seed mock data in memory database
         await sideEffectRepository.insert(sideEffectSeeder.collectionSource);

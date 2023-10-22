@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateHttpCommunicationsCommand } from '@app/auditing/http-communication/application/create/create-http-communications.command';
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
+import { AuditingCreateHttpCommunicationsCommand } from '@app/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 
 @Injectable()
 export class AuditingHttpCommunicationSeeder
@@ -15,8 +15,8 @@ export class AuditingHttpCommunicationSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateHttpCommunicationsCommand(
-            httpCommunications,
+        await this.commandBus.dispatch(new AuditingCreateHttpCommunicationsCommand(
+            auditingMockHttpCommunicationData,
             {
                 timezone: process.env.TZ ,
             },

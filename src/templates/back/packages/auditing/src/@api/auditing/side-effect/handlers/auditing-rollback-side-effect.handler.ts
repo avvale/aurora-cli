@@ -1,11 +1,8 @@
-import { FindSideEffectByIdQuery } from '@app/auditing/side-effect/application/find/find-side-effect-by-id.query';
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { AuditingMeta, AuditingRunner, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-import * as path from 'node:path';
-
-// @app
-import { UpdateSideEffectByIdCommand } from '@app/auditing/side-effect/application/update/update-side-effect-by-id.command';
 import { AuditingSideEffectEvent, AuditingUpdateSideEffectByIdInput } from '@api/graphql';
+import { AuditingFindSideEffectByIdQuery, AuditingUpdateSideEffectByIdCommand } from '@app/auditing/side-effect';
+import { AuditingMeta, AuditingRunner, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import * as path from 'node:path';
 import { AuditingUpdateSideEffectByIdDto } from '../dto';
 
 @Injectable()
@@ -24,7 +21,7 @@ export class AuditingRollbackSideEffectHandler
         auditing?: AuditingMeta,
     ): Promise<boolean>
     {
-        const sideEffect           = await this.queryBus.ask(new FindSideEffectByIdQuery(payload.id, constraint, { timezone }));
+        const sideEffect           = await this.queryBus.ask(new AuditingFindSideEffectByIdQuery(payload.id, constraint, { timezone }));
         const modelPath            = path.join('..', '..', '..', '..', sideEffect.modelPath);
         const now                  = Utils.nowTimestamp();
         const rollbackSideEffectId = Utils.uuid();
@@ -43,7 +40,8 @@ export class AuditingRollbackSideEffectHandler
                     .findByPk(sideEffect.auditableId);
 
                 // eslint-disable-next-line max-len
-                if (!objectCreated) throw new BadRequestException(`The object from model ${sideEffect.modelName} with id ${sideEffect.auditableId} no longer exists in the database`);
+                if (!objectCreated)
+                    throw new BadRequestException(`The object from model ${sideEffect.modelName} with id ${sideEffect.auditableId} no longer exists in the database`);
 
                 await objectCreated.destroy({
                     auditing: {
@@ -93,7 +91,7 @@ export class AuditingRollbackSideEffectHandler
                 break;
         }
 
-        await this.commandBus.dispatch(new UpdateSideEffectByIdCommand(
+        await this.commandBus.dispatch(new AuditingUpdateSideEffectByIdCommand(
             {
                 id        : payload.id,
                 isRollback: true,

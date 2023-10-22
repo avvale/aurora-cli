@@ -1,18 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { AuditingModule } from '@api/auditing/auditing.module';
+import { AuditingIHttpCommunicationRepository, auditingMockHttpCommunicationData, AuditingMockHttpCommunicationSeeder } from '@app/auditing/http-communication';
+import { Auth } from '@aurora/decorators';
+import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Auth } from '@aurora/decorators';
-import { IHttpCommunicationRepository } from '@app/auditing/http-communication/domain/http-communication.repository';
-import { MockHttpCommunicationSeeder } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.seeder';
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
-import { AuditingModule } from '@api/auditing/auditing.module';
-import * as request from 'supertest';
+import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
+import * as request from 'supertest';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -20,8 +18,8 @@ const importForeignModules = [];
 describe('http-communication', () =>
 {
     let app: INestApplication;
-    let httpCommunicationRepository: IHttpCommunicationRepository;
-    let httpCommunicationSeeder: MockHttpCommunicationSeeder;
+    let httpCommunicationRepository: AuditingIHttpCommunicationRepository;
+    let httpCommunicationSeeder: AuditingMockHttpCommunicationSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -58,17 +56,17 @@ describe('http-communication', () =>
                 }),
             ],
             providers: [
-                MockHttpCommunicationSeeder,
+                AuditingMockHttpCommunicationSeeder,
             ],
         })
             .overrideGuard(Auth)
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = httpCommunications;
+        mockData = auditingMockHttpCommunicationData;
         app = module.createNestApplication();
-        httpCommunicationRepository = module.get<IHttpCommunicationRepository>(IHttpCommunicationRepository);
-        httpCommunicationSeeder = module.get<MockHttpCommunicationSeeder>(MockHttpCommunicationSeeder);
+        httpCommunicationRepository = module.get<AuditingIHttpCommunicationRepository>(AuditingIHttpCommunicationRepository);
+        httpCommunicationSeeder = module.get<AuditingMockHttpCommunicationSeeder>(AuditingMockHttpCommunicationSeeder);
 
         // seed mock data in memory database
         await httpCommunicationRepository.insert(httpCommunicationSeeder.collectionSource);

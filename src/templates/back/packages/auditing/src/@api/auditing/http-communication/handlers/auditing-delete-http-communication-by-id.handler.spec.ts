@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
+import { AuditingDeleteHttpCommunicationByIdHandler } from '@api/auditing/http-communication';
+import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingDeleteHttpCommunicationByIdHandler } from './auditing-delete-http-communication-by-id.handler';
-
-// sources
-import { httpCommunications } from '@app/auditing/http-communication/infrastructure/mock/mock-http-communication.data';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingDeleteHttpCommunicationByIdController', () =>
 {
     let handler: AuditingDeleteHttpCommunicationByIdHandler;
     let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -39,7 +34,6 @@ describe('AuditingDeleteHttpCommunicationByIdController', () =>
 
         handler = module.get<AuditingDeleteHttpCommunicationByIdHandler>(AuditingDeleteHttpCommunicationByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
@@ -51,8 +45,15 @@ describe('AuditingDeleteHttpCommunicationByIdController', () =>
 
         test('should return an httpCommunication deleted', async () =>
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(httpCommunications[0])));
-            expect(await handler.main(httpCommunications[0].id)).toBe(httpCommunications[0]);
+            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+            expect(
+                await handler.main(
+                    auditingMockHttpCommunicationData[0].id,
+                    {},
+                    'Europe/Madrid',
+                ),
+            )
+                .toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

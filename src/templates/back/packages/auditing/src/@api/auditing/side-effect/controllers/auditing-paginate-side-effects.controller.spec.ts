@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingPaginateSideEffectsController, AuditingPaginateSideEffectsHandler } from '@api/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingPaginateSideEffectsController } from './auditing-paginate-side-effects.controller';
-import { AuditingPaginateSideEffectsHandler } from '../handlers/auditing-paginate-side-effects.handler';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingPaginateSideEffectsController', () =>
 {
@@ -43,17 +37,17 @@ describe('AuditingPaginateSideEffectsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return a sideEffects', async () =>
+        test('should return a auditingMockSideEffectData', async () =>
         {
             jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
                 total: 5,
                 count: 5,
-                rows : sideEffects,
+                rows : auditingMockSideEffectData,
             })));
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : sideEffects,
+                rows : auditingMockSideEffectData,
             });
         });
     });

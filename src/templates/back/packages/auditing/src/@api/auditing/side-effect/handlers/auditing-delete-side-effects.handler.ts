@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetSideEffectsQuery } from '@app/auditing/side-effect/application/get/get-side-effects.query';
-import { DeleteSideEffectsCommand } from '@app/auditing/side-effect/application/delete/delete-side-effects.command';
+import { AuditingSideEffectDto } from '@api/auditing/side-effect';
 import { AuditingSideEffect } from '@api/graphql';
-import { AuditingSideEffectDto } from '../dto';
+import { AuditingDeleteSideEffectsCommand, AuditingGetSideEffectsQuery } from '@app/auditing/side-effect';
+import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingDeleteSideEffectsHandler
@@ -21,7 +18,7 @@ export class AuditingDeleteSideEffectsHandler
         timezone?: string,
     ): Promise<AuditingSideEffect[] | AuditingSideEffectDto[]>
     {
-        const sideEffects = await this.queryBus.ask(new GetSideEffectsQuery(
+        const sideEffects = await this.queryBus.ask(new AuditingGetSideEffectsQuery(
             queryStatement,
             constraint,
             {
@@ -29,7 +26,7 @@ export class AuditingDeleteSideEffectsHandler
             },
         ));
 
-        await this.commandBus.dispatch(new DeleteSideEffectsCommand(
+        await this.commandBus.dispatch(new AuditingDeleteSideEffectsCommand(
             queryStatement,
             constraint,
             {

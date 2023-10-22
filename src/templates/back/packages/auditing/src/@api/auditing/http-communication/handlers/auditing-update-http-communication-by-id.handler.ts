@@ -1,11 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
-
-// @app
-import { FindHttpCommunicationByIdQuery } from '@app/auditing/http-communication/application/find/find-http-communication-by-id.query';
-import { UpdateHttpCommunicationByIdCommand } from '@app/auditing/http-communication/application/update/update-http-communication-by-id.command';
+import { AuditingHttpCommunicationDto, AuditingUpdateHttpCommunicationByIdDto } from '@api/auditing/http-communication';
 import { AuditingHttpCommunication, AuditingUpdateHttpCommunicationByIdInput } from '@api/graphql';
-import { AuditingHttpCommunicationDto, AuditingUpdateHttpCommunicationByIdDto } from '../dto';
+import { AuditingFindHttpCommunicationByIdQuery, AuditingUpdateHttpCommunicationByIdCommand } from '@app/auditing/http-communication';
+import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingUpdateHttpCommunicationByIdHandler
@@ -21,7 +18,7 @@ export class AuditingUpdateHttpCommunicationByIdHandler
         timezone?: string,
     ): Promise<AuditingHttpCommunication | AuditingHttpCommunicationDto>
     {
-        const httpCommunication = await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
+        const httpCommunication = await this.queryBus.ask(new AuditingFindHttpCommunicationByIdQuery(
             payload.id,
             constraint,
             {
@@ -31,7 +28,7 @@ export class AuditingUpdateHttpCommunicationByIdHandler
 
         const dataToUpdate = Utils.diff(payload, httpCommunication);
 
-        await this.commandBus.dispatch(new UpdateHttpCommunicationByIdCommand(
+        await this.commandBus.dispatch(new AuditingUpdateHttpCommunicationByIdCommand(
             {
                 ...dataToUpdate,
                 id: payload.id,
@@ -42,7 +39,7 @@ export class AuditingUpdateHttpCommunicationByIdHandler
             },
         ));
 
-        return await this.queryBus.ask(new FindHttpCommunicationByIdQuery(
+        return await this.queryBus.ask(new AuditingFindHttpCommunicationByIdQuery(
             payload.id,
             constraint,
             {

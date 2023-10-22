@@ -1,12 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingDeleteSideEffectsController, AuditingDeleteSideEffectsHandler } from '@api/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingDeleteSideEffectsController } from './auditing-delete-side-effects.controller';
-import { AuditingDeleteSideEffectsHandler } from '../handlers/auditing-delete-side-effects.handler';
-
-// sources
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
 
 describe('AuditingDeleteSideEffectsController', () =>
 {
@@ -43,10 +37,10 @@ describe('AuditingDeleteSideEffectsController', () =>
             expect(controller).toBeDefined();
         });
 
-        test('should return an sideEffects deleted', async () =>
+        test('should return an auditingMockSideEffectData deleted', async () =>
         {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(sideEffects)));
-            expect(await controller.main()).toBe(sideEffects);
+            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData)));
+            expect(await controller.main()).toBe(auditingMockSideEffectData);
         });
     });
 });

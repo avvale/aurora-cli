@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 
 //
-import { CreateSideEffectsCommand } from '@app/auditing/side-effect/application/create/create-side-effects.command';
-import { sideEffects } from '@app/auditing/side-effect/infrastructure/mock/mock-side-effect.data';
+import { AuditingCreateSideEffectsCommand } from '@app/auditing/side-effect';
+import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 
 @Injectable()
 export class AuditingSideEffectSeeder
@@ -15,8 +15,8 @@ export class AuditingSideEffectSeeder
 
     async main(): Promise<boolean>
     {
-        await this.commandBus.dispatch(new CreateSideEffectsCommand(
-            sideEffects,
+        await this.commandBus.dispatch(new AuditingCreateSideEffectsCommand(
+            auditingMockSideEffectData,
             {
                 timezone: process.env.TZ ,
             },

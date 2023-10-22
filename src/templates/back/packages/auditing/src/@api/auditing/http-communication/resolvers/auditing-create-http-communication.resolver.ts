@@ -1,10 +1,8 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { Auditing, AuditingMeta, Timezone } from '@aurorajs.dev/core';
+import { AuditingCreateHttpCommunicationHandler } from '@api/auditing/http-communication';
+import { AuditingCreateHttpCommunicationInput, AuditingHttpCommunication } from '@api/graphql';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { AuditingCreateHttpCommunicationHandler } from '../handlers/auditing-create-http-communication.handler';
-import { AuditingHttpCommunication, AuditingCreateHttpCommunicationInput } from '@api/graphql';
+import { Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('auditing.httpCommunication.create')

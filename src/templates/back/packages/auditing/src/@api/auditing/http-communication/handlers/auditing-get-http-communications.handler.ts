@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-
-// @app
-import { GetHttpCommunicationsQuery } from '@app/auditing/http-communication/application/get/get-http-communications.query';
+import { AuditingHttpCommunicationDto } from '@api/auditing/http-communication';
 import { AuditingHttpCommunication } from '@api/graphql';
-import { AuditingHttpCommunicationDto } from '../dto';
+import { AuditingGetHttpCommunicationsQuery } from '@app/auditing/http-communication';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingGetHttpCommunicationsHandler
@@ -19,7 +17,7 @@ export class AuditingGetHttpCommunicationsHandler
         timezone?: string,
     ): Promise<AuditingHttpCommunication[] | AuditingHttpCommunicationDto[]>
     {
-        return await this.queryBus.ask(new GetHttpCommunicationsQuery(
+        return await this.queryBus.ask(new AuditingGetHttpCommunicationsQuery(
             queryStatement,
             constraint,
             {

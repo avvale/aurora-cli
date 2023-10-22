@@ -1,14 +1,9 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
-import { ICommandBus, Utils } from '@aurorajs.dev/core';
-import type { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
-
-// @api
 import { AuditingHttpCommunicationEvent } from '@api/graphql';
-
-// @app
-import { CreateHttpCommunicationCommand } from '@app/auditing/http-communication/application/create/create-http-communication.command';
-import { UpdateHttpCommunicationByIdCommand } from '@app/auditing/http-communication/application/update/update-http-communication-by-id.command';
+import { AuditingCreateHttpCommunicationCommand, AuditingUpdateHttpCommunicationByIdCommand } from '@app/auditing/http-communication';
+import { ICommandBus, Utils } from '@aurorajs.dev/core';
+import { HttpService } from '@nestjs/axios';
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 // logging.axios-interceptor.ts
 const META_KEY = Symbol('metaAxiosInterceptor');
@@ -65,7 +60,7 @@ export class AuditingAxiosInterceptorService implements OnModuleInit
                 tags: config.headers['X-Auditing-Tags'] ? config.headers['X-Auditing-Tags'].split(',') : [],
             };
 
-            await this.commandBus.dispatch(new CreateHttpCommunicationCommand(
+            await this.commandBus.dispatch(new AuditingCreateHttpCommunicationCommand(
                 {
                     ...config[META_KEY],
                     event         : AuditingHttpCommunicationEvent.REQUEST_FULFILLED,
@@ -114,7 +109,7 @@ export class AuditingAxiosInterceptorService implements OnModuleInit
             {
                 const { config, response } = err;
 
-                await this.commandBus.dispatch(new UpdateHttpCommunicationByIdCommand(
+                await this.commandBus.dispatch(new AuditingUpdateHttpCommunicationByIdCommand(
                     {
                         id                 : config[META_KEY].id,
                         event              : AuditingHttpCommunicationEvent.REQUEST_REJECTED,
@@ -143,7 +138,7 @@ export class AuditingAxiosInterceptorService implements OnModuleInit
     {
         return async (response: AxiosResponse) =>
         {
-            await this.commandBus.dispatch(new UpdateHttpCommunicationByIdCommand(
+            await this.commandBus.dispatch(new AuditingUpdateHttpCommunicationByIdCommand(
                 {
                     id          : response.config[META_KEY].id,
                     event       : AuditingHttpCommunicationEvent.RESPONSE_FULFILLED,
@@ -171,7 +166,7 @@ export class AuditingAxiosInterceptorService implements OnModuleInit
             {
                 const { config, response } = err;
 
-                await this.commandBus.dispatch(new UpdateHttpCommunicationByIdCommand(
+                await this.commandBus.dispatch(new AuditingUpdateHttpCommunicationByIdCommand(
                     {
                         id                  : config[META_KEY].id,
                         event               : AuditingHttpCommunicationEvent.RESPONSE_REJECTED,

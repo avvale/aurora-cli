@@ -10,7 +10,7 @@ import { AuditingRollbackSideEffectHandler } from '../handlers/auditing-rollback
 
 @ApiTags('[auditing] side-effect')
 @Controller('auditing/side-effect/rollback')
-@Auth('auditing.sideEffect.rollback')
+@Auth('auditing.sideEffect.update')
 export class AuditingRollbackSideEffectController
 {
     constructor(
@@ -24,14 +24,12 @@ export class AuditingRollbackSideEffectController
         @Body() payload: AuditingUpdateSideEffectByIdDto,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
     )
     {
         return await this.handler.main(
             payload,
             constraint,
             timezone,
-            auditing,
         );
     }
 }
