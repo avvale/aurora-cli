@@ -1,12 +1,7 @@
+import { QueueManagerGetJobsRegistryQuery, QueueManagerIJobRegistryRepository, QueueManagerJobRegistryMapper, QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry';
+import { QueueManagerGetJobsRegistryQueryHandler } from '@app/queue-manager/job-registry/application/get/queue-manager-get-jobs-registry.query-handler';
+import { QueueManagerGetJobsRegistryService } from '@app/queue-manager/job-registry/application/get/queue-manager-get-jobs-registry.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerGetJobsRegistryQueryHandler } from './queue-manager-get-jobs-registry.query-handler';
-import { QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.repository';
-import { QueueManagerIJobRegistryRepository } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.repository';
-import { QueueManagerJobRegistryMapper } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.mapper';
-import { QueueManagerGetJobsRegistryQuery } from './queue-manager-get-jobs-registry.query';
-import { QueueManagerGetJobsRegistryService } from './queue-manager-get-jobs-registry.service';
 
 describe('GetJobsRegistryQueryHandler', () =>
 {

@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerCreateJobsRegistryCommand, queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
+import { QueueManagerCreateJobsRegistryCommandHandler } from '@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.command-handler';
+import { QueueManagerCreateJobsRegistryService } from '@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.data';
-import { QueueManagerCreateJobsRegistryCommandHandler } from './queue-manager-create-jobs-registry.command-handler';
-import { QueueManagerCreateJobsRegistryCommand } from './queue-manager-create-jobs-registry.command';
-import { QueueManagerCreateJobsRegistryService } from './queue-manager-create-jobs-registry.service';
 
 describe('queueManagerCreateJobsRegistryCommandHandler', () =>
 {
     let commandHandler: QueueManagerCreateJobsRegistryCommandHandler;
-    let service: QueueManagerCreateJobsRegistryService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('queueManagerCreateJobsRegistryCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<QueueManagerCreateJobsRegistryCommandHandler>(QueueManagerCreateJobsRegistryCommandHandler);
-        service = module.get<QueueManagerCreateJobsRegistryService>(QueueManagerCreateJobsRegistryService);
     });
 
     describe('main', () =>

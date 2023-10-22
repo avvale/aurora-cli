@@ -1,13 +1,7 @@
+import { QueueManagerFindQueueByIdQuery, QueueManagerIQueueRepository, queueManagerMockQueueData, QueueManagerMockQueueRepository, QueueManagerQueueMapper } from '@app/queue-manager/queue';
+import { QueueManagerFindQueueByIdQueryHandler } from '@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.query-handler';
+import { QueueManagerFindQueueByIdService } from '@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerFindQueueByIdQueryHandler } from './queue-manager-find-queue-by-id.query-handler';
-import { QueueManagerMockQueueRepository } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.repository';
-import { queueManagerMockQueueData } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data';
-import { QueueManagerIQueueRepository } from '@app/queue-manager/queue/domain/queue-manager-queue.repository';
-import { QueueManagerQueueMapper } from '@app/queue-manager/queue/domain/queue-manager-queue.mapper';
-import { QueueManagerFindQueueByIdQuery } from './queue-manager-find-queue-by-id.query';
-import { QueueManagerFindQueueByIdService } from './queue-manager-find-queue-by-id.service';
 
 describe('QueueManagerFindQueueByIdQueryHandler', () =>
 {

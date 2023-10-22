@@ -1,14 +1,11 @@
+import { QueueManagerDeleteQueuesCommand } from '@app/queue-manager/queue';
+import { QueueManagerDeleteQueuesCommandHandler } from '@app/queue-manager/queue/application/delete/queue-manager-delete-queues.command-handler';
+import { QueueManagerDeleteQueuesService } from '@app/queue-manager/queue/application/delete/queue-manager-delete-queues.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerDeleteQueuesCommandHandler } from './queue-manager-delete-queues.command-handler';
-import { QueueManagerDeleteQueuesCommand } from './queue-manager-delete-queues.command';
-import { QueueManagerDeleteQueuesService } from './queue-manager-delete-queues.service';
 
 describe('QueueManagerDeleteQueuesCommandHandler', () =>
 {
     let commandHandler: QueueManagerDeleteQueuesCommandHandler;
-    let service: QueueManagerDeleteQueuesService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('QueueManagerDeleteQueuesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<QueueManagerDeleteQueuesCommandHandler>(QueueManagerDeleteQueuesCommandHandler);
-        service = module.get<QueueManagerDeleteQueuesService>(QueueManagerDeleteQueuesService);
     });
 
     describe('main', () =>

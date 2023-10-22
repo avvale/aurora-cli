@@ -1,10 +1,7 @@
+import { queueManagerMockJobRegistryData, QueueManagerUpsertJobRegistryCommand } from '@app/queue-manager/job-registry';
+import { QueueManagerUpsertJobRegistryCommandHandler } from '@app/queue-manager/job-registry/application/upsert/queue-manager-upsert-job-registry.command-handler';
+import { QueueManagerUpsertJobRegistryService } from '@app/queue-manager/job-registry/application/upsert/queue-manager-upsert-job-registry.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.data';
-import { QueueManagerUpsertJobRegistryCommandHandler } from './queue-manager-upsert-job-registry.command-handler';
-import { QueueManagerUpsertJobRegistryCommand } from './queue-manager-upsert-job-registry.command';
-import { QueueManagerUpsertJobRegistryService } from './queue-manager-upsert-job-registry.service';
 
 describe('QueueManagerUpsertJobRegistryCommandHandler', () =>
 {

@@ -1,13 +1,7 @@
+import { QueueManagerFindJobRegistryByIdQuery, QueueManagerIJobRegistryRepository, QueueManagerJobRegistryMapper, queueManagerMockJobRegistryData, QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry';
+import { QueueManagerFindJobRegistryByIdQueryHandler } from '@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry-by-id.query-handler';
+import { QueueManagerFindJobRegistryByIdService } from '@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerFindJobRegistryByIdQueryHandler } from './queue-manager-find-job-registry-by-id.query-handler';
-import { QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.repository';
-import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.data';
-import { QueueManagerIJobRegistryRepository } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.repository';
-import { QueueManagerJobRegistryMapper } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.mapper';
-import { QueueManagerFindJobRegistryByIdQuery } from './queue-manager-find-job-registry-by-id.query';
-import { QueueManagerFindJobRegistryByIdService } from './queue-manager-find-job-registry-by-id.service';
 
 describe('QueueManagerFindJobRegistryByIdQueryHandler', () =>
 {

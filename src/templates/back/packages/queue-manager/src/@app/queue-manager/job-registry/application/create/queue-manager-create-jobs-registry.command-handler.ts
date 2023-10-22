@@ -1,18 +1,15 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { QueueManagerCreateJobsRegistryCommand } from './queue-manager-create-jobs-registry.command';
-import { QueueManagerCreateJobsRegistryService } from './queue-manager-create-jobs-registry.service';
+import { QueueManagerCreateJobsRegistryCommand } from '@app/queue-manager/job-registry';
+import { QueueManagerCreateJobsRegistryService } from '@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.service';
 import {
     QueueManagerJobRegistryId,
-    QueueManagerJobRegistryQueueName,
-    QueueManagerJobRegistryState,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
+    QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
-    QueueManagerJobRegistryCreatedAt,
-    QueueManagerJobRegistryUpdatedAt,
-    QueueManagerJobRegistryDeletedAt,
-} from '../../domain/value-objects';
+} from '@app/queue-manager/job-registry/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(QueueManagerCreateJobsRegistryCommand)
 export class QueueManagerCreateJobsRegistryCommandHandler implements ICommandHandler<QueueManagerCreateJobsRegistryCommand>

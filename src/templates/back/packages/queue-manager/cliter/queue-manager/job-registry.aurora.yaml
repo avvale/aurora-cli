@@ -33,7 +33,7 @@ aggregateProperties:
     type: varchar
     maxLength: 36
     nullable: false
-    index: unique
+    index: index
   - name: jobName
     type: varchar
     maxLength: 50
@@ -52,5 +52,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []

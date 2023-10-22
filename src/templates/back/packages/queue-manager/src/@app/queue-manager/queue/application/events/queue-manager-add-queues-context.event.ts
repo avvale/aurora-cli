@@ -1,11 +1,5 @@
+import { QueueManagerCreatedQueueEvent, QueueManagerCreatedQueuesEvent, QueueManagerDeletedQueueEvent, QueueManagerDeletedQueuesEvent, QueueManagerQueue, QueueManagerUpdatedQueueEvent, QueueManagerUpdatedQueuesEvent } from '@app/queue-manager/queue';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { QueueManagerQueue } from '../../domain/queue-manager-queue.aggregate';
-import { QueueManagerCreatedQueueEvent } from './queue-manager-created-queue.event';
-import { QueueManagerCreatedQueuesEvent } from './queue-manager-created-queues.event';
-import { QueueManagerUpdatedQueueEvent } from './queue-manager-updated-queue.event';
-import { QueueManagerUpdatedQueuesEvent } from './queue-manager-updated-queues.event';
-import { QueueManagerDeletedQueueEvent } from './queue-manager-deleted-queue.event';
-import { QueueManagerDeletedQueuesEvent } from './queue-manager-deleted-queues.event';
 
 export class QueueManagerAddQueuesContextEvent extends AggregateRoot
 {

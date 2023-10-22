@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { QueueManagerJobRegistry } from './queue-manager-job-registry.aggregate';
 import { QueueManagerJobRegistryId } from './value-objects';
+import { QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class QueueManagerIJobRegistryRepository implements IRepository<QueueManagerJobRegistry>
 {
@@ -30,6 +30,8 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<QueueManagerJobRegistry | null>;
 
@@ -124,6 +126,8 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

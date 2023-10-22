@@ -1,9 +1,7 @@
+import { QueueManagerDeleteQueueByIdCommand } from '@app/queue-manager/queue';
+import { QueueManagerDeleteQueueByIdService } from '@app/queue-manager/queue/application/delete/queue-manager-delete-queue-by-id.service';
+import { QueueManagerQueueId } from '@app/queue-manager/queue/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { QueueManagerDeleteQueueByIdCommand } from './queue-manager-delete-queue-by-id.command';
-import { QueueManagerDeleteQueueByIdService } from './queue-manager-delete-queue-by-id.service';
-import {
-    QueueManagerQueueId
-} from '../../domain/value-objects';
 
 @CommandHandler(QueueManagerDeleteQueueByIdCommand)
 export class QueueManagerDeleteQueueByIdCommandHandler implements ICommandHandler<QueueManagerDeleteQueueByIdCommand>

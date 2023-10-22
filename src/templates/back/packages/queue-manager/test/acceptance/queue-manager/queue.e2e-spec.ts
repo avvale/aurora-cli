@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { QueueManagerModule } from '@api/queue-manager/queue-manager.module';
 import { QueueManagerIQueueRepository, queueManagerMockQueueData, QueueManagerMockQueueSeeder } from '@app/queue-manager/queue';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('queue', () =>
                 QueueManagerMockQueueSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for QueueManagerQueueId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueuePrefix must be defined, can not be null');
+                expect(res.body.message).toContain('Value for QueueManagerQueuePrefix must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for QueueManagerQueueName must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for QueueManagerQueueId must be defined, can not be undefined');
             });
     });
 
@@ -150,7 +153,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueuePrefix must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for QueueManagerQueuePrefix must be defined, can not be undefined');
             });
     });
 
@@ -166,7 +169,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for QueueManagerQueueName must be defined, can not be undefined');
             });
     });
 
@@ -182,7 +185,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for QueueManagerQueueId is not allowed, must be a length of 36');
             });
     });
 
@@ -198,7 +201,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueuePrefix is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for QueueManagerQueuePrefix is too large, has a maximum length of 50');
             });
     });
 
@@ -214,7 +217,7 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueName is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for QueueManagerQueueName is too large, has a maximum length of 50');
             });
     });
 

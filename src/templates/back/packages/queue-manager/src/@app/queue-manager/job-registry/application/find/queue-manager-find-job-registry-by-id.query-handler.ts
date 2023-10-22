@@ -1,9 +1,7 @@
+import { QueueManagerFindJobRegistryByIdQuery, QueueManagerJobRegistryMapper, QueueManagerJobRegistryResponse } from '@app/queue-manager/job-registry';
+import { QueueManagerFindJobRegistryByIdService } from '@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry-by-id.service';
+import { QueueManagerJobRegistryId } from '@app/queue-manager/job-registry/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { QueueManagerJobRegistryResponse } from '../../domain/queue-manager-job-registry.response';
-import { QueueManagerJobRegistryMapper } from '../../domain/queue-manager-job-registry.mapper';
-import { QueueManagerJobRegistryId } from '../../domain/value-objects';
-import { QueueManagerFindJobRegistryByIdQuery } from './queue-manager-find-job-registry-by-id.query';
-import { QueueManagerFindJobRegistryByIdService } from './queue-manager-find-job-registry-by-id.service';
 
 @QueryHandler(QueueManagerFindJobRegistryByIdQuery)
 export class QueueManagerFindJobRegistryByIdQueryHandler implements IQueryHandler<QueueManagerFindJobRegistryByIdQuery>

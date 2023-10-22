@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { QueueManagerModule } from '@api/queue-manager/queue-manager.module';
 import { QueueManagerIJobRegistryRepository, queueManagerMockJobRegistryData, QueueManagerMockJobRegistrySeeder } from '@app/queue-manager/job-registry';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('job-registry', () =>
                 QueueManagerMockJobRegistrySeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryQueueName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryQueueName must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryState must be defined, can not be null');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryState must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryJobId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryJobId must be defined, can not be null');
             });
     });
 
@@ -150,7 +153,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryId must be defined, can not be undefined');
             });
     });
 
@@ -166,7 +169,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryQueueName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryQueueName must be defined, can not be undefined');
             });
     });
 
@@ -182,7 +185,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryState must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryState must be defined, can not be undefined');
             });
     });
 
@@ -198,7 +201,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryJobId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryJobId must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +217,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryId is not allowed, must be a length of 36');
             });
     });
 
@@ -230,7 +233,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryQueueName is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryQueueName is too large, has a maximum length of 50');
             });
     });
 
@@ -246,7 +249,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryJobId is too large, has a maximum length of 36');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryJobId is too large, has a maximum length of 36');
             });
     });
 
@@ -262,7 +265,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryJobName is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryJobName is too large, has a maximum length of 50');
             });
     });
 
@@ -278,7 +281,7 @@ describe('job-registry', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for JobRegistryState has to be any of this options: COMPLETED, WAITING, ACTIVE, DELAYED, FAILED, PAUSED');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryState has to be any of this options: COMPLETED, WAITING, ACTIVE, DELAYED, FAILED, PAUSED');
             });
     });
 

@@ -1,17 +1,15 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { QueueManagerCreatedQueueEvent, QueueManagerDeletedQueueEvent, QueueManagerUpdatedQueueEvent } from '@app/queue-manager/queue';
 import {
-    QueueManagerQueueId,
-    QueueManagerQueuePrefix,
-    QueueManagerQueueName,
     QueueManagerQueueCreatedAt,
-    QueueManagerQueueUpdatedAt,
     QueueManagerQueueDeletedAt,
-} from './value-objects';
-import { QueueManagerCreatedQueueEvent } from '../application/events/queue-manager-created-queue.event';
-import { QueueManagerUpdatedQueueEvent } from '../application/events/queue-manager-updated-queue.event';
-import { QueueManagerDeletedQueueEvent } from '../application/events/queue-manager-deleted-queue.event';
+    QueueManagerQueueId,
+    QueueManagerQueueName,
+    QueueManagerQueuePrefix,
+    QueueManagerQueueUpdatedAt,
+} from '@app/queue-manager/queue/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class QueueManagerQueue extends AggregateRoot
 {
@@ -22,8 +20,6 @@ export class QueueManagerQueue extends AggregateRoot
     updatedAt: QueueManagerQueueUpdatedAt;
     deletedAt: QueueManagerQueueDeletedAt;
 
-    // eager relationship
-
     constructor(
         id: QueueManagerQueueId,
         prefix: QueueManagerQueuePrefix,
@@ -31,7 +27,6 @@ export class QueueManagerQueue extends AggregateRoot
         createdAt: QueueManagerQueueCreatedAt,
         updatedAt: QueueManagerQueueUpdatedAt,
         deletedAt: QueueManagerQueueDeletedAt,
-
     )
     {
         super();
@@ -41,18 +36,15 @@ export class QueueManagerQueue extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
     }
 
-    static register (
+    static register(
         id: QueueManagerQueueId,
         prefix: QueueManagerQueuePrefix,
         name: QueueManagerQueueName,
         createdAt: QueueManagerQueueCreatedAt,
         updatedAt: QueueManagerQueueUpdatedAt,
         deletedAt: QueueManagerQueueDeletedAt,
-
     ): QueueManagerQueue
     {
         return new QueueManagerQueue(
@@ -62,7 +54,6 @@ export class QueueManagerQueue extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
         );
     }
 
@@ -117,8 +108,6 @@ export class QueueManagerQueue extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 
@@ -132,8 +121,6 @@ export class QueueManagerQueue extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 }

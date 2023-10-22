@@ -7,11 +7,11 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-job-registry.command-handler.spec.ts",
-            "integrity": "sha1:0b35597223d53b75a16085f56248c45c37a0eeb6"
+            "integrity": "sha1:78bbeeae892bef118839d543c5fd89acfe74e583"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-job-registry.command-handler.ts",
-            "integrity": "sha1:4e1af0fc150367526d30e29d4542e942bc5ec243"
+            "integrity": "sha1:ba72948e01dee1288557208b605431fd1323e3f1"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-job-registry.command.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-job-registry.service.spec.ts",
-            "integrity": "sha1:1aba55610d83f82cccdc1eb9f161bffdc0b5f14f"
+            "integrity": "sha1:de1de066de08e159fcf54c55318ae52c033eec1a"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-job-registry.service.ts",
@@ -27,31 +27,31 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.command-handler.spec.ts",
-            "integrity": "sha1:4cf06b7c9dace870095c7b671929af7e5e950502"
+            "integrity": "sha1:8f1cc7ce3ac6607584a0a3c5b0f02b5f96b1d993"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.command-handler.ts",
-            "integrity": "sha1:6be39fae440e433275a6ebf46fda3650371440a4"
+            "integrity": "sha1:7c4d694cc0ae713da766662eaea2a801eecfe122"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.command.ts",
-            "integrity": "sha1:1f4c9a9a72c2a7316e7f912dcfbd211d5f83ff08"
+            "integrity": "sha1:1cb36974a761c5c6047a5a2363a3a1e582fed10f"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.service.spec.ts",
-            "integrity": "sha1:1c0395fd19ede72dbd0001199491ffd0c9b93edf"
+            "integrity": "sha1:62e319dd983b17f5ed6d7cba3e7fe2cb361dffc8"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.service.ts",
-            "integrity": "sha1:344d2a24746b63bdf94014d0c53531235bdb9189"
+            "integrity": "sha1:4a5ed89020ba273358252aee1340f0b0ba7f8a2a"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-job-registry-by-id.command-handler.spec.ts",
-            "integrity": "sha1:d5410b8574a89264b8db9db84170ed0be5f97dca"
+            "integrity": "sha1:e28b6afe2114663ebe0bb4ffdeb93cc6d86ab800"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-job-registry-by-id.command-handler.ts",
-            "integrity": "sha1:55f3fc35e144c4bd208cdcc5221a6f6cc0390f47"
+            "integrity": "sha1:723a5fddfa7274697b83846ae44c347ef1fd5a2c"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-job-registry-by-id.command.ts",
@@ -59,7 +59,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-job-registry-by-id.service.spec.ts",
-            "integrity": "sha1:9566b7807896335755ed9b206222cb4a842aa31f"
+            "integrity": "sha1:d053dd91c8d8c34e6e03ad0f8813c0925d589a47"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-job-registry-by-id.service.ts",
@@ -67,19 +67,19 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-jobs-registry.command-handler.spec.ts",
-            "integrity": "sha1:0a6f623ada67cdee8e4a0407580c32a68fe7c0d4"
+            "integrity": "sha1:04ca2514d980739749fd2acb241958d9edbbcf7b"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-jobs-registry.command-handler.ts",
-            "integrity": "sha1:9d405980e441ce13d008966d167ea03b0c3d0e91"
+            "integrity": "sha1:e18d9812d9e5ca9d3901f4a808af6020a93facd5"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-jobs-registry.command.ts",
-            "integrity": "sha1:7156f7cb41817e82e54649dab205f3af8e8f7f0a"
+            "integrity": "sha1:90031a3dac4aaf7ee55683865f0af3ec9424c1c4"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-jobs-registry.service.spec.ts",
-            "integrity": "sha1:8f9b036190644285e29ab43115636c796cafbf09"
+            "integrity": "sha1:1fd0f543191a0ebaf8a701ce7e0a856f8d6578a3"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/delete/queue-manager-delete-jobs-registry.service.ts",
@@ -87,11 +87,11 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-add-jobs-registry-context.event.ts",
-            "integrity": "sha1:ff78cf5672963dfa9099d1a9f9ab0bd21b368da2"
+            "integrity": "sha1:f31363516e8d1f2027cc6cd867d1c3d32f7b90ca"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-created-job-registry.event-handler.ts",
-            "integrity": "sha1:1710d0050aa46f13859aff601f4e6ab6ff656a8b"
+            "integrity": "sha1:ddfd72dc142c00ee345285930f5881bbdc5da4d7"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-created-job-registry.event.ts",
@@ -99,7 +99,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-created-jobs-registry.event-handler.ts",
-            "integrity": "sha1:60612aac119857de0d6f8e27c5152b987dd34099"
+            "integrity": "sha1:1893e3721128544b2b2910cd835548ab69e0dde7"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-created-jobs-registry.event.ts",
@@ -107,7 +107,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-deleted-job-registry.event-handler.ts",
-            "integrity": "sha1:ccbf2ea53b16171768717452348748a0c5043cc8"
+            "integrity": "sha1:a6ffbd22b2ad0d3074ec778c44c73b48bc4387a7"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-deleted-job-registry.event.ts",
@@ -115,7 +115,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-deleted-jobs-registry.event-handler.ts",
-            "integrity": "sha1:4a9b36d915e706bcc403b1c38fdc549ca7aec296"
+            "integrity": "sha1:c456cd3039e7a7ff1b6cd206d2050b54526cdeec"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-deleted-jobs-registry.event.ts",
@@ -123,7 +123,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-updated-job-registry.event-handler.ts",
-            "integrity": "sha1:43dcccffe9ff2c639e3627e3b4f6795d139e4848"
+            "integrity": "sha1:c3bda5367272bb20baa94282f3e834228e57287e"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-updated-job-registry.event.ts",
@@ -131,7 +131,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-updated-jobs-registry.event-handler.ts",
-            "integrity": "sha1:a998e36c417f307b887620a29ddca38360329bb3"
+            "integrity": "sha1:969f29805740e3cf44ec512b1eb6203114942c08"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/events/queue-manager-updated-jobs-registry.event.ts",
@@ -139,39 +139,39 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry-by-id.query-handler.spec.ts",
-            "integrity": "sha1:d1d21645ae7ddf9bfa6fa40f2ff29753616a6cee"
+            "integrity": "sha1:2b8b13af6539ef2138ca92baf01abc38b3d1bbbf"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry-by-id.query-handler.ts",
-            "integrity": "sha1:90fb82fb4389b22ee2dfe0198fd6c605ad2db02a"
+            "integrity": "sha1:72199c2dd96279dab62d6dbd0bc38ade8aadb75b"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry-by-id.query.ts",
-            "integrity": "sha1:8ffdb15a2d48c3764c02c64b98dfb058fc100182"
+            "integrity": "sha1:5b74c17bd7764e8bc714418c48d66234526bddc8"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry-by-id.service.spec.ts",
-            "integrity": "sha1:29fbef560deec5a6c7df9eda3bba2965abbddf46"
+            "integrity": "sha1:abdee2d53db1607dec2593bc4e7ce3e39a134e2d"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry-by-id.service.ts",
-            "integrity": "sha1:65a910fa36597f9863f562b2bde85e4783a1c63c"
+            "integrity": "sha1:036a76389da4eedb1e7dd61cd9941de31214cd5b"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry.query-handler.spec.ts",
-            "integrity": "sha1:f964fa67c173db00df1661709bbdf76e0d14a374"
+            "integrity": "sha1:1c07d364a235c4fa7f531ce739fc1cea90173cd8"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry.query-handler.ts",
-            "integrity": "sha1:a47b0713b9e9f8d14d597c1d6f6aca66786dcacf"
+            "integrity": "sha1:ce78bfe4bad6607ff27255bd2857e06ecaa7975c"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry.query.ts",
-            "integrity": "sha1:95077fda556fabf1567dbdde4237347145179ef1"
+            "integrity": "sha1:3cee5600905b84fd639bacab71b3f797eac3cf36"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry.service.spec.ts",
-            "integrity": "sha1:551a494a2831710ee39ec302f78cf2a5337a74d7"
+            "integrity": "sha1:191cd23b11efc21e9f243b7ae2d3c25715dc0e3b"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/find/queue-manager-find-job-registry.service.ts",
@@ -179,51 +179,51 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/get/queue-manager-get-jobs-registry.query-handler.spec.ts",
-            "integrity": "sha1:757ab54f4de50384d94cb062af49b3f973254d7b"
+            "integrity": "sha1:ab16bd9d487e5de2b9d0372c4f2c92ed328ddf57"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/get/queue-manager-get-jobs-registry.query-handler.ts",
-            "integrity": "sha1:6dcf9efdbf3b1c580a53468e83188e74d18f0dc3"
+            "integrity": "sha1:ae96a324e4b03492457d9c8a9fd72cbf03a033d0"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/get/queue-manager-get-jobs-registry.query.ts",
-            "integrity": "sha1:f7269d3530026f5c1d4ac122a43461fd3933af32"
+            "integrity": "sha1:1a6ac6b8df65a8a8bb6457a20153ded277c4c47d"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/get/queue-manager-get-jobs-registry.service.spec.ts",
-            "integrity": "sha1:72e6c75c9fd4e29534f337b21f4c3eb5fe1ab4e1"
+            "integrity": "sha1:af53d0fb54fd1ef45dd68a1058818a1efe79d588"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/get/queue-manager-get-jobs-registry.service.ts",
-            "integrity": "sha1:e538fc71a54e99b765fadd27c186779ca66d8de1"
+            "integrity": "sha1:15dec5afa5a79860fb0041e046f84b1291c3450f"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/paginate/queue-manager-paginate-jobs-registry.query-handler.spec.ts",
-            "integrity": "sha1:c3dfb27532897baaf154928dbaad9c09e444ea4a"
+            "integrity": "sha1:99e1961c6d4aa9923a038577e8cfe272696b6301"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/paginate/queue-manager-paginate-jobs-registry.query-handler.ts",
-            "integrity": "sha1:5ae84a30a6a4678520ebd5c5bce186028a8aebcd"
+            "integrity": "sha1:a255b2886e1a568e722283967721a9c24777c7e7"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/paginate/queue-manager-paginate-jobs-registry.query.ts",
-            "integrity": "sha1:8c452eda3a70d67d7f5a0036a14cdec336f3f4b0"
+            "integrity": "sha1:042a2ba2d95e4e8e74995a8c23523c97481799ce"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/paginate/queue-manager-paginate-jobs-registry.service.spec.ts",
-            "integrity": "sha1:ae83e21d5c2e727637d3e180b995f1028a944cc3"
+            "integrity": "sha1:64e4d0675e95ec696834ed17cdf0d9b2f57ac02e"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/paginate/queue-manager-paginate-jobs-registry.service.ts",
-            "integrity": "sha1:6a4df8b5930537c33bf719d704973dd019bf648e"
+            "integrity": "sha1:d73979cc7c0ca5bb70f57493f99f06a24538a172"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/raw-sql/queue-manager-raw-sql-jobs-registry.query-handler.spec.ts",
-            "integrity": "sha1:f8f6941a8e3e96741c1f2a17d3bc0995dcec2f26"
+            "integrity": "sha1:fcc085f7e0a9c428f4ed301765004be93b386c29"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/raw-sql/queue-manager-raw-sql-jobs-registry.query-handler.ts",
-            "integrity": "sha1:8f1af15aad2071a42cf3a30fdf47d196f556ed1c"
+            "integrity": "sha1:6ea1adc082f14ba1d1ccd996c138c93f7c2be782"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/raw-sql/queue-manager-raw-sql-jobs-registry.query.ts",
@@ -231,31 +231,31 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/raw-sql/queue-manager-raw-sql-jobs-registry.service.spec.ts",
-            "integrity": "sha1:9abd463cedfcd7421111e21c933951ba8abdf528"
+            "integrity": "sha1:ee3b5b70ae18a115d1a4bd6fea59eabc963e3abb"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/raw-sql/queue-manager-raw-sql-jobs-registry.service.ts",
-            "integrity": "sha1:5334c04de1b9ca518debb945a426c1b7f10f4c86"
+            "integrity": "sha1:76d9dfcd2b8eb9c7da189ee7c20eadef80e586bb"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/sagas/queue-manager-job-registry.sagas.ts",
-            "integrity": "sha1:ada79276a472c92e1c19f64a8d5b7ba496161443"
+            "integrity": "sha1:f8211c4452d8e5e6c274445cdda69aedafd7385b"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-job-registry-by-id.command-handler.spec.ts",
-            "integrity": "sha1:9cc9586ee3e2c44f13e9f3e57c9cfc27ce3346e0"
+            "integrity": "sha1:6d9af3f8c1e14058ad44181c8a1f1cbf417acfc4"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-job-registry-by-id.command-handler.ts",
-            "integrity": "sha1:d94102a5d19e3c2d189bf603710ce4659918f938"
+            "integrity": "sha1:ff7ea522f8c5db58cb608769e3e93f752d2724fa"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-job-registry-by-id.command.ts",
-            "integrity": "sha1:4fb03a806b9e5f210eb76ce4cf72ca40ec85ffc3"
+            "integrity": "sha1:1fc5c35aac814caf81e68be47ee35945fcadf3f1"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-job-registry-by-id.service.spec.ts",
-            "integrity": "sha1:9e074c53dcb8fd2eef65573e2afd619c729ccde7"
+            "integrity": "sha1:2bddb02fc9aa9cabc86fda4530ec0b3edd06a254"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-job-registry-by-id.service.ts",
@@ -263,31 +263,31 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-jobs-registry.command-handler.spec.ts",
-            "integrity": "sha1:421ca97c7141f5ac4879752584cd83a06fb92943"
+            "integrity": "sha1:ef12cf81480c3c90d81f53ef6b02fe5dde1ec19a"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-jobs-registry.command-handler.ts",
-            "integrity": "sha1:0f9bfa12099179ec2825531f19844f8137ba9ca7"
+            "integrity": "sha1:4e5ee0e1d534f30f474db4d262f435d0368948e5"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-jobs-registry.command.ts",
-            "integrity": "sha1:813a695faa9b052bcdfafff87291bea1a588ea45"
+            "integrity": "sha1:a75afa571b5c1cfebd161e99a8a4ec143b2b45b4"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-jobs-registry.service.spec.ts",
-            "integrity": "sha1:98b778300c6fdb82812894474b5b0ffeecd68146"
+            "integrity": "sha1:31b29a4e2629c1b58575510d80e3e35cb4aca7a4"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/update/queue-manager-update-jobs-registry.service.ts",
-            "integrity": "sha1:bed18cc2d8db90615120930e5adced39153b06b3"
+            "integrity": "sha1:6ca492a69dfb0b8bb702f58da400d4f63031f000"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/upsert/queue-manager-upsert-job-registry.command-handler.spec.ts",
-            "integrity": "sha1:85b0e4f49caf35921ceb51f17ccbdcb8718065d1"
+            "integrity": "sha1:238529fccc5e8301fad13b3bde59ac0db71f996c"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/upsert/queue-manager-upsert-job-registry.command-handler.ts",
-            "integrity": "sha1:1a7c2bd58b20c532ad279aac25d3c9292d428320"
+            "integrity": "sha1:732af32e16976020b4d8e1a0c3ba999c9927a8c2"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/upsert/queue-manager-upsert-job-registry.command.ts",
@@ -295,7 +295,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/upsert/queue-manager-upsert-job-registry.service.spec.ts",
-            "integrity": "sha1:df9fa39463d2e7780b65543f80a753655b3b3816"
+            "integrity": "sha1:6592dc6519efa7743f669924d8b967f88922198c"
         },
         {
             "path": "src/@app/queue-manager/job-registry/application/upsert/queue-manager-upsert-job-registry.service.ts",
@@ -303,15 +303,15 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/queue-manager-job-registry.aggregate.ts",
-            "integrity": "sha1:63469b759cc27a2b67420729bda66b343c1dbe67"
+            "integrity": "sha1:b3fa0cb20009411345256f0de1ee675cfb88451b"
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/queue-manager-job-registry.mapper.ts",
-            "integrity": "sha1:9d6f777db31e7fad2e9e6080e45c5a1d3b15302b"
+            "integrity": "sha1:c5fec459a27017447b0c007d7a8eb559710d12c3"
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/queue-manager-job-registry.repository.ts",
-            "integrity": "sha1:94b325a04caad0a32f23e34a61aa9bef8a30d71b"
+            "integrity": "sha1:ab373d466cb6bfcba2b96d12882fbce8bfd2db2a"
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/queue-manager-job-registry.response.ts",
@@ -319,7 +319,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/value-objects/index.ts",
-            "integrity": "sha1:4aa18f924f807fd7b1e1477862c5f4e1dd99444d"
+            "integrity": "sha1:078739aa925656799f19204a03aac6f238efa30f"
         },
         {
             "path": "src/@app/queue-manager/job-registry/index.ts",
@@ -327,19 +327,19 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.data.ts",
-            "integrity": "sha1:f1541a372a9c543ca6c67254c9b57ebf132e93f0"
+            "integrity": "sha1:b9a35186cb06a389dc0dfc6f2a11a4b132d5abb0"
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.repository.ts",
-            "integrity": "sha1:c337b20ea384d336ebad55e92497c06d415268eb"
+            "integrity": "sha1:93cce61e87e51e28fbd461d9cbf84b0c35fdcc6e"
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.seeder.ts",
-            "integrity": "sha1:a1e7c8e6e185a1a36473d28dfdaa77fc541fb519"
+            "integrity": "sha1:c166935e00a846417cb8009c30ee23bf37b320fe"
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/sequelize/queue-manager-sequelize-job-registry.model.ts",
-            "integrity": "sha1:10ba603673c55d0b3962a94ff3b407b0734dcf33"
+            "integrity": "sha1:e50f9c75a5593241d2a2dcc9e49a68883ebf44d1"
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/sequelize/queue-manager-sequelize-job-registry.repository.ts",
@@ -383,7 +383,7 @@
         },
         {
             "path": "src/@api/queue-manager/queue-manager.seeder.ts",
-            "integrity": "sha1:ebf75472804a5ed225e674e2afb2729dfda38858"
+            "integrity": "sha1:d7ff005816c298c8fb7826b29adb7b8f7dd70c41"
         },
         {
             "path": "src/@api/queue-manager/job-registry/controllers/queue-manager-create-job-registry.controller.spec.ts",
@@ -475,7 +475,7 @@
         },
         {
             "path": "src/@api/queue-manager/job-registry/dto/queue-manager-job-registry.dto.ts",
-            "integrity": "sha1:3506a7e6a99ad8f922bc32ebf726131c8b9bcf61"
+            "integrity": "sha1:edbb4d69adfab1d7e0412ef8502426bace5d5463"
         },
         {
             "path": "src/@api/queue-manager/job-registry/dto/queue-manager-create-job-registry.dto.ts",
@@ -587,7 +587,7 @@
         },
         {
             "path": "src/@api/queue-manager/job-registry/index.ts",
-            "integrity": "sha1:242590c3b151a113e60876b84662ec92447bb9d2"
+            "integrity": "sha1:f8b871f50d5ae0db315e4c6aa6bb1c2f76bb7347"
         },
         {
             "path": "src/@api/queue-manager/job-registry/resolvers/queue-manager-create-job-registry.resolver.spec.ts",
@@ -683,11 +683,11 @@
         },
         {
             "path": "test/acceptance/queue-manager/job-registry.e2e-spec.ts",
-            "integrity": "sha1:2a8eb5ab9f0a7e0996cf05c0a67ae9e1e65f8270"
+            "integrity": "sha1:02b2845e6ecb0b8bb20155f9dd4a9a4193447688"
         },
         {
             "path": "postman/queue-manager/queue-manager.job-registry.postman.json",
-            "integrity": "sha1:f377fdab06c7e9dd647be08651166059eda8fe0a"
+            "integrity": "sha1:2f39c701bb1580761e6dc03330f1c55cfbd87092"
         }
     ]
 }

@@ -1,10 +1,7 @@
+import { QueueManagerIQueueRepository, QueueManagerMockQueueRepository } from '@app/queue-manager/queue';
+import { QueueManagerRawSQLQueuesService } from '@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { QueueManagerRawSQLQueuesService } from './queue-manager-raw-sql-queues.service';
-import { QueueManagerIQueueRepository } from '../../domain/queue-manager-queue.repository';
-import { QueueManagerMockQueueRepository } from '../../infrastructure/mock/queue-manager-mock-queue.repository';
 
 describe('QueueManagerRawSQLQueuesService ', () =>
 {

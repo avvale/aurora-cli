@@ -1,23 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.data';
-import { QueueManagerUpdateJobsRegistryService } from './queue-manager-update-jobs-registry.service';
+import { QueueManagerIJobRegistryRepository, queueManagerMockJobRegistryData, QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry';
+import { QueueManagerUpdateJobsRegistryService } from '@app/queue-manager/job-registry/application/update/queue-manager-update-jobs-registry.service';
 import {
     QueueManagerJobRegistryId,
-    QueueManagerJobRegistryQueueName,
-    QueueManagerJobRegistryState,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
+    QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
-    QueueManagerJobRegistryCreatedAt,
-    QueueManagerJobRegistryUpdatedAt,
-    QueueManagerJobRegistryDeletedAt,
-} from '../../domain/value-objects';
-import { QueueManagerIJobRegistryRepository } from '../../domain/queue-manager-job-registry.repository';
-import { QueueManagerMockJobRegistryRepository } from '../../infrastructure/mock/queue-manager-mock-job-registry.repository';
+} from '@app/queue-manager/job-registry/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerUpdateJobsRegistryService', () =>
 {

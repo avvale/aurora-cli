@@ -1,5 +1,5 @@
+import { QueueManagerCreatedJobRegistryEvent } from '@app/queue-manager/job-registry';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { QueueManagerCreatedJobRegistryEvent } from './queue-manager-created-job-registry.event';
 
 @EventsHandler(QueueManagerCreatedJobRegistryEvent)
 export class QueueManagerCreatedJobRegistryEventHandler implements IEventHandler<QueueManagerCreatedJobRegistryEvent>

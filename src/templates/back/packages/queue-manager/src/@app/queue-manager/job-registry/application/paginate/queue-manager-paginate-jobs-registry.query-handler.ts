@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { QueueManagerPaginateJobsRegistryQuery } from '@app/queue-manager/job-registry';
+import { QueueManagerPaginateJobsRegistryService } from '@app/queue-manager/job-registry/application/paginate/queue-manager-paginate-jobs-registry.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { QueueManagerPaginateJobsRegistryQuery } from './queue-manager-paginate-jobs-registry.query';
-import { QueueManagerPaginateJobsRegistryService } from './queue-manager-paginate-jobs-registry.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(QueueManagerPaginateJobsRegistryQuery)
 export class QueueManagerPaginateJobsRegistryQueryHandler implements IQueryHandler<QueueManagerPaginateJobsRegistryQuery>

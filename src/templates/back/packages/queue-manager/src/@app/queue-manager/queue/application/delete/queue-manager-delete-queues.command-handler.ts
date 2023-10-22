@@ -1,6 +1,6 @@
+import { QueueManagerDeleteQueuesCommand } from '@app/queue-manager/queue';
+import { QueueManagerDeleteQueuesService } from '@app/queue-manager/queue/application/delete/queue-manager-delete-queues.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { QueueManagerDeleteQueuesCommand } from './queue-manager-delete-queues.command';
-import { QueueManagerDeleteQueuesService } from './queue-manager-delete-queues.service';
 
 @CommandHandler(QueueManagerDeleteQueuesCommand)
 export class QueueManagerDeleteQueuesCommandHandler implements ICommandHandler<QueueManagerDeleteQueuesCommand>

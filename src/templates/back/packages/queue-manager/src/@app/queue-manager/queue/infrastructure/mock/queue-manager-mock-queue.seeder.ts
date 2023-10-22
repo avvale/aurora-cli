@@ -1,15 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { queueManagerMockQueueData, QueueManagerQueue } from '@app/queue-manager/queue';
 import {
-    QueueManagerQueueId,
-    QueueManagerQueuePrefix,
-    QueueManagerQueueName,
     QueueManagerQueueCreatedAt,
-    QueueManagerQueueUpdatedAt,
     QueueManagerQueueDeletedAt,
-} from '../../domain/value-objects';
-import { QueueManagerQueue } from '../../domain/queue-manager-queue.aggregate';
-import { queueManagerMockQueueData } from './queue-manager-mock-queue.data';
+    QueueManagerQueueId,
+    QueueManagerQueueName,
+    QueueManagerQueuePrefix,
+    QueueManagerQueueUpdatedAt,
+} from '@app/queue-manager/queue/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

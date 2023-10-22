@@ -1,12 +1,7 @@
+import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistryMapper, QueueManagerMockJobRegistryRepository, QueueManagerRawSQLJobsRegistryQuery } from '@app/queue-manager/job-registry';
+import { QueueManagerRawSQLJobsRegistryQueryHandler } from '@app/queue-manager/job-registry/application/raw-sql/queue-manager-raw-sql-jobs-registry.query-handler';
+import { QueueManagerRawSQLJobsRegistryService } from '@app/queue-manager/job-registry/application/raw-sql/queue-manager-raw-sql-jobs-registry.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.repository';
-import { QueueManagerIJobRegistryRepository } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.repository';
-import { QueueManagerJobRegistryMapper } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.mapper';
-import { QueueManagerRawSQLJobsRegistryQueryHandler } from './queue-manager-raw-sql-jobs-registry.query-handler';
-import { QueueManagerRawSQLJobsRegistryQuery } from './queue-manager-raw-sql-jobs-registry.query';
-import { QueueManagerRawSQLJobsRegistryService } from './queue-manager-raw-sql-jobs-registry.service';
 
 describe('RawSQLJobsRegistryQueryHandler', () =>
 {

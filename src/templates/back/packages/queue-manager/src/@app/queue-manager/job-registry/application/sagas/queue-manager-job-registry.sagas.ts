@@ -1,8 +1,8 @@
+import { QueueManagerCreatedJobRegistryEvent } from '@app/queue-manager/job-registry';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { QueueManagerCreatedJobRegistryEvent } from '../events/queue-manager-created-job-registry.event';
 
 @Injectable()
 export class QueueManagerJobRegistrySagas

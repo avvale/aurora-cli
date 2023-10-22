@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'QueueManagerJobRegistry',
@@ -14,7 +14,7 @@ import { DataTypes } from 'sequelize';
 		},
 		{
 			fields: ['jobId'],
-			unique: true,
+			unique: false,
 		},
 		{
 			fields: ['tags'],

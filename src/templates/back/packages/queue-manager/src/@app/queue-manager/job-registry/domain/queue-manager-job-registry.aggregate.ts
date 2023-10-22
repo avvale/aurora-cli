@@ -1,20 +1,18 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { QueueManagerCreatedJobRegistryEvent, QueueManagerDeletedJobRegistryEvent, QueueManagerUpdatedJobRegistryEvent } from '@app/queue-manager/job-registry';
 import {
+    QueueManagerJobRegistryCreatedAt,
+    QueueManagerJobRegistryDeletedAt,
     QueueManagerJobRegistryId,
-    QueueManagerJobRegistryQueueName,
-    QueueManagerJobRegistryState,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
+    QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
-    QueueManagerJobRegistryCreatedAt,
     QueueManagerJobRegistryUpdatedAt,
-    QueueManagerJobRegistryDeletedAt,
-} from './value-objects';
-import { QueueManagerCreatedJobRegistryEvent } from '../application/events/queue-manager-created-job-registry.event';
-import { QueueManagerUpdatedJobRegistryEvent } from '../application/events/queue-manager-updated-job-registry.event';
-import { QueueManagerDeletedJobRegistryEvent } from '../application/events/queue-manager-deleted-job-registry.event';
+} from '@app/queue-manager/job-registry/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class QueueManagerJobRegistry extends AggregateRoot
 {
@@ -28,8 +26,6 @@ export class QueueManagerJobRegistry extends AggregateRoot
     updatedAt: QueueManagerJobRegistryUpdatedAt;
     deletedAt: QueueManagerJobRegistryDeletedAt;
 
-    // eager relationship
-
     constructor(
         id: QueueManagerJobRegistryId,
         queueName: QueueManagerJobRegistryQueueName,
@@ -40,7 +36,6 @@ export class QueueManagerJobRegistry extends AggregateRoot
         createdAt: QueueManagerJobRegistryCreatedAt,
         updatedAt: QueueManagerJobRegistryUpdatedAt,
         deletedAt: QueueManagerJobRegistryDeletedAt,
-
     )
     {
         super();
@@ -53,11 +48,9 @@ export class QueueManagerJobRegistry extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
     }
 
-    static register (
+    static register(
         id: QueueManagerJobRegistryId,
         queueName: QueueManagerJobRegistryQueueName,
         state: QueueManagerJobRegistryState,
@@ -67,7 +60,6 @@ export class QueueManagerJobRegistry extends AggregateRoot
         createdAt: QueueManagerJobRegistryCreatedAt,
         updatedAt: QueueManagerJobRegistryUpdatedAt,
         deletedAt: QueueManagerJobRegistryDeletedAt,
-
     ): QueueManagerJobRegistry
     {
         return new QueueManagerJobRegistry(
@@ -80,7 +72,6 @@ export class QueueManagerJobRegistry extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
         );
     }
 
@@ -147,8 +138,6 @@ export class QueueManagerJobRegistry extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 
@@ -165,8 +154,6 @@ export class QueueManagerJobRegistry extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 }

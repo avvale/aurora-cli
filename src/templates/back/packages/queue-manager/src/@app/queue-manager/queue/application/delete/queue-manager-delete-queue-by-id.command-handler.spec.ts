@@ -1,15 +1,11 @@
+import { QueueManagerDeleteQueueByIdCommand, queueManagerMockQueueData } from '@app/queue-manager/queue';
+import { QueueManagerDeleteQueueByIdCommandHandler } from '@app/queue-manager/queue/application/delete/queue-manager-delete-queue-by-id.command-handler';
+import { QueueManagerDeleteQueueByIdService } from '@app/queue-manager/queue/application/delete/queue-manager-delete-queue-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerDeleteQueueByIdCommandHandler } from './queue-manager-delete-queue-by-id.command-handler';
-import { queueManagerMockQueueData } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data';
-import { QueueManagerDeleteQueueByIdCommand } from './queue-manager-delete-queue-by-id.command';
-import { QueueManagerDeleteQueueByIdService } from './queue-manager-delete-queue-by-id.service';
 
 describe('QueueManagerDeleteQueueByIdCommandHandler', () =>
 {
     let commandHandler: QueueManagerDeleteQueueByIdCommandHandler;
-    let service: QueueManagerDeleteQueueByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('QueueManagerDeleteQueueByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<QueueManagerDeleteQueueByIdCommandHandler>(QueueManagerDeleteQueueByIdCommandHandler);
-        service = module.get<QueueManagerDeleteQueueByIdService>(QueueManagerDeleteQueueByIdService);
     });
 
     describe('main', () =>

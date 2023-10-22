@@ -1,19 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { QueueManagerIJobRegistryRepository } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.repository';
+import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistry, queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import {
+    QueueManagerJobRegistryCreatedAt,
+    QueueManagerJobRegistryDeletedAt,
     QueueManagerJobRegistryId,
-    QueueManagerJobRegistryQueueName,
-    QueueManagerJobRegistryState,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
+    QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
-    QueueManagerJobRegistryCreatedAt,
     QueueManagerJobRegistryUpdatedAt,
-    QueueManagerJobRegistryDeletedAt,
 } from '@app/queue-manager/job-registry/domain/value-objects';
-import { QueueManagerJobRegistry } from '../../domain/queue-manager-job-registry.aggregate';
-import { queueManagerMockJobRegistryData } from './queue-manager-mock-job-registry.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerMockJobRegistryRepository extends MockRepository<QueueManagerJobRegistry> implements QueueManagerIJobRegistryRepository
@@ -21,7 +19,6 @@ export class QueueManagerMockJobRegistryRepository extends MockRepository<QueueM
     public readonly repository: any;
     public readonly aggregateName: string = 'QueueManagerJobRegistry';
     public collectionSource: QueueManagerJobRegistry[];
-    public deletedAtInstance: QueueManagerJobRegistryDeletedAt = new QueueManagerJobRegistryDeletedAt(null);
 
     constructor()
     {

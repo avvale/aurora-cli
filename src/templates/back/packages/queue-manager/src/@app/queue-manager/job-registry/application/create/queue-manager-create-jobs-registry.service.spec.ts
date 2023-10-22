@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerIJobRegistryRepository, QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry';
+import { QueueManagerCreateJobsRegistryService } from '@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { QueueManagerCreateJobsRegistryService } from './queue-manager-create-jobs-registry.service';
-import { QueueManagerIJobRegistryRepository } from '../../domain/queue-manager-job-registry.repository';
-import { QueueManagerMockJobRegistryRepository } from '../../infrastructure/mock/queue-manager-mock-job-registry.repository';
 
 describe('QueueManagerCreateJobsRegistryService', () =>
 {

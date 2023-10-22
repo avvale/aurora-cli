@@ -1,9 +1,6 @@
+import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { QueueManagerIJobRegistryRepository } from '../../domain/queue-manager-job-registry.repository';
-import { QueueManagerJobRegistry } from '../../domain/queue-manager-job-registry.aggregate';
 
 @Injectable()
 export class QueueManagerPaginateJobsRegistryService

@@ -1,8 +1,6 @@
+import { QueueManagerGetQueuesQuery, QueueManagerQueueMapper, QueueManagerQueueResponse } from '@app/queue-manager/queue';
+import { QueueManagerGetQueuesService } from '@app/queue-manager/queue/application/get/queue-manager-get-queues.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { QueueManagerQueueResponse } from '../../domain/queue-manager-queue.response';
-import { QueueManagerQueueMapper } from '../../domain/queue-manager-queue.mapper';
-import { QueueManagerGetQueuesQuery } from './queue-manager-get-queues.query';
-import { QueueManagerGetQueuesService } from './queue-manager-get-queues.service';
 
 @QueryHandler(QueueManagerGetQueuesQuery)
 export class QueueManagerGetQueuesQueryHandler implements IQueryHandler<QueueManagerGetQueuesQuery>
@@ -15,10 +13,12 @@ export class QueueManagerGetQueuesQueryHandler implements IQueryHandler<QueueMan
 
     async execute(query: QueueManagerGetQueuesQuery): Promise<QueueManagerQueueResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getQueuesService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getQueuesService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

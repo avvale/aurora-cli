@@ -6,11 +6,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { createClient } from 'redis';
 import { QueueManagerHandlers, QueueManagerModels, QueueManagerRepositories, QueueManagerSagas, QueueManagerServices } from '../../@app/queue-manager';
-import { QueueManagerQueueApiHandlers, QueueManagerQueueControllers, QueueManagerQueueResolvers, QueueManagerQueueServices } from './queue';
+import { QueueManagerQueueApiHandlers, QueueManagerQueueApiControllers, QueueManagerQueueApiResolvers, QueueManagerQueueApiServices } from './queue';
 import { QueueManagerSeeder } from './queue-manager.seeder';
 import { QueueRedisImplementationService } from './shared/services';
 import { QueueManagerJobControllers, QueueManagerJobResolvers, QueueManagerJobApiHandlers, QueueManagerJobServices } from './job';
-import { QueueManagerJobRegistryControllers, QueueManagerJobRegistryResolvers, QueueManagerJobRegistryApiHandlers, QueueManagerJobRegistryServices } from './job-registry';
+import { QueueManagerJobRegistryApiHandlers, QueueManagerJobRegistryApiControllers, QueueManagerJobRegistryApiResolvers, QueueManagerJobRegistryApiServices } from './job-registry';
 import { appQueues } from 'src/app.queues';
 
 @Module({
@@ -44,9 +44,9 @@ import { appQueues } from 'src/app.queues';
         ),
     ],
     controllers: [
-        ...QueueManagerQueueControllers,
         ...QueueManagerJobControllers,
-        ...QueueManagerJobRegistryControllers,
+        ...QueueManagerQueueApiControllers,
+        ...QueueManagerJobRegistryApiControllers
     ],
     providers: [
         {
@@ -68,15 +68,15 @@ import { appQueues } from 'src/app.queues';
         ...QueueManagerServices,
         ...QueueManagerRepositories,
         ...QueueManagerSagas,
-        ...QueueManagerQueueResolvers,
         ...QueueManagerQueueApiHandlers,
-        ...QueueManagerQueueServices,
         ...QueueManagerJobResolvers,
         ...QueueManagerJobApiHandlers,
         ...QueueManagerJobServices,
-        ...QueueManagerJobRegistryResolvers,
         ...QueueManagerJobRegistryApiHandlers,
-        ...QueueManagerJobRegistryServices,
+        ...QueueManagerQueueApiResolvers,
+        ...QueueManagerQueueApiServices,
+        ...QueueManagerJobRegistryApiResolvers,
+        ...QueueManagerJobRegistryApiServices
     ],
 })
 export class QueueManagerModule {}

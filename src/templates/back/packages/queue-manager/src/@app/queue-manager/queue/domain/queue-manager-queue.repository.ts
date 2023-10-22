@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { QueueManagerQueue } from './queue-manager-queue.aggregate';
 import { QueueManagerQueueId } from './value-objects';
+import { QueueManagerQueue } from '@app/queue-manager/queue';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class QueueManagerIQueueRepository implements IRepository<QueueManagerQueue>
 {
@@ -30,6 +30,8 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<QueueManagerQueue | null>;
 
@@ -124,6 +126,8 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

@@ -1,15 +1,11 @@
+import { queueManagerMockJobRegistryData, QueueManagerUpdateJobRegistryByIdCommand } from '@app/queue-manager/job-registry';
+import { QueueManagerUpdateJobRegistryByIdCommandHandler } from '@app/queue-manager/job-registry/application/update/queue-manager-update-job-registry-by-id.command-handler';
+import { QueueManagerUpdateJobRegistryByIdService } from '@app/queue-manager/job-registry/application/update/queue-manager-update-job-registry-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.data';
-import { QueueManagerUpdateJobRegistryByIdCommandHandler } from './queue-manager-update-job-registry-by-id.command-handler';
-import { QueueManagerUpdateJobRegistryByIdCommand } from './queue-manager-update-job-registry-by-id.command';
-import { QueueManagerUpdateJobRegistryByIdService } from './queue-manager-update-job-registry-by-id.service';
 
 describe('QueueManagerUpdateJobRegistryByIdCommandHandler', () =>
 {
     let commandHandler: QueueManagerUpdateJobRegistryByIdCommandHandler;
-    let service: QueueManagerUpdateJobRegistryByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('QueueManagerUpdateJobRegistryByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<QueueManagerUpdateJobRegistryByIdCommandHandler>(QueueManagerUpdateJobRegistryByIdCommandHandler);
-        service = module.get<QueueManagerUpdateJobRegistryByIdService>(QueueManagerUpdateJobRegistryByIdService);
     });
 
     describe('main', () =>

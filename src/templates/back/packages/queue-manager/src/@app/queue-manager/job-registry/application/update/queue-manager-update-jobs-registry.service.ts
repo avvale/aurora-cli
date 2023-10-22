@@ -1,21 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { QueueManagerAddJobsRegistryContextEvent, QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
 import {
+    QueueManagerJobRegistryCreatedAt,
+    QueueManagerJobRegistryDeletedAt,
     QueueManagerJobRegistryId,
-    QueueManagerJobRegistryQueueName,
-    QueueManagerJobRegistryState,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
+    QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
-    QueueManagerJobRegistryCreatedAt,
     QueueManagerJobRegistryUpdatedAt,
-    QueueManagerJobRegistryDeletedAt,
-} from '../../domain/value-objects';
-import { QueueManagerIJobRegistryRepository } from '../../domain/queue-manager-job-registry.repository';
-import { QueueManagerJobRegistry } from '../../domain/queue-manager-job-registry.aggregate';
-import { QueueManagerAddJobsRegistryContextEvent } from '../events/queue-manager-add-jobs-registry-context.event';
+} from '@app/queue-manager/job-registry/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class QueueManagerUpdateJobsRegistryService
@@ -51,7 +48,6 @@ export class QueueManagerUpdateJobsRegistryService
             new QueueManagerJobRegistryUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

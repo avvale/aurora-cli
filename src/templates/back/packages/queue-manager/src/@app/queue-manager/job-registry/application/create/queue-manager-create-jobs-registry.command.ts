@@ -1,6 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class  QueueManagerCreateJobsRegistryCommand
+export class QueueManagerCreateJobsRegistryCommand
 {
     constructor(
         public readonly payload: {

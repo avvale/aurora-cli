@@ -1,8 +1,6 @@
+import { QueueManagerJobRegistryMapper, QueueManagerJobRegistryResponse, QueueManagerRawSQLJobsRegistryQuery } from '@app/queue-manager/job-registry';
+import { QueueManagerRawSQLJobsRegistryService } from '@app/queue-manager/job-registry/application/raw-sql/queue-manager-raw-sql-jobs-registry.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { QueueManagerJobRegistryResponse } from '../../domain/queue-manager-job-registry.response';
-import { QueueManagerJobRegistryMapper } from '../../domain/queue-manager-job-registry.mapper';
-import { QueueManagerRawSQLJobsRegistryQuery } from './queue-manager-raw-sql-jobs-registry.query';
-import { QueueManagerRawSQLJobsRegistryService } from './queue-manager-raw-sql-jobs-registry.service';
 
 @QueryHandler(QueueManagerRawSQLJobsRegistryQuery)
 export class QueueManagerRawSQLJobsRegistryQueryHandler implements IQueryHandler<QueueManagerRawSQLJobsRegistryQuery>

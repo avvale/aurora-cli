@@ -1,12 +1,7 @@
+import { QueueManagerIQueueRepository, QueueManagerMockQueueRepository, QueueManagerQueueMapper, QueueManagerRawSQLQueuesQuery } from '@app/queue-manager/queue';
+import { QueueManagerRawSQLQueuesQueryHandler } from '@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.query-handler';
+import { QueueManagerRawSQLQueuesService } from '@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerMockQueueRepository } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.repository';
-import { QueueManagerIQueueRepository } from '@app/queue-manager/queue/domain/queue-manager-queue.repository';
-import { QueueManagerQueueMapper } from '@app/queue-manager/queue/domain/queue-manager-queue.mapper';
-import { QueueManagerRawSQLQueuesQueryHandler } from './queue-manager-raw-sql-queues.query-handler';
-import { QueueManagerRawSQLQueuesQuery } from './queue-manager-raw-sql-queues.query';
-import { QueueManagerRawSQLQueuesService } from './queue-manager-raw-sql-queues.service';
 
 describe('RawSQLQueuesQueryHandler', () =>
 {

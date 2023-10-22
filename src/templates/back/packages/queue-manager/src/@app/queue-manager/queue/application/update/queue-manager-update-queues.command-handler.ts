@@ -1,15 +1,12 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { QueueManagerUpdateQueuesCommand } from './queue-manager-update-queues.command';
-import { QueueManagerUpdateQueuesService } from './queue-manager-update-queues.service';
+import { QueueManagerUpdateQueuesCommand } from '@app/queue-manager/queue';
+import { QueueManagerUpdateQueuesService } from '@app/queue-manager/queue/application/update/queue-manager-update-queues.service';
 import {
     QueueManagerQueueId,
-    QueueManagerQueuePrefix,
     QueueManagerQueueName,
-    QueueManagerQueueCreatedAt,
-    QueueManagerQueueUpdatedAt,
-    QueueManagerQueueDeletedAt,
-} from '../../domain/value-objects';
+    QueueManagerQueuePrefix,
+} from '@app/queue-manager/queue/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(QueueManagerUpdateQueuesCommand)
 export class QueueManagerUpdateQueuesCommandHandler implements ICommandHandler<QueueManagerUpdateQueuesCommand>

@@ -1,18 +1,17 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { QueueManagerJobRegistry, queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import {
+    QueueManagerJobRegistryCreatedAt,
+    QueueManagerJobRegistryDeletedAt,
     QueueManagerJobRegistryId,
-    QueueManagerJobRegistryQueueName,
-    QueueManagerJobRegistryState,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
+    QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
-    QueueManagerJobRegistryCreatedAt,
     QueueManagerJobRegistryUpdatedAt,
-    QueueManagerJobRegistryDeletedAt,
-} from '../../domain/value-objects';
-import { QueueManagerJobRegistry } from '../../domain/queue-manager-job-registry.aggregate';
-import { queueManagerMockJobRegistryData } from './queue-manager-mock-job-registry.data';
+} from '@app/queue-manager/job-registry/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

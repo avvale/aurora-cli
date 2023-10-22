@@ -1,15 +1,11 @@
+import { queueManagerMockQueueData, QueueManagerUpdateQueueByIdCommand } from '@app/queue-manager/queue';
+import { QueueManagerUpdateQueueByIdCommandHandler } from '@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.command-handler';
+import { QueueManagerUpdateQueueByIdService } from '@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { queueManagerMockQueueData } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data';
-import { QueueManagerUpdateQueueByIdCommandHandler } from './queue-manager-update-queue-by-id.command-handler';
-import { QueueManagerUpdateQueueByIdCommand } from './queue-manager-update-queue-by-id.command';
-import { QueueManagerUpdateQueueByIdService } from './queue-manager-update-queue-by-id.service';
 
 describe('QueueManagerUpdateQueueByIdCommandHandler', () =>
 {
     let commandHandler: QueueManagerUpdateQueueByIdCommandHandler;
-    let service: QueueManagerUpdateQueueByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('QueueManagerUpdateQueueByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<QueueManagerUpdateQueueByIdCommandHandler>(QueueManagerUpdateQueueByIdCommandHandler);
-        service = module.get<QueueManagerUpdateQueueByIdService>(QueueManagerUpdateQueueByIdService);
     });
 
     describe('main', () =>

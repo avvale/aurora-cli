@@ -1,8 +1,8 @@
+import { QueueManagerCreatedQueueEvent } from '@app/queue-manager/queue';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { QueueManagerCreatedQueueEvent } from '../events/queue-manager-created-queue.event';
 
 @Injectable()
 export class QueueManagerQueueSagas

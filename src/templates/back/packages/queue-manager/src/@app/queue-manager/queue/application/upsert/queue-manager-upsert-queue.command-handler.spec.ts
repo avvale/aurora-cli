@@ -1,10 +1,7 @@
+import { queueManagerMockQueueData, QueueManagerUpsertQueueCommand } from '@app/queue-manager/queue';
+import { QueueManagerUpsertQueueCommandHandler } from '@app/queue-manager/queue/application/upsert/queue-manager-upsert-queue.command-handler';
+import { QueueManagerUpsertQueueService } from '@app/queue-manager/queue/application/upsert/queue-manager-upsert-queue.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { queueManagerMockQueueData } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data';
-import { QueueManagerUpsertQueueCommandHandler } from './queue-manager-upsert-queue.command-handler';
-import { QueueManagerUpsertQueueCommand } from './queue-manager-upsert-queue.command';
-import { QueueManagerUpsertQueueService } from './queue-manager-upsert-queue.service';
 
 describe('QueueManagerUpsertQueueCommandHandler', () =>
 {

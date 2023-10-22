@@ -1,9 +1,6 @@
+import { QueueManagerIQueueRepository, QueueManagerQueue } from '@app/queue-manager/queue';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { QueueManagerIQueueRepository } from '../../domain/queue-manager-queue.repository';
-import { QueueManagerQueue } from '../../domain/queue-manager-queue.aggregate';
 
 @Injectable()
 export class QueueManagerPaginateQueuesService

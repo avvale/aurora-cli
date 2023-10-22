@@ -1,14 +1,11 @@
+import { QueueManagerDeleteJobsRegistryCommand } from '@app/queue-manager/job-registry';
+import { QueueManagerDeleteJobsRegistryCommandHandler } from '@app/queue-manager/job-registry/application/delete/queue-manager-delete-jobs-registry.command-handler';
+import { QueueManagerDeleteJobsRegistryService } from '@app/queue-manager/job-registry/application/delete/queue-manager-delete-jobs-registry.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerDeleteJobsRegistryCommandHandler } from './queue-manager-delete-jobs-registry.command-handler';
-import { QueueManagerDeleteJobsRegistryCommand } from './queue-manager-delete-jobs-registry.command';
-import { QueueManagerDeleteJobsRegistryService } from './queue-manager-delete-jobs-registry.service';
 
 describe('QueueManagerDeleteJobsRegistryCommandHandler', () =>
 {
     let commandHandler: QueueManagerDeleteJobsRegistryCommandHandler;
-    let service: QueueManagerDeleteJobsRegistryService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('QueueManagerDeleteJobsRegistryCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<QueueManagerDeleteJobsRegistryCommandHandler>(QueueManagerDeleteJobsRegistryCommandHandler);
-        service = module.get<QueueManagerDeleteJobsRegistryService>(QueueManagerDeleteJobsRegistryService);
     });
 
     describe('main', () =>

@@ -30,7 +30,7 @@ export { QueueManagerUpsertJobRegistryController } from './controllers/queue-man
 export { QueueManagerDeleteJobRegistryByIdController } from './controllers/queue-manager-delete-job-registry-by-id.controller';
 export { QueueManagerDeleteJobsRegistryController } from './controllers/queue-manager-delete-jobs-registry.controller';
 
-// exports resolvers
+// export resolvers
 export { QueueManagerCreateJobRegistryResolver } from './resolvers/queue-manager-create-job-registry.resolver';
 export { QueueManagerCreateJobsRegistryResolver } from './resolvers/queue-manager-create-jobs-registry.resolver';
 export { QueueManagerPaginateJobsRegistryResolver } from './resolvers/queue-manager-paginate-jobs-registry.resolver';
@@ -43,7 +43,7 @@ export { QueueManagerUpsertJobRegistryResolver } from './resolvers/queue-manager
 export { QueueManagerDeleteJobRegistryByIdResolver } from './resolvers/queue-manager-delete-job-registry-by-id.resolver';
 export { QueueManagerDeleteJobsRegistryResolver } from './resolvers/queue-manager-delete-jobs-registry.resolver';
 
-// controllers
+// import controllers
 import { QueueManagerCreateJobRegistryController } from './controllers/queue-manager-create-job-registry.controller';
 import { QueueManagerCreateJobsRegistryController } from './controllers/queue-manager-create-jobs-registry.controller';
 import { QueueManagerPaginateJobsRegistryController } from './controllers/queue-manager-paginate-jobs-registry.controller';
@@ -56,7 +56,7 @@ import { QueueManagerUpsertJobRegistryController } from './controllers/queue-man
 import { QueueManagerDeleteJobRegistryByIdController } from './controllers/queue-manager-delete-job-registry-by-id.controller';
 import { QueueManagerDeleteJobsRegistryController } from './controllers/queue-manager-delete-jobs-registry.controller';
 
-// resolvers
+// import resolvers
 import { QueueManagerCreateJobRegistryResolver } from './resolvers/queue-manager-create-job-registry.resolver';
 import { QueueManagerCreateJobsRegistryResolver } from './resolvers/queue-manager-create-jobs-registry.resolver';
 import { QueueManagerPaginateJobsRegistryResolver } from './resolvers/queue-manager-paginate-jobs-registry.resolver';
@@ -69,7 +69,7 @@ import { QueueManagerUpsertJobRegistryResolver } from './resolvers/queue-manager
 import { QueueManagerDeleteJobRegistryByIdResolver } from './resolvers/queue-manager-delete-job-registry-by-id.resolver';
 import { QueueManagerDeleteJobsRegistryResolver } from './resolvers/queue-manager-delete-jobs-registry.resolver';
 
-// handlers
+// import handlers
 import { QueueManagerCreateJobRegistryHandler } from './handlers/queue-manager-create-job-registry.handler';
 import { QueueManagerCreateJobsRegistryHandler } from './handlers/queue-manager-create-jobs-registry.handler';
 import { QueueManagerPaginateJobsRegistryHandler } from './handlers/queue-manager-paginate-jobs-registry.handler';
@@ -82,10 +82,10 @@ import { QueueManagerUpsertJobRegistryHandler } from './handlers/queue-manager-u
 import { QueueManagerDeleteJobRegistryByIdHandler } from './handlers/queue-manager-delete-job-registry-by-id.handler';
 import { QueueManagerDeleteJobsRegistryHandler } from './handlers/queue-manager-delete-jobs-registry.handler';
 
-// seeder
+// import seeder
 import { QueueManagerJobRegistrySeeder } from './seeder/queue-manager-job-registry.seeder';
 
-export const QueueManagerJobRegistryControllers = [
+export const QueueManagerJobRegistryApiControllers = [
     QueueManagerCreateJobRegistryController,
     QueueManagerCreateJobsRegistryController,
     QueueManagerPaginateJobsRegistryController,
@@ -99,7 +99,7 @@ export const QueueManagerJobRegistryControllers = [
     QueueManagerDeleteJobsRegistryController,
 ];
 
-export const QueueManagerJobRegistryResolvers = [
+export const QueueManagerJobRegistryApiResolvers = [
     QueueManagerCreateJobRegistryResolver,
     QueueManagerCreateJobsRegistryResolver,
     QueueManagerPaginateJobsRegistryResolver,
@@ -127,6 +127,6 @@ export const QueueManagerJobRegistryApiHandlers = [
     QueueManagerDeleteJobsRegistryHandler,
 ];
 
-export const QueueManagerJobRegistryServices = [
+export const QueueManagerJobRegistryApiServices = [
     QueueManagerJobRegistrySeeder,
 ];

@@ -1,16 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { QueueManagerIQueueRepository } from '@app/queue-manager/queue/domain/queue-manager-queue.repository';
+import { QueueManagerIQueueRepository, queueManagerMockQueueData, QueueManagerQueue } from '@app/queue-manager/queue';
 import {
-    QueueManagerQueueId,
-    QueueManagerQueuePrefix,
-    QueueManagerQueueName,
     QueueManagerQueueCreatedAt,
-    QueueManagerQueueUpdatedAt,
     QueueManagerQueueDeletedAt,
+    QueueManagerQueueId,
+    QueueManagerQueueName,
+    QueueManagerQueuePrefix,
+    QueueManagerQueueUpdatedAt,
 } from '@app/queue-manager/queue/domain/value-objects';
-import { QueueManagerQueue } from '../../domain/queue-manager-queue.aggregate';
-import { queueManagerMockQueueData } from './queue-manager-mock-queue.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerMockQueueRepository extends MockRepository<QueueManagerQueue> implements QueueManagerIQueueRepository
@@ -18,7 +16,6 @@ export class QueueManagerMockQueueRepository extends MockRepository<QueueManager
     public readonly repository: any;
     public readonly aggregateName: string = 'QueueManagerQueue';
     public collectionSource: QueueManagerQueue[];
-    public deletedAtInstance: QueueManagerQueueDeletedAt = new QueueManagerQueueDeletedAt(null);
 
     constructor()
     {

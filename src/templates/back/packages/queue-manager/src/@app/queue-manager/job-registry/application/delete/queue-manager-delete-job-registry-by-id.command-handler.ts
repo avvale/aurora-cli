@@ -1,9 +1,7 @@
+import { QueueManagerDeleteJobRegistryByIdCommand } from '@app/queue-manager/job-registry';
+import { QueueManagerDeleteJobRegistryByIdService } from '@app/queue-manager/job-registry/application/delete/queue-manager-delete-job-registry-by-id.service';
+import { QueueManagerJobRegistryId } from '@app/queue-manager/job-registry/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { QueueManagerDeleteJobRegistryByIdCommand } from './queue-manager-delete-job-registry-by-id.command';
-import { QueueManagerDeleteJobRegistryByIdService } from './queue-manager-delete-job-registry-by-id.service';
-import {
-    QueueManagerJobRegistryId
-} from '../../domain/value-objects';
 
 @CommandHandler(QueueManagerDeleteJobRegistryByIdCommand)
 export class QueueManagerDeleteJobRegistryByIdCommandHandler implements ICommandHandler<QueueManagerDeleteJobRegistryByIdCommand>

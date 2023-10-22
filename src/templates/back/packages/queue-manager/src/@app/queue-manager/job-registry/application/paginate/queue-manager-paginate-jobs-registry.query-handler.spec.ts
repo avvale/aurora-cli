@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { QueueManagerIJobRegistryRepository, QueueManagerMockJobRegistryRepository, QueueManagerPaginateJobsRegistryQuery } from '@app/queue-manager/job-registry';
+import { QueueManagerPaginateJobsRegistryQueryHandler } from '@app/queue-manager/job-registry/application/paginate/queue-manager-paginate-jobs-registry.query-handler';
+import { QueueManagerPaginateJobsRegistryService } from '@app/queue-manager/job-registry/application/paginate/queue-manager-paginate-jobs-registry.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { QueueManagerPaginateJobsRegistryQueryHandler } from './queue-manager-paginate-jobs-registry.query-handler';
-import { QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.repository';
-import { QueueManagerIJobRegistryRepository } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.repository';
-import { QueueManagerJobRegistryMapper } from '@app/queue-manager/job-registry/domain/queue-manager-job-registry.mapper';
-import { QueueManagerPaginateJobsRegistryQuery } from './queue-manager-paginate-jobs-registry.query';
-import { QueueManagerPaginateJobsRegistryService } from './queue-manager-paginate-jobs-registry.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerPaginateJobsRegistryQueryHandler', () =>
 {
     let queryHandler: QueueManagerPaginateJobsRegistryQueryHandler;
     let service: QueueManagerPaginateJobsRegistryService;
     let repository: QueueManagerMockJobRegistryRepository;
-    let mapper: QueueManagerJobRegistryMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('QueueManagerPaginateJobsRegistryQueryHandler', () =>
         queryHandler = module.get<QueueManagerPaginateJobsRegistryQueryHandler>(QueueManagerPaginateJobsRegistryQueryHandler);
         service = module.get<QueueManagerPaginateJobsRegistryService>(QueueManagerPaginateJobsRegistryService);
         repository = <QueueManagerMockJobRegistryRepository>module.get<QueueManagerIJobRegistryRepository>(QueueManagerIJobRegistryRepository);
-        mapper = new QueueManagerJobRegistryMapper();
     });
 
     describe('main', () =>

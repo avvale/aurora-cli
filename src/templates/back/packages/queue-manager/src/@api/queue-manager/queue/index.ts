@@ -30,7 +30,7 @@ export { QueueManagerUpsertQueueController } from './controllers/queue-manager-u
 export { QueueManagerDeleteQueueByIdController } from './controllers/queue-manager-delete-queue-by-id.controller';
 export { QueueManagerDeleteQueuesController } from './controllers/queue-manager-delete-queues.controller';
 
-// exports resolvers
+// export resolvers
 export { QueueManagerCreateQueueResolver } from './resolvers/queue-manager-create-queue.resolver';
 export { QueueManagerCreateQueuesResolver } from './resolvers/queue-manager-create-queues.resolver';
 export { QueueManagerPaginateQueuesResolver } from './resolvers/queue-manager-paginate-queues.resolver';
@@ -43,7 +43,7 @@ export { QueueManagerUpsertQueueResolver } from './resolvers/queue-manager-upser
 export { QueueManagerDeleteQueueByIdResolver } from './resolvers/queue-manager-delete-queue-by-id.resolver';
 export { QueueManagerDeleteQueuesResolver } from './resolvers/queue-manager-delete-queues.resolver';
 
-// controllers
+// import controllers
 import { QueueManagerCreateQueueController } from './controllers/queue-manager-create-queue.controller';
 import { QueueManagerCreateQueuesController } from './controllers/queue-manager-create-queues.controller';
 import { QueueManagerPaginateQueuesController } from './controllers/queue-manager-paginate-queues.controller';
@@ -56,7 +56,7 @@ import { QueueManagerUpsertQueueController } from './controllers/queue-manager-u
 import { QueueManagerDeleteQueueByIdController } from './controllers/queue-manager-delete-queue-by-id.controller';
 import { QueueManagerDeleteQueuesController } from './controllers/queue-manager-delete-queues.controller';
 
-// resolvers
+// import resolvers
 import { QueueManagerCreateQueueResolver } from './resolvers/queue-manager-create-queue.resolver';
 import { QueueManagerCreateQueuesResolver } from './resolvers/queue-manager-create-queues.resolver';
 import { QueueManagerPaginateQueuesResolver } from './resolvers/queue-manager-paginate-queues.resolver';
@@ -69,7 +69,7 @@ import { QueueManagerUpsertQueueResolver } from './resolvers/queue-manager-upser
 import { QueueManagerDeleteQueueByIdResolver } from './resolvers/queue-manager-delete-queue-by-id.resolver';
 import { QueueManagerDeleteQueuesResolver } from './resolvers/queue-manager-delete-queues.resolver';
 
-// handlers
+// import handlers
 import { QueueManagerCreateQueueHandler } from './handlers/queue-manager-create-queue.handler';
 import { QueueManagerCreateQueuesHandler } from './handlers/queue-manager-create-queues.handler';
 import { QueueManagerPaginateQueuesHandler } from './handlers/queue-manager-paginate-queues.handler';
@@ -82,10 +82,10 @@ import { QueueManagerUpsertQueueHandler } from './handlers/queue-manager-upsert-
 import { QueueManagerDeleteQueueByIdHandler } from './handlers/queue-manager-delete-queue-by-id.handler';
 import { QueueManagerDeleteQueuesHandler } from './handlers/queue-manager-delete-queues.handler';
 
-// seeder
+// import seeder
 import { QueueManagerQueueSeeder } from './seeder/queue-manager-queue.seeder';
 
-export const QueueManagerQueueControllers = [
+export const QueueManagerQueueApiControllers = [
     QueueManagerCreateQueueController,
     QueueManagerCreateQueuesController,
     QueueManagerPaginateQueuesController,
@@ -99,7 +99,7 @@ export const QueueManagerQueueControllers = [
     QueueManagerDeleteQueuesController,
 ];
 
-export const QueueManagerQueueResolvers = [
+export const QueueManagerQueueApiResolvers = [
     QueueManagerCreateQueueResolver,
     QueueManagerCreateQueuesResolver,
     QueueManagerPaginateQueuesResolver,
@@ -127,6 +127,6 @@ export const QueueManagerQueueApiHandlers = [
     QueueManagerDeleteQueuesHandler,
 ];
 
-export const QueueManagerQueueServices = [
+export const QueueManagerQueueApiServices = [
     QueueManagerQueueSeeder,
 ];

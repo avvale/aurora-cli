@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
+import { QueueManagerJobRegistryId } from '@app/queue-manager/job-registry/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { QueueManagerIJobRegistryRepository } from '../../domain/queue-manager-job-registry.repository';
-import { QueueManagerJobRegistry } from '../../domain/queue-manager-job-registry.aggregate';
-import { QueueManagerJobRegistryId } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerFindJobRegistryByIdService

@@ -1,14 +1,13 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { QueueManagerQueue } from './queue-manager-queue.aggregate';
-import { QueueManagerQueueResponse } from './queue-manager-queue.response';
+import { QueueManagerQueue, QueueManagerQueueResponse } from '@app/queue-manager/queue';
 import {
-    QueueManagerQueueId,
-    QueueManagerQueuePrefix,
-    QueueManagerQueueName,
     QueueManagerQueueCreatedAt,
-    QueueManagerQueueUpdatedAt,
     QueueManagerQueueDeletedAt,
-} from './value-objects';
+    QueueManagerQueueId,
+    QueueManagerQueueName,
+    QueueManagerQueuePrefix,
+    QueueManagerQueueUpdatedAt,
+} from '@app/queue-manager/queue/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class QueueManagerQueueMapper implements IMapper
 {

@@ -1,15 +1,12 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { QueueManagerCreateQueuesCommand } from './queue-manager-create-queues.command';
-import { QueueManagerCreateQueuesService } from './queue-manager-create-queues.service';
+import { QueueManagerCreateQueuesCommand } from '@app/queue-manager/queue';
+import { QueueManagerCreateQueuesService } from '@app/queue-manager/queue/application/create/queue-manager-create-queues.service';
 import {
     QueueManagerQueueId,
-    QueueManagerQueuePrefix,
     QueueManagerQueueName,
-    QueueManagerQueueCreatedAt,
-    QueueManagerQueueUpdatedAt,
-    QueueManagerQueueDeletedAt,
-} from '../../domain/value-objects';
+    QueueManagerQueuePrefix,
+} from '@app/queue-manager/queue/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(QueueManagerCreateQueuesCommand)
 export class QueueManagerCreateQueuesCommandHandler implements ICommandHandler<QueueManagerCreateQueuesCommand>

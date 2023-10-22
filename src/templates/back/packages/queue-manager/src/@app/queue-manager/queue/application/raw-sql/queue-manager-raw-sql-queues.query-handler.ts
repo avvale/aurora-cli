@@ -1,8 +1,6 @@
+import { QueueManagerQueueMapper, QueueManagerQueueResponse, QueueManagerRawSQLQueuesQuery } from '@app/queue-manager/queue';
+import { QueueManagerRawSQLQueuesService } from '@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { QueueManagerQueueResponse } from '../../domain/queue-manager-queue.response';
-import { QueueManagerQueueMapper } from '../../domain/queue-manager-queue.mapper';
-import { QueueManagerRawSQLQueuesQuery } from './queue-manager-raw-sql-queues.query';
-import { QueueManagerRawSQLQueuesService } from './queue-manager-raw-sql-queues.service';
 
 @QueryHandler(QueueManagerRawSQLQueuesQuery)
 export class QueueManagerRawSQLQueuesQueryHandler implements IQueryHandler<QueueManagerRawSQLQueuesQuery>

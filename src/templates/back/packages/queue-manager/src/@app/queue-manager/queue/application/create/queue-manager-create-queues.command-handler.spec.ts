@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerCreateQueuesCommand, queueManagerMockQueueData } from '@app/queue-manager/queue';
+import { QueueManagerCreateQueuesCommandHandler } from '@app/queue-manager/queue/application/create/queue-manager-create-queues.command-handler';
+import { QueueManagerCreateQueuesService } from '@app/queue-manager/queue/application/create/queue-manager-create-queues.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { queueManagerMockQueueData } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data';
-import { QueueManagerCreateQueuesCommandHandler } from './queue-manager-create-queues.command-handler';
-import { QueueManagerCreateQueuesCommand } from './queue-manager-create-queues.command';
-import { QueueManagerCreateQueuesService } from './queue-manager-create-queues.service';
 
 describe('queueManagerCreateQueuesCommandHandler', () =>
 {
     let commandHandler: QueueManagerCreateQueuesCommandHandler;
-    let service: QueueManagerCreateQueuesService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('queueManagerCreateQueuesCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<QueueManagerCreateQueuesCommandHandler>(QueueManagerCreateQueuesCommandHandler);
-        service = module.get<QueueManagerCreateQueuesService>(QueueManagerCreateQueuesService);
     });
 
     describe('main', () =>

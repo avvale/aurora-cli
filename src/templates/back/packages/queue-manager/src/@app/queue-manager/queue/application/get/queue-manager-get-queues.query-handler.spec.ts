@@ -1,12 +1,7 @@
+import { QueueManagerGetQueuesQuery, QueueManagerIQueueRepository, QueueManagerMockQueueRepository, QueueManagerQueueMapper } from '@app/queue-manager/queue';
+import { QueueManagerGetQueuesQueryHandler } from '@app/queue-manager/queue/application/get/queue-manager-get-queues.query-handler';
+import { QueueManagerGetQueuesService } from '@app/queue-manager/queue/application/get/queue-manager-get-queues.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { QueueManagerGetQueuesQueryHandler } from './queue-manager-get-queues.query-handler';
-import { QueueManagerMockQueueRepository } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.repository';
-import { QueueManagerIQueueRepository } from '@app/queue-manager/queue/domain/queue-manager-queue.repository';
-import { QueueManagerQueueMapper } from '@app/queue-manager/queue/domain/queue-manager-queue.mapper';
-import { QueueManagerGetQueuesQuery } from './queue-manager-get-queues.query';
-import { QueueManagerGetQueuesService } from './queue-manager-get-queues.service';
 
 describe('GetQueuesQueryHandler', () =>
 {

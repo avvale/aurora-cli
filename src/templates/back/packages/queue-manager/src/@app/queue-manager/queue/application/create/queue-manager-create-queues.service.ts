@@ -20,7 +20,7 @@ export class QueueManagerCreateQueuesService
     ) {}
 
     async main(
-        queues: {
+        payload: {
             id: QueueManagerQueueId;
             prefix: QueueManagerQueuePrefix;
             name: QueueManagerQueueName;
@@ -29,7 +29,7 @@ export class QueueManagerCreateQueuesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateQueues = queues.map(queue => QueueManagerQueue.register(
+        const aggregateQueues = payload.map(queue => QueueManagerQueue.register(
             queue.id,
             queue.prefix,
             queue.name,

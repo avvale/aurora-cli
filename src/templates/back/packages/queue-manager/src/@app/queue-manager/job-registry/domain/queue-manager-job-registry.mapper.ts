@@ -1,17 +1,16 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { QueueManagerJobRegistry } from './queue-manager-job-registry.aggregate';
-import { QueueManagerJobRegistryResponse } from './queue-manager-job-registry.response';
+import { QueueManagerJobRegistry, QueueManagerJobRegistryResponse } from '@app/queue-manager/job-registry';
 import {
+    QueueManagerJobRegistryCreatedAt,
+    QueueManagerJobRegistryDeletedAt,
     QueueManagerJobRegistryId,
-    QueueManagerJobRegistryQueueName,
-    QueueManagerJobRegistryState,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
+    QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
-    QueueManagerJobRegistryCreatedAt,
     QueueManagerJobRegistryUpdatedAt,
-    QueueManagerJobRegistryDeletedAt,
-} from './value-objects';
+} from '@app/queue-manager/job-registry/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class QueueManagerJobRegistryMapper implements IMapper
 {

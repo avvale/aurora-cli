@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { QueueManagerIJobRegistryRepository } from '../../domain/queue-manager-job-registry.repository';
-import { QueueManagerJobRegistry } from '../../domain/queue-manager-job-registry.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerRawSQLJobsRegistryService

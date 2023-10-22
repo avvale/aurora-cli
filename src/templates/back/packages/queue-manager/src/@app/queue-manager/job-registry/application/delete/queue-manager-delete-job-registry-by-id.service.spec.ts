@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { QueueManagerIJobRegistryRepository, queueManagerMockJobRegistryData, QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry';
+import { QueueManagerDeleteJobRegistryByIdService } from '@app/queue-manager/job-registry/application/delete/queue-manager-delete-job-registry-by-id.service';
+import { QueueManagerJobRegistryId } from '@app/queue-manager/job-registry/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.data';
-import { QueueManagerDeleteJobRegistryByIdService } from './queue-manager-delete-job-registry-by-id.service';
-import { QueueManagerJobRegistryId } from '../../domain/value-objects';
-import { QueueManagerIJobRegistryRepository } from '../../domain/queue-manager-job-registry.repository';
-import { QueueManagerMockJobRegistryRepository } from '../../infrastructure/mock/queue-manager-mock-job-registry.repository';
 
 describe('QueueManagerDeleteJobRegistryByIdService', () =>
 {

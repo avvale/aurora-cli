@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('QueueManagerCreateQueueCommandHandler', () =>
 {
     let commandHandler: QueueManagerCreateQueueCommandHandler;
-    let service: QueueManagerCreateQueueService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('QueueManagerCreateQueueCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<QueueManagerCreateQueueCommandHandler>(QueueManagerCreateQueueCommandHandler);
-        service = module.get<QueueManagerCreateQueueService>(QueueManagerCreateQueueService);
     });
 
     describe('main', () =>

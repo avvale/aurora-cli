@@ -1,12 +1,8 @@
+import { QueueManagerIQueueRepository, queueManagerMockQueueData, QueueManagerMockQueueRepository } from '@app/queue-manager/queue';
+import { QueueManagerFindQueueByIdService } from '@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.service';
+import { QueueManagerQueueId } from '@app/queue-manager/queue/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { queueManagerMockQueueData } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data';
-import { QueueManagerFindQueueByIdService } from './queue-manager-find-queue-by-id.service';
-import { QueueManagerQueueId } from '../../domain/value-objects';
-import { QueueManagerIQueueRepository } from '../../domain/queue-manager-queue.repository';
-import { QueueManagerMockQueueRepository } from '../../infrastructure/mock/queue-manager-mock-queue.repository';
 
 describe('QueueManagerFindQueueByIdService', () =>
 {

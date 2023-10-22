@@ -1,9 +1,9 @@
+export { QueueManagerJobRegistryCreatedAt } from './queue-manager-job-registry-created-at';
+export { QueueManagerJobRegistryDeletedAt } from './queue-manager-job-registry-deleted-at';
 export { QueueManagerJobRegistryId } from './queue-manager-job-registry-id';
-export { QueueManagerJobRegistryQueueName } from './queue-manager-job-registry-queue-name';
-export { QueueManagerJobRegistryState } from './queue-manager-job-registry-state';
 export { QueueManagerJobRegistryJobId } from './queue-manager-job-registry-job-id';
 export { QueueManagerJobRegistryJobName } from './queue-manager-job-registry-job-name';
+export { QueueManagerJobRegistryQueueName } from './queue-manager-job-registry-queue-name';
+export { QueueManagerJobRegistryState } from './queue-manager-job-registry-state';
 export { QueueManagerJobRegistryTags } from './queue-manager-job-registry-tags';
-export { QueueManagerJobRegistryCreatedAt } from './queue-manager-job-registry-created-at';
 export { QueueManagerJobRegistryUpdatedAt } from './queue-manager-job-registry-updated-at';
-export { QueueManagerJobRegistryDeletedAt } from './queue-manager-job-registry-deleted-at';

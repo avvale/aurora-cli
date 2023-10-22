@@ -23,7 +23,7 @@ export class QueueManagerCreateJobsRegistryService
     ) {}
 
     async main(
-        jobsRegistry: {
+        payload: {
             id: QueueManagerJobRegistryId;
             queueName: QueueManagerJobRegistryQueueName;
             state: QueueManagerJobRegistryState;
@@ -35,7 +35,7 @@ export class QueueManagerCreateJobsRegistryService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateJobsRegistry = jobsRegistry.map(jobRegistry => QueueManagerJobRegistry.register(
+        const aggregateJobsRegistry = payload.map(jobRegistry => QueueManagerJobRegistry.register(
             jobRegistry.id,
             jobRegistry.queueName,
             jobRegistry.state,

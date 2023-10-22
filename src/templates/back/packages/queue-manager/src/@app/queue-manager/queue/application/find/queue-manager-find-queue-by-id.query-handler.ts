@@ -1,9 +1,7 @@
+import { QueueManagerFindQueueByIdQuery, QueueManagerQueueMapper, QueueManagerQueueResponse } from '@app/queue-manager/queue';
+import { QueueManagerFindQueueByIdService } from '@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.service';
+import { QueueManagerQueueId } from '@app/queue-manager/queue/domain/value-objects';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { QueueManagerQueueResponse } from '../../domain/queue-manager-queue.response';
-import { QueueManagerQueueMapper } from '../../domain/queue-manager-queue.mapper';
-import { QueueManagerQueueId } from '../../domain/value-objects';
-import { QueueManagerFindQueueByIdQuery } from './queue-manager-find-queue-by-id.query';
-import { QueueManagerFindQueueByIdService } from './queue-manager-find-queue-by-id.service';
 
 @QueryHandler(QueueManagerFindQueueByIdQuery)
 export class QueueManagerFindQueueByIdQueryHandler implements IQueryHandler<QueueManagerFindQueueByIdQuery>

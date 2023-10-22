@@ -1,11 +1,5 @@
+import { QueueManagerCreatedJobRegistryEvent, QueueManagerCreatedJobsRegistryEvent, QueueManagerDeletedJobRegistryEvent, QueueManagerDeletedJobsRegistryEvent, QueueManagerJobRegistry, QueueManagerUpdatedJobRegistryEvent, QueueManagerUpdatedJobsRegistryEvent } from '@app/queue-manager/job-registry';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { QueueManagerJobRegistry } from '../../domain/queue-manager-job-registry.aggregate';
-import { QueueManagerCreatedJobRegistryEvent } from './queue-manager-created-job-registry.event';
-import { QueueManagerCreatedJobsRegistryEvent } from './queue-manager-created-jobs-registry.event';
-import { QueueManagerUpdatedJobRegistryEvent } from './queue-manager-updated-job-registry.event';
-import { QueueManagerUpdatedJobsRegistryEvent } from './queue-manager-updated-jobs-registry.event';
-import { QueueManagerDeletedJobRegistryEvent } from './queue-manager-deleted-job-registry.event';
-import { QueueManagerDeletedJobsRegistryEvent } from './queue-manager-deleted-jobs-registry.event';
 
 export class QueueManagerAddJobsRegistryContextEvent extends AggregateRoot
 {

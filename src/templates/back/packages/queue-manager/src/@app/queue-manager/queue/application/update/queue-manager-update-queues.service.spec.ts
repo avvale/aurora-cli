@@ -1,20 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { queueManagerMockQueueData } from '@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data';
-import { QueueManagerUpdateQueuesService } from './queue-manager-update-queues.service';
+import { QueueManagerIQueueRepository, queueManagerMockQueueData, QueueManagerMockQueueRepository } from '@app/queue-manager/queue';
+import { QueueManagerUpdateQueuesService } from '@app/queue-manager/queue/application/update/queue-manager-update-queues.service';
 import {
     QueueManagerQueueId,
-    QueueManagerQueuePrefix,
     QueueManagerQueueName,
-    QueueManagerQueueCreatedAt,
-    QueueManagerQueueUpdatedAt,
-    QueueManagerQueueDeletedAt,
-} from '../../domain/value-objects';
-import { QueueManagerIQueueRepository } from '../../domain/queue-manager-queue.repository';
-import { QueueManagerMockQueueRepository } from '../../infrastructure/mock/queue-manager-mock-queue.repository';
+    QueueManagerQueuePrefix,
+} from '@app/queue-manager/queue/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerUpdateQueuesService', () =>
 {
