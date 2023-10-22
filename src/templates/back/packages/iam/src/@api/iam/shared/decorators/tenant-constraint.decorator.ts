@@ -3,9 +3,11 @@ import { Operator } from '@aurorajs.dev/core';
 import { IamAccountResponse } from '@app/iam/account';
 import * as _ from 'lodash';
 
+// add the tenantId of the current user to the constraint
+// of a query to limit the results it has access to
 export const TenantConstraint = (customProperties?: {
-    targetProperty: string;
-    constraintIndex: number;
+    targetProperty: string;     // name of the property to be added to the query
+    constraintIndex: number;    // index of the constraint in the arguments
 }) =>
 {
     return (target, propertyKey: string, descriptor: PropertyDescriptor) =>

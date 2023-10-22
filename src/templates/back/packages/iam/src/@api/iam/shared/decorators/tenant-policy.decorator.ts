@@ -2,12 +2,18 @@
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { IamAccountResponse } from '@app/iam/account';
 
+// checks that the tenantId field is present in the received payloads
+// and that the value of tenantId sent, the user has access to that tenant
 export const TenantPolicy = (customProperties?: {
-    targetProperty: string;
-    payloadIndex: number;
+    targetProperty: string; // name of the property containing the tenantId in the payload
+    payloadIndex: number;    // index of the payload in the arguments
 }) =>
 {
-    return (target, propertyKey: string, descriptor: PropertyDescriptor) =>
+    return (
+        target,
+        propertyKey: string,
+        descriptor: PropertyDescriptor,
+    ) =>
     {
         return {
             value( ... args: any[])
@@ -26,6 +32,7 @@ export const TenantPolicy = (customProperties?: {
 
                 if (!account) throw new BadRequestException('To use @TenantPolicy() decorator need has @CurrentAccount() defined in properties of method');
 
+                // check if payload has tenantId in array payload
                 if (Array.isArray(args[properties.payloadIndex]))
                 {
                     for (const item of args[properties.payloadIndex])
@@ -34,6 +41,7 @@ export const TenantPolicy = (customProperties?: {
                         if (account.dTenants.indexOf(item[properties.targetProperty]) === -1) throw new UnauthorizedException(`Not allowed create this item on the tenant ${args[properties.payloadIndex][properties.targetProperty]}, please contact the administrator`);
                     }
                 }
+                // check if payload has tenantId in object payload
                 else
                 {
                     if (!args[properties.payloadIndex][properties.targetProperty]) throw new BadRequestException('TenantId not found in payload, maybe has to set payloadIndex or targetProperty arguments of TenantPolicy decorator');
