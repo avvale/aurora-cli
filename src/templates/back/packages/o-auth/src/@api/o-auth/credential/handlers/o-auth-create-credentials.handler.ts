@@ -62,6 +62,20 @@ export class OAuthCreateCredentialsHandler
             // if not exist client throw error
             if (!client) throw new UnauthorizedException();
 
+            // get account to create credential and consolidate permissions
+            await this.consolidatePermissions(
+                await this.queryBus.ask(new IamFindAccountByIdQuery(
+                    account.id,
+                    {
+                        include: [
+                            { association: 'roles' },
+                        ],
+                    },
+                )),
+                timezone,
+                auditing,
+            );
+
             return await this.createCredential(client, account);
         }
 
