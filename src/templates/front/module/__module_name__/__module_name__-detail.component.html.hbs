@@ -7,7 +7,7 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
-                    svgIcon="{{ schema.front.solidIcon }}"
+                    svgIcon="{{ ternary schema.front.solidIcon schema.front.solidIcon 'heroicons_outline:tag' }}"
                     class="icon-size-8 mr-2"
                 >
                 </mat-icon>
