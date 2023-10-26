@@ -1,5 +1,6 @@
 import { CommonAttachmentFamily, CommonAttachmentFamilyResponse } from '@app/common/attachment-family';
 import {
+    CommonAttachmentFamilyCode,
     CommonAttachmentFamilyCreatedAt,
     CommonAttachmentFamilyDeletedAt,
     CommonAttachmentFamilyFitType,
@@ -69,6 +70,7 @@ export class CommonAttachmentFamilyMapper implements IMapper
         return CommonAttachmentFamily.register(
             new CommonAttachmentFamilyId(attachmentFamily.id, { undefinable: true }),
             new CommonAttachmentFamilyResourceId(attachmentFamily.resourceId, { undefinable: true }),
+            new CommonAttachmentFamilyCode(attachmentFamily.code, { undefinable: true }),
             new CommonAttachmentFamilyName(attachmentFamily.name, { undefinable: true }),
             new CommonAttachmentFamilyWidth(attachmentFamily.width, { undefinable: true }),
             new CommonAttachmentFamilyHeight(attachmentFamily.height, { undefinable: true }),
@@ -90,6 +92,7 @@ export class CommonAttachmentFamilyMapper implements IMapper
         return new CommonAttachmentFamilyResponse(
             attachmentFamily.id.value,
             attachmentFamily.resourceId.value,
+            attachmentFamily.code.value,
             attachmentFamily.name.value,
             attachmentFamily.width.value,
             attachmentFamily.height.value,

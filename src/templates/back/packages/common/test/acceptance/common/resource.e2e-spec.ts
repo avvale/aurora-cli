@@ -2,8 +2,9 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { CommonModule } from '@api/common/common.module';
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { CommonIResourceRepository, commonMockResourceData, CommonMockResourceSeeder } from '@app/common/resource';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('resource', () =>
                 CommonMockResourceSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonResourceId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceCode must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonResourceCode must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonResourceName must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceIsActive must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonResourceIsActive must be defined, can not be null');
             });
     });
 
@@ -150,7 +153,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceHasAttachments must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonResourceHasAttachments must be defined, can not be null');
             });
     });
 
@@ -166,7 +169,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonResourceId must be defined, can not be undefined');
             });
     });
 
@@ -182,7 +185,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceCode must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonResourceCode must be defined, can not be undefined');
             });
     });
 
@@ -198,7 +201,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonResourceName must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +217,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceIsActive must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonResourceIsActive must be defined, can not be undefined');
             });
     });
 
@@ -230,7 +233,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceHasAttachments must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonResourceHasAttachments must be defined, can not be undefined');
             });
     });
 
@@ -246,7 +249,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for CommonResourceId is not allowed, must be a length of 36');
             });
     });
 
@@ -262,7 +265,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceCode is too large, has a maximum length of 30');
+                expect(res.body.message).toContain('Value for CommonResourceCode is too large, has a maximum length of 30');
             });
     });
 
@@ -278,7 +281,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceName is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonResourceName is too large, has a maximum length of 100');
             });
     });
 
@@ -294,7 +297,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceIsActive has to be a boolean value');
+                expect(res.body.message).toContain('Value for CommonResourceIsActive has to be a boolean value');
             });
     });
     test('/REST:POST common/resource/create - Got 400 Conflict, ResourceHasAttachments has to be a boolean value', () =>
@@ -309,7 +312,7 @@ describe('resource', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ResourceHasAttachments has to be a boolean value');
+                expect(res.body.message).toContain('Value for CommonResourceHasAttachments has to be a boolean value');
             });
     });
 

@@ -1,0 +1,124 @@
+
+type CommonAttachmentLibrary
+{
+    id: ID!
+    name: GraphQLString!
+    path: GraphQLString!
+    filename: GraphQLString!
+    url: GraphQLString!
+    mime: GraphQLString!
+    extension: GraphQLString!
+    size: GraphQLInt!
+    width: GraphQLInt
+    height: GraphQLInt
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input CommonCreateAttachmentLibraryInput
+{
+    id: ID!
+    name: GraphQLString!
+    path: GraphQLString!
+    filename: GraphQLString!
+    url: GraphQLString!
+    mime: GraphQLString!
+    extension: GraphQLString!
+    size: GraphQLInt!
+    width: GraphQLInt
+    height: GraphQLInt
+    meta: JSON
+}
+
+input CommonUpdateAttachmentLibraryByIdInput
+{
+    id: ID!
+    name: GraphQLString
+    path: GraphQLString
+    filename: GraphQLString
+    url: GraphQLString
+    mime: GraphQLString
+    extension: GraphQLString
+    size: GraphQLInt
+    width: GraphQLInt
+    height: GraphQLInt
+    meta: JSON
+}
+
+input CommonUpdateAttachmentLibrariesInput
+{
+    id: ID
+    name: GraphQLString
+    path: GraphQLString
+    filename: GraphQLString
+    url: GraphQLString
+    mime: GraphQLString
+    extension: GraphQLString
+    size: GraphQLInt
+    width: GraphQLInt
+    height: GraphQLInt
+    meta: JSON
+}
+
+type Query
+{
+    commonFindAttachmentLibrary(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): CommonAttachmentLibrary
+
+    commonFindAttachmentLibraryById(
+        id: ID
+        constraint: QueryStatement
+    ): CommonAttachmentLibrary
+
+    commonGetAttachmentLibraries(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachmentLibrary]!
+
+    commonPaginateAttachmentLibraries(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    commonCreateAttachmentLibrary(
+        payload: CommonCreateAttachmentLibraryInput!
+    ): CommonAttachmentLibrary
+
+    commonCreateAttachmentLibraries(
+        payload: [CommonCreateAttachmentLibraryInput]!
+    ): Boolean!
+
+    commonUpdateAttachmentLibraryById(
+        payload: CommonUpdateAttachmentLibraryByIdInput!
+        constraint: QueryStatement
+    ): CommonAttachmentLibrary
+
+    commonUpdateAttachmentLibraries(
+        payload: CommonUpdateAttachmentLibrariesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachmentLibrary]!
+
+    commonUpsertAttachmentLibrary(
+        payload: CommonUpdateAttachmentLibraryByIdInput!
+    ): CommonAttachmentLibrary
+
+    commonDeleteAttachmentLibraryById(
+        id: ID!
+        constraint: QueryStatement
+    ): CommonAttachmentLibrary
+
+    commonDeleteAttachmentLibraries(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachmentLibrary]!
+
+}

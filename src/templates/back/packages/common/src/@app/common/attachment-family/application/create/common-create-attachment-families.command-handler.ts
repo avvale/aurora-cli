@@ -2,6 +2,7 @@
 import { CommonCreateAttachmentFamiliesCommand } from '@app/common/attachment-family';
 import { CommonCreateAttachmentFamiliesService } from '@app/common/attachment-family/application/create/common-create-attachment-families.service';
 import {
+    CommonAttachmentFamilyCode,
     CommonAttachmentFamilyFitType,
     CommonAttachmentFamilyFormat,
     CommonAttachmentFamilyHeight,
@@ -31,6 +32,7 @@ export class CommonCreateAttachmentFamiliesCommandHandler implements ICommandHan
                     return {
                         id: new CommonAttachmentFamilyId(attachmentFamily.id),
                         resourceId: new CommonAttachmentFamilyResourceId(attachmentFamily.resourceId),
+                        code: new CommonAttachmentFamilyCode(attachmentFamily.code),
                         name: new CommonAttachmentFamilyName(attachmentFamily.name),
                         width: new CommonAttachmentFamilyWidth(attachmentFamily.width),
                         height: new CommonAttachmentFamilyHeight(attachmentFamily.height),

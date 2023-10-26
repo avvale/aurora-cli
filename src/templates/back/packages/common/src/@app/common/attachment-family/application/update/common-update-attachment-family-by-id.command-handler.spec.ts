@@ -39,6 +39,7 @@ describe('CommonUpdateAttachmentFamilyByIdCommandHandler', () =>
                     {
                         id: commonMockAttachmentFamilyData[0].id,
                         resourceId: commonMockAttachmentFamilyData[0].resourceId,
+                        code: commonMockAttachmentFamilyData[0].code,
                         name: commonMockAttachmentFamilyData[0].name,
                         width: commonMockAttachmentFamilyData[0].width,
                         height: commonMockAttachmentFamilyData[0].height,

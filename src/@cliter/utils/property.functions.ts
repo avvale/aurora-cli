@@ -27,10 +27,10 @@ export const getPropertySequelizeType = (
 ): string =>
 {
     let parameter: number | string | undefined | number[];
-    if (property.type === PropertyType.CHAR)    parameter = property.length;                        // parameter = length
-    if (property.type === PropertyType.VARCHAR) parameter = property.maxLength;                     // parameter = maxLength
-    if (property.type === PropertyType.ENUM)    parameter = getPropertyStringEnumOptions(property); // parameter = values
-    if (property.type === PropertyType.DECIMAL) parameter = property.decimals;                      // parameter = decimals
+    if (property.type === PropertyType.CHAR && property?.length)        parameter = property.length;                        // parameter = length
+    if (property.type === PropertyType.VARCHAR && property?.maxLength)  parameter = property.maxLength;                     // parameter = maxLength
+    if (property.type === PropertyType.ENUM)                            parameter = getPropertyStringEnumOptions(property); // parameter = values
+    if (property.type === PropertyType.DECIMAL)                         parameter = property.decimals;                      // parameter = decimals
 
     return config.propertyTypesEquivalenceSequelizeTypes[property.type](parameter);
 };

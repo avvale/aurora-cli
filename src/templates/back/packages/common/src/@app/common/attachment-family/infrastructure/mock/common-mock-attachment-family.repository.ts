@@ -1,5 +1,6 @@
 import { CommonAttachmentFamily, CommonIAttachmentFamilyRepository, commonMockAttachmentFamilyData } from '@app/common/attachment-family';
 import {
+    CommonAttachmentFamilyCode,
     CommonAttachmentFamilyCreatedAt,
     CommonAttachmentFamilyDeletedAt,
     CommonAttachmentFamilyFitType,
@@ -48,6 +49,7 @@ export class CommonMockAttachmentFamilyRepository extends MockRepository<CommonA
             this.collectionSource.push(CommonAttachmentFamily.register(
                 new CommonAttachmentFamilyId(itemCollection.id),
                 new CommonAttachmentFamilyResourceId(itemCollection.resourceId),
+                new CommonAttachmentFamilyCode(itemCollection.code),
                 new CommonAttachmentFamilyName(itemCollection.name),
                 new CommonAttachmentFamilyWidth(itemCollection.width),
                 new CommonAttachmentFamilyHeight(itemCollection.height),

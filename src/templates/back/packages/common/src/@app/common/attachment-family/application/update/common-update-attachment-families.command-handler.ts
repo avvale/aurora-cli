@@ -2,6 +2,7 @@
 import { CommonUpdateAttachmentFamiliesCommand } from '@app/common/attachment-family';
 import { CommonUpdateAttachmentFamiliesService } from '@app/common/attachment-family/application/update/common-update-attachment-families.service';
 import {
+    CommonAttachmentFamilyCode,
     CommonAttachmentFamilyFitType,
     CommonAttachmentFamilyFormat,
     CommonAttachmentFamilyHeight,
@@ -28,6 +29,7 @@ export class CommonUpdateAttachmentFamiliesCommandHandler implements ICommandHan
             {
                 id: new CommonAttachmentFamilyId(command.payload.id, { undefinable: true }),
                 resourceId: new CommonAttachmentFamilyResourceId(command.payload.resourceId, { undefinable: true }),
+                code: new CommonAttachmentFamilyCode(command.payload.code, { undefinable: true }),
                 name: new CommonAttachmentFamilyName(command.payload.name, { undefinable: true }),
                 width: new CommonAttachmentFamilyWidth(command.payload.width),
                 height: new CommonAttachmentFamilyHeight(command.payload.height),

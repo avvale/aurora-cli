@@ -19,6 +19,12 @@ export class CommonUpdateAttachmentFamiliesDto
 
     @ApiProperty({
         type       : String,
+        description: 'code [input here api field description]',
+    })
+    code?: string;
+
+    @ApiProperty({
+        type       : String,
         description: 'name [input here api field description]',
     })
     name?: string;

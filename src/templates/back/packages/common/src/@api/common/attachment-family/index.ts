@@ -30,7 +30,7 @@ export { CommonUpsertAttachmentFamilyController } from './controllers/common-ups
 export { CommonDeleteAttachmentFamilyByIdController } from './controllers/common-delete-attachment-family-by-id.controller';
 export { CommonDeleteAttachmentFamiliesController } from './controllers/common-delete-attachment-families.controller';
 
-// exports resolvers
+// export resolvers
 export { CommonCreateAttachmentFamilyResolver } from './resolvers/common-create-attachment-family.resolver';
 export { CommonCreateAttachmentFamiliesResolver } from './resolvers/common-create-attachment-families.resolver';
 export { CommonPaginateAttachmentFamiliesResolver } from './resolvers/common-paginate-attachment-families.resolver';
@@ -43,7 +43,7 @@ export { CommonUpsertAttachmentFamilyResolver } from './resolvers/common-upsert-
 export { CommonDeleteAttachmentFamilyByIdResolver } from './resolvers/common-delete-attachment-family-by-id.resolver';
 export { CommonDeleteAttachmentFamiliesResolver } from './resolvers/common-delete-attachment-families.resolver';
 
-// controllers
+// import controllers
 import { CommonCreateAttachmentFamilyController } from './controllers/common-create-attachment-family.controller';
 import { CommonCreateAttachmentFamiliesController } from './controllers/common-create-attachment-families.controller';
 import { CommonPaginateAttachmentFamiliesController } from './controllers/common-paginate-attachment-families.controller';
@@ -56,7 +56,7 @@ import { CommonUpsertAttachmentFamilyController } from './controllers/common-ups
 import { CommonDeleteAttachmentFamilyByIdController } from './controllers/common-delete-attachment-family-by-id.controller';
 import { CommonDeleteAttachmentFamiliesController } from './controllers/common-delete-attachment-families.controller';
 
-// resolvers
+// import resolvers
 import { CommonCreateAttachmentFamilyResolver } from './resolvers/common-create-attachment-family.resolver';
 import { CommonCreateAttachmentFamiliesResolver } from './resolvers/common-create-attachment-families.resolver';
 import { CommonPaginateAttachmentFamiliesResolver } from './resolvers/common-paginate-attachment-families.resolver';
@@ -69,7 +69,7 @@ import { CommonUpsertAttachmentFamilyResolver } from './resolvers/common-upsert-
 import { CommonDeleteAttachmentFamilyByIdResolver } from './resolvers/common-delete-attachment-family-by-id.resolver';
 import { CommonDeleteAttachmentFamiliesResolver } from './resolvers/common-delete-attachment-families.resolver';
 
-// handlers
+// import handlers
 import { CommonCreateAttachmentFamilyHandler } from './handlers/common-create-attachment-family.handler';
 import { CommonCreateAttachmentFamiliesHandler } from './handlers/common-create-attachment-families.handler';
 import { CommonPaginateAttachmentFamiliesHandler } from './handlers/common-paginate-attachment-families.handler';
@@ -82,7 +82,7 @@ import { CommonUpsertAttachmentFamilyHandler } from './handlers/common-upsert-at
 import { CommonDeleteAttachmentFamilyByIdHandler } from './handlers/common-delete-attachment-family-by-id.handler';
 import { CommonDeleteAttachmentFamiliesHandler } from './handlers/common-delete-attachment-families.handler';
 
-// seeder
+// import seeder
 import { CommonAttachmentFamilySeeder } from './seeder/common-attachment-family.seeder';
 
 export const CommonAttachmentFamilyApiControllers = [

@@ -6,6 +6,7 @@ export class CommonUpdateAttachmentFamiliesCommand
         public readonly payload: {
             id?: string;
             resourceId?: string;
+            code?: string;
             name?: string;
             width?: number;
             height?: number;

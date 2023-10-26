@@ -30,7 +30,7 @@ export { CommonUpsertResourceController } from './controllers/common-upsert-reso
 export { CommonDeleteResourceByIdController } from './controllers/common-delete-resource-by-id.controller';
 export { CommonDeleteResourcesController } from './controllers/common-delete-resources.controller';
 
-// exports resolvers
+// export resolvers
 export { CommonCreateResourceResolver } from './resolvers/common-create-resource.resolver';
 export { CommonCreateResourcesResolver } from './resolvers/common-create-resources.resolver';
 export { CommonPaginateResourcesResolver } from './resolvers/common-paginate-resources.resolver';
@@ -43,7 +43,7 @@ export { CommonUpsertResourceResolver } from './resolvers/common-upsert-resource
 export { CommonDeleteResourceByIdResolver } from './resolvers/common-delete-resource-by-id.resolver';
 export { CommonDeleteResourcesResolver } from './resolvers/common-delete-resources.resolver';
 
-// controllers
+// import controllers
 import { CommonCreateResourceController } from './controllers/common-create-resource.controller';
 import { CommonCreateResourcesController } from './controllers/common-create-resources.controller';
 import { CommonPaginateResourcesController } from './controllers/common-paginate-resources.controller';
@@ -56,7 +56,7 @@ import { CommonUpsertResourceController } from './controllers/common-upsert-reso
 import { CommonDeleteResourceByIdController } from './controllers/common-delete-resource-by-id.controller';
 import { CommonDeleteResourcesController } from './controllers/common-delete-resources.controller';
 
-// resolvers
+// import resolvers
 import { CommonCreateResourceResolver } from './resolvers/common-create-resource.resolver';
 import { CommonCreateResourcesResolver } from './resolvers/common-create-resources.resolver';
 import { CommonPaginateResourcesResolver } from './resolvers/common-paginate-resources.resolver';
@@ -69,7 +69,7 @@ import { CommonUpsertResourceResolver } from './resolvers/common-upsert-resource
 import { CommonDeleteResourceByIdResolver } from './resolvers/common-delete-resource-by-id.resolver';
 import { CommonDeleteResourcesResolver } from './resolvers/common-delete-resources.resolver';
 
-// handlers
+// import handlers
 import { CommonCreateResourceHandler } from './handlers/common-create-resource.handler';
 import { CommonCreateResourcesHandler } from './handlers/common-create-resources.handler';
 import { CommonPaginateResourcesHandler } from './handlers/common-paginate-resources.handler';
@@ -82,7 +82,7 @@ import { CommonUpsertResourceHandler } from './handlers/common-upsert-resource.h
 import { CommonDeleteResourceByIdHandler } from './handlers/common-delete-resource-by-id.handler';
 import { CommonDeleteResourcesHandler } from './handlers/common-delete-resources.handler';
 
-// seeder
+// import seeder
 import { CommonResourceSeeder } from './seeder/common-resource.seeder';
 
 export const CommonResourceApiControllers = [

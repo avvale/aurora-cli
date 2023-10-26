@@ -26,8 +26,14 @@ aggregateProperties:
       key: id
       field: resource
       avoidConstraint: true
+    index: index
     webComponent:
       type: select
+  - name: code
+    type: varchar
+    maxLength: 25
+    nullable: false
+    index: unique
   - name: name
     type: varchar
     maxLength: 100
@@ -51,7 +57,7 @@ aggregateProperties:
     nullable: true
     example: CommonAttachmentFamilyFitType.FIT_CROP
   - name: quality
-    type: tinyint.unsigned
+    type: smallint.unsigned
     maxLength: 3
     nullable: true
   - name: sizes

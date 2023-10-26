@@ -1,0 +1,174 @@
+
+type CommonAttachment
+{
+    id: ID!
+    familyId: ID
+    family: CommonAttachmentFamily
+    sort: GraphQLInt
+    alt: GraphQLString!
+    title: GraphQLString!
+    path: GraphQLString!
+    filename: GraphQLString!
+    url: GraphQLString!
+    mime: GraphQLString!
+    extension: GraphQLString!
+    size: GraphQLInt!
+    width: GraphQLInt
+    height: GraphQLInt
+    libraryId: ID
+    library: CommonAttachmentLibrary
+    libraryFilename: GraphQLString!
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input CommonCreateAttachmentInput
+{
+    id: ID!
+    familyId: ID
+    sort: GraphQLInt
+    alt: GraphQLString!
+    title: GraphQLString!
+    path: GraphQLString!
+    filename: GraphQLString!
+    url: GraphQLString!
+    mime: GraphQLString!
+    extension: GraphQLString!
+    size: GraphQLInt!
+    width: GraphQLInt
+    height: GraphQLInt
+    libraryId: ID
+    libraryFilename: GraphQLString!
+    meta: JSON
+}
+
+input CommonUpdateAttachmentByIdInput
+{
+    id: ID!
+    familyId: ID
+    sort: GraphQLInt
+    alt: GraphQLString
+    title: GraphQLString
+    path: GraphQLString
+    filename: GraphQLString
+    url: GraphQLString
+    mime: GraphQLString
+    extension: GraphQLString
+    size: GraphQLInt
+    width: GraphQLInt
+    height: GraphQLInt
+    libraryId: ID
+    libraryFilename: GraphQLString
+    meta: JSON
+}
+
+input CommonUpdateAttachmentsInput
+{
+    id: ID
+    familyId: ID
+    sort: GraphQLInt
+    alt: GraphQLString
+    title: GraphQLString
+    path: GraphQLString
+    filename: GraphQLString
+    url: GraphQLString
+    mime: GraphQLString
+    extension: GraphQLString
+    size: GraphQLInt
+    width: GraphQLInt
+    height: GraphQLInt
+    libraryId: ID
+    libraryFilename: GraphQLString
+    meta: JSON
+}
+
+input CommonCropInput
+{
+    x: GraphQLInt!
+    y: GraphQLInt!
+    width: GraphQLInt!
+    height: GraphQLInt!
+    rotate: GraphQLInt!
+    scaleX: GraphQLInt!
+    scaleY: GraphQLInt!
+}
+
+input CommonCropAttachmentInput
+{
+    attachment: CommonCreateAttachmentInput!
+    attachmentFamily: CommonCreateAttachmentFamilyInput!
+    crop: CommonCropInput!
+}
+
+type Query
+{
+    commonFindAttachment(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): CommonAttachment
+
+    commonFindAttachmentById(
+        id: ID
+        constraint: QueryStatement
+    ): CommonAttachment
+
+    commonGetAttachments(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachment]!
+
+    commonPaginateAttachments(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    commonCreateAttachment(
+        payload: CommonCreateAttachmentInput!
+    ): CommonAttachment
+
+    commonCreateAttachments(
+        payload: [CommonCreateAttachmentInput]!
+    ): Boolean!
+
+    commonUpdateAttachmentById(
+        payload: CommonUpdateAttachmentByIdInput!
+        constraint: QueryStatement
+    ): CommonAttachment
+
+    commonUpdateAttachments(
+        payload: CommonUpdateAttachmentsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachment]!
+
+    commonUpsertAttachment(
+        payload: CommonUpdateAttachmentByIdInput!
+    ): CommonAttachment
+
+    commonDeleteAttachmentById(
+        id: ID!
+        constraint: QueryStatement
+    ): CommonAttachment
+
+    commonDeleteAttachments(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [CommonAttachment]!
+
+
+    # additionalApis
+    commonUploadAttachments(
+        files: [CoreFileUploaded!]!
+    ): [CoreFile!]!
+
+    commonCropAttachment(
+        payload: CommonCropAttachmentInput!
+    ): Boolean!
+
+}

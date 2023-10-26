@@ -1,3 +1,4 @@
+export { CommonAttachmentFamilyCode } from './common-attachment-family-code';
 export { CommonAttachmentFamilyCreatedAt } from './common-attachment-family-created-at';
 export { CommonAttachmentFamilyDeletedAt } from './common-attachment-family-deleted-at';
 export { CommonAttachmentFamilyFitType } from './common-attachment-family-fit-type';

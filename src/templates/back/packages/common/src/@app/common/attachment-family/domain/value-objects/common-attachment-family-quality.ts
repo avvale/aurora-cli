@@ -1,6 +1,6 @@
-import { IntValueObject, ValidationRules } from '@aurorajs.dev/core';
+import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CommonAttachmentFamilyQuality extends IntValueObject
+export class CommonAttachmentFamilyQuality extends SmallintValueObject
 {
     public readonly type: string = 'CommonAttachmentFamilyQuality';
 

@@ -19,6 +19,8 @@ export class CommonAdministrativeAreasCountryHandler
         private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
     ) {}
 
+    // handler which will be called only to load administrative
+    // areas of an object that already has defined administrative areas.
     async main(
         countryId: string,
         administrativeAreaLevel1Id?: string,
@@ -73,33 +75,36 @@ export class CommonAdministrativeAreasCountryHandler
             ));
         }
 
-        if (
-            administrativeAreaLevel1Id &&
-            (!hasAdministrativeAreas || commonCountry.administrativeAreas?.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_LEVEL_2))
-        )
+        if (!hasAdministrativeAreas || commonCountry.administrativeAreas?.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_LEVEL_2))
         {
+            const whereStatement = {
+                countryId,
+                administrativeAreaLevel1Id,
+            };
+
+            if (!administrativeAreaLevel1Id) delete whereStatement.administrativeAreaLevel1Id;
+
             commonGetAdministrativeAreasLevel2 = await this.queryBus.ask(new CommonGetAdministrativeAreasLevel2Query(
                 {
-                    where: {
-                        countryId,
-                        administrativeAreaLevel1Id,
-                    },
+                    where: whereStatement,
                 },
             ));
         }
 
-        if (
-            administrativeAreaLevel2Id &&
-            (!hasAdministrativeAreas || commonCountry.administrativeAreas?.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_LEVEL_3))
-        )
+        if (!hasAdministrativeAreas || commonCountry.administrativeAreas?.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_LEVEL_3))
         {
+            const whereStatement = {
+                countryId,
+                administrativeAreaLevel1Id,
+                administrativeAreaLevel2Id,
+            };
+
+            if (!administrativeAreaLevel1Id) delete whereStatement.administrativeAreaLevel1Id;
+            if (!administrativeAreaLevel2Id) delete whereStatement.administrativeAreaLevel2Id;
+
             commonGetAdministrativeAreasLevel3 = await this.queryBus.ask(new CommonGetAdministrativeAreasLevel3Query(
                 {
-                    where: {
-                        countryId,
-                        administrativeAreaLevel1Id,
-                        administrativeAreaLevel2Id,
-                    },
+                    where: whereStatement,
                 },
             ));
         }

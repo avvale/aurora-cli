@@ -1,5 +1,6 @@
 import { CommonAttachmentFamily, CommonIAttachmentFamilyRepository } from '@app/common/attachment-family';
 import {
+    CommonAttachmentFamilyCode,
     CommonAttachmentFamilyCreatedAt,
     CommonAttachmentFamilyDeletedAt,
     CommonAttachmentFamilyFitType,
@@ -29,6 +30,7 @@ export class CommonUpdateAttachmentFamilyByIdService
         payload: {
             id: CommonAttachmentFamilyId;
             resourceId?: CommonAttachmentFamilyResourceId;
+            code?: CommonAttachmentFamilyCode;
             name?: CommonAttachmentFamilyName;
             width?: CommonAttachmentFamilyWidth;
             height?: CommonAttachmentFamilyHeight;
@@ -45,6 +47,7 @@ export class CommonUpdateAttachmentFamilyByIdService
         const attachmentFamily = CommonAttachmentFamily.register(
             payload.id,
             payload.resourceId,
+            payload.code,
             payload.name,
             payload.width,
             payload.height,

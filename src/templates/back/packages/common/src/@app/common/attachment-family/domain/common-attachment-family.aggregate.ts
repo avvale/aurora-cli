@@ -1,6 +1,7 @@
 /* eslint-disable key-spacing */
 import { CommonCreatedAttachmentFamilyEvent, CommonDeletedAttachmentFamilyEvent, CommonUpdatedAttachmentFamilyEvent } from '@app/common/attachment-family';
 import {
+    CommonAttachmentFamilyCode,
     CommonAttachmentFamilyCreatedAt,
     CommonAttachmentFamilyDeletedAt,
     CommonAttachmentFamilyFitType,
@@ -22,6 +23,7 @@ export class CommonAttachmentFamily extends AggregateRoot
 {
     id: CommonAttachmentFamilyId;
     resourceId: CommonAttachmentFamilyResourceId;
+    code: CommonAttachmentFamilyCode;
     name: CommonAttachmentFamilyName;
     width: CommonAttachmentFamilyWidth;
     height: CommonAttachmentFamilyHeight;
@@ -37,6 +39,7 @@ export class CommonAttachmentFamily extends AggregateRoot
     constructor(
         id: CommonAttachmentFamilyId,
         resourceId: CommonAttachmentFamilyResourceId,
+        code: CommonAttachmentFamilyCode,
         name: CommonAttachmentFamilyName,
         width: CommonAttachmentFamilyWidth,
         height: CommonAttachmentFamilyHeight,
@@ -53,6 +56,7 @@ export class CommonAttachmentFamily extends AggregateRoot
         super();
         this.id = id;
         this.resourceId = resourceId;
+        this.code = code;
         this.name = name;
         this.width = width;
         this.height = height;
@@ -69,6 +73,7 @@ export class CommonAttachmentFamily extends AggregateRoot
     static register(
         id: CommonAttachmentFamilyId,
         resourceId: CommonAttachmentFamilyResourceId,
+        code: CommonAttachmentFamilyCode,
         name: CommonAttachmentFamilyName,
         width: CommonAttachmentFamilyWidth,
         height: CommonAttachmentFamilyHeight,
@@ -85,6 +90,7 @@ export class CommonAttachmentFamily extends AggregateRoot
         return new CommonAttachmentFamily(
             id,
             resourceId,
+            code,
             name,
             width,
             height,
@@ -105,6 +111,7 @@ export class CommonAttachmentFamily extends AggregateRoot
             new CommonCreatedAttachmentFamilyEvent(
                 attachmentFamily.id.value,
                 attachmentFamily.resourceId.value,
+                attachmentFamily.code.value,
                 attachmentFamily.name.value,
                 attachmentFamily.width?.value,
                 attachmentFamily.height?.value,
@@ -125,6 +132,7 @@ export class CommonAttachmentFamily extends AggregateRoot
             new CommonUpdatedAttachmentFamilyEvent(
                 attachmentFamily.id?.value,
                 attachmentFamily.resourceId?.value,
+                attachmentFamily.code?.value,
                 attachmentFamily.name?.value,
                 attachmentFamily.width?.value,
                 attachmentFamily.height?.value,
@@ -145,6 +153,7 @@ export class CommonAttachmentFamily extends AggregateRoot
             new CommonDeletedAttachmentFamilyEvent(
                 attachmentFamily.id.value,
                 attachmentFamily.resourceId.value,
+                attachmentFamily.code.value,
                 attachmentFamily.name.value,
                 attachmentFamily.width?.value,
                 attachmentFamily.height?.value,
@@ -164,6 +173,7 @@ export class CommonAttachmentFamily extends AggregateRoot
         return {
             id: this.id.value,
             resourceId: this.resourceId.value,
+            code: this.code.value,
             name: this.name.value,
             width: this.width?.value,
             height: this.height?.value,
@@ -184,6 +194,7 @@ export class CommonAttachmentFamily extends AggregateRoot
         return {
             id: this.id.value,
             resourceId: this.resourceId.value,
+            code: this.code.value,
             name: this.name.value,
             width: this.width?.value,
             height: this.height?.value,

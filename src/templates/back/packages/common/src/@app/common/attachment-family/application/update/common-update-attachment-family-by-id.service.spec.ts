@@ -2,6 +2,7 @@
 import { CommonIAttachmentFamilyRepository, commonMockAttachmentFamilyData, CommonMockAttachmentFamilyRepository } from '@app/common/attachment-family';
 import { CommonUpdateAttachmentFamilyByIdService } from '@app/common/attachment-family/application/update/common-update-attachment-family-by-id.service';
 import {
+    CommonAttachmentFamilyCode,
     CommonAttachmentFamilyFitType,
     CommonAttachmentFamilyFormat,
     CommonAttachmentFamilyHeight,
@@ -56,6 +57,7 @@ describe('CommonUpdateAttachmentFamilyByIdService', () =>
                     {
                         id: new CommonAttachmentFamilyId(commonMockAttachmentFamilyData[0].id),
                         resourceId: new CommonAttachmentFamilyResourceId(commonMockAttachmentFamilyData[0].resourceId),
+                        code: new CommonAttachmentFamilyCode(commonMockAttachmentFamilyData[0].code),
                         name: new CommonAttachmentFamilyName(commonMockAttachmentFamilyData[0].name),
                         width: new CommonAttachmentFamilyWidth(commonMockAttachmentFamilyData[0].width),
                         height: new CommonAttachmentFamilyHeight(commonMockAttachmentFamilyData[0].height),

@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.data.ts",
-            "integrity": "sha1:17e64a459c65b1398a42f875ec0cf4670e434fcc"
+            "integrity": "sha1:e1cde75f650cd3387c5aeb88f2025e3d3d4484e6"
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/common/resource/infrastructure/sequelize/common-sequelize-resource.model.ts",
-            "integrity": "sha1:c38cfd9db410fe178058ac665ccefe90d8cd9b8d"
+            "integrity": "sha1:fa73d2aa1c1a430f52ce63be569a4e78096f23ac"
         },
         {
             "path": "src/@app/common/resource/infrastructure/sequelize/common-sequelize-resource.repository.ts",
@@ -583,7 +583,7 @@
         },
         {
             "path": "src/@api/common/resource/index.ts",
-            "integrity": "sha1:ccbeba1cde51ec73c8a144ec7e8503963789692a"
+            "integrity": "sha1:c79c69c04a0f203050b8f815d5db80f6ec84128e"
         },
         {
             "path": "src/@api/common/resource/resolvers/common-create-resource.resolver.spec.ts",
@@ -679,11 +679,11 @@
         },
         {
             "path": "test/acceptance/common/resource.e2e-spec.ts",
-            "integrity": "sha1:677d11270684f8f934530eebebeb29a64cbbd1db"
+            "integrity": "sha1:45a610aba01fca412ea170d0d30d106ba2c56edc"
         },
         {
             "path": "postman/common/common.resource.postman.json",
-            "integrity": "sha1:e5abd46a667e920808b7156f56d6446ecb4786bd"
+            "integrity": "sha1:5786e0cc6c245272bc1e9a681d08782bbf6f21fb"
         }
     ]
 }

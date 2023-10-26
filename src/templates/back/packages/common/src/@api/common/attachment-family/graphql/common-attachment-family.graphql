@@ -20,6 +20,7 @@ type CommonAttachmentFamily
     id: ID!
     resourceId: ID!
     resource: CommonResource
+    code: GraphQLString!
     name: GraphQLString!
     width: GraphQLInt
     height: GraphQLInt
@@ -36,6 +37,7 @@ input CommonCreateAttachmentFamilyInput
 {
     id: ID!
     resourceId: ID!
+    code: GraphQLString!
     name: GraphQLString!
     width: GraphQLInt
     height: GraphQLInt
@@ -49,6 +51,7 @@ input CommonUpdateAttachmentFamilyByIdInput
 {
     id: ID!
     resourceId: ID
+    code: GraphQLString
     name: GraphQLString
     width: GraphQLInt
     height: GraphQLInt
@@ -62,6 +65,7 @@ input CommonUpdateAttachmentFamiliesInput
 {
     id: ID
     resourceId: ID
+    code: GraphQLString
     name: GraphQLString
     width: GraphQLInt
     height: GraphQLInt
