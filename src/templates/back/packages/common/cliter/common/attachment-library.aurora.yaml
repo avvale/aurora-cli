@@ -15,23 +15,11 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
-  - name: name
-    type: varchar
-    maxLength: 255
-    nullable: false
-  - name: path
-    type: varchar
-    maxLength: 2047
-    nullable: false
   - name: filename
     type: varchar
     maxLength: 255
     nullable: false
-  - name: url
-    type: varchar
-    maxLength: 2047
-    nullable: false
-  - name: mime
+  - name: mimetype
     type: varchar
     maxLength: 50
     nullable: false
@@ -39,9 +27,8 @@ aggregateProperties:
     type: varchar
     maxLength: 10
     nullable: false
-  - name: size
-    type: int.unsigned
-    maxLength: 10
+  - name: relativePathSegments
+    type: json
     nullable: false
   - name: width
     type: smallint.unsigned
@@ -51,6 +38,19 @@ aggregateProperties:
     type: smallint.unsigned
     maxLength: 5
     nullable: true
+  - name: size
+    type: int.unsigned
+    maxLength: 10
+    nullable: false
+  - name: url
+    type: varchar
+    maxLength: 2047
+    nullable: false
+  - name: isCropable
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: true
   - name: meta
     type: json
     nullable: true

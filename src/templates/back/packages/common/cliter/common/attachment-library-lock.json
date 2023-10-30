@@ -7,23 +7,23 @@
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-library.command-handler.spec.ts",
-            "integrity": "sha1:d9245ea09a5f1729f54964f3296a07ad878acd2a"
+            "integrity": "sha1:4d733b7cd994250bac0e721c6e0fdc42b70b3593"
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-library.command-handler.ts",
-            "integrity": "sha1:6847254305f20ef6920c390e549841d882562e28"
+            "integrity": "sha1:a68a339c6d6cbc970b64bb7d9ce4797342230ea4"
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-library.command.ts",
-            "integrity": "sha1:87f0876b5d69acedcffdd577223a8f32c5d142c0"
+            "integrity": "sha1:7290d5fb7540f05e8fcd3370044a18b5df509d2f"
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-library.service.spec.ts",
-            "integrity": "sha1:a7d6139eb7954cad456e214d76eb7f7e8b4b2a52"
+            "integrity": "sha1:cd60e213e7c3141a8cfb117098e8fd2266045981"
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-library.service.ts",
-            "integrity": "sha1:6600c14b95416a2d6f209810df1c6a21055b946c"
+            "integrity": "sha1:df537cc6d33606a723d1262d7d301a73360f6e27"
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-libraries.command-handler.spec.ts",
@@ -31,11 +31,11 @@
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-libraries.command-handler.ts",
-            "integrity": "sha1:fa737a180d02418b08546bbdf04ccc3c4f7a8c5f"
+            "integrity": "sha1:a2b80457f78d0517768f67183d6d41581245f442"
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-libraries.command.ts",
-            "integrity": "sha1:675fc6e30d1b3cdb76f0b0681bb1007b36de6bf6"
+            "integrity": "sha1:537a4337c2b3e0b24565e730cf4ff58925aa384a"
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-libraries.service.spec.ts",
@@ -43,7 +43,7 @@
         },
         {
             "path": "src/@app/common/attachment-library/application/create/common-create-attachment-libraries.service.ts",
-            "integrity": "sha1:92fc31e82fbfa8927f174d0e75083a561d3b921e"
+            "integrity": "sha1:8d9003e3bac459863c6378cf14436de2153615dc"
         },
         {
             "path": "src/@app/common/attachment-library/application/delete/common-delete-attachment-library-by-id.command-handler.spec.ts",
@@ -87,7 +87,7 @@
         },
         {
             "path": "src/@app/common/attachment-library/application/events/common-add-attachment-libraries-context.event.ts",
-            "integrity": "sha1:a7fd57b3110c22d320eeb851e36ef23576c42f81"
+            "integrity": "sha1:08f151bbc003f4152270c285573f6435e3c83cff"
         },
         {
             "path": "src/@app/common/attachment-library/application/events/common-created-attachment-library.event-handler.ts",
@@ -95,7 +95,7 @@
         },
         {
             "path": "src/@app/common/attachment-library/application/events/common-created-attachment-library.event.ts",
-            "integrity": "sha1:a8f819f7220cba0896bef547d973a3afde17b48f"
+            "integrity": "sha1:304707e345e09e48d5b7382f4602de078b651f8f"
         },
         {
             "path": "src/@app/common/attachment-library/application/events/common-created-attachment-libraries.event-handler.ts",
@@ -111,7 +111,7 @@
         },
         {
             "path": "src/@app/common/attachment-library/application/events/common-deleted-attachment-library.event.ts",
-            "integrity": "sha1:300235e9f7cf839f0712c5b88e20740ede56c9c6"
+            "integrity": "sha1:0db835f8d229f9b65948394ca7a51adeeb6e64ae"
         },
         {
             "path": "src/@app/common/attachment-library/application/events/common-deleted-attachment-libraries.event-handler.ts",
@@ -127,7 +127,7 @@
         },
         {
             "path": "src/@app/common/attachment-library/application/events/common-updated-attachment-library.event.ts",
-            "integrity": "sha1:1d3572252d58a98c9fa57713b0d8949335380a1d"
+            "integrity": "sha1:43ec13fa8e9886517c2f77a4909772c3ecb05004"
         },
         {
             "path": "src/@app/common/attachment-library/application/events/common-updated-attachment-libraries.event-handler.ts",
@@ -243,71 +243,71 @@
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-library-by-id.command-handler.spec.ts",
-            "integrity": "sha1:1e2eeeccef9df5a5035cd8de9a39e0126764c3ba"
+            "integrity": "sha1:8b52d50690700cfb739ee2410cd4b0bb52687fc2"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-library-by-id.command-handler.ts",
-            "integrity": "sha1:0d2f1b3e290510eb19661687b5b1b1d1271722e4"
+            "integrity": "sha1:1f1b1adb7349c96e52ce6656ae34690e8e36e52b"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-library-by-id.command.ts",
-            "integrity": "sha1:fc4e9b791daad2d54b1d29b1a09a2989aabc72d6"
+            "integrity": "sha1:0271ede5e10c15ad59f364462e0a66156936a0b3"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-library-by-id.service.spec.ts",
-            "integrity": "sha1:935d352cb6fc9217321fdaa8dfc424d5b67a6db0"
+            "integrity": "sha1:0aa18e92ff4e391a0c9e8cefc41f7050b0497acd"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-library-by-id.service.ts",
-            "integrity": "sha1:de73b85da9afa516af7075f94284aa79cf4819c5"
+            "integrity": "sha1:779b08e9f91c3ce59b1618d0962180036fe06e0c"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-libraries.command-handler.spec.ts",
-            "integrity": "sha1:e80a5be5f6daf51906805faf8b24ca7cabac5646"
+            "integrity": "sha1:b56a2a82cafc90030e4b762d5bb08ccc3b4302a9"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-libraries.command-handler.ts",
-            "integrity": "sha1:959d341e29e0c2904a057279ca44fd2e7c74e7e3"
+            "integrity": "sha1:8427b94a3ee2bcd81cfe08dc1bccdc0381a109e5"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-libraries.command.ts",
-            "integrity": "sha1:fbd02458b2b89da677508e50fbe6f5efaf06b03a"
+            "integrity": "sha1:e26fd9dda4adf179d187d7e0a44b8fbe070147fc"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-libraries.service.spec.ts",
-            "integrity": "sha1:d4510f556e58597a9396d04ce03cce845963f830"
+            "integrity": "sha1:97af8d19c3244fefc536da5d8dcd850c6eb15f97"
         },
         {
             "path": "src/@app/common/attachment-library/application/update/common-update-attachment-libraries.service.ts",
-            "integrity": "sha1:e05f7a6c170b1d534d1fb02497b0a2378c7d8889"
+            "integrity": "sha1:cc06e396cf6f6bf4ffab25a4b3e6c7c6eb54d1a5"
         },
         {
             "path": "src/@app/common/attachment-library/application/upsert/common-upsert-attachment-library.command-handler.spec.ts",
-            "integrity": "sha1:5f4df817e6792e34c6b82f74dc56d3bdbc859909"
+            "integrity": "sha1:204bf7d97103741507024959838c5eb026c88e0b"
         },
         {
             "path": "src/@app/common/attachment-library/application/upsert/common-upsert-attachment-library.command-handler.ts",
-            "integrity": "sha1:caae44023f5b2f42f48d8355ac66e6922104d8f6"
+            "integrity": "sha1:cc070665598b0a7a68010d76aff67277491e42aa"
         },
         {
             "path": "src/@app/common/attachment-library/application/upsert/common-upsert-attachment-library.command.ts",
-            "integrity": "sha1:6f4c7b741a733c01a90204e57085bf6da64f3764"
+            "integrity": "sha1:f911d4b91dfb5b92d50a8bb55a087e918b35de05"
         },
         {
             "path": "src/@app/common/attachment-library/application/upsert/common-upsert-attachment-library.service.spec.ts",
-            "integrity": "sha1:84c40aef48b42481d075c6e5643ded140765c088"
+            "integrity": "sha1:3bccb2e92fd318ab97978bee43a53e19ea6b0970"
         },
         {
             "path": "src/@app/common/attachment-library/application/upsert/common-upsert-attachment-library.service.ts",
-            "integrity": "sha1:a80654388317ef198fbbc2e885d8aa825048a593"
+            "integrity": "sha1:4195332c285ebbd5053e9c3f8f952e89dda3d26e"
         },
         {
             "path": "src/@app/common/attachment-library/domain/common-attachment-library.aggregate.ts",
-            "integrity": "sha1:9ac853bf0a088ed1fb7c2f2b171dcfaf8ca82532"
+            "integrity": "sha1:e5af74ab6703e11e876f955e4ea6c53941c29059"
         },
         {
             "path": "src/@app/common/attachment-library/domain/common-attachment-library.mapper.ts",
-            "integrity": "sha1:9fd04ca1d07f896109b2efb0d12bc8b28c7b9830"
+            "integrity": "sha1:035d826acb4870ed11919d4cc8de440196ec8018"
         },
         {
             "path": "src/@app/common/attachment-library/domain/common-attachment-library.repository.ts",
@@ -315,11 +315,11 @@
         },
         {
             "path": "src/@app/common/attachment-library/domain/common-attachment-library.response.ts",
-            "integrity": "sha1:8e2c8077f0897d93c2f4e18f94ebcce031d63727"
+            "integrity": "sha1:0fc1081da5ae764388bf50f79624de8c81624dbd"
         },
         {
             "path": "src/@app/common/attachment-library/domain/value-objects/index.ts",
-            "integrity": "sha1:a6919f9ce44cb22ac38742288077e247bbfcb486"
+            "integrity": "sha1:ba6fed016bf3b88999c68ec6215fc99d1424b190"
         },
         {
             "path": "src/@app/common/attachment-library/index.ts",
@@ -327,19 +327,19 @@
         },
         {
             "path": "src/@app/common/attachment-library/infrastructure/mock/common-mock-attachment-library.data.ts",
-            "integrity": "sha1:7cf80a537bdbde38b21fe2dd2541b3ad62892d0f"
+            "integrity": "sha1:f3efcb49bd86f8f2f28592b1114d8e57af297d1b"
         },
         {
             "path": "src/@app/common/attachment-library/infrastructure/mock/common-mock-attachment-library.repository.ts",
-            "integrity": "sha1:d9c6c61d155d3d9e2c0b775431ce339a20d6d037"
+            "integrity": "sha1:b3f3107655c5fd0c998e14db378f22c393ed64ec"
         },
         {
             "path": "src/@app/common/attachment-library/infrastructure/mock/common-mock-attachment-library.seeder.ts",
-            "integrity": "sha1:c7e3a5b6fbf987e8dc623b3ab0162649ccc89642"
+            "integrity": "sha1:99450022584bd9691a68f5b2fa3fb2880f4c926d"
         },
         {
             "path": "src/@app/common/attachment-library/infrastructure/sequelize/common-sequelize-attachment-library.model.ts",
-            "integrity": "sha1:198c91b051734b5d8acb86a492aca3d142a69246"
+            "integrity": "sha1:f7a4ea98670b42f4930428c7c95f1dd7c80e4d86"
         },
         {
             "path": "src/@app/common/attachment-library/infrastructure/sequelize/common-sequelize-attachment-library.repository.ts",
@@ -350,32 +350,20 @@
             "integrity": "sha1:112e9bf77504c95e8351329088bf3d02df18e0a4"
         },
         {
-            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-name.ts",
-            "integrity": "sha1:11f40da848d2b8a94f296e52ac15e1ff84175d5f"
-        },
-        {
-            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-path.ts",
-            "integrity": "sha1:5bbe04061c238d2e24e20b43f4690871e6f20618"
-        },
-        {
             "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-filename.ts",
             "integrity": "sha1:bd5fed06a66724d7b78ca88e9949659fbe130794"
         },
         {
-            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-url.ts",
-            "integrity": "sha1:d607c56982ebdd85de75c3b3b32a792d92c8bed3"
-        },
-        {
-            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-mime.ts",
-            "integrity": "sha1:eb9090b99a39e82d60282097bf1fa53705475600"
+            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-mimetype.ts",
+            "integrity": "sha1:1220b18d51a97c3892017aab15c432f15d3243b6"
         },
         {
             "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-extension.ts",
             "integrity": "sha1:c482488c1371f470353367bf5fb604b4734c8f3a"
         },
         {
-            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-size.ts",
-            "integrity": "sha1:dbf371ec50b7cb4f867491995970eb1c8fc0c75e"
+            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-relative-path-segments.ts",
+            "integrity": "sha1:e139cb80233531b77d233e54a6e27d4f6de81390"
         },
         {
             "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-width.ts",
@@ -384,6 +372,18 @@
         {
             "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-height.ts",
             "integrity": "sha1:6aa5e74a81ea2b1f7b39cd8be4647cd05b1b36c6"
+        },
+        {
+            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-size.ts",
+            "integrity": "sha1:dbf371ec50b7cb4f867491995970eb1c8fc0c75e"
+        },
+        {
+            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-url.ts",
+            "integrity": "sha1:d607c56982ebdd85de75c3b3b32a792d92c8bed3"
+        },
+        {
+            "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-is-cropable.ts",
+            "integrity": "sha1:a4661f7d79b34439def42107a629c09c525b89f7"
         },
         {
             "path": "src/@app/common/attachment-library/domain/value-objects/common-attachment-library-meta.ts",
@@ -495,19 +495,19 @@
         },
         {
             "path": "src/@api/common/attachment-library/dto/common-attachment-library.dto.ts",
-            "integrity": "sha1:29d7790a285d489dfab561cfc9206da662103367"
+            "integrity": "sha1:757ea134420bae38a20a510e133b5fce8ea2db40"
         },
         {
             "path": "src/@api/common/attachment-library/dto/common-create-attachment-library.dto.ts",
-            "integrity": "sha1:322981c506bb22e4fc1f9002df2b830d4efd1dc1"
+            "integrity": "sha1:896651a28fe50e657c14caf73b6cf1075615fc52"
         },
         {
             "path": "src/@api/common/attachment-library/dto/common-update-attachment-library-by-id.dto.ts",
-            "integrity": "sha1:a6caf5b7539172c9568f7ed47d1abb8d4f49d285"
+            "integrity": "sha1:3e75278c3f5bd772877072f80fb2e421518bdd5a"
         },
         {
             "path": "src/@api/common/attachment-library/dto/common-update-attachment-libraries.dto.ts",
-            "integrity": "sha1:f5f62a28fb0936669df3108aea05f17b1f536d88"
+            "integrity": "sha1:095c15a72d7a7f8815d2cd572bbd33c9de1e43f2"
         },
         {
             "path": "src/@api/common/attachment-library/dto/index.ts",
@@ -515,7 +515,7 @@
         },
         {
             "path": "src/@api/common/attachment-library/graphql/common-attachment-library.graphql",
-            "integrity": "sha1:289a2a630812281b03faf7da65821418008c0df7"
+            "integrity": "sha1:f945cf9020a634b1346c4dcf4ea5fdf2d8c580b1"
         },
         {
             "path": "src/@api/common/attachment-library/handlers/common-create-attachment-library.handler.spec.ts",
@@ -703,11 +703,11 @@
         },
         {
             "path": "test/acceptance/common/attachment-library.e2e-spec.ts",
-            "integrity": "sha1:d7767333b4f380db5c0e550cd3150ac0aa36a850"
+            "integrity": "sha1:759811aa0f3884eb5c936f991f1abe1d0ee24264"
         },
         {
             "path": "postman/common/common.attachment-library.postman.json",
-            "integrity": "sha1:ea1fa83e9b266c1cc3e3c6e6c99cca1df4dcd678"
+            "integrity": "sha1:d922936958ed85715ae5a95b8aff58459bfd3f6a"
         }
     ]
 }

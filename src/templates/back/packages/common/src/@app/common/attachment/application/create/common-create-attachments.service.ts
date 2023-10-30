@@ -8,11 +8,12 @@ import {
     CommonAttachmentFilename,
     CommonAttachmentHeight,
     CommonAttachmentId,
+    CommonAttachmentIsCropable,
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryId,
     CommonAttachmentMeta,
-    CommonAttachmentMime,
-    CommonAttachmentPath,
+    CommonAttachmentMimetype,
+    CommonAttachmentRelativePathSegments,
     CommonAttachmentSize,
     CommonAttachmentSort,
     CommonAttachmentTitle,
@@ -39,14 +40,15 @@ export class CommonCreateAttachmentsService
             sort: CommonAttachmentSort;
             alt: CommonAttachmentAlt;
             title: CommonAttachmentTitle;
-            path: CommonAttachmentPath;
             filename: CommonAttachmentFilename;
-            url: CommonAttachmentUrl;
-            mime: CommonAttachmentMime;
+            mimetype: CommonAttachmentMimetype;
             extension: CommonAttachmentExtension;
-            size: CommonAttachmentSize;
+            relativePathSegments: CommonAttachmentRelativePathSegments;
             width: CommonAttachmentWidth;
             height: CommonAttachmentHeight;
+            size: CommonAttachmentSize;
+            url: CommonAttachmentUrl;
+            isCropable: CommonAttachmentIsCropable;
             libraryId: CommonAttachmentLibraryId;
             libraryFilename: CommonAttachmentLibraryFilename;
             meta: CommonAttachmentMeta;
@@ -61,14 +63,15 @@ export class CommonCreateAttachmentsService
             attachment.sort,
             attachment.alt,
             attachment.title,
-            attachment.path,
             attachment.filename,
-            attachment.url,
-            attachment.mime,
+            attachment.mimetype,
             attachment.extension,
-            attachment.size,
+            attachment.relativePathSegments,
             attachment.width,
             attachment.height,
+            attachment.size,
+            attachment.url,
+            attachment.isCropable,
             attachment.libraryId,
             attachment.libraryFilename,
             attachment.meta,

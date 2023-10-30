@@ -8,8 +8,8 @@ export class CommonAttachmentAlt extends StringValueObject
     {
         super(value, Object.assign({
             name       : 'CommonAttachmentAlt',
-            nullable   : false,
-            undefinable: false,
+            nullable   : true,
+            undefinable: true,
             maxLength  : 255,
         }, validationRules));
     }

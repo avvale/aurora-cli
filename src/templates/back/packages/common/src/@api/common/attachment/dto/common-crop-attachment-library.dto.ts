@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CommonCreateAttachmentLibraryDto
+export class CommonCropAttachmentLibraryDto
 {
     @ApiProperty({
         type       : String,
@@ -58,16 +58,9 @@ export class CommonCreateAttachmentLibraryDto
     url: string;
 
     @ApiProperty({
-        type       : Boolean,
-        description: 'isCropable [input here api field description]',
-        example    : true,
-    })
-    isCropable: boolean;
-
-    @ApiProperty({
         type       : Object,
         description: 'meta [input here api field description]',
     })
-    meta?: any;
+    meta: any;
 
 }

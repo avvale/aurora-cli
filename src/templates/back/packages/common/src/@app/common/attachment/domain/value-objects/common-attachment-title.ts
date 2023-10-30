@@ -8,8 +8,8 @@ export class CommonAttachmentTitle extends StringValueObject
     {
         super(value, Object.assign({
             name       : 'CommonAttachmentTitle',
-            nullable   : false,
-            undefinable: false,
+            nullable   : true,
+            undefinable: true,
             maxLength  : 255,
         }, validationRules));
     }

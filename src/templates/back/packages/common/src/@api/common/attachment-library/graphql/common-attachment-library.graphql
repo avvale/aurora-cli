@@ -2,15 +2,15 @@
 type CommonAttachmentLibrary
 {
     id: ID!
-    name: GraphQLString!
-    path: GraphQLString!
     filename: GraphQLString!
-    url: GraphQLString!
-    mime: GraphQLString!
+    mimetype: GraphQLString!
     extension: GraphQLString!
-    size: GraphQLInt!
+    relativePathSegments: JSON!
     width: GraphQLInt
     height: GraphQLInt
+    size: GraphQLInt!
+    url: GraphQLString!
+    isCropable: GraphQLBoolean!
     meta: JSON
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
@@ -20,45 +20,45 @@ type CommonAttachmentLibrary
 input CommonCreateAttachmentLibraryInput
 {
     id: ID!
-    name: GraphQLString!
-    path: GraphQLString!
     filename: GraphQLString!
-    url: GraphQLString!
-    mime: GraphQLString!
+    mimetype: GraphQLString!
     extension: GraphQLString!
-    size: GraphQLInt!
+    relativePathSegments: JSON!
     width: GraphQLInt
     height: GraphQLInt
+    size: GraphQLInt!
+    url: GraphQLString!
+    isCropable: GraphQLBoolean!
     meta: JSON
 }
 
 input CommonUpdateAttachmentLibraryByIdInput
 {
     id: ID!
-    name: GraphQLString
-    path: GraphQLString
     filename: GraphQLString
-    url: GraphQLString
-    mime: GraphQLString
+    mimetype: GraphQLString
     extension: GraphQLString
-    size: GraphQLInt
+    relativePathSegments: JSON
     width: GraphQLInt
     height: GraphQLInt
+    size: GraphQLInt
+    url: GraphQLString
+    isCropable: GraphQLBoolean
     meta: JSON
 }
 
 input CommonUpdateAttachmentLibrariesInput
 {
     id: ID
-    name: GraphQLString
-    path: GraphQLString
     filename: GraphQLString
-    url: GraphQLString
-    mime: GraphQLString
+    mimetype: GraphQLString
     extension: GraphQLString
-    size: GraphQLInt
+    relativePathSegments: JSON
     width: GraphQLInt
     height: GraphQLInt
+    size: GraphQLInt
+    url: GraphQLString
+    isCropable: GraphQLBoolean
     meta: JSON
 }
 

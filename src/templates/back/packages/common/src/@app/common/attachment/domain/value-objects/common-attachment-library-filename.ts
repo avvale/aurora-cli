@@ -8,8 +8,8 @@ export class CommonAttachmentLibraryFilename extends StringValueObject
     {
         super(value, Object.assign({
             name       : 'CommonAttachmentLibraryFilename',
-            nullable   : false,
-            undefinable: false,
+            nullable   : true,
+            undefinable: true,
             maxLength  : 255,
         }, validationRules));
     }

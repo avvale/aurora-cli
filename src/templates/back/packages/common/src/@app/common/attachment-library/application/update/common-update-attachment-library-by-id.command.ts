@@ -5,15 +5,15 @@ export class CommonUpdateAttachmentLibraryByIdCommand
     constructor(
         public readonly payload: {
             id: string;
-            name?: string;
-            path?: string;
             filename?: string;
-            url?: string;
-            mime?: string;
+            mimetype?: string;
             extension?: string;
-            size?: number;
+            relativePathSegments?: any;
             width?: number;
             height?: number;
+            size?: number;
+            url?: string;
+            isCropable?: boolean;
             meta?: any;
         },
         public readonly constraint?: QueryStatement,

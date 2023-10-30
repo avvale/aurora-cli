@@ -34,19 +34,13 @@ export class CommonAttachmentDto
         type       : String,
         description: 'alt [input here api field description]',
     })
-    alt: string;
+    alt?: string;
 
     @ApiProperty({
         type       : String,
         description: 'title [input here api field description]',
     })
-    title: string;
-
-    @ApiProperty({
-        type       : String,
-        description: 'path [input here api field description]',
-    })
-    path: string;
+    title?: string;
 
     @ApiProperty({
         type       : String,
@@ -56,15 +50,9 @@ export class CommonAttachmentDto
 
     @ApiProperty({
         type       : String,
-        description: 'url [input here api field description]',
+        description: 'mimetype [input here api field description]',
     })
-    url: string;
-
-    @ApiProperty({
-        type       : String,
-        description: 'mime [input here api field description]',
-    })
-    mime: string;
+    mimetype: string;
 
     @ApiProperty({
         type       : String,
@@ -73,10 +61,10 @@ export class CommonAttachmentDto
     extension: string;
 
     @ApiProperty({
-        type       : Number,
-        description: 'size [input here api field description]',
+        type       : Object,
+        description: 'relativePathSegments [input here api field description]',
     })
-    size: number;
+    relativePathSegments: any;
 
     @ApiProperty({
         type       : Number,
@@ -89,6 +77,25 @@ export class CommonAttachmentDto
         description: 'height [input here api field description]',
     })
     height?: number;
+
+    @ApiProperty({
+        type       : Number,
+        description: 'size [input here api field description]',
+    })
+    size: number;
+
+    @ApiProperty({
+        type       : String,
+        description: 'url [input here api field description]',
+    })
+    url: string;
+
+    @ApiProperty({
+        type       : Boolean,
+        description: 'isCropable [input here api field description]',
+        example    : true,
+    })
+    isCropable: boolean;
 
     @ApiProperty({
         type       : String,
@@ -107,7 +114,7 @@ export class CommonAttachmentDto
         type       : String,
         description: 'libraryFilename [input here api field description]',
     })
-    libraryFilename: string;
+    libraryFilename?: string;
 
     @ApiProperty({
         type       : Object,

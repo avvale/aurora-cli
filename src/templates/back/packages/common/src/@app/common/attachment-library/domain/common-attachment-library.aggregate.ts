@@ -7,10 +7,10 @@ import {
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryHeight,
     CommonAttachmentLibraryId,
+    CommonAttachmentLibraryIsCropable,
     CommonAttachmentLibraryMeta,
-    CommonAttachmentLibraryMime,
-    CommonAttachmentLibraryName,
-    CommonAttachmentLibraryPath,
+    CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUpdatedAt,
     CommonAttachmentLibraryUrl,
@@ -22,15 +22,15 @@ import { AggregateRoot } from '@nestjs/cqrs';
 export class CommonAttachmentLibrary extends AggregateRoot
 {
     id: CommonAttachmentLibraryId;
-    name: CommonAttachmentLibraryName;
-    path: CommonAttachmentLibraryPath;
     filename: CommonAttachmentLibraryFilename;
-    url: CommonAttachmentLibraryUrl;
-    mime: CommonAttachmentLibraryMime;
+    mimetype: CommonAttachmentLibraryMimetype;
     extension: CommonAttachmentLibraryExtension;
-    size: CommonAttachmentLibrarySize;
+    relativePathSegments: CommonAttachmentLibraryRelativePathSegments;
     width: CommonAttachmentLibraryWidth;
     height: CommonAttachmentLibraryHeight;
+    size: CommonAttachmentLibrarySize;
+    url: CommonAttachmentLibraryUrl;
+    isCropable: CommonAttachmentLibraryIsCropable;
     meta: CommonAttachmentLibraryMeta;
     createdAt: CommonAttachmentLibraryCreatedAt;
     updatedAt: CommonAttachmentLibraryUpdatedAt;
@@ -38,15 +38,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
 
     constructor(
         id: CommonAttachmentLibraryId,
-        name: CommonAttachmentLibraryName,
-        path: CommonAttachmentLibraryPath,
         filename: CommonAttachmentLibraryFilename,
-        url: CommonAttachmentLibraryUrl,
-        mime: CommonAttachmentLibraryMime,
+        mimetype: CommonAttachmentLibraryMimetype,
         extension: CommonAttachmentLibraryExtension,
-        size: CommonAttachmentLibrarySize,
+        relativePathSegments: CommonAttachmentLibraryRelativePathSegments,
         width: CommonAttachmentLibraryWidth,
         height: CommonAttachmentLibraryHeight,
+        size: CommonAttachmentLibrarySize,
+        url: CommonAttachmentLibraryUrl,
+        isCropable: CommonAttachmentLibraryIsCropable,
         meta: CommonAttachmentLibraryMeta,
         createdAt: CommonAttachmentLibraryCreatedAt,
         updatedAt: CommonAttachmentLibraryUpdatedAt,
@@ -55,15 +55,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
     {
         super();
         this.id = id;
-        this.name = name;
-        this.path = path;
         this.filename = filename;
-        this.url = url;
-        this.mime = mime;
+        this.mimetype = mimetype;
         this.extension = extension;
-        this.size = size;
+        this.relativePathSegments = relativePathSegments;
         this.width = width;
         this.height = height;
+        this.size = size;
+        this.url = url;
+        this.isCropable = isCropable;
         this.meta = meta;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -72,15 +72,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
 
     static register(
         id: CommonAttachmentLibraryId,
-        name: CommonAttachmentLibraryName,
-        path: CommonAttachmentLibraryPath,
         filename: CommonAttachmentLibraryFilename,
-        url: CommonAttachmentLibraryUrl,
-        mime: CommonAttachmentLibraryMime,
+        mimetype: CommonAttachmentLibraryMimetype,
         extension: CommonAttachmentLibraryExtension,
-        size: CommonAttachmentLibrarySize,
+        relativePathSegments: CommonAttachmentLibraryRelativePathSegments,
         width: CommonAttachmentLibraryWidth,
         height: CommonAttachmentLibraryHeight,
+        size: CommonAttachmentLibrarySize,
+        url: CommonAttachmentLibraryUrl,
+        isCropable: CommonAttachmentLibraryIsCropable,
         meta: CommonAttachmentLibraryMeta,
         createdAt: CommonAttachmentLibraryCreatedAt,
         updatedAt: CommonAttachmentLibraryUpdatedAt,
@@ -89,15 +89,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
     {
         return new CommonAttachmentLibrary(
             id,
-            name,
-            path,
             filename,
-            url,
-            mime,
+            mimetype,
             extension,
-            size,
+            relativePathSegments,
             width,
             height,
+            size,
+            url,
+            isCropable,
             meta,
             createdAt,
             updatedAt,
@@ -110,15 +110,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
         this.apply(
             new CommonCreatedAttachmentLibraryEvent(
                 attachmentLibrary.id.value,
-                attachmentLibrary.name.value,
-                attachmentLibrary.path.value,
                 attachmentLibrary.filename.value,
-                attachmentLibrary.url.value,
-                attachmentLibrary.mime.value,
+                attachmentLibrary.mimetype.value,
                 attachmentLibrary.extension.value,
-                attachmentLibrary.size.value,
+                attachmentLibrary.relativePathSegments.value,
                 attachmentLibrary.width?.value,
                 attachmentLibrary.height?.value,
+                attachmentLibrary.size.value,
+                attachmentLibrary.url.value,
+                attachmentLibrary.isCropable.value,
                 attachmentLibrary.meta?.value,
                 attachmentLibrary.createdAt?.value,
                 attachmentLibrary.updatedAt?.value,
@@ -132,15 +132,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
         this.apply(
             new CommonUpdatedAttachmentLibraryEvent(
                 attachmentLibrary.id?.value,
-                attachmentLibrary.name?.value,
-                attachmentLibrary.path?.value,
                 attachmentLibrary.filename?.value,
-                attachmentLibrary.url?.value,
-                attachmentLibrary.mime?.value,
+                attachmentLibrary.mimetype?.value,
                 attachmentLibrary.extension?.value,
-                attachmentLibrary.size?.value,
+                attachmentLibrary.relativePathSegments?.value,
                 attachmentLibrary.width?.value,
                 attachmentLibrary.height?.value,
+                attachmentLibrary.size?.value,
+                attachmentLibrary.url?.value,
+                attachmentLibrary.isCropable?.value,
                 attachmentLibrary.meta?.value,
                 attachmentLibrary.createdAt?.value,
                 attachmentLibrary.updatedAt?.value,
@@ -154,15 +154,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
         this.apply(
             new CommonDeletedAttachmentLibraryEvent(
                 attachmentLibrary.id.value,
-                attachmentLibrary.name.value,
-                attachmentLibrary.path.value,
                 attachmentLibrary.filename.value,
-                attachmentLibrary.url.value,
-                attachmentLibrary.mime.value,
+                attachmentLibrary.mimetype.value,
                 attachmentLibrary.extension.value,
-                attachmentLibrary.size.value,
+                attachmentLibrary.relativePathSegments.value,
                 attachmentLibrary.width?.value,
                 attachmentLibrary.height?.value,
+                attachmentLibrary.size.value,
+                attachmentLibrary.url.value,
+                attachmentLibrary.isCropable.value,
                 attachmentLibrary.meta?.value,
                 attachmentLibrary.createdAt?.value,
                 attachmentLibrary.updatedAt?.value,
@@ -175,15 +175,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
     {
         return {
             id: this.id.value,
-            name: this.name.value,
-            path: this.path.value,
             filename: this.filename.value,
-            url: this.url.value,
-            mime: this.mime.value,
+            mimetype: this.mimetype.value,
             extension: this.extension.value,
-            size: this.size.value,
+            relativePathSegments: this.relativePathSegments.value,
             width: this.width?.value,
             height: this.height?.value,
+            size: this.size.value,
+            url: this.url.value,
+            isCropable: this.isCropable.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
@@ -196,15 +196,15 @@ export class CommonAttachmentLibrary extends AggregateRoot
     {
         return {
             id: this.id.value,
-            name: this.name.value,
-            path: this.path.value,
             filename: this.filename.value,
-            url: this.url.value,
-            mime: this.mime.value,
+            mimetype: this.mimetype.value,
             extension: this.extension.value,
-            size: this.size.value,
+            relativePathSegments: this.relativePathSegments.value,
             width: this.width?.value,
             height: this.height?.value,
+            size: this.size.value,
+            url: this.url.value,
+            isCropable: this.isCropable.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,

@@ -7,18 +7,19 @@ export class CommonCreateAttachmentCommand
             id: string;
             familyId?: string;
             sort?: number;
-            alt: string;
-            title: string;
-            path: string;
+            alt?: string;
+            title?: string;
             filename: string;
-            url: string;
-            mime: string;
+            mimetype: string;
             extension: string;
-            size: number;
+            relativePathSegments: any;
             width?: number;
             height?: number;
+            size: number;
+            url: string;
+            isCropable: boolean;
             libraryId?: string;
-            libraryFilename: string;
+            libraryFilename?: string;
             meta?: any;
         },
         public readonly cQMetadata?: CQMetadata,

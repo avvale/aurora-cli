@@ -128,20 +128,6 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
     id: string;
 
     @Column({
-        field: 'name',
-        allowNull: false,
-        type: DataTypes.STRING(255),
-    })
-    name: string;
-
-    @Column({
-        field: 'path',
-        allowNull: false,
-        type: DataTypes.STRING(2047),
-    })
-    path: string;
-
-    @Column({
         field: 'filename',
         allowNull: false,
         type: DataTypes.STRING(255),
@@ -149,18 +135,11 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
     filename: string;
 
     @Column({
-        field: 'url',
-        allowNull: false,
-        type: DataTypes.STRING(2047),
-    })
-    url: string;
-
-    @Column({
-        field: 'mime',
+        field: 'mimetype',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
-    mime: string;
+    mimetype: string;
 
     @Column({
         field: 'extension',
@@ -170,11 +149,11 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
     extension: string;
 
     @Column({
-        field: 'size',
+        field: 'relativePathSegments',
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.JSON,
     })
-    size: number;
+    relativePathSegments: any;
 
     @Column({
         field: 'width',
@@ -189,6 +168,28 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
         type: DataTypes.SMALLINT.UNSIGNED,
     })
     height: number;
+
+    @Column({
+        field: 'size',
+        allowNull: false,
+        type: DataTypes.INTEGER.UNSIGNED,
+    })
+    size: number;
+
+    @Column({
+        field: 'url',
+        allowNull: false,
+        type: DataTypes.STRING(2047),
+    })
+    url: string;
+
+    @Column({
+        field: 'isCropable',
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    })
+    isCropable: boolean;
 
     @Column({
         field: 'meta',

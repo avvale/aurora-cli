@@ -152,24 +152,17 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
 
     @Column({
         field: 'alt',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(255),
     })
     alt: string;
 
     @Column({
         field: 'title',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(255),
     })
     title: string;
-
-    @Column({
-        field: 'path',
-        allowNull: false,
-        type: DataTypes.STRING(2047),
-    })
-    path: string;
 
     @Column({
         field: 'filename',
@@ -179,18 +172,11 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
     filename: string;
 
     @Column({
-        field: 'url',
-        allowNull: false,
-        type: DataTypes.STRING(2047),
-    })
-    url: string;
-
-    @Column({
-        field: 'mime',
+        field: 'mimetype',
         allowNull: false,
         type: DataTypes.STRING(50),
     })
-    mime: string;
+    mimetype: string;
 
     @Column({
         field: 'extension',
@@ -200,11 +186,11 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
     extension: string;
 
     @Column({
-        field: 'size',
+        field: 'relativePathSegments',
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.JSON,
     })
-    size: number;
+    relativePathSegments: any;
 
     @Column({
         field: 'width',
@@ -219,6 +205,28 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
         type: DataTypes.SMALLINT.UNSIGNED,
     })
     height: number;
+
+    @Column({
+        field: 'size',
+        allowNull: false,
+        type: DataTypes.INTEGER.UNSIGNED,
+    })
+    size: number;
+
+    @Column({
+        field: 'url',
+        allowNull: false,
+        type: DataTypes.STRING(2047),
+    })
+    url: string;
+
+    @Column({
+        field: 'isCropable',
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    })
+    isCropable: boolean;
 
     @ForeignKey(() => CommonAttachmentLibraryModel)
     @Column({
@@ -236,7 +244,7 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
 
     @Column({
         field: 'libraryFilename',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(255),
     })
     libraryFilename: string;

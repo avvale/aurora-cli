@@ -6,10 +6,10 @@ import {
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryHeight,
     CommonAttachmentLibraryId,
+    CommonAttachmentLibraryIsCropable,
     CommonAttachmentLibraryMeta,
-    CommonAttachmentLibraryMime,
-    CommonAttachmentLibraryName,
-    CommonAttachmentLibraryPath,
+    CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUpdatedAt,
     CommonAttachmentLibraryUrl,
@@ -30,15 +30,15 @@ export class CommonUpsertAttachmentLibraryService
     async main(
         payload: {
             id: CommonAttachmentLibraryId;
-            name: CommonAttachmentLibraryName;
-            path: CommonAttachmentLibraryPath;
             filename: CommonAttachmentLibraryFilename;
-            url: CommonAttachmentLibraryUrl;
-            mime: CommonAttachmentLibraryMime;
+            mimetype: CommonAttachmentLibraryMimetype;
             extension: CommonAttachmentLibraryExtension;
-            size: CommonAttachmentLibrarySize;
+            relativePathSegments: CommonAttachmentLibraryRelativePathSegments;
             width: CommonAttachmentLibraryWidth;
             height: CommonAttachmentLibraryHeight;
+            size: CommonAttachmentLibrarySize;
+            url: CommonAttachmentLibraryUrl;
+            isCropable: CommonAttachmentLibraryIsCropable;
             meta: CommonAttachmentLibraryMeta;
         },
         cQMetadata?: CQMetadata,
@@ -47,15 +47,15 @@ export class CommonUpsertAttachmentLibraryService
         // upsert aggregate with factory pattern
         const attachmentLibrary = CommonAttachmentLibrary.register(
             payload.id,
-            payload.name,
-            payload.path,
             payload.filename,
-            payload.url,
-            payload.mime,
+            payload.mimetype,
             payload.extension,
-            payload.size,
+            payload.relativePathSegments,
             payload.width,
             payload.height,
+            payload.size,
+            payload.url,
+            payload.isCropable,
             payload.meta,
             new CommonAttachmentLibraryCreatedAt({ currentTimestamp: true }),
             new CommonAttachmentLibraryUpdatedAt({ currentTimestamp: true }),

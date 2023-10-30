@@ -1,30 +1,23 @@
 import { CommonCropAttachmentHandler } from '@api/common/attachment';
-import { CommonCropAttachmentInput } from '@api/graphql';
+import { CommonCropAndCreateAttachment, CommonCropAndCreateAttachmentInput } from '@api/graphql';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-@Auth('common.attachment.update')
+@Auth('common.attachment.create')
 export class CommonCropAttachmentResolver
 {
     constructor(
         private readonly handler: CommonCropAttachmentHandler,
     ) {}
 
-    @Mutation('commonCropAttachment')
+    @Mutation('commonCropAndCreateAttachment')
     async main(
-        @Args('payload') payload: CommonCropAttachmentInput,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean>
+        @Args('payload') payload: CommonCropAndCreateAttachmentInput,
+    ): Promise<CommonCropAndCreateAttachment>
     {
         return await this.handler.main(
             payload,
-            constraint,
-            timezone,
-            auditing,
         );
     }
 }

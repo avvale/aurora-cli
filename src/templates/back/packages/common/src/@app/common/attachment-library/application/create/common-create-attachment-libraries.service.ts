@@ -6,10 +6,10 @@ import {
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryHeight,
     CommonAttachmentLibraryId,
+    CommonAttachmentLibraryIsCropable,
     CommonAttachmentLibraryMeta,
-    CommonAttachmentLibraryMime,
-    CommonAttachmentLibraryName,
-    CommonAttachmentLibraryPath,
+    CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUpdatedAt,
     CommonAttachmentLibraryUrl,
@@ -30,15 +30,15 @@ export class CommonCreateAttachmentLibrariesService
     async main(
         payload: {
             id: CommonAttachmentLibraryId;
-            name: CommonAttachmentLibraryName;
-            path: CommonAttachmentLibraryPath;
             filename: CommonAttachmentLibraryFilename;
-            url: CommonAttachmentLibraryUrl;
-            mime: CommonAttachmentLibraryMime;
+            mimetype: CommonAttachmentLibraryMimetype;
             extension: CommonAttachmentLibraryExtension;
-            size: CommonAttachmentLibrarySize;
+            relativePathSegments: CommonAttachmentLibraryRelativePathSegments;
             width: CommonAttachmentLibraryWidth;
             height: CommonAttachmentLibraryHeight;
+            size: CommonAttachmentLibrarySize;
+            url: CommonAttachmentLibraryUrl;
+            isCropable: CommonAttachmentLibraryIsCropable;
             meta: CommonAttachmentLibraryMeta;
         } [],
         cQMetadata?: CQMetadata,
@@ -47,15 +47,15 @@ export class CommonCreateAttachmentLibrariesService
         // create aggregate with factory pattern
         const aggregateAttachmentLibraries = payload.map(attachmentLibrary => CommonAttachmentLibrary.register(
             attachmentLibrary.id,
-            attachmentLibrary.name,
-            attachmentLibrary.path,
             attachmentLibrary.filename,
-            attachmentLibrary.url,
-            attachmentLibrary.mime,
+            attachmentLibrary.mimetype,
             attachmentLibrary.extension,
-            attachmentLibrary.size,
+            attachmentLibrary.relativePathSegments,
             attachmentLibrary.width,
             attachmentLibrary.height,
+            attachmentLibrary.size,
+            attachmentLibrary.url,
+            attachmentLibrary.isCropable,
             attachmentLibrary.meta,
             new CommonAttachmentLibraryCreatedAt({ currentTimestamp: true }),
             new CommonAttachmentLibraryUpdatedAt({ currentTimestamp: true }),

@@ -1,13 +1,13 @@
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CommonAttachmentLibraryMime extends StringValueObject
+export class CommonAttachmentMimetype extends StringValueObject
 {
-    public readonly type: string = 'CommonAttachmentLibraryMime';
+    public readonly type: string = 'CommonAttachmentMimetype';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'CommonAttachmentLibraryMime',
+            name       : 'CommonAttachmentMimetype',
             nullable   : false,
             undefinable: false,
             maxLength  : 50,

@@ -8,11 +8,12 @@ import {
     CommonAttachmentFilename,
     CommonAttachmentHeight,
     CommonAttachmentId,
+    CommonAttachmentIsCropable,
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryId,
     CommonAttachmentMeta,
-    CommonAttachmentMime,
-    CommonAttachmentPath,
+    CommonAttachmentMimetype,
+    CommonAttachmentRelativePathSegments,
     CommonAttachmentSize,
     CommonAttachmentSort,
     CommonAttachmentTitle,
@@ -39,14 +40,15 @@ export class CommonUpdateAttachmentsService
             sort?: CommonAttachmentSort;
             alt?: CommonAttachmentAlt;
             title?: CommonAttachmentTitle;
-            path?: CommonAttachmentPath;
             filename?: CommonAttachmentFilename;
-            url?: CommonAttachmentUrl;
-            mime?: CommonAttachmentMime;
+            mimetype?: CommonAttachmentMimetype;
             extension?: CommonAttachmentExtension;
-            size?: CommonAttachmentSize;
+            relativePathSegments?: CommonAttachmentRelativePathSegments;
             width?: CommonAttachmentWidth;
             height?: CommonAttachmentHeight;
+            size?: CommonAttachmentSize;
+            url?: CommonAttachmentUrl;
+            isCropable?: CommonAttachmentIsCropable;
             libraryId?: CommonAttachmentLibraryId;
             libraryFilename?: CommonAttachmentLibraryFilename;
             meta?: CommonAttachmentMeta;
@@ -63,14 +65,15 @@ export class CommonUpdateAttachmentsService
             payload.sort,
             payload.alt,
             payload.title,
-            payload.path,
             payload.filename,
-            payload.url,
-            payload.mime,
+            payload.mimetype,
             payload.extension,
-            payload.size,
+            payload.relativePathSegments,
             payload.width,
             payload.height,
+            payload.size,
+            payload.url,
+            payload.isCropable,
             payload.libraryId,
             payload.libraryFilename,
             payload.meta,
