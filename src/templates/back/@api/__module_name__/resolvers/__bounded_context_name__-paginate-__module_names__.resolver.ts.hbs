@@ -17,7 +17,7 @@
 {{#if schema.hasTenant}}
 {{
     push importsArray
-        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
         (object items='TenantConstraint' path=(sumStrings config.appContainer '/iam/shared'))
         (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
@@ -51,7 +51,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
     {{/if}}
     async main(
         {{#if schema.hasTenant}}
-        @CurrentAccount() account: AccountResponse,
+        @CurrentAccount() account: IamAccountResponse,
         {{/if}}
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,

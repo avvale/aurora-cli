@@ -42,7 +42,7 @@
 {{#if schema.hasTenant}}
 {{
     push importsArray
-        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}

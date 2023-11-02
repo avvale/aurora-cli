@@ -38,8 +38,8 @@
 {{#if schema.hasTenant}}
 {{
     push importsArray
-        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
-        (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='TenantPolicy' path=(sumStrings config.apiContainer '/iam/shared'))
         (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
@@ -59,14 +59,14 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     @ApiOperation({ summary: 'Delete {{ toKebabCase schema.moduleName }} by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
     {{#if schema.hasTenant}}
-    @TenantConstraint()
+    @TenantPolicy()
     {{/if}}
     async main(
         {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
         @Param('{{ toCamelCase (getPropertyName this) }}') {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptDeleteType this ../config }},
         {{/each}}
         {{#if schema.hasTenant}}
-        @CurrentAccount() account: AccountResponse,
+        @CurrentAccount() account: IamAccountResponse,
         {{/if}}
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,

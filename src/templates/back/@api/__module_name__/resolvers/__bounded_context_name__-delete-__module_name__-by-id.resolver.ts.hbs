@@ -32,8 +32,8 @@
 {{#if schema.hasTenant}}
 {{
     push importsArray
-        (object items='AccountResponse' pathñ=(sumStrings config.appContainer '/iam/account'))
-        (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='TenantPolicy' path=(sumStrings config.apiContainer '/iam/shared'))
         (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
@@ -50,14 +50,14 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
 
     @Mutation('{{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById')
     {{#if schema.hasTenant}}
-    @TenantConstraint()
+    @TenantPolicy()
     {{/if}}
     async main(
         {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
         @Args('{{ toCamelCase (getPropertyName this) }}') {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptDeleteType this ../config }},
         {{/each}}
         {{#if schema.hasTenant}}
-        @CurrentAccount() account: AccountResponse,
+        @CurrentAccount() account: IamAccountResponse,
         {{/if}}
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,

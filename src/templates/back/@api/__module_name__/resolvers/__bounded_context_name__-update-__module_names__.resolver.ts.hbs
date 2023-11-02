@@ -37,8 +37,8 @@
 {{#if schema.hasTenant}}
 {{
     push importsArray
-        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account'))
-        (object items='TenantPolicy' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+        (object items='TenantPolicy' path=(sumStrings config.apiContainer '/iam/shared'))
         (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
@@ -55,12 +55,12 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 
     @Mutation('{{ toCamelCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}')
     {{#if schema.hasTenant}}
-    @TenantConstraint()
+    @TenantPolicy()
     {{/if}}
     async main(
         @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input,
         {{#if schema.hasTenant}}
-        @CurrentAccount() account: AccountResponse,
+        @CurrentAccount() account: IamAccountResponse,
         {{/if}}
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
