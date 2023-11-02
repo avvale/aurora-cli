@@ -1,5 +1,5 @@
 import * as handlebars from 'handlebars';
-import { Property, PropertyType } from '../../types';
+import { Property, PropertyType, WebComponentType } from '../../types';
 import { hasI18nProperties, timestampProperties } from '../../utils';
 
 handlebars.registerHelper('importWebComponentsManager', function(
@@ -40,6 +40,15 @@ handlebars.registerHelper('importWebComponentsManager', function(
 
             case PropertyType.DATE:
                 importWebComponents.add('MatDatepickerModule');
+                break;
+
+            case PropertyType.ID:
+                if (property.webComponent?.type === WebComponentType.SELECT)
+                {
+                    importWebComponents.add('MatSelectModule');
+                    importWebComponents.add('NgForOf');
+                }
+
                 break;
         }
     }
