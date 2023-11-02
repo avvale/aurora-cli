@@ -50,5 +50,12 @@ export const iamNavigation: FuseNavigationItem = {
                 permission: 'iam.tenant.access',
             },
         },
+        {
+            id   : 'permissions',
+            title: 'Permission',
+            type : 'basic',
+            icon : 'mat_outline:local_police',
+            link : '/iam/permission',
+        },
     ],
 };

@@ -13,6 +13,9 @@ import { roleEditResolver, roleNewResolver, rolePaginationResolver } from './rol
 import { AccountListComponent } from './account/account-list.component';
 import { AccountDetailComponent } from './account/account-detail.component';
 import { accountEditResolver, accountNewResolver, accountPaginationResolver } from './account/account.resolvers';
+import { PermissionListComponent } from './permission/permission-list.component';
+import { PermissionDetailComponent } from './permission/permission-detail.component';
+import { permissionEditResolver, permissionNewResolver, permissionPaginationResolver } from './permission/permission.resolvers';
 
 export default [
     {
@@ -31,6 +34,9 @@ export default [
             { path: 'account', component: AccountListComponent, resolve: { data: accountPaginationResolver }, data: { permission: 'iam.account.get' }},
             { path: 'account/new', component: AccountDetailComponent, resolve: { data: accountNewResolver }, data: { permission: 'iam.account.create' }},
             { path: 'account/edit/:id', component: AccountDetailComponent, resolve: { data: accountEditResolver }, data: { permission: 'iam.account.get' }},
+            { path: 'permission', component: PermissionListComponent, resolve: { data: permissionPaginationResolver }, data: { permission: 'iam.permission.get' }},
+            { path: 'permission/new', component: PermissionDetailComponent, resolve: { data: permissionNewResolver }, data: { permission: 'iam.permission.create' }},
+            { path: 'permission/edit/:id', component: PermissionDetailComponent, resolve: { data: permissionEditResolver }, data: { permission: 'iam.permission.get' }},
         ],
         providers: [
             {

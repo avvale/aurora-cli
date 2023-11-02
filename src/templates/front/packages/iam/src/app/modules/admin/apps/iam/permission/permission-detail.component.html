@@ -1,0 +1,133 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    svgIcon="mat_solid:local_police"
+                    class="icon-size-8 mr-2"
+                >
+                </mat-icon>
+                {{ t('iam.Permission') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button
+                *ngIf="currentViewAction.id === 'iam::permission.detail.edit'"
+                mat-flat-button
+                type="submit"
+                class="ml-3"
+                form="iamPermissionFormDetail"
+                color="accent"
+                [disabled]="fg.pristine || ('iam::permission.detail.update' | getSpinnerFlag | async)"
+            >
+                <mat-icon
+                    *ngIf="!('iam::permission.detail.update' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:edit"
+                    class="icon-size-5 mr-2"
+                >
+                </mat-icon>
+                <mat-icon *ngIf="'iam::permission.detail.update' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
+                </mat-icon>
+                {{ t('Update') }}
+            </button>
+            <button
+                *ngIf="currentViewAction.id === 'iam::permission.detail.new'"
+                mat-flat-button
+                type="submit"
+                form="iamPermissionFormDetail"
+                class="ml-3"
+                color="accent"
+                [disabled]="fg.pristine || ('iam::permission.detail.create' | getSpinnerFlag | async)"
+            >
+                <mat-icon
+                    *ngIf="!('iam::permission.detail.create' | getSpinnerFlag | async)"
+                    svgIcon="mat_solid:save"
+                    class="icon-size-5 mr-2"
+                >
+                </mat-icon>
+                <mat-icon *ngIf="'iam::permission.detail.create' | getSpinnerFlag | async">
+                    <mat-spinner diameter="20"></mat-spinner>
+                </mat-icon>
+                {{ t('Create') }}
+            </button>
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="iamPermissionFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('Id') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="id"
+                            maxlength="36"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.id | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('iam.Name') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="name"
+                            maxlength="255"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.name | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-6"
+                    >
+                        <mat-label>{{ t('iam.BoundedContextId') }}</mat-label>
+                        <mat-select
+                            formControlName="boundedContextId"
+                        >
+                            <mat-option
+                                *ngFor="let boundedContext of boundedContexts$ | async"
+                                [value]="boundedContext.id"
+                            >
+                                {{ boundedContext.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.boundedContextId | async }}</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>

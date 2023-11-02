@@ -3,11 +3,25 @@ import gql from 'graphql-tag';
 export const fields = `
     name
     boundedContextId
+    roles {
+        id
+    }
     createdAt
     updatedAt
 `;
 
-export const relationsFields = '';
+export const relationsFields = `
+    iamGetBoundedContexts (
+        query: $queryBoundedContexts
+        constraint: $constraintBoundedContexts
+    ) {
+        id
+        name
+        root
+        sort
+        isActive
+    }
+`;
 
 // default methods
 export const paginationQuery = gql`
@@ -41,10 +55,36 @@ export const getQuery = gql`
     }
 `;
 
+export const getRelations = gql`
+    query IamGetPermissionsRelations(
+        $queryBoundedContexts: QueryStatement
+        $constraintBoundedContexts: QueryStatement
+    ) {
+        ${relationsFields}
+    }
+`;
+
 export const findByIdQuery = gql`
     query IamFindPermissionById (
         $id: ID
         $constraint: QueryStatement
+    ) {
+        object: iamFindPermissionById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+    }
+`;
+
+export const findByIdWithRelationsQuery = gql`
+    query IamFindPermissionByIdWithRelations (
+        $id: ID
+        $constraint: QueryStatement
+        $queryBoundedContexts: QueryStatement
+        $constraintBoundedContexts: QueryStatement
     ) {
         object: iamFindPermissionById (
             id: $id

@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { BoundedContextService } from '../bounded-context/bounded-context.service';
+import { IamBoundedContext } from '../iam.types';
+import { findByIdWithRelationsQuery, getRelations } from './permission.graphql';
+import { Injectable, inject } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { IamCreatePermission, IamPermission, IamUpdatePermissionById, IamUpdatePermissions } from '@apps/iam/iam.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/permission';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { IamPermission, IamCreatePermission, IamUpdatePermissionById, IamUpdatePermissions } from '../iam.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation } from './permission.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -112,6 +115,59 @@ export class PermissionService
             );
     }
 
+    findByIdWithRelations(
+        {
+            graphqlStatement = findByIdWithRelationsQuery,
+            id = '',
+            constraint = {},
+            headers = {},
+            queryBoundedContexts = {},
+            constraintBoundedContexts = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+            queryBoundedContexts?: QueryStatement;
+            constraintBoundedContexts?: QueryStatement;
+        } = {},
+    ): Observable<{
+        object: IamPermission;
+        iamGetBoundedContexts: IamBoundedContext[];
+    }>
+    {
+        // inject bounded context service to avoid circular dependency
+        const boundedContextService = inject(BoundedContextService);
+
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: IamPermission;
+                iamGetBoundedContexts: IamBoundedContext[];
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                variables: {
+                    id,
+                    constraint,
+                    queryBoundedContexts,
+                    constraintBoundedContexts,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.permissionSubject$.next(data.object);
+                    boundedContextService.boundedContextsSubject$.next(data.iamGetBoundedContexts);
+                }),
+            );
+    }
+
     find(
         {
             graphqlStatement = findQuery,
@@ -190,6 +246,48 @@ export class PermissionService
                 tap(data =>
                 {
                     this.permissionsSubject$.next(data.objects);
+                }),
+            );
+    }
+
+    getRelations(
+        {
+            queryBoundedContexts = {},
+            constraintBoundedContexts = {},
+            headers = {},
+        }: {
+            queryBoundedContexts?: QueryStatement;
+            constraintBoundedContexts?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        iamGetBoundedContexts: IamBoundedContext[];
+    }>
+    {
+        // inject bounded context service to avoid circular dependency
+        const boundedContextService = inject(BoundedContextService);
+
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                iamGetBoundedContexts: IamBoundedContext[];
+            }>({
+                query    : getRelations,
+                variables: {
+                    queryBoundedContexts,
+                    constraintBoundedContexts,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    boundedContextService.boundedContextsSubject$.next(data.iamGetBoundedContexts);
                 }),
             );
     }
