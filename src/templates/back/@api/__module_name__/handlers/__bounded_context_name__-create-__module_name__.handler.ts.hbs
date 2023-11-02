@@ -71,7 +71,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     async main(
         payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input | {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto,
         {{#if schema.hasTenant}}
-        account: AccountResponse,
+        account: IamAccountResponse,
         {{/if}}
         timezone?: string,
         {{#if (hasI18nProperties schema.aggregateProperties) }}

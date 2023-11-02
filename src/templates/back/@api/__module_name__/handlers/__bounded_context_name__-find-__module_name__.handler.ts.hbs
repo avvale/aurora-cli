@@ -45,7 +45,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
 
     async main(
         {{#if schema.hasTenant}}
-        account: AccountResponse,
+        account: IamAccountResponse,
         {{/if}}
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,

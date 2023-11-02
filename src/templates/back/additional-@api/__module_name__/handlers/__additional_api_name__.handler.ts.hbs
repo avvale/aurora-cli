@@ -54,7 +54,7 @@ export class {{ getClassNameAdditionalApi currentAdditionalApi }}Handler
         constraint?: QueryStatement,
         {{/eq }}
         {{#if schema.hasTenant}}
-        account: AccountResponse,
+        account: IamAccountResponse,
         {{/if}}
         timezone?: string,
         {{#if schema.hasAuditing}}

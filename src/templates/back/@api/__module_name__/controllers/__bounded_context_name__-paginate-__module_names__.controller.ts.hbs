@@ -20,7 +20,7 @@
 {{
     push importsArray
         (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
-        (object items='TenantConstraint' path=(sumStrings config.appContainer '/iam/shared'))
+        (object items='TenantConstraint' path=(sumStrings config.apiContainer '/iam/shared'))
         (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}

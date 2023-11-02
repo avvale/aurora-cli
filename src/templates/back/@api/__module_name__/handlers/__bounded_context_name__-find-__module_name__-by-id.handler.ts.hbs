@@ -48,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
         {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
         {{/each}}
         {{#if schema.hasTenant}}
-        account: AccountResponse,
+        account: IamAccountResponse,
         {{/if}}
         constraint?: QueryStatement,
         timezone?: string,

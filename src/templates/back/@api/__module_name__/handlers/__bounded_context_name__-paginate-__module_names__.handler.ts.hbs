@@ -40,7 +40,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
 
     async main(
         {{#if schema.hasTenant}}
-        account: AccountResponse,
+        account: IamAccountResponse,
         {{/if}}
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,

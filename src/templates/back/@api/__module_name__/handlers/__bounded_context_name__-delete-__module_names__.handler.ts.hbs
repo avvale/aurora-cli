@@ -53,7 +53,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
 
     async main(
         {{#if schema.hasTenant}}
-        account: AccountResponse,
+        account: IamAccountResponse,
         {{/if}}
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,

@@ -14,6 +14,12 @@
         (object items=(array 'AuditingMeta') path=config.auroraCorePackage)
 ~}}
 {{/if}}
+{{#if schema.hasTenant}}
+{{
+    push importsArray
+        (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+~}}
+{{/if}}
 {{{ importManager (object imports=importsArray) }}}
 @Injectable()
 export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler
@@ -25,7 +31,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     async main(
         payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input[] | {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto[],
         {{#if schema.hasTenant}}
-        account: AccountResponse,
+        account: IamAccountResponse,
         {{/if}}
         timezone?: string,
         {{#if schema.hasAuditing}}
