@@ -4,6 +4,7 @@ import { CommonAttachmentFamily } from '@app/common/attachment-family';
 import { CommonAttachmentLibrary } from '@app/common/attachment-library';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentCreatedAt,
     CommonAttachmentDeletedAt,
     CommonAttachmentExtension,
@@ -31,6 +32,7 @@ export class CommonAttachment extends AggregateRoot
 {
     id: CommonAttachmentId;
     familyId: CommonAttachmentFamilyId;
+    attachableId: CommonAttachmentAttachableId;
     sort: CommonAttachmentSort;
     alt: CommonAttachmentAlt;
     title: CommonAttachmentTitle;
@@ -55,6 +57,7 @@ export class CommonAttachment extends AggregateRoot
     constructor(
         id: CommonAttachmentId,
         familyId: CommonAttachmentFamilyId,
+        attachableId: CommonAttachmentAttachableId,
         sort: CommonAttachmentSort,
         alt: CommonAttachmentAlt,
         title: CommonAttachmentTitle,
@@ -80,6 +83,7 @@ export class CommonAttachment extends AggregateRoot
         super();
         this.id = id;
         this.familyId = familyId;
+        this.attachableId = attachableId;
         this.sort = sort;
         this.alt = alt;
         this.title = title;
@@ -105,6 +109,7 @@ export class CommonAttachment extends AggregateRoot
     static register(
         id: CommonAttachmentId,
         familyId: CommonAttachmentFamilyId,
+        attachableId: CommonAttachmentAttachableId,
         sort: CommonAttachmentSort,
         alt: CommonAttachmentAlt,
         title: CommonAttachmentTitle,
@@ -130,6 +135,7 @@ export class CommonAttachment extends AggregateRoot
         return new CommonAttachment(
             id,
             familyId,
+            attachableId,
             sort,
             alt,
             title,
@@ -159,6 +165,7 @@ export class CommonAttachment extends AggregateRoot
             new CommonCreatedAttachmentEvent(
                 attachment.id.value,
                 attachment.familyId?.value,
+                attachment.attachableId.value,
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
@@ -187,6 +194,7 @@ export class CommonAttachment extends AggregateRoot
             new CommonUpdatedAttachmentEvent(
                 attachment.id?.value,
                 attachment.familyId?.value,
+                attachment.attachableId?.value,
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
@@ -215,6 +223,7 @@ export class CommonAttachment extends AggregateRoot
             new CommonDeletedAttachmentEvent(
                 attachment.id.value,
                 attachment.familyId?.value,
+                attachment.attachableId.value,
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
@@ -242,6 +251,7 @@ export class CommonAttachment extends AggregateRoot
         return {
             id: this.id.value,
             familyId: this.familyId?.value,
+            attachableId: this.attachableId.value,
             sort: this.sort?.value,
             alt: this.alt?.value,
             title: this.title?.value,
@@ -271,6 +281,7 @@ export class CommonAttachment extends AggregateRoot
         return {
             id: this.id.value,
             familyId: this.familyId?.value,
+            attachableId: this.attachableId.value,
             sort: this.sort?.value,
             alt: this.alt?.value,
             title: this.title?.value,

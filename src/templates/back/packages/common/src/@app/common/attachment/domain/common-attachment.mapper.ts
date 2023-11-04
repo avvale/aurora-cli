@@ -3,6 +3,7 @@ import { CommonAttachmentFamilyMapper } from '@app/common/attachment-family';
 import { CommonAttachmentLibraryMapper } from '@app/common/attachment-library';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentCreatedAt,
     CommonAttachmentDeletedAt,
     CommonAttachmentExtension,
@@ -78,6 +79,7 @@ export class CommonAttachmentMapper implements IMapper
         return CommonAttachment.register(
             new CommonAttachmentId(attachment.id, { undefinable: true }),
             new CommonAttachmentFamilyId(attachment.familyId, { undefinable: true }),
+            new CommonAttachmentAttachableId(attachment.attachableId, { undefinable: true }),
             new CommonAttachmentSort(attachment.sort, { undefinable: true }),
             new CommonAttachmentAlt(attachment.alt, { undefinable: true }),
             new CommonAttachmentTitle(attachment.title, { undefinable: true }),
@@ -108,6 +110,7 @@ export class CommonAttachmentMapper implements IMapper
         return new CommonAttachmentResponse(
             attachment.id.value,
             attachment.familyId.value,
+            attachment.attachableId.value,
             attachment.sort.value,
             attachment.alt.value,
             attachment.title.value,

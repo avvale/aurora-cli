@@ -4,6 +4,7 @@ type CommonAttachment
     id: ID!
     familyId: ID
     family: CommonAttachmentFamily
+    attachableId: ID!
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
@@ -29,6 +30,7 @@ input CommonCreateAttachmentInput
 {
     id: ID!
     familyId: ID
+    attachableId: ID!
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
@@ -50,6 +52,7 @@ input CommonUpdateAttachmentByIdInput
 {
     id: ID!
     familyId: ID
+    attachableId: ID
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
@@ -71,6 +74,7 @@ input CommonUpdateAttachmentsInput
 {
     id: ID
     familyId: ID
+    attachableId: ID
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString

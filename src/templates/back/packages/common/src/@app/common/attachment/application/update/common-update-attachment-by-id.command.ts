@@ -6,6 +6,7 @@ export class CommonUpdateAttachmentByIdCommand
         public readonly payload: {
             id: string;
             familyId?: string;
+            attachableId?: string;
             sort?: number;
             alt?: string;
             title?: string;

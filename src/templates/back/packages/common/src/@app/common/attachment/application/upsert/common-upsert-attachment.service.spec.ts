@@ -3,6 +3,7 @@ import { CommonIAttachmentRepository, commonMockAttachmentData, CommonMockAttach
 import { CommonUpsertAttachmentService } from '@app/common/attachment/application/upsert/common-upsert-attachment.service';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentExtension,
     CommonAttachmentFamilyId,
     CommonAttachmentFilename,
@@ -65,6 +66,7 @@ describe('CommonUpsertAttachmentService', () =>
                     {
                         id: new CommonAttachmentId(commonMockAttachmentData[0].id),
                         familyId: new CommonAttachmentFamilyId(commonMockAttachmentData[0].familyId),
+                        attachableId: new CommonAttachmentAttachableId(commonMockAttachmentData[0].attachableId),
                         sort: new CommonAttachmentSort(commonMockAttachmentData[0].sort),
                         alt: new CommonAttachmentAlt(commonMockAttachmentData[0].alt),
                         title: new CommonAttachmentTitle(commonMockAttachmentData[0].title),

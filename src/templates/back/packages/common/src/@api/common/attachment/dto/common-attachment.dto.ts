@@ -25,6 +25,12 @@ export class CommonAttachmentDto
     family?: CommonAttachmentFamilyDto;
 
     @ApiProperty({
+        type       : String,
+        description: 'attachableId [input here api field description]',
+    })
+    attachableId: string;
+
+    @ApiProperty({
         type       : Number,
         description: 'sort [input here api field description]',
     })

@@ -3,6 +3,7 @@ import { CommonCreateAttachmentsCommand } from '@app/common/attachment';
 import { CommonCreateAttachmentsService } from '@app/common/attachment/application/create/common-create-attachments.service';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentExtension,
     CommonAttachmentFamilyId,
     CommonAttachmentFilename,
@@ -39,6 +40,7 @@ export class CommonCreateAttachmentsCommandHandler implements ICommandHandler<Co
                     return {
                         id: new CommonAttachmentId(attachment.id),
                         familyId: new CommonAttachmentFamilyId(attachment.familyId),
+                        attachableId: new CommonAttachmentAttachableId(attachment.attachableId),
                         sort: new CommonAttachmentSort(attachment.sort),
                         alt: new CommonAttachmentAlt(attachment.alt),
                         title: new CommonAttachmentTitle(attachment.title),

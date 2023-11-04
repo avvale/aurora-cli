@@ -1,6 +1,7 @@
 import { CommonAttachment, commonMockAttachmentData } from '@app/common/attachment';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentCreatedAt,
     CommonAttachmentDeletedAt,
     CommonAttachmentExtension,
@@ -46,6 +47,7 @@ export class CommonMockAttachmentSeeder extends MockSeeder<CommonAttachment>
                 CommonAttachment.register(
                     new CommonAttachmentId(attachment.id),
                     new CommonAttachmentFamilyId(attachment.familyId),
+                    new CommonAttachmentAttachableId(attachment.attachableId),
                     new CommonAttachmentSort(attachment.sort),
                     new CommonAttachmentAlt(attachment.alt),
                     new CommonAttachmentTitle(attachment.title),

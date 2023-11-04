@@ -41,6 +41,7 @@ describe('CommonUpsertAttachmentCommandHandler', () =>
                     {
                         id: commonMockAttachmentData[0].id,
                         familyId: commonMockAttachmentData[0].familyId,
+                        attachableId: commonMockAttachmentData[0].attachableId,
                         sort: commonMockAttachmentData[0].sort,
                         alt: commonMockAttachmentData[0].alt,
                         title: commonMockAttachmentData[0].title,

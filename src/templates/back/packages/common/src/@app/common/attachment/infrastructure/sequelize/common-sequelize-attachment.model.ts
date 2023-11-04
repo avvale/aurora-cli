@@ -10,6 +10,13 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
     modelName: 'CommonAttachment',
     freezeTableName: true,
     timestamps: false,
+    indexes: [
+		{
+			fields: ['attachableId'],
+			unique: false,
+		},
+
+    ],
 })
 export class CommonAttachmentModel extends Model<CommonAttachmentModel>
 {
@@ -142,6 +149,13 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
         foreignKey: 'familyId',
     })
     family: CommonAttachmentFamilyModel;
+
+    @Column({
+        field: 'attachableId',
+        allowNull: false,
+        type: DataTypes.UUID,
+    })
+    attachableId: string;
 
     @Column({
         field: 'sort',

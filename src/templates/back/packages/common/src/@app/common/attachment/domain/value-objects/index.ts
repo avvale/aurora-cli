@@ -1,4 +1,5 @@
 export { CommonAttachmentAlt } from './common-attachment-alt';
+export { CommonAttachmentAttachableId } from './common-attachment-attachable-id';
 export { CommonAttachmentCreatedAt } from './common-attachment-created-at';
 export { CommonAttachmentDeletedAt } from './common-attachment-deleted-at';
 export { CommonAttachmentExtension } from './common-attachment-extension';

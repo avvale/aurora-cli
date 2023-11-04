@@ -1,6 +1,7 @@
 import { CommonAddAttachmentsContextEvent, CommonAttachment, CommonIAttachmentRepository } from '@app/common/attachment';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentCreatedAt,
     CommonAttachmentDeletedAt,
     CommonAttachmentExtension,
@@ -37,6 +38,7 @@ export class CommonUpdateAttachmentsService
         payload: {
             id?: CommonAttachmentId;
             familyId?: CommonAttachmentFamilyId;
+            attachableId?: CommonAttachmentAttachableId;
             sort?: CommonAttachmentSort;
             alt?: CommonAttachmentAlt;
             title?: CommonAttachmentTitle;
@@ -62,6 +64,7 @@ export class CommonUpdateAttachmentsService
         const attachment = CommonAttachment.register(
             payload.id,
             payload.familyId,
+            payload.attachableId,
             payload.sort,
             payload.alt,
             payload.title,

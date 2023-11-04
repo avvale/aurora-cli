@@ -23,6 +23,7 @@ export class CommonAddAttachmentsContextEvent extends AggregateRoot
                     new CommonCreatedAttachmentEvent(
                         attachment.id.value,
                         attachment.familyId?.value,
+                        attachment.attachableId.value,
                         attachment.sort?.value,
                         attachment.alt?.value,
                         attachment.title?.value,
@@ -55,6 +56,7 @@ export class CommonAddAttachmentsContextEvent extends AggregateRoot
                     new CommonUpdatedAttachmentEvent(
                         attachment.id.value,
                         attachment.familyId?.value,
+                        attachment.attachableId.value,
                         attachment.sort?.value,
                         attachment.alt?.value,
                         attachment.title?.value,
@@ -87,6 +89,7 @@ export class CommonAddAttachmentsContextEvent extends AggregateRoot
                     new CommonDeletedAttachmentEvent(
                         attachment.id.value,
                         attachment.familyId?.value,
+                        attachment.attachableId.value,
                         attachment.sort?.value,
                         attachment.alt?.value,
                         attachment.title?.value,

@@ -3,6 +3,7 @@ import { CommonUpdateAttachmentsCommand } from '@app/common/attachment';
 import { CommonUpdateAttachmentsService } from '@app/common/attachment/application/update/common-update-attachments.service';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentExtension,
     CommonAttachmentFamilyId,
     CommonAttachmentFilename,
@@ -36,6 +37,7 @@ export class CommonUpdateAttachmentsCommandHandler implements ICommandHandler<Co
             {
                 id: new CommonAttachmentId(command.payload.id, { undefinable: true }),
                 familyId: new CommonAttachmentFamilyId(command.payload.familyId),
+                attachableId: new CommonAttachmentAttachableId(command.payload.attachableId, { undefinable: true }),
                 sort: new CommonAttachmentSort(command.payload.sort),
                 alt: new CommonAttachmentAlt(command.payload.alt),
                 title: new CommonAttachmentTitle(command.payload.title),

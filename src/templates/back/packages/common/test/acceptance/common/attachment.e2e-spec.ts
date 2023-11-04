@@ -93,6 +93,22 @@ describe('attachment', () =>
             });
     });
 
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentAttachableId property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                attachableId: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentAttachableId must be defined, can not be null');
+            });
+    });
+
     test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentFilename property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -218,6 +234,22 @@ describe('attachment', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentId must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentAttachableId property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                attachableId: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentAttachableId must be defined, can not be undefined');
             });
     });
 
@@ -362,6 +394,22 @@ describe('attachment', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentFamilyId is not allowed, must be a length of 36');
+            });
+    });
+
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentAttachableId is not allowed, must be a length of 36', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                attachableId: '*************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentAttachableId is not allowed, must be a length of 36');
             });
     });
 
@@ -761,6 +809,7 @@ describe('attachment', () =>
                         {
                             id
                             familyId
+                            attachableId
                             sort
                             alt
                             title
@@ -842,6 +891,7 @@ describe('attachment', () =>
                         commonGetAttachments (query:$query)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -886,6 +936,7 @@ describe('attachment', () =>
                         {
                             id
                             familyId
+                            attachableId
                             sort
                             alt
                             title
@@ -930,6 +981,7 @@ describe('attachment', () =>
                         commonFindAttachment (query:$query)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -981,6 +1033,7 @@ describe('attachment', () =>
                         commonFindAttachment (query:$query)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -1030,6 +1083,7 @@ describe('attachment', () =>
                         commonFindAttachmentById (id:$id)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -1074,6 +1128,7 @@ describe('attachment', () =>
                         commonFindAttachmentById (id:$id)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -1116,6 +1171,7 @@ describe('attachment', () =>
                         commonUpdateAttachmentById (payload:$payload)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -1163,6 +1219,7 @@ describe('attachment', () =>
                         commonUpdateAttachmentById (payload:$payload)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -1208,6 +1265,7 @@ describe('attachment', () =>
                         commonUpdateAttachments (payload:$payload query:$query)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -1258,6 +1316,7 @@ describe('attachment', () =>
                         commonDeleteAttachmentById (id:$id)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title
@@ -1302,6 +1361,7 @@ describe('attachment', () =>
                         commonDeleteAttachmentById (id:$id)
                         {
                             id
+                            attachableId
                             sort
                             alt
                             title

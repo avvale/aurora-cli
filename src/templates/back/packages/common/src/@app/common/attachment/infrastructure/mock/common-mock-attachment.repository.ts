@@ -1,6 +1,7 @@
 import { CommonAttachment, CommonIAttachmentRepository, commonMockAttachmentData } from '@app/common/attachment';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentCreatedAt,
     CommonAttachmentDeletedAt,
     CommonAttachmentExtension,
@@ -56,6 +57,7 @@ export class CommonMockAttachmentRepository extends MockRepository<CommonAttachm
             this.collectionSource.push(CommonAttachment.register(
                 new CommonAttachmentId(itemCollection.id),
                 new CommonAttachmentFamilyId(itemCollection.familyId),
+                new CommonAttachmentAttachableId(itemCollection.attachableId),
                 new CommonAttachmentSort(itemCollection.sort),
                 new CommonAttachmentAlt(itemCollection.alt),
                 new CommonAttachmentTitle(itemCollection.title),

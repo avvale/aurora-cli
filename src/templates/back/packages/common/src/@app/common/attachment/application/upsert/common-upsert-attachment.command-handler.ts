@@ -3,6 +3,7 @@ import { CommonUpsertAttachmentCommand } from '@app/common/attachment';
 import { CommonUpsertAttachmentService } from '@app/common/attachment/application/upsert/common-upsert-attachment.service';
 import {
     CommonAttachmentAlt,
+    CommonAttachmentAttachableId,
     CommonAttachmentExtension,
     CommonAttachmentFamilyId,
     CommonAttachmentFilename,
@@ -36,6 +37,7 @@ export class CommonUpsertAttachmentCommandHandler implements ICommandHandler<Com
             {
                 id: new CommonAttachmentId(command.payload.id),
                 familyId: new CommonAttachmentFamilyId(command.payload.familyId),
+                attachableId: new CommonAttachmentAttachableId(command.payload.attachableId),
                 sort: new CommonAttachmentSort(command.payload.sort),
                 alt: new CommonAttachmentAlt(command.payload.alt),
                 title: new CommonAttachmentTitle(command.payload.title),
