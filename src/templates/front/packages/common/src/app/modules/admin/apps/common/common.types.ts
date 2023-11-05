@@ -1,7 +1,7 @@
 export enum CommonAdministrativeArea {
-    ADMINISTRATIVE_AREA_1 = 'ADMINISTRATIVE_AREA_1',
-    ADMINISTRATIVE_AREA_2 = 'ADMINISTRATIVE_AREA_2',
-    ADMINISTRATIVE_AREA_3 = 'ADMINISTRATIVE_AREA_3',
+    ADMINISTRATIVE_AREA_LEVEL_1 = 'ADMINISTRATIVE_AREA_LEVEL_1',
+    ADMINISTRATIVE_AREA_LEVEL_2 = 'ADMINISTRATIVE_AREA_LEVEL_2',
+    ADMINISTRATIVE_AREA_LEVEL_3 = 'ADMINISTRATIVE_AREA_LEVEL_3'
 }
 
 export interface CommonLang {
@@ -379,7 +379,7 @@ export interface CommonUpdateResources {
 
 export interface CommonAttachmentFamily {
     id: string;
-    resources?: CommonResource[];
+    resourceId: string;
     name: string;
     width?: number;
     height?: number;

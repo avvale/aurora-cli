@@ -54,6 +54,7 @@ export const attachmentFamilyNewResolver: ResolveFn<{
 };
 
 export const attachmentFamilyEditResolver: ResolveFn<{
+    commonGetResources: CommonResource[];
     object: CommonAttachmentFamily;
 }> = (
     route: ActivatedRouteSnapshot,
@@ -71,12 +72,5 @@ export const attachmentFamilyEditResolver: ResolveFn<{
     return attachmentFamilyService
         .findByIdWithRelations({
             id: route.paramMap.get('id'),
-            constraint: {
-                include: [
-                    {
-                        association: 'resources',
-                    },
-                ],
-            },
         });
 };

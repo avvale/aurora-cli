@@ -80,15 +80,15 @@ export const AdministrativeAreasMixin = <TBase extends GConstructorBase>(Base: T
             {
                 await this.loadAdministrativeAreaLevel1({ country });
             }
-            else if (country.administrativeAreas.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_1))
+            else if (country.administrativeAreas.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_LEVEL_1))
             {
                 await this.loadAdministrativeAreaLevel1({ country });
             }
-            else if (country.administrativeAreas.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_2))
+            else if (country.administrativeAreas.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_LEVEL_2))
             {
                 await this.loadAdministrativeAreaLevel2({ country });
             }
-            else if (country.administrativeAreas.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_3))
+            else if (country.administrativeAreas.includes(CommonAdministrativeArea.ADMINISTRATIVE_AREA_LEVEL_3))
             {
                 await this.loadAdministrativeAreaLevel3({ country });
             }

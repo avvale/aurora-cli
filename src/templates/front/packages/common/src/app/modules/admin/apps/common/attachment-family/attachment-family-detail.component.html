@@ -81,10 +81,9 @@
                         appearance="outline"
                         class="col-6"
                     >
-                        <mat-label>{{ t('common.Resources') }}</mat-label>
+                        <mat-label>{{ t('common.ResourceId') }}</mat-label>
                         <mat-select
-                            formControlName="resourceIds"
-                            multiple
+                            formControlName="resourceId"
                         >
                             <mat-option
                                 *ngFor="let resource of resources$ | async"
@@ -93,7 +92,20 @@
                                 {{ resource.name }}
                             </mat-option>
                         </mat-select>
-                        <mat-error>{{ formErrors?.resourceIds | async }}</mat-error>
+                        <mat-error>{{ formErrors?.resourceId | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('common.Code') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="code"
+                            maxlength="25"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.code | async }}</mat-error>
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"

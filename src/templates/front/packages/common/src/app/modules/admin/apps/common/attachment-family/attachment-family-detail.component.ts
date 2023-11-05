@@ -92,7 +92,8 @@ export class AttachmentFamilyDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            resourceIds: [],
+            resourceId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            code: ['', [Validators.required, Validators.maxLength(25)]],
             name: ['', [Validators.required, Validators.maxLength(100)]],
             width: [null, [Validators.maxLength(5)]],
             height: [null, [Validators.maxLength(5)]],
@@ -121,9 +122,6 @@ export class AttachmentFamilyDetailComponent extends ViewDetailComponent
                     {
                         this.managedObject = item;
                         this.fg.patchValue(item);
-
-                        // set many to many resources associations
-                        this.fg.get('resourceIds').setValue(item.resources.map(resource => resource.id));
                     });
                 break;
 

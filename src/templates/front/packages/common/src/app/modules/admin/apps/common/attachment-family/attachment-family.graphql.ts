@@ -1,9 +1,8 @@
 import gql from 'graphql-tag';
 
 export const fields = `
-    resources {
-        id
-    }
+    resourceId
+    code
     name
     width
     height
@@ -97,13 +96,6 @@ export const findByIdWithRelationsQuery = gql`
         ) {
             id
             #FIELDS
-            resources {
-                id
-                code
-                name
-                isActive
-                hasAttachments
-            }
         }
         ${relationsFields}
     }
