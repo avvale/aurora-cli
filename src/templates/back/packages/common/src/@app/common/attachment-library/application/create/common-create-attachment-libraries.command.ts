@@ -9,11 +9,10 @@ export class CommonCreateAttachmentLibrariesCommand
             mimetype: string;
             extension: string;
             relativePathSegments: any;
-            width?: number;
-            height?: number;
+            width: number;
+            height: number;
             size: number;
             url: string;
-            isCropable: boolean;
             meta?: any;
         } [],
         public readonly cQMetadata?: CQMetadata,

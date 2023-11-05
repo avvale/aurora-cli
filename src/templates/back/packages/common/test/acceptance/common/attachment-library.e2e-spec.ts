@@ -157,6 +157,38 @@ describe('attachment-library', () =>
             });
     });
 
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryWidth property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                width: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryWidth must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryHeight property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                height: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryHeight must be defined, can not be null');
+            });
+    });
+
     test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibrarySize property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -186,22 +218,6 @@ describe('attachment-library', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentLibraryUrl must be defined, can not be null');
-            });
-    });
-
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryIsCropable property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                isCropable: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryIsCropable must be defined, can not be null');
             });
     });
 
@@ -285,6 +301,38 @@ describe('attachment-library', () =>
             });
     });
 
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryWidth property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                width: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryWidth must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryHeight property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                height: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryHeight must be defined, can not be undefined');
+            });
+    });
+
     test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibrarySize property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -314,22 +362,6 @@ describe('attachment-library', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentLibraryUrl must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryIsCropable property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                isCropable: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryIsCropable must be defined, can not be undefined');
             });
     });
 
@@ -474,21 +506,6 @@ describe('attachment-library', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('The numerical Value for CommonAttachmentLibrarySize must have a positive sign, this field does not accept negative values');
-            });
-    });
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryIsCropable has to be a boolean value', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                isCropable: 'true',
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryIsCropable has to be a boolean value');
             });
     });
 
@@ -672,7 +689,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                         }
                     }
@@ -748,7 +764,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -787,7 +802,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                         }
                     }
@@ -826,7 +840,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -873,7 +886,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -918,7 +930,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -958,7 +969,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -996,7 +1006,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -1039,7 +1048,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -1080,7 +1088,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -1126,7 +1133,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt
@@ -1166,7 +1172,6 @@ describe('attachment-library', () =>
                             height
                             size
                             url
-                            isCropable
                             meta
                             createdAt
                             updatedAt

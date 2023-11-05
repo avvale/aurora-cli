@@ -46,7 +46,6 @@ describe('CommonCreateAttachmentLibraryCommandHandler', () =>
                         height: commonMockAttachmentLibraryData[0].height,
                         size: commonMockAttachmentLibraryData[0].size,
                         url: commonMockAttachmentLibraryData[0].url,
-                        isCropable: commonMockAttachmentLibraryData[0].isCropable,
                         meta: commonMockAttachmentLibraryData[0].meta,
                     },
                     { timezone: process.env.TZ },

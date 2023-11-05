@@ -4,7 +4,6 @@ export { CommonAttachmentLibraryExtension } from './common-attachment-library-ex
 export { CommonAttachmentLibraryFilename } from './common-attachment-library-filename';
 export { CommonAttachmentLibraryHeight } from './common-attachment-library-height';
 export { CommonAttachmentLibraryId } from './common-attachment-library-id';
-export { CommonAttachmentLibraryIsCropable } from './common-attachment-library-is-cropable';
 export { CommonAttachmentLibraryMeta } from './common-attachment-library-meta';
 export { CommonAttachmentLibraryMimetype } from './common-attachment-library-mimetype';
 export { CommonAttachmentLibraryRelativePathSegments } from './common-attachment-library-relative-path-segments';

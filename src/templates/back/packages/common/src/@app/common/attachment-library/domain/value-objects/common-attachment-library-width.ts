@@ -8,8 +8,8 @@ export class CommonAttachmentLibraryWidth extends SmallintValueObject
     {
         super(value, Object.assign({
             name       : 'CommonAttachmentLibraryWidth',
-            nullable   : true,
-            undefinable: true,
+            nullable   : false,
+            undefinable: false,
             maxLength  : 5,
             unsigned   : true,
         }, validationRules));

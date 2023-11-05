@@ -1,47 +1,49 @@
-import { CommonCropAndCreateAttachment, CommonCropAndCreateAttachmentInput } from '@api/graphql';
+import { CommonCreateAttachmentDto } from '@api/common/attachment';
+import { CommonCropPropertiesDto } from '@api/common/crop';
+import { CommonCreateAttachmentInput, CommonCreatedCrop, CommonCropPropertiesInput } from '@api/graphql';
 import { CommonFindAttachmentFamilyByIdQuery } from '@app/common/attachment-family';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { join } from 'node:path';
 import * as sharp from 'sharp';
-import { CommonCropAndCreateAttachmentDto } from '../dto';
 
 @Injectable()
-export class CommonCropAttachmentHandler
+export class CommonCreateCropHandler
 {
     constructor(
         private readonly queryBus: IQueryBus,
     ) {}
 
     async main(
-        payload: CommonCropAndCreateAttachmentInput | CommonCropAndCreateAttachmentDto,
-    ): Promise<CommonCropAndCreateAttachment>
+        crop: CommonCropPropertiesInput | CommonCropPropertiesDto,
+        attachment: CommonCreateAttachmentInput | CommonCreateAttachmentDto,
+    ): Promise<CommonCreatedCrop>
     {
         const attachmentFamily = await this.queryBus.ask(new CommonFindAttachmentFamilyByIdQuery(
-            payload.attachment.familyId,
+            attachment.familyId,
         ));
 
         // TODO, ver dodne ponemos el cambio de extension, posiblemente guardadeo de attachemtn
-       /*  if (Utils.mimeFromExtension(attachmentFamily.format.toLowerCase()) !== payload.attachment.mimetype)
+        /*  if (Utils.mimeFromExtension(attachmentFamily.format.toLowerCase()) !== payload.attachment.mimetype)
         {
             console.log('mimetype not match');
         } */
 
         // get library paths
-        const absoluteLibraryPathDirectory = join(process.cwd(), 'storage', 'app', ...payload.attachment.library.relativePathSegments);
-        const absoluteLibraryPath = join(absoluteLibraryPathDirectory, `${payload.attachment.library.id}${payload.attachment.library.extension}`);
+        const absoluteLibraryPathDirectory = join(process.cwd(), 'storage', 'app', ...attachment.library.relativePathSegments);
+        const absoluteLibraryPath = join(absoluteLibraryPathDirectory, `${attachment.library.id}${attachment.library.extension}`);
 
         // get library paths
-        const absolutePathDirectory = join(process.cwd(), 'storage', 'app', ...payload.attachment.relativePathSegments);
-        const absolutePath = join(absolutePathDirectory, `${payload.attachment.id}${payload.attachment.extension}`);
+        const absolutePathDirectory = join(process.cwd(), 'storage', 'app', ...attachment.relativePathSegments);
+        const absolutePath = join(absolutePathDirectory, `${attachment.id}${attachment.extension}`);
 
         // crop image
         const image = sharp(absoluteLibraryPath)
             .extract({
-                left  : payload.crop.x,
-                top   : payload.crop.y,
-                width : payload.crop.width,
-                height: payload.crop.height,
+                left  : crop.x,
+                top   : crop.y,
+                width : crop.width,
+                height: crop.height,
             });
 
         if (attachmentFamily.width > 0 && attachmentFamily.height > 0)
@@ -57,12 +59,12 @@ export class CommonCropAttachmentHandler
 
         return {
             attachment: {
-                ...payload.attachment,
+                ...attachment,
                 width : imageResult.width,
                 height: imageResult.height,
                 size  : imageResult.size,
             },
-            crop: payload.crop,
+            crop,
         };
     }
 }

@@ -11,7 +11,6 @@ export class CommonAttachmentLibraryResponse
         public readonly height: number,
         public readonly size: number,
         public readonly url: string,
-        public readonly isCropable: boolean,
         public readonly meta: any,
         public readonly createdAt: string,
         public readonly updatedAt: string,

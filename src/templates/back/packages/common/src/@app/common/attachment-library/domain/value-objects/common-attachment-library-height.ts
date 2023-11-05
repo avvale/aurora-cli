@@ -8,8 +8,8 @@ export class CommonAttachmentLibraryHeight extends SmallintValueObject
     {
         super(value, Object.assign({
             name       : 'CommonAttachmentLibraryHeight',
-            nullable   : true,
-            undefinable: true,
+            nullable   : false,
+            undefinable: false,
             maxLength  : 5,
             unsigned   : true,
         }, validationRules));

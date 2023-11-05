@@ -6,7 +6,6 @@ import {
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryHeight,
     CommonAttachmentLibraryId,
-    CommonAttachmentLibraryIsCropable,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
     CommonAttachmentLibraryRelativePathSegments,
@@ -40,7 +39,6 @@ export class CommonCreateAttachmentLibrariesCommandHandler implements ICommandHa
                         height: new CommonAttachmentLibraryHeight(attachmentLibrary.height),
                         size: new CommonAttachmentLibrarySize(attachmentLibrary.size),
                         url: new CommonAttachmentLibraryUrl(attachmentLibrary.url),
-                        isCropable: new CommonAttachmentLibraryIsCropable(attachmentLibrary.isCropable),
                         meta: new CommonAttachmentLibraryMeta(attachmentLibrary.meta),
                     };
                 }),

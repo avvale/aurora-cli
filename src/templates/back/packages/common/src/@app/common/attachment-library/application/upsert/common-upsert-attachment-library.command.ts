@@ -13,7 +13,6 @@ export class CommonUpsertAttachmentLibraryCommand
             height?: number;
             size?: number;
             url?: string;
-            isCropable?: boolean;
             meta?: any;
         },
         public readonly cQMetadata?: CQMetadata,

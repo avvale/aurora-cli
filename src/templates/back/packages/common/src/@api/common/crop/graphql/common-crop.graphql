@@ -1,0 +1,35 @@
+type CommonCropProperties
+{
+    x: GraphQLInt!
+    y: GraphQLInt!
+    width: GraphQLInt!
+    height: GraphQLInt!
+    rotate: GraphQLInt!
+    scaleX: GraphQLInt!
+    scaleY: GraphQLInt!
+}
+
+input CommonCropPropertiesInput
+{
+    x: GraphQLInt!
+    y: GraphQLInt!
+    width: GraphQLInt!
+    height: GraphQLInt!
+    rotate: GraphQLInt!
+    scaleX: GraphQLInt!
+    scaleY: GraphQLInt!
+}
+
+type CommonCreatedCrop
+{
+    attachment: CommonAttachment!
+    crop: CommonCropProperties!
+}
+
+type Mutation
+{
+    commonCreateCrop(
+        attachment: CommonCreateAttachmentInput! # CommonCreateAttachmentInput
+        crop: CommonCropPropertiesInput!
+    ): CommonCreatedCrop!
+}

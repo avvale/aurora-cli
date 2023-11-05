@@ -1,9 +1,9 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
-import { CommonCropPropertiesDto } from './common-crop-properties.dto';
+import { CommonCropPropertiesDto } from '../../crop/dto/common-crop-properties.dto';
 import { CommonCropAttachmentDto } from './common-crop-attachment.dto';
 
-export class CommonCropAndCreateAttachmentDto
+export class CommonCreateCropDto
 {
     @ApiProperty({
         type       : CommonCropAttachmentDto,

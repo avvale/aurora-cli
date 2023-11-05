@@ -157,14 +157,14 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
 
     @Column({
         field: 'width',
-        allowNull: true,
+        allowNull: false,
         type: DataTypes.SMALLINT.UNSIGNED,
     })
     width: number;
 
     @Column({
         field: 'height',
-        allowNull: true,
+        allowNull: false,
         type: DataTypes.SMALLINT.UNSIGNED,
     })
     height: number;
@@ -182,14 +182,6 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
         type: DataTypes.STRING(2047),
     })
     url: string;
-
-    @Column({
-        field: 'isCropable',
-        allowNull: false,
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-    })
-    isCropable: boolean;
 
     @Column({
         field: 'meta',

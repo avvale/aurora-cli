@@ -13,7 +13,6 @@ export class CommonUpdateAttachmentLibrariesCommand
             height?: number;
             size?: number;
             url?: string;
-            isCropable?: boolean;
             meta?: any;
         },
         public readonly queryStatement?: QueryStatement,

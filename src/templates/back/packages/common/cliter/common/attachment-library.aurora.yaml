@@ -33,11 +33,11 @@ aggregateProperties:
   - name: width
     type: smallint.unsigned
     maxLength: 5
-    nullable: true
+    nullable: false
   - name: height
     type: smallint.unsigned
     maxLength: 5
-    nullable: true
+    nullable: false
   - name: size
     type: int.unsigned
     maxLength: 10
@@ -46,11 +46,6 @@ aggregateProperties:
     type: varchar
     maxLength: 2047
     nullable: false
-  - name: isCropable
-    type: boolean
-    nullable: false
-    defaultValue: false
-    example: true
   - name: meta
     type: json
     nullable: true

@@ -58,13 +58,6 @@ export class CommonUpdateAttachmentLibrariesDto
     url?: string;
 
     @ApiProperty({
-        type       : Boolean,
-        description: 'isCropable [input here api field description]',
-        example    : true,
-    })
-    isCropable?: boolean;
-
-    @ApiProperty({
         type       : Object,
         description: 'meta [input here api field description]',
     })

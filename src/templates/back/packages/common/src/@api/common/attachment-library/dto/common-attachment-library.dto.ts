@@ -37,13 +37,13 @@ export class CommonAttachmentLibraryDto
         type       : Number,
         description: 'width [input here api field description]',
     })
-    width?: number;
+    width: number;
 
     @ApiProperty({
         type       : Number,
         description: 'height [input here api field description]',
     })
-    height?: number;
+    height: number;
 
     @ApiProperty({
         type       : Number,
@@ -56,13 +56,6 @@ export class CommonAttachmentLibraryDto
         description: 'url [input here api field description]',
     })
     url: string;
-
-    @ApiProperty({
-        type       : Boolean,
-        description: 'isCropable [input here api field description]',
-        example    : true,
-    })
-    isCropable: boolean;
 
     @ApiProperty({
         type       : Object,

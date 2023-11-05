@@ -6,7 +6,6 @@ import {
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryHeight,
     CommonAttachmentLibraryId,
-    CommonAttachmentLibraryIsCropable,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
     CommonAttachmentLibraryRelativePathSegments,
@@ -38,7 +37,6 @@ export class CommonUpsertAttachmentLibraryService
             height: CommonAttachmentLibraryHeight;
             size: CommonAttachmentLibrarySize;
             url: CommonAttachmentLibraryUrl;
-            isCropable: CommonAttachmentLibraryIsCropable;
             meta: CommonAttachmentLibraryMeta;
         },
         cQMetadata?: CQMetadata,
@@ -55,7 +53,6 @@ export class CommonUpsertAttachmentLibraryService
             payload.height,
             payload.size,
             payload.url,
-            payload.isCropable,
             payload.meta,
             new CommonAttachmentLibraryCreatedAt({ currentTimestamp: true }),
             new CommonAttachmentLibraryUpdatedAt({ currentTimestamp: true }),

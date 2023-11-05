@@ -7,7 +7,6 @@ import {
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryHeight,
     CommonAttachmentLibraryId,
-    CommonAttachmentLibraryIsCropable,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
     CommonAttachmentLibraryRelativePathSegments,
@@ -30,7 +29,6 @@ export class CommonAttachmentLibrary extends AggregateRoot
     height: CommonAttachmentLibraryHeight;
     size: CommonAttachmentLibrarySize;
     url: CommonAttachmentLibraryUrl;
-    isCropable: CommonAttachmentLibraryIsCropable;
     meta: CommonAttachmentLibraryMeta;
     createdAt: CommonAttachmentLibraryCreatedAt;
     updatedAt: CommonAttachmentLibraryUpdatedAt;
@@ -46,7 +44,6 @@ export class CommonAttachmentLibrary extends AggregateRoot
         height: CommonAttachmentLibraryHeight,
         size: CommonAttachmentLibrarySize,
         url: CommonAttachmentLibraryUrl,
-        isCropable: CommonAttachmentLibraryIsCropable,
         meta: CommonAttachmentLibraryMeta,
         createdAt: CommonAttachmentLibraryCreatedAt,
         updatedAt: CommonAttachmentLibraryUpdatedAt,
@@ -63,7 +60,6 @@ export class CommonAttachmentLibrary extends AggregateRoot
         this.height = height;
         this.size = size;
         this.url = url;
-        this.isCropable = isCropable;
         this.meta = meta;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -80,7 +76,6 @@ export class CommonAttachmentLibrary extends AggregateRoot
         height: CommonAttachmentLibraryHeight,
         size: CommonAttachmentLibrarySize,
         url: CommonAttachmentLibraryUrl,
-        isCropable: CommonAttachmentLibraryIsCropable,
         meta: CommonAttachmentLibraryMeta,
         createdAt: CommonAttachmentLibraryCreatedAt,
         updatedAt: CommonAttachmentLibraryUpdatedAt,
@@ -97,7 +92,6 @@ export class CommonAttachmentLibrary extends AggregateRoot
             height,
             size,
             url,
-            isCropable,
             meta,
             createdAt,
             updatedAt,
@@ -114,11 +108,10 @@ export class CommonAttachmentLibrary extends AggregateRoot
                 attachmentLibrary.mimetype.value,
                 attachmentLibrary.extension.value,
                 attachmentLibrary.relativePathSegments.value,
-                attachmentLibrary.width?.value,
-                attachmentLibrary.height?.value,
+                attachmentLibrary.width.value,
+                attachmentLibrary.height.value,
                 attachmentLibrary.size.value,
                 attachmentLibrary.url.value,
-                attachmentLibrary.isCropable.value,
                 attachmentLibrary.meta?.value,
                 attachmentLibrary.createdAt?.value,
                 attachmentLibrary.updatedAt?.value,
@@ -140,7 +133,6 @@ export class CommonAttachmentLibrary extends AggregateRoot
                 attachmentLibrary.height?.value,
                 attachmentLibrary.size?.value,
                 attachmentLibrary.url?.value,
-                attachmentLibrary.isCropable?.value,
                 attachmentLibrary.meta?.value,
                 attachmentLibrary.createdAt?.value,
                 attachmentLibrary.updatedAt?.value,
@@ -158,11 +150,10 @@ export class CommonAttachmentLibrary extends AggregateRoot
                 attachmentLibrary.mimetype.value,
                 attachmentLibrary.extension.value,
                 attachmentLibrary.relativePathSegments.value,
-                attachmentLibrary.width?.value,
-                attachmentLibrary.height?.value,
+                attachmentLibrary.width.value,
+                attachmentLibrary.height.value,
                 attachmentLibrary.size.value,
                 attachmentLibrary.url.value,
-                attachmentLibrary.isCropable.value,
                 attachmentLibrary.meta?.value,
                 attachmentLibrary.createdAt?.value,
                 attachmentLibrary.updatedAt?.value,
@@ -179,11 +170,10 @@ export class CommonAttachmentLibrary extends AggregateRoot
             mimetype: this.mimetype.value,
             extension: this.extension.value,
             relativePathSegments: this.relativePathSegments.value,
-            width: this.width?.value,
-            height: this.height?.value,
+            width: this.width.value,
+            height: this.height.value,
             size: this.size.value,
             url: this.url.value,
-            isCropable: this.isCropable.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
@@ -200,11 +190,10 @@ export class CommonAttachmentLibrary extends AggregateRoot
             mimetype: this.mimetype.value,
             extension: this.extension.value,
             relativePathSegments: this.relativePathSegments.value,
-            width: this.width?.value,
-            height: this.height?.value,
+            width: this.width.value,
+            height: this.height.value,
             size: this.size.value,
             url: this.url.value,
-            isCropable: this.isCropable.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,

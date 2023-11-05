@@ -47,9 +47,6 @@ export { CommonDeleteAttachmentsResolver } from './resolvers/common-delete-attac
 export { CommonUploadAttachmentsController } from './controllers/common-upload-attachments.controller';
 export { CommonUploadAttachmentsHandler } from './handlers/common-upload-attachments.handler';
 export { CommonUploadAttachmentsResolver } from './resolvers/common-upload-attachments.resolver';
-export { CommonCropAttachmentController } from './controllers/common-crop-attachment.controller';
-export { CommonCropAttachmentHandler } from './handlers/common-crop-attachment.handler';
-export { CommonCropAttachmentResolver } from './resolvers/common-crop-attachment.resolver';
 
 // import controllers
 import { CommonCreateAttachmentController } from './controllers/common-create-attachment.controller';
@@ -97,9 +94,6 @@ import { CommonAttachmentSeeder } from './seeder/common-attachment.seeder';
 import { CommonUploadAttachmentsController } from './controllers/common-upload-attachments.controller';
 import { CommonUploadAttachmentsHandler } from './handlers/common-upload-attachments.handler';
 import { CommonUploadAttachmentsResolver } from './resolvers/common-upload-attachments.resolver';
-import { CommonCropAttachmentController } from './controllers/common-crop-attachment.controller';
-import { CommonCropAttachmentHandler } from './handlers/common-crop-attachment.handler';
-import { CommonCropAttachmentResolver } from './resolvers/common-crop-attachment.resolver';
 
 export const CommonAttachmentApiControllers = [
     CommonCreateAttachmentController,
@@ -116,7 +110,6 @@ export const CommonAttachmentApiControllers = [
 
     // additionalApis
     CommonUploadAttachmentsController,
-    CommonCropAttachmentController,
 ];
 
 export const CommonAttachmentApiResolvers = [
@@ -134,7 +127,6 @@ export const CommonAttachmentApiResolvers = [
 
     // additionalApis
     CommonUploadAttachmentsResolver,
-    CommonCropAttachmentResolver,
 ];
 
 export const CommonAttachmentApiHandlers = [
@@ -152,7 +144,6 @@ export const CommonAttachmentApiHandlers = [
 
     // additionalApis
     CommonUploadAttachmentsHandler,
-    CommonCropAttachmentHandler,
 ];
 
 export const CommonAttachmentApiServices = [

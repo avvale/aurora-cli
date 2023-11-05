@@ -6,7 +6,6 @@ import {
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryHeight,
     CommonAttachmentLibraryId,
-    CommonAttachmentLibraryIsCropable,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
     CommonAttachmentLibraryRelativePathSegments,
@@ -38,7 +37,6 @@ export class CommonCreateAttachmentLibrariesService
             height: CommonAttachmentLibraryHeight;
             size: CommonAttachmentLibrarySize;
             url: CommonAttachmentLibraryUrl;
-            isCropable: CommonAttachmentLibraryIsCropable;
             meta: CommonAttachmentLibraryMeta;
         } [],
         cQMetadata?: CQMetadata,
@@ -55,7 +53,6 @@ export class CommonCreateAttachmentLibrariesService
             attachmentLibrary.height,
             attachmentLibrary.size,
             attachmentLibrary.url,
-            attachmentLibrary.isCropable,
             attachmentLibrary.meta,
             new CommonAttachmentLibraryCreatedAt({ currentTimestamp: true }),
             new CommonAttachmentLibraryUpdatedAt({ currentTimestamp: true }),

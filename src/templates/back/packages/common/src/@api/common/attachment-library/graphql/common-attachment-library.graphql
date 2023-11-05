@@ -6,11 +6,10 @@ type CommonAttachmentLibrary
     mimetype: GraphQLString!
     extension: GraphQLString!
     relativePathSegments: JSON!
-    width: GraphQLInt
-    height: GraphQLInt
+    width: GraphQLInt!
+    height: GraphQLInt!
     size: GraphQLInt!
     url: GraphQLString!
-    isCropable: GraphQLBoolean!
     meta: JSON
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
@@ -24,11 +23,10 @@ input CommonCreateAttachmentLibraryInput
     mimetype: GraphQLString!
     extension: GraphQLString!
     relativePathSegments: JSON!
-    width: GraphQLInt
-    height: GraphQLInt
+    width: GraphQLInt!
+    height: GraphQLInt!
     size: GraphQLInt!
     url: GraphQLString!
-    isCropable: GraphQLBoolean!
     meta: JSON
 }
 
@@ -43,7 +41,6 @@ input CommonUpdateAttachmentLibraryByIdInput
     height: GraphQLInt
     size: GraphQLInt
     url: GraphQLString
-    isCropable: GraphQLBoolean
     meta: JSON
 }
 
@@ -58,7 +55,6 @@ input CommonUpdateAttachmentLibrariesInput
     height: GraphQLInt
     size: GraphQLInt
     url: GraphQLString
-    isCropable: GraphQLBoolean
     meta: JSON
 }
 
