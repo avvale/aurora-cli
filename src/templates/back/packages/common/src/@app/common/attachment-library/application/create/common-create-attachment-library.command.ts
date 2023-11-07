@@ -6,6 +6,7 @@ export class CommonCreateAttachmentLibraryCommand
         public readonly payload: {
             id: string;
             filename: string;
+            originFilename: string;
             mimetype: string;
             extension: string;
             relativePathSegments: any;

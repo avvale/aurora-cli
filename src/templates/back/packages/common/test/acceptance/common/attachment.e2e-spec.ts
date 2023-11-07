@@ -109,6 +109,22 @@ describe('attachment', () =>
             });
     });
 
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentOriginFilename property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                originFilename: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentOriginFilename must be defined, can not be null');
+            });
+    });
+
     test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentFilename property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -250,6 +266,22 @@ describe('attachment', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentAttachableId must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentOriginFilename property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                originFilename: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentOriginFilename must be defined, can not be undefined');
             });
     });
 
@@ -474,6 +506,22 @@ describe('attachment', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentTitle is too large, has a maximum length of 255');
+            });
+    });
+
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentOriginFilename is too large, has a maximum length of 255', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                originFilename: '****************************************************************************************************************************************************************************************************************************************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentOriginFilename is too large, has a maximum length of 255');
             });
     });
 
@@ -813,6 +861,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -895,6 +944,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -940,6 +990,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -985,6 +1036,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -1037,6 +1089,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -1087,6 +1140,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -1132,6 +1186,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -1175,6 +1230,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -1223,6 +1279,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -1269,6 +1326,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -1320,6 +1378,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension
@@ -1365,6 +1424,7 @@ describe('attachment', () =>
                             sort
                             alt
                             title
+                            originFilename
                             filename
                             mimetype
                             extension

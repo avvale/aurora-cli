@@ -6,6 +6,7 @@ export { CommonAttachmentLibraryHeight } from './common-attachment-library-heigh
 export { CommonAttachmentLibraryId } from './common-attachment-library-id';
 export { CommonAttachmentLibraryMeta } from './common-attachment-library-meta';
 export { CommonAttachmentLibraryMimetype } from './common-attachment-library-mimetype';
+export { CommonAttachmentLibraryOriginFilename } from './common-attachment-library-origin-filename';
 export { CommonAttachmentLibraryRelativePathSegments } from './common-attachment-library-relative-path-segments';
 export { CommonAttachmentLibrarySize } from './common-attachment-library-size';
 export { CommonAttachmentLibraryUpdatedAt } from './common-attachment-library-updated-at';

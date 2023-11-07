@@ -8,6 +8,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryOriginFilename,
     CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUpdatedAt,
@@ -39,6 +40,7 @@ export class CommonMockAttachmentLibrarySeeder extends MockSeeder<CommonAttachme
                 CommonAttachmentLibrary.register(
                     new CommonAttachmentLibraryId(attachmentLibrary.id),
                     new CommonAttachmentLibraryFilename(attachmentLibrary.filename),
+                    new CommonAttachmentLibraryOriginFilename(attachmentLibrary.originFilename),
                     new CommonAttachmentLibraryMimetype(attachmentLibrary.mimetype),
                     new CommonAttachmentLibraryExtension(attachmentLibrary.extension),
                     new CommonAttachmentLibraryRelativePathSegments(attachmentLibrary.relativePathSegments),

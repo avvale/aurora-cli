@@ -8,6 +8,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryOriginFilename,
     CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUrl,
@@ -58,6 +59,7 @@ describe('CommonUpdateAttachmentLibrariesService', () =>
                     {
                         id: new CommonAttachmentLibraryId(commonMockAttachmentLibraryData[0].id),
                         filename: new CommonAttachmentLibraryFilename(commonMockAttachmentLibraryData[0].filename),
+                        originFilename: new CommonAttachmentLibraryOriginFilename(commonMockAttachmentLibraryData[0].originFilename),
                         mimetype: new CommonAttachmentLibraryMimetype(commonMockAttachmentLibraryData[0].mimetype),
                         extension: new CommonAttachmentLibraryExtension(commonMockAttachmentLibraryData[0].extension),
                         relativePathSegments: new CommonAttachmentLibraryRelativePathSegments(commonMockAttachmentLibraryData[0].relativePathSegments),

@@ -43,6 +43,10 @@ aggregateProperties:
     type: varchar
     maxLength: 255
     nullable: true
+  - name: originFilename
+    type: varchar
+    maxLength: 255
+    nullable: false
   - name: filename
     type: varchar
     maxLength: 255

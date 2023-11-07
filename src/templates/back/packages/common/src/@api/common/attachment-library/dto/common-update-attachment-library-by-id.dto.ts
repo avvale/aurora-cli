@@ -17,6 +17,12 @@ export class CommonUpdateAttachmentLibraryByIdDto
 
     @ApiProperty({
         type       : String,
+        description: 'originFilename [input here api field description]',
+    })
+    originFilename?: string;
+
+    @ApiProperty({
+        type       : String,
         description: 'mimetype [input here api field description]',
     })
     mimetype?: string;

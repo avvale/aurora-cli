@@ -17,6 +17,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentMeta,
     CommonAttachmentMimetype,
+    CommonAttachmentOriginFilename,
     CommonAttachmentRelativePathSegments,
     CommonAttachmentSize,
     CommonAttachmentSort,
@@ -36,6 +37,7 @@ export class CommonAttachment extends AggregateRoot
     sort: CommonAttachmentSort;
     alt: CommonAttachmentAlt;
     title: CommonAttachmentTitle;
+    originFilename: CommonAttachmentOriginFilename;
     filename: CommonAttachmentFilename;
     mimetype: CommonAttachmentMimetype;
     extension: CommonAttachmentExtension;
@@ -61,6 +63,7 @@ export class CommonAttachment extends AggregateRoot
         sort: CommonAttachmentSort,
         alt: CommonAttachmentAlt,
         title: CommonAttachmentTitle,
+        originFilename: CommonAttachmentOriginFilename,
         filename: CommonAttachmentFilename,
         mimetype: CommonAttachmentMimetype,
         extension: CommonAttachmentExtension,
@@ -87,6 +90,7 @@ export class CommonAttachment extends AggregateRoot
         this.sort = sort;
         this.alt = alt;
         this.title = title;
+        this.originFilename = originFilename;
         this.filename = filename;
         this.mimetype = mimetype;
         this.extension = extension;
@@ -113,6 +117,7 @@ export class CommonAttachment extends AggregateRoot
         sort: CommonAttachmentSort,
         alt: CommonAttachmentAlt,
         title: CommonAttachmentTitle,
+        originFilename: CommonAttachmentOriginFilename,
         filename: CommonAttachmentFilename,
         mimetype: CommonAttachmentMimetype,
         extension: CommonAttachmentExtension,
@@ -139,6 +144,7 @@ export class CommonAttachment extends AggregateRoot
             sort,
             alt,
             title,
+            originFilename,
             filename,
             mimetype,
             extension,
@@ -169,6 +175,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
+                attachment.originFilename.value,
                 attachment.filename.value,
                 attachment.mimetype.value,
                 attachment.extension.value,
@@ -198,6 +205,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
+                attachment.originFilename?.value,
                 attachment.filename?.value,
                 attachment.mimetype?.value,
                 attachment.extension?.value,
@@ -227,6 +235,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
+                attachment.originFilename.value,
                 attachment.filename.value,
                 attachment.mimetype.value,
                 attachment.extension.value,
@@ -255,6 +264,7 @@ export class CommonAttachment extends AggregateRoot
             sort: this.sort?.value,
             alt: this.alt?.value,
             title: this.title?.value,
+            originFilename: this.originFilename.value,
             filename: this.filename.value,
             mimetype: this.mimetype.value,
             extension: this.extension.value,
@@ -285,6 +295,7 @@ export class CommonAttachment extends AggregateRoot
             sort: this.sort?.value,
             alt: this.alt?.value,
             title: this.title?.value,
+            originFilename: this.originFilename.value,
             filename: this.filename.value,
             mimetype: this.mimetype.value,
             extension: this.extension.value,

@@ -12,6 +12,7 @@ export { CommonAttachmentLibraryFilename } from './common-attachment-library-fil
 export { CommonAttachmentLibraryId } from './common-attachment-library-id';
 export { CommonAttachmentMeta } from './common-attachment-meta';
 export { CommonAttachmentMimetype } from './common-attachment-mimetype';
+export { CommonAttachmentOriginFilename } from './common-attachment-origin-filename';
 export { CommonAttachmentRelativePathSegments } from './common-attachment-relative-path-segments';
 export { CommonAttachmentSize } from './common-attachment-size';
 export { CommonAttachmentSort } from './common-attachment-sort';

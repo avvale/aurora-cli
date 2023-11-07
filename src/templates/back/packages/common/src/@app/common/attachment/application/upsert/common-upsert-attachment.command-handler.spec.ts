@@ -45,6 +45,7 @@ describe('CommonUpsertAttachmentCommandHandler', () =>
                         sort: commonMockAttachmentData[0].sort,
                         alt: commonMockAttachmentData[0].alt,
                         title: commonMockAttachmentData[0].title,
+                        originFilename: commonMockAttachmentData[0].originFilename,
                         filename: commonMockAttachmentData[0].filename,
                         mimetype: commonMockAttachmentData[0].mimetype,
                         extension: commonMockAttachmentData[0].extension,

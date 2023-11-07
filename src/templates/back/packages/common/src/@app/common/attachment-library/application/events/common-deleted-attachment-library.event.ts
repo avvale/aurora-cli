@@ -3,6 +3,7 @@ export class CommonDeletedAttachmentLibraryEvent
     constructor(
         public readonly id: string,
         public readonly filename: string,
+        public readonly originFilename: string,
         public readonly mimetype: string,
         public readonly extension: string,
         public readonly relativePathSegments: any,

@@ -14,6 +14,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentMeta,
     CommonAttachmentMimetype,
+    CommonAttachmentOriginFilename,
     CommonAttachmentRelativePathSegments,
     CommonAttachmentSize,
     CommonAttachmentSort,
@@ -42,6 +43,7 @@ export class CommonCreateAttachmentsService
             sort: CommonAttachmentSort;
             alt: CommonAttachmentAlt;
             title: CommonAttachmentTitle;
+            originFilename: CommonAttachmentOriginFilename;
             filename: CommonAttachmentFilename;
             mimetype: CommonAttachmentMimetype;
             extension: CommonAttachmentExtension;
@@ -66,6 +68,7 @@ export class CommonCreateAttachmentsService
             attachment.sort,
             attachment.alt,
             attachment.title,
+            attachment.originFilename,
             attachment.filename,
             attachment.mimetype,
             attachment.extension,

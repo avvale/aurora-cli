@@ -179,6 +179,13 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
     title: string;
 
     @Column({
+        field: 'originFilename',
+        allowNull: false,
+        type: DataTypes.STRING(255),
+    })
+    originFilename: string;
+
+    @Column({
         field: 'filename',
         allowNull: false,
         type: DataTypes.STRING(255),

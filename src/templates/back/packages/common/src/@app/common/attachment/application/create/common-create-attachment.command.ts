@@ -10,6 +10,7 @@ export class CommonCreateAttachmentCommand
             sort?: number;
             alt?: string;
             title?: string;
+            originFilename: string;
             filename: string;
             mimetype: string;
             extension: string;

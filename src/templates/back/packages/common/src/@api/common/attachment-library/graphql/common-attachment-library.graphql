@@ -3,6 +3,7 @@ type CommonAttachmentLibrary
 {
     id: ID!
     filename: GraphQLString!
+    originFilename: GraphQLString!
     mimetype: GraphQLString!
     extension: GraphQLString!
     relativePathSegments: JSON!
@@ -20,6 +21,7 @@ input CommonCreateAttachmentLibraryInput
 {
     id: ID!
     filename: GraphQLString!
+    originFilename: GraphQLString!
     mimetype: GraphQLString!
     extension: GraphQLString!
     relativePathSegments: JSON!
@@ -34,6 +36,7 @@ input CommonUpdateAttachmentLibraryByIdInput
 {
     id: ID!
     filename: GraphQLString
+    originFilename: GraphQLString
     mimetype: GraphQLString
     extension: GraphQLString
     relativePathSegments: JSON
@@ -48,6 +51,7 @@ input CommonUpdateAttachmentLibrariesInput
 {
     id: ID
     filename: GraphQLString
+    originFilename: GraphQLString
     mimetype: GraphQLString
     extension: GraphQLString
     relativePathSegments: JSON

@@ -2,9 +2,8 @@ import { CommonCreateAttachmentDto } from '@api/common/attachment';
 import { CommonCropPropertiesDto } from '@api/common/crop';
 import { CommonCreateAttachmentInput, CommonCreatedCrop, CommonCropPropertiesInput } from '@api/graphql';
 import { CommonFindAttachmentFamilyByIdQuery } from '@app/common/attachment-family';
-import { IQueryBus } from '@aurorajs.dev/core';
+import { IQueryBus, storagePublicAbsolutePath } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { join } from 'node:path';
 import * as sharp from 'sharp';
 
 @Injectable()
@@ -30,12 +29,12 @@ export class CommonCreateCropHandler
         } */
 
         // get library paths
-        const absoluteLibraryPathDirectory = join(process.cwd(), 'storage', 'app', ...attachment.library.relativePathSegments);
-        const absoluteLibraryPath = join(absoluteLibraryPathDirectory, `${attachment.library.id}${attachment.library.extension}`);
+        const libraryFilename = `${attachment.library.id}${attachment.library.extension}`;
+        const absoluteLibraryPath = storagePublicAbsolutePath(attachment.library.relativePathSegments, libraryFilename);
 
-        // get library paths
-        const absolutePathDirectory = join(process.cwd(), 'storage', 'app', ...attachment.relativePathSegments);
-        const absolutePath = join(absolutePathDirectory, `${attachment.id}${attachment.extension}`);
+        // get paths
+        const filename = `${attachment.id}${attachment.extension}`;
+        const absolutePath =  storagePublicAbsolutePath(attachment.relativePathSegments, filename);
 
         // crop image
         const image = sharp(absoluteLibraryPath)

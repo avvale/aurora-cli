@@ -7,6 +7,7 @@ export class CommonUpdatedAttachmentEvent
         public readonly sort: number,
         public readonly alt: string,
         public readonly title: string,
+        public readonly originFilename: string,
         public readonly filename: string,
         public readonly mimetype: string,
         public readonly extension: string,

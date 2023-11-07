@@ -8,6 +8,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryOriginFilename,
     CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUrl,
@@ -29,6 +30,7 @@ export class CommonUpdateAttachmentLibraryByIdCommandHandler implements ICommand
             {
                 id: new CommonAttachmentLibraryId(command.payload.id),
                 filename: new CommonAttachmentLibraryFilename(command.payload.filename, { undefinable: true }),
+                originFilename: new CommonAttachmentLibraryOriginFilename(command.payload.originFilename, { undefinable: true }),
                 mimetype: new CommonAttachmentLibraryMimetype(command.payload.mimetype, { undefinable: true }),
                 extension: new CommonAttachmentLibraryExtension(command.payload.extension, { undefinable: true }),
                 relativePathSegments: new CommonAttachmentLibraryRelativePathSegments(command.payload.relativePathSegments, { undefinable: true }),

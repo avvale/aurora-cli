@@ -8,6 +8,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryOriginFilename,
     CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUpdatedAt,
@@ -49,6 +50,7 @@ export class CommonMockAttachmentLibraryRepository extends MockRepository<Common
             this.collectionSource.push(CommonAttachmentLibrary.register(
                 new CommonAttachmentLibraryId(itemCollection.id),
                 new CommonAttachmentLibraryFilename(itemCollection.filename),
+                new CommonAttachmentLibraryOriginFilename(itemCollection.originFilename),
                 new CommonAttachmentLibraryMimetype(itemCollection.mimetype),
                 new CommonAttachmentLibraryExtension(itemCollection.extension),
                 new CommonAttachmentLibraryRelativePathSegments(itemCollection.relativePathSegments),

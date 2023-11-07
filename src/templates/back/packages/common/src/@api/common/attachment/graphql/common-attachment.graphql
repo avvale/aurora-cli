@@ -8,6 +8,7 @@ type CommonAttachment
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
+    originFilename: GraphQLString!
     filename: GraphQLString!
     mimetype: GraphQLString!
     extension: GraphQLString!
@@ -36,6 +37,7 @@ input CommonCreateAttachmentInput
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
+    originFilename: GraphQLString!
     filename: GraphQLString!
     mimetype: GraphQLString!
     extension: GraphQLString!
@@ -61,6 +63,7 @@ input CommonUpdateAttachmentByIdInput
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
+    originFilename: GraphQLString
     filename: GraphQLString
     mimetype: GraphQLString
     extension: GraphQLString
@@ -86,6 +89,7 @@ input CommonUpdateAttachmentsInput
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
+    originFilename: GraphQLString
     filename: GraphQLString
     mimetype: GraphQLString
     extension: GraphQLString

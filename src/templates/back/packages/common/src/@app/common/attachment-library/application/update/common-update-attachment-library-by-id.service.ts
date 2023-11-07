@@ -8,6 +8,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryOriginFilename,
     CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUpdatedAt,
@@ -30,6 +31,7 @@ export class CommonUpdateAttachmentLibraryByIdService
         payload: {
             id: CommonAttachmentLibraryId;
             filename?: CommonAttachmentLibraryFilename;
+            originFilename?: CommonAttachmentLibraryOriginFilename;
             mimetype?: CommonAttachmentLibraryMimetype;
             extension?: CommonAttachmentLibraryExtension;
             relativePathSegments?: CommonAttachmentLibraryRelativePathSegments;
@@ -47,6 +49,7 @@ export class CommonUpdateAttachmentLibraryByIdService
         const attachmentLibrary = CommonAttachmentLibrary.register(
             payload.id,
             payload.filename,
+            payload.originFilename,
             payload.mimetype,
             payload.extension,
             payload.relativePathSegments,

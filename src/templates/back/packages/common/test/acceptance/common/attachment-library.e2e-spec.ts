@@ -109,6 +109,22 @@ describe('attachment-library', () =>
             });
     });
 
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryOriginFilename property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                originFilename: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryOriginFilename must be defined, can not be null');
+            });
+    });
+
     test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryMimetype property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -253,6 +269,22 @@ describe('attachment-library', () =>
             });
     });
 
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryOriginFilename property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                originFilename: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryOriginFilename must be defined, can not be undefined');
+            });
+    });
+
     test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryMimetype property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -394,6 +426,22 @@ describe('attachment-library', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentLibraryFilename is too large, has a maximum length of 255');
+            });
+    });
+
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryOriginFilename is too large, has a maximum length of 255', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                originFilename: '****************************************************************************************************************************************************************************************************************************************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryOriginFilename is too large, has a maximum length of 255');
             });
     });
 
@@ -682,6 +730,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -757,6 +806,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -795,6 +845,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -833,6 +884,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -879,6 +931,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -923,6 +976,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -962,6 +1016,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -999,6 +1054,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -1041,6 +1097,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -1081,6 +1138,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -1126,6 +1184,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments
@@ -1165,6 +1224,7 @@ describe('attachment-library', () =>
                         {
                             id
                             filename
+                            originFilename
                             mimetype
                             extension
                             relativePathSegments

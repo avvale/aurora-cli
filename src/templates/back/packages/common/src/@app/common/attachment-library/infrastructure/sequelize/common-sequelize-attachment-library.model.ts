@@ -135,6 +135,13 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
     filename: string;
 
     @Column({
+        field: 'originFilename',
+        allowNull: false,
+        type: DataTypes.STRING(255),
+    })
+    originFilename: string;
+
+    @Column({
         field: 'mimetype',
         allowNull: false,
         type: DataTypes.STRING(50),

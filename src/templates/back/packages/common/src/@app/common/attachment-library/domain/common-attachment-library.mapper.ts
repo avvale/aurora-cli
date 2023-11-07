@@ -8,6 +8,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryOriginFilename,
     CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUpdatedAt,
@@ -69,6 +70,7 @@ export class CommonAttachmentLibraryMapper implements IMapper
         return CommonAttachmentLibrary.register(
             new CommonAttachmentLibraryId(attachmentLibrary.id, { undefinable: true }),
             new CommonAttachmentLibraryFilename(attachmentLibrary.filename, { undefinable: true }),
+            new CommonAttachmentLibraryOriginFilename(attachmentLibrary.originFilename, { undefinable: true }),
             new CommonAttachmentLibraryMimetype(attachmentLibrary.mimetype, { undefinable: true }),
             new CommonAttachmentLibraryExtension(attachmentLibrary.extension, { undefinable: true }),
             new CommonAttachmentLibraryRelativePathSegments(attachmentLibrary.relativePathSegments, { undefinable: true }),
@@ -90,6 +92,7 @@ export class CommonAttachmentLibraryMapper implements IMapper
         return new CommonAttachmentLibraryResponse(
             attachmentLibrary.id.value,
             attachmentLibrary.filename.value,
+            attachmentLibrary.originFilename.value,
             attachmentLibrary.mimetype.value,
             attachmentLibrary.extension.value,
             attachmentLibrary.relativePathSegments.value,

@@ -8,6 +8,7 @@ import {
     CommonAttachmentLibraryId,
     CommonAttachmentLibraryMeta,
     CommonAttachmentLibraryMimetype,
+    CommonAttachmentLibraryOriginFilename,
     CommonAttachmentLibraryRelativePathSegments,
     CommonAttachmentLibrarySize,
     CommonAttachmentLibraryUrl,
@@ -29,6 +30,7 @@ export class CommonUpsertAttachmentLibraryCommandHandler implements ICommandHand
             {
                 id: new CommonAttachmentLibraryId(command.payload.id),
                 filename: new CommonAttachmentLibraryFilename(command.payload.filename),
+                originFilename: new CommonAttachmentLibraryOriginFilename(command.payload.originFilename),
                 mimetype: new CommonAttachmentLibraryMimetype(command.payload.mimetype),
                 extension: new CommonAttachmentLibraryExtension(command.payload.extension),
                 relativePathSegments: new CommonAttachmentLibraryRelativePathSegments(command.payload.relativePathSegments),
