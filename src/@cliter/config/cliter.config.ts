@@ -68,7 +68,7 @@ export const cliterConfig: CliterConfig =
         char               : 'STRING',
         date               : 'STRING',
         decimal            : 'NUMBER',
-        enum               : 'STRING',
+        enum               : 'ENUM',
         float              : 'NUMBER',
         id                 : 'STRING',
         int                : 'NUMBER',
