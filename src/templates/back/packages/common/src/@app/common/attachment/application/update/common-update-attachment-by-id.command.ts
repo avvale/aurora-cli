@@ -22,6 +22,7 @@ export class CommonUpdateAttachmentByIdCommand
             isCropable?: boolean;
             libraryId?: string;
             libraryFilename?: string;
+            sizes?: any;
             meta?: any;
         },
         public readonly constraint?: QueryStatement,

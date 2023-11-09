@@ -15,6 +15,7 @@ export { CommonAttachmentMimetype } from './common-attachment-mimetype';
 export { CommonAttachmentOriginFilename } from './common-attachment-origin-filename';
 export { CommonAttachmentRelativePathSegments } from './common-attachment-relative-path-segments';
 export { CommonAttachmentSize } from './common-attachment-size';
+export { CommonAttachmentSizes } from './common-attachment-sizes';
 export { CommonAttachmentSort } from './common-attachment-sort';
 export { CommonAttachmentTitle } from './common-attachment-title';
 export { CommonAttachmentUpdatedAt } from './common-attachment-updated-at';

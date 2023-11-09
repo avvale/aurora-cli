@@ -98,6 +98,9 @@ aggregateProperties:
     type: varchar
     maxLength: 255
     nullable: true
+  - name: sizes
+    type: json
+    nullable: true
   - name: meta
     type: json
     nullable: true

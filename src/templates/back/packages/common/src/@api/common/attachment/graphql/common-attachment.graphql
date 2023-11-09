@@ -23,6 +23,7 @@ type CommonAttachment
     libraryId: ID
     library: CommonAttachmentLibrary
     libraryFilename: GraphQLString
+    sizes: JSON
     meta: JSON
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
@@ -52,6 +53,7 @@ input CommonCreateAttachmentInput
     library: CommonCreateAttachmentLibraryInput
     libraryId: ID
     libraryFilename: GraphQLString
+    sizes: JSON
     meta: JSON
 }
 
@@ -78,6 +80,7 @@ input CommonUpdateAttachmentByIdInput
     library: CommonCreateAttachmentLibraryInput
     libraryId: ID
     libraryFilename: GraphQLString
+    sizes: JSON
     meta: JSON
 }
 
@@ -101,6 +104,7 @@ input CommonUpdateAttachmentsInput
     isCropable: GraphQLBoolean
     libraryId: ID
     libraryFilename: GraphQLString
+    sizes: JSON
     meta: JSON
 }
 

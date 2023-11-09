@@ -17,6 +17,7 @@ import {
     CommonAttachmentOriginFilename,
     CommonAttachmentRelativePathSegments,
     CommonAttachmentSize,
+    CommonAttachmentSizes,
     CommonAttachmentSort,
     CommonAttachmentTitle,
     CommonAttachmentUpdatedAt,
@@ -55,6 +56,7 @@ export class CommonCreateAttachmentsService
             isCropable: CommonAttachmentIsCropable;
             libraryId: CommonAttachmentLibraryId;
             libraryFilename: CommonAttachmentLibraryFilename;
+            sizes: CommonAttachmentSizes;
             meta: CommonAttachmentMeta;
         } [],
         cQMetadata?: CQMetadata,
@@ -80,6 +82,7 @@ export class CommonCreateAttachmentsService
             attachment.isCropable,
             attachment.libraryId,
             attachment.libraryFilename,
+            attachment.sizes,
             attachment.meta,
             new CommonAttachmentCreatedAt({ currentTimestamp: true }),
             new CommonAttachmentUpdatedAt({ currentTimestamp: true }),

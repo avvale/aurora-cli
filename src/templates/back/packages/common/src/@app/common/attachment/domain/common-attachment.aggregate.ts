@@ -20,6 +20,7 @@ import {
     CommonAttachmentOriginFilename,
     CommonAttachmentRelativePathSegments,
     CommonAttachmentSize,
+    CommonAttachmentSizes,
     CommonAttachmentSort,
     CommonAttachmentTitle,
     CommonAttachmentUpdatedAt,
@@ -49,6 +50,7 @@ export class CommonAttachment extends AggregateRoot
     isCropable: CommonAttachmentIsCropable;
     libraryId: CommonAttachmentLibraryId;
     libraryFilename: CommonAttachmentLibraryFilename;
+    sizes: CommonAttachmentSizes;
     meta: CommonAttachmentMeta;
     createdAt: CommonAttachmentCreatedAt;
     updatedAt: CommonAttachmentUpdatedAt;
@@ -75,6 +77,7 @@ export class CommonAttachment extends AggregateRoot
         isCropable: CommonAttachmentIsCropable,
         libraryId: CommonAttachmentLibraryId,
         libraryFilename: CommonAttachmentLibraryFilename,
+        sizes: CommonAttachmentSizes,
         meta: CommonAttachmentMeta,
         createdAt: CommonAttachmentCreatedAt,
         updatedAt: CommonAttachmentUpdatedAt,
@@ -102,6 +105,7 @@ export class CommonAttachment extends AggregateRoot
         this.isCropable = isCropable;
         this.libraryId = libraryId;
         this.libraryFilename = libraryFilename;
+        this.sizes = sizes;
         this.meta = meta;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -129,6 +133,7 @@ export class CommonAttachment extends AggregateRoot
         isCropable: CommonAttachmentIsCropable,
         libraryId: CommonAttachmentLibraryId,
         libraryFilename: CommonAttachmentLibraryFilename,
+        sizes: CommonAttachmentSizes,
         meta: CommonAttachmentMeta,
         createdAt: CommonAttachmentCreatedAt,
         updatedAt: CommonAttachmentUpdatedAt,
@@ -156,6 +161,7 @@ export class CommonAttachment extends AggregateRoot
             isCropable,
             libraryId,
             libraryFilename,
+            sizes,
             meta,
             createdAt,
             updatedAt,
@@ -187,6 +193,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.isCropable.value,
                 attachment.libraryId?.value,
                 attachment.libraryFilename?.value,
+                attachment.sizes?.value,
                 attachment.meta?.value,
                 attachment.createdAt?.value,
                 attachment.updatedAt?.value,
@@ -217,6 +224,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.isCropable?.value,
                 attachment.libraryId?.value,
                 attachment.libraryFilename?.value,
+                attachment.sizes?.value,
                 attachment.meta?.value,
                 attachment.createdAt?.value,
                 attachment.updatedAt?.value,
@@ -247,6 +255,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.isCropable.value,
                 attachment.libraryId?.value,
                 attachment.libraryFilename?.value,
+                attachment.sizes?.value,
                 attachment.meta?.value,
                 attachment.createdAt?.value,
                 attachment.updatedAt?.value,
@@ -276,6 +285,7 @@ export class CommonAttachment extends AggregateRoot
             isCropable: this.isCropable.value,
             libraryId: this.libraryId?.value,
             libraryFilename: this.libraryFilename?.value,
+            sizes: this.sizes?.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
@@ -307,6 +317,7 @@ export class CommonAttachment extends AggregateRoot
             isCropable: this.isCropable.value,
             libraryId: this.libraryId?.value,
             libraryFilename: this.libraryFilename?.value,
+            sizes: this.sizes?.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,

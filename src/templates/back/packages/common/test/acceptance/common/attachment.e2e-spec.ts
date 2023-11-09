@@ -873,6 +873,7 @@ describe('attachment', () =>
                             isCropable
                             libraryId
                             libraryFilename
+                            sizes
                             meta
                         }
                     }
@@ -955,6 +956,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1002,6 +1004,7 @@ describe('attachment', () =>
                             isCropable
                             libraryId
                             libraryFilename
+                            sizes
                             meta
                         }
                     }
@@ -1047,6 +1050,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1100,6 +1104,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1151,6 +1156,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1197,6 +1203,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1241,6 +1248,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1290,6 +1298,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1337,6 +1346,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1389,6 +1399,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt
@@ -1435,6 +1446,7 @@ describe('attachment', () =>
                             url
                             isCropable
                             libraryFilename
+                            sizes
                             meta
                             createdAt
                             updatedAt

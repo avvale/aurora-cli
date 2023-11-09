@@ -102,6 +102,20 @@ export class CommonUpdateAttachmentByIdDto
     isCropable?: boolean;
 
     @ApiProperty({
+        type       : Boolean,
+        description: 'isUploaded [input here api field description]',
+        example    : true,
+    })
+    isUploaded: boolean;
+
+    @ApiProperty({
+        type       : Boolean,
+        description: 'isChanged [input here api field description]',
+        example    : true,
+    })
+    isChanged: boolean;
+
+    @ApiProperty({
         type       : String,
         description: 'libraryId [input here api field description]',
         example    : 'e703e3d2-5509-5e86-8b55-58e9f0d4249a',
@@ -113,6 +127,12 @@ export class CommonUpdateAttachmentByIdDto
         description: 'libraryFilename [input here api field description]',
     })
     libraryFilename?: string;
+
+    @ApiProperty({
+        type       : Object,
+        description: 'sizes [input here api field description]',
+    })
+    sizes?: any;
 
     @ApiProperty({
         type       : Object,

@@ -22,6 +22,7 @@ export class CommonAttachmentResponse
         public readonly isCropable: boolean,
         public readonly libraryId: string,
         public readonly libraryFilename: string,
+        public readonly sizes: any,
         public readonly meta: any,
         public readonly createdAt: string,
         public readonly updatedAt: string,

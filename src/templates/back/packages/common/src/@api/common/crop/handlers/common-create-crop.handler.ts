@@ -56,12 +56,16 @@ export class CommonCreateCropHandler
         // save to file
         const imageResult = await image.toFile(absolutePath);
 
+        // set metadata for cropped image
+        const meta = await sharp(absolutePath).metadata();
+
         return {
             attachment: {
                 ...attachment,
                 width : imageResult.width,
                 height: imageResult.height,
                 size  : imageResult.size,
+                meta,
             },
             crop,
         };

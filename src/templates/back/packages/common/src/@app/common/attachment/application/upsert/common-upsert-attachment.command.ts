@@ -22,6 +22,7 @@ export class CommonUpsertAttachmentCommand
             isCropable?: boolean;
             libraryId?: string;
             libraryFilename?: string;
+            sizes?: any;
             meta?: any;
         },
         public readonly cQMetadata?: CQMetadata,

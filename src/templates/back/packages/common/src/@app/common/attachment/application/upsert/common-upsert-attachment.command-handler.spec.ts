@@ -57,6 +57,7 @@ describe('CommonUpsertAttachmentCommandHandler', () =>
                         isCropable: commonMockAttachmentData[0].isCropable,
                         libraryId: commonMockAttachmentData[0].libraryId,
                         libraryFilename: commonMockAttachmentData[0].libraryFilename,
+                        sizes: commonMockAttachmentData[0].sizes,
                         meta: commonMockAttachmentData[0].meta,
                     },
                     { timezone: process.env.TZ },

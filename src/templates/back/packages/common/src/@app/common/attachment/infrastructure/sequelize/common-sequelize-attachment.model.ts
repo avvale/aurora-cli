@@ -271,6 +271,13 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
     libraryFilename: string;
 
     @Column({
+        field: 'sizes',
+        allowNull: true,
+        type: DataTypes.JSON,
+    })
+    sizes: any;
+
+    @Column({
         field: 'meta',
         allowNull: true,
         type: DataTypes.JSON,

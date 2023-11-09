@@ -17,6 +17,7 @@ import {
     CommonAttachmentOriginFilename,
     CommonAttachmentRelativePathSegments,
     CommonAttachmentSize,
+    CommonAttachmentSizes,
     CommonAttachmentSort,
     CommonAttachmentTitle,
     CommonAttachmentUrl,
@@ -57,6 +58,7 @@ export class CommonCreateAttachmentsCommandHandler implements ICommandHandler<Co
                         isCropable: new CommonAttachmentIsCropable(attachment.isCropable),
                         libraryId: new CommonAttachmentLibraryId(attachment.libraryId),
                         libraryFilename: new CommonAttachmentLibraryFilename(attachment.libraryFilename),
+                        sizes: new CommonAttachmentSizes(attachment.sizes),
                         meta: new CommonAttachmentMeta(attachment.meta),
                     };
                 }),

@@ -22,6 +22,7 @@ export class CommonCreateAttachmentCommand
             isCropable: boolean;
             libraryId?: string;
             libraryFilename?: string;
+            sizes?: any;
             meta?: any;
         },
         public readonly cQMetadata?: CQMetadata,

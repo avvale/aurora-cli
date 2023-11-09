@@ -17,6 +17,7 @@ import {
     CommonAttachmentOriginFilename,
     CommonAttachmentRelativePathSegments,
     CommonAttachmentSize,
+    CommonAttachmentSizes,
     CommonAttachmentSort,
     CommonAttachmentTitle,
     CommonAttachmentUpdatedAt,
@@ -55,6 +56,7 @@ export class CommonUpdateAttachmentsService
             isCropable?: CommonAttachmentIsCropable;
             libraryId?: CommonAttachmentLibraryId;
             libraryFilename?: CommonAttachmentLibraryFilename;
+            sizes?: CommonAttachmentSizes;
             meta?: CommonAttachmentMeta;
         },
         queryStatement?: QueryStatement,
@@ -82,6 +84,7 @@ export class CommonUpdateAttachmentsService
             payload.isCropable,
             payload.libraryId,
             payload.libraryFilename,
+            payload.sizes,
             payload.meta,
             null, // createdAt
             new CommonAttachmentUpdatedAt({ currentTimestamp: true }),
