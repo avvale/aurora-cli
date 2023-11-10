@@ -1,7 +1,7 @@
 import { IamAccount, IamAccountType, IamCreateAccountInput } from '@api/graphql';
 import { IamCreateAccountCommand, IamFindAccountByIdQuery, IamGetAccountsQuery } from '@app/iam/account';
-import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
 import { IamGetRolesQuery } from '@app/iam/role';
+import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
 import { IamCreateUserCommand, IamGetUsersQuery } from '@app/iam/user';
 import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
 import { AuditingMeta, ICommandBus, IQueryBus, Jwt, LiteralObject, Operator, Utils } from '@aurorajs.dev/core';
@@ -16,7 +16,6 @@ export class IamCreateAccountHandler
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
         private readonly jwtService: JwtService,
-        private readonly createPermissionsFromRolesService: IamCreatePermissionsFromRolesService,
     ) {}
 
     async main(
@@ -47,7 +46,7 @@ export class IamCreateAccountHandler
             if (accounts.some(client => client.email === payload.email))
             {
                 throw new ConflictException({
-                    message   : `The email ${payload.code} already exists`,
+                    message   : `The email ${payload.email} already exists`,
                     statusCode: 102,
                 });
             }
@@ -118,7 +117,7 @@ export class IamCreateAccountHandler
                 clientId         : client?.id,
                 scopes           : payload.scopes,
                 dApplicationCodes: client?.applications.map(application => application.code),
-                dPermissions     : this.createPermissionsFromRolesService.main(roles),
+                dPermissions     : iamCreatePermissionsFromRoles(roles),
                 meta             : payload.meta,
                 roleIds          : payload.roleIds,
                 tenantIds        : payload.tenantIds,

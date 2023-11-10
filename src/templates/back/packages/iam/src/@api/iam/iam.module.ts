@@ -11,7 +11,6 @@ import { IamRoleApiHandlers, IamRoleApiControllers, IamRoleApiResolvers, IamRole
 import { IamAccountApiHandlers, IamAccountApiControllers, IamAccountApiResolvers, IamAccountApiServices } from './account';
 import { IamUserApiHandlers, IamUserApiControllers, IamUserApiResolvers, IamUserApiServices } from './user';
 import { IamUserMetaControllers, IamUserMetaResolvers, IamUserMetaApiHandlers } from './user-meta';
-import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
 import { IamRoleAccountApiControllers, IamRoleAccountApiResolvers, IamRoleAccountApiHandlers, IamRoleAccountApiServices } from './role-account';
 import { IamTenantAccountApiControllers, IamTenantAccountApiResolvers, IamTenantAccountApiHandlers, IamTenantAccountApiServices } from './tenant-account';
 
@@ -35,9 +34,6 @@ import { IamTenantAccountApiControllers, IamTenantAccountApiResolvers, IamTenant
         ...IamUserApiControllers
     ],
     providers: [
-        // ---- customizations ----
-        IamCreatePermissionsFromRolesService,
-
         IamSeeder,
         ...IamAccountApiHandlers,
         ...IamBoundedContextApiHandlers,

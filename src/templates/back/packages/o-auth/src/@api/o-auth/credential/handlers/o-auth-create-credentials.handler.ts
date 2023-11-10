@@ -1,15 +1,15 @@
+import { IamAccount, IamAccountType, OAuthClient, OAuthClientGrantType, OAuthCreateCredentialsInput, OAuthCredentials } from '@api/graphql';
+import { IamFindAccountByIdQuery, IamFindAccountQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
+import { IamGetRolesQuery } from '@app/iam/role/application/get/iam-get-roles.query';
+import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
+import { IamFindUserByUsernamePasswordQuery } from '@app/iam/user';
+import { OAuthCreateAccessTokenCommand, OAuthDeleteAccessTokenByIdCommand, OAuthFindAccessTokenQuery } from '@app/o-auth/access-token';
+import { OAuthFindApplicationByAuthorizationHeaderQuery } from '@app/o-auth/application';
+import { OAuthFindClientQuery } from '@app/o-auth/client';
+import { OAuthCreateRefreshTokenCommand, OAuthFindRefreshTokenByIdQuery } from '@app/o-auth/refresh-token';
 import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Utils } from '@aurorajs.dev/core';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IamAccount, IamAccountType, OAuthClient, OAuthClientGrantType, OAuthCreateCredentialsInput, OAuthCredentials } from '@api/graphql';
-import { IamFindAccountByIdQuery, IamFindAccountQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
-import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
-import { IamGetRolesQuery } from '@app/iam/role/application/get/iam-get-roles.query';
-import { IamFindUserByUsernamePasswordQuery } from '@app/iam/user';
-import { OAuthCreateAccessTokenCommand, OAuthDeleteAccessTokenByIdCommand, OAuthFindAccessTokenQuery } from '@app/o-auth/access-token';
-import { OAuthCreateRefreshTokenCommand, OAuthFindRefreshTokenByIdQuery } from '@app/o-auth/refresh-token';
-import { OAuthFindApplicationByAuthorizationHeaderQuery } from '@app/o-auth/application';
-import { OAuthFindClientQuery } from '@app/o-auth/client';
 import { OAuthCreateCredentialsDto, OAuthCredentialsDto } from '../dto';
 
 @Injectable()
@@ -19,7 +19,6 @@ export class OAuthCreateCredentialsHandler
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
         private readonly jwtService: JwtService,
-        private readonly createPermissionsFromRolesService: IamCreatePermissionsFromRolesService,
     ) {}
 
     async main(
@@ -217,7 +216,7 @@ export class OAuthCreateCredentialsHandler
         }));
 
         // get permissions from roles
-        const dPermissions = this.createPermissionsFromRolesService.main(roles);
+        const dPermissions = iamCreatePermissionsFromRoles(roles);
 
         // check if account permissions are equals
         if (Utils.arraysHasSameValues(account.dPermissions.all, dPermissions.all))

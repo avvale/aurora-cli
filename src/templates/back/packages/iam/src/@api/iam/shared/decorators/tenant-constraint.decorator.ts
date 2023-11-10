@@ -13,7 +13,7 @@ export const TenantConstraint = (customProperties?: {
     return (target, propertyKey: string, descriptor: PropertyDescriptor) =>
     {
         return {
-            value( ... args: any[])
+            value( ...args: any[])
             {
                 const properties = Object.assign({}, {
                     targetProperty : 'tenantId',
@@ -23,7 +23,7 @@ export const TenantConstraint = (customProperties?: {
                 let account: IamAccountResponse;
                 for (const arg of args)
                 {
-                    if (typeof arg === 'object' && arg.constructor.name === 'AccountResponse') account = <IamAccountResponse>arg;
+                    if (typeof arg === 'object' && arg.constructor.name === 'IamAccountResponse') account = <IamAccountResponse>arg;
                 }
 
                 if (!account) throw new BadRequestException('To use @TenantConstraint() decorator need has @CurrentAccount() defined in properties of method');

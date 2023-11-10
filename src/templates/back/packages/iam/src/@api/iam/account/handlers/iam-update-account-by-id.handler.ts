@@ -1,8 +1,8 @@
 import { IamAccount, IamAccountType, IamUpdateAccountByIdInput } from '@api/graphql';
 import { IamAccountDto, IamUpdateAccountByIdDto } from '@api/iam/account';
 import { IamFindAccountByIdQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
-import { IamCreatePermissionsFromRolesService } from '@app/iam/permission-role/application/services/iam-create-permissions-from-roles.service';
 import { IamGetRolesQuery } from '@app/iam/role';
+import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
 import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
 import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -13,7 +13,6 @@ export class IamUpdateAccountByIdHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        private readonly createPermissionsFromRolesService: IamCreatePermissionsFromRolesService,
     ) {}
 
     async main(
@@ -43,7 +42,12 @@ export class IamUpdateAccountByIdHandler
                 include: ['permissions'],
             }));
 
-            dataToUpdate['dPermissions'] = this.createPermissionsFromRolesService.main(roles);
+            dataToUpdate['dPermissions'] = iamCreatePermissionsFromRoles(roles);
+        }
+
+        if ('tenantIds' in dataToUpdate)
+        {
+            dataToUpdate['dTenants'] = dataToUpdate.tenantIds;
         }
 
         const operationId = Utils.uuid();

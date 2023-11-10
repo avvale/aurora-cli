@@ -6,6 +6,9 @@ aggregateName: IamPermission
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+front:
+  outlineIcon: mat_outline:local_police
+  solidIcon: mat_solid:local_police
 aggregateProperties:
   - name: id
     type: id
@@ -28,6 +31,8 @@ aggregateProperties:
       field: boundedContext
       avoidConstraint: true
     index: index
+    webComponent:
+      type: select
   - name: roles
     type: relationship
     nullable: true
@@ -68,9 +73,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-excluded:
-  - src/app/modules/admin/apps/iam/permission/permission-detail.component.html
-  - src/app/modules/admin/apps/iam/permission/permission-detail.component.ts
-  - src/app/modules/admin/apps/iam/permission/permission-list.component.html
-  - src/app/modules/admin/apps/iam/permission/permission-list.component.ts
-  - src/app/modules/admin/apps/iam/permission/permission.resolvers.ts
