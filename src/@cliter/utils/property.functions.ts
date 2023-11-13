@@ -1,5 +1,5 @@
 import { CliterConfig } from '../config';
-import { ModuleDefinitionSchema, Property, PropertyType, RelationshipType } from '../types';
+import { ModuleDefinitionSchema, Property, PropertyArrayOptions, PropertyType, RelationshipType } from '../types';
 import { loadYamlByBoundedContextModule } from './yaml-manager';
 
 // replace by Property name
@@ -26,11 +26,12 @@ export const getPropertySequelizeType = (
     config: CliterConfig,
 ): string =>
 {
-    let parameter: number | string | undefined | number[];
+    let parameter: number | string | undefined | number[] | PropertyArrayOptions;
     if (property.type === PropertyType.CHAR && property?.length)        parameter = property.length;                        // parameter = length
     if (property.type === PropertyType.VARCHAR && property?.maxLength)  parameter = property.maxLength;                     // parameter = maxLength
     if (property.type === PropertyType.ENUM)                            parameter = getPropertyStringEnumOptions(property); // parameter = values
     if (property.type === PropertyType.DECIMAL)                         parameter = property.decimals;                      // parameter = decimals
+    if (property.type === PropertyType.ARRAY)                           parameter = property.arrayOptions;                  // parameter = 
 
     return config.propertyTypesEquivalenceSequelizeTypes[property.type](parameter);
 };

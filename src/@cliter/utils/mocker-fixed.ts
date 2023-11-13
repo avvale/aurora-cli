@@ -102,6 +102,9 @@ export class MockerFixed
             case 'date':
                 return '2022-01-01';
 
+            case 'array':
+                return '[]';
+
             default:
                 throw new Error(`
                     Command Faker ${fieldType} not recognized, check FakeJs API:

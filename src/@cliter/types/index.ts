@@ -113,6 +113,14 @@ export interface PropertyWebComponent
     property: Property;
 }
 
+export interface PropertyArrayOptions
+{
+    type: PropertyType;
+    length?: number;
+    maxLength?: number;
+    enumOptions?: string[];
+}
+
 export interface Property
 {
     type: PropertyType;
@@ -135,6 +143,7 @@ export interface Property
     webComponent?: PropertyWebComponent;
     aggregateName?: string;
     modulePath?: string;
+    arrayOptions?: PropertyArrayOptions;
 }
 
 export interface PropertyRelationship
@@ -159,6 +168,7 @@ export enum PropertyIndex
 
 export enum PropertyType
 {
+    'ARRAY'             = 'array',
     'BIGINT.UNSIGNED'   = 'bigint.unsigned',
     'BIGINT'            = 'bigint',
     'BLOB'              = 'blob',

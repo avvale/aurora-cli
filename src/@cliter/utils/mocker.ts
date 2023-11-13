@@ -101,6 +101,9 @@ export class Mocker
             case 'date':
                 return dayjs(faker.date.recent()).format('YYYY-MM-DD');
 
+            case 'array':
+                return '[]';
+
             case 'blob.long':
             case 'blob.medium':
             case 'blob.tiny':
