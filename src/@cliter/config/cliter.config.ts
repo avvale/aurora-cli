@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { Property } from '../types';
 
 export interface CliterConfig
 {
@@ -19,7 +20,7 @@ export interface CliterConfig
     propertyTypesEquivalenceJavascriptTypes: { [key: string]: string };
     propertyTypesEquivalenceJavascriptModelTypes: { [key: string]: string };
     propertyTypesEquivalenceSwaggerTypes: { [key: string]: string };
-    propertyTypesEquivalenceDtoTypes: { [key: string]: string };
+    propertyTypesEquivalenceDtoTypes: { [key: string]: (property?: Property, config?: CliterConfig) => string };
     propertyTypesEquivalenceQraphqlTypes: { [key: string]: string };
     propertyTypesEquivalenceSequelizeTypes: { [key: string]: Function };
     defaultTypeLength: { [key: string]: number };
@@ -167,32 +168,32 @@ export const cliterConfig: CliterConfig =
         varchar            : 'String',
     },
     propertyTypesEquivalenceDtoTypes: {
-        'bigint.unsigned'  : 'number',
-        'blob.long'        : 'string',
-        'blob.medium'      : 'string',
-        'blob.tiny'        : 'string',
-        'int.unsigned'     : 'number',
-        'smallint.unsigned': 'number',
-        'tinyint.unsigned' : 'number',
-        array              : 'any[]',
-        bigint             : 'number',
-        blob               : 'string',
-        boolean            : 'boolean',
-        char               : 'string',
-        date               : 'string',
-        decimal            : 'number',
-        enum               : 'string',
-        float              : 'number',
-        id                 : 'string',
-        int                : 'number',
-        json               : 'any',
-        manyToMany         : 'string[]',
-        password           : 'string',
-        smallint           : 'number',
-        text               : 'string',
-        timestamp          : 'string',
-        tinyint            : 'number',
-        varchar            : 'string',
+        'bigint.unsigned'  : () => 'number',
+        'blob.long'        : () => 'string',
+        'blob.medium'      : () => 'string',
+        'blob.tiny'        : () => 'string',
+        'int.unsigned'     : () => 'number',
+        'smallint.unsigned': () => 'number',
+        'tinyint.unsigned' : () => 'number',
+        array              : (property?: Property, config?: CliterConfig) => config!.propertyTypesEquivalenceDtoTypes[property!.arrayOptions!.type]() + '[]',
+        bigint             : () => 'number',
+        blob               : () => 'string',
+        boolean            : () => 'boolean',
+        char               : () => 'string',
+        date               : () => 'string',
+        decimal            : () => 'number',
+        enum               : () => 'string',
+        float              : () => 'number',
+        id                 : () => 'string',
+        int                : () => 'number',
+        json               : () => 'any',
+        manyToMany         : () => 'string[]',
+        password           : () => 'string',
+        smallint           : () => 'number',
+        text               : () => 'string',
+        timestamp          : () => 'string',
+        tinyint            : () => 'number',
+        varchar            : () => 'string',
     },
     propertyTypesEquivalenceQraphqlTypes: {
         'bigint.unsigned'  : 'GraphQLInt',

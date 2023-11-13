@@ -351,7 +351,7 @@ export const getDtoTypeProperty = (
     config: CliterConfig,
 ): string =>
 {
-    return config.propertyTypesEquivalenceDtoTypes[property.type];
+    return config.propertyTypesEquivalenceDtoTypes[property.type](property, config);
 };
 
 /***********
