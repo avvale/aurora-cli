@@ -195,11 +195,12 @@ export class Add extends Command
 
                     // shared.module.ts file
                     const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+                    const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
 
                     ImportDriver.createImportItems(
                         sharedModuleSourceFile,
                         '@api/common/shared',
-                        ['CommonGetLangsFromDbService'],
+                        ['CommonAttachmentsService', 'CommonGetLangsFromDbService'],
                     );
 
                     DecoratorDriver.changeModuleDecoratorPropertyAdapter(
@@ -210,6 +211,12 @@ export class Add extends Command
                         'CoreGetLangsService',
                         'CommonGetLangsFromDbService',
                     );
+
+                    const providersArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'providers');
+                    providersArray.addElement('CommonAttachmentsService', { useNewLines: true });
+
+                    const exportsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'exports');
+                    exportsArray.addElement('CommonAttachmentsService', { useNewLines: true });
 
                     sharedModuleSourceFile.saveSync();
 
