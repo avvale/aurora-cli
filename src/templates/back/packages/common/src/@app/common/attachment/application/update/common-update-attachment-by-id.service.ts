@@ -10,6 +10,7 @@ import {
     CommonAttachmentHeight,
     CommonAttachmentId,
     CommonAttachmentIsCropable,
+    CommonAttachmentLangId,
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryId,
     CommonAttachmentMeta,
@@ -41,6 +42,7 @@ export class CommonUpdateAttachmentByIdService
             id: CommonAttachmentId;
             familyId?: CommonAttachmentFamilyId;
             attachableId?: CommonAttachmentAttachableId;
+            langId?: CommonAttachmentLangId;
             sort?: CommonAttachmentSort;
             alt?: CommonAttachmentAlt;
             title?: CommonAttachmentTitle;
@@ -68,6 +70,7 @@ export class CommonUpdateAttachmentByIdService
             payload.id,
             payload.familyId,
             payload.attachableId,
+            payload.langId,
             payload.sort,
             payload.alt,
             payload.title,

@@ -47,6 +47,9 @@ export { CommonDeleteAttachmentsResolver } from './resolvers/common-delete-attac
 export { CommonUploadAttachmentsController } from './controllers/common-upload-attachments.controller';
 export { CommonUploadAttachmentsHandler } from './handlers/common-upload-attachments.handler';
 export { CommonUploadAttachmentsResolver } from './resolvers/common-upload-attachments.resolver';
+export { CommonDeleteAttachmentController } from './controllers/common-delete-attachment.controller';
+export { CommonDeleteAttachmentHandler } from './handlers/common-delete-attachment.handler';
+export { CommonDeleteAttachmentResolver } from './resolvers/common-delete-attachment.resolver';
 
 // import controllers
 import { CommonCreateAttachmentController } from './controllers/common-create-attachment.controller';
@@ -94,6 +97,9 @@ import { CommonAttachmentSeeder } from './seeder/common-attachment.seeder';
 import { CommonUploadAttachmentsController } from './controllers/common-upload-attachments.controller';
 import { CommonUploadAttachmentsHandler } from './handlers/common-upload-attachments.handler';
 import { CommonUploadAttachmentsResolver } from './resolvers/common-upload-attachments.resolver';
+import { CommonDeleteAttachmentController } from './controllers/common-delete-attachment.controller';
+import { CommonDeleteAttachmentHandler } from './handlers/common-delete-attachment.handler';
+import { CommonDeleteAttachmentResolver } from './resolvers/common-delete-attachment.resolver';
 
 export const CommonAttachmentApiControllers = [
     CommonCreateAttachmentController,
@@ -110,6 +116,7 @@ export const CommonAttachmentApiControllers = [
 
     // additionalApis
     CommonUploadAttachmentsController,
+    CommonDeleteAttachmentController,
 ];
 
 export const CommonAttachmentApiResolvers = [
@@ -127,6 +134,7 @@ export const CommonAttachmentApiResolvers = [
 
     // additionalApis
     CommonUploadAttachmentsResolver,
+    CommonDeleteAttachmentResolver,
 ];
 
 export const CommonAttachmentApiHandlers = [
@@ -144,6 +152,7 @@ export const CommonAttachmentApiHandlers = [
 
     // additionalApis
     CommonUploadAttachmentsHandler,
+    CommonDeleteAttachmentHandler,
 ];
 
 export const CommonAttachmentApiServices = [

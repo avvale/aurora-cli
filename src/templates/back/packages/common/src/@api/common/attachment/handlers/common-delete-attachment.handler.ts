@@ -1,14 +1,14 @@
-import { CommonAttachmentDto } from '@api/common/attachment';
 import { CommonAttachmentsService } from '@api/common/shared';
-import { CommonAttachment } from '@api/graphql';
+import { CommonAttachment, CommonAttachmentInput } from '@api/graphql';
 import { CommonDeleteAttachmentByIdCommand, CommonFindAttachmentByIdQuery } from '@app/common/attachment';
 import { CommonDeleteAttachmentLibraryByIdCommand } from '@app/common/attachment-library';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
+import { CommonAttachmentDto } from '../dto';
 
 @Injectable()
-export class CommonDeleteAttachmentByIdHandler
+export class CommonDeleteAttachmentHandler
 {
     constructor(
         private readonly commandBus: ICommandBus,
@@ -17,16 +17,22 @@ export class CommonDeleteAttachmentByIdHandler
     ) {}
 
     async main(
-        id: string,
-        constraint?: QueryStatement,
+        payload: CommonAttachmentInput | CommonAttachmentDto,
         timezone?: string,
         auditing?: AuditingMeta,
     ): Promise<CommonAttachment | CommonAttachmentDto>
     {
+        if (payload.isUploaded)
+        {
+            // delete attachment file, attachment library file and attachment sizes if exists
+            this.commonAttachmentsService.deleteAttachment(payload);
+            return payload;
+        }
+
         const attachment = await this.queryBus.ask(new CommonFindAttachmentByIdQuery(
-            id,
+            payload.id,
             _.merge(
-                constraint,
+                {},
                 {
                     include: [
                         { association: 'library' },
@@ -42,8 +48,8 @@ export class CommonDeleteAttachmentByIdHandler
         this.commonAttachmentsService.deleteAttachment(attachment);
 
         await this.commandBus.dispatch(new CommonDeleteAttachmentByIdCommand(
-            id,
-            constraint,
+            payload.id,
+            {},
             {
                 timezone,
                 repositoryOptions: {
@@ -57,7 +63,7 @@ export class CommonDeleteAttachmentByIdHandler
         {
             await this.commandBus.dispatch(new CommonDeleteAttachmentLibraryByIdCommand(
                 attachment.library.id,
-                constraint,
+                {},
                 {
                     timezone,
                     repositoryOptions: {

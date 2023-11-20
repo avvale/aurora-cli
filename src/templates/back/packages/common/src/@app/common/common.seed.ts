@@ -63,4 +63,5 @@ export const permissions = [
 
     { id: 'b44ba814-9441-443c-a27b-75db371dd8b3',  name: 'common.attachment.upload',                boundedContextId: '539423b1-4817-4eda-a068-e99ef457aa7a', roleIds: []},
     { id: 'bede68f8-289f-4615-9066-7887d612ca51',  name: 'common.attachment.create',                boundedContextId: '539423b1-4817-4eda-a068-e99ef457aa7a', roleIds: []},
+    { id: '98e758ad-d09e-411f-b0b9-3e4c99ad458d',  name: 'common.attachment.delete',                boundedContextId: '539423b1-4817-4eda-a068-e99ef457aa7a', roleIds: []},
 ];

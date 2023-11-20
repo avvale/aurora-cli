@@ -1,5 +1,6 @@
 import { CommonAttachmentFamilyResponse } from '@app/common/attachment-family';
 import { CommonAttachmentLibraryResponse } from '@app/common/attachment-library';
+import { CommonLangResponse } from '@app/common/lang';
 
 export class CommonAttachmentResponse
 {
@@ -7,6 +8,7 @@ export class CommonAttachmentResponse
         public readonly id: string,
         public readonly familyId: string,
         public readonly attachableId: string,
+        public readonly langId: string,
         public readonly sort: number,
         public readonly alt: string,
         public readonly title: string,
@@ -28,6 +30,7 @@ export class CommonAttachmentResponse
         public readonly updatedAt: string,
         public readonly deletedAt: string,
         public readonly family: CommonAttachmentFamilyResponse,
+        public readonly lang: CommonLangResponse,
         public readonly library: CommonAttachmentLibraryResponse,
     ) {}
 }

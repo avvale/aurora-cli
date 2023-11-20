@@ -4,6 +4,7 @@ export class CommonCreatedAttachmentEvent
         public readonly id: string,
         public readonly familyId: string,
         public readonly attachableId: string,
+        public readonly langId: string,
         public readonly sort: number,
         public readonly alt: string,
         public readonly title: string,

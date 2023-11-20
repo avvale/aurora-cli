@@ -12,6 +12,7 @@ import {
     CommonAttachmentHeight,
     CommonAttachmentId,
     CommonAttachmentIsCropable,
+    CommonAttachmentLangId,
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryId,
     CommonAttachmentMeta,
@@ -26,6 +27,7 @@ import {
     CommonAttachmentUrl,
     CommonAttachmentWidth,
 } from '@app/common/attachment/domain/value-objects';
+import { CommonLangMapper } from '@app/common/lang';
 import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class CommonAttachmentMapper implements IMapper
@@ -82,6 +84,7 @@ export class CommonAttachmentMapper implements IMapper
             new CommonAttachmentId(attachment.id, { undefinable: true }),
             new CommonAttachmentFamilyId(attachment.familyId, { undefinable: true }),
             new CommonAttachmentAttachableId(attachment.attachableId, { undefinable: true }),
+            new CommonAttachmentLangId(attachment.langId, { undefinable: true }),
             new CommonAttachmentSort(attachment.sort, { undefinable: true }),
             new CommonAttachmentAlt(attachment.alt, { undefinable: true }),
             new CommonAttachmentTitle(attachment.title, { undefinable: true }),
@@ -103,6 +106,7 @@ export class CommonAttachmentMapper implements IMapper
             new CommonAttachmentUpdatedAt(attachment.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new CommonAttachmentDeletedAt(attachment.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             this.options.eagerLoading ? new CommonAttachmentFamilyMapper({ eagerLoading: true }).mapModelToAggregate(attachment.family, cQMetadata) : undefined,
+            this.options.eagerLoading ? new CommonLangMapper({ eagerLoading: true }).mapModelToAggregate(attachment.lang, cQMetadata) : undefined,
             this.options.eagerLoading ? new CommonAttachmentLibraryMapper({ eagerLoading: true }).mapModelToAggregate(attachment.library, cQMetadata) : undefined,
         );
     }
@@ -115,6 +119,7 @@ export class CommonAttachmentMapper implements IMapper
             attachment.id.value,
             attachment.familyId.value,
             attachment.attachableId.value,
+            attachment.langId.value,
             attachment.sort.value,
             attachment.alt.value,
             attachment.title.value,
@@ -136,6 +141,7 @@ export class CommonAttachmentMapper implements IMapper
             attachment.updatedAt.value,
             attachment.deletedAt.value,
             this.options.eagerLoading ? new CommonAttachmentFamilyMapper({ eagerLoading: true }).mapAggregateToResponse(attachment.family) : undefined,
+            this.options.eagerLoading ? new CommonLangMapper({ eagerLoading: true }).mapAggregateToResponse(attachment.lang) : undefined,
             this.options.eagerLoading ? new CommonAttachmentLibraryMapper({ eagerLoading: true }).mapAggregateToResponse(attachment.library) : undefined,
         );
     }

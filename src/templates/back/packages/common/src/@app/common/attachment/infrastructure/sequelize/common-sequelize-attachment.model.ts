@@ -2,6 +2,7 @@
 /* eslint-disable key-spacing */
 import { CommonAttachmentFamilyModel } from '@app/common/attachment-family';
 import { CommonAttachmentLibraryModel } from '@app/common/attachment-library';
+import { CommonLangModel } from '@app/common/lang';
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
 import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
@@ -156,6 +157,20 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
         type: DataTypes.UUID,
     })
     attachableId: string;
+
+    @ForeignKey(() => CommonLangModel)
+    @Column({
+        field: 'langId',
+        allowNull: true,
+        type: DataTypes.UUID,
+    })
+    langId: string;
+
+    @BelongsTo(() => CommonLangModel, {
+        constraints: false,
+        foreignKey: 'langId',
+    })
+    lang: CommonLangModel;
 
     @Column({
         field: 'sort',

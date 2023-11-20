@@ -7,6 +7,7 @@ export class CommonUpdateAttachmentsCommand
             id?: string;
             familyId?: string;
             attachableId?: string;
+            langId?: string;
             sort?: number;
             alt?: string;
             title?: string;

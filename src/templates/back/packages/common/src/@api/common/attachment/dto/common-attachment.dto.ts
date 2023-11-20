@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 import { CommonAttachmentFamilyDto } from '@api/common/attachment-family';
 import { CommonAttachmentLibraryDto } from '@api/common/attachment-library';
+import { CommonLangDto } from '@api/common/lang';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CommonAttachmentDto
@@ -29,6 +30,19 @@ export class CommonAttachmentDto
         description: 'attachableId [input here api field description]',
     })
     attachableId: string;
+
+    @ApiProperty({
+        type       : String,
+        description: 'langId [input here api field description]',
+        example    : '53805b00-dfd2-5a5e-bc41-1ad8bf9722a5',
+    })
+    langId?: string;
+
+    @ApiProperty({
+        type       : () => CommonLangDto,
+        description: 'CommonLang [input here api field description]',
+    })
+    lang?: CommonLangDto;
 
     @ApiProperty({
         type       : Number,

@@ -15,11 +15,11 @@ aggregateProperties:
     primaryKey: true
     length: 36
     nullable: false
-  - name: filename
+  - name: originFilename
     type: varchar
     maxLength: 255
     nullable: false
-  - name: originFilename
+  - name: filename
     type: varchar
     maxLength: 255
     nullable: false

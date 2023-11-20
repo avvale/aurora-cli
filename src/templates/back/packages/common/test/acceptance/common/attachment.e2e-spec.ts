@@ -445,6 +445,22 @@ describe('attachment', () =>
             });
     });
 
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentLangId is not allowed, must be a length of 36', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                langId: '*************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLangId is not allowed, must be a length of 36');
+            });
+    });
+
     test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentLibraryId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
@@ -858,6 +874,7 @@ describe('attachment', () =>
                             id
                             familyId
                             attachableId
+                            langId
                             sort
                             alt
                             title
@@ -989,6 +1006,7 @@ describe('attachment', () =>
                             id
                             familyId
                             attachableId
+                            langId
                             sort
                             alt
                             title

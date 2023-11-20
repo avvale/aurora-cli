@@ -8,6 +8,7 @@ export { CommonAttachmentFilename } from './common-attachment-filename';
 export { CommonAttachmentHeight } from './common-attachment-height';
 export { CommonAttachmentId } from './common-attachment-id';
 export { CommonAttachmentIsCropable } from './common-attachment-is-cropable';
+export { CommonAttachmentLangId } from './common-attachment-lang-id';
 export { CommonAttachmentLibraryFilename } from './common-attachment-library-filename';
 export { CommonAttachmentLibraryId } from './common-attachment-library-id';
 export { CommonAttachmentMeta } from './common-attachment-meta';

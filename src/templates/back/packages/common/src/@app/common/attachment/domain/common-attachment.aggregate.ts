@@ -13,6 +13,7 @@ import {
     CommonAttachmentHeight,
     CommonAttachmentId,
     CommonAttachmentIsCropable,
+    CommonAttachmentLangId,
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryId,
     CommonAttachmentMeta,
@@ -27,6 +28,7 @@ import {
     CommonAttachmentUrl,
     CommonAttachmentWidth,
 } from '@app/common/attachment/domain/value-objects';
+import { CommonLang } from '@app/common/lang';
 import { LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
@@ -35,6 +37,7 @@ export class CommonAttachment extends AggregateRoot
     id: CommonAttachmentId;
     familyId: CommonAttachmentFamilyId;
     attachableId: CommonAttachmentAttachableId;
+    langId: CommonAttachmentLangId;
     sort: CommonAttachmentSort;
     alt: CommonAttachmentAlt;
     title: CommonAttachmentTitle;
@@ -56,12 +59,14 @@ export class CommonAttachment extends AggregateRoot
     updatedAt: CommonAttachmentUpdatedAt;
     deletedAt: CommonAttachmentDeletedAt;
     family: CommonAttachmentFamily;
+    lang: CommonLang;
     library: CommonAttachmentLibrary;
 
     constructor(
         id: CommonAttachmentId,
         familyId: CommonAttachmentFamilyId,
         attachableId: CommonAttachmentAttachableId,
+        langId: CommonAttachmentLangId,
         sort: CommonAttachmentSort,
         alt: CommonAttachmentAlt,
         title: CommonAttachmentTitle,
@@ -83,6 +88,7 @@ export class CommonAttachment extends AggregateRoot
         updatedAt: CommonAttachmentUpdatedAt,
         deletedAt: CommonAttachmentDeletedAt,
         family?: CommonAttachmentFamily,
+        lang?: CommonLang,
         library?: CommonAttachmentLibrary,
     )
     {
@@ -90,6 +96,7 @@ export class CommonAttachment extends AggregateRoot
         this.id = id;
         this.familyId = familyId;
         this.attachableId = attachableId;
+        this.langId = langId;
         this.sort = sort;
         this.alt = alt;
         this.title = title;
@@ -111,6 +118,7 @@ export class CommonAttachment extends AggregateRoot
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
         this.family = family;
+        this.lang = lang;
         this.library = library;
     }
 
@@ -118,6 +126,7 @@ export class CommonAttachment extends AggregateRoot
         id: CommonAttachmentId,
         familyId: CommonAttachmentFamilyId,
         attachableId: CommonAttachmentAttachableId,
+        langId: CommonAttachmentLangId,
         sort: CommonAttachmentSort,
         alt: CommonAttachmentAlt,
         title: CommonAttachmentTitle,
@@ -139,6 +148,7 @@ export class CommonAttachment extends AggregateRoot
         updatedAt: CommonAttachmentUpdatedAt,
         deletedAt: CommonAttachmentDeletedAt,
         family?: CommonAttachmentFamily,
+        lang?: CommonLang,
         library?: CommonAttachmentLibrary,
     ): CommonAttachment
     {
@@ -146,6 +156,7 @@ export class CommonAttachment extends AggregateRoot
             id,
             familyId,
             attachableId,
+            langId,
             sort,
             alt,
             title,
@@ -167,6 +178,7 @@ export class CommonAttachment extends AggregateRoot
             updatedAt,
             deletedAt,
             family,
+            lang,
             library,
         );
     }
@@ -178,6 +190,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.id.value,
                 attachment.familyId?.value,
                 attachment.attachableId.value,
+                attachment.langId?.value,
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
@@ -209,6 +222,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.id?.value,
                 attachment.familyId?.value,
                 attachment.attachableId?.value,
+                attachment.langId?.value,
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
@@ -240,6 +254,7 @@ export class CommonAttachment extends AggregateRoot
                 attachment.id.value,
                 attachment.familyId?.value,
                 attachment.attachableId.value,
+                attachment.langId?.value,
                 attachment.sort?.value,
                 attachment.alt?.value,
                 attachment.title?.value,
@@ -270,6 +285,7 @@ export class CommonAttachment extends AggregateRoot
             id: this.id.value,
             familyId: this.familyId?.value,
             attachableId: this.attachableId.value,
+            langId: this.langId?.value,
             sort: this.sort?.value,
             alt: this.alt?.value,
             title: this.title?.value,
@@ -291,6 +307,7 @@ export class CommonAttachment extends AggregateRoot
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
             family: this.family?.toDTO(),
+            lang: this.lang?.toDTO(),
             library: this.library?.toDTO(),
         };
     }
@@ -302,6 +319,7 @@ export class CommonAttachment extends AggregateRoot
             id: this.id.value,
             familyId: this.familyId?.value,
             attachableId: this.attachableId.value,
+            langId: this.langId?.value,
             sort: this.sort?.value,
             alt: this.alt?.value,
             title: this.title?.value,
@@ -323,6 +341,7 @@ export class CommonAttachment extends AggregateRoot
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
             family: this.family?.toDTO(),
+            lang: this.lang?.toDTO(),
             library: this.library?.toDTO(),
         };
     }

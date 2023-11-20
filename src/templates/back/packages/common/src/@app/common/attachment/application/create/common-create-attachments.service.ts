@@ -10,6 +10,7 @@ import {
     CommonAttachmentHeight,
     CommonAttachmentId,
     CommonAttachmentIsCropable,
+    CommonAttachmentLangId,
     CommonAttachmentLibraryFilename,
     CommonAttachmentLibraryId,
     CommonAttachmentMeta,
@@ -41,6 +42,7 @@ export class CommonCreateAttachmentsService
             id: CommonAttachmentId;
             familyId: CommonAttachmentFamilyId;
             attachableId: CommonAttachmentAttachableId;
+            langId: CommonAttachmentLangId;
             sort: CommonAttachmentSort;
             alt: CommonAttachmentAlt;
             title: CommonAttachmentTitle;
@@ -67,6 +69,7 @@ export class CommonCreateAttachmentsService
             attachment.id,
             attachment.familyId,
             attachment.attachableId,
+            attachment.langId,
             attachment.sort,
             attachment.alt,
             attachment.title,

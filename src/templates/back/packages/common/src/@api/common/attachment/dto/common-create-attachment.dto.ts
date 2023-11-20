@@ -24,6 +24,13 @@ export class CommonCreateAttachmentDto
     attachableId: string;
 
     @ApiProperty({
+        type       : String,
+        description: 'langId [input here api field description]',
+        example    : '53805b00-dfd2-5a5e-bc41-1ad8bf9722a5',
+    })
+    langId?: string;
+
+    @ApiProperty({
         type       : Number,
         description: 'sort [input here api field description]',
     })

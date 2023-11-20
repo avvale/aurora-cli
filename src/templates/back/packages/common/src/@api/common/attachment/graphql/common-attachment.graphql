@@ -5,6 +5,8 @@ type CommonAttachment
     familyId: ID
     family: CommonAttachmentFamily
     attachableId: ID!
+    langId: ID
+    lang: CommonLang
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
@@ -35,6 +37,7 @@ input CommonCreateAttachmentInput
     id: ID!
     familyId: ID
     attachableId: ID!
+    langId: ID
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
@@ -62,6 +65,7 @@ input CommonUpdateAttachmentByIdInput
     id: ID!
     familyId: ID
     attachableId: ID
+    langId: ID
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
@@ -89,6 +93,7 @@ input CommonUpdateAttachmentsInput
     id: ID
     familyId: ID
     attachableId: ID
+    langId: ID
     sort: GraphQLInt
     alt: GraphQLString
     title: GraphQLString
@@ -102,6 +107,35 @@ input CommonUpdateAttachmentsInput
     size: GraphQLInt
     url: GraphQLString
     isCropable: GraphQLBoolean
+    libraryId: ID
+    libraryFilename: GraphQLString
+    sizes: JSON
+    meta: JSON
+}
+
+# ---- customizations ----
+input CommonAttachmentInput
+{
+    id: ID!
+    familyId: ID
+    attachableId: ID!
+    langId: ID
+    sort: GraphQLInt
+    alt: GraphQLString
+    title: GraphQLString
+    originFilename: GraphQLString!
+    filename: GraphQLString!
+    mimetype: GraphQLString!
+    extension: GraphQLString!
+    relativePathSegments: JSON!
+    width: GraphQLInt
+    height: GraphQLInt
+    size: GraphQLInt!
+    url: GraphQLString!
+    isCropable: GraphQLBoolean!
+    isUploaded: GraphQLBoolean!
+    isChanged: GraphQLBoolean!
+    library: CommonCreateAttachmentLibraryInput
     libraryId: ID
     libraryFilename: GraphQLString
     sizes: JSON
@@ -172,5 +206,9 @@ type Mutation
     commonUploadAttachments(
         files: [CoreFileUploaded!]!
     ): [CoreFile!]!
+
+    commonDeleteAttachment(
+        payload: CommonAttachmentInput!
+    ): CommonAttachment!
 
 }

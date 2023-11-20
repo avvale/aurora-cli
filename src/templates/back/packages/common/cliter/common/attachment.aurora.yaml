@@ -31,6 +31,17 @@ aggregateProperties:
     length: 36
     nullable: false
     index: index
+  - name: langId
+    type: id
+    length: 36
+    nullable: true
+    relationship:
+      type: many-to-one
+      aggregateName: CommonLang
+      modulePath: common/lang
+      key: id
+      field: lang
+      avoidConstraint: true
   - name: sort
     type: smallint.unsigned
     maxLength: 6
@@ -115,5 +126,8 @@ aggregateProperties:
     nullable: true
 additionalApis:
   - path: common/attachments/upload
+    resolverType: mutation
+    httpMethod: post
+  - path: common/attachment/delete
     resolverType: mutation
     httpMethod: post
