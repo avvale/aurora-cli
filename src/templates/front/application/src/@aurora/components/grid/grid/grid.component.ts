@@ -7,7 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Action, GridManagerService } from '@aurora';
@@ -21,7 +21,7 @@ import { GridFiltersDialogComponent } from '../grid-filters-dialog/grid-filters-
 import { GridSearchComponent } from '../grid-search/grid-search.component';
 import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
 import { ColumnConfig, ColumnConfigAction, ColumnDataType, ExportFormat, ExportGridState, GridColumnFilter, GridData, GridSearchState, GridSortState, GridState } from '../grid.types';
-import { FilterGridCustomHeaderTemplatesPositionPipe, GetActionsPipe, GetGridSpinnerFlagPipe, GetTranslationIconColorPipe, HasCellValueTemplatePipe, IsOriginColumnConfigPipe, TransformDataCellPipe } from '../pipes';
+import { FilterGridCustomHeaderTemplatesPositionPipe, GetActionsPipe, GetGridSpinnerFlagPipe, GetTranslationIconColorPipe, HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, IsOriginColumnConfigPipe, TransformDataCellPipe } from '../pipes';
 import { SelectionChange, SelectionModel } from '../selection-model/selection-model';
 
 // no barrel
@@ -33,7 +33,7 @@ import { SelectionChange, SelectionModel } from '../selection-model/selection-mo
     standalone     : true,
     imports        : [
         AsyncPipe, DragDropModule, FilterGridCustomHeaderTemplatesPositionPipe, FlagIconComponent, GetActionsPipe, GetGridSpinnerFlagPipe, GetPipe, GridSearchComponent, GridTranslatePipe, GetTranslationIconColorPipe,
-        HasCellValueTemplatePipe, IsOriginColumnConfigPipe, MatBadgeModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatPaginatorModule, MatSortModule, MatTableModule,
+        HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, IsOriginColumnConfigPipe, MatBadgeModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatPaginatorModule, MatSortModule, MatTableModule,
         NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, TransformDataCellPipe,
     ],
 })

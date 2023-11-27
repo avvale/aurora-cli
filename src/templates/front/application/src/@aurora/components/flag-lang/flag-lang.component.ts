@@ -35,7 +35,7 @@ import { Appearance, CoreLang } from '@aurora';
         </mat-form-field>
     `,
     standalone: true,
-    imports: [
+    imports   : [
         FormsModule, MatFormFieldModule, MatInputModule, NgStyle,
     ],
 })

@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Pipe({
-    name: 'getGridSpinnerFlag',
+    name      : 'getGridSpinnerFlag',
     standalone: true,
 })
 export class GetGridSpinnerFlagPipe implements PipeTransform

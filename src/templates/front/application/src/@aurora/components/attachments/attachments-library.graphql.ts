@@ -1,17 +1,13 @@
-const fields = `
+export const commonAttachmentLibraryFields = `
     id
-    uuid
-    name
-    pathname
+    originFilename
     filename
-    url
-    mime
+    mimetype
     extension
+    relativePathSegments
     width
     height
     size
+    url
+    meta
 `;
-
-export const graphQL = {
-    fields,
-};

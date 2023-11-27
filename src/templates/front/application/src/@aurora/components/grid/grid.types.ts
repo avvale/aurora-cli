@@ -8,6 +8,7 @@ export interface ColumnConfig
 {
     type: ColumnDataType;
     field?: string;
+    searchableField?: string;
     translation?: string;
     hidden?: boolean;
     sort?: string | string[];
@@ -46,6 +47,7 @@ export enum ColumnDataType
     CHECKBOX = 'CHECKBOX',
     DATE = 'DATE',
     DRAG_AND_DROP= 'DRAG_AND_DROP',
+    ENUM = 'ENUM',
     NUMBER = 'NUMBER',
     STRING = 'STRING',
     TRANSLATIONS_MENU = 'TRANSLATIONS_MENU',

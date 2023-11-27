@@ -196,7 +196,7 @@ export class GridFiltersDialogComponent implements OnInit
         this.formColumnFilter.insert(0,
             this.fb.group({
                 id      : this.fb.control(Utils.uuid()),
-                field   : this.fb.control(event.option.value.field),
+                field   : this.fb.control(event.option.value.searchableField ? event.option.value.searchableField : event.option.value.field),
                 type    : this.fb.control(event.option.value.type),
                 operator: this.fb.control(null, [Validators.required]),
                 value   : this.fb.control('', [Validators.required]),

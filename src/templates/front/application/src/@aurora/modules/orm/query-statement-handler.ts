@@ -1,4 +1,4 @@
-import { ColumnConfig, ColumnDataType, getContactOperator, GridColumnFilter, GridPageState, GridSearchState, GridSortState, GridState, isValidOrderStatement } from '@aurora';
+import { ColumnConfig, ColumnDataType, getContactOperator, GridColumnFilter, GridPageState, GridSearchState, GridSortState, isValidOrderStatement, log } from '@aurora';
 import { Operator, QueryStatement } from './sql-statement';
 import groupBy from 'lodash-es/groupBy';
 
@@ -130,12 +130,12 @@ export class QueryStatementHandler
         {
             if (
                 (columnConfig.searchable === undefined || (columnConfig.searchable && columnConfig.searchable === true)) &&
-                (columnConfig.hidden === undefined || columnConfig.hidden === false) &&
-                (columnConfig.type === ColumnDataType.STRING ||
-                columnConfig.type === ColumnDataType.NUMBER)
+                (columnConfig.hidden === undefined || columnConfig.hidden === false)
             )
             {
-                searchStatement.push({ [columnConfig.field]: { [Operator.substring]: value }});
+                if (columnConfig.type === ColumnDataType.STRING)    searchStatement.push({ [columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field]: { [Operator.iLike]: `%${value}%` }});
+                if (columnConfig.type === ColumnDataType.ENUM)      log('[DEBUG] Enum search is not implemented yet');
+                if (columnConfig.type === ColumnDataType.NUMBER)    log('[DEBUG] Number search is not implemented yet');
             }
         }
 

@@ -22,22 +22,22 @@ export class Utils
         return dayjs();
     }
 
-    public static nowTimestamp(): string
+    static nowTimestamp(): string
     {
         return dayjs().format('YYYY-MM-DD H:mm:ss');
     }
 
-    public static nowDate(): string
+    static nowDate(): string
     {
         return dayjs().format('YYYY-MM-DD');
     }
 
-    public static dateFromFormat(date: string, format: string = 'YYYY-MM-DD H:mm:ss'): dayjs.Dayjs
+    static dateFromFormat(date: string, format: string = 'YYYY-MM-DD H:mm:ss'): dayjs.Dayjs
     {
         return dayjs(date, format);
     }
 
-    public static timezone(): string
+    static timezone(): string
     {
         return dayjs.tz.guess();
     }
@@ -175,7 +175,11 @@ Go to https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto for more inf
         }
     }
 
-    static convertBase64ToFile(b64Data, contentType = '', sliceSize = 512): Blob
+    static convertBase64ToBlob(
+        b64Data: string,
+        contentType: string = '',
+        sliceSize: number = 512,
+    ): Blob
     {
         const byteCharacters = atob(b64Data);
         const byteArrays = [];

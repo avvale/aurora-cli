@@ -1,12 +1,12 @@
-import { Component, Input, Output, OnInit, EventEmitter, ViewChild, Renderer2, forwardRef, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { Attachment, AttachmentFamily, CropType, File } from './../attachments.types';
-import * as _ from 'lodash';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Optional, Output, Renderer2, ViewChild } from '@angular/core';
+import { ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImageInputComponent } from '@aurora/components/image-input';
+import { first, merge } from 'rxjs';
+import { AttachmentTranslatePipe } from '../attachment-translations/attachment-translate.pipe';
+import { DownloadService } from '../download.service';
 import { SizeFormatPipe } from '../pipes/size-format.pipe';
-
-
-// import { DownloadService } from '@horus/services/download.service';
-// declare const jQuery: any; // jQuery definition
+import { Attachment, AttachmentFamily, CropType } from './../attachments.types';
 
 @Component({
     selector       : 'au-attachment-item',
@@ -15,140 +15,110 @@ import { SizeFormatPipe } from '../pipes/size-format.pipe';
     standalone     : true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports        : [
-        FormsModule, ReactiveFormsModule, SizeFormatPipe,
-    ],
-    providers: [
-        {
-            provide    : NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => AttachmentItemComponent),
-            multi      : true,
-        },
+        AttachmentTranslatePipe, AsyncPipe, FormsModule, ImageInputComponent, NgIf, NgForOf, ReactiveFormsModule, SizeFormatPipe,
     ],
 })
-
-export class AttachmentItemComponent implements OnInit
+export class AttachmentItemComponent implements OnInit//, //ControlValueAccessor
 {
-    attachment: Attachment;
+    @Input() formGroupName: string;
+    @Input() families: AttachmentFamily[] = [];
 
+    @Output() enableCrop: EventEmitter<{
+        attachmentItemFormGroup: FormGroup;
+        attachmentItemImage: ImageInputComponent;
+    }> = new EventEmitter();
+    @Output() removeItem: EventEmitter<{
+        attachmentItemFormGroup: FormGroup;
+    }> = new EventEmitter();
 
-
-
-    @Input() form: FormGroup;
-    @Input() name: string; // name of form array attachment
-    @Input() index: number; // id to identify attachment item
-    @Input() attachmentFamilies: AttachmentFamily[] = [];
-    //@Input() attachment: FormGroup;
-    @Output() enableCrop: EventEmitter<any> = new EventEmitter();
-    @Output() removeItem: EventEmitter<any> = new EventEmitter();
-
+    @ViewChild('image', { static: false }) image: ImageInputComponent;
     @ViewChild('openOver', { static: true }) openOver;
     @ViewChild('closeOver', { static: true }) closeOver;
-    @ViewChild('image', { static: false }) image;
-    attachmentFamilySelect: AttachmentFamily;
+
     showCropButton = false;
 
+    // get attachment item form group
+    get formGroup(): FormGroup
+    {
+        return this.controlContainer.control as FormGroup;
+    }
+
+    get attachmentFamily(): AttachmentFamily
+    {
+        return <AttachmentFamily>this.families.find(family => family.id === this.formGroup.get('familyId').value);
+    }
+
+    get attachment(): Attachment
+    {
+        return <Attachment>this.formGroup.value;
+    }
+
     constructor(
-        private _renderer: Renderer2,
-        // private _downloadService: DownloadService
+        private readonly renderer: Renderer2,
+        private readonly downloadService: DownloadService,
+        @Optional() private controlContainer: ControlContainer,
     )
-    {}
-
-    private propagateChange: (value: any) => void;
-    private onTouched: () => void;
-
-    writeValue(attachment: Attachment): void
-    {
-        if (attachment) this.attachment = attachment;
-    }
-
-    // registers a callback function is called by the forms API on initialization
-    registerOnChange(fn: (value: any) => void): void
-    {
-        this.propagateChange = fn;
-    }
-
-    registerOnTouched(fn: any): void
-    {
-        this.onTouched = fn;
-    }
-
-
-
+    { /**/ }
 
     ngOnInit(): void
     {
-        this._renderer.listen(this.openOver.nativeElement, 'click', $event =>
+        this.renderer.listen(this.openOver.nativeElement, 'click', $event =>
         {
-            this._renderer.addClass($event.target.closest('.attachment-item'), 'covered');
+            this.renderer.addClass($event.target.closest('.attachment-item'), 'covered');
         });
 
-        this._renderer.listen(this.closeOver.nativeElement, 'click', $event =>
+        this.renderer.listen(this.closeOver.nativeElement, 'click', $event =>
         {
-            this._renderer.removeClass($event.target.closest('.attachment-item'), 'covered');
+            this.renderer.removeClass($event.target.closest('.attachment-item'), 'covered');
         });
-
-        //this.attachmentFamilySelect = <AttachmentFamily>_.find(this.attachmentFamilies, { uuid: this.attachment.get('familyUuid').value });
 
         this.setShowCropButton();
+
+        merge(
+            this.formGroup.get('alt').valueChanges,
+            this.formGroup.get('title').valueChanges,
+        )
+            .pipe(first())
+            .subscribe(value => this.formGroup.get('isChanged').setValue(true));
     }
 
-    onRemoveItem($event): void
+    activeCropHandler(): void
+    {
+        // click to active cropper
+        if (this.formGroup.get('familyId').value !== '')
+        {
+            this.enableCrop
+                .emit({
+                    attachmentItemFormGroup: this.formGroup,
+                    attachmentItemImage    : this.image,
+                });
+        }
+    }
+
+    handlerRemoveItem(): void
     {
         this.removeItem.emit({
-            attachment: this.attachment,
+            attachmentItemFormGroup: this.formGroup,
         });
-
-        /* jQuery($event.target.closest('au-attachment-item')).fadeOut(300, function ()
-        {
-            jQuery($event.target.closest('au-attachment-item')).remove();
-        }); */
     }
 
-    onChangeAttachmentFamily($event): void
+    handlerChangeFamily($event: { target: { value: number; }; }): void
     {
-        // get $event.target.value with ngValue that return a object
-        this.attachmentFamilySelect =  <AttachmentFamily>_.find(this.attachmentFamilies, { uuid: $event.target.value });
-
+        this.formGroup.get('isChanged').setValue(true);
         this.setShowCropButton();
-    }
-
-    activeCropHandler($event): void
-    {
-        /*
-        // click to active cropper
-        if (this.attachment.get('familyUuid').value !== '')
-        {
-            this.enableCrop.emit({
-                image     : this.image, // add to event image to be updated if crop image
-                attachment: this.attachment,
-                familyUuid: this.attachment.get('familyUuid').value,
-            });
-        }
-        */
     }
 
     setShowCropButton(): void
     {
-        this.showCropButton = this.attachmentFamilySelect && (
-            this.attachmentFamilySelect.fitType === CropType.FIT_CROP ||
-            this.attachmentFamilySelect.fitType === CropType.FIT_WIDTH_FREE_CROP ||
-            this.attachmentFamilySelect.fitType === CropType.FIT_HEIGHT_FREE_CROP
+        this.showCropButton = this.attachmentFamily && (
+            this.attachmentFamily.fitType === CropType.FIT_CROP ||
+            this.attachmentFamily.fitType === CropType.FIT_WIDTH_FREE_CROP ||
+            this.attachmentFamily.fitType === CropType.FIT_HEIGHT_FREE_CROP
         ) ? true : false;
     }
 
-    download(): void
+    handlerDownload(): void
     {
-        /*const attachmentValue = this.attachment.value;
-
-        const file = {
-            url     : attachmentValue.url,
-            filename: attachmentValue.file_name,
-            pathname: attachmentValue.base_path.slice(attachmentValue.base_path.indexOf('app/public')) + '/' + attachmentValue.file_name,
-            mime    : attachmentValue.mime,
-            size    : attachmentValue.size,
-        };*/
-
-        // call download service
-        // this._downloadService.download(<File>file);
+        this.downloadService.download(this.formGroup.value);
     }
 }

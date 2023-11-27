@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ColumnConfig } from '../grid.types';
 
 @Pipe({
-    name: 'isOriginColumnConfig',
+    name      : 'isOriginColumnConfig',
     standalone: true,
 })
 export class IsOriginColumnConfigPipe implements PipeTransform

@@ -12,8 +12,8 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
 
 // ---- customizations ----
-import { AuthenticationService, IamService, log } from '@aurora';
-import { TranslocoModule } from '@ngneat/transloco';
+import { AuthenticationService, IamService, SessionService, log } from '@aurora';
+import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 
 @Component({
     selector     : 'auth-sign-in',
@@ -47,8 +47,10 @@ export class AuthSignInComponent implements OnInit
         private _router: Router,
 
         // ---- customizations ----
-        private authenticationService: AuthenticationService,
-        private iamService: IamService,
+        private readonly sessionService: SessionService,
+        private readonly authenticationService: AuthenticationService,
+        private readonly iamService: IamService,
+        private readonly translocoService: TranslocoService,
     )
     {
     }
@@ -105,15 +107,19 @@ export class AuthSignInComponent implements OnInit
                     // ---- customizations ----
                     // after sing in, get user, calling get, after that, user will be available in iamService.me
                     this.iamService.get()
-                        .subscribe(() =>
+                        .subscribe(data =>
                         {
-                            console.log('redirectURL', redirectURL);
+                            // set user preferred lang
+                            const langs = this.sessionService.get('langs');
+                            const userPreferredLang = langs.find(lang => lang.id === data.me.user.langId);
+                            if (userPreferredLang) this.translocoService.setActiveLang(userPreferredLang.iso6392);
+
                             // Navigate to the redirect url
-                            this._router.navigateByUrl(redirectURL)
+                            this._router.navigateByUrl(redirectURL);
                         });
 
                 },
-                (response) =>
+                response =>
                 {
                     log(`[DEBUG] Error to login application: ${response}`);
 

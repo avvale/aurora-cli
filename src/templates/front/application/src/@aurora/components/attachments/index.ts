@@ -1,1 +1,1 @@
-export * from '@aurora/components/attachments/public-api';
+export * from './public-api';

@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ColumnConfigAction } from '../grid.types';
 
 @Pipe({
-    name: 'getActions',
+    name      : 'getActions',
     standalone: true,
 })
 export class GetActionsPipe implements PipeTransform

@@ -1,58 +1,86 @@
 import gql from 'graphql-tag';
+import { commonAttachmentLibraryFields } from './attachments-library.graphql';
 
-const fields = `
+export const commonAttachmentFields = `
     id
-    uuid
-    commonUuid
-    langUuid
-    attachableType
-    attachableUuid
-    familyUuid
+    familyId
+    attachableId
+    langId
     sort
     alt
     title
-    pathname
+    originFilename
     filename
-    url
-    mime
+    mimetype
     extension
-    size
+    relativePathSegments
     width
     height
-    libraryUuid
-    libraryFileName
-    library {
-        id
-        uuid
-        name
-    }
+    size
+    url
+    isCropable
+    libraryId
+    libraryFilename
+    sizes
+    meta
 `;
 
-const relationsFields = `
-    adminAttachmentFamilies (query:$attachmentFamilyQuery) {
-        id
-        uuid
-        name
-    }
-`;
-
-export const graphQL = {
-    fields,
-    relationsFields,
-};
-
-export const uploadFilesMutation = gql`
-    mutation CommonUploadFiles (
-        $files: [CoreFileUploaded!]!
-    ) {
-        commonUploadFiles (
-            files: $files
+export const commonCreateCropMutation = gql`
+    mutation CommonCreateCrop (
+        $attachment: CommonCreateAttachmentInput!
+        $crop: CommonCropPropertiesInput!
+    )
+    {
+        commonCreateCrop (
+            attachment:$attachment
+            crop:$crop
         )
         {
-            id
-            filename
-            mimetype
-            encoding
+            attachment {
+                ${commonAttachmentFields}
+                isUploaded
+                isChanged
+                library {
+                    ${commonAttachmentLibraryFields}
+                }
+            }
+            crop {
+                x
+                y
+                width
+                height
+                rotate
+                scaleX
+                scaleY
+            }
         }
-    }
+    },
+`;
+
+export const commonDeleteAttachmentMutation = gql`
+    mutation CommonDeleteAttachment (
+        $payload: CommonAttachmentInput!
+    )
+    {
+        commonDeleteAttachment (
+            payload: $payload
+        )
+        {
+            ${commonAttachmentFields}
+            library {
+                ${commonAttachmentLibraryFields}
+            }
+        }
+    },
+`;
+
+export const commonCreateBlobAttachmentMutation = gql`
+    mutation CommonCreateBlobAttachment (
+        $payload: CommonAttachmentInput!
+    )
+    {
+        commonCreateBlobAttachment(
+            payload: $payload
+        )
+    },
 `;

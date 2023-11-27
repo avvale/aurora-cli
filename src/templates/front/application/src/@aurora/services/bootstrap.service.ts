@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AuthenticationService, CoreGetLangsService, CoreSearchKeyLang, Environment, IamService, log, SessionService } from '@aurora';
 import { lastValueFrom } from 'rxjs';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Injectable({
     providedIn: 'root',
@@ -14,6 +15,7 @@ export class BootstrapService
         private readonly iamService: IamService,
         private readonly authenticationService: AuthenticationService,
         private readonly coreGetLangsService: CoreGetLangsService,
+        private readonly translocoService: TranslocoService,
     ) {}
 
     async init(): Promise<void>
@@ -34,7 +36,12 @@ export class BootstrapService
         if (await lastValueFrom(this.authenticationService.check()))
         {
             // get user from iam service
-            await lastValueFrom(this.iamService.get());
+            const response = await lastValueFrom(this.iamService.get());
+
+            // set user preferred lang
+            const userPreferredLang = data.langs.find(lang => lang.id === response.me.user.langId);
+            if (userPreferredLang) this.translocoService.setActiveLang(userPreferredLang.iso6392);
+
             log('[DEBUG] Get IamService user data from BootstrapService');
         }
 

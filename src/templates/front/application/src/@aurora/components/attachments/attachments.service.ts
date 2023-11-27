@@ -1,48 +1,57 @@
 import { Injectable } from '@angular/core';
-// import { HttpService } from '@horus/services/http.service';
-import { environment } from 'environments/environment';
-import { Observable, from } from 'rxjs';
+import { Attachment, CropProperties, GraphQLService, log } from '@aurora';
+import { Observable, map } from 'rxjs';
+import { commonCreateCropMutation, commonDeleteAttachmentMutation } from './attachments.graphql';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AttachmentsService
 {
-    setCropImage(parameters): Observable<any>
-    {
-        if (environment.debug) console.log('DEBUG - Crop image with parameters: ', parameters);
+    constructor(
+        private readonly graphqlService: GraphQLService,
+    ) {}
 
-        return from([]);
-        /* return this
-            ._http
-            .graphQLClient()
-            .mutate({
-                mutation: gql`
-                    mutation AdminCropAttachment ($payload:JSON!) {
-                        adminCropAttachment (payload:$payload)
-                    }`,
+    setCropImage(
+        attachment,
+        crop: CropProperties,
+    ): Observable<any>
+    {
+        log('[DEBUG] - Crop image with parameters: ', {
+            attachment,
+            crop,
+        });
+
+        return this
+            .graphqlService
+            .client()
+            .mutate<string>({
+                mutation : commonCreateCropMutation,
                 variables: {
-                    payload: parameters // add object to arguments
-                }
-            }); */
+                    attachment,
+                    crop,
+                },
+            })
+            .pipe(
+                map(({ data }) => data['commonCreateCrop']),
+            );
     }
 
-    deleteAttachment(attachment): Observable<any>
+    deleteAttachment(attachment: Attachment): Observable<any>
     {
-        if (environment.debug) console.log('DEBUG - Trigger delete attachment: ', attachment);
+        log('[DEBUG] - Delete attachment: ', attachment);
 
-        return from([]);
-        /* return this
-            ._http
-            .graphQLClient()
-            .mutate({
-                mutation: gql`
-                    mutation AdminDeleteAttachment ($attachment:AdminAttachmentInput!) {
-                        adminDeleteAttachment (attachment:$attachment)
-                    }`,
+        return this
+            .graphqlService
+            .client()
+            .mutate<string>({
+                mutation : commonDeleteAttachmentMutation,
                 variables: {
-                    attachment: attachment
-                }
-            }); */
+                    payload: attachment,
+                },
+            })
+            .pipe(
+                map(({ data }) => data['commonDeleteAttachment']),
+            );
     }
 }

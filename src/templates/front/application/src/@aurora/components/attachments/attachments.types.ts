@@ -1,24 +1,28 @@
-export interface Attachment
-{
-    id: number;
-    familyId: string;
-    sort: number;
-    alt: string;
-    title: string;
-    path: string;
+import { BehaviorSubject } from 'rxjs';
+
+export interface Attachment {
+    id: string;
+    familyId?: string;
+    attachableId: string;
+    sort?: number;
+    alt?: string;
+    title?: string;
+    originFilename: string;
     filename: string;
-    url: string;
-    mime: string;
+    mimetype: string;
     extension: string;
+    relativePathSegments: any;
+    width?: number;
+    height?: number;
     size: number;
-    width: number;
-    height: number;
-    libraryId: string;
-    libraryFilename: string;
-    meta: any;
-    createdAt: string;
-    updatedAt: string;
-    deletedAt: string;
+    url: string;
+    isCropable: boolean;
+    isUploaded: boolean;
+    isChanged: boolean;
+    libraryId?: string;
+    libraryFilename?: string;
+    meta?: any;
+    library?: AttachmentLibrary;
 }
 
 export interface AttachmentFamily
@@ -37,6 +41,30 @@ export interface AttachmentFamily
     deletedAt: string;
 }
 
+export interface AttachmentLibrary {
+    id: string;
+    originFilename: string;
+    filename: string;
+    mimetype: string;
+    extension: string;
+    relativePathSegments: any;
+    width: number;
+    height: number;
+    size: number;
+    url: string;
+    meta?: any;
+}
+
+export interface AttachmentMessages
+{
+    alt: BehaviorSubject<string>;
+    cancel: BehaviorSubject<string>;
+    crop: BehaviorSubject<string>;
+    placeholder: BehaviorSubject<string>;
+    selectFamily: BehaviorSubject<string>;
+    title: BehaviorSubject<string>;
+}
+
 export enum CropType
 {
     FIT_CROP                = 'FIT_CROP',
@@ -46,13 +74,15 @@ export enum CropType
     FIT_HEIGHT_FREE_CROP    = 'FIT_HEIGHT_FREE_CROP',
 }
 
-export interface File
+export interface CropProperties
 {
-    url: string;
-    filename: string;
-    path: string;
-    mime: string;
-    size: number;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    rotate: number;
+    scaleX: number;
+    scaleY: number;
 }
 
 export enum ImageFormat

@@ -140,6 +140,7 @@ export class LanguagesComponent implements OnInit, OnDestroy
                     if (navigationTranslations[flatNavigationItem.id])
                     {
                         flatNavigationItem.title = navigationTranslations[flatNavigationItem.id];
+                        flatNavigationItem.subtitle = navigationTranslations[flatNavigationItem.subtitle];
                     }
                 }
 

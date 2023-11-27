@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { GraphQLHeaders, GraphQLService } from '@aurora';
+import { FileUploaded, GraphQLHeaders, GraphQLService } from '@aurora';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,15 +15,13 @@ export class FileUploaderService
     uploadFile<T>(
         {
             graphqlStatement = null,
-            id = null,
             file = null,
             headers = {
                 'Apollo-Require-Preflight': 'true',
             },
         }: {
             graphqlStatement?: DocumentNode;
-            id?: string;
-            file?: File;
+            file?: FileUploaded;
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
@@ -33,7 +31,6 @@ export class FileUploaderService
             .mutate({
                 mutation : graphqlStatement,
                 variables: {
-                    id,
                     file,
                 },
                 context: {
@@ -51,7 +48,7 @@ export class FileUploaderService
             },
         }: {
             graphqlStatement?: DocumentNode;
-            files?: { id: string; file: File; }[];
+            files?: FileUploaded[];
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>

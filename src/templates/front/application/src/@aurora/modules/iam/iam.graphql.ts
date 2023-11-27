@@ -24,6 +24,7 @@ export const iamMeAccount =  gql`
             user {
                 id
                 name
+                langId
                 meta
             }
             createdAt

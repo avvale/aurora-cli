@@ -4,7 +4,6 @@ export * from '@aurora/components';
 export * from '@aurora/directives';
 export * from '@aurora/foundations';
 export * from '@aurora/functions';
-export * from '@aurora/icons';
 export * from '@aurora/modules';
 export * from '@aurora/pipes';
 export * from '@aurora/rxjs';

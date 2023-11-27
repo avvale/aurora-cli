@@ -126,7 +126,7 @@ export class FilePreviewOverlayComponent
 
     download(): void
     {
-        const blob = Utils.convertBase64ToFile(this.image.binary,  this.image.mime);
+        const blob = Utils.convertBase64ToBlob(this.image.binary,  this.image.mime);
         saveAs(blob, this.image.filename);
     }
 }

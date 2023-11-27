@@ -1,3 +1,4 @@
+export * from '@aurora/components/grid/directives/grid-cell-value-template.directive';
 export * from '@aurora/components/grid/directives/grid-custom-header-template.directive';
 export * from '@aurora/components/grid/functions/grid-custom-cell-values-template-directive-adapter';
 export * from '@aurora/components/grid/functions/grid-custom-header-template-directive-adapter';

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CoreLang } from './lang.types';
 
+// class that is responsible for containing the current language of multi-language objects.
+// Attention!, it has nothing to do with the user's language.
 @Injectable({
     providedIn: 'root',
 })

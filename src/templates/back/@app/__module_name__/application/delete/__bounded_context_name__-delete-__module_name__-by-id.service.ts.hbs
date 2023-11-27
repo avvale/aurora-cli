@@ -103,7 +103,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
                         queryStatement: {
                             where: {
                                 {{ toCamelCase schema.moduleName }}Id: {{ toCamelCase schema.moduleName }}.id.value,
-                                langId   : contentLanguage.id,
+                                langId: contentLanguage.id,
                             },
                         },
                         deleteOptions: cQMetadata?.repositoryOptions,

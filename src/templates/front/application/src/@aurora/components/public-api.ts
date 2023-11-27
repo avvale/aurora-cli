@@ -17,6 +17,7 @@ export * from './grid-dialog';
 export * from './grid-elements-manager';
 export * from './grid-select-element';
 export * from './grid-select-multiple-elements';
+export * from './image-input';
 export * from './mat-form-field-appearance';
 export * from './navigation';
 export * from './ribbon-environment';
