@@ -53,7 +53,7 @@
 {{/or}}
 {{#each schema.additionalApis}}
 {{ push ../importsArray
-    (object items=(sumStrings (getVariableNameAdditionalApi this) (toPascalCase ../resolverType)) path=(sumStrings './' (toKebabCase ../schema.moduleName) '.graphql'))
+    (object items=(sumStrings (getVariableNameAdditionalApi this) (toPascalCase ./resolverType)) path=(sumStrings './' (toKebabCase ../schema.moduleName) '.graphql'))
 ~}}
 {{/each}}
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
@@ -668,10 +668,10 @@ export class {{ toPascalCase schema.moduleName }}Service
 {{#if (hasAdditionalApiQueries schema.additionalApis) }}
 
     // Queries additionalApis
-{{#each schema.additionalApis.queries}}
+{{#each (getAdditionalApiQueries schema.additionalApis) }}
     {{ getVariableNameAdditionalApi this }}(
         {
-            graphqlStatement = {{ getVgetVariableNameAdditionalApi thisariableName }}Query,
+            graphqlStatement = {{ getVariableNameAdditionalApi this }}Query,
             query = {},
             constraint = {},
         }: {
@@ -709,7 +709,7 @@ export class {{ toPascalCase schema.moduleName }}Service
 {{#if (hasAdditionalApiMutations schema.additionalApis) }}
 
     // Mutation additionalApis
-{{#each schema.additionalApis.mutations}}
+{{#each (getAdditionalApiMutations schema.additionalApis) }}
 
     {{ getVariableNameAdditionalApi this }}<T>(
         {

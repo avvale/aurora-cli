@@ -269,9 +269,9 @@ export const deleteMutation = gql`
 {{#if (hasAdditionalApiQueries schema.additionalApis) }}
 
 // Queries additionalApis
-{{#each schema.additionalApis.queries}}
+{{#each (getAdditionalApiQueries schema.additionalApis) }}
 export const {{ getVariableNameAdditionalApi this }}Query = gql`
-    query {{ getClassName }} (
+    query {{ getClassNameAdditionalApi this }} (
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
@@ -288,9 +288,9 @@ export const {{ getVariableNameAdditionalApi this }}Query = gql`
 {{#if (hasAdditionalApiMutations schema.additionalApis) }}
 
 // Mutation additionalApis
-{{#each schema.additionalApis.mutations}}
+{{#each (getAdditionalApiMutations schema.additionalApis) }}
 export const {{ getVariableNameAdditionalApi this }}Mutation = gql`
-    mutation {{ getClassName }} (
+    mutation {{ getClassNameAdditionalApi this }} (
         $payload: {{ toPascalCase ../schema.boundedContextName }}Update{{ toPascalCase ../schema.moduleName }}ByIdInput!
         $constraint: QueryStatement
     ) {
