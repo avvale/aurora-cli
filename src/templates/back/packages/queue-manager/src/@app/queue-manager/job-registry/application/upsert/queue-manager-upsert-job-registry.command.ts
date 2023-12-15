@@ -9,7 +9,7 @@ export class QueueManagerUpsertJobRegistryCommand
             state?: string;
             jobId?: string;
             jobName?: string;
-            tags?: any;
+            tags?: string[];
         },
         public readonly cQMetadata?: CQMetadata,
     ) {}

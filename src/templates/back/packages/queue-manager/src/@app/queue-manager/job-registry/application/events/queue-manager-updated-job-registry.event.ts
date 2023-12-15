@@ -6,7 +6,7 @@ export class QueueManagerUpdatedJobRegistryEvent
         public readonly state: string,
         public readonly jobId: string,
         public readonly jobName: string,
-        public readonly tags: any,
+        public readonly tags: string[],
         public readonly createdAt: string,
         public readonly updatedAt: string,
         public readonly deletedAt: string,

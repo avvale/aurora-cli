@@ -15,7 +15,7 @@ type QueueManagerJobRegistry
     state: QueueManagerJobRegistryState!
     jobId: GraphQLString!
     jobName: GraphQLString
-    tags: JSON
+    tags: [GraphQLString]
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -28,7 +28,7 @@ input QueueManagerCreateJobRegistryInput
     state: QueueManagerJobRegistryState!
     jobId: GraphQLString!
     jobName: GraphQLString
-    tags: JSON
+    tags: [GraphQLString]
 }
 
 input QueueManagerUpdateJobRegistryByIdInput
@@ -38,7 +38,7 @@ input QueueManagerUpdateJobRegistryByIdInput
     state: QueueManagerJobRegistryState
     jobId: GraphQLString
     jobName: GraphQLString
-    tags: JSON
+    tags: [GraphQLString]
 }
 
 input QueueManagerUpdateJobsRegistryInput
@@ -48,7 +48,7 @@ input QueueManagerUpdateJobsRegistryInput
     state: QueueManagerJobRegistryState
     jobId: GraphQLString
     jobName: GraphQLString
-    tags: JSON
+    tags: [GraphQLString]
 }
 
 type Query

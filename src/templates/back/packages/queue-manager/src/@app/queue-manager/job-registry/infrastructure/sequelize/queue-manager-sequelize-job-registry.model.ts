@@ -66,9 +66,9 @@ export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryM
     @Column({
         field: 'tags',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING(63)),
     })
-    tags: any;
+    tags: string[];
 
     @Column({
         field: 'createdAt',

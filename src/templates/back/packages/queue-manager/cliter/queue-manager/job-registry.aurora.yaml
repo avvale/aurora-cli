@@ -40,7 +40,10 @@ aggregateProperties:
     nullable: true
     defaultValue: __default__
   - name: tags
-    type: json
+    type: array
+    arrayOptions:
+      type: varchar
+      maxLength: 63
     nullable: true
     index: index
   - name: createdAt

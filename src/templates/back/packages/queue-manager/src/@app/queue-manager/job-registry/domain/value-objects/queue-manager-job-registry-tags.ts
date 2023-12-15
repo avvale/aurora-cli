@@ -4,7 +4,7 @@ export class QueueManagerJobRegistryTags extends JsonValueObject
 {
     public readonly type: string = 'QueueManagerJobRegistryTags';
 
-    constructor(value: any, validationRules: ValidationRules = {})
+    constructor(value: any[], validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : 'QueueManagerJobRegistryTags',

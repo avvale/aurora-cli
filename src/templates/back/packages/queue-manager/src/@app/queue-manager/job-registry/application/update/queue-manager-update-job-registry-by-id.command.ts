@@ -9,7 +9,7 @@ export class QueueManagerUpdateJobRegistryByIdCommand
             state?: string;
             jobId?: string;
             jobName?: string;
-            tags?: any;
+            tags?: string[];
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,
