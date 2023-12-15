@@ -1,5 +1,6 @@
 import * as path from 'node:path';
 import { Property } from '../types';
+import { getPropertyStringEnumOptions } from '../utils';
 
 export interface CliterConfig
 {
@@ -91,7 +92,6 @@ export const cliterConfig: CliterConfig =
         'int.unsigned'     : 'number',
         'smallint.unsigned': 'number',
         'tinyint.unsigned' : 'number',
-        array              : 'any[]',
         bigint             : 'number',
         blob               : 'string',
         boolean            : 'boolean',
@@ -119,7 +119,6 @@ export const cliterConfig: CliterConfig =
         'int.unsigned'     : 'number',
         'smallint.unsigned': 'number',
         'tinyint.unsigned' : 'number',
-        array              : 'any[]',
         bigint             : 'number',
         blob               : 'Buffer',
         boolean            : 'boolean',
@@ -203,7 +202,6 @@ export const cliterConfig: CliterConfig =
         'int.unsigned'     : 'GraphQLInt',
         'smallint.unsigned': 'GraphQLInt',
         'tinyint.unsigned' : 'GraphQLInt',
-        array              : '[Any]',
         bigint             : 'GraphQLInt',
         blob               : 'GraphQLString',
         boolean            : 'GraphQLBoolean',
@@ -237,7 +235,7 @@ export const cliterConfig: CliterConfig =
         char               : (length: number): string => `DataTypes.CHAR(${length?.toString()})`,
         date               : (length: number): string => 'DataTypes.DATE',
         decimal            : (decimals: number[]): string => `DataTypes.DECIMAL(${decimals.join(',')})`,
-        enum               : (values: string): string => `DataTypes.ENUM(${values})`,
+        enum               : (property: Property): string => `DataTypes.ENUM(${getPropertyStringEnumOptions(property)})`,
         float              : (length: number): string => 'DataTypes.FLOAT',
         id                 : (length: number): string => 'DataTypes.UUID',
         int                : (length: number): string => 'DataTypes.INTEGER',
@@ -247,7 +245,7 @@ export const cliterConfig: CliterConfig =
         text               : (length: number): string => 'DataTypes.TEXT',
         timestamp          : (length: number): string => 'DataTypes.DATE',
         tinyint            : (length: number): string => 'DataTypes.TINYINT',
-        varchar            : (length: number): string => `DataTypes.STRING(${length?.toString()})`,
+        varchar            : (property: Property): string => `DataTypes.STRING(${property?.maxLength?.toString()})`,
         array              : (parameter: any): string => `DataTypes.ARRAY(${cliterConfig.propertyTypesEquivalenceSequelizeTypes[parameter.type](parameter)})`,
     },
     defaultTypeLength: {

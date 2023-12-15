@@ -27,11 +27,11 @@ export const getPropertySequelizeType = (
 ): string =>
 {
     let parameter: number | string | undefined | number[] | PropertyArrayOptions;
-    if (property.type === PropertyType.CHAR && property?.length)        parameter = property.length;                        // parameter = length
-    if (property.type === PropertyType.VARCHAR && property?.maxLength)  parameter = property.maxLength;                     // parameter = maxLength
-    if (property.type === PropertyType.ENUM)                            parameter = getPropertyStringEnumOptions(property); // parameter = values
-    if (property.type === PropertyType.DECIMAL)                         parameter = property.decimals;                      // parameter = decimals
-    if (property.type === PropertyType.ARRAY)                           parameter = property.arrayOptions;                  // parameter = 
+    if (property.type === PropertyType.CHAR && property?.length)        parameter = property.length;        // parameter = length
+    if (property.type === PropertyType.VARCHAR)                         parameter = property;               // parameter = maxLength
+    if (property.type === PropertyType.ENUM)                            parameter = property;               // parameter = values
+    if (property.type === PropertyType.DECIMAL)                         parameter = property.decimals;      // parameter = decimals
+    if (property.type === PropertyType.ARRAY)                           parameter = property.arrayOptions;  // parameter = array types
 
     return config.propertyTypesEquivalenceSequelizeTypes[property.type](parameter);
 };
@@ -44,6 +44,7 @@ export const getJavascriptModelTypeProperty = (
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)  return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                    return `${property.relationship?.aggregateName}[]`;
+    if (property.type === PropertyType.ARRAY && property.arrayOptions)  return `${config.propertyTypesEquivalenceJavascriptModelTypes[property.arrayOptions.type]}[]`;
 
     return config.propertyTypesEquivalenceJavascriptModelTypes[property.type];
 };
@@ -366,6 +367,8 @@ export const getGraphqlTypeProperty = (
     if (property.relationship?.type === RelationshipType.ONE_TO_MANY || property.relationship?.type === RelationshipType.MANY_TO_MANY)  return `[${property.relationship?.aggregateName}]`;
     if (property.relationship?.type === RelationshipType.MANY_TO_ONE)                                                                   return `${property.relationship?.aggregateName}`;
     if (property.relationship?.type === RelationshipType.ONE_TO_ONE)                                                                    return `${property.relationship?.aggregateName}`;
+    if (property.type === PropertyType.ARRAY && property.arrayOptions)                                                                  return `[${config.propertyTypesEquivalenceQraphqlTypes[property.arrayOptions.type]}]`;
+
     return config.propertyTypesEquivalenceQraphqlTypes[property.type];
 };
 
@@ -377,6 +380,8 @@ export const getGraphqlCreateTypeProperty = (
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)                                  return config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
     if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getBoundedContextNameFromPropertyRelationship(property.relationship.modulePath)?.toPascalCase()}Create${getModuleNameFromPropertyRelationship(property.relationship.modulePath)?.toPascalCase()}Input`;
+    if (property.type === PropertyType.ARRAY && property.arrayOptions)                                  return `[${config.propertyTypesEquivalenceQraphqlTypes[property.arrayOptions.type]}]`;
+
     return config.propertyTypesEquivalenceQraphqlTypes[property.type];
 };
 
@@ -388,6 +393,8 @@ export const getGraphqlUpdateTypeProperty = (
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)                                  return config.propertyTypesEquivalenceQraphqlTypes.manyToMany;
     if (property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship.field)    return `${getBoundedContextNameFromPropertyRelationship(property.relationship.modulePath)?.toPascalCase()}Update${getModuleNameFromPropertyRelationship(property.relationship.modulePath)?.toPascalCase()}Input`;
+    if (property.type === PropertyType.ARRAY && property.arrayOptions)                                  return `[${config.propertyTypesEquivalenceQraphqlTypes[property.arrayOptions.type]}]`;
+
     return config.propertyTypesEquivalenceQraphqlTypes[property.type];
 };
 
@@ -409,6 +416,7 @@ export const getPropertyJavascriptCreateType = (
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
+    if (property.type === PropertyType.ARRAY && property.arrayOptions)    return `${config.propertyTypesEquivalenceJavascriptTypes[property.arrayOptions.type]}[]`;
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
@@ -420,6 +428,7 @@ export const getPropertyJavascriptUpdateType = (
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
+    if (property.type === PropertyType.ARRAY && property.arrayOptions)    return `${config.propertyTypesEquivalenceJavascriptTypes[property.arrayOptions.type]}[]`;
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
@@ -431,6 +440,7 @@ export const getPropertyJavascriptDeleteType = (
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
+    if (property.type === PropertyType.ARRAY && property.arrayOptions)    return `${config.propertyTypesEquivalenceJavascriptTypes[property.arrayOptions.type]}[]`;
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
@@ -442,6 +452,7 @@ export const getPropertyJavascriptResponseType = (
 {
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
+    if (property.type === PropertyType.ARRAY && property.arrayOptions)    return `${config.propertyTypesEquivalenceJavascriptTypes[property.arrayOptions.type]}[]`;
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
