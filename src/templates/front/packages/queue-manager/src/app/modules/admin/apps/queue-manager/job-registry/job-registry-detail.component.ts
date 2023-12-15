@@ -43,7 +43,7 @@ export class JobRegistryDetailComponent extends ViewDetailComponent
         private readonly jobService: JobService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

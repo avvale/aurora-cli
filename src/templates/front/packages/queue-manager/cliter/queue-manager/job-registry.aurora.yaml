@@ -33,14 +33,17 @@ aggregateProperties:
     type: varchar
     maxLength: 36
     nullable: false
-    index: unique
+    index: index
   - name: jobName
     type: varchar
     maxLength: 50
     nullable: true
     defaultValue: __default__
   - name: tags
-    type: json
+    type: array
+    arrayOptions:
+      type: varchar
+      maxLength: 63
     nullable: true
     index: index
   - name: createdAt
@@ -52,4 +55,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-additionalApis: []

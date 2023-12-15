@@ -66,7 +66,7 @@ export class JobRegistryListComponent extends ViewBaseComponent
         private readonly jobRegistryService: JobRegistryService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

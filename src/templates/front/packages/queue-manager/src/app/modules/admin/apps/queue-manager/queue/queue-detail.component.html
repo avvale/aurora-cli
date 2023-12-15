@@ -342,6 +342,7 @@
                             </form>
                         </ng-template>
                         <au-grid-translations
+                            [for]="jobsGridId"
                             [actions]="t('Actions')"
                             [AND]="t('AND')"
                             [clearFilters]="t('ClearFilters')"
@@ -349,7 +350,6 @@
                             [columns]="t('Columns')"
                             [field]="t('Field')"
                             [filter]="t('Filter')"
-                            [for]="jobsGridId"
                             [operator]="t('Operator')"
                             [OR]="t('OR')"
                             [pleaseSelectField]="t('PleaseSelectField')"

@@ -66,7 +66,7 @@ export class QueueListComponent extends ViewBaseComponent
         private readonly queueService: QueueService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of
