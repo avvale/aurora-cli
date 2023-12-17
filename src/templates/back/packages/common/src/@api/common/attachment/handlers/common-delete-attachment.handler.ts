@@ -25,7 +25,7 @@ export class CommonDeleteAttachmentHandler
         if (payload.isUploaded)
         {
             // delete attachment file, attachment library file and attachment sizes if exists
-            this.commonAttachmentsService.deleteAttachment(payload);
+            this.commonAttachmentsService.deleteAttachmentFile(payload);
             return payload;
         }
 
@@ -45,7 +45,7 @@ export class CommonDeleteAttachmentHandler
         ));
 
         // delete attachment file, attachment library file and attachment sizes if exists
-        this.commonAttachmentsService.deleteAttachment(attachment);
+        this.commonAttachmentsService.deleteAttachmentFile(attachment);
 
         await this.commandBus.dispatch(new CommonDeleteAttachmentByIdCommand(
             payload.id,

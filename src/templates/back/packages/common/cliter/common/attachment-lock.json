@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/common/attachment/infrastructure/mock/common-mock-attachment.data.ts",
-            "integrity": "sha1:2a0d1728d668f3fe4adef685a9e64d32d4c13228"
+            "integrity": "sha1:b3703e14a1b7d68a8a6d39ae69419465108cecd9"
         },
         {
             "path": "src/@app/common/attachment/infrastructure/mock/common-mock-attachment.repository.ts",
@@ -559,7 +559,7 @@
         },
         {
             "path": "src/@api/common/attachment/graphql/common-attachment.graphql",
-            "integrity": "sha1:d11114424f4ebb02b9722ea65d0febade526739d"
+            "integrity": "sha1:08b6079e42b410f6596fcbd285be72cf8b8fdc61"
         },
         {
             "path": "src/@api/common/attachment/handlers/common-create-attachment.handler.spec.ts",
@@ -651,7 +651,7 @@
         },
         {
             "path": "src/@api/common/attachment/index.ts",
-            "integrity": "sha1:c56bbd831c22aeb94b2a07ff678c6e06d34ca6a6"
+            "integrity": "sha1:9b6103c5a12370ffc3a2b8c056b23ca16bdc0a23"
         },
         {
             "path": "src/@api/common/attachment/resolvers/common-create-attachment.resolver.spec.ts",
@@ -794,12 +794,36 @@
             "integrity": "sha1:55e97ae6a11bee755a8e15742d3b5bd50fd5bda9"
         },
         {
+            "path": "src/@api/common/attachment/controllers/common-create-blob-attachment.controller.spec.ts",
+            "integrity": "sha1:b8ade4bd662ccbae741035c1cc06c7ffcb80a8db"
+        },
+        {
+            "path": "src/@api/common/attachment/controllers/common-create-blob-attachment.controller.ts",
+            "integrity": "sha1:0459eb16ccae0f5715155d436f7b0d916141dbe5"
+        },
+        {
+            "path": "src/@api/common/attachment/handlers/common-create-blob-attachment.handler.spec.ts",
+            "integrity": "sha1:d056bb9aeb417f72b2649a94bd16fc3e0b3eb7b7"
+        },
+        {
+            "path": "src/@api/common/attachment/handlers/common-create-blob-attachment.handler.ts",
+            "integrity": "sha1:73f4361c3fb38c2945a61800eb702f28230b1bb3"
+        },
+        {
+            "path": "src/@api/common/attachment/resolvers/common-create-blob-attachment.resolver.spec.ts",
+            "integrity": "sha1:5ed58197ff943802763a7bfa7330becfc45aab8a"
+        },
+        {
+            "path": "src/@api/common/attachment/resolvers/common-create-blob-attachment.resolver.ts",
+            "integrity": "sha1:1a5a98db5e94bab1ed9954d4a0f44a8754c5ff6e"
+        },
+        {
             "path": "test/acceptance/common/attachment.e2e-spec.ts",
             "integrity": "sha1:2b2c5c16e5e0f362bd6353836df798439c9312ee"
         },
         {
             "path": "postman/common/common.attachment.postman.json",
-            "integrity": "sha1:09ca30fbd995b7e6b49471895d8c35424d637a13"
+            "integrity": "sha1:f6d90e6c00695ce180daeb242fb6788903644083"
         }
     ]
 }

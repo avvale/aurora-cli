@@ -50,6 +50,9 @@ export { CommonUploadAttachmentsResolver } from './resolvers/common-upload-attac
 export { CommonDeleteAttachmentController } from './controllers/common-delete-attachment.controller';
 export { CommonDeleteAttachmentHandler } from './handlers/common-delete-attachment.handler';
 export { CommonDeleteAttachmentResolver } from './resolvers/common-delete-attachment.resolver';
+export { CommonCreateBlobAttachmentController } from './controllers/common-create-blob-attachment.controller';
+export { CommonCreateBlobAttachmentHandler } from './handlers/common-create-blob-attachment.handler';
+export { CommonCreateBlobAttachmentResolver } from './resolvers/common-create-blob-attachment.resolver';
 
 // import controllers
 import { CommonCreateAttachmentController } from './controllers/common-create-attachment.controller';
@@ -100,6 +103,9 @@ import { CommonUploadAttachmentsResolver } from './resolvers/common-upload-attac
 import { CommonDeleteAttachmentController } from './controllers/common-delete-attachment.controller';
 import { CommonDeleteAttachmentHandler } from './handlers/common-delete-attachment.handler';
 import { CommonDeleteAttachmentResolver } from './resolvers/common-delete-attachment.resolver';
+import { CommonCreateBlobAttachmentController } from './controllers/common-create-blob-attachment.controller';
+import { CommonCreateBlobAttachmentHandler } from './handlers/common-create-blob-attachment.handler';
+import { CommonCreateBlobAttachmentResolver } from './resolvers/common-create-blob-attachment.resolver';
 
 export const CommonAttachmentApiControllers = [
     CommonCreateAttachmentController,
@@ -117,6 +123,7 @@ export const CommonAttachmentApiControllers = [
     // additionalApis
     CommonUploadAttachmentsController,
     CommonDeleteAttachmentController,
+    CommonCreateBlobAttachmentController,
 ];
 
 export const CommonAttachmentApiResolvers = [
@@ -135,6 +142,7 @@ export const CommonAttachmentApiResolvers = [
     // additionalApis
     CommonUploadAttachmentsResolver,
     CommonDeleteAttachmentResolver,
+    CommonCreateBlobAttachmentResolver,
 ];
 
 export const CommonAttachmentApiHandlers = [
@@ -153,6 +161,7 @@ export const CommonAttachmentApiHandlers = [
     // additionalApis
     CommonUploadAttachmentsHandler,
     CommonDeleteAttachmentHandler,
+    CommonCreateBlobAttachmentHandler,
 ];
 
 export const CommonAttachmentApiServices = [

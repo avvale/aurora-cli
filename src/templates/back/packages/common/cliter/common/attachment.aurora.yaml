@@ -131,3 +131,6 @@ additionalApis:
   - path: common/attachment/delete
     resolverType: mutation
     httpMethod: post
+  - path: common/attachment/create-blob
+    resolverType: mutation
+    httpMethod: post

@@ -20,8 +20,8 @@ type CommonAttachment
     size: GraphQLInt!
     url: GraphQLString!
     isCropable: GraphQLBoolean!
-    isUploaded: GraphQLBoolean! # field is not in database
-    isChanged: GraphQLBoolean!  # field is not in database
+    isUploaded: GraphQLBoolean # field is not in database
+    isChanged: GraphQLBoolean  # field is not in database
     libraryId: ID
     library: CommonAttachmentLibrary
     libraryFilename: GraphQLString
@@ -210,5 +210,9 @@ type Mutation
     commonDeleteAttachment(
         payload: CommonAttachmentInput!
     ): CommonAttachment!
+
+    commonCreateBlobAttachment(
+       payload: CommonAttachmentInput!
+    ): GraphQLString!
 
 }

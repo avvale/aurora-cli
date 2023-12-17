@@ -39,7 +39,7 @@ export class CommonDeleteAttachmentByIdHandler
         ));
 
         // delete attachment file, attachment library file and attachment sizes if exists
-        this.commonAttachmentsService.deleteAttachment(attachment);
+        this.commonAttachmentsService.deleteAttachmentFile(attachment);
 
         await this.commandBus.dispatch(new CommonDeleteAttachmentByIdCommand(
             id,
