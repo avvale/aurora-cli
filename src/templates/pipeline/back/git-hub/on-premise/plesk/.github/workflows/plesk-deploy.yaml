@@ -128,3 +128,21 @@ jobs:
           remote_port: $\{{ env.SERVER_PORT }}
           remote_user: $\{{ env.SERVER_USERNAME }}
           remote_key: $\{{ env.SERVER_KEY }}
+
+      - name: Print server path
+        run: |
+          echo ${{ env.SERVER_PATH }}
+        shell: sh
+
+      - name: Execute command on remote server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ env.SERVER_HOST }}
+          username: ${{ env.SERVER_USERNAME }}
+          key: ${{ env.SERVER_KEY }}
+          port: ${{ env.SERVER_PORT }}
+          script: |
+            whoami
+            ls -al
+            mkdir -p ${{ env.SERVER_PATH }}/storage/app/public
+            ln -s ${{ env.SERVER_PATH }}/storage/app/public ${{ env.SERVER_PATH }}/httpdocs/public
