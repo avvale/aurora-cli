@@ -57,5 +57,5 @@ handlebars.registerHelper('importWebComponentsManager', function(
 
     if (sortImports) importWebComponentsArr.sort();
 
-    return importWebComponentsArr.join(', ') + ',';
+    return importWebComponentsArr.length > 0 ? importWebComponentsArr.join(', ') + ',' : '';
 });
