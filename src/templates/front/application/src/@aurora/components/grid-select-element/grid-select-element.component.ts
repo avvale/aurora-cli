@@ -48,6 +48,8 @@ export class GridSelectElementComponent
     @Output() selectedCheckboxRowModelChange = new EventEmitter<SelectionChange<any>>();
     @Output() search = new EventEmitter<GridState>();
     @Output() stateChange = new EventEmitter<GridState>();
+    @Output() dialogClose = new EventEmitter<MatDialogRef<GridDialogComponent>>();
+    @Output() dialogOpen = new EventEmitter<MatDialogRef<GridDialogComponent>>();
 
     // directive to set custom values in cells
     @ContentChildren(GridSelectElementCellValueTemplateDirective) gridSelectElementCellValuesTemplate?: QueryList<GridSelectElementCellValueTemplateDirective>;
@@ -122,6 +124,14 @@ export class GridSelectElementComponent
             .componentInstance
             .selectedCheckboxRowModelChange
             .subscribe((action: Action) => this.action.next(action));
+
+        this.elementDialogRef
+            .afterOpened()
+            .subscribe(() => this.dialogOpen.next(this.elementDialogRef));
+
+        this.elementDialogRef
+            .afterClosed()
+            .subscribe(() => this.dialogClose.next(this.elementDialogRef));
     }
 
     closeDialog(): void

@@ -10,7 +10,7 @@ import { GridTranslationsComponent } from './grid-translations.component';
         <ng-content></ng-content>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
+    standalone     : true,
 })
 export class GridColumnTranslationComponent implements OnInit
 {

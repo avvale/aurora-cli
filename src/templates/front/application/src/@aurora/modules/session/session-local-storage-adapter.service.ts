@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { log } from '@aurora';
+import { CoreGetLangsService, log } from '@aurora';
 import { Session } from '@aurora';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 import { SessionService } from './session.service';
 
 @Injectable({
@@ -12,6 +12,13 @@ export class SessionLocalStorageService extends SessionService
     private sessionName: string = 'session';
 
     dataSubject$: BehaviorSubject<Session | null> = new BehaviorSubject(null);
+
+    constructor(
+        private readonly coreGetLangsService: CoreGetLangsService,
+    )
+    {
+        super();
+    }
 
     get data$(): Observable<Session>
     {
@@ -31,6 +38,25 @@ export class SessionLocalStorageService extends SessionService
     {
         log('[DEBUG] Session initialized: ', this.session);
         this.dataSubject$.next(this.session);
+    }
+
+    // function to load the minimum data for
+    // the correct operation of the application
+    async loadMinimumData(): Promise<void>
+    {
+        if (
+            this.get('langs') &&
+            Array.isArray(this.get('langs')) &&
+            this.get('fallbackLang') &&
+            this.get('searchKeyLang')
+        ) return;
+
+        log('[DEBUG] Load minimum data in session');
+
+        const data = await lastValueFrom(this.coreGetLangsService.get());
+        this.set('langs', data.langs);
+        this.set('fallbackLang', data.fallbackLang);
+        this.set('searchKeyLang', data.searchKeyLang);
     }
 
     get<T>(id: string): T | null

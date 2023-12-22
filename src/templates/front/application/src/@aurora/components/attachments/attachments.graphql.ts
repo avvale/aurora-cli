@@ -38,6 +38,7 @@ export const commonCreateCropMutation = gql`
         {
             attachment {
                 ${commonAttachmentFields}
+                isCropped
                 isUploaded
                 isChanged
                 library {

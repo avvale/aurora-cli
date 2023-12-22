@@ -17,6 +17,7 @@ export interface Attachment {
     size: number;
     url: string;
     isCropable: boolean;
+    isCropped: boolean;
     isUploaded: boolean;
     isChanged: boolean;
     libraryId?: string;

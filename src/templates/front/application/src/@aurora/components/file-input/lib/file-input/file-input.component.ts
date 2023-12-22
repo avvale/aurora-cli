@@ -27,7 +27,7 @@ export class FileInputComponent extends FileInputMixinBase implements MatFormFie
 
     focused = false;
     controlType = 'file-input';
-    @Output() files = new EventEmitter<File[]>();
+    @Output() files = new EventEmitter<File | File[]>();
 
     @Input() autofilled = false;
 
@@ -234,8 +234,20 @@ export class FileInputComponent extends FileInputMixinBase implements MatFormFie
             }
         }
         this.value = new FileInput(fileArray);
+
+        if (this.multiple)
+        {
+            this.files.emit(fileArray);
+            this._onChange(fileArray);
+        }
+        else
+        {
+            this.files.emit(fileArray[0]);
+            this._onChange(fileArray[0]);
+
+        }
         this.files.emit(fileArray);
-        this._onChange(this.value);
+        this._onChange(fileArray[0]);
     }
 
     @HostListener('focusout')

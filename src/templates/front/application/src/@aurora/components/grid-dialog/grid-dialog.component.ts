@@ -18,7 +18,7 @@ import { SelectionModel } from '../grid/selection-model/selection-model';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        AsyncPipe, GridComponent, GridCustomHeaderTemplateDirective, MatButtonModule, MatDialogModule, MatIconModule, NgForOf, NgTemplateOutlet,
+        AsyncPipe, GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective, MatButtonModule, MatDialogModule, MatIconModule, NgForOf, NgTemplateOutlet,
     ],
 })
 export class GridDialogComponent

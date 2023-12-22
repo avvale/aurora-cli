@@ -14,6 +14,10 @@ export abstract class SessionService<T = Session>
 
     abstract init(): void;
 
+    // function to load the minimum data for
+    // the correct operation of the application
+    abstract loadMinimumData(): void;
+
     abstract get<E = any>(id: string): E | null;
 
     abstract set<E = any>(id: string, value: E): void;

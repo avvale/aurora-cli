@@ -31,7 +31,7 @@ export class DownloadService
 
                 const blob = Utils.convertBase64ToBlob(data['commonCreateBlobAttachment']);
 
-                saveAs(blob, attachment.originFilename);
+                saveAs(blob, attachment.filename);
             });
     }
 }

@@ -7,7 +7,7 @@ import { GridMessages } from '../grid.types';
  * Check which action to perform depending on whether or not the language exists.
  */
 @Pipe({
-    name: 'gridTranslate',
+    name      : 'gridTranslate',
     standalone: true,
 })
 export class GridTranslatePipe implements PipeTransform, OnDestroy

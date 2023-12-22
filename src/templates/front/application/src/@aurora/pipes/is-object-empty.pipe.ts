@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'isObjectEmpty',
-    pure: true,
+    name      : 'isObjectEmpty',
+    pure      : true,
     standalone: true,
 })
 export class IsObjectEmptyPipe implements PipeTransform

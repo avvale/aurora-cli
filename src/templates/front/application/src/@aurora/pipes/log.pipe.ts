@@ -2,8 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { log } from '@aurora';
 
 @Pipe({
-    name: 'log',
-    pure: true,
+    name      : 'log',
+    pure      : true,
     standalone: true,
 })
 export class LogPipe implements PipeTransform

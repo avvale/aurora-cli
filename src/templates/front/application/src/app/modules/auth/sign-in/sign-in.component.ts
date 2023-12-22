@@ -24,14 +24,16 @@ import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
     imports      : [
         // ---- customizations ----
         TranslocoModule,
-        RouterLink, FuseAlertComponent, NgIf, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule, MatProgressSpinnerModule
+        RouterLink, FuseAlertComponent, NgIf, FormsModule, ReactiveFormsModule,
+        MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule,
+        MatCheckboxModule, MatProgressSpinnerModule,
     ],
 })
 export class AuthSignInComponent implements OnInit
 {
     @ViewChild('signInNgForm') signInNgForm: NgForm;
 
-    alert: { type: FuseAlertType; message: string } = {
+    alert: { type: FuseAlertType; message: string; } = {
         type   : 'success',
         message: '',
     };
@@ -62,7 +64,7 @@ export class AuthSignInComponent implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
+    async ngOnInit(): Promise<void>
     {
         // Create the form
         this.signInForm = this._formBuilder.group({
@@ -70,6 +72,13 @@ export class AuthSignInComponent implements OnInit
             password  : ['', Validators.required],
             rememberMe: [''],
         });
+
+        // at this point, there should be no previous session,
+        // so there would be no need to load it with this.sessionService.init();
+
+        // checks and loads the minimum data for the correct
+        // operation of the application if necessary
+        await this.sessionService.loadMinimumData();
     }
 
     // -----------------------------------------------------------------------------------------------------

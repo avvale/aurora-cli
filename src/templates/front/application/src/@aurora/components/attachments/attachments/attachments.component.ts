@@ -242,6 +242,7 @@ export class AttachmentsComponent implements OnInit, AfterViewInit
             size                : [0, Validators.required],
             url                 : ['', Validators.required],
             isCropable          : false,
+            isCropped           : false,
             isUploaded          : false,
             isChanged           : false,
             libraryId           : '',

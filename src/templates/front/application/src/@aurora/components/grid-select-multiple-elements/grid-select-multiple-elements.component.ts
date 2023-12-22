@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, Even
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { Action } from '@aurora';
-import { GridCustomHeaderTemplateDirective } from '@aurora/components/grid/directives/grid-custom-header-template.directive';
+import { GridCellValueTemplateDirective, GridCustomHeaderTemplateDirective } from '@aurora/components/grid';
 import { GridDialogComponent } from '../grid-dialog/grid-dialog.component';
 import { ColumnConfig, GridData, GridState } from '../grid/grid.types';
 import { GridComponent } from '../grid/grid/grid.component';
@@ -21,7 +21,7 @@ import { GridSelectMultipleCustomHeaderTemplateDirective } from './directives/gr
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        GridComponent, GridCustomHeaderTemplateDirective, MatIconModule, NgForOf, NgIf, NgTemplateOutlet,
+        GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective, MatIconModule, NgForOf, NgIf, NgTemplateOutlet,
     ],
 })
 export class GridSelectMultipleElementsComponent

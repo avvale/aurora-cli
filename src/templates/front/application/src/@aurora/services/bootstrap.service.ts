@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { AuthenticationService, CoreGetLangsService, CoreSearchKeyLang, Environment, IamService, log, SessionService } from '@aurora';
+import { AuthenticationService, Environment, IamService, log, SessionService } from '@aurora';
 import { lastValueFrom } from 'rxjs';
 import { TranslocoService } from '@ngneat/transloco';
 
@@ -14,7 +14,6 @@ export class BootstrapService
         private readonly sessionService: SessionService,
         private readonly iamService: IamService,
         private readonly authenticationService: AuthenticationService,
-        private readonly coreGetLangsService: CoreGetLangsService,
         private readonly translocoService: TranslocoService,
     ) {}
 
@@ -25,12 +24,9 @@ export class BootstrapService
         // get session from local storage and set in session observable
         this.sessionService.init();
 
-        // get languages from CACHE MANAGER in nestjs or json or
-        // database according to configuration in shared module
-        const data = await lastValueFrom(this.coreGetLangsService.get());
-        this.sessionService.set('langs', data.langs);
-        this.sessionService.set('fallbackLang', data.fallbackLang);
-        this.sessionService.set('searchKeyLang', data.searchKeyLang);
+        // checks and loads the minimum data for the correct
+        // operation of the application if necessary
+        await this.sessionService.loadMinimumData();
 
         // check token to request user
         if (await lastValueFrom(this.authenticationService.check()))
@@ -39,7 +35,9 @@ export class BootstrapService
             const response = await lastValueFrom(this.iamService.get());
 
             // set user preferred lang
-            const userPreferredLang = data.langs.find(lang => lang.id === response.me.user.langId);
+            const userPreferredLang = this.sessionService
+                .get('langs')
+                .find(lang => lang.id === response.me.user.langId);
             if (userPreferredLang) this.translocoService.setActiveLang(userPreferredLang.iso6392);
 
             log('[DEBUG] Get IamService user data from BootstrapService');

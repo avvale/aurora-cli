@@ -1,8 +1,8 @@
 import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Action } from '@aurora/aurora.types';
-import { GridComponent, GridCustomHeaderTemplateDirective } from '@aurora/components/grid';
+import { GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective } from '@aurora/components/grid';
 import { ColumnConfig, GridData, GridState } from '../grid/grid.types';
 import { GridCustomButtonsHeaderDialogTemplateDirective } from './directives/grid-custom-buttons-header-dialog-template.directive';
 import { GridElementsManagerCellValueTemplateDirective } from './directives/grid-elements-manager-cell-value-template.directive';
@@ -15,7 +15,7 @@ import { GridElementDetailDialogComponent } from './grid-element-detail-dialog.c
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        GridComponent, GridCustomHeaderTemplateDirective, NgForOf, NgIf, NgTemplateOutlet,
+        GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective, NgForOf, NgIf, NgTemplateOutlet,
     ],
 })
 export class GridElementsManagerComponent
@@ -44,8 +44,9 @@ export class GridElementsManagerComponent
     @Output() action = new EventEmitter<Action>();
     @Output() columnFiltersChange = new EventEmitter<GridState>();
     @Output() columnsConfigChange = new EventEmitter<ColumnConfig[]>();
-    @Output() dialogClose = new EventEmitter<void>();
-    @Output() dialogOpen = new EventEmitter<void>();
+    @Output() dialogClose = new EventEmitter<MatDialogRef<GridElementDetailDialogComponent>>();
+    @Output() dialogOpen = new EventEmitter<MatDialogRef<GridElementDetailDialogComponent>>();
+    @Output() dialogAfterViewInit = new EventEmitter<void>();
     @Output() stateChange = new EventEmitter<GridState>();
     @Output() search = new EventEmitter<GridState>();
 
@@ -57,7 +58,7 @@ export class GridElementsManagerComponent
     @ContentChildren(GridElementsManagerCellValueTemplateDirective) gridElementsManagerCellValueTemplate?: QueryList<GridElementsManagerCellValueTemplateDirective>;
 
     constructor(
-        private dialog: MatDialog,
+        private readonly dialog: MatDialog,
     ) {}
 
     handleElementDetailDialog(actionId: string): void
@@ -81,10 +82,16 @@ export class GridElementsManagerComponent
 
         elementDetailDialogRef
             .afterOpened()
-            .subscribe(() => this.dialogOpen.next());
+            .subscribe(() => this.dialogOpen.next(elementDetailDialogRef));
 
         elementDetailDialogRef
             .afterClosed()
-            .subscribe(() => this.dialogClose.next());
+            .subscribe(() => this.dialogClose.next(elementDetailDialogRef));
+
+        // subscription to know when components loaded in dialog are ready
+        elementDetailDialogRef
+            .componentInstance
+            .afterViewInit
+            .subscribe(() => this.dialogAfterViewInit.next());
     }
 }

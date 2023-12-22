@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { finalize, Subject, takeUntil, takeWhile, tap, timer } from 'rxjs';
 
 // ---- customizations ----
-import { AuthenticationService, IamService } from '@aurora';
+import { AuthenticationService, IamService, SessionService } from '@aurora';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 
 @Component({
@@ -37,7 +37,7 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
         private readonly translocoService: TranslocoService,
         private readonly iamService: IamService,
         private readonly authenticationService: AuthenticationService,
-
+        private readonly sessionService: SessionService,
     )
     {
     }
@@ -53,7 +53,7 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
     {
         // ---- customizations ----
         this.iamService.clear();
-        this.authenticationService.clear();
+        this.sessionService.clear();
         this.authenticationService.signOut();
 
         // Redirect after the countdown
