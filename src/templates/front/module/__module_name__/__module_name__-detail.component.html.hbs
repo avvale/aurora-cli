@@ -134,7 +134,15 @@
                     {{> intInput schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq type 'tinyint'}}
+                    {{> intInput schema=../schema property=.}}
+
+                    {{/eq}}
                     {{#eq type 'smallint.unsigned'}}
+                    {{> intInput schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq type 'smallint'}}
                     {{> intInput schema=../schema property=.}}
 
                     {{/eq}}
@@ -147,6 +155,10 @@
 
                     {{/eq}}
                     {{#eq type 'int.unsigned'}}
+                    {{> intInput schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq type 'int'}}
                     {{> intInput schema=../schema property=.}}
 
                     {{/eq}}
