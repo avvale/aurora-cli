@@ -13,7 +13,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase moduleN
             {{#if currentProperty.maxLength }}
             maxLength  : {{ currentProperty.maxLength }},
             {{/if}}
-            unsigned   : false,
+            unsigned   : {{#if currentProperty.unsigned}}true{{else}}false{{/if}},
         }, validationRules));
     }
 }
