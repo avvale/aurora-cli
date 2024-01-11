@@ -245,7 +245,7 @@ export const cliterConfig: CliterConfig =
         text               : (length: number): string => 'DataTypes.TEXT',
         timestamp          : (length: number): string => 'DataTypes.DATE',
         tinyint            : (length: number): string => 'DataTypes.TINYINT',
-        varchar            : (property: Property): string => `DataTypes.STRING(${property?.maxLength?.toString()})`,
+        varchar            : (property: Property): string => `DataTypes.STRING(${property?.maxLength ? property.maxLength.toString() : ''})`,
         array              : (parameter: any): string => `DataTypes.ARRAY(${cliterConfig.propertyTypesEquivalenceSequelizeTypes[parameter.type](parameter)})`,
     },
     defaultTypeLength: {
