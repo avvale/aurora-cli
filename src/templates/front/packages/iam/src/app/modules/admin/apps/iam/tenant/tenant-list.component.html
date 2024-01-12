@@ -53,6 +53,7 @@
             [originColumnsConfig]="originColumnsConfig"
         >
             <au-grid-translations
+                [for]="gridId"
                 [actions]="t('Actions')"
                 [AND]="t('AND')"
                 [clearFilters]="t('ClearFilters')"
@@ -60,7 +61,6 @@
                 [columns]="t('Columns')"
                 [field]="t('Field')"
                 [filter]="t('Filter')"
-                [for]="gridId"
                 [operator]="t('Operator')"
                 [OR]="t('OR')"
                 [pleaseSelectField]="t('PleaseSelectField')"

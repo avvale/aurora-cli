@@ -117,6 +117,7 @@
                         #permissionsGridSelectMultipleElements
                     >
                         <au-grid-translations
+                            [for]="permissionsRolesGridId"
                             [actions]="t('Actions')"
                             [AND]="t('AND')"
                             [clearFilters]="t('ClearFilters')"
@@ -124,7 +125,6 @@
                             [columns]="t('Columns')"
                             [field]="t('Field')"
                             [filter]="t('Filter')"
-                            [for]="permissionsRolesGridId"
                             [operator]="t('Operator')"
                             [OR]="t('OR')"
                             [pleaseSelectField]="t('PleaseSelectField')"

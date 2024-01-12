@@ -214,6 +214,7 @@
                             </div>
                         </ng-template>
                         <au-grid-translations
+                            [for]="permissionsGridId"
                             [actions]="t('Actions')"
                             [AND]="t('AND')"
                             [clearFilters]="t('ClearFilters')"
@@ -221,7 +222,6 @@
                             [columns]="t('Columns')"
                             [field]="t('Field')"
                             [filter]="t('Filter')"
-                            [for]="permissionsGridId"
                             [operator]="t('Operator')"
                             [OR]="t('OR')"
                             [pleaseSelectField]="t('PleaseSelectField')"
