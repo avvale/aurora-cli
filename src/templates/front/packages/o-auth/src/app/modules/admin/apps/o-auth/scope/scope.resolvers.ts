@@ -1,8 +1,8 @@
-import { OAuthScope } from '../o-auth.types';
-import { scopeColumnsConfig } from './scope.columns-config';
-import { ScopeService } from './scope.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { IamRole } from '@apps/iam/iam.types';
+import { OAuthScope } from '@apps/o-auth/o-auth.types';
+import { scopeColumnsConfig, ScopeService } from '@apps/o-auth/scope';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const scopePaginationResolver: ResolveFn<GridData<OAuthScope>> = (
@@ -35,17 +35,22 @@ export const scopePaginationResolver: ResolveFn<GridData<OAuthScope>> = (
     });
 };
 
-export const scopeNewResolver: ResolveFn<Action> = (
+export const scopeNewResolver: ResolveFn<{
+    iamGetRoles: IamRole[];
+}> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
     const actionService = inject(ActionService);
+    const scopeService = inject(ScopeService);
 
-    return actionService.action({
+    actionService.action({
         id          : 'oAuth::scope.detail.new',
         isViewAction: true,
     });
+
+    return scopeService.getRelations();
 };
 
 export const scopeEditResolver: ResolveFn<{
@@ -64,7 +69,7 @@ export const scopeEditResolver: ResolveFn<{
     });
 
     return scopeService
-        .findById({
+        .findByIdWithRelations({
             id: route.paramMap.get('id'),
         });
 };

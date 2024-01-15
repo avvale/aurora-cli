@@ -29,6 +29,8 @@
     "Redirect": "Redirect",
     "RefreshToken": "RefreshToken",
     "RefreshTokens": "RefreshTokens",
+    "RoleIds": "RoleIds",
+    "Roles": "Roles",
     "Scope": "Scope",
     "ScopeOptions": "Scope Options",
     "Scopes": "Scopes",

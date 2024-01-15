@@ -137,7 +137,7 @@
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="255"
+                            maxlength="127"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
@@ -150,7 +150,7 @@
                         <input
                             matInput
                             formControlName="secret"
-                            maxlength="90"
+                            maxlength="127"
                             required
                         >
                         <mat-error>{{ formErrors?.secret | async }}</mat-error>
@@ -163,7 +163,7 @@
                         <input
                             matInput
                             formControlName="authUrl"
-                            maxlength="2048"
+                            maxlength="2046"
                         >
                         <mat-error>{{ formErrors?.authUrl | async }}</mat-error>
                     </mat-form-field>
@@ -175,7 +175,7 @@
                         <input
                             matInput
                             formControlName="redirect"
-                            maxlength="2048"
+                            maxlength="2046"
                         >
                         <mat-error>{{ formErrors?.redirect | async }}</mat-error>
                     </mat-form-field>

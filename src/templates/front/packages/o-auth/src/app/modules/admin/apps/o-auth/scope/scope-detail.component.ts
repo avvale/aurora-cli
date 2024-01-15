@@ -1,9 +1,13 @@
-import { OAuthScope } from '../o-auth.types';
-import { ScopeService } from './scope.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
+import { MatSelectModule } from '@angular/material/select';
+import { IamRole } from '@apps/iam/iam.types';
+import { RoleService } from '@apps/iam/role/role.service';
+import { OAuthScope } from '@apps/o-auth/o-auth.types';
+import { ScopeService } from '@apps/o-auth/scope';
+import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
+import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-scope-detail',
@@ -13,12 +17,13 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
+        MatSelectModule, NgForOf,
     ],
 })
 export class ScopeDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
-    // ..
+    roles$: Observable<IamRole[]>;
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
@@ -34,8 +39,8 @@ export class ScopeDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly scopeService: ScopeService,
+        private readonly roleService: RoleService,
     )
     {
         super();
@@ -46,6 +51,7 @@ export class ScopeDetailComponent extends ViewDetailComponent
     init(): void
     {
         /**/
+        this.roles$ = this.roleService.roles$;
     }
 
     onSubmit($event): void
@@ -81,11 +87,14 @@ export class ScopeDetailComponent extends ViewDetailComponent
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            code: ['', [Validators.required, Validators.maxLength(20)]],
-            name: ['', [Validators.required, Validators.maxLength(255)]],
+            code: ['', [Validators.required, Validators.maxLength(63)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            roleIds: [],
         });
+        /* eslint-enable key-spacing */
     }
 
     async handleAction(action: Action): Promise<void>

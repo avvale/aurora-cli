@@ -1,8 +1,7 @@
-import { OAuthRefreshToken } from '../o-auth.types';
-import { refreshTokenColumnsConfig } from './refresh-token.columns-config';
-import { RefreshTokenService } from './refresh-token.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { OAuthRefreshToken } from '@apps/o-auth/o-auth.types';
+import { refreshTokenColumnsConfig, RefreshTokenService } from '@apps/o-auth/refresh-token';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const refreshTokenPaginationResolver: ResolveFn<GridData<OAuthRefreshToken>> = (

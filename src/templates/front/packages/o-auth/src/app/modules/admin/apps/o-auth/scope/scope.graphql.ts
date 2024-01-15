@@ -3,11 +3,16 @@ import gql from 'graphql-tag';
 export const fields = `
     code
     name
+    roleIds
     createdAt
     updatedAt
 `;
 
 export const relationsFields = `
+    iamGetRoles {
+        id
+        name
+    }
 `;
 
 // default methods
@@ -42,6 +47,12 @@ export const getQuery = gql`
     }
 `;
 
+export const getRelations = gql`
+    query OAuthScopeRelations {
+        ${relationsFields}
+    }
+`;
+
 export const findByIdQuery = gql`
     query OAuthFindScopeById (
         $id: ID
@@ -54,6 +65,22 @@ export const findByIdQuery = gql`
             id
             #FIELDS
         }
+    }
+`;
+
+export const findByIdWithRelationsQuery = gql`
+    query OAuthFindScopeById (
+        $id: ID
+        $constraint: QueryStatement
+    ) {
+        object: oAuthFindScopeById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+        ${relationsFields}
     }
 `;
 

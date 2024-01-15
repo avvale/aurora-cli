@@ -11,35 +11,43 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-detail.component.html",
-            "integrity": "sha1:d208afd52e85aabe2900fac0c4406a9b01e1ecd6"
+            "integrity": "sha1:e1f138ecda807598761772c3db1b9d7086d98607"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-detail.component.ts",
-            "integrity": "sha1:8954287d7c2360c3de00c0c572cbbcefe22f98ca"
+            "integrity": "sha1:4a53bb9ab3502da6785344d6d39db0fbc48eeb90"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-list.component.html",
-            "integrity": "sha1:2edd3829518ecc650e6dae1119fa6852ebd05122"
+            "integrity": "sha1:d39a6cde54e9a56eec713c873c2555a7c04b7ff2"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-list.component.ts",
-            "integrity": "sha1:6490a1975c3f061c9fe3544e093d818decdeed13"
+            "integrity": "sha1:b1589ec010e827ddf31d95444bb69e31486d9652"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.columns-config.ts",
-            "integrity": "sha1:d3a7cef3bea03b30bb2a99db2a41bff989c3b0b8"
+            "integrity": "sha1:1e9dcf6f272d71fcac4fba0929f258cf9e4eb7c9"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.graphql.ts",
-            "integrity": "sha1:1ddbfd0a87132e1fc9e649e2b775b208e5f70b3b"
+            "integrity": "sha1:ce45bc89621e266640bb51956a4a10876433b647"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.resolvers.ts",
-            "integrity": "sha1:556fad074a09dda4db5ea0b3e9e5ddcaa8d18e05"
+            "integrity": "sha1:080e83063edbba6f7e4efbcda6796f6350c10ac1"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.service.ts",
-            "integrity": "sha1:c03542016bea614dc4cca400021155ec438ce87b"
+            "integrity": "sha1:25f36e7a4f03707ac3356bd4cd12ccc692fe86de"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/application/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/application/public-api.ts",
+            "integrity": "sha1:077218cf66a11b4875f745a5d85e1da7d46c7379"
         }
     ]
 }

@@ -1,8 +1,7 @@
-import { OAuthAccessToken } from '../o-auth.types';
-import { accessTokenColumnsConfig } from './access-token.columns-config';
-import { AccessTokenService } from './access-token.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { accessTokenColumnsConfig, AccessTokenService } from '@apps/o-auth/access-token';
+import { OAuthAccessToken } from '@apps/o-auth/o-auth.types';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const accessTokenPaginationResolver: ResolveFn<GridData<OAuthAccessToken>> = (

@@ -1,8 +1,8 @@
-import { OAuthApplication } from '../o-auth.types';
-import { ApplicationService } from './application.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ApplicationService } from '@apps/o-auth/application';
+import { OAuthApplication } from '@apps/o-auth/o-auth.types';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
@@ -37,7 +37,6 @@ export class ApplicationDetailComponent extends ViewDetailComponent
 
     constructor(
         private readonly applicationService: ApplicationService,
-        protected readonly injector: Injector,
     )
     {
         super();
@@ -85,9 +84,9 @@ export class ApplicationDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            code: ['', [Validators.required, Validators.maxLength(50)]],
-            name: ['', [Validators.required, Validators.maxLength(255)]],
-            secret: ['', [Validators.required, Validators.maxLength(90)]],
+            code: ['', [Validators.required, Validators.maxLength(63)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            secret: ['', [Validators.required, Validators.maxLength(127)]],
             isMaster: false,
         });
     }

@@ -1,16 +1,15 @@
 import { ApplicationService } from '../application/application.service';
-import { OAuthApplication, OAuthClient, OAuthClientGrantType, OAuthScope } from '../o-auth.types';
-import { ClientService } from './client.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { Observable, lastValueFrom, takeUntil } from 'rxjs';
-
-// ---- customizations ----
-import { ScopeService } from '../scope/scope.service';
+import { OAuthApplication, OAuthClientGrantType, OAuthScope } from '../o-auth.types';
 import { KeyValuePipe, NgForOf } from '@angular/common';
-import { MatSelectModule } from '@angular/material/select';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { ClientService } from '@apps/o-auth/client';
+import { OAuthClient } from '@apps/o-auth/o-auth.types';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { ScopeService } from '../scope';
 
 @Component({
     selector       : 'o-auth-client-detail',
@@ -48,7 +47,6 @@ export class ClientDetailComponent extends ViewDetailComponent
     constructor(
         private readonly applicationService: ApplicationService,
         private readonly clientService: ClientService,
-        protected readonly injector: Injector,
         private readonly scopeService: ScopeService,
     )
     {
@@ -99,17 +97,17 @@ export class ClientDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            grantType: ['', [Validators.required]],
-            applicationIds: [],
-            name: ['', [Validators.required, Validators.maxLength(255)]],
-            secret: ['', [Validators.required, Validators.maxLength(90)]],
-            authUrl: ['', [Validators.maxLength(2048)]],
-            redirect: ['', [Validators.maxLength(2048)]],
+            grantType: [null, [Validators.required]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            secret: ['', [Validators.required, Validators.maxLength(127)]],
+            authUrl: ['', [Validators.maxLength(2046)]],
+            redirect: ['', [Validators.maxLength(2046)]],
             scopeOptions: [],
             expiredAccessToken: [null, [Validators.maxLength(10)]],
             expiredRefreshToken: [null, [Validators.maxLength(10)]],
             isActive: false,
             isMaster: false,
+            applicationIds: [],
         });
     }
 

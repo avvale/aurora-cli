@@ -17,16 +17,16 @@ aggregateProperties:
     nullable: false
   - name: code
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: false
     index: unique
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 127
     nullable: false
   - name: secret
     type: varchar
-    maxLength: 90
+    maxLength: 127
     nullable: false
   - name: isMaster
     type: boolean

@@ -3,12 +3,6 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 export const refreshTokenColumnsConfig: ColumnConfig[] = [
     {
         type       : ColumnDataType.STRING,
-        field      : 'accessTokenId',
-        sort       : 'accessTokenId',
-        translation: 'oAuth.AccessTokenId',
-    },
-    {
-        type       : ColumnDataType.STRING,
         field      : 'token',
         sort       : 'token',
         translation: 'oAuth.Token',

@@ -7,7 +7,7 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
-                    svgIcon=""
+                    svgIcon="mat_solid:ads_click"
                     class="icon-size-8 mr-2"
                 >
                 </mat-icon>
@@ -85,7 +85,7 @@
                         <input
                             matInput
                             formControlName="code"
-                            maxlength="20"
+                            maxlength="63"
                             required
                         >
                         <mat-error>{{ formErrors?.code | async }}</mat-error>
@@ -98,10 +98,28 @@
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="255"
+                            maxlength="127"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('oAuth.Roles') }}</mat-label>
+                        <mat-select
+                            formControlName="roleIds"
+                            multiple
+                        >
+                            <mat-option
+                                *ngFor="let role of roles$ | async"
+                                [value]="role.id"
+                            >
+                                {{ role.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.roleIds | async }}</mat-error>
                     </mat-form-field>
 
                 </div>

@@ -1,13 +1,13 @@
-import { OAuthApplication, OAuthClient, OAuthCreateClient, OAuthScope, OAuthUpdateClientById, OAuthUpdateClients } from '../o-auth.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, getRelations, paginationQuery, updateByIdMutation, updateMutation } from './client.graphql';
+import { ApplicationService } from '../application/application.service';
+import { OAuthApplication, OAuthScope } from '../o-auth.types';
+import { findByIdWithRelationsQuery, getRelations } from './client.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/o-auth/client';
+import { OAuthClient, OAuthCreateClient, OAuthUpdateClientById, OAuthUpdateClients } from '@apps/o-auth/o-auth.types';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-
-// ---- customizations ----
-import { ScopeService } from '../scope/scope.service';
-import { ApplicationService } from '../application/application.service';
+import { ScopeService } from '../scope';
 
 @Injectable({
     providedIn: 'root',

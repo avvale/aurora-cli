@@ -1,8 +1,7 @@
-import { OAuthApplication } from '../o-auth.types';
-import { applicationColumnsConfig } from './application.columns-config';
-import { ApplicationService } from './application.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { applicationColumnsConfig, ApplicationService } from '@apps/o-auth/application';
+import { OAuthApplication } from '@apps/o-auth/o-auth.types';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const applicationPaginationResolver: ResolveFn<GridData<OAuthApplication>> = (

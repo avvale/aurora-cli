@@ -13,4 +13,11 @@ export const scopeColumnsConfig: ColumnConfig[] = [
         sort       : 'name',
         translation: 'oAuth.Name',
     },
+    {
+        type       : ColumnDataType.STRING,
+        field      : 'roleIds',
+        sort       : 'roleIds',
+        translation: 'oAuth.RoleIds',
+        hidden     : true,
+    },
 ];

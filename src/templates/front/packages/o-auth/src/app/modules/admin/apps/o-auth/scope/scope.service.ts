@@ -1,7 +1,9 @@
-import { OAuthCreateScope, OAuthScope, OAuthUpdateScopeById, OAuthUpdateScopes } from '../o-auth.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './scope.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { IamRole } from '@apps/iam/iam.types';
+import { RoleService } from '@apps/iam/role/role.service';
+import { OAuthCreateScope, OAuthScope, OAuthUpdateScopeById, OAuthUpdateScopes } from '@apps/o-auth/o-auth.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, getRelations, paginationQuery, updateByIdMutation, updateMutation } from '@apps/o-auth/scope';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 
@@ -16,6 +18,7 @@ export class ScopeService
 
     constructor(
         private readonly graphqlService: GraphQLService,
+        private readonly roleService: RoleService,
     ) {}
 
     /**
@@ -112,6 +115,50 @@ export class ScopeService
             );
     }
 
+    findByIdWithRelations(
+        {
+            graphqlStatement = findByIdWithRelationsQuery,
+            id = '',
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        object: OAuthScope;
+        iamGetRoles: IamRole[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: OAuthScope;
+                iamGetRoles: IamRole[];
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                variables: {
+                    id,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.scopeSubject$.next(data.object);
+                    this.roleService.rolesSubject$.next(data.iamGetRoles);
+                }),
+            );
+    }
+
     find(
         {
             graphqlStatement = findQuery,
@@ -190,6 +237,38 @@ export class ScopeService
                 tap(data =>
                 {
                     this.scopesSubject$.next(data.objects);
+                }),
+            );
+    }
+
+    getRelations(
+        {
+            headers = {},
+        }: {
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        iamGetRoles: IamRole[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                iamGetRoles: IamRole[];
+            }>({
+                query    : getRelations,
+                variables: {},
+                context  : {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.roleService.rolesSubject$.next(data.iamGetRoles);
                 }),
             );
     }

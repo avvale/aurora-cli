@@ -1,10 +1,11 @@
-import { OAuthAccessToken } from '../o-auth.types';
-import { AccessTokenService } from './access-token.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AccessTokenService } from '@apps/o-auth/access-token';
+import { OAuthAccessToken } from '@apps/o-auth/o-auth.types';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-access-token-detail',
@@ -14,7 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatCheckboxModule,
+        MatCheckboxModule, MtxDatetimepickerModule,
     ],
 })
 export class AccessTokenDetailComponent extends ViewDetailComponent
@@ -37,7 +38,6 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
 
     constructor(
         private readonly accessTokenService: AccessTokenService,
-        protected readonly injector: Injector,
     )
     {
         super();
@@ -88,7 +88,7 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
             clientId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             accountId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
             token: ['', [Validators.required]],
-            name: ['', [Validators.maxLength(255)]],
+            name: ['', [Validators.maxLength(127)]],
             isRevoked: false,
             expiresAt: '',
         });

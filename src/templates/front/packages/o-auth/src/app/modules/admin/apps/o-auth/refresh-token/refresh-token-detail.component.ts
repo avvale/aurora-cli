@@ -1,10 +1,11 @@
-import { OAuthRefreshToken } from '../o-auth.types';
-import { RefreshTokenService } from './refresh-token.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { OAuthRefreshToken } from '@apps/o-auth/o-auth.types';
+import { RefreshTokenService } from '@apps/o-auth/refresh-token';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'o-auth-refresh-token-detail',
@@ -14,7 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatCheckboxModule,
+        MatCheckboxModule, MtxDatetimepickerModule,
     ],
 })
 export class RefreshTokenDetailComponent extends ViewDetailComponent
@@ -36,7 +37,6 @@ export class RefreshTokenDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly refreshTokenService: RefreshTokenService,
     )
     {

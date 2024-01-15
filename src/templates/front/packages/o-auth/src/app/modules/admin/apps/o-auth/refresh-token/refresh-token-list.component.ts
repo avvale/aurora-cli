@@ -1,7 +1,6 @@
-import { OAuthRefreshToken } from '../o-auth.types';
-import { refreshTokenColumnsConfig } from './refresh-token.columns-config';
-import { RefreshTokenService } from './refresh-token.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { OAuthRefreshToken } from '@apps/o-auth/o-auth.types';
+import { refreshTokenColumnsConfig, RefreshTokenService } from '@apps/o-auth/refresh-token';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -59,7 +58,6 @@ export class RefreshTokenListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,

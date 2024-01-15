@@ -1,9 +1,9 @@
-import { OAuthClient, OAuthScope } from '../o-auth.types';
-import { clientColumnsConfig } from './client.columns-config';
-import { ClientService } from './client.service';
+import { OAuthScope } from '../o-auth.types';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { clientColumnsConfig, ClientService } from '@apps/o-auth/client';
+import { OAuthClient } from '@apps/o-auth/o-auth.types';
+import { ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const clientPaginationResolver: ResolveFn<GridData<OAuthClient>> = (
     route: ActivatedRouteSnapshot,
@@ -74,7 +74,9 @@ export const clientEditResolver: ResolveFn<{
             id: route.paramMap.get('id'),
             constraint: {
                 include: [
-                    { association: 'applications' },
+                    {
+                        association: 'applications',
+                    },
                 ],
             },
         });

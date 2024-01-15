@@ -25,30 +25,30 @@ aggregateProperties:
     nullable: false
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 127
     nullable: false
   - name: secret
     type: varchar
-    maxLength: 90
+    maxLength: 127
     nullable: false
   - name: authUrl
     type: varchar
-    maxLength: 2048
+    maxLength: 2046
     nullable: true
   - name: redirect
     type: varchar
-    maxLength: 2048
+    maxLength: 2046
     nullable: true
   - name: scopeOptions
     type: json
     nullable: true
   - name: expiredAccessToken
-    type: int.unsigned
-    maxLength: 10
+    type: int
+    unsigned: true
     nullable: true
   - name: expiredRefreshToken
-    type: int.unsigned
-    maxLength: 10
+    type: int
+    unsigned: true
     nullable: true
   - name: isActive
     type: boolean
