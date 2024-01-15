@@ -37,6 +37,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
     #{{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}GridElementSelector
 >
     <au-grid-translations
+        [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
         [actions]="t('Actions')"
         [AND]="t('AND')"
         [clearFilters]="t('ClearFilters')"
@@ -44,7 +45,6 @@ handlebars.registerPartial('gridSelectElementWebComponent',
         [columns]="t('Columns')"
         [field]="t('Field')"
         [filter]="t('Filter')"
-        [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
         [operator]="t('Operator')"
         [OR]="t('OR')"
         [pleaseSelectField]="t('PleaseSelectField')"

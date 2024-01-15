@@ -9,7 +9,9 @@ handlebars.registerPartial('charInput',
     <input
         matInput
         formControlName="{{ toCamelCase property.name }}"
-        {{#if property.length}} maxlength="{{ property.length }}"{{/if}}
+        {{#if property.length}}
+        maxlength="{{ property.length }}"
+        {{/if}}
     >
     <mat-error>\\{{ formErrors?.{{ toCamelCase property.name }} | async }}</mat-error>
 </mat-form-field>`);
