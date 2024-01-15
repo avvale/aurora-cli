@@ -85,7 +85,7 @@
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="100"
+                            maxlength="127"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
@@ -98,6 +98,7 @@
                         <input
                             matInput
                             formControlName="image"
+                            maxlength="1022"
                         >
                         <mat-error>{{ formErrors?.image | async }}</mat-error>
                     </mat-form-field>
@@ -139,13 +140,13 @@
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class="col-2"
+                        class="col-8"
                     >
                         <mat-label>{{ t('common.CustomCode') }}</mat-label>
                         <input
                             matInput
                             formControlName="customCode"
-                            maxlength="10"
+                            maxlength="63"
                         >
                         <mat-error>{{ formErrors?.customCode | async }}</mat-error>
                     </mat-form-field>
@@ -162,14 +163,13 @@
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class="col-2"
+                        class="col-12"
                     >
                         <mat-label>{{ t('common.Sort') }}</mat-label>
                         <input
                             matInput
                             formControlName="sort"
                             type="number"
-                            maxlength="6"
                         >
                         <mat-error>{{ formErrors?.sort | async }}</mat-error>
                     </mat-form-field>

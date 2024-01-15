@@ -1,8 +1,6 @@
+import { AuditingHttpCommunicationMapper, AuditingHttpCommunicationResponse, AuditingRawSQLHttpCommunicationsQuery } from '@app/auditing/http-communication';
+import { AuditingRawSQLHttpCommunicationsService } from '@app/auditing/http-communication/application/raw-sql/auditing-raw-sql-http-communications.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { AuditingHttpCommunicationResponse } from '../../domain/auditing-http-communication.response';
-import { AuditingHttpCommunicationMapper } from '../../domain/auditing-http-communication.mapper';
-import { AuditingRawSQLHttpCommunicationsQuery } from './auditing-raw-sql-http-communications.query';
-import { AuditingRawSQLHttpCommunicationsService } from './auditing-raw-sql-http-communications.service';
 
 @QueryHandler(AuditingRawSQLHttpCommunicationsQuery)
 export class AuditingRawSQLHttpCommunicationsQueryHandler implements IQueryHandler<AuditingRawSQLHttpCommunicationsQuery>

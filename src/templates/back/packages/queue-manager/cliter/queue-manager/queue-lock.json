@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data.ts",
-            "integrity": "sha1:60bae4c29167164d6ae4520792a97b03b43f199e"
+            "integrity": "sha1:4e72c66cb9fedf2b9630fdf8356d36ed6f568e0c"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/sequelize/queue-manager-sequelize-queue.model.ts",
-            "integrity": "sha1:0813b893a25aabda4d5b41945358c91dfd7f0188"
+            "integrity": "sha1:c96445759d6fd720ec5c99f8ea487a228408ed12"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/sequelize/queue-manager-sequelize-queue.repository.ts",
@@ -351,11 +351,11 @@
         },
         {
             "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-prefix.ts",
-            "integrity": "sha1:44a4cce8af7ec0ee83ffdadaa9ff8a145989b8e2"
+            "integrity": "sha1:e04cfba1054308592e219298bc62a98b45d3ca2c"
         },
         {
             "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-name.ts",
-            "integrity": "sha1:de7ef2d2fdffdd1e65b95065515786e5d9f6d5ae"
+            "integrity": "sha1:1db85ae05efa17b333b6040c8e4958de2247131b"
         },
         {
             "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-created-at.ts",
@@ -463,7 +463,7 @@
         },
         {
             "path": "src/@api/queue-manager/queue/dto/queue-manager-queue.dto.ts",
-            "integrity": "sha1:9d5e7bf124c0d9c9e6aee23cdd0ecf464cd30165"
+            "integrity": "sha1:fdf0e4dd37b1391125fe2274a36dec6f04bc21aa"
         },
         {
             "path": "src/@api/queue-manager/queue/dto/queue-manager-create-queue.dto.ts",
@@ -479,6 +479,10 @@
         },
         {
             "path": "src/@api/queue-manager/queue/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/queue-manager/queue/dto/public-api.ts",
             "integrity": "sha1:fb9e2f97bd4f7a1087a4fd96c3afada0d0e60539"
         },
         {
@@ -671,11 +675,11 @@
         },
         {
             "path": "test/acceptance/queue-manager/queue.e2e-spec.ts",
-            "integrity": "sha1:e4d5300acbe2dc50e1d2b87859f26617612d652c"
+            "integrity": "sha1:5174ea3cd4464f3e39d8a92c0ab91d85a70d7f74"
         },
         {
             "path": "postman/queue-manager/queue-manager.queue.postman.json",
-            "integrity": "sha1:e0afadb3987e7adda5946ebb8a0f5319aae61777"
+            "integrity": "sha1:9b16dd3a003ae80539a951188adc438d735e2ca0"
         }
     ]
 }

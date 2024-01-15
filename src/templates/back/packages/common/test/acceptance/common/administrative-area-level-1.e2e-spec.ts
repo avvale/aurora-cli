@@ -2,8 +2,9 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { CommonModule } from '@api/common/common.module';
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { CommonIAdministrativeAreaLevel1Repository, commonMockAdministrativeAreaLevel1Data, CommonMockAdministrativeAreaLevel1Seeder } from '@app/common/administrative-area-level-1';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('administrative-area-level-1', () =>
                 CommonMockAdministrativeAreaLevel1Seeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Id must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Id must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1CountryId must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Code must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Code must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Name must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Name must be defined, can not be null');
             });
     });
 
@@ -150,23 +153,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Slug must be defined, can not be null');
-            });
-    });
-
-    test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1MapType property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/administrative-area-level-1/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                mapType: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1MapType must be defined, can not be null');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Slug must be defined, can not be null');
             });
     });
 
@@ -182,7 +169,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Id must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Id must be defined, can not be undefined');
             });
     });
 
@@ -198,7 +185,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1CountryId must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +201,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Code must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Code must be defined, can not be undefined');
             });
     });
 
@@ -230,7 +217,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Name must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Name must be defined, can not be undefined');
             });
     });
 
@@ -246,23 +233,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Slug must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1MapType property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/administrative-area-level-1/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                mapType: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1MapType must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Slug must be defined, can not be undefined');
             });
     });
 
@@ -278,7 +249,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Id is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Id is not allowed, must be a length of 36');
             });
     });
 
@@ -294,7 +265,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CountryId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1CountryId is not allowed, must be a length of 36');
             });
     });
 
@@ -310,39 +281,39 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Code is too large, has a maximum length of 8');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Code is too large, has a maximum length of 8');
             });
     });
 
-    test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1CustomCode is too large, has a maximum length of 10', () =>
+    test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1CustomCode is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/administrative-area-level-1/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                customCode: '***********',
+                customCode: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1CustomCode is too large, has a maximum length of 10');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1CustomCode is too large, has a maximum length of 63');
             });
     });
 
-    test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1Name is too large, has a maximum length of 100', () =>
+    test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1Name is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/common/administrative-area-level-1/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '*****************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Name is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Name is too large, has a maximum length of 127');
             });
     });
 
@@ -358,41 +329,10 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Slug is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Slug is too large, has a maximum length of 100');
             });
     });
 
-    test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1Zoom is too large, has a maximum length of 2', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/administrative-area-level-1/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                zoom: 111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Zoom is too large, has a maximum length of 2');
-            });
-    });
-
-    test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1Zoom must have a positive sign', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/administrative-area-level-1/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                zoom: -1,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('The numerical value for AdministrativeAreaLevel1Zoom must have a positive sign, this field does not accept negative values');
-            });
-    });
     test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1MapType has to be a enum option of ROADMAP, SATELLITE, HYBRID, TERRAIN', () =>
     {
         return request(app.getHttpServer())
@@ -405,7 +345,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1MapType has to be any of this options: ROADMAP, SATELLITE, HYBRID, TERRAIN');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1MapType has to be any of this options: ROADMAP, SATELLITE, HYBRID, TERRAIN');
             });
     });
     test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1Latitude is too large, has a maximum decimal integers length of 2', () =>
@@ -420,7 +360,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Latitude is too large, has a maximum length of 2 integers in');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Latitude is too large, has a maximum length of 2 integers in');
             });
     });
     test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1Longitude is too large, has a maximum decimal integers length of 3', () =>
@@ -435,7 +375,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Longitude is too large, has a maximum length of 3 integers in');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Longitude is too large, has a maximum length of 3 integers in');
             });
     });
     test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1Latitude is too large, has a maximum decimals length of 14', () =>
@@ -450,7 +390,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Latitude is too large, has a maximum length of 14 decimals in');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Latitude is too large, has a maximum length of 14 decimals in');
             });
     });
     test('/REST:POST common/administrative-area-level-1/create - Got 400 Conflict, AdministrativeAreaLevel1Longitude is too large, has a maximum decimals length of 14', () =>
@@ -465,7 +405,7 @@ describe('administrative-area-level-1', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AdministrativeAreaLevel1Longitude is too large, has a maximum length of 14 decimals in');
+                expect(res.body.message).toContain('Value for CommonAdministrativeAreaLevel1Longitude is too large, has a maximum length of 14 decimals in');
             });
     });
 

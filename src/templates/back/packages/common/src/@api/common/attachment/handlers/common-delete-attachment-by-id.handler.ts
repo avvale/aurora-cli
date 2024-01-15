@@ -1,10 +1,10 @@
 import { CommonAttachmentDto } from '@api/common/attachment';
-import { CommonAttachmentsService } from '@api/common/shared';
 import { CommonAttachment } from '@api/graphql';
 import { CommonDeleteAttachmentByIdCommand, CommonFindAttachmentByIdQuery } from '@app/common/attachment';
-import { CommonDeleteAttachmentLibraryByIdCommand } from '@app/common/attachment-library';
 import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
+import { CommonAttachmentsService } from '@api/common/shared';
+import { CommonDeleteAttachmentLibraryByIdCommand } from '@app/common/attachment-library';
 import * as _ from 'lodash';
 
 @Injectable()

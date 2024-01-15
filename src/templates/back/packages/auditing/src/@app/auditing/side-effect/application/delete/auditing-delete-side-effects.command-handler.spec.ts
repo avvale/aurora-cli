@@ -1,14 +1,11 @@
+import { AuditingDeleteSideEffectsCommand } from '@app/auditing/side-effect';
+import { AuditingDeleteSideEffectsCommandHandler } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effects.command-handler';
+import { AuditingDeleteSideEffectsService } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effects.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingDeleteSideEffectsCommandHandler } from './auditing-delete-side-effects.command-handler';
-import { AuditingDeleteSideEffectsCommand } from './auditing-delete-side-effects.command';
-import { AuditingDeleteSideEffectsService } from './auditing-delete-side-effects.service';
 
 describe('AuditingDeleteSideEffectsCommandHandler', () =>
 {
     let commandHandler: AuditingDeleteSideEffectsCommandHandler;
-    let service: AuditingDeleteSideEffectsService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('AuditingDeleteSideEffectsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingDeleteSideEffectsCommandHandler>(AuditingDeleteSideEffectsCommandHandler);
-        service = module.get<AuditingDeleteSideEffectsService>(AuditingDeleteSideEffectsService);
     });
 
     describe('main', () =>

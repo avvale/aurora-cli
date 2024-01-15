@@ -1,10 +1,7 @@
+import { AuditingISideEffectRepository, AuditingMockSideEffectRepository } from '@app/auditing/side-effect';
+import { AuditingFindSideEffectService } from '@app/auditing/side-effect/application/find/auditing-find-side-effect.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { AuditingFindSideEffectService } from './auditing-find-side-effect.service';
-import { AuditingISideEffectRepository } from '../../domain/auditing-side-effect.repository';
-import { AuditingMockSideEffectRepository } from '../../infrastructure/mock/auditing-mock-side-effect.repository';
 
 describe('AuditingFindSideEffectService', () =>
 {

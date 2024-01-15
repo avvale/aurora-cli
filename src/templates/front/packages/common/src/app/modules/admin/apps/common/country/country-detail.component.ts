@@ -1,11 +1,11 @@
-import { CommonAdministrativeArea, CommonCountry, CommonCountryMapType } from '../common.types';
-import { CountryService } from './country.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { Action, CoreCurrentLangService, CoreLang, Crumb, FlagLangComponent, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { KeyValuePipe, NgForOf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { CommonAdministrativeArea, CommonCountry, CommonCountryMapType } from '@apps/common/common.types';
+import { CountryService } from '@apps/common/country';
+import { Action, CoreCurrentLangService, CoreLang, Crumb, defaultDetailImports, FlagLangComponent, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'common-country-detail',
@@ -42,7 +42,6 @@ export class CountryDetailComponent extends ViewDetailComponent
     constructor(
         private readonly coreCurrentLangService: CoreCurrentLangService,
         private readonly countryService: CountryService,
-        protected readonly injector: Injector,
     )
     {
         super();
@@ -93,21 +92,21 @@ export class CountryDetailComponent extends ViewDetailComponent
             iso3166Alpha2: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
             iso3166Alpha3: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
             iso3166Numeric: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-            customCode: ['', [Validators.maxLength(10)]],
+            customCode: ['', [Validators.maxLength(63)]],
             prefix: ['', [Validators.maxLength(5)]],
-            image: ['', [Validators.maxLength(1024)]],
-            sort: [null, [Validators.maxLength(6)]],
+            image: ['', [Validators.maxLength(1022)]],
+            sort: null,
             administrativeAreas: [],
             latitude: null,
             longitude: null,
             zoom: [null, [Validators.maxLength(2)]],
-            mapType: [null, [Validators.required]],
-            langId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(100)]],
-            slug: ['', [Validators.required, Validators.maxLength(100)]],
-            administrativeAreaLevel1: ['', [Validators.maxLength(50)]],
-            administrativeAreaLevel2: ['', [Validators.maxLength(50)]],
-            administrativeAreaLevel3: ['', [Validators.maxLength(50)]],
+            mapType: null,
+            langId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            slug: ['', [Validators.required, Validators.maxLength(127)]],
+            administrativeAreaLevel1: ['', [Validators.maxLength(63)]],
+            administrativeAreaLevel2: ['', [Validators.maxLength(63)]],
+            administrativeAreaLevel3: ['', [Validators.maxLength(63)]],
         });
     }
 

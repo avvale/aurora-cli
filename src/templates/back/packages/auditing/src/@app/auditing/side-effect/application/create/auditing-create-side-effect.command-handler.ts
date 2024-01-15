@@ -1,33 +1,30 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { AuditingCreateSideEffectCommand } from './auditing-create-side-effect.command';
-import { AuditingCreateSideEffectService } from './auditing-create-side-effect.service';
+import { AuditingCreateSideEffectCommand } from '@app/auditing/side-effect';
+import { AuditingCreateSideEffectService } from '@app/auditing/side-effect/application/create/auditing-create-side-effect.service';
 import {
-    AuditingSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectModelName,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
     AuditingSideEffectAccountId,
+    AuditingSideEffectAuditableId,
+    AuditingSideEffectBaseUrl,
+    AuditingSideEffectBody,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectNewValue,
+    AuditingSideEffectId,
     AuditingSideEffectIp,
+    AuditingSideEffectIsRollback,
     AuditingSideEffectMethod,
-    AuditingSideEffectBaseUrl,
+    AuditingSideEffectModelName,
+    AuditingSideEffectModelPath,
+    AuditingSideEffectNewValue,
+    AuditingSideEffectOldValue,
+    AuditingSideEffectOperationId,
+    AuditingSideEffectOperationSort,
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
-    AuditingSideEffectBody,
-    AuditingSideEffectUserAgent,
-    AuditingSideEffectIsRollback,
     AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectCreatedAt,
-    AuditingSideEffectUpdatedAt,
-    AuditingSideEffectDeletedAt,
-} from '../../domain/value-objects';
+    AuditingSideEffectTags,
+    AuditingSideEffectUserAgent,
+} from '@app/auditing/side-effect/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(AuditingCreateSideEffectCommand)
 export class AuditingCreateSideEffectCommandHandler implements ICommandHandler<AuditingCreateSideEffectCommand>

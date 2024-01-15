@@ -66,7 +66,7 @@ export class CommonDeleteCountryByIdService
                         queryStatement: {
                             where: {
                                 countryId: country.id.value,
-                                langId   : contentLanguage.id,
+                                langId: contentLanguage.id,
                             },
                         },
                         deleteOptions: cQMetadata?.repositoryOptions,

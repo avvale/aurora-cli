@@ -1,24 +1,23 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { AuditingHttpCommunication, auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import {
-    AuditingHttpCommunicationId,
-    AuditingHttpCommunicationTags,
+    AuditingHttpCommunicationCreatedAt,
+    AuditingHttpCommunicationDeletedAt,
     AuditingHttpCommunicationEvent,
-    AuditingHttpCommunicationStatus,
-    AuditingHttpCommunicationMethod,
-    AuditingHttpCommunicationUrl,
     AuditingHttpCommunicationHttpRequest,
     AuditingHttpCommunicationHttpRequestRejected,
     AuditingHttpCommunicationHttpResponse,
     AuditingHttpCommunicationHttpResponseRejected,
+    AuditingHttpCommunicationId,
     AuditingHttpCommunicationIsReprocessing,
+    AuditingHttpCommunicationMethod,
     AuditingHttpCommunicationReprocessingHttpCommunicationId,
-    AuditingHttpCommunicationCreatedAt,
+    AuditingHttpCommunicationStatus,
+    AuditingHttpCommunicationTags,
     AuditingHttpCommunicationUpdatedAt,
-    AuditingHttpCommunicationDeletedAt,
-} from '../../domain/value-objects';
-import { AuditingHttpCommunication } from '../../domain/auditing-http-communication.aggregate';
-import { auditingMockHttpCommunicationData } from './auditing-mock-http-communication.data';
+    AuditingHttpCommunicationUrl,
+} from '@app/auditing/http-communication/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

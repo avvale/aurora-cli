@@ -30,8 +30,8 @@ export class CommonCreateAttachmentLibraryService
     async main(
         payload: {
             id: CommonAttachmentLibraryId;
-            filename: CommonAttachmentLibraryFilename;
             originFilename: CommonAttachmentLibraryOriginFilename;
+            filename: CommonAttachmentLibraryFilename;
             mimetype: CommonAttachmentLibraryMimetype;
             extension: CommonAttachmentLibraryExtension;
             relativePathSegments: CommonAttachmentLibraryRelativePathSegments;
@@ -47,8 +47,8 @@ export class CommonCreateAttachmentLibraryService
         // create aggregate with factory pattern
         const attachmentLibrary = CommonAttachmentLibrary.register(
             payload.id,
-            payload.filename,
             payload.originFilename,
+            payload.filename,
             payload.mimetype,
             payload.extension,
             payload.relativePathSegments,

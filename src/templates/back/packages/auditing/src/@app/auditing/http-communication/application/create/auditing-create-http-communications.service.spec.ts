@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingIHttpCommunicationRepository, AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication';
+import { AuditingCreateHttpCommunicationsService } from '@app/auditing/http-communication/application/create/auditing-create-http-communications.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { AuditingCreateHttpCommunicationsService } from './auditing-create-http-communications.service';
-import { AuditingIHttpCommunicationRepository } from '../../domain/auditing-http-communication.repository';
-import { AuditingMockHttpCommunicationRepository } from '../../infrastructure/mock/auditing-mock-http-communication.repository';
 
 describe('AuditingCreateHttpCommunicationsService', () =>
 {

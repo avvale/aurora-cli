@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('AuditingCreateSideEffectCommandHandler', () =>
 {
     let commandHandler: AuditingCreateSideEffectCommandHandler;
-    let service: AuditingCreateSideEffectService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('AuditingCreateSideEffectCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingCreateSideEffectCommandHandler>(AuditingCreateSideEffectCommandHandler);
-        service = module.get<AuditingCreateSideEffectService>(AuditingCreateSideEffectService);
     });
 
     describe('main', () =>

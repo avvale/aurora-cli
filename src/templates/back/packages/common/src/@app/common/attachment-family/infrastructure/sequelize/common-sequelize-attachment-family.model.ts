@@ -156,7 +156,7 @@ export class CommonAttachmentFamilyModel extends Model<CommonAttachmentFamilyMod
     @Column({
         field: 'code',
         allowNull: false,
-        type: DataTypes.STRING(25),
+        type: DataTypes.STRING(63),
     })
     code: string;
 
@@ -170,14 +170,14 @@ export class CommonAttachmentFamilyModel extends Model<CommonAttachmentFamilyMod
     @Column({
         field: 'width',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     width: number;
 
     @Column({
         field: 'height',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     height: number;
 
@@ -191,7 +191,7 @@ export class CommonAttachmentFamilyModel extends Model<CommonAttachmentFamilyMod
     @Column({
         field: 'quality',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     quality: number;
 

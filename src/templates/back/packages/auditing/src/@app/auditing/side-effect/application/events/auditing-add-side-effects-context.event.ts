@@ -1,11 +1,5 @@
+import { AuditingCreatedSideEffectEvent, AuditingCreatedSideEffectsEvent, AuditingDeletedSideEffectEvent, AuditingDeletedSideEffectsEvent, AuditingSideEffect, AuditingUpdatedSideEffectEvent, AuditingUpdatedSideEffectsEvent } from '@app/auditing/side-effect';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { AuditingSideEffect } from '../../domain/auditing-side-effect.aggregate';
-import { AuditingCreatedSideEffectEvent } from './auditing-created-side-effect.event';
-import { AuditingCreatedSideEffectsEvent } from './auditing-created-side-effects.event';
-import { AuditingUpdatedSideEffectEvent } from './auditing-updated-side-effect.event';
-import { AuditingUpdatedSideEffectsEvent } from './auditing-updated-side-effects.event';
-import { AuditingDeletedSideEffectEvent } from './auditing-deleted-side-effect.event';
-import { AuditingDeletedSideEffectsEvent } from './auditing-deleted-side-effects.event';
 
 export class AuditingAddSideEffectsContextEvent extends AggregateRoot
 {

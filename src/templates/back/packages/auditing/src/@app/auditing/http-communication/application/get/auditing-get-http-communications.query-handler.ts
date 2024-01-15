@@ -1,8 +1,6 @@
+import { AuditingGetHttpCommunicationsQuery, AuditingHttpCommunicationMapper, AuditingHttpCommunicationResponse } from '@app/auditing/http-communication';
+import { AuditingGetHttpCommunicationsService } from '@app/auditing/http-communication/application/get/auditing-get-http-communications.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { AuditingHttpCommunicationResponse } from '../../domain/auditing-http-communication.response';
-import { AuditingHttpCommunicationMapper } from '../../domain/auditing-http-communication.mapper';
-import { AuditingGetHttpCommunicationsQuery } from './auditing-get-http-communications.query';
-import { AuditingGetHttpCommunicationsService } from './auditing-get-http-communications.service';
 
 @QueryHandler(AuditingGetHttpCommunicationsQuery)
 export class AuditingGetHttpCommunicationsQueryHandler implements IQueryHandler<AuditingGetHttpCommunicationsQuery>
@@ -15,10 +13,12 @@ export class AuditingGetHttpCommunicationsQueryHandler implements IQueryHandler<
 
     async execute(query: AuditingGetHttpCommunicationsQuery): Promise<AuditingHttpCommunicationResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getHttpCommunicationsService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getHttpCommunicationsService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

@@ -137,14 +137,14 @@ export class CommonResourceModel extends Model<CommonResourceModel>
     @Column({
         field: 'code',
         allowNull: false,
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(63),
     })
     code: string;
 
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(127),
     })
     name: string;
 

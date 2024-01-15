@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { AuditingISideEffectRepository, AuditingSideEffect } from '@app/auditing/side-effect';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { AuditingISideEffectRepository } from '../../domain/auditing-side-effect.repository';
-import { AuditingSideEffect } from '../../domain/auditing-side-effect.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingRawSQLSideEffectsService

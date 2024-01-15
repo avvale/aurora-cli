@@ -38,7 +38,7 @@ export class AuditingCreateSideEffectsService
     ) {}
 
     async main(
-        sideEffects: {
+        payload: {
             id: AuditingSideEffectId;
             tags: AuditingSideEffectTags;
             modelPath: AuditingSideEffectModelPath;
@@ -65,7 +65,7 @@ export class AuditingCreateSideEffectsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateSideEffects = sideEffects.map(sideEffect => AuditingSideEffect.register(
+        const aggregateSideEffects = payload.map(sideEffect => AuditingSideEffect.register(
             sideEffect.id,
             sideEffect.tags,
             sideEffect.modelPath,

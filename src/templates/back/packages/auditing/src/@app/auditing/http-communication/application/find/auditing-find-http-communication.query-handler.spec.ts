@@ -1,12 +1,7 @@
+import { AuditingFindHttpCommunicationQuery, AuditingHttpCommunicationMapper, AuditingIHttpCommunicationRepository, AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication';
+import { AuditingFindHttpCommunicationQueryHandler } from '@app/auditing/http-communication/application/find/auditing-find-http-communication.query-handler';
+import { AuditingFindHttpCommunicationService } from '@app/auditing/http-communication/application/find/auditing-find-http-communication.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingFindHttpCommunicationQueryHandler } from './auditing-find-http-communication.query-handler';
-import { AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.repository';
-import { AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication/domain/auditing-http-communication.repository';
-import { AuditingHttpCommunicationMapper } from '@app/auditing/http-communication/domain/auditing-http-communication.mapper';
-import { AuditingFindHttpCommunicationQuery } from './auditing-find-http-communication.query';
-import { AuditingFindHttpCommunicationService } from './auditing-find-http-communication.service';
 
 describe('AuditingFindHttpCommunicationQueryHandler', () =>
 {

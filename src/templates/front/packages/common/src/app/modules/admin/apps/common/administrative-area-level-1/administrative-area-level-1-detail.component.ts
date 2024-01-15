@@ -1,8 +1,9 @@
-import { CommonAdministrativeAreaLevel1 } from '../common.types';
-import { AdministrativeAreaLevel1Service } from './administrative-area-level-1.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { AdministrativeAreaLevel1Service } from '@apps/common/administrative-area-level-1';
+import { CommonAdministrativeAreaLevel1 } from '@apps/common/common.types';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
@@ -14,7 +15,7 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatSelectModule,
+        MatSelectModule, NgForOf,
     ],
 })
 export class AdministrativeAreaLevel1DetailComponent extends ViewDetailComponent
@@ -37,7 +38,6 @@ export class AdministrativeAreaLevel1DetailComponent extends ViewDetailComponent
 
     constructor(
         private readonly administrativeAreaLevel1Service: AdministrativeAreaLevel1Service,
-        protected readonly injector: Injector,
     )
     {
         super();
@@ -85,10 +85,10 @@ export class AdministrativeAreaLevel1DetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            countryId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            countryId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             code: ['', [Validators.required, Validators.maxLength(8)]],
-            customCode: ['', [Validators.maxLength(10)]],
-            name: ['', [Validators.required, Validators.maxLength(100)]],
+            customCode: ['', [Validators.maxLength(63)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
             slug: ['', [Validators.required, Validators.maxLength(100)]],
             latitude: null,
             longitude: null,

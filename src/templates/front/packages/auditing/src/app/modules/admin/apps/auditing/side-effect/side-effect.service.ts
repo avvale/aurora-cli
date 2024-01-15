@@ -1,7 +1,7 @@
-import { AuditingCreateSideEffect, AuditingSideEffect, AuditingUpdateSideEffectById, AuditingUpdateSideEffects } from '../auditing.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, rollbackSideEffectMutation, updateByIdMutation, updateMutation } from './side-effect.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { AuditingCreateSideEffect, AuditingSideEffect, AuditingUpdateSideEffectById, AuditingUpdateSideEffects } from '@apps/auditing/auditing.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, rollbackSideEffectMutation, updateByIdMutation, updateMutation } from '@apps/auditing/side-effect';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 

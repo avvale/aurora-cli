@@ -1,10 +1,7 @@
+import { auditingMockHttpCommunicationData, AuditingUpsertHttpCommunicationCommand } from '@app/auditing/http-communication';
+import { AuditingUpsertHttpCommunicationCommandHandler } from '@app/auditing/http-communication/application/upsert/auditing-upsert-http-communication.command-handler';
+import { AuditingUpsertHttpCommunicationService } from '@app/auditing/http-communication/application/upsert/auditing-upsert-http-communication.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.data';
-import { AuditingUpsertHttpCommunicationCommandHandler } from './auditing-upsert-http-communication.command-handler';
-import { AuditingUpsertHttpCommunicationCommand } from './auditing-upsert-http-communication.command';
-import { AuditingUpsertHttpCommunicationService } from './auditing-upsert-http-communication.service';
 
 describe('AuditingUpsertHttpCommunicationCommandHandler', () =>
 {

@@ -4,7 +4,7 @@ export class AuditingHttpCommunicationTags extends JsonValueObject
 {
     public readonly type: string = 'AuditingHttpCommunicationTags';
 
-    constructor(value: any, validationRules: ValidationRules = {})
+    constructor(value: any[], validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : 'AuditingHttpCommunicationTags',

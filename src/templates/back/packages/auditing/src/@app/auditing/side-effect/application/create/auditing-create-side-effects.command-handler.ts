@@ -1,33 +1,30 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { AuditingCreateSideEffectsCommand } from './auditing-create-side-effects.command';
-import { AuditingCreateSideEffectsService } from './auditing-create-side-effects.service';
+import { AuditingCreateSideEffectsCommand } from '@app/auditing/side-effect';
+import { AuditingCreateSideEffectsService } from '@app/auditing/side-effect/application/create/auditing-create-side-effects.service';
 import {
-    AuditingSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectModelName,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
     AuditingSideEffectAccountId,
+    AuditingSideEffectAuditableId,
+    AuditingSideEffectBaseUrl,
+    AuditingSideEffectBody,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectNewValue,
+    AuditingSideEffectId,
     AuditingSideEffectIp,
+    AuditingSideEffectIsRollback,
     AuditingSideEffectMethod,
-    AuditingSideEffectBaseUrl,
+    AuditingSideEffectModelName,
+    AuditingSideEffectModelPath,
+    AuditingSideEffectNewValue,
+    AuditingSideEffectOldValue,
+    AuditingSideEffectOperationId,
+    AuditingSideEffectOperationSort,
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
-    AuditingSideEffectBody,
-    AuditingSideEffectUserAgent,
-    AuditingSideEffectIsRollback,
     AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectCreatedAt,
-    AuditingSideEffectUpdatedAt,
-    AuditingSideEffectDeletedAt,
-} from '../../domain/value-objects';
+    AuditingSideEffectTags,
+    AuditingSideEffectUserAgent,
+} from '@app/auditing/side-effect/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(AuditingCreateSideEffectsCommand)
 export class AuditingCreateSideEffectsCommandHandler implements ICommandHandler<AuditingCreateSideEffectsCommand>

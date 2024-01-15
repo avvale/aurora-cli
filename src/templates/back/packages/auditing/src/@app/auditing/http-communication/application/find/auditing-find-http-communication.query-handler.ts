@@ -1,8 +1,6 @@
+import { AuditingFindHttpCommunicationQuery, AuditingHttpCommunicationMapper, AuditingHttpCommunicationResponse } from '@app/auditing/http-communication';
+import { AuditingFindHttpCommunicationService } from '@app/auditing/http-communication/application/find/auditing-find-http-communication.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { AuditingHttpCommunicationResponse } from '../../domain/auditing-http-communication.response';
-import { AuditingHttpCommunicationMapper } from '../../domain/auditing-http-communication.mapper';
-import { AuditingFindHttpCommunicationQuery } from './auditing-find-http-communication.query';
-import { AuditingFindHttpCommunicationService } from './auditing-find-http-communication.service';
 
 @QueryHandler(AuditingFindHttpCommunicationQuery)
 export class AuditingFindHttpCommunicationQueryHandler implements IQueryHandler<AuditingFindHttpCommunicationQuery>

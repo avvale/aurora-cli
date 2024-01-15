@@ -18,7 +18,7 @@ type CommonAdministrativeAreaLevel1
     latitude: GraphQLFloat
     longitude: GraphQLFloat
     zoom: GraphQLInt
-    mapType: CommonAdministrativeAreaLevel1MapType!
+    mapType: CommonAdministrativeAreaLevel1MapType
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -35,7 +35,7 @@ input CommonCreateAdministrativeAreaLevel1Input
     latitude: GraphQLFloat
     longitude: GraphQLFloat
     zoom: GraphQLInt
-    mapType: CommonAdministrativeAreaLevel1MapType!
+    mapType: CommonAdministrativeAreaLevel1MapType
 }
 
 input CommonUpdateAdministrativeAreaLevel1ByIdInput

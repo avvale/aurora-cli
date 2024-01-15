@@ -1,10 +1,10 @@
 import { KeyValuePipe, NgForOf } from '@angular/common';
-import { AuditingSideEffect, AuditingSideEffectEvent } from '../auditing.types';
-import { SideEffectService } from './side-effect.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { AuditingSideEffect, AuditingSideEffectEvent} from '@apps/auditing/auditing.types';
+import { SideEffectService } from '@apps/auditing/side-effect';
 import { Action, CanPipe, Crumb, defaultDetailImports, IsObjectEmptyPipe, log, mapActions, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
@@ -39,11 +39,10 @@ export class SideEffectDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		protected readonly injector: Injector,
-		private readonly sideEffectService: SideEffectService,
+        private readonly sideEffectService: SideEffectService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of
@@ -89,23 +88,23 @@ export class SideEffectDetailComponent extends ViewDetailComponent
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             tags: null,
-            modelPath: ['', [Validators.required, Validators.maxLength(1023)]],
+            modelPath: ['', [Validators.required, Validators.maxLength(1022)]],
             modelName: ['', [Validators.required, Validators.maxLength(255)]],
             operationId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
-            operationSort: [null, [Validators.maxLength(2)]],
+            operationSort: null,
             accountId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            email: ['', [Validators.required, Validators.maxLength(120)]],
+            email: ['', [Validators.required, Validators.maxLength(127)]],
             event: ['', [Validators.required]],
             auditableId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             oldValue: null,
             newValue: null,
             ip: ['', [Validators.maxLength(19)]],
             method: ['', [Validators.required]],
-            baseUrl: ['', [Validators.maxLength(2047)]],
+            baseUrl: ['', [Validators.maxLength(2046)]],
             params: null,
             query: null,
             body: null,
-            userAgent: ['', [Validators.maxLength(1023)]],
+            userAgent: ['', [Validators.maxLength(1022)]],
             isRollback: false,
             rollbackSideEffectId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
         });
@@ -186,7 +185,7 @@ export class SideEffectDetailComponent extends ViewDetailComponent
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-            /* #endregion common actions */
+                /* #endregion common actions */
 
             // ---- customizations ----
             case 'auditing::sideEffect.detail.rollback':

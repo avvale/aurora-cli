@@ -10,7 +10,7 @@ export class CommonAttachmentFamilyCode extends StringValueObject
             name       : 'CommonAttachmentFamilyCode',
             nullable   : false,
             undefinable: false,
-            maxLength  : 25,
+            maxLength  : 63,
         }, validationRules));
     }
 }

@@ -2,7 +2,7 @@ export class AuditingCreatedHttpCommunicationEvent
 {
     constructor(
         public readonly id: string,
-        public readonly tags: any,
+        public readonly tags: string[],
         public readonly event: string,
         public readonly status: number,
         public readonly method: string,

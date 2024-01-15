@@ -10,7 +10,6 @@ export class CommonCountrySort extends SmallintValueObject
             name       : 'CommonCountrySort',
             nullable   : true,
             undefinable: true,
-            maxLength  : 6,
             unsigned   : true,
         }, validationRules));
     }

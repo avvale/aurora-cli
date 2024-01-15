@@ -10,7 +10,6 @@ export class CommonAttachmentSort extends SmallintValueObject
             name       : 'CommonAttachmentSort',
             nullable   : true,
             undefinable: true,
-            maxLength  : 6,
             unsigned   : true,
         }, validationRules));
     }

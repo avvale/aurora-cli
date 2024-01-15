@@ -16,7 +16,7 @@ export class CommonCreateCountriesCommand
             latitude?: number;
             longitude?: number;
             zoom?: number;
-            mapType: string;
+            mapType?: string;
             availableLangs?: any;
             langId: string;
             name: string;

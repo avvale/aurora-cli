@@ -11,15 +11,15 @@ export class CommonAttachmentLibraryDto
 
     @ApiProperty({
         type       : String,
-        description: 'filename [input here api field description]',
-    })
-    filename: string;
-
-    @ApiProperty({
-        type       : String,
         description: 'originFilename [input here api field description]',
     })
     originFilename: string;
+
+    @ApiProperty({
+        type       : String,
+        description: 'filename [input here api field description]',
+    })
+    filename: string;
 
     @ApiProperty({
         type       : String,

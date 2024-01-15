@@ -10,7 +10,7 @@ export class AuditingSideEffectBaseUrl extends StringValueObject
             name       : 'AuditingSideEffectBaseUrl',
             nullable   : true,
             undefinable: true,
-            maxLength  : 2047,
+            maxLength  : 2046,
         }, validationRules));
     }
 }

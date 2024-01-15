@@ -29,14 +29,14 @@ export class QueueManagerQueueModel extends Model<QueueManagerQueueModel>
     @Column({
         field: 'prefix',
         allowNull: false,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
     })
     prefix: string;
 
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
     })
     name: string;
 

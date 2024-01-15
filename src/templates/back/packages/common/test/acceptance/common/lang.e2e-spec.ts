@@ -365,51 +365,51 @@ describe('lang', () =>
             });
     });
 
-    test('/REST:POST common/lang/create - Got 400 Conflict, LangName is too large, has a maximum length of 100', () =>
+    test('/REST:POST common/lang/create - Got 400 Conflict, LangName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/common/lang/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '*****************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonLangName is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonLangName is too large, has a maximum length of 127');
             });
     });
 
-    test('/REST:POST common/lang/create - Got 400 Conflict, LangCustomCode is too large, has a maximum length of 10', () =>
+    test('/REST:POST common/lang/create - Got 400 Conflict, LangImage is too large, has a maximum length of 1022', () =>
     {
         return request(app.getHttpServer())
             .post('/common/lang/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                customCode: '***********',
+                image: '***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonLangCustomCode is too large, has a maximum length of 10');
+                expect(res.body.message).toContain('Value for CommonLangImage is too large, has a maximum length of 1022');
             });
     });
 
-    test('/REST:POST common/lang/create - Got 400 Conflict, LangSort is too large, has a maximum length of 6', () =>
+    test('/REST:POST common/lang/create - Got 400 Conflict, LangCustomCode is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/lang/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                sort: 1111111,
+                customCode: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonLangSort is too large, has a maximum length of 6');
+                expect(res.body.message).toContain('Value for CommonLangCustomCode is too large, has a maximum length of 63');
             });
     });
 

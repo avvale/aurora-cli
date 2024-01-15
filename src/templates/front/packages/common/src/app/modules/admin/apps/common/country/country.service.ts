@@ -1,7 +1,8 @@
-import { CommonCountry, CommonCreateCountry, CommonUpdateCountries, CommonUpdateCountryById } from '../common.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './country.graphql';
+import { administrativeAreasCountryQuery } from './country.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { CommonCountry, CommonCreateCountry, CommonUpdateCountries, CommonUpdateCountryById } from '@apps/common/common.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/common/country';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 
@@ -329,5 +330,42 @@ export class CountryService
                     headers,
                 },
             });
+    }
+
+    // Queries additionalApis
+    administrativeAreasCountry(
+        {
+            graphqlStatement = administrativeAreasCountryQuery,
+            query = {},
+            constraint = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+        } = {},
+    ): Observable<{
+        objects: CommonCountry[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                objects: CommonCountry[];
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    query,
+                    constraint,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.countriesSubject$.next(data.objects);
+                }),
+            );
     }
 }

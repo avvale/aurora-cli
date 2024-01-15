@@ -5,13 +5,13 @@ export const langColumnsConfig: ColumnConfig[] = [
         type       : ColumnDataType.STRING,
         field      : 'name',
         sort       : 'name',
-        translation: 'Name',
+        translation: 'common.Name',
     },
     {
         type       : ColumnDataType.STRING,
         field      : 'image',
         sort       : 'image',
-        translation: 'Image',
+        translation: 'common.Image',
     },
     {
         type       : ColumnDataType.STRING,
@@ -38,7 +38,7 @@ export const langColumnsConfig: ColumnConfig[] = [
         translation: 'common.CustomCode',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.ENUM,
         field      : 'dir',
         sort       : 'dir',
         translation: 'common.Dir',

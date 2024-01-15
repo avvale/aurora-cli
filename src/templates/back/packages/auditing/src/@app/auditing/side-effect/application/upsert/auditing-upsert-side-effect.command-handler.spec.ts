@@ -1,10 +1,7 @@
+import { auditingMockSideEffectData, AuditingUpsertSideEffectCommand } from '@app/auditing/side-effect';
+import { AuditingUpsertSideEffectCommandHandler } from '@app/auditing/side-effect/application/upsert/auditing-upsert-side-effect.command-handler';
+import { AuditingUpsertSideEffectService } from '@app/auditing/side-effect/application/upsert/auditing-upsert-side-effect.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { auditingMockSideEffectData } from '@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.data';
-import { AuditingUpsertSideEffectCommandHandler } from './auditing-upsert-side-effect.command-handler';
-import { AuditingUpsertSideEffectCommand } from './auditing-upsert-side-effect.command';
-import { AuditingUpsertSideEffectService } from './auditing-upsert-side-effect.service';
 
 describe('AuditingUpsertSideEffectCommandHandler', () =>
 {

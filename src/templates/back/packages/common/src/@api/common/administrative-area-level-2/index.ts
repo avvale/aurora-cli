@@ -30,7 +30,7 @@ export { CommonUpsertAdministrativeAreaLevel2Controller } from './controllers/co
 export { CommonDeleteAdministrativeAreaLevel2ByIdController } from './controllers/common-delete-administrative-area-level-2-by-id.controller';
 export { CommonDeleteAdministrativeAreasLevel2Controller } from './controllers/common-delete-administrative-areas-level-2.controller';
 
-// exports resolvers
+// export resolvers
 export { CommonCreateAdministrativeAreaLevel2Resolver } from './resolvers/common-create-administrative-area-level-2.resolver';
 export { CommonCreateAdministrativeAreasLevel2Resolver } from './resolvers/common-create-administrative-areas-level-2.resolver';
 export { CommonPaginateAdministrativeAreasLevel2Resolver } from './resolvers/common-paginate-administrative-areas-level-2.resolver';
@@ -43,7 +43,7 @@ export { CommonUpsertAdministrativeAreaLevel2Resolver } from './resolvers/common
 export { CommonDeleteAdministrativeAreaLevel2ByIdResolver } from './resolvers/common-delete-administrative-area-level-2-by-id.resolver';
 export { CommonDeleteAdministrativeAreasLevel2Resolver } from './resolvers/common-delete-administrative-areas-level-2.resolver';
 
-// controllers
+// import controllers
 import { CommonCreateAdministrativeAreaLevel2Controller } from './controllers/common-create-administrative-area-level-2.controller';
 import { CommonCreateAdministrativeAreasLevel2Controller } from './controllers/common-create-administrative-areas-level-2.controller';
 import { CommonPaginateAdministrativeAreasLevel2Controller } from './controllers/common-paginate-administrative-areas-level-2.controller';
@@ -56,7 +56,7 @@ import { CommonUpsertAdministrativeAreaLevel2Controller } from './controllers/co
 import { CommonDeleteAdministrativeAreaLevel2ByIdController } from './controllers/common-delete-administrative-area-level-2-by-id.controller';
 import { CommonDeleteAdministrativeAreasLevel2Controller } from './controllers/common-delete-administrative-areas-level-2.controller';
 
-// resolvers
+// import resolvers
 import { CommonCreateAdministrativeAreaLevel2Resolver } from './resolvers/common-create-administrative-area-level-2.resolver';
 import { CommonCreateAdministrativeAreasLevel2Resolver } from './resolvers/common-create-administrative-areas-level-2.resolver';
 import { CommonPaginateAdministrativeAreasLevel2Resolver } from './resolvers/common-paginate-administrative-areas-level-2.resolver';
@@ -69,7 +69,7 @@ import { CommonUpsertAdministrativeAreaLevel2Resolver } from './resolvers/common
 import { CommonDeleteAdministrativeAreaLevel2ByIdResolver } from './resolvers/common-delete-administrative-area-level-2-by-id.resolver';
 import { CommonDeleteAdministrativeAreasLevel2Resolver } from './resolvers/common-delete-administrative-areas-level-2.resolver';
 
-// handlers
+// import handlers
 import { CommonCreateAdministrativeAreaLevel2Handler } from './handlers/common-create-administrative-area-level-2.handler';
 import { CommonCreateAdministrativeAreasLevel2Handler } from './handlers/common-create-administrative-areas-level-2.handler';
 import { CommonPaginateAdministrativeAreasLevel2Handler } from './handlers/common-paginate-administrative-areas-level-2.handler';
@@ -82,7 +82,7 @@ import { CommonUpsertAdministrativeAreaLevel2Handler } from './handlers/common-u
 import { CommonDeleteAdministrativeAreaLevel2ByIdHandler } from './handlers/common-delete-administrative-area-level-2-by-id.handler';
 import { CommonDeleteAdministrativeAreasLevel2Handler } from './handlers/common-delete-administrative-areas-level-2.handler';
 
-// seeder
+// import seeder
 import { CommonAdministrativeAreaLevel2Seeder } from './seeder/common-administrative-area-level-2.seeder';
 
 export const CommonAdministrativeAreaLevel2ApiControllers = [

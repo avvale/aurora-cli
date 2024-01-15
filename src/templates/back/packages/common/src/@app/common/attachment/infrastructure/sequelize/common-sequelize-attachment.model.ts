@@ -175,7 +175,7 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
     @Column({
         field: 'sort',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     sort: number;
 
@@ -210,7 +210,7 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
     @Column({
         field: 'mimetype',
         allowNull: false,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
     })
     mimetype: string;
 
@@ -231,21 +231,21 @@ export class CommonAttachmentModel extends Model<CommonAttachmentModel>
     @Column({
         field: 'width',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     width: number;
 
     @Column({
         field: 'height',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     height: number;
 
     @Column({
         field: 'size',
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     size: number;
 

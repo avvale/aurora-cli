@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { AuditingIHttpCommunicationRepository, AuditingMockHttpCommunicationRepository, AuditingPaginateHttpCommunicationsQuery } from '@app/auditing/http-communication';
+import { AuditingPaginateHttpCommunicationsQueryHandler } from '@app/auditing/http-communication/application/paginate/auditing-paginate-http-communications.query-handler';
+import { AuditingPaginateHttpCommunicationsService } from '@app/auditing/http-communication/application/paginate/auditing-paginate-http-communications.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingPaginateHttpCommunicationsQueryHandler } from './auditing-paginate-http-communications.query-handler';
-import { AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.repository';
-import { AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication/domain/auditing-http-communication.repository';
-import { AuditingHttpCommunicationMapper } from '@app/auditing/http-communication/domain/auditing-http-communication.mapper';
-import { AuditingPaginateHttpCommunicationsQuery } from './auditing-paginate-http-communications.query';
-import { AuditingPaginateHttpCommunicationsService } from './auditing-paginate-http-communications.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingPaginateHttpCommunicationsQueryHandler', () =>
 {
     let queryHandler: AuditingPaginateHttpCommunicationsQueryHandler;
     let service: AuditingPaginateHttpCommunicationsService;
     let repository: AuditingMockHttpCommunicationRepository;
-    let mapper: AuditingHttpCommunicationMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('AuditingPaginateHttpCommunicationsQueryHandler', () =>
         queryHandler = module.get<AuditingPaginateHttpCommunicationsQueryHandler>(AuditingPaginateHttpCommunicationsQueryHandler);
         service = module.get<AuditingPaginateHttpCommunicationsService>(AuditingPaginateHttpCommunicationsService);
         repository = <AuditingMockHttpCommunicationRepository>module.get<AuditingIHttpCommunicationRepository>(AuditingIHttpCommunicationRepository);
-        mapper = new AuditingHttpCommunicationMapper();
     });
 
     describe('main', () =>

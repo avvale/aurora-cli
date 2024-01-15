@@ -10,7 +10,7 @@ export class QueueManagerJobRegistryQueueName extends StringValueObject
             name       : 'QueueManagerJobRegistryQueueName',
             nullable   : false,
             undefinable: false,
-            maxLength  : 50,
+            maxLength  : 63,
         }, validationRules));
     }
 }

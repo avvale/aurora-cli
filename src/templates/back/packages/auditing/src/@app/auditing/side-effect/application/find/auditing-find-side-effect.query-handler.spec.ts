@@ -1,12 +1,7 @@
+import { AuditingFindSideEffectQuery, AuditingISideEffectRepository, AuditingMockSideEffectRepository, AuditingSideEffectMapper } from '@app/auditing/side-effect';
+import { AuditingFindSideEffectQueryHandler } from '@app/auditing/side-effect/application/find/auditing-find-side-effect.query-handler';
+import { AuditingFindSideEffectService } from '@app/auditing/side-effect/application/find/auditing-find-side-effect.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingFindSideEffectQueryHandler } from './auditing-find-side-effect.query-handler';
-import { AuditingMockSideEffectRepository } from '@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.repository';
-import { AuditingISideEffectRepository } from '@app/auditing/side-effect/domain/auditing-side-effect.repository';
-import { AuditingSideEffectMapper } from '@app/auditing/side-effect/domain/auditing-side-effect.mapper';
-import { AuditingFindSideEffectQuery } from './auditing-find-side-effect.query';
-import { AuditingFindSideEffectService } from './auditing-find-side-effect.service';
 
 describe('AuditingFindSideEffectQueryHandler', () =>
 {

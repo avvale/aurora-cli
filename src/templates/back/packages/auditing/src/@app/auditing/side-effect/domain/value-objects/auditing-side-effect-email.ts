@@ -10,7 +10,7 @@ export class AuditingSideEffectEmail extends StringValueObject
             name       : 'AuditingSideEffectEmail',
             nullable   : false,
             undefinable: false,
-            maxLength  : 120,
+            maxLength  : 127,
         }, validationRules));
     }
 }

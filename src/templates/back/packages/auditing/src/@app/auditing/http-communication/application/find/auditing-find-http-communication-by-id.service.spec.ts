@@ -1,12 +1,8 @@
+import { AuditingIHttpCommunicationRepository, auditingMockHttpCommunicationData, AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication';
+import { AuditingFindHttpCommunicationByIdService } from '@app/auditing/http-communication/application/find/auditing-find-http-communication-by-id.service';
+import { AuditingHttpCommunicationId } from '@app/auditing/http-communication/domain/value-objects';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.data';
-import { AuditingFindHttpCommunicationByIdService } from './auditing-find-http-communication-by-id.service';
-import { AuditingHttpCommunicationId } from '../../domain/value-objects';
-import { AuditingIHttpCommunicationRepository } from '../../domain/auditing-http-communication.repository';
-import { AuditingMockHttpCommunicationRepository } from '../../infrastructure/mock/auditing-mock-http-communication.repository';
 
 describe('AuditingFindHttpCommunicationByIdService', () =>
 {

@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { AuditingPaginateSideEffectsQuery } from '@app/auditing/side-effect';
+import { AuditingPaginateSideEffectsService } from '@app/auditing/side-effect/application/paginate/auditing-paginate-side-effects.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { AuditingPaginateSideEffectsQuery } from './auditing-paginate-side-effects.query';
-import { AuditingPaginateSideEffectsService } from './auditing-paginate-side-effects.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(AuditingPaginateSideEffectsQuery)
 export class AuditingPaginateSideEffectsQueryHandler implements IQueryHandler<AuditingPaginateSideEffectsQuery>

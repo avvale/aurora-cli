@@ -1,12 +1,7 @@
+import { AuditingHttpCommunicationMapper, AuditingIHttpCommunicationRepository, AuditingMockHttpCommunicationRepository, AuditingRawSQLHttpCommunicationsQuery } from '@app/auditing/http-communication';
+import { AuditingRawSQLHttpCommunicationsQueryHandler } from '@app/auditing/http-communication/application/raw-sql/auditing-raw-sql-http-communications.query-handler';
+import { AuditingRawSQLHttpCommunicationsService } from '@app/auditing/http-communication/application/raw-sql/auditing-raw-sql-http-communications.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.repository';
-import { AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication/domain/auditing-http-communication.repository';
-import { AuditingHttpCommunicationMapper } from '@app/auditing/http-communication/domain/auditing-http-communication.mapper';
-import { AuditingRawSQLHttpCommunicationsQueryHandler } from './auditing-raw-sql-http-communications.query-handler';
-import { AuditingRawSQLHttpCommunicationsQuery } from './auditing-raw-sql-http-communications.query';
-import { AuditingRawSQLHttpCommunicationsService } from './auditing-raw-sql-http-communications.service';
 
 describe('RawSQLHttpCommunicationsQueryHandler', () =>
 {

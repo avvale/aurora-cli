@@ -1,10 +1,8 @@
+import { AuditingRollbackSideEffectHandler } from '@api/auditing/side-effect';
+import { AuditingUpdateSideEffectByIdInput } from '@api/graphql';
 import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { Auth } from '@aurora/decorators';
-
-// @app
-import { AuditingRollbackSideEffectHandler } from '../handlers/auditing-rollback-side-effect.handler';
-import { AuditingUpdateSideEffectByIdInput } from '@api/graphql';
 
 @Resolver()
 @Auth('auditing.sideEffect.rollback')

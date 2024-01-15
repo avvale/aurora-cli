@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'AuditingSideEffect',
@@ -44,14 +44,14 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'tags',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING()),
     })
-    tags: any;
+    tags: string[];
 
     @Column({
         field: 'modelPath',
         allowNull: false,
-        type: DataTypes.STRING(1023),
+        type: DataTypes.STRING(1022),
     })
     modelPath: string;
 
@@ -72,7 +72,7 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'operationSort',
         allowNull: true,
-        type: DataTypes.TINYINT.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     operationSort: number;
 
@@ -86,7 +86,7 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'email',
         allowNull: false,
-        type: DataTypes.STRING(120),
+        type: DataTypes.STRING(127),
     })
     email: string;
 
@@ -121,7 +121,7 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'ip',
         allowNull: true,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(19),
     })
     ip: string;
 
@@ -135,7 +135,7 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'baseUrl',
         allowNull: true,
-        type: DataTypes.STRING(2047),
+        type: DataTypes.STRING(2046),
     })
     baseUrl: string;
 
@@ -163,7 +163,7 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'userAgent',
         allowNull: true,
-        type: DataTypes.STRING(1023),
+        type: DataTypes.STRING(1022),
     })
     userAgent: string;
 

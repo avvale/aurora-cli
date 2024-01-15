@@ -158,3 +158,18 @@ export const deleteMutation = gql`
         }
     }
 `;
+
+// Queries additionalApis
+export const administrativeAreasCountryQuery = gql`
+    query CommonAdministrativeAreasCountry (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        commonAdministrativeAreasCountry (
+            query: $query
+            constraint: $constraint
+        ){
+            ${fields}
+        }
+    }
+`;

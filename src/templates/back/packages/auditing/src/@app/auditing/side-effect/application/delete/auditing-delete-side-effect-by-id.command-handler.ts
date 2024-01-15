@@ -1,9 +1,7 @@
+import { AuditingDeleteSideEffectByIdCommand } from '@app/auditing/side-effect';
+import { AuditingDeleteSideEffectByIdService } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effect-by-id.service';
+import { AuditingSideEffectId } from '@app/auditing/side-effect/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { AuditingDeleteSideEffectByIdCommand } from './auditing-delete-side-effect-by-id.command';
-import { AuditingDeleteSideEffectByIdService } from './auditing-delete-side-effect-by-id.service';
-import {
-    AuditingSideEffectId
-} from '../../domain/value-objects';
 
 @CommandHandler(AuditingDeleteSideEffectByIdCommand)
 export class AuditingDeleteSideEffectByIdCommandHandler implements ICommandHandler<AuditingDeleteSideEffectByIdCommand>

@@ -10,7 +10,7 @@ export class CommonAttachmentMimetype extends StringValueObject
             name       : 'CommonAttachmentMimetype',
             nullable   : false,
             undefinable: false,
-            maxLength  : 50,
+            maxLength  : 63,
         }, validationRules));
     }
 }

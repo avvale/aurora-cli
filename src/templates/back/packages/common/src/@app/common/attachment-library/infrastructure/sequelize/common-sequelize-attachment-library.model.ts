@@ -128,13 +128,6 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
     id: string;
 
     @Column({
-        field: 'filename',
-        allowNull: false,
-        type: DataTypes.STRING(255),
-    })
-    filename: string;
-
-    @Column({
         field: 'originFilename',
         allowNull: false,
         type: DataTypes.STRING(255),
@@ -142,9 +135,16 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
     originFilename: string;
 
     @Column({
+        field: 'filename',
+        allowNull: false,
+        type: DataTypes.STRING(255),
+    })
+    filename: string;
+
+    @Column({
         field: 'mimetype',
         allowNull: false,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
     })
     mimetype: string;
 
@@ -165,21 +165,21 @@ export class CommonAttachmentLibraryModel extends Model<CommonAttachmentLibraryM
     @Column({
         field: 'width',
         allowNull: false,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     width: number;
 
     @Column({
         field: 'height',
         allowNull: false,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     height: number;
 
     @Column({
         field: 'size',
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     size: number;
 

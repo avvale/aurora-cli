@@ -49,7 +49,7 @@ export class CommonUpdateCountryByIdCommandHandler implements ICommandHandler<Co
                 latitude: new CommonCountryLatitude(command.payload.latitude),
                 longitude: new CommonCountryLongitude(command.payload.longitude),
                 zoom: new CommonCountryZoom(command.payload.zoom),
-                mapType: new CommonCountryMapType(command.payload.mapType, { undefinable: true }),
+                mapType: new CommonCountryMapType(command.payload.mapType),
                 langId: new CommonCountryI18nLangId(command.payload.langId, { undefinable: true }),
                 name: new CommonCountryI18nName(command.payload.name, { undefinable: true }),
                 slug: new CommonCountryI18nSlug(command.payload.slug, { undefinable: true }),

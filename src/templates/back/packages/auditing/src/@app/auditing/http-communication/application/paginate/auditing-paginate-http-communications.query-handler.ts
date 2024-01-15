@@ -1,7 +1,7 @@
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { AuditingPaginateHttpCommunicationsQuery } from '@app/auditing/http-communication';
+import { AuditingPaginateHttpCommunicationsService } from '@app/auditing/http-communication/application/paginate/auditing-paginate-http-communications.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-import { AuditingPaginateHttpCommunicationsQuery } from './auditing-paginate-http-communications.query';
-import { AuditingPaginateHttpCommunicationsService } from './auditing-paginate-http-communications.service';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(AuditingPaginateHttpCommunicationsQuery)
 export class AuditingPaginateHttpCommunicationsQueryHandler implements IQueryHandler<AuditingPaginateHttpCommunicationsQuery>

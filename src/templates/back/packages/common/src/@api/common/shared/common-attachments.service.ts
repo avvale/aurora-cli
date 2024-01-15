@@ -1,4 +1,4 @@
-import { CommonAttachment, CommonCreateAttachmentInput, CommonUpdateAttachmentByIdInput } from '@api/graphql';
+import { CommonAttachment, CommonAttachmentFamilyFormat, CommonCreateAttachmentInput, CommonUpdateAttachmentByIdInput } from '@api/graphql';
 import { CommonCreateAttachmentsCommand, CommonDeleteAttachmentsCommand, CommonGetAttachmentsQuery, CommonUpdateAttachmentByIdCommand } from '@app/common/attachment';
 import { CommonGetAttachmentFamiliesQuery } from '@app/common/attachment-family';
 import { CommonCreateAttachmentLibrariesCommand, CommonDeleteAttachmentLibrariesCommand } from '@app/common/attachment-library';
@@ -22,23 +22,29 @@ export class CommonAttachmentsService
     async createUploadedAttachments(
         attachableId: string,
         attachments: CommonCreateAttachmentInput[],
-        placesRelativePathSegments: string[],
+        relativePathSegments: string[],
     ): Promise<void>
     {
+        // change extension of attachments if is required
+        await this.changeAttachmentExtensions(
+            // only attachments that are uploaded
+            attachments.filter(attachment => attachment.isUploaded),
+        );
+
         const uploadedAttachmentLibraries = [];
         const uploadedAttachments = [];
         for (const attachment of attachments)
         {
             if (!attachment.isUploaded) continue;
 
-            const absoluteDirectoryPath = storagePublicAbsoluteDirectoryPath(placesRelativePathSegments);
+            const absoluteDirectoryPath = storagePublicAbsoluteDirectoryPath(relativePathSegments);
 
             // create directory if not exists
             if (!existsSync(absoluteDirectoryPath)) mkdirSync(absoluteDirectoryPath, { recursive: true });
 
             const tempAbsolutePath = storagePublicAbsolutePath(attachment.relativePathSegments, attachment.filename);
-            attachment.relativePathSegments = placesRelativePathSegments;
-            attachment.url = storagePublicAbsoluteURL(placesRelativePathSegments, attachment.filename);
+            attachment.relativePathSegments = relativePathSegments;
+            attachment.url = storagePublicAbsoluteURL(relativePathSegments, attachment.filename);
             attachment.attachableId = attachableId;
             const finalAbsolutePath = storagePublicAbsolutePath(attachment.relativePathSegments, attachment.filename);
 
@@ -53,8 +59,8 @@ export class CommonAttachmentsService
 
             // manage attachment library
             const tempLibraryAbsolutePath = storagePublicAbsolutePath(attachment.library.relativePathSegments, attachment.library.filename);
-            attachment.library.relativePathSegments = placesRelativePathSegments;
-            attachment.library.url = storagePublicAbsoluteURL(placesRelativePathSegments, attachment.library.filename);
+            attachment.library.relativePathSegments = relativePathSegments;
+            attachment.library.url = storagePublicAbsoluteURL(relativePathSegments, attachment.library.filename);
             const finalLibraryAbsolutePath = storagePublicAbsolutePath(attachment.library.relativePathSegments, attachment.library.filename);
 
             // copy library file to create final directory
@@ -68,12 +74,13 @@ export class CommonAttachmentsService
             uploadedAttachments.push(attachment);
         }
 
-        const uploadedAttachmentsWithSizes = await this.createAttachmentsSizes(uploadedAttachments);
+        // only create sizes if attachment has been cropped
+        await this.createAttachmentsSizes(uploadedAttachments) as CommonCreateAttachmentInput[];
 
-        if (uploadedAttachmentsWithSizes.length > 0)
+        if (uploadedAttachments.length > 0)
         {
             await this.commandBus.dispatch(new CommonCreateAttachmentsCommand(
-                uploadedAttachmentsWithSizes,
+                uploadedAttachments,
             ));
         }
 
@@ -85,12 +92,76 @@ export class CommonAttachmentsService
         }
     }
 
-    async createAttachmentsSizes(
-        attachments: CommonCreateAttachmentInput[],
-    ): Promise<CommonCreateAttachmentInput[]>
+    async changeAttachmentExtensions(
+        attachments: CommonCreateAttachmentInput[] | CommonUpdateAttachmentByIdInput[],
+    ): Promise<CommonCreateAttachmentInput[] | CommonUpdateAttachmentByIdInput[]>
     {
+        // get all family ids from attachments
         const attachmentFamilyIds = attachments
-            .filter(attachment => attachment.isUploaded)
+            .filter(attachment => attachment.isCropable)
+            .filter(attachment => Boolean(attachment.familyId))
+            .map(attachment => attachment.familyId);
+
+        const attachmentFamilies = await this.queryBus.ask(new CommonGetAttachmentFamiliesQuery(
+            {
+                where: {
+                    id: attachmentFamilyIds,
+                },
+            },
+        ));
+
+        // checks that there is at least one attachment family with format property defined
+        if (!attachmentFamilies.some(attachmentFamily => attachmentFamily.format)) return attachments;
+
+        for (const attachment of attachments)
+        {
+            if (!attachment.isCropable) continue;
+            if (!attachment.familyId) continue;
+
+            const attachmentFamily = attachmentFamilies.find(attachmentFamily => attachmentFamily.id === attachment.familyId);
+
+            if (!attachmentFamily.format) continue;
+            if (Utils.mimeFromExtension(attachmentFamily.format.toLowerCase()) === attachment.mimetype) continue;
+
+            const absolutePath = storagePublicAbsolutePath(attachment.relativePathSegments, attachment.filename);
+
+            // add new extension parameters
+            attachment.extension = `.${attachmentFamily.format.toLowerCase()}`;
+            attachment.filename = `${attachment.id}${attachment.extension}`;
+            const targetAbsolutePathTarget = storagePublicAbsolutePath(attachment.relativePathSegments, attachment.filename);
+
+            let image;
+            switch (attachmentFamily.format)
+            {
+                case CommonAttachmentFamilyFormat.JPG:
+                    image = sharp(absolutePath)
+                        .jpeg({
+                            quality: attachmentFamily.quality ? attachmentFamily.quality : 80,
+                        });
+                    break;
+            }
+
+            // save to file
+            // eslint-disable-next-line no-await-in-loop
+            const imageResult = await image.toFile(targetAbsolutePathTarget);
+            unlinkSync(absolutePath);
+
+            attachment.width = imageResult.width;
+            attachment.height = imageResult.height;
+            attachment.size = imageResult.size;
+            attachment.url = storagePublicAbsoluteURL(attachment.relativePathSegments, attachment.filename);
+            attachment.mimetype = Utils.mimeFromExtension(attachmentFamily.format.toLowerCase());
+        }
+
+        return attachments;
+    }
+
+    async createAttachmentsSizes(
+        attachments: CommonCreateAttachmentInput[] | CommonUpdateAttachmentByIdInput[],
+    ): Promise<CommonCreateAttachmentInput[] | CommonUpdateAttachmentByIdInput[]>
+    {
+        // get all family ids from attachments
+        const attachmentFamilyIds = attachments
             .filter(attachment => attachment.isCropable)
             .filter(attachment => Boolean(attachment.familyId))
             .map(attachment => attachment.familyId);
@@ -111,59 +182,61 @@ export class CommonAttachmentsService
 
         for (const attachment of attachments)
         {
-            if (!attachment.isUploaded) continue;
             if (!attachment.isCropable) continue;
+            if (!attachment.isCropped) continue;
             if (!attachment.familyId) continue;
 
-            // eslint-disable-next-line no-await-in-loop
             const attachmentFamily = attachmentFamilies.find(attachmentFamily => attachmentFamily.id === attachment.familyId);
 
-            if (Array.isArray(attachmentFamily.sizes))
+            if (!Array.isArray(attachmentFamily.sizes)) continue;
+
+            const sizes = [];
+            for (const size of attachmentFamily.sizes)
             {
-                const sizes = [];
-                for (const size of attachmentFamily.sizes)
-                {
-                    const width = Math.round(attachment.width * size / 100);
-                    const height = Math.round(attachment.height * size / 100);
-                    const absolutePath = storagePublicAbsolutePath(attachment.relativePathSegments, attachment.filename);
+                const width = Math.round(attachment.width * size / 100);
+                const height = Math.round(attachment.height * size / 100);
+                const absolutePath = storagePublicAbsolutePath(attachment.relativePathSegments, attachment.filename);
 
-                    // get paths for resized image
-                    const targetFilename = `${size}@_${attachment.filename}`;
-                    const targetAbsolutePathTarget = storagePublicAbsolutePath(attachment.relativePathSegments, targetFilename);
+                // get paths for resized image
+                const targetFilename = `${size}@_${attachment.filename}`;
+                const targetAbsolutePathTarget = storagePublicAbsolutePath(attachment.relativePathSegments, targetFilename);
 
-                    // resize image
-                    const image = sharp(absolutePath)
-                        .resize({
-                            width,
-                            height,
-                        });
-
-                    // save to file
-                    // eslint-disable-next-line no-await-in-loop
-                    const imageResult = await image.toFile(targetAbsolutePathTarget);
-
-                    sizes.push({
-                        resizePercentage    : size,
-                        filename            : targetFilename,
-                        relativePathSegments: attachment.relativePathSegments,
-                        width               : imageResult.width,
-                        height              : imageResult.height,
-                        size                : imageResult.size,
-                        url                 : storagePublicAbsoluteURL(attachment.relativePathSegments, targetFilename),
+                // resize image
+                const image = sharp(absolutePath)
+                    .resize({
+                        width,
+                        height,
                     });
-                }
 
-                attachment.sizes = sizes;
+                // save to file
+                // eslint-disable-next-line no-await-in-loop
+                const imageResult = await image.toFile(targetAbsolutePathTarget);
+
+                sizes.push({
+                    resizePercentage    : size,
+                    filename            : targetFilename,
+                    relativePathSegments: attachment.relativePathSegments,
+                    width               : imageResult.width,
+                    height              : imageResult.height,
+                    size                : imageResult.size,
+                    url                 : storagePublicAbsoluteURL(attachment.relativePathSegments, targetFilename),
+                });
             }
+
+            attachment.sizes = sizes;
         }
 
         return attachments;
     }
 
-    updateAttachments(
+    // update attachments data, like alt, title, family, etc.
+    async updateAttachments(
         attachments: CommonUpdateAttachmentByIdInput[],
-    ): void
+    ): Promise<void>
     {
+        // only create sizes if attachment has been cropped
+        await this.createAttachmentsSizes(attachments) as CommonUpdateAttachmentByIdInput[];
+
         const attachmentPromises = [];
         for (const attachment of attachments)
         {

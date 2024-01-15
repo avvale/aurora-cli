@@ -10,7 +10,7 @@ export class CommonCountryImage extends StringValueObject
             name       : 'CommonCountryImage',
             nullable   : true,
             undefinable: true,
-            maxLength  : 1024,
+            maxLength  : 1022,
         }, validationRules));
     }
 }

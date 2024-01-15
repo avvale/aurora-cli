@@ -1,33 +1,30 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { AuditingUpdateSideEffectByIdCommand } from './auditing-update-side-effect-by-id.command';
-import { AuditingUpdateSideEffectByIdService } from './auditing-update-side-effect-by-id.service';
+import { AuditingUpdateSideEffectByIdCommand } from '@app/auditing/side-effect';
+import { AuditingUpdateSideEffectByIdService } from '@app/auditing/side-effect/application/update/auditing-update-side-effect-by-id.service';
 import {
-    AuditingSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectModelName,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
     AuditingSideEffectAccountId,
+    AuditingSideEffectAuditableId,
+    AuditingSideEffectBaseUrl,
+    AuditingSideEffectBody,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectNewValue,
+    AuditingSideEffectId,
     AuditingSideEffectIp,
+    AuditingSideEffectIsRollback,
     AuditingSideEffectMethod,
-    AuditingSideEffectBaseUrl,
+    AuditingSideEffectModelName,
+    AuditingSideEffectModelPath,
+    AuditingSideEffectNewValue,
+    AuditingSideEffectOldValue,
+    AuditingSideEffectOperationId,
+    AuditingSideEffectOperationSort,
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
-    AuditingSideEffectBody,
-    AuditingSideEffectUserAgent,
-    AuditingSideEffectIsRollback,
     AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectCreatedAt,
-    AuditingSideEffectUpdatedAt,
-    AuditingSideEffectDeletedAt,
-} from '../../domain/value-objects';
+    AuditingSideEffectTags,
+    AuditingSideEffectUserAgent,
+} from '@app/auditing/side-effect/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(AuditingUpdateSideEffectByIdCommand)
 export class AuditingUpdateSideEffectByIdCommandHandler implements ICommandHandler<AuditingUpdateSideEffectByIdCommand>

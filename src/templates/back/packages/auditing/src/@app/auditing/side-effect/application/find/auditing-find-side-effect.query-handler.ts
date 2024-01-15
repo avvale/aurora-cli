@@ -1,8 +1,6 @@
+import { AuditingFindSideEffectQuery, AuditingSideEffectMapper, AuditingSideEffectResponse } from '@app/auditing/side-effect';
+import { AuditingFindSideEffectService } from '@app/auditing/side-effect/application/find/auditing-find-side-effect.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { AuditingSideEffectResponse } from '../../domain/auditing-side-effect.response';
-import { AuditingSideEffectMapper } from '../../domain/auditing-side-effect.mapper';
-import { AuditingFindSideEffectQuery } from './auditing-find-side-effect.query';
-import { AuditingFindSideEffectService } from './auditing-find-side-effect.service';
 
 @QueryHandler(AuditingFindSideEffectQuery)
 export class AuditingFindSideEffectQueryHandler implements IQueryHandler<AuditingFindSideEffectQuery>

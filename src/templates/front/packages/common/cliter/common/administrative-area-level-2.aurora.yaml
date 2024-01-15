@@ -44,17 +44,17 @@ aggregateProperties:
     index: unique
   - name: customCode
     type: varchar
-    maxLength: 10
+    maxLength: 63
     nullable: true
     index: unique
   - name: name
     type: varchar
-    maxLength: 100
+    maxLength: 127
     nullable: false
     index: index
   - name: slug
     type: varchar
-    maxLength: 100
+    maxLength: 127
     nullable: false
     index: index
   - name: latitude
@@ -70,8 +70,8 @@ aggregateProperties:
       - 14
     nullable: true
   - name: zoom
-    type: int.unsigned
-    maxLength: 2
+    type: smallint
+    unsigned: true
     nullable: true
   - name: mapType
     type: enum
@@ -80,8 +80,8 @@ aggregateProperties:
       - SATELLITE
       - HYBRID
       - TERRAIN
-    nullable: false
-    example: CommonAdministrativeAreaLevel2MapType.TERRAIN
+    nullable: true
+    example: CommonAdministrativeAreaLevel1MapType.TERRAIN
   - name: createdAt
     type: timestamp
     nullable: true

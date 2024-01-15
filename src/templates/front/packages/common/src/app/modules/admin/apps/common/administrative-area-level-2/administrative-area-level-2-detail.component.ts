@@ -1,10 +1,11 @@
-import { CommonAdministrativeAreaLevel2 } from '../common.types';
-import { AdministrativeAreaLevel2Service } from './administrative-area-level-2.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { AdministrativeAreaLevel2Service } from '@apps/common/administrative-area-level-2';
+import { CommonAdministrativeAreaLevel2 } from '@apps/common/common.types';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
     selector       : 'common-administrative-area-level-2-detail',
@@ -14,7 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatSelectModule,
+        MatSelectModule, NgForOf,
     ],
 })
 export class AdministrativeAreaLevel2DetailComponent extends ViewDetailComponent
@@ -37,7 +38,6 @@ export class AdministrativeAreaLevel2DetailComponent extends ViewDetailComponent
 
     constructor(
         private readonly administrativeAreaLevel2Service: AdministrativeAreaLevel2Service,
-        protected readonly injector: Injector,
     )
     {
         super();
@@ -85,12 +85,12 @@ export class AdministrativeAreaLevel2DetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            countryId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            administrativeAreaLevel1Id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            countryId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            administrativeAreaLevel1Id: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             code: ['', [Validators.required, Validators.maxLength(8)]],
-            customCode: ['', [Validators.maxLength(10)]],
-            name: ['', [Validators.required, Validators.maxLength(100)]],
-            slug: ['', [Validators.required, Validators.maxLength(100)]],
+            customCode: ['', [Validators.maxLength(63)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            slug: ['', [Validators.required, Validators.maxLength(127)]],
             latitude: null,
             longitude: null,
             zoom: [null, [Validators.maxLength(2)]],

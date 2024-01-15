@@ -1,11 +1,9 @@
-import { QueueManagerQueue, QueueManagerCreateQueue, QueueManagerUpdateQueueById, QueueManagerUpdateQueues, QueueManagerJob } from '../queue-manager.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation, findByIdWithRelationsQuery } from './queue.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/queue-manager/queue';
+import { QueueManagerCreateQueue, QueueManagerJob, QueueManagerQueue, QueueManagerUpdateQueueById, QueueManagerUpdateQueues } from '@apps/queue-manager/queue-manager.types';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-
-// ---- customizations ----
 import { JobService } from '../job/job.service';
 
 @Injectable({

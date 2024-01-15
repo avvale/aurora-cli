@@ -1,8 +1,7 @@
-import { CommonCountry } from '../common.types';
-import { countryColumnsConfig } from './country.columns-config';
-import { CountryService } from './country.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { CommonCountry } from '@apps/common/common.types';
+import { countryColumnsConfig, CountryService } from '@apps/common/country';
 import { Action, ActionService, CoreCurrentLangService, CoreLang, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler, SessionService } from '@aurora';
 
 export const countryPaginationResolver: ResolveFn<GridData<CommonCountry>> = (

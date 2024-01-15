@@ -7,10 +7,11 @@ export const sideEffectColumnsConfig: ColumnConfig[] = [
         sort : 'tags',
     },
     {
-        type     : ColumnDataType.STRING,
-        field    : 'createdAt',
-        sort     : 'createdAt',
-        bodyClass: 'min-w-48',
+        type       : ColumnDataType.STRING,
+        field      : 'createdAt',
+        sort       : 'createdAt',
+        bodyClass  : 'min-w-48',
+        translation: 'Created.M',
     },
     {
         type : ColumnDataType.STRING,

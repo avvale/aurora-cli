@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { AuditingHttpCommunication, AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication';
+import { AuditingHttpCommunicationId } from '@app/auditing/http-communication/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { AuditingIHttpCommunicationRepository } from '../../domain/auditing-http-communication.repository';
-import { AuditingHttpCommunication } from '../../domain/auditing-http-communication.aggregate';
-import { AuditingHttpCommunicationId } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingFindHttpCommunicationByIdService

@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.data.ts",
-            "integrity": "sha1:e1cde75f650cd3387c5aeb88f2025e3d3d4484e6"
+            "integrity": "sha1:f5a65bc2558b8d66c09a4c0a7e6c69711f61a0f4"
         },
         {
             "path": "src/@app/common/resource/infrastructure/mock/common-mock-resource.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/common/resource/infrastructure/sequelize/common-sequelize-resource.model.ts",
-            "integrity": "sha1:fa73d2aa1c1a430f52ce63be569a4e78096f23ac"
+            "integrity": "sha1:cc2ce3f524d949fa28f69c3bcc071beb995a4606"
         },
         {
             "path": "src/@app/common/resource/infrastructure/sequelize/common-sequelize-resource.repository.ts",
@@ -351,11 +351,11 @@
         },
         {
             "path": "src/@app/common/resource/domain/value-objects/common-resource-code.ts",
-            "integrity": "sha1:f744478c02bd084abe52e26c34a74e73b5d10107"
+            "integrity": "sha1:14bcf922eaf1074f2478b892fc3998a5adb3ebb7"
         },
         {
             "path": "src/@app/common/resource/domain/value-objects/common-resource-name.ts",
-            "integrity": "sha1:8a3b9ea0e24575e076292ecde0f902192dcaf178"
+            "integrity": "sha1:833220fb15bb3d778199b31c7edc2ad53c81917b"
         },
         {
             "path": "src/@app/common/resource/domain/value-objects/common-resource-is-active.ts",
@@ -471,7 +471,7 @@
         },
         {
             "path": "src/@api/common/resource/dto/common-resource.dto.ts",
-            "integrity": "sha1:5fd6fb0eb57550a889f39c4d6d18262739208ebf"
+            "integrity": "sha1:5d9bdcb0cd1441599bb7ef2a350141690c6926b4"
         },
         {
             "path": "src/@api/common/resource/dto/common-create-resource.dto.ts",
@@ -487,6 +487,10 @@
         },
         {
             "path": "src/@api/common/resource/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/common/resource/dto/public-api.ts",
             "integrity": "sha1:2041a52efc396262395f23a428121675145f47c4"
         },
         {
@@ -679,11 +683,11 @@
         },
         {
             "path": "test/acceptance/common/resource.e2e-spec.ts",
-            "integrity": "sha1:45a610aba01fca412ea170d0d30d106ba2c56edc"
+            "integrity": "sha1:62712a38e18273febaabeac0b725edf0b1aab8f2"
         },
         {
             "path": "postman/common/common.resource.postman.json",
-            "integrity": "sha1:5786e0cc6c245272bc1e9a681d08782bbf6f21fb"
+            "integrity": "sha1:04826bd1e603a2e7e642005e5975a84069dc0f8c"
         }
     ]
 }

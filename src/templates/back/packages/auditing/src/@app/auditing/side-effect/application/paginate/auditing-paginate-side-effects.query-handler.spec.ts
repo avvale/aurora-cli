@@ -1,20 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { AuditingISideEffectRepository, AuditingMockSideEffectRepository, AuditingPaginateSideEffectsQuery } from '@app/auditing/side-effect';
+import { AuditingPaginateSideEffectsQueryHandler } from '@app/auditing/side-effect/application/paginate/auditing-paginate-side-effects.query-handler';
+import { AuditingPaginateSideEffectsService } from '@app/auditing/side-effect/application/paginate/auditing-paginate-side-effects.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
-
-// custom items
-import { AuditingPaginateSideEffectsQueryHandler } from './auditing-paginate-side-effects.query-handler';
-import { AuditingMockSideEffectRepository } from '@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.repository';
-import { AuditingISideEffectRepository } from '@app/auditing/side-effect/domain/auditing-side-effect.repository';
-import { AuditingSideEffectMapper } from '@app/auditing/side-effect/domain/auditing-side-effect.mapper';
-import { AuditingPaginateSideEffectsQuery } from './auditing-paginate-side-effects.query';
-import { AuditingPaginateSideEffectsService } from './auditing-paginate-side-effects.service';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingPaginateSideEffectsQueryHandler', () =>
 {
     let queryHandler: AuditingPaginateSideEffectsQueryHandler;
     let service: AuditingPaginateSideEffectsService;
     let repository: AuditingMockSideEffectRepository;
-    let mapper: AuditingSideEffectMapper;
 
     beforeAll(async () =>
     {
@@ -38,7 +32,6 @@ describe('AuditingPaginateSideEffectsQueryHandler', () =>
         queryHandler = module.get<AuditingPaginateSideEffectsQueryHandler>(AuditingPaginateSideEffectsQueryHandler);
         service = module.get<AuditingPaginateSideEffectsService>(AuditingPaginateSideEffectsService);
         repository = <AuditingMockSideEffectRepository>module.get<AuditingISideEffectRepository>(AuditingISideEffectRepository);
-        mapper = new AuditingSideEffectMapper();
     });
 
     describe('main', () =>

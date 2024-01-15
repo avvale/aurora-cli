@@ -8,8 +8,8 @@ export class CommonCountryMapType extends EnumValueObject
     {
         super(value, Object.assign({
             name       : 'CommonCountryMapType',
-            nullable   : false,
-            undefinable: false,
+            nullable   : true,
+            undefinable: true,
             enumOptions: ['ROADMAP','SATELLITE','HYBRID','TERRAIN'],
         }, validationRules));
     }

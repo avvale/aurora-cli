@@ -10,7 +10,6 @@ export class CommonAttachmentLibrarySize extends IntValueObject
             name       : 'CommonAttachmentLibrarySize',
             nullable   : false,
             undefinable: false,
-            maxLength  : 10,
             unsigned   : true,
         }, validationRules));
     }

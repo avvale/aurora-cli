@@ -1,15 +1,11 @@
+import { auditingMockSideEffectData, AuditingUpdateSideEffectByIdCommand } from '@app/auditing/side-effect';
+import { AuditingUpdateSideEffectByIdCommandHandler } from '@app/auditing/side-effect/application/update/auditing-update-side-effect-by-id.command-handler';
+import { AuditingUpdateSideEffectByIdService } from '@app/auditing/side-effect/application/update/auditing-update-side-effect-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { auditingMockSideEffectData } from '@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.data';
-import { AuditingUpdateSideEffectByIdCommandHandler } from './auditing-update-side-effect-by-id.command-handler';
-import { AuditingUpdateSideEffectByIdCommand } from './auditing-update-side-effect-by-id.command';
-import { AuditingUpdateSideEffectByIdService } from './auditing-update-side-effect-by-id.service';
 
 describe('AuditingUpdateSideEffectByIdCommandHandler', () =>
 {
     let commandHandler: AuditingUpdateSideEffectByIdCommandHandler;
-    let service: AuditingUpdateSideEffectByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('AuditingUpdateSideEffectByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingUpdateSideEffectByIdCommandHandler>(AuditingUpdateSideEffectByIdCommandHandler);
-        service = module.get<AuditingUpdateSideEffectByIdService>(AuditingUpdateSideEffectByIdService);
     });
 
     describe('main', () =>

@@ -3,20 +3,6 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 export const administrativeAreaLevel2ColumnsConfig: ColumnConfig[] = [
     {
         type       : ColumnDataType.STRING,
-        field      : 'countryId',
-        sort       : 'countryId',
-        translation: 'common.CountryId',
-        hidden     : true,
-    },
-    {
-        type       : ColumnDataType.STRING,
-        field      : 'administrativeAreaLevel1Id',
-        sort       : 'administrativeAreaLevel1Id',
-        translation: 'common.AdministrativeAreaLevel1Id',
-        hidden     : true,
-    },
-    {
-        type       : ColumnDataType.STRING,
         field      : 'code',
         sort       : 'code',
         translation: 'common.Code',
@@ -58,7 +44,7 @@ export const administrativeAreaLevel2ColumnsConfig: ColumnConfig[] = [
         translation: 'common.Zoom',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.ENUM,
         field      : 'mapType',
         sort       : 'mapType',
         translation: 'common.MapType',

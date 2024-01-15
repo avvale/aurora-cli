@@ -25,7 +25,7 @@ aggregateProperties:
     nullable: false
   - name: mimetype
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: false
   - name: extension
     type: varchar
@@ -35,16 +35,16 @@ aggregateProperties:
     type: json
     nullable: false
   - name: width
-    type: smallint.unsigned
-    maxLength: 5
+    type: int
+    unsigned: true
     nullable: false
   - name: height
-    type: smallint.unsigned
-    maxLength: 5
+    type: int
+    unsigned: true
     nullable: false
   - name: size
-    type: int.unsigned
-    maxLength: 10
+    type: int
+    unsigned: true
     nullable: false
   - name: url
     type: varchar

@@ -1,23 +1,22 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { AuditingHttpCommunication } from './auditing-http-communication.aggregate';
-import { AuditingHttpCommunicationResponse } from './auditing-http-communication.response';
+import { AuditingHttpCommunication, AuditingHttpCommunicationResponse } from '@app/auditing/http-communication';
 import {
-    AuditingHttpCommunicationId,
-    AuditingHttpCommunicationTags,
+    AuditingHttpCommunicationCreatedAt,
+    AuditingHttpCommunicationDeletedAt,
     AuditingHttpCommunicationEvent,
-    AuditingHttpCommunicationStatus,
-    AuditingHttpCommunicationMethod,
-    AuditingHttpCommunicationUrl,
     AuditingHttpCommunicationHttpRequest,
     AuditingHttpCommunicationHttpRequestRejected,
     AuditingHttpCommunicationHttpResponse,
     AuditingHttpCommunicationHttpResponseRejected,
+    AuditingHttpCommunicationId,
     AuditingHttpCommunicationIsReprocessing,
+    AuditingHttpCommunicationMethod,
     AuditingHttpCommunicationReprocessingHttpCommunicationId,
-    AuditingHttpCommunicationCreatedAt,
+    AuditingHttpCommunicationStatus,
+    AuditingHttpCommunicationTags,
     AuditingHttpCommunicationUpdatedAt,
-    AuditingHttpCommunicationDeletedAt,
-} from './value-objects';
+    AuditingHttpCommunicationUrl,
+} from '@app/auditing/http-communication/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class AuditingHttpCommunicationMapper implements IMapper
 {

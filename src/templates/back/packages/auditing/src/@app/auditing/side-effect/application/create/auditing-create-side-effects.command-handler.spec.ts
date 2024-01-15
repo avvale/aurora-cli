@@ -1,16 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingCreateSideEffectsCommand, auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { AuditingCreateSideEffectsCommandHandler } from '@app/auditing/side-effect/application/create/auditing-create-side-effects.command-handler';
+import { AuditingCreateSideEffectsService } from '@app/auditing/side-effect/application/create/auditing-create-side-effects.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { auditingMockSideEffectData } from '@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.data';
-import { AuditingCreateSideEffectsCommandHandler } from './auditing-create-side-effects.command-handler';
-import { AuditingCreateSideEffectsCommand } from './auditing-create-side-effects.command';
-import { AuditingCreateSideEffectsService } from './auditing-create-side-effects.service';
 
 describe('auditingCreateSideEffectsCommandHandler', () =>
 {
     let commandHandler: AuditingCreateSideEffectsCommandHandler;
-    let service: AuditingCreateSideEffectsService;
 
     beforeAll(async () =>
     {
@@ -28,7 +23,6 @@ describe('auditingCreateSideEffectsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingCreateSideEffectsCommandHandler>(AuditingCreateSideEffectsCommandHandler);
-        service = module.get<AuditingCreateSideEffectsService>(AuditingCreateSideEffectsService);
     });
 
     describe('main', () =>
@@ -38,7 +32,7 @@ describe('auditingCreateSideEffectsCommandHandler', () =>
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return AuditingMockSideEffectData createds', async () =>
+        test('should return AuditingMockSideEffectData created', async () =>
         {
             expect(await commandHandler.execute(
                 new AuditingCreateSideEffectsCommand(

@@ -189,35 +189,35 @@ describe('queue', () =>
             });
     });
 
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueuePrefix is too large, has a maximum length of 50', () =>
+    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueuePrefix is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/queue-manager/queue/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                prefix: '***************************************************',
+                prefix: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerQueuePrefix is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for QueueManagerQueuePrefix is too large, has a maximum length of 63');
             });
     });
 
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueueName is too large, has a maximum length of 50', () =>
+    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueueName is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/queue-manager/queue/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '***************************************************',
+                name: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerQueueName is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for QueueManagerQueueName is too large, has a maximum length of 63');
             });
     });
 

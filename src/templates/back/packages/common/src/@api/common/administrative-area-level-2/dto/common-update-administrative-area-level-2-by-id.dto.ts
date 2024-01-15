@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { CommonAdministrativeAreaLevel2MapType } from '@api/graphql';
+import { CommonAdministrativeAreaLevel1MapType, CommonAdministrativeAreaLevel2MapType } from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CommonUpdateAdministrativeAreaLevel2ByIdDto
@@ -70,7 +70,7 @@ export class CommonUpdateAdministrativeAreaLevel2ByIdDto
         type       : CommonAdministrativeAreaLevel2MapType,
         enum       : ['ROADMAP','SATELLITE','HYBRID','TERRAIN'],
         description: 'mapType [input here api field description]',
-        example    : CommonAdministrativeAreaLevel2MapType.TERRAIN,
+        example    : CommonAdministrativeAreaLevel1MapType.TERRAIN,
     })
     mapType?: CommonAdministrativeAreaLevel2MapType;
 

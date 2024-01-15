@@ -8,8 +8,8 @@ export class CommonAdministrativeAreaLevel2MapType extends EnumValueObject
     {
         super(value, Object.assign({
             name       : 'CommonAdministrativeAreaLevel2MapType',
-            nullable   : false,
-            undefinable: false,
+            nullable   : true,
+            undefinable: true,
             enumOptions: ['ROADMAP','SATELLITE','HYBRID','TERRAIN'],
         }, validationRules));
     }

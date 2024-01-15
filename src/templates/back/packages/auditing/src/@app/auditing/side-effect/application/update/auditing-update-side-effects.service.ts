@@ -1,36 +1,33 @@
-import { Injectable } from '@nestjs/common';
-import { EventPublisher } from '@nestjs/cqrs';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { AuditingAddSideEffectsContextEvent, AuditingISideEffectRepository, AuditingSideEffect } from '@app/auditing/side-effect';
 import {
-    AuditingSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectModelName,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
     AuditingSideEffectAccountId,
+    AuditingSideEffectAuditableId,
+    AuditingSideEffectBaseUrl,
+    AuditingSideEffectBody,
+    AuditingSideEffectCreatedAt,
+    AuditingSideEffectDeletedAt,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectNewValue,
+    AuditingSideEffectId,
     AuditingSideEffectIp,
+    AuditingSideEffectIsRollback,
     AuditingSideEffectMethod,
-    AuditingSideEffectBaseUrl,
+    AuditingSideEffectModelName,
+    AuditingSideEffectModelPath,
+    AuditingSideEffectNewValue,
+    AuditingSideEffectOldValue,
+    AuditingSideEffectOperationId,
+    AuditingSideEffectOperationSort,
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
-    AuditingSideEffectBody,
-    AuditingSideEffectUserAgent,
-    AuditingSideEffectIsRollback,
     AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectCreatedAt,
+    AuditingSideEffectTags,
     AuditingSideEffectUpdatedAt,
-    AuditingSideEffectDeletedAt,
-} from '../../domain/value-objects';
-import { AuditingISideEffectRepository } from '../../domain/auditing-side-effect.repository';
-import { AuditingSideEffect } from '../../domain/auditing-side-effect.aggregate';
-import { AuditingAddSideEffectsContextEvent } from '../events/auditing-add-side-effects-context.event';
+    AuditingSideEffectUserAgent,
+} from '@app/auditing/side-effect/domain/value-objects';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
+import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class AuditingUpdateSideEffectsService
@@ -96,7 +93,6 @@ export class AuditingUpdateSideEffectsService
             new AuditingSideEffectUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
-
 
         // update
         await this.repository.update(

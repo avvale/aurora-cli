@@ -1,6 +1,6 @@
-import { IntValueObject, ValidationRules } from '@aurorajs.dev/core';
+import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CommonAdministrativeAreaLevel2Zoom extends IntValueObject
+export class CommonAdministrativeAreaLevel2Zoom extends SmallintValueObject
 {
     public readonly type: string = 'CommonAdministrativeAreaLevel2Zoom';
 
@@ -10,7 +10,6 @@ export class CommonAdministrativeAreaLevel2Zoom extends IntValueObject
             name       : 'CommonAdministrativeAreaLevel2Zoom',
             nullable   : true,
             undefinable: true,
-            maxLength  : 2,
             unsigned   : true,
         }, validationRules));
     }

@@ -10,7 +10,7 @@ export class CommonResourceName extends StringValueObject
             name       : 'CommonResourceName',
             nullable   : false,
             undefinable: false,
-            maxLength  : 100,
+            maxLength  : 127,
         }, validationRules));
     }
 }

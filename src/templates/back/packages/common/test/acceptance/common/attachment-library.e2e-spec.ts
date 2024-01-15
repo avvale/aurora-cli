@@ -93,22 +93,6 @@ describe('attachment-library', () =>
             });
     });
 
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryFilename property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                filename: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryFilename must be defined, can not be null');
-            });
-    });
-
     test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryOriginFilename property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -122,6 +106,22 @@ describe('attachment-library', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentLibraryOriginFilename must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryFilename property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                filename: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryFilename must be defined, can not be null');
             });
     });
 
@@ -253,22 +253,6 @@ describe('attachment-library', () =>
             });
     });
 
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryFilename property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                filename: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryFilename must be defined, can not be undefined');
-            });
-    });
-
     test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryOriginFilename property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -282,6 +266,22 @@ describe('attachment-library', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentLibraryOriginFilename must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryFilename property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                filename: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryFilename must be defined, can not be undefined');
             });
     });
 
@@ -413,22 +413,6 @@ describe('attachment-library', () =>
             });
     });
 
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryFilename is too large, has a maximum length of 255', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                filename: '****************************************************************************************************************************************************************************************************************************************************************',
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryFilename is too large, has a maximum length of 255');
-            });
-    });
-
     test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryOriginFilename is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
@@ -445,19 +429,35 @@ describe('attachment-library', () =>
             });
     });
 
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryMimetype is too large, has a maximum length of 50', () =>
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryFilename is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
             .post('/common/attachment-library/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                mimetype: '***************************************************',
+                filename: '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryMimetype is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryFilename is too large, has a maximum length of 255');
+            });
+    });
+
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryMimetype is too large, has a maximum length of 63', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                mimetype: '****************************************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryMimetype is too large, has a maximum length of 63');
             });
     });
 
@@ -477,54 +477,6 @@ describe('attachment-library', () =>
             });
     });
 
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryWidth is too large, has a maximum length of 5', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                width: 111111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryWidth is too large, has a maximum length of 5');
-            });
-    });
-
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryHeight is too large, has a maximum length of 5', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                height: 111111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibraryHeight is too large, has a maximum length of 5');
-            });
-    });
-
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibrarySize is too large, has a maximum length of 10', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-library/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                size: 11111111111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentLibrarySize is too large, has a maximum length of 10');
-            });
-    });
-
     test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryUrl is too large, has a maximum length of 2047', () =>
     {
         return request(app.getHttpServer())
@@ -541,19 +493,49 @@ describe('attachment-library', () =>
             });
     });
 
-    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibrarySize must have a positive sign', () =>
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryWidth has to be a integer value', () =>
     {
         return request(app.getHttpServer())
             .post('/common/attachment-library/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                size: -1,
+                width: 100.10,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('The numerical Value for CommonAttachmentLibrarySize must have a positive sign, this field does not accept negative values');
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryWidth has to be a integer value');
+            });
+    });
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibraryHeight has to be a integer value', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                height: 100.10,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibraryHeight has to be a integer value');
+            });
+    });
+    test('/REST:POST common/attachment-library/create - Got 400 Conflict, AttachmentLibrarySize has to be a integer value', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment-library/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                size: 100.10,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentLibrarySize has to be a integer value');
             });
     });
 
@@ -729,8 +711,8 @@ describe('attachment-library', () =>
                         commonCreateAttachmentLibrary (payload:$payload)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -805,8 +787,8 @@ describe('attachment-library', () =>
                         commonGetAttachmentLibraries (query:$query)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -844,8 +826,8 @@ describe('attachment-library', () =>
                         commonCreateAttachmentLibrary (payload:$payload)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -883,8 +865,8 @@ describe('attachment-library', () =>
                         commonFindAttachmentLibrary (query:$query)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -930,8 +912,8 @@ describe('attachment-library', () =>
                         commonFindAttachmentLibrary (query:$query)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -975,8 +957,8 @@ describe('attachment-library', () =>
                         commonFindAttachmentLibraryById (id:$id)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -1015,8 +997,8 @@ describe('attachment-library', () =>
                         commonFindAttachmentLibraryById (id:$id)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -1053,8 +1035,8 @@ describe('attachment-library', () =>
                         commonUpdateAttachmentLibraryById (payload:$payload)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -1096,8 +1078,8 @@ describe('attachment-library', () =>
                         commonUpdateAttachmentLibraryById (payload:$payload)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -1137,8 +1119,8 @@ describe('attachment-library', () =>
                         commonUpdateAttachmentLibraries (payload:$payload query:$query)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -1183,8 +1165,8 @@ describe('attachment-library', () =>
                         commonDeleteAttachmentLibraryById (id:$id)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments
@@ -1223,8 +1205,8 @@ describe('attachment-library', () =>
                         commonDeleteAttachmentLibraryById (id:$id)
                         {
                             id
-                            filename
                             originFilename
+                            filename
                             mimetype
                             extension
                             relativePathSegments

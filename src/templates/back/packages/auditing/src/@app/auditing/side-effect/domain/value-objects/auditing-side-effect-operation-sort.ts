@@ -1,6 +1,6 @@
-import { IntValueObject, ValidationRules } from '@aurorajs.dev/core';
+import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class AuditingSideEffectOperationSort extends IntValueObject
+export class AuditingSideEffectOperationSort extends SmallintValueObject
 {
     public readonly type: string = 'AuditingSideEffectOperationSort';
 
@@ -10,7 +10,6 @@ export class AuditingSideEffectOperationSort extends IntValueObject
             name       : 'AuditingSideEffectOperationSort',
             nullable   : true,
             undefinable: true,
-            maxLength  : 2,
             unsigned   : true,
         }, validationRules));
     }

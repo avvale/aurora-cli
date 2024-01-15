@@ -1,7 +1,7 @@
-import { QueueManagerCreateJobRegistry, QueueManagerJobRegistry, QueueManagerUpdateJobRegistryById, QueueManagerUpdateJobsRegistry } from '../queue-manager.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './job-registry.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/queue-manager/job-registry';
+import { QueueManagerCreateJobRegistry, QueueManagerJobRegistry, QueueManagerUpdateJobRegistryById, QueueManagerUpdateJobsRegistry } from '@apps/queue-manager/queue-manager.types';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 

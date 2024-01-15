@@ -1,7 +1,7 @@
-import { CommonAdministrativeAreaLevel1, CommonCreateAdministrativeAreaLevel1, CommonUpdateAdministrativeAreaLevel1ById, CommonUpdateAdministrativeAreasLevel1 } from '../common.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './administrative-area-level-1.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/common/administrative-area-level-1';
+import { CommonAdministrativeAreaLevel1, CommonCreateAdministrativeAreaLevel1, CommonUpdateAdministrativeAreaLevel1ById, CommonUpdateAdministrativeAreasLevel1 } from '@apps/common/common.types';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 

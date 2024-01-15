@@ -1,14 +1,11 @@
+import { AuditingDeleteHttpCommunicationsCommand } from '@app/auditing/http-communication';
+import { AuditingDeleteHttpCommunicationsCommandHandler } from '@app/auditing/http-communication/application/delete/auditing-delete-http-communications.command-handler';
+import { AuditingDeleteHttpCommunicationsService } from '@app/auditing/http-communication/application/delete/auditing-delete-http-communications.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingDeleteHttpCommunicationsCommandHandler } from './auditing-delete-http-communications.command-handler';
-import { AuditingDeleteHttpCommunicationsCommand } from './auditing-delete-http-communications.command';
-import { AuditingDeleteHttpCommunicationsService } from './auditing-delete-http-communications.service';
 
 describe('AuditingDeleteHttpCommunicationsCommandHandler', () =>
 {
     let commandHandler: AuditingDeleteHttpCommunicationsCommandHandler;
-    let service: AuditingDeleteHttpCommunicationsService;
 
     beforeAll(async () =>
     {
@@ -26,7 +23,6 @@ describe('AuditingDeleteHttpCommunicationsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingDeleteHttpCommunicationsCommandHandler>(AuditingDeleteHttpCommunicationsCommandHandler);
-        service = module.get<AuditingDeleteHttpCommunicationsService>(AuditingDeleteHttpCommunicationsService);
     });
 
     describe('main', () =>

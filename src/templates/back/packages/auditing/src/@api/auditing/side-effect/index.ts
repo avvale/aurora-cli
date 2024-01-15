@@ -30,7 +30,7 @@ export { AuditingUpsertSideEffectController } from './controllers/auditing-upser
 export { AuditingDeleteSideEffectByIdController } from './controllers/auditing-delete-side-effect-by-id.controller';
 export { AuditingDeleteSideEffectsController } from './controllers/auditing-delete-side-effects.controller';
 
-// exports resolvers
+// export resolvers
 export { AuditingCreateSideEffectResolver } from './resolvers/auditing-create-side-effect.resolver';
 export { AuditingCreateSideEffectsResolver } from './resolvers/auditing-create-side-effects.resolver';
 export { AuditingPaginateSideEffectsResolver } from './resolvers/auditing-paginate-side-effects.resolver';
@@ -43,7 +43,12 @@ export { AuditingUpsertSideEffectResolver } from './resolvers/auditing-upsert-si
 export { AuditingDeleteSideEffectByIdResolver } from './resolvers/auditing-delete-side-effect-by-id.resolver';
 export { AuditingDeleteSideEffectsResolver } from './resolvers/auditing-delete-side-effects.resolver';
 
-// controllers
+// export additionalApis
+export { AuditingRollbackSideEffectController } from './controllers/auditing-rollback-side-effect.controller';
+export { AuditingRollbackSideEffectHandler } from './handlers/auditing-rollback-side-effect.handler';
+export { AuditingRollbackSideEffectResolver } from './resolvers/auditing-rollback-side-effect.resolver';
+
+// import controllers
 import { AuditingCreateSideEffectController } from './controllers/auditing-create-side-effect.controller';
 import { AuditingCreateSideEffectsController } from './controllers/auditing-create-side-effects.controller';
 import { AuditingPaginateSideEffectsController } from './controllers/auditing-paginate-side-effects.controller';
@@ -56,10 +61,7 @@ import { AuditingUpsertSideEffectController } from './controllers/auditing-upser
 import { AuditingDeleteSideEffectByIdController } from './controllers/auditing-delete-side-effect-by-id.controller';
 import { AuditingDeleteSideEffectsController } from './controllers/auditing-delete-side-effects.controller';
 
-// additionalApis
-import { AuditingRollbackSideEffectController } from './controllers/auditing-rollback-side-effect.controller';
-
-// resolvers
+// import resolvers
 import { AuditingCreateSideEffectResolver } from './resolvers/auditing-create-side-effect.resolver';
 import { AuditingCreateSideEffectsResolver } from './resolvers/auditing-create-side-effects.resolver';
 import { AuditingPaginateSideEffectsResolver } from './resolvers/auditing-paginate-side-effects.resolver';
@@ -72,10 +74,7 @@ import { AuditingUpsertSideEffectResolver } from './resolvers/auditing-upsert-si
 import { AuditingDeleteSideEffectByIdResolver } from './resolvers/auditing-delete-side-effect-by-id.resolver';
 import { AuditingDeleteSideEffectsResolver } from './resolvers/auditing-delete-side-effects.resolver';
 
-// additionalApis
-import { AuditingRollbackSideEffectResolver } from './resolvers/auditing-rollback-side-effect.resolver';
-
-// handlers
+// import handlers
 import { AuditingCreateSideEffectHandler } from './handlers/auditing-create-side-effect.handler';
 import { AuditingCreateSideEffectsHandler } from './handlers/auditing-create-side-effects.handler';
 import { AuditingPaginateSideEffectsHandler } from './handlers/auditing-paginate-side-effects.handler';
@@ -88,13 +87,15 @@ import { AuditingUpsertSideEffectHandler } from './handlers/auditing-upsert-side
 import { AuditingDeleteSideEffectByIdHandler } from './handlers/auditing-delete-side-effect-by-id.handler';
 import { AuditingDeleteSideEffectsHandler } from './handlers/auditing-delete-side-effects.handler';
 
-// seeder
+// import seeder
 import { AuditingSideEffectSeeder } from './seeder/auditing-side-effect.seeder';
 
-// additionalApis
+// import additionalApis
+import { AuditingRollbackSideEffectController } from './controllers/auditing-rollback-side-effect.controller';
 import { AuditingRollbackSideEffectHandler } from './handlers/auditing-rollback-side-effect.handler';
+import { AuditingRollbackSideEffectResolver } from './resolvers/auditing-rollback-side-effect.resolver';
 
-export const AuditingSideEffectControllers = [
+export const AuditingSideEffectApiControllers = [
     AuditingCreateSideEffectController,
     AuditingCreateSideEffectsController,
     AuditingPaginateSideEffectsController,
@@ -111,7 +112,7 @@ export const AuditingSideEffectControllers = [
     AuditingRollbackSideEffectController,
 ];
 
-export const AuditingSideEffectResolvers = [
+export const AuditingSideEffectApiResolvers = [
     AuditingCreateSideEffectResolver,
     AuditingCreateSideEffectsResolver,
     AuditingPaginateSideEffectsResolver,
@@ -145,6 +146,6 @@ export const AuditingSideEffectApiHandlers = [
     AuditingRollbackSideEffectHandler,
 ];
 
-export const AuditingSideEffectServices = [
+export const AuditingSideEffectApiServices = [
     AuditingSideEffectSeeder,
 ];

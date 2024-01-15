@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { AuditingHttpCommunication } from './auditing-http-communication.aggregate';
 import { AuditingHttpCommunicationId } from './value-objects';
+import { AuditingHttpCommunication } from '@app/auditing/http-communication';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class AuditingIHttpCommunicationRepository implements IRepository<AuditingHttpCommunication>
 {
@@ -30,6 +30,8 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<AuditingHttpCommunication | null>;
 
@@ -124,6 +126,8 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

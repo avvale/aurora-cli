@@ -10,7 +10,6 @@ export class CommonLangSort extends SmallintValueObject
             name       : 'CommonLangSort',
             nullable   : true,
             undefinable: true,
-            maxLength  : 6,
             unsigned   : true,
         }, validationRules));
     }

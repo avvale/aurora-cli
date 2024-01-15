@@ -1,8 +1,8 @@
+import { AuditingCreatedSideEffectEvent } from '@app/auditing/side-effect';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { AuditingCreatedSideEffectEvent } from '../events/auditing-created-side-effect.event';
 
 @Injectable()
 export class AuditingSideEffectSagas

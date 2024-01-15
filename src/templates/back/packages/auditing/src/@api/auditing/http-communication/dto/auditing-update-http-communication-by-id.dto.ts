@@ -11,10 +11,10 @@ export class AuditingUpdateHttpCommunicationByIdDto
     id: string;
 
     @ApiProperty({
-        type       : Object,
+        type       : Array,
         description: 'tags [input here api field description]',
     })
-    tags?: any;
+    tags?: string[];
 
     @ApiProperty({
         type       : AuditingHttpCommunicationEvent,

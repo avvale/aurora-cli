@@ -17,12 +17,12 @@ aggregateProperties:
     nullable: false
   - name: code
     type: varchar
-    maxLength: 30
+    maxLength: 63
     nullable: false
     index: unique
   - name: name
     type: varchar
-    maxLength: 100
+    maxLength: 127
     nullable: false
   - name: isActive
     type: boolean

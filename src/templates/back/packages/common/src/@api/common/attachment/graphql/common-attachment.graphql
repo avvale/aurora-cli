@@ -20,6 +20,7 @@ type CommonAttachment
     size: GraphQLInt!
     url: GraphQLString!
     isCropable: GraphQLBoolean!
+    isCropped: GraphQLBoolean  # field is not in database
     isUploaded: GraphQLBoolean # field is not in database
     isChanged: GraphQLBoolean  # field is not in database
     libraryId: ID
@@ -51,6 +52,7 @@ input CommonCreateAttachmentInput
     size: GraphQLInt!
     url: GraphQLString!
     isCropable: GraphQLBoolean!
+    isCropped: GraphQLBoolean!
     isUploaded: GraphQLBoolean!
     isChanged: GraphQLBoolean!
     library: CommonCreateAttachmentLibraryInput
@@ -79,6 +81,7 @@ input CommonUpdateAttachmentByIdInput
     size: GraphQLInt
     url: GraphQLString
     isCropable: GraphQLBoolean
+    isCropped: GraphQLBoolean!
     isUploaded: GraphQLBoolean!
     isChanged: GraphQLBoolean!
     library: CommonCreateAttachmentLibraryInput
@@ -133,6 +136,7 @@ input CommonAttachmentInput
     size: GraphQLInt!
     url: GraphQLString!
     isCropable: GraphQLBoolean!
+    isCropped: GraphQLBoolean!
     isUploaded: GraphQLBoolean!
     isChanged: GraphQLBoolean!
     library: CommonCreateAttachmentLibraryInput

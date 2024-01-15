@@ -1,8 +1,6 @@
+import { AuditingGetSideEffectsQuery, AuditingSideEffectMapper, AuditingSideEffectResponse } from '@app/auditing/side-effect';
+import { AuditingGetSideEffectsService } from '@app/auditing/side-effect/application/get/auditing-get-side-effects.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { AuditingSideEffectResponse } from '../../domain/auditing-side-effect.response';
-import { AuditingSideEffectMapper } from '../../domain/auditing-side-effect.mapper';
-import { AuditingGetSideEffectsQuery } from './auditing-get-side-effects.query';
-import { AuditingGetSideEffectsService } from './auditing-get-side-effects.service';
 
 @QueryHandler(AuditingGetSideEffectsQuery)
 export class AuditingGetSideEffectsQueryHandler implements IQueryHandler<AuditingGetSideEffectsQuery>
@@ -15,10 +13,12 @@ export class AuditingGetSideEffectsQueryHandler implements IQueryHandler<Auditin
 
     async execute(query: AuditingGetSideEffectsQuery): Promise<AuditingSideEffectResponse[]>
     {
-        return this.mapper.mapAggregatesToResponses(await this.getSideEffectsService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        ));
+        return this.mapper.mapAggregatesToResponses(
+            await this.getSideEffectsService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            ),
+        );
     }
 }

@@ -33,7 +33,7 @@ type CommonCountry
     latitude: GraphQLFloat
     longitude: GraphQLFloat
     zoom: GraphQLInt
-    mapType: CommonCountryMapType!
+    mapType: CommonCountryMapType
     availableLangs: JSON
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
@@ -61,7 +61,7 @@ input CommonCreateCountryInput
     latitude: GraphQLFloat
     longitude: GraphQLFloat
     zoom: GraphQLInt
-    mapType: CommonCountryMapType!
+    mapType: CommonCountryMapType
     availableLangs: JSON
     langId: ID!
     name: GraphQLString!

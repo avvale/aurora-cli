@@ -14,13 +14,13 @@ aggregateProperties:
     nullable: false
   - name: prefix
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: false
     index: unique
     indexName: uniquePrefixName
   - name: name
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: false
     index: unique
     indexName: uniquePrefixName

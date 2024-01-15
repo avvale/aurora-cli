@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { AuditingHttpCommunication, AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication';
 import { CQMetadata } from '@aurorajs.dev/core';
-import { AuditingIHttpCommunicationRepository } from '../../domain/auditing-http-communication.repository';
-import { AuditingHttpCommunication } from '../../domain/auditing-http-communication.aggregate';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingRawSQLHttpCommunicationsService

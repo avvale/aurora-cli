@@ -2,8 +2,9 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { AuditingModule } from '@api/auditing/auditing.module';
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuditingISideEffectRepository, auditingMockSideEffectData, AuditingMockSideEffectSeeder } from '@app/auditing/side-effect';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('side-effect', () =>
                 AuditingMockSideEffectSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingSideEffectId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectModelPath must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingSideEffectModelPath must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectModelName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingSideEffectModelName must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectAccountId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingSideEffectAccountId must be defined, can not be null');
             });
     });
 
@@ -150,7 +153,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectEmail must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingSideEffectEmail must be defined, can not be null');
             });
     });
 
@@ -166,7 +169,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectEvent must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingSideEffectEvent must be defined, can not be null');
             });
     });
 
@@ -182,7 +185,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectMethod must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingSideEffectMethod must be defined, can not be null');
             });
     });
 
@@ -198,7 +201,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectIsRollback must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingSideEffectIsRollback must be defined, can not be null');
             });
     });
 
@@ -214,7 +217,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingSideEffectId must be defined, can not be undefined');
             });
     });
 
@@ -230,7 +233,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectModelPath must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingSideEffectModelPath must be defined, can not be undefined');
             });
     });
 
@@ -246,7 +249,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectModelName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingSideEffectModelName must be defined, can not be undefined');
             });
     });
 
@@ -262,7 +265,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectAccountId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingSideEffectAccountId must be defined, can not be undefined');
             });
     });
 
@@ -278,7 +281,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectEmail must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingSideEffectEmail must be defined, can not be undefined');
             });
     });
 
@@ -294,7 +297,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectEvent must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingSideEffectEvent must be defined, can not be undefined');
             });
     });
 
@@ -310,7 +313,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectMethod must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingSideEffectMethod must be defined, can not be undefined');
             });
     });
 
@@ -326,7 +329,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectIsRollback must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingSideEffectIsRollback must be defined, can not be undefined');
             });
     });
 
@@ -342,7 +345,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for AuditingSideEffectId is not allowed, must be a length of 36');
             });
     });
 
@@ -358,7 +361,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectOperationId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for AuditingSideEffectOperationId is not allowed, must be a length of 36');
             });
     });
 
@@ -374,7 +377,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectAccountId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for AuditingSideEffectAccountId is not allowed, must be a length of 36');
             });
     });
 
@@ -390,7 +393,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectAuditableId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for AuditingSideEffectAuditableId is not allowed, must be a length of 36');
             });
     });
 
@@ -406,23 +409,23 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectRollbackSideEffectId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for AuditingSideEffectRollbackSideEffectId is not allowed, must be a length of 36');
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelPath is too large, has a maximum length of 1023', () =>
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelPath is too large, has a maximum length of 1022', () =>
     {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                modelPath: '****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                modelPath: '***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectModelPath is too large, has a maximum length of 1023');
+                expect(res.body.message).toContain('Value for AuditingSideEffectModelPath is too large, has a maximum length of 1022');
             });
     });
 
@@ -438,87 +441,71 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectModelName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for AuditingSideEffectModelName is too large, has a maximum length of 255');
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectOperationSort is too large, has a maximum length of 2', () =>
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEmail is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                operationSort: 111,
+                email: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectOperationSort is too large, has a maximum length of 2');
+                expect(res.body.message).toContain('Value for AuditingSideEffectEmail is too large, has a maximum length of 127');
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEmail is too large, has a maximum length of 120', () =>
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIp is too large, has a maximum length of 19', () =>
     {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                email: '*************************************************************************************************************************',
+                ip: '********************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectEmail is too large, has a maximum length of 120');
+                expect(res.body.message).toContain('Value for AuditingSideEffectIp is too large, has a maximum length of 19');
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIp is too large, has a maximum length of 50', () =>
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectBaseUrl is too large, has a maximum length of 2046', () =>
     {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                ip: '***************************************************',
+                baseUrl: '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectIp is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for AuditingSideEffectBaseUrl is too large, has a maximum length of 2046');
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectBaseUrl is too large, has a maximum length of 2047', () =>
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectUserAgent is too large, has a maximum length of 1022', () =>
     {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                baseUrl: '********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                userAgent: '***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectBaseUrl is too large, has a maximum length of 2047');
-            });
-    });
-
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectUserAgent is too large, has a maximum length of 1023', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/auditing/side-effect/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                userAgent: '****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for SideEffectUserAgent is too large, has a maximum length of 1023');
+                expect(res.body.message).toContain('Value for AuditingSideEffectUserAgent is too large, has a maximum length of 1022');
             });
     });
 
@@ -534,7 +521,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectIsRollback has to be a boolean value');
+                expect(res.body.message).toContain('Value for AuditingSideEffectIsRollback has to be a boolean value');
             });
     });
     test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEvent has to be a enum option of CREATED, BULK_CREATED, UPDATED, BULK_UPDATED, DELETED, BULK_DELETED, RESTORED, BULK_RESTORED, UPSERTED', () =>
@@ -549,7 +536,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectEvent has to be any of this options: CREATED, BULK_CREATED, UPDATED, BULK_UPDATED, DELETED, BULK_DELETED, RESTORED, BULK_RESTORED, UPSERTED');
+                expect(res.body.message).toContain('Value for AuditingSideEffectEvent has to be any of this options: CREATED, BULK_CREATED, UPDATED, BULK_UPDATED, DELETED, BULK_DELETED, RESTORED, BULK_RESTORED, UPSERTED');
             });
     });
     test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectMethod has to be a enum option of GET, POST, UPDATE, DELETE', () =>
@@ -564,7 +551,7 @@ describe('side-effect', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for SideEffectMethod has to be any of this options: GET, POST, UPDATE, DELETE');
+                expect(res.body.message).toContain('Value for AuditingSideEffectMethod has to be any of this options: GET, POST, UPDATE, DELETE');
             });
     });
 

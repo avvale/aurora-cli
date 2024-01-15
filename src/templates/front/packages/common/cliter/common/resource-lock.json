@@ -11,19 +11,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource-detail.component.html",
-            "integrity": "sha1:79293b0e6f3229e088d671f6209692b8fb116aa1"
+            "integrity": "sha1:48b9d20c7c61b18662b20219e3a270de6be0ced1"
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource-detail.component.ts",
-            "integrity": "sha1:a7448215d1326341580b552b7e502a682aa08e1d"
+            "integrity": "sha1:49993f30a9091041e03da52a664277ca8fb6d567"
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource-list.component.html",
-            "integrity": "sha1:f8074a8d0bde64c6d8a983b449a9a6450b516b73"
+            "integrity": "sha1:9ba29b8304d0dba7c1ce76c2ad9bbe548d22fb88"
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource-list.component.ts",
-            "integrity": "sha1:5e3dc81978555e3699717e1491cce9bb582ebbd3"
+            "integrity": "sha1:af534d4c6f5d67743df646b940e447f705e00b47"
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource.columns-config.ts",
@@ -35,11 +35,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource.resolvers.ts",
-            "integrity": "sha1:fb5292a2d8f9afba638d4c70e0114bac8b431a4a"
+            "integrity": "sha1:c3835db43376d11b4d15dd4145de1536995f0141"
         },
         {
             "path": "src/app/modules/admin/apps/common/resource/resource.service.ts",
-            "integrity": "sha1:a0fbc7917e935da11108c514c5d0a7cfb4139de6"
+            "integrity": "sha1:620088d3a53f4885c69b3acd024c87c75ffdef5e"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/resource/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/common/resource/public-api.ts",
+            "integrity": "sha1:cb381f6c263bae59c4e11e553351f2ef2f37d167"
         }
     ]
 }

@@ -5,8 +5,8 @@ export class CommonUpsertAttachmentLibraryCommand
     constructor(
         public readonly payload: {
             id: string;
-            filename?: string;
             originFilename?: string;
+            filename?: string;
             mimetype?: string;
             extension?: string;
             relativePathSegments?: any;

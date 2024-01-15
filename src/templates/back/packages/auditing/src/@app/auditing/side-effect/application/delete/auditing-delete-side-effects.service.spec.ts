@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { AuditingISideEffectRepository, AuditingMockSideEffectRepository } from '@app/auditing/side-effect';
+import { AuditingDeleteSideEffectsService } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effects.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { AuditingDeleteSideEffectsService } from './auditing-delete-side-effects.service';
-import { AuditingISideEffectRepository } from '../../domain/auditing-side-effect.repository';
-import { AuditingMockSideEffectRepository } from '../../infrastructure/mock/auditing-mock-side-effect.repository';
 
 describe('AuditingDeleteSideEffectsService', () =>
 {

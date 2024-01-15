@@ -3,7 +3,7 @@ export class AuditingSideEffectResponse
 {
     constructor(
         public readonly id: string,
-        public readonly tags: any,
+        public readonly tags: string[],
         public readonly modelPath: string,
         public readonly modelName: string,
         public readonly operationId: string,

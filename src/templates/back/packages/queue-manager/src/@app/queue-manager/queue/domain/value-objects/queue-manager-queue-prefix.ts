@@ -10,7 +10,7 @@ export class QueueManagerQueuePrefix extends StringValueObject
             name       : 'QueueManagerQueuePrefix',
             nullable   : false,
             undefinable: false,
-            maxLength  : 50,
+            maxLength  : 63,
         }, validationRules));
     }
 }

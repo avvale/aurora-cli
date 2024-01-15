@@ -10,7 +10,7 @@ export class AuditingSideEffectModelPath extends StringValueObject
             name       : 'AuditingSideEffectModelPath',
             nullable   : false,
             undefinable: false,
-            maxLength  : 1023,
+            maxLength  : 1022,
         }, validationRules));
     }
 }

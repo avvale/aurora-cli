@@ -1,6 +1,6 @@
+import { AuditingDeleteHttpCommunicationsCommand } from '@app/auditing/http-communication';
+import { AuditingDeleteHttpCommunicationsService } from '@app/auditing/http-communication/application/delete/auditing-delete-http-communications.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { AuditingDeleteHttpCommunicationsCommand } from './auditing-delete-http-communications.command';
-import { AuditingDeleteHttpCommunicationsService } from './auditing-delete-http-communications.service';
 
 @CommandHandler(AuditingDeleteHttpCommunicationsCommand)
 export class AuditingDeleteHttpCommunicationsCommandHandler implements ICommandHandler<AuditingDeleteHttpCommunicationsCommand>

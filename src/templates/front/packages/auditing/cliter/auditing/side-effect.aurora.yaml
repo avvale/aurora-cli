@@ -13,12 +13,14 @@ aggregateProperties:
     length: 36
     nullable: false
   - name: tags
-    type: json
+    type: array
+    arrayOptions:
+      type: varchar
     nullable: true
     index: index
   - name: modelPath
     type: varchar
-    maxLength: 1023
+    maxLength: 1022
     nullable: false
   - name: modelName
     type: varchar
@@ -30,8 +32,8 @@ aggregateProperties:
     nullable: true
     index: index
   - name: operationSort
-    type: tinyint.unsigned
-    maxLength: 2
+    type: smallint
+    unsigned: true
     nullable: true
   - name: accountId
     type: id
@@ -40,7 +42,7 @@ aggregateProperties:
     index: index
   - name: email
     type: varchar
-    maxLength: 120
+    maxLength: 127
     nullable: false
     example: john@gmail.com
   - name: event
@@ -69,7 +71,7 @@ aggregateProperties:
     nullable: true
   - name: ip
     type: varchar
-    maxLength: 50
+    maxLength: 19
     nullable: true
   - name: method
     type: enum
@@ -82,7 +84,7 @@ aggregateProperties:
     example: AuditingSideEffectMethod.POST
   - name: baseUrl
     type: varchar
-    maxLength: 2047
+    maxLength: 2046
     nullable: true
   - name: params
     type: json
@@ -95,7 +97,7 @@ aggregateProperties:
     nullable: true
   - name: userAgent
     type: varchar
-    maxLength: 1023
+    maxLength: 1022
     nullable: true
   - name: isRollback
     type: boolean
@@ -110,6 +112,7 @@ aggregateProperties:
   - name: createdAt
     type: timestamp
     nullable: true
+    index: index
   - name: updatedAt
     type: timestamp
     nullable: true

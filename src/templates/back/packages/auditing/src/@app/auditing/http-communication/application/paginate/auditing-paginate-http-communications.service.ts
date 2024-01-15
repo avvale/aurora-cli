@@ -1,9 +1,6 @@
+import { AuditingHttpCommunication, AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication';
+import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { QueryStatement } from '@aurorajs.dev/core';
-import { Pagination } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
-import { AuditingIHttpCommunicationRepository } from '../../domain/auditing-http-communication.repository';
-import { AuditingHttpCommunication } from '../../domain/auditing-http-communication.aggregate';
 
 @Injectable()
 export class AuditingPaginateHttpCommunicationsService

@@ -1,32 +1,31 @@
-import { IMapper, LiteralObject, MapperOptions, CQMetadata } from '@aurorajs.dev/core';
-import { AuditingSideEffect } from './auditing-side-effect.aggregate';
-import { AuditingSideEffectResponse } from './auditing-side-effect.response';
+import { AuditingSideEffect, AuditingSideEffectResponse } from '@app/auditing/side-effect';
 import {
-    AuditingSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectModelName,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
     AuditingSideEffectAccountId,
+    AuditingSideEffectAuditableId,
+    AuditingSideEffectBaseUrl,
+    AuditingSideEffectBody,
+    AuditingSideEffectCreatedAt,
+    AuditingSideEffectDeletedAt,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectNewValue,
+    AuditingSideEffectId,
     AuditingSideEffectIp,
+    AuditingSideEffectIsRollback,
     AuditingSideEffectMethod,
-    AuditingSideEffectBaseUrl,
+    AuditingSideEffectModelName,
+    AuditingSideEffectModelPath,
+    AuditingSideEffectNewValue,
+    AuditingSideEffectOldValue,
+    AuditingSideEffectOperationId,
+    AuditingSideEffectOperationSort,
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
-    AuditingSideEffectBody,
-    AuditingSideEffectUserAgent,
-    AuditingSideEffectIsRollback,
     AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectCreatedAt,
+    AuditingSideEffectTags,
     AuditingSideEffectUpdatedAt,
-    AuditingSideEffectDeletedAt,
-} from './value-objects';
+    AuditingSideEffectUserAgent,
+} from '@app/auditing/side-effect/domain/value-objects';
+import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class AuditingSideEffectMapper implements IMapper
 {

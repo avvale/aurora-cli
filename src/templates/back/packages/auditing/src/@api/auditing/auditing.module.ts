@@ -3,8 +3,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '@aurora/shared.module';
 import { AuditingSeeder } from './auditing.seeder';
 import { AuditingModels, AuditingHandlers, AuditingServices, AuditingRepositories, AuditingSagas } from '@app/auditing';
-import { AuditingSideEffectControllers, AuditingSideEffectResolvers, AuditingSideEffectApiHandlers, AuditingSideEffectServices } from './side-effect';
-import { AuditingHttpCommunicationControllers, AuditingHttpCommunicationResolvers, AuditingHttpCommunicationApiHandlers, AuditingHttpCommunicationServices } from './http-communication';
+import { AuditingSideEffectApiHandlers, AuditingSideEffectApiControllers, AuditingSideEffectApiResolvers, AuditingSideEffectApiServices } from './side-effect';
+import { AuditingHttpCommunicationApiHandlers, AuditingHttpCommunicationApiControllers, AuditingHttpCommunicationApiResolvers, AuditingHttpCommunicationApiServices } from './http-communication';
 import { AuditingDeleteSideEffectTasksService } from './shared/tasks/auditing-delete-side-effect.task';
 import { AuditingDeleteHttpCommunicationTasksService } from './shared/tasks/auditing-delete-http-communication.task';
 
@@ -16,8 +16,8 @@ import { AuditingDeleteHttpCommunicationTasksService } from './shared/tasks/audi
         ]),
     ],
     controllers: [
-        ...AuditingSideEffectControllers,
-        ...AuditingHttpCommunicationControllers,
+        ...AuditingSideEffectApiControllers,
+        ...AuditingHttpCommunicationApiControllers,
     ],
     providers: [
         AuditingDeleteHttpCommunicationTasksService,
@@ -27,12 +27,12 @@ import { AuditingDeleteHttpCommunicationTasksService } from './shared/tasks/audi
         ...AuditingServices,
         ...AuditingRepositories,
         ...AuditingSagas,
-        ...AuditingSideEffectResolvers,
         ...AuditingSideEffectApiHandlers,
-        ...AuditingHttpCommunicationResolvers,
         ...AuditingHttpCommunicationApiHandlers,
-        ...AuditingSideEffectServices,
-        ...AuditingHttpCommunicationServices,
+        ...AuditingSideEffectApiResolvers,
+        ...AuditingSideEffectApiServices,
+        ...AuditingHttpCommunicationApiResolvers,
+        ...AuditingHttpCommunicationApiServices,
     ],
 })
 export class AuditingModule {}

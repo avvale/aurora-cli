@@ -1,15 +1,11 @@
+import { AuditingDeleteSideEffectByIdCommand, auditingMockSideEffectData } from '@app/auditing/side-effect';
+import { AuditingDeleteSideEffectByIdCommandHandler } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effect-by-id.command-handler';
+import { AuditingDeleteSideEffectByIdService } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effect-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingDeleteSideEffectByIdCommandHandler } from './auditing-delete-side-effect-by-id.command-handler';
-import { auditingMockSideEffectData } from '@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.data';
-import { AuditingDeleteSideEffectByIdCommand } from './auditing-delete-side-effect-by-id.command';
-import { AuditingDeleteSideEffectByIdService } from './auditing-delete-side-effect-by-id.service';
 
 describe('AuditingDeleteSideEffectByIdCommandHandler', () =>
 {
     let commandHandler: AuditingDeleteSideEffectByIdCommandHandler;
-    let service: AuditingDeleteSideEffectByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('AuditingDeleteSideEffectByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingDeleteSideEffectByIdCommandHandler>(AuditingDeleteSideEffectByIdCommandHandler);
-        service = module.get<AuditingDeleteSideEffectByIdService>(AuditingDeleteSideEffectByIdService);
     });
 
     describe('main', () =>

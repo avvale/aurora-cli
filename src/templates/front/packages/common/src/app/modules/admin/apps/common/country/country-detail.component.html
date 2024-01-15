@@ -119,7 +119,9 @@
                         <mat-label>{{ t('common.Name') }}</mat-label>
                         <input
                             matInput
-                            formControlName="name"        required
+                            formControlName="name"
+                            maxlength="127"
+                            required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
                     </mat-form-field>
@@ -131,7 +133,7 @@
                         <input
                             matInput
                             formControlName="slug"
-                            maxlength="1024"
+                            maxlength="1022"
                             required
                         >
                         <mat-error>{{ formErrors?.slug | async }}</mat-error>
@@ -144,7 +146,7 @@
                         <input
                             matInput
                             formControlName="iso3166Alpha2"
-                             maxlength="2"
+                            maxlength="2"
                         >
                         <mat-error>{{ formErrors?.iso3166Alpha2 | async }}</mat-error>
                     </mat-form-field>
@@ -156,7 +158,7 @@
                         <input
                             matInput
                             formControlName="iso3166Alpha3"
-                             maxlength="3"
+                            maxlength="3"
                         >
                         <mat-error>{{ formErrors?.iso3166Alpha3 | async }}</mat-error>
                     </mat-form-field>
@@ -168,7 +170,7 @@
                         <input
                             matInput
                             formControlName="iso3166Numeric"
-                             maxlength="3"
+                            maxlength="3"
                         >
                         <mat-error>{{ formErrors?.iso3166Numeric | async }}</mat-error>
                     </mat-form-field>
@@ -204,7 +206,7 @@
                         <input
                             matInput
                             formControlName="image"
-                            maxlength="1024"
+                            maxlength="1022"
                         >
                         <mat-error>{{ formErrors?.image | async }}</mat-error>
                     </mat-form-field>
@@ -311,7 +313,7 @@
                         <input
                             matInput
                             formControlName="administrativeAreaLevel2"
-                            maxlength="50"
+                            maxlength="63"
                         >
                         <mat-error>{{ formErrors?.administrativeAreaLevel2 | async }}</mat-error>
                     </mat-form-field>
@@ -323,7 +325,7 @@
                         <input
                             matInput
                             formControlName="administrativeAreaLevel3"
-                            maxlength="50"
+                            maxlength="63"
                         >
                         <mat-error>{{ formErrors?.administrativeAreaLevel3 | async }}</mat-error>
                     </mat-form-field>

@@ -477,22 +477,6 @@ describe('attachment', () =>
             });
     });
 
-    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentSort is too large, has a maximum length of 6', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                sort: 1111111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentSort is too large, has a maximum length of 6');
-            });
-    });
-
     test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentAlt is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
@@ -557,19 +541,19 @@ describe('attachment', () =>
             });
     });
 
-    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentMimetype is too large, has a maximum length of 50', () =>
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentMimetype is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/attachment/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                mimetype: '***************************************************',
+                mimetype: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonAttachmentMimetype is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CommonAttachmentMimetype is too large, has a maximum length of 63');
             });
     });
 
@@ -586,54 +570,6 @@ describe('attachment', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonAttachmentExtension is too large, has a maximum length of 10');
-            });
-    });
-
-    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentWidth is too large, has a maximum length of 5', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                width: 111111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentWidth is too large, has a maximum length of 5');
-            });
-    });
-
-    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentHeight is too large, has a maximum length of 5', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                height: 111111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentHeight is too large, has a maximum length of 5');
-            });
-    });
-
-    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentSize is too large, has a maximum length of 10', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                size: 11111111111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentSize is too large, has a maximum length of 10');
             });
     });
 
@@ -669,19 +605,49 @@ describe('attachment', () =>
             });
     });
 
-    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentSize must have a positive sign', () =>
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentWidth has to be a integer value', () =>
     {
         return request(app.getHttpServer())
             .post('/common/attachment/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                size: -1,
+                width: 100.10,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('The numerical Value for CommonAttachmentSize must have a positive sign, this field does not accept negative values');
+                expect(res.body.message).toContain('Value for CommonAttachmentWidth has to be a integer value');
+            });
+    });
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentHeight has to be a integer value', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                height: 100.10,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentHeight has to be a integer value');
+            });
+    });
+    test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentSize has to be a integer value', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/common/attachment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                size: 100.10,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for CommonAttachmentSize has to be a integer value');
             });
     });
     test('/REST:POST common/attachment/create - Got 400 Conflict, AttachmentIsCropable has to be a boolean value', () =>

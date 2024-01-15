@@ -1,6 +1,6 @@
+import { AuditingDeleteSideEffectsCommand } from '@app/auditing/side-effect';
+import { AuditingDeleteSideEffectsService } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effects.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { AuditingDeleteSideEffectsCommand } from './auditing-delete-side-effects.command';
-import { AuditingDeleteSideEffectsService } from './auditing-delete-side-effects.service';
 
 @CommandHandler(AuditingDeleteSideEffectsCommand)
 export class AuditingDeleteSideEffectsCommandHandler implements ICommandHandler<AuditingDeleteSideEffectsCommand>

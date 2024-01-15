@@ -1,7 +1,6 @@
-import { QueueManagerQueue } from '../queue-manager.types';
-import { queueColumnsConfig } from './queue.columns-config';
-import { QueueService } from './queue.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { queueColumnsConfig, QueueService } from '@apps/queue-manager/queue';
+import { QueueManagerQueue } from '@apps/queue-manager/queue-manager.types';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -59,7 +58,6 @@ export class QueueListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,

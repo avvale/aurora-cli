@@ -14,7 +14,7 @@ aggregateProperties:
     nullable: false
   - name: queueName
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: false
   - name: state
     type: enum
@@ -36,7 +36,7 @@ aggregateProperties:
     index: index
   - name: jobName
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: true
     defaultValue: __default__
   - name: tags

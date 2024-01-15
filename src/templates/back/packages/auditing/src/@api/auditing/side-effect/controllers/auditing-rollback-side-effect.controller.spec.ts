@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingRollbackSideEffectController } from './auditing-rollback-side-effect.controller';
 import { AuditingRollbackSideEffectHandler } from '../handlers/auditing-rollback-side-effect.handler';
+import { AuditingRollbackSideEffectController } from './auditing-rollback-side-effect.controller';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingRollbackSideEffectController', () =>
 {

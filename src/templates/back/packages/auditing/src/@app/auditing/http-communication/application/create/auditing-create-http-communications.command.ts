@@ -1,11 +1,11 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class  AuditingCreateHttpCommunicationsCommand
+export class AuditingCreateHttpCommunicationsCommand
 {
     constructor(
         public readonly payload: {
             id: string;
-            tags?: any;
+            tags?: string[];
             event: string;
             status?: number;
             method: string;

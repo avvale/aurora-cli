@@ -79,13 +79,13 @@
 
                     <mat-form-field
                         appearance="outline"
-                        class="col-4"
+                        class="col-8"
                     >
                         <mat-label>{{ t('common.Code') }}</mat-label>
                         <input
                             matInput
                             formControlName="code"
-                            maxlength="30"
+                            maxlength="63"
                             required
                         >
                         <mat-error>{{ formErrors?.code | async }}</mat-error>
@@ -98,7 +98,7 @@
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="100"
+                            maxlength="127"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>

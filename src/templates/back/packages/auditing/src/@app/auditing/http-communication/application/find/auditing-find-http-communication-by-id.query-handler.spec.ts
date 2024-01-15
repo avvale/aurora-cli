@@ -1,13 +1,7 @@
+import { AuditingFindHttpCommunicationByIdQuery, AuditingHttpCommunicationMapper, AuditingIHttpCommunicationRepository, auditingMockHttpCommunicationData, AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication';
+import { AuditingFindHttpCommunicationByIdQueryHandler } from '@app/auditing/http-communication/application/find/auditing-find-http-communication-by-id.query-handler';
+import { AuditingFindHttpCommunicationByIdService } from '@app/auditing/http-communication/application/find/auditing-find-http-communication-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingFindHttpCommunicationByIdQueryHandler } from './auditing-find-http-communication-by-id.query-handler';
-import { AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.repository';
-import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.data';
-import { AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication/domain/auditing-http-communication.repository';
-import { AuditingHttpCommunicationMapper } from '@app/auditing/http-communication/domain/auditing-http-communication.mapper';
-import { AuditingFindHttpCommunicationByIdQuery } from './auditing-find-http-communication-by-id.query';
-import { AuditingFindHttpCommunicationByIdService } from './auditing-find-http-communication-by-id.service';
 
 describe('AuditingFindHttpCommunicationByIdQueryHandler', () =>
 {

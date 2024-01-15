@@ -39,8 +39,8 @@ export class CommonMockAttachmentLibrarySeeder extends MockSeeder<CommonAttachme
             this.collectionSource.push(
                 CommonAttachmentLibrary.register(
                     new CommonAttachmentLibraryId(attachmentLibrary.id),
-                    new CommonAttachmentLibraryFilename(attachmentLibrary.filename),
                     new CommonAttachmentLibraryOriginFilename(attachmentLibrary.originFilename),
+                    new CommonAttachmentLibraryFilename(attachmentLibrary.filename),
                     new CommonAttachmentLibraryMimetype(attachmentLibrary.mimetype),
                     new CommonAttachmentLibraryExtension(attachmentLibrary.extension),
                     new CommonAttachmentLibraryRelativePathSegments(attachmentLibrary.relativePathSegments),

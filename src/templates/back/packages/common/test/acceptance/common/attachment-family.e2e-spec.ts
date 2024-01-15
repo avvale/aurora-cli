@@ -237,19 +237,19 @@ describe('attachment-family', () =>
             });
     });
 
-    test('/REST:POST common/attachment-family/create - Got 400 Conflict, AttachmentFamilyCode is too large, has a maximum length of 25', () =>
+    test('/REST:POST common/attachment-family/create - Got 400 Conflict, AttachmentFamilyCode is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/attachment-family/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: '**************************',
+                code: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonAttachmentFamilyCode is too large, has a maximum length of 25');
+                expect(res.body.message).toContain('Value for CommonAttachmentFamilyCode is too large, has a maximum length of 63');
             });
     });
 
@@ -269,54 +269,36 @@ describe('attachment-family', () =>
             });
     });
 
-    test('/REST:POST common/attachment-family/create - Got 400 Conflict, AttachmentFamilyWidth is too large, has a maximum length of 5', () =>
+    test('/REST:POST common/attachment-family/create - Got 400 Conflict, AttachmentFamilyWidth has to be a integer value', () =>
     {
         return request(app.getHttpServer())
             .post('/common/attachment-family/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                width: 111111,
+                width: 100.10,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonAttachmentFamilyWidth is too large, has a maximum length of 5');
+                expect(res.body.message).toContain('Value for CommonAttachmentFamilyWidth has to be a integer value');
             });
     });
-
-    test('/REST:POST common/attachment-family/create - Got 400 Conflict, AttachmentFamilyHeight is too large, has a maximum length of 5', () =>
+    test('/REST:POST common/attachment-family/create - Got 400 Conflict, AttachmentFamilyHeight has to be a integer value', () =>
     {
         return request(app.getHttpServer())
             .post('/common/attachment-family/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                height: 111111,
+                height: 100.10,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonAttachmentFamilyHeight is too large, has a maximum length of 5');
+                expect(res.body.message).toContain('Value for CommonAttachmentFamilyHeight has to be a integer value');
             });
     });
-
-    test('/REST:POST common/attachment-family/create - Got 400 Conflict, AttachmentFamilyQuality is too large, has a maximum length of 3', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/attachment-family/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                quality: 1111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonAttachmentFamilyQuality is too large, has a maximum length of 3');
-            });
-    });
-
     test('/REST:POST common/attachment-family/create - Got 400 Conflict, AttachmentFamilyFitType has to be a enum option of FIT_CROP, FIT_WIDTH, FIT_HEIGHT, FIT_WIDTH_FREE_CROP, FIT_HEIGHT_FREE_CROP', () =>
     {
         return request(app.getHttpServer())

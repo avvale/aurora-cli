@@ -13,7 +13,9 @@ aggregateProperties:
     length: 36
     nullable: false
   - name: tags
-    type: json
+    type: array
+    arrayOptions:
+      type: varchar
     nullable: true
     index: index
   - name: event
@@ -26,8 +28,8 @@ aggregateProperties:
     nullable: false
     example: AuditingHttpCommunicationEvent.REQUEST_FULFILLED
   - name: status
-    type: smallint.unsigned
-    maxLength: 5
+    type: smallint
+    unsigned: true
     nullable: true
   - name: method
     type: varchar
@@ -35,7 +37,7 @@ aggregateProperties:
     nullable: false
   - name: url
     type: varchar
-    maxLength: 2048
+    maxLength: 2046
     nullable: false
   - name: httpRequest
     type: json
@@ -62,6 +64,7 @@ aggregateProperties:
   - name: createdAt
     type: timestamp
     nullable: true
+    index: index
   - name: updatedAt
     type: timestamp
     nullable: true

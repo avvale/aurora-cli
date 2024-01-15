@@ -1,24 +1,21 @@
 /* eslint-disable key-spacing */
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { AuditingCreateHttpCommunicationCommand } from './auditing-create-http-communication.command';
-import { AuditingCreateHttpCommunicationService } from './auditing-create-http-communication.service';
+import { AuditingCreateHttpCommunicationCommand } from '@app/auditing/http-communication';
+import { AuditingCreateHttpCommunicationService } from '@app/auditing/http-communication/application/create/auditing-create-http-communication.service';
 import {
-    AuditingHttpCommunicationId,
-    AuditingHttpCommunicationTags,
     AuditingHttpCommunicationEvent,
-    AuditingHttpCommunicationStatus,
-    AuditingHttpCommunicationMethod,
-    AuditingHttpCommunicationUrl,
     AuditingHttpCommunicationHttpRequest,
     AuditingHttpCommunicationHttpRequestRejected,
     AuditingHttpCommunicationHttpResponse,
     AuditingHttpCommunicationHttpResponseRejected,
+    AuditingHttpCommunicationId,
     AuditingHttpCommunicationIsReprocessing,
+    AuditingHttpCommunicationMethod,
     AuditingHttpCommunicationReprocessingHttpCommunicationId,
-    AuditingHttpCommunicationCreatedAt,
-    AuditingHttpCommunicationUpdatedAt,
-    AuditingHttpCommunicationDeletedAt,
-} from '../../domain/value-objects';
+    AuditingHttpCommunicationStatus,
+    AuditingHttpCommunicationTags,
+    AuditingHttpCommunicationUrl,
+} from '@app/auditing/http-communication/domain/value-objects';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(AuditingCreateHttpCommunicationCommand)
 export class AuditingCreateHttpCommunicationCommandHandler implements ICommandHandler<AuditingCreateHttpCommunicationCommand>

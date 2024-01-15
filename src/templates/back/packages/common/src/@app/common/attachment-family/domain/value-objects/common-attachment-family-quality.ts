@@ -10,7 +10,6 @@ export class CommonAttachmentFamilyQuality extends SmallintValueObject
             name       : 'CommonAttachmentFamilyQuality',
             nullable   : true,
             undefinable: true,
-            maxLength  : 3,
             unsigned   : true,
         }, validationRules));
     }

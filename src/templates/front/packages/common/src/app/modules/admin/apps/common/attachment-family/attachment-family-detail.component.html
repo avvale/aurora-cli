@@ -102,7 +102,7 @@
                         <input
                             matInput
                             formControlName="code"
-                            maxlength="25"
+                            maxlength="63"
                             required
                         >
                         <mat-error>{{ formErrors?.code | async }}</mat-error>
@@ -169,9 +169,9 @@
                             formControlName="sizes"
                             multiple
                         >
-                            <mat-option value="25">-25%</mat-option>
-                            <mat-option value="50">-50%</mat-option>
-                            <mat-option value="75">-75%</mat-option>
+                            <mat-option value="25">25%</mat-option>
+                            <mat-option value="50">50%</mat-option>
+                            <mat-option value="75">75%</mat-option>
                         </mat-select>
                         <mat-error>{{ formErrors?.sizes | async }}</mat-error>
                     </mat-form-field>

@@ -1,9 +1,7 @@
+import { AuditingDeleteHttpCommunicationByIdCommand } from '@app/auditing/http-communication';
+import { AuditingDeleteHttpCommunicationByIdService } from '@app/auditing/http-communication/application/delete/auditing-delete-http-communication-by-id.service';
+import { AuditingHttpCommunicationId } from '@app/auditing/http-communication/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { AuditingDeleteHttpCommunicationByIdCommand } from './auditing-delete-http-communication-by-id.command';
-import { AuditingDeleteHttpCommunicationByIdService } from './auditing-delete-http-communication-by-id.service';
-import {
-    AuditingHttpCommunicationId
-} from '../../domain/value-objects';
 
 @CommandHandler(AuditingDeleteHttpCommunicationByIdCommand)
 export class AuditingDeleteHttpCommunicationByIdCommandHandler implements ICommandHandler<AuditingDeleteHttpCommunicationByIdCommand>

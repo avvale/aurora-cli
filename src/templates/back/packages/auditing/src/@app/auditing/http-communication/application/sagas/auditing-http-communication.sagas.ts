@@ -1,8 +1,8 @@
+import { AuditingCreatedHttpCommunicationEvent } from '@app/auditing/http-communication';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { Observable } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { AuditingCreatedHttpCommunicationEvent } from '../events/auditing-created-http-communication.event';
 
 @Injectable()
 export class AuditingHttpCommunicationSagas

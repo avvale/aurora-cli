@@ -92,13 +92,13 @@
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class="col-2"
+                        class="col-8"
                     >
                         <mat-label>{{ t('common.CustomCode') }}</mat-label>
                         <input
                             matInput
                             formControlName="customCode"
-                            maxlength="10"
+                            maxlength="63"
                         >
                         <mat-error>{{ formErrors?.customCode | async }}</mat-error>
                     </mat-form-field>
@@ -110,7 +110,7 @@
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="100"
+                            maxlength="127"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
@@ -154,14 +154,13 @@
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
-                        class="col-2"
+                        class="col-12"
                     >
                         <mat-label>{{ t('common.Zoom') }}</mat-label>
                         <input
                             matInput
                             formControlName="zoom"
                             type="number"
-                            maxlength="2"
                         >
                         <mat-error>{{ formErrors?.zoom | async }}</mat-error>
                     </mat-form-field>

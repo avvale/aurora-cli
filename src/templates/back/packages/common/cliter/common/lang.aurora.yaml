@@ -17,10 +17,11 @@ aggregateProperties:
     nullable: false
   - name: name
     type: varchar
-    maxLength: 100
+    maxLength: 127
     nullable: false
   - name: image
     type: varchar
+    maxLength: 1022
     nullable: true
   - name: iso6392
     type: char
@@ -39,7 +40,7 @@ aggregateProperties:
     index: index
   - name: customCode
     type: varchar
-    maxLength: 10
+    maxLength: 63
     nullable: true
     index: index
   - name: dir
@@ -49,8 +50,8 @@ aggregateProperties:
       - RTL
     nullable: false
   - name: sort
-    type: smallint.unsigned
-    maxLength: 6
+    type: smallint
+    unsigned: true
     nullable: true
   - name: isActive
     type: boolean

@@ -1,6 +1,6 @@
-import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
+import { IntValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CommonAttachmentFamilyHeight extends SmallintValueObject
+export class CommonAttachmentFamilyHeight extends IntValueObject
 {
     public readonly type: string = 'CommonAttachmentFamilyHeight';
 
@@ -10,7 +10,6 @@ export class CommonAttachmentFamilyHeight extends SmallintValueObject
             name       : 'CommonAttachmentFamilyHeight',
             nullable   : true,
             undefinable: true,
-            maxLength  : 5,
             unsigned   : true,
         }, validationRules));
     }

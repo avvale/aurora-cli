@@ -156,22 +156,6 @@ describe('country', () =>
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryMapType property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/country/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                mapType: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonCountryMapType must be defined, can not be null');
-            });
-    });
-
     test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nLangId property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -281,22 +265,6 @@ describe('country', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for CommonCountryIso3166Numeric must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryMapType property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/country/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                mapType: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonCountryMapType must be defined, can not be undefined');
             });
     });
 
@@ -428,19 +396,19 @@ describe('country', () =>
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryCustomCode is too large, has a maximum length of 10', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryCustomCode is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                customCode: '***********',
+                customCode: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonCountryCustomCode is too large, has a maximum length of 10');
+                expect(res.body.message).toContain('Value for CommonCountryCustomCode is too large, has a maximum length of 63');
             });
     });
 
@@ -460,149 +428,102 @@ describe('country', () =>
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryImage is too large, has a maximum length of 1024', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryImage is too large, has a maximum length of 1022', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                image: '*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                image: '***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonCountryImage is too large, has a maximum length of 1024');
+                expect(res.body.message).toContain('Value for CommonCountryImage is too large, has a maximum length of 1022');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountrySort is too large, has a maximum length of 6', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                sort: 1111111,
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonCountrySort is too large, has a maximum length of 6');
+                expect(res.body.message).toContain('Value for CommonCountryI18nName is too large, has a maximum length of 127');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryZoom is too large, has a maximum length of 2', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                zoom: 111,
+                slug: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonCountryZoom is too large, has a maximum length of 2');
+                expect(res.body.message).toContain('Value for CommonCountryI18nSlug is too large, has a maximum length of 127');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nName is too large, has a maximum length of 100', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '*****************************************************************************************************',
+                administrativeAreaLevel1: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonCountryI18nName is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 63');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nSlug is too large, has a maximum length of 100', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                slug: '*****************************************************************************************************',
+                administrativeAreaLevel2: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonCountryI18nSlug is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 63');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 50', () =>
+    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/country/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                administrativeAreaLevel1: '***************************************************',
+                administrativeAreaLevel3: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel1 is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 63');
             });
     });
 
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 50', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/country/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                administrativeAreaLevel2: '***************************************************',
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel2 is too large, has a maximum length of 50');
-            });
-    });
-
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 50', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/country/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                administrativeAreaLevel3: '***************************************************',
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for CommonCountryI18nAdministrativeAreaLevel3 is too large, has a maximum length of 50');
-            });
-    });
-
-    test('/REST:POST common/country/create - Got 400 Conflict, CountryZoom must have a positive sign', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/common/country/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                zoom: -1,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('The numerical Value for CommonCountryZoom must have a positive sign, this field does not accept negative values');
-            });
-    });
     test('/REST:POST common/country/create - Got 400 Conflict, CountryMapType has to be a enum option of ROADMAP, SATELLITE, HYBRID, TERRAIN', () =>
     {
         return request(app.getHttpServer())

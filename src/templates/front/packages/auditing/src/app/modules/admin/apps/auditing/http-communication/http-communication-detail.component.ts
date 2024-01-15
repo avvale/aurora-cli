@@ -1,10 +1,10 @@
-import { AuditingHttpCommunication } from '../auditing.types';
-import { HttpCommunicationService } from './http-communication.service';
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { AuditingHttpCommunication } from '@apps/auditing/auditing.types';
+import { HttpCommunicationService } from '@apps/auditing/http-communication';
 import { Action, Crumb, defaultDetailImports, log, mapActions, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent } from '@aurora';
-import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { lastValueFrom, takeUntil } from 'rxjs';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @Component({
     selector       : 'auditing-http-communication-detail',
@@ -40,7 +40,7 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
 		protected readonly injector: Injector,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of
@@ -87,9 +87,9 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
             id                  : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             code                : [{ value: '', disabled: true }],
             event               : [{ value: '', disabled: true }],
-            status              : [{ value: '', disabled: true }, [Validators.maxLength(5)]],
+            status              : [{ value: '', disabled: true }],
             method              : [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(25)]],
-            url                 : [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(2048)]],
+            url                 : [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(2046)]],
             httpRequest         : null,
             httpRequestRejected : null,
             httpResponse        : null,

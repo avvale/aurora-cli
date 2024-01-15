@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { AuditingISideEffectRepository, AuditingSideEffect } from '@app/auditing/side-effect';
+import { AuditingSideEffectId } from '@app/auditing/side-effect/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
-import { AuditingISideEffectRepository } from '../../domain/auditing-side-effect.repository';
-import { AuditingSideEffect } from '../../domain/auditing-side-effect.aggregate';
-import { AuditingSideEffectId } from '../../domain/value-objects';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingFindSideEffectByIdService

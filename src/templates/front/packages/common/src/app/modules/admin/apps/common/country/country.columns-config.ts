@@ -87,7 +87,7 @@ export const countryColumnsConfig: ColumnConfig[] = [
         translation: 'common.Zoom',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.ENUM,
         field      : 'mapType',
         sort       : 'mapType',
         translation: 'common.MapType',

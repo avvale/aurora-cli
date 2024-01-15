@@ -2,7 +2,7 @@
 import { CommonAdministrativeAreaLevel1Dto } from '@api/common/administrative-area-level-1';
 import { CommonAdministrativeAreaLevel2Dto } from '@api/common/administrative-area-level-2';
 import { CommonCountryDto } from '@api/common/country';
-import { CommonAdministrativeAreaLevel3MapType } from '@api/graphql';
+import { CommonAdministrativeAreaLevel1MapType, CommonAdministrativeAreaLevel3MapType } from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CommonAdministrativeAreaLevel3Dto
@@ -98,9 +98,9 @@ export class CommonAdministrativeAreaLevel3Dto
         type       : CommonAdministrativeAreaLevel3MapType,
         enum       : ['ROADMAP','SATELLITE','HYBRID','TERRAIN'],
         description: 'mapType [input here api field description]',
-        example    : CommonAdministrativeAreaLevel3MapType.TERRAIN,
+        example    : CommonAdministrativeAreaLevel1MapType.TERRAIN,
     })
-    mapType: CommonAdministrativeAreaLevel3MapType;
+    mapType?: CommonAdministrativeAreaLevel3MapType;
 
     @ApiProperty({
         type       : String,

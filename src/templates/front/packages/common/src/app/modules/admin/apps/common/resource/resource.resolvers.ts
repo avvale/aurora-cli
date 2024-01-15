@@ -1,8 +1,7 @@
-import { CommonResource } from '../common.types';
-import { resourceColumnsConfig } from './resource.columns-config';
-import { ResourceService } from './resource.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { CommonResource } from '@apps/common/common.types';
+import { resourceColumnsConfig, ResourceService } from '@apps/common/resource';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const resourcePaginationResolver: ResolveFn<GridData<CommonResource>> = (

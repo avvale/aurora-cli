@@ -2,8 +2,9 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 import { AuditingModule } from '@api/auditing/auditing.module';
+import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
+import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuditingIHttpCommunicationRepository, auditingMockHttpCommunicationData, AuditingMockHttpCommunicationSeeder } from '@app/auditing/http-communication';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -59,7 +60,9 @@ describe('http-communication', () =>
                 AuditingMockHttpCommunicationSeeder,
             ],
         })
-            .overrideGuard(Auth)
+            .overrideGuard(AuthenticationJwtGuard)
+            .useValue({ canActivate: () => true })
+            .overrideGuard(AuthorizationPermissionsGuard)
             .useValue({ canActivate: () => true })
             .compile();
 
@@ -86,7 +89,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationId must be defined, can not be null');
             });
     });
 
@@ -102,7 +105,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationEvent must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationEvent must be defined, can not be null');
             });
     });
 
@@ -118,7 +121,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationMethod must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationMethod must be defined, can not be null');
             });
     });
 
@@ -134,7 +137,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationUrl must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationUrl must be defined, can not be null');
             });
     });
 
@@ -150,7 +153,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationIsReprocessing must be defined, can not be null');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationIsReprocessing must be defined, can not be null');
             });
     });
 
@@ -166,7 +169,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationId must be defined, can not be undefined');
             });
     });
 
@@ -182,7 +185,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationEvent must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationEvent must be defined, can not be undefined');
             });
     });
 
@@ -198,7 +201,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationMethod must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationMethod must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +217,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationUrl must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationUrl must be defined, can not be undefined');
             });
     });
 
@@ -230,7 +233,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationIsReprocessing must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationIsReprocessing must be defined, can not be undefined');
             });
     });
 
@@ -246,7 +249,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationId is not allowed, must be a length of 36');
             });
     });
 
@@ -262,23 +265,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationReprocessingHttpCommunicationId is not allowed, must be a length of 36');
-            });
-    });
-
-    test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationStatus is too large, has a maximum length of 5', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/auditing/http-communication/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                status: 111111,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for HttpCommunicationStatus is too large, has a maximum length of 5');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationReprocessingHttpCommunicationId is not allowed, must be a length of 36');
             });
     });
 
@@ -294,23 +281,23 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationMethod is too large, has a maximum length of 25');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationMethod is too large, has a maximum length of 25');
             });
     });
 
-    test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationUrl is too large, has a maximum length of 2048', () =>
+    test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationUrl is too large, has a maximum length of 2046', () =>
     {
         return request(app.getHttpServer())
             .post('/auditing/http-communication/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                url: '*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                url: '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationUrl is too large, has a maximum length of 2048');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationUrl is too large, has a maximum length of 2046');
             });
     });
 
@@ -326,7 +313,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationIsReprocessing has to be a boolean value');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationIsReprocessing has to be a boolean value');
             });
     });
     test('/REST:POST auditing/http-communication/create - Got 400 Conflict, HttpCommunicationEvent has to be a enum option of REQUEST_FULFILLED, REQUEST_REJECTED, RESPONSE_FULFILLED, RESPONSE_REJECTED', () =>
@@ -341,7 +328,7 @@ describe('http-communication', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for HttpCommunicationEvent has to be any of this options: REQUEST_FULFILLED, REQUEST_REJECTED, RESPONSE_FULFILLED, RESPONSE_REJECTED');
+                expect(res.body.message).toContain('Value for AuditingHttpCommunicationEvent has to be any of this options: REQUEST_FULFILLED, REQUEST_REJECTED, RESPONSE_FULFILLED, RESPONSE_REJECTED');
             });
     });
 

@@ -1,7 +1,6 @@
-import { AuditingHttpCommunication } from '../auditing.types';
-import { httpCommunicationColumnsConfig } from './http-communication.columns-config';
-import { HttpCommunicationService } from './http-communication.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { AuditingHttpCommunication } from '@apps/auditing/auditing.types';
+import { httpCommunicationColumnsConfig, HttpCommunicationService } from '@apps/auditing/http-communication';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -59,14 +58,13 @@ export class HttpCommunicationListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly httpCommunicationService: HttpCommunicationService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

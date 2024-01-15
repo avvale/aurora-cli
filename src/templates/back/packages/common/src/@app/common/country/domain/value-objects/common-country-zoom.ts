@@ -1,6 +1,6 @@
-import { IntValueObject, ValidationRules } from '@aurorajs.dev/core';
+import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CommonCountryZoom extends IntValueObject
+export class CommonCountryZoom extends SmallintValueObject
 {
     public readonly type: string = 'CommonCountryZoom';
 
@@ -10,7 +10,6 @@ export class CommonCountryZoom extends IntValueObject
             name       : 'CommonCountryZoom',
             nullable   : true,
             undefinable: true,
-            maxLength  : 2,
             unsigned   : true,
         }, validationRules));
     }

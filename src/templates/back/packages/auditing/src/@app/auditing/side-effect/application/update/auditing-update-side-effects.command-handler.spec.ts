@@ -1,15 +1,11 @@
+import { auditingMockSideEffectData, AuditingUpdateSideEffectsCommand } from '@app/auditing/side-effect';
+import { AuditingUpdateSideEffectsCommandHandler } from '@app/auditing/side-effect/application/update/auditing-update-side-effects.command-handler';
+import { AuditingUpdateSideEffectsService } from '@app/auditing/side-effect/application/update/auditing-update-side-effects.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { auditingMockSideEffectData } from '@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.data';
-import { AuditingUpdateSideEffectsCommandHandler } from './auditing-update-side-effects.command-handler';
-import { AuditingUpdateSideEffectsCommand } from './auditing-update-side-effects.command';
-import { AuditingUpdateSideEffectsService } from './auditing-update-side-effects.service';
 
 describe('AuditingUpdateSideEffectsCommandHandler', () =>
 {
     let commandHandler: AuditingUpdateSideEffectsCommandHandler;
-    let service: AuditingUpdateSideEffectsService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('AuditingUpdateSideEffectsCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingUpdateSideEffectsCommandHandler>(AuditingUpdateSideEffectsCommandHandler);
-        service = module.get<AuditingUpdateSideEffectsService>(AuditingUpdateSideEffectsService);
     });
 
     describe('main', () =>

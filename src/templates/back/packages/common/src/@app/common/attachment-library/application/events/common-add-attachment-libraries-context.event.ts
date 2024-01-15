@@ -22,8 +22,8 @@ export class CommonAddAttachmentLibrariesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(attachmentLibrary =>
                     new CommonCreatedAttachmentLibraryEvent(
                         attachmentLibrary.id.value,
-                        attachmentLibrary.filename.value,
                         attachmentLibrary.originFilename.value,
+                        attachmentLibrary.filename.value,
                         attachmentLibrary.mimetype.value,
                         attachmentLibrary.extension.value,
                         attachmentLibrary.relativePathSegments.value,
@@ -48,8 +48,8 @@ export class CommonAddAttachmentLibrariesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(attachmentLibrary =>
                     new CommonUpdatedAttachmentLibraryEvent(
                         attachmentLibrary.id.value,
-                        attachmentLibrary.filename.value,
                         attachmentLibrary.originFilename.value,
+                        attachmentLibrary.filename.value,
                         attachmentLibrary.mimetype.value,
                         attachmentLibrary.extension.value,
                         attachmentLibrary.relativePathSegments.value,
@@ -74,8 +74,8 @@ export class CommonAddAttachmentLibrariesContextEvent extends AggregateRoot
                 this.aggregateRoots.map(attachmentLibrary =>
                     new CommonDeletedAttachmentLibraryEvent(
                         attachmentLibrary.id.value,
-                        attachmentLibrary.filename.value,
                         attachmentLibrary.originFilename.value,
+                        attachmentLibrary.filename.value,
                         attachmentLibrary.mimetype.value,
                         attachmentLibrary.extension.value,
                         attachmentLibrary.relativePathSegments.value,

@@ -36,7 +36,7 @@ export class CommonUpdateAdministrativeAreasLevel1CommandHandler implements ICom
                 latitude: new CommonAdministrativeAreaLevel1Latitude(command.payload.latitude),
                 longitude: new CommonAdministrativeAreaLevel1Longitude(command.payload.longitude),
                 zoom: new CommonAdministrativeAreaLevel1Zoom(command.payload.zoom),
-                mapType: new CommonAdministrativeAreaLevel1MapType(command.payload.mapType, { undefinable: true }),
+                mapType: new CommonAdministrativeAreaLevel1MapType(command.payload.mapType),
             },
             command.queryStatement,
             command.constraint,

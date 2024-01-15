@@ -26,7 +26,7 @@ export const attachmentFamilyColumnsConfig: ColumnConfig[] = [
         translation: 'common.Height',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.ENUM,
         field      : 'fitType',
         sort       : 'fitType',
         translation: 'common.FitType',
@@ -44,7 +44,7 @@ export const attachmentFamilyColumnsConfig: ColumnConfig[] = [
         translation: 'common.Sizes',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.ENUM,
         field      : 'format',
         sort       : 'format',
         translation: 'common.Format',

@@ -1,6 +1,6 @@
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
-import { AuditingSideEffect } from './auditing-side-effect.aggregate';
 import { AuditingSideEffectId } from './value-objects';
+import { AuditingSideEffect } from '@app/auditing/side-effect';
+import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
 
 export abstract class AuditingISideEffectRepository implements IRepository<AuditingSideEffect>
 {
@@ -30,6 +30,8 @@ export abstract class AuditingISideEffectRepository implements IRepository<Audit
         options?: {
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<AuditingSideEffect | null>;
 
@@ -124,6 +126,8 @@ export abstract class AuditingISideEffectRepository implements IRepository<Audit
             deleteOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
+            // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
+            findArguments?: LiteralObject;
         }
     ): Promise<void>;
 

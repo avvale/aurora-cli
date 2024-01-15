@@ -5,7 +5,7 @@ export class AuditingCreateHttpCommunicationCommand
     constructor(
         public readonly payload: {
             id: string;
-            tags?: any;
+            tags?: string[];
             event: string;
             status?: number;
             method: string;

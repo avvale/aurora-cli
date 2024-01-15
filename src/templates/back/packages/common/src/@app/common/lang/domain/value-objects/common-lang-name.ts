@@ -10,7 +10,7 @@ export class CommonLangName extends StringValueObject
             name       : 'CommonLangName',
             nullable   : false,
             undefinable: false,
-            maxLength  : 100,
+            maxLength  : 127,
         }, validationRules));
     }
 }

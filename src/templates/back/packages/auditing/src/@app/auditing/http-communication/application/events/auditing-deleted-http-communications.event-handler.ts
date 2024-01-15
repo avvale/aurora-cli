@@ -1,5 +1,5 @@
+import { AuditingDeletedHttpCommunicationsEvent } from '@app/auditing/http-communication';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { AuditingDeletedHttpCommunicationsEvent } from './auditing-deleted-http-communications.event';
 
 @EventsHandler(AuditingDeletedHttpCommunicationsEvent)
 export class AuditingDeletedHttpCommunicationsEventHandler implements IEventHandler<AuditingDeletedHttpCommunicationsEvent>

@@ -1,35 +1,33 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AuditingCreatedSideEffectEvent, AuditingDeletedSideEffectEvent, AuditingUpdatedSideEffectEvent } from '@app/auditing/side-effect';
 import {
-    AuditingSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectModelName,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
     AuditingSideEffectAccountId,
+    AuditingSideEffectAuditableId,
+    AuditingSideEffectBaseUrl,
+    AuditingSideEffectBody,
+    AuditingSideEffectCreatedAt,
+    AuditingSideEffectDeletedAt,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectNewValue,
+    AuditingSideEffectId,
     AuditingSideEffectIp,
+    AuditingSideEffectIsRollback,
     AuditingSideEffectMethod,
-    AuditingSideEffectBaseUrl,
+    AuditingSideEffectModelName,
+    AuditingSideEffectModelPath,
+    AuditingSideEffectNewValue,
+    AuditingSideEffectOldValue,
+    AuditingSideEffectOperationId,
+    AuditingSideEffectOperationSort,
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
-    AuditingSideEffectBody,
-    AuditingSideEffectUserAgent,
-    AuditingSideEffectIsRollback,
     AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectCreatedAt,
+    AuditingSideEffectTags,
     AuditingSideEffectUpdatedAt,
-    AuditingSideEffectDeletedAt,
-} from './value-objects';
-import { AuditingCreatedSideEffectEvent } from '../application/events/auditing-created-side-effect.event';
-import { AuditingUpdatedSideEffectEvent } from '../application/events/auditing-updated-side-effect.event';
-import { AuditingDeletedSideEffectEvent } from '../application/events/auditing-deleted-side-effect.event';
+    AuditingSideEffectUserAgent,
+} from '@app/auditing/side-effect/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class AuditingSideEffect extends AggregateRoot
 {
@@ -58,8 +56,6 @@ export class AuditingSideEffect extends AggregateRoot
     updatedAt: AuditingSideEffectUpdatedAt;
     deletedAt: AuditingSideEffectDeletedAt;
 
-    // eager relationship
-
     constructor(
         id: AuditingSideEffectId,
         tags: AuditingSideEffectTags,
@@ -85,7 +81,6 @@ export class AuditingSideEffect extends AggregateRoot
         createdAt: AuditingSideEffectCreatedAt,
         updatedAt: AuditingSideEffectUpdatedAt,
         deletedAt: AuditingSideEffectDeletedAt,
-
     )
     {
         super();
@@ -113,11 +108,9 @@ export class AuditingSideEffect extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
     }
 
-    static register (
+    static register(
         id: AuditingSideEffectId,
         tags: AuditingSideEffectTags,
         modelPath: AuditingSideEffectModelPath,
@@ -142,7 +135,6 @@ export class AuditingSideEffect extends AggregateRoot
         createdAt: AuditingSideEffectCreatedAt,
         updatedAt: AuditingSideEffectUpdatedAt,
         deletedAt: AuditingSideEffectDeletedAt,
-
     ): AuditingSideEffect
     {
         return new AuditingSideEffect(
@@ -170,7 +162,6 @@ export class AuditingSideEffect extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
         );
     }
 
@@ -297,8 +288,6 @@ export class AuditingSideEffect extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 
@@ -330,8 +319,6 @@ export class AuditingSideEffect extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 }

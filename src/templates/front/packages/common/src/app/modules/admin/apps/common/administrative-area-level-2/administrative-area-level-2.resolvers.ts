@@ -1,8 +1,7 @@
-import { CommonAdministrativeAreaLevel2 } from '../common.types';
-import { administrativeAreaLevel2ColumnsConfig } from './administrative-area-level-2.columns-config';
-import { AdministrativeAreaLevel2Service } from './administrative-area-level-2.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { administrativeAreaLevel2ColumnsConfig, AdministrativeAreaLevel2Service } from '@apps/common/administrative-area-level-2';
+import { CommonAdministrativeAreaLevel2 } from '@apps/common/common.types';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const administrativeAreaLevel2PaginationResolver: ResolveFn<GridData<CommonAdministrativeAreaLevel2>> = (

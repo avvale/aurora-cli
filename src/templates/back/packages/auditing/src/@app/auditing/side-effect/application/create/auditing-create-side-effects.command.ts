@@ -1,11 +1,11 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class  AuditingCreateSideEffectsCommand
+export class AuditingCreateSideEffectsCommand
 {
     constructor(
         public readonly payload: {
             id: string;
-            tags?: any;
+            tags?: string[];
             modelPath: string;
             modelName: string;
             operationId?: string;

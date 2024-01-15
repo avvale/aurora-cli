@@ -38,8 +38,8 @@ describe('CommonCreateAttachmentLibraryCommandHandler', () =>
                 new CommonCreateAttachmentLibraryCommand(
                     {
                         id: commonMockAttachmentLibraryData[0].id,
-                        filename: commonMockAttachmentLibraryData[0].filename,
                         originFilename: commonMockAttachmentLibraryData[0].originFilename,
+                        filename: commonMockAttachmentLibraryData[0].filename,
                         mimetype: commonMockAttachmentLibraryData[0].mimetype,
                         extension: commonMockAttachmentLibraryData[0].extension,
                         relativePathSegments: commonMockAttachmentLibraryData[0].relativePathSegments,

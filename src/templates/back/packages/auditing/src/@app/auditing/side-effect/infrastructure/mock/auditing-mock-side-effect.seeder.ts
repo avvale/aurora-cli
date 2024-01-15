@@ -1,33 +1,32 @@
-import { Injectable } from '@nestjs/common';
-import { MockSeeder } from '@aurorajs.dev/core';
+import { auditingMockSideEffectData, AuditingSideEffect } from '@app/auditing/side-effect';
 import {
-    AuditingSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectModelName,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
     AuditingSideEffectAccountId,
+    AuditingSideEffectAuditableId,
+    AuditingSideEffectBaseUrl,
+    AuditingSideEffectBody,
+    AuditingSideEffectCreatedAt,
+    AuditingSideEffectDeletedAt,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectNewValue,
+    AuditingSideEffectId,
     AuditingSideEffectIp,
+    AuditingSideEffectIsRollback,
     AuditingSideEffectMethod,
-    AuditingSideEffectBaseUrl,
+    AuditingSideEffectModelName,
+    AuditingSideEffectModelPath,
+    AuditingSideEffectNewValue,
+    AuditingSideEffectOldValue,
+    AuditingSideEffectOperationId,
+    AuditingSideEffectOperationSort,
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
-    AuditingSideEffectBody,
-    AuditingSideEffectUserAgent,
-    AuditingSideEffectIsRollback,
     AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectCreatedAt,
+    AuditingSideEffectTags,
     AuditingSideEffectUpdatedAt,
-    AuditingSideEffectDeletedAt,
-} from '../../domain/value-objects';
-import { AuditingSideEffect } from '../../domain/auditing-side-effect.aggregate';
-import { auditingMockSideEffectData } from './auditing-mock-side-effect.data';
+    AuditingSideEffectUserAgent,
+} from '@app/auditing/side-effect/domain/value-objects';
+import { MockSeeder } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()

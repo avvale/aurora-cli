@@ -1,12 +1,10 @@
-import { QueueManagerJob, QueueManagerJobRegistry, QueueManagerJobState } from '../queue-manager.types';
-import { JobRegistryService } from './job-registry.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { Action, Crumb, IsObjectEmptyPipe, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
-
-// ---- customizations ----
-import { JobService } from '../job/job.service';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { JobRegistryService } from '@apps/queue-manager/job-registry';
+import { QueueManagerJob, QueueManagerJobRegistry, QueueManagerJobState } from '@apps/queue-manager/queue-manager.types';
+import { Action, Crumb, defaultDetailImports, IsObjectEmptyPipe, log, mapActions, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent } from '@aurora';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { lastValueFrom, takeUntil } from 'rxjs';
+import { JobService } from '../job/job.service';
 
 @Component({
     selector       : 'queue-manager-job-registry-detail',
@@ -38,7 +36,6 @@ export class JobRegistryDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		protected readonly injector: Injector,
 		private readonly jobRegistryService: JobRegistryService,
         private readonly jobService: JobService,
     )

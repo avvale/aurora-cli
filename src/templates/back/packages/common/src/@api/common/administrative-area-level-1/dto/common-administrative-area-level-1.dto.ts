@@ -72,7 +72,7 @@ export class CommonAdministrativeAreaLevel1Dto
         description: 'mapType [input here api field description]',
         example    : CommonAdministrativeAreaLevel1MapType.TERRAIN,
     })
-    mapType: CommonAdministrativeAreaLevel1MapType;
+    mapType?: CommonAdministrativeAreaLevel1MapType;
 
     @ApiProperty({
         type       : String,

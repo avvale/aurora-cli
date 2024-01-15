@@ -1,25 +1,23 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication/domain/auditing-http-communication.repository';
+import { AuditingHttpCommunication, AuditingIHttpCommunicationRepository, auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import {
-    AuditingHttpCommunicationId,
-    AuditingHttpCommunicationTags,
+    AuditingHttpCommunicationCreatedAt,
+    AuditingHttpCommunicationDeletedAt,
     AuditingHttpCommunicationEvent,
-    AuditingHttpCommunicationStatus,
-    AuditingHttpCommunicationMethod,
-    AuditingHttpCommunicationUrl,
     AuditingHttpCommunicationHttpRequest,
     AuditingHttpCommunicationHttpRequestRejected,
     AuditingHttpCommunicationHttpResponse,
     AuditingHttpCommunicationHttpResponseRejected,
+    AuditingHttpCommunicationId,
     AuditingHttpCommunicationIsReprocessing,
+    AuditingHttpCommunicationMethod,
     AuditingHttpCommunicationReprocessingHttpCommunicationId,
-    AuditingHttpCommunicationCreatedAt,
+    AuditingHttpCommunicationStatus,
+    AuditingHttpCommunicationTags,
     AuditingHttpCommunicationUpdatedAt,
-    AuditingHttpCommunicationDeletedAt,
+    AuditingHttpCommunicationUrl,
 } from '@app/auditing/http-communication/domain/value-objects';
-import { AuditingHttpCommunication } from '../../domain/auditing-http-communication.aggregate';
-import { auditingMockHttpCommunicationData } from './auditing-mock-http-communication.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingMockHttpCommunicationRepository extends MockRepository<AuditingHttpCommunication> implements AuditingIHttpCommunicationRepository
@@ -27,7 +25,6 @@ export class AuditingMockHttpCommunicationRepository extends MockRepository<Audi
     public readonly repository: any;
     public readonly aggregateName: string = 'AuditingHttpCommunication';
     public collectionSource: AuditingHttpCommunication[];
-    public deletedAtInstance: AuditingHttpCommunicationDeletedAt = new AuditingHttpCommunicationDeletedAt(null);
 
     constructor()
     {

@@ -1,8 +1,7 @@
-import { AuditingHttpCommunication } from '../auditing.types';
-import { httpCommunicationColumnsConfig } from './http-communication.columns-config';
-import { HttpCommunicationService } from './http-communication.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { AuditingHttpCommunication } from '@apps/auditing/auditing.types';
+import { httpCommunicationColumnsConfig, HttpCommunicationService } from '@apps/auditing/http-communication';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const httpCommunicationPaginationResolver: ResolveFn<GridData<AuditingHttpCommunication>> = (
@@ -40,7 +39,7 @@ export const httpCommunicationNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'auditing::httpCommunication.detail.new',
@@ -49,14 +48,14 @@ export const httpCommunicationNewResolver: ResolveFn<Action> = (
 };
 
 export const httpCommunicationEditResolver: ResolveFn<{
-	object: AuditingHttpCommunication;
+    object: AuditingHttpCommunication;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const httpCommunicationService = inject(HttpCommunicationService);
+    const actionService = inject(ActionService);
+    const httpCommunicationService = inject(HttpCommunicationService);
 
     actionService.action({
         id          : 'auditing::httpCommunication.detail.edit',

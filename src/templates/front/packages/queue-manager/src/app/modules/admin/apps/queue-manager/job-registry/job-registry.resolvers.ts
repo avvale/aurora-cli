@@ -1,12 +1,10 @@
-import { QueueManagerJob, QueueManagerJobRegistry } from '../queue-manager.types';
-import { jobRegistryColumnsConfig } from './job-registry.columns-config';
-import { JobRegistryService } from './job-registry.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { jobRegistryColumnsConfig, JobRegistryService } from '@apps/queue-manager/job-registry';
+import { QueueManagerJob, QueueManagerJobRegistry } from '@apps/queue-manager/queue-manager.types';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
-
-import { Observable, Subject, first, map } from 'rxjs';
 import { JobService } from '../job/job.service';
+import { Subject, first, map } from 'rxjs';
 
 export const jobRegistryPaginationResolver: ResolveFn<GridData<QueueManagerJobRegistry>> = (
     route: ActivatedRouteSnapshot,
@@ -43,7 +41,7 @@ export const jobRegistryNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'queueManager::jobRegistry.detail.new',
@@ -58,8 +56,8 @@ export const jobRegistryEditResolver: ResolveFn<{
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const jobRegistryService = inject(JobRegistryService);
+    const actionService = inject(ActionService);
+    const jobRegistryService = inject(JobRegistryService);
     const jobService = inject(JobService);
 
     actionService.action({

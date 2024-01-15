@@ -3,7 +3,7 @@
 import { CommonCountryModel } from '@app/common/country';
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'CommonAdministrativeAreaLevel1',
@@ -171,14 +171,14 @@ export class CommonAdministrativeAreaLevel1Model extends Model<CommonAdministrat
     @Column({
         field: 'customCode',
         allowNull: true,
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(63),
     })
     customCode: string;
 
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(127),
     })
     name: string;
 
@@ -206,13 +206,13 @@ export class CommonAdministrativeAreaLevel1Model extends Model<CommonAdministrat
     @Column({
         field: 'zoom',
         allowNull: true,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     zoom: number;
 
     @Column({
         field: 'mapType',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.ENUM('ROADMAP','SATELLITE','HYBRID','TERRAIN'),
     })
     mapType: string;

@@ -110,6 +110,13 @@ export class CommonUpdateAttachmentByIdDto
 
     @ApiProperty({
         type       : Boolean,
+        description: 'isCropped [input here api field description]',
+        example    : true,
+    })
+    isCropped: boolean;
+
+    @ApiProperty({
+        type       : Boolean,
         description: 'isUploaded [input here api field description]',
         example    : true,
     })

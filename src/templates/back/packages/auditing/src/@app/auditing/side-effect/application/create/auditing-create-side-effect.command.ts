@@ -5,7 +5,7 @@ export class AuditingCreateSideEffectCommand
     constructor(
         public readonly payload: {
             id: string;
-            tags?: any;
+            tags?: string[];
             modelPath: string;
             modelName: string;
             operationId?: string;

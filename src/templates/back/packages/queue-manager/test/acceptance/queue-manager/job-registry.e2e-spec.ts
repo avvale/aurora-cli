@@ -221,19 +221,19 @@ describe('job-registry', () =>
             });
     });
 
-    test('/REST:POST queue-manager/job-registry/create - Got 400 Conflict, JobRegistryQueueName is too large, has a maximum length of 50', () =>
+    test('/REST:POST queue-manager/job-registry/create - Got 400 Conflict, JobRegistryQueueName is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/queue-manager/job-registry/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                queueName: '***************************************************',
+                queueName: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerJobRegistryQueueName is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryQueueName is too large, has a maximum length of 63');
             });
     });
 
@@ -253,19 +253,19 @@ describe('job-registry', () =>
             });
     });
 
-    test('/REST:POST queue-manager/job-registry/create - Got 400 Conflict, JobRegistryJobName is too large, has a maximum length of 50', () =>
+    test('/REST:POST queue-manager/job-registry/create - Got 400 Conflict, JobRegistryJobName is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/queue-manager/job-registry/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                jobName: '***************************************************',
+                jobName: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerJobRegistryJobName is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for QueueManagerJobRegistryJobName is too large, has a maximum length of 63');
             });
     });
 

@@ -10,7 +10,7 @@ export class CommonCountryCustomCode extends StringValueObject
             name       : 'CommonCountryCustomCode',
             nullable   : true,
             undefinable: true,
-            maxLength  : 10,
+            maxLength  : 63,
         }, validationRules));
     }
 }

@@ -1,6 +1,6 @@
-import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
+import { IntValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CommonAttachmentLibraryWidth extends SmallintValueObject
+export class CommonAttachmentLibraryWidth extends IntValueObject
 {
     public readonly type: string = 'CommonAttachmentLibraryWidth';
 
@@ -10,7 +10,6 @@ export class CommonAttachmentLibraryWidth extends SmallintValueObject
             name       : 'CommonAttachmentLibraryWidth',
             nullable   : false,
             undefinable: false,
-            maxLength  : 5,
             unsigned   : true,
         }, validationRules));
     }

@@ -82,7 +82,7 @@ export class CommonCreateCountryDto
         description: 'mapType [input here api field description]',
         example    : CommonCountryMapType.TERRAIN,
     })
-    mapType: CommonCountryMapType;
+    mapType?: CommonCountryMapType;
 
     @ApiProperty({
         type       : Object,

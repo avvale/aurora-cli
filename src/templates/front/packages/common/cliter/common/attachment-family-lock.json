@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-detail.component.html",
-            "integrity": "sha1:8b36c010450caf6a338c7979cae0f5e9235c09d6"
+            "integrity": "sha1:6a66ed94665c30573414f9310a8bdd70f8c4942a"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-detail.component.ts",
-            "integrity": "sha1:727d1e37f8dd5c9be9e1302a6555fd399a759829"
+            "integrity": "sha1:1ada440b003c56315ee653da174965d02db06164"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-list.component.html",
-            "integrity": "sha1:a45c6cf1c5a335b5a758d28cbddafd64f8b1c5dd"
+            "integrity": "sha1:3a713236b19fbeb64017f5a3a461714c07607202"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family-list.component.ts",
@@ -27,7 +27,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.columns-config.ts",
-            "integrity": "sha1:7a18698142783219147ec1a34fbb926621f37e8c"
+            "integrity": "sha1:7372f8da32815ad475dc4c9bb577f320ce52645e"
         },
         {
             "path": "src/app/modules/admin/apps/common/attachment-family/attachment-family.graphql.ts",

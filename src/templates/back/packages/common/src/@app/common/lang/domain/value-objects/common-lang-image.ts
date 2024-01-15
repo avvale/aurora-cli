@@ -10,6 +10,7 @@ export class CommonLangImage extends StringValueObject
             name       : 'CommonLangImage',
             nullable   : true,
             undefinable: true,
+            maxLength  : 1022,
         }, validationRules));
     }
 }

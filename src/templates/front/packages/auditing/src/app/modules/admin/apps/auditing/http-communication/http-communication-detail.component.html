@@ -41,13 +41,12 @@
                         appearance="outline"
                         class="col-4"
                     >
-                        <mat-label>{{ t('auditing.Code') }}</mat-label>
+                        <mat-label>{{ t('auditing.Tags') }}</mat-label>
                         <input
                             matInput
-                            formControlName="code"
-                            maxlength="100"
+                            formControlName="tags"
                         >
-                        <mat-error>{{ formErrors?.code | async }}</mat-error>
+                        <mat-error>{{ formErrors?.tags | async }}</mat-error>
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
@@ -58,7 +57,6 @@
                             matInput
                             formControlName="status"
                             type="number"
-                            maxlength="5"
                         >
                         <mat-error>{{ formErrors?.status | async }}</mat-error>
                     </mat-form-field>
@@ -95,7 +93,7 @@
                         <input
                             matInput
                             formControlName="url"
-                            maxlength="2048"
+                            maxlength="2046"
                             required
                         >
                         <mat-error>{{ formErrors?.url | async }}</mat-error>

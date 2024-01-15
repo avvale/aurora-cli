@@ -1,12 +1,7 @@
+import { AuditingISideEffectRepository, AuditingMockSideEffectRepository, AuditingRawSQLSideEffectsQuery, AuditingSideEffectMapper } from '@app/auditing/side-effect';
+import { AuditingRawSQLSideEffectsQueryHandler } from '@app/auditing/side-effect/application/raw-sql/auditing-raw-sql-side-effects.query-handler';
+import { AuditingRawSQLSideEffectsService } from '@app/auditing/side-effect/application/raw-sql/auditing-raw-sql-side-effects.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { AuditingMockSideEffectRepository } from '@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.repository';
-import { AuditingISideEffectRepository } from '@app/auditing/side-effect/domain/auditing-side-effect.repository';
-import { AuditingSideEffectMapper } from '@app/auditing/side-effect/domain/auditing-side-effect.mapper';
-import { AuditingRawSQLSideEffectsQueryHandler } from './auditing-raw-sql-side-effects.query-handler';
-import { AuditingRawSQLSideEffectsQuery } from './auditing-raw-sql-side-effects.query';
-import { AuditingRawSQLSideEffectsService } from './auditing-raw-sql-side-effects.service';
 
 describe('RawSQLSideEffectsQueryHandler', () =>
 {

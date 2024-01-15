@@ -1,26 +1,24 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AuditingCreatedHttpCommunicationEvent, AuditingDeletedHttpCommunicationEvent, AuditingUpdatedHttpCommunicationEvent } from '@app/auditing/http-communication';
 import {
-    AuditingHttpCommunicationId,
-    AuditingHttpCommunicationTags,
+    AuditingHttpCommunicationCreatedAt,
+    AuditingHttpCommunicationDeletedAt,
     AuditingHttpCommunicationEvent,
-    AuditingHttpCommunicationStatus,
-    AuditingHttpCommunicationMethod,
-    AuditingHttpCommunicationUrl,
     AuditingHttpCommunicationHttpRequest,
     AuditingHttpCommunicationHttpRequestRejected,
     AuditingHttpCommunicationHttpResponse,
     AuditingHttpCommunicationHttpResponseRejected,
+    AuditingHttpCommunicationId,
     AuditingHttpCommunicationIsReprocessing,
+    AuditingHttpCommunicationMethod,
     AuditingHttpCommunicationReprocessingHttpCommunicationId,
-    AuditingHttpCommunicationCreatedAt,
+    AuditingHttpCommunicationStatus,
+    AuditingHttpCommunicationTags,
     AuditingHttpCommunicationUpdatedAt,
-    AuditingHttpCommunicationDeletedAt,
-} from './value-objects';
-import { AuditingCreatedHttpCommunicationEvent } from '../application/events/auditing-created-http-communication.event';
-import { AuditingUpdatedHttpCommunicationEvent } from '../application/events/auditing-updated-http-communication.event';
-import { AuditingDeletedHttpCommunicationEvent } from '../application/events/auditing-deleted-http-communication.event';
+    AuditingHttpCommunicationUrl,
+} from '@app/auditing/http-communication/domain/value-objects';
+import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 export class AuditingHttpCommunication extends AggregateRoot
 {
@@ -40,8 +38,6 @@ export class AuditingHttpCommunication extends AggregateRoot
     updatedAt: AuditingHttpCommunicationUpdatedAt;
     deletedAt: AuditingHttpCommunicationDeletedAt;
 
-    // eager relationship
-
     constructor(
         id: AuditingHttpCommunicationId,
         tags: AuditingHttpCommunicationTags,
@@ -58,7 +54,6 @@ export class AuditingHttpCommunication extends AggregateRoot
         createdAt: AuditingHttpCommunicationCreatedAt,
         updatedAt: AuditingHttpCommunicationUpdatedAt,
         deletedAt: AuditingHttpCommunicationDeletedAt,
-
     )
     {
         super();
@@ -77,11 +72,9 @@ export class AuditingHttpCommunication extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
     }
 
-    static register (
+    static register(
         id: AuditingHttpCommunicationId,
         tags: AuditingHttpCommunicationTags,
         event: AuditingHttpCommunicationEvent,
@@ -97,7 +90,6 @@ export class AuditingHttpCommunication extends AggregateRoot
         createdAt: AuditingHttpCommunicationCreatedAt,
         updatedAt: AuditingHttpCommunicationUpdatedAt,
         deletedAt: AuditingHttpCommunicationDeletedAt,
-
     ): AuditingHttpCommunication
     {
         return new AuditingHttpCommunication(
@@ -116,7 +108,6 @@ export class AuditingHttpCommunication extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
         );
     }
 
@@ -207,8 +198,6 @@ export class AuditingHttpCommunication extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 
@@ -231,8 +220,6 @@ export class AuditingHttpCommunication extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
         };
     }
 }

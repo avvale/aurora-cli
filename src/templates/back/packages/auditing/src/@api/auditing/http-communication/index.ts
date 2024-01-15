@@ -30,7 +30,7 @@ export { AuditingUpsertHttpCommunicationController } from './controllers/auditin
 export { AuditingDeleteHttpCommunicationByIdController } from './controllers/auditing-delete-http-communication-by-id.controller';
 export { AuditingDeleteHttpCommunicationsController } from './controllers/auditing-delete-http-communications.controller';
 
-// exports resolvers
+// export resolvers
 export { AuditingCreateHttpCommunicationResolver } from './resolvers/auditing-create-http-communication.resolver';
 export { AuditingCreateHttpCommunicationsResolver } from './resolvers/auditing-create-http-communications.resolver';
 export { AuditingPaginateHttpCommunicationsResolver } from './resolvers/auditing-paginate-http-communications.resolver';
@@ -43,7 +43,7 @@ export { AuditingUpsertHttpCommunicationResolver } from './resolvers/auditing-up
 export { AuditingDeleteHttpCommunicationByIdResolver } from './resolvers/auditing-delete-http-communication-by-id.resolver';
 export { AuditingDeleteHttpCommunicationsResolver } from './resolvers/auditing-delete-http-communications.resolver';
 
-// controllers
+// import controllers
 import { AuditingCreateHttpCommunicationController } from './controllers/auditing-create-http-communication.controller';
 import { AuditingCreateHttpCommunicationsController } from './controllers/auditing-create-http-communications.controller';
 import { AuditingPaginateHttpCommunicationsController } from './controllers/auditing-paginate-http-communications.controller';
@@ -56,7 +56,7 @@ import { AuditingUpsertHttpCommunicationController } from './controllers/auditin
 import { AuditingDeleteHttpCommunicationByIdController } from './controllers/auditing-delete-http-communication-by-id.controller';
 import { AuditingDeleteHttpCommunicationsController } from './controllers/auditing-delete-http-communications.controller';
 
-// resolvers
+// import resolvers
 import { AuditingCreateHttpCommunicationResolver } from './resolvers/auditing-create-http-communication.resolver';
 import { AuditingCreateHttpCommunicationsResolver } from './resolvers/auditing-create-http-communications.resolver';
 import { AuditingPaginateHttpCommunicationsResolver } from './resolvers/auditing-paginate-http-communications.resolver';
@@ -69,7 +69,7 @@ import { AuditingUpsertHttpCommunicationResolver } from './resolvers/auditing-up
 import { AuditingDeleteHttpCommunicationByIdResolver } from './resolvers/auditing-delete-http-communication-by-id.resolver';
 import { AuditingDeleteHttpCommunicationsResolver } from './resolvers/auditing-delete-http-communications.resolver';
 
-// handlers
+// import handlers
 import { AuditingCreateHttpCommunicationHandler } from './handlers/auditing-create-http-communication.handler';
 import { AuditingCreateHttpCommunicationsHandler } from './handlers/auditing-create-http-communications.handler';
 import { AuditingPaginateHttpCommunicationsHandler } from './handlers/auditing-paginate-http-communications.handler';
@@ -82,10 +82,10 @@ import { AuditingUpsertHttpCommunicationHandler } from './handlers/auditing-upse
 import { AuditingDeleteHttpCommunicationByIdHandler } from './handlers/auditing-delete-http-communication-by-id.handler';
 import { AuditingDeleteHttpCommunicationsHandler } from './handlers/auditing-delete-http-communications.handler';
 
-// seeder
+// import seeder
 import { AuditingHttpCommunicationSeeder } from './seeder/auditing-http-communication.seeder';
 
-export const AuditingHttpCommunicationControllers = [
+export const AuditingHttpCommunicationApiControllers = [
     AuditingCreateHttpCommunicationController,
     AuditingCreateHttpCommunicationsController,
     AuditingPaginateHttpCommunicationsController,
@@ -99,7 +99,7 @@ export const AuditingHttpCommunicationControllers = [
     AuditingDeleteHttpCommunicationsController,
 ];
 
-export const AuditingHttpCommunicationResolvers = [
+export const AuditingHttpCommunicationApiResolvers = [
     AuditingCreateHttpCommunicationResolver,
     AuditingCreateHttpCommunicationsResolver,
     AuditingPaginateHttpCommunicationsResolver,
@@ -127,6 +127,6 @@ export const AuditingHttpCommunicationApiHandlers = [
     AuditingDeleteHttpCommunicationsHandler,
 ];
 
-export const AuditingHttpCommunicationServices = [
+export const AuditingHttpCommunicationApiServices = [
     AuditingHttpCommunicationSeeder,
 ];

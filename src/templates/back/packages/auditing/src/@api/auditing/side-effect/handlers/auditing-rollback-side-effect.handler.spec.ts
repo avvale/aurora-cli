@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
-import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-
-// custom items
 import { AuditingRollbackSideEffectHandler } from './auditing-rollback-side-effect.handler';
+import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingRollbackSideEffectHandler', () =>
 {

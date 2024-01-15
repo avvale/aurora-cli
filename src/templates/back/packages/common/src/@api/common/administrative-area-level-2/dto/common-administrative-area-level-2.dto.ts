@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { CommonAdministrativeAreaLevel1Dto } from '@api/common/administrative-area-level-1';
 import { CommonCountryDto } from '@api/common/country';
-import { CommonAdministrativeAreaLevel2MapType } from '@api/graphql';
+import { CommonAdministrativeAreaLevel1MapType, CommonAdministrativeAreaLevel2MapType } from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CommonAdministrativeAreaLevel2Dto
@@ -84,9 +84,9 @@ export class CommonAdministrativeAreaLevel2Dto
         type       : CommonAdministrativeAreaLevel2MapType,
         enum       : ['ROADMAP','SATELLITE','HYBRID','TERRAIN'],
         description: 'mapType [input here api field description]',
-        example    : CommonAdministrativeAreaLevel2MapType.TERRAIN,
+        example    : CommonAdministrativeAreaLevel1MapType.TERRAIN,
     })
-    mapType: CommonAdministrativeAreaLevel2MapType;
+    mapType?: CommonAdministrativeAreaLevel2MapType;
 
     @ApiProperty({
         type       : String,

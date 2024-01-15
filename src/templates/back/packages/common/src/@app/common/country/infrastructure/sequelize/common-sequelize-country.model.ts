@@ -171,7 +171,7 @@ export class CommonCountryModel extends Model<CommonCountryModel>
     @Column({
         field: 'customCode',
         allowNull: true,
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(63),
     })
     customCode: string;
 
@@ -185,14 +185,14 @@ export class CommonCountryModel extends Model<CommonCountryModel>
     @Column({
         field: 'image',
         allowNull: true,
-        type: DataTypes.STRING(1024),
+        type: DataTypes.STRING(1022),
     })
     image: string;
 
     @Column({
         field: 'sort',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     sort: number;
 
@@ -220,13 +220,13 @@ export class CommonCountryModel extends Model<CommonCountryModel>
     @Column({
         field: 'zoom',
         allowNull: true,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     zoom: number;
 
     @Column({
         field: 'mapType',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.ENUM('ROADMAP','SATELLITE','HYBRID','TERRAIN'),
     })
     mapType: string;

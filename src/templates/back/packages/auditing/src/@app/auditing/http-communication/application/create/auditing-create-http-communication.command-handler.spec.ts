@@ -6,7 +6,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 describe('AuditingCreateHttpCommunicationCommandHandler', () =>
 {
     let commandHandler: AuditingCreateHttpCommunicationCommandHandler;
-    let service: AuditingCreateHttpCommunicationService;
 
     beforeAll(async () =>
     {
@@ -24,7 +23,6 @@ describe('AuditingCreateHttpCommunicationCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingCreateHttpCommunicationCommandHandler>(AuditingCreateHttpCommunicationCommandHandler);
-        service = module.get<AuditingCreateHttpCommunicationService>(AuditingCreateHttpCommunicationService);
     });
 
     describe('main', () =>

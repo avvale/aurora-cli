@@ -1,11 +1,8 @@
-import { QueueManagerQueue } from '../queue-manager.types';
-import { queueColumnsConfig } from './queue.columns-config';
-import { QueueService } from './queue.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { queueColumnsConfig, QueueService } from '@apps/queue-manager/queue';
+import { QueueManagerQueue } from '@apps/queue-manager/queue-manager.types';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
-
-// ---- customizations ----
 import { jobColumnsConfig } from '../job/job.columns-config';
 
 export const queuePaginationResolver: ResolveFn<GridData<QueueManagerQueue>> = (
@@ -43,7 +40,7 @@ export const queueNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'queueManager::queue.detail.new',
@@ -58,8 +55,8 @@ export const queueEditResolver: ResolveFn<{
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const queueService = inject(QueueService);
+    const actionService = inject(ActionService);
+    const queueService = inject(QueueService);
     const gridFiltersStorageService = inject(GridFiltersStorageService);
     const gridStateService = inject(GridStateService);
 

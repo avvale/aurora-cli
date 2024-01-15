@@ -1,5 +1,5 @@
+import { AuditingCreatedSideEffectEvent } from '@app/auditing/side-effect';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { AuditingCreatedSideEffectEvent } from './auditing-created-side-effect.event';
 
 @EventsHandler(AuditingCreatedSideEffectEvent)
 export class AuditingCreatedSideEffectEventHandler implements IEventHandler<AuditingCreatedSideEffectEvent>

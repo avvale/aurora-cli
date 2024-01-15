@@ -32,7 +32,7 @@ aggregateProperties:
     index: index
   - name: customCode
     type: varchar
-    maxLength: 10
+    maxLength: 63
     nullable: true
     index: index
   - name: prefix
@@ -41,11 +41,11 @@ aggregateProperties:
     nullable: true
   - name: image
     type: varchar
-    maxLength: 1024
+    maxLength: 1022
     nullable: true
   - name: sort
-    type: smallint.unsigned
-    maxLength: 6
+    type: smallint
+    unsigned: true
     nullable: true
   - name: administrativeAreas
     type: json
@@ -63,8 +63,8 @@ aggregateProperties:
       - 14
     nullable: true
   - name: zoom
-    type: int.unsigned
-    maxLength: 2
+    type: smallint
+    unsigned: true
     nullable: true
   - name: mapType
     type: enum
@@ -73,7 +73,7 @@ aggregateProperties:
       - SATELLITE
       - HYBRID
       - TERRAIN
-    nullable: false
+    nullable: true
     example: CommonCountryMapType.TERRAIN
   - name: availableLangs
     type: json
@@ -123,29 +123,29 @@ aggregateProperties:
   - name: name
     isI18n: true
     type: varchar
-    maxLength: 100
+    maxLength: 127
     nullable: false
     index: index
   - name: slug
     isI18n: true
     type: varchar
-    maxLength: 100
+    maxLength: 127
     nullable: false
     index: index
   - name: administrativeAreaLevel1
     isI18n: true
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: true
   - name: administrativeAreaLevel2
     isI18n: true
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: true
   - name: administrativeAreaLevel3
     isI18n: true
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: true
   - name: createdAt
     isI18n: true
@@ -159,3 +159,7 @@ aggregateProperties:
     isI18n: true
     type: timestamp
     nullable: true
+additionalApis:
+  - path: common/country/administrative-areas
+    resolverType: query
+    httpMethod: post

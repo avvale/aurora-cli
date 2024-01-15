@@ -1,11 +1,5 @@
+import { AuditingCreatedHttpCommunicationEvent, AuditingCreatedHttpCommunicationsEvent, AuditingDeletedHttpCommunicationEvent, AuditingDeletedHttpCommunicationsEvent, AuditingHttpCommunication, AuditingUpdatedHttpCommunicationEvent, AuditingUpdatedHttpCommunicationsEvent } from '@app/auditing/http-communication';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { AuditingHttpCommunication } from '../../domain/auditing-http-communication.aggregate';
-import { AuditingCreatedHttpCommunicationEvent } from './auditing-created-http-communication.event';
-import { AuditingCreatedHttpCommunicationsEvent } from './auditing-created-http-communications.event';
-import { AuditingUpdatedHttpCommunicationEvent } from './auditing-updated-http-communication.event';
-import { AuditingUpdatedHttpCommunicationsEvent } from './auditing-updated-http-communications.event';
-import { AuditingDeletedHttpCommunicationEvent } from './auditing-deleted-http-communication.event';
-import { AuditingDeletedHttpCommunicationsEvent } from './auditing-deleted-http-communications.event';
 
 export class AuditingAddHttpCommunicationsContextEvent extends AggregateRoot
 {

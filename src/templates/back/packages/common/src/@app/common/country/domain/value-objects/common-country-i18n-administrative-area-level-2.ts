@@ -10,7 +10,7 @@ export class CommonCountryI18nAdministrativeAreaLevel2 extends StringValueObject
             name       : 'CommonCountryI18nAdministrativeAreaLevel2',
             nullable   : true,
             undefinable: true,
-            maxLength  : 50,
+            maxLength  : 63,
         }, validationRules));
     }
 }

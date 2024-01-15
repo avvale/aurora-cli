@@ -4,7 +4,7 @@ export class AuditingSideEffectTags extends JsonValueObject
 {
     public readonly type: string = 'AuditingSideEffectTags';
 
-    constructor(value: any, validationRules: ValidationRules = {})
+    constructor(value: any[], validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : 'AuditingSideEffectTags',

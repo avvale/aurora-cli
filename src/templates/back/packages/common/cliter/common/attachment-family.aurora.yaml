@@ -31,7 +31,7 @@ aggregateProperties:
       type: select
   - name: code
     type: varchar
-    maxLength: 25
+    maxLength: 63
     nullable: false
     index: unique
   - name: name
@@ -39,12 +39,12 @@ aggregateProperties:
     maxLength: 100
     nullable: false
   - name: width
-    type: smallint.unsigned
-    maxLength: 5
+    type: int
+    unsigned: true
     nullable: true
   - name: height
-    type: smallint.unsigned
-    maxLength: 5
+    type: int
+    unsigned: true
     nullable: true
   - name: fitType
     type: enum
@@ -57,8 +57,8 @@ aggregateProperties:
     nullable: true
     example: CommonAttachmentFamilyFitType.FIT_CROP
   - name: quality
-    type: smallint.unsigned
-    maxLength: 3
+    type: smallint
+    unsigned: true
     nullable: true
   - name: sizes
     type: json

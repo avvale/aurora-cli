@@ -29,7 +29,7 @@ export class AuditingCreateHttpCommunicationsService
     ) {}
 
     async main(
-        httpCommunications: {
+        payload: {
             id: AuditingHttpCommunicationId;
             tags: AuditingHttpCommunicationTags;
             event: AuditingHttpCommunicationEvent;
@@ -47,7 +47,7 @@ export class AuditingCreateHttpCommunicationsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateHttpCommunications = httpCommunications.map(httpCommunication => AuditingHttpCommunication.register(
+        const aggregateHttpCommunications = payload.map(httpCommunication => AuditingHttpCommunication.register(
             httpCommunication.id,
             httpCommunication.tags,
             httpCommunication.event,

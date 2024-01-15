@@ -36,7 +36,7 @@ export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryM
     @Column({
         field: 'queueName',
         allowNull: false,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
     })
     queueName: string;
 
@@ -58,7 +58,7 @@ export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryM
     @Column({
         field: 'jobName',
         allowNull: true,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
         defaultValue: '__default__',
     })
     jobName: string;

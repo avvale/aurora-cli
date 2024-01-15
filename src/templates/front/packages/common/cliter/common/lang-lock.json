@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.html",
-            "integrity": "sha1:6ce42a6ad97931ad06169553cb408eec3eb320eb"
+            "integrity": "sha1:d1398ca9f1b2aceb74ec09e9aaca73d42814d350"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-detail.component.ts",
-            "integrity": "sha1:a49852edd2363b9b3a9de9f89a19a4d9c7805461"
+            "integrity": "sha1:173e13ccf57fc598a3c3b1910b96bd6ba7dc5881"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.html",
-            "integrity": "sha1:672a3e0859980ac1129953be47c3540412ce8f96"
+            "integrity": "sha1:773df28da7aacdf7d22e8ae468f91a7359ce0cf4"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang-list.component.ts",
@@ -27,7 +27,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.columns-config.ts",
-            "integrity": "sha1:b5fd2916a184c079c2d0f88b0fee3744d3b2c664"
+            "integrity": "sha1:f651015fa70bc547a63aedc6ab5c54f2b5f4c0fc"
         },
         {
             "path": "src/app/modules/admin/apps/common/lang/lang.graphql.ts",

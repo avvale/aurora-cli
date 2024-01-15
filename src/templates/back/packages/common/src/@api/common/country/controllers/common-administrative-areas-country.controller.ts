@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { CommonAdministrativeAreasCountryHandler } from '../handlers/common-administrative-areas-country.handler';
 import { Auth } from '@aurora/decorators';
 import { ContentLanguage } from '@aurorajs.dev/core';
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CommonAdministrativeAreasCountryHandler } from '../handlers/common-administrative-areas-country.handler';
 
 @ApiTags('[common] country')
 @Controller('common/country/administrative-areas')

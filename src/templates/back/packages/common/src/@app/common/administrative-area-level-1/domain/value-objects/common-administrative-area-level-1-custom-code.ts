@@ -10,7 +10,7 @@ export class CommonAdministrativeAreaLevel1CustomCode extends StringValueObject
             name       : 'CommonAdministrativeAreaLevel1CustomCode',
             nullable   : true,
             undefinable: true,
-            maxLength  : 10,
+            maxLength  : 63,
         }, validationRules));
     }
 }

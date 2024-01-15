@@ -10,7 +10,7 @@ export class CommonAdministrativeAreaLevel3Name extends StringValueObject
             name       : 'CommonAdministrativeAreaLevel3Name',
             nullable   : false,
             undefinable: false,
-            maxLength  : 100,
+            maxLength  : 127,
         }, validationRules));
     }
 }

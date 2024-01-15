@@ -10,7 +10,7 @@ export class AuditingSideEffectUserAgent extends StringValueObject
             name       : 'AuditingSideEffectUserAgent',
             nullable   : true,
             undefinable: true,
-            maxLength  : 1023,
+            maxLength  : 1022,
         }, validationRules));
     }
 }

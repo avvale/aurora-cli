@@ -1,13 +1,13 @@
 import { NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnTranslationComponent, GridColumnsConfigStorageService, GridCustomButtonsHeaderDialogTemplateDirective, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridFormElementDetailDialogTemplateDirective, GridState, GridStateService, GridTranslationsComponent, IsObjectEmptyPipe, MatFormFieldAppearanceComponent, QueryStatementHandler, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
+import { QueueService } from '@apps/queue-manager/queue';
+import { QueueJobType, QueueManagerJob, QueueManagerQueue } from '@apps/queue-manager/queue-manager.types';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, GridColumnsConfigStorageService, GridColumnTranslationComponent, GridCustomButtonsHeaderDialogTemplateDirective, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridFormElementDetailDialogTemplateDirective, GridState, GridStateService, GridTranslationsComponent, IsObjectEmptyPipe, log, mapActions, MatFormFieldAppearanceComponent, QueryStatementHandler, Utils, ViewDetailComponent } from '@aurora';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
-import { jobColumnsConfig } from '../job/job.columns-config';
 import { JobService } from '../job/job.service';
-import { QueueJobType, QueueManagerJob, QueueManagerQueue } from '../queue-manager.types';
-import { QueueService } from './queue.service';
+import { jobColumnsConfig } from '../job/job.columns-config';
 
 @Component({
     selector       : 'queue-manager-queue-detail',
@@ -79,7 +79,6 @@ export class QueueDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly queueService: QueueService,
         private readonly jobService: JobService,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
@@ -132,8 +131,8 @@ export class QueueDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id    : [{ value: '', disabled: true }, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            prefix: [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(50)]],
-            name  : [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(50)]],
+            prefix: [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(63)]],
+            name  : [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(63)]],
         });
     }
 

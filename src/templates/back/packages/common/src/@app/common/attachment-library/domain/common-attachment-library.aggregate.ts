@@ -22,8 +22,8 @@ import { AggregateRoot } from '@nestjs/cqrs';
 export class CommonAttachmentLibrary extends AggregateRoot
 {
     id: CommonAttachmentLibraryId;
-    filename: CommonAttachmentLibraryFilename;
     originFilename: CommonAttachmentLibraryOriginFilename;
+    filename: CommonAttachmentLibraryFilename;
     mimetype: CommonAttachmentLibraryMimetype;
     extension: CommonAttachmentLibraryExtension;
     relativePathSegments: CommonAttachmentLibraryRelativePathSegments;
@@ -38,8 +38,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
 
     constructor(
         id: CommonAttachmentLibraryId,
-        filename: CommonAttachmentLibraryFilename,
         originFilename: CommonAttachmentLibraryOriginFilename,
+        filename: CommonAttachmentLibraryFilename,
         mimetype: CommonAttachmentLibraryMimetype,
         extension: CommonAttachmentLibraryExtension,
         relativePathSegments: CommonAttachmentLibraryRelativePathSegments,
@@ -55,8 +55,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
     {
         super();
         this.id = id;
-        this.filename = filename;
         this.originFilename = originFilename;
+        this.filename = filename;
         this.mimetype = mimetype;
         this.extension = extension;
         this.relativePathSegments = relativePathSegments;
@@ -72,8 +72,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
 
     static register(
         id: CommonAttachmentLibraryId,
-        filename: CommonAttachmentLibraryFilename,
         originFilename: CommonAttachmentLibraryOriginFilename,
+        filename: CommonAttachmentLibraryFilename,
         mimetype: CommonAttachmentLibraryMimetype,
         extension: CommonAttachmentLibraryExtension,
         relativePathSegments: CommonAttachmentLibraryRelativePathSegments,
@@ -89,8 +89,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
     {
         return new CommonAttachmentLibrary(
             id,
-            filename,
             originFilename,
+            filename,
             mimetype,
             extension,
             relativePathSegments,
@@ -110,8 +110,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
         this.apply(
             new CommonCreatedAttachmentLibraryEvent(
                 attachmentLibrary.id.value,
-                attachmentLibrary.filename.value,
                 attachmentLibrary.originFilename.value,
+                attachmentLibrary.filename.value,
                 attachmentLibrary.mimetype.value,
                 attachmentLibrary.extension.value,
                 attachmentLibrary.relativePathSegments.value,
@@ -132,8 +132,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
         this.apply(
             new CommonUpdatedAttachmentLibraryEvent(
                 attachmentLibrary.id?.value,
-                attachmentLibrary.filename?.value,
                 attachmentLibrary.originFilename?.value,
+                attachmentLibrary.filename?.value,
                 attachmentLibrary.mimetype?.value,
                 attachmentLibrary.extension?.value,
                 attachmentLibrary.relativePathSegments?.value,
@@ -154,8 +154,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
         this.apply(
             new CommonDeletedAttachmentLibraryEvent(
                 attachmentLibrary.id.value,
-                attachmentLibrary.filename.value,
                 attachmentLibrary.originFilename.value,
+                attachmentLibrary.filename.value,
                 attachmentLibrary.mimetype.value,
                 attachmentLibrary.extension.value,
                 attachmentLibrary.relativePathSegments.value,
@@ -175,8 +175,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
     {
         return {
             id: this.id.value,
-            filename: this.filename.value,
             originFilename: this.originFilename.value,
+            filename: this.filename.value,
             mimetype: this.mimetype.value,
             extension: this.extension.value,
             relativePathSegments: this.relativePathSegments.value,
@@ -196,8 +196,8 @@ export class CommonAttachmentLibrary extends AggregateRoot
     {
         return {
             id: this.id.value,
-            filename: this.filename.value,
             originFilename: this.originFilename.value,
+            filename: this.filename.value,
             mimetype: this.mimetype.value,
             extension: this.extension.value,
             relativePathSegments: this.relativePathSegments.value,

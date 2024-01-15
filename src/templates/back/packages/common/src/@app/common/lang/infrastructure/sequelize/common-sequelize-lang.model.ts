@@ -149,14 +149,14 @@ export class CommonLangModel extends Model<CommonLangModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(127),
     })
     name: string;
 
     @Column({
         field: 'image',
         allowNull: true,
-        type: DataTypes.STRING(undefined),
+        type: DataTypes.STRING(1022),
     })
     image: string;
 
@@ -184,7 +184,7 @@ export class CommonLangModel extends Model<CommonLangModel>
     @Column({
         field: 'customCode',
         allowNull: true,
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(63),
     })
     customCode: string;
 
@@ -198,7 +198,7 @@ export class CommonLangModel extends Model<CommonLangModel>
     @Column({
         field: 'sort',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     sort: number;
 

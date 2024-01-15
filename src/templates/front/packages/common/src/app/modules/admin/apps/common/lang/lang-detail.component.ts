@@ -86,14 +86,14 @@ export class LangDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(100)]],
-            image: '',
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            image: ['', [Validators.maxLength(1022)]],
             iso6392: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
             iso6393: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
             ietf: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            customCode: ['', [Validators.maxLength(10)]],
+            customCode: ['', [Validators.maxLength(63)]],
             dir: [null, [Validators.required]],
-            sort: [null, [Validators.maxLength(6)]],
+            sort: null,
             isActive: [false, [Validators.required]],
         });
     }

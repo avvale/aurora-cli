@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { Column, Model, Table, ForeignKey, BelongsTo, HasMany, BelongsToMany, HasOne } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
+import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'AuditingHttpCommunication',
@@ -36,9 +36,9 @@ export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicat
     @Column({
         field: 'tags',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING()),
     })
-    tags: any;
+    tags: string[];
 
     @Column({
         field: 'event',
@@ -50,7 +50,7 @@ export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicat
     @Column({
         field: 'status',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     status: number;
 
@@ -64,7 +64,7 @@ export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicat
     @Column({
         field: 'url',
         allowNull: false,
-        type: DataTypes.STRING(2048),
+        type: DataTypes.STRING(2046),
     })
     url: string;
 

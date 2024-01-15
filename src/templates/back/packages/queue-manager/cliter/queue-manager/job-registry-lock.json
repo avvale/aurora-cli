@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.data.ts",
-            "integrity": "sha1:f9d47bc5a2be6c357566dc34e3eef257e306112b"
+            "integrity": "sha1:6a716d1a1b3e063a1fe49d657fa9506055e0edf7"
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/mock/queue-manager-mock-job-registry.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/sequelize/queue-manager-sequelize-job-registry.model.ts",
-            "integrity": "sha1:5276ba2e59f7f5d1697c58440b1262ff83e1ff9c"
+            "integrity": "sha1:bf919f4fb588f86a85bdc12345947eb07d3060e0"
         },
         {
             "path": "src/@app/queue-manager/job-registry/infrastructure/sequelize/queue-manager-sequelize-job-registry.repository.ts",
@@ -351,7 +351,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/value-objects/queue-manager-job-registry-queue-name.ts",
-            "integrity": "sha1:42bc7465ce67e9bb745e5c6a4f79595bcb955bf7"
+            "integrity": "sha1:167b3690637c149dfa1805b72a6a2f6bc30bc57a"
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/value-objects/queue-manager-job-registry-state.ts",
@@ -363,7 +363,7 @@
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/value-objects/queue-manager-job-registry-job-name.ts",
-            "integrity": "sha1:ff6798a087a3c0fc1c4bd3b6d34bc7d99c2ff089"
+            "integrity": "sha1:7b3f711cbdb5e027a2ed45708ff3a63f1a186b63"
         },
         {
             "path": "src/@app/queue-manager/job-registry/domain/value-objects/queue-manager-job-registry-tags.ts",
@@ -687,11 +687,11 @@
         },
         {
             "path": "test/acceptance/queue-manager/job-registry.e2e-spec.ts",
-            "integrity": "sha1:02b2845e6ecb0b8bb20155f9dd4a9a4193447688"
+            "integrity": "sha1:796022e652ff73976d22afd619ccfa79d2d4ece4"
         },
         {
             "path": "postman/queue-manager/queue-manager.job-registry.postman.json",
-            "integrity": "sha1:87a91d9748f999d89970a08370fe68282b6f53b5"
+            "integrity": "sha1:5c8ed884fcdb547c9d9a1c5e0dda6c219d9f56c2"
         }
     ]
 }

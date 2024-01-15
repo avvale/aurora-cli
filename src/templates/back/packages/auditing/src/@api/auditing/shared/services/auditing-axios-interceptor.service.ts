@@ -13,7 +13,7 @@ interface MetaAxiosRequestConfig extends InternalAxiosRequestConfig
 {
     [META_KEY]: {
         id: string;
-        tags: string[] | number[];
+        tags: string[];
     };
 }
 

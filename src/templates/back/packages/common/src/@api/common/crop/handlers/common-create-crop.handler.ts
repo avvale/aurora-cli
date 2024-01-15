@@ -22,12 +22,6 @@ export class CommonCreateCropHandler
             attachment.familyId,
         ));
 
-        // TODO, ver dodne ponemos el cambio de extension, posiblemente guardadeo de attachemtn
-        /*  if (Utils.mimeFromExtension(attachmentFamily.format.toLowerCase()) !== payload.attachment.mimetype)
-        {
-            console.log('mimetype not match');
-        } */
-
         // get library paths
         const libraryFilename = `${attachment.library.id}${attachment.library.extension}`;
         const absoluteLibraryPath = storagePublicAbsolutePath(attachment.library.relativePathSegments, libraryFilename);
@@ -53,7 +47,7 @@ export class CommonCreateCropHandler
             });
         }
 
-        // save to file
+        // save to file, output format will be inferred from the extension
         const imageResult = await image.toFile(absolutePath);
 
         // set metadata for cropped image
@@ -62,10 +56,13 @@ export class CommonCreateCropHandler
         return {
             attachment: {
                 ...attachment,
-                width : imageResult.width,
-                height: imageResult.height,
-                size  : imageResult.size,
-                meta,
+                width    : imageResult.width,
+                height   : imageResult.height,
+                size     : imageResult.size,
+                isCropped: true,
+                meta     : {
+                    imageMeta: meta,
+                },
             },
             crop,
         };

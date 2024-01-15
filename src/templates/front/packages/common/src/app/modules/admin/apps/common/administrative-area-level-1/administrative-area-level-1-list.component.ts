@@ -1,7 +1,6 @@
-import { CommonAdministrativeAreaLevel1 } from '../common.types';
-import { administrativeAreaLevel1ColumnsConfig } from './administrative-area-level-1.columns-config';
-import { AdministrativeAreaLevel1Service } from './administrative-area-level-1.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { administrativeAreaLevel1ColumnsConfig, AdministrativeAreaLevel1Service } from '@apps/common/administrative-area-level-1';
+import { CommonAdministrativeAreaLevel1 } from '@apps/common/common.types';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -59,7 +58,6 @@ export class AdministrativeAreaLevel1ListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,

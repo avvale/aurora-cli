@@ -32,8 +32,8 @@ export class CommonCreateAttachmentLibrariesCommandHandler implements ICommandHa
                 {
                     return {
                         id: new CommonAttachmentLibraryId(attachmentLibrary.id),
-                        filename: new CommonAttachmentLibraryFilename(attachmentLibrary.filename),
                         originFilename: new CommonAttachmentLibraryOriginFilename(attachmentLibrary.originFilename),
+                        filename: new CommonAttachmentLibraryFilename(attachmentLibrary.filename),
                         mimetype: new CommonAttachmentLibraryMimetype(attachmentLibrary.mimetype),
                         extension: new CommonAttachmentLibraryExtension(attachmentLibrary.extension),
                         relativePathSegments: new CommonAttachmentLibraryRelativePathSegments(attachmentLibrary.relativePathSegments),

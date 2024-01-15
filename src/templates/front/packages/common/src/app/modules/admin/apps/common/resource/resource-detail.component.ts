@@ -1,10 +1,10 @@
-import { CommonResource } from '../common.types';
-import { ResourceService } from './resource.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CommonResource } from '@apps/common/common.types';
+import { ResourceService } from '@apps/common/resource';
+import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'common-resource-detail',
@@ -36,7 +36,6 @@ export class ResourceDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly resourceService: ResourceService,
     )
     {
@@ -85,8 +84,8 @@ export class ResourceDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            code: ['', [Validators.required, Validators.maxLength(30)]],
-            name: ['', [Validators.required, Validators.maxLength(100)]],
+            code: ['', [Validators.required, Validators.maxLength(63)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
             isActive: [false, [Validators.required]],
             hasAttachments: [false, [Validators.required]],
         });

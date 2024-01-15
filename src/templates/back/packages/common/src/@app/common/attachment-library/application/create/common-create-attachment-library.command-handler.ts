@@ -29,8 +29,8 @@ export class CommonCreateAttachmentLibraryCommandHandler implements ICommandHand
         await this.createAttachmentLibraryService.main(
             {
                 id: new CommonAttachmentLibraryId(command.payload.id),
-                filename: new CommonAttachmentLibraryFilename(command.payload.filename),
                 originFilename: new CommonAttachmentLibraryOriginFilename(command.payload.originFilename),
+                filename: new CommonAttachmentLibraryFilename(command.payload.filename),
                 mimetype: new CommonAttachmentLibraryMimetype(command.payload.mimetype),
                 extension: new CommonAttachmentLibraryExtension(command.payload.extension),
                 relativePathSegments: new CommonAttachmentLibraryRelativePathSegments(command.payload.relativePathSegments),

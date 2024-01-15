@@ -29,8 +29,8 @@ export class CommonUpdateAttachmentLibrariesCommandHandler implements ICommandHa
         await this.updateAttachmentLibrariesService.main(
             {
                 id: new CommonAttachmentLibraryId(command.payload.id, { undefinable: true }),
-                filename: new CommonAttachmentLibraryFilename(command.payload.filename, { undefinable: true }),
                 originFilename: new CommonAttachmentLibraryOriginFilename(command.payload.originFilename, { undefinable: true }),
+                filename: new CommonAttachmentLibraryFilename(command.payload.filename, { undefinable: true }),
                 mimetype: new CommonAttachmentLibraryMimetype(command.payload.mimetype, { undefinable: true }),
                 extension: new CommonAttachmentLibraryExtension(command.payload.extension, { undefinable: true }),
                 relativePathSegments: new CommonAttachmentLibraryRelativePathSegments(command.payload.relativePathSegments, { undefinable: true }),

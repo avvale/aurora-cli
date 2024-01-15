@@ -1,8 +1,7 @@
-import { AuditingSideEffect } from '../auditing.types';
-import { sideEffectColumnsConfig } from './side-effect.columns-config';
-import { SideEffectService } from './side-effect.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { AuditingSideEffect } from '@apps/auditing/auditing.types';
+import { sideEffectColumnsConfig, SideEffectService } from '@apps/auditing/side-effect';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const sideEffectPaginationResolver: ResolveFn<GridData<AuditingSideEffect>> = (
@@ -40,7 +39,7 @@ export const sideEffectNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'auditing::sideEffect.detail.new',
@@ -49,14 +48,14 @@ export const sideEffectNewResolver: ResolveFn<Action> = (
 };
 
 export const sideEffectEditResolver: ResolveFn<{
-	object: AuditingSideEffect;
+    object: AuditingSideEffect;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const sideEffectService = inject(SideEffectService);
+    const actionService = inject(ActionService);
+    const sideEffectService = inject(SideEffectService);
 
     actionService.action({
         id          : 'auditing::sideEffect.detail.edit',

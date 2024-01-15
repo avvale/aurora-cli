@@ -40,7 +40,7 @@ export class CommonUpdateAdministrativeAreaLevel3ByIdCommandHandler implements I
                 latitude: new CommonAdministrativeAreaLevel3Latitude(command.payload.latitude),
                 longitude: new CommonAdministrativeAreaLevel3Longitude(command.payload.longitude),
                 zoom: new CommonAdministrativeAreaLevel3Zoom(command.payload.zoom),
-                mapType: new CommonAdministrativeAreaLevel3MapType(command.payload.mapType, { undefinable: true }),
+                mapType: new CommonAdministrativeAreaLevel3MapType(command.payload.mapType),
             },
             command.constraint,
             command.cQMetadata,

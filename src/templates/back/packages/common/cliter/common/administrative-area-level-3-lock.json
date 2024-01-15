@@ -15,7 +15,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/create/common-create-administrative-area-level-3.command.ts",
-            "integrity": "sha1:8772b9e69b607e7478c40751a8ce33cad5def827"
+            "integrity": "sha1:456f3375c288d34b2f455876195b1c791bddb6c4"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/create/common-create-administrative-area-level-3.service.spec.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/create/common-create-administrative-areas-level-3.command.ts",
-            "integrity": "sha1:545d7abb3206cf4467c2bf95fd5f917ff1132ff7"
+            "integrity": "sha1:b97a0f7480163a5bd37cc7bafc5f9a0f337eb446"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/create/common-create-administrative-areas-level-3.service.spec.ts",
@@ -87,7 +87,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/events/common-add-administrative-areas-level-3-context.event.ts",
-            "integrity": "sha1:4e81e8cfeccadb77d2160372fdde2fe25a05c609"
+            "integrity": "sha1:11a53d016041929d469c0559ec71f084e69a2dbb"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/events/common-created-administrative-area-level-3.event-handler.ts",
@@ -247,7 +247,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/update/common-update-administrative-area-level-3-by-id.command-handler.ts",
-            "integrity": "sha1:ee68d1a2237c3e951dd4bbaf26f45eac90385435"
+            "integrity": "sha1:80bd07767dd162dbc8d09528fb55f6994fcbc8f5"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/update/common-update-administrative-area-level-3-by-id.command.ts",
@@ -267,7 +267,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/update/common-update-administrative-areas-level-3.command-handler.ts",
-            "integrity": "sha1:29f65b470b7c73bcfbe6214f58e8bd360bc719c5"
+            "integrity": "sha1:cdcb9964e749e0f8092e17ac7dd7a6d5b6a2de12"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/application/update/common-update-administrative-areas-level-3.command.ts",
@@ -303,7 +303,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/common-administrative-area-level-3.aggregate.ts",
-            "integrity": "sha1:1e1a741effb0a20cdf8cacbde274443d7c4ebc83"
+            "integrity": "sha1:f983e08aaf81b5e4fa7055b50b2446fc11b8d32f"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/common-administrative-area-level-3.mapper.ts",
@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.data.ts",
-            "integrity": "sha1:a6db9d8ed2ae1620cc960851345ffc0103c6b391"
+            "integrity": "sha1:10056d59bddc09904e2f0ed86b099fae6960b808"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/infrastructure/mock/common-mock-administrative-area-level-3.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/infrastructure/sequelize/common-sequelize-administrative-area-level-3.model.ts",
-            "integrity": "sha1:3ccb0530892deafe2111f3cc800889a4b74bbfa8"
+            "integrity": "sha1:92bc47c2390aab75f07a7035ed20cbba1f4781e1"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/infrastructure/sequelize/common-sequelize-administrative-area-level-3.repository.ts",
@@ -367,15 +367,15 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/value-objects/common-administrative-area-level-3-custom-code.ts",
-            "integrity": "sha1:a072f71e163156aa1ec725643e845e46aa0b31e1"
+            "integrity": "sha1:2a8c254989c14c33839166a90a514e0863f26a49"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/value-objects/common-administrative-area-level-3-name.ts",
-            "integrity": "sha1:a5f15ad7373ca8823fc5983577959588c103c5fa"
+            "integrity": "sha1:a61ba3dca46513d4c08dd50044ef30432937b2c4"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/value-objects/common-administrative-area-level-3-slug.ts",
-            "integrity": "sha1:a6a1987011c8ac2219ae18cc0011e96822c8236e"
+            "integrity": "sha1:f3835b35d8268662708a51a1a47467ea82bcf829"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/value-objects/common-administrative-area-level-3-latitude.ts",
@@ -387,11 +387,11 @@
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/value-objects/common-administrative-area-level-3-zoom.ts",
-            "integrity": "sha1:4db54d54a199a1e7034fe58906d38f70be02f560"
+            "integrity": "sha1:b2c2ef09d830959b822836892c048db4ac54a5ec"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/value-objects/common-administrative-area-level-3-map-type.ts",
-            "integrity": "sha1:fcd1e2eb21ea857ea16aa4141c5521415a0f0bb5"
+            "integrity": "sha1:b57403437b6d348de6ab7a7ddc0f09162b8df414"
         },
         {
             "path": "src/@app/common/administrative-area-level-3/domain/value-objects/common-administrative-area-level-3-created-at.ts",
@@ -499,27 +499,31 @@
         },
         {
             "path": "src/@api/common/administrative-area-level-3/dto/common-administrative-area-level-3.dto.ts",
-            "integrity": "sha1:b13d9e88f3bcdc65ec3c925d3b56504e0c7163f7"
+            "integrity": "sha1:716d82fd9f6b162a595b64ddd8ede044079f7f28"
         },
         {
             "path": "src/@api/common/administrative-area-level-3/dto/common-create-administrative-area-level-3.dto.ts",
-            "integrity": "sha1:68a6f719e34b911222f9fe331089f1748c85ace2"
+            "integrity": "sha1:09ecb283901cbb773be24336e41ad14fa8acc972"
         },
         {
             "path": "src/@api/common/administrative-area-level-3/dto/common-update-administrative-area-level-3-by-id.dto.ts",
-            "integrity": "sha1:5abe64585b1bebdef386b165d386054e631440de"
+            "integrity": "sha1:e4b11ef41c41418667ceefeee9b2ba584015ebc1"
         },
         {
             "path": "src/@api/common/administrative-area-level-3/dto/common-update-administrative-areas-level-3.dto.ts",
-            "integrity": "sha1:4f571bd3fc172553366f4932f1481cf424847b63"
+            "integrity": "sha1:0082dac3fd6f6ebcf66b1fce3e58cd13b5eff575"
         },
         {
             "path": "src/@api/common/administrative-area-level-3/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/common/administrative-area-level-3/dto/public-api.ts",
             "integrity": "sha1:3e8496454b389e12d7e06d6e8d96a1db22933315"
         },
         {
             "path": "src/@api/common/administrative-area-level-3/graphql/common-administrative-area-level-3.graphql",
-            "integrity": "sha1:cb799cc9c461025d6d5cd9a4a76d8e2b5afd3669"
+            "integrity": "sha1:8e02a4e543baa136422a9fcac19adf1ad9ff872f"
         },
         {
             "path": "src/@api/common/administrative-area-level-3/handlers/common-create-administrative-area-level-3.handler.spec.ts",
@@ -611,7 +615,7 @@
         },
         {
             "path": "src/@api/common/administrative-area-level-3/index.ts",
-            "integrity": "sha1:707e3e1d2ee2e995ed004c2aef6ac910e02d863e"
+            "integrity": "sha1:28b9857febc51adcfda5f6662a41107363088d19"
         },
         {
             "path": "src/@api/common/administrative-area-level-3/resolvers/common-create-administrative-area-level-3.resolver.spec.ts",
@@ -707,11 +711,11 @@
         },
         {
             "path": "test/acceptance/common/administrative-area-level-3.e2e-spec.ts",
-            "integrity": "sha1:cd572eb72833a9d9c9158beb21bcd0e8da83af10"
+            "integrity": "sha1:3923f2e1c3a82d5b2b4a082921d4d16f9a10f00b"
         },
         {
             "path": "postman/common/common.administrative-area-level-3.postman.json",
-            "integrity": "sha1:b52475f8c210c8d5c2542060c89df7fe1b10f8b8"
+            "integrity": "sha1:144dd23b74c34b6c570ea410c52ae34280295ad7"
         }
     ]
 }

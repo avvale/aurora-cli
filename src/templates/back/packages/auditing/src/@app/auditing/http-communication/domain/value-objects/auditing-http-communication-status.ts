@@ -10,7 +10,6 @@ export class AuditingHttpCommunicationStatus extends SmallintValueObject
             name       : 'AuditingHttpCommunicationStatus',
             nullable   : true,
             undefinable: true,
-            maxLength  : 5,
             unsigned   : true,
         }, validationRules));
     }

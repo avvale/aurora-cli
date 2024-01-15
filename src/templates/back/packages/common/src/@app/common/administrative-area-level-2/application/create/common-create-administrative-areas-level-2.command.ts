@@ -14,7 +14,7 @@ export class CommonCreateAdministrativeAreasLevel2Command
             latitude?: number;
             longitude?: number;
             zoom?: number;
-            mapType: string;
+            mapType?: string;
         } [],
         public readonly cQMetadata?: CQMetadata,
     ) {}

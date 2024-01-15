@@ -1,15 +1,11 @@
+import { auditingMockHttpCommunicationData, AuditingUpdateHttpCommunicationByIdCommand } from '@app/auditing/http-communication';
+import { AuditingUpdateHttpCommunicationByIdCommandHandler } from '@app/auditing/http-communication/application/update/auditing-update-http-communication-by-id.command-handler';
+import { AuditingUpdateHttpCommunicationByIdService } from '@app/auditing/http-communication/application/update/auditing-update-http-communication-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
-
-// custom items
-import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.data';
-import { AuditingUpdateHttpCommunicationByIdCommandHandler } from './auditing-update-http-communication-by-id.command-handler';
-import { AuditingUpdateHttpCommunicationByIdCommand } from './auditing-update-http-communication-by-id.command';
-import { AuditingUpdateHttpCommunicationByIdService } from './auditing-update-http-communication-by-id.service';
 
 describe('AuditingUpdateHttpCommunicationByIdCommandHandler', () =>
 {
     let commandHandler: AuditingUpdateHttpCommunicationByIdCommandHandler;
-    let service: AuditingUpdateHttpCommunicationByIdService;
 
     beforeAll(async () =>
     {
@@ -27,7 +23,6 @@ describe('AuditingUpdateHttpCommunicationByIdCommandHandler', () =>
             .compile();
 
         commandHandler = module.get<AuditingUpdateHttpCommunicationByIdCommandHandler>(AuditingUpdateHttpCommunicationByIdCommandHandler);
-        service = module.get<AuditingUpdateHttpCommunicationByIdService>(AuditingUpdateHttpCommunicationByIdService);
     });
 
     describe('main', () =>

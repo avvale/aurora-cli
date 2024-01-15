@@ -1,10 +1,7 @@
+import { AuditingISideEffectRepository, AuditingMockSideEffectRepository } from '@app/auditing/side-effect';
+import { AuditingRawSQLSideEffectsService } from '@app/auditing/side-effect/application/raw-sql/auditing-raw-sql-side-effects.service';
+import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { EventPublisher, EventBus, CommandBus, UnhandledExceptionBus } from '@nestjs/cqrs';
-
-// custom items
-import { AuditingRawSQLSideEffectsService } from './auditing-raw-sql-side-effects.service';
-import { AuditingISideEffectRepository } from '../../domain/auditing-side-effect.repository';
-import { AuditingMockSideEffectRepository } from '../../infrastructure/mock/auditing-mock-side-effect.repository';
 
 describe('AuditingRawSQLSideEffectsService ', () =>
 {

@@ -1,12 +1,11 @@
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
 export class AuditingUpdateSideEffectByIdCommand
 {
     constructor(
         public readonly payload: {
             id: string;
-            tags?: any;
+            tags?: string[];
             modelPath?: string;
             modelName?: string;
             operationId?: string;

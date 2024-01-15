@@ -11,19 +11,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue-detail.component.html",
-            "integrity": "sha1:57ddeaea7221f230ff472a1fe9a0a4993014ac0f"
+            "integrity": "sha1:a99299b5c228bd423a8f8c470e59f8b154421d11"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue-detail.component.ts",
-            "integrity": "sha1:1653546afd2807dba6e46d2352aef1ab28945851"
+            "integrity": "sha1:fe1abe56ff0be6206654b59e6038ee783da32a54"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue-list.component.html",
-            "integrity": "sha1:e8b38897d2868d07f395a6817147ffd02991296b"
+            "integrity": "sha1:348af6beef98dc6fd251246441760ca3f14fba53"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue-list.component.ts",
-            "integrity": "sha1:4c71bd17c09598e20b86f7989a3b230a9e55fd82"
+            "integrity": "sha1:4b409a0c54b068584420c8d47effcd8c2574b22a"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue.columns-config.ts",
@@ -35,11 +35,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue.resolvers.ts",
-            "integrity": "sha1:f9feb75b1f07233f287e4a57015a7c233aeaaa65"
+            "integrity": "sha1:0cb54027491c5cfc55ec79b23f854af2109b79c8"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue/queue.service.ts",
-            "integrity": "sha1:8a5ef65e01d6b211bef8e9069cde85104cc47d07"
+            "integrity": "sha1:3fb3acb82ce28e99449323a348ec0f2e285185f8"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/queue/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/queue-manager/queue/public-api.ts",
+            "integrity": "sha1:0c96d35739cd47114a083b8b38c2cb92b1e7f01b"
         }
     ]
 }

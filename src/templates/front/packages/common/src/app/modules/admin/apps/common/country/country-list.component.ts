@@ -1,7 +1,6 @@
-import { CommonCountry } from '../common.types';
-import { countryColumnsConfig } from './country.columns-config';
-import { CountryService } from './country.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CommonCountry } from '@apps/common/common.types';
+import { countryColumnsConfig, CountryService } from '@apps/common/country';
 import { Action, ColumnConfig, ColumnConfigAction, ColumnDataType, CoreLang, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -104,7 +103,6 @@ export class CountryListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,

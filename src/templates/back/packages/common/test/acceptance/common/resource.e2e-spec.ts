@@ -253,35 +253,35 @@ describe('resource', () =>
             });
     });
 
-    test('/REST:POST common/resource/create - Got 400 Conflict, ResourceCode is too large, has a maximum length of 30', () =>
+    test('/REST:POST common/resource/create - Got 400 Conflict, ResourceCode is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/common/resource/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: '*******************************',
+                code: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonResourceCode is too large, has a maximum length of 30');
+                expect(res.body.message).toContain('Value for CommonResourceCode is too large, has a maximum length of 63');
             });
     });
 
-    test('/REST:POST common/resource/create - Got 400 Conflict, ResourceName is too large, has a maximum length of 100', () =>
+    test('/REST:POST common/resource/create - Got 400 Conflict, ResourceName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/common/resource/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '*****************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for CommonResourceName is too large, has a maximum length of 100');
+                expect(res.body.message).toContain('Value for CommonResourceName is too large, has a maximum length of 127');
             });
     });
 

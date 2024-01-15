@@ -1,34 +1,32 @@
-import { Injectable } from '@nestjs/common';
-import { MockRepository, Utils } from '@aurorajs.dev/core';
-import { AuditingISideEffectRepository } from '@app/auditing/side-effect/domain/auditing-side-effect.repository';
+import { AuditingISideEffectRepository, auditingMockSideEffectData, AuditingSideEffect } from '@app/auditing/side-effect';
 import {
-    AuditingSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectModelName,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
     AuditingSideEffectAccountId,
+    AuditingSideEffectAuditableId,
+    AuditingSideEffectBaseUrl,
+    AuditingSideEffectBody,
+    AuditingSideEffectCreatedAt,
+    AuditingSideEffectDeletedAt,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectNewValue,
+    AuditingSideEffectId,
     AuditingSideEffectIp,
+    AuditingSideEffectIsRollback,
     AuditingSideEffectMethod,
-    AuditingSideEffectBaseUrl,
+    AuditingSideEffectModelName,
+    AuditingSideEffectModelPath,
+    AuditingSideEffectNewValue,
+    AuditingSideEffectOldValue,
+    AuditingSideEffectOperationId,
+    AuditingSideEffectOperationSort,
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
-    AuditingSideEffectBody,
-    AuditingSideEffectUserAgent,
-    AuditingSideEffectIsRollback,
     AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectCreatedAt,
+    AuditingSideEffectTags,
     AuditingSideEffectUpdatedAt,
-    AuditingSideEffectDeletedAt,
+    AuditingSideEffectUserAgent,
 } from '@app/auditing/side-effect/domain/value-objects';
-import { AuditingSideEffect } from '../../domain/auditing-side-effect.aggregate';
-import { auditingMockSideEffectData } from './auditing-mock-side-effect.data';
+import { MockRepository, Utils } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingMockSideEffectRepository extends MockRepository<AuditingSideEffect> implements AuditingISideEffectRepository
@@ -36,7 +34,6 @@ export class AuditingMockSideEffectRepository extends MockRepository<AuditingSid
     public readonly repository: any;
     public readonly aggregateName: string = 'AuditingSideEffect';
     public collectionSource: AuditingSideEffect[];
-    public deletedAtInstance: AuditingSideEffectDeletedAt = new AuditingSideEffectDeletedAt(null);
 
     constructor()
     {

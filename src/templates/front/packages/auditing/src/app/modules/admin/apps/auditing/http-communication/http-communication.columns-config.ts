@@ -1,7 +1,13 @@
-// ignored file
 import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const httpCommunicationColumnsConfig: ColumnConfig[] = [
+    {
+        type       : ColumnDataType.STRING,
+        field      : 'createdAt',
+        sort       : 'createdAt',
+        bodyClass  : 'min-w-48',
+        translation: 'Created.M',
+    },
     {
         type : ColumnDataType.STRING,
         field: 'tags',
@@ -21,15 +27,5 @@ export const httpCommunicationColumnsConfig: ColumnConfig[] = [
         type : ColumnDataType.STRING,
         field: 'url',
         sort : 'url',
-    },
-    {
-        type : ColumnDataType.STRING,
-        field: 'createdAt',
-        sort : 'createdAt',
-    },
-    {
-        type : ColumnDataType.STRING,
-        field: 'updatedAt',
-        sort : 'updatedAt',
     },
 ];
