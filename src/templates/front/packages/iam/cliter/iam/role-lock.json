@@ -11,35 +11,43 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-detail.component.html",
-            "integrity": "sha1:3fc7721c317e4d1a060441ffa9d097ba21812d53"
+            "integrity": "sha1:13c19326d754f3870cd38ddd00564a00a953103e"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-detail.component.ts",
-            "integrity": "sha1:910619cdf36a5a9a16da24678c490c6c60c84a41"
+            "integrity": "sha1:716ebcef4df79e7f7658aefafc588eaec31deb47"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-list.component.html",
-            "integrity": "sha1:65bb2841337e60f6456cadb0cd04b66ffb011021"
+            "integrity": "sha1:22091496fa87a1af944e7611215d1224c34ac879"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-list.component.ts",
-            "integrity": "sha1:c2c7bfe857bd1e4d9657bd9fb3c775ca52fbb8c6"
+            "integrity": "sha1:817c87c70e9ab5c62b98df1d3325138e8e8bf10b"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.columns-config.ts",
-            "integrity": "sha1:42fb51481eee1307c6d757fdaf21f7b5f025f391"
+            "integrity": "sha1:a1bf05a386cf50ec64e360743fac15a5ed75cfc7"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.graphql.ts",
-            "integrity": "sha1:83a2a4159145904888de67fc9683ff6cc81b8d9e"
+            "integrity": "sha1:c6180bca6d73eb967e3ba40e743130f3f485f8a8"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.resolvers.ts",
-            "integrity": "sha1:699309e3c4d26323b89ccf1755f90ac82a602ac4"
+            "integrity": "sha1:031f0039d53a7800d6da83666b21a21e81266ed5"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.service.ts",
-            "integrity": "sha1:8e01a656d2b78453323240fe21e42f0face10f90"
+            "integrity": "sha1:33b3e2267bc3a7ddfa16dab36714029b9300bab1"
+        },
+        {
+            "path": "src/app/modules/admin/apps/iam/role/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/iam/role/public-api.ts",
+            "integrity": "sha1:65a81340cc7857fb1fc4c87637b7ee18bed821a3"
         }
     ]
 }

@@ -29,6 +29,7 @@ export const fields = `
         name
         surname
         mobile
+        langId
         username
     }
     createdAt
@@ -87,6 +88,15 @@ export const getQuery = gql`
     }
 `;
 
+export const getRelations = gql`
+    query IamAccountRelations (
+        $queryGetClients: QueryStatement
+        $constraintGetClients: QueryStatement
+    ){
+        ${relationsFields}
+    }
+`;
+
 export const findByIdQuery = gql`
     query IamFindAccountById (
         $id: ID
@@ -99,6 +109,26 @@ export const findByIdQuery = gql`
             id
             #FIELDS
         }
+    }
+`;
+
+export const findByIdWithRelationsQuery = gql`
+    query IamFindAccountById (
+        $id: ID
+        $constraint: QueryStatement
+        $queryGetClients: QueryStatement
+        $constraintGetClients: QueryStatement
+    ) {
+        object: iamFindAccountById (
+            id: $id
+            constraint: $constraint
+            queryGetClients: $queryGetClients
+            constraintGetClients: $constraintGetClients
+        ) {
+            id
+            #FIELDS
+        }
+        ${relationsFields}
     }
 `;
 
@@ -184,35 +214,5 @@ export const deleteMutation = gql`
         ) {
             ${fields}
         }
-    }
-`;
-
-// ---- customizations ----
-export const getRelations = gql`
-    query IamAccountRelations (
-        $queryGetClients: QueryStatement
-        $constraintGetClients: QueryStatement
-    ){
-        ${relationsFields}
-    }
-`;
-
-export const findByIdWithRelationsQuery = gql`
-    query IamFindAccountById (
-        $id: ID
-        $constraint: QueryStatement
-        $queryGetClients: QueryStatement
-        $constraintGetClients: QueryStatement
-    ) {
-        object: iamFindAccountById (
-            id: $id
-            constraint: $constraint
-            queryGetClients: $queryGetClients
-            constraintGetClients: $constraintGetClients
-        ) {
-            id
-            #FIELDS
-        }
-        ${relationsFields}
     }
 `;

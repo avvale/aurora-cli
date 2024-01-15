@@ -60,6 +60,49 @@ export const findByIdQuery = gql`
     }
 `;
 
+export const findByIdWithRelationsQuery = gql`
+    query IamFindRoleById (
+        $id: ID
+        $constraint: QueryStatement
+        $queryPaginatePermissionsRoles: QueryStatement
+        $constraintPaginatePermissionsRoles: QueryStatement
+        $queryPaginatePermissions: QueryStatement
+        $constraintPaginatePermissions: QueryStatement
+        $queryGetPermissionsRoles: QueryStatement
+        $constraintGetPermissionsRoles: QueryStatement
+    ) {
+        object: iamFindRoleById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+        iamPaginatePermissionsRoles (
+            query: $queryPaginatePermissionsRoles
+            constraint: $constraintPaginatePermissionsRoles
+        ) {
+            total
+            rows
+            count
+        }
+        iamPaginatePermissions (
+            query: $queryPaginatePermissions
+            constraint: $constraintPaginatePermissions
+        ) {
+            total
+            rows
+            count
+        }
+        iamGetPermissionsRoles (
+            query: $queryGetPermissionsRoles
+            constraint: $constraintGetPermissionsRoles
+        ) {
+            permissionId
+        }
+    }
+`;
+
 export const findQuery = gql`
     query IamFindRole (
         $query: QueryStatement
@@ -141,50 +184,6 @@ export const deleteMutation = gql`
             constraint: $constraint
         ) {
             ${fields}
-        }
-    }
-`;
-
-// ---- customizations ----
-export const findByIdWithRelationsQuery = gql`
-    query IamFindRoleById (
-        $id: ID
-        $constraint: QueryStatement
-        $queryPaginatePermissionsRoles: QueryStatement
-        $constraintPaginatePermissionsRoles: QueryStatement
-        $queryPaginatePermissions: QueryStatement
-        $constraintPaginatePermissions: QueryStatement
-        $queryGetPermissionsRoles: QueryStatement
-        $constraintGetPermissionsRoles: QueryStatement
-    ) {
-        object: iamFindRoleById (
-            id: $id
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-        }
-        iamPaginatePermissionsRoles (
-            query: $queryPaginatePermissionsRoles
-            constraint: $constraintPaginatePermissionsRoles
-        ) {
-            total
-            rows
-            count
-        }
-        iamPaginatePermissions (
-            query: $queryPaginatePermissions
-            constraint: $constraintPaginatePermissions
-        ) {
-            total
-            rows
-            count
-        }
-        iamGetPermissionsRoles (
-            query: $queryGetPermissionsRoles
-            constraint: $constraintGetPermissionsRoles
-        ) {
-            permissionId
         }
     }
 `;

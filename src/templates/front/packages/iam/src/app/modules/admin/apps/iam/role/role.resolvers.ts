@@ -1,10 +1,10 @@
-import { IamRole } from '../iam.types';
-import { permissionColumnsConfig } from '../permission/permission.columns-config';
-import { roleColumnsConfig } from './role.columns-config';
-import { RoleService } from './role.service';
+import { IamPermission } from '../iam.types';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { IamRole } from '@apps/iam/iam.types';
+import { roleColumnsConfig, RoleService } from '@apps/iam/role';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { permissionColumnsConfig } from '../permission';
 
 export const rolePaginationResolver: ResolveFn<GridData<IamRole>> = (
     route: ActivatedRouteSnapshot,

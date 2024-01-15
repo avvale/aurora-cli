@@ -11,35 +11,43 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-detail.component.html",
-            "integrity": "sha1:4e13ef4382ed6d89ed8e1bb0bac9be972e57b40e"
+            "integrity": "sha1:2d2fb0a0441c1472c51d336642faf11bd6c177a9"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-detail.component.ts",
-            "integrity": "sha1:26e0085862b28b7c0417d101c2fba31d0f5d1301"
+            "integrity": "sha1:fb4a6d33379cbedccd2df754c73c192427e4dc6f"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-list.component.html",
-            "integrity": "sha1:eec6832f210141749c109a35bb88772b666d3cfe"
+            "integrity": "sha1:679cc12892066ffb9f8f648c96d7e1a8fef1fd6b"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-list.component.ts",
-            "integrity": "sha1:c19b6246325a61bf50c2b0d0791652b009eecc0c"
+            "integrity": "sha1:cf9d1e7a187ffcc912c1b4cd4feec5493ccffa06"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.columns-config.ts",
-            "integrity": "sha1:10358b4c180b67baaca8eb9ee20ec201780985ca"
+            "integrity": "sha1:e177092a3a65fd5e46c018ff017d442422158e20"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.graphql.ts",
-            "integrity": "sha1:221ebcb1ce343192dc152f8901a966eed1bcb887"
+            "integrity": "sha1:64763b341fefe33bdddf98b2b580f0ca45ba54ea"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.resolvers.ts",
-            "integrity": "sha1:35458154b9d0bf0d2c1b7330564c2f6ed77fa316"
+            "integrity": "sha1:ef69bfb9351811a6ade7407214024b0ca74a653b"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.service.ts",
-            "integrity": "sha1:fc2c2336032108eb30a2db2e9b925e22e7b261d9"
+            "integrity": "sha1:ad6f990dae442966d03a2234fca83cecfb9f4d50"
+        },
+        {
+            "path": "src/app/modules/admin/apps/iam/tenant/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/iam/tenant/public-api.ts",
+            "integrity": "sha1:d8e8dbf74753dd7868bf0fcace20ed24d4c6eccf"
         }
     ]
 }

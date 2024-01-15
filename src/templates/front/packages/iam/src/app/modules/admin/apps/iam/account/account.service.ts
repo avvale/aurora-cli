@@ -1,13 +1,15 @@
-import { IamAccount, IamCreateAccount, IamRole, IamTenant, IamUpdateAccountById, IamUpdateAccounts } from '../iam.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, getRelations, paginationQuery, updateByIdMutation, updateMutation } from './account.graphql';
+import { IamRole, IamTenant } from '../iam.types';
+import { TenantService } from '../tenant/tenant.service';
+import { findByIdWithRelationsQuery, getRelations } from './account.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/account';
+import { IamAccount, IamCreateAccount, IamUpdateAccountById, IamUpdateAccounts } from '@apps/iam/iam.types';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { RoleService } from '../role/role.service';
-import { TenantService } from '../tenant/tenant.service';
-import { ClientService } from '../../o-auth/client/client.service';
-import { OAuthClient } from '../../o-auth/o-auth.types';
+import { RoleService } from '../role';
+import { ClientService } from '@apps/o-auth/client';
+import { OAuthClient } from '@apps/o-auth/o-auth.types';
 
 @Injectable({
     providedIn: 'root',
@@ -20,8 +22,8 @@ export class AccountService
 
     constructor(
         private readonly graphqlService: GraphQLService,
-        private readonly roleService: RoleService,
         private readonly tenantService: TenantService,
+        private readonly roleService: RoleService,
         private readonly clientService: ClientService,
     ) {}
 
@@ -119,6 +121,62 @@ export class AccountService
             );
     }
 
+    findByIdWithRelations(
+        {
+            graphqlStatement = findByIdWithRelationsQuery,
+            id = '',
+            constraint = {},
+            queryGetClients = {},
+            constraintGetClients = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            queryGetClients?: QueryStatement;
+            constraintGetClients?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        object: IamAccount;
+        iamGetTenants: IamTenant[];
+        iamGetRoles: IamRole[];
+        oAuthGetClients: OAuthClient[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: IamAccount;
+                iamGetTenants: IamTenant[];
+                iamGetRoles: IamRole[];
+                oAuthGetClients: OAuthClient[];
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                variables: {
+                    id,
+                    constraint,
+                    queryGetClients,
+                    constraintGetClients,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.accountSubject$.next(data.object);
+                    this.tenantService.tenantsSubject$.next(data.iamGetTenants);
+                    this.roleService.rolesSubject$.next(data.iamGetRoles);
+                    this.clientService.clientsSubject$.next(data.oAuthGetClients);
+                }),
+            );
+    }
+
     find(
         {
             graphqlStatement = findQuery,
@@ -197,6 +255,51 @@ export class AccountService
                 tap(data =>
                 {
                     this.accountsSubject$.next(data.objects);
+                }),
+            );
+    }
+
+    getRelations(
+        {
+            queryGetClients = {},
+            constraintGetClients = {},
+            headers = {},
+        }: {
+            queryGetClients?: QueryStatement;
+            constraintGetClients?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        iamGetTenants: IamTenant[];
+        iamGetRoles: IamRole[];
+        oAuthGetClients: OAuthClient[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                iamGetTenants: IamTenant[];
+                iamGetRoles: IamRole[];
+                oAuthGetClients: OAuthClient[];
+            }>({
+                query    : getRelations,
+                variables: {
+                    queryGetClients,
+                    constraintGetClients,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.tenantService.tenantsSubject$.next(data.iamGetTenants);
+                    this.roleService.rolesSubject$.next(data.iamGetRoles);
+                    this.clientService.clientsSubject$.next(data.oAuthGetClients);
                 }),
             );
     }
@@ -336,107 +439,5 @@ export class AccountService
                     headers,
                 },
             });
-    }
-
-    // ---- customizations ----
-    getRelations(
-        {
-            queryGetClients = {},
-            constraintGetClients = {},
-            headers = {},
-        }: {
-            queryGetClients?: QueryStatement;
-            constraintGetClients?: QueryStatement;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<{
-        iamGetTenants: IamTenant[];
-        iamGetRoles: IamRole[];
-        oAuthGetClients: OAuthClient[];
-    }>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{
-                iamGetTenants: IamTenant[];
-                iamGetRoles: IamRole[];
-                oAuthGetClients: OAuthClient[];
-            }>({
-                query    : getRelations,
-                variables: {
-                    queryGetClients,
-                    constraintGetClients,
-                },
-                context: {
-                    headers,
-                },
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map(result => result.data),
-                tap(data =>
-                {
-                    this.tenantService.tenantsSubject$.next(data.iamGetTenants);
-                    this.roleService.rolesSubject$.next(data.iamGetRoles);
-                    this.clientService.clientsSubject$.next(data.oAuthGetClients);
-                }),
-            );
-    }
-
-    findByIdWithRelations(
-        {
-            graphqlStatement = findByIdWithRelationsQuery,
-            id = '',
-            constraint = {},
-            queryGetClients = {},
-            constraintGetClients = {},
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            id?: string;
-            constraint?: QueryStatement;
-            queryGetClients?: QueryStatement;
-            constraintGetClients?: QueryStatement;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<{
-        object: IamAccount;
-        iamGetTenants: IamTenant[];
-        iamGetRoles: IamRole[];
-        oAuthGetClients: OAuthClient[];
-    }>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{
-                object: IamAccount;
-                iamGetTenants: IamTenant[];
-                iamGetRoles: IamRole[];
-                oAuthGetClients: OAuthClient[];
-            }>({
-                query    : parseGqlFields(graphqlStatement, fields, constraint),
-                variables: {
-                    id,
-                    constraint,
-                    queryGetClients,
-                    constraintGetClients,
-                },
-                context: {
-                    headers,
-                },
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map(result => result.data),
-                tap(data =>
-                {
-                    this.accountSubject$.next(data.object);
-                    this.tenantService.tenantsSubject$.next(data.iamGetTenants);
-                    this.roleService.rolesSubject$.next(data.iamGetRoles);
-                    this.clientService.clientsSubject$.next(data.oAuthGetClients);
-                }),
-            );
     }
 }

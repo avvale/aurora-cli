@@ -11,19 +11,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context-detail.component.html",
-            "integrity": "sha1:29980b723ded31afebbe08ee2eb7369777b4523a"
+            "integrity": "sha1:5152ac7287d3a7137619d85619c1f970cc75318a"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context-detail.component.ts",
-            "integrity": "sha1:969c7a61575ee8e39bdbed5ae39cf410a41387fa"
+            "integrity": "sha1:aba96d532b15c21f4dd00bf887aae2c195241ce8"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context-list.component.html",
-            "integrity": "sha1:77b4a7f34ccf5b90d524be3a2700794d3a1ea3e9"
+            "integrity": "sha1:89896d207d8bc9370d7c070026f8813b50cef146"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context-list.component.ts",
-            "integrity": "sha1:6a498239a9be0461214a80f0cbff306afdf359ba"
+            "integrity": "sha1:1a99525da0e0c0444f8ba32a2982e46725bdae9b"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context.columns-config.ts",
@@ -35,11 +35,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context.resolvers.ts",
-            "integrity": "sha1:9a8d8b682326b6a11f382a3eb995b73a42d4ff47"
+            "integrity": "sha1:f8fcf1c1631cf06d59a85a47f23af6ffe2002e08"
         },
         {
             "path": "src/app/modules/admin/apps/iam/bounded-context/bounded-context.service.ts",
-            "integrity": "sha1:45c3d7cb2a45bf7427eb2fe62fe59668dedbcd5c"
+            "integrity": "sha1:fbe0b3d5f3ca0e90ff36ed9ff4238686fa044025"
+        },
+        {
+            "path": "src/app/modules/admin/apps/iam/bounded-context/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/iam/bounded-context/public-api.ts",
+            "integrity": "sha1:d458ec717a77a0b456d26fee909abaf13551cb66"
         }
     ]
 }

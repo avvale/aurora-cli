@@ -24,12 +24,12 @@ aggregateProperties:
     example: IamAccountType.USER
   - name: code
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: true
     index: unique
   - name: email
     type: varchar
-    maxLength: 120
+    maxLength: 127
     nullable: false
     index: unique
     example: john@gmial.com

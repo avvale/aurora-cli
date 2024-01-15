@@ -1,8 +1,8 @@
-import { IamTenant } from '../iam.types';
-import { TenantService } from './tenant.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { IamTenant } from '@apps/iam/iam.types';
+import { TenantService } from '@apps/iam/tenant';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
@@ -36,7 +36,6 @@ export class TenantDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly tenantService: TenantService,
     )
     {
@@ -85,8 +84,8 @@ export class TenantDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(255)]],
-            code: ['', [Validators.maxLength(50)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            code: ['', [Validators.maxLength(63)]],
             logo: ['', [Validators.maxLength(255)]],
             isActive: false,
             accountIds: [],

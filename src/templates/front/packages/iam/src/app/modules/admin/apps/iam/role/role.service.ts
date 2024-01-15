@@ -1,10 +1,12 @@
-import { IamCreateRole, IamPermission, IamPermissionRole, IamRole, IamUpdateRoleById, IamUpdateRoles } from '../iam.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from './role.graphql';
+import { IamPermission, IamPermissionRole } from '../iam.types';
+import { PermissionService } from '../permission/permission.service';
+import { findByIdWithRelationsQuery } from './role.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { IamCreateRole, IamRole, IamUpdateRoleById, IamUpdateRoles } from '@apps/iam/iam.types';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/role';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { PermissionService } from '../permission/permission.service';
 import { PermissionRoleService } from '../permission-role/permission-role.service';
 
 @Injectable({
@@ -112,6 +114,97 @@ export class RoleService
                 tap(data =>
                 {
                     this.roleSubject$.next(data.object);
+                }),
+            );
+    }
+
+    findByIdWithRelations(
+        {
+            graphqlStatement = findByIdWithRelationsQuery,
+            id = '',
+            constraint = {},
+            queryPaginatePermissionsRoles = {},
+            constraintPaginatePermissionsRoles = {},
+            queryPaginatePermissions = {},
+            constraintPaginatePermissions = {},
+            queryGetPermissionsRoles = {},
+            constraintGetPermissionsRoles = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            queryPaginatePermissionsRoles?: QueryStatement;
+            constraintPaginatePermissionsRoles?: QueryStatement;
+            queryPaginatePermissions?: QueryStatement;
+            constraintPaginatePermissions?: QueryStatement;
+            queryGetPermissionsRoles?: QueryStatement;
+            constraintGetPermissionsRoles?: QueryStatement;
+        } = {},
+    ): Observable<{
+        object: IamRole;
+        iamPaginatePermissions: GridData<IamPermission>;
+        iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
+        iamGetPermissionsRoles: IamPermissionRole[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: IamRole;
+                iamPaginatePermissions: GridData<IamPermission>;
+                iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
+                iamGetPermissionsRoles: IamPermissionRole[];
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                variables: {
+                    id,
+                    constraint,
+                    queryPaginatePermissionsRoles,
+                    constraintPaginatePermissionsRoles: {
+                        ...constraintPaginatePermissionsRoles,
+                        where: {
+                            roleId: id,
+                        },
+                        include: [
+                            {
+                                association: 'permission',
+                            },
+                        ],
+                    },
+                    queryPaginatePermissions,
+                    constraintPaginatePermissions,
+                    queryGetPermissionsRoles,
+                    constraintGetPermissionsRoles,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map<{
+                    data: {
+                        object: IamRole;
+                        iamPaginatePermissions: GridData<IamPermission>;
+                        iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
+                        iamGetPermissionsRoles: IamPermissionRole[];
+                    };
+                },
+                {
+                    object: IamRole;
+                    iamPaginatePermissions: GridData<IamPermission>;
+                    iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
+                    iamGetPermissionsRoles: IamPermissionRole[];
+                }>(result => result.data),
+                tap((data: {
+                    object: IamRole;
+                    iamPaginatePermissions: GridData<IamPermission>;
+                    iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
+                    iamGetPermissionsRoles: IamPermissionRole[];
+                }) =>
+                {
+                    this.roleSubject$.next(data.object);
+                    this.permissionService.paginationSubject$.next(data.iamPaginatePermissions);
+                    this.permissionRoleService.paginationSubject$.next(data.iamPaginatePermissionsRoles);
+                    this.permissionRoleService.permissionsRolesSubject$.next(data.iamGetPermissionsRoles);
                 }),
             );
     }
@@ -333,97 +426,5 @@ export class RoleService
                     headers,
                 },
             });
-    }
-
-    // ---- customizations ----
-    findByIdWithRelations(
-        {
-            graphqlStatement = findByIdWithRelationsQuery,
-            id = '',
-            constraint = {},
-            queryPaginatePermissionsRoles = {},
-            constraintPaginatePermissionsRoles = {},
-            queryPaginatePermissions = {},
-            constraintPaginatePermissions = {},
-            queryGetPermissionsRoles = {},
-            constraintGetPermissionsRoles = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            id?: string;
-            constraint?: QueryStatement;
-            queryPaginatePermissionsRoles?: QueryStatement;
-            constraintPaginatePermissionsRoles?: QueryStatement;
-            queryPaginatePermissions?: QueryStatement;
-            constraintPaginatePermissions?: QueryStatement;
-            queryGetPermissionsRoles?: QueryStatement;
-            constraintGetPermissionsRoles?: QueryStatement;
-        } = {},
-    ): Observable<{
-        object: IamRole;
-        iamPaginatePermissions: GridData<IamPermission>;
-        iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
-        iamGetPermissionsRoles: IamPermissionRole[];
-    }>
-    {
-        return this.graphqlService
-            .client()
-            .watchQuery<{
-                object: IamRole;
-                iamPaginatePermissions: GridData<IamPermission>;
-                iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
-                iamGetPermissionsRoles: IamPermissionRole[];
-            }>({
-                query    : parseGqlFields(graphqlStatement, fields, constraint),
-                variables: {
-                    id,
-                    constraint,
-                    queryPaginatePermissionsRoles,
-                    constraintPaginatePermissionsRoles: {
-                        ...constraintPaginatePermissionsRoles,
-                        where: {
-                            roleId: id,
-                        },
-                        include: [
-                            {
-                                association: 'permission',
-                            },
-                        ],
-                    },
-                    queryPaginatePermissions,
-                    constraintPaginatePermissions,
-                    queryGetPermissionsRoles,
-                    constraintGetPermissionsRoles,
-                },
-            })
-            .valueChanges
-            .pipe(
-                first(),
-                map<{
-                    data: {
-                        object: IamRole;
-                        iamPaginatePermissions: GridData<IamPermission>;
-                        iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
-                        iamGetPermissionsRoles: IamPermissionRole[];
-                    };
-                },
-                {
-                    object: IamRole;
-                    iamPaginatePermissions: GridData<IamPermission>;
-                    iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
-                    iamGetPermissionsRoles: IamPermissionRole[];
-                }>(result => result.data),
-                tap((data: {
-                    object: IamRole;
-                    iamPaginatePermissions: GridData<IamPermission>;
-                    iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
-                    iamGetPermissionsRoles: IamPermissionRole[];
-                }) =>
-                {
-                    this.roleSubject$.next(data.object);
-                    this.permissionService.paginationSubject$.next(data.iamPaginatePermissions);
-                    this.permissionRoleService.paginationSubject$.next(data.iamPaginatePermissionsRoles);
-                    this.permissionRoleService.permissionsRolesSubject$.next(data.iamGetPermissionsRoles);
-                }),
-            );
     }
 }

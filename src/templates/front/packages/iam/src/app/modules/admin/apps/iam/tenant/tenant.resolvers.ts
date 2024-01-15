@@ -1,8 +1,7 @@
-import { IamTenant } from '../iam.types';
-import { tenantColumnsConfig } from './tenant.columns-config';
-import { TenantService } from './tenant.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { IamTenant } from '@apps/iam/iam.types';
+import { tenantColumnsConfig, TenantService } from '@apps/iam/tenant';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const tenantPaginationResolver: ResolveFn<GridData<IamTenant>> = (

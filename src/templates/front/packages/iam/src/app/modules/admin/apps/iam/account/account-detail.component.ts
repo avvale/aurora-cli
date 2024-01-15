@@ -1,20 +1,21 @@
-import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { IamAccountType, IamRole, IamTenant } from '../iam.types';
+import { TenantService } from '../tenant/tenant.service';
 import { KeyValuePipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
+import { AccountService } from '@apps/iam/account';
+import { IamAccount } from '@apps/iam/iam.types';
+import { Action, CoreGetLangsService, CoreLang, Crumb, defaultDetailImports, log, mapActions, OAuthClientGrantType, Utils, ViewDetailComponent } from '@aurora';
+import { BehaviorSubject, lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { RoleService } from '../role';
+import { MatOptionSelectionChange } from '@angular/material/core';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
-import { BehaviorSubject, Observable, lastValueFrom, takeUntil } from 'rxjs';
-import { ClientService } from '../../o-auth/client/client.service';
-import { OAuthClient, OAuthClientGrantType, OAuthScope } from '../../o-auth/o-auth.types';
-import { IamAccount, IamAccountType, IamRole, IamTenant } from '../iam.types';
-import { RoleService } from '../role/role.service';
-import { TenantService } from '../tenant/tenant.service';
-import { AccountService } from './account.service';
+import { OAuthClient, OAuthScope } from '@apps/o-auth/o-auth.types';
+import { ClientService } from '@apps/o-auth/client';
 
 @Component({
     selector       : 'iam-account-detail',
@@ -31,18 +32,21 @@ export class AccountDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
     iamAccountType = IamAccountType;
-    tenants$: Observable<IamTenant[]>;
     roles$: Observable<IamRole[]>;
     clients$: Observable<OAuthClient[]>;
     originClients: OAuthClient[];
     isShowPassword: boolean = false;
     scopeOptions$: BehaviorSubject<OAuthScope[]> = new BehaviorSubject<OAuthScope[]>([]);
+    langs$: Observable<CoreLang[]>;
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
     managedObject: IamAccount;
+
+    // relationships
+    tenants$: Observable<IamTenant[]>;
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
@@ -57,11 +61,11 @@ export class AccountDetailComponent extends ViewDetailComponent
     }
 
     constructor(
-        protected readonly injector: Injector,
         private readonly accountService: AccountService,
         private readonly tenantService: TenantService,
         private readonly roleService: RoleService,
         private readonly clientService: ClientService,
+        private readonly coreGetLangsService: CoreGetLangsService,
     )
     {
         super();
@@ -74,6 +78,7 @@ export class AccountDetailComponent extends ViewDetailComponent
         this.tenants$ = this.tenantService.tenants$;
         this.roles$ = this.roleService.roles$;
         this.clients$ = this.clientService.clients$;
+        this.langs$ = this.coreGetLangsService.langs$;
 
         // set all clients to be filtered according account type, and action
         this.originClients = this.clientService.clientsSubject$.value;
@@ -133,7 +138,7 @@ export class AccountDetailComponent extends ViewDetailComponent
                 id            : '',
                 name          : ['', [Validators.required, Validators.maxLength(255)]],
                 surname       : ['', [Validators.required, Validators.maxLength(255)]],
-                //langId        : '',
+                langId        : '',
                 username      : ['', [Validators.required, Validators.email, Validators.maxLength(120)]],
                 password      : '',
                 repeatPassword: '',

@@ -14,11 +14,11 @@ aggregateProperties:
     nullable: false
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 127
     nullable: false
   - name: code
     type: varchar
-    maxLength: 50
+    maxLength: 63
     nullable: true
     index: unique
   - name: logo

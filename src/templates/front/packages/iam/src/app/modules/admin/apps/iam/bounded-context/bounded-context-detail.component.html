@@ -85,7 +85,7 @@
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="255"
+                            maxlength="127"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
@@ -98,7 +98,7 @@
                         <input
                             matInput
                             formControlName="root"
-                            maxlength="30"
+                            maxlength="63"
                             required
                         >
                         <mat-error>{{ formErrors?.root | async }}</mat-error>
@@ -175,7 +175,7 @@
                                         <input
                                             matInput
                                             formControlName="name"
-                                            maxlength="255"
+                                            maxlength="127"
                                             required
                                         >
                                         <mat-error>{{ formErrors?.name | async }}</mat-error>

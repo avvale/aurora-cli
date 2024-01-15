@@ -1,16 +1,17 @@
 import { NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
+import { IamPermission, IamPermissionRole } from '../iam.types';
+import { PermissionService } from '../permission/permission.service';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, GridState, GridStateService, Operator, QueryStatementHandler, SelectionChange, SelectionModel, Utils, ViewDetailComponent, defaultDetailImports, exportRows, log, mapActions } from '@aurora';
-import { Observable, lastValueFrom, takeUntil } from 'rxjs';
-import { IamPermission, IamPermissionRole, IamRole } from '../iam.types';
+import { IamRole } from '@apps/iam/iam.types';
+import { RoleService } from '@apps/iam/role';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, GridState, GridStateService, log, mapActions, Operator, QueryStatementHandler, SelectionChange, SelectionModel, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { permissionColumnsConfig } from '../permission';
 import { permissionRoleColumnsConfig } from '../permission-role/permission-role.columns-config';
-import { getQueryExportPermissionsRoles } from '../permission-role/permission-role.graphql';
 import { PermissionRoleService } from '../permission-role/permission-role.service';
-import { permissionColumnsConfig } from '../permission/permission.columns-config';
-import { PermissionService } from '../permission/permission.service';
-import { RoleService } from './role.service';
+import { getQueryExportPermissionsRoles } from '../permission-role/permission-role.graphql';
 
 @Component({
     selector       : 'iam-role-detail',
@@ -130,7 +131,6 @@ export class RoleDetailComponent extends ViewDetailComponent
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
-        protected readonly injector: Injector,
         private readonly permissionRoleService: PermissionRoleService,
         private readonly permissionService: PermissionService,
         private readonly roleService: RoleService,
@@ -181,7 +181,7 @@ export class RoleDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(255)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
             isMaster: false,
             permissionIds: [],
         });

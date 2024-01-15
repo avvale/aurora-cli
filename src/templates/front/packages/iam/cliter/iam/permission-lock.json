@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-detail.component.html",
-            "integrity": "sha1:b96a40b5641cbb7c8538f4c03bd87d4cd76d3750"
+            "integrity": "sha1:f1a8407ca4057832d87900cec6d91f3da07d354b"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-detail.component.ts",
-            "integrity": "sha1:a1f5012d4fe142f244f0f7a36cc305d8c4c0686d"
+            "integrity": "sha1:182fd193569c3496bea514fde42b75f58cdebf84"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-list.component.html",
-            "integrity": "sha1:7ab2675ce363b2df85ebe218a76d5e7c0af447cd"
+            "integrity": "sha1:11e9b667d008500d1ba69681998e3071fcf5828f"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-list.component.ts",

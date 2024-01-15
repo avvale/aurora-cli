@@ -17,15 +17,15 @@ aggregateProperties:
     nullable: false
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 127
     nullable: false
   - name: root
     type: varchar
-    maxLength: 30
+    maxLength: 63
     nullable: false
   - name: sort
-    type: smallint.unsigned
-    maxLength: 6
+    type: smallint
+    unsigned: true
     nullable: true
   - name: isActive
     type: boolean

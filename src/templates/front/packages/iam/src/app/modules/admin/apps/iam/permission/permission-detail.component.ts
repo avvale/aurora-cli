@@ -1,6 +1,6 @@
-import { NgForOf } from '@angular/common';
 import { BoundedContextService } from '../bounded-context/bounded-context.service';
 import { IamBoundedContext } from '../iam.types';
+import { NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -92,7 +92,7 @@ export class PermissionDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(255)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
             boundedContextId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             roleIds: [],
         });

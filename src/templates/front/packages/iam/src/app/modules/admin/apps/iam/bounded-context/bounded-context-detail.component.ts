@@ -1,13 +1,14 @@
-import { IamBoundedContext, IamPermission } from '../iam.types';
+import { NgForOf } from '@angular/common';
+import { IamPermission } from '../iam.types';
 import { permissionColumnsConfig } from '../permission/permission.columns-config';
 import { PermissionService } from '../permission/permission.service';
-import { BoundedContextService } from './bounded-context.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnTranslationComponent, GridColumnsConfigStorageService, GridCustomButtonsHeaderDialogTemplateDirective, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridFormElementDetailDialogTemplateDirective, GridState, GridStateService, GridTranslationsComponent, QueryStatementHandler, Utils, ViewDetailComponent, defaultDetailImports, exportRows, log, mapActions } from '@aurora';
-import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NgForOf } from '@angular/common';
+import { BoundedContextService } from '@apps/iam/bounded-context';
+import { IamBoundedContext } from '@apps/iam/iam.types';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridColumnTranslationComponent, GridCustomButtonsHeaderDialogTemplateDirective, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridFormElementDetailDialogTemplateDirective, GridState, GridStateService, GridTranslationsComponent, log, mapActions, QueryStatementHandler, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'iam-bounded-context-detail',
@@ -33,7 +34,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
     managedObject: IamBoundedContext;
 
     // relationships
-    /* #region  variables to manage grid-elements-manager permissions */
+    /* #region variables to manage grid-elements-manager permissions */
     @ViewChild('permissionsGridElementsManager') permissionsComponent: GridElementsManagerComponent;
     permissionDialogFg: FormGroup;
     permissionsGridId: string = 'iam::boundedContext.detail.permissionsGridList';
@@ -81,7 +82,6 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
-        protected readonly injector: Injector,
         private readonly permissionService: PermissionService,
     )
     {
@@ -130,8 +130,8 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(255)]],
-            root: ['', [Validators.required, Validators.maxLength(30)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            root: ['', [Validators.required, Validators.maxLength(63)]],
             sort: [null, [Validators.maxLength(6)]],
             isActive: false,
         });
@@ -142,8 +142,8 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
     {
         this.permissionDialogFg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(255)]],
-            boundedContextId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            name: ['', [Validators.required, Validators.maxLength(127)]],
+            boundedContextId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
         });
     }
 
@@ -218,7 +218,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                             this.permissionDialogFg.patchValue(permission);
                         }
                     });
-                /* #endregion init actions to manage permissions grid-elements-manager */
+                /* #endregion edit action to manage permissions grid-elements-manager */
                 break;
 
             case 'iam::boundedContext.detail.create':

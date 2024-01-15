@@ -1,9 +1,9 @@
-import { IamBoundedContext, IamPermission } from '../iam.types';
+import { IamPermission } from '../iam.types';
 import { permissionColumnsConfig } from '../permission/permission.columns-config';
-import { boundedContextColumnsConfig } from './bounded-context.columns-config';
-import { BoundedContextService } from './bounded-context.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { boundedContextColumnsConfig, BoundedContextService } from '@apps/iam/bounded-context';
+import { IamBoundedContext } from '@apps/iam/iam.types';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const boundedContextPaginationResolver: ResolveFn<GridData<IamBoundedContext>> = (

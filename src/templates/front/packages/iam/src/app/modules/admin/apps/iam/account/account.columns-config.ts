@@ -2,7 +2,7 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const accountColumnsConfig: ColumnConfig[] = [
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.ENUM,
         field      : 'type',
         sort       : 'type',
         translation: 'iam.Type',
