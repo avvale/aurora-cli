@@ -17,7 +17,7 @@ aggregateProperties:
     nullable: false
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 127
     nullable: false
   - name: boundedContextId
     type: id

@@ -3,7 +3,7 @@
 import { IamPermissionModel } from '@app/iam/permission';
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamBoundedContext',
@@ -131,21 +131,21 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(127),
     })
     name: string;
 
     @Column({
         field: 'root',
         allowNull: false,
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(63),
     })
     root: string;
 
     @Column({
         field: 'sort',
         allowNull: true,
-        type: DataTypes.SMALLINT.UNSIGNED,
+        type: DataTypes.SMALLINT,
     })
     sort: number;
 

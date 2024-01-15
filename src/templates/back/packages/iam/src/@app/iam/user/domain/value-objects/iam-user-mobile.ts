@@ -10,7 +10,7 @@ export class IamUserMobile extends StringValueObject
             name       : 'IamUserMobile',
             nullable   : true,
             undefinable: true,
-            maxLength  : 60,
+            maxLength  : 63,
         }, validationRules));
     }
 }

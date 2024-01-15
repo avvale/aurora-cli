@@ -30,7 +30,7 @@ export { IamUpsertRoleController } from './controllers/iam-upsert-role.controlle
 export { IamDeleteRoleByIdController } from './controllers/iam-delete-role-by-id.controller';
 export { IamDeleteRolesController } from './controllers/iam-delete-roles.controller';
 
-// exports resolvers
+// export resolvers
 export { IamCreateRoleResolver } from './resolvers/iam-create-role.resolver';
 export { IamCreateRolesResolver } from './resolvers/iam-create-roles.resolver';
 export { IamPaginateRolesResolver } from './resolvers/iam-paginate-roles.resolver';
@@ -43,7 +43,7 @@ export { IamUpsertRoleResolver } from './resolvers/iam-upsert-role.resolver';
 export { IamDeleteRoleByIdResolver } from './resolvers/iam-delete-role-by-id.resolver';
 export { IamDeleteRolesResolver } from './resolvers/iam-delete-roles.resolver';
 
-// controllers
+// import controllers
 import { IamCreateRoleController } from './controllers/iam-create-role.controller';
 import { IamCreateRolesController } from './controllers/iam-create-roles.controller';
 import { IamPaginateRolesController } from './controllers/iam-paginate-roles.controller';
@@ -56,7 +56,7 @@ import { IamUpsertRoleController } from './controllers/iam-upsert-role.controlle
 import { IamDeleteRoleByIdController } from './controllers/iam-delete-role-by-id.controller';
 import { IamDeleteRolesController } from './controllers/iam-delete-roles.controller';
 
-// resolvers
+// import resolvers
 import { IamCreateRoleResolver } from './resolvers/iam-create-role.resolver';
 import { IamCreateRolesResolver } from './resolvers/iam-create-roles.resolver';
 import { IamPaginateRolesResolver } from './resolvers/iam-paginate-roles.resolver';
@@ -69,7 +69,7 @@ import { IamUpsertRoleResolver } from './resolvers/iam-upsert-role.resolver';
 import { IamDeleteRoleByIdResolver } from './resolvers/iam-delete-role-by-id.resolver';
 import { IamDeleteRolesResolver } from './resolvers/iam-delete-roles.resolver';
 
-// handlers
+// import handlers
 import { IamCreateRoleHandler } from './handlers/iam-create-role.handler';
 import { IamCreateRolesHandler } from './handlers/iam-create-roles.handler';
 import { IamPaginateRolesHandler } from './handlers/iam-paginate-roles.handler';
@@ -82,7 +82,7 @@ import { IamUpsertRoleHandler } from './handlers/iam-upsert-role.handler';
 import { IamDeleteRoleByIdHandler } from './handlers/iam-delete-role-by-id.handler';
 import { IamDeleteRolesHandler } from './handlers/iam-delete-roles.handler';
 
-// seeder
+// import seeder
 import { IamRoleSeeder } from './seeder/iam-role.seeder';
 
 export const IamRoleApiControllers = [

@@ -5,7 +5,6 @@ import { IamModule } from '@api/iam/iam.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { IamIUserRepository, iamMockUserData, IamMockUserSeeder } from '@app/iam/user';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -122,7 +121,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserName must be defined, can not be null');
+                expect(res.body.message).toContain('Value for IamUserName must be defined, can not be null');
             });
     });
 
@@ -138,7 +137,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserUsername must be defined, can not be null');
+                expect(res.body.message).toContain('Value for IamUserUsername must be defined, can not be null');
             });
     });
 
@@ -154,7 +153,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserPassword must be defined, can not be null');
+                expect(res.body.message).toContain('Value for IamUserPassword must be defined, can not be null');
             });
     });
 
@@ -170,7 +169,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamUserId must be defined, can not be undefined');
             });
     });
 
@@ -186,7 +185,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserAccountId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamUserAccountId must be defined, can not be undefined');
             });
     });
 
@@ -202,7 +201,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserName must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamUserName must be defined, can not be undefined');
             });
     });
 
@@ -218,7 +217,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserUsername must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamUserUsername must be defined, can not be undefined');
             });
     });
 
@@ -234,7 +233,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserPassword must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamUserPassword must be defined, can not be undefined');
             });
     });
 
@@ -250,7 +249,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for IamUserId is not allowed, must be a length of 36');
             });
     });
 
@@ -266,7 +265,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserAccountId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for IamUserAccountId is not allowed, must be a length of 36');
             });
     });
 
@@ -282,23 +281,23 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserLangId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for IamUserLangId is not allowed, must be a length of 36');
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserName is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '****************************************************************************************************************************************************************************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for IamUserName is too large, has a maximum length of 127');
             });
     });
 
@@ -314,7 +313,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserSurname is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for IamUserSurname is too large, has a maximum length of 255');
             });
     });
 
@@ -330,39 +329,39 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserAvatar is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for IamUserAvatar is too large, has a maximum length of 255');
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserMobile is too large, has a maximum length of 60', () =>
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserMobile is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                mobile: '*************************************************************',
+                mobile: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserMobile is too large, has a maximum length of 60');
+                expect(res.body.message).toContain('Value for IamUserMobile is too large, has a maximum length of 63');
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserUsername is too large, has a maximum length of 120', () =>
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserUsername is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                username: '*************************************************************************************************************************',
+                username: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserUsername is too large, has a maximum length of 120');
+                expect(res.body.message).toContain('Value for IamUserUsername is too large, has a maximum length of 127');
             });
     });
 
@@ -378,7 +377,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserPassword is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for IamUserPassword is too large, has a maximum length of 255');
             });
     });
 
@@ -394,7 +393,7 @@ describe('user', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for UserRememberToken is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for IamUserRememberToken is too large, has a maximum length of 255');
             });
     });
 

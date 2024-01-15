@@ -10,7 +10,7 @@ export class IamTenantName extends StringValueObject
             name       : 'IamTenantName',
             nullable   : false,
             undefinable: false,
-            maxLength  : 255,
+            maxLength  : 127,
         }, validationRules));
     }
 }

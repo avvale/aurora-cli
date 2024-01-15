@@ -4,8 +4,8 @@ import { iamMockAccountData } from '@app/iam/account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import { IamGetRolesQuery } from '@app/iam/role';
-import { FindClientByIdQuery } from '@app/o-auth/client/application/find/find-client-by-id.query';
-import { FindAccountByIdQuery } from '@app/iam/account';
+import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
+import { IamFindAccountByIdQuery } from '@app/iam/account';
 import { JwtModule } from '@nestjs/jwt';
 
 describe('IamCreateAccountHandler', () =>
@@ -56,22 +56,22 @@ describe('IamCreateAccountHandler', () =>
             {
                 return new Promise(resolve =>
                 {
-                    if (query instanceof FindClientByIdQuery) resolve(clients[0]); // return client
+                    if (query instanceof OAuthFindClientByIdQuery) resolve(clients[0]); // return client
                     if (query instanceof IamGetRolesQuery) resolve(roles); // return roles
-                    if (query instanceof FindAccountByIdQuery) resolve(accounts[0]); // return account created
+                    if (query instanceof IamFindAccountByIdQuery) resolve(iamMockAccountData[0]); // return account created
 
                     resolve(false);
                 });
             });
 
             expect(await handler.main(
-                accounts[0],
+                iamMockAccountData[0],
                 {
                     // mock jwt
                     // eslint-disable-next-line max-len
                     authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImppdCI6IjE1MjQifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.oDME4U1e7-hco5Nyx2pUlO53jcm7x3zakYHWpnHUHzI',
                 },
-            )).toBe(accounts[0]);
+            )).toBe(iamMockAccountData[0]);
         });
     });
 });

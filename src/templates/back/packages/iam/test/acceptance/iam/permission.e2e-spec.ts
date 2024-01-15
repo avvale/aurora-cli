@@ -12,7 +12,6 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
 import * as request from 'supertest';
-import { OAuthModule } from './../../../src/@api/o-auth/o-auth.module';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -206,19 +205,19 @@ describe('permission', () =>
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '****************************************************************************************************************************************************************************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamPermissionName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for IamPermissionName is too large, has a maximum length of 127');
             });
     });
 

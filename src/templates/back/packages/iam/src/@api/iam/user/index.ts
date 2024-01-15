@@ -26,7 +26,7 @@ export { IamUpsertUserController } from './controllers/iam-upsert-user.controlle
 export { IamDeleteUserByIdController } from './controllers/iam-delete-user-by-id.controller';
 export { IamDeleteUsersController } from './controllers/iam-delete-users.controller';
 
-// exports resolvers
+// export resolvers
 export { IamPaginateUsersResolver } from './resolvers/iam-paginate-users.resolver';
 export { IamGetUsersResolver } from './resolvers/iam-get-users.resolver';
 export { IamFindUserByIdResolver } from './resolvers/iam-find-user-by-id.resolver';
@@ -37,7 +37,7 @@ export { IamUpsertUserResolver } from './resolvers/iam-upsert-user.resolver';
 export { IamDeleteUserByIdResolver } from './resolvers/iam-delete-user-by-id.resolver';
 export { IamDeleteUsersResolver } from './resolvers/iam-delete-users.resolver';
 
-// controllers
+// import controllers
 import { IamPaginateUsersController } from './controllers/iam-paginate-users.controller';
 import { IamGetUsersController } from './controllers/iam-get-users.controller';
 import { IamFindUserByIdController } from './controllers/iam-find-user-by-id.controller';
@@ -48,7 +48,7 @@ import { IamUpsertUserController } from './controllers/iam-upsert-user.controlle
 import { IamDeleteUserByIdController } from './controllers/iam-delete-user-by-id.controller';
 import { IamDeleteUsersController } from './controllers/iam-delete-users.controller';
 
-// resolvers
+// import resolvers
 import { IamPaginateUsersResolver } from './resolvers/iam-paginate-users.resolver';
 import { IamGetUsersResolver } from './resolvers/iam-get-users.resolver';
 import { IamFindUserByIdResolver } from './resolvers/iam-find-user-by-id.resolver';
@@ -59,7 +59,7 @@ import { IamUpsertUserResolver } from './resolvers/iam-upsert-user.resolver';
 import { IamDeleteUserByIdResolver } from './resolvers/iam-delete-user-by-id.resolver';
 import { IamDeleteUsersResolver } from './resolvers/iam-delete-users.resolver';
 
-// handlers
+// import handlers
 import { IamPaginateUsersHandler } from './handlers/iam-paginate-users.handler';
 import { IamGetUsersHandler } from './handlers/iam-get-users.handler';
 import { IamFindUserByIdHandler } from './handlers/iam-find-user-by-id.handler';
@@ -70,7 +70,7 @@ import { IamUpsertUserHandler } from './handlers/iam-upsert-user.handler';
 import { IamDeleteUserByIdHandler } from './handlers/iam-delete-user-by-id.handler';
 import { IamDeleteUsersHandler } from './handlers/iam-delete-users.handler';
 
-// seeder
+// import seeder
 import { IamUserSeeder } from './seeder/iam-user.seeder';
 
 export const IamUserApiControllers = [

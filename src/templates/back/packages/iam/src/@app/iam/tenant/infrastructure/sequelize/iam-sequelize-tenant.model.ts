@@ -4,7 +4,7 @@ import { IamAccountModel } from '@app/iam/account';
 import { IamTenantAccountModel } from '@app/iam/tenant-account';
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsToMany, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamTenant',
@@ -139,14 +139,14 @@ export class IamTenantModel extends Model<IamTenantModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(127),
     })
     name: string;
 
     @Column({
         field: 'code',
         allowNull: true,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
     })
     code: string;
 

@@ -8,7 +8,7 @@ import { IamUserModel } from '@app/iam/user';
 import { OAuthClientModel } from '@app/o-auth/client';
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasOne, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamAccount',
@@ -154,14 +154,14 @@ export class IamAccountModel extends Model<IamAccountModel>
     @Column({
         field: 'code',
         allowNull: true,
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(63),
     })
     code: string;
 
     @Column({
         field: 'email',
         allowNull: false,
-        type: DataTypes.STRING(120),
+        type: DataTypes.STRING(127),
     })
     email: string;
 

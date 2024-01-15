@@ -5,21 +5,26 @@ import * as _ from 'lodash';
 
 // add the tenantId of the current user to the constraint
 // of a query to limit the results it has access to
-export const TenantConstraint = (customProperties?: {
-    targetProperty: string;     // name of the property to be added to the query
-    constraintIndex: number;    // index of the constraint in the arguments
-}) =>
+export const TenantConstraint = ({
+    targetProperty  = 'tenantIds',
+    constraintIndex = 2,
+    isArray         = true,
+
+}: {
+    targetProperty?: string;  // name of the property to be added to the query
+    constraintIndex?: number; // index of the constraint in the arguments
+    isArray?: boolean;        // if the column is an array
+} = {}) =>
 {
-    return (target, propertyKey: string, descriptor: PropertyDescriptor) =>
+    return (
+        target,
+        propertyKey: string,
+        descriptor: PropertyDescriptor,
+    ) =>
     {
         return {
             value( ...args: any[])
             {
-                const properties = Object.assign({}, {
-                    targetProperty : 'tenantId',
-                    constraintIndex: 2,
-                }, customProperties);
-
                 let account: IamAccountResponse;
                 for (const arg of args)
                 {
@@ -28,17 +33,32 @@ export const TenantConstraint = (customProperties?: {
 
                 if (!account) throw new BadRequestException('To use @TenantConstraint() decorator need has @CurrentAccount() defined in properties of method');
 
-                const orStatements = [];
-                for (const tenantId of account.dTenants)
+                if (isArray)
                 {
-                    orStatements.push({ tenantId });
+                    args[constraintIndex] = _.merge(args[constraintIndex], {
+                        where: {
+                            [targetProperty]: {
+                                [Operator.overlap]: account.dTenants,
+                            },
+                        },
+                    });
                 }
+                else
+                {
+                    const orStatements = [];
+                    for (const tenantId of account.dTenants)
+                    {
+                        orStatements.push({
+                            [targetProperty]: tenantId,
+                        });
+                    }
 
-                args[properties.constraintIndex] = _.merge(args[properties.constraintIndex], {
-                    where: {
-                        [Operator.or]: orStatements,
-                    },
-                });
+                    args[constraintIndex] = _.merge(args[constraintIndex], {
+                        where: {
+                            [Operator.or]: orStatements,
+                        },
+                    });
+                }
 
                 // default behavior, apply 'this' to use current class definition, with inject apply
                 const result = descriptor.value.apply(this, args);

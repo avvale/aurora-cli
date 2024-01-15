@@ -27,6 +27,7 @@ import { MockClientSeeder } from '@app/o-auth/client/infrastructure/mock/mock-cl
 import { IClientRepository } from '@app/o-auth/client';
 import { MockUserSeeder } from '@app/iam/user/infrastructure/mock/mock-user.seeder';
 import { IUserRepository } from '@app/iam/user/domain/user.repository';
+import { IamAccountType, OAuthCredentials } from '@api/graphql';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];

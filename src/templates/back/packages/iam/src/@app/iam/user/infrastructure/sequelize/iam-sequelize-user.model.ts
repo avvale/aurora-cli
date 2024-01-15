@@ -3,7 +3,7 @@
 import { IamAccountModel } from '@app/iam/account';
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamUser',
@@ -155,7 +155,7 @@ export class IamUserModel extends Model<IamUserModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(127),
     })
     name: string;
 
@@ -176,7 +176,7 @@ export class IamUserModel extends Model<IamUserModel>
     @Column({
         field: 'mobile',
         allowNull: true,
-        type: DataTypes.STRING(60),
+        type: DataTypes.STRING(63),
     })
     mobile: string;
 
@@ -190,7 +190,7 @@ export class IamUserModel extends Model<IamUserModel>
     @Column({
         field: 'username',
         allowNull: false,
-        type: DataTypes.STRING(120),
+        type: DataTypes.STRING(127),
     })
     username: string;
 

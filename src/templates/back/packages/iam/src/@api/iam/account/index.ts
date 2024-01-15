@@ -28,7 +28,7 @@ export { IamUpsertAccountController } from './controllers/iam-upsert-account.con
 export { IamDeleteAccountByIdController } from './controllers/iam-delete-account-by-id.controller';
 export { IamDeleteAccountsController } from './controllers/iam-delete-accounts.controller';
 
-// exports resolvers
+// export resolvers
 export { IamCreateAccountResolver } from './resolvers/iam-create-account.resolver';
 export { IamPaginateAccountsResolver } from './resolvers/iam-paginate-accounts.resolver';
 export { IamGetAccountsResolver } from './resolvers/iam-get-accounts.resolver';
@@ -40,7 +40,7 @@ export { IamUpsertAccountResolver } from './resolvers/iam-upsert-account.resolve
 export { IamDeleteAccountByIdResolver } from './resolvers/iam-delete-account-by-id.resolver';
 export { IamDeleteAccountsResolver } from './resolvers/iam-delete-accounts.resolver';
 
-// controllers
+// import controllers
 import { IamCreateAccountController } from './controllers/iam-create-account.controller';
 import { IamPaginateAccountsController } from './controllers/iam-paginate-accounts.controller';
 import { IamGetAccountsController } from './controllers/iam-get-accounts.controller';
@@ -52,7 +52,7 @@ import { IamUpsertAccountController } from './controllers/iam-upsert-account.con
 import { IamDeleteAccountByIdController } from './controllers/iam-delete-account-by-id.controller';
 import { IamDeleteAccountsController } from './controllers/iam-delete-accounts.controller';
 
-// resolvers
+// import resolvers
 import { IamCreateAccountResolver } from './resolvers/iam-create-account.resolver';
 import { IamPaginateAccountsResolver } from './resolvers/iam-paginate-accounts.resolver';
 import { IamGetAccountsResolver } from './resolvers/iam-get-accounts.resolver';
@@ -64,7 +64,7 @@ import { IamUpsertAccountResolver } from './resolvers/iam-upsert-account.resolve
 import { IamDeleteAccountByIdResolver } from './resolvers/iam-delete-account-by-id.resolver';
 import { IamDeleteAccountsResolver } from './resolvers/iam-delete-accounts.resolver';
 
-// handlers
+// import handlers
 import { IamCreateAccountHandler } from './handlers/iam-create-account.handler';
 import { IamPaginateAccountsHandler } from './handlers/iam-paginate-accounts.handler';
 import { IamGetAccountsHandler } from './handlers/iam-get-accounts.handler';
@@ -76,7 +76,7 @@ import { IamUpsertAccountHandler } from './handlers/iam-upsert-account.handler';
 import { IamDeleteAccountByIdHandler } from './handlers/iam-delete-account-by-id.handler';
 import { IamDeleteAccountsHandler } from './handlers/iam-delete-accounts.handler';
 
-// seeder
+// import seeder
 import { IamAccountSeeder } from './seeder/iam-account.seeder';
 
 // ---- customizations ----

@@ -189,35 +189,35 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantName is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '****************************************************************************************************************************************************************************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamTenantName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for IamTenantName is too large, has a maximum length of 127');
             });
     });
 
-    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantCode is too large, has a maximum length of 50', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantCode is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: '***************************************************',
+                code: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamTenantCode is too large, has a maximum length of 50');
+                expect(res.body.message).toContain('Value for IamTenantCode is too large, has a maximum length of 63');
             });
     });
 

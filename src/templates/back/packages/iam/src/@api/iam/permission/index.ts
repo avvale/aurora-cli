@@ -30,7 +30,7 @@ export { IamUpsertPermissionController } from './controllers/iam-upsert-permissi
 export { IamDeletePermissionByIdController } from './controllers/iam-delete-permission-by-id.controller';
 export { IamDeletePermissionsController } from './controllers/iam-delete-permissions.controller';
 
-// exports resolvers
+// export resolvers
 export { IamCreatePermissionResolver } from './resolvers/iam-create-permission.resolver';
 export { IamCreatePermissionsResolver } from './resolvers/iam-create-permissions.resolver';
 export { IamPaginatePermissionsResolver } from './resolvers/iam-paginate-permissions.resolver';
@@ -43,7 +43,7 @@ export { IamUpsertPermissionResolver } from './resolvers/iam-upsert-permission.r
 export { IamDeletePermissionByIdResolver } from './resolvers/iam-delete-permission-by-id.resolver';
 export { IamDeletePermissionsResolver } from './resolvers/iam-delete-permissions.resolver';
 
-// controllers
+// import controllers
 import { IamCreatePermissionController } from './controllers/iam-create-permission.controller';
 import { IamCreatePermissionsController } from './controllers/iam-create-permissions.controller';
 import { IamPaginatePermissionsController } from './controllers/iam-paginate-permissions.controller';
@@ -56,7 +56,7 @@ import { IamUpsertPermissionController } from './controllers/iam-upsert-permissi
 import { IamDeletePermissionByIdController } from './controllers/iam-delete-permission-by-id.controller';
 import { IamDeletePermissionsController } from './controllers/iam-delete-permissions.controller';
 
-// resolvers
+// import resolvers
 import { IamCreatePermissionResolver } from './resolvers/iam-create-permission.resolver';
 import { IamCreatePermissionsResolver } from './resolvers/iam-create-permissions.resolver';
 import { IamPaginatePermissionsResolver } from './resolvers/iam-paginate-permissions.resolver';
@@ -69,7 +69,7 @@ import { IamUpsertPermissionResolver } from './resolvers/iam-upsert-permission.r
 import { IamDeletePermissionByIdResolver } from './resolvers/iam-delete-permission-by-id.resolver';
 import { IamDeletePermissionsResolver } from './resolvers/iam-delete-permissions.resolver';
 
-// handlers
+// import handlers
 import { IamCreatePermissionHandler } from './handlers/iam-create-permission.handler';
 import { IamCreatePermissionsHandler } from './handlers/iam-create-permissions.handler';
 import { IamPaginatePermissionsHandler } from './handlers/iam-paginate-permissions.handler';
@@ -82,7 +82,7 @@ import { IamUpsertPermissionHandler } from './handlers/iam-upsert-permission.han
 import { IamDeletePermissionByIdHandler } from './handlers/iam-delete-permission-by-id.handler';
 import { IamDeletePermissionsHandler } from './handlers/iam-delete-permissions.handler';
 
-// seeder
+// import seeder
 import { IamPermissionSeeder } from './seeder/iam-permission.seeder';
 
 export const IamPermissionApiControllers = [

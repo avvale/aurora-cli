@@ -24,7 +24,7 @@ aggregateProperties:
     index: index
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 127
     nullable: false
   - name: surname
     type: varchar
@@ -36,7 +36,7 @@ aggregateProperties:
     nullable: true
   - name: mobile
     type: varchar
-    maxLength: 60
+    maxLength: 63
     nullable: true
   - name: langId
     type: id
@@ -44,7 +44,7 @@ aggregateProperties:
     nullable: true
   - name: username
     type: varchar
-    maxLength: 120
+    maxLength: 127
     nullable: false
     index: unique
   - name: password
@@ -80,3 +80,9 @@ excluded:
   - src/@api/iam/user/resolvers/iam-create-user.resolver.ts
   - src/@api/iam/user/resolvers/iam-create-users.resolver.spec.ts
   - src/@api/iam/user/resolvers/iam-create-users.resolver.ts
+  - src/app/modules/admin/apps/iam/user/user-detail.component.html
+  - src/app/modules/admin/apps/iam/user/user-detail.component.ts
+  - src/app/modules/admin/apps/iam/user/user-list.component.html
+  - src/app/modules/admin/apps/iam/user/user-list.component.ts
+  - src/app/modules/admin/apps/iam/user/user.columns-config.ts
+  - src/app/modules/admin/apps/iam/user/user.resolvers.ts

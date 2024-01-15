@@ -10,7 +10,6 @@ export class IamBoundedContextSort extends SmallintValueObject
             name       : 'IamBoundedContextSort',
             nullable   : true,
             undefinable: true,
-            maxLength  : 6,
             unsigned   : true,
         }, validationRules));
     }

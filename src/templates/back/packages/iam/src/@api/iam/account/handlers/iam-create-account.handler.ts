@@ -1,4 +1,5 @@
 import { IamAccount, IamAccountType, IamCreateAccountInput } from '@api/graphql';
+import { IamAccountDto, IamCreateAccountDto } from '@api/iam/account';
 import { IamCreateAccountCommand, IamFindAccountByIdQuery, IamGetAccountsQuery } from '@app/iam/account';
 import { IamGetRolesQuery } from '@app/iam/role';
 import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
@@ -7,7 +8,6 @@ import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
 import { AuditingMeta, ICommandBus, IQueryBus, Jwt, LiteralObject, Operator, Utils } from '@aurorajs.dev/core';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IamAccountDto, IamCreateAccountDto } from '../dto';
 
 @Injectable()
 export class IamCreateAccountHandler

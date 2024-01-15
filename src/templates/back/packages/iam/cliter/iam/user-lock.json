@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/iam-mock-user.data.ts",
-            "integrity": "sha1:5dcb972bfaa77058bf8b04fb133b92800d07afd1"
+            "integrity": "sha1:eb04f52a1c2ded4c1aa0c833aa24c72e7a906d00"
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/iam-mock-user.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/iam/user/infrastructure/sequelize/iam-sequelize-user.model.ts",
-            "integrity": "sha1:1a4c7122b6ee5f0446bfd2f5bf6ac2c8563d62e4"
+            "integrity": "sha1:82b0447fa8dc47342df781a2471e15fa8b3b98fb"
         },
         {
             "path": "src/@app/iam/user/infrastructure/sequelize/iam-sequelize-user.repository.ts",
@@ -355,7 +355,7 @@
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-name.ts",
-            "integrity": "sha1:d06573a802a556148dcfe4a030921bb62e66eebe"
+            "integrity": "sha1:88451a6ba6ed1cb2d195011e05f47f530459f706"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-surname.ts",
@@ -367,7 +367,7 @@
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-mobile.ts",
-            "integrity": "sha1:773a7f1971b029d077c2333ffb2627eb5a739599"
+            "integrity": "sha1:93e8acf8785e91e4bcf1f7bc17badc9037727607"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-lang-id.ts",
@@ -375,7 +375,7 @@
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-username.ts",
-            "integrity": "sha1:3756e685ed36fde893c22566f2207d78a77b3bf0"
+            "integrity": "sha1:0ffb704dbfc0a3410adae4657fb1dcec017c3b15"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-password.ts",
@@ -479,7 +479,7 @@
         },
         {
             "path": "src/@api/iam/user/dto/iam-user.dto.ts",
-            "integrity": "sha1:133826301d1bcb1367d10587dcd76708e4189795"
+            "integrity": "sha1:c85d73f82865afed61980eac1f731426fa63966f"
         },
         {
             "path": "src/@api/iam/user/dto/iam-create-user.dto.ts",
@@ -495,6 +495,10 @@
         },
         {
             "path": "src/@api/iam/user/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/iam/user/dto/public-api.ts",
             "integrity": "sha1:7c183af6218c669211bef8101cde72b3792dc2a4"
         },
         {
@@ -575,7 +579,7 @@
         },
         {
             "path": "src/@api/iam/user/index.ts",
-            "integrity": "sha1:8458904af867d1d8f2ab687bc268da223ec5da3a"
+            "integrity": "sha1:9c077f73a7846e2e834becb3c053ce647981db1d"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-delete-user-by-id.resolver.spec.ts",
@@ -655,11 +659,11 @@
         },
         {
             "path": "test/acceptance/iam/user.e2e-spec.ts",
-            "integrity": "sha1:8c3b06a055130a88f7d41d463dbcf6fd69cbd01f"
+            "integrity": "sha1:8623a198e3a973a302d3a92481478a8ad1037b03"
         },
         {
             "path": "postman/iam/iam.user.postman.json",
-            "integrity": "sha1:1f67673ac712fcafdef5d7213eec630e2468d9f0"
+            "integrity": "sha1:718f3dc136a362e5ab3bf599722c30c35de455c9"
         }
     ]
 }

@@ -5,7 +5,7 @@ import { IamPermissionRoleModel } from '@app/iam/permission-role';
 import { IamRoleModel } from '@app/iam/role';
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamPermission',
@@ -140,7 +140,7 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(127),
     })
     name: string;
 

@@ -30,7 +30,7 @@ export { IamUpsertTenantController } from './controllers/iam-upsert-tenant.contr
 export { IamDeleteTenantByIdController } from './controllers/iam-delete-tenant-by-id.controller';
 export { IamDeleteTenantsController } from './controllers/iam-delete-tenants.controller';
 
-// exports resolvers
+// export resolvers
 export { IamCreateTenantResolver } from './resolvers/iam-create-tenant.resolver';
 export { IamCreateTenantsResolver } from './resolvers/iam-create-tenants.resolver';
 export { IamPaginateTenantsResolver } from './resolvers/iam-paginate-tenants.resolver';
@@ -43,7 +43,7 @@ export { IamUpsertTenantResolver } from './resolvers/iam-upsert-tenant.resolver'
 export { IamDeleteTenantByIdResolver } from './resolvers/iam-delete-tenant-by-id.resolver';
 export { IamDeleteTenantsResolver } from './resolvers/iam-delete-tenants.resolver';
 
-// controllers
+// import controllers
 import { IamCreateTenantController } from './controllers/iam-create-tenant.controller';
 import { IamCreateTenantsController } from './controllers/iam-create-tenants.controller';
 import { IamPaginateTenantsController } from './controllers/iam-paginate-tenants.controller';
@@ -56,7 +56,7 @@ import { IamUpsertTenantController } from './controllers/iam-upsert-tenant.contr
 import { IamDeleteTenantByIdController } from './controllers/iam-delete-tenant-by-id.controller';
 import { IamDeleteTenantsController } from './controllers/iam-delete-tenants.controller';
 
-// resolvers
+// import resolvers
 import { IamCreateTenantResolver } from './resolvers/iam-create-tenant.resolver';
 import { IamCreateTenantsResolver } from './resolvers/iam-create-tenants.resolver';
 import { IamPaginateTenantsResolver } from './resolvers/iam-paginate-tenants.resolver';
@@ -69,7 +69,7 @@ import { IamUpsertTenantResolver } from './resolvers/iam-upsert-tenant.resolver'
 import { IamDeleteTenantByIdResolver } from './resolvers/iam-delete-tenant-by-id.resolver';
 import { IamDeleteTenantsResolver } from './resolvers/iam-delete-tenants.resolver';
 
-// handlers
+// import handlers
 import { IamCreateTenantHandler } from './handlers/iam-create-tenant.handler';
 import { IamCreateTenantsHandler } from './handlers/iam-create-tenants.handler';
 import { IamPaginateTenantsHandler } from './handlers/iam-paginate-tenants.handler';
@@ -82,7 +82,7 @@ import { IamUpsertTenantHandler } from './handlers/iam-upsert-tenant.handler';
 import { IamDeleteTenantByIdHandler } from './handlers/iam-delete-tenant-by-id.handler';
 import { IamDeleteTenantsHandler } from './handlers/iam-delete-tenants.handler';
 
-// seeder
+// import seeder
 import { IamTenantSeeder } from './seeder/iam-tenant.seeder';
 
 export const IamTenantApiControllers = [

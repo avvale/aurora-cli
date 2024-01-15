@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/iam/tenant/infrastructure/mock/iam-mock-tenant.data.ts",
-            "integrity": "sha1:1a9f7a3509f0041f4f588b96731e6124c086058c"
+            "integrity": "sha1:03d9520e09f6c52ab1b44f3ddf746ebe9d558690"
         },
         {
             "path": "src/@app/iam/tenant/infrastructure/mock/iam-mock-tenant.repository.ts",
@@ -339,7 +339,7 @@
         },
         {
             "path": "src/@app/iam/tenant/infrastructure/sequelize/iam-sequelize-tenant.model.ts",
-            "integrity": "sha1:30fc7edf4a7b068bf316c5655c3b5fc10953a22b"
+            "integrity": "sha1:b233b5aa66321508c3a0c0b3ede0c6a0a4ec05a6"
         },
         {
             "path": "src/@app/iam/tenant/infrastructure/sequelize/iam-sequelize-tenant.repository.ts",
@@ -351,11 +351,11 @@
         },
         {
             "path": "src/@app/iam/tenant/domain/value-objects/iam-tenant-name.ts",
-            "integrity": "sha1:65a34fe831402df8afbe32fa15306bcd247a39ee"
+            "integrity": "sha1:d91c5fa628e09e9adf9dab44228a0ebd174e2af5"
         },
         {
             "path": "src/@app/iam/tenant/domain/value-objects/iam-tenant-code.ts",
-            "integrity": "sha1:dfac8a734ebe104483aee4b60a7b34f71420bcf1"
+            "integrity": "sha1:8458fc97aabdd3ebff97e5e49b0fb741f707b3df"
         },
         {
             "path": "src/@app/iam/tenant/domain/value-objects/iam-tenant-logo.ts",
@@ -370,7 +370,7 @@
             "integrity": "sha1:6f39e289019cc7afc74fc4190bc72ee4d7560ff3"
         },
         {
-            "path": "src/@app/iam/tenant/domain/value-objects/iam-tenant-accounts.ts",
+            "path": "src/@app/iam/tenant/domain/value-objects/iam-tenant-account-ids.ts",
             "integrity": "sha1:18677c2cf4f19aedcfe9b43204049a4eabfd1364"
         },
         {
@@ -384,10 +384,6 @@
         {
             "path": "src/@app/iam/tenant/domain/value-objects/iam-tenant-deleted-at.ts",
             "integrity": "sha1:c12ea06cd7177909d27aed11a26d40782d8a498d"
-        },
-        {
-            "path": "src/@app/iam/iam.seed.ts",
-            "integrity": "sha1:f5604606b2c6790ea25d6362db9b858542ce7a63"
         },
         {
             "path": "src/@app/iam/tenant-account/application/create/iam-create-tenant-account.command-handler.spec.ts",
@@ -711,7 +707,7 @@
         },
         {
             "path": "src/@app/iam/tenant-account/infrastructure/mock/iam-mock-tenant-account.data.ts",
-            "integrity": "sha1:1f0be38a5d3f36a08e4b9aa5fc747030a306742f"
+            "integrity": "sha1:bb0a98d2025022c4d48424a9f234fa5036e8df0a"
         },
         {
             "path": "src/@app/iam/tenant-account/infrastructure/mock/iam-mock-tenant-account.repository.ts",
@@ -723,7 +719,7 @@
         },
         {
             "path": "src/@app/iam/tenant-account/infrastructure/sequelize/iam-sequelize-tenant-account.model.ts",
-            "integrity": "sha1:44fa0edabeae90a3b43da65cead86f25bdb8a240"
+            "integrity": "sha1:9a981ce4c2966d6810b2b929284f50983f5496cb"
         },
         {
             "path": "src/@app/iam/tenant-account/infrastructure/sequelize/iam-sequelize-tenant-account.repository.ts",
@@ -831,7 +827,7 @@
         },
         {
             "path": "src/@api/iam/tenant/dto/iam-tenant.dto.ts",
-            "integrity": "sha1:84ed1ba08d0b885d5873ce3c602fd3c62d0d0a33"
+            "integrity": "sha1:6829f076a13e16529c68f9ad28a79113e520cb89"
         },
         {
             "path": "src/@api/iam/tenant/dto/iam-create-tenant.dto.ts",
@@ -847,6 +843,10 @@
         },
         {
             "path": "src/@api/iam/tenant/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/iam/tenant/dto/public-api.ts",
             "integrity": "sha1:07aa0655f755f388d6906da41b7943fd8cad632f"
         },
         {
@@ -943,7 +943,7 @@
         },
         {
             "path": "src/@api/iam/tenant/index.ts",
-            "integrity": "sha1:6e79a1c06acc0a35c33cc137f09af127d64eef21"
+            "integrity": "sha1:6037530074c7fd70e24e1e8e5c98357f0312b095"
         },
         {
             "path": "src/@api/iam/tenant/resolvers/iam-create-tenant.resolver.spec.ts",
@@ -1038,10 +1038,6 @@
             "integrity": "sha1:87e6c35b5b75ffaf4dd87dd1e6d1f67439908bba"
         },
         {
-            "path": "src/@api/iam/iam.seeder.ts",
-            "integrity": "sha1:11a96ffd42691725c9db6c3405623396f385cf25"
-        },
-        {
             "path": "src/@api/iam/tenant-account/controllers/iam-create-tenant-account.controller.spec.ts",
             "integrity": "sha1:d16453b8c13dcfb510d79d78e7465bb95955cd99"
         },
@@ -1131,7 +1127,7 @@
         },
         {
             "path": "src/@api/iam/tenant-account/dto/iam-tenant-account.dto.ts",
-            "integrity": "sha1:8d81e4770691b85725f7a689ece2265d720b1db5"
+            "integrity": "sha1:50bd3f24dbd7d6a78e31f80a495b1b1826a237b5"
         },
         {
             "path": "src/@api/iam/tenant-account/dto/iam-create-tenant-account.dto.ts",
@@ -1147,6 +1143,10 @@
         },
         {
             "path": "src/@api/iam/tenant-account/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/iam/tenant-account/dto/public-api.ts",
             "integrity": "sha1:ded47e84ba33bcfd2c7a25f0410f3cb8d83f3b46"
         },
         {
@@ -1243,7 +1243,7 @@
         },
         {
             "path": "src/@api/iam/tenant-account/index.ts",
-            "integrity": "sha1:29e3151a361cfa8c4e5247b2cfb91ef8b3740a38"
+            "integrity": "sha1:411009a7f277a735e66d9309ff2e1e3dc6920545"
         },
         {
             "path": "src/@api/iam/tenant-account/resolvers/iam-create-tenant-account.resolver.spec.ts",
@@ -1339,11 +1339,11 @@
         },
         {
             "path": "test/acceptance/iam/tenant.e2e-spec.ts",
-            "integrity": "sha1:2714c9334558004b8d8d3daedf379b11c394a079"
+            "integrity": "sha1:a923ef9ea9b71293e2197feca0b10ede72702b43"
         },
         {
             "path": "postman/iam/iam.tenant.postman.json",
-            "integrity": "sha1:83b142a779f8af0d1860ce7a9340d14ee30aca6d"
+            "integrity": "sha1:2ac5923b16c32f46edf70fb1f62ff64524ab4c3c"
         }
     ]
 }

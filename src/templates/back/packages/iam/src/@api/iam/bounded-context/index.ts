@@ -30,7 +30,7 @@ export { IamUpsertBoundedContextController } from './controllers/iam-upsert-boun
 export { IamDeleteBoundedContextByIdController } from './controllers/iam-delete-bounded-context-by-id.controller';
 export { IamDeleteBoundedContextsController } from './controllers/iam-delete-bounded-contexts.controller';
 
-// exports resolvers
+// export resolvers
 export { IamCreateBoundedContextResolver } from './resolvers/iam-create-bounded-context.resolver';
 export { IamCreateBoundedContextsResolver } from './resolvers/iam-create-bounded-contexts.resolver';
 export { IamPaginateBoundedContextsResolver } from './resolvers/iam-paginate-bounded-contexts.resolver';
@@ -43,7 +43,7 @@ export { IamUpsertBoundedContextResolver } from './resolvers/iam-upsert-bounded-
 export { IamDeleteBoundedContextByIdResolver } from './resolvers/iam-delete-bounded-context-by-id.resolver';
 export { IamDeleteBoundedContextsResolver } from './resolvers/iam-delete-bounded-contexts.resolver';
 
-// controllers
+// import controllers
 import { IamCreateBoundedContextController } from './controllers/iam-create-bounded-context.controller';
 import { IamCreateBoundedContextsController } from './controllers/iam-create-bounded-contexts.controller';
 import { IamPaginateBoundedContextsController } from './controllers/iam-paginate-bounded-contexts.controller';
@@ -56,7 +56,7 @@ import { IamUpsertBoundedContextController } from './controllers/iam-upsert-boun
 import { IamDeleteBoundedContextByIdController } from './controllers/iam-delete-bounded-context-by-id.controller';
 import { IamDeleteBoundedContextsController } from './controllers/iam-delete-bounded-contexts.controller';
 
-// resolvers
+// import resolvers
 import { IamCreateBoundedContextResolver } from './resolvers/iam-create-bounded-context.resolver';
 import { IamCreateBoundedContextsResolver } from './resolvers/iam-create-bounded-contexts.resolver';
 import { IamPaginateBoundedContextsResolver } from './resolvers/iam-paginate-bounded-contexts.resolver';
@@ -69,7 +69,7 @@ import { IamUpsertBoundedContextResolver } from './resolvers/iam-upsert-bounded-
 import { IamDeleteBoundedContextByIdResolver } from './resolvers/iam-delete-bounded-context-by-id.resolver';
 import { IamDeleteBoundedContextsResolver } from './resolvers/iam-delete-bounded-contexts.resolver';
 
-// handlers
+// import handlers
 import { IamCreateBoundedContextHandler } from './handlers/iam-create-bounded-context.handler';
 import { IamCreateBoundedContextsHandler } from './handlers/iam-create-bounded-contexts.handler';
 import { IamPaginateBoundedContextsHandler } from './handlers/iam-paginate-bounded-contexts.handler';
@@ -82,7 +82,7 @@ import { IamUpsertBoundedContextHandler } from './handlers/iam-upsert-bounded-co
 import { IamDeleteBoundedContextByIdHandler } from './handlers/iam-delete-bounded-context-by-id.handler';
 import { IamDeleteBoundedContextsHandler } from './handlers/iam-delete-bounded-contexts.handler';
 
-// seeder
+// import seeder
 import { IamBoundedContextSeeder } from './seeder/iam-bounded-context.seeder';
 
 export const IamBoundedContextApiControllers = [

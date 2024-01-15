@@ -30,7 +30,7 @@ export { IamUpsertPermissionRoleController } from './controllers/iam-upsert-perm
 export { IamDeletePermissionRoleByIdController } from './controllers/iam-delete-permission-role-by-id.controller';
 export { IamDeletePermissionsRolesController } from './controllers/iam-delete-permissions-roles.controller';
 
-// exports resolvers
+// export resolvers
 export { IamCreatePermissionRoleResolver } from './resolvers/iam-create-permission-role.resolver';
 export { IamCreatePermissionsRolesResolver } from './resolvers/iam-create-permissions-roles.resolver';
 export { IamPaginatePermissionsRolesResolver } from './resolvers/iam-paginate-permissions-roles.resolver';
@@ -43,7 +43,7 @@ export { IamUpsertPermissionRoleResolver } from './resolvers/iam-upsert-permissi
 export { IamDeletePermissionRoleByIdResolver } from './resolvers/iam-delete-permission-role-by-id.resolver';
 export { IamDeletePermissionsRolesResolver } from './resolvers/iam-delete-permissions-roles.resolver';
 
-// controllers
+// import controllers
 import { IamCreatePermissionRoleController } from './controllers/iam-create-permission-role.controller';
 import { IamCreatePermissionsRolesController } from './controllers/iam-create-permissions-roles.controller';
 import { IamPaginatePermissionsRolesController } from './controllers/iam-paginate-permissions-roles.controller';
@@ -56,7 +56,7 @@ import { IamUpsertPermissionRoleController } from './controllers/iam-upsert-perm
 import { IamDeletePermissionRoleByIdController } from './controllers/iam-delete-permission-role-by-id.controller';
 import { IamDeletePermissionsRolesController } from './controllers/iam-delete-permissions-roles.controller';
 
-// resolvers
+// import resolvers
 import { IamCreatePermissionRoleResolver } from './resolvers/iam-create-permission-role.resolver';
 import { IamCreatePermissionsRolesResolver } from './resolvers/iam-create-permissions-roles.resolver';
 import { IamPaginatePermissionsRolesResolver } from './resolvers/iam-paginate-permissions-roles.resolver';
@@ -69,7 +69,7 @@ import { IamUpsertPermissionRoleResolver } from './resolvers/iam-upsert-permissi
 import { IamDeletePermissionRoleByIdResolver } from './resolvers/iam-delete-permission-role-by-id.resolver';
 import { IamDeletePermissionsRolesResolver } from './resolvers/iam-delete-permissions-roles.resolver';
 
-// handlers
+// import handlers
 import { IamCreatePermissionRoleHandler } from './handlers/iam-create-permission-role.handler';
 import { IamCreatePermissionsRolesHandler } from './handlers/iam-create-permissions-roles.handler';
 import { IamPaginatePermissionsRolesHandler } from './handlers/iam-paginate-permissions-roles.handler';
@@ -82,7 +82,7 @@ import { IamUpsertPermissionRoleHandler } from './handlers/iam-upsert-permission
 import { IamDeletePermissionRoleByIdHandler } from './handlers/iam-delete-permission-role-by-id.handler';
 import { IamDeletePermissionsRolesHandler } from './handlers/iam-delete-permissions-roles.handler';
 
-// seeder
+// import seeder
 import { IamPermissionRoleSeeder } from './seeder/iam-permission-role.seeder';
 
 export const IamPermissionRoleApiControllers = [

@@ -12,7 +12,6 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
 import * as request from 'supertest';
-import { OAuthModule } from './../../../src/@api/o-auth/o-auth.module';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -190,19 +189,19 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role/create - Got 400 Conflict, RoleName is too large, has a maximum length of 255', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '****************************************************************************************************************************************************************************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamRoleName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for IamRoleName is too large, has a maximum length of 127');
             });
     });
 
