@@ -5,6 +5,7 @@ import {
     OAuthScopeDeletedAt,
     OAuthScopeId,
     OAuthScopeName,
+    OAuthScopeRoleIds,
     OAuthScopeUpdatedAt,
 } from '@app/o-auth/scope/domain/value-objects';
 import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
@@ -63,6 +64,7 @@ export class OAuthScopeMapper implements IMapper
             new OAuthScopeId(scope.id, { undefinable: true }),
             new OAuthScopeCode(scope.code, { undefinable: true }),
             new OAuthScopeName(scope.name, { undefinable: true }),
+            new OAuthScopeRoleIds(scope.roleIds, { undefinable: true }),
             new OAuthScopeCreatedAt(scope.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new OAuthScopeUpdatedAt(scope.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new OAuthScopeDeletedAt(scope.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
@@ -77,6 +79,7 @@ export class OAuthScopeMapper implements IMapper
             scope.id.value,
             scope.code.value,
             scope.name.value,
+            scope.roleIds.value,
             scope.createdAt.value,
             scope.updatedAt.value,
             scope.deletedAt.value,

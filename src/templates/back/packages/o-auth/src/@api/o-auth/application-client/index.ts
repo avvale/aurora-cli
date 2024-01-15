@@ -30,7 +30,7 @@ export { OAuthUpsertApplicationClientController } from './controllers/o-auth-ups
 export { OAuthDeleteApplicationClientByIdController } from './controllers/o-auth-delete-application-client-by-id.controller';
 export { OAuthDeleteApplicationsClientsController } from './controllers/o-auth-delete-applications-clients.controller';
 
-// exports resolvers
+// export resolvers
 export { OAuthCreateApplicationClientResolver } from './resolvers/o-auth-create-application-client.resolver';
 export { OAuthCreateApplicationsClientsResolver } from './resolvers/o-auth-create-applications-clients.resolver';
 export { OAuthPaginateApplicationsClientsResolver } from './resolvers/o-auth-paginate-applications-clients.resolver';
@@ -43,7 +43,7 @@ export { OAuthUpsertApplicationClientResolver } from './resolvers/o-auth-upsert-
 export { OAuthDeleteApplicationClientByIdResolver } from './resolvers/o-auth-delete-application-client-by-id.resolver';
 export { OAuthDeleteApplicationsClientsResolver } from './resolvers/o-auth-delete-applications-clients.resolver';
 
-// controllers
+// import controllers
 import { OAuthCreateApplicationClientController } from './controllers/o-auth-create-application-client.controller';
 import { OAuthCreateApplicationsClientsController } from './controllers/o-auth-create-applications-clients.controller';
 import { OAuthPaginateApplicationsClientsController } from './controllers/o-auth-paginate-applications-clients.controller';
@@ -56,7 +56,7 @@ import { OAuthUpsertApplicationClientController } from './controllers/o-auth-ups
 import { OAuthDeleteApplicationClientByIdController } from './controllers/o-auth-delete-application-client-by-id.controller';
 import { OAuthDeleteApplicationsClientsController } from './controllers/o-auth-delete-applications-clients.controller';
 
-// resolvers
+// import resolvers
 import { OAuthCreateApplicationClientResolver } from './resolvers/o-auth-create-application-client.resolver';
 import { OAuthCreateApplicationsClientsResolver } from './resolvers/o-auth-create-applications-clients.resolver';
 import { OAuthPaginateApplicationsClientsResolver } from './resolvers/o-auth-paginate-applications-clients.resolver';
@@ -69,7 +69,7 @@ import { OAuthUpsertApplicationClientResolver } from './resolvers/o-auth-upsert-
 import { OAuthDeleteApplicationClientByIdResolver } from './resolvers/o-auth-delete-application-client-by-id.resolver';
 import { OAuthDeleteApplicationsClientsResolver } from './resolvers/o-auth-delete-applications-clients.resolver';
 
-// handlers
+// import handlers
 import { OAuthCreateApplicationClientHandler } from './handlers/o-auth-create-application-client.handler';
 import { OAuthCreateApplicationsClientsHandler } from './handlers/o-auth-create-applications-clients.handler';
 import { OAuthPaginateApplicationsClientsHandler } from './handlers/o-auth-paginate-applications-clients.handler';
@@ -82,7 +82,7 @@ import { OAuthUpsertApplicationClientHandler } from './handlers/o-auth-upsert-ap
 import { OAuthDeleteApplicationClientByIdHandler } from './handlers/o-auth-delete-application-client-by-id.handler';
 import { OAuthDeleteApplicationsClientsHandler } from './handlers/o-auth-delete-applications-clients.handler';
 
-// seeder
+// import seeder
 import { OAuthApplicationClientSeeder } from './seeder/o-auth-application-client.seeder';
 
 export const OAuthApplicationClientApiControllers = [

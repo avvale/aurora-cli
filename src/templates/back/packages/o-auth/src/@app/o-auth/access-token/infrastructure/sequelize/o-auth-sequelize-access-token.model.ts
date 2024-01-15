@@ -3,7 +3,7 @@
 import { OAuthClientModel } from '@app/o-auth/client';
 import { OAuthRefreshTokenModel } from '@app/o-auth/refresh-token';
 import { DataTypes } from 'sequelize';
-import { BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, ForeignKey, HasOne, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'OAuthAccessToken',
@@ -58,7 +58,7 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
     @Column({
         field: 'name',
         allowNull: true,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(127),
     })
     name: string;
 

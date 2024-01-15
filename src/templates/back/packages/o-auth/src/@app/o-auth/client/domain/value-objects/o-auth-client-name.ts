@@ -10,7 +10,7 @@ export class OAuthClientName extends StringValueObject
             name       : 'OAuthClientName',
             nullable   : false,
             undefinable: false,
-            maxLength  : 255,
+            maxLength  : 127,
         }, validationRules));
     }
 }

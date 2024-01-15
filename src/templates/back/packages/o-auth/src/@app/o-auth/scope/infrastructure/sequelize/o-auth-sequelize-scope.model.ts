@@ -2,7 +2,7 @@
 /* eslint-disable key-spacing */
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'OAuthScope',
@@ -137,16 +137,23 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     @Column({
         field: 'code',
         allowNull: false,
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(63),
     })
     code: string;
 
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(127),
     })
     name: string;
+
+    @Column({
+        field: 'roleIds',
+        allowNull: true,
+        type: DataTypes.ARRAY(DataTypes.UUID),
+    })
+    roleIds: string[];
 
     @Column({
         field: 'createdAt',

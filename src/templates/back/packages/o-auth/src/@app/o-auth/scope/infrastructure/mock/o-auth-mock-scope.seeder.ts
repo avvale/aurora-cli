@@ -5,6 +5,7 @@ import {
     OAuthScopeDeletedAt,
     OAuthScopeId,
     OAuthScopeName,
+    OAuthScopeRoleIds,
     OAuthScopeUpdatedAt,
 } from '@app/o-auth/scope/domain/value-objects';
 import { MockSeeder } from '@aurorajs.dev/core';
@@ -33,6 +34,7 @@ export class OAuthMockScopeSeeder extends MockSeeder<OAuthScope>
                     new OAuthScopeId(scope.id),
                     new OAuthScopeCode(scope.code),
                     new OAuthScopeName(scope.name),
+                    new OAuthScopeRoleIds(scope.roleIds),
                     new OAuthScopeCreatedAt({ currentTimestamp: true }),
                     new OAuthScopeUpdatedAt({ currentTimestamp: true }),
                     new OAuthScopeDeletedAt(null),

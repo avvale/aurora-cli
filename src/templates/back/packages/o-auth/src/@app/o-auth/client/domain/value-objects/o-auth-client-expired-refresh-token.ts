@@ -10,7 +10,6 @@ export class OAuthClientExpiredRefreshToken extends IntValueObject
             name       : 'OAuthClientExpiredRefreshToken',
             nullable   : true,
             undefinable: true,
-            maxLength  : 10,
             unsigned   : true,
         }, validationRules));
     }

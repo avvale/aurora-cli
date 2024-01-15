@@ -30,7 +30,7 @@ export { OAuthUpsertClientController } from './controllers/o-auth-upsert-client.
 export { OAuthDeleteClientByIdController } from './controllers/o-auth-delete-client-by-id.controller';
 export { OAuthDeleteClientsController } from './controllers/o-auth-delete-clients.controller';
 
-// exports resolvers
+// export resolvers
 export { OAuthCreateClientResolver } from './resolvers/o-auth-create-client.resolver';
 export { OAuthCreateClientsResolver } from './resolvers/o-auth-create-clients.resolver';
 export { OAuthPaginateClientsResolver } from './resolvers/o-auth-paginate-clients.resolver';
@@ -43,7 +43,7 @@ export { OAuthUpsertClientResolver } from './resolvers/o-auth-upsert-client.reso
 export { OAuthDeleteClientByIdResolver } from './resolvers/o-auth-delete-client-by-id.resolver';
 export { OAuthDeleteClientsResolver } from './resolvers/o-auth-delete-clients.resolver';
 
-// controllers
+// import controllers
 import { OAuthCreateClientController } from './controllers/o-auth-create-client.controller';
 import { OAuthCreateClientsController } from './controllers/o-auth-create-clients.controller';
 import { OAuthPaginateClientsController } from './controllers/o-auth-paginate-clients.controller';
@@ -56,7 +56,7 @@ import { OAuthUpsertClientController } from './controllers/o-auth-upsert-client.
 import { OAuthDeleteClientByIdController } from './controllers/o-auth-delete-client-by-id.controller';
 import { OAuthDeleteClientsController } from './controllers/o-auth-delete-clients.controller';
 
-// resolvers
+// import resolvers
 import { OAuthCreateClientResolver } from './resolvers/o-auth-create-client.resolver';
 import { OAuthCreateClientsResolver } from './resolvers/o-auth-create-clients.resolver';
 import { OAuthPaginateClientsResolver } from './resolvers/o-auth-paginate-clients.resolver';
@@ -69,7 +69,7 @@ import { OAuthUpsertClientResolver } from './resolvers/o-auth-upsert-client.reso
 import { OAuthDeleteClientByIdResolver } from './resolvers/o-auth-delete-client-by-id.resolver';
 import { OAuthDeleteClientsResolver } from './resolvers/o-auth-delete-clients.resolver';
 
-// handlers
+// import handlers
 import { OAuthCreateClientHandler } from './handlers/o-auth-create-client.handler';
 import { OAuthCreateClientsHandler } from './handlers/o-auth-create-clients.handler';
 import { OAuthPaginateClientsHandler } from './handlers/o-auth-paginate-clients.handler';
@@ -82,7 +82,7 @@ import { OAuthUpsertClientHandler } from './handlers/o-auth-upsert-client.handle
 import { OAuthDeleteClientByIdHandler } from './handlers/o-auth-delete-client-by-id.handler';
 import { OAuthDeleteClientsHandler } from './handlers/o-auth-delete-clients.handler';
 
-// seeder
+// import seeder
 import { OAuthClientSeeder } from './seeder/o-auth-client.seeder';
 
 export const OAuthClientApiControllers = [

@@ -42,6 +42,7 @@ describe('OAuthUpsertScopeCommandHandler', () =>
                         id: oAuthMockScopeData[0].id,
                         code: oAuthMockScopeData[0].code,
                         name: oAuthMockScopeData[0].name,
+                        roleIds: oAuthMockScopeData[0].roleIds,
                     },
                     { timezone: process.env.TZ },
                 ),

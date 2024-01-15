@@ -30,7 +30,7 @@ export { OAuthUpsertScopeController } from './controllers/o-auth-upsert-scope.co
 export { OAuthDeleteScopeByIdController } from './controllers/o-auth-delete-scope-by-id.controller';
 export { OAuthDeleteScopesController } from './controllers/o-auth-delete-scopes.controller';
 
-// exports resolvers
+// export resolvers
 export { OAuthCreateScopeResolver } from './resolvers/o-auth-create-scope.resolver';
 export { OAuthCreateScopesResolver } from './resolvers/o-auth-create-scopes.resolver';
 export { OAuthPaginateScopesResolver } from './resolvers/o-auth-paginate-scopes.resolver';
@@ -43,7 +43,7 @@ export { OAuthUpsertScopeResolver } from './resolvers/o-auth-upsert-scope.resolv
 export { OAuthDeleteScopeByIdResolver } from './resolvers/o-auth-delete-scope-by-id.resolver';
 export { OAuthDeleteScopesResolver } from './resolvers/o-auth-delete-scopes.resolver';
 
-// controllers
+// import controllers
 import { OAuthCreateScopeController } from './controllers/o-auth-create-scope.controller';
 import { OAuthCreateScopesController } from './controllers/o-auth-create-scopes.controller';
 import { OAuthPaginateScopesController } from './controllers/o-auth-paginate-scopes.controller';
@@ -56,7 +56,7 @@ import { OAuthUpsertScopeController } from './controllers/o-auth-upsert-scope.co
 import { OAuthDeleteScopeByIdController } from './controllers/o-auth-delete-scope-by-id.controller';
 import { OAuthDeleteScopesController } from './controllers/o-auth-delete-scopes.controller';
 
-// resolvers
+// import resolvers
 import { OAuthCreateScopeResolver } from './resolvers/o-auth-create-scope.resolver';
 import { OAuthCreateScopesResolver } from './resolvers/o-auth-create-scopes.resolver';
 import { OAuthPaginateScopesResolver } from './resolvers/o-auth-paginate-scopes.resolver';
@@ -69,7 +69,7 @@ import { OAuthUpsertScopeResolver } from './resolvers/o-auth-upsert-scope.resolv
 import { OAuthDeleteScopeByIdResolver } from './resolvers/o-auth-delete-scope-by-id.resolver';
 import { OAuthDeleteScopesResolver } from './resolvers/o-auth-delete-scopes.resolver';
 
-// handlers
+// import handlers
 import { OAuthCreateScopeHandler } from './handlers/o-auth-create-scope.handler';
 import { OAuthCreateScopesHandler } from './handlers/o-auth-create-scopes.handler';
 import { OAuthPaginateScopesHandler } from './handlers/o-auth-paginate-scopes.handler';
@@ -82,7 +82,7 @@ import { OAuthUpsertScopeHandler } from './handlers/o-auth-upsert-scope.handler'
 import { OAuthDeleteScopeByIdHandler } from './handlers/o-auth-delete-scope-by-id.handler';
 import { OAuthDeleteScopesHandler } from './handlers/o-auth-delete-scopes.handler';
 
-// seeder
+// import seeder
 import { OAuthScopeSeeder } from './seeder/o-auth-scope.seeder';
 
 export const OAuthScopeApiControllers = [

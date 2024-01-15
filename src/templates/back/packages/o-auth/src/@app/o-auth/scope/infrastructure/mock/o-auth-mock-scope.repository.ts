@@ -5,6 +5,7 @@ import {
     OAuthScopeDeletedAt,
     OAuthScopeId,
     OAuthScopeName,
+    OAuthScopeRoleIds,
     OAuthScopeUpdatedAt,
 } from '@app/o-auth/scope/domain/value-objects';
 import { MockRepository, Utils } from '@aurorajs.dev/core';
@@ -43,6 +44,7 @@ export class OAuthMockScopeRepository extends MockRepository<OAuthScope> impleme
                 new OAuthScopeId(itemCollection.id),
                 new OAuthScopeCode(itemCollection.code),
                 new OAuthScopeName(itemCollection.name),
+                new OAuthScopeRoleIds(itemCollection.roleIds),
                 new OAuthScopeCreatedAt(itemCollection.createdAt),
                 new OAuthScopeUpdatedAt(itemCollection.updatedAt),
                 new OAuthScopeDeletedAt(itemCollection.deletedAt),

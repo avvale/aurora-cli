@@ -5,6 +5,7 @@ import {
     OAuthScopeCode,
     OAuthScopeId,
     OAuthScopeName,
+    OAuthScopeRoleIds,
 } from '@app/o-auth/scope/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
@@ -23,6 +24,7 @@ export class OAuthUpdateScopeByIdCommandHandler implements ICommandHandler<OAuth
                 id: new OAuthScopeId(command.payload.id),
                 code: new OAuthScopeCode(command.payload.code, { undefinable: true }),
                 name: new OAuthScopeName(command.payload.name, { undefinable: true }),
+                roleIds: new OAuthScopeRoleIds(command.payload.roleIds),
             },
             command.constraint,
             command.cQMetadata,

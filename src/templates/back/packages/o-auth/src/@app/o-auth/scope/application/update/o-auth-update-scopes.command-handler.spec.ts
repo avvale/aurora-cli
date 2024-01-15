@@ -40,6 +40,7 @@ describe('OAuthUpdateScopesCommandHandler', () =>
                         id: oAuthMockScopeData[0].id,
                         code: oAuthMockScopeData[0].code,
                         name: oAuthMockScopeData[0].name,
+                        roleIds: oAuthMockScopeData[0].roleIds,
                     },
                     {},
                     {},

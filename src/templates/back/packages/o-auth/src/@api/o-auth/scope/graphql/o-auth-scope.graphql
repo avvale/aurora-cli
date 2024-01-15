@@ -4,6 +4,7 @@ type OAuthScope
     id: ID!
     code: GraphQLString!
     name: GraphQLString!
+    roleIds: [ID]
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -14,6 +15,7 @@ input OAuthCreateScopeInput
     id: ID!
     code: GraphQLString!
     name: GraphQLString!
+    roleIds: [ID]
 }
 
 input OAuthUpdateScopeByIdInput
@@ -21,6 +23,7 @@ input OAuthUpdateScopeByIdInput
     id: ID!
     code: GraphQLString
     name: GraphQLString
+    roleIds: [ID]
 }
 
 input OAuthUpdateScopesInput
@@ -28,6 +31,7 @@ input OAuthUpdateScopesInput
     id: ID
     code: GraphQLString
     name: GraphQLString
+    roleIds: [ID]
 }
 
 type Query

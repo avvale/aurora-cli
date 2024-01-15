@@ -29,6 +29,8 @@ export class OAuthUpdateScopeByIdHandler
 
         const dataToUpdate = Utils.diff(payload, scope);
 
+        if ('roleIds' in dataToUpdate) dataToUpdate.roleIds = payload.roleIds;
+
         await this.commandBus.dispatch(new OAuthUpdateScopeByIdCommand(
             {
                 ...dataToUpdate,

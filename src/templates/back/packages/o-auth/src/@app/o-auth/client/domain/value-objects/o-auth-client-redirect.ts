@@ -10,7 +10,7 @@ export class OAuthClientRedirect extends StringValueObject
             name       : 'OAuthClientRedirect',
             nullable   : true,
             undefinable: true,
-            maxLength  : 2048,
+            maxLength  : 2046,
         }, validationRules));
     }
 }

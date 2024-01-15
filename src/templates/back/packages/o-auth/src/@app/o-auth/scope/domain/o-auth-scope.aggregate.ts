@@ -6,6 +6,7 @@ import {
     OAuthScopeDeletedAt,
     OAuthScopeId,
     OAuthScopeName,
+    OAuthScopeRoleIds,
     OAuthScopeUpdatedAt,
 } from '@app/o-auth/scope/domain/value-objects';
 import { LiteralObject, Utils } from '@aurorajs.dev/core';
@@ -16,6 +17,7 @@ export class OAuthScope extends AggregateRoot
     id: OAuthScopeId;
     code: OAuthScopeCode;
     name: OAuthScopeName;
+    roleIds: OAuthScopeRoleIds;
     createdAt: OAuthScopeCreatedAt;
     updatedAt: OAuthScopeUpdatedAt;
     deletedAt: OAuthScopeDeletedAt;
@@ -24,6 +26,7 @@ export class OAuthScope extends AggregateRoot
         id: OAuthScopeId,
         code: OAuthScopeCode,
         name: OAuthScopeName,
+        roleIds: OAuthScopeRoleIds,
         createdAt: OAuthScopeCreatedAt,
         updatedAt: OAuthScopeUpdatedAt,
         deletedAt: OAuthScopeDeletedAt,
@@ -33,6 +36,7 @@ export class OAuthScope extends AggregateRoot
         this.id = id;
         this.code = code;
         this.name = name;
+        this.roleIds = roleIds;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -42,6 +46,7 @@ export class OAuthScope extends AggregateRoot
         id: OAuthScopeId,
         code: OAuthScopeCode,
         name: OAuthScopeName,
+        roleIds: OAuthScopeRoleIds,
         createdAt: OAuthScopeCreatedAt,
         updatedAt: OAuthScopeUpdatedAt,
         deletedAt: OAuthScopeDeletedAt,
@@ -51,6 +56,7 @@ export class OAuthScope extends AggregateRoot
             id,
             code,
             name,
+            roleIds,
             createdAt,
             updatedAt,
             deletedAt,
@@ -64,6 +70,7 @@ export class OAuthScope extends AggregateRoot
                 scope.id.value,
                 scope.code.value,
                 scope.name.value,
+                scope.roleIds?.value,
                 scope.createdAt?.value,
                 scope.updatedAt?.value,
                 scope.deletedAt?.value,
@@ -78,6 +85,7 @@ export class OAuthScope extends AggregateRoot
                 scope.id?.value,
                 scope.code?.value,
                 scope.name?.value,
+                scope.roleIds?.value,
                 scope.createdAt?.value,
                 scope.updatedAt?.value,
                 scope.deletedAt?.value,
@@ -92,6 +100,7 @@ export class OAuthScope extends AggregateRoot
                 scope.id.value,
                 scope.code.value,
                 scope.name.value,
+                scope.roleIds?.value,
                 scope.createdAt?.value,
                 scope.updatedAt?.value,
                 scope.deletedAt?.value,
@@ -105,6 +114,7 @@ export class OAuthScope extends AggregateRoot
             id: this.id.value,
             code: this.code.value,
             name: this.name.value,
+            roleIds: this.roleIds?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
@@ -118,6 +128,7 @@ export class OAuthScope extends AggregateRoot
             id: this.id.value,
             code: this.code.value,
             name: this.name.value,
+            roleIds: this.roleIds?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

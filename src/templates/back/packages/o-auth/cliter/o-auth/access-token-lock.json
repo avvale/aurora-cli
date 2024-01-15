@@ -223,7 +223,7 @@
         },
         {
             "path": "src/@app/o-auth/access-token/infrastructure/mock/o-auth-mock-access-token.data.ts",
-            "integrity": "sha1:9e72d23066828223695b75be5c27fb95381e8159"
+            "integrity": "sha1:c4f4b5c4482521d852faca13a5fcac7cdeb0d6f1"
         },
         {
             "path": "src/@app/o-auth/access-token/infrastructure/mock/o-auth-mock-access-token.repository.ts",
@@ -235,7 +235,7 @@
         },
         {
             "path": "src/@app/o-auth/access-token/infrastructure/sequelize/o-auth-sequelize-access-token.model.ts",
-            "integrity": "sha1:c25ad6d13090c434565c9e7be8ed4850893896f1"
+            "integrity": "sha1:a5bcf7287534d68576efd53feeb95d1e52c04586"
         },
         {
             "path": "src/@app/o-auth/access-token/infrastructure/sequelize/o-auth-sequelize-access-token.repository.ts",
@@ -259,7 +259,7 @@
         },
         {
             "path": "src/@app/o-auth/access-token/domain/value-objects/o-auth-access-token-name.ts",
-            "integrity": "sha1:1004bea0bde3dc2b410d70cbd189d0f3acf68f7e"
+            "integrity": "sha1:14e336c7c70719dba5cbb32afe1e4850c1c13902"
         },
         {
             "path": "src/@app/o-auth/access-token/domain/value-objects/o-auth-access-token-is-revoked.ts",
@@ -335,7 +335,7 @@
         },
         {
             "path": "src/@api/o-auth/access-token/dto/o-auth-access-token.dto.ts",
-            "integrity": "sha1:45e92242fe4f1b36e8275ed38fd4e1c42e1152e5"
+            "integrity": "sha1:f46d6abb64dfe779bb9c234b1984b6c011c540c9"
         },
         {
             "path": "src/@api/o-auth/access-token/dto/o-auth-create-access-token.dto.ts",
@@ -351,6 +351,10 @@
         },
         {
             "path": "src/@api/o-auth/access-token/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/o-auth/access-token/dto/public-api.ts",
             "integrity": "sha1:881f91346c5475e54562d86a543911356752a515"
         },
         {
@@ -407,7 +411,7 @@
         },
         {
             "path": "src/@api/o-auth/access-token/index.ts",
-            "integrity": "sha1:87cf00b0db6f64ce3d165886d370c92b4bf75239"
+            "integrity": "sha1:3b3054b12f50586f47b9008e87e3bf3c2bf34e6e"
         },
         {
             "path": "src/@api/o-auth/access-token/resolvers/o-auth-delete-access-token-by-id.resolver.spec.ts",
@@ -459,11 +463,11 @@
         },
         {
             "path": "test/acceptance/o-auth/access-token.e2e-spec.ts",
-            "integrity": "sha1:e0031acdc5f75a6797e1c722e291830b7954f7b4"
+            "integrity": "sha1:72e3c1d868219691bc08c0d46a20b6beb005011e"
         },
         {
             "path": "postman/o-auth/o-auth.access-token.postman.json",
-            "integrity": "sha1:d50df1c18b822fdd110fc7ff05623fb4dfad2493"
+            "integrity": "sha1:2eb4a495fdcb4682d446343f5302a1ed0e00a78c"
         }
     ]
 }

@@ -17,14 +17,19 @@ aggregateProperties:
     nullable: false
   - name: code
     type: varchar
-    maxLength: 20
+    maxLength: 63
     nullable: false
     index: unique
     example: EDIT
   - name: name
     type: varchar
-    maxLength: 255
+    maxLength: 127
     nullable: false
+  - name: roleIds
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
   - name: createdAt
     type: timestamp
     nullable: true

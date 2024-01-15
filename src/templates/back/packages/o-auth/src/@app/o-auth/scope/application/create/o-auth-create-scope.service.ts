@@ -5,6 +5,7 @@ import {
     OAuthScopeDeletedAt,
     OAuthScopeId,
     OAuthScopeName,
+    OAuthScopeRoleIds,
     OAuthScopeUpdatedAt,
 } from '@app/o-auth/scope/domain/value-objects';
 import { CQMetadata } from '@aurorajs.dev/core';
@@ -24,6 +25,7 @@ export class OAuthCreateScopeService
             id: OAuthScopeId;
             code: OAuthScopeCode;
             name: OAuthScopeName;
+            roleIds: OAuthScopeRoleIds;
         },
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -33,6 +35,7 @@ export class OAuthCreateScopeService
             payload.id,
             payload.code,
             payload.name,
+            payload.roleIds,
             new OAuthScopeCreatedAt({ currentTimestamp: true }),
             new OAuthScopeUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt

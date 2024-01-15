@@ -22,4 +22,10 @@ export class OAuthCreateScopeDto
     })
     name: string;
 
+    @ApiProperty({
+        type       : Array,
+        description: 'roleIds [input here api field description]',
+    })
+    roleIds?: string[];
+
 }

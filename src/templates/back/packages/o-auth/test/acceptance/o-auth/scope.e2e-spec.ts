@@ -189,35 +189,35 @@ describe('scope', () =>
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode is too large, has a maximum length of 20', () =>
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode is too large, has a maximum length of 63', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: '*********************',
+                code: '****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthScopeCode is too large, has a maximum length of 20');
+                expect(res.body.message).toContain('Value for OAuthScopeCode is too large, has a maximum length of 63');
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName is too large, has a maximum length of 255', () =>
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '****************************************************************************************************************************************************************************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthScopeName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for OAuthScopeName is too large, has a maximum length of 127');
             });
     });
 
@@ -396,6 +396,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                         }
                     }
                 `,
@@ -464,6 +465,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -495,6 +497,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                         }
                     }
                 `,
@@ -526,6 +529,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -565,6 +569,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -602,6 +607,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -634,6 +640,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -664,6 +671,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -699,6 +707,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -732,6 +741,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -770,6 +780,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }
@@ -802,6 +813,7 @@ describe('scope', () =>
                             id
                             code
                             name
+                            roleIds
                             createdAt
                             updatedAt
                         }

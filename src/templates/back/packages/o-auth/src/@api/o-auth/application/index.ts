@@ -30,7 +30,7 @@ export { OAuthUpsertApplicationController } from './controllers/o-auth-upsert-ap
 export { OAuthDeleteApplicationByIdController } from './controllers/o-auth-delete-application-by-id.controller';
 export { OAuthDeleteApplicationsController } from './controllers/o-auth-delete-applications.controller';
 
-// exports resolvers
+// export resolvers
 export { OAuthCreateApplicationResolver } from './resolvers/o-auth-create-application.resolver';
 export { OAuthCreateApplicationsResolver } from './resolvers/o-auth-create-applications.resolver';
 export { OAuthPaginateApplicationsResolver } from './resolvers/o-auth-paginate-applications.resolver';
@@ -43,7 +43,7 @@ export { OAuthUpsertApplicationResolver } from './resolvers/o-auth-upsert-applic
 export { OAuthDeleteApplicationByIdResolver } from './resolvers/o-auth-delete-application-by-id.resolver';
 export { OAuthDeleteApplicationsResolver } from './resolvers/o-auth-delete-applications.resolver';
 
-// controllers
+// import controllers
 import { OAuthCreateApplicationController } from './controllers/o-auth-create-application.controller';
 import { OAuthCreateApplicationsController } from './controllers/o-auth-create-applications.controller';
 import { OAuthPaginateApplicationsController } from './controllers/o-auth-paginate-applications.controller';
@@ -56,7 +56,7 @@ import { OAuthUpsertApplicationController } from './controllers/o-auth-upsert-ap
 import { OAuthDeleteApplicationByIdController } from './controllers/o-auth-delete-application-by-id.controller';
 import { OAuthDeleteApplicationsController } from './controllers/o-auth-delete-applications.controller';
 
-// resolvers
+// import resolvers
 import { OAuthCreateApplicationResolver } from './resolvers/o-auth-create-application.resolver';
 import { OAuthCreateApplicationsResolver } from './resolvers/o-auth-create-applications.resolver';
 import { OAuthPaginateApplicationsResolver } from './resolvers/o-auth-paginate-applications.resolver';
@@ -69,7 +69,7 @@ import { OAuthUpsertApplicationResolver } from './resolvers/o-auth-upsert-applic
 import { OAuthDeleteApplicationByIdResolver } from './resolvers/o-auth-delete-application-by-id.resolver';
 import { OAuthDeleteApplicationsResolver } from './resolvers/o-auth-delete-applications.resolver';
 
-// handlers
+// import handlers
 import { OAuthCreateApplicationHandler } from './handlers/o-auth-create-application.handler';
 import { OAuthCreateApplicationsHandler } from './handlers/o-auth-create-applications.handler';
 import { OAuthPaginateApplicationsHandler } from './handlers/o-auth-paginate-applications.handler';
@@ -82,7 +82,7 @@ import { OAuthUpsertApplicationHandler } from './handlers/o-auth-upsert-applicat
 import { OAuthDeleteApplicationByIdHandler } from './handlers/o-auth-delete-application-by-id.handler';
 import { OAuthDeleteApplicationsHandler } from './handlers/o-auth-delete-applications.handler';
 
-// seeder
+// import seeder
 import { OAuthApplicationSeeder } from './seeder/o-auth-application.seeder';
 
 export const OAuthApplicationApiControllers = [

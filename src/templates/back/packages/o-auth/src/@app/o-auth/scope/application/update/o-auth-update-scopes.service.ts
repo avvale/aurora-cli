@@ -5,6 +5,7 @@ import {
     OAuthScopeDeletedAt,
     OAuthScopeId,
     OAuthScopeName,
+    OAuthScopeRoleIds,
     OAuthScopeUpdatedAt,
 } from '@app/o-auth/scope/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
@@ -24,6 +25,7 @@ export class OAuthUpdateScopesService
             id?: OAuthScopeId;
             code?: OAuthScopeCode;
             name?: OAuthScopeName;
+            roleIds?: OAuthScopeRoleIds;
         },
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
@@ -35,6 +37,7 @@ export class OAuthUpdateScopesService
             payload.id,
             payload.code,
             payload.name,
+            payload.roleIds,
             null, // createdAt
             new OAuthScopeUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt

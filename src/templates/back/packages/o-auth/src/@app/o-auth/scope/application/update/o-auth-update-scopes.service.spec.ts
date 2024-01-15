@@ -5,6 +5,7 @@ import {
     OAuthScopeCode,
     OAuthScopeId,
     OAuthScopeName,
+    OAuthScopeRoleIds,
 } from '@app/o-auth/scope/domain/value-objects';
 import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -52,6 +53,7 @@ describe('OAuthUpdateScopesService', () =>
                         id: new OAuthScopeId(oAuthMockScopeData[0].id),
                         code: new OAuthScopeCode(oAuthMockScopeData[0].code),
                         name: new OAuthScopeName(oAuthMockScopeData[0].name),
+                        roleIds: new OAuthScopeRoleIds(oAuthMockScopeData[0].roleIds),
                     },
                     {},
                     {},

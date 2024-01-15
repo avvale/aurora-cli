@@ -1,6 +1,6 @@
 /* eslint-disable key-spacing */
 import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { LiteralObject } from '@aurorajs.dev/core';
 import {
     OAuthAccessTokenId,
     OAuthAccessTokenClientId,
@@ -30,8 +30,6 @@ export class OAuthAccessToken extends AggregateRoot
     createdAt: OAuthAccessTokenCreatedAt;
     updatedAt: OAuthAccessTokenUpdatedAt;
     deletedAt: OAuthAccessTokenDeletedAt;
-
-    // eager relationship
     refreshToken: OAuthRefreshToken;
     client: OAuthClient;
 
@@ -46,7 +44,6 @@ export class OAuthAccessToken extends AggregateRoot
         createdAt: OAuthAccessTokenCreatedAt,
         updatedAt: OAuthAccessTokenUpdatedAt,
         deletedAt: OAuthAccessTokenDeletedAt,
-
         refreshToken?: OAuthRefreshToken,
         client?: OAuthClient,
     )
@@ -62,13 +59,11 @@ export class OAuthAccessToken extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
-
-        // eager relationship
         this.refreshToken = refreshToken;
         this.client = client;
     }
 
-    static register (
+    static register(
         id: OAuthAccessTokenId,
         clientId: OAuthAccessTokenClientId,
         accountId: OAuthAccessTokenAccountId,
@@ -79,7 +74,6 @@ export class OAuthAccessToken extends AggregateRoot
         createdAt: OAuthAccessTokenCreatedAt,
         updatedAt: OAuthAccessTokenUpdatedAt,
         deletedAt: OAuthAccessTokenDeletedAt,
-
         refreshToken?: OAuthRefreshToken,
         client?: OAuthClient,
     ): OAuthAccessToken
@@ -95,7 +89,6 @@ export class OAuthAccessToken extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
-
             refreshToken,
             client,
         );
@@ -150,8 +143,6 @@ export class OAuthAccessToken extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             refreshToken: this.refreshToken?.toDTO(),
             client: this.client?.toDTO(),
         };
@@ -171,8 +162,6 @@ export class OAuthAccessToken extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-
-            // eager relationship
             refreshToken: this.refreshToken?.toDTO(),
             client: this.client?.toDTO(),
         };

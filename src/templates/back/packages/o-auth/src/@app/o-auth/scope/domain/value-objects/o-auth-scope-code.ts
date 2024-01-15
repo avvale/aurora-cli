@@ -10,7 +10,7 @@ export class OAuthScopeCode extends StringValueObject
             name       : 'OAuthScopeCode',
             nullable   : false,
             undefinable: false,
-            maxLength  : 20,
+            maxLength  : 63,
         }, validationRules));
     }
 }

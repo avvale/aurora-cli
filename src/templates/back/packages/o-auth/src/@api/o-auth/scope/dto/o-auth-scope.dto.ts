@@ -23,6 +23,12 @@ export class OAuthScopeDto
     name: string;
 
     @ApiProperty({
+        type       : Array,
+        description: 'roleIds [input here api field description]',
+    })
+    roleIds?: string[];
+
+    @ApiProperty({
         type       : String,
         description: 'createdAt [input here api field description]',
     })

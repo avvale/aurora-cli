@@ -5,7 +5,7 @@ import { OAuthApplicationModel } from '@app/o-auth/application';
 import { OAuthApplicationClientModel } from '@app/o-auth/application-client';
 import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsToMany, Column, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'OAuthClient',
@@ -140,28 +140,28 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(255),
+        type: DataTypes.STRING(127),
     })
     name: string;
 
     @Column({
         field: 'secret',
         allowNull: false,
-        type: DataTypes.STRING(90),
+        type: DataTypes.STRING(127),
     })
     secret: string;
 
     @Column({
         field: 'authUrl',
         allowNull: true,
-        type: DataTypes.STRING(2048),
+        type: DataTypes.STRING(2046),
     })
     authUrl: string;
 
     @Column({
         field: 'redirect',
         allowNull: true,
-        type: DataTypes.STRING(2048),
+        type: DataTypes.STRING(2046),
     })
     redirect: string;
 
@@ -175,14 +175,14 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     @Column({
         field: 'expiredAccessToken',
         allowNull: true,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     expiredAccessToken: number;
 
     @Column({
         field: 'expiredRefreshToken',
         allowNull: true,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
     })
     expiredRefreshToken: number;
 

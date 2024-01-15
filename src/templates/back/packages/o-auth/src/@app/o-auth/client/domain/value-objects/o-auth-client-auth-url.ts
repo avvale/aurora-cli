@@ -10,7 +10,7 @@ export class OAuthClientAuthUrl extends StringValueObject
             name       : 'OAuthClientAuthUrl',
             nullable   : true,
             undefinable: true,
-            maxLength  : 2048,
+            maxLength  : 2046,
         }, validationRules));
     }
 }

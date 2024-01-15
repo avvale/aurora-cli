@@ -7,6 +7,7 @@ export class OAuthUpsertScopeCommand
             id: string;
             code?: string;
             name?: string;
+            roleIds?: string[];
         },
         public readonly cQMetadata?: CQMetadata,
     ) {}

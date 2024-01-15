@@ -3,7 +3,6 @@
 /* eslint-disable key-spacing */
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { OAuthIAccessTokenRepository, oAuthMockAccessTokenData, OAuthMockAccessTokenSeeder } from '@app/o-auth/access-token';
-import { Auth } from '@aurora/decorators';
 import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -11,6 +10,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as _ from 'lodash';
 import * as request from 'supertest';
+import { Auth } from '@aurora/decorators';
 
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
@@ -86,7 +86,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenId must be defined, can not be null');
             });
     });
 
@@ -102,7 +102,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenClientId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenClientId must be defined, can not be null');
             });
     });
 
@@ -118,7 +118,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenToken must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenToken must be defined, can not be null');
             });
     });
 
@@ -134,7 +134,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenIsRevoked must be defined, can not be null');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenIsRevoked must be defined, can not be null');
             });
     });
 
@@ -150,7 +150,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenId must be defined, can not be undefined');
             });
     });
 
@@ -166,7 +166,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenClientId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenClientId must be defined, can not be undefined');
             });
     });
 
@@ -182,7 +182,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenToken must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenToken must be defined, can not be undefined');
             });
     });
 
@@ -198,7 +198,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenIsRevoked must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenIsRevoked must be defined, can not be undefined');
             });
     });
 
@@ -214,7 +214,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenId is not allowed, must be a length of 36');
             });
     });
 
@@ -230,7 +230,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenClientId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenClientId is not allowed, must be a length of 36');
             });
     });
 
@@ -246,23 +246,23 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenAccountId is not allowed, must be a length of 36');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenAccountId is not allowed, must be a length of 36');
             });
     });
 
-    test('/REST:POST o-auth/access-token/create - Got 400 Conflict, AccessTokenName is too large, has a maximum length of 255', () =>
+    test('/REST:POST o-auth/access-token/create - Got 400 Conflict, AccessTokenName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '****************************************************************************************************************************************************************************************************************************************************************',
+                name: '********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenName is too large, has a maximum length of 255');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenName is too large, has a maximum length of 127');
             });
     });
 
@@ -278,7 +278,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenIsRevoked has to be a boolean value');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenIsRevoked has to be a boolean value');
             });
     });
     test('/REST:POST o-auth/access-token/create - Got 400 Conflict, AccessTokenExpiresAt has to be a timestamp value', () =>
@@ -293,7 +293,7 @@ describe('access-token', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccessTokenExpiresAt has to be a timestamp value');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenExpiresAt has to be a timestamp value');
             });
     });
 

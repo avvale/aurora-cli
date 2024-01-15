@@ -7,6 +7,7 @@ export class OAuthUpdateScopeByIdCommand
             id: string;
             code?: string;
             name?: string;
+            roleIds?: string[];
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,
