@@ -515,6 +515,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             {{#each (getFormGroupFieldsProperties schema.aggregateProperties) }}
             {{#if (isAllowProperty ../schema.moduleName this) }}
@@ -522,6 +523,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {{/if}}
             {{/each}}
         });
+        /* eslint-enable key-spacing */
     }
 
     {{#if (hasI18nProperties schema.aggregateProperties) }}
