@@ -6,6 +6,9 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
 {
     switch (property.type)
     {
+        case PropertyType.ARRAY:
+            return '[]';
+
         case PropertyType.CHAR:
         case PropertyType.TEXT:
         case PropertyType.TIMESTAMP:
