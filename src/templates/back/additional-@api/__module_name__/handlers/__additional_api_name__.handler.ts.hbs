@@ -20,7 +20,7 @@
 {{#if schema.hasTenant}}
 {{
     push importsArray
-        (object items='AccountResponse' path=(sumStrings config.appContainer '/iam/account/domain/account.response'))
+        (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
 ~}}
 {{/if}}
 {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
@@ -46,6 +46,9 @@ export class {{ getClassNameAdditionalApi currentAdditionalApi }}Handler
     ) {}
 
     async main(
+        {{#if schema.hasTenant}}
+        account: IamAccountResponse,
+        {{/if}}
         {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
@@ -53,9 +56,6 @@ export class {{ getClassNameAdditionalApi currentAdditionalApi }}Handler
         payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput | {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
         constraint?: QueryStatement,
         {{/eq }}
-        {{#if schema.hasTenant}}
-        account: IamAccountResponse,
-        {{/if}}
         timezone?: string,
         {{#if schema.hasAuditing}}
         auditing?: AuditingMeta,

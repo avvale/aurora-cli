@@ -62,6 +62,9 @@ export class {{ getClassNameAdditionalApi currentAdditionalApi }}Controller
     @TenantPolicy()
     {{/if}}
     async main(
+        {{#if schema.hasTenant}}
+        @CurrentAccount() account: IamAccountResponse,
+        {{/if}}
         {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
         @Body('query') queryStatement?: QueryStatement,
         @Body('constraint') constraint?: QueryStatement,
@@ -69,9 +72,6 @@ export class {{ getClassNameAdditionalApi currentAdditionalApi }}Controller
         @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
         @Body('constraint') constraint?: QueryStatement,
         {{/eq }}
-        {{#if schema.hasTenant}}
-        @CurrentAccount() account: IamAccountResponse,
-        {{/if}}
         @Timezone() timezone?: string,
         {{#if schema.hasAuditing}}
         @Auditing() auditing?: AuditingMeta,
@@ -79,6 +79,9 @@ export class {{ getClassNameAdditionalApi currentAdditionalApi }}Controller
     )
     {
         return await this.handler.main(
+            {{#if schema.hasTenant}}
+            account,
+            {{/if}}
             {{#eq currentAdditionalApi.resolverType resolverType.QUERY }}
             queryStatement,
             constraint,
@@ -86,9 +89,6 @@ export class {{ getClassNameAdditionalApi currentAdditionalApi }}Controller
             payload,
             constraint,
             {{/eq }}
-            {{#if schema.hasTenant}}
-            account,
-            {{/if}}
             timezone,
             {{#if schema.hasAuditing}}
             auditing,

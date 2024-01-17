@@ -62,10 +62,10 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     @TenantPolicy()
     {{/if}}
     async main(
-        @Body() payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: IamAccountResponse,
         {{/if}}
+        @Body() payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto,
         @Timezone() timezone?: string,
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         @ContentLanguage() contentLanguage?: string,
@@ -76,10 +76,10 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     )
     {
         return await this.handler.main(
-            payload,
             {{#if schema.hasTenant}}
             account,
             {{/if}}
+            payload,
             timezone,
             {{#if (hasI18nProperties schema.aggregateProperties) }}
             contentLanguage,

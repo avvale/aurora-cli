@@ -44,12 +44,12 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
     ) {}
 
     async main(
-        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
-        {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
-        {{/each}}
         {{#if schema.hasTenant}}
         account: IamAccountResponse,
         {{/if}}
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptType this ../config }},
+        {{/each}}
         constraint?: QueryStatement,
         timezone?: string,
         {{#if (hasI18nProperties schema.aggregateProperties) }}

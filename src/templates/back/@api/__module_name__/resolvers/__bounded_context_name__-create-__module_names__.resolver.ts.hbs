@@ -50,10 +50,10 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     @TenantPolicy()
     {{/if}}
     async main(
-        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input[],
         {{#if schema.hasTenant}}
         @CurrentAccount() account: IamAccountResponse,
         {{/if}}
+        @Args('payload') payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input[],
         @Timezone() timezone?: string,
         {{#if schema.hasAuditing}}
         @Auditing() auditing?: AuditingMeta,
@@ -61,10 +61,10 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ): Promise<boolean>
     {
         return await this.handler.main(
-            payload,
             {{#if schema.hasTenant}}
             account,
             {{/if}}
+            payload,
             timezone,
             {{#if schema.hasAuditing}}
             auditing,

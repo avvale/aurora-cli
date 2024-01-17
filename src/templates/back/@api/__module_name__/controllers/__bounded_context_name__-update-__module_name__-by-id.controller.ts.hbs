@@ -63,10 +63,10 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     @TenantPolicy()
     {{/if}}
     async main(
-        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
         {{#if schema.hasTenant}}
         @CurrentAccount() account: IamAccountResponse,
         {{/if}}
+        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         {{#if (hasI18nProperties schema.aggregateProperties) }}
@@ -78,10 +78,10 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     )
     {
         return await this.handler.main(
-            payload,
             {{#if schema.hasTenant}}
             account,
             {{/if}}
+            payload,
             constraint,
             timezone,
             {{#if (hasI18nProperties schema.aggregateProperties) }}

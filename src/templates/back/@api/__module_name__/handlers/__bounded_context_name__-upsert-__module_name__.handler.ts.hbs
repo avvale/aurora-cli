@@ -60,10 +60,10 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
     ) {}
 
     async main(
-        payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput | {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
         {{#if schema.hasTenant}}
         account: IamAccountResponse,
         {{/if}}
+        payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput | {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
         timezone?: string,
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         contentLanguage?: string,

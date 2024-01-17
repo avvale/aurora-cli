@@ -56,12 +56,12 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     ) {}
 
     async main(
-        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
-        {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptDeleteType this ../config }},
-        {{/each}}
         {{#if schema.hasTenant}}
         account: IamAccountResponse,
         {{/if}}
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptDeleteType this ../config }},
+        {{/each}}
         constraint?: QueryStatement,
         timezone?: string,
         {{#if (hasI18nProperties schema.aggregateProperties) }}

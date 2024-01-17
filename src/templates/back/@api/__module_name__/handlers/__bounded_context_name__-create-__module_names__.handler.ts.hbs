@@ -29,10 +29,10 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ) {}
 
     async main(
-        payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input[] | {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto[],
         {{#if schema.hasTenant}}
         account: IamAccountResponse,
         {{/if}}
+        payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input[] | {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto[],
         timezone?: string,
         {{#if schema.hasAuditing}}
         auditing?: AuditingMeta,
