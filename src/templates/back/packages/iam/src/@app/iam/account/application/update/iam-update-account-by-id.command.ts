@@ -10,10 +10,10 @@ export class IamUpdateAccountByIdCommand
             email?: string;
             isActive?: boolean;
             clientId?: string;
-            scopes?: any;
-            dApplicationCodes?: any;
+            scopes?: string[];
+            dApplicationCodes?: string[];
             dPermissions?: any;
-            dTenants?: any;
+            dTenants?: string[];
             meta?: any;
             roleIds?: string[];
             tenantIds?: string[];

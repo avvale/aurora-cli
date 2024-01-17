@@ -10,8 +10,8 @@ export class IamCreateAccountCommand
             email: string;
             isActive: boolean;
             clientId: string;
-            scopes?: any;
-            dApplicationCodes: any;
+            scopes?: string[];
+            dApplicationCodes: string[];
             dPermissions: any;
             meta?: any;
             roleIds?: string[];

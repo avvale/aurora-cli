@@ -13,10 +13,10 @@ type IamAccount
     isActive: GraphQLBoolean!
     clientId: ID!
     client: OAuthClient
-    scopes: JSON
-    dApplicationCodes: JSON!
+    scopes: [GraphQLString]
+    dApplicationCodes: [GraphQLString]!
     dPermissions: JSON!
-    dTenants: JSON!
+    dTenants: [ID]!
     meta: JSON
     roles: [IamRole]
     tenants: [IamTenant]
@@ -34,7 +34,7 @@ input IamCreateAccountInput
     email: GraphQLString!
     isActive: GraphQLBoolean!
     clientId: ID
-    scopes: JSON
+    scopes: [GraphQLString]
     meta: JSON
     roleIds: [ID]
     tenantIds: [ID]
@@ -49,7 +49,7 @@ input IamUpdateAccountByIdInput
     email: GraphQLString
     isActive: GraphQLBoolean
     clientId: ID
-    scopes: JSON
+    scopes: [GraphQLString]
     meta: JSON
     roleIds: [ID]
     tenantIds: [ID]
@@ -64,8 +64,8 @@ input IamUpdateAccountsInput
     email: GraphQLString
     isActive: GraphQLBoolean
     clientId: ID
-    scopes: JSON
-    dApplicationCodes: JSON
+    scopes: [GraphQLString]
+    dApplicationCodes: [GraphQLString]
     dPermissions: JSON
     meta: JSON
     roleIds: [ID]

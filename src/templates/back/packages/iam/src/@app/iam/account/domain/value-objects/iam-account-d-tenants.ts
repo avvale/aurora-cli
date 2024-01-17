@@ -4,7 +4,7 @@ export class IamAccountDTenants extends JsonValueObject
 {
     public readonly type: string = 'IamAccountDTenants';
 
-    constructor(value: any, validationRules: ValidationRules = {})
+    constructor(value: any[], validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : 'IamAccountDTenants',

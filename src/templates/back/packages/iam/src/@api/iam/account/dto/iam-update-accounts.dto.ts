@@ -47,16 +47,16 @@ export class IamUpdateAccountsDto
     clientId?: string;
 
     @ApiProperty({
-        type       : Object,
+        type       : Array,
         description: 'scopes [input here api field description]',
     })
-    scopes?: any;
+    scopes?: string[];
 
     @ApiProperty({
-        type       : Object,
+        type       : Array,
         description: 'dApplicationCodes [input here api field description]',
     })
-    dApplicationCodes?: any;
+    dApplicationCodes?: string[];
 
     @ApiProperty({
         type       : Object,
@@ -65,10 +65,10 @@ export class IamUpdateAccountsDto
     dPermissions?: any;
 
     @ApiProperty({
-        type       : Object,
+        type       : Array,
         description: 'dTenants [input here api field description]',
     })
-    dTenants?: any;
+    dTenants?: string[];
 
     @ApiProperty({
         type       : Object,

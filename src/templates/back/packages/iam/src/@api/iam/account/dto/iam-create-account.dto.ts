@@ -47,16 +47,16 @@ export class IamCreateAccountDto
     clientId: string;
 
     @ApiProperty({
-        type       : Object,
+        type       : Array,
         description: 'scopes [input here api field description]',
     })
-    scopes?: any;
+    scopes?: string[];
 
     @ApiProperty({
-        type       : Object,
+        type       : Array,
         description: 'dApplicationCodes [input here api field description]',
     })
-    dApplicationCodes: any;
+    dApplicationCodes: string[];
 
     @ApiProperty({
         type       : Object,

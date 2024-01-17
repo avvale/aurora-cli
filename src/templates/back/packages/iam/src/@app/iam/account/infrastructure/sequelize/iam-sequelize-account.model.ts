@@ -190,16 +190,16 @@ export class IamAccountModel extends Model<IamAccountModel>
     @Column({
         field: 'scopes',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING()),
     })
-    scopes: any;
+    scopes: string[];
 
     @Column({
         field: 'dApplicationCodes',
         allowNull: false,
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.STRING()),
     })
-    dApplicationCodes: any;
+    dApplicationCodes: string[];
 
     @Column({
         field: 'dPermissions',
@@ -211,9 +211,9 @@ export class IamAccountModel extends Model<IamAccountModel>
     @Column({
         field: 'dTenants',
         allowNull: false,
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.UUID),
     })
-    dTenants: any;
+    dTenants: string[];
 
     @Column({
         field: 'meta',
