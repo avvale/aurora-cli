@@ -10,6 +10,9 @@ export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = 
         field      : '{{ toCamelCase (getPropertyName this) }}',
         sort       : '{{ toCamelCase (getPropertyName this) }}',
         translation: '{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getPropertyName this) }}',
+        {{#if (isUnaccentProperty this ../config) }}
+        isUnaccent : true,
+        {{/if}}
     },
     {{/unlessEq}}
     {{/if}}

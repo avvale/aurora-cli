@@ -468,3 +468,11 @@ export const getPropertyColumnDataType = (
 {
     return config.propertyTypesEquivalenceDashboardColumnDataTypes[property.type];
 };
+
+export const isUnaccentProperty = (
+    property: Property,
+    config: CliterConfig,
+): boolean =>
+{
+    return config.isUnaccentProperty[property.type];
+};

@@ -159,6 +159,7 @@ import './is-one-to-many-relationship-property';
 import './is-pivot-property';
 import './is-relationship-property';
 import './is-timezone-property';
+import './is-unaccent-property';
 import './is-undefined';
 import './loops';
 import './mocker';
