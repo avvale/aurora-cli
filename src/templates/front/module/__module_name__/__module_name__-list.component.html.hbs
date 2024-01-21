@@ -7,9 +7,16 @@
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
+                    {{#if schema.front.solidFontSetIcon }}
+                    fontSet="{{ schema.front.solidFontSetIcon }}"
+                    {{else}}
                     svgIcon="{{ ternary schema.front.solidIcon schema.front.solidIcon 'heroicons_outline:tag' }}"
+                    {{/if}}
                     class="icon-size-8 mr-2"
                 >
+                    {{#if schema.front.solidFontSetIcon }}
+                    {{ ternary schema.front.solidIcon schema.front.solidIcon 'heroicons_outline:tag' }}
+                    {{/if}}
                 </mat-icon>
                 \{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleName }}') }}
             </au-title>
@@ -24,9 +31,16 @@
                 [routerLink]="'new'"
             >
                 <mat-icon
+                    {{#if schema.front.solidFontSetIcon }}
+                    fontSet="{{ schema.front.solidFontSetIcon }}"
+                    {{else}}
                     svgIcon="{{ ternary schema.front.solidIcon schema.front.solidIcon 'heroicons_outline:tag' }}"
+                    {{/if}}
                     class="icon-size-5 mr-2"
                 >
+                    {{#if schema.front.solidFontSetIcon }}
+                    {{ ternary schema.front.solidIcon schema.front.solidIcon 'heroicons_outline:tag' }}
+                    {{/if}}
                 </mat-icon>
                 \{{ t('New.M') }}
             </button>

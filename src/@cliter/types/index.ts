@@ -89,8 +89,10 @@ export interface ModuleDefinitionSchema
     hasTenant: boolean;
     hasAuditing: boolean;
     front?: {
-        solidIcon?: string;
+        outlineFontSetIcon?: string;
         outlineIcon?: string;
+        solidFontSetIcon?: string;
+        solidIcon?: string;
     }
     aggregateProperties: Property[];
     additionalApis?: AdditionalApi[];
