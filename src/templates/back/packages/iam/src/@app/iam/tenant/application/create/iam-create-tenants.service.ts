@@ -9,6 +9,7 @@ import {
     IamTenantLogo,
     IamTenantMeta,
     IamTenantName,
+    IamTenantParentId,
     IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { CQMetadata } from '@aurorajs.dev/core';
@@ -26,6 +27,7 @@ export class IamCreateTenantsService
     async main(
         payload: {
             id: IamTenantId;
+            parentId: IamTenantParentId;
             name: IamTenantName;
             code: IamTenantCode;
             logo: IamTenantLogo;
@@ -39,6 +41,7 @@ export class IamCreateTenantsService
         // create aggregate with factory pattern
         const aggregateTenants = payload.map(tenant => IamTenant.register(
             tenant.id,
+            tenant.parentId,
             tenant.name,
             tenant.code,
             tenant.logo,

@@ -9,6 +9,7 @@ import {
     IamTenantLogo,
     IamTenantMeta,
     IamTenantName,
+    IamTenantParentId,
     IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { MockRepository, Utils } from '@aurorajs.dev/core';
@@ -45,6 +46,7 @@ export class IamMockTenantRepository extends MockRepository<IamTenant> implement
 
             this.collectionSource.push(IamTenant.register(
                 new IamTenantId(itemCollection.id),
+                new IamTenantParentId(itemCollection.parentId),
                 new IamTenantName(itemCollection.name),
                 new IamTenantCode(itemCollection.code),
                 new IamTenantLogo(itemCollection.logo),

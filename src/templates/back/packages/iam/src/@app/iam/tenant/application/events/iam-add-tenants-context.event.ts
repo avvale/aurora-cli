@@ -22,6 +22,7 @@ export class IamAddTenantsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(tenant =>
                     new IamCreatedTenantEvent(
                         tenant.id.value,
+                        tenant.parentId?.value,
                         tenant.name.value,
                         tenant.code?.value,
                         tenant.logo?.value,
@@ -44,6 +45,7 @@ export class IamAddTenantsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(tenant =>
                     new IamUpdatedTenantEvent(
                         tenant.id.value,
+                        tenant.parentId?.value,
                         tenant.name.value,
                         tenant.code?.value,
                         tenant.logo?.value,
@@ -66,6 +68,7 @@ export class IamAddTenantsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(tenant =>
                     new IamDeletedTenantEvent(
                         tenant.id.value,
+                        tenant.parentId?.value,
                         tenant.name.value,
                         tenant.code?.value,
                         tenant.logo?.value,

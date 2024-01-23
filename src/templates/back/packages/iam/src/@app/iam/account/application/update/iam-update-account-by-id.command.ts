@@ -13,7 +13,6 @@ export class IamUpdateAccountByIdCommand
             scopes?: string[];
             dApplicationCodes?: string[];
             dPermissions?: any;
-            dTenants?: string[];
             meta?: any;
             roleIds?: string[];
             tenantIds?: string[];

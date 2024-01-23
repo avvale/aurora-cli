@@ -38,6 +38,7 @@ input IamCreateAccountInput
     meta: JSON
     roleIds: [ID]
     tenantIds: [ID]
+    hasAddChildTenants: GraphQLBoolean
     user: IamCreateUserInput
 }
 
@@ -53,6 +54,7 @@ input IamUpdateAccountByIdInput
     meta: JSON
     roleIds: [ID]
     tenantIds: [ID]
+    hasAddChildTenants: GraphQLBoolean
     user: IamUpdateUserByIdInput
 }
 

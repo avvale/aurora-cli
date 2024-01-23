@@ -147,7 +147,7 @@
 
                     <mat-form-field
                         appearance="outline"
-                        class="col-3"
+                        class="col-9"
                     >
                         <mat-label>{{ t('iam.Tenants') }}</mat-label>
                         <mat-select
@@ -164,9 +164,17 @@
                         <mat-error>{{ formErrors?.tenantIds | async }}</mat-error>
                     </mat-form-field>
 
+                    <div class="col-3 pt-5">
+                        <mat-checkbox
+                            formControlName="hasAddChildTenants"
+                        >
+                            {{ t('iam.AddChildTenants') }}
+                        </mat-checkbox>
+                    </div>
+
                     <mat-form-field
                         appearance="outline"
-                        class="col-3"
+                        class="col-start-1 col-3"
                     >
                         <mat-label>{{ t('iam.Scopes') }}</mat-label>
                         <mat-select

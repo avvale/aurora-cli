@@ -10,6 +10,7 @@ import {
     IamTenantLogo,
     IamTenantMeta,
     IamTenantName,
+    IamTenantParentId,
     IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
@@ -66,6 +67,7 @@ export class IamTenantMapper implements IMapper
     {
         return IamTenant.register(
             new IamTenantId(tenant.id, { undefinable: true }),
+            new IamTenantParentId(tenant.parentId, { undefinable: true }),
             new IamTenantName(tenant.name, { undefinable: true }),
             new IamTenantCode(tenant.code, { undefinable: true }),
             new IamTenantLogo(tenant.logo, { undefinable: true }),
@@ -75,6 +77,7 @@ export class IamTenantMapper implements IMapper
             new IamTenantCreatedAt(tenant.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new IamTenantUpdatedAt(tenant.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new IamTenantDeletedAt(tenant.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            this.options.eagerLoading ? new IamTenantMapper({ eagerLoading: true }).mapModelToAggregate(tenant.parent, cQMetadata) : undefined,
             this.options.eagerLoading ? new IamAccountMapper({ eagerLoading: true }).mapModelsToAggregates(tenant.accounts, cQMetadata) : undefined,
         );
     }
@@ -85,6 +88,7 @@ export class IamTenantMapper implements IMapper
 
         return new IamTenantResponse(
             tenant.id.value,
+            tenant.parentId.value,
             tenant.name.value,
             tenant.code.value,
             tenant.logo.value,
@@ -94,6 +98,7 @@ export class IamTenantMapper implements IMapper
             tenant.createdAt.value,
             tenant.updatedAt.value,
             tenant.deletedAt.value,
+            this.options.eagerLoading ? new IamTenantMapper({ eagerLoading: true }).mapAggregateToResponse(tenant.parent) : undefined,
             this.options.eagerLoading ? new IamAccountMapper({ eagerLoading: true }).mapAggregatesToResponses(tenant.accounts) : undefined,
         );
     }

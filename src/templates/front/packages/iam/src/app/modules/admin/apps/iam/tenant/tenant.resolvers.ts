@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { IamTenant } from '@apps/iam/iam.types';
 import { tenantColumnsConfig, TenantService } from '@apps/iam/tenant';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const tenantPaginationResolver: ResolveFn<GridData<IamTenant>> = (
     route: ActivatedRouteSnapshot,
@@ -34,20 +34,26 @@ export const tenantPaginationResolver: ResolveFn<GridData<IamTenant>> = (
     });
 };
 
-export const tenantNewResolver: ResolveFn<Action> = (
+export const tenantNewResolver: ResolveFn<{
+    iamGetTenants: IamTenant[];
+}> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
     const actionService = inject(ActionService);
+    const tenantService = inject(TenantService);
 
-    return actionService.action({
+    actionService.action({
         id          : 'iam::tenant.detail.new',
         isViewAction: true,
     });
+
+    return tenantService.getRelations();
 };
 
 export const tenantEditResolver: ResolveFn<{
+    iamGetTenants: IamTenant[];
     object: IamTenant;
 }> = (
     route: ActivatedRouteSnapshot,
@@ -63,7 +69,7 @@ export const tenantEditResolver: ResolveFn<{
     });
 
     return tenantService
-        .findById({
+        .findByIdWithRelations({
             id: route.paramMap.get('id'),
         });
 };

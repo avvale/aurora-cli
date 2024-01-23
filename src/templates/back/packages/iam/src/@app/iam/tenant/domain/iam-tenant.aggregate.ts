@@ -11,6 +11,7 @@ import {
     IamTenantLogo,
     IamTenantMeta,
     IamTenantName,
+    IamTenantParentId,
     IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { LiteralObject, Utils } from '@aurorajs.dev/core';
@@ -19,6 +20,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 export class IamTenant extends AggregateRoot
 {
     id: IamTenantId;
+    parentId: IamTenantParentId;
     name: IamTenantName;
     code: IamTenantCode;
     logo: IamTenantLogo;
@@ -28,10 +30,12 @@ export class IamTenant extends AggregateRoot
     createdAt: IamTenantCreatedAt;
     updatedAt: IamTenantUpdatedAt;
     deletedAt: IamTenantDeletedAt;
+    parent: IamTenant;
     accounts: IamAccount[];
 
     constructor(
         id: IamTenantId,
+        parentId: IamTenantParentId,
         name: IamTenantName,
         code: IamTenantCode,
         logo: IamTenantLogo,
@@ -41,11 +45,13 @@ export class IamTenant extends AggregateRoot
         createdAt: IamTenantCreatedAt,
         updatedAt: IamTenantUpdatedAt,
         deletedAt: IamTenantDeletedAt,
+        parent?: IamTenant,
         accounts?: IamAccount[],
     )
     {
         super();
         this.id = id;
+        this.parentId = parentId;
         this.name = name;
         this.code = code;
         this.logo = logo;
@@ -55,11 +61,13 @@ export class IamTenant extends AggregateRoot
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+        this.parent = parent;
         this.accounts = accounts;
     }
 
     static register(
         id: IamTenantId,
+        parentId: IamTenantParentId,
         name: IamTenantName,
         code: IamTenantCode,
         logo: IamTenantLogo,
@@ -69,11 +77,13 @@ export class IamTenant extends AggregateRoot
         createdAt: IamTenantCreatedAt,
         updatedAt: IamTenantUpdatedAt,
         deletedAt: IamTenantDeletedAt,
+        parent?: IamTenant,
         accounts?: IamAccount[],
     ): IamTenant
     {
         return new IamTenant(
             id,
+            parentId,
             name,
             code,
             logo,
@@ -83,6 +93,7 @@ export class IamTenant extends AggregateRoot
             createdAt,
             updatedAt,
             deletedAt,
+            parent,
             accounts,
         );
     }
@@ -92,6 +103,7 @@ export class IamTenant extends AggregateRoot
         this.apply(
             new IamCreatedTenantEvent(
                 tenant.id.value,
+                tenant.parentId?.value,
                 tenant.name.value,
                 tenant.code?.value,
                 tenant.logo?.value,
@@ -110,6 +122,7 @@ export class IamTenant extends AggregateRoot
         this.apply(
             new IamUpdatedTenantEvent(
                 tenant.id?.value,
+                tenant.parentId?.value,
                 tenant.name?.value,
                 tenant.code?.value,
                 tenant.logo?.value,
@@ -128,6 +141,7 @@ export class IamTenant extends AggregateRoot
         this.apply(
             new IamDeletedTenantEvent(
                 tenant.id.value,
+                tenant.parentId?.value,
                 tenant.name.value,
                 tenant.code?.value,
                 tenant.logo?.value,
@@ -145,6 +159,7 @@ export class IamTenant extends AggregateRoot
     {
         return {
             id: this.id.value,
+            parentId: this.parentId?.value,
             name: this.name.value,
             code: this.code?.value,
             logo: this.logo?.value,
@@ -154,6 +169,7 @@ export class IamTenant extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
+            parent: this.parent?.toDTO(),
             accounts: this.accounts?.map(item => item.toDTO()),
         };
     }
@@ -163,6 +179,7 @@ export class IamTenant extends AggregateRoot
     {
         return {
             id: this.id.value,
+            parentId: this.parentId?.value,
             name: this.name.value,
             code: this.code?.value,
             logo: this.logo?.buffer,
@@ -172,6 +189,7 @@ export class IamTenant extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
+            parent: this.parent?.toDTO(),
             accounts: this.accounts?.map(item => item.toDTO()),
         };
     }

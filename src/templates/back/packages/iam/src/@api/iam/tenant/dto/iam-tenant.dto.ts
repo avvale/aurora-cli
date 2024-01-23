@@ -12,6 +12,19 @@ export class IamTenantDto
 
     @ApiProperty({
         type       : String,
+        description: 'parentId [input here api field description]',
+        example    : '186fc6f7-0160-5e63-9872-355a648c32d2',
+    })
+    parentId?: string;
+
+    @ApiProperty({
+        type       : () => IamTenantDto,
+        description: 'IamTenant [input here api field description]',
+    })
+    parent?: IamTenantDto;
+
+    @ApiProperty({
+        type       : String,
         description: 'name [input here api field description]',
     })
     name: string;

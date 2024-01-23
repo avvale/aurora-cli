@@ -89,6 +89,13 @@ export class IamUpdateAccountByIdDto
     tenantIds?: string[];
 
     @ApiProperty({
+        type       : Boolean,
+        description: 'hasAddChildTenants [input here api field description]',
+        example    : true,
+    })
+    hasAddChildTenants?: boolean;
+
+    @ApiProperty({
         type       : IamUpdateUserByIdDto,
         description: 'user [input here api field description]',
     })

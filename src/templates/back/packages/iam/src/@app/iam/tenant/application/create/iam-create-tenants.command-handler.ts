@@ -9,6 +9,7 @@ import {
     IamTenantLogo,
     IamTenantMeta,
     IamTenantName,
+    IamTenantParentId,
 } from '@app/iam/tenant/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
@@ -28,6 +29,7 @@ export class IamCreateTenantsCommandHandler implements ICommandHandler<IamCreate
                 {
                     return {
                         id: new IamTenantId(tenant.id),
+                        parentId: new IamTenantParentId(tenant.parentId),
                         name: new IamTenantName(tenant.name),
                         code: new IamTenantCode(tenant.code),
                         logo: new IamTenantLogo(tenant.logo),

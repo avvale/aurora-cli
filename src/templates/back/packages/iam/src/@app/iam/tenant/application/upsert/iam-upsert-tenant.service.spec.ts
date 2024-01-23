@@ -9,6 +9,7 @@ import {
     IamTenantLogo,
     IamTenantMeta,
     IamTenantName,
+    IamTenantParentId,
 } from '@app/iam/tenant/domain/value-objects';
 import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -54,6 +55,7 @@ describe('IamUpsertTenantService', () =>
                 await service.main(
                     {
                         id: new IamTenantId(iamMockTenantData[0].id),
+                        parentId: new IamTenantParentId(iamMockTenantData[0].parentId),
                         name: new IamTenantName(iamMockTenantData[0].name),
                         code: new IamTenantCode(iamMockTenantData[0].code),
                         logo: new IamTenantLogo(iamMockTenantData[0].logo),

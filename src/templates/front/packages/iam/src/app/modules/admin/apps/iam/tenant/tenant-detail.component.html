@@ -82,6 +82,31 @@
                         appearance="outline"
                         class="col-12"
                     >
+                        <mat-label>{{ t('iam.ParentId') }}</mat-label>
+                        <mat-select
+                            formControlName="parentId"
+                        >
+                            <mat-option>
+                                <ngx-mat-select-search
+                                    [formControl]="parentTenantFilterCtrl"
+                                    [placeholderLabel]="t('iam.FindTenant')"
+                                    [noEntriesFoundLabel]="t('NoResultsFound')"
+                                >
+                                </ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option
+                                *ngFor="let parentTenant of filteredParentTenants$ | async"
+                                [value]="parentTenant.id"
+                            >
+                                {{ parentTenant.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.parentId | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
                         <mat-label>{{ t('iam.Name') }}</mat-label>
                         <input
                             matInput

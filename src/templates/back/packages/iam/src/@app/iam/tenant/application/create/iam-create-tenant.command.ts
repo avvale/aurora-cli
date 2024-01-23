@@ -5,6 +5,7 @@ export class IamCreateTenantCommand
     constructor(
         public readonly payload: {
             id: string;
+            parentId?: string;
             name: string;
             code?: string;
             logo?: string;

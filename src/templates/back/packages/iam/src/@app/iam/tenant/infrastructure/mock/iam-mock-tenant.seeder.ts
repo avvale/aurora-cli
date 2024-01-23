@@ -9,6 +9,7 @@ import {
     IamTenantLogo,
     IamTenantMeta,
     IamTenantName,
+    IamTenantParentId,
     IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { MockSeeder } from '@aurorajs.dev/core';
@@ -35,6 +36,7 @@ export class IamMockTenantSeeder extends MockSeeder<IamTenant>
             this.collectionSource.push(
                 IamTenant.register(
                     new IamTenantId(tenant.id),
+                    new IamTenantParentId(tenant.parentId),
                     new IamTenantName(tenant.name),
                     new IamTenantCode(tenant.code),
                     new IamTenantLogo(tenant.logo),

@@ -1,3 +1,4 @@
+import { findByIdWithRelationsQuery, getRelations } from './tenant.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { IamCreateTenant, IamTenant, IamUpdateTenantById, IamUpdateTenants } from '@apps/iam/iam.types';
@@ -112,6 +113,56 @@ export class TenantService
             );
     }
 
+    findByIdWithRelations(
+        {
+            graphqlStatement = findByIdWithRelationsQuery,
+            id = '',
+            constraint = {},
+            headers = {},
+            queryTenants = {},
+            constraintTenants = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            id?: string;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+            queryTenants?: QueryStatement;
+            constraintTenants?: QueryStatement;
+        } = {},
+    ): Observable<{
+        object: IamTenant;
+        iamGetTenants: IamTenant[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                object: IamTenant;
+                iamGetTenants: IamTenant[];
+            }>({
+                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                variables: {
+                    id,
+                    constraint,
+                    queryTenants,
+                    constraintTenants,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.tenantSubject$.next(data.object);
+                    this.tenantsSubject$.next(data.iamGetTenants);
+                }),
+            );
+    }
+
     find(
         {
             graphqlStatement = findQuery,
@@ -190,6 +241,45 @@ export class TenantService
                 tap(data =>
                 {
                     this.tenantsSubject$.next(data.objects);
+                }),
+            );
+    }
+
+    getRelations(
+        {
+            queryTenants = {},
+            constraintTenants = {},
+            headers = {},
+        }: {
+            queryTenants?: QueryStatement;
+            constraintTenants?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<{
+        iamGetTenants: IamTenant[];
+    }>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                iamGetTenants: IamTenant[];
+            }>({
+                query    : getRelations,
+                variables: {
+                    queryTenants,
+                    constraintTenants,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    this.tenantsSubject$.next(data.iamGetTenants);
                 }),
             );
     }

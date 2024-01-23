@@ -125,16 +125,17 @@ export class AccountDetailComponent extends ViewDetailComponent
     createForm(): void
     {
         this.fg = this.fb.group({
-            id       : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            type     : ['', [Validators.required]],
-            code     : ['', [Validators.maxLength(50)]],
-            email    : ['', [Validators.required, Validators.maxLength(120)]],
-            isActive : false,
-            clientId : '',
-            scopes   : [],
-            tenantIds: [],
-            roleIds  : [],
-            user     : this.fb.group({
+            id                : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            type              : ['', [Validators.required]],
+            code              : ['', [Validators.maxLength(50)]],
+            email             : ['', [Validators.required, Validators.maxLength(120)]],
+            isActive          : false,
+            clientId          : '',
+            scopes            : [],
+            tenantIds         : [],
+            hasAddChildTenants: false,
+            roleIds           : [],
+            user              : this.fb.group({
                 id            : '',
                 name          : ['', [Validators.required, Validators.maxLength(255)]],
                 surname       : ['', [Validators.required, Validators.maxLength(255)]],

@@ -2,6 +2,8 @@
 type IamTenant
 {
     id: ID!
+    parentId: ID
+    parent: IamTenant
     name: GraphQLString!
     code: GraphQLString
     logo: GraphQLString
@@ -16,6 +18,7 @@ type IamTenant
 input IamCreateTenantInput
 {
     id: ID!
+    parentId: ID
     name: GraphQLString!
     code: GraphQLString
     logo: GraphQLString
@@ -27,6 +30,7 @@ input IamCreateTenantInput
 input IamUpdateTenantByIdInput
 {
     id: ID!
+    parentId: ID
     name: GraphQLString
     code: GraphQLString
     logo: GraphQLString
@@ -38,6 +42,7 @@ input IamUpdateTenantByIdInput
 input IamUpdateTenantsInput
 {
     id: ID
+    parentId: ID
     name: GraphQLString
     code: GraphQLString
     logo: GraphQLString

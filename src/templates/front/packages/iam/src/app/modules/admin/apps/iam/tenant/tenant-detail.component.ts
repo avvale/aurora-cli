@@ -1,10 +1,14 @@
+import { NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 import { IamTenant } from '@apps/iam/iam.types';
 import { TenantService } from '@apps/iam/tenant';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
+import { Action, Crumb, defaultDetailImports, log, mapActions, SelectSearchService, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, Observable, ReplaySubject, takeUntil } from 'rxjs';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @Component({
     selector       : 'iam-tenant-detail',
@@ -14,19 +18,24 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatCheckboxModule,
+        MatCheckboxModule, MatSelectModule, NgForOf, NgxMatSelectSearchModule,
     ],
 })
 export class TenantDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
-    // ..
+    // parent tenant filter
+    parentTenantFilterCtrl: FormControl = new FormControl<string>('');
+    filteredParentTenants$: ReplaySubject<IamTenant[]> = new ReplaySubject<IamTenant[]>(1);
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
     managedObject: IamTenant;
+
+    // relationships
+    parentTenants$: Observable<IamTenant[]>;
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
@@ -37,9 +46,13 @@ export class TenantDetailComponent extends ViewDetailComponent
 
     constructor(
         private readonly tenantService: TenantService,
+        private readonly selectSearchService: SelectSearchService,
     )
     {
         super();
+
+        // organizational entities
+        this.initParentTenantsFilter(this.activatedRoute.snapshot.data.data.iamGetTenants);
     }
 
     // this method will be called after the ngOnInit of
@@ -47,6 +60,27 @@ export class TenantDetailComponent extends ViewDetailComponent
     init(): void
     {
         /**/
+        this.parentTenants$ = this.tenantService.tenants$;
+    }
+
+    initParentTenantsFilter(parentTenants: IamTenant[]): void
+    {
+        // init select filter with all items
+        this.filteredParentTenants$.next(parentTenants);
+
+        // listen for country search field value changes
+        this.parentTenantFilterCtrl
+            .valueChanges
+            .pipe(takeUntilDestroyed())
+            .subscribe(async () =>
+            {
+                this.selectSearchService
+                    .filterSelect<IamTenant>(
+                        this.parentTenantFilterCtrl,
+                        parentTenants,
+                        this.filteredParentTenants$,
+                    );
+            });
     }
 
     onSubmit($event): void
@@ -84,6 +118,7 @@ export class TenantDetailComponent extends ViewDetailComponent
     {
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            parentId: [null, [Validators.minLength(36), Validators.maxLength(36)]],
             name: ['', [Validators.required, Validators.maxLength(127)]],
             code: ['', [Validators.maxLength(63)]],
             logo: ['', [Validators.maxLength(255)]],

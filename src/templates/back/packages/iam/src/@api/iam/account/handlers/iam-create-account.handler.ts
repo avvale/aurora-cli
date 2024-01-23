@@ -3,9 +3,10 @@ import { IamAccountDto, IamCreateAccountDto } from '@api/iam/account';
 import { IamCreateAccountCommand, IamFindAccountByIdQuery, IamGetAccountsQuery } from '@app/iam/account';
 import { IamGetRolesQuery } from '@app/iam/role';
 import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
+import { IamGetTenantsQuery } from '@app/iam/tenant';
 import { IamCreateUserCommand, IamGetUsersQuery } from '@app/iam/user';
 import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
-import { AuditingMeta, ICommandBus, IQueryBus, Jwt, LiteralObject, Operator, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, Jwt, LiteralObject, Operator, Utils, getNestedObjectsFromParentId } from '@aurorajs.dev/core';
 import { ConflictException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
@@ -104,6 +105,28 @@ export class IamCreateAccountHandler
                 },
             ],
         }));
+
+
+        if (payload.hasAddChildTenants)
+        {
+            // get all tenants to get children tenants
+            const tenants = await this.queryBus.ask(new IamGetTenantsQuery());
+            const accountTenantIds = new Set<string>();
+
+            for (const tenantId of payload.tenantIds)
+            {
+                // add parent tenantId
+                accountTenantIds.add(tenantId);
+
+                for (const tenant of getNestedObjectsFromParentId(tenants, tenantId))
+                {
+                    accountTenantIds.add(tenant.id);
+                }
+            }
+
+            // add all children tenant ids
+            payload.tenantIds = [...accountTenantIds];
+        }
 
         const operationId = Utils.uuid();
 

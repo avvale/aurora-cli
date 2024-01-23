@@ -3,8 +3,9 @@ import { IamAccountDto, IamUpdateAccountByIdDto } from '@api/iam/account';
 import { IamFindAccountByIdQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
 import { IamGetRolesQuery } from '@app/iam/role';
 import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
+import { IamGetTenantsQuery } from '@app/iam/tenant';
 import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils, getNestedObjectsFromParentId } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -45,9 +46,31 @@ export class IamUpdateAccountByIdHandler
             dataToUpdate['dPermissions'] = iamCreatePermissionsFromRoles(roles);
         }
 
-        if ('tenantIds' in dataToUpdate)
+        // if hasAddChildTenants, we need to get all children tenants, even if tenants doesn't changed
+        if (payload.hasAddChildTenants)
         {
-            dataToUpdate['dTenants'] = dataToUpdate.tenantIds;
+            // get all tenants to get children tenants
+            const tenants = await this.queryBus.ask(new IamGetTenantsQuery());
+            const accountTenantIds = new Set<string>();
+
+            for (const tenantId of payload.tenantIds)
+            {
+                // add parent tenantId
+                accountTenantIds.add(tenantId);
+
+                for (const tenant of getNestedObjectsFromParentId(tenants, tenantId))
+                {
+                    accountTenantIds.add(tenant.id);
+                }
+            }
+
+            // add all children tenant ids
+            dataToUpdate['tenantIds'] = [...accountTenantIds];
+        }
+        else
+        {
+            // to update avoid array diff, we need to set the tenantIds from payload
+            if ('tenantIds' in dataToUpdate) dataToUpdate['tenantIds'] = payload.tenantIds;
         }
 
         const operationId = Utils.uuid();

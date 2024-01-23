@@ -50,17 +50,23 @@ aggregateProperties:
       field: client
       avoidConstraint: true
   - name: scopes
-    type: json
+    type: array
     nullable: true
+    arrayOptions:
+      type: varchar
   - name: dApplicationCodes
-    type: json
+    type: array
     nullable: false
+    arrayOptions:
+      type: varchar
   - name: dPermissions
     type: json
     nullable: false
   - name: dTenants
-    type: json
+    type: array
     nullable: false
+    arrayOptions:
+      type: id
   - name: meta
     type: json
     nullable: true

@@ -189,6 +189,22 @@ describe('tenant', () =>
             });
     });
 
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantParentId is not allowed, must be a length of 36', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/tenant/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                parentId: '*************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for IamTenantParentId is not allowed, must be a length of 36');
+            });
+    });
+
     test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantName is too large, has a maximum length of 127', () =>
     {
         return request(app.getHttpServer())
@@ -409,6 +425,7 @@ describe('tenant', () =>
                         iamCreateTenant (payload:$payload)
                         {
                             id
+                            parentId
                             name
                             code
                             logo
@@ -514,6 +531,7 @@ describe('tenant', () =>
                         iamCreateTenant (payload:$payload)
                         {
                             id
+                            parentId
                             name
                             code
                             logo

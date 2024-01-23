@@ -40,6 +40,7 @@ describe('IamUpsertTenantCommandHandler', () =>
                 new IamUpsertTenantCommand(
                     {
                         id: iamMockTenantData[0].id,
+                        parentId: iamMockTenantData[0].parentId,
                         name: iamMockTenantData[0].name,
                         code: iamMockTenantData[0].code,
                         logo: iamMockTenantData[0].logo,

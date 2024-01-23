@@ -39,7 +39,7 @@ export class IamUpdateAccountByIdCommandHandler implements ICommandHandler<IamUp
                 scopes: new IamAccountScopes(command.payload.scopes),
                 dApplicationCodes: new IamAccountDApplicationCodes(command.payload.dApplicationCodes, { undefinable: true }),
                 dPermissions: new IamAccountDPermissions(command.payload.dPermissions, { undefinable: true }),
-                dTenants: new IamAccountDTenants(command.payload.dTenants, { undefinable: true }),
+                dTenants: new IamAccountDTenants(command.payload.tenantIds, { undefinable: true }),
                 meta: new IamAccountMeta(command.payload.meta),
                 roleIds: new IamAccountRoleIds(command.payload.roleIds),
                 tenantIds: new IamAccountTenantIds(command.payload.tenantIds),

@@ -5,6 +5,7 @@ export class IamUpdateTenantsCommand
     constructor(
         public readonly payload: {
             id?: string;
+            parentId?: string;
             name?: string;
             code?: string;
             logo?: string;

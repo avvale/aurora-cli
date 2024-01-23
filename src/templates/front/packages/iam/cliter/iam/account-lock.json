@@ -15,7 +15,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account-detail.component.ts",
-            "integrity": "sha1:79d55700dba7aef8389ecfb8fb8a25065f105652"
+            "integrity": "sha1:d1f40b11c774fb4e8305d5ca24d0a938cbe237e3"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account-list.component.html",

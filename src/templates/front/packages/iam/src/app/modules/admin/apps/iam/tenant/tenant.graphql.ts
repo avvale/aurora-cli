@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    parentId
     name
     code
     logo
@@ -14,6 +15,17 @@ export const fields = `
 `;
 
 export const relationsFields = `
+    iamGetTenants (
+        query: $queryTenants
+        constraint: $constraintTenants
+    ) {
+        id
+        name
+        code
+        logo
+        isActive
+        meta
+    }
 `;
 
 // default methods
@@ -48,6 +60,15 @@ export const getQuery = gql`
     }
 `;
 
+export const getRelations = gql`
+    query IamGetTenantsRelations(
+        $queryTenants: QueryStatement
+        $constraintTenants: QueryStatement
+    ) {
+        ${relationsFields}
+    }
+`;
+
 export const findByIdQuery = gql`
     query IamFindTenantById (
         $id: ID
@@ -60,6 +81,24 @@ export const findByIdQuery = gql`
             id
             #FIELDS
         }
+    }
+`;
+
+export const findByIdWithRelationsQuery = gql`
+    query IamFindTenantByIdWithRelations (
+        $id: ID
+        $constraint: QueryStatement
+        $queryTenants: QueryStatement
+        $constraintTenants: QueryStatement
+    ) {
+        object: iamFindTenantById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+        ${relationsFields}
     }
 `;
 
