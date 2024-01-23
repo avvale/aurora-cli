@@ -116,6 +116,7 @@ export class TenantDetailComponent extends ViewDetailComponent
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             parentId: [null, [Validators.minLength(36), Validators.maxLength(36)]],
@@ -125,6 +126,7 @@ export class TenantDetailComponent extends ViewDetailComponent
             isActive: false,
             accountIds: [],
         });
+        /* eslint-enable key-spacing */
     }
 
     async handleAction(action: Action): Promise<void>

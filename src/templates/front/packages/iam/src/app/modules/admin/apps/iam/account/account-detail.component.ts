@@ -2,20 +2,22 @@ import { IamAccountType, IamRole, IamTenant } from '../iam.types';
 import { TenantService } from '../tenant/tenant.service';
 import { KeyValuePipe, NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AccountService } from '@apps/iam/account';
 import { IamAccount } from '@apps/iam/iam.types';
-import { Action, CoreGetLangsService, CoreLang, Crumb, defaultDetailImports, log, mapActions, OAuthClientGrantType, Utils, ViewDetailComponent } from '@aurora';
-import { BehaviorSubject, lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { Action, CoreGetLangsService, CoreLang, Crumb, defaultDetailImports, log, mapActions, OAuthClientGrantType, SelectSearchService, Utils, ViewDetailComponent } from '@aurora';
+import { BehaviorSubject, lastValueFrom, Observable, ReplaySubject, takeUntil } from 'rxjs';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { RoleService } from '../role';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { OAuthClient, OAuthScope } from '@apps/o-auth/o-auth.types';
 import { ClientService } from '@apps/o-auth/client';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @Component({
     selector       : 'iam-account-detail',
@@ -25,7 +27,7 @@ import { ClientService } from '@apps/o-auth/client';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        KeyValuePipe, MatCheckboxModule, MatPasswordStrengthModule, MatSelectModule, MatToolbarModule, NgForOf,
+        KeyValuePipe, MatCheckboxModule, MatPasswordStrengthModule, MatSelectModule, MatToolbarModule, NgForOf, NgxMatSelectSearchModule,
     ],
 })
 export class AccountDetailComponent extends ViewDetailComponent
@@ -38,6 +40,8 @@ export class AccountDetailComponent extends ViewDetailComponent
     isShowPassword: boolean = false;
     scopeOptions$: BehaviorSubject<OAuthScope[]> = new BehaviorSubject<OAuthScope[]>([]);
     langs$: Observable<CoreLang[]>;
+    tenantFilterCtrl: FormControl = new FormControl<string>('');
+    filteredTenants$: ReplaySubject<IamTenant[]> = new ReplaySubject<IamTenant[]>(1);
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
@@ -66,9 +70,13 @@ export class AccountDetailComponent extends ViewDetailComponent
         private readonly roleService: RoleService,
         private readonly clientService: ClientService,
         private readonly coreGetLangsService: CoreGetLangsService,
+        private readonly selectSearchService: SelectSearchService,
     )
     {
         super();
+
+        // tenants
+        this.initTenantsFilter(this.activatedRoute.snapshot.data.data.iamGetTenants);
     }
 
     // this method will be called after the ngOnInit of
@@ -82,6 +90,26 @@ export class AccountDetailComponent extends ViewDetailComponent
 
         // set all clients to be filtered according account type, and action
         this.originClients = this.clientService.clientsSubject$.value;
+    }
+
+    initTenantsFilter(parentTenants: IamTenant[]): void
+    {
+        // init select filter with all items
+        this.filteredTenants$.next(parentTenants);
+
+        // listen for country search field value changes
+        this.tenantFilterCtrl
+            .valueChanges
+            .pipe(takeUntilDestroyed())
+            .subscribe(async () =>
+            {
+                this.selectSearchService
+                    .filterSelect<IamTenant>(
+                        this.tenantFilterCtrl,
+                        parentTenants,
+                        this.filteredTenants$,
+                    );
+            });
     }
 
     onSubmit($event): void

@@ -154,8 +154,16 @@
                             formControlName="tenantIds"
                             multiple
                         >
+                            <mat-option>
+                                <ngx-mat-select-search
+                                    [formControl]="tenantFilterCtrl"
+                                    [placeholderLabel]="t('iam.FindTenant')"
+                                    [noEntriesFoundLabel]="t('NoResultsFound')"
+                                >
+                                </ngx-mat-select-search>
+                            </mat-option>
                             <mat-option
-                                *ngFor="let tenant of tenants$ | async"
+                                *ngFor="let tenant of filteredTenants$ | async"
                                 [value]="tenant.id"
                             >
                                 {{ tenant.name }}
