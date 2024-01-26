@@ -1,7 +1,7 @@
 import { IamRoleAccount, IamUpdateRoleAccountByIdInput } from '@api/graphql';
 import { IamRoleAccountDto, IamUpdateRoleAccountByIdDto } from '@api/iam/role-account';
 import { IamFindRoleAccountByIdQuery, IamUpdateRoleAccountByIdCommand } from '@app/iam/role-account';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class IamUpdateRoleAccountByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, roleAccount);
+        const dataToUpdate = diff(payload, roleAccount);
 
         await this.commandBus.dispatch(new IamUpdateRoleAccountByIdCommand(
             {

@@ -7,8 +7,8 @@ import { Utils } from '@aurorajs.dev/core';
 // and that the value of tenantId sent, the user has access to that tenant
 export const TenantPolicy = ({
     targetProperty = 'tenantIds',
-    payloadIndex  = 0,
-    isArray       = true,
+    payloadIndex   = 1,
+    isArray        = true,
 }: {
     targetProperty?: string; // name of the property containing the tenantId in the payload
     payloadIndex?: number;   // index of the payload in the arguments

@@ -1,7 +1,7 @@
 import { IamPermission, IamUpdatePermissionByIdInput } from '@api/graphql';
 import { IamPermissionDto, IamUpdatePermissionByIdDto } from '@api/iam/permission';
 import { IamFindPermissionByIdQuery, IamUpdatePermissionByIdCommand } from '@app/iam/permission';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class IamUpdatePermissionByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, permission);
+        const dataToUpdate = diff(payload, permission);
 
         await this.commandBus.dispatch(new IamUpdatePermissionByIdCommand(
             {

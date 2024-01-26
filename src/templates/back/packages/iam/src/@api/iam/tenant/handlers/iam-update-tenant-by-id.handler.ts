@@ -1,7 +1,7 @@
 import { IamTenant, IamUpdateTenantByIdInput } from '@api/graphql';
 import { IamTenantDto, IamUpdateTenantByIdDto } from '@api/iam/tenant';
 import { IamFindTenantByIdQuery, IamUpdateTenantByIdCommand } from '@app/iam/tenant';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class IamUpdateTenantByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, tenant);
+        const dataToUpdate = diff(payload, tenant);
 
         await this.commandBus.dispatch(new IamUpdateTenantByIdCommand(
             {

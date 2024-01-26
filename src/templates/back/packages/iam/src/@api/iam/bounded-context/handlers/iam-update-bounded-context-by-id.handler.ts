@@ -1,7 +1,7 @@
 import { IamBoundedContext, IamUpdateBoundedContextByIdInput } from '@api/graphql';
 import { IamBoundedContextDto, IamUpdateBoundedContextByIdDto } from '@api/iam/bounded-context';
 import { IamFindBoundedContextByIdQuery, IamUpdateBoundedContextByIdCommand } from '@app/iam/bounded-context';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class IamUpdateBoundedContextByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, boundedContext);
+        const dataToUpdate = diff(payload, boundedContext);
 
         await this.commandBus.dispatch(new IamUpdateBoundedContextByIdCommand(
             {

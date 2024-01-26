@@ -39,7 +39,7 @@
 {{
     push importsArray
         (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
-        (object items='TenantPolicy' path=(sumStrings config.apiContainer '/iam/shared'))
+        (object items='TenantConstraint' path=(sumStrings config.apiContainer '/iam/shared'))
         (object items='CurrentAccount' path=config.auroraCorePackage)
 ~}}
 {{/if}}
@@ -59,7 +59,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
     @ApiOperation({ summary: 'Delete {{ toKebabCase schema.moduleName }} by id' })
     @ApiOkResponse({ description: 'The record has been deleted successfully.', type: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto })
     {{#if schema.hasTenant}}
-    @TenantPolicy()
+    @TenantConstraint()
     {{/if}}
     async main(
         {{#if schema.hasTenant}}

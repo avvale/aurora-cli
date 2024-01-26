@@ -5,7 +5,7 @@ import { IamGetRolesQuery } from '@app/iam/role';
 import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
 import { IamGetTenantsQuery } from '@app/iam/tenant';
 import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils, getNestedObjectsFromParentId } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils, diff, getNestedObjectsFromParentId } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class IamUpdateAccountByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, account);
+        const dataToUpdate = diff(payload, account);
 
         if ('roleIds' in dataToUpdate)
         {
@@ -97,7 +97,7 @@ export class IamUpdateAccountByIdHandler
         {
             const user = await this.queryBus.ask(new IamFindUserByIdQuery(payload.user.id, constraint, { timezone }));
 
-            const dataToUpdate = Utils.diff(payload.user, user);
+            const dataToUpdate = diff(payload.user, user);
 
             // always password will be empty unless is changed
             if (dataToUpdate.password === '') delete dataToUpdate.password;
