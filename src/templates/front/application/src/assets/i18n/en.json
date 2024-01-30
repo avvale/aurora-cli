@@ -123,6 +123,7 @@
     "State": "State",
     "Status": "Status",
     "Surname": "Surname",
+    "SyncStatus": "Sync Status",
     "Tenant": "Tenant",
     "Translations": "Translations",
     "ToggleFullscreen": "Toggle Fullscreen",
