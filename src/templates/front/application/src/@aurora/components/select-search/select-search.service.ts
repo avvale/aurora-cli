@@ -19,7 +19,7 @@ export class SelectSearchService
         let search = filterCtrl.value;
         if (!search)
         {
-            objectsFiltered$.next(objects.slice());
+            objectsFiltered$.next([...objects]);
             return;
         }
         else
@@ -29,7 +29,8 @@ export class SelectSearchService
 
         // filter the objects
         objectsFiltered$.next(
-            objects.filter(object => object.name.toLowerCase().indexOf(search) > -1),
+            objects
+                .filter(object => object.name.toLowerCase().indexOf(search) > -1),
         );
     }
 }

@@ -187,3 +187,14 @@ export const deleteMutation = gql`
         }
     }
 `;
+
+// Mutation additionalApis
+export const inheritPermissionsRoleRoleMutation = gql`
+    mutation IamInheritPermissionsRoleRole (
+        $payload: IamInheritRoleInput!
+    ) {
+        iamInheritPermissionsRoleRole (
+            payload: $payload
+        )
+    }
+`;

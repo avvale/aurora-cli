@@ -35,7 +35,7 @@
                     {{ file.type }}
                 </p>
                 <p class="text-base opacity-60">
-                    {{ calculateSize(file.size).size }}{{ calculateSize(file.size).unit }}
+                    {{ (file.size | formatFileSize).size }}{{ (file.size | formatFileSize).unit }}
                 </p>
                 <button
                     class="ml-3"

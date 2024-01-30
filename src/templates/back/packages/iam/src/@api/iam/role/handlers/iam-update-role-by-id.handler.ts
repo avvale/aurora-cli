@@ -1,7 +1,7 @@
 import { IamRole, IamUpdateRoleByIdInput } from '@api/graphql';
 import { IamRoleDto, IamUpdateRoleByIdDto } from '@api/iam/role';
 import { IamFindRoleByIdQuery, IamUpdateRoleByIdCommand } from '@app/iam/role';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
+import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

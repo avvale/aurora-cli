@@ -38,6 +38,12 @@ input IamUpdateRolesInput
     accountIds: [ID]
 }
 
+input IamInheritRoleInput
+{
+    parentRoleId: ID!
+    childRoleId: ID!
+}
+
 type Query
 {
     iamFindRole(
@@ -96,5 +102,11 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [IamRole]!
+
+
+    # additionalApis
+    iamInheritPermissionsRoleRole(
+        payload: IamInheritRoleInput!
+    ): Boolean!
 
 }

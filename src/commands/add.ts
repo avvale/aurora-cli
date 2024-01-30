@@ -552,6 +552,13 @@ export class Add extends Command
                         'provideAurora',
                     );
 
+                    // TODO, comprobar si hace falta borrar AuthorizationService
+                    // remove AuthorizationService, will be replaced by AuthorizationAzureAdAdapterService defined in provideAzureAd()
+                    /* ArrayDriver.removeProviderArray(
+                        returnArray,
+                        'AuthorizationService',
+                    ); */
+
                     if (!ImportDriver.hasImportDeclarations(auroraProviderSourceFile, 'UserMetaStorageIamAdapterService'))
                     {
                         ImportDriver.createImportItems(

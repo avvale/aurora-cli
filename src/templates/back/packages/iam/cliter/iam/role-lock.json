@@ -327,7 +327,7 @@
         },
         {
             "path": "src/@app/iam/role/infrastructure/mock/iam-mock-role.data.ts",
-            "integrity": "sha1:bb57caf7ad5d7036387b70149c9e73fcb8b0b707"
+            "integrity": "sha1:0602b7921dcfdc25d990783d55a0e92067700662"
         },
         {
             "path": "src/@app/iam/role/infrastructure/mock/iam-mock-role.repository.ts",
@@ -699,7 +699,7 @@
         },
         {
             "path": "src/@app/iam/permission-role/infrastructure/mock/iam-mock-permission-role.data.ts",
-            "integrity": "sha1:9ad8b67e72d51b31f2728c92eaf5352307a4f742"
+            "integrity": "sha1:73d2d11f793d4a119846ef81e6911842d3b9b9d8"
         },
         {
             "path": "src/@app/iam/permission-role/infrastructure/mock/iam-mock-permission-role.repository.ts",
@@ -1047,7 +1047,7 @@
         },
         {
             "path": "src/@app/iam/role-account/infrastructure/mock/iam-mock-role-account.data.ts",
-            "integrity": "sha1:4433f5ea9845019eac0fdb975fb716c74eea3917"
+            "integrity": "sha1:35c3d333c196d61c5b96b7d93b8efb1b68d48e98"
         },
         {
             "path": "src/@app/iam/role-account/infrastructure/mock/iam-mock-role-account.repository.ts",
@@ -1191,7 +1191,7 @@
         },
         {
             "path": "src/@api/iam/role/graphql/iam-role.graphql",
-            "integrity": "sha1:640a72b3072b7d56492fc99f155f5d939abc6bd2"
+            "integrity": "sha1:774deba945e8dd4761a4579940be9e29313d6877"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-create-role.handler.spec.ts",
@@ -1263,7 +1263,7 @@
         },
         {
             "path": "src/@api/iam/role/handlers/iam-update-role-by-id.handler.ts",
-            "integrity": "sha1:e2814d548d5906235fb18648e60290db6db945f9"
+            "integrity": "sha1:098292bf5aea8fcf4b25df4060ee6868b25f128a"
         },
         {
             "path": "src/@api/iam/role/handlers/iam-update-roles.handler.spec.ts",
@@ -1283,7 +1283,7 @@
         },
         {
             "path": "src/@api/iam/role/index.ts",
-            "integrity": "sha1:d8cfb3ec6b297119951262d539be70ae24d280b8"
+            "integrity": "sha1:b6a3d73319946f504b2769afe3a880b16011223b"
         },
         {
             "path": "src/@api/iam/role/resolvers/iam-create-role.resolver.spec.ts",
@@ -1563,7 +1563,7 @@
         },
         {
             "path": "src/@api/iam/permission-role/handlers/iam-update-permission-role-by-id.handler.ts",
-            "integrity": "sha1:b33ed555c1456876fd411586f32725284ebffe51"
+            "integrity": "sha1:54609e5cea95048a6c8be8abd886666474f82387"
         },
         {
             "path": "src/@api/iam/permission-role/handlers/iam-update-permissions-roles.handler.spec.ts",
@@ -1863,7 +1863,7 @@
         },
         {
             "path": "src/@api/iam/role-account/handlers/iam-update-role-account-by-id.handler.ts",
-            "integrity": "sha1:fdb2ea06efd2259ad82d3c3ecc6a1a32770ee0c4"
+            "integrity": "sha1:75a2d28143c735ac0999f847a820e95e49a42255"
         },
         {
             "path": "src/@api/iam/role-account/handlers/iam-update-roles-accounts.handler.spec.ts",
@@ -1978,12 +1978,36 @@
             "integrity": "sha1:ab25bf87d6ae001881af4317370a215eab62b8b6"
         },
         {
+            "path": "src/@api/iam/role/controllers/iam-inherit-permissions-role-role.controller.spec.ts",
+            "integrity": "sha1:307c7380d3a82ca628192c47710666007184edc8"
+        },
+        {
+            "path": "src/@api/iam/role/controllers/iam-inherit-permissions-role-role.controller.ts",
+            "integrity": "sha1:c699a9b8f78559d02637080eb70b7bc0bc43664e"
+        },
+        {
+            "path": "src/@api/iam/role/handlers/iam-inherit-permissions-role-role.handler.spec.ts",
+            "integrity": "sha1:10c790458239ff98e086198a459a18a0d745b058"
+        },
+        {
+            "path": "src/@api/iam/role/handlers/iam-inherit-permissions-role-role.handler.ts",
+            "integrity": "sha1:f9cac96c474ef9de6e850ed9b00728cbe01652c4"
+        },
+        {
+            "path": "src/@api/iam/role/resolvers/iam-inherit-permissions-role-role.resolver.spec.ts",
+            "integrity": "sha1:63122c3f433e58ac7b84881dc631562151d028ae"
+        },
+        {
+            "path": "src/@api/iam/role/resolvers/iam-inherit-permissions-role-role.resolver.ts",
+            "integrity": "sha1:8516620d1f6988b1c5ec5c1b666a61e532a8a829"
+        },
+        {
             "path": "test/acceptance/iam/role.e2e-spec.ts",
             "integrity": "sha1:1552e1a2d1ffc6a1f108498f5e566b8e2f610e29"
         },
         {
             "path": "postman/iam/iam.role.postman.json",
-            "integrity": "sha1:aeb443948a964bc997380549d20b82936583b7c2"
+            "integrity": "sha1:c7d96058dca8a00bcbd8d281b423ea0f9c9dcfca"
         }
     ]
 }

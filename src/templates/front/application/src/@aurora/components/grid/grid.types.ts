@@ -14,6 +14,7 @@ export interface ColumnConfig
     sort?: string | string[];
     filterable?: boolean;       // field available to filter with columns filters
     searchable?: boolean;       // field available to search with general search
+    isUnaccent?: boolean;       // field available to search with unaccent search on global list search
     headerClass?: string | string[];
     bodyClass?: string | string[];
     sticky?: boolean;

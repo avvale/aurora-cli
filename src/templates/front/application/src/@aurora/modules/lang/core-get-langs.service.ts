@@ -10,9 +10,9 @@ import gql from 'graphql-tag';
 })
 export class CoreGetLangsService
 {
-    private langsSubject$: BehaviorSubject<CoreLang[] | null> = new BehaviorSubject(null);
-    private fallbackLangSubject$: BehaviorSubject<CoreLang | null> = new BehaviorSubject(null);
-    private searchKeyLangSubject$: BehaviorSubject<CoreSearchKeyLang | null> = new BehaviorSubject(null);
+    langsSubject$: BehaviorSubject<CoreLang[] | null> = new BehaviorSubject(null);
+    fallbackLangSubject$: BehaviorSubject<CoreLang | null> = new BehaviorSubject(null);
+    searchKeyLangSubject$: BehaviorSubject<CoreSearchKeyLang | null> = new BehaviorSubject(null);
 
     constructor(
         private readonly graphqlService: GraphQLService,

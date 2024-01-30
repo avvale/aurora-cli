@@ -1,10 +1,10 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auGridCustomButtonsHeaderDialogTemplate]',
+    selector  : '[auContentDialogTemplate]',
     standalone: true,
 })
-export class GridCustomButtonsHeaderDialogTemplateDirective
+export class ContentDialogTemplateDirective
 {
     constructor(
         public templateRef: TemplateRef<unknown>,

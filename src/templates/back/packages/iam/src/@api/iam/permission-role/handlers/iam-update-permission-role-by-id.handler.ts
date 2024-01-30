@@ -1,7 +1,7 @@
 import { IamPermissionRole, IamUpdatePermissionRoleByIdInput } from '@api/graphql';
 import { IamPermissionRoleDto, IamUpdatePermissionRoleByIdDto } from '@api/iam/permission-role';
 import { IamFindPermissionRoleByIdQuery, IamUpdatePermissionRoleByIdCommand } from '@app/iam/permission-role';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
+import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

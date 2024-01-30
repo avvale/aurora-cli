@@ -1,6 +1,6 @@
 import { IamPermission, IamPermissionRole } from '../iam.types';
 import { PermissionService } from '../permission/permission.service';
-import { findByIdWithRelationsQuery } from './role.graphql';
+import { findByIdWithRelationsQuery, inheritPermissionsRoleRoleMutation } from './role.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { IamCreateRole, IamRole, IamUpdateRoleById, IamUpdateRoles } from '@apps/iam/iam.types';
@@ -424,6 +424,27 @@ export class RoleService
                 },
                 context: {
                     headers,
+                },
+            });
+    }
+
+    // Mutation additionalApis
+    inheritPermissionsRoleRole<T>(
+        {
+            graphqlStatement = inheritPermissionsRoleRoleMutation,
+            object = null,
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: IamUpdateRoleById;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
                 },
             });
     }

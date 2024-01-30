@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, Inject, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { ContentDialogTemplateDirective } from './directives/content-dialog-template.directive';
+import { ActionsDialogTemplateDirective } from './directives/actions-dialog-template.directive';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector       : 'au-dialog',
@@ -8,6 +13,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation  : ViewEncapsulation.None,
     standalone     : true,
+    imports        : [
+        MatButtonModule, MatDialogModule, MatIconModule, NgIf, NgTemplateOutlet,
+    ],
 })
 export class DialogComponent
 {
@@ -18,9 +26,9 @@ export class DialogComponent
             icon: string;
             svgIcon: string;
             currentActionId: string;
-            content: TemplateRef<any>;
-            headerActions?: TemplateRef<any>;
-            footerActions?: TemplateRef<any>;
+            content: ContentDialogTemplateDirective;
+            headerActions?: ActionsDialogTemplateDirective;
+            footerActions?: ActionsDialogTemplateDirective;
         },
     ) { }
 }

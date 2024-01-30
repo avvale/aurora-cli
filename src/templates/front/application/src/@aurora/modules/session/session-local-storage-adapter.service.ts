@@ -49,10 +49,19 @@ export class SessionLocalStorageService extends SessionService
             Array.isArray(this.get('langs')) &&
             this.get('fallbackLang') &&
             this.get('searchKeyLang')
-        ) return;
+        )
+        {
+            // set coreGetLangsService data from session
+            this.coreGetLangsService.langsSubject$.next(this.get('langs'));
+            this.coreGetLangsService.fallbackLangSubject$.next(this.get('fallbackLang'));
+            this.coreGetLangsService.searchKeyLangSubject$.next(this.get('searchKeyLang'));
+
+            return;
+        }
 
         log('[DEBUG] Load minimum data in session');
 
+        // set coreGetLangsService data from database and save in session
         const data = await lastValueFrom(this.coreGetLangsService.get());
         this.set('langs', data.langs);
         this.set('fallbackLang', data.fallbackLang);

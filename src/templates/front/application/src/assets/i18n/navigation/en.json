@@ -25,5 +25,6 @@
     "roles": "Roles",
     "scopes": "Scopes",
     "sideEffects": "Side Effects",
-    "tenants": "Tenants"
+    "tenants": "Tenants",
+    "users": "Users"
 }

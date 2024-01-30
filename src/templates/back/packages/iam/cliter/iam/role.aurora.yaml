@@ -97,3 +97,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+additionalApis:
+  - path: iam/role/inherit-permissions-role
+    resolverType: mutation
+    httpMethod: post

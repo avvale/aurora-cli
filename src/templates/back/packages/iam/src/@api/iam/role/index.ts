@@ -43,6 +43,11 @@ export { IamUpsertRoleResolver } from './resolvers/iam-upsert-role.resolver';
 export { IamDeleteRoleByIdResolver } from './resolvers/iam-delete-role-by-id.resolver';
 export { IamDeleteRolesResolver } from './resolvers/iam-delete-roles.resolver';
 
+// export additionalApis
+export { IamInheritPermissionsRoleRoleController } from './controllers/iam-inherit-permissions-role-role.controller';
+export { IamInheritPermissionsRoleRoleHandler } from './handlers/iam-inherit-permissions-role-role.handler';
+export { IamInheritPermissionsRoleRoleResolver } from './resolvers/iam-inherit-permissions-role-role.resolver';
+
 // import controllers
 import { IamCreateRoleController } from './controllers/iam-create-role.controller';
 import { IamCreateRolesController } from './controllers/iam-create-roles.controller';
@@ -85,6 +90,11 @@ import { IamDeleteRolesHandler } from './handlers/iam-delete-roles.handler';
 // import seeder
 import { IamRoleSeeder } from './seeder/iam-role.seeder';
 
+// import additionalApis
+import { IamInheritPermissionsRoleRoleController } from './controllers/iam-inherit-permissions-role-role.controller';
+import { IamInheritPermissionsRoleRoleHandler } from './handlers/iam-inherit-permissions-role-role.handler';
+import { IamInheritPermissionsRoleRoleResolver } from './resolvers/iam-inherit-permissions-role-role.resolver';
+
 export const IamRoleApiControllers = [
     IamCreateRoleController,
     IamCreateRolesController,
@@ -97,6 +107,9 @@ export const IamRoleApiControllers = [
     IamUpsertRoleController,
     IamDeleteRoleByIdController,
     IamDeleteRolesController,
+
+    // additionalApis
+    IamInheritPermissionsRoleRoleController,
 ];
 
 export const IamRoleApiResolvers = [
@@ -111,6 +124,9 @@ export const IamRoleApiResolvers = [
     IamUpsertRoleResolver,
     IamDeleteRoleByIdResolver,
     IamDeleteRolesResolver,
+
+    // additionalApis
+    IamInheritPermissionsRoleRoleResolver,
 ];
 
 export const IamRoleApiHandlers = [
@@ -125,6 +141,9 @@ export const IamRoleApiHandlers = [
     IamUpsertRoleHandler,
     IamDeleteRoleByIdHandler,
     IamDeleteRolesHandler,
+
+    // additionalApis
+    IamInheritPermissionsRoleRoleHandler,
 ];
 
 export const IamRoleApiServices = [

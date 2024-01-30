@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { IamPermission, IamPermissionRole } from '../iam.types';
 import { PermissionService } from '../permission/permission.service';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
@@ -8,6 +7,7 @@ import { IamRole } from '@apps/iam/iam.types';
 import { RoleService } from '@apps/iam/role';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, GridState, GridStateService, log, mapActions, Operator, QueryStatementHandler, SelectionChange, SelectionModel, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { NgFor } from '@angular/common';
 import { permissionColumnsConfig } from '../permission';
 import { permissionRoleColumnsConfig } from '../permission-role/permission-role.columns-config';
 import { PermissionRoleService } from '../permission-role/permission-role.service';
@@ -179,12 +179,14 @@ export class RoleDetailComponent extends ViewDetailComponent
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             name: ['', [Validators.required, Validators.maxLength(127)]],
             isMaster: false,
             permissionIds: [],
         });
+        /* eslint-enable key-spacing */
     }
 
     /* #region methods to manage PermissionsRoles grid */

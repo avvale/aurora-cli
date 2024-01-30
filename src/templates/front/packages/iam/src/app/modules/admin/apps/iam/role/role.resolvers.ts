@@ -25,6 +25,9 @@ export const rolePaginationResolver: ResolveFn<GridData<IamRole>> = (
     gridStateService.setPaginationActionId(gridId, 'iam::role.list.pagination');
     gridStateService.setExportActionId(gridId, 'iam::role.list.export');
 
+    // get roles with pagination
+    roleService.get().subscribe();
+
     return roleService.pagination({
         query: QueryStatementHandler
             .init({ columnsConfig: roleColumnsConfig })

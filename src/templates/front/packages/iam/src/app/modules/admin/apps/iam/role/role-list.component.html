@@ -86,7 +86,8 @@
                 }"
                 [actionsMenu]="{
                     edit: t('Edit'),
-                    delete: t('Delete')
+                    delete: t('Delete'),
+                    inherit: t('Inherit')
                 }"
             >
                 <au-grid-column-translation
@@ -103,3 +104,66 @@
     <!-- / Main -->
 
 </div>
+
+<ng-template
+    #roleSelectorContentFormDialog
+    *transloco="let t"
+>
+    <form
+        id="roleSelectorForm"
+        novalidate
+        [formGroup]="roleSelectorDialogFg"
+        (ngSubmit)="handleSubmitInheritRoleForm($event)"
+    >
+        <div class="layout__container">
+
+            <mat-form-field
+                appearance="outline"
+                class="col-12"
+            >
+                <mat-label>{{ t('iam.Roles') }}</mat-label>
+                <mat-select
+                    formControlName="parentRoleId"
+                >
+                    <mat-option
+                        *ngFor="let role of roles$ | async"
+                        [value]="role.id"
+                    >
+                        {{ role.name }}
+                    </mat-option>
+                </mat-select>
+                <mat-error>{{ formErrors?.parentRoleId | async }}</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+    <div class="flex justify-end">
+        <button
+            mat-flat-button
+            mat-dialog-close
+            class="ml-3"
+            color="basic"
+        >
+            <mat-icon
+                class="icon-size-5 mr-2"
+                svgIcon="mat_solid:close"
+            >
+            </mat-icon>
+            {{ t('Cancel') }}
+        </button>
+        <button
+            mat-flat-button
+            class="ml-3"
+            type="submit"
+            form="roleSelectorForm"
+            color="accent"
+            [disabled]="roleSelectorDialogFg.pristine"
+        >
+            <mat-icon
+                class="icon-size-5 mr-2"
+                svgIcon="mat_solid:edit"
+            >
+            </mat-icon>
+            {{ t('Save') }}
+        </button>
+    </div>
+</ng-template>

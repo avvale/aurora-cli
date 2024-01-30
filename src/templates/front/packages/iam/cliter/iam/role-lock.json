@@ -15,7 +15,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-detail.component.ts",
-            "integrity": "sha1:716ebcef4df79e7f7658aefafc588eaec31deb47"
+            "integrity": "sha1:cbf0c5cc720d5d495cabfaf64a1da52796533f07"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-list.component.html",
@@ -27,11 +27,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.columns-config.ts",
-            "integrity": "sha1:a1bf05a386cf50ec64e360743fac15a5ed75cfc7"
+            "integrity": "sha1:b1a4afb013241437a9346510330c245faef84d28"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.graphql.ts",
-            "integrity": "sha1:c6180bca6d73eb967e3ba40e743130f3f485f8a8"
+            "integrity": "sha1:54b13d2fc814d362dafce2d05303c1e93eaa9a25"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.resolvers.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.service.ts",
-            "integrity": "sha1:33b3e2267bc3a7ddfa16dab36714029b9300bab1"
+            "integrity": "sha1:8489a29b0f4d0a98e47e82d5137ac030a492ad45"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/index.ts",

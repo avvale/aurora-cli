@@ -6,6 +6,7 @@ export const roleColumnsConfig: ColumnConfig[] = [
         field      : 'name',
         sort       : 'name',
         translation: 'iam.Name',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.BOOLEAN,

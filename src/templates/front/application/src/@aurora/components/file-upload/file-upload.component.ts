@@ -98,29 +98,4 @@ export class FileUploadComponent
         this.filesContainer = this.filesContainer.filter(f => f.name != file.name);
         this.files.emit(this.filesContainer);
     }
-
-    calculateSize(size: number): { size: number; unit: string; }
-    {
-        let calcSize = size;
-        let calcUnit = 'B';
-
-        // Transform B ---> KB
-        if (calcSize >= 1024)
-        {
-            calcSize = calcSize / 1024;
-            calcUnit = 'KB';
-        }
-
-        // Transform KB ---> MB
-        if (calcSize >= 1024)
-        {
-            calcSize = calcSize / 1024;
-            calcUnit = 'MB';
-        }
-
-        return {
-            size: Math.round(calcSize),
-            unit: calcUnit,
-        };
-    }
 }

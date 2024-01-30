@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { IamRole } from '@apps/iam/iam.types';
 import { roleColumnsConfig, RoleService } from '@apps/iam/role';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, ContentDialogTemplateDirective, Crumb, defaultListImports, DialogComponent, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ValidationMessagesService, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
@@ -12,12 +15,16 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
     standalone     : true,
     imports        : [
         ...defaultListImports,
+        ContentDialogTemplateDirective, FormsModule, MatDialogModule, MatSelectModule, ReactiveFormsModule,
     ],
 })
 export class RoleListComponent extends ViewBaseComponent
 {
     // ---- customizations ----
-    // ..
+    @ViewChild('roleSelectorContentFormDialog') roleSelectorContentFormDialog?: TemplateRef<any>;
+    roleSelectorDialogFg: FormGroup;
+    roles$: Observable<IamRole[]>;
+    contactFamilyUnitDialog: MatDialogRef<DialogComponent>;
 
     breadcrumb: Crumb[] = [
         { translation: 'App', routerLink: ['/']},
@@ -41,6 +48,11 @@ export class RoleListComponent extends ViewBaseComponent
                         icon       : 'mode_edit',
                     },
                     {
+                        id         : 'iam::role.list.openRoleSelectorFormDialog',
+                        translation: 'inherit',
+                        icon       : 'layers',
+                    },
+                    {
                         id         : 'iam::role.list.delete',
                         translation: 'delete',
                         icon       : 'delete',
@@ -62,6 +74,9 @@ export class RoleListComponent extends ViewBaseComponent
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly roleService: RoleService,
+        private readonly validationMessagesService: ValidationMessagesService,
+        private readonly fb: FormBuilder,
+        private readonly dialog: MatDialog,
     )
     {
         super();
@@ -71,6 +86,34 @@ export class RoleListComponent extends ViewBaseComponent
     // the parent class you can use instead of ngOnInit
     init(): void
     { /**/ }
+
+    /* #region methods to role */
+    createContactFamilyUnitDialogForm(role: IamRole): void
+    {
+        this.roleSelectorDialogFg = this.fb.group({
+            parentRoleId: ['', [Validators.required]],
+            childRoleId : [role.id, [Validators.required]],
+        });
+    }
+
+    handleSubmitInheritRoleForm(): void
+    {
+        // manage validations before execute actions
+        if (this.roleSelectorDialogFg.invalid)
+        {
+            log('[DEBUG] Error to validate form: ', this.roleSelectorDialogFg);
+            this.validationMessagesService.validate();
+            return;
+        }
+
+        this.actionService.action({
+            id          : 'iam::role.list.inheritPermissionsRole',
+            isViewAction: false,
+        });
+
+        this.contactFamilyUnitDialog.close();
+    }
+    /* #endregion methods to manage role */
 
     async handleAction(action: Action): Promise<void>
     {
@@ -90,6 +133,7 @@ export class RoleListComponent extends ViewBaseComponent
                 };
 
                 this.gridData$ = this.roleService.pagination$;
+                this.roles$ = this.roleService.roles$;
                 break;
 
             case 'iam::role.list.pagination':
@@ -191,6 +235,54 @@ export class RoleListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+
+            /* #region custom actions */
+            case 'iam::role.list.openRoleSelectorFormDialog':
+                this.createContactFamilyUnitDialogForm(action.meta.row);
+                this.contactFamilyUnitDialog = this.dialog
+                    .open(
+                        DialogComponent,
+                        {
+                            panelClass: 'au-dialog',
+                            width     : '60vw',
+                            maxWidth  : '2048px',
+                            minWidth  : '240px',
+                            height    : 'auto',
+                            data      : {
+                                icon   : 'layers',
+                                title  : `${this.translocoService.translate('iam.Roles')} ${this.translocoService.translate('For').toLowerCase()} ${action.meta.row.name}`,
+                                content: new ContentDialogTemplateDirective(this.roleSelectorContentFormDialog),
+                            },
+                        },
+                    );
+
+                break;
+
+            case 'iam::role.list.inheritPermissionsRole':
+                try
+                {
+                    await lastValueFrom(
+                        this.roleService
+                            .inheritPermissionsRoleRole({
+                                object: this.roleSelectorDialogFg.value,
+                            }),
+                    );
+
+                    this.snackBar.open(
+                        `${this.translocoService.translate('iam.Permissions')} ${this.translocoService.translate('iam.Inherited')}`,
+                        undefined,
+                        {
+                            verticalPosition: 'top',
+                            duration        : 3000,
+                        },
+                    );
+                }
+                catch(error)
+                {
+                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                }
+                break;
+                /* #endregion custom actions */
         }
     }
 }

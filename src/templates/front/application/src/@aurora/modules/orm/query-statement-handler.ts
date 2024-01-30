@@ -133,7 +133,15 @@ export class QueryStatementHandler
                 (columnConfig.hidden === undefined || columnConfig.hidden === false)
             )
             {
-                if (columnConfig.type === ColumnDataType.STRING)    searchStatement.push({ [columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field]: { [Operator.iLike]: `%${value}%` }});
+                if (columnConfig.type === ColumnDataType.STRING)
+                {
+                    searchStatement.push({
+                        [(columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field) + (columnConfig.isUnaccent ? '::unaccent' : '')]:
+                        {
+                            [Operator.iLike]: `%${value}%`,
+                        },
+                    });
+                }
                 if (columnConfig.type === ColumnDataType.ENUM)      log('[DEBUG] Enum search is not implemented yet');
                 if (columnConfig.type === ColumnDataType.NUMBER)    log('[DEBUG] Number search is not implemented yet');
             }
