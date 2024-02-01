@@ -1,7 +1,7 @@
 import { CommonCountryDto, CommonUpdateCountryByIdDto } from '@api/common/country';
 import { CommonCountry, CommonUpdateCountryByIdInput } from '@api/graphql';
 import { CommonFindCountryByIdQuery, CommonUpdateCountryByIdCommand } from '@app/common/country';
-import { AuditingMeta, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetSearchKeyLangService, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetSearchKeyLangService, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { BadRequestException, Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -42,7 +42,7 @@ export class CommonUpdateCountryByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, country);
+        const dataToUpdate = diff(payload, country);
 
         // diff method get only new items to load in JSON, not deleted items. We need items from payload to update
         if ('administrativeAreas' in dataToUpdate) dataToUpdate.administrativeAreas = payload.administrativeAreas;

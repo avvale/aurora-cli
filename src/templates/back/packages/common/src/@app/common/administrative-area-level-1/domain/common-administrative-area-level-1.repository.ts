@@ -140,4 +140,16 @@ export abstract class CommonIAdministrativeAreaLevel1Repository implements IRepo
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        administrativeAreaLevel1: CommonAdministrativeAreaLevel1,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => LiteralObject;
+        }
+    ): Promise<void>;
 }

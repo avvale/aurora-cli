@@ -140,4 +140,16 @@ export abstract class CommonIResourceRepository implements IRepository<CommonRes
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        resource: CommonResource,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonResource) => LiteralObject;
+        }
+    ): Promise<void>;
 }

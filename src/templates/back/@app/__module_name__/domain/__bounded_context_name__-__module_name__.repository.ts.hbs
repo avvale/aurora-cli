@@ -158,4 +158,16 @@ export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCa
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
+        }
+    ): Promise<void>;
 }

@@ -136,4 +136,16 @@ export abstract class CommonICountryI18nRepository implements IRepository<Common
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        country: CommonCountry,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonCountry) => LiteralObject;
+        }
+    ): Promise<void>;
 }

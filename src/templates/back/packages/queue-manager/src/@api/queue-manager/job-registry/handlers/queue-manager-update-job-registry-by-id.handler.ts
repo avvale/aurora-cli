@@ -1,7 +1,7 @@
 import { QueueManagerJobRegistry, QueueManagerUpdateJobRegistryByIdInput } from '@api/graphql';
 import { QueueManagerJobRegistryDto, QueueManagerUpdateJobRegistryByIdDto } from '@api/queue-manager/job-registry';
 import { QueueManagerFindJobRegistryByIdQuery, QueueManagerUpdateJobRegistryByIdCommand } from '@app/queue-manager/job-registry';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -26,7 +26,7 @@ export class QueueManagerUpdateJobRegistryByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, jobRegistry);
+        const dataToUpdate = diff(payload, jobRegistry);
 
         await this.commandBus.dispatch(new QueueManagerUpdateJobRegistryByIdCommand(
             {

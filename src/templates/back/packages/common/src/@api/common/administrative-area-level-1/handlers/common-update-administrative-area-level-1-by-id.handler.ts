@@ -1,7 +1,7 @@
 import { CommonAdministrativeAreaLevel1Dto, CommonUpdateAdministrativeAreaLevel1ByIdDto } from '@api/common/administrative-area-level-1';
 import { CommonAdministrativeAreaLevel1, CommonUpdateAdministrativeAreaLevel1ByIdInput } from '@api/graphql';
 import { CommonFindAdministrativeAreaLevel1ByIdQuery, CommonUpdateAdministrativeAreaLevel1ByIdCommand } from '@app/common/administrative-area-level-1';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class CommonUpdateAdministrativeAreaLevel1ByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, administrativeAreaLevel1);
+        const dataToUpdate = diff(payload, administrativeAreaLevel1);
 
         await this.commandBus.dispatch(new CommonUpdateAdministrativeAreaLevel1ByIdCommand(
             {

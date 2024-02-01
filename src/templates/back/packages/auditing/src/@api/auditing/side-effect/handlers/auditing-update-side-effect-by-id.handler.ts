@@ -1,7 +1,7 @@
 import { AuditingSideEffectDto, AuditingUpdateSideEffectByIdDto } from '@api/auditing/side-effect';
 import { AuditingSideEffect, AuditingUpdateSideEffectByIdInput } from '@api/graphql';
 import { AuditingFindSideEffectByIdQuery, AuditingUpdateSideEffectByIdCommand } from '@app/auditing/side-effect';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -26,7 +26,7 @@ export class AuditingUpdateSideEffectByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, sideEffect);
+        const dataToUpdate = diff(payload, sideEffect);
 
         await this.commandBus.dispatch(new AuditingUpdateSideEffectByIdCommand(
             {

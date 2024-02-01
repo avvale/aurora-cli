@@ -140,4 +140,16 @@ export abstract class IamIBoundedContextRepository implements IRepository<IamBou
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        boundedContext: IamBoundedContext,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamBoundedContext) => LiteralObject;
+        }
+    ): Promise<void>;
 }

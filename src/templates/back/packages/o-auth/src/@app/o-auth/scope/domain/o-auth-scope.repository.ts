@@ -140,4 +140,16 @@ export abstract class OAuthIScopeRepository implements IRepository<OAuthScope>
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        scope: OAuthScope,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: OAuthScope) => LiteralObject;
+        }
+    ): Promise<void>;
 }

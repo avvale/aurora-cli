@@ -139,4 +139,16 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        permissionRole: IamPermissionRole,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamPermissionRole) => LiteralObject;
+        }
+    ): Promise<void>;
 }

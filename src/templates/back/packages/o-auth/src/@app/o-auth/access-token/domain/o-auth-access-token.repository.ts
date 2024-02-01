@@ -140,4 +140,16 @@ export abstract class OAuthIAccessTokenRepository implements IRepository<OAuthAc
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        accessToken: OAuthAccessToken,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: OAuthAccessToken) => LiteralObject;
+        }
+    ): Promise<void>;
 }

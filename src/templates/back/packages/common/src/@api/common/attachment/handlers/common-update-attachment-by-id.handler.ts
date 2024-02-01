@@ -1,7 +1,7 @@
 import { CommonAttachmentDto, CommonUpdateAttachmentByIdDto } from '@api/common/attachment';
 import { CommonAttachment, CommonUpdateAttachmentByIdInput } from '@api/graphql';
 import { CommonFindAttachmentByIdQuery, CommonUpdateAttachmentByIdCommand } from '@app/common/attachment';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class CommonUpdateAttachmentByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, attachment);
+        const dataToUpdate = diff(payload, attachment);
 
         await this.commandBus.dispatch(new CommonUpdateAttachmentByIdCommand(
             {

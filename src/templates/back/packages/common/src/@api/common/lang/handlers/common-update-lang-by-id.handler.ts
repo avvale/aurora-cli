@@ -1,7 +1,7 @@
 import { CommonLangDto, CommonUpdateLangByIdDto } from '@api/common/lang';
 import { CommonLang, CommonUpdateLangByIdInput } from '@api/graphql';
 import { CommonFindLangByIdQuery, CommonUpdateLangByIdCommand } from '@app/common/lang';
-import { AuditingMeta, CoreGetLangsService, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, CoreGetLangsService, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class CommonUpdateLangByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, lang);
+        const dataToUpdate = diff(payload, lang);
 
         await this.commandBus.dispatch(new CommonUpdateLangByIdCommand(
             {

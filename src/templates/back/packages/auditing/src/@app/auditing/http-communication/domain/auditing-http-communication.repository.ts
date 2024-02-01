@@ -140,4 +140,16 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        httpCommunication: AuditingHttpCommunication,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
+        }
+    ): Promise<void>;
 }

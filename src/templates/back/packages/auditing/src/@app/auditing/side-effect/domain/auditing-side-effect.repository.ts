@@ -140,4 +140,16 @@ export abstract class AuditingISideEffectRepository implements IRepository<Audit
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        sideEffect: AuditingSideEffect,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: AuditingSideEffect) => LiteralObject;
+        }
+    ): Promise<void>;
 }

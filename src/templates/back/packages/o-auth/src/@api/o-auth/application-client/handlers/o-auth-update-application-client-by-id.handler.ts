@@ -1,7 +1,7 @@
 import { OAuthApplicationClient, OAuthUpdateApplicationClientByIdInput } from '@api/graphql';
 import { OAuthApplicationClientDto, OAuthUpdateApplicationClientByIdDto } from '@api/o-auth/application-client';
 import { OAuthFindApplicationClientByIdQuery, OAuthUpdateApplicationClientByIdCommand } from '@app/o-auth/application-client';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class OAuthUpdateApplicationClientByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, applicationClient);
+        const dataToUpdate = diff(payload, applicationClient);
 
         await this.commandBus.dispatch(new OAuthUpdateApplicationClientByIdCommand(
             {

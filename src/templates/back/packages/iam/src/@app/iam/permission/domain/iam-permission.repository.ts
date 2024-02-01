@@ -140,4 +140,16 @@ export abstract class IamIPermissionRepository implements IRepository<IamPermiss
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        permission: IamPermission,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamPermission) => LiteralObject;
+        }
+    ): Promise<void>;
 }

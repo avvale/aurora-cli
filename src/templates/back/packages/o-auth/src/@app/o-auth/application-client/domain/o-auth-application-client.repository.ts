@@ -139,4 +139,16 @@ export abstract class OAuthIApplicationClientRepository implements IRepository<O
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        applicationClient: OAuthApplicationClient,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: OAuthApplicationClient) => LiteralObject;
+        }
+    ): Promise<void>;
 }

@@ -139,4 +139,16 @@ export abstract class IamIRoleAccountRepository implements IRepository<IamRoleAc
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        roleAccount: IamRoleAccount,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamRoleAccount) => LiteralObject;
+        }
+    ): Promise<void>;
 }

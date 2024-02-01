@@ -140,4 +140,16 @@ export abstract class IamIAccountRepository implements IRepository<IamAccount>
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        account: IamAccount,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamAccount) => LiteralObject;
+        }
+    ): Promise<void>;
 }

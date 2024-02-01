@@ -1,7 +1,7 @@
 import { QueueManagerQueue, QueueManagerUpdateQueueByIdInput } from '@api/graphql';
 import { QueueManagerQueueDto, QueueManagerUpdateQueueByIdDto } from '@api/queue-manager/queue';
 import { QueueManagerFindQueueByIdQuery, QueueManagerUpdateQueueByIdCommand } from '@app/queue-manager/queue';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -26,7 +26,7 @@ export class QueueManagerUpdateQueueByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, queue);
+        const dataToUpdate = diff(payload, queue);
 
         await this.commandBus.dispatch(new QueueManagerUpdateQueueByIdCommand(
             {

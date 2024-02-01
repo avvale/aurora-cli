@@ -140,4 +140,16 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        queue: QueueManagerQueue,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
+        }
+    ): Promise<void>;
 }

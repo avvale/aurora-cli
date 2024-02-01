@@ -1,7 +1,7 @@
 import { CommonResourceDto, CommonUpdateResourceByIdDto } from '@api/common/resource';
 import { CommonResource, CommonUpdateResourceByIdInput } from '@api/graphql';
 import { CommonFindResourceByIdQuery, CommonUpdateResourceByIdCommand } from '@app/common/resource';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class CommonUpdateResourceByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, resource);
+        const dataToUpdate = diff(payload, resource);
 
         await this.commandBus.dispatch(new CommonUpdateResourceByIdCommand(
             {

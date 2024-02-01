@@ -1,7 +1,7 @@
 import { OAuthScope, OAuthUpdateScopeByIdInput } from '@api/graphql';
 import { OAuthScopeDto, OAuthUpdateScopeByIdDto } from '@api/o-auth/scope';
 import { OAuthFindScopeByIdQuery, OAuthUpdateScopeByIdCommand } from '@app/o-auth/scope';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class OAuthUpdateScopeByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, scope);
+        const dataToUpdate = diff(payload, scope);
 
         if ('roleIds' in dataToUpdate) dataToUpdate.roleIds = payload.roleIds;
 

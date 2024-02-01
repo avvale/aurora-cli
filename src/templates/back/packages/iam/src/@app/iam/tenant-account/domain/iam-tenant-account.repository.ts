@@ -139,4 +139,16 @@ export abstract class IamITenantAccountRepository implements IRepository<IamTena
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        tenantAccount: IamTenantAccount,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamTenantAccount) => LiteralObject;
+        }
+    ): Promise<void>;
 }

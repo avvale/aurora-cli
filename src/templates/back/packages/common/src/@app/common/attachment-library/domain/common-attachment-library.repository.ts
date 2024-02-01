@@ -140,4 +140,16 @@ export abstract class CommonIAttachmentLibraryRepository implements IRepository<
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        attachmentLibrary: CommonAttachmentLibrary,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonAttachmentLibrary) => LiteralObject;
+        }
+    ): Promise<void>;
 }

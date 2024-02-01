@@ -1,7 +1,7 @@
 import { AuditingHttpCommunicationDto, AuditingUpdateHttpCommunicationByIdDto } from '@api/auditing/http-communication';
 import { AuditingHttpCommunication, AuditingUpdateHttpCommunicationByIdInput } from '@api/graphql';
 import { AuditingFindHttpCommunicationByIdQuery, AuditingUpdateHttpCommunicationByIdCommand } from '@app/auditing/http-communication';
-import { ICommandBus, IQueryBus, QueryStatement, Utils } from '@aurorajs.dev/core';
+import { ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -26,7 +26,7 @@ export class AuditingUpdateHttpCommunicationByIdHandler
             },
         ));
 
-        const dataToUpdate = Utils.diff(payload, httpCommunication);
+        const dataToUpdate = diff(payload, httpCommunication);
 
         await this.commandBus.dispatch(new AuditingUpdateHttpCommunicationByIdCommand(
             {

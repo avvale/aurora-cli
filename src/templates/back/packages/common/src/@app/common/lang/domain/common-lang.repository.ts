@@ -140,4 +140,16 @@ export abstract class CommonILangRepository implements IRepository<CommonLang>
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        lang: CommonLang,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonLang) => LiteralObject;
+        }
+    ): Promise<void>;
 }

@@ -140,4 +140,16 @@ export abstract class OAuthIRefreshTokenRepository implements IRepository<OAuthR
             cQMetadata?: CQMetadata;
         }
     ): Promise<void>;
+
+    // increment records
+    abstract increment(
+        refreshToken: OAuthRefreshToken,
+        options?: {
+            incrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: OAuthRefreshToken) => LiteralObject;
+        }
+    ): Promise<void>;
 }
