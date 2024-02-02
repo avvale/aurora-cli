@@ -171,7 +171,6 @@ export enum PropertyIndex
 export enum PropertyType
 {
     'ARRAY'             = 'array',
-    'BIGINT.UNSIGNED'   = 'bigint.unsigned',
     'BIGINT'            = 'bigint',
     'BLOB'              = 'blob',
     'BOOLEAN'           = 'boolean',
@@ -181,20 +180,16 @@ export enum PropertyType
     'ENUM'              = 'enum',
     'FLOAT'             = 'float',
     'ID'                = 'id',
-    'INT.UNSIGNED'      = 'int.unsigned',
     'INT'               = 'int',
     'JSON'              = 'json',
     'LONGBLOB'          = 'blob.long',
     'MEDIUMBLOB'        = 'blob.medium',
     'PASSWORD'          = 'password',
     'RELATIONSHIP'      = 'relationship',
-    'SMALLINT.UNSIGNED' = 'smallint.unsigned',
     'SMALLINT'          = 'smallint',
     'TEXT'              = 'text',
     'TIMESTAMP'         = 'timestamp',
     'TINYBLOB'          = 'blob.tiny',
-    'TINYINT.UNSIGNED'  = 'tinyint.unsigned',
-    'TINYINT'           = 'tinyint',
     'VARCHAR'           = 'varchar',
 }
 
