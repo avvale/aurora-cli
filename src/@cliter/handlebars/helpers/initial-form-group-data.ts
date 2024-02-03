@@ -16,15 +16,11 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
             return '\'\'';
 
         case PropertyType.ENUM:
-        case PropertyType.TINYINT:
-        case PropertyType['TINYINT.UNSIGNED']:
         case PropertyType.INT:
-        case PropertyType['INT.UNSIGNED']:
         case PropertyType.SMALLINT:
         case PropertyType.JSON:
         case PropertyType.DATE:
         case PropertyType.DECIMAL:
-        case PropertyType['SMALLINT.UNSIGNED']:
             return 'null';
 
         case PropertyType.BOOLEAN:
