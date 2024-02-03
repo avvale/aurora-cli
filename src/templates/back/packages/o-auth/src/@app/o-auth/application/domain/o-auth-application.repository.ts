@@ -110,6 +110,18 @@ export abstract class OAuthIApplicationRepository implements IRepository<OAuthAp
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        application: OAuthApplication,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: OAuthApplication) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         application: OAuthApplication,
@@ -138,18 +150,6 @@ export abstract class OAuthIApplicationRepository implements IRepository<OAuthAp
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        application: OAuthApplication,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: OAuthApplication) => LiteralObject;
         }
     ): Promise<void>;
 }

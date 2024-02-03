@@ -110,6 +110,18 @@ export abstract class IamIRoleRepository implements IRepository<IamRole>
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        role: IamRole,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamRole) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         role: IamRole,
@@ -138,18 +150,6 @@ export abstract class IamIRoleRepository implements IRepository<IamRole>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        role: IamRole,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamRole) => LiteralObject;
         }
     ): Promise<void>;
 }

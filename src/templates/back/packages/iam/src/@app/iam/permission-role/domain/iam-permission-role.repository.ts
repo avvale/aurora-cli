@@ -109,6 +109,18 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        permissionRole: IamPermissionRole,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamPermissionRole) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         permissionRole: IamPermissionRole,
@@ -137,18 +149,6 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        permissionRole: IamPermissionRole,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamPermissionRole) => LiteralObject;
         }
     ): Promise<void>;
 }

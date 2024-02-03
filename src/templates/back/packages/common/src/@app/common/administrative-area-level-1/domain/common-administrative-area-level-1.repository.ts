@@ -110,6 +110,18 @@ export abstract class CommonIAdministrativeAreaLevel1Repository implements IRepo
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        administrativeAreaLevel1: CommonAdministrativeAreaLevel1,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         administrativeAreaLevel1: CommonAdministrativeAreaLevel1,
@@ -138,18 +150,6 @@ export abstract class CommonIAdministrativeAreaLevel1Repository implements IRepo
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        administrativeAreaLevel1: CommonAdministrativeAreaLevel1,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: CommonAdministrativeAreaLevel1) => LiteralObject;
         }
     ): Promise<void>;
 }

@@ -110,6 +110,18 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        httpCommunication: AuditingHttpCommunication,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         httpCommunication: AuditingHttpCommunication,
@@ -138,18 +150,6 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        httpCommunication: AuditingHttpCommunication,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
         }
     ): Promise<void>;
 }

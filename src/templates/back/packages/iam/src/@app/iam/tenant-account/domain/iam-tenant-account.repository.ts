@@ -109,6 +109,18 @@ export abstract class IamITenantAccountRepository implements IRepository<IamTena
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        tenantAccount: IamTenantAccount,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamTenantAccount) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         tenantAccount: IamTenantAccount,
@@ -137,18 +149,6 @@ export abstract class IamITenantAccountRepository implements IRepository<IamTena
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        tenantAccount: IamTenantAccount,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamTenantAccount) => LiteralObject;
         }
     ): Promise<void>;
 }

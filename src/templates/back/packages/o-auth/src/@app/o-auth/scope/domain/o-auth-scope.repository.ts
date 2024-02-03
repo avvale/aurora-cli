@@ -110,6 +110,18 @@ export abstract class OAuthIScopeRepository implements IRepository<OAuthScope>
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        scope: OAuthScope,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: OAuthScope) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         scope: OAuthScope,
@@ -138,18 +150,6 @@ export abstract class OAuthIScopeRepository implements IRepository<OAuthScope>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        scope: OAuthScope,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: OAuthScope) => LiteralObject;
         }
     ): Promise<void>;
 }

@@ -110,6 +110,18 @@ export abstract class CommonILangRepository implements IRepository<CommonLang>
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        lang: CommonLang,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonLang) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         lang: CommonLang,
@@ -138,18 +150,6 @@ export abstract class CommonILangRepository implements IRepository<CommonLang>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        lang: CommonLang,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: CommonLang) => LiteralObject;
         }
     ): Promise<void>;
 }

@@ -110,6 +110,18 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        jobRegistry: QueueManagerJobRegistry,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: QueueManagerJobRegistry) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         jobRegistry: QueueManagerJobRegistry,
@@ -138,18 +150,6 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        jobRegistry: QueueManagerJobRegistry,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: QueueManagerJobRegistry) => LiteralObject;
         }
     ): Promise<void>;
 }

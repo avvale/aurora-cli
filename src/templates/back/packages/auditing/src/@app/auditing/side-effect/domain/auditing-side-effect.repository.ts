@@ -110,6 +110,18 @@ export abstract class AuditingISideEffectRepository implements IRepository<Audit
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        sideEffect: AuditingSideEffect,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: AuditingSideEffect) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         sideEffect: AuditingSideEffect,
@@ -138,18 +150,6 @@ export abstract class AuditingISideEffectRepository implements IRepository<Audit
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        sideEffect: AuditingSideEffect,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: AuditingSideEffect) => LiteralObject;
         }
     ): Promise<void>;
 }

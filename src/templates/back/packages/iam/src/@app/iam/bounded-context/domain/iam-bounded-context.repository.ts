@@ -110,6 +110,18 @@ export abstract class IamIBoundedContextRepository implements IRepository<IamBou
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        boundedContext: IamBoundedContext,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamBoundedContext) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         boundedContext: IamBoundedContext,
@@ -138,18 +150,6 @@ export abstract class IamIBoundedContextRepository implements IRepository<IamBou
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        boundedContext: IamBoundedContext,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamBoundedContext) => LiteralObject;
         }
     ): Promise<void>;
 }

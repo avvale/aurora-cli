@@ -110,6 +110,18 @@ export abstract class CommonIAttachmentFamilyRepository implements IRepository<C
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        attachmentFamily: CommonAttachmentFamily,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: CommonAttachmentFamily) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         attachmentFamily: CommonAttachmentFamily,
@@ -138,18 +150,6 @@ export abstract class CommonIAttachmentFamilyRepository implements IRepository<C
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        attachmentFamily: CommonAttachmentFamily,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: CommonAttachmentFamily) => LiteralObject;
         }
     ): Promise<void>;
 }

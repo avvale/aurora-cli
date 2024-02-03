@@ -110,6 +110,18 @@ export abstract class OAuthIAccessTokenRepository implements IRepository<OAuthAc
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        accessToken: OAuthAccessToken,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: OAuthAccessToken) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         accessToken: OAuthAccessToken,
@@ -138,18 +150,6 @@ export abstract class OAuthIAccessTokenRepository implements IRepository<OAuthAc
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        accessToken: OAuthAccessToken,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: OAuthAccessToken) => LiteralObject;
         }
     ): Promise<void>;
 }

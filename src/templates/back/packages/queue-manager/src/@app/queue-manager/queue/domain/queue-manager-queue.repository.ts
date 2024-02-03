@@ -110,6 +110,18 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        queue: QueueManagerQueue,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         queue: QueueManagerQueue,
@@ -138,18 +150,6 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        queue: QueueManagerQueue,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
         }
     ): Promise<void>;
 }

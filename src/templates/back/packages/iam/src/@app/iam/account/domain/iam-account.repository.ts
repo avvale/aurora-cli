@@ -110,6 +110,18 @@ export abstract class IamIAccountRepository implements IRepository<IamAccount>
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        account: IamAccount,
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: IamAccount) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         account: IamAccount,
@@ -138,18 +150,6 @@ export abstract class IamIAccountRepository implements IRepository<IamAccount>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        account: IamAccount,
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: IamAccount) => LiteralObject;
         }
     ): Promise<void>;
 }
