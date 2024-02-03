@@ -128,6 +128,7 @@ export interface Property
     type: PropertyType;
     name: string;
     nullable?: boolean;
+    unsigned?: boolean;
     defaultValue?: string | number;
     primaryKey?: boolean;
     index?: PropertyIndex;
