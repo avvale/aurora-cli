@@ -89,6 +89,7 @@ export class Add extends Command
                         );
 
                         const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(appModuleClassDecoratorArguments, 'imports');
+                        // TODO, replace addElement with ArrayDriver.addArrayItems
                         importsArray.addElement('ScheduleModule.forRoot()', { useNewLines: true });
                     }
 
@@ -107,6 +108,7 @@ export class Add extends Command
                         );
 
                         const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+                        // TODO, replace addElement with ArrayDriver.addArrayItems
                         importsArray.addElement('HttpModule', { useNewLines: true });
                     }
 
@@ -119,6 +121,7 @@ export class Add extends Command
                         );
 
                         const providersArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'providers');
+                        // TODO, replace addElement with ArrayDriver.addArrayItems
                         providersArray.addElement('AuditingAxiosInterceptorService', { useNewLines: true });
                     }
 
@@ -213,10 +216,18 @@ export class Add extends Command
                     );
 
                     const providersArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'providers');
-                    providersArray.addElement('CommonAttachmentsService', { useNewLines: true });
+                    ArrayDriver.addArrayItems(
+                        appModuleSourceFile,
+                        ['CommonAttachmentsService'],
+                        providersArray,
+                    );
 
                     const exportsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'exports');
-                    exportsArray.addElement('CommonAttachmentsService', { useNewLines: true });
+                    ArrayDriver.addArrayItems(
+                        appModuleSourceFile,
+                        ['CommonAttachmentsService'],
+                        exportsArray,
+                    );
 
                     sharedModuleSourceFile.saveSync();
 
@@ -284,8 +295,10 @@ export class Add extends Command
 
                         const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
                         const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+                        // TODO, replace addElement with ArrayDriver.addArrayItems
                         importsArray.addElement('AuthJwtStrategyRegistryModule.forRoot(jwtConfig)', { useNewLines: true });
                         const exportsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'exports');
+                        // TODO, replace addElement with ArrayDriver.addArrayItems
                         exportsArray.addElement('AuthJwtStrategyRegistryModule', { useNewLines: true });
                     }
 
@@ -338,6 +351,7 @@ export class Add extends Command
                         );
 
                         const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(appModuleClassDecoratorArguments, 'imports');
+                        // TODO, replace addElement with ArrayDriver.addArrayItems
                         importsArray.addElement('ScheduleModule.forRoot()', { useNewLines: true });
                     }
 
@@ -402,6 +416,7 @@ export class Add extends Command
                         './modules/azure-ad',
                         ['provideAzureAd'],
                     );
+                    // TODO, replace addElement with ArrayDriver.addArrayItems
                     returnArray?.addElement('provideAzureAd()', { useNewLines: true });
 
 

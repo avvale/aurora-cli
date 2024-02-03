@@ -301,6 +301,7 @@ export class CodeWriter
             // register module
             const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
             const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+            // TODO, replace addElement with ArrayDriver.addArrayItems
             importsArray.addElement(`${this.boundedContextName.toPascalCase()}Module`, { useNewLines: true });
         }
 
@@ -613,6 +614,7 @@ export class CodeWriter
         }
 
         // set routes
+        // TODO, replace addElement with ArrayDriver.addArrayItems
         childrenRoutesArray?.addElement(
             `{ path: '${this.boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.routes') },`
             , { useNewLines: true });

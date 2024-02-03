@@ -781,7 +781,7 @@ export const getIntegerUnsignedProperties = (
     properties: Property[],
 ): Property[] =>
 {
-    return properties?.filter(property => property.type === PropertyType['INT.UNSIGNED']);
+    return properties?.filter(property => property.type === PropertyType.INT && property.unsigned);
 };
 
 // replace by Properties isBoolean

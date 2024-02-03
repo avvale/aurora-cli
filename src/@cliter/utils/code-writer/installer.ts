@@ -18,6 +18,7 @@ export const Installer =
 
         const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sourceFile, 'AppModule', 'Module');
         const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+        // TODO, replace addElement with ArrayDriver.addArrayItems
         importsArray.addElement(`${boundedContextName.toPascalCase()}Module`, { useNewLines: true });
     },
 
@@ -57,6 +58,7 @@ export const Installer =
         }
 
         // set routes
+        // TODO, replace addElement with ArrayDriver.addArrayItems
         childrenRoutesArray?.addElement(
             `{ path: '${boundedContextName.toKebabCase()}', loadChildren: () => import('app/modules/admin/apps/${boundedContextName.toKebabCase()}/${boundedContextName.toKebabCase()}.routes') },`
             , { useNewLines: true });

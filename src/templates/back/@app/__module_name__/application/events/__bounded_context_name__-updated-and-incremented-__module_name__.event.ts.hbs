@@ -1,0 +1,10 @@
+export class {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleName }}Event
+{
+    constructor(
+        {{#each (getUpdatedEventProperties schema.aggregateProperties) }}
+        {{#if (isAllowProperty ../schema.moduleName this) }}
+        public readonly {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptUpdateType this ../config }},
+        {{/if}}
+        {{/each}}
+    ) {}
+}

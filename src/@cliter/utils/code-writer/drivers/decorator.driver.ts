@@ -28,6 +28,7 @@ export class DecoratorDriver
 
         const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sourceFile, moduleName, decoratorName);
         const decoratorArrayProperty = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, propertyName);
+        // TODO, replace addElement with ArrayDriver.addArrayItems
         decoratorArrayProperty.addElement(module, { useNewLines: true });
     }
 

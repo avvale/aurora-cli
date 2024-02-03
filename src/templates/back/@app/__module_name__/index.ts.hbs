@@ -11,6 +11,9 @@ export { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.command.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Command } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.command';
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-and-increment-' (toKebabCase schema.moduleNames) '.command.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}Command } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-and-increment-{{ toKebabCase schema.moduleNames }}.command';
+{{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Command } from './application/upsert/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.command';
 {{/notInArray}}
@@ -76,6 +79,12 @@ export { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase sche
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-' (toKebabCase schema.moduleName) '.event.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event } from './application/events/{{ toKebabCase schema.boundedContextName }}-updated-{{ toKebabCase schema.moduleName }}.event';
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleNames }}Event } from './application/events/{{ toKebabCase schema.boundedContextName }}-updated-and-incremented-{{ toKebabCase schema.moduleNames }}.event';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleName }}Event } from './application/events/{{ toKebabCase schema.boundedContextName }}-updated-and-incremented-{{ toKebabCase schema.moduleName }}.event';
+{{/notInArray}}
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -126,6 +135,9 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/'(toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.command-handler';
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/'(toKebabCase schema.boundedContextName) '-update-and-increment-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}CommandHandler } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-and-increment-{{ toKebabCase schema.moduleNames }}.command-handler';
+{{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}CommandHandler } from './application/upsert/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.command-handler';
 {{/notInArray}}
@@ -171,6 +183,9 @@ import { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase sche
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-' (toKebabCase schema.moduleNames) '.event-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleNames }}EventHandler } from './application/events/{{ toKebabCase schema.boundedContextName }}-updated-{{ toKebabCase schema.moduleNames }}.event-handler';
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event-handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleNames }}EventHandler } from './application/events/{{ toKebabCase schema.boundedContextName }}-updated-and-incremented-{{ toKebabCase schema.moduleNames }}.event-handler';
+{{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}EventHandler } from './application/events/{{ toKebabCase schema.boundedContextName }}-deleted-{{ toKebabCase schema.moduleName }}.event-handler';
 {{/notInArray}}
@@ -206,6 +221,9 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.service.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Service } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleNames }}.service';
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-and-increment-' (toKebabCase schema.moduleNames) '.service.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}Service } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-and-increment-{{ toKebabCase schema.moduleNames }}.service';
+{{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.service.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service } from './application/upsert/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.service';
 {{/notInArray}}
@@ -234,6 +252,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}CommandHandler,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-and--increment-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
+    {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}CommandHandler,
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command-handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}CommandHandler,
@@ -280,6 +301,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-' (toKebabCase schema.moduleNames) '.event-handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleNames }}EventHandler,
     {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event-handler.ts'}}
+    {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleNames }}EventHandler,
+    {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event-handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}EventHandler,
     {{/notInArray}}
@@ -315,6 +339,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleNames) '.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Service,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-and-increment-' (toKebabCase schema.moduleNames) '.service.ts'}}
+    {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}Service,
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service,

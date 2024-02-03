@@ -41,6 +41,22 @@
 ~}}
 {{/notInArray}}
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts'}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{
+    push importsArray
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'UpdatedAndIncremented' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+~}}
+{{/notInArray}}
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts'}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{
+    push importsArray
+        (object items=(sumStrings (toPascalCase schema.boundedContextName) 'UpdatedAndIncremented' (toPascalCase schema.moduleNames) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+~}}
+{{/notInArray}}
+{{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
 {{
     push importsArray
@@ -97,6 +113,27 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
             new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleNames }}Event(
                 this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
                     new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event(
+                        {{#each (getAggregateProperties schema.aggregateProperties) }}
+                        {{#if (isAllowProperty ../schema.moduleName this) }}
+                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
+                        {{/if}}
+                        {{/each}}
+                    ),
+                ),
+            ),
+        );
+    }
+    {{/notInArray}}
+    {{/notInArray}}
+
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts'}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts'}}
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleNames }}Event(
+                this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
+                    new {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleName }}Event(
                         {{#each (getAggregateProperties schema.aggregateProperties) }}
                         {{#if (isAllowProperty ../schema.moduleName this) }}
                         {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,

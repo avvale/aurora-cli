@@ -128,6 +128,18 @@ export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCa
         }
     ): Promise<void>;
 
+    // update and increment records
+    abstract updateAndIncrement(
+        {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
+        options?: {
+            updateAndIncrementOptions?: LiteralObject;
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
+        }
+    ): Promise<void>;
+
     // insert or update key identification element already existing in the table
     abstract upsert(
         {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
@@ -156,18 +168,6 @@ export abstract class {{ toPascalCase schema.boundedContextName }}I{{ toPascalCa
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
-
-    // increment records
-    abstract increment(
-        {{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }},
-        options?: {
-            incrementOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: {{ schema.aggregateName }}) => LiteralObject;
         }
     ): Promise<void>;
 }
