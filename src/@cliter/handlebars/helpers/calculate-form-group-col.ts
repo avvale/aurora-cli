@@ -27,9 +27,7 @@ handlebars.registerHelper('calculateFormGroupCol', function(property: Property)
             return `col-6`;
 
         case PropertyType.INT:
-        case PropertyType['INT.UNSIGNED']:
         case PropertyType.SMALLINT:
-        case PropertyType['SMALLINT.UNSIGNED']:
             if (!property.maxLength) return 'col-12';
             if (property.maxLength < 11) return 'col-2';
             if (property.maxLength < 31) return 'col-4';
