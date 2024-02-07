@@ -1,4 +1,5 @@
-import { ObjectLiteralExpression, PropertyAssignment } from 'ts-morph';
+import { ObjectLiteralExpression, PropertyAssignment, StringLiteral } from 'ts-morph';
+import { getInitializer } from '../functions';
 
 export class ProviderDriver
 {
@@ -40,7 +41,7 @@ export class ProviderDriver
 
             if (
                 property.getName() === 'provide' &&
-                property.getInitializer()?.getText() === provide
+                (<StringLiteral>getInitializer(property))?.getText() === provide
             )
             {
                 return true;

@@ -1,5 +1,6 @@
-import { SourceFile, SyntaxKind, ArrayLiteralExpression, ObjectLiteralExpression, PropertyAssignment } from 'ts-morph';
+import { SourceFile, ArrayLiteralExpression, ObjectLiteralExpression, PropertyAssignment, StringLiteral } from 'ts-morph';
 import { ProviderDriver } from './provider.driver';
+import { getInitializer } from '../functions';
 
 export class ArrayDriver
 {
@@ -18,7 +19,7 @@ export class ArrayDriver
         if (typeof array === 'string')
         {
             const routesDeclaration = sourceFile?.getVariableDeclaration(array);
-            arrayLiteralExpression  = routesDeclaration?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+            arrayLiteralExpression  = <ArrayLiteralExpression>getInitializer(routesDeclaration);
 
             // if array not exist return void
             if (!arrayLiteralExpression) return;
@@ -49,7 +50,7 @@ export class ArrayDriver
         if (typeof array === 'string')
         {
             const routesDeclaration = sourceFile?.getVariableDeclaration(array);
-            arrayLiteralExpression = routesDeclaration?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+            arrayLiteralExpression = <ArrayLiteralExpression>getInitializer(routesDeclaration);
         }
         else
         {
@@ -77,7 +78,7 @@ export class ArrayDriver
                 let isProvideWanted = false;
                 for (const property of properties)
                 {
-                    if (property.getName() === 'provide' && property.getInitializer()?.getText() === provide)
+                    if (property.getName() === 'provide' && (<StringLiteral>getInitializer(property))?.getText() === provide)
                     {
                         isProvideWanted = true;
                     }

@@ -1,10 +1,10 @@
 /* eslint-disable complexity */
 import { Args, Command, Flags, ux } from '@oclif/core';
 import * as fs from 'node:fs';
-import { ArrayLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
+import { ArrayLiteralExpression, ObjectLiteralExpression, Writers } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
 import { exec } from '../@cliter/functions/common';
-import { ArrayDriver, ArrowFunctionDriver, CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from '../@cliter/utils/code-writer/public-api';
+import { ArrayDriver, ArrowFunctionDriver, CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver, getInitializer } from '../@cliter/utils/code-writer/public-api';
 
 export class Add extends Command
 {
@@ -450,7 +450,7 @@ export class Add extends Command
                     // implement environments azure ad variables
                     const environmentFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.ts']);
                     const environmentVariable = VariableDriver.getVariable(environmentFile, 'environment');
-                    const environmentObject = environmentVariable?.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+                    const environmentObject = <ObjectLiteralExpression>getInitializer(environmentVariable);
                     environmentObject?.addPropertyAssignment({
                         name       : 'azureAd',
                         initializer: Writers.object({
@@ -466,7 +466,7 @@ export class Add extends Command
                     // implement environments azure ad variables
                     const environmentProdFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.prod.ts']);
                     const environmentProdVariable = VariableDriver.getVariable(environmentProdFile, 'environment');
-                    const environmentProdObject = environmentProdVariable?.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+                    const environmentProdObject = <ObjectLiteralExpression>getInitializer(environmentProdVariable);
                     environmentProdObject?.addPropertyAssignment({
                         name       : 'azureAd',
                         initializer: Writers.object({
@@ -482,7 +482,7 @@ export class Add extends Command
                     // implement environments azure ad variables
                     const environmentLocalFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.local.ts']);
                     const environmentLocalVariable = VariableDriver.getVariable(environmentLocalFile, 'environment');
-                    const environmentLocalObject = environmentLocalVariable?.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+                    const environmentLocalObject = <ObjectLiteralExpression>getInitializer(environmentLocalVariable);
                     environmentLocalObject?.addPropertyAssignment({
                         name       : 'azureAd',
                         initializer: Writers.object({
@@ -498,7 +498,7 @@ export class Add extends Command
                     // implement environments azure ad variables
                     const environmentDevFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.dev.ts']);
                     const environmentDevVariable = VariableDriver.getVariable(environmentDevFile, 'environment');
-                    const environmentDevObject = environmentDevVariable?.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+                    const environmentDevObject = <ObjectLiteralExpression>getInitializer(environmentDevVariable);
                     environmentDevObject?.addPropertyAssignment({
                         name       : 'azureAd',
                         initializer: Writers.object({

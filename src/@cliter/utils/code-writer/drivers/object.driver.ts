@@ -1,4 +1,5 @@
 import { ObjectLiteralElementLike, ObjectLiteralExpression, PropertyAssignment } from 'ts-morph';
+import { getInitializer } from '../functions';
 
 export class ObjectDriver
 {
@@ -15,7 +16,6 @@ export class ObjectDriver
         property: string,
     ): T
     {
-        return ObjectDriver.getProperty<PropertyAssignment>(object, property)
-            .getInitializer() as T;
+        return <T>getInitializer(ObjectDriver.getProperty<PropertyAssignment>(object, property));
     }
 }

@@ -1,17 +1,17 @@
 /* eslint-disable max-params */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, InitializerExpressionGetableNode, ObjectLiteralExpression, Project, QuoteKind, SourceFile } from 'ts-morph';
+import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, InitializerExpressionGetableNode, ObjectLiteralExpression, Project, QuoteKind, SourceFile, StringLiteral } from 'ts-morph';
 import { NewLineKind, SyntaxKind } from 'typescript';
 import { CliterConfig, cliterConfig } from '../../config';
+import { Property } from '../../types';
 import { ObjectTools } from '../object-tools';
-import { ArrayDriver } from './drivers/array.driver';
-import { ExportDriver } from './drivers/export.driver';
-import { ImportDriver } from './drivers/import.driver';
-import { InterfaceDriver } from './drivers/interface.driver';
 import { getForeignRelationshipProperties, getGraphqlInputProperties, getGraphqlProperties, getWithoutTimestampsProperties, hasI18nProperties } from '../properties.functions';
 import { getPropertyJavascriptCreateType, getPropertyJavascriptType, getPropertyJavascriptUpdateType } from '../property.functions';
-import { Property } from '../../types';
+import { ArrayDriver } from './drivers/array.driver';
+import { ImportDriver } from './drivers/import.driver';
+import { InterfaceDriver } from './drivers/interface.driver';
+import { getInitializer } from './functions';
 
 export class CodeWriter
 {
@@ -156,11 +156,11 @@ export class CodeWriter
 
         // providers
         const providers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('providers') as InitializerExpressionGetableNode;
-        const providersArray: ArrayLiteralExpression = providers?.getInitializer() as ArrayLiteralExpression;
+        const providersArray: ArrayLiteralExpression = <ArrayLiteralExpression>getInitializer(providers);
 
         // controllers
         const controllers: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('controllers') as InitializerExpressionGetableNode;
-        const controllersArray = controllers?.getInitializer() as ArrayLiteralExpression;
+        const controllersArray = <ArrayLiteralExpression>getInitializer(controllers);
 
         // register imports from bounded context from @app
         ImportDriver.createImportItems(
@@ -300,9 +300,14 @@ export class CodeWriter
 
             // register module
             const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
-            const importsArray = importsArgument?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-            // TODO, replace addElement with ArrayDriver.addArrayItems
-            importsArray.addElement(`${this.boundedContextName.toPascalCase()}Module`, { useNewLines: true });
+            const importsArray = <ArrayLiteralExpression>getInitializer(importsArgument);
+            ArrayDriver.addArrayItems(
+                sourceFile,
+                [
+                    `${this.boundedContextName.toPascalCase()}Module`,
+                ],
+                importsArray,
+            );
         }
 
         sourceFile?.saveSync();
@@ -417,7 +422,7 @@ export class CodeWriter
         const routesArray = (defaultExportDeclarations.get('default') as ArrayLiteralExpression[])[0];
         const objectRoute = routesArray.getElements()[index] as ObjectLiteralExpression;
         const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
-        const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const childrenRoutesArray = <ArrayLiteralExpression>getInitializer(childrenRoutes);
 
         // export list component
         ImportDriver.createImportItems(
@@ -453,7 +458,7 @@ export class CodeWriter
             {
                 const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
                 {
-                    return `'${this.moduleName.toKebabCase()}'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                    return `'${this.moduleName.toKebabCase()}'` === (<StringLiteral>getInitializer((item.getPropertyOrThrow('path') as InitializerExpressionGetableNode))).getText();
                 });
 
                 return Boolean(foundItem);
@@ -469,7 +474,7 @@ export class CodeWriter
             {
                 const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
                 {
-                    return `'${this.moduleName.toKebabCase()}/new'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                    return `'${this.moduleName.toKebabCase()}/new'` === (<StringLiteral>getInitializer((item.getPropertyOrThrow('path') as InitializerExpressionGetableNode))).getText();
                 });
 
                 return Boolean(foundItem);
@@ -488,7 +493,7 @@ export class CodeWriter
                 {
                     const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
                     {
-                        return `'${this.moduleName.toKebabCase()}/new/:id/:langId'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                        return `'${this.moduleName.toKebabCase()}/new/:id/:langId'` === (<StringLiteral>getInitializer((item.getPropertyOrThrow('path') as InitializerExpressionGetableNode))).getText();
                     });
 
                     return Boolean(foundItem);
@@ -504,7 +509,7 @@ export class CodeWriter
                 {
                     const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
                     {
-                        return `'${this.moduleName.toKebabCase()}/edit/:id/:langId'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                        return `'${this.moduleName.toKebabCase()}/edit/:id/:langId'` === (<StringLiteral>getInitializer((item.getPropertyOrThrow('path') as InitializerExpressionGetableNode))).getText();
                     });
 
                     return Boolean(foundItem);
@@ -525,7 +530,7 @@ export class CodeWriter
             {
                 const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
                 {
-                    return `'${this.moduleName.toKebabCase()}/edit/:id'` === (item.getPropertyOrThrow('path') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                    return `'${this.moduleName.toKebabCase()}/edit/:id'` === (<StringLiteral>getInitializer((item.getPropertyOrThrow('path') as InitializerExpressionGetableNode))).getText();
                 });
 
                 return Boolean(foundItem);
@@ -565,7 +570,7 @@ export class CodeWriter
 
         // declarations
         const declarations: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('declarations') as InitializerExpressionGetableNode;
-        const declarationsArray: ArrayLiteralExpression = declarations?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression) as ArrayLiteralExpression;
+        const declarationsArray: ArrayLiteralExpression = <ArrayLiteralExpression>getInitializer(declarations);
 
         // export list component
         ImportDriver.createImportItems(
@@ -598,17 +603,17 @@ export class CodeWriter
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, 'app', 'app.routes.ts'));
 
         const appRoutes = sourceFile.getVariableDeclarationOrThrow('appRoutes');
-        const appRoutesArray = appRoutes.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const appRoutesArray = <ArrayLiteralExpression>getInitializer(appRoutes);
         const objectRoute = appRoutesArray.getElements()[index] as ObjectLiteralExpression;
         const childrenRoutes = objectRoute.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
-        const childrenRoutesArray = childrenRoutes?.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const childrenRoutesArray = <ArrayLiteralExpression>getInitializer(childrenRoutes);
         const childrenRoutesElements = childrenRoutesArray.getElements() as ObjectLiteralExpression[];
 
         // avoid duplicated declaration
         for (const element of childrenRoutesElements)
         {
             const pathProperty = element.getPropertyOrThrow('path') as InitializerExpressionGetableNode;
-            const pathString = pathProperty.getInitializerIfKindOrThrow(SyntaxKind.StringLiteral);
+            const pathString = <StringLiteral>getInitializer(pathProperty);
 
             if (pathString.getText() === `'${this.boundedContextName.toKebabCase()}'`) return;
         }
@@ -635,16 +640,16 @@ export class CodeWriter
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), srcDirectory, cliterConfig.dashboardContainer, boundedContextName.toKebabCase(), `${boundedContextName.toKebabCase()}.navigation.ts`));
         const navigation = sourceFile.getVariableDeclarationOrThrow(boundedContextName.toCamelCase() + 'Navigation');
-        const navigationObject = navigation.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression);
+        const navigationObject = <ObjectLiteralExpression>getInitializer(navigation);
         const childrenProperty = navigationObject.getPropertyOrThrow('children') as InitializerExpressionGetableNode;
-        const childrenArrayNavigation = childrenProperty.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+        const childrenArrayNavigation = <ArrayLiteralExpression>getInitializer(childrenProperty);
         const navigationElements = childrenArrayNavigation.getElements() as ObjectLiteralExpression[];
 
         // avoid duplicated declaration
         for (const element of navigationElements)
         {
             const pathProperty = element.getPropertyOrThrow('id') as InitializerExpressionGetableNode;
-            const pathString = pathProperty.getInitializerIfKindOrThrow(SyntaxKind.StringLiteral);
+            const pathString = <StringLiteral>getInitializer(pathProperty);
 
             if (pathString.getText() === `'${moduleName.toCamelCase()}'`) return;
         }
@@ -664,7 +669,7 @@ export class CodeWriter
             {
                 const foundItem = (array?.getElements() as ObjectLiteralExpression[]).find(item =>
                 {
-                    return `'${moduleNames.toCamelCase()}'` === (item.getPropertyOrThrow('id') as InitializerExpressionGetableNode).getInitializerIfKindOrThrow(SyntaxKind.StringLiteral).getText();
+                    return `'${moduleNames.toCamelCase()}'` === (<StringLiteral>getInitializer((item.getPropertyOrThrow('id') as InitializerExpressionGetableNode))).getText();
                 });
 
                 return Boolean(foundItem);
@@ -721,7 +726,7 @@ export class CodeWriter
     private getModelArrayArgument(moduleDecoratorArguments: ObjectLiteralExpression): ArrayLiteralExpression
     {
         const importsArgument: InitializerExpressionGetableNode = moduleDecoratorArguments.getProperty('imports') as InitializerExpressionGetableNode;
-        const importsArray: ArrayLiteralExpression = importsArgument.getInitializer() as ArrayLiteralExpression;
+        const importsArray: ArrayLiteralExpression = <ArrayLiteralExpression>getInitializer(importsArgument);
         const importsElements = importsArray.getElements();
         const SequelizeModuleElement: CallExpression = importsElements.find(el => el.getText().indexOf('SequelizeModule.forFeature') === 0) as CallExpression;
 

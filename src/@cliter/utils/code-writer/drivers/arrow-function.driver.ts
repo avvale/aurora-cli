@@ -1,4 +1,5 @@
-import { ArrayLiteralExpression, SourceFile, SyntaxKind } from 'ts-morph';
+import { ArrayLiteralExpression, ArrowFunction, SourceFile, SyntaxKind } from 'ts-morph';
+import { getInitializer } from '../functions';
 
 export class ArrowFunctionDriver
 {
@@ -8,7 +9,7 @@ export class ArrowFunctionDriver
     ): ArrayLiteralExpression
     {
         const provideAurora = sourceFile.getVariableDeclarationOrThrow(variableName);
-        const provideAuroraFunction = provideAurora.getInitializerIfKindOrThrow(SyntaxKind.ArrowFunction);
+        const provideAuroraFunction = <ArrowFunction>getInitializer(provideAurora);
         const returnFunction = provideAuroraFunction.getDescendantsOfKind(SyntaxKind.ReturnStatement)[0];
         return returnFunction.getDescendantsOfKind(SyntaxKind.ArrayLiteralExpression)[0];
     }
