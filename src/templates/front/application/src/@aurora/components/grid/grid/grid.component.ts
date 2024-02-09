@@ -11,8 +11,8 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/p
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Action, GridManagerService } from '@aurora';
+import { JoinPipe } from '@aurora/pipes/join.pipe';
 import { FlagIconComponent } from '@aurora/components/flag-icon';
-import { GetPipe } from '@aurora/pipes/get.pipe';
 import { merge, tap } from 'rxjs';
 import { GridCellValueTemplateDirective } from '../directives/grid-cell-value-template.directive';
 import { GridCustomHeaderTemplateDirective } from '../directives/grid-custom-header-template.directive';
@@ -21,7 +21,7 @@ import { GridFiltersDialogComponent } from '../grid-filters-dialog/grid-filters-
 import { GridSearchComponent } from '../grid-search/grid-search.component';
 import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
 import { ColumnConfig, ColumnConfigAction, ColumnDataType, ExportFormat, ExportGridState, GridColumnFilter, GridData, GridSearchState, GridSortState, GridState } from '../grid.types';
-import { FilterGridCustomHeaderTemplatesPositionPipe, GetActionsPipe, GetGridSpinnerFlagPipe, GetTranslationIconColorPipe, HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, IsOriginColumnConfigPipe, TransformDataCellPipe } from '../pipes';
+import { FilterGridCustomHeaderTemplatesPositionPipe, GetActionsPipe, GetCellValuePipe, GetGridSpinnerFlagPipe, GetTranslationIconColorPipe, HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, IsOriginColumnConfigPipe, TransformDataCellPipe } from '../pipes';
 import { SelectionChange, SelectionModel } from '../selection-model/selection-model';
 
 // no barrel
@@ -32,8 +32,8 @@ import { SelectionChange, SelectionModel } from '../selection-model/selection-mo
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        AsyncPipe, DragDropModule, FilterGridCustomHeaderTemplatesPositionPipe, FlagIconComponent, GetActionsPipe, GetGridSpinnerFlagPipe, GetPipe, GridSearchComponent, GridTranslatePipe, GetTranslationIconColorPipe,
-        HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, IsOriginColumnConfigPipe, MatBadgeModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatPaginatorModule, MatSortModule, MatTableModule,
+        AsyncPipe, DragDropModule, FilterGridCustomHeaderTemplatesPositionPipe, FlagIconComponent, GetActionsPipe, GetCellValuePipe, GetGridSpinnerFlagPipe, GridSearchComponent, GridTranslatePipe, GetTranslationIconColorPipe,
+        HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, JoinPipe, IsOriginColumnConfigPipe, MatBadgeModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatPaginatorModule, MatSortModule, MatTableModule,
         NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, TransformDataCellPipe,
     ],
 })

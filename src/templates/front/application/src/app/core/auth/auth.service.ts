@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
@@ -8,16 +8,8 @@ import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 export class AuthService
 {
     private _authenticated: boolean = false;
-
-    /**
-     * Constructor
-     */
-    constructor(
-        private _httpClient: HttpClient,
-        private _userService: UserService,
-    )
-    {
-    }
+    private _httpClient = inject(HttpClient);
+    private _userService = inject(UserService);
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors

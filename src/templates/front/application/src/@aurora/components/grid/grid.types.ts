@@ -44,6 +44,7 @@ export interface ColumnsConfigChange
 export enum ColumnDataType
 {
     ACTIONS = 'ACTIONS',
+    ARRAY = 'ARRAY',
     BOOLEAN = 'BOOLEAN',
     CHECKBOX = 'CHECKBOX',
     DATE = 'DATE',

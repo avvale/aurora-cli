@@ -22,11 +22,10 @@ export class DatePickerDayjsAdapter extends NativeDateAdapter
 {
     constructor(
         matDateLocale: string,
-        platform: Platform,
         @Optional() @Inject(MAT_DATE_FORMATS) private dateFormats: MatDateFormats,
     )
     {
-        super(matDateLocale, platform);
+        super(matDateLocale);
 
         dayjs.locale('es');
         dayjs.extend(customParseFormat);

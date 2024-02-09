@@ -7,9 +7,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class JoinPipe implements PipeTransform
 {
-    transform(object: string[], separator: string = ', '): string
+    transform(arr: any[], separator: string = ', '): string
     {
-        if (!Array.isArray(object)) '';
-        return object.join(separator);
+        if (!Array.isArray(arr)) return '';
+        return arr.join(separator);
     }
 }

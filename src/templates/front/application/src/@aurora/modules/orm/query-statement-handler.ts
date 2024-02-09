@@ -142,6 +142,15 @@ export class QueryStatementHandler
                         },
                     });
                 }
+                if (columnConfig.type === ColumnDataType.ARRAY)
+                {
+                    searchStatement.push({
+                        [(columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field) + '::cast::varchar']:
+                        {
+                            [Operator.iLike]: `%${value}%`,
+                        },
+                    });
+                }
                 if (columnConfig.type === ColumnDataType.ENUM)      log('[DEBUG] Enum search is not implemented yet');
                 if (columnConfig.type === ColumnDataType.NUMBER)    log('[DEBUG] Number search is not implemented yet');
             }

@@ -5,7 +5,7 @@ import { AuthenticationService, Utils, extractGraphqlMessageErrors, extractGraph
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { TranslocoService } from '@ngneat/transloco';
 import { HttpLink } from 'apollo-angular/http/http-link';
-import { createUploadLink } from 'apollo-upload-client';
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { environment } from 'environments/environment';
 import { lastValueFrom } from 'rxjs';
 

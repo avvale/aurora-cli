@@ -6,6 +6,7 @@ export const iamMeAccount =  gql`
         iamMeAccount
         {
             id
+            clientId
             email
             isActive
             scopes

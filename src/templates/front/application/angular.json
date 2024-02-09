@@ -132,13 +132,13 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "fuse:build:production"
+                            "buildTarget": "fuse:build:production"
                         },
                         "development": {
-                            "browserTarget": "fuse:build:development"
+                            "buildTarget": "fuse:build:development"
                         },
                         "localhost": {
-                            "browserTarget": "fuse:build:localhost"
+                            "buildTarget": "fuse:build:localhost"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -146,7 +146,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "fuse:build"
+                        "buildTarget": "fuse:build"
                     }
                 },
                 "test": {
