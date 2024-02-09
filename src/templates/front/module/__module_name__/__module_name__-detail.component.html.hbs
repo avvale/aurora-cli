@@ -137,18 +137,6 @@
                     {{> charInput schema=../schema property=.}}
 
                     {{/eq}}
-                    {{#eq type 'tinyint.unsigned'}}
-                    {{> intInput schema=../schema property=.}}
-
-                    {{/eq}}
-                    {{#eq type 'tinyint'}}
-                    {{> intInput schema=../schema property=.}}
-
-                    {{/eq}}
-                    {{#eq type 'smallint.unsigned'}}
-                    {{> intInput schema=../schema property=.}}
-
-                    {{/eq}}
                     {{#eq type 'smallint'}}
                     {{> intInput schema=../schema property=.}}
 
@@ -159,10 +147,6 @@
                     {{/eq}}
                     {{#eq type 'boolean'}}
                     {{> booleanInput schema=../schema property=.}}
-
-                    {{/eq}}
-                    {{#eq type 'int.unsigned'}}
-                    {{> intInput schema=../schema property=.}}
 
                     {{/eq}}
                     {{#eq type 'int'}}

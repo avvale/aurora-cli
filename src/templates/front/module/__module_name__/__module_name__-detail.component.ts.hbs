@@ -904,7 +904,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 /* #endregion common actions */
             {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
 
-            /* #region actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} grid-select-element */
+            /* #region actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-select-element */
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}OpenDialog':
                 this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.gridState = {
                     columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId),
@@ -962,7 +962,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     action.meta.format,
                 );
                 break;
-                /* #endregion actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} grid-select-element */
+                /* #endregion actions to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-select-element */
             {{/each}}
             {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
 
