@@ -1,0 +1,41 @@
+{{
+    setVar 'importsArray' (
+        array
+            (object items='Injectable' path='@nestjs/common')
+            (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'I' (toPascalCase schema.moduleName) 'Repository')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
+@Injectable()
+export class {{ toPascalCase schema.boundedContextName }}Sum{{ toPascalCase schema.moduleName }}Service
+{
+    constructor(
+        private readonly repository: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository,
+    ) {}
+
+    async main(
+        column: string,
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        cQMetadata?: CQMetadata,
+    ): Promise<number>
+    {
+        return await this.repository.max(
+            column,
+            {
+                queryStatement,
+                constraint,
+                cQMetadata,
+            },
+        );
+    }
+}

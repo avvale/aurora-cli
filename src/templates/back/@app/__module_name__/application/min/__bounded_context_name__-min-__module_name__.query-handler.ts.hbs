@@ -1,0 +1,38 @@
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'IQueryHandler' 'QueryHandler') path='@nestjs/cqrs')
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Min' (toPascalCase schema.moduleName) 'Query')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Min' (toPascalCase schema.moduleName) 'Service')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/min/' (toKebabCase schema.boundedContextName) '-min-' (toKebabCase schema.moduleName) '.service')
+            )
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
+@QueryHandler({{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Query)
+export class {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}QueryHandler implements IQueryHandler<{{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Query>
+{
+    constructor(
+        private readonly min{{ toPascalCase schema.moduleName }}Service: {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Service,
+    ) {}
+
+    async execute(query: {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Query): Promise<number>
+    {
+        return await this.min{{ toPascalCase schema.moduleName }}Service.main(
+            query.column,
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
+    }
+}

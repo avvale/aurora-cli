@@ -1,0 +1,16 @@
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'CQMetadata' 'QueryStatement') path=config.auroraCorePackage)
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
+export class {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Query
+{
+    constructor(
+        public readonly column: string,
+        public readonly queryStatement?: QueryStatement,
+        public readonly constraint?: QueryStatement,
+        public readonly cQMetadata?: CQMetadata,
+    ) {}
+}

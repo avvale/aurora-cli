@@ -1,0 +1,38 @@
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'IQueryHandler' 'QueryHandler') path='@nestjs/cqrs')
+            (
+                object
+                    items=
+                    (
+                        array
+                            (sumStrings (toPascalCase schema.boundedContextName) 'Max' (toPascalCase schema.moduleName) 'Query')
+                    )
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
+            )
+            (
+                object
+                    items=(sumStrings (toPascalCase schema.boundedContextName) 'Max' (toPascalCase schema.moduleName) 'Service')
+                    path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/max/' (toKebabCase schema.boundedContextName) '-max-' (toKebabCase schema.moduleName) '.service')
+            )
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
+@QueryHandler({{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}Query)
+export class {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}QueryHandler implements IQueryHandler<{{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}Query>
+{
+    constructor(
+        private readonly max{{ toPascalCase schema.moduleName }}Service: {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}Service,
+    ) {}
+
+    async execute(query: {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}Query): Promise<number>
+    {
+        return await this.max{{ toPascalCase schema.moduleName }}Service.main(
+            query.column,
+            query.queryStatement,
+            query.constraint,
+            query.cQMetadata,
+        );
+    }
+}
