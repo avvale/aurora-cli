@@ -16,10 +16,10 @@
 ~}}
 {{{ importManager (object imports=importsArray) }}}
 @Injectable()
-export class {{ toPascalCase schema.boundedContextName }}CountInboxService
+export class {{ toPascalCase schema.boundedContextName }}Count{{ toPascalCase schema.moduleName }}Service
 {
     constructor(
-        private readonly repository: {{ toPascalCase schema.boundedContextName }}IInboxRepository,
+        private readonly repository: {{ toPascalCase schema.boundedContextName }}I{{ toPascalCase schema.moduleName }}Repository,
     ) {}
 
     async main(
