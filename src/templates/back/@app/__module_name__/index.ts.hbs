@@ -45,6 +45,18 @@ export { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/' (toKebabCase schema.boundedContextName) '-raw-sql-' (toKebabCase schema.moduleNames) '.query.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Query } from './application/raw-sql/{{ toKebabCase schema.boundedContextName }}-raw-sql-{{ toKebabCase schema.moduleNames }}.query';
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/count/' (toKebabCase schema.boundedContextName) '-count-' (toKebabCase schema.moduleName) '.query.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}Count{{ toPascalCase schema.moduleName }}Query } from './application/count/{{ toKebabCase schema.boundedContextName }}-count-{{ toKebabCase schema.moduleName }}.query';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/max/' (toKebabCase schema.boundedContextName) '-max-' (toKebabCase schema.moduleName) '.query.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}Query } from './application/max/{{ toKebabCase schema.boundedContextName }}-max-{{ toKebabCase schema.moduleName }}.query';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/min/' (toKebabCase schema.boundedContextName) '-min-' (toKebabCase schema.moduleName) '.query.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Query } from './application/min/{{ toKebabCase schema.boundedContextName }}-min-{{ toKebabCase schema.moduleName }}.query';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/sum/' (toKebabCase schema.boundedContextName) '-sum-' (toKebabCase schema.moduleName) '.query.ts'}}
+export { {{ toPascalCase schema.boundedContextName }}Sum{{ toPascalCase schema.moduleName }}Query } from './application/sum/{{ toKebabCase schema.boundedContextName }}-sum-{{ toKebabCase schema.moduleName }}.query';
+{{/notInArray}}
 
 // export mocks
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/infrastructure/mock/' (toKebabCase schema.boundedContextName) '-mock-' (toKebabCase schema.moduleName) '.data.ts'}}
@@ -169,6 +181,18 @@ import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/' (toKebabCase schema.boundedContextName) '-raw-sql-' (toKebabCase schema.moduleNames) '.query-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler } from './application/raw-sql/{{ toKebabCase schema.boundedContextName }}-raw-sql-{{ toKebabCase schema.moduleNames }}.query-handler';
 {{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/count/' (toKebabCase schema.boundedContextName) '-count-' (toKebabCase schema.moduleNam) '.query-handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Count{{ toPascalCase schema.moduleName }}QueryHandler } from './application/count/{{ toKebabCase schema.boundedContextName }}-count-{{ toKebabCase schema.moduleName }}.query-handler';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/max/' (toKebabCase schema.boundedContextName) '-max-' (toKebabCase schema.moduleName) '.query-handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}QueryHandler } from './application/max/{{ toKebabCase schema.boundedContextName }}-max-{{ toKebabCase schema.moduleName }}.query-handler';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/min/' (toKebabCase schema.boundedContextName) '-min-' (toKebabCase schema.moduleName) '.query-handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}QueryHandler } from './application/min/{{ toKebabCase schema.boundedContextName }}-min-{{ toKebabCase schema.moduleName }}.query-handler';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/sum/' (toKebabCase schema.boundedContextName) '-sum-' (toKebabCase schema.moduleName) '.query-handler.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Sum{{ toPascalCase schema.moduleName }}QueryHandler } from './application/sum/{{ toKebabCase schema.boundedContextName }}-sum-{{ toKebabCase schema.moduleName }}.query-handler';
+{{/notInArray}}
 
 // event handlers
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleName) '.event-handler.ts'}}
@@ -214,6 +238,18 @@ import { {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/' (toKebabCase schema.boundedContextName) '-raw-sql-' (toKebabCase schema.moduleNames) '.service.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Service } from './application/raw-sql/{{ toKebabCase schema.boundedContextName }}-raw-sql-{{ toKebabCase schema.moduleNames }}.service';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/count/' (toKebabCase schema.boundedContextName) '-count-' (toKebabCase schema.moduleName) '.service.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Count{{ toPascalCase schema.moduleName }}Service } from './application/count/{{ toKebabCase schema.boundedContextName }}-count-{{ toKebabCase schema.moduleName }}.service';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/max/' (toKebabCase schema.boundedContextName) '-max-' (toKebabCase schema.moduleName) '.service.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}Service } from './application/max/{{ toKebabCase schema.boundedContextName }}-max-{{ toKebabCase schema.moduleName }}.service';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/min/' (toKebabCase schema.boundedContextName) '-min-' (toKebabCase schema.moduleName) '.service.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Service } from './application/min/{{ toKebabCase schema.boundedContextName }}-min-{{ toKebabCase schema.moduleName }}.service';
+{{/notInArray}}
+{{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/sum/' (toKebabCase schema.boundedContextName) '-sum-' (toKebabCase schema.moduleName) '.service.ts'}}
+import { {{ toPascalCase schema.boundedContextName }}Sum{{ toPascalCase schema.moduleName }}Service } from './application/sum/{{ toKebabCase schema.boundedContextName }}-sum-{{ toKebabCase schema.moduleName }}.service';
 {{/notInArray}}
 {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdService } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-{{ toKebabCase schema.moduleName }}-by-id.service';
@@ -287,6 +323,18 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/' (toKebabCase schema.boundedContextName) '-raw-sql-' (toKebabCase schema.moduleNames) '.query-handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}QueryHandler,
     {{/notInArray}}
+     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/count/' (toKebabCase schema.boundedContextName) '-count-' (toKebabCase schema.moduleNam) '.query-handler.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Count{{ toPascalCase schema.moduleName }}QueryHandler,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/max/' (toKebabCase schema.boundedContextName) '-max-' (toKebabCase schema.moduleName) '.query-handler.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}QueryHandler,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/min/' (toKebabCase schema.boundedContextName) '-min-' (toKebabCase schema.moduleName) '.query-handler.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}QueryHandler,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/sum/' (toKebabCase schema.boundedContextName) '-sum-' (toKebabCase schema.moduleName) '.query-handler.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Sum{{ toPascalCase schema.moduleName }}QueryHandler,
+    {{/notInArray}}
 
     // events
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/' (toKebabCase schema.boundedContextName) '-created-' (toKebabCase schema.moduleName) '.event-handler.ts'}}
@@ -333,6 +381,18 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/' (toKebabCase schema.boundedContextName) '-raw-sql-' (toKebabCase schema.moduleNames) '.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Service,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/count/' (toKebabCase schema.boundedContextName) '-count-' (toKebabCase schema.moduleName) '.service.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Count{{ toPascalCase schema.moduleName }}Service,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/max/' (toKebabCase schema.boundedContextName) '-max-' (toKebabCase schema.moduleName) '.service.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}Service,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/min/' (toKebabCase schema.boundedContextName) '-min-' (toKebabCase schema.moduleName) '.service.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Service,
+    {{/notInArray}}
+    {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/sum/' (toKebabCase schema.boundedContextName) '-sum-' (toKebabCase schema.moduleName) '.service.ts'}}
+    {{ toPascalCase schema.boundedContextName }}Sum{{ toPascalCase schema.moduleName }}Service,
     {{/notInArray}}
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/update/' (toKebabCase schema.boundedContextName) '-update-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdService,
