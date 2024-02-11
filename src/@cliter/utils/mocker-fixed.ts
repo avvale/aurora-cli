@@ -28,7 +28,7 @@ export class MockerFixed
         // according to the meaning of the field use a faker function to obtain the mock
         if (checkFieldNameMeaning)
         {
-            const mockByFieldNameMeaning = MockerFixed.mockByFieldNameMeaning(fieldName);
+            const mockByFieldNameMeaning = MockerFixed.mockByFieldNameMeaning(fieldType, fieldName);
             if (mockByFieldNameMeaning) return mockByFieldNameMeaning;
         }
 
@@ -125,18 +125,21 @@ export class MockerFixed
         }
     }
 
-    private static mockByFieldNameMeaning(fieldName: string): string | number | boolean | undefined
+    private static mockByFieldNameMeaning(fieldType: string, fieldName: string): string | number | boolean | undefined
     {
         switch (fieldName)
         {
             case 'image':
-                return faker.image.image();
+                if (fieldType === 'varchar') return faker.image.image();
+                break;
 
             case 'name':
-                return faker.commerce.productName();
+                if (fieldType === 'varchar') return faker.commerce.productName();
+                break;
 
             case 'slug':
-                return faker.lorem.slug();
+                if (fieldType === 'varchar') return faker.lorem.slug();
+                break;
         }
     }
 }
