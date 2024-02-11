@@ -674,10 +674,12 @@ export class {{ toPascalCase schema.moduleName }}Service
             graphqlStatement = {{ getVariableNameAdditionalApi this }}Query,
             query = {},
             constraint = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         objects: {{ ../schema.aggregateName }}[];
@@ -692,6 +694,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 variables: {
                     query,
                     constraint,
+                },
+                context: {
+                    headers,
                 },
             })
             .valueChanges
@@ -714,9 +719,11 @@ export class {{ toPascalCase schema.moduleName }}Service
         {
             graphqlStatement = {{ getVariableNameAdditionalApi this }}Mutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: {{ toPascalCase ../schema.boundedContextName }}Update{{ toPascalCase ../schema.moduleName }}ById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -726,6 +733,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }
