@@ -666,9 +666,11 @@ export class {{ toPascalCase schema.moduleName }}Service
             });
     }
 {{#if (hasAdditionalApiQueries schema.additionalApis) }}
-
-    // Queries additionalApis
 {{#each (getAdditionalApiQueries schema.additionalApis) }}
+
+{{#if @first}}
+    // Queries additionalApis
+{{/if}}
     {{ getVariableNameAdditionalApi this }}(
         {
             graphqlStatement = {{ getVariableNameAdditionalApi this }}Query,
@@ -712,9 +714,11 @@ export class {{ toPascalCase schema.moduleName }}Service
 {{/each}}
 {{/if}}
 {{#if (hasAdditionalApiMutations schema.additionalApis) }}
-
-    // Mutation additionalApis
 {{#each (getAdditionalApiMutations schema.additionalApis) }}
+
+{{#if @first}}
+    // Mutation additionalApis
+{{/if}}
     {{ getVariableNameAdditionalApi this }}<T>(
         {
             graphqlStatement = {{ getVariableNameAdditionalApi this }}Mutation,
