@@ -132,6 +132,7 @@ export interface Property
     defaultValue?: string | number;
     primaryKey?: boolean;
     index?: PropertyIndex;
+    indexFields?: string[];
     indexName?: string;
     autoIncrement?: boolean;
     decimals?: number[];

@@ -4,53 +4,44 @@ import { Property } from '../../types';
 
 handlebars.registerHelper('indexesManager', function(
     {
-        indexes = [],
+        indexProperties = [],
         isI18n = false,
     }: {
-        indexes: Property[];
+        indexProperties: Property[];
         isI18n: boolean;
     },
     context,
 )
 {
-    const propertiesToIndex = indexes.filter(index => Boolean(index.isI18n) === isI18n);
-
-    const indexedGrouped = _.groupBy(propertiesToIndex, 'indexName');
     let response = '';
 
-    for (const [indexName, indexes] of Object.entries(indexedGrouped))
+    for (const [i, indexProperty] of indexProperties.entries())
     {
-        if (indexName === 'undefined') continue;
-
         response += '\t\t{\n';
         response += '\t\t\tfields: [';
 
-        for (const [i, index] of indexes.entries())
+        if (Array.isArray(indexProperty.indexFields))
         {
-            if (i === indexes.length - 1)
+            for (const [j, indexField] of indexProperty.indexFields.entries())
             {
-                response += `'${index.name}'`;
-                continue;
-            }
+                if (j === indexProperty.indexFields.length - 1)
+                {
+                    response += `'${indexField}'`;
+                    continue;
+                }
 
-            response += `'${index.name}', `;
+                response += `'${indexField}', `;
+            }
+        }
+        else
+        {
+            response += `'${indexProperty.name}'`;
         }
 
         response += '],\n';
-        response += `\t\t\tunique: ${indexes[0].index === 'unique' ? 'true' : 'false'},\n`;
-        response += `\t\t\tname: '${indexName}',\n`;
-        response += '\t\t},\n';
-    }
-
-    if (Array.isArray(indexedGrouped.undefined))
-    {
-        for (const index of indexedGrouped.undefined)
-        {
-            response += '\t\t{\n';
-            response += `\t\t\tfields: ['${index.name}'],\n`;
-            response += `\t\t\tunique: ${index.index === 'unique' ? 'true' : 'false'},\n`;
-            response += '\t\t},\n';
-        }
+        response += `\t\t\tunique: ${indexProperty.index === 'unique' ? 'true' : 'false'},\n`;
+        if (indexProperty.indexName) response += `\t\t\tname: '${indexProperty.indexName}',\n`;
+        response += `\t\t},${i === indexProperties.length - 1 ? '' : '\n'}`;
     }
 
     return response;
