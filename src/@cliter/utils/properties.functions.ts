@@ -1045,3 +1045,67 @@ export const getGridElementsManagerWebComponentsProperties = (
 {
     return properties?.filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER);
 };
+
+export const getImportWebComponentsManagerProperties = (
+    properties: Property[],
+    sortImports: boolean,
+): string[] =>
+{
+    const importWebComponents = new Set<string>();
+
+    if (hasI18nProperties(properties)) importWebComponents.add('FlagLangComponent');
+
+    for (const property of properties)
+    {
+        // avoid evaluating timestamp properties
+        if (timestampProperties.includes(property.name)) continue;
+
+        switch (property.type)
+        {
+            case PropertyType.BOOLEAN:
+                importWebComponents.add('MatCheckboxModule');
+                break;
+
+            case PropertyType.ENUM:
+                importWebComponents.add('MatSelectModule');
+                importWebComponents.add('NgForOf');
+                break;
+
+            case PropertyType.TIMESTAMP:
+                importWebComponents.add('MtxDatetimepickerModule');
+                break;
+
+            case PropertyType.DATE:
+                importWebComponents.add('MatDatepickerModule');
+                break;
+
+            case PropertyType.ID:
+                if (property.webComponent?.type === WebComponentType.SELECT)
+                {
+                    importWebComponents.add('MatSelectModule');
+                    importWebComponents.add('NgForOf');
+                }
+
+                break;
+
+            case PropertyType.RELATIONSHIP:
+                if (property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER)
+                {
+                    importWebComponents.add('GridElementsManagerComponent');
+                    importWebComponents.add('GridCustomButtonsHeaderDialogTemplateDirective');
+                    importWebComponents.add('GridFormElementDetailDialogTemplateDirective');
+                    importWebComponents.add('GridTranslationsComponent');
+                    importWebComponents.add('GridColumnTranslationComponent');
+                }
+
+                break;
+        }
+    }
+
+    const importWebComponentsArr = [...importWebComponents];
+
+    if (sortImports) importWebComponentsArr.sort();
+
+    return importWebComponentsArr;
+};
+

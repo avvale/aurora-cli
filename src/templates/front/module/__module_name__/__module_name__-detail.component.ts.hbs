@@ -61,7 +61,7 @@
     push importsArray
         (
             object
-                items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridElementsManagerComponent' 'GridFiltersStorageService' 'GridState' 'GridStateService' 'QueryStatementHandler')
+                items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridCustomButtonsHeaderDialogTemplateDirective' 'GridData' 'GridElementsManagerComponent' 'GridFiltersStorageService' 'GridFormElementDetailDialogTemplateDirective' 'GridState' 'GridStateService' 'GridColumnTranslationComponent' 'QueryStatementHandler' 'GridTranslationsComponent')
                 path='@aurora'
         )
 ~}}
@@ -180,7 +180,9 @@
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        {{{ importWebComponentsManager (object properties=schema.aggregateProperties) }}}
+        {{#if (hasImportWebComponentsManagerProperties (object properties=schema.aggregateProperties)) }}
+        {{{ getImportWebComponentsManagerProperties (object properties=schema.aggregateProperties) }}}
+        {{/if}}
     ],
 })
 export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDetailComponent
@@ -620,6 +622,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     /* #region methods to manage {{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
     create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm(): void
     {
+        /* eslint-disable key-spacing */
         this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg = this.fb.group({
             {{#each (getFormGroupFieldsProperties (getPropertiesFromPropertyRelationship relationship.modulePath)) as |formGroupFieldsProperty formGroupFieldsPropertyIndex| }}
             {{#if (isAllowProperty (getModuleNameFromPropertyRelationship ../relationship.modulePath) this) }}
@@ -627,6 +630,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {{/if}}
             {{/each}}
         });
+        /* eslint-enable key-spacing */
     }
 
     handleSubmit{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Form($event, dialog): void
