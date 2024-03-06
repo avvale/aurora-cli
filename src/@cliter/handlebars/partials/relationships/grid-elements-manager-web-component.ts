@@ -102,7 +102,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
             >
                 <mat-icon
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:x"
+                    svgIcon="mat_solid:close"
                 >
                 </mat-icon>
                 \\{{ t('Cancel') }}
@@ -117,7 +117,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
             >
                 <mat-icon
                     class="icon-size-5 mr-2"
-                    svgIcon="heroicons_solid:pencil"
+                    svgIcon="mat_solid:mode_edit"
                 >
                 </mat-icon>
                 \\{{ t('Save') }}
