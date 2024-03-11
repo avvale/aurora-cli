@@ -19,7 +19,7 @@
                 path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
             )
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Module') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.boundedContextName) '.module'))
-            (object items='GraphQLConfigModule' path='@aurora/graphql/graphql-config.module')
+            (object items='GraphQLConfigModule' path='@aurora/modules')
             (object items='* as request' path='supertest' defaultImport=true)
             (object items='* as _' path='lodash' defaultImport=true)
     )

@@ -29,7 +29,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
             "
         >
             <mat-icon class="mr-2">add</mat-icon>
-            \\{{ t('New.F') }}
+            \\{{ t('New.M') }}
         </button>
     </ng-template>
     <ng-template

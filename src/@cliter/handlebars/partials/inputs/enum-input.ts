@@ -6,7 +6,9 @@ handlebars.registerPartial('enumInput',
     class="{{ calculateFormGroupCol property }}"
 >
     <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name}}') }}</mat-label>
-    <mat-select formControlName="{{ toCamelCase property.name }}">
+    <mat-select
+        formControlName="{{ toCamelCase property.name }}"
+    >
         {{#each (getPropertyEnumOptions property) }}
         <mat-option value="{{ . }}">{{ . }}</mat-option>
         {{/each}}
