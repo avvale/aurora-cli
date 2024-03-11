@@ -348,7 +348,7 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     @Column({
         field: '{{ toCamelCase relationship.singularName }}Ids',
         allowNull: {{ nullable }},
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.UUID),
         {{#unless (isUndefined defaultValue) }}
         defaultValue: {{{ getDefaultValueProperty this }}},
         {{/unless}}

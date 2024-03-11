@@ -22,7 +22,7 @@ type {{ schema.aggregateName }}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase name }}: [{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}]{{#unless nullable }}!{{/unless}}
     {{#if relationship.isDenormalized}}
-    {{ toCamelCase relationship.singularName }}Ids: JSON{{#unless nullable }}!{{/unless}}
+    {{ toCamelCase relationship.singularName }}Ids: [GraphQLString{{#unless nullable }}!{{/unless}}]{{#unless nullable }}!{{/unless}}
     {{/if}}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}

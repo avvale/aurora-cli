@@ -104,13 +104,13 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
 {{#if relationship.isDenormalized}}
     @ApiProperty({
-        type       : Object,
+        type       : Array,
         description: '{{ toCamelCase relationship.singularName }}Ids [input here api field description]',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
     })
-    {{ toCamelCase relationship.singularName }}Ids{{#if nullable }}?{{/if}}: any;
+    {{ toCamelCase relationship.singularName }}Ids{{#if nullable }}?{{/if}}: string[];
 
 {{/if}}
 {{/eq}}

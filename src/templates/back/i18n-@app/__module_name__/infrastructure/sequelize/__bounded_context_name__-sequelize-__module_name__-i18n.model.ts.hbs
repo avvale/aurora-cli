@@ -303,7 +303,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
     @Column({
         field: '{{ toCamelCase relationship.singularName }}Ids',
         allowNull: {{ nullable }},
-        type: DataTypes.JSON,
+        type: DataTypes.ARRAY(DataTypes.UUID),
         {{#unless (isUndefined defaultValue) }}
         defaultValue: {{{ getDefaultValueProperty this }}},
         {{/unless}}
