@@ -1,1 +1,1 @@
-export * from './split-button.module';
+export * from './public-api';

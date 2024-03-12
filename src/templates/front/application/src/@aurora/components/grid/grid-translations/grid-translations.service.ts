@@ -8,6 +8,7 @@ import { GridActionsMenuMessages, GridMessages, GridOperatorsMessages, GridPagin
 export class GridTranslationsService
 {
     // custom messages
+    defaultGridScope = 'defaultGridScope';
     columnMessages: { [key: string]: { [key: string]: BehaviorSubject<string>; }; } = {};
     actionsMenuMessages: { [key: string]: BehaviorSubject<{ [key: string]: string; }>; } = {};
     messages: { [key: string]: GridMessages; } = {};
@@ -107,6 +108,7 @@ export class GridTranslationsService
         return instantMessages;
     }
 
+    /* #region message translations */
     private checkMessage(scope: string): void
     {
         if (!this.messages[scope])
@@ -115,20 +117,23 @@ export class GridTranslationsService
         }
     }
 
-    setMessage(scope: string, key: keyof GridMessages, message: string): void
+    setMessage(key: keyof GridMessages, message: string, scope: string = 'defaultGridScope'): void
     {
         this.checkMessage(scope);
         this.messages[scope][key].next(message);
     }
 
-    getMessage(scope: string, key: keyof GridMessages): Observable<string>
+    getMessage(key: keyof GridMessages, scope: string = 'defaultGridScope'): Observable<string>
     {
         this.checkMessage(scope);
         return this.messages[scope][key]?.asObservable();
     }
+    /* #endregion message translations */
 
+    /* #region paginator translations */
     private checkPaginatorMessages(scope: string): void
     {
+        scope = 'paginatorGrid';
         if (!this.paginatorMessages[scope])
         {
             this.paginatorMessages[scope] = new BehaviorSubject<GridPaginatorMessages>({ ...this.defaultPaginatorMessages });
@@ -137,15 +142,20 @@ export class GridTranslationsService
 
     setPaginatorMessages(scope: string, paginatorMessages: GridPaginatorMessages): void
     {
+        // paginator translations are set with provider in src/@aurora/aurora.provider.ts, can't to have scope
+        scope = 'paginatorGrid';
         this.checkPaginatorMessages(scope);
         this.paginatorMessages[scope].next({ ...this.defaultPaginatorMessages, ...paginatorMessages });
     }
 
     getPaginatorMessages(scope: string): Observable<GridPaginatorMessages>
     {
+        // paginator translations are set with provider in src/@aurora/aurora.provider.ts, can't to have scope
+        scope = 'paginatorGrid';
         this.checkPaginatorMessages(scope);
         return this.paginatorMessages[scope]?.asObservable();
     }
+    /* #endregion paginator translations */
 
     private checkOperatorsMessages(scope: string): void
     {

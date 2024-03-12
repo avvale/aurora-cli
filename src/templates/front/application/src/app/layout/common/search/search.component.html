@@ -20,8 +20,7 @@
             [matAutocomplete]="matAutocomplete"
             [placeholder]="'Search...'"
             (keydown)="onKeydown($event)"
-            #barSearchInput
-        >
+            #barSearchInput>
         <mat-autocomplete
             class="max-h-128 sm:px-2 border-t rounded-b shadow-md"
             [autoSelectActiveOption]="true"
@@ -80,8 +79,7 @@
                 [formControl]="searchControl"
                 [matAutocomplete]="matAutocomplete"
                 [placeholder]="'Search...'"
-                (keydown)="onKeydown($event)"
-            >
+                (keydown)="onKeydown($event)">
         </mat-form-field>
         <mat-autocomplete
             class="max-h-128 mt-1 rounded"

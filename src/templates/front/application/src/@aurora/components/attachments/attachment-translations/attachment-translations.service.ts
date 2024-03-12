@@ -31,13 +31,13 @@ export class AttachmentTranslationsService
         }
     }
 
-    setMessage(scope: string, key: keyof AttachmentMessages, message: string): void
+    setMessage(key: keyof AttachmentMessages, message: string, scope: string): void
     {
         this.checkMessage(scope);
         this.messages[scope][key].next(message);
     }
 
-    getMessage(scope: string, key: keyof AttachmentMessages): Observable<string>
+    getMessage(key: keyof AttachmentMessages, scope: string): Observable<string>
     {
         this.checkMessage(scope);
         return this.messages[scope][key]?.asObservable();

@@ -1,5 +1,6 @@
 export * from './authentication';
 export * from './authorization';
+export * from './custom-icons';
 export * from './graphql';
 export * from './iam';
 export * from './lang';

@@ -21,6 +21,7 @@ export interface ColumnConfig
     actions?: (row: any) => ColumnConfigAction[];
     transform?: (row: any) => any;
     translationIconColor?: (row: any) => string;
+    fieldValues?: () => { key: string; value: string; }[];
 }
 
 export interface ColumnConfigAction extends Action
@@ -74,7 +75,7 @@ export interface ExportGridState
     format: ExportFormat;
 }
 
-export type FilterColumnDataType = ColumnDataType.STRING | ColumnDataType.NUMBER | ColumnDataType.DATE;
+export type FilterColumnDataType = ColumnDataType.STRING | ColumnDataType.NUMBER | ColumnDataType.DATE | ColumnDataType.ENUM | ColumnDataType.BOOLEAN;
 
 export interface FilterDialogResponse
 {

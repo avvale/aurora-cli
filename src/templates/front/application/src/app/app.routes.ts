@@ -75,7 +75,6 @@ export const appRoutes: Route[] = [
         },
         children: [
             { path: 'example', loadChildren: () => import('app/modules/admin/example/example.routes') },
-            { path: 'notification', loadChildren: () => import('app/modules/admin/apps/notification/notification.routes') },
         ],
     },
 

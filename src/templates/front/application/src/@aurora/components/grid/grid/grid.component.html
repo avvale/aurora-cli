@@ -73,6 +73,7 @@
                     [matBadge]="gridState.columnFilters?.length"
                     [matBadgeHidden]="gridState.columnFilters?.length == 0"
                     matBadgeColor="warn"
+                    aria-hidden="false"
                 >
                     filter_list
                 </mat-icon>
@@ -92,6 +93,7 @@
                 <mat-icon
                     [matBadge]="'!'"
                     [matBadgeHidden]="gridState.columnsConfig | isOriginColumnConfig:originColumnsConfig"
+                    aria-hidden="false"
                 >
                     table_chart
                 </mat-icon>
@@ -447,6 +449,7 @@
                                                     [matBadgeHidden]="action.badge?.hidden"
                                                     [matBadgeColor]="action.badge?.color"
                                                     [matBadge]="action.badge?.label"
+                                                    aria-hidden="false"
                                                 >
                                                     {{ action.icon }}
                                                 </mat-icon>

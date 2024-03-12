@@ -24,7 +24,7 @@ export class GridTranslatePipe implements PipeTransform, OnDestroy
         if (type === 'message')
         {
             return this.gridTranslationsService
-                .getMessage(scope, key as keyof GridMessages)
+                .getMessage(key as keyof GridMessages, scope)
                 .pipe(takeUntil(this._unsubscribeAll));
         }
         else if (type === 'column')

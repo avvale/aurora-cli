@@ -1,21 +1,26 @@
-import { AsyncPipe, NgForOf, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { AsyncPipe, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, QueryList } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { Operator, Utils } from '@aurora';
+import { GridFiltersDialogValueTemplateDirective, Operator, Utils } from '@aurora';
 import { GetPipe } from '@aurora/pipes/get.pipe';
 import { Observable, map, startWith } from 'rxjs';
+import { DatepickerSqlFormatDirective } from '../../datepicker-sql-format';
 import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
 import { GridTranslationsService } from '../grid-translations/grid-translations.service';
 import { ColumnConfig, ColumnDataType, FilterCriteriaOperator, FilterDialogResponse, GridColumnFilter, GridOperatorsMessages } from '../grid.types';
 import { FilterOperatorsPipe } from './pipes/filter-operators.pipe';
+import { GetGridFilterValue } from './pipes/get-grid-filter-value.pipe';
+import { GetGridFiltersValue } from './pipes/get-grid-filter-values.pipe';
 import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector       : 'au-grid-filters-dialog',
@@ -24,14 +29,18 @@ import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        AsyncPipe, FilterOperatorsPipe, GetPipe, GridTranslatePipe, HasRenderOutboxPipe, MatAutocompleteModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule,
-        MatInputModule, MatSelectModule, NgForOf, NgIf, NgSwitch, NgSwitchCase, ReactiveFormsModule
+        AsyncPipe, DatepickerSqlFormatDirective, FilterOperatorsPipe, GetGridFiltersValue, GetGridFilterValue, GetPipe,
+        GridTranslatePipe, HasRenderOutboxPipe, MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatDatepickerModule,
+        MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, NgForOf, NgIf, NgSwitch, NgSwitchCase,
+        NgTemplateOutlet, ReactiveFormsModule,
     ],
 })
 export class GridFiltersDialogComponent implements OnInit
 {
     gridId: string = 'grid';
+    // get columns config from state to get the columns sorted
     columnsConfig: ColumnConfig[] = [];
+    originColumnsConfig: ColumnConfig[] = [];
     // form control picking for fields search from autocomplete
     searchFieldNameControl = new FormControl();
     // columns filtered by autocomplete
@@ -53,7 +62,13 @@ export class GridFiltersDialogComponent implements OnInit
     }
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data: any,
+        @Inject(MAT_DIALOG_DATA) public data: {
+            columnFilters: GridColumnFilter[];
+            columnsConfig: ColumnConfig[];
+            originColumnsConfig: ColumnConfig[];
+            gridId: string;
+            gridFiltersDialogValuesTemplate: QueryList<GridFiltersDialogValueTemplateDirective>;
+        },
         private _dialogRef: MatDialogRef<GridFiltersDialogComponent>,
         private fb: FormBuilder,
         private gridTranslationsService: GridTranslationsService,
@@ -82,7 +97,7 @@ export class GridFiltersDialogComponent implements OnInit
         {
             operator   : Operator.eq,
             translation: 'equals',
-            types      : [ColumnDataType.STRING, ColumnDataType.DATE, ColumnDataType.NUMBER],
+            types      : [ColumnDataType.STRING, ColumnDataType.DATE, ColumnDataType.NUMBER, ColumnDataType.ENUM, ColumnDataType.BOOLEAN],
         },
         {
             operator   : Operator.gt,
@@ -107,7 +122,7 @@ export class GridFiltersDialogComponent implements OnInit
         {
             operator   : Operator.ne,
             translation: 'notEquals',
-            types      : [ColumnDataType.STRING, ColumnDataType.DATE, ColumnDataType.NUMBER],
+            types      : [ColumnDataType.STRING, ColumnDataType.DATE, ColumnDataType.NUMBER, ColumnDataType.ENUM, ColumnDataType.BOOLEAN],
         },
         {
             operator   : Operator.startsWith,
@@ -126,6 +141,9 @@ export class GridFiltersDialogComponent implements OnInit
                 columnConfig.type !== ColumnDataType.CHECKBOX &&
                 columnConfig.type !== ColumnDataType.DRAG_AND_DROP,
             );
+
+        // get original columns config, to get values from columns selected
+        this.originColumnsConfig  = this.data.originColumnsConfig;
 
         // cerate subscription for filter columns in autocomplete component
         this.filteredColumnsConfig = this.searchFieldNameControl

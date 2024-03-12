@@ -33,7 +33,6 @@
                             "crypto-js/enc-base64",
                             "flat",
                             "file-saver",
-                            "quill",
                             "dayjs",
                             "dayjs/locale/es",
                             "dayjs/locale/en",
@@ -45,7 +44,7 @@
                             "dayjs/plugin/isoWeek",
                             "dayjs/plugin/utc",
                             "dayjs/plugin/weekOfYear",
-                            "quill"
+                            "quill-delta"
                         ],
                         "assets": [
                             "src/favicon-16x16.png",

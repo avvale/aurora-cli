@@ -10,7 +10,9 @@
         [routerLink]="routerLinkMainButton"
         (click)="mainButtonClick.emit($event)"
     >
-        <ng-container *ngTemplateOutlet="splitMainButtonContentTemplate.templateRef; context: { }">
+        <ng-container
+            *ngTemplateOutlet="splitMainButtonContentTemplate?.templateRef; context: { }"
+        >
         </ng-container>
     </button>
     <ng-container *ngIf="hasMenu">
@@ -32,7 +34,9 @@
             #menu="matMenu"
             xPosition="before"
         >
-            <ng-container *ngTemplateOutlet="splitMenuButtonsTemplate.templateRef; context: { }">
+            <ng-container
+                *ngTemplateOutlet="splitMenuButtonsTemplate?.templateRef; context: { }"
+            >
             </ng-container>
         </mat-menu>
     </ng-container>

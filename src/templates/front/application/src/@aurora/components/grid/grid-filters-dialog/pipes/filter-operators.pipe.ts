@@ -5,7 +5,7 @@ import { FilterColumnDataType, FilterCriteriaOperator } from '../../grid.types';
  * filter operator accord column type
  */
 @Pipe({
-    name: 'filterOperators',
+    name      : 'filterOperators',
     standalone: true,
 })
 export class FilterOperatorsPipe implements PipeTransform

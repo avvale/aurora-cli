@@ -15,6 +15,10 @@ export class GetContactOperatorPipe implements PipeTransform
         {
             case ColumnDataType.STRING:
                 return 'OR';
+            case ColumnDataType.ENUM:
+                return 'OR';
+            case ColumnDataType.BOOLEAN:
+                return 'OR';
             case ColumnDataType.NUMBER:
                 return 'AND';
             case ColumnDataType.DATE:

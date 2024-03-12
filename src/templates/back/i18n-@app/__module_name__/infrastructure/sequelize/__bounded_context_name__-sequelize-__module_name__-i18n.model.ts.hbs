@@ -308,7 +308,7 @@ export class {{ schema.aggregateName }}I18nModel extends Model<{{ schema.aggrega
         defaultValue: {{{ getDefaultValueProperty this }}},
         {{/unless}}
     })
-    {{ toCamelCase (getPropertyName this) }}: any;
+    {{ toCamelCase (getPropertyName this) }}: string[];
     {{/if}}
     {{else}}
     @BelongsToMany(() => {{ relationship.aggregateName }}Model, {

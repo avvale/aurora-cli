@@ -14,27 +14,27 @@ export class AttachmentTranslationsComponent
     // messages translations
     @Input() set alt(message: string)
     {
-        this.attachmentTranslationsService.setMessage(this.scope, 'alt', message);
+        this.attachmentTranslationsService.setMessage('alt', message, this.scope);
     }
     @Input() set cancel(message: string)
     {
-        this.attachmentTranslationsService.setMessage(this.scope, 'cancel', message);
+        this.attachmentTranslationsService.setMessage('cancel', message, this.scope);
     }
     @Input() set crop(message: string)
     {
-        this.attachmentTranslationsService.setMessage(this.scope, 'crop', message);
+        this.attachmentTranslationsService.setMessage('crop', message, this.scope);
     }
     @Input() set placeholder(message: string)
     {
-        this.attachmentTranslationsService.setMessage(this.scope, 'placeholder', message);
+        this.attachmentTranslationsService.setMessage('placeholder', message, this.scope);
     }
     @Input() set selectFamily(message: string)
     {
-        this.attachmentTranslationsService.setMessage(this.scope, 'selectFamily', message);
+        this.attachmentTranslationsService.setMessage('selectFamily', message, this.scope);
     }
     @Input() set title(message: string)
     {
-        this.attachmentTranslationsService.setMessage(this.scope, 'title', message);
+        this.attachmentTranslationsService.setMessage('title', message, this.scope);
     }
 
     constructor(

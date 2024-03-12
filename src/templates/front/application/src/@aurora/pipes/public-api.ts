@@ -1,3 +1,4 @@
+export * from '@aurora/pipes/date-format.pipe';
 export * from '@aurora/pipes/filter-key-value-and-sort.pipe';
 export * from '@aurora/pipes/format-file-size.pipe';
 export * from '@aurora/pipes/get-values-objects-array.pipe';

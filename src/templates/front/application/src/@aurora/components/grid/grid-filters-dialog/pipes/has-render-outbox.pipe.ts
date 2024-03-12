@@ -5,7 +5,7 @@ import { GridColumnFilter } from '../../grid.types';
  * Check if in has draw field linking brackets
  */
 @Pipe({
-    name: 'hasRenderOutbox',
+    name      : 'hasRenderOutbox',
     standalone: true,
 })
 export class HasRenderOutboxPipe implements PipeTransform

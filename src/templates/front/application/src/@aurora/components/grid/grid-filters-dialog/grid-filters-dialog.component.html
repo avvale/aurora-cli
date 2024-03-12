@@ -94,6 +94,38 @@
                                 </div>
                             </mat-form-field>
 
+                            <!-- ENUM -->
+                            <mat-form-field
+                                *ngSwitchCase="columnDataType.ENUM"
+                                appearance="outline"
+                                class="col-span-7 relative"
+                                tiny
+                            >
+                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                <mat-select formControlName="value">
+                                    <mat-option
+                                        *ngFor="let filterValue of originColumnsConfig | getGridFilterValues:formFilter.get('field').value"
+                                        [value]="filterValue.key"
+                                    >
+                                        <ng-container *ngIf="data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value">
+                                            <ng-container
+                                                *ngTemplateOutlet="(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value).templateRef; context: { $implicit: filterValue.value }"
+                                            >
+                                            </ng-container>
+                                        </ng-container>
+                                        <ng-container *ngIf="!(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)">
+                                            {{ filterValue.value }}
+                                        </ng-container>
+                                    </mat-option>
+                                </mat-select>
+                                <div
+                                    *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value"
+                                    class="outbox"
+                                >
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                </div>
+                            </mat-form-field>
+
                             <!-- NUMBER -->
                             <mat-form-field
                                 *ngSwitchCase="columnDataType.NUMBER"
@@ -114,11 +146,27 @@
                                 </div>
                             </mat-form-field>
 
+                            <!-- BOOLEAN -->
+                            <div
+                                *ngSwitchCase="columnDataType.BOOLEAN"
+                                class="col-span-7 relative pl-12"
+                            >
+                                <mat-checkbox
+                                    formControlName="value"
+                                >
+                                    {{ 'value' | gridTranslate:'message':gridId | async }}
+                                </mat-checkbox>
+
+                                <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                </div>
+                            </div>
+
                             <!-- DATE -->
                             <mat-form-field
                                 *ngSwitchCase="columnDataType.DATE"
                                 appearance="outline"
-                                class="au-datepicker col-span-7 relative"
+                                class="col-span-7 relative"
                                 tiny
                             >
                                 <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>

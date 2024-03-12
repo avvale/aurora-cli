@@ -133,26 +133,36 @@ export class QueryStatementHandler
                 (columnConfig.hidden === undefined || columnConfig.hidden === false)
             )
             {
-                if (columnConfig.type === ColumnDataType.STRING)
+                switch (columnConfig.type)
                 {
-                    searchStatement.push({
-                        [(columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field) + (columnConfig.isUnaccent ? '::unaccent' : '')]:
-                        {
-                            [Operator.iLike]: `%${value}%`,
-                        },
-                    });
+                    case ColumnDataType.STRING:
+                        searchStatement.push({
+                            [(columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field) + (columnConfig.isUnaccent ? '::unaccent' : '')]:
+                            {
+                                [Operator.iLike]: `%${value}%`,
+                            },
+                        });
+                        break;
+
+                    case ColumnDataType.ARRAY:
+                    case ColumnDataType.NUMBER:
+                    case ColumnDataType.ENUM:
+                        searchStatement.push({
+                            [(columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field) + '::cast::varchar']:
+                            {
+                                [Operator.iLike]: `%${value}%`,
+                            },
+                        });
+                        break;
+
+                    case ColumnDataType.ACTIONS:
+                        // do nothing
+                        break;
+
+                    default:
+                        log(`[DEBUG] Search is not implemented for ${columnConfig.type} yet`);
+                        break;
                 }
-                if (columnConfig.type === ColumnDataType.ARRAY)
-                {
-                    searchStatement.push({
-                        [(columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field) + '::cast::varchar']:
-                        {
-                            [Operator.iLike]: `%${value}%`,
-                        },
-                    });
-                }
-                if (columnConfig.type === ColumnDataType.ENUM)      log('[DEBUG] Enum search is not implemented yet');
-                if (columnConfig.type === ColumnDataType.NUMBER)    log('[DEBUG] Number search is not implemented yet');
             }
         }
 

@@ -25,6 +25,7 @@ export * from './ribbon-environment';
 export * from './select-search';
 export * from './slug';
 export * from './split-button';
+export * from './split-button';
 export * from './template-dialog';
 export * from './title';
 export * from './user-meta-storage';

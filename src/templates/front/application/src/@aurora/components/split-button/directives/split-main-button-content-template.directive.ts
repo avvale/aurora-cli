@@ -1,7 +1,8 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: '[auSplitMainButtonContentTemplate]',
+    selector  : '[auSplitMainButtonContentTemplate]',
+    standalone: true,
 })
 export class SplitMainButtonContentTemplateDirective
 {

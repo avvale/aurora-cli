@@ -24,7 +24,7 @@ export class AttachmentTranslatePipe implements PipeTransform, OnDestroy
         if (type === 'message')
         {
             return this.attachmentTranslationsService
-                .getMessage(scope, key as keyof AttachmentMessages)
+                .getMessage(key as keyof AttachmentMessages, scope)
                 .pipe(takeUntil(this._unsubscribeAll));
         }
     }

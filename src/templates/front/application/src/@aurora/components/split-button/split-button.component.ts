@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { SplitMainButtonContentTemplateDirective } from './directives/split-main-button-content-template.directive';
 import { SplitMenuButtonsTemplateDirective } from './directives/split-menu-buttons-template.directive';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { RouterModule } from '@angular/router';
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector       : 'au-split-button',
@@ -8,6 +13,10 @@ import { SplitMenuButtonsTemplateDirective } from './directives/split-menu-butto
     styleUrls      : ['./split-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation  : ViewEncapsulation.None,
+    standalone     : true,
+    imports        : [
+        MatButtonModule, MatIconModule, MatMenuModule, NgClass, NgIf, NgTemplateOutlet, RouterModule,
+    ],
 })
 export class SplitButtonComponent
 {

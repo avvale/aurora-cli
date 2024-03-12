@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
-import { AsyncPipe, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { Action, GridManagerService } from '@aurora';
+import { Action, GridFiltersDialogValueTemplateDirective, GridManagerService } from '@aurora';
 import { JoinPipe } from '@aurora/pipes/join.pipe';
 import { FlagIconComponent } from '@aurora/components/flag-icon';
 import { merge, tap } from 'rxjs';
@@ -34,7 +34,7 @@ import { SelectionChange, SelectionModel } from '../selection-model/selection-mo
     imports        : [
         AsyncPipe, DragDropModule, FilterGridCustomHeaderTemplatesPositionPipe, FlagIconComponent, GetActionsPipe, GetCellValuePipe, GetGridSpinnerFlagPipe, GridSearchComponent, GridTranslatePipe, GetTranslationIconColorPipe,
         HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, JoinPipe, IsOriginColumnConfigPipe, MatBadgeModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatPaginatorModule, MatSortModule, MatTableModule,
-        NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, TransformDataCellPipe,
+        NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, TransformDataCellPipe,
     ],
 })
 export class GridComponent implements OnInit, AfterViewInit
@@ -110,8 +110,12 @@ export class GridComponent implements OnInit, AfterViewInit
 
     // directive to set custom values in cells
     @ContentChildren(GridCellValueTemplateDirective) gridCellValuesTemplate?: QueryList<GridCellValueTemplateDirective>;
+
     // add custom header
     @ContentChildren(GridCustomHeaderTemplateDirective) gridCustomHeadersTemplate?: QueryList<GridCustomHeaderTemplateDirective>;
+
+    // get custom values form column filters with selects
+    @ContentChildren(GridFiltersDialogValueTemplateDirective) gridFiltersDialogValuesTemplate?: QueryList<GridFiltersDialogValueTemplateDirective>;
 
     get displayedColumns(): string[]
     {
@@ -324,9 +328,11 @@ export class GridComponent implements OnInit, AfterViewInit
                 minWidth  : '240px',
                 autoFocus : false,
                 data      : {
-                    columnFilters: this.gridState.columnFilters,
-                    columnsConfig: this.gridState.columnsConfig,
-                    gridId       : this.id,
+                    columnFilters                  : this.gridState.columnFilters,
+                    columnsConfig                  : this.gridState.columnsConfig,
+                    originColumnsConfig            : this.originColumnsConfig,
+                    gridId                         : this.id,
+                    gridFiltersDialogValuesTemplate: this.gridFiltersDialogValuesTemplate,
                 },
             });
 

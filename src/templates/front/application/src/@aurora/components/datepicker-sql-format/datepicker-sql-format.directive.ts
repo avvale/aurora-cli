@@ -4,7 +4,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import * as dayjs from 'dayjs';
 
 @Directive({
-    selector: '[auDatepickerSqlFormat]',
+    selector  : '[auDatepickerSqlFormat]',
     standalone: true,
 })
 export class DatepickerSqlFormatDirective

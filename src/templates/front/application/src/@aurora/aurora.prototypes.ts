@@ -1,4 +1,3 @@
-
 import './prototypes/string-to-camel-case.interface';
 import './prototypes/string-to-camel-case';
 import './prototypes/string-to-kebab-case.interface';

@@ -121,7 +121,7 @@
     }
 
     /* Set the foreground color for disabled elements */
-    [disabled] * {
+    [disabled] {
         @apply text-disabled #{'!important'};
     }
 
