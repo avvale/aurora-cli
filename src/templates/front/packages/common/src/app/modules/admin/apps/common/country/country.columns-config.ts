@@ -4,6 +4,13 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 export const countryColumnsConfig: ColumnConfig[] = [
     {
         type       : ColumnDataType.STRING,
+        field      : 'id',
+        sort       : 'id',
+        translation: 'Id',
+        hidden     : true,
+    },
+    {
+        type       : ColumnDataType.STRING,
         field      : 'name',
         sort       : 'name',
         translation: 'common.Name',

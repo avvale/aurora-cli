@@ -3,6 +3,20 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 export const administrativeAreaLevel2ColumnsConfig: ColumnConfig[] = [
     {
         type       : ColumnDataType.STRING,
+        field      : 'id',
+        sort       : 'id',
+        translation: 'Id',
+        hidden     : true,
+    },
+    {
+        type       : ColumnDataType.STRING,
+        field      : 'administrativeAreaLevel1Id',
+        sort       : 'administrativeAreaLevel1Id',
+        translation: 'common.administrativeAreaLevel1Id',
+        hidden     : true,
+    },
+    {
+        type       : ColumnDataType.STRING,
         field      : 'code',
         sort       : 'code',
         translation: 'common.Code',
