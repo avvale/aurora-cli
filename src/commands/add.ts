@@ -240,6 +240,10 @@ export class Add extends Command
                 case 'iam': {
                     await BackHandler.addPackage(addCommandState);
 
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@angular-material-extensions/password-strength']);
+                    ux.action.stop('Completed!');
+
                     const project = CommonDriver.createProject(['tsconfig.json']);
 
                     // app.module.ts file
