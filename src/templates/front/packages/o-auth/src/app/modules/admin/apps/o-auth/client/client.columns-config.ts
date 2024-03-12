@@ -36,6 +36,7 @@ export const clientColumnsConfig: ColumnConfig[] = [
         field      : 'scopes',
         sort       : 'scopes',
         translation: 'oAuth.Scopes',
+        hidden     : true,
     },
     {
         type       : ColumnDataType.NUMBER,
