@@ -14,7 +14,7 @@ export const accountColumnsConfig: ColumnConfig[] = [
         translation: 'iam.Code',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.ARRAY,
         field      : 'scopes',
         sort       : 'scopes',
         translation: 'iam.Scopes',
