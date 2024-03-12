@@ -15,7 +15,6 @@
         "test": "ng test"
     },
     "dependencies": {
-        "@angular-material-extensions/password-strength": "^16.0.0",
         "@angular/animations": "17.2.4",
         "@angular/cdk": "17.2.2",
         "@angular/common": "17.2.4",
