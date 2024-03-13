@@ -1,11 +1,10 @@
-import { CoreFileUploaderService } from '@aurora/modules/file-uploader';
 import { CoreGetFallbackLangFromJsonService, CoreGetLangsFromJsonService } from '@aurora/modules/lang';
 import { AuditingRunner, AuditingRunnerDisabledImplementationService, AuroraMetadataModule, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetLangsService, CoreGetSearchKeyLangService, CoreModule } from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
-import { CqrsConfigModule } from './cqrs-config.module';
+import { CqrsConfigModule, SentryModule } from './modules';
 
 @Module({
     imports: [
@@ -14,10 +13,19 @@ import { CqrsConfigModule } from './cqrs-config.module';
         ConfigModule.forRoot({ isGlobal: true }),
         CoreModule,
         CqrsConfigModule,
-        CqrsModule
+        CqrsModule,
+        SentryModule.forRootAsync({
+            imports   : [ConfigModule],
+            inject    : [ConfigService],
+            useFactory: (configService: ConfigService) => ({
+                dsn        : configService.get('SENTRY_DSN'),
+                environment: configService.get('SENTRY_ENVIRONMENT'),
+                release    : configService.get('SENTRY_PROJECT') + '@' + process.env.npm_package_version,
+            }),
+        }),
     ],
     providers: [
-        CoreFileUploaderService,
+        CommonAttachmentsService,
         CoreAddI18nConstraintService,
         CoreGetContentLanguageObjectService,
         CoreGetSearchKeyLangService,
@@ -40,12 +48,13 @@ import { CqrsConfigModule } from './cqrs-config.module';
         CacheModule,
         ConfigModule,
         CoreAddI18nConstraintService,
-        CoreFileUploaderService,
         CoreGetContentLanguageObjectService,
         CoreGetFallbackLangService,
         CoreGetLangsService,
         CoreGetSearchKeyLangService,
-        CqrsConfigModule
+        CqrsConfigModule,
+        HttpModule,
+        SentryModule,
     ],
 })
 export class SharedModule {}
