@@ -294,7 +294,7 @@ export class CodeWriter
             // import module
             ImportDriver.createImportItems(
                 sourceFile,
-                `./${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
+                `${cliterConfig.apiContainer}/${this.boundedContextName.toKebabCase()}/${this.boundedContextName.toKebabCase()}.module`,
                 [`${this.boundedContextName.toPascalCase()}Module`],
             );
 

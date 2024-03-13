@@ -1,16 +1,17 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { setTimeZoneApplication } from '@aurorajs.dev/core';
-import { urlencoded, json } from 'express';
-import * as utc from 'dayjs/plugin/utc';
-import * as timezone from 'dayjs/plugin/timezone';
-import * as advancedFormat from 'dayjs/plugin/advancedFormat';
-import * as weekOfYear from 'dayjs/plugin/weekOfYear';
-import * as isoWeek from 'dayjs/plugin/isoWeek';
-import * as dayOfYear from 'dayjs/plugin/dayOfYear';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dayjs from 'dayjs';
+import * as advancedFormat from 'dayjs/plugin/advancedFormat';
+import * as dayOfYear from 'dayjs/plugin/dayOfYear';
+import * as isoWeek from 'dayjs/plugin/isoWeek';
+import * as timezone from 'dayjs/plugin/timezone';
+import * as utc from 'dayjs/plugin/utc';
+import * as weekOfYear from 'dayjs/plugin/weekOfYear';
+import { json, urlencoded } from 'express';
+import { logger } from './@aurora/services';
+import { AppModule } from './app.module';
 
 // dayjs configuration
 dayjs.extend(utc);
@@ -22,7 +23,7 @@ dayjs.extend(dayOfYear);
 
 async function bootstrap(): Promise<void>
 {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule, { logger: logger() });
     const configService = app.get(ConfigService);
 
     if (configService.get<string>('SWAGGER') === 'true')
