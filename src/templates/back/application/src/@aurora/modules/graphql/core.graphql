@@ -9,6 +9,9 @@ scalar GraphQLBoolean
 scalar GraphQLISODateTime
 scalar GraphQLTimestamp
 
+##############
+# Lang types #
+##############
 type CoreLang
 {
     id: GraphQLString!
@@ -40,6 +43,55 @@ enum CoreSearchKeyLang
     ietf
 }
 
+#######################
+# Files manager types #
+#######################
+type CoreFile
+{
+    id: ID!
+    originFilename: GraphQLString!
+    filename: GraphQLString!
+    mimetype: GraphQLString!
+    extension: GraphQLString!
+    relativePathSegments: [GraphQLString!]!
+    width: GraphQLInt
+    height: GraphQLInt
+    size: GraphQLInt!
+    url: GraphQLString!
+    isCropable: GraphQLBoolean!
+    isUploaded: GraphQLBoolean!
+    libraryId: ID
+    libraryFilename: GraphQLString
+    library: CoreLibraryFile
+    meta: JSON
+}
+
+type CoreLibraryFile
+{
+    id: ID!
+    originFilename: GraphQLString!
+    filename: GraphQLString!
+    mimetype: GraphQLString!
+    extension: GraphQLString!
+    relativePathSegments: [GraphQLString!]!
+    width: GraphQLInt!
+    height: GraphQLInt!
+    size: GraphQLInt!
+    url: GraphQLString!
+    meta: JSON
+}
+
+input CoreFileUploaded
+{
+    id: ID!
+    file: Upload!
+    relativePathSegments: [GraphQLString]
+    hasCreateLibrary: GraphQLBoolean
+}
+
+#############
+# ORM types #
+#############
 input QueryStatement
 {
     where: JSON

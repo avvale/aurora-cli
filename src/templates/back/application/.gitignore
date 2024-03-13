@@ -6,7 +6,7 @@
 /node_modules
 
 # files uploaded
-/storage
+/public
 
 # Logs
 logs
