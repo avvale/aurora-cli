@@ -4,6 +4,7 @@ import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
 import { ModuleDefinitionSchema } from '../types';
 import { cliterConfig } from '../config';
+import { addYamlDefaultValues } from '../functions/common';
 
 export class YamlManager
 {
@@ -17,7 +18,7 @@ export class YamlManager
 
         YamlManager.checkModuleDefinitionSchema(yamlObj);
 
-        return yamlObj;
+        return addYamlDefaultValues(yamlObj);
     }
 
     public static generateYamlConfigFile(
