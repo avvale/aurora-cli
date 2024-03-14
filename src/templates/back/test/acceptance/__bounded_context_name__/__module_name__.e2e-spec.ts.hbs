@@ -176,7 +176,7 @@ describe('{{ toKebabCase schema.moduleName }}', () =>
     });
 
     {{/each}}
-    {{#each (countProperties schema.aggregateProperties schema.moduleName)  as |lengthProperty lengthPropertyIndex|}}
+    {{#each (getLengthProperties schema.aggregateProperties schema.moduleName)  as |lengthProperty lengthPropertyIndex|}}
     test('/REST:POST {{ toKebabCase ../schema.boundedContextName }}/{{ toKebabCase ../schema.moduleName }}/create - Got 400 Conflict, {{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }} is not allowed, must be a length of {{ lengthProperty.length }}', () =>
     {
         return request(app.getHttpServer())
