@@ -4,7 +4,7 @@ import * as yaml from 'js-yaml';
 import * as _ from 'lodash';
 import { ModuleDefinitionSchema } from '../types';
 import { cliterConfig } from '../config';
-import { addYamlDefaultValues } from '../functions/common';
+import { addYamlDefaultValues, deleteYamlDefaultValues } from '../functions/common';
 
 export class YamlManager
 {
@@ -28,7 +28,7 @@ export class YamlManager
         // write yaml file
         const yamlStr = yaml.dump(
             {
-                ...schema,
+                ...deleteYamlDefaultValues(schema),
                 version: cliterConfig.configYamlVersion,
             },
             {
