@@ -1,0 +1,28 @@
+version: 0.0.1
+boundedContextName: whatsapp
+moduleName: conversation
+moduleNames: conversations
+aggregateName: WhatsappConversation
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: accounts
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
+    index: index
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true

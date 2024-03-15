@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - whatsapp/message",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - whatsappCreateMessage",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:WhatsappCreateMessageInput!)\n{\n\twhatsappCreateMessage (payload:$payload)\n\t{\n\t\tid\n\t\twhatsappMessageId\n\t\tconversationId\n\t\tdirection\n\t\taccountId\n\t\tdisplayPhoneNumber\n\t\tphoneNumberId\n\t\ttype\n\t\tpayload\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"whatsappMessageId\": \"p\", \n\t\t\"conversationId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"direction\": 'INPUT', \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"displayPhoneNumber\": \"c54bjj01zn3kv8yir70orev6ybr0txpl22n\", \n\t\t\"phoneNumberId\": \"14st3y5g1sfuwehjot8term9j6e9ky7p3h6\", \n\t\t\"type\": 'REACTION', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappCreateMessages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[WhatsappCreateMessageInput]!)\n{\n\twhatsappCreateMessages (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"409513c6-cfdc-424b-acd4-beacea83a2f0\", \n\t\t\t\"whatsappMessageId\": \"7\", \n\t\t\t\"conversationId\": \"b2c0b880-50a6-4ed8-bff0-caf4033dea37\", \n\t\t\t\"direction\": 'OUTPUT', \n\t\t\t\"accountId\": \"23b3549e-eb24-421b-8516-672bdb97fdc7\", \n\t\t\t\"displayPhoneNumber\": \"5yfcicq0xwqzwtr4mhxey0l8sxvhluiafa6\", \n\t\t\t\"phoneNumberId\": \"pugvlxciznrwgoni04pttsef3xc8ilmvd5e\", \n\t\t\t\"type\": 'INTERACTIVE', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"7b8bce0e-605c-41f2-92fa-365270887470\", \n\t\t\t\"whatsappMessageId\": \"y\", \n\t\t\t\"conversationId\": \"59aac393-74ea-4fcf-8101-f5f822e01b71\", \n\t\t\t\"direction\": 'OUTPUT', \n\t\t\t\"accountId\": \"a3bf6bcc-22fe-4475-824d-e9a736e2af29\", \n\t\t\t\"displayPhoneNumber\": \"vsxvfs2ieyzk15f0e8udsrc8flkfb9crv52\", \n\t\t\t\"phoneNumberId\": \"cl4vg45qft4lfi7sb74cp44x3s5ogngi8a2\", \n\t\t\t\"type\": 'INTERACTIVE', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"762ceda5-92ba-4134-8b58-60a14c381318\", \n\t\t\t\"whatsappMessageId\": \"l\", \n\t\t\t\"conversationId\": \"98ff2d9c-a499-4ed2-b73e-423b6c7d7414\", \n\t\t\t\"direction\": 'INPUT', \n\t\t\t\"accountId\": \"20291e73-a254-4e2a-b376-20ea60b58ea3\", \n\t\t\t\"displayPhoneNumber\": \"hmk8d2v6smattw59dzm1iyoa03fw1okglrv\", \n\t\t\t\"phoneNumberId\": \"zojhfvucwwbb0ph882jge5ysq4dftjgz8dq\", \n\t\t\t\"type\": 'IMAGE', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"01f9c821-b7b6-40f3-a325-5e7855c511df\", \n\t\t\t\"whatsappMessageId\": \"v\", \n\t\t\t\"conversationId\": \"baf497fd-898e-4765-9dc2-7dbb7b8f2100\", \n\t\t\t\"direction\": 'OUTPUT', \n\t\t\t\"accountId\": \"25a9c7be-de78-4730-a3f1-6bca85643985\", \n\t\t\t\"displayPhoneNumber\": \"13f4ai0woyijr8pn2mbjp6wwvjsljenrrdv\", \n\t\t\t\"phoneNumberId\": \"ggjfegejytkx5t1b4bjl5oz66hvys4qa60s\", \n\t\t\t\"type\": 'TEXT', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"14bc0c57-64e0-46a0-a70b-5a58119e068b\", \n\t\t\t\"whatsappMessageId\": \"b\", \n\t\t\t\"conversationId\": \"02dde54b-fca3-4616-9028-b26d638b59c8\", \n\t\t\t\"direction\": 'INPUT', \n\t\t\t\"accountId\": \"dec64d13-7173-44e3-9a21-46b3ec659deb\", \n\t\t\t\"displayPhoneNumber\": \"8f2z36q5hmupumuk36q82bde8vu5f0dphuv\", \n\t\t\t\"phoneNumberId\": \"jnygnydf1n8nyszq1s1qhrvgfv1165587cd\", \n\t\t\t\"type\": 'LOCATION', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"22d1ded0-774c-42ad-a75c-97f3efef722e\", \n\t\t\t\"whatsappMessageId\": \"0\", \n\t\t\t\"conversationId\": \"b894dff1-daba-41c4-87f3-cbd38274087f\", \n\t\t\t\"direction\": 'OUTPUT', \n\t\t\t\"accountId\": \"5973452d-c5b0-4ba4-9125-b9649226aa99\", \n\t\t\t\"displayPhoneNumber\": \"tziim6int0u024tc6rt4x853gzhw08sn883\", \n\t\t\t\"phoneNumberId\": \"1sedhircg53ky174v9gg29jcf0e2phiqu0a\", \n\t\t\t\"type\": 'CONTACTS', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4cb2848c-5cc6-44ea-bf60-1869219b8783\", \n\t\t\t\"whatsappMessageId\": \"u\", \n\t\t\t\"conversationId\": \"d7dab705-7a6c-42dc-9a4b-e93e465fd367\", \n\t\t\t\"direction\": 'OUTPUT', \n\t\t\t\"accountId\": \"dbde6038-86e3-4329-80cb-5d34b5a8d880\", \n\t\t\t\"displayPhoneNumber\": \"8uptgsivsvxszyellm44bxqcpypoxe0b9z3\", \n\t\t\t\"phoneNumberId\": \"yxcs1s4gn2x58chmqeaw3sh7m89r7usj8cm\", \n\t\t\t\"type\": 'TEXT', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a7f443ef-e9c1-488b-8dfa-f6b2e8501a13\", \n\t\t\t\"whatsappMessageId\": \"2\", \n\t\t\t\"conversationId\": \"8fcc5085-ef85-41b9-a96e-f15f485b933c\", \n\t\t\t\"direction\": 'OUTPUT', \n\t\t\t\"accountId\": \"e51d5935-7512-47ec-80c6-0cd4841b68ea\", \n\t\t\t\"displayPhoneNumber\": \"s915xhvorgisve4a314w8swaqdm8lgh3nnn\", \n\t\t\t\"phoneNumberId\": \"6aluva0p71t66labygkyujqugprmjiulex2\", \n\t\t\t\"type\": 'INTERACTIVE', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2bde3d32-7d20-4904-87d5-ff38901abc1d\", \n\t\t\t\"whatsappMessageId\": \"u\", \n\t\t\t\"conversationId\": \"f5811f75-7c41-4272-af09-285a80f990ea\", \n\t\t\t\"direction\": 'OUTPUT', \n\t\t\t\"accountId\": \"980c4b3d-a766-4eea-acd6-fa3365ec1089\", \n\t\t\t\"displayPhoneNumber\": \"2wx2602ga39w8hznc45hsefgx7jcksmwojk\", \n\t\t\t\"phoneNumberId\": \"w3rlpvj8vgrglr1zdv4ml1skh3rds4vl4eo\", \n\t\t\t\"type\": 'TEMPLATE', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3dc04f31-2463-41e1-9366-e39e0f5396bc\", \n\t\t\t\"whatsappMessageId\": \"g\", \n\t\t\t\"conversationId\": \"3e25f3ac-f0e8-4234-ac84-fc2108c4eb1d\", \n\t\t\t\"direction\": 'INPUT', \n\t\t\t\"accountId\": \"1ee6221c-1d9f-4607-a172-2b2462931048\", \n\t\t\t\"displayPhoneNumber\": \"38pqr6j63rm7lo1it2wc8doptjsofhcu4yc\", \n\t\t\t\"phoneNumberId\": \"k6c1zgc2y77kutwecmqtk3s801d5vz87rbr\", \n\t\t\t\"type\": 'CONTACTS', \n\t\t\t\"payload\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappPaginateMessages",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\twhatsappPaginateMessages (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappGetMessages",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\twhatsappGetMessages (query: $query)\n\t{\n\t\tid\n\t\twhatsappMessageId\n\t\tdirection\n\t\taccountId\n\t\tdisplayPhoneNumber\n\t\tphoneNumberId\n\t\ttype\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappFindMessage",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\twhatsappFindMessage (query: $query)\n\t{\n\t\tid\n\t\twhatsappMessageId\n\t\tdirection\n\t\taccountId\n\t\tdisplayPhoneNumber\n\t\tphoneNumberId\n\t\ttype\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappFindMessageById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\twhatsappFindMessageById (id:$id)\n\t{\n\t\tid\n\t\twhatsappMessageId\n\t\tdirection\n\t\taccountId\n\t\tdisplayPhoneNumber\n\t\tphoneNumberId\n\t\ttype\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappUpdateMessage",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:WhatsappUpdateMessageInput!)\n{\n\twhatsappUpdateMessage (payload:$payload)\n\t{\n\t\tid\n\t\twhatsappMessageId\n\t\tdirection\n\t\taccountId\n\t\tdisplayPhoneNumber\n\t\tphoneNumberId\n\t\ttype\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"whatsappMessageId\": \"l\", \n\t\t\"conversationId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"direction\": 'OUTPUT', \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"displayPhoneNumber\": \"5yhd8opvji4gj40njigtn6ykhx6da1fhs6j\", \n\t\t\"phoneNumberId\": \"vk2o1evfkxety0ucxau847fulbin7aagpj1\", \n\t\t\"type\": 'REACTION', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappDeleteMessageById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\twhatsappDeleteMessageById (id:$id)\n\t{\n\t\tid\n\t\twhatsappMessageId\n\t\tdirection\n\t\taccountId\n\t\tdisplayPhoneNumber\n\t\tphoneNumberId\n\t\ttype\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappDeleteMessages",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\twhatsappDeleteMessages (query: $query)\n\t{\n\t\tid\n\t\twhatsappMessageId\n\t\tdirection\n\t\taccountId\n\t\tdisplayPhoneNumber\n\t\tphoneNumberId\n\t\ttype\n\t\tpayload\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/message/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"whatsappMessageId\": \"o\", \n\t\"conversationId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"direction\": 'INPUT', \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"displayPhoneNumber\": \"x9qh6y1bh30chqyo298eujub00yptzl89mw\", \n\t\"phoneNumberId\": \"r9jiioikcq3j5v0etnvfbsj60hb2up9z3p6\", \n\t\"type\": 'LOCATION', \n\t\"payload\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/message/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"message",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/messages/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"50d0db8d-233d-40c4-b155-45d5bd74973d\", \n\t\t\"whatsappMessageId\": \"2\", \n\t\t\"conversationId\": \"342b3a41-fd25-4bf8-8595-3f66ea9fbb6b\", \n\t\t\"direction\": 'OUTPUT', \n\t\t\"accountId\": \"0abda85e-a523-4a5c-8897-be8be5dfef66\", \n\t\t\"displayPhoneNumber\": \"raxe2ylter2ihp30102w6j8nyr7hl8xre36\", \n\t\t\"phoneNumberId\": \"0pwrg7q261c7zpycsc6gtcoivxvfqqvbvtk\", \n\t\t\"type\": 'REACTION', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"4d4cde01-6d47-4b7d-96bc-8eb2942cc242\", \n\t\t\"whatsappMessageId\": \"6\", \n\t\t\"conversationId\": \"e17a3763-860a-432a-b627-d19864d9e364\", \n\t\t\"direction\": 'INPUT', \n\t\t\"accountId\": \"7e1f5c48-5144-49ee-9eaf-f808584c9bdf\", \n\t\t\"displayPhoneNumber\": \"o7w9arzsfmiola5du10r138cp2lacqr6vcj\", \n\t\t\"phoneNumberId\": \"4s7p188i9sxq3i4mmblnaw892eb5a33stdm\", \n\t\t\"type\": 'INTERACTIVE', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"377be755-d4b2-451b-a348-6e152c4d30d6\", \n\t\t\"whatsappMessageId\": \"t\", \n\t\t\"conversationId\": \"d1ec2553-2eea-488d-a5bc-c96c4a3bc911\", \n\t\t\"direction\": 'INPUT', \n\t\t\"accountId\": \"6f203c78-3eb8-4aca-ade5-4ceaaf61e3f2\", \n\t\t\"displayPhoneNumber\": \"99amf5tzkhfalw5mx65mzw1nb3oabwftz6q\", \n\t\t\"phoneNumberId\": \"t8sh6uutr90t97vvq5wskv9246tzf4xx3s9\", \n\t\t\"type\": 'TEMPLATE', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"7815f9d0-18b2-4f7c-bf15-2843bd2e88a6\", \n\t\t\"whatsappMessageId\": \"b\", \n\t\t\"conversationId\": \"957730ed-80f7-4969-8213-2168e086ed38\", \n\t\t\"direction\": 'OUTPUT', \n\t\t\"accountId\": \"632e74c1-8f58-4470-acc7-d703b1338399\", \n\t\t\"displayPhoneNumber\": \"u11jiiejlagsm91z0bmhuoktlid31zyxzxh\", \n\t\t\"phoneNumberId\": \"ga00u779idvjej84rckoj2cb8elmcn83x82\", \n\t\t\"type\": 'CONTACTS', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"e34e5eeb-1e7f-4bd2-9018-b7bcdee1a79f\", \n\t\t\"whatsappMessageId\": \"s\", \n\t\t\"conversationId\": \"342a2eed-a180-4bdb-a0df-ef443482bb96\", \n\t\t\"direction\": 'INPUT', \n\t\t\"accountId\": \"65f3de4a-de07-480d-a0b8-8736389f3296\", \n\t\t\"displayPhoneNumber\": \"ajgpwmrq64jeyur7g9wx07vvadqtrvtof5i\", \n\t\t\"phoneNumberId\": \"rkgtidad3szon6jtv0949ybdr58t2qfuq6x\", \n\t\t\"type\": 'IMAGE', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2039ae79-06cc-40bc-a23c-bc9936843458\", \n\t\t\"whatsappMessageId\": \"2\", \n\t\t\"conversationId\": \"530aa746-fa50-4737-922b-495a620073c4\", \n\t\t\"direction\": 'OUTPUT', \n\t\t\"accountId\": \"2b9c6fae-79d4-418f-ae5d-af8851c228be\", \n\t\t\"displayPhoneNumber\": \"5dncc8w66ffxaln2pgxd2u7ch2ehcktkww8\", \n\t\t\"phoneNumberId\": \"fotag1icmw0sm2bt2l2fj7atayespem3wpx\", \n\t\t\"type\": 'TEXT', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"84e829b0-560d-4cfb-a114-d7ae398f6485\", \n\t\t\"whatsappMessageId\": \"x\", \n\t\t\"conversationId\": \"1519e9f1-2fec-4c5d-9466-bb4ffeba8269\", \n\t\t\"direction\": 'OUTPUT', \n\t\t\"accountId\": \"98dab0db-e076-4f64-8a53-07dbed601ca0\", \n\t\t\"displayPhoneNumber\": \"x25la40pt1sl6q8hrkwfls95m7wjbhp2uii\", \n\t\t\"phoneNumberId\": \"rz7gz0swhyfujgl8cu598k4gipfb3jgqax5\", \n\t\t\"type\": 'IMAGE', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"89c9fc9f-b4d2-4cc4-b44c-4a890a506e65\", \n\t\t\"whatsappMessageId\": \"2\", \n\t\t\"conversationId\": \"dc5702c8-7f5f-44bd-9d4e-421c3f849304\", \n\t\t\"direction\": 'OUTPUT', \n\t\t\"accountId\": \"487539c7-90bd-4b6a-aff8-49d1834bbf00\", \n\t\t\"displayPhoneNumber\": \"5rgksh9q9t53nri70gqpkisfxpw74v43g0f\", \n\t\t\"phoneNumberId\": \"ym4v943nzedpr4cqzr1gb9rsg6p0k1mbyt9\", \n\t\t\"type\": 'LOCATION', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"83354a9a-9e37-4888-a691-d679b64303b1\", \n\t\t\"whatsappMessageId\": \"u\", \n\t\t\"conversationId\": \"1905a9ef-8bc3-4e8b-a45b-13f87e68c327\", \n\t\t\"direction\": 'OUTPUT', \n\t\t\"accountId\": \"47daf733-924a-4e12-ace8-fea246402504\", \n\t\t\"displayPhoneNumber\": \"5a4q3owx1ieu64atdd3hl6er2dobmmt0xat\", \n\t\t\"phoneNumberId\": \"w7vklgd7ckjc8sg0siecgwohdhx8hwb8hcr\", \n\t\t\"type\": 'INTERACTIVE', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"79498c1d-16ec-464a-ac90-2941d50ec831\", \n\t\t\"whatsappMessageId\": \"u\", \n\t\t\"conversationId\": \"dd82bf82-8db6-47cc-b501-ef9360e84669\", \n\t\t\"direction\": 'OUTPUT', \n\t\t\"accountId\": \"96856820-ecfd-406f-b12f-65d11279e754\", \n\t\t\"displayPhoneNumber\": \"7fwkj6s7x9uv80byq4lvl4pa59lbnvdpwmx\", \n\t\t\"phoneNumberId\": \"lkag45tal0123v1r787ndi5zm7sxyb5tmi6\", \n\t\t\"type\": 'LOCATION', \n\t\t\"payload\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/messages/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"messages",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/messages/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/messages/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+                        "messages",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/messages/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/messages/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"messages",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/message/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/message/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"message",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/message/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/message/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"message",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/message/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"whatsappMessageId\": \"z\", \n\t\"conversationId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"direction\": 'INPUT', \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"displayPhoneNumber\": \"i2volk9teg9hqaywkul3gkhh5gc56tnkia0\", \n\t\"phoneNumberId\": \"v792f1pqyo5oqkpcst76z9gsaiedqqy87k5\", \n\t\"type\": 'LOCATION', \n\t\"payload\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/message/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"message",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/message/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/message/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"message",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - whatsapp/messages/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/messages/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"messages",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

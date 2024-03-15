@@ -1,0 +1,797 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/@app/whatsapp/whatsapp.seed.ts",
+            "integrity": "sha1:71094f018a9134555d1dcf8e325e44eda5dc165e"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/count/whatsapp-count-conversation.query-handler.spec.ts",
+            "integrity": "sha1:07e0ebbbb565d2de7b5ca799e25e443d11cf8c7a"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/count/whatsapp-count-conversation.query-handler.ts",
+            "integrity": "sha1:d1b2d4c6867efe5873875e3f798565a08c523373"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/count/whatsapp-count-conversation.query.ts",
+            "integrity": "sha1:2b387d6312e4b018c701cbb4073cf368579d4b52"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/count/whatsapp-count-conversation.service.spec.ts",
+            "integrity": "sha1:5cb8aad8807836c692b8b479e76f1c3e90300150"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/count/whatsapp-count-conversation.service.ts",
+            "integrity": "sha1:8dfe1ea803791e07f05efec749572dc16f221134"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversation.command-handler.spec.ts",
+            "integrity": "sha1:a860747ce8a377691e6da1c627aa1dfb0f303465"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversation.command-handler.ts",
+            "integrity": "sha1:83c2186d9522205e5b38794b7cfd6a5a4b4e72d2"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversation.command.ts",
+            "integrity": "sha1:3e389411b3250de4460ab9711824f6f12fa9c906"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversation.service.spec.ts",
+            "integrity": "sha1:bb9ac49a7bf56c0012bdf473b358d7db147a33a4"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversation.service.ts",
+            "integrity": "sha1:1b9b60998224c619e9e42824cc6cdaa54ccd2b70"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversations.command-handler.spec.ts",
+            "integrity": "sha1:9ed0fd2a300586531dac28a771a46fd56de988ca"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversations.command-handler.ts",
+            "integrity": "sha1:163b50115acbf8b4c2c292fb98d1776cc87ba406"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversations.command.ts",
+            "integrity": "sha1:6b309c3142b101352b291bd4c3c74b75fda193a9"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversations.service.spec.ts",
+            "integrity": "sha1:abe6e54fc2b2b4a628cec7992dec01adb42eb09b"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/create/whatsapp-create-conversations.service.ts",
+            "integrity": "sha1:02bc58dd8771f91e300849da94b436e3e553bd2e"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversation-by-id.command-handler.spec.ts",
+            "integrity": "sha1:317dd52226bad4282eb1a8ae8ec1eafdf44797ed"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversation-by-id.command-handler.ts",
+            "integrity": "sha1:9332ad61985534c4fe6ae54d8900fdd5b4b11b41"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversation-by-id.command.ts",
+            "integrity": "sha1:16b27e8ede4b45b8cd3e3983070d7475a3491c73"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversation-by-id.service.spec.ts",
+            "integrity": "sha1:8b694744e6e079f71eb13cec0ac434a335900473"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversation-by-id.service.ts",
+            "integrity": "sha1:e200f005fb9f28a97cca834d9dde56c42b5c6b11"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversations.command-handler.spec.ts",
+            "integrity": "sha1:209388241845a500691a4df771eef029ca20de8c"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversations.command-handler.ts",
+            "integrity": "sha1:ce25b5dc249c4233282d8a6ce6e47f251c432a6c"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversations.command.ts",
+            "integrity": "sha1:16a09863483d92ddc50fa7d887f95f83193000eb"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversations.service.spec.ts",
+            "integrity": "sha1:021064b11bbbd5214bb8e45b263b06f9e783d448"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/delete/whatsapp-delete-conversations.service.ts",
+            "integrity": "sha1:2daa82f0b873af9002acb357a6aea30f22b52c9d"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-add-conversations-context.event.ts",
+            "integrity": "sha1:1839e835953011aa068fff8f465342c11cf3ab1c"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-created-conversation.event-handler.ts",
+            "integrity": "sha1:09db46b92b07a7a1c54c81b995c64280b11edafe"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-created-conversation.event.ts",
+            "integrity": "sha1:43442c24486b43a4ebfa74bb6b9d6320a6c53a53"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-created-conversations.event-handler.ts",
+            "integrity": "sha1:73f5c486ccd1128460c66e7ffc7dd5392c90819f"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-created-conversations.event.ts",
+            "integrity": "sha1:d0118f95b73eac7dca1fcafe9aa85cf05f93d9b5"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-deleted-conversation.event-handler.ts",
+            "integrity": "sha1:a17539c9a3f9992dad7d7536251210c50fb8e56d"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-deleted-conversation.event.ts",
+            "integrity": "sha1:311451f8e55935c548bdc07a157d5b6c51a12666"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-deleted-conversations.event-handler.ts",
+            "integrity": "sha1:1d87a95529e63f89fc7946ab3854357a9a1c05f9"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-deleted-conversations.event.ts",
+            "integrity": "sha1:1f105550023d859ce179d7f336f061482509a3a4"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-updated-conversation.event-handler.ts",
+            "integrity": "sha1:c1372ebaeaf71807472c55b7f790800048210857"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-updated-conversation.event.ts",
+            "integrity": "sha1:8aeb0d5691b0275a621d1cf50bca47c8102a87c1"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-updated-conversations.event-handler.ts",
+            "integrity": "sha1:a2254cbbcad311319d24adf0b2b4c3213cce129e"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-updated-conversations.event.ts",
+            "integrity": "sha1:5039d52dbf5cea399f15edd6364224f4f061e66d"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-updated-and-incremented-conversation.event.ts",
+            "integrity": "sha1:dd4de2666fe9728b7af158299fed94e6afb8464f"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-updated-and-incremented-conversations.event-handler.ts",
+            "integrity": "sha1:da8ed02b8336ae9f9a87b3a6ee9b0ad3cc0f1acb"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/events/whatsapp-updated-and-incremented-conversations.event.ts",
+            "integrity": "sha1:8085930554f73a737c17e307559020e5dfd01b32"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation-by-id.query-handler.spec.ts",
+            "integrity": "sha1:0e212d631e0ef5a1175382b856b33880346b926d"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation-by-id.query-handler.ts",
+            "integrity": "sha1:9b28bd6f9f691d223be8458b2464860c133828a5"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation-by-id.query.ts",
+            "integrity": "sha1:9076db90b8008b993ad74ed3087173fd4be0d1e8"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation-by-id.service.spec.ts",
+            "integrity": "sha1:e91fd54eedc4228548c8dd21dd3a6939bba0977d"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation-by-id.service.ts",
+            "integrity": "sha1:84cee822ee57b9bb858182592672211516eca838"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation.query-handler.spec.ts",
+            "integrity": "sha1:86474480850325d01f57308dcbd7342742202ca1"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation.query-handler.ts",
+            "integrity": "sha1:26765667e455211b1048f14e1033ed5b9f931341"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation.query.ts",
+            "integrity": "sha1:d8aec7792558b51167bcec1a059dd66baf515e3c"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation.service.spec.ts",
+            "integrity": "sha1:185a39cfde838b2a5a3b1b943e8346a1c046d0d6"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/find/whatsapp-find-conversation.service.ts",
+            "integrity": "sha1:2cde64a1bf8cdf9a469c723e67c0f1e384d3486b"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/get/whatsapp-get-conversations.query-handler.spec.ts",
+            "integrity": "sha1:7c9ba7e931a6272c9f180cd622d4cd6e716892b1"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/get/whatsapp-get-conversations.query-handler.ts",
+            "integrity": "sha1:beb7bdf5e5b8acdea608211d8e9ca3b5b6711ab2"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/get/whatsapp-get-conversations.query.ts",
+            "integrity": "sha1:0e8db2ff0cf8189724ab61919be58676a696cc68"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/get/whatsapp-get-conversations.service.spec.ts",
+            "integrity": "sha1:669915ba04cb6ea6eeead30b3938d99ce836d352"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/get/whatsapp-get-conversations.service.ts",
+            "integrity": "sha1:f098e7c442bfbb04296f857c8de0a6a547079dff"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/max/whatsapp-max-conversation.query-handler.spec.ts",
+            "integrity": "sha1:78ec6a53f22e777888d7bdbae1136a00e724615b"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/max/whatsapp-max-conversation.query-handler.ts",
+            "integrity": "sha1:54eac1b3c6a79cbc473ff2d8280c4019d105bad2"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/max/whatsapp-max-conversation.query.ts",
+            "integrity": "sha1:659ff82dff0f40602249d5443abb46c8f09008eb"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/max/whatsapp-max-conversation.service.spec.ts",
+            "integrity": "sha1:882a68f48e1fdad1887149719cf9d2d2775de3dc"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/max/whatsapp-max-conversation.service.ts",
+            "integrity": "sha1:f865d3aed37852ecd32ea4c3df54a26ad1144056"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/min/whatsapp-min-conversation.query-handler.spec.ts",
+            "integrity": "sha1:d373d1635a3f8f439abfdc5ae84615a78ab80643"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/min/whatsapp-min-conversation.query-handler.ts",
+            "integrity": "sha1:0879ff7a89808e8de04c693653bb39923b9003c0"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/min/whatsapp-min-conversation.query.ts",
+            "integrity": "sha1:393e0d9cb603fa3db2d236179c4772dde1f61e07"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/min/whatsapp-min-conversation.service.spec.ts",
+            "integrity": "sha1:90a13e3cb06ee847cd0bd542117df461ed9176ad"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/min/whatsapp-min-conversation.service.ts",
+            "integrity": "sha1:1e97647225a7c41451c9fc39cc0a3cf498b6deb3"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/paginate/whatsapp-paginate-conversations.query-handler.spec.ts",
+            "integrity": "sha1:897c67f997541220cf463987d062bd45f85745f0"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/paginate/whatsapp-paginate-conversations.query-handler.ts",
+            "integrity": "sha1:2b14ab80f02785e8e23d47d948a1f63e7304f2de"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/paginate/whatsapp-paginate-conversations.query.ts",
+            "integrity": "sha1:de1ef22035844d6a67522134e8e37965a281edc8"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/paginate/whatsapp-paginate-conversations.service.spec.ts",
+            "integrity": "sha1:417a819b9cfaf06c8d4d94eee5b998ab04e0affd"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/paginate/whatsapp-paginate-conversations.service.ts",
+            "integrity": "sha1:7a2624c2516e7e725cbd03e141ac16bcd3838507"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/raw-sql/whatsapp-raw-sql-conversations.query-handler.spec.ts",
+            "integrity": "sha1:81dffe06bccfddc5a8ea80669527becbe88fc7a4"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/raw-sql/whatsapp-raw-sql-conversations.query-handler.ts",
+            "integrity": "sha1:bd2c0e7fd3851f5d11dcc476302d22d493a8daf4"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/raw-sql/whatsapp-raw-sql-conversations.query.ts",
+            "integrity": "sha1:7a3587906a20953996de38f18f47964a8e9321e4"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/raw-sql/whatsapp-raw-sql-conversations.service.spec.ts",
+            "integrity": "sha1:74f44ee02b4eaf6e2ac3ec251d6076c784ad1168"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/raw-sql/whatsapp-raw-sql-conversations.service.ts",
+            "integrity": "sha1:d395280f2898cf4c3cc3f9dfd72e28838f367452"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/sagas/whatsapp-conversation.sagas.ts",
+            "integrity": "sha1:96a9f6d4e12fba33f012a9b79f93073179b159e8"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/sum/whatsapp-sum-conversation.query-handler.spec.ts",
+            "integrity": "sha1:c7b750c7f76bc8148e8db8da26a0d4f1c9211bae"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/sum/whatsapp-sum-conversation.query-handler.ts",
+            "integrity": "sha1:d0f504b208f811e15ce51136262b924080750f6a"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/sum/whatsapp-sum-conversation.query.ts",
+            "integrity": "sha1:acbf6d6ae3d013ac59b22976ada51a6395790411"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/sum/whatsapp-sum-conversation.service.spec.ts",
+            "integrity": "sha1:c399ddb8a07176452884b60d95622b847da2fdf3"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/sum/whatsapp-sum-conversation.service.ts",
+            "integrity": "sha1:856212e06aac6511fe49855905d8de976dfd3fdc"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversation-by-id.command-handler.spec.ts",
+            "integrity": "sha1:6174e6605cebe39077a46c57aebb32ebbce5e502"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversation-by-id.command-handler.ts",
+            "integrity": "sha1:1d00465121f3f0f12bff1f10af1c969271d31499"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversation-by-id.command.ts",
+            "integrity": "sha1:1a66d91ee8c2a7b099ad34be3013e6baf973af67"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversation-by-id.service.spec.ts",
+            "integrity": "sha1:7525c94c37d14251c3407d33bd3e51525cc0854f"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversation-by-id.service.ts",
+            "integrity": "sha1:4b343965c0abfbcd9ad325c5e6c680f840709a7d"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversations.command-handler.spec.ts",
+            "integrity": "sha1:ee151b3fca449f5b89704449ae76d67dd926d175"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversations.command-handler.ts",
+            "integrity": "sha1:c5f8aaf5b7800ee0593edfa9e76e627b5123e335"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversations.command.ts",
+            "integrity": "sha1:f525ba4ff47e3af24ecbd2a82fe483e1c7790d3e"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversations.service.spec.ts",
+            "integrity": "sha1:8942a06111751ab5f23a083783638d8c5f73ab6d"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversations.service.ts",
+            "integrity": "sha1:440ed02ff206dd5237fb98c51bada4e9eca133f7"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-and-increment-conversations.command-handler.spec.ts",
+            "integrity": "sha1:4b2157ce92eff782b658bc9641ab9e7ea416b5e1"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-and-increment-conversations.command-handler.ts",
+            "integrity": "sha1:7ac39d82f59ae319a4da32f79228648f89acff09"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-and-increment-conversations.command.ts",
+            "integrity": "sha1:bb74d4ecc66fa849a77f35279bbebbb24da145dc"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-and-increment-conversations.service.spec.ts",
+            "integrity": "sha1:26736877a510b22b9afd6468a09ba4cc5b068f18"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-and-increment-conversations.service.ts",
+            "integrity": "sha1:73c3416ef031acf1eb33a051e69dd0b6728cc246"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/upsert/whatsapp-upsert-conversation.command-handler.spec.ts",
+            "integrity": "sha1:8535a5ec95185c893ab5c97a2b771c19f3a5e8a3"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/upsert/whatsapp-upsert-conversation.command-handler.ts",
+            "integrity": "sha1:c787bff6ee4e4d1d3da9189aa043d30f5ef296a9"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/upsert/whatsapp-upsert-conversation.command.ts",
+            "integrity": "sha1:fd6641add761830f87eb929e926c1671fcaa7971"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/upsert/whatsapp-upsert-conversation.service.spec.ts",
+            "integrity": "sha1:6390a8d72f7cfc7c010af1e1f185a6daddc38ea5"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/application/upsert/whatsapp-upsert-conversation.service.ts",
+            "integrity": "sha1:7b4521aa85c72c1c664f4cbd44e4712acf9202c2"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/whatsapp-conversation.aggregate.ts",
+            "integrity": "sha1:04951fcc4827d3bdae3617f9f4a089a35f5a4c3f"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/whatsapp-conversation.mapper.ts",
+            "integrity": "sha1:cc656f6d0176a80e9fd532658aebdf4e062068fb"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/whatsapp-conversation.repository.ts",
+            "integrity": "sha1:954218a4213359e1a3ec2627ea7e9044fab01f92"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/whatsapp-conversation.response.ts",
+            "integrity": "sha1:e5b98939d7c544ae03df85b7b367779e3880672a"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/value-objects/index.ts",
+            "integrity": "sha1:dfa5ea50e54dfd0fd4fff9c70339b06bd2a62f0c"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/index.ts",
+            "integrity": "sha1:4d96011320bc1eeba6bfddace037f1caa36d06ab"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/infrastructure/mock/whatsapp-mock-conversation.data.ts",
+            "integrity": "sha1:127251629788885db2fd6d070b81c136fe5cca33"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/infrastructure/mock/whatsapp-mock-conversation.repository.ts",
+            "integrity": "sha1:40d549c1d0eee891370ba3e819655a8c28a5667f"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/infrastructure/mock/whatsapp-mock-conversation.seeder.ts",
+            "integrity": "sha1:39a27d63274f4a7ce17f0f42fbb2f5c60b5fe878"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/infrastructure/sequelize/whatsapp-sequelize-conversation.model.ts",
+            "integrity": "sha1:bd0e40dd6879395e4547e98c775f7b86a2b7c18d"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/infrastructure/sequelize/whatsapp-sequelize-conversation.repository.ts",
+            "integrity": "sha1:af3338cf2ae9aa04c83de229943ef11edbfff6ad"
+        },
+        {
+            "path": "src/@app/whatsapp/index.ts",
+            "integrity": "sha1:40cb1394f82f6ea60dacef09ad1fb0cefa339b36"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/value-objects/whatsapp-conversation-id.ts",
+            "integrity": "sha1:48186572dea6f2e10cef689ddfa394cdb3c4284b"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/value-objects/whatsapp-conversation-accounts.ts",
+            "integrity": "sha1:d2c152a0cc59b3972217c73448f912636c2da074"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/value-objects/whatsapp-conversation-created-at.ts",
+            "integrity": "sha1:59dac21c6e2706b230f1196dc1e1644acba39c21"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/value-objects/whatsapp-conversation-updated-at.ts",
+            "integrity": "sha1:77df2595dd37531099a1714342669f83d2dc7608"
+        },
+        {
+            "path": "src/@app/whatsapp/conversation/domain/value-objects/whatsapp-conversation-deleted-at.ts",
+            "integrity": "sha1:cf835e32aa0265b89d4e2a035a5e452d4a49a1e9"
+        },
+        {
+            "path": "src/@api/whatsapp/whatsapp.seeder.ts",
+            "integrity": "sha1:2c06c7fe6ef9234fd739de838ae70119ecceef62"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-create-conversation.controller.spec.ts",
+            "integrity": "sha1:3bd54a3a2a10d7201f6e0825bb12c34b7778cf44"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-create-conversation.controller.ts",
+            "integrity": "sha1:0fb662e8755ea9f958ac1afe648cf6a69cdcf02e"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-create-conversations.controller.spec.ts",
+            "integrity": "sha1:4ffe06945fd3f34c380a33f4a85342176149d953"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-create-conversations.controller.ts",
+            "integrity": "sha1:40d36e6702da9419eaf08b24090a7d236a2944d5"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-delete-conversation-by-id.controller.spec.ts",
+            "integrity": "sha1:d37273105ab2efd9daedb00ebe70c345bfbf7469"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-delete-conversation-by-id.controller.ts",
+            "integrity": "sha1:fc87adc0e44037b0acbaa64c10219cf4834df792"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-delete-conversations.controller.spec.ts",
+            "integrity": "sha1:d98626b2d4fd9433a00fe9cad046d2145f061397"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-delete-conversations.controller.ts",
+            "integrity": "sha1:a2a66db6b0023949a8762c0c70019acf696afee7"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-find-conversation-by-id.controller.spec.ts",
+            "integrity": "sha1:4604ffb7deae7ce84c6b7e0f3fc44c8011f76dbb"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-find-conversation-by-id.controller.ts",
+            "integrity": "sha1:a3508777998d6757de7d67c33a7fc910688f5fba"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-find-conversation.controller.spec.ts",
+            "integrity": "sha1:53739a31c508132fc07b149d2136d11c991221fe"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-find-conversation.controller.ts",
+            "integrity": "sha1:1d0096a39c398e2f7a5db7e4ffa34507e752b7f1"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-get-conversations.controller.spec.ts",
+            "integrity": "sha1:920e89eb62b71bab7c0bc1726b093c507cec4af8"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-get-conversations.controller.ts",
+            "integrity": "sha1:a5ace2865b7f359dfef12f70f22a801b50e54a7d"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-paginate-conversations.controller.spec.ts",
+            "integrity": "sha1:e0492a83bea95fadea78a119656eeccc1a59df62"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-paginate-conversations.controller.ts",
+            "integrity": "sha1:e8df2d8622c7aeafe3f948ae549a5a7226a33000"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-update-conversation-by-id.controller.spec.ts",
+            "integrity": "sha1:57e24ec61ffdf0829ed600ce8e2481590d3dbb9b"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-update-conversation-by-id.controller.ts",
+            "integrity": "sha1:94c15a6dd325911ac8302bf94fae66bd26235a39"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-update-conversations.controller.spec.ts",
+            "integrity": "sha1:b9fb132b4c0ebd5a56f0e56164c318f9efd81f09"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-update-conversations.controller.ts",
+            "integrity": "sha1:c60ab74695d3ba97932649aa341047b023fce703"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-upsert-conversation.controller.spec.ts",
+            "integrity": "sha1:bf788e1b30fb533a281fedd2236a8adfad7c9c11"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/controllers/whatsapp-upsert-conversation.controller.ts",
+            "integrity": "sha1:f7f0d2054fd933c27bc1640a42f41accd690435d"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/dto/whatsapp-conversation.dto.ts",
+            "integrity": "sha1:e001b024fca00b56659cc2aef8cea0340239b4b7"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/dto/whatsapp-create-conversation.dto.ts",
+            "integrity": "sha1:274fa21fe00c5467d4f3c3206f3e46de0f4f37cc"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/dto/whatsapp-update-conversation-by-id.dto.ts",
+            "integrity": "sha1:26708fa4cf507d36e12833375376c40c9243c999"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/dto/whatsapp-update-conversations.dto.ts",
+            "integrity": "sha1:275411f94b776ac15457d38811d65d8fd4f1022c"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/dto/public-api.ts",
+            "integrity": "sha1:0cbba88613b9e10ce50ca8311fd949683b82f143"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/graphql/whatsapp-conversation.graphql",
+            "integrity": "sha1:b9da63f7c02159adcda2173993a10d0ca198acd5"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-create-conversation.handler.spec.ts",
+            "integrity": "sha1:ae037ea92b9ed04493a3a1c5e66863e61823dcc4"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-create-conversation.handler.ts",
+            "integrity": "sha1:630c5e9c324cdb81fb67c1241acde6ea406b7a77"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-create-conversations.handler.spec.ts",
+            "integrity": "sha1:d93e6b97960a3323cf0997b56b1c83abf1ae38b1"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-create-conversations.handler.ts",
+            "integrity": "sha1:bb4329312b63659acc55a5107f2f96f1e8593967"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-delete-conversation-by-id.handler.spec.ts",
+            "integrity": "sha1:8db1d7644497c67d00c52ab66b6c106c35881f00"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-delete-conversation-by-id.handler.ts",
+            "integrity": "sha1:ee50b4107acf3766450c4b33ab8d77d4e9c61d90"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-delete-conversations.handler.spec.ts",
+            "integrity": "sha1:6ce7e22689e862c2907f9363445af9cb2d12be79"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-delete-conversations.handler.ts",
+            "integrity": "sha1:c467f88dad456156d76ba2d775bc9bb6f96ab317"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-find-conversation-by-id.handler.spec.ts",
+            "integrity": "sha1:907b33038772f5c0b302d143fff90867470bfed9"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-find-conversation-by-id.handler.ts",
+            "integrity": "sha1:d6827523ae92e1d17696d945e430a8e58ecdeb03"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-find-conversation.handler.spec.ts",
+            "integrity": "sha1:907e4538d396ccbcf1a7eb5861844d80736e8b80"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-find-conversation.handler.ts",
+            "integrity": "sha1:c74eede27597b1ee3b392262465a2f2abc666666"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-get-conversations.handler.spec.ts",
+            "integrity": "sha1:d7a5006dd9a6ef6afa7195d747deb0b58e136c9e"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-get-conversations.handler.ts",
+            "integrity": "sha1:a7ef2b47b90256a91ea98964ff491d36cf1358f1"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-paginate-conversations.handler.spec.ts",
+            "integrity": "sha1:cc40c261aaaeba018a31fa8011f70e4e54785767"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-paginate-conversations.handler.ts",
+            "integrity": "sha1:f4012c6ffdf86b0257fbe141dc6efa84eae93f09"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-update-conversation-by-id.handler.spec.ts",
+            "integrity": "sha1:d19ebd77b2698e44e5830cf4160a47c10a3619fa"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-update-conversation-by-id.handler.ts",
+            "integrity": "sha1:772933681993137eee48f8b7decf5a12c859935a"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-update-conversations.handler.spec.ts",
+            "integrity": "sha1:f18f247700b5947161a239b97886b1cb96cb657e"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-update-conversations.handler.ts",
+            "integrity": "sha1:5f79ee98a5cf93e6d89f8b4c80f8029c599335ea"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-upsert-conversation.handler.spec.ts",
+            "integrity": "sha1:108cf77001b8aefa8bb30b08f21ff2223a142532"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/handlers/whatsapp-upsert-conversation.handler.ts",
+            "integrity": "sha1:ae467dfdbb3f439dbc5ee248a8ddf3c8566a8536"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/index.ts",
+            "integrity": "sha1:81a6a696e92b12d574f6a8b920c68a923e84287b"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-create-conversation.resolver.spec.ts",
+            "integrity": "sha1:83cd74fc8a5e5073275c6e0e04a90663d1ac3b50"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-create-conversation.resolver.ts",
+            "integrity": "sha1:0d59c816d46936af08544977783ca6175dc31ad6"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-create-conversations.resolver.spec.ts",
+            "integrity": "sha1:162e3b103aad1b3b2de7493edb3da6f0047f04fa"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-create-conversations.resolver.ts",
+            "integrity": "sha1:eee0a92ac4a836e53e3486f9dc56ab1e37acdad2"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-delete-conversation-by-id.resolver.spec.ts",
+            "integrity": "sha1:3d91bf5ebc16c193d50dc60cec9670fe0914fea1"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-delete-conversation-by-id.resolver.ts",
+            "integrity": "sha1:b0b375e627ccbdf259851c7e8f0daa4b4b24c294"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-delete-conversations.resolver.spec.ts",
+            "integrity": "sha1:088dd1a99477a0df5dbac6ee0b71c4b6d21e5843"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-delete-conversations.resolver.ts",
+            "integrity": "sha1:8ebedd975a8bc4f6ee1e5d023050e520f7b862b5"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-find-conversation-by-id.resolver.spec.ts",
+            "integrity": "sha1:f77e111c67ffdd7230b4016e7ed6f0df0034cf09"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-find-conversation-by-id.resolver.ts",
+            "integrity": "sha1:7329e07d22f190e4db0327221877badd2996d3b4"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-find-conversation.resolver.spec.ts",
+            "integrity": "sha1:104b6b430eb06d41ada2e8f2303741483495aa61"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-find-conversation.resolver.ts",
+            "integrity": "sha1:5c4cbd2fa0bff92f2d7d3804e62f0dc5140c2dac"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-get-conversations.resolver.spec.ts",
+            "integrity": "sha1:3af9c8fcf21d18d1c7612340b26640e240f22dc6"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-get-conversations.resolver.ts",
+            "integrity": "sha1:d36380d2831b9bdd641bde3c5db0be64e31abd06"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-paginate-conversations.resolver.spec.ts",
+            "integrity": "sha1:a13d7f4c63eb8645e88dd3c42cf0b204054e37ca"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-paginate-conversations.resolver.ts",
+            "integrity": "sha1:5fe75284248c98bba6b3922d88175e3d6f1cc377"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-update-conversation-by-id.resolver.spec.ts",
+            "integrity": "sha1:44f995312ce3fd75c7590b1846f6704ef77fce68"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-update-conversation-by-id.resolver.ts",
+            "integrity": "sha1:69c583b1925356205e08e46d5fd49867ed63a561"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-update-conversations.resolver.spec.ts",
+            "integrity": "sha1:f14cb94f567c3e89c59edfa9560cb7b9104b2e56"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-update-conversations.resolver.ts",
+            "integrity": "sha1:1689fd511fec2d6a125201ba11cfe9b876016322"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-upsert-conversation.resolver.spec.ts",
+            "integrity": "sha1:ed6bf8cb5c5064e8ab86efaf73e803c9f4251f03"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/resolvers/whatsapp-upsert-conversation.resolver.ts",
+            "integrity": "sha1:68b6ec25d7273250145e5c3b5bdf661bd64493bd"
+        },
+        {
+            "path": "src/@api/whatsapp/conversation/seeder/whatsapp-conversation.seeder.ts",
+            "integrity": "sha1:58a7efe2e84bf2ca001f54ad57277e790919d963"
+        },
+        {
+            "path": "test/acceptance/whatsapp/conversation.e2e-spec.ts",
+            "integrity": "sha1:1a42c5f1f4f214e05fc970f07851f2ff0f76d8ee"
+        },
+        {
+            "path": "postman/whatsapp/whatsapp.conversation.postman.json",
+            "integrity": "sha1:5b40fbda3e0822f0dee88a97cefef68129824be9"
+        }
+    ]
+}

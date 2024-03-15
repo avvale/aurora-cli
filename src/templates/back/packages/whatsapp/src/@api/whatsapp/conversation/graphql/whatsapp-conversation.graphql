@@ -1,0 +1,88 @@
+
+type WhatsappConversation
+{
+    id: ID!
+    accounts: [ID]
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input WhatsappCreateConversationInput
+{
+    id: ID!
+    accounts: [ID]
+}
+
+input WhatsappUpdateConversationByIdInput
+{
+    id: ID!
+    accounts: [ID]
+}
+
+input WhatsappUpdateConversationsInput
+{
+    id: ID
+    accounts: [ID]
+}
+
+type Query
+{
+    whatsappFindConversation(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): WhatsappConversation
+
+    whatsappFindConversationById(
+        id: ID
+        constraint: QueryStatement
+    ): WhatsappConversation
+
+    whatsappGetConversations(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappConversation]!
+
+    whatsappPaginateConversations(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    whatsappCreateConversation(
+        payload: WhatsappCreateConversationInput!
+    ): WhatsappConversation
+
+    whatsappCreateConversations(
+        payload: [WhatsappCreateConversationInput]!
+    ): Boolean!
+
+    whatsappUpdateConversationById(
+        payload: WhatsappUpdateConversationByIdInput!
+        constraint: QueryStatement
+    ): WhatsappConversation
+
+    whatsappUpdateConversations(
+        payload: WhatsappUpdateConversationsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappConversation]!
+
+    whatsappUpsertConversation(
+        payload: WhatsappUpdateConversationByIdInput!
+    ): WhatsappConversation
+
+    whatsappDeleteConversationById(
+        id: ID!
+        constraint: QueryStatement
+    ): WhatsappConversation
+
+    whatsappDeleteConversations(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappConversation]!
+
+}

@@ -1,0 +1,133 @@
+enum WhatsappMessageDirection {
+    INPUT
+    OUTPUT
+}
+
+enum WhatsappMessageType {
+    TEMPLATE
+    REACTION
+    IMAGE
+    LOCATION
+    CONTACTS
+    INTERACTIVE
+    TEXT
+}
+
+
+type WhatsappMessage
+{
+    id: ID!
+    whatsappMessageId: GraphQLString!
+    conversationId: ID!
+    conversation: WhatsappConversation
+    direction: WhatsappMessageDirection!
+    accountId: ID
+    account: IamAccount
+    displayPhoneNumber: GraphQLString!
+    phoneNumberId: GraphQLString!
+    type: WhatsappMessageType!
+    payload: JSON!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input WhatsappCreateMessageInput
+{
+    id: ID!
+    whatsappMessageId: GraphQLString!
+    conversationId: ID!
+    direction: WhatsappMessageDirection!
+    accountId: ID
+    displayPhoneNumber: GraphQLString!
+    phoneNumberId: GraphQLString!
+    type: WhatsappMessageType!
+    payload: JSON!
+}
+
+input WhatsappUpdateMessageByIdInput
+{
+    id: ID!
+    whatsappMessageId: GraphQLString
+    conversationId: ID
+    direction: WhatsappMessageDirection
+    accountId: ID
+    displayPhoneNumber: GraphQLString
+    phoneNumberId: GraphQLString
+    type: WhatsappMessageType
+    payload: JSON
+}
+
+input WhatsappUpdateMessagesInput
+{
+    id: ID
+    whatsappMessageId: GraphQLString
+    conversationId: ID
+    direction: WhatsappMessageDirection
+    accountId: ID
+    displayPhoneNumber: GraphQLString
+    phoneNumberId: GraphQLString
+    type: WhatsappMessageType
+    payload: JSON
+}
+
+type Query
+{
+    whatsappFindMessage(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): WhatsappMessage
+
+    whatsappFindMessageById(
+        id: ID
+        constraint: QueryStatement
+    ): WhatsappMessage
+
+    whatsappGetMessages(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappMessage]!
+
+    whatsappPaginateMessages(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    whatsappCreateMessage(
+        payload: WhatsappCreateMessageInput!
+    ): WhatsappMessage
+
+    whatsappCreateMessages(
+        payload: [WhatsappCreateMessageInput]!
+    ): Boolean!
+
+    whatsappUpdateMessageById(
+        payload: WhatsappUpdateMessageByIdInput!
+        constraint: QueryStatement
+    ): WhatsappMessage
+
+    whatsappUpdateMessages(
+        payload: WhatsappUpdateMessagesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappMessage]!
+
+    whatsappUpsertMessage(
+        payload: WhatsappUpdateMessageByIdInput!
+    ): WhatsappMessage
+
+    whatsappDeleteMessageById(
+        id: ID!
+        constraint: QueryStatement
+    ): WhatsappMessage
+
+    whatsappDeleteMessages(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappMessage]!
+
+}

@@ -1,0 +1,52 @@
+version: 0.0.1
+boundedContextName: whatsapp
+moduleName: template
+moduleNames: templates
+aggregateName: WhatsappTemplate
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    length: 36
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: category
+    type: enum
+    enumOptions:
+      - UTILITY
+      - MARKETING
+      - AUTHENTICATION
+    nullable: false
+  - name: subCategory
+    type: enum
+    enumOptions:
+      - CUSTOM
+      - ORDER_DETAILS
+      - ORDER_STATUS
+    nullable: false
+  - name: languageId
+    type: id
+    length: 36
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregateName: WhatsappLanguage
+      modulePath: whatsapp/language
+      key: id
+      field: language
+      avoidConstraint: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true

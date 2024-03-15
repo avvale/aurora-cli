@@ -1,0 +1,75 @@
+version: 0.0.1
+boundedContextName: whatsapp
+moduleName: message
+moduleNames: messages
+aggregateName: WhatsappMessage
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: whatsappMessageId
+    type: varchar
+    length: 63
+    nullable: false
+  - name: conversationId
+    type: id
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregateName: WhatsappConversation
+      modulePath: whatsapp/conversation
+      key: id
+      field: conversation
+      avoidConstraint: true
+  - name: direction
+    type: enum
+    enumOptions:
+      - INPUT
+      - OUTPUT
+    nullable: false
+  - name: accountId
+    type: id
+    nullable: true
+    relationship:
+      type: one-to-one
+      aggregateName: IamAccount
+      modulePath: iam/account
+      field: account
+    index: index
+  - name: displayPhoneNumber
+    type: varchar
+    maxLength: 36
+    nullable: false
+    index: index
+  - name: phoneNumberId
+    type: varchar
+    maxLength: 36
+    nullable: false
+    index: index
+  - name: type
+    type: enum
+    enumOptions:
+      - TEMPLATE
+      - REACTION
+      - IMAGE
+      - LOCATION
+      - CONTACTS
+      - INTERACTIVE
+      - TEXT
+    nullable: false
+  - name: payload
+    type: jsonb
+    nullable: false
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
