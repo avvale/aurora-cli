@@ -48,6 +48,7 @@ export class Mocker
                 return '[]';
 
             case 'json':
+            case 'jsonb':
                 return scapeQuotes ? '{ "foo" : "bar" }'.replace(/"/gi, '\\"') : '{ "foo" : "bar" }';
 
             case 'json.array':

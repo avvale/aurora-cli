@@ -500,6 +500,19 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(
+                SnackBarInvalidFormComponent,
+                {
+                    data: {
+                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                    },
+                    panelClass      : 'error-snackbar',
+                    verticalPosition: 'top',
+                    duration        : 10000,
+                },
+            );
             return;
         }
 

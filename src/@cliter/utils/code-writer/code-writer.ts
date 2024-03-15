@@ -165,7 +165,7 @@ export class CodeWriter
         // register imports from bounded context from @app
         ImportDriver.createImportItems(
             sourceFile,
-            `../../${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}`,
+            `${cliterConfig.appContainer}/${this.boundedContextName.toKebabCase()}`,
             [
                 `${this.boundedContextName.toPascalCase()}Models`,
                 `${this.boundedContextName.toPascalCase()}Handlers`,

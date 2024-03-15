@@ -184,6 +184,7 @@ export enum PropertyType
     'ID'                = 'id',
     'INT'               = 'int',
     'JSON'              = 'json',
+    'JSONB'             = 'jsonb',
     'LONGBLOB'          = 'blob.long',
     'MEDIUMBLOB'        = 'blob.medium',
     'PASSWORD'          = 'password',
