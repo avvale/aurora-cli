@@ -1091,11 +1091,17 @@ export const getImportWebComponentsManagerProperties = (
             case PropertyType.RELATIONSHIP:
                 if (property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER)
                 {
-                    importWebComponents.add('GridElementsManagerComponent');
-                    importWebComponents.add('GridCustomButtonsHeaderDialogTemplateDirective');
-                    importWebComponents.add('GridFormElementDetailDialogTemplateDirective');
-                    importWebComponents.add('GridTranslationsComponent');
-                    importWebComponents.add('GridColumnTranslationComponent');
+                    importWebComponents.add('GridElementsManagerModule');
+                }
+
+                if (property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT)
+                {
+                    importWebComponents.add('GridSelectElementModule');
+                }
+
+                if (property.webComponent?.type === WebComponentType.GRID_SELECT_MULTIPLE_ELEMENTS)
+                {
+                    importWebComponents.add('GridSelectMultipleElementsModule');
                 }
 
                 break;
