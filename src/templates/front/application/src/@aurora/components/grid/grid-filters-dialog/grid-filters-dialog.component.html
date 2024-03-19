@@ -58,7 +58,7 @@
                                 {{ formFilter.get('field').value | gridTranslate:'column':gridId  | async }}
                             </span>
 
-                            <!-- criteria picker -->
+                            <!-- OPERATOR SELECTOR -->
                             <mat-form-field
                                 appearance="outline"
                                 class="col-span-4"
@@ -103,6 +103,41 @@
                             >
                                 <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
                                 <mat-select formControlName="value">
+                                    <mat-option
+                                        *ngFor="let filterValue of originColumnsConfig | getGridFilterValues:formFilter.get('field').value"
+                                        [value]="filterValue.key"
+                                    >
+                                        <ng-container *ngIf="data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value">
+                                            <ng-container
+                                                *ngTemplateOutlet="(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value).templateRef; context: { $implicit: filterValue.value }"
+                                            >
+                                            </ng-container>
+                                        </ng-container>
+                                        <ng-container *ngIf="!(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)">
+                                            {{ filterValue.value }}
+                                        </ng-container>
+                                    </mat-option>
+                                </mat-select>
+                                <div
+                                    *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value"
+                                    class="outbox"
+                                >
+                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                </div>
+                            </mat-form-field>
+
+                            <!-- ARRAY -->
+                            <mat-form-field
+                                *ngSwitchCase="columnDataType.ARRAY"
+                                appearance="outline"
+                                class="col-span-7 relative"
+                                tiny
+                            >
+                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                <mat-select
+                                    formControlName="value"
+                                    multiple
+                                >
                                     <mat-option
                                         *ngFor="let filterValue of originColumnsConfig | getGridFilterValues:formFilter.get('field').value"
                                         [value]="filterValue.key"

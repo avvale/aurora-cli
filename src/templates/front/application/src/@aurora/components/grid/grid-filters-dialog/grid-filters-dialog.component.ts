@@ -90,6 +90,16 @@ export class GridFiltersDialogComponent implements OnInit
             types      : [ColumnDataType.STRING],
         },
         {
+            operator   : Operator.contained,
+            translation: 'containsAny',
+            types      : [ColumnDataType.ARRAY],
+        },
+        {
+            operator   : Operator.contains,
+            translation: 'mustContain',
+            types      : [ColumnDataType.ARRAY],
+        },
+        {
             operator   : Operator.endsWith,
             translation: 'endsWith',
             types      : [ColumnDataType.STRING],

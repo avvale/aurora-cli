@@ -75,14 +75,14 @@ export interface ExportGridState
     format: ExportFormat;
 }
 
-export type FilterColumnDataType = ColumnDataType.STRING | ColumnDataType.NUMBER | ColumnDataType.DATE | ColumnDataType.ENUM | ColumnDataType.BOOLEAN;
+export type FilterColumnDataType = ColumnDataType.STRING | ColumnDataType.NUMBER | ColumnDataType.DATE | ColumnDataType.ENUM | ColumnDataType.BOOLEAN | ColumnDataType.ARRAY;
 
 export interface FilterDialogResponse
 {
    columnFilters: GridColumnFilter[];
 }
 
-export type FilterOperator = Operator.eq | Operator.ne | Operator.startsWith | Operator.endsWith | Operator.substring | Operator.gt | Operator.gte | Operator.lt | Operator.lte;
+export type FilterOperator = Operator.eq | Operator.ne | Operator.startsWith | Operator.endsWith | Operator.substring | Operator.gt | Operator.gte | Operator.lt | Operator.lte | Operator.contains | Operator.contained;
 
 export interface FilterCriteriaOperator
 {
@@ -147,12 +147,14 @@ export interface GridMessages
 export interface GridOperatorsMessages
 {
     contains: string;
+    containsAny: string;
     endsWith: string;
     equals: string;
     greaterThan: string;
     greaterThanEqual: string;
     lessThan: string;
     lessThanEqual: string;
+    mustContain: string;
     notEquals: string;
     startsWith: string;
 }

@@ -14,12 +14,14 @@ export class GridTranslationsService
     messages: { [key: string]: GridMessages; } = {};
     defaultOperatorsMessages: GridOperatorsMessages = {
         contains        : 'Contains',
+        containsAny     : 'containsAny',
         endsWith        : 'Ends with',
         equals          : 'Equal to',
         greaterThan     : 'Greater than',
         greaterThanEqual: 'Greater than equal',
         lessThan        : 'Less than',
         lessThanEqual   : 'Less than equal',
+        mustContain     : 'mustContain',
         notEquals       : 'Not equal to',
         startsWith      : 'Starts with',
     };

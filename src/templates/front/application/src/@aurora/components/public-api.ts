@@ -24,6 +24,7 @@ export * from './navigation';
 export * from './ribbon-environment';
 export * from './select-search';
 export * from './slug';
+export * from './snack-bar-invalid-form';
 export * from './split-button';
 export * from './split-button';
 export * from './template-dialog';
