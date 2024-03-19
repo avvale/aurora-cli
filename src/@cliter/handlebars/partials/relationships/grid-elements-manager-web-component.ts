@@ -4,7 +4,7 @@ handlebars.registerPartial('gridElementsManagerWebComponent',
     `<!-- #region component to manage {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }} -->
 <au-grid-elements-manager
     *ngIf="currentViewAction.id === '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.edit'"
-    class="col-12 mt-7"
+    class="col-12 mb-5"
     [columnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
     [dialogTitle]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}')"
     [gridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"

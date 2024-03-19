@@ -5,6 +5,7 @@ import { GridElementsManagerCellValueTemplateDirective } from './directives/grid
 import { GridFormElementDetailDialogTemplateDirective } from './directives/grid-form-element-detail-dialog-template.directive';
 import { GridTranslationsComponent } from '../grid/grid-translations/grid-translations.component';
 import { GridColumnTranslationComponent } from '../grid/grid-translations/grid-column-translation.component';
+import { NgFor } from '@angular/common';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import { GridColumnTranslationComponent } from '../grid/grid-translations/grid-c
         GridFormElementDetailDialogTemplateDirective,
         GridTranslationsComponent,
         GridColumnTranslationComponent,
+        NgFor,
     ],
     exports: [
         GridCustomButtonsHeaderDialogTemplateDirective,
@@ -22,6 +24,7 @@ import { GridColumnTranslationComponent } from '../grid/grid-translations/grid-c
         GridFormElementDetailDialogTemplateDirective,
         GridTranslationsComponent,
         GridColumnTranslationComponent,
+        NgFor,
     ],
 })
 export class GridElementsManagerModule { }
