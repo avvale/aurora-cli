@@ -1086,17 +1086,17 @@ export const getImportWebComponentsManagerProperties = (
                     importWebComponents.add('NgForOf');
                 }
 
+                if (property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT)
+                {
+                    importWebComponents.add('GridSelectElementModule');
+                }
+
                 break;
 
             case PropertyType.RELATIONSHIP:
                 if (property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER)
                 {
                     importWebComponents.add('GridElementsManagerModule');
-                }
-
-                if (property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT)
-                {
-                    importWebComponents.add('GridSelectElementModule');
                 }
 
                 if (property.webComponent?.type === WebComponentType.GRID_SELECT_MULTIPLE_ELEMENTS)
