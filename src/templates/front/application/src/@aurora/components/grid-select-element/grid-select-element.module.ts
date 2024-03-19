@@ -18,4 +18,4 @@ import { GridSelectElementCustomHeaderTemplateDirective } from './directives/gri
         NgForOf,
     ],
 })
-export class GridSelectElementsModule { }
+export class GridSelectElementModule { }
