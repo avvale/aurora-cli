@@ -25,7 +25,6 @@ import { CqrsConfigModule, SentryModule } from './modules';
         }),
     ],
     providers: [
-        CommonAttachmentsService,
         CoreAddI18nConstraintService,
         CoreGetContentLanguageObjectService,
         CoreGetSearchKeyLangService,
@@ -53,7 +52,6 @@ import { CqrsConfigModule, SentryModule } from './modules';
         CoreGetLangsService,
         CoreGetSearchKeyLangService,
         CqrsConfigModule,
-        HttpModule,
         SentryModule,
     ],
 })

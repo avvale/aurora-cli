@@ -319,6 +319,7 @@ export const cliterConfig: CliterConfig =
         'iam',
         'oAuth',
         'queueManager',
+        'whatsapp',
     ],
     frontPackages: [
         'auditing',
@@ -328,5 +329,6 @@ export const cliterConfig: CliterConfig =
         'iam',
         'oAuth',
         'queueManager',
+        'whatsapp',
     ],
 };

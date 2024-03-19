@@ -367,6 +367,28 @@ export class Add extends Command
 
                     break;
                 }
+
+                case 'whatsapp': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'whatsapp',
+                        ['WhatsappModule'],
+                    );
+
+                    appModuleSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed!');
+
+                    break;
+                }
             }
         }
 
@@ -651,6 +673,20 @@ export class Add extends Command
 
                     const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
                     Installer.declareFrontRouting(routesSourceFile, 'queueManager');
+                    routesSourceFile.saveSync();
+                    break;
+                }
+
+                case 'whatsapp': {
+                    await FrontHandler.addPackage(addCommandState);
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'whatsapp', 'whatsappNavigation');
+                    navigationSourceFile.saveSync();
+
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'whatsapp');
                     routesSourceFile.saveSync();
                     break;
                 }
