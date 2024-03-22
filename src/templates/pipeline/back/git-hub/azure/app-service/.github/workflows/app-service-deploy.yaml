@@ -3,12 +3,18 @@ name: Build and Deploy Back on Azure App Service
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 env:
-  APP_NAME: APP-{{ nanoid }}
-  DOT_ENV: ${{secrets.AZURE_DOT_ENV}}
-  PUBLISH_PROFILE: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+  APP_NAME: app-{{ nanoid }}
+
+  # azure
+  PUBLISH_PROFILE: $\{{ secrets.AZURE_PRODUCTION_PUBLISH_PROFILE }}
+
+  # application secrets
+  OAUTH_PRIVATE_KEY: $\{{ secrets.AZURE_PRODUCTION_OAUTH_PRIVATE_KEY }}
+  OAUTH_PUBLIC_KEY: $\{{ secrets.AZURE_PRODUCTION_OAUTH_PUBLIC_KEY }}
+  DOT_ENV: $\{{ secrets.AZURE_PRODUCTION_DOT_ENV }}
 
 jobs:
   tests:
@@ -21,18 +27,20 @@ jobs:
     - name: Install node
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: '20'
 
     - name: Install dependencies
       run: npm ci
 
-    - name: Create .env file
+    - name: Create OAuth Keys and dot file
       run: |
+        touch oauth-private.key
+        echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
+        touch oauth-public.key
+        echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
         touch .env
         echo "$DOT_ENV" > .env
       shell: bash
-      env:
-        DOT_ENV: ${{secrets.DOT_ENV}}
 
     - name: Unit testing
       run: npm run test
@@ -40,33 +48,66 @@ jobs:
     - name: Acceptance testing
       run: npm run test:e2e
 
+    - name: Build project
+      run: npm run build
+
+    - name: Copy graphQL files
+      run: |
+        mkdir ./dist/src/graphql \;
+        find ./src -name '*.graphql' -exec cp "{}" ./dist/src/graphql \;
+      shell: bash
+
+    - name: Zip artifact for deployment
+      run: zip release.zip ./dist/* ./package.json ./package-lock.json -r
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: tested-artifact
+        path: |
+          release.zip
+
   deploy:
     name: Azure App Engine Deploy
     needs: tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: tested-artifact
+
+      - uses: geekyeggo/delete-artifact@v2
+        with:
+          name: tested-artifact
+
+      - name: Unzip artifact for deployment
+        run: unzip -o release.zip -d .
+
+      - name: Delete zip artifact
+        run: rm release.zip
 
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
-
-      - name: Create .env file
-        run: |
-          touch .env
-          echo "$DOT_ENV" > .env
-        shell: bash
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build project
-        run: npm run build
+      - name: Create OAuth Keys and dot file
+        run: |
+          touch oauth-private.key
+          echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
+          touch oauth-public.key
+          echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
+          touch .env
+          echo "$DOT_ENV" > .env
+        shell: bash
 
       - name: Run Azure webapp deploy action using publish profile credential
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ env.APP_NAME }}
-          publish-profile: ${{ env.PUBLISH_PROFILE }}
+          app-name: $\{{ env.APP_NAME }}
+          slot-name: 'production'
+          publish-profile: $\{{ env.PUBLISH_PROFILE }}
