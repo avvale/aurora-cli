@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.data.ts",
-            "integrity": "sha1:03c584d443040d48f8f9979a05e0969183e63a08"
+            "integrity": "sha1:4d0585425a7cefca5c68615515a52d047ec0907a"
         },
         {
             "path": "src/@app/auditing/side-effect/infrastructure/mock/auditing-mock-side-effect.repository.ts",
@@ -451,7 +451,7 @@
         },
         {
             "path": "src/@app/auditing/side-effect/infrastructure/sequelize/auditing-sequelize-side-effect.model.ts",
-            "integrity": "sha1:549f51d4e6fec3a9afde6452477a6a41747b536d"
+            "integrity": "sha1:48157b958391a0d7de2847d004ed1628b0ed7d39"
         },
         {
             "path": "src/@app/auditing/side-effect/infrastructure/sequelize/auditing-sequelize-side-effect.repository.ts",
@@ -887,7 +887,7 @@
         },
         {
             "path": "postman/auditing/auditing.side-effect.postman.json",
-            "integrity": "sha1:47682a5a0fe496d2c8de8230af453a50ad256881"
+            "integrity": "sha1:ff50bdbdabf91ec071c8542939d7c1c9cf52d097"
         }
     ]
 }

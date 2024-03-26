@@ -173,22 +173,6 @@ describe('side-effect', () =>
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectMethod property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/auditing/side-effect/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                method: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectMethod must be defined, can not be null');
-            });
-    });
-
     test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIsRollback property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -298,22 +282,6 @@ describe('side-effect', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for AuditingSideEffectEvent must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectMethod property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/auditing/side-effect/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                method: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectMethod must be defined, can not be undefined');
             });
     });
 

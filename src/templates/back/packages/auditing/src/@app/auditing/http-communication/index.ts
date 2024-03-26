@@ -3,6 +3,7 @@ export { AuditingCreateHttpCommunicationCommand } from './application/create/aud
 export { AuditingCreateHttpCommunicationsCommand } from './application/create/auditing-create-http-communications.command';
 export { AuditingUpdateHttpCommunicationByIdCommand } from './application/update/auditing-update-http-communication-by-id.command';
 export { AuditingUpdateHttpCommunicationsCommand } from './application/update/auditing-update-http-communications.command';
+export { AuditingUpdateAndIncrementHttpCommunicationsCommand } from './application/update/auditing-update-and-increment-http-communications.command';
 export { AuditingUpsertHttpCommunicationCommand } from './application/upsert/auditing-upsert-http-communication.command';
 export { AuditingDeleteHttpCommunicationByIdCommand } from './application/delete/auditing-delete-http-communication-by-id.command';
 export { AuditingDeleteHttpCommunicationsCommand } from './application/delete/auditing-delete-http-communications.command';
@@ -13,6 +14,10 @@ export { AuditingGetHttpCommunicationsQuery } from './application/get/auditing-g
 export { AuditingFindHttpCommunicationQuery } from './application/find/auditing-find-http-communication.query';
 export { AuditingFindHttpCommunicationByIdQuery } from './application/find/auditing-find-http-communication-by-id.query';
 export { AuditingRawSQLHttpCommunicationsQuery } from './application/raw-sql/auditing-raw-sql-http-communications.query';
+export { AuditingCountHttpCommunicationQuery } from './application/count/auditing-count-http-communication.query';
+export { AuditingMaxHttpCommunicationQuery } from './application/max/auditing-max-http-communication.query';
+export { AuditingMinHttpCommunicationQuery } from './application/min/auditing-min-http-communication.query';
+export { AuditingSumHttpCommunicationQuery } from './application/sum/auditing-sum-http-communication.query';
 
 // export mocks
 export { auditingMockHttpCommunicationData } from './infrastructure/mock/auditing-mock-http-communication.data';
@@ -27,6 +32,8 @@ export { AuditingDeletedHttpCommunicationsEvent } from './application/events/aud
 export { AuditingDeletedHttpCommunicationEvent } from './application/events/auditing-deleted-http-communication.event';
 export { AuditingUpdatedHttpCommunicationsEvent } from './application/events/auditing-updated-http-communications.event';
 export { AuditingUpdatedHttpCommunicationEvent } from './application/events/auditing-updated-http-communication.event';
+export { AuditingUpdatedAndIncrementedHttpCommunicationsEvent } from './application/events/auditing-updated-and-incremented-http-communications.event';
+export { AuditingUpdatedAndIncrementedHttpCommunicationEvent } from './application/events/auditing-updated-and-incremented-http-communication.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -52,6 +59,7 @@ import { AuditingCreateHttpCommunicationCommandHandler } from './application/cre
 import { AuditingCreateHttpCommunicationsCommandHandler } from './application/create/auditing-create-http-communications.command-handler';
 import { AuditingUpdateHttpCommunicationByIdCommandHandler } from './application/update/auditing-update-http-communication-by-id.command-handler';
 import { AuditingUpdateHttpCommunicationsCommandHandler } from './application/update/auditing-update-http-communications.command-handler';
+import { AuditingUpdateAndIncrementHttpCommunicationsCommandHandler } from './application/update/auditing-update-and-increment-http-communications.command-handler';
 import { AuditingUpsertHttpCommunicationCommandHandler } from './application/upsert/auditing-upsert-http-communication.command-handler';
 import { AuditingDeleteHttpCommunicationByIdCommandHandler } from './application/delete/auditing-delete-http-communication-by-id.command-handler';
 import { AuditingDeleteHttpCommunicationsCommandHandler } from './application/delete/auditing-delete-http-communications.command-handler';
@@ -62,12 +70,17 @@ import { AuditingGetHttpCommunicationsQueryHandler } from './application/get/aud
 import { AuditingFindHttpCommunicationQueryHandler } from './application/find/auditing-find-http-communication.query-handler';
 import { AuditingFindHttpCommunicationByIdQueryHandler } from './application/find/auditing-find-http-communication-by-id.query-handler';
 import { AuditingRawSQLHttpCommunicationsQueryHandler } from './application/raw-sql/auditing-raw-sql-http-communications.query-handler';
+import { AuditingCountHttpCommunicationQueryHandler } from './application/count/auditing-count-http-communication.query-handler';
+import { AuditingMaxHttpCommunicationQueryHandler } from './application/max/auditing-max-http-communication.query-handler';
+import { AuditingMinHttpCommunicationQueryHandler } from './application/min/auditing-min-http-communication.query-handler';
+import { AuditingSumHttpCommunicationQueryHandler } from './application/sum/auditing-sum-http-communication.query-handler';
 
 // event handlers
 import { AuditingCreatedHttpCommunicationEventHandler } from './application/events/auditing-created-http-communication.event-handler';
 import { AuditingCreatedHttpCommunicationsEventHandler } from './application/events/auditing-created-http-communications.event-handler';
 import { AuditingUpdatedHttpCommunicationEventHandler } from './application/events/auditing-updated-http-communication.event-handler';
 import { AuditingUpdatedHttpCommunicationsEventHandler } from './application/events/auditing-updated-http-communications.event-handler';
+import { AuditingUpdatedAndIncrementedHttpCommunicationsEventHandler } from './application/events/auditing-updated-and-incremented-http-communications.event-handler';
 import { AuditingDeletedHttpCommunicationEventHandler } from './application/events/auditing-deleted-http-communication.event-handler';
 import { AuditingDeletedHttpCommunicationsEventHandler } from './application/events/auditing-deleted-http-communications.event-handler';
 
@@ -79,8 +92,13 @@ import { AuditingGetHttpCommunicationsService } from './application/get/auditing
 import { AuditingFindHttpCommunicationService } from './application/find/auditing-find-http-communication.service';
 import { AuditingFindHttpCommunicationByIdService } from './application/find/auditing-find-http-communication-by-id.service';
 import { AuditingRawSQLHttpCommunicationsService } from './application/raw-sql/auditing-raw-sql-http-communications.service';
+import { AuditingCountHttpCommunicationService } from './application/count/auditing-count-http-communication.service';
+import { AuditingMaxHttpCommunicationService } from './application/max/auditing-max-http-communication.service';
+import { AuditingMinHttpCommunicationService } from './application/min/auditing-min-http-communication.service';
+import { AuditingSumHttpCommunicationService } from './application/sum/auditing-sum-http-communication.service';
 import { AuditingUpdateHttpCommunicationByIdService } from './application/update/auditing-update-http-communication-by-id.service';
 import { AuditingUpdateHttpCommunicationsService } from './application/update/auditing-update-http-communications.service';
+import { AuditingUpdateAndIncrementHttpCommunicationsService } from './application/update/auditing-update-and-increment-http-communications.service';
 import { AuditingUpsertHttpCommunicationService } from './application/upsert/auditing-upsert-http-communication.service';
 import { AuditingDeleteHttpCommunicationByIdService } from './application/delete/auditing-delete-http-communication-by-id.service';
 import { AuditingDeleteHttpCommunicationsService } from './application/delete/auditing-delete-http-communications.service';
@@ -91,6 +109,7 @@ export const AuditingHttpCommunicationHandlers = [
     AuditingCreateHttpCommunicationsCommandHandler,
     AuditingUpdateHttpCommunicationByIdCommandHandler,
     AuditingUpdateHttpCommunicationsCommandHandler,
+    AuditingUpdateAndIncrementHttpCommunicationsCommandHandler,
     AuditingUpsertHttpCommunicationCommandHandler,
     AuditingDeleteHttpCommunicationByIdCommandHandler,
     AuditingDeleteHttpCommunicationsCommandHandler,
@@ -101,12 +120,17 @@ export const AuditingHttpCommunicationHandlers = [
     AuditingFindHttpCommunicationQueryHandler,
     AuditingFindHttpCommunicationByIdQueryHandler,
     AuditingRawSQLHttpCommunicationsQueryHandler,
+    AuditingCountHttpCommunicationQueryHandler,
+    AuditingMaxHttpCommunicationQueryHandler,
+    AuditingMinHttpCommunicationQueryHandler,
+    AuditingSumHttpCommunicationQueryHandler,
 
     // events
     AuditingCreatedHttpCommunicationEventHandler,
     AuditingCreatedHttpCommunicationsEventHandler,
     AuditingUpdatedHttpCommunicationEventHandler,
     AuditingUpdatedHttpCommunicationsEventHandler,
+    AuditingUpdatedAndIncrementedHttpCommunicationsEventHandler,
     AuditingDeletedHttpCommunicationEventHandler,
     AuditingDeletedHttpCommunicationsEventHandler,
 ];
@@ -119,8 +143,13 @@ export const AuditingHttpCommunicationServices = [
     AuditingFindHttpCommunicationService,
     AuditingFindHttpCommunicationByIdService,
     AuditingRawSQLHttpCommunicationsService,
+    AuditingCountHttpCommunicationService,
+    AuditingMaxHttpCommunicationService,
+    AuditingMinHttpCommunicationService,
+    AuditingSumHttpCommunicationService,
     AuditingUpdateHttpCommunicationByIdService,
     AuditingUpdateHttpCommunicationsService,
+    AuditingUpdateAndIncrementHttpCommunicationsService,
     AuditingUpsertHttpCommunicationService,
     AuditingDeleteHttpCommunicationByIdService,
     AuditingDeleteHttpCommunicationsService,

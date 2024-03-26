@@ -60,10 +60,10 @@ aggregateProperties:
     type: id
     nullable: true
   - name: oldValue
-    type: json
+    type: jsonb
     nullable: true
   - name: newValue
-    type: json
+    type: jsonb
     nullable: true
   - name: ip
     type: varchar
@@ -83,13 +83,13 @@ aggregateProperties:
     maxLength: 2046
     nullable: true
   - name: params
-    type: json
+    type: jsonb
     nullable: true
   - name: query
-    type: json
+    type: jsonb
     nullable: true
   - name: body
-    type: json
+    type: jsonb
     nullable: true
   - name: userAgent
     type: varchar

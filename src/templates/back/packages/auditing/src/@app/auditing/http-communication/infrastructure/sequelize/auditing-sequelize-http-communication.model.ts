@@ -20,7 +20,6 @@ import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 			fields: ['createdAt'],
 			unique: false,
 		},
-
     ],
 })
 export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicationModel>
@@ -71,28 +70,28 @@ export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicat
     @Column({
         field: 'httpRequest',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     httpRequest: any;
 
     @Column({
         field: 'httpRequestRejected',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     httpRequestRejected: any;
 
     @Column({
         field: 'httpResponse',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     httpResponse: any;
 
     @Column({
         field: 'httpResponseRejected',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     httpResponseRejected: any;
 

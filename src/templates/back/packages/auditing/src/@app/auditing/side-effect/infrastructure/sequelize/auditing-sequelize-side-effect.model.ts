@@ -106,14 +106,14 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'oldValue',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     oldValue: any;
 
     @Column({
         field: 'newValue',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     newValue: any;
 
@@ -141,21 +141,21 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'params',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     params: any;
 
     @Column({
         field: 'query',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     query: any;
 
     @Column({
         field: 'body',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     body: any;
 

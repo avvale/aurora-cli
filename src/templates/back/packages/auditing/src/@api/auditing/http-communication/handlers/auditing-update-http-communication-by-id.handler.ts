@@ -1,7 +1,7 @@
 import { AuditingHttpCommunicationDto, AuditingUpdateHttpCommunicationByIdDto } from '@api/auditing/http-communication';
 import { AuditingHttpCommunication, AuditingUpdateHttpCommunicationByIdInput } from '@api/graphql';
 import { AuditingFindHttpCommunicationByIdQuery, AuditingUpdateHttpCommunicationByIdCommand } from '@app/auditing/http-communication';
-import { ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
+import { diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

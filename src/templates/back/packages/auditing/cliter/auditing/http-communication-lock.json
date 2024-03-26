@@ -6,6 +6,26 @@
             "integrity": "sha1:683825fbb1e60dcf01f1ae4c9f65c31d740b3aaf"
         },
         {
+            "path": "src/@app/auditing/http-communication/application/count/auditing-count-http-communication.query-handler.spec.ts",
+            "integrity": "sha1:7f6ef47878de71bb5fc43865aa40657bad259b98"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/count/auditing-count-http-communication.query-handler.ts",
+            "integrity": "sha1:1782084446ff762cb402869789411a1243359084"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/count/auditing-count-http-communication.query.ts",
+            "integrity": "sha1:4e1d8dda658c6fd0a50fc63ef906be604cb9297c"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/count/auditing-count-http-communication.service.spec.ts",
+            "integrity": "sha1:6b62882aee4b40eafa0ed93c3436915a9b87f548"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/count/auditing-count-http-communication.service.ts",
+            "integrity": "sha1:cecb6123bff4ea8666498849a2bf9483f92d74e0"
+        },
+        {
             "path": "src/@app/auditing/http-communication/application/create/auditing-create-http-communication.command-handler.spec.ts",
             "integrity": "sha1:97bcabf107e5b2d2549c8d7d1f6b677a02d7d736"
         },
@@ -87,7 +107,7 @@
         },
         {
             "path": "src/@app/auditing/http-communication/application/events/auditing-add-http-communications-context.event.ts",
-            "integrity": "sha1:ca3fa11a192dd76c552748f897ca838ab053ed36"
+            "integrity": "sha1:7b12eb987051c964a8f33a6ee400cc6f2e9fc9dc"
         },
         {
             "path": "src/@app/auditing/http-communication/application/events/auditing-created-http-communication.event-handler.ts",
@@ -136,6 +156,18 @@
         {
             "path": "src/@app/auditing/http-communication/application/events/auditing-updated-http-communications.event.ts",
             "integrity": "sha1:3cdfd033f27e233b177e9d20bf246eb1b70a38a8"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/events/auditing-updated-and-incremented-http-communication.event.ts",
+            "integrity": "sha1:02433bc7dfccf159841cf8734eed4c49666e3415"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/events/auditing-updated-and-incremented-http-communications.event-handler.ts",
+            "integrity": "sha1:8a4ab059dce82489f38f6c0c54449759650051f4"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/events/auditing-updated-and-incremented-http-communications.event.ts",
+            "integrity": "sha1:335a28076c53a988a262c1413c2a45c64183309b"
         },
         {
             "path": "src/@app/auditing/http-communication/application/find/auditing-find-http-communication-by-id.query-handler.spec.ts",
@@ -198,6 +230,46 @@
             "integrity": "sha1:b6bae6472b7373f7f02d6039ad5e1978f3c5283d"
         },
         {
+            "path": "src/@app/auditing/http-communication/application/max/auditing-max-http-communication.query-handler.spec.ts",
+            "integrity": "sha1:41d800256a9b1e5982fb41274c20f989d989e3d0"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/max/auditing-max-http-communication.query-handler.ts",
+            "integrity": "sha1:673d2ba1969a694c2774b3c062d4a6ab40098dcc"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/max/auditing-max-http-communication.query.ts",
+            "integrity": "sha1:268f9d4cb68baec009d0125500ea96b562c60e5d"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/max/auditing-max-http-communication.service.spec.ts",
+            "integrity": "sha1:771a9426f1552110a46019299927eb5b3e5a44f4"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/max/auditing-max-http-communication.service.ts",
+            "integrity": "sha1:ca8b5f52cb6ad32b0ab3e6d653c57f95f09a96e5"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/min/auditing-min-http-communication.query-handler.spec.ts",
+            "integrity": "sha1:d94031f222ed1f6b0883da17c86ab2d057d918c6"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/min/auditing-min-http-communication.query-handler.ts",
+            "integrity": "sha1:de344bb1ad9e5c25d9ea077d03f5fd05d4781ea4"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/min/auditing-min-http-communication.query.ts",
+            "integrity": "sha1:81b7c529516a5226c878b71e5e3cf19c2edc9dd9"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/min/auditing-min-http-communication.service.spec.ts",
+            "integrity": "sha1:7d03f15c16382e01fdfcca96b401335882d14e71"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/min/auditing-min-http-communication.service.ts",
+            "integrity": "sha1:1d3b0ba716168dd8efb08bc43991a013c112cdc1"
+        },
+        {
             "path": "src/@app/auditing/http-communication/application/paginate/auditing-paginate-http-communications.query-handler.spec.ts",
             "integrity": "sha1:80bfe54d713ac4dbad1bdbd0d78f3a33d09b982a"
         },
@@ -242,6 +314,26 @@
             "integrity": "sha1:b1f5561d8e60e70ea22961c10cfae2fe82a02450"
         },
         {
+            "path": "src/@app/auditing/http-communication/application/sum/auditing-sum-http-communication.query-handler.spec.ts",
+            "integrity": "sha1:d38f2f34fbf74d44dee210b5e0b77d478f526271"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/sum/auditing-sum-http-communication.query-handler.ts",
+            "integrity": "sha1:71150942e48ad68cb78154506ea6e32f326357f1"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/sum/auditing-sum-http-communication.query.ts",
+            "integrity": "sha1:9a90a1ba34c82670d39f687fcddc904cc7dce9c5"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/sum/auditing-sum-http-communication.service.spec.ts",
+            "integrity": "sha1:7f0f132165e5ed561ff77365e793a673a8379a5f"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/sum/auditing-sum-http-communication.service.ts",
+            "integrity": "sha1:ce4ddbada1817ab4163387529edee0d44d327358"
+        },
+        {
             "path": "src/@app/auditing/http-communication/application/update/auditing-update-http-communication-by-id.command-handler.spec.ts",
             "integrity": "sha1:2116a73f37bcc7bd96a3072110ace3bcdb1a02fb"
         },
@@ -282,6 +374,26 @@
             "integrity": "sha1:59c7b4f3f979904e422f92e69b63c3a13f5ec1fc"
         },
         {
+            "path": "src/@app/auditing/http-communication/application/update/auditing-update-and-increment-http-communications.command-handler.spec.ts",
+            "integrity": "sha1:c81ac05d64a98da8b8c151d537a18bbc5bb9a9d3"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/update/auditing-update-and-increment-http-communications.command-handler.ts",
+            "integrity": "sha1:bc51d8ae4795069cae4b2162ed51e7d6f90fa83c"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/update/auditing-update-and-increment-http-communications.command.ts",
+            "integrity": "sha1:4d9cbc6b1ada53356f82c9e81eacdbf98628d0d5"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/update/auditing-update-and-increment-http-communications.service.spec.ts",
+            "integrity": "sha1:ea1198cf835e905450144d8f2ea98b2dfd698bd2"
+        },
+        {
+            "path": "src/@app/auditing/http-communication/application/update/auditing-update-and-increment-http-communications.service.ts",
+            "integrity": "sha1:d242551ccb1515146412049f79fb5f54dc0f1dc6"
+        },
+        {
             "path": "src/@app/auditing/http-communication/application/upsert/auditing-upsert-http-communication.command-handler.spec.ts",
             "integrity": "sha1:e00e0c123321ccb5f5161bc77dcdb220de3912d9"
         },
@@ -311,7 +423,7 @@
         },
         {
             "path": "src/@app/auditing/http-communication/domain/auditing-http-communication.repository.ts",
-            "integrity": "sha1:207c3fb212621f4813869a158f3cf1b6673750a6"
+            "integrity": "sha1:eaae83fad89ed7ec16f767c8fc8b97e65ffd13c4"
         },
         {
             "path": "src/@app/auditing/http-communication/domain/auditing-http-communication.response.ts",
@@ -323,11 +435,11 @@
         },
         {
             "path": "src/@app/auditing/http-communication/index.ts",
-            "integrity": "sha1:d49b42aa5d87a872aa6699aa4bd2510c807e284c"
+            "integrity": "sha1:dca8663eacde3b72a07cf7cdb744cbaa37646f0e"
         },
         {
             "path": "src/@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.data.ts",
-            "integrity": "sha1:0ffe313a092208b56d1b536d639e7f1e3c57618b"
+            "integrity": "sha1:7c546a39fe9c3e8a2f34a9ae194a97200cee3559"
         },
         {
             "path": "src/@app/auditing/http-communication/infrastructure/mock/auditing-mock-http-communication.repository.ts",
@@ -339,7 +451,7 @@
         },
         {
             "path": "src/@app/auditing/http-communication/infrastructure/sequelize/auditing-sequelize-http-communication.model.ts",
-            "integrity": "sha1:6c5a7740032d99c8e900e55dea0c14dcc182a544"
+            "integrity": "sha1:583e2816822a3ef0883f773ff199bffeef988a86"
         },
         {
             "path": "src/@app/auditing/http-communication/infrastructure/sequelize/auditing-sequelize-http-communication.repository.ts",
@@ -595,7 +707,7 @@
         },
         {
             "path": "src/@api/auditing/http-communication/handlers/auditing-update-http-communication-by-id.handler.ts",
-            "integrity": "sha1:fd554f2971b2cee97a7a727f0c0773bc265e9413"
+            "integrity": "sha1:9b16d49ecc124b553a16bf9b40cb1c462b904086"
         },
         {
             "path": "src/@api/auditing/http-communication/handlers/auditing-update-http-communications.handler.spec.ts",
@@ -711,11 +823,11 @@
         },
         {
             "path": "test/acceptance/auditing/http-communication.e2e-spec.ts",
-            "integrity": "sha1:2e151a608f8490ea5de876bf059932b86a203fd4"
+            "integrity": "sha1:29436fc4e517edfeb0dfebce0d02b08f9575d576"
         },
         {
             "path": "postman/auditing/auditing.http-communication.postman.json",
-            "integrity": "sha1:ab69a1e83f18bc85701d4b473393e3790fc02c8e"
+            "integrity": "sha1:f07248e5644331223d0a75acc5d5a051a1da7f3e"
         }
     ]
 }
