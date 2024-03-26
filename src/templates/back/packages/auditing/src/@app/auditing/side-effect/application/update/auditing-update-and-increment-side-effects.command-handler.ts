@@ -1,6 +1,6 @@
 /* eslint-disable key-spacing */
-import { AuditingUpdateSideEffectsCommand } from '@app/auditing/side-effect';
-import { AuditingUpdateSideEffectsService } from '@app/auditing/side-effect/application/update/auditing-update-side-effects.service';
+import { AuditingUpdateAndIncrementSideEffectsCommand } from '@app/auditing/side-effect';
+import { AuditingUpdateAndIncrementSideEffectsService } from '@app/auditing/side-effect/application/update/auditing-update-and-increment-side-effects.service';
 import {
     AuditingSideEffectAccountId,
     AuditingSideEffectAuditableId,
@@ -26,14 +26,14 @@ import {
 } from '@app/auditing/side-effect/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
-@CommandHandler(AuditingUpdateSideEffectsCommand)
-export class AuditingUpdateSideEffectsCommandHandler implements ICommandHandler<AuditingUpdateSideEffectsCommand>
+@CommandHandler(AuditingUpdateAndIncrementSideEffectsCommand)
+export class AuditingUpdateAndIncrementSideEffectsCommandHandler implements ICommandHandler<AuditingUpdateAndIncrementSideEffectsCommand>
 {
     constructor(
-        private readonly updateSideEffectsService: AuditingUpdateSideEffectsService,
+        private readonly updateSideEffectsService: AuditingUpdateAndIncrementSideEffectsService,
     ) {}
 
-    async execute(command: AuditingUpdateSideEffectsCommand): Promise<void>
+    async execute(command: AuditingUpdateAndIncrementSideEffectsCommand): Promise<void>
     {
         // call to use case and implements ValueObjects
         await this.updateSideEffectsService.main(

@@ -1,4 +1,4 @@
-import { AuditingCreatedSideEffectEvent, AuditingCreatedSideEffectsEvent, AuditingDeletedSideEffectEvent, AuditingDeletedSideEffectsEvent, AuditingSideEffect, AuditingUpdatedSideEffectEvent, AuditingUpdatedSideEffectsEvent } from '@app/auditing/side-effect';
+import { AuditingCreatedSideEffectEvent, AuditingCreatedSideEffectsEvent, AuditingDeletedSideEffectEvent, AuditingDeletedSideEffectsEvent, AuditingSideEffect, AuditingUpdatedAndIncrementedSideEffectEvent, AuditingUpdatedAndIncrementedSideEffectsEvent, AuditingUpdatedSideEffectEvent, AuditingUpdatedSideEffectsEvent } from '@app/auditing/side-effect';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class AuditingAddSideEffectsContextEvent extends AggregateRoot
@@ -34,7 +34,7 @@ export class AuditingAddSideEffectsContextEvent extends AggregateRoot
                         sideEffect.oldValue?.value,
                         sideEffect.newValue?.value,
                         sideEffect.ip?.value,
-                        sideEffect.method.value,
+                        sideEffect.method?.value,
                         sideEffect.baseUrl?.value,
                         sideEffect.params?.value,
                         sideEffect.query?.value,
@@ -70,7 +70,43 @@ export class AuditingAddSideEffectsContextEvent extends AggregateRoot
                         sideEffect.oldValue?.value,
                         sideEffect.newValue?.value,
                         sideEffect.ip?.value,
-                        sideEffect.method.value,
+                        sideEffect.method?.value,
+                        sideEffect.baseUrl?.value,
+                        sideEffect.params?.value,
+                        sideEffect.query?.value,
+                        sideEffect.body?.value,
+                        sideEffect.userAgent?.value,
+                        sideEffect.isRollback.value,
+                        sideEffect.rollbackSideEffectId?.value,
+                        sideEffect.createdAt?.value,
+                        sideEffect.updatedAt?.value,
+                        sideEffect.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new AuditingUpdatedAndIncrementedSideEffectsEvent(
+                this.aggregateRoots.map(sideEffect =>
+                    new AuditingUpdatedAndIncrementedSideEffectEvent(
+                        sideEffect.id.value,
+                        sideEffect.tags?.value,
+                        sideEffect.modelPath.value,
+                        sideEffect.modelName.value,
+                        sideEffect.operationId?.value,
+                        sideEffect.operationSort?.value,
+                        sideEffect.accountId.value,
+                        sideEffect.email.value,
+                        sideEffect.event.value,
+                        sideEffect.auditableId?.value,
+                        sideEffect.oldValue?.value,
+                        sideEffect.newValue?.value,
+                        sideEffect.ip?.value,
+                        sideEffect.method?.value,
                         sideEffect.baseUrl?.value,
                         sideEffect.params?.value,
                         sideEffect.query?.value,
@@ -106,7 +142,7 @@ export class AuditingAddSideEffectsContextEvent extends AggregateRoot
                         sideEffect.oldValue?.value,
                         sideEffect.newValue?.value,
                         sideEffect.ip?.value,
-                        sideEffect.method.value,
+                        sideEffect.method?.value,
                         sideEffect.baseUrl?.value,
                         sideEffect.params?.value,
                         sideEffect.query?.value,

@@ -10,7 +10,6 @@ aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
   - name: tags
     type: array
@@ -28,7 +27,6 @@ aggregateProperties:
     nullable: false
   - name: operationId
     type: id
-    length: 36
     nullable: true
     index: index
   - name: operationSort
@@ -37,7 +35,6 @@ aggregateProperties:
     nullable: true
   - name: accountId
     type: id
-    length: 36
     nullable: false
     index: index
   - name: email
@@ -61,7 +58,6 @@ aggregateProperties:
     example: AuditingSideEffectEvent.CREATED
   - name: auditableId
     type: id
-    length: 36
     nullable: true
   - name: oldValue
     type: json
@@ -80,7 +76,7 @@ aggregateProperties:
       - POST
       - UPDATE
       - DELETE
-    nullable: false
+    nullable: true
     example: AuditingSideEffectMethod.POST
   - name: baseUrl
     type: varchar
@@ -106,7 +102,6 @@ aggregateProperties:
     example: true
   - name: rollbackSideEffectId
     type: id
-    length: 36
     nullable: true
     index: index
   - name: createdAt

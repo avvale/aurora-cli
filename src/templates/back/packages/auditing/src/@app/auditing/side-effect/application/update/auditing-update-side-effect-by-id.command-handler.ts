@@ -51,7 +51,7 @@ export class AuditingUpdateSideEffectByIdCommandHandler implements ICommandHandl
                 oldValue: new AuditingSideEffectOldValue(command.payload.oldValue),
                 newValue: new AuditingSideEffectNewValue(command.payload.newValue),
                 ip: new AuditingSideEffectIp(command.payload.ip),
-                method: new AuditingSideEffectMethod(command.payload.method, { undefinable: true }),
+                method: new AuditingSideEffectMethod(command.payload.method),
                 baseUrl: new AuditingSideEffectBaseUrl(command.payload.baseUrl),
                 params: new AuditingSideEffectParams(command.payload.params),
                 query: new AuditingSideEffectQuery(command.payload.query),

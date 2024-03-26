@@ -16,7 +16,7 @@ export class AuditingSeeder
     async main(): Promise<boolean>
     {
         // await this.commandBus.dispatch(new IamCreateBoundedContextsCommand(boundedContexts, { timezone: process.env.TZ }));
-        /// await this.commandBus.dispatch(new IamCreatePermissionsCommand(permissions, { timezone: process.env.TZ }));
+        // await this.commandBus.dispatch(new IamCreatePermissionsCommand(permissions, { timezone: process.env.TZ }));
 
         return true;
     }

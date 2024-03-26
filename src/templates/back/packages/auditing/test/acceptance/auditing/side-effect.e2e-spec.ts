@@ -5,7 +5,7 @@ import { AuditingModule } from '@api/auditing/auditing.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { AuditingISideEffectRepository, auditingMockSideEffectData, AuditingMockSideEffectSeeder } from '@app/auditing/side-effect';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';

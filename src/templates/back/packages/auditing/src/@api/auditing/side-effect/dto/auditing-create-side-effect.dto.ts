@@ -91,7 +91,7 @@ export class AuditingCreateSideEffectDto
         description: 'method [input here api field description]',
         example    : AuditingSideEffectMethod.POST,
     })
-    method: AuditingSideEffectMethod;
+    method?: AuditingSideEffectMethod;
 
     @ApiProperty({
         type       : String,

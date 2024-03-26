@@ -28,7 +28,6 @@ import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 			fields: ['createdAt'],
 			unique: false,
 		},
-
     ],
 })
 export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
@@ -127,7 +126,7 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
 
     @Column({
         field: 'method',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.ENUM('GET','POST','UPDATE','DELETE'),
     })
     method: string;

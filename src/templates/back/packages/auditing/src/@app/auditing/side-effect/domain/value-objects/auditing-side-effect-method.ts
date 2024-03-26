@@ -8,8 +8,8 @@ export class AuditingSideEffectMethod extends EnumValueObject
     {
         super(value, Object.assign({
             name       : 'AuditingSideEffectMethod',
-            nullable   : false,
-            undefinable: false,
+            nullable   : true,
+            undefinable: true,
             enumOptions: ['GET','POST','UPDATE','DELETE'],
         }, validationRules));
     }

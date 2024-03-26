@@ -1,7 +1,7 @@
 import { AuditingSideEffectDto, AuditingUpdateSideEffectByIdDto } from '@api/auditing/side-effect';
 import { AuditingSideEffect, AuditingUpdateSideEffectByIdInput } from '@api/graphql';
 import { AuditingFindSideEffectByIdQuery, AuditingUpdateSideEffectByIdCommand } from '@app/auditing/side-effect';
-import { ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
+import { diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

@@ -17,7 +17,7 @@ export class AuditingCreateSideEffectCommand
             oldValue?: any;
             newValue?: any;
             ip?: string;
-            method: string;
+            method?: string;
             baseUrl?: string;
             params?: any;
             query?: any;

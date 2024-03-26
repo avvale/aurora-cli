@@ -33,7 +33,7 @@ type AuditingSideEffect
     oldValue: JSON
     newValue: JSON
     ip: GraphQLString
-    method: AuditingSideEffectMethod!
+    method: AuditingSideEffectMethod
     baseUrl: GraphQLString
     params: JSON
     query: JSON
@@ -61,7 +61,7 @@ input AuditingCreateSideEffectInput
     oldValue: JSON
     newValue: JSON
     ip: GraphQLString
-    method: AuditingSideEffectMethod!
+    method: AuditingSideEffectMethod
     baseUrl: GraphQLString
     params: JSON
     query: JSON

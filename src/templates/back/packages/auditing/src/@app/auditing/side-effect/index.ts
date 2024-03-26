@@ -3,6 +3,7 @@ export { AuditingCreateSideEffectCommand } from './application/create/auditing-c
 export { AuditingCreateSideEffectsCommand } from './application/create/auditing-create-side-effects.command';
 export { AuditingUpdateSideEffectByIdCommand } from './application/update/auditing-update-side-effect-by-id.command';
 export { AuditingUpdateSideEffectsCommand } from './application/update/auditing-update-side-effects.command';
+export { AuditingUpdateAndIncrementSideEffectsCommand } from './application/update/auditing-update-and-increment-side-effects.command';
 export { AuditingUpsertSideEffectCommand } from './application/upsert/auditing-upsert-side-effect.command';
 export { AuditingDeleteSideEffectByIdCommand } from './application/delete/auditing-delete-side-effect-by-id.command';
 export { AuditingDeleteSideEffectsCommand } from './application/delete/auditing-delete-side-effects.command';
@@ -13,6 +14,10 @@ export { AuditingGetSideEffectsQuery } from './application/get/auditing-get-side
 export { AuditingFindSideEffectQuery } from './application/find/auditing-find-side-effect.query';
 export { AuditingFindSideEffectByIdQuery } from './application/find/auditing-find-side-effect-by-id.query';
 export { AuditingRawSQLSideEffectsQuery } from './application/raw-sql/auditing-raw-sql-side-effects.query';
+export { AuditingCountSideEffectQuery } from './application/count/auditing-count-side-effect.query';
+export { AuditingMaxSideEffectQuery } from './application/max/auditing-max-side-effect.query';
+export { AuditingMinSideEffectQuery } from './application/min/auditing-min-side-effect.query';
+export { AuditingSumSideEffectQuery } from './application/sum/auditing-sum-side-effect.query';
 
 // export mocks
 export { auditingMockSideEffectData } from './infrastructure/mock/auditing-mock-side-effect.data';
@@ -27,6 +32,8 @@ export { AuditingDeletedSideEffectsEvent } from './application/events/auditing-d
 export { AuditingDeletedSideEffectEvent } from './application/events/auditing-deleted-side-effect.event';
 export { AuditingUpdatedSideEffectsEvent } from './application/events/auditing-updated-side-effects.event';
 export { AuditingUpdatedSideEffectEvent } from './application/events/auditing-updated-side-effect.event';
+export { AuditingUpdatedAndIncrementedSideEffectsEvent } from './application/events/auditing-updated-and-incremented-side-effects.event';
+export { AuditingUpdatedAndIncrementedSideEffectEvent } from './application/events/auditing-updated-and-incremented-side-effect.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -52,6 +59,7 @@ import { AuditingCreateSideEffectCommandHandler } from './application/create/aud
 import { AuditingCreateSideEffectsCommandHandler } from './application/create/auditing-create-side-effects.command-handler';
 import { AuditingUpdateSideEffectByIdCommandHandler } from './application/update/auditing-update-side-effect-by-id.command-handler';
 import { AuditingUpdateSideEffectsCommandHandler } from './application/update/auditing-update-side-effects.command-handler';
+import { AuditingUpdateAndIncrementSideEffectsCommandHandler } from './application/update/auditing-update-and-increment-side-effects.command-handler';
 import { AuditingUpsertSideEffectCommandHandler } from './application/upsert/auditing-upsert-side-effect.command-handler';
 import { AuditingDeleteSideEffectByIdCommandHandler } from './application/delete/auditing-delete-side-effect-by-id.command-handler';
 import { AuditingDeleteSideEffectsCommandHandler } from './application/delete/auditing-delete-side-effects.command-handler';
@@ -62,12 +70,17 @@ import { AuditingGetSideEffectsQueryHandler } from './application/get/auditing-g
 import { AuditingFindSideEffectQueryHandler } from './application/find/auditing-find-side-effect.query-handler';
 import { AuditingFindSideEffectByIdQueryHandler } from './application/find/auditing-find-side-effect-by-id.query-handler';
 import { AuditingRawSQLSideEffectsQueryHandler } from './application/raw-sql/auditing-raw-sql-side-effects.query-handler';
+import { AuditingCountSideEffectQueryHandler } from './application/count/auditing-count-side-effect.query-handler';
+import { AuditingMaxSideEffectQueryHandler } from './application/max/auditing-max-side-effect.query-handler';
+import { AuditingMinSideEffectQueryHandler } from './application/min/auditing-min-side-effect.query-handler';
+import { AuditingSumSideEffectQueryHandler } from './application/sum/auditing-sum-side-effect.query-handler';
 
 // event handlers
 import { AuditingCreatedSideEffectEventHandler } from './application/events/auditing-created-side-effect.event-handler';
 import { AuditingCreatedSideEffectsEventHandler } from './application/events/auditing-created-side-effects.event-handler';
 import { AuditingUpdatedSideEffectEventHandler } from './application/events/auditing-updated-side-effect.event-handler';
 import { AuditingUpdatedSideEffectsEventHandler } from './application/events/auditing-updated-side-effects.event-handler';
+import { AuditingUpdatedAndIncrementedSideEffectsEventHandler } from './application/events/auditing-updated-and-incremented-side-effects.event-handler';
 import { AuditingDeletedSideEffectEventHandler } from './application/events/auditing-deleted-side-effect.event-handler';
 import { AuditingDeletedSideEffectsEventHandler } from './application/events/auditing-deleted-side-effects.event-handler';
 
@@ -79,8 +92,13 @@ import { AuditingGetSideEffectsService } from './application/get/auditing-get-si
 import { AuditingFindSideEffectService } from './application/find/auditing-find-side-effect.service';
 import { AuditingFindSideEffectByIdService } from './application/find/auditing-find-side-effect-by-id.service';
 import { AuditingRawSQLSideEffectsService } from './application/raw-sql/auditing-raw-sql-side-effects.service';
+import { AuditingCountSideEffectService } from './application/count/auditing-count-side-effect.service';
+import { AuditingMaxSideEffectService } from './application/max/auditing-max-side-effect.service';
+import { AuditingMinSideEffectService } from './application/min/auditing-min-side-effect.service';
+import { AuditingSumSideEffectService } from './application/sum/auditing-sum-side-effect.service';
 import { AuditingUpdateSideEffectByIdService } from './application/update/auditing-update-side-effect-by-id.service';
 import { AuditingUpdateSideEffectsService } from './application/update/auditing-update-side-effects.service';
+import { AuditingUpdateAndIncrementSideEffectsService } from './application/update/auditing-update-and-increment-side-effects.service';
 import { AuditingUpsertSideEffectService } from './application/upsert/auditing-upsert-side-effect.service';
 import { AuditingDeleteSideEffectByIdService } from './application/delete/auditing-delete-side-effect-by-id.service';
 import { AuditingDeleteSideEffectsService } from './application/delete/auditing-delete-side-effects.service';
@@ -91,6 +109,7 @@ export const AuditingSideEffectHandlers = [
     AuditingCreateSideEffectsCommandHandler,
     AuditingUpdateSideEffectByIdCommandHandler,
     AuditingUpdateSideEffectsCommandHandler,
+    AuditingUpdateAndIncrementSideEffectsCommandHandler,
     AuditingUpsertSideEffectCommandHandler,
     AuditingDeleteSideEffectByIdCommandHandler,
     AuditingDeleteSideEffectsCommandHandler,
@@ -101,12 +120,17 @@ export const AuditingSideEffectHandlers = [
     AuditingFindSideEffectQueryHandler,
     AuditingFindSideEffectByIdQueryHandler,
     AuditingRawSQLSideEffectsQueryHandler,
+    AuditingCountSideEffectQueryHandler,
+    AuditingMaxSideEffectQueryHandler,
+    AuditingMinSideEffectQueryHandler,
+    AuditingSumSideEffectQueryHandler,
 
     // events
     AuditingCreatedSideEffectEventHandler,
     AuditingCreatedSideEffectsEventHandler,
     AuditingUpdatedSideEffectEventHandler,
     AuditingUpdatedSideEffectsEventHandler,
+    AuditingUpdatedAndIncrementedSideEffectsEventHandler,
     AuditingDeletedSideEffectEventHandler,
     AuditingDeletedSideEffectsEventHandler,
 ];
@@ -119,8 +143,13 @@ export const AuditingSideEffectServices = [
     AuditingFindSideEffectService,
     AuditingFindSideEffectByIdService,
     AuditingRawSQLSideEffectsService,
+    AuditingCountSideEffectService,
+    AuditingMaxSideEffectService,
+    AuditingMinSideEffectService,
+    AuditingSumSideEffectService,
     AuditingUpdateSideEffectByIdService,
     AuditingUpdateSideEffectsService,
+    AuditingUpdateAndIncrementSideEffectsService,
     AuditingUpsertSideEffectService,
     AuditingDeleteSideEffectByIdService,
     AuditingDeleteSideEffectsService,
