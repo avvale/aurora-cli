@@ -5,7 +5,7 @@ import { IamModule } from '@api/iam/iam.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { IamIBoundedContextRepository, iamMockBoundedContextData, IamMockBoundedContextSeeder } from '@app/iam/bounded-context';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -221,35 +221,35 @@ describe('bounded-context', () =>
             });
     });
 
-    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextName is too large, has a maximum length of 127', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamBoundedContextName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for IamBoundedContextName is too large, has a maximum length of 128');
             });
     });
 
-    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextRoot is too large, has a maximum length of 63', () =>
+    test('/REST:POST iam/bounded-context/create - Got 400 Conflict, BoundedContextRoot is too large, has a maximum length of 64', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/bounded-context/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                root: '****************************************************************',
+                root: '*****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamBoundedContextRoot is too large, has a maximum length of 63');
+                expect(res.body.message).toContain('Value for IamBoundedContextRoot is too large, has a maximum length of 64');
             });
     });
 

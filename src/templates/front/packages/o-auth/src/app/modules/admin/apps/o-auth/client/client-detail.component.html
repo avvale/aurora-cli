@@ -137,7 +137,7 @@
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="127"
+                            maxlength="128"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
@@ -150,7 +150,7 @@
                         <input
                             matInput
                             formControlName="secret"
-                            maxlength="127"
+                            maxlength="128"
                             required
                         >
                         <mat-error>{{ formErrors?.secret | async }}</mat-error>
@@ -188,7 +188,6 @@
                             matInput
                             formControlName="expiredAccessToken"
                             type="number"
-                            maxlength="10"
                         >
                         <mat-error>{{ formErrors?.expiredAccessToken | async }}</mat-error>
                     </mat-form-field>
@@ -201,7 +200,6 @@
                             matInput
                             formControlName="expiredRefreshToken"
                             type="number"
-                            maxlength="10"
                         >
                         <mat-error>{{ formErrors?.expiredRefreshToken | async }}</mat-error>
                     </mat-form-field>

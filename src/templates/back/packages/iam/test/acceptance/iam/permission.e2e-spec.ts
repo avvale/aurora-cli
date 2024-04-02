@@ -5,7 +5,7 @@ import { IamModule } from '@api/iam/iam.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { IamIPermissionRepository, iamMockPermissionData, IamMockPermissionSeeder } from '@app/iam/permission';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -205,19 +205,19 @@ describe('permission', () =>
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName is too large, has a maximum length of 127', () =>
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamPermissionName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for IamPermissionName is too large, has a maximum length of 128');
             });
     });
 

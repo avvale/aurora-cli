@@ -13,15 +13,13 @@ aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
   - name: name
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
   - name: boundedContextId
     type: id
-    length: 36
     nullable: false
     relationship:
       type: many-to-one

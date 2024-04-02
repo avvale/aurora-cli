@@ -13,6 +13,7 @@ import {
     IamAccountMeta,
     IamAccountRoleIds,
     IamAccountScopes,
+    IamAccountTags,
     IamAccountTenantIds,
     IamAccountType,
 } from '@app/iam/account/domain/value-objects';
@@ -64,6 +65,7 @@ describe('IamUpdateAccountByIdService', () =>
                         email: new IamAccountEmail(iamMockAccountData[0].email),
                         isActive: new IamAccountIsActive(iamMockAccountData[0].isActive),
                         clientId: new IamAccountClientId(iamMockAccountData[0].clientId),
+                        tags: new IamAccountTags(iamMockAccountData[0].tags),
                         scopes: new IamAccountScopes(iamMockAccountData[0].scopes),
                         dApplicationCodes: new IamAccountDApplicationCodes(iamMockAccountData[0].dApplicationCodes),
                         dPermissions: new IamAccountDPermissions(iamMockAccountData[0].dPermissions),

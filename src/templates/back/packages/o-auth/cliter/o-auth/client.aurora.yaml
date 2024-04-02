@@ -13,7 +13,6 @@ aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
   - name: grantType
     type: enum
@@ -25,11 +24,11 @@ aggregateProperties:
     nullable: false
   - name: name
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
   - name: secret
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
   - name: authUrl
     type: varchar

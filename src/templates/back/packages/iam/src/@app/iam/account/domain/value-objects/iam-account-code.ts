@@ -10,7 +10,7 @@ export class IamAccountCode extends StringValueObject
             name       : 'IamAccountCode',
             nullable   : true,
             undefinable: true,
-            maxLength  : 63,
+            maxLength  : 64,
         }, validationRules));
     }
 }

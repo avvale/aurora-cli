@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-detail.component.html",
-            "integrity": "sha1:6f20ec9f16cc1be5dba07ee37affcf801ddcc843"
+            "integrity": "sha1:98fe4d8170ffeb2c05eea54644fe23afae40064e"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-detail.component.ts",
-            "integrity": "sha1:f49b80e89b64601ae9dea64737a1bf1492cadb2a"
+            "integrity": "sha1:d41e438687c6b046dba174b77c1d9ffa1a631b6a"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-list.component.html",
-            "integrity": "sha1:b38125a482789c105bcb6514fa18f52ef34ee4f1"
+            "integrity": "sha1:b45a84272bc0506829f78316bfdfe730b9175ad8"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant-list.component.ts",
@@ -27,7 +27,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.columns-config.ts",
-            "integrity": "sha1:3a07fa601c8923c2b4f23ce62349c6c26bc12d81"
+            "integrity": "sha1:7559e972cc69667d92a16eed2eb797cf4d0e8cc9"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.graphql.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/tenant.service.ts",
-            "integrity": "sha1:c8a1a5ed4082650d95c0a84828027d8eda0f0e57"
+            "integrity": "sha1:9e2db7e55cedf58d9c7fa931a303ad630e25da92"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tenant/index.ts",

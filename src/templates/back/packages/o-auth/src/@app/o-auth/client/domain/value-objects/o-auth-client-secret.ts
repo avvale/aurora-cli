@@ -10,7 +10,7 @@ export class OAuthClientSecret extends StringValueObject
             name       : 'OAuthClientSecret',
             nullable   : false,
             undefinable: false,
-            maxLength  : 127,
+            maxLength  : 128,
         }, validationRules));
     }
 }

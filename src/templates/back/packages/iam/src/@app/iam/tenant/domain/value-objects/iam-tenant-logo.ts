@@ -1,15 +1,15 @@
-import { BlobValueObject, DataValueObject, ValidationRules } from '@aurorajs.dev/core';
+import { JsonValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class IamTenantLogo extends BlobValueObject
+export class IamTenantLogo extends JsonValueObject
 {
     public readonly type: string = 'IamTenantLogo';
 
-    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
+    constructor(value: any, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
             name       : 'IamTenantLogo',
             nullable   : true,
             undefinable: true,
-        }, validationRules), data);
+        }, validationRules));
     }
 }

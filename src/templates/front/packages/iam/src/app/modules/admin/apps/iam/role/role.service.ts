@@ -129,6 +129,7 @@ export class RoleService
             constraintPaginatePermissions = {},
             queryGetPermissionsRoles = {},
             constraintGetPermissionsRoles = {},
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
@@ -139,6 +140,7 @@ export class RoleService
             constraintPaginatePermissions?: QueryStatement;
             queryGetPermissionsRoles?: QueryStatement;
             constraintGetPermissionsRoles?: QueryStatement;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<{
         object: IamRole;
@@ -180,26 +182,8 @@ export class RoleService
             .valueChanges
             .pipe(
                 first(),
-                map<{
-                    data: {
-                        object: IamRole;
-                        iamPaginatePermissions: GridData<IamPermission>;
-                        iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
-                        iamGetPermissionsRoles: IamPermissionRole[];
-                    };
-                },
-                {
-                    object: IamRole;
-                    iamPaginatePermissions: GridData<IamPermission>;
-                    iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
-                    iamGetPermissionsRoles: IamPermissionRole[];
-                }>(result => result.data),
-                tap((data: {
-                    object: IamRole;
-                    iamPaginatePermissions: GridData<IamPermission>;
-                    iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
-                    iamGetPermissionsRoles: IamPermissionRole[];
-                }) =>
+                map(result => result.data),
+                tap(data =>
                 {
                     this.roleSubject$.next(data.object);
                     this.permissionService.paginationSubject$.next(data.iamPaginatePermissions);
@@ -433,9 +417,11 @@ export class RoleService
         {
             graphqlStatement = inheritPermissionsRoleRoleMutation,
             object = null,
+            headers = {},
         }: {
             graphqlStatement?: DocumentNode;
             object?: IamUpdateRoleById;
+            headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
     {
@@ -445,6 +431,9 @@ export class RoleService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
                 },
             });
     }

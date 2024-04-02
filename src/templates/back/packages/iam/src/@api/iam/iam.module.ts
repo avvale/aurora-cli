@@ -13,6 +13,7 @@ import { IamUserApiHandlers, IamUserApiControllers, IamUserApiResolvers, IamUser
 import { IamUserMetaControllers, IamUserMetaResolvers, IamUserMetaApiHandlers } from './user-meta';
 import { IamRoleAccountApiControllers, IamRoleAccountApiResolvers, IamRoleAccountApiHandlers, IamRoleAccountApiServices } from './role-account';
 import { IamTenantAccountApiControllers, IamTenantAccountApiResolvers, IamTenantAccountApiHandlers, IamTenantAccountApiServices } from './tenant-account';
+import { IamTagApiControllers, IamTagApiResolvers, IamTagApiHandlers, IamTagApiServices } from './tag';
 
 @Module({
     imports: [
@@ -31,7 +32,8 @@ import { IamTenantAccountApiControllers, IamTenantAccountApiResolvers, IamTenant
         ...IamAccountApiControllers,
         ...IamTenantAccountApiControllers,
         ...IamTenantApiControllers,
-        ...IamUserApiControllers
+        ...IamUserApiControllers,
+        ...IamTagApiControllers
     ],
     providers: [
         IamSeeder,
@@ -67,7 +69,10 @@ import { IamTenantAccountApiControllers, IamTenantAccountApiResolvers, IamTenant
         ...IamTenantApiResolvers,
         ...IamTenantApiServices,
         ...IamUserApiResolvers,
-        ...IamUserApiServices
+        ...IamUserApiServices,
+        ...IamTagApiResolvers,
+        ...IamTagApiHandlers,
+        ...IamTagApiServices
     ],
 })
 export class IamModule {}

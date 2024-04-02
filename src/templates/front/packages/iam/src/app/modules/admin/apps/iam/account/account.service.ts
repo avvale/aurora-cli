@@ -1,15 +1,16 @@
-import { IamRole, IamTenant } from '../iam.types';
-import { TenantService } from '../tenant/tenant.service';
-import { findByIdWithRelationsQuery, getRelations } from './account.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/account';
 import { IamAccount, IamCreateAccount, IamUpdateAccountById, IamUpdateAccounts } from '@apps/iam/iam.types';
-import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
-import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { RoleService } from '../role';
 import { ClientService } from '@apps/o-auth/client';
 import { OAuthClient } from '@apps/o-auth/o-auth.types';
+import { GraphQLHeaders, GraphQLService, GridData, QueryStatement, parseGqlFields } from '@aurora';
+import { BehaviorSubject, Observable, first, map, tap } from 'rxjs';
+import { IamRole, IamTag, IamTenant } from '../iam.types';
+import { RoleService } from '../role';
+import { TagService } from '../tag';
+import { TenantService } from '../tenant/tenant.service';
+import { findByIdWithRelationsQuery, getRelations } from './account.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -24,6 +25,7 @@ export class AccountService
         private readonly graphqlService: GraphQLService,
         private readonly tenantService: TenantService,
         private readonly roleService: RoleService,
+        private readonly tagService: TagService,
         private readonly clientService: ClientService,
     ) {}
 
@@ -141,6 +143,7 @@ export class AccountService
         object: IamAccount;
         iamGetTenants: IamTenant[];
         iamGetRoles: IamRole[];
+        iamGetTags: IamTag[];
         oAuthGetClients: OAuthClient[];
     }>
     {
@@ -150,6 +153,7 @@ export class AccountService
                 object: IamAccount;
                 iamGetTenants: IamTenant[];
                 iamGetRoles: IamRole[];
+                iamGetTags: IamTag[];
                 oAuthGetClients: OAuthClient[];
             }>({
                 query    : parseGqlFields(graphqlStatement, fields, constraint),
@@ -172,6 +176,7 @@ export class AccountService
                     this.accountSubject$.next(data.object);
                     this.tenantService.tenantsSubject$.next(data.iamGetTenants);
                     this.roleService.rolesSubject$.next(data.iamGetRoles);
+                    this.tagService.tagsSubject$.next(data.iamGetTags);
                     this.clientService.clientsSubject$.next(data.oAuthGetClients);
                 }),
             );
@@ -272,6 +277,7 @@ export class AccountService
     ): Observable<{
         iamGetTenants: IamTenant[];
         iamGetRoles: IamRole[];
+        iamGetTags: IamTag[];
         oAuthGetClients: OAuthClient[];
     }>
     {
@@ -280,6 +286,7 @@ export class AccountService
             .watchQuery<{
                 iamGetTenants: IamTenant[];
                 iamGetRoles: IamRole[];
+                iamGetTags: IamTag[];
                 oAuthGetClients: OAuthClient[];
             }>({
                 query    : getRelations,
@@ -299,6 +306,7 @@ export class AccountService
                 {
                     this.tenantService.tenantsSubject$.next(data.iamGetTenants);
                     this.roleService.rolesSubject$.next(data.iamGetRoles);
+                    this.tagService.tagsSubject$.next(data.iamGetTags);
                     this.clientService.clientsSubject$.next(data.oAuthGetClients);
                 }),
             );

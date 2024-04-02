@@ -1,4 +1,4 @@
-import { OAuthAccessToken, OAuthDeletedAccessTokenEvent, OAuthDeletedAccessTokensEvent } from '@app/o-auth/access-token';
+import { OAuthAccessToken, OAuthDeletedAccessTokenEvent, OAuthDeletedAccessTokensEvent, OAuthUpdatedAndIncrementedAccessTokenEvent, OAuthUpdatedAndIncrementedAccessTokensEvent } from '@app/o-auth/access-token';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class OAuthAddAccessTokensContextEvent extends AggregateRoot
@@ -16,6 +16,28 @@ export class OAuthAddAccessTokensContextEvent extends AggregateRoot
     }
 
 
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new OAuthUpdatedAndIncrementedAccessTokensEvent(
+                this.aggregateRoots.map(accessToken =>
+                    new OAuthUpdatedAndIncrementedAccessTokenEvent(
+                        accessToken.id.value,
+                        accessToken.clientId.value,
+                        accessToken.accountId?.value,
+                        accessToken.token.value,
+                        accessToken.name?.value,
+                        accessToken.isRevoked.value,
+                        accessToken.expiresAt?.value,
+                        accessToken.createdAt?.value,
+                        accessToken.updatedAt?.value,
+                        accessToken.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
 
     deleted(): void
     {

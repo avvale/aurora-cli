@@ -8,7 +8,7 @@ export class IamCreateTenantCommand
             parentId?: string;
             name: string;
             code?: string;
-            logo?: string;
+            logo?: any;
             isActive: boolean;
             meta?: any;
             accountIds?: string[];

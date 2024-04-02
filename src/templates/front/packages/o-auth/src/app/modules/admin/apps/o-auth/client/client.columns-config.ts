@@ -12,6 +12,7 @@ export const clientColumnsConfig: ColumnConfig[] = [
         field      : 'name',
         sort       : 'name',
         translation: 'oAuth.Name',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.STRING,

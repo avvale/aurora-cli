@@ -1,4 +1,4 @@
-import { OAuthApplication, OAuthCreatedApplicationEvent, OAuthCreatedApplicationsEvent, OAuthDeletedApplicationEvent, OAuthDeletedApplicationsEvent, OAuthUpdatedApplicationEvent, OAuthUpdatedApplicationsEvent } from '@app/o-auth/application';
+import { OAuthApplication, OAuthCreatedApplicationEvent, OAuthCreatedApplicationsEvent, OAuthDeletedApplicationEvent, OAuthDeletedApplicationsEvent, OAuthUpdatedAndIncrementedApplicationEvent, OAuthUpdatedAndIncrementedApplicationsEvent, OAuthUpdatedApplicationEvent, OAuthUpdatedApplicationsEvent } from '@app/o-auth/application';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class OAuthAddApplicationsContextEvent extends AggregateRoot
@@ -42,6 +42,27 @@ export class OAuthAddApplicationsContextEvent extends AggregateRoot
             new OAuthUpdatedApplicationsEvent(
                 this.aggregateRoots.map(application =>
                     new OAuthUpdatedApplicationEvent(
+                        application.id.value,
+                        application.code.value,
+                        application.name.value,
+                        application.secret.value,
+                        application.isMaster.value,
+                        application.clientIds?.value,
+                        application.createdAt?.value,
+                        application.updatedAt?.value,
+                        application.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new OAuthUpdatedAndIncrementedApplicationsEvent(
+                this.aggregateRoots.map(application =>
+                    new OAuthUpdatedAndIncrementedApplicationEvent(
                         application.id.value,
                         application.code.value,
                         application.name.value,

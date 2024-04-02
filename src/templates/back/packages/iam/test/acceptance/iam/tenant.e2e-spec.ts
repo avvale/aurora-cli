@@ -5,7 +5,7 @@ import { IamModule } from '@api/iam/iam.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { IamITenantRepository, iamMockTenantData, IamMockTenantSeeder } from '@app/iam/tenant';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -205,35 +205,35 @@ describe('tenant', () =>
             });
     });
 
-    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantName is too large, has a maximum length of 127', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamTenantName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for IamTenantName is too large, has a maximum length of 128');
             });
     });
 
-    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantCode is too large, has a maximum length of 63', () =>
+    test('/REST:POST iam/tenant/create - Got 400 Conflict, TenantCode is too large, has a maximum length of 64', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/tenant/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: '****************************************************************',
+                code: '*****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamTenantCode is too large, has a maximum length of 63');
+                expect(res.body.message).toContain('Value for IamTenantCode is too large, has a maximum length of 64');
             });
     });
 

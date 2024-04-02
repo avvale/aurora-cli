@@ -1,4 +1,4 @@
-import { IamRole, IamTenant } from '../iam.types';
+import { IamRole, IamTag, IamTenant } from '../iam.types';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { accountColumnsConfig, AccountService } from '@apps/iam/account';
@@ -39,6 +39,7 @@ export const accountPaginationResolver: ResolveFn<GridData<IamAccount>> = (
 export const accountNewResolver: ResolveFn<{
     iamGetTenants: IamTenant[];
     iamGetRoles: IamRole[];
+    iamGetTags: IamTag[];
     oAuthGetClients: OAuthClient[];
 }> = (
     route: ActivatedRouteSnapshot,

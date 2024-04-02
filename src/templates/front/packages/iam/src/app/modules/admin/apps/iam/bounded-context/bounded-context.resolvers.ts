@@ -1,5 +1,5 @@
 import { IamPermission } from '../iam.types';
-import { permissionColumnsConfig } from '../permission/permission.columns-config';
+import { permissionColumnsConfig } from '../permission';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { boundedContextColumnsConfig, BoundedContextService } from '@apps/iam/bounded-context';

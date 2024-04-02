@@ -6,7 +6,7 @@ type IamTenant
     parent: IamTenant
     name: GraphQLString!
     code: GraphQLString
-    logo: GraphQLString
+    logo: JSON
     isActive: GraphQLBoolean!
     meta: JSON
     accounts: [IamAccount]
@@ -21,7 +21,7 @@ input IamCreateTenantInput
     parentId: ID
     name: GraphQLString!
     code: GraphQLString
-    logo: GraphQLString
+    logo: JSON
     isActive: GraphQLBoolean!
     meta: JSON
     accountIds: [ID]
@@ -33,7 +33,7 @@ input IamUpdateTenantByIdInput
     parentId: ID
     name: GraphQLString
     code: GraphQLString
-    logo: GraphQLString
+    logo: JSON
     isActive: GraphQLBoolean
     meta: JSON
     accountIds: [ID]
@@ -45,7 +45,7 @@ input IamUpdateTenantsInput
     parentId: ID
     name: GraphQLString
     code: GraphQLString
-    logo: GraphQLString
+    logo: JSON
     isActive: GraphQLBoolean
     meta: JSON
     accountIds: [ID]

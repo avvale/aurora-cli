@@ -3,6 +3,7 @@ export { OAuthCreateScopeCommand } from './application/create/o-auth-create-scop
 export { OAuthCreateScopesCommand } from './application/create/o-auth-create-scopes.command';
 export { OAuthUpdateScopeByIdCommand } from './application/update/o-auth-update-scope-by-id.command';
 export { OAuthUpdateScopesCommand } from './application/update/o-auth-update-scopes.command';
+export { OAuthUpdateAndIncrementScopesCommand } from './application/update/o-auth-update-and-increment-scopes.command';
 export { OAuthUpsertScopeCommand } from './application/upsert/o-auth-upsert-scope.command';
 export { OAuthDeleteScopeByIdCommand } from './application/delete/o-auth-delete-scope-by-id.command';
 export { OAuthDeleteScopesCommand } from './application/delete/o-auth-delete-scopes.command';
@@ -13,6 +14,10 @@ export { OAuthGetScopesQuery } from './application/get/o-auth-get-scopes.query';
 export { OAuthFindScopeQuery } from './application/find/o-auth-find-scope.query';
 export { OAuthFindScopeByIdQuery } from './application/find/o-auth-find-scope-by-id.query';
 export { OAuthRawSQLScopesQuery } from './application/raw-sql/o-auth-raw-sql-scopes.query';
+export { OAuthCountScopeQuery } from './application/count/o-auth-count-scope.query';
+export { OAuthMaxScopeQuery } from './application/max/o-auth-max-scope.query';
+export { OAuthMinScopeQuery } from './application/min/o-auth-min-scope.query';
+export { OAuthSumScopeQuery } from './application/sum/o-auth-sum-scope.query';
 
 // export mocks
 export { oAuthMockScopeData } from './infrastructure/mock/o-auth-mock-scope.data';
@@ -27,6 +32,8 @@ export { OAuthDeletedScopesEvent } from './application/events/o-auth-deleted-sco
 export { OAuthDeletedScopeEvent } from './application/events/o-auth-deleted-scope.event';
 export { OAuthUpdatedScopesEvent } from './application/events/o-auth-updated-scopes.event';
 export { OAuthUpdatedScopeEvent } from './application/events/o-auth-updated-scope.event';
+export { OAuthUpdatedAndIncrementedScopesEvent } from './application/events/o-auth-updated-and-incremented-scopes.event';
+export { OAuthUpdatedAndIncrementedScopeEvent } from './application/events/o-auth-updated-and-incremented-scope.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -52,6 +59,7 @@ import { OAuthCreateScopeCommandHandler } from './application/create/o-auth-crea
 import { OAuthCreateScopesCommandHandler } from './application/create/o-auth-create-scopes.command-handler';
 import { OAuthUpdateScopeByIdCommandHandler } from './application/update/o-auth-update-scope-by-id.command-handler';
 import { OAuthUpdateScopesCommandHandler } from './application/update/o-auth-update-scopes.command-handler';
+import { OAuthUpdateAndIncrementScopesCommandHandler } from './application/update/o-auth-update-and-increment-scopes.command-handler';
 import { OAuthUpsertScopeCommandHandler } from './application/upsert/o-auth-upsert-scope.command-handler';
 import { OAuthDeleteScopeByIdCommandHandler } from './application/delete/o-auth-delete-scope-by-id.command-handler';
 import { OAuthDeleteScopesCommandHandler } from './application/delete/o-auth-delete-scopes.command-handler';
@@ -62,12 +70,17 @@ import { OAuthGetScopesQueryHandler } from './application/get/o-auth-get-scopes.
 import { OAuthFindScopeQueryHandler } from './application/find/o-auth-find-scope.query-handler';
 import { OAuthFindScopeByIdQueryHandler } from './application/find/o-auth-find-scope-by-id.query-handler';
 import { OAuthRawSQLScopesQueryHandler } from './application/raw-sql/o-auth-raw-sql-scopes.query-handler';
+import { OAuthCountScopeQueryHandler } from './application/count/o-auth-count-scope.query-handler';
+import { OAuthMaxScopeQueryHandler } from './application/max/o-auth-max-scope.query-handler';
+import { OAuthMinScopeQueryHandler } from './application/min/o-auth-min-scope.query-handler';
+import { OAuthSumScopeQueryHandler } from './application/sum/o-auth-sum-scope.query-handler';
 
 // event handlers
 import { OAuthCreatedScopeEventHandler } from './application/events/o-auth-created-scope.event-handler';
 import { OAuthCreatedScopesEventHandler } from './application/events/o-auth-created-scopes.event-handler';
 import { OAuthUpdatedScopeEventHandler } from './application/events/o-auth-updated-scope.event-handler';
 import { OAuthUpdatedScopesEventHandler } from './application/events/o-auth-updated-scopes.event-handler';
+import { OAuthUpdatedAndIncrementedScopesEventHandler } from './application/events/o-auth-updated-and-incremented-scopes.event-handler';
 import { OAuthDeletedScopeEventHandler } from './application/events/o-auth-deleted-scope.event-handler';
 import { OAuthDeletedScopesEventHandler } from './application/events/o-auth-deleted-scopes.event-handler';
 
@@ -79,8 +92,13 @@ import { OAuthGetScopesService } from './application/get/o-auth-get-scopes.servi
 import { OAuthFindScopeService } from './application/find/o-auth-find-scope.service';
 import { OAuthFindScopeByIdService } from './application/find/o-auth-find-scope-by-id.service';
 import { OAuthRawSQLScopesService } from './application/raw-sql/o-auth-raw-sql-scopes.service';
+import { OAuthCountScopeService } from './application/count/o-auth-count-scope.service';
+import { OAuthMaxScopeService } from './application/max/o-auth-max-scope.service';
+import { OAuthMinScopeService } from './application/min/o-auth-min-scope.service';
+import { OAuthSumScopeService } from './application/sum/o-auth-sum-scope.service';
 import { OAuthUpdateScopeByIdService } from './application/update/o-auth-update-scope-by-id.service';
 import { OAuthUpdateScopesService } from './application/update/o-auth-update-scopes.service';
+import { OAuthUpdateAndIncrementScopesService } from './application/update/o-auth-update-and-increment-scopes.service';
 import { OAuthUpsertScopeService } from './application/upsert/o-auth-upsert-scope.service';
 import { OAuthDeleteScopeByIdService } from './application/delete/o-auth-delete-scope-by-id.service';
 import { OAuthDeleteScopesService } from './application/delete/o-auth-delete-scopes.service';
@@ -91,6 +109,7 @@ export const OAuthScopeHandlers = [
     OAuthCreateScopesCommandHandler,
     OAuthUpdateScopeByIdCommandHandler,
     OAuthUpdateScopesCommandHandler,
+    OAuthUpdateAndIncrementScopesCommandHandler,
     OAuthUpsertScopeCommandHandler,
     OAuthDeleteScopeByIdCommandHandler,
     OAuthDeleteScopesCommandHandler,
@@ -101,12 +120,17 @@ export const OAuthScopeHandlers = [
     OAuthFindScopeQueryHandler,
     OAuthFindScopeByIdQueryHandler,
     OAuthRawSQLScopesQueryHandler,
+    OAuthCountScopeQueryHandler,
+    OAuthMaxScopeQueryHandler,
+    OAuthMinScopeQueryHandler,
+    OAuthSumScopeQueryHandler,
 
     // events
     OAuthCreatedScopeEventHandler,
     OAuthCreatedScopesEventHandler,
     OAuthUpdatedScopeEventHandler,
     OAuthUpdatedScopesEventHandler,
+    OAuthUpdatedAndIncrementedScopesEventHandler,
     OAuthDeletedScopeEventHandler,
     OAuthDeletedScopesEventHandler,
 ];
@@ -119,8 +143,13 @@ export const OAuthScopeServices = [
     OAuthFindScopeService,
     OAuthFindScopeByIdService,
     OAuthRawSQLScopesService,
+    OAuthCountScopeService,
+    OAuthMaxScopeService,
+    OAuthMinScopeService,
+    OAuthSumScopeService,
     OAuthUpdateScopeByIdService,
     OAuthUpdateScopesService,
+    OAuthUpdateAndIncrementScopesService,
     OAuthUpsertScopeService,
     OAuthDeleteScopeByIdService,
     OAuthDeleteScopesService,

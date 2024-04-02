@@ -13,7 +13,6 @@ aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
   - name: type
     type: enum
@@ -24,12 +23,12 @@ aggregateProperties:
     example: IamAccountType.USER
   - name: code
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: true
     index: unique
   - name: email
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
     index: unique
     example: john@gmial.com
@@ -40,7 +39,6 @@ aggregateProperties:
     example: true
   - name: clientId
     type: id
-    length: 36
     nullable: false
     relationship:
       type: many-to-one
@@ -49,18 +47,26 @@ aggregateProperties:
       key: id
       field: client
       avoidConstraint: true
+  - name: tags
+    type: array
+    nullable: true
+    index: index
+    arrayOptions:
+      type: varchar
+      maxLength: 64
   - name: scopes
     type: array
     nullable: true
     arrayOptions:
       type: varchar
+      maxLength: 64
   - name: dApplicationCodes
     type: array
     nullable: false
     arrayOptions:
       type: varchar
   - name: dPermissions
-    type: json
+    type: jsonb
     nullable: false
   - name: dTenants
     type: array
@@ -68,7 +74,7 @@ aggregateProperties:
     arrayOptions:
       type: id
   - name: meta
-    type: json
+    type: jsonb
     nullable: true
   - name: roles
     type: relationship

@@ -6,6 +6,7 @@ export const refreshTokenColumnsConfig: ColumnConfig[] = [
         field      : 'token',
         sort       : 'token',
         translation: 'oAuth.Token',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.BOOLEAN,

@@ -1,5 +1,6 @@
 // export commands
 export { OAuthCreateRefreshTokenCommand } from './application/create/o-auth-create-refresh-token.command';
+export { OAuthUpdateAndIncrementRefreshTokensCommand } from './application/update/o-auth-update-and-increment-refresh-tokens.command';
 export { OAuthDeleteRefreshTokenByIdCommand } from './application/delete/o-auth-delete-refresh-token-by-id.command';
 export { OAuthDeleteRefreshTokensCommand } from './application/delete/o-auth-delete-refresh-tokens.command';
 
@@ -9,6 +10,10 @@ export { OAuthGetRefreshTokensQuery } from './application/get/o-auth-get-refresh
 export { OAuthFindRefreshTokenQuery } from './application/find/o-auth-find-refresh-token.query';
 export { OAuthFindRefreshTokenByIdQuery } from './application/find/o-auth-find-refresh-token-by-id.query';
 export { OAuthRawSQLRefreshTokensQuery } from './application/raw-sql/o-auth-raw-sql-refresh-tokens.query';
+export { OAuthCountRefreshTokenQuery } from './application/count/o-auth-count-refresh-token.query';
+export { OAuthMaxRefreshTokenQuery } from './application/max/o-auth-max-refresh-token.query';
+export { OAuthMinRefreshTokenQuery } from './application/min/o-auth-min-refresh-token.query';
+export { OAuthSumRefreshTokenQuery } from './application/sum/o-auth-sum-refresh-token.query';
 
 // export mocks
 export { oAuthMockRefreshTokenData } from './infrastructure/mock/o-auth-mock-refresh-token.data';
@@ -20,6 +25,8 @@ export { OAuthAddRefreshTokensContextEvent } from './application/events/o-auth-a
 export { OAuthCreatedRefreshTokenEvent } from './application/events/o-auth-created-refresh-token.event';
 export { OAuthDeletedRefreshTokensEvent } from './application/events/o-auth-deleted-refresh-tokens.event';
 export { OAuthDeletedRefreshTokenEvent } from './application/events/o-auth-deleted-refresh-token.event';
+export { OAuthUpdatedAndIncrementedRefreshTokensEvent } from './application/events/o-auth-updated-and-incremented-refresh-tokens.event';
+export { OAuthUpdatedAndIncrementedRefreshTokenEvent } from './application/events/o-auth-updated-and-incremented-refresh-token.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -42,6 +49,7 @@ export { OAuthRefreshTokenSagas } from './application/sagas/o-auth-refresh-token
 
 // command handlers
 import { OAuthCreateRefreshTokenCommandHandler } from './application/create/o-auth-create-refresh-token.command-handler';
+import { OAuthUpdateAndIncrementRefreshTokensCommandHandler } from './application/update/o-auth-update-and-increment-refresh-tokens.command-handler';
 import { OAuthDeleteRefreshTokenByIdCommandHandler } from './application/delete/o-auth-delete-refresh-token-by-id.command-handler';
 import { OAuthDeleteRefreshTokensCommandHandler } from './application/delete/o-auth-delete-refresh-tokens.command-handler';
 
@@ -51,9 +59,14 @@ import { OAuthGetRefreshTokensQueryHandler } from './application/get/o-auth-get-
 import { OAuthFindRefreshTokenQueryHandler } from './application/find/o-auth-find-refresh-token.query-handler';
 import { OAuthFindRefreshTokenByIdQueryHandler } from './application/find/o-auth-find-refresh-token-by-id.query-handler';
 import { OAuthRawSQLRefreshTokensQueryHandler } from './application/raw-sql/o-auth-raw-sql-refresh-tokens.query-handler';
+import { OAuthCountRefreshTokenQueryHandler } from './application/count/o-auth-count-refresh-token.query-handler';
+import { OAuthMaxRefreshTokenQueryHandler } from './application/max/o-auth-max-refresh-token.query-handler';
+import { OAuthMinRefreshTokenQueryHandler } from './application/min/o-auth-min-refresh-token.query-handler';
+import { OAuthSumRefreshTokenQueryHandler } from './application/sum/o-auth-sum-refresh-token.query-handler';
 
 // event handlers
 import { OAuthCreatedRefreshTokenEventHandler } from './application/events/o-auth-created-refresh-token.event-handler';
+import { OAuthUpdatedAndIncrementedRefreshTokensEventHandler } from './application/events/o-auth-updated-and-incremented-refresh-tokens.event-handler';
 import { OAuthDeletedRefreshTokenEventHandler } from './application/events/o-auth-deleted-refresh-token.event-handler';
 import { OAuthDeletedRefreshTokensEventHandler } from './application/events/o-auth-deleted-refresh-tokens.event-handler';
 
@@ -64,12 +77,18 @@ import { OAuthGetRefreshTokensService } from './application/get/o-auth-get-refre
 import { OAuthFindRefreshTokenService } from './application/find/o-auth-find-refresh-token.service';
 import { OAuthFindRefreshTokenByIdService } from './application/find/o-auth-find-refresh-token-by-id.service';
 import { OAuthRawSQLRefreshTokensService } from './application/raw-sql/o-auth-raw-sql-refresh-tokens.service';
+import { OAuthCountRefreshTokenService } from './application/count/o-auth-count-refresh-token.service';
+import { OAuthMaxRefreshTokenService } from './application/max/o-auth-max-refresh-token.service';
+import { OAuthMinRefreshTokenService } from './application/min/o-auth-min-refresh-token.service';
+import { OAuthSumRefreshTokenService } from './application/sum/o-auth-sum-refresh-token.service';
+import { OAuthUpdateAndIncrementRefreshTokensService } from './application/update/o-auth-update-and-increment-refresh-tokens.service';
 import { OAuthDeleteRefreshTokenByIdService } from './application/delete/o-auth-delete-refresh-token-by-id.service';
 import { OAuthDeleteRefreshTokensService } from './application/delete/o-auth-delete-refresh-tokens.service';
 
 export const OAuthRefreshTokenHandlers = [
     // commands
     OAuthCreateRefreshTokenCommandHandler,
+    OAuthUpdateAndIncrementRefreshTokensCommandHandler,
     OAuthDeleteRefreshTokenByIdCommandHandler,
     OAuthDeleteRefreshTokensCommandHandler,
 
@@ -79,9 +98,14 @@ export const OAuthRefreshTokenHandlers = [
     OAuthFindRefreshTokenQueryHandler,
     OAuthFindRefreshTokenByIdQueryHandler,
     OAuthRawSQLRefreshTokensQueryHandler,
+    OAuthCountRefreshTokenQueryHandler,
+    OAuthMaxRefreshTokenQueryHandler,
+    OAuthMinRefreshTokenQueryHandler,
+    OAuthSumRefreshTokenQueryHandler,
 
     // events
     OAuthCreatedRefreshTokenEventHandler,
+    OAuthUpdatedAndIncrementedRefreshTokensEventHandler,
     OAuthDeletedRefreshTokenEventHandler,
     OAuthDeletedRefreshTokensEventHandler,
 ];
@@ -93,6 +117,11 @@ export const OAuthRefreshTokenServices = [
     OAuthFindRefreshTokenService,
     OAuthFindRefreshTokenByIdService,
     OAuthRawSQLRefreshTokensService,
+    OAuthCountRefreshTokenService,
+    OAuthMaxRefreshTokenService,
+    OAuthMinRefreshTokenService,
+    OAuthSumRefreshTokenService,
+    OAuthUpdateAndIncrementRefreshTokensService,
     OAuthDeleteRefreshTokenByIdService,
     OAuthDeleteRefreshTokensService,
 ];

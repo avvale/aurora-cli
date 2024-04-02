@@ -3,6 +3,7 @@ export { IamCreateBoundedContextCommand } from './application/create/iam-create-
 export { IamCreateBoundedContextsCommand } from './application/create/iam-create-bounded-contexts.command';
 export { IamUpdateBoundedContextByIdCommand } from './application/update/iam-update-bounded-context-by-id.command';
 export { IamUpdateBoundedContextsCommand } from './application/update/iam-update-bounded-contexts.command';
+export { IamUpdateAndIncrementBoundedContextsCommand } from './application/update/iam-update-and-increment-bounded-contexts.command';
 export { IamUpsertBoundedContextCommand } from './application/upsert/iam-upsert-bounded-context.command';
 export { IamDeleteBoundedContextByIdCommand } from './application/delete/iam-delete-bounded-context-by-id.command';
 export { IamDeleteBoundedContextsCommand } from './application/delete/iam-delete-bounded-contexts.command';
@@ -13,6 +14,10 @@ export { IamGetBoundedContextsQuery } from './application/get/iam-get-bounded-co
 export { IamFindBoundedContextQuery } from './application/find/iam-find-bounded-context.query';
 export { IamFindBoundedContextByIdQuery } from './application/find/iam-find-bounded-context-by-id.query';
 export { IamRawSQLBoundedContextsQuery } from './application/raw-sql/iam-raw-sql-bounded-contexts.query';
+export { IamCountBoundedContextQuery } from './application/count/iam-count-bounded-context.query';
+export { IamMaxBoundedContextQuery } from './application/max/iam-max-bounded-context.query';
+export { IamMinBoundedContextQuery } from './application/min/iam-min-bounded-context.query';
+export { IamSumBoundedContextQuery } from './application/sum/iam-sum-bounded-context.query';
 
 // export mocks
 export { iamMockBoundedContextData } from './infrastructure/mock/iam-mock-bounded-context.data';
@@ -27,6 +32,8 @@ export { IamDeletedBoundedContextsEvent } from './application/events/iam-deleted
 export { IamDeletedBoundedContextEvent } from './application/events/iam-deleted-bounded-context.event';
 export { IamUpdatedBoundedContextsEvent } from './application/events/iam-updated-bounded-contexts.event';
 export { IamUpdatedBoundedContextEvent } from './application/events/iam-updated-bounded-context.event';
+export { IamUpdatedAndIncrementedBoundedContextsEvent } from './application/events/iam-updated-and-incremented-bounded-contexts.event';
+export { IamUpdatedAndIncrementedBoundedContextEvent } from './application/events/iam-updated-and-incremented-bounded-context.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -52,6 +59,7 @@ import { IamCreateBoundedContextCommandHandler } from './application/create/iam-
 import { IamCreateBoundedContextsCommandHandler } from './application/create/iam-create-bounded-contexts.command-handler';
 import { IamUpdateBoundedContextByIdCommandHandler } from './application/update/iam-update-bounded-context-by-id.command-handler';
 import { IamUpdateBoundedContextsCommandHandler } from './application/update/iam-update-bounded-contexts.command-handler';
+import { IamUpdateAndIncrementBoundedContextsCommandHandler } from './application/update/iam-update-and-increment-bounded-contexts.command-handler';
 import { IamUpsertBoundedContextCommandHandler } from './application/upsert/iam-upsert-bounded-context.command-handler';
 import { IamDeleteBoundedContextByIdCommandHandler } from './application/delete/iam-delete-bounded-context-by-id.command-handler';
 import { IamDeleteBoundedContextsCommandHandler } from './application/delete/iam-delete-bounded-contexts.command-handler';
@@ -62,12 +70,17 @@ import { IamGetBoundedContextsQueryHandler } from './application/get/iam-get-bou
 import { IamFindBoundedContextQueryHandler } from './application/find/iam-find-bounded-context.query-handler';
 import { IamFindBoundedContextByIdQueryHandler } from './application/find/iam-find-bounded-context-by-id.query-handler';
 import { IamRawSQLBoundedContextsQueryHandler } from './application/raw-sql/iam-raw-sql-bounded-contexts.query-handler';
+import { IamCountBoundedContextQueryHandler } from './application/count/iam-count-bounded-context.query-handler';
+import { IamMaxBoundedContextQueryHandler } from './application/max/iam-max-bounded-context.query-handler';
+import { IamMinBoundedContextQueryHandler } from './application/min/iam-min-bounded-context.query-handler';
+import { IamSumBoundedContextQueryHandler } from './application/sum/iam-sum-bounded-context.query-handler';
 
 // event handlers
 import { IamCreatedBoundedContextEventHandler } from './application/events/iam-created-bounded-context.event-handler';
 import { IamCreatedBoundedContextsEventHandler } from './application/events/iam-created-bounded-contexts.event-handler';
 import { IamUpdatedBoundedContextEventHandler } from './application/events/iam-updated-bounded-context.event-handler';
 import { IamUpdatedBoundedContextsEventHandler } from './application/events/iam-updated-bounded-contexts.event-handler';
+import { IamUpdatedAndIncrementedBoundedContextsEventHandler } from './application/events/iam-updated-and-incremented-bounded-contexts.event-handler';
 import { IamDeletedBoundedContextEventHandler } from './application/events/iam-deleted-bounded-context.event-handler';
 import { IamDeletedBoundedContextsEventHandler } from './application/events/iam-deleted-bounded-contexts.event-handler';
 
@@ -79,8 +92,13 @@ import { IamGetBoundedContextsService } from './application/get/iam-get-bounded-
 import { IamFindBoundedContextService } from './application/find/iam-find-bounded-context.service';
 import { IamFindBoundedContextByIdService } from './application/find/iam-find-bounded-context-by-id.service';
 import { IamRawSQLBoundedContextsService } from './application/raw-sql/iam-raw-sql-bounded-contexts.service';
+import { IamCountBoundedContextService } from './application/count/iam-count-bounded-context.service';
+import { IamMaxBoundedContextService } from './application/max/iam-max-bounded-context.service';
+import { IamMinBoundedContextService } from './application/min/iam-min-bounded-context.service';
+import { IamSumBoundedContextService } from './application/sum/iam-sum-bounded-context.service';
 import { IamUpdateBoundedContextByIdService } from './application/update/iam-update-bounded-context-by-id.service';
 import { IamUpdateBoundedContextsService } from './application/update/iam-update-bounded-contexts.service';
+import { IamUpdateAndIncrementBoundedContextsService } from './application/update/iam-update-and-increment-bounded-contexts.service';
 import { IamUpsertBoundedContextService } from './application/upsert/iam-upsert-bounded-context.service';
 import { IamDeleteBoundedContextByIdService } from './application/delete/iam-delete-bounded-context-by-id.service';
 import { IamDeleteBoundedContextsService } from './application/delete/iam-delete-bounded-contexts.service';
@@ -94,6 +112,7 @@ export const IamBoundedContextHandlers = [
     IamCreateBoundedContextsCommandHandler,
     IamUpdateBoundedContextByIdCommandHandler,
     IamUpdateBoundedContextsCommandHandler,
+    IamUpdateAndIncrementBoundedContextsCommandHandler,
     IamUpsertBoundedContextCommandHandler,
     IamDeleteBoundedContextByIdCommandHandler,
     IamDeleteBoundedContextsCommandHandler,
@@ -104,12 +123,17 @@ export const IamBoundedContextHandlers = [
     IamFindBoundedContextQueryHandler,
     IamFindBoundedContextByIdQueryHandler,
     IamRawSQLBoundedContextsQueryHandler,
+    IamCountBoundedContextQueryHandler,
+    IamMaxBoundedContextQueryHandler,
+    IamMinBoundedContextQueryHandler,
+    IamSumBoundedContextQueryHandler,
 
     // events
     IamCreatedBoundedContextEventHandler,
     IamCreatedBoundedContextsEventHandler,
     IamUpdatedBoundedContextEventHandler,
     IamUpdatedBoundedContextsEventHandler,
+    IamUpdatedAndIncrementedBoundedContextsEventHandler,
     IamDeletedBoundedContextEventHandler,
     IamDeletedBoundedContextsEventHandler,
 ];
@@ -122,8 +146,13 @@ export const IamBoundedContextServices = [
     IamFindBoundedContextService,
     IamFindBoundedContextByIdService,
     IamRawSQLBoundedContextsService,
+    IamCountBoundedContextService,
+    IamMaxBoundedContextService,
+    IamMinBoundedContextService,
+    IamSumBoundedContextService,
     IamUpdateBoundedContextByIdService,
     IamUpdateBoundedContextsService,
+    IamUpdateAndIncrementBoundedContextsService,
     IamUpsertBoundedContextService,
     IamDeleteBoundedContextByIdService,
     IamDeleteBoundedContextsService,

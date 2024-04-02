@@ -1,5 +1,6 @@
 // export commands
 export { OAuthCreateAccessTokenCommand } from './application/create/o-auth-create-access-token.command';
+export { OAuthUpdateAndIncrementAccessTokensCommand } from './application/update/o-auth-update-and-increment-access-tokens.command';
 export { OAuthDeleteAccessTokenByIdCommand } from './application/delete/o-auth-delete-access-token-by-id.command';
 export { OAuthDeleteAccessTokensCommand } from './application/delete/o-auth-delete-access-tokens.command';
 
@@ -9,6 +10,10 @@ export { OAuthGetAccessTokensQuery } from './application/get/o-auth-get-access-t
 export { OAuthFindAccessTokenQuery } from './application/find/o-auth-find-access-token.query';
 export { OAuthFindAccessTokenByIdQuery } from './application/find/o-auth-find-access-token-by-id.query';
 export { OAuthRawSQLAccessTokensQuery } from './application/raw-sql/o-auth-raw-sql-access-tokens.query';
+export { OAuthCountAccessTokenQuery } from './application/count/o-auth-count-access-token.query';
+export { OAuthMaxAccessTokenQuery } from './application/max/o-auth-max-access-token.query';
+export { OAuthMinAccessTokenQuery } from './application/min/o-auth-min-access-token.query';
+export { OAuthSumAccessTokenQuery } from './application/sum/o-auth-sum-access-token.query';
 
 // export mocks
 export { oAuthMockAccessTokenData } from './infrastructure/mock/o-auth-mock-access-token.data';
@@ -20,6 +25,8 @@ export { OAuthAddAccessTokensContextEvent } from './application/events/o-auth-ad
 export { OAuthCreatedAccessTokenEvent } from './application/events/o-auth-created-access-token.event';
 export { OAuthDeletedAccessTokensEvent } from './application/events/o-auth-deleted-access-tokens.event';
 export { OAuthDeletedAccessTokenEvent } from './application/events/o-auth-deleted-access-token.event';
+export { OAuthUpdatedAndIncrementedAccessTokensEvent } from './application/events/o-auth-updated-and-incremented-access-tokens.event';
+export { OAuthUpdatedAndIncrementedAccessTokenEvent } from './application/events/o-auth-updated-and-incremented-access-token.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -42,6 +49,7 @@ export { OAuthAccessTokenSagas } from './application/sagas/o-auth-access-token.s
 
 // command handlers
 import { OAuthCreateAccessTokenCommandHandler } from './application/create/o-auth-create-access-token.command-handler';
+import { OAuthUpdateAndIncrementAccessTokensCommandHandler } from './application/update/o-auth-update-and-increment-access-tokens.command-handler';
 import { OAuthDeleteAccessTokenByIdCommandHandler } from './application/delete/o-auth-delete-access-token-by-id.command-handler';
 import { OAuthDeleteAccessTokensCommandHandler } from './application/delete/o-auth-delete-access-tokens.command-handler';
 
@@ -51,9 +59,14 @@ import { OAuthGetAccessTokensQueryHandler } from './application/get/o-auth-get-a
 import { OAuthFindAccessTokenQueryHandler } from './application/find/o-auth-find-access-token.query-handler';
 import { OAuthFindAccessTokenByIdQueryHandler } from './application/find/o-auth-find-access-token-by-id.query-handler';
 import { OAuthRawSQLAccessTokensQueryHandler } from './application/raw-sql/o-auth-raw-sql-access-tokens.query-handler';
+import { OAuthCountAccessTokenQueryHandler } from './application/count/o-auth-count-access-token.query-handler';
+import { OAuthMaxAccessTokenQueryHandler } from './application/max/o-auth-max-access-token.query-handler';
+import { OAuthMinAccessTokenQueryHandler } from './application/min/o-auth-min-access-token.query-handler';
+import { OAuthSumAccessTokenQueryHandler } from './application/sum/o-auth-sum-access-token.query-handler';
 
 // event handlers
 import { OAuthCreatedAccessTokenEventHandler } from './application/events/o-auth-created-access-token.event-handler';
+import { OAuthUpdatedAndIncrementedAccessTokensEventHandler } from './application/events/o-auth-updated-and-incremented-access-tokens.event-handler';
 import { OAuthDeletedAccessTokenEventHandler } from './application/events/o-auth-deleted-access-token.event-handler';
 import { OAuthDeletedAccessTokensEventHandler } from './application/events/o-auth-deleted-access-tokens.event-handler';
 
@@ -64,12 +77,18 @@ import { OAuthGetAccessTokensService } from './application/get/o-auth-get-access
 import { OAuthFindAccessTokenService } from './application/find/o-auth-find-access-token.service';
 import { OAuthFindAccessTokenByIdService } from './application/find/o-auth-find-access-token-by-id.service';
 import { OAuthRawSQLAccessTokensService } from './application/raw-sql/o-auth-raw-sql-access-tokens.service';
+import { OAuthCountAccessTokenService } from './application/count/o-auth-count-access-token.service';
+import { OAuthMaxAccessTokenService } from './application/max/o-auth-max-access-token.service';
+import { OAuthMinAccessTokenService } from './application/min/o-auth-min-access-token.service';
+import { OAuthSumAccessTokenService } from './application/sum/o-auth-sum-access-token.service';
+import { OAuthUpdateAndIncrementAccessTokensService } from './application/update/o-auth-update-and-increment-access-tokens.service';
 import { OAuthDeleteAccessTokenByIdService } from './application/delete/o-auth-delete-access-token-by-id.service';
 import { OAuthDeleteAccessTokensService } from './application/delete/o-auth-delete-access-tokens.service';
 
 export const OAuthAccessTokenHandlers = [
     // commands
     OAuthCreateAccessTokenCommandHandler,
+    OAuthUpdateAndIncrementAccessTokensCommandHandler,
     OAuthDeleteAccessTokenByIdCommandHandler,
     OAuthDeleteAccessTokensCommandHandler,
 
@@ -79,9 +98,14 @@ export const OAuthAccessTokenHandlers = [
     OAuthFindAccessTokenQueryHandler,
     OAuthFindAccessTokenByIdQueryHandler,
     OAuthRawSQLAccessTokensQueryHandler,
+    OAuthCountAccessTokenQueryHandler,
+    OAuthMaxAccessTokenQueryHandler,
+    OAuthMinAccessTokenQueryHandler,
+    OAuthSumAccessTokenQueryHandler,
 
     // events
     OAuthCreatedAccessTokenEventHandler,
+    OAuthUpdatedAndIncrementedAccessTokensEventHandler,
     OAuthDeletedAccessTokenEventHandler,
     OAuthDeletedAccessTokensEventHandler,
 ];
@@ -93,6 +117,11 @@ export const OAuthAccessTokenServices = [
     OAuthFindAccessTokenService,
     OAuthFindAccessTokenByIdService,
     OAuthRawSQLAccessTokensService,
+    OAuthCountAccessTokenService,
+    OAuthMaxAccessTokenService,
+    OAuthMinAccessTokenService,
+    OAuthSumAccessTokenService,
+    OAuthUpdateAndIncrementAccessTokensService,
     OAuthDeleteAccessTokenByIdService,
     OAuthDeleteAccessTokensService,
 ];

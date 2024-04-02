@@ -3,6 +3,7 @@ export { IamCreateTenantAccountCommand } from './application/create/iam-create-t
 export { IamCreateTenantsAccountsCommand } from './application/create/iam-create-tenants-accounts.command';
 export { IamUpdateTenantAccountByIdCommand } from './application/update/iam-update-tenant-account-by-id.command';
 export { IamUpdateTenantsAccountsCommand } from './application/update/iam-update-tenants-accounts.command';
+export { IamUpdateAndIncrementTenantsAccountsCommand } from './application/update/iam-update-and-increment-tenants-accounts.command';
 export { IamUpsertTenantAccountCommand } from './application/upsert/iam-upsert-tenant-account.command';
 export { IamDeleteTenantAccountByIdCommand } from './application/delete/iam-delete-tenant-account-by-id.command';
 export { IamDeleteTenantsAccountsCommand } from './application/delete/iam-delete-tenants-accounts.command';
@@ -13,6 +14,10 @@ export { IamGetTenantsAccountsQuery } from './application/get/iam-get-tenants-ac
 export { IamFindTenantAccountQuery } from './application/find/iam-find-tenant-account.query';
 export { IamFindTenantAccountByIdQuery } from './application/find/iam-find-tenant-account-by-id.query';
 export { IamRawSQLTenantsAccountsQuery } from './application/raw-sql/iam-raw-sql-tenants-accounts.query';
+export { IamCountTenantAccountQuery } from './application/count/iam-count-tenant-account.query';
+export { IamMaxTenantAccountQuery } from './application/max/iam-max-tenant-account.query';
+export { IamMinTenantAccountQuery } from './application/min/iam-min-tenant-account.query';
+export { IamSumTenantAccountQuery } from './application/sum/iam-sum-tenant-account.query';
 
 // export mocks
 export { iamMockTenantAccountData } from './infrastructure/mock/iam-mock-tenant-account.data';
@@ -27,6 +32,8 @@ export { IamDeletedTenantsAccountsEvent } from './application/events/iam-deleted
 export { IamDeletedTenantAccountEvent } from './application/events/iam-deleted-tenant-account.event';
 export { IamUpdatedTenantsAccountsEvent } from './application/events/iam-updated-tenants-accounts.event';
 export { IamUpdatedTenantAccountEvent } from './application/events/iam-updated-tenant-account.event';
+export { IamUpdatedAndIncrementedTenantsAccountsEvent } from './application/events/iam-updated-and-incremented-tenants-accounts.event';
+export { IamUpdatedAndIncrementedTenantAccountEvent } from './application/events/iam-updated-and-incremented-tenant-account.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -52,6 +59,7 @@ import { IamCreateTenantAccountCommandHandler } from './application/create/iam-c
 import { IamCreateTenantsAccountsCommandHandler } from './application/create/iam-create-tenants-accounts.command-handler';
 import { IamUpdateTenantAccountByIdCommandHandler } from './application/update/iam-update-tenant-account-by-id.command-handler';
 import { IamUpdateTenantsAccountsCommandHandler } from './application/update/iam-update-tenants-accounts.command-handler';
+import { IamUpdateAndIncrementTenantsAccountsCommandHandler } from './application/update/iam-update-and-increment-tenants-accounts.command-handler';
 import { IamUpsertTenantAccountCommandHandler } from './application/upsert/iam-upsert-tenant-account.command-handler';
 import { IamDeleteTenantAccountByIdCommandHandler } from './application/delete/iam-delete-tenant-account-by-id.command-handler';
 import { IamDeleteTenantsAccountsCommandHandler } from './application/delete/iam-delete-tenants-accounts.command-handler';
@@ -62,12 +70,17 @@ import { IamGetTenantsAccountsQueryHandler } from './application/get/iam-get-ten
 import { IamFindTenantAccountQueryHandler } from './application/find/iam-find-tenant-account.query-handler';
 import { IamFindTenantAccountByIdQueryHandler } from './application/find/iam-find-tenant-account-by-id.query-handler';
 import { IamRawSQLTenantsAccountsQueryHandler } from './application/raw-sql/iam-raw-sql-tenants-accounts.query-handler';
+import { IamCountTenantAccountQueryHandler } from './application/count/iam-count-tenant-account.query-handler';
+import { IamMaxTenantAccountQueryHandler } from './application/max/iam-max-tenant-account.query-handler';
+import { IamMinTenantAccountQueryHandler } from './application/min/iam-min-tenant-account.query-handler';
+import { IamSumTenantAccountQueryHandler } from './application/sum/iam-sum-tenant-account.query-handler';
 
 // event handlers
 import { IamCreatedTenantAccountEventHandler } from './application/events/iam-created-tenant-account.event-handler';
 import { IamCreatedTenantsAccountsEventHandler } from './application/events/iam-created-tenants-accounts.event-handler';
 import { IamUpdatedTenantAccountEventHandler } from './application/events/iam-updated-tenant-account.event-handler';
 import { IamUpdatedTenantsAccountsEventHandler } from './application/events/iam-updated-tenants-accounts.event-handler';
+import { IamUpdatedAndIncrementedTenantsAccountsEventHandler } from './application/events/iam-updated-and-incremented-tenants-accounts.event-handler';
 import { IamDeletedTenantAccountEventHandler } from './application/events/iam-deleted-tenant-account.event-handler';
 import { IamDeletedTenantsAccountsEventHandler } from './application/events/iam-deleted-tenants-accounts.event-handler';
 
@@ -79,8 +92,13 @@ import { IamGetTenantsAccountsService } from './application/get/iam-get-tenants-
 import { IamFindTenantAccountService } from './application/find/iam-find-tenant-account.service';
 import { IamFindTenantAccountByIdService } from './application/find/iam-find-tenant-account-by-id.service';
 import { IamRawSQLTenantsAccountsService } from './application/raw-sql/iam-raw-sql-tenants-accounts.service';
+import { IamCountTenantAccountService } from './application/count/iam-count-tenant-account.service';
+import { IamMaxTenantAccountService } from './application/max/iam-max-tenant-account.service';
+import { IamMinTenantAccountService } from './application/min/iam-min-tenant-account.service';
+import { IamSumTenantAccountService } from './application/sum/iam-sum-tenant-account.service';
 import { IamUpdateTenantAccountByIdService } from './application/update/iam-update-tenant-account-by-id.service';
 import { IamUpdateTenantsAccountsService } from './application/update/iam-update-tenants-accounts.service';
+import { IamUpdateAndIncrementTenantsAccountsService } from './application/update/iam-update-and-increment-tenants-accounts.service';
 import { IamUpsertTenantAccountService } from './application/upsert/iam-upsert-tenant-account.service';
 import { IamDeleteTenantAccountByIdService } from './application/delete/iam-delete-tenant-account-by-id.service';
 import { IamDeleteTenantsAccountsService } from './application/delete/iam-delete-tenants-accounts.service';
@@ -91,6 +109,7 @@ export const IamTenantAccountHandlers = [
     IamCreateTenantsAccountsCommandHandler,
     IamUpdateTenantAccountByIdCommandHandler,
     IamUpdateTenantsAccountsCommandHandler,
+    IamUpdateAndIncrementTenantsAccountsCommandHandler,
     IamUpsertTenantAccountCommandHandler,
     IamDeleteTenantAccountByIdCommandHandler,
     IamDeleteTenantsAccountsCommandHandler,
@@ -101,12 +120,17 @@ export const IamTenantAccountHandlers = [
     IamFindTenantAccountQueryHandler,
     IamFindTenantAccountByIdQueryHandler,
     IamRawSQLTenantsAccountsQueryHandler,
+    IamCountTenantAccountQueryHandler,
+    IamMaxTenantAccountQueryHandler,
+    IamMinTenantAccountQueryHandler,
+    IamSumTenantAccountQueryHandler,
 
     // events
     IamCreatedTenantAccountEventHandler,
     IamCreatedTenantsAccountsEventHandler,
     IamUpdatedTenantAccountEventHandler,
     IamUpdatedTenantsAccountsEventHandler,
+    IamUpdatedAndIncrementedTenantsAccountsEventHandler,
     IamDeletedTenantAccountEventHandler,
     IamDeletedTenantsAccountsEventHandler,
 ];
@@ -119,8 +143,13 @@ export const IamTenantAccountServices = [
     IamFindTenantAccountService,
     IamFindTenantAccountByIdService,
     IamRawSQLTenantsAccountsService,
+    IamCountTenantAccountService,
+    IamMaxTenantAccountService,
+    IamMinTenantAccountService,
+    IamSumTenantAccountService,
     IamUpdateTenantAccountByIdService,
     IamUpdateTenantsAccountsService,
+    IamUpdateAndIncrementTenantsAccountsService,
     IamUpsertTenantAccountService,
     IamDeleteTenantAccountByIdService,
     IamDeleteTenantsAccountsService,

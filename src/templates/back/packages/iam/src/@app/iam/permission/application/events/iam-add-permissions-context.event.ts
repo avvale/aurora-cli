@@ -1,4 +1,4 @@
-import { IamCreatedPermissionEvent, IamCreatedPermissionsEvent, IamDeletedPermissionEvent, IamDeletedPermissionsEvent, IamPermission, IamUpdatedPermissionEvent, IamUpdatedPermissionsEvent } from '@app/iam/permission';
+import { IamCreatedPermissionEvent, IamCreatedPermissionsEvent, IamDeletedPermissionEvent, IamDeletedPermissionsEvent, IamPermission, IamUpdatedAndIncrementedPermissionEvent, IamUpdatedAndIncrementedPermissionsEvent, IamUpdatedPermissionEvent, IamUpdatedPermissionsEvent } from '@app/iam/permission';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddPermissionsContextEvent extends AggregateRoot
@@ -40,6 +40,25 @@ export class IamAddPermissionsContextEvent extends AggregateRoot
             new IamUpdatedPermissionsEvent(
                 this.aggregateRoots.map(permission =>
                     new IamUpdatedPermissionEvent(
+                        permission.id.value,
+                        permission.name.value,
+                        permission.boundedContextId.value,
+                        permission.roleIds?.value,
+                        permission.createdAt?.value,
+                        permission.updatedAt?.value,
+                        permission.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new IamUpdatedAndIncrementedPermissionsEvent(
+                this.aggregateRoots.map(permission =>
+                    new IamUpdatedAndIncrementedPermissionEvent(
                         permission.id.value,
                         permission.name.value,
                         permission.boundedContextId.value,

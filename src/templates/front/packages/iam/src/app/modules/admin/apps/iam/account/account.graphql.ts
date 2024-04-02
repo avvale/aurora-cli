@@ -11,6 +11,7 @@ export const fields = `
         grantType
         scopeOptions
     }
+    tags
     scopes
     dApplicationCodes
     dPermissions
@@ -42,6 +43,10 @@ export const relationsFields = `
         name
     }
     iamGetRoles {
+        id
+        name
+    }
+    iamGetTags {
         id
         name
     }

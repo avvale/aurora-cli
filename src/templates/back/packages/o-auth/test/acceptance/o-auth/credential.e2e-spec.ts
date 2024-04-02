@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import * as request from 'supertest';
 import * as _ from 'lodash';

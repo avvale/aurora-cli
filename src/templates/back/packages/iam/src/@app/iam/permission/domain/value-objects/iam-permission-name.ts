@@ -10,7 +10,7 @@ export class IamPermissionName extends StringValueObject
             name       : 'IamPermissionName',
             nullable   : false,
             undefinable: false,
-            maxLength  : 127,
+            maxLength  : 128,
         }, validationRules));
     }
 }

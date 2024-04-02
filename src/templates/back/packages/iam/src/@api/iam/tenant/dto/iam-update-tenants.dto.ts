@@ -29,10 +29,10 @@ export class IamUpdateTenantsDto
     code?: string;
 
     @ApiProperty({
-        type       : String,
+        type       : Object,
         description: 'logo [input here api field description]',
     })
-    logo?: string;
+    logo?: any;
 
     @ApiProperty({
         type       : Boolean,

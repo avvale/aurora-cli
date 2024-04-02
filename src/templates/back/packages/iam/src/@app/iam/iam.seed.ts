@@ -82,6 +82,13 @@ export const permissions = [
     { id: 'd1023124-8d33-4dab-a043-4ae890239d95',  name: 'iam.tenantAccount.update',                 boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
     { id: 'ba0d87b7-b31d-4211-9751-713cad9704ad',  name: 'iam.tenantAccount.upsert',                 boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
     { id: '4d48139b-4722-4e37-af10-c488941a2184',  name: 'iam.tenantAccount.delete',                 boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
+
+    { id: '3c1730bf-6658-4985-bf8b-fbb81fe62827',  name: 'iam.tag.access',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
+    { id: '07ad61a7-c01f-485a-b975-c633c10c2ac7',  name: 'iam.tag.get',                              boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
+    { id: '48bf2076-edb6-4236-82aa-e4b6aa18bda1',  name: 'iam.tag.create',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
+    { id: 'e4f909f1-de8a-466a-98d5-4905a41de030',  name: 'iam.tag.update',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
+    { id: '824dbc82-7150-4172-baef-3273eb0d8289',  name: 'iam.tag.upsert',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
+    { id: '883ce1ee-cff1-47bb-b0b6-1420daec2d60',  name: 'iam.tag.delete',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
 ];
 
 export const users = [

@@ -10,7 +10,7 @@ export class OAuthAccessTokenName extends StringValueObject
             name       : 'OAuthAccessTokenName',
             nullable   : true,
             undefinable: true,
-            maxLength  : 127,
+            maxLength  : 128,
         }, validationRules));
     }
 }

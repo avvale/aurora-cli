@@ -3,7 +3,7 @@
 /* eslint-disable key-spacing */
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { OAuthIAccessTokenRepository, oAuthMockAccessTokenData, OAuthMockAccessTokenSeeder } from '@app/o-auth/access-token';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -250,19 +250,19 @@ describe('access-token', () =>
             });
     });
 
-    test('/REST:POST o-auth/access-token/create - Got 400 Conflict, AccessTokenName is too large, has a maximum length of 127', () =>
+    test('/REST:POST o-auth/access-token/create - Got 400 Conflict, AccessTokenName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/access-token/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthAccessTokenName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for OAuthAccessTokenName is too large, has a maximum length of 128');
             });
     });
 

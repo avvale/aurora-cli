@@ -10,7 +10,7 @@ export class IamUserUsername extends StringValueObject
             name       : 'IamUserUsername',
             nullable   : false,
             undefinable: false,
-            maxLength  : 127,
+            maxLength  : 128,
         }, validationRules));
     }
 }

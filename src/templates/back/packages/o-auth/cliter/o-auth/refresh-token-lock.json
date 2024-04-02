@@ -6,12 +6,32 @@
             "integrity": "sha1:d9517c7e34ae8c0219d279a08bdd08cc0936bc4f"
         },
         {
+            "path": "src/@app/o-auth/refresh-token/application/count/o-auth-count-refresh-token.query-handler.spec.ts",
+            "integrity": "sha1:893ed9a387514bf58e18225f1fe969f28d595fe3"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/count/o-auth-count-refresh-token.query-handler.ts",
+            "integrity": "sha1:abfb5d19e00e28b0d3b2d055cd1464327efee88f"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/count/o-auth-count-refresh-token.query.ts",
+            "integrity": "sha1:778bc99e7ff258195a510179d275fb54ccc04868"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/count/o-auth-count-refresh-token.service.spec.ts",
+            "integrity": "sha1:0aee4b84f408e30442c88a2843378a006ca32600"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/count/o-auth-count-refresh-token.service.ts",
+            "integrity": "sha1:03851227cbcb80e0d84e8dcec7c7a228fc7ebf6d"
+        },
+        {
             "path": "src/@app/o-auth/refresh-token/application/create/o-auth-create-refresh-token.command-handler.spec.ts",
             "integrity": "sha1:8900b9d100f1fdc5a0c81fad08e248802d14e6fd"
         },
         {
             "path": "src/@app/o-auth/refresh-token/application/create/o-auth-create-refresh-token.command-handler.ts",
-            "integrity": "sha1:97b37d85191d58b579bd8a92aff187aacb4528f8"
+            "integrity": "sha1:dc2ed6e30bc2e17443fa585611f76ad6bff6b8f7"
         },
         {
             "path": "src/@app/o-auth/refresh-token/application/create/o-auth-create-refresh-token.command.ts",
@@ -67,7 +87,7 @@
         },
         {
             "path": "src/@app/o-auth/refresh-token/application/events/o-auth-add-refresh-tokens-context.event.ts",
-            "integrity": "sha1:d793ca39905708ec3ebf99a9ec72dd6c06f4dd09"
+            "integrity": "sha1:e00fc183f9090482cc2c18b0027bdddb829b2c34"
         },
         {
             "path": "src/@app/o-auth/refresh-token/application/events/o-auth-created-refresh-token.event-handler.ts",
@@ -92,6 +112,18 @@
         {
             "path": "src/@app/o-auth/refresh-token/application/events/o-auth-deleted-refresh-tokens.event.ts",
             "integrity": "sha1:4b4c4cf10ef72be9e966215b12e27c3753b6074b"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/events/o-auth-updated-and-incremented-refresh-token.event.ts",
+            "integrity": "sha1:a85ff8e04e76939a3bb0f9903bbe30db1a3fec23"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/events/o-auth-updated-and-incremented-refresh-tokens.event-handler.ts",
+            "integrity": "sha1:40350efdb631119a8090e6aaea100e87e8fac6f7"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/events/o-auth-updated-and-incremented-refresh-tokens.event.ts",
+            "integrity": "sha1:197ef6e98f8b96a3bf66e2fecddd09d73d14976f"
         },
         {
             "path": "src/@app/o-auth/refresh-token/application/find/o-auth-find-refresh-token-by-id.query-handler.spec.ts",
@@ -154,6 +186,46 @@
             "integrity": "sha1:f35b98cc1356ec7f885cfb890430a4cf5075c04b"
         },
         {
+            "path": "src/@app/o-auth/refresh-token/application/max/o-auth-max-refresh-token.query-handler.spec.ts",
+            "integrity": "sha1:de78e264acb64899c2a3bdfbeb1dbfa79b03c1c3"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/max/o-auth-max-refresh-token.query-handler.ts",
+            "integrity": "sha1:9f0a1f98a360809517bc68492eeddd42792b96a8"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/max/o-auth-max-refresh-token.query.ts",
+            "integrity": "sha1:1138434bc0893a5cc36fb3929decc7a5156c6172"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/max/o-auth-max-refresh-token.service.spec.ts",
+            "integrity": "sha1:4e38da8210371b776114e09b44e1008817100ca3"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/max/o-auth-max-refresh-token.service.ts",
+            "integrity": "sha1:022df28b8ee195906fdced71540b6ec1a281da3b"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/min/o-auth-min-refresh-token.query-handler.spec.ts",
+            "integrity": "sha1:de4cf320547206604ae4f662aeffe591c7f28cdf"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/min/o-auth-min-refresh-token.query-handler.ts",
+            "integrity": "sha1:6e73efab5ba351edacf9b05a3b67f4ce7633e1a6"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/min/o-auth-min-refresh-token.query.ts",
+            "integrity": "sha1:b1222dcf9728a6ca0e83abbfd419c680e96bd761"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/min/o-auth-min-refresh-token.service.spec.ts",
+            "integrity": "sha1:4c0fabaa578bd293fdf523dda3b02a7fc09eaf70"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/min/o-auth-min-refresh-token.service.ts",
+            "integrity": "sha1:9a1eaf4a73d7ad30379da39ecf8e591b45676219"
+        },
+        {
             "path": "src/@app/o-auth/refresh-token/application/paginate/o-auth-paginate-refresh-tokens.query-handler.spec.ts",
             "integrity": "sha1:e1aaca489f1acccfbd8710e6b81361b6de8ee0aa"
         },
@@ -198,6 +270,46 @@
             "integrity": "sha1:cfc3f9f4a61148cdd89a57a532ae6036f5699091"
         },
         {
+            "path": "src/@app/o-auth/refresh-token/application/sum/o-auth-sum-refresh-token.query-handler.spec.ts",
+            "integrity": "sha1:8919a498e74b70bec0406b669f97a124def35252"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/sum/o-auth-sum-refresh-token.query-handler.ts",
+            "integrity": "sha1:334d18a05c188100ad723483dda9fb9334731bd3"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/sum/o-auth-sum-refresh-token.query.ts",
+            "integrity": "sha1:de938f3cecfe4b910154f79191d3b6f272ceecc2"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/sum/o-auth-sum-refresh-token.service.spec.ts",
+            "integrity": "sha1:50af13e67210b3c38bd7901b0b1a3cbc15fbd213"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/sum/o-auth-sum-refresh-token.service.ts",
+            "integrity": "sha1:e5a78e1c0b7a4e88343889d6f2227bccf6ad0c9d"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/update/o-auth-update-and-increment-refresh-tokens.command-handler.spec.ts",
+            "integrity": "sha1:c32ea133d68aee70aea0dc124f2faf52d8ea3637"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/update/o-auth-update-and-increment-refresh-tokens.command-handler.ts",
+            "integrity": "sha1:6a042032772995af1382666ac42120fec95e9e59"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/update/o-auth-update-and-increment-refresh-tokens.command.ts",
+            "integrity": "sha1:f4010e3a8e7717a7e07f42e4537521503a0c6125"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/update/o-auth-update-and-increment-refresh-tokens.service.spec.ts",
+            "integrity": "sha1:0a0ef6dc8251647c27253fbb2b86654c8d2158ec"
+        },
+        {
+            "path": "src/@app/o-auth/refresh-token/application/update/o-auth-update-and-increment-refresh-tokens.service.ts",
+            "integrity": "sha1:40545a7854c08b8f292d67941f629541fff1c5c1"
+        },
+        {
             "path": "src/@app/o-auth/refresh-token/domain/o-auth-refresh-token.aggregate.ts",
             "integrity": "sha1:785a22cbcd84186652e0177cef8a009437aec6e3"
         },
@@ -207,7 +319,7 @@
         },
         {
             "path": "src/@app/o-auth/refresh-token/domain/o-auth-refresh-token.repository.ts",
-            "integrity": "sha1:cc2c0e9b5a733174a01b8c636cf66e623831e92d"
+            "integrity": "sha1:7f18f6a2b081335a46c250cfa011d84453fa9b3d"
         },
         {
             "path": "src/@app/o-auth/refresh-token/domain/o-auth-refresh-token.response.ts",
@@ -219,11 +331,11 @@
         },
         {
             "path": "src/@app/o-auth/refresh-token/index.ts",
-            "integrity": "sha1:fe6c6dfaf069b47f34f2b3c598efe8e81bdde471"
+            "integrity": "sha1:28768fa7ed90535c5bda5803d337c8ba5957c6f3"
         },
         {
             "path": "src/@app/o-auth/refresh-token/infrastructure/mock/o-auth-mock-refresh-token.data.ts",
-            "integrity": "sha1:8b37cb4bdfe5cf238f0a5eb53b370b63f750a011"
+            "integrity": "sha1:0c307e82e5018ddc54ff2097197b1703b3e2548d"
         },
         {
             "path": "src/@app/o-auth/refresh-token/infrastructure/mock/o-auth-mock-refresh-token.repository.ts",
@@ -235,7 +347,7 @@
         },
         {
             "path": "src/@app/o-auth/refresh-token/infrastructure/sequelize/o-auth-sequelize-refresh-token.model.ts",
-            "integrity": "sha1:99a70231cf82c753b958e6e9403737bc938194e7"
+            "integrity": "sha1:18ad5bdbc33ae2b64d06d4ba8757e634a12cfea6"
         },
         {
             "path": "src/@app/o-auth/refresh-token/infrastructure/sequelize/o-auth-sequelize-refresh-token.repository.ts",
@@ -327,7 +439,7 @@
         },
         {
             "path": "src/@api/o-auth/refresh-token/dto/o-auth-refresh-token.dto.ts",
-            "integrity": "sha1:5d5f0df85e52991da84851bc21f668853b081754"
+            "integrity": "sha1:7afad6489e17819369b3fde7b54d4a889fbe68fd"
         },
         {
             "path": "src/@api/o-auth/refresh-token/dto/o-auth-create-refresh-token.dto.ts",
@@ -343,6 +455,10 @@
         },
         {
             "path": "src/@api/o-auth/refresh-token/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/o-auth/refresh-token/dto/public-api.ts",
             "integrity": "sha1:8c794f97ace38aed660cc8474409d99f5a9ef0c5"
         },
         {
@@ -399,7 +515,7 @@
         },
         {
             "path": "src/@api/o-auth/refresh-token/index.ts",
-            "integrity": "sha1:ba498cf8a545146200b92198cd2b5c5bf005956e"
+            "integrity": "sha1:addc444f85ada6fb25c8b981353bdf6a11ccc2a4"
         },
         {
             "path": "src/@api/o-auth/refresh-token/resolvers/o-auth-delete-refresh-token-by-id.resolver.spec.ts",
@@ -451,11 +567,11 @@
         },
         {
             "path": "test/acceptance/o-auth/refresh-token.e2e-spec.ts",
-            "integrity": "sha1:f76d1124b4a23dfbb9fb88529ed5bbe939c86cf0"
+            "integrity": "sha1:d51b98d2ade457514934b04741bd86870cfb3825"
         },
         {
             "path": "postman/o-auth/o-auth.refresh-token.postman.json",
-            "integrity": "sha1:9f5ea58ad87544fc25509b6f1ac3cd9e31adeeea"
+            "integrity": "sha1:5b09d315d8676f9143b5385a6ba2e0ca42cbcccd"
         }
     ]
 }

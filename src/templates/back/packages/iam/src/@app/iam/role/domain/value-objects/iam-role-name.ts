@@ -10,7 +10,7 @@ export class IamRoleName extends StringValueObject
             name       : 'IamRoleName',
             nullable   : false,
             undefinable: false,
-            maxLength  : 127,
+            maxLength  : 128,
         }, validationRules));
     }
 }

@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-detail.component.html",
-            "integrity": "sha1:e1f138ecda807598761772c3db1b9d7086d98607"
+            "integrity": "sha1:06c676e795388d56bd722433ff300214ea285771"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-detail.component.ts",
-            "integrity": "sha1:4a53bb9ab3502da6785344d6d39db0fbc48eeb90"
+            "integrity": "sha1:f74db5b34670357c1e45e2a3a498178c49f5c340"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-list.component.html",
-            "integrity": "sha1:d39a6cde54e9a56eec713c873c2555a7c04b7ff2"
+            "integrity": "sha1:459d60c3e3c78bc8b573637274e548a884f0c1ff"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-list.component.ts",
@@ -27,7 +27,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.columns-config.ts",
-            "integrity": "sha1:1e9dcf6f272d71fcac4fba0929f258cf9e4eb7c9"
+            "integrity": "sha1:0a7012eea776720d96a1422fbbe62ca04c0112e9"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.graphql.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.service.ts",
-            "integrity": "sha1:25f36e7a4f03707ac3356bd4cd12ccc692fe86de"
+            "integrity": "sha1:fdc6b2257dcd832ca480c2b2688708ce22830c3e"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/index.ts",

@@ -24,6 +24,7 @@ export const accessTokenColumnsConfig: ColumnConfig[] = [
         field      : 'name',
         sort       : 'name',
         translation: 'oAuth.Name',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.BOOLEAN,

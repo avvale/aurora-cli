@@ -6,12 +6,14 @@ export const boundedContextColumnsConfig: ColumnConfig[] = [
         field      : 'name',
         sort       : 'name',
         translation: 'iam.Name',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.STRING,
         field      : 'root',
         sort       : 'root',
         translation: 'iam.Root',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.NUMBER,

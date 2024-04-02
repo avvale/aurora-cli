@@ -1,7 +1,7 @@
 import { IamTenant, IamUpdateTenantByIdInput } from '@api/graphql';
 import { IamTenantDto, IamUpdateTenantByIdDto } from '@api/iam/tenant';
 import { IamFindTenantByIdQuery, IamUpdateTenantByIdCommand } from '@app/iam/tenant';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
+import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

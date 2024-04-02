@@ -5,7 +5,7 @@ import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorizat
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { OAuthIClientRepository, oAuthMockClientData, OAuthMockClientSeeder } from '@app/o-auth/client';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -285,35 +285,35 @@ describe('client', () =>
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientName is too large, has a maximum length of 127', () =>
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthClientName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for OAuthClientName is too large, has a maximum length of 128');
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientSecret is too large, has a maximum length of 127', () =>
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientSecret is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                secret: '********************************************************************************************************************************',
+                secret: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthClientSecret is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for OAuthClientSecret is too large, has a maximum length of 128');
             });
     });
 
@@ -377,6 +377,36 @@ describe('client', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for OAuthClientExpiredRefreshToken has to be a integer value');
+            });
+    });
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredAccessToken must have a positive sign', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/client/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                expiredAccessToken: -1,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('The numerical Value for OAuthClientExpiredAccessToken must have a positive sign, this field does not accept negative values');
+            });
+    });
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredRefreshToken must have a positive sign', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/o-auth/client/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                expiredRefreshToken: -1,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('The numerical Value for OAuthClientExpiredRefreshToken must have a positive sign, this field does not accept negative values');
             });
     });
     test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsActive has to be a boolean value', () =>

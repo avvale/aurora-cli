@@ -10,7 +10,7 @@ export class IamAccountEmail extends StringValueObject
             name       : 'IamAccountEmail',
             nullable   : false,
             undefinable: false,
-            maxLength  : 127,
+            maxLength  : 128,
         }, validationRules));
     }
 }

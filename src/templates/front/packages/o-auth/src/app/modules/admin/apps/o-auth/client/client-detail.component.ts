@@ -7,7 +7,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { ClientService } from '@apps/o-auth/client';
 import { OAuthClient } from '@apps/o-auth/o-auth.types';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { ScopeService } from '../scope';
 
@@ -19,7 +19,8 @@ import { ScopeService } from '../scope';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        KeyValuePipe, MatCheckboxModule, MatSelectModule, NgForOf,
+        MatCheckboxModule, MatSelectModule, NgForOf,
+        KeyValuePipe,
     ],
 })
 export class ClientDetailComponent extends ViewDetailComponent
@@ -78,6 +79,19 @@ export class ClientDetailComponent extends ViewDetailComponent
         {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(
+                SnackBarInvalidFormComponent,
+                {
+                    data: {
+                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                    },
+                    panelClass      : 'error-snackbar',
+                    verticalPosition: 'top',
+                    duration        : 10000,
+                },
+            );
             return;
         }
 
@@ -95,20 +109,22 @@ export class ClientDetailComponent extends ViewDetailComponent
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             grantType: [null, [Validators.required]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
-            secret: ['', [Validators.required, Validators.maxLength(127)]],
+            name: ['', [Validators.required, Validators.maxLength(128)]],
+            secret: ['', [Validators.required, Validators.maxLength(128)]],
             authUrl: ['', [Validators.maxLength(2046)]],
             redirect: ['', [Validators.maxLength(2046)]],
             scopeOptions: [],
-            expiredAccessToken: [null, [Validators.maxLength(10)]],
-            expiredRefreshToken: [null, [Validators.maxLength(10)]],
-            isActive: false,
-            isMaster: false,
+            expiredAccessToken: null,
+            expiredRefreshToken: null,
+            isActive: [false, [Validators.required]],
+            isMaster: [false, [Validators.required]],
             applicationIds: [],
         });
+        /* eslint-enable key-spacing */
     }
 
     async handleAction(action: Action): Promise<void>

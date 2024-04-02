@@ -60,6 +60,36 @@ export abstract class IamIPermissionRoleRepository implements IRepository<IamPer
         }
     ): Promise<number>;
 
+    // max record
+    abstract max(
+        column: string,
+        options?: {
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<number>;
+
+    // min record
+    abstract min(
+        column: string,
+        options?: {
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<number>;
+
+    // sum record
+    abstract sum(
+        column: string,
+        options?: {
+            queryStatement?: QueryStatement;
+            constraint?: QueryStatement;
+            cQMetadata?: CQMetadata;
+        }
+    ): Promise<number>;
+
     // ******************
     // ** side effects **
     // ******************

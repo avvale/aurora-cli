@@ -1,13 +1,12 @@
-import { NgForOf } from '@angular/common';
 import { IamPermission } from '../iam.types';
-import { permissionColumnsConfig } from '../permission/permission.columns-config';
+import { permissionColumnsConfig } from '../permission';
 import { PermissionService } from '../permission/permission.service';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BoundedContextService } from '@apps/iam/bounded-context';
 import { IamBoundedContext } from '@apps/iam/iam.types';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridColumnTranslationComponent, GridCustomButtonsHeaderDialogTemplateDirective, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridFormElementDetailDialogTemplateDirective, GridState, GridStateService, GridTranslationsComponent, log, mapActions, QueryStatementHandler, Utils, ViewDetailComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridElementsManagerComponent, GridElementsManagerModule, GridFiltersStorageService, GridState, GridStateService, log, mapActions, QueryStatementHandler, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
@@ -18,8 +17,7 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        GridColumnTranslationComponent, GridCustomButtonsHeaderDialogTemplateDirective, GridElementsManagerComponent, GridFormElementDetailDialogTemplateDirective,
-        GridTranslationsComponent, MatCheckboxModule, NgForOf,
+        GridElementsManagerModule, MatCheckboxModule,
     ],
 })
 export class BoundedContextDetailComponent extends ViewDetailComponent
@@ -128,23 +126,27 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
-            root: ['', [Validators.required, Validators.maxLength(63)]],
-            sort: [null, [Validators.maxLength(6)]],
-            isActive: false,
+            name: ['', [Validators.required, Validators.maxLength(128)]],
+            root: ['', [Validators.required, Validators.maxLength(64)]],
+            sort: null,
+            isActive: [false, [Validators.required]],
         });
+        /* eslint-enable key-spacing */
     }
 
     /* #region methods to manage Permissions */
     createPermissionDialogForm(): void
     {
+        /* eslint-disable key-spacing */
         this.permissionDialogFg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
+            name: ['', [Validators.required, Validators.maxLength(128)]],
             boundedContextId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
         });
+        /* eslint-enable key-spacing */
     }
 
     handleSubmitPermissionForm($event, dialog): void

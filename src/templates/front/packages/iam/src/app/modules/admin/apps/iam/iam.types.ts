@@ -211,6 +211,15 @@ export interface IamCreatePermissionRole {
     roleId: string;
 }
 
+/*******
+ * tag *
+ *******/
+export interface IamTag
+{
+    id: string;
+    name: string;
+}
+
 /**************
  * tenant *
  **************/
@@ -317,4 +326,27 @@ export interface IamUpdateUsers {
     password?: string;
     rememberToken?: string;
     meta?: any;
+}
+
+export interface IamTag {
+    id: string;
+    name: string;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface IamCreateTag {
+    id: string;
+    name: string;
+}
+
+export interface IamUpdateTagById {
+    id: string;
+    name?: string;
+}
+
+export interface IamUpdateTags {
+    id?: string;
+    name?: string;
 }

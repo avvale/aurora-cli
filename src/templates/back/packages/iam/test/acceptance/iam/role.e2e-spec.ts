@@ -5,7 +5,7 @@ import { IamModule } from '@api/iam/iam.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { IamIRoleRepository, iamMockRoleData, IamMockRoleSeeder } from '@app/iam/role';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -189,19 +189,19 @@ describe('role', () =>
             });
     });
 
-    test('/REST:POST iam/role/create - Got 400 Conflict, RoleName is too large, has a maximum length of 127', () =>
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/role/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamRoleName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for IamRoleName is too large, has a maximum length of 128');
             });
     });
 

@@ -1,4 +1,4 @@
-import { IamCreatedTenantAccountEvent, IamCreatedTenantsAccountsEvent, IamDeletedTenantAccountEvent, IamDeletedTenantsAccountsEvent, IamTenantAccount, IamUpdatedTenantAccountEvent, IamUpdatedTenantsAccountsEvent } from '@app/iam/tenant-account';
+import { IamCreatedTenantAccountEvent, IamCreatedTenantsAccountsEvent, IamDeletedTenantAccountEvent, IamDeletedTenantsAccountsEvent, IamTenantAccount, IamUpdatedAndIncrementedTenantAccountEvent, IamUpdatedAndIncrementedTenantsAccountsEvent, IamUpdatedTenantAccountEvent, IamUpdatedTenantsAccountsEvent } from '@app/iam/tenant-account';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddTenantsAccountsContextEvent extends AggregateRoot
@@ -35,6 +35,20 @@ export class IamAddTenantsAccountsContextEvent extends AggregateRoot
             new IamUpdatedTenantsAccountsEvent(
                 this.aggregateRoots.map(tenantAccount =>
                     new IamUpdatedTenantAccountEvent(
+                        tenantAccount.tenantId.value,
+                        tenantAccount.accountId.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new IamUpdatedAndIncrementedTenantsAccountsEvent(
+                this.aggregateRoots.map(tenantAccount =>
+                    new IamUpdatedAndIncrementedTenantAccountEvent(
                         tenantAccount.tenantId.value,
                         tenantAccount.accountId.value,
                     ),

@@ -1,0 +1,29 @@
+version: 0.0.1
+boundedContextName: iam
+moduleName: tag
+moduleNames: tags
+aggregateName: IamTag
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+front:
+  solidIcon: mat_solid:tag
+  outlineIcon: mat_outline:tag
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 64
+    nullable: false
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true

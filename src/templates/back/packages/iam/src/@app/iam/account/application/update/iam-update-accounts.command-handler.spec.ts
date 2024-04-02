@@ -43,6 +43,7 @@ describe('IamUpdateAccountsCommandHandler', () =>
                         email: iamMockAccountData[0].email,
                         isActive: iamMockAccountData[0].isActive,
                         clientId: iamMockAccountData[0].clientId,
+                        tags: iamMockAccountData[0].tags,
                         scopes: iamMockAccountData[0].scopes,
                         dApplicationCodes: iamMockAccountData[0].dApplicationCodes,
                         dPermissions: iamMockAccountData[0].dPermissions,

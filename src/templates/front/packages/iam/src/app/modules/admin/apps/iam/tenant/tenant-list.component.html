@@ -43,7 +43,6 @@
         class="flex flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto"
         cdkScrollable
     >
-
         <!-- Grid -->
         <au-grid
             [columnsConfig]="columnsConfig$ | async"
@@ -77,12 +76,14 @@
                 }"
                 [operators]="{
                     contains: t('Operators.Contains'),
+                    containsAny: t('Operators.ContainsAny'),
                     endsWith: t('Operators.EndsWith'),
                     equals: t('Operators.Equals'),
                     greaterThan: t('Operators.GreaterThan'),
                     greaterThanEqual: t('Operators.GreaterThanEqual'),
                     lessThan: t('Operators.LessThan'),
                     lessThanEqual: t('Operators.LessThanEqual'),
+                    mustContain: t('Operators.MustContain'),
                     notEquals: t('Operators.NotEquals'),
                     startsWith: t('Operators.StartsWith')
                 }"

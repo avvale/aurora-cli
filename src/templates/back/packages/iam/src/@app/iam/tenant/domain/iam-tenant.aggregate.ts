@@ -182,7 +182,7 @@ export class IamTenant extends AggregateRoot
             parentId: this.parentId?.value,
             name: this.name.value,
             code: this.code?.value,
-            logo: this.logo?.buffer,
+            logo: this.logo?.value,
             isActive: this.isActive.value,
             meta: this.meta?.value,
             accountIds: this.accountIds?.value,

@@ -6,7 +6,7 @@ import { Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { IamPermission } from '@apps/iam/iam.types';
 import { PermissionService } from '@apps/iam/permission';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
@@ -73,6 +73,19 @@ export class PermissionDetailComponent extends ViewDetailComponent
         {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(
+                SnackBarInvalidFormComponent,
+                {
+                    data: {
+                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                    },
+                    panelClass      : 'error-snackbar',
+                    verticalPosition: 'top',
+                    duration        : 10000,
+                },
+            );
             return;
         }
 
@@ -90,12 +103,14 @@ export class PermissionDetailComponent extends ViewDetailComponent
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
+            name: ['', [Validators.required, Validators.maxLength(128)]],
             boundedContextId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             roleIds: [],
         });
+        /* eslint-enable key-spacing */
     }
 
     async handleAction(action: Action): Promise<void>

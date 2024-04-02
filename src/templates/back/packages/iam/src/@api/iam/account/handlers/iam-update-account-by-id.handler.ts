@@ -33,6 +33,16 @@ export class IamUpdateAccountByIdHandler
 
         const dataToUpdate = diff(payload, account);
 
+        if ('tags' in dataToUpdate)
+        {
+            dataToUpdate['tags'] = payload.tags;
+        }
+
+        if ('scopes' in dataToUpdate)
+        {
+            dataToUpdate['scopes'] = payload.scopes;
+        }
+
         if ('roleIds' in dataToUpdate)
         {
             // get roles with permissions

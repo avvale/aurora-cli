@@ -13,20 +13,19 @@ aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
   - name: code
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: false
     index: unique
   - name: name
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
   - name: secret
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
   - name: isMaster
     type: boolean
@@ -73,4 +72,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-additionalApis: []

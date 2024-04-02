@@ -1,7 +1,7 @@
 import { OAuthScope, OAuthUpdateScopeByIdInput } from '@api/graphql';
 import { OAuthScopeDto, OAuthUpdateScopeByIdDto } from '@api/o-auth/scope';
 import { OAuthFindScopeByIdQuery, OAuthUpdateScopeByIdCommand } from '@app/o-auth/scope';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
+import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

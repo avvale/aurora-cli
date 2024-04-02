@@ -6,6 +6,26 @@
             "integrity": "sha1:f5604606b2c6790ea25d6362db9b858542ce7a63"
         },
         {
+            "path": "src/@app/iam/user/application/count/iam-count-user.query-handler.spec.ts",
+            "integrity": "sha1:301e45429c269814dc9add1de774f2385f4a6c8b"
+        },
+        {
+            "path": "src/@app/iam/user/application/count/iam-count-user.query-handler.ts",
+            "integrity": "sha1:c3fe2196d316bac1a3a30a2d7f073780130630d8"
+        },
+        {
+            "path": "src/@app/iam/user/application/count/iam-count-user.query.ts",
+            "integrity": "sha1:ff5835a41dc0c32449ea1865f39ff34c142cb3d6"
+        },
+        {
+            "path": "src/@app/iam/user/application/count/iam-count-user.service.spec.ts",
+            "integrity": "sha1:f3868a305d2d31ac00b5b6d097bf0a0e47e7ebe3"
+        },
+        {
+            "path": "src/@app/iam/user/application/count/iam-count-user.service.ts",
+            "integrity": "sha1:0d4491f39c5aec492ac88d573b965c9aee6bae93"
+        },
+        {
             "path": "src/@app/iam/user/application/create/iam-create-user.command-handler.spec.ts",
             "integrity": "sha1:2741d8fc64c893b5b6947d704e3d37d395c38418"
         },
@@ -87,7 +107,7 @@
         },
         {
             "path": "src/@app/iam/user/application/events/iam-add-users-context.event.ts",
-            "integrity": "sha1:8eb0d9f3e0024929abc21b7e3d878fad616fbd14"
+            "integrity": "sha1:d4fb1d8264dea86e46a29b940f47e387b706acf0"
         },
         {
             "path": "src/@app/iam/user/application/events/iam-created-user.event-handler.ts",
@@ -136,6 +156,18 @@
         {
             "path": "src/@app/iam/user/application/events/iam-updated-users.event.ts",
             "integrity": "sha1:a0a874ee7274cc3da57c782cee3a6cb41d75256b"
+        },
+        {
+            "path": "src/@app/iam/user/application/events/iam-updated-and-incremented-user.event.ts",
+            "integrity": "sha1:d1393186d301d11ad4b7cde6486b4d3db376d585"
+        },
+        {
+            "path": "src/@app/iam/user/application/events/iam-updated-and-incremented-users.event-handler.ts",
+            "integrity": "sha1:bbef2f1d9390b220eec44022111a1d220f7183d5"
+        },
+        {
+            "path": "src/@app/iam/user/application/events/iam-updated-and-incremented-users.event.ts",
+            "integrity": "sha1:23370fb444ed25daa6199e873509348140776cb8"
         },
         {
             "path": "src/@app/iam/user/application/find/iam-find-user-by-id.query-handler.spec.ts",
@@ -198,6 +230,46 @@
             "integrity": "sha1:d5df2e61e37699c7af250419482702c07b5f6354"
         },
         {
+            "path": "src/@app/iam/user/application/max/iam-max-user.query-handler.spec.ts",
+            "integrity": "sha1:eedab5dee04c8c0464ce9639a47aedfbca0cfcf5"
+        },
+        {
+            "path": "src/@app/iam/user/application/max/iam-max-user.query-handler.ts",
+            "integrity": "sha1:98783949e4300d68d56a91213ed0ce4759033269"
+        },
+        {
+            "path": "src/@app/iam/user/application/max/iam-max-user.query.ts",
+            "integrity": "sha1:da1b49948662170aa649591745986828066af8b0"
+        },
+        {
+            "path": "src/@app/iam/user/application/max/iam-max-user.service.spec.ts",
+            "integrity": "sha1:f37485cb283ed91772d5f658f1ba4406c92a5d01"
+        },
+        {
+            "path": "src/@app/iam/user/application/max/iam-max-user.service.ts",
+            "integrity": "sha1:90e59dbde99cda2446751759bc1f8e803ff46702"
+        },
+        {
+            "path": "src/@app/iam/user/application/min/iam-min-user.query-handler.spec.ts",
+            "integrity": "sha1:bf6cf1575566502fe97a470cccf1bfe0dcd10365"
+        },
+        {
+            "path": "src/@app/iam/user/application/min/iam-min-user.query-handler.ts",
+            "integrity": "sha1:19ef37d8e5253a00dc49be765789cdb02271566f"
+        },
+        {
+            "path": "src/@app/iam/user/application/min/iam-min-user.query.ts",
+            "integrity": "sha1:53d50809aa2fb124bc344412a0a91f778d99504c"
+        },
+        {
+            "path": "src/@app/iam/user/application/min/iam-min-user.service.spec.ts",
+            "integrity": "sha1:954ccb0daf53f896618ce5cb8e256f3b7c3cf61d"
+        },
+        {
+            "path": "src/@app/iam/user/application/min/iam-min-user.service.ts",
+            "integrity": "sha1:2ce7d31a5615b5ae33ea3170d99134088f29f326"
+        },
+        {
             "path": "src/@app/iam/user/application/paginate/iam-paginate-users.query-handler.spec.ts",
             "integrity": "sha1:188b50052c1bd722198e1c6551cc5023c5dc5941"
         },
@@ -242,6 +314,26 @@
             "integrity": "sha1:4d837b4bfa73df75b6dca7ce104e1487e6cf5147"
         },
         {
+            "path": "src/@app/iam/user/application/sum/iam-sum-user.query-handler.spec.ts",
+            "integrity": "sha1:9a475189f92f2add6392a4dbc5b33165245fe74e"
+        },
+        {
+            "path": "src/@app/iam/user/application/sum/iam-sum-user.query-handler.ts",
+            "integrity": "sha1:2376e178fbe207afff8ba572e03932e13fb27b3e"
+        },
+        {
+            "path": "src/@app/iam/user/application/sum/iam-sum-user.query.ts",
+            "integrity": "sha1:74217d6b10015c35aadf46495a58eebe19b57f1e"
+        },
+        {
+            "path": "src/@app/iam/user/application/sum/iam-sum-user.service.spec.ts",
+            "integrity": "sha1:1f488891c14fc900780f3af263350268d7cedc91"
+        },
+        {
+            "path": "src/@app/iam/user/application/sum/iam-sum-user.service.ts",
+            "integrity": "sha1:b8f896e321ca4fc711508cb339cad7eab8e22f3d"
+        },
+        {
             "path": "src/@app/iam/user/application/update/iam-update-user-by-id.command-handler.spec.ts",
             "integrity": "sha1:389bac2c15a6064ed8f4dce2a883cf305b202151"
         },
@@ -282,6 +374,26 @@
             "integrity": "sha1:a584fdad97b50cfcc9278f0c549f0f73e83ec4c6"
         },
         {
+            "path": "src/@app/iam/user/application/update/iam-update-and-increment-users.command-handler.spec.ts",
+            "integrity": "sha1:1f4ed276e12622670367280b870f326ea037c754"
+        },
+        {
+            "path": "src/@app/iam/user/application/update/iam-update-and-increment-users.command-handler.ts",
+            "integrity": "sha1:47e35b93939317b804bd3eef5921754d5eea768a"
+        },
+        {
+            "path": "src/@app/iam/user/application/update/iam-update-and-increment-users.command.ts",
+            "integrity": "sha1:4760d5c766a6be5138d1be88b8a2ebdcf40e43e0"
+        },
+        {
+            "path": "src/@app/iam/user/application/update/iam-update-and-increment-users.service.spec.ts",
+            "integrity": "sha1:81c3fa19b120fd867f04ca7b0acbbe5dc4c9a7f4"
+        },
+        {
+            "path": "src/@app/iam/user/application/update/iam-update-and-increment-users.service.ts",
+            "integrity": "sha1:2c4aaa6c288e9cd5acc493b2e119d05844a6c41e"
+        },
+        {
             "path": "src/@app/iam/user/application/upsert/iam-upsert-user.command-handler.spec.ts",
             "integrity": "sha1:091faf1f96d3b6af6d057cbf9a68247c1bfd9401"
         },
@@ -311,7 +423,7 @@
         },
         {
             "path": "src/@app/iam/user/domain/iam-user.repository.ts",
-            "integrity": "sha1:db3910699fe0f50fc72dbf7142f86644de567851"
+            "integrity": "sha1:f6742b0318674ad1ffeff8723ffa3fa706d370d0"
         },
         {
             "path": "src/@app/iam/user/domain/iam-user.response.ts",
@@ -323,11 +435,11 @@
         },
         {
             "path": "src/@app/iam/user/index.ts",
-            "integrity": "sha1:f69c0cadafa9553908db27ec2de922ea786f39a9"
+            "integrity": "sha1:4004ede3064d976fea15cc6966aaf49d476272cb"
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/iam-mock-user.data.ts",
-            "integrity": "sha1:eb04f52a1c2ded4c1aa0c833aa24c72e7a906d00"
+            "integrity": "sha1:3dc9d3ecb42a4886f04641c0af5a38717de9a987"
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/iam-mock-user.repository.ts",
@@ -339,7 +451,7 @@
         },
         {
             "path": "src/@app/iam/user/infrastructure/sequelize/iam-sequelize-user.model.ts",
-            "integrity": "sha1:82b0447fa8dc47342df781a2471e15fa8b3b98fb"
+            "integrity": "sha1:2b185c88af5bf1caff5a859891d34c6a5555404c"
         },
         {
             "path": "src/@app/iam/user/infrastructure/sequelize/iam-sequelize-user.repository.ts",
@@ -355,7 +467,7 @@
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-name.ts",
-            "integrity": "sha1:88451a6ba6ed1cb2d195011e05f47f530459f706"
+            "integrity": "sha1:35393fa74c1a2dc657efd0e30eedeae651634956"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-surname.ts",
@@ -367,7 +479,7 @@
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-mobile.ts",
-            "integrity": "sha1:93e8acf8785e91e4bcf1f7bc17badc9037727607"
+            "integrity": "sha1:838be0105cd215d2d71e5226d79eb3ebb9130d28"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-lang-id.ts",
@@ -375,7 +487,7 @@
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-username.ts",
-            "integrity": "sha1:0ffb704dbfc0a3410adae4657fb1dcec017c3b15"
+            "integrity": "sha1:a4c3cc7410f4f3213ca19cc66a54b10cc0aa24d9"
         },
         {
             "path": "src/@app/iam/user/domain/value-objects/iam-user-password.ts",
@@ -559,7 +671,7 @@
         },
         {
             "path": "src/@api/iam/user/handlers/iam-update-user-by-id.handler.ts",
-            "integrity": "sha1:2e269d2c87b4f08f72f79c3ffc830a817ff063d6"
+            "integrity": "sha1:0d772c49a2a70a2bd69dd6f64ed154aa1ab6af39"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-update-users.handler.spec.ts",
@@ -659,11 +771,11 @@
         },
         {
             "path": "test/acceptance/iam/user.e2e-spec.ts",
-            "integrity": "sha1:8623a198e3a973a302d3a92481478a8ad1037b03"
+            "integrity": "sha1:a822742c54a1166c33151372c504d5f0d761e5c8"
         },
         {
             "path": "postman/iam/iam.user.postman.json",
-            "integrity": "sha1:718f3dc136a362e5ab3bf599722c30c35de455c9"
+            "integrity": "sha1:c4751e9e314dd1d58b1b6a72a085617bc6fdffa4"
         }
     ]
 }

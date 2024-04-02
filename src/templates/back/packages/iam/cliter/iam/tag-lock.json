@@ -1,0 +1,793 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/@app/iam/iam.seed.ts",
+            "integrity": "sha1:f5604606b2c6790ea25d6362db9b858542ce7a63"
+        },
+        {
+            "path": "src/@app/iam/tag/application/count/iam-count-tag.query-handler.spec.ts",
+            "integrity": "sha1:c668deb1f97908a389f2587baffb6f958b78e0c1"
+        },
+        {
+            "path": "src/@app/iam/tag/application/count/iam-count-tag.query-handler.ts",
+            "integrity": "sha1:df1ed543f267f0a0f2f4f8fa5cf8420d2e1deb19"
+        },
+        {
+            "path": "src/@app/iam/tag/application/count/iam-count-tag.query.ts",
+            "integrity": "sha1:2276acf685de6f9b804bff933cb829ebaab734e9"
+        },
+        {
+            "path": "src/@app/iam/tag/application/count/iam-count-tag.service.spec.ts",
+            "integrity": "sha1:a109ee221d83d34668705006403c78d70f5a7f14"
+        },
+        {
+            "path": "src/@app/iam/tag/application/count/iam-count-tag.service.ts",
+            "integrity": "sha1:ec82f5e5b3a2ce9057920d97f065468d09dba67d"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tag.command-handler.spec.ts",
+            "integrity": "sha1:5b83823c3a8f4f0ce3ec5dc0fc3f1e6d0ec1b2f2"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tag.command-handler.ts",
+            "integrity": "sha1:32c4070f427d1baf5deafd799c6dcbe7897bc864"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tag.command.ts",
+            "integrity": "sha1:808444ed0bd5409dd7da826ef699942c04ddc15a"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tag.service.spec.ts",
+            "integrity": "sha1:cef8a58fb7ab1a5949cf3ee9513e35d2108cd57e"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tag.service.ts",
+            "integrity": "sha1:ccd634614311095688413f36423d649bfbb4d988"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tags.command-handler.spec.ts",
+            "integrity": "sha1:f3b2533b454c36c4413e8439523082f41f9bd95a"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tags.command-handler.ts",
+            "integrity": "sha1:2db2f6b06a11b9f4791275c1690e8c4efd4b19a0"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tags.command.ts",
+            "integrity": "sha1:d57f431a2d251f55edc952e5526e8cc354d39926"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tags.service.spec.ts",
+            "integrity": "sha1:7a4617860b92ae04fb756ed571ce6db88e189f9b"
+        },
+        {
+            "path": "src/@app/iam/tag/application/create/iam-create-tags.service.ts",
+            "integrity": "sha1:f27eb4ea985e39ddede8886cdbf8895bdc4740e6"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tag-by-id.command-handler.spec.ts",
+            "integrity": "sha1:825ccac288874054ec157721a8c088fb03fdf2e1"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tag-by-id.command-handler.ts",
+            "integrity": "sha1:818f4d143f16e3b3ed2c2610cbf23fe5e5c37afd"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tag-by-id.command.ts",
+            "integrity": "sha1:1bf4a5ccd8c78af07bb53734218a58551b9b3519"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tag-by-id.service.spec.ts",
+            "integrity": "sha1:b0fd2a144cbf990bdae2ea78682de7f9f73d0627"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tag-by-id.service.ts",
+            "integrity": "sha1:77005c98b0c6931111082901b32ac9bbd47c34d3"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tags.command-handler.spec.ts",
+            "integrity": "sha1:adfa8a1f2db92d9769bc2251919d84e03b07194b"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tags.command-handler.ts",
+            "integrity": "sha1:23a226aeb0f33a80cacb1ec6bf6ac5312d984aa5"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tags.command.ts",
+            "integrity": "sha1:b1edab33c750ba62bddb37b029b3272c549ad6ee"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tags.service.spec.ts",
+            "integrity": "sha1:94ce0c3755aa6187012cf91194598a86eca15630"
+        },
+        {
+            "path": "src/@app/iam/tag/application/delete/iam-delete-tags.service.ts",
+            "integrity": "sha1:19b2e750ebb6bbaffe2c447e7c62b1b96f4fd5c5"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-add-tags-context.event.ts",
+            "integrity": "sha1:ebdfd4c5201b6fa79f4daef4c5a4aca5c10438f4"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-created-tag.event-handler.ts",
+            "integrity": "sha1:9949614a00f4720c12147bbc0b2e02dbf04ff75d"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-created-tag.event.ts",
+            "integrity": "sha1:23874b4508e8fa7aa29e8ce90c2cd621f65b633a"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-created-tags.event-handler.ts",
+            "integrity": "sha1:c1653fb66fa90995b922da218133f077553d38b9"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-created-tags.event.ts",
+            "integrity": "sha1:38e3b3fa247f737f547d0ee3fdbc1f340c827d13"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-deleted-tag.event-handler.ts",
+            "integrity": "sha1:9e88bd65e6ce5ce352584894d0df3fc3a24d1327"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-deleted-tag.event.ts",
+            "integrity": "sha1:dbf7213b63daa0a4b73d9873c119188acc31d015"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-deleted-tags.event-handler.ts",
+            "integrity": "sha1:5d6818eff15e3856c5a6ade4969bc1e88a051627"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-deleted-tags.event.ts",
+            "integrity": "sha1:6c27be51bcfbd7d4e55dfdb5eb4ed23f8a53c405"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-updated-tag.event-handler.ts",
+            "integrity": "sha1:174431228e0b85d5a15c9f531b22288a1d0a79fd"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-updated-tag.event.ts",
+            "integrity": "sha1:bb7bec1d50c97831aeaa22528e9a351b51c928ff"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-updated-tags.event-handler.ts",
+            "integrity": "sha1:bed9b3774fd25eae7d9cb912cbad57d75cc76d21"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-updated-tags.event.ts",
+            "integrity": "sha1:8dc0a7ef7cbbb5ddcc1d71529fce8a7673f1e8f5"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-updated-and-incremented-tag.event.ts",
+            "integrity": "sha1:11f6fd8712aabb64d2225125f28259ba4d3a203b"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-updated-and-incremented-tags.event-handler.ts",
+            "integrity": "sha1:bc735d4d97484f113085c69aa727a1c72abe225b"
+        },
+        {
+            "path": "src/@app/iam/tag/application/events/iam-updated-and-incremented-tags.event.ts",
+            "integrity": "sha1:9eb91edcf46d2030a877cf9953670dc70e6d82e2"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag-by-id.query-handler.spec.ts",
+            "integrity": "sha1:cd9a58e9e168158b02cc65ac661afe650b13f497"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag-by-id.query-handler.ts",
+            "integrity": "sha1:a6da99bb104599be402407353ceee6970a342c6b"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag-by-id.query.ts",
+            "integrity": "sha1:f5d51648034b36b9ae3b288040130997600e5abc"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag-by-id.service.spec.ts",
+            "integrity": "sha1:523728c631c6bb6bc1e92337e67ea79c26e8c34c"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag-by-id.service.ts",
+            "integrity": "sha1:fbd35d2f55c16d074f3768312e322865ea1d66a7"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag.query-handler.spec.ts",
+            "integrity": "sha1:435022d3555bd76f9a5bef125e6b6ac6cecd1867"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag.query-handler.ts",
+            "integrity": "sha1:86bc44ddcc3ae5fb3bfa9db9d3a02caa87646e4e"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag.query.ts",
+            "integrity": "sha1:fda7f24625af0d0dec3534f0c46689c57c50f45e"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag.service.spec.ts",
+            "integrity": "sha1:6aa9adba0b8d144fc5bfa017ae69336e6ab394c5"
+        },
+        {
+            "path": "src/@app/iam/tag/application/find/iam-find-tag.service.ts",
+            "integrity": "sha1:f6ef93abc3fbdf6d4b20e384073c4b688ae67f41"
+        },
+        {
+            "path": "src/@app/iam/tag/application/get/iam-get-tags.query-handler.spec.ts",
+            "integrity": "sha1:06ee7764c399f1c5b437f915cbf9941b2890f2a8"
+        },
+        {
+            "path": "src/@app/iam/tag/application/get/iam-get-tags.query-handler.ts",
+            "integrity": "sha1:1f2a50ed60136614ab12908fd7beba9dc52ae68c"
+        },
+        {
+            "path": "src/@app/iam/tag/application/get/iam-get-tags.query.ts",
+            "integrity": "sha1:5ee0fb8e9412339678362e151450530fb6b2a9f3"
+        },
+        {
+            "path": "src/@app/iam/tag/application/get/iam-get-tags.service.spec.ts",
+            "integrity": "sha1:4ea278950666f2842cd06b2e1673333b811ddc84"
+        },
+        {
+            "path": "src/@app/iam/tag/application/get/iam-get-tags.service.ts",
+            "integrity": "sha1:9d02e1d25fe44e4c678b87d06bd151fcb3c10400"
+        },
+        {
+            "path": "src/@app/iam/tag/application/max/iam-max-tag.query-handler.spec.ts",
+            "integrity": "sha1:bb3545c883f3171f2df88618eeeb06f94788e0b8"
+        },
+        {
+            "path": "src/@app/iam/tag/application/max/iam-max-tag.query-handler.ts",
+            "integrity": "sha1:fdac6f06372758298188daed2af36a3f7cb30c8f"
+        },
+        {
+            "path": "src/@app/iam/tag/application/max/iam-max-tag.query.ts",
+            "integrity": "sha1:3a18264506935ef89c4f0cb5315a2e2da8f19410"
+        },
+        {
+            "path": "src/@app/iam/tag/application/max/iam-max-tag.service.spec.ts",
+            "integrity": "sha1:fa724809a0739c50f762a1fe1c7f56dbb1cc7da1"
+        },
+        {
+            "path": "src/@app/iam/tag/application/max/iam-max-tag.service.ts",
+            "integrity": "sha1:328ddb5912020468f85e1d66db6b1b5b0beed8f0"
+        },
+        {
+            "path": "src/@app/iam/tag/application/min/iam-min-tag.query-handler.spec.ts",
+            "integrity": "sha1:5d86c3b66c5707d5de095d20fc58ab540cb820ed"
+        },
+        {
+            "path": "src/@app/iam/tag/application/min/iam-min-tag.query-handler.ts",
+            "integrity": "sha1:09584cbbdae6fd8697f0703e73ae2b9b05479b2b"
+        },
+        {
+            "path": "src/@app/iam/tag/application/min/iam-min-tag.query.ts",
+            "integrity": "sha1:b9ccc009be319bf3018ffca5a34e09973cf36f7d"
+        },
+        {
+            "path": "src/@app/iam/tag/application/min/iam-min-tag.service.spec.ts",
+            "integrity": "sha1:ad1490b7dece3446bd5d27508b823f67d4e51709"
+        },
+        {
+            "path": "src/@app/iam/tag/application/min/iam-min-tag.service.ts",
+            "integrity": "sha1:5151b04614935b89c0aba0df747b31a97f62d401"
+        },
+        {
+            "path": "src/@app/iam/tag/application/paginate/iam-paginate-tags.query-handler.spec.ts",
+            "integrity": "sha1:fe112232a9c59a0911d0328b168075cc16a94ab2"
+        },
+        {
+            "path": "src/@app/iam/tag/application/paginate/iam-paginate-tags.query-handler.ts",
+            "integrity": "sha1:46b79beed6fd255695062599de1cf96ad04ada7c"
+        },
+        {
+            "path": "src/@app/iam/tag/application/paginate/iam-paginate-tags.query.ts",
+            "integrity": "sha1:67d73ee9cbba8300efbe12cd5b094b5844d31ad2"
+        },
+        {
+            "path": "src/@app/iam/tag/application/paginate/iam-paginate-tags.service.spec.ts",
+            "integrity": "sha1:879ff02507d08056f71ade7f82c965c95326cee2"
+        },
+        {
+            "path": "src/@app/iam/tag/application/paginate/iam-paginate-tags.service.ts",
+            "integrity": "sha1:e3620cb42fd1b5b09fe697da53db945f5381ffbc"
+        },
+        {
+            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.query-handler.spec.ts",
+            "integrity": "sha1:064630d0dd6f91647e89744d8cc3145239d38b7c"
+        },
+        {
+            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.query-handler.ts",
+            "integrity": "sha1:3148e42798819534d494101a7d9b2ea9d6cc6498"
+        },
+        {
+            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.query.ts",
+            "integrity": "sha1:c8f78c5437e29e1c9a4face93740bb1759b3ca0e"
+        },
+        {
+            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.service.spec.ts",
+            "integrity": "sha1:393aa847f6939d74359a78276105dece08e328c9"
+        },
+        {
+            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.service.ts",
+            "integrity": "sha1:756d408c1e8056b0750a2429b5b165fb75f8e17b"
+        },
+        {
+            "path": "src/@app/iam/tag/application/sagas/iam-tag.sagas.ts",
+            "integrity": "sha1:f1c94cc45d853ed7550f9eb12e6c652ea017c8b4"
+        },
+        {
+            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.query-handler.spec.ts",
+            "integrity": "sha1:4c3878c01dc12fc240d98d2bf8bd1c027d75bae6"
+        },
+        {
+            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.query-handler.ts",
+            "integrity": "sha1:eac8eacf5c2c51c84024878bc207d5a437ca4286"
+        },
+        {
+            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.query.ts",
+            "integrity": "sha1:6cd6c60bd829c605134d836a02a1e17911da2267"
+        },
+        {
+            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.service.spec.ts",
+            "integrity": "sha1:005523ada559dd7e97f19f66857e89f96c94f79f"
+        },
+        {
+            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.service.ts",
+            "integrity": "sha1:d613de62b71e63f5653f03b975d1ba2bc33f8e43"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tag-by-id.command-handler.spec.ts",
+            "integrity": "sha1:b65c98e0c0607f461e469bcbdb908b6e8d57333d"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tag-by-id.command-handler.ts",
+            "integrity": "sha1:9e2132e9783dc4b214dd271e4c4feeb08a2b37c5"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tag-by-id.command.ts",
+            "integrity": "sha1:0ac1d7268df374986988a35cdd8e98e703e33421"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tag-by-id.service.spec.ts",
+            "integrity": "sha1:3b56dd6436434d4aa308caba1e3b3ae441150681"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tag-by-id.service.ts",
+            "integrity": "sha1:fd2025a660d8c6a87a9cb36ed80c92f2f98c22fc"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tags.command-handler.spec.ts",
+            "integrity": "sha1:654cf275347508107bfa607f352d81fd29471d3e"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tags.command-handler.ts",
+            "integrity": "sha1:a006729a7323f51e828365bc11621f2e6cb21cd9"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tags.command.ts",
+            "integrity": "sha1:e989f8779f01ac7de68c9d537dca021da0992320"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tags.service.spec.ts",
+            "integrity": "sha1:758e51b0743b3251fa206874f1049e93adf4caa6"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-tags.service.ts",
+            "integrity": "sha1:4773da2c1ee566b0051ad9b32bd48035283d190c"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-and-increment-tags.command-handler.spec.ts",
+            "integrity": "sha1:43cdc02609a60159c95475671cbebf3075edbd37"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-and-increment-tags.command-handler.ts",
+            "integrity": "sha1:77c396e1c08848a7725c12c41769619ac764e5ab"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-and-increment-tags.command.ts",
+            "integrity": "sha1:b8620c64e17ebe13f8cb4cb863c637334ca28cc0"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-and-increment-tags.service.spec.ts",
+            "integrity": "sha1:f038a004e4958b0d72cb09c8eba45ea071424688"
+        },
+        {
+            "path": "src/@app/iam/tag/application/update/iam-update-and-increment-tags.service.ts",
+            "integrity": "sha1:867cbc9fd9778ede3c4d57f633c1e62a90c24e6f"
+        },
+        {
+            "path": "src/@app/iam/tag/application/upsert/iam-upsert-tag.command-handler.spec.ts",
+            "integrity": "sha1:5cfaf9b230ed63e7166f143714ab687562fa260e"
+        },
+        {
+            "path": "src/@app/iam/tag/application/upsert/iam-upsert-tag.command-handler.ts",
+            "integrity": "sha1:dfe26eaee2c70ecd30061b3b860c802bf0b5f25b"
+        },
+        {
+            "path": "src/@app/iam/tag/application/upsert/iam-upsert-tag.command.ts",
+            "integrity": "sha1:006626f4a039e11368a3a10677173dc6fbc9f8a0"
+        },
+        {
+            "path": "src/@app/iam/tag/application/upsert/iam-upsert-tag.service.spec.ts",
+            "integrity": "sha1:edbf416091138d4d711bf0fd8cd3dd762babbb78"
+        },
+        {
+            "path": "src/@app/iam/tag/application/upsert/iam-upsert-tag.service.ts",
+            "integrity": "sha1:d1e17ed55a7d2b6905cd41af81da3bedd42245c5"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/iam-tag.aggregate.ts",
+            "integrity": "sha1:c1c9f307b95dea61362a1864220292c2ce314067"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/iam-tag.mapper.ts",
+            "integrity": "sha1:7b1fb0ca5933fd4e9e8a14da275c60030954306b"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/iam-tag.repository.ts",
+            "integrity": "sha1:85dba1043340941ae6d77a2b20adc36105c064bd"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/iam-tag.response.ts",
+            "integrity": "sha1:d173c32999f3f8a6fc2a8e4d00ce73965f75937f"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/value-objects/index.ts",
+            "integrity": "sha1:0836579b3701fade09a76cb42f4e95fc64a95212"
+        },
+        {
+            "path": "src/@app/iam/tag/index.ts",
+            "integrity": "sha1:2b7d046b4be4d36e83df158834ede7bcfe0c70b4"
+        },
+        {
+            "path": "src/@app/iam/tag/infrastructure/mock/iam-mock-tag.data.ts",
+            "integrity": "sha1:8a5351291b61ba746005e8c089c4b9eb8a4758a7"
+        },
+        {
+            "path": "src/@app/iam/tag/infrastructure/mock/iam-mock-tag.repository.ts",
+            "integrity": "sha1:b3daadcb957cf844bf68f4f78e1548aeb7d53b94"
+        },
+        {
+            "path": "src/@app/iam/tag/infrastructure/mock/iam-mock-tag.seeder.ts",
+            "integrity": "sha1:a8a8e85525d6940b51f8558d652373a980bac339"
+        },
+        {
+            "path": "src/@app/iam/tag/infrastructure/sequelize/iam-sequelize-tag.model.ts",
+            "integrity": "sha1:d6374ba748739cac6cdeb5bdd7672e5d191194b3"
+        },
+        {
+            "path": "src/@app/iam/tag/infrastructure/sequelize/iam-sequelize-tag.repository.ts",
+            "integrity": "sha1:6872dc6de74096c4f753acb87ba8c1f842a0d175"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/value-objects/iam-tag-id.ts",
+            "integrity": "sha1:3d259c8ff98d9718758497a51108e1c430d43143"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/value-objects/iam-tag-name.ts",
+            "integrity": "sha1:4dc9c8443d534d9a06017578f4964bc22b6d6d6c"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/value-objects/iam-tag-created-at.ts",
+            "integrity": "sha1:5be73e6a1b81fe1816c3c1565602aae710d9103a"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/value-objects/iam-tag-updated-at.ts",
+            "integrity": "sha1:61dd6879926548a8dba9a6c3435e1f424e1ce539"
+        },
+        {
+            "path": "src/@app/iam/tag/domain/value-objects/iam-tag-deleted-at.ts",
+            "integrity": "sha1:f3fd780fc7c81028361768856ffabf6b60df97b5"
+        },
+        {
+            "path": "src/@api/iam/iam.seeder.ts",
+            "integrity": "sha1:11a96ffd42691725c9db6c3405623396f385cf25"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-create-tag.controller.spec.ts",
+            "integrity": "sha1:455e5e0d158a4357bde663dfc9b1cad7137dceeb"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-create-tag.controller.ts",
+            "integrity": "sha1:6ff85f5c08c79fd554173d770da529b6efb48729"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-create-tags.controller.spec.ts",
+            "integrity": "sha1:54f24bdb19b23ad33198291e371f142c0a45cb38"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-create-tags.controller.ts",
+            "integrity": "sha1:291aa59bd065a5c73ee11bd57b3d8dfcf3545b42"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-delete-tag-by-id.controller.spec.ts",
+            "integrity": "sha1:bed73c97de1a99206f39a57822cba42397f263c3"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-delete-tag-by-id.controller.ts",
+            "integrity": "sha1:7795c2e8566b4ec3c6e50fdf7214f94916e249c9"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-delete-tags.controller.spec.ts",
+            "integrity": "sha1:6a538e6ac4c8abd7cbaef76f6b66e438c1f54b46"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-delete-tags.controller.ts",
+            "integrity": "sha1:9b1e0e14f1a999ab1f38b739fb3db5c004b0cbaf"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-find-tag-by-id.controller.spec.ts",
+            "integrity": "sha1:494f8c820a135e5e1dddd670ba223ec768f33d65"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-find-tag-by-id.controller.ts",
+            "integrity": "sha1:691cebe22947140186732f5fe6753aa48f380cbf"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-find-tag.controller.spec.ts",
+            "integrity": "sha1:0f299a2689dcb93742c29a543460807702a7adbb"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-find-tag.controller.ts",
+            "integrity": "sha1:b0850662c3e3e794b8f72fac47dc7b94deb0f4cb"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-get-tags.controller.spec.ts",
+            "integrity": "sha1:af33ff97785a898ac76c8b50e8301342ef29b29e"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-get-tags.controller.ts",
+            "integrity": "sha1:728f8c419e387576ac1887516078069309bd4462"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-paginate-tags.controller.spec.ts",
+            "integrity": "sha1:b2402bd4b85baa18547f1cd31ee939357be7f984"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-paginate-tags.controller.ts",
+            "integrity": "sha1:f710f4ce43a0149cf2ab942dd96a9305e3d4a468"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-update-tag-by-id.controller.spec.ts",
+            "integrity": "sha1:e3bad90dd05ebf20c44a055dda16dbac06236139"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-update-tag-by-id.controller.ts",
+            "integrity": "sha1:65eb6e0eb1ab7edb7c71e1d8568f5e837c0af67a"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-update-tags.controller.spec.ts",
+            "integrity": "sha1:c84d0a3bab6851d3ebc216ea749cacc3759673c8"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-update-tags.controller.ts",
+            "integrity": "sha1:dd730a458055a98d1cb693b953de6570bcfea3e6"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-upsert-tag.controller.spec.ts",
+            "integrity": "sha1:df8d961580a99cc77c3fe48b83b66bea35bbecf1"
+        },
+        {
+            "path": "src/@api/iam/tag/controllers/iam-upsert-tag.controller.ts",
+            "integrity": "sha1:42da7162719201108a753e9ae9246846bd74c4a5"
+        },
+        {
+            "path": "src/@api/iam/tag/dto/iam-tag.dto.ts",
+            "integrity": "sha1:d1e4c536f9b28c851c4767e060eafd7d94f6e1c8"
+        },
+        {
+            "path": "src/@api/iam/tag/dto/iam-create-tag.dto.ts",
+            "integrity": "sha1:3276edc6e41310ecc57a9fb0e04c2c4eba70c795"
+        },
+        {
+            "path": "src/@api/iam/tag/dto/iam-update-tag-by-id.dto.ts",
+            "integrity": "sha1:f0d0a6e430b64363cdfaff30e94ec1213854113e"
+        },
+        {
+            "path": "src/@api/iam/tag/dto/iam-update-tags.dto.ts",
+            "integrity": "sha1:60f084cd9c2f4da709938ff62c2b0fb624b0dc0f"
+        },
+        {
+            "path": "src/@api/iam/tag/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/iam/tag/dto/public-api.ts",
+            "integrity": "sha1:8a61db1ce50d9574487d57d03934b80a00eb9fdb"
+        },
+        {
+            "path": "src/@api/iam/tag/graphql/iam-tag.graphql",
+            "integrity": "sha1:e577c76c2f3d2f0710246afa61bc10e8c1ccc5db"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-create-tag.handler.spec.ts",
+            "integrity": "sha1:9e9d5db5849135af58ae5004ed28c29b2ffd2cb2"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-create-tag.handler.ts",
+            "integrity": "sha1:a8878380370416f7884e93589aadafba2b68e167"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-create-tags.handler.spec.ts",
+            "integrity": "sha1:caabf98027e73509ab10463895a44d5aa3d9bb41"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-create-tags.handler.ts",
+            "integrity": "sha1:f4a5c62d4c74ec9f7faca006caea228ac9480e11"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-delete-tag-by-id.handler.spec.ts",
+            "integrity": "sha1:d9829f6b62c3ffa25c3ff93f5ef3469f212a55d4"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-delete-tag-by-id.handler.ts",
+            "integrity": "sha1:6e11114291cb469fa43666379cf397f5590aa70a"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-delete-tags.handler.spec.ts",
+            "integrity": "sha1:7f2f79126f80dbb2397e03146a546bf9095cceff"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-delete-tags.handler.ts",
+            "integrity": "sha1:28d348e3f2b629f1200b98449540d67f41c08880"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-find-tag-by-id.handler.spec.ts",
+            "integrity": "sha1:06d993a6ad4f75b513ef99f43622a8a96909c29b"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-find-tag-by-id.handler.ts",
+            "integrity": "sha1:23250794ba79887c64335870d1d4e000ea2fbc39"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-find-tag.handler.spec.ts",
+            "integrity": "sha1:057dd156967461a20f821b57ed25aa1ea04d7883"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-find-tag.handler.ts",
+            "integrity": "sha1:60766513af8188e4f1b9aad49c3c784af1a34714"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-get-tags.handler.spec.ts",
+            "integrity": "sha1:d3c4564eb7f176e3eaf022f036519769685eaa4d"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-get-tags.handler.ts",
+            "integrity": "sha1:2ecee5ba97237291a79c732e237504681d4ce666"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-paginate-tags.handler.spec.ts",
+            "integrity": "sha1:047fae3aeef07602f804fc5a0065895e94d732b3"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-paginate-tags.handler.ts",
+            "integrity": "sha1:b715845b64a10fc58b203b590263ab28c53ec989"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-update-tag-by-id.handler.spec.ts",
+            "integrity": "sha1:7eea742d64a2103ed678e954b4e860a5a786ee91"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-update-tag-by-id.handler.ts",
+            "integrity": "sha1:6df7db3c52763271a5abefc2650fc650793dbe5d"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-update-tags.handler.spec.ts",
+            "integrity": "sha1:b4c3b64f76a38d09989ae5f353cb7cd931c42400"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-update-tags.handler.ts",
+            "integrity": "sha1:b4fa0054a62b1afb1c0f87bdb2e7d39e172a6549"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-upsert-tag.handler.spec.ts",
+            "integrity": "sha1:25c92d4ce1d345afbbdc75afba3ded89367a7f9b"
+        },
+        {
+            "path": "src/@api/iam/tag/handlers/iam-upsert-tag.handler.ts",
+            "integrity": "sha1:8be211e516d623b0157f78747727ae76602ec51c"
+        },
+        {
+            "path": "src/@api/iam/tag/index.ts",
+            "integrity": "sha1:a7b09cc1c4a5f4ee8d217a062e69e746b7b93c2a"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-create-tag.resolver.spec.ts",
+            "integrity": "sha1:74bac5212b721d5c29e87163d1cee3963f639315"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-create-tag.resolver.ts",
+            "integrity": "sha1:12cb97fd75f1c1019ad7a74a2e0488f034189cb4"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-create-tags.resolver.spec.ts",
+            "integrity": "sha1:f41a1aa7fee31e2b4462cba20f365d1d29680854"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-create-tags.resolver.ts",
+            "integrity": "sha1:3764bf587cf8db4bae2c973f46304ac799a312e0"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-delete-tag-by-id.resolver.spec.ts",
+            "integrity": "sha1:c74b672adb733c08cff221e92b382ad136397168"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-delete-tag-by-id.resolver.ts",
+            "integrity": "sha1:b1f237f6df03a76d32b7702b0f6bfe7a72f8f221"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-delete-tags.resolver.spec.ts",
+            "integrity": "sha1:080708e8e41d38c6517f66630832a4a8c751813c"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-delete-tags.resolver.ts",
+            "integrity": "sha1:8285581c882f3385a8124c3c9d8f398f9b14239a"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-find-tag-by-id.resolver.spec.ts",
+            "integrity": "sha1:67cba20dfcb179c9bfbedc1d16c91f12e6766bc6"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-find-tag-by-id.resolver.ts",
+            "integrity": "sha1:d953b2018f3b7439db25775f19d6bba44f80f7c4"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-find-tag.resolver.spec.ts",
+            "integrity": "sha1:593087e734a3d413b6acab33d3499c6cfa745613"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-find-tag.resolver.ts",
+            "integrity": "sha1:8217e88b2071c3c8bc0886a8a4814f768026c143"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-get-tags.resolver.spec.ts",
+            "integrity": "sha1:2fc94dbb1697f5f60013aef3d3984ea710a3eb2b"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-get-tags.resolver.ts",
+            "integrity": "sha1:4c1a50866cb2671ca40d6b761213020a1bc4316f"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-paginate-tags.resolver.spec.ts",
+            "integrity": "sha1:680206ddd7f6a572df2f0ff398e83221fea8cbf1"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-paginate-tags.resolver.ts",
+            "integrity": "sha1:45f908f2cf06df4a71a1ba5035782e32686192ff"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-update-tag-by-id.resolver.spec.ts",
+            "integrity": "sha1:daa06c1305f40b9e9a006dec04de7165e7fc08a1"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-update-tag-by-id.resolver.ts",
+            "integrity": "sha1:e95a0f98d8639872f7a016b7326eb9ea7bb0cb82"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-update-tags.resolver.spec.ts",
+            "integrity": "sha1:d4c37df10e2164a4c333bcc4f98516258281b73e"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-update-tags.resolver.ts",
+            "integrity": "sha1:84c96e3ebe77ea63d4fb0d001e6f90eda1dd2ba2"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-upsert-tag.resolver.spec.ts",
+            "integrity": "sha1:ab06b34e72f08544e8bcee38c9e5eaeebf393c56"
+        },
+        {
+            "path": "src/@api/iam/tag/resolvers/iam-upsert-tag.resolver.ts",
+            "integrity": "sha1:2b45b6bd0a8a9c4bc2f79a0e046b8160266127d8"
+        },
+        {
+            "path": "src/@api/iam/tag/seeder/iam-tag.seeder.ts",
+            "integrity": "sha1:081c47fb093a97e4ea519a9c8c4a04e10f318d22"
+        },
+        {
+            "path": "test/acceptance/iam/tag.e2e-spec.ts",
+            "integrity": "sha1:c7088dbd735dd3abb36366e5be591dc17f2a4467"
+        },
+        {
+            "path": "postman/iam/iam.tag.postman.json",
+            "integrity": "sha1:71ab4b4d779556e2694a2b88a340ed931e65daeb"
+        }
+    ]
+}

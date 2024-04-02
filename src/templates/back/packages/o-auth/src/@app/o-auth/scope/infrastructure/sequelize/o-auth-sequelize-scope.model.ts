@@ -13,7 +13,6 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
 			fields: ['code'],
 			unique: true,
 		},
-
     ],
 })
 export class OAuthScopeModel extends Model<OAuthScopeModel>
@@ -137,14 +136,14 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     @Column({
         field: 'code',
         allowNull: false,
-        type: DataTypes.STRING(63),
+        type: DataTypes.STRING(64),
     })
     code: string;
 
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     name: string;
 

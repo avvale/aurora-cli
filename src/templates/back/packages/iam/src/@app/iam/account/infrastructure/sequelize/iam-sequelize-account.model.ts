@@ -23,7 +23,10 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
 			fields: ['email'],
 			unique: true,
 		},
-
+		{
+			fields: ['tags'],
+			unique: false,
+		},
     ],
 })
 export class IamAccountModel extends Model<IamAccountModel>
@@ -154,14 +157,14 @@ export class IamAccountModel extends Model<IamAccountModel>
     @Column({
         field: 'code',
         allowNull: true,
-        type: DataTypes.STRING(63),
+        type: DataTypes.STRING(64),
     })
     code: string;
 
     @Column({
         field: 'email',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     email: string;
 
@@ -188,9 +191,16 @@ export class IamAccountModel extends Model<IamAccountModel>
     client: OAuthClientModel;
 
     @Column({
+        field: 'tags',
+        allowNull: true,
+        type: DataTypes.ARRAY(DataTypes.STRING(64)),
+    })
+    tags: string[];
+
+    @Column({
         field: 'scopes',
         allowNull: true,
-        type: DataTypes.ARRAY(DataTypes.STRING()),
+        type: DataTypes.ARRAY(DataTypes.STRING(64)),
     })
     scopes: string[];
 
@@ -204,7 +214,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     @Column({
         field: 'dPermissions',
         allowNull: false,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     dPermissions: any;
 
@@ -218,7 +228,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     @Column({
         field: 'meta',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     meta: any;
 

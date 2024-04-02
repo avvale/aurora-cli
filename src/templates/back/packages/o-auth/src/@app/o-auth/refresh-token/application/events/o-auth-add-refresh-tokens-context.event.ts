@@ -1,4 +1,4 @@
-import { OAuthDeletedRefreshTokenEvent, OAuthDeletedRefreshTokensEvent, OAuthRefreshToken } from '@app/o-auth/refresh-token';
+import { OAuthDeletedRefreshTokenEvent, OAuthDeletedRefreshTokensEvent, OAuthRefreshToken, OAuthUpdatedAndIncrementedRefreshTokenEvent, OAuthUpdatedAndIncrementedRefreshTokensEvent } from '@app/o-auth/refresh-token';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class OAuthAddRefreshTokensContextEvent extends AggregateRoot
@@ -16,6 +16,26 @@ export class OAuthAddRefreshTokensContextEvent extends AggregateRoot
     }
 
 
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new OAuthUpdatedAndIncrementedRefreshTokensEvent(
+                this.aggregateRoots.map(refreshToken =>
+                    new OAuthUpdatedAndIncrementedRefreshTokenEvent(
+                        refreshToken.id.value,
+                        refreshToken.accessTokenId.value,
+                        refreshToken.token.value,
+                        refreshToken.isRevoked.value,
+                        refreshToken.expiresAt?.value,
+                        refreshToken.createdAt?.value,
+                        refreshToken.updatedAt?.value,
+                        refreshToken.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
 
     deleted(): void
     {

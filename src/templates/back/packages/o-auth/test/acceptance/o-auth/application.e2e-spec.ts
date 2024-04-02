@@ -5,7 +5,7 @@ import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorizat
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { OAuthIApplicationRepository, oAuthMockApplicationData, OAuthMockApplicationSeeder } from '@app/o-auth/application';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -253,51 +253,51 @@ describe('application', () =>
             });
     });
 
-    test('/REST:POST o-auth/application/create - Got 400 Conflict, ApplicationCode is too large, has a maximum length of 63', () =>
+    test('/REST:POST o-auth/application/create - Got 400 Conflict, ApplicationCode is too large, has a maximum length of 64', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: '****************************************************************',
+                code: '*****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthApplicationCode is too large, has a maximum length of 63');
+                expect(res.body.message).toContain('Value for OAuthApplicationCode is too large, has a maximum length of 64');
             });
     });
 
-    test('/REST:POST o-auth/application/create - Got 400 Conflict, ApplicationName is too large, has a maximum length of 127', () =>
+    test('/REST:POST o-auth/application/create - Got 400 Conflict, ApplicationName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthApplicationName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for OAuthApplicationName is too large, has a maximum length of 128');
             });
     });
 
-    test('/REST:POST o-auth/application/create - Got 400 Conflict, ApplicationSecret is too large, has a maximum length of 127', () =>
+    test('/REST:POST o-auth/application/create - Got 400 Conflict, ApplicationSecret is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/application/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                secret: '********************************************************************************************************************************',
+                secret: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthApplicationSecret is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for OAuthApplicationSecret is too large, has a maximum length of 128');
             });
     });
 

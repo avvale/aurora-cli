@@ -134,7 +134,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     name: string;
 

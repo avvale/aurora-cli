@@ -1,4 +1,4 @@
-import { IamAccount, IamCreatedAccountEvent, IamCreatedAccountsEvent, IamDeletedAccountEvent, IamDeletedAccountsEvent, IamUpdatedAccountEvent, IamUpdatedAccountsEvent } from '@app/iam/account';
+import { IamAccount, IamCreatedAccountEvent, IamCreatedAccountsEvent, IamDeletedAccountEvent, IamDeletedAccountsEvent, IamUpdatedAccountEvent, IamUpdatedAccountsEvent, IamUpdatedAndIncrementedAccountEvent, IamUpdatedAndIncrementedAccountsEvent } from '@app/iam/account';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddAccountsContextEvent extends AggregateRoot
@@ -27,6 +27,7 @@ export class IamAddAccountsContextEvent extends AggregateRoot
                         account.email.value,
                         account.isActive.value,
                         account.clientId.value,
+                        account.tags?.value,
                         account.scopes?.value,
                         account.dApplicationCodes.value,
                         account.dPermissions.value,
@@ -55,6 +56,36 @@ export class IamAddAccountsContextEvent extends AggregateRoot
                         account.email.value,
                         account.isActive.value,
                         account.clientId.value,
+                        account.tags?.value,
+                        account.scopes?.value,
+                        account.dApplicationCodes.value,
+                        account.dPermissions.value,
+                        account.dTenants.value,
+                        account.meta?.value,
+                        account.roleIds?.value,
+                        account.tenantIds?.value,
+                        account.createdAt?.value,
+                        account.updatedAt?.value,
+                        account.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new IamUpdatedAndIncrementedAccountsEvent(
+                this.aggregateRoots.map(account =>
+                    new IamUpdatedAndIncrementedAccountEvent(
+                        account.id.value,
+                        account.type.value,
+                        account.code?.value,
+                        account.email.value,
+                        account.isActive.value,
+                        account.clientId.value,
+                        account.tags?.value,
                         account.scopes?.value,
                         account.dApplicationCodes.value,
                         account.dPermissions.value,
@@ -83,6 +114,7 @@ export class IamAddAccountsContextEvent extends AggregateRoot
                         account.email.value,
                         account.isActive.value,
                         account.clientId.value,
+                        account.tags?.value,
                         account.scopes?.value,
                         account.dApplicationCodes.value,
                         account.dPermissions.value,

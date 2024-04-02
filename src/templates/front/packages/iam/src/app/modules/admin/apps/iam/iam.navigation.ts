@@ -57,5 +57,12 @@ export const iamNavigation: FuseNavigationItem = {
             icon : 'mat_outline:local_police',
             link : '/iam/permission',
         },
+        {
+            id   : 'tags',
+            title: 'Tag',
+            type : 'basic',
+            icon : 'mat_outline:tag',
+            link : '/iam/tag',
+        },
     ],
 };

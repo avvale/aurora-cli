@@ -12,6 +12,7 @@ export class IamAccountResponse
         public readonly email: string,
         public readonly isActive: boolean,
         public readonly clientId: string,
+        public readonly tags: string[],
         public readonly scopes: string[],
         public readonly dApplicationCodes: string[],
         public readonly dPermissions: any,

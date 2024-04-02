@@ -15,7 +15,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/user/user.service.ts",
-            "integrity": "sha1:23867aedd85958e3d2c9e9ea836c6a874708fb7a"
+            "integrity": "sha1:673697699fd5e64e6fe74d37221b0d38296b95f3"
         },
         {
             "path": "src/app/modules/admin/apps/iam/user/index.ts",

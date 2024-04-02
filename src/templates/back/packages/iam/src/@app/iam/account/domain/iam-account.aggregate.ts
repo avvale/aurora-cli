@@ -14,6 +14,7 @@ import {
     IamAccountMeta,
     IamAccountRoleIds,
     IamAccountScopes,
+    IamAccountTags,
     IamAccountTenantIds,
     IamAccountType,
     IamAccountUpdatedAt,
@@ -33,6 +34,7 @@ export class IamAccount extends AggregateRoot
     email: IamAccountEmail;
     isActive: IamAccountIsActive;
     clientId: IamAccountClientId;
+    tags: IamAccountTags;
     scopes: IamAccountScopes;
     dApplicationCodes: IamAccountDApplicationCodes;
     dPermissions: IamAccountDPermissions;
@@ -55,6 +57,7 @@ export class IamAccount extends AggregateRoot
         email: IamAccountEmail,
         isActive: IamAccountIsActive,
         clientId: IamAccountClientId,
+        tags: IamAccountTags,
         scopes: IamAccountScopes,
         dApplicationCodes: IamAccountDApplicationCodes,
         dPermissions: IamAccountDPermissions,
@@ -78,6 +81,7 @@ export class IamAccount extends AggregateRoot
         this.email = email;
         this.isActive = isActive;
         this.clientId = clientId;
+        this.tags = tags;
         this.scopes = scopes;
         this.dApplicationCodes = dApplicationCodes;
         this.dPermissions = dPermissions;
@@ -101,6 +105,7 @@ export class IamAccount extends AggregateRoot
         email: IamAccountEmail,
         isActive: IamAccountIsActive,
         clientId: IamAccountClientId,
+        tags: IamAccountTags,
         scopes: IamAccountScopes,
         dApplicationCodes: IamAccountDApplicationCodes,
         dPermissions: IamAccountDPermissions,
@@ -124,6 +129,7 @@ export class IamAccount extends AggregateRoot
             email,
             isActive,
             clientId,
+            tags,
             scopes,
             dApplicationCodes,
             dPermissions,
@@ -151,6 +157,7 @@ export class IamAccount extends AggregateRoot
                 account.email.value,
                 account.isActive.value,
                 account.clientId.value,
+                account.tags?.value,
                 account.scopes?.value,
                 account.dApplicationCodes.value,
                 account.dPermissions.value,
@@ -175,6 +182,7 @@ export class IamAccount extends AggregateRoot
                 account.email?.value,
                 account.isActive?.value,
                 account.clientId?.value,
+                account.tags?.value,
                 account.scopes?.value,
                 account.dApplicationCodes?.value,
                 account.dPermissions?.value,
@@ -199,6 +207,7 @@ export class IamAccount extends AggregateRoot
                 account.email.value,
                 account.isActive.value,
                 account.clientId.value,
+                account.tags?.value,
                 account.scopes?.value,
                 account.dApplicationCodes.value,
                 account.dPermissions.value,
@@ -222,6 +231,7 @@ export class IamAccount extends AggregateRoot
             email: this.email.value,
             isActive: this.isActive.value,
             clientId: this.clientId.value,
+            tags: this.tags?.value,
             scopes: this.scopes?.value,
             dApplicationCodes: this.dApplicationCodes.value,
             dPermissions: this.dPermissions.value,
@@ -249,6 +259,7 @@ export class IamAccount extends AggregateRoot
             email: this.email.value,
             isActive: this.isActive.value,
             clientId: this.clientId.value,
+            tags: this.tags?.value,
             scopes: this.scopes?.value,
             dApplicationCodes: this.dApplicationCodes.value,
             dPermissions: this.dPermissions.value,

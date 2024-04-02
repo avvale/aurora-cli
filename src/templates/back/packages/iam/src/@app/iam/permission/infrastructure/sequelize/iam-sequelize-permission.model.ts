@@ -16,7 +16,6 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
 			fields: ['boundedContextId'],
 			unique: false,
 		},
-
     ],
 })
 export class IamPermissionModel extends Model<IamPermissionModel>
@@ -140,7 +139,7 @@ export class IamPermissionModel extends Model<IamPermissionModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     name: string;
 

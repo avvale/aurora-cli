@@ -7,7 +7,7 @@ export class IamTenantResponse
         public readonly parentId: string,
         public readonly name: string,
         public readonly code: string,
-        public readonly logo: string,
+        public readonly logo: any,
         public readonly isActive: boolean,
         public readonly meta: any,
         public readonly accountIds: string[],

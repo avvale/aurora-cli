@@ -13,6 +13,7 @@ import {
     IamAccountMeta,
     IamAccountRoleIds,
     IamAccountScopes,
+    IamAccountTags,
     IamAccountTenantIds,
     IamAccountType,
 } from '@app/iam/account/domain/value-objects';
@@ -36,6 +37,7 @@ export class IamUpdateAccountsCommandHandler implements ICommandHandler<IamUpdat
                 email: new IamAccountEmail(command.payload.email, { undefinable: true }),
                 isActive: new IamAccountIsActive(command.payload.isActive, { undefinable: true }),
                 clientId: new IamAccountClientId(command.payload.clientId, { undefinable: true }),
+                tags: new IamAccountTags(command.payload.tags),
                 scopes: new IamAccountScopes(command.payload.scopes),
                 dApplicationCodes: new IamAccountDApplicationCodes(command.payload.dApplicationCodes, { undefinable: true }),
                 dPermissions: new IamAccountDPermissions(command.payload.dPermissions, { undefinable: true }),

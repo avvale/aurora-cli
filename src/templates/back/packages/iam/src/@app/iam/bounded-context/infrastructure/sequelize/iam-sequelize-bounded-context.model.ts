@@ -131,14 +131,14 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     name: string;
 
     @Column({
         field: 'root',
         allowNull: false,
-        type: DataTypes.STRING(63),
+        type: DataTypes.STRING(64),
     })
     root: string;
 

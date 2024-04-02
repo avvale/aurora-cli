@@ -13,6 +13,7 @@ import {
     IamAccountMeta,
     IamAccountRoleIds,
     IamAccountScopes,
+    IamAccountTags,
     IamAccountTenantIds,
     IamAccountType,
     IamAccountUpdatedAt,
@@ -37,6 +38,7 @@ export class IamUpdateAccountsService
             email?: IamAccountEmail;
             isActive?: IamAccountIsActive;
             clientId?: IamAccountClientId;
+            tags?: IamAccountTags;
             scopes?: IamAccountScopes;
             dApplicationCodes?: IamAccountDApplicationCodes;
             dPermissions?: IamAccountDPermissions;
@@ -58,6 +60,7 @@ export class IamUpdateAccountsService
             payload.email,
             payload.isActive,
             payload.clientId,
+            payload.tags,
             payload.scopes,
             payload.dApplicationCodes,
             payload.dPermissions,

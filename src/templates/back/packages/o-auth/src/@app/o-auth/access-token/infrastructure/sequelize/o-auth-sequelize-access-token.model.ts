@@ -14,7 +14,6 @@ import { BelongsTo, Column, ForeignKey, HasOne, Model, Table } from 'sequelize-t
 			fields: ['clientId'],
 			unique: false,
 		},
-
     ],
 })
 export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
@@ -58,7 +57,7 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
     @Column({
         field: 'name',
         allowNull: true,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     name: string;
 

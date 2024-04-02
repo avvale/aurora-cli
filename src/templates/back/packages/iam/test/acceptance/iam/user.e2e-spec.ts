@@ -5,7 +5,7 @@ import { IamModule } from '@api/iam/iam.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { IamIUserRepository, iamMockUserData, IamMockUserSeeder } from '@app/iam/user';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -285,19 +285,19 @@ describe('user', () =>
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserName is too large, has a maximum length of 127', () =>
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamUserName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for IamUserName is too large, has a maximum length of 128');
             });
     });
 
@@ -333,35 +333,35 @@ describe('user', () =>
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserMobile is too large, has a maximum length of 63', () =>
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserMobile is too large, has a maximum length of 64', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                mobile: '****************************************************************',
+                mobile: '*****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamUserMobile is too large, has a maximum length of 63');
+                expect(res.body.message).toContain('Value for IamUserMobile is too large, has a maximum length of 64');
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserUsername is too large, has a maximum length of 127', () =>
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserUsername is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/iam/user/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                username: '********************************************************************************************************************************',
+                username: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for IamUserUsername is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for IamUserUsername is too large, has a maximum length of 128');
             });
     });
 

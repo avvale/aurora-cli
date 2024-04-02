@@ -13,6 +13,7 @@ import {
     IamAccountMeta,
     IamAccountRoleIds,
     IamAccountScopes,
+    IamAccountTags,
     IamAccountTenantIds,
     IamAccountType,
     IamAccountUpdatedAt,
@@ -37,6 +38,7 @@ export class IamCreateAccountsService
             email: IamAccountEmail;
             isActive: IamAccountIsActive;
             clientId: IamAccountClientId;
+            tags: IamAccountTags;
             scopes: IamAccountScopes;
             dApplicationCodes: IamAccountDApplicationCodes;
             dPermissions: IamAccountDPermissions;
@@ -56,6 +58,7 @@ export class IamCreateAccountsService
             account.email,
             account.isActive,
             account.clientId,
+            account.tags,
             account.scopes,
             account.dApplicationCodes,
             account.dPermissions,

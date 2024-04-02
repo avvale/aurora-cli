@@ -48,6 +48,12 @@ export class IamUpdateAccountsDto
 
     @ApiProperty({
         type       : Array,
+        description: 'tags [input here api field description]',
+    })
+    tags?: string[];
+
+    @ApiProperty({
+        type       : Array,
         description: 'scopes [input here api field description]',
     })
     scopes?: string[];

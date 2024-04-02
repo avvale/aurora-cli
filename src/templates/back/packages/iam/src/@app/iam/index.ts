@@ -7,6 +7,7 @@ import { IamAccountHandlers, IamAccountServices, IamAccountModel, IamIAccountRep
 import { IamUserHandlers, IamUserServices, IamUserModel, IamIUserRepository, IamSequelizeUserRepository, IamUserSagas } from './user';
 import { IamRoleAccountHandlers, IamRoleAccountServices, IamRoleAccountModel, IamRoleAccountSagas, IamIRoleAccountRepository, IamSequelizeRoleAccountRepository } from './role-account';
 import { IamTenantAccountHandlers, IamTenantAccountServices, IamTenantAccountModel, IamITenantAccountRepository, IamSequelizeTenantAccountRepository, IamTenantAccountSagas } from './tenant-account';
+import { IamTagHandlers, IamTagServices, IamTagModel, IamITagRepository, IamSequelizeTagRepository, IamTagSagas } from './tag';
 
 export const IamHandlers = [
     ...IamBoundedContextHandlers,
@@ -17,7 +18,8 @@ export const IamHandlers = [
     ...IamAccountHandlers,
     ...IamUserHandlers,
     ...IamRoleAccountHandlers,
-    ...IamTenantAccountHandlers
+    ...IamTenantAccountHandlers,
+    ...IamTagHandlers
 ];
 export const IamServices = [
     ...IamBoundedContextServices,
@@ -28,7 +30,8 @@ export const IamServices = [
     ...IamAccountServices,
     ...IamUserServices,
     ...IamRoleAccountServices,
-    ...IamTenantAccountServices
+    ...IamTenantAccountServices,
+    ...IamTagServices
 ];
 export const IamModels = [
     IamBoundedContextModel,
@@ -39,7 +42,8 @@ export const IamModels = [
     IamUserModel,
     IamPermissionRoleModel,
     IamRoleAccountModel,
-    IamTenantAccountModel
+    IamTenantAccountModel,
+    IamTagModel
 ];
 export const IamRepositories = [
     {
@@ -83,6 +87,10 @@ export const IamRepositories = [
     {
         provide : IamITenantAccountRepository,
         useClass: IamSequelizeTenantAccountRepository
+    },
+    {
+        provide : IamITagRepository,
+        useClass: IamSequelizeTagRepository
     }
 ];
 export const IamSagas = [
@@ -95,5 +103,6 @@ export const IamSagas = [
     IamTenantSagas,
     IamPermissionRoleSagas,
     IamRoleAccountSagas,
-    IamTenantAccountSagas
+    IamTenantAccountSagas,
+    IamTagSagas
 ];

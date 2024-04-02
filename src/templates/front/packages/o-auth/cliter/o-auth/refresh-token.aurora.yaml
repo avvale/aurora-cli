@@ -13,11 +13,9 @@ aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
   - name: accessTokenId
     type: id
-    length: 36
     nullable: false
     relationship:
       type: one-to-one

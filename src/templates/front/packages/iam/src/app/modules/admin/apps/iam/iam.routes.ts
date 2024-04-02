@@ -16,6 +16,9 @@ import { accountEditResolver, accountNewResolver, accountPaginationResolver } fr
 import { PermissionListComponent } from './permission/permission-list.component';
 import { PermissionDetailComponent } from './permission/permission-detail.component';
 import { permissionEditResolver, permissionNewResolver, permissionPaginationResolver } from './permission/permission.resolvers';
+import { TagListComponent } from './tag/tag-list.component';
+import { TagDetailComponent } from './tag/tag-detail.component';
+import { tagEditResolver, tagNewResolver, tagPaginationResolver } from './tag/tag.resolvers';
 
 export default [
     {
@@ -37,6 +40,9 @@ export default [
             { path: 'permission', component: PermissionListComponent, resolve: { data: permissionPaginationResolver }, data: { permission: 'iam.permission.get' }},
             { path: 'permission/new', component: PermissionDetailComponent, resolve: { data: permissionNewResolver }, data: { permission: 'iam.permission.create' }},
             { path: 'permission/edit/:id', component: PermissionDetailComponent, resolve: { data: permissionEditResolver }, data: { permission: 'iam.permission.get' }},
+            { path: 'tag', component: TagListComponent, resolve: { data: tagPaginationResolver }, data: { permission: 'iam.tag.get' }},
+            { path: 'tag/new', component: TagDetailComponent, resolve: { data: tagNewResolver }, data: { permission: 'iam.tag.create' }},
+            { path: 'tag/edit/:id', component: TagDetailComponent, resolve: { data: tagEditResolver }, data: { permission: 'iam.tag.get' }},
         ],
         providers: [
             {

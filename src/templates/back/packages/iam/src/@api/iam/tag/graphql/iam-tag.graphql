@@ -1,0 +1,88 @@
+
+type IamTag
+{
+    id: ID!
+    name: GraphQLString!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input IamCreateTagInput
+{
+    id: ID!
+    name: GraphQLString!
+}
+
+input IamUpdateTagByIdInput
+{
+    id: ID!
+    name: GraphQLString
+}
+
+input IamUpdateTagsInput
+{
+    id: ID
+    name: GraphQLString
+}
+
+type Query
+{
+    iamFindTag(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): IamTag
+
+    iamFindTagById(
+        id: ID
+        constraint: QueryStatement
+    ): IamTag
+
+    iamGetTags(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamTag]!
+
+    iamPaginateTags(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    iamCreateTag(
+        payload: IamCreateTagInput!
+    ): IamTag
+
+    iamCreateTags(
+        payload: [IamCreateTagInput]!
+    ): Boolean!
+
+    iamUpdateTagById(
+        payload: IamUpdateTagByIdInput!
+        constraint: QueryStatement
+    ): IamTag
+
+    iamUpdateTags(
+        payload: IamUpdateTagsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamTag]!
+
+    iamUpsertTag(
+        payload: IamUpdateTagByIdInput!
+    ): IamTag
+
+    iamDeleteTagById(
+        id: ID!
+        constraint: QueryStatement
+    ): IamTag
+
+    iamDeleteTags(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamTag]!
+
+}

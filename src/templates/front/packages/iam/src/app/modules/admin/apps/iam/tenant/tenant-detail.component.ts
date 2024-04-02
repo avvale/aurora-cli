@@ -6,7 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { IamTenant } from '@apps/iam/iam.types';
 import { TenantService } from '@apps/iam/tenant';
-import { Action, Crumb, defaultDetailImports, log, mapActions, SelectSearchService, Utils, ViewDetailComponent } from '@aurora';
+import { Action, Crumb, defaultDetailImports, log, mapActions, SelectSearchService, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, ReplaySubject, takeUntil } from 'rxjs';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
@@ -18,7 +18,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatCheckboxModule, MatSelectModule, NgForOf, NgxMatSelectSearchModule,
+        MatCheckboxModule, MatSelectModule, NgForOf,
+        NgxMatSelectSearchModule,
     ],
 })
 export class TenantDetailComponent extends ViewDetailComponent
@@ -99,6 +100,19 @@ export class TenantDetailComponent extends ViewDetailComponent
         {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(
+                SnackBarInvalidFormComponent,
+                {
+                    data: {
+                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                    },
+                    panelClass      : 'error-snackbar',
+                    verticalPosition: 'top',
+                    duration        : 10000,
+                },
+            );
             return;
         }
 
@@ -120,10 +134,10 @@ export class TenantDetailComponent extends ViewDetailComponent
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             parentId: [null, [Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
-            code: ['', [Validators.maxLength(63)]],
-            logo: ['', [Validators.maxLength(255)]],
-            isActive: false,
+            name: ['', [Validators.required, Validators.maxLength(128)]],
+            code: ['', [Validators.maxLength(64)]],
+            logo: null,
+            isActive: [false, [Validators.required]],
             accountIds: [],
         });
         /* eslint-enable key-spacing */

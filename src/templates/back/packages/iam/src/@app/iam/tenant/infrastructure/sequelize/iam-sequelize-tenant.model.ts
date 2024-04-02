@@ -15,7 +15,6 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
 			fields: ['code'],
 			unique: true,
 		},
-
     ],
 })
 export class IamTenantModel extends Model<IamTenantModel>
@@ -153,23 +152,23 @@ export class IamTenantModel extends Model<IamTenantModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     name: string;
 
     @Column({
         field: 'code',
         allowNull: true,
-        type: DataTypes.STRING(63),
+        type: DataTypes.STRING(64),
     })
     code: string;
 
     @Column({
         field: 'logo',
         allowNull: true,
-        type: DataTypes.BLOB('medium'),
+        type: DataTypes.JSONB,
     })
-    logo: Buffer;
+    logo: any;
 
     @Column({
         field: 'isActive',
@@ -182,7 +181,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     @Column({
         field: 'meta',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     meta: any;
 

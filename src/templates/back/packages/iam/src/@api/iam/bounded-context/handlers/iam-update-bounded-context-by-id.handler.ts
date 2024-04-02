@@ -1,7 +1,7 @@
 import { IamBoundedContext, IamUpdateBoundedContextByIdInput } from '@api/graphql';
 import { IamBoundedContextDto, IamUpdateBoundedContextByIdDto } from '@api/iam/bounded-context';
 import { IamFindBoundedContextByIdQuery, IamUpdateBoundedContextByIdCommand } from '@app/iam/bounded-context';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff } from '@aurorajs.dev/core';
+import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

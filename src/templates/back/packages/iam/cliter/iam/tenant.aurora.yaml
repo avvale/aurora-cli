@@ -15,11 +15,9 @@ aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
   - name: parentId
     type: id
-    length: 36
     nullable: true
     relationship:
       type: many-to-one
@@ -32,15 +30,15 @@ aggregateProperties:
       type: select
   - name: name
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
   - name: code
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: true
     index: unique
   - name: logo
-    type: blob.medium
+    type: jsonb
     nullable: true
   - name: isActive
     type: boolean
@@ -48,7 +46,7 @@ aggregateProperties:
     defaultValue: false
     example: true
   - name: meta
-    type: json
+    type: jsonb
     nullable: true
   - name: accounts
     type: relationship

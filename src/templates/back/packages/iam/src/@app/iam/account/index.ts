@@ -3,6 +3,7 @@ export { IamCreateAccountCommand } from './application/create/iam-create-account
 export { IamCreateAccountsCommand } from './application/create/iam-create-accounts.command';
 export { IamUpdateAccountByIdCommand } from './application/update/iam-update-account-by-id.command';
 export { IamUpdateAccountsCommand } from './application/update/iam-update-accounts.command';
+export { IamUpdateAndIncrementAccountsCommand } from './application/update/iam-update-and-increment-accounts.command';
 export { IamUpsertAccountCommand } from './application/upsert/iam-upsert-account.command';
 export { IamDeleteAccountByIdCommand } from './application/delete/iam-delete-account-by-id.command';
 export { IamDeleteAccountsCommand } from './application/delete/iam-delete-accounts.command';
@@ -13,6 +14,10 @@ export { IamGetAccountsQuery } from './application/get/iam-get-accounts.query';
 export { IamFindAccountQuery } from './application/find/iam-find-account.query';
 export { IamFindAccountByIdQuery } from './application/find/iam-find-account-by-id.query';
 export { IamRawSQLAccountsQuery } from './application/raw-sql/iam-raw-sql-accounts.query';
+export { IamCountAccountQuery } from './application/count/iam-count-account.query';
+export { IamMaxAccountQuery } from './application/max/iam-max-account.query';
+export { IamMinAccountQuery } from './application/min/iam-min-account.query';
+export { IamSumAccountQuery } from './application/sum/iam-sum-account.query';
 
 // export mocks
 export { iamMockAccountData } from './infrastructure/mock/iam-mock-account.data';
@@ -27,6 +32,8 @@ export { IamDeletedAccountsEvent } from './application/events/iam-deleted-accoun
 export { IamDeletedAccountEvent } from './application/events/iam-deleted-account.event';
 export { IamUpdatedAccountsEvent } from './application/events/iam-updated-accounts.event';
 export { IamUpdatedAccountEvent } from './application/events/iam-updated-account.event';
+export { IamUpdatedAndIncrementedAccountsEvent } from './application/events/iam-updated-and-incremented-accounts.event';
+export { IamUpdatedAndIncrementedAccountEvent } from './application/events/iam-updated-and-incremented-account.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -52,6 +59,7 @@ import { IamCreateAccountCommandHandler } from './application/create/iam-create-
 import { IamCreateAccountsCommandHandler } from './application/create/iam-create-accounts.command-handler';
 import { IamUpdateAccountByIdCommandHandler } from './application/update/iam-update-account-by-id.command-handler';
 import { IamUpdateAccountsCommandHandler } from './application/update/iam-update-accounts.command-handler';
+import { IamUpdateAndIncrementAccountsCommandHandler } from './application/update/iam-update-and-increment-accounts.command-handler';
 import { IamUpsertAccountCommandHandler } from './application/upsert/iam-upsert-account.command-handler';
 import { IamDeleteAccountByIdCommandHandler } from './application/delete/iam-delete-account-by-id.command-handler';
 import { IamDeleteAccountsCommandHandler } from './application/delete/iam-delete-accounts.command-handler';
@@ -62,12 +70,17 @@ import { IamGetAccountsQueryHandler } from './application/get/iam-get-accounts.q
 import { IamFindAccountQueryHandler } from './application/find/iam-find-account.query-handler';
 import { IamFindAccountByIdQueryHandler } from './application/find/iam-find-account-by-id.query-handler';
 import { IamRawSQLAccountsQueryHandler } from './application/raw-sql/iam-raw-sql-accounts.query-handler';
+import { IamCountAccountQueryHandler } from './application/count/iam-count-account.query-handler';
+import { IamMaxAccountQueryHandler } from './application/max/iam-max-account.query-handler';
+import { IamMinAccountQueryHandler } from './application/min/iam-min-account.query-handler';
+import { IamSumAccountQueryHandler } from './application/sum/iam-sum-account.query-handler';
 
 // event handlers
 import { IamCreatedAccountEventHandler } from './application/events/iam-created-account.event-handler';
 import { IamCreatedAccountsEventHandler } from './application/events/iam-created-accounts.event-handler';
 import { IamUpdatedAccountEventHandler } from './application/events/iam-updated-account.event-handler';
 import { IamUpdatedAccountsEventHandler } from './application/events/iam-updated-accounts.event-handler';
+import { IamUpdatedAndIncrementedAccountsEventHandler } from './application/events/iam-updated-and-incremented-accounts.event-handler';
 import { IamDeletedAccountEventHandler } from './application/events/iam-deleted-account.event-handler';
 import { IamDeletedAccountsEventHandler } from './application/events/iam-deleted-accounts.event-handler';
 
@@ -79,8 +92,13 @@ import { IamGetAccountsService } from './application/get/iam-get-accounts.servic
 import { IamFindAccountService } from './application/find/iam-find-account.service';
 import { IamFindAccountByIdService } from './application/find/iam-find-account-by-id.service';
 import { IamRawSQLAccountsService } from './application/raw-sql/iam-raw-sql-accounts.service';
+import { IamCountAccountService } from './application/count/iam-count-account.service';
+import { IamMaxAccountService } from './application/max/iam-max-account.service';
+import { IamMinAccountService } from './application/min/iam-min-account.service';
+import { IamSumAccountService } from './application/sum/iam-sum-account.service';
 import { IamUpdateAccountByIdService } from './application/update/iam-update-account-by-id.service';
 import { IamUpdateAccountsService } from './application/update/iam-update-accounts.service';
+import { IamUpdateAndIncrementAccountsService } from './application/update/iam-update-and-increment-accounts.service';
 import { IamUpsertAccountService } from './application/upsert/iam-upsert-account.service';
 import { IamDeleteAccountByIdService } from './application/delete/iam-delete-account-by-id.service';
 import { IamDeleteAccountsService } from './application/delete/iam-delete-accounts.service';
@@ -91,6 +109,7 @@ export const IamAccountHandlers = [
     IamCreateAccountsCommandHandler,
     IamUpdateAccountByIdCommandHandler,
     IamUpdateAccountsCommandHandler,
+    IamUpdateAndIncrementAccountsCommandHandler,
     IamUpsertAccountCommandHandler,
     IamDeleteAccountByIdCommandHandler,
     IamDeleteAccountsCommandHandler,
@@ -101,12 +120,17 @@ export const IamAccountHandlers = [
     IamFindAccountQueryHandler,
     IamFindAccountByIdQueryHandler,
     IamRawSQLAccountsQueryHandler,
+    IamCountAccountQueryHandler,
+    IamMaxAccountQueryHandler,
+    IamMinAccountQueryHandler,
+    IamSumAccountQueryHandler,
 
     // events
     IamCreatedAccountEventHandler,
     IamCreatedAccountsEventHandler,
     IamUpdatedAccountEventHandler,
     IamUpdatedAccountsEventHandler,
+    IamUpdatedAndIncrementedAccountsEventHandler,
     IamDeletedAccountEventHandler,
     IamDeletedAccountsEventHandler,
 ];
@@ -119,8 +143,13 @@ export const IamAccountServices = [
     IamFindAccountService,
     IamFindAccountByIdService,
     IamRawSQLAccountsService,
+    IamCountAccountService,
+    IamMaxAccountService,
+    IamMinAccountService,
+    IamSumAccountService,
     IamUpdateAccountByIdService,
     IamUpdateAccountsService,
+    IamUpdateAndIncrementAccountsService,
     IamUpsertAccountService,
     IamDeleteAccountByIdService,
     IamDeleteAccountsService,

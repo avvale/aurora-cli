@@ -62,7 +62,6 @@ export const findByIdQuery = gql`
             id
             #FIELDS
         }
-        ${relationsFields}
     }
 `;
 

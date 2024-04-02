@@ -6,7 +6,7 @@ import { IamRole } from '@apps/iam/iam.types';
 import { RoleService } from '@apps/iam/role/role.service';
 import { OAuthScope } from '@apps/o-auth/o-auth.types';
 import { ScopeService } from '@apps/o-auth/scope';
-import { Action, Crumb, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
+import { Action, Crumb, SnackBarInvalidFormComponent, Utils, ViewDetailComponent, defaultDetailImports, log, mapActions } from '@aurora';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
@@ -70,6 +70,19 @@ export class ScopeDetailComponent extends ViewDetailComponent
         {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(
+                SnackBarInvalidFormComponent,
+                {
+                    data: {
+                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                    },
+                    panelClass      : 'error-snackbar',
+                    verticalPosition: 'top',
+                    duration        : 10000,
+                },
+            );
             return;
         }
 
@@ -90,8 +103,8 @@ export class ScopeDetailComponent extends ViewDetailComponent
         /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            code: ['', [Validators.required, Validators.maxLength(63)]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
+            code: ['', [Validators.required, Validators.maxLength(64)]],
+            name: ['', [Validators.required, Validators.maxLength(128)]],
             roleIds: [],
         });
         /* eslint-enable key-spacing */

@@ -1,4 +1,4 @@
-import { IamBoundedContext, IamCreatedBoundedContextEvent, IamCreatedBoundedContextsEvent, IamDeletedBoundedContextEvent, IamDeletedBoundedContextsEvent, IamUpdatedBoundedContextEvent, IamUpdatedBoundedContextsEvent } from '@app/iam/bounded-context';
+import { IamBoundedContext, IamCreatedBoundedContextEvent, IamCreatedBoundedContextsEvent, IamDeletedBoundedContextEvent, IamDeletedBoundedContextsEvent, IamUpdatedAndIncrementedBoundedContextEvent, IamUpdatedAndIncrementedBoundedContextsEvent, IamUpdatedBoundedContextEvent, IamUpdatedBoundedContextsEvent } from '@app/iam/bounded-context';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddBoundedContextsContextEvent extends AggregateRoot
@@ -41,6 +41,26 @@ export class IamAddBoundedContextsContextEvent extends AggregateRoot
             new IamUpdatedBoundedContextsEvent(
                 this.aggregateRoots.map(boundedContext =>
                     new IamUpdatedBoundedContextEvent(
+                        boundedContext.id.value,
+                        boundedContext.name.value,
+                        boundedContext.root.value,
+                        boundedContext.sort?.value,
+                        boundedContext.isActive.value,
+                        boundedContext.createdAt?.value,
+                        boundedContext.updatedAt?.value,
+                        boundedContext.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new IamUpdatedAndIncrementedBoundedContextsEvent(
+                this.aggregateRoots.map(boundedContext =>
+                    new IamUpdatedAndIncrementedBoundedContextEvent(
                         boundedContext.id.value,
                         boundedContext.name.value,
                         boundedContext.root.value,

@@ -5,7 +5,7 @@ import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorizat
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { OAuthIScopeRepository, oAuthMockScopeData, OAuthMockScopeSeeder } from '@app/o-auth/scope';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -189,35 +189,35 @@ describe('scope', () =>
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode is too large, has a maximum length of 63', () =>
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode is too large, has a maximum length of 64', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                code: '****************************************************************',
+                code: '*****************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthScopeCode is too large, has a maximum length of 63');
+                expect(res.body.message).toContain('Value for OAuthScopeCode is too large, has a maximum length of 64');
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName is too large, has a maximum length of 127', () =>
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                name: '********************************************************************************************************************************',
+                name: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for OAuthScopeName is too large, has a maximum length of 127');
+                expect(res.body.message).toContain('Value for OAuthScopeName is too large, has a maximum length of 128');
             });
     });
 

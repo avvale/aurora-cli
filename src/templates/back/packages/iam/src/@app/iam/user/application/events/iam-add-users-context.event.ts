@@ -1,4 +1,4 @@
-import { IamCreatedUserEvent, IamCreatedUsersEvent, IamDeletedUserEvent, IamDeletedUsersEvent, IamUpdatedUserEvent, IamUpdatedUsersEvent, IamUser } from '@app/iam/user';
+import { IamCreatedUserEvent, IamCreatedUsersEvent, IamDeletedUserEvent, IamDeletedUsersEvent, IamUpdatedAndIncrementedUserEvent, IamUpdatedAndIncrementedUsersEvent, IamUpdatedUserEvent, IamUpdatedUsersEvent, IamUser } from '@app/iam/user';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddUsersContextEvent extends AggregateRoot
@@ -47,6 +47,32 @@ export class IamAddUsersContextEvent extends AggregateRoot
             new IamUpdatedUsersEvent(
                 this.aggregateRoots.map(user =>
                     new IamUpdatedUserEvent(
+                        user.id.value,
+                        user.accountId.value,
+                        user.name.value,
+                        user.surname?.value,
+                        user.avatar?.value,
+                        user.mobile?.value,
+                        user.langId?.value,
+                        user.username.value,
+                        user.password.value,
+                        user.rememberToken?.value,
+                        user.meta?.value,
+                        user.createdAt?.value,
+                        user.updatedAt?.value,
+                        user.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new IamUpdatedAndIncrementedUsersEvent(
+                this.aggregateRoots.map(user =>
+                    new IamUpdatedAndIncrementedUserEvent(
                         user.id.value,
                         user.accountId.value,
                         user.name.value,

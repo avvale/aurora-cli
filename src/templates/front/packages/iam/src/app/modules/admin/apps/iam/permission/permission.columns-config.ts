@@ -6,5 +6,6 @@ export const permissionColumnsConfig: ColumnConfig[] = [
         field      : 'name',
         sort       : 'name',
         translation: 'iam.Name',
+        isUnaccent : true,
     },
 ];

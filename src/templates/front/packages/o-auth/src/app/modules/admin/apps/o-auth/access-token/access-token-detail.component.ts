@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AccessTokenService } from '@apps/o-auth/access-token';
 import { OAuthAccessToken } from '@apps/o-auth/o-auth.types';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
@@ -66,6 +66,19 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
         {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(
+                SnackBarInvalidFormComponent,
+                {
+                    data: {
+                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                    },
+                    panelClass      : 'error-snackbar',
+                    verticalPosition: 'top',
+                    duration        : 10000,
+                },
+            );
             return;
         }
 
@@ -83,15 +96,17 @@ export class AccessTokenDetailComponent extends ViewDetailComponent
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            clientId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            clientId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             accountId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
             token: ['', [Validators.required]],
-            name: ['', [Validators.maxLength(127)]],
-            isRevoked: false,
+            name: ['', [Validators.maxLength(128)]],
+            isRevoked: [false, [Validators.required]],
             expiresAt: '',
         });
+        /* eslint-enable key-spacing */
     }
 
     async handleAction(action: Action): Promise<void>

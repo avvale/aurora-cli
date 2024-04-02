@@ -11,15 +11,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token-detail.component.html",
-            "integrity": "sha1:e7a21ebe7aaed78f1d03b88635644c5f5dfbf6fc"
+            "integrity": "sha1:8bc976f09b874632aed7693b0e1ed0a297e14e2b"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token-detail.component.ts",
-            "integrity": "sha1:bcaa34b545fb305d7c1f3ca2fa713e6fa6740ecb"
+            "integrity": "sha1:a5cfcc0513610c65f3dd66e2611e334fbe32c283"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token-list.component.html",
-            "integrity": "sha1:3da19eba9f6351b440aa51dcb29b3a54569b11eb"
+            "integrity": "sha1:b802ec4563a8917beeda7267d9b45f87de7cea21"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token-list.component.ts",
@@ -27,7 +27,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token.columns-config.ts",
-            "integrity": "sha1:17466649f5bd5a97637ec4980f2b9c67086bb9e1"
+            "integrity": "sha1:d18b3ebb2f07125b5ef2d7fdf0f7798081fd7d3d"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token.graphql.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token.service.ts",
-            "integrity": "sha1:b92a4cfd856534ea5a25ac51c25916ed45c890c4"
+            "integrity": "sha1:1eb9ba4df69192295956441df007eb2f85fa08f0"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/index.ts",

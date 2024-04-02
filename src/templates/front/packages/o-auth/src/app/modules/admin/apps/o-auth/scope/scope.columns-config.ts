@@ -12,6 +12,7 @@ export const scopeColumnsConfig: ColumnConfig[] = [
         field      : 'name',
         sort       : 'name',
         translation: 'oAuth.Name',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.STRING,

@@ -107,11 +107,11 @@
                         appearance="outline"
                         class="col-12"
                     >
-                        <mat-label>{{ t('iam.Name') }}</mat-label>
+                        <mat-label>{{ t('Name') }}</mat-label>
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="127"
+                            maxlength="128"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
@@ -120,11 +120,11 @@
                         appearance="outline"
                         class="col-6"
                     >
-                        <mat-label>{{ t('iam.Code') }}</mat-label>
+                        <mat-label>{{ t('Code') }}</mat-label>
                         <input
                             matInput
                             formControlName="code"
-                            maxlength="63"
+                            maxlength="64"
                         >
                         <mat-error>{{ formErrors?.code | async }}</mat-error>
                     </mat-form-field>
@@ -132,7 +132,7 @@
                         appearance="outline"
                         class="col-12"
                     >
-                        <mat-label>{{ t('iam.Logo') }}</mat-label>
+                        <mat-label>{{ t('Logo') }}</mat-label>
                         <input
                             matInput
                             formControlName="logo"
@@ -144,7 +144,7 @@
                         <mat-checkbox
                             formControlName="isActive"
                         >
-                            {{ t('iam.IsActive') }}
+                            {{ t('Active') }}
                         </mat-checkbox>
                     </div>
 

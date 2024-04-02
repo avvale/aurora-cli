@@ -5,7 +5,7 @@ import { IamModule } from '@api/iam/iam.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { IamIAccountRepository, iamMockAccountData, IamMockAccountSeeder } from '@app/iam/account';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -14,7 +14,7 @@ import * as _ from 'lodash';
 import * as request from 'supertest';
 
 // ---- customizations ----
-import { jwtConfig } from '@app/o-auth/shared/jwt-config';
+import { jwtConfig } from '@app/o-auth/shared';
 import { AuthorizationGuard } from '@api/iam/shared/guards/authorization.guard';
 import { AuthModule } from '@app/o-auth/shared/modules/auth.module';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
@@ -230,7 +230,7 @@ describe('account', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccountId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamAccountId must be defined, can not be undefined');
             });
     });
 
@@ -247,7 +247,7 @@ describe('account', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccountType must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamAccountType must be defined, can not be undefined');
             });
     });
 
@@ -264,7 +264,7 @@ describe('account', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccountEmail must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamAccountEmail must be defined, can not be undefined');
             });
     });
 
@@ -281,7 +281,7 @@ describe('account', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for AccountIsActive must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for IamAccountIsActive must be defined, can not be undefined');
             });
     });
 
@@ -1077,7 +1077,8 @@ describe('account', () =>
                             code
                             email
                             isActive
-                            clientId
+                            tags
+                            scopes
                             dApplicationCodes
                             dPermissions
                             dTenants
@@ -1118,7 +1119,8 @@ describe('account', () =>
                             code
                             email
                             isActive
-                            clientId
+                            tags
+                            scopes
                             dApplicationCodes
                             dPermissions
                             dTenants

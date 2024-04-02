@@ -3,6 +3,7 @@ export { IamCreateRoleAccountCommand } from './application/create/iam-create-rol
 export { IamCreateRolesAccountsCommand } from './application/create/iam-create-roles-accounts.command';
 export { IamUpdateRoleAccountByIdCommand } from './application/update/iam-update-role-account-by-id.command';
 export { IamUpdateRolesAccountsCommand } from './application/update/iam-update-roles-accounts.command';
+export { IamUpdateAndIncrementRolesAccountsCommand } from './application/update/iam-update-and-increment-roles-accounts.command';
 export { IamUpsertRoleAccountCommand } from './application/upsert/iam-upsert-role-account.command';
 export { IamDeleteRoleAccountByIdCommand } from './application/delete/iam-delete-role-account-by-id.command';
 export { IamDeleteRolesAccountsCommand } from './application/delete/iam-delete-roles-accounts.command';
@@ -13,6 +14,10 @@ export { IamGetRolesAccountsQuery } from './application/get/iam-get-roles-accoun
 export { IamFindRoleAccountQuery } from './application/find/iam-find-role-account.query';
 export { IamFindRoleAccountByIdQuery } from './application/find/iam-find-role-account-by-id.query';
 export { IamRawSQLRolesAccountsQuery } from './application/raw-sql/iam-raw-sql-roles-accounts.query';
+export { IamCountRoleAccountQuery } from './application/count/iam-count-role-account.query';
+export { IamMaxRoleAccountQuery } from './application/max/iam-max-role-account.query';
+export { IamMinRoleAccountQuery } from './application/min/iam-min-role-account.query';
+export { IamSumRoleAccountQuery } from './application/sum/iam-sum-role-account.query';
 
 // export mocks
 export { iamMockRoleAccountData } from './infrastructure/mock/iam-mock-role-account.data';
@@ -27,6 +32,8 @@ export { IamDeletedRolesAccountsEvent } from './application/events/iam-deleted-r
 export { IamDeletedRoleAccountEvent } from './application/events/iam-deleted-role-account.event';
 export { IamUpdatedRolesAccountsEvent } from './application/events/iam-updated-roles-accounts.event';
 export { IamUpdatedRoleAccountEvent } from './application/events/iam-updated-role-account.event';
+export { IamUpdatedAndIncrementedRolesAccountsEvent } from './application/events/iam-updated-and-incremented-roles-accounts.event';
+export { IamUpdatedAndIncrementedRoleAccountEvent } from './application/events/iam-updated-and-incremented-role-account.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -52,6 +59,7 @@ import { IamCreateRoleAccountCommandHandler } from './application/create/iam-cre
 import { IamCreateRolesAccountsCommandHandler } from './application/create/iam-create-roles-accounts.command-handler';
 import { IamUpdateRoleAccountByIdCommandHandler } from './application/update/iam-update-role-account-by-id.command-handler';
 import { IamUpdateRolesAccountsCommandHandler } from './application/update/iam-update-roles-accounts.command-handler';
+import { IamUpdateAndIncrementRolesAccountsCommandHandler } from './application/update/iam-update-and-increment-roles-accounts.command-handler';
 import { IamUpsertRoleAccountCommandHandler } from './application/upsert/iam-upsert-role-account.command-handler';
 import { IamDeleteRoleAccountByIdCommandHandler } from './application/delete/iam-delete-role-account-by-id.command-handler';
 import { IamDeleteRolesAccountsCommandHandler } from './application/delete/iam-delete-roles-accounts.command-handler';
@@ -62,12 +70,17 @@ import { IamGetRolesAccountsQueryHandler } from './application/get/iam-get-roles
 import { IamFindRoleAccountQueryHandler } from './application/find/iam-find-role-account.query-handler';
 import { IamFindRoleAccountByIdQueryHandler } from './application/find/iam-find-role-account-by-id.query-handler';
 import { IamRawSQLRolesAccountsQueryHandler } from './application/raw-sql/iam-raw-sql-roles-accounts.query-handler';
+import { IamCountRoleAccountQueryHandler } from './application/count/iam-count-role-account.query-handler';
+import { IamMaxRoleAccountQueryHandler } from './application/max/iam-max-role-account.query-handler';
+import { IamMinRoleAccountQueryHandler } from './application/min/iam-min-role-account.query-handler';
+import { IamSumRoleAccountQueryHandler } from './application/sum/iam-sum-role-account.query-handler';
 
 // event handlers
 import { IamCreatedRoleAccountEventHandler } from './application/events/iam-created-role-account.event-handler';
 import { IamCreatedRolesAccountsEventHandler } from './application/events/iam-created-roles-accounts.event-handler';
 import { IamUpdatedRoleAccountEventHandler } from './application/events/iam-updated-role-account.event-handler';
 import { IamUpdatedRolesAccountsEventHandler } from './application/events/iam-updated-roles-accounts.event-handler';
+import { IamUpdatedAndIncrementedRolesAccountsEventHandler } from './application/events/iam-updated-and-incremented-roles-accounts.event-handler';
 import { IamDeletedRoleAccountEventHandler } from './application/events/iam-deleted-role-account.event-handler';
 import { IamDeletedRolesAccountsEventHandler } from './application/events/iam-deleted-roles-accounts.event-handler';
 
@@ -79,8 +92,13 @@ import { IamGetRolesAccountsService } from './application/get/iam-get-roles-acco
 import { IamFindRoleAccountService } from './application/find/iam-find-role-account.service';
 import { IamFindRoleAccountByIdService } from './application/find/iam-find-role-account-by-id.service';
 import { IamRawSQLRolesAccountsService } from './application/raw-sql/iam-raw-sql-roles-accounts.service';
+import { IamCountRoleAccountService } from './application/count/iam-count-role-account.service';
+import { IamMaxRoleAccountService } from './application/max/iam-max-role-account.service';
+import { IamMinRoleAccountService } from './application/min/iam-min-role-account.service';
+import { IamSumRoleAccountService } from './application/sum/iam-sum-role-account.service';
 import { IamUpdateRoleAccountByIdService } from './application/update/iam-update-role-account-by-id.service';
 import { IamUpdateRolesAccountsService } from './application/update/iam-update-roles-accounts.service';
+import { IamUpdateAndIncrementRolesAccountsService } from './application/update/iam-update-and-increment-roles-accounts.service';
 import { IamUpsertRoleAccountService } from './application/upsert/iam-upsert-role-account.service';
 import { IamDeleteRoleAccountByIdService } from './application/delete/iam-delete-role-account-by-id.service';
 import { IamDeleteRolesAccountsService } from './application/delete/iam-delete-roles-accounts.service';
@@ -91,6 +109,7 @@ export const IamRoleAccountHandlers = [
     IamCreateRolesAccountsCommandHandler,
     IamUpdateRoleAccountByIdCommandHandler,
     IamUpdateRolesAccountsCommandHandler,
+    IamUpdateAndIncrementRolesAccountsCommandHandler,
     IamUpsertRoleAccountCommandHandler,
     IamDeleteRoleAccountByIdCommandHandler,
     IamDeleteRolesAccountsCommandHandler,
@@ -101,12 +120,17 @@ export const IamRoleAccountHandlers = [
     IamFindRoleAccountQueryHandler,
     IamFindRoleAccountByIdQueryHandler,
     IamRawSQLRolesAccountsQueryHandler,
+    IamCountRoleAccountQueryHandler,
+    IamMaxRoleAccountQueryHandler,
+    IamMinRoleAccountQueryHandler,
+    IamSumRoleAccountQueryHandler,
 
     // events
     IamCreatedRoleAccountEventHandler,
     IamCreatedRolesAccountsEventHandler,
     IamUpdatedRoleAccountEventHandler,
     IamUpdatedRolesAccountsEventHandler,
+    IamUpdatedAndIncrementedRolesAccountsEventHandler,
     IamDeletedRoleAccountEventHandler,
     IamDeletedRolesAccountsEventHandler,
 ];
@@ -119,8 +143,13 @@ export const IamRoleAccountServices = [
     IamFindRoleAccountService,
     IamFindRoleAccountByIdService,
     IamRawSQLRolesAccountsService,
+    IamCountRoleAccountService,
+    IamMaxRoleAccountService,
+    IamMinRoleAccountService,
+    IamSumRoleAccountService,
     IamUpdateRoleAccountByIdService,
     IamUpdateRolesAccountsService,
+    IamUpdateAndIncrementRolesAccountsService,
     IamUpsertRoleAccountService,
     IamDeleteRoleAccountByIdService,
     IamDeleteRolesAccountsService,

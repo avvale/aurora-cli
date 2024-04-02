@@ -5,7 +5,7 @@ import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { IamRole } from '@apps/iam/iam.types';
 import { RoleService } from '@apps/iam/role';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, GridState, GridStateService, log, mapActions, Operator, QueryStatementHandler, SelectionChange, SelectionModel, Utils, ViewDetailComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, log, mapActions, Operator, QueryStatementHandler, SelectionChange, SelectionModel, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { NgFor } from '@angular/common';
 import { permissionColumnsConfig } from '../permission';
@@ -21,7 +21,8 @@ import { getQueryExportPermissionsRoles } from '../permission-role/permission-ro
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleCustomHeaderTemplateDirective, GridSelectMultipleElementsComponent, MatCheckboxModule, NgFor,
+        GridSelectMultipleElementsModule, MatCheckboxModule,
+        GridSelectMultipleCustomHeaderDialogTemplateDirective, NgFor,
     ],
 })
 export class RoleDetailComponent extends ViewDetailComponent
@@ -162,6 +163,19 @@ export class RoleDetailComponent extends ViewDetailComponent
         {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(
+                SnackBarInvalidFormComponent,
+                {
+                    data: {
+                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                    },
+                    panelClass      : 'error-snackbar',
+                    verticalPosition: 'top',
+                    duration        : 10000,
+                },
+            );
             return;
         }
 
@@ -182,7 +196,7 @@ export class RoleDetailComponent extends ViewDetailComponent
         /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
+            name: ['', [Validators.required, Validators.maxLength(128)]],
             isMaster: false,
             permissionIds: [],
         });

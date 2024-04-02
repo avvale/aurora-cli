@@ -1,4 +1,4 @@
-import { OAuthCreatedScopeEvent, OAuthCreatedScopesEvent, OAuthDeletedScopeEvent, OAuthDeletedScopesEvent, OAuthScope, OAuthUpdatedScopeEvent, OAuthUpdatedScopesEvent } from '@app/o-auth/scope';
+import { OAuthCreatedScopeEvent, OAuthCreatedScopesEvent, OAuthDeletedScopeEvent, OAuthDeletedScopesEvent, OAuthScope, OAuthUpdatedAndIncrementedScopeEvent, OAuthUpdatedAndIncrementedScopesEvent, OAuthUpdatedScopeEvent, OAuthUpdatedScopesEvent } from '@app/o-auth/scope';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class OAuthAddScopesContextEvent extends AggregateRoot
@@ -40,6 +40,25 @@ export class OAuthAddScopesContextEvent extends AggregateRoot
             new OAuthUpdatedScopesEvent(
                 this.aggregateRoots.map(scope =>
                     new OAuthUpdatedScopeEvent(
+                        scope.id.value,
+                        scope.code.value,
+                        scope.name.value,
+                        scope.roleIds?.value,
+                        scope.createdAt?.value,
+                        scope.updatedAt?.value,
+                        scope.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new OAuthUpdatedAndIncrementedScopesEvent(
+                this.aggregateRoots.map(scope =>
+                    new OAuthUpdatedAndIncrementedScopeEvent(
                         scope.id.value,
                         scope.code.value,
                         scope.name.value,

@@ -18,7 +18,6 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
 			fields: ['username'],
 			unique: true,
 		},
-
     ],
 })
 export class IamUserModel extends Model<IamUserModel>
@@ -155,7 +154,7 @@ export class IamUserModel extends Model<IamUserModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     name: string;
 
@@ -176,7 +175,7 @@ export class IamUserModel extends Model<IamUserModel>
     @Column({
         field: 'mobile',
         allowNull: true,
-        type: DataTypes.STRING(63),
+        type: DataTypes.STRING(64),
     })
     mobile: string;
 
@@ -190,7 +189,7 @@ export class IamUserModel extends Model<IamUserModel>
     @Column({
         field: 'username',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     username: string;
 
@@ -211,7 +210,7 @@ export class IamUserModel extends Model<IamUserModel>
     @Column({
         field: 'meta',
         allowNull: true,
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
     })
     meta: any;
 

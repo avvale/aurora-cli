@@ -140,14 +140,14 @@ export class OAuthClientModel extends Model<OAuthClientModel>
     @Column({
         field: 'name',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     name: string;
 
     @Column({
         field: 'secret',
         allowNull: false,
-        type: DataTypes.STRING(127),
+        type: DataTypes.STRING(128),
     })
     secret: string;
 

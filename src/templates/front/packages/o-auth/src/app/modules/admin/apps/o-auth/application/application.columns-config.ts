@@ -6,18 +6,21 @@ export const applicationColumnsConfig: ColumnConfig[] = [
         field      : 'code',
         sort       : 'code',
         translation: 'oAuth.Code',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.STRING,
         field      : 'name',
         sort       : 'name',
         translation: 'oAuth.Name',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.STRING,
         field      : 'secret',
         sort       : 'secret',
         translation: 'oAuth.Secret',
+        isUnaccent : true,
     },
     {
         type       : ColumnDataType.BOOLEAN,

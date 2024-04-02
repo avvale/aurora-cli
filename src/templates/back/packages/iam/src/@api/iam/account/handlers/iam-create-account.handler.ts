@@ -138,6 +138,7 @@ export class IamCreateAccountHandler
                 email            : payload.email,
                 isActive         : payload.isActive,
                 clientId         : client?.id,
+                tags             : payload.tags,
                 scopes           : payload.scopes,
                 dApplicationCodes: client?.applications.map(application => application.code),
                 dPermissions     : iamCreatePermissionsFromRoles(roles),

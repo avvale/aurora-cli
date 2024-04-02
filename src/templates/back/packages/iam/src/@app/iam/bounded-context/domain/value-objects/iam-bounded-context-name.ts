@@ -10,7 +10,7 @@ export class IamBoundedContextName extends StringValueObject
             name       : 'IamBoundedContextName',
             nullable   : false,
             undefinable: false,
-            maxLength  : 127,
+            maxLength  : 128,
         }, validationRules));
     }
 }

@@ -10,7 +10,7 @@ export class OAuthApplicationCode extends StringValueObject
             name       : 'OAuthApplicationCode',
             nullable   : false,
             undefinable: false,
-            maxLength  : 63,
+            maxLength  : 64,
         }, validationRules));
     }
 }

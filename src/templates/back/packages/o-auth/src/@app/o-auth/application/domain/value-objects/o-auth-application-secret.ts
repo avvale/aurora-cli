@@ -10,7 +10,7 @@ export class OAuthApplicationSecret extends StringValueObject
             name       : 'OAuthApplicationSecret',
             nullable   : false,
             undefinable: false,
-            maxLength  : 127,
+            maxLength  : 128,
         }, validationRules));
     }
 }
