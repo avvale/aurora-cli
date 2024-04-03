@@ -10,12 +10,14 @@ env:
   # don't forget set like bin/bash ftp user
   # SSH private key
   SERVER_KEY: $\{{ secrets.SERVER_KEY }}
+  # security phrase for SSH private key
+  SERVER_KEY_PHRASE: $\{{ secrets.SERVER_KEY_PHRASE }}
   # default port SFTP 22
   SERVER_PORT: $\{{ secrets.SERVER_PORT }}
   SERVER_HOST: $\{{ secrets.SERVER_HOST }}
   # SFTP/SSH username
   SERVER_USERNAME: $\{{ secrets.SERVER_USERNAME }}
-  # example /var/www/vhosts/contoso.com/httpdocs
+  # example /var/www/vhosts/contoso.com
   SERVER_PATH: $\{{ secrets.SERVER_PATH }}
 
   # application secrets
@@ -123,26 +125,28 @@ jobs:
         with:
           switches: -avzh --delete --include=".env" --exclude=".*"
           path: src/
-          remote_path: $\{{ env.SERVER_PATH }}
+          remote_path: $\{{ env.SERVER_PATH }}/httpdocs
           remote_host: $\{{ env.SERVER_HOST }}
           remote_port: $\{{ env.SERVER_PORT }}
           remote_user: $\{{ env.SERVER_USERNAME }}
           remote_key: $\{{ env.SERVER_KEY }}
+          remote_key_pass: $\{{ env.SERVER_KEY_PHRASE }}
 
       - name: Print server path
         run: |
-          echo ${{ env.SERVER_PATH }}
+          echo $\{{ env.SERVER_PATH }}
         shell: sh
 
       - name: Execute command on remote server
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ env.SERVER_HOST }}
-          username: ${{ env.SERVER_USERNAME }}
-          key: ${{ env.SERVER_KEY }}
-          port: ${{ env.SERVER_PORT }}
+          host: $\{{ env.SERVER_HOST }}
+          username: $\{{ env.SERVER_USERNAME }}
+          key: $\{{ env.SERVER_KEY }}
+          passphrase: $\{{ env.SERVER_KEY_PHRASE }}
+          port: $\{{ env.SERVER_PORT }}
           script: |
             whoami
             ls -al
-            mkdir -p ${{ env.SERVER_PATH }}/storage/app/public
-            ln -s ${{ env.SERVER_PATH }}/storage/app/public ${{ env.SERVER_PATH }}/httpdocs/public
+            mkdir -p $\{{ env.SERVER_PATH }}/storage/app/public
+            ln -s $\{{ env.SERVER_PATH }}/storage/app/public $\{{ env.SERVER_PATH }}/httpdocs/public
