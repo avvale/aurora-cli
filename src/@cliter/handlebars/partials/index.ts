@@ -16,4 +16,6 @@ import './relationships/grid-elements-manager-web-component';
 import './relationships/grid-select-element-web-component';
 import './relationships/grid-select-multiple-elements-web-component';
 import './relationships/multiple-select-web-component';
+import './relationships/search-multiple-select-web-component';
+import './relationships/search-select-web-component';
 import './relationships/select-web-component';

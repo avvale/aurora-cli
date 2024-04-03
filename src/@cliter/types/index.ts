@@ -302,4 +302,14 @@ export enum WebComponentType
      * dropdown to select multiple elements from a list of related items
      */
     MULTIPLE_SELECT = 'multiple-select',
+
+    /**
+     * dropdown to select one element from a list of related items with search functionality
+     */
+    SEARCH_SELECT = 'search-select',
+
+    /**
+     * dropdown to select multiple elements from a list of related items with search functionality
+     */
+    SEARCH_MULTIPLE_SELECT = 'search-multiple-select',
 }

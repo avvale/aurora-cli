@@ -196,6 +196,14 @@
                     {{> multipleSelectWebComponent schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq webComponent.type 'search-select'}}
+                    {{> searchSelectWebComponent schema=../schema property=.}}
+
+                    {{/eq}}
+                    {{#eq webComponent.type 'search-multiple-select'}}
+                    {{> searchMultipleSelectWebComponent schema=../schema property=.}}
+
+                    {{/eq}}
                     {{#eq webComponent.type 'grid-select-element'}}
                     {{> gridSelectElementWebComponent schema=../schema property=.}}
 

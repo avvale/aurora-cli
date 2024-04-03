@@ -209,6 +209,12 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{#eq webComponent.type 'multiple-select'}}
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$: Observable<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[]>;
     {{/eq}}
+    {{#eq webComponent.type 'search-select'}}
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$: Observable<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[]>;
+    {{/eq}}
+    {{#eq webComponent.type 'search-multiple-select'}}
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$: Observable<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[]>;
+    {{/eq}}
     {{#eq webComponent.type 'grid-select-element'}}
     /* #region variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
     @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridElementSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectElementComponent;
