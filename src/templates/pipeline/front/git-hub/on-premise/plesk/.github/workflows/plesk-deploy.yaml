@@ -10,12 +10,14 @@ env:
   # don't forget set like bin/bash ftp user
   # SSH private key
   SERVER_KEY: $\{{ secrets.SERVER_KEY }}
+  # security phrase for SSH private key
+  SERVER_KEY_PHRASE: ${{ secrets.PLESK_DEVELOPMENT_SERVER_KEY_PHRASE }}
   # default port SFTP 22
   SERVER_PORT: $\{{ secrets.SERVER_PORT }}
   SERVER_HOST: $\{{ secrets.SERVER_HOST }}
   # SFTP/SSH username
   SERVER_USERNAME: $\{{ secrets.SERVER_USERNAME }}
-  # example /var/www/vhosts/contoso.com/httpdocs
+  # example /var/www/vhosts/contoso.com
   SERVER_PATH: $\{{ secrets.SERVER_PATH }}
   HTACCESS: |
     <IfModule mod_rewrite.c>
@@ -51,7 +53,7 @@ jobs:
     - name: Install node
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '20'
 
     - name: Install dependencies
       run: npm ci
@@ -95,7 +97,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Create .htaccess file
         run: |
@@ -109,8 +111,9 @@ jobs:
         with:
           switches: -avzh --delete --include=".htaccess" --exclude=".*"
           path: src/
-          remote_path: $\{{ env.SERVER_PATH }}
+          remote_path: $\{{ env.SERVER_PATH }}/httpdocs
           remote_host: $\{{ env.SERVER_HOST }}
           remote_port: $\{{ env.SERVER_PORT }}
           remote_user: $\{{ env.SERVER_USERNAME }}
           remote_key: $\{{ env.SERVER_KEY }}
+          remote_key_pass: ${{ env.SERVER_KEY_PHRASE }}
