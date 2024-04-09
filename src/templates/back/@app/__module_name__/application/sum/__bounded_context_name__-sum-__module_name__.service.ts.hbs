@@ -29,7 +29,7 @@ export class {{ toPascalCase schema.boundedContextName }}Sum{{ toPascalCase sche
         cQMetadata?: CQMetadata,
     ): Promise<number>
     {
-        return await this.repository.max(
+        return await this.repository.sum(
             column,
             {
                 queryStatement,

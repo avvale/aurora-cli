@@ -96,6 +96,11 @@ export class {{ toPascalCase schema.moduleName }}Service
     {{ toCamelCase schema.moduleName }}Subject$: BehaviorSubject<{{ schema.aggregateName }} | null> = new BehaviorSubject(null);
     {{ toCamelCase schema.moduleNames }}Subject$: BehaviorSubject<{{ schema.aggregateName }}[] | null> = new BehaviorSubject(null);
 
+    // scoped subjects
+    paginationScoped: { [key: string]: BehaviorSubject<GridData<{{ schema.aggregateName }}> | null>; } = {};
+    {{ toCamelCase schema.moduleName }}Scoped: { [key: string]: BehaviorSubject<{{ schema.aggregateName }} | null>; } = {};
+    {{ toCamelCase schema.moduleNames }}Scoped: { [key: string]: BehaviorSubject<{{ schema.aggregateName }}[] | null>; } = {};
+
     constructor(
         private readonly graphqlService: GraphQLService,
         {{#each (getWebComponentsProperties schema.aggregateProperties) }}
@@ -121,17 +126,73 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.{{ toCamelCase schema.moduleNames }}Subject$.asObservable();
     }
 
+    // allows to store different types of pagination under different scopes this allows us
+    // to have multiple observables with different streams of pagination data.
+    setScopePagination(scope: string, pagination: GridData<{{ schema.aggregateName }}>): void
+    {
+        if (this.paginationScoped[scope])
+        {
+            this.paginationScoped[scope].next(pagination);
+            return;
+        }
+        // create new subject if not exist
+        this.paginationScoped[scope] = new BehaviorSubject(pagination);
+    }
+
+    // get pagination observable by scope
+    getScopePagination(scope: string): Observable<GridData<{{ schema.aggregateName }}>>
+    {
+        if (this.paginationScoped[scope]) return this.paginationScoped[scope].asObservable();
+        return null;
+    }
+
+    setScope{{ toPascalCase schema.moduleName }}(scope: string, object: {{ schema.aggregateName }}): void
+    {
+        if (this.{{ toCamelCase schema.moduleName }}Scoped[scope])
+        {
+            this.{{ toCamelCase schema.moduleName }}Scoped[scope].next(object);
+            return;
+        }
+        // create new subject if not exist
+        this.{{ toCamelCase schema.moduleName }}Scoped[scope] = new BehaviorSubject(object);
+    }
+
+    getScope{{ toPascalCase schema.moduleName }}(scope: string): Observable<{{ schema.aggregateName }}>
+    {
+        if (this.{{ toCamelCase schema.moduleName }}Scoped[scope]) return this.{{ toCamelCase schema.moduleName }}Scoped[scope].asObservable();
+        return null;
+    }
+
+    setScope{{ toPascalCase schema.moduleNames }}(scope: string, objects: {{ schema.aggregateName }}[]): void
+    {
+        if (this.{{ toCamelCase schema.moduleNames }}Scoped[scope])
+        {
+            this.{{ toCamelCase schema.moduleNames }}Scoped[scope].next(objects);
+            return;
+        }
+        // create new subject if not exist
+        this.{{ toCamelCase schema.moduleNames }}Scoped[scope] = new BehaviorSubject(objects);
+    }
+
+    getScope{{ toPascalCase schema.moduleNames }}(scope: string): Observable<{{ schema.aggregateName }}[]>
+    {
+        if (this.{{ toCamelCase schema.moduleNames }}Scoped[scope]) return this.{{ toCamelCase schema.moduleNames }}Scoped[scope].asObservable();
+        return null;
+    }
+
     pagination(
         {
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<GridData<{{ schema.aggregateName }}>>
     {
@@ -152,7 +213,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map(result => result.data.pagination),
-                tap(pagination => this.paginationSubject$.next(pagination)),
+                tap(pagination => scope ? this.setScopePagination(scope, pagination) : this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -162,11 +223,13 @@ export class {{ toPascalCase schema.moduleName }}Service
             id = '',
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: {{ schema.aggregateName }};
@@ -190,10 +253,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScope{{ toPascalCase schema.moduleName }}(scope, data.object) : this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object)),
             );
     }
 
@@ -222,6 +282,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
             {{/eq}}
             {{/each}}
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
@@ -245,6 +306,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
             {{/eq}}
             {{/each}}
+            scope?: string;
         } = {},
     ): Observable<{
         object: {{ schema.aggregateName }};
@@ -316,7 +378,14 @@ export class {{ toPascalCase schema.moduleName }}Service
                 map(result => result.data),
                 tap(data =>
                 {
-                    this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
+                    if (scope)
+                    {
+                        this.setScope{{ toPascalCase schema.moduleName }}(scope, data.object);
+                    }
+                    else
+                    {
+                        this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
+                    }
                     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
                     {{#eq webComponent.type 'select'}}
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Subject$.next(data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }});
@@ -342,11 +411,13 @@ export class {{ toPascalCase schema.moduleName }}Service
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: {{ schema.aggregateName }};
@@ -370,10 +441,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScope{{ toPascalCase schema.moduleName }}(scope, data.object) : this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object)),
             );
     }
 
@@ -383,11 +451,13 @@ export class {{ toPascalCase schema.moduleName }}Service
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         objects: {{ schema.aggregateName }}[];
@@ -411,10 +481,7 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.{{ toCamelCase schema.moduleNames }}Subject$.next(data.objects);
-                }),
+                tap(data => scope ? this.setScope{{ toPascalCase schema.moduleNames }}(scope, data.objects) : this.{{ toCamelCase schema.moduleNames }}Subject$.next(data.objects)),
             );
     }
 

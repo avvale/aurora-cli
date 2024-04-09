@@ -23,7 +23,7 @@
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
-export const {{ toCamelCase schema.moduleName }}MainGridList = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
+export const {{ toCamelCase schema.moduleName }}MainGridListId = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
 
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-list',
@@ -44,7 +44,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         { translation: 'App', routerLink: ['/']},
         { translation: '{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase schema.moduleNames }}' },
     ];
-    gridId: string = {{ toCamelCase schema.moduleName }}MainGridList;
+    gridId: string = {{ toCamelCase schema.moduleName }}MainGridListId;
     gridData$: Observable<GridData<{{ schema.aggregateName }}>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
