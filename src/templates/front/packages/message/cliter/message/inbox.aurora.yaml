@@ -1,0 +1,111 @@
+version: 0.0.1
+boundedContextName: message
+moduleName: inbox
+moduleNames: inboxes
+aggregateName: MessageInbox
+hasOAuth: true
+hasTenant: true
+hasAuditing: true
+front:
+  solidIcon: mat_solid:move_to_inbox
+  outlineIcon: mat_outline:move_to_inbox
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: tenantIds
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
+    index: index
+  - name: messageId
+    type: id
+    nullable: true
+    relationship:
+      type: many-to-one
+      aggregateName: MessageMessage
+      modulePath: message/message
+      key: id
+      field: message
+      avoidConstraint: true
+  - name: sort
+    type: int
+    nullable: false
+  - name: accountId
+    type: id
+    nullable: false
+    index: index
+  - name: accountCode
+    type: varchar
+    length: 128
+    nullable: true
+    index: index
+  - name: isImportant
+    type: boolean
+    nullable: false
+  - name: sentAt
+    type: timestamp
+    nullable: false
+  - name: subject
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: body
+    type: text
+    nullable: false
+  - name: link
+    type: varchar
+    maxLength: 2046
+    nullable: true
+  - name: isInternalLink
+    type: boolean
+    nullable: true
+  - name: image
+    type: jsonb
+    nullable: true
+  - name: icon
+    type: varchar
+    maxLength: 64
+    nullable: true
+  - name: attachments
+    type: jsonb
+    nullable: true
+  - name: isRead
+    type: boolean
+    nullable: false
+  - name: isReadAtLeastOnce
+    type: boolean
+    nullable: false
+  - name: meta
+    type: jsonb
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis:
+  - path: message/inbox/check-messages
+    resolverType: mutation
+    httpMethod: post
+  - path: message/inbox/paginate-customer-messages
+    resolverType: query
+    httpMethod: post
+  - path: message/inbox/find-customer-message
+    resolverType: query
+    httpMethod: post
+  - path: message/inbox/delete-customer-message
+    resolverType: mutation
+    httpMethod: post
+  - path: message/inbox/read-customer-message
+    resolverType: mutation
+    httpMethod: post
+  - path: message/inbox/unread-customer-message
+    resolverType: mutation
+    httpMethod: post

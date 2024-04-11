@@ -1,0 +1,231 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    fontSet="material-symbols-outlined"
+                    class="icon-size-8 mr-2"
+                >
+                    all_inbox
+                </mat-icon>
+                {{ t('message.MessageCenter') }}
+            </au-title>
+        </div>
+    </div>
+    <!-- / Header -->
+
+    <div class="relative flex flex-auto w-full h-full bg-card dark:bg-transparent">
+
+        <!-- mails list -->
+        @if (countMessages() > 0)
+        {
+            <div class="relative flex flex-auto flex-col w-full min-w-0 lg:min-w-90 lg:max-w-90 border-r z-10">
+
+                <!-- Header -->
+                <div class="relative flex flex-0 items-center justify-between h-16 px-4 border-b bg-gray-50 dark:bg-transparent">
+
+                    <div class="flex items-center">
+                        <!-- Sidebar toggle button -->
+                        <mat-icon
+                            fontSet="material-symbols-outlined"
+                            class="icon-size-5 mr-2"
+                        >
+                            notification_multiple
+                        </mat-icon>
+                        <!-- Category name -->
+                        <div class="ml-2 font-semibold uppercase">{{ t('message.Messages') }}</div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center">
+                        <!-- Info -->
+                        <div class="flex items-center mr-3 text-md font-medium">
+                            <span>{{ firstMessageOfPage() }}</span>
+                            <span class="mx-1 text-secondary">-</span>
+                            <span>{{ lastMessageOfPage() }}</span>
+                            <span class="mx-1 text-secondary">of</span>
+                            <span>{{ totalMessages() }}</span>
+                        </div>
+
+                        <!-- previous page button -->
+                        <a
+                            class="w-8 h-8 min-h-8"
+                            mat-icon-button
+                            [disabled]="previousOffset() < 0"
+                            (click)="
+                                actionService.action({
+                                    id: 'message::messageCenter.list.pagination',
+                                    isViewAction: false,
+                                    meta: {
+                                        query: {
+                                            offset: previousOffset(),
+                                            limit: limit,
+                                            order: [['sort', 'desc']]
+                                        }
+                                    }
+                                })
+                            "
+                        >
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:chevron-left'"
+                            >
+                            </mat-icon>
+                        </a>
+
+                        <!-- next page button-->
+                       <a
+                            class="w-8 h-8 min-h-8"
+                            mat-icon-button
+                            [disabled]="nextOffset() >= totalMessages()"
+                            (click)="
+                                actionService.action({
+                                    id: 'message::messageCenter.list.pagination',
+                                    isViewAction: false,
+                                    meta: {
+                                        query: {
+                                            offset: nextOffset(),
+                                            limit: limit,
+                                            order: [['sort', 'desc']]
+                                        }
+                                    }
+                                })
+                            "
+                        >
+                            <mat-icon
+                                class="icon-size-5"
+                                [svgIcon]="'heroicons_solid:chevron-right'"
+                            >
+                            </mat-icon>
+                        </a>
+                    </div>
+
+                    <!-- Loading bar -->
+                    @if(mailsLoading)
+                    {
+                        <mat-progress-bar
+                            class="absolute inset-x-0 bottom-0 h-0.5"
+                            [mode]="'indeterminate'"
+                        >
+                        </mat-progress-bar>
+                    }
+                </div>
+
+                <!-- Mail list -->
+                <div
+                    class="overflow-y-auto"
+                    #messageList
+                >
+                    <!-- Item loop -->
+                    @for (message of messages(); track message.id; let i = $index)
+                    {
+                        <!-- Item -->
+                        <a
+                            class="relative flex border-t first:border-0 hover:bg-hover"
+                            [routerLink]="[message.id]"
+                        >
+                            <!-- Item content -->
+                            <div
+                                class="flex flex-col items-start justify-start w-full py-6 pr-4 pl-5 border-l-4 border-transparent"
+                                [ngClass]="{
+                                    'border-primary': !message.isRead,
+                                    'bg-primary-50 dark:bg-black dark:bg-opacity-5': selectedMessage()?.id === message.id
+                                }"
+                            >
+                                <!-- Info -->
+                                <div class="flex items-center w-full">
+                                    <span
+                                        class="w-2 h-2 rounded-full"
+                                        [matTooltip]="t('message.UnRead')"
+                                        [ngClass]="{
+                                            'bg-gray-400 dark:bg-gray-500 sm:opacity-0 sm:group-hover:opacity-100': message.isRead,
+                                            'bg-primary': !message.isRead
+                                        }"
+                                    >
+                                    </span>
+                                    <!-- Date -->
+                                    <div class="ml-auto text-md text-right whitespace-nowrap text-hint">
+                                        {{ message.sentAt | date:'LLL dd' }}
+                                    </div>
+                                </div>
+
+                                <!-- Subject -->
+                                <div class="flex items-center w-full mt-1">
+                                    <!-- Important indicator -->
+                                    @if(message.isImportant)
+                                    {
+                                        <mat-icon
+                                            class="mr-3 icon-size-4 text-red-500 dark:text-red-600"
+                                            [svgIcon]="'heroicons_solid:exclamation-circle'"
+                                        >
+                                        </mat-icon>
+                                    }
+                                    <span class="leading-4 truncate font-semibold">{{ message.subject }}</span>
+                                    <!-- Indicators -->
+                                    <div
+                                        class="flex ml-auto pl-2"
+                                        *ngIf="(message.attachments && message.attachments.length > 0) || message.starred">
+                                        <!-- Attachments -->
+                                        <mat-icon
+                                            class="flex justify-center icon-size-4"
+                                            *ngIf="message.attachments && message.attachments.length > 0"
+                                            [svgIcon]="'heroicons_solid:paper-clip'">
+                                        </mat-icon>
+                                        <!-- Starred -->
+                                        <mat-icon
+                                            class="flex justify-center icon-size-4 ml-1 text-orange-500 dark:text-orange-400"
+                                            *ngIf="message.starred"
+                                            [svgIcon]="'heroicons_solid:star'">
+                                        </mat-icon>
+                                    </div>
+                                </div>
+
+                                <!-- Excerpt -->
+                                <div
+                                    class="mt-2 leading-normal line-clamp-2 text-secondary"
+                                    [innerHTML]="message.body"
+                                >
+                                </div>
+
+                            </div>
+
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+        }
+        @else
+        {
+            <div class="z-100 absolute inset-0 flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                <mat-icon
+                    class="icon-size-24"
+                    [svgIcon]="'heroicons_outline:envelope'"
+                >
+                </mat-icon>
+                <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">
+                    There are no e-mails
+                </div>
+            </div>
+        }
+
+        <!-- mail detail -->
+        @if (countMessages() > 0)
+        {
+            <div
+                class="flex-auto"
+                [ngClass]="{
+                    'z-20 absolute inset-0 lg:static lg:inset-auto flex': selectedMessage()?.id,
+                    'hidden lg:flex': !selectedMessage() || !selectedMessage()?.id
+                }"
+            >
+                <router-outlet></router-outlet>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,68 @@
+version: 0.0.1
+boundedContextName: message
+moduleName: outbox
+moduleNames: outboxes
+aggregateName: MessageOutbox
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+front:
+  solidIcon: mat_solid:language
+  outlineIcon: mat_outline:language
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: messageId
+    type: id
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregateName: MessageMessage
+      modulePath: message/message
+      key: id
+      field: message
+      avoidConstraint: true
+  - name: sort
+    type: int
+    autoIncrement: true
+    nullable: false
+  - name: accountRecipientIds
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
+    index: index
+  - name: tenantRecipientIds
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
+    index: index
+  - name: scopeRecipients
+    type: array
+    arrayOptions:
+      type: varchar
+      maxLength: 64
+    nullable: true
+    index: index
+  - name: tagRecipients
+    type: array
+    arrayOptions:
+      type: varchar
+      maxLength: 64
+    nullable: true
+    index: index
+  - name: meta
+    type: jsonb
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true

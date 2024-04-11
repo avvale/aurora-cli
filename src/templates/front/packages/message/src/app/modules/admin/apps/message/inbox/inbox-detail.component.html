@@ -1,0 +1,236 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    svgIcon="mat_solid:move_to_inbox"
+                    class="icon-size-8 mr-2"
+                >
+                </mat-icon>
+                {{ t('message.Inbox') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            @if (currentViewAction.id === 'message::inbox.detail.edit')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    class="ml-3"
+                    form="messageInboxFormDetail"
+                    color="accent"
+                    [disabled]="fg.pristine || ('message::inbox.detail.update' | getSpinnerFlag | async)"
+                >
+                    @if ('message::inbox.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:edit"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Update') }}
+                </button>
+            }
+
+            @if (currentViewAction.id === 'message::inbox.detail.new')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    form="messageInboxFormDetail"
+                    class="ml-3"
+                    color="accent"
+                    [disabled]="fg.pristine || ('message::inbox.detail.create' | getSpinnerFlag | async)"
+                >
+                    @if ('message::inbox.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:save"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Create') }}
+                </button>
+            }
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="messageInboxFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('message.Sort') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="sort"
+                            type="number"
+                        >
+                        <mat-error>{{ formErrors?.sort | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('message.AccountCode') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="accountCode"
+                        >
+                        <mat-error>{{ formErrors?.accountCode | async }}</mat-error>
+                    </mat-form-field>
+                    <div class="col-4 pt-5">
+                        <mat-checkbox
+                            formControlName="isImportant"
+                        >
+                            {{ t('message.IsImportant') }}
+                        </mat-checkbox>
+                    </div>
+                    <mat-form-field
+                        appearance="outline"
+                        class="au-datepicker col-4"
+                    >
+                        <mat-label>{{ t('message.SentAt') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="sentAt"
+                            [auDatetimepickerSqlFormat]
+                            [mtxDatetimepicker]="sentAtPicker"
+                        >
+                        <mtx-datetimepicker-toggle
+                            [for]="sentAtPicker"
+                            matSuffix
+                        >
+                        </mtx-datetimepicker-toggle>
+                        <mtx-datetimepicker
+                            #sentAtPicker
+                            type="datetime"
+                            mode="landscape"
+                            [multiYearSelector]="false"
+                            startView="month"
+                            [twelvehour]="false"
+                            [timeInterval]="1"
+                            [touchUi]="false"
+                        >
+                        </mtx-datetimepicker>
+                        <mat-error>{{ formErrors?.sentAt | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('message.Subject') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="subject"
+                            maxlength="255"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.subject | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('message.Body') }}</mat-label>
+                        <textarea
+                            matInput
+                            formControlName="body"
+                        >
+                        </textarea>
+                        <mat-error>{{ formErrors?.body | async }}</mat-error>
+                    </mat-form-field>
+                    <!-- <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('message.Link') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="link"
+                            maxlength="2046"
+                        >
+                        <mat-error>{{ formErrors?.link | async }}</mat-error>
+                    </mat-form-field> -->
+                    <!-- <div class="col-4 pt-5">
+                        <mat-checkbox
+                            formControlName="isInternalLink"
+                        >
+                            {{ t('message.IsInternalLink') }}
+                        </mat-checkbox>
+                    </div> -->
+                    <!-- <mat-form-field
+                        appearance="outline"
+                        class="col-8"
+                    >
+                        <mat-label>{{ t('message.Icon') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="icon"
+                            maxlength="64"
+                        >
+                        <mat-error>{{ formErrors?.icon | async }}</mat-error>
+                    </mat-form-field> -->
+                    <div class="col-4 pt-5">
+                        <mat-checkbox
+                            formControlName="isRead"
+                        >
+                            {{ t('message.IsRead') }}
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-4 pt-5">
+                        <mat-checkbox
+                            formControlName="isReadAtLeastOnce"
+                        >
+                            {{ t('message.IsReadAtLeastOnce') }}
+                        </mat-checkbox>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>
