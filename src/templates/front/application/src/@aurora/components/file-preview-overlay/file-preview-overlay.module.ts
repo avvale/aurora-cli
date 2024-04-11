@@ -1,4 +1,3 @@
-// angular
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FilePreviewOverlayToolbarComponent } from './file-preview-overlay-toolbar/file-preview-overlay-toolbar.component';

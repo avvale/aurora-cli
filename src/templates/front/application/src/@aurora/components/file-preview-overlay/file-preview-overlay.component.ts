@@ -1,10 +1,10 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, HostListener, Inject } from '@angular/core';
+import { base64ToBlob } from '@aurora';
+import { saveAs } from 'file-saver';
 import { FilePreviewOverlayRef } from './file-preview-overlay-ref';
 import { FILE_PREVIEW_DIALOG_DATA } from './file-preview-overlay.tokens';
 import { Image } from './file-preview-overlay.types';
-import { saveAs } from 'file-saver';
-import { Utils } from '@aurora';
 
 // Keycode for ESCAPE
 const ESCAPE = 'Escape';
@@ -126,7 +126,9 @@ export class FilePreviewOverlayComponent
 
     download(): void
     {
-        const blob = Utils.convertBase64ToBlob(this.image.binary,  this.image.mime);
-        saveAs(blob, this.image.filename);
+        saveAs(
+            base64ToBlob(this.image.binary,  this.image.mime),
+            this.image.filename,
+        );
     }
 }

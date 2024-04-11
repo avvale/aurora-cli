@@ -7,10 +7,11 @@ import { ReplaySubject } from 'rxjs';
 })
 export class SelectSearchService
 {
-    filterSelect<T extends { name: string; }>(
+    filterSelect<T>(
         filterCtrl: FormControl,
         objects: T[],
         objectsFiltered$: ReplaySubject<T[]>,
+        exposeKeyword: (object: T) => string = object => object['name'],
     ): void
     {
         if (!objects) return;
@@ -30,7 +31,7 @@ export class SelectSearchService
         // filter the objects
         objectsFiltered$.next(
             objects
-                .filter(object => object.name.toLowerCase().indexOf(search) > -1),
+                .filter(object => exposeKeyword(object).toLowerCase().indexOf(search) > -1),
         );
     }
 }

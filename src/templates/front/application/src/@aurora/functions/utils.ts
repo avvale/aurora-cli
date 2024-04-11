@@ -1,12 +1,13 @@
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { v4 as uuidv4 } from 'uuid';
-import * as utc from 'dayjs/plugin/utc';
-import * as timezone from 'dayjs/plugin/timezone';
-import * as advancedFormat from 'dayjs/plugin/advancedFormat';
-import * as weekOfYear from 'dayjs/plugin/weekOfYear';
-import * as isoWeek from 'dayjs/plugin/isoWeek';
 import * as dayjs from 'dayjs';
+import * as advancedFormat from 'dayjs/plugin/advancedFormat';
+import * as isoWeek from 'dayjs/plugin/isoWeek';
+import * as timezone from 'dayjs/plugin/timezone';
+import * as utc from 'dayjs/plugin/utc';
+import * as weekOfYear from 'dayjs/plugin/weekOfYear';
 import generatePassword, { GenerateOptions } from 'generate-password-browser';
+import { v4 as uuidv4 } from 'uuid';
+import { base64ToBlob } from './base64-to-blob.function';
 
 // dayjs configuration
 dayjs.extend(utc);
@@ -181,25 +182,11 @@ Go to https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto for more inf
         sliceSize: number = 512,
     ): Blob
     {
-        const byteCharacters = atob(b64Data);
-        const byteArrays = [];
-
-        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize)
-        {
-            const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            const byteNumbers = new Array(slice.length);
-            for (let i = 0; i < slice.length; i++)
-            {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-
-            const byteArray = new Uint8Array(byteNumbers);
-            byteArrays.push(byteArray);
-        }
-
-        const blob = new Blob(byteArrays, { type: contentType });
-        return blob;
+        return base64ToBlob(
+            b64Data,
+            contentType,
+            sliceSize,
+        );
     }
 
     static createPassword(options?: GenerateOptions): string

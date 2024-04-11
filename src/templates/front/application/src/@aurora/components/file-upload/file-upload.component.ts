@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { log } from '@aurora';
+import { FormatFileSizePipe } from './../../pipes/format-file-size.pipe';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry, NgxFileDropModule } from 'ngx-file-drop';
 
 interface FileEntry
@@ -21,7 +22,7 @@ interface FileEntry
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        MatButtonModule, MatIconModule, NgForOf, NgIf, NgxFileDropModule,
+        FormatFileSizePipe, MatButtonModule, MatIconModule, NgForOf, NgIf, NgxFileDropModule,
     ],
 })
 export class FileUploadComponent

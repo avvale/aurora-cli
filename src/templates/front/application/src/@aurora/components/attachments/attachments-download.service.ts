@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Attachment, GraphQLService, Utils, commonCreateBlobAttachmentMutation, log } from '@aurora';
+import { Attachment, GraphQLService, base64ToBlob, commonCreateBlobAttachmentMutation, log } from '@aurora';
 import { saveAs } from 'file-saver';
 
 @Injectable({
     providedIn: 'root',
 })
-export class DownloadService
+export class AttachmentsDownloadService
 {
     constructor(
         private readonly graphqlService: GraphQLService,
-        private readonly sanitizer: DomSanitizer,
     )
     {}
 
-    public download(attachment: Attachment, callback: () => void = () => { /**/ }): void
+    public download(attachment: Attachment): void
     {
         this
             .graphqlService
@@ -29,9 +27,10 @@ export class DownloadService
             {
                 log('[DEBUG] - Download attachment: ', data);
 
-                const blob = Utils.convertBase64ToBlob(data['commonCreateBlobAttachment']);
-
-                saveAs(blob, attachment.filename);
+                saveAs(
+                    base64ToBlob(data['commonCreateBlobAttachment']),
+                    attachment.filename,
+                );
             });
     }
 }

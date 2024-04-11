@@ -4,7 +4,7 @@ import { ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@
 import { ImageInputComponent } from '@aurora/components/image-input';
 import { first, merge } from 'rxjs';
 import { AttachmentTranslatePipe } from '../attachment-translations/attachment-translate.pipe';
-import { DownloadService } from '../download.service';
+import { AttachmentsDownloadService } from '../attachments-download.service';
 import { SizeFormatPipe } from '../pipes/size-format.pipe';
 import { Attachment, AttachmentFamily, CropType } from './../attachments.types';
 
@@ -55,7 +55,7 @@ export class AttachmentItemComponent implements OnInit//, //ControlValueAccessor
 
     constructor(
         private readonly renderer: Renderer2,
-        private readonly downloadService: DownloadService,
+        private readonly attachmentsDownloadService: AttachmentsDownloadService,
         @Optional() private controlContainer: ControlContainer,
     )
     { /**/ }
@@ -119,6 +119,7 @@ export class AttachmentItemComponent implements OnInit//, //ControlValueAccessor
 
     handlerDownload(): void
     {
-        this.downloadService.download(this.formGroup.value);
+        this.attachmentsDownloadService
+            .download(this.formGroup.value);
     }
 }
