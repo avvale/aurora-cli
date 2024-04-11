@@ -16,11 +16,12 @@
     "exampleSection": "Sección de ejemplo",
     "fields": "Campos",
     "httpCommunications": "Http Communications",
-    "inBoxes": "InBoxes",
-    "inboxes": "Inboxes",
+    "inboxes": "Mensajes recibidos",
     "jobsRegistry": "Registro de Jobs",
     "langs": "Idiomas",
-    "messages": "Messages",
+    "message": "Mensajes",
+    "messageCenter": "Centro de mensajes",
+    "messages": "Mensajes",
     "notifications": "Notifications",
     "outBoxNotifications": "OutBoxNotifications",
     "permissions": "Permisos",
@@ -30,6 +31,7 @@
     "roles": "Roles",
     "scopes": "Scopes",
     "sideEffects": "Side Effects",
+    "tags": "Tags",
     "tenants": "Tenants",
     "users": "Users"
 }

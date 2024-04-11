@@ -4,9 +4,9 @@
 <div class="flex flex-auto justify-center w-full sm:p-4 md:p-8 bg-gray-200 dark:bg-card">
 
     <!-- Navigation -->
+    <!-- customizations remove class="dark bg-gray-900 print:hidden" -->
     <ng-container *ngIf="isScreenSmall">
         <fuse-vertical-navigation
-            class="dark bg-gray-900 print:hidden"
             [mode]="'over'"
             [name]="'mainNavigation'"
             [navigation]="navigation.default"

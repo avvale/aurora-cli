@@ -141,7 +141,7 @@ export class AuthSignInComponent implements OnInit
                     // Set the alert
                     this.alert = {
                         type   : 'error',
-                        message: 'Wrong email or password',
+                        message: this.translocoService.translate('validations.Login'),
                     };
 
                     // Show the alert

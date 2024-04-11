@@ -16,10 +16,11 @@
     "exampleSection": "Example Section",
     "fields": "Fields",
     "httpCommunications": "Http Communications",
-    "inBoxes": "InBoxes",
     "inboxes": "Inboxes",
     "jobsRegistry": "Jobs Registry",
     "langs": "Langs",
+    "message": "Messages",
+    "messageCenter": "Message Center",
     "messages": "Messages",
     "notifications": "Notifications",
     "outBoxNotifications": "OutBoxNotifications",
@@ -30,6 +31,7 @@
     "roles": "Roles",
     "scopes": "Scopes",
     "sideEffects": "Side Effects",
+    "tags": "Tags",
     "tenants": "Tenants",
     "users": "Users"
 }

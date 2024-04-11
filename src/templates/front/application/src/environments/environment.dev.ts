@@ -14,4 +14,8 @@ export const environment = {
         applicationCode  : 'aurora',
         applicationSecret: '$2y$10$EOA/SKEwKRgHPw64kO4LZ.6oy5b8kl6JzW/mCROMfSq6S38/IiywG',
     },
+    appearance: {
+        theme : 'theme-default',
+        layout: 'classy',
+    },
 };

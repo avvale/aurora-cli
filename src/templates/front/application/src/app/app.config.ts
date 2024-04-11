@@ -16,6 +16,7 @@ import { TranslocoHttpLoader } from './core/transloco/transloco.http-loader';
 
 // ---- customizations ----
 import { provideAurora } from '@aurora';
+import { environment } from 'environments/environment';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -59,7 +60,7 @@ export const appConfig: ApplicationConfig = {
                         label: 'Spanish',
                     },
                 ],
-                defaultLang         : 'en',
+                defaultLang         : environment.lang.base,
                 fallbackLang        : 'en',
                 reRenderOnLangChange: true,
                 prodMode            : true,
@@ -89,7 +90,7 @@ export const appConfig: ApplicationConfig = {
                 services: mockApiServices,
             },
             fuse   : {
-                layout : 'classy',
+                layout : environment.appearance.layout,
                 scheme : 'light',
                 screens: {
                     sm: '600px',
@@ -97,7 +98,7 @@ export const appConfig: ApplicationConfig = {
                     lg: '1280px',
                     xl: '1440px',
                 },
-                theme  : 'theme-default',
+                theme  : environment.appearance.theme,
                 themes : [
                     {
                         id  : 'theme-default',
