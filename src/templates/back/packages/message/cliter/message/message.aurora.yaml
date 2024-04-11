@@ -1,0 +1,122 @@
+version: 0.0.1
+boundedContextName: message
+moduleName: message
+moduleNames: messages
+aggregateName: MessageMessage
+hasOAuth: true
+hasTenant: true
+hasAuditing: true
+front:
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: notification_multiple
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: notification_multiple
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: tenantIds
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
+    index: index
+  - name: status
+    type: enum
+    enumOptions:
+      - DRAFT
+      - PENDING
+      - SENT
+    nullable: false
+  - name: accountRecipientIds
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
+    index: index
+  - name: tenantRecipientIds
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
+    index: index
+  - name: scopeRecipients
+    type: array
+    arrayOptions:
+      type: varchar
+      maxLength: 64
+    nullable: true
+    index: index
+  - name: tagRecipients
+    type: array
+    arrayOptions:
+      type: varchar
+      maxLength: 64
+    nullable: true
+    index: index
+  - name: sendAt
+    type: timestamp
+    nullable: true
+  - name: isImportant
+    type: boolean
+    nullable: false
+  - name: subject
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: body
+    type: text
+    nullable: false
+  - name: link
+    type: varchar
+    maxLength: 2046
+    nullable: true
+  - name: isInternalLink
+    type: boolean
+    nullable: true
+  - name: image
+    type: jsonb
+    nullable: true
+  - name: icon
+    type: varchar
+    maxLength: 64
+    nullable: true
+  - name: attachments
+    type: jsonb
+    nullable: true
+  - name: totalRecipients
+    type: int
+    nullable: false
+    unsigned: true
+    defaultValue: 0
+  - name: reads
+    type: int
+    nullable: false
+    unsigned: true
+    defaultValue: 0
+  - name: meta
+    type: jsonb
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis:
+  - path: message/message/remove-attachment
+    resolverType: mutation
+    httpMethod: post
+  - path: message/message/count-total-recipients
+    resolverType: query
+    httpMethod: post
+  - path: message/message/send-message
+    resolverType: mutation
+    httpMethod: post
+  - path: message/message/draft-message
+    resolverType: mutation
+    httpMethod: post

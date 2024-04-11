@@ -1,0 +1,92 @@
+
+type MessageInboxSetting
+{
+    id: ID!
+    accountId: ID!
+    sort: GraphQLInt!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input MessageCreateInboxSettingInput
+{
+    id: ID!
+    accountId: ID!
+    sort: GraphQLInt!
+}
+
+input MessageUpdateInboxSettingByIdInput
+{
+    id: ID!
+    accountId: ID
+    sort: GraphQLInt
+}
+
+input MessageUpdateInboxSettingsInput
+{
+    id: ID
+    accountId: ID
+    sort: GraphQLInt
+}
+
+type Query
+{
+    messageFindInboxSetting(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): MessageInboxSetting
+
+    messageFindInboxSettingById(
+        id: ID
+        constraint: QueryStatement
+    ): MessageInboxSetting
+
+    messageGetInboxSettings(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageInboxSetting]!
+
+    messagePaginateInboxSettings(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    messageCreateInboxSetting(
+        payload: MessageCreateInboxSettingInput!
+    ): MessageInboxSetting
+
+    messageCreateInboxSettings(
+        payload: [MessageCreateInboxSettingInput]!
+    ): Boolean!
+
+    messageUpdateInboxSettingById(
+        payload: MessageUpdateInboxSettingByIdInput!
+        constraint: QueryStatement
+    ): MessageInboxSetting
+
+    messageUpdateInboxSettings(
+        payload: MessageUpdateInboxSettingsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageInboxSetting]!
+
+    messageUpsertInboxSetting(
+        payload: MessageUpdateInboxSettingByIdInput!
+    ): MessageInboxSetting
+
+    messageDeleteInboxSettingById(
+        id: ID!
+        constraint: QueryStatement
+    ): MessageInboxSetting
+
+    messageDeleteInboxSettings(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageInboxSetting]!
+
+}

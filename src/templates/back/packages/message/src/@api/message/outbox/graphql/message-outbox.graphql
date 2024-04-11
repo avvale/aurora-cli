@@ -1,0 +1,110 @@
+
+type MessageOutbox
+{
+    id: ID!
+    messageId: ID!
+    message: MessageMessage
+    sort: GraphQLInt!
+    accountRecipientIds: [ID]
+    tenantRecipientIds: [ID]
+    scopeRecipients: [GraphQLString]
+    tagRecipients: [GraphQLString]
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input MessageCreateOutboxInput
+{
+    id: ID!
+    messageId: ID!
+    accountRecipientIds: [ID]
+    tenantRecipientIds: [ID]
+    scopeRecipients: [GraphQLString]
+    tagRecipients: [GraphQLString]
+    meta: JSON
+}
+
+input MessageUpdateOutboxByIdInput
+{
+    id: ID!
+    messageId: ID
+    accountRecipientIds: [ID]
+    tenantRecipientIds: [ID]
+    scopeRecipients: [GraphQLString]
+    tagRecipients: [GraphQLString]
+    meta: JSON
+}
+
+input MessageUpdateOutboxesInput
+{
+    id: ID
+    messageId: ID
+    accountRecipientIds: [ID]
+    tenantRecipientIds: [ID]
+    scopeRecipients: [GraphQLString]
+    tagRecipients: [GraphQLString]
+    meta: JSON
+}
+
+type Query
+{
+    messageFindOutbox(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): MessageOutbox
+
+    messageFindOutboxById(
+        id: ID
+        constraint: QueryStatement
+    ): MessageOutbox
+
+    messageGetOutboxes(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageOutbox]!
+
+    messagePaginateOutboxes(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    messageCreateOutbox(
+        payload: MessageCreateOutboxInput!
+    ): MessageOutbox
+
+    messageCreateOutboxes(
+        payload: [MessageCreateOutboxInput]!
+    ): Boolean!
+
+    messageUpdateOutboxById(
+        payload: MessageUpdateOutboxByIdInput!
+        constraint: QueryStatement
+    ): MessageOutbox
+
+    messageUpdateOutboxes(
+        payload: MessageUpdateOutboxesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageOutbox]!
+
+    messageUpsertOutbox(
+        payload: MessageUpdateOutboxByIdInput!
+    ): MessageOutbox
+
+    messageDeleteOutboxById(
+        id: ID!
+        constraint: QueryStatement
+    ): MessageOutbox
+
+    messageDeleteOutboxes(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageOutbox]!
+
+}

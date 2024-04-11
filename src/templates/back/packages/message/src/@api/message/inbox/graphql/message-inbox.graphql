@@ -1,0 +1,184 @@
+
+type MessageInbox
+{
+    id: ID!
+    tenantIds: [ID]
+    messageId: ID
+    message: MessageMessage
+    sort: GraphQLInt!
+    accountId: ID!
+    accountCode: GraphQLString
+    isImportant: GraphQLBoolean!
+    sentAt: GraphQLTimestamp!
+    subject: GraphQLString!
+    body: GraphQLString!
+    link: GraphQLString
+    isInternalLink: GraphQLBoolean
+    image: JSON
+    icon: GraphQLString
+    attachments: JSON
+    isRead: GraphQLBoolean!
+    isReadAtLeastOnce: GraphQLBoolean!
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input MessageCreateInboxInput
+{
+    id: ID!
+    tenantIds: [ID]
+    messageId: ID
+    sort: GraphQLInt!
+    accountId: ID!
+    accountCode: GraphQLString
+    isImportant: GraphQLBoolean!
+    sentAt: GraphQLTimestamp!
+    subject: GraphQLString!
+    body: GraphQLString!
+    link: GraphQLString
+    isInternalLink: GraphQLBoolean
+    image: JSON
+    icon: GraphQLString
+    attachments: JSON
+    isRead: GraphQLBoolean!
+    isReadAtLeastOnce: GraphQLBoolean!
+    meta: JSON
+}
+
+input MessageUpdateInboxByIdInput
+{
+    id: ID!
+    tenantIds: [ID]
+    messageId: ID
+    sort: GraphQLInt
+    accountId: ID
+    accountCode: GraphQLString
+    isImportant: GraphQLBoolean
+    sentAt: GraphQLTimestamp
+    subject: GraphQLString
+    body: GraphQLString
+    link: GraphQLString
+    isInternalLink: GraphQLBoolean
+    image: JSON
+    icon: GraphQLString
+    attachments: JSON
+    isRead: GraphQLBoolean
+    isReadAtLeastOnce: GraphQLBoolean
+    meta: JSON
+}
+
+input MessageUpdateInboxesInput
+{
+    id: ID
+    tenantIds: [ID]
+    messageId: ID
+    sort: GraphQLInt
+    accountId: ID
+    accountCode: GraphQLString
+    isImportant: GraphQLBoolean
+    sentAt: GraphQLTimestamp
+    subject: GraphQLString
+    body: GraphQLString
+    link: GraphQLString
+    isInternalLink: GraphQLBoolean
+    image: JSON
+    icon: GraphQLString
+    attachments: JSON
+    isRead: GraphQLBoolean
+    isReadAtLeastOnce: GraphQLBoolean
+    meta: JSON
+}
+
+type Query
+{
+    messageFindInbox(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): MessageInbox
+
+    messageFindInboxById(
+        id: ID
+        constraint: QueryStatement
+    ): MessageInbox
+
+    messageGetInboxes(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageInbox]!
+
+    messagePaginateInboxes(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+
+    # additionalApis
+    messagePaginateCustomerMessagesInbox(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+    messageFindCustomerMessageInbox(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): MessageInbox
+
+}
+
+type Mutation
+{
+    messageCreateInbox(
+        payload: MessageCreateInboxInput!
+    ): MessageInbox
+
+    messageCreateInboxes(
+        payload: [MessageCreateInboxInput]!
+    ): Boolean!
+
+    messageUpdateInboxById(
+        payload: MessageUpdateInboxByIdInput!
+        constraint: QueryStatement
+    ): MessageInbox
+
+    messageUpdateInboxes(
+        payload: MessageUpdateInboxesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageInbox]!
+
+    messageUpsertInbox(
+        payload: MessageUpdateInboxByIdInput!
+    ): MessageInbox
+
+    messageDeleteInboxById(
+        id: ID!
+        constraint: QueryStatement
+    ): MessageInbox
+
+    messageDeleteInboxes(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageInbox]!
+
+
+    # additionalApis
+    messageCheckMessagesInbox: Boolean!
+
+    messageDeleteCustomerMessageInbox(
+        id: ID!
+        constraint: QueryStatement
+    ): Boolean!
+
+    messageReadCustomerMessageInbox(
+        inbox: MessageUpdateInboxByIdInput!
+        constraint: QueryStatement
+    ): Boolean!
+
+    messageUnreadCustomerMessageInbox(
+        inbox: MessageUpdateInboxByIdInput!
+        constraint: QueryStatement
+    ): Boolean!
+
+}

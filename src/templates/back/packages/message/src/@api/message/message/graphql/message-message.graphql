@@ -1,0 +1,186 @@
+enum MessageMessageStatus {
+    DRAFT
+    PENDING
+    SENT
+}
+
+
+type MessageMessage
+{
+    id: ID!
+    tenantIds: [ID]
+    status: MessageMessageStatus!
+    accountRecipientIds: [ID]
+    tenantRecipientIds: [ID]
+    scopeRecipients: [GraphQLString]
+    tagRecipients: [GraphQLString]
+    sendAt: GraphQLTimestamp
+    isImportant: GraphQLBoolean!
+    subject: GraphQLString!
+    body: GraphQLString!
+    link: GraphQLString
+    isInternalLink: GraphQLBoolean
+    image: JSON
+    icon: GraphQLString
+    attachments: JSON
+    totalRecipients: GraphQLInt!
+    reads: GraphQLInt!
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input MessageCreateMessageInput
+{
+    id: ID!
+    tenantIds: [ID]
+    status: MessageMessageStatus!
+    accountRecipientIds: [ID]
+    tenantRecipientIds: [ID]
+    scopeRecipients: [GraphQLString]
+    tagRecipients: [GraphQLString]
+    sendAt: GraphQLTimestamp
+    isImportant: GraphQLBoolean!
+    subject: GraphQLString!
+    body: GraphQLString!
+    link: GraphQLString
+    isInternalLink: GraphQLBoolean
+    image: JSON
+    icon: GraphQLString
+    attachmentsInputFile: [Upload]
+    meta: JSON
+}
+
+input MessageUpdateMessageByIdInput
+{
+    id: ID!
+    tenantIds: [ID]
+    status: MessageMessageStatus
+    accountRecipientIds: [ID]
+    tenantRecipientIds: [ID]
+    scopeRecipients: [GraphQLString]
+    tagRecipients: [GraphQLString]
+    sendAt: GraphQLTimestamp
+    isImportant: GraphQLBoolean
+    subject: GraphQLString
+    body: GraphQLString
+    link: GraphQLString
+    isInternalLink: GraphQLBoolean
+    image: JSON
+    icon: GraphQLString
+    attachmentsInputFile: [Upload]
+    meta: JSON
+}
+
+input MessageUpdateMessagesInput
+{
+    id: ID
+    tenantIds: [ID]
+    status: MessageMessageStatus
+    accountRecipientIds: [ID]
+    tenantRecipientIds: [ID]
+    scopeRecipients: [GraphQLString]
+    tagRecipients: [GraphQLString]
+    sendAt: GraphQLTimestamp
+    isImportant: GraphQLBoolean
+    subject: GraphQLString
+    body: GraphQLString
+    link: GraphQLString
+    isInternalLink: GraphQLBoolean
+    image: JSON
+    icon: GraphQLString
+    attachments: JSON
+    totalRecipients: GraphQLInt
+    reads: GraphQLInt
+    meta: JSON
+}
+
+type Query
+{
+    messageFindMessage(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): MessageMessage
+
+    messageFindMessageById(
+        id: ID
+        constraint: QueryStatement
+    ): MessageMessage
+
+    messageGetMessages(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageMessage]!
+
+    messagePaginateMessages(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+
+    # additionalApis
+    messageCountTotalRecipientsMessage(
+        tenantRecipientIds: [ID]
+        scopeRecipients: [GraphQLString]
+        tagRecipients: [GraphQLString]
+        accountRecipientIds: [ID]
+        constraint: QueryStatement
+    ): GraphQLInt!
+
+}
+
+type Mutation
+{
+    messageCreateMessage(
+        payload: MessageCreateMessageInput!
+    ): MessageMessage
+
+    messageCreateMessages(
+        payload: [MessageCreateMessageInput]!
+    ): Boolean!
+
+    messageUpdateMessageById(
+        payload: MessageUpdateMessageByIdInput!
+        constraint: QueryStatement
+    ): MessageMessage
+
+    messageUpdateMessages(
+        payload: MessageUpdateMessagesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageMessage]!
+
+    messageUpsertMessage(
+        payload: MessageUpdateMessageByIdInput!
+    ): MessageMessage
+
+    messageDeleteMessageById(
+        id: ID!
+        constraint: QueryStatement
+    ): MessageMessage
+
+    messageDeleteMessages(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [MessageMessage]!
+
+
+    # additionalApis
+    messageRemoveAttachmentMessage(
+        message: MessageUpdateMessageByIdInput!
+        attachmentId: ID!
+        constraint: QueryStatement
+    ): Boolean!
+
+    messageSendMessageMessage(
+        message: MessageUpdateMessageByIdInput!
+        constraint: QueryStatement
+    ): Boolean!
+
+    messageDraftMessageMessage(
+        message: MessageUpdateMessageByIdInput!
+        constraint: QueryStatement
+    ): Boolean!
+
+}

@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - message/outbox",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - messageCreateOutbox",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:MessageCreateOutboxInput!)\n{\n\tmessageCreateOutbox (payload:$payload)\n\t{\n\t\tid\n\t\tmessageId\n\t\tsort\n\t\taccountRecipientIds\n\t\ttenantRecipientIds\n\t\tscopeRecipients\n\t\ttagRecipients\n\t\tmeta\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"messageId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"sort\": 341036, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageCreateOutboxes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[MessageCreateOutboxInput]!)\n{\n\tmessageCreateOutboxes (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"10fdad60-22f7-41ed-a060-2e8fe678428a\", \n\t\t\t\"messageId\": \"e5a6551c-5746-450a-b367-ef428be099d4\", \n\t\t\t\"sort\": 780643, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"cfb7137d-203e-4df6-acb7-4c892272683f\", \n\t\t\t\"messageId\": \"2f1e2f80-3935-40eb-afbf-3ce1c773e071\", \n\t\t\t\"sort\": 196453, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b58f4a8f-f0ab-4bfa-99ae-ee831987e743\", \n\t\t\t\"messageId\": \"8d354d86-5d35-4b76-8c2f-1334444f1521\", \n\t\t\t\"sort\": 996893, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a1301a1e-ac5d-4532-b203-9a216443a73a\", \n\t\t\t\"messageId\": \"c07772ab-157b-4600-ae61-cdf57879dbb6\", \n\t\t\t\"sort\": 651331, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c3bd227c-b6fa-411d-bf92-b655a2cf6bae\", \n\t\t\t\"messageId\": \"8d217ffa-12ec-41dd-9d6e-eb97a03ff620\", \n\t\t\t\"sort\": 438451, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"21938c62-f44a-431b-82fa-c178e64eb40a\", \n\t\t\t\"messageId\": \"c6deca10-eed8-4902-a1b2-ec8a25fd4d36\", \n\t\t\t\"sort\": 326126, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3e4c1dfb-f04f-4f7c-b814-ab34868c9dad\", \n\t\t\t\"messageId\": \"060daf98-182d-4a44-b52f-f2f13c1d6b1b\", \n\t\t\t\"sort\": 162289, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2ebe7f47-9d21-4c4f-af7a-cf1053c19855\", \n\t\t\t\"messageId\": \"3bd6eae6-dd01-48e5-b9f3-cd611697d6eb\", \n\t\t\t\"sort\": 797116, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4f339a96-ab16-4a38-9f6f-1b096935d3fa\", \n\t\t\t\"messageId\": \"a40df145-6600-46ec-8efd-16cee951246b\", \n\t\t\t\"sort\": 811783, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"41408fbf-071d-4a1f-995c-a69101337295\", \n\t\t\t\"messageId\": \"72686270-3fb7-41b7-9681-f93dafeb1908\", \n\t\t\t\"sort\": 846078, \n\t\t\t\"accountRecipientIds\": [], \n\t\t\t\"tenantRecipientIds\": [], \n\t\t\t\"scopeRecipients\": [], \n\t\t\t\"tagRecipients\": [], \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messagePaginateOutboxes",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tmessagePaginateOutboxes (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageGetOutboxes",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tmessageGetOutboxes (query: $query)\n\t{\n\t\tid\n\t\tsort\n\t\taccountRecipientIds\n\t\ttenantRecipientIds\n\t\tscopeRecipients\n\t\ttagRecipients\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageFindOutbox",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tmessageFindOutbox (query: $query)\n\t{\n\t\tid\n\t\tsort\n\t\taccountRecipientIds\n\t\ttenantRecipientIds\n\t\tscopeRecipients\n\t\ttagRecipients\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageFindOutboxById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tmessageFindOutboxById (id:$id)\n\t{\n\t\tid\n\t\tsort\n\t\taccountRecipientIds\n\t\ttenantRecipientIds\n\t\tscopeRecipients\n\t\ttagRecipients\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageUpdateOutbox",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:MessageUpdateOutboxInput!)\n{\n\tmessageUpdateOutbox (payload:$payload)\n\t{\n\t\tid\n\t\tsort\n\t\taccountRecipientIds\n\t\ttenantRecipientIds\n\t\tscopeRecipients\n\t\ttagRecipients\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"messageId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"sort\": 492830, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageDeleteOutboxById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tmessageDeleteOutboxById (id:$id)\n\t{\n\t\tid\n\t\tsort\n\t\taccountRecipientIds\n\t\ttenantRecipientIds\n\t\tscopeRecipients\n\t\ttagRecipients\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageDeleteOutboxes",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tmessageDeleteOutboxes (query: $query)\n\t{\n\t\tid\n\t\tsort\n\t\taccountRecipientIds\n\t\ttenantRecipientIds\n\t\tscopeRecipients\n\t\ttagRecipients\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/outbox/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"messageId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"sort\": 912893, \n\t\"accountRecipientIds\": [], \n\t\"tenantRecipientIds\": [], \n\t\"scopeRecipients\": [], \n\t\"tagRecipients\": [], \n\t\"meta\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outbox/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"outbox",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/outboxes/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"71f88c6d-bd57-465d-b881-7f535d3e559e\", \n\t\t\"messageId\": \"09be2a14-977b-4ddf-aaa1-fb7dc5bd3549\", \n\t\t\"sort\": 862568, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"fc45608d-3849-4e0c-966d-768924820348\", \n\t\t\"messageId\": \"80563d3a-3be9-427c-ac4e-4e9d55569a15\", \n\t\t\"sort\": 117444, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"067a81cc-6cb1-45fc-aa4e-a2136189735d\", \n\t\t\"messageId\": \"154b1cfc-9b8f-43da-a0b5-a72d549e8eae\", \n\t\t\"sort\": 945216, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"82641cfe-cbf8-414d-9e84-017a53063ae1\", \n\t\t\"messageId\": \"b2d66595-52fd-42e5-ad99-94b7d1e15048\", \n\t\t\"sort\": 884500, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"aefde564-0ef5-4892-8861-1814a5fadd5c\", \n\t\t\"messageId\": \"0145bf1a-7d6c-4804-8f7e-7c0f0c752684\", \n\t\t\"sort\": 658202, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"33305128-11e1-4fb7-a659-38ce24724013\", \n\t\t\"messageId\": \"5339941f-fa01-4d9d-bbd8-2c5dcebf24ad\", \n\t\t\"sort\": 597715, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"d0f46585-b446-4437-83e6-c70f51d6dbde\", \n\t\t\"messageId\": \"c8d71953-aeae-46dc-a795-ee12ab3a7241\", \n\t\t\"sort\": 872680, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"42b1d8c8-4b20-4d37-b3ef-024c40cd96cc\", \n\t\t\"messageId\": \"aa24812e-4619-4f75-9e93-d34153b0d35e\", \n\t\t\"sort\": 926827, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8ca6d29b-87b9-4374-8a6f-8e08b26fe0ed\", \n\t\t\"messageId\": \"4caff7f6-fd62-4f83-824a-28ddb2aedd59\", \n\t\t\"sort\": 448487, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"7739dc90-5fac-4872-be03-d53a2795bf15\", \n\t\t\"messageId\": \"e6d29944-e141-4d81-8eb0-8e245e3ad9db\", \n\t\t\"sort\": 640633, \n\t\t\"accountRecipientIds\": [], \n\t\t\"tenantRecipientIds\": [], \n\t\t\"scopeRecipients\": [], \n\t\t\"tagRecipients\": [], \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outboxes/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"outboxes",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/outboxes/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outboxes/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+                        "outboxes",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/outboxes/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outboxes/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"outboxes",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/outbox/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outbox/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"outbox",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/outbox/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outbox/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"outbox",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/outbox/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"messageId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"sort\": 964426, \n\t\"accountRecipientIds\": [], \n\t\"tenantRecipientIds\": [], \n\t\"scopeRecipients\": [], \n\t\"tagRecipients\": [], \n\t\"meta\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outbox/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"outbox",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/outbox/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outbox/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"outbox",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - message/outboxes/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/outboxes/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"outboxes",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

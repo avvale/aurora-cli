@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - message/inbox",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - messageCreateInbox",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:MessageCreateInboxInput!)\n{\n\tmessageCreateInbox (payload:$payload)\n\t{\n\t\tid\n\t\ttenantIds\n\t\tmessageId\n\t\tsort\n\t\taccountId\n\t\taccountCode\n\t\tisImportant\n\t\tsentAt\n\t\tsubject\n\t\tbody\n\t\tlink\n\t\tisInternalLink\n\t\timage\n\t\ticon\n\t\tattachments\n\t\tisRead\n\t\tisReadAtLeastOnce\n\t\tmeta\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"sort\": 770930, \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountCode\": \"c\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-04-01 01:38:46\", \n\t\t\"subject\": \"3gozi9urygpun7rcr60nk42g776q5zgxdzuu3m33yknzxf9eswx7eit9za49tbjmbyoy978fs276itq5movi353hmoxkhigunky0uey1sm5gz9plt6cokinrx9s5pdoj5deoqi3votgwwggj34lstktizvepfcpbjccvpeest9a6qobb2j5szmoqmrr7tr1pkdr9a8d3fcrshueo2wq21ov972hpe3miyybv0lneftqfprvywygntm9johx57p\", \n\t\t\"body\": \"Hic odio dolorem sint nisi facere eaque accusantium explicabo. Voluptas dolorem est. Dolorem quo neque dicta dolor ut.\", \n\t\t\"link\": \"xnnjfa31uuzt93lbc1umgokbbpitt70h6wbtk068lqyi47hnj1o32ur17oe8oenuqwu2ytf3vda1j8mnfqvab7yfnvgk3vdpkg5qakys66uzt0reju7obijwc3l8gbeltdzqo6ptduanw16o6c3p71q0a07wzt67kohf9bpitm1mlhx2mcp7lywl4xadz9efl29cgvdc0rg9q5hh2nbfu0lxkhr169292xq1bemq20t2sh9dn74f9ilgr0f1hrxijs1aukqfycujfwnmygamhpj2fdir5d5ts25oid7kqsk4mcrnpss3qb7ujnekwhtlm74p2irmrrty4zwz3dbb18skxvcwoyjmm138djnt3ntsstfe4zj8mb5w90wisgy0c2wn2r9dlkvd7qkss9byou4wccyegl7n3o093qhcd97cmzz9saefd68qv2v47wah7w1albobwxk45sen77gpkrtmsmem90psgwx9jskfxuv3z8s3shba2f7s257gemqjha4de44502gisjpagxcyd57uaakf3foag23hd1zohpgv5xuzvmn1z1e2yuazhopjrba4kunmpezmy9zzq51dbi37nswwjjmzup68sv51re5afoyflbde295zspqq6g8zqlyqgoogd9f341t3scsa2871i2gcvldt4qnfyhd979q9lwj0j7sukcf2e1i7hiu2538omyeikrbogusok808cblcqqbtjb4z8xfxtv5m26v7nafph9jln0ivpiz5tk13zd471i22kuop3737fomc1pgdjesna8yhz77ubqvi42if2fc1vxwl5dquhjofx0ye2ps0tbcrcvyslyebcn3c468qsxan8e3piw35sk6no3dmt1bijwil11ckldejwzrbfagez6axo8r7jh5u2g45etkk6bbrtbub8vj2u5uqhoqxk4kxqhsaytsfa9y8vc83ygpdfxkz84xrz6atsnh8m3z1t7girbussq6b21bw10xudoqv3x3pbstedqxww6qbbmwrnkotpgzog7mcbhze5nwyh5t2i9ffshhrl9t8w5rz4l9d80z2h92wbpa95i8hkhe6sjwbdjojdpx3kac3fe8ahab7v895vp8b6727nmf1kvug270sum48t5x1htg6qdkwx1uwie5ny1ag7lk03ffln7iaoh63cl49bvlkbmug6lng4aidmelng2z55cvqv0jqaq54rgc8dduedheob7ge30kvkoyb97kdif496uxsj84reoyh3uj7li854qxihu9vtws4wd41ejgj63rui0drphmrlu01pueoyldnk34cwk8tr3xjee3sqnerma2sguhyh3vg00q1fp6t1ukmus0q88b6k0cumji36fo6ijiyqu0a5kw0jr2zj0bgsaszrk3jcheypffwq3n1dnq2tg26n9fco9qaubcmhrn2xjliewzk9gcaayif9jzjj60o97ruch9p0ih7kxli5jgdj72ey6stkedqnu7f0n2f4fn7wm92dnqygmgeypt2fg54tiz9x0mlq2ccn4g6lrfxxt9d5u8fw2pnnfd8wd1gpuumnfux3dyfsxk7wycoxzasjorngspsmfnyrhsvwn2yhogc1ycx1apu3am78c7wf7q3wcm1jfsg6gdp5rgppuumf3mky2q5rx9n7dn9op5diamyks29oxu0hq5e8lofktf3w91zifd624gmu9g997j10hndhst2qb69bu1bfulq4ttqfv3c64vatf9pah9h4tm1hq9rwau8h9v3a6scz9xggsvtchw37jlz22obfgfmav8d4ii4hbwx8dhu8jj7cjpkeq5o82p7bw0ywsdkfmdzy8mj35qo1k2qxpf830kda54ft7d04uaz7zwkd18pxhhf5vglfw5kgvpqjs2tutjpzx5rt8ydfgiugzntplcq9qi1asod80fhfda9h7vemdfk9zf0ry2igrt69ofe5vpvgk8fss0ufemlh8joefg5z541finy1dsf9xqzeojjzsnqaihr5x0n3e6v84bj1\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"6e5niwqo1cvoh6gi8zidyocnj74ztrrr0b9vkw05hld58jt5nsa57cxdrjris8h\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": true, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageCreateInboxes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[MessageCreateInboxInput]!)\n{\n\tmessageCreateInboxes (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"f722e8ba-e590-4a52-85d2-0778f4e63ebd\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"ffaeaed9-dcc7-4542-a8f2-7240fee727ef\", \n\t\t\t\"sort\": 968437, \n\t\t\t\"accountId\": \"d658c62f-f098-46d5-8c33-33922f5f7e1f\", \n\t\t\t\"accountCode\": \"w\", \n\t\t\t\"isImportant\": false, \n\t\t\t\"sentAt\": \"2024-04-01 02:37:40\", \n\t\t\t\"subject\": \"9cxbh8jbivw9owaf55niojr6v0ma20o1553ip1kt7jowe3acgoi257pe7le12uhhpp8j7a2nwhqrh1c1x7r6k5oksmu4ekbwat16cb177hdot23lo8imruvgbqyc13v07zifo9m2f82atsljnxvdbrcvoywvyc7umfyel1c6zkxihib1k0r0bhd6ce2n36l7htq4pi5d725tdv5rf390vj0swgro7eb13njmf56gr97k0p4nw25ee0wa2vj83a\", \n\t\t\t\"body\": \"Placeat magni odio harum saepe et eligendi quia qui deserunt. Culpa quam sit temporibus. Ex consequatur voluptatem voluptates. Delectus repellendus aut sunt porro voluptatum et assumenda. Et sunt et deserunt sit cupiditate modi. Quia temporibus sint.\", \n\t\t\t\"link\": \"hl6olqzxhfn8tlfwfyfh0g86y65rsuim0aczywoj6ssz5miii4jcr98xqwqiucri7zv1wwjknb6u63gk8u2z14pnwvoxgvznhdtnun1ot77lpe6tcd7g0prsxwzondw63d3mfhyml7rzqt5rsuzri9e0eixtidzv15pwvoa9jxohtzt1brf61jnbi9aj7ah694mhphkzgavt0w4mel3z3cduf107eao2y58aztob3fuxw4poz8uonkxxp3p3x5sjsd1i4k4yatmaoga38el7fiales93nsn5epw8bz68671jmnuhc1cqx3qvck991lgu7fie1zpwg1lqgj9fwtvzbf1mtil9w5i9qdqfo2zeqfh1cwwmttxxplcyzrvwxi7hp6agprhccu2qrc6jzyvbisoy8czraiszpakixpavr8f46zis2tw192avxp3iq5u5mo7q1mskjpuoyduydl0ia8j4uorvt6puows15hyuw5qh7bnt8fwpmw08jjgxfcwhz7xcafybb28d0nik2qvhihm6tmfgstnlr1q7zk7onhint2jckjgc6pobke9vyit92dv9cb2tlp13zslmv9e7ekt2z0c2oyejx9blsnwapv5lcow8rzip8rhfzgdk266hrm4vzflgpxbycr5o4gaqa1z7fdd5ipwfnup76cotqhbgydaq09ucr0vlpo7hx9rj7haxspk2p3n351q0zng25ro1si4fo60rs6amjr5i855n8by91n2qne9v36paxsljw8vgmsby5tan6zb22g20eqz0oxsbjiitttsw50ojy1tyw6v0409ubzta2ddjtfe245wjo3ekykrl4gzdm281jobuy53h33wtmav3ujp5o2ziwppr5zro0asve5wzttzd6wtvzalevkkirgni9mq5rra2n11iut34sn6aoain563tydm86c3v4t723alvrcap7fqj21hydvympgba1zniy3zcvsrytbtp4sby4vlphle4yy1v3s52v8dvjwftb2mfyh7aygrxpkdns4finh6keid2vkpoyfl7w1s1i6jvehjj1x77a8td9c0d77uegcg8civcr3rqg8tre8yx7c0wog0rijy5q4ekgvkh4wcejzlt6w6goe24d3b4v8kxavut3ntv20wen584yjln4ipmstcmehyrf0e81yy2v0zx0j5iszto74mxelul8456mb15scb3vh5xnoweo67pnrj5yn2428yukolvao2z4bwhfi8kvuo6j1nulaleqkyhxcte6k9a6ik9fryhr426hwgcydwwaf9r1je2odts0hfanokjbrrchtnz7kxk0sihewto89f7kai6d24llmqo8rnf41qrjcam0jr7ypjushwhnj0krynh2aqbfveqv6ja4jwdhg9s59tzph6miphsjc55us5yarq5cxrf41kxtcrc4hd685l7k3g1mv2eam9frilaorbwsg7r136zr4oo68v0j7mp02h5z8fz33lnrecbwark1yg9jx1vyglz4js7cbk8da4q3torghwq9wz3yl7m6crtifju061hbipc5x8rbv4aoadbjlmb0g3bzcp52zk6xcbdw6rrdtpxb8nmdjb9557ylqvwcrrn7a2zyx3lvygnaxtmxpyvc62d45p48ph6152w89jlclq5ivpugha41wj9f2jtmrwo8xqc682hlkrfyrfnfsvpq4ce4w9h1syppjtcklssxllvuf63c1ijba6b0ab383czibymr4f08q6llojun2alx4386yd9367tgl0pux2cyqna1k9mgmq9y3jblf1nowvh7o6mlvb7hdk71k20yjbc5q9f5uobcxqy3ssvbn0189iytliraehejqrlvag9imxg831ge2v82k20ipwgxqd61ga92kih37iq7a4qsiezosjnitclpgviwfctp60d82z8kzaw3hkn81suhi9nj72m9jckslnzvo41q50bujfi4p28ex0fc60v357re29ry9lcho3cpy5cia8re6mnozrta18vweft1\", \n\t\t\t\"isInternalLink\": true, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"snq4iya0rur11nyofibc86e5nqohi2oetge33nycg2z8nbl50chv6mw58ebckry\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": true, \n\t\t\t\"isReadAtLeastOnce\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c50162d7-42b2-415c-989c-17ab4a601486\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"6ef73261-4a6b-49dc-ab15-d4c62586e4a2\", \n\t\t\t\"sort\": 539996, \n\t\t\t\"accountId\": \"25b248f2-620e-461c-92ba-1075c6c90167\", \n\t\t\t\"accountCode\": \"e\", \n\t\t\t\"isImportant\": false, \n\t\t\t\"sentAt\": \"2024-04-01 01:32:10\", \n\t\t\t\"subject\": \"db4uby72eyna41tcxgksl4qboygn2su7lidw3yz1q54j78hf6x1n5bfgypx6g47v1dp2qux2c40ow20twmqos3v9c3a1r7clmbaugxgma2p2zv5j34w70bzrzqlb0t3ylbwr9a68xr6o48zegumw30prhnn4e2rp847zf2s3k4na3uzvkwj0vt24oc4pbnzf2sm7vssl1j792f02eq1gaj9x237dwcudk9sqngt3wvi482voyymp4r4l6pqoc9\", \n\t\t\t\"body\": \"Ea rerum et maxime reiciendis in est nulla velit maxime. Nesciunt dolorem enim iusto nobis qui. Est rerum quo et velit aut illo. Doloremque est modi aut eos molestias ut facere officia commodi. Eum adipisci rerum accusamus repellat.\", \n\t\t\t\"link\": \"vp203inpv2zrpjlbhq42d5cfcovwedg4l2uvdgde4mmoll3gsckidwspxeoklzyjvke8q8vmigblhhy6ebg0d4ovikw9ju56sb9y3blwqrj5xu4osywae2mc7a64tgjgkwjys7ii6j7jw927ct0c50dhr40emrsusp5l3eksv4jdynjbluik88cua33yam4ajlvr3h1fob2xqz5gq9ab8hukayq8gxzbpos01ppq28f1g0tf08mljrqow7nnvhv77f5sob08b9i68pe70ifj76bm54vru7d8rnsujuck8e0sgyspc0virgexog5saifu6ftsf0xoxt4fky5zimy08yzk8ixw3kzy2oia1da9fhvhbpl2stu6zju3o0iat3hid19czsewbemsh23l68jnono3lkvt902lb0tn82qbfyflihiyetz26r903fchzcb0zcgs4omg5a5rc8sh7jyf8gqkq3vw6lgpubqvbbfur35sviz6qsvmhxeqd471ra8hpdzzgko6un54b9ehs80wia7chhar9jkgpgjl5s1l1ha2lslzvc9w92ibvytwlnvb99asr2qp8b74f5jd2ldtvlz46t5h4agmkbp2z78ymc2e1n124ti3d788gq0hb3eq83nmu3ngjhkq1rodbda0n7m8pusxr1ryu8eqlrrczdy3b2dr937xysk9hu5o7ci4mkttb6r77esqm1wq7sqfj8cymnxzpr29qct5xk655k0lpe4l2svwnkulboagwne3f605wbqlcakc1rv7zv9f76nqgjkytnaukuux9lzqldl9pqrsh9mdc8fxudus85u9ks0s5b8xwbn4q1x3y1i1b235kp8brfz8u8q9lya4tjmxjpv5u8bz5vzhnvjhvo0ano2ofrcpi5p33ddssfos73rql4minackbeu1gg7vnww335ik7g5u6zw46xlp6p0gu4xb8ot3iqlwmm5z9ctvsid4eh9d2kyomzchmcsvzglaacgqwbdlgm8n171d3sxa5qhpqc4z974m8www2d1cqcg6t2odempepmpiu5uqauaik9w49wikyu5cwljyh59b929ma4ufdyhvzcdai7rpuqh33armhciswhebwd3xidy1h83pc40de8gvjw5fvg4fdprknafebflyig0x0v3izap2r50840qmlwxortrofzjsknoit5jeztcn0qr32egq371u148cjzg83h6iwrkx2bqd6qhkti0udsmbbg4sgqi6t6ggxeanmuoam8ceaw59cvurbquzw1qzi61tt27zpmemfhm6vz60551fgblnhwyegshlitnvghwcw2rn0a3pif6ux02xvjjcdriat75wbtszns02qyqmlyx7eh73aysnbawrhhuvui8sqaxc3tfkzhra7zemd9ky0ffst3o9c8t2zcrnwvdtung6joo7txwumum0qzautihifvjdfyyrzd6bjid87g07zool8jxu5m7twoeftdgw62zkkuri5f7gyb7vzogbat3y2q7stxa3ugo8sih4szt630km99hzgia0pdxy89s1wnsj1opcm872ysdq6w3w2mwhhg04wt80e5sr3r4j5qqn1gj04dfdgwedw81po2ex3pxzqbkxiw1916hup0nbhge4df0u5umsd0xccbxqkdcxm1bwjbvg38nvzbwtfp2954gxq72a4mh9j3v5jx8il4cqxy1zrhb2qffeug30a43uoq664b1pata28civynm96ruaw0l26nka4m4rktegckdfg640dooff3wq8fqnjxzjxnps7g8n3yd17tb0w91twqz79kzewlueu464k3g3yvw7lfqea33x2lmrzo79qfweionztowddg9xjyj2es1ramt2wkqnyzpz4vtl3ubaj0i1dtu5pqe4a9zb3r1g7lrh9crlkg4pxvt2rsu8v20pvjryxnxng15i7km9l4uqsr54n689sfq8y8nafwl7z29o9r2q3ddx8wi5loho8g689aogba3mvwcl3jsb8xdy70zeparx4\", \n\t\t\t\"isInternalLink\": true, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"v2h7pq6y4h3dteqtdhph502856p5h7y4wnwe3pp62f26s1xf4b4wr38ww4ralzf\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": false, \n\t\t\t\"isReadAtLeastOnce\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"72ece4e3-2891-4326-810f-8770dac5df01\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"e87a0c7c-2fd8-498a-903c-9c136cb4388f\", \n\t\t\t\"sort\": 902461, \n\t\t\t\"accountId\": \"fdcb4e0d-3f31-4c90-8585-51dca5f25b3a\", \n\t\t\t\"accountCode\": \"h\", \n\t\t\t\"isImportant\": false, \n\t\t\t\"sentAt\": \"2024-04-01 17:12:04\", \n\t\t\t\"subject\": \"wschnsfvbuvo3sm5afdz4qx9aarqrwy18zsgdoyfrhf2jasqxlr7d5ewux27ghdd3yjeerskbqzdy08z444vg9n0thbrabgiuxqpqllozlcnkavbuddj5nex5j5xsqnj258lm3q233u3l5qvviz1vu946effrz5g8etk5rjffqm6cfsja80bf8sa2nl3h3trstw7kaaqw9ywp9jrzd1bmoia7tatxpzrx0wh0r8hfw6hk25aeg2hmbi9fwutfz\", \n\t\t\t\"body\": \"Sunt molestias perspiciatis ratione atque suscipit perspiciatis. Provident iusto sint sit impedit similique impedit. Eaque eum perspiciatis sit. Id deserunt dolorem. Sint quos rem vel aut aut quis aliquam quos. Pariatur sint iusto eum corporis totam aut.\", \n\t\t\t\"link\": \"930t9pmgfktkuhw5qszq1suoo831q8n06obsgoq2btow6ro3fndph4w76fu8fvvsdvueftghvdutdrrdjdx5s5vc41v561o75mf2v5ei0efx92sg1pehc8jfdnfnimlfvugilc8cd7qmqoy9rxkrqp5bbju54ps0rn3259ecx7kt9vydw3prclfpk238ghz9qas6csm0ac5eha90977yrmt8x8zgav5scipmn1z6eobritu6pqbn31uc9r36o1d5cqci7hfciktoe1206uol98xsjbkbzfikwf68q1cun1uyicamz7091afat16u7fk17kqt59s7ue93qfnvgfeb8ae83caiqwbszyqn2xy6u5s89npcr5cnuur66w2xaqwggvigj1ia6oyexdgvk2a6n769f4jf7ivn0cdqebhm7jy8v0gdscuchpawvxb39oi42fwiyty95zk27t4uqe8asowhw85ieygx8v4pc3a2h8txidklrisfpafnwzkg5xe5xxn3ov5ucosd19113evh69p3omjw8o9n9b1470dg2b2z01c336ms3hnadirmew33llen119xh7occanu13mfhc4qqal3dlfuqk18zsrays0i0d69ohu3qq8tbobuz204neph1t56iq42b5eye518ukjkqcqfrtu8catf988n4kx6lz6l0sn1v6ispqc8lkbfsawm7ev3me9ww88o91zsz9r7p2crfzrgapz49synacz7hj4niwu54x0as9fxox6vmoy8ou7ifxx5qnbgie7s09kz5br3x1ubqd4281wwvy2ian69x3ln7eb7ba57xq5tf52r52g8lx466pxu8t3sxu36yng5r3nwbj9elrnwbzu8a0i0829xsznkqtyfz4se7p0zjanx4l9ord5kog5iosqj2gxa9kadm904d2nczorxropffta9l23au86mkw35e9jzn5aoc6lv7eaj1byaz35n8z6p6mcpplmfayvep61guegxs1ayzogku91iqt5jzlwy4uu5drj7ax7gpm36oq7q06fhwqbhxh2kicjlrfxdb16bez7l9i9h32fzwgmg6espcj3bg73yldg42jkghgx7dt6ayy2oo5r7fk3jjlw797coqoo9ke3e0y62qwyil97jqtm00crudr3o5pe8w3xg4gvi02sgcc2kiagayotq3cwm89ctmm92b335tbkfawyb5nme6dt8pgayhq9zom29rtwjf7cywa02yxd6sx81vo9tarid5o35s011g49dli1xsbra4iru3t6d6yvq4qj0cqvyi0xeude028uvc3m755m367rv4w9xgr93h1pt6xe9oomb9bi356is3vlfo27nxmz4cztpb8o5ea1uelo9xbxs6fpc5r5cpd6vqvj3vetat2tikrul1yicpw0ewl9gchw9navfie85tx2gztrlun8sjcee7zqxcvhx1q1u19qqm0w3f7jp8efom69u5gqn9wkrwjw5l287hz6ig5l72bwnl0bf1bxhkibowh3ud2c0w9uhg1xpp5g34pcxomtyqoproz1bch68ao72hlj9tsxcx7r7fhvolh689wlyy1jt8sp336nrbgdw92cf55jrk0ctmqk02c1rx6xzy63l0wlvzejpnjp87hkj02lf2n5rrlwcnojpxh7q02d238zf87ock7e1wgnosewxy9yz4y3jkulkfs4jmwiw3evkr8q11rnib21mgo65mpz2mp9ll1dln7zalbzraom6fuisqq2eb42r8q9d4gnkpaqcv9ymn9ri869cawpqyoiugjmkm9jk08zn9f4l6zv9vzvg3lkeqntdgm85i28mucufl218xsrfb3yw9cy0sbt93ufsya7ihdtwgnw851b5v6vckhno3vvh5nb61fcgio9076f2o6vmk4jn67pbn5es0lllyqlcnh49or4oy6v0zhdticpqy4k0d9q6u0sja7pt8bm2eityr3nt30b5xs6vamcqel03afyobbk7q4jbslsf2cgz5mtjpea23vm2i\", \n\t\t\t\"isInternalLink\": true, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"b5kniswbwc9y2cx5bbb80lqasf01bmhy7cg3widzfwsu6fad76112gce3ayln7c\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": false, \n\t\t\t\"isReadAtLeastOnce\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1a15f311-e68b-4032-abcc-6428aa6569cc\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"fbb8c37d-5aca-4be7-8184-a3af18c042e1\", \n\t\t\t\"sort\": 972759, \n\t\t\t\"accountId\": \"e5e96ef8-c09a-48cb-bfe3-fec11c6bc77a\", \n\t\t\t\"accountCode\": \"6\", \n\t\t\t\"isImportant\": false, \n\t\t\t\"sentAt\": \"2024-03-31 20:38:37\", \n\t\t\t\"subject\": \"zqmd7gf8p7wd9iaqrjam8pjnmwuesn56k29w3x3skcdx10rrzltiqu1tmdjzk8td5c5wfsq6f3ptl9ep8pvfsyrimasc3gm1djltzc1dcssnqv5ut8rlhjgjh8mey660dsstnh60vt3j356jxtr09yuh5zc3bj025sx86npmfi5cqpm52qgoyicl1j0dmth7lpieyi6cehxqd1ll4oogapkcbwrmjgf1fytsxw9uxq9fya2py7894zvtnrunqv\", \n\t\t\t\"body\": \"Aperiam maxime aut quisquam. Tenetur ea impedit cupiditate. Placeat id dicta eaque exercitationem est et a cum dolor. Autem odit est pariatur velit sunt.\", \n\t\t\t\"link\": \"whrmaivfv628x5ywf92zv47uigc61mefrkxuid2iiz5n43omj3r1i1um26xs12cw25as6u1zhtqho1m6a1dfr7ebqer2wt35pk4eehlvuxrvhrnq19gufiombj645h3lfn6gfeht0b7y5h3ua4kto3hk11gbrv75dyinh9gfo7fiirz2vqs3u7zls798cvowz0eun39zeng2wpnuga0qjopp1r003rm6h4pxjei7u3yjj2mr2d3n683w5ux1gxs5oqa88obff3lm1rn32rlu9j8fdk3tytapi6cky2uw30bzhwb3klgvrzt74d0b9t4n3zpxc9cpfa3ufyliqvclhnwysthqv9j17mfp3ajxtzpzd0z1birsav5i0g5wepz6vpsztsfturgwik9w62aim583pomk6cwkufcnskjwe5bjmpglrf30ahjx1lx4v2rjz1o4kfa37z57fjbp9031c4a2swdzqh2p085u3j8c5lqiztujfu4d0rvtfxk99z1upw2mhq4m84vrahq4l0wjv0my0gvjiq8khtx8cyzbx0qaclcwt374g0tnf0nelkd9sm7syyefjiz92v85tv1t3ufstnhck7vgyzbmbotqkljsptg257nep2rnjatlmrjwbq0am1qcesyek0t1l8l0feg0iw1e9kg1gvqxrsbs831sccdeli8yrp16iwzv33w3kukau8mjl6kc2l4u4d4pvhlnho6znt1196nuppbitffidohwtmo3ripnwoah1sf92lh1m7myp8syhg5ydrrv2j0a2ckxwic5yl8ji7matjikctijax0k6bx9zvkbhzcm66u9zfxsufbdn096pzs8zxtjzbgo9viwuccjsbm8friyszaqqzedj05t81o0cvonrcwlbuxvrgc2u01l0bv6onpjy86m14233om5uk37bluewjlfbcpjw7a7x91211x9qwtyjd8uijajkupbwvtvvzefb0aot7ecryb17jn9g4q8hq3cv70tl08fwnud7or59xyhjxe08l4s8yifwo5cen8x8mf2mje308dvhkb1ref74ft9vhlp6v7wfh8d9rwzdrevntzetvxgqm0seoqze6skgg3srm9j1jlf9z8qdj4if75t3v2n7owoe5yk73d39bchyg0o5x4yj5sxpv1oa13k5100xaz0bqiwmvyudojoonk9d0uk9hk2s4utgkyun4hyr8us77ud5ne3pyt89xb4tloijuhooo48wm3vfb9p65d2mvadu1ocnmqt8klsat0f2918134i7yqo7p3i7mmopfah5yftlcatbgq5owsn1n3ncgqau73yehwpvkrf0u1p67zr2i6y4g1iq7pl514f0dhhizj5tw8wgd1abt7gni3nvcuxlakxfzq9lp9u3ah2q7u0eusbh2o60lqghzi3gajdsma4e10b3b0deerzbg2ffesuba6smvrdu7m7nml6qis8i4ixt4wxoyi4fki0otq7gvexi9iiny3lu9bckm4epe3u5tufyxvnl0u1nqf84s0nitwcrfp38efur0he6x934pngybjvteczytivixol05lmylw6jnb1sodd0wo6ak82nqnx598ezlhupmt7bl8y96ryo4ev07v2bpghl0gcgq1fdrcyhpial74e32irekpkswijpzr15nah6kqcmakjdediqljqds7v297iwwj4ur0ksn07km22gqi5gnzo75v6hmxy20mm837pdwl516wjowawmxjibrpnyjeyignaanzafv7zhldkpp5736u0a8gbjg7nsg49r4a4cnujump21zqudz0izbtfe10odz15ji7reqpaukhjvlo8hf93cx84ju8y2udzbqxezsgtjg9t2tdob216dw7xc1ln1cun15rzvajv409oyv2r3i4eiom1kzk7mnoav6kezntsl1we60qgrnsimv7ejwudr2kld0wtimknizqrgzor7fuhf93j4lx9c8gfjg4yfi5g01c7q79kv9is3xaa556l3zlp1mwu5vya522e1\", \n\t\t\t\"isInternalLink\": false, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"fddywuv32zld4991nfrir62vwepzqjwge8fuzvbdfivn5wgd53xeh5sjzea3ze6\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": false, \n\t\t\t\"isReadAtLeastOnce\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"cee5c04b-2a91-4a27-90a2-b305c380b205\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"3e001813-295c-4770-b31f-d123974845f3\", \n\t\t\t\"sort\": 803215, \n\t\t\t\"accountId\": \"5202edfb-63a3-4b14-b42a-e5eb78e7c263\", \n\t\t\t\"accountCode\": \"i\", \n\t\t\t\"isImportant\": false, \n\t\t\t\"sentAt\": \"2024-03-31 23:40:01\", \n\t\t\t\"subject\": \"pocwurzjhp0aol1hk62x7eirf87s4dyonxqd07jm4taqb7fw68vb9bxzekmgzyld7d430gidym48e4xaao23ml9g84lsp7k9s7jgeo1hoaj2e4w0lh25y6k66gylt1v863zyyi8tydsgabdkevuax82vori2eynf5qd1q8ik2y45pyuodhxclce0bh1xy2cuey1d54ofeg742gok3bx3v06lzusbaqhy0y6ctib17ta18wco9x0h5uj13se30o\", \n\t\t\t\"body\": \"Voluptatem in aut aspernatur molestias natus laudantium occaecati. Omnis sapiente id doloribus dolorem laudantium incidunt cumque non occaecati. Non aut qui.\", \n\t\t\t\"link\": \"n661t1ybz4w8e26v220ofwrteyxyrsf12ieblcm3bxbk5sjod2waub1hv8bidoh0zly78lbulft4rl8du8vegqwpt3ywgv5v430bx0ywxjts60yua06t8v0mb3flvj6ospbzx0zmy9v89uk63763ohgdqy5u5ifioq51zr8kcxd5plnls1f6dlxlfnda3eszm8n18wwp8ztf1kgry6w7npj9cel38d38z88tcgtdpitrj0q5fcd5sox12tm6ieocpft9gtxot8xcaokvgyszze908hnkyafs7e4lvl7nf37961vj9f5pcu93w1kh85f43dbqj24mqgiigzplu4xr82y4r71j98c8x5uhs7o3mytxag9vq45sti1hrrspltdqko7ibhhyorqrsvyycmbmabjfkldmf9cwa5a00v0if3k9nr41907qbel7f50s2d8kaq2ujk9luy76j4dqdudd3qgy3f95og6f50u4vnf731uuaho8ka63mdrw4ixn5v1hmxmlgp3vysm5zzcjgyn1q4svz7su8um8afduvvzso151qnhsz4m0h0kfimccfi8x4griwtb2iu5eng2mmayfu5cl16ixsgqg9mqklrjm0yue0p5ryhrggduj0d6w7n59znka9g9132exx85g5urxjfv7fmwd5f9ivm0h9dkolrmsflom2kw2afx2gbozuzesrify9l17jiqnv9h98x38yo7m6j9xqb3od37hqaql1avxhqav964qxayl3mcxf0hpthtnm4q22702phia95nawely145c52d7cnm1rbk4wn2hdujmns63g08vduel00ipfwu6jv6a41la5tfwruov0ftq1ogpx9kvnh6h60m66tqcairesj0hg4clls2zfmrl33d4hjcgt2r3zf637okmltq358srenz4rryqjafox0ko1onlvcp92e7ftta5ia10c1jr28xqpmt910wttucgtk2maqmy51zb6b3qa3qyn90sn8uuu10q4egig3l41u12nnyoua3dn49k8ftoam82th04c8xhknza0zxrazjh3qcfkbm97vtn06ou62d5u2d12qeryvvwf2hi4w3qqchwtm131d2i8ho5i3t1abujkpjwqpmftd57sgkpdz1wslch38t2fja5fe00s5zcp2q42ry6nromd5e6h434c390c2effmieqvkf3b2vg4i6f5iakfcer0t5f0ulwuin64iw9m6ho6xaou43m2g3a42alg10gz1pn9tova4sfrdlk6tizgu14ibsykplxg4xebfc2yzyp5vzkmm3js1826vwb2jucfm27ptqryz41cj4fslse22lo10xxf4xz8rnrw1onofm55blu1pgjm4leyk93ac58bduzrveuvhyggq1tdx5xfoxpifc45qeb72gy9l27nggr90mb4g0trlslqv1b222e9xmxa2tph9x85pb10n2fo4ukypcpqotbvsze1dq3dk29g20wa4w9c1npc0awdmnk2pz6hpajmpzjhnztowpni7vtxqq7h13fgriotp4gvogz80ezzclingwxx3irizcq3zqfup8zucap3nkls983ca3q7dgr991zezoxiqtlvp9ssen2k26hk6l3we6ld35dm02euh1wlrgkqmblk1ppl9iu04c2f3miwcv2np4rkh22obftouavvk0io27dtbp34qgxv3r3ko4bogw837yko3lo1iywslcophg9opoif6o1h90u48s9vp2h123jd7ng8rhkp57j4mh76iumouoxj50jk9k849lrb2297jjqen5fadw97k5fy1j0k33d1xp4paf54wvrkez6kephrj8big616wtsqg35y1b17rrl5jbz3wmzgkpdrn7rynguul8nxgjxgqltslvb7p69x697wdbzhnwr8hz5osx5w70wy6nfcp0s6jyk6prw6m3xqadv7djysag0trx227qw7mbo9ruwdwjrppn2lif4vx7j7bfq758iz2sha2yikmq5q7fxjtoj86ht6ya8rq0p\", \n\t\t\t\"isInternalLink\": false, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"0tics5owl36occavviwragzb6ap5k725c1gqo33kjro3kukw7cyeqnw312oooft\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": true, \n\t\t\t\"isReadAtLeastOnce\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8de2e1a5-afd6-4f01-9580-e93c1a086d66\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"6466ee87-25bf-4473-bc2b-442607202be9\", \n\t\t\t\"sort\": 141537, \n\t\t\t\"accountId\": \"0866ef3a-dfab-4f5c-a2ba-096033df9831\", \n\t\t\t\"accountCode\": \"p\", \n\t\t\t\"isImportant\": true, \n\t\t\t\"sentAt\": \"2024-04-01 01:20:07\", \n\t\t\t\"subject\": \"1ajmnmbsf4cm7lq6cdqqhgf9a9n9q79wfeyfyb5jelo2t8rkfy4apu26gpn80o89jbhqntnar53m2w697uer3ah5jszvh11agijxfi17myrk0jqoui3cjhqwcjbdmddsctno8mup9wwv5mpg28c21v8qe2hv7fdl54bzp9tnjitx3azf64vdz49916hqs3zmlh4l37qxg4qs7d973mzaeq4x5j5rc10yoa8ami5pnrq9yb1j92y0mhs1kzoa02\", \n\t\t\t\"body\": \"Et qui sed dolor sit aspernatur. Laboriosam aut tempore. Eos tempora quaerat consequuntur. Aut non iste impedit corrupti aut. In corrupti totam enim quis expedita. Inventore eum occaecati sunt est neque provident deserunt eius.\", \n\t\t\t\"link\": \"ukadmtv4o5wtf8lghu9dp7sv5j3h887vi49s465rg6wys0r1u3k8bqzfe4eum13owu2qzwocgzfef4q3dvcvfi66ruagmq0114bz9lszn4qtmdnlktkwc48y4t29koekdih8uxhgyqnnqikkto09wyztlp0cq1fk3wd4w2rfxcgfh5paomt0pgz12gftyh2opait890ahdsbtzybydsn6tl83r0zi7pe5ay3fd9lu1cini7kkv16mke35pbkn5d6wd3rmd1sbetm7cugq1elcvt5wv93bs23bea4woa4rp8n2vtodu4wg440zse4v1ccl2g4pn8dj28elnmy596bwgj9g9tvldo8zppklix8dcgljvlgaamw3xo9plr6tzlw2vu4wq8tu5v37rm9br8mdyq3blnzkrgdgju74h1o1r0kpo2hvylbfs1mwrchr4siz2s2mfdns0n2dajq7p81ij031ybftpmoeedjzfk2i4x1czlgbkit1u9kb7tlcark9kckmawq350qtjrtzve6hy9omysk4cz36a6d34oimuehvin906t0jfrhthis25doeln8oqu5i6f4jn0ft20mlhtin1l31003jt9y87tg1kqxepsldc7z2iqv1btxeg1pspt6gzm1odout8o1v4twi85dzgvx7mjk2784a1dxs84qvhodv706aiz4lhyo2jt1c66dsfsq8zgmfz61a21wujxlkwj8pyohp7noptwpzapc21xc9kmtlzytarlp2w8r27zj86axbithrv0qedfx5ntt9xc98467cvr3hzgmhrtuaniabo5rlgnx22t2xr4xjppuuvivv5ucab5eo0ywyklug6oeossfs0dhce2gr0vdc9xectydpybfa87g6lw97e9kcz4kt895bau3n2o6uyh4mj1vs53uwf5s87i1161grj1t5udnbtq36ecerr8qsry3xcvpkg0hkeql8khho1s5rt0rv6c0v3dysz6i6ad985y19lq7j0t39m6s60vorivwek1tjytdq5qh19brbem759klkwpyjdevocsk1v6j3501koj7y3hsu9ioc8jwyvtapb3nrspv2vo7uwo1d4b0hmu5ahycnervjvz2m8nh5mn1jedjjmpt5z2frgwtl2pmoezxl47j22tnpqo286pqwt56m3ocxkq5bjsbkssclv59q0wzsgupye51hs2k0xg52dwu03qn857v6qmtcuc1tnqbshx5mbi5i17bfbt01vc6zaxzz3wvojdg1adjg3xx0ojktj9hczry8phg0gboau4z61dax9he5nu5x57kd4jfclsbxujrph9umldu0vsemvplbk1fmovi2zuftbsrgwgjlg99iyk6vctrb9f9kebevojmld60fo5wf6k99kldcvuvglkcb2rfe8mrf6watpphoqawg3bhwlu37yjg5o5k1gw2a0ua15rrgnhbx3wx8i7nr0h8nhvyp88fuo30xeulok09hf0y5p10bgxdm9kjxvt88ybfqvu2k8a4ft55om9culnwnzj0akcxs260jxfqfdvic8rq1q4807s1tlmgea442bjlmcftizyhj2c9yv74sqm7m2ff8yb1aoovgvitjp2k1wx5jgvy6rhbyaj5dp8bhokiow5mbgj8v25rgd4b3htbxpu54dst2mtgp8qiode7kycmt7c07wtii0wbz6cmz19hgo6kiyxczgmhqpeltk56ta3v09wl9dh5col5zn8hgtmbgvf45v9qa4v29bknjj4t37nwwho9kdrli4a27uu53qgdawqlaqu2muqg52ey3z7r6iux5mvu50cvea1dm0nqzdr3fpf3ky5vo0d6bqho4ed1da9rsb2w0f7yil3esa9vln0rakolwjjr0ugc1isjo8qk3j8klv7qpa7t7g3yv6k4dq1t0n6p8wzoj1p1wj63djdd0t2xq9b5s296d3iqfz3m6su0tulfl8v2ae6s6f656373en5ah64vbaetgocdg0s769j1l67oax1677a6ebdu9\", \n\t\t\t\"isInternalLink\": false, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"6wbkybwleex1qyoptfex8iqswqlnetjatmgihr26ywxfbka06q39uk0ez0nq9re\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": true, \n\t\t\t\"isReadAtLeastOnce\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e3f40631-e593-4f18-af8f-dea2652695a8\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"6bb6200a-2bd7-4a06-9e1f-7fd442f49db5\", \n\t\t\t\"sort\": 785279, \n\t\t\t\"accountId\": \"ba815114-93f5-43e1-894f-b25aabddcbf9\", \n\t\t\t\"accountCode\": \"s\", \n\t\t\t\"isImportant\": false, \n\t\t\t\"sentAt\": \"2024-04-01 19:46:41\", \n\t\t\t\"subject\": \"ohau9gy89kdklx2fer9rnyy10ij68mfrm7k2lzrur2lhmyjb4aimcv4z9uywb0hmmrk85pfcsfn9pk5nt5fcjla5hdm6zksxpjloh2r7q8b5odbrs7zhrdf9921tvh1yj43huv8dpk64qtadpir4irq7z56yw0rnobos2o1m6ulezwhwtz50yoe84aofbh8rap3arkd075sgt6le4id2vlr922z4kv5k5pmr83yymubz4gz2pb7sqohtp23khj\", \n\t\t\t\"body\": \"Possimus veritatis quia voluptates dolor. Qui nobis quis repudiandae magnam dicta rerum. Recusandae est dolor ut iusto. Corrupti laudantium dolores dignissimos esse qui. Pariatur non ipsam corrupti qui eaque a sint. Ea tempora mollitia commodi.\", \n\t\t\t\"link\": \"0kior7nisvmxhunwz4si3i1l4rw90s3c1nq605xql49ab7wy5jc4wx4s3j319903jxkdgm1xupli567nrxyomzqipm1vqhhnybt7gh8hdc7vz252ps0znko3f6bendyzul0hg8ql9xfypivdi1695x8hfvrznb0lojej5pmlznhib6sugy7e8ahszoa2thidslkedygso0spktnuujh6irfmlqhb0cbdp3mt90yord5lc2yb5s9l9cw24ys4ibh7bt3c0qfflrdutmtfuvy6blgbq35sxnzv0khivr2jb8ppidmdogvrzz2rpv44naue3si26itk1n3gsjqf2xqvnkmkrcdkr36tq7x1vh2wab4egrog4tkzbnr43cvx5qoe90yao9fqu407sppmegbtim8fq3b188o287bbfhy8ehcxh0z2cf6n7421zqvscyty0r3uthmhbjcdvbsj9psyycc7ahj23tfyqd4wg41ihrkj36k53qqsmzo7ixqp74qxrortl396qkbpct3dg0exxnjmudtgpwe68lc9uvsypchxlq0sfqhsvyi39tc20qp569g4a4d86wb5bwezbcmp8vuc1xhdof1hyqhrrm5xp3tzpg2dpfjtwwea8uezj2dryxd0pnij70axd5j41ud183cnw1re4ffz66antbbo6z8ydn8zgh6du9jxxhoy0yl1si55poogkwgx7hu1pdl56grqbpqbsd34av7arj8smm6yvceuebuha9n0g716j18rjk81re7cxntq1covb34fxbc5ku70dnm61h253b2onrc6a5gjf0c1u1c4e6dsa4yt57wqqp3heru7sgl7419ae6uf7qhj4triqwjunahidp81g60d8jqoqjcj3q2zml71nvxpsh9nls0e8r71bb1dx8v47e43dsfryd0h8kmrhtpmibwse1nazw2zk34tq001h08a9n0yhlxtn0flir79eil2pviyguhrdkovxup0od1dudh1t5o02bppn6p44s2wmqf9opni3fjb2qil6s3gnomf834jr9lm04p58kkf4aph9prta4neobp7cpayc695sh89j9innrzvzx0fxlwriwg9eo5uiekqvd57n4z58b817w94m906xwf6xfl0ji0tu4zsv2mxjydscwh0lbhgs73cfgds9vw5hf9nsc9ksfzbyu9bszfms9q92fumrl0caqp7wb9smxm6g7vpoeaguck5vzt6p08cy8pofcdbk1sa55xx7ddhqulfqfr1xt6w7me6zydh600jh1sem0dazslyh0kch4yjhsnnd15pe61ko8sfyjoo9y3zahbum4s0j0pb6ed3no91uuf3bdlfoz65x7ukbb461pus8k7jwc85gaicfkxx00ikbeo4nh7rfueci3cke7951leioisznoth7bv36k9asrrj41ovb1ho6ag2mpttz59bc1c8ejzwnki08up9p9n6u0qd5plufyj9aix9od25pzi8zy2n3jeurhbgr41i2tql253dhwc9vnh1e51r92ntsc8025q9rtwy7gqs13q1il69s6zj9csp9fantgx9yf02b2fnkeejq9w54y0z9zzctph5oopk8bqw1592vygc1pzirm7v0hcmjlckgnw89rwy4b36a4nc9ncscofvfybxxjzunzfwu5ck0ax2y46i7ma61gqszv4eitcsqb0560gtlid0mjbpev7i72veibazrxmk84a2o60k08d8ap7d72y2rak1rerrwvse4m5dohknx6bsjbztpr7i7ogm4l7aoc054sll2sedhjes2fg7cq5ztl318h3i5ta2qy0jc4bw2pjylcmdtxstupk3w0jlydnb4b6cwda5o3ca9r8t30xsbc7c5q0sdrelzu58fh2iuy324ss2n6n325hsg49batpr4jlp6ndyszlnuwh2b26rrk8fic3toox7n18yzfyswu2038j68zxp63dq9kyfg53ztqjmizm74d8f8306ogpmolq5vxkb2408eypylx0hyqolr\", \n\t\t\t\"isInternalLink\": false, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"ii20mxp47021zr9adzfp2vgj8hbaedask2z7hsd0pf7mdet3feq6vr8dpstqw8l\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": true, \n\t\t\t\"isReadAtLeastOnce\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f00c4d74-47dd-46ef-8e7c-0e1761f182bc\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"df36c7ec-d190-4689-a00c-ed0c569815f8\", \n\t\t\t\"sort\": 213769, \n\t\t\t\"accountId\": \"5ff51d3f-eb83-4850-859b-dee8411b728e\", \n\t\t\t\"accountCode\": \"i\", \n\t\t\t\"isImportant\": false, \n\t\t\t\"sentAt\": \"2024-03-31 21:10:31\", \n\t\t\t\"subject\": \"bzqfhhbirp7wnnsuzh019ite9t6n0wj963d7accwnw2iypd2auz7h5drhqjb7ddklxtiixxg3lfd8h5zwa53fuw416b7xcnjqrsqq33hsql6dcxzoloh8ayng464izktsy1c31416nvyupwbnvmed2i22vmyef1e45i324g128k1jynmqh95d8pz854ruqtdxxg5t8r6hicm8oybdbal901mnqbyo9a5a4dmyozz4ljjl23d89d5v4fk9ja4u6\", \n\t\t\t\"body\": \"Eum ut cupiditate consequatur omnis deserunt alias. Consequatur incidunt et fugiat tempore repellat. Cupiditate necessitatibus quis aliquid non deleniti. Ducimus dolores voluptates possimus neque facilis molestiae nisi ea. Reiciendis odit aliquid fuga error commodi sint corrupti voluptatum.\", \n\t\t\t\"link\": \"8ok544mofwmv0wmb101ukosllvc30gl6f1f308thcj7141l7345qiont0ole9bwfrvet72khme2di4swi26wjas2h15c7vpjy7v33cjp5m6rndwbahtpxiiir86kiiycs6q971zp8zbol5k6qgx7tocc46k188r6u328jhohdl3ydgtpv1x3acrmez1kduc598qum45czhqp6p4vd8ei5oslvr2m32n9tllmvbgfvfiu93i1264vhh1tlzjecbx37ajo87owzc44m9oyo3qmjk7wdfcus1f2lmfwjd1x7ke3vwe9bh3w8nni7o1l0zzc41bfawimmfn4go4jn8byqr1tldwcr0f8cl070pnhzyc24283cfsyuh82oecnedrq87n6j8whsamye86hd0wcvzps9d0sbhxdwqly3ynjyzf9mcdhwrctmb5dxjp9eaus01fu1551mbf6fr0o4gg0jsjkqfihooae9qwx898go9uftlnf3jv17n3lr94wvqa6lusknvfiib6zsb5tjs2ndmc36r0gqs3z9l6ahjeo6mp5otwyy7pg6f5zu0hezhp6fe0vofekag5kg99u5yrgwwotwuhqzokp09aqvykwdhemzi8l2dbdggr5i9j95nxn67yawzdtat8x7w0909eabpqmiu56rlkylr36t4vunj48ozaf8ztqo6chpj790a640spcinwy3k25ekhhin8a8xs2198sxxl65kinxsvrvh7eeek68qguve3724481yawvrpbg2tb2i0y39ly5ve1cd07g8o9mrjolmod7qbx338lhcw289gg1iw12rvfk5cfivs96u4uvnox7edguehn721adb4nk1z7sv26r9c8ntj5u24zz600bu12gsq5a218l9ajeldvuyho97wnnrt7a3sy4f1luk3bfr2xll4ygfhns0xfauo8scjxhmnsgavxotdqzkw2gb1aqrjdlkppnvrd28sc2ba80azn8bcs0jep2q3lcnhktei4app4q1jdnpln1nfcb6o6yzq7glttc53mdh0ui59wskj3kj12f1iz22eqvhlke4u98541msqc8d3fei3nrz87xdnws7a1mz4c462amr1pd4os6s7suknfv4zlse1zunr55f4xdcxk4e0wmeo4bjkzh82ladnh4587go9bjky6mswiu1udq21zr1wkxzzdqdte9h1oowk9kp7qc19pt9rg8rvld9erdxreyf3nh0vb8p73mrfaqxeu44freuh3q7q2ctvszli4uv6cc7lvojlgtnspvndwm3sqb9y4japp0edw0cgmowqxkzz2u692i832kxze1e9b092dr807iuqg97ke2cf2sau0mudrzhqmxahvzferpkbfppqwjcz03bdeic3qz10ib8dvt875bedckzug4t0dp46kmk0sv3xpd0n5eegd5zx8fpis71zqrtr2dl328jl8cq1ilobz8oohyaz5yhnml0qgqzu784eb2t3uubmlcq43l4j2emqc95rtn1s7hcgvbufq37yz1w47to6koig2wrg9e42w44fcpejttnr88c3kknzjpa2sozwnuo040uzz4fq0454x5om39l1ksh8i2d4cerhv50xnrakd71h5zef059mq0zndeyp92p608eo973p3ga2t6xmwk6o7oo5prfaboo99maz0ledk7u6g23u0hyqn83py9r84azbxjramw3qfh4m3znltp2m7kqcwj13n5onqb2vohmwd1f85siy5o08c5j3md2htuhdq7cxnjvz6vzn72ysvhslpnfj75fp7sfb8o7n0og2fwr1eersrbpf1bgtcleg2lkpevduqrfwvf2ozrf0bvsv3scaqqyznqq2dt5tyqoyg4u3i7cuaqutvuxc1a5okv737uzrwsaf3mmtlwv6xq5h5oxoota9c983ynb6j7227mvf825zxofk3vt14mvrvfn2qsih6oidbv2wsvzq2qlxe4zqw6ycezwk7qxulmgmzy0xfndpp60yizo4o8hdjb28nu\", \n\t\t\t\"isInternalLink\": false, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"y90cgzjlp1u1szvggk7skmts5dqt60w4hsezydkyjouyazlo1kkce67wqorzvxm\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": true, \n\t\t\t\"isReadAtLeastOnce\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f179c39b-0e21-4805-9131-d1e8bd4d8d5c\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"42a86940-b29a-42a4-948f-b1b1347f3050\", \n\t\t\t\"sort\": 766571, \n\t\t\t\"accountId\": \"b6acaf9e-81a0-4cbe-a02d-d934e2ec95e2\", \n\t\t\t\"accountCode\": \"y\", \n\t\t\t\"isImportant\": false, \n\t\t\t\"sentAt\": \"2024-04-01 04:48:19\", \n\t\t\t\"subject\": \"jqje0npuof4pvszfw0gp2w4md3q5dqbkr2d20cnwuk9kakcxixuufo4pbyulynvgptd2rzvuv887dyf9004i7z2qsn7yzzorp8paf789hif5uuzq27a3f67q2n2uvavec5rthhitdp2enw8a7egx6r0q8ce46f1qhgt55fvx6c2279whktmy24hfgqg2ubud0e33dl7fim80svjhr7xz19d8gtjw2bpnvcv5hu0n8u9wwdfqi8upt1h39p096s\", \n\t\t\t\"body\": \"Nulla eligendi sunt et consequuntur molestiae saepe id. Harum aut veniam magnam. Quia ut optio sed non ut laborum. Quos ipsa alias totam. Minima magni illum est.\", \n\t\t\t\"link\": \"9hi6m41703va3dvph97bskupy69cgepeyfkkczt12wn9upmypbku2aomoid6z6veagfudifip9fpk0q2dq35nhm0v757uhxknr95mjxoh046xyaahunar762pkjs9oyafdc0wumg7a5zsbxw7wu76ydssq3k8vvyfkfxxufooe1fh95rtyxddt2h0cwkan5gynnpjdkhkwsn9oc2jk78yk1gk0dq3ns4z5osl0ojkj4ey7nszg8z4tu6rz7pgnnmq1aiv8sa9wuz0t2qbkkyw9xzkmhjy5bitijiec8mni959kczwuci5zhwmsm89mh0kycx6q3nwt4kslorkax6kly9zxkmhte89wyzdxzaptgt5140bhg0kugq5sehfxfxp2z1azikmiupyk2e15mk9zpsdvg8xk0no3e6e5y44ruoult5abmz7k0l585zqkih1oz8z4rnvh0bnrkepg75xcxrzcaanp5vjhzu65jgrwyzm46ggvdpscs31fnxwv3jleywq8lhge6djbsjlhnvy73gxut8wdrhkm36pzpbmc03mbxcr8e5bhz0vfh71o08n05jv822ljq7x07477el9dccc547h0mlzcb7nmo44ej36is99up4nitwkpl5qels0b0neo7rz3nm51vdg4d15dklbtvronqpotys43t4m7j3od7xp4s0pydycxwt36pvt27s65ljkp0iiaqkhzc8gw7m6l43uemtl6yc4ys46ee7mp0sn5j0i0yiza1ysw9bjc01m9w7fgdezzlpt2ez73ovrjocmkizt1huojrtba6cpox7bqp1xp76l4su3c4993sbxqkn3hxj3br3vy8yymbfwoi24ygvwb7bhp2h1neq1vy66delvf119gwa1sscezck19z21qe8fggbkosyntkozetlsb2bqc7xcqwig6907ov7v5al89euw3odel749cshf2inmkki4ed6l3q3w782zkai554zpx8rd0v1cpcny212zz86ldzadvg1cbzour7f2qj56a4cr19e0x8yms43vf9xnx20k1i3u78nfxh22no8vsntl2jag04yaqqdkyqq2px84djma05977d21nybmcudcdc1kgk8b8tnzhxtyi1juzoix04bt0u6pak8ytv6mnuyyrogdkxd9yg0p7kokm7zkgm6teicw813e3jma9aa1d5wcbcd595fpshz12gpn671h7ymt0ju17n41yqf8piabfwtx3j8kkuch6dgu8ud4c9y7icnbibiwe7dknvrbooxcb62cde5x2jdn45b2ymp05a2rfeukqlz71uricauyi9vby3yrncifimmm9d9o650ctyd1wo4lxik9y2l4dlucj9p0dr5hhua05c5fw15acm2gv1l3vujx70zrcfr19tgtg8clobo60ln6af4bouqwttybuexpesadf1mwe6d5kfvnl9463mocrr29cgvuh245yh46qlxsbuhmcgfbgk67y8x4kadgmxstjw1zfq907c9lq4l56uh1fb8snwto4zexqa042loe4d5bet027t4e4uyehf9vfq81doeafwydtbcs7h3mjglqkrnvf44v4yv24ny7hz7qvvmkji4q1tbjkgxgimjcm7za96pmlhzbnxfhiap44fe4n5soyxaon6vyo6jex6ibxj13rcjd9z44sylzngr78awa35cu17ye2b594c216tk6q8sthfu33w97d87ih35xpp5fd1hi5pxzldaxfe55oj3mgtbau5ut02nolkylaeip92uk0mbnm2yiq9zo1yx5vltj6b9hr0jn5dfhz5qmh7a1x62kjsukfhzkw8thgrmrzexp3bmn945evcx3ij1b4panv795bxdj4d7nj9hx0hx0rhf7hm2us59z0tzbfa5be0tcoc275mcfejha001alky58wzc5z4f8vrb6keeex5f0z02yg9mffnycia066d02ahpdynwabshnk9lzvp16s22dbsc0wj8v87wz8foeeu4re59htgs8aomdo205wci\", \n\t\t\t\"isInternalLink\": true, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"xn0dfa75txx2gz83xnrbtmg3rm3nxbbn7s304mfw1fghnq8zu5ctawpbuont4w1\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": false, \n\t\t\t\"isReadAtLeastOnce\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6a9b5c0f-f340-4ec2-83e9-cf915b07fec9\", \n\t\t\t\"tenantIds\": [], \n\t\t\t\"messageId\": \"d74e9f3a-cd97-40e9-9437-85b187f6c125\", \n\t\t\t\"sort\": 339226, \n\t\t\t\"accountId\": \"45bc37db-d256-4afa-ab24-a925388595d9\", \n\t\t\t\"accountCode\": \"r\", \n\t\t\t\"isImportant\": true, \n\t\t\t\"sentAt\": \"2024-03-31 21:49:23\", \n\t\t\t\"subject\": \"fxpnsduiwjcls2ftnnblc1x39e9wp7mfywydxfa1ynfv90opguleo59auzfst2vp41znujt6y783m1vvzhirr06tzgq1jhifqdm83x74j3ykdngiqiivwa7mskzedbefuyukzk5req4fukk6vtmazwzrnx6kfa0fqv65yv5wcqrkx1e96m980plhczx26zji4xs7ea93291lghanlr1jo9nhuw0kgstyq0gcq1cynq2zwvnxvryc1fa5zx4hjf\", \n\t\t\t\"body\": \"Aspernatur delectus quis consequatur aliquam optio non voluptas est et. Aliquid voluptas odio quibusdam voluptatum quae. Est amet architecto ad illum qui non corporis possimus.\", \n\t\t\t\"link\": \"nb7pm46w0eja9ezyfg1cj3nk5r0njidnqsyxgp9dotjnt83gaqh6l1h9q83xhz2attfjnw4cvv9khe1n6eo8k1yoaiezsjdm7j9lpc10o9dwbw29pc8ec1yvmoqguzmdwl4vsg227d1yj5sljl63mwidudiupktn859hx1lgsqftvrw4qic9p5iszudo4asgi4trv250ych5jq1oau2mf8pcuv6o7wj6fans4zpjgbf9677zrygahtk7fzkckomfcduae6bitbz3wx2x5d6kyhmnf4j4243t36gx04hnf4xtbxn76zmanbded26xomubxu4eoi95gw27gew3yshzllxs414b2xmfhs4plweunmwt9szzvfx9xx666wdmvkmwpweifjqe7wdlz8uwgndudiwku5rxvvovdpbw3dm7dt9qrdbqytzfyzshhoj5x06dbd5bcqa6b7umwzbw0a3cwncw3ley34bxovm4bphw833v4v6sm35zjqjar7ej8qev8mzj594qvxivdwmrlmvef8fewtzsbgek1tgfr5n6mvtsr7dtf4dxp4v4iccf1u4yv1mjki5fu3vbd0euadsqpe7lno76r43u3nw0weee4xgmt6hws6t0xjfv1fddv2b3fflncl78er88w763vbax9yydwdgrqzl4lpsj72lnkgzfif4fbasup3dybjex9x4e0gxwi6fgvm0sg8absnbthouuxfbuv8s4x05lykwk2sbgl7s9zc84ozoeezbqafhizhpo5jym65wp1187txepj6n2kstu63b73489l1tlpe718y09irjhoqu2suqwherk7pvhmn1wzjlbo843pyo5u8ews8jzcn7bgyf4j5vwsky27e1etduo6qqcxuj3vsz181qstag3n7qyflgh7igyos1e4vvqlvdu87tcc4jk22zit876csflsg0rioiq1qoiada840amhay3t0i6w9kymxbb1nb9gef6tj5fd9xy1bbttbwd2z2c616ecz7pqtkafwuibhg83sy6ctbbe5jsxfw5a5k0ycyta9xhlkk03brtg4k5lepwmdux72y24ss7hh4n7ljbbywaax1bzcmj5zvr72ucww5xivbwg757a1ixnwycxo0o3dceoohfglr5h2lbpq5it705r15i6tf1inmgr99gg1g61svf7yh3nr8o1ud87xukpjqlh240nre3fczg50535o448xi7ditwejt1obbenwo4mhi6p1xl3t6li59ls3vbyoe72p1ec1u0j13ev845bww9wabqg1hoobwqxgcjlxhk87bfxnyeu1qhisvqzdkhrs01nvd1z1jei5rqwlqzhbm0k0l11vdzdl3delwbcjvkv81yx3m9ga2xtgetuq0s3oiguw1rhmryrtiqua9gsdez67b1dq5nrh8ceka2sv1qq5qcecogjdwvqzbtfwi93suolwxcuneuc53xtxrjz6cn1kbnvrxtw3twxpd9a5c2afp2wk35bwcq0zctctfn2gjxhowekfwmhmmvcyicbsfslx862ezn2rcmr95edzmhdnt2cievyddt92ay4uctnjkle24lkk3z17e2d7fhlw1v3zetu4g8p37d6q9yjuakb48ngd2fjlbzlfdnrkozus0cv8pvzgjt280bcrq0r04hend0cabxqx7p2hjpd2y65jiuzk32c81c7wc10luax12t4izphcyar96q1i3k77er8t1davmp32v5ktsowj91v3kaf75ydoad9sy4utubqx9rb4i0osedte8sinirdgxvrttpflegn3utr6rhrxiayy95zv4faxkn5kr5wwkedla91yi1pdqvm37tkofx13hnsdcmr0uaw9d89gixv9xjib63ge1m7ql82d0up3qx7beyhk1v41x8w98etus3ygouh3wc6vw2itza0qweya44ku366uya5zfo5xa03e6aed394mfcbz7ftcxq8ksmzmp49zjmuxqf0z4k7ebf4lgh8ongj12v59fjij64qd55rjnkguyc1\", \n\t\t\t\"isInternalLink\": false, \n\t\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\t\"icon\": \"s4vhfhmbj7i9v6v5j3du28s3ji2em3ufxn1ycx5n1k5pcp5tsnyx0p3kal3gh8r\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"isRead\": false, \n\t\t\t\"isReadAtLeastOnce\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messagePaginateInboxes",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tmessagePaginateInboxes (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageGetInboxes",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tmessageGetInboxes (query: $query)\n\t{\n\t\tid\n\t\ttenantIds\n\t\tsort\n\t\taccountId\n\t\taccountCode\n\t\tisImportant\n\t\tsentAt\n\t\tsubject\n\t\tbody\n\t\tlink\n\t\tisInternalLink\n\t\timage\n\t\ticon\n\t\tattachments\n\t\tisRead\n\t\tisReadAtLeastOnce\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageFindInbox",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\tmessageFindInbox (query: $query)\n\t{\n\t\tid\n\t\ttenantIds\n\t\tsort\n\t\taccountId\n\t\taccountCode\n\t\tisImportant\n\t\tsentAt\n\t\tsubject\n\t\tbody\n\t\tlink\n\t\tisInternalLink\n\t\timage\n\t\ticon\n\t\tattachments\n\t\tisRead\n\t\tisReadAtLeastOnce\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageFindInboxById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\tmessageFindInboxById (id:$id)\n\t{\n\t\tid\n\t\ttenantIds\n\t\tsort\n\t\taccountId\n\t\taccountCode\n\t\tisImportant\n\t\tsentAt\n\t\tsubject\n\t\tbody\n\t\tlink\n\t\tisInternalLink\n\t\timage\n\t\ticon\n\t\tattachments\n\t\tisRead\n\t\tisReadAtLeastOnce\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageUpdateInbox",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:MessageUpdateInboxInput!)\n{\n\tmessageUpdateInbox (payload:$payload)\n\t{\n\t\tid\n\t\ttenantIds\n\t\tsort\n\t\taccountId\n\t\taccountCode\n\t\tisImportant\n\t\tsentAt\n\t\tsubject\n\t\tbody\n\t\tlink\n\t\tisInternalLink\n\t\timage\n\t\ticon\n\t\tattachments\n\t\tisRead\n\t\tisReadAtLeastOnce\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"sort\": 304740, \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountCode\": \"o\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-04-01 14:11:56\", \n\t\t\"subject\": \"y1v7er1e17sq2c8tp842ho8ipp9cgzfo0rdc56ggk9v71s92n7wtmuf9crra3lkbnprhfffmzc6wona90g43l4sqe1mzurb2t0ffqrzep6vb171nngj30gqf53n0pg4xr0iq5h21olduji5lc45ix0njmwt5kvgniqtvcch5odr109qv50zvafe808n8om3jobnugkerer0xvi8cm4g6x20vyit6ky8kdhnjwmo4hi8yaaczxx3eticj3d5pcp\", \n\t\t\"body\": \"Incidunt nobis at nemo quaerat cumque facere nihil rerum corrupti. Nihil nam non adipisci. Accusamus pariatur quia nisi doloremque. Impedit molestiae voluptatem cumque et ad. Velit quo illum. Possimus hic sed.\", \n\t\t\"link\": \"4u1tlvf0pi320ik90rziu5ml8cvwv1fpjbzui97fufuupxn8boswy8juielhey1mbg81sa8mq3dr8sp34m8uquao5iwbrayh6izkikaj6ztg8ur7myev6goskh7oadj8h2sur1p8vvo233zzl0rmnch8eep6ng71sjp1jjl0rthmdzltrx9wandcarb8edzt45o8wd5h18xb8rma8heyc4okg1ljj7h90zajowuljgc0eyjmlpfmlxwodaslld2aefxqah98n6xjpw0t1z4v7uhf767hqxdvknal7d8w6n04s0841liae8hw6wvio4lio39lc4lr39mclnyxkd1e0y12iy4v6lxusvf8xdcqfhavldz79j3bu9avlodgmx04joa5hvggycgx0agm0u4ds2p3wogrnpw7qghl9dn6dq9dob0h98sux6ugja28hqezbm8w7ebyk92bcybzokaqjlc08rcpb5ts5im1fcz1gl3pu1ws7mf03qtfks36nf098olc7zezcqhnktmxg1j0l2ej7crhvzwd1rvmgpjaf3itnfjeyp57e49dij39unm39znyrrzcu8pvz9fllrdczzmcrnrw4md33mmtvq1f0fhzg39mdggce7zqb8kzd942od0rfj6qozzr6v9zjupe26w4aijfget4zpa90xhue9q7d606y4b0cque7dce430km24w3epbmupkbhm64jscn0pphc9uq0qng3j3bxv4wuyzfs46aib1x7kr3dcnlxrpomjvwe7j2ixdlb9og8rl7o1uz25xgjm36o3xbioz4gncdmkdlo28tpmubq2wgtu0qnt09wkh36acwu67sgz6pizb9txon6j8qx0g7txh8p24hf5w99fklv5ekrjo8ocvg8038ewdx3zqasz0vfcp5knht83p3qtmuzree2d3nrmmtqltwo7ees0py44zqze2dd8fvntcadi6tfy732h265ntc6btw222nm53ex7rp9278b7lrj556tu47bf951vgo3aud96i81xjr8fydqelp8re0q1jm1igjzmyssp7r01tu4mv1fos0izrrxmvhb8726upce2ungyya3smuxcedjn96pnzokqneiyfbz70q2w8v6mn4xrvy03z6nfr5kh6qm5pso2wa065sfnfsma4oot9zagjd4e0eow1c2kolm4huodgv4ncqquxnyr4ky6v4e4an04r7tn1cn9ni2kp0nfack7ep43l9gvhfp5j4g2u3qqqrsjyo4lhl33by25hjhy2p8k1qk89jjlxhvcoa5cf1z4orm2f7j94lq3uditymx7zprdsz0to82p10sgwhvmyzwq3g7qn2g9b2dsl92k0k2fb350vcdcky0gx2ahvp7mx63rd8wkm4ng15uiwr76v0hr7d2asfpynou6qvpm6fw1xov0qzufie4ac4suqvlroyfjofdxtuzp0b1g3y33fr5t0fu5z9ozard5hxid8104ehajz55zi5nve4pn1ll6q0g793aejtwikdreqk4qsr5ghi3zixxdy9baog909hsrv3mxkp7azju02i4qzyx0vbnzxebz5mrbgk2n5otwar48zw88veltqizaapquo5ehge9xyyafyut8cmpufkyyrlzipfnpdbwzclpncq5wuwt56p26wn8aec5y3ui7dtmb2m8ekhz5j9tuxobt415264z224kyngrdki9kgohqejygxd7huqo6ebme0nnys8pkiswhdcsxqmobcsjkyras3efrrq1ovqgeua7zwvacqd59o3rlr9m22portmttl1j3cqx3mz74xzywqj0s0iknvexqtluv26msrab6oc3l093xlt4pyl7wsw1d5wd6a7hjoaforc23kc6za3sqfem8fxidfxh02ccrzx55019f48u40sl1vsg2m2pnfs2oeaigj4f4nobrqk5gp22tyi8unfv57lwd7a7gxvmndlk67s9lrzp15s4g6gssv9tthe10k6azunz5gl43njqhzjktdw0s770imgyugq\", \n\t\t\"isInternalLink\": false, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"fqqzk5l1satf324g6m14418ls1rt3pyfqvnr2aobxhlp57x2brot9n5jepin7zu\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": true, \n\t\t\"isReadAtLeastOnce\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageDeleteInboxById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\tmessageDeleteInboxById (id:$id)\n\t{\n\t\tid\n\t\ttenantIds\n\t\tsort\n\t\taccountId\n\t\taccountCode\n\t\tisImportant\n\t\tsentAt\n\t\tsubject\n\t\tbody\n\t\tlink\n\t\tisInternalLink\n\t\timage\n\t\ticon\n\t\tattachments\n\t\tisRead\n\t\tisReadAtLeastOnce\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - messageDeleteInboxes",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\tmessageDeleteInboxes (query: $query)\n\t{\n\t\tid\n\t\ttenantIds\n\t\tsort\n\t\taccountId\n\t\taccountCode\n\t\tisImportant\n\t\tsentAt\n\t\tsubject\n\t\tbody\n\t\tlink\n\t\tisInternalLink\n\t\timage\n\t\ticon\n\t\tattachments\n\t\tisRead\n\t\tisReadAtLeastOnce\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/inbox/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"tenantIds\": [], \n\t\"messageId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"sort\": 713055, \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountCode\": \"f\", \n\t\"isImportant\": true, \n\t\"sentAt\": \"2024-04-01 05:23:53\", \n\t\"subject\": \"m9ogmcz9gnjopzmqa1ew4zbyuzi4sfim59t0a9lnzxw5tczp32mj9rm093nthlpzu0323jlasgqc2jh0vwzvinwrbe4pyh0irtjb8onqqvfmqwm3xe8b94dlqug094wuu7zgybgjb9ujj08jjrhraho8nfpymzjnj8njsa85a44bgpnknl8ltbnqrg9xljz7h5x6r2dtcbblyrc12n914xeewfmp5acpbxt4hq5vxrqi3wefnvw1k9oihr6me8\", \n\t\"body\": \"Quos quam id perspiciatis quasi dolor quia hic est nesciunt. Dignissimos omnis voluptatem incidunt voluptatem qui exercitationem qui assumenda. Quia facere eum nihil non eos labore omnis. Earum rem earum repellendus odio et ipsa aperiam. Sunt et dolores illum maiores soluta dolorem voluptatibus beatae nesciunt.\", \n\t\"link\": \"iflbsb0t0k377std5fxsmiecruv8s5vorrdr4m8y2yqvlzva6lz2lnh5cnavglw82zwt7ncw2bgiz7d4rmsp0x6re5st5cpjrcd4904adhvj177k5e0kv8zdlny61smugse0mqrr519pmapmredsemsnmjrd830fc90y1p38jqfhbqxq9cdjo22pf1f1iprfvlljh23w549gk4iwxn2gp6ipokqbj1m5uedwyy9z4tj8xud5abacj9057hpk0mb6xnugtl6m2nb6zoh9y86xpa1ixwd6p0zbez62e290xc9m1usbzvos3owt2v42wb36f13c4udqz1vd0wgd3h45nf5nfq9cnpyi2oihn2ye98lv4hpof7zlie4cpw7eg12pzhcy67y6tqao1v2nlwa2udc77f3dqf48wniwzx80td4c9jdwiualk8ywucnhioswzmjrw1w7dbmeh7lgpgcuuunk6efsjtekf03b5tyad4ncbbj163n0udfcwfdwlrusb2hgstst4ce577ki2va6nj45xn2cigw702pfh6nnc01ggs7mhgsvbf70zlhdkc2i9gxwcqknxn9hiigud2wqxjdhpl3fxrvcjhwpnj5w152q9qieb2l07qiyur5mqu8it99c8zoskqmp6f8utb574dy23kitiv9tb4gj7bfrngcu1uipxb3o3dynej318puz6kzcurqrsiop4egtj9t401ckfa4ynvienqfnmhi3mpi5l828qwmtj8tw0zqgoh8jvuhv2f3an9ntgh89ucr9x4al3q07qizugp72axlyq0mgxspp0kg0uvh38c49zque2zvnb3se0s8acbfxznvynlo2r8hrdncmce3f5e86vqgml22dsjhl1qz5l5jde51xl9wcuil1xjhorfe4wyvganc80fl64tyl9i33ar5tc0ytw3wflb1zpyahztfabuy3305vrreoeee7ppo8eitmzstkx8ss8qqi7kpkp8jr1ejw0kwfw0zq7ha0c0c7ostvbg7tmk5k2xa03sdmhx1mv5n0x5kqo9ecmgt1mnchwh3jb9uehrbntwxw8ryx1csnxmrcrkho9bdf8dwashmqcgchxhkvclvsukqh6xi9zhl9w5l2vgyv8fyx7ep0ruartadcyvdl0j3ur7t7hndfoo2jw6nsq9lz5li1vz234ksf9ngjy1r74roju7j6souqkulhq54ck2t0vvcjox7ez5vo3sts44dcnidfjb1oblt5smjiwote93vpbd66opwknm99t7llsfk4v9jbohyeeyvbftinzm4p8af8qw6wizgw7rwy1ee35an29nrt7dk5ijwd3fv615hhkgp0u63y5sehvo0bvrrlhcnqzuw8ea12q25hh7xyjrclmp7x1lkyourh5vq3s9sczhyxr7xtdkvysbyhltbzj01u3lu3gxgw5sv98nocbk6i9jt7rkuginu7vy3ihu54z2ap4vanbc0fpsnc8j5koskgon8t8ikve6kmx8we8crcmlmbh1i1b245f8ioubqtbs2fc5luunko3l29nrxzm587bsyv8dx3znxdxatwj2xq1d9jdq7q5nmsklbw27j5j128839t5rx37gx2pi686m7i3rql8v5iabsh0prg9l4k6jw0yee6n4o8d7hejnxffbr63l0nf4zwn31ujt5awlg60pyhbyqelfdt69eoq0re7u3kqxdzedkrs20bsp4ft36v5j4ebr98q9s83nb7svdqpagsht8cg1y0we7zpo201i8p3hi7lo9nyvyh1yarnwelqr8q9kaqtm8hyyv8zmlckh1a14b5kcwqgzctzni954lzl9lm7gzwu4tjkpqhnnq794elmx9y7b5xqmjy5i2zm3zxdvjxzmwybkfya71ntzqbccmpokghkkorhu5qmdze3n0chk43qqu1vciekk026dwfmeb11myb78d5eh23fc11fhyvleglls0b71n7sfwrrk4recte780vob5vvyu7t781ewjd84ep1lmz3dfpwv8tt\", \n\t\"isInternalLink\": true, \n\t\"image\": { \"foo\" : \"bar\" }, \n\t\"icon\": \"v6vsuyyb42hjzi3b562eb4rq1crc2016v1q0h062acycfsnu4mnb9ghjr8lzl5d\", \n\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\"isRead\": false, \n\t\"isReadAtLeastOnce\": false, \n\t\"meta\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inbox/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"inbox",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/inboxes/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"17778f80-3caa-4b7f-a6ae-e8b73852f4eb\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"c9a68cb4-553c-4e1e-91a0-4b4896553bbb\", \n\t\t\"sort\": 352258, \n\t\t\"accountId\": \"569e0550-82d9-4574-b31b-517584c45688\", \n\t\t\"accountCode\": \"w\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-04-01 02:38:41\", \n\t\t\"subject\": \"7q0pqtq19rw21wvu3ch2yd4y8rn44le8hxst40r8chbz1evh8e8mjwyef0hokpnmi11j8fjm2lxmh6x2joo6g4mhnkppdemnsaspp435mp3hmaw9ih1mo79rve8lgxrdbc8lh94nir9ts3mnew39fsfi9cwxzbmnwva01hqgrgapg1br65o7ryoketd6i8fhflg3wcliijw2s1hgka1zb7pqhfj10c51t737oqj3m0i83qtn0phghmqmv5fjsl\", \n\t\t\"body\": \"Sint aut quisquam placeat perspiciatis et doloremque hic blanditiis. Aspernatur voluptatem laborum ducimus officiis quasi placeat ut. Incidunt debitis iure qui aut. Sapiente aut adipisci vero praesentium unde. Ex quaerat magnam et odit a temporibus.\", \n\t\t\"link\": \"g89oqf68zm1gamhahlapig8n736b9bu0zbzvowajdapsm56plp9k0m9s5plvvsbo5m2v9dw4hz3audvp10iv006gj13ij9mg15xis48iju0ccxe9ydsegn87gix919d44qw0hft7ecrxnuw08okoh0qcjg362rckln8hthvfikpe2umi2s3ams3ngliwlse0hh1t04q54hkdyq86uhzj5vnap9lx0mpcw35osevrpfykeevbizetsj6ngeml4qjo5tsqejt664o2usw7pdmo0rzj6vw8h1l0m7inyl7koqcdhnt4y0lo65nk45eh8vbs7urlop4asbya1gyw8fy27qd7yj2nivy4wwiqlge87g7vvpwvpgzo1exu42gd1gyggfvyfnd3iu33aiumksqred21zwhklaw2yqhma400yvk28n2y5x0hg519eqfqeoxkcq3m6yuwitcpdsxi9nbbfq4emcaoolbc6falfvlo53wl37sb3caadkz5urkyyjkp5ruxab4k6sl35vptx4n7qmv2slwlk3nre0oxdfn1gbwci6d7sfd2h54w3dl8n28qrg7wr5nt8ydvm9x0h2s8xazz26mt49uspw1imal8glz0oj9q1v3b4his3wf018et0cfpgskyyhwxfv4z21hcwdk2kufkn9x30y19mklmx9eoigtmeizlbfjlratpxh7hqx2ru11gk3t4vcu7odzg70hpkzy6w1aliwq6f7yqo22cdgkiybpyb08ijjfo3ty78cllo6q87x1983lmbx3jwvgoldk32vlqcybgbb4u7tu2icry1a13c4dylufnu5fbvnbippgc022d4r1yr5j0rafottl6tkl9qwgnyvo7jcslhmkysltjkk8ofumlpugs4hs7fndb4brasswug4vg3j2bvzkjoz3le1e8lstpnuhg3on7xvqgvi6s58aujq6apxxx2ff9pcb30mup7gz9q3nfwz4s8xypz4meou7oz6duxgk67dudl1z3x07rp4mvo9tucjp6rjdgh29vw5bznj2fdvbb3x8eumnqccz3n7oyd1tjdmb7cqeay083ckk8dgjz8br6hrclvmacck3rn3igvgwogv0h7ejk7dnv3sg8hjzingpp0ui5jhhgszwkh5b9jxq5zmtw3rj0gfs0huukar7w0s52cm7840xdo0fd6krnd38mhj42srjcg8x5afmc9sfwwgra06dcr6kcstyycgmaty6mw8jbcj7so5zpjatlorw26x55md12iveoy4lkedcd2oeles072htwroo9ebby77dc6to6plcx04s2nk1wamjyvgvjxoeb6t1laq1ghi2u3yvfz98s30xszqpgd0gjj62yy39rytgdcbnn6h8hucmufkmbbm3oix8vu1p3xbot6dt5llqtmw312wn64n0o4kzqked91n32d3rmm9xkc5l4v3fjt44tsh9q302108u62pxl6412ey1rb5lxgmnwxi072ey3es6f0jf9wwtb76s7u75x0d9rmk0cxxoylt3ky0j25jvui0tvrgod1piv3aolv6iyd4usr7hgnmd1zntqyqvvns04zdsg6c5nvrfarvh5sxvzcjj4tejhlc5sccqc59dmn634q6dbqr8v2mhfrkjr0iz2wuemqkg60d3x37ak1isakb731w2lh3nebg8ikjcojnt5l4p7jayooed36v7i8gj3y7twdjqrmf9yrqkjcxrx6fjou7crds18x8kdoymt0j8mkdvlc2gm8mcwhfb0z88q3g95x2m0g7nz7t7jt6jm714d5u426dipq7ecr899asx8vefzbbwievxey1pox2oxacon7nkr5c7co6h61vwo80fo4c29rsjdau49mkyhjheufe5a9l6z5i6errn3nyfzqv2i292mmwxy2azxpa9aijap11oimmksaoz83bfremtnbzyhhjlvputi235893q9jcnd5aopsfta6346ga4rc5snxjeh11kyi0nd1r2jzepvhoaie33bgl4cni8fyeyu9\", \n\t\t\"isInternalLink\": false, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"8jq6tuqbvcgzi9626skq3175zzuwtux9dk2odv0pq5igg4poa5l54c8nmw3l0qb\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": false, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"2acd9273-fb97-4d45-8da2-8c7bd6a337c7\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"326589c8-efae-439a-947e-980eee0f6565\", \n\t\t\"sort\": 563352, \n\t\t\"accountId\": \"d0819dfe-4380-477a-9a40-2d2e562aeabe\", \n\t\t\"accountCode\": \"n\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-04-01 09:11:29\", \n\t\t\"subject\": \"e7dvyaqehnmljriwm7ipenubn2phqwni0hwfnl1zz4eox25x9ab8i63zo4pcc4lfmtm0hok5uexg8xppxx6z3s7w1z25ykhb5ids50h9avinizc6fo7ayxakyl637dnc10em3l6uqhyzyk3yaze1ov3h4va77cjxtfsbf8jnqmea7hf58ct3vrxuy2haib5o2lxs71notjr87k26uikr3095f4wfp7nxfim52g6929r51l69tisi3b70a8m158\", \n\t\t\"body\": \"Non consectetur nobis. At fuga tenetur minima quas magni. Qui enim in perferendis eum error. Nihil cumque ad.\", \n\t\t\"link\": \"65466prp0udnxwta0vfa9i51r5lw086t8nadu142mps3ov06dzzl0xmnbqi05bnrg7scnap1o9j169ehrkx5tnn9hiwp4izpiddybemkmritygzn3akthtrfp47300jyum44uo7a8k3s4zh6akkjke5pbmcc3fk4x2wgwutgl9922142onftp8vgv7xzkira6lpye60i0cl8kwm2fnvam6yyyzwmlb23emf9wpgz3warhxqvjugny2ry096m6pmuj9ticuwdm25anv3lu8z3l4c680suojceaecdao77ihp3shua5xmjl1e479qn5ahvnis9ze9pt0ytoryp4dyq75hqls3kghsq2y0nufq0o07oi8kvvjrfz6xj8t3tvvm5qt4n21oukyn0xq87eheq5yfyeppu4yqm8t2pj7q5himwqu65kfau7l8regvfzp34pql7ne7ugztxseo4lyvbavzylprltor52mmo44bxepnjttp235ye9ktboforownuj5of8d0qzlvwi8bc51c87z4i4dy8160uw3nnaxkp13kayidf834jrxfgiunc6icyw0entaxbvfk41b6uucgxtjo5nfvcbwrr1os6n02gnunzdtf2vt6b2np0ycsh3r43pkacyc9cz3qtn6jhqasijwk34z9i1lhe2fkafhmegp2k4t12jdhz6da3jw0mbvsnl4jb4xgdrf8qj5wz9v6lig1sd5os21f5ztnioebxwfypvddhgdqwkopqspmpvy2xtmuqanqtdarb7holpuokc3dehn22ustcn6i132pn471j7i7pzjw8c0h55jbfxb8zx62wduphfii43p40g7vimudlkyghsjos8rzzgrvh0zkru3k6qlal5hmkwtj3hxjgy2ej5f24f39zigwjxb70n6qou8xh2vb80alcvhs25sdod64wrdyyea00lwuzdvui2uia7j9kh0yodcfy376d2n1k8zieaa6fkyx3y231zmuwisrqz8yehck8q0p98up20mjazbd6o65125bzpxdga6s4btsa88w6cjc485ef4nq2twobcozec3w2d47oonuc35e3sbzckgiggw21j91k62yzre4pqiype626fyqnkt40ym65fzoz52q0lj6eqberhq5xldtun6lqdl3nlgxna1iuc4tutqwpr3ak9q8rfxmmrkcfryswvnwzk6yykld1y415s71t8fcerulno1ep0z1dcei0lsslv0imi1q4fhk2jks793di8ex3na9trlz1fs68sqf3fb7m9r0qg7qwz9wak2d3r496vikytdjxk1gmshab85her5nyco7qb3ju9ke8yzc7o00317hjwrriimwgho6gawnq9twze2u6vjm9j7qtwdkdfkyinx5qb6178dsr8hqe40f70x04s5p3kvk7kd039us2j80o080yn93gbu2sr25qgn6sy0gjh6bkr3yq0edg6uy6r5pmtcyr6625lu9g2isccnbbpof9txlfrfdn90z9rt8nacpjzf2f6jjdyvm2joam1d3fany8y1xkf6z3rce73ii2s2tviwxeqmdghmmgy5keh8l5n2n9rlyyo6kuenh7n6sigm12dxe1shfbph36u9iti04pb0tyavo8ilcmwgbfstcwbkool2elpfdzld6vubwsblms5q8xo09p30p62aw91bfo8wo3hjx05fru3ir306do5va65ja6qdl8uc2fsjkvegesuq0091nftopiuadnajldmxx0gj5ox85z4orumka5zkzmo5m0rlo0np0xpmtrmcbosr2akg6fcl9fnsp87buprrscisvcr4ai3hbd1tn2d63vkuyqid8arlb068qxewfkr4fk9c8d63v9orvquhtewlf00cqc5s5c67t2ug5xmbtzon65t317xs6qsw6ofxml03dli5efwmmgk3ask2oh39l66lrrreinzla380lls66sg7duxt4gqdcwt70576fauhjvt2g42clls61wh7mko6d60ulx8a86qjkhg2s4v\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"ypo6f9qlzvxfw3obil6idvdznm73ev7546wnwz90f7kgaol5bpkx69ijg9gvbag\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": true, \n\t\t\"isReadAtLeastOnce\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"4091ad66-edb8-43a4-93dc-d9e18ac37c74\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"e0dc4b10-76fe-4712-b6b1-b8e34532ae37\", \n\t\t\"sort\": 573557, \n\t\t\"accountId\": \"060a436b-f941-4819-8f54-4c65fb0894c1\", \n\t\t\"accountCode\": \"j\", \n\t\t\"isImportant\": false, \n\t\t\"sentAt\": \"2024-04-01 08:35:15\", \n\t\t\"subject\": \"37a9jkzesnipwsgzvkjao5xjpg8rnaw8ajhc7iognz57jqaynh28zokry8y45rzc32afvdpy1jw4vz15j6ilpvpr6rzy6ofvbkqmsolneuulcubvuqsjgudqggtw4joqckjcicu28t3hwp6v4lrnz98a6xq7x86viebz1ubql3gs4khv89ikizch3i1yrb3yw0jfx04o8go58l952w2w2q143p7icef2zbgl15zbwoaat0k4w2258ub7yrt87d\", \n\t\t\"body\": \"Sint at qui numquam sapiente aut corrupti. Aut ut beatae distinctio eligendi. Vero qui fuga debitis expedita ut dolore est. Consequatur voluptatum aut.\", \n\t\t\"link\": \"3f6aaomw21uny07gqpk4sorsk8u1bouttp5wpw2co1dzpu1yr3m00ekeoovhwiokql5g9yfe1hii7zjdc4a16ygvl3ldfqx4x2xfgoaboclougjfrt1dbudptacr12mql8wrdje8w3f0gyxxartye8stjp9fahh8sqgm0dywn90bu1tjldleog87axhw5alimpzzzarg3oxcuu2fdagcn5sxurp5ea3o7dfkhf31pz9nw47904er89d79i9q82f7f5rpuyyf8y44rmhh9oagem3rbit6s7y9vkxfz5va93fhg7zb40t1sl7zcrbtigf2vrowdfu1t9x1zmw874p6abgw3l4e1dw15j36xme7ug796agn9b4zqmcjdh2b8ionu9vpzxi5fx80nkm74i8ypdvo2lz4gugjb2jywvcvoyfpu1bg5e0oqzrt9j6onv988rc0h6rd9s9om3xg4mswdcnkmxb2iwrkrxqkedsfad9ctay6x1s7w6cm6k73dvlnyt6fxkl1i6l7mlaumlajtcqzdlnu8i8fpphm7vo76cuxbc5rh942sjtdasv7puvoa0otzrqmeoi3k9wc34vx5tk74rg0vr08bjolcn8csxgcni7d7k88dvpswax5umykai38g6a0ii11ahxxrugy29s3yma2x4lwlke8czq2lwp7kn3d5ijbm4w19vajir795a6f1l7gdqaxfs2kf8j9bg2lmh2ddkbwj11ltj0kq70eizq5vd5smfppi14ieomeq0frexqjh27kbu5nkw0dnviah22nkeo5vqg9bph83xknl40hix3fwrdzow593vsh0hdfr2tysc7lvhjfdk3b95lc6l9pfziuw8rtpsmzyv4tjlq99tun64qu49db4y6z92c8bpcbxnow6um79g1khr173r6gs04pjcow8s3vwf2x3rd4b39u5c2ohc2rceh9un9ml1980r6lyy8q7n7pt6mx9t0gvfpnn23lh5lfs4uycq5ncwwzf0lcinukfbgze7405u4p53m4xaofaxs6f387xdtc6fcc8xwow8l3d1l9ksbig0lfizajrup8kvjqms28zkl29hiu0oye3zzy1xspo3r08smaoqbc191sfk2qtxi9w7z40db4f41ga9mxw5xu7lt9yv7zh42qi7py2je65i459kd0fqws25z6u7emq44ujoru3razfyg57nlc849j07jjjx906xt96osxz1tc96tyuefqc9g6eudgjum0sumeuvso1y84vnwxmqnnjgz5l2zlcjjkgdimirtcx5kx94ewjconge9rlvngxhmirdvdco01ysi4d8x6fzmz2ty00nvjmytzsxlj8s8wy8l3rhc442l7zoi61siohak9ilghaf85ro57ovc8fomgie2jkznfq18qcxhx603nh91pvmrvl4cjmxf9fgksrlf1x9g8e1kabagdong4xl6ezahadie83qzkudqzvc6mol60lh138hbf9wfvnhhopfbg5g2zyjfsxb6sc49u7x2d6glnegkq0bud9d189ucce47yhw8fo8amprk5o4sguncbx8ybemrmc5huvwl31lxyaf91nu1i1ree7hkansc1gattt30n1ykfj09417zv1e7rnnj0tfg8qnnhfaqif8sbssl1z3yhsyjk3wms6bnzhopwtrfe1yd1rqv4kgtplrsez9coyeecsedouzbh1fuab98qt40t4crjs3v1tdh4dr3ibhc1pj3gh8dm54kt0g0j59f3jtfkl39862w5d8d7rg6a8r73fzl8s7r521mekpifeln2o2k40c6gchjegmxih1wbnkzwhio4md3j3hdemt7kb84n1pef5w11qvvwq32mjvznctri3zfvgpdjbur07kgj9wsms76j220lbscu7iji9bkx7cgd4zdst4kzxza5uurc3rd4j5ll09rev3tqapy67a2fi5ps5yby86pd4ix11xaj6fon6e4ue3a1thh08x05njoj9qyovjs6u6kc8olhaeob8cg1q2jxq\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"ygbmhyuf7qc4czi1y59bwbhp03i7psw9pgn508b9lv1tnbpj7mnxwer1jx4bjst\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": false, \n\t\t\"isReadAtLeastOnce\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b0142f4b-1483-4c83-899c-ac7c31f800fd\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"7b8ea0e7-4c2c-4c05-8a3b-7fafe06bca13\", \n\t\t\"sort\": 523461, \n\t\t\"accountId\": \"426afa73-57db-4d4a-a8f3-73e944b3716c\", \n\t\t\"accountCode\": \"m\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-03-31 23:18:35\", \n\t\t\"subject\": \"l2851egbsg735m1c8wste66mipxqw1egw8zz5uivd24a59bpxdpsfnsi2z4deam2otswpfwap0drp363g8i5ztcl3nnu067fjiobdxdsjox6d5wm6wmgiofwl7kbmwpwthp22a540ib6ppud8zaw2e3jls4859d70difcmzqkc6yefbcrceaebweq7zoro6yam4jtgxit9woni66kh8muyq58z1g28uymvsimmzsg7s48si7uxyreks7slvxli\", \n\t\t\"body\": \"Eos et deleniti sapiente ab est illo. Alias veniam consequatur dignissimos consequatur nemo provident culpa. Autem dolorum ducimus sunt.\", \n\t\t\"link\": \"z603x9ggtcy0bqy2r8v6ef93dqgth9vxstuzpezeo0yj86yca5bg5oo5bv13ppujzfvau2ffu85ri5qohusczwjlryd9k1cvoha6gjfm6nwgij7kdsstc59ybh7zzofq98epfhgtcofzldiwe5dhljvwq0c891omyxjpiacv2okmfc25ft0duquxmpkv9tprp354aqrsktvhy4lxmcbvwwicepzsoi88qxls9013q4zju4d3tkzh5ow26wvm3498h9eoobtsh6sq2qpsim4rvsujj9ebjx28ciu3cijmdzy19c76qcyf0ld17xm7hkol5oaud5mermksu8o7y4e6p7oqklrhfa7cbm4jajh47xff2nep0b82ekv2v4iuoseodm9yqriws6wyxerzee5gf6tbll29wukpbn5r5d466bgmccm2k0fqsl4tuy3gyeujlaj81y58lg767pgmx277j24qrrhe4r38snlgfdi205qvvjnc1i1a3jhrwlmh5ssifpjn53womozbxaftzhjwqxecjk3vtvifob10xbltn479zfbgl0165o7asjur4x8c2cizeqdbpryt0j3bo9hmswgnvr4i0tzyvq8v0kh6dc05q71jybhvpf33zvgr8gqjkdz817iaghu5o5s509gwqglhbt986xh14vt6qm9yj2jv9tvfi9g4qj33ek0qep4bc65hvxpr5f0zzj3gdvnvuutyilm8j5bq49d7887zfc60n6urivyrhgwg5sf9sxhqc6wukbfk5c2jsolgzyqsp5744ao0k4tpsdm3j6opeze6r9bvoa1x4qfbj2k7m830g8xirkp4h9bfwgh4f54k4rakgf5scq7hqss60s8voz08ablpq27i5o2sxva08zb7ffllg8ixhvpcy34i25m3a2r7zgqk3egusdrtb857asd6hd8qmneruw35g7bsdjq6s0vxkvm27do4dd713mq3oj11g8f8waorimuaollvyug9urc289jdrjti9fcnh12jauh66yjvflkojkcbk08cua3hn1yio30200vriz976bzkufahxrqrrel9lm0qqvqn0edsgbzev424wnvi9dyons3jvwqcg0x037pn2vry5z8txne438pxn1jtovca82it7ezlru1a1gucq2i4diz8z7ow2tllhrbgazyy1srmaakxq1lmktan7w6l3n66csh3e0pfchbbcq6w8d826rf2n3223km9gwgzw2gk017agdz1kmv73sjbcd6r7rc2mng57ryqc2aw1y222kalhuem3f92dw5nsgsz7tm82d32lv9ldjnps072m2oe27v7kjdxwpmr2iv9v8lhalas5hz8k87lx70keuegdggjfkgjmrd98wssj4w7y93d2d8rrozcembj21o8kle6n4xqvpeh8tev37eb1zicvcp49gnirp9u0vkalj37lvq02f126uw7qhhjdad01awj7lmychr1914cocpybgp6iwgci50mc6lw6flhdnvjo5huwm7hwbj0v8vo6uy2ahajbw2e6ks4mvoxsqsag4v2kajwbce489lsc2wkh67ww0uahik697i109nzmb8ovrcwmcarh8z86sc78xpshkorcutlpqqueao21uksdv13j578bjzw2vhaqzq2mi40jdz2r8tdvnwdlpeqi2wblz2bko4yxz6pdxapk9yfebpmp2y1qwlliyqc20ig12qt0vg5f82kczxo591h246c467fkawc26xygs36t7fnahj1etqb4w1myogkb5aqhfwc06yxgqjl0wmjqm0yguv9hwqfxhos3sg64jjvr5t5pzbylli1stmbt2thfqwlbtt2ykgxy4h70ovgzdwz756avo109iba2bknp8ae37d688hgt8ht4kp2to7jpz6xvjckluy8a5prtxa4n5codoqhyqb2vsjcf0s31v9l3oovjvm0imoam70oiowy86rr3ar0c2pwicog0gl27dpg4qiu2fgxizzilyrbxwvpxhfcu0lenk63gnif2\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"5rbjbtchuddy5ygn3unbli4bnou98ueoghv29imkar7yzvr431fc5z34la8ay4e\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": true, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"685e2d7d-a18e-4888-b415-e66f4c885418\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"f1f24c3e-169e-4ef0-bfc2-c7677eaaa3b6\", \n\t\t\"sort\": 456199, \n\t\t\"accountId\": \"463b8dc3-c762-408b-9e51-c8bacdde45fe\", \n\t\t\"accountCode\": \"s\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-04-01 02:40:38\", \n\t\t\"subject\": \"2v82b0010cy9secpxrij0819ta9qhb15594fys8aojla18plb73dgd6s48qggttyvy3zor97vdhkl7lxi48nbih3p7d5bllr6f5mxoh1z29vkhqzp8kzfhkjmjet7e4g8uh08rv9b5avv4je349c0ui2g7ho47wyeb2l3wp375dsru9empbbftjadeeuagh5oj3n04agbrwkqjxxi5kuil67931a5exli05jvbr89x43rhzobosig6jdwerdwr\", \n\t\t\"body\": \"Nulla quaerat vitae aliquam non. Saepe harum accusantium temporibus magnam beatae sunt sit totam voluptatem. Aliquam dolorem aliquam asperiores quod sunt commodi dolores omnis.\", \n\t\t\"link\": \"g0bj24u0343ssc8yf7xe8jfwhd4znsbzbb8j4ha4h4hnrsryrtnm00nmwgycqpy6y7rrvnldakynbw1k969sxzphz839jck2rlounp5i69eyoo8ea1jdwuloeokme6xwkn96ko3cytmijq4qfg54d36mrieg22lx8u6mgp56eyqj0xynorzmpxlr4di5dtclqyj4gq72m2xyr63f90030ou0pu90no0ydg8l4tewbmnedq3m6fdgounmbclwzzvekfjy9f5i7nosdx4w6i2pmudu19tfhrrxgemoolp30sl03g0344eitlpfdzfqdwdtcdmfsrnxv5nvzomnota89jdnhyu052zx362no42x5a6dsemtfyy58ceiu36152wjadj1zou1p1krcstplc842nwnv43qygje1pjekdre3owqgza8mr7xcefetmqvn8n2vz2e5quohjq3zotsm09n1h9k74d1h527ln84i9vnv3yr2dcslyn52lvr9dudxrno1amo46s9wmkc9wa641zhb5nzt443vajg2430vrzd4mawpzvzaod5vnvm4kaaotajgk7bijt8ykmnftd9cpd374774peo3x745s3q8mtutwd0bwfvni5gpdu9b8ivn0u78cwuehspejo9igbml0taedkiq5agsl433e2i3ujyhvadz3iloeo1dazyn8ly013t8mb61grb2e8of91uabglxqn5l6x15q4rluvh5aojyyeja2d53nw35a684m2f8vd7wzbgk2vqvyc86e3krkisrz6xg85vwhg2q4qdgrtde3u3iexlvmkg147l4wg23natp8liycg2a0d4fgydhk5mbe7idd7rvsj69qvfzanlwfnnrabf2y611js2rm0r6n5ykb79yrpqetm0r855sl1473fwlbwa0tcodi6kvod89dwe72e4fluk2hvgklrt29fwqt2yh2ydj1bis4j8g1zff3i45nh923k4xjo7locol4k4kiubeotb5ufg6mrdju9imgfnm1wnl4p229u0hpkm7mhagl3s5hzso3733g9ox85cf9t1n4b7gody1ttyylddatjud0k642v9cwfroae668lejfqy27q51jvpxqijr2sumdyo1217272fxdmuxk5edleghfu0znbj49hi3cb181pp7gbzd9j4itbejme512214d4iswai2bgof4spqe3c71g856dgguw7gvtuep972xiiqvh1qmjogxr1aer0y3nf9co1w9qaukcwdls0b20bcm93h2ckqzm0dbccmd0v758454htb4ar81v8ts98ucpo98y49147ig4ion77kaicz7ce7ajqht9l786ie5snxbtroeabs0de4i49f1lyazeduvbo7u0w3ovy55crq4bdl3gsnru2e7x6ui9ootrle9fm2md500mwqnkoa1i65g1gnfr3ottio29xe3hct1e1jtlv98v6zlhxfhfvxjme742zjri2ztrc375cmhkupokvjnf5alt1hrl1j0iwmdwb6yrey0y8av66zd80dci05jl20k5it8rh7dgwmrg3xchnk6ffx6cu4wojlaanuaph70ttxt64x4n3gbakxs6dliplzstew5sqop64ns4nznswd4unw415ntk8fufqacjfy6zer24rgldc8s96nxhjjt8k4n2vdbrubcsmnpcy27sgcxx7wb9q7qoboeh0f0jikuferdnwcnalv29jzs1zkcltdqi16q7yk5sqivn4v1dz8xg6pamz3ojt7la48kb45n0csipi5d9b2snvw1k72ehtse6go7wo5mmyetare1scj9hwsa3gaiqy8qy1jwqfw2fjm5o18rovf3fphfe9rrv7o6jdmmp39xrgkcqv6tnk8manwudbpa2b2bskfwi4z4nc7pz6bk679zw6p3gjqimf9buxnvuw2xqebth6ye1y4hjnkid0xnnzyy24m7xfduyqgvvvokl6fus18ucyclein07yo4chdhmnyl59zas8pv7n83cqr8713ffdp\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"oe26h0b256drl3szpwea0dvms3wcdnm8flngirhcvldimmc5x7mh2vpw0dxyjxk\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": true, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5bd893cb-35d5-406a-951a-5d8b7ddd48b1\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"4f6df030-ed32-4ebb-bb5f-d12d37494316\", \n\t\t\"sort\": 670761, \n\t\t\"accountId\": \"6d50d78f-4d58-4ce0-8b3f-6f2e77f68f98\", \n\t\t\"accountCode\": \"n\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-04-01 11:36:27\", \n\t\t\"subject\": \"efnhgwd6mfwtfsd337j2gq08bohff499mf5wpqt246b25cb9k5r854fw3w8kor4z5ly3n8b7630y8qpi15fnmwonmmpzl7tqwsu7q9nbnkzomaxaoqyr2ap54ynfcdoj2ndy5erotuhmr04g8xaydg5ephwh24hcea9tvf3vvqec96t9wtia8al44w40p1d737s3b7z8pxjsgnceseoc8mdy88pwe4v373pmcw933w4v47cixcmsb7ychz740v\", \n\t\t\"body\": \"Quos molestias ut laudantium explicabo sint sunt vero omnis. Rem doloribus vel cum. Minus ex necessitatibus eos fuga. Corrupti officia quo asperiores aut sequi natus fuga.\", \n\t\t\"link\": \"4o5icy527w7c5z22c9a8fy55j3rqv0xp76hweyqzgtpug5n3x212y3df0vbz4yn1pksv4j7alt0avi2l6edrtpcozm3zz3jb92b691ha8p7maxeuj6dnscz75p8hn66yj2fynzdv0pwqmwa2rlendyflsxrpfoao0atpks2y1krfeio710l4rd7xclvihec2r7sfeywwd3pedahajbkcwm2zpwjkolxknaqcs1i2qk8ca5e2tksyid0v9u9oxmtu0jfwr86ibnano8vxfhx3v72xinklh1a5fgpzffqttffy686frpj1sadw29idsljxhuv23o63m9kgzz5sy9vpt5sejvjznqyy0scdy0zujwaiz8fazjw15b7bamat1n2nbsv2boyxzelod4ti0w5ajn6ga14a1ti5xl8j4cwwcqcg8c7yg62ka7xmb60jj6bke7w10e4s6lx82yx4dkfdfjbtz3wvazyrsjzhmmrcrbx1uidophh9gtxenj6m7vzmfhsplsaa9ri0lvhov9nzdo8qq3jb76kjjarsha76te0i60bgieavx1denhhryt3qq74v4wxgnx4nuytusptq1m2twnzox8xlkpvcc7kw4bhpws14feye802b7xa0kwba4bl4924ne3skygj71913adacug0z8bqpzwuf64xmcb62k6bpj8rmogkflp2b27iv9be48l1z1yj7uazr1jyaytjb6zqlqrip20u1t9ies0k0k6ragcgm3gke1v34731h8g5a7qs5llkk0p3c865qd6o8i03rh65wwrn4ojxndja4txgzzexw00evb121vdxgde2tipcsrq17xqdw06gxyhwgatdc9yh9ptzdbvv0stt1hixz02q04dfsba2mgw4ft6fgksno50l3j7g2jj4l54izb73sm8ptzj63wyywxgsqng1pi3rlln30wajjisi0jgbtuohe5zmwmiiwrmiwajhkytpjeb7341c24y6fnakac1o95tif4shehuf34mwu34dt6r102a8h66hb9bsone5le5vjqsm31bc4g9l6atrfljp9lem763d2rei8odlrxkgrn1t0fd0ozha17wv3uyqwlvjnh382wq6eajzfu29dti5igoeml1iiw9gps8fmfn1v80z9zxhih8l78ld300a46t52yih36ir5z14083jn4avm72kv7810f443t4ie7hzm020u1qhnlc1de5szjjtqgxprmsbkj5z5op8j1jxbyju1vo7hfxeszhwdkuvdl7g76kzhrm7uhnegeoed1px9fjx4b3b1o3x5ipiciyuqyi3z4b2nohtkq85shkuy2hse39qbmiqog24gacl9uqd2vp5lvklxg3b5wx29xypdprdaho6y6a1jvd94wubt8y88x4zews3sjgq37twayjm53g6wv15m8xvrqqgqluaskkou5ix6zrp52dzhxa012njm9i6sfv08hohyuqfg3of9rlarvzfuot1hrjlcs88hagigkf8yffi01dgcpeyqyjogkn6zrljl0059f1gjlqzvcskg9p2kx55ej5w8617fojd1vif0zaxohtz4rediqwisjl73o8dyjjq7u1ssycr4wwhpofr63qbc5q0cg150jn68reklhji905wmy1575tcanb3tx28m57fek4bnvbws2obhk7lrva2to2w6djyy2nilp9yaqstxrep19z8ls790wnagqkdig8urmwb6jm9ykfobxu69sf2djffjwb2nxadficxokrisxk3so4ysjslhl8mgfzt18z7tar64imtp5iijodatdfmwe94bquzozrpu4kqi9t02y00k6sugrsswya6mcr3wu1xsfshmowhj5xcdztrf5gd8apkm5c8ydn60ryqsicr0qijpw166d6zzybz0yxg8msr1bh6l9fqrv5i8m0zob4leatzwsh88h3a5v686xvv5uk5z8v39gfcu824b6q94m4an5c39h3xmt1gmxm99vett3z51vycxoldkg9rge5lr10d0t\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"ft4bcp35ne7nw78tanp5t3stu75chptt1pw8d6an61fkedw1pmfx635hb2x2lrw\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": true, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"1028cce1-376d-488b-a0ff-d124c0bc5e97\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"789d2ffb-8cd3-4a61-afd2-746eb5d34143\", \n\t\t\"sort\": 695195, \n\t\t\"accountId\": \"d880f7c5-5581-4eeb-8401-a3d27724e383\", \n\t\t\"accountCode\": \"5\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-04-01 05:14:43\", \n\t\t\"subject\": \"qljslghp069n5123m4xpiq4cns9mksjbgpic7ovrijbig6k7ipv12mp0yt9jecoonltslmfou7um5c5b8bvkm0gmo39wlrn7p5w3qai86a34rsvq7wwoojr6536sg6mfy6bsvb0s6n82k7a2uhv64u23unqtkmvpb0wbrnil0oo40z8wkzhc9dayux8ghpgekjipaindjny67uwsl05rtul4icpo3ta1387lpnn8ge5pcvsw7wx20zqufetr0v\", \n\t\t\"body\": \"Doloribus debitis ipsa nihil ut. Qui laboriosam provident earum neque error harum perferendis. Vero quis sapiente.\", \n\t\t\"link\": \"5cp41lxk2g4vxq2ns6vj1d7p38zynay8tl5y36z1grvbdq78615h8spq55r97u8qbh9dq3avktqpmbr30owcdhzm4wryaemqn46uafrho53b3adq8u6p1lxvejstvc9jg5ghb3wi793gn5j49xcycmtwg532kzg6i0ku2cnyjgbguxwfvivyd2p0dt764qyt03lufikfg49d5ghsnf6l2epi3nqe645riuqf23ptpg4vsqifwvu02z5wwa1vku2io1vkf7hxabgn1meozu2k9nfb6skss746w5a1v7s0dcvt6d5ikfpvbxzcuadlsv75ef8wmjg9vhr4ibyippc76it6xrf8i7bffn93h4jatuhu5gjqhekk3744uqp15w247dd9j01h533ledrtjzbb5m0d4ax7w049ca4jykdgqy4p4o24c0u9xmk7iwtmtrj9jt3426gk9yrnssaz5822rro72hrr2iud1qwz6o4d7x5sukzyyp5kw4o57kt0ki9pmpkrqzf81mef0iduo86tyjyuenkooqb2x7yll2v9s8icptknh8v4tde2f2meqmm5g45ue4vml65wuttzm0rn0qtnjzsqz0xfzsg4cnckkg2lv3ofkhif4qybj9bojzvyal318g3a3lzis59lxrdxf80bhl4v50hbogo7e594ebbihd7g4r8db6u7qdw6n616t8ds1f8eatneh1vqpcmx0oirdolb51m8u26m2exq2kfnqqwizaaa7zam8opgj4mf7lqa144vss8aevusipmyiito29pyxlcxk91l0n0o4ds8a4pfgxboulwakwy02nlm40ls8wg9g64gi68kjsajppj4ywvskklezg2gnifvonok001jme6i6id2jh0bqz2dsdohhwg119wss5od20951o74ig8es211akgza7jk9kvw00g6yph2kmlz1x6gdrwzajjmotmoes3if44wljpnprwwa7zsy0hwvaurzn1pci84jfdq5sj0qwxlr7flnrwnhsfontsfg39a4i4x9wf54t25q5rdml1blg13o801l709v9o7zz23fhy88adpa4h1sn5b97c9j206pcj9y65hdd095rtjdqcpwc40inn6qyvun8nn3ygzc9i1cdix00pfq1mc14dkata0yvug5hj20b2ikxa5jc19iduyeuphl59it7rgnw6p467acpxgikxdwx07q3tmi2giam8j74bixclfb92dxj5qqc8veys7vu8828hr3yehxd8safiwb4ixvpdpmfniutsv9qkq415ai105npll31plau30lw88owklu73ur15ycg923c4jt6jj4vfibxrkcreinwu7pi9eabzk4x5j1e8gjzavmqec0z6oyksbcwhpengszyumtgd086tvj0dyg07j9av8nqqjupf5k9aq73cht0fh5eqtabjh7lzeqzmr2wf0hpmg0apm53t0anignsc19cw6fu3h00oz4sd6tjhaipkg7t3r32bwb4mtyi64rr20byit6d2fp75cj1ytmttzb7w33mig3j52vuubvgdljs5byfba92xzjgbjpy28cyc3p9n2m4y209xeowo66z5pqc6y8ytd99gmgll4pfwrv4f8r8j9g544gajon5pnv2jy7tlc42moh5my3xitumjyi9lm2saaid3w2atuttsim9eczc9zn84rk5z51p539u6mvyb1pobngyp13p68k2oodwbgzvah9p1mv0m3a681675v1jf82iahbhvrgobt12n7tdalx87xg4az8aixoyrgfe1i8xmubatluetncmiflupjddnu7gvwzu0tagd4mjo2wwm9qbc1yu00lzsrilmszcoixwokeluf2ufopuh5l1pogbg8oj351c84mh6b7tdvfpycv6sm2pkpa5k81gz9ztsec7b6m8rjhnbqsbr0nk6polc36f79ander6ggctju32hmhfdsuza43rakjvpqumnghy1eqo6o7tt3rqb4dr6is82q1gv68v18f5ftdfh4zmtn5\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"xsadbpy08sj4e86c530d4ecj0xe7pzwoto57lp2uy6y8qyaa6q3gk5ophu673ft\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": false, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"f98f43dc-4bc8-46ce-a207-80554ed42c38\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"8c1c73c2-2563-4bf5-b72e-04fe83bab6e9\", \n\t\t\"sort\": 969316, \n\t\t\"accountId\": \"bef6de69-ea5f-416c-ba1a-a901a6f4b052\", \n\t\t\"accountCode\": \"6\", \n\t\t\"isImportant\": false, \n\t\t\"sentAt\": \"2024-04-01 01:16:16\", \n\t\t\"subject\": \"8u25q08hc2pd07l0fnanetagsweno6iu5jo6l4bzyl2cd6k5ux7p00lmo30u7jrmt82hopjq63uqjfky12i38vr9v0bo86i16c3g4m8901wjbu46p6hjmkhvwn6i1yskjhsmn71deu0b5ljs6vh11i5sfj96cr0b9qdzju8ziebg9qnpgwfud29k1kwrceqgfm2rh8trbm0dxgx8m1atqfbgtfpmlqljwqres0gmb7dh310wgo88h2rjgpqq6i\", \n\t\t\"body\": \"Voluptatibus omnis ut explicabo. Harum distinctio aut voluptatem ea debitis velit alias vitae a. Veritatis sapiente ex beatae dolores corrupti similique dolores mollitia. Aut molestias et repellendus aut.\", \n\t\t\"link\": \"l67ncwr3t4iy3ugs4w90dl1liuht5lmpqqdazfg7sn0vm98jpvsja4gnba691c0z0d5syporpnivds06576v0rkzgyqfnu1olmhannzsvnqmgqqqacyfxl2694os5s16bocyewis9n1hy6f9aik7pixcv37tl4b7y7bpj769xrdjtnd4v4hfukksk2mv9o0i47oe8qnccc40bkhc7r6wty8hk09zi9rumduqqymfviikiylar61241garl5lrlsig9oku3xm70270ate0628wnqmwooz9hl2100tq3ttx9fao2w9eq3z7gldop5gcijrjqdioydyh1tku4eaueshogc2yao65v1q3pkobubvyg2diuxgbc68zg0zq0e5o9ccjz3i5p1d0tehvr8e0c8qytkvd01zcvebcm2ok5rkb9orlm3zoev1lpu3juy0tlbj6qw7zsq9s0yasnorgc2lqyb90qtwvymref3cd6p6ou39h57po35zuv7n2tywxqy05ksl34jso7yw8nulwko99hfn9vdgnvwn3hj1pn1pbi8clbsvkexi1c1d241uvt0n60mkdt1y693d6ciy5yjx76bpx75ki6zuyahcnocm2lv9krrowx4qfx33bjvx6gfwjc3ammp7qpmmfy9h5tqpirig0vhsveehdkatikua6ynyzj0i6r5lk02fotfkktfomj3kizz0sdvse8cfnquypfq12c9lf9vykt21vnc18szs5c2i62ygwxc2hr6dhm00t5w48ipik0bfxex6dy3aicbb35xu6fhe4jvzzq25vusbh7c3um334kxkmjav56624ex7qift8mqh4zabf5ux6hcb766agiovrg9rw64tsx65g992oiyldmijirs26wpq3ycwb77y8rbs948yqk66t1gd0dvpzu89ojragw6r5ynobqd21j57j8trj5v3wb6du9x4qbh5vfzm8ybl3253hxz5aba30dn54manf543mi3hy6qpdld92x5bqhv8i3zpqly1l80ss11907wi46iu6mq9xoupry2ot0ul2xh18yyb8wi18km5e0a2l91coyn0mcbrg2fe61uhdvxb90tw8cubzzuo4vjgdda2uzniks6biaoj0zbyhi4jfvg0padsdgymgbvn3jrccqai2rm1p0zuukx30m08u2tih3oobol4uhgpjqo29jaxvseqnbf9pfwwjdqxx7ptjbe7oreypxa2si40gwla3nqewal0dj29cgz83rukkzk53dzkd546ieqc9id428dl23a7wb7qvnzirrod7aj7bfhq39mqttd6u5jg46q058b4chleaadzrnv3p11b6vpwfy6hgt323gs5m8zomku0df62erwqn9djnzidcka6kvjutfk8j4ueny9oaya0jh3zsio5w4sshep72x2rxds0pll5oso1gxnadm16ejnevw2hhd0qu9uxuome7dnuyn3qf7y1uj2gefpmlsgfrfb7jl0j8vx8u5mgkx70n68qqqz19wsfuzl2tj7hm3vqerpg73jn4yme5vwwe1nnfyce1zu60fugezdump9v0dtkd0urifawaedp2vvpfpinms2c88v582nfqz62fejh6n9xvsmeqwbt1lxtu8sm7939cft1v5n6ngepdv61zwi87jzon64qs1f9bzmx00isxqlvpg6t7rkw264v6b37yu6xrbx6jpmmmor7okeokbottgp88me8cpq6i0ogfhu6k6fcekkdxdmce467mdgas2x265j4lg1bbt15gv7zbj7mrs0cms2vxt8jzm3mf38czu1zorbjyy4xzgbe4obgllot36kwcrsk0e9qhef62o3l4xmzljudnek5bwe6mce9e7egoohq6co5615v4cfe537iv0x119toln9hec41tdiefprrzyzyqkr65uqw8psnqrfzhrlpsbid1pus9emt8u1dcqt4l52qusy8wuzpy90bqbfongksjvmuz7mqwl9fsqz9e2rtsunnwrkskl3tvj8ffdq2e357o\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"9rxtq5vczowhsrlza1tav9a2mui46ahw0edtc3df6m8k8nhd3n2jnbekwl059d3\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": false, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"fee044d3-ff5a-4a37-a2ea-815658d2235a\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"88e481f8-0d10-4e8b-be87-96709c9fb251\", \n\t\t\"sort\": 342516, \n\t\t\"accountId\": \"04c2ead6-3654-43ba-939f-2b177ab3e149\", \n\t\t\"accountCode\": \"l\", \n\t\t\"isImportant\": false, \n\t\t\"sentAt\": \"2024-03-31 20:38:16\", \n\t\t\"subject\": \"yrefqdelyjw6dajt055ncm60l1jgjpeqosj5mvex1aabekpoms3otqr5wo6py0q6q2otk5ngci4xa053q5kut56nsc9gojevj3g33x4od1q2fm9miagih94wjwjn3nghy2snmjqnluemnsbt3n8uxps6bc5vhm5p0ef63i3mntgnyjjbucf4wba14xrf3kbzgmyrpjbsm3xsoxnad8avose88mllewt8y5umgk1yxc124bun0fspabne6rqrzz\", \n\t\t\"body\": \"Nesciunt quos et aut. Iste ut blanditiis nihil est dolores. Et veniam est quia officiis porro ipsa totam laudantium eos.\", \n\t\t\"link\": \"fw1lqsun359fs2hxquiqrmhiatfhka54u3z6qlv6exffkqtw2bslyab42z5or0w1vgigb3mcjku74y2u1dhtd40vk24ip82w8el0blwnfzli7bp2bc41ak7gpj0vnwele8aypxy6fur1xft8qe4y10owbmhspfmvu5afqki532aicq96gvwma826rlimopaq2n9ef9thaqn4rphu8p07qiq32esomh21gsw4d1z7uu92muhzza9gum74cv6gpq7ijnhhr7mse4mpz6u5m7uzoj4j5mfsy2z3leur1s7znaorqwmwrecjahm4rnstrsuo5ic621vlib1vmi8hg6wgdxscmaucnfj7tq6k94znpgnunpk5a122m9xomankatmzj57bkfxijatw6layn3gf171gcnp9v45th8l6b27qo9cg00ug5zv0uqpwojum6vs7yxhwckxnsxpj3srkwkeyqdiz96i176wj2dnz7c2ej4x1f0z30fracub71mtljzp0t9u2f5nahgaiadb7kq22wnbcalb9o8lzri8yzg2pxx81t64mgvygvk7kvtu3v1ii9zslfaet7b90h3pth2a0z0nv1wg91q6letlglxxp10s8kh00bhel3jna7ifor9kgqs9uy6wkehbzw8qcpzb0aydd5k5wbptu2r2h1mv88jg3nhfn53e1xj0pe3vvcsnjd2fksfmim8vddi22nd9bewybnk1gufq1oezqw9hnqcvq90995c73upyqtxp9jifz00hi7g7jdce9ckxqbojhcohtaxra75jnq0e1bkfi4tttgs22sng89pxaktbwot6fvy8svz80iy6uohnvanvrlq4dfrgwml3byed7z15rwr6e5kw0eczywqwbyv26gz64z2ee6z4mrs25m1b8r2mp4n3pidfu9gsvikjl1nn0cid5ovk92on7qoxc9gkyl2j29qphexey3uecl53xx8w1o4i8fg7ctct1tcj9xq2pz54oi1ztmzdssxowjmm0xih935yxr6api80zixos30gow2ho94qrp5tbmf1lxvr2vzjafn0x32nlixlo3da153v3at94dng5eu160bvfvvm7l26z752bo2ifmkzbbh9aenv4mzm2dcnvmyqvhfavj1xut2ipsssm009rhrwp3x918di6izu96dtt3vk15cxkxx0qkui90bk45juowdisr2e0lgixmapy62gr00ogbl355euovmujnrkdfpt97gmkialofzsyufmkkkb1nhm54fxt2qioe5jfv3go5jy3d8jqx22wz5b9pbkabpnm1daokd7fgv1n05drkag8x7wdd4os638agsek3huj7n7qhxccgulk4othnqsg6u4yaxwzzuxfrmiwbb7j8xc0ckbqg3tkcdyq1ltnszpd9o48epf3syqcovner0e99biyfgpd44ry876bpch4n1zvgbl0qhmyvkvzhaqqasaay3bt33ea4db0eb10lsq5gw7ums9fdq7b8xnw2ue9ifckvgu8by42nn68drjjc366cvz55qdk9pcxlhim7is61rsboeze8kmw74fbxvbkbvjih31h990t00ouraq8hjx04y0ahue0g5f9y26sdg556okc19d03oif9zsgjhm59lpp0wziuja0hibb1r1h2yh8qvbkc63wxj0bjjbm3fli4swevh24h3qcko93qco3v95ibjrxbvepx7gokyqe3xziu852s8hkpbxdyck2omhazr52eiyl9ntcn149sk5mft271j9irrmtjz0pp26mkhg2a4prjkz8u4vw3r7j3xrbu5ucnmi65etlshmrngdzns65i3do2ij9y1b6tty0vcwpby0rkehgurq3mvw0qqc6n6jaflmnitdaivoqwyzorbixd8tjpdayhv3z2la0ex93ybxglvgr666aiuj8qcg0lxyup9e8h92cfec4xntsmmr77szknlfciflrfrpvvnr16a4gawsngcamj3gdrrb1c78t5xd7d4trq84pvmg0mbnnndyqh\", \n\t\t\"isInternalLink\": false, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"nu5djvvwva2la4mje8aw8apjy4l1n7xggtmr8u522kcrpjmrbuu9emca74qrckz\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": false, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"4276f3eb-24d5-42ab-b726-8e6acb8bae34\", \n\t\t\"tenantIds\": [], \n\t\t\"messageId\": \"90fc8a0b-77c8-43cd-b9d4-84649383ba01\", \n\t\t\"sort\": 157121, \n\t\t\"accountId\": \"5b37285e-df7f-46e2-8f94-8ed84d48cf80\", \n\t\t\"accountCode\": \"n\", \n\t\t\"isImportant\": true, \n\t\t\"sentAt\": \"2024-03-31 21:12:13\", \n\t\t\"subject\": \"egayv8b5onje1sp9rrtymatiz77lrumx90ykxpmtg9gs1xtnxiiv0ytrdkk5eu6k1vyli2mm6ssji0w91puld9bn83grsy2dp56onft4kjvy9a03ez1wc37bg37k19va8gk45ekq76ndnxr4lg6mlpui35h4bjexkkntvfmn8d0jskltficfkod3jrcxgz04gvlfzjszar0koh6ujevu0nkgesbo8mueef8qe2knvc1bu82hkyl126whhehg1r\", \n\t\t\"body\": \"Molestiae in qui possimus voluptatibus debitis assumenda. Sunt voluptas id dolor enim ea illo non aut. Aut nostrum non. Architecto asperiores nostrum blanditiis nihil natus sed inventore error totam. Esse illum non. Officiis id cum ut facere ut atque.\", \n\t\t\"link\": \"pkdzvlqgsg584hzg3lfr4ajt0hhh69ihieojnh94y52m3vfdeszsdld1mh8sp3ve7zjlkvi4gwx7uwj1ce78mj51dgv9ly2ys1dzzofou7apz0q9300kdtu5ndiewcfurcdh7eu5p2ct0n2vzgkxdy0t0vri75jf9l079d9c5pfa81kc6pi1bjui24n3jzm4fxw32jgid7gss5t9ezowq72nxry7c8z3aqb1eqd4t6vlvh3u9ut5naxr8776ab0ri19585j45ya9s5k948l4fvf7dwsnv1jpzlsy2bjgugmlzxdm08hktr7qk5aj5y0aru51toil4oviyebu5uufh007uuo7dfsaqfuuinwizeqwe5n491dym1wkx48ao8q9pp815dvmlow8hgqfff5oizw54133dc4iigtynhbvb9hs4xlu0u57elue2n2gfgtaaff09c9cyphyo0vmz0r7i50h2wrh47jkzwrl67i3xqzzoet179einw0mhiaeh3r92dfvyhnrbuz4lirvpsh47x0hinr6sygz7g1lhl5jtz6wwkike9zawlw9b8sh4m4ahklhwklu7zoydf8c8beml9mu090qg47yxth5ecd6u2bbijenr9gthw5k6tia72vv521cnp2sfr171mgk9tfl3l1g1eoj9a5xdh68e7w1umrkp6nzfx6at5tczw786u098ehwzgpop2b071la2xvcz1vdtvlb5eokoo07lvazs3m1no7gxv5fkx5p2lfj91wizv7a4dlvkgdw7wih8qod2awglse0kw1240lpnqhwarlsgzpbuc8o1ddwceyybcpy3wn0lioz9jz25unzvs77vdmj8csk02diyvdjpwckotf2721fbrr1gjxceni0xzefexti8ve7ci0fytris12rjeyre6vy1zibbypjmkvgpz7tbshaz3nq8gk5yuxq8u8knqio0heom5ab24fqmodlefigbns2h226s9fegp4koyc8z84txpi9rx1zbo54ahwhpk8938hhiv5ca0bcvabosrtdgfdz2cj9jqbq425vfhm5qgukcxhq5pw9c3prrxujw7n3if1ujrf5we06afpqmry17u0r71ed51jh6spu1w8yfckjze4o28gd64lmv9s3gkx8gjbhil3lixg0y75373jfvubifpgelxnibs9p2gdn9gi6gcmpaegkwk8ncq89d0hzy3ceopmjf6mahp7s4lvd8sutphy177srsixxakl3s5m7mjsvtjcz1o4msrsl6uktuzz3narzlubvvca66cudwgpnmwe0du88bom5l13yw4p1slvr1fjivmtskayin1pusydxznpa9jdfyn509l74d5zso1loeqtlangqjq8exs20bp6demicty74tsx7ytwpdw1r0j56ipqb16lbj62zstpl50inj8o4c8ak3ollwiuz139vuenizj28d2gvcsz1pnnyt55nhbf89ev1q3momm0bjsay27zv5qayrzolvu17rxe310762py53p5g61r3pjnkoeolgk9pdj4oo0vxddojusct5v2kobzl5kvzzmu48vnj09ioeyl73fdekgda9umva322frvy56w2f68462h611rxgqmzqhq422kklq9ghneedstd00s2kghedivn2ao3luwxue7iu1nxd5797x0d0idmclmycsn2kozhibx16h9kdzivpk4xerqkelwcmno2mul1uod7brfb15forio462ar9mhjo4lzoqwrkmvjud2ln9me3535i3oo3ia3bjmhhsnrxwkwia36f3jkwbskxf0i5go2dryl4dfcx2kmphlngdis7mv6pbm1yg6tksjkfh7yek8ym367qn1xfyuzney774wkma1pi46czvle07qpffhwtk2ti903nxkhi1r6t52a2st2znpxwcidxuiom3lsm7vuath1qe5q97tbqdsoq29yg2r4du0xxyhjq9ppkmo7kio0cvhjcinwkbwc1gno89y7rrjvlgob5kfbqkdmjyttp5d7r\", \n\t\t\"isInternalLink\": true, \n\t\t\"image\": { \"foo\" : \"bar\" }, \n\t\t\"icon\": \"w42v8ycc2pv4plqub035cszlt9gqwhu0o6is9hspbawt4p9bfoimxiqoma3xbnu\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"isRead\": true, \n\t\t\"isReadAtLeastOnce\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inboxes/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"inboxes",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/inboxes/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inboxes/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+                        "inboxes",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/inboxes/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inboxes/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"inboxes",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/inbox/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inbox/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"inbox",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/inbox/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inbox/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"inbox",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/inbox/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"tenantIds\": [], \n\t\"messageId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"sort\": 257580, \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountCode\": \"5\", \n\t\"isImportant\": false, \n\t\"sentAt\": \"2024-04-01 17:12:12\", \n\t\"subject\": \"5w7o9lhob9h4a4wv2aflg4tqssnq7zsfiowedpcsjqyqqcrqyzo3k7gcksjzk3wdig8etsyd2xo285sks3xr900ae43jkzjt5tuob3s1xsnes7s0ulanlfgr17cnotfhxml1gax7bx7uca33uc05n1zsv8t5yghz7g1wvw8u7u10vmrndoj9x2xc8ltleuugl776b8b40dmyg5t2kpniw4mpvg1ifvpkushznmdvmzc5n2bpbrar691xpyfcna\", \n\t\"body\": \"Doloribus nam ut culpa. Quia eum libero libero iste. Error sit recusandae voluptatum enim doloremque atque omnis quia nulla. Corrupti reiciendis quae id aspernatur quidem pariatur. Dolores possimus ut aut ut nesciunt mollitia esse repellendus. Alias eius voluptatem voluptatem sunt explicabo ipsam tempore velit.\", \n\t\"link\": \"ug1b9uzruxyj2bsbtpystwhoag0yh3zypph2j2510mjv3tymmdywa3za3a6fvg1b2mb6kws98wjbycjjhui8s5yftv3imol01b1xi78h9ioxnfd0bkdk0opxte682hsol49lv5tjko41g3514ao1jqetv35p7drb4pjn5rb2jcmw2dmipqsfr8149u25f6zcdbntfo696yquskxpnd0ye63b3w7ehfyr8dfqkkj66dk53e95cbjpa4e5lzuuupekafpkevg04knoqi6v3w5ti61riubamoq8dagepv16xvbmi0iq1q1neqd630u32rlp3ihot09sbmpn8rv72ha9c4jhep4ruyd602ejnl1pkooyd6n50dkbci3fjr8zqtkijnb1hb47k03moe7hyilbps5ql6boys3wl8hmv7webo6cmanuwoaxn962d4m69kr3eo9stuy2virovm0ksupqf0ofe6yvcfcvzm64238frfknon6cs5034te04ctlx2qp1cvdizunil9kbzssjongbg0ktdjx21s7hc7xf1s2pirzfliw00m72xxmeqbowzs4nopkrglzpe6pe9b2apfvukib01wpl5blw5exjb3ha2fh0ku3vgpfml7vif5bi8esugqwo0bir8ocqclrp6g593fb787nwipifi7hqjglb8hhriw5jppfwgfvfkyy308fnvhzmbpoxutk95wqsamfv5q3w0gefbdxim83xl0mo6r3atoisbwn6yxrkylepq9lvf2pu1ajphly00a1oucubuq8cv8t6u517psngitvhalpgsiqwiigmkvcti6gebwngpigzwvngy7rrng4w4kn88cw2c7esbjy96b8frowugvlf07hyt9awwq4muezybj4iu5gg5vblpdx6x0jvq1dl4hf8xcy5q9zfb6yixz0mcjlub4zdqg31l4y4y9bw1a47h2q1dwrexqjjy7u6jdla1j263z36u2i4tvlqi582prn816vpa0qoict7nn6xl3whz3z78wl077cfac39ezmwz7t9c7tc7yaupn2ikorqmsn268m66z6d4jmehmfk1cwjc52u0k78nqvbm2emuumm1qoa4wtkhcfjnortk9n50nrldbqrlj09wc43m527xwc2rlc2liqc5qerpnt2vl365fy0o5j3dqfvnf35r12futzzrvq9mb2jlx13nsgc81pxu73ryfg18qcdzjvynmva1d5dqufat6sox075y0ne6dli7jnro3x0ilzj42z1tby8rushbqrspx4lcc3voi8fs9e1lwxe4sg73qx81wo2vnx4bfnxstv5k0bjaar2q2scvcwzpraqz6xqimify6l4m3rfxfobc9uoe6a6v5oocqbqgcls6gzvtsrqhdeghr0hwgfldcw08cscln3ev0uy4qnbddb8n8gk98m1kq96nr7514xgwvpoa2zh958eaxl9shoa5u85z2aiuwa2tpxiqcxgtfctnrrlg0cronzdnnmnhxlv3fmxfer0jhwytpy0ydseh3hgkttyeii2y9ozqmlagzljsbej3x3126w8e4ej779jei4165akblgoxkzpvzw30f4kskumr7y8df775bq0xn4nhom4s4s82leafffh36rxqsrgp749j5jgizaxrb1b7xhdaz5lr8hoct9fs3o430m2iya4llav4ptbg10fd88lnqozzbb4klba5jewei45dj9deaqh4fi5k3ohduhla5888nht3q8cppji799p1yu8mug3nn4e0xs6ldx5gsnlyhu09hsg9myqujtv0pl8f01v2pm75ldnhnvlj12lgtrr3llod3h5j5hxzafr58b7m4qvl6khe2fwyzd5puseggyq9kt4c66sps3cfq81mxg9jpn6835h9jhb18okl18hcenodjt2ww39i3kp2fmzav53nufam243ytyfyq34uzd1oqswdun2upuc9ie9shb4eqeh514j67dgbk83ilhbothgmo20cgsdml6yrlzqw1bybcf6k3vgp3xj\", \n\t\"isInternalLink\": false, \n\t\"image\": { \"foo\" : \"bar\" }, \n\t\"icon\": \"n8skd89aggqdfsramwglm0jmarqzxnmwhjnp8ntrbbqi66zyoi0bq1zflvlsvlr\", \n\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\"isRead\": false, \n\t\"isReadAtLeastOnce\": false, \n\t\"meta\": { \"foo\" : \"bar\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inbox/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"inbox",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - message/inbox/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inbox/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"inbox",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - message/inboxes/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/message/inboxes/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"message",
+						"inboxes",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
