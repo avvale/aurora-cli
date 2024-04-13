@@ -1,10 +1,10 @@
 import { CoreGetFallbackLangFromJsonService, CoreGetLangsFromJsonService } from '@aurora/modules/lang';
-import { AuditingRunner, AuditingRunnerDisabledImplementationService, AuroraMetadataModule, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetLangsService, CoreGetSearchKeyLangService, CoreModule } from '@aurorajs.dev/core';
+import { AuditingRunner, AuditingRunnerDisabledImplementationService, AuroraMetadataModule, CoreAddI18nConstraintService, CoreGetBase64FromFileService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetLangsService, CoreGetSearchKeyLangService, CoreModule } from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
-import { CqrsConfigModule, SentryModule } from './modules';
+import { SentryModule } from './modules';
 
 @Module({
     imports: [
@@ -12,7 +12,6 @@ import { CqrsConfigModule, SentryModule } from './modules';
         CacheModule.register({ isGlobal: true, ttl: 0 }),
         ConfigModule.forRoot({ isGlobal: true }),
         CoreModule,
-        CqrsConfigModule,
         CqrsModule,
         SentryModule.forRootAsync({
             imports   : [ConfigModule],
@@ -26,6 +25,7 @@ import { CqrsConfigModule, SentryModule } from './modules';
     ],
     providers: [
         CoreAddI18nConstraintService,
+        CoreGetBase64FromFileService,
         CoreGetContentLanguageObjectService,
         CoreGetSearchKeyLangService,
         {
@@ -47,11 +47,11 @@ import { CqrsConfigModule, SentryModule } from './modules';
         CacheModule,
         ConfigModule,
         CoreAddI18nConstraintService,
+        CoreGetBase64FromFileService,
         CoreGetContentLanguageObjectService,
         CoreGetFallbackLangService,
         CoreGetLangsService,
         CoreGetSearchKeyLangService,
-        CqrsConfigModule,
         SentryModule,
     ],
 })

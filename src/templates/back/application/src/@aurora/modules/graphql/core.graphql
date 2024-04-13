@@ -118,7 +118,15 @@ type Pagination
 type Query
 {
     coreGetLangs: [CoreLang]!
+
     coreGetFallbackLang: CoreLang
+
     coreGetSearchKeyLang: CoreSearchKeyLang
+
+    coreGetBase64FromFile (
+        relativePathSegments: [GraphQLString!]!
+        filename: GraphQLString!
+    ): GraphQLString
+
     hello: String
 }

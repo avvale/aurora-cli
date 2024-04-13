@@ -4,10 +4,11 @@ import { AppService } from './app.service';
 
 // modules
 import { CoreModule } from './@aurora/core.module';
-import { ServerStaticModule } from '@aurora/modules';
+import { RootModule, ServerStaticModule } from '@aurora/modules';
 
 @Module({
     imports: [
+        RootModule,
         CoreModule,
         ServerStaticModule
     ],
