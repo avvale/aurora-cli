@@ -21,7 +21,6 @@ export * from './grid-select-multiple-elements';
 export * from './image-input';
 export * from './mat-form-field-appearance';
 export * from './navigation';
-export * from './ribbon-environment';
 export * from './select-search';
 export * from './slug';
 export * from './snack-bar-invalid-form';

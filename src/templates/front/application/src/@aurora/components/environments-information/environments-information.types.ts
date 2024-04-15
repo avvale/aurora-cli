@@ -8,4 +8,5 @@ export interface EnvironmentInformation
 {
     name: string;
     version: string;
+    environment: string;
 }

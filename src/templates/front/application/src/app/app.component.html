@@ -1,6 +1,5 @@
-<au-ribbon-environment
-    *ngIf="!environment.production"
-    title="Development"
->
-</au-ribbon-environment>
+@if(!environment.production)
+{
+    <au-ribbon-environment></au-ribbon-environment>
+}
 <router-outlet></router-outlet>

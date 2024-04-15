@@ -10,12 +10,14 @@ export class EnvironmentsInformationMockAdapterService extends EnvironmentsInfor
 {
     environmentsInformationSubject$: BehaviorSubject<EnvironmentsInformation | null> = new BehaviorSubject({
         app: {
-            name   : 'no-version front',
-            version: '0.0.0',
+            name       : 'no-version front',
+            version    : '0.0.0',
+            environment: 'Production',
         },
         server: {
-            name   : 'no-version back',
-            version: '0.0.0',
+            name       : 'no-version back',
+            version    : '0.0.0',
+            environment: 'Production',
         },
     });
 

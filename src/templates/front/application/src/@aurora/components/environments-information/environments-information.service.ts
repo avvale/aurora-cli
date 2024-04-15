@@ -13,12 +13,14 @@ export class EnvironmentsInformationService
 {
     environmentsInformationSubject$: BehaviorSubject<EnvironmentsInformation | null> = new BehaviorSubject({
         app: {
-            name   : '',
-            version: '0.0.0',
+            name       : '',
+            version    : '0.0.0',
+            environment: 'Production',
         },
         server: {
-            name   : '',
-            version: '0.0.0',
+            name       : '',
+            version    : '0.0.0',
+            environment: 'Production',
         },
     });
 
@@ -42,8 +44,9 @@ export class EnvironmentsInformationService
             {
                 this.environmentsInformationSubject$.next({
                     app: {
-                        name   : packageFile.name,
-                        version: packageFile.version,
+                        name       : packageFile.name,
+                        version    : packageFile.version,
+                        environment: environmentInformationServer.environment,
                     },
                     server: environmentInformationServer,
                 });
