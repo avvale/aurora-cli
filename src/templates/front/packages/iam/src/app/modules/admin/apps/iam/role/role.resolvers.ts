@@ -1,4 +1,3 @@
-import { IamPermission } from '../iam.types';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { IamRole } from '@apps/iam/iam.types';
@@ -73,7 +72,6 @@ export const roleEditResolver: ResolveFn<{
     const permissionsRolesGridId = 'iam::role.detail.permissionsRolesGridList';
     gridStateService.setPaginationActionId(permissionsRolesGridId, 'iam::role.detail.permissionsRolesPagination');
     gridStateService.setExportActionId(permissionsRolesGridId, 'iam::role.detail.exportPermissionsRoles');
-
 
     const permissionsGridId = 'iam::role.detail.permissionsGridList';
     gridStateService.setPaginationActionId(permissionsGridId, 'iam::role.detail.permissionsPagination');

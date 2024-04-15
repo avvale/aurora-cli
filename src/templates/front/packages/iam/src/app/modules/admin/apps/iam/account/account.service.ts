@@ -21,6 +21,11 @@ export class AccountService
     accountSubject$: BehaviorSubject<IamAccount | null> = new BehaviorSubject(null);
     accountsSubject$: BehaviorSubject<IamAccount[] | null> = new BehaviorSubject(null);
 
+    // scoped subjects
+    paginationScoped: { [key: string]: BehaviorSubject<GridData<IamAccount> | null>; } = {};
+    accountScoped: { [key: string]: BehaviorSubject<IamAccount | null>; } = {};
+    accountsScoped: { [key: string]: BehaviorSubject<IamAccount[] | null>; } = {};
+
     constructor(
         private readonly graphqlService: GraphQLService,
         private readonly tenantService: TenantService,
@@ -47,17 +52,74 @@ export class AccountService
         return this.accountsSubject$.asObservable();
     }
 
+    // allows to store different types of pagination under different scopes
+    // this allows us to have multiple observables with different streams of
+    // pagination data.
+    setScopePagination(scope: string, pagination: GridData<IamAccount>): void
+    {
+        if (this.paginationScoped[scope])
+        {
+            this.paginationScoped[scope].next(pagination);
+            return;
+        }
+        // create new subject if not exist
+        this.paginationScoped[scope] = new BehaviorSubject(pagination);
+    }
+
+    // get pagination observable by scope
+    getScopePagination(scope: string): Observable<GridData<IamAccount>>
+    {
+        if (this.paginationScoped[scope]) return this.paginationScoped[scope].asObservable();
+        return null;
+    }
+
+    setScopeAccount(scope: string, object: IamAccount): void
+    {
+        if (this.accountScoped[scope])
+        {
+            this.accountScoped[scope].next(object);
+            return;
+        }
+        // create new subject if not exist
+        this.accountScoped[scope] = new BehaviorSubject(object);
+    }
+
+    getScopeAccount(scope: string): Observable<IamAccount>
+    {
+        if (this.accountScoped[scope]) return this.accountScoped[scope].asObservable();
+        return null;
+    }
+
+    setScopeAccounts(scope: string, objects: IamAccount[]): void
+    {
+        if (this.accountsScoped[scope])
+        {
+            this.accountsScoped[scope].next(objects);
+            return;
+        }
+        // create new subject if not exist
+        this.accountsScoped[scope] = new BehaviorSubject(objects);
+    }
+
+    getScopeAccounts(scope: string): Observable<IamAccount[]>
+    {
+        if (this.accountsScoped[scope]) return this.accountsScoped[scope].asObservable();
+        return null;
+    }
+
     pagination(
         {
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<GridData<IamAccount>>
     {
@@ -78,7 +140,7 @@ export class AccountService
             .pipe(
                 first(),
                 map(result => result.data.pagination),
-                tap(pagination => this.paginationSubject$.next(pagination)),
+                tap(pagination => scope ? this.setScopePagination(scope, pagination) : this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -88,11 +150,13 @@ export class AccountService
             id = '',
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamAccount;
@@ -116,10 +180,7 @@ export class AccountService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.accountSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopeAccount(scope, data.object) : this.accountSubject$.next(data.object)),
             );
     }
 
@@ -131,6 +192,7 @@ export class AccountService
             queryGetClients = {},
             constraintGetClients = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
@@ -138,6 +200,7 @@ export class AccountService
             queryGetClients?: QueryStatement;
             constraintGetClients?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamAccount;
@@ -173,7 +236,14 @@ export class AccountService
                 map(result => result.data),
                 tap(data =>
                 {
-                    this.accountSubject$.next(data.object);
+                    if (scope)
+                    {
+                        this.setScopeAccount(scope, data.object);
+                    }
+                    else
+                    {
+                        this.accountSubject$.next(data.object);
+                    }
                     this.tenantService.tenantsSubject$.next(data.iamGetTenants);
                     this.roleService.rolesSubject$.next(data.iamGetRoles);
                     this.tagService.tagsSubject$.next(data.iamGetTags);
@@ -188,11 +258,13 @@ export class AccountService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamAccount;
@@ -216,10 +288,7 @@ export class AccountService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.accountSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopeAccount(scope, data.object) : this.accountSubject$.next(data.object)),
             );
     }
 
@@ -229,11 +298,13 @@ export class AccountService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         objects: IamAccount[];
@@ -257,10 +328,7 @@ export class AccountService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.accountsSubject$.next(data.objects);
-                }),
+                tap(data => scope ? this.setScopeAccounts(scope, data.objects) : this.accountsSubject$.next(data.objects)),
             );
     }
 

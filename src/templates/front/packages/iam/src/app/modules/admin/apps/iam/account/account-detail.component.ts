@@ -1,7 +1,7 @@
 import { IamAccountType, IamRole, IamTag, IamTenant } from '../iam.types';
 import { TenantService } from '../tenant/tenant.service';
 import { KeyValuePipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, WritableSignal, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,7 +10,7 @@ import { AccountService } from '@apps/iam/account';
 import { IamAccount } from '@apps/iam/iam.types';
 import { Action, CoreGetLangsService, CoreLang, Crumb, defaultDetailImports, log, mapActions, OAuthClientGrantType, SelectSearchService, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { BehaviorSubject, lastValueFrom, Observable, ReplaySubject, takeUntil } from 'rxjs';
-import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+// import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { OAuthClient, OAuthScope } from '@apps/o-auth/o-auth.types';
@@ -29,7 +29,8 @@ import { TagService } from '../tag';
     imports        : [
         ...defaultDetailImports,
         MatCheckboxModule, MatSelectModule, NgForOf,
-        KeyValuePipe, MatPasswordStrengthModule, MatToolbarModule, NgxMatSelectSearchModule
+        KeyValuePipe, MatToolbarModule, NgxMatSelectSearchModule,
+        // MatPasswordStrengthModule,
     ],
 })
 export class AccountDetailComponent extends ViewDetailComponent
@@ -45,6 +46,7 @@ export class AccountDetailComponent extends ViewDetailComponent
     langs$: Observable<CoreLang[]>;
     tenantFilterCtrl: FormControl = new FormControl<string>('');
     filteredTenants$: ReplaySubject<IamTenant[]> = new ReplaySubject<IamTenant[]>(1);
+    showTenantsInput: WritableSignal<boolean> = signal(true);
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
@@ -97,10 +99,16 @@ export class AccountDetailComponent extends ViewDetailComponent
         this.originClients = this.clientService.clientsSubject$.value;
     }
 
-    initTenantsFilter(parentTenants: IamTenant[]): void
+    initTenantsFilter(tenants: IamTenant[]): void
     {
+        if (tenants.length === 1)
+        {
+            this.fg.get('tenantIds').setValue([tenants[0].id]);
+            this.showTenantsInput.set(false);
+        }
+
         // init select filter with all items
-        this.filteredTenants$.next(parentTenants);
+        this.filteredTenants$.next(tenants);
 
         // listen for country search field value changes
         this.tenantFilterCtrl
@@ -111,7 +119,7 @@ export class AccountDetailComponent extends ViewDetailComponent
                 this.selectSearchService
                     .filterSelect<IamTenant>(
                         this.tenantFilterCtrl,
-                        parentTenants,
+                        tenants,
                         this.filteredTenants$,
                     );
             });
@@ -180,7 +188,7 @@ export class AccountDetailComponent extends ViewDetailComponent
             clientId: null,
             tags: [],
             scopes: [],
-            tenantIds: [],
+            tenantIds: [[], [Validators.required]],
             hasAddChildTenants: false,
             roleIds: [],
             user: this.fb.group({

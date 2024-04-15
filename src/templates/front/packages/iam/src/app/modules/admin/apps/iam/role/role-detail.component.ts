@@ -7,7 +7,6 @@ import { IamRole } from '@apps/iam/iam.types';
 import { RoleService } from '@apps/iam/role';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, log, mapActions, Operator, QueryStatementHandler, SelectionChange, SelectionModel, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
-import { NgFor } from '@angular/common';
 import { permissionColumnsConfig } from '../permission';
 import { permissionRoleColumnsConfig } from '../permission-role/permission-role.columns-config';
 import { PermissionRoleService } from '../permission-role/permission-role.service';
@@ -22,7 +21,6 @@ import { getQueryExportPermissionsRoles } from '../permission-role/permission-ro
     imports        : [
         ...defaultDetailImports,
         GridSelectMultipleElementsModule, MatCheckboxModule,
-        GridSelectMultipleCustomHeaderDialogTemplateDirective, NgFor,
     ],
 })
 export class RoleDetailComponent extends ViewDetailComponent

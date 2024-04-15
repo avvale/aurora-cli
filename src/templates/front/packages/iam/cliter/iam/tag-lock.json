@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-detail.component.html",
-            "integrity": "sha1:f91f7bfce20558079d7cdb881af8aa59cf51c483"
+            "integrity": "sha1:3e5851e58793edf57adbbd4f3a8c078cd0e8fae1"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-detail.component.ts",
@@ -19,7 +19,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-list.component.html",
-            "integrity": "sha1:df49adf9cb042450f2fb230589da87068130688b"
+            "integrity": "sha1:b5eab9f59349ea989f58161d26d93373bd9a8f28"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-list.component.ts",

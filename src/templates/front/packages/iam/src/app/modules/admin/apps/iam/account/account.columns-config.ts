@@ -5,13 +5,13 @@ export const accountColumnsConfig: ColumnConfig[] = [
         type       : ColumnDataType.ENUM,
         field      : 'type',
         sort       : 'type',
-        translation: 'iam.Type',
+        translation: 'Type',
     },
     {
         type       : ColumnDataType.STRING,
         field      : 'code',
         sort       : 'code',
-        translation: 'iam.Code',
+        translation: 'Code',
     },
     {
         type       : ColumnDataType.ARRAY,
@@ -23,12 +23,12 @@ export const accountColumnsConfig: ColumnConfig[] = [
         type       : ColumnDataType.STRING,
         field      : 'email',
         sort       : 'email',
-        translation: 'iam.Email',
+        translation: 'Email',
     },
     {
         type       : ColumnDataType.BOOLEAN,
         field      : 'isActive',
         sort       : 'isActive',
-        translation: 'iam.IsActive',
+        translation: 'Active',
     },
 ];

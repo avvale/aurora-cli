@@ -17,46 +17,63 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-            <button
-                *ngIf="currentViewAction.id === 'iam::tag.detail.edit'"
-                mat-flat-button
-                type="submit"
-                class="ml-3"
-                form="iamTagFormDetail"
-                color="accent"
-                [disabled]="fg.pristine || ('iam::tag.detail.update' | getSpinnerFlag | async)"
-            >
-                <mat-icon
-                    *ngIf="!('iam::tag.detail.update' | getSpinnerFlag | async)"
-                    svgIcon="mat_solid:edit"
-                    class="icon-size-5 mr-2"
+
+            @if (currentViewAction.id === 'iam::tag.detail.edit')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    class="ml-3"
+                    form="iamTagFormDetail"
+                    color="accent"
+                    [disabled]="fg.pristine || ('iam::tag.detail.update' | getSpinnerFlag | async)"
                 >
-                </mat-icon>
-                <mat-icon *ngIf="'iam::tag.detail.update' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
-                {{ t('Update') }}
-            </button>
-            <button
-                *ngIf="currentViewAction.id === 'iam::tag.detail.new'"
-                mat-flat-button
-                type="submit"
-                form="iamTagFormDetail"
-                class="ml-3"
-                color="accent"
-                [disabled]="fg.pristine || ('iam::tag.detail.create' | getSpinnerFlag | async)"
-            >
-                <mat-icon
-                    *ngIf="!('iam::tag.detail.create' | getSpinnerFlag | async)"
-                    svgIcon="mat_solid:save"
-                    class="icon-size-5 mr-2"
+                    @if('iam::tag.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:edit"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Update') }}
+                </button>
+            }
+
+            @if (currentViewAction.id === 'iam::tag.detail.new')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    form="iamTagFormDetail"
+                    class="ml-3"
+                    color="accent"
+                    [disabled]="fg.pristine || ('iam::tag.detail.create' | getSpinnerFlag | async)"
                 >
-                </mat-icon>
-                <mat-icon *ngIf="'iam::tag.detail.create' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
-                {{ t('Create') }}
-            </button>
+                    @if('iam::tag.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:save"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Create') }}
+                </button>
+            }
         </div>
         <!-- / Actions -->
 
@@ -79,7 +96,7 @@
 
                     <mat-form-field
                         appearance="outline"
-                        class="col-8"
+                        class="col-12"
                     >
                         <mat-label>{{ t('iam.Name') }}</mat-label>
                         <input

@@ -145,60 +145,62 @@
                         <mat-error>{{ formErrors?.email | async }}</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-9"
-                    >
-                        <mat-label>{{ t('iam.Tenants') }}</mat-label>
-                        <mat-select
-                            formControlName="tenantIds"
-                            multiple
+                    @if(showTenantsInput())
+                    {
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-9"
                         >
-                            <mat-option>
-                                <ngx-mat-select-search
-                                    [formControl]="tenantFilterCtrl"
-                                    [placeholderLabel]="t('iam.FindTenant')"
-                                    [noEntriesFoundLabel]="t('NoResultsFound')"
+                            <mat-label>{{ t('iam.Tenants') }}</mat-label>
+                            <mat-select
+                                formControlName="tenantIds"
+                                multiple
+                            >
+                                <mat-option>
+                                    <ngx-mat-select-search
+                                        [formControl]="tenantFilterCtrl"
+                                        [placeholderLabel]="t('iam.FindTenant')"
+                                        [noEntriesFoundLabel]="t('NoResultsFound')"
+                                    >
+                                    </ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option
+                                    *ngFor="let tenant of filteredTenants$ | async"
+                                    [value]="tenant.id"
                                 >
-                                </ngx-mat-select-search>
-                            </mat-option>
-                            <mat-option
-                                *ngFor="let tenant of filteredTenants$ | async"
-                                [value]="tenant.id"
+                                    {{ tenant.name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>{{ formErrors?.tenantIds | async }}</mat-error>
+                        </mat-form-field>
+
+                        <div class="col-3 pt-5">
+                            <mat-checkbox
+                                formControlName="hasAddChildTenants"
                             >
-                                {{ tenant.name }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error>{{ formErrors?.tenantIds | async }}</mat-error>
-                    </mat-form-field>
+                                {{ t('iam.AddChildTenants') }}
+                            </mat-checkbox>
+                        </div>
 
-                    <div class="col-3 pt-5">
-                        <mat-checkbox
-                            formControlName="hasAddChildTenants"
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-start-1 col-3"
                         >
-                            {{ t('iam.AddChildTenants') }}
-                        </mat-checkbox>
-                    </div>
-
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-start-1 col-3"
-                    >
-                        <mat-label>{{ t('iam.Tags') }}</mat-label>
-                        <mat-select
-                            formControlName="tags"
-                            multiple
-                        >
-                            <mat-option
-                                *ngFor="let tag of tags$ | async"
-                                [value]="tag.name"
+                            <mat-label>{{ t('iam.Tags') }}</mat-label>
+                            <mat-select
+                                formControlName="tags"
+                                multiple
                             >
-                                {{ tag.name }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error>{{ formErrors?.tags | async }}</mat-error>
-                    </mat-form-field>
-
+                                <mat-option
+                                    *ngFor="let tag of tags$ | async"
+                                    [value]="tag.name"
+                                >
+                                    {{ tag.name }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>{{ formErrors?.tags | async }}</mat-error>
+                        </mat-form-field>
+                    }
                     <mat-form-field
                         appearance="outline"
                         class="col-3"
@@ -361,11 +363,11 @@
                             <mat-error>{{ formErrors['user.password'] | async }}</mat-error>
                         </mat-form-field>
 
-                        <mat-password-strength
+                        <!-- <mat-password-strength
                             class="col-start-1 col-6"
                             [password]="fg.get('user.password').value"
                         >
-                        </mat-password-strength>
+                        </mat-password-strength> -->
                         <mat-form-field
                             appearance="outline"
                             class="col-start-1 col-6"
