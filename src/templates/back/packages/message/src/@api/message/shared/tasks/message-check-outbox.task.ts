@@ -14,8 +14,7 @@ export class MessageCheckOutboxTask
         private readonly queryBus: IQueryBus,
     ) {}
 
-    // @Cron(CronExpression.EVERY_5_MINUTES) // Every 5 minutes
-    @Cron(CronExpression.EVERY_MINUTE) // Every minute
+    @Cron(CronExpression.EVERY_5_MINUTES) // Every 5 minutes
     async handleCron(): Promise<void>
     {
         try
