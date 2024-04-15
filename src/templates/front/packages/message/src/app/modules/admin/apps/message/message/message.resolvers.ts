@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { IamTag, IamTenant } from '@apps/iam/iam.types';
+import { IamTag, IamTenant } from '@apps/iam';
 import { messageColumnsConfig, MessageService } from '@apps/message/message';
 import { MessageMessage } from '@apps/message/message.types';
 import { OAuthClient } from '@apps/o-auth/o-auth.types';
@@ -77,6 +77,8 @@ export const messageNewResolver: ResolveFn<{
             include: [
                 {
                     association: 'user',
+                    required   : true,
+
                 },
             ],
         },
@@ -84,6 +86,7 @@ export const messageNewResolver: ResolveFn<{
             include: [
                 {
                     association: 'user',
+                    required   : true,
                 },
             ],
         },
@@ -140,6 +143,7 @@ export const messageEditResolver: ResolveFn<{
                     include: [
                         {
                             association: 'user',
+                            required   : true,
                         },
                     ],
                 },
@@ -147,6 +151,7 @@ export const messageEditResolver: ResolveFn<{
                     include: [
                         {
                             association: 'user',
+                            required   : true,
                         },
                     ],
                 },
