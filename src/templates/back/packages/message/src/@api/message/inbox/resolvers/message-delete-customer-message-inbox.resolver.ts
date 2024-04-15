@@ -1,5 +1,5 @@
 import { MessageInbox } from '@api/graphql';
-import { TenantPolicy } from '@api/iam/shared';
+import { TenantConstraint } from '@api/iam/shared';
 import { MessageDeleteCustomerMessageInboxHandler } from '@api/message/inbox';
 import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
@@ -15,7 +15,7 @@ export class MessageDeleteCustomerMessageInboxResolver
     ) {}
 
     @Mutation('messageDeleteCustomerMessageInbox')
-    @TenantPolicy()
+    @TenantConstraint()
     async main(
         @CurrentAccount() account: IamAccountResponse,
         @Args('id') id: string,

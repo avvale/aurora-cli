@@ -1,4 +1,4 @@
-import { MessageCreateMessageInput } from '@api/graphql';
+import { MessageCreateMessageInput, MessageMessageStatus } from '@api/graphql';
 import { MessageCreateMessageDto } from '@api/message/message';
 import { IamAccountResponse } from '@app/iam/account';
 import { MessageCreateMessagesCommand } from '@app/message/message';
@@ -24,6 +24,7 @@ export class MessageCreateMessagesHandler
                 ...message,
                 totalRecipients: 0,
                 reads          : 0,
+                status         : MessageMessageStatus.DRAFT,
             })),
             {
                 timezone,

@@ -1,5 +1,4 @@
 /* eslint-disable indent */
-import { MessageMessageStatus } from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class MessageUpdateMessageByIdDto
@@ -15,13 +14,6 @@ export class MessageUpdateMessageByIdDto
         description: 'tenantIds [input here api field description]',
     })
     tenantIds?: string[];
-
-    @ApiProperty({
-        type       : MessageMessageStatus,
-        enum       : ['DRAFT','PENDING','SENT'],
-        description: 'status [input here api field description]',
-    })
-    status?: MessageMessageStatus;
 
     @ApiProperty({
         type       : Array,

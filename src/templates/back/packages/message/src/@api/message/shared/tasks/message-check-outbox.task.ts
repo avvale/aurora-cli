@@ -20,7 +20,7 @@ export class MessageCheckOutboxTask
     {
         try
         {
-            const messagesToSent = await this.queryBus.ask(new MessageGetMessagesQuery(
+            const messagesToSend = await this.queryBus.ask(new MessageGetMessagesQuery(
                 {
                     where: {
                         status       : MessageMessageStatus.PENDING,
@@ -40,16 +40,17 @@ export class MessageCheckOutboxTask
                 },
             ));
 
-            if (messagesToSent.length > 0)
+            if (messagesToSend.length > 0)
             {
                 // create message in outbox
                 await this.commandBus.dispatch(new MessageCreateOutboxesCommand(
-                    messagesToSent.map(message => ({
+                    messagesToSend.map(message => ({
                         id                 : uuid(),
                         messageId          : message.id,
                         accountRecipientIds: message.accountRecipientIds,
                         tenantRecipientIds : message.tenantRecipientIds,
                         scopeRecipients    : message.scopeRecipients,
+                        tagRecipients      : message.tagRecipients,
                         sort               : null,
                     })),
                 ));
@@ -60,7 +61,7 @@ export class MessageCheckOutboxTask
                     },
                     {
                         where: {
-                            id: messagesToSent.map(message => message.id),
+                            id: messagesToSend.map(message => message.id),
                         },
                     },
                 ));

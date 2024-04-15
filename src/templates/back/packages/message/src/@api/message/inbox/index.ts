@@ -62,6 +62,9 @@ export { MessageReadCustomerMessageInboxResolver } from './resolvers/message-rea
 export { MessageUnreadCustomerMessageInboxController } from './controllers/message-unread-customer-message-inbox.controller';
 export { MessageUnreadCustomerMessageInboxHandler } from './handlers/message-unread-customer-message-inbox.handler';
 export { MessageUnreadCustomerMessageInboxResolver } from './resolvers/message-unread-customer-message-inbox.resolver';
+export { MessageCountUnreadCustomerMessageInboxController } from './controllers/message-count-unread-customer-message-inbox.controller';
+export { MessageCountUnreadCustomerMessageInboxHandler } from './handlers/message-count-unread-customer-message-inbox.handler';
+export { MessageCountUnreadCustomerMessageInboxResolver } from './resolvers/message-count-unread-customer-message-inbox.resolver';
 
 // import controllers
 import { MessageCreateInboxController } from './controllers/message-create-inbox.controller';
@@ -124,6 +127,9 @@ import { MessageReadCustomerMessageInboxResolver } from './resolvers/message-rea
 import { MessageUnreadCustomerMessageInboxController } from './controllers/message-unread-customer-message-inbox.controller';
 import { MessageUnreadCustomerMessageInboxHandler } from './handlers/message-unread-customer-message-inbox.handler';
 import { MessageUnreadCustomerMessageInboxResolver } from './resolvers/message-unread-customer-message-inbox.resolver';
+import { MessageCountUnreadCustomerMessageInboxController } from './controllers/message-count-unread-customer-message-inbox.controller';
+import { MessageCountUnreadCustomerMessageInboxHandler } from './handlers/message-count-unread-customer-message-inbox.handler';
+import { MessageCountUnreadCustomerMessageInboxResolver } from './resolvers/message-count-unread-customer-message-inbox.resolver';
 
 export const MessageInboxApiControllers = [
     MessageCreateInboxController,
@@ -145,6 +151,7 @@ export const MessageInboxApiControllers = [
     MessageDeleteCustomerMessageInboxController,
     MessageReadCustomerMessageInboxController,
     MessageUnreadCustomerMessageInboxController,
+    MessageCountUnreadCustomerMessageInboxController,
 ];
 
 export const MessageInboxApiResolvers = [
@@ -167,6 +174,7 @@ export const MessageInboxApiResolvers = [
     MessageDeleteCustomerMessageInboxResolver,
     MessageReadCustomerMessageInboxResolver,
     MessageUnreadCustomerMessageInboxResolver,
+    MessageCountUnreadCustomerMessageInboxResolver,
 ];
 
 export const MessageInboxApiHandlers = [
@@ -189,6 +197,7 @@ export const MessageInboxApiHandlers = [
     MessageDeleteCustomerMessageInboxHandler,
     MessageReadCustomerMessageInboxHandler,
     MessageUnreadCustomerMessageInboxHandler,
+    MessageCountUnreadCustomerMessageInboxHandler,
 ];
 
 export const MessageInboxApiServices = [

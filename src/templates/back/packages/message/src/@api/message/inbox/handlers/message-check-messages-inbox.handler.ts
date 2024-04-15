@@ -49,50 +49,36 @@ export class MessageCheckMessagesInboxHandler
             const outboxMessages = await this.queryBus.ask(new MessageGetOutboxesQuery(
                 {
                     where: {
-                        // avoid query messages that are already in the inbox
+                        // get messages that are not already in the inbox yet
                         sort: {
                             [Operator.gt]: inboxSetting.sort,
                         },
-                        [Operator.or]: [
+                        [Operator.and]: [
                             {
-                                // query messages for account
-                                accountRecipientIds: {
-                                    [Operator.contains]: [account.id],
-                                },
-                            },
-                            {
-                                [Operator.and]: [
+                                [Operator.or]: [
                                     {
-                                        [Operator.or]: [
-                                            {
-                                                // query messages for all tenants, tenantRecipientIds = null
-                                                tenantRecipientIds: {
-                                                    [Operator.is]: null,
-                                                },
-                                            },
-                                            {
-                                                // query messages for tenants that account belongs to
-                                                tenantRecipientIds: {
-                                                    [Operator.overlap]: account.dTenants,
-                                                },
-                                            },
-                                        ],
+                                        // query messages for account
+                                        accountRecipientIds: {
+                                            [Operator.contains]: [account.id],
+                                        },
                                     },
                                     {
-                                        [Operator.or]: [
-                                            {
-                                                // query messages for all scopes, scopeRecipients = null
-                                                scopeRecipients: {
-                                                    [Operator.is]: null,
-                                                },
-                                            },
-                                            {
-                                                // query messages for scopes that account belongs to
-                                                scopeRecipients: {
-                                                    [Operator.overlap]: account.scopes,
-                                                },
-                                            },
-                                        ],
+                                        // query messages for tenants that account belongs to
+                                        tenantRecipientIds: {
+                                            [Operator.overlap]: account.dTenants,
+                                        },
+                                    },
+                                    {
+                                        // query messages for scopes that account belongs to
+                                        scopeRecipients: {
+                                            [Operator.overlap]: account.scopes,
+                                        },
+                                    },
+                                    {
+                                        // query messages for tags that account belongs to
+                                        tagRecipients: {
+                                            [Operator.overlap]: account.tags,
+                                        },
                                     },
                                 ],
                             },

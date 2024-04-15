@@ -1,5 +1,5 @@
-import { MessageInboxDto, MessageUpdateInboxByIdDto } from '../dto';
-import { MessageInbox, MessageUpdateInboxByIdInput } from '@api/graphql';
+import { MessageUpdateInboxByIdDto } from '../dto';
+import { MessageUpdateInboxByIdInput } from '@api/graphql';
 import { IamAccountResponse } from '@app/iam/account';
 import { MessageFindInboxByIdQuery, MessageUpdateInboxByIdCommand } from '@app/message/inbox';
 import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';

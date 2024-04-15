@@ -1,4 +1,4 @@
-import { MessageInbox, MessageUpdateInboxByIdInput } from '@api/graphql';
+import { MessageUpdateInboxByIdInput } from '@api/graphql';
 import { TenantPolicy } from '@api/iam/shared';
 import { MessageUnreadCustomerMessageInboxHandler } from '@api/message/inbox';
 import { IamAccountResponse } from '@app/iam/account';

@@ -1,9 +1,9 @@
-import { MessageCreateMessageInput, MessageMessage } from '@api/graphql';
+import { MessageCreateMessageInput, MessageMessage, MessageMessageStatus } from '@api/graphql';
 import { MessageCreateMessageDto, MessageMessageDto } from '@api/message/message';
 import { countTotalRecipients } from '@api/message/shared';
-import { IamAccountResponse, IamCountAccountQuery } from '@app/iam/account';
+import { IamAccountResponse } from '@app/iam/account';
 import { MessageCreateMessageCommand, MessageFindMessageByIdQuery } from '@app/message/message';
-import { AuditingMeta, ICommandBus, IQueryBus, Operator, uploadFile, uuid } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, uploadFile, uuid } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -47,7 +47,8 @@ export class MessageCreateMessageHandler
                 ...payload,
                 attachments,
                 totalRecipients,
-                reads: 0,
+                reads : 0,
+                status: MessageMessageStatus.DRAFT,
             },
             {
                 timezone,
