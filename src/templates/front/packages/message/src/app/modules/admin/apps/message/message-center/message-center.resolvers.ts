@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { MessageService } from '@apps/message';
 import { ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
-import { MessageInbox } from '../message.types';
-import { InboxService, inboxColumnsConfig } from '../inbox';
-import { messageCenterExportListAction, messageCenterMainListId, messageCenterPaginationListAction } from './list/message-center-list.component';
-import { MessageCenterService } from './message-center.service';
 import { of } from 'rxjs';
+import { InboxService, inboxColumnsConfig } from '../inbox';
+import { MessageInbox } from '../message.types';
+import { messageCenterExportListAction, messageCenterMainListId, messageCenterPaginationListAction } from './list/message-center-list.component';
 
 export const messageCenterPaginationResolver: ResolveFn<GridData<MessageInbox>> = (
     route: ActivatedRouteSnapshot,
@@ -60,9 +60,9 @@ export const messageCenterShowEmptyResolver: ResolveFn<boolean> = (
     state: RouterStateSnapshot,
 ) =>
 {
-    const messageCenterService = inject(MessageCenterService);
+    const messageService = inject(MessageService);
 
-    messageCenterService.resetSelectedMessage();
+    messageService.resetSelectedMessage();
 
     return of(true);
 };

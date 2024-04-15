@@ -166,18 +166,17 @@
                         >
                         <mat-error>{{ formErrors?.subject | async }}</mat-error>
                     </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-12"
-                    >
-                        <mat-label>{{ t('message.Body') }}</mat-label>
-                        <textarea
-                            matInput
+                    <div class="col-12">
+                        <quill-editor
+                            class="w-full"
                             formControlName="body"
+                            placeholder="{{ t('message.StartHereToWriteYourMessage') }}"
+                            [bounds]="'self'"
+                            [modules]="quillModules"
                         >
-                        </textarea>
+                        </quill-editor>
                         <mat-error>{{ formErrors?.body | async }}</mat-error>
-                    </mat-form-field>
+                    </div>
                     <!-- <mat-form-field
                         appearance="outline"
                         class="col-12"

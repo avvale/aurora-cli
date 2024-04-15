@@ -1,19 +1,18 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { DatePipe, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation, WritableSignal, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation, WritableSignal, computed, inject, signal } from '@angular/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
-import { Subject, lastValueFrom, takeUntil } from 'rxjs';
-import { MessageInbox } from '../message.types';
-import { InboxService } from '../inbox';
+import { MessageInbox, MessageService } from '@apps/message';
 import { GridData } from '@aurora';
 import { TranslocoModule } from '@ngneat/transloco';
-import { MessageCenterService } from '../message-center/message-center.service';
+import { Subject, lastValueFrom, takeUntil } from 'rxjs';
+import { InboxService } from '../inbox';
 
-export const messageQuickViewMessages = 'message::QuickViewMessages';
+export const messageQuickViewMessagesScope = 'message::QuickViewMessages';
 
 @Component({
     selector       : 'au-message-quick-view',
@@ -33,12 +32,12 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
     @ViewChild('messagesPanel') private messagesPanel: TemplateRef<any>;
 
     messages: WritableSignal<MessageInbox[]> = signal([]);
-    calculateUnreadCount = computed(() => this.messages().filter(message => !message.isRead).length);
+    unreadMessagesNumber: WritableSignal<number>;
     inboxCustomerPagination: GridData<MessageInbox>;
     unreadCount: number = 0;
 
     private inboxService = inject(InboxService);
-    private messageCenterService = inject(MessageCenterService);
+    private messageService = inject(MessageService);
     private router = inject(Router);
     private unsubscribeAll$: Subject<void> = new Subject<void>();
     private overlayRef: OverlayRef;
@@ -47,7 +46,6 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
-        private changeDetectorRef: ChangeDetectorRef,
         private overlay: Overlay,
         private viewContainerRef: ViewContainerRef,
     )
@@ -58,40 +56,29 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
     async ngOnInit(): Promise<void>
     {
+        this.unreadMessagesNumber = this.messageService.unreadMessagesNumber;
+
         // Get the messages
-        await lastValueFrom(
-            this.inboxService
-                .paginateCustomerQuickVewMessagesInbox({
-                    query: {
-                        limit : 10,
-                        offset: 0,
-                        order : [['sort', 'desc']],
-                    },
-                }),
-        );
+        await this.getMessages();
+        await this.messageService.countUnreadMessages();
 
         // Subscribe to message changes
         this.inboxService
-            .getScopePagination(messageQuickViewMessages)
+            .getScopePagination(messageQuickViewMessagesScope)
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe((inboxCustomerPagination: GridData<MessageInbox>) =>
             {
                 // Load the messages
                 this.messages.set(inboxCustomerPagination.rows);
-
-                // Calculate the unread count
-                this.calculateUnreadCount();
-
-                // Mark for check
-                this.changeDetectorRef.markForCheck();
             });
 
         // Subscribe to toggle message as read
-        this.messageCenterService
+        this.messageService
             .toggleMessageAsRead$
             .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe((toggleMessage: MessageInbox) =>
+            .subscribe(async (toggleMessage: MessageInbox) =>
             {
+                // mark message as read/unread if it is in the list
                 const messages = this.messages();
                 this.messages.set(
                     messages.map(message =>
@@ -100,20 +87,29 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
                         return message;
                     }),
                 );
+
+                // update unread total messages count
+                await this.messageService.countUnreadMessages();
             });
 
         // Subscribe to message as deleted
-        this.messageCenterService
+        this.messageService
             .deletedMessage$
             .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe((deletedMessage: MessageInbox) =>
+            .subscribe(async (deletedMessage: MessageInbox) =>
             {
-                const messages = this.messages();
-                this.messages.set(
-                    messages.filter(message => message.id !== deletedMessage.id),
-                );
-            });
+                // only update the messages if the deleted message is in the list
+                if (this.messages().some(message => message.id === deletedMessage.id))
+                {
+                    this.getMessages();
+                }
 
+                // count unread messages if deleted message is unread
+                if (!deletedMessage.isRead)
+                {
+                    this.messageService.countUnreadMessages();
+                }
+            });
     }
 
     /**
@@ -135,6 +131,21 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
+
+    async getMessages(): Promise<GridData<MessageInbox>>
+    {
+        // Get the messages
+        return await lastValueFrom(
+            this.inboxService
+                .paginateCustomerQuickVewMessagesInbox({
+                    query: {
+                        limit : 10,
+                        offset: 0,
+                        order : [['sort', 'desc']],
+                    },
+                }),
+        );
+    }
 
     /**
      * Open the messages panel
@@ -178,7 +189,8 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
      */
     deleteMessage(message: MessageInbox): void
     {
-        this.messageCenterService.deleteMessage(message);
+        this.messageService.deleteMessage(message);
+        this.messageService.countUnreadMessages();
     }
 
     // -----------------------------------------------------------------------------------------------------

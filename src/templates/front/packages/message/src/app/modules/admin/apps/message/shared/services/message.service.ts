@@ -1,16 +1,16 @@
 
-import { Injectable, inject } from '@angular/core';
-import { Observable, Subject, lastValueFrom } from 'rxjs';
-import { MessageInbox } from '../message.types';
+import { Injectable, WritableSignal, inject, signal } from '@angular/core';
+import { MessageInbox } from '@apps/message';
+import { log } from '@aurora';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { TranslocoService } from '@ngneat/transloco';
-import { log } from '@aurora';
-import { InboxService } from '../inbox';
+import { Observable, Subject, lastValueFrom } from 'rxjs';
+import { InboxService } from '../../inbox';
 
 @Injectable({
     providedIn: 'root',
 })
-export class MessageCenterService
+export class MessageService
 {
     selectedMessageSubject$: Subject<MessageInbox> = new Subject();
     toggleMessageAsReadSubject$: Subject<MessageInbox> = new Subject();
@@ -19,6 +19,7 @@ export class MessageCenterService
     confirmationService = inject(FuseConfirmationService);
     translocoService = inject(TranslocoService);
     inboxService = inject(InboxService);
+    unreadMessagesNumber: WritableSignal<number> = signal(0);
 
     get selectedMessage$(): Observable<MessageInbox>
     {
@@ -87,5 +88,15 @@ export class MessageCenterService
                     }
                 }
             });
+    }
+
+    async countUnreadMessages(): Promise<void>
+    {
+        this.unreadMessagesNumber.set(
+            await lastValueFrom(
+                this.inboxService
+                    .countUnreadCustomerMessageInbox(),
+            ),
+        );
     }
 }

@@ -6,16 +6,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { InboxService } from '@apps/message/inbox';
-import { MessageInbox } from '@apps/message/message.types';
+import { MessageInbox, MessageService } from '@apps/message';
 import { Action, BreadcrumbComponent, ColumnConfig, ColumnDataType, Crumb, GridFiltersStorageService, GridState, GridStateService, QueryStatementHandler, TitleComponent, ViewBaseComponent } from '@aurora';
 import { TranslocoModule } from '@ngneat/transloco';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
-import { MessageCenterService } from '../message-center.service';
+
 
 export const messageCenterMainListId = 'message::messageCenter.list.mainList';
 export const messageCenterPaginationListAction = 'message::messageCenter.list.pagination';
 export const messageCenterExportListAction = 'message::messageCenter.list.export';
-export const messageCustomerCenterMessage = 'message::customerCenterMessage';
+export const messageCustomerCenterMessageScope = 'message::customerCenterMessage';
 
 @Component({
     selector     : 'au-message-center-list',
@@ -40,6 +40,7 @@ export class MessageCenterListComponent extends ViewBaseComponent
     firstMessageOfPage = computed(() => (this.currentPage() * this.limit) + 1);
     lastMessageOfPage = computed(() => (this.currentPage() * this.limit) + this.limit > this.totalMessages() ? this.totalMessages() : (this.currentPage() * this.limit) + this.limit);
     previousOffset = computed(() => (this.currentPage() - 1) * this.limit);
+    currentOffset = computed(() => this.currentPage() * this.limit);
     nextOffset = computed(() => (this.currentPage() * this.limit) + this.limit);
     selectedMessage: WritableSignal<MessageInbox> = signal(null);
 
@@ -65,7 +66,7 @@ export class MessageCenterListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        private readonly messageCenterService: MessageCenterService,
+        private readonly messageService: MessageService,
         private readonly gridStateService: GridStateService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly inboxService: InboxService,
@@ -84,7 +85,7 @@ export class MessageCenterListComponent extends ViewBaseComponent
 
         // Subscribe to message changes
         this.inboxService
-            .getScopePagination(messageCustomerCenterMessage)
+            .getScopePagination(messageCustomerCenterMessageScope)
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe(inboxCustomerPagination =>
             {
@@ -94,7 +95,7 @@ export class MessageCenterListComponent extends ViewBaseComponent
             });
 
         // Subscribe to selected message
-        this.messageCenterService
+        this.messageService
             .selectedMessage$
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe((selectedMessage: MessageInbox) =>
@@ -103,7 +104,7 @@ export class MessageCenterListComponent extends ViewBaseComponent
             });
 
         // Subscribe to toggle message as read
-        this.messageCenterService
+        this.messageService
             .toggleMessageAsRead$
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe((toggleMessage: MessageInbox) =>
@@ -119,16 +120,22 @@ export class MessageCenterListComponent extends ViewBaseComponent
             });
 
         // Subscribe to message as deleted
-        this.messageCenterService
+        this.messageService
             .deletedMessage$
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe((deletedMessage: MessageInbox) =>
             {
-                const messages = this.messages();
-                this.messages.set(
-                    messages.filter(message => message.id !== deletedMessage.id),
-                );
-                this.totalMessages.set(this.totalMessages() - 1);
+                this.actionService.action({
+                    id          : 'message::messageCenter.list.pagination',
+                    isViewAction: false,
+                    meta        : {
+                        query: {
+                            offset: this.currentOffset(),
+                            limit : this.limit,
+                            order : [['sort', 'desc']],
+                        },
+                    },
+                });
             });
     }
 
@@ -141,17 +148,18 @@ export class MessageCenterListComponent extends ViewBaseComponent
                 this.currentPage.set(action.meta.query.offset / this.limit);
 
                 await lastValueFrom(
-                    this.inboxService.paginateCustomerCenterMessagesInbox({
-                        query: action.meta.query ?
-                            action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: this.originColumnsConfig })
-                                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(messageCenterMainListId))
-                                .setSort(this.gridStateService.getSort(messageCenterMainListId))
-                                .setPage(this.gridStateService.getPage(messageCenterMainListId))
-                                .setSearch(this.gridStateService.getSearchState(messageCenterMainListId))
-                                .getQueryStatement(),
-                    }),
+                    this.inboxService
+                        .paginateCustomerCenterMessagesInbox({
+                            query: action.meta.query ?
+                                action.meta.query :
+                                QueryStatementHandler
+                                    .init({ columnsConfig: this.originColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(messageCenterMainListId))
+                                    .setSort(this.gridStateService.getSort(messageCenterMainListId))
+                                    .setPage(this.gridStateService.getPage(messageCenterMainListId))
+                                    .setSearch(this.gridStateService.getSearchState(messageCenterMainListId))
+                                    .getQueryStatement(),
+                        }),
                 );
                 break;
         }

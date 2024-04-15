@@ -1,12 +1,12 @@
-import { checkMessagesInboxMutation, deleteCustomerMessageInboxMutation, findCustomerMessageInboxQuery, paginateCustomerMessagesInboxQuery, readCustomerMessageInboxMutation, unreadCustomerMessageInboxMutation } from './inbox.graphql';
+import { checkMessagesInboxMutation, countUnreadCustomerMessageInboxQuery, deleteCustomerMessageInboxMutation, findCustomerMessageInboxQuery, paginateCustomerMessagesInboxQuery, readCustomerMessageInboxMutation, unreadCustomerMessageInboxMutation } from './inbox.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/message/inbox';
 import { MessageCreateInbox, MessageInbox, MessageUpdateInboxById, MessageUpdateInboxes } from '@apps/message/message.types';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { messageCustomerCenterMessage } from '../message-center/list/message-center-list.component';
-import { messageQuickViewMessages } from '../message-quick-view/message-quick-view.component';
+import { messageCustomerCenterMessageScope } from '../message-center/list/message-center-list.component';
+import { messageQuickViewMessagesScope } from '../message-quick-view/message-quick-view.component';
 
 @Injectable({
     providedIn: 'root',
@@ -425,7 +425,7 @@ export class InboxService
             .pipe(
                 first(),
                 map(result => result.data.pagination),
-                tap(pagination => this.setScopePagination(messageCustomerCenterMessage, pagination)),
+                tap(pagination => this.setScopePagination(messageCustomerCenterMessageScope, pagination)),
             );
     }
 
@@ -461,7 +461,7 @@ export class InboxService
             .pipe(
                 first(),
                 map(result => result.data.pagination),
-                tap(pagination => this.setScopePagination(messageQuickViewMessages, pagination)),
+                tap(pagination => this.setScopePagination(messageQuickViewMessagesScope, pagination)),
             );
     }
 
@@ -499,7 +499,42 @@ export class InboxService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data => this.setScopeInbox(messageCustomerCenterMessage, data.object)),
+                tap(data => this.setScopeInbox(messageCustomerCenterMessageScope, data.object)),
+            );
+    }
+
+    countUnreadCustomerMessageInbox(
+        {
+            graphqlStatement = countUnreadCustomerMessageInboxQuery,
+            query = {},
+            constraint = {},
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<number>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                messageCountUnreadCustomerMessageInbox: number;
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data.messageCountUnreadCustomerMessageInbox),
             );
     }
 

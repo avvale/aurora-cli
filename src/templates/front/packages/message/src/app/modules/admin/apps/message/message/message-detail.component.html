@@ -28,31 +28,6 @@
 
             @if (currentViewAction?.id === 'message::message.detail.edit')
             {
-                <!-- <button
-                    mat-flat-button
-                    type="submit"
-                    class="ml-3"
-                    form="messageMessageFormDetail"
-                    color="accent"
-                    [disabled]="fg.pristine || ('message::message.detail.update' | getSpinnerFlag | async)"
-                >
-                    @if ('message::message.detail.update' | getSpinnerFlag | async)
-                    {
-                        <mat-icon>
-                            <mat-spinner diameter="20"></mat-spinner>
-                        </mat-icon>
-                    }
-                    @else
-                    {
-                        <mat-icon
-                            svgIcon="mat_solid:edit"
-                            class="icon-size-5 mr-2"
-                        >
-                        </mat-icon>
-                    }
-                    {{ t('Update') }}
-                </button> -->
-
                 <au-split-button
                     color="accent"
                     mainButtonType="submit"

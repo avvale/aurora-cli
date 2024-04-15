@@ -1,5 +1,5 @@
 import { DatePipe, DecimalPipe, NgClass, NgFor, NgIf, NgPlural, NgPluralCase } from '@angular/common';
-import { Component, ViewEncapsulation, inject, signal, WritableSignal } from '@angular/core';
+import { Component, ViewEncapsulation, WritableSignal, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
@@ -7,17 +7,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
+import { MessageInbox, MessageService } from '@apps/message';
 import { InboxService } from '@apps/message/inbox';
-import { MessageInbox } from '@apps/message/message.types';
+import { Action, DownloadService, ViewBaseComponent } from '@aurora';
 import { FuseScrollResetDirective } from '@fuse/directives/scroll-reset';
 import { FuseFindByKeyPipe } from '@fuse/pipes/find-by-key/find-by-key.pipe';
-import { lastValueFrom, takeUntil } from 'rxjs';
-import { MessageCenterService } from '../message-center.service';
-import { messageCustomerCenterMessage } from '../list/message-center-list.component';
 import { TranslocoModule } from '@ngneat/transloco';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { Action, DownloadService, ViewBaseComponent } from '@aurora';
+import { lastValueFrom, takeUntil } from 'rxjs';
+import { messageCustomerCenterMessageScope } from '../list/message-center-list.component';
 
 @Component({
     selector     : 'message-center-details',
@@ -34,7 +33,7 @@ export class MessageCenterDetailsComponent extends ViewBaseComponent
 {
     message: WritableSignal<MessageInbox> = signal(null);
     inboxService = inject(InboxService);
-    messageCenterService = inject(MessageCenterService);
+    messageService = inject(MessageService);
     downloadService = inject(DownloadService);
 
     // this method will be called after the ngOnInit of
@@ -46,24 +45,24 @@ export class MessageCenterDetailsComponent extends ViewBaseComponent
         // subscriptions are accumulated and executed all at once.
 
         this.inboxService
-            .getScopeInbox(messageCustomerCenterMessage)
+            .getScopeInbox(messageCustomerCenterMessageScope)
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe(message =>
             {
                 this.message.set(message);
 
                 // set selected message, this will be tagged in list component
-                this.messageCenterService.selectedMessageSubject$.next(message);
+                this.messageService.selectedMessageSubject$.next(message);
 
                 // clear previous timeout
-                if (this.messageCenterService.currentTimeoutId)
+                if (this.messageService.currentTimeoutId)
                 {
-                    clearTimeout(this.messageCenterService.currentTimeoutId);
+                    clearTimeout(this.messageService.currentTimeoutId);
                 }
 
                 if (!message.isRead)
                 {
-                    this.messageCenterService.currentTimeoutId = setTimeout(() =>
+                    this.messageService.currentTimeoutId = setTimeout(() =>
                         this.actionService.action({
                             id          : 'message::messageCenter.detail.markAsRead',
                             isViewAction: false,
@@ -76,12 +75,14 @@ export class MessageCenterDetailsComponent extends ViewBaseComponent
             });
 
         // Subscribe to message as deleted
-        this.messageCenterService
+        this.messageService
             .deletedMessage$
             .pipe(takeUntil(this.unsubscribeAll$))
             .subscribe((deletedMessage: MessageInbox) =>
             {
-                this.message().id === deletedMessage.id && this.router.navigate(['message', 'message-center']);
+                // go back to message center if the current message is deleted
+                this.message().id === deletedMessage.id &&
+                this.router.navigate(['message', 'message-center']);
             });
     }
 
@@ -90,7 +91,7 @@ export class MessageCenterDetailsComponent extends ViewBaseComponent
      */
     deleteMessage(message: MessageInbox): void
     {
-        this.messageCenterService.deleteMessage(message);
+        this.messageService.deleteMessage(message);
     }
 
     async handleAction(action: Action): Promise<void>
@@ -109,7 +110,7 @@ export class MessageCenterDetailsComponent extends ViewBaseComponent
                         }),
                 );
 
-                this.messageCenterService
+                this.messageService
                     .toggleMessageAsReadSubject$
                     .next(action.meta.message);
 
@@ -131,7 +132,7 @@ export class MessageCenterDetailsComponent extends ViewBaseComponent
                         }),
                 );
 
-                this.messageCenterService
+                this.messageService
                     .toggleMessageAsReadSubject$
                     .next(action.meta.message);
 

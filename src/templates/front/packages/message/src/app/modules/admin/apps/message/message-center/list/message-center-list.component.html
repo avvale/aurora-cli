@@ -18,7 +18,7 @@
     </div>
     <!-- / Header -->
 
-    <div class="relative flex flex-auto w-full h-full bg-card dark:bg-transparent">
+    <div class="relative flex flex-auto w-full bg-card dark:bg-transparent" style="height: calc(100% - 102px);">
 
         <!-- mails list -->
         @if (countMessages() > 0)
@@ -209,7 +209,7 @@
                 >
                 </mat-icon>
                 <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">
-                    There are no e-mails
+                    {{ t('message.NoMessages') }}
                 </div>
             </div>
         }

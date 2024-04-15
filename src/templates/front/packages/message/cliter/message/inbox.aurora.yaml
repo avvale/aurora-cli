@@ -109,3 +109,6 @@ additionalApis:
   - path: message/inbox/unread-customer-message
     resolverType: mutation
     httpMethod: post
+  - path: message/inbox/count-unread-customer-message
+    resolverType: query
+    httpMethod: post

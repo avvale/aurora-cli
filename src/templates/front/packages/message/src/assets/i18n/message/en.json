@@ -33,6 +33,8 @@
     },
     "Messages": "Messages",
     "Meta": "Meta",
+    "NoMessages": "No hay mensajes",
+    "NoMessagesDescription": "When you have messages, they will appear here.",
     "PerRead": "Per read",
     "Read": "Read",
     "Reads": "Reads",

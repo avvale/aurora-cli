@@ -3,10 +3,10 @@
     mat-icon-button
     (click)="openPanel()"
     #messagesOrigin>
-    <ng-container *ngIf="calculateUnreadCount() > 0">
+    <ng-container *ngIf="unreadMessagesNumber() > 0">
         <span class="absolute top-0 right-0 left-0 flex items-center justify-center h-3">
             <span class="flex items-center justify-center shrink-0 min-w-4 h-4 px-1 ml-4 mt-2.5 rounded-full bg-indigo-600 text-indigo-50 text-xs font-medium">
-                {{ calculateUnreadCount() }}
+                {{ unreadMessagesNumber() }}
             </span>
         </span>
     </ng-container>
@@ -35,7 +35,7 @@
             <div class="ml-auto">
                 <button
                     mat-icon-button
-                    [disabled]="calculateUnreadCount() === 0"
+                    [disabled]="unreadMessagesNumber() === 0"
                     [matTooltip]="t('message.GoToMessageCenter')"
                     (click)="goToMessageCenter()">
                     <mat-icon
@@ -190,8 +190,8 @@
                             class="text-primary-700 dark:text-primary-50"
                             [svgIcon]="'heroicons_outline:inbox'"></mat-icon>
                     </div>
-                    <div class="mt-5 text-2xl font-semibold tracking-tight">No messages</div>
-                    <div class="w-full max-w-60 mt-1 text-md text-center text-secondary">When you have messages, they will appear here.</div>
+                    <div class="mt-5 text-2xl font-semibold tracking-tight">{{ t('message.NoMessages') }}</div>
+                    <div class="w-full max-w-60 mt-1 text-md text-center text-secondary">{{ t('message.NoMessagesDescription') }}</div>
                 </div>
             }
         </div>

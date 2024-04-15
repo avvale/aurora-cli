@@ -5,6 +5,7 @@ import { InboxService } from '@apps/message/inbox';
 import { MessageInbox } from '@apps/message/message.types';
 import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { QuillEditorComponent } from 'ngx-quill';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
@@ -15,7 +16,7 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatCheckboxModule, MtxDatetimepickerModule,
+        MatCheckboxModule, MtxDatetimepickerModule, QuillEditorComponent,
     ],
 })
 export class InboxDetailComponent extends ViewDetailComponent
@@ -28,6 +29,14 @@ export class InboxDetailComponent extends ViewDetailComponent
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
     managedObject: MessageInbox;
+    quillModules: any = {
+        toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['link'],
+            [{ align: []}, { list: 'ordered' }, { list: 'bullet' }],
+            ['clean'],
+        ],
+    };
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
