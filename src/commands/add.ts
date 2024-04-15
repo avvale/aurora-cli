@@ -274,6 +274,21 @@ export class Add extends Command
                     break;
                 }
 
+                case 'message': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(appModuleSourceFile, 'message', ['MessageModule']);
+                    appModuleSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed!');
+
+                    break;
+                }
+
                 case 'oAuth': {
                     await BackHandler.addPackage(addCommandState);
 
@@ -624,6 +639,23 @@ export class Add extends Command
                     );
 
                     auroraProviderSourceFile.saveSync();
+                    break;
+                }
+
+                case 'message': {
+                    await FrontHandler.addPackage(addCommandState);
+
+                    // add module in main navigation menu
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'message', 'messageNavigation');
+                    navigationSourceFile.saveSync();
+
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'message');
+                    routesSourceFile.saveSync();
+
                     break;
                 }
 
