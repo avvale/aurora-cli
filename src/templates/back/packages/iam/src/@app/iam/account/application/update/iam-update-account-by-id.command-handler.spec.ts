@@ -41,6 +41,7 @@ describe('IamUpdateAccountByIdCommandHandler', () =>
                         type: iamMockAccountData[0].type,
                         code: iamMockAccountData[0].code,
                         email: iamMockAccountData[0].email,
+                        username: iamMockAccountData[0].username,
                         isActive: iamMockAccountData[0].isActive,
                         clientId: iamMockAccountData[0].clientId,
                         tags: iamMockAccountData[0].tags,

@@ -24,6 +24,10 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
 			unique: true,
 		},
 		{
+			fields: ['username'],
+			unique: true,
+		},
+		{
 			fields: ['tags'],
 			unique: false,
 		},
@@ -163,10 +167,17 @@ export class IamAccountModel extends Model<IamAccountModel>
 
     @Column({
         field: 'email',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING(128),
     })
     email: string;
+
+    @Column({
+        field: 'username',
+        allowNull: false,
+        type: DataTypes.STRING(128),
+    })
+    username: string;
 
     @Column({
         field: 'isActive',

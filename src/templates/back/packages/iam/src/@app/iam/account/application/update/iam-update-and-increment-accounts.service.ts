@@ -17,6 +17,7 @@ import {
     IamAccountTenantIds,
     IamAccountType,
     IamAccountUpdatedAt,
+    IamAccountUsername,
 } from '@app/iam/account/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -36,6 +37,7 @@ export class IamUpdateAndIncrementAccountsService
             type?: IamAccountType;
             code?: IamAccountCode;
             email?: IamAccountEmail;
+            username?: IamAccountUsername;
             isActive?: IamAccountIsActive;
             clientId?: IamAccountClientId;
             tags?: IamAccountTags;
@@ -58,6 +60,7 @@ export class IamUpdateAndIncrementAccountsService
             payload.type,
             payload.code,
             payload.email,
+            payload.username,
             payload.isActive,
             payload.clientId,
             payload.tags,

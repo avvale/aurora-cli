@@ -7,7 +7,8 @@ export class IamCreateAccountCommand
             id: string;
             type: string;
             code?: string;
-            email: string;
+            email?: string;
+            username: string;
             isActive: boolean;
             clientId: string;
             tags?: string[];

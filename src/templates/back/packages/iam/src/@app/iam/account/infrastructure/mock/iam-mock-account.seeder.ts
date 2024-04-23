@@ -17,6 +17,7 @@ import {
     IamAccountTenantIds,
     IamAccountType,
     IamAccountUpdatedAt,
+    IamAccountUsername,
 } from '@app/iam/account/domain/value-objects';
 import { MockSeeder } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -45,6 +46,7 @@ export class IamMockAccountSeeder extends MockSeeder<IamAccount>
                     new IamAccountType(account.type),
                     new IamAccountCode(account.code),
                     new IamAccountEmail(account.email),
+                    new IamAccountUsername(account.username),
                     new IamAccountIsActive(account.isActive),
                     new IamAccountClientId(account.clientId),
                     new IamAccountTags(account.tags),

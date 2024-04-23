@@ -11,6 +11,7 @@ export const iamMockAccountData = [
         type: IamAccountType.USER,
         code: null,
         email: 'john.doe@refrival.com',
+        username: 'john.doe@refrival.com',
         isActive: true,
         clientId: '5ac621dc-be2c-4e84-a4e4-6a08cc5a8488',
         dApplicationCodes: ['orion'],

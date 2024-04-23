@@ -4,7 +4,7 @@ import { IamCreateAccountCommand, IamFindAccountByIdQuery, IamGetAccountsQuery }
 import { IamGetRolesQuery } from '@app/iam/role';
 import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
 import { IamGetTenantsQuery } from '@app/iam/tenant';
-import { IamCreateUserCommand, IamGetUsersQuery } from '@app/iam/user';
+import { IamCreateUserCommand } from '@app/iam/user';
 import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
 import { AuditingMeta, ICommandBus, IQueryBus, Jwt, LiteralObject, Operator, Utils, getNestedObjectsFromParentId } from '@aurorajs.dev/core';
 import { ConflictException, Injectable } from '@nestjs/common';
@@ -26,18 +26,14 @@ export class IamCreateAccountHandler
         auditing?: AuditingMeta,
     ): Promise<IamAccount | IamAccountDto>
     {
+        const accountQueryWhere = { username: payload.username };
+        if (payload.code) accountQueryWhere['code'] = payload.code;
+        if (payload.email) accountQueryWhere['email'] = payload.email;
+
         const accounts = await this.queryBus.ask(new IamGetAccountsQuery(
             {
                 where: {
-                    [Operator.or]: payload.code ?
-                        {
-                            code : payload.code,
-                            email: payload.email,
-                        } :
-                        {
-                            email: payload.email,
-                        }
-                    ,
+                    [Operator.or]: accountQueryWhere,
                 },
             },
         ));
@@ -60,23 +56,13 @@ export class IamCreateAccountHandler
                 });
             }
 
-            throw new ConflictException({});
-        }
-
-        if (payload.type === IamAccountType.USER)
-        {
-            const users = await this.queryBus.ask(new IamGetUsersQuery(
-                {
-                    where: {
-                        username: payload.user.username,
-                    },
-                },
-            ));
-
-            if (users.length > 0) throw new ConflictException({
-                message   : `The username ${payload.user.username} already exists in the database`,
-                statusCode: 101,
-            });
+            if (accounts.some(client => client.username === payload.username))
+            {
+                throw new ConflictException({
+                    message   : `The username ${payload.username} already exists in the database`,
+                    statusCode: 101,
+                });
+            }
         }
 
         // get token from Headers
@@ -136,6 +122,7 @@ export class IamCreateAccountHandler
                 type             : payload.type,
                 code             : payload.code,
                 email            : payload.email,
+                username         : payload.username,
                 isActive         : payload.isActive,
                 clientId         : client?.id,
                 tags             : payload.tags,
@@ -162,17 +149,17 @@ export class IamCreateAccountHandler
         {
             await this.commandBus.dispatch(new IamCreateUserCommand(
                 {
-                    id           : Utils.uuid(),
-                    accountId    : payload.id,
-                    name         : payload.user.name,
-                    surname      : payload.user.surname,
-                    avatar       : payload.user.avatar,
-                    mobile       : payload.user.mobile,
-                    langId       : payload.user.langId,
-                    username     : payload.user.username,
-                    password     : payload.user.password,
-                    rememberToken: payload.user.rememberToken,
-                    meta         : null,
+                    id                              : Utils.uuid(),
+                    accountId                       : payload.id,
+                    name                            : payload.user.name,
+                    surname                         : payload.user.surname,
+                    avatar                          : payload.user.avatar,
+                    mobile                          : payload.user.mobile,
+                    langId                          : payload.user.langId,
+                    password                        : payload.user.password,
+                    isTwoFactorAuthenticationEnabled: false,
+                    rememberToken                   : payload.user.rememberToken,
+                    meta                            : null,
                 },
                 {
                     timezone,

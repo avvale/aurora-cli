@@ -5,6 +5,7 @@ import {
     IamUserAccountId,
     IamUserAvatar,
     IamUserId,
+    IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
     IamUserMeta,
     IamUserMobile,
@@ -12,7 +13,7 @@ import {
     IamUserPassword,
     IamUserRememberToken,
     IamUserSurname,
-    IamUserUsername,
+    IamUserTwoFactorAuthenticationSecret,
 } from '@app/iam/user/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
@@ -38,8 +39,9 @@ export class IamCreateUsersCommandHandler implements ICommandHandler<IamCreateUs
                         avatar: new IamUserAvatar(user.avatar),
                         mobile: new IamUserMobile(user.mobile),
                         langId: new IamUserLangId(user.langId),
-                        username: new IamUserUsername(user.username),
                         password: new IamUserPassword(user.password, {}, { haveToEncrypt: true }),
+                        isTwoFactorAuthenticationEnabled: new IamUserIsTwoFactorAuthenticationEnabled(user.isTwoFactorAuthenticationEnabled),
+                        twoFactorAuthenticationSecret: new IamUserTwoFactorAuthenticationSecret(user.twoFactorAuthenticationSecret),
                         rememberToken: new IamUserRememberToken(user.rememberToken),
                         meta: new IamUserMeta(user.meta),
                     };

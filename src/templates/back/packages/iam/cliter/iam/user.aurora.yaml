@@ -39,15 +39,18 @@ aggregateProperties:
   - name: langId
     type: id
     nullable: true
-  - name: username
-    type: varchar
-    maxLength: 128
-    nullable: false
-    index: unique
   - name: password
     type: password
     maxLength: 255
     nullable: false
+  - name: isTwoFactorAuthenticationEnabled
+    type: boolean
+    nullable: false
+    defaultValue: false
+  - name: twoFactorAuthenticationSecret
+    type: varchar
+    maxLength: 16
+    nullable: true
   - name: rememberToken
     type: varchar
     maxLength: 255

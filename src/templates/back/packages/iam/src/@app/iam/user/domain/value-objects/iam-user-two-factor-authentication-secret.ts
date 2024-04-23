@@ -1,16 +1,16 @@
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class IamAccountEmail extends StringValueObject
+export class IamUserTwoFactorAuthenticationSecret extends StringValueObject
 {
-    public readonly type: string = 'IamAccountEmail';
+    public readonly type: string = 'IamUserTwoFactorAuthenticationSecret';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'IamAccountEmail',
+            name       : 'IamUserTwoFactorAuthenticationSecret',
             nullable   : true,
             undefinable: true,
-            maxLength  : 128,
+            maxLength  : 16,
         }, validationRules));
     }
 }

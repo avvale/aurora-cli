@@ -8,6 +8,7 @@ export class IamUpdateAndIncrementAccountsCommand
             type?: string;
             code?: string;
             email?: string;
+            username?: string;
             isActive?: boolean;
             clientId?: string;
             tags?: string[];

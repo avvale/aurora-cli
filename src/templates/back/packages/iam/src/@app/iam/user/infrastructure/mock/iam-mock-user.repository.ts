@@ -5,6 +5,7 @@ import {
     IamUserCreatedAt,
     IamUserDeletedAt,
     IamUserId,
+    IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
     IamUserMeta,
     IamUserMobile,
@@ -12,8 +13,8 @@ import {
     IamUserPassword,
     IamUserRememberToken,
     IamUserSurname,
+    IamUserTwoFactorAuthenticationSecret,
     IamUserUpdatedAt,
-    IamUserUsername,
 } from '@app/iam/user/domain/value-objects';
 import { MockRepository, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -55,8 +56,9 @@ export class IamMockUserRepository extends MockRepository<IamUser> implements Ia
                 new IamUserAvatar(itemCollection.avatar),
                 new IamUserMobile(itemCollection.mobile),
                 new IamUserLangId(itemCollection.langId),
-                new IamUserUsername(itemCollection.username),
                 new IamUserPassword(itemCollection.password),
+                new IamUserIsTwoFactorAuthenticationEnabled(itemCollection.isTwoFactorAuthenticationEnabled),
+                new IamUserTwoFactorAuthenticationSecret(itemCollection.twoFactorAuthenticationSecret),
                 new IamUserRememberToken(itemCollection.rememberToken),
                 new IamUserMeta(itemCollection.meta),
                 new IamUserCreatedAt(itemCollection.createdAt),

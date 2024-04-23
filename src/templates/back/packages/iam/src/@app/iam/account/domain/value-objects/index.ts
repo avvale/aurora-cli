@@ -15,3 +15,4 @@ export { IamAccountTags } from './iam-account-tags';
 export { IamAccountTenantIds } from './iam-account-tenant-ids';
 export { IamAccountType } from './iam-account-type';
 export { IamAccountUpdatedAt } from './iam-account-updated-at';
+export { IamAccountUsername } from './iam-account-username';

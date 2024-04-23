@@ -11,8 +11,9 @@ export class IamCreateUserCommand
             avatar?: string;
             mobile?: string;
             langId?: string;
-            username: string;
             password: string;
+            isTwoFactorAuthenticationEnabled: boolean;
+            twoFactorAuthenticationSecret?: string;
             rememberToken?: string;
             meta?: any;
         },

@@ -10,6 +10,7 @@ export class IamAccountResponse
         public readonly type: string,
         public readonly code: string,
         public readonly email: string,
+        public readonly username: string,
         public readonly isActive: boolean,
         public readonly clientId: string,
         public readonly tags: string[],

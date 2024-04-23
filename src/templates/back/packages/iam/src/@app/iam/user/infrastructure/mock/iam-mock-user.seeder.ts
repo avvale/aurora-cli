@@ -5,6 +5,7 @@ import {
     IamUserCreatedAt,
     IamUserDeletedAt,
     IamUserId,
+    IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
     IamUserMeta,
     IamUserMobile,
@@ -12,8 +13,8 @@ import {
     IamUserPassword,
     IamUserRememberToken,
     IamUserSurname,
+    IamUserTwoFactorAuthenticationSecret,
     IamUserUpdatedAt,
-    IamUserUsername,
 } from '@app/iam/user/domain/value-objects';
 import { MockSeeder } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -45,8 +46,9 @@ export class IamMockUserSeeder extends MockSeeder<IamUser>
                     new IamUserAvatar(user.avatar),
                     new IamUserMobile(user.mobile),
                     new IamUserLangId(user.langId),
-                    new IamUserUsername(user.username),
                     new IamUserPassword(user.password, {}, { haveToEncrypt: true }),
+                    new IamUserIsTwoFactorAuthenticationEnabled(user.isTwoFactorAuthenticationEnabled),
+                    new IamUserTwoFactorAuthenticationSecret(user.twoFactorAuthenticationSecret),
                     new IamUserRememberToken(user.rememberToken),
                     new IamUserMeta(user.meta),
                     new IamUserCreatedAt({ currentTimestamp: true }),

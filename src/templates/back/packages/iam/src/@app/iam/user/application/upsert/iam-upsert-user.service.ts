@@ -5,6 +5,7 @@ import {
     IamUserCreatedAt,
     IamUserDeletedAt,
     IamUserId,
+    IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
     IamUserMeta,
     IamUserMobile,
@@ -12,8 +13,8 @@ import {
     IamUserPassword,
     IamUserRememberToken,
     IamUserSurname,
+    IamUserTwoFactorAuthenticationSecret,
     IamUserUpdatedAt,
-    IamUserUsername,
 } from '@app/iam/user/domain/value-objects';
 import { CQMetadata, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -36,8 +37,9 @@ export class IamUpsertUserService
             avatar: IamUserAvatar;
             mobile: IamUserMobile;
             langId: IamUserLangId;
-            username: IamUserUsername;
             password: IamUserPassword;
+            isTwoFactorAuthenticationEnabled: IamUserIsTwoFactorAuthenticationEnabled;
+            twoFactorAuthenticationSecret: IamUserTwoFactorAuthenticationSecret;
             rememberToken: IamUserRememberToken;
             meta: IamUserMeta;
         },
@@ -53,8 +55,9 @@ export class IamUpsertUserService
             payload.avatar,
             payload.mobile,
             payload.langId,
-            payload.username,
             payload.password,
+            payload.isTwoFactorAuthenticationEnabled,
+            payload.twoFactorAuthenticationSecret,
             payload.rememberToken,
             payload.meta,
             new IamUserCreatedAt({ currentTimestamp: true }),

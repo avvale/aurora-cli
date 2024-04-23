@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { IamIUserRepository } from '../../domain/iam-user.repository';
 import { IamUser } from '../../domain/iam-user.aggregate';
-import { IamUserPassword, IamUserUsername } from '../../domain/value-objects';
+import { IamUserPassword } from '../../domain/value-objects';
 import * as bcrypt from 'bcrypt';
+import { IamAccountUsername } from '@app/iam/account/domain/value-objects';
 
 @Injectable()
 export class IamFindUserByUsernamePasswordService
@@ -13,7 +14,7 @@ export class IamFindUserByUsernamePasswordService
     ) {}
 
     public async main(
-        username: IamUserUsername,
+        username: IamAccountUsername,
         password: IamUserPassword,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
@@ -21,12 +22,12 @@ export class IamFindUserByUsernamePasswordService
     {
         const user = await this.repository.find({
             queryStatement: {
-                where: {
-                    username: username.value,
-                },
                 include: [
                     {
                         association: 'account',
+                        where      : {
+                            username: username.value,
+                        },
                     },
                 ],
             },

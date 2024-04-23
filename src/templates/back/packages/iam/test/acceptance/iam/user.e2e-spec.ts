@@ -125,22 +125,6 @@ describe('user', () =>
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserUsername property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                username: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamUserUsername must be defined, can not be null');
-            });
-    });
-
     test('/REST:POST iam/user/create - Got 400 Conflict, UserPassword property can not to be null', () =>
     {
         return request(app.getHttpServer())
@@ -154,6 +138,22 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for IamUserPassword must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserIsTwoFactorAuthenticationEnabled property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isTwoFactorAuthenticationEnabled: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for IamUserIsTwoFactorAuthenticationEnabled must be defined, can not be null');
             });
     });
 
@@ -205,22 +205,6 @@ describe('user', () =>
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserUsername property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                username: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamUserUsername must be defined, can not be undefined');
-            });
-    });
-
     test('/REST:POST iam/user/create - Got 400 Conflict, UserPassword property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -234,6 +218,22 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for IamUserPassword must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserIsTwoFactorAuthenticationEnabled property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isTwoFactorAuthenticationEnabled: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for IamUserIsTwoFactorAuthenticationEnabled must be defined, can not be undefined');
             });
     });
 
@@ -349,22 +349,6 @@ describe('user', () =>
             });
     });
 
-    test('/REST:POST iam/user/create - Got 400 Conflict, UserUsername is too large, has a maximum length of 128', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/iam/user/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                username: '*********************************************************************************************************************************',
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamUserUsername is too large, has a maximum length of 128');
-            });
-    });
-
     test('/REST:POST iam/user/create - Got 400 Conflict, UserPassword is too large, has a maximum length of 255', () =>
     {
         return request(app.getHttpServer())
@@ -378,6 +362,22 @@ describe('user', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for IamUserPassword is too large, has a maximum length of 255');
+            });
+    });
+
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserTwoFactorAuthenticationSecret is too large, has a maximum length of 16', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                twoFactorAuthenticationSecret: '*****************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for IamUserTwoFactorAuthenticationSecret is too large, has a maximum length of 16');
             });
     });
 
@@ -397,6 +397,21 @@ describe('user', () =>
             });
     });
 
+    test('/REST:POST iam/user/create - Got 400 Conflict, UserIsTwoFactorAuthenticationEnabled has to be a boolean value', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/iam/user/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isTwoFactorAuthenticationEnabled: 'true',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for IamUserIsTwoFactorAuthenticationEnabled has to be a boolean value');
+            });
+    });
 
     test('/REST:POST iam/user/create - Got 409 Conflict, item already exist in database', () =>
     {
@@ -576,8 +591,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                         }
@@ -652,8 +668,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -691,8 +708,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                         }
@@ -730,8 +748,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -777,8 +796,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -822,8 +842,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -862,8 +883,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -900,8 +922,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -943,8 +966,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -984,8 +1008,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -1030,8 +1055,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt
@@ -1070,8 +1096,9 @@ describe('user', () =>
                             avatar
                             mobile
                             langId
-                            username
                             password
+                            isTwoFactorAuthenticationEnabled
+                            twoFactorAuthenticationSecret
                             rememberToken
                             meta
                             createdAt

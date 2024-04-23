@@ -7,6 +7,7 @@ import {
     IamUserCreatedAt,
     IamUserDeletedAt,
     IamUserId,
+    IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
     IamUserMeta,
     IamUserMobile,
@@ -14,8 +15,8 @@ import {
     IamUserPassword,
     IamUserRememberToken,
     IamUserSurname,
+    IamUserTwoFactorAuthenticationSecret,
     IamUserUpdatedAt,
-    IamUserUsername,
 } from '@app/iam/user/domain/value-objects';
 import { LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
@@ -29,8 +30,9 @@ export class IamUser extends AggregateRoot
     avatar: IamUserAvatar;
     mobile: IamUserMobile;
     langId: IamUserLangId;
-    username: IamUserUsername;
     password: IamUserPassword;
+    isTwoFactorAuthenticationEnabled: IamUserIsTwoFactorAuthenticationEnabled;
+    twoFactorAuthenticationSecret: IamUserTwoFactorAuthenticationSecret;
     rememberToken: IamUserRememberToken;
     meta: IamUserMeta;
     createdAt: IamUserCreatedAt;
@@ -46,8 +48,9 @@ export class IamUser extends AggregateRoot
         avatar: IamUserAvatar,
         mobile: IamUserMobile,
         langId: IamUserLangId,
-        username: IamUserUsername,
         password: IamUserPassword,
+        isTwoFactorAuthenticationEnabled: IamUserIsTwoFactorAuthenticationEnabled,
+        twoFactorAuthenticationSecret: IamUserTwoFactorAuthenticationSecret,
         rememberToken: IamUserRememberToken,
         meta: IamUserMeta,
         createdAt: IamUserCreatedAt,
@@ -64,8 +67,9 @@ export class IamUser extends AggregateRoot
         this.avatar = avatar;
         this.mobile = mobile;
         this.langId = langId;
-        this.username = username;
         this.password = password;
+        this.isTwoFactorAuthenticationEnabled = isTwoFactorAuthenticationEnabled;
+        this.twoFactorAuthenticationSecret = twoFactorAuthenticationSecret;
         this.rememberToken = rememberToken;
         this.meta = meta;
         this.createdAt = createdAt;
@@ -82,8 +86,9 @@ export class IamUser extends AggregateRoot
         avatar: IamUserAvatar,
         mobile: IamUserMobile,
         langId: IamUserLangId,
-        username: IamUserUsername,
         password: IamUserPassword,
+        isTwoFactorAuthenticationEnabled: IamUserIsTwoFactorAuthenticationEnabled,
+        twoFactorAuthenticationSecret: IamUserTwoFactorAuthenticationSecret,
         rememberToken: IamUserRememberToken,
         meta: IamUserMeta,
         createdAt: IamUserCreatedAt,
@@ -100,8 +105,9 @@ export class IamUser extends AggregateRoot
             avatar,
             mobile,
             langId,
-            username,
             password,
+            isTwoFactorAuthenticationEnabled,
+            twoFactorAuthenticationSecret,
             rememberToken,
             meta,
             createdAt,
@@ -122,8 +128,9 @@ export class IamUser extends AggregateRoot
                 user.avatar?.value,
                 user.mobile?.value,
                 user.langId?.value,
-                user.username.value,
                 user.password.value,
+                user.isTwoFactorAuthenticationEnabled.value,
+                user.twoFactorAuthenticationSecret?.value,
                 user.rememberToken?.value,
                 user.meta?.value,
                 user.createdAt?.value,
@@ -144,8 +151,9 @@ export class IamUser extends AggregateRoot
                 user.avatar?.value,
                 user.mobile?.value,
                 user.langId?.value,
-                user.username?.value,
                 user.password?.value,
+                user.isTwoFactorAuthenticationEnabled?.value,
+                user.twoFactorAuthenticationSecret?.value,
                 user.rememberToken?.value,
                 user.meta?.value,
                 user.createdAt?.value,
@@ -166,8 +174,9 @@ export class IamUser extends AggregateRoot
                 user.avatar?.value,
                 user.mobile?.value,
                 user.langId?.value,
-                user.username.value,
                 user.password.value,
+                user.isTwoFactorAuthenticationEnabled.value,
+                user.twoFactorAuthenticationSecret?.value,
                 user.rememberToken?.value,
                 user.meta?.value,
                 user.createdAt?.value,
@@ -187,8 +196,9 @@ export class IamUser extends AggregateRoot
             avatar: this.avatar?.value,
             mobile: this.mobile?.value,
             langId: this.langId?.value,
-            username: this.username.value,
             password: this.password.value,
+            isTwoFactorAuthenticationEnabled: this.isTwoFactorAuthenticationEnabled.value,
+            twoFactorAuthenticationSecret: this.twoFactorAuthenticationSecret?.value,
             rememberToken: this.rememberToken?.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,
@@ -209,8 +219,9 @@ export class IamUser extends AggregateRoot
             avatar: this.avatar?.value,
             mobile: this.mobile?.value,
             langId: this.langId?.value,
-            username: this.username.value,
             password: this.password.value,
+            isTwoFactorAuthenticationEnabled: this.isTwoFactorAuthenticationEnabled.value,
+            twoFactorAuthenticationSecret: this.twoFactorAuthenticationSecret?.value,
             rememberToken: this.rememberToken?.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,

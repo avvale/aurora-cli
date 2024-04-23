@@ -29,9 +29,14 @@ aggregateProperties:
   - name: email
     type: varchar
     maxLength: 128
-    nullable: false
+    nullable: true
     index: unique
     example: john@gmial.com
+  - name: username
+    type: varchar
+    maxLength: 128
+    nullable: false
+    index: unique
   - name: isActive
     type: boolean
     nullable: false

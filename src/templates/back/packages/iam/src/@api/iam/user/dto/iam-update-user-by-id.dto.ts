@@ -48,15 +48,21 @@ export class IamUpdateUserByIdDto
 
     @ApiProperty({
         type       : String,
-        description: 'username [input here api field description]',
-    })
-    username?: string;
-
-    @ApiProperty({
-        type       : String,
         description: 'password [input here api field description]',
     })
     password?: string;
+
+    @ApiProperty({
+        type       : Boolean,
+        description: 'isTwoFactorAuthenticationEnabled [input here api field description]',
+    })
+    isTwoFactorAuthenticationEnabled?: boolean;
+
+    @ApiProperty({
+        type       : String,
+        description: 'twoFactorAuthenticationSecret [input here api field description]',
+    })
+    twoFactorAuthenticationSecret?: string;
 
     @ApiProperty({
         type       : String,

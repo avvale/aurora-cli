@@ -16,6 +16,7 @@ import {
     IamAccountTags,
     IamAccountTenantIds,
     IamAccountType,
+    IamAccountUsername,
 } from '@app/iam/account/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
@@ -38,6 +39,7 @@ export class IamCreateAccountsCommandHandler implements ICommandHandler<IamCreat
                         type: new IamAccountType(account.type),
                         code: new IamAccountCode(account.code),
                         email: new IamAccountEmail(account.email),
+                        username: new IamAccountUsername(account.username),
                         isActive: new IamAccountIsActive(account.isActive),
                         clientId: new IamAccountClientId(account.clientId),
                         tags: new IamAccountTags(account.tags),

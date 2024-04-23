@@ -18,6 +18,7 @@ import {
     IamAccountTenantIds,
     IamAccountType,
     IamAccountUpdatedAt,
+    IamAccountUsername,
 } from '@app/iam/account/domain/value-objects';
 import { IamRole } from '@app/iam/role';
 import { IamTenant } from '@app/iam/tenant';
@@ -32,6 +33,7 @@ export class IamAccount extends AggregateRoot
     type: IamAccountType;
     code: IamAccountCode;
     email: IamAccountEmail;
+    username: IamAccountUsername;
     isActive: IamAccountIsActive;
     clientId: IamAccountClientId;
     tags: IamAccountTags;
@@ -55,6 +57,7 @@ export class IamAccount extends AggregateRoot
         type: IamAccountType,
         code: IamAccountCode,
         email: IamAccountEmail,
+        username: IamAccountUsername,
         isActive: IamAccountIsActive,
         clientId: IamAccountClientId,
         tags: IamAccountTags,
@@ -79,6 +82,7 @@ export class IamAccount extends AggregateRoot
         this.type = type;
         this.code = code;
         this.email = email;
+        this.username = username;
         this.isActive = isActive;
         this.clientId = clientId;
         this.tags = tags;
@@ -103,6 +107,7 @@ export class IamAccount extends AggregateRoot
         type: IamAccountType,
         code: IamAccountCode,
         email: IamAccountEmail,
+        username: IamAccountUsername,
         isActive: IamAccountIsActive,
         clientId: IamAccountClientId,
         tags: IamAccountTags,
@@ -127,6 +132,7 @@ export class IamAccount extends AggregateRoot
             type,
             code,
             email,
+            username,
             isActive,
             clientId,
             tags,
@@ -154,7 +160,8 @@ export class IamAccount extends AggregateRoot
                 account.id.value,
                 account.type.value,
                 account.code?.value,
-                account.email.value,
+                account.email?.value,
+                account.username.value,
                 account.isActive.value,
                 account.clientId.value,
                 account.tags?.value,
@@ -180,6 +187,7 @@ export class IamAccount extends AggregateRoot
                 account.type?.value,
                 account.code?.value,
                 account.email?.value,
+                account.username?.value,
                 account.isActive?.value,
                 account.clientId?.value,
                 account.tags?.value,
@@ -204,7 +212,8 @@ export class IamAccount extends AggregateRoot
                 account.id.value,
                 account.type.value,
                 account.code?.value,
-                account.email.value,
+                account.email?.value,
+                account.username.value,
                 account.isActive.value,
                 account.clientId.value,
                 account.tags?.value,
@@ -228,7 +237,8 @@ export class IamAccount extends AggregateRoot
             id: this.id.value,
             type: this.type.value,
             code: this.code?.value,
-            email: this.email.value,
+            email: this.email?.value,
+            username: this.username.value,
             isActive: this.isActive.value,
             clientId: this.clientId.value,
             tags: this.tags?.value,
@@ -256,7 +266,8 @@ export class IamAccount extends AggregateRoot
             id: this.id.value,
             type: this.type.value,
             code: this.code?.value,
-            email: this.email.value,
+            email: this.email?.value,
+            username: this.username.value,
             isActive: this.isActive.value,
             clientId: this.clientId.value,
             tags: this.tags?.value,

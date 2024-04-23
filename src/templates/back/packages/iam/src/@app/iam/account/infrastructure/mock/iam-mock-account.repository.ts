@@ -17,6 +17,7 @@ import {
     IamAccountTenantIds,
     IamAccountType,
     IamAccountUpdatedAt,
+    IamAccountUsername,
 } from '@app/iam/account/domain/value-objects';
 import { MockRepository, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -55,6 +56,7 @@ export class IamMockAccountRepository extends MockRepository<IamAccount> impleme
                 new IamAccountType(itemCollection.type),
                 new IamAccountCode(itemCollection.code),
                 new IamAccountEmail(itemCollection.email),
+                new IamAccountUsername(itemCollection.username),
                 new IamAccountIsActive(itemCollection.isActive),
                 new IamAccountClientId(itemCollection.clientId),
                 new IamAccountTags(itemCollection.tags),

@@ -93,17 +93,17 @@ export const permissions = [
 
 export const users = [
     {
-        id           : IamPermissionHelper.administratorUserId,
-        accountId    : IamPermissionHelper.administratorAccountId,
-        name         : 'John',
-        surname      : 'Doe',
-        avatar       : null,
-        mobile       : null,
-        langId       : null,
-        username     : 'john.doe@contoso.com',
-        password     : '1111',
-        rememberToken: null,
-        data         : null,
+        id                              : IamPermissionHelper.administratorUserId,
+        accountId                       : IamPermissionHelper.administratorAccountId,
+        name                            : 'John',
+        surname                         : 'Doe',
+        avatar                          : null,
+        mobile                          : null,
+        langId                          : null,
+        password                        : '1111',
+        isTwoFactorAuthenticationEnabled: false,
+        rememberToken                   : null,
+        data                            : null,
     },
 ];
 
@@ -114,6 +114,7 @@ export const accounts = [
         type             : IamAccountType.USER,
         code             : null,
         email            : 'john.doe@contoso.com',
+        username         : 'john.doe@contoso.com',
         isActive         : true,
         clientId         : clients[0].id,
         dApplicationCodes: ['orion'],

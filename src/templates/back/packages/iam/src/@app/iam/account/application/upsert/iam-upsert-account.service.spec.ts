@@ -16,6 +16,7 @@ import {
     IamAccountTags,
     IamAccountTenantIds,
     IamAccountType,
+    IamAccountUsername,
 } from '@app/iam/account/domain/value-objects';
 import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -64,6 +65,7 @@ describe('IamUpsertAccountService', () =>
                         type: new IamAccountType(iamMockAccountData[0].type),
                         code: new IamAccountCode(iamMockAccountData[0].code),
                         email: new IamAccountEmail(iamMockAccountData[0].email),
+                        username: new IamAccountUsername(iamMockAccountData[0].username),
                         isActive: new IamAccountIsActive(iamMockAccountData[0].isActive),
                         clientId: new IamAccountClientId(iamMockAccountData[0].clientId),
                         tags: new IamAccountTags(iamMockAccountData[0].tags),

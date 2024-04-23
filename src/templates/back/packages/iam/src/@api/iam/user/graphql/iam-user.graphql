@@ -9,8 +9,9 @@ type IamUser
     avatar: GraphQLString
     mobile: GraphQLString
     langId: ID
-    username: GraphQLString!
     password: GraphQLString!
+    isTwoFactorAuthenticationEnabled: GraphQLBoolean!
+    twoFactorAuthenticationSecret: GraphQLString
     rememberToken: GraphQLString
     meta: JSON
     createdAt: GraphQLTimestamp
@@ -26,8 +27,9 @@ input IamCreateUserInput
     avatar: GraphQLString
     mobile: GraphQLString
     langId: ID
-    username: GraphQLString!
     password: GraphQLString!
+    isTwoFactorAuthenticationEnabled: GraphQLBoolean!
+    twoFactorAuthenticationSecret: GraphQLString
     rememberToken: GraphQLString
 }
 
@@ -39,8 +41,9 @@ input IamUpdateUserByIdInput
     avatar: GraphQLString
     mobile: GraphQLString
     langId: ID
-    username: GraphQLString
     password: GraphQLString
+    isTwoFactorAuthenticationEnabled: GraphQLBoolean
+    twoFactorAuthenticationSecret: GraphQLString
     rememberToken: GraphQLString
 }
 
@@ -52,8 +55,9 @@ input IamUpdateUsersInput
     avatar: GraphQLString
     mobile: GraphQLString
     langId: ID
-    username: GraphQLString
     password: GraphQLString
+    isTwoFactorAuthenticationEnabled: GraphQLBoolean
+    twoFactorAuthenticationSecret: GraphQLString
     rememberToken: GraphQLString
 }
 

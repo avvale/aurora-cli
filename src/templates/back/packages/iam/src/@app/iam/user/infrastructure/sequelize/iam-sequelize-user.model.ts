@@ -14,10 +14,6 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
 			fields: ['accountId'],
 			unique: false,
 		},
-		{
-			fields: ['username'],
-			unique: true,
-		},
     ],
 })
 export class IamUserModel extends Model<IamUserModel>
@@ -187,18 +183,26 @@ export class IamUserModel extends Model<IamUserModel>
     langId: string;
 
     @Column({
-        field: 'username',
-        allowNull: false,
-        type: DataTypes.STRING(128),
-    })
-    username: string;
-
-    @Column({
         field: 'password',
         allowNull: false,
         type: DataTypes.STRING(undefined),
     })
     password: string;
+
+    @Column({
+        field: 'isTwoFactorAuthenticationEnabled',
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    })
+    isTwoFactorAuthenticationEnabled: boolean;
+
+    @Column({
+        field: 'twoFactorAuthenticationSecret',
+        allowNull: true,
+        type: DataTypes.STRING(16),
+    })
+    twoFactorAuthenticationSecret: string;
 
     @Column({
         field: 'rememberToken',

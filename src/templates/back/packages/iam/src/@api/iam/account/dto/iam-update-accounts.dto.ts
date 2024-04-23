@@ -33,6 +33,12 @@ export class IamUpdateAccountsDto
     email?: string;
 
     @ApiProperty({
+        type       : String,
+        description: 'username [input here api field description]',
+    })
+    username?: string;
+
+    @ApiProperty({
         type       : Boolean,
         description: 'isActive [input here api field description]',
         example    : true,

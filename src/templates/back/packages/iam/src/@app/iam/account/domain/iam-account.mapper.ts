@@ -17,6 +17,7 @@ import {
     IamAccountTenantIds,
     IamAccountType,
     IamAccountUpdatedAt,
+    IamAccountUsername,
 } from '@app/iam/account/domain/value-objects';
 import { IamRoleMapper } from '@app/iam/role';
 import { IamTenantMapper } from '@app/iam/tenant';
@@ -79,6 +80,7 @@ export class IamAccountMapper implements IMapper
             new IamAccountType(account.type, { undefinable: true }),
             new IamAccountCode(account.code, { undefinable: true }),
             new IamAccountEmail(account.email, { undefinable: true }),
+            new IamAccountUsername(account.username, { undefinable: true }),
             new IamAccountIsActive(account.isActive, { undefinable: true }),
             new IamAccountClientId(account.clientId, { undefinable: true }),
             new IamAccountTags(account.tags, { undefinable: true }),
@@ -108,6 +110,7 @@ export class IamAccountMapper implements IMapper
             account.type.value,
             account.code.value,
             account.email.value,
+            account.username.value,
             account.isActive.value,
             account.clientId.value,
             account.tags.value,

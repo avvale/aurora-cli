@@ -16,7 +16,7 @@ export class IamMinRoleAccountService
         cQMetadata?: CQMetadata,
     ): Promise<number>
     {
-        return await this.repository.max(
+        return await this.repository.min(
             column,
             {
                 queryStatement,

@@ -30,7 +30,13 @@ export class IamCreateAccountDto
         description: 'email [input here api field description]',
         example    : 'john@gmial.com',
     })
-    email: string;
+    email?: string;
+
+    @ApiProperty({
+        type       : String,
+        description: 'username [input here api field description]',
+    })
+    username: string;
 
     @ApiProperty({
         type       : Boolean,

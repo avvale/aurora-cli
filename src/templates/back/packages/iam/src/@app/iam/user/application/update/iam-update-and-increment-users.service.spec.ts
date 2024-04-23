@@ -5,6 +5,7 @@ import {
     IamUserAccountId,
     IamUserAvatar,
     IamUserId,
+    IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
     IamUserMeta,
     IamUserMobile,
@@ -12,7 +13,7 @@ import {
     IamUserPassword,
     IamUserRememberToken,
     IamUserSurname,
-    IamUserUsername,
+    IamUserTwoFactorAuthenticationSecret,
 } from '@app/iam/user/domain/value-objects';
 import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -65,8 +66,9 @@ describe('IamUpdateAndIncrementUsersService', () =>
                         avatar: new IamUserAvatar(iamMockUserData[0].avatar),
                         mobile: new IamUserMobile(iamMockUserData[0].mobile),
                         langId: new IamUserLangId(iamMockUserData[0].langId),
-                        username: new IamUserUsername(iamMockUserData[0].username),
                         password: new IamUserPassword(iamMockUserData[0].password),
+                        isTwoFactorAuthenticationEnabled: new IamUserIsTwoFactorAuthenticationEnabled(iamMockUserData[0].isTwoFactorAuthenticationEnabled),
+                        twoFactorAuthenticationSecret: new IamUserTwoFactorAuthenticationSecret(iamMockUserData[0].twoFactorAuthenticationSecret),
                         rememberToken: new IamUserRememberToken(iamMockUserData[0].rememberToken),
                         meta: new IamUserMeta(iamMockUserData[0].meta),
                     },
