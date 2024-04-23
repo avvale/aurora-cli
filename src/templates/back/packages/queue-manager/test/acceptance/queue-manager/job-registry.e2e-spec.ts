@@ -5,7 +5,7 @@ import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorizat
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { QueueManagerModule } from '@api/queue-manager/queue-manager.module';
 import { QueueManagerIJobRegistryRepository, queueManagerMockJobRegistryData, QueueManagerMockJobRegistrySeeder } from '@app/queue-manager/job-registry';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';

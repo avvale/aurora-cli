@@ -3,9 +3,9 @@
 /* eslint-disable key-spacing */
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { QueueManagerModule } from '@api/queue-manager/queue-manager.module';
-import { QueueManagerIQueueRepository, queueManagerMockQueueData, QueueManagerMockQueueSeeder } from '@app/queue-manager/queue';
-import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
+import { WhatsappModule } from '@api/whatsapp/whatsapp.module';
+import { WhatsappIWebhookRepository, whatsappMockWebhookData, WhatsappMockWebhookSeeder } from '@app/whatsapp/webhook';
+import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -16,11 +16,11 @@ import * as request from 'supertest';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('queue', () =>
+describe('webhook', () =>
 {
     let app: INestApplication;
-    let queueRepository: QueueManagerIQueueRepository;
-    let queueSeeder: QueueManagerMockQueueSeeder;
+    let webhookRepository: WhatsappIWebhookRepository;
+    let webhookSeeder: WhatsappMockWebhookSeeder;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let mockData: any;
@@ -33,7 +33,7 @@ describe('queue', () =>
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
-                QueueManagerModule,
+                WhatsappModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
                     imports   : [ConfigModule],
@@ -57,7 +57,7 @@ describe('queue', () =>
                 }),
             ],
             providers: [
-                QueueManagerMockQueueSeeder,
+                WhatsappMockWebhookSeeder,
             ],
         })
             .overrideGuard(AuthenticationJwtGuard)
@@ -66,21 +66,21 @@ describe('queue', () =>
             .useValue({ canActivate: () => true })
             .compile();
 
-        mockData = queueManagerMockQueueData;
+        mockData = whatsappMockWebhookData;
         app = module.createNestApplication();
-        queueRepository = module.get<QueueManagerIQueueRepository>(QueueManagerIQueueRepository);
-        queueSeeder = module.get<QueueManagerMockQueueSeeder>(QueueManagerMockQueueSeeder);
+        webhookRepository = module.get<WhatsappIWebhookRepository>(WhatsappIWebhookRepository);
+        webhookSeeder = module.get<WhatsappMockWebhookSeeder>(WhatsappMockWebhookSeeder);
 
         // seed mock data in memory database
-        await queueRepository.insert(queueSeeder.collectionSource);
+        await webhookRepository.insert(webhookSeeder.collectionSource);
 
         await app.init();
     });
 
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueueId property can not to be null', () =>
+    test('/REST:POST whatsapp/webhook/create - Got 400 Conflict, WebhookId property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
+            .post('/whatsapp/webhook/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
@@ -89,46 +89,30 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerQueueId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for WhatsappWebhookId must be defined, can not be null');
             });
     });
 
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueuePrefix property can not to be null', () =>
+    test('/REST:POST whatsapp/webhook/create - Got 400 Conflict, WebhookPayload property can not to be null', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
+            .post('/whatsapp/webhook/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                prefix: null,
+                payload: null,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerQueuePrefix must be defined, can not be null');
+                expect(res.body.message).toContain('Value for WhatsappWebhookPayload must be defined, can not be null');
             });
     });
 
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueueName property can not to be null', () =>
+    test('/REST:POST whatsapp/webhook/create - Got 400 Conflict, WebhookId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                name: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for QueueManagerQueueName must be defined, can not be null');
-            });
-    });
-
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueueId property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
+            .post('/whatsapp/webhook/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
@@ -137,46 +121,30 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerQueueId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for WhatsappWebhookId must be defined, can not be undefined');
             });
     });
 
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueuePrefix property can not to be undefined', () =>
+    test('/REST:POST whatsapp/webhook/create - Got 400 Conflict, WebhookPayload property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
+            .post('/whatsapp/webhook/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                prefix: undefined,
+                payload: undefined,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerQueuePrefix must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for WhatsappWebhookPayload must be defined, can not be undefined');
             });
     });
 
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueueName property can not to be undefined', () =>
+    test('/REST:POST whatsapp/webhook/create - Got 400 Conflict, WebhookId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                name: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for QueueManagerQueueName must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueueId is not allowed, must be a length of 36', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
+            .post('/whatsapp/webhook/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
@@ -185,56 +153,24 @@ describe('queue', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for QueueManagerQueueId is not allowed, must be a length of 36');
-            });
-    });
-
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueuePrefix is too large, has a maximum length of 63', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                prefix: '****************************************************************',
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for QueueManagerQueuePrefix is too large, has a maximum length of 63');
-            });
-    });
-
-    test('/REST:POST queue-manager/queue/create - Got 400 Conflict, QueueName is too large, has a maximum length of 63', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                name: '****************************************************************',
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for QueueManagerQueueName is too large, has a maximum length of 63');
+                expect(res.body.message).toContain('Value for WhatsappWebhookId is not allowed, must be a length of 36');
             });
     });
 
 
-    test('/REST:POST queue-manager/queue/create - Got 409 Conflict, item already exist in database', () =>
+    test('/REST:POST whatsapp/webhook/create - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
+            .post('/whatsapp/webhook/create')
             .set('Accept', 'application/json')
             .send(mockData[0])
             .expect(409);
     });
 
-    test('/REST:POST queue-manager/queues/paginate', () =>
+    test('/REST:POST whatsapp/webhooks/paginate', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queues/paginate')
+            .post('/whatsapp/webhooks/paginate')
             .set('Accept', 'application/json')
             .send({
                 query:
@@ -247,48 +183,48 @@ describe('queue', () =>
             .then(res =>
             {
                 expect(res.body).toEqual({
-                    total: queueSeeder.collectionResponse.length,
-                    count: queueSeeder.collectionResponse.length,
-                    rows : queueSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    total: webhookSeeder.collectionResponse.length,
+                    count: webhookSeeder.collectionResponse.length,
+                    rows : webhookSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
 
-    test('/REST:POST queue-manager/queues/get', () =>
+    test('/REST:POST whatsapp/webhooks/get', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queues/get')
+            .post('/whatsapp/webhooks/get')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
             {
                 expect(res.body).toEqual(
-                    queueSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    webhookSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
                 );
             });
     });
 
-    test('/REST:POST queue-manager/queue/find - Got 404 Not Found', () =>
+    test('/REST:POST whatsapp/webhook/find - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/find')
+            .post('/whatsapp/webhook/find')
             .set('Accept', 'application/json')
             .send({
                 query:
                 {
                     where:
                     {
-                        id: '68b918c5-52c5-5138-bda4-d9c6e82df62a',
+                        id: 'dd43db4b-be73-5997-9453-754122d62131',
                     },
                 },
             })
             .expect(404);
     });
 
-    test('/REST:POST queue-manager/queue/create', () =>
+    test('/REST:POST whatsapp/webhook/create', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/create')
+            .post('/whatsapp/webhook/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
@@ -297,10 +233,10 @@ describe('queue', () =>
             .expect(201);
     });
 
-    test('/REST:POST queue-manager/queue/find', () =>
+    test('/REST:POST whatsapp/webhook/find', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/find')
+            .post('/whatsapp/webhook/find')
             .set('Accept', 'application/json')
             .send({
                 query:
@@ -318,18 +254,18 @@ describe('queue', () =>
             });
     });
 
-    test('/REST:POST queue-manager/queue/find/{id} - Got 404 Not Found', () =>
+    test('/REST:POST whatsapp/webhook/find/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/find/3f7793a5-41bc-5154-ac67-221445c98d99')
+            .post('/whatsapp/webhook/find/3b8a55b7-433b-53e7-be70-f8c144c82f4d')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:POST queue-manager/queue/find/{id}', () =>
+    test('/REST:POST whatsapp/webhook/find/{id}', () =>
     {
         return request(app.getHttpServer())
-            .post('/queue-manager/queue/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post('/whatsapp/webhook/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
             .then(res =>
@@ -338,22 +274,22 @@ describe('queue', () =>
             });
     });
 
-    test('/REST:PUT queue-manager/queue/update - Got 404 Not Found', () =>
+    test('/REST:PUT whatsapp/webhook/update - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .put('/queue-manager/queue/update')
+            .put('/whatsapp/webhook/update')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                id: 'ce38dfc9-2ca2-5081-9be4-a5978214cf3d',
+                id: 'f652f175-d968-5cd6-a6c1-7fa10e0af890',
             })
             .expect(404);
     });
 
-    test('/REST:PUT queue-manager/queue/update', () =>
+    test('/REST:PUT whatsapp/webhook/update', () =>
     {
         return request(app.getHttpServer())
-            .put('/queue-manager/queue/update')
+            .put('/whatsapp/webhook/update')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
@@ -366,36 +302,35 @@ describe('queue', () =>
             });
     });
 
-    test('/REST:DELETE queue-manager/queue/delete/{id} - Got 404 Not Found', () =>
+    test('/REST:DELETE whatsapp/webhook/delete/{id} - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
-            .delete('/queue-manager/queue/delete/1e92e502-8af7-5872-ab06-2baedc8b6250')
+            .delete('/whatsapp/webhook/delete/2ff66854-39ed-5635-abf1-594571181656')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE queue-manager/queue/delete/{id}', () =>
+    test('/REST:DELETE whatsapp/webhook/delete/{id}', () =>
     {
         return request(app.getHttpServer())
-            .delete('/queue-manager/queue/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete('/whatsapp/webhook/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL queueManagerCreateQueue - Got 409 Conflict, item already exist in database', () =>
+    test('/GraphQL whatsappCreateWebhook - Got 409 Conflict, item already exist in database', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:QueueManagerCreateQueueInput!)
+                    mutation ($payload:WhatsappCreateWebhookInput!)
                     {
-                        queueManagerCreateQueue (payload:$payload)
+                        whatsappCreateWebhook (payload:$payload)
                         {
                             id
-                            prefix
-                            name
+                            payload
                         }
                     }
                 `,
@@ -413,7 +348,7 @@ describe('queue', () =>
             });
     });
 
-    test('/GraphQL queueManagerPaginateQueues', () =>
+    test('/GraphQL whatsappPaginateWebhooks', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -422,7 +357,7 @@ describe('queue', () =>
                 query: `
                     query ($query:QueryStatement $constraint:QueryStatement)
                     {
-                        queueManagerPaginateQueues (query:$query constraint:$constraint)
+                        whatsappPaginateWebhooks (query:$query constraint:$constraint)
                         {
                             total
                             count
@@ -442,15 +377,15 @@ describe('queue', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.queueManagerPaginateQueues).toEqual({
-                    total: queueSeeder.collectionResponse.length,
-                    count: queueSeeder.collectionResponse.length,
-                    rows : queueSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                expect(res.body.data.whatsappPaginateWebhooks).toEqual({
+                    total: webhookSeeder.collectionResponse.length,
+                    count: webhookSeeder.collectionResponse.length,
+                    rows : webhookSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
                 });
             });
     });
 
-    test('/GraphQL queueManagerGetQueues', () =>
+    test('/GraphQL whatsappGetWebhooks', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -459,11 +394,10 @@ describe('queue', () =>
                 query: `
                     query ($query:QueryStatement)
                     {
-                        queueManagerGetQueues (query:$query)
+                        whatsappGetWebhooks (query:$query)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -474,27 +408,26 @@ describe('queue', () =>
             .expect(200)
             .then(res =>
             {
-                for (const [index, value] of res.body.data.queueManagerGetQueues.entries())
+                for (const [index, value] of res.body.data.whatsappGetWebhooks.entries())
                 {
-                    expect(queueSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+                    expect(webhookSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
                 }
             });
     });
 
-    test('/GraphQL queueManagerCreateQueue', () =>
+    test('/GraphQL whatsappCreateWebhook', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:QueueManagerCreateQueueInput!)
+                    mutation ($payload:WhatsappCreateWebhookInput!)
                     {
-                        queueManagerCreateQueue (payload:$payload)
+                        whatsappCreateWebhook (payload:$payload)
                         {
                             id
-                            prefix
-                            name
+                            payload
                         }
                     }
                 `,
@@ -508,11 +441,11 @@ describe('queue', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.queueManagerCreateQueue).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.whatsappCreateWebhook).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL queueManagerFindQueue - Got 404 Not Found', () =>
+    test('/GraphQL whatsappFindWebhook - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -521,11 +454,10 @@ describe('queue', () =>
                 query: `
                     query ($query:QueryStatement)
                     {
-                        queueManagerFindQueue (query:$query)
+                        whatsappFindWebhook (query:$query)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -537,7 +469,7 @@ describe('queue', () =>
                     {
                         where:
                         {
-                            id: 'da8ecf74-51f6-5f73-8e5c-2cc12f0bb38c',
+                            id: '4cec416e-da73-59bb-b19c-66d7d8345e0e',
                         },
                     },
                 },
@@ -551,7 +483,7 @@ describe('queue', () =>
             });
     });
 
-    test('/GraphQL queueManagerFindQueue', () =>
+    test('/GraphQL whatsappFindWebhook', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -560,11 +492,10 @@ describe('queue', () =>
                 query: `
                     query ($query:QueryStatement)
                     {
-                        queueManagerFindQueue (query:$query)
+                        whatsappFindWebhook (query:$query)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -584,11 +515,11 @@ describe('queue', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.queueManagerFindQueue.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.whatsappFindWebhook.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL queueManagerFindQueueById - Got 404 Not Found', () =>
+    test('/GraphQL whatsappFindWebhookById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -597,18 +528,17 @@ describe('queue', () =>
                 query: `
                     query ($id:ID!)
                     {
-                        queueManagerFindQueueById (id:$id)
+                        whatsappFindWebhookById (id:$id)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: '5d8cae8f-5f02-516b-beb4-44ca60bd3f50',
+                    id: '12b7991e-7732-59f0-b2fd-500e555e7134',
                 },
             })
             .expect(200)
@@ -620,7 +550,7 @@ describe('queue', () =>
             });
     });
 
-    test('/GraphQL queueManagerFindQueueById', () =>
+    test('/GraphQL whatsappFindWebhookById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -629,11 +559,10 @@ describe('queue', () =>
                 query: `
                     query ($id:ID!)
                     {
-                        queueManagerFindQueueById (id:$id)
+                        whatsappFindWebhookById (id:$id)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -646,24 +575,23 @@ describe('queue', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.queueManagerFindQueueById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.whatsappFindWebhookById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL queueManagerUpdateQueueById - Got 404 Not Found', () =>
+    test('/GraphQL whatsappUpdateWebhookById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:QueueManagerUpdateQueueByIdInput!)
+                    mutation ($payload:WhatsappUpdateWebhookByIdInput!)
                     {
-                        queueManagerUpdateQueueById (payload:$payload)
+                        whatsappUpdateWebhookById (payload:$payload)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -672,7 +600,7 @@ describe('queue', () =>
                 variables: {
                     payload: {
                         ...mockData[0],
-                        id: '4fe17240-c74e-57db-b73d-db9c5227d6a4',
+                        id: '7b337e29-e7e5-5249-8ca7-9522ca7c47fd',
                     },
                 },
             })
@@ -685,20 +613,19 @@ describe('queue', () =>
             });
     });
 
-    test('/GraphQL queueManagerUpdateQueueById', () =>
+    test('/GraphQL whatsappUpdateWebhookById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:QueueManagerUpdateQueueByIdInput!)
+                    mutation ($payload:WhatsappUpdateWebhookByIdInput!)
                     {
-                        queueManagerUpdateQueueById (payload:$payload)
+                        whatsappUpdateWebhookById (payload:$payload)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -714,24 +641,23 @@ describe('queue', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.queueManagerUpdateQueueById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.whatsappUpdateWebhookById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL queueManagerUpdateQueues', () =>
+    test('/GraphQL whatsappUpdateWebhooks', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
             .send({
                 query: `
-                    mutation ($payload:QueueManagerUpdateQueuesInput! $query: QueryStatement)
+                    mutation ($payload:WhatsappUpdateWebhooksInput! $query: QueryStatement)
                     {
-                        queueManagerUpdateQueues (payload:$payload query:$query)
+                        whatsappUpdateWebhooks (payload:$payload query:$query)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -752,11 +678,11 @@ describe('queue', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.queueManagerUpdateQueues[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.whatsappUpdateWebhooks[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL queueManagerDeleteQueueById - Got 404 Not Found', () =>
+    test('/GraphQL whatsappDeleteWebhookById - Got 404 Not Found', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -765,18 +691,17 @@ describe('queue', () =>
                 query: `
                     mutation ($id:ID!)
                     {
-                        queueManagerDeleteQueueById (id:$id)
+                        whatsappDeleteWebhookById (id:$id)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
                     }
                 `,
                 variables: {
-                    id: 'a9fecddd-0d8f-5ab7-a6bf-3ee64049390a',
+                    id: '5960b3db-4b0b-5e69-987d-e05853402693',
                 },
             })
             .expect(200)
@@ -788,7 +713,7 @@ describe('queue', () =>
             });
     });
 
-    test('/GraphQL queueManagerDeleteQueueById', () =>
+    test('/GraphQL whatsappDeleteWebhookById', () =>
     {
         return request(app.getHttpServer())
             .post('/graphql')
@@ -797,11 +722,10 @@ describe('queue', () =>
                 query: `
                     mutation ($id:ID!)
                     {
-                        queueManagerDeleteQueueById (id:$id)
+                        whatsappDeleteWebhookById (id:$id)
                         {
                             id
-                            prefix
-                            name
+                            payload
                             createdAt
                             updatedAt
                         }
@@ -814,13 +738,13 @@ describe('queue', () =>
             .expect(200)
             .then(res =>
             {
-                expect(res.body.data.queueManagerDeleteQueueById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+                expect(res.body.data.whatsappDeleteWebhookById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
     afterAll(async () =>
     {
-        await queueRepository.delete({
+        await webhookRepository.delete({
             queryStatement: {
                 where: {},
             },

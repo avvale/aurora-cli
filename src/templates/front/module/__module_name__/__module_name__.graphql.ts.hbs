@@ -91,7 +91,7 @@ export const getQuery = gql`
 }}
 
 export const getRelations = gql`
-    query {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Relations(
+    query {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Relations (
         {{#each (getWebComponentsProperties schema.aggregateProperties) }}
         {{#eq webComponent.type 'select'}}
         $query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
