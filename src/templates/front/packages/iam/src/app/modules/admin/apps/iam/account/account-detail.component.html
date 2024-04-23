@@ -17,46 +17,62 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-            <button
-                *ngIf="currentViewAction.id === 'iam::account.detail.edit'"
-                mat-flat-button
-                type="submit"
-                class="ml-3"
-                form="iamAccountFormDetail"
-                color="accent"
-                [disabled]="fg.pristine || ('iam::account.detail.update' | getSpinnerFlag | async)"
-            >
-                <mat-icon
-                    *ngIf="!('iam::account.detail.update' | getSpinnerFlag | async)"
-                    svgIcon="mat_solid:edit"
-                    class="icon-size-5 mr-2"
+
+            @if (currentViewAction.id === 'iam::account.detail.edit')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    class="ml-3"
+                    form="iamAccountFormDetail"
+                    color="accent"
+                    [disabled]="fg.pristine || ('iam::account.detail.update' | getSpinnerFlag | async)"
                 >
-                </mat-icon>
-                <mat-icon *ngIf="'iam::account.detail.update' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
-                {{ t('Update') }}
-            </button>
-            <button
-                *ngIf="currentViewAction.id === 'iam::account.detail.new'"
-                mat-flat-button
-                type="submit"
-                form="iamAccountFormDetail"
-                class="ml-3"
-                color="accent"
-                [disabled]="fg.pristine || ('iam::account.detail.create' | getSpinnerFlag | async)"
-            >
-                <mat-icon
-                    *ngIf="!('iam::account.detail.create' | getSpinnerFlag | async)"
-                    svgIcon="mat_solid:save"
-                    class="icon-size-5 mr-2"
+                    @if ('iam::account.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:edit"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Update') }}
+                </button>
+            }
+
+            @if (currentViewAction.id === 'iam::account.detail.new')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    form="iamAccountFormDetail"
+                    class="ml-3"
+                    color="accent"
+                    [disabled]="fg.pristine || ('iam::account.detail.create' | getSpinnerFlag | async)"
                 >
-                </mat-icon>
-                <mat-icon *ngIf="'iam::account.detail.create' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
-                {{ t('Create') }}
-            </button>
+                    @if ('iam::account.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:save"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Create') }}
+                </button>
+            }
         </div>
         <!-- / Actions -->
 
@@ -86,12 +102,12 @@
                             formControlName="type"
                             (selectionChange)="handleChangeAccountType($event)"
                         >
-                            <mat-option
-                                *ngFor="let type of iamAccountType | keyvalue"
-                                [value]="type.key"
-                            >
-                                {{ t('iam.AccountType.' + type.value) }}
-                            </mat-option>
+                            @for (type of iamAccountType | keyvalue; track type)
+                            {
+                                <mat-option [value]="type.key">
+                                    {{ t('iam.AccountType.' + type.value) }}
+                                </mat-option>
+                            }
                         </mat-select>
                         <mat-error>{{ formErrors?.type | async }}</mat-error>
                     </mat-form-field>
@@ -108,9 +124,8 @@
                         <mat-error>{{ formErrors?.code | async }}</mat-error>
                     </mat-form-field>
 
-                    <ng-container
-                        *ngIf="currentViewAction.id === 'iam::account.detail.new'"
-                    >
+                    @if (currentViewAction.id === 'iam::account.detail.new')
+                    {
                         <mat-form-field
                             appearance="outline"
                             class="col-start-1 col-8"
@@ -129,7 +144,7 @@
                             </mat-select>
                             <mat-error>{{ formErrors?.clientId | async }}</mat-error>
                         </mat-form-field>
-                    </ng-container>
+                    }
 
                     <mat-form-field
                         appearance="outline"
@@ -140,12 +155,27 @@
                             matInput
                             formControlName="email"
                             maxlength="128"
-                            required
                         >
                         <mat-error>{{ formErrors?.email | async }}</mat-error>
                     </mat-form-field>
 
-                    @if(showTenantsInput())
+                    @if (fg.get('type').value === iamAccountType.SERVICE)
+                    {
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-start-1 col-6"
+                        >
+                            <mat-label>{{ t('iam.Username') }}</mat-label>
+                            <input
+                                matInput
+                                formControlName="username"
+                                maxlength="120"
+                            >
+                            <mat-error>{{ formErrors['user.username'] | async }}</mat-error>
+                        </mat-form-field>
+                    }
+
+                    @if (showTenantsInput())
                     {
                         <mat-form-field
                             appearance="outline"
@@ -210,12 +240,12 @@
                             formControlName="scopes"
                             multiple
                         >
-                            <mat-option
-                                *ngFor="let scopeOption of scopeOptions$ | async"
-                                [value]="scopeOption"
-                            >
-                                {{ scopeOption }}
-                            </mat-option>
+                            @for (scopeOption of scopeOptions$ | async; track scopeOption)
+                            {
+                                <mat-option [value]="scopeOption">
+                                    {{ scopeOption }}
+                                </mat-option>
+                            }
                         </mat-select>
                         <mat-error>{{ formErrors?.scopes | async }}</mat-error>
                     </mat-form-field>
@@ -247,44 +277,43 @@
                         </mat-checkbox>
                     </div>
 
-                    <ng-container
-                        *ngIf="fg.get('type').value === iamAccountType.USER"
-                        formGroupName="user"
-                    >
-                        <mat-form-field
-                            appearance="outline"
-                            class="col-6"
-                        >
-                            <mat-label>{{ t('iam.Name') }}</mat-label>
-                            <input
-                                matInput
-                                formControlName="name"
-                                maxlength="255"
+                    @if (fg.get('type').value === iamAccountType.USER)
+                    {
+                        <ng-container formGroupName="user">
+                            <mat-toolbar class="p-0 col-12">
+                                <mat-icon
+                                    svgIcon="mat_solid:how_to_reg"
+                                    class="mr-3"
+                                >
+                                </mat-icon>
+                                <span> {{ t('User') }}</span>
+                            </mat-toolbar>
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-6"
                             >
-                            <mat-error>{{ formErrors?.name | async }}</mat-error>
-                        </mat-form-field>
-                        <mat-form-field
-                            appearance="outline"
-                            class="col-6"
-                        >
-                            <mat-label>{{ t('iam.Surname') }}</mat-label>
-                            <input
-                                matInput
-                                formControlName="surname"
-                                maxlength="255"
+                                <mat-label>{{ t('Name') }}</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="name"
+                                    maxlength="255"
+                                >
+                                <mat-error>{{ formErrors['user.name'] | async }}</mat-error>
+                            </mat-form-field>
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-6"
                             >
-                            <mat-error>{{ formErrors?.surname | async }}</mat-error>
-                        </mat-form-field>
-
-                        <mat-toolbar class="p-0 col-12">
-                            <mat-icon
-                                svgIcon="mat_solid:how_to_reg"
-                                class="mr-3"
-                            >
-                            </mat-icon>
-                            <span> {{ t('DataAccess') }}</span>
-                        </mat-toolbar>
-
+                                <mat-label>{{ t('Surname') }}</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="surname"
+                                    maxlength="255"
+                                >
+                                <mat-error>{{ formErrors['user.surname'] | async }}</mat-error>
+                            </mat-form-field>
+                        </ng-container>
+                        <!-- out of formGroupName user -->
                         <mat-form-field
                             appearance="outline"
                             class="col-start-1 col-6"
@@ -297,100 +326,100 @@
                             >
                             <mat-error>{{ formErrors['user.username'] | async }}</mat-error>
                         </mat-form-field>
-
-                        <mat-form-field
-                            appearance="outline"
-                            class="col-5"
-                        >
-                            <mat-label>{{ t('iam.LangId') }}</mat-label>
-                            <mat-select
-                                formControlName="langId"
+                        <!-- / out of formGroupName user -->
+                        <ng-container formGroupName="user">
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-5"
                             >
-                                <mat-option
-                                    *ngFor="let lang of langs$ | async"
-                                    [value]="lang.id"
+                                <mat-label>{{ t('iam.LangId') }}</mat-label>
+                                <mat-select
+                                    formControlName="langId"
                                 >
-                                    {{ lang.name }}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error>{{ formErrors?.langId | async }}</mat-error>
-                        </mat-form-field>
+                                    @for (lang of langs$ | async; track lang.id)
+                                    {
+                                        <mat-option [value]="lang.id">
+                                            {{ lang.name }}
+                                        </mat-option>
+                                    }
+                                </mat-select>
+                                <mat-error>{{ formErrors?.langId | async }}</mat-error>
+                            </mat-form-field>
 
-                        <mat-form-field
-                            appearance="outline"
-                            class="col-start-1 col-6"
-                        >
-                            <mat-label>{{ t('iam.Password') }}</mat-label>
-                            <mat-icon
-                                matSuffix
-                                svgIcon="mat_solid:lock"
-                                matTooltip="{{ t('iam.ShowPassword') }}"
-                                class="inline-block cursor-pointer"
-                                *ngIf="!isShowPassword"
-                                (click)="isShowPassword = !isShowPassword"
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-start-1 col-6"
                             >
-                            </mat-icon>
-                            <mat-icon
-                                matSuffix
-                                svgIcon="mat_solid:lock_open"
-                                matTooltip="{{ t('iam.HidePassword') }}"
-                                class="inline-block cursor-pointer"
-                                *ngIf="isShowPassword"
-                                (click)="isShowPassword = !isShowPassword"
-                            >
-                            </mat-icon>
-                            <mat-icon
-                                matSuffix
-                                svgIcon="mat_solid:cached"
-                                [matTooltip]="t('iam.CreatePassword')"
-                                class="inline-block cursor-pointer ml-4"
-                                (click)="handleCreatePassword()"
-                            >
-                            </mat-icon>
-                            <input
-                                matInput
-                                formControlName="password"
-                                [type]="isShowPassword ? 'text' : 'password'"
-                                [required]="currentAction === 'iam::account.detail.new'"
-                                autocomplete="new-password"
-                            >
-                            <mat-hint
-                                align="end"
-                                aria-live="polite"
-                            >
-                                {{ fg.get('user.password').value?.length }}
-                            </mat-hint>
-                            <mat-error>{{ formErrors['user.password'] | async }}</mat-error>
-                        </mat-form-field>
+                                <mat-label>{{ t('iam.Password') }}</mat-label>
+                                <mat-icon
+                                    matSuffix
+                                    svgIcon="mat_solid:lock"
+                                    matTooltip="{{ t('iam.ShowPassword') }}"
+                                    class="inline-block cursor-pointer"
+                                    *ngIf="!isShowPassword"
+                                    (click)="isShowPassword = !isShowPassword"
+                                >
+                                </mat-icon>
+                                <mat-icon
+                                    matSuffix
+                                    svgIcon="mat_solid:lock_open"
+                                    matTooltip="{{ t('iam.HidePassword') }}"
+                                    class="inline-block cursor-pointer"
+                                    *ngIf="isShowPassword"
+                                    (click)="isShowPassword = !isShowPassword"
+                                >
+                                </mat-icon>
+                                <mat-icon
+                                    matSuffix
+                                    svgIcon="mat_solid:cached"
+                                    [matTooltip]="t('iam.CreatePassword')"
+                                    class="inline-block cursor-pointer ml-4"
+                                    (click)="handleCreatePassword()"
+                                >
+                                </mat-icon>
+                                <input
+                                    matInput
+                                    formControlName="password"
+                                    [type]="isShowPassword ? 'text' : 'password'"
+                                    [required]="currentAction === 'iam::account.detail.new'"
+                                    autocomplete="new-password"
+                                >
+                                <mat-hint
+                                    align="end"
+                                    aria-live="polite"
+                                >
+                                    {{ fg.get('user.password').value?.length }}
+                                </mat-hint>
+                                <mat-error>{{ formErrors['user.password'] | async }}</mat-error>
+                            </mat-form-field>
 
-                        <!-- <mat-password-strength
-                            class="col-start-1 col-6"
-                            [password]="fg.get('user.password').value"
-                        >
-                        </mat-password-strength> -->
-                        <mat-form-field
-                            appearance="outline"
-                            class="col-start-1 col-6"
-                        >
-                            <mat-label>{{ t('RepeatPassword') }}</mat-label>
-                            <input
-                                matInput
-                                formControlName="repeatPassword"
-                                type="password"
-                                [required]="currentViewAction.id === 'iam::account.detail.new'"
-                                autocomplete="new-password"
+                            <!-- <mat-password-strength
+                                class="col-start-1 col-6"
+                                [password]="fg.get('user.password').value"
                             >
-                            <mat-hint
-                                align="end"
-                                aria-live="polite"
+                            </mat-password-strength> -->
+                            <mat-form-field
+                                appearance="outline"
+                                class="col-start-1 col-6"
                             >
-                                {{ user.get('repeatPassword')?.value?.length }}
-                            </mat-hint>
-                            <mat-error>{{ formErrors['user.repeatPassword'] | async }}</mat-error>
-                        </mat-form-field>
-
-                    </ng-container>
-
+                                <mat-label>{{ t('RepeatPassword') }}</mat-label>
+                                <input
+                                    matInput
+                                    formControlName="repeatPassword"
+                                    type="password"
+                                    [required]="currentViewAction.id === 'iam::account.detail.new'"
+                                    autocomplete="new-password"
+                                >
+                                <mat-hint
+                                    align="end"
+                                    aria-live="polite"
+                                >
+                                    {{ user.get('repeatPassword')?.value?.length }}
+                                </mat-hint>
+                                <mat-error>{{ formErrors['user.repeatPassword'] | async }}</mat-error>
+                            </mat-form-field>
+                        </ng-container>
+                    }
                 </div>
 
             </form>

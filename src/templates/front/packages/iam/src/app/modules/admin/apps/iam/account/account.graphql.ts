@@ -4,6 +4,7 @@ export const fields = `
     type
     code
     email
+    username
     isActive
     clientId
     client {
@@ -31,7 +32,6 @@ export const fields = `
         surname
         mobile
         langId
-        username
     }
     createdAt
     updatedAt
@@ -94,10 +94,10 @@ export const getQuery = gql`
 `;
 
 export const getRelations = gql`
-    query IamAccountRelations (
+    query IamGetAccountsRelations (
         $queryGetClients: QueryStatement
         $constraintGetClients: QueryStatement
-    ){
+    ) {
         ${relationsFields}
     }
 `;
@@ -118,7 +118,7 @@ export const findByIdQuery = gql`
 `;
 
 export const findByIdWithRelationsQuery = gql`
-    query IamFindAccountById (
+    query IamFindAccountByIdWithRelations (
         $id: ID
         $constraint: QueryStatement
         $queryGetClients: QueryStatement

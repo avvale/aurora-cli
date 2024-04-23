@@ -46,8 +46,8 @@ export const accountNewResolver: ResolveFn<{
     state: RouterStateSnapshot,
 ) =>
 {
-    const actionService = inject(ActionService);
     const accountService = inject(AccountService);
+    const actionService = inject(ActionService);
 
     actionService.action({
         id          : 'iam::account.detail.new',
@@ -79,23 +79,24 @@ export const accountEditResolver: ResolveFn<{
         isViewAction: true,
     });
 
-    return accountService.findByIdWithRelations({
-        id        : route.paramMap.get('id'),
-        constraint: {
-            include: [
-                {
-                    association: 'client',
-                },
-                {
-                    association: 'user',
-                },
-                {
-                    association: 'roles',
-                },
-                {
-                    association: 'tenants',
-                },
-            ],
-        },
-    });
+    return accountService
+        .findByIdWithRelations({
+            id: route.paramMap.get('id'),
+            constraint: {
+                include: [
+                    {
+                        association: 'client',
+                    },
+                    {
+                        association: 'user',
+                    },
+                    {
+                        association: 'roles',
+                    },
+                    {
+                        association: 'tenants',
+                    },
+                ],
+            },
+        });
 };

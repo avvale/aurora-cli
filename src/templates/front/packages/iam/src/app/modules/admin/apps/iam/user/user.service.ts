@@ -14,6 +14,11 @@ export class UserService
     userSubject$: BehaviorSubject<IamUser | null> = new BehaviorSubject(null);
     usersSubject$: BehaviorSubject<IamUser[] | null> = new BehaviorSubject(null);
 
+    // scoped subjects
+    paginationScoped: { [key: string]: BehaviorSubject<GridData<IamUser> | null>; } = {};
+    userScoped: { [key: string]: BehaviorSubject<IamUser | null>; } = {};
+    usersScoped: { [key: string]: BehaviorSubject<IamUser[] | null>; } = {};
+
     constructor(
         private readonly graphqlService: GraphQLService,
     ) {}
@@ -36,17 +41,73 @@ export class UserService
         return this.usersSubject$.asObservable();
     }
 
+    // allows to store different types of pagination under different scopes this allows us
+    // to have multiple observables with different streams of pagination data.
+    setScopePagination(scope: string, pagination: GridData<IamUser>): void
+    {
+        if (this.paginationScoped[scope])
+        {
+            this.paginationScoped[scope].next(pagination);
+            return;
+        }
+        // create new subject if not exist
+        this.paginationScoped[scope] = new BehaviorSubject(pagination);
+    }
+
+    // get pagination observable by scope
+    getScopePagination(scope: string): Observable<GridData<IamUser>>
+    {
+        if (this.paginationScoped[scope]) return this.paginationScoped[scope].asObservable();
+        return null;
+    }
+
+    setScopeUser(scope: string, object: IamUser): void
+    {
+        if (this.userScoped[scope])
+        {
+            this.userScoped[scope].next(object);
+            return;
+        }
+        // create new subject if not exist
+        this.userScoped[scope] = new BehaviorSubject(object);
+    }
+
+    getScopeUser(scope: string): Observable<IamUser>
+    {
+        if (this.userScoped[scope]) return this.userScoped[scope].asObservable();
+        return null;
+    }
+
+    setScopeUsers(scope: string, objects: IamUser[]): void
+    {
+        if (this.usersScoped[scope])
+        {
+            this.usersScoped[scope].next(objects);
+            return;
+        }
+        // create new subject if not exist
+        this.usersScoped[scope] = new BehaviorSubject(objects);
+    }
+
+    getScopeUsers(scope: string): Observable<IamUser[]>
+    {
+        if (this.usersScoped[scope]) return this.usersScoped[scope].asObservable();
+        return null;
+    }
+
     pagination(
         {
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<GridData<IamUser>>
     {
@@ -67,7 +128,7 @@ export class UserService
             .pipe(
                 first(),
                 map(result => result.data.pagination),
-                tap(pagination => this.paginationSubject$.next(pagination)),
+                tap(pagination => scope ? this.setScopePagination(scope, pagination) : this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -77,11 +138,13 @@ export class UserService
             id = '',
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamUser;
@@ -105,10 +168,7 @@ export class UserService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.userSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopeUser(scope, data.object) : this.userSubject$.next(data.object)),
             );
     }
 
@@ -118,11 +178,13 @@ export class UserService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamUser;
@@ -146,10 +208,7 @@ export class UserService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.userSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopeUser(scope, data.object) : this.userSubject$.next(data.object)),
             );
     }
 
@@ -159,11 +218,13 @@ export class UserService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         objects: IamUser[];
@@ -187,10 +248,7 @@ export class UserService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.usersSubject$.next(data.objects);
-                }),
+                tap(data => scope ? this.setScopeUsers(scope, data.objects) : this.usersSubject$.next(data.objects)),
             );
     }
 

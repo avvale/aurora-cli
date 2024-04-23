@@ -7,8 +7,9 @@ export const fields = `
     avatar
     mobile
     langId
-    username
     password
+    isTwoFactorAuthenticationEnabled
+    twoFactorAuthenticationSecret
     rememberToken
     meta
     createdAt

@@ -90,7 +90,7 @@
                     delete: t('Delete')
                 }"
             >
-                @for(columnConfig of originColumnsConfig; track columnConfig.field)
+                @for (columnConfig of originColumnsConfig; track columnConfig.field)
                 {
                     <au-grid-column-translation [field]="columnConfig.field">
                         {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}

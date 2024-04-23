@@ -4,6 +4,8 @@ import { IamAccount } from '@apps/iam/iam.types';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
+export const accountMainGridListId = 'iam::account.list.mainGridList';
+
 @Component({
     selector       : 'iam-account-list',
     templateUrl    : './account-list.component.html',
@@ -23,7 +25,7 @@ export class AccountListComponent extends ViewBaseComponent
         { translation: 'App', routerLink: ['/']},
         { translation: 'iam.Accounts' },
     ];
-    gridId: string = 'iam::account.list.mainGridList';
+    gridId: string = accountMainGridListId;
     gridData$: Observable<GridData<IamAccount>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;

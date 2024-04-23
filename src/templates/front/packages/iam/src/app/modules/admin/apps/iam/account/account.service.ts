@@ -52,9 +52,8 @@ export class AccountService
         return this.accountsSubject$.asObservable();
     }
 
-    // allows to store different types of pagination under different scopes
-    // this allows us to have multiple observables with different streams of
-    // pagination data.
+    // allows to store different types of pagination under different scopes this allows us
+    // to have multiple observables with different streams of pagination data.
     setScopePagination(scope: string, pagination: GridData<IamAccount>): void
     {
         if (this.paginationScoped[scope])

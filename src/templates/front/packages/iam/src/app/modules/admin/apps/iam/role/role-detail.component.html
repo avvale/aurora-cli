@@ -159,12 +159,14 @@
                                 close: t('Close')
                             }"
                         >
-                            <au-grid-column-translation
-                                *ngFor="let columnConfig of originStagesColumnsConfig"
-                                [field]="columnConfig.field"
-                            >
-                                {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
-                            </au-grid-column-translation>
+                            @for (columnConfig of permissionsOriginColumnsConfig; track permissionsOriginColumnsConfig.field)
+                            {
+                                <au-grid-column-translation
+                                    [field]="columnConfig.field"
+                                >
+                                    {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                                </au-grid-column-translation>
+                            }
                         </au-grid-translations>
                         <ng-template
                             auGridSelectMultipleCustomHeaderTemplate
