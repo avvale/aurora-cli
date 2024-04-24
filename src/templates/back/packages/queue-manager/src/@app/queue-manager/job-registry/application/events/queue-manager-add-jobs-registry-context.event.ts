@@ -1,4 +1,4 @@
-import { QueueManagerCreatedJobRegistryEvent, QueueManagerCreatedJobsRegistryEvent, QueueManagerDeletedJobRegistryEvent, QueueManagerDeletedJobsRegistryEvent, QueueManagerJobRegistry, QueueManagerUpdatedJobRegistryEvent, QueueManagerUpdatedJobsRegistryEvent } from '@app/queue-manager/job-registry';
+import { QueueManagerCreatedJobRegistryEvent, QueueManagerCreatedJobsRegistryEvent, QueueManagerDeletedJobRegistryEvent, QueueManagerDeletedJobsRegistryEvent, QueueManagerJobRegistry, QueueManagerUpdatedAndIncrementedJobRegistryEvent, QueueManagerUpdatedAndIncrementedJobsRegistryEvent, QueueManagerUpdatedJobRegistryEvent, QueueManagerUpdatedJobsRegistryEvent } from '@app/queue-manager/job-registry';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class QueueManagerAddJobsRegistryContextEvent extends AggregateRoot
@@ -42,6 +42,27 @@ export class QueueManagerAddJobsRegistryContextEvent extends AggregateRoot
             new QueueManagerUpdatedJobsRegistryEvent(
                 this.aggregateRoots.map(jobRegistry =>
                     new QueueManagerUpdatedJobRegistryEvent(
+                        jobRegistry.id.value,
+                        jobRegistry.queueName.value,
+                        jobRegistry.state.value,
+                        jobRegistry.jobId.value,
+                        jobRegistry.jobName?.value,
+                        jobRegistry.tags?.value,
+                        jobRegistry.createdAt?.value,
+                        jobRegistry.updatedAt?.value,
+                        jobRegistry.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new QueueManagerUpdatedAndIncrementedJobsRegistryEvent(
+                this.aggregateRoots.map(jobRegistry =>
+                    new QueueManagerUpdatedAndIncrementedJobRegistryEvent(
                         jobRegistry.id.value,
                         jobRegistry.queueName.value,
                         jobRegistry.state.value,

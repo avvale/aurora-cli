@@ -20,7 +20,6 @@ import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 			fields: ['tags'],
 			unique: false,
 		},
-
     ],
 })
 export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryModel>

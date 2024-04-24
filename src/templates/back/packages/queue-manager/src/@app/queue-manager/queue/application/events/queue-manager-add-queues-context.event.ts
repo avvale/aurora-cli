@@ -1,4 +1,4 @@
-import { QueueManagerCreatedQueueEvent, QueueManagerCreatedQueuesEvent, QueueManagerDeletedQueueEvent, QueueManagerDeletedQueuesEvent, QueueManagerQueue, QueueManagerUpdatedQueueEvent, QueueManagerUpdatedQueuesEvent } from '@app/queue-manager/queue';
+import { QueueManagerCreatedQueueEvent, QueueManagerCreatedQueuesEvent, QueueManagerDeletedQueueEvent, QueueManagerDeletedQueuesEvent, QueueManagerQueue, QueueManagerUpdatedAndIncrementedQueueEvent, QueueManagerUpdatedAndIncrementedQueuesEvent, QueueManagerUpdatedQueueEvent, QueueManagerUpdatedQueuesEvent } from '@app/queue-manager/queue';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class QueueManagerAddQueuesContextEvent extends AggregateRoot
@@ -39,6 +39,24 @@ export class QueueManagerAddQueuesContextEvent extends AggregateRoot
             new QueueManagerUpdatedQueuesEvent(
                 this.aggregateRoots.map(queue =>
                     new QueueManagerUpdatedQueueEvent(
+                        queue.id.value,
+                        queue.prefix.value,
+                        queue.name.value,
+                        queue.createdAt?.value,
+                        queue.updatedAt?.value,
+                        queue.deletedAt?.value,
+                    ),
+                ),
+            ),
+        );
+    }
+
+    updatedAndIncremented(): void
+    {
+        this.apply(
+            new QueueManagerUpdatedAndIncrementedQueuesEvent(
+                this.aggregateRoots.map(queue =>
+                    new QueueManagerUpdatedAndIncrementedQueueEvent(
                         queue.id.value,
                         queue.prefix.value,
                         queue.name.value,

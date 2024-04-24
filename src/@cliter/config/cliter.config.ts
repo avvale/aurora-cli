@@ -290,6 +290,7 @@ export const cliterConfig: CliterConfig =
     skipDirectories             : ['node_modules', 'dist', 'coverage', 'cliter'],
     avoidOverwritingFilesIfExist: [
         path.join('back', '@app', 'index.ts'),
+        path.join('back', '@app', 'public-api.ts'),
         path.join('back', '@api', '__bounded_context_name__.module.ts'),
         path.join('front', 'module', '__bounded_context_name__.navigation.ts'),
         path.join('front', 'module', '__bounded_context_name__.module.ts'),

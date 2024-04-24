@@ -10,7 +10,6 @@ aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
   - name: queueName
     type: varchar

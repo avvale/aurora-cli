@@ -9,11 +9,15 @@ import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
     timestamps: false,
     indexes: [
 		{
-			fields: ['prefix', 'name'],
+			fields: ['prefix'],
 			unique: true,
 			name: 'uniquePrefixName',
 		},
-
+		{
+			fields: ['name'],
+			unique: true,
+			name: 'uniquePrefixName',
+		},
     ],
 })
 export class QueueManagerQueueModel extends Model<QueueManagerQueueModel>
