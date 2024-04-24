@@ -71,6 +71,7 @@ export class WhatsappMessageModel extends Model<WhatsappMessageModel>
     accountId: string;
 
     @BelongsTo(() => IamAccountModel, {
+        constraints: false,
         foreignKey: 'accountId',
     })
     account: IamAccountModel;

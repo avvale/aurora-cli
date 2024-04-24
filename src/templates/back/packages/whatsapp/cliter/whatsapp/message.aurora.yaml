@@ -39,6 +39,7 @@ aggregateProperties:
       aggregateName: IamAccount
       modulePath: iam/account
       field: account
+      avoidConstraint: true
     index: index
   - name: displayPhoneNumber
     type: varchar

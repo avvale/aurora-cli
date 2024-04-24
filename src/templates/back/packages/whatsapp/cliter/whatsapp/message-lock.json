@@ -267,7 +267,7 @@
         },
         {
             "path": "src/@app/whatsapp/message/application/min/whatsapp-min-message.service.ts",
-            "integrity": "sha1:dd9f852ab2f6598eefb26a03b78272cd99b49f40"
+            "integrity": "sha1:af8dd59dbae509074895c36dddaee4df5852385f"
         },
         {
             "path": "src/@app/whatsapp/message/application/paginate/whatsapp-paginate-messages.query-handler.spec.ts",
@@ -331,7 +331,7 @@
         },
         {
             "path": "src/@app/whatsapp/message/application/sum/whatsapp-sum-message.service.ts",
-            "integrity": "sha1:43aac319c2c17679c7e40438a8f3ad3eb5ccffce"
+            "integrity": "sha1:a68aa2a2666689b8c6f5a04dc8371945d791b169"
         },
         {
             "path": "src/@app/whatsapp/message/application/update/whatsapp-update-message-by-id.command-handler.spec.ts",
@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@app/whatsapp/message/infrastructure/mock/whatsapp-mock-message.data.ts",
-            "integrity": "sha1:8b8ea229217219bc731c5a49415539b803b34d14"
+            "integrity": "sha1:dc8be0c1f55b13645a4c5550e13d58b2ea5ee966"
         },
         {
             "path": "src/@app/whatsapp/message/infrastructure/mock/whatsapp-mock-message.repository.ts",
@@ -451,11 +451,15 @@
         },
         {
             "path": "src/@app/whatsapp/message/infrastructure/sequelize/whatsapp-sequelize-message.model.ts",
-            "integrity": "sha1:ec721066f32f4e6f337da32860e81946a61081ef"
+            "integrity": "sha1:163498a835ae5c8b7aa6cbebd98415f9fb549068"
         },
         {
             "path": "src/@app/whatsapp/message/infrastructure/sequelize/whatsapp-sequelize-message.repository.ts",
             "integrity": "sha1:536b03c3cc4b33510be2f2514fb4ef387a82cb14"
+        },
+        {
+            "path": "src/@app/whatsapp/public-api.ts",
+            "integrity": "sha1:1b4ec5e57023709942ee9e2ff163f26923b03fe3"
         },
         {
             "path": "src/@app/whatsapp/message/domain/value-objects/whatsapp-message-id.ts",
@@ -815,7 +819,7 @@
         },
         {
             "path": "postman/whatsapp/whatsapp.message.postman.json",
-            "integrity": "sha1:e3633c6c00b7cde4bbbae6233b11f78f70229b78"
+            "integrity": "sha1:193f1f7fd22254de7cfecb3afefa26d802e1b292"
         }
     ]
 }

@@ -267,7 +267,7 @@
         },
         {
             "path": "src/@app/whatsapp/conversation/application/min/whatsapp-min-conversation.service.ts",
-            "integrity": "sha1:1e97647225a7c41451c9fc39cc0a3cf498b6deb3"
+            "integrity": "sha1:d516b1a5150756c99c138ab209725425eb869731"
         },
         {
             "path": "src/@app/whatsapp/conversation/application/paginate/whatsapp-paginate-conversations.query-handler.spec.ts",
@@ -331,7 +331,7 @@
         },
         {
             "path": "src/@app/whatsapp/conversation/application/sum/whatsapp-sum-conversation.service.ts",
-            "integrity": "sha1:856212e06aac6511fe49855905d8de976dfd3fdc"
+            "integrity": "sha1:8fe7805c8b657dd695204ed5b29b0c5eb3f25f55"
         },
         {
             "path": "src/@app/whatsapp/conversation/application/update/whatsapp-update-conversation-by-id.command-handler.spec.ts",
@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@app/whatsapp/conversation/infrastructure/mock/whatsapp-mock-conversation.data.ts",
-            "integrity": "sha1:127251629788885db2fd6d070b81c136fe5cca33"
+            "integrity": "sha1:bf39dc1c26fc53d32ddc14d0602d1a46cb934967"
         },
         {
             "path": "src/@app/whatsapp/conversation/infrastructure/mock/whatsapp-mock-conversation.repository.ts",
@@ -456,10 +456,6 @@
         {
             "path": "src/@app/whatsapp/conversation/infrastructure/sequelize/whatsapp-sequelize-conversation.repository.ts",
             "integrity": "sha1:af3338cf2ae9aa04c83de229943ef11edbfff6ad"
-        },
-        {
-            "path": "src/@app/whatsapp/index.ts",
-            "integrity": "sha1:40cb1394f82f6ea60dacef09ad1fb0cefa339b36"
         },
         {
             "path": "src/@app/whatsapp/conversation/domain/value-objects/whatsapp-conversation-id.ts",
@@ -791,7 +787,7 @@
         },
         {
             "path": "postman/whatsapp/whatsapp.conversation.postman.json",
-            "integrity": "sha1:5b40fbda3e0822f0dee88a97cefef68129824be9"
+            "integrity": "sha1:05b3230c65506496a067ee41484524e484276cb0"
         }
     ]
 }
