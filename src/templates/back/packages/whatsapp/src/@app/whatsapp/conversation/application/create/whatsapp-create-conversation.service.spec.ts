@@ -2,8 +2,14 @@
 import { WhatsappIConversationRepository, whatsappMockConversationData, WhatsappMockConversationRepository } from '@app/whatsapp/conversation';
 import { WhatsappCreateConversationService } from '@app/whatsapp/conversation/application/create/whatsapp-create-conversation.service';
 import {
-    WhatsappConversationAccounts,
+    WhatsappConversationCategory,
+    WhatsappConversationExpiration,
     WhatsappConversationId,
+    WhatsappConversationIsBillable,
+    WhatsappConversationPricingModel,
+    WhatsappConversationTimelineId,
+    WhatsappConversationWabaContactId,
+    WhatsappConversationWabaConversationId,
 } from '@app/whatsapp/conversation/domain/value-objects';
 import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -49,7 +55,13 @@ describe('WhatsappCreateConversationService', () =>
                 await service.main(
                     {
                         id: new WhatsappConversationId(whatsappMockConversationData[0].id),
-                        accounts: new WhatsappConversationAccounts(whatsappMockConversationData[0].accounts),
+                        wabaConversationId: new WhatsappConversationWabaConversationId(whatsappMockConversationData[0].wabaConversationId),
+                        timelineId: new WhatsappConversationTimelineId(whatsappMockConversationData[0].timelineId),
+                        wabaContactId: new WhatsappConversationWabaContactId(whatsappMockConversationData[0].wabaContactId),
+                        expiration: new WhatsappConversationExpiration(whatsappMockConversationData[0].expiration),
+                        category: new WhatsappConversationCategory(whatsappMockConversationData[0].category),
+                        isBillable: new WhatsappConversationIsBillable(whatsappMockConversationData[0].isBillable),
+                        pricingModel: new WhatsappConversationPricingModel(whatsappMockConversationData[0].pricingModel),
                     },
                 ),
             )

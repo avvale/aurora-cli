@@ -2,12 +2,14 @@ export class WhatsappUpdatedAndIncrementedMessageEvent
 {
     constructor(
         public readonly id: string,
-        public readonly whatsappMessageId: string,
+        public readonly wabaMessageId: string,
+        public readonly timelineId: string,
         public readonly conversationId: string,
+        public readonly statuses: string[],
         public readonly direction: string,
         public readonly accountId: string,
-        public readonly displayPhoneNumber: string,
-        public readonly phoneNumberId: string,
+        public readonly wabaContactId: string,
+        public readonly contactName: string,
         public readonly type: string,
         public readonly payload: any,
         public readonly createdAt: string,

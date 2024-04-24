@@ -1,10 +1,16 @@
 import { WhatsappConversation, WhatsappIConversationRepository, whatsappMockConversationData } from '@app/whatsapp/conversation';
 import {
-    WhatsappConversationAccounts,
+    WhatsappConversationCategory,
     WhatsappConversationCreatedAt,
     WhatsappConversationDeletedAt,
+    WhatsappConversationExpiration,
     WhatsappConversationId,
+    WhatsappConversationIsBillable,
+    WhatsappConversationPricingModel,
+    WhatsappConversationTimelineId,
     WhatsappConversationUpdatedAt,
+    WhatsappConversationWabaContactId,
+    WhatsappConversationWabaConversationId,
 } from '@app/whatsapp/conversation/domain/value-objects';
 import { MockRepository, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -40,7 +46,13 @@ export class WhatsappMockConversationRepository extends MockRepository<WhatsappC
 
             this.collectionSource.push(WhatsappConversation.register(
                 new WhatsappConversationId(itemCollection.id),
-                new WhatsappConversationAccounts(itemCollection.accounts),
+                new WhatsappConversationWabaConversationId(itemCollection.wabaConversationId),
+                new WhatsappConversationTimelineId(itemCollection.timelineId),
+                new WhatsappConversationWabaContactId(itemCollection.wabaContactId),
+                new WhatsappConversationExpiration(itemCollection.expiration),
+                new WhatsappConversationCategory(itemCollection.category),
+                new WhatsappConversationIsBillable(itemCollection.isBillable),
+                new WhatsappConversationPricingModel(itemCollection.pricingModel),
                 new WhatsappConversationCreatedAt(itemCollection.createdAt),
                 new WhatsappConversationUpdatedAt(itemCollection.updatedAt),
                 new WhatsappConversationDeletedAt(itemCollection.deletedAt),

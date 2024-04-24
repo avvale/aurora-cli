@@ -22,7 +22,13 @@ export class WhatsappAddConversationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(conversation =>
                     new WhatsappCreatedConversationEvent(
                         conversation.id.value,
-                        conversation.accounts?.value,
+                        conversation.wabaConversationId.value,
+                        conversation.timelineId.value,
+                        conversation.wabaContactId.value,
+                        conversation.expiration.value,
+                        conversation.category.value,
+                        conversation.isBillable.value,
+                        conversation.pricingModel.value,
                         conversation.createdAt?.value,
                         conversation.updatedAt?.value,
                         conversation.deletedAt?.value,
@@ -39,7 +45,13 @@ export class WhatsappAddConversationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(conversation =>
                     new WhatsappUpdatedConversationEvent(
                         conversation.id.value,
-                        conversation.accounts?.value,
+                        conversation.wabaConversationId.value,
+                        conversation.timelineId.value,
+                        conversation.wabaContactId.value,
+                        conversation.expiration.value,
+                        conversation.category.value,
+                        conversation.isBillable.value,
+                        conversation.pricingModel.value,
                         conversation.createdAt?.value,
                         conversation.updatedAt?.value,
                         conversation.deletedAt?.value,
@@ -56,7 +68,13 @@ export class WhatsappAddConversationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(conversation =>
                     new WhatsappUpdatedAndIncrementedConversationEvent(
                         conversation.id.value,
-                        conversation.accounts?.value,
+                        conversation.wabaConversationId.value,
+                        conversation.timelineId.value,
+                        conversation.wabaContactId.value,
+                        conversation.expiration.value,
+                        conversation.category.value,
+                        conversation.isBillable.value,
+                        conversation.pricingModel.value,
                         conversation.createdAt?.value,
                         conversation.updatedAt?.value,
                         conversation.deletedAt?.value,
@@ -73,7 +91,13 @@ export class WhatsappAddConversationsContextEvent extends AggregateRoot
                 this.aggregateRoots.map(conversation =>
                     new WhatsappDeletedConversationEvent(
                         conversation.id.value,
-                        conversation.accounts?.value,
+                        conversation.wabaConversationId.value,
+                        conversation.timelineId.value,
+                        conversation.wabaContactId.value,
+                        conversation.expiration.value,
+                        conversation.category.value,
+                        conversation.isBillable.value,
+                        conversation.pricingModel.value,
                         conversation.createdAt?.value,
                         conversation.updatedAt?.value,
                         conversation.deletedAt?.value,

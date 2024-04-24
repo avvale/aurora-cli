@@ -1,17 +1,19 @@
 import { WhatsappMessage, whatsappMockMessageData } from '@app/whatsapp/message';
 import {
     WhatsappMessageAccountId,
+    WhatsappMessageContactName,
     WhatsappMessageConversationId,
     WhatsappMessageCreatedAt,
     WhatsappMessageDeletedAt,
     WhatsappMessageDirection,
-    WhatsappMessageDisplayPhoneNumber,
     WhatsappMessageId,
     WhatsappMessagePayload,
-    WhatsappMessagePhoneNumberId,
+    WhatsappMessageStatuses,
+    WhatsappMessageTimelineId,
     WhatsappMessageType,
     WhatsappMessageUpdatedAt,
-    WhatsappMessageWhatsappMessageId,
+    WhatsappMessageWabaContactId,
+    WhatsappMessageWabaMessageId,
 } from '@app/whatsapp/message/domain/value-objects';
 import { MockSeeder } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -37,12 +39,14 @@ export class WhatsappMockMessageSeeder extends MockSeeder<WhatsappMessage>
             this.collectionSource.push(
                 WhatsappMessage.register(
                     new WhatsappMessageId(message.id),
-                    new WhatsappMessageWhatsappMessageId(message.whatsappMessageId),
+                    new WhatsappMessageWabaMessageId(message.wabaMessageId),
+                    new WhatsappMessageTimelineId(message.timelineId),
                     new WhatsappMessageConversationId(message.conversationId),
+                    new WhatsappMessageStatuses(message.statuses),
                     new WhatsappMessageDirection(message.direction),
                     new WhatsappMessageAccountId(message.accountId),
-                    new WhatsappMessageDisplayPhoneNumber(message.displayPhoneNumber),
-                    new WhatsappMessagePhoneNumberId(message.phoneNumberId),
+                    new WhatsappMessageWabaContactId(message.wabaContactId),
+                    new WhatsappMessageContactName(message.contactName),
                     new WhatsappMessageType(message.type),
                     new WhatsappMessagePayload(message.payload),
                     new WhatsappMessageCreatedAt({ currentTimestamp: true }),

@@ -1,6 +1,6 @@
 import * as crypto from 'crypto';
 
-const WHATSAPP_WEBHOOK_TOKEN: string = process.env.WHATSAPP_WEBHOOK_TOKEN;
+const WHATSAPP_APPLICATION_SECRET_KEY: string = process.env.WHATSAPP_APPLICATION_SECRET_KEY;
 
 export const verifyWebhookSignature = (
     xHubSignature256: string,
@@ -10,12 +10,19 @@ export const verifyWebhookSignature = (
     if (!xHubSignature256) return false;
 
     const signature = crypto
-        .createHmac('sha256', WHATSAPP_WEBHOOK_TOKEN)
+        .createHmac('sha256', WHATSAPP_APPLICATION_SECRET_KEY)
         .update(JSON.stringify(payload))
         .digest('hex');
 
-    const trusted = Buffer.from(`sha256=${signature}`, 'ascii');
-    const untrusted =  Buffer.from(xHubSignature256, 'ascii');
+    try
+    {
+        const trusted = Buffer.from(signature, 'utf8');
+        const untrusted = Buffer.from(xHubSignature256.replace('sha256=', ''), 'utf8');
 
-    return crypto.timingSafeEqual(trusted, untrusted);
+        return crypto.timingSafeEqual(trusted, untrusted);
+    }
+    catch (error)
+    {
+        return false;
+    }
 };

@@ -1,0 +1,84 @@
+
+type WhatsappTimeline
+{
+    id: ID!
+    accounts: [ID]
+    wabaPhoneNumberId: GraphQLString!
+    wabaContactId: GraphQLString!
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input WhatsappCreateTimelineInput
+{
+    id: ID!
+    accounts: [ID]
+    wabaPhoneNumberId: GraphQLString!
+    wabaContactId: GraphQLString!
+}
+
+input WhatsappUpdateTimelineByIdInput
+{
+    id: ID!
+    accounts: [ID]
+    wabaPhoneNumberId: GraphQLString
+    wabaContactId: GraphQLString
+}
+
+input WhatsappUpdateTimelinesInput
+{
+    id: ID
+    accounts: [ID]
+    wabaPhoneNumberId: GraphQLString
+    wabaContactId: GraphQLString
+}
+
+type Query
+{
+    whatsappFindTimeline(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): WhatsappTimeline
+
+    whatsappFindTimelineById(
+        id: ID
+        constraint: QueryStatement
+    ): WhatsappTimeline
+
+    whatsappGetTimelines(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappTimeline]!
+
+    whatsappPaginateTimelines(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    whatsappUpdateTimelineById(
+        payload: WhatsappUpdateTimelineByIdInput!
+        constraint: QueryStatement
+    ): WhatsappTimeline
+
+    whatsappUpdateTimelines(
+        payload: WhatsappUpdateTimelinesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappTimeline]!
+
+    whatsappDeleteTimelineById(
+        id: ID!
+        constraint: QueryStatement
+    ): WhatsappTimeline
+
+    whatsappDeleteTimelines(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [WhatsappTimeline]!
+
+}

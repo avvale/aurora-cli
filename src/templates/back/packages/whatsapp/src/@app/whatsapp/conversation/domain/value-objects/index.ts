@@ -1,5 +1,11 @@
-export { WhatsappConversationAccounts } from './whatsapp-conversation-accounts';
+export { WhatsappConversationCategory } from './whatsapp-conversation-category';
 export { WhatsappConversationCreatedAt } from './whatsapp-conversation-created-at';
 export { WhatsappConversationDeletedAt } from './whatsapp-conversation-deleted-at';
+export { WhatsappConversationExpiration } from './whatsapp-conversation-expiration';
 export { WhatsappConversationId } from './whatsapp-conversation-id';
+export { WhatsappConversationIsBillable } from './whatsapp-conversation-is-billable';
+export { WhatsappConversationPricingModel } from './whatsapp-conversation-pricing-model';
+export { WhatsappConversationTimelineId } from './whatsapp-conversation-timeline-id';
 export { WhatsappConversationUpdatedAt } from './whatsapp-conversation-updated-at';
+export { WhatsappConversationWabaContactId } from './whatsapp-conversation-waba-contact-id';
+export { WhatsappConversationWabaConversationId } from './whatsapp-conversation-waba-conversation-id';

@@ -3,18 +3,21 @@ import { WhatsappConversationMapper } from '@app/whatsapp/conversation';
 import { WhatsappMessage, WhatsappMessageResponse } from '@app/whatsapp/message';
 import {
     WhatsappMessageAccountId,
+    WhatsappMessageContactName,
     WhatsappMessageConversationId,
     WhatsappMessageCreatedAt,
     WhatsappMessageDeletedAt,
     WhatsappMessageDirection,
-    WhatsappMessageDisplayPhoneNumber,
     WhatsappMessageId,
     WhatsappMessagePayload,
-    WhatsappMessagePhoneNumberId,
+    WhatsappMessageStatuses,
+    WhatsappMessageTimelineId,
     WhatsappMessageType,
     WhatsappMessageUpdatedAt,
-    WhatsappMessageWhatsappMessageId,
+    WhatsappMessageWabaContactId,
+    WhatsappMessageWabaMessageId,
 } from '@app/whatsapp/message/domain/value-objects';
+import { WhatsappTimelineMapper } from '@app/whatsapp/timeline';
 import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
 
 export class WhatsappMessageMapper implements IMapper
@@ -69,18 +72,21 @@ export class WhatsappMessageMapper implements IMapper
     {
         return WhatsappMessage.register(
             new WhatsappMessageId(message.id, { undefinable: true }),
-            new WhatsappMessageWhatsappMessageId(message.whatsappMessageId, { undefinable: true }),
+            new WhatsappMessageWabaMessageId(message.wabaMessageId, { undefinable: true }),
+            new WhatsappMessageTimelineId(message.timelineId, { undefinable: true }),
             new WhatsappMessageConversationId(message.conversationId, { undefinable: true }),
+            new WhatsappMessageStatuses(message.statuses, { undefinable: true }),
             new WhatsappMessageDirection(message.direction, { undefinable: true }),
             new WhatsappMessageAccountId(message.accountId, { undefinable: true }),
-            new WhatsappMessageDisplayPhoneNumber(message.displayPhoneNumber, { undefinable: true }),
-            new WhatsappMessagePhoneNumberId(message.phoneNumberId, { undefinable: true }),
+            new WhatsappMessageWabaContactId(message.wabaContactId, { undefinable: true }),
+            new WhatsappMessageContactName(message.contactName, { undefinable: true }),
             new WhatsappMessageType(message.type, { undefinable: true }),
             new WhatsappMessagePayload(message.payload, { undefinable: true }),
             new WhatsappMessageCreatedAt(message.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new WhatsappMessageUpdatedAt(message.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             new WhatsappMessageDeletedAt(message.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
             this.options.eagerLoading ? new IamAccountMapper({ eagerLoading: true }).mapModelToAggregate(message.account, cQMetadata) : undefined,
+            this.options.eagerLoading ? new WhatsappTimelineMapper({ eagerLoading: true }).mapModelToAggregate(message.timeline, cQMetadata) : undefined,
             this.options.eagerLoading ? new WhatsappConversationMapper({ eagerLoading: true }).mapModelToAggregate(message.conversation, cQMetadata) : undefined,
         );
     }
@@ -91,18 +97,21 @@ export class WhatsappMessageMapper implements IMapper
 
         return new WhatsappMessageResponse(
             message.id.value,
-            message.whatsappMessageId.value,
+            message.wabaMessageId.value,
+            message.timelineId.value,
             message.conversationId.value,
+            message.statuses.value,
             message.direction.value,
             message.accountId.value,
-            message.displayPhoneNumber.value,
-            message.phoneNumberId.value,
+            message.wabaContactId.value,
+            message.contactName.value,
             message.type.value,
             message.payload.value,
             message.createdAt.value,
             message.updatedAt.value,
             message.deletedAt.value,
             this.options.eagerLoading ? new IamAccountMapper({ eagerLoading: true }).mapAggregateToResponse(message.account) : undefined,
+            this.options.eagerLoading ? new WhatsappTimelineMapper({ eagerLoading: true }).mapAggregateToResponse(message.timeline) : undefined,
             this.options.eagerLoading ? new WhatsappConversationMapper({ eagerLoading: true }).mapAggregateToResponse(message.conversation) : undefined,
         );
     }

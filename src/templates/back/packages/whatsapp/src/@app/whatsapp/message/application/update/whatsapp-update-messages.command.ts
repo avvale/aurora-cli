@@ -5,12 +5,14 @@ export class WhatsappUpdateMessagesCommand
     constructor(
         public readonly payload: {
             id?: string;
-            whatsappMessageId?: string;
+            wabaMessageId?: string;
+            timelineId?: string;
             conversationId?: string;
+            statuses?: string[];
             direction?: string;
             accountId?: string;
-            displayPhoneNumber?: string;
-            phoneNumberId?: string;
+            wabaContactId?: string;
+            contactName?: string;
             type?: string;
             payload?: any;
         },

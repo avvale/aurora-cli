@@ -8,8 +8,8 @@ export class WhatsappMessageConversationId extends UuidValueObject
     {
         super(value, Object.assign({
             name       : 'WhatsappMessageConversationId',
-            nullable   : false,
-            undefinable: false,
+            nullable   : true,
+            undefinable: true,
             length     : 36,
         }, validationRules), data);
     }

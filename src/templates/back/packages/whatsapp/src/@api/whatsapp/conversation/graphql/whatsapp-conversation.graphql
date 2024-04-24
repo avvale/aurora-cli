@@ -2,7 +2,14 @@
 type WhatsappConversation
 {
     id: ID!
-    accounts: [ID]
+    wabaConversationId: GraphQLString!
+    timelineId: ID!
+    timeline: WhatsappTimeline
+    wabaContactId: GraphQLString!
+    expiration: GraphQLString!
+    category: GraphQLString!
+    isBillable: GraphQLBoolean!
+    pricingModel: GraphQLString!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
@@ -11,19 +18,37 @@ type WhatsappConversation
 input WhatsappCreateConversationInput
 {
     id: ID!
-    accounts: [ID]
+    wabaConversationId: GraphQLString!
+    timelineId: ID!
+    wabaContactId: GraphQLString!
+    expiration: GraphQLString!
+    category: GraphQLString!
+    isBillable: GraphQLBoolean!
+    pricingModel: GraphQLString!
 }
 
 input WhatsappUpdateConversationByIdInput
 {
     id: ID!
-    accounts: [ID]
+    wabaConversationId: GraphQLString
+    timelineId: ID
+    wabaContactId: GraphQLString
+    expiration: GraphQLString
+    category: GraphQLString
+    isBillable: GraphQLBoolean
+    pricingModel: GraphQLString
 }
 
 input WhatsappUpdateConversationsInput
 {
     id: ID
-    accounts: [ID]
+    wabaConversationId: GraphQLString
+    timelineId: ID
+    wabaContactId: GraphQLString
+    expiration: GraphQLString
+    category: GraphQLString
+    isBillable: GraphQLBoolean
+    pricingModel: GraphQLString
 }
 
 type Query
@@ -52,14 +77,6 @@ type Query
 
 type Mutation
 {
-    whatsappCreateConversation(
-        payload: WhatsappCreateConversationInput!
-    ): WhatsappConversation
-
-    whatsappCreateConversations(
-        payload: [WhatsappCreateConversationInput]!
-    ): Boolean!
-
     whatsappUpdateConversationById(
         payload: WhatsappUpdateConversationByIdInput!
         constraint: QueryStatement
@@ -70,10 +87,6 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [WhatsappConversation]!
-
-    whatsappUpsertConversation(
-        payload: WhatsappUpdateConversationByIdInput!
-    ): WhatsappConversation
 
     whatsappDeleteConversationById(
         id: ID!

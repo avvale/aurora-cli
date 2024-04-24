@@ -1,10 +1,16 @@
 import { WhatsappAddConversationsContextEvent, WhatsappConversation, WhatsappIConversationRepository } from '@app/whatsapp/conversation';
 import {
-    WhatsappConversationAccounts,
+    WhatsappConversationCategory,
     WhatsappConversationCreatedAt,
     WhatsappConversationDeletedAt,
+    WhatsappConversationExpiration,
     WhatsappConversationId,
+    WhatsappConversationIsBillable,
+    WhatsappConversationPricingModel,
+    WhatsappConversationTimelineId,
     WhatsappConversationUpdatedAt,
+    WhatsappConversationWabaContactId,
+    WhatsappConversationWabaConversationId,
 } from '@app/whatsapp/conversation/domain/value-objects';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -21,7 +27,13 @@ export class WhatsappCreateConversationsService
     async main(
         payload: {
             id: WhatsappConversationId;
-            accounts: WhatsappConversationAccounts;
+            wabaConversationId: WhatsappConversationWabaConversationId;
+            timelineId: WhatsappConversationTimelineId;
+            wabaContactId: WhatsappConversationWabaContactId;
+            expiration: WhatsappConversationExpiration;
+            category: WhatsappConversationCategory;
+            isBillable: WhatsappConversationIsBillable;
+            pricingModel: WhatsappConversationPricingModel;
         } [],
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -29,7 +41,13 @@ export class WhatsappCreateConversationsService
         // create aggregate with factory pattern
         const aggregateConversations = payload.map(conversation => WhatsappConversation.register(
             conversation.id,
-            conversation.accounts,
+            conversation.wabaConversationId,
+            conversation.timelineId,
+            conversation.wabaContactId,
+            conversation.expiration,
+            conversation.category,
+            conversation.isBillable,
+            conversation.pricingModel,
             new WhatsappConversationCreatedAt({ currentTimestamp: true }),
             new WhatsappConversationUpdatedAt({ currentTimestamp: true }),
             null, // deleteAt

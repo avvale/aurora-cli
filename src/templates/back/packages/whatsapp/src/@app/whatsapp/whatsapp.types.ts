@@ -1,13 +1,7 @@
-export interface WhatsappPayload
+export interface WhatsappButton
 {
-    object: string;
-    entry: WhatsappEntry[];
-}
-
-export interface WhatsappEntry
-{
-    id: string;
-    changes: WhatsappChange[];
+    text: string;
+    payload: string;
 }
 
 export interface WhatsappChange
@@ -16,63 +10,77 @@ export interface WhatsappChange
     value: WhatsappValue;
 }
 
-export interface WhatsappValue
-{
-    messaging_product: string;
-    metadata: WhatsappMetadata;
-    contacts: WhatsappContact[];
-    messages: WhatsappMessage[];
-}
-
-export interface WhatsappMetadata
-{
-    display_phone_number: string;
-    phone_number_id: string;
-}
-
 export interface WhatsappContact
 {
     wa_id: string;
     profile: WhatsappProfile;
 }
 
-export interface WhatsappProfile
+export interface WhatsappContext
 {
-    name: string;
-}
-
-export type WhatsappMessageTypes = 'text' | 'reaction' | 'image'  | 'sticker' | 'unknown' | 'button' | 'interactive' | 'order' | 'system';
-
-export interface WhatsappMessage
-{
+    id: string;
     from: string;
+}
+
+export interface WhatsappConversation
+{
     id: string;
-    timestamp: string;
-    type: WhatsappMessageTypes;
-    reaction?: WhatsappReaction;
-    text?: WhatsappMessageText;
-    sticker?: WhatsappSticker;
-    location?: WhatsappLocation;
-    button?: WhatsappButton;
+    expiration_timestamp: string;
 }
 
-export interface WhatsappMessageText
+export interface WhatsappEntry
 {
-    body: string;
-}
-
-export interface WhatsappReaction
-{
-    message_id: string;
-    emoji: string;
-}
-
-export interface WhatsappSticker
-{
-    mime_type: string;
-    sha256: string;
     id: string;
+    changes: WhatsappChange[];
 }
+
+export interface WhatsappInteractive
+{
+    type: WhatsappInteractiveType;
+    header: WhatsappInteractiveHeader;
+    body: WhatsappInteractiveBody;
+    footer: WhatsappInteractiveFooter;
+    action: any;
+    list_reply: WhatsappInteractiveListReply;
+}
+
+export interface WhatsappInteractiveBody
+{
+    text?: string;
+}
+
+export interface WhatsappInteractiveFooter
+{
+    text?: string;
+}
+
+export interface WhatsappInteractiveHeader
+{
+    type: WhatsappInteractiveHeaderType;
+    document?: object;
+    image?: object;
+    video?: object;
+    text?: string;
+}
+
+export type WhatsappInteractiveHeaderType = 'text' | 'video' | 'image' | 'document';
+
+export interface WhatsappInteractiveListReply
+{
+    id: string;
+    title: string;
+    description: string;
+}
+
+export type WhatsappInteractiveType =
+    'button' |
+    'catalog_message' |
+    'flow' |
+    'list' |
+    'list_reply' |
+    'product_list' |
+    'product';
+
 
 export interface WhatsappLocation
 {
@@ -82,11 +90,89 @@ export interface WhatsappLocation
     address: string;
 }
 
-export interface WhatsappButton
+export interface WhatsappMessage
 {
-    text: string;
-    payload: string;
+    id: string;
+    from: string;
+    type: WhatsappMessageType;
+    reaction?: WhatsappReaction;
+    text?: WhatsappMessageText;
+    sticker?: WhatsappSticker;
+    location?: WhatsappLocation;
+    button?: WhatsappButton;
+    interactive?: WhatsappInteractive;
+    context?: WhatsappContext;
+    timestamp: string;
 }
+
+export interface WhatsappMessageText
+{
+    body: string;
+}
+
+export type WhatsappMessageType = 'button' | 'contacts' | 'image' | 'interactive' | 'location' | 'order' | 'reaction' | 'sticker' | 'system' | 'template' | 'text' | 'unknown';
+
+export interface WhatsappMetadata
+{
+    display_phone_number: string;
+    phone_number_id: string;
+}
+
+export interface WhatsappPayload
+{
+    object: string;
+    entry: WhatsappEntry[];
+}
+
+export interface WhatsappPricing
+{
+    billable: boolean;
+    pricing_model: string;
+    category: string;
+}
+
+export interface WhatsappProfile
+{
+    name: string;
+}
+
+export interface WhatsappReaction
+{
+    message_id: string;
+    emoji: string;
+}
+
+export interface WhatsappStatus
+{
+    id: string;
+    status: string;
+    timestamp: string;
+    conversation: WhatsappConversation;
+    pricing: WhatsappPricing;
+}
+
+export interface WhatsappSticker
+{
+    mime_type: string;
+    sha256: string;
+    id: string;
+}
+
+export interface WhatsappValue
+{
+    messaging_product: string;
+    metadata: WhatsappMetadata;
+    contacts: WhatsappContact[];
+    messages: WhatsappMessage[];
+    statuses: WhatsappStatus[];
+}
+
+
+
+
+
+
+
 
 
 // https://github.com/apimatic/whatsapp-typescript-sdk/tree/main/src/models
@@ -101,7 +187,6 @@ export interface ReplyButton
     type: 'reply';
     reply: Button;
 }
-
 
 import type { RequireAtLeastOne } from 'type-fest';
 

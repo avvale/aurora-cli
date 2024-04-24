@@ -2,6 +2,7 @@
 /* eslint-disable key-spacing */
 import { IamAccountModel } from '@app/iam/account';
 import { WhatsappConversationModel } from '@app/whatsapp/conversation';
+import { WhatsappTimelineModel } from '@app/whatsapp/timeline';
 import { DataTypes } from 'sequelize';
 import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
@@ -11,15 +12,15 @@ import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescrip
     timestamps: false,
     indexes: [
 		{
+			fields: ['wabaMessageId'],
+			unique: true,
+		},
+		{
 			fields: ['accountId'],
 			unique: false,
 		},
 		{
-			fields: ['displayPhoneNumber'],
-			unique: false,
-		},
-		{
-			fields: ['phoneNumberId'],
+			fields: ['wabaContactId'],
 			unique: false,
 		},
     ],
@@ -35,16 +36,30 @@ export class WhatsappMessageModel extends Model<WhatsappMessageModel>
     id: string;
 
     @Column({
-        field: 'whatsappMessageId',
+        field: 'wabaMessageId',
         allowNull: false,
-        type: DataTypes.STRING(),
+        type: DataTypes.STRING(128),
     })
-    whatsappMessageId: string;
+    wabaMessageId: string;
+
+    @ForeignKey(() => WhatsappTimelineModel)
+    @Column({
+        field: 'timelineId',
+        allowNull: false,
+        type: DataTypes.UUID,
+    })
+    timelineId: string;
+
+    @BelongsTo(() => WhatsappTimelineModel, {
+        constraints: false,
+        foreignKey: 'timelineId',
+    })
+    timeline: WhatsappTimelineModel;
 
     @ForeignKey(() => WhatsappConversationModel)
     @Column({
         field: 'conversationId',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.UUID,
     })
     conversationId: string;
@@ -54,6 +69,13 @@ export class WhatsappMessageModel extends Model<WhatsappMessageModel>
         foreignKey: 'conversationId',
     })
     conversation: WhatsappConversationModel;
+
+    @Column({
+        field: 'statuses',
+        allowNull: false,
+        type: DataTypes.ARRAY(DataTypes.ENUM('ACCEPTED','DELIVERED','READ','SENT')),
+    })
+    statuses: string[];
 
     @Column({
         field: 'direction',
@@ -71,29 +93,28 @@ export class WhatsappMessageModel extends Model<WhatsappMessageModel>
     accountId: string;
 
     @BelongsTo(() => IamAccountModel, {
-        constraints: false,
         foreignKey: 'accountId',
     })
     account: IamAccountModel;
 
     @Column({
-        field: 'displayPhoneNumber',
+        field: 'wabaContactId',
         allowNull: false,
         type: DataTypes.STRING(36),
     })
-    displayPhoneNumber: string;
+    wabaContactId: string;
 
     @Column({
-        field: 'phoneNumberId',
-        allowNull: false,
-        type: DataTypes.STRING(36),
+        field: 'contactName',
+        allowNull: true,
+        type: DataTypes.STRING(127),
     })
-    phoneNumberId: string;
+    contactName: string;
 
     @Column({
         field: 'type',
         allowNull: false,
-        type: DataTypes.ENUM('TEMPLATE','REACTION','IMAGE','LOCATION','CONTACTS','INTERACTIVE','TEXT'),
+        type: DataTypes.ENUM('BUTTON','CONTACTS','IMAGE','INTERACTIVE','LOCATION','ORDER','REACTION','STICKER','SYSTEM','TEMPLATE','TEXT','UNKNOWN'),
     })
     type: string;
 

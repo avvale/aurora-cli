@@ -16,7 +16,7 @@ export class WhatsappMinMessageService
         cQMetadata?: CQMetadata,
     ): Promise<number>
     {
-        return await this.repository.min(
+        return await this.repository.max(
             column,
             {
                 queryStatement,

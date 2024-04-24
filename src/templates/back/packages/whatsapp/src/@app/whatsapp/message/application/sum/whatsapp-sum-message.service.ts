@@ -16,7 +16,7 @@ export class WhatsappSumMessageService
         cQMetadata?: CQMetadata,
     ): Promise<number>
     {
-        return await this.repository.sum(
+        return await this.repository.max(
             column,
             {
                 queryStatement,

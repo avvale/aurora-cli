@@ -4,27 +4,42 @@ enum WhatsappMessageDirection {
 }
 
 enum WhatsappMessageType {
-    TEMPLATE
-    REACTION
-    IMAGE
-    LOCATION
+    BUTTON
     CONTACTS
+    IMAGE
     INTERACTIVE
+    LOCATION
+    ORDER
+    REACTION
+    STICKER
+    SYSTEM
+    TEMPLATE
     TEXT
+    UNKNOWN
 }
 
+# ---- customizations ----
+enum WhatsappMessageStatus {
+    ACCEPTED
+    SENT
+    DELIVERED
+    READ
+}
 
 type WhatsappMessage
 {
     id: ID!
-    whatsappMessageId: GraphQLString!
-    conversationId: ID!
+    wabaMessageId: GraphQLString!
+    timelineId: ID!
+    timeline: WhatsappTimeline
+    conversationId: ID
     conversation: WhatsappConversation
+    statuses: [GraphQLString]!
     direction: WhatsappMessageDirection!
     accountId: ID
     account: IamAccount
-    displayPhoneNumber: GraphQLString!
-    phoneNumberId: GraphQLString!
+    wabaContactId: GraphQLString!
+    contactName: GraphQLString
     type: WhatsappMessageType!
     payload: JSON!
     createdAt: GraphQLTimestamp
@@ -35,12 +50,11 @@ type WhatsappMessage
 input WhatsappCreateMessageInput
 {
     id: ID!
-    whatsappMessageId: GraphQLString!
-    conversationId: ID!
+    wabaMessageId: GraphQLString!
     direction: WhatsappMessageDirection!
     accountId: ID
-    displayPhoneNumber: GraphQLString!
-    phoneNumberId: GraphQLString!
+    wabaContactId: GraphQLString!
+    contactName: GraphQLString
     type: WhatsappMessageType!
     payload: JSON!
 }
@@ -48,12 +62,11 @@ input WhatsappCreateMessageInput
 input WhatsappUpdateMessageByIdInput
 {
     id: ID!
-    whatsappMessageId: GraphQLString
-    conversationId: ID
+    wabaMessageId: GraphQLString
     direction: WhatsappMessageDirection
     accountId: ID
-    displayPhoneNumber: GraphQLString
-    phoneNumberId: GraphQLString
+    wabaContactId: GraphQLString
+    contactName: GraphQLString
     type: WhatsappMessageType
     payload: JSON
 }
@@ -61,12 +74,14 @@ input WhatsappUpdateMessageByIdInput
 input WhatsappUpdateMessagesInput
 {
     id: ID
-    whatsappMessageId: GraphQLString
+    wabaMessageId: GraphQLString
+    timelineId: ID
     conversationId: ID
+    statuses: [GraphQLString]
     direction: WhatsappMessageDirection
     accountId: ID
-    displayPhoneNumber: GraphQLString
-    phoneNumberId: GraphQLString
+    wabaContactId: GraphQLString
+    contactName: GraphQLString
     type: WhatsappMessageType
     payload: JSON
 }
@@ -97,14 +112,6 @@ type Query
 
 type Mutation
 {
-    whatsappCreateMessage(
-        payload: WhatsappCreateMessageInput!
-    ): WhatsappMessage
-
-    whatsappCreateMessages(
-        payload: [WhatsappCreateMessageInput]!
-    ): Boolean!
-
     whatsappUpdateMessageById(
         payload: WhatsappUpdateMessageByIdInput!
         constraint: QueryStatement
@@ -115,10 +122,6 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [WhatsappMessage]!
-
-    whatsappUpsertMessage(
-        payload: WhatsappUpdateMessageByIdInput!
-    ): WhatsappMessage
 
     whatsappDeleteMessageById(
         id: ID!

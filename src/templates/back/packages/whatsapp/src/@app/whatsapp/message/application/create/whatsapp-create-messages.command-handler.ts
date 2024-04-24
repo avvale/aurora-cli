@@ -3,14 +3,16 @@ import { WhatsappCreateMessagesCommand } from '@app/whatsapp/message';
 import { WhatsappCreateMessagesService } from '@app/whatsapp/message/application/create/whatsapp-create-messages.service';
 import {
     WhatsappMessageAccountId,
+    WhatsappMessageContactName,
     WhatsappMessageConversationId,
     WhatsappMessageDirection,
-    WhatsappMessageDisplayPhoneNumber,
     WhatsappMessageId,
     WhatsappMessagePayload,
-    WhatsappMessagePhoneNumberId,
+    WhatsappMessageStatuses,
+    WhatsappMessageTimelineId,
     WhatsappMessageType,
-    WhatsappMessageWhatsappMessageId,
+    WhatsappMessageWabaContactId,
+    WhatsappMessageWabaMessageId,
 } from '@app/whatsapp/message/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
@@ -30,12 +32,14 @@ export class WhatsappCreateMessagesCommandHandler implements ICommandHandler<Wha
                 {
                     return {
                         id: new WhatsappMessageId(message.id),
-                        whatsappMessageId: new WhatsappMessageWhatsappMessageId(message.whatsappMessageId),
+                        wabaMessageId: new WhatsappMessageWabaMessageId(message.wabaMessageId),
+                        timelineId: new WhatsappMessageTimelineId(message.timelineId),
                         conversationId: new WhatsappMessageConversationId(message.conversationId),
+                        statuses: new WhatsappMessageStatuses(message.statuses),
                         direction: new WhatsappMessageDirection(message.direction),
                         accountId: new WhatsappMessageAccountId(message.accountId),
-                        displayPhoneNumber: new WhatsappMessageDisplayPhoneNumber(message.displayPhoneNumber),
-                        phoneNumberId: new WhatsappMessagePhoneNumberId(message.phoneNumberId),
+                        wabaContactId: new WhatsappMessageWabaContactId(message.wabaContactId),
+                        contactName: new WhatsappMessageContactName(message.contactName),
                         type: new WhatsappMessageType(message.type),
                         payload: new WhatsappMessagePayload(message.payload),
                     };

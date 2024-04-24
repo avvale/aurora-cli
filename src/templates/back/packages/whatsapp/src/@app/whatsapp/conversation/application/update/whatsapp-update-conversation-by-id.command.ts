@@ -5,7 +5,13 @@ export class WhatsappUpdateConversationByIdCommand
     constructor(
         public readonly payload: {
             id: string;
-            accounts?: string[];
+            wabaConversationId?: string;
+            timelineId?: string;
+            wabaContactId?: string;
+            expiration?: string;
+            category?: string;
+            isBillable?: boolean;
+            pricingModel?: string;
         },
         public readonly constraint?: QueryStatement,
         public readonly cQMetadata?: CQMetadata,

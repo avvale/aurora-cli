@@ -1,10 +1,16 @@
 import { WhatsappConversation, WhatsappIConversationRepository } from '@app/whatsapp/conversation';
 import {
-    WhatsappConversationAccounts,
+    WhatsappConversationCategory,
     WhatsappConversationCreatedAt,
     WhatsappConversationDeletedAt,
+    WhatsappConversationExpiration,
     WhatsappConversationId,
+    WhatsappConversationIsBillable,
+    WhatsappConversationPricingModel,
+    WhatsappConversationTimelineId,
     WhatsappConversationUpdatedAt,
+    WhatsappConversationWabaContactId,
+    WhatsappConversationWabaConversationId,
 } from '@app/whatsapp/conversation/domain/value-objects';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -21,7 +27,13 @@ export class WhatsappCreateConversationService
     async main(
         payload: {
             id: WhatsappConversationId;
-            accounts: WhatsappConversationAccounts;
+            wabaConversationId: WhatsappConversationWabaConversationId;
+            timelineId: WhatsappConversationTimelineId;
+            wabaContactId: WhatsappConversationWabaContactId;
+            expiration: WhatsappConversationExpiration;
+            category: WhatsappConversationCategory;
+            isBillable: WhatsappConversationIsBillable;
+            pricingModel: WhatsappConversationPricingModel;
         },
         cQMetadata?: CQMetadata,
     ): Promise<void>
@@ -29,7 +41,13 @@ export class WhatsappCreateConversationService
         // create aggregate with factory pattern
         const conversation = WhatsappConversation.register(
             payload.id,
-            payload.accounts,
+            payload.wabaConversationId,
+            payload.timelineId,
+            payload.wabaContactId,
+            payload.expiration,
+            payload.category,
+            payload.isBillable,
+            payload.pricingModel,
             new WhatsappConversationCreatedAt({ currentTimestamp: true }),
             new WhatsappConversationUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt

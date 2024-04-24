@@ -10,7 +10,7 @@ export class WhatsappMessageType extends EnumValueObject
             name       : 'WhatsappMessageType',
             nullable   : false,
             undefinable: false,
-            enumOptions: ['TEMPLATE','REACTION','IMAGE','LOCATION','CONTACTS','INTERACTIVE','TEXT'],
+            enumOptions: ['BUTTON','CONTACTS','IMAGE','INTERACTIVE','LOCATION','ORDER','REACTION','STICKER','SYSTEM','TEMPLATE','TEXT','UNKNOWN'],
         }, validationRules));
     }
 }

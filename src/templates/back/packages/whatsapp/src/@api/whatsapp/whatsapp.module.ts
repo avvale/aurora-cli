@@ -6,10 +6,13 @@ import { WhatsappWebhookApiControllers, WhatsappWebhookApiHandlers } from './web
 import { WhatsappModels, WhatsappHandlers, WhatsappServices, WhatsappRepositories, WhatsappSagas } from '@app/whatsapp';
 import { WhatsappConversationApiControllers, WhatsappConversationApiResolvers, WhatsappConversationApiHandlers, WhatsappConversationApiServices } from './conversation';
 import { WhatsappMessageApiControllers, WhatsappMessageApiResolvers, WhatsappMessageApiHandlers, WhatsappMessageApiServices } from './message';
+import { WhatsappSharedModule } from './shared';
+import { WhatsappTimelineApiControllers, WhatsappTimelineApiResolvers, WhatsappTimelineApiHandlers, WhatsappTimelineApiServices } from './timeline';
 
 @Module({
     imports: [
         SharedModule,
+        WhatsappSharedModule,
         SequelizeModule.forFeature([
                 ...WhatsappModels
             ])
@@ -17,7 +20,8 @@ import { WhatsappMessageApiControllers, WhatsappMessageApiResolvers, WhatsappMes
     controllers: [
         ...WhatsappWebhookApiControllers,
         ...WhatsappConversationApiControllers,
-        ...WhatsappMessageApiControllers
+        ...WhatsappMessageApiControllers,
+        ...WhatsappTimelineApiControllers
     ],
     providers: [
         WhatsappSeeder,
@@ -31,7 +35,10 @@ import { WhatsappMessageApiControllers, WhatsappMessageApiResolvers, WhatsappMes
         ...WhatsappConversationApiServices,
         ...WhatsappMessageApiResolvers,
         ...WhatsappMessageApiHandlers,
-        ...WhatsappMessageApiServices
+        ...WhatsappMessageApiServices,
+        ...WhatsappTimelineApiResolvers,
+        ...WhatsappTimelineApiHandlers,
+        ...WhatsappTimelineApiServices
     ],
 })
 export class WhatsappModule {}

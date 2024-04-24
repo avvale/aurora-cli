@@ -1,12 +1,14 @@
 export { WhatsappMessageAccountId } from './whatsapp-message-account-id';
+export { WhatsappMessageContactName } from './whatsapp-message-contact-name';
 export { WhatsappMessageConversationId } from './whatsapp-message-conversation-id';
 export { WhatsappMessageCreatedAt } from './whatsapp-message-created-at';
 export { WhatsappMessageDeletedAt } from './whatsapp-message-deleted-at';
 export { WhatsappMessageDirection } from './whatsapp-message-direction';
-export { WhatsappMessageDisplayPhoneNumber } from './whatsapp-message-display-phone-number';
 export { WhatsappMessageId } from './whatsapp-message-id';
 export { WhatsappMessagePayload } from './whatsapp-message-payload';
-export { WhatsappMessagePhoneNumberId } from './whatsapp-message-phone-number-id';
+export { WhatsappMessageStatuses } from './whatsapp-message-statuses';
+export { WhatsappMessageTimelineId } from './whatsapp-message-timeline-id';
 export { WhatsappMessageType } from './whatsapp-message-type';
 export { WhatsappMessageUpdatedAt } from './whatsapp-message-updated-at';
-export { WhatsappMessageWhatsappMessageId } from './whatsapp-message-whatsapp-message-id';
+export { WhatsappMessageWabaContactId } from './whatsapp-message-waba-contact-id';
+export { WhatsappMessageWabaMessageId } from './whatsapp-message-waba-message-id';

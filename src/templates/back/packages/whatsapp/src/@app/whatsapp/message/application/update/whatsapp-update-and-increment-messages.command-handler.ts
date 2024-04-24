@@ -3,14 +3,16 @@ import { WhatsappUpdateAndIncrementMessagesCommand } from '@app/whatsapp/message
 import { WhatsappUpdateAndIncrementMessagesService } from '@app/whatsapp/message/application/update/whatsapp-update-and-increment-messages.service';
 import {
     WhatsappMessageAccountId,
+    WhatsappMessageContactName,
     WhatsappMessageConversationId,
     WhatsappMessageDirection,
-    WhatsappMessageDisplayPhoneNumber,
     WhatsappMessageId,
     WhatsappMessagePayload,
-    WhatsappMessagePhoneNumberId,
+    WhatsappMessageStatuses,
+    WhatsappMessageTimelineId,
     WhatsappMessageType,
-    WhatsappMessageWhatsappMessageId,
+    WhatsappMessageWabaContactId,
+    WhatsappMessageWabaMessageId,
 } from '@app/whatsapp/message/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
@@ -27,12 +29,14 @@ export class WhatsappUpdateAndIncrementMessagesCommandHandler implements IComman
         await this.updateMessagesService.main(
             {
                 id: new WhatsappMessageId(command.payload.id, { undefinable: true }),
-                whatsappMessageId: new WhatsappMessageWhatsappMessageId(command.payload.whatsappMessageId, { undefinable: true }),
-                conversationId: new WhatsappMessageConversationId(command.payload.conversationId, { undefinable: true }),
+                wabaMessageId: new WhatsappMessageWabaMessageId(command.payload.wabaMessageId, { undefinable: true }),
+                timelineId: new WhatsappMessageTimelineId(command.payload.timelineId, { undefinable: true }),
+                conversationId: new WhatsappMessageConversationId(command.payload.conversationId),
+                statuses: new WhatsappMessageStatuses(command.payload.statuses, { undefinable: true }),
                 direction: new WhatsappMessageDirection(command.payload.direction, { undefinable: true }),
                 accountId: new WhatsappMessageAccountId(command.payload.accountId),
-                displayPhoneNumber: new WhatsappMessageDisplayPhoneNumber(command.payload.displayPhoneNumber, { undefinable: true }),
-                phoneNumberId: new WhatsappMessagePhoneNumberId(command.payload.phoneNumberId, { undefinable: true }),
+                wabaContactId: new WhatsappMessageWabaContactId(command.payload.wabaContactId, { undefinable: true }),
+                contactName: new WhatsappMessageContactName(command.payload.contactName),
                 type: new WhatsappMessageType(command.payload.type, { undefinable: true }),
                 payload: new WhatsappMessagePayload(command.payload.payload, { undefinable: true }),
             },

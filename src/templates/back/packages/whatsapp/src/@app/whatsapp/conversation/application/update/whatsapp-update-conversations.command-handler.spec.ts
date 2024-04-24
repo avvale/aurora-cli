@@ -38,7 +38,13 @@ describe('WhatsappUpdateConversationsCommandHandler', () =>
                 new WhatsappUpdateConversationsCommand(
                     {
                         id: whatsappMockConversationData[0].id,
-                        accounts: whatsappMockConversationData[0].accounts,
+                        wabaConversationId: whatsappMockConversationData[0].wabaConversationId,
+                        timelineId: whatsappMockConversationData[0].timelineId,
+                        wabaContactId: whatsappMockConversationData[0].wabaContactId,
+                        expiration: whatsappMockConversationData[0].expiration,
+                        category: whatsappMockConversationData[0].category,
+                        isBillable: whatsappMockConversationData[0].isBillable,
+                        pricingModel: whatsappMockConversationData[0].pricingModel,
                     },
                     {},
                     {},

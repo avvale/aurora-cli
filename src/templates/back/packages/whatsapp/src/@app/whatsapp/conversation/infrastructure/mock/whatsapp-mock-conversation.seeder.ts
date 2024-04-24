@@ -1,10 +1,16 @@
 import { WhatsappConversation, whatsappMockConversationData } from '@app/whatsapp/conversation';
 import {
-    WhatsappConversationAccounts,
+    WhatsappConversationCategory,
     WhatsappConversationCreatedAt,
     WhatsappConversationDeletedAt,
+    WhatsappConversationExpiration,
     WhatsappConversationId,
+    WhatsappConversationIsBillable,
+    WhatsappConversationPricingModel,
+    WhatsappConversationTimelineId,
     WhatsappConversationUpdatedAt,
+    WhatsappConversationWabaContactId,
+    WhatsappConversationWabaConversationId,
 } from '@app/whatsapp/conversation/domain/value-objects';
 import { MockSeeder } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -30,7 +36,13 @@ export class WhatsappMockConversationSeeder extends MockSeeder<WhatsappConversat
             this.collectionSource.push(
                 WhatsappConversation.register(
                     new WhatsappConversationId(conversation.id),
-                    new WhatsappConversationAccounts(conversation.accounts),
+                    new WhatsappConversationWabaConversationId(conversation.wabaConversationId),
+                    new WhatsappConversationTimelineId(conversation.timelineId),
+                    new WhatsappConversationWabaContactId(conversation.wabaContactId),
+                    new WhatsappConversationExpiration(conversation.expiration),
+                    new WhatsappConversationCategory(conversation.category),
+                    new WhatsappConversationIsBillable(conversation.isBillable),
+                    new WhatsappConversationPricingModel(conversation.pricingModel),
                     new WhatsappConversationCreatedAt({ currentTimestamp: true }),
                     new WhatsappConversationUpdatedAt({ currentTimestamp: true }),
                     new WhatsappConversationDeletedAt(null),

@@ -3,14 +3,16 @@ import { WhatsappIMessageRepository, whatsappMockMessageData, WhatsappMockMessag
 import { WhatsappUpdateMessagesService } from '@app/whatsapp/message/application/update/whatsapp-update-messages.service';
 import {
     WhatsappMessageAccountId,
+    WhatsappMessageContactName,
     WhatsappMessageConversationId,
     WhatsappMessageDirection,
-    WhatsappMessageDisplayPhoneNumber,
     WhatsappMessageId,
     WhatsappMessagePayload,
-    WhatsappMessagePhoneNumberId,
+    WhatsappMessageStatuses,
+    WhatsappMessageTimelineId,
     WhatsappMessageType,
-    WhatsappMessageWhatsappMessageId,
+    WhatsappMessageWabaContactId,
+    WhatsappMessageWabaMessageId,
 } from '@app/whatsapp/message/domain/value-objects';
 import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -56,12 +58,14 @@ describe('WhatsappUpdateMessagesService', () =>
                 await service.main(
                     {
                         id: new WhatsappMessageId(whatsappMockMessageData[0].id),
-                        whatsappMessageId: new WhatsappMessageWhatsappMessageId(whatsappMockMessageData[0].whatsappMessageId),
+                        wabaMessageId: new WhatsappMessageWabaMessageId(whatsappMockMessageData[0].wabaMessageId),
+                        timelineId: new WhatsappMessageTimelineId(whatsappMockMessageData[0].timelineId),
                         conversationId: new WhatsappMessageConversationId(whatsappMockMessageData[0].conversationId),
+                        statuses: new WhatsappMessageStatuses(whatsappMockMessageData[0].statuses),
                         direction: new WhatsappMessageDirection(whatsappMockMessageData[0].direction),
                         accountId: new WhatsappMessageAccountId(whatsappMockMessageData[0].accountId),
-                        displayPhoneNumber: new WhatsappMessageDisplayPhoneNumber(whatsappMockMessageData[0].displayPhoneNumber),
-                        phoneNumberId: new WhatsappMessagePhoneNumberId(whatsappMockMessageData[0].phoneNumberId),
+                        wabaContactId: new WhatsappMessageWabaContactId(whatsappMockMessageData[0].wabaContactId),
+                        contactName: new WhatsappMessageContactName(whatsappMockMessageData[0].contactName),
                         type: new WhatsappMessageType(whatsappMockMessageData[0].type),
                         payload: new WhatsappMessagePayload(whatsappMockMessageData[0].payload),
                     },

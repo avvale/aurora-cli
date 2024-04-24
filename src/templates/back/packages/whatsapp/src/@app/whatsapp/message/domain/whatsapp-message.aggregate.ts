@@ -4,103 +4,121 @@ import { WhatsappConversation } from '@app/whatsapp/conversation';
 import { WhatsappCreatedMessageEvent, WhatsappDeletedMessageEvent, WhatsappUpdatedMessageEvent } from '@app/whatsapp/message';
 import {
     WhatsappMessageAccountId,
+    WhatsappMessageContactName,
     WhatsappMessageConversationId,
     WhatsappMessageCreatedAt,
     WhatsappMessageDeletedAt,
     WhatsappMessageDirection,
-    WhatsappMessageDisplayPhoneNumber,
     WhatsappMessageId,
     WhatsappMessagePayload,
-    WhatsappMessagePhoneNumberId,
+    WhatsappMessageStatuses,
+    WhatsappMessageTimelineId,
     WhatsappMessageType,
     WhatsappMessageUpdatedAt,
-    WhatsappMessageWhatsappMessageId,
+    WhatsappMessageWabaContactId,
+    WhatsappMessageWabaMessageId,
 } from '@app/whatsapp/message/domain/value-objects';
+import { WhatsappTimeline } from '@app/whatsapp/timeline';
 import { LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class WhatsappMessage extends AggregateRoot
 {
     id: WhatsappMessageId;
-    whatsappMessageId: WhatsappMessageWhatsappMessageId;
+    wabaMessageId: WhatsappMessageWabaMessageId;
+    timelineId: WhatsappMessageTimelineId;
     conversationId: WhatsappMessageConversationId;
+    statuses: WhatsappMessageStatuses;
     direction: WhatsappMessageDirection;
     accountId: WhatsappMessageAccountId;
-    displayPhoneNumber: WhatsappMessageDisplayPhoneNumber;
-    phoneNumberId: WhatsappMessagePhoneNumberId;
+    wabaContactId: WhatsappMessageWabaContactId;
+    contactName: WhatsappMessageContactName;
     type: WhatsappMessageType;
     payload: WhatsappMessagePayload;
     createdAt: WhatsappMessageCreatedAt;
     updatedAt: WhatsappMessageUpdatedAt;
     deletedAt: WhatsappMessageDeletedAt;
     account: IamAccount;
+    timeline: WhatsappTimeline;
     conversation: WhatsappConversation;
 
     constructor(
         id: WhatsappMessageId,
-        whatsappMessageId: WhatsappMessageWhatsappMessageId,
+        wabaMessageId: WhatsappMessageWabaMessageId,
+        timelineId: WhatsappMessageTimelineId,
         conversationId: WhatsappMessageConversationId,
+        statuses: WhatsappMessageStatuses,
         direction: WhatsappMessageDirection,
         accountId: WhatsappMessageAccountId,
-        displayPhoneNumber: WhatsappMessageDisplayPhoneNumber,
-        phoneNumberId: WhatsappMessagePhoneNumberId,
+        wabaContactId: WhatsappMessageWabaContactId,
+        contactName: WhatsappMessageContactName,
         type: WhatsappMessageType,
         payload: WhatsappMessagePayload,
         createdAt: WhatsappMessageCreatedAt,
         updatedAt: WhatsappMessageUpdatedAt,
         deletedAt: WhatsappMessageDeletedAt,
         account?: IamAccount,
+        timeline?: WhatsappTimeline,
         conversation?: WhatsappConversation,
     )
     {
         super();
         this.id = id;
-        this.whatsappMessageId = whatsappMessageId;
+        this.wabaMessageId = wabaMessageId;
+        this.timelineId = timelineId;
         this.conversationId = conversationId;
+        this.statuses = statuses;
         this.direction = direction;
         this.accountId = accountId;
-        this.displayPhoneNumber = displayPhoneNumber;
-        this.phoneNumberId = phoneNumberId;
+        this.wabaContactId = wabaContactId;
+        this.contactName = contactName;
         this.type = type;
         this.payload = payload;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
         this.account = account;
+        this.timeline = timeline;
         this.conversation = conversation;
     }
 
     static register(
         id: WhatsappMessageId,
-        whatsappMessageId: WhatsappMessageWhatsappMessageId,
+        wabaMessageId: WhatsappMessageWabaMessageId,
+        timelineId: WhatsappMessageTimelineId,
         conversationId: WhatsappMessageConversationId,
+        statuses: WhatsappMessageStatuses,
         direction: WhatsappMessageDirection,
         accountId: WhatsappMessageAccountId,
-        displayPhoneNumber: WhatsappMessageDisplayPhoneNumber,
-        phoneNumberId: WhatsappMessagePhoneNumberId,
+        wabaContactId: WhatsappMessageWabaContactId,
+        contactName: WhatsappMessageContactName,
         type: WhatsappMessageType,
         payload: WhatsappMessagePayload,
         createdAt: WhatsappMessageCreatedAt,
         updatedAt: WhatsappMessageUpdatedAt,
         deletedAt: WhatsappMessageDeletedAt,
         account?: IamAccount,
+        timeline?: WhatsappTimeline,
         conversation?: WhatsappConversation,
     ): WhatsappMessage
     {
         return new WhatsappMessage(
             id,
-            whatsappMessageId,
+            wabaMessageId,
+            timelineId,
             conversationId,
+            statuses,
             direction,
             accountId,
-            displayPhoneNumber,
-            phoneNumberId,
+            wabaContactId,
+            contactName,
             type,
             payload,
             createdAt,
             updatedAt,
             deletedAt,
             account,
+            timeline,
             conversation,
         );
     }
@@ -110,12 +128,14 @@ export class WhatsappMessage extends AggregateRoot
         this.apply(
             new WhatsappCreatedMessageEvent(
                 message.id.value,
-                message.whatsappMessageId.value,
-                message.conversationId.value,
+                message.wabaMessageId.value,
+                message.timelineId.value,
+                message.conversationId?.value,
+                message.statuses.value,
                 message.direction.value,
                 message.accountId?.value,
-                message.displayPhoneNumber.value,
-                message.phoneNumberId.value,
+                message.wabaContactId.value,
+                message.contactName?.value,
                 message.type.value,
                 message.payload.value,
                 message.createdAt?.value,
@@ -130,12 +150,14 @@ export class WhatsappMessage extends AggregateRoot
         this.apply(
             new WhatsappUpdatedMessageEvent(
                 message.id?.value,
-                message.whatsappMessageId?.value,
+                message.wabaMessageId?.value,
+                message.timelineId?.value,
                 message.conversationId?.value,
+                message.statuses?.value,
                 message.direction?.value,
                 message.accountId?.value,
-                message.displayPhoneNumber?.value,
-                message.phoneNumberId?.value,
+                message.wabaContactId?.value,
+                message.contactName?.value,
                 message.type?.value,
                 message.payload?.value,
                 message.createdAt?.value,
@@ -150,12 +172,14 @@ export class WhatsappMessage extends AggregateRoot
         this.apply(
             new WhatsappDeletedMessageEvent(
                 message.id.value,
-                message.whatsappMessageId.value,
-                message.conversationId.value,
+                message.wabaMessageId.value,
+                message.timelineId.value,
+                message.conversationId?.value,
+                message.statuses.value,
                 message.direction.value,
                 message.accountId?.value,
-                message.displayPhoneNumber.value,
-                message.phoneNumberId.value,
+                message.wabaContactId.value,
+                message.contactName?.value,
                 message.type.value,
                 message.payload.value,
                 message.createdAt?.value,
@@ -169,18 +193,21 @@ export class WhatsappMessage extends AggregateRoot
     {
         return {
             id: this.id.value,
-            whatsappMessageId: this.whatsappMessageId.value,
-            conversationId: this.conversationId.value,
+            wabaMessageId: this.wabaMessageId.value,
+            timelineId: this.timelineId.value,
+            conversationId: this.conversationId?.value,
+            statuses: this.statuses.value,
             direction: this.direction.value,
             accountId: this.accountId?.value,
-            displayPhoneNumber: this.displayPhoneNumber.value,
-            phoneNumberId: this.phoneNumberId.value,
+            wabaContactId: this.wabaContactId.value,
+            contactName: this.contactName?.value,
             type: this.type.value,
             payload: this.payload.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
             account: this.account?.toDTO(),
+            timeline: this.timeline?.toDTO(),
             conversation: this.conversation?.toDTO(),
         };
     }
@@ -190,18 +217,21 @@ export class WhatsappMessage extends AggregateRoot
     {
         return {
             id: this.id.value,
-            whatsappMessageId: this.whatsappMessageId.value,
-            conversationId: this.conversationId.value,
+            wabaMessageId: this.wabaMessageId.value,
+            timelineId: this.timelineId.value,
+            conversationId: this.conversationId?.value,
+            statuses: this.statuses.value,
             direction: this.direction.value,
             accountId: this.accountId?.value,
-            displayPhoneNumber: this.displayPhoneNumber.value,
-            phoneNumberId: this.phoneNumberId.value,
+            wabaContactId: this.wabaContactId.value,
+            contactName: this.contactName?.value,
             type: this.type.value,
             payload: this.payload.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
             account: this.account?.toDTO(),
+            timeline: this.timeline?.toDTO(),
             conversation: this.conversation?.toDTO(),
         };
     }

@@ -2,8 +2,14 @@
 import { WhatsappCreateConversationsCommand } from '@app/whatsapp/conversation';
 import { WhatsappCreateConversationsService } from '@app/whatsapp/conversation/application/create/whatsapp-create-conversations.service';
 import {
-    WhatsappConversationAccounts,
+    WhatsappConversationCategory,
+    WhatsappConversationExpiration,
     WhatsappConversationId,
+    WhatsappConversationIsBillable,
+    WhatsappConversationPricingModel,
+    WhatsappConversationTimelineId,
+    WhatsappConversationWabaContactId,
+    WhatsappConversationWabaConversationId,
 } from '@app/whatsapp/conversation/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
@@ -23,7 +29,13 @@ export class WhatsappCreateConversationsCommandHandler implements ICommandHandle
                 {
                     return {
                         id: new WhatsappConversationId(conversation.id),
-                        accounts: new WhatsappConversationAccounts(conversation.accounts),
+                        wabaConversationId: new WhatsappConversationWabaConversationId(conversation.wabaConversationId),
+                        timelineId: new WhatsappConversationTimelineId(conversation.timelineId),
+                        wabaContactId: new WhatsappConversationWabaContactId(conversation.wabaContactId),
+                        expiration: new WhatsappConversationExpiration(conversation.expiration),
+                        category: new WhatsappConversationCategory(conversation.category),
+                        isBillable: new WhatsappConversationIsBillable(conversation.isBillable),
+                        pricingModel: new WhatsappConversationPricingModel(conversation.pricingModel),
                     };
                 }),
             command.cQMetadata,

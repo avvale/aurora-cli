@@ -1,17 +1,19 @@
 import { WhatsappIMessageRepository, WhatsappMessage, whatsappMockMessageData } from '@app/whatsapp/message';
 import {
     WhatsappMessageAccountId,
+    WhatsappMessageContactName,
     WhatsappMessageConversationId,
     WhatsappMessageCreatedAt,
     WhatsappMessageDeletedAt,
     WhatsappMessageDirection,
-    WhatsappMessageDisplayPhoneNumber,
     WhatsappMessageId,
     WhatsappMessagePayload,
-    WhatsappMessagePhoneNumberId,
+    WhatsappMessageStatuses,
+    WhatsappMessageTimelineId,
     WhatsappMessageType,
     WhatsappMessageUpdatedAt,
-    WhatsappMessageWhatsappMessageId,
+    WhatsappMessageWabaContactId,
+    WhatsappMessageWabaMessageId,
 } from '@app/whatsapp/message/domain/value-objects';
 import { MockRepository, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -47,12 +49,14 @@ export class WhatsappMockMessageRepository extends MockRepository<WhatsappMessag
 
             this.collectionSource.push(WhatsappMessage.register(
                 new WhatsappMessageId(itemCollection.id),
-                new WhatsappMessageWhatsappMessageId(itemCollection.whatsappMessageId),
+                new WhatsappMessageWabaMessageId(itemCollection.wabaMessageId),
+                new WhatsappMessageTimelineId(itemCollection.timelineId),
                 new WhatsappMessageConversationId(itemCollection.conversationId),
+                new WhatsappMessageStatuses(itemCollection.statuses),
                 new WhatsappMessageDirection(itemCollection.direction),
                 new WhatsappMessageAccountId(itemCollection.accountId),
-                new WhatsappMessageDisplayPhoneNumber(itemCollection.displayPhoneNumber),
-                new WhatsappMessagePhoneNumberId(itemCollection.phoneNumberId),
+                new WhatsappMessageWabaContactId(itemCollection.wabaContactId),
+                new WhatsappMessageContactName(itemCollection.contactName),
                 new WhatsappMessageType(itemCollection.type),
                 new WhatsappMessagePayload(itemCollection.payload),
                 new WhatsappMessageCreatedAt(itemCollection.createdAt),

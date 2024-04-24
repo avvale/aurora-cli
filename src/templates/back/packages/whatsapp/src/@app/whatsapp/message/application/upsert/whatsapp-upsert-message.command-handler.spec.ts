@@ -40,12 +40,14 @@ describe('WhatsappUpsertMessageCommandHandler', () =>
                 new WhatsappUpsertMessageCommand(
                     {
                         id: whatsappMockMessageData[0].id,
-                        whatsappMessageId: whatsappMockMessageData[0].whatsappMessageId,
+                        wabaMessageId: whatsappMockMessageData[0].wabaMessageId,
+                        timelineId: whatsappMockMessageData[0].timelineId,
                         conversationId: whatsappMockMessageData[0].conversationId,
+                        statuses: whatsappMockMessageData[0].statuses,
                         direction: whatsappMockMessageData[0].direction,
                         accountId: whatsappMockMessageData[0].accountId,
-                        displayPhoneNumber: whatsappMockMessageData[0].displayPhoneNumber,
-                        phoneNumberId: whatsappMockMessageData[0].phoneNumberId,
+                        wabaContactId: whatsappMockMessageData[0].wabaContactId,
+                        contactName: whatsappMockMessageData[0].contactName,
                         type: whatsappMockMessageData[0].type,
                         payload: whatsappMockMessageData[0].payload,
                     },

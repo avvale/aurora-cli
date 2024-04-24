@@ -1,17 +1,19 @@
 import { WhatsappAddMessagesContextEvent, WhatsappIMessageRepository, WhatsappMessage } from '@app/whatsapp/message';
 import {
     WhatsappMessageAccountId,
+    WhatsappMessageContactName,
     WhatsappMessageConversationId,
     WhatsappMessageCreatedAt,
     WhatsappMessageDeletedAt,
     WhatsappMessageDirection,
-    WhatsappMessageDisplayPhoneNumber,
     WhatsappMessageId,
     WhatsappMessagePayload,
-    WhatsappMessagePhoneNumberId,
+    WhatsappMessageStatuses,
+    WhatsappMessageTimelineId,
     WhatsappMessageType,
     WhatsappMessageUpdatedAt,
-    WhatsappMessageWhatsappMessageId,
+    WhatsappMessageWabaContactId,
+    WhatsappMessageWabaMessageId,
 } from '@app/whatsapp/message/domain/value-objects';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -28,12 +30,14 @@ export class WhatsappCreateMessagesService
     async main(
         payload: {
             id: WhatsappMessageId;
-            whatsappMessageId: WhatsappMessageWhatsappMessageId;
+            wabaMessageId: WhatsappMessageWabaMessageId;
+            timelineId: WhatsappMessageTimelineId;
             conversationId: WhatsappMessageConversationId;
+            statuses: WhatsappMessageStatuses;
             direction: WhatsappMessageDirection;
             accountId: WhatsappMessageAccountId;
-            displayPhoneNumber: WhatsappMessageDisplayPhoneNumber;
-            phoneNumberId: WhatsappMessagePhoneNumberId;
+            wabaContactId: WhatsappMessageWabaContactId;
+            contactName: WhatsappMessageContactName;
             type: WhatsappMessageType;
             payload: WhatsappMessagePayload;
         } [],
@@ -43,12 +47,14 @@ export class WhatsappCreateMessagesService
         // create aggregate with factory pattern
         const aggregateMessages = payload.map(message => WhatsappMessage.register(
             message.id,
-            message.whatsappMessageId,
+            message.wabaMessageId,
+            message.timelineId,
             message.conversationId,
+            message.statuses,
             message.direction,
             message.accountId,
-            message.displayPhoneNumber,
-            message.phoneNumberId,
+            message.wabaContactId,
+            message.contactName,
             message.type,
             message.payload,
             new WhatsappMessageCreatedAt({ currentTimestamp: true }),

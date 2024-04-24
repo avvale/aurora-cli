@@ -2,6 +2,7 @@
 import { WhatsappMessageDirection, WhatsappMessageType } from '@api/graphql';
 import { IamAccountDto } from '@api/iam/account';
 import { WhatsappConversationDto } from '@api/whatsapp/conversation';
+import { WhatsappTimelineDto } from '@api/whatsapp/timeline';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class WhatsappMessageDto
@@ -14,22 +15,41 @@ export class WhatsappMessageDto
 
     @ApiProperty({
         type       : String,
-        description: 'whatsappMessageId [input here api field description]',
+        description: 'wabaMessageId [input here api field description]',
     })
-    whatsappMessageId: string;
+    wabaMessageId: string;
+
+    @ApiProperty({
+        type       : String,
+        description: 'timelineId [input here api field description]',
+        example    : 'e3d69519-5187-5a8a-8bdc-ca03ec3bfcdd',
+    })
+    timelineId: string;
+
+    @ApiProperty({
+        type       : () => WhatsappTimelineDto,
+        description: 'WhatsappTimeline [input here api field description]',
+    })
+    timeline?: WhatsappTimelineDto;
 
     @ApiProperty({
         type       : String,
         description: 'conversationId [input here api field description]',
         example    : 'cb32e229-229b-59bd-b4ba-db9fc1090029',
     })
-    conversationId: string;
+    conversationId?: string;
 
     @ApiProperty({
         type       : () => WhatsappConversationDto,
         description: 'WhatsappConversation [input here api field description]',
     })
     conversation?: WhatsappConversationDto;
+
+    @ApiProperty({
+        type       : Array,
+        description: 'statuses [input here api field description]',
+    })
+    statuses: string[];
 
     @ApiProperty({
         type       : WhatsappMessageDirection,
@@ -53,19 +73,19 @@ export class WhatsappMessageDto
 
     @ApiProperty({
         type       : String,
-        description: 'displayPhoneNumber [input here api field description]',
+        description: 'wabaContactId [input here api field description]',
     })
-    displayPhoneNumber: string;
+    wabaContactId: string;
 
     @ApiProperty({
         type       : String,
-        description: 'phoneNumberId [input here api field description]',
+        description: 'contactName [input here api field description]',
     })
-    phoneNumberId: string;
+    contactName?: string;
 
     @ApiProperty({
         type       : WhatsappMessageType,
-        enum       : ['TEMPLATE','REACTION','IMAGE','LOCATION','CONTACTS','INTERACTIVE','TEXT'],
+        enum       : ['BUTTON','CONTACTS','IMAGE','INTERACTIVE','LOCATION','ORDER','REACTION','STICKER','SYSTEM','TEMPLATE','TEXT','UNKNOWN'],
         description: 'type [input here api field description]',
     })
     type: WhatsappMessageType;
