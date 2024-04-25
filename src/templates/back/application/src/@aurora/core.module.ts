@@ -7,7 +7,7 @@ import { SharedModule } from './shared.module';
 @Module({
     imports: [
         GraphQLConfigModule,
-        MailerCLientModule,
+        MailerCLientModule.forRootAsync(),
         SequelizeConfigModule,
         SharedModule,
     ],

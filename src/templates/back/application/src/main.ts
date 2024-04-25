@@ -1,4 +1,4 @@
-import { setTimeZoneApplication } from '@aurorajs.dev/core';
+import { memoryWatcher, setTimeZoneApplication } from '@aurorajs.dev/core';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -10,6 +10,7 @@ import * as timezone from 'dayjs/plugin/timezone';
 import * as utc from 'dayjs/plugin/utc';
 import * as weekOfYear from 'dayjs/plugin/weekOfYear';
 import { json, urlencoded } from 'express';
+import { env } from 'node:process';
 import { logger } from './@aurora/services';
 import { AppModule } from './app.module';
 
@@ -20,6 +21,9 @@ dayjs.extend(advancedFormat);
 dayjs.extend(weekOfYear);
 dayjs.extend(isoWeek);
 dayjs.extend(dayOfYear);
+
+// hmr (hot module replacement) for development
+declare const module: any;
 
 async function bootstrap(): Promise<void>
 {
@@ -56,6 +60,18 @@ async function bootstrap(): Promise<void>
 
     app.enableCors();
     await app.listen(configService.get<number>('APP_PORT'));
+
+    // hmr (hot module replacement) for development
+    if (module.hot)
+    {
+        module.hot.accept();
+        module.hot.dispose(() => app.close());
+    }
+
+    if (env.NODE_ENV !== 'production')
+    {
+        memoryWatcher();
+    }
 }
 
 bootstrap();
