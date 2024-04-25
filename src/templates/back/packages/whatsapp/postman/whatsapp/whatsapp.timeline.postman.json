@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - whatsapp/timeline",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - whatsappCreateTimeline",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:WhatsappCreateTimelineInput!)\n{\n\twhatsappCreateTimeline (payload:$payload)\n\t{\n\t\tid\n\t\taccounts\n\t\twabaPhoneNumberId\n\t\twabaContactId\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"nwc0grtaiu2jtirfp7p069j096s1xsaafi6\", \n\t\t\"wabaContactId\": \"9uepjarnwzf3kvydbevgmkr0l5i3dypbsbk\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappCreateTimelines",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[WhatsappCreateTimelineInput]!)\n{\n\twhatsappCreateTimelines (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"8b6c37be-8d75-4f12-bcb5-3548645661f4\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"gbofbt7oyzee0ik94iaqan8urefhfkp02xy\", \n\t\t\t\"wabaContactId\": \"2c5gf9uiw4hj2ij6suefe6gmo5acuyyxbub\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"75be7759-726d-4dcb-b16d-1f7a903498d9\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"fw31fge6xetuxznu9ujmeul8a85se3a0wv2\", \n\t\t\t\"wabaContactId\": \"7mz2ffsxneb33n78vq2hideb8pdo7ds584c\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c4ec37b2-53b7-4ab7-ba34-040bcf6b754c\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"cfjq8aeekoic1046q3ybp5pll5585xoav14\", \n\t\t\t\"wabaContactId\": \"hqaepx97w9d825dv1o7an3s8xy6mksvodph\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b851dcc6-c058-4306-9c59-1ddb6cfeb061\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"ph5hv97sf19zdk3uaiqpaqm1ip9v8yagxip\", \n\t\t\t\"wabaContactId\": \"22cbdr90ab7s59nny9p0x45n0bbxadbsexj\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"27ad0a9a-28da-4365-8801-5a31be452a0b\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"in06cuu2lslpedpwede4z8i8ttg8dagn40x\", \n\t\t\t\"wabaContactId\": \"i5nqit0iu82u09m275pc7k06sbolxnyeuz0\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"63487076-eea9-446f-8016-b3645b0e6aba\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"kor9t9s41fl5mjvz1icuarzb69ht7z6kukj\", \n\t\t\t\"wabaContactId\": \"ok5ucbi3765j8e5sszs4h19zc1c41un9azy\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"7c454b7c-0016-40ce-812d-4f3854ca6141\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"usyon7t66aducfcdp08cc2dk7grdrp1qxkf\", \n\t\t\t\"wabaContactId\": \"cc3gms312aakfomipndw9jdhw8uv2wx6hpq\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3c140f77-ca33-4c52-a2a3-4cbea483204e\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"7v3jcsgos4r5d2dwiq6fi7jdhcnozuczkv9\", \n\t\t\t\"wabaContactId\": \"t0hceldjjtm2e3fnlc4ux0a1cusg0li61nb\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"71665164-1776-45db-b3eb-da7324bea445\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"l9fxx3u4lcn7cv8ylytojyspas2wv829cnn\", \n\t\t\t\"wabaContactId\": \"wk8ogmeeqza0z2g4h9220oyhvznzxpvnzio\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"520ba6ad-9380-462e-92c3-ba6ad83ba147\", \n\t\t\t\"accounts\": [], \n\t\t\t\"wabaPhoneNumberId\": \"cuklu663k28h2682oel9j82iqnebo56oh4n\", \n\t\t\t\"wabaContactId\": \"c5b7d0biwrpm6jy5ktoj2fg2up1qz92yvrp\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappPaginateTimelines",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\twhatsappPaginateTimelines (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappGetTimelines",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\twhatsappGetTimelines (query: $query)\n\t{\n\t\tid\n\t\taccounts\n\t\twabaPhoneNumberId\n\t\twabaContactId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappFindTimeline",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\twhatsappFindTimeline (query: $query)\n\t{\n\t\tid\n\t\taccounts\n\t\twabaPhoneNumberId\n\t\twabaContactId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappFindTimelineById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\twhatsappFindTimelineById (id:$id)\n\t{\n\t\tid\n\t\taccounts\n\t\twabaPhoneNumberId\n\t\twabaContactId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappUpdateTimeline",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:WhatsappUpdateTimelineInput!)\n{\n\twhatsappUpdateTimeline (payload:$payload)\n\t{\n\t\tid\n\t\taccounts\n\t\twabaPhoneNumberId\n\t\twabaContactId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"z19deim9m60v66xw9k7m7ffypwqsqjp0v9r\", \n\t\t\"wabaContactId\": \"f9lm3uto3wqax16jws34ompdohbk760unh9\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappDeleteTimelineById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\twhatsappDeleteTimelineById (id:$id)\n\t{\n\t\tid\n\t\taccounts\n\t\twabaPhoneNumberId\n\t\twabaContactId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - whatsappDeleteTimelines",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\twhatsappDeleteTimelines (query: $query)\n\t{\n\t\tid\n\t\taccounts\n\t\twabaPhoneNumberId\n\t\twabaContactId\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/timeline/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accounts\": [], \n\t\"wabaPhoneNumberId\": \"o4qzxmsttke145ari1duksb2e4yk66hjozu\", \n\t\"wabaContactId\": \"55275j83h9bm6dqm82iwbzhq5lnh32i5d3a\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timeline/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"timeline",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/timelines/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"eb718013-f220-42c6-8f29-489e2d223e5e\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"g9uy8shljg4fh0ai6fs2g79zpj8y3wriupk\", \n\t\t\"wabaContactId\": \"62n2we2clizd8qe9i0207mdc1g8j2lus7mu\"\n\t}, \n\t{\n\t\t\"id\": \"fa771382-09d0-4067-a58e-1f4c035ff63b\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"0a6b1h9mec48p5p49is9cgqk2fv6mxfquot\", \n\t\t\"wabaContactId\": \"iju0gq0oa2ywiq9ero5jlmhhklcd4qtnf85\"\n\t}, \n\t{\n\t\t\"id\": \"5f685c86-512f-47d5-b25e-96d109a2dee8\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"vldpfjhb2vbjqqk4nhjtajmpy56d84xbsnm\", \n\t\t\"wabaContactId\": \"kk6o5pog11c6iursoq9fgp7gzohvsf7cnfm\"\n\t}, \n\t{\n\t\t\"id\": \"dc925d38-0a4e-4a39-a134-51190461796c\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"8jd46imwvw7fmyx3hyid0f1qn57wcsq1goc\", \n\t\t\"wabaContactId\": \"8bxyqa8w3wrosei2ihtvnnmas96h7jvfrbl\"\n\t}, \n\t{\n\t\t\"id\": \"e09540f9-7b39-4a36-b906-e105de67132c\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"izefgh87tbex2950s4pcoh1mrcsmvtuqokk\", \n\t\t\"wabaContactId\": \"dqxbavomrg6jhqfqtkpyzp21duk1w5i6nvp\"\n\t}, \n\t{\n\t\t\"id\": \"566756a1-86f7-4d5d-82bf-c9105f4a078e\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"k9qdes9iupqiwofqzl3waibjlbz3mmzvtmr\", \n\t\t\"wabaContactId\": \"f5d3cickoehgn4o7tmo7rol9lkw3zal5u0j\"\n\t}, \n\t{\n\t\t\"id\": \"e031526a-45fb-4109-9f12-ee7f58012b75\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"6irbj97xok50e9dvla3c2klmrk2alhgb2bg\", \n\t\t\"wabaContactId\": \"9ixh7d509k1ft225t63nas84vs28tdfispr\"\n\t}, \n\t{\n\t\t\"id\": \"ccb0a0c5-5634-46c1-a97e-e6d81fea5673\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"npdd7czgvhy0lnuln45bt1707tqzs73dmec\", \n\t\t\"wabaContactId\": \"h0fed0idn267q1k5hvpa2fvll5qyckwahb9\"\n\t}, \n\t{\n\t\t\"id\": \"a579fcf1-d0cb-4e4f-9e68-8531432b174e\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"p8n61xeb2dv9puyulmr0pj0gd6ahs0tcmad\", \n\t\t\"wabaContactId\": \"hwk2d2ndye9f0wnb25r0qp3twurwukgxgom\"\n\t}, \n\t{\n\t\t\"id\": \"3e266449-4944-4f6f-a121-0a5539845f48\", \n\t\t\"accounts\": [], \n\t\t\"wabaPhoneNumberId\": \"wjx8z9c1lfcl65v60zyiq7wdkllitq2mihg\", \n\t\t\"wabaContactId\": \"4rp65cbquor55f1zyf3sn8qbghn5mgpeqt3\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timelines/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"timelines",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/timelines/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timelines/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+                        "timelines",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/timelines/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timelines/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"timelines",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/timeline/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timeline/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"timeline",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/timeline/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timeline/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"timeline",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/timeline/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accounts\": [], \n\t\"wabaPhoneNumberId\": \"xk32u4nl5h10vyjm7l2yeyej2arsz2ki5rx\", \n\t\"wabaContactId\": \"9u871in9vmedbs6hgqolf5ctvgvccf6ssy7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timeline/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"timeline",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - whatsapp/timeline/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timeline/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"timeline",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - whatsapp/timelines/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/whatsapp/timelines/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"whatsapp",
+						"timelines",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
