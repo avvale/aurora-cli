@@ -1,0 +1,60 @@
+version: 0.0.1
+boundedContextName: whatsapp
+moduleName: timeline
+moduleNames: timelines
+aggregateName: WhatsappTimeline
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: accounts
+    type: array
+    arrayOptions:
+      type: id
+    nullable: true
+    index: index
+  - name: wabaPhoneNumberId
+    type: varchar
+    maxLength: 36
+    nullable: false
+    index: unique
+    indexFields:
+      - wabaPhoneNumberId
+      - wabaContactId
+  - name: wabaContactId
+    type: varchar
+    maxLength: 36
+    nullable: false
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+excluded:
+  - src/@api/whatsapp/timeline/dto/whatsapp-create-timeline.dto.ts
+  - src/@api/whatsapp/timeline/controllers/whatsapp-create-timeline.controller.spec.ts
+  - src/@api/whatsapp/timeline/controllers/whatsapp-create-timeline.controller.ts
+  - src/@api/whatsapp/timeline/controllers/whatsapp-create-timelines.controller.spec.ts
+  - src/@api/whatsapp/timeline/controllers/whatsapp-create-timelines.controller.ts
+  - src/@api/whatsapp/timeline/controllers/whatsapp-upsert-timeline.controller.spec.ts
+  - src/@api/whatsapp/timeline/controllers/whatsapp-upsert-timeline.controller.ts
+  - src/@api/whatsapp/timeline/handlers/whatsapp-create-timeline.handler.spec.ts
+  - src/@api/whatsapp/timeline/handlers/whatsapp-create-timeline.handler.ts
+  - src/@api/whatsapp/timeline/handlers/whatsapp-create-timelines.handler.spec.ts
+  - src/@api/whatsapp/timeline/handlers/whatsapp-create-timelines.handler.ts
+  - src/@api/whatsapp/timeline/handlers/whatsapp-upsert-timeline.handler.spec.ts
+  - src/@api/whatsapp/timeline/handlers/whatsapp-upsert-timeline.handler.ts
+  - src/@api/whatsapp/timeline/resolvers/whatsapp-create-timeline.resolver.spec.ts
+  - src/@api/whatsapp/timeline/resolvers/whatsapp-create-timeline.resolver.ts
+  - src/@api/whatsapp/timeline/resolvers/whatsapp-create-timelines.resolver.spec.ts
+  - src/@api/whatsapp/timeline/resolvers/whatsapp-create-timelines.resolver.ts
+  - src/@api/whatsapp/timeline/resolvers/whatsapp-upsert-timeline.resolver.spec.ts
+  - src/@api/whatsapp/timeline/resolvers/whatsapp-upsert-timeline.resolver.ts

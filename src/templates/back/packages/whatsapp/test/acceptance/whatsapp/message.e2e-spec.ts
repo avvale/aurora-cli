@@ -93,35 +93,51 @@ describe('message', () =>
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWhatsappMessageId property can not to be null', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWabaMessageId property can not to be null', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                whatsappMessageId: null,
+                wabaMessageId: null,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageWhatsappMessageId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for WhatsappMessageWabaMessageId must be defined, can not be null');
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageConversationId property can not to be null', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageTimelineId property can not to be null', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                conversationId: null,
+                timelineId: null,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageConversationId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for WhatsappMessageTimelineId must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageStatuses property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/message/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                statuses: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappMessageStatuses must be defined, can not be null');
             });
     });
 
@@ -141,35 +157,19 @@ describe('message', () =>
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageDisplayPhoneNumber property can not to be null', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWabaContactId property can not to be null', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                displayPhoneNumber: null,
+                wabaContactId: null,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageDisplayPhoneNumber must be defined, can not be null');
-            });
-    });
-
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessagePhoneNumberId property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/whatsapp/message/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                phoneNumberId: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for WhatsappMessagePhoneNumberId must be defined, can not be null');
+                expect(res.body.message).toContain('Value for WhatsappMessageWabaContactId must be defined, can not be null');
             });
     });
 
@@ -221,35 +221,51 @@ describe('message', () =>
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWhatsappMessageId property can not to be undefined', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWabaMessageId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                whatsappMessageId: undefined,
+                wabaMessageId: undefined,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageWhatsappMessageId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for WhatsappMessageWabaMessageId must be defined, can not be undefined');
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageConversationId property can not to be undefined', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageTimelineId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                conversationId: undefined,
+                timelineId: undefined,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageConversationId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for WhatsappMessageTimelineId must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageStatuses property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/message/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                statuses: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappMessageStatuses must be defined, can not be undefined');
             });
     });
 
@@ -269,35 +285,19 @@ describe('message', () =>
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageDisplayPhoneNumber property can not to be undefined', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWabaContactId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                displayPhoneNumber: undefined,
+                wabaContactId: undefined,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageDisplayPhoneNumber must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessagePhoneNumberId property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/whatsapp/message/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                phoneNumberId: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for WhatsappMessagePhoneNumberId must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for WhatsappMessageWabaContactId must be defined, can not be undefined');
             });
     });
 
@@ -349,19 +349,19 @@ describe('message', () =>
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWhatsappMessageId is not allowed, must be a length of 63', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageTimelineId is not allowed, must be a length of 36', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                whatsappMessageId: '*',
+                timelineId: '*************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageWhatsappMessageId is not allowed, must be a length of 63');
+                expect(res.body.message).toContain('Value for WhatsappMessageTimelineId is not allowed, must be a length of 36');
             });
     });
 
@@ -397,35 +397,51 @@ describe('message', () =>
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageDisplayPhoneNumber is too large, has a maximum length of 36', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWabaMessageId is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                displayPhoneNumber: '*************************************',
+                wabaMessageId: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageDisplayPhoneNumber is too large, has a maximum length of 36');
+                expect(res.body.message).toContain('Value for WhatsappMessageWabaMessageId is too large, has a maximum length of 128');
             });
     });
 
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessagePhoneNumberId is too large, has a maximum length of 36', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageWabaContactId is too large, has a maximum length of 36', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                phoneNumberId: '*************************************',
+                wabaContactId: '*************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessagePhoneNumberId is too large, has a maximum length of 36');
+                expect(res.body.message).toContain('Value for WhatsappMessageWabaContactId is too large, has a maximum length of 36');
+            });
+    });
+
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageContactName is too large, has a maximum length of 127', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/message/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                contactName: '********************************************************************************************************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappMessageContactName is too large, has a maximum length of 127');
             });
     });
 
@@ -444,7 +460,7 @@ describe('message', () =>
                 expect(res.body.message).toContain('Value for WhatsappMessageDirection has to be any of this options: INPUT, OUTPUT');
             });
     });
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageType has to be a enum option of TEMPLATE, REACTION, IMAGE, LOCATION, CONTACTS, INTERACTIVE, TEXT', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageType has to be a enum option of BUTTON, CONTACTS, IMAGE, INTERACTIVE, LOCATION, ORDER, REACTION, STICKER, SYSTEM, TEMPLATE, TEXT, UNKNOWN', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
@@ -456,7 +472,7 @@ describe('message', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageType has to be any of this options: TEMPLATE, REACTION, IMAGE, LOCATION, CONTACTS, INTERACTIVE, TEXT');
+                expect(res.body.message).toContain('Value for WhatsappMessageType has to be any of this options: BUTTON, CONTACTS, IMAGE, INTERACTIVE, LOCATION, ORDER, REACTION, STICKER, SYSTEM, TEMPLATE, TEXT, UNKNOWN');
             });
     });
 
@@ -632,12 +648,14 @@ describe('message', () =>
                         whatsappCreateMessage (payload:$payload)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            timelineId
                             conversationId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                         }
@@ -706,11 +724,12 @@ describe('message', () =>
                         whatsappGetMessages (query:$query)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -742,12 +761,14 @@ describe('message', () =>
                         whatsappCreateMessage (payload:$payload)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            timelineId
                             conversationId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                         }
@@ -779,11 +800,12 @@ describe('message', () =>
                         whatsappFindMessage (query:$query)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -823,11 +845,12 @@ describe('message', () =>
                         whatsappFindMessage (query:$query)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -865,11 +888,12 @@ describe('message', () =>
                         whatsappFindMessageById (id:$id)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -902,11 +926,12 @@ describe('message', () =>
                         whatsappFindMessageById (id:$id)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -937,11 +962,12 @@ describe('message', () =>
                         whatsappUpdateMessageById (payload:$payload)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -977,11 +1003,12 @@ describe('message', () =>
                         whatsappUpdateMessageById (payload:$payload)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -1015,11 +1042,12 @@ describe('message', () =>
                         whatsappUpdateMessages (payload:$payload query:$query)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -1058,11 +1086,12 @@ describe('message', () =>
                         whatsappDeleteMessageById (id:$id)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt
@@ -1095,11 +1124,12 @@ describe('message', () =>
                         whatsappDeleteMessageById (id:$id)
                         {
                             id
-                            whatsappMessageId
+                            wabaMessageId
+                            statuses
                             direction
                             accountId
-                            displayPhoneNumber
-                            phoneNumberId
+                            wabaContactId
+                            contactName
                             type
                             payload
                             createdAt

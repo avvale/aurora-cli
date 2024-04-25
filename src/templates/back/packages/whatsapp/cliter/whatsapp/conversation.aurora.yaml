@@ -11,12 +11,41 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
-  - name: accounts
-    type: array
-    arrayOptions:
-      type: id
-    nullable: true
+  - name: wabaConversationId
+    type: varchar
+    maxLength: 63
+    nullable: false
+    index: unique
+  - name: timelineId
+    type: id
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregateName: WhatsappTimeline
+      modulePath: whatsapp/timeline
+      key: id
+      field: timeline
+      avoidConstraint: true
+  - name: wabaContactId
+    type: varchar
+    maxLength: 36
+    nullable: false
     index: index
+  - name: expiration
+    type: varchar
+    maxLength: 36
+    nullable: false
+  - name: category
+    type: varchar
+    maxLength: 63
+    nullable: false
+  - name: isBillable
+    type: boolean
+    nullable: false
+  - name: pricingModel
+    type: varchar
+    maxLength: 36
+    nullable: false
   - name: createdAt
     type: timestamp
     nullable: true
@@ -26,3 +55,23 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excluded:
+  - src/@api/whatsapp/conversation/dto/whatsapp-create-conversation.dto.ts
+  - src/@api/whatsapp/conversation/controllers/whatsapp-create-conversation.controller.spec.ts
+  - src/@api/whatsapp/conversation/controllers/whatsapp-create-conversation.controller.ts
+  - src/@api/whatsapp/conversation/controllers/whatsapp-create-conversations.controller.spec.ts
+  - src/@api/whatsapp/conversation/controllers/whatsapp-create-conversations.controller.ts
+  - src/@api/whatsapp/conversation/controllers/whatsapp-upsert-conversation.controller.spec.ts
+  - src/@api/whatsapp/conversation/controllers/whatsapp-upsert-conversation.controller.ts
+  - src/@api/whatsapp/conversation/handlers/whatsapp-create-conversation.handler.spec.ts
+  - src/@api/whatsapp/conversation/handlers/whatsapp-create-conversation.handler.ts
+  - src/@api/whatsapp/conversation/handlers/whatsapp-create-conversations.handler.spec.ts
+  - src/@api/whatsapp/conversation/handlers/whatsapp-create-conversations.handler.ts
+  - src/@api/whatsapp/conversation/handlers/whatsapp-upsert-conversation.handler.spec.ts
+  - src/@api/whatsapp/conversation/handlers/whatsapp-upsert-conversation.handler.ts
+  - src/@api/whatsapp/conversation/resolvers/whatsapp-create-conversation.resolver.spec.ts
+  - src/@api/whatsapp/conversation/resolvers/whatsapp-create-conversation.resolver.ts
+  - src/@api/whatsapp/conversation/resolvers/whatsapp-create-conversations.resolver.spec.ts
+  - src/@api/whatsapp/conversation/resolvers/whatsapp-create-conversations.resolver.ts
+  - src/@api/whatsapp/conversation/resolvers/whatsapp-upsert-conversation.resolver.spec.ts
+  - src/@api/whatsapp/conversation/resolvers/whatsapp-upsert-conversation.resolver.ts

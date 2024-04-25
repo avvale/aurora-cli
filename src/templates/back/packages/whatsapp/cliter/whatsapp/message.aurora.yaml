@@ -11,13 +11,24 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
-  - name: whatsappMessageId
+  - name: wabaMessageId
     type: varchar
-    length: 63
+    maxLength: 128
     nullable: false
-  - name: conversationId
+    index: unique
+  - name: timelineId
     type: id
     nullable: false
+    relationship:
+      type: many-to-one
+      aggregateName: WhatsappTimeline
+      modulePath: whatsapp/timeline
+      key: id
+      field: timeline
+      avoidConstraint: true
+  - name: conversationId
+    type: id
+    nullable: true
     relationship:
       type: many-to-one
       aggregateName: WhatsappConversation
@@ -25,6 +36,16 @@ aggregateProperties:
       key: id
       field: conversation
       avoidConstraint: true
+  - name: statuses
+    type: array
+    nullable: false
+    arrayOptions:
+      type: enum
+      enumOptions:
+        - ACCEPTED
+        - DELIVERED
+        - READ
+        - SENT
   - name: direction
     type: enum
     enumOptions:
@@ -39,29 +60,32 @@ aggregateProperties:
       aggregateName: IamAccount
       modulePath: iam/account
       field: account
-      avoidConstraint: true
     index: index
-  - name: displayPhoneNumber
+  - name: wabaContactId
     type: varchar
     maxLength: 36
     nullable: false
     index: index
-  - name: phoneNumberId
+  - name: contactName
     type: varchar
-    maxLength: 36
-    nullable: false
-    index: index
+    maxLength: 127
+    nullable: true
   - name: type
     type: enum
-    enumOptions:
-      - TEMPLATE
-      - REACTION
-      - IMAGE
-      - LOCATION
-      - CONTACTS
-      - INTERACTIVE
-      - TEXT
     nullable: false
+    enumOptions:
+      - BUTTON
+      - CONTACTS
+      - IMAGE
+      - INTERACTIVE
+      - LOCATION
+      - ORDER
+      - REACTION
+      - STICKER
+      - SYSTEM
+      - TEMPLATE
+      - TEXT
+      - UNKNOWN
   - name: payload
     type: jsonb
     nullable: false
@@ -74,3 +98,23 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excluded:
+  - src/@api/whatsapp/message/dto/whatsapp-create-message.dto.ts
+  - src/@api/whatsapp/message/controllers/whatsapp-create-message.controller.spec.ts
+  - src/@api/whatsapp/message/controllers/whatsapp-create-message.controller.ts
+  - src/@api/whatsapp/message/controllers/whatsapp-create-messages.controller.spec.ts
+  - src/@api/whatsapp/message/controllers/whatsapp-create-messages.controller.ts
+  - src/@api/whatsapp/message/controllers/whatsapp-upsert-message.controller.spec.ts
+  - src/@api/whatsapp/message/controllers/whatsapp-upsert-message.controller.ts
+  - src/@api/whatsapp/message/handlers/whatsapp-create-message.handler.spec.ts
+  - src/@api/whatsapp/message/handlers/whatsapp-create-message.handler.ts
+  - src/@api/whatsapp/message/handlers/whatsapp-create-messages.handler.spec.ts
+  - src/@api/whatsapp/message/handlers/whatsapp-create-messages.handler.ts
+  - src/@api/whatsapp/message/handlers/whatsapp-upsert-message.handler.spec.ts
+  - src/@api/whatsapp/message/handlers/whatsapp-upsert-message.handler.ts
+  - src/@api/whatsapp/message/resolvers/whatsapp-create-message.resolver.spec.ts
+  - src/@api/whatsapp/message/resolvers/whatsapp-create-message.resolver.ts
+  - src/@api/whatsapp/message/resolvers/whatsapp-create-messages.resolver.spec.ts
+  - src/@api/whatsapp/message/resolvers/whatsapp-create-messages.resolver.ts
+  - src/@api/whatsapp/message/resolvers/whatsapp-upsert-message.resolver.spec.ts
+  - src/@api/whatsapp/message/resolvers/whatsapp-upsert-message.resolver.ts

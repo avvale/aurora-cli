@@ -93,6 +93,118 @@ describe('conversation', () =>
             });
     });
 
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationWabaConversationId property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                wabaConversationId: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationWabaConversationId must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationTimelineId property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                timelineId: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationTimelineId must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationWabaContactId property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                wabaContactId: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationWabaContactId must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationExpiration property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                expiration: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationExpiration must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationCategory property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                category: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationCategory must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationIsBillable property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isBillable: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationIsBillable must be defined, can not be null');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationPricingModel property can not to be null', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                pricingModel: null,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationPricingModel must be defined, can not be null');
+            });
+    });
+
     test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationId property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
@@ -106,6 +218,118 @@ describe('conversation', () =>
             .then(res =>
             {
                 expect(res.body.message).toContain('Value for WhatsappConversationId must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationWabaConversationId property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                wabaConversationId: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationWabaConversationId must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationTimelineId property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                timelineId: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationTimelineId must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationWabaContactId property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                wabaContactId: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationWabaContactId must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationExpiration property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                expiration: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationExpiration must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationCategory property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                category: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationCategory must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationIsBillable property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isBillable: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationIsBillable must be defined, can not be undefined');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationPricingModel property can not to be undefined', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                pricingModel: undefined,
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationPricingModel must be defined, can not be undefined');
             });
     });
 
@@ -125,6 +349,117 @@ describe('conversation', () =>
             });
     });
 
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationTimelineId is not allowed, must be a length of 36', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                timelineId: '*************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationTimelineId is not allowed, must be a length of 36');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationWabaConversationId is too large, has a maximum length of 63', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                wabaConversationId: '****************************************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationWabaConversationId is too large, has a maximum length of 63');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationWabaContactId is too large, has a maximum length of 36', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                wabaContactId: '*************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationWabaContactId is too large, has a maximum length of 36');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationExpiration is too large, has a maximum length of 36', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                expiration: '*************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationExpiration is too large, has a maximum length of 36');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationCategory is too large, has a maximum length of 63', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                category: '****************************************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationCategory is too large, has a maximum length of 63');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationPricingModel is too large, has a maximum length of 36', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                pricingModel: '*************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationPricingModel is too large, has a maximum length of 36');
+            });
+    });
+
+    test('/REST:POST whatsapp/conversation/create - Got 400 Conflict, ConversationIsBillable has to be a boolean value', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/whatsapp/conversation/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isBillable: 'true',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for WhatsappConversationIsBillable has to be a boolean value');
+            });
+    });
 
     test('/REST:POST whatsapp/conversation/create - Got 409 Conflict, item already exist in database', () =>
     {
@@ -298,7 +633,13 @@ describe('conversation', () =>
                         whatsappCreateConversation (payload:$payload)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            timelineId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                         }
                     }
                 `,
@@ -365,7 +706,12 @@ describe('conversation', () =>
                         whatsappGetConversations (query:$query)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -395,7 +741,13 @@ describe('conversation', () =>
                         whatsappCreateConversation (payload:$payload)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            timelineId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                         }
                     }
                 `,
@@ -425,7 +777,12 @@ describe('conversation', () =>
                         whatsappFindConversation (query:$query)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -463,7 +820,12 @@ describe('conversation', () =>
                         whatsappFindConversation (query:$query)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -499,7 +861,12 @@ describe('conversation', () =>
                         whatsappFindConversationById (id:$id)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -530,7 +897,12 @@ describe('conversation', () =>
                         whatsappFindConversationById (id:$id)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -559,7 +931,12 @@ describe('conversation', () =>
                         whatsappUpdateConversationById (payload:$payload)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -593,7 +970,12 @@ describe('conversation', () =>
                         whatsappUpdateConversationById (payload:$payload)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -625,7 +1007,12 @@ describe('conversation', () =>
                         whatsappUpdateConversations (payload:$payload query:$query)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -662,7 +1049,12 @@ describe('conversation', () =>
                         whatsappDeleteConversationById (id:$id)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
@@ -693,7 +1085,12 @@ describe('conversation', () =>
                         whatsappDeleteConversationById (id:$id)
                         {
                             id
-                            accounts
+                            wabaConversationId
+                            wabaContactId
+                            expiration
+                            category
+                            isBillable
+                            pricingModel
                             createdAt
                             updatedAt
                         }
