@@ -199,6 +199,7 @@ export class AccountDetailComponent extends ViewDetailComponent
                 langId: null,
                 password: '',
                 repeatPassword: '',
+                isTwoFactorAuthenticationEnabled: false,
             }),
         });
         /* eslint-enable key-spacing */
