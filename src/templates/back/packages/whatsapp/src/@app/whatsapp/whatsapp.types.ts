@@ -110,7 +110,7 @@ export interface WhatsappMessageText
     body: string;
 }
 
-export type WhatsappMessageType = 'button' | 'contacts' | 'image' | 'interactive' | 'location' | 'order' | 'reaction' | 'sticker' | 'system' | 'template' | 'text' | 'unknown';
+export type WhatsappMessageType = 'audio' | 'button' | 'contacts' | 'documents' | 'image' | 'interactive' | 'location' | 'order' | 'reaction' | 'sticker' | 'system' | 'template' | 'text' | 'unknown' | 'video';
 
 export interface WhatsappMetadata
 {
