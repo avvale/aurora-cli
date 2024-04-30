@@ -114,7 +114,7 @@ export class WhatsappMessageModel extends Model<WhatsappMessageModel>
     @Column({
         field: 'type',
         allowNull: false,
-        type: DataTypes.ENUM('BUTTON','CONTACTS','IMAGE','INTERACTIVE','LOCATION','ORDER','REACTION','STICKER','SYSTEM','TEMPLATE','TEXT','UNKNOWN'),
+        type: DataTypes.ENUM('AUDIO','BUTTON','CONTACTS','DOCUMENT','IMAGE','INTERACTIVE','LOCATION','ORDER','REACTION','STICKER','SYSTEM','TEMPLATE','TEXT','UNKNOWN','VIDEO'),
     })
     type: string;
 

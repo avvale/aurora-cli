@@ -460,7 +460,7 @@ describe('message', () =>
                 expect(res.body.message).toContain('Value for WhatsappMessageDirection has to be any of this options: INPUT, OUTPUT');
             });
     });
-    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageType has to be a enum option of BUTTON, CONTACTS, IMAGE, INTERACTIVE, LOCATION, ORDER, REACTION, STICKER, SYSTEM, TEMPLATE, TEXT, UNKNOWN', () =>
+    test('/REST:POST whatsapp/message/create - Got 400 Conflict, MessageType has to be a enum option of AUDIO, BUTTON, CONTACTS, DOCUMENT, IMAGE, INTERACTIVE, LOCATION, ORDER, REACTION, STICKER, SYSTEM, TEMPLATE, TEXT, UNKNOWN, VIDEO', () =>
     {
         return request(app.getHttpServer())
             .post('/whatsapp/message/create')
@@ -472,7 +472,7 @@ describe('message', () =>
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for WhatsappMessageType has to be any of this options: BUTTON, CONTACTS, IMAGE, INTERACTIVE, LOCATION, ORDER, REACTION, STICKER, SYSTEM, TEMPLATE, TEXT, UNKNOWN');
+                expect(res.body.message).toContain('Value for WhatsappMessageType has to be any of this options: AUDIO, BUTTON, CONTACTS, DOCUMENT, IMAGE, INTERACTIVE, LOCATION, ORDER, REACTION, STICKER, SYSTEM, TEMPLATE, TEXT, UNKNOWN, VIDEO');
             });
     });
 

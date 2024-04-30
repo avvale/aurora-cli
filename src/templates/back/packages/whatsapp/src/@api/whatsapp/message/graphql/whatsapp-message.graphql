@@ -4,8 +4,10 @@ enum WhatsappMessageDirection {
 }
 
 enum WhatsappMessageType {
+    AUDIO
     BUTTON
     CONTACTS
+    DOCUMENT
     IMAGE
     INTERACTIVE
     LOCATION
@@ -16,6 +18,7 @@ enum WhatsappMessageType {
     TEMPLATE
     TEXT
     UNKNOWN
+    VIDEO
 }
 
 # ---- customizations ----

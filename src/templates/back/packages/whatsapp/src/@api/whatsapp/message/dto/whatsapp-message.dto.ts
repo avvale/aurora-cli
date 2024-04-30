@@ -85,7 +85,7 @@ export class WhatsappMessageDto
 
     @ApiProperty({
         type       : WhatsappMessageType,
-        enum       : ['BUTTON','CONTACTS','IMAGE','INTERACTIVE','LOCATION','ORDER','REACTION','STICKER','SYSTEM','TEMPLATE','TEXT','UNKNOWN'],
+        enum       : ['AUDIO','BUTTON','CONTACTS','DOCUMENT','IMAGE','INTERACTIVE','LOCATION','ORDER','REACTION','STICKER','SYSTEM','TEMPLATE','TEXT','UNKNOWN','VIDEO'],
         description: 'type [input here api field description]',
     })
     type: WhatsappMessageType;

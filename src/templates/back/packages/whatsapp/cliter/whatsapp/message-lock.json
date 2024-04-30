@@ -267,7 +267,7 @@
         },
         {
             "path": "src/@app/whatsapp/message/application/min/whatsapp-min-message.service.ts",
-            "integrity": "sha1:dd9f852ab2f6598eefb26a03b78272cd99b49f40"
+            "integrity": "sha1:af8dd59dbae509074895c36dddaee4df5852385f"
         },
         {
             "path": "src/@app/whatsapp/message/application/paginate/whatsapp-paginate-messages.query-handler.spec.ts",
@@ -331,7 +331,7 @@
         },
         {
             "path": "src/@app/whatsapp/message/application/sum/whatsapp-sum-message.service.ts",
-            "integrity": "sha1:43aac319c2c17679c7e40438a8f3ad3eb5ccffce"
+            "integrity": "sha1:a68aa2a2666689b8c6f5a04dc8371945d791b169"
         },
         {
             "path": "src/@app/whatsapp/message/application/update/whatsapp-update-message-by-id.command-handler.spec.ts",
@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@app/whatsapp/message/infrastructure/mock/whatsapp-mock-message.data.ts",
-            "integrity": "sha1:3e33fc9809ddae025aa445abac71e1d448c91ab2"
+            "integrity": "sha1:e193e6ede26fb4051b976d6a4007f287ff3a5b7d"
         },
         {
             "path": "src/@app/whatsapp/message/infrastructure/mock/whatsapp-mock-message.repository.ts",
@@ -451,11 +451,15 @@
         },
         {
             "path": "src/@app/whatsapp/message/infrastructure/sequelize/whatsapp-sequelize-message.model.ts",
-            "integrity": "sha1:134355785b1ab4694c10beea0b4205bcc49b12a0"
+            "integrity": "sha1:2388ad9294bbfd4224d8484a5d57d41c19c0ee45"
         },
         {
             "path": "src/@app/whatsapp/message/infrastructure/sequelize/whatsapp-sequelize-message.repository.ts",
             "integrity": "sha1:536b03c3cc4b33510be2f2514fb4ef387a82cb14"
+        },
+        {
+            "path": "src/@app/whatsapp/public-api.ts",
+            "integrity": "sha1:1b4ec5e57023709942ee9e2ff163f26923b03fe3"
         },
         {
             "path": "src/@app/whatsapp/message/domain/value-objects/whatsapp-message-id.ts",
@@ -495,7 +499,7 @@
         },
         {
             "path": "src/@app/whatsapp/message/domain/value-objects/whatsapp-message-type.ts",
-            "integrity": "sha1:2f738e2cbe196199fed4cf40814268d8cf80dbe1"
+            "integrity": "sha1:5fb0ca89649f93ad766d8db722c083d5cf1c12ab"
         },
         {
             "path": "src/@app/whatsapp/message/domain/value-objects/whatsapp-message-payload.ts",
@@ -583,15 +587,15 @@
         },
         {
             "path": "src/@api/whatsapp/message/dto/whatsapp-message.dto.ts",
-            "integrity": "sha1:aa536e52d155b2db012e2827b8cee2fe832a77cf"
+            "integrity": "sha1:ee671e728d8397f52003a0171558fe41650f43e3"
         },
         {
             "path": "src/@api/whatsapp/message/dto/whatsapp-update-message-by-id.dto.ts",
-            "integrity": "sha1:92e7ac49384976d099d5e0b8436d87f5fe3d55e1"
+            "integrity": "sha1:57441433ae3a74b3468f8ffa4cb0ca25c6303540"
         },
         {
             "path": "src/@api/whatsapp/message/dto/whatsapp-update-messages.dto.ts",
-            "integrity": "sha1:57785c112ef244569dbecce80367cf5b1f2b915b"
+            "integrity": "sha1:39e592a9c40d0bf752bbd669218f6d1cab3d5b92"
         },
         {
             "path": "src/@api/whatsapp/message/dto/index.ts",
@@ -603,7 +607,7 @@
         },
         {
             "path": "src/@api/whatsapp/message/graphql/whatsapp-message.graphql",
-            "integrity": "sha1:3edaa5e29bf62be6999c9bb2f850a5f894b0a1ff"
+            "integrity": "sha1:88a693b6ec35aae280eeb447947572a5a42dc469"
         },
         {
             "path": "src/@api/whatsapp/message/handlers/whatsapp-delete-message-by-id.handler.spec.ts",
@@ -743,11 +747,11 @@
         },
         {
             "path": "test/acceptance/whatsapp/message.e2e-spec.ts",
-            "integrity": "sha1:94af3648663744699665377b657edda8b142b4ce"
+            "integrity": "sha1:bb850b47011aa8cc3176084bd88e3a35d89a4eb8"
         },
         {
             "path": "postman/whatsapp/whatsapp.message.postman.json",
-            "integrity": "sha1:01dfdcf2991afebf21c65ef1e5221f6a1313c76b"
+            "integrity": "sha1:273f037a0c4dc0f0ee5b75252aed836b26f9d2f3"
         }
     ]
 }

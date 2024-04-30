@@ -21,11 +21,17 @@ export const mapMessageType = (
 {
     switch (type)
     {
+        case 'audio':
+            return WhatsappMessageType.AUDIO;
+
         case 'button':
             return WhatsappMessageType.BUTTON;
 
         case 'contacts':
             return WhatsappMessageType.CONTACTS;
+
+        case 'document':
+            return WhatsappMessageType.DOCUMENT;
 
         case 'image':
             return WhatsappMessageType.IMAGE;
@@ -56,6 +62,9 @@ export const mapMessageType = (
 
         case 'unknown':
             return WhatsappMessageType.UNKNOWN;
+
+        case 'video':
+            return WhatsappMessageType.VIDEO;
 
         default:
             Logger.error(`Error to map message type, Error: Invalid message type ${type}. Include message type ${type} in message type enum database colum.`, 'mapMessageType');

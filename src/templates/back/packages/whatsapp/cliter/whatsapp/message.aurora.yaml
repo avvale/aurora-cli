@@ -74,8 +74,10 @@ aggregateProperties:
     type: enum
     nullable: false
     enumOptions:
+      - AUDIO
       - BUTTON
       - CONTACTS
+      - DOCUMENT
       - IMAGE
       - INTERACTIVE
       - LOCATION
@@ -86,6 +88,7 @@ aggregateProperties:
       - TEMPLATE
       - TEXT
       - UNKNOWN
+      - VIDEO
   - name: payload
     type: jsonb
     nullable: false
