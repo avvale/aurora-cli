@@ -1,3 +1,4 @@
+import { parseWebhookPayload } from '@api/whatsapp/shared';
 import * as crypto from 'crypto';
 
 const WHATSAPP_APPLICATION_SECRET_KEY: string = process.env.WHATSAPP_APPLICATION_SECRET_KEY;
@@ -11,7 +12,7 @@ export const verifyWebhookSignature = (
 
     const signature = crypto
         .createHmac('sha256', WHATSAPP_APPLICATION_SECRET_KEY)
-        .update(JSON.stringify(payload))
+        .update(parseWebhookPayload(payload))
         .digest('hex');
 
     try
