@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoService } from '@ngneat/transloco';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { Action, ActionService, SessionService, SpinnerManagerService } from '@aurora';
+import { Action, ActionService, SessionService, SpinnerManagerService, log } from '@aurora';
 import { BehaviorSubject, filter, Subject, takeUntil } from 'rxjs';
 
 @Directive()
@@ -49,6 +49,12 @@ export class ViewBaseComponent implements OnInit, OnDestroy
             )
             .subscribe(async action =>
             {
+                if (!action)
+                {
+                    log('[DEBUG] Action not defined.');
+                    return;
+                }
+
                 // if the spinner of the action is defined, it means that there is a specific key
                 // to obtain the BehaviorSubject that controls the spinner of the action
                 const spinnerFlag$ = action.spinner instanceof Function ?

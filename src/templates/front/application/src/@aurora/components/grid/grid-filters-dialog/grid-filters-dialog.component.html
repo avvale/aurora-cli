@@ -49,16 +49,14 @@
 			>
 				<!-- generated input fields -->
                 <ng-container formArrayName="formColumnFilter">
-                    <ng-container *ngFor="let formFilter of formColumnFilter.controls; let i=index">
-                        <ng-container
-                            [ngSwitch]="formFilter.get('type').value"
-                            [formGroup]="formFilter"
-                        >
+                    @for (formFilter of formColumnFilter.controls; track formFilter.value.id; let idx = $index)
+                    {
+                        <ng-container [formGroup]="formFilter">
                             <span class="text-sm col-span-12">
                                 {{ formFilter.get('field').value | gridTranslate:'column':gridId  | async }}
                             </span>
 
-                            <!-- OPERATOR SELECTOR -->
+                            <!-- operator selector -->
                             <mat-form-field
                                 appearance="outline"
                                 class="col-span-4"
@@ -75,164 +73,193 @@
                                 </mat-select>
                             </mat-form-field>
 
-                            <!-- STRING -->
-                            <mat-form-field
-                                *ngSwitchCase="columnDataType.STRING"
-                                appearance="outline"
-                                class="col-span-7 relative"
-                                tiny
-                            >
-                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
-                                <input
-                                    autocomplete="off"
-                                    formControlName="value"
-                                    matInput
-                                >
-
-                                <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
-                                </div>
-                            </mat-form-field>
-
-                            <!-- ENUM -->
-                            <mat-form-field
-                                *ngSwitchCase="columnDataType.ENUM"
-                                appearance="outline"
-                                class="col-span-7 relative"
-                                tiny
-                            >
-                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
-                                <mat-select formControlName="value">
-                                    <mat-option
-                                        *ngFor="let filterValue of originColumnsConfig | getGridFilterValues:formFilter.get('field').value"
-                                        [value]="filterValue.key"
+                            @switch (formFilter.get('type').value)
+                            {
+                                <!-- string -->
+                                @case (columnDataType.STRING)
+                                {
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-span-7 relative"
+                                        tiny
                                     >
-                                        <ng-container *ngIf="data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value">
-                                            <ng-container
-                                                *ngTemplateOutlet="(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value).templateRef; context: { $implicit: filterValue.value }"
-                                            >
-                                            </ng-container>
-                                        </ng-container>
-                                        <ng-container *ngIf="!(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)">
-                                            {{ filterValue.value }}
-                                        </ng-container>
-                                    </mat-option>
-                                </mat-select>
-                                <div
-                                    *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value"
-                                    class="outbox"
-                                >
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
-                                </div>
-                            </mat-form-field>
+                                        <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                        <input
+                                            autocomplete="off"
+                                            formControlName="value"
+                                            matInput
+                                        >
+                                        @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
+                                        {
+                                            <div class="outbox">
+                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                            </div>
+                                        }
+                                    </mat-form-field>
+                                }
 
-                            <!-- ARRAY -->
-                            <mat-form-field
-                                *ngSwitchCase="columnDataType.ARRAY"
-                                appearance="outline"
-                                class="col-span-7 relative"
-                                tiny
-                            >
-                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
-                                <mat-select
-                                    formControlName="value"
-                                    multiple
-                                >
-                                    <mat-option
-                                        *ngFor="let filterValue of originColumnsConfig | getGridFilterValues:formFilter.get('field').value"
-                                        [value]="filterValue.key"
+                                <!-- enum -->
+                                @case (columnDataType.ENUM)
+                                {
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-span-7 relative"
+                                        tiny
                                     >
-                                        <ng-container *ngIf="data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value">
-                                            <ng-container
-                                                *ngTemplateOutlet="(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value).templateRef; context: { $implicit: filterValue.value }"
+                                        <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                        <mat-select formControlName="value">
+                                            @for (filterValue of originColumnsConfig | getGridFilterValues:formFilter.get('field').value; track filterValue.key)
+                                            {
+                                                <mat-option [value]="filterValue.key">
+                                                    @if (data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)
+                                                    {
+                                                        <ng-container
+                                                            *ngTemplateOutlet="(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value).templateRef; context: { $implicit: filterValue.value }"
+                                                        >
+                                                        </ng-container>
+                                                    }
+                                                    @else
+                                                    {
+                                                        {{ filterValue.value }}
+                                                    }
+                                                </mat-option>
+                                            }
+                                        </mat-select>
+                                        @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
+                                        {
+                                            <div class="outbox">
+                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                            </div>
+                                        }
+                                    </mat-form-field>
+                                }
+
+                                <!-- array -->
+                                @case (columnDataType.ARRAY)
+                                {
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-span-7 relative"
+                                        tiny
+                                    >
+                                        <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                        <mat-select
+                                            formControlName="value"
+                                            multiple
+                                        >
+                                            @for (filterValue of originColumnsConfig | getGridFilterValues:formFilter.get('field').value; track filterValue.key)
+                                            {
+                                                <mat-option [value]="filterValue.key">
+                                                    @if (data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)
+                                                    {
+                                                        <ng-container
+                                                            *ngTemplateOutlet="(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value).templateRef; context: { $implicit: filterValue.value }"
+                                                        >
+                                                        </ng-container>
+                                                    }
+                                                    @else
+                                                    {
+                                                        {{ filterValue.value }}
+                                                    }
+                                                </mat-option>
+                                            }
+                                        </mat-select>
+                                        @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
+                                        {
+                                            <div class="outbox">
+                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                            </div>
+                                        }
+                                    </mat-form-field>
+                                }
+
+                                <!-- number -->
+                                @case (columnDataType.NUMBER)
+                                {
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-span-7 relative"
+                                        tiny
+                                    >
+                                        <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                        <input
+                                            type="number"
+                                            autocomplete="off"
+                                            formControlName="value"
+                                            matInput
+                                        >
+                                        @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
+                                        {
+                                            <div class="outbox">
+                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                            </div>
+                                        }
+                                    </mat-form-field>
+                                }
+
+                                <!-- boolean -->
+                                @case (columnDataType.BOOLEAN)
+                                {
+                                    <div class="col-span-7 relative pl-12">
+                                        <mat-checkbox formControlName="value">
+                                            {{ 'value' | gridTranslate:'message':gridId | async }}
+                                        </mat-checkbox>
+                                        @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
+                                        {
+                                            <div class="outbox">
+                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+
+                                <!-- date -->
+                                @case (columnDataType.DATE)
+                                {
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="au-datepicker col-span-7 relative"
+                                        tiny
+                                    >
+                                        <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                        <input
+                                            matInput
+                                            autocomplete="off"
+                                            formControlName="value"
+                                            auDatepickerSqlFormat
+                                            [matDatepicker]="picker"
+                                        >
+                                        <mat-datepicker-toggle
+                                            matIconSuffix
+                                            [for]="picker"
+                                        >
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                matDatepickerToggleIcon
                                             >
-                                            </ng-container>
-                                        </ng-container>
-                                        <ng-container *ngIf="!(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)">
-                                            {{ filterValue.value }}
-                                        </ng-container>
-                                    </mat-option>
-                                </mat-select>
-                                <div
-                                    *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value"
-                                    class="outbox"
-                                >
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
-                                </div>
-                            </mat-form-field>
-
-                            <!-- NUMBER -->
-                            <mat-form-field
-                                *ngSwitchCase="columnDataType.NUMBER"
-                                appearance="outline"
-                                class="col-span-7 relative"
-                                tiny
-                            >
-                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
-                                <input
-                                    type="number"
-                                    autocomplete="off"
-                                    formControlName="value"
-                                    matInput
-                                >
-
-                                <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
-                                </div>
-                            </mat-form-field>
-
-                            <!-- BOOLEAN -->
-                            <div
-                                *ngSwitchCase="columnDataType.BOOLEAN"
-                                class="col-span-7 relative pl-12"
-                            >
-                                <mat-checkbox
-                                    formControlName="value"
-                                >
-                                    {{ 'value' | gridTranslate:'message':gridId | async }}
-                                </mat-checkbox>
-
-                                <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox">
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
-                                </div>
-                            </div>
-
-                            <!-- DATE -->
-                            <mat-form-field
-                                *ngSwitchCase="columnDataType.DATE"
-                                appearance="outline"
-                                class="col-span-7 relative"
-                                tiny
-                            >
-                                <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
-                                <input
-                                    autocomplete="off"
-                                    formControlName="value"
-                                    matInput
-                                    [auDatepickerSqlFormat]
-                                    [matDatepicker]="picker"
-                                >
-                                <mat-datepicker-toggle
-                                    matSuffix
-                                    [for]="picker"
-                                >
-                                </mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                                <div *ngIf="arrayColumnFilters | hasRenderOutbox:formFilter.value" class="outbox--datepicker">
-                                    <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
-                                </div>
-                            </mat-form-field>
-
+                                                today
+                                            </mat-icon>
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
+                                        {
+                                            <div class="outbox--datepicker">
+                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                            </div>
+                                        }
+                                    </mat-form-field>
+                                }
+                            }
                             <button
                                 mat-icon-button
                                 class="col-span-1 mb-5"
                                 type="button"
-                                (click)="handleDeleteFilter(i)"
+                                (click)="handleDeleteFilter(idx)"
                             >
                                 <mat-icon>highlight_off</mat-icon>
                             </button>
                         </ng-container>
-                    </ng-container>
+                    }
                 </ng-container>
 			</form>
 		</div>

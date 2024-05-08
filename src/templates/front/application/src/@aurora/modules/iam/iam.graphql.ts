@@ -8,6 +8,7 @@ export const iamMeAccount =  gql`
             id
             clientId
             email
+            username
             isActive
             scopes
             dApplicationCodes
@@ -25,6 +26,7 @@ export const iamMeAccount =  gql`
             user {
                 id
                 name
+                surname
                 langId
                 meta
             }

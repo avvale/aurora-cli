@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, Inject, OnInit, QueryList } from '@
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,10 +18,10 @@ import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
 import { GridTranslationsService } from '../grid-translations/grid-translations.service';
 import { ColumnConfig, ColumnDataType, FilterCriteriaOperator, FilterDialogResponse, GridColumnFilter, GridOperatorsMessages } from '../grid.types';
 import { FilterOperatorsPipe } from './pipes/filter-operators.pipe';
+import { GetContactOperatorPipe } from './pipes/get-concat-operator.pipe';
 import { GetGridFilterValue } from './pipes/get-grid-filter-value.pipe';
 import { GetGridFiltersValue } from './pipes/get-grid-filter-values.pipe';
 import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
     selector       : 'au-grid-filters-dialog',
@@ -29,7 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        AsyncPipe, DatepickerSqlFormatDirective, FilterOperatorsPipe, GetGridFiltersValue, GetGridFilterValue, GetPipe,
+        AsyncPipe, DatepickerSqlFormatDirective, FilterOperatorsPipe, GetContactOperatorPipe, GetGridFiltersValue, GetGridFilterValue, GetPipe,
         GridTranslatePipe, HasRenderOutboxPipe, MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatDatepickerModule,
         MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, NgForOf, NgIf, NgSwitch, NgSwitchCase,
         NgTemplateOutlet, ReactiveFormsModule,
@@ -90,7 +91,7 @@ export class GridFiltersDialogComponent implements OnInit
             types      : [ColumnDataType.STRING],
         },
         {
-            operator   : Operator.contained,
+            operator   : Operator.overlap,
             translation: 'containsAny',
             types      : [ColumnDataType.ARRAY],
         },
@@ -153,7 +154,7 @@ export class GridFiltersDialogComponent implements OnInit
             );
 
         // get original columns config, to get values from columns selected
-        this.originColumnsConfig  = this.data.originColumnsConfig;
+        this.originColumnsConfig = this.data.originColumnsConfig;
 
         // cerate subscription for filter columns in autocomplete component
         this.filteredColumnsConfig = this.searchFieldNameControl
@@ -223,11 +224,12 @@ export class GridFiltersDialogComponent implements OnInit
         // control insert in first position
         this.formColumnFilter.insert(0,
             this.fb.group({
-                id      : this.fb.control(Utils.uuid()),
-                field   : this.fb.control(event.option.value.searchableField ? event.option.value.searchableField : event.option.value.field),
-                type    : this.fb.control(event.option.value.type),
-                operator: this.fb.control(null, [Validators.required]),
-                value   : this.fb.control('', [Validators.required]),
+                id             : this.fb.control(Utils.uuid()),
+                field          : this.fb.control(event.option.value.field),
+                searchableField: this.fb.control(event.option.value.searchableField),
+                type           : this.fb.control(event.option.value.type),
+                operator       : this.fb.control(null, [Validators.required]),
+                value          : this.fb.control('', [Validators.required]),
             }),
         );
     }
@@ -241,11 +243,12 @@ export class GridFiltersDialogComponent implements OnInit
             this.formColumnFilter
                 .push(
                     this.fb.group({
-                        id      : this.fb.control(gridColumnFilter.id),
-                        field   : this.fb.control(gridColumnFilter.field),
-                        type    : this.fb.control(gridColumnFilter.type),
-                        operator: this.fb.control(gridColumnFilter.operator, [Validators.required]),
-                        value   : this.fb.control(gridColumnFilter.value, [Validators.required]),
+                        id             : this.fb.control(gridColumnFilter.id),
+                        field          : this.fb.control(gridColumnFilter.field),
+                        searchableField: this.fb.control(gridColumnFilter.searchableField),
+                        type           : this.fb.control(gridColumnFilter.type),
+                        operator       : this.fb.control(gridColumnFilter.operator, [Validators.required]),
+                        value          : this.fb.control(gridColumnFilter.value, [Validators.required]),
                     }),
                 );
         }

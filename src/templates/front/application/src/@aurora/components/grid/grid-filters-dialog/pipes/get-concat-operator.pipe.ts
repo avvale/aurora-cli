@@ -5,7 +5,8 @@ import { ColumnDataType } from '../../grid.types';
  * Get contact operator that we need
  */
 @Pipe({
-    name: 'getContactOperator',
+    name      : 'getContactOperator',
+    standalone: true,
 })
 export class GetContactOperatorPipe implements PipeTransform
 {

@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatIconModule } from '@angular/material/icon';
 import { Action } from '@aurora';
 import { BehaviorSubject, Observable, Subject, of, takeUntil } from 'rxjs';
-import { ColumnConfig, GridCustomHeaderTemplateDirective, GridData, GridState } from '../grid';
+import { ColumnConfig, GridCustomHeaderTemplateDirective, GridData, GridModule, GridState } from '../grid';
 import { GridCellValueTemplateDirective } from '../grid/directives/grid-cell-value-template.directive';
 import { GridComponent } from '../grid/grid/grid.component';
 import { SelectionModel } from '../grid/selection-model/selection-model';
@@ -18,7 +18,7 @@ import { SelectionModel } from '../grid/selection-model/selection-model';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        AsyncPipe, GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective, MatButtonModule, MatDialogModule, MatIconModule, NgForOf, NgTemplateOutlet,
+        AsyncPipe, GridCellValueTemplateDirective, GridModule, MatButtonModule, MatDialogModule, MatIconModule, NgForOf, NgTemplateOutlet,
     ],
 })
 export class GridDialogComponent

@@ -14,6 +14,7 @@ export * from '@aurora/components/grid/grid-translations/grid-column-translation
 export * from '@aurora/components/grid/grid-translations/grid-translations.component';
 export * from '@aurora/components/grid/grid-translations/grid-translations.service';
 export * from '@aurora/components/grid/grid.functions';
+export * from '@aurora/components/grid/grid.module';
 export * from '@aurora/components/grid/grid.types';
 export * from '@aurora/components/grid/grid/grid.component';
 export * from '@aurora/components/grid/grid/paginator-intl.service';
