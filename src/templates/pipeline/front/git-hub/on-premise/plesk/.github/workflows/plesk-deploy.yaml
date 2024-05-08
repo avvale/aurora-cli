@@ -11,7 +11,7 @@ env:
   # SSH private key
   SERVER_KEY: $\{{ secrets.SERVER_KEY }}
   # security phrase for SSH private key
-  SERVER_KEY_PHRASE: ${{ secrets.PLESK_DEVELOPMENT_SERVER_KEY_PHRASE }}
+  SERVER_KEY_PHRASE: $\{{ secrets.SERVER_KEY_PHRASE }}
   # default port SFTP 22
   SERVER_PORT: $\{{ secrets.SERVER_PORT }}
   SERVER_HOST: $\{{ secrets.SERVER_HOST }}
@@ -116,4 +116,4 @@ jobs:
           remote_port: $\{{ env.SERVER_PORT }}
           remote_user: $\{{ env.SERVER_USERNAME }}
           remote_key: $\{{ env.SERVER_KEY }}
-          remote_key_pass: ${{ env.SERVER_KEY_PHRASE }}
+          remote_key_pass: $\{{ env.SERVER_KEY_PHRASE }}

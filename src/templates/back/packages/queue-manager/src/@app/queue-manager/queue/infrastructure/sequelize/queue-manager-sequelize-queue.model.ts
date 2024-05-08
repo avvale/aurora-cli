@@ -9,14 +9,8 @@ import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
     timestamps: false,
     indexes: [
 		{
-			fields: ['prefix'],
+			fields: ['prefix', 'name'],
 			unique: true,
-			name: 'uniquePrefixName',
-		},
-		{
-			fields: ['name'],
-			unique: true,
-			name: 'uniquePrefixName',
 		},
     ],
 })

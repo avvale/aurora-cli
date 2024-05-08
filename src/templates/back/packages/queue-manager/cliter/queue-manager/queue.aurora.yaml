@@ -16,13 +16,13 @@ aggregateProperties:
     maxLength: 63
     nullable: false
     index: unique
-    indexName: uniquePrefixName
+    indexFields:
+      - prefix
+      - name
   - name: name
     type: varchar
     maxLength: 63
     nullable: false
-    index: unique
-    indexName: uniquePrefixName
   - name: createdAt
     type: timestamp
     nullable: true

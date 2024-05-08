@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data.ts",
-            "integrity": "sha1:bcbd154a34358ffd0e025d482e1afc51709718f6"
+            "integrity": "sha1:e02d6f7e2c87ee018c5022c7e35fe5e21bc742dd"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.repository.ts",
@@ -451,7 +451,7 @@
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/sequelize/queue-manager-sequelize-queue.model.ts",
-            "integrity": "sha1:fceb2efe0725e194786a70f039528bd4cc8fd72f"
+            "integrity": "sha1:8524e27e7bf49d6742af833a1d0c06a800c65b67"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/sequelize/queue-manager-sequelize-queue.repository.ts",
@@ -791,7 +791,7 @@
         },
         {
             "path": "postman/queue-manager/queue-manager.queue.postman.json",
-            "integrity": "sha1:82fdc1a432a79476ee12fdf947d4519e138eb0b6"
+            "integrity": "sha1:f18202fa6ea1734d590eccab00af28c9583b68c2"
         }
     ]
 }
