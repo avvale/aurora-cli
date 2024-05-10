@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { heineken, sapIcon, sapWhiteIcon } from './custom-icons-library';
+import { heineken, sapIcon, sapWhiteIcon, whatsappIcon } from './custom-icons-library';
 
 @Injectable({
     providedIn: 'root',
@@ -16,6 +16,7 @@ export class CustomIconsService
         matIconRegistry.addSvgIconSetInNamespace('aurora', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/aurora.svg'));
         matIconRegistry.addSvgIconLiteral('sap', domSanitizer.bypassSecurityTrustHtml(sapIcon));
         matIconRegistry.addSvgIconLiteral('sap_white', domSanitizer.bypassSecurityTrustHtml(sapWhiteIcon));
+        matIconRegistry.addSvgIconLiteral('whatsapp', domSanitizer.bypassSecurityTrustHtml(whatsappIcon));
         matIconRegistry.addSvgIconLiteral('heineken', domSanitizer.bypassSecurityTrustHtml(heineken));
     }
 }
