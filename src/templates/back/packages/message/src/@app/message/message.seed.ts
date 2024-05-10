@@ -39,4 +39,14 @@ export const permissions = [
     { id: '9e923097-079f-46ae-afde-e08f2b501c7c',  name: 'message.inboxSetting.update',     boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
     { id: '6ea0080a-5bba-4299-89c1-9491e01a7ece',  name: 'message.inboxSetting.upsert',     boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
     { id: 'a1e96d45-3f59-412f-909a-9b79bbb6d44a',  name: 'message.inboxSetting.delete',     boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
+
+    { id: 'c0fca51f-976d-48cf-a2cb-3a4335387467',  name: 'message.messageCenter.access',    boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
+    { id: '5e1d9161-e78f-4364-a2b1-476a3778fa1d',  name: 'message.messageCenter.get',       boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
+    { id: 'b4e62134-4909-440d-a39a-d5d7df8ad7e0',  name: 'message.messageCenter.update',    boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
+    { id: '2cda5a47-9808-4460-b23e-90a505b87298',  name: 'message.messageCenter.delete',    boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
+
+    { id: '1b441abf-9fe7-4cab-9b19-65e8b49a3cca',  name: 'message.messageQuickView.access', boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
+    { id: 'c52835f3-4e2b-4ff6-8b83-06a029d4e5c1',  name: 'message.messageQuickView.get',    boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
+    { id: 'bfd7046c-e135-4095-abf1-9c82b178fde9',  name: 'message.messageQuickView.update', boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
+    { id: '753cced1-6087-4d5e-b697-f18b7ebbfad5',  name: 'message.messageQuickView.delete', boundedContextId: '3575595d-1c67-4ed1-b753-19e55cabb2b2', roleIds: []},
 ];

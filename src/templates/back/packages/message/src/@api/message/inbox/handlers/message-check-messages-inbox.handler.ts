@@ -105,7 +105,7 @@ export class MessageCheckMessagesInboxHandler
                         messageId        : outboxMessage.messageId,
                         sort             : outboxMessage.sort,
                         accountId        : account.id,
-                        accountCode      : account.user.username,
+                        accountCode      : account.username,
                         isImportant      : outboxMessage.message.isImportant,
                         sentAt           : outboxMessage.createdAt,
                         subject          : outboxMessage.message.subject,
