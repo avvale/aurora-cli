@@ -28,13 +28,6 @@ export class OAuthCreateCredentialsDto
 
     @ApiProperty({
         type       : String,
-        description: 'email [input here api field description]',
-        example    : 'john@gmail.com',
-    })
-    email?: string;
-
-    @ApiProperty({
-        type       : String,
         description: 'clientSecret [input here api field description]',
         example    : 'ktjfde3ibcxglzz7glw6ehoibcn4olk8yitqaqtlvp',
     })
