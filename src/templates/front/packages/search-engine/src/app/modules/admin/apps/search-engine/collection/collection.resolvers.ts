@@ -1,9 +1,9 @@
 import { fieldColumnsConfig } from '../field/field.columns-config';
-import { SearchEngineCollection, SearchEngineField } from '../search-engine.types';
-import { collectionColumnsConfig } from './collection.columns-config';
-import { CollectionService } from './collection.service';
+import { SearchEngineField } from '../search-engine.types';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { collectionColumnsConfig, CollectionService } from '@apps/search-engine/collection';
+import { SearchEngineCollection } from '@apps/search-engine/search-engine.types';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const collectionPaginationResolver: ResolveFn<GridData<SearchEngineCollection>> = (
@@ -41,7 +41,7 @@ export const collectionNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'searchEngine::collection.detail.new',
@@ -50,17 +50,17 @@ export const collectionNewResolver: ResolveFn<Action> = (
 };
 
 export const collectionEditResolver: ResolveFn<{
-	object: SearchEngineCollection;
-	searchEnginePaginateFields: GridData<SearchEngineField>;
+    object: SearchEngineCollection;
+    searchEnginePaginateFields: GridData<SearchEngineField>;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const collectionService = inject(CollectionService);
-	const gridFiltersStorageService = inject(GridFiltersStorageService);
-	const gridStateService = inject(GridStateService);
+    const actionService = inject(ActionService);
+    const collectionService = inject(CollectionService);
+    const gridFiltersStorageService = inject(GridFiltersStorageService);
+    const gridStateService = inject(GridStateService);
 
     // paginate to manage fields grid-elements-manager
     const fieldsGridId = 'searchEngine::collection.detail.fieldsGridList';

@@ -1,8 +1,7 @@
-import { SearchEngineField } from '../search-engine.types';
-import { fieldColumnsConfig } from './field.columns-config';
-import { FieldService } from './field.service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { fieldColumnsConfig, FieldService } from '@apps/search-engine/field';
+import { SearchEngineField } from '@apps/search-engine/search-engine.types';
 import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
 
 export const fieldPaginationResolver: ResolveFn<GridData<SearchEngineField>> = (
@@ -40,7 +39,7 @@ export const fieldNewResolver: ResolveFn<Action> = (
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
+    const actionService = inject(ActionService);
 
     return actionService.action({
         id          : 'searchEngine::field.detail.new',
@@ -49,14 +48,14 @@ export const fieldNewResolver: ResolveFn<Action> = (
 };
 
 export const fieldEditResolver: ResolveFn<{
-	object: SearchEngineField;
+    object: SearchEngineField;
 }> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
 {
-	const actionService = inject(ActionService);
-	const fieldService = inject(FieldService);
+    const actionService = inject(ActionService);
+    const fieldService = inject(FieldService);
 
     actionService.action({
         id          : 'searchEngine::field.detail.edit',

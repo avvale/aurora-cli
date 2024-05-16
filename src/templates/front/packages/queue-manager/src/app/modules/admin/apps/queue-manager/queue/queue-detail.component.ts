@@ -191,7 +191,6 @@ export class QueueDetailComponent extends ViewDetailComponent
                         if (job && this.currentAction.id === 'queueManager::queue.detail.editJob')
                         {
                             this.managedJob = job;
-                            console.log(job.data);
                             this.jobDialogFg.patchValue(job);
                         }
                     });

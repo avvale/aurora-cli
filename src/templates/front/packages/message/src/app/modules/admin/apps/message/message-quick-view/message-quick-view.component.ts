@@ -8,7 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
 import { MessageInbox, MessageService } from '@apps/message';
 import { GridData } from '@aurora';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 import { Subject, lastValueFrom, takeUntil } from 'rxjs';
 import { InboxService } from '../inbox';
 
@@ -24,6 +24,13 @@ export const messageQuickViewMessagesScope = 'message::QuickViewMessages';
     imports        : [
         MatButtonModule, NgIf, MatIconModule, MatTooltipModule,
         NgFor, NgClass, NgTemplateOutlet, RouterLink, TranslocoModule, DatePipe,
+    ],
+    providers: [
+        {
+            provide : TRANSLOCO_SCOPE,
+            useValue: 'message',
+            multi   : true,
+        },
     ],
 })
 export class MessageQuickViewComponent implements OnInit, OnDestroy

@@ -1,8 +1,10 @@
 import { FieldService } from '../field/field.service';
-import { SearchEngineCollection, SearchEngineCreateCollection, SearchEngineField, SearchEngineUpdateCollectionById, SearchEngineUpdateCollections } from '../search-engine.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, indexCollectionMutation, paginationQuery, updateByIdMutation, updateMutation } from './collection.graphql';
+import { SearchEngineField } from '../search-engine.types';
+import { findByIdWithRelationsQuery, indexCollectionMutation } from './collection.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/search-engine/collection';
+import { SearchEngineCollection, SearchEngineCreateCollection, SearchEngineUpdateCollectionById, SearchEngineUpdateCollections } from '@apps/search-engine/search-engine.types';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 

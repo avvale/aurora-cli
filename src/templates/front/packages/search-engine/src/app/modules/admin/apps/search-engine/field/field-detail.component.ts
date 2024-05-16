@@ -1,8 +1,8 @@
-import { SearchEngineField } from '../search-engine.types';
-import { FieldService } from './field.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FieldService } from '@apps/search-engine/field';
+import { SearchEngineField } from '@apps/search-engine/search-engine.types';
 import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
@@ -36,11 +36,10 @@ export class FieldDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		private readonly fieldService: FieldService,
-		protected readonly injector: Injector,
+        private readonly fieldService: FieldService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of
@@ -83,13 +82,15 @@ export class FieldDetailComponent extends ViewDetailComponent
 
     createForm(): void
     {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            collectionId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            collectionId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             name: ['', [Validators.required, Validators.maxLength(255)]],
-            type: ['', [Validators.required, Validators.maxLength(20)]],
+            type: ['', [Validators.required, Validators.maxLength(63)]],
             isNullable: [false, [Validators.required]],
         });
+        /* eslint-enable key-spacing */
     }
 
     async handleAction(action: Action): Promise<void>

@@ -14,7 +14,7 @@ export const collectionColumnsConfig: ColumnConfig[] = [
         translation: 'searchEngine.Alias',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.ENUM,
         field      : 'status',
         sort       : 'status',
         translation: 'searchEngine.Status',

@@ -1,7 +1,6 @@
-import { SearchEngineCollection } from '../search-engine.types';
-import { collectionColumnsConfig } from './collection.columns-config';
-import { CollectionService } from './collection.service';
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { collectionColumnsConfig, CollectionService } from '@apps/search-engine/collection';
+import { SearchEngineCollection } from '@apps/search-engine/search-engine.types';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
@@ -64,14 +63,13 @@ export class CollectionListComponent extends ViewBaseComponent
     ];
 
     constructor(
-        protected readonly injector: Injector,
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly collectionService: CollectionService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of

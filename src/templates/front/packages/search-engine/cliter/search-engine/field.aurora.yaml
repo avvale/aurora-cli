@@ -18,7 +18,7 @@ aggregateProperties:
     nullable: false
     relationship:
       type: many-to-one
-      aggregate: SearchEngineCollection
+      aggregateName: SearchEngineCollection
       modulePath: search-engine/collection
       key: id
       field: collection
@@ -29,7 +29,7 @@ aggregateProperties:
     nullable: false
   - name: type
     type: varchar
-    maxLength: 20
+    maxLength: 63
     nullable: false
   - name: isNullable
     type: boolean
@@ -45,5 +45,3 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
-additionalApis: []

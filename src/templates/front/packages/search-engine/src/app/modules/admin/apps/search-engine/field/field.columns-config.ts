@@ -3,12 +3,6 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 export const fieldColumnsConfig: ColumnConfig[] = [
     {
         type       : ColumnDataType.STRING,
-        field      : 'collectionId',
-        sort       : 'collectionId',
-        translation: 'searchEngine.CollectionId',
-    },
-    {
-        type       : ColumnDataType.STRING,
         field      : 'name',
         sort       : 'name',
         translation: 'searchEngine.Name',

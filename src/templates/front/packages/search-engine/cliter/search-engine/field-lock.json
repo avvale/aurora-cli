@@ -11,23 +11,23 @@
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/field/field-detail.component.html",
-            "integrity": "sha1:53a3ff446446a5c67701c826a60a75d9f34d2f54"
+            "integrity": "sha1:e48cb8be118f5c694514b60b6938c7f670c15c68"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/field/field-detail.component.ts",
-            "integrity": "sha1:862d533570b009b564c0ec120d9a4f816a4da2f8"
+            "integrity": "sha1:403af0357eeea163360194a67eaee743b3fe2edd"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/field/field-list.component.html",
-            "integrity": "sha1:eda14d820862b688cee79078c7d16d4b2e5f7a2b"
+            "integrity": "sha1:ce909b8cc18c2a9365bb687b9d5c2d704e7d0333"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/field/field-list.component.ts",
-            "integrity": "sha1:55ab2e56e84dc5470d6e42701e333bda7734653b"
+            "integrity": "sha1:e41b0175d0e522439841fc1466bec61a8785ff5a"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/field/field.columns-config.ts",
-            "integrity": "sha1:fa65a99f8bca6acb5467e9a94f5ae7091e4103b4"
+            "integrity": "sha1:68ac0fc958376ef1f3eeaffc5e56ea134d7c0e7a"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/field/field.graphql.ts",
@@ -35,11 +35,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/field/field.resolvers.ts",
-            "integrity": "sha1:573fa91c7ae489910dde6c47291c6a54b28b274d"
+            "integrity": "sha1:55149c865c0333b09d8f03ad6a858652f23c6f6f"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/field/field.service.ts",
-            "integrity": "sha1:6e69aef1fda267329966339bf9c146560019321c"
+            "integrity": "sha1:deedadbe4d4c76d8fe16bea5d7b50d05abbc220b"
+        },
+        {
+            "path": "src/app/modules/admin/apps/search-engine/field/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/search-engine/field/public-api.ts",
+            "integrity": "sha1:2c214c1a395eacab20d7ee5e928d58b3dd1d6e80"
         }
     ]
 }

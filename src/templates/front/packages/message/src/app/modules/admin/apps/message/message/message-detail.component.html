@@ -338,12 +338,14 @@
                                     }"
                                     [operators]="{
                                         contains: t('Operators.Contains'),
+                                        containsAny: t('Operators.ContainsAny'),
                                         endsWith: t('Operators.EndsWith'),
                                         equals: t('Operators.Equals'),
                                         greaterThan: t('Operators.GreaterThan'),
                                         greaterThanEqual: t('Operators.GreaterThanEqual'),
                                         lessThan: t('Operators.LessThan'),
                                         lessThanEqual: t('Operators.LessThanEqual'),
+                                        mustContain: t('Operators.MustContain'),
                                         notEquals: t('Operators.NotEquals'),
                                         startsWith: t('Operators.StartsWith')
                                     }"
@@ -531,7 +533,7 @@
                             <div
                                 class="col-12"
                             >
-                                @for(attachment of managedObject()?.attachments; track attachment.id)
+                                @for (attachment of managedObject()?.attachments; track attachment.id)
                                 {
                                     <div class="flex justify-between items-center p-4 mb-2 border rounded">
                                         <p

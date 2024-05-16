@@ -10,28 +10,24 @@
             "integrity": "sha1:099da41f9a20e2e8d0c241780985bb227e84f5bf"
         },
         {
-            "path": "src/app/modules/admin/apps/search-engine/search-engine.routes.ts",
-            "integrity": "sha1:e6ad3801383eb51c3b5716c5f1dc160c3362c048"
-        },
-        {
             "path": "src/app/modules/admin/apps/search-engine/collection/collection-detail.component.html",
-            "integrity": "sha1:9e7dd8343cd32959e7538e956aace5d4442305b7"
+            "integrity": "sha1:c25bd96e1d1e1591b68ceee44422af224d0e2d60"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/collection/collection-detail.component.ts",
-            "integrity": "sha1:8130df458252bcd13e13b9fdd985b1ef56b0a372"
+            "integrity": "sha1:a7c178d0fa36e557a8eb74fae4a026b311dca327"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/collection/collection-list.component.html",
-            "integrity": "sha1:c68860d3639f7c6e031c0700bee45251c5058d7f"
+            "integrity": "sha1:956d6a4dafd406633b12b08245ccc434b658f6ce"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/collection/collection-list.component.ts",
-            "integrity": "sha1:226397e1bcfa70e88c2a6c04762b4915db47f92b"
+            "integrity": "sha1:aa84b9a0e8298a3b7f0c5ecf731f11ce1f0020f5"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/collection/collection.columns-config.ts",
-            "integrity": "sha1:b50817951ce045e82a7053e22e2e9daffc097b4a"
+            "integrity": "sha1:51889960dd2b38385c81bdfa5945767642bc75de"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/collection/collection.graphql.ts",
@@ -39,11 +35,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/collection/collection.resolvers.ts",
-            "integrity": "sha1:ff2dfbd6d0d906223531515129cac2a493859f4c"
+            "integrity": "sha1:e990acb7eba5e368fe82691fdd374b9cb95754a0"
         },
         {
             "path": "src/app/modules/admin/apps/search-engine/collection/collection.service.ts",
-            "integrity": "sha1:b98765ca13c3d486a833a3132cc683bff04a6c2f"
+            "integrity": "sha1:00fa7c8bf35621c4957138532c50aaae2c4684c9"
+        },
+        {
+            "path": "src/app/modules/admin/apps/search-engine/collection/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/search-engine/collection/public-api.ts",
+            "integrity": "sha1:8a47a6d209efefc589a360fc5f75e362ed19de3e"
         }
     ]
 }

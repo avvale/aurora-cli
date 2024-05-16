@@ -31,20 +31,20 @@ aggregateProperties:
     defaultValue: CONSOLIDATED
     example: SearchEngineCollectionStatus.CONSOLIDATED
   - name: documentsNumber
-    type: int.unsigned
-    maxLength: 10
+    type: int
+    unsigned: true
     nullable: true
   - name: defaultSortingField
     type: varchar
     maxLength: 255
     nullable: true
   - name: numMemoryShards
-    type: smallint.unsigned
-    maxLength: 5
+    type: smallint
+    unsigned: true
     nullable: true
   - name: timestampCreatedAt
-    type: int.unsigned
-    maxLength: 10
+    type: int
+    unsigned: true
     nullable: true
   - name: isEnableNestedFields
     type: boolean
@@ -57,9 +57,8 @@ aggregateProperties:
     relationship:
       type: one-to-many
       singularName: field
-      aggregate: SearchEngineField
+      aggregateName: SearchEngineField
       modulePath: search-engine/field
-      key: collectionId
       avoidConstraint: true
     webComponent:
       type: grid-elements-manager
@@ -72,7 +71,6 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-aggregateI18nProperties: []
 additionalApis:
   - path: search-engine/collection/index
     resolverType: mutation

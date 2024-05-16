@@ -1,14 +1,15 @@
+import { fieldColumnsConfig } from '../field/field.columns-config';
+import { FieldService } from '../field/field.service';
+import { SearchEngineField } from '../search-engine.types';
 import { NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
-import { Action, ColumnConfig, ColumnDataType, Crumb, GridColumnsConfigStorageService, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridState, GridStateService, QueryStatementHandler, Utils, ViewDetailComponent, defaultDetailImports, exportRows, log, mapActions } from '@aurora';
-import { Observable, lastValueFrom, takeUntil } from 'rxjs';
-import { fieldColumnsConfig } from '../field/field.columns-config';
-import { FieldService } from '../field/field.service';
-import { SearchEngineCollection, SearchEngineField } from '../search-engine.types';
-import { CollectionService } from './collection.service';
+import { CollectionService } from '@apps/search-engine/collection';
+import { SearchEngineCollection } from '@apps/search-engine/search-engine.types';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridState, GridStateService, log, mapActions, QueryStatementHandler, Utils, ViewDetailComponent } from '@aurora';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'search-engine-collection-detail',
@@ -33,7 +34,7 @@ export class CollectionDetailComponent extends ViewDetailComponent
     managedObject: SearchEngineCollection;
 
     // relationships
-    /* #region  variables to manage grid-elements-manager fields */
+    /* #region variables to manage grid-elements-manager fields */
     @ViewChild('fieldsGridElementsManager') fieldsComponent: GridElementsManagerComponent;
     fieldDialogFg: FormGroup;
     fieldsGridId: string = 'searchEngine::collection.detail.fieldsGridList';
@@ -77,15 +78,14 @@ export class CollectionDetailComponent extends ViewDetailComponent
     ];
 
     constructor(
-		private readonly collectionService: CollectionService,
-		private readonly fieldService: FieldService,
-		private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
-		private readonly gridFiltersStorageService: GridFiltersStorageService,
-		private readonly gridStateService: GridStateService,
-		protected readonly injector: Injector,
+        private readonly collectionService: CollectionService,
+        private readonly fieldService: FieldService,
+        private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
+        private readonly gridFiltersStorageService: GridFiltersStorageService,
+        private readonly gridStateService: GridStateService,
     )
     {
-        super(injector);
+        super();
     }
 
     // this method will be called after the ngOnInit of
@@ -132,12 +132,12 @@ export class CollectionDetailComponent extends ViewDetailComponent
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             name: ['', [Validators.required, Validators.maxLength(255)]],
             alias: ['', [Validators.maxLength(255)]],
-            status: ['', [Validators.required]],
+            status: [null, [Validators.required]],
             documentsNumber: [null, [Validators.maxLength(10)]],
             defaultSortingField: ['', [Validators.maxLength(255)]],
             numMemoryShards: [null, [Validators.maxLength(5)]],
             timestampCreatedAt: [null, [Validators.maxLength(10)]],
-            isEnableNestedFields: [false, [Validators.required]],
+            isEnableNestedFields: false,
         });
     }
 
@@ -146,9 +146,9 @@ export class CollectionDetailComponent extends ViewDetailComponent
     {
         this.fieldDialogFg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            collectionId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            collectionId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             name: ['', [Validators.required, Validators.maxLength(255)]],
-            type: ['', [Validators.required, Validators.maxLength(20)]],
+            type: ['', [Validators.required, Validators.maxLength(63)]],
             isNullable: [false, [Validators.required]],
         });
     }
@@ -199,7 +199,7 @@ export class CollectionDetailComponent extends ViewDetailComponent
                         this.fg.patchValue(item);
                     });
 
-                /* #region init actions to manage fields grid-elements-manager */
+                /* #region edit action to manage fields grid-elements-manager */
                 this.fieldsColumnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.fieldsGridId, this.originFieldsColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
@@ -224,7 +224,7 @@ export class CollectionDetailComponent extends ViewDetailComponent
                             this.fieldDialogFg.patchValue(field);
                         }
                     });
-                /* #endregion init actions to manage fields grid-elements-manager */
+                /* #endregion edit action to manage fields grid-elements-manager */
                 break;
 
             case 'searchEngine::collection.detail.create':
