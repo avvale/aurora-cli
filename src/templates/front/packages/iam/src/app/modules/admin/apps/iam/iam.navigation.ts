@@ -64,12 +64,5 @@ export const iamNavigation: FuseNavigationItem = {
             icon : 'mat_outline:tag',
             link : '/iam/tag',
         },
-        {
-            id   : 'users',
-            title: 'User',
-            type : 'basic',
-            icon : 'heroicons_outline:tag',
-            link : '/iam/user',
-        },
     ],
 };
