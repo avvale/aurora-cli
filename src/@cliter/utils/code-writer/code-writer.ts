@@ -100,7 +100,7 @@ export class CodeWriter
             `
 {
     provide : ${this.boundedContextName.toPascalCase()}I${this.moduleName.toPascalCase()}Repository,
-    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}Repository
+    useClass: ${this.boundedContextName.toPascalCase()}Sequelize${this.moduleName.toPascalCase()}Repository,
 }`,
             `${this.boundedContextName.toPascalCase()}Repositories`,
         );
