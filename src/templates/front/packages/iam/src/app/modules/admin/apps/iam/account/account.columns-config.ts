@@ -26,6 +26,12 @@ export const accountColumnsConfig: ColumnConfig[] = [
         translation: 'Email',
     },
     {
+        type       : ColumnDataType.STRING,
+        field      : 'username',
+        sort       : 'username',
+        translation: 'Username',
+    },
+    {
         type       : ColumnDataType.BOOLEAN,
         field      : 'isActive',
         sort       : 'isActive',

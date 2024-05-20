@@ -19,7 +19,6 @@ aggregateProperties:
       aggregateName: IamAccount
       modulePath: iam/account
       field: account
-    index: index
   - name: name
     type: varchar
     maxLength: 128

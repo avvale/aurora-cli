@@ -9,12 +9,6 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
     modelName: 'IamUser',
     freezeTableName: true,
     timestamps: false,
-    indexes: [
-		{
-			fields: ['accountId'],
-			unique: false,
-		},
-    ],
 })
 export class IamUserModel extends Model<IamUserModel>
 {
