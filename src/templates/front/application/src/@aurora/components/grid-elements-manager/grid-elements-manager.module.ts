@@ -9,21 +9,21 @@ import { NgFor } from '@angular/common';
 
 @NgModule({
     imports: [
+        GridColumnTranslationComponent,
         GridCustomButtonsHeaderDialogTemplateDirective,
         GridElementsManagerCellValueTemplateDirective,
         GridElementsManagerComponent,
         GridFormElementDetailDialogTemplateDirective,
         GridTranslationsComponent,
-        GridColumnTranslationComponent,
         NgFor,
     ],
     exports: [
+        GridColumnTranslationComponent,
         GridCustomButtonsHeaderDialogTemplateDirective,
         GridElementsManagerCellValueTemplateDirective,
         GridElementsManagerComponent,
         GridFormElementDetailDialogTemplateDirective,
         GridTranslationsComponent,
-        GridColumnTranslationComponent,
         NgFor,
     ],
 })

@@ -125,15 +125,15 @@
         >
             <ng-container *ngFor="let columnConfig of gridState.columnsConfig">
 
-                <ng-container   [matColumnDef]="columnConfig.field"
-                                [sticky]="columnConfig.sticky">
-
+                <ng-container
+                    [matColumnDef]="columnConfig.field"
+                    [sticky]="columnConfig.sticky"
+                >
                     <!-- ngSwitch for grid cell -->
                     <ng-container
                         [ngSwitch]="columnConfig.type"
                         *ngIf="!columnConfig.hidden"
                     >
-
                         <!-- STRING -->
                         <ng-container *ngSwitchCase="columnConfigType.STRING">
                             <th
@@ -562,7 +562,10 @@
             </tr>
 
             <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" [attr.colspan]="displayedColumns?.length">
+                <td
+                    class="mat-cell"
+                    [attr.colspan]="displayedColumns?.length"
+                >
                     <p class="p-2 text-base">{{ 'noData' | gridTranslate | async }}</p>
                 </td>
             </tr>
@@ -571,23 +574,23 @@
     </div>
 
     <div class="grid-footer">
-        <div
-            *ngIf="!hasPagination"
-            class="h-3"
-        >
-        </div>
-
-        <mat-paginator
-            *ngIf="hasPagination"
-            showFirstLastButtons
-            class="rounded-b-md"
-            aria-label="Select page of periodic elements"
-            (page)="handlePageStateChange($event)"
-            [length]="gridData?.count"
-            [pageIndex]="gridState?.page?.pageIndex"
-            [pageSize]="gridState?.page?.pageSize"
-            [pageSizeOptions]="[10, 20, 50, 100]"
-        >
-        </mat-paginator>
+        @if (hasPagination)
+        {
+            <mat-paginator
+                showFirstLastButtons
+                class="rounded-b-md"
+                aria-label="Select page of periodic elements"
+                (page)="handlePageStateChange($event)"
+                [length]="gridData?.count"
+                [pageIndex]="gridState?.page?.pageIndex"
+                [pageSize]="gridState?.page?.pageSize"
+                [pageSizeOptions]="[10, 20, 50, 100]"
+            >
+            </mat-paginator>
+        }
+        @else
+        {
+            <div class="h-3"></div>
+        }
     </div>
 </div>

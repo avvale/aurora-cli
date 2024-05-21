@@ -17,46 +17,60 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-            <button
-                *ngIf="currentViewAction.id === 'iam::role.detail.edit'"
-                mat-flat-button
-                type="submit"
-                class="ml-3"
-                form="iamRoleFormDetail"
-                color="accent"
-                [disabled]="fg.pristine || ('iam::role.detail.update' | getSpinnerFlag | async)"
-            >
-                <mat-icon
-                    *ngIf="!('iam::role.detail.update' | getSpinnerFlag | async)"
-                    svgIcon="mat_solid:edit"
-                    class="icon-size-5 mr-2"
+            @if (currentViewAction.id === 'iam::role.detail.edit')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    class="ml-3"
+                    form="iamRoleFormDetail"
+                    color="accent"
+                    [disabled]="fg.pristine || ('iam::role.detail.update' | getSpinnerFlag | async)"
                 >
-                </mat-icon>
-                <mat-icon *ngIf="'iam::role.detail.update' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
-                {{ t('Update') }}
-            </button>
-            <button
-                *ngIf="currentViewAction.id === 'iam::role.detail.new'"
-                mat-flat-button
-                type="submit"
-                form="iamRoleFormDetail"
-                class="ml-3"
-                color="accent"
-                [disabled]="fg.pristine || ('iam::role.detail.create' | getSpinnerFlag | async)"
-            >
-                <mat-icon
-                    *ngIf="!('iam::role.detail.create' | getSpinnerFlag | async)"
-                    svgIcon="mat_solid:save"
-                    class="icon-size-5 mr-2"
+                    @if ('iam::role.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon *ngIf="'iam::role.detail.update' | getSpinnerFlag | async">
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:edit"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Update') }}
+                </button>
+            }
+            @if (currentViewAction.id === 'iam::role.detail.new')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    form="iamRoleFormDetail"
+                    class="ml-3"
+                    color="accent"
+                    [disabled]="fg.pristine || ('iam::role.detail.create' | getSpinnerFlag | async)"
                 >
-                </mat-icon>
-                <mat-icon *ngIf="'iam::role.detail.create' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
-                {{ t('Create') }}
-            </button>
+                    @if ('iam::role.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:save"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Create') }}
+                </button>
+            }
         </div>
         <!-- / Actions -->
 
@@ -64,17 +78,17 @@
     <!-- / Header -->
 
     <!-- Main -->
-    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
-
+    <div
+        cdkScrollable
+        class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto"
+    >
         <div class="form-card">
-
             <form
                 id="iamRoleFormDetail"
                 novalidate
                 [formGroup]="fg"
                 (ngSubmit)="onSubmit($event)"
             >
-
                 <div class="layout__container">
 
                     <mat-form-field
@@ -98,123 +112,124 @@
                         </mat-checkbox>
                     </div>
                     <!-- #region component to manage permissions -->
-                    <au-grid-select-multiple-elements
-                        *ngIf="currentViewAction.id === 'iam::role.detail.edit'"
-                        class="col-12 mt-0"
-                        [columnsConfig]="permissionsRolesColumnsConfig$ | async"
-                        [dialogColumnsConfig]="permissionsColumnsConfig$ | async"
-                        [dialogGridData]="permissionsGridData$ | async"
-                        [dialogGridId]="permissionsGridId"
-                        [dialogOriginColumnsConfig]="permissionsColumnsConfig$ | async"
-                        [gridData]="permissionsRolesGridData$ | async"
-                        [gridId]="permissionsRolesGridId"
-                        [gridState]="permissionsRolesGridState"
-                        [id]="permissionsRolesGridId"
-                        [label]="t('iam.Permissions')"
-                        [originColumnsConfig]="originPermissionsRolesColumnsConfig"
-                        [selectedCheckboxRowModel]="selectedCheckboxRowModel"
-                        (dialogSelectedCheckboxRowModelChange)="handleDialogPermissionsRowsSectionChange($event)"
-                        (selectedCheckboxRowModelChange)="handlePermissionsRowsSectionChange($event)"
-                        #permissionsGridSelectMultipleElements
-                    >
-                        <au-grid-translations
-                            [for]="permissionsRolesGridId"
-                            [actions]="t('Actions')"
-                            [AND]="t('AND')"
-                            [clearFilters]="t('ClearFilters')"
-                            [clickAndDragInfo]="t('ClickAndDragInfo')"
-                            [columns]="t('Columns')"
-                            [field]="t('Field')"
-                            [filter]="t('Filter')"
-                            [operator]="t('Operator')"
-                            [OR]="t('OR')"
-                            [pleaseSelectField]="t('PleaseSelectField')"
-                            [translations]="t('Translations')"
-                            [value]="t('Value')"
-                            [noData]="t('NoData')"
-                            [paginator]="{
-                                firstPageLabel: t('Paginator.FirstPageLabel'),
-                                itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
-                                lastPageLabel: t('Paginator.LastPageLabel'),
-                                nextPageLabel: t('Paginator.NextPageLabel'),
-                                ofLabel: t('Paginator.OfLabel'),
-                                previousPageLabel: t('Paginator.PreviousPageLabel')
-                            }"
-                            [operators]="{
-                                contains: t('Operators.Contains'),
-                                containsAny: t('Operators.ContainsAny'),
-                                endsWith: t('Operators.EndsWith'),
-                                equals: t('Operators.Equals'),
-                                greaterThan: t('Operators.GreaterThan'),
-                                greaterThanEqual: t('Operators.GreaterThanEqual'),
-                                lessThan: t('Operators.LessThan'),
-                                lessThanEqual: t('Operators.LessThanEqual'),
-                                mustContain: t('Operators.MustContain'),
-                                notEquals: t('Operators.NotEquals'),
-                                startsWith: t('Operators.StartsWith')
-                            }"
-                            [actionsMenu]="{
-                                edit: t('Edit'),
-                                delete: t('Delete'),
-                                unlink: t('Unlink'),
-                                cancel: t('Cancel'),
-                                close: t('Close')
-                            }"
+                    @if (currentViewAction.id === 'iam::role.detail.edit')
+                    {
+                        <au-grid-select-multiple-elements
+                            class="col-12 mt-0"
+                            [columnsConfig]="permissionsRolesColumnsConfig$ | async"
+                            [dialogColumnsConfig]="permissionsColumnsConfig$ | async"
+                            [dialogGridData]="permissionsGridData$ | async"
+                            [dialogGridId]="permissionsGridId"
+                            [dialogOriginColumnsConfig]="permissionsColumnsConfig$ | async"
+                            [gridData]="permissionsRolesGridData$ | async"
+                            [gridId]="permissionsRolesGridId"
+                            [gridState]="permissionsRolesGridState"
+                            [label]="t('iam.Permissions')"
+                            [originColumnsConfig]="originPermissionsRolesColumnsConfig"
+                            [selectedCheckboxRowModel]="selectedCheckboxRowModel"
+                            (dialogSelectedCheckboxRowModelChange)="handleDialogPermissionsRowsSectionChange($event)"
+                            (selectedCheckboxRowModelChange)="handlePermissionsRowsSectionChange($event)"
+                            #permissionsGridSelectMultipleElements
                         >
-                            @for (columnConfig of permissionsOriginColumnsConfig; track permissionsOriginColumnsConfig.field)
-                            {
-                                <au-grid-column-translation
-                                    [field]="columnConfig.field"
-                                >
-                                    {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
-                                </au-grid-column-translation>
-                            }
-                        </au-grid-translations>
-                        <ng-template
-                            auGridSelectMultipleCustomHeaderTemplate
-                            position="left"
-                        >
-                            <div class="flex justify-start items-center">
-                                <button
-                                    mat-icon-button
-                                    class="mr-2"
-                                    (click)="handleOpenPermissionsDialog(newActionId)"
-                                >
-                                    <mat-icon svgIcon="mat_solid:add"></mat-icon>
-                                    <span class="cdk-visually-hidden">
-                                        Add new item
-                                    </span>
-                                </button>
-                                <button
-                                    mat-flat-button
-                                    [disabled]="permissionsRolesSelectedRows.length === 0"
-                                    (click)="handleRemovePermissionsSelected()"
-                                >
-                                    <mat-icon
-                                        class="mr-2"
-                                        svgIcon="mat_solid:link_off"
+                            <au-grid-translations
+                                [for]="permissionsRolesGridId"
+                                [actions]="t('Actions')"
+                                [AND]="t('AND')"
+                                [clearFilters]="t('ClearFilters')"
+                                [clickAndDragInfo]="t('ClickAndDragInfo')"
+                                [columns]="t('Columns')"
+                                [field]="t('Field')"
+                                [filter]="t('Filter')"
+                                [operator]="t('Operator')"
+                                [OR]="t('OR')"
+                                [pleaseSelectField]="t('PleaseSelectField')"
+                                [translations]="t('Translations')"
+                                [value]="t('Value')"
+                                [noData]="t('NoData')"
+                                [paginator]="{
+                                    firstPageLabel: t('Paginator.FirstPageLabel'),
+                                    itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
+                                    lastPageLabel: t('Paginator.LastPageLabel'),
+                                    nextPageLabel: t('Paginator.NextPageLabel'),
+                                    ofLabel: t('Paginator.OfLabel'),
+                                    previousPageLabel: t('Paginator.PreviousPageLabel')
+                                }"
+                                [operators]="{
+                                    contains: t('Operators.Contains'),
+                                    containsAny: t('Operators.ContainsAny'),
+                                    endsWith: t('Operators.EndsWith'),
+                                    equals: t('Operators.Equals'),
+                                    greaterThan: t('Operators.GreaterThan'),
+                                    greaterThanEqual: t('Operators.GreaterThanEqual'),
+                                    lessThan: t('Operators.LessThan'),
+                                    lessThanEqual: t('Operators.LessThanEqual'),
+                                    mustContain: t('Operators.MustContain'),
+                                    notEquals: t('Operators.NotEquals'),
+                                    startsWith: t('Operators.StartsWith')
+                                }"
+                                [actionsMenu]="{
+                                    edit: t('Edit'),
+                                    delete: t('Delete'),
+                                    unlink: t('Unlink'),
+                                    cancel: t('Cancel'),
+                                    close: t('Close')
+                                }"
+                            >
+                                @for (columnConfig of originPermissionsRolesColumnsConfig; track columnConfig.field)
+                                {
+                                    <au-grid-column-translation
+                                        [field]="columnConfig.field"
                                     >
-                                    </mat-icon>
-                                    {{ t('RemoveSelected') }}
-                                </button>
-                            </div>
-                        </ng-template>
-                        <ng-template
-                            auGridSelectMultipleCustomHeaderDialogTemplate
-                            position="left"
-                        >
-                            <ng-container>
-                                <button
-                                    mat-flat-button
-                                    [disabled]="permissionsSelectedRows.length === 0"
-                                    (click)="handleAddPermissionsSelected()"
-                                >
-                                    <mat-icon class="mr-2">add_link</mat-icon>
-                                    {{ t('AddSelected') }}
-                                </button>
-                            </ng-container>
-                        </ng-template>
-                    </au-grid-select-multiple-elements>
+                                        {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                                    </au-grid-column-translation>
+                                }
+                            </au-grid-translations>
+                            <ng-template
+                                auGridSelectMultipleCustomHeaderTemplate
+                                position="left"
+                            >
+                                <div class="flex justify-start items-center">
+                                    <button
+                                        mat-icon-button
+                                        class="mr-2"
+                                        (click)="handleOpenPermissionsDialog(newActionId)"
+                                    >
+                                        <mat-icon svgIcon="mat_solid:add"></mat-icon>
+                                        <span class="cdk-visually-hidden">
+                                            Add new item
+                                        </span>
+                                    </button>
+                                    <button
+                                        mat-flat-button
+                                        [disabled]="permissionsRolesSelectedRows.length === 0"
+                                        (click)="handleRemovePermissionsSelected()"
+                                    >
+                                        <mat-icon
+                                            class="mr-2"
+                                            svgIcon="mat_solid:link_off"
+                                        >
+                                        </mat-icon>
+                                        {{ t('RemoveSelected') }}
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <ng-template
+                                auGridSelectMultipleCustomHeaderDialogTemplate
+                                position="left"
+                            >
+                                <ng-container>
+                                    <button
+                                        mat-flat-button
+                                        [disabled]="permissionsSelectedRows.length === 0"
+                                        (click)="handleAddPermissionsSelected()"
+                                    >
+                                        <mat-icon class="mr-2">add_link</mat-icon>
+                                        {{ t('AddSelected') }}
+                                    </button>
+                                </ng-container>
+                            </ng-template>
+                        </au-grid-select-multiple-elements>
+                    }
                     <!-- #endregion component to manage permissions -->
 
                 </div>
