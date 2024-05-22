@@ -350,54 +350,53 @@
                                 appearance="outline"
                                 class="col-start-1 col-6"
                             >
-                                <mat-label>{{ t('iam.Password') }}</mat-label>
-                                <mat-icon
+                                <mat-label>{{ t('Password') }}</mat-label>
+                                <mat-pass-toggle-visibility
+                                    #showPassword
                                     matSuffix
-                                    svgIcon="mat_solid:lock"
-                                    matTooltip="{{ t('iam.ShowPassword') }}"
-                                    class="inline-block cursor-pointer"
-                                    *ngIf="!isShowPassword"
-                                    (click)="isShowPassword = !isShowPassword"
+                                    class="mr-2"
                                 >
-                                </mat-icon>
-                                <mat-icon
+                                </mat-pass-toggle-visibility>
+                                <button
                                     matSuffix
-                                    svgIcon="mat_solid:lock_open"
-                                    matTooltip="{{ t('iam.HidePassword') }}"
-                                    class="inline-block cursor-pointer"
-                                    *ngIf="isShowPassword"
-                                    (click)="isShowPassword = !isShowPassword"
-                                >
-                                </mat-icon>
-                                <mat-icon
-                                    matSuffix
-                                    svgIcon="mat_solid:cached"
-                                    [matTooltip]="t('iam.CreatePassword')"
-                                    class="inline-block cursor-pointer ml-4"
+                                    mat-icon-button
+                                    class="mr-2"
+                                    [aria-label]="t('iam.CreatePassword')"
                                     (click)="handleCreatePassword()"
                                 >
-                                </mat-icon>
+                                    <mat-icon>sync</mat-icon>
+                                </button>
                                 <input
                                     matInput
+                                    #passwordInput
                                     formControlName="password"
-                                    [type]="isShowPassword ? 'text' : 'password'"
+                                    [type]="showPassword.type"
                                     [required]="currentAction === 'iam::account.detail.new'"
+                                    maxlength="30"
                                     autocomplete="new-password"
                                 >
                                 <mat-hint
                                     align="end"
                                     aria-live="polite"
                                 >
-                                    {{ fg.get('user.password').value?.length }}
+                                    {{ passwordInput.value?.length }} / {{ passwordStrengthComponent.max }}
                                 </mat-hint>
                                 <mat-error>{{ formErrors['user.password'] | async }}</mat-error>
                             </mat-form-field>
-
-                            <!-- <mat-password-strength
+                            <mat-password-strength
+                                #passwordStrengthComponent
                                 class="col-start-1 col-6"
-                                [password]="fg.get('user.password').value"
+                                [password]="passwordInput.value"
+                                [enableLengthRule]="true"
+                                [min]="8"
+                                [max]="30"
+                                [enableLowerCaseLetterRule]="true"
+                                [enableUpperCaseLetterRule]="true"
+                                [enableDigitRule]="true"
+                                [enableSpecialCharRule]="true"
                             >
-                            </mat-password-strength> -->
+                            </mat-password-strength>
+
                             <mat-form-field
                                 appearance="outline"
                                 class="col-start-1 col-6"
@@ -405,16 +404,18 @@
                                 <mat-label>{{ t('RepeatPassword') }}</mat-label>
                                 <input
                                     matInput
+                                    #repeatPasswordInput
                                     formControlName="repeatPassword"
                                     type="password"
                                     [required]="currentViewAction.id === 'iam::account.detail.new'"
+                                    maxlength="30"
                                     autocomplete="new-password"
                                 >
                                 <mat-hint
                                     align="end"
                                     aria-live="polite"
                                 >
-                                    {{ user.get('repeatPassword')?.value?.length }}
+                                    {{ repeatPasswordInput.value?.length }} / {{ passwordStrengthComponent.max }}
                                 </mat-hint>
                                 <mat-error>{{ formErrors['user.repeatPassword'] | async }}</mat-error>
                             </mat-form-field>
