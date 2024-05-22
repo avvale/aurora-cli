@@ -188,9 +188,4 @@ Go to https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto for more inf
             sliceSize,
         );
     }
-
-    static createPassword(options?: GenerateOptions): string
-    {
-        return generatePassword.generate(options);
-    }
 }

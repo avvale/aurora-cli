@@ -75,6 +75,9 @@ export class ValidationMessagesService
             case 'min':
                 return this.translocoService.selectTranslate('validations.Min', { min: ac.errors[error]['min'] });
 
+            case 'password':
+                return this.translocoService.selectTranslate(`validations.${ac.errors[error]['message']}`);
+
             case 'notequal':
                 return this.translocoService.selectTranslate('validations.NotEqual',
                     { fieldName: ac.errors[error]['fieldName'], matchFieldName: ac.errors[error]['matchFieldName'] });

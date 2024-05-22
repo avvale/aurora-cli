@@ -1,13 +1,17 @@
 {
-    "Compare"   : "Values do not match, must be the same.",
-    "Default"   : "Error not contemplated.",
-    "Email"     : "This field must be a valid email address.",
-    "Login"     : "The user or password is incorrect.",
-    "Max"       : "This field may not be greater than {{ max }}.",
-    "MaxLength" : "This field may not be greater than {{ maxlength }} characters.",
-    "Min"       : "This field cannot be less than {{ min }}.",
-    "MinLength" : "This field must be at least {{ minlength }} characters.",
-    "NotEqual"  : "Field {{ fieldName }} is not the same as field {{ matchFieldName }}",
-    "Required"  : "This field is required.",
-    "Pattern"   : "The field {{ fieldname }} doesn\"t match the indicated pattern"
+    "Compare"                 : "Values do not match, must be the same.",
+    "Default"                 : "Error not contemplated.",
+    "Email"                   : "This field must be a valid email address.",
+    "Login"                   : "The user or password is incorrect.",
+    "Max"                     : "This field may not be greater than {{ max }}.",
+    "MaxLength"               : "This field may not be greater than {{ maxlength }} characters.",
+    "Min"                     : "This field cannot be less than {{ min }}.",
+    "MinLength"               : "This field must be at least {{ minlength }} characters.",
+    "NotEqual"                : "Field {{ fieldName }} is not the same as field {{ matchFieldName }}.",
+    "PasswordDigit"           : "The field must contain at least one digit.",
+    "PasswordLowerCase"       : "The field must contain at least one lowercase letter.",
+    "PasswordSpecialCharacter": "The field must contain at least one special character.",
+    "PasswordUpperCase"       : "The field must contain at least one uppercase letter.",
+    "Pattern"                 : "The field {{ fieldname }} doesn\"t match the indicated pattern.",
+    "Required"                : "This field is required."
 }
