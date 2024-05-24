@@ -53,7 +53,10 @@ export class IamUpdateTenantsAccountsService
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tenantsAccountsRegister = this.publisher.mergeObjectContext(
-            new IamAddTenantsAccountsContextEvent(tenantsAccounts),
+            new IamAddTenantsAccountsContextEvent(
+                tenantsAccounts,
+                cQMetadata,
+            ),
         );
 
         tenantsAccountsRegister.updated(); // apply event to model events

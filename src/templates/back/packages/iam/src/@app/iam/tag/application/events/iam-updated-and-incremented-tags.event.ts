@@ -1,8 +1,12 @@
-import { IamUpdatedAndIncrementedTagEvent } from './iam-updated-and-incremented-tag.event';
+import { IamUpdatedAndIncrementedTagEvent } from '@app/iam/tag';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamUpdatedAndIncrementedTagsEvent
 {
     constructor(
-        public readonly tags: IamUpdatedAndIncrementedTagEvent[],
+        public readonly event: {
+            payload: IamUpdatedAndIncrementedTagEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

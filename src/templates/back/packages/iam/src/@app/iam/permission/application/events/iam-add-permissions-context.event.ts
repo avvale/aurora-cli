@@ -1,10 +1,12 @@
 import { IamCreatedPermissionEvent, IamCreatedPermissionsEvent, IamDeletedPermissionEvent, IamDeletedPermissionsEvent, IamPermission, IamUpdatedAndIncrementedPermissionEvent, IamUpdatedAndIncrementedPermissionsEvent, IamUpdatedPermissionEvent, IamUpdatedPermissionsEvent } from '@app/iam/permission';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddPermissionsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamPermission[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,76 +20,88 @@ export class IamAddPermissionsContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedPermissionsEvent(
-                this.aggregateRoots.map(permission =>
-                    new IamCreatedPermissionEvent(
-                        permission.id.value,
-                        permission.name.value,
-                        permission.boundedContextId.value,
-                        permission.roleIds?.value,
-                        permission.createdAt?.value,
-                        permission.updatedAt?.value,
-                        permission.deletedAt?.value,
-                    ),
+            new IamCreatedPermissionsEvent({
+                payload: this.aggregateRoots.map(permission =>
+                    new IamCreatedPermissionEvent({
+                        payload: {
+                            id: permission.id.value,
+                            name: permission.name.value,
+                            boundedContextId: permission.boundedContextId.value,
+                            roleIds: permission.roleIds?.value,
+                            createdAt: permission.createdAt?.value,
+                            updatedAt: permission.updatedAt?.value,
+                            deletedAt: permission.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedPermissionsEvent(
-                this.aggregateRoots.map(permission =>
-                    new IamUpdatedPermissionEvent(
-                        permission.id.value,
-                        permission.name.value,
-                        permission.boundedContextId.value,
-                        permission.roleIds?.value,
-                        permission.createdAt?.value,
-                        permission.updatedAt?.value,
-                        permission.deletedAt?.value,
-                    ),
+            new IamUpdatedPermissionsEvent({
+                payload: this.aggregateRoots.map(permission =>
+                    new IamUpdatedPermissionEvent({
+                        payload: {
+                            id: permission.id.value,
+                            name: permission.name.value,
+                            boundedContextId: permission.boundedContextId.value,
+                            roleIds: permission.roleIds?.value,
+                            createdAt: permission.createdAt?.value,
+                            updatedAt: permission.updatedAt?.value,
+                            deletedAt: permission.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedPermissionsEvent(
-                this.aggregateRoots.map(permission =>
-                    new IamUpdatedAndIncrementedPermissionEvent(
-                        permission.id.value,
-                        permission.name.value,
-                        permission.boundedContextId.value,
-                        permission.roleIds?.value,
-                        permission.createdAt?.value,
-                        permission.updatedAt?.value,
-                        permission.deletedAt?.value,
-                    ),
+            new IamUpdatedAndIncrementedPermissionsEvent({
+                payload: this.aggregateRoots.map(permission =>
+                    new IamUpdatedAndIncrementedPermissionEvent({
+                        payload: {
+                            id: permission.id.value,
+                            name: permission.name.value,
+                            boundedContextId: permission.boundedContextId.value,
+                            roleIds: permission.roleIds?.value,
+                            createdAt: permission.createdAt?.value,
+                            updatedAt: permission.updatedAt?.value,
+                            deletedAt: permission.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedPermissionsEvent(
-                this.aggregateRoots.map(permission =>
-                    new IamDeletedPermissionEvent(
-                        permission.id.value,
-                        permission.name.value,
-                        permission.boundedContextId.value,
-                        permission.roleIds?.value,
-                        permission.createdAt?.value,
-                        permission.updatedAt?.value,
-                        permission.deletedAt?.value,
-                    ),
+            new IamDeletedPermissionsEvent({
+                payload: this.aggregateRoots.map(permission =>
+                    new IamDeletedPermissionEvent({
+                        payload: {
+                            id: permission.id.value,
+                            name: permission.name.value,
+                            boundedContextId: permission.boundedContextId.value,
+                            roleIds: permission.roleIds?.value,
+                            createdAt: permission.createdAt?.value,
+                            updatedAt: permission.updatedAt?.value,
+                            deletedAt: permission.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

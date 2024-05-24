@@ -1,8 +1,12 @@
-import { IamCreatedPermissionRoleEvent } from './iam-created-permission-role.event';
+import { IamCreatedPermissionRoleEvent } from '@app/iam/permission-role';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamCreatedPermissionsRolesEvent
 {
     constructor(
-        public readonly permissionsRoles: IamCreatedPermissionRoleEvent[],
+        public readonly event: {
+            payload: IamCreatedPermissionRoleEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

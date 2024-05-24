@@ -1,8 +1,12 @@
-import { IamUpdatedAndIncrementedRoleEvent } from './iam-updated-and-incremented-role.event';
+import { IamUpdatedAndIncrementedRoleEvent } from '@app/iam/role';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamUpdatedAndIncrementedRolesEvent
 {
     constructor(
-        public readonly roles: IamUpdatedAndIncrementedRoleEvent[],
+        public readonly event: {
+            payload: IamUpdatedAndIncrementedRoleEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

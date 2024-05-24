@@ -1,8 +1,12 @@
-import { IamUpdatedTagEvent } from './iam-updated-tag.event';
+import { IamUpdatedTagEvent } from '@app/iam/tag';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamUpdatedTagsEvent
 {
     constructor(
-        public readonly tags: IamUpdatedTagEvent[],
+        public readonly event: {
+            payload: IamUpdatedTagEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

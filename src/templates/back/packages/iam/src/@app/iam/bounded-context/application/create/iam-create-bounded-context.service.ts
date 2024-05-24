@@ -56,7 +56,10 @@ export class IamCreateBoundedContextService
             boundedContext,
         );
 
-        boundedContextRegister.created(boundedContext); // apply event to model events
+        boundedContextRegister.created({
+            payload: boundedContext,
+            cQMetadata,
+        }); // apply event to model events
         boundedContextRegister.commit(); // commit all events of model
     }
 }

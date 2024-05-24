@@ -1,10 +1,12 @@
 import { IamAccount, IamCreatedAccountEvent, IamCreatedAccountsEvent, IamDeletedAccountEvent, IamDeletedAccountsEvent, IamUpdatedAccountEvent, IamUpdatedAccountsEvent, IamUpdatedAndIncrementedAccountEvent, IamUpdatedAndIncrementedAccountsEvent } from '@app/iam/account';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddAccountsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamAccount[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,120 +20,132 @@ export class IamAddAccountsContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedAccountsEvent(
-                this.aggregateRoots.map(account =>
-                    new IamCreatedAccountEvent(
-                        account.id.value,
-                        account.type.value,
-                        account.code?.value,
-                        account.email?.value,
-                        account.username.value,
-                        account.isActive.value,
-                        account.clientId.value,
-                        account.tags?.value,
-                        account.scopes?.value,
-                        account.dApplicationCodes.value,
-                        account.dPermissions.value,
-                        account.dTenants.value,
-                        account.meta?.value,
-                        account.roleIds?.value,
-                        account.tenantIds?.value,
-                        account.createdAt?.value,
-                        account.updatedAt?.value,
-                        account.deletedAt?.value,
-                    ),
+            new IamCreatedAccountsEvent({
+                payload: this.aggregateRoots.map(account =>
+                    new IamCreatedAccountEvent({
+                        payload: {
+                            id: account.id.value,
+                            type: account.type.value,
+                            code: account.code?.value,
+                            email: account.email?.value,
+                            username: account.username.value,
+                            isActive: account.isActive.value,
+                            clientId: account.clientId.value,
+                            tags: account.tags?.value,
+                            scopes: account.scopes?.value,
+                            dApplicationCodes: account.dApplicationCodes.value,
+                            dPermissions: account.dPermissions.value,
+                            dTenants: account.dTenants.value,
+                            meta: account.meta?.value,
+                            roleIds: account.roleIds?.value,
+                            tenantIds: account.tenantIds?.value,
+                            createdAt: account.createdAt?.value,
+                            updatedAt: account.updatedAt?.value,
+                            deletedAt: account.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedAccountsEvent(
-                this.aggregateRoots.map(account =>
-                    new IamUpdatedAccountEvent(
-                        account.id.value,
-                        account.type.value,
-                        account.code?.value,
-                        account.email?.value,
-                        account.username.value,
-                        account.isActive.value,
-                        account.clientId.value,
-                        account.tags?.value,
-                        account.scopes?.value,
-                        account.dApplicationCodes.value,
-                        account.dPermissions.value,
-                        account.dTenants.value,
-                        account.meta?.value,
-                        account.roleIds?.value,
-                        account.tenantIds?.value,
-                        account.createdAt?.value,
-                        account.updatedAt?.value,
-                        account.deletedAt?.value,
-                    ),
+            new IamUpdatedAccountsEvent({
+                payload: this.aggregateRoots.map(account =>
+                    new IamUpdatedAccountEvent({
+                        payload: {
+                            id: account.id.value,
+                            type: account.type.value,
+                            code: account.code?.value,
+                            email: account.email?.value,
+                            username: account.username.value,
+                            isActive: account.isActive.value,
+                            clientId: account.clientId.value,
+                            tags: account.tags?.value,
+                            scopes: account.scopes?.value,
+                            dApplicationCodes: account.dApplicationCodes.value,
+                            dPermissions: account.dPermissions.value,
+                            dTenants: account.dTenants.value,
+                            meta: account.meta?.value,
+                            roleIds: account.roleIds?.value,
+                            tenantIds: account.tenantIds?.value,
+                            createdAt: account.createdAt?.value,
+                            updatedAt: account.updatedAt?.value,
+                            deletedAt: account.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedAccountsEvent(
-                this.aggregateRoots.map(account =>
-                    new IamUpdatedAndIncrementedAccountEvent(
-                        account.id.value,
-                        account.type.value,
-                        account.code?.value,
-                        account.email?.value,
-                        account.username.value,
-                        account.isActive.value,
-                        account.clientId.value,
-                        account.tags?.value,
-                        account.scopes?.value,
-                        account.dApplicationCodes.value,
-                        account.dPermissions.value,
-                        account.dTenants.value,
-                        account.meta?.value,
-                        account.roleIds?.value,
-                        account.tenantIds?.value,
-                        account.createdAt?.value,
-                        account.updatedAt?.value,
-                        account.deletedAt?.value,
-                    ),
+            new IamUpdatedAndIncrementedAccountsEvent({
+                payload: this.aggregateRoots.map(account =>
+                    new IamUpdatedAndIncrementedAccountEvent({
+                        payload: {
+                            id: account.id.value,
+                            type: account.type.value,
+                            code: account.code?.value,
+                            email: account.email?.value,
+                            username: account.username.value,
+                            isActive: account.isActive.value,
+                            clientId: account.clientId.value,
+                            tags: account.tags?.value,
+                            scopes: account.scopes?.value,
+                            dApplicationCodes: account.dApplicationCodes.value,
+                            dPermissions: account.dPermissions.value,
+                            dTenants: account.dTenants.value,
+                            meta: account.meta?.value,
+                            roleIds: account.roleIds?.value,
+                            tenantIds: account.tenantIds?.value,
+                            createdAt: account.createdAt?.value,
+                            updatedAt: account.updatedAt?.value,
+                            deletedAt: account.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedAccountsEvent(
-                this.aggregateRoots.map(account =>
-                    new IamDeletedAccountEvent(
-                        account.id.value,
-                        account.type.value,
-                        account.code?.value,
-                        account.email?.value,
-                        account.username.value,
-                        account.isActive.value,
-                        account.clientId.value,
-                        account.tags?.value,
-                        account.scopes?.value,
-                        account.dApplicationCodes.value,
-                        account.dPermissions.value,
-                        account.dTenants.value,
-                        account.meta?.value,
-                        account.roleIds?.value,
-                        account.tenantIds?.value,
-                        account.createdAt?.value,
-                        account.updatedAt?.value,
-                        account.deletedAt?.value,
-                    ),
+            new IamDeletedAccountsEvent({
+                payload: this.aggregateRoots.map(account =>
+                    new IamDeletedAccountEvent({
+                        payload: {
+                            id: account.id.value,
+                            type: account.type.value,
+                            code: account.code?.value,
+                            email: account.email?.value,
+                            username: account.username.value,
+                            isActive: account.isActive.value,
+                            clientId: account.clientId.value,
+                            tags: account.tags?.value,
+                            scopes: account.scopes?.value,
+                            dApplicationCodes: account.dApplicationCodes.value,
+                            dPermissions: account.dPermissions.value,
+                            dTenants: account.dTenants.value,
+                            meta: account.meta?.value,
+                            roleIds: account.roleIds?.value,
+                            tenantIds: account.tenantIds?.value,
+                            createdAt: account.createdAt?.value,
+                            updatedAt: account.updatedAt?.value,
+                            deletedAt: account.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

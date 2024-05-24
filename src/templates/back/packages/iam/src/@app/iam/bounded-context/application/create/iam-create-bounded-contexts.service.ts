@@ -33,7 +33,7 @@ export class IamCreateBoundedContextsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateBoundedContexts = payload.map(boundedContext => IamBoundedContext.register(
+        const boundedContexts = payload.map(boundedContext => IamBoundedContext.register(
             boundedContext.id,
             boundedContext.name,
             boundedContext.root,
@@ -46,7 +46,7 @@ export class IamCreateBoundedContextsService
 
         // insert
         await this.repository.insert(
-            aggregateBoundedContexts,
+            boundedContexts,
             {
                 insertOptions: cQMetadata?.repositoryOptions,
             },
@@ -54,7 +54,12 @@ export class IamCreateBoundedContextsService
 
         // create AddBoundedContextsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const boundedContextsRegistered = this.publisher.mergeObjectContext(new IamAddBoundedContextsContextEvent(aggregateBoundedContexts));
+        const boundedContextsRegistered = this.publisher.mergeObjectContext(
+            new IamAddBoundedContextsContextEvent(
+                boundedContexts,
+                cQMetadata,
+            ),
+        );
 
         boundedContextsRegistered.created(); // apply event to model events
         boundedContextsRegistered.commit(); // commit all events of model

@@ -51,7 +51,10 @@ export class IamDeletePermissionRoleByIdService
         // insert EventBus in object, to be able to apply and commit events
         const permissionRoleRegister = this.publisher.mergeObjectContext(permissionRole);
 
-        permissionRoleRegister.deleted(permissionRole); // apply event to model events
+        permissionRoleRegister.deleted({
+            payload: permissionRole,
+            cQMetadata,
+        }); // apply event to model events
         permissionRoleRegister.commit(); // commit all events of model
     }
 }

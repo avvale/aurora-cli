@@ -77,7 +77,10 @@ export class IamCreateUserService
             user,
         );
 
-        userRegister.created(user); // apply event to model events
+        userRegister.created({
+            payload: user,
+            cQMetadata,
+        }); // apply event to model events
         userRegister.commit(); // commit all events of model
     }
 }

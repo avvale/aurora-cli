@@ -91,6 +91,46 @@ export const IamRepositories = [
     {
         provide : IamITagRepository,
         useClass: IamSequelizeTagRepository
+    },
+    {
+        provide : IamIAccountRepository,
+        useClass: IamSequelizeAccountRepository,
+    },
+    {
+        provide : IamIRoleAccountRepository,
+        useClass: IamSequelizeRoleAccountRepository,
+    },
+    {
+        provide : IamITenantAccountRepository,
+        useClass: IamSequelizeTenantAccountRepository,
+    },
+    {
+        provide : IamIBoundedContextRepository,
+        useClass: IamSequelizeBoundedContextRepository,
+    },
+    {
+        provide : IamIPermissionRepository,
+        useClass: IamSequelizePermissionRepository,
+    },
+    {
+        provide : IamIPermissionRoleRepository,
+        useClass: IamSequelizePermissionRoleRepository,
+    },
+    {
+        provide : IamIRoleRepository,
+        useClass: IamSequelizeRoleRepository,
+    },
+    {
+        provide : IamITagRepository,
+        useClass: IamSequelizeTagRepository,
+    },
+    {
+        provide : IamITenantRepository,
+        useClass: IamSequelizeTenantRepository,
+    },
+    {
+        provide : IamIUserRepository,
+        useClass: IamSequelizeUserRepository,
     }
 ];
 export const IamSagas = [

@@ -69,7 +69,10 @@ export class IamUpdateTenantByIdService
             tenant,
         );
 
-        tenantRegister.updated(tenant); // apply event to model events
+        tenantRegister.updated({
+            payload: tenant,
+            cQMetadata,
+        }); // apply event to model events
         tenantRegister.commit(); // commit all events of model
     }
 }

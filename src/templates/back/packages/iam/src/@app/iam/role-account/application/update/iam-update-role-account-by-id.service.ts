@@ -45,7 +45,10 @@ export class IamUpdateRoleAccountByIdService
             roleAccount,
         );
 
-        roleAccountRegister.updated(roleAccount); // apply event to model events
+        roleAccountRegister.updated({
+            payload: roleAccount,
+            cQMetadata,
+        }); // apply event to model events
         roleAccountRegister.commit(); // commit all events of model
     }
 }

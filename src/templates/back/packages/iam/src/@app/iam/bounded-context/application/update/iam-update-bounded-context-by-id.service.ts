@@ -60,7 +60,10 @@ export class IamUpdateBoundedContextByIdService
             boundedContext,
         );
 
-        boundedContextRegister.updated(boundedContext); // apply event to model events
+        boundedContextRegister.updated({
+            payload: boundedContext,
+            cQMetadata,
+        }); // apply event to model events
         boundedContextRegister.commit(); // commit all events of model
     }
 }

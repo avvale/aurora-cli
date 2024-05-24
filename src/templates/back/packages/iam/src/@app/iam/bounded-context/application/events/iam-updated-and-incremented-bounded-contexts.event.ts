@@ -1,8 +1,12 @@
-import { IamUpdatedAndIncrementedBoundedContextEvent } from './iam-updated-and-incremented-bounded-context.event';
+import { IamUpdatedAndIncrementedBoundedContextEvent } from '@app/iam/bounded-context';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamUpdatedAndIncrementedBoundedContextsEvent
 {
     constructor(
-        public readonly boundedContexts: IamUpdatedAndIncrementedBoundedContextEvent[],
+        public readonly event: {
+            payload: IamUpdatedAndIncrementedBoundedContextEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

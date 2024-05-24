@@ -1,8 +1,12 @@
-import { IamUpdatedPermissionEvent } from './iam-updated-permission.event';
+import { IamUpdatedPermissionEvent } from '@app/iam/permission';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamUpdatedPermissionsEvent
 {
     constructor(
-        public readonly permissions: IamUpdatedPermissionEvent[],
+        public readonly event: {
+            payload: IamUpdatedPermissionEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

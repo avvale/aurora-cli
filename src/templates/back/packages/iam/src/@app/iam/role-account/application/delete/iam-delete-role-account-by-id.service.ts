@@ -51,7 +51,10 @@ export class IamDeleteRoleAccountByIdService
         // insert EventBus in object, to be able to apply and commit events
         const roleAccountRegister = this.publisher.mergeObjectContext(roleAccount);
 
-        roleAccountRegister.deleted(roleAccount); // apply event to model events
+        roleAccountRegister.deleted({
+            payload: roleAccount,
+            cQMetadata,
+        }); // apply event to model events
         roleAccountRegister.commit(); // commit all events of model
     }
 }

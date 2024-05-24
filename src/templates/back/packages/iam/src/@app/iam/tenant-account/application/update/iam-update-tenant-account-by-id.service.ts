@@ -45,7 +45,10 @@ export class IamUpdateTenantAccountByIdService
             tenantAccount,
         );
 
-        tenantAccountRegister.updated(tenantAccount); // apply event to model events
+        tenantAccountRegister.updated({
+            payload: tenantAccount,
+            cQMetadata,
+        }); // apply event to model events
         tenantAccountRegister.commit(); // commit all events of model
     }
 }

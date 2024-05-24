@@ -12,7 +12,7 @@ import {
     IamRolePermissionIds,
     IamRoleUpdatedAt,
 } from '@app/iam/role/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamRole extends AggregateRoot
@@ -81,51 +81,75 @@ export class IamRole extends AggregateRoot
         );
     }
 
-    created(role: IamRole): void
+    created(
+        event: {
+            payload: IamRole;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedRoleEvent(
-                role.id.value,
-                role.name.value,
-                role.isMaster.value,
-                role.permissionIds?.value,
-                role.accountIds?.value,
-                role.createdAt?.value,
-                role.updatedAt?.value,
-                role.deletedAt?.value,
-            ),
+            new IamCreatedRoleEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    name: event.payload.name.value,
+                    isMaster: event.payload.isMaster.value,
+                    permissionIds: event.payload.permissionIds?.value,
+                    accountIds: event.payload.accountIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(role: IamRole): void
+    updated(
+        event: {
+            payload: IamRole;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedRoleEvent(
-                role.id?.value,
-                role.name?.value,
-                role.isMaster?.value,
-                role.permissionIds?.value,
-                role.accountIds?.value,
-                role.createdAt?.value,
-                role.updatedAt?.value,
-                role.deletedAt?.value,
-            ),
+            new IamUpdatedRoleEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    name: event.payload.name?.value,
+                    isMaster: event.payload.isMaster?.value,
+                    permissionIds: event.payload.permissionIds?.value,
+                    accountIds: event.payload.accountIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(role: IamRole): void
+    deleted(
+        event: {
+            payload: IamRole;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedRoleEvent(
-                role.id.value,
-                role.name.value,
-                role.isMaster.value,
-                role.permissionIds?.value,
-                role.accountIds?.value,
-                role.createdAt?.value,
-                role.updatedAt?.value,
-                role.deletedAt?.value,
-            ),
+            new IamDeletedRoleEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    name: event.payload.name.value,
+                    isMaster: event.payload.isMaster.value,
+                    permissionIds: event.payload.permissionIds?.value,
+                    accountIds: event.payload.accountIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

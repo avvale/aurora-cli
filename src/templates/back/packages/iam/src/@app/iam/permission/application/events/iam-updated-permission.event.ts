@@ -1,12 +1,19 @@
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class IamUpdatedPermissionEvent
 {
     constructor(
-        public readonly id: string,
-        public readonly name: string,
-        public readonly boundedContextId: string,
-        public readonly roleIds: string[],
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                name: string;
+                boundedContextId: string;
+                roleIds: string[];
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

@@ -6,7 +6,7 @@ import {
     IamPermissionRoleRoleId,
 } from '@app/iam/permission-role/domain/value-objects';
 import { IamRole } from '@app/iam/role';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamPermissionRole extends AggregateRoot
@@ -45,33 +45,57 @@ export class IamPermissionRole extends AggregateRoot
         );
     }
 
-    created(permissionRole: IamPermissionRole): void
+    created(
+        event: {
+            payload: IamPermissionRole;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedPermissionRoleEvent(
-                permissionRole.permissionId.value,
-                permissionRole.roleId.value,
-            ),
+            new IamCreatedPermissionRoleEvent({
+                payload: {
+                    permissionId: event.payload.permissionId.value,
+                    roleId: event.payload.roleId.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(permissionRole: IamPermissionRole): void
+    updated(
+        event: {
+            payload: IamPermissionRole;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedPermissionRoleEvent(
-                permissionRole.permissionId?.value,
-                permissionRole.roleId?.value,
-            ),
+            new IamUpdatedPermissionRoleEvent({
+                payload: {
+                    permissionId: event.payload.permissionId?.value,
+                    roleId: event.payload.roleId?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(permissionRole: IamPermissionRole): void
+    deleted(
+        event: {
+            payload: IamPermissionRole;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedPermissionRoleEvent(
-                permissionRole.permissionId.value,
-                permissionRole.roleId.value,
-            ),
+            new IamDeletedPermissionRoleEvent({
+                payload: {
+                    permissionId: event.payload.permissionId.value,
+                    roleId: event.payload.roleId.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

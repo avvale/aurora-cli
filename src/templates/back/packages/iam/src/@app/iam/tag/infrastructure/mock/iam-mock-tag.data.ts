@@ -3,83 +3,83 @@
 
 export const iamMockTagData = [
     {
-        id: '32ca777b-0d70-414b-a15f-5c014955a781',
-        name: 'Fantastic Cotton Sausages',
+        id: '2e220ea4-dd2e-4320-9376-c7bad457a6ec',
+        name: 'Incredible Rubber Table',
     },
     {
-        id: '5d90cc5f-43d7-4b5b-92f6-5bb6823f91e8',
-        name: 'Incredible Plastic Keyboard',
+        id: '469ed7f0-695f-438a-9c96-1d9bc97d8e31',
+        name: 'Fantastic Plastic Pizza',
     },
     {
-        id: 'fa345775-2e05-47b1-b2c6-f4f4970fe504',
-        name: 'Gorgeous Plastic Chair',
+        id: '32c6f2ff-ebfb-49e9-87c9-e0939e6f0b31',
+        name: 'Refined Plastic Keyboard',
     },
     {
-        id: '29069dc3-57ca-4f05-ba51-e97b831b40d6',
-        name: 'Sleek Soft Gloves',
+        id: 'a3a328a3-ba13-4acd-98a9-76269af38a6c',
+        name: 'Sleek Cotton Shoes',
     },
     {
-        id: '9e07b50c-8ed0-49ce-a843-f0b906cda0d5',
-        name: 'Intelligent Cotton Towels',
+        id: '486d144d-0284-462a-834a-10129aef2737',
+        name: 'Ergonomic Metal Fish',
     },
     {
-        id: 'dfc34e73-8ebc-4e49-8513-09fe00ce9c45',
-        name: 'Ergonomic Metal Chicken',
+        id: '2617fd14-0809-4fef-993d-a8ca63ef4351',
+        name: 'Handmade Concrete Sausages',
     },
     {
-        id: '462f3d33-8e9a-401a-b2ae-3c85059ff961',
-        name: 'Intelligent Steel Shirt',
+        id: '9f92f318-cc35-4ca6-9251-df7d943c54b2',
+        name: 'Refined Granite Car',
     },
     {
-        id: '7d200c94-7c35-4620-ac3d-d4f518b068c6',
-        name: 'Unbranded Frozen Chips',
+        id: 'b3d34e07-7c16-40cb-9e0e-b5bbf65749d8',
+        name: 'Awesome Fresh Keyboard',
     },
     {
-        id: '7f044b71-38bb-4dba-a3ac-13ae80dcdfac',
-        name: 'Rustic Rubber Towels',
+        id: '9613eab0-ed9b-4b53-a180-7132dd9e6f5e',
+        name: 'Rustic Steel Sausages',
     },
     {
-        id: 'cbfa9f14-8399-4762-ad31-c11e116f5d22',
-        name: 'Gorgeous Frozen Mouse',
+        id: 'dec1cb79-f183-4592-8b01-6e74fd79b19e',
+        name: 'Ergonomic Fresh Cheese',
     },
     {
-        id: 'bf55fc7d-6a57-422b-8026-41c86a678895',
-        name: 'Intelligent Plastic Fish',
+        id: 'ec4931e2-ead1-4d15-b780-bad0e10aa963',
+        name: 'Fantastic Soft Keyboard',
     },
     {
-        id: '7e318b73-9bca-44e3-b427-d34334ded189',
-        name: 'Handcrafted Concrete Pizza',
+        id: '9daf246a-152f-4817-8e45-cd287513230e',
+        name: 'Ergonomic Rubber Tuna',
     },
     {
-        id: 'c480df57-7138-410f-b914-c29a6d75388e',
-        name: 'Small Plastic Sausages',
+        id: 'e575316c-8077-4052-9893-20b11c2cc650',
+        name: 'Incredible Frozen Cheese',
     },
     {
-        id: '6da56b66-1110-451b-b9f2-733888d65f60',
-        name: 'Fantastic Granite Soap',
+        id: 'ade1f522-5910-46e5-aa95-0ef162e1150f',
+        name: 'Rustic Metal Bacon',
     },
     {
-        id: 'f0679275-ecd3-4cd6-a9a0-32bcfc707407',
-        name: 'Intelligent Concrete Salad',
+        id: 'fcf45a60-2b2a-4766-96f4-b4de6798b775',
+        name: 'Handcrafted Steel Table',
     },
     {
-        id: 'c19f64e4-74fe-4a68-9923-6baeaf027745',
-        name: 'Unbranded Granite Soap',
+        id: '50c10a49-1cfa-4b92-bae6-8f4c4cc85891',
+        name: 'Tasty Wooden Computer',
     },
     {
-        id: '4f930493-5115-4152-9c0a-134e090e8a33',
-        name: 'Unbranded Soft Computer',
+        id: '3f5e1c24-72bd-483c-a8c7-23f95c5393a7',
+        name: 'Ergonomic Cotton Mouse',
     },
     {
-        id: '3cae489a-f7e6-452c-89c5-ed9226e5dbe5',
-        name: 'Handmade Wooden Towels',
+        id: 'cebf797e-db54-428f-b7e7-0f262816cf64',
+        name: 'Gorgeous Concrete Bike',
     },
     {
-        id: '0c8671d6-76d0-4804-a6ee-c774847d67e2',
-        name: 'Licensed Metal Ball',
+        id: 'b17266e2-b563-47bf-8ae8-2db09d259bf0',
+        name: 'Gorgeous Soft Cheese',
     },
     {
-        id: 'dfe5fef9-33e2-4711-85fb-2a54b1d61c17',
-        name: 'Handcrafted Metal Chicken',
+        id: '0a349188-e4ee-4683-8dc1-518fc6d8ff75',
+        name: 'Awesome Wooden Tuna',
     },
 ];

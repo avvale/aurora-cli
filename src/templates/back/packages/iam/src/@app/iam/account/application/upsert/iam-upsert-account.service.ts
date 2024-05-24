@@ -87,7 +87,10 @@ export class IamUpsertAccountService
             account,
         );
 
-        accountRegister.created(account); // apply event to model events
+        accountRegister.created({
+            payload: account,
+            cQMetadata,
+        }); // apply event to model events
         accountRegister.commit(); // commit all events of model
     }
 }

@@ -1,8 +1,12 @@
-import { IamUpdatedRoleAccountEvent } from './iam-updated-role-account.event';
+import { IamUpdatedRoleAccountEvent } from '@app/iam/role-account';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamUpdatedRolesAccountsEvent
 {
     constructor(
-        public readonly rolesAccounts: IamUpdatedRoleAccountEvent[],
+        public readonly event: {
+            payload: IamUpdatedRoleAccountEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

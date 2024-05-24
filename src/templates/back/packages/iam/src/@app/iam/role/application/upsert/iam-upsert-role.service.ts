@@ -57,7 +57,10 @@ export class IamUpsertRoleService
             role,
         );
 
-        roleRegister.created(role); // apply event to model events
+        roleRegister.created({
+            payload: role,
+            cQMetadata,
+        }); // apply event to model events
         roleRegister.commit(); // commit all events of model
     }
 }

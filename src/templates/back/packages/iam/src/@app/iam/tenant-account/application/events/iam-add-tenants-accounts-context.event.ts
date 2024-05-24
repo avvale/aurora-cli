@@ -1,10 +1,12 @@
 import { IamCreatedTenantAccountEvent, IamCreatedTenantsAccountsEvent, IamDeletedTenantAccountEvent, IamDeletedTenantsAccountsEvent, IamTenantAccount, IamUpdatedAndIncrementedTenantAccountEvent, IamUpdatedAndIncrementedTenantsAccountsEvent, IamUpdatedTenantAccountEvent, IamUpdatedTenantsAccountsEvent } from '@app/iam/tenant-account';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddTenantsAccountsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamTenantAccount[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,56 +20,68 @@ export class IamAddTenantsAccountsContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedTenantsAccountsEvent(
-                this.aggregateRoots.map(tenantAccount =>
-                    new IamCreatedTenantAccountEvent(
-                        tenantAccount.tenantId.value,
-                        tenantAccount.accountId.value,
-                    ),
+            new IamCreatedTenantsAccountsEvent({
+                payload: this.aggregateRoots.map(tenantAccount =>
+                    new IamCreatedTenantAccountEvent({
+                        payload: {
+                            tenantId: tenantAccount.tenantId.value,
+                            accountId: tenantAccount.accountId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedTenantsAccountsEvent(
-                this.aggregateRoots.map(tenantAccount =>
-                    new IamUpdatedTenantAccountEvent(
-                        tenantAccount.tenantId.value,
-                        tenantAccount.accountId.value,
-                    ),
+            new IamUpdatedTenantsAccountsEvent({
+                payload: this.aggregateRoots.map(tenantAccount =>
+                    new IamUpdatedTenantAccountEvent({
+                        payload: {
+                            tenantId: tenantAccount.tenantId.value,
+                            accountId: tenantAccount.accountId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedTenantsAccountsEvent(
-                this.aggregateRoots.map(tenantAccount =>
-                    new IamUpdatedAndIncrementedTenantAccountEvent(
-                        tenantAccount.tenantId.value,
-                        tenantAccount.accountId.value,
-                    ),
+            new IamUpdatedAndIncrementedTenantsAccountsEvent({
+                payload: this.aggregateRoots.map(tenantAccount =>
+                    new IamUpdatedAndIncrementedTenantAccountEvent({
+                        payload: {
+                            tenantId: tenantAccount.tenantId.value,
+                            accountId: tenantAccount.accountId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedTenantsAccountsEvent(
-                this.aggregateRoots.map(tenantAccount =>
-                    new IamDeletedTenantAccountEvent(
-                        tenantAccount.tenantId.value,
-                        tenantAccount.accountId.value,
-                    ),
+            new IamDeletedTenantsAccountsEvent({
+                payload: this.aggregateRoots.map(tenantAccount =>
+                    new IamDeletedTenantAccountEvent({
+                        payload: {
+                            tenantId: tenantAccount.tenantId.value,
+                            accountId: tenantAccount.accountId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

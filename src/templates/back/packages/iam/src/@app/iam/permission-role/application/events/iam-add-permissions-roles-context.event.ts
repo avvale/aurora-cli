@@ -1,10 +1,12 @@
 import { IamCreatedPermissionRoleEvent, IamCreatedPermissionsRolesEvent, IamDeletedPermissionRoleEvent, IamDeletedPermissionsRolesEvent, IamPermissionRole, IamUpdatedAndIncrementedPermissionRoleEvent, IamUpdatedAndIncrementedPermissionsRolesEvent, IamUpdatedPermissionRoleEvent, IamUpdatedPermissionsRolesEvent } from '@app/iam/permission-role';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddPermissionsRolesContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamPermissionRole[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,56 +20,68 @@ export class IamAddPermissionsRolesContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedPermissionsRolesEvent(
-                this.aggregateRoots.map(permissionRole =>
-                    new IamCreatedPermissionRoleEvent(
-                        permissionRole.permissionId.value,
-                        permissionRole.roleId.value,
-                    ),
+            new IamCreatedPermissionsRolesEvent({
+                payload: this.aggregateRoots.map(permissionRole =>
+                    new IamCreatedPermissionRoleEvent({
+                        payload: {
+                            permissionId: permissionRole.permissionId.value,
+                            roleId: permissionRole.roleId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedPermissionsRolesEvent(
-                this.aggregateRoots.map(permissionRole =>
-                    new IamUpdatedPermissionRoleEvent(
-                        permissionRole.permissionId.value,
-                        permissionRole.roleId.value,
-                    ),
+            new IamUpdatedPermissionsRolesEvent({
+                payload: this.aggregateRoots.map(permissionRole =>
+                    new IamUpdatedPermissionRoleEvent({
+                        payload: {
+                            permissionId: permissionRole.permissionId.value,
+                            roleId: permissionRole.roleId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedPermissionsRolesEvent(
-                this.aggregateRoots.map(permissionRole =>
-                    new IamUpdatedAndIncrementedPermissionRoleEvent(
-                        permissionRole.permissionId.value,
-                        permissionRole.roleId.value,
-                    ),
+            new IamUpdatedAndIncrementedPermissionsRolesEvent({
+                payload: this.aggregateRoots.map(permissionRole =>
+                    new IamUpdatedAndIncrementedPermissionRoleEvent({
+                        payload: {
+                            permissionId: permissionRole.permissionId.value,
+                            roleId: permissionRole.roleId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedPermissionsRolesEvent(
-                this.aggregateRoots.map(permissionRole =>
-                    new IamDeletedPermissionRoleEvent(
-                        permissionRole.permissionId.value,
-                        permissionRole.roleId.value,
-                    ),
+            new IamDeletedPermissionsRolesEvent({
+                payload: this.aggregateRoots.map(permissionRole =>
+                    new IamDeletedPermissionRoleEvent({
+                        payload: {
+                            permissionId: permissionRole.permissionId.value,
+                            roleId: permissionRole.roleId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

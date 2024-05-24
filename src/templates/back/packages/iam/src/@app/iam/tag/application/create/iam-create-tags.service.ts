@@ -27,7 +27,7 @@ export class IamCreateTagsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateTags = payload.map(tag => IamTag.register(
+        const tags = payload.map(tag => IamTag.register(
             tag.id,
             tag.name,
             new IamTagCreatedAt({ currentTimestamp: true }),
@@ -37,7 +37,7 @@ export class IamCreateTagsService
 
         // insert
         await this.repository.insert(
-            aggregateTags,
+            tags,
             {
                 insertOptions: cQMetadata?.repositoryOptions,
             },
@@ -45,7 +45,12 @@ export class IamCreateTagsService
 
         // create AddTagsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const tagsRegistered = this.publisher.mergeObjectContext(new IamAddTagsContextEvent(aggregateTags));
+        const tagsRegistered = this.publisher.mergeObjectContext(
+            new IamAddTagsContextEvent(
+                tags,
+                cQMetadata,
+            ),
+        );
 
         tagsRegistered.created(); // apply event to model events
         tagsRegistered.commit(); // commit all events of model

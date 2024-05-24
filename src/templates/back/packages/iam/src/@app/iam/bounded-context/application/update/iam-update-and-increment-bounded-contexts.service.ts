@@ -68,7 +68,10 @@ export class IamUpdateAndIncrementBoundedContextsService
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const boundedContextsRegister = this.publisher.mergeObjectContext(
-            new IamAddBoundedContextsContextEvent(boundedContexts),
+            new IamAddBoundedContextsContextEvent(
+                boundedContexts,
+                cQMetadata,
+            ),
         );
 
         boundedContextsRegister.updatedAndIncremented(); // apply event to model events

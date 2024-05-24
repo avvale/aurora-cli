@@ -24,7 +24,7 @@ import { IamRole } from '@app/iam/role';
 import { IamTenant } from '@app/iam/tenant';
 import { IamUser } from '@app/iam/user';
 import { OAuthClient } from '@app/o-auth/client';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAccount extends AggregateRoot
@@ -153,81 +153,105 @@ export class IamAccount extends AggregateRoot
         );
     }
 
-    created(account: IamAccount): void
+    created(
+        event: {
+            payload: IamAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedAccountEvent(
-                account.id.value,
-                account.type.value,
-                account.code?.value,
-                account.email?.value,
-                account.username.value,
-                account.isActive.value,
-                account.clientId.value,
-                account.tags?.value,
-                account.scopes?.value,
-                account.dApplicationCodes.value,
-                account.dPermissions.value,
-                account.dTenants.value,
-                account.meta?.value,
-                account.roleIds?.value,
-                account.tenantIds?.value,
-                account.createdAt?.value,
-                account.updatedAt?.value,
-                account.deletedAt?.value,
-            ),
+            new IamCreatedAccountEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    type: event.payload.type.value,
+                    code: event.payload.code?.value,
+                    email: event.payload.email?.value,
+                    username: event.payload.username.value,
+                    isActive: event.payload.isActive.value,
+                    clientId: event.payload.clientId.value,
+                    tags: event.payload.tags?.value,
+                    scopes: event.payload.scopes?.value,
+                    dApplicationCodes: event.payload.dApplicationCodes.value,
+                    dPermissions: event.payload.dPermissions.value,
+                    dTenants: event.payload.dTenants.value,
+                    meta: event.payload.meta?.value,
+                    roleIds: event.payload.roleIds?.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(account: IamAccount): void
+    updated(
+        event: {
+            payload: IamAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedAccountEvent(
-                account.id?.value,
-                account.type?.value,
-                account.code?.value,
-                account.email?.value,
-                account.username?.value,
-                account.isActive?.value,
-                account.clientId?.value,
-                account.tags?.value,
-                account.scopes?.value,
-                account.dApplicationCodes?.value,
-                account.dPermissions?.value,
-                account.dTenants?.value,
-                account.meta?.value,
-                account.roleIds?.value,
-                account.tenantIds?.value,
-                account.createdAt?.value,
-                account.updatedAt?.value,
-                account.deletedAt?.value,
-            ),
+            new IamUpdatedAccountEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    type: event.payload.type?.value,
+                    code: event.payload.code?.value,
+                    email: event.payload.email?.value,
+                    username: event.payload.username?.value,
+                    isActive: event.payload.isActive?.value,
+                    clientId: event.payload.clientId?.value,
+                    tags: event.payload.tags?.value,
+                    scopes: event.payload.scopes?.value,
+                    dApplicationCodes: event.payload.dApplicationCodes?.value,
+                    dPermissions: event.payload.dPermissions?.value,
+                    dTenants: event.payload.dTenants?.value,
+                    meta: event.payload.meta?.value,
+                    roleIds: event.payload.roleIds?.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(account: IamAccount): void
+    deleted(
+        event: {
+            payload: IamAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedAccountEvent(
-                account.id.value,
-                account.type.value,
-                account.code?.value,
-                account.email?.value,
-                account.username.value,
-                account.isActive.value,
-                account.clientId.value,
-                account.tags?.value,
-                account.scopes?.value,
-                account.dApplicationCodes.value,
-                account.dPermissions.value,
-                account.dTenants.value,
-                account.meta?.value,
-                account.roleIds?.value,
-                account.tenantIds?.value,
-                account.createdAt?.value,
-                account.updatedAt?.value,
-                account.deletedAt?.value,
-            ),
+            new IamDeletedAccountEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    type: event.payload.type.value,
+                    code: event.payload.code?.value,
+                    email: event.payload.email?.value,
+                    username: event.payload.username.value,
+                    isActive: event.payload.isActive.value,
+                    clientId: event.payload.clientId.value,
+                    tags: event.payload.tags?.value,
+                    scopes: event.payload.scopes?.value,
+                    dApplicationCodes: event.payload.dApplicationCodes.value,
+                    dPermissions: event.payload.dPermissions.value,
+                    dTenants: event.payload.dTenants.value,
+                    meta: event.payload.meta?.value,
+                    roleIds: event.payload.roleIds?.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

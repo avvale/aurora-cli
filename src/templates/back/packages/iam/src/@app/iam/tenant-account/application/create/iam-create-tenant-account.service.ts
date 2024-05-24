@@ -47,7 +47,10 @@ export class IamCreateTenantAccountService
             tenantAccount,
         );
 
-        tenantAccountRegister.created(tenantAccount); // apply event to model events
+        tenantAccountRegister.created({
+            payload: tenantAccount,
+            cQMetadata,
+        }); // apply event to model events
         tenantAccountRegister.commit(); // commit all events of model
     }
 }

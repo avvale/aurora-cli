@@ -16,7 +16,7 @@ export class IamSumRoleService
         cQMetadata?: CQMetadata,
     ): Promise<number>
     {
-        return await this.repository.max(
+        return await this.repository.sum(
             column,
             {
                 queryStatement,

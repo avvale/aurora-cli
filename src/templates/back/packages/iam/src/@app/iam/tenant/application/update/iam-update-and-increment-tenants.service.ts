@@ -77,7 +77,10 @@ export class IamUpdateAndIncrementTenantsService
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tenantsRegister = this.publisher.mergeObjectContext(
-            new IamAddTenantsContextEvent(tenants),
+            new IamAddTenantsContextEvent(
+                tenants,
+                cQMetadata,
+            ),
         );
 
         tenantsRegister.updatedAndIncremented(); // apply event to model events

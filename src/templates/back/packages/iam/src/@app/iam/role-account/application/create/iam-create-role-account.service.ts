@@ -47,7 +47,10 @@ export class IamCreateRoleAccountService
             roleAccount,
         );
 
-        roleAccountRegister.created(roleAccount); // apply event to model events
+        roleAccountRegister.created({
+            payload: roleAccount,
+            cQMetadata,
+        }); // apply event to model events
         roleAccountRegister.commit(); // commit all events of model
     }
 }

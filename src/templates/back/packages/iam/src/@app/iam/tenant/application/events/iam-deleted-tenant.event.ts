@@ -1,16 +1,23 @@
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class IamDeletedTenantEvent
 {
     constructor(
-        public readonly id: string,
-        public readonly parentId: string,
-        public readonly name: string,
-        public readonly code: string,
-        public readonly logo: any,
-        public readonly isActive: boolean,
-        public readonly meta: any,
-        public readonly accountIds: string[],
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                parentId: string;
+                name: string;
+                code: string;
+                logo: any;
+                isActive: boolean;
+                meta: any;
+                accountIds: string[];
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

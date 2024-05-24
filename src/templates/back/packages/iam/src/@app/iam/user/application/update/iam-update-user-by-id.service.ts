@@ -81,7 +81,10 @@ export class IamUpdateUserByIdService
             user,
         );
 
-        userRegister.updated(user); // apply event to model events
+        userRegister.updated({
+            payload: user,
+            cQMetadata,
+        }); // apply event to model events
         userRegister.commit(); // commit all events of model
     }
 }

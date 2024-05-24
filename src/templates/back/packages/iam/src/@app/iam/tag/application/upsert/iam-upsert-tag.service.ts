@@ -48,7 +48,10 @@ export class IamUpsertTagService
             tag,
         );
 
-        tagRegister.created(tag); // apply event to model events
+        tagRegister.created({
+            payload: tag,
+            cQMetadata,
+        }); // apply event to model events
         tagRegister.commit(); // commit all events of model
     }
 }

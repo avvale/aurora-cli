@@ -1,10 +1,12 @@
 import { IamCreatedTagEvent, IamCreatedTagsEvent, IamDeletedTagEvent, IamDeletedTagsEvent, IamTag, IamUpdatedAndIncrementedTagEvent, IamUpdatedAndIncrementedTagsEvent, IamUpdatedTagEvent, IamUpdatedTagsEvent } from '@app/iam/tag';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddTagsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamTag[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,68 +20,80 @@ export class IamAddTagsContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedTagsEvent(
-                this.aggregateRoots.map(tag =>
-                    new IamCreatedTagEvent(
-                        tag.id.value,
-                        tag.name.value,
-                        tag.createdAt?.value,
-                        tag.updatedAt?.value,
-                        tag.deletedAt?.value,
-                    ),
+            new IamCreatedTagsEvent({
+                payload: this.aggregateRoots.map(tag =>
+                    new IamCreatedTagEvent({
+                        payload: {
+                            id: tag.id.value,
+                            name: tag.name.value,
+                            createdAt: tag.createdAt?.value,
+                            updatedAt: tag.updatedAt?.value,
+                            deletedAt: tag.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedTagsEvent(
-                this.aggregateRoots.map(tag =>
-                    new IamUpdatedTagEvent(
-                        tag.id.value,
-                        tag.name.value,
-                        tag.createdAt?.value,
-                        tag.updatedAt?.value,
-                        tag.deletedAt?.value,
-                    ),
+            new IamUpdatedTagsEvent({
+                payload: this.aggregateRoots.map(tag =>
+                    new IamUpdatedTagEvent({
+                        payload: {
+                            id: tag.id.value,
+                            name: tag.name.value,
+                            createdAt: tag.createdAt?.value,
+                            updatedAt: tag.updatedAt?.value,
+                            deletedAt: tag.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedTagsEvent(
-                this.aggregateRoots.map(tag =>
-                    new IamUpdatedAndIncrementedTagEvent(
-                        tag.id.value,
-                        tag.name.value,
-                        tag.createdAt?.value,
-                        tag.updatedAt?.value,
-                        tag.deletedAt?.value,
-                    ),
+            new IamUpdatedAndIncrementedTagsEvent({
+                payload: this.aggregateRoots.map(tag =>
+                    new IamUpdatedAndIncrementedTagEvent({
+                        payload: {
+                            id: tag.id.value,
+                            name: tag.name.value,
+                            createdAt: tag.createdAt?.value,
+                            updatedAt: tag.updatedAt?.value,
+                            deletedAt: tag.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedTagsEvent(
-                this.aggregateRoots.map(tag =>
-                    new IamDeletedTagEvent(
-                        tag.id.value,
-                        tag.name.value,
-                        tag.createdAt?.value,
-                        tag.updatedAt?.value,
-                        tag.deletedAt?.value,
-                    ),
+            new IamDeletedTagsEvent({
+                payload: this.aggregateRoots.map(tag =>
+                    new IamDeletedTagEvent({
+                        payload: {
+                            id: tag.id.value,
+                            name: tag.name.value,
+                            createdAt: tag.createdAt?.value,
+                            updatedAt: tag.updatedAt?.value,
+                            deletedAt: tag.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

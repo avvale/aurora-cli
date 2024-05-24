@@ -36,7 +36,10 @@ export class IamDeletePermissionsRolesService
         // create AddPermissionsRolesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const permissionsRolesRegistered = this.publisher.mergeObjectContext(
-            new IamAddPermissionsRolesContextEvent(permissionsRoles),
+            new IamAddPermissionsRolesContextEvent(
+                permissionsRoles,
+                cQMetadata,
+            ),
         );
 
         permissionsRolesRegistered.deleted(); // apply event to model events

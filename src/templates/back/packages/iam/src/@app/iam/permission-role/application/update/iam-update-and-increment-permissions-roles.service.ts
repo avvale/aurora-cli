@@ -53,7 +53,10 @@ export class IamUpdateAndIncrementPermissionsRolesService
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const permissionsRolesRegister = this.publisher.mergeObjectContext(
-            new IamAddPermissionsRolesContextEvent(permissionsRoles),
+            new IamAddPermissionsRolesContextEvent(
+                permissionsRoles,
+                cQMetadata,
+            ),
         );
 
         permissionsRolesRegister.updatedAndIncremented(); // apply event to model events

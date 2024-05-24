@@ -31,7 +31,7 @@ export class IamCreatePermissionsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregatePermissions = payload.map(permission => IamPermission.register(
+        const permissions = payload.map(permission => IamPermission.register(
             permission.id,
             permission.name,
             permission.boundedContextId,
@@ -43,7 +43,7 @@ export class IamCreatePermissionsService
 
         // insert
         await this.repository.insert(
-            aggregatePermissions,
+            permissions,
             {
                 insertOptions: cQMetadata?.repositoryOptions,
             },
@@ -51,7 +51,12 @@ export class IamCreatePermissionsService
 
         // create AddPermissionsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const permissionsRegistered = this.publisher.mergeObjectContext(new IamAddPermissionsContextEvent(aggregatePermissions));
+        const permissionsRegistered = this.publisher.mergeObjectContext(
+            new IamAddPermissionsContextEvent(
+                permissions,
+                cQMetadata,
+            ),
+        );
 
         permissionsRegistered.created(); // apply event to model events
         permissionsRegistered.commit(); // commit all events of model

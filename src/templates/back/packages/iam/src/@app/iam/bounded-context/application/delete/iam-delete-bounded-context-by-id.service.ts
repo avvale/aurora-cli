@@ -42,7 +42,10 @@ export class IamDeleteBoundedContextByIdService
         // insert EventBus in object, to be able to apply and commit events
         const boundedContextRegister = this.publisher.mergeObjectContext(boundedContext);
 
-        boundedContextRegister.deleted(boundedContext); // apply event to model events
+        boundedContextRegister.deleted({
+            payload: boundedContext,
+            cQMetadata,
+        }); // apply event to model events
         boundedContextRegister.commit(); // commit all events of model
     }
 }

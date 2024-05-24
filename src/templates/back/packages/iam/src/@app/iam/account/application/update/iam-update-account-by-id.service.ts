@@ -90,7 +90,10 @@ export class IamUpdateAccountByIdService
             account,
         );
 
-        accountRegister.updated(account); // apply event to model events
+        accountRegister.updated({
+            payload: account,
+            cQMetadata,
+        }); // apply event to model events
         accountRegister.commit(); // commit all events of model
     }
 }

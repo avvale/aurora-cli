@@ -1,10 +1,12 @@
 import { IamCreatedTenantEvent, IamCreatedTenantsEvent, IamDeletedTenantEvent, IamDeletedTenantsEvent, IamTenant, IamUpdatedAndIncrementedTenantEvent, IamUpdatedAndIncrementedTenantsEvent, IamUpdatedTenantEvent, IamUpdatedTenantsEvent } from '@app/iam/tenant';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddTenantsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamTenant[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,92 +20,104 @@ export class IamAddTenantsContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedTenantsEvent(
-                this.aggregateRoots.map(tenant =>
-                    new IamCreatedTenantEvent(
-                        tenant.id.value,
-                        tenant.parentId?.value,
-                        tenant.name.value,
-                        tenant.code?.value,
-                        tenant.logo?.value,
-                        tenant.isActive.value,
-                        tenant.meta?.value,
-                        tenant.accountIds?.value,
-                        tenant.createdAt?.value,
-                        tenant.updatedAt?.value,
-                        tenant.deletedAt?.value,
-                    ),
+            new IamCreatedTenantsEvent({
+                payload: this.aggregateRoots.map(tenant =>
+                    new IamCreatedTenantEvent({
+                        payload: {
+                            id: tenant.id.value,
+                            parentId: tenant.parentId?.value,
+                            name: tenant.name.value,
+                            code: tenant.code?.value,
+                            logo: tenant.logo?.value,
+                            isActive: tenant.isActive.value,
+                            meta: tenant.meta?.value,
+                            accountIds: tenant.accountIds?.value,
+                            createdAt: tenant.createdAt?.value,
+                            updatedAt: tenant.updatedAt?.value,
+                            deletedAt: tenant.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedTenantsEvent(
-                this.aggregateRoots.map(tenant =>
-                    new IamUpdatedTenantEvent(
-                        tenant.id.value,
-                        tenant.parentId?.value,
-                        tenant.name.value,
-                        tenant.code?.value,
-                        tenant.logo?.value,
-                        tenant.isActive.value,
-                        tenant.meta?.value,
-                        tenant.accountIds?.value,
-                        tenant.createdAt?.value,
-                        tenant.updatedAt?.value,
-                        tenant.deletedAt?.value,
-                    ),
+            new IamUpdatedTenantsEvent({
+                payload: this.aggregateRoots.map(tenant =>
+                    new IamUpdatedTenantEvent({
+                        payload: {
+                            id: tenant.id.value,
+                            parentId: tenant.parentId?.value,
+                            name: tenant.name.value,
+                            code: tenant.code?.value,
+                            logo: tenant.logo?.value,
+                            isActive: tenant.isActive.value,
+                            meta: tenant.meta?.value,
+                            accountIds: tenant.accountIds?.value,
+                            createdAt: tenant.createdAt?.value,
+                            updatedAt: tenant.updatedAt?.value,
+                            deletedAt: tenant.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedTenantsEvent(
-                this.aggregateRoots.map(tenant =>
-                    new IamUpdatedAndIncrementedTenantEvent(
-                        tenant.id.value,
-                        tenant.parentId?.value,
-                        tenant.name.value,
-                        tenant.code?.value,
-                        tenant.logo?.value,
-                        tenant.isActive.value,
-                        tenant.meta?.value,
-                        tenant.accountIds?.value,
-                        tenant.createdAt?.value,
-                        tenant.updatedAt?.value,
-                        tenant.deletedAt?.value,
-                    ),
+            new IamUpdatedAndIncrementedTenantsEvent({
+                payload: this.aggregateRoots.map(tenant =>
+                    new IamUpdatedAndIncrementedTenantEvent({
+                        payload: {
+                            id: tenant.id.value,
+                            parentId: tenant.parentId?.value,
+                            name: tenant.name.value,
+                            code: tenant.code?.value,
+                            logo: tenant.logo?.value,
+                            isActive: tenant.isActive.value,
+                            meta: tenant.meta?.value,
+                            accountIds: tenant.accountIds?.value,
+                            createdAt: tenant.createdAt?.value,
+                            updatedAt: tenant.updatedAt?.value,
+                            deletedAt: tenant.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedTenantsEvent(
-                this.aggregateRoots.map(tenant =>
-                    new IamDeletedTenantEvent(
-                        tenant.id.value,
-                        tenant.parentId?.value,
-                        tenant.name.value,
-                        tenant.code?.value,
-                        tenant.logo?.value,
-                        tenant.isActive.value,
-                        tenant.meta?.value,
-                        tenant.accountIds?.value,
-                        tenant.createdAt?.value,
-                        tenant.updatedAt?.value,
-                        tenant.deletedAt?.value,
-                    ),
+            new IamDeletedTenantsEvent({
+                payload: this.aggregateRoots.map(tenant =>
+                    new IamDeletedTenantEvent({
+                        payload: {
+                            id: tenant.id.value,
+                            parentId: tenant.parentId?.value,
+                            name: tenant.name.value,
+                            code: tenant.code?.value,
+                            logo: tenant.logo?.value,
+                            isActive: tenant.isActive.value,
+                            meta: tenant.meta?.value,
+                            accountIds: tenant.accountIds?.value,
+                            createdAt: tenant.createdAt?.value,
+                            updatedAt: tenant.updatedAt?.value,
+                            deletedAt: tenant.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

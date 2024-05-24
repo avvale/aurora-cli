@@ -1,10 +1,12 @@
 import { IamCreatedRoleEvent, IamCreatedRolesEvent, IamDeletedRoleEvent, IamDeletedRolesEvent, IamRole, IamUpdatedAndIncrementedRoleEvent, IamUpdatedAndIncrementedRolesEvent, IamUpdatedRoleEvent, IamUpdatedRolesEvent } from '@app/iam/role';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddRolesContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamRole[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,80 +20,92 @@ export class IamAddRolesContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedRolesEvent(
-                this.aggregateRoots.map(role =>
-                    new IamCreatedRoleEvent(
-                        role.id.value,
-                        role.name.value,
-                        role.isMaster.value,
-                        role.permissionIds?.value,
-                        role.accountIds?.value,
-                        role.createdAt?.value,
-                        role.updatedAt?.value,
-                        role.deletedAt?.value,
-                    ),
+            new IamCreatedRolesEvent({
+                payload: this.aggregateRoots.map(role =>
+                    new IamCreatedRoleEvent({
+                        payload: {
+                            id: role.id.value,
+                            name: role.name.value,
+                            isMaster: role.isMaster.value,
+                            permissionIds: role.permissionIds?.value,
+                            accountIds: role.accountIds?.value,
+                            createdAt: role.createdAt?.value,
+                            updatedAt: role.updatedAt?.value,
+                            deletedAt: role.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedRolesEvent(
-                this.aggregateRoots.map(role =>
-                    new IamUpdatedRoleEvent(
-                        role.id.value,
-                        role.name.value,
-                        role.isMaster.value,
-                        role.permissionIds?.value,
-                        role.accountIds?.value,
-                        role.createdAt?.value,
-                        role.updatedAt?.value,
-                        role.deletedAt?.value,
-                    ),
+            new IamUpdatedRolesEvent({
+                payload: this.aggregateRoots.map(role =>
+                    new IamUpdatedRoleEvent({
+                        payload: {
+                            id: role.id.value,
+                            name: role.name.value,
+                            isMaster: role.isMaster.value,
+                            permissionIds: role.permissionIds?.value,
+                            accountIds: role.accountIds?.value,
+                            createdAt: role.createdAt?.value,
+                            updatedAt: role.updatedAt?.value,
+                            deletedAt: role.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedRolesEvent(
-                this.aggregateRoots.map(role =>
-                    new IamUpdatedAndIncrementedRoleEvent(
-                        role.id.value,
-                        role.name.value,
-                        role.isMaster.value,
-                        role.permissionIds?.value,
-                        role.accountIds?.value,
-                        role.createdAt?.value,
-                        role.updatedAt?.value,
-                        role.deletedAt?.value,
-                    ),
+            new IamUpdatedAndIncrementedRolesEvent({
+                payload: this.aggregateRoots.map(role =>
+                    new IamUpdatedAndIncrementedRoleEvent({
+                        payload: {
+                            id: role.id.value,
+                            name: role.name.value,
+                            isMaster: role.isMaster.value,
+                            permissionIds: role.permissionIds?.value,
+                            accountIds: role.accountIds?.value,
+                            createdAt: role.createdAt?.value,
+                            updatedAt: role.updatedAt?.value,
+                            deletedAt: role.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedRolesEvent(
-                this.aggregateRoots.map(role =>
-                    new IamDeletedRoleEvent(
-                        role.id.value,
-                        role.name.value,
-                        role.isMaster.value,
-                        role.permissionIds?.value,
-                        role.accountIds?.value,
-                        role.createdAt?.value,
-                        role.updatedAt?.value,
-                        role.deletedAt?.value,
-                    ),
+            new IamDeletedRolesEvent({
+                payload: this.aggregateRoots.map(role =>
+                    new IamDeletedRoleEvent({
+                        payload: {
+                            id: role.id.value,
+                            name: role.name.value,
+                            isMaster: role.isMaster.value,
+                            permissionIds: role.permissionIds?.value,
+                            accountIds: role.accountIds?.value,
+                            createdAt: role.createdAt?.value,
+                            updatedAt: role.updatedAt?.value,
+                            deletedAt: role.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

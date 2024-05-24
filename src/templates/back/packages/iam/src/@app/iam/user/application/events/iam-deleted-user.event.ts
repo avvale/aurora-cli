@@ -1,20 +1,27 @@
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class IamDeletedUserEvent
 {
     constructor(
-        public readonly id: string,
-        public readonly accountId: string,
-        public readonly name: string,
-        public readonly surname: string,
-        public readonly avatar: string,
-        public readonly mobile: string,
-        public readonly langId: string,
-        public readonly password: string,
-        public readonly isTwoFactorAuthenticationEnabled: boolean,
-        public readonly twoFactorAuthenticationSecret: string,
-        public readonly rememberToken: string,
-        public readonly meta: any,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                accountId: string;
+                name: string;
+                surname: string;
+                avatar: string;
+                mobile: string;
+                langId: string;
+                password: string;
+                isTwoFactorAuthenticationEnabled: boolean;
+                twoFactorAuthenticationSecret: string;
+                rememberToken: string;
+                meta: any;
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

@@ -1,10 +1,12 @@
 import { IamCreatedRoleAccountEvent, IamCreatedRolesAccountsEvent, IamDeletedRoleAccountEvent, IamDeletedRolesAccountsEvent, IamRoleAccount, IamUpdatedAndIncrementedRoleAccountEvent, IamUpdatedAndIncrementedRolesAccountsEvent, IamUpdatedRoleAccountEvent, IamUpdatedRolesAccountsEvent } from '@app/iam/role-account';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddRolesAccountsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamRoleAccount[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,56 +20,68 @@ export class IamAddRolesAccountsContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedRolesAccountsEvent(
-                this.aggregateRoots.map(roleAccount =>
-                    new IamCreatedRoleAccountEvent(
-                        roleAccount.roleId.value,
-                        roleAccount.accountId.value,
-                    ),
+            new IamCreatedRolesAccountsEvent({
+                payload: this.aggregateRoots.map(roleAccount =>
+                    new IamCreatedRoleAccountEvent({
+                        payload: {
+                            roleId: roleAccount.roleId.value,
+                            accountId: roleAccount.accountId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedRolesAccountsEvent(
-                this.aggregateRoots.map(roleAccount =>
-                    new IamUpdatedRoleAccountEvent(
-                        roleAccount.roleId.value,
-                        roleAccount.accountId.value,
-                    ),
+            new IamUpdatedRolesAccountsEvent({
+                payload: this.aggregateRoots.map(roleAccount =>
+                    new IamUpdatedRoleAccountEvent({
+                        payload: {
+                            roleId: roleAccount.roleId.value,
+                            accountId: roleAccount.accountId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedRolesAccountsEvent(
-                this.aggregateRoots.map(roleAccount =>
-                    new IamUpdatedAndIncrementedRoleAccountEvent(
-                        roleAccount.roleId.value,
-                        roleAccount.accountId.value,
-                    ),
+            new IamUpdatedAndIncrementedRolesAccountsEvent({
+                payload: this.aggregateRoots.map(roleAccount =>
+                    new IamUpdatedAndIncrementedRoleAccountEvent({
+                        payload: {
+                            roleId: roleAccount.roleId.value,
+                            accountId: roleAccount.accountId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedRolesAccountsEvent(
-                this.aggregateRoots.map(roleAccount =>
-                    new IamDeletedRoleAccountEvent(
-                        roleAccount.roleId.value,
-                        roleAccount.accountId.value,
-                    ),
+            new IamDeletedRolesAccountsEvent({
+                payload: this.aggregateRoots.map(roleAccount =>
+                    new IamDeletedRoleAccountEvent({
+                        payload: {
+                            roleId: roleAccount.roleId.value,
+                            accountId: roleAccount.accountId.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

@@ -1,8 +1,12 @@
-import { IamUpdatedAndIncrementedAccountEvent } from './iam-updated-and-incremented-account.event';
+import { IamUpdatedAndIncrementedAccountEvent } from '@app/iam/account';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamUpdatedAndIncrementedAccountsEvent
 {
     constructor(
-        public readonly accounts: IamUpdatedAndIncrementedAccountEvent[],
+        public readonly event: {
+            payload: IamUpdatedAndIncrementedAccountEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

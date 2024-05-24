@@ -1,7 +1,14 @@
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class IamCreatedPermissionRoleEvent
 {
     constructor(
-        public readonly permissionId: string,
-        public readonly roleId: string,
+        public readonly event: {
+            payload: {
+                permissionId: string;
+                roleId: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

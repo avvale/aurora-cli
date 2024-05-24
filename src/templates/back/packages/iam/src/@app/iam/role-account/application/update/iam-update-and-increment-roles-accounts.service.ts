@@ -53,7 +53,10 @@ export class IamUpdateAndIncrementRolesAccountsService
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const rolesAccountsRegister = this.publisher.mergeObjectContext(
-            new IamAddRolesAccountsContextEvent(rolesAccounts),
+            new IamAddRolesAccountsContextEvent(
+                rolesAccounts,
+                cQMetadata,
+            ),
         );
 
         rolesAccountsRegister.updatedAndIncremented(); // apply event to model events

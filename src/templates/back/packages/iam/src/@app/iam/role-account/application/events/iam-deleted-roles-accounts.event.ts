@@ -1,8 +1,12 @@
-import { IamDeletedRoleAccountEvent } from './iam-deleted-role-account.event';
+import { IamDeletedRoleAccountEvent } from '@app/iam/role-account';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamDeletedRolesAccountsEvent
 {
     constructor(
-        public readonly rolesAccounts: IamDeletedRoleAccountEvent[],
+        public readonly event: {
+            payload: IamDeletedRoleAccountEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

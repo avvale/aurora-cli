@@ -6,7 +6,7 @@ import {
     IamTenantAccountAccountId,
     IamTenantAccountTenantId,
 } from '@app/iam/tenant-account/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamTenantAccount extends AggregateRoot
@@ -45,33 +45,57 @@ export class IamTenantAccount extends AggregateRoot
         );
     }
 
-    created(tenantAccount: IamTenantAccount): void
+    created(
+        event: {
+            payload: IamTenantAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedTenantAccountEvent(
-                tenantAccount.tenantId.value,
-                tenantAccount.accountId.value,
-            ),
+            new IamCreatedTenantAccountEvent({
+                payload: {
+                    tenantId: event.payload.tenantId.value,
+                    accountId: event.payload.accountId.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(tenantAccount: IamTenantAccount): void
+    updated(
+        event: {
+            payload: IamTenantAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedTenantAccountEvent(
-                tenantAccount.tenantId?.value,
-                tenantAccount.accountId?.value,
-            ),
+            new IamUpdatedTenantAccountEvent({
+                payload: {
+                    tenantId: event.payload.tenantId?.value,
+                    accountId: event.payload.accountId?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(tenantAccount: IamTenantAccount): void
+    deleted(
+        event: {
+            payload: IamTenantAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedTenantAccountEvent(
-                tenantAccount.tenantId.value,
-                tenantAccount.accountId.value,
-            ),
+            new IamDeletedTenantAccountEvent({
+                payload: {
+                    tenantId: event.payload.tenantId.value,
+                    accountId: event.payload.accountId.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

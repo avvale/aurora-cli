@@ -65,7 +65,10 @@ export class IamCreateTenantService
             tenant,
         );
 
-        tenantRegister.created(tenant); // apply event to model events
+        tenantRegister.created({
+            payload: tenant,
+            cQMetadata,
+        }); // apply event to model events
         tenantRegister.commit(); // commit all events of model
     }
 }

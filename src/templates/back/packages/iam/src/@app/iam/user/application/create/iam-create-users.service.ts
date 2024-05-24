@@ -47,7 +47,7 @@ export class IamCreateUsersService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateUsers = payload.map(user => IamUser.register(
+        const users = payload.map(user => IamUser.register(
             user.id,
             user.accountId,
             user.name,
@@ -67,7 +67,7 @@ export class IamCreateUsersService
 
         // insert
         await this.repository.insert(
-            aggregateUsers,
+            users,
             {
                 insertOptions: cQMetadata?.repositoryOptions,
             },
@@ -75,7 +75,12 @@ export class IamCreateUsersService
 
         // create AddUsersContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const usersRegistered = this.publisher.mergeObjectContext(new IamAddUsersContextEvent(aggregateUsers));
+        const usersRegistered = this.publisher.mergeObjectContext(
+            new IamAddUsersContextEvent(
+                users,
+                cQMetadata,
+            ),
+        );
 
         usersRegistered.created(); // apply event to model events
         usersRegistered.commit(); // commit all events of model

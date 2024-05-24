@@ -11,7 +11,7 @@ import {
     IamBoundedContextUpdatedAt,
 } from '@app/iam/bounded-context/domain/value-objects';
 import { IamPermission } from '@app/iam/permission';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamBoundedContext extends AggregateRoot
@@ -75,51 +75,75 @@ export class IamBoundedContext extends AggregateRoot
         );
     }
 
-    created(boundedContext: IamBoundedContext): void
+    created(
+        event: {
+            payload: IamBoundedContext;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedBoundedContextEvent(
-                boundedContext.id.value,
-                boundedContext.name.value,
-                boundedContext.root.value,
-                boundedContext.sort?.value,
-                boundedContext.isActive.value,
-                boundedContext.createdAt?.value,
-                boundedContext.updatedAt?.value,
-                boundedContext.deletedAt?.value,
-            ),
+            new IamCreatedBoundedContextEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    name: event.payload.name.value,
+                    root: event.payload.root.value,
+                    sort: event.payload.sort?.value,
+                    isActive: event.payload.isActive.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(boundedContext: IamBoundedContext): void
+    updated(
+        event: {
+            payload: IamBoundedContext;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedBoundedContextEvent(
-                boundedContext.id?.value,
-                boundedContext.name?.value,
-                boundedContext.root?.value,
-                boundedContext.sort?.value,
-                boundedContext.isActive?.value,
-                boundedContext.createdAt?.value,
-                boundedContext.updatedAt?.value,
-                boundedContext.deletedAt?.value,
-            ),
+            new IamUpdatedBoundedContextEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    name: event.payload.name?.value,
+                    root: event.payload.root?.value,
+                    sort: event.payload.sort?.value,
+                    isActive: event.payload.isActive?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(boundedContext: IamBoundedContext): void
+    deleted(
+        event: {
+            payload: IamBoundedContext;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedBoundedContextEvent(
-                boundedContext.id.value,
-                boundedContext.name.value,
-                boundedContext.root.value,
-                boundedContext.sort?.value,
-                boundedContext.isActive.value,
-                boundedContext.createdAt?.value,
-                boundedContext.updatedAt?.value,
-                boundedContext.deletedAt?.value,
-            ),
+            new IamDeletedBoundedContextEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    name: event.payload.name.value,
+                    root: event.payload.root.value,
+                    sort: event.payload.sort?.value,
+                    isActive: event.payload.isActive.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

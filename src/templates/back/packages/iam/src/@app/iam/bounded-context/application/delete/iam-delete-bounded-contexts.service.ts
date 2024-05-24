@@ -36,7 +36,10 @@ export class IamDeleteBoundedContextsService
         // create AddBoundedContextsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const boundedContextsRegistered = this.publisher.mergeObjectContext(
-            new IamAddBoundedContextsContextEvent(boundedContexts),
+            new IamAddBoundedContextsContextEvent(
+                boundedContexts,
+                cQMetadata,
+            ),
         );
 
         boundedContextsRegistered.deleted(); // apply event to model events

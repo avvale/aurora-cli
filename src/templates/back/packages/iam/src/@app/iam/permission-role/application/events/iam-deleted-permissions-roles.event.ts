@@ -1,8 +1,12 @@
-import { IamDeletedPermissionRoleEvent } from './iam-deleted-permission-role.event';
+import { IamDeletedPermissionRoleEvent } from '@app/iam/permission-role';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamDeletedPermissionsRolesEvent
 {
     constructor(
-        public readonly permissionsRoles: IamDeletedPermissionRoleEvent[],
+        public readonly event: {
+            payload: IamDeletedPermissionRoleEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

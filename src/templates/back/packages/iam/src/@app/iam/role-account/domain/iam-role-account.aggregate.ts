@@ -6,7 +6,7 @@ import {
     IamRoleAccountAccountId,
     IamRoleAccountRoleId,
 } from '@app/iam/role-account/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamRoleAccount extends AggregateRoot
@@ -45,33 +45,57 @@ export class IamRoleAccount extends AggregateRoot
         );
     }
 
-    created(roleAccount: IamRoleAccount): void
+    created(
+        event: {
+            payload: IamRoleAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedRoleAccountEvent(
-                roleAccount.roleId.value,
-                roleAccount.accountId.value,
-            ),
+            new IamCreatedRoleAccountEvent({
+                payload: {
+                    roleId: event.payload.roleId.value,
+                    accountId: event.payload.accountId.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(roleAccount: IamRoleAccount): void
+    updated(
+        event: {
+            payload: IamRoleAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedRoleAccountEvent(
-                roleAccount.roleId?.value,
-                roleAccount.accountId?.value,
-            ),
+            new IamUpdatedRoleAccountEvent({
+                payload: {
+                    roleId: event.payload.roleId?.value,
+                    accountId: event.payload.accountId?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(roleAccount: IamRoleAccount): void
+    deleted(
+        event: {
+            payload: IamRoleAccount;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedRoleAccountEvent(
-                roleAccount.roleId.value,
-                roleAccount.accountId.value,
-            ),
+            new IamDeletedRoleAccountEvent({
+                payload: {
+                    roleId: event.payload.roleId.value,
+                    accountId: event.payload.accountId.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

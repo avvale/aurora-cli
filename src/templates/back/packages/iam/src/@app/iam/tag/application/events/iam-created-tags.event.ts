@@ -1,8 +1,12 @@
-import { IamCreatedTagEvent } from './iam-created-tag.event';
+import { IamCreatedTagEvent } from '@app/iam/tag';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamCreatedTagsEvent
 {
     constructor(
-        public readonly tags: IamCreatedTagEvent[],
+        public readonly event: {
+            payload: IamCreatedTagEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

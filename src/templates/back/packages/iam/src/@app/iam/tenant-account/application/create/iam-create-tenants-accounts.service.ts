@@ -24,14 +24,14 @@ export class IamCreateTenantsAccountsService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateTenantsAccounts = payload.map(tenantAccount => IamTenantAccount.register(
+        const tenantsAccounts = payload.map(tenantAccount => IamTenantAccount.register(
             tenantAccount.tenantId,
             tenantAccount.accountId,
         ));
 
         // insert
         await this.repository.insert(
-            aggregateTenantsAccounts,
+            tenantsAccounts,
             {
                 insertOptions: cQMetadata?.repositoryOptions,
             },
@@ -39,7 +39,12 @@ export class IamCreateTenantsAccountsService
 
         // create AddTenantsAccountsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const tenantsAccountsRegistered = this.publisher.mergeObjectContext(new IamAddTenantsAccountsContextEvent(aggregateTenantsAccounts));
+        const tenantsAccountsRegistered = this.publisher.mergeObjectContext(
+            new IamAddTenantsAccountsContextEvent(
+                tenantsAccounts,
+                cQMetadata,
+            ),
+        );
 
         tenantsAccountsRegistered.created(); // apply event to model events
         tenantsAccountsRegistered.commit(); // commit all events of model

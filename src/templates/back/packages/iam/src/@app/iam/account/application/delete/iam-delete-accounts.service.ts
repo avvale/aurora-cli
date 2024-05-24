@@ -36,7 +36,10 @@ export class IamDeleteAccountsService
         // create AddAccountsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const accountsRegistered = this.publisher.mergeObjectContext(
-            new IamAddAccountsContextEvent(accounts),
+            new IamAddAccountsContextEvent(
+                accounts,
+                cQMetadata,
+            ),
         );
 
         accountsRegistered.deleted(); // apply event to model events

@@ -18,7 +18,7 @@ import {
     IamUserTwoFactorAuthenticationSecret,
     IamUserUpdatedAt,
 } from '@app/iam/user/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamUser extends AggregateRoot
@@ -117,72 +117,96 @@ export class IamUser extends AggregateRoot
         );
     }
 
-    created(user: IamUser): void
+    created(
+        event: {
+            payload: IamUser;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedUserEvent(
-                user.id.value,
-                user.accountId.value,
-                user.name.value,
-                user.surname?.value,
-                user.avatar?.value,
-                user.mobile?.value,
-                user.langId?.value,
-                user.password.value,
-                user.isTwoFactorAuthenticationEnabled.value,
-                user.twoFactorAuthenticationSecret?.value,
-                user.rememberToken?.value,
-                user.meta?.value,
-                user.createdAt?.value,
-                user.updatedAt?.value,
-                user.deletedAt?.value,
-            ),
+            new IamCreatedUserEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    accountId: event.payload.accountId.value,
+                    name: event.payload.name.value,
+                    surname: event.payload.surname?.value,
+                    avatar: event.payload.avatar?.value,
+                    mobile: event.payload.mobile?.value,
+                    langId: event.payload.langId?.value,
+                    password: event.payload.password.value,
+                    isTwoFactorAuthenticationEnabled: event.payload.isTwoFactorAuthenticationEnabled.value,
+                    twoFactorAuthenticationSecret: event.payload.twoFactorAuthenticationSecret?.value,
+                    rememberToken: event.payload.rememberToken?.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(user: IamUser): void
+    updated(
+        event: {
+            payload: IamUser;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedUserEvent(
-                user.id?.value,
-                user.accountId?.value,
-                user.name?.value,
-                user.surname?.value,
-                user.avatar?.value,
-                user.mobile?.value,
-                user.langId?.value,
-                user.password?.value,
-                user.isTwoFactorAuthenticationEnabled?.value,
-                user.twoFactorAuthenticationSecret?.value,
-                user.rememberToken?.value,
-                user.meta?.value,
-                user.createdAt?.value,
-                user.updatedAt?.value,
-                user.deletedAt?.value,
-            ),
+            new IamUpdatedUserEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    accountId: event.payload.accountId?.value,
+                    name: event.payload.name?.value,
+                    surname: event.payload.surname?.value,
+                    avatar: event.payload.avatar?.value,
+                    mobile: event.payload.mobile?.value,
+                    langId: event.payload.langId?.value,
+                    password: event.payload.password?.value,
+                    isTwoFactorAuthenticationEnabled: event.payload.isTwoFactorAuthenticationEnabled?.value,
+                    twoFactorAuthenticationSecret: event.payload.twoFactorAuthenticationSecret?.value,
+                    rememberToken: event.payload.rememberToken?.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(user: IamUser): void
+    deleted(
+        event: {
+            payload: IamUser;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedUserEvent(
-                user.id.value,
-                user.accountId.value,
-                user.name.value,
-                user.surname?.value,
-                user.avatar?.value,
-                user.mobile?.value,
-                user.langId?.value,
-                user.password.value,
-                user.isTwoFactorAuthenticationEnabled.value,
-                user.twoFactorAuthenticationSecret?.value,
-                user.rememberToken?.value,
-                user.meta?.value,
-                user.createdAt?.value,
-                user.updatedAt?.value,
-                user.deletedAt?.value,
-            ),
+            new IamDeletedUserEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    accountId: event.payload.accountId.value,
+                    name: event.payload.name.value,
+                    surname: event.payload.surname?.value,
+                    avatar: event.payload.avatar?.value,
+                    mobile: event.payload.mobile?.value,
+                    langId: event.payload.langId?.value,
+                    password: event.payload.password.value,
+                    isTwoFactorAuthenticationEnabled: event.payload.isTwoFactorAuthenticationEnabled.value,
+                    twoFactorAuthenticationSecret: event.payload.twoFactorAuthenticationSecret?.value,
+                    rememberToken: event.payload.rememberToken?.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

@@ -1,8 +1,12 @@
-import { IamCreatedUserEvent } from './iam-created-user.event';
+import { IamCreatedUserEvent } from '@app/iam/user';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamCreatedUsersEvent
 {
     constructor(
-        public readonly users: IamCreatedUserEvent[],
+        public readonly event: {
+            payload: IamCreatedUserEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

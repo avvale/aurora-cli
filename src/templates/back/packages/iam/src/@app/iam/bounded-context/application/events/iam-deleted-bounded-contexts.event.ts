@@ -1,8 +1,12 @@
-import { IamDeletedBoundedContextEvent } from './iam-deleted-bounded-context.event';
+import { IamDeletedBoundedContextEvent } from '@app/iam/bounded-context';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamDeletedBoundedContextsEvent
 {
     constructor(
-        public readonly boundedContexts: IamDeletedBoundedContextEvent[],
+        public readonly event: {
+            payload: IamDeletedBoundedContextEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

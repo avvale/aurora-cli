@@ -1,10 +1,12 @@
 import { IamBoundedContext, IamCreatedBoundedContextEvent, IamCreatedBoundedContextsEvent, IamDeletedBoundedContextEvent, IamDeletedBoundedContextsEvent, IamUpdatedAndIncrementedBoundedContextEvent, IamUpdatedAndIncrementedBoundedContextsEvent, IamUpdatedBoundedContextEvent, IamUpdatedBoundedContextsEvent } from '@app/iam/bounded-context';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddBoundedContextsContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamBoundedContext[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,80 +20,92 @@ export class IamAddBoundedContextsContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedBoundedContextsEvent(
-                this.aggregateRoots.map(boundedContext =>
-                    new IamCreatedBoundedContextEvent(
-                        boundedContext.id.value,
-                        boundedContext.name.value,
-                        boundedContext.root.value,
-                        boundedContext.sort?.value,
-                        boundedContext.isActive.value,
-                        boundedContext.createdAt?.value,
-                        boundedContext.updatedAt?.value,
-                        boundedContext.deletedAt?.value,
-                    ),
+            new IamCreatedBoundedContextsEvent({
+                payload: this.aggregateRoots.map(boundedContext =>
+                    new IamCreatedBoundedContextEvent({
+                        payload: {
+                            id: boundedContext.id.value,
+                            name: boundedContext.name.value,
+                            root: boundedContext.root.value,
+                            sort: boundedContext.sort?.value,
+                            isActive: boundedContext.isActive.value,
+                            createdAt: boundedContext.createdAt?.value,
+                            updatedAt: boundedContext.updatedAt?.value,
+                            deletedAt: boundedContext.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedBoundedContextsEvent(
-                this.aggregateRoots.map(boundedContext =>
-                    new IamUpdatedBoundedContextEvent(
-                        boundedContext.id.value,
-                        boundedContext.name.value,
-                        boundedContext.root.value,
-                        boundedContext.sort?.value,
-                        boundedContext.isActive.value,
-                        boundedContext.createdAt?.value,
-                        boundedContext.updatedAt?.value,
-                        boundedContext.deletedAt?.value,
-                    ),
+            new IamUpdatedBoundedContextsEvent({
+                payload: this.aggregateRoots.map(boundedContext =>
+                    new IamUpdatedBoundedContextEvent({
+                        payload: {
+                            id: boundedContext.id.value,
+                            name: boundedContext.name.value,
+                            root: boundedContext.root.value,
+                            sort: boundedContext.sort?.value,
+                            isActive: boundedContext.isActive.value,
+                            createdAt: boundedContext.createdAt?.value,
+                            updatedAt: boundedContext.updatedAt?.value,
+                            deletedAt: boundedContext.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedBoundedContextsEvent(
-                this.aggregateRoots.map(boundedContext =>
-                    new IamUpdatedAndIncrementedBoundedContextEvent(
-                        boundedContext.id.value,
-                        boundedContext.name.value,
-                        boundedContext.root.value,
-                        boundedContext.sort?.value,
-                        boundedContext.isActive.value,
-                        boundedContext.createdAt?.value,
-                        boundedContext.updatedAt?.value,
-                        boundedContext.deletedAt?.value,
-                    ),
+            new IamUpdatedAndIncrementedBoundedContextsEvent({
+                payload: this.aggregateRoots.map(boundedContext =>
+                    new IamUpdatedAndIncrementedBoundedContextEvent({
+                        payload: {
+                            id: boundedContext.id.value,
+                            name: boundedContext.name.value,
+                            root: boundedContext.root.value,
+                            sort: boundedContext.sort?.value,
+                            isActive: boundedContext.isActive.value,
+                            createdAt: boundedContext.createdAt?.value,
+                            updatedAt: boundedContext.updatedAt?.value,
+                            deletedAt: boundedContext.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedBoundedContextsEvent(
-                this.aggregateRoots.map(boundedContext =>
-                    new IamDeletedBoundedContextEvent(
-                        boundedContext.id.value,
-                        boundedContext.name.value,
-                        boundedContext.root.value,
-                        boundedContext.sort?.value,
-                        boundedContext.isActive.value,
-                        boundedContext.createdAt?.value,
-                        boundedContext.updatedAt?.value,
-                        boundedContext.deletedAt?.value,
-                    ),
+            new IamDeletedBoundedContextsEvent({
+                payload: this.aggregateRoots.map(boundedContext =>
+                    new IamDeletedBoundedContextEvent({
+                        payload: {
+                            id: boundedContext.id.value,
+                            name: boundedContext.name.value,
+                            root: boundedContext.root.value,
+                            sort: boundedContext.sort?.value,
+                            isActive: boundedContext.isActive.value,
+                            createdAt: boundedContext.createdAt?.value,
+                            updatedAt: boundedContext.updatedAt?.value,
+                            deletedAt: boundedContext.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

@@ -47,7 +47,10 @@ export class IamCreatePermissionRoleService
             permissionRole,
         );
 
-        permissionRoleRegister.created(permissionRole); // apply event to model events
+        permissionRoleRegister.created({
+            payload: permissionRole,
+            cQMetadata,
+        }); // apply event to model events
         permissionRoleRegister.commit(); // commit all events of model
     }
 }

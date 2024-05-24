@@ -1,8 +1,12 @@
-import { IamCreatedTenantAccountEvent } from './iam-created-tenant-account.event';
+import { IamCreatedTenantAccountEvent } from '@app/iam/tenant-account';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamCreatedTenantsAccountsEvent
 {
     constructor(
-        public readonly tenantsAccounts: IamCreatedTenantAccountEvent[],
+        public readonly event: {
+            payload: IamCreatedTenantAccountEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

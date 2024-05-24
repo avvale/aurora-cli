@@ -59,7 +59,10 @@ export class IamUpdateAndIncrementTagsService
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const tagsRegister = this.publisher.mergeObjectContext(
-            new IamAddTagsContextEvent(tags),
+            new IamAddTagsContextEvent(
+                tags,
+                cQMetadata,
+            ),
         );
 
         tagsRegister.updatedAndIncremented(); // apply event to model events

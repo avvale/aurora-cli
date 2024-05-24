@@ -11,7 +11,7 @@ import {
     IamPermissionUpdatedAt,
 } from '@app/iam/permission/domain/value-objects';
 import { IamRole } from '@app/iam/role';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamPermission extends AggregateRoot
@@ -75,48 +75,72 @@ export class IamPermission extends AggregateRoot
         );
     }
 
-    created(permission: IamPermission): void
+    created(
+        event: {
+            payload: IamPermission;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedPermissionEvent(
-                permission.id.value,
-                permission.name.value,
-                permission.boundedContextId.value,
-                permission.roleIds?.value,
-                permission.createdAt?.value,
-                permission.updatedAt?.value,
-                permission.deletedAt?.value,
-            ),
+            new IamCreatedPermissionEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    name: event.payload.name.value,
+                    boundedContextId: event.payload.boundedContextId.value,
+                    roleIds: event.payload.roleIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(permission: IamPermission): void
+    updated(
+        event: {
+            payload: IamPermission;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedPermissionEvent(
-                permission.id?.value,
-                permission.name?.value,
-                permission.boundedContextId?.value,
-                permission.roleIds?.value,
-                permission.createdAt?.value,
-                permission.updatedAt?.value,
-                permission.deletedAt?.value,
-            ),
+            new IamUpdatedPermissionEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    name: event.payload.name?.value,
+                    boundedContextId: event.payload.boundedContextId?.value,
+                    roleIds: event.payload.roleIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(permission: IamPermission): void
+    deleted(
+        event: {
+            payload: IamPermission;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedPermissionEvent(
-                permission.id.value,
-                permission.name.value,
-                permission.boundedContextId.value,
-                permission.roleIds?.value,
-                permission.createdAt?.value,
-                permission.updatedAt?.value,
-                permission.deletedAt?.value,
-            ),
+            new IamDeletedPermissionEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    name: event.payload.name.value,
+                    boundedContextId: event.payload.boundedContextId.value,
+                    roleIds: event.payload.roleIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

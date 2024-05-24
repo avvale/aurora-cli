@@ -51,7 +51,10 @@ export class IamDeleteTenantAccountByIdService
         // insert EventBus in object, to be able to apply and commit events
         const tenantAccountRegister = this.publisher.mergeObjectContext(tenantAccount);
 
-        tenantAccountRegister.deleted(tenantAccount); // apply event to model events
+        tenantAccountRegister.deleted({
+            payload: tenantAccount,
+            cQMetadata,
+        }); // apply event to model events
         tenantAccountRegister.commit(); // commit all events of model
     }
 }

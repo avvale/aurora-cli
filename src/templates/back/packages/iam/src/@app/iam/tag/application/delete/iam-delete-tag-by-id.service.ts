@@ -42,7 +42,10 @@ export class IamDeleteTagByIdService
         // insert EventBus in object, to be able to apply and commit events
         const tagRegister = this.publisher.mergeObjectContext(tag);
 
-        tagRegister.deleted(tag); // apply event to model events
+        tagRegister.deleted({
+            payload: tag,
+            cQMetadata,
+        }); // apply event to model events
         tagRegister.commit(); // commit all events of model
     }
 }

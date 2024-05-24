@@ -14,7 +14,7 @@ import {
     IamTenantParentId,
     IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamTenant extends AggregateRoot
@@ -98,60 +98,84 @@ export class IamTenant extends AggregateRoot
         );
     }
 
-    created(tenant: IamTenant): void
+    created(
+        event: {
+            payload: IamTenant;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedTenantEvent(
-                tenant.id.value,
-                tenant.parentId?.value,
-                tenant.name.value,
-                tenant.code?.value,
-                tenant.logo?.value,
-                tenant.isActive.value,
-                tenant.meta?.value,
-                tenant.accountIds?.value,
-                tenant.createdAt?.value,
-                tenant.updatedAt?.value,
-                tenant.deletedAt?.value,
-            ),
+            new IamCreatedTenantEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    parentId: event.payload.parentId?.value,
+                    name: event.payload.name.value,
+                    code: event.payload.code?.value,
+                    logo: event.payload.logo?.value,
+                    isActive: event.payload.isActive.value,
+                    meta: event.payload.meta?.value,
+                    accountIds: event.payload.accountIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(tenant: IamTenant): void
+    updated(
+        event: {
+            payload: IamTenant;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedTenantEvent(
-                tenant.id?.value,
-                tenant.parentId?.value,
-                tenant.name?.value,
-                tenant.code?.value,
-                tenant.logo?.value,
-                tenant.isActive?.value,
-                tenant.meta?.value,
-                tenant.accountIds?.value,
-                tenant.createdAt?.value,
-                tenant.updatedAt?.value,
-                tenant.deletedAt?.value,
-            ),
+            new IamUpdatedTenantEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    parentId: event.payload.parentId?.value,
+                    name: event.payload.name?.value,
+                    code: event.payload.code?.value,
+                    logo: event.payload.logo?.value,
+                    isActive: event.payload.isActive?.value,
+                    meta: event.payload.meta?.value,
+                    accountIds: event.payload.accountIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(tenant: IamTenant): void
+    deleted(
+        event: {
+            payload: IamTenant;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedTenantEvent(
-                tenant.id.value,
-                tenant.parentId?.value,
-                tenant.name.value,
-                tenant.code?.value,
-                tenant.logo?.value,
-                tenant.isActive.value,
-                tenant.meta?.value,
-                tenant.accountIds?.value,
-                tenant.createdAt?.value,
-                tenant.updatedAt?.value,
-                tenant.deletedAt?.value,
-            ),
+            new IamDeletedTenantEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    parentId: event.payload.parentId?.value,
+                    name: event.payload.name.value,
+                    code: event.payload.code?.value,
+                    logo: event.payload.logo?.value,
+                    isActive: event.payload.isActive.value,
+                    meta: event.payload.meta?.value,
+                    accountIds: event.payload.accountIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

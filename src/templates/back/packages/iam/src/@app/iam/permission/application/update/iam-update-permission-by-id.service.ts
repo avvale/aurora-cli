@@ -57,7 +57,10 @@ export class IamUpdatePermissionByIdService
             permission,
         );
 
-        permissionRegister.updated(permission); // apply event to model events
+        permissionRegister.updated({
+            payload: permission,
+            cQMetadata,
+        }); // apply event to model events
         permissionRegister.commit(); // commit all events of model
     }
 }

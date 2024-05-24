@@ -36,7 +36,10 @@ export class IamDeleteTagsService
         // create AddTagsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const tagsRegistered = this.publisher.mergeObjectContext(
-            new IamAddTagsContextEvent(tags),
+            new IamAddTagsContextEvent(
+                tags,
+                cQMetadata,
+            ),
         );
 
         tagsRegistered.deleted(); // apply event to model events

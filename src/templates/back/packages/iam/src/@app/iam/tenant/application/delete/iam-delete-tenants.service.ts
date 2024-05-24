@@ -36,7 +36,10 @@ export class IamDeleteTenantsService
         // create AddTenantsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const tenantsRegistered = this.publisher.mergeObjectContext(
-            new IamAddTenantsContextEvent(tenants),
+            new IamAddTenantsContextEvent(
+                tenants,
+                cQMetadata,
+            ),
         );
 
         tenantsRegistered.deleted(); // apply event to model events

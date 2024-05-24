@@ -1,10 +1,12 @@
 import { IamCreatedUserEvent, IamCreatedUsersEvent, IamDeletedUserEvent, IamDeletedUsersEvent, IamUpdatedAndIncrementedUserEvent, IamUpdatedAndIncrementedUsersEvent, IamUpdatedUserEvent, IamUpdatedUsersEvent, IamUser } from '@app/iam/user';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAddUsersContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: IamUser[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,108 +20,120 @@ export class IamAddUsersContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new IamCreatedUsersEvent(
-                this.aggregateRoots.map(user =>
-                    new IamCreatedUserEvent(
-                        user.id.value,
-                        user.accountId.value,
-                        user.name.value,
-                        user.surname?.value,
-                        user.avatar?.value,
-                        user.mobile?.value,
-                        user.langId?.value,
-                        user.password.value,
-                        user.isTwoFactorAuthenticationEnabled.value,
-                        user.twoFactorAuthenticationSecret?.value,
-                        user.rememberToken?.value,
-                        user.meta?.value,
-                        user.createdAt?.value,
-                        user.updatedAt?.value,
-                        user.deletedAt?.value,
-                    ),
+            new IamCreatedUsersEvent({
+                payload: this.aggregateRoots.map(user =>
+                    new IamCreatedUserEvent({
+                        payload: {
+                            id: user.id.value,
+                            accountId: user.accountId.value,
+                            name: user.name.value,
+                            surname: user.surname?.value,
+                            avatar: user.avatar?.value,
+                            mobile: user.mobile?.value,
+                            langId: user.langId?.value,
+                            password: user.password.value,
+                            isTwoFactorAuthenticationEnabled: user.isTwoFactorAuthenticationEnabled.value,
+                            twoFactorAuthenticationSecret: user.twoFactorAuthenticationSecret?.value,
+                            rememberToken: user.rememberToken?.value,
+                            meta: user.meta?.value,
+                            createdAt: user.createdAt?.value,
+                            updatedAt: user.updatedAt?.value,
+                            deletedAt: user.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new IamUpdatedUsersEvent(
-                this.aggregateRoots.map(user =>
-                    new IamUpdatedUserEvent(
-                        user.id.value,
-                        user.accountId.value,
-                        user.name.value,
-                        user.surname?.value,
-                        user.avatar?.value,
-                        user.mobile?.value,
-                        user.langId?.value,
-                        user.password.value,
-                        user.isTwoFactorAuthenticationEnabled.value,
-                        user.twoFactorAuthenticationSecret?.value,
-                        user.rememberToken?.value,
-                        user.meta?.value,
-                        user.createdAt?.value,
-                        user.updatedAt?.value,
-                        user.deletedAt?.value,
-                    ),
+            new IamUpdatedUsersEvent({
+                payload: this.aggregateRoots.map(user =>
+                    new IamUpdatedUserEvent({
+                        payload: {
+                            id: user.id.value,
+                            accountId: user.accountId.value,
+                            name: user.name.value,
+                            surname: user.surname?.value,
+                            avatar: user.avatar?.value,
+                            mobile: user.mobile?.value,
+                            langId: user.langId?.value,
+                            password: user.password.value,
+                            isTwoFactorAuthenticationEnabled: user.isTwoFactorAuthenticationEnabled.value,
+                            twoFactorAuthenticationSecret: user.twoFactorAuthenticationSecret?.value,
+                            rememberToken: user.rememberToken?.value,
+                            meta: user.meta?.value,
+                            createdAt: user.createdAt?.value,
+                            updatedAt: user.updatedAt?.value,
+                            deletedAt: user.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new IamUpdatedAndIncrementedUsersEvent(
-                this.aggregateRoots.map(user =>
-                    new IamUpdatedAndIncrementedUserEvent(
-                        user.id.value,
-                        user.accountId.value,
-                        user.name.value,
-                        user.surname?.value,
-                        user.avatar?.value,
-                        user.mobile?.value,
-                        user.langId?.value,
-                        user.password.value,
-                        user.isTwoFactorAuthenticationEnabled.value,
-                        user.twoFactorAuthenticationSecret?.value,
-                        user.rememberToken?.value,
-                        user.meta?.value,
-                        user.createdAt?.value,
-                        user.updatedAt?.value,
-                        user.deletedAt?.value,
-                    ),
+            new IamUpdatedAndIncrementedUsersEvent({
+                payload: this.aggregateRoots.map(user =>
+                    new IamUpdatedAndIncrementedUserEvent({
+                        payload: {
+                            id: user.id.value,
+                            accountId: user.accountId.value,
+                            name: user.name.value,
+                            surname: user.surname?.value,
+                            avatar: user.avatar?.value,
+                            mobile: user.mobile?.value,
+                            langId: user.langId?.value,
+                            password: user.password.value,
+                            isTwoFactorAuthenticationEnabled: user.isTwoFactorAuthenticationEnabled.value,
+                            twoFactorAuthenticationSecret: user.twoFactorAuthenticationSecret?.value,
+                            rememberToken: user.rememberToken?.value,
+                            meta: user.meta?.value,
+                            createdAt: user.createdAt?.value,
+                            updatedAt: user.updatedAt?.value,
+                            deletedAt: user.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new IamDeletedUsersEvent(
-                this.aggregateRoots.map(user =>
-                    new IamDeletedUserEvent(
-                        user.id.value,
-                        user.accountId.value,
-                        user.name.value,
-                        user.surname?.value,
-                        user.avatar?.value,
-                        user.mobile?.value,
-                        user.langId?.value,
-                        user.password.value,
-                        user.isTwoFactorAuthenticationEnabled.value,
-                        user.twoFactorAuthenticationSecret?.value,
-                        user.rememberToken?.value,
-                        user.meta?.value,
-                        user.createdAt?.value,
-                        user.updatedAt?.value,
-                        user.deletedAt?.value,
-                    ),
+            new IamDeletedUsersEvent({
+                payload: this.aggregateRoots.map(user =>
+                    new IamDeletedUserEvent({
+                        payload: {
+                            id: user.id.value,
+                            accountId: user.accountId.value,
+                            name: user.name.value,
+                            surname: user.surname?.value,
+                            avatar: user.avatar?.value,
+                            mobile: user.mobile?.value,
+                            langId: user.langId?.value,
+                            password: user.password.value,
+                            isTwoFactorAuthenticationEnabled: user.isTwoFactorAuthenticationEnabled.value,
+                            twoFactorAuthenticationSecret: user.twoFactorAuthenticationSecret?.value,
+                            rememberToken: user.rememberToken?.value,
+                            meta: user.meta?.value,
+                            createdAt: user.createdAt?.value,
+                            updatedAt: user.updatedAt?.value,
+                            deletedAt: user.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

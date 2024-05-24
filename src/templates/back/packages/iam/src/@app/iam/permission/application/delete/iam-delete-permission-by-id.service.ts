@@ -42,7 +42,10 @@ export class IamDeletePermissionByIdService
         // insert EventBus in object, to be able to apply and commit events
         const permissionRegister = this.publisher.mergeObjectContext(permission);
 
-        permissionRegister.deleted(permission); // apply event to model events
+        permissionRegister.deleted({
+            payload: permission,
+            cQMetadata,
+        }); // apply event to model events
         permissionRegister.commit(); // commit all events of model
     }
 }

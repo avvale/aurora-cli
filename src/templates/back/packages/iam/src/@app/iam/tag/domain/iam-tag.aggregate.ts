@@ -7,7 +7,7 @@ import {
     IamTagName,
     IamTagUpdatedAt,
 } from '@app/iam/tag/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamTag extends AggregateRoot
@@ -51,42 +51,66 @@ export class IamTag extends AggregateRoot
         );
     }
 
-    created(tag: IamTag): void
+    created(
+        event: {
+            payload: IamTag;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamCreatedTagEvent(
-                tag.id.value,
-                tag.name.value,
-                tag.createdAt?.value,
-                tag.updatedAt?.value,
-                tag.deletedAt?.value,
-            ),
+            new IamCreatedTagEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    name: event.payload.name.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(tag: IamTag): void
+    updated(
+        event: {
+            payload: IamTag;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamUpdatedTagEvent(
-                tag.id?.value,
-                tag.name?.value,
-                tag.createdAt?.value,
-                tag.updatedAt?.value,
-                tag.deletedAt?.value,
-            ),
+            new IamUpdatedTagEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    name: event.payload.name?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(tag: IamTag): void
+    deleted(
+        event: {
+            payload: IamTag;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new IamDeletedTagEvent(
-                tag.id.value,
-                tag.name.value,
-                tag.createdAt?.value,
-                tag.updatedAt?.value,
-                tag.deletedAt?.value,
-            ),
+            new IamDeletedTagEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    name: event.payload.name.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
