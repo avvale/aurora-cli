@@ -102,7 +102,10 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         // create Add{{ toPascalCase schema.moduleNames }}ContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const {{ toCamelCase schema.moduleNames }}Registered = this.publisher.mergeObjectContext(
-            new {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase schema.moduleNames }}ContextEvent({{ toCamelCase schema.moduleNames }}),
+            new {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase schema.moduleNames }}ContextEvent(
+                {{ toCamelCase schema.moduleNames }},
+                cQMetadata,
+            ),
         );
 
         {{ toCamelCase schema.moduleNames }}Registered.deleted(); // apply event to model events

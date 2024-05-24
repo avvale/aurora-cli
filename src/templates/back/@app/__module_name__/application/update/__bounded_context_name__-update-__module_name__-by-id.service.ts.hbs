@@ -124,7 +124,10 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
             {{ toCamelCase schema.moduleName }},
         );
 
-        {{ toCamelCase schema.moduleName }}Register.updated({{ toCamelCase schema.moduleName }}); // apply event to model events
+        {{ toCamelCase schema.moduleName }}Register.updated({
+            payload: {{ toCamelCase schema.moduleName }},
+            cQMetadata,
+        }); // apply event to model events
         {{ toCamelCase schema.moduleName }}Register.commit(); // commit all events of model
     }
 }

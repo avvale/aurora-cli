@@ -58,7 +58,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregate{{ toPascalCase schema.moduleNames }} = payload.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
+        const {{ toCamelCase schema.moduleNames }} = payload.map({{ toCamelCase schema.moduleName }} => {{ schema.aggregateName }}.register(
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#unless isI18n}}
 {{#eq (getPropertyName this) 'createdAt'}}
@@ -81,14 +81,14 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         // delete duplicate elements from multiple languages
         await this.repository.insert(
-            aggregate{{ toPascalCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)),
+            {{ toCamelCase schema.moduleNames }}.filter((country, index, self) => index === self.findIndex(t => t.id.value === country.id.value)),
             {
                 insertOptions: cQMetadata?.repositoryOptions,
             },
         );
 
         await this.repositoryI18n.insert(
-            aggregate{{ toPascalCase schema.moduleNames }},
+            {{ toCamelCase schema.moduleNames }},
             {
                 dataFactory  : aggregate => aggregate.toI18nDTO(),
                 insertOptions: cQMetadata?.repositoryOptions,
@@ -96,7 +96,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         );
         {{else}}
         await this.repository.insert(
-            aggregate{{ toPascalCase schema.moduleNames }},
+            {{ toCamelCase schema.moduleNames }},
             {
                 insertOptions: cQMetadata?.repositoryOptions,
             },
@@ -105,7 +105,12 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
 
         // create Add{{ toPascalCase schema.moduleNames }}ContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const {{ toCamelCase schema.moduleNames }}Registered = this.publisher.mergeObjectContext(new {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase schema.moduleNames }}ContextEvent(aggregate{{ toPascalCase schema.moduleNames }}));
+        const {{ toCamelCase schema.moduleNames }}Registered = this.publisher.mergeObjectContext(
+            new {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase schema.moduleNames }}ContextEvent(
+                {{ toCamelCase schema.moduleNames }},
+                cQMetadata,
+            ),
+        );
 
         {{ toCamelCase schema.moduleNames }}Registered.created(); // apply event to model events
         {{ toCamelCase schema.moduleNames }}Registered.commit(); // commit all events of model

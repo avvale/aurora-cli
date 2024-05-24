@@ -2,6 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'AggregateRoot') path='@nestjs/cqrs')
+            (object items='CQMetadata' path=config.auroraCorePackage)
             (
                 object
                     items=schema.aggregateName
@@ -74,6 +75,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
 {
     constructor(
         public readonly aggregateRoots: {{ schema.aggregateName }}[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -89,17 +91,20 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
     created(): void
     {
         this.apply(
-            new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleNames }}Event(
-                this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
-                    new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event(
-                        {{#each (getAggregateProperties schema.aggregateProperties) }}
-                        {{#if (isAllowProperty ../schema.moduleName this) }}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
-                        {{/if}}
-                        {{/each}}
-                    ),
+            new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleNames }}Event({
+                payload: this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
+                    new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event({
+                        payload: {
+                            {{#each (getAggregateProperties schema.aggregateProperties) }}
+                            {{#if (isAllowProperty ../schema.moduleName this) }}
+                            {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
+                            {{/if}}
+                            {{/each}}
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
     {{/notInArray}}
@@ -110,17 +115,20 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
     updated(): void
     {
         this.apply(
-            new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleNames }}Event(
-                this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
-                    new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event(
-                        {{#each (getAggregateProperties schema.aggregateProperties) }}
-                        {{#if (isAllowProperty ../schema.moduleName this) }}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
-                        {{/if}}
-                        {{/each}}
-                    ),
+            new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleNames }}Event({
+                payload: this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
+                    new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event({
+                        payload: {
+                            {{#each (getAggregateProperties schema.aggregateProperties) }}
+                            {{#if (isAllowProperty ../schema.moduleName this) }}
+                            {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
+                            {{/if}}
+                            {{/each}}
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
     {{/notInArray}}
@@ -131,17 +139,20 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
     updatedAndIncremented(): void
     {
         this.apply(
-            new {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleNames }}Event(
-                this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
-                    new {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleName }}Event(
-                        {{#each (getAggregateProperties schema.aggregateProperties) }}
-                        {{#if (isAllowProperty ../schema.moduleName this) }}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
-                        {{/if}}
-                        {{/each}}
-                    ),
+            new {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleNames }}Event({
+                payload: this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
+                    new {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleName }}Event({
+                        payload: {
+                            {{#each (getAggregateProperties schema.aggregateProperties) }}
+                            {{#if (isAllowProperty ../schema.moduleName this) }}
+                            {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
+                            {{/if}}
+                            {{/each}}
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
     {{/notInArray}}
@@ -152,17 +163,20 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
     deleted(): void
     {
         this.apply(
-            new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleNames }}Event(
-                this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
-                    new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event(
-                        {{#each (getAggregateProperties schema.aggregateProperties) }}
-                        {{#if (isAllowProperty ../schema.moduleName this) }}
-                        {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
-                        {{/if}}
-                        {{/each}}
-                    ),
+            new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleNames }}Event({
+                payload: this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
+                    new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event({
+                        payload: {
+                            {{#each (getAggregateProperties schema.aggregateProperties) }}
+                            {{#if (isAllowProperty ../schema.moduleName this) }}
+                            {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
+                            {{/if}}
+                            {{/each}}
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
     {{/notInArray}}

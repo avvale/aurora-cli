@@ -1,8 +1,17 @@
-import { {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event } from './{{ toKebabCase schema.boundedContextName }}-deleted-{{ toKebabCase schema.moduleName }}.event';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items='CQMetadata' path=config.auroraCorePackage)
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleNames }}Event
 {
     constructor(
-        public readonly {{ toCamelCase schema.moduleNames }}: {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event[],
+        public readonly event: {
+            payload: {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

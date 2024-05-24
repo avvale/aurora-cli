@@ -3,7 +3,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'AggregateRoot') path='@nestjs/cqrs')
-            (object items=(array 'LiteralObject' 'Utils') path=config.auroraCorePackage)
+            (object items=(array 'CQMetadata' 'LiteralObject' 'Utils') path=config.auroraCorePackage)
     )
 ~}}
 {{! ValueObjects }}
@@ -286,46 +286,70 @@ export class {{ schema.aggregateName }} extends AggregateRoot
     }
 
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/created-' (toKebabCase schema.moduleName) '.event-handler.ts'}}
-    created({{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }}): void
+    created(
+        event: {
+            payload: {{ schema.aggregateName }};
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event(
-                {{#each (getAggregateProperties schema.aggregateProperties) }}
-                {{#if (isAllowProperty ../schema.moduleName this) }}
-                {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
-                {{/if}}
-                {{/each}}
-            ),
+            new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event({
+                payload: {
+                    {{#each (getAggregateProperties schema.aggregateProperties) }}
+                    {{#if (isAllowProperty ../schema.moduleName this) }}
+                    {{ toCamelCase (getPropertyName this) }}: event.payload.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
+                    {{/if}}
+                    {{/each}}
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
     {{/notInArray}}
 
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/updated-' (toKebabCase schema.moduleName) '.event.ts'}}
-    updated({{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }}): void
+    updated(
+        event: {
+            payload: {{ schema.aggregateName }};
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event(
-                {{#each (getAggregateProperties schema.aggregateProperties) }}
-                {{#if (isAllowProperty ../schema.moduleName this) }}
-                {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}?.value,
-                {{/if}}
-                {{/each}}
-            ),
+            new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event({
+                payload: {
+                    {{#each (getAggregateProperties schema.aggregateProperties) }}
+                    {{#if (isAllowProperty ../schema.moduleName this) }}
+                    {{ toCamelCase (getPropertyName this) }}: event.payload.{{ toCamelCase (getPropertyName this) }}?.value,
+                    {{/if}}
+                    {{/each}}
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
     {{/notInArray}}
 
     {{#notInArray schema.excluded 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/events/deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
-    deleted({{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }}): void
+    deleted(
+        event: {
+            payload: {{ schema.aggregateName }};
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event(
-                {{#each (getAggregateProperties schema.aggregateProperties) }}
-                {{#if (isAllowProperty ../schema.moduleName this) }}
-                {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
-                {{/if}}
-                {{/each}}
-            ),
+            new {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event({
+                payload: {
+                    {{#each (getAggregateProperties schema.aggregateProperties) }}
+                    {{#if (isAllowProperty ../schema.moduleName this) }}
+                    {{ toCamelCase (getPropertyName this) }}: event.payload.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
+                    {{/if}}
+                    {{/each}}
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
     {{/notInArray}}

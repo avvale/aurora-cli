@@ -1,10 +1,22 @@
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'CQMetadata') path=config.auroraCorePackage)
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Deleted{{ toPascalCase schema.moduleName }}Event
 {
     constructor(
-        {{#each (getDeletedEventProperties schema.aggregateProperties) }}
-        {{#if (isAllowProperty ../schema.moduleName this) }}
-        public readonly {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptDeleteType this ../config }},
-        {{/if}}
-        {{/each}}
+        public readonly event: {
+            payload: {
+                {{#each (getDeletedEventProperties schema.aggregateProperties) }}
+                {{#if (isAllowProperty ../schema.moduleName this) }}
+                {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptDeleteType this ../config }};
+                {{/if}}
+                {{/each}}
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

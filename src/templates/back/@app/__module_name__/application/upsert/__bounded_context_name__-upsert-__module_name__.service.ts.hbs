@@ -193,7 +193,10 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
             {{ toCamelCase schema.moduleName }},
         );
 
-        {{ toCamelCase schema.moduleName }}Register.created({{ toCamelCase schema.moduleName }}); // apply event to model events
+        {{ toCamelCase schema.moduleName }}Register.created({
+            payload: {{ toCamelCase schema.moduleName }},
+            cQMetadata,
+        }); // apply event to model events
         {{ toCamelCase schema.moduleName }}Register.commit(); // commit all events of model
     }
 }
