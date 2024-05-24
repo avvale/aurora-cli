@@ -3,9 +3,15 @@
     setVar 'importsArray' (
         array
             (object items=(array 'AggregateRoot') path='@nestjs/cqrs')
-            (object items=(array 'CQMetadata' 'LiteralObject' 'Utils') path=config.auroraCorePackage)
+            (object items=(array 'CQMetadata' 'LiteralObject') path=config.auroraCorePackage)
     )
 ~}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
+{{
+    push ../importsArray
+        (object items=(array 'uuid') path=config.auroraCorePackage)
+~}}
+{{/if}}
 {{! ValueObjects }}
 {{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}
@@ -399,7 +405,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{#each (getAggregateProperties schema.aggregateProperties) }}
             {{#if isI18n}}
             {{#eq (getPropertyName this) 'id'}}
-            {{ toCamelCase (getPropertyName this) }}: Utils.uuid(),
+            {{ toCamelCase (getPropertyName this) }}: uuid(),
             {{else}}
             {{#if (isI18nRelationProperty ../schema.moduleName this)}}
             {{ toCamelCase (getPropertyName this) }}: this.id.value,
