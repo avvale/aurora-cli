@@ -208,7 +208,7 @@ export class FileManager
                 // when we have not yet created any bounded context or module
                 if (
                     excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)) ||
-                    excludeOperations(excludedOperations).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced))
+                    !excludeOperations(excludedOperations).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced))
                 )
                 {
                     command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
@@ -237,7 +237,7 @@ export class FileManager
             }
             else if (stats.isDirectory())
             {
-                if (excludeOperations(excludedOperations).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
+                if (!excludeOperations(excludedOperations).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
                 {
                     command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
                     continue;
