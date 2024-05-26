@@ -2,6 +2,8 @@ export * from './additional-api.functions';
 export * from './additional-apis.functions';
 export * from './code-writer/public-api';
 export * from './cypher';
+export * from './exclude-files.functions';
+export * from './exclude-operations.functions';
 export * from './file-manager';
 export * from './fs-extend';
 export * from './mocker';
