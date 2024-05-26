@@ -26,7 +26,7 @@ handlebars.registerHelper(
 
         if (
             (Array.isArray(schema.excludedOperations) ?
-                excludeOperations(schema.excludedOperations).isAllowPath(path.join(...paths)) : true) ||
+                excludeOperations(schema.excludedOperations).isAllowPath(path.join(...paths)) : true) &&
             (Array.isArray(schema.excludedFiles) ?
                 excludeFiles(schema.excludedFiles).isAllowPath(path.join(...paths)) : true)
         )

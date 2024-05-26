@@ -12,6 +12,7 @@ import { Cypher } from './cypher';
 import { getPropertyName } from './property.functions';
 import templateEngine from './template-engine';
 import { excludeOperations } from './exclude-operations.functions';
+import { excludeFiles } from './exclude-files.functions';
 
 export class FileManager
 {
@@ -145,7 +146,7 @@ export class FileManager
             additionalApi,
             force = false,
             verbose = false,
-            excludeFiles = [],
+            excludedFiles = [],
             excludedOperations = [],
             lockFiles = [],
             templateData = {},
@@ -158,7 +159,7 @@ export class FileManager
             additionalApi?: AdditionalApi;
             force?: boolean;
             verbose?: boolean;
-            excludeFiles?: string[];
+            excludedFiles?: string[];
             excludedOperations?: string[];
             lockFiles?: LockFile[];
             templateData?: any;
@@ -207,7 +208,7 @@ export class FileManager
                 // schema may not exist if is a new project from master,
                 // when we have not yet created any bounded context or module
                 if (
-                    excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)) ||
+                    !excludeFiles(excludedFiles).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)) ||
                     !excludeOperations(excludedOperations).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced))
                 )
                 {
@@ -267,7 +268,7 @@ export class FileManager
                         additionalApi,
                         force,
                         verbose,
-                        excludeFiles,
+                        excludedFiles,
                         excludedOperations,
                         lockFiles,
                         templateData,

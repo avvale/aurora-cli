@@ -21,7 +21,7 @@ export const generateModuleFiles = async (generateCommandState: GenerateCommandS
             boundedContextName: generateCommandState.schema.boundedContextName,
             moduleName        : generateCommandState.schema.moduleName,
             moduleNames       : generateCommandState.schema.moduleNames,
-            excludeFiles      : generateCommandState.schema.excludedFiles,
+            excludedFiles     : generateCommandState.schema.excludedFiles,
             excludedOperations: generateCommandState.schema.excludedOperations,
             force             : generateCommandState.flags.force,
             verbose           : generateCommandState.flags.verbose,

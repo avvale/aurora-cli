@@ -5,6 +5,8 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { AdditionalApi, LockFile, Property, TemplateElement } from '../types';
 import { FileManager } from './file-manager';
+import { excludeFiles } from './exclude-files.functions';
+import { excludeOperations } from './exclude-operations.functions';
 
 export class TemplateGenerator
 {
@@ -33,7 +35,7 @@ export class TemplateGenerator
             additionalApi,
             force = false,
             verbose = false,
-            excludeFiles = [],
+            excludedFiles = [],
             excludedOperations = [],
             lockFiles = [],
             templateData = {},
@@ -47,7 +49,7 @@ export class TemplateGenerator
             additionalApi?: AdditionalApi;
             force?: boolean;
             verbose?: boolean;
-            excludeFiles?: string[];
+            excludedFiles?: string[];
             excludedOperations?: string[];
             lockFiles?: LockFile[];
             templateData?: any;
@@ -73,7 +75,7 @@ export class TemplateGenerator
                 additionalApi,
                 force,
                 verbose,
-                excludeFiles,
+                excludedFiles,
                 excludedOperations,
                 lockFiles,
                 templateData,
@@ -116,7 +118,7 @@ export class TemplateGenerator
             moduleNames = '',
             force = false,
             verbose = false,
-            excludeFiles = [],
+            excludedFiles = [],
             lockFiles = [],
             templateData = {},
         }: {
@@ -125,7 +127,7 @@ export class TemplateGenerator
             moduleNames?: string;
             force?: boolean;
             verbose?: boolean;
-            excludeFiles?: string[];
+            excludedFiles?: string[];
             lockFiles?: LockFile[];
             templateData?: any;
         } = {},
@@ -147,7 +149,7 @@ export class TemplateGenerator
                     moduleNames,
                     force,
                     verbose,
-                    excludeFiles,
+                    excludedFiles,
                     lockFiles,
                     templateData,
                 },
@@ -174,7 +176,7 @@ export class TemplateGenerator
             moduleNames = '',
             force = false,
             verbose = false,
-            excludeFiles = [],
+            excludedFiles = [],
             lockFiles = [],
             templateData = {},
         }: {
@@ -183,7 +185,7 @@ export class TemplateGenerator
             moduleNames?: string;
             force?: boolean;
             verbose?: boolean;
-            excludeFiles?: string[];
+            excludedFiles?: string[];
             lockFiles?: LockFile[];
             templateData?: any;
         } = {},
@@ -211,7 +213,7 @@ export class TemplateGenerator
         // check if file to create is excluded in schema.
         // schema may not exist if is a new project from master,
         // when we have not yet created any bounded context or module
-        if (excludeFiles.includes(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
+        if (!excludeFiles(excludedFiles).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
         {
             command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
             return;

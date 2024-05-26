@@ -20,7 +20,7 @@ export const generateAppI18nFiles = (generateCommandState: GenerateCommandState)
                 moduleNames       : generateCommandState.schema.moduleNames,
                 force             : generateCommandState.flags.force,
                 verbose           : generateCommandState.flags.verbose,
-                excludeFiles      : generateCommandState.schema.excludedFiles,
+                excludedFiles     : generateCommandState.schema.excludedFiles,
                 excludedOperations: generateCommandState.schema.excludedOperations,
                 lockFiles         : generateCommandState.lockFiles,
                 templateData      : {

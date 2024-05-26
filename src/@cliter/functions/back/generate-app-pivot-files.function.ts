@@ -28,7 +28,7 @@ export const generateAppPivotFiles = (generateCommandState: GenerateCommandState
                 boundedContextName: property.relationship.pivot.boundedContextName,
                 moduleName        : property.relationship.pivot.moduleName,
                 moduleNames       : property.relationship.pivot.moduleNames,
-                excludeFiles      : [
+                excludedFiles     : [
                     ...(Array.isArray(generateCommandState.schema.excludedFiles) ? generateCommandState.schema.excludedFiles : []),
                     // avoid creating files for pivot only with delimited context name, these files have been created with an earlier module
                     `src/@app/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.seed.ts`,
@@ -56,7 +56,7 @@ export const generateAppPivotFiles = (generateCommandState: GenerateCommandState
                 boundedContextName: property.relationship.pivot.boundedContextName,
                 moduleName        : property.relationship.pivot.moduleName,
                 moduleNames       : property.relationship.pivot.moduleNames,
-                excludeFiles      : generateCommandState.schema.excludedFiles,
+                excludedFiles     : generateCommandState.schema.excludedFiles,
                 force             : generateCommandState.flags.force,
                 verbose           : generateCommandState.flags.verbose,
                 lockFiles         : generateCommandState.lockFiles,
