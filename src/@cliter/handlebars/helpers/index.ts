@@ -150,6 +150,9 @@ import './has-validation-form-control';
 import './import-manager';
 import './indexes-manager';
 import './initial-form-group-data';
+import './is-allow-files-path';
+import './is-allow-operations-path';
+import './is-allow-path';
 import './is-allow-property';
 import './is-binary-property';
 import './is-i18n-available-langs-property';
@@ -182,4 +185,3 @@ import './sum-strings';
 import './ternary';
 import './uuid';
 import './variables-injector-manager';
-
