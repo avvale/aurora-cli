@@ -36,6 +36,14 @@ class ExcludeOperations
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'max', '__bounded_context_name__-max-__module_name__.service.spec.ts'],
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'max', '__bounded_context_name__-max-__module_name__.service.ts'],
         ]),
+        min: new Set([
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'min'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'min', '__bounded_context_name__-min-__module_name__.query-handler.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'min', '__bounded_context_name__-min-__module_name__.query-handler.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'min', '__bounded_context_name__-min-__module_name__.query.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'min', '__bounded_context_name__-min-__module_name__.service.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'min', '__bounded_context_name__-min-__module_name__.service.ts'],
+        ]),
     };
 
     private operationsParsedPaths: { [key: string]: Set<string> } = {};
