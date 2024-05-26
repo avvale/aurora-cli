@@ -168,8 +168,14 @@ export class FileManager
         } = {},
     ): void
     {
-        const targetBasePath    = process.cwd();
-        const templatesPath     = path.join(__dirname, '..', '..', 'templates');
+        const targetBasePath        = process.cwd();
+        const templatesPath         = path.join(__dirname, '..', '..', 'templates');
+        const excludeOperationsObj  = excludeOperations(
+            excludedOperations,
+            boundedContextName,
+            moduleName,
+            moduleNames,
+        );
 
         // read all files/folders (1 level) from template folder
         const filesToCreate = fs.readdirSync(originPath);
@@ -209,7 +215,7 @@ export class FileManager
                 // when we have not yet created any bounded context or module
                 if (
                     !excludeFiles(excludedFiles).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)) ||
-                    !excludeOperations(excludedOperations).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced))
+                    !excludeOperationsObj.isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced))
                 )
                 {
                     command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
@@ -238,7 +244,7 @@ export class FileManager
             }
             else if (stats.isDirectory())
             {
-                if (!excludeOperations(excludedOperations).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
+                if (!excludeOperationsObj.isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
                 {
                     command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
                     continue;

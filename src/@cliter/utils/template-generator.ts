@@ -6,7 +6,6 @@ import * as path from 'node:path';
 import { AdditionalApi, LockFile, Property, TemplateElement } from '../types';
 import { FileManager } from './file-manager';
 import { excludeFiles } from './exclude-files.functions';
-import { excludeOperations } from './exclude-operations.functions';
 
 export class TemplateGenerator
 {

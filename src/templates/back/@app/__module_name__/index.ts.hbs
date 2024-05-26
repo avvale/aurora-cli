@@ -382,12 +382,12 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/raw-sql/' (toKebabCase schema.boundedContextName) '-raw-sql-' (toKebabCase schema.moduleNames) '.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}RawSQL{{ toPascalCase schema.moduleNames }}Service,
     {{/notInArray}}
-    {{#isAllowPath schema 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName)  'application' 'count' (sumStrings (toKebabCase schema.boundedContextName) '-count-' (toKebabCase schema.moduleName) '.service.ts') }}
+    {{#isAllowPath schema 'count' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName)  'application' 'count' (sumStrings (toKebabCase schema.boundedContextName) '-count-' (toKebabCase schema.moduleName) '.service.ts') }}
     {{ toPascalCase schema.boundedContextName }}Count{{ toPascalCase schema.moduleName }}Service,
     {{/isAllowPath}}
-    {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/max/' (toKebabCase schema.boundedContextName) '-max-' (toKebabCase schema.moduleName) '.service.ts'}}
+    {{#isAllowPath schema 'max' 'src/' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName)  'application' 'max' (sumStrings (toKebabCase schema.boundedContextName) '-max-' (toKebabCase schema.moduleName) '.service.ts') }}
     {{ toPascalCase schema.boundedContextName }}Max{{ toPascalCase schema.moduleName }}Service,
-    {{/notInArray}}
+    {{/isAllowPath}}
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/application/min/' (toKebabCase schema.boundedContextName) '-min-' (toKebabCase schema.moduleName) '.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}Min{{ toPascalCase schema.moduleName }}Service,
     {{/notInArray}}

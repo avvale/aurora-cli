@@ -7,6 +7,7 @@ handlebars.registerHelper(
     function(
         this: any,
         schema: ModuleDefinitionSchema,
+        operation: string,
         ...params
     )
     {
@@ -26,7 +27,13 @@ handlebars.registerHelper(
 
         if (
             (Array.isArray(schema.excludedOperations) ?
-                excludeOperations(schema.excludedOperations).isAllowPath(path.join(...paths)) : true) &&
+                excludeOperations(
+                    schema.excludedOperations,
+                    schema.boundedContextName,
+                    schema.moduleName,
+                    schema.moduleNames,
+                    operation,
+                ).isAllowPath(path.join(...paths)) : true) &&
             (Array.isArray(schema.excludedFiles) ?
                 excludeFiles(schema.excludedFiles).isAllowPath(path.join(...paths)) : true)
         )

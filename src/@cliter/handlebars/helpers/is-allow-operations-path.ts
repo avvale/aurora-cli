@@ -1,10 +1,18 @@
 import * as handlebars from 'handlebars';
-import { excludeOperations } from '../..';
+import { ModuleDefinitionSchema, excludeOperations } from '../..';
 
 handlebars.registerHelper('isAllowOperationsPath', function(
-    operationsToExclude: string[],
+    schema: ModuleDefinitionSchema,
+    operation: string,
     path: string,
 ): boolean
 {
-    return excludeOperations(operationsToExclude).isAllowPath(path);
+    if (!Array.isArray(schema.excludedOperations)) return true;
+    return excludeOperations(
+        schema.excludedOperations,
+        schema.boundedContextName,
+        schema.moduleName,
+        schema.moduleNames,
+        operation,
+    ).isAllowPath(path);
 });
