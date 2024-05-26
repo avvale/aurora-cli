@@ -6,7 +6,7 @@ import * as path from 'node:path';
 
 export const generateAppPivotFiles = (generateCommandState: GenerateCommandState): void =>
 {
-    if (generateCommandState.schema.excluded?.includes('src/@app/**')) return;
+    if (generateCommandState.schema.excludedFiles?.includes('src/@app/**')) return;
     if (!Array.isArray(generateCommandState.schema.aggregateProperties)) return;
 
     for (const property of getManyToManyRelationshipProperties(generateCommandState.schema.aggregateProperties))
@@ -29,14 +29,15 @@ export const generateAppPivotFiles = (generateCommandState: GenerateCommandState
                 moduleName        : property.relationship.pivot.moduleName,
                 moduleNames       : property.relationship.pivot.moduleNames,
                 excludeFiles      : [
-                    ...(Array.isArray(generateCommandState.schema.excluded) ? generateCommandState.schema.excluded : []),
+                    ...(Array.isArray(generateCommandState.schema.excludedFiles) ? generateCommandState.schema.excludedFiles : []),
                     // avoid creating files for pivot only with delimited context name, these files have been created with an earlier module
                     `src/@app/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.seed.ts`,
                 ],
-                force       : generateCommandState.flags.force,
-                verbose     : generateCommandState.flags.verbose,
-                lockFiles   : generateCommandState.lockFiles,
-                templateData: {
+                excludedOperations: generateCommandState.schema.excludedOperations,
+                force             : generateCommandState.flags.force,
+                verbose           : generateCommandState.flags.verbose,
+                lockFiles         : generateCommandState.lockFiles,
+                templateData      : {
                     ...generateCommandState,
                     relationshipType: RelationshipType,
                     schema          : property.relationship?.pivot, // overwrite schema property
@@ -55,7 +56,7 @@ export const generateAppPivotFiles = (generateCommandState: GenerateCommandState
                 boundedContextName: property.relationship.pivot.boundedContextName,
                 moduleName        : property.relationship.pivot.moduleName,
                 moduleNames       : property.relationship.pivot.moduleNames,
-                excludeFiles      : generateCommandState.schema.excluded,
+                excludeFiles      : generateCommandState.schema.excludedFiles,
                 force             : generateCommandState.flags.force,
                 verbose           : generateCommandState.flags.verbose,
                 lockFiles         : generateCommandState.lockFiles,

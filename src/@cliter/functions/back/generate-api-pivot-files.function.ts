@@ -6,7 +6,7 @@ import * as path from 'node:path';
 
 export const generateApiPivotFiles = (generateCommandState: GenerateCommandState): void =>
 {
-    if (generateCommandState.schema.excluded?.includes('src/@api/**')) return;
+    if (generateCommandState.schema.excludedFiles?.includes('src/@api/**')) return;
     if (!Array.isArray(generateCommandState.schema.aggregateProperties)) return;
 
     for (const property of getManyToManyRelationshipProperties(generateCommandState.schema.aggregateProperties))
@@ -28,15 +28,16 @@ export const generateApiPivotFiles = (generateCommandState: GenerateCommandState
                 moduleName        : property.relationship.pivot.moduleName,
                 moduleNames       : property.relationship.pivot.moduleNames,
                 excludeFiles      : [
-                    ...(Array.isArray(generateCommandState.schema.excluded) ? generateCommandState.schema.excluded : []),
+                    ...(Array.isArray(generateCommandState.schema.excludedFiles) ? generateCommandState.schema.excludedFiles : []),
                     // avoid creating files for pivot only with delimited context name, these files have been created with an earlier module
                     `src/@api/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.module.ts`,
                     `src/@api/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.seeder.ts`,
                 ],
-                force       : generateCommandState.flags.force,
-                verbose     : generateCommandState.flags.verbose,
-                lockFiles   : generateCommandState.lockFiles,
-                templateData: {
+                excludedOperations: generateCommandState.schema.excludedOperations,
+                force             : generateCommandState.flags.force,
+                verbose           : generateCommandState.flags.verbose,
+                lockFiles         : generateCommandState.lockFiles,
+                templateData      : {
                     ...generateCommandState,
                     propertyType    : PropertyType,
                     relationshipType: RelationshipType,

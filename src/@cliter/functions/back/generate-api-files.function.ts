@@ -8,7 +8,7 @@ import { TemplateGenerator } from '../../utils';
 
 export const generateApiFiles = (generateCommandState: GenerateCommandState): void =>
 {
-    if (generateCommandState.schema.excluded?.includes('src/@api/**')) return;
+    if (generateCommandState.schema.excludedFiles?.includes('src/@api/**')) return;
 
     TemplateGenerator.createDirectory(
         path.join('src', cliterConfig.apiContainer),
@@ -26,7 +26,8 @@ export const generateApiFiles = (generateCommandState: GenerateCommandState): vo
             moduleNames       : generateCommandState.schema.moduleNames,
             force             : generateCommandState.flags.force,
             verbose           : generateCommandState.flags.verbose,
-            excludeFiles      : generateCommandState.schema.excluded,
+            excludeFiles      : generateCommandState.schema.excludedFiles,
+            excludedOperations: generateCommandState.schema.excludedOperations,
             lockFiles         : generateCommandState.lockFiles,
             templateData      : {
                 ...generateCommandState,

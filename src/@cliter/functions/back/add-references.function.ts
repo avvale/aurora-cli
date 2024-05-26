@@ -18,7 +18,7 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
 
     codeWriter.generateBackAppBoundedContextReferences(
         generateCommandState.schema.aggregateProperties,
-        generateCommandState.schema.excluded,
+        generateCommandState.schema.excludedFiles,
     );
 
     codeWriter.declareBackApplicationItemsInModule();
@@ -32,7 +32,7 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
         generateCommandState.schema.boundedContextName.toLowerCase(),
         generateCommandState.schema.moduleName.toLowerCase(),
         generateCommandState.schema.aggregateName,
-        generateCommandState.schema.excluded,
+        generateCommandState.schema.excludedFiles,
     );
 
     declareBackApiItemsExports(
@@ -40,6 +40,6 @@ export const addReferences = (generateCommandState: GenerateCommandState): void 
         path.join('src'),
         generateCommandState.schema.boundedContextName.toLowerCase(),
         generateCommandState.schema.moduleName.toLowerCase(),
-        generateCommandState.schema.excluded,
+        generateCommandState.schema.excludedFiles,
     );
 };

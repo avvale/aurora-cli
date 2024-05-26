@@ -247,7 +247,7 @@ export const getResponseProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to many relations
 };
 
@@ -257,7 +257,7 @@ export const getSeedProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                     // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                    // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
 };
@@ -268,7 +268,7 @@ export const getMapperProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
 };
 
@@ -278,7 +278,7 @@ export const getMockProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
 };
 
@@ -303,7 +303,7 @@ export const getAggregateProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
 };
 
@@ -448,7 +448,7 @@ export const getCreateControllerProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getCreateControllerProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                              // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))            // exclude one to one relations without relationship field, is relation one to one without xxxxId
         .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
@@ -465,7 +465,7 @@ export const getUpdateControllerProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getUpdateControllerProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                              // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))            // exclude one to one relations without relationship field, is relation one to one without xxxxId
         .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
@@ -485,7 +485,7 @@ export const getCreateServiceProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getCreateServiceProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                              // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))            // exclude one to one relations without relationship field, is relation one to one without xxxxId
         .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
@@ -502,7 +502,7 @@ export const getCreateItemsServiceProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getCreateItemsServiceProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                           // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                          // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                           // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))        // exclude one to one relations without relationship field, is relation one to one without xxxxId
         .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                        // exclude id of i18n table
@@ -518,7 +518,7 @@ export const getUpdateServiceProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getUpdateServiceProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                              // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))            // exclude one to one relations without relationship field, is relation one to one without xxxxId
         .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
@@ -535,7 +535,7 @@ export const getUpsertServiceProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getUpsertServiceProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                       // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                      // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))    // exclude one to one relations without relationship field, is relation one to one without xxxxId
         .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                    // exclude id of i18n table
@@ -551,7 +551,7 @@ export const getCreateCommandHandlerProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                     // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                    // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
 };
@@ -562,7 +562,7 @@ export const getUpdateCommandHandlerProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                     // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                    // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
 };
@@ -573,7 +573,7 @@ export const getUpsertCommandHandlerProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                     // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                    // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
 };
@@ -595,7 +595,7 @@ export const getCreateCommandProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                     // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                    // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship?.field, is relation one to one without xxxxId
 };
@@ -631,7 +631,7 @@ export const getCreatedEventProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
 };
 
@@ -641,7 +641,7 @@ export const getUpdatedEventProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship field, is relation one to one without xxxxId
 };
 
@@ -651,7 +651,7 @@ export const getDeletedEventProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                     // exclude one to many relations
+        ?.filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                    // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field)); // exclude one to one relations without relationship  field, is relation one to one without xxxxId
 };
 
@@ -814,7 +814,7 @@ export const getPostmanGraphqlCreateMutationProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getPostmanGraphqlCreateMutationProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                              // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                              // exclude many to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))            // exclude one to one relations without relationship field, is relation one to one without xxxxId
@@ -832,7 +832,7 @@ export const getPostmanGraphqlCreateVariablesProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getPostmanGraphqlCreateVariablesProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                              // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                              // exclude many to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))            // exclude one to one relations without relationship field, is relation one to one without xxxxId
@@ -847,7 +847,7 @@ export const getPostmanGraphqlGetQueryProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !deletedAtProperty.includes(property.name))                                                         // exclude deleteAt
+        ?.filter(property => !deletedAtProperty.includes(property.name))                                                        // exclude deleteAt
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                      // exclude many to many relations
@@ -860,7 +860,7 @@ export const getPostmanGraphqlFindQueryProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !deletedAtProperty.includes(property.name))                                                         // exclude deleteAt
+        ?.filter(property => !deletedAtProperty.includes(property.name))                                                        // exclude deleteAt
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                      // exclude many to many relations
@@ -873,7 +873,7 @@ export const getPostmanGraphqlFindByIdQueryProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !deletedAtProperty.includes(property.name))                                                         // exclude deleteAt
+        ?.filter(property => !deletedAtProperty.includes(property.name))                                                        // exclude deleteAt
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                      // exclude many to many relations
@@ -886,7 +886,7 @@ export const getPostmanGraphqlUpdateMutationProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !deletedAtProperty.includes(property.name))                                                         // exclude deleteAt
+        ?.filter(property => !deletedAtProperty.includes(property.name))                                                        // exclude deleteAt
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                      // exclude many to many relations
@@ -902,7 +902,7 @@ export const getPostmanGraphqlUpdateVariablesProperties = (
     if (!moduleName) throw new Error('Module name parameter is not defined in getPostmanGraphqlUpdateVariablesProperties function');
 
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                               // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                              // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                               // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field))            // exclude one to one relations without relationship field, is relation one to one without xxxxId
         .filter(property => !property.isI18n || (property.isI18n && property.name !== 'id'))                                            // exclude id of i18n table
@@ -916,7 +916,7 @@ export const getPostmanGraphqlDeleteMutationProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !deletedAtProperty.includes(property.name))                                                         // exclude deleteAt
+        ?.filter(property => !deletedAtProperty.includes(property.name))                                                        // exclude deleteAt
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_ONE)                                       // exclude one to many relations
         .filter(property => property.relationship?.type !== RelationshipType.MANY_TO_MANY)                                      // exclude many to many relations
@@ -929,7 +929,7 @@ export const getPostmanRestCreateProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                       // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                      // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field));   // exclude one to many relations
 };
@@ -940,7 +940,7 @@ export const getPostmanRestUpdateProperties = (
 ): Property[] =>
 {
     return properties
-        ?.filter(property => !timestampProperties.includes(property.name))                                                       // exclude timestamps
+        ?.filter(property => !timestampProperties.includes(property.name))                                                      // exclude timestamps
         .filter(property => property.relationship?.type !== RelationshipType.ONE_TO_MANY)                                       // exclude one to many relations
         .filter(property => !(property.relationship?.type === RelationshipType.ONE_TO_ONE && !property.relationship?.field));   // exclude one to many relations
 };

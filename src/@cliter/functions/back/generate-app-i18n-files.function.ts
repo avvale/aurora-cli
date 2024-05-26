@@ -5,7 +5,7 @@ import * as path from 'node:path';
 
 export const generateAppI18nFiles = (generateCommandState: GenerateCommandState): void =>
 {
-    if (generateCommandState.schema.excluded?.includes('src/@app/**')) return;
+    if (generateCommandState.schema.excludedFiles?.includes('src/@app/**')) return;
 
     if (hasI18nProperties(generateCommandState.schema.aggregateProperties))
     {
@@ -20,7 +20,8 @@ export const generateAppI18nFiles = (generateCommandState: GenerateCommandState)
                 moduleNames       : generateCommandState.schema.moduleNames,
                 force             : generateCommandState.flags.force,
                 verbose           : generateCommandState.flags.verbose,
-                excludeFiles      : generateCommandState.schema.excluded,
+                excludeFiles      : generateCommandState.schema.excludedFiles,
+                excludedOperations: generateCommandState.schema.excludedOperations,
                 lockFiles         : generateCommandState.lockFiles,
                 templateData      : {
                     ...generateCommandState,

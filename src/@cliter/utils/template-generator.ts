@@ -34,6 +34,7 @@ export class TemplateGenerator
             force = false,
             verbose = false,
             excludeFiles = [],
+            excludedOperations = [],
             lockFiles = [],
             templateData = {},
             currentProperty, // property to render value object or pivot table
@@ -47,6 +48,7 @@ export class TemplateGenerator
             force?: boolean;
             verbose?: boolean;
             excludeFiles?: string[];
+            excludedOperations?: string[];
             lockFiles?: LockFile[];
             templateData?: any;
             currentProperty?: Property;
@@ -72,6 +74,7 @@ export class TemplateGenerator
                 force,
                 verbose,
                 excludeFiles,
+                excludedOperations,
                 lockFiles,
                 templateData,
                 currentProperty,

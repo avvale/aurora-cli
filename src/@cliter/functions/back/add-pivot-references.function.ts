@@ -23,7 +23,7 @@ export const addPivotReferences = (generateCommandState: GenerateCommandState): 
         );
         codeWriter.generateBackAppBoundedContextReferences(
             property.relationship.pivot.aggregateProperties,
-            generateCommandState.schema.excluded,
+            generateCommandState.schema.excludedFiles,
         );
         codeWriter.declareBackApplicationItemsInModule();
         codeWriter.declareBackBoundedContextModuleInApplicationModule();
@@ -36,7 +36,7 @@ export const addPivotReferences = (generateCommandState: GenerateCommandState): 
             property.relationship.pivot.boundedContextName.toLowerCase(),
             property.relationship.pivot.moduleName.toLowerCase(),
             property.relationship.pivot.aggregateName,
-            generateCommandState.schema.excluded,
+            generateCommandState.schema.excludedFiles,
         );
 
         declareBackApiItemsExports(
@@ -44,7 +44,7 @@ export const addPivotReferences = (generateCommandState: GenerateCommandState): 
             path.join('src'),
             property.relationship.pivot.boundedContextName.toLowerCase(),
             property.relationship.pivot.moduleName.toLowerCase(),
-            generateCommandState.schema.excluded,
+            generateCommandState.schema.excludedFiles,
         );
     }
 };

@@ -5,7 +5,7 @@ import * as path from 'node:path';
 
 export const generateAppFiles = (generateCommandState: GenerateCommandState): void =>
 {
-    if (generateCommandState.schema.excluded?.includes('src/@app/**')) return;
+    if (generateCommandState.schema.excludedFiles?.includes('src/@app/**')) return;
 
     // create directory application container, normally src/@app
     TemplateGenerator.createDirectory(
@@ -23,7 +23,8 @@ export const generateAppFiles = (generateCommandState: GenerateCommandState): vo
             boundedContextName: generateCommandState.schema.boundedContextName,
             moduleName        : generateCommandState.schema.moduleName,
             moduleNames       : generateCommandState.schema.moduleNames,
-            excludeFiles      : generateCommandState.schema.excluded,
+            excludeFiles      : generateCommandState.schema.excludedFiles,
+            excludedOperations: generateCommandState.schema.excludedOperations,
             force             : generateCommandState.flags.force,
             verbose           : generateCommandState.flags.verbose,
             lockFiles         : generateCommandState.lockFiles,
@@ -44,7 +45,7 @@ export const generateAppFiles = (generateCommandState: GenerateCommandState): vo
             boundedContextName: generateCommandState.schema.boundedContextName,
             moduleName        : generateCommandState.schema.moduleName,
             moduleNames       : generateCommandState.schema.moduleNames,
-            excludeFiles      : generateCommandState.schema.excluded,
+            excludeFiles      : generateCommandState.schema.excludedFiles,
             force             : generateCommandState.flags.force,
             verbose           : generateCommandState.flags.verbose,
             lockFiles         : generateCommandState.lockFiles,

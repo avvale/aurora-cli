@@ -96,7 +96,8 @@ export interface ModuleDefinitionSchema
     }
     aggregateProperties: Property[];
     additionalApis?: AdditionalApi[];
-    excluded?: string[];                // set files to avoid create
+    excludedFiles?: string[];                // set files to avoid create
+    excludedOperations?: string[];           // set operations to avoid create
 }
 
 export interface NewBackCommandState extends CommandState
