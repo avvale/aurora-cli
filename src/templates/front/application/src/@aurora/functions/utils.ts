@@ -5,7 +5,6 @@ import * as isoWeek from 'dayjs/plugin/isoWeek';
 import * as timezone from 'dayjs/plugin/timezone';
 import * as utc from 'dayjs/plugin/utc';
 import * as weekOfYear from 'dayjs/plugin/weekOfYear';
-import generatePassword, { GenerateOptions } from 'generate-password-browser';
 import { v4 as uuidv4 } from 'uuid';
 import { base64ToBlob } from './base64-to-blob.function';
 

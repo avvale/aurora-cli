@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { SpinnerManagerService } from './spinner-manager.service';
 
 @Pipe({
-    name: 'getSpinnerFlag',
+    name      : 'getSpinnerFlag',
     standalone: true,
 })
 export class GetSpinnerFlagPipe implements PipeTransform
