@@ -13,11 +13,6 @@ export { IamPaginateTagsQuery } from './application/paginate/iam-paginate-tags.q
 export { IamGetTagsQuery } from './application/get/iam-get-tags.query';
 export { IamFindTagQuery } from './application/find/iam-find-tag.query';
 export { IamFindTagByIdQuery } from './application/find/iam-find-tag-by-id.query';
-export { IamRawSQLTagsQuery } from './application/raw-sql/iam-raw-sql-tags.query';
-export { IamCountTagQuery } from './application/count/iam-count-tag.query';
-export { IamMaxTagQuery } from './application/max/iam-max-tag.query';
-export { IamMinTagQuery } from './application/min/iam-min-tag.query';
-export { IamSumTagQuery } from './application/sum/iam-sum-tag.query';
 
 // export mocks
 export { iamMockTagData } from './infrastructure/mock/iam-mock-tag.data';
@@ -69,11 +64,6 @@ import { IamPaginateTagsQueryHandler } from './application/paginate/iam-paginate
 import { IamGetTagsQueryHandler } from './application/get/iam-get-tags.query-handler';
 import { IamFindTagQueryHandler } from './application/find/iam-find-tag.query-handler';
 import { IamFindTagByIdQueryHandler } from './application/find/iam-find-tag-by-id.query-handler';
-import { IamRawSQLTagsQueryHandler } from './application/raw-sql/iam-raw-sql-tags.query-handler';
-import { IamCountTagQueryHandler } from './application/count/iam-count-tag.query-handler';
-import { IamMaxTagQueryHandler } from './application/max/iam-max-tag.query-handler';
-import { IamMinTagQueryHandler } from './application/min/iam-min-tag.query-handler';
-import { IamSumTagQueryHandler } from './application/sum/iam-sum-tag.query-handler';
 
 // event handlers
 import { IamCreatedTagEventHandler } from './application/events/iam-created-tag.event-handler';
@@ -91,11 +81,6 @@ import { IamPaginateTagsService } from './application/paginate/iam-paginate-tags
 import { IamGetTagsService } from './application/get/iam-get-tags.service';
 import { IamFindTagService } from './application/find/iam-find-tag.service';
 import { IamFindTagByIdService } from './application/find/iam-find-tag-by-id.service';
-import { IamRawSQLTagsService } from './application/raw-sql/iam-raw-sql-tags.service';
-import { IamCountTagService } from './application/count/iam-count-tag.service';
-import { IamMaxTagService } from './application/max/iam-max-tag.service';
-import { IamMinTagService } from './application/min/iam-min-tag.service';
-import { IamSumTagService } from './application/sum/iam-sum-tag.service';
 import { IamUpdateTagByIdService } from './application/update/iam-update-tag-by-id.service';
 import { IamUpdateTagsService } from './application/update/iam-update-tags.service';
 import { IamUpdateAndIncrementTagsService } from './application/update/iam-update-and-increment-tags.service';
@@ -119,11 +104,6 @@ export const IamTagHandlers = [
     IamGetTagsQueryHandler,
     IamFindTagQueryHandler,
     IamFindTagByIdQueryHandler,
-    IamRawSQLTagsQueryHandler,
-    IamCountTagQueryHandler,
-    IamMaxTagQueryHandler,
-    IamMinTagQueryHandler,
-    IamSumTagQueryHandler,
 
     // events
     IamCreatedTagEventHandler,
@@ -142,11 +122,6 @@ export const IamTagServices = [
     IamGetTagsService,
     IamFindTagService,
     IamFindTagByIdService,
-    IamRawSQLTagsService,
-    IamCountTagService,
-    IamMaxTagService,
-    IamMinTagService,
-    IamSumTagService,
     IamUpdateTagByIdService,
     IamUpdateTagsService,
     IamUpdateAndIncrementTagsService,

@@ -27,3 +27,9 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - max
+  - min
+  - sum
+  - rawSql

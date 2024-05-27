@@ -161,7 +161,11 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-excluded:
+additionalApis:
+  - path: iam/account/update/me
+    resolverType: mutation
+    httpMethod: post
+excludedFiles:
   - src/@api/iam/account/resolvers/iam-create-accounts.resolver.ts
   - src/@api/iam/account/resolvers/iam-create-accounts.resolver.spec.ts
   - src/@api/iam/account/controllers/iam-create-accounts.controller.ts

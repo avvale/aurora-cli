@@ -24,7 +24,7 @@ import { IamRole } from '@app/iam/role';
 import { IamTenant } from '@app/iam/tenant';
 import { IamUser } from '@app/iam/user';
 import { OAuthClient } from '@app/o-auth/client';
-import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamAccount extends AggregateRoot

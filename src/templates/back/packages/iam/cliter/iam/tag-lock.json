@@ -6,26 +6,6 @@
             "integrity": "sha1:f5604606b2c6790ea25d6362db9b858542ce7a63"
         },
         {
-            "path": "src/@app/iam/tag/application/count/iam-count-tag.query-handler.spec.ts",
-            "integrity": "sha1:c668deb1f97908a389f2587baffb6f958b78e0c1"
-        },
-        {
-            "path": "src/@app/iam/tag/application/count/iam-count-tag.query-handler.ts",
-            "integrity": "sha1:df1ed543f267f0a0f2f4f8fa5cf8420d2e1deb19"
-        },
-        {
-            "path": "src/@app/iam/tag/application/count/iam-count-tag.query.ts",
-            "integrity": "sha1:2276acf685de6f9b804bff933cb829ebaab734e9"
-        },
-        {
-            "path": "src/@app/iam/tag/application/count/iam-count-tag.service.spec.ts",
-            "integrity": "sha1:a109ee221d83d34668705006403c78d70f5a7f14"
-        },
-        {
-            "path": "src/@app/iam/tag/application/count/iam-count-tag.service.ts",
-            "integrity": "sha1:ec82f5e5b3a2ce9057920d97f065468d09dba67d"
-        },
-        {
             "path": "src/@app/iam/tag/application/create/iam-create-tag.command-handler.spec.ts",
             "integrity": "sha1:5b83823c3a8f4f0ce3ec5dc0fc3f1e6d0ec1b2f2"
         },
@@ -230,46 +210,6 @@
             "integrity": "sha1:9d02e1d25fe44e4c678b87d06bd151fcb3c10400"
         },
         {
-            "path": "src/@app/iam/tag/application/max/iam-max-tag.query-handler.spec.ts",
-            "integrity": "sha1:bb3545c883f3171f2df88618eeeb06f94788e0b8"
-        },
-        {
-            "path": "src/@app/iam/tag/application/max/iam-max-tag.query-handler.ts",
-            "integrity": "sha1:fdac6f06372758298188daed2af36a3f7cb30c8f"
-        },
-        {
-            "path": "src/@app/iam/tag/application/max/iam-max-tag.query.ts",
-            "integrity": "sha1:3a18264506935ef89c4f0cb5315a2e2da8f19410"
-        },
-        {
-            "path": "src/@app/iam/tag/application/max/iam-max-tag.service.spec.ts",
-            "integrity": "sha1:fa724809a0739c50f762a1fe1c7f56dbb1cc7da1"
-        },
-        {
-            "path": "src/@app/iam/tag/application/max/iam-max-tag.service.ts",
-            "integrity": "sha1:328ddb5912020468f85e1d66db6b1b5b0beed8f0"
-        },
-        {
-            "path": "src/@app/iam/tag/application/min/iam-min-tag.query-handler.spec.ts",
-            "integrity": "sha1:5d86c3b66c5707d5de095d20fc58ab540cb820ed"
-        },
-        {
-            "path": "src/@app/iam/tag/application/min/iam-min-tag.query-handler.ts",
-            "integrity": "sha1:09584cbbdae6fd8697f0703e73ae2b9b05479b2b"
-        },
-        {
-            "path": "src/@app/iam/tag/application/min/iam-min-tag.query.ts",
-            "integrity": "sha1:b9ccc009be319bf3018ffca5a34e09973cf36f7d"
-        },
-        {
-            "path": "src/@app/iam/tag/application/min/iam-min-tag.service.spec.ts",
-            "integrity": "sha1:ad1490b7dece3446bd5d27508b823f67d4e51709"
-        },
-        {
-            "path": "src/@app/iam/tag/application/min/iam-min-tag.service.ts",
-            "integrity": "sha1:f0c0eaa63d5452e8813d98cd7092ebbc224a46fc"
-        },
-        {
             "path": "src/@app/iam/tag/application/paginate/iam-paginate-tags.query-handler.spec.ts",
             "integrity": "sha1:fe112232a9c59a0911d0328b168075cc16a94ab2"
         },
@@ -290,48 +230,8 @@
             "integrity": "sha1:e3620cb42fd1b5b09fe697da53db945f5381ffbc"
         },
         {
-            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.query-handler.spec.ts",
-            "integrity": "sha1:064630d0dd6f91647e89744d8cc3145239d38b7c"
-        },
-        {
-            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.query-handler.ts",
-            "integrity": "sha1:3148e42798819534d494101a7d9b2ea9d6cc6498"
-        },
-        {
-            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.query.ts",
-            "integrity": "sha1:c8f78c5437e29e1c9a4face93740bb1759b3ca0e"
-        },
-        {
-            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.service.spec.ts",
-            "integrity": "sha1:393aa847f6939d74359a78276105dece08e328c9"
-        },
-        {
-            "path": "src/@app/iam/tag/application/raw-sql/iam-raw-sql-tags.service.ts",
-            "integrity": "sha1:756d408c1e8056b0750a2429b5b165fb75f8e17b"
-        },
-        {
             "path": "src/@app/iam/tag/application/sagas/iam-tag.sagas.ts",
             "integrity": "sha1:f1c94cc45d853ed7550f9eb12e6c652ea017c8b4"
-        },
-        {
-            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.query-handler.spec.ts",
-            "integrity": "sha1:4c3878c01dc12fc240d98d2bf8bd1c027d75bae6"
-        },
-        {
-            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.query-handler.ts",
-            "integrity": "sha1:eac8eacf5c2c51c84024878bc207d5a437ca4286"
-        },
-        {
-            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.query.ts",
-            "integrity": "sha1:6cd6c60bd829c605134d836a02a1e17911da2267"
-        },
-        {
-            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.service.spec.ts",
-            "integrity": "sha1:005523ada559dd7e97f19f66857e89f96c94f79f"
-        },
-        {
-            "path": "src/@app/iam/tag/application/sum/iam-sum-tag.service.ts",
-            "integrity": "sha1:d8d49b7a320a9ef7e9c1e154d5f363181ccc6495"
         },
         {
             "path": "src/@app/iam/tag/application/update/iam-update-tag-by-id.command-handler.spec.ts",
@@ -435,11 +335,11 @@
         },
         {
             "path": "src/@app/iam/tag/index.ts",
-            "integrity": "sha1:2b7d046b4be4d36e83df158834ede7bcfe0c70b4"
+            "integrity": "sha1:e4e7dfa9729888d3fcebc7454b34bf5f93b58d10"
         },
         {
             "path": "src/@app/iam/tag/infrastructure/mock/iam-mock-tag.data.ts",
-            "integrity": "sha1:4fac6e3f6f2c70f7382e727789f4e8f52acce565"
+            "integrity": "sha1:68eaa1c748dca071b7c4e104f9ab10761c38f156"
         },
         {
             "path": "src/@app/iam/tag/infrastructure/mock/iam-mock-tag.repository.ts",
@@ -787,7 +687,7 @@
         },
         {
             "path": "postman/iam/iam.tag.postman.json",
-            "integrity": "sha1:b8e7da063feb954ffd76328a6bb7c5dd1f83fcca"
+            "integrity": "sha1:f01a12553ad1e9c989ec45bd5fc47e686ae42c71"
         }
     ]
 }

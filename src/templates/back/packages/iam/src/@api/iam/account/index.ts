@@ -40,6 +40,11 @@ export { IamUpsertAccountResolver } from './resolvers/iam-upsert-account.resolve
 export { IamDeleteAccountByIdResolver } from './resolvers/iam-delete-account-by-id.resolver';
 export { IamDeleteAccountsResolver } from './resolvers/iam-delete-accounts.resolver';
 
+// export additionalApis
+export { IamMeAccountUpdateController } from './controllers/iam-me-account-update.controller';
+export { IamMeAccountUpdateHandler } from './handlers/iam-me-account-update.handler';
+export { IamMeAccountUpdateResolver } from './resolvers/iam-me-account-update.resolver';
+
 // import controllers
 import { IamCreateAccountController } from './controllers/iam-create-account.controller';
 import { IamPaginateAccountsController } from './controllers/iam-paginate-accounts.controller';
@@ -79,12 +84,20 @@ import { IamDeleteAccountsHandler } from './handlers/iam-delete-accounts.handler
 // import seeder
 import { IamAccountSeeder } from './seeder/iam-account.seeder';
 
+// import additionalApis
+import { IamMeAccountUpdateController } from './controllers/iam-me-account-update.controller';
+import { IamMeAccountUpdateHandler } from './handlers/iam-me-account-update.handler';
+import { IamMeAccountUpdateResolver } from './resolvers/iam-me-account-update.resolver';
+
 // ---- customizations ----
 import { IamMeAccountController } from './controllers/iam-me-account.controller';
 import { IamMeAccountResolver } from './resolvers/iam-me-account.resolver';
 import { IamMeAccountHandler } from './handlers/iam-me-account.handler';
 
 export const IamAccountApiControllers = [
+    // ---- customizations ----
+    IamMeAccountController,
+
     IamCreateAccountController,
     IamPaginateAccountsController,
     IamGetAccountsController,
@@ -96,11 +109,14 @@ export const IamAccountApiControllers = [
     IamDeleteAccountByIdController,
     IamDeleteAccountsController,
 
-    // ---- customizations ----
-    IamMeAccountController,
+    // additionalApis
+    IamMeAccountUpdateController,
 ];
 
 export const IamAccountApiResolvers = [
+    // ---- customizations ----
+    IamMeAccountResolver,
+
     IamCreateAccountResolver,
     IamPaginateAccountsResolver,
     IamGetAccountsResolver,
@@ -112,11 +128,14 @@ export const IamAccountApiResolvers = [
     IamDeleteAccountByIdResolver,
     IamDeleteAccountsResolver,
 
-    // ---- customizations ----
-    IamMeAccountResolver,
+    // additionalApis
+    IamMeAccountUpdateResolver,
 ];
 
 export const IamAccountApiHandlers = [
+    // ---- customizations ----
+    IamMeAccountHandler,
+
     IamCreateAccountHandler,
     IamPaginateAccountsHandler,
     IamGetAccountsHandler,
@@ -128,8 +147,8 @@ export const IamAccountApiHandlers = [
     IamDeleteAccountByIdHandler,
     IamDeleteAccountsHandler,
 
-    // ---- customizations ----
-    IamMeAccountHandler,
+    // additionalApis
+    IamMeAccountUpdateHandler,
 ];
 
 export const IamAccountApiServices = [

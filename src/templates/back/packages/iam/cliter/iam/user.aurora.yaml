@@ -66,7 +66,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-excluded:
+excludedFiles:
   - src/@api/iam/user/handlers/iam-create-user.handler.spec.ts
   - src/@api/iam/user/handlers/iam-create-user.handler.ts
   - src/@api/iam/user/controllers/iam-create-users.controller.spec.ts
