@@ -26,9 +26,11 @@ import { Account, EnvironmentsInformationComponent, IamService } from '@aurora';
     encapsulation: ViewEncapsulation.None,
     standalone   : true,
     imports      : [
+        FuseLoadingBarComponent, FuseVerticalNavigationComponent, NotificationsComponent, UserComponent,
+        NgIf, MatIconModule, MatButtonModule, LanguagesComponent, FuseFullscreenComponent, SearchComponent,
+        ShortcutsComponent, RouterOutlet, QuickChatComponent,
         // ---- customizations ----
-        EnvironmentsInformationComponent, FuseLoadingBarComponent, FuseVerticalNavigationComponent, NotificationsComponent, UserComponent, NgIf,
-        MatIconModule, MatButtonModule, LanguagesComponent, FuseFullscreenComponent, SearchComponent, ShortcutsComponent, RouterOutlet, QuickChatComponent
+        EnvironmentsInformationComponent
     ],
 })
 export class ClassyLayoutComponent implements OnInit, OnDestroy
