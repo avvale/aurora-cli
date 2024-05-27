@@ -44,6 +44,22 @@ class ExcludeOperations
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'min', '__bounded_context_name__-min-__module_name__.service.spec.ts'],
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'min', '__bounded_context_name__-min-__module_name__.service.ts'],
         ]),
+        sum: new Set([
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'sum'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'sum', '__bounded_context_name__-sum-__module_name__.query-handler.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'sum', '__bounded_context_name__-sum-__module_name__.query-handler.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'sum', '__bounded_context_name__-sum-__module_name__.query.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'sum', '__bounded_context_name__-sum-__module_name__.service.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'sum', '__bounded_context_name__-sum-__module_name__.service.ts'],
+        ]),
+        rawSql: new Set([
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'raw-sql'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'raw-sql', '__bounded_context_name__-raw-sql-__module_names__.query-handler.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'raw-sql', '__bounded_context_name__-raw-sql-__module_names__.query-handler.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'raw-sql', '__bounded_context_name__-raw-sql-__module_names__.query.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'raw-sql', '__bounded_context_name__-raw-sql-__module_names__.service.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'raw-sql', '__bounded_context_name__-raw-sql-__module_names__.service.ts'],
+        ]),
     };
 
     private operationsParsedPaths: { [key: string]: Set<string> } = {};
