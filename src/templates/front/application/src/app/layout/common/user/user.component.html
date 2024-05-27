@@ -32,14 +32,8 @@
             </span>
         </button>
         <mat-divider class="my-2"></mat-divider>
-        <!-- <button mat-menu-item>
-            <mat-icon [svgIcon]="'heroicons_outline:user-circle'"></mat-icon>
-            <span>{{ t('Profile') }}</span>
-        </button>
-        <button mat-menu-item>
-            <mat-icon [svgIcon]="'heroicons_outline:cog-8-tooth'"></mat-icon>
-            <span>{{ t('Settings') }}</span>
-        </button>
+        
+        <!--
         <button
             mat-menu-item
             [matMenuTriggerFor]="userStatus">
@@ -49,7 +43,8 @@
         <mat-divider class="my-2"></mat-divider>
         <button
             mat-menu-item
-            (click)="signOut()">
+            (click)="signOut()"
+        >
             <mat-icon [svgIcon]="'heroicons_outline:arrow-right-on-rectangle'"></mat-icon>
             <span>{{ t('SignOut') }}</span>
         </button>
