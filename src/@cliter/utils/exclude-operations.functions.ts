@@ -20,6 +20,20 @@ class ExcludeOperations
     private operationsToExclude: Set<string>;
     private operationsPatternPaths: { [key: string]: Set<string[]> } =
     {
+        upsert: new Set([
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'controllers', '__bounded_context_name__-upsert-__module_name__.controller.spec.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'controllers', '__bounded_context_name__-upsert-__module_name__.controller.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'handlers', '__bounded_context_name__-upsert-__module_name__.handler.spec.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'handlers', '__bounded_context_name__-upsert-__module_name__.handler.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'resolvers', '__bounded_context_name__-upsert-__module_name__.resolver.spec.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'resolvers', '__bounded_context_name__-upsert-__module_name__.resolver.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'upsert'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'upsert', '__bounded_context_name__-upsert-__module_name__.command-handler.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'upsert', '__bounded_context_name__-upsert-__module_name__.command-handler.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'upsert', '__bounded_context_name__-upsert-__module_name__.command.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'upsert', '__bounded_context_name__-upsert-__module_name__.service.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'upsert', '__bounded_context_name__-upsert-__module_name__.service.ts'],
+        ]),
         count: new Set([
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'count'],
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'count', '__bounded_context_name__-count-__module_name__.query-handler.spec.ts'],

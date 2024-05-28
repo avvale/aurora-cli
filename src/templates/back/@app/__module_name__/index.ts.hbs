@@ -14,9 +14,9 @@ export { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/update/' (toKebabCase schema.boundedContextName) '-update-and-increment-' (toKebabCase schema.moduleNames) '.command.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}Command } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-and-increment-{{ toKebabCase schema.moduleNames }}.command';
 {{/notInArray}}
-{{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command.ts'}}
+{{#isAllowPath schema 'upsert' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'upsert' (sumStrings (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command.ts') }}
 export { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Command } from './application/upsert/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.command';
-{{/notInArray}}
+{{/isAllowPath}}
 {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.command.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommand } from './application/delete/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.command';
 {{/notInArray}}
@@ -150,9 +150,9 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/update/'(toKebabCase schema.boundedContextName) '-update-and-increment-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}CommandHandler } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-and-increment-{{ toKebabCase schema.moduleNames }}.command-handler';
 {{/notInArray}}
-{{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command-handler.ts'}}
+{{#isAllowPath schema 'upsert' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'upsert' (sumStrings (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command-handler.ts') }}
 import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}CommandHandler } from './application/upsert/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.command-handler';
-{{/notInArray}}
+{{/isAllowPath}}
 {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.command-handler.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler } from './application/delete/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.command-handler';
 {{/notInArray}}
@@ -260,9 +260,9 @@ import { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/update/' (toKebabCase schema.boundedContextName) '-update-and-increment-' (toKebabCase schema.moduleNames) '.service.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}Service } from './application/update/{{ toKebabCase schema.boundedContextName }}-update-and-increment-{{ toKebabCase schema.moduleNames }}.service';
 {{/notInArray}}
-{{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.service.ts'}}
+{{#isAllowPath schema 'upsert' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'upsert' (sumStrings (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.service.ts') }}
 import { {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service } from './application/upsert/{{ toKebabCase schema.boundedContextName }}-upsert-{{ toKebabCase schema.moduleName }}.service';
-{{/notInArray}}
+{{/isAllowPath}}
 {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
 import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdService } from './application/delete/{{ toKebabCase schema.boundedContextName }}-delete-{{ toKebabCase schema.moduleName }}-by-id.service';
 {{/notInArray}}
@@ -292,9 +292,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/update/' (toKebabCase schema.boundedContextName) '-update-and--increment-' (toKebabCase schema.moduleNames) '.command-handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}CommandHandler,
     {{/notInArray}}
-    {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command-handler.ts'}}
+    {{#isAllowPath schema 'upsert' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'upsert' (sumStrings (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.command-handler.ts') }}
     {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}CommandHandler,
-    {{/notInArray}}
+    {{/isAllowPath}}
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.command-handler.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommandHandler,
     {{/notInArray}}
@@ -403,9 +403,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/update/' (toKebabCase schema.boundedContextName) '-update-and-increment-' (toKebabCase schema.moduleNames) '.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}Service,
     {{/notInArray}}
-    {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/upsert/' (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.service.ts'}}
+    {{#isAllowPath schema 'upsert' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'upsert' (sumStrings (toKebabCase schema.boundedContextName) '-upsert-' (toKebabCase schema.moduleName) '.service.ts') }}
     {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Service,
-    {{/notInArray}}
+    {{/isAllowPath}}
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/delete/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleName) '-by-id.service.ts'}}
     {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdService,
     {{/notInArray}}
