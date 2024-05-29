@@ -1,18 +1,20 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, WritableSignal, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { AccountService } from '@apps/iam/account';
-import { Account, Action, CoreGetLangsService, CoreLang, GetSpinnerFlagPipe, IamService, SnackBarInvalidFormComponent, ViewDetailComponent, log, mapActions } from '@aurora';
+import { uniqueEmailValidator, uniqueUsernameValidator } from '@apps/iam/shared';
+import { Account, Action, CoreGetLangsService, CoreLang, GetSpinnerFlagPipe, IamService, SnackBarInvalidFormComponent, ViewDetailComponent, log } from '@aurora';
 import { TranslocoModule } from '@ngneat/transloco';
-import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 import { environment } from 'environments/environment';
+import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector       : 'settings-account',
@@ -21,23 +23,36 @@ import { environment } from 'environments/environment';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        AsyncPipe, FormsModule, GetSpinnerFlagPipe, ReactiveFormsModule, MatFormFieldModule, MatIconModule,
-        MatInputModule, TextFieldModule, MatSelectModule, MatOptionModule,
-        MatButtonModule, TranslocoModule,
+        AsyncPipe, FormsModule, GetSpinnerFlagPipe, MatButtonModule, MatFormFieldModule,
+        MatIconModule, MatInputModule, MatSelectModule, MatOptionModule,
+        MatProgressSpinnerModule, ReactiveFormsModule, TextFieldModule, TranslocoModule,
     ],
 })
 export class SettingsAccountComponent extends ViewDetailComponent
 {
-    iamService = inject(IamService);
-    coreGetLangsService = inject(CoreGetLangsService);
     account: Account;
     langs$: Observable<CoreLang[]>;
-    accountService = inject(AccountService);
     environment = environment;
+    usernameStatus: WritableSignal<string> = signal('VALID');
+    emailStatus: WritableSignal<string> = signal('VALID');
+
+    iamService = inject(IamService);
+    coreGetLangsService = inject(CoreGetLangsService);
+    accountService = inject(AccountService);
 
     get user(): FormGroup
     {
         return this.fg.get('user') as FormGroup;
+    }
+
+    get email(): FormControl
+    {
+        return this.fg.get('email') as FormControl;
+    }
+
+    get username(): FormControl
+    {
+        return this.fg.get('username') as FormControl;
     }
 
     createForm(): void
@@ -46,7 +61,10 @@ export class SettingsAccountComponent extends ViewDetailComponent
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             email: ['', [Validators.maxLength(128), Validators.email]],
-            username: ['', [Validators.required, Validators.maxLength(128)]],
+            username: ['', {
+                validators: [Validators.required, Validators.maxLength(128)],
+                updateOn: 'blur',
+            }],
             user    : this.fb.group({
                 id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
                 name: ['', [Validators.required, Validators.maxLength(255)]],
@@ -60,6 +78,15 @@ export class SettingsAccountComponent extends ViewDetailComponent
     init(): void
     {
         this.langs$ = this.coreGetLangsService.langs$;
+
+        // subscribe to async validators status
+        this.email
+            .statusChanges
+            .subscribe(status => this.emailStatus.set(status));
+
+        this.username
+            .statusChanges
+            .subscribe(status => this.usernameStatus.set(status));
     }
 
     onSubmit($event): void
@@ -104,6 +131,14 @@ export class SettingsAccountComponent extends ViewDetailComponent
                     .subscribe((account: Account) =>
                     {
                         this.account = account;
+
+                        // load async validators
+                        this.email.setAsyncValidators(
+                            uniqueEmailValidator(this.accountService, [account.email]),
+                        );
+                        this.username.setAsyncValidators(
+                            uniqueUsernameValidator(this.accountService, [account.username]),
+                        );
                         this.fg.patchValue(account);
                     });
                 break;
@@ -111,10 +146,9 @@ export class SettingsAccountComponent extends ViewDetailComponent
             case 'settings::account.detail.update':
                 try
                 {
-
                     await lastValueFrom(
                         this.accountService
-                            .meAccountUpdate({
+                            .updateMeAccount({
                                 object: this.fg.value,
                             }),
                     );
@@ -127,8 +161,6 @@ export class SettingsAccountComponent extends ViewDetailComponent
                             duration        : 3000,
                         },
                     );
-
-                    // this.router.navigate(['iam/tag']);
                 }
                 catch(error)
                 {

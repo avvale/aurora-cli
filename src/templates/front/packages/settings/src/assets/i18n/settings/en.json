@@ -1,6 +1,11 @@
 {
     "AccountDescription": "Manage your public profile and private information",
     "ChangeYourPassword": "Change your password",
+    "ChangeYourPasswordDescription": "Manage your password responsibly.",
+    "CurrentPassword": "Current password",
+    "MinimumPasswordComplexity": "The password must be at least 8 characters long and contain at least one number and one lowercase and one uppercase letter.",
+    "NewPassword": "New password",
     "ProfileDescription": "Following information is publicly displayed, be careful!",
+    "RepeatNewPassword": "Repeat new password",
     "SecurityDescription": "Manage your password and 2-step verification preferences"
 }

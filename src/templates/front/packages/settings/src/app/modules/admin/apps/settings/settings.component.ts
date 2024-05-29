@@ -1,5 +1,5 @@
 import { NgClass, NgSwitch, NgSwitchCase } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
@@ -70,12 +70,6 @@ export class SettingsComponent implements OnInit, OnDestroy
                 description: 'settings.SecurityDescription',
                 routerLink : ['security'],
             },
-            /* {
-                id         : 'notifications',
-                icon       : 'heroicons_outline:bell',
-                title      : 'Notifications',
-                description: 'Manage when you\'ll be notified on which channels',
-            }, */
         ];
 
         // Subscribe to media changes
@@ -115,6 +109,24 @@ export class SettingsComponent implements OnInit, OnDestroy
     // -----------------------------------------------------------------------------------------------------
 
     /**
+     * Check component loaded in router-outlet
+     *
+     * @param panel
+     */
+    onActivate(event: any): void
+    {
+        if (event.constructor.name === SettingsAccountComponent.name)
+        {
+            this.goToPanel('account');
+        }
+
+        if (event.constructor.name === SettingsSecurityComponent.name)
+        {
+            this.goToPanel('security');
+        }
+    }
+
+    /**
      * Navigate to the panel
      *
      * @param panel
@@ -126,7 +138,7 @@ export class SettingsComponent implements OnInit, OnDestroy
         // Close the drawer on 'over' mode
         if ( this.drawerMode === 'over' )
         {
-            this.drawer.close();
+            this.drawer?.close();
         }
     }
 

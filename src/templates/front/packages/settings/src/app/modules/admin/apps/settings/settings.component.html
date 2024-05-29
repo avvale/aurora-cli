@@ -34,7 +34,6 @@
                                 'bg-primary-50 dark:bg-hover': selectedPanel && selectedPanel === panel.id
                             }"
                         [routerLink]="panel.routerLink"
-                        (click)="goToPanel(panel.id)"
                     >
                         <mat-icon
                             [ngClass]="
@@ -74,7 +73,8 @@
                     <button
                         class="lg:hidden -ml-2"
                         mat-icon-button
-                        (click)="drawer.toggle()">
+                        (click)="drawer.toggle()"
+                    >
                         <mat-icon [svgIcon]="'heroicons_outline:bars-3'"></mat-icon>
                     </button>
 
@@ -86,26 +86,7 @@
 
                 <!-- Load settings panel -->
                 <div class="mt-8">
-                    <router-outlet></router-outlet>
-                    <!-- @switch (selectedPanel)
-                    {
-                        @case ('account')
-                        {
-                            <settings-account></settings-account>
-                        }
-                        @case ('security')
-                        {
-                            <settings-security></settings-security>
-                        }
-                        @case ('notifications')
-                        {
-                            <settings-notifications></settings-notifications>
-                        }
-                        @case ('team')
-                        {
-                            <settings-team></settings-team>
-                        }
-                    } -->
+                    <router-outlet (activate)="onActivate($event)"></router-outlet>
                 </div>
 
             </div>

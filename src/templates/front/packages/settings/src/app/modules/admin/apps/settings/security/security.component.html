@@ -1,36 +1,72 @@
-<div class="w-full max-w-3xl"  *transloco="let t">
+<div class="w-full max-w-3xl" *transloco="let t">
 
     <!-- Form -->
-    <form [formGroup]="securityForm">
-
+    <form
+        novalidate
+        [formGroup]="fg"
+        (ngSubmit)="onSubmit($event)"
+    >
         <!-- Section -->
         <div class="w-full">
             <div class="text-xl">{{ t('settings.ChangeYourPassword') }}</div>
-            <div class="text-secondary">You can only change your password twice within 24 hours!</div>
+            <div class="text-secondary">{{ t('settings.ChangeYourPasswordDescription') }}</div>
         </div>
         <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
             <!-- Current password -->
             <div class="sm:col-span-4">
                 <mat-form-field
                     class="w-full"
-                    [subscriptSizing]="'dynamic'">
-                    <mat-label>Current password</mat-label>
+                    subscriptSizing="dynamic"
+                >
+                    <mat-label>{{ t('settings.CurrentPassword') }}</mat-label>
                     <mat-icon
                         class="icon-size-5"
-                        [svgIcon]="'heroicons_solid:key'"
-                        matPrefix></mat-icon>
+                        svgIcon="heroicons_solid:key"
+                        matPrefix
+                    >
+                    </mat-icon>
                     <input
-                        [formControlName]="'currentPassword'"
-                        type="password"
-                        matInput>
+                        matInput
+                        [type]="showCurrentPassword.type"
+                        formControlName="currentPassword"
+                    >
+                    @if (currentPasswordStatus() === 'PENDING')
+                    {
+                        <mat-icon matSuffix>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else if (currentPasswordStatus() === 'VALID')
+                    {
+                        <mat-icon matSuffix>
+                            check
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            matSuffix
+                            fontSet="material-symbols-outlined"
+                        >
+                            exclamation
+                        </mat-icon>
+                    }
+                    <mat-pass-toggle-visibility
+                        #showCurrentPassword
+                        matSuffix
+                        class="ml-2"
+                    >
+                    </mat-pass-toggle-visibility>
+                    <mat-error>{{ formErrors['currentPassword'] | async }}</mat-error>
                 </mat-form-field>
             </div>
             <!-- New password -->
             <div class="sm:col-span-4">
                 <mat-form-field
                     class="w-full"
-                    [subscriptSizing]="'dynamic'">
-                    <mat-label>New password</mat-label>
+                    [subscriptSizing]="'dynamic'"
+                >
+                    <mat-label>{{ t('settings.NewPassword') }}</mat-label>
                     <mat-icon
                         class="icon-size-5"
                         [svgIcon]="'heroicons_solid:key'"
@@ -38,74 +74,86 @@
                     >
                     </mat-icon>
                     <input
-                        [formControlName]="'newPassword'"
-                        type="password"
-                        matInput>
+                        matInput
+                        #newPasswordInput
+                        formControlName="newPassword"
+                        [type]="showNewPassword.type"
+                    >
+                    <button
+                        matSuffix
+                        mat-icon-button
+                        type="button"
+                        [aria-label]="t('iam.CreatePassword')"
+                        (click)="handleCreateNewPassword()"
+                    >
+                        <mat-icon>sync</mat-icon>
+                    </button>
+                    <mat-pass-toggle-visibility
+                        matSuffix
+                        class="ml-2"
+                        #showNewPassword
+                    >
+                    </mat-pass-toggle-visibility>
                 </mat-form-field>
-                <div class="mt-1 text-md text-hint">Minimum 8 characters. Must include numbers, letters and special characters.</div>
+                <mat-error>{{ formErrors['newPassword'] | async }}</mat-error>
+                <mat-password-strength
+                    #passwordStrengthComponent
+                    class="col-start-1 col-6"
+                    [password]="newPasswordInput.value"
+                    [enableLengthRule]="true"
+                    [min]="8"
+                    [max]="30"
+                    [enableLowerCaseLetterRule]="true"
+                    [enableUpperCaseLetterRule]="true"
+                    [enableDigitRule]="true"
+                    [enableSpecialCharRule]="true"
+                >
+                </mat-password-strength>
+            </div>
+
+            <!-- Repeat new password -->
+            <div class="sm:col-span-4">
+                <mat-form-field
+                    class="w-full"
+                    [subscriptSizing]="'dynamic'"
+                >
+                    <mat-label>{{ t('settings.RepeatNewPassword') }}</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:key'"
+                        matPrefix
+                    >
+                    </mat-icon>
+                    <input
+                        matInput
+                        [formControlName]="'repeatNewPassword'"
+                        [type]="showNewPassword.type"
+                    >
+                    <mat-pass-toggle-visibility
+                        #showNewPassword
+                        matSuffix
+                        class="ml-2"
+                    >
+                    </mat-pass-toggle-visibility>
+                </mat-form-field>
+                <mat-error>{{ formErrors['repeatNewPassword'] | async }}</mat-error>
+                <div class="mt-1 text-md text-hint">{{ t('settings.MinimumPasswordComplexity') }}</div>
             </div>
         </div>
 
         <!-- Divider -->
         <div class="my-10 border-t"></div>
 
-        <!-- Section -->
-        <!-- <div class="w-full">
-            <div class="text-xl">Security preferences</div>
-            <div class="text-secondary">Keep your account more secure with following preferences.</div>
-        </div> -->
-        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
-            <!-- 2-step auth -->
-            <!-- <div class="sm:col-span-4 flex items-center justify-between">
-                <div
-                    class="flex-auto cursor-pointer"
-                    (click)="twoStepToggle.toggle()">
-                    <div class="leading-6 font-medium">Enable 2-step authentication</div>
-                    <div class="text-md text-secondary">
-                        Protects you against password theft by requesting an authentication code via SMS on every login.
-                    </div>
-                </div>
-                <mat-slide-toggle
-                    class="ml-4"
-                    [color]="'primary'"
-                    [formControlName]="'twoStep'"
-                    #twoStepToggle>
-                </mat-slide-toggle>
-            </div> -->
-            <!-- Ask to change password -->
-            <!-- <div class="sm:col-span-4 flex items-center justify-between">
-                <div
-                    class="flex-auto cursor-pointer"
-                    (click)="askPasswordChangeToggle.toggle()">
-                    <div class="leading-6 font-medium">Ask to change password on every 6 months</div>
-                    <div class="text-md text-secondary">
-                        A simple but an effective way to be protected against data leaks and password theft.
-                    </div>
-                </div>
-                <mat-slide-toggle
-                    class="ml-4"
-                    [color]="'primary'"
-                    [formControlName]="'askPasswordChange'"
-                    #askPasswordChangeToggle>
-                </mat-slide-toggle>
-            </div> -->
-        </div>
-
-        <!-- Divider -->
-        <!-- <div class="my-10 border-t"></div> -->
-
         <!-- Actions -->
         <div class="flex items-center justify-end">
             <button
-                mat-stroked-button
-                type="button">
-                Cancel
-            </button>
-            <button
                 class="ml-4"
                 mat-flat-button
-                type="button"
-                [color]="'primary'">Save
+                type="submit"
+                color="primary"
+                [disabled]="fg.pristine || ('settings::security.detail.update' | getSpinnerFlag | async)"
+            >
+                {{ t('Update') }}
             </button>
         </div>
     </form>

@@ -1,6 +1,11 @@
 {
     "AccountDescription": "Gestiona tu perfil público y tu información privada",
     "ChangeYourPassword": "Cambiar la contraseña",
+    "ChangeYourPasswordDescription": "Gestiona tu contraseña de forma responsable.",
+    "CurrentPassword": "Contraseña actual",
+    "MinimumPasswordComplexity": "La contraseña debe tener al menos 8 caracteres y contener al menos un número, una letra minúcula y mayúscula",
+    "NewPassword": "Nueva contraseña",
     "ProfileDescription": "La siguiente información se muestra públicamente, ¡ten cuidado!",
+    "RepeatNewPassword": "Repita la nueva contraseña",
     "SecurityDescription": "Gestiona tus preferencias de contraseña y verificación en dos pasos"
 }

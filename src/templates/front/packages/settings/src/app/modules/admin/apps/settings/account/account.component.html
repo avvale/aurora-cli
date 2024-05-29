@@ -73,9 +73,33 @@
                         {{ environment.oAuth.applicationCode }}/
                     </div>
                     <input
-                        formControlName="username"
                         matInput
+                        formControlName="username"
+                        maxlength="128"
+                        (input)="$event.target.value = $event.target.value.toLowerCase()"
                     >
+                    @if (usernameStatus() === 'PENDING')
+                    {
+                        <mat-icon matSuffix>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else if (usernameStatus() === 'VALID')
+                    {
+                        <mat-icon matSuffix>
+                            check
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            matSuffix
+                            fontSet="material-symbols-outlined"
+                        >
+                            exclamation
+                        </mat-icon>
+                    }
+                    <mat-error>{{ formErrors['username'] | async }}</mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -103,9 +127,32 @@
                     >
                     </mat-icon>
                     <input
-                        [formControlName]="'email'"
                         matInput
+                        formControlName="email"
+                        maxlength="128"
+                        (input)="$event.target.value = $event.target.value.toLowerCase()"
                     >
+                    @if (emailStatus() === 'PENDING')
+                    {
+                        <mat-icon matSuffix>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else if (emailStatus() === 'VALID')
+                    {
+                        <mat-icon matSuffix>
+                            check
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            matSuffix
+                            fontSet="material-symbols-outlined"
+                        >
+                            exclamation
+                        </mat-icon>
+                    }
                     <mat-error>{{ formErrors?.email | async }}</mat-error>
                 </mat-form-field>
             </div>
@@ -142,12 +189,6 @@
 
         <!-- Actions -->
         <div class="flex items-center justify-end">
-            <button
-                mat-stroked-button
-                type="button"
-            >
-                {{ t('Cancel') }}
-            </button>
             <button
                 class="ml-4"
                 mat-flat-button
