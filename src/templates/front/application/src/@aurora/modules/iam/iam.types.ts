@@ -2,6 +2,7 @@ export interface Account
 {
     id: string;
     email: string;
+    username: string;
     isActive: boolean;
     clientId: string;
     dApplicationCodes: string[];
@@ -27,7 +28,6 @@ export interface User
     avatar?: string;
     mobile?: string;
     langId?: string;
-    username: string;
     password?: string;
     rememberToken?: string;
     meta?: any;

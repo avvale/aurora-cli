@@ -33,7 +33,10 @@ export class ValidationMessagesService
      * @param error
      * @param ac
      */
-    getMessage(error: string, ac?: AbstractControl): Observable<string>
+    getMessage(
+        error: string,
+        ac?: AbstractControl,
+    ): Observable<string>
     {
         // check custom message errors
         for (const customMessage of this.customMessages)
@@ -87,6 +90,15 @@ export class ValidationMessagesService
 
             case 'pattern':
                 return this.translocoService.selectTranslate('validations.Pattern');
+
+            case 'uniqueUsername':
+                return this.translocoService.selectTranslate('validations.UniqueUsername');
+
+            case 'uniqueEmail':
+                return this.translocoService.selectTranslate('validations.UniqueEmail');
+
+            case 'passwordMe':
+                return this.translocoService.selectTranslate('validations.PasswordMe');
 
             default:
                 console.log('error', error);

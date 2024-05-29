@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
 import { BreadcrumbComponent, GridModule, TitleComponent } from '@aurora/components';
@@ -14,5 +15,5 @@ export const defaultListImports = [
 ];
 
 export const defaultDetailImports = [
-    AsyncPipe, BreadcrumbComponent, FormsModule, GetSpinnerFlagPipe, MatButtonModule, MatIconModule, MatInputModule, MatSnackBarModule, NgIf, TitleComponent, ReactiveFormsModule, TranslocoModule,
+    AsyncPipe, BreadcrumbComponent, FormsModule, GetSpinnerFlagPipe, MatButtonModule, MatIconModule, MatInputModule, MatProgressSpinnerModule, MatSnackBarModule, NgIf, TitleComponent, ReactiveFormsModule, TranslocoModule,
 ];

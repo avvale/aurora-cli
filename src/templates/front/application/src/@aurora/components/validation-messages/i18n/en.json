@@ -10,8 +10,11 @@
     "NotEqual"                : "Field {{ fieldName }} is not the same as field {{ matchFieldName }}.",
     "PasswordDigit"           : "The field must contain at least one digit.",
     "PasswordLowerCase"       : "The field must contain at least one lowercase letter.",
+    "PasswordMe"              : "The password entered does not match the current one.",
     "PasswordSpecialCharacter": "The field must contain at least one special character.",
     "PasswordUpperCase"       : "The field must contain at least one uppercase letter.",
     "Pattern"                 : "The field {{ fieldname }} doesn\"t match the indicated pattern.",
-    "Required"                : "This field is required."
+    "Required"                : "This field is required.",
+    "UniqueEmail"             : "Email already exists.",
+    "UniqueUsername"          : "This username is already in use."
 }
