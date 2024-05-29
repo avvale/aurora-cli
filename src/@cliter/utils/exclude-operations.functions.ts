@@ -34,6 +34,16 @@ class ExcludeOperations
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'upsert', '__bounded_context_name__-upsert-__module_name__.service.spec.ts'],
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'upsert', '__bounded_context_name__-upsert-__module_name__.service.ts'],
         ]),
+        updateAndIncrement: new Set([
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'update', '__bounded_context_name__-update-and-increment-__module_names__.command-handler.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'update', '__bounded_context_name__-update-and-increment-__module_names__.command-handler.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'update', '__bounded_context_name__-update-and-increment-__module_names__.command.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'update', '__bounded_context_name__-update-and-increment-__module_names__.service.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'update', '__bounded_context_name__-update-and-increment-__module_names__.service.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'events', '__bounded_context_name__-updated-and-incremented-__module_name__.event.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'events', '__bounded_context_name__-updated-and-incremented-__module_names__.event-handler.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'events', '__bounded_context_name__-updated-and-incremented-__module_names__.event.ts'],
+        ]),
         count: new Set([
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'count'],
             ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'count', '__bounded_context_name__-count-__module_name__.query-handler.spec.ts'],

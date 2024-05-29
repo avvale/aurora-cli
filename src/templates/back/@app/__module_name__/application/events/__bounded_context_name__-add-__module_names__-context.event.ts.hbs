@@ -42,22 +42,22 @@
 ~}}
 {{/notInArray}}
 {{/notInArray}}
-{{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts'}}
-{{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{#isAllowPath schema 'updateAndIncrement' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'events' (sumStrings (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts') }}
+{{#isAllowPath schema 'updateAndIncrement' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'events' (sumStrings (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts') }}
 {{
     push importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'UpdatedAndIncremented' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
 ~}}
-{{/notInArray}}
-{{/notInArray}}
-{{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts'}}
-{{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{/isAllowPath}}
+{{/isAllowPath}}
+{{#isAllowPath schema 'updateAndIncrement' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'events' (sumStrings (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts') }}
+{{#isAllowPath schema 'updateAndIncrement' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'events' (sumStrings (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts') }}
 {{
     push importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'UpdatedAndIncremented' (toPascalCase schema.moduleNames) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
 ~}}
-{{/notInArray}}
-{{/notInArray}}
+{{/isAllowPath}}
+{{/isAllowPath}}
 {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
 {{
     push importsArray
@@ -107,9 +107,9 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
             }),
         );
     }
-    {{/notInArray}}
-    {{/notInArray}}
 
+    {{/notInArray}}
+    {{/notInArray}}
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-' (toKebabCase schema.moduleName) '.event.ts'}}
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-' (toKebabCase schema.moduleNames) '.event.ts'}}
     updated(): void
@@ -131,11 +131,11 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
             }),
         );
     }
-    {{/notInArray}}
-    {{/notInArray}}
 
-    {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts'}}
-    {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts'}}
+    {{/notInArray}}
+    {{/notInArray}}
+    {{#isAllowPath schema 'updateAndIncrement' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'events' (sumStrings (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleName) '.event.ts') }}
+    {{#isAllowPath schema 'updateAndIncrement' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'events' (sumStrings (toKebabCase schema.boundedContextName) '-updated-and-incremented-' (toKebabCase schema.moduleNames) '.event.ts') }}
     updatedAndIncremented(): void
     {
         this.apply(
@@ -155,9 +155,9 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
             }),
         );
     }
-    {{/notInArray}}
-    {{/notInArray}}
 
+    {{/isAllowPath}}
+    {{/isAllowPath}}
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleNames) '.event.ts'}}
     deleted(): void
