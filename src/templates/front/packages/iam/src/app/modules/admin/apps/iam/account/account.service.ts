@@ -10,7 +10,7 @@ import { IamRole, IamTag, IamTenant } from '../iam.types';
 import { RoleService } from '../role';
 import { TagService } from '../tag';
 import { TenantService } from '../tenant/tenant.service';
-import { findByIdWithRelationsQuery, getRelations } from './account.graphql';
+import { checkPasswordMeAccountQuery, checkUniqueEmailAccountQuery, checkUniqueUsernameAccountQuery, findByIdWithRelationsQuery, getRelations, updateMeAccountMutation } from './account.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -188,9 +188,9 @@ export class AccountService
             graphqlStatement = findByIdWithRelationsQuery,
             id = '',
             constraint = {},
+            headers = {},
             queryGetClients = {},
             constraintGetClients = {},
-            headers = {},
             scope,
         }: {
             graphqlStatement?: DocumentNode;
@@ -509,6 +509,135 @@ export class AccountService
                 variables: {
                     query,
                     constraint,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
+    // Queries additionalApis
+    checkPasswordMeAccount(
+        {
+            graphqlStatement = checkPasswordMeAccountQuery,
+            password = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            password?: string;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<boolean>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                iamCheckPasswordMeAccount: boolean;
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    password,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data.iamCheckPasswordMeAccount),
+            );
+    }
+
+    checkUniqueUsernameAccount(
+        {
+            graphqlStatement = checkUniqueUsernameAccountQuery,
+            username = null,
+            avoidUsernames = [],
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            username?: string;
+            avoidUsernames?: string[];
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<boolean>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                iamCheckUniqueUsernameAccount: boolean;
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    username,
+                    avoidUsernames,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data.iamCheckUniqueUsernameAccount),
+            );
+    }
+
+    checkUniqueEmailAccount(
+        {
+            graphqlStatement = checkUniqueEmailAccountQuery,
+            email = null,
+            avoidEmails = [],
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            email?: string;
+            avoidEmails?: string[];
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<boolean>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                iamCheckUniqueEmailAccount: boolean;
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    email,
+                    avoidEmails,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data.iamCheckUniqueEmailAccount),
+            );
+    }
+
+    // Mutation additionalApis
+    updateMeAccount<T>(
+        {
+            graphqlStatement = updateMeAccountMutation,
+            object = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            object?: IamUpdateAccountById;
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: object,
                 },
                 context: {
                     headers,

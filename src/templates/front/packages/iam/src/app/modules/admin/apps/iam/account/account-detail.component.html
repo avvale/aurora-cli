@@ -155,7 +155,29 @@
                             matInput
                             formControlName="email"
                             maxlength="128"
+                            (input)="$event.target.value = $event.target.value.toLowerCase()"
                         >
+                        @if (emailStatus() === 'PENDING')
+                        {
+                            <mat-icon matSuffix>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </mat-icon>
+                        }
+                        @else if (emailStatus() === 'VALID')
+                        {
+                            <mat-icon matSuffix>
+                                check
+                            </mat-icon>
+                        }
+                        @else
+                        {
+                            <mat-icon
+                                matSuffix
+                                fontSet="material-symbols-outlined"
+                            >
+                                exclamation
+                            </mat-icon>
+                        }
                         <mat-error>{{ formErrors?.email | async }}</mat-error>
                     </mat-form-field>
 
@@ -169,9 +191,31 @@
                             <input
                                 matInput
                                 formControlName="username"
-                                maxlength="120"
+                                maxlength="128"
+                                (input)="$event.target.value = $event.target.value.toLowerCase()"
                             >
-                            <mat-error>{{ formErrors['user.username'] | async }}</mat-error>
+                            @if (usernameStatus() === 'PENDING')
+                            {
+                                <mat-icon matSuffix>
+                                    <mat-spinner diameter="20"></mat-spinner>
+                                </mat-icon>
+                            }
+                            @else if (usernameStatus() === 'VALID')
+                            {
+                                <mat-icon matSuffix>
+                                    check
+                                </mat-icon>
+                            }
+                            @else
+                            {
+                                <mat-icon
+                                    matSuffix
+                                    fontSet="material-symbols-outlined"
+                                >
+                                    exclamation
+                                </mat-icon>
+                            }
+                            <mat-error>{{ formErrors['username'] | async }}</mat-error>
                         </mat-form-field>
                     }
 
@@ -280,7 +324,7 @@
                     @if (fg.get('type').value === iamAccountType.USER)
                     {
                         <ng-container formGroupName="user">
-                            <mat-toolbar class="p-0 col-12">
+                            <mat-toolbar class="p-0 col-12 border-b mb-2">
                                 <mat-icon
                                     svgIcon="mat_solid:how_to_reg"
                                     class="mr-3"
@@ -322,9 +366,31 @@
                             <input
                                 matInput
                                 formControlName="username"
-                                maxlength="120"
+                                maxlength="128"
+                                (input)="$event.target.value = $event.target.value.toLowerCase()"
                             >
-                            <mat-error>{{ formErrors['user.username'] | async }}</mat-error>
+                            @if (usernameStatus() === 'PENDING')
+                            {
+                                <mat-icon matSuffix>
+                                    <mat-spinner diameter="20"></mat-spinner>
+                                </mat-icon>
+                            }
+                            @else if (usernameStatus() === 'VALID')
+                            {
+                                <mat-icon matSuffix>
+                                    check
+                                </mat-icon>
+                            }
+                            @else
+                            {
+                                <mat-icon
+                                    matSuffix
+                                    fontSet="material-symbols-outlined"
+                                >
+                                    exclamation
+                                </mat-icon>
+                            }
+                            <mat-error>{{ formErrors['username'] | async }}</mat-error>
                         </mat-form-field>
                         <!-- / out of formGroupName user -->
                         <ng-container formGroupName="user">

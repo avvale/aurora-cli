@@ -53,7 +53,7 @@
     "TwoFactorAuthenticationSecret": "TwoFactorAuthenticationSecret",
     "Type": "Type",
     "User": "User",
-    "Username": "Username",
+    "Username": "Nombre de usuario",
     "Users": "Users",
     "error": {
         "101": "El nombre de usuario ya existe.",

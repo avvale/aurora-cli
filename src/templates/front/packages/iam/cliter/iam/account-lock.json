@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account-detail.component.html",
-            "integrity": "sha1:c0ce8aa40be7c8e5e482de6c6b77682abada2828"
+            "integrity": "sha1:bc09432a51337644790cb9b3581b4206c4013fe4"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account-detail.component.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account.graphql.ts",
-            "integrity": "sha1:1267c315448459cad65dc6420d868290cb867db7"
+            "integrity": "sha1:58214154f7aa8be73587b216b3fffcdc34a9726c"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account.resolvers.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/account.service.ts",
-            "integrity": "sha1:11df010e4b1ee7adc6dc7f9dc799c46399eeda73"
+            "integrity": "sha1:0eb415f25ac11aed98abec970aa642562f25df37"
         },
         {
             "path": "src/app/modules/admin/apps/iam/account/index.ts",

@@ -221,3 +221,49 @@ export const deleteMutation = gql`
         }
     }
 `;
+
+// Queries additionalApis
+export const checkPasswordMeAccountQuery = gql`
+    query IamCheckPasswordMeAccount (
+        $password: GraphQLString!
+    ) {
+        iamCheckPasswordMeAccount (
+            password: $password
+        )
+    }
+`;
+
+export const checkUniqueUsernameAccountQuery = gql`
+    query IamCheckUniqueUsernameAccount (
+        $username: GraphQLString!
+        $avoidUsernames: [GraphQLString]
+    ) {
+        iamCheckUniqueUsernameAccount (
+            username: $username
+            avoidUsernames: $avoidUsernames
+        )
+    }
+`;
+
+export const checkUniqueEmailAccountQuery = gql`
+    query IamCheckUniqueEmailAccount (
+        $email: GraphQLString!
+        $avoidEmails: [GraphQLString]
+    ) {
+        iamCheckUniqueEmailAccount (
+            email: $email
+            avoidEmails: $avoidEmails
+        )
+    }
+`;
+
+// Mutation additionalApis
+export const updateMeAccountMutation = gql`
+    mutation IamUpdateMeAccount (
+        $payload: IamUpdateMeAccountInput!
+    ) {
+        iamUpdateMeAccount (
+            payload: $payload
+        )
+    }
+`;

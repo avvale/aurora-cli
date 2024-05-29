@@ -8,6 +8,7 @@ export interface IamAccount {
     type: IamAccountType;
     code?: string;
     email: string;
+    username: string;
     isActive: boolean;
     clientId: string;
     client: OAuthClient;
@@ -277,7 +278,6 @@ export interface IamUser {
     avatar?: string;
     mobile?: string;
     langId?: string;
-    username: string;
     password: string;
     rememberToken?: string;
     meta?: any;
