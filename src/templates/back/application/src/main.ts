@@ -22,9 +22,6 @@ dayjs.extend(weekOfYear);
 dayjs.extend(isoWeek);
 dayjs.extend(dayOfYear);
 
-// hmr (hot module replacement) for development
-declare const module: any;
-
 async function bootstrap(): Promise<void>
 {
     const app = await NestFactory.create(AppModule, { logger: logger() });
@@ -60,13 +57,6 @@ async function bootstrap(): Promise<void>
 
     app.enableCors();
     await app.listen(configService.get<number>('APP_PORT'));
-
-    // hmr (hot module replacement) for development
-    if (module.hot)
-    {
-        module.hot.accept();
-        module.hot.dispose(() => app.close());
-    }
 
     if (env.NODE_ENV !== 'production')
     {

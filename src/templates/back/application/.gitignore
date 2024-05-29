@@ -1,4 +1,7 @@
+# envirionment files
 .env
+
+# key files
 *.key
 
 # compiled output
