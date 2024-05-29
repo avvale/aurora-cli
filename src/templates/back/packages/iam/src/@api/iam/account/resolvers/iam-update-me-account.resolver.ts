@@ -1,5 +1,5 @@
 import { IamUpdateMeAccountInput } from '@api/graphql';
-import { IamMeAccountUpdateHandler } from '@api/iam/account';
+import { IamUpdateMeAccountHandler } from '@api/iam/account';
 import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
 import { Auditing, AuditingMeta, CurrentAccount, Timezone } from '@aurorajs.dev/core';
@@ -7,13 +7,13 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.account.update')
-export class IamMeAccountUpdateResolver
+export class IamUpdateMeAccountResolver
 {
     constructor(
-        private readonly handler: IamMeAccountUpdateHandler,
+        private readonly handler: IamUpdateMeAccountHandler,
     ) {}
 
-    @Mutation('iamMeAccountUpdate')
+    @Mutation('iamUpdateMeAccount')
     async main(
         @CurrentAccount() account: IamAccountResponse,
         @Args('payload') payload: IamUpdateMeAccountInput,

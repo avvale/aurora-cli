@@ -1,4 +1,4 @@
-import { IamCreatedTagEvent, IamCreatedTagsEvent, IamDeletedTagEvent, IamDeletedTagsEvent, IamTag, IamUpdatedAndIncrementedTagEvent, IamUpdatedAndIncrementedTagsEvent, IamUpdatedTagEvent, IamUpdatedTagsEvent } from '@app/iam/tag';
+import { IamCreatedTagEvent, IamCreatedTagsEvent, IamDeletedTagEvent, IamDeletedTagsEvent, IamTag, IamUpdatedTagEvent, IamUpdatedTagsEvent } from '@app/iam/tag';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
@@ -43,26 +43,6 @@ export class IamAddTagsContextEvent extends AggregateRoot
             new IamUpdatedTagsEvent({
                 payload: this.aggregateRoots.map(tag =>
                     new IamUpdatedTagEvent({
-                        payload: {
-                            id: tag.id.value,
-                            name: tag.name.value,
-                            createdAt: tag.createdAt?.value,
-                            updatedAt: tag.updatedAt?.value,
-                            deletedAt: tag.deletedAt?.value,
-                        },
-                    }),
-                ),
-                cQMetadata: this.cQMetadata,
-            }),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new IamUpdatedAndIncrementedTagsEvent({
-                payload: this.aggregateRoots.map(tag =>
-                    new IamUpdatedAndIncrementedTagEvent({
                         payload: {
                             id: tag.id.value,
                             name: tag.name.value,

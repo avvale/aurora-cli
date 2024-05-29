@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamUpsertTagHandler } from '@api/iam/tag';
-import { iamMockTagData } from '@app/iam/tag';
+import { IamCheckUniqueUsernameAccountHandler } from './iam-check-unique-username-account.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpsertTagHandler', () =>
+describe('IamCheckUniqueUsernameAccountHandler', () =>
 {
-    let handler: IamUpsertTagHandler;
+    let handler: IamCheckUniqueUsernameAccountHandler;
     let queryBus: IQueryBus;
+    let commandBus: ICommandBus;
 
     beforeAll(async () =>
     {
@@ -15,7 +15,7 @@ describe('IamUpsertTagHandler', () =>
             imports: [
             ],
             providers: [
-                IamUpsertTagHandler,
+                IamCheckUniqueUsernameAccountHandler,
                 {
                     provide : IQueryBus,
                     useValue: {
@@ -32,26 +32,16 @@ describe('IamUpsertTagHandler', () =>
         })
             .compile();
 
-        handler = module.get<IamUpsertTagHandler>(IamUpsertTagHandler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
+        handler     = module.get<IamCheckUniqueUsernameAccountHandler>(IamCheckUniqueUsernameAccountHandler);
+        queryBus    = module.get<IQueryBus>(IQueryBus);
+        commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
     {
-        test('IamUpsertTagHandler should be defined', () =>
+        test('IamCheckUniqueUsernameAccountHandler should be defined', () =>
         {
             expect(handler).toBeDefined();
-        });
-
-        test('should return an tag upserted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTagData[0])));
-            expect(
-                await handler.main(
-                    iamMockTagData[0],
-                    'Europe/Madrid',
-                ))
-                .toBe(iamMockTagData[0]);
         });
     });
 });

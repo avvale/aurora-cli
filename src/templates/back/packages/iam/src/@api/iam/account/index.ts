@@ -41,9 +41,18 @@ export { IamDeleteAccountByIdResolver } from './resolvers/iam-delete-account-by-
 export { IamDeleteAccountsResolver } from './resolvers/iam-delete-accounts.resolver';
 
 // export additionalApis
-export { IamMeAccountUpdateController } from './controllers/iam-me-account-update.controller';
-export { IamMeAccountUpdateHandler } from './handlers/iam-me-account-update.handler';
-export { IamMeAccountUpdateResolver } from './resolvers/iam-me-account-update.resolver';
+export { IamUpdateMeAccountController } from './controllers/iam-update-me-account.controller';
+export { IamUpdateMeAccountHandler } from './handlers/iam-update-me-account.handler';
+export { IamUpdateMeAccountResolver } from './resolvers/iam-update-me-account.resolver';
+export { IamCheckPasswordMeAccountController } from './controllers/iam-check-password-me-account.controller';
+export { IamCheckPasswordMeAccountHandler } from './handlers/iam-check-password-me-account.handler';
+export { IamCheckPasswordMeAccountResolver } from './resolvers/iam-check-password-me-account.resolver';
+export { IamCheckUniqueUsernameAccountController } from './controllers/iam-check-unique-username-account.controller';
+export { IamCheckUniqueUsernameAccountHandler } from './handlers/iam-check-unique-username-account.handler';
+export { IamCheckUniqueUsernameAccountResolver } from './resolvers/iam-check-unique-username-account.resolver';
+export { IamCheckUniqueEmailAccountController } from './controllers/iam-check-unique-email-account.controller';
+export { IamCheckUniqueEmailAccountHandler } from './handlers/iam-check-unique-email-account.handler';
+export { IamCheckUniqueEmailAccountResolver } from './resolvers/iam-check-unique-email-account.resolver';
 
 // import controllers
 import { IamCreateAccountController } from './controllers/iam-create-account.controller';
@@ -84,15 +93,24 @@ import { IamDeleteAccountsHandler } from './handlers/iam-delete-accounts.handler
 // import seeder
 import { IamAccountSeeder } from './seeder/iam-account.seeder';
 
-// import additionalApis
-import { IamMeAccountUpdateController } from './controllers/iam-me-account-update.controller';
-import { IamMeAccountUpdateHandler } from './handlers/iam-me-account-update.handler';
-import { IamMeAccountUpdateResolver } from './resolvers/iam-me-account-update.resolver';
-
 // ---- customizations ----
 import { IamMeAccountController } from './controllers/iam-me-account.controller';
 import { IamMeAccountResolver } from './resolvers/iam-me-account.resolver';
 import { IamMeAccountHandler } from './handlers/iam-me-account.handler';
+
+// import additionalApis
+import { IamUpdateMeAccountController } from './controllers/iam-update-me-account.controller';
+import { IamUpdateMeAccountHandler } from './handlers/iam-update-me-account.handler';
+import { IamUpdateMeAccountResolver } from './resolvers/iam-update-me-account.resolver';
+import { IamCheckPasswordMeAccountController } from './controllers/iam-check-password-me-account.controller';
+import { IamCheckPasswordMeAccountHandler } from './handlers/iam-check-password-me-account.handler';
+import { IamCheckPasswordMeAccountResolver } from './resolvers/iam-check-password-me-account.resolver';
+import { IamCheckUniqueUsernameAccountController } from './controllers/iam-check-unique-username-account.controller';
+import { IamCheckUniqueUsernameAccountHandler } from './handlers/iam-check-unique-username-account.handler';
+import { IamCheckUniqueUsernameAccountResolver } from './resolvers/iam-check-unique-username-account.resolver';
+import { IamCheckUniqueEmailAccountController } from './controllers/iam-check-unique-email-account.controller';
+import { IamCheckUniqueEmailAccountHandler } from './handlers/iam-check-unique-email-account.handler';
+import { IamCheckUniqueEmailAccountResolver } from './resolvers/iam-check-unique-email-account.resolver';
 
 export const IamAccountApiControllers = [
     // ---- customizations ----
@@ -110,7 +128,10 @@ export const IamAccountApiControllers = [
     IamDeleteAccountsController,
 
     // additionalApis
-    IamMeAccountUpdateController,
+    IamUpdateMeAccountController,
+    IamCheckPasswordMeAccountController,
+    IamCheckUniqueUsernameAccountController,
+    IamCheckUniqueEmailAccountController,
 ];
 
 export const IamAccountApiResolvers = [
@@ -129,7 +150,10 @@ export const IamAccountApiResolvers = [
     IamDeleteAccountsResolver,
 
     // additionalApis
-    IamMeAccountUpdateResolver,
+    IamUpdateMeAccountResolver,
+    IamCheckPasswordMeAccountResolver,
+    IamCheckUniqueUsernameAccountResolver,
+    IamCheckUniqueEmailAccountResolver,
 ];
 
 export const IamAccountApiHandlers = [
@@ -148,7 +172,10 @@ export const IamAccountApiHandlers = [
     IamDeleteAccountsHandler,
 
     // additionalApis
-    IamMeAccountUpdateHandler,
+    IamUpdateMeAccountHandler,
+    IamCheckPasswordMeAccountHandler,
+    IamCheckUniqueUsernameAccountHandler,
+    IamCheckUniqueEmailAccountHandler,
 ];
 
 export const IamAccountApiServices = [

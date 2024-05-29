@@ -71,10 +71,6 @@ type Mutation
         constraint: QueryStatement
     ): [IamTag]!
 
-    iamUpsertTag(
-        payload: IamUpdateTagByIdInput!
-    ): IamTag
-
     iamDeleteTagById(
         id: ID!
         constraint: QueryStatement

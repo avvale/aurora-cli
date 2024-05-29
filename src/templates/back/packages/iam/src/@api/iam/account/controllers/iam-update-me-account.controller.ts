@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { IamAccountResponse } from '@app/iam/account';
 import { IamUpdateMeAccountDto } from '../dto';
-import { IamMeAccountUpdateHandler } from '../handlers/iam-me-account-update.handler';
+import { IamUpdateMeAccountHandler } from '../handlers/iam-update-me-account.handler';
 import { Auth } from '@aurora/decorators';
 import { Auditing, AuditingMeta, CurrentAccount, Timezone } from '@aurorajs.dev/core';
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] account')
-@Controller('iam/account/update/me')
+@Controller('iam/account/update-me')
 @Auth('iam.account.update')
-export class IamMeAccountUpdateController
+export class IamUpdateMeAccountController
 {
     constructor(
-        private readonly handler: IamMeAccountUpdateHandler,
+        private readonly handler: IamUpdateMeAccountHandler,
     ) {}
 
     @Post()

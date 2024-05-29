@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamMeAccountUpdateHandler } from './iam-me-account-update.handler';
+import { IamUpdateMeAccountHandler } from './iam-update-me-account.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamMeAccountUpdateHandler', () =>
+describe('IamUpdateMeAccountHandler', () =>
 {
-    let handler: IamMeAccountUpdateHandler;
+    let handler: IamUpdateMeAccountHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
@@ -15,7 +15,7 @@ describe('IamMeAccountUpdateHandler', () =>
             imports: [
             ],
             providers: [
-                IamMeAccountUpdateHandler,
+                IamUpdateMeAccountHandler,
                 {
                     provide : IQueryBus,
                     useValue: {
@@ -32,14 +32,14 @@ describe('IamMeAccountUpdateHandler', () =>
         })
             .compile();
 
-        handler     = module.get<IamMeAccountUpdateHandler>(IamMeAccountUpdateHandler);
+        handler     = module.get<IamUpdateMeAccountHandler>(IamUpdateMeAccountHandler);
         queryBus    = module.get<IQueryBus>(IQueryBus);
         commandBus  = module.get<ICommandBus>(ICommandBus);
     });
 
     describe('main', () =>
     {
-        test('IamMeAccountUpdateHandler should be defined', () =>
+        test('IamUpdateMeAccountHandler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });

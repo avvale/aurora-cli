@@ -162,8 +162,17 @@ aggregateProperties:
     type: timestamp
     nullable: true
 additionalApis:
-  - path: iam/account/update/me
+  - path: iam/account/update-me
     resolverType: mutation
+    httpMethod: post
+  - path: iam/account/check-password-me
+    resolverType: query
+    httpMethod: post
+  - path: iam/account/check-unique-username
+    resolverType: query
+    httpMethod: post
+  - path: iam/account/check-unique-email
+    resolverType: query
     httpMethod: post
 excludedFiles:
   - src/@api/iam/account/resolvers/iam-create-accounts.resolver.ts

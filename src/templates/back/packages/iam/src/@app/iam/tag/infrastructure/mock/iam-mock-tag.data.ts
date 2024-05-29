@@ -3,83 +3,83 @@
 
 export const iamMockTagData = [
     {
-        id: 'bb6a0ac6-cd50-44fd-9641-c17c4397098f',
-        name: 'Practical Steel Chair',
+        id: '7f353853-cb8e-4560-80c6-ff96f9d617c6',
+        name: 'Small Frozen Pizza',
     },
     {
-        id: 'ae316de6-1ebb-4357-8334-a8a4fbe8d05b',
-        name: 'Small Metal Bike',
+        id: 'facd4db8-2d78-4cf4-bc34-5087b436971f',
+        name: 'Rustic Frozen Fish',
     },
     {
-        id: '08472ee1-427a-49d6-9a1a-51a9bbd4d2ea',
-        name: 'Awesome Wooden Chicken',
+        id: 'd80c5a92-fcef-4a79-88e1-f0da6d60f51d',
+        name: 'Fantastic Frozen Salad',
     },
     {
-        id: '169f0053-e381-4c1f-b73e-77dee94cfe0e',
-        name: 'Rustic Plastic Fish',
+        id: '5a9843a6-2df4-400a-9578-72708e7b97c3',
+        name: 'Small Granite Pizza',
     },
     {
-        id: 'faf8fba5-46a5-4283-bd6e-d2041dbf52ba',
-        name: 'Handmade Soft Fish',
+        id: 'de546afd-03b6-4e9f-9c90-dd8c65e4c342',
+        name: 'Small Plastic Ball',
     },
     {
-        id: '74f34291-095f-45f5-b0b4-6958d3474066',
-        name: 'Tasty Frozen Pizza',
+        id: 'abc02915-d616-460e-a4db-5012d4a01385',
+        name: 'Rustic Wooden Ball',
     },
     {
-        id: 'fdd1bce1-c432-414d-bae6-8b1a03413367',
-        name: 'Handcrafted Concrete Table',
+        id: '03a13a1a-aa7d-4fa7-823f-580a59333294',
+        name: 'Practical Cotton Pants',
     },
     {
-        id: '09ca2538-a081-4860-9ead-a0ed8803be8a',
-        name: 'Handmade Wooden Tuna',
+        id: '557d5a02-d346-4de5-8f4a-515d9960c9a8',
+        name: 'Generic Fresh Computer',
     },
     {
-        id: '7f099dfb-cf6c-484b-829d-a9d6a9d60caf',
-        name: 'Sleek Steel Towels',
+        id: 'b0d8dacd-31db-47ed-930c-2e40069a5d31',
+        name: 'Practical Plastic Chips',
     },
     {
-        id: '1eb98c04-d333-46be-8ed6-7dea02d3adf3',
-        name: 'Refined Frozen Pizza',
+        id: 'b675b317-c6d8-4620-ac9f-042b460cdc29',
+        name: 'Small Cotton Bike',
     },
     {
-        id: '02762b2d-df57-48a9-a208-5e477c8e507b',
-        name: 'Unbranded Fresh Bacon',
+        id: '6a745e00-1f2a-441b-be8a-fbb761752b12',
+        name: 'Small Cotton Salad',
     },
     {
-        id: 'd17656be-c789-406c-8dcd-23867b011592',
-        name: 'Rustic Soft Computer',
+        id: 'f5686707-5e2d-42b2-9362-a30393c1a767',
+        name: 'Fantastic Soft Keyboard',
     },
     {
-        id: '95826f37-b13b-4b80-89f4-1053105764b5',
-        name: 'Small Fresh Chicken',
+        id: '27ce9be4-b0b6-448e-8177-b653220abfa1',
+        name: 'Fantastic Granite Salad',
     },
     {
-        id: '7af0b7e6-467d-48f6-989f-202f153169af',
-        name: 'Licensed Rubber Table',
+        id: '37d00587-26bb-4175-b23c-33db23f59a55',
+        name: 'Awesome Granite Shoes',
     },
     {
-        id: 'f0923981-bb5f-4f53-a2da-e59e69a9a470',
-        name: 'Ergonomic Fresh Bike',
+        id: '794c2be7-ae96-43bd-a599-ae14a1509caf',
+        name: 'Intelligent Concrete Fish',
     },
     {
-        id: '8265f9b4-015b-4262-a4ee-339fab8aaa6e',
-        name: 'Fantastic Plastic Pants',
+        id: '152c58c2-2a78-4152-90dd-d64e5045a185',
+        name: 'Small Frozen Tuna',
     },
     {
-        id: '7b4d4040-d75e-48a7-85dd-75527d5420b6',
-        name: 'Small Steel Salad',
+        id: '95ae528f-c582-470b-b5f9-bd54bcda818f',
+        name: 'Practical Metal Pants',
     },
     {
-        id: '9ab1301e-5380-4ece-8eb2-0ba0547b7d2e',
-        name: 'Ergonomic Fresh Chips',
+        id: '0284ee78-50c5-438f-a531-a8941889be77',
+        name: 'Sleek Concrete Salad',
     },
     {
-        id: '392feab3-ffe2-4fd0-ad11-475f8ac149c4',
-        name: 'Generic Frozen Chair',
+        id: '45b3b2da-5d8a-42ef-9ab3-7a2a650fe729',
+        name: 'Handcrafted Plastic Chips',
     },
     {
-        id: '81d6c607-f0c9-46d2-86a7-ecd6c494eba3',
-        name: 'Unbranded Plastic Chair',
+        id: '09a61c61-277e-4ecc-9b26-725f8fd6f0a5',
+        name: 'Rustic Steel Table',
     },
 ];
