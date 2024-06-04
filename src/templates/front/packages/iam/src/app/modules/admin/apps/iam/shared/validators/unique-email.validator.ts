@@ -11,6 +11,8 @@ export function uniqueEmailValidator(
         control: AbstractControl,
     ): Observable<ValidationErrors | null> =>
     {
+        if (!control.value) return of(null);
+
         return accountService
             .checkUniqueEmailAccount({
                 email: control.value.toLowerCase(),

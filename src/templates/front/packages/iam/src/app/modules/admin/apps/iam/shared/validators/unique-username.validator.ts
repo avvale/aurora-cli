@@ -11,6 +11,8 @@ export function uniqueUsernameValidator(
         control: AbstractControl,
     ): Observable<ValidationErrors | null> =>
     {
+        if (!control.value) return of(null);
+
         return accountService
             .checkUniqueUsernameAccount({
                 username: control.value.toLowerCase(),

@@ -10,6 +10,8 @@ export function checkPasswordValidator(
         control: AbstractControl,
     ): Observable<ValidationErrors | null> =>
     {
+        if (!control.value) return of(null);
+
         return accountService
             .checkPasswordMeAccount({
                 password: control.value,
