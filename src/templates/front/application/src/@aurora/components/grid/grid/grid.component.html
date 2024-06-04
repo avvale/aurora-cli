@@ -566,7 +566,9 @@
                     class="mat-cell"
                     [attr.colspan]="displayedColumns?.length"
                 >
-                    <p class="p-2 text-base">{{ 'noData' | gridTranslate | async }}</p>
+                    <p class="p-2 text-base">
+                        {{ 'noData' | gridTranslate:'message':gridId | async }}
+                    </p>
                 </td>
             </tr>
 

@@ -6,7 +6,7 @@ import { GridTranslationsService } from '../grid-translations/grid-translations.
 export class PaginatorIntlService extends MatPaginatorIntl
 {
     ofLabel: string;
-    gridId: string = 'paginatorGrid';
+    paginatorScope: string = 'defaultGridScope';
 
     constructor(
         private gridTranslationsService: GridTranslationsService,
@@ -19,15 +19,50 @@ export class PaginatorIntlService extends MatPaginatorIntl
     init(): void
     {
         this.gridTranslationsService
-            .getPaginatorMessages(this.gridId)
-            .subscribe(paginatorMessages =>
+            .getPaginatorMessage('firstPageLabel', this.paginatorScope)
+            .subscribe(firstPageLabel =>
             {
-                this.firstPageLabel = paginatorMessages.firstPageLabel;
-                this.itemsPerPageLabel = paginatorMessages.itemsPerPageLabel;
-                this.lastPageLabel = paginatorMessages.lastPageLabel;
-                this.nextPageLabel = paginatorMessages.nextPageLabel;
-                this.previousPageLabel = paginatorMessages.previousPageLabel;
-                this.ofLabel = paginatorMessages.ofLabel;
+                this.firstPageLabel = firstPageLabel;
+                this.changes.next();
+            });
+
+        this.gridTranslationsService
+            .getPaginatorMessage('itemsPerPageLabel', this.paginatorScope)
+            .subscribe(itemsPerPageLabel =>
+            {
+                this.itemsPerPageLabel = itemsPerPageLabel;
+                this.changes.next();
+            });
+
+        this.gridTranslationsService
+            .getPaginatorMessage('lastPageLabel', this.paginatorScope)
+            .subscribe(lastPageLabel =>
+            {
+                this.lastPageLabel = lastPageLabel;
+                this.changes.next();
+            });
+
+        this.gridTranslationsService
+            .getPaginatorMessage('nextPageLabel', this.paginatorScope)
+            .subscribe(nextPageLabel =>
+            {
+                this.nextPageLabel = nextPageLabel;
+                this.changes.next();
+            });
+
+        this.gridTranslationsService
+            .getPaginatorMessage('previousPageLabel', this.paginatorScope)
+            .subscribe(previousPageLabel =>
+            {
+                this.previousPageLabel = previousPageLabel;
+                this.changes.next();
+            });
+
+        this.gridTranslationsService
+            .getPaginatorMessage('ofLabel', this.paginatorScope)
+            .subscribe(ofLabel =>
+            {
+                this.ofLabel = ofLabel;
                 this.changes.next();
             });
     }

@@ -15,6 +15,6 @@
     "PasswordUpperCase"       : "El campo debe contener al menos una letra mayúscula.",
     "Pattern"                 : "El valor del campo no coincide con el patrón indicado.",
     "Required"                : "Este campo es requerido.",
-    "UniqueEmail"             : "El email ya existe.",
+    "UniqueEmail"             : "El email introducido ya existe.",
     "UniqueUsername"          : "El nombre de usuario ya está en uso."
 }

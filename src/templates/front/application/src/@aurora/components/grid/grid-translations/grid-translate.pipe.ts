@@ -1,7 +1,7 @@
 import { OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
 import { GridTranslationsService } from './grid-translations.service';
-import { GridMessages } from '../grid.types';
+import { GridMessages, GridOperatorMessages, GridActionMenuMessages } from '../grid.types';
 
 /**
  * Check which action to perform depending on whether or not the language exists.
@@ -19,28 +19,29 @@ export class GridTranslatePipe implements PipeTransform, OnDestroy
     )
     {}
 
-    transform(key: string, type: 'column' | 'message' | 'action' = 'message', scope = 'grid'): Observable<string>
+    transform(key: string, type: 'column' | 'message' | 'operator' | 'action' = 'message', scope = 'grid'): Observable<string>
     {
-        if (type === 'message')
+        switch (type)
         {
-            return this.gridTranslationsService
-                .getMessage(key as keyof GridMessages, scope)
-                .pipe(takeUntil(this._unsubscribeAll));
-        }
-        else if (type === 'column')
-        {
-            return this.gridTranslationsService
-                .getColumnMessage(scope, key)
-                .pipe(takeUntil(this._unsubscribeAll));
-        }
-        else
-        {
-            return this.gridTranslationsService
-                .getActionsMenuMessages(scope)
-                .pipe(
-                    takeUntil(this._unsubscribeAll),
-                    map(actionsMenuMessages => actionsMenuMessages[key]),
-                );
+            case 'message':
+                return this.gridTranslationsService
+                    .getMessage(key as keyof GridMessages, scope)
+                    .pipe(takeUntil(this._unsubscribeAll));
+
+            case 'operator':
+                return this.gridTranslationsService
+                    .getOperatorMessage(key as keyof GridOperatorMessages, scope)
+                    .pipe(takeUntil(this._unsubscribeAll));
+
+            case 'column':
+                return this.gridTranslationsService
+                    .getColumnMessage(scope, key)
+                    .pipe(takeUntil(this._unsubscribeAll));
+
+            case 'action':
+                return this.gridTranslationsService
+                    .getActionMenuMessage(key as keyof GridActionMenuMessages, scope)
+                    .pipe(takeUntil(this._unsubscribeAll));
         }
     }
 

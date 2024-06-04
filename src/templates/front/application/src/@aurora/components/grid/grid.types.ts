@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export interface ColumnConfig
 {
     type: ColumnDataType;
+    searchComponent?: SearchComponentType;
     field?: string;
     searchableField?: string;
     translation?: string;
@@ -22,6 +23,7 @@ export interface ColumnConfig
     transform?: (row: any) => any;
     translationIconColor?: (row: any) => string;
     fieldValues?: () => { key: string; value: string; }[];
+    meta?: any;
 }
 
 export interface ColumnConfigAction extends Action
@@ -54,11 +56,12 @@ export enum ColumnDataType
     NUMBER = 'NUMBER',
     STRING = 'STRING',
     TRANSLATIONS_MENU = 'TRANSLATIONS_MENU',
+    UUID = 'UUID',
 }
 
 export interface ColumnFilterStorage
 {
-    id: string; // id of grid where apply filter
+    scope: string; // id of grid where apply filter
     columnFilters: GridColumnFilter[];
 }
 
@@ -75,8 +78,6 @@ export interface ExportGridState
     format: ExportFormat;
 }
 
-export type FilterColumnDataType = ColumnDataType.STRING | ColumnDataType.NUMBER | ColumnDataType.DATE | ColumnDataType.ENUM | ColumnDataType.BOOLEAN | ColumnDataType.ARRAY;
-
 export interface FilterDialogResponse
 {
    columnFilters: GridColumnFilter[];
@@ -86,22 +87,24 @@ export type FilterOperator = Operator.eq | Operator.ne | Operator.startsWith | O
 
 export interface FilterCriteriaOperator
 {
-   operator   : FilterOperator;
-   translation: string;
-   types      : FilterColumnDataType[];
+   operator            : FilterOperator;
+   translation         : string;
+   searchComponentTypes: SearchComponentType[];
 }
 
-export interface GridActionsMenuMessages
+export interface GridActionMenuMessages
 {
-    [key: string]: string;
+    edit?: BehaviorSubject<string>;
+    delete?: BehaviorSubject<string>;
 }
 
 export interface GridColumnFilter
 {
     id: string;
     field: string;
-    searchableField?: string;
     type: ColumnDataType;
+    searchableField?: string;
+    searchComponent?: SearchComponentType;
     operator: FilterOperator;
     value: string | number;
 }
@@ -128,46 +131,49 @@ export interface GridData<T = any>
 
 export interface GridMessages
 {
-    actions: BehaviorSubject<string>;
-    AND: BehaviorSubject<string>;
-    clearFilters: BehaviorSubject<string>;
-    clickAndDragInfo: BehaviorSubject<string>;
-    columns: BehaviorSubject<string>;
-    field: BehaviorSubject<string>;
-    filter: BehaviorSubject<string>;
-    noData: BehaviorSubject<string>;
-    operator: BehaviorSubject<string>;
-    OR: BehaviorSubject<string>;
-    pleaseSelectField: BehaviorSubject<string>;
-    resetColumnsConfig: BehaviorSubject<string>;
-    search: BehaviorSubject<string>;
-    translations: BehaviorSubject<string>;
-    value: BehaviorSubject<string>;
+    actions?: BehaviorSubject<string>;
+    AND?: BehaviorSubject<string>;
+    clearFilters?: BehaviorSubject<string>;
+    clickAndDragInfo?: BehaviorSubject<string>;
+    columns?: BehaviorSubject<string>;
+    field?: BehaviorSubject<string>;
+    filter?: BehaviorSubject<string>;
+    find?: BehaviorSubject<string>;
+    noData?: BehaviorSubject<string>;
+    noResultsFound?: BehaviorSubject<string>;
+    operator?: BehaviorSubject<string>;
+    OR?: BehaviorSubject<string>;
+    pleaseSelectField?: BehaviorSubject<string>;
+    resetColumnsConfig?: BehaviorSubject<string>;
+    search?: BehaviorSubject<string>;
+    selectedOptions?: BehaviorSubject<string>;
+    translations?: BehaviorSubject<string>;
+    value?: BehaviorSubject<string>;
 }
 
-export interface GridOperatorsMessages
+export interface GridOperatorMessages
 {
-    contains: string;
-    containsAny: string;
-    endsWith: string;
-    equals: string;
-    greaterThan: string;
-    greaterThanEqual: string;
-    lessThan: string;
-    lessThanEqual: string;
-    mustContain: string;
-    notEquals: string;
-    startsWith: string;
+    contains?: BehaviorSubject<string>;
+    containsAny?: BehaviorSubject<string>;
+    endsWith?: BehaviorSubject<string>;
+    equals?: BehaviorSubject<string>;
+    greaterThan?: BehaviorSubject<string>;
+    greaterThanEqual?: BehaviorSubject<string>;
+    lessThan?: BehaviorSubject<string>;
+    lessThanEqual?: BehaviorSubject<string>;
+    mustContain?: BehaviorSubject<string>;
+    notEquals?: BehaviorSubject<string>;
+    startsWith?: BehaviorSubject<string>;
 }
 
 export interface GridPaginatorMessages
 {
-    firstPageLabel: string;
-    itemsPerPageLabel: string;
-    lastPageLabel: string;
-    nextPageLabel: string;
-    ofLabel: string;
-    previousPageLabel: string;
+    firstPageLabel?: BehaviorSubject<string>;
+    itemsPerPageLabel?: BehaviorSubject<string>;
+    lastPageLabel?: BehaviorSubject<string>;
+    nextPageLabel?: BehaviorSubject<string>;
+    ofLabel?: BehaviorSubject<string>;
+    previousPageLabel?: BehaviorSubject<string>;
 }
 
 export interface GridPageState
@@ -196,4 +202,18 @@ export interface GridState
     search?: GridSearchState;
     sort?: GridSortState;
     page?: GridPageState;
+}
+
+export enum SearchComponentType
+{
+    ASYNC_MULTIPLE_SELECT = 'ASYNC_MULTIPLE_SELECT',
+    ASYNC_SELECT = 'ASYNC_SELECT',
+    CHECKBOX = 'CHECKBOX',
+    CHIPS = 'CHIPS',
+    DATEPICKER = 'DATEPICKER',
+    MULTIPLE_SELECT = 'MULTIPLE_SELECT',
+    NUMBER = 'NUMBER',
+    SELECT = 'SELECT',
+    TEXT = 'TEXT',
+    TIMEPICKER = 'TIMEPICKER',
 }

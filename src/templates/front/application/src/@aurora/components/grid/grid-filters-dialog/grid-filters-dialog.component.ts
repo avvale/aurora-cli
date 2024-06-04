@@ -1,24 +1,29 @@
-import { AsyncPipe, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, OnInit, QueryList } from '@angular/core';
+import { AsyncPipe, LowerCasePipe, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, QueryList, WritableSignal } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { GridFiltersDialogValueTemplateDirective, Operator, Utils } from '@aurora';
+import { GridFiltersDialogValueTemplateDirective, Operator, Utils, getAsyncMatSelectSearchColumnConfigFunction } from '@aurora';
 import { GetPipe } from '@aurora/pipes/get.pipe';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Observable, map, startWith } from 'rxjs';
+import { MatSelectAddSelectedDirective, ScrollEndDirective } from '../../../directives';
+import { GetAsyncMatSelectSearchColumnConfig } from '../../async-mat-select-search';
 import { DatepickerSqlFormatDirective } from '../../datepicker-sql-format';
 import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
 import { GridTranslationsService } from '../grid-translations/grid-translations.service';
-import { ColumnConfig, ColumnDataType, FilterCriteriaOperator, FilterDialogResponse, GridColumnFilter, GridOperatorsMessages } from '../grid.types';
+import { ColumnConfig, ColumnDataType, FilterCriteriaOperator, FilterDialogResponse, GridColumnFilter, SearchComponentType } from '../grid.types';
+import { mapColumnDataToSearchComponentType } from './functions/map-column-data-to-search-component-type.function';
 import { FilterOperatorsPipe } from './pipes/filter-operators.pipe';
-import { GetContactOperatorPipe } from './pipes/get-concat-operator.pipe';
+import { GetConcatOperatorPipe } from './pipes/get-concat-operator.pipe';
 import { GetGridFilterValue } from './pipes/get-grid-filter-value.pipe';
 import { GetGridFiltersValue } from './pipes/get-grid-filter-values.pipe';
 import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
@@ -30,10 +35,12 @@ import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        AsyncPipe, DatepickerSqlFormatDirective, FilterOperatorsPipe, GetContactOperatorPipe, GetGridFiltersValue, GetGridFilterValue, GetPipe,
-        GridTranslatePipe, HasRenderOutboxPipe, MatAutocompleteModule, MatButtonModule, MatCheckboxModule, MatDatepickerModule,
-        MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, NgForOf, NgIf, NgSwitch, NgSwitchCase,
-        NgTemplateOutlet, ReactiveFormsModule,
+        AsyncPipe, DatepickerSqlFormatDirective, FilterOperatorsPipe, GetAsyncMatSelectSearchColumnConfig,
+        GetConcatOperatorPipe, GetGridFiltersValue, GetGridFilterValue, GetPipe,
+        GridTranslatePipe, HasRenderOutboxPipe, LowerCasePipe, MatAutocompleteModule, MatButtonModule,MatCheckboxModule,
+        MatDatepickerModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatIconModule,
+        MatInputModule, MatSelectAddSelectedDirective, MatSelectModule, NgTemplateOutlet,
+        NgxMatSelectSearchModule, ReactiveFormsModule, ScrollEndDirective,
     ],
 })
 export class GridFiltersDialogComponent implements OnInit
@@ -46,12 +53,17 @@ export class GridFiltersDialogComponent implements OnInit
     searchFieldNameControl = new FormControl();
     // columns filtered by autocomplete
     filteredColumnsConfig: Observable<ColumnConfig[]>;
-    // operator translations
-    operatorsMessages: Observable<GridOperatorsMessages>;
     // data type can be a column
     columnDataType = ColumnDataType;
+    // search component can be a column
+    searchComponentType = SearchComponentType;
     // form filters components
     containerForm: FormGroup;
+    // mapper to change column data to search component type
+    mapColumnDataToSearchComponentType = mapColumnDataToSearchComponentType;
+    // get async mat select search column config
+    getAsyncMatSelectSearchColumnConfigFunction = getAsyncMatSelectSearchColumnConfigFunction;
+
     // create getter to form array
     get formColumnFilter(): FormArray
     {
@@ -86,59 +98,95 @@ export class GridFiltersDialogComponent implements OnInit
     // string criteria information
     filterOperators: FilterCriteriaOperator[] = [
         {
-            operator   : Operator.substring,
-            translation: 'contains',
-            types      : [ColumnDataType.STRING],
+            operator            : Operator.substring,
+            translation         : 'contains',
+            searchComponentTypes: [
+                SearchComponentType.TEXT,
+            ],
         },
         {
-            operator   : Operator.overlap,
-            translation: 'containsAny',
-            types      : [ColumnDataType.ARRAY],
+            operator            : Operator.overlap,
+            translation         : 'containsAny',
+            searchComponentTypes: [
+                SearchComponentType.ASYNC_MULTIPLE_SELECT,
+                SearchComponentType.MULTIPLE_SELECT,
+            ],
         },
         {
-            operator   : Operator.contains,
-            translation: 'mustContain',
-            types      : [ColumnDataType.ARRAY],
+            operator            : Operator.contains,
+            translation         : 'mustContain',
+            searchComponentTypes: [
+                SearchComponentType.ASYNC_MULTIPLE_SELECT,
+                SearchComponentType.MULTIPLE_SELECT,
+            ],
         },
         {
-            operator   : Operator.endsWith,
-            translation: 'endsWith',
-            types      : [ColumnDataType.STRING],
+            operator            : Operator.endsWith,
+            translation         : 'endsWith',
+            searchComponentTypes: [
+                SearchComponentType.TEXT,
+            ],
         },
         {
-            operator   : Operator.eq,
-            translation: 'equals',
-            types      : [ColumnDataType.STRING, ColumnDataType.DATE, ColumnDataType.NUMBER, ColumnDataType.ENUM, ColumnDataType.BOOLEAN],
+            operator            : Operator.eq,
+            translation         : 'equals',
+            searchComponentTypes: [
+                SearchComponentType.TEXT,
+                SearchComponentType.DATEPICKER,
+                SearchComponentType.NUMBER,
+                SearchComponentType.SELECT,
+                SearchComponentType.CHECKBOX,
+            ],
         },
         {
-            operator   : Operator.gt,
-            translation: 'greaterThan',
-            types      : [ColumnDataType.DATE, ColumnDataType.NUMBER],
+            operator            : Operator.gt,
+            translation         : 'greaterThan',
+            searchComponentTypes: [
+                SearchComponentType.DATEPICKER,
+                SearchComponentType.NUMBER,
+            ],
         },
         {
-            operator   : Operator.gte,
-            translation: 'greaterThanEqual',
-            types      : [ColumnDataType.DATE, ColumnDataType.NUMBER],
+            operator            : Operator.gte,
+            translation         : 'greaterThanEqual',
+            searchComponentTypes: [
+                SearchComponentType.DATEPICKER,
+                SearchComponentType.NUMBER,
+            ],
         },
         {
-            operator   : Operator.lt,
-            translation: 'lessThan',
-            types      : [ColumnDataType.DATE, ColumnDataType.NUMBER],
+            operator            : Operator.lt,
+            translation         : 'lessThan',
+            searchComponentTypes: [
+                SearchComponentType.DATEPICKER,
+                SearchComponentType.NUMBER,
+            ],
         },
         {
-            operator   : Operator.lte,
-            translation: 'lessThanEqual',
-            types      : [ColumnDataType.DATE, ColumnDataType.NUMBER],
+            operator            : Operator.lte,
+            translation         : 'lessThanEqual',
+            searchComponentTypes: [
+                SearchComponentType.DATEPICKER,
+                SearchComponentType.NUMBER,
+            ],
         },
         {
-            operator   : Operator.ne,
-            translation: 'notEquals',
-            types      : [ColumnDataType.STRING, ColumnDataType.DATE, ColumnDataType.NUMBER, ColumnDataType.ENUM, ColumnDataType.BOOLEAN],
+            operator            : Operator.ne,
+            translation         : 'notEquals',
+            searchComponentTypes: [
+                SearchComponentType.TEXT,
+                SearchComponentType.DATEPICKER,
+                SearchComponentType.NUMBER,
+                SearchComponentType.SELECT,
+                SearchComponentType.CHECKBOX,
+            ],
         },
         {
-            operator   : Operator.startsWith,
-            translation: 'startsWith',
-            types      : [ColumnDataType.STRING],
+            operator            : Operator.startsWith,
+            translation         : 'startsWith',
+            searchComponentTypes: [
+                SearchComponentType.TEXT,
+            ],
         },
     ];
 
@@ -164,9 +212,6 @@ export class GridFiltersDialogComponent implements OnInit
                 map(value => this._filter(value)),
             );
 
-        // set operator translations
-        this.operatorsMessages = this.gridTranslationsService.getOperatorsMessages(this.gridId);
-
         // add active filters
         this.generatePreviousDataForm(this.data.columnFilters);
 
@@ -180,14 +225,6 @@ export class GridFiltersDialogComponent implements OnInit
                     ? this.searchFieldNameControl.disable()
                     : this.searchFieldNameControl.enable();
             });
-    }
-
-    // manage response data after close dialog
-    handleCloseDialog(): FilterDialogResponse
-    {
-        return {
-            columnFilters: this.formColumnFilter.value,
-        };
     }
 
     private _filter(value: string): ColumnConfig[]
@@ -208,9 +245,7 @@ export class GridFiltersDialogComponent implements OnInit
         });
     }
 
-    /**
-     * Function to manage filter column autocomplete is item selected
-     */
+    // function to manage filter column autocomplete is item selected
     handleFieldSelectionChange(event: MatAutocompleteSelectedEvent): void
     {
         // value is reset instantly to avoid having an [object Object] in the field, as well as allowing for a new pick
@@ -221,13 +256,14 @@ export class GridFiltersDialogComponent implements OnInit
             this.sortFiltersArray(this.arrayColumnFilters, event.option.value.field),
         );
 
-        // control insert in first position
+        // control insert in first position, shifts the rest of the components
         this.formColumnFilter.insert(0,
             this.fb.group({
                 id             : this.fb.control(Utils.uuid()),
                 field          : this.fb.control(event.option.value.field),
-                searchableField: this.fb.control(event.option.value.searchableField),
                 type           : this.fb.control(event.option.value.type),
+                searchableField: this.fb.control(event.option.value.searchableField),
+                searchComponent: this.fb.control(event.option.value.searchComponent || mapColumnDataToSearchComponentType(event.option.value.type)),
                 operator       : this.fb.control(null, [Validators.required]),
                 value          : this.fb.control('', [Validators.required]),
             }),
@@ -245,8 +281,9 @@ export class GridFiltersDialogComponent implements OnInit
                     this.fb.group({
                         id             : this.fb.control(gridColumnFilter.id),
                         field          : this.fb.control(gridColumnFilter.field),
-                        searchableField: this.fb.control(gridColumnFilter.searchableField),
                         type           : this.fb.control(gridColumnFilter.type),
+                        searchableField: this.fb.control(gridColumnFilter.searchableField),
+                        searchComponent: this.fb.control(gridColumnFilter.searchComponent),
                         operator       : this.fb.control(gridColumnFilter.operator, [Validators.required]),
                         value          : this.fb.control(gridColumnFilter.value, [Validators.required]),
                     }),
@@ -274,10 +311,38 @@ export class GridFiltersDialogComponent implements OnInit
         this.formColumnFilter.removeAt(index);
     }
 
-    handleRemoveFilters(): FilterDialogResponse
+    resetFilters(): void
+    {
+        for (const columnConfig of this.originColumnsConfig)
+        {
+            if (
+                columnConfig.searchComponent === SearchComponentType.ASYNC_MULTIPLE_SELECT &&
+                columnConfig.meta?.asyncMatSelectSearch?.asyncMatSelectSearchState?.selectedItems
+            )
+            {
+                columnConfig
+                    .meta
+                    .asyncMatSelectSearch
+                    .asyncMatSelectSearchState
+                    .selectedItems
+                    .set(new Set());
+            }
+        }
+    }
+
+    closeDialogAndRemoveFilters(): FilterDialogResponse
     {
         return {
             columnFilters: [],
         };
     }
+
+    // manage response data after close dialog
+    closeDialogAndSetFilters(): FilterDialogResponse
+    {
+        return {
+            columnFilters: this.formColumnFilter.value,
+        };
+    }
+
 }

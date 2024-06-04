@@ -2,13 +2,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ColumnDataType } from '../../grid.types';
 
 /**
- * Get contact operator that we need
+ * Get concat operator that we need
  */
 @Pipe({
-    name      : 'getContactOperator',
+    name      : 'getConcatOperator',
     standalone: true,
 })
-export class GetContactOperatorPipe implements PipeTransform
+export class GetConcatOperatorPipe implements PipeTransform
 {
     transform(columnDataType: ColumnDataType): 'OR' | 'AND'
     {

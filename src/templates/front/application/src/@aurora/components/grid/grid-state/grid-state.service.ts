@@ -48,6 +48,7 @@ export class GridStateService
         this.sortStorage[id] = sort;
     }
 
+    // define action to call when grid state changes
     setPaginationActionId(id: string, actionId: string): void
     {
         this.paginationActionIdStorage[id] = actionId;

@@ -314,9 +314,7 @@ export class GridComponent implements OnInit, AfterViewInit
         columnsConfigPropertiesDialogRef.afterClosed().subscribe(res => this.closeColumnDialog.emit());
     }
 
-    /*
-    * manage filters column grid
-    */
+    // manage filters column grid
     handleFiltersDialog(): void
     {
         const gridFilterDialogRef = this.dialog.open(GridFiltersDialogComponent,

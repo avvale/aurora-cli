@@ -1,3 +1,4 @@
+export * from './async-mat-select-search';
 export * from './attachments';
 export * from './breadcrumb';
 export * from './chip';

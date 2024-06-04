@@ -30,12 +30,12 @@
 			#auto="matAutocomplete"
 			(optionSelected)="handleFieldSelectionChange($event)"
 		>
-			<mat-option
-				*ngFor="let item of filteredColumnsConfig | async"
-				[value]="item"
-			>
-                {{ item.field | gridTranslate:'column':gridId | async }}
-			</mat-option>
+            @for (item of filteredColumnsConfig | async; track item.field)
+            {
+                <mat-option [value]="item">
+                    {{ item.field | gridTranslate:'column':gridId | async }}
+                </mat-option>
+            }
 		</mat-autocomplete>
 	</mat-form-field>
 
@@ -64,19 +64,19 @@
                             >
                                 <mat-label>{{ 'operator' | gridTranslate:'message':gridId | async }}</mat-label>
                                 <mat-select formControlName="operator">
-                                    <mat-option
-                                        *ngFor="let filterOperator of filterOperators | filterOperators:formFilter.get('type').value"
-                                        [value]="filterOperator.operator"
-                                    >
-                                        {{ operatorsMessages | async | get:filterOperator.translation }}
-                                    </mat-option>
+                                    @for (filterOperator of filterOperators | filterOperators:formFilter.get('searchComponent').value; track filterOperator.translation)
+                                    {
+                                        <mat-option [value]="filterOperator.operator">
+                                            {{ filterOperator.translation | gridTranslate:'operator':gridId | async }}
+                                        </mat-option>
+                                    }
                                 </mat-select>
                             </mat-form-field>
 
-                            @switch (formFilter.get('type').value)
+                            @switch (formFilter.get('searchComponent').value)
                             {
                                 <!-- string -->
-                                @case (columnDataType.STRING)
+                                @case (searchComponentType.TEXT)
                                 {
                                     <mat-form-field
                                         appearance="outline"
@@ -92,14 +92,14 @@
                                         @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
                                         {
                                             <div class="outbox">
-                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                                <span>{{ formFilter.get('type').value | getConcatOperator | gridTranslate:'message':gridId | async }}</span>
                                             </div>
                                         }
                                     </mat-form-field>
                                 }
 
                                 <!-- enum -->
-                                @case (columnDataType.ENUM)
+                                @case (searchComponentType.SELECT)
                                 {
                                     <mat-form-field
                                         appearance="outline"
@@ -128,14 +128,14 @@
                                         @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
                                         {
                                             <div class="outbox">
-                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                                <span>{{ formFilter.get('type').value | getConcatOperator | gridTranslate:'message':gridId | async }}</span>
                                             </div>
                                         }
                                     </mat-form-field>
                                 }
 
                                 <!-- array -->
-                                @case (columnDataType.ARRAY)
+                                @case (searchComponentType.MULTIPLE_SELECT)
                                 {
                                     <mat-form-field
                                         appearance="outline"
@@ -167,14 +167,113 @@
                                         @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
                                         {
                                             <div class="outbox">
-                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                                <span>{{ formFilter.get('type').value | getConcatOperator | gridTranslate:'message':gridId | async }}</span>
+                                            </div>
+                                        }
+                                    </mat-form-field>
+                                }
+
+                                @case (searchComponentType.ASYNC_MULTIPLE_SELECT)
+                                {
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="col-span-7 relative"
+                                        tiny
+                                    >
+                                        <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                        <mat-select
+                                            formControlName="value"
+                                            multiple
+                                            auScrollEnd
+                                            (scrollEnd)="
+                                                getAsyncMatSelectSearchColumnConfigFunction(
+                                                    originColumnsConfig,
+                                                    formFilter.get('field').value
+                                                )
+                                                .manageAsyncMatSelectSearch({
+                                                    asyncMatSelectSearchState: getAsyncMatSelectSearchColumnConfigFunction(
+                                                            originColumnsConfig,
+                                                            formFilter.get('field').value
+                                                        ).asyncMatSelectSearchState,
+                                                    isFromScrollEndEvent: true,
+                                                })
+                                            "
+                                        >
+                                            <mat-option>
+                                                <ngx-mat-select-search
+                                                    [formControl]="(originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.itemFilterCtrl"
+                                                    [placeholderLabel]="('find' | gridTranslate:'message':gridId | async) + ' ' + (formFilter.get('field').value | gridTranslate:'column':gridId  | async | lowercase)"
+                                                >
+                                                </ngx-mat-select-search>
+                                            </mat-option>
+                                            @if ((originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems().size > 0)
+                                            {
+                                                <mat-optgroup [label]="'selectedOptions' | gridTranslate:'message':gridId | async">
+                                                    @for (item of (originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems(); track item.id)
+                                                    {
+                                                        <mat-option
+                                                            [value]="item.id"
+                                                            auMatSelectAddSelectedDirective
+                                                            [object]="item"
+                                                            [selectedItems]="(originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems"
+                                                        >
+                                                            @if (data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)
+                                                            {
+                                                                <ng-container
+                                                                    *ngTemplateOutlet="(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value).templateRef; context: { $implicit: item }"
+                                                                >
+                                                                </ng-container>
+                                                            }
+                                                            @else
+                                                            {
+                                                                {{ item.name }}
+                                                            }
+                                                        </mat-option>
+                                                    }
+                                                </mat-optgroup>
+                                                <mat-divider></mat-divider>
+                                            }
+                                            @for (item of (originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.filteredItems(); track item.id)
+                                            {
+                                                @if (!(originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems().has(item))
+                                                {
+                                                    <mat-option
+                                                        [value]="item.id"
+                                                        [disabled]="item.id === null"
+                                                        auMatSelectAddSelectedDirective
+                                                        [object]="item"
+                                                        [selectedItems]="(originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems"
+                                                    >
+                                                        @if (item.id === null)
+                                                        {
+                                                            {{ 'noResultsFound' | gridTranslate:'message':gridId | async }}
+                                                        }
+                                                        @else if (data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)
+                                                        {
+                                                            <ng-container
+                                                                *ngTemplateOutlet="(data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value).templateRef; context: { $implicit: item }"
+                                                            >
+                                                            </ng-container>
+                                                        }
+                                                        @else
+                                                        {
+                                                            {{ item.name }}
+                                                        }
+                                                    </mat-option>
+                                                }
+                                            }
+                                        </mat-select>
+                                        @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
+                                        {
+                                            <div class="outbox">
+                                                <span>{{ formFilter.get('type').value | getConcatOperator | gridTranslate:'message':gridId | async }}</span>
                                             </div>
                                         }
                                     </mat-form-field>
                                 }
 
                                 <!-- number -->
-                                @case (columnDataType.NUMBER)
+                                @case (searchComponentType.NUMBER)
                                 {
                                     <mat-form-field
                                         appearance="outline"
@@ -191,14 +290,14 @@
                                         @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
                                         {
                                             <div class="outbox">
-                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                                <span>{{ formFilter.get('type').value | getConcatOperator | gridTranslate:'message':gridId | async }}</span>
                                             </div>
                                         }
                                     </mat-form-field>
                                 }
 
                                 <!-- boolean -->
-                                @case (columnDataType.BOOLEAN)
+                                @case (searchComponentType.CHECKBOX)
                                 {
                                     <div class="col-span-7 relative pl-12">
                                         <mat-checkbox formControlName="value">
@@ -207,14 +306,14 @@
                                         @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
                                         {
                                             <div class="outbox">
-                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                                <span>{{ formFilter.get('type').value | getConcatOperator | gridTranslate:'message':gridId | async }}</span>
                                             </div>
                                         }
                                     </div>
                                 }
 
                                 <!-- date -->
-                                @case (columnDataType.DATE)
+                                @case (searchComponentType.DATEPICKER)
                                 {
                                     <mat-form-field
                                         appearance="outline"
@@ -244,7 +343,7 @@
                                         @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
                                         {
                                             <div class="outbox--datepicker">
-                                                <span>{{ formFilter.get('type').value | getContactOperator | gridTranslate:'message':gridId | async }}</span>
+                                                <span>{{ formFilter.get('type').value | getConcatOperator | gridTranslate:'message':gridId | async }}</span>
                                             </div>
                                         }
                                     </mat-form-field>
@@ -269,21 +368,20 @@
 <!-- confirmation buttons -->
 <mat-dialog-actions class="grid grid-cols-2 gap-2">
     <button
-        [mat-dialog-close]="handleRemoveFilters()"
-        class=""
         mat-flat-button
+        [mat-dialog-close]="closeDialogAndRemoveFilters()"
+        (click)="resetFilters()"
     >
         {{ 'clearFilters' | gridTranslate:'message':gridId | async }}
     </button>
     <button
-        mat-flat-button
         type="submit"
-        class=""
         color="primary"
         form="filterGridDialog"
-        [mat-dialog-close]="handleCloseDialog()"
+        mat-flat-button
+        [mat-dialog-close]="closeDialogAndSetFilters()"
         [disabled]="!containerForm.valid"
     >
-    {{ 'filter' | gridTranslate:'message':gridId | async }}
+        {{ 'search' | gridTranslate:'message':gridId | async }}
     </button>
 </mat-dialog-actions>

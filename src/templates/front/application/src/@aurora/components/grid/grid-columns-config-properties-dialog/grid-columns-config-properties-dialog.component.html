@@ -27,8 +27,9 @@
             >
                 <div class="flex">
                     <mat-checkbox
-                        [(ngModel)]="!columnConfig.hidden"
+                        [ngModel]="!columnConfig.hidden"
                         [disabled]="columnConfig.sticky"
+                        (ngModelChange)="columnConfig.hidden = !$event"
                         (change)="handleChangeVisibilityColumn($event, columnConfig)"
                     >
                     </mat-checkbox>

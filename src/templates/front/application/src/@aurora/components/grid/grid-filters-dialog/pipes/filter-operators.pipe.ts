@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FilterColumnDataType, FilterCriteriaOperator } from '../../grid.types';
+import { FilterCriteriaOperator, SearchComponentType } from '../../grid.types';
 
 /**
  * filter operator accord column type
@@ -10,8 +10,9 @@ import { FilterColumnDataType, FilterCriteriaOperator } from '../../grid.types';
 })
 export class FilterOperatorsPipe implements PipeTransform
 {
-    transform(filterOperators: FilterCriteriaOperator[], columnDataType: FilterColumnDataType): FilterCriteriaOperator[]
+    transform(filterOperators: FilterCriteriaOperator[], searchComponentType: SearchComponentType): FilterCriteriaOperator[]
     {
-        return filterOperators.filter(filterOperator => filterOperator.types.includes(columnDataType));
+        return filterOperators
+            .filter(filterOperator => filterOperator.searchComponentTypes.includes(searchComponentType));
     }
 }

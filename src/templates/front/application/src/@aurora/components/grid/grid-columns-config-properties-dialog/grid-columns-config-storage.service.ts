@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { ColumnConfigStorage, log, UserMetaStorageService, Utils } from '@aurora';
+import { ColumnConfigStorage, encrypt, log, UserMetaStorageService } from '@aurora';
 import { BehaviorSubject, combineLatest, from, lastValueFrom, map, Observable, Subject, takeUntil } from 'rxjs';
-import { ColumnConfig } from '..';
+import { ColumnConfig, adaptColumnsConfigForSerialization } from '..';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 @Injectable({
@@ -47,15 +47,19 @@ export class GridColumnsConfigStorageService implements OnDestroy
         this.unsubscribeAll$.complete();
     }
 
-    async setColumnsConfig(id: string, columnsConfig: ColumnConfig[], originColumnsConfig: ColumnConfig[]): Promise<void>
+    async setColumnsConfig(
+        id: string,
+        columnsConfig: ColumnConfig[],
+        originColumnsConfig: ColumnConfig[],
+    ): Promise<void>
     {
         // get current columns config storage
         const columnsConfigStorage = this.columnsConfigStorageSubject$.value;
 
         const columnConfigStorage = {
             id,
-            hash: await this.createColumnsConfigHash(originColumnsConfig), // create hash of the original config columns to verify future changes
-            columnsConfig,
+            hash         : await this.createColumnsConfigHash(originColumnsConfig), // create hash of the original config columns to verify future changes
+            columnsConfig: adaptColumnsConfigForSerialization(columnsConfig),
         };
 
         // set ColumnConfigStorage with id, to identify which grid the configuration belongs to
@@ -66,7 +70,10 @@ export class GridColumnsConfigStorageService implements OnDestroy
         // save all columns config in user record database
         await lastValueFrom(
             this.userMetaStorageService
-                .updateUserMeta(this.nameStorage, columnsConfigStorage),
+                .updateUserMeta(
+                    this.nameStorage,
+                    columnsConfigStorage,
+                ),
         );
     }
 
@@ -91,22 +98,37 @@ export class GridColumnsConfigStorageService implements OnDestroy
 
                     if (response.originColumnsConfigHash !== columnConfigStorage.hash)
                     {
-                        log('[DEBUG] columns config changed in :', id, originColumnsConfig);
+                        log('[DEBUG] columns config changed in: ', id, originColumnsConfig);
 
                         // we use spread operator to break the origin config reference to avoid changing changes
-                        const newColumnsConfigStorage = this.addChangesToColumnsConfig(columnConfigStorage.columnsConfig, cloneDeep(originColumnsConfig));
-                        this.setColumnsConfig(id, newColumnsConfigStorage, originColumnsConfig);
+                        const newColumnsConfigStorage = this.addChangesToColumnsConfig(
+                            columnConfigStorage.columnsConfig,
+                            cloneDeep(originColumnsConfig),
+                        );
+
+                        this.setColumnsConfig(
+                            id,
+                            newColumnsConfigStorage,
+                            originColumnsConfig,
+                        );
 
                         return newColumnsConfigStorage;
                     }
 
-                    return this.addFunctionsToColumnsConfig(columnConfigStorage.columnsConfig, originColumnsConfig);
+                    return this.addFunctionsToColumnsConfig(
+                        columnConfigStorage.columnsConfig,
+                        originColumnsConfig,
+                    );
                 }),
             );
     }
 
-    // data from database is unserialize, this action delete functions from array object, we need add the original functions
-    private addFunctionsToColumnsConfig(columnConfigStorage: ColumnConfig[], originColumnsConfig: ColumnConfig[]): ColumnConfig[]
+    // data from database is unserialize, this action delete
+    // functions from array object, we need add the original functions
+    private addFunctionsToColumnsConfig(
+        columnConfigStorage: ColumnConfig[],
+        originColumnsConfig: ColumnConfig[],
+    ): ColumnConfig[]
     {
         for (const [index, columnConfig] of originColumnsConfig.entries())
         {
@@ -117,7 +139,10 @@ export class GridColumnsConfigStorageService implements OnDestroy
         return columnConfigStorage;
     }
 
-    private addChangesToColumnsConfig(columnConfigStorage: ColumnConfig[], originColumnsConfig: ColumnConfig[]): ColumnConfig[]
+    private addChangesToColumnsConfig(
+        columnConfigStorage: ColumnConfig[],
+        originColumnsConfig: ColumnConfig[],
+    ): ColumnConfig[]
     {
         // sort array accord columnConfigStorage
         originColumnsConfig.sort(
@@ -146,6 +171,6 @@ export class GridColumnsConfigStorageService implements OnDestroy
 
     private async createColumnsConfigHash(columnsConfig: ColumnConfig[]): Promise<string>
     {
-        return await Utils.encrypt(JSON.stringify(columnsConfig));
+        return await encrypt(JSON.stringify(adaptColumnsConfigForSerialization(columnsConfig)));
     }
 }

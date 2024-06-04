@@ -16,8 +16,8 @@ import { ColumnConfig, ColumnDataType, ColumnsConfigChange } from '../grid.types
     styleUrls  : ['./grid-columns-config-properties-dialog.component.scss'],
     standalone : true,
     imports    : [
-        AsyncPipe, GridTranslatePipe, MatButtonModule, MatCheckboxModule, MatDialogModule, DragDropModule,
-        MatIconModule,NgForOf, FormsModule
+        AsyncPipe, GridTranslatePipe, MatButtonModule, MatCheckboxModule,
+        MatDialogModule, DragDropModule, MatIconModule,NgForOf, FormsModule,
     ],
 })
 export class GridColumnsConfigPropertiesDialogComponent implements OnInit

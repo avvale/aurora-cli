@@ -1,7 +1,7 @@
 import { ColumnDataType, FilterOperator, GridColumnFilter } from '../../grid.types';
 import { ContactOperator, Operator } from '@aurora';
 
-export const getContactOperator = (columnDataType:ColumnDataType): ContactOperator =>
+export const getConcatOperator = (columnDataType:ColumnDataType): ContactOperator =>
 {
     switch (columnDataType)
     {

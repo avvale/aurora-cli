@@ -2,7 +2,7 @@
 import { ChangeDetectionStrategy, Component, Host, Input, Optional } from '@angular/core';
 import { GridComponent } from '../grid/grid.component';
 import { GridTranslationsService } from './grid-translations.service';
-import { GridActionsMenuMessages, GridOperatorsMessages, GridPaginatorMessages } from '../grid.types';
+import { GridActionMenuMessages, GridOperatorMessages, GridPaginatorMessages } from '../grid.types';
 
 @Component({
     selector       : 'au-grid-translations',
@@ -15,21 +15,21 @@ export class GridTranslationsComponent
     @Input('for') scope: string = 'defaultGridScope';
 
     // operators
-    @Input() set operators(operatorsMessages: GridOperatorsMessages)
+    @Input() set operators(operatorsMessages: { [key in keyof GridOperatorMessages]: string; })
     {
-        this.gridTranslationsService.setOperatorsMessages(this.scope, operatorsMessages);
+        this.gridTranslationsService.setOperatorMessages(this.scope, operatorsMessages);
     }
 
     // paginator
-    @Input() set paginator(paginatorMessages: GridPaginatorMessages)
+    @Input() set paginator(paginatorMessages: { [key in keyof GridPaginatorMessages]: string; })
     {
         this.gridTranslationsService.setPaginatorMessages(this.scope, paginatorMessages);
     }
 
     // actions menu
-    @Input() set actionsMenu(actionsMenuMessages: GridActionsMenuMessages)
+    @Input() set actionsMenu(actionMenuMessages: { [key in keyof GridActionMenuMessages]: string; })
     {
-        this.gridTranslationsService.setActionsMenuMessages(this.scope, actionsMenuMessages);
+        this.gridTranslationsService.setActionMenuMessages(this.scope, actionMenuMessages);
     }
 
     // messages translations
@@ -61,9 +61,17 @@ export class GridTranslationsComponent
     {
         this.gridTranslationsService.setMessage('filter', message, this.scope);
     }
+    @Input() set find(message: string)
+    {
+        this.gridTranslationsService.setMessage('find', message, this.scope);
+    }
     @Input() set noData(message: string)
     {
         this.gridTranslationsService.setMessage('noData', message, this.scope);
+    }
+    @Input() set noResultsFound(message: string)
+    {
+        this.gridTranslationsService.setMessage('noResultsFound', message, this.scope);
     }
     @Input() set operator(message: string)
     {
@@ -84,6 +92,10 @@ export class GridTranslationsComponent
     @Input() set search(message: string)
     {
         this.gridTranslationsService.setMessage('search', message, this.scope);
+    }
+    @Input() set selectedOptions(message: string)
+    {
+        this.gridTranslationsService.setMessage('selectedOptions', message, this.scope);
     }
     @Input() set translations(message: string)
     {

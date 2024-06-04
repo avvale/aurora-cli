@@ -1,6 +1,16 @@
-import { ColumnConfig, ColumnDataType, getContactOperator, getPostgresOperatorModifier, getPostgresValueModifier, GridColumnFilter, GridPageState, GridSearchState, GridSortState, isValidOrderStatement, log } from '@aurora';
+import { ColumnConfig, ColumnDataType, getConcatOperator, getPostgresOperatorModifier, getPostgresValueModifier, GridColumnFilter, GridPageState, GridSearchState, GridSortState, isValidOrderStatement, log } from '@aurora';
 import { Operator, QueryStatement } from './sql-statement';
 import groupBy from 'lodash-es/groupBy';
+
+export const queryStatementHandler = (
+    {
+        queryStatement = {},
+        columnsConfig = [],
+    }: {
+        queryStatement?: QueryStatement;
+        columnsConfig?: ColumnConfig[];
+    } = {},
+): QueryStatementHandler => QueryStatementHandler.init({ queryStatement, columnsConfig });
 
 export class QueryStatementHandler
 {
@@ -44,7 +54,7 @@ export class QueryStatementHandler
             {
                 const filter: GridColumnFilter = groupedFilter[0];
                 this.queryStatement
-                    .where[filter.field] = {
+                    .where[filter.searchableField || filter.field] = {
                         [getPostgresOperatorModifier(filter)]: getPostgresValueModifier(filter),
                     };
             }
@@ -52,8 +62,8 @@ export class QueryStatementHandler
             {
                 const firstFilter: GridColumnFilter = groupedFilter[0];
                 this.queryStatement
-                    .where[firstFilter.field] = {
-                        [getContactOperator(groupedFilter[0].type)]: groupedFilter.map(filter => ({ [getPostgresOperatorModifier(filter)]: getPostgresValueModifier(filter) })),
+                    .where[firstFilter.searchableField || firstFilter.field] = {
+                        [getConcatOperator(groupedFilter[0].type)]: groupedFilter.map(filter => ({ [getPostgresOperatorModifier(filter)]: getPostgresValueModifier(filter) })),
                     };
             }
         }

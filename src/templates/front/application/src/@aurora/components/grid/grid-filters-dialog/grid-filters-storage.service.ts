@@ -45,19 +45,18 @@ export class GridFiltersStorageService implements OnDestroy
         this.unsubscribeAll$.complete();
     }
 
-    // setColumnFilterState(id: string, columnFilters: GridColumnFilter[]): void
-    setColumnFilterState(id: string, columnFilters: any): void
+    setColumnFilterState(scope: string, columnFilters: GridColumnFilter[]): void
     {
         // get current column filters config storage
         const columnFiltersStorage = this.columnFiltersStorageSubject$.value ? this.columnFiltersStorageSubject$.value : {};
 
         const columnFilterStorage = {
-            id,
+            scope,
             columnFilters,
         };
 
         // set QueryStatement with id, to identify which grid the filters belongs to
-        columnFiltersStorage[columnFilterStorage.id] = columnFilterStorage;
+        columnFiltersStorage[columnFilterStorage.scope] = columnFilterStorage;
 
         this.columnFiltersChangeSubject$.next(columnFilterStorage);
 
@@ -67,11 +66,19 @@ export class GridFiltersStorageService implements OnDestroy
         log('[DEBUG] Set column filter: ', columnFilterStorage);
     }
 
-    getColumnFilterState(id: string): GridColumnFilter[]
+    getColumnFilterState(scope: string): GridColumnFilter[]
     {
         // get current column filters config storage
         const columnFiltersStorage = this.columnFiltersStorageSubject$.value;
 
-        return columnFiltersStorage[id]?.columnFilters ? columnFiltersStorage[id].columnFilters : [];
+        return columnFiltersStorage[scope]?.columnFilters ? columnFiltersStorage[scope].columnFilters : [];
+    }
+
+    getColumnFilter(scope: string, field: string): GridColumnFilter | null
+    {
+        // get current column filters config storage
+        const columnFiltersStorage = this.columnFiltersStorageSubject$.value;
+
+        return columnFiltersStorage[scope]?.columnFilters && columnFiltersStorage[scope].columnFilters.find(columnFilter => columnFilter.field === field);
     }
 }
