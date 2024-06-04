@@ -709,6 +709,19 @@ export class Add extends Command
                     break;
                 }
 
+                case 'settings': {
+                    await FrontHandler.addPackage(addCommandState);
+
+                    // add module in main navigation menu
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'settings');
+                    routesSourceFile.saveSync();
+                    break;
+                }
+
                 case 'whatsapp': {
                     await FrontHandler.addPackage(addCommandState);
 

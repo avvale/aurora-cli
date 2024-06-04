@@ -334,6 +334,7 @@ export const cliterConfig: CliterConfig =
         'message',
         'oAuth',
         'queueManager',
+        'settings',
         'whatsapp',
     ],
 };
