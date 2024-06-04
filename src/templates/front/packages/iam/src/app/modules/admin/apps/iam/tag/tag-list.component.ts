@@ -4,6 +4,8 @@ import { tagColumnsConfig, TagService } from '@apps/iam/tag';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
+export const tagMainGridListId = 'iam::tag.list.mainGridList';
+
 @Component({
     selector       : 'iam-tag-list',
     templateUrl    : './tag-list.component.html',
@@ -23,7 +25,7 @@ export class TagListComponent extends ViewBaseComponent
         { translation: 'App', routerLink: ['/']},
         { translation: 'iam.Tags' },
     ];
-    gridId: string = 'iam::tag.list.mainGridList';
+    gridId: string = tagMainGridListId;
     gridData$: Observable<GridData<IamTag>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;

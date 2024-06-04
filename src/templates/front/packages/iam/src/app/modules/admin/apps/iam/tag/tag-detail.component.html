@@ -28,7 +28,7 @@
                     color="accent"
                     [disabled]="fg.pristine || ('iam::tag.detail.update' | getSpinnerFlag | async)"
                 >
-                    @if('iam::tag.detail.update' | getSpinnerFlag | async)
+                    @if ('iam::tag.detail.update' | getSpinnerFlag | async)
                     {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -56,12 +56,11 @@
                     color="accent"
                     [disabled]="fg.pristine || ('iam::tag.detail.create' | getSpinnerFlag | async)"
                 >
-                    @if('iam::tag.detail.create' | getSpinnerFlag | async)
+                    @if ('iam::tag.detail.create' | getSpinnerFlag | async)
                     {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
-
                     }
                     @else
                     {

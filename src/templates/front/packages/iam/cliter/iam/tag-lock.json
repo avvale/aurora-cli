@@ -11,7 +11,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-detail.component.html",
-            "integrity": "sha1:3e5851e58793edf57adbbd4f3a8c078cd0e8fae1"
+            "integrity": "sha1:1a326d551ef6506ff4c7fba322fd4ebdb737ac49"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-detail.component.ts",
@@ -19,11 +19,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-list.component.html",
-            "integrity": "sha1:b5eab9f59349ea989f58161d26d93373bd9a8f28"
+            "integrity": "sha1:d30046b35d7412d6ae308e9e2740ebbfda99a92a"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-list.component.ts",
-            "integrity": "sha1:3417ab8e418813b3aeba4ce831bf94fed5b10e16"
+            "integrity": "sha1:3b68e466df847bb3aeeeb3d57db2f4fad98ff846"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag.columns-config.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag.service.ts",
-            "integrity": "sha1:19dff83995a46368f8355d7ef00123953fca5bae"
+            "integrity": "sha1:c7000442bb9649778bfb63cd5234834b8c2b5d18"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/index.ts",

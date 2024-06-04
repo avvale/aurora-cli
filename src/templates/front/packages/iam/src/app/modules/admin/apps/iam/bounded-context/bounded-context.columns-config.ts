@@ -5,7 +5,7 @@ export const boundedContextColumnsConfig: ColumnConfig[] = [
         type       : ColumnDataType.STRING,
         field      : 'name',
         sort       : 'name',
-        translation: 'iam.Name',
+        translation: 'Name',
         isUnaccent : true,
     },
     {
@@ -19,12 +19,12 @@ export const boundedContextColumnsConfig: ColumnConfig[] = [
         type       : ColumnDataType.NUMBER,
         field      : 'sort',
         sort       : 'sort',
-        translation: 'iam.Sort',
+        translation: 'Sort',
     },
     {
         type       : ColumnDataType.BOOLEAN,
         field      : 'isActive',
         sort       : 'isActive',
-        translation: 'iam.IsActive',
+        translation: 'IsActive',
     },
 ];
