@@ -20,6 +20,19 @@ class ExcludeOperations
     private operationsToExclude: Set<string>;
     private operationsPatternPaths: { [key: string]: Set<string[]> } =
     {
+        createBatch: new Set([
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'controllers', '__bounded_context_name__-create-__module_names__.controller.spec.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'controllers', '__bounded_context_name__-create-__module_names__.controller.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'handlers', '__bounded_context_name__-create-__module_names__.handler.spec.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'handlers', '__bounded_context_name__-create-__module_names__.handler.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'resolvers', '__bounded_context_name__-create-__module_names__.resolver.spec.ts'],
+            ['src', '@api', '__bounded_context_name__', '__module_name__', 'resolvers', '__bounded_context_name__-create-__module_names__.resolver.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'create', '__bounded_context_name__-create-__module_names__.command-handler.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'create', '__bounded_context_name__-create-__module_names__.command-handler.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'create', '__bounded_context_name__-create-__module_names__.command.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'create', '__bounded_context_name__-create-__module_names__.service.spec.ts'],
+            ['src', '@app', '__bounded_context_name__', '__module_name__', 'application', 'create', '__bounded_context_name__-create-__module_names__.service.ts'],
+        ]),
         upsert: new Set([
             ['src', '@api', '__bounded_context_name__', '__module_name__', 'controllers', '__bounded_context_name__-upsert-__module_name__.controller.spec.ts'],
             ['src', '@api', '__bounded_context_name__', '__module_name__', 'controllers', '__bounded_context_name__-upsert-__module_name__.controller.ts'],
