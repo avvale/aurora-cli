@@ -3,7 +3,7 @@
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'ViewEncapsulation') path='@angular/core')
             (object items='Validators' path='@angular/forms')
-            (object items=(array 'Action' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'SnackBarInvalidFormComponent' 'Utils' 'ViewDetailComponent') path='@aurora')
+            (object items=(array 'Action' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'SnackBarInvalidFormComponent' 'uuid' 'ViewDetailComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.boundedContextName '.types'))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName))
@@ -681,7 +681,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             /* #region common actions */
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.new':
                 {{#unless (hasI18nProperties schema.aggregateProperties) }}
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 {{else}}
                 this.currentLang = this.coreCurrentLangService.currentLang;
 
@@ -703,7 +703,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 {
                     // only when we create a record
                     // with default language
-                    this.fg.get('id').setValue(Utils.uuid());
+                    this.fg.get('id').setValue(uuid());
                 }
 
                 this.fg.get('langId').setValue(this.currentLang.id);
@@ -1273,7 +1273,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
                 this.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm();
                 this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.handleElementDetailDialog(action.id);
-                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('id').setValue(Utils.uuid());
+                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('id').setValue(uuid());
                 this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('{{ getForeignKey (object relationship=relationship schema=../schema) }}').setValue(this.managedObject.id);
                 break;
 
