@@ -10,12 +10,12 @@ handlebars.registerPartial('multipleSelectWebComponent',
         formControlName="{{ toCamelCase property.relationship.singularName }}Ids"
         multiple
     >
-        <mat-option
-            *ngFor="let {{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }} of {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}$ | async"
-            [value]="{{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}.id"
-        >
-            \\{{ {{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}.name }}
-        </mat-option>
+        @for ({{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }} of {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}$ | async; track {{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}.id)
+        {
+            <mat-option [value]="{{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}.id">
+                \\{{ {{ toCamelCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}.name }}
+            </mat-option>
+        }
     </mat-select>
     <mat-error>\\{{ formErrors?.{{ toCamelCase property.relationship.singularName }}Ids | async }}</mat-error>
 </mat-form-field>`);

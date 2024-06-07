@@ -38,47 +38,16 @@ handlebars.registerPartial('gridSelectElementWebComponent',
 >
     <au-grid-translations
         [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
-        [actions]="t('Actions')"
-        [AND]="t('AND')"
-        [clearFilters]="t('ClearFilters')"
-        [clickAndDragInfo]="t('ClickAndDragInfo')"
-        [columns]="t('Columns')"
-        [field]="t('Field')"
-        [filter]="t('Filter')"
-        [operator]="t('Operator')"
-        [OR]="t('OR')"
-        [pleaseSelectField]="t('PleaseSelectField')"
-        [translations]="t('Translations')"
-        [value]="t('Value')"
-        [paginator]="{
-            firstPageLabel: t('Paginator.FirstPageLabel'),
-            itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
-            lastPageLabel: t('Paginator.LastPageLabel'),
-            nextPageLabel: t('Paginator.NextPageLabel'),
-            ofLabel: t('Paginator.OfLabel'),
-            previousPageLabel: t('Paginator.PreviousPageLabel')
-        }"
-        [operators]="{
-            contains: t('Operators.Contains'),
-            endsWith: t('Operators.EndsWith'),
-            equals: t('Operators.Equals'),
-            greaterThan: t('Operators.GreaterThan'),
-            greaterThanEqual: t('Operators.GreaterThanEqual'),
-            lessThan: t('Operators.LessThan'),
-            lessThanEqual: t('Operators.LessThanEqual'),
-            notEquals: t('Operators.NotEquals'),
-            startsWith: t('Operators.StartsWith')
-        }"
         [actionsMenu]="{
             editCallLog: t('Edit'),
             deleteCallLog: t('Delete')
         }"
     >
-        <au-grid-column-translation
-            *ngFor="let columnConfig of {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}OriginColumnsConfig"
-            [field]="columnConfig.field"
-        >
-            \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
-        </au-grid-column-translation>
+        @for (columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}OriginColumnsConfig; track columnConfig.field)
+        {
+            <au-grid-column-translation [field]="columnConfig.field">
+                \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+            </au-grid-column-translation>
+        }
     </au-grid-translations>
 </au-grid-select-element>`);
