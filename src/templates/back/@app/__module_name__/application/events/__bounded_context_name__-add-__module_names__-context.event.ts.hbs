@@ -64,12 +64,12 @@
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleName) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
 ~}}
 {{/notInArray}}
-{{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleNames) '.event.ts'}}
+{{#isAllowPath schema 'delete' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'events' (sumStrings (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleNames) '.event.ts') }}
 {{
     push importsArray
         (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Deleted' (toPascalCase schema.moduleNames) 'Event') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
 ~}}
-{{/notInArray}}
+{{/isAllowPath}}
 {{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase schema.moduleNames }}ContextEvent extends AggregateRoot
 {
@@ -159,7 +159,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
     {{/isAllowPath}}
     {{/isAllowPath}}
     {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleName) '.event.ts'}}
-    {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/events/' (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleNames) '.event.ts'}}
+    {{#isAllowPath schema 'delete' 'src' config.appContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'application' 'events' (sumStrings (toKebabCase schema.boundedContextName) '-deleted-' (toKebabCase schema.moduleNames) '.event.ts') }}
     deleted(): void
     {
         this.apply(
@@ -179,6 +179,6 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
             }),
         );
     }
-    {{/notInArray}}
+    {{/isAllowPath}}
     {{/notInArray}}
 }

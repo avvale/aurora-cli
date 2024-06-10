@@ -246,13 +246,13 @@ type Mutation
     ): {{ schema.aggregateName }}
 
     {{/notInArray}}
-    {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/resolvers/' (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.resolver.ts'}}
+    {{#isAllowPath schema 'delete' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-delete-' (toKebabCase schema.moduleNames) '.resolver.ts') }}
     {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleNames }}(
         query: QueryStatement
         constraint: QueryStatement
     ): [{{ schema.aggregateName }}]!
 
-    {{/notInArray}}
+    {{/isAllowPath}}
     {{#if (hasAdditionalApiMutations schema.additionalApis) }}
 
     # additionalApis
