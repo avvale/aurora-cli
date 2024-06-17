@@ -370,6 +370,8 @@ export class CodeWriter
             { overwrite },
         );
 
+        console.log('properties', `${this.boundedContextName.toPascalCase()}Update${this.moduleName.toPascalCase()}ById`);
+
         // add update object by id type
         InterfaceDriver.addInterface(
             sourceFile,

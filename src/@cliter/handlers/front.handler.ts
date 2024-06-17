@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-static-only-class */
 import { TemplateGenerator } from '../utils/template-generator';
-import { addPackageFiles, addReferences, generateModuleFiles, generateTranslationFiles } from '../functions/front';
+import { addPackageFiles, addPivotTableReferences, addReferences, generateModuleFiles, generateModulePivotFiles, generateTranslationFiles } from '../functions/front';
 import { AddCommandState, GenerateCommandState, NewFrontCommandState, TemplateElement } from '../types';
 import { generateJsonLockFile } from '../functions/common';
 import { GlobalState } from '../store';
@@ -45,8 +45,14 @@ export class FrontHandler
         // generate front module files
         await generateModuleFiles(generateCommandState);
 
+        // generate module pivot files
+        await generateModulePivotFiles(generateCommandState);
+
         // create references, write imports in ts files
         addReferences(generateCommandState);
+
+        // create references, write imports in ts files
+        addPivotTableReferences(generateCommandState);
 
         generateJsonLockFile(
             generateCommandState,

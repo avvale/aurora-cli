@@ -265,9 +265,6 @@ export class {{ schema.aggregateName }}Model extends Model<{{ schema.aggregateNa
     {{#eq relationship.type ../relationshipType.MANY_TO_ONE }}
     @ForeignKey(() => {{ relationship.aggregateName }}Model)
     {{/eq}}
-    {{#eq ../currentProperty.relationship.type ../relationshipType.MANY_TO_MANY }}
-    @ForeignKey(() => {{ aggregateName }}Model)
-    {{/eq}}
     @Column({
         field: '{{ toCamelCase (getPropertyName this) }}',
         {{#if primaryKey }}

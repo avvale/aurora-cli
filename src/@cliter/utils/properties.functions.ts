@@ -294,6 +294,17 @@ export const hasPivotProperties = (
     return false;
 };
 
+export const hasCompositePrimaryKeys = (
+    properties: Property[],
+): boolean =>
+{
+    return properties
+        .reduce(
+            (sum, property) => sum + (property.primaryKey ? 1 : 0),
+            0,
+        ) > 1;
+};
+
 /*************
  * AGGREGATE *
  *************/

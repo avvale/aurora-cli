@@ -6,33 +6,44 @@ handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
 {
     <au-grid-select-multiple-elements
         class="col-12 mt-0"
-        [columnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
+        [label]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}')"
+        [gridId]="{{ toCamelCase relationship.pivot.moduleName }}GridId"
+        [originColumnsConfig]="origin{{ toPascalCase relationship.pivot.moduleName }}ColumnsConfig"
+        [columnsConfig]="{{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig$ | async"
+        [gridData]="{{ toCamelCase relationship.pivot.moduleName }}GridData$ | async"
+        [gridState]="{{ toCamelCase relationship.pivot.moduleName }}GridState"
         [dialogColumnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
         [dialogGridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
         [dialogGridId]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
-        [dialogOriginColumnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
-        [gridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
-        [gridId]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}RolesGridId"
-        [gridState]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridState"
-        [id]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
-        [label]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}')"
-        [originColumnsConfig]="origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig"
+        [dialogOriginColumnsConfig]="origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig"
         [selectedCheckboxRowModel]="selectedCheckboxRowModel"
         (dialogSelectedCheckboxRowModelChange)="handleDialog{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}RowsSectionChange($event)"
         (selectedCheckboxRowModelChange)="handle{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}RowsSectionChange($event)"
-        #{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridElementsManager
+        #{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridSelectMultipleElements
     >
         <au-grid-translations
-            [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
+            [for]="{{ toCamelCase relationship.pivot.moduleName }}GridId"
             [actionsMenu]="{
                 unlink: t('Unlink'),
                 cancel: t('Cancel'),
                 close: t('Close')
             }"
         >
-            @for (columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig; track columnConfig.field)
+            @for (columnConfig of origin{{ toPascalCase schema.moduleName }}{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig; track columnConfig.field)
             {
                 <au-grid-column-translation [field]="columnConfig.field">
+                    \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                </au-grid-column-translation>
+            }
+        </au-grid-translations>
+        <au-grid-translations
+            [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
+        >
+            @for (columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig; track columnConfig.field)
+            {
+                <au-grid-column-translation
+                    [field]="columnConfig.field"
+                >
                     \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
                 </au-grid-column-translation>
             }
@@ -54,7 +65,7 @@ handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
                 </button>
                 <button
                     mat-flat-button
-                    [disabled]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}RolesSelectedRows.length === 0"
+                    [disabled]="{{ toCamelCase relationship.pivot.moduleName }}SelectedRows.length === 0"
                     (click)="handleRemove{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}Selected()"
                 >
                     <mat-icon

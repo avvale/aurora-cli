@@ -204,6 +204,8 @@ export interface RelationshipPivot
     moduleNames: string;
     aggregateName: string;
     aggregateProperties: Property[];
+    excludedFiles?: string[];                // set files to avoid create
+    excludedOperations?: string[];           // set operations to avoid create
 }
 
 export enum RelationshipType

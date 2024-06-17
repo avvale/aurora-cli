@@ -11,9 +11,16 @@ export const fields = `
     {{~ setVar 'printProperty' false }}
     {{/if}}
     {{#and ../printProperty (isAllowProperty ../schema.moduleName this) }}
-    {{#unlessEq (getPropertyName this) 'id'}}
+    {{#unless (isPrimaryKeyProperty this) }}
     {{ toCamelCase (getPropertyName this) }}
-    {{/unlessEq}}
+    {{/unless}}
+    {{#if (isManyToOneRelationshipProperty this) }}
+    {{ toCamelCase relationship.field }} {
+        {{#each (getWithoutTimestampsWithoutRelationshipProperties (getPropertiesFromPropertyRelationship relationship.modulePath)) }}
+        {{ toCamelCase name }}
+        {{/each}}
+    }
+    {{/if}}
     {{/and}}
     {{/each}}
 `;
@@ -79,7 +86,9 @@ export const getQuery = gql`
             query: $query
             constraint: $constraint
         ) {
-            id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}
+            {{/each}}
             #FIELDS
         }
     }
@@ -114,19 +123,27 @@ export const getRelations = gql`
 
 export const findByIdQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
-        $id: ID
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        ${{ toCamelCase name }}: ID
+        {{/each}}
         $constraint: QueryStatement
     ) {
         object: {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
-            id: $id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}: ${{ toCamelCase name }}
+            {{/each}}
             constraint: $constraint
         ) {
-            id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}
+            {{/each}}
             #FIELDS
         }
     }
 `;
-{{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
+{{#or
+    (unlessEq (countWebComponentsProperties schema.aggregateProperties) 0)
+}}
 
 export const findByIdWithRelationsQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdWithRelations (
@@ -148,6 +165,14 @@ export const findByIdWithRelationsQuery = gql`
         {{#eq webComponent.type 'grid-elements-manager'}}
         $queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
         $constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
+        {{/eq}}
+        {{#eq webComponent.type 'grid-select-multiple-elements'}}
+        $queryPaginate{{ toPascalCase relationship.pivot.moduleNames }}: QueryStatement
+        $constraintPaginate{{ toPascalCase relationship.pivot.moduleNames }}: QueryStatement
+        $queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
+        $constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
+        $queryGet{{ toPascalCase relationship.pivot.moduleNames }}: QueryStatement
+        $constraintGet{{ toPascalCase relationship.pivot.moduleNames }}: QueryStatement
         {{/eq}}
         {{/each}}
     ) {
@@ -177,10 +202,34 @@ export const findByIdWithRelationsQuery = gql`
             count
         }
         {{/each}}
+        {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
+        {{ toCamelCase relationship.pivot.boundedContextName }}Paginate{{ toPascalCase relationship.pivot.moduleNames }} (
+            query: $queryPaginate{{ toPascalCase relationship.pivot.moduleNames }}
+            constraint: $constraintPaginate{{ toPascalCase relationship.pivot.moduleNames }}
+        ) {
+            total
+            rows
+            count
+        }
+        {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} (
+            query: $queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}
+            constraint: $constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}
+        ) {
+            total
+            rows
+            count
+        }
+        {{ toCamelCase relationship.pivot.boundedContextName }}Get{{ toPascalCase relationship.pivot.moduleNames }} (
+            query: $queryGet{{ toPascalCase relationship.pivot.moduleNames }}
+            constraint: $constraintGet{{ toPascalCase relationship.pivot.moduleNames }}
+        ) {
+            {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id
+        }
+        {{/each}}
         ${relationsFields}
     }
 `;
-{{/unlessEq}}
+{{/or}}
 
 export const findQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (
@@ -191,7 +240,9 @@ export const findQuery = gql`
             query: $query
             constraint: $constraint
         ) {
-            id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}
+            {{/each}}
             #FIELDS
         }
     }
@@ -206,6 +257,16 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (
+        $payload: [{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input]!
+    ) {
+        {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (
+            payload: $payload
+        )
     }
 `;
 
@@ -241,11 +302,15 @@ export const updateMutation = gql`
 
 export const deleteByIdMutation = gql`
     mutation {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (
-        $id: ID!
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        ${{ toCamelCase name }}: ID!
+        {{/each}}
         $constraint: QueryStatement
     ) {
         {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (
-            id: $id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}: ${{ toCamelCase name }}
+            {{/each}}
             constraint: $constraint
         ) {
             ${fields}
