@@ -1,18 +1,20 @@
 /* eslint-disable quote-props */
 /* eslint-disable camelcase */
 /* eslint-disable max-len */
-import { WhatsappMessageDirection, WhatsappMessage, WhatsappMessageStatus, WhatsappMessageType } from '@api/graphql';
+import { WhatsappMessage, WhatsappMessageDirection, WhatsappMessageStatus, WhatsappMessageType } from '@api/graphql';
 import { WhatsappCreateMessageCommand } from '@app/whatsapp/message';
 import { WhatsappContact, WhatsappInteractiveBody, WhatsappInteractiveFooter, WhatsappInteractiveHeader, WhatsappInteractiveType } from '@app/whatsapp/whatsapp.types';
 import { ICommandBus, uuid } from '@aurorajs.dev/core';
 import { HttpService } from '@nestjs/axios';
-import { Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import parsePhoneNumberFromString, { CountryCode } from 'libphonenumber-js';
 import { Observable, lastValueFrom } from 'rxjs';
+import { makeSendInteractivePayload } from '../functions/make-send-interactive-payload.function';
 import { makeSendTemplatePayload } from '../functions/make-send-template-payload.function';
 import { makeSendTextPayload } from '../functions/make-send-text-payload.function';
+import { WhatsappTemplateParameters } from '../whatsapp.types';
 import { WhatsappTimelineService } from './whatsapp-timeline.service';
-import { makeSendInteractivePayload } from '../functions/make-send-interactive-payload.function';
 
 @Injectable()
 export class WhatsappConnectorService
@@ -43,12 +45,16 @@ export class WhatsappConnectorService
         return `${this.baseApi}/${this.version}/${this.getSenderTelephoneNumberId()}/${this.messagesApi}`;
     }
 
-    getCommonHeaders(to: string): object
+    getCommonHeaders(
+        to: string,
+        customHeaders?: object,
+    ): object
     {
         return {
             'Authorization'  : `Bearer ${this.getAccessToken()}`,
             'Content-Type'   : 'application/json',
             'X-Auditing-Tags': `WABA ${to}`,
+            ...customHeaders,
         };
     }
 
@@ -62,6 +68,7 @@ export class WhatsappConnectorService
             text: string;
             previewUrl?: boolean;
         },
+        customHeaders?: object,
     ): Promise<any>
     {
         const payload = makeSendTextPayload({
@@ -76,7 +83,10 @@ export class WhatsappConnectorService
                     this.getUrlMessagesPath(),
                     payload,
                     {
-                        headers: this.getCommonHeaders(to),
+                        headers: this.getCommonHeaders(
+                            to,
+                            customHeaders,
+                        ),
                     },
                 ),
         );
@@ -92,8 +102,14 @@ export class WhatsappConnectorService
     }
 
     sendImage(
-        to: string,
-        link: string,
+        {
+            to,
+            link,
+        }: {
+            to: string;
+            link: string;
+        },
+        customHeaders?: object,
     ): Observable<any>
     {
         return this.httpService
@@ -109,14 +125,23 @@ export class WhatsappConnectorService
                     },
                 },
                 {
-                    headers: this.getCommonHeaders(to),
+                    headers: this.getCommonHeaders(
+                        to,
+                        customHeaders,
+                    ),
                 },
             );
     }
 
     sendAudio(
-        to: string,
-        link: string,
+        {
+            to,
+            link,
+        }: {
+            to: string;
+            link: string;
+        },
+        customHeaders?: object,
     ): Observable<any>
     {
         return this.httpService
@@ -132,15 +157,25 @@ export class WhatsappConnectorService
                     },
                 },
                 {
-                    headers: this.getCommonHeaders(to),
+                    headers: this.getCommonHeaders(
+                        to,
+                        customHeaders,
+                    ),
                 },
             );
     }
 
     sendDocument(
-        to: string,
-        link: string,
-        caption: string,
+        {
+            to,
+            link,
+            caption,
+        }: {
+            to: string;
+            link: string;
+            caption: string;
+        },
+        customHeaders?: object,
     ): Observable<any>
     {
         return this.httpService
@@ -157,15 +192,25 @@ export class WhatsappConnectorService
                     },
                 },
                 {
-                    headers: this.getCommonHeaders(to),
+                    headers: this.getCommonHeaders(
+                        to,
+                        customHeaders,
+                    ),
                 },
             );
     }
 
     sendVideo(
-        to: string,
-        link: string,
-        caption: string,
+        {
+            to,
+            link,
+            caption,
+        }: {
+            to: string;
+            link: string;
+            caption: string;
+        },
+        customHeaders?: object,
     ): Observable<any>
     {
         return this.httpService
@@ -182,14 +227,23 @@ export class WhatsappConnectorService
                     },
                 },
                 {
-                    headers: this.getCommonHeaders(to),
+                    headers: this.getCommonHeaders(
+                        to,
+                        customHeaders,
+                    ),
                 },
             );
     }
 
     sendSticker(
-        to: string,
-        link: string,
+        {
+            to,
+            link,
+        }: {
+            to: string;
+            link: string;
+        },
+        customHeaders?: object,
     ): Observable<any>
     {
         return this.httpService
@@ -205,17 +259,29 @@ export class WhatsappConnectorService
                     },
                 },
                 {
-                    headers: this.getCommonHeaders(to),
+                    headers: this.getCommonHeaders(
+                        to,
+                        customHeaders,
+                    ),
                 },
             );
     }
 
     sendLocation(
-        to: string,
-        latitude: string,
-        longitude: string,
-        name: string,
-        address: string,
+        {
+            to,
+            latitude,
+            longitude,
+            name,
+            address,
+        }: {
+            to: string;
+            latitude: string;
+            longitude: string;
+            name: string;
+            address: string;
+        },
+        customHeaders?: object,
     ): Observable<any>
     {
         return this.httpService
@@ -234,7 +300,10 @@ export class WhatsappConnectorService
                     },
                 },
                 {
-                    headers: this.getCommonHeaders(to),
+                    headers: this.getCommonHeaders(
+                        to,
+                        customHeaders,
+                    ),
                 },
             );
     }
@@ -255,6 +324,7 @@ export class WhatsappConnectorService
             footer?: WhatsappInteractiveFooter;
             action: any;
         },
+        customHeaders?: object,
     ): Promise<any>
     {
         const payload = makeSendInteractivePayload({
@@ -274,7 +344,10 @@ export class WhatsappConnectorService
                         this.getUrlMessagesPath(),
                         payload,
                         {
-                            headers: this.getCommonHeaders(to),
+                            headers: this.getCommonHeaders(
+                                to,
+                                customHeaders,
+                            ),
                         },
                     ),
             );
@@ -297,21 +370,19 @@ export class WhatsappConnectorService
     async sendTemplate(
         {
             to,
+            country,
             templateName,
             language,
             headerParameters,
             bodyParameters,
             buttons,
-        }: {
-            to: string;
-            templateName: string;
-            language: string;
-            headerParameters: any[];
-            bodyParameters: any[];
-            buttons: any[];
-        },
+        }: WhatsappTemplateParameters,
+        customHeaders?: object,
     ): Promise<any>
     {
+        // guard clause
+        this.parsePhoneNumber(to, country);
+
         const payload = makeSendTemplatePayload({
             to,
             templateName,
@@ -327,7 +398,10 @@ export class WhatsappConnectorService
                     this.getUrlMessagesPath(),
                     payload,
                     {
-                        headers: this.getCommonHeaders(to),
+                        headers: this.getCommonHeaders(
+                            to,
+                            customHeaders,
+                        ),
                     },
                 ),
         );
@@ -350,6 +424,7 @@ export class WhatsappConnectorService
             to: string;
             messageId: string;
         },
+        customHeaders?: object,
     ): Promise<any>
     {
         const response = await lastValueFrom(
@@ -362,7 +437,10 @@ export class WhatsappConnectorService
                         message_id       : messageId,
                     },
                     {
-                        headers: this.getCommonHeaders(to),
+                        headers: this.getCommonHeaders(
+                            to,
+                            customHeaders,
+                        ),
                     },
                 ),
         );
@@ -371,10 +449,14 @@ export class WhatsappConnectorService
     }
 
     callApi(
-        payload: {
+        {
+            to,
+            ...payload
+        }: {
             to: string;
             [key: string]: any;
         },
+        customHeaders?: object,
     ): Observable<any>
     {
         return this.httpService
@@ -382,7 +464,10 @@ export class WhatsappConnectorService
                 this.getUrlMessagesPath(),
                 payload,
                 {
-                    headers: this.getCommonHeaders(payload.to),
+                    headers: this.getCommonHeaders(
+                        to,
+                        customHeaders,
+                    ),
                 },
             );
     }
@@ -442,5 +527,16 @@ payload: ${JSON.stringify(payload)}
         }
 
         await Promise.all(commandCreateMessagePromises);
+    }
+
+    private parsePhoneNumber(
+        to: string,
+        country: CountryCode,
+    ): void
+    {
+        if (!parsePhoneNumberFromString(to, country)?.isValid())
+        {
+            throw new BadRequestException(`The Phone number "${to}" is not correct to send a whatsapp for the country "${country}".`);
+        }
     }
 }

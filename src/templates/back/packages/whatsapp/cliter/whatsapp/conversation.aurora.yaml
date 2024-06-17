@@ -55,7 +55,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-excluded:
+excludedFiles:
   - src/@api/whatsapp/conversation/dto/whatsapp-create-conversation.dto.ts
   - src/@api/whatsapp/conversation/controllers/whatsapp-create-conversation.controller.spec.ts
   - src/@api/whatsapp/conversation/controllers/whatsapp-create-conversation.controller.ts

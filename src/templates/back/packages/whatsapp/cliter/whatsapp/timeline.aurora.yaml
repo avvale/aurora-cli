@@ -38,7 +38,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-excluded:
+excludedFiles:
   - src/@api/whatsapp/timeline/dto/whatsapp-create-timeline.dto.ts
   - src/@api/whatsapp/timeline/controllers/whatsapp-create-timeline.controller.spec.ts
   - src/@api/whatsapp/timeline/controllers/whatsapp-create-timeline.controller.ts

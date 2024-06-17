@@ -101,7 +101,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-excluded:
+excludedFiles:
   - src/@api/whatsapp/message/dto/whatsapp-create-message.dto.ts
   - src/@api/whatsapp/message/controllers/whatsapp-create-message.controller.spec.ts
   - src/@api/whatsapp/message/controllers/whatsapp-create-message.controller.ts

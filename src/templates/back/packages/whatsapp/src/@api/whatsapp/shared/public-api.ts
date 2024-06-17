@@ -5,3 +5,4 @@ export * from './functions/parse-webhook-payload.function';
 export * from './services/whatsapp-connector.service';
 export * from './services/whatsapp-timeline.service';
 export * from './whatsapp-shared.module';
+export * from './whatsapp.types';
