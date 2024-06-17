@@ -120,7 +120,7 @@
                             [dialogColumnsConfig]="permissionsColumnsConfig$ | async"
                             [dialogGridData]="permissionsGridData$ | async"
                             [dialogGridId]="permissionsGridId"
-                            [dialogOriginColumnsConfig]="permissionsColumnsConfig$ | async"
+                            [dialogOriginColumnsConfig]="permissionsOriginColumnsConfig"
                             [gridData]="permissionsRolesGridData$ | async"
                             [gridId]="permissionsRolesGridId"
                             [gridState]="permissionsRolesGridState"
@@ -133,49 +133,25 @@
                         >
                             <au-grid-translations
                                 [for]="permissionsRolesGridId"
-                                [actions]="t('Actions')"
-                                [AND]="t('AND')"
-                                [clearFilters]="t('ClearFilters')"
-                                [clickAndDragInfo]="t('ClickAndDragInfo')"
-                                [columns]="t('Columns')"
-                                [field]="t('Field')"
-                                [filter]="t('Filter')"
-                                [operator]="t('Operator')"
-                                [OR]="t('OR')"
-                                [pleaseSelectField]="t('PleaseSelectField')"
-                                [translations]="t('Translations')"
-                                [value]="t('Value')"
-                                [noData]="t('NoData')"
-                                [paginator]="{
-                                    firstPageLabel: t('Paginator.FirstPageLabel'),
-                                    itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
-                                    lastPageLabel: t('Paginator.LastPageLabel'),
-                                    nextPageLabel: t('Paginator.NextPageLabel'),
-                                    ofLabel: t('Paginator.OfLabel'),
-                                    previousPageLabel: t('Paginator.PreviousPageLabel')
-                                }"
-                                [operators]="{
-                                    contains: t('Operators.Contains'),
-                                    containsAny: t('Operators.ContainsAny'),
-                                    endsWith: t('Operators.EndsWith'),
-                                    equals: t('Operators.Equals'),
-                                    greaterThan: t('Operators.GreaterThan'),
-                                    greaterThanEqual: t('Operators.GreaterThanEqual'),
-                                    lessThan: t('Operators.LessThan'),
-                                    lessThanEqual: t('Operators.LessThanEqual'),
-                                    mustContain: t('Operators.MustContain'),
-                                    notEquals: t('Operators.NotEquals'),
-                                    startsWith: t('Operators.StartsWith')
-                                }"
                                 [actionsMenu]="{
-                                    edit: t('Edit'),
-                                    delete: t('Delete'),
                                     unlink: t('Unlink'),
                                     cancel: t('Cancel'),
                                     close: t('Close')
                                 }"
                             >
                                 @for (columnConfig of originPermissionsRolesColumnsConfig; track columnConfig.field)
+                                {
+                                    <au-grid-column-translation
+                                        [field]="columnConfig.field"
+                                    >
+                                        {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                                    </au-grid-column-translation>
+                                }
+                            </au-grid-translations>
+                            <au-grid-translations
+                                [for]="permissionsGridId"
+                            >
+                                @for (columnConfig of permissionsOriginColumnsConfig; track columnConfig.field)
                                 {
                                     <au-grid-column-translation
                                         [field]="columnConfig.field"
