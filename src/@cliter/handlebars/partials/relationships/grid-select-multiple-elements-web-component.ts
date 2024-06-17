@@ -10,26 +10,26 @@ handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
         [gridId]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
         [originColumnsConfig]="origin{{ toPascalCase schema.moduleName }}{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig"
         [columnsConfig]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
-        [gridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
-        [gridState]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridState"
+        [gridData]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
+        [gridState]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridState"
         [dialogColumnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
         [dialogGridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
         [dialogGridId]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
-        [dialogOriginColumnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
+        [dialogOriginColumnsConfig]="origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig"
         [selectedCheckboxRowModel]="selectedCheckboxRowModel"
         (dialogSelectedCheckboxRowModelChange)="handleDialog{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}RowsSectionChange($event)"
         (selectedCheckboxRowModelChange)="handle{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}RowsSectionChange($event)"
         #{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridSelectMultipleElements
     >
         <au-grid-translations
-            [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
+            [for]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
             [actionsMenu]="{
                 unlink: t('Unlink'),
                 cancel: t('Cancel'),
                 close: t('Close')
             }"
         >
-            @for (columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig; track columnConfig.field)
+            @for (columnConfig of origin{{ toPascalCase schema.moduleName }}{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig; track columnConfig.field)
             {
                 <au-grid-column-translation [field]="columnConfig.field">
                     \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
@@ -39,7 +39,7 @@ handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
         <au-grid-translations
             [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
         >
-            @for (columnConfig of {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}OriginColumnsConfig; track columnConfig.field)
+            @for (columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig; track columnConfig.field)
             {
                 <au-grid-column-translation
                     [field]="columnConfig.field"
@@ -65,7 +65,7 @@ handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
                 </button>
                 <button
                     mat-flat-button
-                    [disabled]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}RolesSelectedRows.length === 0"
+                    [disabled]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}SelectedRows.length === 0"
                     (click)="handleRemove{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}Selected()"
                 >
                     <mat-icon
