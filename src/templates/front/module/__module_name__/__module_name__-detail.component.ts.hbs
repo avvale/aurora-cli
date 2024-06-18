@@ -5,7 +5,7 @@
             (object items='Validators' path='@angular/forms')
             (object items=(array 'Action' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'SnackBarInvalidFormComponent' 'uuid' 'ViewDetailComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
-            (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.boundedContextName '.types'))
+            (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName))
     )
 ~}}
@@ -69,100 +69,61 @@
 {{/unlessEq}}
 {{! add imports for each components }}
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
 {{
     push ../importsArray
         (
             object
                 items=(getAggregateNameFromPropertyRelationship relationship.modulePath)
-                path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
+                path=(sumStrings ../config.appsContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)))
         )
         (
             object
                 items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
-                path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service')
+                path=(sumStrings ../config.appsContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
         )
 ~}}
-{{else}}
-{{
-    push ../importsArray
-        (
-            object
-                items=(getAggregateNameFromPropertyRelationship relationship.modulePath)
-                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
-        )
-        (
-            object
-                items=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
-                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)) '.service')
-        )
-~}}
-{{/eq}}
 {{/each}}
 {{! add imports for each GridSelectElement components }}
 {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
-{{
-    push ../importsArray
-        (
-            object
-                items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
-                path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
-        )
-~}}
-{{else}}
 {{ push ../importsArray
     (
         object
             items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
-            path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
+            path=(sumStrings ../config.appsContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
     )
 ~}}
-{{/eq}}
 {{/each}}
 {{! add imports for each GridElementsManager components }}
 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
 {{
     push ../importsArray
         (
             object
                 items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
-                path=(sumStrings '../' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
+                path=(sumStrings ../config.appsContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
         )
 ~}}
-{{else}}
-{{
-    push ../importsArray
-        (
-            object
-                items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
-                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
-        )
-~}}
-{{/eq}}
 {{/each}}
 {{! add imports for each GridSelectMultipleElementsWebComponents components }}
 {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
-{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
 {{
     push ../importsArray
         (
             object
                 items=relationship.pivot.aggregateName
-                path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
+                path=(sumStrings ../config.appsContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)))
         )
-~}}
-{{else}}
-{{
-    push ../importsArray
         (
             object
-                items=relationship.pivot.aggregateName
-                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
+                items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
+                path=(sumStrings ../config.appsContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
+        )
+        (
+            object
+                items=(array (sumStrings (toCamelCase relationship.pivot.moduleName) 'ColumnsConfig') (sumStrings (toPascalCase relationship.pivot.moduleName) 'Service') (sumStrings 'getQueryExport' (toPascalCase relationship.pivot.moduleNames)))
+                path=(sumStrings ../config.appsContainer '/'  (toKebabCase relationship.pivot.boundedContextName) '/' (toKebabCase relationship.pivot.moduleName))
         )
 ~}}
-{{/eq}}
 {{/each}}
 {{#if (hasBooleanProperties schema.aggregateProperties) }}
 {{
@@ -586,17 +547,17 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{/if}}
     {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
     /* #region methods to manage {{ toPascalCase relationship.pivot.moduleNames }} grid */
-    handlePermissionsRowsSectionChange($event: SelectionChange<IamPermissionRole>): void
+    handle{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}RowsSectionChange($event: SelectionChange<{{ relationship.pivot.aggregateName }}>): void
     {
         this.{{ toCamelCase relationship.pivot.moduleName }}SelectedRows = $event.source.selected;
     }
 
-    handleRemovePermissionsSelected(): void
+    handleRemove{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Selected(): void
     {
         if (this.{{ toCamelCase relationship.pivot.moduleName }}SelectedRows.length > 0)
         {
             this.actionService.action({
-                id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.removePermissionsRoles',
+                id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.remove{{ toPascalCase relationship.pivot.moduleNames }}',
                 isViewAction: false,
                 meta        : {
                     rows: this.{{ toCamelCase relationship.pivot.moduleName }}SelectedRows,
@@ -614,7 +575,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             isViewAction: false,
             meta        : {
                 query: QueryStatementHandler
-                    .init({ columnsConfig: permissionColumnsConfig })
+                    .init({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase name }}GridId))
                     .setSort(this.gridStateService.getSort(this.{{ toCamelCase name }}GridId))
                     .setPage(this.gridStateService.getPage(this.{{ toCamelCase name }}GridId))
@@ -624,7 +585,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             afterRunAction: () =>
             {
                 this.gridStateService.setPaginationActionId(this.{{ toCamelCase name }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase name }}Pagination');
-                this.gridStateService.setExportActionId(this.{{ toCamelCase name }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.exportPermissions');
+                this.gridStateService.setExportActionId(this.{{ toCamelCase name }}GridId, '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}');
                 this.{{ toCamelCase name }}Component.handleElementsDialog({
                     data: {
                         gridId   : this.{{ toCamelCase name }}GridId,
@@ -640,7 +601,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         });
     }
 
-    handleDialog{{ toPascalCase name }}RowsSectionChange($event: SelectionChange<IamPermission>): void
+    handleDialog{{ toPascalCase name }}RowsSectionChange($event: SelectionChange<{{ relationship.aggregateName }}>): void
     {
         this.{{ toCamelCase name }}SelectedRows = $event.source.selected;
     }
@@ -650,7 +611,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         if (this.{{ toCamelCase name }}SelectedRows.length > 0)
         {
             this.actionService.action({
-                id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.addPermissionsRoles',
+                id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.add{{ toPascalCase relationship.pivot.moduleNames }}',
                 isViewAction: false,
                 meta        : {
                     rows: this.{{ toCamelCase name }}SelectedRows,
@@ -774,7 +735,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe({{ toCamelCase relationship.pivot.moduleNames }} =>
                     {
-                        this.{{ toCamelCase relationship.pivot.moduleNames }}Id = {{ toCamelCase relationship.pivot.moduleNames }}.map({{ toCamelCase relationship.pivot.moduleName }} => {{ toCamelCase relationship.pivot.moduleName }}.permissionId);
+                        this.{{ toCamelCase relationship.pivot.moduleNames }}Ids = {{ toCamelCase relationship.pivot.moduleNames }}.map({{ toCamelCase relationship.pivot.moduleName }} => {{ toCamelCase relationship.pivot.moduleName }}.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id);
                     });
 
                 // {{ name }} grid
@@ -793,9 +754,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
                 // {{ name }} grid
                 this.{{ name }}ColumnsConfig$ = this.gridColumnsConfigStorageService
-                    .getColumnsConfig(this.{{ name }}GridId, this.{{ name }}OriginColumnsConfig)
+                    .getColumnsConfig(this.{{ name }}GridId, this.origin{{ toPascalCase name }}ColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
-                this.{{ name }}GridData$ = this.permissionService.pagination$;
+                this.{{ name }}GridData$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.pagination$;
                 /* #endregion edit action to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements */
                 {{/each}}
                 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
@@ -1016,34 +977,34 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
 
             /* #region actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
-            case 'iam::role.detail.addPermissionRole':
-                await lastValueFrom(this.permissionRoleService.create({
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.add{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
+                await lastValueFrom(this.{{ toCamelCase relationship.pivot.moduleName }}Service.create({
                     object: {
-                        permissionId: action.meta.row.id,
-                        roleId      : this.managedObject.id,
+                        {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                        {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id: action.meta.row.id,
                     },
                 }));
 
                 this.actionService.action({
-                    id          : 'iam::role.detail.permissionsRolesPagination',
+                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase relationship.pivot.moduleNames }}Pagination',
                     isViewAction: false,
                 });
 
-                // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                // get all {{ toPascalCase relationship.pivot.moduleNames }} from the {{ toCamelCase ../schema.moduleName }}, to mark the {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} as selected when open {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} dialog
                 this.actionService.action({
-                    id            : 'iam::role.detail.getPermissionsRoles',
+                    id            : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.get{{ toPascalCase relationship.pivot.moduleNames }}',
                     isViewAction  : false,
                     afterRunAction: () =>
                     {
                         this.actionService.action({
-                            id          : 'iam::role.detail.permissionsPagination',
+                            id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination',
                             isViewAction: false,
                         });
                     },
                 });
 
                 this.snackBar.open(
-                    `${this.translocoService.translate('iam.Permission')} ${this.translocoService.translate('Saved.M')}`,
+                    `${this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}')} ${this.translocoService.translate('Saved.M')}`,
                     undefined,
                     {
                         verticalPosition: 'top',
@@ -1052,35 +1013,35 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 );
                 break;
 
-            case 'iam::role.detail.addPermissionsRoles':
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.add{{ toPascalCase relationship.pivot.moduleNames }}':
                 try
                 {
                     await lastValueFrom(
-                        this.permissionRoleService
+                        this.{{ toCamelCase relationship.pivot.moduleName }}Service
                             .insert({
                                 objects: action.meta.rows
                                     // avoid insert rows already inserted
-                                    .filter(row => this.rolePermissionsId.indexOf(row.id) === -1)
+                                    .filter(row => this.{{ toCamelCase relationship.pivot.moduleNames }}Ids.indexOf(row.id) === -1)
                                     .map(row => ({
-                                        permissionId: row.id,
-                                        roleId      : this.managedObject.id,
+                                        {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                                        {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id: row.id,
                                     })),
                             }),
                     );
 
                     this.actionService.action({
-                        id          : 'iam::role.detail.permissionsRolesPagination',
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase relationship.pivot.moduleNames }}Pagination',
                         isViewAction: false,
                     });
 
-                    // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                    // get all {{ toPascalCase relationship.pivot.moduleNames }} from the {{ toCamelCase ../schema.moduleName }}, to mark the {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} as selected when open {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} dialog
                     this.actionService.action({
-                        id          : 'iam::role.detail.getPermissionsRoles',
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.get{{ toPascalCase relationship.pivot.moduleNames }}',
                         isViewAction: false,
                     });
 
                     this.snackBar.open(
-                        `${this.translocoService.translate('iam.Permissions')} ${this.translocoService.translate('Saved.M.P')}`,
+                        `${this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}')} ${this.translocoService.translate('Saved.M.P')}`,
                         undefined,
                         {
                             verticalPosition: 'top',
@@ -1094,24 +1055,27 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 }
                 break;
 
-            case 'iam::role.detail.removePermissionRole':
-                await lastValueFrom(this.permissionRoleService.deleteById({
-                    permissionId: action.meta.row.permissionId,
-                    roleId      : this.managedObject.id,
-                }));
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.remove{{ toPascalCase relationship.pivot.moduleName }}':
+                await lastValueFrom(
+                    this.{{ toCamelCase relationship.pivot.moduleName }}Service
+                        .deleteById({
+                            {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                            {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id: action.meta.row.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id,
+                        }),
+                );
 
                 this.actionService.action({
-                    id          : 'iam::role.detail.permissionsRolesPagination',
+                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase relationship.pivot.moduleNames }}Pagination',
                     isViewAction: false,
                 });
 
                 this.actionService.action({
-                    id          : 'iam::role.detail.getPermissionsRoles',
+                    id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.get{{ toPascalCase relationship.pivot.moduleNames }}',
                     isViewAction: false,
                 });
 
                 this.snackBar.open(
-                    `${this.translocoService.translate('iam.Permission')} ${this.translocoService.translate('Deleted.M')}`,
+                    `${this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}')} ${this.translocoService.translate('Deleted.M')}`,
                     undefined,
                     {
                         verticalPosition: 'top',
@@ -1120,26 +1084,26 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 );
                 break;
 
-            case 'iam::role.detail.permissionsRolesPagination':
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase relationship.pivot.moduleNames }}Pagination':
                 await lastValueFrom(
-                    this.permissionRoleService
+                    this.{{ toCamelCase relationship.pivot.moduleName }}Service
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
                                 QueryStatementHandler
-                                    .init({ columnsConfig: permissionRoleColumnsConfig })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsRolesGridId))
-                                    .setSort(this.gridStateService.getSort(this.permissionsRolesGridId))
-                                    .setPage(this.gridStateService.getPage(this.permissionsRolesGridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.permissionsRolesGridId))
+                                    .init({ columnsConfig: {{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
+                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
+                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
                                     .getQueryStatement(),
                             constraint: {
                                 where: {
-                                    roleId: this.managedObject.id,
+                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
                                 },
                                 include: [
                                     {
-                                        association: 'permission',
+                                        association: '{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
                                     },
                                 ],
                             },
@@ -1147,81 +1111,90 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 );
                 break;
 
-            case 'iam::role.detail.getPermissionsRoles':
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.get{{ toPascalCase relationship.pivot.moduleNames }}':
                 await lastValueFrom(
-                    this.permissionRoleService
+                    this.{{ toCamelCase relationship.pivot.moduleName }}Service
                         .get({
                             query: {
                                 where: {
-                                    roleId: this.managedObject.id,
+                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
                                 },
                             },
                         }),
                 );
                 break;
 
-            case 'iam::role.detail.exportPermissionsRoles':
-                const permissionRoleRows = await lastValueFrom(
-                    this.permissionRoleService
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase relationship.pivot.moduleNames }}':
+                const {{ toCamelCase relationship.pivot.moduleName }}Rows = await lastValueFrom(
+                    this.{{ toCamelCase relationship.pivot.moduleName }}Service
                         .get({
-                            graphqlStatement: getQueryExportPermissionsRoles,
+                            graphqlStatement: getQueryExport{{ toPascalCase relationship.pivot.moduleNames }},
                             query           : action.meta.query,
                             constraint      : {
                                 where: {
-                                    roleId: this.managedObject.id,
+                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
                                 },
                                 include: [
                                     {
-                                        association: 'permission',
+                                        association: '{{ toCamelCase ../schema.moduleName }}',
+                                    },
+                                    {
+                                        association: '{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
                                     },
                                 ],
                             },
                         }),
                 );
 
-                const permissionRoleColumns: string[] = ['name'];
-                const permissionRoleHeaders: string[] = [this.translocoService.translate('iam.permission')];
+                const {{ toCamelCase relationship.pivot.moduleName }}Columns: string[] = ['{{ toCamelCase ../schema.moduleName }}', '{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}'];
+                const {{ toCamelCase relationship.pivot.moduleName }}Headers: string[] = [
+                    this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toCamelCase ../schema.moduleName }}'),
+                    this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}'),
+                ];
 
                 exportRows(
-                    permissionRoleRows.objects.map(row => row.permission),
-                    'rolePermissions.' + action.meta.format,
-                    permissionRoleColumns,
-                    permissionRoleHeaders,
+                    {{ toCamelCase relationship.pivot.moduleName }}Rows.objects.map(row => ({
+                        {{ toCamelCase ../schema.moduleName }}: row.{{ toCamelCase ../schema.moduleName }}.name,
+                        {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}: row.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.name,
+                    })),
+                    '{{ toCamelCase relationship.pivot.moduleNames }}.' + action.meta.format,
+                    {{ toCamelCase relationship.pivot.moduleName }}Columns,
+                    {{ toCamelCase relationship.pivot.moduleName }}Headers,
                     action.meta.format,
                 );
                 break;
                 /* #endregion actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements grid */
 
             /* #region actions to manage {{ toPascalCase relationship.pivot.moduleNames }} grid-select-multiple-elements dialog */
-            case 'iam::role.detail.permissionsPagination':
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination':
                 await lastValueFrom(
-                    this.permissionService
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
                                 QueryStatementHandler
-                                    .init({ columnsConfig: permissionColumnsConfig })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
-                                    .setSort(this.gridStateService.getSort(this.permissionsGridId))
-                                    .setPage(this.gridStateService.getPage(this.permissionsGridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.permissionsGridId))
+                                    .init({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .getQueryStatement(),
                         }),
                 );
                 break;
 
-            case 'iam::role.detail.removePermissionsRoles':
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.remove{{ toPascalCase relationship.pivot.moduleNames }}':
                 try
                 {
                     await lastValueFrom(
-                        this.permissionRoleService
+                        this.{{ toCamelCase relationship.pivot.moduleName }}Service
                             .delete({
                                 query: {
                                     where: {
                                         [Operator.or]: action.meta.rows
                                             .map(row => ({
-                                                permissionId: row.permissionId,
-                                                roleId      : this.managedObject.id,
+                                                {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                                                {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id: row.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id,
                                             })),
                                     },
                                 },
@@ -1231,18 +1204,18 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     this.selectedCheckboxRowModel.clear();
 
                     this.actionService.action({
-                        id          : 'iam::role.detail.permissionsRolesPagination',
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase relationship.pivot.moduleNames }}Pagination',
                         isViewAction: false,
                     });
 
-                    // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                    // get all {{ toPascalCase relationship.pivot.moduleNames }} from the {{ toCamelCase ../schema.moduleName }}, to mark the {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} as selected when open {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} dialog
                     this.actionService.action({
-                        id          : 'iam::role.detail.getPermissionsRoles',
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.get{{ toPascalCase relationship.pivot.moduleNames }}',
                         isViewAction: false,
                     });
 
                     this.snackBar.open(
-                        `${this.translocoService.translate('iam.Permissions')} ${this.translocoService.translate('Deleted.M.P')}`,
+                        `${this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}')} ${this.translocoService.translate('Deleted.M.P')}`,
                         undefined,
                         {
                             verticalPosition: 'top',
@@ -1256,22 +1229,22 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 }
                 break;
 
-            case 'iam::role.detail.exportPermissions':
-                const permissionRows = await lastValueFrom(
-                    this.permissionService
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.export{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}':
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows = await lastValueFrom(
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .get({
                             query: action.meta.query,
                         }),
                 );
 
-                const permissionColumns: string[] = permissionColumnsConfig.map(permissionColumnConfig => permissionColumnConfig.field);
-                const permissionHeaders = permissionColumns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig.map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
 
                 exportRows(
-                    permissionRows.objects,
-                    'permissions.' + action.meta.format,
-                    permissionColumns,
-                    permissionHeaders,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows.objects,
+                    '{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}.' + action.meta.format,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns,
+                    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers,
                     action.meta.format,
                 );
                 break;
