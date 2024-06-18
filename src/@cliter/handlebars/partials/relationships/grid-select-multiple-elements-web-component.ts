@@ -7,11 +7,11 @@ handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
     <au-grid-select-multiple-elements
         class="col-12 mt-0"
         [label]="t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}')"
-        [gridId]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
-        [originColumnsConfig]="origin{{ toPascalCase schema.moduleName }}{{ toPascalCase (getModuleNameFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig"
-        [columnsConfig]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
-        [gridData]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
-        [gridState]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridState"
+        [gridId]="{{ toCamelCase relationship.pivot.moduleName }}GridId"
+        [originColumnsConfig]="origin{{ toPascalCase relationship.pivot.moduleName }}ColumnsConfig"
+        [columnsConfig]="{{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig$ | async"
+        [gridData]="{{ toCamelCase relationship.pivot.moduleName }}GridData$ | async"
+        [gridState]="{{ toCamelCase relationship.pivot.moduleName }}GridState"
         [dialogColumnsConfig]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}ColumnsConfig$ | async"
         [dialogGridData]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridData$ | async"
         [dialogGridId]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
@@ -22,7 +22,7 @@ handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
         #{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridSelectMultipleElements
     >
         <au-grid-translations
-            [for]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
+            [for]="{{ toCamelCase relationship.pivot.moduleName }}GridId"
             [actionsMenu]="{
                 unlink: t('Unlink'),
                 cancel: t('Cancel'),
@@ -65,7 +65,7 @@ handlebars.registerPartial('gridSelectMultipleElementsWebComponent',
                 </button>
                 <button
                     mat-flat-button
-                    [disabled]="{{ toCamelCase schema.moduleName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}SelectedRows.length === 0"
+                    [disabled]="{{ toCamelCase relationship.pivot.moduleName }}SelectedRows.length === 0"
                     (click)="handleRemove{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}Selected()"
                 >
                     <mat-icon

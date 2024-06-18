@@ -43,7 +43,7 @@
     push importsArray
         (
             object
-                items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectMultipleElementsComponent' 'GridSelectMultipleElementsModule' 'GridState' 'GridStateService' 'QueryStatementHandler' 'SelectionModel')
+                items=(array 'ColumnConfig' 'ColumnDataType' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridSelectMultipleElementsComponent' 'GridSelectMultipleElementsModule' 'GridState' 'GridStateService' 'Operator' 'QueryStatementHandler' 'SelectionChange' 'SelectionModel')
                 path='@aurora'
         )
 ~}}
@@ -67,6 +67,7 @@
 ~}}
 {{/unlessEq}}
 {{/unlessEq}}
+{{! add imports for each components }}
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
 {{
@@ -98,6 +99,7 @@
 ~}}
 {{/eq}}
 {{/each}}
+{{! add imports for each GridSelectElement components }}
 {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
 {{
@@ -118,6 +120,7 @@
 ~}}
 {{/eq}}
 {{/each}}
+{{! add imports for each GridElementsManager components }}
 {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
 {{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
 {{
@@ -135,6 +138,28 @@
             object
                 items=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'ColumnsConfig')
                 path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
+        )
+~}}
+{{/eq}}
+{{/each}}
+{{! add imports for each GridSelectMultipleElementsWebComponents components }}
+{{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
+{{#eq (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) (toKebabCase ../schema.boundedContextName) }}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.pivot.aggregateName
+                path=(sumStrings '../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
+        )
+~}}
+{{else}}
+{{
+    push ../importsArray
+        (
+            object
+                items=relationship.pivot.aggregateName
+                path=(sumStrings '../../' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '.types')
         )
 ~}}
 {{/eq}}
@@ -172,6 +197,13 @@
 ~}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
+{{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
+export const {{ toCamelCase relationship.pivot.moduleName }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase relationship.pivot.moduleName }}GridList';
+export const {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
+{{#if @last}}
+
+{{/if}}
+{{/each}}
 @Component({
     selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-detail',
     templateUrl    : './{{ toKebabCase schema.moduleName }}-detail.component.html',
@@ -237,13 +269,13 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     /* #endregion variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
     {{/eq}}
     {{#eq webComponent.type 'grid-select-multiple-elements'}}
-    /* #region variables to manage grid-select-multiple-elements {{ toCamelCase schema.moduleNames }}-{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
-    // {{ toCamelCase schema.moduleNames }}-{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-select-multiple-elements
-    @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridSelectMultipleElements') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectMultipleElementsComponent;
-    {{ toCamelCase relationship.pivot.moduleNames }}Id: string[];
+    /* #region variables to manage grid-select-multiple-elements {{ toCamelCase ../schema.moduleNames }}-{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+    // {{ toCamelCase ../schema.moduleNames }}-{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} grid-select-multiple-elements
+    @ViewChild('{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridSelectMultipleElements') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectMultipleElementsComponent;
+    {{ toCamelCase relationship.pivot.moduleNames }}Ids: string[];
     {{ toCamelCase relationship.pivot.moduleName }}GridState: GridState = {};
     {{ toCamelCase relationship.pivot.moduleName }}SelectedRows: {{ relationship.pivot.aggregateName }}[] = [];
-    {{ toCamelCase relationship.pivot.moduleName }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase relationship.pivot.moduleName }}GridList';
+    {{ toCamelCase relationship.pivot.moduleName }}GridId = {{ toCamelCase relationship.pivot.moduleName }}GridId;
     {{ toCamelCase relationship.pivot.moduleName }}GridData$: Observable<GridData<{{ relationship.pivot.aggregateName }}>>;
     {{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig$: Observable<ColumnConfig[]>;
     selectedCheckboxRowModel = new SelectionModel<any>(true, [], true, (a: {{ relationship.pivot.aggregateName }}, b: {{ relationship.pivot.aggregateName }}) => a.{{ toCamelCase relationship.singularName }}Id === b.{{ toCamelCase relationship.singularName }}Id);
@@ -275,12 +307,12 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         ...{{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig,
     ];
 
-    // start {{ name }} grid of {{ toCamelCase ../schema.moduleName }}
+    // {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} dialog
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}SelectedRows: {{ relationship.aggregateName }}[] = [];
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId = {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>>;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
-    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}OriginColumnsConfig: ColumnConfig[] = [
+    origin{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig: ColumnConfig[] = [
         {
             type   : ColumnDataType.ACTIONS,
             field  : 'Actions',
@@ -289,7 +321,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {
                 const actions = [];
 
-                if (this.{{ toCamelCase relationship.pivot.moduleNames }}Id.includes(row.id))
+                if (this.{{ toCamelCase relationship.pivot.moduleNames }}Ids.includes(row.id))
                 {
                     actions.push({
                         id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.noAction',
