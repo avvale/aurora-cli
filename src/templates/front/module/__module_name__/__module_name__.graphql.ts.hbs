@@ -149,6 +149,14 @@ export const findByIdWithRelationsQuery = gql`
         $queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
         $constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
         {{/eq}}
+        {{#eq webComponent.type 'grid-select-multiple-elements'}}
+        $queryPaginate{{ toPascalCase relationship.pivot.moduleNames }}: QueryStatement
+        $constraintPaginate{{ toPascalCase relationship.pivot.moduleNames }}: QueryStatement
+        $queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
+        $constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatement
+        $queryGet{{ toPascalCase relationship.pivot.moduleNames }}: QueryStatement
+        $constraintGet{{ toPascalCase relationship.pivot.moduleNames }}: QueryStatement
+        {{/eq}}
         {{/each}}
     ) {
         object: {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
@@ -175,6 +183,30 @@ export const findByIdWithRelationsQuery = gql`
             total
             rows
             count
+        }
+        {{/each}}
+        {{#each (getGridSelectMultipleElementsWebComponentsProperties schema.aggregateProperties) }}
+        {{ toCamelCase relationship.pivot.boundedContextName }}Paginate{{ toPascalCase relationship.pivot.moduleNames }} (
+            query: $queryPaginate{{ toPascalCase relationship.pivot.moduleNames }}
+            constraint: $constraintPaginate{{ toPascalCase relationship.pivot.moduleNames }}
+        ) {
+            total
+            rows
+            count
+        }
+        {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} (
+            query: $queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}
+            constraint: $constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}
+        ) {
+            total
+            rows
+            count
+        }
+        {{ toCamelCase relationship.pivot.boundedContextName }}Get{{ toPascalCase relationship.pivot.moduleNames }} (
+            query: $queryGet{{ toPascalCase relationship.pivot.moduleNames }}
+            constraint: $constraintGet{{ toPascalCase relationship.pivot.moduleNames }}
+        ) {
+            {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id
         }
         {{/each}}
         ${relationsFields}
