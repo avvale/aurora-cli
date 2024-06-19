@@ -241,6 +241,16 @@ export const createMutation = gql`
     }
 `;
 
+export const insertMutation = gql`
+    mutation {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (
+        $payload: [{{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input]!
+    ) {
+        {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }} (
+            payload: $payload
+        )
+    }
+`;
+
 export const updateByIdMutation = gql`
     mutation {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ById (
         $payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput!

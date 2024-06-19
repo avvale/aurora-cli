@@ -15,23 +15,24 @@
                             (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ById')
                             (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleNames))
                     )
-                    path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.boundedContextName '.types')
+                    path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName)
             )
             (
                 object
                     items=
                     (
                         array
-                            'paginationQuery'
-                            'getQuery'
+                            'createMutation'
+                            'deleteByIdMutation'
+                            'deleteMutation'
                             'fields'
                             'findByIdQuery'
                             'findQuery'
-                            'createMutation'
+                            'getQuery'
+                            'insertMutation'
+                            'paginationQuery'
                             'updateByIdMutation'
                             'updateMutation'
-                            'deleteByIdMutation'
-                            'deleteMutation'
                     )
                     path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName)
             )
@@ -684,6 +685,31 @@ export class {{ toPascalCase schema.moduleName }}Service
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
+    insert<T>(
+        {
+            graphqlStatement = insertMutation,
+            objects = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            objects?: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}[];
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: objects,
                 },
                 context: {
                     headers,
