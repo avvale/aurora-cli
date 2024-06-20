@@ -1,4 +1,4 @@
-import { ModuleDefinitionSchema, PropertyType } from '../..';
+import { ModuleDefinitionSchema, PropertyType, RelationshipType } from '../..';
 
 export const deleteYamlDefaultValues = (schema: ModuleDefinitionSchema): ModuleDefinitionSchema =>
 {
@@ -11,6 +11,25 @@ export const deleteYamlDefaultValues = (schema: ModuleDefinitionSchema): ModuleD
         )
         {
             delete property.length;
+        }
+
+        if (
+            property.type === PropertyType.RELATIONSHIP &&
+            property.relationship?.type === RelationshipType.MANY_TO_MANY &&
+            property.relationship.pivot?.aggregateProperties &&
+            Array.isArray(property.relationship.pivot.aggregateProperties)
+        )
+        {
+            for (const pivotProperty of property.relationship.pivot.aggregateProperties)
+            {
+                if (
+                    pivotProperty.type === PropertyType.ID &&
+                    pivotProperty.length === 36
+                )
+                {
+                    delete pivotProperty.length;
+                }
+            }
         }
     }
 

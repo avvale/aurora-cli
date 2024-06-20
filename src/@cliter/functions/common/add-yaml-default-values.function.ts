@@ -1,4 +1,4 @@
-import { ModuleDefinitionSchema, PropertyType } from '../..';
+import { ModuleDefinitionSchema, PropertyType, RelationshipType } from '../..';
 
 export const addYamlDefaultValues = (schema: ModuleDefinitionSchema): ModuleDefinitionSchema =>
 {
@@ -11,6 +11,25 @@ export const addYamlDefaultValues = (schema: ModuleDefinitionSchema): ModuleDefi
         )
         {
             property.length = 36;
+        }
+
+        if (
+            property.type === PropertyType.RELATIONSHIP &&
+            property.relationship?.type === RelationshipType.MANY_TO_MANY &&
+            property.relationship.pivot?.aggregateProperties &&
+            Array.isArray(property.relationship.pivot.aggregateProperties)
+        )
+        {
+            for (const pivotProperty of property.relationship.pivot.aggregateProperties)
+            {
+                if (
+                    pivotProperty.type === PropertyType.ID &&
+                    pivotProperty.length === undefined
+                )
+                {
+                    pivotProperty.length = 36;
+                }
+            }
         }
     }
 
