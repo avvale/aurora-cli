@@ -242,13 +242,17 @@ export class {{ toPascalCase schema.moduleName }}Service
     findById(
         {
             graphqlStatement = findByIdQuery,
-            id = '',
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }} = null,
+            {{/each}}
             constraint = {},
             headers = {},
             scope,
         }: {
             graphqlStatement?: DocumentNode;
-            id?: string;
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}?: string;
+            {{/each}}
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
             scope?: string;
@@ -264,7 +268,9 @@ export class {{ toPascalCase schema.moduleName }}Service
             }>({
                 query    : parseGqlFields(graphqlStatement, fields, constraint),
                 variables: {
-                    id,
+                    {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+                    {{ toCamelCase name }},
+                    {{/each}}
                     constraint,
                 },
                 context: {
@@ -776,12 +782,16 @@ export class {{ toPascalCase schema.moduleName }}Service
     deleteById<T>(
         {
             graphqlStatement = deleteByIdMutation,
-            id = '',
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }} = null,
+            {{/each}}
             constraint = {},
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            id?: string;
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}?: string;
+            {{/each}}
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
         } = {},
@@ -792,7 +802,9 @@ export class {{ toPascalCase schema.moduleName }}Service
             .mutate({
                 mutation : graphqlStatement,
                 variables: {
-                    id,
+                    {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+                    {{ toCamelCase name }},
+                    {{/each}}
                     constraint,
                 },
                 context: {

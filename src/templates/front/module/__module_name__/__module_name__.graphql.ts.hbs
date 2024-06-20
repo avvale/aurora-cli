@@ -11,9 +11,9 @@ export const fields = `
     {{~ setVar 'printProperty' false }}
     {{/if}}
     {{#and ../printProperty (isAllowProperty ../schema.moduleName this) }}
-    {{#unlessEq (getPropertyName this) 'id'}}
+    {{#unless (isPrimaryKeyProperty this) }}
     {{ toCamelCase (getPropertyName this) }}
-    {{/unlessEq}}
+    {{/unless}}
     {{/and}}
     {{/each}}
 `;
@@ -79,7 +79,9 @@ export const getQuery = gql`
             query: $query
             constraint: $constraint
         ) {
-            id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}
+            {{/each}}
             #FIELDS
         }
     }
@@ -114,19 +116,28 @@ export const getRelations = gql`
 
 export const findByIdQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
-        $id: ID
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        ${{ toCamelCase name }}: ID
+        {{/each}}
         $constraint: QueryStatement
     ) {
         object: {{ toCamelCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ById (
-            id: $id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}: ${{ toCamelCase name }}
+            {{/each}}
             constraint: $constraint
         ) {
-            id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}
+            {{/each}}
             #FIELDS
         }
     }
 `;
-{{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
+{{#or
+    (unlessEq (countWebComponentsProperties schema.aggregateProperties) 0)
+    (hasCompositePrimaryKeys schema.aggregateProperties)
+}}
 
 export const findByIdWithRelationsQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }}ByIdWithRelations (
@@ -212,7 +223,7 @@ export const findByIdWithRelationsQuery = gql`
         ${relationsFields}
     }
 `;
-{{/unlessEq}}
+{{/or}}
 
 export const findQuery = gql`
     query {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase schema.moduleName }} (
@@ -283,11 +294,15 @@ export const updateMutation = gql`
 
 export const deleteByIdMutation = gql`
     mutation {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (
-        $id: ID!
+        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+        ${{ toCamelCase name }}: ID!
+        {{/each}}
         $constraint: QueryStatement
     ) {
         {{ toCamelCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ById (
-            id: $id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}: ${{ toCamelCase name }}
+            {{/each}}
             constraint: $constraint
         ) {
             ${fields}

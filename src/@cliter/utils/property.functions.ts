@@ -119,6 +119,13 @@ export const isManyToManyRelationshipProperty = (
     return property.relationship?.type === RelationshipType.MANY_TO_MANY;
 };
 
+export const isPrimaryKeyProperty = (
+    property: Property,
+): boolean =>
+{
+    return Boolean(property.primaryKey);
+};
+
 // replace by Property isBinary
 export const isBinaryProperty = (
     property: Property,
