@@ -300,7 +300,7 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
         (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
     }}
 
-    return {{ toCamelCase schema.moduleName }}Service.getRelations({{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}{
+    return {{ toCamelCase schema.moduleName }}Service.getRelations({{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}{{#if @first }}{{ bracketOpen }}{{/if}}
         queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: QueryStatementHandler
             .init({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
@@ -308,7 +308,9 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
             .setPage(gridStateService.getPage({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
             .setSearch(gridStateService.getSearchState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
             .getQueryStatement(),
-    }{{/each}});
+    {{~#if @last }}
+
+    {{ bracketClose }}{{/if}}{{/each}});
     {{else}}
     {{#if (hasI18nProperties schema.aggregateProperties) }}
 
