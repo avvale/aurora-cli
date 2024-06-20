@@ -16,5 +16,16 @@ export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = 
     },
     {{/unlessEq}}
     {{/if}}
+    {{! columns config for GridSelectMultipleElementsWebComponents }}
+    {{#if (isManyToOneRelationshipProperty this) }}
+    {
+        type           : ColumnDataType.{{ getPropertyColumnDataType this ../config }},
+        field          : '{{ toCamelCase relationship.field }}.name',
+        searchableField: '${{ toCamelCase relationship.field }}.name$',
+        sort           : '{{ toCamelCase relationship.field }}.name',
+        translation    : 'Name',
+        isUnaccent     : true,
+    },
+    {{/if}}
     {{/each}}
 ];

@@ -14,6 +14,13 @@ export const fields = `
     {{#unless (isPrimaryKeyProperty this) }}
     {{ toCamelCase (getPropertyName this) }}
     {{/unless}}
+    {{#if (isManyToOneRelationshipProperty this) }}
+    {{ toCamelCase relationship.field }} {
+        {{#each (getWithoutTimestampsWithoutRelationshipProperties (getPropertiesFromPropertyRelationship relationship.modulePath)) }}
+        {{ toCamelCase name }}
+        {{/each}}
+    }
+    {{/if}}
     {{/and}}
     {{/each}}
 `;

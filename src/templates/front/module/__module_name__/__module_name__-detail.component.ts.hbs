@@ -120,7 +120,7 @@
         )
         (
             object
-                items=(array (sumStrings (toCamelCase relationship.pivot.moduleName) 'ColumnsConfig') (sumStrings (toPascalCase relationship.pivot.moduleName) 'Service') (sumStrings 'getQueryExport' (toPascalCase relationship.pivot.moduleNames)))
+                items=(array (sumStrings (toCamelCase relationship.pivot.moduleName) 'ColumnsConfig') (sumStrings (toPascalCase relationship.pivot.moduleName) 'Service') (sumStrings 'getQuery as getQueryExport' (toPascalCase relationship.pivot.moduleNames)))
                 path=(sumStrings ../config.appsContainer '/'  (toKebabCase relationship.pivot.boundedContextName) '/' (toKebabCase relationship.pivot.moduleName))
         )
 ~}}
