@@ -136,7 +136,6 @@ export const findByIdQuery = gql`
 `;
 {{#or
     (unlessEq (countWebComponentsProperties schema.aggregateProperties) 0)
-    (hasCompositePrimaryKeys schema.aggregateProperties)
 }}
 
 export const findByIdWithRelationsQuery = gql`
@@ -234,7 +233,9 @@ export const findQuery = gql`
             query: $query
             constraint: $constraint
         ) {
-            id
+            {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}
+            {{/each}}
             #FIELDS
         }
     }

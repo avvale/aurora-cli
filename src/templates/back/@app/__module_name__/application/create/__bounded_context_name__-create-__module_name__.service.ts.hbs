@@ -166,10 +166,10 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             {{ toCamelCase schema.moduleName }},
             {
                 createOptions: cQMetadata?.repositoryOptions,
-                {{#if (hasPivotProperties schema.aggregateProperties) }}
+                {{#if (hasCompositePrimaryKeys schema.aggregateProperties) }}
                 finderQueryStatement: (aggregate: {{ schema.aggregateName }}) => ({
                     where: {
-                        {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
+                        {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
                         {{ name }}: aggregate['{{ name }}']['value'],
                         {{/each}}
                     },

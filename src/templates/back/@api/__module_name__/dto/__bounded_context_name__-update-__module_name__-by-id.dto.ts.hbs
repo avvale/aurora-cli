@@ -42,7 +42,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         description: '{{ toCamelCase name }} [input here api field description]',
         example    : '{{ uuid name }}',
     })
-    {{ toCamelCase name }}?: string;
+    {{ toCamelCase name }}{{#unless (isPrimaryKeyProperty this) }}?{{/unless}}: string;
 
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}

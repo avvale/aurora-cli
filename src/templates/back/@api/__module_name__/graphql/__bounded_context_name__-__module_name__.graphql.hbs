@@ -93,7 +93,7 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
-    {{ toCamelCase name }}: ID
+    {{ toCamelCase name }}: ID{{#if (isPrimaryKeyProperty this) }}!{{/if}}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{setVar 'isCommonProperty' false ~}}

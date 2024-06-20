@@ -29,11 +29,11 @@ export const generateAppPivotFiles = (generateCommandState: GenerateCommandState
                 moduleName        : property.relationship.pivot.moduleName,
                 moduleNames       : property.relationship.pivot.moduleNames,
                 excludedFiles     : [
-                    ...(Array.isArray(generateCommandState.schema.excludedFiles) ? generateCommandState.schema.excludedFiles : []),
+                    ...(Array.isArray(property.relationship.pivot.excludedFiles) ? property.relationship.pivot.excludedFiles : []),
                     // avoid creating files for pivot only with delimited context name, these files have been created with an earlier module
                     `src/@app/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.seed.ts`,
                 ],
-                excludedOperations: generateCommandState.schema.excludedOperations,
+                excludedOperations: property.relationship.pivot.excludedOperations,
                 force             : generateCommandState.flags.force,
                 verbose           : generateCommandState.flags.verbose,
                 lockFiles         : generateCommandState.lockFiles,

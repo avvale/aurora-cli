@@ -1,5 +1,4 @@
-import './public-api';
-import './array';
+import './add-i18n-property-signature';
 import './array';
 import './bracket-close';
 import './bracket-open';
