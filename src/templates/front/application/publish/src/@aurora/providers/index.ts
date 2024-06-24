@@ -1,1 +1,0 @@
-export { provideDateTimeFormat, provideDateTimeLocale } from './date-time.provider';
