@@ -1,0 +1,91 @@
+@tailwind components;
+
+@layer components {
+    .col-responsive-small {
+        @apply
+        col-span-6
+        sm:col-span-3
+    }
+    .col-responsive {
+        @apply
+        col-span-12
+        sm:col-span-6
+    }
+}
+
+// layout container acts as base structure for all cols
+.layout__container {
+    @apply
+    content-start grid grid-cols-12 gap-4
+}
+
+.col-1 {
+    @apply
+    md:col-span-1
+    col-responsive-small
+}
+
+.col-2 {
+    @apply
+    md:col-span-2
+    col-responsive-small
+}
+
+.col-3 {
+    @apply
+    md:col-span-3
+    col-responsive-small
+}
+
+.col-4 {
+    @apply
+    md:col-span-4
+    col-responsive-small
+}
+
+.col-5 {
+    @apply
+    md:col-span-5
+    col-responsive
+}
+
+.col-6 {
+    @apply
+    md:col-span-6
+    col-responsive
+}
+
+.col-7 {
+    @apply
+    md:col-span-7
+    col-responsive
+}
+
+.col-8 {
+    @apply
+    md:col-span-8
+    col-responsive
+}
+
+.col-9 {
+    @apply
+    md:col-span-9
+    col-responsive
+}
+
+.col-10 {
+    @apply
+    md:col-span-10
+    col-responsive
+}
+
+.col-11 {
+    @apply
+    md:col-span-11
+    col-responsive
+}
+
+.col-12 {
+    @apply
+    col-span-12
+}

@@ -1,0 +1,32 @@
+<button
+    mat-icon-button
+    *ngIf="!opened"
+    (click)="open()"
+>
+    <mat-icon [svgIcon]="'mat_solid:search'">
+    </mat-icon>
+</button>
+<div
+    class="absolute inset-0 flex items-center shrink-0 z-99 bg-card"
+    *ngIf="opened"
+    @slideInTop
+    @slideOutTop>
+    <mat-icon
+        class="absolute ml-6 sm:ml-8"
+        [svgIcon]="'mat_solid:search'">
+    </mat-icon>
+    <input
+        class="w-full h-full px-16 sm:px-18"
+        [formControl]="searchControl"
+        [placeholder]="('search' | gridTranslate | async) + '...'"
+        #barSearchInput
+    >
+    <button
+        class="absolute top-1/2 right-5 sm:right-7 shrink-0 w-10 h-10 -mt-5"
+        mat-icon-button
+        (click)="close()"
+    >
+        <mat-icon [svgIcon]="'mat_solid:close'">
+        </mat-icon>
+    </button>
+</div>

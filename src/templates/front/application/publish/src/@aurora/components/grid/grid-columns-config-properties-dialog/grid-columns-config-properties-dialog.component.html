@@ -1,0 +1,63 @@
+<div mat-dialog-title class="dialog-header relative">
+    <p class="title">
+        <mat-icon class="inline">table_chart</mat-icon>
+        <span>{{ 'columns' | gridTranslate:'message':gridId | async }}</span>
+    </p>
+
+    <div class="helper text-base opacity-50">{{ 'clickAndDragInfo' | gridTranslate:'message':gridId | async }}</div>
+    <hr class="mt-2 mb-4">
+
+    <button mat-dialog-close mat-icon-button class="absolute top-2 right-2">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div mat-dialog-content class="dialog-content">
+    <div
+        cdkDropList
+        class="columns-list"
+        (cdkDropListDropped)="drop($event)"
+    >
+        <ng-container *ngFor="let columnConfig of columnsConfigToList">
+            <div
+                class="column"
+                cdkDrag
+                [ngClass]="{ 'cursor-move': !columnConfig.sticky }"
+                [cdkDragDisabled]="columnConfig.sticky"
+            >
+                <div class="flex">
+                    <mat-checkbox
+                        [ngModel]="!columnConfig.hidden"
+                        [disabled]="columnConfig.sticky"
+                        (ngModelChange)="columnConfig.hidden = !$event"
+                        (change)="handleChangeVisibilityColumn($event, columnConfig)"
+                    >
+                    </mat-checkbox>
+                    <span>
+                        {{ columnConfig.field | gridTranslate:'column':gridId | async }}
+                    </span>
+                </div>
+                <mat-icon>
+                    drag_indicator
+                </mat-icon>
+            </div>
+            <hr>
+        </ng-container>
+    </div>
+</div>
+
+<mat-dialog-actions>
+    <button
+        [mat-dialog-close]
+        (click)="resetColumnsConfig($event)"
+        class="w-full"
+        mat-flat-button
+    >
+        <mat-icon
+            class="icon-size-5 mr-2"
+        >
+            restart_alt
+        </mat-icon>
+        {{ 'resetColumnsConfig' | gridTranslate:'message':gridId | async }}
+    </button>
+</mat-dialog-actions>

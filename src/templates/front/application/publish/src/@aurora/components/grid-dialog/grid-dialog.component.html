@@ -1,0 +1,81 @@
+<div mat-dialog-title class="dialog-header">
+    <!-- <p class="title">
+        <mat-icon>...</mat-icon>
+        <span>...</span>
+    </p> -->
+
+    <button mat-dialog-close mat-icon-button class="absolute top-2 right-2">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<div mat-dialog-content class="flex flex-col h-full">
+    <div
+        class="flex flex-auto h-full overflow-y-auto pt-0"
+        cdkScrollable
+    >
+        <!-- grid -->
+        <au-grid
+            [id]="gridId"
+            [columnsConfig]="columnsConfig$ | async"
+            [gridData]="gridData$ | async"
+            [gridState]="data.gridState"
+            [originColumnsConfig]="data.originColumnsConfig"
+            [selectedCheckboxRowModel]="selectedCheckboxRowModel"
+            [selectedRows]="selectedRows"
+            (action)="action.emit($event)"
+            (columnsConfigChange)="columnsConfigChange.emit($event)"
+            (columnFiltersChange)="columnFiltersChange.emit($event)"
+            (selectedCheckboxRowModelChange)="selectedCheckboxRowModelChange.emit($event)"
+            (stateChange)="stateChange.emit($event)"
+            (searchOpen)="searchOpen.emit()"
+            (searchClose)="searchClose.emit()"
+            (search)="search.emit($event)"
+        >
+            <!-- container to pass GridCustomHeaderTemplateDirective -->
+            <ng-container *ngFor="let gridCustomHeaderTemplate of data.gridCustomHeadersTemplate">
+                <ng-template
+                    auGridCustomHeaderTemplate
+                    [position]="gridCustomHeaderTemplate.position"
+                >
+                    <ng-container *ngTemplateOutlet="gridCustomHeaderTemplate.templateRef">
+                    </ng-container>
+                </ng-template>
+            </ng-container>
+
+            <ng-template
+                auGridCustomHeaderTemplate
+                position="left"
+            >
+            </ng-template>
+
+            <ng-template
+                auGridCustomHeaderTemplate
+                position="beforeGridButtons"
+            >
+            </ng-template>
+
+            <ng-template
+                auGridCustomHeaderTemplate
+                position="right"
+            >
+            </ng-template>
+
+            <!-- container to pass GridCellValueTemplateDirective -->
+            <ng-container *ngFor="let gridCellValueTemplate of data.gridCellValuesTemplate">
+                <ng-template
+                    auGridCellValueTemplate
+                    let-value
+                    let-columnConfig="columnConfig"
+                    let-row="row"
+                    [field]="gridCellValueTemplate.field"
+                >
+                    <ng-container *ngTemplateOutlet="gridCellValueTemplate.templateRef; context: { $implicit: value, columnConfig, row }">
+                    </ng-container>
+                </ng-template>
+            </ng-container>
+
+        </au-grid>
+        <!-- / grid -->
+    </div>
+</div>

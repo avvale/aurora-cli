@@ -1,0 +1,33 @@
+<div
+    #attachmentFrame
+    id="attachment-library"
+    [formGroup]="formGroup"
+>
+    <div
+        #attachmentMask
+        id="attachment-library-mask"
+    >
+        {{ 'placeholder' | attachmentTranslate | async }}
+    </div>
+    <div
+        id="library-sortable"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="sortDropHandler($event)"
+        [formArrayName]="formArrayName"
+    >
+        <ng-container
+            *ngFor="let attachmentItem of attachmentsFormArray.controls; let i=index"
+        >
+            <au-attachment-item
+                cdkDrag
+                class="relative w-full md:w-1/2 lg:w-1/3"
+                [formGroup]="attachmentItem"
+                [families]="families"
+                (enableCrop)="handlerEnableCrop($event)"
+                (removeItem)="handlerRemoveItem($event)"
+            >
+            </au-attachment-item>
+        </ng-container>
+    </div>
+</div>

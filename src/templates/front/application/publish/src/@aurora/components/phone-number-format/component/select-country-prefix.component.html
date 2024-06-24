@@ -1,0 +1,27 @@
+<mat-select
+    class="ml-5 w-20 mr-2"
+    [formControl]="internalControl"
+    (selectionChange)="onSelectionChange($event)"
+>
+    <mat-select-trigger>
+        <au-flag-icon
+            [flagCode]="(options() | getCountryPrefix:internalControl?.value)?.iso3166Alpha2 | lowercase"
+            fontSize="16px"
+        >
+            {{ (options() | getCountryPrefix:internalControl?.value)?.prefix }}
+        </au-flag-icon>
+    </mat-select-trigger>
+    @for (option of options(); track option.iso3166Alpha2)
+    {
+        <mat-option
+            [value]="option.iso3166Alpha2"
+        >
+            <au-flag-icon
+                [flagCode]="option.iso3166Alpha2 | lowercase"
+                fontSize="16px"
+            >
+                {{ option.content }}
+            </au-flag-icon>
+        </mat-option>
+    }
+</mat-select>

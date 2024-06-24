@@ -1,0 +1,22 @@
+.chipsize-tiny {
+    @apply py-1 px-2.5 text-xs;
+}
+.chipsize-small {
+    @apply py-1.5 px-2.5 text-sm;
+}
+.chipsize-regular {
+    @apply py-2 px-2.5 text-base;
+}
+
+.chipbg-primary {
+    @apply bg-primary;
+}
+.chipbg-accent {
+    @apply bg-accent;
+}
+.chipbg-warn {
+    @apply bg-warn;
+}
+.chipbg-success {
+    @apply bg-green-600;
+}

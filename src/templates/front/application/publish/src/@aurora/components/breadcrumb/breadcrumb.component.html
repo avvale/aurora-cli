@@ -1,0 +1,37 @@
+<div *transloco="let t; scope: 'breadcrumb';">
+    <div class="hidden sm:flex flex-wrap items-center font-medium">
+        <ng-container *ngFor="let crumb of data; first as isFirst; last as isLast">
+            <div *ngIf="isFirst">
+                <a class="whitespace-nowrap text-primary-500">{{ t(crumb.translation) }}</a>
+            </div>
+
+            <div *ngIf="!isFirst && !isLast" class="flex items-center ml-1 whitespace-nowrap">
+                <mat-icon
+                    class="icon-size-5 text-secondary"
+                    [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                <a  class="ml-1 text-primary-500"
+                    [routerLink]="crumb.routerLink">{{ t(crumb.translation) }}</a>
+            </div>
+
+            <div *ngIf="isLast" class="flex items-center ml-1 whitespace-nowrap">
+                <mat-icon
+                    class="icon-size-5 text-secondary"
+                    [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                <span class="ml-1 text-secondary">{{ t(crumb.translation) }}</span>
+            </div>
+
+        </ng-container>
+    </div>
+
+    <div class="flex sm:hidden">
+        <a
+            class="inline-flex items-center -ml-1.5 text-secondary font-medium"
+            [routerLink]="'..'">
+            <mat-icon
+                class="icon-size-5 text-secondary"
+                [svgIcon]="'heroicons_solid:chevron-left'"></mat-icon>
+            <span class="ml-1">{{ t('breadcrumb.Back') }}</span>
+        </a>
+    </div>
+
+</div>
