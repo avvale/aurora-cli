@@ -5,9 +5,9 @@ import * as path from 'node:path';
 
 export const generateTranslationFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
-    // create directory application container, normally src/assets/i18n/module_name
+    // create directory application container, normally public/i18n/module_name
     await TemplateGenerator.createDirectory(
-        path.join('src', cliterConfig.dashboardTranslations),
+        cliterConfig.dashboardTranslations,
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
     );
 
@@ -15,7 +15,7 @@ export const generateTranslationFiles = async (generateCommandState: GenerateCom
     await TemplateGenerator.generateStaticContents(
         generateCommandState.command,
         TemplateElement.FRONT_MODULE_TRANSLATIONS,
-        path.join('src', cliterConfig.dashboardTranslations),
+        cliterConfig.dashboardTranslations,
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
         {
             boundedContextName: generateCommandState.schema.boundedContextName,

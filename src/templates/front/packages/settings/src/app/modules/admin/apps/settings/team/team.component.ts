@@ -39,43 +39,43 @@ export class SettingsTeamComponent implements OnInit
         // Setup the team members
         this.members = [
             {
-                avatar: 'assets/images/avatars/male-01.jpg',
+                avatar: 'public/images/avatars/male-01.jpg',
                 name  : 'Dejesus Michael',
                 email : 'dejesusmichael@mail.org',
                 role  : 'admin',
             },
             {
-                avatar: 'assets/images/avatars/male-03.jpg',
+                avatar: 'public/images/avatars/male-03.jpg',
                 name  : 'Mclaughlin Steele',
                 email : 'mclaughlinsteele@mail.me',
                 role  : 'admin',
             },
             {
-                avatar: 'assets/images/avatars/female-02.jpg',
+                avatar: 'public/images/avatars/female-02.jpg',
                 name  : 'Laverne Dodson',
                 email : 'lavernedodson@mail.ca',
                 role  : 'write',
             },
             {
-                avatar: 'assets/images/avatars/female-03.jpg',
+                avatar: 'public/images/avatars/female-03.jpg',
                 name  : 'Trudy Berg',
                 email : 'trudyberg@mail.us',
                 role  : 'read',
             },
             {
-                avatar: 'assets/images/avatars/male-07.jpg',
+                avatar: 'public/images/avatars/male-07.jpg',
                 name  : 'Lamb Underwood',
                 email : 'lambunderwood@mail.me',
                 role  : 'read',
             },
             {
-                avatar: 'assets/images/avatars/male-08.jpg',
+                avatar: 'public/images/avatars/male-08.jpg',
                 name  : 'Mcleod Wagner',
                 email : 'mcleodwagner@mail.biz',
                 role  : 'read',
             },
             {
-                avatar: 'assets/images/avatars/female-07.jpg',
+                avatar: 'public/images/avatars/female-07.jpg',
                 name  : 'Shannon Kennedy',
                 email : 'shannonkennedy@mail.ca',
                 role  : 'read',

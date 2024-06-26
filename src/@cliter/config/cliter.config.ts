@@ -45,7 +45,7 @@ export const cliterConfig: CliterConfig =
     appsContainer        : '@apps',
     dashboardContainer   : path.join('app', 'modules', 'admin', 'apps'),
     adminContainer       : path.join('app', 'modules', 'admin'),
-    dashboardTranslations: path.join('assets', 'i18n'),
+    dashboardTranslations: path.join('public', 'i18n'),
 
     // back
     appContainer                                    : '@app',

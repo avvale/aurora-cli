@@ -681,7 +681,7 @@ export class CodeWriter
 
     generateFrontTranslations(properties: Property[], langCode: string): void
     {
-        const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'));
+        const translationObject = require(path.join(process.cwd(), cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'));
 
         // get names to translate
         const names = getWithoutTimestampsProperties(properties)
@@ -703,12 +703,12 @@ export class CodeWriter
         // sort object by keys
         const newTranslationObject = ObjectTools.sortByKeys(translationObject);
 
-        fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
+        fs.writeFileSync(path.join(process.cwd(), cliterConfig.dashboardTranslations, this.boundedContextName.toKebabCase(), langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
     generateFrontNavigationTranslation(langCode: string): void
     {
-        const translationObject = require(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'));
+        const translationObject = require(path.join(process.cwd(), cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'));
 
         // avoid overwriting existing properties
         if (translationObject[this.moduleNames.toCamelCase()] === undefined)
@@ -719,7 +719,7 @@ export class CodeWriter
         // sort object by keys
         const newTranslationObject = ObjectTools.sortByKeys(translationObject);
 
-        fs.writeFileSync(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
+        fs.writeFileSync(path.join(process.cwd(), cliterConfig.dashboardTranslations, 'navigation', langCode + '.json'), JSON.stringify(newTranslationObject, null, 4));
     }
 
     // private methods

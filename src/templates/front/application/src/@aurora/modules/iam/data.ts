@@ -9,7 +9,7 @@ export const account: Account = {
         name  : 'Brian',
         surname: 'Hughes',
         status: '',
-        avatar: 'assets/images/avatars/brian-hughes.jpg',
+        avatar: 'public/images/avatars/brian-hughes.jpg',
         mobile: '',
         langId: '',
         password: '',
