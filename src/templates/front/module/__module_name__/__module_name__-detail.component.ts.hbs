@@ -217,7 +217,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             {
                 return [
                     {
-                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
+                        id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase relationship.field }}',
                         isViewAction: false,
                         translation : 'select',
                         icon        : 'add_link',
@@ -942,11 +942,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 );
                 break;
 
-            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
+            case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase relationship.field }}':
                 const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} = action.meta.row as {{ getAggregateNameFromPropertyRelationship relationship.modulePath }};
 
-                this.fg.get('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.id);
-                this.fg.get('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Name').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.name);
+                this.fg.get('{{ toCamelCase relationship.field }}Id').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.id);
+                this.fg.get('{{ toCamelCase relationship.field }}Name').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.name);
                 this.fg.markAsDirty();
 
                 this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.closeDialog();

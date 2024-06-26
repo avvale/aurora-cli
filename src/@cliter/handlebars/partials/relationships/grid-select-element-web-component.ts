@@ -38,12 +38,8 @@ handlebars.registerPartial('gridSelectElementWebComponent',
 >
     <au-grid-translations
         [for]="{{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}GridId"
-        [actionsMenu]="{
-            editCallLog: t('Edit'),
-            deleteCallLog: t('Delete')
-        }"
     >
-        @for (columnConfig of origin{{ toPascalCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}OriginColumnsConfig; track columnConfig.field)
+        @for (columnConfig of {{ toCamelCase (getModuleNamesFromPropertyRelationship property.relationship.modulePath) }}OriginColumnsConfig; track columnConfig.field)
         {
             <au-grid-column-translation [field]="columnConfig.field">
                 \\{{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
