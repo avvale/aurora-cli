@@ -65,14 +65,14 @@ jobs:
       run: npm run build -- --configuration=production
 
     - name: Zip artifact for deployment
-      run: cd dist/fuse && zip release.zip ./* -r
+      run: cd dist/fuse/browser && zip release.zip ./* -r
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: tested-artifact
         path: |
-          dist/fuse/release.zip
+          dist/fuse/browser/release.zip
 
   deploy:
     name: Rsync Plesk deploy
