@@ -165,7 +165,9 @@ export class {{ toPascalCase schema.moduleName }}Service
     getScopePagination(scope: string): Observable<GridData<{{ schema.aggregateName }}>>
     {
         if (this.paginationScoped[scope]) return this.paginationScoped[scope].asObservable();
-        return null;
+
+        this.paginationScoped[scope] = new BehaviorSubject(null);
+        return this.paginationScoped[scope].asObservable();
     }
 
     setScope{{ toPascalCase schema.moduleName }}(scope: string, object: {{ schema.aggregateName }}): void
@@ -182,7 +184,9 @@ export class {{ toPascalCase schema.moduleName }}Service
     getScope{{ toPascalCase schema.moduleName }}(scope: string): Observable<{{ schema.aggregateName }}>
     {
         if (this.{{ toCamelCase schema.moduleName }}Scoped[scope]) return this.{{ toCamelCase schema.moduleName }}Scoped[scope].asObservable();
-        return null;
+
+        this.{{ toCamelCase schema.moduleName }}Scoped[scope] = new BehaviorSubject(null);
+        return this.{{ toCamelCase schema.moduleName }}Scoped[scope].asObservable();
     }
 
     setScope{{ toPascalCase schema.moduleNames }}(scope: string, objects: {{ schema.aggregateName }}[]): void
@@ -199,7 +203,9 @@ export class {{ toPascalCase schema.moduleName }}Service
     getScope{{ toPascalCase schema.moduleNames }}(scope: string): Observable<{{ schema.aggregateName }}[]>
     {
         if (this.{{ toCamelCase schema.moduleNames }}Scoped[scope]) return this.{{ toCamelCase schema.moduleNames }}Scoped[scope].asObservable();
-        return null;
+
+        this.{{ toCamelCase schema.moduleNames }}Scoped[scope] = new BehaviorSubject(null);
+        return this.{{ toCamelCase schema.moduleNames }}Scoped[scope].asObservable();
     }
 
     pagination(
