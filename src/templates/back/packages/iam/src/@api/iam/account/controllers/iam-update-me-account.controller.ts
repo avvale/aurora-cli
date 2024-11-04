@@ -9,7 +9,7 @@ import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/update-me')
-@Auth('iam.account.update')
+@Auth('iam.accountSettings.update')
 export class IamUpdateMeAccountController
 {
     constructor(

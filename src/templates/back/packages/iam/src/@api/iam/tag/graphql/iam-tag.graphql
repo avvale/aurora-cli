@@ -56,29 +56,14 @@ type Mutation
         payload: IamCreateTagInput!
     ): IamTag
 
-    iamCreateTags(
-        payload: [IamCreateTagInput]!
-    ): Boolean!
-
     iamUpdateTagById(
         payload: IamUpdateTagByIdInput!
         constraint: QueryStatement
     ): IamTag
 
-    iamUpdateTags(
-        payload: IamUpdateTagsInput!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [IamTag]!
-
     iamDeleteTagById(
         id: ID!
         constraint: QueryStatement
     ): IamTag
-
-    iamDeleteTags(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [IamTag]!
 
 }

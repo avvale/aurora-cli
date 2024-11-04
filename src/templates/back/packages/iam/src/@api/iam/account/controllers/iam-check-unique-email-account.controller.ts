@@ -7,7 +7,7 @@ import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/check-unique-email')
-@Auth('iam.account.get')
+@Auth('iam.account.get', 'iam.accountSettings.update')
 export class IamCheckUniqueEmailAccountController
 {
     constructor(

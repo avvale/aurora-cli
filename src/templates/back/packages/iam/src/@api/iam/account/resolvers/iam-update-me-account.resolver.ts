@@ -6,7 +6,7 @@ import { Auditing, AuditingMeta, CurrentAccount, Timezone } from '@aurorajs.dev/
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-@Auth('iam.account.update')
+@Auth('iam.accountSettings.update')
 export class IamUpdateMeAccountResolver
 {
     constructor(

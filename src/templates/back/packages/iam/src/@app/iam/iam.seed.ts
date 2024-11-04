@@ -89,6 +89,8 @@ export const permissions = [
     { id: 'e4f909f1-de8a-466a-98d5-4905a41de030',  name: 'iam.tag.update',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
     { id: '824dbc82-7150-4172-baef-3273eb0d8289',  name: 'iam.tag.upsert',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
     { id: '883ce1ee-cff1-47bb-b0b6-1420daec2d60',  name: 'iam.tag.delete',                           boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
+
+    { id: '5b57df0d-d319-43e2-9eed-ab70b9d847b2',  name: 'iam.accountSettings.update',               boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
 ];
 
 export const users = [

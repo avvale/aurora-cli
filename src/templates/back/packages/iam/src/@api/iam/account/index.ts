@@ -1,3 +1,5 @@
+export * from './shared';
+
 // export DTOs
 export { IamAccountDto } from './dto/iam-account.dto';
 export { IamCreateAccountDto } from './dto/iam-create-account.dto';

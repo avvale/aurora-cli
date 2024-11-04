@@ -41,11 +41,11 @@ export const TenantPolicy = ({
                         if (!item[targetProperty]) throw new BadRequestException(`The ${targetProperty} property not found in payload, maybe has to set payloadIndex or targetProperty arguments of TenantPolicy decorator`);
                         if (isArray)
                         {
-                            if (!Utils.arraysIntersects(account.dTenants, item[targetProperty])) throw new UnauthorizedException(`Not allowed create this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
+                            if (!Utils.arraysIntersects(account.dTenants, item[targetProperty])) throw new UnauthorizedException(`Not allowed operate this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
                         }
                         else
                         {
-                            if (account.dTenants.indexOf(item[targetProperty]) === -1) throw new UnauthorizedException(`Not allowed create this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
+                            if (account.dTenants.indexOf(item[targetProperty]) === -1) throw new UnauthorizedException(`Not allowed operate this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
                         }
                     }
                 }
@@ -55,11 +55,11 @@ export const TenantPolicy = ({
                     if (!args[payloadIndex][targetProperty]) throw new BadRequestException(`The ${targetProperty} property not found in payload, maybe has to set payloadIndex or targetProperty arguments of TenantPolicy decorator`);
                     if (isArray)
                     {
-                        if (!Utils.arraysIntersects(account.dTenants, args[payloadIndex][targetProperty])) throw new UnauthorizedException(`Not allowed create this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
+                        if (!Utils.arraysIntersects(account.dTenants, args[payloadIndex][targetProperty])) throw new UnauthorizedException(`Not allowed operate this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
                     }
                     else
                     {
-                        if (account.dTenants.indexOf(args[payloadIndex][targetProperty]) === -1) throw new UnauthorizedException(`Not allowed create this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
+                        if (account.dTenants.indexOf(args[payloadIndex][targetProperty]) === -1) throw new UnauthorizedException(`Not allowed operate this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
                     }
                 }
 

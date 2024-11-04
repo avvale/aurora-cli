@@ -3,7 +3,7 @@ import { Auth } from '@aurora/decorators';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-@Auth('iam.account.get')
+@Auth('iam.account.get', 'iam.accountSettings.update')
 export class IamCheckUniqueEmailAccountResolver
 {
     constructor(

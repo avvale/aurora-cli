@@ -65,6 +65,9 @@ export class IamUpdateMeAccountHandler
                             operationSort: 1,
                         },
                     },
+                    meta: {
+                        from: IamUpdateMeAccountHandler.name,
+                    },
                 },
             ));
         }
@@ -86,6 +89,10 @@ export class IamUpdateMeAccountHandler
                         operationId,
                         operationSort: 2,
                     },
+                },
+                meta: {
+                    from       : IamUpdateMeAccountHandler.name,
+                    rawPassword: userDataToUpdate.password,
                 },
             },
         ));

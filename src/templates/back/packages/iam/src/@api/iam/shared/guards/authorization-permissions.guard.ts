@@ -12,9 +12,12 @@ export class AuthorizationPermissionsGuard implements CanActivate
     {
         const permissions = this.reflector.get<string[]>('permissions', context.getClass());
 
-        if (!permissions) return true;
+        if (
+            !permissions ||
+            (Array.isArray(permissions) && permissions.length === 0)
+        ) return true;
 
-        if (permissions.every(permission => this.getRequest(context).user.dPermissions.all?.includes(permission))) return true;
+        if (permissions.some(permission => this.getRequest(context).user.dPermissions.all?.includes(permission))) return true;
 
         throw new UnauthorizedException({
             statusCode: 403,
