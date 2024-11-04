@@ -60,7 +60,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-excluded:
+excludedFiles:
   - src/@api/o-auth/access-token/controllers/o-auth-create-access-token.controller.ts
   - src/@api/o-auth/access-token/controllers/o-auth-create-access-token.controller.spec.ts
   - src/@api/o-auth/access-token/controllers/o-auth-create-access-tokens.controller.ts

@@ -15,6 +15,8 @@ export const permissions = [
 
     { id: '9593e97b-7871-4344-8ab1-30a68b260f88',  name: 'oAuth.access',                               boundedContextId: '1effdcd9-c1a0-410f-a49d-b2bf6ce34ac7', roleIds: []},
 
+    { id: '77c33c95-5d8a-4319-ae7a-0b977e44dfe4',  name: 'oAuth.credential.impersonalize',             boundedContextId: '1effdcd9-c1a0-410f-a49d-b2bf6ce34ac7', roleIds: []},
+
     { id: '5faf12a6-a7cf-431e-82ba-7afd5d2d647b',  name: 'oAuth.accessToken.access',                   boundedContextId: '1effdcd9-c1a0-410f-a49d-b2bf6ce34ac7', roleIds: []},
     { id: '207b76d5-31d6-4d21-bf24-8e71e5ff042f',  name: 'oAuth.accessToken.get',                      boundedContextId: '1effdcd9-c1a0-410f-a49d-b2bf6ce34ac7', roleIds: []},
     { id: 'a6b36557-f04d-4e3b-9074-3f87934a34b7',  name: 'oAuth.accessToken.create',                   boundedContextId: '1effdcd9-c1a0-410f-a49d-b2bf6ce34ac7', roleIds: []},

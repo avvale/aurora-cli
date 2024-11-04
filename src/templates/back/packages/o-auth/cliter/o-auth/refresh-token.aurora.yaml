@@ -44,7 +44,7 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-excluded:
+excludedFiles:
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.ts
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.spec.ts
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-tokens.controller.ts
