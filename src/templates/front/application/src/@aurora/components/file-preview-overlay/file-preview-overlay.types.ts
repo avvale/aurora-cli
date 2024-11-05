@@ -3,13 +3,13 @@ export interface FilePreviewDialogConfig
     panelClass?: string;
     hasBackdrop?: boolean;
     backdropClass?: string;
-    image?: Image;
+    file?: FilePreviewDialog;
 }
 
-export interface Image
+export interface FilePreviewDialog
 {
     filename: string;
-    prefix: string;
-    binary: string;
-    mime: string;
+    url: string;
+    mimetype: string;
+    relativePathSegments: string[];
 }

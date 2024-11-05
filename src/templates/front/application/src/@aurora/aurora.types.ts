@@ -53,6 +53,39 @@ export interface Config
     readonly data: Property[];
 }
 
+export interface CoreFile {
+    id: string;
+    originFilename: string;
+    filename: string;
+    mimetype: string;
+    extension: string;
+    relativePathSegments: string[];
+    width?:number;
+    height?:number;
+    size: number;
+    url: string;
+    isCropable: boolean;
+    isUploaded: boolean;
+    libraryId?: string;
+    libraryFilename?: string;
+    library?: CoreLibraryFile;
+    meta?: JSON;
+}
+
+export interface CoreLibraryFile {
+    id: string;
+    originFilename: string;
+    filename: string;
+    mimetype: string;
+    extension: string;
+    relativePathSegments: string[];
+    width: number;
+    height: number;
+    size: number;
+    url: string;
+    meta?: JSON;
+}
+
 export interface Environment
 {
     production: boolean;

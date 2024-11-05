@@ -1,0 +1,215 @@
+<div class="relative flex flex-col h-full w-full overflow-auto">
+    <div class="flex flex-auto flex-col h-full max-h-full w-full max-w-full overflow-hidden bg-transparent">
+        @if (chatMessages())
+        {
+            <div
+                class="flex flex-col-reverse overflow-y-auto overscroll-y-contain grow"
+                (scroll)="handlerScroll($event)"
+            >
+                <div class="flex flex-auto shrink flex-col p-4">
+                    @for (
+                        message of chatMessages();
+                        track message.id;
+                        let i = $index;
+                        let first = $first;
+                        let last = $last;
+                    ) {
+                        <!-- Start of the day -->
+                        @if (
+                            first ||
+                            (chatMessages()[i - 1].createdAt | dateFormat: 'D') !== (message.createdAt | dateFormat: 'D')
+                        ) {
+                            <div class="-mx-4 my-3 flex items-center justify-center">
+                                <div class="flex-auto border-b"></div>
+                                <div class="text-secondary mx-4 flex-0 text-sm font-medium leading-5">
+                                    {{ message.createdAt | dateFormat:'MMMM D, YYYY' }}
+                                </div>
+                                <div class="flex-auto border-b"></div>
+                            </div>
+                        }
+                        <div
+                            class="flex flex-col"
+                            [ngClass]="{
+                                'items-end': message | isMine,
+                                'items-start': message | isNotMine,
+                                'mt-0.5': i > 0 && (chatMessages()[i - 1] | isMine) === (message | isMine),
+                                'mt-3': i > 0 && (chatMessages()[i - 1] | isMine) !== (message | isMine),
+                            }"
+                        >
+                            <div
+                                class="flex w-full items-end"
+                                [ngClass]="{
+                                    'justify-end': message | isMine,
+                                    'justify-start': message | isNotMine,
+                                }"
+                            >
+                                <!-- Avatar -->
+                                @if ((message | isNotMine) && false)
+                                {
+                                    <div
+                                        class="mr-3 h-8 w-8 rounded-full bg-gray-300"
+                                        [ngClass]="{
+                                            'pointer-events-none opacity-0': !(last || (chatMessages()[i + 1] | isMine) !== (message | isMine)),
+                                            'opacity-100': last || (chatMessages()[i + 1] | isMine) !== (message | isMine),
+                                        }"
+                                    >
+                                    </div>
+                                }
+
+                                <!-- Bubble -->
+                                <div
+                                    class="relative max-w-3/4 rounded-lg px-3 py-2 group"
+                                    [ngClass]="{
+                                        'bg-blue-500 text-blue-50': message | isMine,
+                                        'bg-gray-500 text-gray-50': message | isNotMine,
+                                    }"
+                                >
+                                    <!-- Speech bubble tail -->
+                                    @if (
+                                        last ||
+                                        (chatMessages()[i + 1] | isMine) !== (message | isMine)
+                                    )
+                                    {
+                                        <div
+                                            class="absolute bottom-0 w-3"
+                                            [ngClass]="{
+                                                '-right-1 -mr-px mb-px text-blue-500': (message | isMine),
+                                                '-left-1 -ml-px mb-px -scale-x-1 text-gray-500': (message | isNotMine),
+                                            }"
+                                        >
+                                            <svg width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path d="M1.01522827,0.516204834 C-8.83532715,54.3062744 61.7609863,70.5215302 64.8009949,64.3061218 C68.8074951,54.8859711 30.1663208,52.9997559 37.5036011,0.516204834 L1.01522827,0.516204834 Z" fill="currentColor" fill-rule="nonzero"></path></g></svg>
+                                        </div>
+                                    }
+
+                                    <!-- Delete button -->
+                                    @if (canDeleteMessage())
+                                    {
+                                        <button
+                                            mat-mini-fab
+                                            aria-label="Delete message"
+                                            color="warn"
+                                            class="absolute -top-1 w-4 h-4 min-h-4 max-h-4 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"
+                                            [ngClass]="{
+                                                '-right-1': message | isMine,
+                                                '-left-1': message | isNotMine,
+                                            }"
+                                            (click)="handlerDeleteMessage(message)"
+                                        >
+                                            <mat-icon
+                                                svgIcon="mat_solid:close"
+                                                class="icon-size-3"
+                                            >
+                                            </mat-icon>
+                                        </button>
+                                    }
+
+                                    <!-- Username -->
+                                    @if (
+                                        (message | isNotMine) &&
+                                        (
+                                            first ||
+                                            (chatMessages()[i - 1] | isMine) !== (message | isMine)
+                                        )
+                                    ) {
+                                        <div
+                                            class="mb-1 text-sm font-medium leading-none"
+                                            [innerHTML]="message.account.username"
+                                        >
+                                        </div>
+                                    }
+
+                                    <!-- Message -->
+                                    @if (
+                                        last &&
+                                        isTyped()
+                                    )
+                                    {
+                                        <div
+                                            class="min-w-4 leading-5"
+                                            [innerHTML]="typedMessage()"
+                                        >
+                                        </div>
+                                    }
+                                    @else
+                                    {
+                                        <div
+                                            class="min-w-4 leading-5"
+                                            [innerHTML]="message.message"
+                                        >
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Time -->
+                            @if (
+                                last ||
+                                (chatMessages()[i + 1] | isMine) !== (message | isMine) ||
+                                (chatMessages()[i + 1].createdAt | dateFormat: 'YYYY-MM-DD HH:mm') !== (message.createdAt | dateFormat: 'YYYY-MM-DD HH:mm')
+                            ) {
+                                <div
+                                    class="text-secondary my-0.5 text-sm font-medium"
+                                    [ngClass]="{
+                                        'mr-0': message | isMine,
+                                        'ml-0': message | isNotMine,
+                                    }"
+                                >
+                                    {{ message.createdAt | dateFormat:'HH:mm'}}
+                                </div>
+                            }
+
+                        </div>
+                    }
+
+                    <!-- Response spinner -->
+                    @if (showSpinner())
+                    {
+                        @if (typeSpinner() === spinnerType.BUBBLE)
+                        {
+                            <div class="mt-3">
+                                <div class="relative max-w-3/4 rounded-lg px-3 py-2 bg-gray-500 inline-block">
+                                    <div class="absolute bottom-0 w-3 -left-1 -ml-px mb-px -scale-x-1 text-gray-500 w">
+                                        <svg width="100%" height="100%" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path d="M1.01522827,0.516204834 C-8.83532715,54.3062744 61.7609863,70.5215302 64.8009949,64.3061218 C68.8074951,54.8859711 30.1663208,52.9997559 37.5036011,0.516204834 L1.01522827,0.516204834 Z" fill="currentColor" fill-rule="nonzero"></path></g></svg>
+                                    </div>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg"><style>.spinner_S1WN{animation:spinner_MGfb .8s linear infinite;animation-delay:-.8s}.spinner_Km9P{animation-delay:-.65s}.spinner_JApP{animation-delay:-.5s}@keyframes spinner_MGfb{93.75%,100%{opacity:.2}}</style><circle class="spinner_S1WN" cx="4" cy="12" r="3"/><circle class="spinner_S1WN spinner_Km9P" cx="12" cy="12" r="3"/><circle class="spinner_S1WN spinner_JApP" cx="20" cy="12" r="3"/></svg>
+                                </div>
+                            </div>
+                        }
+                        @else if(typeSpinner() === spinnerType.PLAIN)
+                        {
+                            <div class="mt-3">
+                                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_S1WN{animation:spinner_MGfb .8s linear infinite;animation-delay:-.8s}.spinner_Km9P{animation-delay:-.65s}.spinner_JApP{animation-delay:-.5s}@keyframes spinner_MGfb{93.75%,100%{opacity:.2}}</style><circle class="spinner_S1WN" cx="4" cy="12" r="3"/><circle class="spinner_S1WN spinner_Km9P" cx="12" cy="12" r="3"/><circle class="spinner_S1WN spinner_JApP" cx="20" cy="12" r="3"/></svg>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <!-- Message field -->
+            <div
+                class="flex items-end border-t bg-gray-50 p-4 dark:bg-transparent"
+            >
+                <mat-form-field
+                    class="fuse-mat-dense fuse-mat-rounded fuse-mat-bold w-full"
+                    [subscriptSizing]="'dynamic'"
+                >
+                    <textarea
+                        matInput
+                        cdkTextareaAutosize
+                        #messageInput
+                    ></textarea>
+                </mat-form-field>
+                <div class="my-px ml-4 flex h-11 items-center">
+                    <button
+                        mat-icon-button
+                        type="button"
+                        (click)="handlerSendMessage(messageInput.value)"
+                    >
+                        <mat-icon svgIcon="mat_solid:send"></mat-icon>
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

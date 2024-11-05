@@ -1,7 +1,6 @@
-import { GraphQLError } from 'graphql';
-import { GraphQLErrors } from '@apollo/client/errors';
+import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
-export const extractGraphqlMessageErrors = (graphqlErrors: GraphQLErrors): string =>
+export const extractGraphqlMessageErrors = (graphqlErrors: ReadonlyArray<GraphQLFormattedError>): string =>
 {
     return graphqlErrors.map((graphqlError: GraphQLError) =>
     {
@@ -23,7 +22,7 @@ export const extractGraphqlMessageErrors = (graphqlErrors: GraphQLErrors): strin
     }).join('<br>');
 };
 
-export const extractGraphqlStatusErrorCodes = (graphqlErrors: GraphQLErrors): string =>
+export const extractGraphqlStatusErrorCodes = (graphqlErrors: ReadonlyArray<GraphQLFormattedError>): string =>
 {
     return graphqlErrors.map((graphqlError: GraphQLError) =>
     {

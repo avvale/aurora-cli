@@ -8,6 +8,7 @@ export interface Account
     dApplicationCodes: string[];
     dPermissions: AccountPermissions;
     dTenants: string[];
+    scopes: string[];
     meta?: any;
     user: User;
     createdAt: string;

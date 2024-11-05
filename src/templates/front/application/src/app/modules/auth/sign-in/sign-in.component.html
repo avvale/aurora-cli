@@ -44,7 +44,7 @@
             <form class="mt-8" [formGroup]="signInForm" #signInNgForm="ngForm">
                 <!-- Email field -->
                 <mat-form-field class="w-full">
-                    <mat-label>{{ t('EmailAddress') }}</mat-label>
+                    <mat-label>{{ t('Username') }}</mat-label>
                     <input id="email" matInput [formControlName]="'email'" />
                     @if (signInForm.get('email').hasError('required')) {
                         <mat-error>

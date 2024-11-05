@@ -84,12 +84,21 @@ export class GridStateService
         return this.exportActionIdStorage[id];
     }
 
-    getPage(id: string): GridPageState
+    getPage(
+        id: string,
+        defaultGridPageState?: GridPageState,
+    ): GridPageState
     {
         const page = this.getPageState(id);
 
         if (!page)
         {
+            if (defaultGridPageState)
+            {
+                this.setPageState(id, defaultGridPageState);
+                return defaultGridPageState;
+            }
+
             return {
                 pageIndex: 0,
                 pageSize : 10,

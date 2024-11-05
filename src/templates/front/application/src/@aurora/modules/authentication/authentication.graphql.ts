@@ -10,3 +10,14 @@ export const oAuthCreateCredentials =  gql`
         }
     }
 `;
+
+export const oAuthCreateImpersonalizeCredentials =  gql`
+    mutation oAuthCreateImpersonalizeCredentials ($accountId:ID!)
+    {
+        oAuthCreateImpersonalizeCredentials (accountId: $accountId)
+        {
+            accessToken
+            refreshToken
+        }
+    }
+`;

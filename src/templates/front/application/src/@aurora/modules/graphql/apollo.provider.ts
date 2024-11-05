@@ -24,7 +24,7 @@ export const provideApollo = (): Array<Provider | EnvironmentProviders> =>
 };
 
 // From the apollo factory, try to extract the statusCode field from the error, and return the error message
-// according to translation file located in public/i18n/error/
+// according to translation file located in assets/i18n/error/
 export const provideApolloErrorTranslations = (): Array<Provider | EnvironmentProviders> =>
 {
     return [

@@ -45,7 +45,7 @@ export class ViewBaseComponent implements OnInit, OnDestroy
             .action$
             .pipe(
                 takeUntil(this.unsubscribeAll$),
-                filter(action => !this.actionScope || (this.actionScope && action.id.startsWith(this.actionScope))),
+                filter(action => !this.actionScope || (this.actionScope && action?.id.startsWith(this.actionScope))),
             )
             .subscribe(async action =>
             {

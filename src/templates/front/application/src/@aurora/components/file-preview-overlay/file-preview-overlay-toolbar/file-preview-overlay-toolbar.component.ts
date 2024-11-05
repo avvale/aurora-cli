@@ -14,6 +14,7 @@ import { FilePreviewOverlayRef } from '../file-preview-overlay-ref';
             transition('* => *', animate('400ms cubic-bezier(0.25, 0.8, 0.25, 1)')),
         ]),
     ],
+    standalone: true,
 })
 export class FilePreviewOverlayToolbarComponent implements OnInit
 {

@@ -1,10 +1,13 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, HostListener, Inject } from '@angular/core';
-import { base64ToBlob } from '@aurora';
-import { saveAs } from 'file-saver';
+import { MatIconModule } from '@angular/material/icon';
+import { DownloadService } from '@aurora';
 import { FilePreviewOverlayRef } from './file-preview-overlay-ref';
+import { FilePreviewOverlayToolbarComponent } from './file-preview-overlay-toolbar';
 import { FILE_PREVIEW_DIALOG_DATA } from './file-preview-overlay.tokens';
-import { Image } from './file-preview-overlay.types';
+import { FilePreviewDialog } from './file-preview-overlay.types';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { NgIf } from '@angular/common';
 
 // Keycode for ESCAPE
 const ESCAPE = 'Escape';
@@ -12,12 +15,13 @@ const ESCAPE = 'Escape';
 const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
 
 @Component({
-    selector: 'au-file-preview-overlay',
-    template: `
+    selector  : 'au-file-preview-overlay',
+    standalone: true,
+    template  : `
         <au-file-preview-overlay-toolbar>
             <div class="flex content-center">
                 <mat-icon>description</mat-icon>
-                {{ image.filename }}
+                {{ file.filename }}
             </div>
             <button
                 mat-icon-button
@@ -38,12 +42,10 @@ const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
             >
                 <mat-spinner></mat-spinner>
             </div>
-            <img
-                [@fade]="loading ? 'fadeOut' : 'fadeIn'"
-                (load)="onLoad($event)"
-                [style.opacity]="loading ? 0 : 1"
-                [src]="image.prefix + image.binary"
-            >
+            <iframe
+                class="bg-white"
+                [src]="iframeSrc"
+            ></iframe>
         </div>
     `,
     styles: [`
@@ -58,10 +60,9 @@ const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
             padding: 1em;
         }
 
-        img {
-            width: 100%;
-            max-width: 500px;
-            height: auto;
+        iframe {
+            width: 80vw;
+            height: 80vh;
         }
 
         .overlay-content {
@@ -81,6 +82,11 @@ const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
             transition('* => *', animate(ANIMATION_TIMINGS)),
         ]),
     ],
+    imports: [
+        NgIf,
+        FilePreviewOverlayToolbarComponent,
+        MatIconModule,
+    ],
 })
 export class FilePreviewOverlayComponent
 {
@@ -88,11 +94,31 @@ export class FilePreviewOverlayComponent
     animationState: 'void' | 'enter' | 'leave' = 'enter';
     animationStateChanged = new EventEmitter<AnimationEvent>();
 
+    iframeSrc: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl("")
+
     constructor(
+        private downloadService: DownloadService,
         public dialogRef: FilePreviewOverlayRef,
-        @Inject(FILE_PREVIEW_DIALOG_DATA) public image: Image,
+        @Inject(FILE_PREVIEW_DIALOG_DATA) public file: FilePreviewDialog,
+
+        private sanitizer : DomSanitizer,
     )
-    { }
+    {
+        switch (file.mimetype)
+        {
+            case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+            case 'application/vnd.ms-excel':
+            case 'application/vnd.ms-powerpoint':
+            case 'application/msword':
+                this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`https://view.officeapps.live.com/op/embed.aspx?src=${ file.url }`);
+                break;
+
+            default:
+                this.iframeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`https://docs.google.com/gview?url=${ file.url }&embedded=true`);
+        }
+    }
 
     // Listen on keydown events on a document level
     @HostListener('document:keydown', ['$event'])
@@ -126,9 +152,11 @@ export class FilePreviewOverlayComponent
 
     download(): void
     {
-        saveAs(
-            base64ToBlob(this.image.binary,  this.image.mime),
-            this.image.filename,
-        );
+        this.downloadService
+            .download({
+                relativePathSegments: this.file.relativePathSegments,
+                filename            : this.file.filename,
+                originFilename      : this.file.filename,
+            });
     }
 }

@@ -1,13 +1,11 @@
-<div mat-dialog-title class="dialog-header">
-    <!-- <p class="title">
-        <mat-icon>...</mat-icon>
-        <span>...</span>
-    </p> -->
-
+<!--
+Header close button, deprecated
+<div>
     <button mat-dialog-close mat-icon-button class="absolute top-2 right-2">
         <mat-icon>close</mat-icon>
     </button>
 </div>
+-->
 
 <div mat-dialog-content class="flex flex-col h-full">
     <div
@@ -32,37 +30,56 @@
             (searchClose)="searchClose.emit()"
             (search)="search.emit($event)"
         >
+            <ng-container *ngTemplateOutlet="data.gridTranslations?.templateRef">
+            </ng-container>
+
             <!-- container to pass GridCustomHeaderTemplateDirective -->
-            <ng-container *ngFor="let gridCustomHeaderTemplate of data.gridCustomHeadersTemplate">
+            @for (gridCustomHeaderTemplate of data.gridCustomHeadersTemplate; track gridCustomHeaderTemplate.position)
+            {
                 <ng-template
                     auGridCustomHeaderTemplate
                     [position]="gridCustomHeaderTemplate.position"
                 >
                     <ng-container *ngTemplateOutlet="gridCustomHeaderTemplate.templateRef">
                     </ng-container>
+                    @if (gridCustomHeaderTemplate.position === 'right')
+                    {
+                        <button
+                            mat-icon-button
+                            mat-dialog-close
+                            class="mr-2"
+                            type="button"
+                        >
+                            <mat-icon aria-hidden="false">
+                                close
+                            </mat-icon>
+                        </button>
+                    }
                 </ng-template>
-            </ng-container>
+            }
 
-            <ng-template
-                auGridCustomHeaderTemplate
-                position="left"
-            >
-            </ng-template>
-
-            <ng-template
-                auGridCustomHeaderTemplate
-                position="beforeGridButtons"
-            >
-            </ng-template>
-
-            <ng-template
-                auGridCustomHeaderTemplate
-                position="right"
-            >
-            </ng-template>
+            @if (!hasCustomHeadersRightPosition())
+            {
+                <ng-template
+                    auGridCustomHeaderTemplate
+                    position="right"
+                >
+                    <button
+                        mat-icon-button
+                        mat-dialog-close
+                        class="mr-2"
+                        type="button"
+                    >
+                        <mat-icon aria-hidden="false">
+                            close
+                        </mat-icon>
+                    </button>
+                </ng-template>
+            }
 
             <!-- container to pass GridCellValueTemplateDirective -->
-            <ng-container *ngFor="let gridCellValueTemplate of data.gridCellValuesTemplate">
+            @for (gridCellValueTemplate of data.gridCellValuesTemplate; track gridCellValueTemplate.field)
+            {
                 <ng-template
                     auGridCellValueTemplate
                     let-value
@@ -73,7 +90,7 @@
                     <ng-container *ngTemplateOutlet="gridCellValueTemplate.templateRef; context: { $implicit: value, columnConfig, row }">
                     </ng-container>
                 </ng-template>
-            </ng-container>
+            }
 
         </au-grid>
         <!-- / grid -->

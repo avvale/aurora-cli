@@ -69,7 +69,7 @@ export class FilePreviewOverlayService
         return Injector.create({
             providers: [
                 { provide: FilePreviewOverlayRef, useValue: dialogRef },
-                { provide: FILE_PREVIEW_DIALOG_DATA, useValue: config.image },
+                { provide: FILE_PREVIEW_DIALOG_DATA, useValue: config.file },
             ],
             parent: this.injector,
             name  : 'FilePreviewOverlayInjector',

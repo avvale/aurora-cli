@@ -1,4 +1,4 @@
-import { v4 as uuidv4, v5 as uuidv5 } from 'uuid';
+import { v4 as uuidv4, v5 as uuidv5, validate as uuidValidator, version as uuidVersion } from 'uuid';
 
 export const uuid = (seed?: string): string =>
 {
@@ -9,4 +9,9 @@ export const uuid = (seed?: string): string =>
     }
 
     return uuidv4();
+};
+
+export const uuidValidate = (uuid: string, version: number = 4): boolean =>
+{
+    return uuidValidator(uuid) && uuidVersion(uuid) === version;
 };

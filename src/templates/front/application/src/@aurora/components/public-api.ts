@@ -1,6 +1,7 @@
 export * from './async-mat-select-search';
 export * from './attachments';
 export * from './breadcrumb';
+export * from './chat-timeline';
 export * from './chip';
 export * from './date-adapters';
 export * from './datepicker';
@@ -20,6 +21,9 @@ export * from './grid-elements-manager';
 export * from './grid-select-element';
 export * from './grid-select-multiple-elements';
 export * from './image-input';
+export * from './image-preview-overlay';
+export * from './impersonalize-warning';
+export * from './kpi-card';
 export * from './mat-form-field-appearance';
 export * from './navigation';
 export * from './password-strength';

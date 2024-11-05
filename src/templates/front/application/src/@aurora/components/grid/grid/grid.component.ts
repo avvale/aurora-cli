@@ -1,6 +1,6 @@
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { AsyncPipe, NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, input, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -48,7 +48,7 @@ export class GridComponent implements OnInit, AfterViewInit
     // input data rows
     @Input() gridData: GridData;
     // input columns config, data non-mutable
-    @Input() readonly originColumnsConfig: ColumnConfig[] = [];
+    originColumnsConfig = input.required<ColumnConfig[]>();
     // set selected rows, will be the selected objects contained in the grid
     @Input() selectedRows: any[] = [];
     // model to manage the comparison of the selected objects and to set whether the checkbox is selected or not
@@ -285,7 +285,7 @@ export class GridComponent implements OnInit, AfterViewInit
                 data      : {
                     gridId             : this.id,
                     columnsConfig      : this.gridState.columnsConfig,
-                    originColumnsConfig: this.originColumnsConfig,
+                    originColumnsConfig: this.originColumnsConfig(),
                 },
             });
 
@@ -301,7 +301,7 @@ export class GridComponent implements OnInit, AfterViewInit
                 this.gridManagerService.handleColumnsConfigChange(
                     this.id,
                     this.gridState.columnsConfig,
-                    this.originColumnsConfig,
+                    this.originColumnsConfig(),
                 );
 
                 // handle output event
@@ -328,7 +328,7 @@ export class GridComponent implements OnInit, AfterViewInit
                 data      : {
                     columnFilters                  : this.gridState.columnFilters,
                     columnsConfig                  : this.gridState.columnsConfig,
-                    originColumnsConfig            : this.originColumnsConfig,
+                    originColumnsConfig            : this.originColumnsConfig(),
                     gridId                         : this.id,
                     gridFiltersDialogValuesTemplate: this.gridFiltersDialogValuesTemplate,
                 },

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import { Credentials, GraphQLService, OAuthClientGrantType, oAuthCreateCredentials, Utils } from '@aurora';
+import { Credentials, GraphQLService, OAuthClientGrantType, oAuthCreateCredentials, oAuthCreateImpersonalizeCredentials, Utils } from '@aurora';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { first, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
@@ -61,9 +61,29 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
         }
     }
 
+    set originCredentials(credentials: Credentials)
+    {
+        if (credentials)
+        {
+            // remove __typename property from
+            Utils.removeKeys(credentials, ['__typename']);
+
+            localStorage.setItem('originCredentials', btoa(JSON.stringify(credentials)));
+        }
+    }
+
     get credentials(): Credentials
     {
         const credentials = localStorage.getItem('credentials') && atob(localStorage.getItem('credentials'));
+
+        if (credentials) return JSON.parse(credentials);
+
+        return null;
+    }
+
+    get originCredentials(): Credentials
+    {
+        const credentials = localStorage.getItem('originCredentials') && atob(localStorage.getItem('originCredentials'));
 
         if (credentials) return JSON.parse(credentials);
 
@@ -77,6 +97,11 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
     clear(): void
     {
         localStorage.removeItem('credentials');
+    }
+
+    isImpersonalized(): boolean
+    {
+        return Boolean(localStorage.getItem('originCredentials'));
     }
 
     /**
@@ -183,6 +208,41 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
 
         // Return the observable
         return of(true);
+    }
+
+    impersonalize(accountId: string): Observable<any>
+    {
+        // TODO, comprobar si ya esta impersonalizando
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : oAuthCreateImpersonalizeCredentials,
+                variables: {
+                    accountId
+                },
+            })
+            .pipe(
+                switchMap((response: any) =>
+                {
+                    // Store the origin credentials in the local storage
+                    this.originCredentials = this.credentials;
+
+                    // Store the access token in the local storage
+                    this.credentials = response.data.oAuthCreateImpersonalizeCredentials;
+
+                    // Set the authenticated flag to true
+                    this.authenticated = true;
+
+                    return of(true);
+                }),
+            );
+    }
+
+    rollbackImpersonalize(): void
+    {
+        this.credentials = this.originCredentials;
+        localStorage.removeItem('originCredentials');
+
     }
 
     async signOutAction(): Promise<void>

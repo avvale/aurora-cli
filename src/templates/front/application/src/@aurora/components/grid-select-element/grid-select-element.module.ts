@@ -5,6 +5,7 @@ import { GridSelectElementCellValueTemplateDirective } from './directives/grid-s
 import { GridSelectElementCustomHeaderTemplateDirective } from './directives/grid-select-element-custom-header-template.directive';
 import { GridSelectElementComponent } from './grid-select-element.component';
 import { GridColumnTranslationComponent } from '../grid/grid-translations/grid-column-translation.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { GridColumnTranslationComponent } from '../grid/grid-translations/grid-c
         GridSelectElementComponent,
         GridSelectElementCustomHeaderTemplateDirective,
         GridTranslationsComponent,
+        MatDialogModule,
         NgForOf,
     ],
     exports: [
@@ -21,6 +23,7 @@ import { GridColumnTranslationComponent } from '../grid/grid-translations/grid-c
         GridSelectElementComponent,
         GridSelectElementCustomHeaderTemplateDirective,
         GridTranslationsComponent,
+        MatDialogModule,
         NgForOf,
     ],
 })

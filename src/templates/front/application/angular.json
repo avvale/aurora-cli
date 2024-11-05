@@ -112,9 +112,52 @@
                                 }
                             ],
                             "sourceMap": true
+                        },
+                        "plesk-development": {
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.plesk-development.ts"
+                                }
+                            ],
+                            "sourceMap": true
+                        },
+                        "plesk-quality": {
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.plesk-quality.ts"
+                                }
+                            ],
+                            "sourceMap": true
+                        },
+                        "plesk-production": {
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "3mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "75kb",
+                                    "maximumError": "90kb"
+                                }
+                            ],
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.plesk-production.ts"
+                                }
+                            ],
+                            "outputHashing": "all"
                         }
                     },
-                    "defaultConfiguration": "production"
+                    "defaultConfiguration": "plesk-production"
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
@@ -127,6 +170,15 @@
                         },
                         "localhost": {
                             "buildTarget": "fuse:build:localhost"
+                        },
+                        "plesk-development": {
+                            "buildTarget": "fuse:build:plesk-development"
+                        },
+                        "plesk-qa": {
+                            "buildTarget": "fuse:build:plesk-quality"
+                        },
+                        "plesk-production": {
+                            "buildTarget": "fuse:build:plesk-production"
                         }
                     },
                     "defaultConfiguration": "development"

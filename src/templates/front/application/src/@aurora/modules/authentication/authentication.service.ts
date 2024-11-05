@@ -16,9 +16,15 @@ export abstract class AuthenticationService<T = Credentials>
 
     abstract set credentials(credentials: T);
 
+    abstract set originCredentials(credentials: T);
+
     abstract get credentials(): T;
 
+    abstract get originCredentials(): T;
+
     abstract clear(): void;
+
+    abstract isImpersonalized(): boolean
 
     abstract forgotPassword(email: string): Observable<any>;
 
@@ -29,6 +35,10 @@ export abstract class AuthenticationService<T = Credentials>
     abstract signInUsingRefreshToken(): Observable<any>;
 
     abstract signOut(): Observable<any>;
+
+    abstract impersonalize(accountId: string): Observable<any>;
+
+    abstract rollbackImpersonalize(): void;
 
     // action to be executed after sign out
     abstract signOutAction(): void

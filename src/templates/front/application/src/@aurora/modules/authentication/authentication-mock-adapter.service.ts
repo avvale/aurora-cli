@@ -60,9 +60,29 @@ export class AuthenticationMockAdapterService extends AuthenticationService
         }
     }
 
+    set originCredentials(credentials: Credentials)
+    {
+        if (credentials)
+        {
+            // remove __typename property from
+            Utils.removeKeys(credentials, ['__typename']);
+
+            localStorage.setItem('originCredentials', btoa(JSON.stringify(credentials)));
+        }
+    }
+
     get credentials(): Credentials
     {
         const credentials = localStorage.getItem('credentials') && atob(localStorage.getItem('credentials'));
+
+        if (credentials) return JSON.parse(credentials);
+
+        return null;
+    }
+
+    get originCredentials(): Credentials
+    {
+        const credentials = localStorage.getItem('originCredentials') && atob(localStorage.getItem('originCredentials'));
 
         if (credentials) return JSON.parse(credentials);
 
@@ -76,6 +96,11 @@ export class AuthenticationMockAdapterService extends AuthenticationService
     clear(): void
     {
         localStorage.removeItem('credentials');
+    }
+
+    isImpersonalized(): boolean
+    {
+        return Boolean(localStorage.getItem('originCredentials'));
     }
 
     /**
@@ -168,6 +193,15 @@ export class AuthenticationMockAdapterService extends AuthenticationService
 
         // Return the observable
         return of(true);
+    }
+
+    impersonalize(accountId: string): Observable<any>
+    {
+        return of(true);
+    }
+
+    rollbackImpersonalize(): void
+    {
     }
 
     async signOutAction(): Promise<void>

@@ -1,53 +1,119 @@
 <div class="block">
-    <p class="text-base opacity-60" *ngIf="label != ''">{{ label }}</p>
+    @if(label)
+    {
+        <p class="text-base opacity-60">{{ label() }}</p>
+    }
     <ngx-file-drop
-        [dropZoneLabel]="dropLabel"
-        dropZoneClassName="border-2 border-dashed rounded text-base"
-        [browseBtnLabel]="browseLabel"
-        browseBtnClassName="ml-1 cursor-pointer text-base underline underline-offset-2"
-        contentClassName="px-4 py-16 flex justify-center"
-        [showBrowseBtn]="hasBrowse"
+        [showBrowseBtn]="false"
+        browseBtnLabel=""
+        browseBtnClassName=""
+        dropZoneLabel=""
+        dropZoneClassName="relative border-2 border-dashed rounded"
+        contentClassName="flex flex-col justify-center items-center p-4 min-h-32"
         [directory]="false"
-        [accept]="acceptType"
-        [disabled]="isDisabled"
-        [multiple]="isMultiple"
-        (onFileDrop)="fileAdd($event)"
-        (onFileOver)="fileEnter($event)"
+        [accept]="acceptType()"
+        [disabled]="isDisabled()"
+        [multiple]="isMultiple()"
+        (onFileDrop)="fileDrop($event)"
+        (onFileOver)="fileOver($event)"
         (onFileLeave)="fileLeave($event)"
     >
-        <!-- <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-            Optional custom content that replaces the the entire default content.
-            <button type="button" (click)="openFileSelector()">Browse Files</button>
-        </ng-template> -->
-    </ngx-file-drop>
-    <div class="block pt-4">
-        <ng-container *ngFor="let file of filesContainer">
-            <div class="flex justify-between items-center p-4 mb-2 border rounded">
-                <p class="text-base flex items-center">
-                    <mat-icon
-                        class="icon-size-5 mr-2"
-                        [svgIcon]="'heroicons_solid:document'"
-                    >
-                    </mat-icon>
-                    {{ file.name }}
-                </p>
-                <p class="text-base opacity-60">
-                    {{ file.type }}
-                </p>
-                <p class="text-base opacity-60">
-                    {{ (file.size | formatFileSize).size }}{{ (file.size | formatFileSize).unit }}
-                </p>
+        <ng-template
+            ngx-file-drop-content-tmp
+            let-openFileSelector="openFileSelector"
+        >
+            @if(fileUploadButtonTemplateDirective)
+            {
+                <ng-container
+                    *ngTemplateOutlet="fileUploadButtonTemplateDirective.templateRef; context: { $implicit: openFileSelector }"
+                >
+                </ng-container>
+            }
+            @else
+            {
                 <button
-                    class="ml-3"
-                    mat-icon-button
-                    (click)="fileRemove(file)">
+                    mat-flat-button
+                    color="accent"
+                    class="absolute -top-3 right-2 h-6 min-h-6 max-h-6 px-4 text-xs"
+                    type="button"
+                    (click)="openFileSelector()"
+                >
                     <mat-icon
-                        class="icon-size-5"
-                        svgIcon="mat_solid:delete"
+                        [svgIcon]="'mat_solid:upload'"
+                        class="icon-size-4 mr-2"
                     >
                     </mat-icon>
+                    {{ btnLabel() }}
                 </button>
-            </div>
-        </ng-container>
-    </div>
+            }
+            @if(fileUploadContentTemplateDirective)
+            {
+                <ng-container
+                    *ngTemplateOutlet="fileUploadContentTemplateDirective.templateRef;"
+                >
+                </ng-container>
+            }
+            @else
+            {
+                @if(files().length)
+                {
+                    @for (file of files(); track file.id)
+                    {
+                        <div class="flex justify-between items-center w-full py-1">
+                            @if (fileIconTemplateDirective)
+                            {
+                                <ng-container
+                                    *ngTemplateOutlet="fileIconTemplateDirective.templateRef; context: { $implicit: file }"
+                                >
+                                </ng-container>
+                            }
+                            @else
+                            {
+                                <mat-icon
+                                    svgIcon="mat_solid:description"
+                                    class="icon-size-5 mr-2"
+                                >
+                                </mat-icon>
+                            }
+                            <p
+                                [matTooltip]="file[fileDisplay()]"
+                                class="w-full mr-2 text-md truncate cursor-default">
+                                {{ file[fileDisplay()] }}
+                            </p>
+                            <button
+                                mat-mini-fab
+                                aria-label="Download file"
+                                color="primary"
+                                class="w-6 h-6 min-h-6 max-h-6 cursor-pointer mr-2"
+                                (click)="fileDownload(file)"
+                            >
+                                <mat-icon
+                                    [svgIcon]="'mat_solid:download'"
+                                    class="icon-size-4"
+                                >
+                                </mat-icon>
+                            </button>
+                            <button
+                                mat-mini-fab
+                                aria-label="Delete file"
+                                color="warn"
+                                class="w-6 h-6 min-h-6 max-h-6 cursor-pointer"
+                                (click)="fileRemove(file)"
+                            >
+                                <mat-icon
+                                    [svgIcon]="'mat_solid:delete'"
+                                    class="icon-size-4"
+                                >
+                                </mat-icon>
+                            </button>
+                        </div>
+                    }
+                }
+                @else
+                {
+                    <p class="text-base text-secondary text-center">{{ dropLabel() }}</p>
+                }
+            }
+        </ng-template>
+    </ngx-file-drop>
 </div>

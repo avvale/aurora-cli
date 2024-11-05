@@ -29,6 +29,7 @@ export interface ColumnConfig
 
 export interface ColumnConfigAction extends Action
 {
+    iconFontSet?: string;
     icon?: string;
     svgIcon?: string;
     translation?: string;

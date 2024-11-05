@@ -7,6 +7,7 @@ export * from '@aurora/pipes/get.pipe';
 export * from '@aurora/pipes/has-validator.pipe';
 export * from '@aurora/pipes/is-object-empty.pipe';
 export * from '@aurora/pipes/join.pipe';
+export * from '@aurora/pipes/last.pipe';
 export * from '@aurora/pipes/log.pipe';
 export * from '@aurora/pipes/safe.pipe';
 export * from '@aurora/pipes/sort-by.pipe';

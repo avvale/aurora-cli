@@ -17,11 +17,11 @@ export class DownloadService
         {
             relativePathSegments,
             filename,
-            originalFilename,
+            originFilename,
         }: {
             relativePathSegments: string[];
             filename: string;
-            originalFilename?: string;
+            originFilename?: string;
         },
     ): void
     {
@@ -55,7 +55,7 @@ export class DownloadService
                 {
                     saveAs(
                         base64ToBlob(data['coreGetBase64FromFile']),
-                        originalFilename || filename,
+                        originFilename || filename,
                     );
                 }
             });

@@ -1,0 +1,16 @@
+@if(show())
+{
+    <button
+        mat-icon-button
+        [matTooltip]="tooltip() || 'Back to administrator'"
+        (click)="rollbackImpersonalize()"
+    >
+        <mat-icon
+            fontSet="material-symbols-outlined"
+            matBadgeColor="warn"
+            matBadge="!"
+        >
+            photo_auto_merge
+        </mat-icon>
+    </button>
+}

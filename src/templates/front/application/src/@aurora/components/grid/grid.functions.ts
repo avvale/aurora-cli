@@ -1,5 +1,5 @@
 import { utils, WorkBook, WorkSheet, writeFile } from 'xlsx';
-import { pick } from 'lodash-es';
+import { pick, get } from 'lodash-es';
 import { ExportFormat } from './grid.types';
 
 export const exportRows = (
@@ -10,6 +10,15 @@ export const exportRows = (
     format: ExportFormat,
 ): void =>
 {
+    // get data from rows and columns nested objects
+    for (const row of rows)
+    {
+        for (const column of columns)
+        {
+            row[column] = get(row, column, '');
+        }
+    }
+
     // create worksheet from JSON Array data, filtered for columns defined
     const workSheet: WorkSheet = utils.json_to_sheet(
         rows.map(row => pick(row, columns)), // only get data from defined columns

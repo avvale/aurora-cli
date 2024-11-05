@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Utils } from '@aurora';
+import { dateFromFormat } from '@aurora';
 
 @Pipe({
     name      : 'dateFormat',
@@ -10,6 +10,7 @@ export class DateFormatPipe implements PipeTransform
 {
     transform(timestamp: string, format: string): string
     {
-        return Utils.dateFromFormat(timestamp, 'YYYY-MM-DD HH:mm:ss').format(format);
+        return dateFromFormat(timestamp, 'YYYY-MM-DD HH:mm:ss')
+            .format(format);
     }
 }

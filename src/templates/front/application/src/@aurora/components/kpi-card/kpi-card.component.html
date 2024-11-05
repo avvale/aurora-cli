@@ -1,0 +1,39 @@
+<div class="flex w-full flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+    <div class="flex items-start justify-between">
+        @if(kpiCardHeaderLeft)
+        {
+            <ng-container *ngTemplateOutlet="kpiCardHeaderLeft.templateRef">
+            </ng-container>
+        }
+        @else
+        {
+            <mat-icon svgIcon="mat_outline:more_vert" class="opacity-0 pointer-events-none"></mat-icon>
+        }
+        <div class="text-lg font-medium tracking-tight leading-6 truncate">
+            {{ title() }}
+        </div>
+        @if(kpiCardHeaderRight)
+        {
+            <ng-container *ngTemplateOutlet="kpiCardHeaderRight.templateRef">
+            </ng-container>
+        }
+        @else
+        {
+            <mat-icon svgIcon="mat_outline:more_vert" class="opacity-0 pointer-events-none"></mat-icon>
+        }
+    </div>
+    <div class="flex flex-col items-center mt-2 cursor-pointer" (click)="kpiClickHandler()">
+        <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none" [style.color]="color()">
+            {{ count() }}
+        </div>
+        <div class="text-lg font-medium" [style.color]="color()">
+            {{ text() }}
+        </div>
+        @if(subtext())
+        {
+            <div class="text-md font-medium truncate mt-4 text-secondary">
+                {{ subtext() }}
+            </div>
+        }
+    </div>
+</div>

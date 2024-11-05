@@ -15,7 +15,8 @@
         "useDefineForClassFields": false,
         "lib": ["ES2022", "dom"],
         "paths": {
-            "@apps/*": ["./app/modules/admin/apps/*"]
+            "@apps/*": ["./app/modules/admin/apps/*"],
+            "@public/*": ["./../public/*"]
         }
     },
     "angularCompilerOptions": {

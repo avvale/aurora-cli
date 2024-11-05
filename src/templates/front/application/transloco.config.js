@@ -1,3 +1,3 @@
 module.exports = {
-    rootTranslationsPath: 'public/i18n/',
+    rootTranslationsPath: 'src/assets/i18n/',
 };

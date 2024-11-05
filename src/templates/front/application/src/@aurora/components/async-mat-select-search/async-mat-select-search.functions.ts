@@ -85,7 +85,7 @@ export const initAsyncMatSelectSearch = <T>(
 export const manageAsyncMatSelectSearch = ({
     columnFilter = null,
     paginationService = null,
-    paginationConstraint = null,
+    paginationConstraint = {},
 }: {
     columnFilter?: GridColumnFilter;
     paginationService?: any;
