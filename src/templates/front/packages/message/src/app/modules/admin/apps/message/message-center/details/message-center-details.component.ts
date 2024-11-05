@@ -148,7 +148,7 @@ export class MessageCenterDetailsComponent extends ViewBaseComponent
                     .download({
                         relativePathSegments: action.meta.attachment.relativePathSegments,
                         filename            : action.meta.attachment.filename,
-                        originalFilename    : action.meta.attachment.originFilename,
+                        originFilename      : action.meta.attachment.originFilename,
                     });
                 break;
         }

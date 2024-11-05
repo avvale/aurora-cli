@@ -1,9 +1,10 @@
 import { APP_INITIALIZER, EnvironmentProviders, Provider } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { AuroraGridManagerService, AuthenticationAuroraAdapterService, AuthenticationService, BootstrapService, COMPACT_NAVIGATION, DEFAULT_NAVIGATION, DatePickerDayjsAdapter, DatePickerDayjsFormats, DateTimePickerDayjsAdapter, DatetimePickerDayjsFormats, FUTURISTIC_NAVIGATION, GridManagerService, HORIZONTAL_NAVIGATION, IamAuroraAdapterService, IamService, PaginatorIntlService, SessionLocalStorageService, SessionService, UserMetaStorageService, compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation, provideApollo, provideApolloErrorTranslations, provideCustomIcons, provideValidationMessages } from '@aurora';
+import { AuroraGridManagerService, AuthenticationAuroraAdapterService, AuthenticationDisabledAdapterGuard, AuthenticationMockAdapterService, AuthenticationService, AuthorizationService, AuthorizationDisabledService, BootstrapService, COMPACT_NAVIGATION, compactNavigation, DatePickerDayjsAdapter, DatePickerDayjsFormats, DateTimePickerDayjsAdapter, DatetimePickerDayjsFormats, DEFAULT_NAVIGATION, defaultNavigation, EnvironmentsInformationService, EnvironmentsInformationMockAdapterService, FUTURISTIC_NAVIGATION, futuristicNavigation, GridManagerService, HORIZONTAL_NAVIGATION, horizontalNavigation, IamAuroraAdapterService, IamMockAdapterService, IamService, PaginatorIntlService, provideApollo, provideApolloErrorTranslations, provideCustomIcons, provideValidationMessages, SessionLocalStorageService, SessionService, UserMetaStorageService, UserMetaStorageLocalStorageAdapterService } from '@aurora';
 import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
-import './aurora.prototypes';
+import { AuthGuard } from 'app/core/auth/guards/auth.guard';
+import '@aurora/aurora.prototypes';
 
 export const provideAurora = (): Array<Provider | EnvironmentProviders> =>
 {

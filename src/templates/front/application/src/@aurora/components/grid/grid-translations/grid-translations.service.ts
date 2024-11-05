@@ -305,7 +305,7 @@ export class GridTranslationsService
     }
 
     setPaginatorMessages(
-        // paginator translations are set with provider in src/@aurora/aurora.provider.ts, can't to have scope
+        // paginator translations are set with provider in src/app/aurora.provider.ts, can't to have scope
         scope: string,
         paginatorMessages: { [key in keyof GridPaginatorMessages]: string; },
     ): void
@@ -336,7 +336,7 @@ export class GridTranslationsService
     ): Observable<string>
     {
         // check custom message
-        // paginator translations are set with provider in src/@aurora/aurora.provider.ts, can't to have scope
+        // paginator translations are set with provider in src/app/aurora.provider.ts, can't to have scope
         if (this.hasPaginatorMessage(key, this.defaultGridScope))
             return this.paginatorMessages[this.defaultGridScope][key]?.asObservable();
 

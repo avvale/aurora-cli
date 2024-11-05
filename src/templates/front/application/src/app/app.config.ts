@@ -19,7 +19,7 @@ import { firstValueFrom } from 'rxjs';
 import { TranslocoHttpLoader } from './core/transloco/transloco.http-loader';
 
 // ---- customizations ----
-import { provideAurora } from '@aurora';
+import { provideAurora } from 'app/aurora.provider';
 import { environment } from 'environments/environment';
 
 export const appConfig: ApplicationConfig = {

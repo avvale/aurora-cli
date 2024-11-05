@@ -445,7 +445,7 @@ export class Add extends Command
                     const project = CommonDriver.createProject(['tsconfig.json']);
 
                     // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
                     const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
                         auroraProviderSourceFile,
                         'provideAurora',
@@ -575,7 +575,7 @@ export class Add extends Command
                     const project = CommonDriver.createProject(['tsconfig.json']);
 
                     // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
                     const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
                         auroraProviderSourceFile,
                         'provideAurora',
@@ -602,7 +602,7 @@ export class Add extends Command
                     routesSourceFile.saveSync();
 
                     // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
                     const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
                         auroraProviderSourceFile,
                         'provideAurora',
@@ -672,7 +672,7 @@ export class Add extends Command
                     routesSourceFile.saveSync();
 
                     // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'aurora.provider.ts']);
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
                     const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
                         auroraProviderSourceFile,
                         'provideAurora',
