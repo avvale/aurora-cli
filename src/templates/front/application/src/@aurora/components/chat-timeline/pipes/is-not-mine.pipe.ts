@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ChatMessage } from '@apps/chat';
-import { IamService } from '@aurora';
+import { ChatMessage, IamService } from '@aurora';
 
 @Pipe({
     name      : 'isNotMine',

@@ -5,14 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { ChatMessage } from '@apps/chat';
-import { Account, LastPipe } from '@aurora';
-// avosd error ERROR TypeError: Cannot read properties of undefined (reading 'ɵcmp'), with specific import
-import { DateFormatPipe } from '@aurora/pipes/date-format.pipe';
+import { Account, ChatMessage, LastPipe, SpinnerType } from '@aurora';
 import { last } from 'lodash-es';
 import { IsMinePipe } from './pipes/is-mine.pipe';
 import { IsNotMinePipe } from './pipes/is-not-mine.pipe';
-import { SpinnerType } from './chat-timeline.types';
+// avoid error ERROR TypeError: Cannot read properties of undefined (reading 'ɵcmp'), with specific import
+import { DateFormatPipe } from '@aurora/pipes/date-format.pipe';
+
 
 @Component({
     selector: 'au-chat-timeline',
