@@ -1,5 +1,3 @@
-import { IamPermission, IamPermissionRole } from '../iam.types';
-import { PermissionService } from '../permission/permission.service';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -7,10 +5,12 @@ import { IamRole } from '@apps/iam/iam.types';
 import { RoleService } from '@apps/iam/role';
 import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, log, mapActions, Operator, QueryStatementHandler, SelectionChange, SelectionModel, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { IamPermission, IamPermissionRole } from '../iam.types';
 import { permissionColumnsConfig } from '../permission';
 import { permissionRoleColumnsConfig } from '../permission-role/permission-role.columns-config';
-import { PermissionRoleService } from '../permission-role/permission-role.service';
 import { getQueryExportPermissionsRoles } from '../permission-role/permission-role.graphql';
+import { PermissionRoleService } from '../permission-role/permission-role.service';
+import { PermissionService } from '../permission/permission.service';
 
 @Component({
     selector       : 'iam-role-detail',

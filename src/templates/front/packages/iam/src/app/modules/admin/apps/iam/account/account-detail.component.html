@@ -362,7 +362,7 @@
                             appearance="outline"
                             class="col-start-1 col-6"
                         >
-                            <mat-label>{{ t('iam.Username') }}</mat-label>
+                            <mat-label>{{ t('Username') }}</mat-label>
                             <input
                                 matInput
                                 formControlName="username"
@@ -398,7 +398,7 @@
                                 appearance="outline"
                                 class="col-5"
                             >
-                                <mat-label>{{ t('iam.LangId') }}</mat-label>
+                                <mat-label>{{ t('Language') }}</mat-label>
                                 <mat-select
                                     formControlName="langId"
                                 >
@@ -411,7 +411,6 @@
                                 </mat-select>
                                 <mat-error>{{ formErrors?.langId | async }}</mat-error>
                             </mat-form-field>
-
                             <mat-form-field
                                 appearance="outline"
                                 class="col-start-1 col-6"
@@ -427,6 +426,7 @@
                                     matSuffix
                                     mat-icon-button
                                     class="mr-2"
+                                    type="button"
                                     [aria-label]="t('iam.CreatePassword')"
                                     (click)="handleCreatePassword()"
                                 >
@@ -462,7 +462,6 @@
                                 [enableSpecialCharRule]="true"
                             >
                             </mat-password-strength>
-
                             <mat-form-field
                                 appearance="outline"
                                 class="col-start-1 col-6"

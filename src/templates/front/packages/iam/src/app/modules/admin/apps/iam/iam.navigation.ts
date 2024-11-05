@@ -56,6 +56,9 @@ export const iamNavigation: FuseNavigationItem = {
             type : 'basic',
             icon : 'mat_outline:local_police',
             link : '/iam/permission',
+            meta       : {
+                permission: 'iam.permission.access',
+            },
         },
         {
             id   : 'tags',
@@ -63,6 +66,9 @@ export const iamNavigation: FuseNavigationItem = {
             type : 'basic',
             icon : 'mat_outline:tag',
             link : '/iam/tag',
+            meta       : {
+                permission: 'iam.tag.access',
+            },
         },
     ],
 };

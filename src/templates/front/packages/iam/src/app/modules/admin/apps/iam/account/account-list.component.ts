@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { accountColumnsConfig, AccountService } from '@apps/iam/account';
 import { IamAccount } from '@apps/iam/iam.types';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { Action, AuthenticationService, AuthorizationService, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 export const accountMainGridListId = 'iam::account.list.mainGridList';
@@ -36,7 +36,9 @@ export class AccountListComponent extends ViewBaseComponent
             sticky : true,
             actions: row =>
             {
-                return [
+                const actions = [];
+
+                actions.push(
                     {
                         id         : 'iam::account.list.edit',
                         translation: 'edit',
@@ -47,7 +49,22 @@ export class AccountListComponent extends ViewBaseComponent
                         translation: 'delete',
                         icon       : 'delete',
                     },
-                ];
+                );
+
+                if (this.authorizationService.can('oAuth.credential.impersonalize'))
+                {
+                    actions.push(
+                        {
+                            id          : 'iam::account.list.impersonalize',
+                            isViewAction: false,
+                            translation : 'impersonalize',
+                            iconFontSet : 'material-symbols-outlined',
+                            icon        : 'photo_auto_merge',
+                        },
+                    );
+                }
+
+                return actions;
             },
         },
         {
@@ -64,6 +81,8 @@ export class AccountListComponent extends ViewBaseComponent
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly accountService: AccountService,
+        private readonly authenticationService: AuthenticationService,
+        private readonly authorizationService: AuthorizationService,
     )
     {
         super();
@@ -193,6 +212,15 @@ export class AccountListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+
+            case 'iam::account.list.impersonalize':
+                await lastValueFrom(
+                    this.authenticationService
+                        .impersonalize(action.meta.row.id)
+                );
+                await this.router.navigate(['/']);
+                window.location.reload();
+                break
         }
     }
 }

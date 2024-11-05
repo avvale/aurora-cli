@@ -95,7 +95,7 @@
                         appearance="outline"
                         class="col-9"
                     >
-                        <mat-label>{{ t('iam.Name') }}</mat-label>
+                        <mat-label>{{ t('Name') }}</mat-label>
                         <input
                             matInput
                             formControlName="name"
@@ -116,16 +116,16 @@
                     {
                         <au-grid-select-multiple-elements
                             class="col-12 mt-0"
+                            [label]="t('iam.Permissions')"
+                            [gridId]="permissionsRolesGridId"
+                            [originColumnsConfig]="originPermissionsRolesColumnsConfig"
                             [columnsConfig]="permissionsRolesColumnsConfig$ | async"
+                            [gridData]="permissionsRolesGridData$ | async"
+                            [gridState]="permissionsRolesGridState"
                             [dialogColumnsConfig]="permissionsColumnsConfig$ | async"
                             [dialogGridData]="permissionsGridData$ | async"
                             [dialogGridId]="permissionsGridId"
                             [dialogOriginColumnsConfig]="permissionsOriginColumnsConfig"
-                            [gridData]="permissionsRolesGridData$ | async"
-                            [gridId]="permissionsRolesGridId"
-                            [gridState]="permissionsRolesGridState"
-                            [label]="t('iam.Permissions')"
-                            [originColumnsConfig]="originPermissionsRolesColumnsConfig"
                             [selectedCheckboxRowModel]="selectedCheckboxRowModel"
                             (dialogSelectedCheckboxRowModelChange)="handleDialogPermissionsRowsSectionChange($event)"
                             (selectedCheckboxRowModelChange)="handlePermissionsRowsSectionChange($event)"

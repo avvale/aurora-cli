@@ -4,8 +4,9 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MatSelectModule } from '@angular/material/select';
 import { IamRole } from '@apps/iam/iam.types';
 import { roleColumnsConfig, RoleService } from '@apps/iam/role';
-import { Action, ColumnConfig, ColumnDataType, ContentDialogTemplateDirective, Crumb, defaultListImports, DialogComponent, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ValidationMessagesService, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, ContentDialogTemplateDirective, Crumb, defaultListImports, DialogComponent, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, uuidValidate, ValidationMessagesService, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { PermissionRoleService } from '../permission-role/permission-role.service';
 
 @Component({
     selector       : 'iam-role-list',
@@ -53,6 +54,16 @@ export class RoleListComponent extends ViewBaseComponent
                         icon       : 'layers',
                     },
                     {
+                        id         : 'iam::role.list.copyPermissions',
+                        translation: 'copyPermissions',
+                        icon       : 'copy_all',
+                    },
+                    {
+                        id         : 'iam::role.list.importPermissions',
+                        translation: 'importPermissions',
+                        icon       : 'publish',
+                    },
+                    {
                         id         : 'iam::role.list.delete',
                         translation: 'delete',
                         icon       : 'delete',
@@ -75,6 +86,7 @@ export class RoleListComponent extends ViewBaseComponent
         private readonly gridStateService: GridStateService,
         private readonly roleService: RoleService,
         private readonly validationMessagesService: ValidationMessagesService,
+        private readonly permissionRoleService: PermissionRoleService,
         private readonly fb: FormBuilder,
         private readonly dialog: MatDialog,
     )
@@ -281,6 +293,138 @@ export class RoleListComponent extends ViewBaseComponent
                 {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
+                break;
+
+            case 'iam::role.list.copyPermissions':
+                const role = await lastValueFrom(
+                    this.roleService
+                        .findById({
+                            id: action.meta.row.id,
+                            constraint: {
+                                include: [
+                                    {
+                                        association: 'permissions',
+                                    },
+                                ],
+                            },
+                        }),
+                );
+
+                navigator
+                    .clipboard
+                    .writeText(
+                        JSON.stringify(role.object.permissions.map(permission => permission.id))
+                    );
+
+                this.snackBar.open(
+                    `${action.meta.row.name} ${this.translocoService.translate('iam.Permissions').toLowerCase()} ${this.translocoService.translate('iam.CopiedInClipboard')}`,
+                    undefined,
+                    {
+                        verticalPosition: 'top',
+                        duration        : 3000,
+                    },
+                );
+                break;
+
+            case 'iam::role.list.importPermissions':
+                const importPermissionsDialogRef = this.confirmationService.open({
+                    title  : `${this.translocoService.translate('iam.ImportPermissions')}`,
+                    message: this.translocoService.translate('iam.ImportPermissionsWarning', { role: action.meta.row.name }),
+                    icon   : {
+                        show : true,
+                        name : 'heroicons_outline:exclamation-triangle',
+                        color: 'warn',
+                    },
+                    actions: {
+                        confirm: {
+                            show : true,
+                            label: this.translocoService.translate('Import'),
+                            color: 'warn',
+                        },
+                        cancel: {
+                            show : true,
+                            label: this.translocoService.translate('Cancel'),
+                        },
+                    },
+                    dismissible: true,
+                });
+
+                importPermissionsDialogRef.afterClosed()
+                    .subscribe(async result =>
+                    {
+                        if (result === 'confirmed')
+                        {
+                            try
+                            {
+                                const clipboardContent = await navigator
+                                    .clipboard
+                                    .readText();
+                                const permissionIds = JSON.parse(clipboardContent);
+
+                                if (!Array.isArray(permissionIds)) throw new SyntaxError('Clipboard content is not an array');
+                                if (permissionIds.some(permissionId => !uuidValidate(permissionId))) throw new SyntaxError('Clipboard content contains invalid UUIDs');
+
+                                // delete all permissions from the role
+                                await lastValueFrom(
+                                    this.permissionRoleService
+                                        .delete({
+                                            query: {
+                                                where: {
+                                                    roleId: action.meta.row.id,
+                                                },
+                                            },
+                                        }),
+                                );
+
+                                // insert new permissions in the role
+                                await lastValueFrom(
+                                    this.permissionRoleService
+                                        .insert({
+                                            objects: permissionIds
+                                                .map(permissionId => ({
+                                                    permissionId,
+                                                    roleId: action.meta.row.id,
+                                                })),
+                                        }),
+                                );
+
+                                this.snackBar.open(
+                                    `${action.meta.row.name} ${this.translocoService.translate('iam.Permissions').toLowerCase()} ${this.translocoService.translate('iam.ImportedFromClipboard')}`,
+                                    undefined,
+                                    {
+                                        verticalPosition: 'top',
+                                        duration        : 3000,
+                                    },
+                                );
+                            }
+                            catch(error)
+                            {
+                                if (error.name === 'SyntaxError')
+                                {
+                                    this.confirmationService.open({
+                                        title  : `${this.translocoService.translate('Import')} ${this.translocoService.translate('iam.Permissions')}`,
+                                        message: this.translocoService.translate('iam.ImportPermissionSyntaxError'),
+                                        icon   : {
+                                            show : true,
+                                            name : 'heroicons_outline:exclamation-triangle',
+                                            color: 'warn',
+                                        },
+                                        actions: {
+                                            confirm: {
+                                                show : false,
+                                            },
+                                            cancel: {
+                                                show : false,
+                                            },
+                                        },
+                                        dismissible: true,
+                                    });
+                                }
+
+                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                            }
+                        }
+                    });
                 break;
                 /* #endregion custom actions */
         }
