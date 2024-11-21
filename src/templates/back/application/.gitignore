@@ -1,5 +1,9 @@
 # envirionment files
 .env
+.env.development.plesk
+.env.quality.plesk
+.env.production.plesk
+.env.localhost.plesk
 
 # key files
 *.key
