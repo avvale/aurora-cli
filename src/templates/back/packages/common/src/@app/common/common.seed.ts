@@ -10,7 +10,7 @@ export const boundedContexts = [
 ];
 
 export const permissions = [
-    { id: 'd9bc3afc-fd40-5505-b57f-8f5d5118e01b',  name: 'common.access',                           boundedContextId: '539423b1-4817-4eda-a068-e99ef457aa7a', roleIds: []},
+    { id: '73a4c644-8b9c-46da-ab30-84c07a306876',  name: 'common.access',                           boundedContextId: '539423b1-4817-4eda-a068-e99ef457aa7a', roleIds: []},
 
     { id: '27853c15-ba7f-42c0-967e-c299edc79763',  name: 'common.lang.access',                      boundedContextId: '539423b1-4817-4eda-a068-e99ef457aa7a', roleIds: []},
     { id: 'baa0fefd-1c77-4a1f-abd0-3f2d7da40227',  name: 'common.lang.get',                         boundedContextId: '539423b1-4817-4eda-a068-e99ef457aa7a', roleIds: []},

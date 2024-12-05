@@ -5,7 +5,7 @@ import { CommonModule } from '@api/common/common.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { CommonICountryI18nRepository, CommonICountryRepository, commonMockCountryData, CommonMockCountrySeeder } from '@app/common/country';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
 import { CoreAddI18nConstraintService } from '@aurorajs.dev/core';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';

@@ -5,7 +5,7 @@ import { CommonModule } from '@api/common/common.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
 import { CommonIAdministrativeAreaLevel1Repository, commonMockAdministrativeAreaLevel1Data, CommonMockAdministrativeAreaLevel1Seeder } from '@app/common/administrative-area-level-1';
-import { GraphQLConfigModule } from '@aurora/graphql/graphql-config.module';
+import { GraphQLConfigModule } from '@aurora/modules/graphql/graphql-config.module';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
