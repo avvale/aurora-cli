@@ -5,6 +5,8 @@ on:
     branches:
       - 'main'
 
+  workflow_dispatch:
+
 env:
   APP_NAME: app-{{ nanoid }}
 

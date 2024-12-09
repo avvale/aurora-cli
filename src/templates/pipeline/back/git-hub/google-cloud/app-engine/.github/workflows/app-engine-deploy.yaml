@@ -3,7 +3,10 @@ name: Build and Deploy Back on Google App Engine
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
+
+  workflow_dispatch:
+
 jobs:
   tests:
     name: Build and test

@@ -5,6 +5,8 @@ on:
     branches:
       - 'environments/plesk-production'
 
+  workflow_dispatch:
+
 env:
   # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
   # don't forget set like bin/bash ftp user
