@@ -570,8 +570,8 @@ export class {{ toPascalCase schema.moduleName }}Service
 
     {{#or
         (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
-        (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0) 
-        (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0) 
+        (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
+        (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
     }}
     getRelations(
         {

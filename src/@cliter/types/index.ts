@@ -149,6 +149,7 @@ export interface Property
     aggregateName?: string;
     modulePath?: string;
     arrayOptions?: PropertyArrayOptions;
+    sort?: number;
 }
 
 export interface PropertyRelationship

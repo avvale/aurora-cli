@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import * as Sentry from '@sentry/node';
-import type { CaptureContext, CheckIn } from '@sentry/types';
+import type { CaptureContext, CheckIn } from '@sentry/core';
 import { SentryLevel, SentryOptions } from './sentry.types';
 import { MODULE_OPTIONS_TOKEN } from './sentry.module-definition';
 
@@ -31,9 +31,10 @@ export class SentryService
             release: sentryOptions.release,
 
             // add database integration
-            integrations: [
+            // TODO, integra sentry
+            /* integrations: [
                 ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
-            ],
+            ], */
         });
     }
 

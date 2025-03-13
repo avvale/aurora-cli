@@ -2,14 +2,14 @@
     "name": "@aurorajs.dev/cli",
     "version": "3.3.3",
     "description": "Aurora CLI",
-    "author": "Jose Carlos Rodriguez Palacín <carlos.rodriguez.palacin@gmail.com>",
+    "author": "José Carlos Rodríguez Palacín <carlos.rodriguez.palacin@gmail.com>",
     "bin": {
         "aurora": "./bin/run"
     },
-    "homepage": "https://github.com/techedge-group/aurora-cli",
+    "homepage": "https://github.com/avvale/aurora-cli",
     "license": "MIT",
     "main": "dist/index.js",
-    "repository": "https://github.com/techedge-group/aurora-cli",
+    "repository": "https://github.com/avvale/aurora-cli",
     "files": [
         "/bin",
         "/dist",

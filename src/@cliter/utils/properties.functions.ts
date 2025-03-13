@@ -978,7 +978,13 @@ export const getFormDetailFieldsProperties = (
 {
     return properties
         ?.filter(property => !timestampProperties.includes(property.name))
-        .filter(property => property.name !== 'id');
+        .filter(property => property.name !== 'id')
+        .sort((a, b) =>
+        {
+            const valA = a.sort ?? Number.POSITIVE_INFINITY;
+            const valB = b.sort ?? Number.POSITIVE_INFINITY;
+            return valA - valB;
+        });
 };
 
 // replace by Properties formGroupFields

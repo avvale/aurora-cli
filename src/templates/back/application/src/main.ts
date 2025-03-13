@@ -56,7 +56,7 @@ async function bootstrap(): Promise<void>
     setTimeZoneApplication(configService, dayjs);
 
     app.enableCors();
-    await app.listen(configService.get<number>('APP_PORT'));
+    await app.listen(configService.get<number>('APP_PORT') ?? 3000);
 
     if (env.NODE_ENV !== 'production')
     {
