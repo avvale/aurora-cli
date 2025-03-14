@@ -1,5 +1,5 @@
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
-import { AsyncPipe, NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgClass, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChildren, EventEmitter, input, Input, OnInit, Output, QueryList, ViewChild } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -34,7 +34,7 @@ import { SelectionChange, SelectionModel } from '../selection-model/selection-mo
     imports        : [
         AsyncPipe, DragDropModule, FilterGridCustomHeaderTemplatesPositionPipe, FlagIconComponent, GetActionsPipe, GetCellValuePipe, GetGridSpinnerFlagPipe, GridSearchComponent, GridTranslatePipe, GetTranslationIconColorPipe,
         HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, JoinPipe, IsOriginColumnConfigPipe, MatBadgeModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatPaginatorModule, MatSortModule, MatTableModule,
-        NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, TransformDataCellPipe,
+        NgClass, NgForOf, NgIf, NgTemplateOutlet, TransformDataCellPipe,
     ],
 })
 export class GridComponent implements OnInit, AfterViewInit

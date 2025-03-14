@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AuthenticationService, Environment, IamService, log, SessionService } from '@aurora';
 import { lastValueFrom } from 'rxjs';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 
 @Injectable({
     providedIn: 'root',

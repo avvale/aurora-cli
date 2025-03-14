@@ -42,7 +42,6 @@ import { Subject, debounceTime, filter, map, takeUntil } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     exportAs: 'fuseSearch',
     animations: fuseAnimations,
-    standalone: true,
     imports: [
         MatButtonModule,
         MatIconModule,

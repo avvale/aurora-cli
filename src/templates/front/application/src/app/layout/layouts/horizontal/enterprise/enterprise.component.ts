@@ -25,7 +25,6 @@ import { Subject, takeUntil } from 'rxjs';
     selector: 'enterprise-layout',
     templateUrl: './enterprise.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         FuseLoadingBarComponent,
         FuseVerticalNavigationComponent,

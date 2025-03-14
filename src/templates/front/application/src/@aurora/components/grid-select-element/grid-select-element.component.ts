@@ -2,7 +2,6 @@ import { SelectionChange } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, Component, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Action } from '@aurora';
-import { GridComponent } from '@aurora/components/grid/grid/grid.component';
 import { ColumnConfig, GridData, GridState } from '../grid';
 import { GridDialogComponent } from '../grid-dialog/grid-dialog.component';
 import { GridSelectElementCellValueTemplateDirective } from './directives/grid-select-element-cell-value-template.directive';
@@ -14,7 +13,7 @@ import { GridSelectElementCustomHeaderTemplateDirective } from './directives/gri
     styleUrls      : ['./grid-select-element.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
-    imports        : [GridComponent],
+    imports        : [],
 })
 export class GridSelectElementComponent
 {

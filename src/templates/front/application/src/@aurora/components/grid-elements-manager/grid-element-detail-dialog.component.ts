@@ -21,6 +21,7 @@ export class GridElementDetailDialogComponent
             title: string;
             icon: string;
             svgIcon: string;
+            fontSet: string;
             currentActionId: string;
             gridFormElementDetailDialogTemplate?: GridFormElementDetailDialogTemplateDirective;
         },

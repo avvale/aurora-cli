@@ -1,7 +1,7 @@
 import { Directive, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { Action, ActionService, SessionService, SpinnerManagerService, log } from '@aurora';
 import { BehaviorSubject, filter, Subject, takeUntil } from 'rxjs';

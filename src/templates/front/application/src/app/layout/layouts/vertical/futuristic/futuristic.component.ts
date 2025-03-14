@@ -27,7 +27,6 @@ import { Account, IamService } from '@aurora';
     selector: 'futuristic-layout',
     templateUrl: './futuristic.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         FuseLoadingBarComponent,
         FuseVerticalNavigationComponent,

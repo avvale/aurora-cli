@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { GetCountryPrefixPipe } from '../get-country-prefix.pipe';
-import { FlagIconComponent } from '../../flag-icon';
 
 @Component({
     selector: 'au-option-country-prefix',
@@ -16,8 +14,6 @@ import { FlagIconComponent } from '../../flag-icon';
     imports        : [
         MatSelectModule,
         ReactiveFormsModule,
-        GetCountryPrefixPipe,
-        FlagIconComponent,
     ],
 })
 export class OptionCountryPrefixComponent

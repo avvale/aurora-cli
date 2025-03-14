@@ -29,7 +29,6 @@ import { Subject, filter, takeUntil } from 'rxjs';
     templateUrl: './collapsable.component.html',
     animations: fuseAnimations,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         NgClass,
         MatTooltipModule,

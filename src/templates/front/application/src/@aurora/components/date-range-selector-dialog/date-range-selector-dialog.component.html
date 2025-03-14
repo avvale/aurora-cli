@@ -1,0 +1,137 @@
+<div mat-dialog-title class="dialog-header">
+    <p class="title">
+        <mat-icon
+            fontSet="material-symbols-outlined"
+        >
+            date_range
+        </mat-icon>
+        <span>{{ data.translations?.dialogTitle }}</span>
+    </p>
+
+    <button
+        mat-dialog-close
+        mat-icon-button
+        class="absolute top-2 right-2"
+    >
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<div mat-dialog-content class="pt-5">
+    @if (isLoading() && isRequested())
+    {
+        <div>
+            <mat-spinner class="mx-auto">
+            </mat-spinner>
+            <p class="text-xl text-center py-4">
+                {{ data.translations?.loadingMessage }}
+            </p>
+        </div>
+    }
+
+    @if (!isLoading() && isRequested())
+    {
+        <div>
+            <p class="text-xl text-center py-4">
+                {{ data.translations?.successfulMessage }}
+            </p>
+        </div>
+    }
+
+    @if (!isLoading() && !isRequested())
+    {
+        <form id="formDetail"
+            novalidate
+            [formGroup]="fg"
+            (ngSubmit)="onSubmit()"
+        >
+            <div class="layout__container">
+
+                <mat-form-field
+                    appearance="outline"
+                    class="au-datepicker col-12"
+                >
+                    <mat-label>
+                        {{ data.translations?.selectionRange }}
+                    </mat-label>
+                    <mat-date-range-input
+                        [rangePicker]="quotaInvoiceRange"
+                    >
+                        <input
+                            matStartDate
+                            formControlName="startAt"
+                            [auDatepickerSqlFormat]
+                            [placeholder]="data.translations?.startDate"
+                        >
+                        <input
+                            matEndDate
+                            formControlName="endAt"
+                            [auDatepickerSqlFormat]
+                            [placeholder]="data.translations?.endDate"
+                        >
+                    </mat-date-range-input>
+                    <mat-hint>
+                        {{ data.translations?.selectionRangeHint }}
+                    </mat-hint>
+                    <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="quotaInvoiceRange"
+                    >
+                    </mat-datepicker-toggle>
+                    <mat-date-range-picker #quotaInvoiceRange>
+                    </mat-date-range-picker>
+                    <mat-error>{{ formErrors?.startAt | async }}</mat-error>
+                    <mat-error>{{ formErrors?.endAt | async }}</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    }
+</div>
+<div
+    mat-dialog-actions
+    align="end"
+>
+    @if (!isLoading() && isRequested())
+    {
+        <button
+            mat-flat-button
+            class="ml-3"
+            type="button"
+            [color]="'accent'"
+            (click)="close()"
+        >
+            <mat-icon class="icon-size-5 mr-2">
+                close
+            </mat-icon>
+            {{ data.translations?.closeButtonText }}
+        </button>
+    }
+    @if (!isLoading() && !isRequested())
+    {
+        <button
+            class="ml-3"
+            mat-flat-button
+            mat-dialog-close
+            [color]="'basic'"
+            [disabled]="isLoading()"
+        >
+            <mat-icon class="icon-size-5 mr-2">
+                close
+            </mat-icon>
+            {{ data.translations?.closeButtonText }}
+        </button>
+        <button
+            mat-flat-button
+            class="ml-3"
+            type="submit"
+            form="formDetail"
+            [disabled]="fg.pristine"
+            [color]="'accent'"
+            [disabled]="isLoading()"
+        >
+            <mat-icon class="icon-size-5 mr-2">
+                check
+            </mat-icon>
+            {{ data.translations?.acceptButtonText }}
+        </button>
+    }
+</div>

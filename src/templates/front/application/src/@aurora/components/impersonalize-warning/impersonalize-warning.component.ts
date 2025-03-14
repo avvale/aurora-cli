@@ -1,11 +1,9 @@
-import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     Component,
     inject,
     input,
     OnInit,
     signal,
-    TemplateRef,
     ViewEncapsulation,
     WritableSignal,
 } from '@angular/core';
@@ -24,7 +22,6 @@ import { AuthenticationService } from '@aurora';
     imports: [
         MatButtonModule,
         MatTooltipModule,
-        NgTemplateOutlet,
         MatBadgeModule,
         MatIconModule,
     ],

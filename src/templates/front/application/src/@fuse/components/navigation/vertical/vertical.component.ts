@@ -64,7 +64,6 @@ import {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     exportAs: 'fuseVerticalNavigation',
-    standalone: true,
     imports: [
         FuseScrollbarDirective,
         FuseVerticalNavigationAsideItemComponent,

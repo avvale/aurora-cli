@@ -8,6 +8,7 @@ export interface ImagePreviewDialogConfig
 
 export interface ImagePreviewDialog
 {
+    originFilename: string;
     filename: string;
     url: string;
     mimetype: string;

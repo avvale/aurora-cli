@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, input, output, ContentChild, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { log, FormatFileSizePipe, CoreFile, FileIconTemplateDirective } from '@aurora';
+import { log, FileIconTemplateDirective } from '@aurora';
 import { NgxFileDropEntry, NgxFileDropModule } from 'ngx-file-drop';
 import { FileUploadButtonTemplateDirective } from './directives/file-upload-button-template.directive';
 import { FileUploadContentTemplateDirective } from './directives/file-upload-content-template.directive';
@@ -16,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        FormatFileSizePipe, MatButtonModule, MatIconModule, NgTemplateOutlet, NgxFileDropModule, MatTooltipModule,
+        MatButtonModule, MatIconModule, NgTemplateOutlet, NgxFileDropModule, MatTooltipModule,
     ],
 })
 export class FileUploadComponent

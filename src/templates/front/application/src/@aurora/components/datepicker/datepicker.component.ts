@@ -38,6 +38,7 @@ import dayjs from 'dayjs';
         <mat-error>{{ error }}</mat-error>
     </mat-form-field>`,
     styleUrls: ['./datepicker.component.scss'],
+    standalone: false,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

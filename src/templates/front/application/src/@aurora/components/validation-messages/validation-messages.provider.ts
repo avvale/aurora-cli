@@ -1,5 +1,5 @@
 import { EnvironmentProviders, Provider } from '@angular/core';
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { translocoLoader } from './transloco-loader';
 
 export const provideValidationMessages = (): Array<Provider | EnvironmentProviders> =>

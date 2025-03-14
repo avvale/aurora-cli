@@ -21,7 +21,7 @@ const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
         <au-file-preview-overlay-toolbar>
             <div class="flex content-center">
                 <mat-icon>description</mat-icon>
-                {{ file.filename }}
+                {{ file.originFilename }}
             </div>
             <button
                 mat-icon-button
@@ -156,7 +156,7 @@ export class FilePreviewOverlayComponent
             .download({
                 relativePathSegments: this.file.relativePathSegments,
                 filename            : this.file.filename,
-                originFilename      : this.file.filename,
+                originFilename      : this.file.originFilename,
             });
     }
 }

@@ -24,7 +24,6 @@ import { Subject, takeUntil } from 'rxjs';
     selector: 'material-layout',
     templateUrl: './material.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         FuseLoadingBarComponent,
         FuseVerticalNavigationComponent,

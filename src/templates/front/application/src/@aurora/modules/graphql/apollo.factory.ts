@@ -15,7 +15,7 @@ import {
     log,
 } from '@aurora';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { HttpLink } from 'apollo-angular/http';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 import { environment } from 'environments/environment';

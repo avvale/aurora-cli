@@ -18,7 +18,7 @@ import { Subject, takeUntil } from 'rxjs';
 // ---- customizations ----
 import { RouterLink } from '@angular/router';
 import { Account, AuthenticationService, IamService, User } from '@aurora';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'user',
@@ -26,7 +26,6 @@ import { TranslocoModule } from '@ngneat/transloco';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     exportAs: 'user',
-    standalone: true,
     imports: [
         MatButtonModule,
         MatMenuModule,

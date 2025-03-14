@@ -12,7 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { GridFiltersDialogValueTemplateDirective, Operator, Utils, getAsyncMatSelectSearchColumnConfigFunction } from '@aurora';
-import { GetPipe } from '@aurora/pipes/get.pipe';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Observable, map, startWith } from 'rxjs';
 import { MatSelectAddSelectedDirective, MatSelectRemoveFor, ScrollEndDirective } from '../../../directives';
@@ -37,7 +36,7 @@ import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
     imports        : [
         AsyncPipe, DatepickerSqlFormatDirective, FilterOperatorsPipe,
         GetAsyncMatSelectSearchColumnConfig, GetConcatOperatorPipe,
-        GetGridFiltersValue, GetGridFilterValue, GetPipe,
+        GetGridFiltersValue, GetGridFilterValue,
         GridTranslatePipe, HasRenderOutboxPipe, LowerCasePipe,
         MatAutocompleteModule, MatButtonModule,MatCheckboxModule,
         MatDatepickerModule, MatDialogModule, MatDividerModule,

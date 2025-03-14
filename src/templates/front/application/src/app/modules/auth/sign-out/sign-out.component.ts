@@ -5,13 +5,12 @@ import { Subject, finalize, takeUntil, takeWhile, tap, timer } from 'rxjs';
 
 // ---- customizations ----
 import { AuthenticationService, IamService, SessionService } from '@aurora';
-import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 
 @Component({
     selector: 'auth-sign-out',
     templateUrl: './sign-out.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         RouterLink,
         I18nPluralPipe,

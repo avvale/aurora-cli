@@ -13,7 +13,8 @@
                         let i = $index;
                         let first = $first;
                         let last = $last;
-                    ) {
+                    )
+                    {
                         <!-- Start of the day -->
                         @if (
                             first ||
@@ -36,6 +37,12 @@
                                 'mt-3': i > 0 && (chatMessages()[i - 1] | isMine) !== (message | isMine),
                             }"
                         >
+                            <!-- projection content after message -->
+                            @for (chatTimelineContentsTemplate of chatTimelineContentsTemplate | filterChatTimelineContentTemplatePosition:'before'; track chatTimelineContentsTemplate.position)
+                            {
+                                <ng-container *ngTemplateOutlet="chatTimelineContentsTemplate.templateRef; context: { $implicit: message, messages: chatMessages() }"></ng-container>
+                            }
+
                             <div
                                 class="flex w-full items-end"
                                 [ngClass]="{
@@ -103,13 +110,10 @@
                                         </button>
                                     }
 
-                                    <!-- Username -->
+                                    <!-- add username -->
                                     @if (
-                                        (message | isNotMine) &&
-                                        (
-                                            first ||
-                                            (chatMessages()[i - 1] | isMine) !== (message | isMine)
-                                        )
+                                        first ||
+                                        chatMessages()[i - 1].accountId !== message.accountId
                                     ) {
                                         <div
                                             class="mb-1 text-sm font-medium leading-none"
@@ -134,12 +138,18 @@
                                     {
                                         <div
                                             class="min-w-4 leading-5"
-                                            [innerHTML]="message.message"
+                                            [innerHTML]="message.message | markdownToHtml"
                                         >
                                         </div>
                                     }
                                 </div>
                             </div>
+
+                            <!-- projection content after message -->
+                            @for (chatTimelineContentsTemplate of chatTimelineContentsTemplate | filterChatTimelineContentTemplatePosition:'after'; track chatTimelineContentsTemplate.position)
+                            {
+                                <ng-container *ngTemplateOutlet="chatTimelineContentsTemplate.templateRef; context: { $implicit: message, messages: chatMessages() }"></ng-container>
+                            }
 
                             <!-- Time -->
                             @if (
@@ -154,7 +164,7 @@
                                         'ml-0': message | isNotMine,
                                     }"
                                 >
-                                    {{ message.createdAt | dateFormat:'HH:mm'}}
+                                    {{ message.createdAt | dateFormat:'HH:mm' }}
                                 </div>
                             }
 
@@ -197,7 +207,8 @@
                         matInput
                         cdkTextareaAutosize
                         #messageInput
-                    ></textarea>
+                    >
+                    </textarea>
                 </mat-form-field>
                 <div class="my-px ml-4 flex h-11 items-center">
                     <button

@@ -21,7 +21,9 @@
                         "outputHashing": "media",
                         "index": "src/index.html",
                         "browser": "src/main.ts",
-                        "polyfills": ["zone.js"],
+                        "polyfills": [
+                            "zone.js"
+                        ],
                         "tsConfig": "tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
                         "allowedCommonJsDependencies": [
@@ -55,9 +57,13 @@
                             }
                         ],
                         "stylePreprocessorOptions": {
-                            "includePaths": ["src/@fuse/styles"]
+                            "includePaths": [
+                                "src/@fuse/styles"
+                            ]
                         },
                         "styles": [
+                            "src/styles/splash-screen.css",
+                            "src/styles/inter.css",
                             "src/@fuse/styles/tailwind.scss",
                             "src/@fuse/styles/themes.scss",
                             "src/styles/vendors.scss",
@@ -174,7 +180,7 @@
                         "plesk-development": {
                             "buildTarget": "fuse:build:plesk-development"
                         },
-                        "plesk-qa": {
+                        "plesk-quality": {
                             "buildTarget": "fuse:build:plesk-quality"
                         },
                         "plesk-production": {
@@ -189,7 +195,10 @@
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "polyfills": ["zone.js", "zone.js/testing"],
+                        "polyfills": [
+                            "zone.js",
+                            "zone.js/testing"
+                        ],
                         "tsConfig": "tsconfig.spec.json",
                         "inlineStyleLanguage": "scss",
                         "assets": [
@@ -198,7 +207,9 @@
                                 "input": "public"
                             }
                         ],
-                        "styles": ["src/styles/styles.scss"],
+                        "styles": [
+                            "src/styles/styles.scss"
+                        ],
                         "scripts": []
                     }
                 }

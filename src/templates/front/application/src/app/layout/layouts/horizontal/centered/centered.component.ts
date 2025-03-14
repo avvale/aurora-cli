@@ -24,7 +24,6 @@ import { Subject, takeUntil } from 'rxjs';
     selector: 'centered-layout',
     templateUrl: './centered.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         FuseLoadingBarComponent,
         FuseVerticalNavigationComponent,

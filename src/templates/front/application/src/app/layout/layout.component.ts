@@ -13,7 +13,6 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { FusePlatformService } from '@fuse/services/platform';
 import { FUSE_VERSION } from '@fuse/version';
 import { Subject, combineLatest, filter, map, takeUntil } from 'rxjs';
-import { SettingsComponent } from './common/settings/settings.component';
 import { EmptyLayoutComponent } from './layouts/empty/empty.component';
 import { CenteredLayoutComponent } from './layouts/horizontal/centered/centered.component';
 import { EnterpriseLayoutComponent } from './layouts/horizontal/enterprise/enterprise.component';
@@ -34,7 +33,6 @@ import { EnvironmentsInformationComponent } from '@aurora';
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         EmptyLayoutComponent,
         EnvironmentsInformationComponent,
@@ -48,7 +46,6 @@ import { EnvironmentsInformationComponent } from '@aurora';
         DenseLayoutComponent,
         FuturisticLayoutComponent,
         ThinLayoutComponent,
-        SettingsComponent,
     ],
 })
 export class LayoutComponent implements OnInit, OnDestroy {

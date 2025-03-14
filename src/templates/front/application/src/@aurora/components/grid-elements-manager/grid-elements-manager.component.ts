@@ -33,6 +33,7 @@ export class GridElementsManagerComponent
     @Input() gridData: GridData;
     @Input('dialogIcon') dialogIcon: string = 'filter_list';
     @Input('dialogSvgIcon') dialogSvgIcon: string = '';
+    @Input() dialogFontSet: string = '';
     @Input('dialogWidth') dialogWidth: string = '90vw';
     @Input('dialogMaxWidth') dialogMaxWidth: string = '2048px';
     @Input('dialogMinWidth') dialogMinWidth: string = '240px';
@@ -75,6 +76,7 @@ export class GridElementsManagerComponent
                     title                              : this.dialogTitle,
                     icon                               : this.dialogIcon,
                     svgIcon                            : this.dialogSvgIcon,
+                    fontSet                            : this.dialogFontSet,
                     currentActionId                    : actionId,
                     gridFormElementDetailDialogTemplate: this.gridFormElementDetailDialogTemplate,
                 },

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations/public-api';
@@ -15,7 +15,7 @@ import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations     : fuseAnimations,
     standalone     : true,
-    imports        : [AsyncPipe, GridTranslatePipe, NgIf, NgForOf, MatButtonModule, MatIconModule, ReactiveFormsModule],
+    imports        : [AsyncPipe, GridTranslatePipe, NgIf, MatButtonModule, MatIconModule, ReactiveFormsModule],
 })
 export class GridSearchComponent implements OnInit
 {

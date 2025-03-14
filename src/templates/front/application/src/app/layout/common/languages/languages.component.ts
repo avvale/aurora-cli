@@ -13,7 +13,7 @@ import {
     FuseNavigationService,
     FuseVerticalNavigationComponent,
 } from '@fuse/components/navigation';
-import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
+import { AvailableLangs, TranslocoService } from '@jsverse/transloco';
 import { take } from 'rxjs';
 
 // ---- customizations ----
@@ -25,7 +25,6 @@ import { NavigationService as AuroraNavigationService } from '@aurora/components
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     exportAs: 'languages',
-    standalone: true,
     imports: [MatButtonModule, MatMenuModule, NgTemplateOutlet],
 })
 export class LanguagesComponent implements OnInit, OnDestroy {

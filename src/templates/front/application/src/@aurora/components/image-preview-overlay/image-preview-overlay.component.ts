@@ -20,7 +20,7 @@ const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
         <au-image-preview-overlay-toolbar>
             <div class="flex content-center">
                 <mat-icon>description</mat-icon>
-                {{ image.filename }}
+                {{ image.originFilename }}
             </div>
             <button
                 mat-icon-button
@@ -63,7 +63,8 @@ const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
 
         img {
             width: 100%;
-            max-width: 500px;
+            max-width: 95vw;
+            max-height: 90vh;
             height: auto;
         }
 
@@ -139,7 +140,7 @@ export class FilePreviewOverlayComponent
             .download({
                 relativePathSegments: this.image.relativePathSegments,
                 filename            : this.image.filename,
-                originFilename      : this.image.filename,
+                originFilename      : this.image.originFilename,
             });
     }
 }

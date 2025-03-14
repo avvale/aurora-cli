@@ -25,7 +25,6 @@ import { Subject, takeUntil } from 'rxjs';
     selector: 'fuse-horizontal-navigation-branch-item',
     templateUrl: './branch.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         NgClass,
         MatMenuModule,

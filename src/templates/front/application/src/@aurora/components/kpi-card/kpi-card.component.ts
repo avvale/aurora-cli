@@ -19,13 +19,13 @@ export class KPICardComponent {
     text = input<string>('');
     subtext = input<string>('');
     color = input<string>('#000000');
-    onKPIClick = output<void>();
+    onClickKpi = output<void>();
 
-    @ContentChild(KPICardHeaderLeftDirective) kpiCardHeaderLeft ? : KPICardHeaderLeftDirective;
-    @ContentChild(KPICardHeaderRightDirective) kpiCardHeaderRight? : KPICardHeaderRightDirective;
+    @ContentChild(KPICardHeaderLeftDirective) kpiCardHeaderLeft?: KPICardHeaderLeftDirective;
+    @ContentChild(KPICardHeaderRightDirective) kpiCardHeaderRight?: KPICardHeaderRightDirective;
 
-    kpiClickHandler(): void
+    clickKpi(): void
     {
-        this.onKPIClick.emit();
+        this.onClickKpi.emit();
     }
 }

@@ -6,7 +6,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
 import { FileInput } from '../model/file-input.model';
-import { FileInputMixinBase } from './file-input-mixin';
+// import { FileInputMixinBase } from './file-input-mixin';
 
 // component develop from https://merlosy.github.io/ngx-material-file-input/
 @Component({
@@ -21,9 +21,9 @@ import { FileInputMixinBase } from './file-input-mixin';
         },
     ],
 })
-export class FileInputComponent extends FileInputMixinBase implements MatFormFieldControl<FileInput>, ControlValueAccessor, OnInit, OnDestroy, DoCheck
+export class FileInputComponent implements MatFormFieldControl<FileInput>, ControlValueAccessor, OnInit, OnDestroy, DoCheck
 {
-    static nextId = 0;
+    stateChanges = new Subject<void>();
 
     focused = false;
     controlType = 'file-input';
@@ -39,12 +39,17 @@ export class FileInputComponent extends FileInputMixinBase implements MatFormFie
     @Input() accept: string | null = null;
     @Input() errorStateMatcher: ErrorStateMatcher;
 
+    static nextId = 0;
     @HostBinding() id = `ngx-mat-file-input-${FileInputComponent.nextId++}`;
     @HostBinding('attr.aria-describedby') describedBy = '';
 
     setDescribedByIds(ids: string[]): void
     {
         this.describedBy = ids.join(' ');
+    }
+
+    get errorState(): boolean {
+        return false
     }
 
     @Input()
@@ -157,7 +162,7 @@ export class FileInputComponent extends FileInputMixinBase implements MatFormFie
         @Optional() public _parentFormGroup: FormGroupDirective,
     )
     {
-        super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl, new Subject<void>());
+        //super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl, new Subject<void>());
 
         if (this.ngControl != null)
         {
@@ -290,6 +295,19 @@ export class FileInputComponent extends FileInputMixinBase implements MatFormFie
             // that whatever logic is in here has to be super lean or we risk destroying the performance.
             this.updateErrorState();
         }
+    }
+
+    private updateErrorState()
+    {
+       /*  const parentSubmitted = this._parentFormGroup?.submitted || this._parentForm?.submitted;
+        const touchedOrParentSubmitted = this.touched || parentSubmitted;
+
+        const newState = (this.ngControl?.invalid || this.parts.invalid) && touchedOrParentSubmitted; */
+
+        /* if (this.errorState !== newState) {
+          this.errorState = newState;
+          this.stateChanges.next(); // Notify listeners of state changes.
+        } */
     }
 
 }

@@ -1,7 +1,7 @@
-import { EnvironmentProviders, Provider, importProvidersFrom } from '@angular/core';
+import { EnvironmentProviders, Provider, inject } from '@angular/core';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { TRANSLOCO_SCOPE, TranslocoService } from '@ngneat/transloco';
-import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { TRANSLOCO_SCOPE, TranslocoService } from '@jsverse/transloco';
+import { provideApollo as provideApolloLibrary } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { apolloFactory } from './apollo.factory';
@@ -9,17 +9,15 @@ import { apolloFactory } from './apollo.factory';
 export const provideApollo = (): Array<Provider | EnvironmentProviders> =>
 {
     return [
-        importProvidersFrom(ApolloModule),
+        provideApolloLibrary(() =>
         {
-            provide   : APOLLO_OPTIONS,
-            useFactory: apolloFactory,
-            deps      : [
-                HttpLink,
-                AuthenticationService,
-                FuseConfirmationService,
-                TranslocoService,
-            ],
-        },
+            const httpLink = inject(HttpLink);
+            const authenticationService = inject(AuthenticationService);
+            const confirmationService = inject(FuseConfirmationService);
+            const translocoService = inject(TranslocoService);
+
+            return apolloFactory(httpLink, authenticationService, confirmationService, translocoService);
+        }),
     ];
 };
 

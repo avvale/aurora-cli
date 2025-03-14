@@ -7,7 +7,9 @@ export * from './date-adapters';
 export * from './datepicker';
 export * from './datepicker-sql-format';
 export * from './datetimepicker-sql-format';
+export * from './date-range-selector-dialog';
 export * from './dialog';
+export * from './dot';
 export * from './environments-information';
 export * from './file-input';
 export * from './file-preview-overlay';
@@ -36,3 +38,4 @@ export * from './template-dialog';
 export * from './title';
 export * from './user-meta-storage';
 export * from './validation-messages';
+

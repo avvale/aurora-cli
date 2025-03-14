@@ -30,7 +30,6 @@ import { Subject, takeUntil } from 'rxjs';
     styleUrls: ['./quick-chat.component.scss'],
     encapsulation: ViewEncapsulation.None,
     exportAs: 'quickChat',
-    standalone: true,
     imports: [
         NgClass,
         MatIconModule,
