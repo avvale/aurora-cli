@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { CommonComponent } from './common.component';
 import { CountryDetailComponent } from './country/country-detail.component';
 import { CountryListComponent } from './country/country-list.component';

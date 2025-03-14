@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { IamComponent } from './iam.component';
 import { TenantListComponent } from './tenant/tenant-list.component';
 import { TenantDetailComponent } from './tenant/tenant-detail.component';

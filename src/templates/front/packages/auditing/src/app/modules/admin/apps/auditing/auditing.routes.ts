@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { AuditingComponent } from './auditing.component';
 import { HttpCommunicationDetailComponent } from './http-communication/http-communication-detail.component';
 import { HttpCommunicationListComponent } from './http-communication/http-communication-list.component';

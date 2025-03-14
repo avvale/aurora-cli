@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { JobRegistryDetailComponent } from './job-registry/job-registry-detail.component';
 import { JobRegistryListComponent } from './job-registry/job-registry-list.component';
 import { jobRegistryEditResolver, jobRegistryNewResolver, jobRegistryPaginationResolver } from './job-registry/job-registry.resolvers';

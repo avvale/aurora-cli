@@ -12,7 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AccountService } from '@apps/iam/account';
 import { uniqueEmailValidator, uniqueUsernameValidator } from '@apps/iam/shared';
 import { Account, Action, CoreGetLangsService, CoreLang, GetSpinnerFlagPipe, IamService, SnackBarInvalidFormComponent, ViewDetailComponent, log } from '@aurora';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { environment } from 'environments/environment';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 

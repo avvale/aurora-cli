@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { MessageComponent } from './message.component';
 import { MessageListComponent } from './message/message-list.component';
 import { MessageDetailComponent } from './message/message-detail.component';

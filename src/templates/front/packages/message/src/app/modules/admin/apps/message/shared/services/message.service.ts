@@ -3,7 +3,7 @@ import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import { MessageInbox } from '@apps/message';
 import { log } from '@aurora';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
-import { TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { Observable, Subject, lastValueFrom } from 'rxjs';
 import { InboxService } from '../../inbox';
 

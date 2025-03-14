@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AccountService } from '@apps/iam/account';
 import { checkPasswordValidator } from '@apps/iam/shared';
 import { Action, GetSpinnerFlagPipe, MatPasswordStrengthModule, SnackBarInvalidFormComponent, ViewDetailComponent, createPassword, log } from '@aurora';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { lastValueFrom } from 'rxjs';
 

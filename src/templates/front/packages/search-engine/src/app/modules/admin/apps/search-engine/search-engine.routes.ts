@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { SearchEngineComponent } from './search-engine.component';
 import { CollectionListComponent } from './collection/collection-list.component';
 import { CollectionDetailComponent } from './collection/collection-detail.component';

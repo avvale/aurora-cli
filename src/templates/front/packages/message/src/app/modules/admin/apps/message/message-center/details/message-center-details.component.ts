@@ -14,7 +14,7 @@ import { InboxService } from '@apps/message/inbox';
 import { Action, DownloadService, ViewBaseComponent } from '@aurora';
 import { FuseScrollResetDirective } from '@fuse/directives/scroll-reset';
 import { FuseFindByKeyPipe } from '@fuse/pipes/find-by-key/find-by-key.pipe';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { lastValueFrom, takeUntil } from 'rxjs';
 import { messageCustomerCenterMessageScope } from '../list/message-center-list.component';
 

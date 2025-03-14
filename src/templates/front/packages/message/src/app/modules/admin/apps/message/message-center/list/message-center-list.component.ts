@@ -8,7 +8,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { InboxService } from '@apps/message/inbox';
 import { MessageInbox, MessageService } from '@apps/message';
 import { Action, BreadcrumbComponent, ColumnConfig, ColumnDataType, Crumb, GridFiltersStorageService, GridState, GridStateService, QueryStatementHandler, TitleComponent, ViewBaseComponent } from '@aurora';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 
 

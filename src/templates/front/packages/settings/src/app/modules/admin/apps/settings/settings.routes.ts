@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { SettingsComponent } from 'app/modules/admin/apps/settings/settings.component';
 import { accountEditResolver } from './account/account.resolvers';
 import { SettingsAccountComponent } from './account/account.component';

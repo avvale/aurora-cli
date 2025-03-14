@@ -8,7 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
 import { MessageInbox, MessageService } from '@apps/message';
 import { GridData } from '@aurora';
-import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@jsverse/transloco';
 import { Subject, lastValueFrom, takeUntil } from 'rxjs';
 import { InboxService } from '../inbox';
 

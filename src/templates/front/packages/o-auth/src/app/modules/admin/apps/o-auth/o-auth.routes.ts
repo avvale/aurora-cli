@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { TRANSLOCO_SCOPE } from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE } from '@jsverse/transloco';
 import { OAuthComponent } from './o-auth.component';
 import { AccessTokenListComponent } from './access-token/access-token-list.component';
 import { AccessTokenDetailComponent } from './access-token/access-token-detail.component';
