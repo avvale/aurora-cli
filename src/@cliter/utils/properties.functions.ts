@@ -981,8 +981,8 @@ export const getFormDetailFieldsProperties = (
         .filter(property => property.name !== 'id')
         .sort((a, b) =>
         {
-            const valA = a.sort ?? Number.POSITIVE_INFINITY;
-            const valB = b.sort ?? Number.POSITIVE_INFINITY;
+            const valA = a.webComponent?.detailSort ?? Number.POSITIVE_INFINITY;
+            const valB = b.webComponent?.detailSort ?? Number.POSITIVE_INFINITY;
             return valA - valB;
         });
 };
@@ -1038,6 +1038,20 @@ export const getMultipleSelectWebComponentsProperties = (
 ): Property[] =>
 {
     return properties?.filter(property => property.webComponent?.type === WebComponentType.MULTIPLE_SELECT);
+};
+
+export const getAsyncSearchMultipleSelectWebComponentsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties?.filter(property => property.webComponent?.type === WebComponentType.ASYNC_SEARCH_MULTIPLE_SELECT);
+};
+
+export const getAsyncSearchSelectWebComponentsProperties = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties?.filter(property => property.webComponent?.type === WebComponentType.ASYNC_SEARCH_SELECT);
 };
 
 // replace by Properties withGridSelectElementWebComponents

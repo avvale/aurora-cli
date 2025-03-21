@@ -114,6 +114,10 @@ export interface PropertyWebComponent
 {
     type: WebComponentType;
     property: Property;
+    detailSort?: number;
+    isDetailHidden?: boolean;
+    listSort?: number;
+    isListHidden?: boolean;
 }
 
 export interface PropertyArrayOptions
@@ -149,7 +153,6 @@ export interface Property
     aggregateName?: string;
     modulePath?: string;
     arrayOptions?: PropertyArrayOptions;
-    sort?: number;
 }
 
 export interface PropertyRelationship
@@ -280,6 +283,24 @@ export interface VariableInjectionStatement
 export enum WebComponentType
 {
     /**
+     * manage many-to-many relationships by creating a dropdown of related items,
+     * with the functionality to search elements
+     */
+    ASYNC_SEARCH_MULTIPLE_SELECT = 'async-search-multiple-select',
+
+    /**
+     * manage many-to-one relationships by creating a dropdown of related item,
+     * with the functionality to search element
+     */
+    ASYNC_SEARCH_SELECT = 'async-search-select',
+
+    /**
+     * manage one-to-many relationships by creating a grid of related items,
+     * with the functionality to create, edit and delete related elements
+     */
+    GRID_ELEMENTS_MANAGER = 'grid-elements-manager',
+
+    /**
      * manage many-to-one relationships by allowing you to select
      * an element within a grid with search functionality
      */
@@ -292,18 +313,12 @@ export enum WebComponentType
     GRID_SELECT_MULTIPLE_ELEMENTS = 'grid-select-multiple-elements',
 
     /**
-     * manage one-to-many relationships by creating a grid of related items,
-     * with the functionality to create, edit and delete related elements
+     * dropdown to select multiple elements from a list of related items
      */
-    GRID_ELEMENTS_MANAGER = 'grid-elements-manager',
+    MULTIPLE_SELECT = 'multiple-select',
 
     /**
      * dropdown to select one element from a list of related items
      */
     SELECT = 'select',
-
-    /**
-     * dropdown to select multiple elements from a list of related items
-     */
-    MULTIPLE_SELECT = 'multiple-select',
 }

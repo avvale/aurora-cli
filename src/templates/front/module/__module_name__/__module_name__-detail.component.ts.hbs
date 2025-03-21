@@ -1,7 +1,7 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'ChangeDetectionStrategy' 'Component' 'ViewEncapsulation') path='@angular/core')
+            (object items=(array 'ChangeDetectionStrategy' 'Component' 'signal' 'ViewEncapsulation' 'WritableSignal') path='@angular/core')
             (object items='Validators' path='@angular/forms')
             (object items=(array 'Action' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'SnackBarInvalidFormComponent' 'uuid' 'ViewDetailComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
@@ -23,7 +23,7 @@
 {{#unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0 }}
 {{
     push importsArray
-        (object items='ViewChild' path='@angular/core')
+        (object items=(array 'ViewChild') path='@angular/core')
 ~}}
 {{
     push importsArray
@@ -185,7 +185,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: {{ schema.aggregateName }};
+    managedObject: WritableSignal<{{ schema.aggregateName }}> = signal(null);
     {{#if (hasI18nProperties schema.aggregateProperties) }}
     currentLang: CoreLang;
     fallbackLang: CoreLang;
@@ -203,6 +203,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{#eq webComponent.type 'grid-select-element'}}
     /* #region variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
     @ViewChild('{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}GridElementSelector') {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component: GridSelectElementComponent;
+    {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Selected: WritableSignal<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}> = signal(null);
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId: string = '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridList';
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$: Observable<GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>>;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
@@ -348,6 +349,22 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
     ];
     /* #endregion variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+    {{/eq}}
+    {{#eq webComponent.type 'async-search-multiple-select'}}
+    /* #region variables to manage async-search-multiple-select {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}AsyncMatSelectSearchState = initAsyncMatSelectSearchState<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>();
+    {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
+        columnFilter: {
+            id      : uuid(),
+            field   : '{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}.name::unaccent',
+            type    : ColumnDataType.STRING,
+            operator: Operator.iLike,
+            value   : null,
+        },
+        paginationService   : this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service,
+        paginationConstraint: {},
+    });
+    /* #endregion variables to manage async-search-multiple-select {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
     {{/eq}}
     {{/each}}
 {{/unlessEq}}
@@ -685,7 +702,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         .pipe(takeUntil(this.unsubscribeAll$))
                         .subscribe(item =>
                         {
-                            this.managedObject = item;
+                            this.managedObject.set(item);
                             this.fg.patchValue(item);
                             this.disabledNotI18nFields();
                         });
@@ -712,11 +729,14 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item =>
                     {
-                        this.managedObject = item;
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                         {{#if (hasI18nProperties schema.aggregateProperties) }}
                         if (this.fallbackLang.id !== this.currentLang.id) this.disabledNotI18nFields();
                         {{/if}}
+                        {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
+                        this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Selected.set(item);
+                        {{/each}}
                         {{#each (getMultipleSelectWebComponentsProperties schema.aggregateProperties) }}
 
                         // set many to many {{ name }} associations
@@ -892,7 +912,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                                 await lastValueFrom(
                                     this.{{ toCamelCase schema.moduleName }}Service
                                         .deleteById<{{ schema.aggregateName }}>({
-                                            id     : this.managedObject.id,
+                                            id     : this.managedObject().id,
                                             headers: {
                                                 'Content-Language': this.currentLang[this.sessionService.get('searchKeyLang')],
                                             },
@@ -942,9 +962,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.select{{ toPascalCase relationship.field }}':
                 const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} = action.meta.row as {{ getAggregateNameFromPropertyRelationship relationship.modulePath }};
+                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Selected.set({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }});
 
                 this.fg.get('{{ toCamelCase relationship.field }}Id').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.id);
-                this.fg.get('{{ toCamelCase relationship.field }}Name').setValue({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.name);
                 this.fg.markAsDirty();
 
                 this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.closeDialog();
@@ -978,7 +998,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.add{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
                 await lastValueFrom(this.{{ toCamelCase relationship.pivot.moduleName }}Service.create({
                     object: {
-                        {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                        {{ toCamelCase ../schema.moduleName }}Id: this.managedObject().id,
                         {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id: action.meta.row.id,
                     },
                 }));
@@ -1021,7 +1041,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                                     // avoid insert rows already inserted
                                     .filter(row => this.{{ toCamelCase relationship.pivot.moduleNames }}Ids.indexOf(row.id) === -1)
                                     .map(row => ({
-                                        {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                                        {{ toCamelCase ../schema.moduleName }}Id: this.managedObject().id,
                                         {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id: row.id,
                                     })),
                             }),
@@ -1057,7 +1077,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 await lastValueFrom(
                     this.{{ toCamelCase relationship.pivot.moduleName }}Service
                         .deleteById({
-                            {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                            {{ toCamelCase ../schema.moduleName }}Id: this.managedObject().id,
                             {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id: action.meta.row.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id,
                         }),
                 );
@@ -1097,7 +1117,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                                     .getQueryStatement(),
                             constraint: {
                                 where: {
-                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject().id,
                                 },
                                 include: [
                                     {
@@ -1115,7 +1135,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         .get({
                             query: {
                                 where: {
-                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject().id,
                                 },
                             },
                         }),
@@ -1130,7 +1150,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             query           : action.meta.query,
                             constraint      : {
                                 where: {
-                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                                    {{ toCamelCase ../schema.moduleName }}Id: this.managedObject().id,
                                 },
                                 include: [
                                     {
@@ -1191,7 +1211,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                                     where: {
                                         [Operator.or]: action.meta.rows
                                             .map(row => ({
-                                                {{ toCamelCase ../schema.moduleName }}Id: this.managedObject.id,
+                                                {{ toCamelCase ../schema.moduleName }}Id: this.managedObject().id,
                                                 {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id: row.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Id,
                                             })),
                                     },
@@ -1266,7 +1286,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                                     .getQueryStatement(),
                             constraint: {
                                 where: {
-                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject.id,
+                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject().id,
                                 },
                             },
                         }),
@@ -1277,7 +1297,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 this.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm();
                 this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.handleElementDetailDialog(action.id);
                 this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('id').setValue(uuid());
-                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('{{ getForeignKey (object relationship=relationship schema=../schema) }}').setValue(this.managedObject.id);
+                this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('{{ getForeignKey (object relationship=relationship schema=../schema) }}').setValue(this.managedObject().id);
                 break;
 
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
@@ -1302,7 +1322,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             id        : action.meta.row.id,
                             constraint: {
                                 where: {
-                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject.id,
+                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject().id,
                                 },
                             },
                         }),
@@ -1383,7 +1403,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             query     : action.meta.query,
                             constraint: {
                                 where: {
-                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject.id,
+                                    {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject().id,
                                 },
                             },
                         }),

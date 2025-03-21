@@ -658,11 +658,11 @@ export class CodeWriter
         ArrayDriver.addArrayItem(
             sourceFile,
             `{
-    id   : '${moduleNames.toCamelCase()}',
+    id: '${moduleNames.toCamelCase()}',
     title: '${moduleName.toPascalCase()}',
-    type : 'basic',
-    icon : '${outlineIcon || 'heroicons_outline:tag'}',
-    link : '/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}',
+    type: 'basic',
+    icon: '${outlineIcon || 'heroicons_outline:tag'}',
+    link: '/${boundedContextName.toKebabCase()}/${moduleName.toKebabCase()}',
 },`,
             childrenArrayNavigation,
             (item: string, array: ArrayLiteralExpression | undefined) =>

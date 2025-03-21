@@ -8,7 +8,7 @@ handlebars.registerPartial('gridSelectElementWebComponent',
     <mat-label>\\{{ t('{{ toCamelCase schema.boundedContextName }}.{{ toPascalCase property.name }}') }}</mat-label>
     <input
         matInput
-        formControlName="{{ toCamelCase property.relationship.field }}Name"
+        [value]="{{ toCamelCase property.relationship.field }}Selected()?.name"
         readonly
     >
     <button
