@@ -155,6 +155,7 @@ export const {{ toCamelCase schema.moduleName }}PaginationResolver: ResolveFn<Gr
 };
 
 {{#and
+    (eq (countAsyncSearchMultipleSelectWebComponentProperty schema.aggregateProperties) 0)
     (eq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
     (eq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
     (eq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
@@ -163,6 +164,9 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<Action{{#
 {{else ~}}
 export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+    {{#eq webComponent.type 'async-search-multiple-select'}}
+    {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>;
+    {{/eq}}
     {{#eq webComponent.type 'select'}}
     {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
     {{/eq}}
@@ -176,6 +180,9 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
 }{{#if (hasI18nProperties schema.aggregateProperties) }} | {
     object: {{ schema.aggregateName }};
     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+    {{#eq webComponent.type 'async-search-multiple-select'}}
+    {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>;
+    {{/eq}}
     {{#eq webComponent.type 'select'}}
     {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
     {{/eq}}
@@ -207,6 +214,7 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
 ~}}
 {{/if}}
 {{#or
+    (unlessEq (countAsyncSearchMultipleSelectWebComponentProperty schema.aggregateProperties) 0)
     (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
     (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
     (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
@@ -295,6 +303,7 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
     }
     {{/if}}
     {{#or
+        (unlessEq (countAsyncSearchMultipleSelectWebComponentProperty schema.aggregateProperties) 0)
         (unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0)
         (unlessEq (countSelectElementWebComponentsProperties schema.aggregateProperties) 0)
         (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)

@@ -20,6 +20,12 @@
     push importsArray
         (object items='Observable' path='rxjs')
 ~}}
+{{#if (hasAsyncSearchMultipleSelectWebComponentProperty schema.aggregateProperties) }}
+{{
+    push importsArray
+        (object items=(array 'initAsyncMatSelectSearch' 'initAsyncMatSelectSearchState' 'manageAsyncMatSelectSearch' 'Operator') path='@aurora')
+~}}
+{{/if}}
 {{#unlessEq (countGridSelectElementWebComponentsProperties schema.aggregateProperties) 0 }}
 {{
     push importsArray
@@ -414,6 +420,15 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 ~}}
 {{/unlessEq ~}}
 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+{{#eq webComponent.type 'async-search-multiple-select'}}
+{{
+    push ../injectionsArray
+        (
+            object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+            className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+        )
+~}}
+{{/eq ~}}
 {{#eq webComponent.type 'select'}}
 {{
     push ../injectionsArray
@@ -476,6 +491,23 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {
         /**/
         {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+        {{#eq webComponent.type 'async-search-multiple-select'}}
+        /* #region constructor to manage async-search-multiple-select {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+        initAsyncMatSelectSearch<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>({
+            asyncMatSelectSearchState : this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}AsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ManageAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+        });
+        {{
+            push ../injectionsArray
+                (
+                    object variableName=(sumStrings (toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+                    className=(sumStrings (toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath)) 'Service')
+                )
+        ~}}
+        /* #endregion constructor to manage async-search-multiple-select {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
+        {{/eq}}
         {{#eq webComponent.type 'select'}}
         this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$;
         {{/eq}}
@@ -483,11 +515,12 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}$;
         {{/eq}}
         {{#eq webComponent.type 'grid-select-element'}}
-        // {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} grid-select-element
+        /* #region constructor to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
         this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$ = this.gridColumnsConfigStorageService
             .getColumnsConfig(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId, this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}OriginColumnsConfig)
             .pipe(takeUntil(this.unsubscribeAll$));
         this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridData$ = this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.pagination$;
+        /* #endregion constructor to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
         {{/eq}}
         {{/each}}
     }
@@ -735,7 +768,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         if (this.fallbackLang.id !== this.currentLang.id) this.disabledNotI18nFields();
                         {{/if}}
                         {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
-                        this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Selected.set(item);
+                        this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Selected.set(item.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }});
                         {{/each}}
                         {{#each (getMultipleSelectWebComponentsProperties schema.aggregateProperties) }}
 

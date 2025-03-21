@@ -191,6 +191,10 @@
                     {{> selectWebComponent schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq webComponent.type 'async-search-multiple-select'}}
+                    {{> multipleSelectWebComponent schema=../schema property=.}}
+
+                    {{/eq}}
                     {{#eq webComponent.type 'multiple-select'}}
                     {{> multipleSelectWebComponent schema=../schema property=.}}
 

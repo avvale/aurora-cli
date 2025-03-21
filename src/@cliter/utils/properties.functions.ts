@@ -94,6 +94,13 @@ export const hasIndexI18nProperties = (
     return properties?.some(property => (property.index === PropertyIndex.INDEX || property.index === PropertyIndex.UNIQUE) && property.isI18n);
 };
 
+export const hasAsyncSearchMultipleSelectWebComponentProperty = (
+    properties: Property[],
+): boolean =>
+{
+    return properties?.some(property => property.webComponent?.type === WebComponentType.ASYNC_SEARCH_MULTIPLE_SELECT);
+};
+
 // replace by Properties withoutTimestampsWithoutRelationship
 export const getWithoutTimestampsWithoutRelationshipProperties = (
     properties: Property[],
@@ -148,6 +155,13 @@ export const countGridElementsManagerWebComponentsProperties = (
 ): number =>
 {
     return getGridElementsManagerWebComponentsProperties(properties).length;
+};
+
+export const countAsyncSearchMultipleSelectWebComponentProperty = (
+    properties: Property[],
+): number =>
+{
+    return getAsyncSearchMultipleSelectWebComponentProperty(properties).length;
 };
 
 // replace by Properties withoutDeletedAt
@@ -1075,6 +1089,13 @@ export const getGridElementsManagerWebComponentsProperties = (
 ): Property[] =>
 {
     return properties?.filter(property => property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER);
+};
+
+export const getAsyncSearchMultipleSelectWebComponentProperty = (
+    properties: Property[],
+): Property[] =>
+{
+    return properties?.filter(property => property.webComponent?.type === WebComponentType.ASYNC_SEARCH_MULTIPLE_SELECT);
 };
 
 export const getImportWebComponentsManagerProperties = (
