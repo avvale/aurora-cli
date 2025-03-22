@@ -1146,6 +1146,15 @@ export const getImportWebComponentsManagerProperties = (
                 break;
 
             case PropertyType.RELATIONSHIP:
+                if (property.webComponent?.type === WebComponentType.ASYNC_SEARCH_MULTIPLE_SELECT)
+                {
+                    importWebComponents.add('HasValidatorPipe');
+                    importWebComponents.add('MatSelectAddSelectedDirective');
+                    importWebComponents.add('MatSelectModule');
+                    importWebComponents.add('NgxMatSelectSearchModule');
+                    importWebComponents.add('ScrollEndDirective');
+                }
+
                 if (property.webComponent?.type === WebComponentType.GRID_ELEMENTS_MANAGER)
                 {
                     importWebComponents.add('GridElementsManagerModule');

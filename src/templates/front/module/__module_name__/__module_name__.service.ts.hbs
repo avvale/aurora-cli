@@ -298,6 +298,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             id = '',
             constraint = {},
             {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+            {{#eq webComponent.type 'async-search-multiple-select'}}
+            queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
+            constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
+            {{/eq}}
             {{#eq webComponent.type 'select'}}
             query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
             constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} = {},
@@ -330,6 +334,10 @@ export class {{ toPascalCase schema.moduleName }}Service
             id?: string;
             constraint?: QueryStatement;
             {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+            {{#eq webComponent.type 'async-search-multiple-select'}}
+            queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
+            constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
+            {{/eq}}
             {{#eq webComponent.type 'select'}}
             query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
             constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}?: QueryStatement;
@@ -361,6 +369,9 @@ export class {{ toPascalCase schema.moduleName }}Service
     ): Observable<{
         object: {{ schema.aggregateName }};
         {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+        {{#eq webComponent.type 'async-search-multiple-select'}}
+        {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>;
+        {{/eq}}
         {{#eq webComponent.type 'select'}}
         {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
         {{/eq}}
@@ -386,6 +397,9 @@ export class {{ toPascalCase schema.moduleName }}Service
             .watchQuery<{
                 object: {{ schema.aggregateName }};
                 {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+                {{#eq webComponent.type 'async-search-multiple-select'}}
+                {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: GridData<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>;
+                {{/eq}}
                 {{#eq webComponent.type 'select'}}
                 {{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: {{ getAggregateNameFromPropertyRelationship relationship.modulePath }}[];
                 {{/eq}}
@@ -410,6 +424,10 @@ export class {{ toPascalCase schema.moduleName }}Service
                     id,
                     constraint,
                     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+                    {{#eq webComponent.type 'async-search-multiple-select'}}
+                    queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+                    constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+                    {{/eq}}
                     {{#eq webComponent.type 'select'}}
                     query{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
                     constraint{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
@@ -465,6 +483,9 @@ export class {{ toPascalCase schema.moduleName }}Service
                         this.{{ toCamelCase schema.moduleName }}Subject$.next(data.object);
                     }
                     {{#each (getWebComponentsProperties schema.aggregateProperties) }}
+                    {{#eq webComponent.type 'async-search-multiple-select'}}
+                    this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.paginationSubject$.next(data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }});
+                    {{/eq}}
                     {{#eq webComponent.type 'select'}}
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Subject$.next(data.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Get{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }});
                     {{/eq}}

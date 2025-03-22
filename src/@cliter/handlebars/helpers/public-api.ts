@@ -18,6 +18,7 @@ import './get-additional-api-mutations';
 import './get-additional-api-queries';
 import './get-aggregate-name-from-property-relationship';
 import './get-aggregate-properties';
+import './get-async-search-multiple-select-web-components-properties';
 import './get-boolean-properties';
 import './get-bounded-context-name-from-property-relationship';
 import './get-class-name-additional-api';
