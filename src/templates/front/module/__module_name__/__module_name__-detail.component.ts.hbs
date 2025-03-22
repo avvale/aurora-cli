@@ -493,7 +493,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             asyncMatSelectSearchState : this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}AsyncMatSelectSearchState,
             manageAsyncMatSelectSearch: this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ManageAsyncMatSelectSearch,
             itemPagination            : this.routeData.{{ toCamelCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Paginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
-            initSelectedItems         : this.routeData.object.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
+            initSelectedItems         : this.routeData.object.?{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }},
         });
         /* #endregion constructor to manage async-search-multiple-select {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
         {{/eq}}
