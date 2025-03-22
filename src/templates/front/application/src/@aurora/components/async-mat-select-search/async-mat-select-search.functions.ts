@@ -9,7 +9,7 @@ export const initAsyncMatSelectSearchState = <T>(): AsyncMatSelectSearchState<T>
 {
     return {
         page: {
-            pageIndex: 1,
+            pageIndex: 0,
             pageSize : 10,
         },
         paginationPageIndex: 1,
@@ -61,7 +61,7 @@ export const initAsyncMatSelectSearch = <T>(
     }
 
     // init select filter with all items
-    asyncMatSelectSearchState.itemsToShow= itemPagination.rows;
+    asyncMatSelectSearchState.itemsToShow = itemPagination.rows;
     asyncMatSelectSearchState.filteredItems.set(new Set(itemPagination.rows));
     asyncMatSelectSearchState.currentCount = itemPagination.count;
 
@@ -107,7 +107,7 @@ export const manageAsyncMatSelectSearch = ({
         const pagination = asyncMatSelectSearchState.page;
         const hasSearch = !!asyncMatSelectSearchState.keyword;
 
-        // when when search by keyword
+        // when search by keyword
         if (hasSearch && !isFromScrollEndEvent)
         {
             asyncMatSelectSearchState.columnFilters = [{
@@ -121,7 +121,7 @@ export const manageAsyncMatSelectSearch = ({
         // when scroll to have pagination
         else if (!hasSearch && isFromScrollEndEvent)
         {
-            // reset organizationalEntitiesFound to show pagination results
+            // reset items founded to show pagination results
             asyncMatSelectSearchState.foundItemsToShow = [];
             asyncMatSelectSearchState.columnFilters = [];
             if (asyncMatSelectSearchState.currentCount > pagination.pageIndex * (pagination.pageSize + 1))

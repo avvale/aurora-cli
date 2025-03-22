@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { FormControl, ValidatorFn } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Pipe({
     name      : 'hasValidator',
@@ -8,9 +9,9 @@ import { FormControl, ValidatorFn } from '@angular/forms';
 })
 export class HasValidatorPipe implements PipeTransform
 {
-    transform(formControl: FormControl, validators: ValidatorFn | ValidatorFn[]): boolean
+    transform(formControl: FormControl, validators: keyof typeof Validators | keyof typeof Validators[]): boolean
     {
-        if (Array.isArray(validators)) return validators.some(validator => formControl.hasValidator(validator));
-        return formControl.hasValidator(validators);
+        if (Array.isArray(validators)) return validators.some(validator => formControl.hasValidator(Validators[validator] as ValidatorFn));
+        return formControl.hasValidator(Validators[validators] as ValidatorFn);
     }
 }
