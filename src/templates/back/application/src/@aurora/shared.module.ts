@@ -9,11 +9,10 @@ import { SentryModule } from './modules';
 @Module({
     imports: [
         AuroraMetadataModule,
-        AuthJwtStrategyRegistryModule.forRoot(),
         CacheModule.register({ isGlobal: true, ttl: 0 }),
         ConfigModule.forRoot({
             isGlobal   : true,
-            envFilePath: ['../.aurora.env', '.aurora.env'],
+            envFilePath: ['../.env', '.env'],
         }),
         CoreModule,
         CqrsModule,

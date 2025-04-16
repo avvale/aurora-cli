@@ -1,0 +1,136 @@
+version: 0.0.1
+boundedContextName: kitchen-sink
+moduleName: my-module
+moduleNames: my-modules
+aggregateName: KitchenSinkMyModule
+hasOAuth: false
+hasTenant: false
+hasAuditing: false
+front:
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: description
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: description
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: type
+    type: enum
+    enumOptions:
+      - OPTION_1
+      - OPTION_2
+    nullable: false
+    example: KitchenSinkMyModule.OPTION_2
+  - name: code
+    type: varchar
+    maxLength: 128
+    nullable: true
+    index: unique
+  - name: email
+    type: varchar
+    maxLength: 255
+    nullable: true
+    index: unique
+    example: john@gmial.com
+  - name: isActive
+    type: boolean
+    nullable: false
+    defaultValue: false
+    example: true
+  - name: otherModuleId
+    type: id
+    nullable: false
+    relationship:
+      type: many-to-one
+      aggregateName: KitchenSinkOtherModule
+      modulePath: kitchen-sink/other-module
+      key: id
+      field: otherModule
+      avoidConstraint: true
+  - name: fields
+    type: relationship
+    nullable: true
+    relationship:
+      type: one-to-many
+      singularName: field
+      aggregateName: KitchenSinkField
+      modulePath: kitchen-sink/field
+      avoidConstraint: true
+    webComponent:
+      type: grid-elements-manager
+  - name: tags
+    type: array
+    nullable: true
+    arrayOptions:
+      type: varchar
+      maxLength: 64
+    webComponent:
+      type: multiple-select
+  - name: roles
+    type: relationship
+    nullable: true
+    relationship:
+      type: many-to-many
+      singularName: role
+      aggregateName: KitchenSinkRole
+      modulePath: kitchen-sink/role
+      avoidConstraint: true
+      isDenormalized: true
+      pivot:
+        boundedContextName: kitchen-sink
+        moduleName: my-module-role
+        moduleNames: my-modules-roles
+        aggregateName: KitchenSinkMyModuleRole
+        hasOAuth: false
+        hasAuditing: false
+        aggregateProperties:
+          - name: myModuleId
+            type: id
+            primaryKey: true
+            nullable: false
+            relationship:
+              type: many-to-one
+              aggregateName: KitchenSinkMyModule
+              modulePath: kitchen-sink/my-module
+              field: myModule
+              avoidConstraint: true
+          - name: roleId
+            type: id
+            primaryKey: true
+            nullable: false
+            relationship:
+              type: many-to-one
+              aggregateName: KitchenSinkRole
+              modulePath: kitchen-sink/role
+              field: role
+              avoidConstraint: true
+        excludedOperations:
+          - count
+          - max
+          - min
+          - sum
+          - rawSql
+          - upsert
+          - updateAndIncrement
+    webComponent:
+      type: async-search-multiple-select
+  - name: meta
+    type: jsonb
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis:
+  - path: kitchen-sink/my-module/my-custom-process
+    resolverType: mutation
+    httpMethod: post
+excludedFiles:
+  - src/@api/kitchen-sink/my-module/resolvers/kitchen-sink-create-my-modules.resolver.ts

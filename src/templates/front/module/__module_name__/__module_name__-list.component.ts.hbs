@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'ViewEncapsulation') path='@angular/core')
-            (object items=(array 'Action' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'defaultListImports' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService'  'log' 'QueryStatementHandler' 'ViewBaseComponent') path='@aurora')
+            (object items=(array 'Action' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'defaultListImports' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService'  'log' 'queryStatementHandler' 'ViewBaseComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'Observable' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.boundedContextName '.types'))
             (
@@ -146,6 +146,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         switch (action?.id)
         {
             {{#if (hasI18nProperties schema.aggregateProperties) }}
+            /* #region common actions */
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.new':
                 this.router
                     .navigate([
@@ -178,8 +179,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     this.{{ toCamelCase schema.moduleName }}Service.pagination({
                         query: action.meta.query ?
                             action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
+                            queryStatementHandler({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
@@ -286,6 +286,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     action.meta.format,
                 );
                 break;
+                /* #endregion common actions */
         }
     }
 }

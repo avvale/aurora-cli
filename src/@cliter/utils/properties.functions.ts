@@ -1120,7 +1120,6 @@ export const getImportWebComponentsManagerProperties = (
 
             case PropertyType.ENUM:
                 importWebComponents.add('MatSelectModule');
-                importWebComponents.add('NgForOf');
                 break;
 
             case PropertyType.TIMESTAMP:
@@ -1135,7 +1134,6 @@ export const getImportWebComponentsManagerProperties = (
                 if (property.webComponent?.type === WebComponentType.SELECT)
                 {
                     importWebComponents.add('MatSelectModule');
-                    importWebComponents.add('NgForOf');
                 }
 
                 if (property.webComponent?.type === WebComponentType.GRID_SELECT_ELEMENT)

@@ -1,7 +1,6 @@
 # environment files
 .env
-.aurora.env
-.aurora.env.*
+.env.*
 
 # key files
 *.key
