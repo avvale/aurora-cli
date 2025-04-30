@@ -7,6 +7,7 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 export class GridCellValueTemplateDirective
 {
     @Input() field: string;
+    @Input() for: string;
 
     constructor(
         public templateRef: TemplateRef<unknown>,

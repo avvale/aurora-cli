@@ -1,4 +1,5 @@
 {
+    "AccessDenied"            : "Acceso denegado.",
     "Compare"                 : "Los valores no coinciden, deben ser iguales.",
     "Default"                 : "Error no contemplado.",
     "Email"                   : "Este campo debe ser un email válido.",

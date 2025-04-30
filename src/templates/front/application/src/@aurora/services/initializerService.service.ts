@@ -8,7 +8,7 @@ import { TranslocoService } from '@jsverse/transloco';
 @Injectable({
     providedIn: 'root',
 })
-export class BootstrapService
+export class InitializerService
 {
     constructor(
         private readonly sessionService: SessionService,
@@ -17,7 +17,12 @@ export class BootstrapService
         private readonly translocoService: TranslocoService,
     ) {}
 
-    async init(): Promise<void>
+    async bootstrapInitializer(): Promise<boolean>
+    {
+        return true;
+    }
+
+    async resolverInitializer(): Promise<void>
     {
         this.checkEnvironmentSchema(environment);
 
@@ -34,16 +39,20 @@ export class BootstrapService
             // get user from iam service
             const response = await lastValueFrom(this.iamService.get());
 
-            // set user preferred lang
-            const userPreferredLang = this.sessionService
-                .get('langs')
-                .find(lang => lang.id === response.me.user.langId);
-            if (userPreferredLang) this.translocoService.setActiveLang(userPreferredLang.iso6392);
+            if (response.me)
+            {
+                // set user preferred lang
+                const userPreferredLang = this.sessionService
+                    .get('langs')
+                    .find(lang => lang.id === response.me.user.langId);
 
-            log('[DEBUG] Get IamService user data from BootstrapService');
+                if (userPreferredLang) this.translocoService.setActiveLang(userPreferredLang.iso6392);
+            }
+
+            log('[DEBUG] Get IamService user data from InitializerService');
         }
 
-        log('[DEBUG] BootstrapService Initialized');
+        log('[DEBUG] InitializerService Initialized');
     }
 
     private checkEnvironmentSchema(env: Environment): void

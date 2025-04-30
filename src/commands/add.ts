@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 import { Args, Command, Flags, ux } from '@oclif/core';
 import * as fs from 'node:fs';
-import { ArrayLiteralExpression, ObjectLiteralExpression, Writers } from 'ts-morph';
+import { ArrayLiteralExpression, ObjectLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
 import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
 import { exec } from '../@cliter/functions/common';
 import { ArrayDriver, ArrowFunctionDriver, CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver, getInitializer } from '../@cliter/utils/code-writer/public-api';
@@ -148,11 +148,11 @@ export class Add extends Command
                     break;
                 }
 
-                case 'azureAd': {
+                case 'msEntraId': {
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@nestjs/passport', 'passport-azure-ad']);
+                    await exec('npm', ['install', '@nestjs/passport', 'passport', 'passport-jwt', 'jwks-rsa']);
                     ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
@@ -161,28 +161,37 @@ export class Add extends Command
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(
                         appModuleSourceFile,
-                        'azure-ad',
-                        ['AzureAdModule'],
+                        'ms-entra-id',
+                        ['MsEntraIdModule'],
                     );
 
                     appModuleSourceFile.saveSync();
 
-                    // auth.decorator.ts file, change Auth decorator
-                    const authDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+                    const authenticationDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+
+                    // authentication.decorator.ts file, change Auth decorator
                     ImportDriver.createImportItems(
-                        authDecoratorSourceFile,
-                        '@api/azure-ad/azure-ad.guard',
-                        ['AzureADGuard'],
+                        authenticationDecoratorSourceFile,
+                        '@api/ms-entra-id/ms-entra-id-authentication.guard',
+                        ['MsEntraIdAuthenticationGuard'],
                     );
 
-                    const callExpression = CallExpressionDriver.findCallExpression(authDecoratorSourceFile, 'UseGuards');
+                    // authorization.decorator.ts file, change Auth decorator
+                    ImportDriver.createImportItems(
+                        authenticationDecoratorSourceFile,
+                        '@api/ms-entra-id/ms-entra-id-authorization.guard',
+                        ['MsEntraIdAuthorizationGuard'],
+                    );
+
+                    const callExpression = CallExpressionDriver.findCallExpression(authenticationDecoratorSourceFile, 'UseGuards');
                     if (callExpression)
                     {
                         CallExpressionDriver.removeAllArguments(callExpression);
-                        CallExpressionDriver.addArgument(callExpression, 'AzureADGuard');
+                        CallExpressionDriver.addArgument(callExpression, 'MsEntraIdAuthenticationGuard');
+                        CallExpressionDriver.addArgument(callExpression, 'MsEntraIdAuthorizationGuard');
                     }
 
-                    authDecoratorSourceFile.saveSync();
+                    authenticationDecoratorSourceFile.saveSync();
                     break;
                 }
 
@@ -437,12 +446,78 @@ export class Add extends Command
                     break;
                 }
 
-                case 'azureAd': {
+                case 'msEntraId': {
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@azure/msal-angular', '@azure/msal-browser']);
                     ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // apollo.provider.ts
+                    const auroraApolloProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'modules', 'graphql', 'apollo.provider.ts']);
+
+                    ImportDriver.createImportItems(
+                        auroraApolloProviderSourceFile,
+                        '@azure/msal-angular',
+                        ['MsalService'],
+                    );
+
+                    const auroraApolloProviderVariable = auroraApolloProviderSourceFile.getVariableDeclarationOrThrow('provideApollo');
+                    const auroraApolloProviderAnonymousFunction = auroraApolloProviderVariable.getInitializerIfKindOrThrow(SyntaxKind.ArrowFunction);
+                    const provideApolloLibraryCall = auroraApolloProviderAnonymousFunction.getDescendantsOfKind(SyntaxKind.CallExpression).find(call => call.getExpression().getText().includes('provideApolloLibrary'));
+                    const arrowFunction = provideApolloLibraryCall?.getFirstDescendantByKind(SyntaxKind.ArrowFunction);
+                    const bodyBlock = arrowFunction?.getBody()?.asKind(SyntaxKind.Block);
+                    const returnStatement = bodyBlock?.getStatements().find(s => s.getKind() === SyntaxKind.ReturnStatement);
+                    if (returnStatement)
+                    {
+                        bodyBlock?.insertStatements(returnStatement.getChildIndex(), ['const msalService = inject(MsalService);']);
+                    }
+
+                    const returnCall = returnStatement?.getFirstDescendantByKind(SyntaxKind.CallExpression);
+                    returnCall?.addArgument('msalService');
+
+                    auroraApolloProviderSourceFile.saveSync();
+
+                    // apollo.factory.ts
+                    const auroraApolloFactorySourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'modules', 'graphql', 'apollo.factory.ts']);
+
+                    ImportDriver.createImportItems(
+                        auroraApolloFactorySourceFile,
+                        '@azure/msal-angular',
+                        ['MsalService'],
+                    );
+
+                    ImportDriver.createImportItems(
+                        auroraApolloFactorySourceFile,
+                        '@aurora/modules/ms-entra-id',
+                        ['msEntraIdAuthLink'],
+                    );
+
+                    const auroraApolloFactoryVariable = auroraApolloFactorySourceFile.getVariableDeclarationOrThrow('apolloFactory');
+                    const auroraApolloFactoryArrowFunction = auroraApolloFactoryVariable.getInitializerIfKindOrThrow(SyntaxKind.ArrowFunction);
+                    auroraApolloFactoryArrowFunction.addParameter({ name: 'msalService', type: 'MsalService' });
+
+                    const auroraApolloFactoryArrowFunctionBody = auroraApolloFactoryArrowFunction.getBody().asKind(SyntaxKind.Block);
+                    const linkStatement = auroraApolloFactoryArrowFunctionBody?.getStatements().find(statement => statement.getText().includes('ApolloLink.from'));
+                    const callExpr = linkStatement?.getFirstDescendantByKindOrThrow(SyntaxKind.CallExpression);
+                    const arrayArg = callExpr?.getArguments()[0];
+                    const arrayLiteral = arrayArg?.asKindOrThrow(SyntaxKind.ArrayLiteralExpression);
+                    arrayLiteral?.insertElement(0, 'msEntraIdAuthLink(msalService)');
+
+                    auroraApolloFactorySourceFile.saveSync();
+
+                    // app.routes.ts
+                    const appRoutesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const authGuardImport = appRoutesSourceFile.getImportDeclaration('app/core/auth/guards/auth.guard');
+                    if (authGuardImport) authGuardImport.remove();
+
+                    ImportDriver.createImportItems(
+                        appRoutesSourceFile,
+                        '@azure/msal-angular',
+                        ['MsalGuard as AuthGuard'],
+                    );
+
+                    appRoutesSourceFile.saveSync();
 
                     // aurora.providers.ts
                     const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
@@ -451,14 +526,14 @@ export class Add extends Command
                         'provideAurora',
                     );
 
-                    // import AzureAdModule
+                    // import MsEntraId provider
                     ImportDriver.createImportItems(
                         auroraProviderSourceFile,
-                        './modules/azure-ad',
-                        ['provideAzureAd'],
+                        '@aurora/modules/ms-entra-id',
+                        ['provideMsEntraId'],
                     );
                     // TODO, replace addElement with ArrayDriver.addArrayItems
-                    returnArray?.addElement('provideAzureAd()', { useNewLines: true });
+                    returnArray?.addElement('provideMsEntraId()', { useNewLines: true });
 
 
                     // remove AuthGuard, will be replaced by MsalGuard defined in provideAzureAd()
@@ -493,61 +568,61 @@ export class Add extends Command
                     const environmentVariable = VariableDriver.getVariable(environmentFile, 'environment');
                     const environmentObject = <ObjectLiteralExpression>getInitializer(environmentVariable);
                     environmentObject?.addPropertyAssignment({
-                        name       : 'azureAd',
+                        name       : 'msEntraId',
                         initializer: Writers.object({
                             tenant     : '\'\'',
                             authority  : '\'\'',
                             clientId   : '\'\'',
                             redirectUri: '\'\'',
-                            scopes     : '[]',
+                            scopes     : '[\'api://********-****-****-****-************/access_as_user\']',
                         }),
                     });
                     environmentFile.saveSync();
 
-                    // implement environments azure ad variables
+                    // implement environments entra id variables
                     const environmentProdFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.prod.ts']);
                     const environmentProdVariable = VariableDriver.getVariable(environmentProdFile, 'environment');
                     const environmentProdObject = <ObjectLiteralExpression>getInitializer(environmentProdVariable);
                     environmentProdObject?.addPropertyAssignment({
-                        name       : 'azureAd',
+                        name       : 'msEntraId',
                         initializer: Writers.object({
                             tenant     : '\'\'',
                             authority  : '\'\'',
                             clientId   : '\'\'',
                             redirectUri: '\'\'',
-                            scopes     : '[]',
+                            scopes     : '[\'api://********-****-****-****-************/access_as_user\']',
                         }),
                     });
                     environmentProdFile.saveSync();
 
-                    // implement environments azure ad variables
+                    // implement environments entra id variables
                     const environmentLocalFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.local.ts']);
                     const environmentLocalVariable = VariableDriver.getVariable(environmentLocalFile, 'environment');
                     const environmentLocalObject = <ObjectLiteralExpression>getInitializer(environmentLocalVariable);
                     environmentLocalObject?.addPropertyAssignment({
-                        name       : 'azureAd',
+                        name       : 'msEntraId',
                         initializer: Writers.object({
                             tenant     : '\'\'',
                             authority  : '\'\'',
                             clientId   : '\'\'',
                             redirectUri: '\'\'',
-                            scopes     : '[]',
+                            scopes     : '[\'api://********-****-****-****-************/access_as_user\']',
                         }),
                     });
                     environmentLocalFile.saveSync();
 
-                    // implement environments azure ad variables
+                    // implement environments entra id variables
                     const environmentDevFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.dev.ts']);
                     const environmentDevVariable = VariableDriver.getVariable(environmentDevFile, 'environment');
                     const environmentDevObject = <ObjectLiteralExpression>getInitializer(environmentDevVariable);
                     environmentDevObject?.addPropertyAssignment({
-                        name       : 'azureAd',
+                        name       : 'msEntraId',
                         initializer: Writers.object({
                             tenant     : '\'\'',
                             authority  : '\'\'',
                             clientId   : '\'\'',
                             redirectUri: '\'\'',
-                            scopes     : '[]',
+                            scopes     : '[\'api://********-****-****-****-************/access_as_user\']',
                         }),
                     });
                     environmentDevFile.saveSync();

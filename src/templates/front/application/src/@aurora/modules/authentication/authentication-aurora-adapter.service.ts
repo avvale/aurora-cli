@@ -210,6 +210,14 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
         return of(true);
     }
 
+    async signOutAction(): Promise<void>
+    {
+        this.router.navigate(['/sign-out']);
+    }
+
+    /**
+     * Impersonalize
+     */
     impersonalize(accountId: string): Observable<any>
     {
         // TODO, comprobar si ya esta impersonalizando
@@ -243,11 +251,6 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
         this.credentials = this.originCredentials;
         localStorage.removeItem('originCredentials');
 
-    }
-
-    async signOutAction(): Promise<void>
-    {
-        this.router.navigate(['/sign-out']);
     }
 
     /**

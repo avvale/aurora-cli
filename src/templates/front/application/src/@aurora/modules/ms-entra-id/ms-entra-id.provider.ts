@@ -5,35 +5,28 @@ import { MSAL_GUARD_CONFIG, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG, MsalBroadcas
 import { BrowserCacheLocation, IPublicClientApplication, InteractionType, LogLevel, PublicClientApplication } from '@azure/msal-browser';
 import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { environment } from 'environments/environment';
-import { AuthenticationAzureAdAdapterService } from './authentication-azure-ad-adapter.service';
-import { AuthorizationAzureAdAdapterService } from './authorization-azure-ad-adapter.service';
-import { IamAzureAdAdapterService } from './iam-azure-ad-adapter.service';
+import { AuthenticationMsEntraIdAdapterService } from './authentication-ms-entra-id-adapter.service';
+import { IamMsEntraIdAdapterService } from './iam-ms-entra-id-adapter.service';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
-
-export function loggerCallback(logLevel: LogLevel, message: string): void
-{
-    log('[DEBUG] Azure AD MSAL: ', message);
-}
 
 export function MSALInstanceFactory(): IPublicClientApplication
 {
     return new PublicClientApplication({
         auth: {
-            clientId   : environment.azureAd.clientId,      // Application (client) ID from the app registration
-            authority  : environment.azureAd.authority,     // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
-            redirectUri: environment.azureAd.redirectUri,   // This is your redirect URI
-            // postLogoutRedirectUri: '/',
+            clientId   : environment.msEntraId.clientId,      // Application (client) ID from the app registration
+            authority  : environment.msEntraId.authority,     // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
+            redirectUri: environment.msEntraId.redirectUri,   // This is your redirect URI
+            postLogoutRedirectUri: '/',
         },
         cache: {
             cacheLocation         : BrowserCacheLocation.LocalStorage,
             storeAuthStateInCookie: isIE, // set to true for IE 11. Remove this line to use Angular Universal
         },
         system: {
-            allowNativeBroker: false, // Disables WAM Broker
             loggerOptions    : {
-                loggerCallback,
-                logLevel         : LogLevel.Info,
+                loggerCallback   : (logLevel: LogLevel, message: string) => log('[DEBUG] MS Entra Id V1: ', message),
+                logLevel         : LogLevel.Error,
                 piiLoggingEnabled: false,
             },
         },
@@ -46,12 +39,17 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration
 
     protectedResourceMap.set(
         environment.api.graphql,
-        environment.azureAd.scopes,
+        environment.msEntraId.scopes,
+    );
+
+    protectedResourceMap.set(
+        environment.api.rest,
+        environment.msEntraId.scopes,
     );
 
     protectedResourceMap.set(
         'https://graph.microsoft.com/v1.0/me',
-        environment.azureAd.scopes,
+        environment.msEntraId.scopes,
     );
 
     return {
@@ -66,14 +64,14 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration
         interactionType: InteractionType.Redirect,
         authRequest    : {
             scopes: [
-                ...environment.azureAd.scopes,
+                ...environment.msEntraId.scopes,
             ],
         },
         loginFailedRoute: '/login-failed',
     };
 }
 
-export const provideAzureAd = (): Array<Provider | EnvironmentProviders> =>
+export const provideMsEntraId = (): Array<Provider | EnvironmentProviders> =>
 {
     return [
         {
@@ -99,15 +97,11 @@ export const provideAzureAd = (): Array<Provider | EnvironmentProviders> =>
         },
         {
             provide : AuthenticationService,
-            useClass: AuthenticationAzureAdAdapterService,
-        },
-        {
-            provide : AuthorizationService,
-            useClass: AuthorizationAzureAdAdapterService,
+            useClass: AuthenticationMsEntraIdAdapterService,
         },
         {
             provide : IamService,
-            useClass: IamAzureAdAdapterService,
+            useClass: IamMsEntraIdAdapterService,
         },
         MsalGuard,
         MsalService,

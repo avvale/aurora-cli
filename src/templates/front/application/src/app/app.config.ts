@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {
     ApplicationConfig,
     inject,
@@ -25,7 +25,10 @@ import { environment } from 'environments/environment';
 export const appConfig: ApplicationConfig = {
     providers: [
         provideAnimations(),
-        provideHttpClient(),
+        provideHttpClient(
+            // add interceptors from DI, to enable the HTTP_INTERCEPTORS token
+            withInterceptorsFromDi()
+        ),
         provideRouter(
             appRoutes,
             withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })

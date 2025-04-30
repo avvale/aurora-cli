@@ -1,6 +1,5 @@
 /* eslint-disable max-params */
 import { SourceFile, ObjectLiteralExpression, InitializerExpressionGetableNode, ArrayLiteralExpression, StringLiteral } from 'ts-morph';
-import { SyntaxKind } from 'typescript';
 import { cliterConfig } from '../../config/cliter.config';
 import { ArrayDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver } from './drivers';
 import { getInitializer } from './functions';

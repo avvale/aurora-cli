@@ -13,7 +13,6 @@ import { GridSelectElementCustomHeaderTemplateDirective } from './directives/gri
     styleUrls      : ['./grid-select-element.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
-    imports        : [],
 })
 export class GridSelectElementComponent
 {
@@ -33,8 +32,7 @@ export class GridSelectElementComponent
 
         // after open dialog, when componentInstance is defined, set gridData
         // to the dialog
-        this.elementDialogRef?.componentInstance
-            .gridDataSubject$.next(gridData);
+        this.elementDialogRef?.componentInstance?.gridDataSubject$.next(gridData);
     }
     get gridData(): GridData
     {

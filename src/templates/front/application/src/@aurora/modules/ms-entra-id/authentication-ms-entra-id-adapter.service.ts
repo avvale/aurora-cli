@@ -8,7 +8,7 @@ import { lastValueFrom, Observable, of } from 'rxjs';
 @Injectable({
     providedIn: 'root',
 })
-export class AuthenticationAzureAdAdapterService extends AuthenticationService
+export class AuthenticationMsEntraIdAdapterService extends AuthenticationService
 {
     public authenticated: boolean = false;
 
@@ -16,7 +16,7 @@ export class AuthenticationAzureAdAdapterService extends AuthenticationService
      * Constructor
      */
     constructor(
-        private readonly authService: MsalService,
+        private readonly msalService: MsalService,
         private readonly router: Router,
     )
     {
@@ -50,6 +50,11 @@ export class AuthenticationAzureAdAdapterService extends AuthenticationService
         //
     }
 
+    set originCredentials(credentials: Credentials)
+    {
+        //
+    }
+
     get credentials(): Credentials
     {
         return;
@@ -61,7 +66,13 @@ export class AuthenticationAzureAdAdapterService extends AuthenticationService
 
     clear(): void
     {
-        //
+        // delete all local storage
+        localStorage.clear();
+    }
+
+    isImpersonalized(): boolean
+    {
+        return false;
     }
 
     /**
@@ -107,7 +118,9 @@ export class AuthenticationAzureAdAdapterService extends AuthenticationService
      */
     signOut(): Observable<any>
     {
-        this.authService.logoutRedirect();
+        this.msalService.logoutRedirect({
+            postLogoutRedirectUri: '/',
+        });
 
         // Remove the access token from the local storage
         this.clear();
@@ -136,6 +149,19 @@ export class AuthenticationAzureAdAdapterService extends AuthenticationService
     signUp(user: { name: string; email: string; password: string; company: string; }): Observable<any>
     {
         return;
+    }
+
+    /**
+     * Impersonalize
+     */
+    impersonalize(accountId: string): Observable<any>
+    {
+        return;
+    }
+
+    rollbackImpersonalize(): void
+    {
+        //
     }
 
     /**

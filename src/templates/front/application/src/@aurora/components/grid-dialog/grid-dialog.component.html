@@ -58,6 +58,18 @@ Header close button, deprecated
                 </ng-template>
             }
 
+            @if (!hasCustomHeadersLeftPosition())
+            {
+                <ng-template
+                    auGridCustomHeaderTemplate
+                    position="left"
+                >
+                    <p class="title">
+                        <span>{{ data.title }}</span>
+                    </p>
+                </ng-template>
+            }
+
             @if (!hasCustomHeadersRightPosition())
             {
                 <ng-template

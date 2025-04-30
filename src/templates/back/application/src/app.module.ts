@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 // modules
-import { CoreModule } from './@aurora/core.module';
+import { CoreModule } from '@aurora/core.module';
 import { RootModule, ServerStaticModule } from '@aurora/modules';
 
 @Module({

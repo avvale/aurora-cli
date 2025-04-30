@@ -31,6 +31,7 @@ export class GridDialogComponent
     columnsConfig$: Observable<ColumnConfig[]>;
     selectedRows = [];
     hasCustomHeadersRightPosition: WritableSignal<boolean> = signal(false);
+    hasCustomHeadersLeftPosition: WritableSignal<boolean> = signal(false);
 
     // manage gridData
     gridDataSubject$: BehaviorSubject<GridData> = new BehaviorSubject(null);
@@ -102,6 +103,10 @@ export class GridDialogComponent
         // know if has custom headers right position
         this.hasCustomHeadersRightPosition.set(
             data.gridCustomHeadersTemplate?.map(template => template.position).includes('right'),
+        );
+
+        this.hasCustomHeadersLeftPosition.set(
+            data.gridCustomHeadersTemplate?.map(template => template.position).includes('left'),
         );
     }
 }
