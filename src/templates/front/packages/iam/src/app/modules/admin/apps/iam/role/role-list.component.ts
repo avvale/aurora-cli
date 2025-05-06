@@ -16,7 +16,7 @@ import { PermissionRoleService } from '../permission-role/permission-role.servic
     standalone     : true,
     imports        : [
         ...defaultListImports,
-        ContentDialogTemplateDirective, FormsModule, MatDialogModule, MatSelectModule, ReactiveFormsModule,
+        FormsModule, MatDialogModule, MatSelectModule, ReactiveFormsModule,
     ],
 })
 export class RoleListComponent extends ViewBaseComponent

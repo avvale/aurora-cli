@@ -26,10 +26,8 @@ export class InterfaceDriver
             {
                 interfaceInstance.remove();
             }
-            else
-            {
-                return;
-            }
+
+            return;
         }
 
         const interfaceDeclaration = sourceFile.addInterface({

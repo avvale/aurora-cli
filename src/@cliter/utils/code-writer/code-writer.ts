@@ -4,7 +4,7 @@ import * as path from 'node:path';
 import { ArrayLiteralExpression, CallExpression, Decorator, IndentationText, InitializerExpressionGetableNode, ObjectLiteralExpression, Project, QuoteKind, SourceFile, StringLiteral } from 'ts-morph';
 import { NewLineKind, SyntaxKind } from 'typescript';
 import { CliterConfig, cliterConfig } from '../../config';
-import { Property } from '../../types';
+import { Property, RelationshipType } from '../../types';
 import { ObjectTools } from '../object-tools';
 import { getForeignRelationshipProperties, getGraphqlInputProperties, getGraphqlProperties, getWithoutTimestampsProperties, hasI18nProperties } from '../properties.functions';
 import { getPropertyJavascriptCreateType, getPropertyJavascriptType, getPropertyJavascriptUpdateType } from '../property.functions';
@@ -325,27 +325,41 @@ export class CodeWriter
     {
         const sourceFile = this.project.addSourceFileAtPath(path.join(process.cwd(), this.srcDirectory, cliterConfig.dashboardContainer, this.boundedContextName.toKebabCase(), `${this.boundedContextName.toKebabCase()}.types.ts`));
 
+        const propertiesObjectType: { name: string; type: string}[] = [];
+        for (const property of getGraphqlProperties(properties)
+            // avoid duplicated properties from i18n table, id, createdAt, updatedAt, deletedAt
+            .filter(property =>
+                !(
+                    property.isI18n &&
+                    (
+                        property.name === 'id' ||
+                        property.name === 'createdAt' ||
+                        property.name === 'updatedAt' ||
+                        property.name === 'deletedAt'
+                    )
+                ),
+            )
+        )
+        {
+            propertiesObjectType.push({
+                name: property.name.toCamelCase() + (property.nullable ? '?' : ''),
+                type: getPropertyJavascriptType(property, cliterConfig),
+            });
+
+            if (property.relationship?.type === RelationshipType.MANY_TO_ONE)
+            {
+                propertiesObjectType.push({
+                    name: property.relationship.field.toCamelCase() + (property.nullable ? '?' : ''),
+                    type: property.relationship.aggregateName,
+                });
+            }
+        }
+
         // add object type
         InterfaceDriver.addInterface(
             sourceFile,
             `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}`,
-            getGraphqlProperties(properties)
-                // avoid duplicated properties from i18n table, id, createdAt, updatedAt, deletedAt
-                .filter(property =>
-                    !(
-                        property.isI18n &&
-                        (
-                            property.name === 'id' ||
-                            property.name === 'createdAt' ||
-                            property.name === 'updatedAt' ||
-                            property.name === 'deletedAt'
-                        )
-                    ),
-                )
-                .map(property => ({
-                    name: property.name.toCamelCase() + (property.nullable ? '?' : ''),
-                    type: getPropertyJavascriptType(property, cliterConfig),
-                })),
+            propertiesObjectType,
             { overwrite },
         );
 
