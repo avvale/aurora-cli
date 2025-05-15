@@ -15,8 +15,8 @@ export class IamAccountDto
     id: string;
 
     @ApiProperty({
-        type       : IamAccountType,
-        enum       : ['USER','SERVICE'],
+        enum       : IamAccountType,
+        enumName   : 'IamAccountType',
         description: 'type [input here api field description]',
         example    : IamAccountType.USER,
     })
