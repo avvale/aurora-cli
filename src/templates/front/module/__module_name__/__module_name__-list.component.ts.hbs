@@ -145,8 +145,8 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
-            {{#if (hasI18nProperties schema.aggregateProperties) }}
             /* #region common actions */
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.new':
                 this.router
                     .navigate([
