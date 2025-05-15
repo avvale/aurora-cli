@@ -22,6 +22,7 @@ handlebars.registerHelper('initialFormGroupData', function(property: Property)
         case PropertyType.JSONB:
         case PropertyType.DATE:
         case PropertyType.DECIMAL:
+        case PropertyType.FLOAT:
             return 'null';
 
         case PropertyType.BOOLEAN:

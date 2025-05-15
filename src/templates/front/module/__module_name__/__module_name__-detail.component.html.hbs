@@ -178,6 +178,10 @@
                     {{> decimalInput schema=../schema property=.}}
 
                     {{/eq}}
+                    {{#eq type 'float'}}
+                    {{> decimalInput schema=../schema property=.}}
+
+                    {{/eq}}
                     {{#eq type 'date'}}
                     {{> dateInput schema=../schema property=.}}
 

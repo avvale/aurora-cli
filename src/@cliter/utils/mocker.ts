@@ -92,7 +92,7 @@ export class Mocker
             case 'decimal':
                 return totalDigits && decimalDigits ? randomDigitsDecimal(totalDigits, decimalDigits) : randomDigitsDecimal(5, 2);
 
-            case 'random.float':
+            case 'float':
                 return maxLength ? randomNumber(maxLength) : faker.datatype.float();
 
             case 'timestamp':
