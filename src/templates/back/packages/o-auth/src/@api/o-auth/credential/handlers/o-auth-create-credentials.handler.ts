@@ -94,7 +94,7 @@ export class OAuthCreateCredentialsHandler
             ));
 
             // if not exist user throw error
-            if (!user) throw new UnauthorizedException();
+            if (!user.account?.isActive) throw new UnauthorizedException();
 
             // get account to create credential and consolidate permissions
             const account = await this.consolidatePermissions(
@@ -131,7 +131,7 @@ export class OAuthCreateCredentialsHandler
         if (payload.grantType === OAuthClientGrantType.REFRESH_TOKEN)
         {
             // get refresh token session
-            const refreshTokenSession = <Jwt>this.jwtService.decode(payload.refreshToken);
+            const refreshTokenSession = this.jwtService.decode(payload.refreshToken);
 
             // get refresh token aggregate
             const refreshTokenAggregate = await this.queryBus.ask(new OAuthFindRefreshTokenByIdQuery(refreshTokenSession.jit, {

@@ -5,12 +5,12 @@ import { OAuthClientGrantType } from '@api/graphql';
 export class OAuthCreateCredentialsDto
 {
     @ApiProperty({
-        type       : String,
+        enum       : OAuthClientGrantType,
+        enumName   : 'AuditingHttpCommunicationEvent',
         description: 'grantType [input here api field description]',
         example    : OAuthClientGrantType.PASSWORD,
-        enum       : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD'],
     })
-    grantType: string;
+    grantType: OAuthClientGrantType;
 
     @ApiProperty({
         type       : String,

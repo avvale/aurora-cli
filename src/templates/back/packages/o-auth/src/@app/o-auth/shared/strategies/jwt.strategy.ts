@@ -4,27 +4,28 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { IQueryBus, Jwt } from '@aurorajs.dev/core';
 // todo, mover a @api para evitar coger un recurso de @api, desde el dominio?? no queda claro, donde se ubica la carpeta shared
-import { IamAccountDto } from '@api/iam/account/dto';
 import { IamFindAccountQuery } from '@app/iam/account';
 import { IamAccount } from '@api/graphql';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy)
 {
     constructor(
         private readonly queryBus: IQueryBus,
+        private readonly configService: ConfigService,
     )
     {
         super({
             jwtFromRequest  : ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey     : fs.readFileSync('oauth-public.key'),
+            secretOrKey     : fs.readFileSync(configService.get('OAUTH_PUBLIC_KEY_PATH'), 'utf8'),
             algorithms      : ['RS256'],
         });
     }
 
     // set user variable in request with return object
-    async validate(payload: Jwt): Promise<IamAccount | IamAccountDto>
+    async validate(payload: Jwt): Promise<IamAccount>
     {
         return await this.queryBus.ask(new IamFindAccountQuery({
             where: {

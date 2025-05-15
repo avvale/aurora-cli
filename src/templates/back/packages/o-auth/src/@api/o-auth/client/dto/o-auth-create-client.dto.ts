@@ -11,8 +11,8 @@ export class OAuthCreateClientDto
     id: string;
 
     @ApiProperty({
-        type       : OAuthClientGrantType,
-        enum       : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD','REFRESH_TOKEN'],
+        enum       : OAuthClientGrantType,
+        enumName   : 'OAuthClientGrantType',
         description: 'grantType [input here api field description]',
     })
     grantType: OAuthClientGrantType;
