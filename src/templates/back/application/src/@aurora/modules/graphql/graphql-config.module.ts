@@ -21,7 +21,7 @@ import GraphQLJSON from 'graphql-type-json';
                     JSON: GraphQLJSON, // define JSON Scalar type
                 },
                 definitions: configService.get('GRAPHQL_CREATE_DEFINITIONS') === 'true' ?  {
-                    path: join(process.cwd(), 'src/@api/graphql.ts'),
+                    path: join(process.cwd(), configService.get('GRAPHQL_TYPE_PATH')),
                 } : undefined,
             }),
             inject: [ConfigService],
