@@ -27,6 +27,9 @@ env:
   OAUTH_PUBLIC_KEY: $\{{ secrets.OAUTH_PUBLIC_KEY }}
   DOT_ENV: $\{{ secrets.DOT_ENV }}
 
+  # Node version
+  NODE_VERSION: '22'
+
 jobs:
   tests:
     name: Build and test
@@ -38,7 +41,7 @@ jobs:
     - name: Install node
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: '$\{{ env.NODE_VERSION }}'
 
     - name: Install dependencies
       run: npm ci
@@ -72,7 +75,7 @@ jobs:
       run: zip release.zip ./dist/* ./package.json ./package-lock.json -r
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tested-artifact
         path: |
@@ -84,11 +87,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: tested-artifact
 
-      - uses: geekyeggo/delete-artifact@v2
+      - uses: geekyeggo/delete-artifact@v5
         with:
           name: tested-artifact
 
@@ -97,24 +100,6 @@ jobs:
 
       - name: Delete zip artifact
         run: rm release.zip
-
-      - name: Install node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci --prefix src
-
-      - name: Create OAuth Keys and dot file
-        run: |
-          touch src/oauth-private.key
-          echo "$OAUTH_PRIVATE_KEY" > src/oauth-private.key
-          touch src/oauth-public.key
-          echo "$OAUTH_PUBLIC_KEY" > src/oauth-public.key
-          touch src/.env
-          echo "$DOT_ENV" > src/.env
-        shell: bash
 
       - name: Create file to restart application
         run: |
@@ -125,7 +110,7 @@ jobs:
       - name: Deploy Plesk with rsync
         uses: burnett01/rsync-deployments@5.2.1
         with:
-          switches: -avzh --delete --include=".env" --exclude=".*"
+          switches: -avzh --delete --exclude=".*"
           path: src/
           remote_path: $\{{ env.SERVER_PATH }}/httpdocs
           remote_host: $\{{ env.SERVER_HOST }}
@@ -147,8 +132,19 @@ jobs:
           key: $\{{ env.SERVER_KEY }}
           passphrase: $\{{ env.SERVER_KEY_PHRASE }}
           port: $\{{ env.SERVER_PORT }}
+          envs: DOT_ENV, NODE_VERSION, OAUTH_PRIVATE_KEY, OAUTH_PUBLIC_KEY
           script: |
+            PATH=$PATH:$\{{ env.SERVER_PATH }}/.nodenv/shims
             whoami
             ls -al
+            touch $\{{ env.SERVER_PATH }}/.node-version
+            echo "$NODE_VERSION" > $\{{ env.SERVER_PATH }}/.node-version
             mkdir -p $\{{ env.SERVER_PATH }}/storage/app/public
             ln -s $\{{ env.SERVER_PATH }}/storage/app/public $\{{ env.SERVER_PATH }}/httpdocs/public
+            touch $\{{ env.SERVER_PATH }}/oauth-private.key
+            echo "$OAUTH_PRIVATE_KEY" > $\{{ env.SERVER_PATH }}/oauth-private.key
+            touch $\{{ env.SERVER_PATH }}/oauth-public.key
+            echo "$OAUTH_PUBLIC_KEY" > $\{{ env.SERVER_PATH }}/oauth-public.key
+            touch $\{{ env.SERVER_PATH }}/.env
+            echo "$DOT_ENV" > $\{{ env.SERVER_PATH }}/.env
+            cd httpdocs && npm ci

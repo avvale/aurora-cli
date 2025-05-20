@@ -21,28 +21,6 @@ env:
   SERVER_USERNAME: $\{{ secrets.SERVER_USERNAME }}
   # example /var/www/vhosts/contoso.com
   SERVER_PATH: $\{{ secrets.SERVER_PATH }}
-  HTACCESS: |
-    <IfModule mod_rewrite.c>
-      <IfModule mod_negotiation.c>
-        Options -MultiViews
-      </IfModule>
-
-      RewriteEngine On
-
-      # Redirect Trailing Slashes If Not A Folder...
-      RewriteCond %{REQUEST_FILENAME} !-d
-      RewriteCond %{REQUEST_URI} (.+)/$
-      RewriteRule ^ %1 [L,R=301]
-
-      # Handle Front Controller...
-      RewriteCond %{REQUEST_FILENAME} !-d
-      RewriteCond %{REQUEST_FILENAME} !-f
-      RewriteRule ^ index.html [L]
-
-      # Handle Authorization Header
-      RewriteCond %{HTTP:Authorization} .
-      RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-    </IfModule>
 
 jobs:
   tests:
@@ -55,7 +33,7 @@ jobs:
     - name: Install node
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: '22'
 
     - name: Install dependencies
       run: npm ci
@@ -70,7 +48,7 @@ jobs:
       run: cd dist/fuse/browser && zip release.zip ./* -r
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: tested-artifact
         path: |
@@ -82,11 +60,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: tested-artifact
 
-      - uses: geekyeggo/delete-artifact@v2
+      - uses: geekyeggo/delete-artifact@v5
         with:
           name: tested-artifact
 
@@ -99,19 +77,12 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
-
-      - name: Create .htaccess file
-        run: |
-          touch src/.htaccess
-          echo "$HTACCESS" > src/.htaccess
-          ls src -a
-        shell: bash
+          node-version: '22'
 
       - name: Deploy Plesk with rsync
         uses: burnett01/rsync-deployments@5.2.1
         with:
-          switches: -avzh --delete --include=".htaccess" --exclude=".*"
+          switches: -avzh --delete --exclude=".*"
           path: src/
           remote_path: $\{{ env.SERVER_PATH }}/httpdocs
           remote_host: $\{{ env.SERVER_HOST }}
