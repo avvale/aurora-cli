@@ -321,4 +321,9 @@ export enum WebComponentType
      * dropdown to select one element from a list of related items
      */
     SELECT = 'select',
+
+    /**
+     * dropdown to select one element from a list of related items with search functionality
+     */
+    SEARCH_SELECT = 'search-select',
 }

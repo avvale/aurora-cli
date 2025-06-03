@@ -303,7 +303,6 @@ export class Add extends Command
 
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@nestjs/jwt', '@nestjs/passport', 'passport-jwt']);
-                    await exec('npm', ['install', '-D', '@types/passport-jwt']);
                     ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);

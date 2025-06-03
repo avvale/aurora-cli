@@ -125,7 +125,7 @@ jobs:
         shell: sh
 
       - name: Execute command on remote server
-        uses: appleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@v1
         with:
           host: $\{{ env.SERVER_HOST }}
           username: $\{{ env.SERVER_USERNAME }}

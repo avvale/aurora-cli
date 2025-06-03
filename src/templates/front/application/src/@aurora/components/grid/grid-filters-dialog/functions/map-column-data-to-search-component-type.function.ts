@@ -15,6 +15,7 @@ export const mapColumnDataToSearchComponentType = (type: ColumnDataType): Search
         case ColumnDataType.BOOLEAN:
             return SearchComponentType.CHECKBOX;
         case ColumnDataType.DATE:
+        case ColumnDataType.TIMESTAMP:
             return SearchComponentType.DATEPICKER;
         case ColumnDataType.UUID:
             return SearchComponentType.SELECT;

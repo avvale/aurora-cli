@@ -58,6 +58,7 @@ export enum ColumnDataType
     JSONB = 'JSONB',
     NUMBER = 'NUMBER',
     STRING = 'STRING',
+    TIMESTAMP = 'TIMESTAMP',
     TRANSLATIONS_MENU = 'TRANSLATIONS_MENU',
     UUID = 'UUID',
 }

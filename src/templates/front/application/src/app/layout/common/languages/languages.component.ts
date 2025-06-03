@@ -17,6 +17,8 @@ import { AvailableLangs, TranslocoService } from '@jsverse/transloco';
 import { take } from 'rxjs';
 
 // ---- customizations ----
+import 'dayjs/locale/es';
+import dayjs from 'dayjs';
 import { NavigationService as AuroraNavigationService } from '@aurora/components/navigation/navigation.service';
 
 @Component({
@@ -62,6 +64,9 @@ export class LanguagesComponent implements OnInit, OnDestroy {
 
             // Update the navigation
             this._updateNavigation(activeLang);
+
+            // ---- customizations ----
+            dayjs.locale(activeLang);
         });
 
         // Set the country iso codes for languages for flags

@@ -293,6 +293,46 @@
                                 </td>
                             }
 
+                            <!-- TIMESTAMP -->
+                            @case (columnConfigType.TIMESTAMP)
+                            {
+                                <th
+                                    mat-header-cell
+                                    *matHeaderCellDef
+                                    [disabled]="!columnConfig.sort"
+                                    [ngClass]="columnConfig.headerClass"
+                                    [mat-sort-header]="columnConfig.sort"
+                                >
+                                    {{ columnConfig.field | gridTranslate:'column':id | async }}
+                                </th>
+                                <td
+                                    mat-cell
+                                    *matCellDef="let row"
+                                    [ngClass]="columnConfig.bodyClass"
+                                >
+                                    <!-- set value by template -->
+                                    <div *ngFor="let cellValueTemplate of gridCellValuesTemplate">
+                                        <div *ngIf="(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === columnConfig.field">
+                                            <ng-container
+                                                *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | getCellValue:columnConfig.field, columnConfig, row }"
+                                            >
+                                            </ng-container>
+                                        </div>
+                                        <!-- set value by template for all fields -->
+                                        <div *ngIf="!(gridCellValuesTemplate | hasCellValueWithFieldTemplate: columnConfig) && cellValueTemplate.field === undefined">
+                                            <ng-container
+                                                *ngTemplateOutlet="cellValueTemplate.templateRef; context: { $implicit: row | getCellValue:columnConfig.field, columnConfig, row }"
+                                            >
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <!-- set value by columns config transform -->
+                                    <div *ngIf="!(gridCellValuesTemplate | hasCellValueTemplate:columnConfig)">
+                                        {{ row | getCellValue:columnConfig.field | transformDataCell:columnConfig.transform }}
+                                    </div>
+                                </td>
+                            }
+
                             <!-- ENUM -->
                             @case (columnConfigType.ENUM)
                             {

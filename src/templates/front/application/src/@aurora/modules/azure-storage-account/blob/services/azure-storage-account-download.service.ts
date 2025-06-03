@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 @Injectable({
     providedIn: 'root',
 })
-export class DownloadService
+export class AzureStorageAccountDownloadService
 {
     constructor(
         private readonly graphqlService: GraphQLService,
@@ -15,12 +15,14 @@ export class DownloadService
 
     public download(
         {
+            blobName,
             relativePathSegments,
-            filename,
+            containerName,
             originFilename,
         }: {
+            blobName: string;
             relativePathSegments: string[];
-            filename: string;
+            containerName?: string;
             originFilename?: string;
         },
     ): void
@@ -30,20 +32,23 @@ export class DownloadService
             .client()
             .watchQuery<string>({
                 query: gql`
-                    query CoreGetBase64FromFile (
+                    query AzureStorageAccountGetBase64FromBlob (
+                        $blobName: GraphQLString!
                         $relativePathSegments: [GraphQLString!]!
-                        $filename: GraphQLString!
+                        $containerName: GraphQLString
                     )
                     {
-                        coreGetBase64FromFile (
+                        azureStorageAccountGetBase64FromBlob (
+                            blobName: $blobName
                             relativePathSegments: $relativePathSegments
-                            filename: $filename
+                            containerName: $containerName
                         )
                     },
                 `,
                 variables: {
+                    blobName,
                     relativePathSegments,
-                    filename,
+                    containerName,
                 },
             })
             .valueChanges
@@ -51,11 +56,11 @@ export class DownloadService
             {
                 log('[DEBUG] - Download attachment: ', data);
 
-                if (data['coreGetBase64FromFile'])
+                if (data['azureStorageAccountGetBase64FromBlob'])
                 {
                     saveAs(
-                        base64ToBlob(data['coreGetBase64FromFile']['base64']),
-                        originFilename || filename,
+                        base64ToBlob(data['azureStorageAccountGetBase64FromBlob']['base64']),
+                        originFilename || blobName,
                     );
                 }
             });
