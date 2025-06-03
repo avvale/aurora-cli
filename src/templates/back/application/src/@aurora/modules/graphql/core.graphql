@@ -86,7 +86,9 @@ input CoreFileUploaded
     id: ID!
     file: Upload!
     relativePathSegments: [GraphQLString]
+    containerName: GraphQLString
     hasCreateLibrary: GraphQLBoolean
+    meta: JSON
 }
 
 #############
