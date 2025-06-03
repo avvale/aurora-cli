@@ -1,0 +1,22 @@
+type AzureStorageAccountBase64Blob
+{
+    base64: GraphQLString!
+}
+
+type Query
+{
+    azureStorageAccountGetBase64FromBlob(
+        blobName: GraphQLString!
+        relativePathSegments: [GraphQLString!]!
+        containerName: GraphQLString
+    ): AzureStorageAccountBase64Blob
+}
+
+type Mutation
+{
+    azureStorageAccountUploadBlob(
+        file: CoreFileUploaded!
+        containerName: GraphQLString
+        hasFileMeta: GraphQLBoolean
+    ): CoreFile
+}
