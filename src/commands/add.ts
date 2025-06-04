@@ -148,6 +148,51 @@ export class Add extends Command
                     break;
                 }
 
+                case 'azureStorageAccount': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@azure/storage-blob']);
+                    ux.action.stop('Completed!');
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'azure-storage-account',
+                        ['AzureStorageAccountModule'],
+                    );
+
+                    appModuleSourceFile.saveSync();
+
+                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@api/azure-storage-account/blob/shared',
+                        ['AzureStorageAccountUploadBlobService'],
+                    );
+
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'providers',
+                        'CoreUploadFileManagerService',
+                        'AzureStorageAccountUploadBlobService',
+                    );
+
+                    sharedModuleSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed!');
+
+                    break;
+                }
+
                 case 'msEntraId': {
                     await BackHandler.addPackage(addCommandState);
 
@@ -192,6 +237,10 @@ export class Add extends Command
                     }
 
                     authenticationDecoratorSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed!');
                     break;
                 }
 
@@ -442,6 +491,30 @@ export class Add extends Command
                     const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
                     Installer.declareFrontRouting(routesSourceFile, 'auditing');
                     routesSourceFile.saveSync();
+                    break;
+                }
+
+                case 'azureStorageAccount': {
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
+
+                    // import MsEntraId provider
+                    ImportDriver.createImportItems(
+                        auroraProviderSourceFile,
+                        '@aurora/modules/azure-storage-account',
+                        ['provideAzureStorageAccount'],
+                    );
+                    // TODO, replace addElement with ArrayDriver.addArrayItems
+                    returnArray?.addElement('provideAzureStorageAccount()', { useNewLines: true });
+
+                    auroraProviderSourceFile.organizeImports();
+                    auroraProviderSourceFile.saveSync();
                     break;
                 }
 

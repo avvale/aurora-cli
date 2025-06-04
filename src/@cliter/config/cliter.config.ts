@@ -317,6 +317,7 @@ export const cliterConfig: CliterConfig =
     },
     backPackages: [
         'auditing',
+        'azureStorageAccount',
         'msEntraId',
         'common',
         'iam',
@@ -327,6 +328,7 @@ export const cliterConfig: CliterConfig =
     ],
     frontPackages: [
         'auditing',
+        'azureStorageAccount',
         'msEntraId',
         'common',
         'environments',
