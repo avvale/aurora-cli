@@ -510,8 +510,14 @@ export class Add extends Command
                         '@aurora/modules/azure-storage-account',
                         ['provideAzureStorageAccount'],
                     );
+
                     // TODO, replace addElement with ArrayDriver.addArrayItems
                     returnArray?.addElement('provideAzureStorageAccount()', { useNewLines: true });
+
+                    ArrayDriver.removeItem(
+                        returnArray,
+                        'provideLocalStorage()',
+                    );
 
                     auroraProviderSourceFile.organizeImports();
                     auroraProviderSourceFile.saveSync();

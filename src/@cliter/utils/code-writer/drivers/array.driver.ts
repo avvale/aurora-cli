@@ -93,6 +93,16 @@ export class ArrayDriver
         }
     }
 
+    public static removeItem(
+        array: ArrayLiteralExpression,
+        item: string,
+    ): void
+    {
+        const elements = array?.getElements();
+        const elementToRemove = elements.find(element => element.getText() === item);
+        if (elementToRemove) array?.removeElement(elementToRemove);
+    }
+
     /**
      * remove provider from providers array
      *
@@ -100,7 +110,10 @@ export class ArrayDriver
      * @param provide - The provider value to be changed
      * @returns void
      */
-    public static removeProviderArray(array: ArrayLiteralExpression, provide: string): void
+    public static removeProviderArray(
+        array: ArrayLiteralExpression,
+        provide: string,
+    ): void
     {
         for (const [index, value] of array.getElements().entries())
         {

@@ -1,0 +1,83 @@
+type StorageAccountFileManagerBase64
+{
+    base64: GraphQLString!
+}
+
+type StorageAccountFileManagerFile
+{
+    id: ID!
+    originFilename: GraphQLString!
+    filename: GraphQLString!
+    mimetype: GraphQLString!
+    extension: GraphQLString!
+    relativePathSegments: [GraphQLString!]!
+    width: GraphQLInt
+    height: GraphQLInt
+    size: GraphQLInt!
+    url: GraphQLString!
+    isCropable: GraphQLBoolean!
+    isUploaded: GraphQLBoolean!
+    libraryId: ID
+    libraryFilename: GraphQLString
+    library: StorageAccountFileManagerLibraryFile
+    meta: JSON
+}
+
+type StorageAccountFileManagerLibraryFile
+{
+    id: ID!
+    originFilename: GraphQLString!
+    filename: GraphQLString!
+    mimetype: GraphQLString!
+    extension: GraphQLString!
+    relativePathSegments: [GraphQLString!]!
+    width: GraphQLInt!
+    height: GraphQLInt!
+    size: GraphQLInt!
+    url: GraphQLString!
+    meta: JSON
+}
+
+input StorageAccountFileManagerFileInput
+{
+    filename: GraphQLString!
+    relativePathSegments: [GraphQLString]!
+    containerName: GraphQLString,
+}
+
+input StorageAccountFileManagerFileUploadedInput
+{
+    id: ID!
+    file: Upload!
+    relativePathSegments: [GraphQLString]!
+    containerName: GraphQLString
+    hasCreateLibrary: GraphQLBoolean
+    meta: JSON
+}
+
+type Query
+{
+    storageAccountGetBase64FileFileManager(
+        file: StorageAccountFileManagerFileInput!
+    ): StorageAccountFileManagerBase64
+
+    storageAccountGetBase64FilesFileManager(
+        files: [StorageAccountFileManagerFileInput!]!
+    ): [StorageAccountFileManagerBase64]
+}
+
+type Mutation
+{
+    storageAccountCopyFileManager(
+        src: StorageAccountFileManagerFileInput!
+        dest: StorageAccountFileManagerFileInput!
+    ): StorageAccountFileManagerFile
+
+    storageAccountUploadFileFileManager(
+        file: StorageAccountFileManagerFileUploadedInput!
+    ): StorageAccountFileManagerFile
+
+    storageAccountUploadFilesFileManager(
+        files: [StorageAccountFileManagerFileUploadedInput!]!
+    ): [StorageAccountFileManagerFile]!
+}
