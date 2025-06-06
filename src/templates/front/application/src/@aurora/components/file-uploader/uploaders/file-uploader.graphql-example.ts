@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const uploadFileMutation = gql`
     mutation YourBoundedContextUploadFile (
-        $file: CoreFileUploaded!
+        $file: StorageAccountFileManagerFileUploadedInput!
     ) {
         yourBoundedContextUploadFile (
             file: $file
@@ -41,7 +41,7 @@ export const uploadFileMutation = gql`
 
 export const uploadFilesMutation = gql`
     mutation YourBoundedContextUploadFiles (
-        $files: [CoreFileUploaded!]!
+        $files: [StorageAccountFileManagerFileUploadedInput!]!
     ) {
         yourBoundedContextUploadFiles (
             files: $files

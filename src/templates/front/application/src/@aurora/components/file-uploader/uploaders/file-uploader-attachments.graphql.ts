@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 
 export const commonUploadAttachment = gql`
-    mutation CommonUploadAttachment (
-        $file: CoreFileUploaded!
+    mutation StorageAccountUploadFileFileManager (
+        $file: StorageAccountFileManagerFileUploadedInput!
     ) {
-        commonUploadAttachment (
+        storageAccountUploadFileFileManager (
             file: $file
         )
         {
@@ -41,10 +41,10 @@ export const commonUploadAttachment = gql`
 `;
 
 export const commonUploadAttachments = gql`
-    mutation CommonUploadAttachments (
-        $files: [CoreFileUploaded!]!
+    mutation StorageAccountUploadFilesFileManager (
+        $files: [StorageAccountFileManagerFileUploadedInput!]!
     ) {
-        commonUploadAttachments (
+        storageAccountUploadFilesFileManager (
             files: $files
         )
         {

@@ -15,12 +15,14 @@ export class DownloadService
 
     public download(
         {
-            relativePathSegments,
             filename,
+            relativePathSegments,
+            containerName,
             originFilename,
         }: {
-            relativePathSegments: string[];
             filename: string;
+            relativePathSegments: string[];
+            containerName?: string;
             originFilename?: string;
         },
     ): void
@@ -30,20 +32,24 @@ export class DownloadService
             .client()
             .watchQuery<string>({
                 query: gql`
-                    query CoreGetBase64FromFile (
-                        $relativePathSegments: [GraphQLString!]!
-                        $filename: GraphQLString!
+                    query StorageAccountGetBase64FileFileManager (
+                        $file: StorageAccountFileManagerFileInput!
                     )
                     {
-                        coreGetBase64FromFile (
-                            relativePathSegments: $relativePathSegments
-                            filename: $filename
+                        storageAccountGetBase64FileFileManager(
+                            file: $file
                         )
+                        {
+                            base64
+                        }
                     },
                 `,
                 variables: {
-                    relativePathSegments,
-                    filename,
+                    file: {
+                        filename,
+                        relativePathSegments,
+                        containerName,
+                    },
                 },
             })
             .valueChanges
@@ -51,10 +57,10 @@ export class DownloadService
             {
                 log('[DEBUG] - Download attachment: ', data);
 
-                if (data['coreGetBase64FromFile'])
+                if (data['storageAccountGetBase64FileFileManager'])
                 {
                     saveAs(
-                        base64ToBlob(data['coreGetBase64FromFile']['base64']),
+                        base64ToBlob(data['storageAccountGetBase64FileFileManager']['base64']),
                         originFilename || filename,
                     );
                 }

@@ -1,11 +1,9 @@
 import { EnvironmentProviders, inject, provideAppInitializer, Provider } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { AuroraGridManagerService, AuthenticationAuroraAdapterService, AuthenticationDisabledAdapterGuard, AuthenticationMockAdapterService, AuthenticationService, AuthorizationService, AuthorizationDisabledService, COMPACT_NAVIGATION, compactNavigation, DatePickerDayjsAdapter, DatePickerDayjsFormats, DateTimePickerDayjsAdapter, DatetimePickerDayjsFormats, DEFAULT_NAVIGATION, defaultNavigation, EnvironmentsInformationService, EnvironmentsInformationMockAdapterService, FUTURISTIC_NAVIGATION, futuristicNavigation, GridManagerService, HORIZONTAL_NAVIGATION, horizontalNavigation, IamAuroraAdapterService, IamMockAdapterService, IamService, PaginatorIntlService, provideApollo, provideApolloErrorTranslations, provideCustomIcons, provideValidationMessages, SessionLocalStorageService, SessionService, UserMetaStorageService, UserMetaStorageLocalStorageAdapterService, InitializerService } from '@aurora';
-import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
-import { AuthGuard } from 'app/core/auth/guards/auth.guard';
+import { AuroraGridManagerService, AuthenticationAuroraAdapterService, AuthenticationService, COMPACT_NAVIGATION, compactNavigation, DatePickerDayjsAdapter, DatePickerDayjsFormats, DateTimePickerDayjsAdapter, DatetimePickerDayjsFormats, DEFAULT_NAVIGATION, defaultNavigation, FUTURISTIC_NAVIGATION, futuristicNavigation, GridManagerService, HORIZONTAL_NAVIGATION, horizontalNavigation, IamAuroraAdapterService, IamService, InitializerService, PaginatorIntlService, provideApollo, provideApolloErrorTranslations, provideCustomIcons, provideValidationMessages, SessionLocalStorageService, SessionService, UserMetaStorageService } from '@aurora';
 import '@aurora/aurora.prototypes';
-
+import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 export const provideAurora = (): Array<Provider | EnvironmentProviders> =>
 {
     return [
