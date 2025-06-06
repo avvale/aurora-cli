@@ -529,36 +529,6 @@ export class Add extends Command
                     break;
                 }
 
-                case 'azureStorageAccount': {
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-
-                    // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
-                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
-                        auroraProviderSourceFile,
-                        'provideAurora',
-                    );
-
-                    // import MsEntraId provider
-                    ImportDriver.createImportItems(
-                        auroraProviderSourceFile,
-                        '@aurora/modules/azure-storage-account',
-                        ['provideAzureStorageAccount'],
-                    );
-
-                    // TODO, replace addElement with ArrayDriver.addArrayItems
-                    returnArray?.addElement('provideAzureStorageAccount()', { useNewLines: true });
-
-                    ArrayDriver.removeItem(
-                        returnArray,
-                        'provideLocalStorage()',
-                    );
-
-                    auroraProviderSourceFile.organizeImports();
-                    auroraProviderSourceFile.saveSync();
-                    break;
-                }
-
                 case 'msEntraId': {
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', '@azure/msal-angular', '@azure/msal-browser']);
