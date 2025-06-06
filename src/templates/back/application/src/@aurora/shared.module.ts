@@ -1,5 +1,5 @@
 import { CoreGetFallbackLangFromJsonService, CoreGetLangsFromJsonService } from '@aurora/modules/lang';
-import { AuditingRunner, AuditingRunnerDisabledImplementationService, AuroraMetadataModule, CoreAddI18nConstraintService, CoreGetBase64FromFileService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetLangsService, CoreGetSearchKeyLangService, CoreModule } from '@aurorajs.dev/core';
+import { AuditingRunner, AuditingRunnerDisabledImplementationService, AuroraMetadataModule, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetLangsService, CoreGetSearchKeyLangService, CoreModule } from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -28,7 +28,6 @@ import { SentryModule } from './modules';
     ],
     providers: [
         CoreAddI18nConstraintService,
-        CoreGetBase64FromFileService,
         CoreGetContentLanguageObjectService,
         CoreGetSearchKeyLangService,
         {
@@ -42,7 +41,7 @@ import { SentryModule } from './modules';
         {
             provide : CoreGetFallbackLangService,
             useClass: CoreGetFallbackLangFromJsonService,
-        },
+        }
     ],
     exports: [
         AuditingRunner,
@@ -50,12 +49,11 @@ import { SentryModule } from './modules';
         CacheModule,
         ConfigModule,
         CoreAddI18nConstraintService,
-        CoreGetBase64FromFileService,
         CoreGetContentLanguageObjectService,
         CoreGetFallbackLangService,
         CoreGetLangsService,
         CoreGetSearchKeyLangService,
-        SentryModule,
+        SentryModule
     ],
 })
 export class SharedModule {}

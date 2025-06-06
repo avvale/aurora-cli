@@ -43,54 +43,6 @@ enum CoreSearchKeyLang
     ietf
 }
 
-#######################
-# Files manager types #
-#######################
-type CoreFile
-{
-    id: ID!
-    originFilename: GraphQLString!
-    filename: GraphQLString!
-    mimetype: GraphQLString!
-    extension: GraphQLString!
-    relativePathSegments: [GraphQLString!]!
-    width: GraphQLInt
-    height: GraphQLInt
-    size: GraphQLInt!
-    url: GraphQLString!
-    isCropable: GraphQLBoolean!
-    isUploaded: GraphQLBoolean!
-    libraryId: ID
-    libraryFilename: GraphQLString
-    library: CoreLibraryFile
-    meta: JSON
-}
-
-type CoreLibraryFile
-{
-    id: ID!
-    originFilename: GraphQLString!
-    filename: GraphQLString!
-    mimetype: GraphQLString!
-    extension: GraphQLString!
-    relativePathSegments: [GraphQLString!]!
-    width: GraphQLInt!
-    height: GraphQLInt!
-    size: GraphQLInt!
-    url: GraphQLString!
-    meta: JSON
-}
-
-input CoreFileUploaded
-{
-    id: ID!
-    file: Upload!
-    relativePathSegments: [GraphQLString]
-    containerName: GraphQLString
-    hasCreateLibrary: GraphQLBoolean
-    meta: JSON
-}
-
 #############
 # ORM types #
 #############

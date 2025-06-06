@@ -148,51 +148,6 @@ export class Add extends Command
                     break;
                 }
 
-                case 'azureStorageAccount': {
-                    await BackHandler.addPackage(addCommandState);
-
-                    ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@azure/storage-blob']);
-                    ux.action.stop('Completed!');
-
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-
-                    // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(
-                        appModuleSourceFile,
-                        'azure-storage-account',
-                        ['AzureStorageAccountModule'],
-                    );
-
-                    appModuleSourceFile.saveSync();
-
-                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
-
-                    ImportDriver.createImportItems(
-                        sharedModuleSourceFile,
-                        '@api/azure-storage-account/blob/shared',
-                        ['AzureStorageAccountUploadBlobService'],
-                    );
-
-                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
-                        sharedModuleSourceFile,
-                        'SharedModule',
-                        'Module',
-                        'providers',
-                        'CoreUploadFileManagerService',
-                        'AzureStorageAccountUploadBlobService',
-                    );
-
-                    sharedModuleSourceFile.saveSync();
-
-                    ux.action.start('Generating graphql types');
-                    await exec('npm', ['run', 'graphql:types']);
-                    ux.action.stop('Completed!');
-
-                    break;
-                }
-
                 case 'msEntraId': {
                     await BackHandler.addPackage(addCommandState);
 
@@ -432,6 +387,86 @@ export class Add extends Command
                     }
 
                     appModuleSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed!');
+
+                    break;
+                }
+
+                case 'storageAccount': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', 'sharp']);
+                    ux.action.stop('Completed!');
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'storage-account',
+                        ['StorageAccountModule'],
+                    );
+
+                    appModuleSourceFile.saveSync();
+
+                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@api/storage-account/file-manager',
+                        ['StorageAccountFileManagerService', 'StorageAccountLocalFileManagerService'],
+                    );
+
+                    DecoratorDriver.addDecoratorAdapter(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'providers',
+                        'StorageAccountFileManagerService',
+                        'StorageAccountLocalFileManagerService',
+                    );
+
+                    sharedModuleSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed!');
+
+                    break;
+                }
+
+                case 'storageAccountAzure': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@azure/storage-blob']);
+                    ux.action.stop('Completed!');
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@api/storage-account-azure/file-manager',
+                        ['StorageAccountAzureFileManagerService'],
+                    );
+
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'providers',
+                        'StorageAccountFileManagerService',
+                        'StorageAccountAzureFileManagerService',
+                    );
+
+                    sharedModuleSourceFile.saveSync();
 
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);

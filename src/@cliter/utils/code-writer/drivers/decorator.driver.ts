@@ -68,6 +68,28 @@ export class DecoratorDriver
         }
     }
 
+    public static addDecoratorAdapter(
+        sourceFile: SourceFile,
+        moduleName: string,
+        decoratorName: string,
+        propertyName: string,
+        provide: string,
+        adapter: string,
+    ): void
+    {
+        const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sourceFile, moduleName, decoratorName);
+        const decoratorArrayProperty = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, propertyName);
+
+        decoratorArrayProperty?.addElement(
+            `
+{
+    provide : ${provide},
+    useClass: ${adapter}
+}`,
+            { useNewLines: true },
+        );
+    }
+
     public static removeDecoratorAdapter(
         sourceFile: SourceFile,
         moduleName: string,
