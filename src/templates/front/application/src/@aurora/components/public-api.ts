@@ -11,7 +11,6 @@ export * from './date-range-selector-dialog';
 export * from './dialog';
 export * from './dot';
 export * from './environments-information';
-export * from './file-input';
 export * from './file-preview-overlay';
 export * from './file-upload';
 export * from './file-uploader';

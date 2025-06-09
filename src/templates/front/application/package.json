@@ -46,6 +46,7 @@
         "luxon": "3.5.0",
         "marked": "^15.0.7",
         "ng-apexcharts": "1.15.0",
+        "ngx-custom-material-file-input": "^20.0.0",
         "ngx-file-drop": "^16.0.0",
         "ngx-json-viewer": "^3.2.1",
         "ngx-mat-select-search": "^8.0.0",

@@ -431,6 +431,14 @@ export class Add extends Command
                         'StorageAccountLocalFileManagerService',
                     );
 
+                    DecoratorDriver.addModuleDecoratorProperty(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'exports',
+                        'StorageAccountFileManagerService',
+                    );
+
                     sharedModuleSourceFile.saveSync();
 
                     ux.action.start('Generating graphql types');
