@@ -21,7 +21,14 @@ export const environment = {
     appearance: {
         theme : 'theme-default',
         layout: 'classy',
-    }
+    },
+    msEntraId: {
+        tenant     : '',
+        authority  : '',
+        clientId   : '',
+        redirectUri: '',
+        scopes     : [],
+    },
 };
 
 /*

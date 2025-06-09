@@ -9,8 +9,8 @@ import { join } from 'path';
             imports   : [ConfigModule],
             inject    : [ConfigService],
             useFactory: (configService: ConfigService) => [{
-                rootPath : join(process.cwd(), configService.get('STORAGE_PUBLIC_PATH')),
-                serveRoot: `/${configService.get('STORAGE_PUBLIC_PATH')}`,
+                rootPath : join(process.cwd(), configService.get('STORAGE_ACCOUNT_PUBLIC_PATH')),
+                serveRoot: `/${configService.get('STORAGE_ACCOUNT_PUBLIC_PATH')}`,
             }],
         }),
     ],

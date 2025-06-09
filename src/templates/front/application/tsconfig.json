@@ -16,6 +16,7 @@
         "lib": ["ES2022", "dom"],
         "paths": {
             "@apps/*": ["./app/modules/admin/apps/*"],
+            "@core/*": ["./app/core/*"],
             "@public/*": ["./../public/*"]
         }
     },
