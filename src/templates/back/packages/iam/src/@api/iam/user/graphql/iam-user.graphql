@@ -61,6 +61,18 @@ input IamUpdateUsersInput
     rememberToken: GraphQLString
 }
 
+input IamForgotPasswordUserInput
+{
+    email: GraphQLString!
+    origin: GraphQLString!
+}
+
+input IamResetPasswordUserInput
+{
+    token: GraphQLString!
+    password: GraphQLString!
+}
+
 type Query
 {
     iamFindUser(
@@ -119,5 +131,15 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [IamUser]!
+
+
+    # additionalApis
+    iamForgotPasswordUser(
+        payload: IamForgotPasswordUserInput!
+    ): Boolean!
+
+    iamResetPasswordUser(
+        payload: IamResetPasswordUserInput!
+    ): Boolean!
 
 }

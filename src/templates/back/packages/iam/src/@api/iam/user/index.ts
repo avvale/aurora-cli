@@ -37,6 +37,14 @@ export { IamUpsertUserResolver } from './resolvers/iam-upsert-user.resolver';
 export { IamDeleteUserByIdResolver } from './resolvers/iam-delete-user-by-id.resolver';
 export { IamDeleteUsersResolver } from './resolvers/iam-delete-users.resolver';
 
+// export additionalApis
+export { IamForgotPasswordUserController } from './controllers/iam-forgot-password-user.controller';
+export { IamForgotPasswordUserHandler } from './handlers/iam-forgot-password-user.handler';
+export { IamForgotPasswordUserResolver } from './resolvers/iam-forgot-password-user.resolver';
+export { IamResetPasswordUserController } from './controllers/iam-reset-password-user.controller';
+export { IamResetPasswordUserHandler } from './handlers/iam-reset-password-user.handler';
+export { IamResetPasswordUserResolver } from './resolvers/iam-reset-password-user.resolver';
+
 // import controllers
 import { IamPaginateUsersController } from './controllers/iam-paginate-users.controller';
 import { IamGetUsersController } from './controllers/iam-get-users.controller';
@@ -73,6 +81,14 @@ import { IamDeleteUsersHandler } from './handlers/iam-delete-users.handler';
 // import seeder
 import { IamUserSeeder } from './seeder/iam-user.seeder';
 
+// import additionalApis
+import { IamForgotPasswordUserController } from './controllers/iam-forgot-password-user.controller';
+import { IamForgotPasswordUserHandler } from './handlers/iam-forgot-password-user.handler';
+import { IamForgotPasswordUserResolver } from './resolvers/iam-forgot-password-user.resolver';
+import { IamResetPasswordUserController } from './controllers/iam-reset-password-user.controller';
+import { IamResetPasswordUserHandler } from './handlers/iam-reset-password-user.handler';
+import { IamResetPasswordUserResolver } from './resolvers/iam-reset-password-user.resolver';
+
 export const IamUserApiControllers = [
     IamPaginateUsersController,
     IamGetUsersController,
@@ -83,6 +99,10 @@ export const IamUserApiControllers = [
     IamUpsertUserController,
     IamDeleteUserByIdController,
     IamDeleteUsersController,
+
+    // additionalApis
+    IamForgotPasswordUserController,
+    IamResetPasswordUserController,
 ];
 
 export const IamUserApiResolvers = [
@@ -95,6 +115,10 @@ export const IamUserApiResolvers = [
     IamUpsertUserResolver,
     IamDeleteUserByIdResolver,
     IamDeleteUsersResolver,
+
+    // additionalApis
+    IamForgotPasswordUserResolver,
+    IamResetPasswordUserResolver,
 ];
 
 export const IamUserApiHandlers = [
@@ -107,6 +131,10 @@ export const IamUserApiHandlers = [
     IamUpsertUserHandler,
     IamDeleteUserByIdHandler,
     IamDeleteUsersHandler,
+
+    // additionalApis
+    IamForgotPasswordUserHandler,
+    IamResetPasswordUserHandler,
 ];
 
 export const IamUserApiServices = [

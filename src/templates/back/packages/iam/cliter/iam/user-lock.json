@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/iam-mock-user.data.ts",
-            "integrity": "sha1:495d2bf53fd8ee26988901f3e402494154e5b904"
+            "integrity": "sha1:17d337693f4388a5816d6d3398e701745da948e5"
         },
         {
             "path": "src/@app/iam/user/infrastructure/mock/iam-mock-user.repository.ts",
@@ -619,7 +619,7 @@
         },
         {
             "path": "src/@api/iam/user/graphql/iam-user.graphql",
-            "integrity": "sha1:aefb2bfdc048a7ddb5bc90c7e36731efb9700724"
+            "integrity": "sha1:3146639f423f797ec952bc2549c4f2c28ee1e505"
         },
         {
             "path": "src/@api/iam/user/handlers/iam-delete-user-by-id.handler.spec.ts",
@@ -695,7 +695,7 @@
         },
         {
             "path": "src/@api/iam/user/index.ts",
-            "integrity": "sha1:9c077f73a7846e2e834becb3c053ce647981db1d"
+            "integrity": "sha1:376d5f41643f6d8ccd9563c6ba95c4511ed00828"
         },
         {
             "path": "src/@api/iam/user/resolvers/iam-delete-user-by-id.resolver.spec.ts",
@@ -774,12 +774,60 @@
             "integrity": "sha1:86184ebbd909021922e4d34e388990079e5a97bf"
         },
         {
+            "path": "src/@api/iam/user/controllers/iam-forgot-password-user.controller.spec.ts",
+            "integrity": "sha1:44fe4ab1f6c122d195e52cc472f7dea59cf320c6"
+        },
+        {
+            "path": "src/@api/iam/user/controllers/iam-forgot-password-user.controller.ts",
+            "integrity": "sha1:80363396069263f6fdbf4af0a7f4b8bfd59e9ae2"
+        },
+        {
+            "path": "src/@api/iam/user/handlers/iam-forgot-password-user.handler.spec.ts",
+            "integrity": "sha1:377de6731f3f03c9c3f6c7c91eb3f17f33c79d3a"
+        },
+        {
+            "path": "src/@api/iam/user/handlers/iam-forgot-password-user.handler.ts",
+            "integrity": "sha1:3746a0a4b174db77f5aa61125e31c459360d1b3a"
+        },
+        {
+            "path": "src/@api/iam/user/resolvers/iam-forgot-password-user.resolver.spec.ts",
+            "integrity": "sha1:eff88e2eda23eb1d7118fd567f142ede1ac1a775"
+        },
+        {
+            "path": "src/@api/iam/user/resolvers/iam-forgot-password-user.resolver.ts",
+            "integrity": "sha1:e46024cc8997398ec14ef0df93f1667f2323a711"
+        },
+        {
+            "path": "src/@api/iam/user/controllers/iam-reset-password-user.controller.spec.ts",
+            "integrity": "sha1:2f2f1d925c409b1a4db6e7947b8cccb7c8f6a6d7"
+        },
+        {
+            "path": "src/@api/iam/user/controllers/iam-reset-password-user.controller.ts",
+            "integrity": "sha1:7cc5785541904ea12c1f2e3e34f7aa79aa979d64"
+        },
+        {
+            "path": "src/@api/iam/user/handlers/iam-reset-password-user.handler.spec.ts",
+            "integrity": "sha1:dad8a00928e7bc37f7b561eb8a2d050721a45777"
+        },
+        {
+            "path": "src/@api/iam/user/handlers/iam-reset-password-user.handler.ts",
+            "integrity": "sha1:15ce1fa19d4b1751b7116dc921d5ec22d1e74ff4"
+        },
+        {
+            "path": "src/@api/iam/user/resolvers/iam-reset-password-user.resolver.spec.ts",
+            "integrity": "sha1:a0d1bd28bcecf41e6fd3c8ea0290c1861469c442"
+        },
+        {
+            "path": "src/@api/iam/user/resolvers/iam-reset-password-user.resolver.ts",
+            "integrity": "sha1:ac26277a5d894c80ef7baefdf19c96638e004ab6"
+        },
+        {
             "path": "test/acceptance/iam/user.e2e-spec.ts",
             "integrity": "sha1:7b96d1986a439dec5eb38fbc6079fdab1e3e95c2"
         },
         {
             "path": "postman/iam/iam.user.postman.json",
-            "integrity": "sha1:e5768ace3d0915a3b4d6dbb240f11d8cf146e41c"
+            "integrity": "sha1:a7b21d41796e020f7dfbdf01c419ab683d4ece08"
         }
     ]
 }

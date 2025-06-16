@@ -66,6 +66,13 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+additionalApis:
+  - path: iam/user/forgot-password
+    resolverType: mutation
+    httpMethod: post
+  - path: iam/user/reset-password
+    resolverType: mutation
+    httpMethod: post
 excludedFiles:
   - src/@api/iam/user/handlers/iam-create-user.handler.spec.ts
   - src/@api/iam/user/handlers/iam-create-user.handler.ts
