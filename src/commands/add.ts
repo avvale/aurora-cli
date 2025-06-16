@@ -254,7 +254,7 @@ export class Add extends Command
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    // await exec('npm', ['install', '@angular-material-extensions/password-strength']); TODO, sustituir por la librería de angular 17
+                    await exec('npm', ['install', 'nestjs-i18n']);
                     ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);
@@ -625,7 +625,6 @@ export class Add extends Command
                     );
                     // TODO, replace addElement with ArrayDriver.addArrayItems
                     returnArray?.addElement('provideMsEntraId()', { useNewLines: true });
-
 
                     // remove AuthGuard, will be replaced by MsalGuard defined in provideAzureAd()
                     ArrayDriver.removeProviderArray(
