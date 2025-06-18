@@ -1,11 +1,15 @@
 {
+    "arrowParens": "always",
+    "bracketSameLine": false,
+    "bracketSpacing": true,
+    "plugins": [
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
+    ],
     "printWidth": 80,
     "semi": true,
-    "bracketSameLine": false,
-    "trailingComma": "es5",
-    "tabWidth": 4,
+    "singleAttributePerLine": true,
     "singleQuote": true,
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"]
+    "tabWidth": 4,
+    "trailingComma": "es5"
 }

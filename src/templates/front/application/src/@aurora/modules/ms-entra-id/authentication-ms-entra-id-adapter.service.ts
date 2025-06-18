@@ -80,7 +80,10 @@ export class AuthenticationMsEntraIdAdapterService extends AuthenticationService
      *
      * @param email
      */
-    forgotPassword(email: string): Observable<any>
+    forgotPassword(
+        email: string,
+        origin: string = window.location.origin,
+    ): Observable<boolean>
     {
         return;
     }
@@ -90,7 +93,7 @@ export class AuthenticationMsEntraIdAdapterService extends AuthenticationService
      *
      * @param password
      */
-    resetPassword(password: string): Observable<any>
+    resetPassword(password: string, token: string): Observable<any>
     {
         return;
     }

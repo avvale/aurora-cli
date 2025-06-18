@@ -11,19 +11,21 @@ import { lastValueFrom } from 'rxjs';
 export const apolloFactory = (
     authenticationService: AuthenticationService,
     confirmationService: FuseConfirmationService,
-    translocoService: TranslocoService
+    translocoService: TranslocoService,
 ): ApolloClientOptions<NormalizedCacheObject> =>
 {
     // Container of headers in force during the whole execution of the application.
     // Doesn't reset on each call, keep headers from every calls.
     const headers = {};
 
-    const initHeaders = setContext(async (operation, context) => {
+    const initHeaders = setContext((operation, context) =>
+    {
         // return original context headers
         return { headers: context.headers };
     });
 
-    const customHeaders = setContext(async (operation, context) => {
+    const customHeaders = setContext((operation, context) =>
+    {
         if (context.headers)
         {
             for (const [key, value] of Object.entries(context.headers))
@@ -36,7 +38,7 @@ export const apolloFactory = (
         return { headers };
     });
 
-    const timezone = setContext(async (operation, context) =>
+    const timezone = setContext((operation, context) =>
     {
         headers['X-Timezone'] = Utils.timezone();
 
@@ -51,13 +53,12 @@ export const apolloFactory = (
             headers['Authorization'] = `Basic ${btoa(environment.oAuth.applicationCode + ':' + environment.oAuth.applicationSecret)}`;
         }
         // check access token, if is expired create other one with refresh token
-        else
-        if (
+        else if (
             await lastValueFrom(authenticationService.check()) &&
             authenticationService.accessToken
         )
         {
-            // set bearer token
+        // set bearer token
             headers['Authorization'] = `Bearer ${authenticationService.accessToken}`;
         }
 
@@ -79,7 +80,7 @@ export const apolloFactory = (
                 }: {
                     message: string;
                     extensions: any;
-                }) => extensions.response?.statusCode === 401
+                }) => extensions.response?.statusCode === 401,
             );
 
             if (unauthorizedError)
@@ -91,6 +92,10 @@ export const apolloFactory = (
 
             const errorCodes = extractGraphqlStatusErrorCodes(graphQLErrors);
             const errorMessage = translocoService.translate('error.' + errorCodes);
+
+            // avoid teaching error if no translation exists
+            if ('error.' + errorCodes === errorMessage) return;
+
             confirmationService.open({
                 title: `Error [${errorCodes}]`,
                 message:
@@ -98,13 +103,13 @@ export const apolloFactory = (
                         ? extractGraphqlMessageErrors(graphQLErrors)
                         : errorMessage,
                 icon: {
-                    show: true,
-                    name: 'error',
+                    show : true,
+                    name : 'error',
                     color: 'error',
                 },
                 actions: {
                     confirm: {
-                        show: true,
+                        show : true,
                         label: 'Ok',
                         color: 'warn',
                     },
@@ -120,7 +125,8 @@ export const apolloFactory = (
         {
             log('[DEBUG] - network GraphQL error', networkError);
 
-            switch (networkError['status']) {
+            switch (networkError['status'])
+            {
                 case 0:
                     // ver src/@horus/components/apollo/apollo.service.ts de horus cci
                     break;

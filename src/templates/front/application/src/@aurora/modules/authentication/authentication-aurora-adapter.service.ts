@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import { Credentials, GraphQLService, OAuthClientGrantType, oAuthCreateCredentials, oAuthCreateImpersonalizeCredentials, Utils } from '@aurora';
+import { Credentials, GraphQLService, iamForgotPasswordUserMutation, iamResetPasswordUserMutation, OAuthClientGrantType, oAuthCreateCredentials, oAuthCreateImpersonalizeCredentials, Utils } from '@aurora';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { first, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
@@ -109,9 +109,28 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
      *
      * @param email
      */
-    forgotPassword(email: string): Observable<any>
+    forgotPassword(
+        email: string,
+        origin: string = window.location.origin,
+    ): Observable<boolean>
     {
-        return this.httpClient.post('api/auth/forgot-password', email);
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : iamForgotPasswordUserMutation,
+                variables: {
+                    payload: {
+                        email,
+                        origin,
+                    },
+                },
+            })
+            .pipe(
+                switchMap((response: any) =>
+                {
+                    return of(true);
+                }),
+            );
     }
 
     /**
@@ -119,9 +138,28 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
      *
      * @param password
      */
-    resetPassword(password: string): Observable<any>
+    resetPassword(
+        password: string,
+        token: string,
+    ): Observable<boolean>
     {
-        return this.httpClient.post('api/auth/reset-password', password);
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : iamResetPasswordUserMutation,
+                variables: {
+                    payload: {
+                        password,
+                        token,
+                    },
+                },
+            })
+            .pipe(
+                switchMap((response: any) =>
+                {
+                    return of(true);
+                }),
+            );
     }
 
     /**
@@ -258,7 +296,7 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
      *
      * @param user
      */
-    signUp(user: { name: string; email: string; password: string; company: string }): Observable<any>
+    signUp(user: { name: string; email: string; password: string; company: string; }): Observable<any>
     {
         return this.httpClient.post('api/auth/sign-up', user);
     }
@@ -268,7 +306,7 @@ export class AuthenticationAuroraAdapterService extends AuthenticationService
      *
      * @param credentials
      */
-    unlockSession(credentials: { email: string; password: string }): Observable<any>
+    unlockSession(credentials: { email: string; password: string; }): Observable<any>
     {
         return this.httpClient.post('api/auth/unlock-session', credentials);
     }

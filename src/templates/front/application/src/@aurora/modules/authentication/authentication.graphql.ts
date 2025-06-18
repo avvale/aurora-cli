@@ -21,3 +21,23 @@ export const oAuthCreateImpersonalizeCredentials =  gql`
         }
     }
 `;
+
+export const iamForgotPasswordUserMutation = gql`
+    mutation IamForgotPasswordUser (
+        $payload: IamForgotPasswordUserInput!
+    ) {
+        iamForgotPasswordUser (
+            payload: $payload
+        )
+    }
+`;
+
+export const iamResetPasswordUserMutation = gql`
+    mutation IamResetPasswordUser (
+        $payload: IamResetPasswordUserInput!
+    ) {
+        iamResetPasswordUser (
+            payload: $payload
+        )
+    }
+`;

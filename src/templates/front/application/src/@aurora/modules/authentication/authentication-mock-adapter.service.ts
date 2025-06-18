@@ -108,9 +108,18 @@ export class AuthenticationMockAdapterService extends AuthenticationService
      *
      * @param email
      */
-    forgotPassword(email: string): Observable<any>
+    forgotPassword(
+        email: string,
+        origin: string = window.location.origin,
+    ): Observable<boolean>
     {
-        return this.httpClient.post('api/auth/forgot-password', email);
+        return this.httpClient.post('api/auth/forgot-password', email)
+            .pipe(
+                switchMap((response: any) =>
+                {
+                    return of(true);
+                }),
+            );
     }
 
     /**
@@ -118,7 +127,7 @@ export class AuthenticationMockAdapterService extends AuthenticationService
      *
      * @param password
      */
-    resetPassword(password: string): Observable<any>
+    resetPassword(password: string, token: string): Observable<any>
     {
         return this.httpClient.post('api/auth/reset-password', password);
     }

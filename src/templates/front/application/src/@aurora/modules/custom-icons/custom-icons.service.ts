@@ -13,7 +13,7 @@ export class CustomIconsService
         const domSanitizer = inject(DomSanitizer);
         const matIconRegistry = inject(MatIconRegistry);
 
-        matIconRegistry.addSvgIconSetInNamespace('aurora', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/aurora.svg'));
+        matIconRegistry.addSvgIconSetInNamespace('aurora', domSanitizer.bypassSecurityTrustResourceUrl('public/icons/aurora.svg'));
         matIconRegistry.addSvgIconLiteral('sap', domSanitizer.bypassSecurityTrustHtml(sapIcon));
         matIconRegistry.addSvgIconLiteral('sap_white', domSanitizer.bypassSecurityTrustHtml(sapWhiteIcon));
         matIconRegistry.addSvgIconLiteral('whatsapp', domSanitizer.bypassSecurityTrustHtml(whatsappIcon));

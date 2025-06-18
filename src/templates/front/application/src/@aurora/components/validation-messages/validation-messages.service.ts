@@ -123,7 +123,10 @@ export class ValidationMessagesService
      * @param fg
      * @param formErrors
      */
-    subscribeForm(fg: FormGroup, formErrors: FormMessageErrors): void
+    subscribeForm(
+        fg: FormGroup,
+        formErrors: FormMessageErrors,
+    ): void
     {
         // set default value
         if (!formErrors) throw new Error(`

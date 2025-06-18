@@ -26,9 +26,15 @@ export abstract class AuthenticationService<T = Credentials>
 
     abstract isImpersonalized(): boolean
 
-    abstract forgotPassword(email: string): Observable<any>;
+    abstract forgotPassword(
+        email: string,
+        origin?: string,
+    ): Observable<boolean>;
 
-    abstract resetPassword(password: string): Observable<any>;
+    abstract resetPassword(
+        password: string,
+        token: string,
+    ): Observable<boolean>;
 
     abstract signIn(credentials: { email: string; password: string; }): Observable<any>;
 

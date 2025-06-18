@@ -34,7 +34,10 @@ export class AuthService {
      *
      * @param email
      */
-    forgotPassword(email: string): Observable<any> {
+    forgotPassword(
+        email: string,
+        origin: string = window.location.origin,
+    ): Observable<any> {
         return this._httpClient.post('api/auth/forgot-password', email);
     }
 

@@ -14,17 +14,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
-import { finalize } from 'rxjs';
+import { catchError, finalize, of, throwError } from 'rxjs';
 
 // ---- customizations ----
 import { AuthenticationService } from '@aurora';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 
 @Component({
-    selector: 'auth-forgot-password',
-    templateUrl: './forgot-password.component.html',
+    selector     : 'auth-forgot-password',
+    templateUrl  : './forgot-password.component.html',
     encapsulation: ViewEncapsulation.None,
-    animations: fuseAnimations,
-    imports: [
+    animations   : fuseAnimations,
+    imports      : [
         FuseAlertComponent,
         FormsModule,
         ReactiveFormsModule,
@@ -33,13 +34,15 @@ import { AuthenticationService } from '@aurora';
         MatButtonModule,
         MatProgressSpinnerModule,
         RouterLink,
+        TranslocoModule,
     ],
 })
-export class AuthForgotPasswordComponent implements OnInit {
+export class AuthForgotPasswordComponent implements OnInit
+{
     @ViewChild('forgotPasswordNgForm') forgotPasswordNgForm: NgForm;
 
-    alert: { type: FuseAlertType; message: string } = {
-        type: 'success',
+    alert: { type: FuseAlertType; message: string; } = {
+        type   : 'success',
         message: '',
     };
     forgotPasswordForm: UntypedFormGroup;
@@ -52,7 +55,8 @@ export class AuthForgotPasswordComponent implements OnInit {
         private _formBuilder: UntypedFormBuilder,
 
         // ---- customizations ----
-        private authenticationService: AuthenticationService
+        private readonly authenticationService: AuthenticationService,
+        private readonly translocoService: TranslocoService,
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -62,10 +66,11 @@ export class AuthForgotPasswordComponent implements OnInit {
     /**
      * On init
      */
-    ngOnInit(): void {
+    ngOnInit(): void
+    {
         // Create the form
         this.forgotPasswordForm = this._formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
+            email: ['', [Validators.required]],
         });
     }
 
@@ -76,9 +81,11 @@ export class AuthForgotPasswordComponent implements OnInit {
     /**
      * Send the reset link
      */
-    sendResetLink(): void {
+    sendResetLink(): void
+    {
         // Return if the form is invalid
-        if (this.forgotPasswordForm.invalid) {
+        if (this.forgotPasswordForm.invalid)
+        {
             return;
         }
 
@@ -92,7 +99,8 @@ export class AuthForgotPasswordComponent implements OnInit {
         this.authenticationService
             .forgotPassword(this.forgotPasswordForm.get('email').value)
             .pipe(
-                finalize(() => {
+                finalize(() =>
+                {
                     // Re-enable the form
                     this.forgotPasswordForm.enable();
 
@@ -101,25 +109,30 @@ export class AuthForgotPasswordComponent implements OnInit {
 
                     // Show the alert
                     this.showAlert = true;
-                })
+                }),
+                catchError(error =>
+                {
+                    if (error.message === 'IamAccount not found')
+                    {
+                        this.alert = {
+                            type   : 'error',
+                            message: this.translocoService.translate('iam.SendEmailForgotPasswordError'),
+                        };
+                        return of(false);
+                    }
+
+                    return throwError(() => error);
+                }),
             )
-            .subscribe(
-                (response) => {
-                    // Set the alert
+            .subscribe(response =>
+            {
+                if (response === true)
+                {
                     this.alert = {
-                        type: 'success',
-                        message:
-                            "Password reset sent! You'll receive an email if you are registered on our system.",
-                    };
-                },
-                (response) => {
-                    // Set the alert
-                    this.alert = {
-                        type: 'error',
-                        message:
-                            'Email does not found! Are you sure you are already a member?',
+                        type   : 'success',
+                        message: this.translocoService.translate('iam.SendEmailForgotPasswordSuccessful'),
                     };
                 }
-            );
+            });
     }
 }

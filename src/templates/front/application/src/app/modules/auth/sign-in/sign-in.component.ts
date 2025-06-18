@@ -13,17 +13,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
 
 // ---- customizations ----
-import {
-    AuthenticationService,
-    IamService,
-    SessionService,
-    log,
-} from '@aurora';
+import { AuthenticationService, IamService, SessionService, log } from '@aurora';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { catchError, lastValueFrom, of, throwError } from 'rxjs';
 import { AuthorizationService } from '@aurora/modules/authorization/authorization.service';
@@ -47,6 +42,7 @@ import { AuthorizationService } from '@aurora/modules/authorization/authorizatio
 
         // ---- customizations ----
         TranslocoModule,
+        RouterModule
     ],
 })
 export class AuthSignInComponent implements OnInit
@@ -132,10 +128,10 @@ export class AuthSignInComponent implements OnInit
                         return of({ code: 401, message: 'Unauthorized' });
 
                     return throwError(() => error);
-                })
+                }),
             )
             .subscribe({
-                next: async (response) =>
+                next: async response =>
                 {
                     const data = response === true ? await lastValueFrom(this.iamService.get()) : null;
 

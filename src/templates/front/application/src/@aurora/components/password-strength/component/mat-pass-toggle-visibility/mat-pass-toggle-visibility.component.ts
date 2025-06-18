@@ -15,12 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class MatPassToggleVisibilityComponent
 {
-
-    @Input()
-        isVisible: boolean;
-
-    @Input()
-        tabindex?: string;
+    @Input() isVisible: boolean;
+    @Input() tabindex?: string;
 
     get type(): string
     {
