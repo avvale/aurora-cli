@@ -60,8 +60,8 @@ export class CommonUpdateAdministrativeAreaLevel1ByIdDto
     zoom?: number;
 
     @ApiProperty({
-        type       : CommonAdministrativeAreaLevel1MapType,
-        enum       : ['ROADMAP','SATELLITE','HYBRID','TERRAIN'],
+        enum       : CommonAdministrativeAreaLevel1MapType,
+        enumName   : 'CommonAdministrativeAreaLevel1MapType',
         description: 'mapType [input here api field description]',
         example    : CommonAdministrativeAreaLevel1MapType.TERRAIN,
     })

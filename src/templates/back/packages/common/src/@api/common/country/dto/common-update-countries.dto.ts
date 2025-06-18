@@ -77,8 +77,8 @@ export class CommonUpdateCountriesDto
     zoom?: number;
 
     @ApiProperty({
-        type       : CommonCountryMapType,
-        enum       : ['ROADMAP','SATELLITE','HYBRID','TERRAIN'],
+        enum       : CommonCountryMapType,
+        enumName   : 'CommonCountryMapType',
         description: 'mapType [input here api field description]',
         example    : CommonCountryMapType.TERRAIN,
     })

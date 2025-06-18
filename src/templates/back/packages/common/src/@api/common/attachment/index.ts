@@ -44,15 +44,9 @@ export { CommonDeleteAttachmentByIdResolver } from './resolvers/common-delete-at
 export { CommonDeleteAttachmentsResolver } from './resolvers/common-delete-attachments.resolver';
 
 // export additionalApis
-export { CommonUploadAttachmentsController } from './controllers/common-upload-attachments.controller';
-export { CommonUploadAttachmentsHandler } from './handlers/common-upload-attachments.handler';
-export { CommonUploadAttachmentsResolver } from './resolvers/common-upload-attachments.resolver';
 export { CommonDeleteAttachmentController } from './controllers/common-delete-attachment.controller';
 export { CommonDeleteAttachmentHandler } from './handlers/common-delete-attachment.handler';
 export { CommonDeleteAttachmentResolver } from './resolvers/common-delete-attachment.resolver';
-export { CommonCreateBlobAttachmentController } from './controllers/common-create-blob-attachment.controller';
-export { CommonCreateBlobAttachmentHandler } from './handlers/common-create-blob-attachment.handler';
-export { CommonCreateBlobAttachmentResolver } from './resolvers/common-create-blob-attachment.resolver';
 
 // import controllers
 import { CommonCreateAttachmentController } from './controllers/common-create-attachment.controller';
@@ -97,15 +91,9 @@ import { CommonDeleteAttachmentsHandler } from './handlers/common-delete-attachm
 import { CommonAttachmentSeeder } from './seeder/common-attachment.seeder';
 
 // import additionalApis
-import { CommonUploadAttachmentsController } from './controllers/common-upload-attachments.controller';
-import { CommonUploadAttachmentsHandler } from './handlers/common-upload-attachments.handler';
-import { CommonUploadAttachmentsResolver } from './resolvers/common-upload-attachments.resolver';
 import { CommonDeleteAttachmentController } from './controllers/common-delete-attachment.controller';
 import { CommonDeleteAttachmentHandler } from './handlers/common-delete-attachment.handler';
 import { CommonDeleteAttachmentResolver } from './resolvers/common-delete-attachment.resolver';
-import { CommonCreateBlobAttachmentController } from './controllers/common-create-blob-attachment.controller';
-import { CommonCreateBlobAttachmentHandler } from './handlers/common-create-blob-attachment.handler';
-import { CommonCreateBlobAttachmentResolver } from './resolvers/common-create-blob-attachment.resolver';
 
 export const CommonAttachmentApiControllers = [
     CommonCreateAttachmentController,
@@ -121,9 +109,7 @@ export const CommonAttachmentApiControllers = [
     CommonDeleteAttachmentsController,
 
     // additionalApis
-    CommonUploadAttachmentsController,
     CommonDeleteAttachmentController,
-    CommonCreateBlobAttachmentController,
 ];
 
 export const CommonAttachmentApiResolvers = [
@@ -140,9 +126,7 @@ export const CommonAttachmentApiResolvers = [
     CommonDeleteAttachmentsResolver,
 
     // additionalApis
-    CommonUploadAttachmentsResolver,
     CommonDeleteAttachmentResolver,
-    CommonCreateBlobAttachmentResolver,
 ];
 
 export const CommonAttachmentApiHandlers = [
@@ -159,9 +143,7 @@ export const CommonAttachmentApiHandlers = [
     CommonDeleteAttachmentsHandler,
 
     // additionalApis
-    CommonUploadAttachmentsHandler,
     CommonDeleteAttachmentHandler,
-    CommonCreateBlobAttachmentHandler,
 ];
 
 export const CommonAttachmentApiServices = [

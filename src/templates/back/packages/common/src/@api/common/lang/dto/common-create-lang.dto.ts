@@ -47,8 +47,8 @@ export class CommonCreateLangDto
     customCode?: string;
 
     @ApiProperty({
-        type       : CommonLangDir,
-        enum       : ['LTR','RTL'],
+        enum       : CommonLangDir,
+        enumName   : 'CommonLangDir',
         description: 'dir [input here api field description]',
     })
     dir: CommonLangDir;

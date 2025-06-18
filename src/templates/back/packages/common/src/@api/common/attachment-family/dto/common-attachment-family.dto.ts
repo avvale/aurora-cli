@@ -49,8 +49,8 @@ export class CommonAttachmentFamilyDto
     height?: number;
 
     @ApiProperty({
-        type       : CommonAttachmentFamilyFitType,
-        enum       : ['FIT_CROP','FIT_WIDTH','FIT_HEIGHT','FIT_WIDTH_FREE_CROP','FIT_HEIGHT_FREE_CROP'],
+        enum       : CommonAttachmentFamilyFitType,
+        enumName   : 'CommonAttachmentFamilyFitType',
         description: 'fitType [input here api field description]',
         example    : CommonAttachmentFamilyFitType.FIT_CROP,
     })
@@ -69,8 +69,8 @@ export class CommonAttachmentFamilyDto
     sizes?: any;
 
     @ApiProperty({
-        type       : CommonAttachmentFamilyFormat,
-        enum       : ['JPG','PNG','GIF','TIF','BMP'],
+        enum       : CommonAttachmentFamilyFormat,
+        enumName   : 'CommonAttachmentFamilyFormat',
         description: 'format [input here api field description]',
         example    : CommonAttachmentFamilyFormat.JPG,
     })

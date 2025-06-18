@@ -207,16 +207,8 @@ type Mutation
 
 
     # additionalApis
-    commonUploadAttachments(
-        files: [CoreFileUploaded!]!
-    ): [CoreFile!]!
-
     commonDeleteAttachment(
         payload: CommonAttachmentInput!
     ): CommonAttachment!
-
-    commonCreateBlobAttachment(
-       payload: CommonAttachmentInput!
-    ): GraphQLString!
 
 }
