@@ -129,12 +129,6 @@
                         [formControlName]="'repeatNewPassword'"
                         [type]="showNewPassword.type"
                     >
-                    <mat-pass-toggle-visibility
-                        #showNewPassword
-                        matSuffix
-                        class="ml-2"
-                    >
-                    </mat-pass-toggle-visibility>
                 </mat-form-field>
                 <mat-error>{{ formErrors['repeatNewPassword'] | async }}</mat-error>
                 <div class="mt-1 text-md text-hint">{{ t('settings.MinimumPasswordComplexity') }}</div>

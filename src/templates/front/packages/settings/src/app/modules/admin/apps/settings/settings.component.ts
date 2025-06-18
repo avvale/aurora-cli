@@ -1,4 +1,4 @@
-import { NgClass, NgSwitch, NgSwitchCase } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,9 +8,7 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { TranslocoModule } from '@jsverse/transloco';
 import { Subject, takeUntil } from 'rxjs';
 import { SettingsAccountComponent } from './account/account.component';
-import { SettingsNotificationsComponent } from './notifications/notifications.component';
 import { SettingsSecurityComponent } from './security/security.component';
-import { SettingsTeamComponent } from './team/team.component';
 
 @Component({
     selector       : 'settings',
@@ -19,9 +17,8 @@ import { SettingsTeamComponent } from './team/team.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        MatSidenavModule, MatButtonModule, MatIconModule, NgClass, NgSwitch,
-        NgSwitchCase, RouterLink, RouterOutlet, SettingsAccountComponent, SettingsSecurityComponent,
-        SettingsNotificationsComponent, SettingsTeamComponent, TranslocoModule,
+        MatSidenavModule, MatButtonModule, MatIconModule, NgClass,
+        RouterLink, RouterOutlet, TranslocoModule,
     ],
 })
 export class SettingsComponent implements OnInit, OnDestroy

@@ -11,8 +11,8 @@ export default [
         path     : '',
         component: SettingsComponent,
         children : [
-            { path: 'account', component: SettingsAccountComponent, resolve: { data: accountEditResolver }, data: { permission: 'iam.tenant.get' }},
-            { path: 'security', component: SettingsSecurityComponent, resolve: { data: securityEditResolver }, data: { permission: 'iam.tenant.get' }},
+            { path: 'account', component: SettingsAccountComponent, resolve: { data: accountEditResolver }, data: { permission: 'iam.accountSettings.update' }},
+            { path: 'security', component: SettingsSecurityComponent, resolve: { data: securityEditResolver }, data: { permission: 'iam.accountSettings.update' }},
             { path: '', redirectTo: 'account', pathMatch: 'full' },
         ],
         providers: [

@@ -23,7 +23,7 @@ import { lastValueFrom } from 'rxjs';
     imports        : [
         AsyncPipe, FormsModule, GetSpinnerFlagPipe, MatButtonModule, MatFormFieldModule,
         MatIconModule, MatInputModule, MatPasswordStrengthModule, MatProgressSpinnerModule,
-        MatSlideToggleModule,ReactiveFormsModule, TranslocoModule,
+        MatSlideToggleModule, ReactiveFormsModule, TranslocoModule,
     ],
 })
 export class SettingsSecurityComponent extends ViewDetailComponent
@@ -114,7 +114,10 @@ export class SettingsSecurityComponent extends ViewDetailComponent
                     message   : { digit: 'PasswordDigit', specialCharacter: 'PasswordSpecialCharacter', lowerCase: 'PasswordLowerCase', upperCase: 'PasswordUpperCase' },
                 }),
             ]],
-            repeatNewPassword: ['', [Validators.required, RxwebValidators.compare({ fieldName: 'newPassword' })]],
+            repeatNewPassword: ['', [
+                Validators.required,
+                RxwebValidators.compare({ fieldName: 'newPassword' }),
+            ]],
             twoStep          : [true],
             askPasswordChange: [false],
         });
