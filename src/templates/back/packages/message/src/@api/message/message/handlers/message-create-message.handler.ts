@@ -1,9 +1,10 @@
 import { MessageCreateMessageInput, MessageMessage, MessageMessageStatus } from '@api/graphql';
 import { MessageCreateMessageDto, MessageMessageDto } from '@api/message/message';
 import { countTotalRecipients } from '@api/message/shared';
+import { StorageAccountFileManagerService } from '@api/storage-account/file-manager';
 import { IamAccountResponse } from '@app/iam/account';
 import { MessageCreateMessageCommand, MessageFindMessageByIdQuery } from '@app/message/message';
-import { AuditingMeta, ICommandBus, IQueryBus, uploadFile, uuid } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, uuid } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -12,6 +13,7 @@ export class MessageCreateMessageHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        private readonly storageAccountFileManagerService: StorageAccountFileManagerService,
     ) {}
 
     async main(
@@ -25,11 +27,10 @@ export class MessageCreateMessageHandler
             await Promise.all(
                 payload.attachmentsInputFile
                     .map(
-                        attachmentInputFile => uploadFile({
+                        async attachmentInputFile => await this.storageAccountFileManagerService.uploadFile({
                             id                  : uuid(),
                             file                : attachmentInputFile,
                             relativePathSegments: ['aurora', 'message', 'attachments'],
-                            hasCreateLibrary    : false,
                         }),
                     ),
             ) : [];

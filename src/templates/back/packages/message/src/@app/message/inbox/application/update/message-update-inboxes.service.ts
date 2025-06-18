@@ -107,7 +107,10 @@ export class MessageUpdateInboxesService
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const inboxesRegister = this.publisher.mergeObjectContext(
-            new MessageAddInboxesContextEvent(inboxes),
+            new MessageAddInboxesContextEvent(
+                inboxes,
+                cQMetadata,
+            ),
         );
 
         inboxesRegister.updated(); // apply event to model events

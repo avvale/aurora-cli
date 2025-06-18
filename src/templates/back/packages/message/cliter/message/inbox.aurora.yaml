@@ -19,7 +19,6 @@ aggregateProperties:
     arrayOptions:
       type: id
     nullable: true
-    index: index
   - name: messageId
     type: id
     nullable: true

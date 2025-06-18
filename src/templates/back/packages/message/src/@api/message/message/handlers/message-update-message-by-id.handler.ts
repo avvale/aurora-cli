@@ -1,9 +1,10 @@
 import { MessageMessage, MessageUpdateMessageByIdInput } from '@api/graphql';
 import { MessageMessageDto, MessageUpdateMessageByIdDto } from '@api/message/message';
 import { countTotalRecipients } from '@api/message/shared';
+import { StorageAccountFileManagerService } from '@api/storage-account/file-manager';
 import { IamAccountResponse } from '@app/iam/account';
 import { MessageFindMessageByIdQuery, MessageUpdateMessageByIdCommand } from '@app/message/message';
-import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement, uploadFile, uuid } from '@aurorajs.dev/core';
+import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement, uuid } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -12,6 +13,7 @@ export class MessageUpdateMessageByIdHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        private readonly storageAccountFileManagerService: StorageAccountFileManagerService,
     ) {}
 
     async main(
@@ -55,11 +57,10 @@ export class MessageUpdateMessageByIdHandler
             await Promise.all(
                 payload.attachmentsInputFile
                     .map(
-                        attachmentInputFile => uploadFile({
+                        async attachmentInputFile => await this.storageAccountFileManagerService.uploadFile({
                             id                  : uuid(),
                             file                : attachmentInputFile,
                             relativePathSegments: ['aurora', 'message', 'attachments'],
-                            hasCreateLibrary    : false,
                         }),
                     ),
             ) : [];

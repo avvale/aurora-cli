@@ -99,7 +99,10 @@ export class MessageUpdateInboxByIdService
             inbox,
         );
 
-        inboxRegister.updated(inbox); // apply event to model events
+        inboxRegister.updated({
+            payload: inbox,
+            cQMetadata,
+        }); // apply event to model events
         inboxRegister.commit(); // commit all events of model
     }
 }

@@ -1,26 +1,33 @@
+import { CQMetadata } from '@aurorajs.dev/core';
+
 export class MessageUpdatedInboxEvent
 {
     constructor(
-        public readonly id: string,
-        public readonly tenantIds: string[],
-        public readonly messageId: string,
-        public readonly sort: number,
-        public readonly accountId: string,
-        public readonly accountCode: string,
-        public readonly isImportant: boolean,
-        public readonly sentAt: string,
-        public readonly subject: string,
-        public readonly body: string,
-        public readonly link: string,
-        public readonly isInternalLink: boolean,
-        public readonly image: any,
-        public readonly icon: string,
-        public readonly attachments: any,
-        public readonly isRead: boolean,
-        public readonly isReadAtLeastOnce: boolean,
-        public readonly meta: any,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                tenantIds: string[];
+                messageId: string;
+                sort: number;
+                accountId: string;
+                accountCode: string;
+                isImportant: boolean;
+                sentAt: string;
+                subject: string;
+                body: string;
+                link: string;
+                isInternalLink: boolean;
+                image: any;
+                icon: string;
+                attachments: any;
+                isRead: boolean;
+                isReadAtLeastOnce: boolean;
+                meta: any;
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

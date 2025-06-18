@@ -24,7 +24,7 @@ import {
     MessageInboxUpdatedAt,
 } from '@app/message/inbox/domain/value-objects';
 import { MessageMessage } from '@app/message/message';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class MessageInbox extends AggregateRoot
@@ -153,90 +153,114 @@ export class MessageInbox extends AggregateRoot
         );
     }
 
-    created(inbox: MessageInbox): void
+    created(
+        event: {
+            payload: MessageInbox;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new MessageCreatedInboxEvent(
-                inbox.id.value,
-                inbox.tenantIds?.value,
-                inbox.messageId?.value,
-                inbox.sort.value,
-                inbox.accountId.value,
-                inbox.accountCode?.value,
-                inbox.isImportant.value,
-                inbox.sentAt.value,
-                inbox.subject.value,
-                inbox.body.value,
-                inbox.link?.value,
-                inbox.isInternalLink?.value,
-                inbox.image?.value,
-                inbox.icon?.value,
-                inbox.attachments?.value,
-                inbox.isRead.value,
-                inbox.isReadAtLeastOnce.value,
-                inbox.meta?.value,
-                inbox.createdAt?.value,
-                inbox.updatedAt?.value,
-                inbox.deletedAt?.value,
-            ),
+            new MessageCreatedInboxEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    messageId: event.payload.messageId?.value,
+                    sort: event.payload.sort.value,
+                    accountId: event.payload.accountId.value,
+                    accountCode: event.payload.accountCode?.value,
+                    isImportant: event.payload.isImportant.value,
+                    sentAt: event.payload.sentAt.value,
+                    subject: event.payload.subject.value,
+                    body: event.payload.body.value,
+                    link: event.payload.link?.value,
+                    isInternalLink: event.payload.isInternalLink?.value,
+                    image: event.payload.image?.value,
+                    icon: event.payload.icon?.value,
+                    attachments: event.payload.attachments?.value,
+                    isRead: event.payload.isRead.value,
+                    isReadAtLeastOnce: event.payload.isReadAtLeastOnce.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(inbox: MessageInbox): void
+    updated(
+        event: {
+            payload: MessageInbox;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new MessageUpdatedInboxEvent(
-                inbox.id?.value,
-                inbox.tenantIds?.value,
-                inbox.messageId?.value,
-                inbox.sort?.value,
-                inbox.accountId?.value,
-                inbox.accountCode?.value,
-                inbox.isImportant?.value,
-                inbox.sentAt?.value,
-                inbox.subject?.value,
-                inbox.body?.value,
-                inbox.link?.value,
-                inbox.isInternalLink?.value,
-                inbox.image?.value,
-                inbox.icon?.value,
-                inbox.attachments?.value,
-                inbox.isRead?.value,
-                inbox.isReadAtLeastOnce?.value,
-                inbox.meta?.value,
-                inbox.createdAt?.value,
-                inbox.updatedAt?.value,
-                inbox.deletedAt?.value,
-            ),
+            new MessageUpdatedInboxEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    messageId: event.payload.messageId?.value,
+                    sort: event.payload.sort?.value,
+                    accountId: event.payload.accountId?.value,
+                    accountCode: event.payload.accountCode?.value,
+                    isImportant: event.payload.isImportant?.value,
+                    sentAt: event.payload.sentAt?.value,
+                    subject: event.payload.subject?.value,
+                    body: event.payload.body?.value,
+                    link: event.payload.link?.value,
+                    isInternalLink: event.payload.isInternalLink?.value,
+                    image: event.payload.image?.value,
+                    icon: event.payload.icon?.value,
+                    attachments: event.payload.attachments?.value,
+                    isRead: event.payload.isRead?.value,
+                    isReadAtLeastOnce: event.payload.isReadAtLeastOnce?.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(inbox: MessageInbox): void
+    deleted(
+        event: {
+            payload: MessageInbox;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new MessageDeletedInboxEvent(
-                inbox.id.value,
-                inbox.tenantIds?.value,
-                inbox.messageId?.value,
-                inbox.sort.value,
-                inbox.accountId.value,
-                inbox.accountCode?.value,
-                inbox.isImportant.value,
-                inbox.sentAt.value,
-                inbox.subject.value,
-                inbox.body.value,
-                inbox.link?.value,
-                inbox.isInternalLink?.value,
-                inbox.image?.value,
-                inbox.icon?.value,
-                inbox.attachments?.value,
-                inbox.isRead.value,
-                inbox.isReadAtLeastOnce.value,
-                inbox.meta?.value,
-                inbox.createdAt?.value,
-                inbox.updatedAt?.value,
-                inbox.deletedAt?.value,
-            ),
+            new MessageDeletedInboxEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    messageId: event.payload.messageId?.value,
+                    sort: event.payload.sort.value,
+                    accountId: event.payload.accountId.value,
+                    accountCode: event.payload.accountCode?.value,
+                    isImportant: event.payload.isImportant.value,
+                    sentAt: event.payload.sentAt.value,
+                    subject: event.payload.subject.value,
+                    body: event.payload.body.value,
+                    link: event.payload.link?.value,
+                    isInternalLink: event.payload.isInternalLink?.value,
+                    image: event.payload.image?.value,
+                    icon: event.payload.icon?.value,
+                    attachments: event.payload.attachments?.value,
+                    isRead: event.payload.isRead.value,
+                    isReadAtLeastOnce: event.payload.isReadAtLeastOnce.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

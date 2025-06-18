@@ -96,7 +96,10 @@ export class MessageUpsertInboxService
             inbox,
         );
 
-        inboxRegister.created(inbox); // apply event to model events
+        inboxRegister.created({
+            payload: inbox,
+            cQMetadata,
+        }); // apply event to model events
         inboxRegister.commit(); // commit all events of model
     }
 }
