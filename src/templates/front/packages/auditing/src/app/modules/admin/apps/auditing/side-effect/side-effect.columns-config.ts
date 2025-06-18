@@ -2,12 +2,12 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const sideEffectColumnsConfig: ColumnConfig[] = [
     {
-        type : ColumnDataType.STRING,
+        type : ColumnDataType.ARRAY,
         field: 'tags',
         sort : 'tags',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.DATE,
         field      : 'createdAt',
         sort       : 'createdAt',
         bodyClass  : 'min-w-48',
@@ -24,7 +24,7 @@ export const sideEffectColumnsConfig: ColumnConfig[] = [
         sort : 'email',
     },
     {
-        type : ColumnDataType.STRING,
+        type : ColumnDataType.ENUM,
         field: 'event',
         sort : 'event',
     },
@@ -40,7 +40,7 @@ export const sideEffectColumnsConfig: ColumnConfig[] = [
         sort : 'ip',
     },
     {
-        type : ColumnDataType.STRING,
+        type : ColumnDataType.ENUM,
         field: 'method',
         sort : 'method',
     },
