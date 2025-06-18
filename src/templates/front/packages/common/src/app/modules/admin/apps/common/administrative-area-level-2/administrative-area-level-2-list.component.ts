@@ -9,7 +9,6 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
     templateUrl    : './administrative-area-level-2-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
     imports        : [
         ...defaultListImports,
     ],

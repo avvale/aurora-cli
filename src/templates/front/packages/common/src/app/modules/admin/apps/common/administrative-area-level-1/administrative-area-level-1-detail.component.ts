@@ -1,4 +1,3 @@
-import { NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,7 +14,7 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     standalone     : true,
     imports        : [
         ...defaultDetailImports,
-        MatSelectModule, NgForOf,
+        MatSelectModule,
     ],
 })
 export class AdministrativeAreaLevel1DetailComponent extends ViewDetailComponent
