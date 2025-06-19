@@ -3,6 +3,18 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as handlebarsHelpers from 'handlebars-helpers';
+import { AcceptLanguageResolver, I18nModule, I18nService, QueryResolver } from 'nestjs-i18n';
+import { join } from 'node:path';
+
+const customI18nHelper = (i18nService: I18nService) =>
+{
+    return (key: string, context: any) =>
+    {
+        const lang = context?.data?.root?.lang || 'en';
+        const args = context?.hash || {};
+        return i18nService.t(key, { lang, args });
+    };
+};
 
 @Module({})
 export class MailerCLientModule
@@ -19,11 +31,31 @@ export class MailerCLientModule
         return {
             module : MailerCLientModule,
             imports: [
-                /** Modules **/
+                I18nModule.forRoot({
+                    fallbackLanguage: 'en',
+                    loaderOptions   : {
+                        path : join(process.cwd(), 'src', 'i18n'),
+                        watch: true,
+                    },
+                    resolvers: [
+                        {
+                            use: QueryResolver, options: ['lang'],
+                        },
+                        AcceptLanguageResolver,
+                    ],
+                }),
                 MailerModule.forRootAsync({
-                    imports   : [ConfigModule],
-                    inject    : [ConfigService],
-                    useFactory: (configService: ConfigService) => ({
+                    imports: [
+                        ConfigModule,
+                    ],
+                    inject: [
+                        ConfigService,
+                        I18nService,
+                    ],
+                    useFactory: (
+                        configService: ConfigService,
+                        i18nService: I18nService,
+                    ) => ({
                         transport: {
                             host     : configService.get<string>('MAILER_HOST'),
                             port     : +configService.get<number>('MAILER_PORT'),
@@ -38,8 +70,11 @@ export class MailerCLientModule
                             from: configService.get<string>('MAILER_FROM'),
                         },
                         template: {
-                            dir    : __dirname + '/templates',
-                            adapter: new HandlebarsAdapter({ ...handlebarsHelpers() }),
+                            dir    : join(process.cwd(), 'src', 'assets', 'email', 'templates'),
+                            adapter: new HandlebarsAdapter({
+                                ...handlebarsHelpers(),
+                                t: customI18nHelper(i18nService),
+                            }),
                             options: {
                                 strict: true,
                             },
