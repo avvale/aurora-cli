@@ -11,6 +11,9 @@ import { OAuthCredentialControllers, OAuthCredentialResolvers, OAuthCredentialAp
 import { OAuthScopeApiHandlers, OAuthScopeApiControllers, OAuthScopeApiResolvers, OAuthScopeApiServices } from './scope';
 import { OAuthApplicationClientApiControllers, OAuthApplicationClientApiResolvers, OAuthApplicationClientApiHandlers, OAuthApplicationClientApiServices } from './application-client';
 
+// ---- customizations ----
+import { OAuthCredentialHandlers, OAuthCredentialServices } from '@app/o-auth/credential';
+
 @Module({
     imports: [
         SharedModule,
@@ -25,7 +28,7 @@ import { OAuthApplicationClientApiControllers, OAuthApplicationClientApiResolver
         ...OAuthRefreshTokenApiControllers,
         ...OAuthApplicationApiControllers,
         ...OAuthApplicationClientApiControllers,
-        ...OAuthClientApiControllers
+        ...OAuthClientApiControllers,
     ],
     providers: [
         OAuthSeeder,
@@ -52,7 +55,11 @@ import { OAuthApplicationClientApiControllers, OAuthApplicationClientApiResolver
         ...OAuthApplicationClientApiHandlers,
         ...OAuthApplicationClientApiServices,
         ...OAuthClientApiResolvers,
-        ...OAuthClientApiServices
+        ...OAuthClientApiServices,
+
+        // ---- customizations ----
+        ...OAuthCredentialHandlers,
+        ...OAuthCredentialServices,
     ],
 })
 export class OAuthModule {}

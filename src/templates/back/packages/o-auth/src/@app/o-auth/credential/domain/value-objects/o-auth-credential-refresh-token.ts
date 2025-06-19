@@ -1,16 +1,15 @@
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class ClientRedirect extends StringValueObject
+export class OAuthCredentialRefreshToken extends StringValueObject
 {
-    public readonly type: string = 'ClientRedirect';
+    public readonly type: string = 'OAuthCredentialRefreshToken';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'ClientRedirect',
+            name       : 'OAuthCredentialRefreshToken',
             nullable   : true,
             undefinable: true,
-            maxLength  : 2048,
         }, validationRules));
     }
 }

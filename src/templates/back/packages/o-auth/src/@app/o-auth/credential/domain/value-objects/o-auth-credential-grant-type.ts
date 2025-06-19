@@ -1,13 +1,13 @@
 import { EnumValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class ClientGrantType extends EnumValueObject
+export class OAuthCredentialGrantType extends EnumValueObject
 {
-    public readonly type: string = 'ClientGrantType';
+    public readonly type: 'OAuthCredentialGrantType';
 
     constructor(value: string, validationRules: ValidationRules = {})
     {
         super(value, Object.assign({
-            name       : 'ClientGrantType',
+            name       : 'OAuthCredentialGrantType',
             nullable   : false,
             undefinable: false,
             enumOptions: ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD','REFRESH_TOKEN'],

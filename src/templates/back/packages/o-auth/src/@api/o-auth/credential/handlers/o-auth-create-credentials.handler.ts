@@ -7,10 +7,11 @@ import { OAuthCreateAccessTokenCommand, OAuthDeleteAccessTokenByIdCommand, OAuth
 import { OAuthFindApplicationByAuthorizationHeaderQuery } from '@app/o-auth/application';
 import { OAuthFindClientQuery } from '@app/o-auth/client';
 import { OAuthCreateRefreshTokenCommand, OAuthFindRefreshTokenByIdQuery } from '@app/o-auth/refresh-token';
-import { AuditingMeta, ICommandBus, IQueryBus, Jwt, Utils } from '@aurorajs.dev/core';
+import { AuditingMeta, ICommandBus, IQueryBus, Jwt, now, Utils, uuid } from '@aurorajs.dev/core';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OAuthCreateCredentialsDto, OAuthCredentialsDto } from '../dto';
+import { OAuthCreateCredentialCommand } from '@app/o-auth/credential';
 
 @Injectable()
 export class OAuthCreateCredentialsHandler
@@ -94,7 +95,7 @@ export class OAuthCreateCredentialsHandler
             ));
 
             // if not exist user throw error
-            if (!user.account?.isActive) throw new UnauthorizedException();
+            if (!user?.account?.isActive) throw new UnauthorizedException();
 
             // get account to create credential and consolidate permissions
             const account = await this.consolidatePermissions(
@@ -151,7 +152,7 @@ export class OAuthCreateCredentialsHandler
             const account = await this.queryBus.ask(new IamFindAccountByIdQuery(refreshTokenAggregate.accessToken.accountId));
 
             // check that refresh token isn't expired
-            if (refreshTokenSession.exp < parseInt(Utils.now().format('X'))) throw new UnauthorizedException();
+            if (refreshTokenSession.exp < parseInt(now().format('X'))) throw new UnauthorizedException();
 
             // delete access token from database
             await this.commandBus.dispatch(new OAuthDeleteAccessTokenByIdCommand(refreshTokenAggregate.accessTokenId));
@@ -166,7 +167,7 @@ export class OAuthCreateCredentialsHandler
     ): Promise<OAuthCredentials | OAuthCredentialsDto>
     {
         // create a JWT access token
-        const accessTokenId = Utils.uuid();
+        const accessTokenId = uuid();
         await this.commandBus.dispatch(new OAuthCreateAccessTokenCommand(
             {
                 id                : accessTokenId,
@@ -181,7 +182,7 @@ export class OAuthCreateCredentialsHandler
         // create a JWT refresh tToken
         await this.commandBus.dispatch(new OAuthCreateRefreshTokenCommand(
             {
-                id                 : Utils.uuid(),
+                id                 : uuid(),
                 accessTokenId,
                 expiredRefreshToken: client.expiredRefreshToken,
             },
@@ -200,6 +201,18 @@ export class OAuthCreateCredentialsHandler
                 ],
             },
         ));
+
+        // call command to trigger event with payload, this command has not side effect
+        // in the database this is used to trigger the event and notify other microservices
+        await this.commandBus.dispatch(new OAuthCreateCredentialCommand({
+            grantType    : client.grantType,
+            accountId    : account.id,
+            username     : account.username,
+            clientSecret : client.secret,
+            accessTokenId: accessToken.id,
+            refreshToken : accessToken.refreshToken.token,
+            redirect     : client.redirect,
+        }));
 
         return {
             accessToken : accessToken.token,
