@@ -64,7 +64,8 @@ export class IamForgotPasswordUserHandler
             .sendMail({
                 to      : account.email,
                 subject : this.i18nService.t('iam.PasswordRecovery', { lang: lang?.iso6392 }),
-                template: join(process.cwd(), 'src', 'assets', 'email', 'templates', 'forgot-password'), // The `.pug`, `.ejs` or `.hbs` extension is appended automatically.
+                // The `.pug`, `.ejs` or `.hbs` extension is appended automatically.
+                template: join(__dirname, '..', '..', '..', '..', 'assets', 'email', 'templates', 'forgot-password'),
                 context : {
                     lang       : lang?.iso6392,
                     link       : `${payload.origin}/reset-password/${rememberToken}`,
