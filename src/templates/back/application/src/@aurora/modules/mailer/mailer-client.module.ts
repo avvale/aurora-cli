@@ -28,13 +28,15 @@ export class MailerCLientModule
             };
         }
 
+        const srcPath = join(__dirname, '..', '..', '..');
+
         return {
             module : MailerCLientModule,
             imports: [
                 I18nModule.forRoot({
                     fallbackLanguage: 'en',
                     loaderOptions   : {
-                        path : join(process.cwd(), 'src', 'i18n'),
+                        path : join(srcPath, 'i18n'),
                         watch: true,
                     },
                     resolvers: [
@@ -70,7 +72,7 @@ export class MailerCLientModule
                             from: configService.get<string>('MAILER_FROM'),
                         },
                         template: {
-                            dir    : join(process.cwd(), 'src', 'assets', 'email', 'templates'),
+                            dir    : join(srcPath, 'assets', 'email', 'templates'),
                             adapter: new HandlebarsAdapter({
                                 ...handlebarsHelpers(),
                                 t: customI18nHelper(i18nService),
