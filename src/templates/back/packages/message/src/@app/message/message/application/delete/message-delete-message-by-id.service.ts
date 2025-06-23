@@ -42,7 +42,10 @@ export class MessageDeleteMessageByIdService
         // insert EventBus in object, to be able to apply and commit events
         const messageRegister = this.publisher.mergeObjectContext(message);
 
-        messageRegister.deleted(message); // apply event to model events
+        messageRegister.deleted({
+            payload: message,
+            cQMetadata,
+        }); // apply event to model events
         messageRegister.commit(); // commit all events of model
     }
 }

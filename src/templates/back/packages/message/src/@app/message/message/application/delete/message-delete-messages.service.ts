@@ -36,7 +36,10 @@ export class MessageDeleteMessagesService
         // create AddMessagesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const messagesRegistered = this.publisher.mergeObjectContext(
-            new MessageAddMessagesContextEvent(messages),
+            new MessageAddMessagesContextEvent(
+                messages,
+                cQMetadata,
+            ),
         );
 
         messagesRegistered.deleted(); // apply event to model events

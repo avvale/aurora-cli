@@ -110,7 +110,10 @@ export class MessageUpdateAndIncrementMessagesService
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const messagesRegister = this.publisher.mergeObjectContext(
-            new MessageAddMessagesContextEvent(messages),
+            new MessageAddMessagesContextEvent(
+                messages,
+                cQMetadata,
+            ),
         );
 
         messagesRegister.updatedAndIncremented(); // apply event to model events

@@ -1,8 +1,12 @@
-import { MessageDeletedMessageEvent } from './message-deleted-message.event';
+import { MessageDeletedMessageEvent } from '@app/message/message';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class MessageDeletedMessagesEvent
 {
     constructor(
-        public readonly messages: MessageDeletedMessageEvent[],
+        public readonly event: {
+            payload: MessageDeletedMessageEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

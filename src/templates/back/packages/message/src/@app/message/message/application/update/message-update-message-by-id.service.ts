@@ -102,7 +102,10 @@ export class MessageUpdateMessageByIdService
             message,
         );
 
-        messageRegister.updated(message); // apply event to model events
+        messageRegister.updated({
+            payload: message,
+            cQMetadata,
+        }); // apply event to model events
         messageRegister.commit(); // commit all events of model
     }
 }

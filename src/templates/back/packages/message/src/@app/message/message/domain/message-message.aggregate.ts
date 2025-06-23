@@ -24,7 +24,7 @@ import {
     MessageMessageTotalRecipients,
     MessageMessageUpdatedAt,
 } from '@app/message/message/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class MessageMessage extends AggregateRoot
@@ -153,93 +153,117 @@ export class MessageMessage extends AggregateRoot
         );
     }
 
-    created(message: MessageMessage): void
+    created(
+        event: {
+            payload: MessageMessage;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new MessageCreatedMessageEvent(
-                message.id.value,
-                message.tenantIds?.value,
-                message.status.value,
-                message.accountRecipientIds?.value,
-                message.tenantRecipientIds?.value,
-                message.scopeRecipients?.value,
-                message.tagRecipients?.value,
-                message.sendAt?.value,
-                message.isImportant.value,
-                message.subject.value,
-                message.body.value,
-                message.link?.value,
-                message.isInternalLink?.value,
-                message.image?.value,
-                message.icon?.value,
-                message.attachments?.value,
-                message.totalRecipients.value,
-                message.reads.value,
-                message.meta?.value,
-                message.createdAt?.value,
-                message.updatedAt?.value,
-                message.deletedAt?.value,
-            ),
+            new MessageCreatedMessageEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    status: event.payload.status.value,
+                    accountRecipientIds: event.payload.accountRecipientIds?.value,
+                    tenantRecipientIds: event.payload.tenantRecipientIds?.value,
+                    scopeRecipients: event.payload.scopeRecipients?.value,
+                    tagRecipients: event.payload.tagRecipients?.value,
+                    sendAt: event.payload.sendAt?.value,
+                    isImportant: event.payload.isImportant.value,
+                    subject: event.payload.subject.value,
+                    body: event.payload.body.value,
+                    link: event.payload.link?.value,
+                    isInternalLink: event.payload.isInternalLink?.value,
+                    image: event.payload.image?.value,
+                    icon: event.payload.icon?.value,
+                    attachments: event.payload.attachments?.value,
+                    totalRecipients: event.payload.totalRecipients.value,
+                    reads: event.payload.reads.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(message: MessageMessage): void
+    updated(
+        event: {
+            payload: MessageMessage;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new MessageUpdatedMessageEvent(
-                message.id?.value,
-                message.tenantIds?.value,
-                message.status?.value,
-                message.accountRecipientIds?.value,
-                message.tenantRecipientIds?.value,
-                message.scopeRecipients?.value,
-                message.tagRecipients?.value,
-                message.sendAt?.value,
-                message.isImportant?.value,
-                message.subject?.value,
-                message.body?.value,
-                message.link?.value,
-                message.isInternalLink?.value,
-                message.image?.value,
-                message.icon?.value,
-                message.attachments?.value,
-                message.totalRecipients?.value,
-                message.reads?.value,
-                message.meta?.value,
-                message.createdAt?.value,
-                message.updatedAt?.value,
-                message.deletedAt?.value,
-            ),
+            new MessageUpdatedMessageEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    status: event.payload.status?.value,
+                    accountRecipientIds: event.payload.accountRecipientIds?.value,
+                    tenantRecipientIds: event.payload.tenantRecipientIds?.value,
+                    scopeRecipients: event.payload.scopeRecipients?.value,
+                    tagRecipients: event.payload.tagRecipients?.value,
+                    sendAt: event.payload.sendAt?.value,
+                    isImportant: event.payload.isImportant?.value,
+                    subject: event.payload.subject?.value,
+                    body: event.payload.body?.value,
+                    link: event.payload.link?.value,
+                    isInternalLink: event.payload.isInternalLink?.value,
+                    image: event.payload.image?.value,
+                    icon: event.payload.icon?.value,
+                    attachments: event.payload.attachments?.value,
+                    totalRecipients: event.payload.totalRecipients?.value,
+                    reads: event.payload.reads?.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(message: MessageMessage): void
+    deleted(
+        event: {
+            payload: MessageMessage;
+            cQMetadata?: CQMetadata;
+        },
+    ): void
     {
         this.apply(
-            new MessageDeletedMessageEvent(
-                message.id.value,
-                message.tenantIds?.value,
-                message.status.value,
-                message.accountRecipientIds?.value,
-                message.tenantRecipientIds?.value,
-                message.scopeRecipients?.value,
-                message.tagRecipients?.value,
-                message.sendAt?.value,
-                message.isImportant.value,
-                message.subject.value,
-                message.body.value,
-                message.link?.value,
-                message.isInternalLink?.value,
-                message.image?.value,
-                message.icon?.value,
-                message.attachments?.value,
-                message.totalRecipients.value,
-                message.reads.value,
-                message.meta?.value,
-                message.createdAt?.value,
-                message.updatedAt?.value,
-                message.deletedAt?.value,
-            ),
+            new MessageDeletedMessageEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    tenantIds: event.payload.tenantIds?.value,
+                    status: event.payload.status.value,
+                    accountRecipientIds: event.payload.accountRecipientIds?.value,
+                    tenantRecipientIds: event.payload.tenantRecipientIds?.value,
+                    scopeRecipients: event.payload.scopeRecipients?.value,
+                    tagRecipients: event.payload.tagRecipients?.value,
+                    sendAt: event.payload.sendAt?.value,
+                    isImportant: event.payload.isImportant.value,
+                    subject: event.payload.subject.value,
+                    body: event.payload.body.value,
+                    link: event.payload.link?.value,
+                    isInternalLink: event.payload.isInternalLink?.value,
+                    image: event.payload.image?.value,
+                    icon: event.payload.icon?.value,
+                    attachments: event.payload.attachments?.value,
+                    totalRecipients: event.payload.totalRecipients.value,
+                    reads: event.payload.reads.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 

@@ -98,7 +98,10 @@ export class MessageCreateMessageService
             message,
         );
 
-        messageRegister.created(message); // apply event to model events
+        messageRegister.created({
+            payload: message,
+            cQMetadata,
+        }); // apply event to model events
         messageRegister.commit(); // commit all events of model
     }
 }

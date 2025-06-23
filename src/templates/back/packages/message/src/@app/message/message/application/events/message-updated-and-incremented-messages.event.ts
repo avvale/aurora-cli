@@ -1,8 +1,12 @@
-import { MessageUpdatedAndIncrementedMessageEvent } from './message-updated-and-incremented-message.event';
+import { MessageUpdatedAndIncrementedMessageEvent } from '@app/message/message';
+import { CQMetadata } from '@aurorajs.dev/core';
 
 export class MessageUpdatedAndIncrementedMessagesEvent
 {
     constructor(
-        public readonly messages: MessageUpdatedAndIncrementedMessageEvent[],
+        public readonly event: {
+            payload: MessageUpdatedAndIncrementedMessageEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

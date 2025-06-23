@@ -1,19 +1,18 @@
-import { MessageCreateMessageInput, MessageMessage, MessageMessageStatus } from '@api/graphql';
+import { MessageCreateMessageInput, MessageMessage } from '@api/graphql';
 import { MessageCreateMessageDto, MessageMessageDto } from '@api/message/message';
-import { countTotalRecipients } from '@api/message/shared';
-import { StorageAccountFileManagerService } from '@api/storage-account/file-manager';
+import { createMessage } from '@api/message/shared';
 import { IamAccountResponse } from '@app/iam/account';
-import { MessageCreateMessageCommand, MessageFindMessageByIdQuery } from '@app/message/message';
-import { AuditingMeta, ICommandBus, IQueryBus, uuid } from '@aurorajs.dev/core';
+import { MessageFindMessageByIdQuery } from '@app/message/message';
+import { AuditingMeta, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 
 @Injectable()
 export class MessageCreateMessageHandler
 {
     constructor(
-        private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-        private readonly storageAccountFileManagerService: StorageAccountFileManagerService,
+        private readonly moduleRef: ModuleRef,
     ) {}
 
     async main(
@@ -23,41 +22,12 @@ export class MessageCreateMessageHandler
         auditing?: AuditingMeta,
     ): Promise<MessageMessage | MessageMessageDto>
     {
-        const attachments = Array.isArray(payload.attachmentsInputFile) ?
-            await Promise.all(
-                payload.attachmentsInputFile
-                    .map(
-                        async attachmentInputFile => await this.storageAccountFileManagerService.uploadFile({
-                            id                  : uuid(),
-                            file                : attachmentInputFile,
-                            relativePathSegments: ['aurora', 'message', 'attachments'],
-                        }),
-                    ),
-            ) : [];
-
-        const totalRecipients = await countTotalRecipients({
-            queryBus           : this.queryBus,
-            tenantRecipientIds : payload.tenantRecipientIds,
-            scopeRecipients    : payload.scopeRecipients,
-            tagRecipients      : payload.tagRecipients,
-            accountRecipientIds: payload.accountRecipientIds,
+        await createMessage({
+            moduleRef: this.moduleRef,
+            payload,
+            timezone,
+            auditing,
         });
-
-        await this.commandBus.dispatch(new MessageCreateMessageCommand(
-            {
-                ...payload,
-                attachments,
-                totalRecipients,
-                reads : 0,
-                status: MessageMessageStatus.DRAFT,
-            },
-            {
-                timezone,
-                repositoryOptions: {
-                    auditing,
-                },
-            },
-        ));
 
         return await this.queryBus.ask(new MessageFindMessageByIdQuery(
             payload.id,

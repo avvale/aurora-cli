@@ -61,7 +61,7 @@ export class MessageCreateMessagesService
     ): Promise<void>
     {
         // create aggregate with factory pattern
-        const aggregateMessages = payload.map(message => MessageMessage.register(
+        const messages = payload.map(message => MessageMessage.register(
             message.id,
             message.tenantIds,
             message.status,
@@ -88,7 +88,7 @@ export class MessageCreateMessagesService
 
         // insert
         await this.repository.insert(
-            aggregateMessages,
+            messages,
             {
                 insertOptions: cQMetadata?.repositoryOptions,
             },
@@ -96,7 +96,12 @@ export class MessageCreateMessagesService
 
         // create AddMessagesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const messagesRegistered = this.publisher.mergeObjectContext(new MessageAddMessagesContextEvent(aggregateMessages));
+        const messagesRegistered = this.publisher.mergeObjectContext(
+            new MessageAddMessagesContextEvent(
+                messages,
+                cQMetadata,
+            ),
+        );
 
         messagesRegistered.created(); // apply event to model events
         messagesRegistered.commit(); // commit all events of model

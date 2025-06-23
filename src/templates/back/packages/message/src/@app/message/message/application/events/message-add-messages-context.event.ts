@@ -1,10 +1,12 @@
 import { MessageCreatedMessageEvent, MessageCreatedMessagesEvent, MessageDeletedMessageEvent, MessageDeletedMessagesEvent, MessageMessage, MessageUpdatedAndIncrementedMessageEvent, MessageUpdatedAndIncrementedMessagesEvent, MessageUpdatedMessageEvent, MessageUpdatedMessagesEvent } from '@app/message/message';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class MessageAddMessagesContextEvent extends AggregateRoot
 {
     constructor(
         public readonly aggregateRoots: MessageMessage[] = [],
+        public readonly cQMetadata?: CQMetadata,
     )
     {
         super();
@@ -18,136 +20,148 @@ export class MessageAddMessagesContextEvent extends AggregateRoot
     created(): void
     {
         this.apply(
-            new MessageCreatedMessagesEvent(
-                this.aggregateRoots.map(message =>
-                    new MessageCreatedMessageEvent(
-                        message.id.value,
-                        message.tenantIds?.value,
-                        message.status.value,
-                        message.accountRecipientIds?.value,
-                        message.tenantRecipientIds?.value,
-                        message.scopeRecipients?.value,
-                        message.tagRecipients?.value,
-                        message.sendAt?.value,
-                        message.isImportant.value,
-                        message.subject.value,
-                        message.body.value,
-                        message.link?.value,
-                        message.isInternalLink?.value,
-                        message.image?.value,
-                        message.icon?.value,
-                        message.attachments?.value,
-                        message.totalRecipients.value,
-                        message.reads.value,
-                        message.meta?.value,
-                        message.createdAt?.value,
-                        message.updatedAt?.value,
-                        message.deletedAt?.value,
-                    ),
+            new MessageCreatedMessagesEvent({
+                payload: this.aggregateRoots.map(message =>
+                    new MessageCreatedMessageEvent({
+                        payload: {
+                            id: message.id.value,
+                            tenantIds: message.tenantIds?.value,
+                            status: message.status.value,
+                            accountRecipientIds: message.accountRecipientIds?.value,
+                            tenantRecipientIds: message.tenantRecipientIds?.value,
+                            scopeRecipients: message.scopeRecipients?.value,
+                            tagRecipients: message.tagRecipients?.value,
+                            sendAt: message.sendAt?.value,
+                            isImportant: message.isImportant.value,
+                            subject: message.subject.value,
+                            body: message.body.value,
+                            link: message.link?.value,
+                            isInternalLink: message.isInternalLink?.value,
+                            image: message.image?.value,
+                            icon: message.icon?.value,
+                            attachments: message.attachments?.value,
+                            totalRecipients: message.totalRecipients.value,
+                            reads: message.reads.value,
+                            meta: message.meta?.value,
+                            createdAt: message.createdAt?.value,
+                            updatedAt: message.updatedAt?.value,
+                            deletedAt: message.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updated(): void
     {
         this.apply(
-            new MessageUpdatedMessagesEvent(
-                this.aggregateRoots.map(message =>
-                    new MessageUpdatedMessageEvent(
-                        message.id.value,
-                        message.tenantIds?.value,
-                        message.status.value,
-                        message.accountRecipientIds?.value,
-                        message.tenantRecipientIds?.value,
-                        message.scopeRecipients?.value,
-                        message.tagRecipients?.value,
-                        message.sendAt?.value,
-                        message.isImportant.value,
-                        message.subject.value,
-                        message.body.value,
-                        message.link?.value,
-                        message.isInternalLink?.value,
-                        message.image?.value,
-                        message.icon?.value,
-                        message.attachments?.value,
-                        message.totalRecipients.value,
-                        message.reads.value,
-                        message.meta?.value,
-                        message.createdAt?.value,
-                        message.updatedAt?.value,
-                        message.deletedAt?.value,
-                    ),
+            new MessageUpdatedMessagesEvent({
+                payload: this.aggregateRoots.map(message =>
+                    new MessageUpdatedMessageEvent({
+                        payload: {
+                            id: message.id.value,
+                            tenantIds: message.tenantIds?.value,
+                            status: message.status.value,
+                            accountRecipientIds: message.accountRecipientIds?.value,
+                            tenantRecipientIds: message.tenantRecipientIds?.value,
+                            scopeRecipients: message.scopeRecipients?.value,
+                            tagRecipients: message.tagRecipients?.value,
+                            sendAt: message.sendAt?.value,
+                            isImportant: message.isImportant.value,
+                            subject: message.subject.value,
+                            body: message.body.value,
+                            link: message.link?.value,
+                            isInternalLink: message.isInternalLink?.value,
+                            image: message.image?.value,
+                            icon: message.icon?.value,
+                            attachments: message.attachments?.value,
+                            totalRecipients: message.totalRecipients.value,
+                            reads: message.reads.value,
+                            meta: message.meta?.value,
+                            createdAt: message.createdAt?.value,
+                            updatedAt: message.updatedAt?.value,
+                            deletedAt: message.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     updatedAndIncremented(): void
     {
         this.apply(
-            new MessageUpdatedAndIncrementedMessagesEvent(
-                this.aggregateRoots.map(message =>
-                    new MessageUpdatedAndIncrementedMessageEvent(
-                        message.id.value,
-                        message.tenantIds?.value,
-                        message.status.value,
-                        message.accountRecipientIds?.value,
-                        message.tenantRecipientIds?.value,
-                        message.scopeRecipients?.value,
-                        message.tagRecipients?.value,
-                        message.sendAt?.value,
-                        message.isImportant.value,
-                        message.subject.value,
-                        message.body.value,
-                        message.link?.value,
-                        message.isInternalLink?.value,
-                        message.image?.value,
-                        message.icon?.value,
-                        message.attachments?.value,
-                        message.totalRecipients.value,
-                        message.reads.value,
-                        message.meta?.value,
-                        message.createdAt?.value,
-                        message.updatedAt?.value,
-                        message.deletedAt?.value,
-                    ),
+            new MessageUpdatedAndIncrementedMessagesEvent({
+                payload: this.aggregateRoots.map(message =>
+                    new MessageUpdatedAndIncrementedMessageEvent({
+                        payload: {
+                            id: message.id.value,
+                            tenantIds: message.tenantIds?.value,
+                            status: message.status.value,
+                            accountRecipientIds: message.accountRecipientIds?.value,
+                            tenantRecipientIds: message.tenantRecipientIds?.value,
+                            scopeRecipients: message.scopeRecipients?.value,
+                            tagRecipients: message.tagRecipients?.value,
+                            sendAt: message.sendAt?.value,
+                            isImportant: message.isImportant.value,
+                            subject: message.subject.value,
+                            body: message.body.value,
+                            link: message.link?.value,
+                            isInternalLink: message.isInternalLink?.value,
+                            image: message.image?.value,
+                            icon: message.icon?.value,
+                            attachments: message.attachments?.value,
+                            totalRecipients: message.totalRecipients.value,
+                            reads: message.reads.value,
+                            meta: message.meta?.value,
+                            createdAt: message.createdAt?.value,
+                            updatedAt: message.updatedAt?.value,
+                            deletedAt: message.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
     deleted(): void
     {
         this.apply(
-            new MessageDeletedMessagesEvent(
-                this.aggregateRoots.map(message =>
-                    new MessageDeletedMessageEvent(
-                        message.id.value,
-                        message.tenantIds?.value,
-                        message.status.value,
-                        message.accountRecipientIds?.value,
-                        message.tenantRecipientIds?.value,
-                        message.scopeRecipients?.value,
-                        message.tagRecipients?.value,
-                        message.sendAt?.value,
-                        message.isImportant.value,
-                        message.subject.value,
-                        message.body.value,
-                        message.link?.value,
-                        message.isInternalLink?.value,
-                        message.image?.value,
-                        message.icon?.value,
-                        message.attachments?.value,
-                        message.totalRecipients.value,
-                        message.reads.value,
-                        message.meta?.value,
-                        message.createdAt?.value,
-                        message.updatedAt?.value,
-                        message.deletedAt?.value,
-                    ),
+            new MessageDeletedMessagesEvent({
+                payload: this.aggregateRoots.map(message =>
+                    new MessageDeletedMessageEvent({
+                        payload: {
+                            id: message.id.value,
+                            tenantIds: message.tenantIds?.value,
+                            status: message.status.value,
+                            accountRecipientIds: message.accountRecipientIds?.value,
+                            tenantRecipientIds: message.tenantRecipientIds?.value,
+                            scopeRecipients: message.scopeRecipients?.value,
+                            tagRecipients: message.tagRecipients?.value,
+                            sendAt: message.sendAt?.value,
+                            isImportant: message.isImportant.value,
+                            subject: message.subject.value,
+                            body: message.body.value,
+                            link: message.link?.value,
+                            isInternalLink: message.isInternalLink?.value,
+                            image: message.image?.value,
+                            icon: message.icon?.value,
+                            attachments: message.attachments?.value,
+                            totalRecipients: message.totalRecipients.value,
+                            reads: message.reads.value,
+                            meta: message.meta?.value,
+                            createdAt: message.createdAt?.value,
+                            updatedAt: message.updatedAt?.value,
+                            deletedAt: message.deletedAt?.value,
+                        },
+                    }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }
