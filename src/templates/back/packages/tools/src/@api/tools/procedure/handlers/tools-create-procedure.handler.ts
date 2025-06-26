@@ -18,7 +18,10 @@ export class ToolsCreateProcedureHandler
     ): Promise<ToolsProcedure | ToolsProcedureDto>
     {
         await this.commandBus.dispatch(new ToolsCreateProcedureCommand(
-            payload,
+            {
+                ...payload,
+                isInstalled: false,
+            },
             {
                 timezone,
             },

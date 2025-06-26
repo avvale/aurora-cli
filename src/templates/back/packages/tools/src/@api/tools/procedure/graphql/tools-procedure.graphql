@@ -31,7 +31,6 @@ input ToolsCreateProcedureInput
     type: ToolsProcedureType!
     version: GraphQLString!
     isActive: GraphQLBoolean!
-    isInstalled: GraphQLBoolean!
     isUpdated: GraphQLBoolean!
     upScript: GraphQLString
     downScript: GraphQLString
