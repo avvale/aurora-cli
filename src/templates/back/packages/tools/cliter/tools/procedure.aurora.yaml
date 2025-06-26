@@ -31,7 +31,6 @@ aggregateProperties:
     type: varchar
     maxLength: 16
     nullable: false
-    index: unique
   - name: isActive
     type: boolean
     nullable: false
