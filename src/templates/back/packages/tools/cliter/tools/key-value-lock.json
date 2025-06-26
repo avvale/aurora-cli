@@ -1,0 +1,633 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/@app/tools/tools.seed.ts",
+            "integrity": "sha1:7dba1aaf3da19edba57e1b652dceac69680d6c24"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-value.command-handler.spec.ts",
+            "integrity": "sha1:41099f02f581f3c1c70ca619c4f9ee71dfccb545"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-value.command-handler.ts",
+            "integrity": "sha1:d4fe07aaaed409883c985659168f66c105dad5b8"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-value.command.ts",
+            "integrity": "sha1:124d51cfa2e091ce8643501b683b7ce098252d8c"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-value.service.spec.ts",
+            "integrity": "sha1:20a4212d3742c723c49b579fe0313bdf97d5a455"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-value.service.ts",
+            "integrity": "sha1:ea1c3d483c4e19946a895d1b571025fa97cc1335"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-values.command-handler.spec.ts",
+            "integrity": "sha1:c68dc06efa3d93eb8f1363ceaf7280d79dc40ce9"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-values.command-handler.ts",
+            "integrity": "sha1:700f53190696785ec727f1c6ed1f18c01e238ecf"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-values.command.ts",
+            "integrity": "sha1:6cba49c894384a471f140a9f88800b5a4d8cf807"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-values.service.spec.ts",
+            "integrity": "sha1:cf5c28cb377de777268a693dc16c62f975e768fa"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/create/tools-create-key-values.service.ts",
+            "integrity": "sha1:60f215a00bc9655385f1c48756e7b1e72274eada"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-value-by-id.command-handler.spec.ts",
+            "integrity": "sha1:a17adaa3dbacecabe22be173a6385bc1fb51a0ba"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-value-by-id.command-handler.ts",
+            "integrity": "sha1:4a24f78d8c56df67fafefae54153606fe7ffae75"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-value-by-id.command.ts",
+            "integrity": "sha1:d36d1d02345d6e8b348e3f5f33939580fb88f777"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-value-by-id.service.spec.ts",
+            "integrity": "sha1:e67534ca65684e2919c9c1408188611f2fde078b"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-value-by-id.service.ts",
+            "integrity": "sha1:1275ba3bdb65c1bfed139d349b090006f1babfc9"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-values.command-handler.spec.ts",
+            "integrity": "sha1:efd1199ad594a74180226aef43df74e231821292"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-values.command-handler.ts",
+            "integrity": "sha1:0805db9bc1580b59d670ecfe2d6c43df77cc98c6"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-values.command.ts",
+            "integrity": "sha1:b7553998d6d4a77c2648f2799655a3406ba87232"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-values.service.spec.ts",
+            "integrity": "sha1:fc919da004c0ab75dc3835d7564d78a6545f3c18"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/delete/tools-delete-key-values.service.ts",
+            "integrity": "sha1:9ac98fa054639f4d0e08979167c9f8bfbebc6351"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-add-key-values-context.event.ts",
+            "integrity": "sha1:ca92e84e8aff2b1e2fedba82dbdcb1ea7828ba6f"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-created-key-value.event-handler.ts",
+            "integrity": "sha1:30ec817194aacba89a071fdf8ff761edd4f473b0"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-created-key-value.event.ts",
+            "integrity": "sha1:b02cbeef523fc922748ebd3d167294b3aa800a00"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-created-key-values.event-handler.ts",
+            "integrity": "sha1:9c662cbcf52a00f79ae3a7b88177b41005c42ef2"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-created-key-values.event.ts",
+            "integrity": "sha1:5dd551ded269d7adbee4f0190198cfb59a7c6549"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-deleted-key-value.event-handler.ts",
+            "integrity": "sha1:5eb4cc1975e983cc218aaf90842173928e098f79"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-deleted-key-value.event.ts",
+            "integrity": "sha1:92186e17b5d8f246a2565932e16d3a0ef584731c"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-deleted-key-values.event-handler.ts",
+            "integrity": "sha1:d9fdb39694ae8a2c6eabdc918d7d4b1da55098dc"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-deleted-key-values.event.ts",
+            "integrity": "sha1:4f31c64c29a11e7f5ddea605f50883b58f9ffb4d"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-updated-key-value.event-handler.ts",
+            "integrity": "sha1:facfaa590df873c3b1d5a7e8c571d54141977cd9"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-updated-key-value.event.ts",
+            "integrity": "sha1:c15ade3a7232ef9f290d9c294266f78b6a6e7770"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-updated-key-values.event-handler.ts",
+            "integrity": "sha1:db793212b7000080f6ed2c9f605d1a5a48f9b0fd"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/events/tools-updated-key-values.event.ts",
+            "integrity": "sha1:c4a045bce865b55f7d03a36cbb7088236e1e454b"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value-by-id.query-handler.spec.ts",
+            "integrity": "sha1:5a658929ec654cdbba08ba761fb2eb8c4cf839f8"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value-by-id.query-handler.ts",
+            "integrity": "sha1:a86acf9bd1b820dbdde568b742c5d3f4902deb8c"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value-by-id.query.ts",
+            "integrity": "sha1:91678a5171ec79ff8d7e35a477a39c9f762d6231"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value-by-id.service.spec.ts",
+            "integrity": "sha1:206a0e695125678dea13a505254d532ea21355a8"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value-by-id.service.ts",
+            "integrity": "sha1:09af578b178c18570e5e0193190e7a7e9fedfbb5"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value.query-handler.spec.ts",
+            "integrity": "sha1:3851cf6ef39308f658e6e476f85828f19be97887"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value.query-handler.ts",
+            "integrity": "sha1:adc6d3ff4314b1863a32a095f1a3303087eae8bb"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value.query.ts",
+            "integrity": "sha1:a8fa623b09260beb3e0382f52b816539a5f6e5eb"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value.service.spec.ts",
+            "integrity": "sha1:f898c5af3f6999b47fb9fbc76c04469805cc0c17"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/find/tools-find-key-value.service.ts",
+            "integrity": "sha1:d561ad0457b268b7ec446e3e0453fbf31d8c37fb"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/get/tools-get-key-values.query-handler.spec.ts",
+            "integrity": "sha1:dd3a6dca9d903878264e0ce0bac7f8bd169b28a6"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/get/tools-get-key-values.query-handler.ts",
+            "integrity": "sha1:0342f13379e3ef29f9628cbd04b27f56b37d1e5e"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/get/tools-get-key-values.query.ts",
+            "integrity": "sha1:af3328c1278f76dc8d4c00bc28ee4ec5f5c351c8"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/get/tools-get-key-values.service.spec.ts",
+            "integrity": "sha1:d46b5fc370e45b7dedc93a4f60f8c074eff78c70"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/get/tools-get-key-values.service.ts",
+            "integrity": "sha1:0a2eb20b4fd2599b5e72494277cdb3405b9f241d"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/paginate/tools-paginate-key-values.query-handler.spec.ts",
+            "integrity": "sha1:236ad68a0052abddb0b57e57f2894ee05f18cf9a"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/paginate/tools-paginate-key-values.query-handler.ts",
+            "integrity": "sha1:462b480fe988b6c642495a24acf2c76bb9d24eea"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/paginate/tools-paginate-key-values.query.ts",
+            "integrity": "sha1:e8e0bbfbe26fdee6714eafd5dbfb3c62f8aa4009"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/paginate/tools-paginate-key-values.service.spec.ts",
+            "integrity": "sha1:5a9526e705209772f2e6a7570d0ae20b34f25add"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/paginate/tools-paginate-key-values.service.ts",
+            "integrity": "sha1:e3b41495493e1276da0f7c2a0590c8356800a13a"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/sagas/tools-key-value.sagas.ts",
+            "integrity": "sha1:9d2586d80360d8186ad31a0b2cceb093a269c4dd"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.command-handler.spec.ts",
+            "integrity": "sha1:6630df7334c7e34b540ccbb253a612ecf3215773"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.command-handler.ts",
+            "integrity": "sha1:419cddb5b81291c1887f0192b092b12961e4d9b9"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.command.ts",
+            "integrity": "sha1:3144d8ee4ca7cc16939144a6fe38267ab3a55137"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.service.spec.ts",
+            "integrity": "sha1:90a6e0e232b3100631b2166de4ec49b7326c9820"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.service.ts",
+            "integrity": "sha1:8050e3f0ebd7d63ac1f97d1a8f7e2f080816cc92"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-values.command-handler.spec.ts",
+            "integrity": "sha1:5ee704ebace1db845647aef9c859f27f28c30b58"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-values.command-handler.ts",
+            "integrity": "sha1:4ca29646d987e7186785f0d80a86904b267337ee"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-values.command.ts",
+            "integrity": "sha1:f214b210dca11524f9b8f70bde6e4f6573826ead"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-values.service.spec.ts",
+            "integrity": "sha1:f48343aa262d94611ac4d425e898f8ec9a200fe0"
+        },
+        {
+            "path": "src/@app/tools/key-value/application/update/tools-update-key-values.service.ts",
+            "integrity": "sha1:aa9423af0ce9bb67484bfe05dc22dec35b73dc60"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/tools-key-value.aggregate.ts",
+            "integrity": "sha1:e90e6c102ba928f6e18b84257ba2864f066c8d4f"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/tools-key-value.mapper.ts",
+            "integrity": "sha1:bc15029bedfef08be90838315b9c54a189a1dec1"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/tools-key-value.repository.ts",
+            "integrity": "sha1:a679f63816bba09277be7dee1cf0ee104d3607e6"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/tools-key-value.response.ts",
+            "integrity": "sha1:9daf256b199a0fade92f00ea048e76add01241d3"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/index.ts",
+            "integrity": "sha1:92e996da5475bb291f7ec27bcc0e2b183f499888"
+        },
+        {
+            "path": "src/@app/tools/key-value/index.ts",
+            "integrity": "sha1:5aabfd41bdd8599ddd81b0d3b2c73b18147f6164"
+        },
+        {
+            "path": "src/@app/tools/key-value/infrastructure/mock/tools-mock-key-value.data.ts",
+            "integrity": "sha1:72dce716fd39ff25a59b38009af0899231119d02"
+        },
+        {
+            "path": "src/@app/tools/key-value/infrastructure/mock/tools-mock-key-value.repository.ts",
+            "integrity": "sha1:ea38515917f35808794e1b118f1012256b70cdb7"
+        },
+        {
+            "path": "src/@app/tools/key-value/infrastructure/mock/tools-mock-key-value.seeder.ts",
+            "integrity": "sha1:54a3ad1575ad0b00d0d511ec10db05f05481d022"
+        },
+        {
+            "path": "src/@app/tools/key-value/infrastructure/sequelize/tools-sequelize-key-value.model.ts",
+            "integrity": "sha1:3645cba58f880b7b8503dbbfb29bd147e4297e22"
+        },
+        {
+            "path": "src/@app/tools/key-value/infrastructure/sequelize/tools-sequelize-key-value.repository.ts",
+            "integrity": "sha1:37d8433168e7ffac6eba451ab2502ad2de8bf6e0"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-id.ts",
+            "integrity": "sha1:a9c1c7f34a155c9f99172f7f01b1d58de2f6310e"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-key.ts",
+            "integrity": "sha1:7fd3bc6e4ee1c671a9825aef2a3f81a32cf9cc54"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-type.ts",
+            "integrity": "sha1:a9294640c2db75750879b676cbd222ce8cb3b01f"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-value.ts",
+            "integrity": "sha1:92fd102ba1ab31035d2062b2f9c1267124b91563"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-is-active.ts",
+            "integrity": "sha1:07b9eb577a8db4a3d3222dd9cd9a988e9e7236a5"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-description.ts",
+            "integrity": "sha1:6fb0cca9d9f1e2cef587e70f5cb190d987bdd0a0"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-created-at.ts",
+            "integrity": "sha1:390247b4383769145abd24d45fe7f3fee78a7d8f"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-updated-at.ts",
+            "integrity": "sha1:4cdb91846571259d3de3e0793ed5b8ba8534fce9"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-deleted-at.ts",
+            "integrity": "sha1:07ae146fb4d6e075d2852f7cfddaf65e790fab08"
+        },
+        {
+            "path": "src/@api/tools/tools.seeder.ts",
+            "integrity": "sha1:aee72096901549f8a089e122747b85f9c64508fc"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-create-key-value.controller.spec.ts",
+            "integrity": "sha1:89d69fae332e522812354a0625d305de87adeb44"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-create-key-value.controller.ts",
+            "integrity": "sha1:3185b3940b1097bd80b7353ff440512919b5abaf"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-create-key-values.controller.spec.ts",
+            "integrity": "sha1:a89fb14c98323e3bb0ea3a472c1b7a21308cdfa5"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-create-key-values.controller.ts",
+            "integrity": "sha1:3f329a8ee41e5f957317083ab6bfe21b7e5efda0"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-delete-key-value-by-id.controller.spec.ts",
+            "integrity": "sha1:dc82c4adc22d9dcca5919104366cee99b27b20dd"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-delete-key-value-by-id.controller.ts",
+            "integrity": "sha1:43fe0994d53884d1b63c1cdc36cdc985717cc6dd"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-delete-key-values.controller.spec.ts",
+            "integrity": "sha1:1007ab7cb1c1a306485c77e17761cbcdbe923667"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-delete-key-values.controller.ts",
+            "integrity": "sha1:1cc0d83b1af7b80fac9c72f793af703695ac6337"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-find-key-value-by-id.controller.spec.ts",
+            "integrity": "sha1:9daf875a7668f2541c7cef3890e96130bd2ca51a"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-find-key-value-by-id.controller.ts",
+            "integrity": "sha1:eebdd0a9665bd08814c0058d667476b7d0379df6"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-find-key-value.controller.spec.ts",
+            "integrity": "sha1:150ef8471f9b4cae0637bd472e841676b224d6b2"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-find-key-value.controller.ts",
+            "integrity": "sha1:59c370709a17a175e5ff3c54c7b5c296b49b8ccd"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-get-key-values.controller.spec.ts",
+            "integrity": "sha1:4ca8265eae604bcc7cd6bb33d8b1e4f65984b200"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-get-key-values.controller.ts",
+            "integrity": "sha1:52a369c6610cf29465ed8959685dd207f403cfa9"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-paginate-key-values.controller.spec.ts",
+            "integrity": "sha1:6904ba7b0af46383ba1eb06f21ddda3a5330d51f"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-paginate-key-values.controller.ts",
+            "integrity": "sha1:d742432ede21614d34245a5f5ac95748269e951f"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-update-key-value-by-id.controller.spec.ts",
+            "integrity": "sha1:8dc72f87c2b9ea93ec6e955e8166b4e0883649ad"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-update-key-value-by-id.controller.ts",
+            "integrity": "sha1:cf772660a9fd20d62f7d003380b9902b84e079cb"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-update-key-values.controller.spec.ts",
+            "integrity": "sha1:5756837b7ebb3f0dc26c47cb5a4b3ad9a1c9ea85"
+        },
+        {
+            "path": "src/@api/tools/key-value/controllers/tools-update-key-values.controller.ts",
+            "integrity": "sha1:5cbd3e32a914be24f6a3f73b85fd527767cfaa6d"
+        },
+        {
+            "path": "src/@api/tools/key-value/dto/tools-key-value.dto.ts",
+            "integrity": "sha1:f6178b355e5bd8d92f45fda79cc8a1b015d1b7b4"
+        },
+        {
+            "path": "src/@api/tools/key-value/dto/tools-create-key-value.dto.ts",
+            "integrity": "sha1:9c75a75cc16aee5a23c8e8f965c153125c06fd21"
+        },
+        {
+            "path": "src/@api/tools/key-value/dto/tools-update-key-value-by-id.dto.ts",
+            "integrity": "sha1:171113e9ddba1ccbd9be9c1231e028da0d3ea04f"
+        },
+        {
+            "path": "src/@api/tools/key-value/dto/tools-update-key-values.dto.ts",
+            "integrity": "sha1:c48ccfd4be6c6347f9c4293414f51fd44f177f94"
+        },
+        {
+            "path": "src/@api/tools/key-value/dto/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/@api/tools/key-value/dto/public-api.ts",
+            "integrity": "sha1:bfea5a875cdf37ef4bdd66e404560442739ac75e"
+        },
+        {
+            "path": "src/@api/tools/key-value/graphql/tools-key-value.graphql",
+            "integrity": "sha1:2456164c8bc00acba6bc97e66aaf46776f8af69d"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-create-key-value.handler.spec.ts",
+            "integrity": "sha1:b4f4b937dc313a7bfde2307831b63d9b67f900f8"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-create-key-value.handler.ts",
+            "integrity": "sha1:36393a28eb5af3a9b5e763a64230a06339c0c347"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-create-key-values.handler.spec.ts",
+            "integrity": "sha1:701302e00fc0c372211c414522030e9bada64ce9"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-create-key-values.handler.ts",
+            "integrity": "sha1:6fc147b00bf44e323cc97b2828c4067aa362f5bf"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-delete-key-value-by-id.handler.spec.ts",
+            "integrity": "sha1:7d3f6addab0a9fd11507f964ceb1ba155105d5ff"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-delete-key-value-by-id.handler.ts",
+            "integrity": "sha1:9f49c53c53e248cb292d61d5d778437b05e2ba3d"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-delete-key-values.handler.spec.ts",
+            "integrity": "sha1:b1d3b6a7d6e5ea0beb5afcf99490fc25287d54d2"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-delete-key-values.handler.ts",
+            "integrity": "sha1:8755da12c0f7a5f4feae4e6b4e4c611a05ec79c8"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-find-key-value-by-id.handler.spec.ts",
+            "integrity": "sha1:98c53ca39be1cbc3921bbd44e3d7a809581b1774"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-find-key-value-by-id.handler.ts",
+            "integrity": "sha1:da8f8f7a5f599d9d1db4b8b8f4a0682404a09ca2"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-find-key-value.handler.spec.ts",
+            "integrity": "sha1:a88d341104a5c6f55906fbf7f144e2ef7183caec"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-find-key-value.handler.ts",
+            "integrity": "sha1:790d3acd8e94fc9755e94f942c4a42a84ffe8f86"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-get-key-values.handler.spec.ts",
+            "integrity": "sha1:b6119cda13580e47aab2d5d845debb18a0e9ab72"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-get-key-values.handler.ts",
+            "integrity": "sha1:5380a1616d8b93ce27cc309ed81bcdc2e0094421"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-paginate-key-values.handler.spec.ts",
+            "integrity": "sha1:27cdce5e4f164032c6cfe88cde962b6d8bc3bdd8"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-paginate-key-values.handler.ts",
+            "integrity": "sha1:2eedddcd70061b5fa95f258f2e075c34efcfda0a"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-update-key-value-by-id.handler.spec.ts",
+            "integrity": "sha1:3560871109d062f250b6da1c7f9f99c833fe4bdd"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-update-key-value-by-id.handler.ts",
+            "integrity": "sha1:46989caeedb178263b040079717267edac91dc68"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-update-key-values.handler.spec.ts",
+            "integrity": "sha1:28973ccc032745000060a679fa71691e73320574"
+        },
+        {
+            "path": "src/@api/tools/key-value/handlers/tools-update-key-values.handler.ts",
+            "integrity": "sha1:7b2d52a37b7e19ffe6aa75d6cc5bf310cfa15660"
+        },
+        {
+            "path": "src/@api/tools/key-value/index.ts",
+            "integrity": "sha1:74694f0dd69b4c1b23937947a63e77ac6d20ccd0"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-create-key-value.resolver.spec.ts",
+            "integrity": "sha1:349079b8267ab0d7693acfa82ff306cc0ba46f63"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-create-key-value.resolver.ts",
+            "integrity": "sha1:e5bdeaa8595e74c2c1004661c2799be468ae5284"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-create-key-values.resolver.spec.ts",
+            "integrity": "sha1:7719cc4812c1a09c2c21aa34224fca67624ecdd3"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-create-key-values.resolver.ts",
+            "integrity": "sha1:7f815fbd45ac1286f3e315135601dcb8c3ba5d8c"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-delete-key-value-by-id.resolver.spec.ts",
+            "integrity": "sha1:a921e38a931957aefc4d4f586a062869af4efdd6"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-delete-key-value-by-id.resolver.ts",
+            "integrity": "sha1:3e77621cea254157df7465ddacdd337d2f05d5c0"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-delete-key-values.resolver.spec.ts",
+            "integrity": "sha1:3f1fb5a8b0ca4e2dd72240a096d29946f8c9b182"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-delete-key-values.resolver.ts",
+            "integrity": "sha1:7aab37795a857c6a04635f73888eeb60bac8f3db"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-find-key-value-by-id.resolver.spec.ts",
+            "integrity": "sha1:724bcc125ee84470edb6d3b0c990a0925789157c"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-find-key-value-by-id.resolver.ts",
+            "integrity": "sha1:effeaaf75c7958ef64045ba78aa87d15d78a197b"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-find-key-value.resolver.spec.ts",
+            "integrity": "sha1:28830f364df0714276338fa64150bbf21865020d"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-find-key-value.resolver.ts",
+            "integrity": "sha1:fccf377202809853ae271e38a0dc97cda51cc587"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-get-key-values.resolver.spec.ts",
+            "integrity": "sha1:9bb33df416a2aab649d433f1e421b091bcddb0c0"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-get-key-values.resolver.ts",
+            "integrity": "sha1:2e4cb95ded738b58581fb4ccde6727c16a3868ce"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-paginate-key-values.resolver.spec.ts",
+            "integrity": "sha1:1cd8114e672a648dda0f4d450e2ca33674556118"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-paginate-key-values.resolver.ts",
+            "integrity": "sha1:0e2fdfbe5e989265e83491ae34d65994f7cfef4b"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-update-key-value-by-id.resolver.spec.ts",
+            "integrity": "sha1:aed23678ac8e054c17728a21c52573150dea5a66"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-update-key-value-by-id.resolver.ts",
+            "integrity": "sha1:e233fd642c8ec531f9619bbda027c25de758c630"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-update-key-values.resolver.spec.ts",
+            "integrity": "sha1:b805c31a63256834a0cb1c89107a5d4249177beb"
+        },
+        {
+            "path": "src/@api/tools/key-value/resolvers/tools-update-key-values.resolver.ts",
+            "integrity": "sha1:b568e4a92c435fdf400e4d2dd221843929617866"
+        },
+        {
+            "path": "src/@api/tools/key-value/seeder/tools-key-value.seeder.ts",
+            "integrity": "sha1:0737ab6447e8aa11ed35c63335abe6ba495d568e"
+        },
+        {
+            "path": "test/acceptance/tools/key-value.e2e-spec.ts",
+            "integrity": "sha1:1e90d41ccd60e394f95e999fccc382e633fe6288"
+        },
+        {
+            "path": "postman/tools/tools.key-value.postman.json",
+            "integrity": "sha1:7f7bc139ce8b604ff2a49a8bca2bf65fb58f029f"
+        }
+    ]
+}

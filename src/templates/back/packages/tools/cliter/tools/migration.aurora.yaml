@@ -1,0 +1,61 @@
+version: 0.0.1
+boundedContextName: tools
+moduleName: migration
+moduleNames: migrations
+aggregateName: ToolsMigration
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: repartition
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: repartition
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 128
+    nullable: false
+  - name: version
+    type: varchar
+    maxLength: 16
+    nullable: false
+    index: unique
+  - name: isActive
+    type: boolean
+    nullable: false
+    defaultValue: false
+  - name: upScript
+    type: text
+    nullable: true
+  - name: downScript
+    type: text
+    nullable: true
+  - name: sort
+    type: smallint
+    unsigned: true
+    nullable: true
+  - name: executedAt
+    type: timestamp
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+excludedOperations:
+  - count
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

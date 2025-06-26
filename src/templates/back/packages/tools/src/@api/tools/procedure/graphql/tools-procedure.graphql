@@ -1,0 +1,144 @@
+enum ToolsProcedureType {
+    FUNCTION
+    PROCEDURE
+    TRIGGER
+}
+
+
+type ToolsProcedure
+{
+    id: ID!
+    name: GraphQLString!
+    type: ToolsProcedureType!
+    version: GraphQLString!
+    isActive: GraphQLBoolean!
+    isInstalled: GraphQLBoolean!
+    isUpdated: GraphQLBoolean!
+    upScript: GraphQLString
+    downScript: GraphQLString
+    sort: GraphQLInt
+    executedAt: GraphQLTimestamp
+    checkedAt: GraphQLTimestamp
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input ToolsCreateProcedureInput
+{
+    id: ID!
+    name: GraphQLString!
+    type: ToolsProcedureType!
+    version: GraphQLString!
+    isActive: GraphQLBoolean!
+    isInstalled: GraphQLBoolean!
+    isUpdated: GraphQLBoolean!
+    upScript: GraphQLString
+    downScript: GraphQLString
+    sort: GraphQLInt
+    executedAt: GraphQLTimestamp
+    checkedAt: GraphQLTimestamp
+}
+
+input ToolsUpdateProcedureByIdInput
+{
+    id: ID!
+    name: GraphQLString
+    type: ToolsProcedureType
+    version: GraphQLString
+    isActive: GraphQLBoolean
+    isInstalled: GraphQLBoolean
+    isUpdated: GraphQLBoolean
+    upScript: GraphQLString
+    downScript: GraphQLString
+    sort: GraphQLInt
+    executedAt: GraphQLTimestamp
+    checkedAt: GraphQLTimestamp
+}
+
+input ToolsUpdateProceduresInput
+{
+    id: ID
+    name: GraphQLString
+    type: ToolsProcedureType
+    version: GraphQLString
+    isActive: GraphQLBoolean
+    isInstalled: GraphQLBoolean
+    isUpdated: GraphQLBoolean
+    upScript: GraphQLString
+    downScript: GraphQLString
+    sort: GraphQLInt
+    executedAt: GraphQLTimestamp
+    checkedAt: GraphQLTimestamp
+}
+
+type Query
+{
+    toolsFindProcedure(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): ToolsProcedure
+
+    toolsFindProcedureById(
+        id: ID
+        constraint: QueryStatement
+    ): ToolsProcedure
+
+    toolsGetProcedures(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsProcedure]!
+
+    toolsPaginateProcedures(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    toolsCreateProcedure(
+        payload: ToolsCreateProcedureInput!
+    ): ToolsProcedure
+
+    toolsCreateProcedures(
+        payload: [ToolsCreateProcedureInput]!
+    ): Boolean!
+
+    toolsUpdateProcedureById(
+        payload: ToolsUpdateProcedureByIdInput!
+        constraint: QueryStatement
+    ): ToolsProcedure
+
+    toolsUpdateProcedures(
+        payload: ToolsUpdateProceduresInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsProcedure]!
+
+    toolsDeleteProcedureById(
+        id: ID!
+        constraint: QueryStatement
+    ): ToolsProcedure
+
+    toolsDeleteProcedures(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsProcedure]!
+
+
+    # additionalApis
+    toolsUpScriptProcedure(
+        procedureId: ID!
+    ): Boolean!
+
+    toolsDownScriptProcedure(
+        procedureId: ID!
+    ): Boolean!
+
+    toolsCheckScriptProcedure(
+        procedureId: ID!
+    ): Boolean!
+
+}

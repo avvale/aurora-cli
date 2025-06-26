@@ -1,0 +1,111 @@
+enum ToolsKeyValueType {
+    STRING
+    BOOLEAN
+    NUMBER
+    DATE
+    TIME
+    TIMESTAMP
+    OBJECT
+    ARRAY
+}
+
+
+type ToolsKeyValue
+{
+    id: ID!
+    key: GraphQLString!
+    type: ToolsKeyValueType!
+    value: GraphQLString!
+    isActive: GraphQLBoolean!
+    description: GraphQLString
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input ToolsCreateKeyValueInput
+{
+    id: ID!
+    key: GraphQLString!
+    type: ToolsKeyValueType!
+    value: GraphQLString!
+    isActive: GraphQLBoolean!
+    description: GraphQLString
+}
+
+input ToolsUpdateKeyValueByIdInput
+{
+    id: ID!
+    key: GraphQLString
+    type: ToolsKeyValueType
+    value: GraphQLString
+    isActive: GraphQLBoolean
+    description: GraphQLString
+}
+
+input ToolsUpdateKeyValuesInput
+{
+    id: ID
+    key: GraphQLString
+    type: ToolsKeyValueType
+    value: GraphQLString
+    isActive: GraphQLBoolean
+    description: GraphQLString
+}
+
+type Query
+{
+    toolsFindKeyValue(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): ToolsKeyValue
+
+    toolsFindKeyValueById(
+        id: ID
+        constraint: QueryStatement
+    ): ToolsKeyValue
+
+    toolsGetKeyValues(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsKeyValue]!
+
+    toolsPaginateKeyValues(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    toolsCreateKeyValue(
+        payload: ToolsCreateKeyValueInput!
+    ): ToolsKeyValue
+
+    toolsCreateKeyValues(
+        payload: [ToolsCreateKeyValueInput]!
+    ): Boolean!
+
+    toolsUpdateKeyValueById(
+        payload: ToolsUpdateKeyValueByIdInput!
+        constraint: QueryStatement
+    ): ToolsKeyValue
+
+    toolsUpdateKeyValues(
+        payload: ToolsUpdateKeyValuesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsKeyValue]!
+
+    toolsDeleteKeyValueById(
+        id: ID!
+        constraint: QueryStatement
+    ): ToolsKeyValue
+
+    toolsDeleteKeyValues(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsKeyValue]!
+
+}
