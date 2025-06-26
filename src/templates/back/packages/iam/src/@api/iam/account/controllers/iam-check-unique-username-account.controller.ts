@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { AuthenticationJwtGuard } from '@api/o-auth/shared';
+import { Auth } from '@aurora/decorators';
 import { IamCheckUniqueUsernameAccountHandler } from '../handlers/iam-check-unique-username-account.handler';
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/check-unique-username')
-@UseGuards(AuthenticationJwtGuard)
+@Auth()
 export class IamCheckUniqueUsernameAccountController
 {
     constructor(

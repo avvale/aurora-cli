@@ -1,10 +1,9 @@
 import { IamCheckUniqueUsernameAccountHandler } from '@api/iam/account';
-import { AuthenticationJwtGuard } from '@api/o-auth/shared';
-import { UseGuards } from '@nestjs/common';
+import { Auth } from '@aurora/decorators';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-@UseGuards(AuthenticationJwtGuard)
+@Auth()
 export class IamCheckUniqueUsernameAccountResolver
 {
     constructor(

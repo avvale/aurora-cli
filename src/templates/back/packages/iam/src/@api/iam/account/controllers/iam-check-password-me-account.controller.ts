@@ -2,13 +2,13 @@
 import { IamAccountResponse } from '@app/iam/account';
 import { IamCheckPasswordMeAccountHandler } from '../handlers/iam-check-password-me-account.handler';
 import { CurrentAccount } from '@aurorajs.dev/core';
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AuthenticationJwtGuard } from '@api/o-auth/shared';
+import { Auth } from '@aurora/decorators';
 
 @ApiTags('[iam] account')
 @Controller('iam/account/check-password-me')
-@UseGuards(AuthenticationJwtGuard)
+@Auth()
 export class IamCheckPasswordMeAccountController
 {
     constructor(
