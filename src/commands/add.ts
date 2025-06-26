@@ -148,57 +148,6 @@ export class Add extends Command
                     break;
                 }
 
-                case 'msEntraId': {
-                    await BackHandler.addPackage(addCommandState);
-
-                    ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@nestjs/passport', 'passport', 'passport-jwt', 'jwks-rsa']);
-                    ux.action.stop('Completed!');
-
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-
-                    // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(
-                        appModuleSourceFile,
-                        'ms-entra-id',
-                        ['MsEntraIdModule'],
-                    );
-
-                    appModuleSourceFile.saveSync();
-
-                    const authenticationDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
-
-                    // authentication.decorator.ts file, change Auth decorator
-                    ImportDriver.createImportItems(
-                        authenticationDecoratorSourceFile,
-                        '@api/ms-entra-id/ms-entra-id-authentication.guard',
-                        ['MsEntraIdAuthenticationGuard'],
-                    );
-
-                    // authorization.decorator.ts file, change Auth decorator
-                    ImportDriver.createImportItems(
-                        authenticationDecoratorSourceFile,
-                        '@api/ms-entra-id/ms-entra-id-authorization.guard',
-                        ['MsEntraIdAuthorizationGuard'],
-                    );
-
-                    const callExpression = CallExpressionDriver.findCallExpression(authenticationDecoratorSourceFile, 'UseGuards');
-                    if (callExpression)
-                    {
-                        CallExpressionDriver.removeAllArguments(callExpression);
-                        CallExpressionDriver.addArgument(callExpression, 'MsEntraIdAuthenticationGuard');
-                        CallExpressionDriver.addArgument(callExpression, 'MsEntraIdAuthorizationGuard');
-                    }
-
-                    authenticationDecoratorSourceFile.saveSync();
-
-                    ux.action.start('Generating graphql types');
-                    await exec('npm', ['run', 'graphql:types']);
-                    ux.action.stop('Completed!');
-                    break;
-                }
-
                 case 'common': {
                     await BackHandler.addPackage(addCommandState);
 
@@ -293,12 +242,64 @@ export class Add extends Command
                     const project = CommonDriver.createProject(['tsconfig.json']);
                     const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
                     Installer.declareBackPackageModule(appModuleSourceFile, 'message', ['MessageModule']);
+
                     appModuleSourceFile.saveSync();
 
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
                     ux.action.stop('Completed!');
 
+                    break;
+                }
+
+                case 'msEntraId': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@nestjs/passport', 'passport', 'passport-jwt', 'jwks-rsa']);
+                    ux.action.stop('Completed!');
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'ms-entra-id',
+                        ['MsEntraIdModule'],
+                    );
+
+                    appModuleSourceFile.saveSync();
+
+                    const authenticationDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+
+                    // authentication.decorator.ts file, change Auth decorator
+                    ImportDriver.createImportItems(
+                        authenticationDecoratorSourceFile,
+                        '@api/ms-entra-id/ms-entra-id-authentication.guard',
+                        ['MsEntraIdAuthenticationGuard'],
+                    );
+
+                    // authorization.decorator.ts file, change Auth decorator
+                    ImportDriver.createImportItems(
+                        authenticationDecoratorSourceFile,
+                        '@api/ms-entra-id/ms-entra-id-authorization.guard',
+                        ['MsEntraIdAuthorizationGuard'],
+                    );
+
+                    const callExpression = CallExpressionDriver.findCallExpression(authenticationDecoratorSourceFile, 'UseGuards');
+                    if (callExpression)
+                    {
+                        CallExpressionDriver.removeAllArguments(callExpression);
+                        CallExpressionDriver.addArgument(callExpression, 'MsEntraIdAuthenticationGuard');
+                        CallExpressionDriver.addArgument(callExpression, 'MsEntraIdAuthorizationGuard');
+                    }
+
+                    authenticationDecoratorSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed!');
                     break;
                 }
 
@@ -483,6 +484,22 @@ export class Add extends Command
                     break;
                 }
 
+                case 'tools': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(appModuleSourceFile, 'tools', ['ToolsModule']);
+
+                    appModuleSourceFile.saveSync();
+
+                    ux.action.start('Generating graphql types');
+                    await exec('npm', ['run', 'graphql:types']);
+                    ux.action.stop('Completed!');
+
+                    break;
+                }
+
                 case 'whatsapp': {
                     await BackHandler.addPackage(addCommandState);
 
@@ -534,6 +551,110 @@ export class Add extends Command
                     const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
                     Installer.declareFrontRouting(routesSourceFile, 'auditing');
                     routesSourceFile.saveSync();
+                    break;
+                }
+
+                case 'common': {
+                    await FrontHandler.addPackage(addCommandState);
+
+                    // add module in main navigation menu
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'common', 'commonNavigation');
+                    navigationSourceFile.saveSync();
+
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'common');
+                    routesSourceFile.saveSync();
+                    break;
+                }
+
+                case 'environments': {
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
+                    ArrayDriver.removeProviderArray(
+                        returnArray,
+                        'EnvironmentsInformationService',
+                    );
+
+                    auroraProviderSourceFile.saveSync();
+                    break;
+                }
+
+                case 'iam': {
+                    await FrontHandler.addPackage(addCommandState);
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'iam', 'iamNavigation');
+                    navigationSourceFile.saveSync();
+
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'iam');
+                    routesSourceFile.saveSync();
+
+                    // aurora.providers.ts
+                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
+                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                        auroraProviderSourceFile,
+                        'provideAurora',
+                    );
+
+                    // TODO, comprobar si hace falta borrar AuthorizationService
+                    // remove AuthorizationService, will be replaced by AuthorizationAzureAdAdapterService defined in provideAzureAd()
+                    /* ArrayDriver.removeProviderArray(
+                        returnArray,
+                        'AuthorizationService',
+                    ); */
+
+                    if (!ImportDriver.hasImportDeclarations(auroraProviderSourceFile, 'UserMetaStorageIamAdapterService'))
+                    {
+                        ImportDriver.createImportItems(
+                            auroraProviderSourceFile,
+                            'app/modules/admin/apps/iam',
+                            ['UserMetaStorageIamAdapterService'],
+                        );
+                    }
+
+                    // change UserMetaStorageService
+                    ArrayDriver.changeProviderArray(
+                        returnArray,
+                        'UserMetaStorageService',
+                        'UserMetaStorageIamAdapterService',
+                    );
+
+                    // change IamService
+                    ArrayDriver.changeProviderArray(
+                        returnArray,
+                        'IamService',
+                        'IamAuroraAdapterService',
+                    );
+
+                    auroraProviderSourceFile.saveSync();
+                    break;
+                }
+
+                case 'message': {
+                    await FrontHandler.addPackage(addCommandState);
+
+                    // add module in main navigation menu
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'message', 'messageNavigation');
+                    navigationSourceFile.saveSync();
+
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'message');
+                    routesSourceFile.saveSync();
+
                     break;
                 }
 
@@ -720,110 +841,6 @@ export class Add extends Command
                     break;
                 }
 
-                case 'common': {
-                    await FrontHandler.addPackage(addCommandState);
-
-                    // add module in main navigation menu
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'common', 'commonNavigation');
-                    navigationSourceFile.saveSync();
-
-                    // add lazy loading module to app routes
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
-                    Installer.declareFrontRouting(routesSourceFile, 'common');
-                    routesSourceFile.saveSync();
-                    break;
-                }
-
-                case 'environments': {
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-
-                    // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
-                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
-                        auroraProviderSourceFile,
-                        'provideAurora',
-                    );
-                    ArrayDriver.removeProviderArray(
-                        returnArray,
-                        'EnvironmentsInformationService',
-                    );
-
-                    auroraProviderSourceFile.saveSync();
-                    break;
-                }
-
-                case 'iam': {
-                    await FrontHandler.addPackage(addCommandState);
-
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'iam', 'iamNavigation');
-                    navigationSourceFile.saveSync();
-
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
-                    Installer.declareFrontRouting(routesSourceFile, 'iam');
-                    routesSourceFile.saveSync();
-
-                    // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
-                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
-                        auroraProviderSourceFile,
-                        'provideAurora',
-                    );
-
-                    // TODO, comprobar si hace falta borrar AuthorizationService
-                    // remove AuthorizationService, will be replaced by AuthorizationAzureAdAdapterService defined in provideAzureAd()
-                    /* ArrayDriver.removeProviderArray(
-                        returnArray,
-                        'AuthorizationService',
-                    ); */
-
-                    if (!ImportDriver.hasImportDeclarations(auroraProviderSourceFile, 'UserMetaStorageIamAdapterService'))
-                    {
-                        ImportDriver.createImportItems(
-                            auroraProviderSourceFile,
-                            'app/modules/admin/apps/iam',
-                            ['UserMetaStorageIamAdapterService'],
-                        );
-                    }
-
-                    // change UserMetaStorageService
-                    ArrayDriver.changeProviderArray(
-                        returnArray,
-                        'UserMetaStorageService',
-                        'UserMetaStorageIamAdapterService',
-                    );
-
-                    // change IamService
-                    ArrayDriver.changeProviderArray(
-                        returnArray,
-                        'IamService',
-                        'IamAuroraAdapterService',
-                    );
-
-                    auroraProviderSourceFile.saveSync();
-                    break;
-                }
-
-                case 'message': {
-                    await FrontHandler.addPackage(addCommandState);
-
-                    // add module in main navigation menu
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'message', 'messageNavigation');
-                    navigationSourceFile.saveSync();
-
-                    // add lazy loading module to app routes
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
-                    Installer.declareFrontRouting(routesSourceFile, 'message');
-                    routesSourceFile.saveSync();
-
-                    break;
-                }
-
                 case 'oAuth': {
                     await FrontHandler.addPackage(addCommandState);
 
@@ -884,6 +901,23 @@ export class Add extends Command
                     const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
                     Installer.declareFrontRouting(routesSourceFile, 'settings');
                     routesSourceFile.saveSync();
+                    break;
+                }
+
+                case 'tools': {
+                    await FrontHandler.addPackage(addCommandState);
+
+                    // add module in main navigation menu
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
+                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'tools', 'toolsNavigation');
+                    navigationSourceFile.saveSync();
+
+                    // add lazy loading module to app routes
+                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    Installer.declareFrontRouting(routesSourceFile, 'tools');
+                    routesSourceFile.saveSync();
+
                     break;
                 }
 
