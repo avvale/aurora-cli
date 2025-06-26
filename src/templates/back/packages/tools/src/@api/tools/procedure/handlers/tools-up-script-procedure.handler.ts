@@ -37,6 +37,7 @@ export class ToolsUpScriptProcedureHandler
             {
                 id         : procedure.id,
                 isInstalled: true,
+                isUpdated  : false,
                 executedAt : now().tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
             },
             {},

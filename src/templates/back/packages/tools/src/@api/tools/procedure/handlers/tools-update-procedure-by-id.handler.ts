@@ -28,6 +28,11 @@ export class ToolsUpdateProcedureByIdHandler
 
         const dataToUpdate = diff(payload, procedure);
 
+        if ('upScript' in dataToUpdate)
+        {
+            dataToUpdate.isUpdated = true;
+        }
+
         await this.commandBus.dispatch(new ToolsUpdateProcedureByIdCommand(
             {
                 ...dataToUpdate,

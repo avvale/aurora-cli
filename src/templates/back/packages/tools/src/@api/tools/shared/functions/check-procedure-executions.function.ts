@@ -1,3 +1,4 @@
+import { ToolsRawSQLInformationSchemaCommand } from '@app/tools/information-schema';
 import { ToolsGetProceduresQuery } from '@app/tools/procedure';
 import { getPackageFile, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { ModuleRef } from '@nestjs/core';
@@ -25,6 +26,6 @@ export const checkProcedureExecutions = async (
     for (const procedure of proceduresInVersion)
     {
         // eslint-disable-next-line no-await-in-loop
-       //  await commandBus.dispatch(new ToolsRawSQLProcedureCommand(procedure.upScript));
+        await commandBus.dispatch(new ToolsRawSQLInformationSchemaCommand(procedure.upScript));
     }
 };
