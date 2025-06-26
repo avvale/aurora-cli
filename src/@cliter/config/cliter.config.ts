@@ -325,6 +325,7 @@ export const cliterConfig: CliterConfig =
         'queueManager',
         'storageAccount',
         'storageAccountAzure',
+        'tools',
         'whatsapp',
     ],
     frontPackages: [
@@ -337,6 +338,7 @@ export const cliterConfig: CliterConfig =
         'oAuth',
         'queueManager',
         'settings',
+        'tools',
         'whatsapp',
     ],
 };
