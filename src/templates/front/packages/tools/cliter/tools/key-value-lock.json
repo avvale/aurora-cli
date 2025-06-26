@@ -1,0 +1,53 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/app/modules/admin/apps/tools/tools.component.html",
+            "integrity": "sha1:a6aab421500581830708e34385e2166e7a039ba7"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/tools.component.ts",
+            "integrity": "sha1:66dd95180dca167c44eaa08806590f37ced9d24b"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/key-value-detail.component.html",
+            "integrity": "sha1:18cca6327bb21cf760a2b4556052d3838b86eafd"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/key-value-detail.component.ts",
+            "integrity": "sha1:cee3766618a1076e8c1ab053833d24725449367f"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/key-value-list.component.html",
+            "integrity": "sha1:13b87f75abd64b0296194f92302ab5c29176e81c"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/key-value-list.component.ts",
+            "integrity": "sha1:1ec035ab3ec70aef8bad2d57aa439b369d47c28c"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/key-value.columns-config.ts",
+            "integrity": "sha1:e12858467a5e08bbd109c5d53700d5da6aa79f7f"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/key-value.graphql.ts",
+            "integrity": "sha1:c1c7d918b98454efd586fafc7492daaad18c12ba"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/key-value.resolvers.ts",
+            "integrity": "sha1:eca7f175ba1778cfd61b964edbe85470857e8fcf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/key-value.service.ts",
+            "integrity": "sha1:606e6d100c0c250981ec4a4c7c110d8dd0aca587"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/key-value/public-api.ts",
+            "integrity": "sha1:4a6558c54b3525198673bcd46a5b3fc780cf0322"
+        }
+    ]
+}

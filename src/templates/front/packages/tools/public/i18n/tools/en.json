@@ -1,0 +1,30 @@
+{
+    "CheckedAt": "Checked",
+    "Description": "Description",
+    "DownScript": "DownScript",
+    "ExecutedAt": "Executed",
+    "InstallScript": "Install Script",
+    "InstallWarning": "You are about to install the {{ name }} script. Make sure you understand the implications before proceeding.",
+    "IsActive": "Is active",
+    "IsInstalled": "Isntalled",
+    "IsUpdated": "IsUpdated",
+    "Key": "Key",
+    "KeyValue": "KeyValue",
+    "KeyValues": "KeyValues",
+    "Name": "Name",
+    "Procedure": "Procedure",
+    "ProcedureTypeOptions": {
+        "FUNCTION": "Function",
+        "PROCEDURE": "Procedure",
+        "TRIGGER": "Trigger"
+    },
+    "Procedures": "Procedures",
+    "Script": "Script",
+    "Sort": "Sort",
+    "Type": "Type",
+    "UninstallScript": "Uninstall Script",
+    "UninstallWarning": "You are about to uninstall the {{ name }} script. Make sure you understand the implications before proceeding.",
+    "UpScript": "UpScript",
+    "Value": "Value",
+    "Version": "Version"
+}

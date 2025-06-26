@@ -1,0 +1,230 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    fontSet="material-symbols-outlined"
+                    class="icon-size-8 mr-2"
+                >
+                    flowsheet
+                </mat-icon>
+                {{ t('tools.Procedure') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            @if (currentViewAction.id === 'tools::procedure.detail.edit')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    class="ml-3"
+                    form="toolsProcedureFormDetail"
+                    color="accent"
+                    [disabled]="fg.pristine || ('tools::procedure.detail.update' | getSpinnerFlag | async)"
+                >
+                    @if ('tools::procedure.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:edit"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Update') }}
+                </button>
+            }
+
+            @if (currentViewAction.id === 'tools::procedure.detail.new')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    form="toolsProcedureFormDetail"
+                    class="ml-3"
+                    color="accent"
+                    [disabled]="fg.pristine || ('tools::procedure.detail.create' | getSpinnerFlag | async)"
+                >
+                    @if ('tools::procedure.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:save"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Create') }}
+                </button>
+            }
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="toolsProcedureFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('Name') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="name"
+                            maxlength="128"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.name | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('tools.Type') }}</mat-label>
+                        <mat-select
+                            formControlName="type"
+                        >
+                            @for (type of toolsProcedureType | keyvalue; track type.key)
+                            {
+                                <mat-option [value]="type.key">
+                                    {{ t('tools.ProcedureTypeOptions.' + type.value) }}
+                                </mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>{{ formErrors?.type | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-3"
+                    >
+                        <mat-label>{{ t('tools.Version') }}</mat-label>
+                        <au-version-input formControlName="version"/>
+                        <mat-error>{{ formErrors?.version | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-2"
+                    >
+                        <mat-label>{{ t('Sort') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="sort"
+                            type="number"
+                        >
+                        <mat-error>{{ formErrors?.sort | async }}</mat-error>
+                    </mat-form-field>
+                    <div class="col-3 pt-5">
+                        <mat-checkbox
+                            formControlName="isActive"
+                        >
+                            {{ t('tools.IsActive') }}
+                        </mat-checkbox>
+                    </div>
+
+                    @if (currentViewAction.id !== 'tools::procedure.detail.new')
+                    {
+                        <div class="col-12">
+                            <button
+                                mat-flat-button
+                                class="ml-3"
+                                color="accent"
+                                (click)="
+                                    actionService.action({
+                                        id          : 'tools::procedure.detail.upScript',
+                                        isViewAction: false
+                                    })
+                                "
+                            >
+                                <mat-icon class="icon-size-5 mr-2">
+                                    extension
+                                </mat-icon>
+                                {{ t('tools.InstallScript') }}
+                            </button>
+                        </div>
+                    }
+                    <au-mat-form-field-appearance
+                        [label]="t('tools.UpScript')"
+                        class="col-12"
+                    >
+                        <ngx-monaco-editor
+                            class="w-full mt-2"
+                            [options]="editorOptions"
+                            formControlName="upScript"
+                        >
+                        </ngx-monaco-editor>
+                    </au-mat-form-field-appearance>
+
+                    @if (currentViewAction.id !== 'tools::procedure.detail.new')
+                    {
+                        <div class="col-12 mt-4">
+                            <button
+                                mat-flat-button
+                                class="ml-3"
+                                color="accent"
+                                (click)="
+                                    actionService.action({
+                                        id          : 'tools::procedure.detail.downScript',
+                                        isViewAction: false
+                                    })
+                                "
+                            >
+                                <mat-icon class="icon-size-5 mr-2">
+                                    extension_off
+                                </mat-icon>
+                                {{ t('tools.UninstallScript') }}
+                            </button>
+                        </div>
+                    }
+                    <au-mat-form-field-appearance
+                        [label]="t('tools.DownScript')"
+                        class="col-12"
+                    >
+                        <ngx-monaco-editor
+                            class="w-full mt-2"
+                            [options]="editorOptions"
+                            formControlName="downScript"
+                        >
+                        </ngx-monaco-editor>
+                    </au-mat-form-field-appearance>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>

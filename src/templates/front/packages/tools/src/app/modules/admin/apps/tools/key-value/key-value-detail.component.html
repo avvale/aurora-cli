@@ -1,0 +1,170 @@
+<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    fontSet="material-symbols-outlined"
+                    class="icon-size-8 mr-2"
+                >
+                    data_object
+                </mat-icon>
+                {{ t('tools.KeyValue') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            @if (currentViewAction.id === 'tools::keyValue.detail.edit')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    class="ml-3"
+                    form="toolsKeyValueFormDetail"
+                    color="accent"
+                    [disabled]="fg.pristine || ('tools::keyValue.detail.update' | getSpinnerFlag | async)"
+                >
+                    @if ('tools::keyValue.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:edit"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Update') }}
+                </button>
+            }
+
+            @if (currentViewAction.id === 'tools::keyValue.detail.new')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    form="toolsKeyValueFormDetail"
+                    class="ml-3"
+                    color="accent"
+                    [disabled]="fg.pristine || ('tools::keyValue.detail.create' | getSpinnerFlag | async)"
+                >
+                    @if ('tools::keyValue.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:save"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Create') }}
+                </button>
+            }
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="toolsKeyValueFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-8"
+                    >
+                        <mat-label>{{ t('tools.Key') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="key"
+                            maxlength="64"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.key | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-4"
+                    >
+                        <mat-label>{{ t('tools.Type') }}</mat-label>
+                        <mat-select
+                            formControlName="type"
+                        >
+                            <mat-option value="STRING">STRING</mat-option>
+                            <mat-option value="BOOLEAN">BOOLEAN</mat-option>
+                            <mat-option value="NUMBER">NUMBER</mat-option>
+                            <mat-option value="DATE">DATE</mat-option>
+                            <mat-option value="TIME">TIME</mat-option>
+                            <mat-option value="TIMESTAMP">TIMESTAMP</mat-option>
+                            <mat-option value="OBJECT">OBJECT</mat-option>
+                            <mat-option value="ARRAY">ARRAY</mat-option>
+                        </mat-select>
+                        <mat-error>{{ formErrors?.type | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('tools.Value') }}</mat-label>
+                        <textarea
+                            matInput
+                            formControlName="value"
+                        >
+                        </textarea>
+                        <mat-error>{{ formErrors?.value | async }}</mat-error>
+                    </mat-form-field>
+                    <div class="col-4 pt-5">
+                        <mat-checkbox
+                            formControlName="isActive"
+                        >
+                            {{ t('tools.IsActive') }}
+                        </mat-checkbox>
+                    </div>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('tools.Description') }}</mat-label>
+                        <textarea
+                            matInput
+                            formControlName="description"
+                        >
+                        </textarea>
+                        <mat-error>{{ formErrors?.description | async }}</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>
