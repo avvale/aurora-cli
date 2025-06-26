@@ -7,7 +7,7 @@ import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('[tools] procedure')
 @Controller('tools/procedure/down-script')
-@Auth('tools.procedure.update')
+@Auth('tools.procedure.execution')
 export class ToolsDownScriptProcedureController
 {
     constructor(

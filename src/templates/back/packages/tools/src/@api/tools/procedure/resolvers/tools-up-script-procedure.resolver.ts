@@ -4,7 +4,7 @@ import { Timezone } from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-@Auth('tools.procedure.update')
+@Auth('tools.procedure.execution')
 export class ToolsUpScriptProcedureResolver
 {
     constructor(

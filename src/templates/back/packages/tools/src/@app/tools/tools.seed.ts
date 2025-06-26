@@ -25,4 +25,5 @@ export const permissions = [
     { id: 'b32cfcb6-130f-4d25-aff4-b008ce7dad04',  name: 'tools.procedure.update',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
     { id: '63bca7f7-2fdf-444e-a2c9-f9b0827da952',  name: 'tools.procedure.upsert',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
     { id: '4f3b0b10-8d1f-4d61-b2f4-407486778309',  name: 'tools.procedure.delete',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
+    { id: 'e58f7e5f-bd4d-461e-8768-eeebf137fc64',  name: 'tools.procedure.execution',   boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
 ];
