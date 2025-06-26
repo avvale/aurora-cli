@@ -26,6 +26,7 @@
     "notifications": "Notifications",
     "outBoxNotifications": "OutBoxNotifications",
     "permissions": "Permissions",
+    "procedures": "Procedures",
     "queues": "Queues",
     "refreshTokens": "Refresh Tokens",
     "resources": "Resources",

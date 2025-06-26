@@ -1,0 +1,27 @@
+<span class="ml-2 font-mono text-gray-500 text-xl">v</span>
+<input
+    #majorInput
+    matInput
+    maxlength="3"
+    [formControl]="majorCtrl"
+    (keydown)="onKey($event, 'major')"
+    class="inline w-7 text-center ml-2"
+/>
+.
+<input
+    #minorInput
+    matInput
+    maxlength="3"
+    [formControl]="minorCtrl"
+    (keydown)="onKey($event, 'minor')"
+    class="inline w-7 text-center"
+/>
+.
+<input
+    #patchInput
+    matInput
+    maxlength="3"
+    [formControl]="patchCtrl"
+    (keydown)="onKey($event, 'patch')"
+    class="inline w-7 text-center"
+/>

@@ -1,18 +1,20 @@
-import { EnvironmentProviders, inject, provideAppInitializer, Provider } from '@angular/core';
+import { EnvironmentProviders, importProvidersFrom, inject, provideAppInitializer, Provider } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { AuroraGridManagerService, AuthenticationAuroraAdapterService, AuthenticationDisabledAdapterGuard, AuthenticationMockAdapterService, AuthenticationService, AuthorizationDisabledService, AuthorizationService, COMPACT_NAVIGATION, compactNavigation, DatePickerDayjsAdapter, DatePickerDayjsFormats, DateTimePickerDayjsAdapter, DatetimePickerDayjsFormats, DEFAULT_NAVIGATION, defaultNavigation, EnvironmentsInformationMockAdapterService, EnvironmentsInformationService, FUTURISTIC_NAVIGATION, futuristicNavigation, GridManagerService, HORIZONTAL_NAVIGATION, horizontalNavigation, IamAuroraAdapterService, IamMockAdapterService, IamService, InitializerService, PaginatorIntlService, provideApollo, provideApolloErrorTranslations, provideCustomIcons, provideValidationMessages, SessionLocalStorageService, SessionService, UserMetaStorageLocalStorageAdapterService, UserMetaStorageService } from '@aurora';
 import '@aurora/aurora.prototypes';
-import { AuthGuard } from '@core/auth';
 import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
+import { provideMonacoEditor } from 'ngx-monaco-editor-v2';
+
 export const provideAurora = (): Array<Provider | EnvironmentProviders> =>
 {
     return [
         provideApollo(),
-        provideValidationMessages(),
         provideApolloErrorTranslations(),
-        provideCustomIcons(),
         provideAppInitializer(() => inject(InitializerService).bootstrapInitializer()),
+        provideValidationMessages(),
+        provideCustomIcons(),
+        provideMonacoEditor(),
         {
             provide : MatPaginatorIntl,
             useClass: PaginatorIntlService,

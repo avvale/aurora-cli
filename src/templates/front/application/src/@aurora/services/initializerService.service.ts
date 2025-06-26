@@ -17,12 +17,10 @@ export class InitializerService
         private readonly translocoService: TranslocoService,
     ) {}
 
+    // TODO, VERIFICAR INICIO ENTRA ID, el código de la función bootstrapInitializer no funciona con
+    // MS entra ID, hay que pasar todo el código a la función resolverInitializer, hay que investigar
+    // method to initialize the application, before to check permission routes
     async bootstrapInitializer(): Promise<boolean>
-    {
-        return true;
-    }
-
-    async resolverInitializer(): Promise<void>
     {
         this.checkEnvironmentSchema(environment);
 
@@ -34,7 +32,9 @@ export class InitializerService
         await this.sessionService.loadMinimumData();
 
         // check token to request user
-        if (await lastValueFrom(this.authenticationService.check()))
+        const isAuthenticated = await lastValueFrom(this.authenticationService.check());
+
+        if (isAuthenticated)
         {
             // get user from iam service
             const response = await lastValueFrom(this.iamService.get());
@@ -53,6 +53,13 @@ export class InitializerService
         }
 
         log('[DEBUG] InitializerService Initialized');
+
+        return true;
+    }
+
+    async resolverInitializer(): Promise<void>
+    {
+        return;
     }
 
     private checkEnvironmentSchema(env: Environment): void

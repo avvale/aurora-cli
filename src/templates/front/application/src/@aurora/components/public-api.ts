@@ -37,4 +37,4 @@ export * from './template-dialog';
 export * from './title';
 export * from './user-meta-storage';
 export * from './validation-messages';
-
+export * from './version-input';
