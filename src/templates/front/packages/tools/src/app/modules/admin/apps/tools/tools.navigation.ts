@@ -5,6 +5,9 @@ export const toolsNavigation: FuseNavigationItem = {
     title   : 'Tools',
     type    : 'collapsable',
     icon    : 'mat_outline:construction',
+    meta : {
+        permission: 'tools.access',
+    },
     children: [
         {
             id         : 'keyValues',
@@ -13,6 +16,9 @@ export const toolsNavigation: FuseNavigationItem = {
             iconFontSet: 'material-symbols-outlined',
             icon       : 'data_object',
             link       : '/tools/key-value',
+            meta : {
+                permission: 'tools.keyValue.access',
+            },
         },
         {
             id         : 'procedures',
@@ -21,6 +27,9 @@ export const toolsNavigation: FuseNavigationItem = {
             iconFontSet: 'material-symbols-outlined',
             icon       : 'flowsheet',
             link       : '/tools/procedure',
+            meta : {
+                permission: 'tools.procedure.access',
+            },
         },
     ],
 };
