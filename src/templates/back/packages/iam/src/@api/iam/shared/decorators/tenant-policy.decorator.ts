@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { IamAccountResponse } from '@app/iam/account';
-import { Utils } from '@aurorajs.dev/core';
+import { Arrays } from '@aurorajs.dev/core';
 
 // checks that the tenantId field is present in the received payloads
 // and that the value of tenantId sent, the user has access to that tenant
@@ -41,11 +41,22 @@ export const TenantPolicy = ({
                         if (!item[targetProperty]) throw new BadRequestException(`The ${targetProperty} property not found in payload, maybe has to set payloadIndex or targetProperty arguments of TenantPolicy decorator`);
                         if (isArray)
                         {
-                            if (!Utils.arraysIntersects(account.dTenants, item[targetProperty])) throw new UnauthorizedException(`Not allowed operate this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
+                            if (!Arrays.contained(item[targetProperty], account.dTenants)) throw new UnauthorizedException({
+                                statusCode : 401,
+                                message    : 'Not allowed operate this item on select tenants, please contact the administrator.',
+                                translation: 'error.107',
+                                params     : { tenant: args[payloadIndex][targetProperty] },
+                            });
                         }
                         else
                         {
-                            if (account.dTenants.indexOf(item[targetProperty]) === -1) throw new UnauthorizedException(`Not allowed operate this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
+                            if (account.dTenants.indexOf(item[targetProperty]) === -1)
+                                throw new UnauthorizedException({
+                                    statusCode : 401,
+                                    message    : 'Not allowed operate this item on select tenants, please contact the administrator.',
+                                    translation: 'error.107',
+                                    params     : { tenant: args[payloadIndex][targetProperty] },
+                                });
                         }
                     }
                 }
@@ -55,11 +66,23 @@ export const TenantPolicy = ({
                     if (!args[payloadIndex][targetProperty]) throw new BadRequestException(`The ${targetProperty} property not found in payload, maybe has to set payloadIndex or targetProperty arguments of TenantPolicy decorator`);
                     if (isArray)
                     {
-                        if (!Utils.arraysIntersects(account.dTenants, args[payloadIndex][targetProperty])) throw new UnauthorizedException(`Not allowed operate this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
+                        if (!Arrays.contained(args[payloadIndex][targetProperty], account.dTenants))
+                            throw new UnauthorizedException({
+                                statusCode : 401,
+                                message    : 'Not allowed operate this item on select tenants, please contact the administrator.',
+                                translation: 'error.107',
+                                params     : { tenant: args[payloadIndex][targetProperty] },
+                            });
                     }
                     else
                     {
-                        if (account.dTenants.indexOf(args[payloadIndex][targetProperty]) === -1) throw new UnauthorizedException(`Not allowed operate this item on the tenant ${args[payloadIndex][targetProperty]}, please contact the administrator`);
+                        if (account.dTenants.indexOf(args[payloadIndex][targetProperty]) === -1)
+                            throw new UnauthorizedException({
+                                statusCode : 401,
+                                message    : 'Not allowed operate this item on select tenants, please contact the administrator.',
+                                translation: 'error.107',
+                                params     : { tenant: args[payloadIndex][targetProperty] },
+                            });
                     }
                 }
 

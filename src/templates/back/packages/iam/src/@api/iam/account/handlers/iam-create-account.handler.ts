@@ -1,33 +1,32 @@
 import { IamAccount, IamCreateAccountInput } from '@api/graphql';
 import { createAccount, IamAccountDto, IamCreateAccountDto } from '@api/iam/account';
-import { AuditingMeta, ICommandBus, IQueryBus, LiteralObject } from '@aurorajs.dev/core';
+import { IamAccountResponse } from '@app/iam/account';
+import { AuditingMeta, LiteralObject } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { ModuleRef } from '@nestjs/core';
 
 @Injectable()
 export class IamCreateAccountHandler
 {
     constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-        private readonly jwtService: JwtService,
+        private readonly moduleRef: ModuleRef,
     ) {}
 
     async main(
+        account: IamAccountResponse,
         payload: IamCreateAccountInput | IamCreateAccountDto,
         headers: LiteralObject,
         timezone?: string,
         auditing?: AuditingMeta,
     ): Promise<IamAccount | IamAccountDto>
     {
-        return createAccount(
-            this.commandBus,
-            this.queryBus,
-            this.jwtService,
+        return createAccount({
+            moduleRef: this.moduleRef,
             payload,
+            account,
             headers,
             timezone,
             auditing,
-        );
+        });
     }
 }

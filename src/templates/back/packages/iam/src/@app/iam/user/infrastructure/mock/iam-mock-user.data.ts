@@ -1,5 +1,5 @@
 // ignored file
-export const iamMockUserData = [
+export const iamMockUserData: any[] = [
     // user demo
     {
         id                              : 'b94dd025-c538-4a37-b852-a7fee35a3561',

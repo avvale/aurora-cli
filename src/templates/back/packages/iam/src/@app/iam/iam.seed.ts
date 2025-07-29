@@ -23,6 +23,7 @@ export const boundedContexts = [
 export const permissions = [
 
     { id: '5960b260-721b-4f37-8bfa-d6784f573394',  name: 'aurora.access',                            boundedContextId: 'f405132f-786d-4a6a-a262-0e6a6518aec3', roleIds: []},
+    { id: '13666f9f-7a4f-45ec-9c8a-d11f2419b80d',  name: 'aurora.sudo',                              boundedContextId: 'f405132f-786d-4a6a-a262-0e6a6518aec3', roleIds: []},
 
     { id: 'c3f07181-ef34-4905-94fc-8c8af191153c',  name: 'iam.access',                               boundedContextId: '9e8dbba3-b82b-406f-b71f-060a0494ffba', roleIds: []},
 

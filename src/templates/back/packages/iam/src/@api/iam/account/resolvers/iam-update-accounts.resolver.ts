@@ -1,7 +1,8 @@
 import { IamAccount, IamUpdateAccountsInput } from '@api/graphql';
 import { IamUpdateAccountsHandler } from '@api/iam/account';
+import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Auditing, AuditingMeta, CurrentAccount, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
@@ -14,6 +15,7 @@ export class IamUpdateAccountsResolver
 
     @Mutation('iamUpdateAccounts')
     async main(
+        @CurrentAccount() account: IamAccountResponse,
         @Args('payload') payload: IamUpdateAccountsInput,
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
@@ -22,6 +24,7 @@ export class IamUpdateAccountsResolver
     ): Promise<IamAccount>
     {
         return await this.handler.main(
+            account,
             payload,
             queryStatement,
             constraint,

@@ -1,25 +1,42 @@
 import { IamAccount, IamAccountType, IamCreateAccountInput } from '@api/graphql';
 import { IamAccountDto, IamCreateAccountDto } from '@api/iam/account';
-import { IamCreateAccountCommand, IamFindAccountByIdQuery, IamGetAccountsQuery } from '@app/iam/account';
+import { IamAccountResponse, IamCreateAccountCommand, IamFindAccountByIdQuery, IamGetAccountsQuery } from '@app/iam/account';
+import { IamPermissions } from '@app/iam/iam.types';
 import { IamGetRolesQuery } from '@app/iam/role';
 import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
 import { IamGetTenantsQuery } from '@app/iam/tenant';
 import { IamCreateUserCommand } from '@app/iam/user';
 import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
-import { AuditingMeta, getNestedObjectsFromParentId, ICommandBus, IQueryBus, Jwt, LiteralObject, Operator, uuid } from '@aurorajs.dev/core';
-import { ConflictException } from '@nestjs/common';
+import { Arrays, AuditingMeta, getNestedObjectsFromParentId, ICommandBus, IQueryBus, LiteralObject, Operator, uuid } from '@aurorajs.dev/core';
+import { BadRequestException, ConflictException } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 
 export const createAccount = async (
-    commandBus: ICommandBus,
-    queryBus: IQueryBus,
-    jwtService: JwtService,
-    payload: IamCreateAccountInput | IamCreateAccountDto,
-    headers: LiteralObject,
-    timezone?: string,
-    auditing?: AuditingMeta,
+    {
+        moduleRef = null,
+        payload = null,
+        account = null,
+        headers = null,
+        timezone = null,
+        auditing = null,
+    }: {
+        moduleRef?: ModuleRef;
+        payload?: IamCreateAccountInput | IamCreateAccountDto;
+        account?: IamAccountResponse;
+        headers?: LiteralObject;
+        timezone?: string;
+        auditing?: AuditingMeta;
+    } = {},
 ): Promise<IamAccount | IamAccountDto> =>
 {
+    if (!moduleRef) throw new BadRequestException('moduleRef parameter is required');
+    if (!payload) throw new BadRequestException('payload parameter is required');
+
+    const queryBus = moduleRef.get(IQueryBus, { strict: false });
+    const commandBus = moduleRef.get(ICommandBus, { strict: false });
+    const jwtService = moduleRef.get(JwtService, { strict: false });
+
     const accountQueryWhere = { username: payload.username };
     if (payload.code) accountQueryWhere['code'] = payload.code;
     if (payload.email) accountQueryWhere['email'] = payload.email;
@@ -37,30 +54,30 @@ export const createAccount = async (
         if (accounts.some(client => client.email === payload.email))
         {
             throw new ConflictException({
-                message   : `The email ${payload.email} already exists`,
-                statusCode: 102,
+                message    : `The email ${payload.email} already exists`,
+                translation: 'error.102',
             });
         }
 
         if (accounts.some(client => client.code === payload.code))
         {
             throw new ConflictException({
-                message   : `The code ${payload.code} already exists`,
-                statusCode: 103,
+                message    : `The code ${payload.code} already exists`,
+                translation: 'error.103',
             });
         }
 
         if (accounts.some(client => client.username === payload.username))
         {
             throw new ConflictException({
-                message   : `The username ${payload.username} already exists in the database`,
-                statusCode: 101,
+                message    : `The username ${payload.username} already exists in the database`,
+                translation: 'error.101',
             });
         }
     }
 
     // check token is correct
-    <Jwt>jwtService.decode(headers.authorization.replace('Bearer ', ''));
+    jwtService.decode(headers.authorization.replace('Bearer ', ''));
 
     // get client to get applications related FindClientByIdQuery
     const client = await queryBus.ask(new OAuthFindClientByIdQuery(
@@ -86,6 +103,19 @@ export const createAccount = async (
         ],
     }));
 
+    const permissions = iamCreatePermissionsFromRoles(roles);
+
+    if (
+        !account.dPermissions.includes(IamPermissions.SUDO) &&
+        !Arrays.contained(permissions.all, account.dPermissions.all)
+    )
+    {
+        throw new ConflictException({
+            message    : 'Your account does not have the required permissions to create an account with the specified roles.',
+            statusCode : 401,
+            translation: 'error.105',
+        });
+    }
 
     if (payload.hasAddChildTenants)
     {
@@ -122,7 +152,7 @@ export const createAccount = async (
             tags             : payload.tags,
             scopes           : payload.scopes,
             dApplicationCodes: client?.applications.map(application => application.code),
-            dPermissions     : iamCreatePermissionsFromRoles(roles),
+            dPermissions     : permissions,
             meta             : payload.meta,
             roleIds          : payload.roleIds,
             tenantIds        : payload.tenantIds,

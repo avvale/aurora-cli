@@ -1,12 +1,13 @@
 import { IamAccount, IamAccountType, IamUpdateAccountByIdInput } from '@api/graphql';
 import { IamAccountDto, IamUpdateAccountByIdDto } from '@api/iam/account';
-import { IamFindAccountByIdQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
+import { IamAccountResponse, IamFindAccountByIdQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
+import { IamPermissions } from '@app/iam/iam.types';
 import { IamGetRolesQuery } from '@app/iam/role';
 import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
 import { IamGetTenantsQuery } from '@app/iam/tenant';
 import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff, getNestedObjectsFromParentId, uuid } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Arrays, AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff, getNestedObjectsFromParentId, uuid } from '@aurorajs.dev/core';
+import { ConflictException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateAccountByIdHandler
@@ -17,13 +18,14 @@ export class IamUpdateAccountByIdHandler
     ) {}
 
     async main(
+        account: IamAccountResponse,
         payload: IamUpdateAccountByIdInput | IamUpdateAccountByIdDto,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
     ): Promise<IamAccount | IamAccountDto>
     {
-        const account = await this.queryBus.ask(new IamFindAccountByIdQuery(
+        const accountToUpdate = await this.queryBus.ask(new IamFindAccountByIdQuery(
             payload.id,
             constraint,
             {
@@ -31,7 +33,10 @@ export class IamUpdateAccountByIdHandler
             },
         ));
 
-        const dataToUpdate = diff(payload, account);
+        const dataToUpdate = diff(payload, accountToUpdate);
+
+        // always delete dPermissions to avoid update it
+        delete dataToUpdate.dPermissions;
 
         if ('tags' in dataToUpdate)
         {
@@ -53,7 +58,21 @@ export class IamUpdateAccountByIdHandler
                 include: ['permissions'],
             }));
 
-            dataToUpdate['dPermissions'] = iamCreatePermissionsFromRoles(roles);
+            const permissions = iamCreatePermissionsFromRoles(roles);
+
+            if (
+                !account.dPermissions.includes(IamPermissions.SUDO) &&
+                !Arrays.contained(permissions.all, account.dPermissions.all)
+            )
+            {
+                throw new ConflictException({
+                    message    : 'The account does not have the required permissions to update the account with the specified roles.',
+                    statusCode : 401,
+                    translation: 'error.106',
+                });
+            }
+
+            dataToUpdate['dPermissions'] = permissions;
         }
 
         // if hasAddChildTenants, we need to get all children tenants, even if tenants doesn't changed
@@ -103,7 +122,7 @@ export class IamUpdateAccountByIdHandler
             },
         ));
 
-        if (account.type === IamAccountType.USER)
+        if (accountToUpdate.type === IamAccountType.USER)
         {
             const user = await this.queryBus.ask(new IamFindUserByIdQuery(
                 payload.user.id,

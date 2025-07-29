@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { IamAccountDto, IamUpdateAccountByIdDto, IamUpdateAccountByIdHandler } from '@api/iam/account';
+import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import { Auditing, AuditingMeta, CurrentAccount, QueryStatement, Timezone } from '@aurorajs.dev/core';
 import { Body, Controller, Put } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
@@ -18,6 +19,7 @@ export class IamUpdateAccountByIdController
     @ApiOperation({ summary: 'Update account by id' })
     @ApiOkResponse({ description: 'The record has been successfully updated.', type: IamAccountDto })
     async main(
+        @CurrentAccount() account: IamAccountResponse,
         @Body() payload: IamUpdateAccountByIdDto,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
@@ -25,6 +27,7 @@ export class IamUpdateAccountByIdController
     )
     {
         return await this.handler.main(
+            account,
             payload,
             constraint,
             timezone,

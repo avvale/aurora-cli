@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { IamAccountDto, IamCreateAccountDto, IamCreateAccountHandler } from '@api/iam/account';
+import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, LiteralObject, Timezone } from '@aurorajs.dev/core';
+import { Auditing, AuditingMeta, CurrentAccount, LiteralObject, Timezone } from '@aurorajs.dev/core';
 import { Body, Controller, Headers, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
@@ -18,6 +19,7 @@ export class IamCreateAccountController
     @ApiOperation({ summary: 'Create account' })
     @ApiCreatedResponse({ description: 'The record has been successfully created.', type: IamAccountDto })
     async main(
+        @CurrentAccount() account: IamAccountResponse,
         @Body() payload: IamCreateAccountDto,
         @Headers() headers: LiteralObject,
         @Timezone() timezone?: string,
@@ -25,6 +27,7 @@ export class IamCreateAccountController
     )
     {
         return await this.handler.main(
+            account,
             payload,
             headers,
             timezone,

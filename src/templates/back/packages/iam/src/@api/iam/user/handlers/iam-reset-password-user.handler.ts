@@ -46,6 +46,16 @@ export class IamResetPasswordUserHandler
                 password     : payload.password,
                 rememberToken: null,
             },
+            {},
+            {
+                repositoryOptions: {
+                    auditing,
+                },
+                meta: {
+                    from       : IamResetPasswordUserHandler.name,
+                    rawPassword: payload.password,
+                },
+            },
         ));
 
         return true;

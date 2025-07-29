@@ -4,7 +4,7 @@
 import { IamAccountType } from '@api/graphql';
 import { iamMockUserData } from '../../../user/infrastructure/mock/iam-mock-user.data';
 
-export const iamMockAccountData = [
+export const iamMockAccountData: any[] = [
     // account demo
     {
         id: 'f0af6bd6-ddee-41bf-a1dd-cb0affa8081f',
