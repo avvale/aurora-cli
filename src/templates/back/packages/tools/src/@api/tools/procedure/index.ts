@@ -50,6 +50,9 @@ export { ToolsDownScriptProcedureResolver } from './resolvers/tools-down-script-
 export { ToolsCheckScriptProcedureController } from './controllers/tools-check-script-procedure.controller';
 export { ToolsCheckScriptProcedureHandler } from './handlers/tools-check-script-procedure.handler';
 export { ToolsCheckScriptProcedureResolver } from './resolvers/tools-check-script-procedure.resolver';
+export { ToolsRunScriptsProcedureController } from './controllers/tools-run-scripts-procedure.controller';
+export { ToolsRunScriptsProcedureHandler } from './handlers/tools-run-scripts-procedure.handler';
+export { ToolsRunScriptsProcedureResolver } from './resolvers/tools-run-scripts-procedure.resolver';
 
 // import controllers
 import { ToolsCreateProcedureController } from './controllers/tools-create-procedure.controller';
@@ -100,6 +103,12 @@ import { ToolsDownScriptProcedureResolver } from './resolvers/tools-down-script-
 import { ToolsCheckScriptProcedureController } from './controllers/tools-check-script-procedure.controller';
 import { ToolsCheckScriptProcedureHandler } from './handlers/tools-check-script-procedure.handler';
 import { ToolsCheckScriptProcedureResolver } from './resolvers/tools-check-script-procedure.resolver';
+import { ToolsRunScriptsProcedureController } from './controllers/tools-run-scripts-procedure.controller';
+import { ToolsRunScriptsProcedureHandler } from './handlers/tools-run-scripts-procedure.handler';
+import { ToolsRunScriptsProcedureResolver } from './resolvers/tools-run-scripts-procedure.resolver';
+
+// import shared services
+import { ToolsLoadProceduresService } from './shared/services/load-procedures.service';
 
 export const ToolsProcedureApiControllers = [
     ToolsCreateProcedureController,
@@ -117,6 +126,7 @@ export const ToolsProcedureApiControllers = [
     ToolsUpScriptProcedureController,
     ToolsDownScriptProcedureController,
     ToolsCheckScriptProcedureController,
+    ToolsRunScriptsProcedureController,
 ];
 
 export const ToolsProcedureApiResolvers = [
@@ -135,6 +145,7 @@ export const ToolsProcedureApiResolvers = [
     ToolsUpScriptProcedureResolver,
     ToolsDownScriptProcedureResolver,
     ToolsCheckScriptProcedureResolver,
+    ToolsRunScriptsProcedureResolver,
 ];
 
 export const ToolsProcedureApiHandlers = [
@@ -153,8 +164,10 @@ export const ToolsProcedureApiHandlers = [
     ToolsUpScriptProcedureHandler,
     ToolsDownScriptProcedureHandler,
     ToolsCheckScriptProcedureHandler,
+    ToolsRunScriptsProcedureHandler,
 ];
 
 export const ToolsProcedureApiServices = [
     ToolsProcedureSeeder,
+    ToolsLoadProceduresService,
 ];

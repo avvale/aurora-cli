@@ -26,4 +26,12 @@ export const permissions = [
     { id: '63bca7f7-2fdf-444e-a2c9-f9b0827da952',  name: 'tools.procedure.upsert',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
     { id: '4f3b0b10-8d1f-4d61-b2f4-407486778309',  name: 'tools.procedure.delete',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
     { id: 'e58f7e5f-bd4d-461e-8768-eeebf137fc64',  name: 'tools.procedure.execution',   boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
+
+    { id: '8f7dbbcc-a6bf-4c9e-972c-b41cd61ed3f2',  name: 'tools.migration.access',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
+    { id: '69a386f6-32d3-4cfc-bbab-fe3e4af0a769',  name: 'tools.migration.get',         boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
+    { id: '0f29d8b3-354e-44c6-94c8-6fd97e122b70',  name: 'tools.migration.create',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
+    { id: 'f12ee6eb-22a8-41ee-b3f3-57bbe79d69b2',  name: 'tools.migration.update',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
+    { id: 'bbf5853b-563f-4b40-bd9e-6b7b30b6ddc3',  name: 'tools.migration.upsert',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
+    { id: 'fa06352f-da7c-49a1-83cd-5fa1705aa696',  name: 'tools.migration.delete',      boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
+    { id: '1ae51754-890a-4e69-adc3-1d0b685d5698',  name: 'tools.migration.execution',   boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304', roleIds: []},
 ];

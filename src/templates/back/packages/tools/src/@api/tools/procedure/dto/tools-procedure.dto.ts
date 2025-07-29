@@ -37,9 +37,9 @@ export class ToolsProcedureDto
 
     @ApiProperty({
         type       : Boolean,
-        description: 'isInstalled [input here api field description]',
+        description: 'isExecuted [input here api field description]',
     })
-    isInstalled: boolean;
+    isExecuted: boolean;
 
     @ApiProperty({
         type       : Boolean,
@@ -64,6 +64,12 @@ export class ToolsProcedureDto
         description: 'sort [input here api field description]',
     })
     sort?: number;
+
+    @ApiProperty({
+        type       : String,
+        description: 'hash [input here api field description]',
+    })
+    hash?: string;
 
     @ApiProperty({
         type       : String,

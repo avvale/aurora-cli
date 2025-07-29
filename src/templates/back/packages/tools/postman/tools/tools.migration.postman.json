@@ -1,0 +1,561 @@
+{
+    "info": {
+		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+		"name"          : "@app - tools/migration",
+		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+			"name": "GraphQL - toolsCreateMigration",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:ToolsCreateMigrationInput!)\n{\n\ttoolsCreateMigration (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\texecutedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Rustic Rubber Cheese\", \n\t\t\"version\": \"jmom5mwed0qufdc\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": false, \n\t\t\"upScript\": \"Praesentium dolore quod consequatur occaecati voluptatem dolore. Accusantium ipsum quod doloremque. Reiciendis tenetur quia aut nobis voluptatibus quo nam magni. Atque sequi aliquam.\", \n\t\t\"downScript\": \"Fugit distinctio vel velit minima in voluptatem ducimus aliquid. Accusamus aliquam eos. Itaque dolorem labore sint eius quia aliquam voluptatem. Sit ut commodi. Sit dolorem laudantium rerum ut et rerum suscipit. Eius distinctio voluptas.\", \n\t\t\"sort\": 9646, \n\t\t\"executedAt\": \"2025-07-29 03:44:58\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - toolsCreateMigrations",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:[ToolsCreateMigrationInput]!)\n{\n\ttoolsCreateMigrations (payload:$payload)\n}",
+						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"1e7af34f-eb98-4cf1-8237-196c331d9ffa\", \n\t\t\t\"name\": \"Unbranded Steel Ball\", \n\t\t\t\"version\": \"d43k1zwxcen6khx\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"upScript\": \"Ratione reiciendis eveniet ullam inventore. Ipsum est eos eligendi voluptas rem sapiente rerum enim ad. Quis aut praesentium quibusdam molestias neque et similique. Id illo voluptas quam reiciendis expedita et quisquam enim eos. Vitae eum autem laudantium sit commodi rerum.\", \n\t\t\t\"downScript\": \"Ut molestiae et repellendus quas magnam dolore tenetur sint ducimus. Ea a ut. Voluptatibus amet facilis similique nam minima reprehenderit fuga accusamus maiores. Cumque quaerat fuga molestias suscipit harum corporis voluptatibus. Laborum tempora consequuntur in.\", \n\t\t\t\"sort\": 5984, \n\t\t\t\"executedAt\": \"2025-07-29 01:19:01\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a1a8dde6-d1c0-4e65-8b46-10460b4228f0\", \n\t\t\t\"name\": \"Handmade Cotton Shoes\", \n\t\t\t\"version\": \"oy42zgsg83u3cnn\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"upScript\": \"Placeat impedit ducimus et neque eius quam non. Incidunt velit autem nisi voluptas nulla accusamus sit. Quia omnis soluta ea totam veritatis eaque sit unde est. Dolorum magni et et quo dolorum magnam aut. Quibusdam fuga deserunt enim vero minus. Atque temporibus libero ea ea illo soluta soluta dolorem.\", \n\t\t\t\"downScript\": \"Dolorem impedit saepe. Ut et nostrum illo. Nesciunt est consequatur tempora atque maxime. Ipsum consectetur doloremque est recusandae voluptate. Aut placeat dolorum.\", \n\t\t\t\"sort\": 7525, \n\t\t\t\"executedAt\": \"2025-07-29 10:39:57\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"13a627fe-a812-4a3a-bd8c-ef2fb7958414\", \n\t\t\t\"name\": \"Licensed Fresh Computer\", \n\t\t\t\"version\": \"rbvj40ctaeherlg\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"upScript\": \"Dolorum odio dolore commodi in voluptatibus. Dolor vitae quis dolor ut. Magnam vitae facilis natus delectus maiores. Sunt quae fugit architecto nemo sed harum consequatur nobis ipsa.\", \n\t\t\t\"downScript\": \"Nesciunt deserunt quis. Velit voluptas et consequuntur necessitatibus magnam est qui sit sapiente. Voluptates sunt provident illum sit ut.\", \n\t\t\t\"sort\": 1984, \n\t\t\t\"executedAt\": \"2025-07-28 22:15:20\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"173a6975-bbc0-4804-bfbe-4bdb14414a46\", \n\t\t\t\"name\": \"Tasty Cotton Table\", \n\t\t\t\"version\": \"aaa5l29gpejv9cp\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"upScript\": \"Veritatis omnis magni suscipit. Voluptate veniam sit tenetur. Quidem accusamus illum qui accusamus consequuntur. Esse alias laborum perferendis.\", \n\t\t\t\"downScript\": \"Officiis voluptatem ut cupiditate. Quis earum ducimus. Enim accusamus officiis culpa doloribus. Rerum amet consequatur numquam neque est accusantium.\", \n\t\t\t\"sort\": 3476, \n\t\t\t\"executedAt\": \"2025-07-29 05:52:30\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c9ba09a8-11cc-4147-b434-f77b227ffaef\", \n\t\t\t\"name\": \"Awesome Metal Tuna\", \n\t\t\t\"version\": \"hfmeh8jb3gnupkl\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"upScript\": \"Quae omnis molestiae aliquid est possimus. Libero voluptas veniam ab consequatur. Reiciendis unde facere. Aut alias blanditiis similique quia ut aut voluptas. Aut et optio.\", \n\t\t\t\"downScript\": \"Atque ducimus rerum nisi voluptate quam enim qui iste. Corrupti enim magnam soluta veniam commodi et animi. Quia numquam et dolor recusandae voluptatem vero exercitationem esse et. Praesentium quod vero saepe omnis natus sapiente. Aspernatur odio ut nemo neque. Et delectus sit aut consequatur reprehenderit.\", \n\t\t\t\"sort\": 1292, \n\t\t\t\"executedAt\": \"2025-07-29 18:03:38\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"eb679fbd-86a1-47c7-98bf-e17aca50f228\", \n\t\t\t\"name\": \"Incredible Frozen Hat\", \n\t\t\t\"version\": \"ihav2ar8o8ruvo7\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"upScript\": \"Est aperiam ut distinctio eaque facilis in quasi voluptate officia. Nostrum illum est rerum voluptas cum veniam repellat rerum et. Et nobis porro fuga excepturi aut culpa nihil nisi. Fugiat culpa qui nostrum enim quisquam quia maxime quo.\", \n\t\t\t\"downScript\": \"A est non sit et. Dignissimos magni quia maiores ea. Sunt nam hic maxime eaque tempora vel saepe in. Ut quidem vel a cupiditate aspernatur neque voluptate. Consectetur labore consequuntur et fugit quia.\", \n\t\t\t\"sort\": 2732, \n\t\t\t\"executedAt\": \"2025-07-29 00:28:33\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4640ec7b-cba0-49a0-8ea0-3ece0570d3be\", \n\t\t\t\"name\": \"Awesome Cotton Hat\", \n\t\t\t\"version\": \"tsv4gwr3fhhazoq\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"upScript\": \"Exercitationem dolorum in harum in et sint veritatis mollitia. Nihil quia facilis. Explicabo et at unde nisi nam qui. Maxime neque sunt explicabo earum id.\", \n\t\t\t\"downScript\": \"Eius cum qui illo quos distinctio veniam reprehenderit maxime qui. Neque expedita laborum occaecati ab sequi voluptas. Nostrum dicta iure ad rerum quia beatae dolor. Facere nihil laudantium nesciunt sunt deserunt eos sit.\", \n\t\t\t\"sort\": 8118, \n\t\t\t\"executedAt\": \"2025-07-29 08:53:36\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1a0e172f-7e79-4cd0-b95e-5e4cd2166544\", \n\t\t\t\"name\": \"Refined Soft Bacon\", \n\t\t\t\"version\": \"j1qi8ujy001s4kg\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"upScript\": \"Qui corrupti iure vel. Saepe alias est aspernatur debitis nihil porro quis modi pariatur. Unde ut sunt aut est mollitia quis laudantium. Optio id deserunt quod rem. Voluptate dolores adipisci autem et. Ducimus aspernatur minima perspiciatis.\", \n\t\t\t\"downScript\": \"A ipsum perspiciatis et maiores quia nam molestiae et. Et illum voluptates quia nostrum repudiandae itaque. Excepturi vel et porro rem voluptas tenetur omnis qui reiciendis. Voluptatibus aut eos sit voluptatum. Ut quaerat est est nihil. Accusantium similique voluptatem sit deserunt voluptas perferendis suscipit.\", \n\t\t\t\"sort\": 9677, \n\t\t\t\"executedAt\": \"2025-07-29 15:20:40\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"59374b97-3ee2-466a-92f1-fefe00dd647c\", \n\t\t\t\"name\": \"Awesome Frozen Chair\", \n\t\t\t\"version\": \"v0286sjlylm3xzi\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"upScript\": \"Quos delectus non ratione et atque. Debitis dicta sint. Consequuntur cupiditate excepturi provident.\", \n\t\t\t\"downScript\": \"Veritatis omnis iure qui qui ut consequatur. At corporis asperiores qui consequatur nemo nam ut. Perferendis cupiditate reiciendis quae doloremque et ea tempore.\", \n\t\t\t\"sort\": 5511, \n\t\t\t\"executedAt\": \"2025-07-29 02:43:25\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1ac16ef5-20a0-4b2d-984b-aa87894c2c8b\", \n\t\t\t\"name\": \"Ergonomic Rubber Shirt\", \n\t\t\t\"version\": \"c6vy60ez1dev0o5\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"upScript\": \"Incidunt libero blanditiis. Ut doloremque amet adipisci doloribus. Magni quaerat tenetur dolor culpa est. Aliquam qui non ut et. Odit omnis sit quae labore omnis eaque. At magnam ut quae deleniti ut voluptatem aliquam doloremque quibusdam.\", \n\t\t\t\"downScript\": \"Rerum omnis nobis officiis illum. Consequuntur libero suscipit non eos placeat ullam ea minima iste. Ut consequatur quia commodi.\", \n\t\t\t\"sort\": 8024, \n\t\t\t\"executedAt\": \"2025-07-29 00:04:57\"\n\t\t}\n\t]\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - toolsPaginateMigrations",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\ttoolsPaginateMigrations (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - toolsGetMigrations",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\ttoolsGetMigrations (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\texecutedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - toolsFindMigration",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($query:QueryStatement)\n{\n\ttoolsFindMigration (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\texecutedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - toolsFindMigrationById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id:ID)\n{\n\ttoolsFindMigrationById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\texecutedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - toolsUpdateMigration",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($payload:ToolsUpdateMigrationInput!)\n{\n\ttoolsUpdateMigration (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\texecutedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Gorgeous Frozen Salad\", \n\t\t\"version\": \"xw2ty50r9ksswrg\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": false, \n\t\t\"upScript\": \"Ex voluptatem et iusto quis ipsa. Accusantium numquam asperiores. Facere laborum vero. Dolores et incidunt alias.\", \n\t\t\"downScript\": \"Veniam architecto dolorem deserunt. Earum facilis debitis autem omnis ipsum quis nobis quasi quo. Maxime et molestiae ab eos velit alias ipsa. Doloribus provident voluptatibus et.\", \n\t\t\"sort\": 9740, \n\t\t\"executedAt\": \"2025-07-29 11:24:45\"\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - toolsDeleteMigrationById",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id:ID!)\n{\n\ttoolsDeleteMigrationById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\texecutedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "GraphQL - toolsDeleteMigrations",
+			"request": {
+				"method": "POST",
+				"header": [
+                ],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($query:QueryStatement)\n{\n\ttoolsDeleteMigrations (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\texecutedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - tools/migration/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Small Wooden Sausages\", \n\t\"version\": \"g1tf30fgg3dqpb9\", \n\t\"isActive\": true, \n\t\"isExecuted\": false, \n\t\"upScript\": \"Beatae facere rerum. Corrupti beatae earum ad harum dolorum et delectus ad nihil. Vel ut corporis tempore. Possimus perferendis et enim unde eum ut. Dolores nihil repellat et aperiam. Enim distinctio saepe hic qui voluptatem quo esse.\", \n\t\"downScript\": \"Eveniet ut perferendis distinctio. Voluptatum adipisci voluptate qui doloribus incidunt distinctio facere. Mollitia quae sequi expedita soluta est minus accusantium nostrum. Repudiandae sit laborum est aut maxime et. Quia amet sint ea eos culpa. Dicta eveniet facere nam aut.\", \n\t\"sort\": 1658, \n\t\"executedAt\": \"2025-07-29 02:30:59\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migration/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+						"migration",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - tools/migrations/create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key"   : "Content-Type",
+						"name"  : "Content-Type",
+						"type"  : "text",
+						"value" : "application/json"
+					}				],
+				"body": {
+					"mode"  : "raw",
+					"raw"   : "[\n\t{\n\t\t\"id\": \"d66305d5-0e65-4bfc-a277-282094913a7e\", \n\t\t\"name\": \"Awesome Fresh Fish\", \n\t\t\"version\": \"l666rjypf2s4v4l\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"upScript\": \"Enim aut illum odit consectetur in exercitationem aut. Aut cum id aut sed officiis. Voluptatibus ea ut exercitationem accusamus ipsa unde. Quam tempora repellat dolor omnis ea natus eos. Maxime ipsam voluptatem.\", \n\t\t\"downScript\": \"Cumque et rem. Quasi enim accusamus saepe non nemo laudantium cumque. At est rerum aut voluptatum suscipit. Placeat voluptatibus omnis voluptates ullam minima velit.\", \n\t\t\"sort\": 3902, \n\t\t\"executedAt\": \"2025-07-29 16:39:44\"\n\t}, \n\t{\n\t\t\"id\": \"944a7145-cd1c-4302-98e5-f1e0840d13ed\", \n\t\t\"name\": \"Awesome Frozen Cheese\", \n\t\t\"version\": \"69iyawwcrxyypzq\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"upScript\": \"Error cum deleniti cum sint ut reprehenderit. Id sit ut totam quia nihil quasi dolore quia. Ut itaque porro modi.\", \n\t\t\"downScript\": \"Eum aut et eligendi quae voluptatem eum non itaque qui. Natus ex nam sed occaecati quo. Aspernatur eos eius rerum mollitia dolore optio explicabo tempore veniam.\", \n\t\t\"sort\": 2817, \n\t\t\"executedAt\": \"2025-07-28 21:02:19\"\n\t}, \n\t{\n\t\t\"id\": \"d2d131bd-5d1e-4de7-84ba-26ab69f77ac9\", \n\t\t\"name\": \"Licensed Plastic Hat\", \n\t\t\"version\": \"hrwwgwdbssby2s0\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": true, \n\t\t\"upScript\": \"Eius at sit tempore reiciendis libero neque architecto tempora. Impedit sit aliquam. Modi atque vel modi ut. Ipsam velit aut quasi delectus labore rem et. Omnis reprehenderit eos fugit magnam modi hic. Tempora repudiandae iusto explicabo fugiat.\", \n\t\t\"downScript\": \"Rerum dolore et. Illo in nobis. Dolorem adipisci earum quia quia. Illum labore iusto qui.\", \n\t\t\"sort\": 8688, \n\t\t\"executedAt\": \"2025-07-29 15:59:00\"\n\t}, \n\t{\n\t\t\"id\": \"8ce18ebd-7dce-45b5-b204-affb4d1df870\", \n\t\t\"name\": \"Sleek Frozen Ball\", \n\t\t\"version\": \"ko98xd7yrsgkt49\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": false, \n\t\t\"upScript\": \"Corporis eveniet odit deleniti quidem iusto voluptates. Quae reprehenderit dolore excepturi. Vel eos inventore mollitia rerum porro eius eum quia optio.\", \n\t\t\"downScript\": \"Ab quidem eos dolorem inventore maxime aut ut sed id. Aut tenetur et quia fugit sit mollitia iusto. Eius esse occaecati voluptate nihil. Corporis exercitationem similique eum soluta accusantium quis. Voluptas rem voluptatum possimus. Dignissimos doloribus dolor cumque omnis cumque sed dolores.\", \n\t\t\"sort\": 7274, \n\t\t\"executedAt\": \"2025-07-29 13:56:03\"\n\t}, \n\t{\n\t\t\"id\": \"86c57558-d63b-4405-865d-7c466f834487\", \n\t\t\"name\": \"Refined Cotton Fish\", \n\t\t\"version\": \"22sx6aa612ihrnc\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"upScript\": \"Qui ipsum ut velit aperiam. Omnis porro ut atque quia autem iusto. Hic eum doloribus nesciunt nisi vel qui ipsa. Veritatis est officiis dolorum hic dolorum exercitationem omnis earum accusamus. Et cum molestias assumenda nam hic qui ut.\", \n\t\t\"downScript\": \"Error et sed dolor quo aliquam minus adipisci nemo. Error dolorem amet et ut aut hic. Ullam qui totam et iusto est est aut. Facilis voluptatem a velit accusamus dolores. Omnis corrupti voluptas consequuntur asperiores provident omnis enim voluptatibus neque.\", \n\t\t\"sort\": 9384, \n\t\t\"executedAt\": \"2025-07-29 15:07:32\"\n\t}, \n\t{\n\t\t\"id\": \"5fd31062-17b7-403c-ba01-03adf4b82f81\", \n\t\t\"name\": \"Unbranded Concrete Soap\", \n\t\t\"version\": \"sh1uvp9ahkvwggg\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"upScript\": \"Qui aliquam error vero recusandae dolor quibusdam non. Et pariatur dolorum sed tempore architecto quas consequatur omnis. Aut esse sed eius ut dignissimos. Ut odio velit asperiores aut et reprehenderit nam magnam. Libero quia cupiditate et porro nam vero ratione.\", \n\t\t\"downScript\": \"Quia ea tempore provident ipsam et maxime. Numquam harum et perspiciatis rerum rerum quo. Ea laudantium iure iste temporibus quo et quibusdam omnis. Dolor omnis et.\", \n\t\t\"sort\": 8130, \n\t\t\"executedAt\": \"2025-07-28 18:49:55\"\n\t}, \n\t{\n\t\t\"id\": \"3fa798d7-f4e2-4aca-aed8-2e0737e6c949\", \n\t\t\"name\": \"Licensed Metal Salad\", \n\t\t\"version\": \"midasom7o4247or\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": false, \n\t\t\"upScript\": \"In harum deleniti illo. Facilis quia qui dolores qui consequatur ad sit maxime voluptas. A sed magnam autem. Quos dolor aperiam ut ea nulla sint ratione. Porro voluptates dolor aut.\", \n\t\t\"downScript\": \"Voluptatum iste voluptas. Corporis nihil nam assumenda est quibusdam. Aliquid officiis error omnis. Et fuga et eum magni earum suscipit. Non inventore velit vero nostrum. Voluptas nemo sunt vero doloribus et officia.\", \n\t\t\"sort\": 7662, \n\t\t\"executedAt\": \"2025-07-29 13:53:20\"\n\t}, \n\t{\n\t\t\"id\": \"73a4c36b-570e-4361-9381-04e3b79290f9\", \n\t\t\"name\": \"Practical Soft Bacon\", \n\t\t\"version\": \"yfs5iccsji6n39r\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"upScript\": \"Rem deserunt omnis excepturi est excepturi esse est rem consectetur. Qui tempore rem. Aut mollitia non expedita itaque earum qui consectetur ut aut. Occaecati explicabo nisi magni aspernatur at perferendis. Ex reprehenderit fugiat quasi excepturi. Sit officia consequatur dolorem.\", \n\t\t\"downScript\": \"Facere repellat dolores doloremque sit deleniti. Beatae animi hic voluptatem quas quos voluptatibus non consectetur praesentium. Cupiditate reiciendis veniam ea sit eos repellendus est sunt. Possimus a repellat et. Dolores dolore dignissimos. Rerum voluptatem est in quas quibusdam omnis iusto atque.\", \n\t\t\"sort\": 5734, \n\t\t\"executedAt\": \"2025-07-29 08:46:39\"\n\t}, \n\t{\n\t\t\"id\": \"83a055d6-160f-4a1c-a193-788aba3b10a9\", \n\t\t\"name\": \"Intelligent Metal Bike\", \n\t\t\"version\": \"7gdnwmj3c7ybk8s\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": true, \n\t\t\"upScript\": \"Velit et assumenda ipsum. Non est eos laudantium sapiente ad ratione non aliquam. Voluptatem sed natus ipsa quis atque. Eveniet deleniti neque. Non nemo dolorum deserunt. Sunt molestiae exercitationem nobis sed enim omnis.\", \n\t\t\"downScript\": \"Et enim provident aliquam tempore voluptatum. Reiciendis dolorum aut ipsam et ut et beatae aspernatur ut. Iusto corporis dignissimos velit aspernatur porro. Quia atque quasi architecto eum provident ullam eligendi. Incidunt veritatis iste nihil fugit eaque. Enim ut nemo atque vero voluptate beatae animi.\", \n\t\t\"sort\": 1962, \n\t\t\"executedAt\": \"2025-07-28 21:28:47\"\n\t}, \n\t{\n\t\t\"id\": \"3c5e7bfa-8b0e-4a74-8b96-e4a54cca9d54\", \n\t\t\"name\": \"Incredible Cotton Shirt\", \n\t\t\"version\": \"s3vz0670c7dgzhd\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"upScript\": \"Et nulla architecto. Neque magnam sequi. Quos non nihil et similique eveniet. Repellendus debitis qui amet quam minus sapiente.\", \n\t\t\"downScript\": \"Aspernatur rerum id ipsa ab harum velit. Libero esse architecto quis quis tempore enim sed. Iste ullam modi.\", \n\t\t\"sort\": 4531, \n\t\t\"executedAt\": \"2025-07-29 12:03:02\"\n\t}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migrations/create",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+						"migrations",
+                        "create"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - tools/migrations/paginate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migrations/paginate",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+                        "migrations",
+                        "paginate"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - tools/migrations/get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migrations/get",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+						"migrations",
+                        "get"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - tools/migration/find",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migration/find",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+						"migration",
+                        "find"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - tools/migration/find/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migration/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+						"migration",
+                        "find",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - tools/migration/update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Practical Frozen Pizza\", \n\t\"version\": \"vufc63wyylwxap8\", \n\t\"isActive\": true, \n\t\"isExecuted\": false, \n\t\"upScript\": \"Commodi rem occaecati fugit quia exercitationem odio quaerat blanditiis. Accusantium quibusdam ducimus et sunt incidunt facilis. Quo ullam quam quaerat. Fuga iusto dicta cumque voluptates laborum. Harum quo et et.\", \n\t\"downScript\": \"Similique eaque quisquam minus libero. Sit et ut et beatae facere odio veniam id. Blanditiis eum in impedit iste impedit laudantium eveniet et. Molestiae autem illum debitis tempora dolorem fugiat pariatur fugiat. Qui libero aliquid.\", \n\t\"sort\": 7033, \n\t\"executedAt\": \"2025-07-29 11:15:06\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migration/update",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+						"migration",
+                        "update"
+					]
+				}
+			},
+			"response": []
+        },
+        {
+			"name": "REST - tools/migration/delete/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migration/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+						"migration",
+                        "delete",
+						"5b19d6ac-4081-573b-96b3-56964d5326a8"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "REST - tools/migrations/delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/tools/migrations/delete",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"tools",
+						"migrations",
+                        "delete"
+					]
+				}
+			},
+			"response": []
+		}
+    ],
+    "variable": [
+		{
+			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+			"key": "URL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

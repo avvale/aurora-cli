@@ -5,9 +5,10 @@ import {
     ToolsProcedureDeletedAt,
     ToolsProcedureDownScript,
     ToolsProcedureExecutedAt,
+    ToolsProcedureHash,
     ToolsProcedureId,
     ToolsProcedureIsActive,
-    ToolsProcedureIsInstalled,
+    ToolsProcedureIsExecuted,
     ToolsProcedureIsUpdated,
     ToolsProcedureName,
     ToolsProcedureSort,
@@ -35,11 +36,12 @@ export class ToolsCreateProcedureService
             type: ToolsProcedureType;
             version: ToolsProcedureVersion;
             isActive: ToolsProcedureIsActive;
-            isInstalled: ToolsProcedureIsInstalled;
+            isExecuted: ToolsProcedureIsExecuted;
             isUpdated: ToolsProcedureIsUpdated;
             upScript: ToolsProcedureUpScript;
             downScript: ToolsProcedureDownScript;
             sort: ToolsProcedureSort;
+            hash: ToolsProcedureHash;
             executedAt: ToolsProcedureExecutedAt;
             checkedAt: ToolsProcedureCheckedAt;
         },
@@ -53,11 +55,12 @@ export class ToolsCreateProcedureService
             payload.type,
             payload.version,
             payload.isActive,
-            payload.isInstalled,
+            payload.isExecuted,
             payload.isUpdated,
             payload.upScript,
             payload.downScript,
             payload.sort,
+            payload.hash,
             payload.executedAt,
             payload.checkedAt,
             new ToolsProcedureCreatedAt({ currentTimestamp: true }),

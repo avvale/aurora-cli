@@ -35,10 +35,10 @@ export class ToolsUpScriptProcedureHandler
 
         await this.commandBus.dispatch(new ToolsUpdateProcedureByIdCommand(
             {
-                id         : procedure.id,
-                isInstalled: true,
-                isUpdated  : false,
-                executedAt : now().tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
+                id        : procedure.id,
+                isExecuted: true,
+                isUpdated : false,
+                executedAt: now().tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
             },
             {},
             {

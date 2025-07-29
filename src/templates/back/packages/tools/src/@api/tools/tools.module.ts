@@ -5,6 +5,7 @@ import { ToolsSeeder } from './tools.seeder';
 import { ToolsModels, ToolsHandlers, ToolsServices, ToolsRepositories, ToolsSagas } from '@app/tools';
 import { ToolsKeyValueApiControllers, ToolsKeyValueApiResolvers, ToolsKeyValueApiHandlers, ToolsKeyValueApiServices } from './key-value';
 import { ToolsProcedureApiControllers, ToolsProcedureApiResolvers, ToolsProcedureApiHandlers, ToolsProcedureApiServices } from './procedure';
+import { ToolsMigrationApiControllers, ToolsMigrationApiResolvers, ToolsMigrationApiHandlers, ToolsMigrationApiServices } from './migration';
 
 @Module({
     imports: [
@@ -15,7 +16,8 @@ import { ToolsProcedureApiControllers, ToolsProcedureApiResolvers, ToolsProcedur
     ],
     controllers: [
         ...ToolsKeyValueApiControllers,
-        ...ToolsProcedureApiControllers
+        ...ToolsProcedureApiControllers,
+        ...ToolsMigrationApiControllers
     ],
     providers: [
         ToolsSeeder,
@@ -28,7 +30,10 @@ import { ToolsProcedureApiControllers, ToolsProcedureApiResolvers, ToolsProcedur
         ...ToolsKeyValueApiServices,
         ...ToolsProcedureApiResolvers,
         ...ToolsProcedureApiHandlers,
-        ...ToolsProcedureApiServices
+        ...ToolsProcedureApiServices,
+        ...ToolsMigrationApiResolvers,
+        ...ToolsMigrationApiHandlers,
+        ...ToolsMigrationApiServices
     ],
 })
 export class ToolsModule {}

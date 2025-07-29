@@ -19,7 +19,7 @@ export class ToolsCreateProceduresHandler
         await this.commandBus.dispatch(new ToolsCreateProceduresCommand(
             payload.map(procedure => ({
                 ...procedure,
-                isInstalled: false,
+                isExecuted: false,
             })),
             {
                 timezone,

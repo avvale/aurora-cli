@@ -68,9 +68,9 @@ export class ToolsCheckScriptProcedureHandler
 
         await this.commandBus.dispatch(new ToolsUpdateProcedureByIdCommand(
             {
-                id         : procedure.id,
-                isInstalled: response.value.length > 0,
-                checkedAt  : now().tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
+                id        : procedure.id,
+                isExecuted: response.value.length > 0,
+                checkedAt : now().tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
             },
             {},
             {

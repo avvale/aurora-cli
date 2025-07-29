@@ -35,10 +35,10 @@ export class ToolsDownScriptProcedureHandler
 
         await this.commandBus.dispatch(new ToolsUpdateProcedureByIdCommand(
             {
-                id         : procedure.id,
-                isInstalled: false,
-                executedAt : null,
-                checkedAt  : null,
+                id        : procedure.id,
+                isExecuted: false,
+                executedAt: null,
+                checkedAt : null,
             },
             {},
             {

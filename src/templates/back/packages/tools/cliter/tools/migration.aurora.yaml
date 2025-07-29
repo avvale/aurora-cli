@@ -29,6 +29,10 @@ aggregateProperties:
     type: boolean
     nullable: false
     defaultValue: false
+  - name: isExecuted
+    type: boolean
+    nullable: false
+    defaultValue: false
   - name: upScript
     type: text
     nullable: true
@@ -51,6 +55,16 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+additionalApis:
+  - path: tools/migration/up-script
+    resolverType: mutation
+    httpMethod: post
+  - path: tools/migration/down-script
+    resolverType: mutation
+    httpMethod: post
+  - path: tools/migration/run-scripts
+    resolverType: mutation
+    httpMethod: post
 excludedOperations:
   - count
   - max

@@ -5,9 +5,10 @@ import {
     ToolsProcedureDeletedAt,
     ToolsProcedureDownScript,
     ToolsProcedureExecutedAt,
+    ToolsProcedureHash,
     ToolsProcedureId,
     ToolsProcedureIsActive,
-    ToolsProcedureIsInstalled,
+    ToolsProcedureIsExecuted,
     ToolsProcedureIsUpdated,
     ToolsProcedureName,
     ToolsProcedureSort,
@@ -35,11 +36,12 @@ export class ToolsCreateProceduresService
             type: ToolsProcedureType;
             version: ToolsProcedureVersion;
             isActive: ToolsProcedureIsActive;
-            isInstalled: ToolsProcedureIsInstalled;
+            isExecuted: ToolsProcedureIsExecuted;
             isUpdated: ToolsProcedureIsUpdated;
             upScript: ToolsProcedureUpScript;
             downScript: ToolsProcedureDownScript;
             sort: ToolsProcedureSort;
+            hash: ToolsProcedureHash;
             executedAt: ToolsProcedureExecutedAt;
             checkedAt: ToolsProcedureCheckedAt;
         } [],
@@ -53,11 +55,12 @@ export class ToolsCreateProceduresService
             procedure.type,
             procedure.version,
             procedure.isActive,
-            procedure.isInstalled,
+            procedure.isExecuted,
             procedure.isUpdated,
             procedure.upScript,
             procedure.downScript,
             procedure.sort,
+            procedure.hash,
             procedure.executedAt,
             procedure.checkedAt,
             new ToolsProcedureCreatedAt({ currentTimestamp: true }),

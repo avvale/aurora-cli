@@ -157,19 +157,19 @@ describe('procedure', () =>
             });
     });
 
-    test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureIsInstalled property can not to be null', () =>
+    test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureIsExecuted property can not to be null', () =>
     {
         return request(app.getHttpServer())
             .post('/tools/procedure/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                isInstalled: null,
+                isExecuted: null,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ToolsProcedureIsInstalled must be defined, can not be null');
+                expect(res.body.message).toContain('Value for ToolsProcedureIsExecuted must be defined, can not be null');
             });
     });
 
@@ -269,19 +269,19 @@ describe('procedure', () =>
             });
     });
 
-    test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureIsInstalled property can not to be undefined', () =>
+    test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureIsExecuted property can not to be undefined', () =>
     {
         return request(app.getHttpServer())
             .post('/tools/procedure/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                isInstalled: undefined,
+                isExecuted: undefined,
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ToolsProcedureIsInstalled must be defined, can not be undefined');
+                expect(res.body.message).toContain('Value for ToolsProcedureIsExecuted must be defined, can not be undefined');
             });
     });
 
@@ -349,6 +349,22 @@ describe('procedure', () =>
             });
     });
 
+    test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureHash is too large, has a maximum length of 64', () =>
+    {
+        return request(app.getHttpServer())
+            .post('/tools/procedure/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                hash: '*****************************************************************',
+            })
+            .expect(400)
+            .then(res =>
+            {
+                expect(res.body.message).toContain('Value for ToolsProcedureHash is too large, has a maximum length of 64');
+            });
+    });
+
     test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureIsActive has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
@@ -364,19 +380,19 @@ describe('procedure', () =>
                 expect(res.body.message).toContain('Value for ToolsProcedureIsActive has to be a boolean value');
             });
     });
-    test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureIsInstalled has to be a boolean value', () =>
+    test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureIsExecuted has to be a boolean value', () =>
     {
         return request(app.getHttpServer())
             .post('/tools/procedure/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                isInstalled: 'true',
+                isExecuted: 'true',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for ToolsProcedureIsInstalled has to be a boolean value');
+                expect(res.body.message).toContain('Value for ToolsProcedureIsExecuted has to be a boolean value');
             });
     });
     test('/REST:POST tools/procedure/create - Got 400 Conflict, ProcedureIsUpdated has to be a boolean value', () =>
@@ -616,11 +632,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                         }
@@ -693,11 +710,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -733,11 +751,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                         }
@@ -773,11 +792,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -821,11 +841,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -867,11 +888,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -908,11 +930,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -947,11 +970,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -991,11 +1015,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -1033,11 +1058,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -1080,11 +1106,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt
@@ -1121,11 +1148,12 @@ describe('procedure', () =>
                             type
                             version
                             isActive
-                            isInstalled
+                            isExecuted
                             isUpdated
                             upScript
                             downScript
                             sort
+                            hash
                             executedAt
                             checkedAt
                             createdAt

@@ -35,7 +35,7 @@ aggregateProperties:
     type: boolean
     nullable: false
     defaultValue: false
-  - name: isInstalled
+  - name: isExecuted
     type: boolean
     nullable: false
     defaultValue: false
@@ -52,6 +52,10 @@ aggregateProperties:
   - name: sort
     type: smallint
     unsigned: true
+    nullable: true
+  - name: hash
+    type: varchar
+    maxLength: 64
     nullable: true
   - name: executedAt
     type: timestamp
@@ -76,6 +80,9 @@ additionalApis:
     resolverType: mutation
     httpMethod: post
   - path: tools/procedure/check-script
+    resolverType: mutation
+    httpMethod: post
+  - path: tools/procedure/run-scripts
     resolverType: mutation
     httpMethod: post
 excludedOperations:

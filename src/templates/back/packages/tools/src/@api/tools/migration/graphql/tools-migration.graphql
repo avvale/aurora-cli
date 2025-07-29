@@ -1,0 +1,131 @@
+
+type ToolsMigration
+{
+    id: ID!
+    name: GraphQLString!
+    version: GraphQLString!
+    isActive: GraphQLBoolean!
+    isExecuted: GraphQLBoolean!
+    upScript: GraphQLString
+    downScript: GraphQLString
+    sort: GraphQLInt
+    executedAt: GraphQLTimestamp
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input ToolsCreateMigrationInput
+{
+    id: ID!
+    name: GraphQLString!
+    version: GraphQLString!
+    isActive: GraphQLBoolean!
+    upScript: GraphQLString
+    downScript: GraphQLString
+    sort: GraphQLInt
+    executedAt: GraphQLTimestamp
+}
+
+input ToolsUpdateMigrationByIdInput
+{
+    id: ID!
+    name: GraphQLString
+    version: GraphQLString
+    isActive: GraphQLBoolean
+    upScript: GraphQLString
+    downScript: GraphQLString
+    sort: GraphQLInt
+    executedAt: GraphQLTimestamp
+}
+
+input ToolsUpdateMigrationsInput
+{
+    id: ID
+    name: GraphQLString
+    version: GraphQLString
+    isActive: GraphQLBoolean
+    upScript: GraphQLString
+    downScript: GraphQLString
+    sort: GraphQLInt
+    executedAt: GraphQLTimestamp
+}
+
+input ToolsCreateMigrationTemplateInput
+{
+    id: ID!
+    name: GraphQLString!
+    version: GraphQLString!
+    upScript: GraphQLString!
+    downScript: GraphQLString!
+    sort: GraphQLInt!
+}
+
+type Query
+{
+    toolsFindMigration(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): ToolsMigration
+
+    toolsFindMigrationById(
+        id: ID
+        constraint: QueryStatement
+    ): ToolsMigration
+
+    toolsGetMigrations(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsMigration]!
+
+    toolsPaginateMigrations(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+}
+
+type Mutation
+{
+    toolsCreateMigration(
+        payload: ToolsCreateMigrationInput!
+    ): ToolsMigration
+
+    toolsCreateMigrations(
+        payload: [ToolsCreateMigrationInput]!
+    ): Boolean!
+
+    toolsUpdateMigrationById(
+        payload: ToolsUpdateMigrationByIdInput!
+        constraint: QueryStatement
+    ): ToolsMigration
+
+    toolsUpdateMigrations(
+        payload: ToolsUpdateMigrationsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsMigration]!
+
+    toolsDeleteMigrationById(
+        id: ID!
+        constraint: QueryStatement
+    ): ToolsMigration
+
+    toolsDeleteMigrations(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsMigration]!
+
+
+    # additionalApis
+    toolsUpScriptMigration(
+        migrationId: ID!
+    ): Boolean!
+
+    toolsDownScriptMigration(
+        migrationId: ID!
+    ): Boolean!
+
+    toolsRunScriptsMigration: Boolean!
+
+}
