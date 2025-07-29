@@ -1,3 +1,9 @@
 {
-    "1001": "..."
+    "101": "The username already exists.",
+    "102": "The email already exists.",
+    "103": "The code already exists.",
+    "104": "Invalid token.",
+    "105": "Your account does not have the required permissions to create an account with the specified roles.",
+    "106": "The account does not have the required permissions to update the account with the specified roles.",
+    "107": "Not allowed operate this item on the tenant {{tenant}}, please contact the administrator."
 }

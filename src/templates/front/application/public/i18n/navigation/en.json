@@ -23,6 +23,7 @@
     "message": "Messages",
     "messageCenter": "Message Center",
     "messages": "Messages",
+    "migrations": "Migrations",
     "notifications": "Notifications",
     "outBoxNotifications": "OutBoxNotifications",
     "permissions": "Permissions",

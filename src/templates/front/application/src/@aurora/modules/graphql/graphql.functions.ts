@@ -1,45 +1,24 @@
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { GraphQLTranslationError } from './graphql.types';
 
-export const extractGraphqlMessageErrors = (graphqlErrors: ReadonlyArray<GraphQLFormattedError>): string =>
+export const extractGraphqlErrorTranslations = (
+    graphqlErrors: ReadonlyArray<GraphQLFormattedError>,
+    translator: (translationKey: string, params?: Object) => string,
+): GraphQLTranslationError[] =>
 {
-    return graphqlErrors.map((graphqlError: GraphQLError) =>
-    {
-        const extensions = graphqlError.extensions as any;
-
-        if (Array.isArray(extensions.exception?.errors))
+    return graphqlErrors
+        .filter((graphqlError: GraphQLError) =>
         {
-            return extensions
-                .exception
-                .errors
-                .map(error => `${error.message}`);
-        }
-
-        if (extensions.originalError?.message)
+            const extensions = graphqlError.extensions as any;
+            return extensions.originalError?.statusCode && extensions.originalError?.message;
+        })
+        .map((graphqlError: GraphQLError) =>
         {
-            return `${extensions.originalError.message}`;
-        }
-
-    }).join('<br>');
-};
-
-export const extractGraphqlStatusErrorCodes = (graphqlErrors: ReadonlyArray<GraphQLFormattedError>): string =>
-{
-    return graphqlErrors.map((graphqlError: GraphQLError) =>
-    {
-        const extensions = graphqlError.extensions as any;
-
-        if (Array.isArray(extensions.exception?.errors))
-        {
-            return extensions
-                .exception
-                .errors
-                .map(error => error.statusCode);
-        }
-
-        if (extensions.originalError?.statusCode)
-        {
-            return extensions.originalError.statusCode;
-        }
-
-    }).join('-');
+            const extensions = graphqlError.extensions as any;
+            return {
+                statusCode: extensions.originalError.statusCode,
+                translation: extensions.originalError.translation,
+                message: extensions.originalError.translation ? translator(extensions.originalError.translation, extensions.originalError.params) : extensions.originalError.message,
+            };
+        });
 };

@@ -1,7 +1,7 @@
 import { ApolloClientOptions, ApolloLink, DefaultOptions, InMemoryCache, NormalizedCacheObject } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import { AuthenticationService, Utils, extractGraphqlMessageErrors, extractGraphqlStatusErrorCodes, log } from '@aurora';
+import { AuthenticationService, Utils, extractGraphqlErrorTranslations, log } from '@aurora';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { TranslocoService } from '@jsverse/transloco';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
@@ -71,8 +71,6 @@ export const apolloFactory = (
         // graphql error
         if (graphQLErrors)
         {
-            log(`[DEBUG] GraphQL Error: ${extractGraphqlMessageErrors(graphQLErrors)}`);
-
             const unauthorizedError = graphQLErrors.find(
                 ({
                     message,
@@ -90,18 +88,16 @@ export const apolloFactory = (
                 return;
             }
 
-            const errorCodes = extractGraphqlStatusErrorCodes(graphQLErrors);
-            const errorMessage = translocoService.translate('error.' + errorCodes);
+            const errorTranslations = extractGraphqlErrorTranslations(
+                graphQLErrors,
+                (translation: string, params?: Object) => translocoService.translate(translation, params),
+            );
 
-            // avoid teaching error if no translation exists
-            if ('error.' + errorCodes === errorMessage) return;
+            log(`[DEBUG] GraphQL Error [${errorTranslations.map(error => error.statusCode).join(', ')}]: ${errorTranslations.map(error => error.message).join(', ')}`);
 
             confirmationService.open({
-                title: `Error [${errorCodes}]`,
-                message:
-                    errorMessage === 'error.' + errorCodes
-                        ? extractGraphqlMessageErrors(graphQLErrors)
-                        : errorMessage,
+                title: `Error [${errorTranslations.map(error => error.statusCode).join(', ')}]`,
+                message: errorTranslations.map(error => error.message).join('<br>'),
                 icon: {
                     show : true,
                     name : 'error',

@@ -81,7 +81,6 @@ export default tseslint.config(
                     beforeColon: false,
                     afterColon: true,
                 },
-                
             }],
             'max-len': [
                 'error',

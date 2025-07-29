@@ -7,6 +7,19 @@ import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
+/*
+    example to use au-version-input component:
+
+    <mat-form-field
+        appearance="outline"
+        class="col-3"
+    >
+        <mat-label>{{ t('tools.Version') }}</mat-label>
+        <au-version-input formControlName="version"/>
+        <mat-error>{{ formErrors?.version | async }}</mat-error>
+    </mat-form-field>
+*/
+
 @Component({
     selector: 'au-version-input',
     imports: [CommonModule, FormsModule, ReactiveFormsModule, MatInputModule],

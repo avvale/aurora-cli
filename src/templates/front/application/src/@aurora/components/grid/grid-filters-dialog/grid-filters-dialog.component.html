@@ -348,6 +348,46 @@
                                         }
                                     </mat-form-field>
                                 }
+
+                                <!-- timestamp -->
+                                @case (searchComponentType.DATETIMEPICKER)
+                                {
+                                    <mat-form-field
+                                        appearance="outline"
+                                        class="au-datepicker col-span-7 relative"
+                                        tiny
+                                    >
+                                        <mat-label>{{ 'value' | gridTranslate:'message':gridId | async }}</mat-label>
+                                        <input
+                                            matInput
+                                            autocomplete="off"
+                                            formControlName="value"
+                                            auDatetimepickerSqlFormat
+                                            [mtxDatetimepicker]="picker"
+                                        >
+                                        <mtx-datetimepicker-toggle
+                                            matSuffix
+                                            [for]="picker"
+                                        >
+                                        </mtx-datetimepicker-toggle>
+                                        <mtx-datetimepicker #picker
+                                            type="datetime"
+                                            mode="landscape"
+                                            [multiYearSelector]="false"
+                                            startView="month"
+                                            [twelvehour]="false"
+                                            [timeInterval]="1"
+                                            [touchUi]="false"
+                                        >
+                                        </mtx-datetimepicker>
+                                        @if (arrayColumnFilters | hasRenderOutbox:formFilter.value)
+                                        {
+                                            <div class="outbox--datepicker">
+                                                <span>{{ formFilter.get('type').value | getConcatOperator | gridTranslate:'message':gridId | async }}</span>
+                                            </div>
+                                        }
+                                    </mat-form-field>
+                                }
                             }
                             <button
                                 mat-icon-button

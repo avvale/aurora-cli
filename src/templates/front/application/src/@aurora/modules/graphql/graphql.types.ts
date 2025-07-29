@@ -17,3 +17,10 @@ export interface GraphQLStatements
     mutationUpdateObject?: DocumentNode;
     mutationDeleteObjectById?: DocumentNode;
 }
+
+export interface GraphQLTranslationError
+{
+    statusCode: number;
+    translation?: string;
+    message?: string;
+}

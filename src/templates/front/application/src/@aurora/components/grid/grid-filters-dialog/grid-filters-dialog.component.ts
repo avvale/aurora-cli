@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { GridFiltersDialogValueTemplateDirective, Operator, Utils, getAsyncMatSelectSearchColumnConfigFunction } from '@aurora';
+import { DatetimepickerSqlFormatDirective, GridFiltersDialogValueTemplateDirective, Operator, Utils, getAsyncMatSelectSearchColumnConfigFunction } from '@aurora';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { Observable, map, startWith } from 'rxjs';
 import { MatSelectAddSelectedDirective, MatSelectRemoveFor, ScrollEndDirective } from '../../../directives';
@@ -26,6 +26,7 @@ import { GetConcatOperatorPipe } from './pipes/get-concat-operator.pipe';
 import { GetGridFilterValue } from './pipes/get-grid-filter-value.pipe';
 import { GetGridFiltersValue } from './pipes/get-grid-filter-values.pipe';
 import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 
 @Component({
     selector       : 'au-grid-filters-dialog',
@@ -34,15 +35,15 @@ import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
-        AsyncPipe, DatepickerSqlFormatDirective, FilterOperatorsPipe,
-        GetAsyncMatSelectSearchColumnConfig, GetConcatOperatorPipe,
+        AsyncPipe, DatetimepickerSqlFormatDirective, DatepickerSqlFormatDirective,
+        FilterOperatorsPipe, GetAsyncMatSelectSearchColumnConfig, GetConcatOperatorPipe,
         GetGridFiltersValue, GetGridFilterValue,
         GridTranslatePipe, HasRenderOutboxPipe, LowerCasePipe,
         MatAutocompleteModule, MatButtonModule,MatCheckboxModule,
         MatDatepickerModule, MatDialogModule, MatDividerModule,
         MatFormFieldModule, MatIconModule,  MatInputModule,
-        MatSelectModule, MatSelectRemoveFor, NgTemplateOutlet,
-        NgxMatSelectSearchModule, ReactiveFormsModule,
+        MatSelectModule, MatSelectRemoveFor, MtxDatetimepickerModule,
+        NgTemplateOutlet, NgxMatSelectSearchModule, ReactiveFormsModule,
         MatSelectAddSelectedDirective, ScrollEndDirective,
     ],
 })
@@ -136,6 +137,7 @@ export class GridFiltersDialogComponent implements OnInit
             searchComponentTypes: [
                 SearchComponentType.TEXT,
                 SearchComponentType.DATEPICKER,
+                SearchComponentType.DATETIMEPICKER,
                 SearchComponentType.NUMBER,
                 SearchComponentType.SELECT,
                 SearchComponentType.CHECKBOX,
@@ -146,6 +148,7 @@ export class GridFiltersDialogComponent implements OnInit
             translation         : 'greaterThan',
             searchComponentTypes: [
                 SearchComponentType.DATEPICKER,
+                SearchComponentType.DATETIMEPICKER,
                 SearchComponentType.NUMBER,
             ],
         },
@@ -154,6 +157,7 @@ export class GridFiltersDialogComponent implements OnInit
             translation         : 'greaterThanEqual',
             searchComponentTypes: [
                 SearchComponentType.DATEPICKER,
+                SearchComponentType.DATETIMEPICKER,
                 SearchComponentType.NUMBER,
             ],
         },
@@ -162,6 +166,7 @@ export class GridFiltersDialogComponent implements OnInit
             translation         : 'lessThan',
             searchComponentTypes: [
                 SearchComponentType.DATEPICKER,
+                SearchComponentType.DATETIMEPICKER,
                 SearchComponentType.NUMBER,
             ],
         },
@@ -170,6 +175,7 @@ export class GridFiltersDialogComponent implements OnInit
             translation         : 'lessThanEqual',
             searchComponentTypes: [
                 SearchComponentType.DATEPICKER,
+                SearchComponentType.DATETIMEPICKER,
                 SearchComponentType.NUMBER,
             ],
         },
@@ -179,6 +185,7 @@ export class GridFiltersDialogComponent implements OnInit
             searchComponentTypes: [
                 SearchComponentType.TEXT,
                 SearchComponentType.DATEPICKER,
+                SearchComponentType.DATETIMEPICKER,
                 SearchComponentType.NUMBER,
                 SearchComponentType.SELECT,
                 SearchComponentType.CHECKBOX,
