@@ -36,6 +36,7 @@ export class ToolsUpScriptMigrationHandler
         await this.commandBus.dispatch(new ToolsUpdateMigrationByIdCommand(
             {
                 id        : migration.id,
+                isActive  : true,
                 isExecuted: true,
                 executedAt: now().tz(timezone).format('YYYY-MM-DD HH:mm:ss'),
             },
