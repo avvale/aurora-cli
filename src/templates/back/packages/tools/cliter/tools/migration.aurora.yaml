@@ -24,7 +24,7 @@ aggregateProperties:
     type: varchar
     maxLength: 16
     nullable: false
-    index: unique
+    index: index
   - name: isActive
     type: boolean
     nullable: false

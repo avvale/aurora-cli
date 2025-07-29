@@ -10,7 +10,7 @@ import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
     indexes: [
 		{
 			fields: ['version'],
-			unique: true,
+			unique: false,
 		},
     ],
 })

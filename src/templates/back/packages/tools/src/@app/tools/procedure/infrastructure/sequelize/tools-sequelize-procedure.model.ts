@@ -7,6 +7,12 @@ import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
     modelName: 'ToolsProcedure',
     freezeTableName: true,
     timestamps: false,
+    indexes: [
+		{
+			fields: ['version'],
+			unique: false,
+		},
+    ],
 })
 export class ToolsProcedureModel extends Model<ToolsProcedureModel>
 {

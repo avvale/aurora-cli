@@ -287,7 +287,7 @@
         },
         {
             "path": "src/@app/tools/migration/infrastructure/mock/tools-mock-migration.data.ts",
-            "integrity": "sha1:02cf1f4707f89765c4073158d5f9d46f0a81bc42"
+            "integrity": "sha1:17a2397cd8b29fc0184509170f7f10b69d3ffb3c"
         },
         {
             "path": "src/@app/tools/migration/infrastructure/mock/tools-mock-migration.repository.ts",
@@ -299,7 +299,7 @@
         },
         {
             "path": "src/@app/tools/migration/infrastructure/sequelize/tools-sequelize-migration.model.ts",
-            "integrity": "sha1:66f359ee2b1d65415ec862bcb428aa143e7bf94b"
+            "integrity": "sha1:5d425e4fc590aae9a35122e28f5cfe206629f1d3"
         },
         {
             "path": "src/@app/tools/migration/infrastructure/sequelize/tools-sequelize-migration.repository.ts",
@@ -711,7 +711,7 @@
         },
         {
             "path": "postman/tools/tools.migration.postman.json",
-            "integrity": "sha1:14ef34d24bbfb663063310a21ead5dbe4ccb3408"
+            "integrity": "sha1:4b2985d3b1e7dbdd4ac1bcb53757d333dc5730c1"
         }
     ]
 }
