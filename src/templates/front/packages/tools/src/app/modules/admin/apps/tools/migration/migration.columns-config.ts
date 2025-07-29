@@ -1,18 +1,12 @@
 import { ColumnConfig, ColumnDataType } from '@aurora';
 
-export const procedureColumnsConfig: ColumnConfig[] = [
+export const migrationColumnsConfig: ColumnConfig[] = [
     {
         type: ColumnDataType.STRING,
         field: 'name',
         sort: 'name',
-        translation: 'Name',
+        translation: 'tools.Name',
         isUnaccent: true,
-    },
-    {
-        type: ColumnDataType.ENUM,
-        field: 'type',
-        sort: 'type',
-        translation: 'tools.Type',
     },
     {
         type: ColumnDataType.STRING,
@@ -34,13 +28,6 @@ export const procedureColumnsConfig: ColumnConfig[] = [
         translation: 'tools.IsExecuted',
     },
     {
-        type: ColumnDataType.BOOLEAN,
-        field: 'isUpdated',
-        sort: 'isUpdated',
-        translation: 'tools.IsUpdated',
-        bodyClass: 'min-w-36',
-    },
-    {
         type: ColumnDataType.NUMBER,
         field: 'sort',
         sort: 'sort',
@@ -51,13 +38,6 @@ export const procedureColumnsConfig: ColumnConfig[] = [
         field: 'executedAt',
         sort: 'executedAt',
         translation: 'tools.ExecutedAt',
-        bodyClass: 'min-w-48',
-    },
-    {
-        type: ColumnDataType.TIMESTAMP,
-        field: 'checkedAt',
-        sort: 'checkedAt',
-        translation: 'tools.CheckedAt',
         bodyClass: 'min-w-48',
     },
 ];

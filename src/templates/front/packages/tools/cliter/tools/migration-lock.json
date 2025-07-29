@@ -1,0 +1,53 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/app/modules/admin/apps/tools/tools.component.html",
+            "integrity": "sha1:a6aab421500581830708e34385e2166e7a039ba7"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/tools.component.ts",
+            "integrity": "sha1:66dd95180dca167c44eaa08806590f37ced9d24b"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/migration-detail.component.html",
+            "integrity": "sha1:3a41cdf8a675c61288be28ebc83945e88e9226df"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/migration-detail.component.ts",
+            "integrity": "sha1:25ccdca8b158bc1c70a5931fc10fb244abd30c40"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/migration-list.component.html",
+            "integrity": "sha1:ffd1c491c53cf3d330f91d286e4668bbdd9fb360"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/migration-list.component.ts",
+            "integrity": "sha1:cab4c7783263ef62d69441160c49e5197b9ad353"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/migration.columns-config.ts",
+            "integrity": "sha1:47c066601a239c0171f7f3909955b37cfa0df84f"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/migration.graphql.ts",
+            "integrity": "sha1:f9690a126047da8d9ff22e24e84c506cb7ec48f4"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/migration.resolvers.ts",
+            "integrity": "sha1:c4376a0fc80d639c57a81caa6d515505899d0aaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/migration.service.ts",
+            "integrity": "sha1:95183d1f3ec12224d72f657832a22f45221802fc"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/tools/migration/public-api.ts",
+            "integrity": "sha1:4c2ceb8bbb0eb3144604acfbe5ab5480690229a9"
+        }
+    ]
+}

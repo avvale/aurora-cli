@@ -10,19 +10,9 @@
                     fontSet="material-symbols-outlined"
                     class="icon-size-8 mr-2"
                 >
-                    flowsheet
+                    repartition
                 </mat-icon>
-                {{ t('tools.Procedure') }}
-                @if (managedObject().isUpdated)
-                {
-                    <au-chip
-                        color="primary"
-                        size="small"
-                        class="ml-4"
-                    >
-                        {{ t('tools.IsUpdated') }}
-                    </au-chip>
-                }
+                {{ t('tools.Migration') }}
                 @if (managedObject().isExecuted)
                 {
                     <au-chip
@@ -39,17 +29,17 @@
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
-            @if (currentViewAction.id === 'tools::procedure.detail.edit')
+            @if (currentViewAction.id === 'tools::migration.detail.edit')
             {
                 <button
                     mat-flat-button
                     type="submit"
                     class="ml-3"
-                    form="toolsProcedureFormDetail"
+                    form="toolsMigrationFormDetail"
                     color="accent"
-                    [disabled]="fg.pristine || ('tools::procedure.detail.update' | getSpinnerFlag | async)"
+                    [disabled]="fg.pristine || ('tools::migration.detail.update' | getSpinnerFlag | async)"
                 >
-                    @if ('tools::procedure.detail.update' | getSpinnerFlag | async)
+                    @if ('tools::migration.detail.update' | getSpinnerFlag | async)
                     {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -67,6 +57,33 @@
                 </button>
             }
 
+            @if (currentViewAction.id === 'tools::migration.detail.new')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    form="toolsMigrationFormDetail"
+                    class="ml-3"
+                    color="accent"
+                    [disabled]="fg.pristine || ('tools::migration.detail.create' | getSpinnerFlag | async)"
+                >
+                    @if ('tools::migration.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:save"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Create') }}
+                </button>
+            }
         </div>
         <!-- / Actions -->
 
@@ -79,7 +96,7 @@
         <div class="form-card">
 
             <form
-                id="toolsProcedureFormDetail"
+                id="toolsMigrationFormDetail"
                 novalidate
                 [formGroup]="fg"
                 (ngSubmit)="onSubmit($event)"
@@ -89,9 +106,9 @@
 
                     <mat-form-field
                         appearance="outline"
-                        class="col-9"
+                        class="col-12"
                     >
-                        <mat-label>{{ t('Name') }}</mat-label>
+                        <mat-label>{{ t('tools.Name') }}</mat-label>
                         <input
                             matInput
                             formControlName="name"
@@ -99,23 +116,6 @@
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-3"
-                    >
-                        <mat-label>{{ t('tools.Type') }}</mat-label>
-                        <mat-select
-                            formControlName="type"
-                        >
-                            @for (type of toolsProcedureType | keyvalue; track type.key)
-                            {
-                                <mat-option [value]="type.key">
-                                    {{ t('tools.ProcedureTypeOptions.' + type.value) }}
-                                </mat-option>
-                            }
-                        </mat-select>
-                        <mat-error>{{ formErrors?.type | async }}</mat-error>
                     </mat-form-field>
                     <mat-form-field
                         appearance="outline"
@@ -179,7 +179,7 @@
                         <mat-error>{{ formErrors?.executedAt | async }}</mat-error>
                     </mat-form-field>
 
-                    @if (currentViewAction.id !== 'tools::procedure.detail.new')
+                    @if (currentViewAction.id !== 'tools::migration.detail.new')
                     {
                         <div class="col-12">
                             <button
@@ -188,7 +188,7 @@
                                 color="accent"
                                 (click)="
                                     actionService.action({
-                                        id          : 'tools::procedure.detail.upScript',
+                                        id          : 'tools::migration.detail.upScript',
                                         isViewAction: false
                                     })
                                 "
@@ -212,7 +212,7 @@
                         </ngx-monaco-editor>
                     </au-mat-form-field-appearance>
 
-                    @if (currentViewAction.id !== 'tools::procedure.detail.new')
+                    @if (currentViewAction.id !== 'tools::migration.detail.new')
                     {
                         <div class="col-12 mt-4">
                             <button
@@ -221,7 +221,7 @@
                                 color="accent"
                                 (click)="
                                     actionService.action({
-                                        id          : 'tools::procedure.detail.downScript',
+                                        id          : 'tools::migration.detail.downScript',
                                         isViewAction: false
                                     })
                                 "

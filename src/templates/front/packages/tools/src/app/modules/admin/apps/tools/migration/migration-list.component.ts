@@ -1,33 +1,32 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { procedureColumnsConfig, ProcedureService } from '@apps/tools/procedure';
-import { ToolsProcedure } from '@apps/tools/tools.types';
-import { Action, ChipComponent, ColumnConfig, ColumnDataType, Crumb, defaultListImports, EnvironmentsInformationService, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, queryStatementHandler, ViewBaseComponent } from '@aurora';
+import { migrationColumnsConfig, MigrationService } from '@apps/tools/migration';
+import { ToolsMigration } from '@apps/tools/tools.types';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, EnvironmentsInformationService, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, queryStatementHandler, ViewBaseComponent } from '@aurora';
 import { firstValueFrom, lastValueFrom, Observable, takeUntil } from 'rxjs';
 
-export const procedureMainGridListId = 'tools::procedure.list.mainGridList';
+export const migrationMainGridListId = 'tools::migration.list.mainGridList';
 
 @Component({
-    selector       : 'tools-procedure-list',
-    templateUrl    : './procedure-list.component.html',
+    selector       : 'tools-migration-list',
+    templateUrl    : './migration-list.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone     : true,
     imports        : [
         ...defaultListImports,
-        ChipComponent,
     ],
 })
-export class ProcedureListComponent extends ViewBaseComponent
+export class MigrationListComponent extends ViewBaseComponent
 {
     // ---- customizations ----
     // ..
 
     breadcrumb: Crumb[] = [
         { translation: 'App', routerLink: ['/']},
-        { translation: 'tools.Procedures' },
+        { translation: 'tools.Migrations' },
     ];
-    gridId: string = procedureMainGridListId;
-    gridData$: Observable<GridData<ToolsProcedure>>;
+    gridId: string = migrationMainGridListId;
+    gridData$: Observable<GridData<ToolsMigration>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
@@ -39,19 +38,14 @@ export class ProcedureListComponent extends ViewBaseComponent
             {
                 return [
                     {
-                        id         : 'tools::procedure.list.edit',
+                        id         : 'tools::migration.list.edit',
                         translation: 'edit',
                         icon       : 'mode_edit',
                     },
                     {
-                        id         : 'tools::procedure.list.delete',
+                        id         : 'tools::migration.list.delete',
                         translation: 'delete',
                         icon       : 'delete',
-                    },
-                    {
-                        id         : 'tools::procedure.list.check',
-                        translation: 'check',
-                        icon       : 'sync',
                     },
                 ];
             },
@@ -62,14 +56,14 @@ export class ProcedureListComponent extends ViewBaseComponent
             translation: 'Selects',
             sticky     : true,
         },
-        ...procedureColumnsConfig,
+        ...migrationColumnsConfig,
     ];
 
     constructor(
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
-        private readonly procedureService: ProcedureService,
+        private readonly migrationService: MigrationService,
         private readonly environmentsInformationService: EnvironmentsInformationService,
     )
     {
@@ -87,7 +81,7 @@ export class ProcedureListComponent extends ViewBaseComponent
         switch (action?.id)
         {
             /* #region common actions */
-            case 'tools::procedure.list.view':
+            case 'tools::migration.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
@@ -99,15 +93,15 @@ export class ProcedureListComponent extends ViewBaseComponent
                     search       : this.gridStateService.getSearchState(this.gridId),
                 };
 
-                this.gridData$ = this.procedureService.pagination$;
+                this.gridData$ = this.migrationService.pagination$;
                 break;
 
-            case 'tools::procedure.list.pagination':
+            case 'tools::migration.list.pagination':
                 await lastValueFrom(
-                    this.procedureService.pagination({
+                    this.migrationService.pagination({
                         query: action.meta.query ?
                             action.meta.query :
-                            queryStatementHandler({ columnsConfig: procedureColumnsConfig })
+                            queryStatementHandler({ columnsConfig: migrationColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
@@ -117,18 +111,18 @@ export class ProcedureListComponent extends ViewBaseComponent
                 );
                 break;
 
-            case 'tools::procedure.list.edit':
+            case 'tools::migration.list.edit':
                 this.router
                     .navigate([
-                        'tools/procedure/edit',
+                        'tools/migration/edit',
                         action.meta.row.id,
                     ]);
                 break;
 
-            case 'tools::procedure.list.delete':
+            case 'tools::migration.list.delete':
                 const deleteDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('tools.Procedure')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('tools.Procedure') }),
+                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('tools.Migration')}`,
+                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('tools.Migration') }),
                     icon   : {
                         show : true,
                         name : 'heroicons_outline:exclamation-triangle',
@@ -156,14 +150,14 @@ export class ProcedureListComponent extends ViewBaseComponent
                             try
                             {
                                 await lastValueFrom(
-                                    this.procedureService
-                                        .deleteById<ToolsProcedure>({
+                                    this.migrationService
+                                        .deleteById<ToolsMigration>({
                                             id: action.meta.row.id,
                                         }),
                                 );
 
                                 this.actionService.action({
-                                    id          : 'tools::procedure.list.pagination',
+                                    id          : 'tools::migration.list.pagination',
                                     isViewAction: false,
                                 });
                             }
@@ -175,20 +169,20 @@ export class ProcedureListComponent extends ViewBaseComponent
                     });
                 break;
 
-            case 'tools::procedure.list.export':
+            case 'tools::migration.list.export':
                 const rows = await lastValueFrom(
-                    this.procedureService
+                    this.migrationService
                         .get({
                             query: action.meta.query,
                         }),
                 );
 
-                const columns: string[] = procedureColumnsConfig.map(procedureColumnConfig => procedureColumnConfig.field);
-                const headers: string[] = procedureColumnsConfig.map(procedureColumnConfig => this.translocoService.translate(procedureColumnConfig.translation));
+                const columns: string[] = migrationColumnsConfig.map(migrationColumnConfig => migrationColumnConfig.field);
+                const headers: string[] = migrationColumnsConfig.map(migrationColumnConfig => this.translocoService.translate(migrationColumnConfig.translation));
 
                 exportRows(
                     rows.objects,
-                    'procedures.' + action.meta.format,
+                    'migrations.' + action.meta.format,
                     columns,
                     headers,
                     action.meta.format,
@@ -197,28 +191,7 @@ export class ProcedureListComponent extends ViewBaseComponent
                 /* #endregion common actions */
 
             /* #region script actions */
-            case 'tools::procedure.list.check':
-                try
-                {
-                    await lastValueFrom(
-                        this.procedureService
-                            .checkScriptProcedure<ToolsProcedure>({
-                                procedureId: action.meta.row.id,
-                            }),
-                    );
-
-                    this.actionService.action({
-                        id          : 'tools::procedure.list.pagination',
-                        isViewAction: false,
-                    });
-                }
-                catch(error)
-                {
-                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                }
-                break;
-
-            case 'tools::procedure.list.runScripts':
+            case 'tools::migration.list.runScripts':
 
                 const environmentsInformation = await firstValueFrom(
                     this.environmentsInformationService.environmentsInformation$
@@ -254,11 +227,11 @@ export class ProcedureListComponent extends ViewBaseComponent
                             try
                             {
                                 await lastValueFrom(
-                                    this.procedureService.runScriptsProcedure(),
+                                    this.migrationService.runScriptsMigration(),
                                 );
 
                                 this.actionService.action({
-                                    id          : 'tools::procedure.list.pagination',
+                                    id          : 'tools::migration.list.pagination',
                                     isViewAction: false,
                                 });
 

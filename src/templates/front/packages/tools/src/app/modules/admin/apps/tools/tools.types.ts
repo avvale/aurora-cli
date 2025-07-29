@@ -89,3 +89,50 @@ export interface ToolsUpdateProcedures {
     executedAt?: string;
     checkedAt?: string;
 }
+
+export interface ToolsMigration {
+    id: string;
+    name: string;
+    version: string;
+    isActive: boolean;
+    upScript?: string;
+    downScript?: string;
+    sort?: number;
+    executedAt?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface ToolsCreateMigration {
+    id: string;
+    name: string;
+    version: string;
+    isActive: boolean;
+    upScript?: string;
+    downScript?: string;
+    sort?: number;
+    executedAt?: string;
+}
+
+export interface ToolsUpdateMigrationById {
+    id: string;
+    name?: string;
+    version?: string;
+    isActive?: boolean;
+    upScript?: string;
+    downScript?: string;
+    sort?: number;
+    executedAt?: string;
+}
+
+export interface ToolsUpdateMigrations {
+    id?: string;
+    name?: string;
+    version?: string;
+    isActive?: boolean;
+    upScript?: string;
+    downScript?: string;
+    sort?: number;
+    executedAt?: string;
+}

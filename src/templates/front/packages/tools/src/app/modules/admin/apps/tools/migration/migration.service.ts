@@ -1,24 +1,24 @@
-import { checkScriptProcedureMutation, downScriptProcedureMutation, runScriptsProcedureMutation, upScriptProcedureMutation } from './procedure.graphql';
+import { downScriptMigrationMutation, runScriptsMigrationMutation, upScriptMigrationMutation } from './migration.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { ToolsCreateProcedure, ToolsProcedure, ToolsUpdateProcedureById, ToolsUpdateProcedures } from '@apps/tools';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, insertMutation, paginationQuery, updateByIdMutation, updateMutation } from '@apps/tools/procedure';
+import { ToolsCreateMigration, ToolsMigration, ToolsUpdateMigrationById, ToolsUpdateMigrations } from '@apps/tools';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, insertMutation, paginationQuery, updateByIdMutation, updateMutation } from '@apps/tools/migration';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ProcedureService
+export class MigrationService
 {
-    paginationSubject$: BehaviorSubject<GridData<ToolsProcedure> | null> = new BehaviorSubject(null);
-    procedureSubject$: BehaviorSubject<ToolsProcedure | null> = new BehaviorSubject(null);
-    proceduresSubject$: BehaviorSubject<ToolsProcedure[] | null> = new BehaviorSubject(null);
+    paginationSubject$: BehaviorSubject<GridData<ToolsMigration> | null> = new BehaviorSubject(null);
+    migrationSubject$: BehaviorSubject<ToolsMigration | null> = new BehaviorSubject(null);
+    migrationsSubject$: BehaviorSubject<ToolsMigration[] | null> = new BehaviorSubject(null);
 
     // scoped subjects
-    paginationScoped: { [key: string]: BehaviorSubject<GridData<ToolsProcedure> | null>; } = {};
-    procedureScoped: { [key: string]: BehaviorSubject<ToolsProcedure | null>; } = {};
-    proceduresScoped: { [key: string]: BehaviorSubject<ToolsProcedure[] | null>; } = {};
+    paginationScoped: { [key: string]: BehaviorSubject<GridData<ToolsMigration> | null>; } = {};
+    migrationScoped: { [key: string]: BehaviorSubject<ToolsMigration | null>; } = {};
+    migrationsScoped: { [key: string]: BehaviorSubject<ToolsMigration[] | null>; } = {};
 
     constructor(
         private readonly graphqlService: GraphQLService,
@@ -27,24 +27,24 @@ export class ProcedureService
     /**
     * Getters
     */
-    get pagination$(): Observable<GridData<ToolsProcedure>>
+    get pagination$(): Observable<GridData<ToolsMigration>>
     {
         return this.paginationSubject$.asObservable();
     }
 
-    get procedure$(): Observable<ToolsProcedure>
+    get migration$(): Observable<ToolsMigration>
     {
-        return this.procedureSubject$.asObservable();
+        return this.migrationSubject$.asObservable();
     }
 
-    get procedures$(): Observable<ToolsProcedure[]>
+    get migrations$(): Observable<ToolsMigration[]>
     {
-        return this.proceduresSubject$.asObservable();
+        return this.migrationsSubject$.asObservable();
     }
 
     // allows to store different types of pagination under different scopes this allows us
     // to have multiple observables with different streams of pagination data.
-    setScopePagination(scope: string, pagination: GridData<ToolsProcedure>): void
+    setScopePagination(scope: string, pagination: GridData<ToolsMigration>): void
     {
         if (this.paginationScoped[scope])
         {
@@ -56,7 +56,7 @@ export class ProcedureService
     }
 
     // get pagination observable by scope
-    getScopePagination(scope: string): Observable<GridData<ToolsProcedure>>
+    getScopePagination(scope: string): Observable<GridData<ToolsMigration>>
     {
         if (this.paginationScoped[scope]) return this.paginationScoped[scope].asObservable();
 
@@ -64,42 +64,42 @@ export class ProcedureService
         return this.paginationScoped[scope].asObservable();
     }
 
-    setScopeProcedure(scope: string, object: ToolsProcedure): void
+    setScopeMigration(scope: string, object: ToolsMigration): void
     {
-        if (this.procedureScoped[scope])
+        if (this.migrationScoped[scope])
         {
-            this.procedureScoped[scope].next(object);
+            this.migrationScoped[scope].next(object);
             return;
         }
         // create new subject if not exist
-        this.procedureScoped[scope] = new BehaviorSubject(object);
+        this.migrationScoped[scope] = new BehaviorSubject(object);
     }
 
-    getScopeProcedure(scope: string): Observable<ToolsProcedure>
+    getScopeMigration(scope: string): Observable<ToolsMigration>
     {
-        if (this.procedureScoped[scope]) return this.procedureScoped[scope].asObservable();
+        if (this.migrationScoped[scope]) return this.migrationScoped[scope].asObservable();
 
-        this.procedureScoped[scope] = new BehaviorSubject(null);
-        return this.procedureScoped[scope].asObservable();
+        this.migrationScoped[scope] = new BehaviorSubject(null);
+        return this.migrationScoped[scope].asObservable();
     }
 
-    setScopeProcedures(scope: string, objects: ToolsProcedure[]): void
+    setScopeMigrations(scope: string, objects: ToolsMigration[]): void
     {
-        if (this.proceduresScoped[scope])
+        if (this.migrationsScoped[scope])
         {
-            this.proceduresScoped[scope].next(objects);
+            this.migrationsScoped[scope].next(objects);
             return;
         }
         // create new subject if not exist
-        this.proceduresScoped[scope] = new BehaviorSubject(objects);
+        this.migrationsScoped[scope] = new BehaviorSubject(objects);
     }
 
-    getScopeProcedures(scope: string): Observable<ToolsProcedure[]>
+    getScopeMigrations(scope: string): Observable<ToolsMigration[]>
     {
-        if (this.proceduresScoped[scope]) return this.proceduresScoped[scope].asObservable();
+        if (this.migrationsScoped[scope]) return this.migrationsScoped[scope].asObservable();
 
-        this.proceduresScoped[scope] = new BehaviorSubject(null);
-        return this.proceduresScoped[scope].asObservable();
+        this.migrationsScoped[scope] = new BehaviorSubject(null);
+        return this.migrationsScoped[scope].asObservable();
     }
 
     pagination(
@@ -116,12 +116,12 @@ export class ProcedureService
             headers?: GraphQLHeaders;
             scope?: string;
         } = {},
-    ): Observable<GridData<ToolsProcedure>>
+    ): Observable<GridData<ToolsMigration>>
     {
         // get result, map ang throw data across observable
         return this.graphqlService
             .client()
-            .watchQuery<{ pagination: GridData<ToolsProcedure>; }>({
+            .watchQuery<{ pagination: GridData<ToolsMigration>; }>({
                 query    : graphqlStatement,
                 variables: {
                     query,
@@ -154,13 +154,13 @@ export class ProcedureService
             scope?: string;
         } = {},
     ): Observable<{
-        object: ToolsProcedure;
+        object: ToolsMigration;
     }>
     {
         return this.graphqlService
             .client()
             .watchQuery<{
-                object: ToolsProcedure;
+                object: ToolsMigration;
             }>({
                 query    : parseGqlFields(graphqlStatement, fields, constraint),
                 variables: {
@@ -175,7 +175,7 @@ export class ProcedureService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data => scope ? this.setScopeProcedure(scope, data.object) : this.procedureSubject$.next(data.object)),
+                tap(data => scope ? this.setScopeMigration(scope, data.object) : this.migrationSubject$.next(data.object)),
             );
     }
 
@@ -194,13 +194,13 @@ export class ProcedureService
             scope?: string;
         } = {},
     ): Observable<{
-        object: ToolsProcedure;
+        object: ToolsMigration;
     }>
     {
         return this.graphqlService
             .client()
             .watchQuery<{
-                object: ToolsProcedure;
+                object: ToolsMigration;
             }>({
                 query    : parseGqlFields(graphqlStatement, fields, query, constraint),
                 variables: {
@@ -215,7 +215,7 @@ export class ProcedureService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data => scope ? this.setScopeProcedure(scope, data.object) : this.procedureSubject$.next(data.object)),
+                tap(data => scope ? this.setScopeMigration(scope, data.object) : this.migrationSubject$.next(data.object)),
             );
     }
 
@@ -234,13 +234,13 @@ export class ProcedureService
             scope?: string;
         } = {},
     ): Observable<{
-        objects: ToolsProcedure[];
+        objects: ToolsMigration[];
     }>
     {
         return this.graphqlService
             .client()
             .watchQuery<{
-                objects: ToolsProcedure[];
+                objects: ToolsMigration[];
             }>({
                 query    : parseGqlFields(graphqlStatement, fields, query, constraint),
                 variables: {
@@ -255,7 +255,7 @@ export class ProcedureService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data => scope ? this.setScopeProcedures(scope, data.objects) : this.proceduresSubject$.next(data.objects)),
+                tap(data => scope ? this.setScopeMigrations(scope, data.objects) : this.migrationsSubject$.next(data.objects)),
             );
     }
 
@@ -266,7 +266,7 @@ export class ProcedureService
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            object?: ToolsCreateProcedure;
+            object?: ToolsCreateMigration;
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
@@ -291,7 +291,7 @@ export class ProcedureService
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            objects?: ToolsCreateProcedure[];
+            objects?: ToolsCreateMigration[];
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
@@ -316,7 +316,7 @@ export class ProcedureService
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            object?: ToolsUpdateProcedureById;
+            object?: ToolsUpdateMigrationById;
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
@@ -343,7 +343,7 @@ export class ProcedureService
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            object?: ToolsUpdateProcedures;
+            object?: ToolsUpdateMigrations;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
@@ -422,14 +422,14 @@ export class ProcedureService
     }
 
     // Mutation additionalApis
-    upScriptProcedure<T>(
+    upScriptMigration<T>(
         {
-            graphqlStatement = upScriptProcedureMutation,
-            procedureId = null,
+            graphqlStatement = upScriptMigrationMutation,
+            migrationId = null,
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            procedureId?: string;
+            migrationId?: string;
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
@@ -439,7 +439,7 @@ export class ProcedureService
             .mutate({
                 mutation : graphqlStatement,
                 variables: {
-                    procedureId,
+                    migrationId,
                 },
                 context: {
                     headers,
@@ -447,14 +447,14 @@ export class ProcedureService
             });
     }
 
-    downScriptProcedure<T>(
+    downScriptMigration<T>(
         {
-            graphqlStatement = downScriptProcedureMutation,
-            procedureId = null,
+            graphqlStatement = downScriptMigrationMutation,
+            migrationId = null,
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            procedureId?: string;
+            migrationId?: string;
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
@@ -464,7 +464,7 @@ export class ProcedureService
             .mutate({
                 mutation : graphqlStatement,
                 variables: {
-                    procedureId,
+                    migrationId,
                 },
                 context: {
                     headers,
@@ -472,34 +472,9 @@ export class ProcedureService
             });
     }
 
-    checkScriptProcedure<T>(
+    runScriptsMigration<T>(
         {
-            graphqlStatement = checkScriptProcedureMutation,
-            procedureId = null,
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            procedureId?: string;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    procedureId,
-                },
-                context: {
-                    headers,
-                },
-            });
-    }
-
-    runScriptsProcedure<T>(
-        {
-            graphqlStatement = runScriptsProcedureMutation,
+            graphqlStatement = runScriptsMigrationMutation,
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;

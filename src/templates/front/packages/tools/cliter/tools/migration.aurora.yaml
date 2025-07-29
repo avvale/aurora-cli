@@ -1,16 +1,16 @@
 version: 0.0.1
 boundedContextName: tools
-moduleName: procedure
-moduleNames: procedures
-aggregateName: ToolsProcedure
+moduleName: migration
+moduleNames: migrations
+aggregateName: ToolsMigration
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
 front:
   outlineFontSetIcon: material-symbols-outlined
-  outlineIcon: flowsheet
+  outlineIcon: repartition
   solidFontSetIcon: material-symbols-outlined
-  solidIcon: flowsheet
+  solidIcon: repartition
 aggregateProperties:
   - name: id
     type: id
@@ -20,26 +20,16 @@ aggregateProperties:
     type: varchar
     maxLength: 128
     nullable: false
-  - name: type
-    type: enum
-    enumOptions:
-      - FUNCTION
-      - PROCEDURE
-      - TRIGGER
-    nullable: false
   - name: version
     type: varchar
     maxLength: 16
     nullable: false
+    index: unique
   - name: isActive
     type: boolean
     nullable: false
     defaultValue: false
   - name: isExecuted
-    type: boolean
-    nullable: false
-    defaultValue: false
-  - name: isUpdated
     type: boolean
     nullable: false
     defaultValue: false
@@ -53,14 +43,7 @@ aggregateProperties:
     type: smallint
     unsigned: true
     nullable: true
-  - name: hash
-    type: varchar
-    maxLength: 64
-    nullable: true
   - name: executedAt
-    type: timestamp
-    nullable: true
-  - name: checkedAt
     type: timestamp
     nullable: true
   - name: createdAt
@@ -73,16 +56,13 @@ aggregateProperties:
     type: timestamp
     nullable: true
 additionalApis:
-  - path: tools/procedure/up-script
+  - path: tools/migration/up-script
     resolverType: mutation
     httpMethod: post
-  - path: tools/procedure/down-script
+  - path: tools/migration/down-script
     resolverType: mutation
     httpMethod: post
-  - path: tools/procedure/check-script
-    resolverType: mutation
-    httpMethod: post
-  - path: tools/procedure/run-scripts
+  - path: tools/migration/run-scripts
     resolverType: mutation
     httpMethod: post
 excludedOperations:

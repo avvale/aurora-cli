@@ -10,25 +10,36 @@ export const toolsNavigation: FuseNavigationItem = {
     },
     children: [
         {
-            id         : 'keyValues',
-            title      : 'KeyValue',
-            type       : 'basic',
+            id: 'keyValues',
+            title: 'KeyValue',
+            type: 'basic',
             iconFontSet: 'material-symbols-outlined',
-            icon       : 'data_object',
-            link       : '/tools/key-value',
-            meta : {
+            icon: 'data_object',
+            link: '/tools/key-value',
+            meta: {
                 permission: 'tools.keyValue.access',
             },
         },
         {
-            id         : 'procedures',
-            title      : 'Procedure',
-            type       : 'basic',
+            id: 'procedures',
+            title: 'Procedure',
+            type: 'basic',
             iconFontSet: 'material-symbols-outlined',
-            icon       : 'flowsheet',
-            link       : '/tools/procedure',
-            meta : {
+            icon: 'flowsheet',
+            link: '/tools/procedure',
+            meta: {
                 permission: 'tools.procedure.access',
+            },
+        },
+        {
+            id: 'migrations',
+            title: 'Migration',
+            type: 'basic',
+            iconFontSet: 'material-symbols-outlined',
+            icon: 'repartition',
+            link: '/tools/migration',
+            meta : {
+                permission: 'tools.migration.access',
             },
         },
     ],

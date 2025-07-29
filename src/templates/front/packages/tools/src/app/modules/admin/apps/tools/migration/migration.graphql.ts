@@ -2,16 +2,13 @@ import gql from 'graphql-tag';
 
 export const fields = `
     name
-    type
     version
     isActive
     isExecuted
-    isUpdated
     upScript
     downScript
     sort
     executedAt
-    checkedAt
     createdAt
     updatedAt
 `;
@@ -21,11 +18,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query ToolsPaginateProcedures (
+    query ToolsPaginateMigrations (
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: toolsPaginateProcedures (
+        pagination: toolsPaginateMigrations (
             query: $query
             constraint: $constraint
         ) {
@@ -37,11 +34,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query ToolsGetProcedures (
+    query ToolsGetMigrations (
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: toolsGetProcedures (
+        objects: toolsGetMigrations (
             query: $query
             constraint: $constraint
         ) {
@@ -52,11 +49,11 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query ToolsFindProcedureById (
+    query ToolsFindMigrationById (
         $id: ID
         $constraint: QueryStatement
     ) {
-        object: toolsFindProcedureById (
+        object: toolsFindMigrationById (
             id: $id
             constraint: $constraint
         ) {
@@ -67,11 +64,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query ToolsFindProcedure (
+    query ToolsFindMigration (
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: toolsFindProcedure (
+        object: toolsFindMigration (
             query: $query
             constraint: $constraint
         ) {
@@ -82,10 +79,10 @@ export const findQuery = gql`
 `;
 
 export const createMutation = gql`
-    mutation ToolsCreateProcedure (
-        $payload: ToolsCreateProcedureInput!
+    mutation ToolsCreateMigration (
+        $payload: ToolsCreateMigrationInput!
     ) {
-        toolsCreateProcedure (
+        toolsCreateMigration (
             payload: $payload
         ) {
             ${fields}
@@ -94,21 +91,21 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation ToolsCreateProcedures (
-        $payload: [ToolsCreateProcedureInput]!
+    mutation ToolsCreateMigrations (
+        $payload: [ToolsCreateMigrationInput]!
     ) {
-        toolsCreateProcedures (
+        toolsCreateMigrations (
             payload: $payload
         )
     }
 `;
 
 export const updateByIdMutation = gql`
-    mutation ToolsUpdateProcedureById (
-        $payload: ToolsUpdateProcedureByIdInput!
+    mutation ToolsUpdateMigrationById (
+        $payload: ToolsUpdateMigrationByIdInput!
         $constraint: QueryStatement
     ) {
-        toolsUpdateProcedureById (
+        toolsUpdateMigrationById (
             payload: $payload
             constraint: $constraint
         ) {
@@ -118,12 +115,12 @@ export const updateByIdMutation = gql`
 `;
 
 export const updateMutation = gql`
-    mutation ToolsUpdateProcedures (
-        $payload: ToolsUpdateProceduresInput!
+    mutation ToolsUpdateMigrations (
+        $payload: ToolsUpdateMigrationsInput!
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        toolsUpdateProcedures (
+        toolsUpdateMigrations (
             payload: $payload
             query: $query
             constraint: $constraint
@@ -134,11 +131,11 @@ export const updateMutation = gql`
 `;
 
 export const deleteByIdMutation = gql`
-    mutation ToolsDeleteProcedureById (
+    mutation ToolsDeleteMigrationById (
         $id: ID!
         $constraint: QueryStatement
     ) {
-        toolsDeleteProcedureById (
+        toolsDeleteMigrationById (
             id: $id
             constraint: $constraint
         ) {
@@ -148,11 +145,11 @@ export const deleteByIdMutation = gql`
 `;
 
 export const deleteMutation = gql`
-    mutation ToolsDeleteProcedures (
+    mutation ToolsDeleteMigrations (
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        toolsDeleteProcedures (
+        toolsDeleteMigrations (
             query: $query
             constraint: $constraint
         ) {
@@ -162,38 +159,28 @@ export const deleteMutation = gql`
 `;
 
 // Mutation additionalApis
-export const upScriptProcedureMutation = gql`
-    mutation ToolsUpScriptProcedure (
-        $procedureId: ID!
+export const upScriptMigrationMutation = gql`
+    mutation ToolsUpScriptMigration (
+        $migrationId: ID!
     ) {
-        toolsUpScriptProcedure (
-            procedureId: $procedureId
+        toolsUpScriptMigration (
+            migrationId: $migrationId
         )
     }
 `;
 
-export const downScriptProcedureMutation = gql`
-    mutation ToolsDownScriptProcedure (
-        $procedureId: ID!
+export const downScriptMigrationMutation = gql`
+    mutation ToolsDownScriptMigration (
+        $migrationId: ID!
     ) {
-        toolsDownScriptProcedure (
-            procedureId: $procedureId
+        toolsDownScriptMigration (
+            migrationId: $migrationId
         )
     }
 `;
 
-export const checkScriptProcedureMutation = gql`
-    mutation ToolsCheckScriptProcedure (
-        $procedureId: ID!
-    ) {
-        toolsCheckScriptProcedure (
-            procedureId: $procedureId
-        )
-    }
-`;
-
-export const runScriptsProcedureMutation = gql`
-    mutation ToolsRunScriptsProcedure {
-        toolsRunScriptsProcedure
+export const runScriptsMigrationMutation = gql`
+    mutation ToolsRunScriptsMigration {
+        toolsRunScriptsMigration
     }
 `;

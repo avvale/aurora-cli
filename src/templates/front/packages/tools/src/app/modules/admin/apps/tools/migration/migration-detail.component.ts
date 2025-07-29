@@ -1,48 +1,45 @@
 import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSelectModule } from '@angular/material/select';
-import { ToolsProcedure, ToolsProcedureType } from '@apps/tools';
-import { ProcedureService } from '@apps/tools/procedure';
+import { ToolsMigration } from '@apps/tools';
+import { MigrationService } from '@apps/tools/migration';
 import { Action, ChipComponent, Crumb, defaultDetailImports, log, mapActions, MatFormFieldAppearanceComponent, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
-import { lastValueFrom, takeUntil } from 'rxjs';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
-import { KeyValuePipe } from '@angular/common';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector: 'tools-procedure-detail',
-    templateUrl: './procedure-detail.component.html',
+    selector: 'tools-migration-detail',
+    templateUrl: './migration-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
         ...defaultDetailImports,
-        ChipComponent, KeyValuePipe, MatCheckboxModule, MatFormFieldAppearanceComponent,
-        MatSelectModule, MonacoEditorModule, MtxDatetimepickerModule,
+        ChipComponent, MatCheckboxModule, MtxDatetimepickerModule,
+        MatFormFieldAppearanceComponent, MonacoEditorModule,
     ],
 })
-export class ProcedureDetailComponent extends ViewDetailComponent
+export class MigrationDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
     editorOptions = { theme: 'vs', language: 'sql', readOnly: true };
-    toolsProcedureType = ToolsProcedureType;
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: WritableSignal<ToolsProcedure> = signal(null);
+    managedObject: WritableSignal<ToolsMigration> = signal(null);
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'tools.Procedures', routerLink: ['/tools/procedure']},
-        { translation: 'tools.Procedure' },
+        { translation: 'tools.Migrations', routerLink: ['/tools/migration']},
+        { translation: 'tools.Migration' },
     ];
 
     constructor(
-        private readonly procedureService: ProcedureService,
+        private readonly migrationService: MigrationService,
     )
     {
         super();
@@ -91,8 +88,8 @@ export class ProcedureDetailComponent extends ViewDetailComponent
             id: mapActions(
                 this.currentViewAction.id,
                 {
-                    'tools::procedure.detail.new' : 'tools::procedure.detail.create',
-                    'tools::procedure.detail.edit': 'tools::procedure.detail.update',
+                    'tools::migration.detail.new' : 'tools::migration.detail.create',
+                    'tools::migration.detail.edit': 'tools::migration.detail.update',
                 },
             ),
             isViewAction: false,
@@ -105,7 +102,6 @@ export class ProcedureDetailComponent extends ViewDetailComponent
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
             name: [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(128)]],
-            type: [{ value: null, disabled: true }, [Validators.required]],
             version: [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(16)]],
             isActive: [false, [Validators.required]],
             upScript: '',
@@ -122,13 +118,13 @@ export class ProcedureDetailComponent extends ViewDetailComponent
         switch (action?.id)
         {
             /* #region common actions */
-            case 'tools::procedure.detail.new':
+            case 'tools::migration.detail.new':
                 this.fg.get('id').setValue(uuid());
                 break;
 
-            case 'tools::procedure.detail.edit':
-                this.procedureService
-                    .procedure$
+            case 'tools::migration.detail.edit':
+                this.migrationService
+                    .migration$
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item =>
                     {
@@ -137,18 +133,18 @@ export class ProcedureDetailComponent extends ViewDetailComponent
                     });
                 break;
 
-            case 'tools::procedure.detail.create':
+            case 'tools::migration.detail.create':
                 try
                 {
                     await lastValueFrom(
-                        this.procedureService
-                            .create<ToolsProcedure>({
+                        this.migrationService
+                            .create<ToolsMigration>({
                                 object: this.fg.value,
                             }),
                     );
 
                     this.snackBar.open(
-                        `${this.translocoService.translate('tools.Procedure')} ${this.translocoService.translate('Created.M')}`,
+                        `${this.translocoService.translate('tools.Migration')} ${this.translocoService.translate('Created.M')}`,
                         undefined,
                         {
                             verticalPosition: 'top',
@@ -156,7 +152,7 @@ export class ProcedureDetailComponent extends ViewDetailComponent
                         },
                     );
 
-                    this.router.navigate(['tools/procedure']);
+                    this.router.navigate(['tools/migration']);
                 }
                 catch(error)
                 {
@@ -164,18 +160,18 @@ export class ProcedureDetailComponent extends ViewDetailComponent
                 }
                 break;
 
-            case 'tools::procedure.detail.update':
+            case 'tools::migration.detail.update':
                 try
                 {
                     await lastValueFrom(
-                        this.procedureService
-                            .updateById<ToolsProcedure>({
+                        this.migrationService
+                            .updateById<ToolsMigration>({
                                 object: this.fg.value,
                             }),
                     );
 
                     this.snackBar.open(
-                        `${this.translocoService.translate('tools.Procedure')} ${this.translocoService.translate('Saved.M')}`,
+                        `${this.translocoService.translate('tools.Migration')} ${this.translocoService.translate('Saved.M')}`,
                         undefined,
                         {
                             verticalPosition: 'top',
@@ -183,7 +179,7 @@ export class ProcedureDetailComponent extends ViewDetailComponent
                         },
                     );
 
-                    this.router.navigate(['tools/procedure']);
+                    this.router.navigate(['tools/migration']);
                 }
                 catch(error)
                 {
@@ -193,7 +189,7 @@ export class ProcedureDetailComponent extends ViewDetailComponent
                 /* #endregion common actions */
 
             /* #region script actions */
-            case 'tools::procedure.detail.upScript':
+            case 'tools::migration.detail.upScript':
                 const deleteDialogRef = this.confirmationService.open({
                     title  : `${this.translocoService.translate('Install')} ${this.translocoService.translate('tools.Script')}`,
                     message: this.translocoService.translate('tools.InstallWarning', { name: this.fg.get('name').value }),
@@ -224,9 +220,9 @@ export class ProcedureDetailComponent extends ViewDetailComponent
                             try
                             {
                                 await lastValueFrom(
-                                    this.procedureService
-                                        .upScriptProcedure<ToolsProcedure>({
-                                            procedureId: this.managedObject().id,
+                                    this.migrationService
+                                        .upScriptMigration<ToolsMigration>({
+                                            migrationId: this.managedObject().id,
                                         }),
                                 );
 
@@ -247,7 +243,7 @@ export class ProcedureDetailComponent extends ViewDetailComponent
                     });
                 break;
 
-            case 'tools::procedure.detail.downScript':
+            case 'tools::migration.detail.downScript':
                 const downScriptDialogRef = this.confirmationService.open({
                     title  : `${this.translocoService.translate('Uninstall')} ${this.translocoService.translate('tools.Script')}`,
                     message: this.translocoService.translate('tools.UninstallWarning', { name: this.fg.get('name').value }),
@@ -278,9 +274,9 @@ export class ProcedureDetailComponent extends ViewDetailComponent
                             try
                             {
                                 await lastValueFrom(
-                                    this.procedureService
-                                        .downScriptProcedure<ToolsProcedure>({
-                                            procedureId: this.managedObject().id,
+                                    this.migrationService
+                                        .downScriptMigration<ToolsMigration>({
+                                            migrationId: this.managedObject().id,
                                         }),
                                 );
 

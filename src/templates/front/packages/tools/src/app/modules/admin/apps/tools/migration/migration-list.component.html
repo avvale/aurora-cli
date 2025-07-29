@@ -10,9 +10,9 @@
                     fontSet="material-symbols-outlined"
                     class="icon-size-8 mr-2"
                 >
-                    flowsheet
+                    repartition
                 </mat-icon>
-                {{ t('tools.Procedure') }}
+                {{ t('tools.Migration') }}
             </au-title>
         </div>
 
@@ -24,7 +24,7 @@
                 color="accent"
                 (click)="
                     actionService.action({
-                        id          : 'tools::procedure.list.runScripts',
+                        id          : 'tools::migration.list.runScripts',
                         isViewAction: false
                     })
                 "
@@ -58,9 +58,6 @@
         >
             <au-grid-translations
                 [for]="gridId"
-                [actionsMenu]="{
-                    check: t('Check'),
-                }"
             >
                 @for (columnConfig of originColumnsConfig; track columnConfig.field)
                 {
@@ -69,24 +66,6 @@
                     </au-grid-column-translation>
                 }
             </au-grid-translations>
-            <ng-template
-                auGridCellValueTemplate
-                field="isUpdated"
-                let-isUpdated
-                let-columnConfig="columnConfig"
-            >
-                @if (isUpdated)
-                {
-                    <div class="inline-block">
-                        <au-chip
-                            color="primary"
-                            size="small"
-                        >
-                            {{ t('tools.IsUpdated') }}
-                        </au-chip>
-                    </div>
-                }
-            </ng-template>
         </au-grid>
         <!-- / Grid -->
 
