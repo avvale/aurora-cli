@@ -14,7 +14,7 @@
 {{/each}}
 {{/if}}
 {{{ importManager (object imports=importsArray) }}}
-export const {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data = [
+export const {{ toCamelCase schema.boundedContextName }}Mock{{ toPascalCase schema.moduleName }}Data: any[] = [
     {{#loops 20}}
     {
         {{#each (getSeedProperties ../schema.aggregateProperties) as |seedProperty seedId|}}

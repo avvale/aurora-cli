@@ -51,13 +51,20 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     {
         // add many to many relation
         {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
-        if (aggregate.{{ toCamelCase (getPropertyName this) }}.length > 0)
+        if (aggregate?.{{ toCamelCase (getPropertyName this) }}.length > 0)
         {
-            await model.$add(
-                '{{ toCamelCase name }}',
-                aggregate.{{ toCamelCase (getPropertyName this) }}.value,
-                createOptions,
-            );
+            try
+            {
+                await model.$add(
+                    '{{ toCamelCase name }}',
+                    aggregate.{{ toCamelCase (getPropertyName this) }}.value,
+                    createOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}Repository:', error);
+            }
         }
         {{/each}}
     }
@@ -71,13 +78,20 @@ export class {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCas
     {
         // set many to many relation
         {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
-        if (aggregate.{{ toCamelCase (getPropertyName this) }}.isArray())
+        if (aggregate?.{{ toCamelCase (getPropertyName this) }}.isArray())
         {
-            await model.$set(
-                '{{ toCamelCase name }}',
-                aggregate.{{ toCamelCase (getPropertyName this) }}.value,
-                updateByIdOptions,
-            );
+            try
+            {
+                await model.$set(
+                    '{{ toCamelCase name }}',
+                    aggregate.{{ toCamelCase (getPropertyName this) }}.value,
+                    updateByIdOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] {{ toPascalCase schema.boundedContextName }}Sequelize{{ toPascalCase schema.moduleName }}Repository:', error);
+            }
         }
         {{/each}}
     }
