@@ -26,78 +26,82 @@
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
-            @if (currentViewAction?.id === 'message::message.detail.edit')
+            @if (currentViewAction.id === 'message::message.detail.edit')
             {
-                <au-split-button
+                <button
+                    mat-flat-button
+                    type="submit"
+                    class="ml-3"
+                    form="messageMessageFormDetail"
                     color="accent"
-                    mainButtonType="submit"
-                    mainButtonForm="messageMessageFormDetail"
                     [disabled]="fg.pristine || ('message::message.detail.update' | getSpinnerFlag | async)"
                 >
-                    <ng-template auSplitMainButtonContentTemplate>
-                        @if ('message::message.detail.update' | getSpinnerFlag | async)
-                        {
-                            <mat-icon>
-                                <mat-spinner diameter="20"></mat-spinner>
-                            </mat-icon>
-                        }
-                        @else
-                        {
-                            <mat-icon
-                                svgIcon="mat_solid:edit"
-                                class="icon-size-5 mr-2"
-                            >
-                            </mat-icon>
-                        }
-                        {{ t('Update') }}
-                    </ng-template>
-                    <ng-template auSplitMenuButtonsTemplate>
-                        @if (status() === messageMessageStatus.DRAFT)
-                        {
-                            <button
-                                mat-menu-item
-                                (click)="
-                                    actionService.action({
-                                        id          : 'message::message.detail.sendMessage',
-                                        isViewAction: false,
-                                        meta        : {
-                                            message: managedObject()
-                                        }
-                                    })
-                                "
-                            >
-                                <mat-icon
-                                    class="icon-size-5"
-                                    svgIcon="mat_outline:send"
-                                >
-                                </mat-icon>
-                                {{ t('Send') }}
-                            </button>
-                        }
-                        @else
-                        {
-                            <button
-                                mat-menu-item
-                                (click)="
-                                    actionService.action({
-                                        id          : 'message::message.detail.draftMessage',
-                                        isViewAction: false,
-                                        meta        : {
-                                            message: managedObject()
-                                        }
-                                    })
-                                "
-                            >
-                                <mat-icon
-                                    class="icon-size-5"
-                                    svgIcon="mat_outline:drafts"
-                                >
-                                </mat-icon>
-                                {{ t('Draft') }}
-                            </button>
-                        }
-                    </ng-template>
-                </au-split-button>
+                    @if ('message::message.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon *ngIf="'message::message.detail.update' | getSpinnerFlag | async">
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:edit"
+                            class="icon-size-5 mr-2"
+                            color="accent"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Update') }}
+                </button>
+
+                @if (status() === messageMessageStatus.DRAFT)
+                {
+                    <button
+                        mat-flat-button
+                        class="ml-3"
+                        color="accent"
+                        (click)="
+                            actionService.action({
+                                id          : 'message::message.detail.sendMessage',
+                                isViewAction: false,
+                                meta        : {
+                                    message: managedObject()
+                                }
+                            })
+                        "
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            svgIcon="mat_outline:send"
+                        >
+                        </mat-icon>
+                        {{ t('Send') }}
+                    </button>
+                }
+                @else
+                {
+                    <button
+                        mat-flat-button
+                        class="ml-3"
+                        color="accent"
+                        (click)="
+                            actionService.action({
+                                id          : 'message::message.detail.draftMessage',
+                                isViewAction: false,
+                                meta        : {
+                                    message: managedObject()
+                                }
+                            })
+                        "
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            svgIcon="mat_outline:drafts"
+                        >
+                        </mat-icon>
+                        {{ t('message.Draft') }}
+                    </button>
+                }
             }
 
             @if (currentViewAction?.id === 'message::message.detail.new')
@@ -115,7 +119,6 @@
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
-
                     }
                     @else
                     {
@@ -258,7 +261,7 @@
                                         >
                                         </ngx-mat-select-search>
                                     </mat-option>
-                                    @for (scope of filteredScopeRecipients$ | async; track scope.id)
+                                    @for (scope of filteredScopeRecipients$ | async; track scope)
                                     {
                                         <mat-option [value]="scope">
                                             {{ scope }}
@@ -415,7 +418,7 @@
                         </div>
                     </mat-tab>
 
-                    <mat-tab [label]="t('message.Message')">
+                    <mat-tab [label]="t('message.MessageWriting')">
                         <div class="layout__container">
 
                             <mat-form-field
@@ -478,6 +481,7 @@
                                 </quill-editor>
                                 <mat-error>{{ formErrors?.body | async }}</mat-error>
                             </div>
+
                             @if (false)
                             {
                                 <mat-form-field
@@ -518,7 +522,7 @@
                                 [isMultiple]="true"
                                 [dropLabel]="t('DropFilesHere')"
                                 [browseLabel]="t('BrowseLabel')"
-                                (files)="
+                                (onFileDrop)="
                                     actionService.action({
                                         id          : 'message::message.detail.addAttachment',
                                         isViewAction: false,
@@ -530,9 +534,58 @@
                             >
                             </au-file-upload>
 
-                            <div
-                                class="col-12"
-                            >
+                            <div class="col-12">
+                                @for (attachment of this.fg.get('attachmentsInputFile').value; track attachment.name; let i = $index)
+                                {
+                                    <div class="flex justify-between items-center p-4 mb-2 border rounded">
+                                        <p
+                                            class="text-base flex items-center cursor-pointer"
+                                            (click)="
+                                                actionService.action({
+                                                    id: 'message::message.detail.downloadAttachment',
+                                                    isViewAction: false,
+                                                    meta: {
+                                                        attachment
+                                                    }
+                                                })
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="icon-size-5 mr-2"
+                                                [svgIcon]="'heroicons_solid:document'"
+                                            >
+                                            </mat-icon>
+                                            {{ attachment.name }}
+                                        </p>
+                                        <p class="text-base opacity-60">
+                                            {{ attachment.type }}
+                                        </p>
+                                        <p class="text-base opacity-60">
+                                            {{ (attachment.size | formatFileSize).size }}{{ (attachment.size | formatFileSize).unit }}
+                                        </p>
+                                        <button
+                                            class="ml-3"
+                                            mat-icon-button
+                                            (click)="
+                                                actionService.action({
+                                                    id          : 'message::message.detail.removeAttachment',
+                                                    isViewAction: false,
+                                                    meta    : {
+                                                        attachment,
+                                                        index: i,
+                                                    }
+                                                })
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="icon-size-5"
+                                                svgIcon="mat_solid:delete"
+                                            >
+                                            </mat-icon>
+                                        </button>
+                                    </div>
+                                }
+
                                 @for (attachment of managedObject()?.attachments; track attachment.id)
                                 {
                                     <div class="flex justify-between items-center p-4 mb-2 border rounded">

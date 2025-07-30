@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { DatePipe, NgClass, NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild, ViewEncapsulation, WritableSignal, computed, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,8 +23,8 @@ export const messageCustomerCenterMessageScope = 'message::customerCenterMessage
     encapsulation: ViewEncapsulation.None,
     standalone   : true,
     imports      : [
-        AsyncPipe, BreadcrumbComponent, NgIf, MatButtonModule, MatIconModule, RouterLink, MatProgressBarModule,
-        MatTooltipModule, NgFor, NgClass, RouterOutlet, DatePipe, TitleComponent, TranslocoModule,
+        BreadcrumbComponent, NgIf, MatButtonModule, MatIconModule, RouterLink, MatProgressBarModule,
+        MatTooltipModule, NgClass, RouterOutlet, DatePipe, TitleComponent, TranslocoModule,
     ],
 })
 export class MessageCenterListComponent extends ViewBaseComponent

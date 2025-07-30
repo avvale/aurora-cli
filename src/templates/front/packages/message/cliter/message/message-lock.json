@@ -11,35 +11,35 @@
         },
         {
             "path": "src/app/modules/admin/apps/message/message/message-detail.component.html",
-            "integrity": "sha1:9dd44a2acd125636c013fe6bbbcc7f6423f4ee30"
+            "integrity": "sha1:94f2e33e8070409e6f652f4d5f98041f45732cc9"
         },
         {
             "path": "src/app/modules/admin/apps/message/message/message-detail.component.ts",
-            "integrity": "sha1:07bb0a906cb625ad4595b894d69f2aac80f76dc7"
+            "integrity": "sha1:00397a73c024294ffceb06ca3ce46fd50f66e5d7"
         },
         {
             "path": "src/app/modules/admin/apps/message/message/message-list.component.html",
-            "integrity": "sha1:a6aca84ee46211258377ea2c7ea1c6ab4dc23e0b"
+            "integrity": "sha1:8e455d82e56bd87783830a8dafb118077c7bb176"
         },
         {
             "path": "src/app/modules/admin/apps/message/message/message-list.component.ts",
-            "integrity": "sha1:d6b39cfc4d2610984b6e487b3a0a9acc111e183a"
+            "integrity": "sha1:1433d463c327a37e775435e65462f29fa232161d"
         },
         {
             "path": "src/app/modules/admin/apps/message/message/message.columns-config.ts",
-            "integrity": "sha1:b7d6fd809d723fde29ed50356ec7642123678564"
+            "integrity": "sha1:66a8e0c18f5b704a4a5390afaec147adf646f2ea"
         },
         {
             "path": "src/app/modules/admin/apps/message/message/message.graphql.ts",
-            "integrity": "sha1:119860305c5f912e9c3162ea3ce6c8843c1ba82e"
+            "integrity": "sha1:6575c908ba1a20451ff1f6aa9257147d19bb6577"
         },
         {
             "path": "src/app/modules/admin/apps/message/message/message.resolvers.ts",
-            "integrity": "sha1:a61738e32c7f955bbbcb4fc8381a443441bd4f54"
+            "integrity": "sha1:0df6fbc1b6d9ad72c2b60716f5dd3073cce58586"
         },
         {
             "path": "src/app/modules/admin/apps/message/message/message.service.ts",
-            "integrity": "sha1:895ef7d5b858d9e14f5debd86dbbc63169da5277"
+            "integrity": "sha1:f907f2e037b937f8fabf9d6b7736261de3ce7011"
         },
         {
             "path": "src/app/modules/admin/apps/message/message/index.ts",

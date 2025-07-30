@@ -1,4 +1,4 @@
-import { NgForOf, KeyValuePipe } from '@angular/common';
+import { NgForOf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Signal, ViewChild, ViewEncapsulation, WritableSignal, computed, signal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -21,15 +21,15 @@ export const messageSelectedAccountsScopePagination = 'message::messageSelectedA
 export const messageAccountsScopeDialogPagination = 'message::messageDialogAccounts';
 
 @Component({
-    selector       : 'message-message-detail',
-    templateUrl    : './message-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'message-message-detail',
+    templateUrl: './message-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    standalone: true,
+    imports: [
         ...defaultDetailImports,
         ChipComponent, FileUploadComponent, FormatFileSizePipe, GetColorStatusMessagePipe, MatCheckboxModule,
-        MatSelectModule, MtxDatetimepickerModule, NgForOf, GridSelectMultipleElementsModule, KeyValuePipe,
+        MatSelectModule, MtxDatetimepickerModule, NgForOf, GridSelectMultipleElementsModule,
         NgxMatSelectSearchModule, MatTabsModule, QuillEditorComponent, SplitButtonModule,
     ],
 })
@@ -733,7 +733,7 @@ export class MessageDetailComponent extends ViewDetailComponent
 
                 for (const file of action.meta.files)
                 {
-                    const fileEntry = file.file.fileEntry as FileSystemFileEntry;
+                    const fileEntry = file.fileEntry as FileSystemFileEntry;
                     fileEntry.file((file: File) =>
                     {
                         this.fg
@@ -749,33 +749,50 @@ export class MessageDetailComponent extends ViewDetailComponent
                 break;
 
             case 'message::message.detail.removeAttachment':
-                await lastValueFrom(
-                    this.messageService
-                        .removeAttachmentMessage<MessageMessage>({
-                            message: {
-                                id       : action.meta.message.id,
-                                tenantIds: action.meta.message.tenantIds,
-                            },
-                            attachmentId: action.meta.attachment.id,
-                        }),
-                );
+                if (action.meta.message)
+                {
+                    await lastValueFrom(
+                        this.messageService
+                            .removeAttachmentMessage<MessageMessage>({
+                                message: {
+                                    id       : action.meta.message.id,
+                                    tenantIds: action.meta.message.tenantIds,
+                                },
+                                attachmentId: action.meta.attachment.id,
+                            }),
+                    );
 
-                this.actionService.action({
-                    id          : 'message::message.detail.refresh',
-                    isViewAction: false,
-                    meta        : {
-                        message: action.meta.message,
-                    },
-                });
+                    this.actionService.action({
+                        id          : 'message::message.detail.refresh',
+                        isViewAction: false,
+                        meta        : {
+                            message: action.meta.message,
+                        },
+                    });
+
+                }
+                else
+                {
+                    this.fg
+                        .get('attachmentsInputFile')
+                        .setValue(this.fg.get('attachmentsInputFile').value.filter((attachment, index) => index !== action.meta.index));
+                }
                 break;
 
             case 'message::message.detail.downloadAttachment':
-                this.downloadService
-                    .download({
-                        relativePathSegments: action.meta.attachment.relativePathSegments,
-                        filename            : action.meta.attachment.filename,
-                        originFilename      : action.meta.attachment.originFilename,
-                    });
+                if (action.meta.attachment instanceof File)
+                {
+                    this.downloadService.downloadTempFile(action.meta.attachment);
+                }
+                else
+                {
+                    this.downloadService
+                        .download({
+                            relativePathSegments: action.meta.attachment.relativePathSegments,
+                            filename            : action.meta.attachment.filename,
+                            originFilename      : action.meta.attachment.originFilename,
+                        });
+                }
                 break;
 
             case 'message::message.detail.refresh':

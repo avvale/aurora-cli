@@ -1,6 +1,6 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { DatePipe, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation, WritableSignal, computed, inject, signal } from '@angular/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,8 +22,8 @@ export const messageQuickViewMessagesScope = 'message::QuickViewMessages';
     exportAs       : 'messageQuickView',
     standalone     : true,
     imports        : [
-        MatButtonModule, NgIf, MatIconModule, MatTooltipModule,
-        NgFor, NgClass, NgTemplateOutlet, RouterLink, TranslocoModule, DatePipe,
+        MatButtonModule, MatIconModule, MatTooltipModule,
+        NgClass, NgTemplateOutlet, RouterLink, TranslocoModule, DatePipe,
     ],
     providers: [
         {

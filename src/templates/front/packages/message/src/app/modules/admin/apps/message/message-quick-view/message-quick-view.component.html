@@ -2,14 +2,16 @@
 <button
     mat-icon-button
     (click)="openPanel()"
-    #messagesOrigin>
-    <ng-container *ngIf="unreadMessagesNumber() > 0">
-        <span class="absolute top-0 right-0 left-0 flex items-center justify-center h-3">
+    #messagesOrigin
+>
+    @if (unreadMessagesNumber() > 0)
+    {
+        <span class="absolute top-0 right-0 left-0 flex items-center justify-center h-3 z-10">
             <span class="flex items-center justify-center shrink-0 min-w-4 h-4 px-1 ml-4 mt-2.5 rounded-full bg-indigo-600 text-indigo-50 text-xs font-medium">
                 {{ unreadMessagesNumber() }}
             </span>
         </span>
-    </ng-container>
+    }
     <mat-icon [svgIcon]="'heroicons_outline:inbox'"></mat-icon>
 </button>
 
