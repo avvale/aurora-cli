@@ -12,7 +12,14 @@
         "start:local": "node ./node_modules/@angular/cli/bin/ng serve --configuration=localhost",
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
-        "test": "ng test"
+        "test": "ng test",
+        "prepare": "husky",
+        "commit": "cz"
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
+        }
     },
     "dependencies": {
         "@angular/animations": "19.0.5",
@@ -64,6 +71,8 @@
         "@angular-devkit/build-angular": "19.0.6",
         "@angular/cli": "19.0.6",
         "@angular/compiler-cli": "19.0.5",
+        "@commitlint/cli": "^19.8.1",
+        "@commitlint/config-conventional": "^19.8.1",
         "@eslint/js": "^9.28.0",
         "@stylistic/eslint-plugin-ts": "^4.4.1",
         "@tailwindcss/typography": "0.5.15",
@@ -77,8 +86,10 @@
         "@types/luxon": "3.4.2",
         "autoprefixer": "10.4.20",
         "chroma-js": "2.4.2",
+        "commitizen": "^4.3.1",
         "eslint": "^9.28.0",
         "globals": "^16.2.0",
+        "husky": "^9.1.7",
         "jasmine-core": "5.1.2",
         "karma": "6.4.4",
         "karma-chrome-launcher": "3.2.0",
