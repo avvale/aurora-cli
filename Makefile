@@ -1,4 +1,4 @@
 # DEPLOYMENTS
 .PHONY: deploy
 deploy:
-	bash scripts/deployments/deploy.sh
+	@bash scripts/deployments/deploy.sh

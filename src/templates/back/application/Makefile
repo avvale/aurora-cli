@@ -13,15 +13,15 @@ docker-stop: docker-cleanup
 # DEPLOYMENTS
 .PHONY: deploy-dev
 deploy-dev:
-	bash scripts/deployments/deploy-dev.sh
+	@bash scripts/deployments/deploy-dev.sh
 
 .PHONY: deploy-qa
 deploy-qa:
-	bash scripts/deployments/deploy-qa.sh
+	@bash scripts/deployments/deploy-qa.sh
 
 .PHONY: deploy-prod
 deploy-prod:
-	bash scripts/deployments/deploy-prod.sh
+	@bash scripts/deployments/deploy-prod.sh
 
 .PHONY: deploy-all
 deploy-all:
