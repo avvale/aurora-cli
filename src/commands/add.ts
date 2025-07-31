@@ -905,6 +905,10 @@ export class Add extends Command
                 }
 
                 case 'tools': {
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', 'ngx-monaco-editor-v2']);
+                    ux.action.stop('Completed!');
+
                     await FrontHandler.addPackage(addCommandState);
 
                     // add module in main navigation menu
