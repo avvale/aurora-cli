@@ -54,8 +54,8 @@ export class AuditingUpdateSideEffectByIdDto
     email?: string;
 
     @ApiProperty({
-        type       : AuditingSideEffectEvent,
-        enum       : ['CREATED','BULK_CREATED','UPDATED','BULK_UPDATED','DELETED','BULK_DELETED','RESTORED','BULK_RESTORED','UPSERTED'],
+        enum       : AuditingSideEffectEvent,
+        enumName   : 'AuditingSideEffectEvent',
         description: 'event [input here api field description]',
         example    : AuditingSideEffectEvent.CREATED,
     })
@@ -86,8 +86,8 @@ export class AuditingUpdateSideEffectByIdDto
     ip?: string;
 
     @ApiProperty({
-        type       : AuditingSideEffectMethod,
-        enum       : ['GET','POST','UPDATE','DELETE'],
+        enum       : AuditingSideEffectMethod,
+        enumName   : 'AuditingSideEffectMethod',
         description: 'method [input here api field description]',
         example    : AuditingSideEffectMethod.POST,
     })

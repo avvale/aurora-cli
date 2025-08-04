@@ -5,18 +5,18 @@ import { AuditingDeleteSideEffectsCommand } from '@app/auditing/side-effect';
 import * as dayjs from 'dayjs';
 
 @Injectable()
-export class AuditingDeleteSideEffectTasksService
+export class AuditingDeleteSideEffectTask
 {
-    private readonly logger = new Logger(AuditingDeleteSideEffectTasksService.name);
+    private readonly logger = new Logger(AuditingDeleteSideEffectTask.name);
 
     constructor(
         private readonly commandBus: ICommandBus,
     ) {}
 
-    // @Cron(CronExpression.EVERY_YEAR) // Every year at 00:00:00
-    // @Cron(CronExpression.EVERY_6_MONTHS) // Every six months at 00:00:00
-    // @Cron(CronExpression.EVERY_1ST_DAY_OF_MONTH_AT_MIDNIGHT) // Every first day of the month at 00:00:00
-    @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT) // Every day at 00:00:00
+    @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT, {
+        name    : 'AuditingDeleteSideEffectTask',
+        timeZone: 'Europe/Madrid',
+    })
     async handleCron(): Promise<void>
     {
         try

@@ -17,8 +17,8 @@ export class AuditingUpdateHttpCommunicationsDto
     tags?: string[];
 
     @ApiProperty({
-        type       : AuditingHttpCommunicationEvent,
-        enum       : ['REQUEST_FULFILLED','REQUEST_REJECTED','RESPONSE_FULFILLED','RESPONSE_REJECTED'],
+        enum       : AuditingHttpCommunicationEvent,
+        enumName   : 'AuditingHttpCommunicationEvent',
         description: 'event [input here api field description]',
         example    : AuditingHttpCommunicationEvent.REQUEST_FULFILLED,
     })
