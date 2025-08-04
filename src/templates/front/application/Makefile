@@ -39,3 +39,17 @@ deploy-all:
 .PHONY: commit
 commit:
 	npm run commit
+
+# PUBLISH
+.PHONY: publish-all
+publish-all:
+	@gulp publishApplication && \
+		gulp publishAuditing && \
+		gulp publishCommon && \
+		gulp publishIam && \
+		gulp publishMessage && \
+		gulp publishOAuth && \
+		gulp publishQueueManager && \
+		gulp publishSearchEngine && \
+		gulp publishSettings && \
+		gulp publishTools

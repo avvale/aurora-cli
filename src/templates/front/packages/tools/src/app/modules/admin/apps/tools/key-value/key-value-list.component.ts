@@ -7,12 +7,11 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 export const keyValueMainGridListId = 'tools::keyValue.list.mainGridList';
 
 @Component({
-    selector       : 'tools-key-value-list',
-    templateUrl    : './key-value-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'tools-key-value-list',
+    templateUrl: './key-value-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
     ],
 })

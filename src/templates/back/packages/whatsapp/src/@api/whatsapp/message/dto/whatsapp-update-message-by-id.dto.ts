@@ -17,8 +17,8 @@ export class WhatsappUpdateMessageByIdDto
     wabaMessageId?: string;
 
     @ApiProperty({
-        type       : WhatsappMessageDirection,
-        enum       : ['INPUT','OUTPUT'],
+        enum       : WhatsappMessageDirection,
+        enumName   : 'WhatsappMessageDirection',
         description: 'direction [input here api field description]',
     })
     direction?: WhatsappMessageDirection;
@@ -43,8 +43,8 @@ export class WhatsappUpdateMessageByIdDto
     contactName?: string;
 
     @ApiProperty({
-        type       : WhatsappMessageType,
-        enum       : ['AUDIO','BUTTON','CONTACTS','DOCUMENT','IMAGE','INTERACTIVE','LOCATION','ORDER','REACTION','STICKER','SYSTEM','TEMPLATE','TEXT','UNKNOWN','VIDEO'],
+        enum       : WhatsappMessageType,
+        enumName   : 'WhatsappMessageType',
         description: 'type [input here api field description]',
     })
     type?: WhatsappMessageType;

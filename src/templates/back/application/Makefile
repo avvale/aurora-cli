@@ -54,4 +54,4 @@ publish-all:
 		gulp publishStorageAccount && \
 		gulp publishStorageAccountAzure && \
 		gulp publishTools && \
-		gulp publishWhatsApp
+		gulp publishWhatsapp

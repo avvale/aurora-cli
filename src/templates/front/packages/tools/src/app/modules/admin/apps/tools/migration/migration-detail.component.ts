@@ -13,7 +13,6 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './migration-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         ChipComponent, MatCheckboxModule, MtxDatetimepickerModule,

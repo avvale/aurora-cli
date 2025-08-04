@@ -15,7 +15,6 @@ import { KeyValuePipe } from '@angular/common';
     templateUrl: './procedure-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         ChipComponent, KeyValuePipe, MatCheckboxModule, MatFormFieldAppearanceComponent,

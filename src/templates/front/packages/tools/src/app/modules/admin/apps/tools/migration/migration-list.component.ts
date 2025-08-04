@@ -7,12 +7,11 @@ import { firstValueFrom, lastValueFrom, Observable, takeUntil } from 'rxjs';
 export const migrationMainGridListId = 'tools::migration.list.mainGridList';
 
 @Component({
-    selector       : 'tools-migration-list',
-    templateUrl    : './migration-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'tools-migration-list',
+    templateUrl: './migration-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
     ],
 })

@@ -7,12 +7,11 @@ import { firstValueFrom, lastValueFrom, Observable, takeUntil } from 'rxjs';
 export const procedureMainGridListId = 'tools::procedure.list.mainGridList';
 
 @Component({
-    selector       : 'tools-procedure-list',
-    templateUrl    : './procedure-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'tools-procedure-list',
+    templateUrl: './procedure-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
         ChipComponent,
     ],
