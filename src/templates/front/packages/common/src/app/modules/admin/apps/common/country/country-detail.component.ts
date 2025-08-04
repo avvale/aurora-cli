@@ -8,12 +8,11 @@ import { Action, CoreCurrentLangService, CoreLang, Crumb, defaultDetailImports, 
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'common-country-detail',
-    templateUrl    : './country-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'common-country-detail',
+    templateUrl: './country-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         FlagLangComponent, KeyValuePipe, MatSelectModule, NgForOf,
     ],

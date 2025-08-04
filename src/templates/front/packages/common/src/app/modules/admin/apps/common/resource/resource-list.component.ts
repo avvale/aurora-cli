@@ -5,12 +5,11 @@ import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, export
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'common-resource-list',
-    templateUrl    : './resource-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'common-resource-list',
+    templateUrl: './resource-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
     ],
 })

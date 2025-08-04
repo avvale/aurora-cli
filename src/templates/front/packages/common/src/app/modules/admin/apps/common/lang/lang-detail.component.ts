@@ -8,12 +8,11 @@ import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetail
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'common-lang-detail',
-    templateUrl    : './lang-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'common-lang-detail',
+    templateUrl: './lang-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule, MatSelectModule,
     ],

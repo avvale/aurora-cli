@@ -5,12 +5,11 @@ import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, export
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'common-administrative-area-level-3-list',
-    templateUrl    : './administrative-area-level-3-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'common-administrative-area-level-3-list',
+    templateUrl: './administrative-area-level-3-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
     ],
 })

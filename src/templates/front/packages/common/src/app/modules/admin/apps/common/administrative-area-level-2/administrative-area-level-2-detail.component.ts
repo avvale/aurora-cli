@@ -7,12 +7,11 @@ import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetail
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'common-administrative-area-level-2-detail',
-    templateUrl    : './administrative-area-level-2-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'common-administrative-area-level-2-detail',
+    templateUrl: './administrative-area-level-2-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatSelectModule,
     ],

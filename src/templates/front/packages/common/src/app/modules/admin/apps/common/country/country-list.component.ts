@@ -5,12 +5,11 @@ import { Action, ColumnConfig, ColumnConfigAction, ColumnDataType, CoreLang, Cru
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'common-country-list',
-    templateUrl    : './country-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'common-country-list',
+    templateUrl: './country-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
     ],
 })

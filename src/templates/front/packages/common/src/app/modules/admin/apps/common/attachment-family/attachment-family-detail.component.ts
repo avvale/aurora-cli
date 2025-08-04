@@ -10,12 +10,11 @@ import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetail
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'common-attachment-family-detail',
-    templateUrl    : './attachment-family-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'common-attachment-family-detail',
+    templateUrl: './attachment-family-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatSelectModule, NgForOf,
     ],
