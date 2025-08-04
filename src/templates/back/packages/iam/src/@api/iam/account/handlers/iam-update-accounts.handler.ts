@@ -40,7 +40,7 @@ export class IamUpdateAccountsHandler
             const permissions = iamCreatePermissionsFromRoles(roles);
 
             if (
-                !account.dPermissions.includes(IamPermissions.SUDO) &&
+                !account.dPermissions.all.includes(IamPermissions.SUDO) &&
                 !Arrays.contained(permissions.all, account.dPermissions.all)
             )
             {
