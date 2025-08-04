@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { IamCreateUser, IamUpdateUserById, IamUpdateUsers, IamUser } from '@apps/iam/iam.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/user';
+import { IamCreateUser, IamUpdateUserById, IamUpdateUsers, IamUser } from '@apps/iam';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, insertMutation, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/user';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 
@@ -58,7 +58,9 @@ export class UserService
     getScopePagination(scope: string): Observable<GridData<IamUser>>
     {
         if (this.paginationScoped[scope]) return this.paginationScoped[scope].asObservable();
-        return null;
+
+        this.paginationScoped[scope] = new BehaviorSubject(null);
+        return this.paginationScoped[scope].asObservable();
     }
 
     setScopeUser(scope: string, object: IamUser): void
@@ -75,7 +77,9 @@ export class UserService
     getScopeUser(scope: string): Observable<IamUser>
     {
         if (this.userScoped[scope]) return this.userScoped[scope].asObservable();
-        return null;
+
+        this.userScoped[scope] = new BehaviorSubject(null);
+        return this.userScoped[scope].asObservable();
     }
 
     setScopeUsers(scope: string, objects: IamUser[]): void
@@ -92,7 +96,9 @@ export class UserService
     getScopeUsers(scope: string): Observable<IamUser[]>
     {
         if (this.usersScoped[scope]) return this.usersScoped[scope].asObservable();
-        return null;
+
+        this.usersScoped[scope] = new BehaviorSubject(null);
+        return this.usersScoped[scope].asObservable();
     }
 
     pagination(
@@ -135,7 +141,7 @@ export class UserService
     findById(
         {
             graphqlStatement = findByIdQuery,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
             scope,
@@ -277,6 +283,31 @@ export class UserService
             });
     }
 
+    insert<T>(
+        {
+            graphqlStatement = insertMutation,
+            objects = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            objects?: IamCreateUser[];
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: objects,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
     updateById<T>(
         {
             graphqlStatement = updateByIdMutation,
@@ -336,7 +367,7 @@ export class UserService
     deleteById<T>(
         {
             graphqlStatement = deleteByIdMutation,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
         }: {

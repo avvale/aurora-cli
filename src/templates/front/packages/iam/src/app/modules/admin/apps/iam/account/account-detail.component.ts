@@ -21,12 +21,11 @@ import { TagService } from '../tag';
 import { TenantService } from '../tenant/tenant.service';
 
 @Component({
-    selector       : 'iam-account-detail',
-    templateUrl    : './account-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-account-detail',
+    templateUrl: './account-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule, MatSelectModule, NgForOf,
         KeyValuePipe, MatToolbarModule, NgxMatSelectSearchModule,
@@ -170,12 +169,12 @@ export class AccountDetailComponent extends ViewDetailComponent
                 SnackBarInvalidFormComponent,
                 {
                     data: {
-                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        message: `${this.translocoService.translate('InvalidForm')}`,
                         textButton: `${this.translocoService.translate('InvalidFormOk')}`,
                     },
-                    panelClass      : 'error-snackbar',
+                    panelClass: 'error-snackbar',
                     verticalPosition: 'top',
-                    duration        : 10000,
+                    duration: 10000,
                 },
             );
             return;
@@ -390,7 +389,7 @@ export class AccountDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
@@ -417,7 +416,7 @@ export class AccountDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 

@@ -9,12 +9,11 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { PermissionRoleService } from '../permission-role/permission-role.service';
 
 @Component({
-    selector       : 'iam-role-list',
-    templateUrl    : './role-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-role-list',
+    templateUrl: './role-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
         FormsModule, MatDialogModule, MatSelectModule, ReactiveFormsModule,
     ],

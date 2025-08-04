@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular
 import { accountColumnsConfig, AccountService } from '@apps/iam/account';
 import { IamAccount } from '@apps/iam/iam.types';
 import { OAuthClient } from '@apps/o-auth/o-auth.types';
-import { ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { ActionService, GridData, GridFiltersStorageService, GridStateService, queryStatementHandler } from '@aurora';
 
 export const accountPaginationResolver: ResolveFn<GridData<IamAccount>> = (
     route: ActivatedRouteSnapshot,
@@ -26,8 +26,7 @@ export const accountPaginationResolver: ResolveFn<GridData<IamAccount>> = (
     gridStateService.setExportActionId(gridId, 'iam::account.list.export');
 
     return accountService.pagination({
-        query: QueryStatementHandler
-            .init({ columnsConfig: accountColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: accountColumnsConfig })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))

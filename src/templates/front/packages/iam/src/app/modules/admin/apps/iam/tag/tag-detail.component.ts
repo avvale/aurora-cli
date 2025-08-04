@@ -6,12 +6,11 @@ import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFo
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'iam-tag-detail',
-    templateUrl    : './tag-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-tag-detail',
+    templateUrl: './tag-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
     ],
 })

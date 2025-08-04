@@ -13,12 +13,11 @@ import { PermissionRoleService } from '../permission-role/permission-role.servic
 import { PermissionService } from '../permission/permission.service';
 
 @Component({
-    selector       : 'iam-role-detail',
-    templateUrl    : './role-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-role-detail',
+    templateUrl: './role-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         GridSelectMultipleElementsModule, MatCheckboxModule,
     ],

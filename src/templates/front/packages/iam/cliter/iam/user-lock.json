@@ -11,11 +11,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/user/user.graphql.ts",
-            "integrity": "sha1:219784394655c8d278d9c09bd96f7946a17c7b4e"
+            "integrity": "sha1:7e2b43ab9ab5b0c4aba9b76f7f72b74acbdd22c8"
         },
         {
             "path": "src/app/modules/admin/apps/iam/user/user.service.ts",
-            "integrity": "sha1:46872a11b4edb84789a3f0ae932c8964fde7dc67"
+            "integrity": "sha1:95f6728878af0274bacb37fa5fc4f0834a7ea072"
         },
         {
             "path": "src/app/modules/admin/apps/iam/user/index.ts",

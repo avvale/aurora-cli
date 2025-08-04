@@ -10,12 +10,11 @@ import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFo
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'iam-permission-detail',
-    templateUrl    : './permission-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-permission-detail',
+    templateUrl: './permission-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatSelectModule, NgForOf,
     ],

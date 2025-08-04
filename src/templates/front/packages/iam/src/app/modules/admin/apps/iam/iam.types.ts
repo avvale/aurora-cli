@@ -227,6 +227,8 @@ export interface IamTag
 export interface IamTenant {
     id: string;
     name: string;
+    parentId: string;
+    parent?: IamTenant;
     code?: string;
     logo?: string;
     isActive: boolean;

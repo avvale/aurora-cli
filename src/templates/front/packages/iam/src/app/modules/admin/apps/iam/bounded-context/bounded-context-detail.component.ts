@@ -10,12 +10,11 @@ import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, expo
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'iam-bounded-context-detail',
-    templateUrl    : './bounded-context-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-bounded-context-detail',
+    templateUrl: './bounded-context-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         GridElementsManagerModule, MatCheckboxModule,
     ],

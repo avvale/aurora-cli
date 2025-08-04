@@ -93,6 +93,16 @@ export const createMutation = gql`
     }
 `;
 
+export const insertMutation = gql`
+    mutation IamCreateUsers (
+        $payload: [IamCreateUserInput]!
+    ) {
+        iamCreateUsers (
+            payload: $payload
+        )
+    }
+`;
+
 export const updateByIdMutation = gql`
     mutation IamUpdateUserById (
         $payload: IamUpdateUserByIdInput!

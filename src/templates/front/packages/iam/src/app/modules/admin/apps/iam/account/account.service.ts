@@ -68,8 +68,8 @@ export class AccountService
     // get pagination observable by scope
     getScopePagination(scope: string): Observable<GridData<IamAccount>>
     {
-        if (this.paginationScoped[scope]) return this.paginationScoped[scope].asObservable();
-        return null;
+        if (!this.paginationScoped[scope]) this.paginationScoped[scope] = new BehaviorSubject(null);
+        return this.paginationScoped[scope].asObservable();
     }
 
     setScopeAccount(scope: string, object: IamAccount): void
@@ -85,8 +85,8 @@ export class AccountService
 
     getScopeAccount(scope: string): Observable<IamAccount>
     {
-        if (this.accountScoped[scope]) return this.accountScoped[scope].asObservable();
-        return null;
+        if (!this.accountScoped[scope]) this.accountScoped[scope] = new BehaviorSubject(null);
+        return this.accountScoped[scope].asObservable();
     }
 
     setScopeAccounts(scope: string, objects: IamAccount[]): void
@@ -102,8 +102,8 @@ export class AccountService
 
     getScopeAccounts(scope: string): Observable<IamAccount[]>
     {
-        if (this.accountsScoped[scope]) return this.accountsScoped[scope].asObservable();
-        return null;
+        if (!this.accountsScoped[scope]) this.accountsScoped[scope] = new BehaviorSubject(null);
+        return this.accountsScoped[scope].asObservable();
     }
 
     pagination(
@@ -463,7 +463,7 @@ export class AccountService
     deleteById<T>(
         {
             graphqlStatement = deleteByIdMutation,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
         }: {

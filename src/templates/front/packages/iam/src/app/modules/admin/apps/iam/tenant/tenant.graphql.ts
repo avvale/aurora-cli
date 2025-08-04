@@ -2,6 +2,11 @@ import gql from 'graphql-tag';
 
 export const fields = `
     parentId
+    parent {
+        id
+        name
+        code
+    }
     name
     code
     logo

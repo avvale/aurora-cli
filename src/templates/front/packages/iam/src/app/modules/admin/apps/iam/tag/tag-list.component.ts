@@ -7,12 +7,11 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 export const tagMainGridListId = 'iam::tag.list.mainGridList';
 
 @Component({
-    selector       : 'iam-tag-list',
-    templateUrl    : './tag-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-tag-list',
+    templateUrl: './tag-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
     ],
 })

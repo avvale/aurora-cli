@@ -11,12 +11,11 @@ import { lastValueFrom, Observable, ReplaySubject, takeUntil } from 'rxjs';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @Component({
-    selector       : 'iam-tenant-detail',
-    templateUrl    : './tenant-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-tenant-detail',
+    templateUrl: './tenant-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule, MatSelectModule, NgForOf,
         NgxMatSelectSearchModule,
