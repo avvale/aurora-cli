@@ -11,12 +11,11 @@ import { SettingsAccountComponent } from './account/account.component';
 import { SettingsSecurityComponent } from './security/security.component';
 
 @Component({
-    selector       : 'settings',
-    templateUrl    : './settings.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'settings',
+    templateUrl: './settings.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         MatSidenavModule, MatButtonModule, MatIconModule, NgClass,
         RouterLink, RouterOutlet, TranslocoModule,
     ],

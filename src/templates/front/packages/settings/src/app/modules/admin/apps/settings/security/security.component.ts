@@ -15,12 +15,11 @@ import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
-    selector       : 'settings-security',
-    templateUrl    : './security.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'settings-security',
+    templateUrl: './security.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         AsyncPipe, FormsModule, GetSpinnerFlagPipe, MatButtonModule, MatFormFieldModule,
         MatIconModule, MatInputModule, MatPasswordStrengthModule, MatProgressSpinnerModule,
         MatSlideToggleModule, ReactiveFormsModule, TranslocoModule,

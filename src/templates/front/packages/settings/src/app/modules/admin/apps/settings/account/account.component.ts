@@ -17,12 +17,11 @@ import { environment } from 'environments/environment';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'settings-account',
-    templateUrl    : './account.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'settings-account',
+    templateUrl: './account.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         AsyncPipe, FormsModule, GetSpinnerFlagPipe, MatButtonModule, MatFormFieldModule,
         MatIconModule, MatInputModule, MatSelectModule, MatOptionModule,
         MatProgressSpinnerModule, ReactiveFormsModule, TextFieldModule, TranslocoModule,
