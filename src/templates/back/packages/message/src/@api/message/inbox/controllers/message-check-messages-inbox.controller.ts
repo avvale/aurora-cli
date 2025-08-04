@@ -1,15 +1,15 @@
 // ignored file
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { AuthenticationJwtGuard } from '@api/o-auth/shared';
 import { IamAccountResponse } from '@app/iam/account';
 import { Auditing, AuditingMeta, CurrentAccount, Timezone } from '@aurorajs.dev/core';
-import { Controller, Post, UseGuards } from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { MessageCheckMessagesInboxHandler } from '../handlers/message-check-messages-inbox.handler';
+import { Auth } from '@aurora/decorators';
 
 @ApiTags('[message] inbox')
 @Controller('message/inbox/check-messages')
-@UseGuards(AuthenticationJwtGuard)
+@Auth()
 export class MessageCheckMessagesInboxController
 {
     constructor(

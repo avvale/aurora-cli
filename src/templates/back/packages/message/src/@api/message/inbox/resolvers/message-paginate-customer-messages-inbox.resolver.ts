@@ -1,13 +1,12 @@
 import { Pagination } from '@api/graphql';
 import { MessagePaginateCustomerMessagesInboxHandler } from '@api/message/inbox';
-import { AuthenticationJwtGuard } from '@api/o-auth/shared';
 import { IamAccountResponse } from '@app/iam/account';
+import { Auth } from '@aurora/decorators';
 import { CurrentAccount, QueryStatement, Timezone } from '@aurorajs.dev/core';
-import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
-@UseGuards(AuthenticationJwtGuard)
+@Auth()
 export class MessagePaginateCustomerMessagesInboxResolver
 {
     constructor(

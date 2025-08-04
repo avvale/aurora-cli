@@ -53,6 +53,11 @@ export class MessageUpdateMessageByIdHandler
             });
         }
 
+        if ('accountRecipientIds' in dataToUpdate)
+        {
+            dataToUpdate.accountRecipientIds = payload.accountRecipientIds;
+        }
+
         const attachments = Array.isArray(payload.attachmentsInputFile) ?
             await Promise.all(
                 payload.attachmentsInputFile
