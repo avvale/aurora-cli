@@ -12,12 +12,11 @@ import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, expo
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'search-engine-collection-detail',
-    templateUrl    : './collection-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'search-engine-collection-detail',
+    templateUrl: './collection-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule, MatSelectModule, NgForOf,
     ],

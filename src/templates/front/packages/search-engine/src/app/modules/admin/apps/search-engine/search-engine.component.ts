@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-    selector       : 'au-search-engine',
-    templateUrl    : './search-engine.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'au-search-engine',
+    templateUrl: './search-engine.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [RouterOutlet],
+    imports: [RouterOutlet],
 })
 export class SearchEngineComponent { }

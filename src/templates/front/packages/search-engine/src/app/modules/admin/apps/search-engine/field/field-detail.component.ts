@@ -7,12 +7,11 @@ import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetail
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'search-engine-field-detail',
-    templateUrl    : './field-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'search-engine-field-detail',
+    templateUrl: './field-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule,
     ],
