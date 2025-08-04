@@ -1,9 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name      : 'getColorStatusMessage',
-    pure      : true,
-    standalone: true,
+    name: 'getColorStatusMessage',
+    pure: true,
 })
 export class GetColorStatusMessagePipe implements PipeTransform
 {

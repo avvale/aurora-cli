@@ -13,17 +13,15 @@ import { MessageInbox, MessageService } from '@apps/message';
 import { InboxService } from '@apps/message/inbox';
 import { Action, DownloadService, ViewBaseComponent } from '@aurora';
 import { FuseScrollResetDirective } from '@fuse/directives/scroll-reset';
-import { FuseFindByKeyPipe } from '@fuse/pipes/find-by-key/find-by-key.pipe';
 import { TranslocoModule } from '@jsverse/transloco';
 import { lastValueFrom, takeUntil } from 'rxjs';
 import { messageCustomerCenterMessageScope } from '../list/message-center-list.component';
 
 @Component({
-    selector     : 'message-center-details',
-    templateUrl  : './message-center-details.component.html',
+    selector: 'message-center-details',
+    templateUrl: './message-center-details.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone   : true,
-    imports      : [
+    imports: [
         NgIf, MatButtonModule, RouterLink, MatIconModule, MatMenuModule, NgFor, MatRippleModule,
         MatCheckboxModule, MatTooltipModule, NgClass, FuseScrollResetDirective,
         MatFormFieldModule, MatInputModule, DecimalPipe, TranslocoModule,

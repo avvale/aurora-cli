@@ -58,6 +58,7 @@
     "TenantIds": "TenantIds",
     "TenantRecipientIds": "TenantRecipientIds",
     "TenantRecipients": "Tenant recipients",
+    "TenantSenders": "Tenants senders",
     "TotalRecipients": "TotalRecipients",
     "UnRead": "UnRead",
     "Users": "Users"

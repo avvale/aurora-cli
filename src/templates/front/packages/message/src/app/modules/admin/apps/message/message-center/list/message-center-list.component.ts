@@ -18,11 +18,10 @@ export const messageCenterExportListAction = 'message::messageCenter.list.export
 export const messageCustomerCenterMessageScope = 'message::customerCenterMessage';
 
 @Component({
-    selector     : 'au-message-center-list',
-    templateUrl  : './message-center-list.component.html',
+    selector: 'au-message-center-list',
+    templateUrl: './message-center-list.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone   : true,
-    imports      : [
+    imports: [
         BreadcrumbComponent, NgIf, MatButtonModule, MatIconModule, RouterLink, MatProgressBarModule,
         MatTooltipModule, NgClass, RouterOutlet, DatePipe, TitleComponent, TranslocoModule,
     ],

@@ -194,30 +194,71 @@
                                     appearance="outline"
                                     class="col-12"
                                 >
-                                    <mat-label>{{ t('Tenants') }}</mat-label>
+                                    <mat-label>{{ t('message.TenantSenders') }}</mat-label>
                                     <mat-select
                                         formControlName="tenantIds"
+                                        #tenantsSelect
                                         multiple
+                                        auScrollEnd
+                                        (scrollEnd)="
+                                            tenantSendersManageAsyncMatSelectSearch({
+                                                asyncMatSelectSearchState: tenantSendersAsyncMatSelectSearchState,
+                                                isFromScrollEndEvent: true,
+                                                noResultsFoundTranslation: t('NoResultsFound'),
+                                            })
+                                        "
                                     >
                                         <mat-option>
                                             <ngx-mat-select-search
-                                                [formControl]="tenantBelongFilterCtrl"
+                                                [formControl]="tenantSendersAsyncMatSelectSearchState.itemFilterCtrl"
                                                 [placeholderLabel]="t('message.FindTenant')"
                                                 [noEntriesFoundLabel]="t('NoResultsFound')"
                                             >
                                             </ngx-mat-select-search>
                                         </mat-option>
-                                        @for (tenant of filteredTenantBelongs$ | async; track tenant.id)
+                                        @if (tenantSendersAsyncMatSelectSearchState.selectedItems().size > 0)
                                         {
-                                            <mat-option [value]="tenant.id">
-                                                {{ tenant.name }}
-                                            </mat-option>
-
+                                            <mat-optgroup [label]="t('SelectedOptions')">
+                                                @for (tenant of tenantSendersAsyncMatSelectSearchState.selectedItems().values(); track tenant.id)
+                                                {
+                                                    <mat-option
+                                                        [value]="tenant.id"
+                                                        auMatSelectAddSelectedDirective
+                                                        [object]="tenant"
+                                                        [selectedItems]="tenantSendersAsyncMatSelectSearchState.selectedItems"
+                                                    >
+                                                        {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
+                                                    </mat-option>
+                                                }
+                                            </mat-optgroup>
+                                            <mat-divider></mat-divider>
+                                        }
+                                        @for (tenant of tenantSendersAsyncMatSelectSearchState.filteredItems().values(); track tenant.id)
+                                        {
+                                            @if (!tenantSendersAsyncMatSelectSearchState.selectedItems().has(tenant.id))
+                                            {
+                                                <mat-option
+                                                    [value]="tenant.id"
+                                                    [disabled]="tenant.id === null"
+                                                    auMatSelectAddSelectedDirective
+                                                    [object]="tenant"
+                                                    [selectedItems]="tenantSendersAsyncMatSelectSearchState.selectedItems"
+                                                >
+                                                    {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
+                                                </mat-option>
+                                            }
                                         }
                                     </mat-select>
+                                    @if (tenantSendersAsyncMatSelectSearchState.isLoading())
+                                    {
+                                        <mat-icon matSuffix>
+                                            <mat-spinner diameter="20"></mat-spinner>
+                                        </mat-icon>
+                                    }
                                     <mat-error>{{ formErrors?.tenantIds | async }}</mat-error>
                                 </mat-form-field>
                             }
+
                             <mat-form-field
                                 appearance="outline"
                                 class="col-12"
@@ -225,23 +266,64 @@
                                 <mat-label>{{ t('message.TenantRecipients') }}</mat-label>
                                 <mat-select
                                     formControlName="tenantRecipientIds"
+                                    #tenantsSelect
                                     multiple
+                                    auScrollEnd
+                                    (scrollEnd)="
+                                        tenantRecipientsManageAsyncMatSelectSearch({
+                                            asyncMatSelectSearchState: tenantRecipientsAsyncMatSelectSearchState,
+                                            isFromScrollEndEvent: true,
+                                            noResultsFoundTranslation: t('NoResultsFound'),
+                                        })
+                                    "
                                 >
                                     <mat-option>
                                         <ngx-mat-select-search
-                                            [formControl]="tenantRecipientFilterCtrl"
+                                            [formControl]="tenantRecipientsAsyncMatSelectSearchState.itemFilterCtrl"
                                             [placeholderLabel]="t('message.FindTenant')"
                                             [noEntriesFoundLabel]="t('NoResultsFound')"
                                         >
                                         </ngx-mat-select-search>
                                     </mat-option>
-                                    @for (tenant of filteredTenantRecipients$ | async; track tenant.id)
+                                    @if (tenantRecipientsAsyncMatSelectSearchState.selectedItems().size > 0)
                                     {
-                                        <mat-option [value]="tenant.id">
-                                            {{ tenant.name }}
-                                        </mat-option>
+                                        <mat-optgroup [label]="t('SelectedOptions')">
+                                            @for (tenant of tenantRecipientsAsyncMatSelectSearchState.selectedItems().values(); track tenant.id)
+                                            {
+                                                <mat-option
+                                                    [value]="tenant.id"
+                                                    auMatSelectAddSelectedDirective
+                                                    [object]="tenant"
+                                                    [selectedItems]="tenantRecipientsAsyncMatSelectSearchState.selectedItems"
+                                                >
+                                                    {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
+                                                </mat-option>
+                                            }
+                                        </mat-optgroup>
+                                        <mat-divider></mat-divider>
+                                    }
+                                    @for (tenant of tenantRecipientsAsyncMatSelectSearchState.filteredItems().values(); track tenant.id)
+                                    {
+                                        @if (!tenantRecipientsAsyncMatSelectSearchState.selectedItems().has(tenant.id))
+                                        {
+                                            <mat-option
+                                                [value]="tenant.id"
+                                                [disabled]="tenant.id === null"
+                                                auMatSelectAddSelectedDirective
+                                                [object]="tenant"
+                                                [selectedItems]="tenantRecipientsAsyncMatSelectSearchState.selectedItems"
+                                            >
+                                                {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
+                                            </mat-option>
+                                        }
                                     }
                                 </mat-select>
+                                @if (tenantRecipientsAsyncMatSelectSearchState.isLoading())
+                                {
+                                    <mat-icon matSuffix>
+                                        <mat-spinner diameter="20"></mat-spinner>
+                                    </mat-icon>
+                                }
                                 <mat-error>{{ formErrors?.tenantRecipientIds | async }}</mat-error>
                             </mat-form-field>
                             <mat-form-field
@@ -318,54 +400,18 @@
                             >
                                 <au-grid-translations
                                     [for]="messageAccountsGridId"
-                                    [actions]="t('Actions')"
-                                    [AND]="t('AND')"
-                                    [clearFilters]="t('ClearFilters')"
-                                    [clickAndDragInfo]="t('ClickAndDragInfo')"
-                                    [columns]="t('Columns')"
-                                    [field]="t('Field')"
-                                    [filter]="t('Filter')"
-                                    [operator]="t('Operator')"
-                                    [OR]="t('OR')"
-                                    [pleaseSelectField]="t('PleaseSelectField')"
-                                    [translations]="t('Translations')"
-                                    [value]="t('Value')"
-                                    [noData]="t('NoData')"
-                                    [paginator]="{
-                                        firstPageLabel: t('Paginator.FirstPageLabel'),
-                                        itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
-                                        lastPageLabel: t('Paginator.LastPageLabel'),
-                                        nextPageLabel: t('Paginator.NextPageLabel'),
-                                        ofLabel: t('Paginator.OfLabel'),
-                                        previousPageLabel: t('Paginator.PreviousPageLabel')
-                                    }"
-                                    [operators]="{
-                                        contains: t('Operators.Contains'),
-                                        containsAny: t('Operators.ContainsAny'),
-                                        endsWith: t('Operators.EndsWith'),
-                                        equals: t('Operators.Equals'),
-                                        greaterThan: t('Operators.GreaterThan'),
-                                        greaterThanEqual: t('Operators.GreaterThanEqual'),
-                                        lessThan: t('Operators.LessThan'),
-                                        lessThanEqual: t('Operators.LessThanEqual'),
-                                        mustContain: t('Operators.MustContain'),
-                                        notEquals: t('Operators.NotEquals'),
-                                        startsWith: t('Operators.StartsWith')
-                                    }"
                                     [actionsMenu]="{
-                                        edit: t('Edit'),
-                                        delete: t('Delete'),
                                         unlink: t('Unlink'),
                                         cancel: t('Cancel'),
                                         close: t('Close')
                                     }"
                                 >
-                                    <au-grid-column-translation
-                                        *ngFor="let columnConfig of originStagesColumnsConfig"
-                                        [field]="columnConfig.field"
-                                    >
-                                        {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
-                                    </au-grid-column-translation>
+                                    @for (columnConfig of originStagesColumnsConfig; track columnConfig.field)
+                                    {
+                                        <au-grid-column-translation [field]="columnConfig.field">
+                                            {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                                        </au-grid-column-translation>
+                                    }
                                 </au-grid-translations>
                                 <ng-template
                                     auGridSelectMultipleCustomHeaderTemplate

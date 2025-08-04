@@ -8,12 +8,11 @@ import { GetColorStatusMessagePipe } from '../shared';
 export const messageMainGridListId = 'message::message.list.mainGridList';
 
 @Component({
-    selector       : 'message-message-list',
-    templateUrl    : './message-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'message-message-list',
+    templateUrl: './message-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
         ChipComponent, GetColorStatusMessagePipe, GridCellValueTemplateDirective,
     ],

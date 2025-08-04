@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { MessageInbox } from '@apps/message';
 import { inboxColumnsConfig, InboxService } from '@apps/message/inbox';
-import { MessageInbox } from '@apps/message/message.types';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, queryStatementHandler } from '@aurora';
 
 export const inboxPaginationResolver: ResolveFn<GridData<MessageInbox>> = (
     route: ActivatedRouteSnapshot,
@@ -24,8 +24,7 @@ export const inboxPaginationResolver: ResolveFn<GridData<MessageInbox>> = (
     gridStateService.setExportActionId(gridId, 'message::inbox.list.export');
 
     return inboxService.pagination({
-        query: QueryStatementHandler
-            .init({ columnsConfig: inboxColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: inboxColumnsConfig })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))

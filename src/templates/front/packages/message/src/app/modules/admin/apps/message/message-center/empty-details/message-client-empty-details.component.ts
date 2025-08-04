@@ -3,11 +3,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
-    selector     : 'message-client-empty-details',
-    templateUrl  : './message-client-empty-details.component.html',
+    selector: 'message-client-empty-details',
+    templateUrl: './message-client-empty-details.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone   : true,
-    imports      : [
+    imports: [
         MatIconModule, TranslocoModule,
     ],
 })

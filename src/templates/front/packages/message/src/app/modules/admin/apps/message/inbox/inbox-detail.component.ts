@@ -9,12 +9,11 @@ import { QuillEditorComponent } from 'ngx-quill';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'message-inbox-detail',
-    templateUrl    : './inbox-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'message-inbox-detail',
+    templateUrl: './inbox-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule, MtxDatetimepickerModule, QuillEditorComponent,
     ],

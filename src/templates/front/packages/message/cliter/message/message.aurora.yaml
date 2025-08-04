@@ -22,8 +22,6 @@ aggregateProperties:
       type: id
     nullable: true
     index: index
-    webComponent:
-      type: async-search-multiple-select
   - name: status
     type: enum
     enumOptions:
@@ -43,8 +41,6 @@ aggregateProperties:
       type: id
     nullable: true
     index: index
-    webComponent:
-      type: async-search-multiple-select
   - name: scopeRecipients
     type: array
     arrayOptions:

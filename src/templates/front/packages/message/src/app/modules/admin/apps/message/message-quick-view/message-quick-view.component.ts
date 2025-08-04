@@ -15,13 +15,12 @@ import { InboxService } from '../inbox';
 export const messageQuickViewMessagesScope = 'message::QuickViewMessages';
 
 @Component({
-    selector       : 'au-message-quick-view',
-    templateUrl    : './message-quick-view.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'au-message-quick-view',
+    templateUrl: './message-quick-view.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'messageQuickView',
-    standalone     : true,
-    imports        : [
+    exportAs: 'messageQuickView',
+    imports: [
         MatButtonModule, MatIconModule, MatTooltipModule,
         NgClass, NgTemplateOutlet, RouterLink, TranslocoModule, DatePipe,
     ],

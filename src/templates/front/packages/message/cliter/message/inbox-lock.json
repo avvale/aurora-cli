@@ -11,35 +11,35 @@
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox-detail.component.html",
-            "integrity": "sha1:162d0d16f3f418102d6416108cac0b6f62dde401"
+            "integrity": "sha1:a49e9ea6e5960737e449f84bd9bfd258fcf4c354"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox-detail.component.ts",
-            "integrity": "sha1:27a8a39a6301bf95f1c72b36375239ed0751e197"
+            "integrity": "sha1:f5dd6043156a9bba8917a4c8acdc99aa75cd29fc"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox-list.component.html",
-            "integrity": "sha1:50d80169d4ad4909e483f384b202a83f64c1441d"
+            "integrity": "sha1:351effb14c1eeb15e924eadeff84f354e808e3e7"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox-list.component.ts",
-            "integrity": "sha1:6b2768b3cc2a81764648c79741ef2fc40b78bedc"
+            "integrity": "sha1:25f30e144dafd81a2dd07732a62802053692ea56"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox.columns-config.ts",
-            "integrity": "sha1:9b8afe85c31c67579164f3b7e1d448a0e38aa634"
+            "integrity": "sha1:146fbb46e20cd0c5c66faa33019bb3ded3c6f11d"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox.graphql.ts",
-            "integrity": "sha1:28b8c19ffb3cf4e566049b48395e452f73dc94a3"
+            "integrity": "sha1:bb1c74e9ee9273458d468ac1eb045f657ffb1f09"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox.resolvers.ts",
-            "integrity": "sha1:a2b2694836aa6a54fd5e73b1985ef5da1ee2c501"
+            "integrity": "sha1:ced549914272cabc8135d98aea7a661f96c06440"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox.service.ts",
-            "integrity": "sha1:1c5254b8bbb3f8371d718db946a0c46b1c5fba8b"
+            "integrity": "sha1:4409bfb80d7af2d30772a24046f6af2362a83aab"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/index.ts",

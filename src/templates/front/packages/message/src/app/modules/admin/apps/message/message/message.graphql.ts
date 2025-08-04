@@ -32,14 +32,17 @@ export const relationsFields = `
         name
     }
     iamGetTenants (
-        query: $queryTenants
-        constraint: $constraintTenants
+        query: $queryGetTenants
+        constraint: $constraintGetTenants
     ) {
         id
-        parentId
         name
-        code
-        meta
+        parentId
+        parent {
+            id
+            name
+        }
+        isActive
     }
     oAuthFindClientById (
         id: $clientId
@@ -47,22 +50,6 @@ export const relationsFields = `
     ) {
         id
         scopeOptions
-    }
-    iamPaginateSelectedAccounts: iamPaginateAccounts (
-        query: $queryPaginateSelectedAccounts
-        constraint: $constraintPaginateSelectedAccounts
-    ) {
-        total
-        rows
-        count
-    }
-    iamPaginateAccounts (
-        query: $queryPaginateAccounts
-        constraint: $constraintPaginateAccounts
-    ) {
-        total
-        rows
-        count
     }
 `;
 
@@ -102,12 +89,8 @@ export const getRelations = gql`
     query MessageGetMessagesRelations(
         $queryTags: QueryStatement
         $constraintTags: QueryStatement
-        $queryTenants: QueryStatement
-        $constraintTenants: QueryStatement
-        $queryPaginateSelectedAccounts: QueryStatement
-        $constraintPaginateSelectedAccounts: QueryStatement
-        $queryPaginateAccounts: QueryStatement
-        $constraintPaginateAccounts: QueryStatement
+        $queryGetTenants: QueryStatement
+        $constraintGetTenants: QueryStatement
         $clientId: ID
         $constraintClient: QueryStatement
     ) {
@@ -127,6 +110,28 @@ export const findByIdQuery = gql`
             id
             #FIELDS
         }
+    }
+`;
+
+export const findByIdWithRelationsQuery = gql`
+    query MessageFindMessageByIdWithRelations (
+        $id: ID
+        $constraint: QueryStatement
+        $queryTags: QueryStatement
+        $constraintTags: QueryStatement
+        $queryGetTenants: QueryStatement
+        $constraintGetTenants: QueryStatement
+        $clientId: ID
+        $constraintClient: QueryStatement
+    ) {
+        object: messageFindMessageById (
+            id: $id
+            constraint: $constraint
+        ) {
+            id
+            #FIELDS
+        }
+        ${relationsFields}
     }
 `;
 
