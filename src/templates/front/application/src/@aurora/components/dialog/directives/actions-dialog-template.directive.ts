@@ -1,8 +1,7 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auActionsDialogTemplate]',
-    standalone: true,
+    selector: '[auActionsDialogTemplate]',
 })
 export class ActionsDialogTemplateDirective
 {

@@ -3,9 +3,8 @@ import { FormControl, ValidatorFn } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
 @Pipe({
-    name      : 'hasValidator',
-    pure      : false,
-    standalone: true,
+    name: 'hasValidator',
+    pure: false,
 })
 export class HasValidatorPipe implements PipeTransform
 {

@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { last } from 'lodash-es';
 
 @Pipe({
-    name      : 'last',
-    pure      : true,
-    standalone: true,
+    name: 'last',
+    pure: true,
 })
 export class LastPipe implements PipeTransform
 {

@@ -9,7 +9,6 @@ import { KPICardHeaderRightDirective } from './directive/kpi-card-header-right.d
     templateUrl: './kpi-card.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [CommonModule, MatIconModule],
 })
 export class KPICardComponent {

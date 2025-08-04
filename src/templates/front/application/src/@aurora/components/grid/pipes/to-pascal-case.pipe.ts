@@ -2,8 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import * as _ from 'lodash';
 
 @Pipe({
-    name      : 'toPascalCase',
-    standalone: true,
+    name: 'toPascalCase',
 })
 export class ToPascalCasePipe implements PipeTransform
 {

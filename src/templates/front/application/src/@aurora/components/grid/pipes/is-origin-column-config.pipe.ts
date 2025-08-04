@@ -3,8 +3,7 @@ import { ColumnConfig } from '../grid.types';
 import { adaptColumnsConfigForSerialization } from '../functions/adapt-columns-config-for-serialization.function';
 
 @Pipe({
-    name      : 'isOriginColumnConfig',
-    standalone: true,
+    name: 'isOriginColumnConfig',
 })
 export class IsOriginColumnConfigPipe implements PipeTransform
 {

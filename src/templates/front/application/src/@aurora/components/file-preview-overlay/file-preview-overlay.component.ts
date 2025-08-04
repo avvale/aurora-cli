@@ -15,9 +15,8 @@ const ESCAPE = 'Escape';
 const ANIMATION_TIMINGS = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
 
 @Component({
-    selector  : 'au-file-preview-overlay',
-    standalone: true,
-    template  : `
+    selector: 'au-file-preview-overlay',
+    template: `
         <au-file-preview-overlay-toolbar>
             <div class="flex content-center">
                 <mat-icon>description</mat-icon>

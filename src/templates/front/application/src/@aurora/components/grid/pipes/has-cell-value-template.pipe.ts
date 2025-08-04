@@ -6,8 +6,7 @@ import { ColumnConfig } from '../grid.types';
  * Check if in current iteration has template directive for current row
  */
 @Pipe({
-    name      : 'hasCellValueTemplate',
-    standalone: true,
+    name: 'hasCellValueTemplate',
 })
 export class HasCellValueTemplatePipe implements PipeTransform
 {

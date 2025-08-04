@@ -16,11 +16,10 @@ import { GridSelectMultipleCustomHeaderDialogTemplateDirective } from './directi
 import { GridSelectMultipleCustomHeaderTemplateDirective } from './directives/grid-select-multiple-custom-header-template.directive';
 
 @Component({
-    selector       : 'au-grid-select-multiple-elements',
-    templateUrl    : './grid-select-multiple-elements.component.html',
+    selector: 'au-grid-select-multiple-elements',
+    templateUrl: './grid-select-multiple-elements.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective, MatIconModule, NgForOf, NgIf, NgTemplateOutlet,
     ],
 })

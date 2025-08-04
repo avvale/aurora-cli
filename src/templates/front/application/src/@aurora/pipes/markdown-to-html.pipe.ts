@@ -3,8 +3,7 @@ import { MarkdownService } from '@aurora/services';
 
 @Pipe({
     name: 'markdownToHtml',
-    pure      : true,
-    standalone: true,
+    pure: true,
 })
 export class MarkdownToHtmlPipe implements PipeTransform
 {

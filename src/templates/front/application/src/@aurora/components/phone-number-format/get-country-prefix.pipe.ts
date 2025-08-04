@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { CountryPrefixOption } from './phone-number-format.types';
 
 @Pipe({
-    name      : 'getCountryPrefix',
-    pure      : true,
-    standalone: true,
+    name: 'getCountryPrefix',
+    pure: true,
 })
 export class GetCountryPrefixPipe implements PipeTransform
 {

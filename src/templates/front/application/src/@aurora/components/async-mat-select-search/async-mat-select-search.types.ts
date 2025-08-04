@@ -2,7 +2,7 @@ import { WritableSignal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GridColumnFilter } from '@aurora';
 
-export interface AsyncMatSelectSearchState<T>
+export interface AsyncMatSelectSearchState<T, E>
 {
     page: {
         pageIndex: number;
@@ -11,11 +11,11 @@ export interface AsyncMatSelectSearchState<T>
     paginationPageIndex: number;
     columnFilters      : GridColumnFilter[];
     currentCount       : number;
-    itemsToShow        : T[];
-    foundItemsToShow   : T[];
+    itemsToShow        : E[];
+    foundItemsToShow   : E[];
     itemFilterCtrl     : FormControl;
-    selectedItems      : WritableSignal<Set<T>>;
-    filteredItems      : WritableSignal<Set<T>>;
+    selectedItems      : WritableSignal<Map<T, E>>;
+    filteredItems      : WritableSignal<Map<T, E>>;
     isLoading          : WritableSignal<boolean>;
     keyword            : string;
 }

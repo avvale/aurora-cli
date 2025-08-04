@@ -5,10 +5,9 @@ import { GridTranslationsService } from './grid-translations.service';
 import { GridActionMenuMessages, GridOperatorMessages, GridPaginatorMessages } from '../grid.types';
 
 @Component({
-    selector       : 'au-grid-translations',
-    template       : '',
+    selector: 'au-grid-translations',
+    template: '',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
 })
 export class GridTranslationsComponent
 {

@@ -5,8 +5,7 @@ import { GridFiltersDialogValueTemplateDirective } from '../directives/grid-filt
  * Get key value for select filter
  */
 @Pipe({
-    name      : 'getGridFilterValue',
-    standalone: true,
+    name: 'getGridFilterValue',
 })
 export class GetGridFilterValue implements PipeTransform
 {

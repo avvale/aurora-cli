@@ -2,8 +2,7 @@ import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
 // https://stackoverflow.com/questions/77316536/incorrect-use-of-label-for-form-element-angular-material
 @Directive({
-    selector  : 'mat-select',
-    standalone: true,
+    selector: 'mat-select',
 })
 export class MatSelectRemoveFor implements AfterViewInit
 {

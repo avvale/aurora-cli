@@ -12,7 +12,6 @@ import { DownloadService } from '@aurora/services';
     selector       : 'au-attachment-item',
     templateUrl    : './attachment-item.component.html',
     styleUrls      : ['./attachment-item.component.scss'],
-    standalone     : true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports        : [
         AttachmentTranslatePipe, AsyncPipe, FormsModule, ImageInputComponent, NgIf, NgForOf, ReactiveFormsModule, SizeFormatPipe,

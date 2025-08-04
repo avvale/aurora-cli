@@ -1,9 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name      : 'filterKeyValueAndSort',
-    pure      : true,
-    standalone: true,
+    name: 'filterKeyValueAndSort',
+    pure: true,
 })
 export class FilterKeyValueAndSortPipe implements PipeTransform
 {

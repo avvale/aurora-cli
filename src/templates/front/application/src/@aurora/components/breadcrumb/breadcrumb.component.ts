@@ -24,7 +24,6 @@ export const loader = ['en', 'es'].reduce((acc, lang) => {
             multi: true,
         },
     ],
-    standalone: true,
     imports: [MatIconModule, NgForOf, NgIf, RouterModule, TranslocoModule],
 })
 export class BreadcrumbComponent {

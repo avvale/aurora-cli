@@ -1,8 +1,7 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auGridDialogTranslations]',
-    standalone: true,
+    selector: '[auGridDialogTranslations]',
 })
 export class GridDialogTranslationsDirective
 {

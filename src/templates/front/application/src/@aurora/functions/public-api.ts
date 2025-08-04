@@ -1,3 +1,4 @@
+export * from './array-to-map.function';
 export * from './base64-to-blob.function';
 export * from './create-password.function';
 export * from './date-from-format.function';

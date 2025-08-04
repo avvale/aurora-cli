@@ -24,7 +24,6 @@ import { CropperDialogComponent } from './../cropper-dialog.component';
     selector       : 'au-attachments',
     templateUrl    : './attachments.component.html',
     styleUrls      : ['./attachments.component.scss'],
-    standalone     : true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports        : [
         NgForOf, ReactiveFormsModule,

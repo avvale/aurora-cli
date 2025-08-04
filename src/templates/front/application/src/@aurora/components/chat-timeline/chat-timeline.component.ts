@@ -24,7 +24,6 @@ import { FilterChatTimelineContentTemplatePositionPipe } from './pipes/filter-ch
         }
     `,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         DateFormatPipe,
         FilterChatTimelineContentTemplatePositionPipe,

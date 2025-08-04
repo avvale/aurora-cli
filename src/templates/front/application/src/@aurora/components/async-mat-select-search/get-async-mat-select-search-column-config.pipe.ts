@@ -3,8 +3,7 @@ import { ColumnConfig } from '../grid';
 
 // Get key value for select filter
 @Pipe({
-    name      : 'getAsyncMatSelectSearchColumnConfig',
-    standalone: true,
+    name: 'getAsyncMatSelectSearchColumnConfig',
 })
 export class GetAsyncMatSelectSearchColumnConfig implements PipeTransform
 {

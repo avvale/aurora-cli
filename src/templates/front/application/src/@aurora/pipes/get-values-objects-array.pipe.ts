@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import get from 'lodash-es/get';
 
 @Pipe({
-    name      : 'getValuesObjectsArray',
-    pure      : true,
-    standalone: true,
+    name: 'getValuesObjectsArray',
+    pure: true,
 })
 export class GetValuesObjectsArrayPipe implements PipeTransform
 {

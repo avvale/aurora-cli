@@ -5,13 +5,12 @@ type ChipSize = 'tiny' | 'small' | 'regular';
 type ChipColor = 'primary' | 'accent' | 'warn' | 'success';
 
 @Component({
-    selector       : 'au-dot',
-    templateUrl    : './dot.component.html',
-    styleUrls      : ['./dot.component.scss'],
+    selector: 'au-dot',
+    templateUrl: './dot.component.html',
+    styleUrls: ['./dot.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation  : ViewEncapsulation.None,
-    standalone     : true,
-    imports        : [
+    encapsulation: ViewEncapsulation.None,
+    imports: [
         CommonModule,
     ],
 })

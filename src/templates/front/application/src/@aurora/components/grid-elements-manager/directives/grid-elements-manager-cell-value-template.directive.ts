@@ -1,8 +1,7 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auGridElementsManagerCellValueTemplate]',
-    standalone: true,
+    selector: '[auGridElementsManagerCellValueTemplate]',
 })
 export class GridElementsManagerCellValueTemplateDirective
 {

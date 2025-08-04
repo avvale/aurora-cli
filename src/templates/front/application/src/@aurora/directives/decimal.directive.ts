@@ -12,7 +12,7 @@ import
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
-    selector : '[auDecimal]',
+    selector: '[auDecimal]',
     providers: [
         {
             provide    : NG_VALUE_ACCESSOR,
@@ -20,7 +20,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
             multi      : true,
         },
     ],
-    standalone: true,
 })
 export class DecimalDirective implements OnChanges, OnInit
 {

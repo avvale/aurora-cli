@@ -3,10 +3,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { FilePreviewOverlayRef } from '../file-preview-overlay-ref';
 
 @Component({
-    selector   : 'au-file-preview-overlay-toolbar',
+    selector: 'au-file-preview-overlay-toolbar',
     templateUrl: './file-preview-overlay-toolbar.component.html',
-    styleUrls  : ['./file-preview-overlay-toolbar.component.scss'],
-    animations : [
+    styleUrls: ['./file-preview-overlay-toolbar.component.scss'],
+    animations: [
         trigger('slideDown', [
             state('void', style({ transform: 'translateY(-100%)' })),
             state('enter', style({ transform: 'translateY(0)' })),
@@ -14,7 +14,6 @@ import { FilePreviewOverlayRef } from '../file-preview-overlay-ref';
             transition('* => *', animate('400ms cubic-bezier(0.25, 0.8, 0.25, 1)')),
         ]),
     ],
-    standalone: true,
 })
 export class FilePreviewOverlayToolbarComponent implements OnInit
 {

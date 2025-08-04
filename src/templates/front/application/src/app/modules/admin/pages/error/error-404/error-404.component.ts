@@ -3,12 +3,11 @@ import { RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
-    selector       : 'error-404',
-    templateUrl    : './error-404.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'error-404',
+    templateUrl: './error-404.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         RouterModule, TranslocoModule,
     ],
 })

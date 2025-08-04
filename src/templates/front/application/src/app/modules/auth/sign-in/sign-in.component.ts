@@ -28,7 +28,6 @@ import { AuthorizationService } from '@aurora/modules/authorization/authorizatio
     templateUrl: './sign-in.component.html',
     encapsulation: ViewEncapsulation.None,
     animations: fuseAnimations,
-    standalone: true,
     imports: [
         FuseAlertComponent,
         FormsModule,

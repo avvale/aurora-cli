@@ -1,6 +1,6 @@
 import { SelectionChange } from '@angular/cdk/collections';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output, QueryList, signal, TemplateRef, ViewChild, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Output, QueryList, signal, ViewChild, WritableSignal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,12 +13,11 @@ import { SelectionModel } from '../grid/selection-model/selection-model';
 import { GridDialogTranslationsDirective } from './directives/grid-dialog-translations.directive';
 
 @Component({
-    selector       : 'au-grid-dialog',
-    templateUrl    : './grid-dialog.component.html',
-    styleUrls      : ['grid-dialog.component.scss'],
+    selector: 'au-grid-dialog',
+    templateUrl: './grid-dialog.component.html',
+    styleUrls: ['grid-dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         AsyncPipe, GridCellValueTemplateDirective, GridModule,
         MatButtonModule, MatDialogModule, MatIconModule,
         NgTemplateOutlet,
@@ -64,7 +63,7 @@ export class GridDialogComponent
             gridCellValuesTemplate: QueryList<GridCellValueTemplateDirective>;
             gridCustomHeadersTemplate: QueryList<GridCustomHeaderTemplateDirective>;
             gridTranslations: GridDialogTranslationsDirective;
-            gridData$: Observable<GridData>; // only can pass by data girdData Observable
+            gridData$: Observable<GridData>; // only can pass by data gridData Observable
             gridId: string;
             originColumnsConfig: ColumnConfig[];
             selectedCheckboxRowModel: SelectionModel<any>;

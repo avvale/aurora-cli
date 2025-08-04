@@ -11,7 +11,6 @@ import { filter, Subject, takeUntil } from 'rxjs';
 @Directive({
     selector: '[fuseScrollReset]',
     exportAs: 'fuseScrollReset',
-    standalone: true,
 })
 export class FuseScrollResetDirective implements OnInit, OnDestroy {
     private _elementRef = inject(ElementRef);

@@ -9,13 +9,12 @@ import { NgTemplateOutlet } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-    selector       : 'au-file-upload',
-    templateUrl    : './file-upload.component.html',
-    styleUrls      : ['./file-upload.component.scss'],
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'au-file-upload',
+    templateUrl: './file-upload.component.html',
+    styleUrls: ['./file-upload.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         MatButtonModule, MatIconModule, NgTemplateOutlet, NgxFileDropModule, MatTooltipModule,
     ],
 })

@@ -5,7 +5,6 @@ import { AttachmentTranslationsService } from './attachment-translations.service
     selector       : 'au-attachment-translations',
     template       : '',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
 })
 export class AttachmentTranslationsComponent
 {

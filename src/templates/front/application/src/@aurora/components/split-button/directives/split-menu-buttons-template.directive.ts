@@ -1,8 +1,7 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auSplitMenuButtonsTemplate]',
-    standalone: true,
+    selector: '[auSplitMenuButtonsTemplate]',
 })
 export class SplitMenuButtonsTemplateDirective
 {

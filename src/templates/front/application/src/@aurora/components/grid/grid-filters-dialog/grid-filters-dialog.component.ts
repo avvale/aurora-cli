@@ -29,12 +29,11 @@ import { HasRenderOutboxPipe } from './pipes/has-render-outbox.pipe';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 
 @Component({
-    selector       : 'au-grid-filters-dialog',
-    templateUrl    : 'grid-filters-dialog.component.html',
-    styleUrls      : ['grid-filters-dialog.component.scss'],
+    selector: 'au-grid-filters-dialog',
+    templateUrl: 'grid-filters-dialog.component.html',
+    styleUrls: ['grid-filters-dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         AsyncPipe, DatetimepickerSqlFormatDirective, DatepickerSqlFormatDirective,
         FilterOperatorsPipe, GetAsyncMatSelectSearchColumnConfig, GetConcatOperatorPipe,
         GetGridFiltersValue, GetGridFilterValue,

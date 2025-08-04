@@ -9,9 +9,9 @@ import { OptionCountryPrefixComponent } from './option-country-prefix.component'
 import { LowerCasePipe } from '@angular/common';
 
 @Component({
-    selector   : 'au-select-country-prefix',
+    selector: 'au-select-country-prefix',
     templateUrl: './select-country-prefix.component.html',
-    providers  : [
+    providers: [
         {
             provide    : NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SelectCountryPrefixComponent),
@@ -19,8 +19,7 @@ import { LowerCasePipe } from '@angular/common';
         },
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         FlagIconComponent,
         GetCountryPrefixPipe,
         LowerCasePipe,

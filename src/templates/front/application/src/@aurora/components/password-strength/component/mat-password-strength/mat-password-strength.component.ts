@@ -18,13 +18,12 @@ import { ThemePalette } from '@angular/material/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
-    selector       : 'mat-password-strength',
-    exportAs       : 'matPasswordStrength',
-    templateUrl    : './mat-password-strength.component.html',
-    styleUrls      : ['./mat-password-strength.component.scss'],
+    selector: 'mat-password-strength',
+    exportAs: 'matPasswordStrength',
+    templateUrl: './mat-password-strength.component.html',
+    styleUrls: ['./mat-password-strength.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    providers      : [
+    providers: [
         {
             provide    : NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => MatPasswordStrengthComponent),

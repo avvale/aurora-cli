@@ -5,11 +5,11 @@ import { shake } from '../../animations/index';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-    selector   : 'mat-password-strength-info',
-    exportAs   : 'matPasswordStrengthInfo',
+    selector: 'mat-password-strength-info',
+    exportAs: 'matPasswordStrengthInfo',
     templateUrl: './mat-password-strength-info.component.html',
-    styleUrls  : ['./mat-password-strength-info.component.scss'],
-    animations : [
+    styleUrls: ['./mat-password-strength-info.component.scss'],
+    animations: [
     // nice stagger effect when showing existing elements
         trigger('list', [
             transition(':enter', [
@@ -72,8 +72,7 @@ import { MatCardModule } from '@angular/material/card';
             transition(':enter', useAnimation(shake)),
         ]),
     ],
-    standalone: true,
-    imports   : [
+    imports: [
         MatCardModule,
     ],
 })

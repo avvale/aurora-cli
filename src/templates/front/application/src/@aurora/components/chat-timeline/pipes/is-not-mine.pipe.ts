@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ChatMessage, IamService } from '@aurora';
 
 @Pipe({
-    name      : 'isNotMine',
-    pure      : true,
-    standalone: true,
+    name: 'isNotMine',
+    pure: true,
 })
 export class IsNotMinePipe implements PipeTransform
 {

@@ -1,9 +1,9 @@
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'au-flag-icon',
-    styles  : [`
+    styles: [`
         :host {
             display: flex;
             align-items: center;
@@ -16,9 +16,8 @@ import { Component, Input } from '@angular/core';
         }
     `],
     template: `
-        <ng-container
-            *ngIf="flagCode"
-        >
+        @if (flagCode)
+        {
             <span
                 class="fi fi-{{ flagCode }}"
                 [ngClass]="{'rounded': rounded}"
@@ -30,11 +29,11 @@ import { Component, Input } from '@angular/core';
             >
             </span>
             <ng-content></ng-content>
-        </ng-container>
+
+        }
     `,
-    standalone: true,
     imports   : [
-        NgClass, NgIf, NgStyle,
+        NgClass, NgStyle,
     ],
 })
 

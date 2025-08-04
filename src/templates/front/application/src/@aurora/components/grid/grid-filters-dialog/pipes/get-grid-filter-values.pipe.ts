@@ -5,8 +5,7 @@ import { ColumnConfig } from '../../grid.types';
  * Get key value for select filter
  */
 @Pipe({
-    name      : 'getGridFilterValues',
-    standalone: true,
+    name: 'getGridFilterValues',
 })
 export class GetGridFiltersValue implements PipeTransform
 {

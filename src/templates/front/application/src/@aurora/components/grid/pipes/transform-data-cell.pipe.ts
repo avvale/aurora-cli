@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name      : 'transformDataCell',
-    standalone: true,
+    name: 'transformDataCell',
 })
 export class TransformDataCellPipe implements PipeTransform
 {

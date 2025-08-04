@@ -11,11 +11,10 @@ import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
 import { ColumnConfig, ColumnDataType, ColumnsConfigChange } from '../grid.types';
 
 @Component({
-    selector   : 'au-grid-columns-config-properties-dialog',
+    selector: 'au-grid-columns-config-properties-dialog',
     templateUrl: 'grid-columns-config-properties-dialog.component.html',
-    styleUrls  : ['./grid-columns-config-properties-dialog.component.scss'],
-    standalone : true,
-    imports    : [
+    styleUrls: ['./grid-columns-config-properties-dialog.component.scss'],
+    imports: [
         AsyncPipe, GridTranslatePipe, MatButtonModule, MatCheckboxModule,
         MatDialogModule, DragDropModule, MatIconModule,NgForOf, FormsModule,
     ],

@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { dateFromFormat } from '@aurora';
 
 @Pipe({
-    name      : 'dateFormat',
-    pure      : true,
-    standalone: true,
+    name: 'dateFormat',
+    pure: true,
 })
 export class DateFormatPipe implements PipeTransform
 {

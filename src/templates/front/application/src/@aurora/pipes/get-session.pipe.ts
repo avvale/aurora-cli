@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { SessionService } from '../modules/session/session.service';
 
 @Pipe({
-    name      : 'getSession',
-    pure      : true,
-    standalone: true,
+    name: 'getSession',
+    pure: true,
 })
 export class GetSessionPipe implements PipeTransform
 {

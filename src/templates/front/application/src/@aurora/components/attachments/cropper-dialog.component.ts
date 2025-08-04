@@ -56,7 +56,6 @@ import { AsyncPipe } from '@angular/common';
             flex: 1 !important;
         }
     `],
-    standalone     : true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports        : [
         AsyncPipe, AttachmentTranslatePipe, MatDialogModule, MatButtonModule,

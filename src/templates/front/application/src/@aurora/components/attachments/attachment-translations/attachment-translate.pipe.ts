@@ -7,8 +7,7 @@ import { AttachmentMessages } from '../attachments.types';
  * Check which action to perform depending on whether or not the language exists.
  */
 @Pipe({
-    name      : 'attachmentTranslate',
-    standalone: true,
+    name: 'attachmentTranslate',
 })
 export class AttachmentTranslatePipe implements PipeTransform, OnDestroy
 {

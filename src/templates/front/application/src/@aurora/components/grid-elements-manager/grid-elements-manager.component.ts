@@ -10,11 +10,10 @@ import { GridFormElementDetailDialogTemplateDirective } from './directives/grid-
 import { GridElementDetailDialogComponent } from './grid-element-detail-dialog.component';
 
 @Component({
-    selector       : 'au-grid-elements-manager',
-    templateUrl    : './grid-elements-manager.component.html',
+    selector: 'au-grid-elements-manager',
+    templateUrl: './grid-elements-manager.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective, NgForOf, NgIf, NgTemplateOutlet,
     ],
 })

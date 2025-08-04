@@ -7,7 +7,6 @@ import { TranslocoModule } from '@jsverse/transloco';
     templateUrl    : './error-500.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
     imports        : [
         RouterModule, TranslocoModule,
     ],

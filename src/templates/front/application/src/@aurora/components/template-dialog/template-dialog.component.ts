@@ -7,7 +7,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     template: `
         <ng-container [ngTemplateOutlet]="data.template"></ng-container>
     `,
-    standalone: true,
     imports: [NgTemplateOutlet],
 })
 export class TemplateDialogComponent<T = undefined>

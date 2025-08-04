@@ -3,11 +3,10 @@ import { EnvironmentsInformationService } from './environments-information.servi
 import { EnvironmentsInformation } from './environments-information.types';
 
 @Component({
-    selector       : 'au-environments-information',
-    templateUrl    : './environments-information.component.html',
+    selector: 'au-environments-information',
+    templateUrl: './environments-information.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'auEnvironmentsInformation',
-    standalone     : true,
+    exportAs: 'auEnvironmentsInformation',
 })
 export class EnvironmentsInformationComponent
 {

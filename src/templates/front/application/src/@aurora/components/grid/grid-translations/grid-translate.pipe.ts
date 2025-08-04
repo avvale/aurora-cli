@@ -7,8 +7,7 @@ import { GridMessages, GridOperatorMessages, GridActionMenuMessages } from '../g
  * Check which action to perform depending on whether or not the language exists.
  */
 @Pipe({
-    name      : 'gridTranslate',
-    standalone: true,
+    name: 'gridTranslate',
 })
 export class GridTranslatePipe implements PipeTransform, OnDestroy
 {

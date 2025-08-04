@@ -1,9 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name      : 'getMetaMessageErrors',
-    pure      : true,
-    standalone: true,
+    name: 'getMetaMessageErrors',
+    pure: true,
 })
 export class GetMetaMessageErrorsPipe implements PipeTransform
 {

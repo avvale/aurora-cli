@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { AuthorizationService } from '../authorization.service';
 
 @Pipe({
-    name      : 'can',
-    pure      : true,
-    standalone: true,
+    name: 'can',
+    pure: true,
 })
 export class CanPipe implements PipeTransform
 {

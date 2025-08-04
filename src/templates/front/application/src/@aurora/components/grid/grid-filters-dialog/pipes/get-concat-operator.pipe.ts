@@ -5,8 +5,7 @@ import { ColumnDataType } from '../../grid.types';
  * Get concat operator that we need
  */
 @Pipe({
-    name      : 'getConcatOperator',
-    standalone: true,
+    name: 'getConcatOperator',
 })
 export class GetConcatOperatorPipe implements PipeTransform
 {

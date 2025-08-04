@@ -5,8 +5,7 @@ import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Directive({
-    selector  : '[auSlug]',
-    standalone: true,
+    selector: '[auSlug]',
 })
 export class SlugDirective
 {

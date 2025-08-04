@@ -26,12 +26,11 @@ import { SelectionChange, SelectionModel } from '../selection-model/selection-mo
 
 // no barrel
 @Component({
-    selector       : 'au-grid',
-    templateUrl    : './grid.component.html',
-    styleUrls      : ['./grid.component.scss'],
+    selector: 'au-grid',
+    templateUrl: './grid.component.html',
+    styleUrls: ['./grid.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         AsyncPipe, DragDropModule, FilterGridCustomHeaderTemplatesPositionPipe, FlagIconComponent, GetActionsPipe, GetCellValuePipe, GetGridSpinnerFlagPipe, GridSearchComponent, GridTranslatePipe, GetTranslationIconColorPipe,
         HasCellValueTemplatePipe, HasCellValueWithFieldTemplatePipe, JoinPipe, IsOriginColumnConfigPipe, MatBadgeModule, MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule, MatPaginatorModule, MatSortModule, MatTableModule,
         NgClass, NgForOf, NgIf, NgTemplateOutlet, TransformDataCellPipe,

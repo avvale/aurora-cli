@@ -18,7 +18,6 @@ import { AuthenticationService } from '@aurora';
     selector: 'au-impersonalize-warning',
     templateUrl: './impersonalize-warning.component.html',
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [
         MatButtonModule,
         MatTooltipModule,

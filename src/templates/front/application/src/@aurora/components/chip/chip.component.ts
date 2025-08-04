@@ -4,12 +4,11 @@ type ChipSize = 'tiny' | 'small' | 'regular';
 type ChipColor = 'primary' | 'accent' | 'warn' | 'success';
 
 @Component({
-    selector       : 'au-chip',
-    templateUrl    : './chip.component.html',
-    styleUrls      : ['./chip.component.scss'],
+    selector: 'au-chip',
+    templateUrl: './chip.component.html',
+    styleUrls: ['./chip.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation  : ViewEncapsulation.None,
-    standalone     : true,
+    encapsulation: ViewEncapsulation.None,
 })
 export class ChipComponent
 {

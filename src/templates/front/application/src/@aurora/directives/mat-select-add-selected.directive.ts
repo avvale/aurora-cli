@@ -1,13 +1,13 @@
 import { Directive, HostListener, Input, OnInit, WritableSignal } from '@angular/core';
 
 @Directive({
-    selector  : '[auMatSelectAddSelectedDirective]',
-    standalone: true,
+    selector: '[auMatSelectAddSelectedDirective]',
 })
 export class MatSelectAddSelectedDirective implements OnInit
 {
+    @Input() value: string | number;
     @Input() object: any;
-    @Input() selectedItems: WritableSignal<Set<any>>;
+    @Input() selectedItems: WritableSignal<Map<any, any>>;
 
     ngOnInit(): void
     {
@@ -35,14 +35,14 @@ export class MatSelectAddSelectedDirective implements OnInit
         {
             if ($event.source.selected)
             {
-                this.selectedItems.update(selectedOrganizationalEntities => selectedOrganizationalEntities.add(this.object));
+                this.selectedItems.update(selectedItems => selectedItems.set(this.value, this.object));
             }
             else
             {
-                this.selectedItems.update(selectedOrganizationalEntities =>
+                this.selectedItems.update(selectedItems =>
                 {
-                    selectedOrganizationalEntities.delete(this.object);
-                    return selectedOrganizationalEntities;
+                    selectedItems.delete(this.value);
+                    return selectedItems;
                 });
             }
         }

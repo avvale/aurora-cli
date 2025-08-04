@@ -34,7 +34,6 @@ import { FuseUtilsService } from '@fuse/services/utils/utils.service';
     styleUrls: ['./drawer.component.scss'],
     encapsulation: ViewEncapsulation.None,
     exportAs: 'fuseDrawer',
-    standalone: true,
 })
 export class FuseDrawerComponent implements OnChanges, OnInit, OnDestroy {
     /* eslint-disable @typescript-eslint/naming-convention */

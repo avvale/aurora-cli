@@ -3,8 +3,7 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 export type ChatTimelineCustomContentPosition = 'before' | 'after';
 
 @Directive({
-    selector  : '[auChatTimelineContentTemplate]',
-    standalone: true,
+    selector: '[auChatTimelineContentTemplate]',
 })
 export class ChatTimelineContentTemplateDirective
 {

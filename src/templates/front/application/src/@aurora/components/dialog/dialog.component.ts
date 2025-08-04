@@ -12,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrls      : ['./dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation  : ViewEncapsulation.None,
-    standalone     : true,
     imports        : [
         MatButtonModule, MatDialogModule, MatIconModule, NgIf, NgTemplateOutlet,
     ],

@@ -8,13 +8,12 @@ import { RouterModule } from '@angular/router';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 
 @Component({
-    selector       : 'au-split-button',
-    templateUrl    : './split-button.component.html',
-    styleUrls      : ['./split-button.component.scss'],
+    selector: 'au-split-button',
+    templateUrl: './split-button.component.html',
+    styleUrls: ['./split-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation  : ViewEncapsulation.None,
-    standalone     : true,
-    imports        : [
+    encapsulation: ViewEncapsulation.None,
+    imports: [
         MatButtonModule, MatIconModule, MatMenuModule, NgClass, NgTemplateOutlet, RouterModule,
     ],
 })

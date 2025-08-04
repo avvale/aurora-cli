@@ -1,11 +1,11 @@
 import { signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
-import { ColumnConfig, GridColumnFilter, GridData, QueryStatement, log, queryStatementHandler } from '@aurora';
+import { ColumnConfig, GridColumnFilter, GridData, QueryStatement, arrayToMap, log, queryStatementHandler } from '@aurora';
 import { debounceTime, lastValueFrom } from 'rxjs';
 import { AsyncMatSelectSearchState } from './async-mat-select-search.types';
 
-export const initAsyncMatSelectSearchState = <T>(): AsyncMatSelectSearchState<T> =>
+export const initAsyncMatSelectSearchState = <T, E>(): AsyncMatSelectSearchState<T, E> =>
 {
     return {
         page: {
@@ -18,31 +18,33 @@ export const initAsyncMatSelectSearchState = <T>(): AsyncMatSelectSearchState<T>
         itemsToShow        : [],
         foundItemsToShow   : [],
         itemFilterCtrl     : new FormControl<string>(''),
-        selectedItems      : signal(new Set()),
-        filteredItems      : signal(new Set()),
+        selectedItems      : signal(new Map<T, E>()),
+        filteredItems      : signal(new Map<T, E>()),
         isLoading          : signal(false),
         keyword            : '',
     };
 };
 
-export const initAsyncMatSelectSearch = <T>(
+export const initAsyncMatSelectSearch = <T, E>(
     {
         asyncMatSelectSearchState = null,
         manageAsyncMatSelectSearch = null,
-        itemPagination = null,
+        itemPagination = [],
         initSelectedItems = [],
+        indexKey = 'id',
     }: {
-        asyncMatSelectSearchState?: AsyncMatSelectSearchState<T>;
-        manageAsyncMatSelectSearch?: <T>(
+        asyncMatSelectSearchState?: AsyncMatSelectSearchState<T, E>;
+        manageAsyncMatSelectSearch?: <E>(
             params: {
-                asyncMatSelectSearchState?: AsyncMatSelectSearchState<T>;
+                asyncMatSelectSearchState?: AsyncMatSelectSearchState<T, E>;
                 isFromScrollEndEvent?: boolean;
                 keyword?: string;
                 noResultsFoundTranslation?: string;
             }
         ) => Promise<void>;
-        itemPagination?: GridData<T>;
-        initSelectedItems?: T[];
+        itemPagination?: E[];
+        initSelectedItems?: E[];
+        indexKey?: string;
     } = {},
 ): void =>
 {
@@ -51,19 +53,19 @@ export const initAsyncMatSelectSearch = <T>(
         asyncMatSelectSearchState
             .selectedItems
             .update(
-                selectedItemsSet =>
+                selectedItemsMap =>
                 {
                     for (const selectedItem of initSelectedItems)
-                        selectedItemsSet.add(selectedItem);
+                        selectedItemsMap.set(selectedItem['id'], selectedItem);
 
-                    return selectedItemsSet;
+                    return selectedItemsMap;
                 });
     }
 
     // init select filter with all items
-    asyncMatSelectSearchState.itemsToShow = itemPagination.rows;
-    asyncMatSelectSearchState.filteredItems.set(new Set(itemPagination.rows));
-    asyncMatSelectSearchState.currentCount = itemPagination.count;
+    asyncMatSelectSearchState.itemsToShow = itemPagination;
+    asyncMatSelectSearchState.filteredItems.set(arrayToMap<T, E>(itemPagination, indexKey));
+    asyncMatSelectSearchState.currentCount = itemPagination.length;
 
     // listen for country search field value changes
     asyncMatSelectSearchState
@@ -76,7 +78,7 @@ export const initAsyncMatSelectSearch = <T>(
         .subscribe(keyword =>
         {
             asyncMatSelectSearchState.keyword = keyword;
-            manageAsyncMatSelectSearch<T>({
+            manageAsyncMatSelectSearch<E>({
                 asyncMatSelectSearchState,
             });
         });
@@ -86,19 +88,21 @@ export const manageAsyncMatSelectSearch = ({
     columnFilter = null,
     paginationService = null,
     paginationConstraint = {},
+    indexKey = 'id',
 }: {
     columnFilter?: GridColumnFilter;
     paginationService?: any;
     paginationConstraint?: QueryStatement;
+    indexKey?: string;
 } = {}) =>
 {
-    return async <T>(
+    return async <T, E>(
         {
             asyncMatSelectSearchState = null,
             isFromScrollEndEvent = null,
             noResultsFoundTranslation = 'No Results Found',
         }: {
-            asyncMatSelectSearchState?: AsyncMatSelectSearchState<T>;
+            asyncMatSelectSearchState?: AsyncMatSelectSearchState<T, E>;
             isFromScrollEndEvent?: boolean;
             noResultsFoundTranslation?: string;
         } = {},
@@ -140,7 +144,7 @@ export const manageAsyncMatSelectSearch = ({
             // reset organizationalEntitiesFound to show pagination results
             asyncMatSelectSearchState.foundItemsToShow = [];
             asyncMatSelectSearchState.columnFilters = [];
-            asyncMatSelectSearchState.filteredItems.set(new Set(asyncMatSelectSearchState.itemsToShow));
+            asyncMatSelectSearchState.filteredItems.set(arrayToMap<T, E>(asyncMatSelectSearchState.itemsToShow, indexKey));
 
             // retrieves previous pagination
             asyncMatSelectSearchState.page.pageIndex = asyncMatSelectSearchState.paginationPageIndex;
@@ -166,7 +170,7 @@ export const manageAsyncMatSelectSearch = ({
         asyncMatSelectSearchState.page = pagination;
 
         asyncMatSelectSearchState.isLoading.set(true);
-        const itemsPagination = await lastValueFrom<GridData<T>>(
+        const itemsPagination = await lastValueFrom<GridData<E>>(
             paginationService
                 .pagination({
                     query: queryStatementHandler()
@@ -198,7 +202,7 @@ export const manageAsyncMatSelectSearch = ({
                     asyncMatSelectSearchState.foundItemsToShow = [{
                         id  : null,
                         name: noResultsFoundTranslation,
-                    } as T];
+                    } as E];
                 }
             }
         }
@@ -210,7 +214,7 @@ export const manageAsyncMatSelectSearch = ({
                 asyncMatSelectSearchState.itemsToShow = [{
                     id  : null,
                     name: noResultsFoundTranslation,
-                } as T];
+                } as E];
             }
             else
             {
@@ -220,10 +224,11 @@ export const manageAsyncMatSelectSearch = ({
 
         // show pagination or search results
         asyncMatSelectSearchState.filteredItems.set(
-            new Set(
+            arrayToMap(
                 asyncMatSelectSearchState.foundItemsToShow.length > 0 ?
                     asyncMatSelectSearchState.foundItemsToShow :
                     asyncMatSelectSearchState.itemsToShow,
+                indexKey,
             ),
         );
         asyncMatSelectSearchState.isLoading.set(false);

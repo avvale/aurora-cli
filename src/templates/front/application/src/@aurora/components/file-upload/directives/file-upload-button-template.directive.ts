@@ -1,8 +1,7 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auFileUploadButtonTemplate]',
-    standalone: true,
+    selector: '[auFileUploadButtonTemplate]',
 })
 export class FileUploadButtonTemplateDirective
 {

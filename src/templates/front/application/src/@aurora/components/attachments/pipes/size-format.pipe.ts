@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name      : 'sizeFormat',
-    standalone: true,
+    name: 'sizeFormat',
 })
 export class SizeFormatPipe implements PipeTransform
 {

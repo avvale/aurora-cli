@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { hasSomeScopes, IamService } from '@aurora';
 
 @Pipe({
-    name      : 'hasSomeScopes',
-    pure      : true,
-    standalone: true,
+    name: 'hasSomeScopes',
+    pure: true,
 })
 export class HasSomeScopesPipe implements PipeTransform
 {

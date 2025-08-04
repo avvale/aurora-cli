@@ -2,8 +2,7 @@ import { Directive, EventEmitter, Output, HostListener } from '@angular/core';
 import { MatSelect } from '@angular/material/select';
 
 @Directive({
-    selector  : '[auScrollEnd]',
-    standalone: true,
+    selector: '[auScrollEnd]',
 })
 export class ScrollEndDirective
 {

@@ -5,7 +5,6 @@ import dayjs from 'dayjs';
 
 @Directive({
     selector: '[auDatetimepickerSqlFormat]',
-    standalone: true,
 })
 export class DatetimepickerSqlFormatDirective {
     @Input() format: string = 'YYYY-MM-DD HH:mm:ss';

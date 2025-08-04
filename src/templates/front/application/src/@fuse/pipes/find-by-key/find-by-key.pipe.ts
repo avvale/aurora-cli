@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
     name: 'fuseFindByKey',
     pure: false,
-    standalone: true,
 })
 export class FuseFindByKeyPipe implements PipeTransform {
     /**

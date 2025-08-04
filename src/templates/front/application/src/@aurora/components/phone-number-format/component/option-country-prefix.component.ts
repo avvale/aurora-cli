@@ -10,8 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
         </div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         MatSelectModule,
         ReactiveFormsModule,
     ],

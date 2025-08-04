@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, WritableSignal, 
 import { EnvironmentsInformationService } from '../environments-information.service';
 
 @Component({
-    selector       : 'au-ribbon-environment',
-    templateUrl    : './ribbon-environment.component.html',
+    selector: 'au-ribbon-environment',
+    templateUrl: './ribbon-environment.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation  : ViewEncapsulation.None,
-    standalone     : true,
+    encapsulation: ViewEncapsulation.None,
 })
 export class RibbonEnvironmentComponent
 {

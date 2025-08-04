@@ -8,11 +8,10 @@ import { GridSelectElementCellValueTemplateDirective } from './directives/grid-s
 import { GridSelectElementCustomHeaderTemplateDirective } from './directives/grid-select-element-custom-header-template.directive';
 
 @Component({
-    selector       : 'au-grid-select-element',
-    template       : '',
-    styleUrls      : ['./grid-select-element.component.scss'],
+    selector: 'au-grid-select-element',
+    template: '',
+    styleUrls: ['./grid-select-element.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
 })
 export class GridSelectElementComponent
 {

@@ -9,13 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { GridTranslatePipe } from '../grid-translations/grid-translate.pipe';
 
 @Component({
-    selector       : 'au-grid-search',
-    templateUrl    : './grid-search.component.html',
-    styles         : [':host { display: inline-block }'],
+    selector: 'au-grid-search',
+    templateUrl: './grid-search.component.html',
+    styles: [':host { display: inline-block }'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    animations     : fuseAnimations,
-    standalone     : true,
-    imports        : [AsyncPipe, GridTranslatePipe, NgIf, MatButtonModule, MatIconModule, ReactiveFormsModule],
+    animations: fuseAnimations,
+    imports: [AsyncPipe, GridTranslatePipe, NgIf, MatButtonModule, MatIconModule, ReactiveFormsModule],
 })
 export class GridSearchComponent implements OnInit
 {

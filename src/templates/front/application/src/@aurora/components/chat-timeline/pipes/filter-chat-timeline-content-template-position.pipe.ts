@@ -2,8 +2,7 @@ import { Pipe, PipeTransform, QueryList } from '@angular/core';
 import { ChatTimelineContentTemplateDirective, ChatTimelineCustomContentPosition } from '../directives/chat-timeline-content-template.directive';
 
 @Pipe({
-    name      : 'filterChatTimelineContentTemplatePosition',
-    standalone: true,
+    name: 'filterChatTimelineContentTemplatePosition',
 })
 export class FilterChatTimelineContentTemplatePositionPipe implements PipeTransform
 {

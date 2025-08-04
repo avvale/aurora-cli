@@ -2,9 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import get from 'lodash-es/get';
 
 @Pipe({
-    name      : 'getCellValue',
-    pure      : true,
-    standalone: true,
+    name: 'getCellValue',
+    pure: true,
 })
 export class GetCellValuePipe implements PipeTransform
 {

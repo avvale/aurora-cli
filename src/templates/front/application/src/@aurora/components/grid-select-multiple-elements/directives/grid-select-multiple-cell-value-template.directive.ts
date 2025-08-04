@@ -1,8 +1,7 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auGridSelectMultipleCellValueTemplate]',
-    standalone: true,
+    selector: '[auGridSelectMultipleCellValueTemplate]',
 })
 export class GridSelectMultipleCellValueTemplateDirective
 {

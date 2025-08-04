@@ -3,8 +3,7 @@ import { AuthorizationService } from '@aurora';
 import { ColumnConfigAction } from '../grid.types';
 
 @Pipe({
-    name      : 'getActions',
-    standalone: true,
+    name: 'getActions',
 })
 export class GetActionsPipe implements PipeTransform
 {

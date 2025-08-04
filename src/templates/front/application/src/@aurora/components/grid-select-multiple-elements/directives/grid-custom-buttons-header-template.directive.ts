@@ -1,8 +1,7 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auGridCustomButtonsHeaderTemplate]',
-    standalone: true,
+    selector: '[auGridCustomButtonsHeaderTemplate]',
 })
 export class GridCustomButtonsHeaderTemplateDirective
 {

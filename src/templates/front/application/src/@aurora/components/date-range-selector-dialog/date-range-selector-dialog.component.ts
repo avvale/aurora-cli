@@ -9,7 +9,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     templateUrl    : './date-range-selector-dialog.component.html',
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
     imports        : [
         ...defaultDetailImports,
         DatepickerSqlFormatDirective, MatDatepickerModule, MatDialogModule,

@@ -32,8 +32,7 @@ import { MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction, MatSnackBarRef
         display: flex;
       }
     `,
-    standalone: true,
-    imports   : [
+    imports: [
         MatButtonModule, MatIconModule, MatSnackBarLabel, MatSnackBarActions, MatSnackBarAction,
     ],
 })

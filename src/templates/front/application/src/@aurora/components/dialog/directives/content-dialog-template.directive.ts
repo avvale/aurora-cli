@@ -1,8 +1,7 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector  : '[auContentDialogTemplate]',
-    standalone: true,
+    selector: '[auContentDialogTemplate]',
 })
 export class ContentDialogTemplateDirective
 {
