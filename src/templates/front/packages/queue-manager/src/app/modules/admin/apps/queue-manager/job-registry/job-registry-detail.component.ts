@@ -7,12 +7,11 @@ import { lastValueFrom, takeUntil } from 'rxjs';
 import { JobService } from '../job/job.service';
 
 @Component({
-    selector       : 'queue-manager-job-registry-detail',
-    templateUrl    : './job-registry-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'queue-manager-job-registry-detail',
+    templateUrl: './job-registry-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         IsObjectEmptyPipe, MatFormFieldAppearanceComponent, NgxJsonViewerModule,
     ],

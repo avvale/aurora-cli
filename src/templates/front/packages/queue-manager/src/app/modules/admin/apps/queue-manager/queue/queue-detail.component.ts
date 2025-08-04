@@ -10,12 +10,11 @@ import { JobService } from '../job/job.service';
 import { jobColumnsConfig } from '../job/job.columns-config';
 
 @Component({
-    selector       : 'queue-manager-queue-detail',
-    templateUrl    : './queue-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'queue-manager-queue-detail',
+    templateUrl: './queue-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         GridColumnTranslationComponent, GridCustomButtonsHeaderDialogTemplateDirective, GridElementsManagerComponent, GridTranslationsComponent, MatFormFieldAppearanceComponent, NgForOf,
         GridFormElementDetailDialogTemplateDirective, IsObjectEmptyPipe, NgxJsonViewerModule
