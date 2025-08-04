@@ -7,12 +7,11 @@ import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFo
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'o-auth-application-detail',
-    templateUrl    : './application-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'o-auth-application-detail',
+    templateUrl: './application-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule,
     ],

@@ -5,12 +5,11 @@ import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, export
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'o-auth-access-token-list',
-    templateUrl    : './access-token-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'o-auth-access-token-list',
+    templateUrl: './access-token-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
     ],
 })

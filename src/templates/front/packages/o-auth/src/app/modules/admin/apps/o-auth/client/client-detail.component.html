@@ -83,12 +83,12 @@
                     >
                         <mat-label>{{ t('oAuth.GrantType') }}</mat-label>
                         <mat-select formControlName="grantType">
-                            <mat-option
-                                *ngFor="let type of oAuthClientGrantType | keyvalue"
-                                [value]="type.key"
-                            >
-                                {{ t('oAuth.GrantTypeOptions.' + type.value) }}
-                            </mat-option>
+                            @for (type of oAuthClientGrantType | keyvalue; track type.key)
+                            {
+                                <mat-option [value]="type.key">
+                                    {{ t('oAuth.GrantTypeOptions.' + type.value) }}
+                                </mat-option>
+                            }
                         </mat-select>
                         <mat-error>{{ formErrors?.grantType | async }}</mat-error>
                     </mat-form-field>

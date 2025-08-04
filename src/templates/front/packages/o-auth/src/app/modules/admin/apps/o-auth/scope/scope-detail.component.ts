@@ -10,12 +10,11 @@ import { Action, Crumb, SnackBarInvalidFormComponent, Utils, ViewDetailComponent
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'o-auth-scope-detail',
-    templateUrl    : './scope-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'o-auth-scope-detail',
+    templateUrl: './scope-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatSelectModule, NgForOf,
     ],

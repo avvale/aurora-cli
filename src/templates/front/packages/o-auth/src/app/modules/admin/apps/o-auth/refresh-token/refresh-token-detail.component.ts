@@ -8,12 +8,11 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'o-auth-refresh-token-detail',
-    templateUrl    : './refresh-token-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'o-auth-refresh-token-detail',
+    templateUrl: './refresh-token-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule, MtxDatetimepickerModule,
     ],

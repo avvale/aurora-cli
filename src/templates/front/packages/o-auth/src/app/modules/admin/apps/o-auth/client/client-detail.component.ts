@@ -12,12 +12,11 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { ScopeService } from '../scope';
 
 @Component({
-    selector       : 'o-auth-client-detail',
-    templateUrl    : './client-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'o-auth-client-detail',
+    templateUrl: './client-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatCheckboxModule, MatSelectModule, NgForOf,
         KeyValuePipe,

@@ -33,7 +33,7 @@ export const accessTokenColumnsConfig: ColumnConfig[] = [
         translation: 'oAuth.IsRevoked',
     },
     {
-        type       : ColumnDataType.STRING,
+        type       : ColumnDataType.TIMESTAMP,
         field      : 'expiresAt',
         sort       : 'expiresAt',
         translation: 'oAuth.ExpiresAt',
