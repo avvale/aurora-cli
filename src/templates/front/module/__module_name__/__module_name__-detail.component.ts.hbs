@@ -176,7 +176,6 @@ export const {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship
     templateUrl: './{{ toKebabCase schema.moduleName }}-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         {{#if (hasImportWebComponentsManagerProperties (object properties=schema.aggregateProperties)) }}
