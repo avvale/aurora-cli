@@ -1,6 +1,6 @@
 type QueueManagerJob
 {
-    id: Any!
+    id: GraphQLString
     name: GraphQLString!
     data: JSON!
     opts: JSON!
@@ -12,7 +12,7 @@ type QueueManagerJob
     stacktrace: [GraphQLString]!
     returnvalue: Any
     finishedOn: GraphQLInt
-    processedOn: GraphQLInt!
+    processedOn: GraphQLInt
     state: QueueManagerJobState!
 }
 

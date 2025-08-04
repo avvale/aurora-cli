@@ -1,9 +1,8 @@
 import { QueueManagerJob, QueueManagerJobState } from '@api/graphql';
-import { QueueManagerJobDto } from '@api/queue-manager/job';
-import { getQueueToken } from '@nestjs/bull';
+import { getQueueToken } from '@nestjs/bullmq';
 import { Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Job } from 'bull';
+import { Job } from 'bullmq';
 
 @Injectable()
 export class QueueManagerDeleteJobByIdHandler
@@ -15,7 +14,7 @@ export class QueueManagerDeleteJobByIdHandler
     async main(
         id: string,
         name?: string,
-    ): Promise<QueueManagerJob | QueueManagerJobDto>
+    ): Promise<QueueManagerJob>
     {
         const queueInstance = this.moduleRef.get(
             getQueueToken(name),
@@ -26,11 +25,11 @@ export class QueueManagerDeleteJobByIdHandler
         const state = await job.getState();
 
         // remove job from redis database
-        job.remove();
+        await job.remove();
 
         return {
             ...job.toJSON(),
             state: QueueManagerJobState[state.toUpperCase()],
-        }
+        };
     }
 }

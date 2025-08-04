@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ICommandBus, Utils } from '@aurorajs.dev/core';
-import { Job, JobOptions, Queue } from 'bull';
+import { Job, JobsOptions, Queue } from 'bullmq';
 import { QueueManagerCreateJobRegistryCommand } from '@app/queue-manager';
 import { QueueManagerJobState } from '@api/graphql';
 
@@ -16,20 +16,20 @@ export class QueueManagerJobService
         data: T,
         tags: string | string[],
         jobName: string,
-        opts?: JobOptions,
+        opts?: JobsOptions,
     ): Promise<Job<T>>;
     async add<T>(
         queue: Queue,
         data: T,
         tags: string | string[],
-        opts?: JobOptions,
+        opts?: JobsOptions,
     ): Promise<Job<T>>;
     async add<T>(
         queue: Queue,
         data: T,
         tags: string | string[],
-        jobNameOrOpts?: string | JobOptions,
-        opts?: JobOptions,
+        jobNameOrOpts?: string | JobsOptions,
+        opts?: JobsOptions,
     ): Promise<Job<T>>
     {
         // get job name and opts

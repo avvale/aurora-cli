@@ -1,6 +1,6 @@
 import { QUEUE_REDIS } from '@app/queue-manager/queue-manager.types';
 import { SharedModule } from '@aurora/shared.module';
-import { BullModule } from '@nestjs/bull';
+import { BullModule } from '@nestjs/bullmq';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -24,7 +24,7 @@ import { appQueues } from 'src/app.queues';
             imports   : [ConfigModule],
             inject    : [ConfigService],
             useFactory: (configService: ConfigService) => ({
-                redis: {
+                connection: {
                     host    : configService.get('REDIS_HOST'),
                     port    : +configService.get('REDIS_PORT'),
                     password: configService.get('REDIS_PASSWORD'),
@@ -46,7 +46,7 @@ import { appQueues } from 'src/app.queues';
     controllers: [
         ...QueueManagerJobControllers,
         ...QueueManagerQueueApiControllers,
-        ...QueueManagerJobRegistryApiControllers
+        ...QueueManagerJobRegistryApiControllers,
     ],
     providers: [
         {
@@ -54,12 +54,20 @@ import { appQueues } from 'src/app.queues';
             provide   : QUEUE_REDIS,
             useFactory: async (configService: ConfigService) =>
             {
-                const client = createClient({
-                    url     : `redis://${configService.get('REDIS_HOST')}:${configService.get('REDIS_PORT')}`,
-                    password: configService.get('REDIS_PASSWORD'),
-                });
-                await client.connect();
-                return client;
+                try
+                {
+                    const client = createClient({
+                        url     : `redis://${configService.get('REDIS_HOST')}:${configService.get('REDIS_PORT')}`,
+                        password: configService.get('REDIS_PASSWORD'),
+                    });
+
+                    await client.connect();
+                    return client;
+                }
+                catch (e)
+                {
+                    console.log(e);
+                }
             },
         },
         QueueRedisImplementationService,
@@ -76,7 +84,7 @@ import { appQueues } from 'src/app.queues';
         ...QueueManagerQueueApiResolvers,
         ...QueueManagerQueueApiServices,
         ...QueueManagerJobRegistryApiResolvers,
-        ...QueueManagerJobRegistryApiServices
+        ...QueueManagerJobRegistryApiServices,
     ],
 })
 export class QueueManagerModule {}

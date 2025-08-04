@@ -17,8 +17,8 @@ export class QueueManagerJobRegistryDto
     queueName: string;
 
     @ApiProperty({
-        type       : QueueManagerJobRegistryState,
-        enum       : ['COMPLETED','WAITING','ACTIVE','DELAYED','FAILED','PAUSED'],
+        enum       : QueueManagerJobRegistryState,
+        enumName   : 'QueueManagerJobRegistryState',
         description: 'state [input here api field description]',
         example    : QueueManagerJobState.COMPLETED,
     })

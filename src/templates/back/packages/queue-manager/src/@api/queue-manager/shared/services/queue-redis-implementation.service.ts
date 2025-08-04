@@ -1,8 +1,8 @@
-/* eslint-disable no-await-in-loop */
+
 import { QueueManagerQueue } from '@api/graphql';
 import { QUEUE_REDIS, QueueDefinition, QueueManagerCreateQueuesCommand, QueueManagerDeleteQueuesCommand } from '@app/queue-manager';
 import { ICommandBus, Utils } from '@aurorajs.dev/core';
-import { getQueueToken } from '@nestjs/bull';
+import { getQueueToken } from '@nestjs/bullmq';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ModuleRef } from '@nestjs/core';

@@ -1,4 +1,4 @@
-import { BullModuleOptions } from '@nestjs/bull';
+import { RegisterQueueOptions } from '@nestjs/bullmq';
 
 export const QUEUE_REDIS = Symbol('QUEUE_REDIS');
 
@@ -10,5 +10,5 @@ export interface QueueDefinition
 
 export interface QueueRegister
 {
-    [key:string]: BullModuleOptions[];
+    [key:string]: RegisterQueueOptions[];
 }

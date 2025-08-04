@@ -1,10 +1,10 @@
 import { Pagination } from '@api/graphql';
 import { QueueManagerFindQueueByIdQuery } from '@app/queue-manager';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { getQueueToken } from '@nestjs/bull';
+import { getQueueToken } from '@nestjs/bullmq';
 import { Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Queue } from 'bull';
+import { Queue } from 'bullmq';
 
 @Injectable()
 export class QueueManagerPaginateJobsHandler
@@ -59,7 +59,7 @@ export class QueueManagerPaginateJobsHandler
                 count = await queueInstance.getFailedCount();
                 break;
             case 'paused':
-                count = await queueInstance.getPausedCount();
+                count = await queueInstance.getWaitingCount();
                 break;
         }
 

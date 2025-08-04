@@ -68,7 +68,7 @@ export class QueueManagerJobDto
         type       : Object,
         description: 'returnValue [input here api field description]',
     })
-    returnvalue: any;
+    returnvalue?: any;
 
     @ApiProperty({
         type       : Number,
@@ -83,8 +83,8 @@ export class QueueManagerJobDto
     processedOn: number;
 
     @ApiProperty({
-        type       : QueueManagerJobState,
-        enum       : ['COMPLETED','WAITING','ACTIVE','DELAYED','FAILED','PAUSED'],
+        enum       : QueueManagerJobState,
+        enumName   : 'QueueManagerJobState',
         description: 'state [input here api field description]',
     })
     state: QueueManagerJobState;
