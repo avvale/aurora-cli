@@ -5,12 +5,11 @@ import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, export
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
-    selector       : 'auditing-side-effect-list',
-    templateUrl    : './side-effect-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'auditing-side-effect-list',
+    templateUrl: './side-effect-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultListImports,
     ],
 })

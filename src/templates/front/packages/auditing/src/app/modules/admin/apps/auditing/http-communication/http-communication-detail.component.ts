@@ -7,12 +7,11 @@ import { lastValueFrom, takeUntil } from 'rxjs';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @Component({
-    selector       : 'auditing-http-communication-detail',
-    templateUrl    : './http-communication-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'auditing-http-communication-detail',
+    templateUrl: './http-communication-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         MatFormFieldAppearanceComponent, NgxJsonViewerModule,
     ],

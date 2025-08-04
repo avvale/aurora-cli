@@ -10,12 +10,11 @@ import { lastValueFrom, takeUntil } from 'rxjs';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @Component({
-    selector       : 'auditing-side-effect-detail',
-    templateUrl    : './side-effect-detail.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'auditing-side-effect-detail',
+    templateUrl: './side-effect-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone     : true,
-    imports        : [
+    imports: [
         ...defaultDetailImports,
         CanPipe, IsObjectEmptyPipe, KeyValuePipe, MatCheckboxModule, MatFormFieldAppearanceComponent, MatSelectModule, NgForOf, NgxJsonViewerModule,
     ],
