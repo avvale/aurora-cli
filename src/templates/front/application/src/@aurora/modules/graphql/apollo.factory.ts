@@ -71,14 +71,16 @@ export const apolloFactory = (
         // graphql error
         if (graphQLErrors)
         {
-            const unauthorizedError = graphQLErrors.find(
+            const unauthorizedError = graphQLErrors.some(
                 ({
                     message,
                     extensions,
                 }: {
                     message: string;
                     extensions: any;
-                }) => extensions.response?.statusCode === 401,
+                }) =>
+                    extensions.originalError?.statusCode === 401 ||
+                    (extensions.originalError?.statusCode === 404 && extensions.originalError?.message?.startsWith('OAuthRefreshToken')),
             );
 
             if (unauthorizedError)
