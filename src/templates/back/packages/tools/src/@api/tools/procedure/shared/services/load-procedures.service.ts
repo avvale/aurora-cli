@@ -1,4 +1,4 @@
-import { ToolsCreateProceduresCommand, ToolsDeleteProceduresCommand, ToolsGetProceduresQuery } from '@app/tools/procedure';
+import { ToolsCreateProceduresCommand, ToolsGetProceduresQuery } from '@app/tools/procedure';
 import { Encrypt, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { procedures } from 'src/assets/tools/procedures';
@@ -50,13 +50,13 @@ export class ToolsLoadProceduresService
             }
         }
 
-        // delete all procedures
-        await this.commandBus.dispatch(new ToolsDeleteProceduresCommand({
-            where: {},
-        }));
-
         await this.commandBus.dispatch(new ToolsCreateProceduresCommand(
             proceduresToStorage,
+            {
+                repositoryOptions: {
+                    updateOnDuplicate: ['name', 'type', 'version', 'upScript', 'downScript', 'sort', 'hash', 'isUpdated'],
+                },
+            },
         ));
     }
 }

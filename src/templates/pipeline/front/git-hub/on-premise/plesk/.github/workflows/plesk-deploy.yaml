@@ -3,7 +3,7 @@ name: Testing, Build and Deploy Back on Plesk
 on:
   push:
     branches:
-      - 'environments/plesk-production'
+      - 'environments/plesk-prod'
 
   workflow_dispatch:
 
