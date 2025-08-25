@@ -68,7 +68,6 @@ export class CommonCreateAdministrativeAreaLevel2Dto
 
     @ApiProperty({
         enum       : CommonAdministrativeAreaLevel2MapType,
-        enumName   : 'CommonAdministrativeAreaLevel2MapType',
         description: 'mapType [input here api field description]',
         example    : CommonAdministrativeAreaLevel1MapType.TERRAIN,
     })

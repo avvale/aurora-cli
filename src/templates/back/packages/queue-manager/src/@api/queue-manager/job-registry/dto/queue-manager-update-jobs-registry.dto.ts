@@ -18,7 +18,6 @@ export class QueueManagerUpdateJobsRegistryDto
 
     @ApiProperty({
         enum       : QueueManagerJobRegistryState,
-        enumName   : 'QueueManagerJobRegistryState',
         description: 'state [input here api field description]',
         example    : QueueManagerJobState.COMPLETED,
     })

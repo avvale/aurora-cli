@@ -363,7 +363,7 @@ export class Add extends Command
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@nestjs/bull', '@nestjs/schedule', 'bull', 'redis']);
+                    await exec('npm', ['install', '@nestjs/bullmq', '@nestjs/schedule', 'bullmq', 'redis']);
                     ux.action.stop('Completed!');
 
                     const project = CommonDriver.createProject(['tsconfig.json']);

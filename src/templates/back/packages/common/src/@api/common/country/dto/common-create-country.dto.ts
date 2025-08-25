@@ -78,7 +78,6 @@ export class CommonCreateCountryDto
 
     @ApiProperty({
         enum       : CommonCountryMapType,
-        enumName   : 'CommonCountryMapType',
         description: 'mapType [input here api field description]',
         example    : CommonCountryMapType.TERRAIN,
     })

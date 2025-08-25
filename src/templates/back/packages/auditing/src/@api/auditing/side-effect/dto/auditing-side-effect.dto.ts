@@ -55,7 +55,6 @@ export class AuditingSideEffectDto
 
     @ApiProperty({
         enum       : AuditingSideEffectEvent,
-        enumName   : 'AuditingSideEffectEvent',
         description: 'event [input here api field description]',
         example    : AuditingSideEffectEvent.CREATED,
     })
@@ -87,7 +86,6 @@ export class AuditingSideEffectDto
 
     @ApiProperty({
         enum       : AuditingSideEffectMethod,
-        enumName   : 'AuditingSideEffectMethod',
         description: 'method [input here api field description]',
         example    : AuditingSideEffectMethod.POST,
     })

@@ -13,7 +13,6 @@ export class IamCreateAccountDto
 
     @ApiProperty({
         enum       : IamAccountType,
-        enumName   : 'IamAccountType',
         description: 'type [input here api field description]',
         example    : IamAccountType.USER,
     })

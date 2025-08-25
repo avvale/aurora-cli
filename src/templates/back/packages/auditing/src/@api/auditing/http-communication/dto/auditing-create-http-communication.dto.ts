@@ -18,7 +18,6 @@ export class AuditingCreateHttpCommunicationDto
 
     @ApiProperty({
         enum       : AuditingHttpCommunicationEvent,
-        enumName   : 'AuditingHttpCommunicationEvent',
         description: 'event [input here api field description]',
         example    : AuditingHttpCommunicationEvent.REQUEST_FULFILLED,
     })

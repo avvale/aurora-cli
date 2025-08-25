@@ -6,7 +6,6 @@ export class OAuthCreateCredentialsDto
 {
     @ApiProperty({
         enum       : OAuthClientGrantType,
-        enumName   : 'AuditingHttpCommunicationEvent',
         description: 'grantType [input here api field description]',
         example    : OAuthClientGrantType.PASSWORD,
     })

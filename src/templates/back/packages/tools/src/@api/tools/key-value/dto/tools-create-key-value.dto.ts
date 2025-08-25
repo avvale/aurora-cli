@@ -18,7 +18,6 @@ export class ToolsCreateKeyValueDto
 
     @ApiProperty({
         enum       : ToolsKeyValueType,
-        enumName   : 'ToolsKeyValueType',
         description: 'type [input here api field description]',
     })
     type: ToolsKeyValueType;

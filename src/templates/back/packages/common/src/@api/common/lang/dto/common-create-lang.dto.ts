@@ -48,7 +48,6 @@ export class CommonCreateLangDto
 
     @ApiProperty({
         enum       : CommonLangDir,
-        enumName   : 'CommonLangDir',
         description: 'dir [input here api field description]',
     })
     dir: CommonLangDir;

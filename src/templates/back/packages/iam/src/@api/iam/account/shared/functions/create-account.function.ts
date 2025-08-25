@@ -7,7 +7,7 @@ import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
 import { IamGetTenantsQuery } from '@app/iam/tenant';
 import { IamCreateUserCommand } from '@app/iam/user';
 import { OAuthFindClientByIdQuery } from '@app/o-auth/client';
-import { Arrays, AuditingMeta, getNestedObjectsFromParentId, ICommandBus, IQueryBus, LiteralObject, Operator, uuid } from '@aurorajs.dev/core';
+import { Arr, AuditingMeta, getNestedObjectsFromParentId, ICommandBus, IQueryBus, LiteralObject, Operator, uuid } from '@aurorajs.dev/core';
 import { BadRequestException, ConflictException } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
@@ -107,7 +107,7 @@ export const createAccount = async (
 
     if (
         !account.dPermissions.all.includes(IamPermissions.SUDO) &&
-        !Arrays.contained(permissions.all, account.dPermissions.all)
+        !Arr.contained(permissions.all, account.dPermissions.all)
     )
     {
         throw new ConflictException({

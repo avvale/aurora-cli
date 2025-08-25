@@ -6,7 +6,7 @@ import { IamGetRolesQuery } from '@app/iam/role';
 import { iamCreatePermissionsFromRoles } from '@app/iam/shared';
 import { IamGetTenantsQuery } from '@app/iam/tenant';
 import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
-import { Arrays, AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff, getNestedObjectsFromParentId, uuid } from '@aurorajs.dev/core';
+import { Arr, AuditingMeta, ICommandBus, IQueryBus, QueryStatement, diff, getNestedObjectsFromParentId, uuid } from '@aurorajs.dev/core';
 import { ConflictException, Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -62,7 +62,7 @@ export class IamUpdateAccountByIdHandler
 
             if (
                 !account.dPermissions.all.includes(IamPermissions.SUDO) &&
-                !Arrays.contained(permissions.all, account.dPermissions.all)
+                !Arr.contained(permissions.all, account.dPermissions.all)
             )
             {
                 throw new ConflictException({

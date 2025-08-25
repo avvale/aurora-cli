@@ -75,7 +75,6 @@ export class CommonUpdateAdministrativeAreasLevel3Dto
 
     @ApiProperty({
         enum       : CommonAdministrativeAreaLevel3MapType,
-        enumName   : 'CommonAdministrativeAreaLevel3MapType',
         description: 'mapType [input here api field description]',
         example    : CommonAdministrativeAreaLevel1MapType.TERRAIN,
     })

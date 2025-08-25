@@ -1,15 +1,15 @@
 /* eslint-disable indent */
+import { OAuthClientGrantType } from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class OAuthCredentialsDto
 {
     @ApiProperty({
-        type       : String,
+        enum       : OAuthClientGrantType,
         description: 'grantType [input here api field description]',
-        example    : 'CLIENT_CREDENTIALS',
-        enum       : ['AUTHORIZATION_CODE','CLIENT_CREDENTIALS','PASSWORD'],
+        example    : OAuthClientGrantType.CLIENT_CREDENTIALS,
     })
-    tokenType: string;
+    tokenType: OAuthClientGrantType;
 
     @ApiProperty({
         type       : String,

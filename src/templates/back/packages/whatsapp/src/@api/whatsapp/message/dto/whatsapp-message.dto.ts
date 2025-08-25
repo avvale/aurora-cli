@@ -53,7 +53,6 @@ export class WhatsappMessageDto
 
     @ApiProperty({
         enum       : WhatsappMessageDirection,
-        enumName   : 'WhatsappMessageDirection',
         description: 'direction [input here api field description]',
     })
     direction: WhatsappMessageDirection;
@@ -85,7 +84,6 @@ export class WhatsappMessageDto
 
     @ApiProperty({
         enum       : WhatsappMessageType,
-        enumName   : 'WhatsappMessageType',
         description: 'type [input here api field description]',
     })
     type: WhatsappMessageType;

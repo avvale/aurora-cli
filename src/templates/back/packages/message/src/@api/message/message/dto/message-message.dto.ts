@@ -18,7 +18,6 @@ export class MessageMessageDto
 
     @ApiProperty({
         enum       : MessageMessageStatus,
-        enumName   : 'MessageMessageStatus',
         description: 'status [input here api field description]',
     })
     status: MessageMessageStatus;

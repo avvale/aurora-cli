@@ -12,7 +12,6 @@ export class OAuthUpdateClientsDto
 
     @ApiProperty({
         enum       : OAuthClientGrantType,
-        enumName   : 'OAuthClientGrantType',
         description: 'grantType [input here api field description]',
     })
     grantType?: OAuthClientGrantType;

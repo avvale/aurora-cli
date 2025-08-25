@@ -18,7 +18,6 @@ export class ToolsCreateProcedureDto
 
     @ApiProperty({
         enum       : ToolsProcedureType,
-        enumName   : 'ToolsProcedureType',
         description: 'type [input here api field description]',
     })
     type: ToolsProcedureType;

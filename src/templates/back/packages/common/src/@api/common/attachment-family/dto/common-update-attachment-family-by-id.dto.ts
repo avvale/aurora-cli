@@ -43,7 +43,6 @@ export class CommonUpdateAttachmentFamilyByIdDto
 
     @ApiProperty({
         enum       : CommonAttachmentFamilyFitType,
-        enumName   : 'CommonAttachmentFamilyFitType',
         description: 'fitType [input here api field description]',
         example    : CommonAttachmentFamilyFitType.FIT_CROP,
     })
@@ -63,7 +62,6 @@ export class CommonUpdateAttachmentFamilyByIdDto
 
     @ApiProperty({
         enum       : CommonAttachmentFamilyFormat,
-        enumName   : 'CommonAttachmentFamilyFormat',
         description: 'format [input here api field description]',
         example    : CommonAttachmentFamilyFormat.JPG,
     })

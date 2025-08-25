@@ -1,4 +1,4 @@
-import { Arrays, getRequestFromExecutionContext } from '@aurorajs.dev/core';
+import { Arr, getRequestFromExecutionContext } from '@aurorajs.dev/core';
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
@@ -21,7 +21,7 @@ export class AuthorizationPermissionsGuard implements CanActivate
             (Array.isArray(apiPermissions) && apiPermissions.length === 0)
         ) return true;
 
-        if (Arrays.intersects(apiPermissions, accountPermissions)) return true;
+        if (Arr.intersects(apiPermissions, accountPermissions)) return true;
 
         throw new UnauthorizedException({
             statusCode: 403,
