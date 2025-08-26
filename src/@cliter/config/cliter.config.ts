@@ -317,6 +317,7 @@ export const cliterConfig: CliterConfig =
     },
     backPackages: [
         'auditing',
+        'msEmail',
         'msEntraId',
         'common',
         'iam',

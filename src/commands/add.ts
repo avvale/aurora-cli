@@ -273,14 +273,14 @@ export class Add extends Command
 
                     const authenticationDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
 
-                    // authentication.decorator.ts file, change Auth decorator
+                    // auth.decorator.ts file, add MsEntraIdAuthenticationGuard import
                     ImportDriver.createImportItems(
                         authenticationDecoratorSourceFile,
                         '@api/ms-entra-id/ms-entra-id-authentication.guard',
                         ['MsEntraIdAuthenticationGuard'],
                     );
 
-                    // authorization.decorator.ts file, change Auth decorator
+                    // auth.decorator.ts file, add MsEntraIdAuthorizationGuard import
                     ImportDriver.createImportItems(
                         authenticationDecoratorSourceFile,
                         '@api/ms-entra-id/ms-entra-id-authorization.guard',
@@ -300,6 +300,37 @@ export class Add extends Command
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
                     ux.action.stop('Completed!');
+                    break;
+                }
+
+                case 'msEmail': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@microsoft/microsoft-graph-client']);
+                    ux.action.stop('Completed!');
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const mailerTransportModule = CommonDriver.createSourceFile(project, ['src', '@config', 'mailer', 'mailer-transport.module.ts']);
+
+                    ImportDriver.createImportItems(
+                        mailerTransportModule,
+                        '@app/ms-email',
+                        ['MailerMicrosoftGraphTransportService'],
+                    );
+
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
+                        mailerTransportModule,
+                        'MailerTransportModule',
+                        'Module',
+                        'providers',
+                        'MailerTransportService',
+                        'MailerMicrosoftGraphTransportService',
+                    );
+
+                    mailerTransportModule.saveSync();
+                    ux.action.stop('Completed!');
+
                     break;
                 }
 
