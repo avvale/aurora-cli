@@ -20,7 +20,7 @@ import { WhatsappTimelineService } from './whatsapp-timeline.service';
 export class WhatsappConnectorService
 {
     baseApi = 'https://graph.facebook.com';
-    version = 'v19.0';
+    version = 'v22.0';
     messagesApi = 'messages';
 
     constructor(

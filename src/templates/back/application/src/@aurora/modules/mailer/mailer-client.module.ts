@@ -1,3 +1,5 @@
+import { MailerTransportService } from '@aurorajs.dev/core';
+import { MailerTransportModule } from '@config/mailer';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { DynamicModule, Module } from '@nestjs/common';
@@ -49,26 +51,20 @@ export class MailerCLientModule
                 MailerModule.forRootAsync({
                     imports: [
                         ConfigModule,
+                        MailerTransportModule,
                     ],
                     inject: [
                         ConfigService,
                         I18nService,
+                        MailerTransportService,
                     ],
                     useFactory: (
                         configService: ConfigService,
                         i18nService: I18nService,
+                        mailerTransportService: MailerTransportService,
                     ) => ({
-                        transport: {
-                            host     : configService.get<string>('MAILER_HOST'),
-                            port     : +configService.get<number>('MAILER_PORT'),
-                            ignoreTLS: configService.get<string>('MAILER_IGNORE_TLS') === 'true' ? true : false,
-                            secure   : configService.get<string>('MAILER_SECURE') === 'true' ? true : false,
-                            auth     : {
-                                user: configService.get<string>('MAILER_USER'),
-                                pass: configService.get<string>('MAILER_PASSWORD'),
-                            },
-                        },
-                        defaults: {
+                        transport: mailerTransportService.getTransport(),
+                        defaults : {
                             from: configService.get<string>('MAILER_FROM'),
                         },
                         template: {

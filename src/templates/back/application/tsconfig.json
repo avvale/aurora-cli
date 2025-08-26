@@ -27,6 +27,9 @@
             ],
             "@aurora/*": [
                 "src/@aurora/*"
+            ],
+            "@config/*": [
+                "src/@config/*"
             ]
         }
     }
