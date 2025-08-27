@@ -1,2 +1,2 @@
-export * from './mailer-client.module';
-export * from './mailer-smtp-transport.service';
+export { MailerCLientModule } from './mailer-client.module';
+export { MailerSMTPTransportService } from './mailer-smtp-transport.service';

@@ -1,3 +1,3 @@
-export * from './sentry.module';
-export * from './sentry.service';
-export * from './sentry.types';
+export { SentryModule } from './sentry.module';
+export { SentryService } from './sentry.service';
+export type * from './sentry.types';

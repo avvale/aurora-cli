@@ -1,4 +1,4 @@
-import { MailerSMTPTransportService } from '@aurora/modules/mailer';
+import { MailerSMTPTransportService } from '@aurora/modules/mailer/mailer-smtp-transport.service';
 import { MailerTransportService } from '@aurorajs.dev/core';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
