@@ -1,1 +1,1 @@
-export * from './microsoft-graph.transport';
+export * from './mailer-microsoft-graph-transport.service';

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import type Mail from 'nodemailer/lib/mailer';
 import { Transport } from 'nodemailer';
 import { Client } from '@microsoft/microsoft-graph-client';
