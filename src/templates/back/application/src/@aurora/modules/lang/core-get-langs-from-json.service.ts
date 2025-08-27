@@ -33,8 +33,8 @@ export class CoreGetLangsFromJsonService implements CoreGetLangsService
         return coreLangs;
     }
 
-    onApplicationBootstrap(): void
+    async onApplicationBootstrap(): Promise<void>
     {
-        this.init();
+        await this.init();
     }
 }
