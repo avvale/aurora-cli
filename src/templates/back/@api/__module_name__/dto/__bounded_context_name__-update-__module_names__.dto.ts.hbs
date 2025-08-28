@@ -39,7 +39,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : String,
-        description: '{{ toCamelCase name }} [input here api field description]',
+        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         example    : '{{ uuid name }}',
     })
     {{ toCamelCase name }}?: string;
@@ -49,7 +49,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : [String],
-        description: '{{ toCamelCase name }} [input here api field description]',
+        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : '{{ example }}',
         {{/if }}
@@ -63,7 +63,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {{#eq type ../propertyType.ID ~}}
     @ApiProperty({
         type       : String,
-        description: '{{ toCamelCase name }} [input here api field description]',
+        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         example    : '{{ uuid name }}',
     })
     {{ toCamelCase name }}?: string;
@@ -71,7 +71,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {{else ~}}
     @ApiProperty({
         type       : {{ toPascalCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath) }}Update{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Dto,
-        description: '{{ toCamelCase name }} [input here api field description]',
+        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
@@ -84,7 +84,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         enum       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-        description: '{{ toCamelCase name }} [input here api field description]',
+        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
@@ -95,7 +95,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
 {{#if ../isCommonProperty}}
     @ApiProperty({
         type       : {{ getSwaggerTypeProperty this ../config }},
-        description: '{{ toCamelCase name }} [input here api field description]',
+        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}

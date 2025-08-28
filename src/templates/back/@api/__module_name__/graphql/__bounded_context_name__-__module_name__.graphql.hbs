@@ -14,11 +14,20 @@ type {{ schema.aggregateName }}
 {{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true)) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
-    {{setVar 'isCommonProperty' false ~}}
+    {{#if description}}
+    """{{ description }}"""
+    {{/if}}
     {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
+    {{#if relationship.description}}
+    """{{ relationship.description }}"""
+    {{/if}}
+    {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
+    {{#if description}}
+    """{{ description }}"""
+    {{/if}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase name }}: [{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}]{{#unless nullable }}!{{/unless}}
     {{#if relationship.isDenormalized}}
@@ -26,23 +35,39 @@ type {{ schema.aggregateName }}
     {{/if}}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}
+    {{#if description}}
+    """{{ description }}"""
+    {{/if}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase name }}: [{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}]{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_ONE }}
     {{setVar 'isCommonProperty' false ~}}
 {{#eq type ../propertyType.ID ~}}
+    {{#if description}}
+    """{{ description }}"""
+    {{/if}}
     {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
+    {{#if relationship.description}}"""{{ relationship.description }}"""{{/if}}
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}
 {{else ~}}
+    {{#if description}}
+    """{{ description }}"""
+    {{/if}}
     {{ toCamelCase name }}: {{ relationship.aggregateName }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{/eq}}
 {{#eq type ../propertyType.ENUM}}
+    {{#if description}}
+    """{{ description }}"""
+    {{/if}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{#if ../isCommonProperty}}
+    {{#if description}}
+    """{{ description }}"""
+    {{/if}}
     {{ toCamelCase name }}: {{ getGraphqlTypeProperty this ../config }}{{#unless nullable }}!{{/unless}}
 {{/if}}
 {{/if}}
