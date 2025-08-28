@@ -33,7 +33,7 @@ export const generateApiPivotFiles = (generateCommandState: GenerateCommandState
                     `src/@api/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.module.ts`,
                     `src/@api/${property.relationship.pivot.boundedContextName.toKebabCase()}/${property.relationship.pivot.boundedContextName.toKebabCase()}.seeder.ts`,
                 ],
-                excludedOperations: generateCommandState.schema.excludedOperations,
+                excludedOperations: property.relationship.pivot.excludedOperations,
                 force             : generateCommandState.flags.force,
                 verbose           : generateCommandState.flags.verbose,
                 lockFiles         : generateCommandState.lockFiles,
