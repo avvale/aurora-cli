@@ -1,4 +1,4 @@
-import { IamCreatedPermissionRoleEvent, IamCreatedPermissionsRolesEvent, IamDeletedPermissionRoleEvent, IamDeletedPermissionsRolesEvent, IamPermissionRole, IamUpdatedAndIncrementedPermissionRoleEvent, IamUpdatedAndIncrementedPermissionsRolesEvent, IamUpdatedPermissionRoleEvent, IamUpdatedPermissionsRolesEvent } from '@app/iam/permission-role';
+import { IamCreatedPermissionRoleEvent, IamCreatedPermissionsRolesEvent, IamDeletedPermissionRoleEvent, IamDeletedPermissionsRolesEvent, IamPermissionRole, IamUpdatedPermissionRoleEvent, IamUpdatedPermissionsRolesEvent } from '@app/iam/permission-role';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
@@ -40,23 +40,6 @@ export class IamAddPermissionsRolesContextEvent extends AggregateRoot
             new IamUpdatedPermissionsRolesEvent({
                 payload: this.aggregateRoots.map(permissionRole =>
                     new IamUpdatedPermissionRoleEvent({
-                        payload: {
-                            permissionId: permissionRole.permissionId.value,
-                            roleId: permissionRole.roleId.value,
-                        },
-                    }),
-                ),
-                cQMetadata: this.cQMetadata,
-            }),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new IamUpdatedAndIncrementedPermissionsRolesEvent({
-                payload: this.aggregateRoots.map(permissionRole =>
-                    new IamUpdatedAndIncrementedPermissionRoleEvent({
                         payload: {
                             permissionId: permissionRole.permissionId.value,
                             roleId: permissionRole.roleId.value,

@@ -1,14 +1,23 @@
 
 type IamBoundedContext
 {
+    """UUID for bounded context"""
     id: ID!
+    """Name of the bounded context"""
     name: GraphQLString!
+    """root folder where the bounded context is located"""
     root: GraphQLString!
+    """Sort order of the bounded context"""
     sort: GraphQLInt
+    """Indicates if the bounded context is active"""
     isActive: GraphQLBoolean!
+    """List of permissions associated with the bounded context"""
     permissions: [IamPermission]
+    """Timestamp when the bounded context was created"""
     createdAt: GraphQLTimestamp
+    """Timestamp when the bounded context was last updated"""
     updatedAt: GraphQLTimestamp
+    """Timestamp when the bounded context was deleted"""
     deletedAt: GraphQLTimestamp
 }
 

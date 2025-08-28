@@ -1,13 +1,21 @@
 
 type IamPermission
 {
+    """UUID for permission"""
     id: ID!
+    """Permission name, this name is unique and used to evaluate if a user can consume or access a resource"""
     name: GraphQLString!
+    """UUID for bounded context, a permission is associated with a bounded context"""
     boundedContextId: ID!
+    """Bounded context object relationship to permission"""
     boundedContext: IamBoundedContext
+    """List of roles associated with the permission"""
     roles: [IamRole]
+    """Timestamp when the permission was created"""
     createdAt: GraphQLTimestamp
+    """Timestamp when the permission was last updated"""
     updatedAt: GraphQLTimestamp
+    """Timestamp when the permission was deleted"""
     deletedAt: GraphQLTimestamp
 }
 

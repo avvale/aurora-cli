@@ -46,6 +46,353 @@ enum CoreSearchKeyLang
 #############
 # ORM types #
 #############
+"""
+-----------------------------------------------------------------------------
+# QueryStatement → Query Options (How-To)
+-----------------------------------------------------------------------------
+It explains how to express Sequelize queries through your GraphQL input:
+
+```graphql
+input QueryStatement {
+  where: JSON
+  attributes: JSON
+  include: [GraphQLString]
+  order: JSON
+  group: JSON
+  limit: GraphQLInt
+  offset: GraphQLInt
+  distinct: GraphQLBoolean
+  col: GraphQLString
+}
+```
+
+## GENERAL NOTES
+- **WHERE operators**: Sequelize uses Symbol operators (e.g., `[Op.gte]`) but the API must use _stringified_ keys wrapped in brackets, e.g. `"[gte]"`, `"[or]"`.
+  ```json
+  { "where": { "age": { "[gte]": 18 } } }
+  ```
+- **INCLUDE**: Prefer association names:
+  ```json
+  { "include": [ { "association": "tableToRelate" } ] }
+  ```
+  You can nest includes, add `where`/`attributes`/`required` per-include, etc.
+- **DIALECTS**: Some operators (`iLike`, `regexp`, array containment) are dialect-specific.
+
+# WHERE — Filtering
+Combine field predicates and logical operators.
+
+### Logical combinations
+```json
+{
+  "where": {
+    "[and]": [
+      { "status": "active" },
+      { "age": { "[gte]": 18 } }
+    ]
+  }
+}
+```
+
+Other forms:
+```json
+{ "where": { "[or]": [ { "role": "admin" }, { "role": "editor" } ] } }
+{ "where": { "[not]": { "deletedAt": { "[ne]": null } } } }
+```
+
+Supported: `[and]`, `[or]`, `[not]`.
+
+### Equality & nulls
+```json
+{ "where": { "id": 123 } }
+{ "where": { "id": { "[eq]": 123 } } }
+{ "where": { "tenantId": { "[ne]": "public" } } }
+{ "where": { "deletedAt": { "[is]": null } } }
+```
+
+Supported: `[eq]`, `[ne]`, `[is]`.
+
+### Comparisons (numbers/dates)
+```json
+{ "where": { "price": { "[gt]": 10 } } }
+{ "where": { "price": { "[gte]": 10, "[lte]": 100 } } }
+{ "where": { "createdAt": { "[lt]": "2025-01-01T00:00:00Z" } } }
+```
+
+Supported: `[gt]`, `[gte]`, `[lt]`, `[lte]`.
+
+### Ranges
+```json
+{ "where": { "score": { "[between]": [70, 90] } } }
+{ "where": { "score": { "[notBetween]": [0, 10] } } }
+```
+
+Supported: `[between]`, `[notBetween]`.
+
+### Sets (IN / NOT IN)
+```json
+{ "where": { "status": { "[in]": ["draft", "published"] } } }
+{ "where": { "status": { "[notIn]": ["archived"] } } }
+```
+
+Supported: `[in]`, `[notIn]`.
+
+### Pattern matching (strings)
+```json
+{ "where": { "name": { "[like]": "%desk%" } } }
+{ "where": { "name": { "[notLike]": "Admin%" } } }
+{ "where": { "name": { "[iLike]": "%madrid%" } } }
+{ "where": { "name": { "[notILike]": "TEST%" } } }
+{ "where": { "name": { "[startsWith]": "Pro" } } }
+{ "where": { "name": { "[endsWith]": "Max" } } }
+{ "where": { "name": { "[substring]": "Air" } } }
+{ "where": { "sku":  { "[regexp]": "^[A-Z]{3}-[0-9]+$" } } }
+{ "where": { "sku":  { "[notRegexp]": "test" } } }
+{ "where": { "sku":  { "[iRegexp]": "abc" } } }
+{ "where": { "sku":  { "[notIRegexp]": "xyz" } } }
+```
+
+Supported: `[like]`, `[notLike]`, `[iLike]`, `[notILike]`, `[startsWith]`, `[endsWith]`, `[substring]`, `[regexp]`, `[notRegexp]`, `[iRegexp]`, `[notIRegexp]`.
+
+### Column vs column
+```json
+{ "where": { "updatedAt": { "[col]": "createdAt" } } }
+```
+
+### Arrays
+```json
+{ "where": { "tags": { "[overlap]": ["react", "node"] } } }
+{ "where": { "tags": { "[contains]": ["graphql"] } } }
+{ "where": { "roles": { "[any]": ["admin", "editor"] } } }
+```
+
+# INCLUDE — Eager Loading Associations
+Recommended shape:
+```json
+{ "include": [ { "association": "tableToRelate" } ] }
+```
+
+Include with filters:
+```json
+{
+  "include": [
+    {
+      "association": "fleetAircraft",
+      "attributes": ["id", "registration"],
+      "where": { "status": "active" },
+      "required": true
+    }
+  ]
+}
+```
+
+- where inside an include turns the join into a filter on the associated table.
+- required: true makes it an INNER JOIN (exclude parents without a matching child, default is left join).
+- attributes inside an include limits columns of the associated model.
+
+Nested includes:
+```json
+{
+  "include": [
+    {
+      "association": "fleetAircraft",
+      "include": [
+        { "association": "aircraftModel" }
+      ]
+    }
+  ]
+}
+```
+
+You can also rely on { "include": { "all": true, "nested": true } }
+(when building queries in code) to include everything recursively.
+In your API, prefer explicit association names for control and safety.
+
+Many-to-many specifics:
+```json
+{
+  "include": [
+    {
+      "association": "userRoles",
+      "through": { "attributes": ["assignedAt"] }
+    }
+  ]
+}
+```
+
+Ordering & limiting with includes
+- You can order by included fields using top-level `order` with a path
+  (see ORDER section below).
+- Limiting rows inside a hasMany include requires `separate: true` on that
+  include in Sequelize (code-level option). If you need this behavior, mirror
+  it in your API contract; otherwise limits apply at the root result set.
+
+---
+
+# ATTRIBUTES — Projection / computed fields
+The attributes option defines which columns should be returned in the query result.
+By default, Sequelize selects all columns from the model. With attributes, you can:
+- Include only specific columns (whitelist).
+- Exclude specific columns (blacklist).
+- Rename (alias) columns.
+- Add computed or aggregated fields using Sequelize functions (fn, col, literal).
+
+Select, alias, and compute:
+```json
+{
+  "attributes": [
+    "id",
+    "name",
+    ["email", "contactEmail"],  // alias
+    { "fn": "count", "col": "orders.id", "as": "orderCount" }, // aggregate
+    { "literal": "NOW()", "as": "now" }  // raw SQL literal (use with care)
+  ]
+}
+```
+
+Exclude shape:
+```json
+{ "attributes": { "exclude": ["password", "secretToken"] } }
+```
+
+Notes
+- `fn`, `col`, `cast`, and `literal` expressions are supported by Sequelize.
+- Aggregates typically pair with `group`.
+
+---
+
+# ORDER — Sorting
+The order option defines the sort order of the query result set.
+It accepts an array of sorting rules. Each rule specifies a column (or expression) and the direction (ASC for ascending, DESC for descending).
+
+Simple:
+```json
+{ "order": [["createdAt", "DESC"]] }
+{ "order": [["name", "ASC"], ["id", "DESC"]] }
+```
+Order by an included model field (path syntax):
+```json
+{ "order": [["$fleetAircraft.registration$", "ASC"]] }
+```
+Order by a function:
+```json
+{ "order": [[{ "fn": "lower", "col": "name" }, "ASC"]] }
+```
+
+---
+
+# GROUP — Aggregation
+The group option is used to aggregate rows in the result set, similar to the SQL GROUP BY clause.
+It is typically combined with aggregate functions in the attributes field (e.g., COUNT, SUM, AVG).
+
+Group by columns/expressions (use with aggregates in attributes):
+```json
+{
+  "attributes": [
+    "status",
+    { "fn": "count", "col": "*", "as": "cnt" }
+  ],
+  "group": ["status"],
+  "order": [["status", "ASC"]]
+}
+```
+
+---
+
+# LIMIT / OFFSET — Pagination
+The limit and offset options are used to control pagination in query results.
+They correspond to SQL’s LIMIT and OFFSET clauses.
+- limit → maximum number of rows to return.
+- offset → number of rows to skip before starting to return results.
+```json
+{ "limit": 20, "offset": 40 }
+```
+Notes
+- With hasMany includes, root rows can duplicate due to joins; use
+  `"distinct": true` (and optionally `"col": "id"`) when counting.
+- Per-include limiting needs `separate: true` on that include (code-level).
+
+---
+
+# DISTINCT & COL — Counting
+The distinct option ensures that query results (and counts) are unique, preventing duplicates that may appear when joining associated tables.
+It corresponds to SQL DISTINCT keyword.
+```json
+{ "distinct": true, "col": "id" }
+```
+Notes
+- `distinct: true` applies COUNT(DISTINCT ...) on the PK (or on `col`).
+- Use to avoid inflated counts caused by JOINs when using findAndCountAll.
+
+---
+
+# END-TO-END EXAMPLES
+### Example 1, Active engines with aircraft ordered by registration
+```json
+{
+  "where": { "status": "active" },
+  "include": [
+    {
+      "association": "fleetAircraft",
+      "attributes": ["id", "registration"],
+      "where": { "registration": { "[notLike]": "TEST%" } },
+      "required": true
+    }
+  ],
+  "order": [["$fleetAircraft.registration$", "ASC"]],
+  "limit": 50,
+  "offset": 0,
+  "distinct": true
+}
+```
+
+### Example 2, Case-insensitive search + range + nested include
+```json
+{
+  "where": {
+    "[and]": [
+      { "name": { "[iLike]": "%aion%" } },
+      { "createdAt": { "[between]": ["2025-01-01", "2025-12-31"] } }
+    ]
+  },
+  "include": [
+    { "association": "engineModel", "attributes": ["id", "name"] },
+    {
+      "association": "fleetAircraft",
+      "include": [
+        { "association": "aircraftModel", "attributes": ["code", "name"] }
+      ]
+    }
+  ],
+  "order": [["createdAt", "DESC"]]
+}
+```
+
+### Example 2, Aggregation with group
+```json
+{
+  "attributes": [
+    "status",
+    { "fn": "count", "col": "*", "as": "total" }
+  ],
+  "group": ["status"],
+  "order": [["status", "ASC"]]
+}
+```
+
+---
+
+# OPERATOR REFERENCE
+- **Logical**:      [and], [or], [not]
+- **Equality**:     [eq], [ne], [is]
+- **Comparison**:   [gt], [gte], [lt], [lte]
+- **Ranges**:       [between], [notBetween]
+- **Sets**:         [in], [notIn]
+- **Patterns**:     [like], [notLike], [iLike], [notILike],
+                    [startsWith], [endsWith], [substring],
+                    [regexp], [notRegexp], [iRegexp], [notIRegexp]
+- **Column ref**:   [col]
+- **Arrays**:       [overlap], [contains], [contained], [any]
+"""
 input QueryStatement
 {
     where: JSON
@@ -61,11 +408,11 @@ input QueryStatement
 
 type Pagination
 {
-    "Total possible objects displayed"
+    """Total possible objects displayed"""
     total: GraphQLInt!
-    "Number of items filtered according to query"
+    """Number of items filtered according to query"""
     count: GraphQLInt!
-    "Query object data"
+    """Query object data"""
     rows: [JSON]!
 }
 

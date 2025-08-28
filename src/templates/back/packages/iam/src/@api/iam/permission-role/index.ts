@@ -13,7 +13,6 @@ export { IamFindPermissionRoleByIdHandler } from './handlers/iam-find-permission
 export { IamFindPermissionRoleHandler } from './handlers/iam-find-permission-role.handler';
 export { IamUpdatePermissionRoleByIdHandler } from './handlers/iam-update-permission-role-by-id.handler';
 export { IamUpdatePermissionsRolesHandler } from './handlers/iam-update-permissions-roles.handler';
-export { IamUpsertPermissionRoleHandler } from './handlers/iam-upsert-permission-role.handler';
 export { IamDeletePermissionRoleByIdHandler } from './handlers/iam-delete-permission-role-by-id.handler';
 export { IamDeletePermissionsRolesHandler } from './handlers/iam-delete-permissions-roles.handler';
 
@@ -26,7 +25,6 @@ export { IamFindPermissionRoleByIdController } from './controllers/iam-find-perm
 export { IamFindPermissionRoleController } from './controllers/iam-find-permission-role.controller';
 export { IamUpdatePermissionRoleByIdController } from './controllers/iam-update-permission-role-by-id.controller';
 export { IamUpdatePermissionsRolesController } from './controllers/iam-update-permissions-roles.controller';
-export { IamUpsertPermissionRoleController } from './controllers/iam-upsert-permission-role.controller';
 export { IamDeletePermissionRoleByIdController } from './controllers/iam-delete-permission-role-by-id.controller';
 export { IamDeletePermissionsRolesController } from './controllers/iam-delete-permissions-roles.controller';
 
@@ -39,7 +37,6 @@ export { IamFindPermissionRoleByIdResolver } from './resolvers/iam-find-permissi
 export { IamFindPermissionRoleResolver } from './resolvers/iam-find-permission-role.resolver';
 export { IamUpdatePermissionRoleByIdResolver } from './resolvers/iam-update-permission-role-by-id.resolver';
 export { IamUpdatePermissionsRolesResolver } from './resolvers/iam-update-permissions-roles.resolver';
-export { IamUpsertPermissionRoleResolver } from './resolvers/iam-upsert-permission-role.resolver';
 export { IamDeletePermissionRoleByIdResolver } from './resolvers/iam-delete-permission-role-by-id.resolver';
 export { IamDeletePermissionsRolesResolver } from './resolvers/iam-delete-permissions-roles.resolver';
 
@@ -52,7 +49,6 @@ import { IamFindPermissionRoleByIdController } from './controllers/iam-find-perm
 import { IamFindPermissionRoleController } from './controllers/iam-find-permission-role.controller';
 import { IamUpdatePermissionRoleByIdController } from './controllers/iam-update-permission-role-by-id.controller';
 import { IamUpdatePermissionsRolesController } from './controllers/iam-update-permissions-roles.controller';
-import { IamUpsertPermissionRoleController } from './controllers/iam-upsert-permission-role.controller';
 import { IamDeletePermissionRoleByIdController } from './controllers/iam-delete-permission-role-by-id.controller';
 import { IamDeletePermissionsRolesController } from './controllers/iam-delete-permissions-roles.controller';
 
@@ -65,7 +61,6 @@ import { IamFindPermissionRoleByIdResolver } from './resolvers/iam-find-permissi
 import { IamFindPermissionRoleResolver } from './resolvers/iam-find-permission-role.resolver';
 import { IamUpdatePermissionRoleByIdResolver } from './resolvers/iam-update-permission-role-by-id.resolver';
 import { IamUpdatePermissionsRolesResolver } from './resolvers/iam-update-permissions-roles.resolver';
-import { IamUpsertPermissionRoleResolver } from './resolvers/iam-upsert-permission-role.resolver';
 import { IamDeletePermissionRoleByIdResolver } from './resolvers/iam-delete-permission-role-by-id.resolver';
 import { IamDeletePermissionsRolesResolver } from './resolvers/iam-delete-permissions-roles.resolver';
 
@@ -78,7 +73,6 @@ import { IamFindPermissionRoleByIdHandler } from './handlers/iam-find-permission
 import { IamFindPermissionRoleHandler } from './handlers/iam-find-permission-role.handler';
 import { IamUpdatePermissionRoleByIdHandler } from './handlers/iam-update-permission-role-by-id.handler';
 import { IamUpdatePermissionsRolesHandler } from './handlers/iam-update-permissions-roles.handler';
-import { IamUpsertPermissionRoleHandler } from './handlers/iam-upsert-permission-role.handler';
 import { IamDeletePermissionRoleByIdHandler } from './handlers/iam-delete-permission-role-by-id.handler';
 import { IamDeletePermissionsRolesHandler } from './handlers/iam-delete-permissions-roles.handler';
 
@@ -94,7 +88,6 @@ export const IamPermissionRoleApiControllers = [
     IamFindPermissionRoleController,
     IamUpdatePermissionRoleByIdController,
     IamUpdatePermissionsRolesController,
-    IamUpsertPermissionRoleController,
     IamDeletePermissionRoleByIdController,
     IamDeletePermissionsRolesController,
 ];
@@ -108,7 +101,6 @@ export const IamPermissionRoleApiResolvers = [
     IamFindPermissionRoleResolver,
     IamUpdatePermissionRoleByIdResolver,
     IamUpdatePermissionsRolesResolver,
-    IamUpsertPermissionRoleResolver,
     IamDeletePermissionRoleByIdResolver,
     IamDeletePermissionsRolesResolver,
 ];
@@ -122,7 +114,6 @@ export const IamPermissionRoleApiHandlers = [
     IamFindPermissionRoleHandler,
     IamUpdatePermissionRoleByIdHandler,
     IamUpdatePermissionsRolesHandler,
-    IamUpsertPermissionRoleHandler,
     IamDeletePermissionRoleByIdHandler,
     IamDeletePermissionsRolesHandler,
 ];

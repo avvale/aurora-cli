@@ -6,56 +6,56 @@ export class IamBoundedContextDto
 {
     @ApiProperty({
         type       : String,
-        description: 'id [input here api field description]',
+        description: 'UUID for bounded context',
     })
     id: string;
 
     @ApiProperty({
         type       : String,
-        description: 'name [input here api field description]',
+        description: 'Name of the bounded context',
     })
     name: string;
 
     @ApiProperty({
         type       : String,
-        description: 'root [input here api field description]',
+        description: 'root folder where the bounded context is located',
     })
     root: string;
 
     @ApiProperty({
         type       : Number,
-        description: 'sort [input here api field description]',
+        description: 'Sort order of the bounded context',
     })
     sort?: number;
 
     @ApiProperty({
         type       : Boolean,
-        description: 'isActive [input here api field description]',
+        description: 'Indicates if the bounded context is active',
         example    : true,
     })
     isActive: boolean;
 
     @ApiProperty({
         type       : () => [IamPermissionDto],
-        description: 'permissions [input here api field description]',
+        description: 'List of permissions associated with the bounded context',
     })
     permissions?: IamPermissionDto[];
 
     @ApiProperty({
         type       : String,
-        description: 'createdAt [input here api field description]',
+        description: 'Timestamp when the bounded context was created',
     })
     createdAt?: string;
 
     @ApiProperty({
         type       : String,
-        description: 'updatedAt [input here api field description]',
+        description: 'Timestamp when the bounded context was last updated',
     })
     updatedAt?: string;
 
     @ApiProperty({
         type       : String,
-        description: 'deletedAt [input here api field description]',
+        description: 'Timestamp when the bounded context was deleted',
     })
     deletedAt?: string;
 

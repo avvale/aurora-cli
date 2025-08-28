@@ -11,7 +11,7 @@ import {
     IamBoundedContextUpdatedAt,
 } from '@app/iam/bounded-context/domain/value-objects';
 import { IamPermission } from '@app/iam/permission';
-import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamBoundedContext extends AggregateRoot

@@ -2,8 +2,8 @@
 type IamPermissionRole
 {
     permissionId: ID!
-    roleId: ID!
     permission: IamPermission
+    roleId: ID!
     role: IamRole
 }
 
@@ -70,10 +70,6 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [IamPermissionRole]!
-
-    iamUpsertPermissionRole(
-        payload: IamUpdatePermissionRoleByIdInput!
-    ): IamPermissionRole
 
     iamDeletePermissionRoleById(
         permissionId: ID!

@@ -11,27 +11,33 @@ front:
   outlineIcon: mat_outline:extension
 aggregateProperties:
   - name: id
+    description: UUID for bounded context
     type: id
     primaryKey: true
     nullable: false
   - name: name
+    description: Name of the bounded context
     type: varchar
     maxLength: 128
     nullable: false
   - name: root
+    description: root folder where the bounded context is located
     type: varchar
     maxLength: 64
     nullable: false
   - name: sort
+    description: Sort order of the bounded context
     type: smallint
     unsigned: true
     nullable: true
   - name: isActive
+    description: Indicates if the bounded context is active
     type: boolean
     nullable: false
     defaultValue: false
     example: true
   - name: permissions
+    description: List of permissions associated with the bounded context
     type: relationship
     nullable: true
     relationship:
@@ -43,11 +49,14 @@ aggregateProperties:
     webComponent:
       type: grid-elements-manager
   - name: createdAt
+    description: Timestamp when the bounded context was created
     type: timestamp
     nullable: true
   - name: updatedAt
+    description: Timestamp when the bounded context was last updated
     type: timestamp
     nullable: true
   - name: deletedAt
+    description: Timestamp when the bounded context was deleted
     type: timestamp
     nullable: true

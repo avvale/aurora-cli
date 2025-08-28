@@ -19,6 +19,10 @@ deploy-dev:
 deploy-qa:
 	@bash scripts/deployments/deploy-qa.sh
 
+.PHONY: deploy-prod-hotfix
+deploy-prod-hotfix:
+	@bash scripts/deployments/deploy-prod-hotfix.sh
+
 .PHONY: deploy-prod
 deploy-prod:
 	@bash scripts/deployments/deploy-prod.sh
@@ -48,6 +52,7 @@ publish-all:
 		gulp publishCommon && \
 		gulp publishIam && \
 		gulp publishMessage && \
+		gulp publishMsEmail && \
 		gulp publishMsEntraId && \
 		gulp publishOAuth && \
 		gulp publishQueueManager && \

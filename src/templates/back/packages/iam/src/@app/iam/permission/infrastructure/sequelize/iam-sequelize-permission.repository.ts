@@ -27,13 +27,20 @@ export class IamSequelizePermissionRepository extends SequelizeRepository<IamPer
     ): Promise<void>
     {
         // add many to many relation
-        if (aggregate.roleIds.length > 0)
+        if (aggregate?.roleIds.length > 0)
         {
-            await model.$add(
-                'roles',
-                aggregate.roleIds.value,
-                createOptions,
-            );
+            try
+            {
+                await model.$add(
+                    'roles',
+                    aggregate.roleIds.value,
+                    createOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
     }
 
@@ -45,13 +52,20 @@ export class IamSequelizePermissionRepository extends SequelizeRepository<IamPer
     ): Promise<void>
     {
         // set many to many relation
-        if (aggregate.roleIds.isArray())
+        if (aggregate?.roleIds.isArray())
         {
-            await model.$set(
-                'roles',
-                aggregate.roleIds.value,
-                updateByIdOptions,
-            );
+            try
+            {
+                await model.$set(
+                    'roles',
+                    aggregate.roleIds.value,
+                    updateByIdOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
     }
 }

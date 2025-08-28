@@ -31,6 +31,7 @@ git_switch_and_pull() {
     local BRANCH=$1
     log BLUE "→ Switching to $BRANCH branch..."
     git switch "$BRANCH" > /dev/null 2>&1
+    log BLUE "→ Updating $BRANCH from origin..."
     git pull origin "$BRANCH" > /dev/null 2>&1
 }
 
