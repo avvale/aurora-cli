@@ -236,6 +236,24 @@ export class Add extends Command
                     break;
                 }
 
+                case 'mcp': {
+                    await BackHandler.addPackage(addCommandState);
+
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@modelcontextprotocol/sdk', 'zod']);
+                    ux.action.stop('Completed!');
+
+                    const project = CommonDriver.createProject(['tsconfig.json']);
+
+                    // app.module.ts file
+                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    Installer.declareBackPackageModule(appModuleSourceFile, 'mcp', ['McpModule']);
+
+                    appModuleSourceFile.saveSync();
+
+                    break;
+                }
+
                 case 'message': {
                     await BackHandler.addPackage(addCommandState);
 
