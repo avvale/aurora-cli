@@ -51,6 +51,7 @@ publish-all:
 		gulp publishAuditing && \
 		gulp publishCommon && \
 		gulp publishIam && \
+		gulp publishMcp && \
 		gulp publishMessage && \
 		gulp publishMsEmail && \
 		gulp publishMsEntraId && \
