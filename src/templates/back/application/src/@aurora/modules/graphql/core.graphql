@@ -101,6 +101,35 @@ Other forms:
 
 Supported: `[and]`, `[or]`, `[not]`.
 
+### Filtering on included associations
+When you use include to join related tables, you can filter on fields of the included association directly from the top-level where using path syntax.
+This requires wrapping the association and field name in $...$.
+
+Example: filter by a field of an included association:
+```json
+{
+  "include": [ { "association": "tableToRelate" } ],
+  "where": { "$tableToRelate.name$": "nameToSearch" }
+}
+```
+This will generate a condition on the name column of the tableToRelate join.
+
+### Disambiguating columns with the same name
+If both the root table and the included association contain columns with the same name, you must qualify the column with its table (or alias) inside $...$ to avoid ambiguity.
+
+Example:
+```json
+{
+  "include": [ { "association": "tableToRelate" } ],
+  "where": { "$TableToRelate.name$": "nameToSearch" }
+}
+```
+This makes sure the condition applies to the name column of the TableToRelate table instead of the root table.
+
+Conclusion:
+When performing queries with include joins, you can target columns of either the root table or the included tables by wrapping the table/association name and column in $...$.
+Use the association alias defined in the include or the actual table name to fully control filtering across joined tables.
+
 ### Equality & nulls
 ```json
 { "where": { "id": 123 } }

@@ -4,7 +4,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import { GraphQLArgument, GraphQLInputType, GraphQLSchema, getNamedType, isInputObjectType, isListType, isNonNullType, isScalarType, isObjectType, isInterfaceType, isUnionType, isEnumType, GraphQLType } from 'graphql';
 import { firstValueFrom } from 'rxjs';
-import { SchemaStoreService } from '@aurora/modules/graphql/schema-store.service';
+import { SchemaStoreService } from '@aurora/modules/graphql';
 import { McpAuthService } from './mcp.auth.service';
 
 @Injectable()
@@ -284,6 +284,7 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         // Enforce/normalize QueryStatement operators
         const enforce   = process.env.MCP_QS_ENFORCE_BRACKETS === 'true';
         const normalize = process.env.MCP_QS_NORMALIZE !== 'false';
+
         if (variables && enforce)
         {
             const offenders = this.findUnbracketedOperators(variables);
@@ -300,8 +301,7 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         // Normalize QueryStatement operators if requested (default: on)
         if (variables && normalize) variables = this.normalizeQueryStatementOperators(variables) as Record<string, unknown>;
 
-        await this.auth.ensureAuth();
-
+        if (process.env.MCP_AUTH === 'true') await this.auth.ensureAuth();
 
         const makeRequest = async (authHeader?: string) => firstValueFrom(this.http.post<any>(
             `${baseURL}/graphql`,
