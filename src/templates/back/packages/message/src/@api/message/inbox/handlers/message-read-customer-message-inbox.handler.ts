@@ -51,7 +51,7 @@ export class MessageReadCustomerMessageInboxHandler
             },
         ));
 
-        if (!inbox.isReadAtLeastOnce)
+        if (!currentInbox.isReadAtLeastOnce)
         {
             await this.commandBus.dispatch(new MessageUpdateAndIncrementMessagesCommand(
                 {
