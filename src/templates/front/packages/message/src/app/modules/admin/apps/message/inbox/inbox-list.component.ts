@@ -22,7 +22,7 @@ export class InboxListComponent extends ViewBaseComponent
 
     breadcrumb: Crumb[] = [
         { translation: 'App', routerLink: ['/']},
-        { translation: 'message.Inboxes' },
+        { translation: 'message.Messages' },
     ];
     gridId: string = inboxMainGridListId;
     gridData$: Observable<GridData<MessageInbox>>;

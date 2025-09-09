@@ -11,7 +11,6 @@ import { Action, BreadcrumbComponent, ColumnConfig, ColumnDataType, Crumb, GridF
 import { TranslocoModule } from '@jsverse/transloco';
 import { Observable, lastValueFrom, takeUntil } from 'rxjs';
 
-
 export const messageCenterMainListId = 'message::messageCenter.list.mainList';
 export const messageCenterPaginationListAction = 'message::messageCenter.list.pagination';
 export const messageCenterExportListAction = 'message::messageCenter.list.export';
@@ -45,7 +44,7 @@ export class MessageCenterListComponent extends ViewBaseComponent
 
     breadcrumb: Crumb[] = [
         { translation: 'App', routerLink: ['/']},
-        { translation: 'message.MessageCenter' },
+        { translation: 'message.Messages' },
     ];
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;

@@ -6,7 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { IamAccount, IamTenant } from '@apps/iam';
 import { MessageService } from '@apps/message/message';
 import { MessageMessage, MessageMessageStatus } from '@apps/message';
-import { Action, AsyncMatSelectSearchModule, ChipComponent, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, DownloadService, FileUploadComponent, FormatFileSizePipe, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, IamService, initAsyncMatSelectSearch, initAsyncMatSelectSearchState, log, manageAsyncMatSelectSearch, mapActions, Operator, queryStatementHandler, QueryStatementHandler, SelectionChange, SelectionModel, SelectSearchService, SnackBarInvalidFormComponent, SplitButtonModule, uuid, ViewDetailComponent } from '@aurora';
+import { Action, AsyncMatSelectSearchModule, ChipComponent, ColumnConfig, ColumnDataType, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, DownloadService, FileUploadComponent, FormatFileSizePipe, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, IamService, initAsyncMatSelectSearch, initAsyncMatSelectSearchState, log, manageAsyncMatSelectSearch, mapActions, Operator, queryStatementHandler, QueryStatementHandler, SelectionChange, SelectionModel, SelectSearchService, SnackBarInvalidFormComponent, SplitButtonModule, uuid, ViewDetailComponent } from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { Observable, ReplaySubject, combineLatest, lastValueFrom, skip, startWith, takeUntil } from 'rxjs';
 import { AccountService, accountColumnsConfig } from '@apps/iam/account';
@@ -26,8 +26,8 @@ export const messageAccountsScopeDialogPagination = 'message::messageDialogAccou
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ...defaultDetailImports,
-        AsyncMatSelectSearchModule, ChipComponent, FileUploadComponent, FormatFileSizePipe,
-        GetColorStatusMessagePipe, MatCheckboxModule, MatSelectModule, MtxDatetimepickerModule,
+        AsyncMatSelectSearchModule, ChipComponent, DatetimepickerSqlFormatDirective, FileUploadComponent,
+        FormatFileSizePipe, GetColorStatusMessagePipe, MatCheckboxModule, MatSelectModule, MtxDatetimepickerModule,
         GridSelectMultipleElementsModule, MatTabsModule, QuillEditorComponent, SplitButtonModule,
     ],
 })
@@ -356,7 +356,7 @@ export class MessageDetailComponent extends ViewDetailComponent
         /* eslint-disable key-spacing */
         this.fg = this.fb.group({
             id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            tenantIds: [[]],
+            tenantIds: [[], [Validators.required]],
             accountRecipientIds: [[]],
             tenantRecipientIds: [[]],
             scopeRecipients: [[]],
