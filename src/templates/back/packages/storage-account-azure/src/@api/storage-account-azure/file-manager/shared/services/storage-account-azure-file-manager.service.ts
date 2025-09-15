@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { StorageAccountFileManagerBase64, StorageAccountFileManagerFile, StorageAccountFileManagerFileInput, StorageAccountFileManagerFileUploadedInput } from '@api/graphql';
 import { StorageAccountFileManagerService } from '@api/storage-account/file-manager';
-import { getRelativePathSegments, streamToBuffer, uuid } from '@aurorajs.dev/core';
+import { Fs, getRelativePathSegments, streamToBuffer, uuid } from '@aurorajs.dev/core';
 import { BlobServiceClient } from '@azure/storage-blob';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -48,6 +48,20 @@ export class StorageAccountAzureFileManagerService implements StorageAccountFile
 
         const copyPoller = await destBlobClient.beginCopyFromURL(srcBlobClient.url);
         await copyPoller.pollUntilDone();
+    }
+
+    async deleteFile(
+        filePayload: StorageAccountFileManagerFileInput,
+    ): Promise<void>
+    {
+        // get container name from file or use default
+        const containerName = this.containerName || filePayload.containerName || 'default';
+
+        const containerClient = this.blobServiceClient.getContainerClient(containerName);
+        const blobPath = Fs.storagePublicRelativeURL(filePayload.relativePathSegments, filePayload.filename);
+
+        const blockBlobClient = containerClient.getBlockBlobClient(blobPath);
+        await blockBlobClient.deleteIfExists();
     }
 
     async getBase64File(

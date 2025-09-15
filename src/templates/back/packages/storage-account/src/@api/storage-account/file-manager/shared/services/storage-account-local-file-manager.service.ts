@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import { StorageAccountFileManagerBase64, StorageAccountFileManagerFile, StorageAccountFileManagerFileInput, StorageAccountFileManagerFileUploadedInput } from '@api/graphql';
-import { getRelativePathSegments, storagePublicAbsoluteDirectoryPath, storagePublicAbsolutePath, storagePublicAbsoluteURL, storageStream, uuid } from '@aurorajs.dev/core';
+import { Fs, getRelativePathSegments, storagePublicAbsoluteDirectoryPath, storagePublicAbsolutePath, storagePublicAbsoluteURL, storageStream, uuid } from '@aurorajs.dev/core';
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, unlinkSync } from 'node:fs';
 import { extname } from 'node:path';
 import * as sharp from 'sharp';
 import { StorageAccountFileManagerService } from './storage-account-file-manager.service';
@@ -15,13 +15,24 @@ export class StorageAccountLocalFileManagerService implements StorageAccountFile
         dest: StorageAccountFileManagerFileInput,
     ): void
     {
-        const srcAbsolutePath = storagePublicAbsolutePath(src.relativePathSegments, src.filename);
+        const srcAbsolutePath = Fs.storagePublicAbsolutePath(src.relativePathSegments, src.filename);
         const destAbsolutePath = storagePublicAbsolutePath(dest.relativePathSegments, dest.filename);
 
         copyFileSync(
             srcAbsolutePath,
             destAbsolutePath,
         );
+    }
+
+    deleteFile(
+        filePayload: StorageAccountFileManagerFileInput,
+    ): void
+    {
+        const absoluteFilePath = Fs.storagePublicAbsolutePath(filePayload.relativePathSegments, filePayload.filename);
+        if (existsSync(absoluteFilePath))
+        {
+            unlinkSync(absoluteFilePath);
+        }
     }
 
     getBase64File(
