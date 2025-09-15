@@ -117,7 +117,7 @@ export class StorageAccountAzureFileManagerService implements StorageAccountFile
 
         await blockBlobClient.uploadStream(
             streamForUpload,
-            filePayload.file.size, // bufferSize
+            buffer.length, // bufferSize
             5, // max concurrency
             {
                 blobHTTPHeaders:
@@ -140,7 +140,7 @@ export class StorageAccountAzureFileManagerService implements StorageAccountFile
             relativePathSegments,
             width     : fileMeta?.width,
             height    : fileMeta?.height,
-            size      : filePayload.file.size,
+            size      : buffer.length,
             url       : blockBlobClient.url,
             isCropable,
             isUploaded: true,
