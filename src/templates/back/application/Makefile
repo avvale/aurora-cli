@@ -61,3 +61,57 @@ publish-all:
 		gulp publishStorageAccountAzure && \
 		gulp publishTools && \
 		gulp publishWhatsapp
+
+# ENCRYPTION/DECRYPTION OF .env FILES
+SOPS_AGE_KEY_FILE := .keys/age.txt
+.PHONY: env encrypt decrypt edit clean
+
+env: decrypt
+
+encrypt:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env > .env.local.enc
+	@echo ">> .env.local.enc actualizado"
+
+decrypt:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.local.enc > .env
+	@echo ">> .env generado"
+
+encrypt-dev:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.dev > .env.dev.enc
+	@echo ">> .env.enc actualizado"
+
+decrypt-dev:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.dev.enc > .env.dev
+	@echo ">> .env generado"
+
+encrypt-qa:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.qa > .env.qa.enc
+	@echo ">> .env.enc actualizado"
+
+decrypt-qa:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.qa.enc > .env.qa
+	@echo ">> .env generado"
+
+encrypt-prod:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.prod > .env.prod.enc
+	@echo ">> .env.enc actualizado"
+
+decrypt-prod:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.prod.enc > .env.prod
+	@echo ">> .env generado"
+
+encrypt-all:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env > .env.local.enc
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.dev > .env.dev.enc
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.qa > .env.qa.enc
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.prod > .env.prod.enc
+
+decrypt-all:
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.local.enc > .env
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.dev.enc > .env.dev
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.qa.enc > .env.qa
+	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.prod.enc > .env.prod
+
+clean:
+	@rm -f .env
+	@echo ">> .env eliminado"

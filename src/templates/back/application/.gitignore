@@ -1,9 +1,11 @@
 # environment files
 .env
 .env.*
+!.env.*.enc
 
 # key files
 *.key
+/.keys
 
 # files uploaded
 /public
