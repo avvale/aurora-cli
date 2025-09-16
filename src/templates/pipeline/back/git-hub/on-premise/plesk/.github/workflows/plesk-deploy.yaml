@@ -3,7 +3,7 @@ name: Testing, Build and Deploy Back on Plesk
 on:
   push:
     branches:
-      - 'environments/plesk-prod'
+      - 'environments/plesk-dev'
 
   workflow_dispatch:
 
@@ -11,21 +11,22 @@ env:
   # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
   # don't forget set like bin/bash ftp user
   # SSH private key
-  SERVER_KEY: $\{{ secrets.SERVER_KEY }}
+  SERVER_KEY: $\{{ secrets.PLESK_DEVELOPMENT_SERVER_KEY }}
   # security phrase for SSH private key
-  SERVER_KEY_PHRASE: $\{{ secrets.SERVER_KEY_PHRASE }}
+  SERVER_KEY_PHRASE: $\{{ secrets.PLESK_DEVELOPMENT_SERVER_KEY_PHRASE }}
   # default port SFTP 22
-  SERVER_PORT: $\{{ secrets.SERVER_PORT }}
-  SERVER_HOST: $\{{ secrets.SERVER_HOST }}
+  SERVER_PORT: $\{{ vars.PLESK_DEVELOPMENT_SERVER_PORT }}
+  SERVER_HOST: $\{{ vars.PLESK_DEVELOPMENT_SERVER_HOST }}
   # SFTP/SSH username
-  SERVER_USERNAME: $\{{ secrets.SERVER_USERNAME }}
+  SERVER_USERNAME: $\{{ secrets.PLESK_DEVELOPMENT_SERVER_USERNAME }}
   # example /var/www/vhosts/contoso.com
-  SERVER_PATH: $\{{ secrets.SERVER_PATH }}
+  SERVER_PATH: $\{{ vars.PLESK_DEVELOPMENT_SERVER_PATH }}
 
   # application secrets
-  OAUTH_PRIVATE_KEY: $\{{ secrets.OAUTH_PRIVATE_KEY }}
-  OAUTH_PUBLIC_KEY: $\{{ secrets.OAUTH_PUBLIC_KEY }}
-  DOT_ENV: $\{{ secrets.DOT_ENV }}
+  OAUTH_PRIVATE_KEY: $\{{ secrets.PLESK_DEVELOPMENT_OAUTH_PRIVATE_KEY }}
+  OAUTH_PUBLIC_KEY: $\{{ secrets.PLESK_DEVELOPMENT_OAUTH_PUBLIC_KEY }}
+  SOPS_DOT_ENV_ENC: $\{{ vars.PLESK_DEVELOPMENT_DOT_ENV_ENC }}
+  SOPS_AGE_KEY: $\{{ secrets.PLESK_DEVELOPMENT_SOPS_AGE_KEY }}
 
   # Node version
   NODE_VERSION: '22'
@@ -34,6 +35,10 @@ jobs:
   tests:
     name: Build and test
     runs-on: ubuntu-latest
+
+    outputs:
+      DOT_ENV_B64: ${{ steps.decrypt-env.outputs.dot_env_b64 }}
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -52,9 +57,19 @@ jobs:
         echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
         touch oauth-public.key
         echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
-        touch .env
-        echo "$DOT_ENV" > .env
       shell: bash
+
+    - name: Setup SOPS
+      uses: nhedger/setup-sops@v2
+
+    - name: Install age
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y age
+
+    - name: Decrypt env to do testing
+      run: |
+        SOPS_AGE_KEY="$SOPS_AGE_KEY" sops --decrypt --input-type binary --output-type binary $SOPS_DOT_ENV_ENC > .env
 
     - name: Unit testing
       run: npm run test
@@ -80,6 +95,12 @@ jobs:
         name: tested-artifact
         path: |
           release.zip
+
+    - name: Output decrypted env for next job
+      id: decrypt-env
+      run: |
+        dot_env_b64=$(SOPS_AGE_KEY="$SOPS_AGE_KEY" sops --decrypt --input-type binary --output-type binary "$SOPS_DOT_ENV_ENC" | base64 -w0)
+        printf 'dot_env_b64<<EOF\n%s\nEOF\n' "$dot_env_b64" >> "$GITHUB_OUTPUT"
 
   deploy:
     name: Rsync Plesk deploy
@@ -108,7 +129,7 @@ jobs:
         shell: bash
 
       - name: Deploy Plesk with rsync
-        uses: burnett01/rsync-deployments@5.2.1
+        uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzh --delete --exclude=".*"
           path: src/
@@ -119,20 +140,17 @@ jobs:
           remote_key: $\{{ env.SERVER_KEY }}
           remote_key_pass: $\{{ env.SERVER_KEY_PHRASE }}
 
-      - name: Print server path
-        run: |
-          echo $\{{ env.SERVER_PATH }}
-        shell: sh
-
       - name: Execute command on remote server
         uses: appleboy/ssh-action@v1
+        env:
+          DOT_ENV_B64: $\{{ needs.tests.outputs.DOT_ENV_B64 }}
         with:
           host: $\{{ env.SERVER_HOST }}
           username: $\{{ env.SERVER_USERNAME }}
           key: $\{{ env.SERVER_KEY }}
           passphrase: $\{{ env.SERVER_KEY_PHRASE }}
           port: $\{{ env.SERVER_PORT }}
-          envs: DOT_ENV, NODE_VERSION, OAUTH_PRIVATE_KEY, OAUTH_PUBLIC_KEY
+          envs: DOT_ENV_B64, NODE_VERSION, OAUTH_PRIVATE_KEY, OAUTH_PUBLIC_KEY
           script: |
             PATH=$PATH:$\{{ env.SERVER_PATH }}/.nodenv/shims
             whoami
@@ -146,5 +164,5 @@ jobs:
             touch $\{{ env.SERVER_PATH }}/oauth-public.key
             echo "$OAUTH_PUBLIC_KEY" > $\{{ env.SERVER_PATH }}/oauth-public.key
             touch $\{{ env.SERVER_PATH }}/.env
-            echo "$DOT_ENV" > $\{{ env.SERVER_PATH }}/.env
+            echo "$DOT_ENV_B64" | base64 -d > ${{ env.SERVER_PATH }}/.env
             cd httpdocs && npm ci
