@@ -11,22 +11,22 @@ env:
   # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
   # don't forget set like bin/bash ftp user
   # SSH private key
-  SERVER_KEY: $\{{ secrets.PLESK_DEVELOPMENT_SERVER_KEY }}
+  SERVER_KEY: $\{{ secrets.PLESK_DEV_SERVER_KEY }}
   # security phrase for SSH private key
-  SERVER_KEY_PHRASE: $\{{ secrets.PLESK_DEVELOPMENT_SERVER_KEY_PHRASE }}
+  SERVER_KEY_PHRASE: $\{{ secrets.PLESK_DEV_SERVER_KEY_PHRASE }}
   # default port SFTP 22
-  SERVER_PORT: $\{{ vars.PLESK_DEVELOPMENT_SERVER_PORT }}
-  SERVER_HOST: $\{{ vars.PLESK_DEVELOPMENT_SERVER_HOST }}
+  SERVER_PORT: $\{{ vars.PLESK_DEV_SERVER_PORT }}
+  SERVER_HOST: $\{{ vars.PLESK_DEV_SERVER_HOST }}
   # SFTP/SSH username
-  SERVER_USERNAME: $\{{ secrets.PLESK_DEVELOPMENT_SERVER_USERNAME }}
+  SERVER_USERNAME: $\{{ secrets.PLESK_DEV_SERVER_USERNAME }}
   # example /var/www/vhosts/contoso.com
-  SERVER_PATH: $\{{ vars.PLESK_DEVELOPMENT_SERVER_PATH }}
+  SERVER_PATH: $\{{ vars.PLESK_DEV_SERVER_PATH }}
 
   # application secrets
-  OAUTH_PRIVATE_KEY: $\{{ secrets.PLESK_DEVELOPMENT_OAUTH_PRIVATE_KEY }}
-  OAUTH_PUBLIC_KEY: $\{{ secrets.PLESK_DEVELOPMENT_OAUTH_PUBLIC_KEY }}
-  SOPS_DOT_ENV_ENC: $\{{ vars.PLESK_DEVELOPMENT_DOT_ENV_ENC }}
-  SOPS_AGE_KEY: $\{{ secrets.PLESK_DEVELOPMENT_SOPS_AGE_KEY }}
+  OAUTH_PRIVATE_KEY: $\{{ secrets.PLESK_DEV_OAUTH_PRIVATE_KEY }}
+  OAUTH_PUBLIC_KEY: $\{{ secrets.PLESK_DEV_OAUTH_PUBLIC_KEY }}
+  SOPS_DOT_ENV_ENC: $\{{ vars.PLESK_DEV_DOT_ENV_ENC }}
+  SOPS_AGE_KEY: $\{{ secrets.PLESK_DEV_SOPS_AGE_KEY }}
 
   # Node version
   NODE_VERSION: '22'
