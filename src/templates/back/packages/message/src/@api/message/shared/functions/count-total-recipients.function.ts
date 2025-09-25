@@ -17,36 +17,90 @@ export const countTotalRecipients = async(
     },
 ): Promise<number> =>
 {
-    return await queryBus.ask(new IamCountAccountQuery(
-        {
-            where: {
-                [Operator.or]: [
+    const where: any = {};
+    const whereAnd: any = [];
+
+    // query messages for tenants that account belongs to
+    if (Array.isArray(tenantRecipientIds) && tenantRecipientIds.length > 0)
+    {
+        whereAnd.push({
+            dTenants: {
+                [Operator.overlap]: tenantRecipientIds,
+            },
+        });
+    }
+
+    // query messages for scopes that account belongs to
+    if (Array.isArray(scopeRecipients) && scopeRecipients.length > 0)
+    {
+        whereAnd.push({
+            scopes: {
+                [Operator.overlap]: scopeRecipients,
+            },
+        });
+    }
+
+    // query messages for tags that account belongs to
+    if (Array.isArray(tagRecipients) && tagRecipients.length > 0)
+    {
+        whereAnd.push({
+            tags: {
+                [Operator.overlap]: tagRecipients,
+            },
+        });
+    }
+
+    // checks if there is an element in whereAnd to add it to where
+    if (whereAnd.length > 0)
+    {
+        if (!where[Operator.or]) where[Operator.or] = [];
+
+        where[Operator.or].push({
+            [Operator.and]: whereAnd,
+        });
+    }
+
+    // checks if there are specific accounts to add and adds them to the OR
+    if (Array.isArray(accountRecipientIds) && accountRecipientIds.length > 0)
+    {
+        if (!where[Operator.or]) where[Operator.or] = [];
+
+        where[Operator.or].push({
+            id: {
+                [Operator.in]: accountRecipientIds || [],
+            },
+        });
+    }
+
+    /*
+    {
+        [Operator.or]: [
+            {
+                [Operator.and]: [
                     {
-                        // query messages for tenants that account belongs to
                         dTenants: {
                             [Operator.overlap]: tenantRecipientIds,
                         },
                     },
                     {
-                        // query messages for scopes that account belongs to
                         scopes: {
                             [Operator.overlap]: scopeRecipients,
                         },
                     },
                     {
-                        // query messages for tags that account belongs to
                         tags: {
                             [Operator.overlap]: tagRecipients,
                         },
                     },
-                    {
-                        // query messages for account
-                        id: {
-                            [Operator.in]: accountRecipientIds || [],
-                        },
-                    },
                 ],
             },
-        },
-    ));
+            {
+                id: {
+                    [Operator.in]: accountRecipientIds || [],
+                },
+            },
+        ],
+    }
+    */
+    return await queryBus.ask(new IamCountAccountQuery({ where }));
 };

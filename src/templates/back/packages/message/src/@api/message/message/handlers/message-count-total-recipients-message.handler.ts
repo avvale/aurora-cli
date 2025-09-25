@@ -1,6 +1,5 @@
 import { countTotalRecipients } from '@api/message/shared';
-import { IamCountAccountQuery } from '@app/iam/account';
-import { IQueryBus, Operator, QueryStatement } from '@aurorajs.dev/core';
+import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

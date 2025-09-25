@@ -1,18 +1,18 @@
-import { ChangeDetectionStrategy, Component, Signal, ViewChild, ViewEncapsulation, WritableSignal, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, Signal, signal, ViewChild, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 import { IamAccount, IamTenant } from '@apps/iam';
-import { MessageService } from '@apps/message/message';
-import { MessageMessage, MessageMessageStatus } from '@apps/message';
-import { Action, AsyncMatSelectSearchModule, ChipComponent, ColumnConfig, ColumnDataType, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, DownloadService, FileUploadComponent, FormatFileSizePipe, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, IamService, initAsyncMatSelectSearch, initAsyncMatSelectSearchState, log, manageAsyncMatSelectSearch, mapActions, Operator, queryStatementHandler, QueryStatementHandler, SelectionChange, SelectionModel, SelectSearchService, SnackBarInvalidFormComponent, SplitButtonModule, uuid, ViewDetailComponent } from '@aurora';
-import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
-import { Observable, ReplaySubject, combineLatest, lastValueFrom, skip, startWith, takeUntil } from 'rxjs';
-import { AccountService, accountColumnsConfig } from '@apps/iam/account';
-import { QuillEditorComponent } from 'ngx-quill';
-import { GetColorStatusMessagePipe } from '../shared';
+import { accountColumnsConfig, AccountService } from '@apps/iam/account';
 import { TenantService } from '@apps/iam/tenant';
+import { MessageMessage, MessageMessageStatus } from '@apps/message';
+import { MessageService } from '@apps/message/message';
+import { Action, AsyncMatSelectSearchModule, ChipComponent, ColumnConfig, ColumnDataType, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, DownloadService, FileUploadComponent, FormatFileSizePipe, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, IamService, initAsyncMatSelectSearch, initAsyncMatSelectSearchState, log, manageAsyncMatSelectSearch, mapActions, Operator, queryStatementHandler, QueryStatementHandler, SelectionChange, SelectionModel, SelectSearchService, SetValueObjectPipe, SnackBarInvalidFormComponent, SplitButtonModule, uuid, ViewDetailComponent } from '@aurora';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { combineLatest, lastValueFrom, Observable, ReplaySubject, skip, startWith, takeUntil } from 'rxjs';
+import { GetColorStatusMessagePipe } from '../shared';
 
 export const messageAccountsDialogGridId = 'message::message.detail.accountsDialogGridList';
 export const messageAccountsGridId = 'message::message.detail.messageAccountsGridList';
@@ -26,10 +26,17 @@ export const messageAccountsScopeDialogPagination = 'message::messageDialogAccou
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ...defaultDetailImports,
-        AsyncMatSelectSearchModule, ChipComponent, DatetimepickerSqlFormatDirective, FileUploadComponent,
-        FormatFileSizePipe, GetColorStatusMessagePipe, MatCheckboxModule, MatSelectModule, MtxDatetimepickerModule,
-        GridSelectMultipleElementsModule, MatTabsModule, QuillEditorComponent, SplitButtonModule,
+        AsyncMatSelectSearchModule, ChipComponent, DatetimepickerSqlFormatDirective, EditorComponent,
+        FileUploadComponent, FormatFileSizePipe, GetColorStatusMessagePipe, MatCheckboxModule,
+        MatSelectModule, MtxDatetimepickerModule, GridSelectMultipleElementsModule, MatTabsModule,
+        SetValueObjectPipe, SplitButtonModule,
     ],
+    providers: [
+        {
+            provide: TINYMCE_SCRIPT_SRC,
+            useValue: 'tinymce/tinymce.min.js',
+        },
+    ]
 })
 export class MessageDetailComponent extends ViewDetailComponent
 {
@@ -42,13 +49,18 @@ export class MessageDetailComponent extends ViewDetailComponent
     totalRecipients: WritableSignal<number> = signal(0);
     status: Signal<string> = computed(() => this.managedObject() ? this.managedObject().status : MessageMessageStatus.DRAFT);
     messageMessageStatus = MessageMessageStatus;
-    quillModules: any = {
-        toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['link'],
-            [{ align: []}, { list: 'ordered' }, { list: 'bullet' }],
-            ['clean'],
-        ],
+
+    tinymceLicenseKey: string = 'gpl';
+    tinymceApiKey: string = '';
+
+    initEditor: EditorComponent['init'] = {
+        base_url: '/tinymce',
+        suffix: '.min',
+        menubar: false,
+        plugins: 'lists link table code', // usa solo plugins OSS
+        toolbar: 'undo redo | bold italic | bullist numlist | link table | alignleft aligncenter alignright alignjustify | blockquote | code | removeformat',
+        branding: false,
+        // placeholder: this.translocoService.translate('message.StartHereToWriteYourMessage'),
     };
 
     // Object retrieved from the database request,
@@ -173,12 +185,15 @@ export class MessageDetailComponent extends ViewDetailComponent
             {
                 const actions = [];
 
-                actions.push({
-                    id          : 'message::message.detail.removeMessageAccount',
-                    isViewAction: false,
-                    translation : 'unlink',
-                    icon        : 'link_off',
-                });
+                if (this.managedObject()?.status !== this.messageMessageStatus.SENT)
+                {
+                    actions.push({
+                        id          : 'message::message.detail.removeMessageAccount',
+                        isViewAction: false,
+                        translation : 'unlink',
+                        icon        : 'link_off',
+                    });
+                }
 
                 return actions;
             },
@@ -230,6 +245,7 @@ export class MessageDetailComponent extends ViewDetailComponent
             itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTenants,
             initSelectedItems         : this.activatedRoute.snapshot.data.data.messageGetTenantRecipients,
         });
+        /* #endregion variables to manage async-search-multiple-select recipients IamTenant[] */
     }
 
     // this method will be called after the ngOnInit of
@@ -492,6 +508,11 @@ export class MessageDetailComponent extends ViewDetailComponent
                         this.fg.patchValue(item);
                         this.managedObject.set(item);
                         this.totalRecipients.set(item.totalRecipients);
+
+                        if (item.status === this.messageMessageStatus.SENT)
+                        {
+                            this.fg.disable();
+                        }
                     });
 
                 /* #region edit action to manage MessagesAccounts grid-select-multiple-elements */

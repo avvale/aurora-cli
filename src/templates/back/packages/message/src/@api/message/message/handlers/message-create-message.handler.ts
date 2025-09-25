@@ -22,6 +22,15 @@ export class MessageCreateMessageHandler
         auditing?: AuditingMeta,
     ): Promise<MessageMessage | MessageMessageDto>
     {
+        // At a minimum, it must have the tenants of the account that is creating the message.
+        if (
+            !Array.isArray(payload.tenantRecipientIds) ||
+            payload.tenantRecipientIds.length === 0
+        )
+        {
+            payload.tenantRecipientIds = account.dTenants;
+        }
+
         await createMessage({
             moduleRef: this.moduleRef,
             payload,

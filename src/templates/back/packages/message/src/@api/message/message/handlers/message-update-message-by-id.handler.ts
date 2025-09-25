@@ -1,11 +1,11 @@
-import { MessageMessage, MessageUpdateMessageByIdInput } from '@api/graphql';
+import { MessageMessage, MessageMessageStatus, MessageUpdateMessageByIdInput } from '@api/graphql';
 import { MessageMessageDto, MessageUpdateMessageByIdDto } from '@api/message/message';
 import { countTotalRecipients } from '@api/message/shared';
 import { StorageAccountFileManagerService } from '@api/storage-account/file-manager';
 import { IamAccountResponse } from '@app/iam/account';
 import { MessageFindMessageByIdQuery, MessageUpdateMessageByIdCommand } from '@app/message/message';
 import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement, uuid } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageUpdateMessageByIdHandler
@@ -32,9 +32,18 @@ export class MessageUpdateMessageByIdHandler
             },
         ));
 
+        if (message.status === MessageMessageStatus.SENT) throw new BadRequestException('Messages that have been sent cannot be modified.');
+
         const dataToUpdate = diff(payload, message);
 
-        if ('tenantRecipientIds' in dataToUpdate) dataToUpdate.tenantRecipientIds = payload.tenantRecipientIds;
+        if ('tenantRecipientIds' in dataToUpdate)
+        {
+            // At a minimum, it must have the tenants of the account that is creating the message.
+            dataToUpdate.tenantRecipientIds = !Array.isArray(payload.tenantRecipientIds) || payload.tenantRecipientIds.length === 0 ?
+                payload.tenantRecipientIds = account.dTenants :
+                payload.tenantRecipientIds;
+        }
+
         if ('scopeRecipients' in dataToUpdate) dataToUpdate.scopeRecipients = payload.scopeRecipients;
         if ('tagRecipients' in dataToUpdate) dataToUpdate.tagRecipients = payload.tagRecipients;
         if (

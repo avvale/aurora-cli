@@ -46,41 +46,62 @@ export class MessageCheckMessagesInboxHandler
         if (inboxSetting)
         {
             // get new messages
-            const outboxMessages = await this.queryBus.ask(new MessageGetOutboxesQuery(
+            const outboxMessagesResponse = await this.queryBus.ask(new MessageGetOutboxesQuery(
                 {
                     where: {
                         // get messages that are not already in the inbox yet
                         sort: {
                             [Operator.gt]: inboxSetting.sort,
                         },
-                        [Operator.and]: [
+                        [Operator.or]: [
                             {
-                                [Operator.or]: [
+                                [Operator.and]: [
                                     {
-                                        // query messages for account
-                                        accountRecipientIds: {
-                                            [Operator.contains]: [account.id],
-                                        },
+                                        [Operator.or]: [
+                                            {
+                                                // query messages for tenants that account belongs to
+                                                tenantRecipientIds: {
+                                                    [Operator.overlap]: account.dTenants,
+                                                },
+                                            },
+                                            {
+                                                tenantRecipientIds: [],
+                                            },
+                                        ],
                                     },
                                     {
-                                        // query messages for tenants that account belongs to
-                                        tenantRecipientIds: {
-                                            [Operator.overlap]: account.dTenants,
-                                        },
+                                        [Operator.or]: [
+                                            {
+                                                // query messages for scopes that account belongs to
+                                                scopeRecipients: {
+                                                    [Operator.overlap]: account.scopes,
+                                                },
+                                            },
+                                            {
+                                                scopeRecipients: [],
+                                            },
+                                        ],
                                     },
                                     {
-                                        // query messages for scopes that account belongs to
-                                        scopeRecipients: {
-                                            [Operator.overlap]: account.scopes,
-                                        },
-                                    },
-                                    {
-                                        // query messages for tags that account belongs to
-                                        tagRecipients: {
-                                            [Operator.overlap]: account.tags,
-                                        },
+                                        [Operator.or]: [
+                                            {
+                                                // query messages for tags that account belongs to
+                                                tagRecipients: {
+                                                    [Operator.overlap]: account.tags,
+                                                },
+                                            },
+                                            {
+                                                tagRecipients: [],
+                                            },
+                                        ],
                                     },
                                 ],
+                            },
+                            {
+                                // query messages for account
+                                accountRecipientIds: {
+                                    [Operator.contains]: [account.id],
+                                },
                             },
                         ],
                     },
@@ -93,6 +114,16 @@ export class MessageCheckMessagesInboxHandler
                     order: [['sort', 'ASC']],
                 },
             ));
+
+            const outboxMessages = outboxMessagesResponse
+                .filter(outboxMessage =>
+                    !(
+                        (outboxMessage.tenantRecipientIds === null || outboxMessage.tenantRecipientIds.length === 0) &&
+                        (outboxMessage.scopeRecipients === null || outboxMessage.scopeRecipients.length === 0) &&
+                        (outboxMessage.tagRecipients === null || outboxMessage.tagRecipients.length === 0) &&
+                        (outboxMessage.accountRecipientIds.length > 0 && !outboxMessage.accountRecipientIds.includes(account.id))
+                    ),
+                );
 
             // create new messages in inbox
             if (outboxMessages.length > 0)

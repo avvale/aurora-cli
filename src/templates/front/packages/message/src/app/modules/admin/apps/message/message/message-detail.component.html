@@ -26,7 +26,10 @@
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
 
-            @if (currentViewAction.id === 'message::message.detail.edit')
+            @if (
+                currentViewAction.id === 'message::message.detail.edit' &&
+                managedObject()?.status !== messageMessageStatus.SENT
+            )
             {
                 <button
                     mat-flat-button
@@ -406,9 +409,21 @@
                                         close: t('Close')
                                     }"
                                 >
-                                    @for (columnConfig of originStagesColumnsConfig; track columnConfig.field)
+                                    @for (columnConfig of originMessageAccountsColumnsConfig; track columnConfig.field)
                                     {
                                         <au-grid-column-translation [field]="columnConfig.field">
+                                            {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                                        </au-grid-column-translation>
+                                    }
+                                </au-grid-translations>
+                                <au-grid-translations
+                                    [for]="accountsDialogGridId"
+                                >
+                                    @for (columnConfig of accountsDialogColumnsConfig$ | async; track columnConfig.field)
+                                    {
+                                        <au-grid-column-translation
+                                            [field]="columnConfig.field"
+                                        >
                                             {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
                                         </au-grid-column-translation>
                                     }
@@ -417,31 +432,34 @@
                                     auGridSelectMultipleCustomHeaderTemplate
                                     position="left"
                                 >
-                                    <div class="flex justify-start items-center">
-                                        <button
-                                            mat-icon-button
-                                            class="mr-2"
-                                            type="button"
-                                            (click)="handleOpenAccountsDialog()"
-                                        >
-                                            <mat-icon svgIcon="mat_solid:add"></mat-icon>
-                                            <span class="cdk-visually-hidden">
-                                                Add new item
-                                            </span>
-                                        </button>
-                                        <button
-                                            mat-flat-button
-                                            [disabled]="messageAccountsSelectedRows.length === 0"
-                                            (click)="handleRemoveMessageAccountsSelected()"
-                                        >
-                                            <mat-icon
+                                    @if (managedObject()?.status !== messageMessageStatus.SENT)
+                                    {
+                                        <div class="flex justify-start items-center">
+                                            <button
+                                                mat-icon-button
                                                 class="mr-2"
-                                                svgIcon="mat_solid:link_off"
+                                                type="button"
+                                                (click)="handleOpenAccountsDialog()"
                                             >
-                                            </mat-icon>
-                                            {{ t('RemoveSelected') }}
-                                        </button>
-                                    </div>
+                                                <mat-icon svgIcon="mat_solid:add"></mat-icon>
+                                                <span class="cdk-visually-hidden">
+                                                    Add new item
+                                                </span>
+                                            </button>
+                                            <button
+                                                mat-flat-button
+                                                [disabled]="messageAccountsSelectedRows.length === 0"
+                                                (click)="handleRemoveMessageAccountsSelected()"
+                                            >
+                                                <mat-icon
+                                                    class="mr-2"
+                                                    svgIcon="mat_solid:link_off"
+                                                >
+                                                </mat-icon>
+                                                {{ t('RemoveSelected') }}
+                                            </button>
+                                        </div>
+                                    }
                                 </ng-template>
                                 <ng-template
                                     auGridSelectMultipleCustomHeaderDialogTemplate
@@ -517,14 +535,13 @@
                                 <mat-error>{{ formErrors?.subject | async }}</mat-error>
                             </mat-form-field>
                             <div class="col-12">
-                                <quill-editor
-                                    class="w-full"
+                                <editor
+                                    [init]="initEditor | setValueObject : 'placeholder' : t('message.StartHereToWriteYourMessage')"
+                                    [licenseKey]="tinymceLicenseKey"
+                                    [apiKey]="tinymceApiKey"
                                     formControlName="body"
-                                    placeholder="{{ t('message.StartHereToWriteYourMessage') }}"
-                                    [bounds]="'self'"
-                                    [modules]="quillModules"
                                 >
-                                </quill-editor>
+                                </editor>
                                 <mat-error>{{ formErrors?.body | async }}</mat-error>
                             </div>
 
@@ -563,22 +580,25 @@
                                 </mat-form-field>
                             }
 
-                            <au-file-upload
-                                class="col-12"
-                                [isMultiple]="true"
-                                [dropLabel]="t('DropFilesHere')"
-                                [browseLabel]="t('BrowseLabel')"
-                                (onFileDrop)="
-                                    actionService.action({
-                                        id          : 'message::message.detail.addAttachment',
-                                        isViewAction: false,
-                                        meta: {
-                                            files: $event
-                                        }
-                                    })
-                                "
-                            >
-                            </au-file-upload>
+                            @if (managedObject()?.status !== messageMessageStatus.SENT)
+                            {
+                                <au-file-upload
+                                    class="col-12"
+                                    [isMultiple]="true"
+                                    [dropLabel]="t('DropFilesHere')"
+                                    [browseLabel]="t('BrowseLabel')"
+                                    (onFileDrop)="
+                                        actionService.action({
+                                            id          : 'message::message.detail.addAttachment',
+                                            isViewAction: false,
+                                            meta: {
+                                                files: $event
+                                            }
+                                        })
+                                    "
+                                >
+                                </au-file-upload>
+                            }
 
                             <div class="col-12">
                                 @for (attachment of this.fg.get('attachmentsInputFile').value; track attachment.name; let i = $index)
@@ -660,26 +680,29 @@
                                         <p class="text-base opacity-60">
                                             {{ (attachment.size | formatFileSize).size }}{{ (attachment.size | formatFileSize).unit }}
                                         </p>
-                                        <button
-                                            class="ml-3"
-                                            mat-icon-button
-                                            (click)="
-                                                actionService.action({
-                                                    id          : 'message::message.detail.removeAttachment',
-                                                    isViewAction: false,
-                                                    meta    : {
-                                                        attachment,
-                                                        message: managedObject()
-                                                    }
-                                                })
-                                            "
-                                        >
-                                            <mat-icon
-                                                class="icon-size-5"
-                                                svgIcon="mat_solid:delete"
+                                        @if (managedObject()?.status !== messageMessageStatus.SENT)
+                                        {
+                                            <button
+                                                class="ml-3"
+                                                mat-icon-button
+                                                (click)="
+                                                    actionService.action({
+                                                        id          : 'message::message.detail.removeAttachment',
+                                                        isViewAction: false,
+                                                        meta    : {
+                                                            attachment,
+                                                            message: managedObject()
+                                                        }
+                                                    })
+                                                "
                                             >
-                                            </mat-icon>
-                                        </button>
+                                                <mat-icon
+                                                    class="icon-size-5"
+                                                    svgIcon="mat_solid:delete"
+                                                >
+                                                </mat-icon>
+                                            </button>
+                                        }
                                     </div>
                                 }
                             </div>
