@@ -43,6 +43,12 @@ export { IamUpsertTenantResolver } from './resolvers/iam-upsert-tenant.resolver'
 export { IamDeleteTenantByIdResolver } from './resolvers/iam-delete-tenant-by-id.resolver';
 export { IamDeleteTenantsResolver } from './resolvers/iam-delete-tenants.resolver';
 
+// export additionalApis
+export { IamGetWithTenantConstraintTenantsController } from './controllers/iam-get-with-tenant-constraint-tenants.controller';
+export { IamGetWithTenantConstraintTenantsResolver } from './resolvers/iam-get-with-tenant-constraint-tenants.resolver';
+export { IamPaginateWithTenantConstraintTenantsController } from './controllers/iam-paginate-with-tenant-constraint-tenants.controller';
+export { IamPaginateWithTenantConstraintTenantsResolver } from './resolvers/iam-paginate-with-tenant-constraint-tenants.resolver';
+
 // import controllers
 import { IamCreateTenantController } from './controllers/iam-create-tenant.controller';
 import { IamCreateTenantsController } from './controllers/iam-create-tenants.controller';
@@ -85,6 +91,12 @@ import { IamDeleteTenantsHandler } from './handlers/iam-delete-tenants.handler';
 // import seeder
 import { IamTenantSeeder } from './seeder/iam-tenant.seeder';
 
+// import additionalApis
+import { IamGetWithTenantConstraintTenantsController } from './controllers/iam-get-with-tenant-constraint-tenants.controller';
+import { IamGetWithTenantConstraintTenantsResolver } from './resolvers/iam-get-with-tenant-constraint-tenants.resolver';
+import { IamPaginateWithTenantConstraintTenantsController } from './controllers/iam-paginate-with-tenant-constraint-tenants.controller';
+import { IamPaginateWithTenantConstraintTenantsResolver } from './resolvers/iam-paginate-with-tenant-constraint-tenants.resolver';
+
 export const IamTenantApiControllers = [
     IamCreateTenantController,
     IamCreateTenantsController,
@@ -97,6 +109,10 @@ export const IamTenantApiControllers = [
     IamUpsertTenantController,
     IamDeleteTenantByIdController,
     IamDeleteTenantsController,
+
+    // additionalApis
+    IamGetWithTenantConstraintTenantsController,
+    IamPaginateWithTenantConstraintTenantsController,
 ];
 
 export const IamTenantApiResolvers = [
@@ -111,6 +127,10 @@ export const IamTenantApiResolvers = [
     IamUpsertTenantResolver,
     IamDeleteTenantByIdResolver,
     IamDeleteTenantsResolver,
+
+    // additionalApis
+    IamGetWithTenantConstraintTenantsResolver,
+    IamPaginateWithTenantConstraintTenantsResolver,
 ];
 
 export const IamTenantApiHandlers = [

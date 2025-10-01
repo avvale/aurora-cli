@@ -10,8 +10,11 @@ type IamTenant
     isActive: GraphQLBoolean!
     meta: JSON
     accounts: [IamAccount]
+    """Timestamp when the tenant was created"""
     createdAt: GraphQLTimestamp
+    """Timestamp when the tenant was last updated"""
     updatedAt: GraphQLTimestamp
+    """Timestamp when the tenant was deleted"""
     deletedAt: GraphQLTimestamp
 }
 
@@ -69,6 +72,18 @@ type Query
     ): [IamTenant]!
 
     iamPaginateTenants(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
+
+    # additionalApis
+    iamGetWithTenantConstraintTenants(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [IamTenant]!
+
+    iamPaginateWithTenantConstraintTenants(
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!

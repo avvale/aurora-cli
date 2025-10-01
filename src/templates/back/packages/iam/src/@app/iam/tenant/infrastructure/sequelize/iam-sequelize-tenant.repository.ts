@@ -27,13 +27,20 @@ export class IamSequelizeTenantRepository extends SequelizeRepository<IamTenant,
     ): Promise<void>
     {
         // add many to many relation
-        if (aggregate.accountIds.length > 0)
+        if (aggregate?.accountIds.length > 0)
         {
-            await model.$add(
-                'accounts',
-                aggregate.accountIds.value,
-                createOptions,
-            );
+            try
+            {
+                await model.$add(
+                    'accounts',
+                    aggregate.accountIds.value,
+                    createOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
     }
 
@@ -45,13 +52,20 @@ export class IamSequelizeTenantRepository extends SequelizeRepository<IamTenant,
     ): Promise<void>
     {
         // set many to many relation
-        if (aggregate.accountIds.isArray())
+        if (aggregate?.accountIds.isArray())
         {
-            await model.$set(
-                'accounts',
-                aggregate.accountIds.value,
-                updateByIdOptions,
-            );
+            try
+            {
+                await model.$set(
+                    'accounts',
+                    aggregate.accountIds.value,
+                    updateByIdOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
     }
 }

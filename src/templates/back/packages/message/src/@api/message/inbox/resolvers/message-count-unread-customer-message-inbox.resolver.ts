@@ -20,7 +20,7 @@ export class MessageCountUnreadCustomerMessageInboxResolver
         @CurrentAccount() account: IamAccountResponse,
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
-    ): Promise<MessageInbox[]>
+    ): Promise<number>
     {
         return await this.handler.main(
             account,

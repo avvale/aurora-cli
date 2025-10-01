@@ -352,3 +352,47 @@ export interface IamUpdateTags {
     id?: string;
     name?: string;
 }
+
+export interface IamTenantAccount {
+    tenantId: string;
+    tenant: IamTenant;
+    accountId: string;
+    account: IamAccount;
+}
+
+export interface IamCreateTenantAccount {
+    tenantId: string;
+    accountId: string;
+}
+
+export interface IamUpdateTenantAccountById {
+    tenantId?: string;
+    accountId?: string;
+}
+
+export interface IamUpdateTenantsAccounts {
+    tenantId?: string;
+    accountId?: string;
+}
+
+export interface IamRoleAccount {
+    roleId: string;
+    role: IamRole;
+    accountId: string;
+    account: IamAccount;
+}
+
+export interface IamCreateRoleAccount {
+    roleId: string;
+    accountId: string;
+}
+
+export interface IamUpdateRoleAccountById {
+    roleId?: string;
+    accountId?: string;
+}
+
+export interface IamUpdateRolesAccounts {
+    roleId?: string;
+    accountId?: string;
+}

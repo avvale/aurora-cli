@@ -56,9 +56,9 @@
     "Subject": "Asunto",
     "TagRecipients": "Tags destinatarios",
     "TenantIds": "TenantIds",
+    "TenantManagers": "Tenants gestores",
     "TenantRecipientIds": "IDs de tenants destinatarios",
     "TenantRecipients": "Tenants destinatarios",
-    "TenantSenders": "Tenants gestores",
     "TotalRecipients": "Destinatarios",
     "UnRead": "Sin leer",
     "Users": "Usuarios"

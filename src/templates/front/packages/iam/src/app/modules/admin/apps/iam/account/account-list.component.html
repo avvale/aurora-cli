@@ -62,6 +62,69 @@
                     </au-grid-column-translation>
                 }
             </au-grid-translations>
+            <ng-template
+                auGridCellValueTemplate
+                field="type"
+                let-type
+                let-columnConfig="columnConfig"
+                let-row="row"
+            >
+                {{ t('AccountTypes.' + type) }}
+            </ng-template>
+            <ng-template
+                auGridCellValueTemplate
+                field="tenants"
+                let-tenants
+                let-columnConfig="columnConfig"
+                let-row="row"
+            >
+                <mat-icon
+                    fontSet="material-symbols-outlined"
+                    class="icon-size-6 mr-2 cursor-pointer"
+                    [matTooltip]="tenants | map:'name' | join"
+                    aria-hidden="false"
+                    matBadgeSize="small"
+                    matBadge="{{ tenants.length > 0 ? tenants.length : '' }}"
+                >
+                    tenancy
+                </mat-icon>
+            </ng-template>
+            <ng-template
+                auGridCellValueTemplate
+                field="scopes"
+                let-scopes
+                let-columnConfig="columnConfig"
+                let-row="row"
+            >
+                <mat-icon
+                    fontSet="material-symbols-outlined"
+                    class="icon-size-6 mr-2 cursor-pointer"
+                    [matTooltip]="scopes | join"
+                    aria-hidden="false"
+                    matBadgeSize="small"
+                    matBadge="{{ scopes?.length > 0 ? scopes.length : '' }}"
+                >
+                    ads_click
+                </mat-icon>
+            </ng-template>
+            <ng-template
+                auGridCellValueTemplate
+                field="tags"
+                let-tags
+                let-columnConfig="columnConfig"
+                let-row="row"
+            >
+                <mat-icon
+                    fontSet="material-symbols-outlined"
+                    class="icon-size-6 mr-2 cursor-pointer"
+                    [matTooltip]="tags | join"
+                    aria-hidden="false"
+                    matBadgeSize="small"
+                    matBadge="{{ tags?.length > 0 ? tags.length : '' }}"
+                >
+                    tag
+                </mat-icon>
+            </ng-template>
         </au-grid>
         <!-- / Grid -->
 

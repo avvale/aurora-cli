@@ -61,6 +61,24 @@ export const relationsFields = `
     }
 `;
 
+export const tenantFields = `
+    id
+    name
+    code
+    isActive
+`;
+
+export const scopeFields = `
+    id
+    code
+    name
+`;
+
+export const tagFields = `
+    id
+    name
+`;
+
 // default methods
 export const paginationQuery = gql`
     query IamPaginateAccounts (
@@ -74,6 +92,70 @@ export const paginationQuery = gql`
             total
             rows
             count
+        }
+    }
+`;
+
+export const paginationWithRelationsQuery = gql`
+    query IamPaginateAccountsWithRelations (
+        $query: QueryStatement
+        $constraint: QueryStatement
+        $queryGetTenants: QueryStatement
+        $constraintGetTenants: QueryStatement
+        $queryGetSelectedTenants: QueryStatement
+        $constraintGetSelectedTenants: QueryStatement
+        $queryGetScopes: QueryStatement
+        $constraintGetScopes: QueryStatement
+        $queryGetSelectedScopes: QueryStatement
+        $constraintGetSelectedScopes: QueryStatement
+        $queryGetTags: QueryStatement
+        $constraintGetTags: QueryStatement
+        $queryGetSelectedTags: QueryStatement
+        $constraintGetSelectedTags: QueryStatement
+    ) {
+        pagination: iamPaginateWithTenantConstraintAccounts (
+            query: $query
+            constraint: $constraint
+        ) {
+            total
+            rows
+            count
+        }
+        iamGetTenants (
+            query: $queryGetTenants
+            constraint: $constraintGetTenants
+        ) {
+            ${tenantFields}
+        }
+        iamGetSelectedTenants: iamGetTenants (
+            query: $queryGetSelectedTenants
+            constraint: $constraintGetSelectedTenants
+        ) {
+            ${tenantFields}
+        }
+        oAuthGetScopes (
+            query: $queryGetScopes
+            constraint: $constraintGetScopes
+        ) {
+            ${scopeFields}
+        }
+        oAuthGetSelectedScopes: oAuthGetScopes (
+            query: $queryGetSelectedScopes
+            constraint: $constraintGetSelectedScopes
+        ) {
+            ${scopeFields}
+        }
+        iamGetTags (
+            query: $queryGetTags
+            constraint: $constraintGetTags
+        ) {
+            ${tagFields}
+        }
+        iamGetSelectedTags: iamGetTags (
+            query: $queryGetSelectedTags
+            constraint: $constraintGetSelectedTags
+        ) {
+            ${tagFields}
         }
     }
 `;
@@ -161,6 +243,16 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation IamCreateAccounts (
+        $payload: [IamCreateAccountInput]!
+    ) {
+        iamCreateAccounts (
+            payload: $payload
+        )
     }
 `;
 
@@ -254,6 +346,22 @@ export const checkUniqueEmailAccountQuery = gql`
             email: $email
             avoidEmails: $avoidEmails
         )
+    }
+`;
+
+export const paginateWithTenantConstraintAccountsQuery = gql`
+    query IamPaginateWithTenantConstraintAccounts (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        pagination: iamPaginateWithTenantConstraintAccounts (
+            query: $query
+            constraint: $constraint
+        ) {
+            total
+            rows
+            count
+        }
     }
 `;
 

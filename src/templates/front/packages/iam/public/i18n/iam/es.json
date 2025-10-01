@@ -3,10 +3,6 @@
     "AccountId": "AccountId",
     "AccountIds": "AccountIds",
     "Accounts": "Accounts",
-    "AccountType": {
-        "SERVICE": "Servicio",
-        "USER": "Usuario"
-    },
     "AddChildTenants": "Añadir tenants hijos",
     "Avatar": "Avatar",
     "BoundedContext": "BoundedContext",
@@ -19,26 +15,17 @@
     "CopiedInClipboard": "copiados en el portapapeles",
     "CopyPermissions": "Copiar permisos",
     "DApplicationCodes": "DApplicationCodes",
-    "Data": "Data",
     "DPermissions": "DPermissions",
     "DScopes": "DScopes",
     "DTenants": "DTenants",
+    "Data": "Data",
     "Email": "Email",
     "EmailRequired": "Email o usuario es obligatorio",
-    "error": {
-        "101": "El nombre de usuario ya existe.",
-        "102": "El correo electrónico ya existe.",
-        "103": "El código ya existe.",
-        "104": "Token inválido.",
-        "105": "Su cuenta no tiene los permisos necesarios para crear una cuenta con los roles especificados.",
-        "106": "Su cuenta no tiene los permisos necesarios para actualizar la cuenta con los roles especificados.",
-        "107": "No se permite operar este elemento en el tenant {{tenant}}, por favor, póngase en contacto con el administrador."
-    },
     "FindTenant": "Encuentra un tenant...",
-    "ImportedFromClipboard": "importados desde el portapapeles",
+    "ImportPermissionSyntaxError": "Error de sintaxis en la importación de permisos",
     "ImportPermissions": "Importar permisos",
     "ImportPermissionsWarning": "Va a eliminar los permisos actuales he importar nuevos permisos en el role {{role}} ¿Está seguro que desea importar los permisos?",
-    "ImportPermissionSyntaxError": "Error de sintaxis en la importación de permisos",
+    "ImportedFromClipboard": "importados desde el portapapeles",
     "Inherited": "Heredados",
     "IsActive": "IsActive",
     "IsMaster": "IsMaster",
@@ -76,7 +63,16 @@
     "Tenants": "Tenants",
     "TwoFactorAuthenticationSecret": "TwoFactorAuthenticationSecret",
     "Type": "Type",
-    "User": "User",
-    "Username": "Nombre de usuario",
-    "Users": "Users"
+    "User": "Usuario",
+    "Username": "Usuario",
+    "Users": "Usuarios",
+    "error": {
+        "101": "El nombre de usuario ya existe.",
+        "102": "El correo electrónico ya existe.",
+        "103": "El código ya existe.",
+        "104": "Token inválido.",
+        "105": "Su cuenta no tiene los permisos necesarios para crear una cuenta con los roles especificados.",
+        "106": "Su cuenta no tiene los permisos necesarios para actualizar la cuenta con los roles especificados.",
+        "107": "No se permite operar este elemento en el tenant {{tenant}}, por favor, póngase en contacto con el administrador."
+    }
 }

@@ -66,7 +66,7 @@ export const getQuery = gql`
 `;
 
 export const getRelations = gql`
-    query IamGetTenantsRelations(
+    query IamGetTenantsRelations (
         $queryTenants: QueryStatement
         $constraintTenants: QueryStatement
     ) {
@@ -134,6 +134,16 @@ export const createMutation = gql`
     }
 `;
 
+export const insertMutation = gql`
+    mutation IamCreateTenants (
+        $payload: [IamCreateTenantInput]!
+    ) {
+        iamCreateTenants (
+            payload: $payload
+        )
+    }
+`;
+
 export const updateByIdMutation = gql`
     mutation IamUpdateTenantById (
         $payload: IamUpdateTenantByIdInput!
@@ -188,6 +198,37 @@ export const deleteMutation = gql`
             constraint: $constraint
         ) {
             ${fields}
+        }
+    }
+`;
+
+// Queries additionalApis
+export const getWithTenantConstraintTenantsQuery = gql`
+    query IamGetWithTenantConstraintTenants (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        iamGetWithTenantConstraintTenants (
+            query: $query
+            constraint: $constraint
+        ) {
+            ${fields}
+        }
+    }
+`;
+
+export const paginateWithTenantConstraintTenantsQuery = gql`
+    query IamPaginateWithTenantConstraintTenants (
+        $query: QueryStatement
+        $constraint: QueryStatement
+    ) {
+        pagination: iamPaginateWithTenantConstraintTenants (
+            query: $query
+            constraint: $constraint
+        ) {
+            total
+            rows
+            count
         }
     }
 `;

@@ -3,16 +3,22 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
-import { IamAccount, IamTenant } from '@apps/iam';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { IamAccount, IamTag, IamTenant } from '@apps/iam';
 import { accountColumnsConfig, AccountService } from '@apps/iam/account';
-import { TenantService } from '@apps/iam/tenant';
+import { paginateWithTenantConstraintTenantsQuery, TenantService } from '@apps/iam/tenant';
 import { MessageMessage, MessageMessageStatus } from '@apps/message';
 import { MessageService } from '@apps/message/message';
-import { Action, AsyncMatSelectSearchModule, ChipComponent, ColumnConfig, ColumnDataType, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, DownloadService, FileUploadComponent, FormatFileSizePipe, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, IamService, initAsyncMatSelectSearch, initAsyncMatSelectSearchState, log, manageAsyncMatSelectSearch, mapActions, Operator, queryStatementHandler, QueryStatementHandler, SelectionChange, SelectionModel, SelectSearchService, SetValueObjectPipe, SnackBarInvalidFormComponent, SplitButtonModule, uuid, ViewDetailComponent } from '@aurora';
+import { Action, AsyncMatSelectSearchModule, ChipComponent, ColumnConfig, ColumnDataType, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, DownloadService, FileUploadComponent, FormatFileSizePipe, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCellValueDialogTemplateDirective, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, initAsyncMatSelectSearch, initAsyncMatSelectSearchState, JoinPipe, log, manageAsyncMatSelectSearch, mapActions, MapPipe, MatSelectAddSelectedDirective, Operator, queryStatementHandler, SelectionChange, SelectionModel, SelectSearchService, SetValueObjectPipe, SnackBarInvalidFormComponent, SplitButtonModule, uuid, ViewDetailComponent } from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { combineLatest, lastValueFrom, Observable, ReplaySubject, skip, startWith, takeUntil } from 'rxjs';
 import { GetColorStatusMessagePipe } from '../shared';
+import { MatBadgeModule } from '@angular/material/badge';
+import { OAuthScope } from '@apps/o-auth';
+import { ScopeService } from '@apps/o-auth/scope';
+import { TagService } from '@apps/iam/tag';
+import { GridSelectMultipleCellValueTemplateDirective } from '@aurora/components/grid-select-multiple-elements/directives/grid-select-multiple-cell-value-template.directive';
 
 export const messageAccountsDialogGridId = 'message::message.detail.accountsDialogGridList';
 export const messageAccountsGridId = 'message::message.detail.messageAccountsGridList';
@@ -26,10 +32,13 @@ export const messageAccountsScopeDialogPagination = 'message::messageDialogAccou
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ...defaultDetailImports,
-        AsyncMatSelectSearchModule, ChipComponent, DatetimepickerSqlFormatDirective, EditorComponent,
-        FileUploadComponent, FormatFileSizePipe, GetColorStatusMessagePipe, MatCheckboxModule,
-        MatSelectModule, MtxDatetimepickerModule, GridSelectMultipleElementsModule, MatTabsModule,
-        SetValueObjectPipe, SplitButtonModule,
+        GridSelectMultipleCellValueTemplateDirective,
+        AsyncMatSelectSearchModule, ChipComponent, DatetimepickerSqlFormatDirective,
+        EditorComponent, FileUploadComponent, FormatFileSizePipe, GetColorStatusMessagePipe,
+        GridSelectMultipleCellValueDialogTemplateDirective, JoinPipe, MatBadgeModule,
+        MatCheckboxModule, MatSelectAddSelectedDirective, MatSelectModule,
+        MtxDatetimepickerModule, GridSelectMultipleElementsModule,
+        MapPipe, MatTabsModule, MatTooltipModule, SetValueObjectPipe, SplitButtonModule,
     ],
     providers: [
         {
@@ -42,9 +51,9 @@ export class MessageDetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----
     scopeRecipientFilterCtrl: FormControl = new FormControl<string>('');
-    filteredScopeRecipients$: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+    filteredScopeRecipients$: ReplaySubject<OAuthScope[]> = new ReplaySubject<OAuthScope[]>(1);
     tagRecipientFilterCtrl: FormControl = new FormControl<string>('');
-    filteredTagRecipients$: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+    filteredTagRecipients$: ReplaySubject<IamTag[]> = new ReplaySubject<IamTag[]>(1);
     showTenantsBelongsInput: WritableSignal<boolean> = signal(true);
     totalRecipients: WritableSignal<number> = signal(0);
     status: Signal<string> = computed(() => this.managedObject() ? this.managedObject().status : MessageMessageStatus.DRAFT);
@@ -69,35 +78,12 @@ export class MessageDetailComponent extends ViewDetailComponent
     // It should not be used habitually, since the source of truth is the form.
     managedObject: WritableSignal<MessageMessage> = signal(null);
 
-    /* #region variables to manage async-search-multiple-select senders IamTenant[] */
-    tenantSendersAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTenant>();
-    tenantSendersManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
-        columnFilter: {
-            id      : uuid(),
-            field   : 'IamTenant.name::unaccent',
-            type    : ColumnDataType.STRING,
-            operator: Operator.iLike,
-            value   : null,
-        },
-        paginationService   : this.tenantService,
-        paginationConstraint: {
-            where: {
-                // constraint para buscar tenants dentro del scope del usuario
-                // TODO, hacer esta validación en el servidor
-                id: this.iamService.me.dTenants,
-            },
-            include: [
-                {
-                    association: 'parent',
-                },
-            ],
-        },
-    });
-    /* #endregion variables to manage async-search-multiple-select senders IamTenant[] */
-
-    /* #region variables to manage async-search-multiple-select recipients IamTenant[] */
+    /* #region variables to manage async-search-multiple-select managers and recipients IamTenant[] */
+    tenantManagersAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTenant>();
     tenantRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTenant>();
-    tenantRecipientsManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
+    tenantAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTenant>();
+    tenantDialogAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTenant>();
+    tenantAsyncMatSelectSearch = manageAsyncMatSelectSearch({
         columnFilter: {
             id      : uuid(),
             field   : 'IamTenant.name::unaccent',
@@ -106,12 +92,8 @@ export class MessageDetailComponent extends ViewDetailComponent
             value   : null,
         },
         paginationService   : this.tenantService,
+        paginationGraphqlStatement: paginateWithTenantConstraintTenantsQuery,
         paginationConstraint: {
-            where: {
-                // constraint para buscar tenants dentro del scope del usuario
-                // TODO, hacer esta validación en el servidor
-                id: this.iamService.me.dTenants,
-            },
             include: [
                 {
                     association: 'parent',
@@ -119,7 +101,37 @@ export class MessageDetailComponent extends ViewDetailComponent
             ],
         },
     });
-    /* #endregion variables to manage async-search-multiple-select recipients IamTenant[] */
+    /* #endregion variables to manage async-search-multiple-select managers and recipients IamTenant[] */
+
+    /* #region variables to manage async-search-multiple-select OAuthScope[] */
+    scopeAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, OAuthScope>();
+    scopeDialogAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, OAuthScope>();
+    scopeManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
+        columnFilter: {
+            id      : uuid(),
+            field   : 'OAuthScope.name::unaccent',
+            type    : ColumnDataType.STRING,
+            operator: Operator.iLike,
+            value   : null,
+        },
+        paginationService: this.scopeService,
+    });
+    /* #endregion variables to manage async-search-multiple-select OAuthScope[] */
+
+    /* #region variables to manage async-search-multiple-select senders account dialog IamTag[] */
+    tagAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTag>();
+    tagDialogAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTag>();
+    tagManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
+        columnFilter: {
+            id      : uuid(),
+            field   : 'IamTag.name::unaccent',
+            type    : ColumnDataType.STRING,
+            operator: Operator.iLike,
+            value   : null,
+        },
+        paginationService: this.tagService,
+    });
+    /* #endregion variables to manage async-search-multiple-select senders account dialog IamTag[] */
 
     // relationships
     /* #region variables to manage grid-select-multiple-elements messageAccountsGridSelectMultipleElementsComponent */
@@ -166,7 +178,21 @@ export class MessageDetailComponent extends ViewDetailComponent
             translation: 'Selects',
             sticky     : true,
         },
-        ...accountColumnsConfig,
+        ...accountColumnsConfig({
+            translocoService: this.translocoService,
+            tenantsAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.tenantDialogAccountRecipientsAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.tenantAsyncMatSelectSearch,
+            },
+            scopesAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.scopeDialogAccountRecipientsAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
+            },
+            tagsAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.tagDialogAccountRecipientsAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
+            },
+        }),
     ];
 
     // start message accounts grid
@@ -204,7 +230,21 @@ export class MessageDetailComponent extends ViewDetailComponent
             translation: 'Selects',
             sticky     : true,
         },
-        ...accountColumnsConfig,
+        ...accountColumnsConfig({
+            translocoService: this.translocoService,
+            tenantsAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.tenantAccountRecipientsAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.tenantAsyncMatSelectSearch,
+            },
+            scopesAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.scopeAccountRecipientsAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
+            },
+            tagsAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.tagAccountRecipientsAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
+            },
+        }),
     ];
     /* #endregion variables to manage grid-select-multiple-elements accountRecipientIds */
 
@@ -224,28 +264,91 @@ export class MessageDetailComponent extends ViewDetailComponent
         private readonly accountService: AccountService,
         private readonly downloadService: DownloadService,
         private readonly tenantService: TenantService,
-        private readonly iamService: IamService,
+        private readonly scopeService: ScopeService,
+        private readonly tagService: TagService,
     )
     {
         super();
 
-        /* #region variables to manage async-search-multiple-select senders IamTenant[] */
+        /* #region variables to manage async-search-multiple-select managers IamTenant[] */
         initAsyncMatSelectSearch<string, IamTenant>({
-            asyncMatSelectSearchState : this.tenantSendersAsyncMatSelectSearchState,
-            manageAsyncMatSelectSearch: this.tenantSendersManageAsyncMatSelectSearch,
+            asyncMatSelectSearchState : this.tenantManagersAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.tenantAsyncMatSelectSearch,
             itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTenants,
-            initSelectedItems         : this.activatedRoute.snapshot.data.data.messageGetTenantSenders,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTenantManagers,
         });
-        /* #endregion variables to manage async-search-multiple-select senders IamTenant[] */
+        /* #endregion variables to manage async-search-multiple-select managers IamTenant[] */
 
         /* #region variables to manage async-search-multiple-select recipients IamTenant[] */
         initAsyncMatSelectSearch<string, IamTenant>({
             asyncMatSelectSearchState : this.tenantRecipientsAsyncMatSelectSearchState,
-            manageAsyncMatSelectSearch: this.tenantRecipientsManageAsyncMatSelectSearch,
+            manageAsyncMatSelectSearch: this.tenantAsyncMatSelectSearch,
             itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTenants,
-            initSelectedItems         : this.activatedRoute.snapshot.data.data.messageGetTenantRecipients,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTenantRecipients,
         });
         /* #endregion variables to manage async-search-multiple-select recipients IamTenant[] */
+
+        /* #region variables to manage async-search-multiple-select account recipients IamTenant[] */
+        initAsyncMatSelectSearch<string, IamTenant>({
+            asyncMatSelectSearchState : this.tenantAccountRecipientsAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.tenantAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTenants,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTenantsAccount,
+        });
+        /* #endregion variables to manage async-search-multiple-select account recipients IamTenant[] */
+
+        /* #region variables to manage async-search-multiple-select dialog account recipients IamTenant[] */
+        initAsyncMatSelectSearch<string, IamTenant>({
+            asyncMatSelectSearchState : this.tenantDialogAccountRecipientsAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.tenantAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTenants,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTenantsDialogAccount,
+        });
+        /* #endregion variables to manage async-search-multiple-select dialog account recipients IamTenant[] */
+
+        /* #region variables to manage async-search-multiple-select account recipients oAuthScope[] */
+        initAsyncMatSelectSearch<string, OAuthScope>({
+            asyncMatSelectSearchState : this.scopeAccountRecipientsAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.oAuthGetScopes,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.oAuthGetSelectedScopesAccount,
+            indexKey                  : 'code',
+            valueKey                  : 'code',
+        });
+        /* #endregion variables to manage async-search-multiple-select account recipients oAuthScope[] */
+
+         /* #region variables to manage async-search-multiple-select dialog account recipients oAuthScope[] */
+        initAsyncMatSelectSearch<string, OAuthScope>({
+            asyncMatSelectSearchState : this.scopeDialogAccountRecipientsAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.oAuthGetScopes,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.oAuthGetSelectedScopesDialogAccount,
+            indexKey                  : 'code',
+            valueKey                  : 'code',
+        });
+        /* #endregion variables to manage async-search-multiple-select dialog account recipients oAuthScope[] */
+
+        /* #region variables to manage async-search-multiple-select account recipients IamTag[] */
+        initAsyncMatSelectSearch<string, IamTag>({
+            asyncMatSelectSearchState : this.tagAccountRecipientsAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTags,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTagsAccount,
+            indexKey                  : 'name',
+            valueKey                  : 'name',
+        });
+        /* #endregion variables to manage async-search-multiple-select account recipients IamTag[] */
+
+        /* #region variables to manage async-search-multiple-select dialog account recipients IamTag[] */
+        initAsyncMatSelectSearch<string, IamTag>({
+            asyncMatSelectSearchState : this.tagDialogAccountRecipientsAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTags,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTagsDialogAccount,
+            indexKey                  : 'name',
+            valueKey                  : 'name',
+        });
+        /* #endregion variables to manage async-search-multiple-select dialog account recipients IamTag[] */
     }
 
     // this method will be called after the ngOnInit of
@@ -253,7 +356,7 @@ export class MessageDetailComponent extends ViewDetailComponent
     init(): void
     {
         // tenants
-        this.initScopeRecipientsFilter(this.activatedRoute.snapshot.data.data.oAuthFindClientById.scopeOptions);
+        this.initScopeRecipientsFilter(this.activatedRoute.snapshot.data.data.oAuthGetScopes);
         this.initTagRecipientsFilter(this.activatedRoute.snapshot.data.data.iamGetTags);
 
         combineLatest([
@@ -282,7 +385,7 @@ export class MessageDetailComponent extends ViewDetailComponent
             });
     }
 
-    initScopeRecipientsFilter(scopes: string[]): void
+    initScopeRecipientsFilter(scopes: OAuthScope[]): void
     {
         // init select filter with all items
         this.filteredScopeRecipients$.next(scopes);
@@ -294,16 +397,15 @@ export class MessageDetailComponent extends ViewDetailComponent
             .subscribe(async () =>
             {
                 this.selectSearchService
-                    .filterSelect<string>(
+                    .filterSelect<OAuthScope>(
                         this.scopeRecipientFilterCtrl,
                         scopes,
                         this.filteredScopeRecipients$,
-                        scope => scope,
                     );
             });
     }
 
-    initTagRecipientsFilter(tags: string[]): void
+    initTagRecipientsFilter(tags: IamTag[]): void
     {
         // init select filter with all items
         this.filteredTagRecipients$.next(tags);
@@ -315,7 +417,7 @@ export class MessageDetailComponent extends ViewDetailComponent
             .subscribe(async () =>
             {
                 this.selectSearchService
-                    .filterSelect<string>(
+                    .filterSelect<IamTag>(
                         this.tagRecipientFilterCtrl,
                         tags,
                         this.filteredTagRecipients$,
@@ -415,11 +517,10 @@ export class MessageDetailComponent extends ViewDetailComponent
     handleOpenAccountsDialog(): void
     {
         this.actionService.action({
-            id          : 'message::message.detail.accountsPagination',
+            id          : 'message::message.detail.messageAccountsDialogPagination',
             isViewAction: false,
             meta        : {
-                query: QueryStatementHandler
-                    .init({ columnsConfig: accountColumnsConfig })
+                query: queryStatementHandler({ columnsConfig: accountColumnsConfig() })
                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.accountsDialogGridId))
                     .setSort(this.gridStateService.getSort(this.accountsDialogGridId))
                     .setPage(this.gridStateService.getPage(this.accountsDialogGridId))
@@ -428,8 +529,8 @@ export class MessageDetailComponent extends ViewDetailComponent
             },
             afterRunAction: (action: Action) =>
             {
-                this.gridStateService.setPaginationActionId(this.accountsDialogGridId, 'message::message.detail.accountsPagination');
-                this.gridStateService.setExportActionId(this.accountsDialogGridId, 'message::message.detail.exportAccounts');
+                this.gridStateService.setPaginationActionId(this.accountsDialogGridId, 'message::message.detail.messageAccountsDialogPagination');
+                this.gridStateService.setExportActionId(this.accountsDialogGridId, 'message::message.detail.exportMessageAccountsDialog');
                 this.messageAccountsGridSelectMultipleElementsComponent.handleElementsDialog({
                     data: {
                         gridId   : this.accountsDialogGridId,
@@ -617,8 +718,7 @@ export class MessageDetailComponent extends ViewDetailComponent
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
-                                QueryStatementHandler
-                                    .init({ columnsConfig: accountColumnsConfig })
+                                queryStatementHandler({ columnsConfig: accountColumnsConfig() })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.messageAccountsGridId))
                                     .setSort(this.gridStateService.getSort(this.messageAccountsGridId))
                                     .setPage(this.gridStateService.getPage(this.messageAccountsGridId))
@@ -631,8 +731,13 @@ export class MessageDetailComponent extends ViewDetailComponent
                                 include: [
                                     {
                                         association: 'user',
+                                        required   : true,
+                                    },
+                                    {
+                                        association: 'tenants',
                                     },
                                 ],
+                                distinct: true,
                             },
                             scope: messageSelectedAccountsScopePagination,
                         }),
@@ -650,7 +755,7 @@ export class MessageDetailComponent extends ViewDetailComponent
                 });
 
                 this.actionService.action({
-                    id          : 'message::message.detail.accountsPagination',
+                    id          : 'message::message.detail.messageAccountsDialogPagination',
                     isViewAction: false,
                 });
 
@@ -676,7 +781,7 @@ export class MessageDetailComponent extends ViewDetailComponent
                 });
 
                 this.actionService.action({
-                    id          : 'message::message.detail.accountsPagination',
+                    id          : 'message::message.detail.messageAccountsDialogPagination',
                     isViewAction: false,
                 });
 
@@ -702,7 +807,7 @@ export class MessageDetailComponent extends ViewDetailComponent
                 });
 
                 this.actionService.action({
-                    id          : 'message::message.detail.accountsPagination',
+                    id          : 'message::message.detail.messageAccountsDialogPagination',
                     isViewAction: false,
                 });
 
@@ -730,7 +835,7 @@ export class MessageDetailComponent extends ViewDetailComponent
                 });
 
                 this.actionService.action({
-                    id          : 'message::message.detail.accountsPagination',
+                    id          : 'message::message.detail.messageAccountsDialogPagination',
                     isViewAction: false,
                 });
 
@@ -746,18 +851,60 @@ export class MessageDetailComponent extends ViewDetailComponent
                 /* #endregion actions to manage Message Accounts grid-select-multiple-elements */
 
             /* #region actions to manage Accounts grid-select-multiple-elements dialog */
-            case 'message::message.detail.accountsPagination':
+            case 'message::message.detail.messageAccountsDialogPagination':
                 await lastValueFrom(
                     this.accountService
-                        .pagination({
+                        .paginationWithRelations({
                             query: action.meta.query ?
                                 action.meta.query :
-                                queryStatementHandler({ columnsConfig: accountColumnsConfig })
+                                queryStatementHandler({ columnsConfig: accountColumnsConfig() })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.accountsDialogGridId))
                                     .setSort(this.gridStateService.getSort(this.accountsDialogGridId))
                                     .setPage(this.gridStateService.getPage(this.accountsDialogGridId))
                                     .setSearch(this.gridStateService.getSearchState(this.accountsDialogGridId))
                                     .getQueryStatement(),
+                            constraint: {
+                                include: [
+                                    {
+                                        association: 'user',
+                                        required   : true,
+                                    },
+                                    {
+                                        association: 'tenants',
+                                    },
+                                ],
+                                distinct: true,
+                            },
+                            queryGetTenants: queryStatementHandler()
+                                .setPage({ pageIndex: 0, pageSize: 10 })
+                                .getQueryStatement(),
+                            queryGetSelectedTenants: {
+                                where: {
+                                    id: this.gridFiltersStorageService
+                                        .getColumnFilter(this.accountsDialogGridId, 'tenants')?.value
+                                        || [],
+                                },
+                            },
+                            queryGetScopes: queryStatementHandler()
+                                .setPage({ pageIndex: 0, pageSize: 10 })
+                                .getQueryStatement(),
+                            queryGetSelectedScopes: {
+                                where: {
+                                    code: this.gridFiltersStorageService
+                                        .getColumnFilter(this.accountsDialogGridId, 'scopes')?.value
+                                        || [],
+                                },
+                            },
+                            queryGetTags: queryStatementHandler()
+                                .setPage({ pageIndex: 0, pageSize: 10 })
+                                .getQueryStatement(),
+                            queryGetSelectedTags: {
+                                where: {
+                                    name: this.gridFiltersStorageService
+                                        .getColumnFilter(this.accountsDialogGridId, 'tags')?.value
+                                        || [],
+                                },
+                            },
                             scope: messageAccountsScopeDialogPagination,
                         }),
                 );

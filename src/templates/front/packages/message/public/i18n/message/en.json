@@ -56,9 +56,9 @@
     "Subject": "Subject",
     "TagRecipients": "Tag recipients",
     "TenantIds": "TenantIds",
+    "TenantManagers": "Tenants managers",
     "TenantRecipientIds": "TenantRecipientIds",
     "TenantRecipients": "Tenant recipients",
-    "TenantSenders": "Tenants senders",
     "TotalRecipients": "TotalRecipients",
     "UnRead": "UnRead",
     "Users": "Users"

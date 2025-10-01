@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@app/message/message/infrastructure/mock/message-mock-message.data.ts",
-            "integrity": "sha1:2cc8d13655392e86a676926b92321e436466bb99"
+            "integrity": "sha1:b360688fb7636fd4aac5b10df5ff5ba32d86c435"
         },
         {
             "path": "src/@app/message/message/infrastructure/mock/message-mock-message.repository.ts",
@@ -451,7 +451,7 @@
         },
         {
             "path": "src/@app/message/message/infrastructure/sequelize/message-sequelize-message.model.ts",
-            "integrity": "sha1:70ef7f746e73319e35076c97ecda9d3f1090f7d1"
+            "integrity": "sha1:6bbbdf14469ee3c4b64554323b1711a5a70f1b0f"
         },
         {
             "path": "src/@app/message/message/infrastructure/sequelize/message-sequelize-message.repository.ts",
@@ -639,19 +639,19 @@
         },
         {
             "path": "src/@api/message/message/dto/message-message.dto.ts",
-            "integrity": "sha1:f60d8643df9fa7f2ff2e01640eb8528b6046127e"
+            "integrity": "sha1:650ce900ac8c221e6ee04e0c8e1d5e8c0a93cec8"
         },
         {
             "path": "src/@api/message/message/dto/message-create-message.dto.ts",
-            "integrity": "sha1:e7c62d2844879d4988eda9b2efed90016668f96a"
+            "integrity": "sha1:a3dd877a87bd900a11c81409eef0fb2150ef2a20"
         },
         {
             "path": "src/@api/message/message/dto/message-update-message-by-id.dto.ts",
-            "integrity": "sha1:4dafa650b8502b729897e79e8d1ef001c034e45a"
+            "integrity": "sha1:91a99c93935580bc18f7151a4f6318fc0a30a37b"
         },
         {
             "path": "src/@api/message/message/dto/message-update-messages.dto.ts",
-            "integrity": "sha1:89e0be8af8d9d2ea1f89ffbdbf0e9301031ee924"
+            "integrity": "sha1:39d5120476d6769be0a0335a2817fce460485281"
         },
         {
             "path": "src/@api/message/message/dto/index.ts",
@@ -951,7 +951,7 @@
         },
         {
             "path": "postman/message/message.message.postman.json",
-            "integrity": "sha1:c3b8f9333568321aa88a2ab70eb9063ffae5433d"
+            "integrity": "sha1:81a9a808188fe74d11acf40dfc8f27880fc24b09"
         }
     ]
 }

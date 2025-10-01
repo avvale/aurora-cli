@@ -45,17 +45,31 @@ aggregateProperties:
           - name: permissionId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamPermission
-            modulePath: iam/permission
+            relationship:
+              type: many-to-one
+              aggregateName: IamPermission
+              modulePath: iam/permission
+              field: permission
+              avoidConstraint: true
           - name: roleId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamRole
-            modulePath: iam/role
+            relationship:
+              type: many-to-one
+              aggregateName: IamRole
+              modulePath: iam/role
+              field: role
+              avoidConstraint: true
+        excludedOperations:
+          - count
+          - max
+          - min
+          - sum
+          - rawSql
+          - upsert
+          - updateAndIncrement
   - name: accounts
     type: relationship
     nullable: true
@@ -76,17 +90,23 @@ aggregateProperties:
           - name: roleId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamRole
-            modulePath: iam/role
+            relationship:
+              type: many-to-one
+              aggregateName: IamRole
+              modulePath: iam/role
+              field: role
+              avoidConstraint: true
           - name: accountId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamAccount
-            modulePath: iam/account
+            relationship:
+              type: many-to-one
+              aggregateName: IamAccount
+              modulePath: iam/account
+              field: account
+              avoidConstraint: true
   - name: createdAt
     type: timestamp
     nullable: true

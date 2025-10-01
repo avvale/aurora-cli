@@ -2,8 +2,8 @@
 type IamRoleAccount
 {
     roleId: ID!
-    accountId: ID!
     role: IamRole
+    accountId: ID!
     account: IamAccount
 }
 
@@ -70,10 +70,6 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [IamRoleAccount]!
-
-    iamUpsertRoleAccount(
-        payload: IamUpdateRoleAccountByIdInput!
-    ): IamRoleAccount
 
     iamDeleteRoleAccountById(
         roleId: ID!

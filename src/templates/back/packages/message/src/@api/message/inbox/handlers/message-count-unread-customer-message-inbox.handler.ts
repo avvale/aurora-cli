@@ -16,7 +16,7 @@ export class MessageCountUnreadCustomerMessageInboxHandler
         account: IamAccountResponse,
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
-    ): Promise<MessageInbox[] | MessageInboxDto[]>
+    ): Promise<number>
     {
         return await this.queryBus.ask(new MessageCountInboxQuery(
             {

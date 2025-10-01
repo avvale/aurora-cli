@@ -1,8 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { accountColumnsConfig, AccountService } from '@apps/iam/account';
-import { IamAccount } from '@apps/iam/iam.types';
-import { Action, AuthenticationService, AuthorizationService, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, queryStatementHandler, ViewBaseComponent } from '@aurora';
+import { IamAccount, IamTag, IamTenant } from '@apps/iam/iam.types';
+import { OAuthScope } from '@apps/o-auth';
+import { ScopeService } from '@apps/o-auth/scope';
+import { Action, AuthenticationService, AuthorizationService, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, IamService, initAsyncMatSelectSearch, initAsyncMatSelectSearchState, JoinPipe, log, manageAsyncMatSelectSearch, MapPipe, Operator, queryStatementHandler, uuid, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+import { TagService } from '../tag';
+import { TenantService } from '../tenant';
 
 export const accountMainGridListId = 'iam::account.list.mainGridList';
 
@@ -13,12 +19,53 @@ export const accountMainGridListId = 'iam::account.list.mainGridList';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports        : [
         ...defaultListImports,
+        JoinPipe, MapPipe, MatBadgeModule, MatTooltipModule,
     ],
 })
 export class AccountListComponent extends ViewBaseComponent
 {
     // ---- customizations ----
-    // ..
+    /* #region variables to manage async-search-multiple-select account IamTenant[] */
+    tenantAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTenant>();
+    tenantManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
+        columnFilter: {
+            id      : uuid(),
+            field   : 'IamTenant.name::unaccent',
+            type    : ColumnDataType.STRING,
+            operator: Operator.iLike,
+            value   : null,
+        },
+        paginationService   : this.tenantService,
+    });
+    /* #endregion variables to manage async-search-multiple-select account IamTenant[] */
+
+    /* #region variables to manage async-search-multiple-select account OAuthScope[] */
+    scopeAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, OAuthScope>();
+    scopeManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
+        columnFilter: {
+            id      : uuid(),
+            field   : 'OAuthScope.name::unaccent',
+            type    : ColumnDataType.STRING,
+            operator: Operator.iLike,
+            value   : null,
+        },
+        paginationService: this.scopeService,
+    });
+    /* #endregion variables to manage async-search-multiple-select account OAuthScope[] */
+
+    /* #region variables to manage async-search-multiple-select account IamTag[] */
+    tagAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTag>();
+    tagManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
+        columnFilter: {
+            id      : uuid(),
+            field   : 'IamTag.name::unaccent',
+            type    : ColumnDataType.STRING,
+            operator: Operator.iLike,
+            value   : null,
+        },
+        paginationService: this.tagService,
+    });
+    /* #endregion variables to manage async-search-multiple-select account IamTag[] */
 
     breadcrumb: Crumb[] = [
         { translation: 'App', routerLink: ['/']},
@@ -72,7 +119,21 @@ export class AccountListComponent extends ViewBaseComponent
             translation: 'Selects',
             sticky     : true,
         },
-        ...accountColumnsConfig,
+        ...accountColumnsConfig({
+            translocoService: this.translocoService,
+            tenantsAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.tenantAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.tenantManageAsyncMatSelectSearch,
+            },
+            scopesAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.scopeAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
+            },
+            tagsAsyncMatSelectSearch: {
+                asyncMatSelectSearchState : this.tagAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
+            },
+        }),
     ];
 
     constructor(
@@ -82,9 +143,41 @@ export class AccountListComponent extends ViewBaseComponent
         private readonly accountService: AccountService,
         private readonly authenticationService: AuthenticationService,
         private readonly authorizationService: AuthorizationService,
+        private readonly tenantService: TenantService,
+        private readonly scopeService: ScopeService,
+        private readonly tagService: TagService,
     )
     {
         super();
+
+        /* #region variables to manage async-search-multiple-select IamTenant[] */
+        initAsyncMatSelectSearch<string, IamTenant>({
+            asyncMatSelectSearchState : this.tenantAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.tenantManageAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTenants,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTenants,
+        });
+        /* #endregion variables to manage async-search-multiple-select IamTenant[] */
+
+         /* #region variables to manage async-search-multiple-select OAuthScope[] */
+        initAsyncMatSelectSearch<string, OAuthScope>({
+            asyncMatSelectSearchState : this.scopeAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.oAuthGetScopes,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.oAuthGetSelectedScopes,
+            valueKey                  : 'code',
+        });
+        /* #endregion variables to manage async-search-multiple-select OAuthScope[] */
+
+         /* #region variables to manage async-search-multiple-select IamTag[] */
+        initAsyncMatSelectSearch<string, IamTag>({
+            asyncMatSelectSearchState : this.tagAsyncMatSelectSearchState,
+            manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
+            itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTags,
+            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTags,
+            valueKey                  : 'name',
+        });
+        /* #endregion variables to manage async-search-multiple-select IamTag[] */
     }
 
     // this method will be called after the ngOnInit of
@@ -118,12 +211,23 @@ export class AccountListComponent extends ViewBaseComponent
                     this.accountService.pagination({
                         query: action.meta.query ?
                             action.meta.query :
-                            queryStatementHandler({ columnsConfig: accountColumnsConfig })
+                            queryStatementHandler({ columnsConfig: accountColumnsConfig() })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
                                 .setSearch(this.gridStateService.getSearchState(this.gridId))
                                 .getQueryStatement(),
+                        constraint: {
+                            include: [
+                                {
+                                    association: 'user',
+                                    required   : true,
+                                },
+                                {
+                                    association: 'tenants',
+                                },
+                            ],
+                        },
                     }),
                 );
                 break;
@@ -194,8 +298,8 @@ export class AccountListComponent extends ViewBaseComponent
                         }),
                 );
 
-                const columns: string[] = accountColumnsConfig.map(accountColumnConfig => accountColumnConfig.field);
-                const headers: string[] = accountColumnsConfig.map(accountColumnConfig => this.translocoService.translate(accountColumnConfig.translation));
+                const columns: string[] = accountColumnsConfig().map(accountColumnConfig => accountColumnConfig.field);
+                const headers: string[] = accountColumnsConfig().map(accountColumnConfig => this.translocoService.translate(accountColumnConfig.translation));
 
                 exportRows(
                     rows.objects,

@@ -197,15 +197,14 @@
                                     appearance="outline"
                                     class="col-12"
                                 >
-                                    <mat-label>{{ t('message.TenantSenders') }}</mat-label>
+                                    <mat-label>{{ t('message.TenantManagers') }}</mat-label>
                                     <mat-select
                                         formControlName="tenantIds"
-                                        #tenantsSelect
                                         multiple
                                         auScrollEnd
                                         (scrollEnd)="
-                                            tenantSendersManageAsyncMatSelectSearch({
-                                                asyncMatSelectSearchState: tenantSendersAsyncMatSelectSearchState,
+                                            tenantAsyncMatSelectSearch({
+                                                asyncMatSelectSearchState: tenantManagersAsyncMatSelectSearchState,
                                                 isFromScrollEndEvent: true,
                                                 noResultsFoundTranslation: t('NoResultsFound'),
                                             })
@@ -213,22 +212,22 @@
                                     >
                                         <mat-option>
                                             <ngx-mat-select-search
-                                                [formControl]="tenantSendersAsyncMatSelectSearchState.itemFilterCtrl"
+                                                [formControl]="tenantManagersAsyncMatSelectSearchState.itemFilterCtrl"
                                                 [placeholderLabel]="t('message.FindTenant')"
                                                 [noEntriesFoundLabel]="t('NoResultsFound')"
                                             >
                                             </ngx-mat-select-search>
                                         </mat-option>
-                                        @if (tenantSendersAsyncMatSelectSearchState.selectedItems().size > 0)
+                                        @if (tenantManagersAsyncMatSelectSearchState.selectedItems().size > 0)
                                         {
                                             <mat-optgroup [label]="t('SelectedOptions')">
-                                                @for (tenant of tenantSendersAsyncMatSelectSearchState.selectedItems().values(); track tenant.id)
+                                                @for (tenant of tenantManagersAsyncMatSelectSearchState.selectedItems().values(); track tenant.id)
                                                 {
                                                     <mat-option
                                                         [value]="tenant.id"
                                                         auMatSelectAddSelectedDirective
                                                         [object]="tenant"
-                                                        [selectedItems]="tenantSendersAsyncMatSelectSearchState.selectedItems"
+                                                        [selectedItems]="tenantManagersAsyncMatSelectSearchState.selectedItems"
                                                     >
                                                         {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
                                                     </mat-option>
@@ -236,23 +235,23 @@
                                             </mat-optgroup>
                                             <mat-divider></mat-divider>
                                         }
-                                        @for (tenant of tenantSendersAsyncMatSelectSearchState.filteredItems().values(); track tenant.id)
+                                        @for (tenant of tenantManagersAsyncMatSelectSearchState.filteredItems().values(); track tenant.id)
                                         {
-                                            @if (!tenantSendersAsyncMatSelectSearchState.selectedItems().has(tenant.id))
+                                            @if (!tenantManagersAsyncMatSelectSearchState.selectedItems().has(tenant.id))
                                             {
                                                 <mat-option
                                                     [value]="tenant.id"
                                                     [disabled]="tenant.id === null"
                                                     auMatSelectAddSelectedDirective
                                                     [object]="tenant"
-                                                    [selectedItems]="tenantSendersAsyncMatSelectSearchState.selectedItems"
+                                                    [selectedItems]="tenantManagersAsyncMatSelectSearchState.selectedItems"
                                                 >
                                                     {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
                                                 </mat-option>
                                             }
                                         }
                                     </mat-select>
-                                    @if (tenantSendersAsyncMatSelectSearchState.isLoading())
+                                    @if (tenantManagersAsyncMatSelectSearchState.isLoading())
                                     {
                                         <mat-icon matSuffix>
                                             <mat-spinner diameter="20"></mat-spinner>
@@ -269,11 +268,10 @@
                                 <mat-label>{{ t('message.TenantRecipients') }}</mat-label>
                                 <mat-select
                                     formControlName="tenantRecipientIds"
-                                    #tenantsSelect
                                     multiple
                                     auScrollEnd
                                     (scrollEnd)="
-                                        tenantRecipientsManageAsyncMatSelectSearch({
+                                        tenantAsyncMatSelectSearch({
                                             asyncMatSelectSearchState: tenantRecipientsAsyncMatSelectSearchState,
                                             isFromScrollEndEvent: true,
                                             noResultsFoundTranslation: t('NoResultsFound'),
@@ -348,8 +346,8 @@
                                     </mat-option>
                                     @for (scope of filteredScopeRecipients$ | async; track scope)
                                     {
-                                        <mat-option [value]="scope">
-                                            {{ scope }}
+                                        <mat-option [value]="scope.code">
+                                            {{ scope.name }}
                                         </mat-option>
                                     }
                                 </mat-select>
@@ -475,6 +473,123 @@
                                             {{ t('AddSelected') }}
                                         </button>
                                     </ng-container>
+                                </ng-template>
+                                <ng-template
+                                    auGridSelectMultipleCellValueDialogTemplate
+                                    field="type"
+                                    let-type
+                                    let-columnConfig="columnConfig"
+                                    let-row="row"
+                                >
+                                    {{ t('AccountTypes.' + type) }}
+                                </ng-template>
+                                <ng-template
+                                    auGridSelectMultipleCellValueTemplate
+                                    field="tenants"
+                                    let-tenants
+                                    let-columnConfig="columnConfig"
+                                    let-row="row"
+                                >
+                                   <mat-icon
+                                        fontSet="material-symbols-outlined"
+                                        class="icon-size-6 mr-2 cursor-pointer"
+                                        [matTooltip]="tenants | map:'name' | join"
+                                        aria-hidden="false"
+                                        matBadgeSize="small"
+                                        matBadge="{{ tenants.length > 0 ? tenants.length : '' }}"
+                                    >
+                                        tenancy
+                                    </mat-icon>
+                                </ng-template>
+                                <ng-template
+                                    auGridSelectMultipleCellValueTemplate
+                                    field="scopes"
+                                    let-scopes
+                                    let-columnConfig="columnConfig"
+                                    let-row="row"
+                                >
+                                    <mat-icon
+                                        fontSet="material-symbols-outlined"
+                                        class="icon-size-6 mr-2 cursor-pointer"
+                                        [matTooltip]="scopes | join"
+                                        aria-hidden="false"
+                                        matBadgeSize="small"
+                                        matBadge="{{ scopes?.length > 0 ? scopes.length : '' }}"
+                                    >
+                                        ads_click
+                                    </mat-icon>
+                                </ng-template>
+                                <ng-template
+                                    auGridSelectMultipleCellValueTemplate
+                                    field="tags"
+                                    let-tags
+                                    let-columnConfig="columnConfig"
+                                    let-row="row"
+                                >
+                                    <mat-icon
+                                        fontSet="material-symbols-outlined"
+                                        class="icon-size-6 mr-2 cursor-pointer"
+                                        [matTooltip]="tags | join"
+                                        aria-hidden="false"
+                                        matBadgeSize="small"
+                                        matBadge="{{ tags?.length > 0 ? tags.length : '' }}"
+                                    >
+                                        tag
+                                    </mat-icon>
+                                </ng-template>
+                                <ng-template
+                                    auGridSelectMultipleCellValueDialogTemplate
+                                    field="tenants"
+                                    let-tenants
+                                    let-columnConfig="columnConfig"
+                                    let-row="row"
+                                >
+                                   <mat-icon
+                                        fontSet="material-symbols-outlined"
+                                        class="icon-size-6 mr-2 cursor-pointer"
+                                        [matTooltip]="tenants | map:'name' | join"
+                                        aria-hidden="false"
+                                        matBadgeSize="small"
+                                        matBadge="{{ tenants.length > 0 ? tenants.length : '' }}"
+                                    >
+                                        tenancy
+                                    </mat-icon>
+                                </ng-template>
+                                <ng-template
+                                    auGridSelectMultipleCellValueDialogTemplate
+                                    field="scopes"
+                                    let-scopes
+                                    let-columnConfig="columnConfig"
+                                    let-row="row"
+                                >
+                                    <mat-icon
+                                        fontSet="material-symbols-outlined"
+                                        class="icon-size-6 mr-2 cursor-pointer"
+                                        [matTooltip]="scopes | join"
+                                        aria-hidden="false"
+                                        matBadgeSize="small"
+                                        matBadge="{{ scopes?.length > 0 ? scopes.length : '' }}"
+                                    >
+                                        ads_click
+                                    </mat-icon>
+                                </ng-template>
+                                <ng-template
+                                    auGridSelectMultipleCellValueDialogTemplate
+                                    field="tags"
+                                    let-tags
+                                    let-columnConfig="columnConfig"
+                                    let-row="row"
+                                >
+                                    <mat-icon
+                                        fontSet="material-symbols-outlined"
+                                        class="icon-size-6 mr-2 cursor-pointer"
+                                        [matTooltip]="tags | join"
+                                        aria-hidden="false"
+                                        matBadgeSize="small"
+                                        matBadge="{{ tags?.length > 0 ? tags.length : '' }}"
+                                    >
+                                        tag
+                                    </mat-icon>
                                 </ng-template>
                             </au-grid-select-multiple-elements>
                             <!-- #endregion component to manage account recipients -->

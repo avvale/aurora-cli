@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 
-export const iamMockRoleAccountData = [
+export const iamMockRoleAccountData: any[] = [
     {
         roleId: '27a5d3e8-dff1-4931-b740-67ab46767b13',
         accountId: 'c15b413c-12db-4f5c-987c-7d9cea802f5e',

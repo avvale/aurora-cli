@@ -3,14 +3,15 @@ import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/account';
 import { IamAccount, IamCreateAccount, IamUpdateAccountById, IamUpdateAccounts } from '@apps/iam/iam.types';
 import { ClientService } from '@apps/o-auth/client';
-import { OAuthClient } from '@apps/o-auth/o-auth.types';
+import { OAuthClient, OAuthScope } from '@apps/o-auth/o-auth.types';
 import { GraphQLHeaders, GraphQLService, GridData, QueryStatement, parseGqlFields } from '@aurora';
 import { BehaviorSubject, Observable, first, map, tap } from 'rxjs';
 import { IamRole, IamTag, IamTenant } from '../iam.types';
 import { RoleService } from '../role';
 import { TagService } from '../tag';
 import { TenantService } from '../tenant/tenant.service';
-import { checkPasswordMeAccountQuery, checkUniqueEmailAccountQuery, checkUniqueUsernameAccountQuery, findByIdWithRelationsQuery, getRelations, updateMeAccountMutation } from './account.graphql';
+import { checkPasswordMeAccountQuery, checkUniqueEmailAccountQuery, checkUniqueUsernameAccountQuery, findByIdWithRelationsQuery, getRelations, insertMutation, paginateWithTenantConstraintAccountsQuery, paginationWithRelationsQuery, updateMeAccountMutation } from './account.graphql';
+import { ScopeService } from '@apps/o-auth/scope';
 
 @Injectable({
     providedIn: 'root',
@@ -32,6 +33,7 @@ export class AccountService
         private readonly roleService: RoleService,
         private readonly tagService: TagService,
         private readonly clientService: ClientService,
+        private readonly scopeService: ScopeService,
     ) {}
 
     /**
@@ -143,10 +145,115 @@ export class AccountService
             );
     }
 
+    paginationWithRelations(
+        {
+            graphqlStatement = paginationWithRelationsQuery,
+            query = {},
+            constraint = {},
+            queryGetTenants = {},
+            constraintGetTenants = {},
+            queryGetSelectedTenants = {},
+            constraintGetSelectedTenants = {},
+            queryGetScopes = {},
+            constraintGetScopes = {},
+            queryGetSelectedScopes = {},
+            constraintGetSelectedScopes = {},
+            queryGetTags = {},
+            constraintGetTags = {},
+            queryGetSelectedTags = {},
+            constraintGetSelectedTags = {},
+            headers = {},
+            scope,
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+            queryGetTenants?: QueryStatement;
+            constraintGetTenants?: QueryStatement;
+            queryGetSelectedTenants?: QueryStatement;
+            constraintGetSelectedTenants?: QueryStatement;
+            queryGetScopes?: QueryStatement;
+            constraintGetScopes?: QueryStatement;
+            queryGetSelectedScopes?: QueryStatement;
+            constraintGetSelectedScopes?: QueryStatement;
+            queryGetTags?: QueryStatement;
+            constraintGetTags?: QueryStatement;
+            queryGetSelectedTags?: QueryStatement;
+            constraintGetSelectedTags?: QueryStatement;
+            headers?: GraphQLHeaders;
+            scope?: string;
+        } = {},
+    ): Observable<{
+        pagination: GridData<IamAccount>;
+        iamGetTenants: IamTenant[];
+        iamGetSelectedTenants: IamTenant[];
+        oAuthGetScopes: OAuthScope[];
+        oAuthGetSelectedScopes: OAuthScope[];
+        iamGetTags: IamTag[];
+        iamGetSelectedTags: IamTag[];
+    }>
+    {
+        // get result, map ang throw data across observable
+        return this.graphqlService
+            .client()
+            .watchQuery<{
+                pagination: GridData<IamAccount>;
+                iamGetTenants: IamTenant[];
+                iamGetSelectedTenants: IamTenant[];
+                oAuthGetScopes: OAuthScope[];
+                oAuthGetSelectedScopes: OAuthScope[];
+                iamGetTags: IamTag[];
+                iamGetSelectedTags: IamTag[];
+            }>({
+                query    : graphqlStatement,
+                variables: {
+                    query,
+                    constraint,
+                    queryGetTenants,
+                    constraintGetTenants,
+                    queryGetSelectedTenants,
+                    constraintGetSelectedTenants,
+                    queryGetScopes,
+                    constraintGetScopes,
+                    queryGetSelectedScopes,
+                    constraintGetSelectedScopes,
+                    queryGetTags,
+                    constraintGetTags,
+                    queryGetSelectedTags,
+                    constraintGetSelectedTags,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data),
+                tap(data =>
+                {
+                    if (scope)
+                    {
+                        this.setScopePagination(scope, data.pagination);
+                    }
+                    else
+                    {
+                        this.paginationSubject$.next(data.pagination);
+                    }
+                    // select tenants are obtained by activatedRoute.snapshot.data.data.iamGetSelectedTenants
+                    this.tenantService.tenantsSubject$.next(data.iamGetTenants);
+                    // select tenants are obtained by activatedRoute.snapshot.data.data.oAuthGetSelectedScopes
+                    this.scopeService.scopesSubject$.next(data.oAuthGetScopes);
+                    // select tenants are obtained by activatedRoute.snapshot.data.data.iamGetSelectedTags
+                    this.tagService.tagsSubject$.next(data.iamGetTags);
+                }),
+            );
+    }
+
     findById(
         {
             graphqlStatement = findByIdQuery,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
             scope,
@@ -404,6 +511,31 @@ export class AccountService
             });
     }
 
+    insert<T>(
+        {
+            graphqlStatement = insertMutation,
+            objects = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            objects?: IamCreateAccount[];
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: objects,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
     updateById<T>(
         {
             graphqlStatement = updateByIdMutation,
@@ -616,6 +748,42 @@ export class AccountService
             .pipe(
                 first(),
                 map(result => result.data.iamCheckUniqueEmailAccount),
+            );
+    }
+
+    paginateWithTenantConstraintAccounts(
+        {
+            graphqlStatement = paginateWithTenantConstraintAccountsQuery,
+            query = {},
+            constraint = {},
+            headers = {},
+            scope,
+        }: {
+            graphqlStatement?: DocumentNode;
+            query?: QueryStatement;
+            constraint?: QueryStatement;
+            headers?: GraphQLHeaders;
+            scope?: string;
+        } = {},
+    ): Observable<GridData<IamAccount>>
+    {
+        return this.graphqlService
+            .client()
+            .watchQuery<{ pagination: GridData<IamAccount>; }>({
+                query    : graphqlStatement,
+                variables: {
+                    query,
+                    constraint,
+                },
+                context: {
+                    headers,
+                },
+            })
+            .valueChanges
+            .pipe(
+                first(),
+                map(result => result.data.pagination),
+                tap(pagination => scope ? this.setScopePagination(scope, pagination) : this.paginationSubject$.next(pagination)),
             );
     }
 

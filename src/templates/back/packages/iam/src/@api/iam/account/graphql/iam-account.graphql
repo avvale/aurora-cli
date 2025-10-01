@@ -133,6 +133,11 @@ type Query
         avoidEmails: [GraphQLString]
     ): Boolean!
 
+    iamPaginateWithTenantConstraintAccounts(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+
 }
 
 type Mutation

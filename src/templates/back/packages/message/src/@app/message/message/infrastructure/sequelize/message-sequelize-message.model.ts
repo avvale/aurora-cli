@@ -10,10 +10,6 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
     timestamps: false,
     indexes: [
 		{
-			fields: ['tenantIds'],
-			unique: false,
-		},
-		{
 			fields: ['accountRecipientIds'],
 			unique: false,
 		},

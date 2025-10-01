@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { IamTenant } from '@apps/iam/iam.types';
+import { IamTenant } from '@apps/iam';
 import { tenantColumnsConfig, TenantService } from '@apps/iam/tenant';
-import { ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { ActionService, GridData, GridFiltersStorageService, GridStateService, queryStatementHandler } from '@aurora';
 
 export const tenantPaginationResolver: ResolveFn<GridData<IamTenant>> = (
     route: ActivatedRouteSnapshot,
@@ -24,8 +24,7 @@ export const tenantPaginationResolver: ResolveFn<GridData<IamTenant>> = (
     gridStateService.setExportActionId(gridId, 'iam::tenant.list.export');
 
     return tenantService.pagination({
-        query: QueryStatementHandler
-            .init({ columnsConfig: tenantColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: tenantColumnsConfig })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))
@@ -49,7 +48,8 @@ export const tenantNewResolver: ResolveFn<{
         isViewAction: true,
     });
 
-    return tenantService.getRelations();
+    return tenantService.getRelations({
+    });
 };
 
 export const tenantEditResolver: ResolveFn<{

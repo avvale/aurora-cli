@@ -27,21 +27,35 @@ export class IamSequelizeAccountRepository extends SequelizeRepository<IamAccoun
     ): Promise<void>
     {
         // add many to many relation
-        if (aggregate.roleIds.length > 0)
+        if (aggregate?.roleIds.length > 0)
         {
-            await model.$add(
-                'roles',
-                aggregate.roleIds.value,
-                createOptions,
-            );
+            try
+            {
+                await model.$add(
+                    'roles',
+                    aggregate.roleIds.value,
+                    createOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
-        if (aggregate.tenantIds.length > 0)
+        if (aggregate?.tenantIds.length > 0)
         {
-            await model.$add(
-                'tenants',
-                aggregate.tenantIds.value,
-                createOptions,
-            );
+            try
+            {
+                await model.$add(
+                    'tenants',
+                    aggregate.tenantIds.value,
+                    createOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
     }
 
@@ -53,21 +67,35 @@ export class IamSequelizeAccountRepository extends SequelizeRepository<IamAccoun
     ): Promise<void>
     {
         // set many to many relation
-        if (aggregate.roleIds.isArray())
+        if (aggregate?.roleIds.isArray())
         {
-            await model.$set(
-                'roles',
-                aggregate.roleIds.value,
-                updateByIdOptions,
-            );
+            try
+            {
+                await model.$set(
+                    'roles',
+                    aggregate.roleIds.value,
+                    updateByIdOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
-        if (aggregate.tenantIds.isArray())
+        if (aggregate?.tenantIds.isArray())
         {
-            await model.$set(
-                'tenants',
-                aggregate.tenantIds.value,
-                updateByIdOptions,
-            );
+            try
+            {
+                await model.$set(
+                    'tenants',
+                    aggregate.tenantIds.value,
+                    updateByIdOptions,
+                );
+            }
+            catch (error)
+            {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
     }
 }

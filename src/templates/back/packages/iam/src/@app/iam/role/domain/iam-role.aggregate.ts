@@ -12,7 +12,7 @@ import {
     IamRolePermissionIds,
     IamRoleUpdatedAt,
 } from '@app/iam/role/domain/value-objects';
-import { CQMetadata, LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class IamRole extends AggregateRoot

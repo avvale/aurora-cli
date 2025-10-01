@@ -18,8 +18,10 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            @if (currentViewAction.id === 'iam::tenant.detail.edit')
+            {
             <button
-                *ngIf="currentViewAction.id === 'iam::tenant.detail.edit'"
                 mat-flat-button
                 type="submit"
                 class="ml-3"
@@ -27,19 +29,27 @@
                 color="accent"
                 [disabled]="fg.pristine || ('iam::tenant.detail.update' | getSpinnerFlag | async)"
             >
+                    @if ('iam::tenant.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
                 <mat-icon
-                    *ngIf="!('iam::tenant.detail.update' | getSpinnerFlag | async)"
                     svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
                 >
                 </mat-icon>
-                <mat-icon *ngIf="'iam::tenant.detail.update' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
+                    }
                 {{ t('Update') }}
             </button>
+            }
+
+            @if (currentViewAction.id === 'iam::tenant.detail.new')
+            {
             <button
-                *ngIf="currentViewAction.id === 'iam::tenant.detail.new'"
                 mat-flat-button
                 type="submit"
                 form="iamTenantFormDetail"
@@ -47,17 +57,23 @@
                 color="accent"
                 [disabled]="fg.pristine || ('iam::tenant.detail.create' | getSpinnerFlag | async)"
             >
+                    @if ('iam::tenant.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
                 <mat-icon
-                    *ngIf="!('iam::tenant.detail.create' | getSpinnerFlag | async)"
                     svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
                 >
                 </mat-icon>
-                <mat-icon *ngIf="'iam::tenant.detail.create' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
+                    }
                 {{ t('Create') }}
             </button>
+            }
         </div>
         <!-- / Actions -->
 
@@ -94,12 +110,12 @@
                                 >
                                 </ngx-mat-select-search>
                             </mat-option>
-                            <mat-option
-                                *ngFor="let parentTenant of filteredParentTenants$ | async"
-                                [value]="parentTenant.id"
-                            >
-                                {{ parentTenant.name }}
-                            </mat-option>
+                            @for (parentTenant of filteredParentTenants$ | async; track parentTenant.id)
+                            {
+                                <mat-option [value]="parentTenant.id">
+                                    {{ parentTenant.name }}
+                                </mat-option>
+                            }
                         </mat-select>
                         <mat-error>{{ formErrors?.parentId | async }}</mat-error>
                     </mat-form-field>

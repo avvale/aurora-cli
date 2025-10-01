@@ -6,7 +6,11 @@ import { IamAccount } from '@apps/iam/iam.types';
 import { OAuthClient } from '@apps/o-auth/o-auth.types';
 import { ActionService, GridData, GridFiltersStorageService, GridStateService, queryStatementHandler } from '@aurora';
 
-export const accountPaginationResolver: ResolveFn<GridData<IamAccount>> = (
+export const accountPaginationResolver: ResolveFn<{
+    pagination: GridData<IamAccount>;
+    iamGetTenants: IamTenant[];
+    iamGetSelectedTenants: IamTenant[];
+}> = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
 ) =>
@@ -25,13 +29,55 @@ export const accountPaginationResolver: ResolveFn<GridData<IamAccount>> = (
     gridStateService.setPaginationActionId(gridId, 'iam::account.list.pagination');
     gridStateService.setExportActionId(gridId, 'iam::account.list.export');
 
-    return accountService.pagination({
-        query: queryStatementHandler({ columnsConfig: accountColumnsConfig })
+    return accountService.paginationWithRelations({
+        query: queryStatementHandler({ columnsConfig: accountColumnsConfig() })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))
             .setSearch(gridStateService.getSearchState(gridId))
             .getQueryStatement(),
+        constraint: {
+            include: [
+                {
+                    association: 'user',
+                    required   : true,
+                },
+                {
+                    association: 'tenants',
+                },
+            ],
+            distinct: true,
+        },
+        queryGetTenants: queryStatementHandler()
+            .setPage({ pageIndex: 0, pageSize: 10 })
+            .getQueryStatement(),
+        queryGetSelectedTenants: {
+            where: {
+                id: gridFiltersStorageService
+                    .getColumnFilter(gridId, 'tenants')?.value
+                    || [],
+            },
+        },
+        queryGetScopes: queryStatementHandler()
+            .setPage({ pageIndex: 0, pageSize: 10 })
+            .getQueryStatement(),
+        queryGetSelectedScopes: {
+            where: {
+                code: gridFiltersStorageService
+                    .getColumnFilter(gridId, 'scopes')?.value
+                    || [],
+            },
+        },
+        queryGetTags: queryStatementHandler()
+            .setPage({ pageIndex: 0, pageSize: 10 })
+            .getQueryStatement(),
+        queryGetSelectedTags: {
+            where: {
+                name: gridFiltersStorageService
+                    .getColumnFilter(gridId, 'tags')?.value
+                    || [],
+            },
+        },
     });
 };
 

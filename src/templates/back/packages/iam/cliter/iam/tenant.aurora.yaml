@@ -68,23 +68,51 @@ aggregateProperties:
           - name: tenantId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamTenant
-            modulePath: iam/tenant
+            relationship:
+              type: many-to-one
+              aggregateName: IamTenant
+              modulePath: iam/tenant
+              field: tenant
+              avoidConstraint: true
           - name: accountId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamAccount
-            modulePath: iam/account
+            relationship:
+              type: many-to-one
+              aggregateName: IamAccount
+              modulePath: iam/account
+              field: account
+              avoidConstraint: true
+        excludedOperations:
+          - count
+          - max
+          - min
+          - sum
+          - rawSql
+          - updateAndIncrement
   - name: createdAt
+    description: Timestamp when the tenant was created
     type: timestamp
     nullable: true
   - name: updatedAt
+    description: Timestamp when the tenant was last updated
     type: timestamp
     nullable: true
   - name: deletedAt
+    description: Timestamp when the tenant was deleted
     type: timestamp
     nullable: true
+additionalApis:
+  - path: iam/tenants/get-with-tenant-constraint
+    resolverType: query
+    httpMethod: post
+  - path: iam/tenants/paginate-with-tenant-constraint
+    resolverType: query
+    httpMethod: post
+excludedFiles:
+  - src/@api/iam/tenant/handlers/iam-get-with-tenant-constraint-tenants.handler.spec.ts
+  - src/@api/iam/tenant/handlers/iam-get-with-tenant-constraint-tenants.handler.ts
+  - src/@api/iam/tenant/handlers/iam-paginate-with-tenant-constraint-tenants.handler.spec.ts
+  - src/@api/iam/tenant/handlers/iam-paginate-with-tenant-constraint-tenants.handler.ts

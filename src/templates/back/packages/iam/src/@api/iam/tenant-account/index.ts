@@ -13,7 +13,6 @@ export { IamFindTenantAccountByIdHandler } from './handlers/iam-find-tenant-acco
 export { IamFindTenantAccountHandler } from './handlers/iam-find-tenant-account.handler';
 export { IamUpdateTenantAccountByIdHandler } from './handlers/iam-update-tenant-account-by-id.handler';
 export { IamUpdateTenantsAccountsHandler } from './handlers/iam-update-tenants-accounts.handler';
-export { IamUpsertTenantAccountHandler } from './handlers/iam-upsert-tenant-account.handler';
 export { IamDeleteTenantAccountByIdHandler } from './handlers/iam-delete-tenant-account-by-id.handler';
 export { IamDeleteTenantsAccountsHandler } from './handlers/iam-delete-tenants-accounts.handler';
 
@@ -26,7 +25,6 @@ export { IamFindTenantAccountByIdController } from './controllers/iam-find-tenan
 export { IamFindTenantAccountController } from './controllers/iam-find-tenant-account.controller';
 export { IamUpdateTenantAccountByIdController } from './controllers/iam-update-tenant-account-by-id.controller';
 export { IamUpdateTenantsAccountsController } from './controllers/iam-update-tenants-accounts.controller';
-export { IamUpsertTenantAccountController } from './controllers/iam-upsert-tenant-account.controller';
 export { IamDeleteTenantAccountByIdController } from './controllers/iam-delete-tenant-account-by-id.controller';
 export { IamDeleteTenantsAccountsController } from './controllers/iam-delete-tenants-accounts.controller';
 
@@ -39,7 +37,6 @@ export { IamFindTenantAccountByIdResolver } from './resolvers/iam-find-tenant-ac
 export { IamFindTenantAccountResolver } from './resolvers/iam-find-tenant-account.resolver';
 export { IamUpdateTenantAccountByIdResolver } from './resolvers/iam-update-tenant-account-by-id.resolver';
 export { IamUpdateTenantsAccountsResolver } from './resolvers/iam-update-tenants-accounts.resolver';
-export { IamUpsertTenantAccountResolver } from './resolvers/iam-upsert-tenant-account.resolver';
 export { IamDeleteTenantAccountByIdResolver } from './resolvers/iam-delete-tenant-account-by-id.resolver';
 export { IamDeleteTenantsAccountsResolver } from './resolvers/iam-delete-tenants-accounts.resolver';
 
@@ -52,7 +49,6 @@ import { IamFindTenantAccountByIdController } from './controllers/iam-find-tenan
 import { IamFindTenantAccountController } from './controllers/iam-find-tenant-account.controller';
 import { IamUpdateTenantAccountByIdController } from './controllers/iam-update-tenant-account-by-id.controller';
 import { IamUpdateTenantsAccountsController } from './controllers/iam-update-tenants-accounts.controller';
-import { IamUpsertTenantAccountController } from './controllers/iam-upsert-tenant-account.controller';
 import { IamDeleteTenantAccountByIdController } from './controllers/iam-delete-tenant-account-by-id.controller';
 import { IamDeleteTenantsAccountsController } from './controllers/iam-delete-tenants-accounts.controller';
 
@@ -65,7 +61,6 @@ import { IamFindTenantAccountByIdResolver } from './resolvers/iam-find-tenant-ac
 import { IamFindTenantAccountResolver } from './resolvers/iam-find-tenant-account.resolver';
 import { IamUpdateTenantAccountByIdResolver } from './resolvers/iam-update-tenant-account-by-id.resolver';
 import { IamUpdateTenantsAccountsResolver } from './resolvers/iam-update-tenants-accounts.resolver';
-import { IamUpsertTenantAccountResolver } from './resolvers/iam-upsert-tenant-account.resolver';
 import { IamDeleteTenantAccountByIdResolver } from './resolvers/iam-delete-tenant-account-by-id.resolver';
 import { IamDeleteTenantsAccountsResolver } from './resolvers/iam-delete-tenants-accounts.resolver';
 
@@ -78,7 +73,6 @@ import { IamFindTenantAccountByIdHandler } from './handlers/iam-find-tenant-acco
 import { IamFindTenantAccountHandler } from './handlers/iam-find-tenant-account.handler';
 import { IamUpdateTenantAccountByIdHandler } from './handlers/iam-update-tenant-account-by-id.handler';
 import { IamUpdateTenantsAccountsHandler } from './handlers/iam-update-tenants-accounts.handler';
-import { IamUpsertTenantAccountHandler } from './handlers/iam-upsert-tenant-account.handler';
 import { IamDeleteTenantAccountByIdHandler } from './handlers/iam-delete-tenant-account-by-id.handler';
 import { IamDeleteTenantsAccountsHandler } from './handlers/iam-delete-tenants-accounts.handler';
 
@@ -94,7 +88,6 @@ export const IamTenantAccountApiControllers = [
     IamFindTenantAccountController,
     IamUpdateTenantAccountByIdController,
     IamUpdateTenantsAccountsController,
-    IamUpsertTenantAccountController,
     IamDeleteTenantAccountByIdController,
     IamDeleteTenantsAccountsController,
 ];
@@ -108,7 +101,6 @@ export const IamTenantAccountApiResolvers = [
     IamFindTenantAccountResolver,
     IamUpdateTenantAccountByIdResolver,
     IamUpdateTenantsAccountsResolver,
-    IamUpsertTenantAccountResolver,
     IamDeleteTenantAccountByIdResolver,
     IamDeleteTenantsAccountsResolver,
 ];
@@ -122,7 +114,6 @@ export const IamTenantAccountApiHandlers = [
     IamFindTenantAccountHandler,
     IamUpdateTenantAccountByIdHandler,
     IamUpdateTenantsAccountsHandler,
-    IamUpsertTenantAccountHandler,
     IamDeleteTenantAccountByIdHandler,
     IamDeleteTenantsAccountsHandler,
 ];

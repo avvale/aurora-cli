@@ -77,6 +77,8 @@ En el caso de tener una aplicación multi-tenant deberemos indicar los tenants q
 
 Los tenants que aparecen en el listado, son tenants a los que pertenece el usuario creador del mensaje, no podrá otorgar la gestión del mensaje a un tenant al que no se pertenezca.
 
+El desplegable es paginado y está construido para soportar grandes volumetrías de tenants.
+
 > [!Atención]
 > Esto permitirá a usuarios gestionar el mensaje, no significa que estos usuarios recibirán los mensajes.
 
@@ -84,12 +86,16 @@ Los tenants que aparecen en el listado, son tenants a los que pertenece el usuar
 Introduciremos aquellos tenants que recibirán el mensaje redactado, solo aparecerán aquellos tenants que el usuario creador del mensaje pertenezca.
 En caso de no indicar ningún tenant, automáticamente se seleccionarán todos los tenants a los que pertenece el usuario que está creando el mensaje.
 ![[message-10.jpg]]
+El desplegable es paginado y está construido para soportar grandes volumetrías de tenants.
+
 #### Scope destinatarios
 Dentro del package OAuth podemos generar Scopes asociados a un Client (CLIENT_CREDENTIALS, PASSWORD AUTHORIZATION_CODE), estos scopes son asignados a cuentas de IAM, seleccionando estos scopes estamos incluyendo las cuentas a las que serán enviadas el mensaje.
 ![[message-11.jpg]]
+
 #### Tags destinatarios
 Dentro del package de IAM podemos crear tags que pueden ser asignados a cuentas, seleccionando estos tags en el apartado de tads destinatarios, estamos incluyendo a las cuentas que posean esos tagas.
 ![[message-12.jpg]]
+
 #### Cuentas destinatarias
 Dentro de esta sección podremos seleccionar usuarios de forma unitaria.
 ![[message-13.jpg]]

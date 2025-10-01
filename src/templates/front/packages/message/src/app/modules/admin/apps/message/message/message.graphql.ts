@@ -24,14 +24,7 @@ export const fields = `
 `;
 
 export const relationsFields = `
-    iamGetTags (
-        query: $queryTags
-        constraint: $constraintTags
-    ) {
-        id
-        name
-    }
-    iamGetTenants (
+    iamGetTenants: iamGetWithTenantConstraintTenants (
         query: $queryGetTenants
         constraint: $constraintGetTenants
     ) {
@@ -44,12 +37,42 @@ export const relationsFields = `
         }
         isActive
     }
-    oAuthFindClientById (
-        id: $clientId
-        constraint: $constraintClient
+    oAuthGetScopes (
+        query: $queryGetScopes
+        constraint: $constraintGetScopes
     ) {
         id
-        scopeOptions
+        code
+        name
+    }
+    iamGetTags (
+        query: $queryGetTags
+        constraint: $constraintGetTags
+    ) {
+        id
+        name
+    }
+    iamGetSelectedTenants: iamGetWithTenantConstraintTenants (
+        query: $queryGetSelectedTenants
+        constraint: $constraintGetSelectedTenants
+    ) {
+        id
+        name
+    }
+    oAuthGetSelectedScopes: oAuthGetScopes (
+        query: $queryGetSelectedScopes
+        constraint: $constraintGetSelectedScopes
+    ) {
+        id
+        code
+        name
+    }
+    iamGetSelectedTags: iamGetTags (
+        query: $queryGetSelectedTags
+        constraint: $constraintGetSelectedTags
+    ) {
+        id
+        name
     }
 `;
 
@@ -87,12 +110,18 @@ export const getQuery = gql`
 
 export const getRelations = gql`
     query MessageGetMessagesRelations(
-        $queryTags: QueryStatement
-        $constraintTags: QueryStatement
         $queryGetTenants: QueryStatement
         $constraintGetTenants: QueryStatement
-        $clientId: ID
-        $constraintClient: QueryStatement
+        $queryGetScopes: QueryStatement
+        $constraintGetScopes: QueryStatement
+        $queryGetTags: QueryStatement
+        $constraintGetTags: QueryStatement
+        $queryGetSelectedTenants: QueryStatement
+        $constraintGetSelectedTenants: QueryStatement
+        $queryGetSelectedScopes: QueryStatement
+        $constraintGetSelectedScopes: QueryStatement
+        $queryGetSelectedTags: QueryStatement
+        $constraintGetSelectedTags: QueryStatement
     ) {
         ${relationsFields}
     }
@@ -117,12 +146,18 @@ export const findByIdWithRelationsQuery = gql`
     query MessageFindMessageByIdWithRelations (
         $id: ID
         $constraint: QueryStatement
-        $queryTags: QueryStatement
-        $constraintTags: QueryStatement
         $queryGetTenants: QueryStatement
         $constraintGetTenants: QueryStatement
-        $clientId: ID
-        $constraintClient: QueryStatement
+        $queryGetScopes: QueryStatement
+        $constraintGetScopes: QueryStatement
+        $queryGetTags: QueryStatement
+        $constraintGetTags: QueryStatement
+        $queryGetSelectedTenants: QueryStatement
+        $constraintGetSelectedTenants: QueryStatement
+        $queryGetSelectedScopes: QueryStatement
+        $constraintGetSelectedScopes: QueryStatement
+        $queryGetSelectedTags: QueryStatement
+        $constraintGetSelectedTags: QueryStatement
     ) {
         object: messageFindMessageById (
             id: $id

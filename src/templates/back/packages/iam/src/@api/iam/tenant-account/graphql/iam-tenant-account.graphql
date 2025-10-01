@@ -2,8 +2,8 @@
 type IamTenantAccount
 {
     tenantId: ID!
-    accountId: ID!
     tenant: IamTenant
+    accountId: ID!
     account: IamAccount
 }
 
@@ -70,10 +70,6 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [IamTenantAccount]!
-
-    iamUpsertTenantAccount(
-        payload: IamUpdateTenantAccountByIdInput!
-    ): IamTenantAccount
 
     iamDeleteTenantAccountById(
         tenantId: ID!

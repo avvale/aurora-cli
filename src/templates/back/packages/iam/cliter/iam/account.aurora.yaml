@@ -101,17 +101,31 @@ aggregateProperties:
           - name: roleId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamRole
-            modulePath: iam/role
+            relationship:
+              type: many-to-one
+              aggregateName: IamRole
+              modulePath: iam/role
+              field: role
+              avoidConstraint: true
           - name: accountId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamAccount
-            modulePath: iam/account
+            relationship:
+              type: many-to-one
+              aggregateName: IamAccount
+              modulePath: iam/account
+              field: account
+              avoidConstraint: true
+        excludedOperations:
+          - count
+          - max
+          - min
+          - sum
+          - rawSql
+          - updateAndIncrement
+          - upsert
   - name: tenants
     type: relationship
     nullable: true
@@ -132,17 +146,31 @@ aggregateProperties:
           - name: tenantId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamTenant
-            modulePath: iam/tenant
+            relationship:
+              type: many-to-one
+              aggregateName: IamTenant
+              modulePath: iam/tenant
+              field: tenant
+              avoidConstraint: true
           - name: accountId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamAccount
-            modulePath: iam/account
+            relationship:
+              type: many-to-one
+              aggregateName: IamAccount
+              modulePath: iam/account
+              field: account
+              avoidConstraint: true
+        excludedOperations:
+          - count
+          - max
+          - min
+          - sum
+          - rawSql
+          - updateAndIncrement
+          - upsert
     webComponent:
       type: multiple-select
   - name: user
@@ -174,6 +202,17 @@ additionalApis:
   - path: iam/account/check-unique-email
     resolverType: query
     httpMethod: post
+  - path: iam/accounts/paginate-with-tenant-constraint
+    resolverType: query
+    httpMethod: post
+excludedOperations:
+  - count
+  - max
+  - min
+  - sum
+  - rawSql
+  - updateAndIncrement
+  - upsert
 excludedFiles:
   - src/@api/iam/account/resolvers/iam-create-accounts.resolver.ts
   - src/@api/iam/account/resolvers/iam-create-accounts.resolver.spec.ts
@@ -181,3 +220,5 @@ excludedFiles:
   - src/@api/iam/account/controllers/iam-create-accounts.controller.spec.ts
   - src/@api/iam/account/handlers/iam-create-accounts.handler.ts
   - src/@api/iam/account/handlers/iam-create-accounts.handler.spec.ts
+  - src/@api/iam/account/handlers/iam-paginate-with-tenant-constraint-accounts.handler.spec.ts
+  - src/@api/iam/account/handlers/iam-paginate-with-tenant-constraint-accounts.handler.ts

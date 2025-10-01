@@ -1,12 +1,11 @@
-import { NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { IamTenant } from '@apps/iam/iam.types';
 import { TenantService } from '@apps/iam/tenant';
-import { Action, Crumb, defaultDetailImports, log, mapActions, SelectSearchService, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
+import { Action, Crumb, defaultDetailImports, log, mapActions, SelectSearchService, SnackBarInvalidFormComponent, Utils, uuid, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, ReplaySubject, takeUntil } from 'rxjs';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
@@ -17,7 +16,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ...defaultDetailImports,
-        MatCheckboxModule, MatSelectModule, NgForOf,
+        MatCheckboxModule, MatSelectModule,
         NgxMatSelectSearchModule,
     ],
 })
@@ -32,7 +31,7 @@ export class TenantDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: IamTenant;
+    managedObject: WritableSignal<IamTenant> = signal(null);
 
     // relationships
     parentTenants$: Observable<IamTenant[]>;
@@ -104,12 +103,12 @@ export class TenantDetailComponent extends ViewDetailComponent
                 SnackBarInvalidFormComponent,
                 {
                     data: {
-                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        message: `${this.translocoService.translate('InvalidForm')}`,
                         textButton: `${this.translocoService.translate('InvalidFormOk')}`,
                     },
-                    panelClass      : 'error-snackbar',
+                    panelClass: 'error-snackbar',
                     verticalPosition: 'top',
-                    duration        : 10000,
+                    duration: 10000,
                 },
             );
             return;
@@ -149,7 +148,7 @@ export class TenantDetailComponent extends ViewDetailComponent
         {
             /* #region common actions */
             case 'iam::tenant.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'iam::tenant.detail.edit':
@@ -158,7 +157,7 @@ export class TenantDetailComponent extends ViewDetailComponent
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item =>
                     {
-                        this.managedObject = item;
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
                 break;
@@ -178,7 +177,7 @@ export class TenantDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
@@ -205,7 +204,7 @@ export class TenantDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 

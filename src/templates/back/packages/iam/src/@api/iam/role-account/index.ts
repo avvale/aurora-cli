@@ -13,7 +13,6 @@ export { IamFindRoleAccountByIdHandler } from './handlers/iam-find-role-account-
 export { IamFindRoleAccountHandler } from './handlers/iam-find-role-account.handler';
 export { IamUpdateRoleAccountByIdHandler } from './handlers/iam-update-role-account-by-id.handler';
 export { IamUpdateRolesAccountsHandler } from './handlers/iam-update-roles-accounts.handler';
-export { IamUpsertRoleAccountHandler } from './handlers/iam-upsert-role-account.handler';
 export { IamDeleteRoleAccountByIdHandler } from './handlers/iam-delete-role-account-by-id.handler';
 export { IamDeleteRolesAccountsHandler } from './handlers/iam-delete-roles-accounts.handler';
 
@@ -26,7 +25,6 @@ export { IamFindRoleAccountByIdController } from './controllers/iam-find-role-ac
 export { IamFindRoleAccountController } from './controllers/iam-find-role-account.controller';
 export { IamUpdateRoleAccountByIdController } from './controllers/iam-update-role-account-by-id.controller';
 export { IamUpdateRolesAccountsController } from './controllers/iam-update-roles-accounts.controller';
-export { IamUpsertRoleAccountController } from './controllers/iam-upsert-role-account.controller';
 export { IamDeleteRoleAccountByIdController } from './controllers/iam-delete-role-account-by-id.controller';
 export { IamDeleteRolesAccountsController } from './controllers/iam-delete-roles-accounts.controller';
 
@@ -39,7 +37,6 @@ export { IamFindRoleAccountByIdResolver } from './resolvers/iam-find-role-accoun
 export { IamFindRoleAccountResolver } from './resolvers/iam-find-role-account.resolver';
 export { IamUpdateRoleAccountByIdResolver } from './resolvers/iam-update-role-account-by-id.resolver';
 export { IamUpdateRolesAccountsResolver } from './resolvers/iam-update-roles-accounts.resolver';
-export { IamUpsertRoleAccountResolver } from './resolvers/iam-upsert-role-account.resolver';
 export { IamDeleteRoleAccountByIdResolver } from './resolvers/iam-delete-role-account-by-id.resolver';
 export { IamDeleteRolesAccountsResolver } from './resolvers/iam-delete-roles-accounts.resolver';
 
@@ -52,7 +49,6 @@ import { IamFindRoleAccountByIdController } from './controllers/iam-find-role-ac
 import { IamFindRoleAccountController } from './controllers/iam-find-role-account.controller';
 import { IamUpdateRoleAccountByIdController } from './controllers/iam-update-role-account-by-id.controller';
 import { IamUpdateRolesAccountsController } from './controllers/iam-update-roles-accounts.controller';
-import { IamUpsertRoleAccountController } from './controllers/iam-upsert-role-account.controller';
 import { IamDeleteRoleAccountByIdController } from './controllers/iam-delete-role-account-by-id.controller';
 import { IamDeleteRolesAccountsController } from './controllers/iam-delete-roles-accounts.controller';
 
@@ -65,7 +61,6 @@ import { IamFindRoleAccountByIdResolver } from './resolvers/iam-find-role-accoun
 import { IamFindRoleAccountResolver } from './resolvers/iam-find-role-account.resolver';
 import { IamUpdateRoleAccountByIdResolver } from './resolvers/iam-update-role-account-by-id.resolver';
 import { IamUpdateRolesAccountsResolver } from './resolvers/iam-update-roles-accounts.resolver';
-import { IamUpsertRoleAccountResolver } from './resolvers/iam-upsert-role-account.resolver';
 import { IamDeleteRoleAccountByIdResolver } from './resolvers/iam-delete-role-account-by-id.resolver';
 import { IamDeleteRolesAccountsResolver } from './resolvers/iam-delete-roles-accounts.resolver';
 
@@ -78,7 +73,6 @@ import { IamFindRoleAccountByIdHandler } from './handlers/iam-find-role-account-
 import { IamFindRoleAccountHandler } from './handlers/iam-find-role-account.handler';
 import { IamUpdateRoleAccountByIdHandler } from './handlers/iam-update-role-account-by-id.handler';
 import { IamUpdateRolesAccountsHandler } from './handlers/iam-update-roles-accounts.handler';
-import { IamUpsertRoleAccountHandler } from './handlers/iam-upsert-role-account.handler';
 import { IamDeleteRoleAccountByIdHandler } from './handlers/iam-delete-role-account-by-id.handler';
 import { IamDeleteRolesAccountsHandler } from './handlers/iam-delete-roles-accounts.handler';
 
@@ -94,7 +88,6 @@ export const IamRoleAccountApiControllers = [
     IamFindRoleAccountController,
     IamUpdateRoleAccountByIdController,
     IamUpdateRolesAccountsController,
-    IamUpsertRoleAccountController,
     IamDeleteRoleAccountByIdController,
     IamDeleteRolesAccountsController,
 ];
@@ -108,7 +101,6 @@ export const IamRoleAccountApiResolvers = [
     IamFindRoleAccountResolver,
     IamUpdateRoleAccountByIdResolver,
     IamUpdateRolesAccountsResolver,
-    IamUpsertRoleAccountResolver,
     IamDeleteRoleAccountByIdResolver,
     IamDeleteRolesAccountsResolver,
 ];
@@ -122,7 +114,6 @@ export const IamRoleAccountApiHandlers = [
     IamFindRoleAccountHandler,
     IamUpdateRoleAccountByIdHandler,
     IamUpdateRolesAccountsHandler,
-    IamUpsertRoleAccountHandler,
     IamDeleteRoleAccountByIdHandler,
     IamDeleteRolesAccountsHandler,
 ];

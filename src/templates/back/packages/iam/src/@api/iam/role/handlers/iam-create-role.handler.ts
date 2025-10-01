@@ -10,7 +10,7 @@ export class IamCreateRoleHandler
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
-    ) { }
+    ) {}
 
     async main(
         payload: IamCreateRoleInput | IamCreateRoleDto,

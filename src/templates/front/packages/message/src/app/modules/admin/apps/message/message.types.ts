@@ -3,9 +3,10 @@ export interface MessageMessage
     id: string;
     tenantIds?;
     status: string;
-    accountRecipientIds?;
-    tenantRecipientIds?;
-    scopeRecipients?;
+    accountRecipientIds?: string[];
+    tenantRecipientIds?: string[];
+    scopeRecipients?: string[];
+    tagRecipients?: string[];
     sendAt?: string;
     isImportant: boolean;
     subject: string;

@@ -1,4 +1,4 @@
-import { IamCreatedTenantAccountEvent, IamCreatedTenantsAccountsEvent, IamDeletedTenantAccountEvent, IamDeletedTenantsAccountsEvent, IamTenantAccount, IamUpdatedAndIncrementedTenantAccountEvent, IamUpdatedAndIncrementedTenantsAccountsEvent, IamUpdatedTenantAccountEvent, IamUpdatedTenantsAccountsEvent } from '@app/iam/tenant-account';
+import { IamCreatedTenantAccountEvent, IamCreatedTenantsAccountsEvent, IamDeletedTenantAccountEvent, IamDeletedTenantsAccountsEvent, IamTenantAccount, IamUpdatedTenantAccountEvent, IamUpdatedTenantsAccountsEvent } from '@app/iam/tenant-account';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
@@ -40,23 +40,6 @@ export class IamAddTenantsAccountsContextEvent extends AggregateRoot
             new IamUpdatedTenantsAccountsEvent({
                 payload: this.aggregateRoots.map(tenantAccount =>
                     new IamUpdatedTenantAccountEvent({
-                        payload: {
-                            tenantId: tenantAccount.tenantId.value,
-                            accountId: tenantAccount.accountId.value,
-                        },
-                    }),
-                ),
-                cQMetadata: this.cQMetadata,
-            }),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new IamUpdatedAndIncrementedTenantsAccountsEvent({
-                payload: this.aggregateRoots.map(tenantAccount =>
-                    new IamUpdatedAndIncrementedTenantAccountEvent({
                         payload: {
                             tenantId: tenantAccount.tenantId.value,
                             accountId: tenantAccount.accountId.value,

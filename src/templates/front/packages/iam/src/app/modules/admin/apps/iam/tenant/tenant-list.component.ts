@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { IamTenant } from '@apps/iam/iam.types';
 import { tenantColumnsConfig, TenantService } from '@apps/iam/tenant';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, queryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
+export const tenantMainGridListId = 'iam::tenant.list.mainGridList';
+
 @Component({
-    selector: 'iam-tenant-list',
-    templateUrl: './tenant-list.component.html',
-    encapsulation: ViewEncapsulation.None,
+    selector       : 'iam-tenant-list',
+    templateUrl    : './tenant-list.component.html',
+    encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
+    imports        : [
         ...defaultListImports,
     ],
 })
@@ -22,7 +24,7 @@ export class TenantListComponent extends ViewBaseComponent
         { translation: 'App', routerLink: ['/']},
         { translation: 'iam.Tenants' },
     ];
-    gridId: string = 'iam::tenant.list.mainGridList';
+    gridId: string = tenantMainGridListId;
     gridData$: Observable<GridData<IamTenant>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
@@ -76,6 +78,7 @@ export class TenantListComponent extends ViewBaseComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'iam::tenant.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
@@ -96,8 +99,7 @@ export class TenantListComponent extends ViewBaseComponent
                     this.tenantService.pagination({
                         query: action.meta.query ?
                             action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: tenantColumnsConfig })
+                            queryStatementHandler({ columnsConfig: tenantColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
@@ -173,14 +175,8 @@ export class TenantListComponent extends ViewBaseComponent
                         }),
                 );
 
-                // format export rows
-                (rows.objects as any[]).forEach(row =>
-                {
-                    // row.id = row.id;
-                });
-
                 const columns: string[] = tenantColumnsConfig.map(tenantColumnConfig => tenantColumnConfig.field);
-                const headers: string[] = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const headers: string[] = tenantColumnsConfig.map(tenantColumnConfig => this.translocoService.translate(tenantColumnConfig.translation));
 
                 exportRows(
                     rows.objects,
@@ -190,6 +186,7 @@ export class TenantListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+                /* #endregion common actions */
         }
     }
 }
