@@ -21,6 +21,8 @@ aggregateProperties:
     arrayOptions:
       type: id
     nullable: true
+    index: index
+    indexUsing: GIN
   - name: status
     type: enum
     enumOptions:

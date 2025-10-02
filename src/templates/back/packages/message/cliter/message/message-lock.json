@@ -439,7 +439,7 @@
         },
         {
             "path": "src/@app/message/message/infrastructure/mock/message-mock-message.data.ts",
-            "integrity": "sha1:e0b232a4a0e00ff82d31de59f10d864d5fa7908a"
+            "integrity": "sha1:a04b105e5ac2a4900ce6afd99eccf7a012c4c478"
         },
         {
             "path": "src/@app/message/message/infrastructure/mock/message-mock-message.repository.ts",
@@ -451,7 +451,7 @@
         },
         {
             "path": "src/@app/message/message/infrastructure/sequelize/message-sequelize-message.model.ts",
-            "integrity": "sha1:9a94e10b281e7c96f0713ce58ff38ad403756ab0"
+            "integrity": "sha1:fc8e708945aae0dc69d96096777b8f7f034df018"
         },
         {
             "path": "src/@app/message/message/infrastructure/sequelize/message-sequelize-message.repository.ts",
@@ -951,7 +951,7 @@
         },
         {
             "path": "postman/message/message.message.postman.json",
-            "integrity": "sha1:289ff72678b48bd329c1e1096cc9f828efebe16c"
+            "integrity": "sha1:28207fa00a83febd6b5c7bea953fdf206e8f16d0"
         }
     ]
 }
