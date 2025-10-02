@@ -39,7 +39,22 @@ export class MessageUpdateMessageByIdHandler
         if ('tenantRecipientIds' in dataToUpdate)
         {
             // At a minimum, it must have the tenants of the account that is creating the message.
-            dataToUpdate.tenantRecipientIds = !Array.isArray(payload.tenantRecipientIds) || payload.tenantRecipientIds.length === 0 ?
+            // We only set tenantIds if they are not included in the payload and if there are no
+            // account or tenant recipients in the payload.
+            // If there are recipient accounts, the message-check-messages-inbox.handler.ts process
+            // filters them and only if there are no tenants but there are recipient accounts, it is sent to those accounts.
+            dataToUpdate.tenantRecipientIds = (
+
+                (
+                    !Array.isArray(payload.tenantRecipientIds) ||
+                    payload.tenantRecipientIds.length === 0
+                )
+                &&
+                (
+                    !Array.isArray(payload.accountRecipientIds) ||
+                    payload.accountRecipientIds.length === 0
+                )
+            ) ?
                 payload.tenantRecipientIds = account.dTenants :
                 payload.tenantRecipientIds;
         }

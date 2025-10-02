@@ -2,6 +2,7 @@ import { MessageMessage } from '@api/graphql';
 import { MessageMessageDto } from '@api/message/message';
 import { IamAccountResponse } from '@app/iam/account';
 import { MessageDeleteMessageByIdCommand, MessageFindMessageByIdQuery } from '@app/message/message';
+import { MessageDeleteOutboxesCommand } from '@app/message/outbox';
 import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, storagePublicAbsolutePath } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { existsSync, unlinkSync } from 'node:fs';
@@ -33,6 +34,22 @@ export class MessageDeleteMessageByIdHandler
         await this.commandBus.dispatch(new MessageDeleteMessageByIdCommand(
             id,
             constraint,
+            {
+                timezone,
+                repositoryOptions: {
+                    auditing,
+                },
+            },
+        ));
+
+        // delete message from outbox too
+        await this.commandBus.dispatch(new MessageDeleteOutboxesCommand(
+            {
+                where: {
+                    messageId: id,
+                },
+            },
+            {},
             {
                 timezone,
                 repositoryOptions: {

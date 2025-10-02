@@ -12,18 +12,22 @@ import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, A
 		{
 			fields: ['accountRecipientIds'],
 			unique: false,
+            using: 'GIN',
 		},
 		{
 			fields: ['tenantRecipientIds'],
 			unique: false,
+            using: 'GIN',
 		},
 		{
 			fields: ['scopeRecipients'],
 			unique: false,
+            using: 'GIN',
 		},
 		{
 			fields: ['tagRecipients'],
 			unique: false,
+            using: 'GIN',
 		},
     ],
 })

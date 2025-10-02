@@ -10,6 +10,7 @@ export class MessageInboxAccountCode extends StringValueObject
             name       : 'MessageInboxAccountCode',
             nullable   : true,
             undefinable: true,
+            maxLength  : 128,
         }, validationRules));
     }
 }

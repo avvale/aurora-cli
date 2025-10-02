@@ -23,9 +23,21 @@ export class MessageCreateMessageHandler
     ): Promise<MessageMessage | MessageMessageDto>
     {
         // At a minimum, it must have the tenants of the account that is creating the message.
+        // We only set tenantIds if they are not included in the payload and if there are no
+        // account or tenant recipients in the payload.
+        // If there are recipient accounts, the message-check-messages-inbox.handler.ts process
+        // filters them and only if there are no tenants but there are recipient accounts, it is sent to those accounts.
         if (
-            !Array.isArray(payload.tenantRecipientIds) ||
-            payload.tenantRecipientIds.length === 0
+
+            (
+                !Array.isArray(payload.tenantRecipientIds) ||
+                payload.tenantRecipientIds.length === 0
+            )
+            &&
+            (
+                !Array.isArray(payload.accountRecipientIds) ||
+                payload.accountRecipientIds.length === 0
+            )
         )
         {
             payload.tenantRecipientIds = account.dTenants;

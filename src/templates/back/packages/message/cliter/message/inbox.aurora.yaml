@@ -38,7 +38,7 @@ aggregateProperties:
     index: index
   - name: accountCode
     type: varchar
-    length: 128
+    maxLength: 128
     nullable: true
     index: index
   - name: isImportant

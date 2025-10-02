@@ -85,13 +85,13 @@ export class MessageDetailComponent extends ViewDetailComponent
     tenantDialogAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTenant>();
     tenantAsyncMatSelectSearch = manageAsyncMatSelectSearch({
         columnFilter: {
-            id      : uuid(),
-            field   : 'IamTenant.name::unaccent',
-            type    : ColumnDataType.STRING,
+            id: uuid(),
+            field: 'IamTenant.name::unaccent',
+            type: ColumnDataType.STRING,
             operator: Operator.iLike,
-            value   : null,
+            value: null,
         },
-        paginationService   : this.tenantService,
+        paginationService: this.tenantService,
         paginationGraphqlStatement: paginateWithTenantConstraintTenantsQuery,
         paginationConstraint: {
             include: [
@@ -108,11 +108,11 @@ export class MessageDetailComponent extends ViewDetailComponent
     scopeDialogAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, OAuthScope>();
     scopeManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
         columnFilter: {
-            id      : uuid(),
-            field   : 'OAuthScope.name::unaccent',
-            type    : ColumnDataType.STRING,
+            id: uuid(),
+            field: 'OAuthScope.name::unaccent',
+            type: ColumnDataType.STRING,
             operator: Operator.iLike,
-            value   : null,
+            value: null,
         },
         paginationService: this.scopeService,
     });
@@ -123,11 +123,11 @@ export class MessageDetailComponent extends ViewDetailComponent
     tagDialogAccountRecipientsAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTag>();
     tagManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
         columnFilter: {
-            id      : uuid(),
-            field   : 'IamTag.name::unaccent',
-            type    : ColumnDataType.STRING,
+            id: uuid(),
+            field: 'IamTag.name::unaccent',
+            type: ColumnDataType.STRING,
             operator: Operator.iLike,
-            value   : null,
+            value: null,
         },
         paginationService: this.tagService,
     });
@@ -180,18 +180,18 @@ export class MessageDetailComponent extends ViewDetailComponent
         },
         ...accountColumnsConfig({
             translocoService: this.translocoService,
-            tenantsAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.tenantDialogAccountRecipientsAsyncMatSelectSearchState,
-                manageAsyncMatSelectSearch: this.tenantAsyncMatSelectSearch,
-            },
-            scopesAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.scopeDialogAccountRecipientsAsyncMatSelectSearchState,
-                manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
-            },
-            tagsAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.tagDialogAccountRecipientsAsyncMatSelectSearchState,
-                manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
-            },
+            tenantsAsyncMatSelectSearch: Object.defineProperties({}, {
+                asyncMatSelectSearchState : { value: this.tenantDialogAccountRecipientsAsyncMatSelectSearchState, enumerable: false },
+                manageAsyncMatSelectSearch: { value: this.tenantAsyncMatSelectSearch },
+            }),
+            scopesAsyncMatSelectSearch: Object.defineProperties({}, {
+                asyncMatSelectSearchState : { value: this.scopeDialogAccountRecipientsAsyncMatSelectSearchState, enumerable: false },
+                manageAsyncMatSelectSearch: { value: this.scopeManageAsyncMatSelectSearch },
+            }),
+            tagsAsyncMatSelectSearch: Object.defineProperties({}, {
+                asyncMatSelectSearchState : { value: this.tagDialogAccountRecipientsAsyncMatSelectSearchState, enumerable: false },
+                manageAsyncMatSelectSearch: { value: this.tagManageAsyncMatSelectSearch },
+            }),
         }),
     ];
 
@@ -232,18 +232,18 @@ export class MessageDetailComponent extends ViewDetailComponent
         },
         ...accountColumnsConfig({
             translocoService: this.translocoService,
-            tenantsAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.tenantAccountRecipientsAsyncMatSelectSearchState,
-                manageAsyncMatSelectSearch: this.tenantAsyncMatSelectSearch,
-            },
-            scopesAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.scopeAccountRecipientsAsyncMatSelectSearchState,
-                manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
-            },
-            tagsAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.tagAccountRecipientsAsyncMatSelectSearchState,
-                manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
-            },
+            tenantsAsyncMatSelectSearch: Object.defineProperties({}, {
+                asyncMatSelectSearchState : { value: this.tenantAccountRecipientsAsyncMatSelectSearchState, enumerable: false },
+                manageAsyncMatSelectSearch: { value: this.tenantAsyncMatSelectSearch },
+            }),
+            scopesAsyncMatSelectSearch: Object.defineProperties({}, {
+                asyncMatSelectSearchState : { value: this.scopeAccountRecipientsAsyncMatSelectSearchState, enumerable: false },
+                manageAsyncMatSelectSearch: { value: this.scopeManageAsyncMatSelectSearch },
+            }),
+            tagsAsyncMatSelectSearch: Object.defineProperties({}, {
+                asyncMatSelectSearchState : { value: this.tagAccountRecipientsAsyncMatSelectSearchState, enumerable: false },
+                manageAsyncMatSelectSearch: { value: this.tagManageAsyncMatSelectSearch },
+            }),
         }),
     ];
     /* #endregion variables to manage grid-select-multiple-elements accountRecipientIds */

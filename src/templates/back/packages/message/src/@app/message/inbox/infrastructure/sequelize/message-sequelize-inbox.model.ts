@@ -176,7 +176,7 @@ export class MessageInboxModel extends Model<MessageInboxModel>
     @Column({
         field: 'accountCode',
         allowNull: true,
-        type: DataTypes.STRING(),
+        type: DataTypes.STRING(128),
     })
     accountCode: string;
 

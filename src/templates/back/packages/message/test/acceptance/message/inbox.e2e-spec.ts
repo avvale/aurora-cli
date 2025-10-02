@@ -416,19 +416,19 @@ describe('inbox', () =>
             });
     });
 
-    test('/REST:POST message/inbox/create - Got 400 Conflict, InboxAccountCode is not allowed, must be a length of 128', () =>
+    test('/REST:POST message/inbox/create - Got 400 Conflict, InboxAccountCode is too large, has a maximum length of 128', () =>
     {
         return request(app.getHttpServer())
             .post('/message/inbox/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                accountCode: '*',
+                accountCode: '*********************************************************************************************************************************',
             })
             .expect(400)
             .then(res =>
             {
-                expect(res.body.message).toContain('Value for MessageInboxAccountCode is not allowed, must be a length of 128');
+                expect(res.body.message).toContain('Value for MessageInboxAccountCode is too large, has a maximum length of 128');
             });
     });
 

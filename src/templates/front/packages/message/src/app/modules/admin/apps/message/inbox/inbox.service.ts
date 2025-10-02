@@ -1,4 +1,4 @@
-import { checkMessagesInboxMutation, countUnreadCustomerMessageInboxQuery, deleteCustomerMessageInboxMutation, findCustomerMessageInboxQuery, paginateCustomerMessagesInboxQuery, readCustomerMessageInboxMutation, unreadCustomerMessageInboxMutation } from './inbox.graphql';
+import { checkMessagesInboxMutation, countUnreadCustomerMessageInboxQuery, deleteCustomerMessageInboxMutation, findCustomerMessageInboxQuery, insertMutation, paginateCustomerMessagesInboxQuery, readCustomerMessageInboxMutation, unreadCustomerMessageInboxMutation } from './inbox.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
 import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/message/inbox';
@@ -138,7 +138,7 @@ export class InboxService
     findById(
         {
             graphqlStatement = findByIdQuery,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
             scope,
@@ -280,6 +280,31 @@ export class InboxService
             });
     }
 
+    insert<T>(
+        {
+            graphqlStatement = insertMutation,
+            objects = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            objects?: MessageCreateInbox[];
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: objects,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
     updateById<T>(
         {
             graphqlStatement = updateByIdMutation,
@@ -339,7 +364,7 @@ export class InboxService
     deleteById<T>(
         {
             graphqlStatement = deleteByIdMutation,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
         }: {

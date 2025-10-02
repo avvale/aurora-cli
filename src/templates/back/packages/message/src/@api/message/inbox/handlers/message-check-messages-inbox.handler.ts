@@ -115,6 +115,9 @@ export class MessageCheckMessagesInboxHandler
                 },
             ));
 
+            // If there are no group recipients (tenant, scope, or tag), but there are account recipients and the account is not in the
+            // account recipients, the message is discarded.
+            // For cases with group recipients (tenant, scope, or tag), they have already been filtered in the query.
             const outboxMessages = outboxMessagesResponse
                 .filter(outboxMessage =>
                     !(

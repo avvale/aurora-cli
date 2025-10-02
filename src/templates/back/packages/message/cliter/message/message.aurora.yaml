@@ -34,12 +34,14 @@ aggregateProperties:
       type: id
     nullable: true
     index: index
+    indexUsing: GIN
   - name: tenantRecipientIds
     type: array
     arrayOptions:
       type: id
     nullable: true
     index: index
+    indexUsing: GIN
   - name: scopeRecipients
     type: array
     arrayOptions:
@@ -47,6 +49,7 @@ aggregateProperties:
       maxLength: 64
     nullable: true
     index: index
+    indexUsing: GIN
   - name: tagRecipients
     type: array
     arrayOptions:
@@ -54,6 +57,7 @@ aggregateProperties:
       maxLength: 64
     nullable: true
     index: index
+    indexUsing: GIN
   - name: sendAt
     type: timestamp
     nullable: true

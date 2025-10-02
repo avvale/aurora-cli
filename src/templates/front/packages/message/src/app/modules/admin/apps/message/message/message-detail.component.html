@@ -383,17 +383,17 @@
                             <!-- #region component to manage account recipients -->
                             <au-grid-select-multiple-elements
                                 class="col-12 mt-0"
+                                [id]="messageAccountsGridId"
+                                [label]="t('message.AccountRecipients')"
+                                [gridId]="messageAccountsGridId"
+                                [originColumnsConfig]="originMessageAccountsColumnsConfig"
                                 [columnsConfig]="messageAccountsColumnsConfig$ | async"
+                                [gridData]="messageAccountsGridData$ | async"
+                                [gridState]="messageAccountsGridState"
                                 [dialogColumnsConfig]="accountsDialogColumnsConfig$ | async"
                                 [dialogGridData]="accountsDialogGridData$ | async"
                                 [dialogGridId]="accountsDialogGridId"
-                                [dialogOriginColumnsConfig]="accountsDialogColumnsConfig$ | async"
-                                [gridData]="messageAccountsGridData$ | async"
-                                [gridId]="messageAccountsGridId"
-                                [gridState]="messageAccountsGridState"
-                                [id]="messageAccountsGridId"
-                                [label]="t('message.AccountRecipients')"
-                                [originColumnsConfig]="originMessageAccountsColumnsConfig"
+                                [dialogOriginColumnsConfig]="accountsDialogOriginColumnsConfig"
                                 [selectedCheckboxRowModel]="selectedCheckboxRowModel"
                                 (dialogSelectedCheckboxRowModelChange)="handleAccountsDialogRowsSectionChange($event)"
                                 (selectedCheckboxRowModelChange)="handleAccountsRowsSectionChange($event)"
@@ -608,7 +608,7 @@
                                 <input
                                     matInput
                                     formControlName="sendAt"
-                                    [auDatetimepickerSqlFormat]
+                                    auDatetimepickerSqlFormat
                                     [mtxDatetimepicker]="sendAtPicker"
                                 >
                                 <mtx-datetimepicker-toggle

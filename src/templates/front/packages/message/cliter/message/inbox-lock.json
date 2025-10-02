@@ -7,15 +7,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/message/message.component.ts",
-            "integrity": "sha1:b7c7fc40126419960e25846813bd44d98c8138af"
+            "integrity": "sha1:c9d10096ccff159b14f28ecf88b222213647c782"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox-detail.component.html",
-            "integrity": "sha1:a49e9ea6e5960737e449f84bd9bfd258fcf4c354"
+            "integrity": "sha1:bc64d8d5c746588acdee602ef44c0a028cd0ab7e"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox-detail.component.ts",
-            "integrity": "sha1:f5dd6043156a9bba8917a4c8acdc99aa75cd29fc"
+            "integrity": "sha1:75343e012c41df5597679a6bc1808f4230aadad7"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox-list.component.html",
@@ -23,7 +23,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox-list.component.ts",
-            "integrity": "sha1:25f30e144dafd81a2dd07732a62802053692ea56"
+            "integrity": "sha1:0544f83ff28cc64bcc01cba9d1bfc03782fd9778"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox.columns-config.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/inbox.service.ts",
-            "integrity": "sha1:4409bfb80d7af2d30772a24046f6af2362a83aab"
+            "integrity": "sha1:4b095fe7a3ba55c8916ef9e07d3c08f71899a2c8"
         },
         {
             "path": "src/app/modules/admin/apps/message/inbox/index.ts",

@@ -19,7 +19,6 @@ aggregateProperties:
     arrayOptions:
       type: id
     nullable: true
-    index: index
   - name: messageId
     type: id
     nullable: true
@@ -39,7 +38,7 @@ aggregateProperties:
     index: index
   - name: accountCode
     type: varchar
-    length: 128
+    maxLength: 128
     nullable: true
     index: index
   - name: isImportant

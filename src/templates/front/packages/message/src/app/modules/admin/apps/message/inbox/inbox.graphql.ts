@@ -100,6 +100,16 @@ export const createMutation = gql`
     }
 `;
 
+export const insertMutation = gql`
+    mutation MessageCreateInboxes (
+        $payload: [MessageCreateInboxInput]!
+    ) {
+        messageCreateInboxes (
+            payload: $payload
+        )
+    }
+`;
+
 export const updateByIdMutation = gql`
     mutation MessageUpdateInboxById (
         $payload: MessageUpdateInboxByIdInput!
@@ -183,7 +193,7 @@ export const findCustomerMessageInboxQuery = gql`
         object: messageFindCustomerMessageInbox (
             query: $query
             constraint: $constraint
-        ){
+        ) {
             ${fields}
         }
     }
