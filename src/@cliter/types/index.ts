@@ -139,6 +139,7 @@ export interface Property
     index?: PropertyIndex;
     indexFields?: string[];
     indexName?: string;
+    indexUsing?: PropertyIndexUsing;
     autoIncrement?: boolean;
     decimals?: number[];
     enumOptions?: string[];
@@ -172,7 +173,17 @@ export interface PropertyRelationship
 export enum PropertyIndex
 {
     UNIQUE  = 'unique',
-    INDEX   = 'index'
+    INDEX   = 'index',
+}
+
+export enum PropertyIndexUsing
+{
+    BTREE = 'Btree',
+    GIN = 'GIN',
+    HASH = 'HASH',
+    SPGIST = 'spgist',
+    GIST = 'GiST',
+    BRIN = 'BRIN',
 }
 
 export enum PropertyType

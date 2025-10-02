@@ -41,6 +41,7 @@ handlebars.registerHelper('indexesManager', function(
         response += '],\n';
         response += `\t\t\tunique: ${indexProperty.index === 'unique' ? 'true' : 'false'},\n`;
         if (indexProperty.indexName) response += `\t\t\tname: '${indexProperty.indexName}',\n`;
+        if (indexProperty.indexUsing) response += `\t\t\tusing: '${indexProperty.indexUsing}',\n`;
         response += `\t\t},${i === indexProperties.length - 1 ? '' : '\n'}`;
     }
 
