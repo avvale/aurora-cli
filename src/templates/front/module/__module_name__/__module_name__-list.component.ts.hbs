@@ -26,11 +26,12 @@
 export const {{ toCamelCase schema.moduleName }}MainGridListId = '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.mainGridList';
 
 @Component({
-    selector       : '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-list',
-    templateUrl    : './{{ toKebabCase schema.moduleName }}-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: '{{ toKebabCase schema.boundedContextName }}-{{ toKebabCase schema.moduleName }}-list',
+    templateUrl: './{{ toKebabCase schema.moduleName }}-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports        : [
+    standalone: true,
+    imports: [
         ...defaultListImports,
     ],
 })
