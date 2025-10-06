@@ -1,0 +1,82 @@
+import { ColumnConfig, ColumnDataType } from '@aurora';
+
+export const issueColumnsConfig: ColumnConfig[] = [
+    {
+        type: ColumnDataType.STRING,
+        field: 'externalId',
+        sort: 'externalId',
+        translation: 'support.ExternalId',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'externalStatus',
+        sort: 'externalStatus',
+        translation: 'support.ExternalStatus',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'account.name',
+        searchableField: '$account.name$',
+        sort: 'account.name',
+        translation: 'Name',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'accountUsername',
+        sort: 'accountUsername',
+        translation: 'support.AccountUsername',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'frontVersion',
+        sort: 'frontVersion',
+        translation: 'support.FrontVersion',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'backVersion',
+        sort: 'backVersion',
+        translation: 'support.BackVersion',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'environment',
+        sort: 'environment',
+        translation: 'support.Environment',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'subject',
+        sort: 'subject',
+        translation: 'support.Subject',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'description',
+        sort: 'description',
+        translation: 'support.Description',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.JSONB,
+        field: 'attachments',
+        sort: 'attachments',
+        translation: 'support.Attachments',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.JSONB,
+        field: 'video',
+        sort: 'video',
+        translation: 'support.Video',
+        isUnaccent: true,
+    },
+];

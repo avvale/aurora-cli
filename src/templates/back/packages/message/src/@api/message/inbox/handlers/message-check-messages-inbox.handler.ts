@@ -153,7 +153,9 @@ export class MessageCheckMessagesInboxHandler
                         isReadAtLeastOnce: false,
                     })),
                     {
-                        timezone,
+                        // data comes from the database
+                        // is already in UTC, and should not be converted
+                        // in this case we do not pass the timezone
                         repositoryOptions: {
                             auditing,
                         },

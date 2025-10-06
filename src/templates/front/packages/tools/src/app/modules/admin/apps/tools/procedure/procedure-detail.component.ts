@@ -4,7 +4,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { ToolsProcedure, ToolsProcedureType } from '@apps/tools';
 import { ProcedureService } from '@apps/tools/procedure';
-import { Action, ChipComponent, Crumb, defaultDetailImports, log, mapActions, MatFormFieldAppearanceComponent, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
+import { Action, ChipComponent, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, log, mapActions, MatFormFieldAppearanceComponent, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { lastValueFrom, takeUntil } from 'rxjs';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
@@ -17,7 +17,8 @@ import { KeyValuePipe } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ...defaultDetailImports,
-        ChipComponent, KeyValuePipe, MatCheckboxModule, MatFormFieldAppearanceComponent,
+        ChipComponent, DatetimepickerSqlFormatDirective, KeyValuePipe,
+        MatCheckboxModule, MatFormFieldAppearanceComponent,
         MatSelectModule, MonacoEditorModule, MtxDatetimepickerModule,
     ],
 })

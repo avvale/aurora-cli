@@ -62,7 +62,7 @@ publish-all:
 		gulp publishTools && \
 		gulp publishWhatsapp
 
-# ENCRYPTION/DECRYPTION OF .env FILES
+# .ENV FILES
 SOPS_AGE_KEY_FILE := .keys/age.txt
 .PHONY: env encrypt decrypt edit clean
 
@@ -70,35 +70,35 @@ env: decrypt
 
 encrypt:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env > .env.local.enc
-	@echo ">> .env.local.enc actualizado"
+	@echo ">> .env.local.enc updated"
 
 decrypt:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.local.enc > .env
-	@echo ">> .env generado"
+	@echo ">> .env generated"
 
 encrypt-dev:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.dev > .env.dev.enc
-	@echo ">> .env.enc actualizado"
+	@echo ">> .env.dev.enc updated"
 
 decrypt-dev:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.dev.enc > .env.dev
-	@echo ">> .env generado"
+	@echo ">> .env.dev generated"
 
 encrypt-qa:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.qa > .env.qa.enc
-	@echo ">> .env.enc actualizado"
+	@echo ">> .env.qa.enc updated"
 
 decrypt-qa:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.qa.enc > .env.qa
-	@echo ">> .env generado"
+	@echo ">> .env.qa generated"
 
 encrypt-prod:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env.prod > .env.prod.enc
-	@echo ">> .env.enc actualizado"
+	@echo ">> .env.prod.enc updated"
 
 decrypt-prod:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --decrypt --input-type binary --output-type binary .env.prod.enc > .env.prod
-	@echo ">> .env generado"
+	@echo ">> .env.prod generated"
 
 encrypt-all:
 	@SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) sops --encrypt --input-type binary --output-type binary .env > .env.local.enc

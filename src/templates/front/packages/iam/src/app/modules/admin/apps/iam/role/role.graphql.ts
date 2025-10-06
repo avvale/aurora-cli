@@ -130,6 +130,16 @@ export const createMutation = gql`
     }
 `;
 
+export const insertMutation = gql`
+    mutation IamCreateRoles (
+        $payload: [IamCreateRoleInput]!
+    ) {
+        iamCreateRoles (
+            payload: $payload
+        )
+    }
+`;
+
 export const updateByIdMutation = gql`
     mutation IamUpdateRoleById (
         $payload: IamUpdateRoleByIdInput!

@@ -2,6 +2,10 @@
     "Account": "Account",
     "AccountId": "AccountId",
     "AccountIds": "AccountIds",
+    "AccountType": {
+        "SERVICE": "Servicio",
+        "USER": "Usuario"
+    },
     "Accounts": "Accounts",
     "AddChildTenants": "Añadir tenants hijos",
     "Avatar": "Avatar",

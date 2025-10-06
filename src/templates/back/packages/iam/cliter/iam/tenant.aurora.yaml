@@ -89,9 +89,10 @@ aggregateProperties:
           - count
           - max
           - min
-          - sum
           - rawSql
+          - sum
           - updateAndIncrement
+          - upsert
   - name: createdAt
     description: Timestamp when the tenant was created
     type: timestamp

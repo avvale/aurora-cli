@@ -3,8 +3,6 @@ export { IamCreatePermissionCommand } from './application/create/iam-create-perm
 export { IamCreatePermissionsCommand } from './application/create/iam-create-permissions.command';
 export { IamUpdatePermissionByIdCommand } from './application/update/iam-update-permission-by-id.command';
 export { IamUpdatePermissionsCommand } from './application/update/iam-update-permissions.command';
-export { IamUpdateAndIncrementPermissionsCommand } from './application/update/iam-update-and-increment-permissions.command';
-export { IamUpsertPermissionCommand } from './application/upsert/iam-upsert-permission.command';
 export { IamDeletePermissionByIdCommand } from './application/delete/iam-delete-permission-by-id.command';
 export { IamDeletePermissionsCommand } from './application/delete/iam-delete-permissions.command';
 
@@ -13,11 +11,6 @@ export { IamPaginatePermissionsQuery } from './application/paginate/iam-paginate
 export { IamGetPermissionsQuery } from './application/get/iam-get-permissions.query';
 export { IamFindPermissionQuery } from './application/find/iam-find-permission.query';
 export { IamFindPermissionByIdQuery } from './application/find/iam-find-permission-by-id.query';
-export { IamRawSQLPermissionsQuery } from './application/raw-sql/iam-raw-sql-permissions.query';
-export { IamCountPermissionQuery } from './application/count/iam-count-permission.query';
-export { IamMaxPermissionQuery } from './application/max/iam-max-permission.query';
-export { IamMinPermissionQuery } from './application/min/iam-min-permission.query';
-export { IamSumPermissionQuery } from './application/sum/iam-sum-permission.query';
 
 // export mocks
 export { iamMockPermissionData } from './infrastructure/mock/iam-mock-permission.data';
@@ -32,8 +25,6 @@ export { IamDeletedPermissionsEvent } from './application/events/iam-deleted-per
 export { IamDeletedPermissionEvent } from './application/events/iam-deleted-permission.event';
 export { IamUpdatedPermissionsEvent } from './application/events/iam-updated-permissions.event';
 export { IamUpdatedPermissionEvent } from './application/events/iam-updated-permission.event';
-export { IamUpdatedAndIncrementedPermissionsEvent } from './application/events/iam-updated-and-incremented-permissions.event';
-export { IamUpdatedAndIncrementedPermissionEvent } from './application/events/iam-updated-and-incremented-permission.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -62,8 +53,6 @@ import { IamCreatePermissionCommandHandler } from './application/create/iam-crea
 import { IamCreatePermissionsCommandHandler } from './application/create/iam-create-permissions.command-handler';
 import { IamUpdatePermissionByIdCommandHandler } from './application/update/iam-update-permission-by-id.command-handler';
 import { IamUpdatePermissionsCommandHandler } from './application/update/iam-update-permissions.command-handler';
-import { IamUpdateAndIncrementPermissionsCommandHandler } from './application/update/iam-update-and-increment-permissions.command-handler';
-import { IamUpsertPermissionCommandHandler } from './application/upsert/iam-upsert-permission.command-handler';
 import { IamDeletePermissionByIdCommandHandler } from './application/delete/iam-delete-permission-by-id.command-handler';
 import { IamDeletePermissionsCommandHandler } from './application/delete/iam-delete-permissions.command-handler';
 
@@ -72,18 +61,12 @@ import { IamPaginatePermissionsQueryHandler } from './application/paginate/iam-p
 import { IamGetPermissionsQueryHandler } from './application/get/iam-get-permissions.query-handler';
 import { IamFindPermissionQueryHandler } from './application/find/iam-find-permission.query-handler';
 import { IamFindPermissionByIdQueryHandler } from './application/find/iam-find-permission-by-id.query-handler';
-import { IamRawSQLPermissionsQueryHandler } from './application/raw-sql/iam-raw-sql-permissions.query-handler';
-import { IamCountPermissionQueryHandler } from './application/count/iam-count-permission.query-handler';
-import { IamMaxPermissionQueryHandler } from './application/max/iam-max-permission.query-handler';
-import { IamMinPermissionQueryHandler } from './application/min/iam-min-permission.query-handler';
-import { IamSumPermissionQueryHandler } from './application/sum/iam-sum-permission.query-handler';
 
 // event handlers
 import { IamCreatedPermissionEventHandler } from './application/events/iam-created-permission.event-handler';
 import { IamCreatedPermissionsEventHandler } from './application/events/iam-created-permissions.event-handler';
 import { IamUpdatedPermissionEventHandler } from './application/events/iam-updated-permission.event-handler';
 import { IamUpdatedPermissionsEventHandler } from './application/events/iam-updated-permissions.event-handler';
-import { IamUpdatedAndIncrementedPermissionsEventHandler } from './application/events/iam-updated-and-incremented-permissions.event-handler';
 import { IamDeletedPermissionEventHandler } from './application/events/iam-deleted-permission.event-handler';
 import { IamDeletedPermissionsEventHandler } from './application/events/iam-deleted-permissions.event-handler';
 
@@ -94,15 +77,8 @@ import { IamPaginatePermissionsService } from './application/paginate/iam-pagina
 import { IamGetPermissionsService } from './application/get/iam-get-permissions.service';
 import { IamFindPermissionService } from './application/find/iam-find-permission.service';
 import { IamFindPermissionByIdService } from './application/find/iam-find-permission-by-id.service';
-import { IamRawSQLPermissionsService } from './application/raw-sql/iam-raw-sql-permissions.service';
-import { IamCountPermissionService } from './application/count/iam-count-permission.service';
-import { IamMaxPermissionService } from './application/max/iam-max-permission.service';
-import { IamMinPermissionService } from './application/min/iam-min-permission.service';
-import { IamSumPermissionService } from './application/sum/iam-sum-permission.service';
 import { IamUpdatePermissionByIdService } from './application/update/iam-update-permission-by-id.service';
 import { IamUpdatePermissionsService } from './application/update/iam-update-permissions.service';
-import { IamUpdateAndIncrementPermissionsService } from './application/update/iam-update-and-increment-permissions.service';
-import { IamUpsertPermissionService } from './application/upsert/iam-upsert-permission.service';
 import { IamDeletePermissionByIdService } from './application/delete/iam-delete-permission-by-id.service';
 import { IamDeletePermissionsService } from './application/delete/iam-delete-permissions.service';
 
@@ -112,8 +88,6 @@ export const IamPermissionHandlers = [
     IamCreatePermissionsCommandHandler,
     IamUpdatePermissionByIdCommandHandler,
     IamUpdatePermissionsCommandHandler,
-    IamUpdateAndIncrementPermissionsCommandHandler,
-    IamUpsertPermissionCommandHandler,
     IamDeletePermissionByIdCommandHandler,
     IamDeletePermissionsCommandHandler,
 
@@ -122,18 +96,12 @@ export const IamPermissionHandlers = [
     IamGetPermissionsQueryHandler,
     IamFindPermissionQueryHandler,
     IamFindPermissionByIdQueryHandler,
-    IamRawSQLPermissionsQueryHandler,
-    IamCountPermissionQueryHandler,
-    IamMaxPermissionQueryHandler,
-    IamMinPermissionQueryHandler,
-    IamSumPermissionQueryHandler,
 
     // events
     IamCreatedPermissionEventHandler,
     IamCreatedPermissionsEventHandler,
     IamUpdatedPermissionEventHandler,
     IamUpdatedPermissionsEventHandler,
-    IamUpdatedAndIncrementedPermissionsEventHandler,
     IamDeletedPermissionEventHandler,
     IamDeletedPermissionsEventHandler,
 ];
@@ -145,15 +113,8 @@ export const IamPermissionServices = [
     IamGetPermissionsService,
     IamFindPermissionService,
     IamFindPermissionByIdService,
-    IamRawSQLPermissionsService,
-    IamCountPermissionService,
-    IamMaxPermissionService,
-    IamMinPermissionService,
-    IamSumPermissionService,
     IamUpdatePermissionByIdService,
     IamUpdatePermissionsService,
-    IamUpdateAndIncrementPermissionsService,
-    IamUpsertPermissionService,
     IamDeletePermissionByIdService,
     IamDeletePermissionsService,
 ];

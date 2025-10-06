@@ -1,12 +1,10 @@
-import { IamPermission } from '../iam.types';
-import { permissionColumnsConfig } from '../permission';
-import { PermissionService } from '../permission/permission.service';
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewChild, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { IamBoundedContext, IamPermission } from '@apps/iam';
 import { BoundedContextService } from '@apps/iam/bounded-context';
-import { IamBoundedContext } from '@apps/iam/iam.types';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridElementsManagerComponent, GridElementsManagerModule, GridFiltersStorageService, GridState, GridStateService, log, mapActions, QueryStatementHandler, Utils, ViewDetailComponent } from '@aurora';
+import { permissionColumnsConfig, PermissionService } from '@apps/iam/permission';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridElementsManagerComponent, GridElementsManagerModule, GridFiltersStorageService, GridState, GridStateService, log, mapActions, queryStatementHandler, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
@@ -14,6 +12,7 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
     templateUrl: './bounded-context-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultDetailImports,
         GridElementsManagerModule, MatCheckboxModule,
@@ -28,7 +27,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: IamBoundedContext;
+    managedObject: WritableSignal<IamBoundedContext> = signal(null);
 
     // relationships
     /* #region variables to manage grid-elements-manager permissions */
@@ -47,16 +46,16 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
             {
                 const actions = [
                     {
-                        id          : 'iam::boundedContext.detail.editPermission',
+                        id: 'iam::boundedContext.detail.editPermission',
                         isViewAction: false,
-                        translation : 'edit',
-                        icon        : 'mode_edit',
+                        translation: 'edit',
+                        icon: 'mode_edit',
                     },
                     {
-                        id          : 'iam::boundedContext.detail.deletePermission',
+                        id: 'iam::boundedContext.detail.deletePermission',
                         isViewAction: false,
-                        translation : 'delete',
-                        icon        : 'delete',
+                        translation: 'delete',
+                        icon: 'delete',
                     },
                 ];
 
@@ -108,6 +107,19 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
         {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(
+                SnackBarInvalidFormComponent,
+                {
+                    data: {
+                        message: `${this.translocoService.translate('InvalidForm')}`,
+                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                    },
+                    panelClass: 'error-snackbar',
+                    verticalPosition: 'top',
+                    duration: 10000,
+                },
+            );
             return;
         }
 
@@ -181,7 +193,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
         {
             /* #region common actions */
             case 'iam::boundedContext.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'iam::boundedContext.detail.edit':
@@ -190,20 +202,20 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item =>
                     {
-                        this.managedObject = item;
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
 
-                /* #region init actions to manage permissions grid-elements-manager */
+                /* #region edit action to manage permissions grid-elements-manager */
                 this.permissionsColumnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.permissionsGridId, this.originPermissionsColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
 
                 this.permissionsGridState = {
                     columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId),
-                    page         : this.gridStateService.getPage(this.permissionsGridId),
-                    sort         : this.gridStateService.getSort(this.permissionsGridId),
-                    search       : this.gridStateService.getSearchState(this.permissionsGridId),
+                    page: this.gridStateService.getPage(this.permissionsGridId),
+                    sort: this.gridStateService.getSort(this.permissionsGridId),
+                    search: this.gridStateService.getSearchState(this.permissionsGridId),
                 };
 
                 this.permissionsGridData$ = this.permissionService.pagination$;
@@ -237,7 +249,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
@@ -264,7 +276,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
@@ -284,8 +296,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
-                                QueryStatementHandler
-                                    .init({ columnsConfig: permissionColumnsConfig })
+                                queryStatementHandler({ columnsConfig: permissionColumnsConfig })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
                                     .setSort(this.gridStateService.getSort(this.permissionsGridId))
                                     .setPage(this.gridStateService.getPage(this.permissionsGridId))
@@ -293,7 +304,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                                     .getQueryStatement(),
                             constraint: {
                                 where: {
-                                    boundedContextId: this.managedObject.id,
+                                    boundedContextId: this.managedObject().id,
                                 },
                             },
                         }),
@@ -303,8 +314,8 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
             case 'iam::boundedContext.detail.newPermission':
                 this.createPermissionDialogForm();
                 this.permissionsComponent.handleElementDetailDialog(action.id);
-                this.permissionDialogFg.get('id').setValue(Utils.uuid());
-                this.permissionDialogFg.get('boundedContextId').setValue(this.managedObject.id);
+                this.permissionDialogFg.get('id').setValue(uuid());
+                this.permissionDialogFg.get('boundedContextId').setValue(this.managedObject().id);
                 break;
 
             case 'iam::boundedContext.detail.createPermission':
@@ -316,7 +327,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                 );
 
                 this.actionService.action({
-                    id          : 'iam::boundedContext.detail.permissionsPagination',
+                    id: 'iam::boundedContext.detail.permissionsPagination',
                     isViewAction: false,
                 });
                 break;
@@ -326,10 +337,10 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                 await lastValueFrom(
                     this.permissionService
                         .findById({
-                            id        : action.meta.row.id,
+                            id: action.meta.row.id,
                             constraint: {
                                 where: {
-                                    boundedContextId: this.managedObject.id,
+                                    boundedContextId: this.managedObject().id,
                                 },
                             },
                         }),
@@ -347,28 +358,28 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                         }),
                 );
                 this.actionService.action({
-                    id          : 'iam::boundedContext.detail.permissionsPagination',
+                    id: 'iam::boundedContext.detail.permissionsPagination',
                     isViewAction: false,
                 });
                 break;
 
             case 'iam::boundedContext.detail.deletePermission':
                 const deletePermissionDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('iam.Permission')}`,
+                    title: `${this.translocoService.translate('Delete')} ${this.translocoService.translate('iam.Permission')}`,
                     message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('iam.Permission') }),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
+                    icon: {
+                        show: true,
+                        name: 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
                         confirm: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Remove'),
                             color: 'warn',
                         },
                         cancel: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Cancel'),
                         },
                     },
@@ -391,7 +402,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                                 );
 
                                 this.actionService.action({
-                                    id          : 'iam::boundedContext.detail.permissionsPagination',
+                                    id: 'iam::boundedContext.detail.permissionsPagination',
                                     isViewAction: false,
                                 });
                             }
@@ -407,10 +418,10 @@ export class BoundedContextDetailComponent extends ViewDetailComponent
                 const permissionRows = await lastValueFrom(
                     this.permissionService
                         .get({
-                            query     : action.meta.query,
+                            query: action.meta.query,
                             constraint: {
                                 where: {
-                                    boundedContextId: this.managedObject.id,
+                                    boundedContextId: this.managedObject().id,
                                 },
                             },
                         }),

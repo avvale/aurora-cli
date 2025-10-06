@@ -57,12 +57,12 @@
                     importPermissions: t('iam.ImportPermissions'),
                 }"
             >
-                <au-grid-column-translation
-                    *ngFor="let columnConfig of originColumnsConfig"
-                    [field]="columnConfig.field"
-                >
-                    {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
-                </au-grid-column-translation>
+                @for (columnConfig of originColumnsConfig; track columnConfig.field)
+                {
+                    <au-grid-column-translation [field]="columnConfig.field">
+                        {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                    </au-grid-column-translation>
+                }
             </au-grid-translations>
         </au-grid>
         <!-- / Grid -->
@@ -92,12 +92,12 @@
                 <mat-select
                     formControlName="parentRoleId"
                 >
-                    <mat-option
-                        *ngFor="let role of roles$ | async"
-                        [value]="role.id"
-                    >
-                        {{ role.name }}
-                    </mat-option>
+                    @for (role of roles$ | async; track role.id)
+                    {
+                        <mat-option [value]="role.id">
+                            {{ role.name }}
+                        </mat-option>
+                    }
                 </mat-select>
                 <mat-error>{{ formErrors?.parentRoleId | async }}</mat-error>
             </mat-form-field>

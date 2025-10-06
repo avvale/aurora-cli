@@ -1,4 +1,4 @@
-import { IamBoundedContext, IamCreatedBoundedContextEvent, IamCreatedBoundedContextsEvent, IamDeletedBoundedContextEvent, IamDeletedBoundedContextsEvent, IamUpdatedAndIncrementedBoundedContextEvent, IamUpdatedAndIncrementedBoundedContextsEvent, IamUpdatedBoundedContextEvent, IamUpdatedBoundedContextsEvent } from '@app/iam/bounded-context';
+import { IamBoundedContext, IamCreatedBoundedContextEvent, IamCreatedBoundedContextsEvent, IamDeletedBoundedContextEvent, IamDeletedBoundedContextsEvent, IamUpdatedBoundedContextEvent, IamUpdatedBoundedContextsEvent } from '@app/iam/bounded-context';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
@@ -46,29 +46,6 @@ export class IamAddBoundedContextsContextEvent extends AggregateRoot
             new IamUpdatedBoundedContextsEvent({
                 payload: this.aggregateRoots.map(boundedContext =>
                     new IamUpdatedBoundedContextEvent({
-                        payload: {
-                            id: boundedContext.id.value,
-                            name: boundedContext.name.value,
-                            root: boundedContext.root.value,
-                            sort: boundedContext.sort?.value,
-                            isActive: boundedContext.isActive.value,
-                            createdAt: boundedContext.createdAt?.value,
-                            updatedAt: boundedContext.updatedAt?.value,
-                            deletedAt: boundedContext.deletedAt?.value,
-                        },
-                    }),
-                ),
-                cQMetadata: this.cQMetadata,
-            }),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new IamUpdatedAndIncrementedBoundedContextsEvent({
-                payload: this.aggregateRoots.map(boundedContext =>
-                    new IamUpdatedAndIncrementedBoundedContextEvent({
                         payload: {
                             id: boundedContext.id.value,
                             name: boundedContext.name.value,

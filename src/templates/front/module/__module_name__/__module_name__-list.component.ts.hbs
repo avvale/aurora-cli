@@ -95,19 +95,19 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     if (row.availableLangs.includes(lang.id))
                     {
                         transitionActions.push({
-                            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit',
-                            translation : 'edit',
+                            id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit',
+                            translation: 'edit',
                             isViewAction: true,
-                            meta        : { lang },
+                            meta: { lang },
                         });
                     }
                     else
                     {
                         transitionActions.push({
-                            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.new',
-                            translation : 'new',
+                            id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.new',
+                            translation: 'new',
                             isViewAction: true,
-                            meta        : { lang },
+                            meta: { lang },
                         });
                     }
                 }
@@ -250,7 +250,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                                 );
 
                                 this.actionService.action({
-                                    id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
+                                    id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination',
                                     isViewAction: false,
                                 });
                             }

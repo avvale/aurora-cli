@@ -11,14 +11,17 @@ front:
   solidIcon: mat_solid:local_police
 aggregateProperties:
   - name: id
+    description: UUID for permission
     type: id
     primaryKey: true
     nullable: false
   - name: name
+    description: Permission name, this name is unique and used to evaluate if a user can consume or access a resource
     type: varchar
     maxLength: 128
     nullable: false
   - name: boundedContextId
+    description: UUID for bounded context, a permission is associated with a bounded context
     type: id
     nullable: false
     relationship:
@@ -27,11 +30,13 @@ aggregateProperties:
       modulePath: iam/bounded-context
       key: id
       field: boundedContext
+      description: Bounded context object relationship to permission
       avoidConstraint: true
     index: index
     webComponent:
       type: select
   - name: roles
+    description: List of roles associated with the permission
     type: relationship
     nullable: true
     relationship:
@@ -51,23 +56,48 @@ aggregateProperties:
           - name: permissionId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamPermission
-            modulePath: iam/permission
+            relationship:
+              type: many-to-one
+              aggregateName: IamPermission
+              modulePath: iam/permission
+              field: permission
+              avoidConstraint: true
           - name: roleId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: IamRole
-            modulePath: iam/role
+            relationship:
+              type: many-to-one
+              aggregateName: IamRole
+              modulePath: iam/role
+              field: role
+              avoidConstraint: true
+        excludedOperations:
+          - count
+          - max
+          - min
+          - rawSql
+          - sum
+          - updateAndIncrement
+          - upsert
   - name: createdAt
+    description: Timestamp when the permission was created
     type: timestamp
     nullable: true
   - name: updatedAt
+    description: Timestamp when the permission was last updated
     type: timestamp
     nullable: true
   - name: deletedAt
+    description: Timestamp when the permission was deleted
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

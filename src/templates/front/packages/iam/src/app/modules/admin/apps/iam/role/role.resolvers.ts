@@ -1,9 +1,10 @@
+import { permissionRoleGridId, permissionsGridId } from './role-detail.component';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { IamRole } from '@apps/iam/iam.types';
+import { IamPermission, IamPermissionRole, IamRole } from '@apps/iam';
+import { permissionColumnsConfig } from '@apps/iam/permission';
 import { roleColumnsConfig, RoleService } from '@apps/iam/role';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
-import { permissionColumnsConfig } from '../permission';
+import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, queryStatementHandler } from '@aurora';
 
 export const rolePaginationResolver: ResolveFn<GridData<IamRole>> = (
     route: ActivatedRouteSnapshot,
@@ -16,7 +17,7 @@ export const rolePaginationResolver: ResolveFn<GridData<IamRole>> = (
     const roleService = inject(RoleService);
 
     actionService.action({
-        id          : 'iam::role.list.view',
+        id: 'iam::role.list.view',
         isViewAction: true,
     });
 
@@ -28,8 +29,7 @@ export const rolePaginationResolver: ResolveFn<GridData<IamRole>> = (
     roleService.get().subscribe();
 
     return roleService.pagination({
-        query: QueryStatementHandler
-            .init({ columnsConfig: roleColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: roleColumnsConfig })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))
@@ -46,12 +46,15 @@ export const roleNewResolver: ResolveFn<Action> = (
     const actionService = inject(ActionService);
 
     return actionService.action({
-        id          : 'iam::role.detail.new',
+        id: 'iam::role.detail.new',
         isViewAction: true,
     });
 };
 
 export const roleEditResolver: ResolveFn<{
+    iamGetPermissionsRoles: IamPermissionRole[];
+    iamPaginatePermissions: GridData<IamPermission>;
+    iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
     object: IamRole;
 }> = (
     route: ActivatedRouteSnapshot,
@@ -59,51 +62,48 @@ export const roleEditResolver: ResolveFn<{
 ) =>
 {
     const actionService = inject(ActionService);
-    const roleService = inject(RoleService);
     const gridFiltersStorageService = inject(GridFiltersStorageService);
     const gridStateService = inject(GridStateService);
+    const roleService = inject(RoleService);
 
+    // paginate to manage PermissionsRoles grid-select-multiple-elements
+    gridStateService.setPaginationActionId(permissionRoleGridId, 'iam::role.detail.permissionsRolesPagination');
+    gridStateService.setExportActionId(permissionRoleGridId, 'iam::role.detail.exportPermissionsRoles');
 
-    actionService.action({
-        id          : 'iam::role.detail.edit',
-        isViewAction: true,
-    });
-
-    const permissionsRolesGridId = 'iam::role.detail.permissionsRolesGridList';
-    gridStateService.setPaginationActionId(permissionsRolesGridId, 'iam::role.detail.permissionsRolesPagination');
-    gridStateService.setExportActionId(permissionsRolesGridId, 'iam::role.detail.exportPermissionsRoles');
-
-    const permissionsGridId = 'iam::role.detail.permissionsGridList';
     gridStateService.setPaginationActionId(permissionsGridId, 'iam::role.detail.permissionsPagination');
     gridStateService.setExportActionId(permissionsGridId, 'iam::role.detail.exportPermissions');
 
-    return roleService.findByIdWithRelations({
-        id        : route.paramMap.get('id'),
-        constraint: {
-            include: [
-                {
-                    association: 'permissions',
-                },
-            ],
-        },
-        queryPaginatePermissionsRoles: QueryStatementHandler
-            .init({ columnsConfig: permissionColumnsConfig })
-            .setColumFilters(gridFiltersStorageService.getColumnFilterState(permissionsRolesGridId))
-            .setSort(gridStateService.getSort(permissionsRolesGridId, { active: 'permission.name', direction: 'asc' }))
-            .setPage(gridStateService.getPage(permissionsRolesGridId))
-            .setSearch(gridStateService.getSearchState(permissionsRolesGridId))
-            .getQueryStatement(),
-        queryPaginatePermissions: QueryStatementHandler
-            .init({ columnsConfig: permissionColumnsConfig })
-            .setColumFilters(gridFiltersStorageService.getColumnFilterState(permissionsGridId))
-            .setSort(gridStateService.getSort(permissionsGridId, { active: 'name', direction: 'asc' }))
-            .setPage(gridStateService.getPage(permissionsGridId))
-            .setSearch(gridStateService.getSearchState(permissionsGridId))
-            .getQueryStatement(),
-        queryGetPermissionsRoles: {
-            where: {
-                roleId: route.paramMap.get('id'),
-            },
-        },
+    actionService.action({
+        id: 'iam::role.detail.edit',
+        isViewAction: true,
     });
+
+    return roleService
+        .findByIdWithRelations({
+            id: route.paramMap.get('id'),
+            constraint: {
+                include: [
+                    {
+                        association: 'permissions',
+                    },
+                ],
+            },
+            queryPaginatePermissionsRoles: queryStatementHandler({ columnsConfig: permissionColumnsConfig })
+                .setColumFilters(gridFiltersStorageService.getColumnFilterState(permissionRoleGridId))
+                .setSort(gridStateService.getSort(permissionRoleGridId, { active: 'permission.name', direction: 'asc' }))
+                .setPage(gridStateService.getPage(permissionRoleGridId))
+                .setSearch(gridStateService.getSearchState(permissionRoleGridId))
+                .getQueryStatement(),
+            queryPaginatePermissions: queryStatementHandler({ columnsConfig: permissionColumnsConfig })
+                .setColumFilters(gridFiltersStorageService.getColumnFilterState(permissionsGridId))
+                .setSort(gridStateService.getSort(permissionsGridId, { active: 'name', direction: 'asc' }))
+                .setPage(gridStateService.getPage(permissionsGridId))
+                .setSearch(gridStateService.getSearchState(permissionsGridId))
+                .getQueryStatement(),
+            queryGetPermissionsRoles: {
+                where: {
+                    roleId: route.paramMap.get('id'),
+                },
+            },
+        });
 };

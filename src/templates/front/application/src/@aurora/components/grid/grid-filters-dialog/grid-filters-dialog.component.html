@@ -173,8 +173,10 @@
                                     </mat-form-field>
                                 }
 
+                                <!-- relationship -->
                                 @case (searchComponentType.ASYNC_MULTIPLE_SELECT)
                                 {
+                                    @let asyncMatSelectSearchState = (originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState;
                                     <mat-form-field
                                         appearance="outline"
                                         class="col-span-7 relative"
@@ -201,21 +203,22 @@
                                         >
                                             <mat-option>
                                                 <ngx-mat-select-search
-                                                    [formControl]="(originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.itemFilterCtrl"
+                                                    [formControl]="asyncMatSelectSearchState.itemFilterCtrl"
                                                     [placeholderLabel]="('find' | gridTranslate:'message':gridId | async) + ' ' + (formFilter.get('field').value | gridTranslate:'column':gridId  | async | lowercase)"
+                                                    [noEntriesFoundLabel]="('noResultsFound' | gridTranslate:'message':gridId | async)"
                                                 >
                                                 </ngx-mat-select-search>
                                             </mat-option>
-                                            @if ((originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems().size > 0)
+                                            @if (asyncMatSelectSearchState.selectedItems().size > 0)
                                             {
                                                 <mat-optgroup [label]="'selectedOptions' | gridTranslate:'message':gridId | async">
-                                                    @for (item of (originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems(); track item.id)
+                                                    @for (item of asyncMatSelectSearchState.selectedItems().values(); track item.id)
                                                     {
                                                         <mat-option
-                                                            [value]="item.id"
+                                                            [value]="item[asyncMatSelectSearchState.valueKey]"
                                                             auMatSelectAddSelectedDirective
                                                             [object]="item"
-                                                            [selectedItems]="(originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems"
+                                                            [selectedItems]="asyncMatSelectSearchState.selectedItems"
                                                         >
                                                             @if (data.gridFiltersDialogValuesTemplate | getGridFilterValue:formFilter.get('field').value)
                                                             {
@@ -233,16 +236,16 @@
                                                 </mat-optgroup>
                                                 <mat-divider></mat-divider>
                                             }
-                                            @for (item of (originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.filteredItems(); track item.id)
+                                            @for (item of asyncMatSelectSearchState.filteredItems().values(); track item.id)
                                             {
-                                                @if (!(originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems().has(item))
+                                                @if (!asyncMatSelectSearchState.selectedItems().has(item[asyncMatSelectSearchState.indexKey]))
                                                 {
                                                     <mat-option
-                                                        [value]="item.id"
+                                                        [value]="item[asyncMatSelectSearchState.valueKey]"
                                                         [disabled]="item.id === null"
                                                         auMatSelectAddSelectedDirective
                                                         [object]="item"
-                                                        [selectedItems]="(originColumnsConfig | getAsyncMatSelectSearchColumnConfig:formFilter.get('field').value).asyncMatSelectSearchState.selectedItems"
+                                                        [selectedItems]="asyncMatSelectSearchState.selectedItems"
                                                     >
                                                         @if (item.id === null)
                                                         {

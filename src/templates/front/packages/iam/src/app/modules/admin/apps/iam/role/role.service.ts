@@ -1,13 +1,11 @@
-import { IamPermission, IamPermissionRole } from '../iam.types';
-import { PermissionService } from '../permission/permission.service';
-import { findByIdWithRelationsQuery, inheritPermissionsRoleRoleMutation } from './role.graphql';
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { IamCreateRole, IamRole, IamUpdateRoleById, IamUpdateRoles } from '@apps/iam/iam.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/role';
+import { IamCreateRole, IamPermission, IamPermissionRole, IamRole, IamUpdateRoleById, IamUpdateRoles } from '@apps/iam';
+import { PermissionService } from '@apps/iam/permission';
+import { PermissionRoleService } from '@apps/iam/permission-role';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, inheritPermissionsRoleRoleMutation, insertMutation, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/role';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { PermissionRoleService } from '../permission-role/permission-role.service';
 
 @Injectable({
     providedIn: 'root',
@@ -18,10 +16,15 @@ export class RoleService
     roleSubject$: BehaviorSubject<IamRole | null> = new BehaviorSubject(null);
     rolesSubject$: BehaviorSubject<IamRole[] | null> = new BehaviorSubject(null);
 
+    // scoped subjects
+    paginationScoped: { [key: string]: BehaviorSubject<GridData<IamRole> | null>; } = {};
+    roleScoped: { [key: string]: BehaviorSubject<IamRole | null>; } = {};
+    rolesScoped: { [key: string]: BehaviorSubject<IamRole[] | null>; } = {};
+
     constructor(
         private readonly graphqlService: GraphQLService,
-        private readonly permissionService: PermissionService,
         private readonly permissionRoleService: PermissionRoleService,
+        private readonly permissionService: PermissionService,
     ) {}
 
     /**
@@ -42,17 +45,73 @@ export class RoleService
         return this.rolesSubject$.asObservable();
     }
 
+    // allows to store different types of pagination under different scopes this allows us
+    // to have multiple observables with different streams of pagination data.
+    setScopePagination(scope: string, pagination: GridData<IamRole>): void
+    {
+        if (this.paginationScoped[scope])
+        {
+            this.paginationScoped[scope].next(pagination);
+            return;
+        }
+        // create new subject if not exist
+        this.paginationScoped[scope] = new BehaviorSubject(pagination);
+    }
+
+    // get pagination observable by scope
+    getScopePagination(scope: string): Observable<GridData<IamRole>>
+    {
+        if (!this.paginationScoped[scope]) this.paginationScoped[scope] = new BehaviorSubject(null);
+        return this.paginationScoped[scope].asObservable();
+    }
+
+    setScopeRole(scope: string, object: IamRole): void
+    {
+        if (this.roleScoped[scope])
+        {
+            this.roleScoped[scope].next(object);
+            return;
+        }
+        // create new subject if not exist
+        this.roleScoped[scope] = new BehaviorSubject(object);
+    }
+
+    getScopeRole(scope: string): Observable<IamRole>
+    {
+        if (!this.roleScoped[scope]) this.roleScoped[scope] = new BehaviorSubject(null);
+        return this.roleScoped[scope].asObservable();
+    }
+
+    setScopeRoles(scope: string, objects: IamRole[]): void
+    {
+        if (this.rolesScoped[scope])
+        {
+            this.rolesScoped[scope].next(objects);
+            return;
+        }
+        // create new subject if not exist
+        this.rolesScoped[scope] = new BehaviorSubject(objects);
+    }
+
+    getScopeRoles(scope: string): Observable<IamRole[]>
+    {
+        if (!this.rolesScoped[scope]) this.rolesScoped[scope] = new BehaviorSubject(null);
+        return this.rolesScoped[scope].asObservable();
+    }
+
     pagination(
         {
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<GridData<IamRole>>
     {
@@ -73,21 +132,23 @@ export class RoleService
             .pipe(
                 first(),
                 map(result => result.data.pagination),
-                tap(pagination => this.paginationSubject$.next(pagination)),
+                tap(pagination => scope ? this.setScopePagination(scope, pagination) : this.paginationSubject$.next(pagination)),
             );
     }
 
     findById(
         {
             graphqlStatement = findByIdQuery,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamRole;
@@ -111,10 +172,7 @@ export class RoleService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.roleSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopeRole(scope, data.object) : this.roleSubject$.next(data.object)),
             );
     }
 
@@ -130,6 +188,7 @@ export class RoleService
             queryGetPermissionsRoles = {},
             constraintGetPermissionsRoles = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
@@ -141,11 +200,12 @@ export class RoleService
             queryGetPermissionsRoles?: QueryStatement;
             constraintGetPermissionsRoles?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamRole;
-        iamPaginatePermissions: GridData<IamPermission>;
         iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
+        iamPaginatePermissions: GridData<IamPermission>;
         iamGetPermissionsRoles: IamPermissionRole[];
     }>
     {
@@ -153,8 +213,8 @@ export class RoleService
             .client()
             .watchQuery<{
                 object: IamRole;
-                iamPaginatePermissions: GridData<IamPermission>;
                 iamPaginatePermissionsRoles: GridData<IamPermissionRole>;
+                iamPaginatePermissions: GridData<IamPermission>;
                 iamGetPermissionsRoles: IamPermissionRole[];
             }>({
                 query    : parseGqlFields(graphqlStatement, fields, constraint),
@@ -178,6 +238,9 @@ export class RoleService
                     queryGetPermissionsRoles,
                     constraintGetPermissionsRoles,
                 },
+                context: {
+                    headers,
+                },
             })
             .valueChanges
             .pipe(
@@ -185,9 +248,16 @@ export class RoleService
                 map(result => result.data),
                 tap(data =>
                 {
-                    this.roleSubject$.next(data.object);
-                    this.permissionService.paginationSubject$.next(data.iamPaginatePermissions);
+                    if (scope)
+                    {
+                        this.setScopeRole(scope, data.object);
+                    }
+                    else
+                    {
+                        this.roleSubject$.next(data.object);
+                    }
                     this.permissionRoleService.paginationSubject$.next(data.iamPaginatePermissionsRoles);
+                    this.permissionService.paginationSubject$.next(data.iamPaginatePermissions);
                     this.permissionRoleService.permissionsRolesSubject$.next(data.iamGetPermissionsRoles);
                 }),
             );
@@ -199,11 +269,13 @@ export class RoleService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamRole;
@@ -227,10 +299,7 @@ export class RoleService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.roleSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopeRole(scope, data.object) : this.roleSubject$.next(data.object)),
             );
     }
 
@@ -240,11 +309,13 @@ export class RoleService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         objects: IamRole[];
@@ -268,10 +339,7 @@ export class RoleService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.rolesSubject$.next(data.objects);
-                }),
+                tap(data => scope ? this.setScopeRoles(scope, data.objects) : this.rolesSubject$.next(data.objects)),
             );
     }
 
@@ -293,6 +361,31 @@ export class RoleService
                 mutation : graphqlStatement,
                 variables: {
                     payload: object,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
+    insert<T>(
+        {
+            graphqlStatement = insertMutation,
+            objects = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            objects?: IamCreateRole[];
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: objects,
                 },
                 context: {
                     headers,
@@ -359,7 +452,7 @@ export class RoleService
     deleteById<T>(
         {
             graphqlStatement = deleteByIdMutation,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
         }: {

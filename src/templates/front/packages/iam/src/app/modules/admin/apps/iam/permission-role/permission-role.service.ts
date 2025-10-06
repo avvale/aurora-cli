@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
+import { IamCreatePermissionRole, IamPermissionRole, IamUpdatePermissionRoleById, IamUpdatePermissionsRoles } from '@apps/iam';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, insertMutation, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/permission-role';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import { IamUpdatePermissionById, IamUpdatePermissions, IamPermissionRole, IamCreatePermissionRole } from '../iam.types';
-import { paginationQuery, getQuery, fields, findByIdQuery, findQuery, createMutation, updateByIdMutation, updateMutation, deleteByIdMutation, deleteMutation, insertMutation } from './permission-role.graphql';
 
 @Injectable({
     providedIn: 'root',
@@ -13,6 +13,11 @@ export class PermissionRoleService
     paginationSubject$: BehaviorSubject<GridData<IamPermissionRole> | null> = new BehaviorSubject(null);
     permissionRoleSubject$: BehaviorSubject<IamPermissionRole | null> = new BehaviorSubject(null);
     permissionsRolesSubject$: BehaviorSubject<IamPermissionRole[] | null> = new BehaviorSubject(null);
+
+    // scoped subjects
+    paginationScoped: { [key: string]: BehaviorSubject<GridData<IamPermissionRole> | null>; } = {};
+    permissionRoleScoped: { [key: string]: BehaviorSubject<IamPermissionRole | null>; } = {};
+    permissionsRolesScoped: { [key: string]: BehaviorSubject<IamPermissionRole[] | null>; } = {};
 
     constructor(
         private readonly graphqlService: GraphQLService,
@@ -36,17 +41,73 @@ export class PermissionRoleService
         return this.permissionsRolesSubject$.asObservable();
     }
 
+    // allows to store different types of pagination under different scopes this allows us
+    // to have multiple observables with different streams of pagination data.
+    setScopePagination(scope: string, pagination: GridData<IamPermissionRole>): void
+    {
+        if (this.paginationScoped[scope])
+        {
+            this.paginationScoped[scope].next(pagination);
+            return;
+        }
+        // create new subject if not exist
+        this.paginationScoped[scope] = new BehaviorSubject(pagination);
+    }
+
+    // get pagination observable by scope
+    getScopePagination(scope: string): Observable<GridData<IamPermissionRole>>
+    {
+        if (!this.paginationScoped[scope]) this.paginationScoped[scope] = new BehaviorSubject(null);
+        return this.paginationScoped[scope].asObservable();
+    }
+
+    setScopePermissionRole(scope: string, object: IamPermissionRole): void
+    {
+        if (this.permissionRoleScoped[scope])
+        {
+            this.permissionRoleScoped[scope].next(object);
+            return;
+        }
+        // create new subject if not exist
+        this.permissionRoleScoped[scope] = new BehaviorSubject(object);
+    }
+
+    getScopePermissionRole(scope: string): Observable<IamPermissionRole>
+    {
+        if (!this.permissionRoleScoped[scope]) this.permissionRoleScoped[scope] = new BehaviorSubject(null);
+        return this.permissionRoleScoped[scope].asObservable();
+    }
+
+    setScopePermissionsRoles(scope: string, objects: IamPermissionRole[]): void
+    {
+        if (this.permissionsRolesScoped[scope])
+        {
+            this.permissionsRolesScoped[scope].next(objects);
+            return;
+        }
+        // create new subject if not exist
+        this.permissionsRolesScoped[scope] = new BehaviorSubject(objects);
+    }
+
+    getScopePermissionsRoles(scope: string): Observable<IamPermissionRole[]>
+    {
+        if (!this.permissionsRolesScoped[scope]) this.permissionsRolesScoped[scope] = new BehaviorSubject(null);
+        return this.permissionsRolesScoped[scope].asObservable();
+    }
+
     pagination(
         {
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<GridData<IamPermissionRole>>
     {
@@ -67,7 +128,7 @@ export class PermissionRoleService
             .pipe(
                 first(),
                 map(result => result.data.pagination),
-                tap(pagination => this.paginationSubject$.next(pagination)),
+                tap(pagination => scope ? this.setScopePagination(scope, pagination) : this.paginationSubject$.next(pagination)),
             );
     }
 
@@ -78,12 +139,14 @@ export class PermissionRoleService
             roleId = null,
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             permissionId?: string;
             roleId?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamPermissionRole;
@@ -108,10 +171,7 @@ export class PermissionRoleService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.permissionRoleSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopePermissionRole(scope, data.object) : this.permissionRoleSubject$.next(data.object)),
             );
     }
 
@@ -121,11 +181,13 @@ export class PermissionRoleService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamPermissionRole;
@@ -149,10 +211,7 @@ export class PermissionRoleService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.permissionRoleSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopePermissionRole(scope, data.object) : this.permissionRoleSubject$.next(data.object)),
             );
     }
 
@@ -162,11 +221,13 @@ export class PermissionRoleService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         objects: IamPermissionRole[];
@@ -190,10 +251,7 @@ export class PermissionRoleService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.permissionsRolesSubject$.next(data.objects);
-                }),
+                tap(data => scope ? this.setScopePermissionsRoles(scope, data.objects) : this.permissionsRolesSubject$.next(data.objects)),
             );
     }
 
@@ -254,7 +312,7 @@ export class PermissionRoleService
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            object?: IamUpdatePermissionById;
+            object?: IamUpdatePermissionRoleById;
             headers?: GraphQLHeaders;
         } = {},
     ): Observable<FetchResult<T>>
@@ -281,7 +339,7 @@ export class PermissionRoleService
             headers = {},
         }: {
             graphqlStatement?: DocumentNode;
-            object?: IamUpdatePermissions;
+            object?: IamUpdatePermissionsRoles;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;

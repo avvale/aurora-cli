@@ -1,22 +1,22 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewChild, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { IamRole } from '@apps/iam/iam.types';
+import { IamPermission, IamPermissionRole, IamRole } from '@apps/iam';
+import { permissionColumnsConfig, PermissionService } from '../permission';
+import { getQueryExportPermissionsRoles, permissionRoleColumnsConfig, PermissionRoleService } from '../permission-role';
 import { RoleService } from '@apps/iam/role';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleCustomHeaderDialogTemplateDirective, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, log, mapActions, Operator, QueryStatementHandler, SelectionChange, SelectionModel, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridSelectMultipleElementsComponent, GridSelectMultipleElementsModule, GridState, GridStateService, log, mapActions, Operator, queryStatementHandler, SelectionChange, SelectionModel, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
-import { IamPermission, IamPermissionRole } from '../iam.types';
-import { permissionColumnsConfig } from '../permission';
-import { permissionRoleColumnsConfig } from '../permission-role/permission-role.columns-config';
-import { getQueryExportPermissionsRoles } from '../permission-role/permission-role.graphql';
-import { PermissionRoleService } from '../permission-role/permission-role.service';
-import { PermissionService } from '../permission/permission.service';
+
+export const permissionRoleGridId = 'iam::role.detail.permissionRoleGridList';
+export const permissionsGridId = 'iam::role.detail.permissionsGridList';
 
 @Component({
     selector: 'iam-role-detail',
     templateUrl: './role-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultDetailImports,
         GridSelectMultipleElementsModule, MatCheckboxModule,
@@ -31,65 +31,20 @@ export class RoleDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: IamRole;
+    managedObject: WritableSignal<IamRole> = signal(null);
 
     // relationships
-    /* #region variables to manage grid-select-multiple-elements permissions */
-    // start permissions dialog
+    /* #region variables to manage grid-select-multiple-elements roles-permissions */
+    // roles-permissions grid-select-multiple-elements
     @ViewChild('permissionsGridSelectMultipleElements') permissionsComponent: GridSelectMultipleElementsComponent;
-    permissionsSelectedRows: IamPermission[] = [];
-    permissionsGridId: string = 'iam::role.detail.permissionsGridList';
-    permissionsGridData$: Observable<GridData<IamPermission>>;
-    permissionsColumnsConfig$: Observable<ColumnConfig[]>;
-    permissionsOriginColumnsConfig: ColumnConfig[] = [
-        {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
-            actions: row =>
-            {
-                const actions = [];
-
-                if (this.rolePermissionsId.includes(row.id))
-                {
-                    actions.push({
-                        id          : 'iam::role.detail.noAction',
-                        isViewAction: false,
-                        translation : 'select',
-                        icon        : 'done',
-                    });
-                }
-                else
-                {
-                    actions.push({
-                        id          : 'iam::role.detail.addPermissionRole',
-                        isViewAction: false,
-                        translation : 'select',
-                        icon        : 'add_link',
-                    });
-                }
-
-                return actions;
-            },
-        },
-        {
-            type       : ColumnDataType.CHECKBOX,
-            field      : 'select',
-            translation: 'Selects',
-            sticky     : true,
-        },
-        ...permissionColumnsConfig,
-    ];
-
-    // start permissions of role grid
-    rolePermissionsId: string[];
-    permissionsRolesGridState: GridState = {};
-    permissionsRolesSelectedRows: IamPermissionRole[] = [];
-    permissionsRolesGridId: string = 'iam::role.detail.permissionsRolesGridList';
-    permissionsRolesGridData$: Observable<GridData<IamPermissionRole>>;
-    permissionsRolesColumnsConfig$: Observable<ColumnConfig[]>;
+    permissionsRolesIds: string[];
+    permissionRoleGridState: GridState = {};
+    permissionRoleSelectedRows: IamPermissionRole[] = [];
+    permissionRoleGridId = permissionRoleGridId;
+    permissionRoleGridData$: Observable<GridData<IamPermissionRole>>;
+    permissionRoleColumnsConfig$: Observable<ColumnConfig[]>;
     selectedCheckboxRowModel = new SelectionModel<any>(true, [], true, (a: IamPermissionRole, b: IamPermissionRole) => a.permissionId === b.permissionId);
-    originPermissionsRolesColumnsConfig: ColumnConfig[] = [
+    originPermissionRoleColumnsConfig: ColumnConfig[] = [
         {
             type   : ColumnDataType.ACTIONS,
             field  : 'actions',
@@ -99,22 +54,67 @@ export class RoleDetailComponent extends ViewDetailComponent
                 const actions = [];
 
                 actions.push({
-                    id          : 'iam::role.detail.removePermissionRole',
+                    id: 'iam::role.detail.removePermissionRole',
                     isViewAction: false,
-                    translation : 'unlink',
-                    icon        : 'link_off',
+                    translation: 'unlink',
+                    icon: 'link_off',
                 });
 
                 return actions;
             },
         },
         {
-            type       : ColumnDataType.CHECKBOX,
-            field      : 'select',
+            type: ColumnDataType.CHECKBOX,
+            field: 'select',
             translation: 'Selects',
-            sticky     : true,
+            sticky: true,
         },
         ...permissionRoleColumnsConfig,
+    ];
+
+    // permissions dialog
+    permissionsSelectedRows: IamPermission[] = [];
+    permissionsGridId = permissionsGridId;
+    permissionsGridData$: Observable<GridData<IamPermission>>;
+    permissionsColumnsConfig$: Observable<ColumnConfig[]>;
+    originPermissionsColumnsConfig: ColumnConfig[] = [
+        {
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
+            actions: row =>
+            {
+                const actions = [];
+
+                if (this.permissionsRolesIds.includes(row.id))
+                {
+                    actions.push({
+                        id: 'iam::role.detail.noAction',
+                        isViewAction: false,
+                        translation: 'select',
+                        icon: 'done',
+                    });
+                }
+                else
+                {
+                    actions.push({
+                        id: 'iam::role.detail.addPermission',
+                        isViewAction: false,
+                        translation: 'select',
+                        icon: 'add_link',
+                    });
+                }
+
+                return actions;
+            },
+        },
+        {
+            type: ColumnDataType.CHECKBOX,
+            field: 'select',
+            translation: 'Selects',
+            sticky: true,
+        },
+        ...permissionColumnsConfig,
     ];
     /* #endregion variables to manage grid-select-multiple-elements permissions }} */
 
@@ -165,12 +165,12 @@ export class RoleDetailComponent extends ViewDetailComponent
                 SnackBarInvalidFormComponent,
                 {
                     data: {
-                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        message: `${this.translocoService.translate('InvalidForm')}`,
                         textButton: `${this.translocoService.translate('InvalidFormOk')}`,
                     },
-                    panelClass      : 'error-snackbar',
+                    panelClass: 'error-snackbar',
                     verticalPosition: 'top',
-                    duration        : 10000,
+                    duration: 10000,
                 },
             );
             return;
@@ -203,18 +203,18 @@ export class RoleDetailComponent extends ViewDetailComponent
     /* #region methods to manage PermissionsRoles grid */
     handlePermissionsRowsSectionChange($event: SelectionChange<IamPermissionRole>): void
     {
-        this.permissionsRolesSelectedRows = $event.source.selected;
+        this.permissionRoleSelectedRows = $event.source.selected;
     }
 
     handleRemovePermissionsSelected(): void
     {
-        if (this.permissionsRolesSelectedRows.length > 0)
+        if (this.permissionRoleSelectedRows.length > 0)
         {
             this.actionService.action({
-                id          : 'iam::role.detail.removePermissionsRoles',
+                id: 'iam::role.detail.removePermissionsRoles',
                 isViewAction: false,
-                meta        : {
-                    rows: this.permissionsRolesSelectedRows,
+                meta: {
+                    rows: this.permissionRoleSelectedRows,
                 },
             });
         }
@@ -225,11 +225,10 @@ export class RoleDetailComponent extends ViewDetailComponent
     handleOpenPermissionsDialog(): void
     {
         this.actionService.action({
-            id          : 'iam::role.detail.permissionsPagination',
+            id: 'iam::role.detail.permissionsPagination',
             isViewAction: false,
-            meta        : {
-                query: QueryStatementHandler
-                    .init({ columnsConfig: permissionColumnsConfig })
+            meta: {
+                query: queryStatementHandler({ columnsConfig: permissionColumnsConfig })
                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
                     .setSort(this.gridStateService.getSort(this.permissionsGridId))
                     .setPage(this.gridStateService.getPage(this.permissionsGridId))
@@ -242,12 +241,12 @@ export class RoleDetailComponent extends ViewDetailComponent
                 this.gridStateService.setExportActionId(this.permissionsGridId, 'iam::role.detail.exportPermissions');
                 this.permissionsComponent.handleElementsDialog({
                     data: {
-                        gridId   : this.permissionsGridId,
+                        gridId: this.permissionsGridId,
                         gridState: {
                             columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId),
-                            page         : this.gridStateService.getPage(this.permissionsGridId),
-                            sort         : this.gridStateService.getSort(this.permissionsGridId),
-                            search       : this.gridStateService.getSearchState(this.permissionsGridId),
+                            page: this.gridStateService.getPage(this.permissionsGridId),
+                            sort: this.gridStateService.getSort(this.permissionsGridId),
+                            search: this.gridStateService.getSearchState(this.permissionsGridId),
                         },
                     },
                 });
@@ -265,9 +264,9 @@ export class RoleDetailComponent extends ViewDetailComponent
         if (this.permissionsSelectedRows.length > 0)
         {
             this.actionService.action({
-                id          : 'iam::role.detail.addPermissionsRoles',
+                id: 'iam::role.detail.addPermissionsRoles',
                 isViewAction: false,
-                meta        : {
+                meta: {
                     rows: this.permissionsSelectedRows,
                 },
             });
@@ -284,7 +283,7 @@ export class RoleDetailComponent extends ViewDetailComponent
         {
             /* #region common actions */
             case 'iam::role.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'iam::role.detail.edit':
@@ -293,7 +292,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item =>
                     {
-                        this.managedObject = item;
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
 
@@ -305,26 +304,26 @@ export class RoleDetailComponent extends ViewDetailComponent
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(permissionsRoles =>
                     {
-                        this.rolePermissionsId = permissionsRoles.map(permissionRole => permissionRole.permissionId);
+                        this.permissionsRolesIds = permissionsRoles.map(permissionRole => permissionRole.permissionId);
                     });
 
                 // permissions grid
-                this.permissionsRolesColumnsConfig$ = this.gridColumnsConfigStorageService
-                    .getColumnsConfig(this.permissionsRolesGridId, this.originPermissionsRolesColumnsConfig)
+                this.permissionRoleColumnsConfig$ = this.gridColumnsConfigStorageService
+                    .getColumnsConfig(this.permissionRoleGridId, this.originPermissionRoleColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
 
-                this.permissionsRolesGridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.permissionsRolesGridId),
-                    page         : this.gridStateService.getPage(this.permissionsRolesGridId),
-                    sort         : this.gridStateService.getSort(this.permissionsRolesGridId),
-                    search       : this.gridStateService.getSearchState(this.permissionsRolesGridId),
+                this.permissionRoleGridState = {
+                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.permissionRoleGridId),
+                    page: this.gridStateService.getPage(this.permissionRoleGridId),
+                    sort: this.gridStateService.getSort(this.permissionRoleGridId),
+                    search: this.gridStateService.getSearchState(this.permissionRoleGridId),
                 };
 
-                this.permissionsRolesGridData$ = this.permissionRoleService.pagination$;
+                this.permissionRoleGridData$ = this.permissionRoleService.pagination$;
 
                 // permissions grid
                 this.permissionsColumnsConfig$ = this.gridColumnsConfigStorageService
-                    .getColumnsConfig(this.permissionsGridId, this.permissionsOriginColumnsConfig)
+                    .getColumnsConfig(this.permissionsGridId, this.originPermissionsColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
                 this.permissionsGridData$ = this.permissionService.pagination$;
                 /* #endregion edit action to manage PermissionsRoles grid-select-multiple-elements */
@@ -345,7 +344,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
@@ -372,7 +371,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
@@ -386,27 +385,27 @@ export class RoleDetailComponent extends ViewDetailComponent
                 /* #endregion common actions */
 
             /* #region actions to manage PermissionsRoles grid-select-multiple-elements grid */
-            case 'iam::role.detail.addPermissionRole':
+            case 'iam::role.detail.addPermission':
                 await lastValueFrom(this.permissionRoleService.create({
                     object: {
+                        roleId: this.managedObject().id,
                         permissionId: action.meta.row.id,
-                        roleId      : this.managedObject.id,
                     },
                 }));
 
                 this.actionService.action({
-                    id          : 'iam::role.detail.permissionsRolesPagination',
+                    id: 'iam::role.detail.permissionsRolesPagination',
                     isViewAction: false,
                 });
 
-                // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                // get all PermissionsRoles from the role, to mark the permissions as selected when open permissions dialog
                 this.actionService.action({
-                    id            : 'iam::role.detail.getPermissionsRoles',
-                    isViewAction  : false,
+                    id: 'iam::role.detail.getPermissionsRoles',
+                    isViewAction: false,
                     afterRunAction: () =>
                     {
                         this.actionService.action({
-                            id          : 'iam::role.detail.permissionsPagination',
+                            id: 'iam::role.detail.permissionsPagination',
                             isViewAction: false,
                         });
                     },
@@ -417,7 +416,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                     undefined,
                     {
                         verticalPosition: 'top',
-                        duration        : 3000,
+                        duration: 3000,
                     },
                 );
                 break;
@@ -430,22 +429,22 @@ export class RoleDetailComponent extends ViewDetailComponent
                             .insert({
                                 objects: action.meta.rows
                                     // avoid insert rows already inserted
-                                    .filter(row => this.rolePermissionsId.indexOf(row.id) === -1)
+                                    .filter(row => this.permissionsRolesIds.indexOf(row.id) === -1)
                                     .map(row => ({
+                                        roleId: this.managedObject().id,
                                         permissionId: row.id,
-                                        roleId      : this.managedObject.id,
                                     })),
                             }),
                     );
 
                     this.actionService.action({
-                        id          : 'iam::role.detail.permissionsRolesPagination',
+                        id: 'iam::role.detail.permissionsRolesPagination',
                         isViewAction: false,
                     });
 
-                    // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                    // get all PermissionsRoles from the role, to mark the permissions as selected when open permissions dialog
                     this.actionService.action({
-                        id          : 'iam::role.detail.getPermissionsRoles',
+                        id: 'iam::role.detail.getPermissionsRoles',
                         isViewAction: false,
                     });
 
@@ -454,7 +453,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
                 }
@@ -465,18 +464,21 @@ export class RoleDetailComponent extends ViewDetailComponent
                 break;
 
             case 'iam::role.detail.removePermissionRole':
-                await lastValueFrom(this.permissionRoleService.deleteById({
-                    permissionId: action.meta.row.permissionId,
-                    roleId      : this.managedObject.id,
-                }));
+                await lastValueFrom(
+                    this.permissionRoleService
+                        .deleteById({
+                            roleId: this.managedObject().id,
+                            permissionId: action.meta.row.permissionId,
+                    }),
+                );
 
                 this.actionService.action({
-                    id          : 'iam::role.detail.permissionsRolesPagination',
+                    id: 'iam::role.detail.permissionsRolesPagination',
                     isViewAction: false,
                 });
 
                 this.actionService.action({
-                    id          : 'iam::role.detail.getPermissionsRoles',
+                    id: 'iam::role.detail.getPermissionsRoles',
                     isViewAction: false,
                 });
 
@@ -485,7 +487,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                     undefined,
                     {
                         verticalPosition: 'top',
-                        duration        : 3000,
+                        duration: 3000,
                     },
                 );
                 break;
@@ -496,16 +498,15 @@ export class RoleDetailComponent extends ViewDetailComponent
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
-                                QueryStatementHandler
-                                    .init({ columnsConfig: permissionRoleColumnsConfig })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsRolesGridId))
-                                    .setSort(this.gridStateService.getSort(this.permissionsRolesGridId))
-                                    .setPage(this.gridStateService.getPage(this.permissionsRolesGridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.permissionsRolesGridId))
+                                queryStatementHandler({ columnsConfig: permissionRoleColumnsConfig })
+                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionRoleGridId))
+                                    .setSort(this.gridStateService.getSort(this.permissionRoleGridId))
+                                    .setPage(this.gridStateService.getPage(this.permissionRoleGridId))
+                                    .setSearch(this.gridStateService.getSearchState(this.permissionRoleGridId))
                                     .getQueryStatement(),
                             constraint: {
                                 where: {
-                                    roleId: this.managedObject.id,
+                                    roleId: this.managedObject().id,
                                 },
                                 include: [
                                     {
@@ -523,7 +524,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                         .get({
                             query: {
                                 where: {
-                                    roleId: this.managedObject.id,
+                                    roleId: this.managedObject().id,
                                 },
                             },
                         }),
@@ -535,10 +536,10 @@ export class RoleDetailComponent extends ViewDetailComponent
                     this.permissionRoleService
                         .get({
                             graphqlStatement: getQueryExportPermissionsRoles,
-                            query           : action.meta.query,
-                            constraint      : {
+                            query: action.meta.query,
+                            constraint: {
                                 where: {
-                                    roleId: this.managedObject.id,
+                                    roleId: this.managedObject().id,
                                 },
                                 include: [
                                     {
@@ -553,8 +554,10 @@ export class RoleDetailComponent extends ViewDetailComponent
                 const permissionRoleHeaders: string[] = [this.translocoService.translate('iam.permission')];
 
                 exportRows(
-                    permissionRoleRows.objects.map(row => row.permission),
-                    'rolePermissions.' + action.meta.format,
+                    permissionRoleRows.objects.map(row => ({
+                        ...row.permission,
+                    })),
+                    'permissionsRoles.' + action.meta.format,
                     permissionRoleColumns,
                     permissionRoleHeaders,
                     action.meta.format,
@@ -569,8 +572,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
-                                QueryStatementHandler
-                                    .init({ columnsConfig: permissionColumnsConfig })
+                                queryStatementHandler({ columnsConfig: permissionColumnsConfig })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.permissionsGridId))
                                     .setSort(this.gridStateService.getSort(this.permissionsGridId))
                                     .setPage(this.gridStateService.getPage(this.permissionsGridId))
@@ -590,8 +592,8 @@ export class RoleDetailComponent extends ViewDetailComponent
                                     where: {
                                         [Operator.or]: action.meta.rows
                                             .map(row => ({
+                                                roleId: this.managedObject().id,
                                                 permissionId: row.permissionId,
-                                                roleId      : this.managedObject.id,
                                             })),
                                     },
                                 },
@@ -601,13 +603,13 @@ export class RoleDetailComponent extends ViewDetailComponent
                     this.selectedCheckboxRowModel.clear();
 
                     this.actionService.action({
-                        id          : 'iam::role.detail.permissionsRolesPagination',
+                        id: 'iam::role.detail.permissionsRolesPagination',
                         isViewAction: false,
                     });
 
-                    // get all permissions roles from the role, to mark the permissions as selected when open permissions dialog
+                    // get all PermissionsRoles from the role, to mark the permissions as selected when open permissions dialog
                     this.actionService.action({
-                        id          : 'iam::role.detail.getPermissionsRoles',
+                        id: 'iam::role.detail.getPermissionsRoles',
                         isViewAction: false,
                     });
 
@@ -616,7 +618,7 @@ export class RoleDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
                 }

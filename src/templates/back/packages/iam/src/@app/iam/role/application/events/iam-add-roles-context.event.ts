@@ -1,4 +1,4 @@
-import { IamCreatedRoleEvent, IamCreatedRolesEvent, IamDeletedRoleEvent, IamDeletedRolesEvent, IamRole, IamUpdatedAndIncrementedRoleEvent, IamUpdatedAndIncrementedRolesEvent, IamUpdatedRoleEvent, IamUpdatedRolesEvent } from '@app/iam/role';
+import { IamCreatedRoleEvent, IamCreatedRolesEvent, IamDeletedRoleEvent, IamDeletedRolesEvent, IamRole, IamUpdatedRoleEvent, IamUpdatedRolesEvent } from '@app/iam/role';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
@@ -46,29 +46,6 @@ export class IamAddRolesContextEvent extends AggregateRoot
             new IamUpdatedRolesEvent({
                 payload: this.aggregateRoots.map(role =>
                     new IamUpdatedRoleEvent({
-                        payload: {
-                            id: role.id.value,
-                            name: role.name.value,
-                            isMaster: role.isMaster.value,
-                            permissionIds: role.permissionIds?.value,
-                            accountIds: role.accountIds?.value,
-                            createdAt: role.createdAt?.value,
-                            updatedAt: role.updatedAt?.value,
-                            deletedAt: role.deletedAt?.value,
-                        },
-                    }),
-                ),
-                cQMetadata: this.cQMetadata,
-            }),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new IamUpdatedAndIncrementedRolesEvent({
-                payload: this.aggregateRoots.map(role =>
-                    new IamUpdatedAndIncrementedRoleEvent({
                         payload: {
                             id: role.id.value,
                             name: role.name.value,

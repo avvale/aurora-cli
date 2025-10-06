@@ -1,6 +1,6 @@
 {
-    "name": "aurora-app",
-    "version": "0.0.0",
+    "name": "aurora-back",
+    "version": "0.0.1",
     "description": "",
     "author": "José Carlos Rodríguez Palacín <carlos.rodriguez.palacin@gmail.com>",
     "private": true,

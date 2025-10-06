@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToolsMigration } from '@apps/tools';
 import { MigrationService } from '@apps/tools/migration';
-import { Action, ChipComponent, Crumb, defaultDetailImports, log, mapActions, MatFormFieldAppearanceComponent, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
+import { Action, ChipComponent, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, log, mapActions, MatFormFieldAppearanceComponent, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { lastValueFrom, takeUntil } from 'rxjs';
@@ -15,8 +15,9 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ...defaultDetailImports,
-        ChipComponent, MatCheckboxModule, MtxDatetimepickerModule,
-        MatFormFieldAppearanceComponent, MonacoEditorModule,
+        ChipComponent, DatetimepickerSqlFormatDirective, MatCheckboxModule,
+        MtxDatetimepickerModule, MatFormFieldAppearanceComponent,
+        MonacoEditorModule,
     ],
 })
 export class MigrationDetailComponent extends ViewDetailComponent

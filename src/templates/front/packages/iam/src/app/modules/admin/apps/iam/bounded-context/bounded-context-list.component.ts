@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { boundedContextColumnsConfig, BoundedContextService } from '@apps/iam/bounded-context';
 import { IamBoundedContext } from '@apps/iam/iam.types';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, queryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+
+export const boundedContextMainGridListId = 'iam::boundedContext.list.mainGridList';
 
 @Component({
     selector: 'iam-bounded-context-list',
     templateUrl: './bounded-context-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultListImports,
     ],
@@ -22,7 +25,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
         { translation: 'App', routerLink: ['/']},
         { translation: 'iam.BoundedContexts' },
     ];
-    gridId: string = 'iam::boundedContext.list.mainGridList';
+    gridId: string = boundedContextMainGridListId;
     gridData$: Observable<GridData<IamBoundedContext>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
@@ -76,6 +79,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'iam::boundedContext.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
@@ -96,8 +100,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
                     this.boundedContextService.pagination({
                         query: action.meta.query ?
                             action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: boundedContextColumnsConfig })
+                            queryStatementHandler({ columnsConfig: boundedContextColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
@@ -153,7 +156,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
                                 );
 
                                 this.actionService.action({
-                                    id          : 'iam::boundedContext.list.pagination',
+                                    id: 'iam::boundedContext.list.pagination',
                                     isViewAction: false,
                                 });
                             }
@@ -173,14 +176,8 @@ export class BoundedContextListComponent extends ViewBaseComponent
                         }),
                 );
 
-                // format export rows
-                (rows.objects as any[]).forEach(row =>
-                {
-                    // row.id = row.id;
-                });
-
                 const columns: string[] = boundedContextColumnsConfig.map(boundedContextColumnConfig => boundedContextColumnConfig.field);
-                const headers: string[] = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const headers: string[] = boundedContextColumnsConfig.map(boundedContextColumnConfig => this.translocoService.translate(boundedContextColumnConfig.translation));
 
                 exportRows(
                     rows.objects,
@@ -190,6 +187,7 @@ export class BoundedContextListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+                /* #endregion common actions */
         }
     }
 }

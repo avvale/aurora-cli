@@ -1,6 +1,10 @@
 {
     "Accept": "Aceptar",
     "Account": "Cuenta",
+    "AccountTypes": {
+        "SERVICE": "Servicio",
+        "USER": "Usuario"
+    },
     "Actions": "Acciones",
     "Active": "Activo",
     "Add": "Añadir",
@@ -60,6 +64,7 @@
     "ForgotPasswordDescription": "Indique su ususario o email para restablecer su contraseña",
     "Forward": "Reenviar",
     "GoTo": "Ir a",
+    "Id": "Id",
     "IdCard": "DNI",
     "Image": "Imagen",
     "Images": "Imágenes",
@@ -141,6 +146,7 @@
     "Saved.F.P": "Guardadas",
     "Saved.M": "Guardado",
     "Saved.M.P": "Guardados",
+    "Scopes": "Scopes",
     "Search": "Buscar",
     "Second": "Segundo",
     "Seconds": "Segundos",
@@ -181,6 +187,7 @@
     "Synchronized.M": "Sincronizado",
     "SynchronizeWarning": "Va a sincronizar el registro {{ entity }} {{ id }}",
     "SyncStatus": "Estado de sincronización",
+    "Tags": "Etiquetas",
     "Tenant": "Tenant",
     "Tenants": "Tenants",
     "Title": "Título",
@@ -197,7 +204,7 @@
     "UploadFiles": "Subir ficheros",
     "UploadImages": "Subir imágenes",
     "User": "Usuario",
-    "Username": "Nombre de usuario",
+    "Username": "Usuario",
     "UsernameEmail": "Usuario o email",
     "Value": "Valor",
     "View": "Ver",

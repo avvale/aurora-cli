@@ -97,12 +97,12 @@
                         appearance="outline"
                         class="col-4"
                     >
-                        <mat-label>{{ t('iam.Type') }}</mat-label>
+                        <mat-label>{{ t('Type') }}</mat-label>
                         <mat-select
                             formControlName="type"
                             (selectionChange)="handleChangeAccountType($event)"
                         >
-                            @for (type of iamAccountType | keyvalue; track type)
+                            @for (type of iamAccountType | keyvalue; track type.key)
                             {
                                 <mat-option [value]="type.key">
                                     {{ t('iam.AccountType.' + type.value) }}

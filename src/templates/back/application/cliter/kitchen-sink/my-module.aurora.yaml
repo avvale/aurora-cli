@@ -110,10 +110,10 @@ aggregateProperties:
           - count
           - max
           - min
-          - sum
           - rawSql
-          - upsert
+          - sum
           - updateAndIncrement
+          - upsert
     webComponent:
       type: async-search-multiple-select
   - name: meta

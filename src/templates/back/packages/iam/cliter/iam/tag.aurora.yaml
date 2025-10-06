@@ -31,10 +31,10 @@ excludedOperations:
   - count
   - max
   - min
-  - sum
   - rawSql
-  - upsert
+  - sum
   - updateAndIncrement
+  - upsert
   - createBatch
   - update
   - delete

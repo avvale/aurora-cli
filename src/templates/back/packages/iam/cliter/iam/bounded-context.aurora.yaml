@@ -60,3 +60,11 @@ aggregateProperties:
     description: Timestamp when the bounded context was deleted
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

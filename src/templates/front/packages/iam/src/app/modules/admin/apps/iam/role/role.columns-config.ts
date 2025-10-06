@@ -2,16 +2,16 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const roleColumnsConfig: ColumnConfig[] = [
     {
-        type       : ColumnDataType.STRING,
-        field      : 'name',
-        sort       : 'name',
+        type: ColumnDataType.STRING,
+        field: 'name',
+        sort: 'name',
         translation: 'Name',
-        isUnaccent : true,
+        isUnaccent: true,
     },
     {
-        type       : ColumnDataType.BOOLEAN,
-        field      : 'isMaster',
-        sort       : 'isMaster',
+        type: ColumnDataType.BOOLEAN,
+        field: 'isMaster',
+        sort: 'isMaster',
         translation: 'IsMaster',
     },
 ];

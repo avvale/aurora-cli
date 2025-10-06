@@ -1,10 +1,9 @@
-import { BoundedContextService } from '../bounded-context/bounded-context.service';
-import { IamBoundedContext } from '../iam.types';
 import { findByIdWithRelationsQuery, getRelations } from './permission.graphql';
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { DocumentNode, FetchResult } from '@apollo/client/core';
-import { IamCreatePermission, IamPermission, IamUpdatePermissionById, IamUpdatePermissions } from '@apps/iam/iam.types';
-import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/permission';
+import { IamBoundedContext, IamCreatePermission, IamPermission, IamUpdatePermissionById, IamUpdatePermissions } from '@apps/iam';
+import { BoundedContextService } from '@apps/iam/bounded-context';
+import { createMutation, deleteByIdMutation, deleteMutation, fields, findByIdQuery, findQuery, getQuery, insertMutation, paginationQuery, updateByIdMutation, updateMutation } from '@apps/iam/permission';
 import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 
@@ -16,6 +15,11 @@ export class PermissionService
     paginationSubject$: BehaviorSubject<GridData<IamPermission> | null> = new BehaviorSubject(null);
     permissionSubject$: BehaviorSubject<IamPermission | null> = new BehaviorSubject(null);
     permissionsSubject$: BehaviorSubject<IamPermission[] | null> = new BehaviorSubject(null);
+
+    // scoped subjects
+    paginationScoped: { [key: string]: BehaviorSubject<GridData<IamPermission> | null>; } = {};
+    permissionScoped: { [key: string]: BehaviorSubject<IamPermission | null>; } = {};
+    permissionsScoped: { [key: string]: BehaviorSubject<IamPermission[] | null>; } = {};
 
     constructor(
         private readonly graphqlService: GraphQLService,
@@ -39,17 +43,73 @@ export class PermissionService
         return this.permissionsSubject$.asObservable();
     }
 
+    // allows to store different types of pagination under different scopes this allows us
+    // to have multiple observables with different streams of pagination data.
+    setScopePagination(scope: string, pagination: GridData<IamPermission>): void
+    {
+        if (this.paginationScoped[scope])
+        {
+            this.paginationScoped[scope].next(pagination);
+            return;
+        }
+        // create new subject if not exist
+        this.paginationScoped[scope] = new BehaviorSubject(pagination);
+    }
+
+    // get pagination observable by scope
+    getScopePagination(scope: string): Observable<GridData<IamPermission>>
+    {
+        if (!this.paginationScoped[scope]) this.paginationScoped[scope] = new BehaviorSubject(null);
+        return this.paginationScoped[scope].asObservable();
+    }
+
+    setScopePermission(scope: string, object: IamPermission): void
+    {
+        if (this.permissionScoped[scope])
+        {
+            this.permissionScoped[scope].next(object);
+            return;
+        }
+        // create new subject if not exist
+        this.permissionScoped[scope] = new BehaviorSubject(object);
+    }
+
+    getScopePermission(scope: string): Observable<IamPermission>
+    {
+        if (!this.permissionScoped[scope]) this.permissionScoped[scope] = new BehaviorSubject(null);
+        return this.permissionScoped[scope].asObservable();
+    }
+
+    setScopePermissions(scope: string, objects: IamPermission[]): void
+    {
+        if (this.permissionsScoped[scope])
+        {
+            this.permissionsScoped[scope].next(objects);
+            return;
+        }
+        // create new subject if not exist
+        this.permissionsScoped[scope] = new BehaviorSubject(objects);
+    }
+
+    getScopePermissions(scope: string): Observable<IamPermission[]>
+    {
+        if (!this.permissionsScoped[scope]) this.permissionsScoped[scope] = new BehaviorSubject(null);
+        return this.permissionsScoped[scope].asObservable();
+    }
+
     pagination(
         {
             graphqlStatement = paginationQuery,
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<GridData<IamPermission>>
     {
@@ -70,21 +130,23 @@ export class PermissionService
             .pipe(
                 first(),
                 map(result => result.data.pagination),
-                tap(pagination => this.paginationSubject$.next(pagination)),
+                tap(pagination => scope ? this.setScopePagination(scope, pagination) : this.paginationSubject$.next(pagination)),
             );
     }
 
     findById(
         {
             graphqlStatement = findByIdQuery,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamPermission;
@@ -108,10 +170,7 @@ export class PermissionService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.permissionSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopePermission(scope, data.object) : this.permissionSubject$.next(data.object)),
             );
     }
 
@@ -120,16 +179,18 @@ export class PermissionService
             graphqlStatement = findByIdWithRelationsQuery,
             id = '',
             constraint = {},
-            headers = {},
             queryBoundedContexts = {},
             constraintBoundedContexts = {},
+            headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             id?: string;
             constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
             queryBoundedContexts?: QueryStatement;
             constraintBoundedContexts?: QueryStatement;
+            headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamPermission;
@@ -162,7 +223,14 @@ export class PermissionService
                 map(result => result.data),
                 tap(data =>
                 {
+                    if (scope)
+                    {
+                        this.setScopePermission(scope, data.object);
+                    }
+                    else
+                {
                     this.permissionSubject$.next(data.object);
+                    }
                     boundedContextService.boundedContextsSubject$.next(data.iamGetBoundedContexts);
                 }),
             );
@@ -174,11 +242,13 @@ export class PermissionService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         object: IamPermission;
@@ -202,10 +272,7 @@ export class PermissionService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.permissionSubject$.next(data.object);
-                }),
+                tap(data => scope ? this.setScopePermission(scope, data.object) : this.permissionSubject$.next(data.object)),
             );
     }
 
@@ -215,11 +282,13 @@ export class PermissionService
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         objects: IamPermission[];
@@ -243,10 +312,7 @@ export class PermissionService
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.permissionsSubject$.next(data.objects);
-                }),
+                tap(data => scope ? this.setScopePermissions(scope, data.objects) : this.permissionsSubject$.next(data.objects)),
             );
     }
 
@@ -317,6 +383,31 @@ export class PermissionService
             });
     }
 
+    insert<T>(
+        {
+            graphqlStatement = insertMutation,
+            objects = null,
+            headers = {},
+        }: {
+            graphqlStatement?: DocumentNode;
+            objects?: IamCreatePermission[];
+            headers?: GraphQLHeaders;
+        } = {},
+    ): Observable<FetchResult<T>>
+    {
+        return this.graphqlService
+            .client()
+            .mutate({
+                mutation : graphqlStatement,
+                variables: {
+                    payload: objects,
+                },
+                context: {
+                    headers,
+                },
+            });
+    }
+
     updateById<T>(
         {
             graphqlStatement = updateByIdMutation,
@@ -376,7 +467,7 @@ export class PermissionService
     deleteById<T>(
         {
             graphqlStatement = deleteByIdMutation,
-            id = '',
+            id = null,
             constraint = {},
             headers = {},
         }: {

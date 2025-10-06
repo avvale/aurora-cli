@@ -6,26 +6,6 @@
             "integrity": "sha1:f5604606b2c6790ea25d6362db9b858542ce7a63"
         },
         {
-            "path": "src/@app/iam/permission/application/count/iam-count-permission.query-handler.spec.ts",
-            "integrity": "sha1:457464e4a8639475f6d29de7e11a5242121624ff"
-        },
-        {
-            "path": "src/@app/iam/permission/application/count/iam-count-permission.query-handler.ts",
-            "integrity": "sha1:f2fe00b6d500612842a59b49a689002a7a4e38e9"
-        },
-        {
-            "path": "src/@app/iam/permission/application/count/iam-count-permission.query.ts",
-            "integrity": "sha1:42ca6b80baca25f015b3ff8774160db7d343c10d"
-        },
-        {
-            "path": "src/@app/iam/permission/application/count/iam-count-permission.service.spec.ts",
-            "integrity": "sha1:178b90592c2fa4dba24c04c3203d02cbfdb193f9"
-        },
-        {
-            "path": "src/@app/iam/permission/application/count/iam-count-permission.service.ts",
-            "integrity": "sha1:dc5922021201b411a68a705c0b499a6db9b0352c"
-        },
-        {
             "path": "src/@app/iam/permission/application/create/iam-create-permission.command-handler.spec.ts",
             "integrity": "sha1:72c3e722ba13319c812384595626a1b7ca378a75"
         },
@@ -107,7 +87,7 @@
         },
         {
             "path": "src/@app/iam/permission/application/events/iam-add-permissions-context.event.ts",
-            "integrity": "sha1:6ab33cc1a7e6125f51a3cb07ec5ed5b9bbcb8761"
+            "integrity": "sha1:c5f0888e40dd48a70dbc89532a1a6d9897b6a889"
         },
         {
             "path": "src/@app/iam/permission/application/events/iam-created-permission.event-handler.ts",
@@ -156,18 +136,6 @@
         {
             "path": "src/@app/iam/permission/application/events/iam-updated-permissions.event.ts",
             "integrity": "sha1:c51689e594fb7795eb023e8fdc354043804dedb8"
-        },
-        {
-            "path": "src/@app/iam/permission/application/events/iam-updated-and-incremented-permission.event.ts",
-            "integrity": "sha1:dfbb3b4036c4535d3be05f3271906feda84c12d9"
-        },
-        {
-            "path": "src/@app/iam/permission/application/events/iam-updated-and-incremented-permissions.event-handler.ts",
-            "integrity": "sha1:5b6632ff1f60ed3799af4009e2ac9b7c17807156"
-        },
-        {
-            "path": "src/@app/iam/permission/application/events/iam-updated-and-incremented-permissions.event.ts",
-            "integrity": "sha1:129b08c0ebbc89dcb67dae9fd8aa60436f43ce15"
         },
         {
             "path": "src/@app/iam/permission/application/find/iam-find-permission-by-id.query-handler.spec.ts",
@@ -230,46 +198,6 @@
             "integrity": "sha1:241b08cfac3f68022816a8a3cf477bbbfb2ce751"
         },
         {
-            "path": "src/@app/iam/permission/application/max/iam-max-permission.query-handler.spec.ts",
-            "integrity": "sha1:94fe6d001a4874eeb80ad27314b7c86126193662"
-        },
-        {
-            "path": "src/@app/iam/permission/application/max/iam-max-permission.query-handler.ts",
-            "integrity": "sha1:e19206fc9a571d4d4518b073afd8b9c8b824596d"
-        },
-        {
-            "path": "src/@app/iam/permission/application/max/iam-max-permission.query.ts",
-            "integrity": "sha1:5a1a5b22b484c15f6b2bbe5ae4769819e434573b"
-        },
-        {
-            "path": "src/@app/iam/permission/application/max/iam-max-permission.service.spec.ts",
-            "integrity": "sha1:6117fafb21caca97eec64d25c8c7a9c1103b39be"
-        },
-        {
-            "path": "src/@app/iam/permission/application/max/iam-max-permission.service.ts",
-            "integrity": "sha1:b6c5ed03b6a26d1387a90c22a3422810f3b2baa3"
-        },
-        {
-            "path": "src/@app/iam/permission/application/min/iam-min-permission.query-handler.spec.ts",
-            "integrity": "sha1:4ecdd04485bd6718055dc5c41def1e0811fe5319"
-        },
-        {
-            "path": "src/@app/iam/permission/application/min/iam-min-permission.query-handler.ts",
-            "integrity": "sha1:6550fc7817e8c5f2250e07e4109a0685dc57907e"
-        },
-        {
-            "path": "src/@app/iam/permission/application/min/iam-min-permission.query.ts",
-            "integrity": "sha1:f559653a4bead4d6542955d7728b16accccd7593"
-        },
-        {
-            "path": "src/@app/iam/permission/application/min/iam-min-permission.service.spec.ts",
-            "integrity": "sha1:dea30aeec01e111046511dc8bdb127b1aed5f942"
-        },
-        {
-            "path": "src/@app/iam/permission/application/min/iam-min-permission.service.ts",
-            "integrity": "sha1:7767580796735675512d899ab38757d4c74abedd"
-        },
-        {
             "path": "src/@app/iam/permission/application/paginate/iam-paginate-permissions.query-handler.spec.ts",
             "integrity": "sha1:4181ae4d5945f28e1700757ea6d5c3aaf4237db6"
         },
@@ -290,48 +218,8 @@
             "integrity": "sha1:d6d30d60335ffc5e91e074933da7d67156d02662"
         },
         {
-            "path": "src/@app/iam/permission/application/raw-sql/iam-raw-sql-permissions.query-handler.spec.ts",
-            "integrity": "sha1:6013b071a00baa69569144063a292c1cb8b73da8"
-        },
-        {
-            "path": "src/@app/iam/permission/application/raw-sql/iam-raw-sql-permissions.query-handler.ts",
-            "integrity": "sha1:cbc122dfa8afc0e9c248fca40ca746858acbf01e"
-        },
-        {
-            "path": "src/@app/iam/permission/application/raw-sql/iam-raw-sql-permissions.query.ts",
-            "integrity": "sha1:6bdf2a8293e4a0269c7461a521dfca8bc095adf5"
-        },
-        {
-            "path": "src/@app/iam/permission/application/raw-sql/iam-raw-sql-permissions.service.spec.ts",
-            "integrity": "sha1:7d4730ee75b1ddfb195f695ccd9a3704ffd9432d"
-        },
-        {
-            "path": "src/@app/iam/permission/application/raw-sql/iam-raw-sql-permissions.service.ts",
-            "integrity": "sha1:6dfb99ec426c3fdbf1aa07a7b51ca7ff4ef59783"
-        },
-        {
             "path": "src/@app/iam/permission/application/sagas/iam-permission.sagas.ts",
             "integrity": "sha1:ae9db944733d52c863de9c366c07bc48871bf880"
-        },
-        {
-            "path": "src/@app/iam/permission/application/sum/iam-sum-permission.query-handler.spec.ts",
-            "integrity": "sha1:9bcab47a780634ee2251fd6b4d217fa8bf49dd5c"
-        },
-        {
-            "path": "src/@app/iam/permission/application/sum/iam-sum-permission.query-handler.ts",
-            "integrity": "sha1:7583859e383a02f91875ab12ea5fceec0915dcad"
-        },
-        {
-            "path": "src/@app/iam/permission/application/sum/iam-sum-permission.query.ts",
-            "integrity": "sha1:7f15eb55ddefc151d1888b4449a7bb1a11a1c808"
-        },
-        {
-            "path": "src/@app/iam/permission/application/sum/iam-sum-permission.service.spec.ts",
-            "integrity": "sha1:de7a2f557dda9ac7543564dddc693c0eafb0eaf8"
-        },
-        {
-            "path": "src/@app/iam/permission/application/sum/iam-sum-permission.service.ts",
-            "integrity": "sha1:435ffd3793d678d64928d102516f4a4b011077e6"
         },
         {
             "path": "src/@app/iam/permission/application/update/iam-update-permission-by-id.command-handler.spec.ts",
@@ -374,46 +262,6 @@
             "integrity": "sha1:4d26a27da912752947c38d1666f47fdcf1bc3a6f"
         },
         {
-            "path": "src/@app/iam/permission/application/update/iam-update-and-increment-permissions.command-handler.spec.ts",
-            "integrity": "sha1:f50fc9eb52be34b633f8cbd9a187449c57263d10"
-        },
-        {
-            "path": "src/@app/iam/permission/application/update/iam-update-and-increment-permissions.command-handler.ts",
-            "integrity": "sha1:ecb876445774752e3aba268ea2fe36418ea99149"
-        },
-        {
-            "path": "src/@app/iam/permission/application/update/iam-update-and-increment-permissions.command.ts",
-            "integrity": "sha1:6ca23dda14c1698e2a1806d201fd01045ccf0f34"
-        },
-        {
-            "path": "src/@app/iam/permission/application/update/iam-update-and-increment-permissions.service.spec.ts",
-            "integrity": "sha1:7bc6d879a54bde19ce5ccc3cd3e5394f47015db5"
-        },
-        {
-            "path": "src/@app/iam/permission/application/update/iam-update-and-increment-permissions.service.ts",
-            "integrity": "sha1:1a945cfd207e64edf117ddd47acb03b29037d130"
-        },
-        {
-            "path": "src/@app/iam/permission/application/upsert/iam-upsert-permission.command-handler.spec.ts",
-            "integrity": "sha1:14899f2ee942ae857497bad4ee709c9d9aeaeb11"
-        },
-        {
-            "path": "src/@app/iam/permission/application/upsert/iam-upsert-permission.command-handler.ts",
-            "integrity": "sha1:9b295ff63f0068a7253b99facde4209c40fe43d7"
-        },
-        {
-            "path": "src/@app/iam/permission/application/upsert/iam-upsert-permission.command.ts",
-            "integrity": "sha1:da9398179848a28be1bf1ca86c8f2050a427f4e0"
-        },
-        {
-            "path": "src/@app/iam/permission/application/upsert/iam-upsert-permission.service.spec.ts",
-            "integrity": "sha1:c7f7c2a0dad4f56b92be720a2ec0cdef4458a1e8"
-        },
-        {
-            "path": "src/@app/iam/permission/application/upsert/iam-upsert-permission.service.ts",
-            "integrity": "sha1:bb54f2e6cf0ec9958c7dc4af40fe413934a9cd00"
-        },
-        {
             "path": "src/@app/iam/permission/domain/iam-permission.aggregate.ts",
             "integrity": "sha1:10d54fcbc0efdca846bdcde55772d992cd7b08d7"
         },
@@ -435,11 +283,11 @@
         },
         {
             "path": "src/@app/iam/permission/index.ts",
-            "integrity": "sha1:63af55fa72549ef4d31fd299b30812ef4d2bf73b"
+            "integrity": "sha1:06fbf0dce278433f3f9d8c711b4baf94caf2dd22"
         },
         {
             "path": "src/@app/iam/permission/infrastructure/mock/iam-mock-permission.data.ts",
-            "integrity": "sha1:f03f34ceadcbbd6293064c8424d3abd6b24b0bd0"
+            "integrity": "sha1:5e6d4fa9f1ae82037370b3b05c8473dfbc5c1808"
         },
         {
             "path": "src/@app/iam/permission/infrastructure/mock/iam-mock-permission.repository.ts",
@@ -767,7 +615,7 @@
         },
         {
             "path": "src/@app/iam/permission-role/infrastructure/mock/iam-mock-permission-role.data.ts",
-            "integrity": "sha1:4a4162dfb3e9a5b224a811ca9ada4880025854b8"
+            "integrity": "sha1:04c7ac8348f016b996ee9b5794c5e8af779ccc3a"
         },
         {
             "path": "src/@app/iam/permission-role/infrastructure/mock/iam-mock-permission-role.repository.ts",
@@ -878,14 +726,6 @@
             "integrity": "sha1:cff5872db12f0eef3313d75fc9bc0dc418edc8f3"
         },
         {
-            "path": "src/@api/iam/permission/controllers/iam-upsert-permission.controller.spec.ts",
-            "integrity": "sha1:8a77991231bf21379d4ccc59de379a3517e3d8fe"
-        },
-        {
-            "path": "src/@api/iam/permission/controllers/iam-upsert-permission.controller.ts",
-            "integrity": "sha1:848b6f7c303d9061c7935e19a6bac588a517de73"
-        },
-        {
             "path": "src/@api/iam/permission/dto/iam-permission.dto.ts",
             "integrity": "sha1:4e1297dd92f237c955cbf7b251d638c40b466596"
         },
@@ -911,7 +751,7 @@
         },
         {
             "path": "src/@api/iam/permission/graphql/iam-permission.graphql",
-            "integrity": "sha1:d1eedfceb1a2128d0f6e44a78a27818eb91c6508"
+            "integrity": "sha1:9b0efeb0d65c80ea3fd98c13dfc66cc26629f081"
         },
         {
             "path": "src/@api/iam/permission/handlers/iam-create-permission.handler.spec.ts",
@@ -994,16 +834,8 @@
             "integrity": "sha1:f0eefa7fbf4f80d7dbb818e5aa6ba2c36167691b"
         },
         {
-            "path": "src/@api/iam/permission/handlers/iam-upsert-permission.handler.spec.ts",
-            "integrity": "sha1:c43f3e063dd799062f86b62fa7cace7fee024859"
-        },
-        {
-            "path": "src/@api/iam/permission/handlers/iam-upsert-permission.handler.ts",
-            "integrity": "sha1:3a36fe6917d35a819254dc0c20d0ab0907c81c09"
-        },
-        {
             "path": "src/@api/iam/permission/index.ts",
-            "integrity": "sha1:9d431171fe0f15025d4282033d99682b56e730c8"
+            "integrity": "sha1:be1348ac4c4702a73634afde38367e2def17a2a3"
         },
         {
             "path": "src/@api/iam/permission/resolvers/iam-create-permission.resolver.spec.ts",
@@ -1084,14 +916,6 @@
         {
             "path": "src/@api/iam/permission/resolvers/iam-update-permissions.resolver.ts",
             "integrity": "sha1:ad1a131515bde5f658d6a43a203065110f36628c"
-        },
-        {
-            "path": "src/@api/iam/permission/resolvers/iam-upsert-permission.resolver.spec.ts",
-            "integrity": "sha1:dc4a177b95c6dae8b17e288784d518e5b941e8a7"
-        },
-        {
-            "path": "src/@api/iam/permission/resolvers/iam-upsert-permission.resolver.ts",
-            "integrity": "sha1:874e0d2d8119a502841681311f85eeb725d36224"
         },
         {
             "path": "src/@api/iam/permission/seeder/iam-permission.seeder.ts",
@@ -1379,7 +1203,7 @@
         },
         {
             "path": "postman/iam/iam.permission.postman.json",
-            "integrity": "sha1:753f8e8633b0aaf215ca4b4fa392ca27f4414188"
+            "integrity": "sha1:af6a20a3453eff4eec46015774ebc6756b9b19d0"
         }
     ]
 }

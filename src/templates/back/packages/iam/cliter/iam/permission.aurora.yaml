@@ -77,10 +77,10 @@ aggregateProperties:
           - count
           - max
           - min
-          - sum
           - rawSql
-          - upsert
+          - sum
           - updateAndIncrement
+          - upsert
   - name: createdAt
     description: Timestamp when the permission was created
     type: timestamp
@@ -93,3 +93,11 @@ aggregateProperties:
     description: Timestamp when the permission was deleted
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

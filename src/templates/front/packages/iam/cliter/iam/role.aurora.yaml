@@ -66,10 +66,10 @@ aggregateProperties:
           - count
           - max
           - min
-          - sum
           - rawSql
-          - upsert
+          - sum
           - updateAndIncrement
+          - upsert
   - name: accounts
     type: relationship
     nullable: true
@@ -107,6 +107,14 @@ aggregateProperties:
               modulePath: iam/account
               field: account
               avoidConstraint: true
+        excludedOperations:
+          - count
+          - max
+          - min
+          - rawSql
+          - sum
+          - updateAndIncrement
+          - upsert
   - name: createdAt
     type: timestamp
     nullable: true
@@ -120,3 +128,11 @@ additionalApis:
   - path: iam/role/inherit-permissions-role
     resolverType: mutation
     httpMethod: post
+excludedOperations:
+  - count
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

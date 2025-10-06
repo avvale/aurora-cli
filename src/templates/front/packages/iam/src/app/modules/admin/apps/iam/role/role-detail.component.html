@@ -17,6 +17,7 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
             @if (currentViewAction.id === 'iam::role.detail.edit')
             {
                 <button
@@ -29,7 +30,7 @@
                 >
                     @if ('iam::role.detail.update' | getSpinnerFlag | async)
                     {
-                        <mat-icon *ngIf="'iam::role.detail.update' | getSpinnerFlag | async">
+                        <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
                     }
@@ -44,6 +45,7 @@
                     {{ t('Update') }}
                 </button>
             }
+
             @if (currentViewAction.id === 'iam::role.detail.new')
             {
                 <button
@@ -78,17 +80,17 @@
     <!-- / Header -->
 
     <!-- Main -->
-    <div
-        cdkScrollable
-        class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto"
-    >
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
         <div class="form-card">
+
             <form
                 id="iamRoleFormDetail"
                 novalidate
                 [formGroup]="fg"
                 (ngSubmit)="onSubmit($event)"
             >
+
                 <div class="layout__container">
 
                     <mat-form-field
@@ -99,7 +101,7 @@
                         <input
                             matInput
                             formControlName="name"
-                            maxlength="127"
+                            maxlength="128"
                             required
                         >
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
@@ -117,33 +119,31 @@
                         <au-grid-select-multiple-elements
                             class="col-12 mt-0"
                             [label]="t('iam.Permissions')"
-                            [gridId]="permissionsRolesGridId"
-                            [originColumnsConfig]="originPermissionsRolesColumnsConfig"
-                            [columnsConfig]="permissionsRolesColumnsConfig$ | async"
-                            [gridData]="permissionsRolesGridData$ | async"
-                            [gridState]="permissionsRolesGridState"
+                            [gridId]="permissionRoleGridId"
+                            [originColumnsConfig]="originPermissionRoleColumnsConfig"
+                            [columnsConfig]="permissionRoleColumnsConfig$ | async"
+                            [gridData]="permissionRoleGridData$ | async"
+                            [gridState]="permissionRoleGridState"
                             [dialogColumnsConfig]="permissionsColumnsConfig$ | async"
                             [dialogGridData]="permissionsGridData$ | async"
                             [dialogGridId]="permissionsGridId"
-                            [dialogOriginColumnsConfig]="permissionsOriginColumnsConfig"
+                            [dialogOriginColumnsConfig]="originPermissionsColumnsConfig"
                             [selectedCheckboxRowModel]="selectedCheckboxRowModel"
                             (dialogSelectedCheckboxRowModelChange)="handleDialogPermissionsRowsSectionChange($event)"
                             (selectedCheckboxRowModelChange)="handlePermissionsRowsSectionChange($event)"
                             #permissionsGridSelectMultipleElements
                         >
                             <au-grid-translations
-                                [for]="permissionsRolesGridId"
+                                [for]="permissionRoleGridId"
                                 [actionsMenu]="{
                                     unlink: t('Unlink'),
                                     cancel: t('Cancel'),
                                     close: t('Close')
                                 }"
                             >
-                                @for (columnConfig of originPermissionsRolesColumnsConfig; track columnConfig.field)
+                                @for (columnConfig of originPermissionRoleColumnsConfig; track columnConfig.field)
                                 {
-                                    <au-grid-column-translation
-                                        [field]="columnConfig.field"
-                                    >
+                                    <au-grid-column-translation [field]="columnConfig.field">
                                         {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
                                     </au-grid-column-translation>
                                 }
@@ -151,7 +151,7 @@
                             <au-grid-translations
                                 [for]="permissionsGridId"
                             >
-                                @for (columnConfig of permissionsOriginColumnsConfig; track columnConfig.field)
+                                @for (columnConfig of originPermissionsColumnsConfig; track columnConfig.field)
                                 {
                                     <au-grid-column-translation
                                         [field]="columnConfig.field"
@@ -177,7 +177,7 @@
                                     </button>
                                     <button
                                         mat-flat-button
-                                        [disabled]="permissionsRolesSelectedRows.length === 0"
+                                        [disabled]="permissionRoleSelectedRows.length === 0"
                                         (click)="handleRemovePermissionsSelected()"
                                     >
                                         <mat-icon

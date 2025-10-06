@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { Action, ActionService, ColumnConfig, ExportFormat, GridColumnFilter, GridColumnsConfigStorageService, GridFiltersStorageService, GridSearchState, GridSortState, GridState, GridStateService, QueryStatementHandler } from '@aurora';
+import { Action, ActionService, ColumnConfig, ExportFormat, GridColumnFilter, GridColumnsConfigStorageService, GridFiltersStorageService, GridSearchState, GridSortState, GridState, GridStateService, queryStatementHandler } from '@aurora';
 import { GridManagerService } from '../grid-manager.service';
 
 @Injectable({
@@ -28,8 +28,7 @@ export class AuroraGridManagerService extends GridManagerService
             id          : this.gridStateService.getPaginationActionId(gridId),
             isViewAction: false,
             meta        : {
-                query: QueryStatementHandler
-                    .init({ columnsConfig })
+                query: queryStatementHandler({ columnsConfig })
                     .setColumFilters(gridState.columnFilters)
                     .setSort(gridState.sort)
                     .setPage(gridState.page)
@@ -113,8 +112,7 @@ export class AuroraGridManagerService extends GridManagerService
             id          : this.gridStateService.getExportActionId(gridId),
             isViewAction: false,
             meta        : {
-                query: QueryStatementHandler
-                    .init({ columnsConfig })
+                query: queryStatementHandler({ columnsConfig })
                     .setColumFilters(gridState.columnFilters)
                     .setSort(gridState.sort)
                     .setSearch(gridState.search)

@@ -38,7 +38,7 @@
                     [disabled]="'{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete' | getSpinnerFlag | async"
                     (click)="
                         actionService.action({
-                            id          : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete',
+                            id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete',
                             isViewAction: false
                         })
                     "

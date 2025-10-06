@@ -122,8 +122,8 @@ aggregateProperties:
           - count
           - max
           - min
-          - sum
           - rawSql
+          - sum
           - updateAndIncrement
           - upsert
   - name: tenants
@@ -167,8 +167,8 @@ aggregateProperties:
           - count
           - max
           - min
-          - sum
           - rawSql
+          - sum
           - updateAndIncrement
           - upsert
     webComponent:
@@ -209,8 +209,8 @@ excludedOperations:
   - count
   - max
   - min
-  - sum
   - rawSql
+  - sum
   - updateAndIncrement
   - upsert
 excludedFiles:

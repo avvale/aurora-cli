@@ -126,7 +126,7 @@ export class GridComponent implements OnInit, AfterViewInit
     constructor(
         protected readonly dialog: MatDialog,
         private readonly changeDetection: ChangeDetectorRef,
-        // service built from IoC, probably defined in app.module
+        // service built from IoC, probably defined in aurora.provider.ts
         private readonly gridManagerServiceAdapter: GridManagerService,
     ) { }
 

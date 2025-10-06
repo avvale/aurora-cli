@@ -16,7 +16,7 @@ export const getConcatOperator = (columnDataType:ColumnDataType): ContactOperato
     }
 };
 
-export const getPostgresValueModifier = (gridColumnFilter: GridColumnFilter): string | number =>
+export const getPostgresValueModifier = (gridColumnFilter: GridColumnFilter): string | number | string[] | number[] =>
 {
     if (gridColumnFilter.type !== ColumnDataType.STRING) return gridColumnFilter.value;
 

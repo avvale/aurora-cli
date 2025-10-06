@@ -1,10 +1,9 @@
-import { IamPermission } from '../iam.types';
 import { permissionColumnsConfig } from '../permission';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
+import { IamBoundedContext, IamPermission } from '@apps/iam';
 import { boundedContextColumnsConfig, BoundedContextService } from '@apps/iam/bounded-context';
-import { IamBoundedContext } from '@apps/iam/iam.types';
-import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { Action, ActionService, GridData, GridFiltersStorageService, GridStateService, queryStatementHandler } from '@aurora';
 
 export const boundedContextPaginationResolver: ResolveFn<GridData<IamBoundedContext>> = (
     route: ActivatedRouteSnapshot,
@@ -17,7 +16,7 @@ export const boundedContextPaginationResolver: ResolveFn<GridData<IamBoundedCont
     const boundedContextService = inject(BoundedContextService);
 
     actionService.action({
-        id          : 'iam::boundedContext.list.view',
+        id: 'iam::boundedContext.list.view',
         isViewAction: true,
     });
 
@@ -26,8 +25,7 @@ export const boundedContextPaginationResolver: ResolveFn<GridData<IamBoundedCont
     gridStateService.setExportActionId(gridId, 'iam::boundedContext.list.export');
 
     return boundedContextService.pagination({
-        query: QueryStatementHandler
-            .init({ columnsConfig: boundedContextColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: boundedContextColumnsConfig })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))
@@ -44,7 +42,7 @@ export const boundedContextNewResolver: ResolveFn<Action> = (
     const actionService = inject(ActionService);
 
     return actionService.action({
-        id          : 'iam::boundedContext.detail.new',
+        id: 'iam::boundedContext.detail.new',
         isViewAction: true,
     });
 };
@@ -68,15 +66,14 @@ export const boundedContextEditResolver: ResolveFn<{
     gridStateService.setExportActionId(permissionsGridId, 'iam::boundedContext.detail.exportPermissions');
 
     actionService.action({
-        id          : 'iam::boundedContext.detail.edit',
+        id: 'iam::boundedContext.detail.edit',
         isViewAction: true,
     });
 
     return boundedContextService
         .findByIdWithRelations({
             id: route.paramMap.get('id'),
-            queryPaginatePermissions: QueryStatementHandler
-                .init({ columnsConfig: permissionColumnsConfig })
+            queryPaginatePermissions: queryStatementHandler({ columnsConfig: permissionColumnsConfig })
                 .setColumFilters(gridFiltersStorageService.getColumnFilterState(permissionsGridId))
                 .setSort(gridStateService.getSort(permissionsGridId, { active: 'name', direction: 'asc' }))
                 .setPage(gridStateService.getPage(permissionsGridId))

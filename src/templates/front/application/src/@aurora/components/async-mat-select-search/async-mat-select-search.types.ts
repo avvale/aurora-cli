@@ -18,4 +18,6 @@ export interface AsyncMatSelectSearchState<T, E>
     filteredItems      : WritableSignal<Map<T, E>>;
     isLoading          : WritableSignal<boolean>;
     keyword            : string;
+    indexKey           : string;
+    valueKey           : string;
 }

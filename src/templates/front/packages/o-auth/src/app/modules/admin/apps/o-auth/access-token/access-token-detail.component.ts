@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AccessTokenService } from '@apps/o-auth/access-token';
 import { OAuthAccessToken } from '@apps/o-auth/o-auth.types';
-import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
+import { Action, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ...defaultDetailImports,
-        MatCheckboxModule, MtxDatetimepickerModule,
+        DatetimepickerSqlFormatDirective, MatCheckboxModule, MtxDatetimepickerModule,
     ],
 })
 export class AccessTokenDetailComponent extends ViewDetailComponent

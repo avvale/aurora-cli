@@ -1,12 +1,10 @@
-import { BoundedContextService } from '../bounded-context/bounded-context.service';
-import { IamBoundedContext } from '../iam.types';
-import { NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { IamPermission } from '@apps/iam/iam.types';
+import { IamBoundedContext, IamPermission } from '@apps/iam';
+import { BoundedContextService } from '@apps/iam/bounded-context';
 import { PermissionService } from '@apps/iam/permission';
-import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
+import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 
 @Component({
@@ -14,9 +12,10 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
     templateUrl: './permission-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultDetailImports,
-        MatSelectModule, NgForOf,
+        MatSelectModule,
     ],
 })
 export class PermissionDetailComponent extends ViewDetailComponent
@@ -28,7 +27,7 @@ export class PermissionDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: IamPermission;
+    managedObject: WritableSignal<IamPermission> = signal(null);
 
     // relationships
     boundedContexts$: Observable<IamBoundedContext[]>;
@@ -77,12 +76,12 @@ export class PermissionDetailComponent extends ViewDetailComponent
                 SnackBarInvalidFormComponent,
                 {
                     data: {
-                        message   : `${this.translocoService.translate('InvalidForm')}`,
+                        message: `${this.translocoService.translate('InvalidForm')}`,
                         textButton: `${this.translocoService.translate('InvalidFormOk')}`,
                     },
-                    panelClass      : 'error-snackbar',
+                    panelClass: 'error-snackbar',
                     verticalPosition: 'top',
-                    duration        : 10000,
+                    duration: 10000,
                 },
             );
             return;
@@ -119,7 +118,7 @@ export class PermissionDetailComponent extends ViewDetailComponent
         {
             /* #region common actions */
             case 'iam::permission.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'iam::permission.detail.edit':
@@ -128,7 +127,7 @@ export class PermissionDetailComponent extends ViewDetailComponent
                     .pipe(takeUntil(this.unsubscribeAll$))
                     .subscribe(item =>
                     {
-                        this.managedObject = item;
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
                 break;
@@ -148,7 +147,7 @@ export class PermissionDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
@@ -175,7 +174,7 @@ export class PermissionDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 

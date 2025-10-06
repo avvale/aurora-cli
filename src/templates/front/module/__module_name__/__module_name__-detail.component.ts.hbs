@@ -1044,7 +1044,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                     afterRunAction: () =>
                     {
                         this.actionService.action({
-                            id          : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination',
+                            id: '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Pagination',
                             isViewAction: false,
                         });
                     },

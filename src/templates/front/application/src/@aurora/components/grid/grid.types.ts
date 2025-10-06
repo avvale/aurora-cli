@@ -110,7 +110,7 @@ export interface GridColumnFilter
     searchableField?: string;
     searchComponent?: SearchComponentType;
     operator: FilterOperator;
-    value: string | number;
+    value: string | number | string[] | number[];
 }
 
 export type GridCustomHeaderPosition = 'left' | 'right' | 'beforeGridButtons';

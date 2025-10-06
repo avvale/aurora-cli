@@ -112,6 +112,16 @@ export const createMutation = gql`
     }
 `;
 
+export const insertMutation = gql`
+    mutation IamCreateBoundedContexts (
+        $payload: [IamCreateBoundedContextInput]!
+    ) {
+        iamCreateBoundedContexts (
+            payload: $payload
+        )
+    }
+`;
+
 export const updateByIdMutation = gql`
     mutation IamUpdateBoundedContextById (
         $payload: IamUpdateBoundedContextByIdInput!

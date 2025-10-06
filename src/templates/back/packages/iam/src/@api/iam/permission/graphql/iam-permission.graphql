@@ -88,10 +88,6 @@ type Mutation
         constraint: QueryStatement
     ): [IamPermission]!
 
-    iamUpsertPermission(
-        payload: IamUpdatePermissionByIdInput!
-    ): IamPermission
-
     iamDeletePermissionById(
         id: ID!
         constraint: QueryStatement

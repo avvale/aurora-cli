@@ -1,6 +1,10 @@
 {
     "Accept": "Accept",
     "Account": "Account",
+    "AccountTypes": {
+        "SERVICE": "Service",
+        "USER": "User"
+    },
     "Actions": "Actions",
     "Active": "Active",
     "Add": "Add",
@@ -60,6 +64,7 @@
     "ForgotPasswordDescription": "Enter your username or email to reset your password",
     "Forward": "Forward",
     "GoTo": "Go to",
+    "Id": "Id",
     "IdCard": "ID Card",
     "Image": "Image",
     "Images": "Images",
@@ -141,6 +146,7 @@
     "Saved.F.P": "Saved",
     "Saved.M": "Saved",
     "Saved.M.P": "Saved",
+    "Scopes": "Scopes",
     "Search": "Search",
     "Second": "Second",
     "Seconds": "Seconds",
@@ -181,6 +187,7 @@
     "Synchronized.M": "Synchronize",
     "SynchronizeWarning": "You are going to synchronize record {{ entity }} {{ id }}",
     "SyncStatus": "Sync Status",
+    "Tags": "Tags",
     "Tenant": "Tenant",
     "Tenants": "Tenants",
     "Title": "Title",

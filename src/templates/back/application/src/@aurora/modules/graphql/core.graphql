@@ -426,11 +426,17 @@ input QueryStatement
 {
     where: JSON
     attributes: JSON
-    include: [GraphQLString]
+    include: JSON
     order: JSON
     group: JSON
     limit: GraphQLInt
     offset: GraphQLInt
+    lock: Any
+    skipLocked: GraphQLBoolean
+    raw: GraphQLBoolean
+    having: Any
+    subQuery: GraphQLBoolean
+    indexHints: JSON
     distinct: GraphQLBoolean
     col: GraphQLString
 }

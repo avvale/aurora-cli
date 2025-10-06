@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="flex items-center">
+    <mat-icon class="icon-size-6 mr-2">play_circle</mat-icon>
+    Previsualización de la grabación
+</h2>
+
+<mat-dialog-content>
+    <ng-container *ngIf="data?.videoUrl; else emptyVideo">
+        <video
+            class="mt-2 w-full rounded border"
+            [src]="data.videoUrl"
+            controls
+            autoplay
+        ></video>
+    </ng-container>
+
+    <ng-template #emptyVideo>
+        <p>No se pudo cargar el video.</p>
+    </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button
+        mat-stroked-button
+        color="primary"
+        type="button"
+        (click)="close()"
+    >
+        <mat-icon class="icon-size-5 mr-2">visibility_off</mat-icon>
+        Ocultar previsualización
+    </button>
+</mat-dialog-actions>

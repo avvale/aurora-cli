@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { IamPermission } from '@apps/iam/iam.types';
 import { permissionColumnsConfig, PermissionService } from '@apps/iam/permission';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, queryStatementHandler, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+
+export const permissionMainGridListId = 'iam::permission.list.mainGridList';
 
 @Component({
     selector: 'iam-permission-list',
     templateUrl: './permission-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultListImports,
     ],
@@ -22,7 +25,7 @@ export class PermissionListComponent extends ViewBaseComponent
         { translation: 'App', routerLink: ['/']},
         { translation: 'iam.Permissions' },
     ];
-    gridId: string = 'iam::permission.list.mainGridList';
+    gridId: string = permissionMainGridListId;
     gridData$: Observable<GridData<IamPermission>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
@@ -76,6 +79,7 @@ export class PermissionListComponent extends ViewBaseComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'iam::permission.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
@@ -96,8 +100,7 @@ export class PermissionListComponent extends ViewBaseComponent
                     this.permissionService.pagination({
                         query: action.meta.query ?
                             action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: permissionColumnsConfig })
+                            queryStatementHandler({ columnsConfig: permissionColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
@@ -173,14 +176,8 @@ export class PermissionListComponent extends ViewBaseComponent
                         }),
                 );
 
-                // format export rows
-                (rows.objects as any[]).forEach(row =>
-                {
-                    // row.id = row.id;
-                });
-
                 const columns: string[] = permissionColumnsConfig.map(permissionColumnConfig => permissionColumnConfig.field);
-                const headers: string[] = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const headers: string[] = permissionColumnsConfig.map(permissionColumnConfig => this.translocoService.translate(permissionColumnConfig.translation));
 
                 exportRows(
                     rows.objects,
@@ -190,6 +187,7 @@ export class PermissionListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+                /* #endregion common actions */
         }
     }
 }

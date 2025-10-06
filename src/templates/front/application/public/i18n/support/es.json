@@ -1,0 +1,16 @@
+{
+    "AccountId": "AccountId",
+    "AccountUsername": "AccountUsername",
+    "Attachments": "Attachments",
+    "BackVersion": "BackVersion",
+    "Description": "Description",
+    "Environment": "Environment",
+    "ExternalId": "ExternalId",
+    "ExternalStatus": "ExternalStatus",
+    "FrontVersion": "FrontVersion",
+    "Issue": "Issue",
+    "Issues": "Issues",
+    "Meta": "Meta",
+    "Subject": "Subject",
+    "Video": "Video"
+}

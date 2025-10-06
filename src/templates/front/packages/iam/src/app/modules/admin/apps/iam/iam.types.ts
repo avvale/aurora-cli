@@ -396,3 +396,13 @@ export interface IamUpdateRolesAccounts {
     roleId?: string;
     accountId?: string;
 }
+
+export interface IamUpdatePermissionRoleById {
+    permissionId?: string;
+    roleId?: string;
+}
+
+export interface IamUpdatePermissionsRoles {
+    permissionId?: string;
+    roleId?: string;
+}

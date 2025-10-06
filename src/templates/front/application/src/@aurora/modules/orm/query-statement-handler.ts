@@ -138,7 +138,7 @@ export class QueryStatementHandler
         // set where property if not exists
         if (!this.queryStatement.where) this.queryStatement.where = {};
 
-        const searchStatement = [];
+        const searchStatements = [];
         for (const columnConfig of this.columnsConfig)
         {
             if (
@@ -156,7 +156,7 @@ export class QueryStatementHandler
                 switch (columnConfigType)
                 {
                     case ColumnDataType.STRING:
-                        searchStatement.push({
+                        searchStatements.push({
                             [(columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field) + (columnConfig.isUnaccent ? '::unaccent' : '')]:
                             {
                                 [Operator.iLike]: `%${value}%`,
@@ -167,7 +167,7 @@ export class QueryStatementHandler
                     case ColumnDataType.ARRAY:
                     case ColumnDataType.NUMBER:
                     case ColumnDataType.ENUM:
-                        searchStatement.push({
+                        searchStatements.push({
                             [(columnConfig.searchableField ? columnConfig.searchableField : columnConfig.field) + '::cast::varchar']:
                             {
                                 [Operator.iLike]: `%${value}%`,
@@ -194,7 +194,7 @@ export class QueryStatementHandler
                         ...this.queryStatement.where,
                     },
                     {
-                        [Operator.or]: searchStatement,
+                        [Operator.or]: searchStatements,
                     },
                 ],
             };
@@ -202,7 +202,7 @@ export class QueryStatementHandler
         else
         {
             this.queryStatement.where = {
-                [Operator.or]: searchStatement,
+                [Operator.or]: searchStatements,
             };
         }
 

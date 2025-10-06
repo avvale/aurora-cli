@@ -1,0 +1,68 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    svgIcon="bug_report"
+                    class="icon-size-8 mr-2"
+                >
+                </mat-icon>
+                {{ t('support.Issue') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <button
+                mat-flat-button
+                class="ml-3"
+                color="accent"
+                [routerLink]="'new'"
+            >
+                <mat-icon
+                    svgIcon="bug_report"
+                    class="icon-size-5 mr-2"
+                >
+                </mat-icon>
+                {{ t('New.M') }}
+            </button>
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div
+        class="flex flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto"
+        cdkScrollable
+    >
+        <!-- Grid -->
+        <au-grid
+            [columnsConfig]="columnsConfig$ | async"
+            [gridData]="gridData$ | async"
+            [gridState]="gridState"
+            [id]="gridId"
+            [originColumnsConfig]="originColumnsConfig"
+        >
+            <au-grid-translations
+                [for]="gridId"
+            >
+                @for (columnConfig of originColumnsConfig; track columnConfig.field)
+                {
+                    <au-grid-column-translation [field]="columnConfig.field">
+                        {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                    </au-grid-column-translation>
+                }
+            </au-grid-translations>
+        </au-grid>
+        <!-- / Grid -->
+
+    </div>
+    <!-- / Main -->
+
+</div>

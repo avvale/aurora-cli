@@ -4,15 +4,18 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MatSelectModule } from '@angular/material/select';
 import { IamRole } from '@apps/iam/iam.types';
 import { roleColumnsConfig, RoleService } from '@apps/iam/role';
-import { Action, ColumnConfig, ColumnDataType, ContentDialogTemplateDirective, Crumb, defaultListImports, DialogComponent, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, uuidValidate, ValidationMessagesService, ViewBaseComponent } from '@aurora';
+import { Action, ColumnConfig, ColumnDataType, ContentDialogTemplateDirective, Crumb, defaultListImports, DialogComponent, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, queryStatementHandler, QueryStatementHandler, uuidValidate, ValidationMessagesService, ViewBaseComponent } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
-import { PermissionRoleService } from '../permission-role/permission-role.service';
+import { PermissionRoleService } from '../permission-role';
+
+export const roleMainGridListId = 'iam::role.list.mainGridList';
 
 @Component({
     selector: 'iam-role-list',
     templateUrl: './role-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultListImports,
         FormsModule, MatDialogModule, MatSelectModule, ReactiveFormsModule,
@@ -30,7 +33,7 @@ export class RoleListComponent extends ViewBaseComponent
         { translation: 'App', routerLink: ['/']},
         { translation: 'iam.Roles' },
     ];
-    gridId: string = 'iam::role.list.mainGridList';
+    gridId: string = roleMainGridListId;
     gridData$: Observable<GridData<IamRole>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
@@ -131,6 +134,7 @@ export class RoleListComponent extends ViewBaseComponent
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
         switch (action?.id)
         {
+            /* #region common actions */
             case 'iam::role.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
@@ -152,8 +156,7 @@ export class RoleListComponent extends ViewBaseComponent
                     this.roleService.pagination({
                         query: action.meta.query ?
                             action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: roleColumnsConfig })
+                            queryStatementHandler({ columnsConfig: roleColumnsConfig })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
@@ -209,7 +212,7 @@ export class RoleListComponent extends ViewBaseComponent
                                 );
 
                                 this.actionService.action({
-                                    id          : 'iam::role.list.pagination',
+                                    id: 'iam::role.list.pagination',
                                     isViewAction: false,
                                 });
                             }
@@ -229,14 +232,8 @@ export class RoleListComponent extends ViewBaseComponent
                         }),
                 );
 
-                // format export rows
-                (rows.objects as any[]).forEach(row =>
-                {
-                    // row.id = row.id;
-                });
-
                 const columns: string[] = roleColumnsConfig.map(roleColumnConfig => roleColumnConfig.field);
-                const headers: string[] = columns.map(column => this.translocoService.translate('iam.' + column.toPascalCase()));
+                const headers: string[] = roleColumnsConfig.map(roleColumnConfig => this.translocoService.translate(roleColumnConfig.translation));
 
                 exportRows(
                     rows.objects,
@@ -246,6 +243,7 @@ export class RoleListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+                /* #endregion common actions */
 
             /* #region custom actions */
             case 'iam::role.list.openRoleSelectorFormDialog':

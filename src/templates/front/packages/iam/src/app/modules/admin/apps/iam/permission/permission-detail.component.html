@@ -17,8 +17,10 @@
 
         <!-- Actions -->
         <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            @if (currentViewAction.id === 'iam::permission.detail.edit')
+            {
             <button
-                *ngIf="currentViewAction.id === 'iam::permission.detail.edit'"
                 mat-flat-button
                 type="submit"
                 class="ml-3"
@@ -26,19 +28,27 @@
                 color="accent"
                 [disabled]="fg.pristine || ('iam::permission.detail.update' | getSpinnerFlag | async)"
             >
+                    @if ('iam::permission.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
                 <mat-icon
-                    *ngIf="!('iam::permission.detail.update' | getSpinnerFlag | async)"
                     svgIcon="mat_solid:edit"
                     class="icon-size-5 mr-2"
                 >
                 </mat-icon>
-                <mat-icon *ngIf="'iam::permission.detail.update' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
+                    }
                 {{ t('Update') }}
             </button>
+            }
+
+            @if (currentViewAction.id === 'iam::permission.detail.new')
+            {
             <button
-                *ngIf="currentViewAction.id === 'iam::permission.detail.new'"
                 mat-flat-button
                 type="submit"
                 form="iamPermissionFormDetail"
@@ -46,17 +56,23 @@
                 color="accent"
                 [disabled]="fg.pristine || ('iam::permission.detail.create' | getSpinnerFlag | async)"
             >
+                    @if ('iam::permission.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
                 <mat-icon
-                    *ngIf="!('iam::permission.detail.create' | getSpinnerFlag | async)"
                     svgIcon="mat_solid:save"
                     class="icon-size-5 mr-2"
                 >
                 </mat-icon>
-                <mat-icon *ngIf="'iam::permission.detail.create' | getSpinnerFlag | async">
-                    <mat-spinner diameter="20"></mat-spinner>
-                </mat-icon>
+                    }
                 {{ t('Create') }}
             </button>
+            }
         </div>
         <!-- / Actions -->
 
@@ -111,12 +127,12 @@
                         <mat-select
                             formControlName="boundedContextId"
                         >
-                            <mat-option
-                                *ngFor="let boundedContext of boundedContexts$ | async"
-                                [value]="boundedContext.id"
-                            >
-                                {{ boundedContext.name }}
-                            </mat-option>
+                            @for (boundedContext of boundedContexts$ | async; track boundedContext.id)
+                            {
+                                <mat-option [value]="boundedContext.id">
+                                    {{ boundedContext.name }}
+                                </mat-option>
+                            }
                         </mat-select>
                         <mat-error>{{ formErrors?.boundedContextId | async }}</mat-error>
                     </mat-form-field>

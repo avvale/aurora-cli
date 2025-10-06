@@ -5,7 +5,8 @@ export const fields = `
     roleId
 `;
 
-export const relationsFields = '';
+export const relationsFields = `
+`;
 
 // default methods
 export const paginationQuery = gql`
@@ -40,12 +41,12 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindRoleById (
+    query IamFindPermissionRoleById (
         $permissionId: ID
         $roleId: ID
         $constraint: QueryStatement
     ) {
-        object: iamFindRoleById (
+        object: iamFindPermissionRoleById (
             permissionId: $permissionId
             roleId: $roleId
             constraint: $constraint
@@ -59,11 +60,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindRole (
+    query IamFindPermissionRole (
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: iamFindRole (
+        object: iamFindPermissionRole (
             query: $query
             constraint: $constraint
         ) {
@@ -96,11 +97,11 @@ export const insertMutation = gql`
 `;
 
 export const updateByIdMutation = gql`
-    mutation IamUpdateRoleById (
-        $payload: IamUpdateRoleByIdInput!
+    mutation IamUpdatePermissionRoleById (
+        $payload: IamUpdatePermissionRoleByIdInput!
         $constraint: QueryStatement
     ) {
-        iamUpdateRoleById (
+        iamUpdatePermissionRoleById (
             payload: $payload
             constraint: $constraint
         ) {
@@ -110,12 +111,12 @@ export const updateByIdMutation = gql`
 `;
 
 export const updateMutation = gql`
-    mutation IamUpdateRoles (
-        $payload: IamUpdateRolesInput!
+    mutation IamUpdatePermissionsRoles (
+        $payload: IamUpdatePermissionsRolesInput!
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        iamUpdateRoles (
+        iamUpdatePermissionsRoles (
             payload: $payload
             query: $query
             constraint: $constraint

@@ -3,8 +3,6 @@ export { IamCreateRoleCommand } from './application/create/iam-create-role.comma
 export { IamCreateRolesCommand } from './application/create/iam-create-roles.command';
 export { IamUpdateRoleByIdCommand } from './application/update/iam-update-role-by-id.command';
 export { IamUpdateRolesCommand } from './application/update/iam-update-roles.command';
-export { IamUpdateAndIncrementRolesCommand } from './application/update/iam-update-and-increment-roles.command';
-export { IamUpsertRoleCommand } from './application/upsert/iam-upsert-role.command';
 export { IamDeleteRoleByIdCommand } from './application/delete/iam-delete-role-by-id.command';
 export { IamDeleteRolesCommand } from './application/delete/iam-delete-roles.command';
 
@@ -13,11 +11,6 @@ export { IamPaginateRolesQuery } from './application/paginate/iam-paginate-roles
 export { IamGetRolesQuery } from './application/get/iam-get-roles.query';
 export { IamFindRoleQuery } from './application/find/iam-find-role.query';
 export { IamFindRoleByIdQuery } from './application/find/iam-find-role-by-id.query';
-export { IamRawSQLRolesQuery } from './application/raw-sql/iam-raw-sql-roles.query';
-export { IamCountRoleQuery } from './application/count/iam-count-role.query';
-export { IamMaxRoleQuery } from './application/max/iam-max-role.query';
-export { IamMinRoleQuery } from './application/min/iam-min-role.query';
-export { IamSumRoleQuery } from './application/sum/iam-sum-role.query';
 
 // export mocks
 export { iamMockRoleData } from './infrastructure/mock/iam-mock-role.data';
@@ -32,8 +25,6 @@ export { IamDeletedRolesEvent } from './application/events/iam-deleted-roles.eve
 export { IamDeletedRoleEvent } from './application/events/iam-deleted-role.event';
 export { IamUpdatedRolesEvent } from './application/events/iam-updated-roles.event';
 export { IamUpdatedRoleEvent } from './application/events/iam-updated-role.event';
-export { IamUpdatedAndIncrementedRolesEvent } from './application/events/iam-updated-and-incremented-roles.event';
-export { IamUpdatedAndIncrementedRoleEvent } from './application/events/iam-updated-and-incremented-role.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -59,8 +50,6 @@ import { IamCreateRoleCommandHandler } from './application/create/iam-create-rol
 import { IamCreateRolesCommandHandler } from './application/create/iam-create-roles.command-handler';
 import { IamUpdateRoleByIdCommandHandler } from './application/update/iam-update-role-by-id.command-handler';
 import { IamUpdateRolesCommandHandler } from './application/update/iam-update-roles.command-handler';
-import { IamUpdateAndIncrementRolesCommandHandler } from './application/update/iam-update-and-increment-roles.command-handler';
-import { IamUpsertRoleCommandHandler } from './application/upsert/iam-upsert-role.command-handler';
 import { IamDeleteRoleByIdCommandHandler } from './application/delete/iam-delete-role-by-id.command-handler';
 import { IamDeleteRolesCommandHandler } from './application/delete/iam-delete-roles.command-handler';
 
@@ -69,18 +58,12 @@ import { IamPaginateRolesQueryHandler } from './application/paginate/iam-paginat
 import { IamGetRolesQueryHandler } from './application/get/iam-get-roles.query-handler';
 import { IamFindRoleQueryHandler } from './application/find/iam-find-role.query-handler';
 import { IamFindRoleByIdQueryHandler } from './application/find/iam-find-role-by-id.query-handler';
-import { IamRawSQLRolesQueryHandler } from './application/raw-sql/iam-raw-sql-roles.query-handler';
-import { IamCountRoleQueryHandler } from './application/count/iam-count-role.query-handler';
-import { IamMaxRoleQueryHandler } from './application/max/iam-max-role.query-handler';
-import { IamMinRoleQueryHandler } from './application/min/iam-min-role.query-handler';
-import { IamSumRoleQueryHandler } from './application/sum/iam-sum-role.query-handler';
 
 // event handlers
 import { IamCreatedRoleEventHandler } from './application/events/iam-created-role.event-handler';
 import { IamCreatedRolesEventHandler } from './application/events/iam-created-roles.event-handler';
 import { IamUpdatedRoleEventHandler } from './application/events/iam-updated-role.event-handler';
 import { IamUpdatedRolesEventHandler } from './application/events/iam-updated-roles.event-handler';
-import { IamUpdatedAndIncrementedRolesEventHandler } from './application/events/iam-updated-and-incremented-roles.event-handler';
 import { IamDeletedRoleEventHandler } from './application/events/iam-deleted-role.event-handler';
 import { IamDeletedRolesEventHandler } from './application/events/iam-deleted-roles.event-handler';
 
@@ -91,15 +74,8 @@ import { IamPaginateRolesService } from './application/paginate/iam-paginate-rol
 import { IamGetRolesService } from './application/get/iam-get-roles.service';
 import { IamFindRoleService } from './application/find/iam-find-role.service';
 import { IamFindRoleByIdService } from './application/find/iam-find-role-by-id.service';
-import { IamRawSQLRolesService } from './application/raw-sql/iam-raw-sql-roles.service';
-import { IamCountRoleService } from './application/count/iam-count-role.service';
-import { IamMaxRoleService } from './application/max/iam-max-role.service';
-import { IamMinRoleService } from './application/min/iam-min-role.service';
-import { IamSumRoleService } from './application/sum/iam-sum-role.service';
 import { IamUpdateRoleByIdService } from './application/update/iam-update-role-by-id.service';
 import { IamUpdateRolesService } from './application/update/iam-update-roles.service';
-import { IamUpdateAndIncrementRolesService } from './application/update/iam-update-and-increment-roles.service';
-import { IamUpsertRoleService } from './application/upsert/iam-upsert-role.service';
 import { IamDeleteRoleByIdService } from './application/delete/iam-delete-role-by-id.service';
 import { IamDeleteRolesService } from './application/delete/iam-delete-roles.service';
 
@@ -109,8 +85,6 @@ export const IamRoleHandlers = [
     IamCreateRolesCommandHandler,
     IamUpdateRoleByIdCommandHandler,
     IamUpdateRolesCommandHandler,
-    IamUpdateAndIncrementRolesCommandHandler,
-    IamUpsertRoleCommandHandler,
     IamDeleteRoleByIdCommandHandler,
     IamDeleteRolesCommandHandler,
 
@@ -119,18 +93,12 @@ export const IamRoleHandlers = [
     IamGetRolesQueryHandler,
     IamFindRoleQueryHandler,
     IamFindRoleByIdQueryHandler,
-    IamRawSQLRolesQueryHandler,
-    IamCountRoleQueryHandler,
-    IamMaxRoleQueryHandler,
-    IamMinRoleQueryHandler,
-    IamSumRoleQueryHandler,
 
     // events
     IamCreatedRoleEventHandler,
     IamCreatedRolesEventHandler,
     IamUpdatedRoleEventHandler,
     IamUpdatedRolesEventHandler,
-    IamUpdatedAndIncrementedRolesEventHandler,
     IamDeletedRoleEventHandler,
     IamDeletedRolesEventHandler,
 ];
@@ -142,15 +110,8 @@ export const IamRoleServices = [
     IamGetRolesService,
     IamFindRoleService,
     IamFindRoleByIdService,
-    IamRawSQLRolesService,
-    IamCountRoleService,
-    IamMaxRoleService,
-    IamMinRoleService,
-    IamSumRoleService,
     IamUpdateRoleByIdService,
     IamUpdateRolesService,
-    IamUpdateAndIncrementRolesService,
-    IamUpsertRoleService,
     IamDeleteRoleByIdService,
     IamDeleteRolesService,
 ];

@@ -1,9 +1,8 @@
-import { IamBoundedContext } from '../iam.types';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { IamPermission } from '@apps/iam/iam.types';
+import { IamBoundedContext, IamPermission } from '@apps/iam';
 import { permissionColumnsConfig, PermissionService } from '@apps/iam/permission';
-import { ActionService, GridData, GridFiltersStorageService, GridStateService, QueryStatementHandler } from '@aurora';
+import { ActionService, GridData, GridFiltersStorageService, GridStateService, queryStatementHandler } from '@aurora';
 
 export const permissionPaginationResolver: ResolveFn<GridData<IamPermission>> = (
     route: ActivatedRouteSnapshot,
@@ -25,8 +24,7 @@ export const permissionPaginationResolver: ResolveFn<GridData<IamPermission>> = 
     gridStateService.setExportActionId(gridId, 'iam::permission.list.export');
 
     return permissionService.pagination({
-        query: QueryStatementHandler
-            .init({ columnsConfig: permissionColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: permissionColumnsConfig })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))
@@ -50,7 +48,8 @@ export const permissionNewResolver: ResolveFn<{
         isViewAction: true,
     });
 
-    return permissionService.getRelations();
+    return permissionService.getRelations({
+    });
 };
 
 export const permissionEditResolver: ResolveFn<{
