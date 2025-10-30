@@ -19,7 +19,7 @@ $ npm install -g @aurorajs.dev/cli
 $ aurora COMMAND
 running command...
 $ aurora (--version)
-@aurorajs.dev/cli/4.2.23 darwin-arm64 node-v20.13.1
+@aurorajs.dev/cli/4.2.24 darwin-arm64 node-v20.13.1
 $ aurora --help [COMMAND]
 USAGE
   $ aurora COMMAND
@@ -74,7 +74,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/add.ts](https://github.com/avvale/aurora-cli/blob/v4.2.23/dist/commands/add.ts)_
+_See code: [dist/commands/add.ts](https://github.com/avvale/aurora-cli/blob/v4.2.24/dist/commands/add.ts)_
 
 ## `aurora delete FIRSTARG SECONDARG`
 
@@ -95,7 +95,7 @@ DESCRIPTION
   Delete elements
 ```
 
-_See code: [dist/commands/delete/index.ts](https://github.com/avvale/aurora-cli/blob/v4.2.23/dist/commands/delete/index.ts)_
+_See code: [dist/commands/delete/index.ts](https://github.com/avvale/aurora-cli/blob/v4.2.24/dist/commands/delete/index.ts)_
 
 ## `aurora generate FIRSTARG SECONDARG`
 
@@ -125,7 +125,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/generate.ts](https://github.com/avvale/aurora-cli/blob/v4.2.23/dist/commands/generate.ts)_
+_See code: [dist/commands/generate.ts](https://github.com/avvale/aurora-cli/blob/v4.2.24/dist/commands/generate.ts)_
 
 ## `aurora hello PERSON`
 
@@ -149,7 +149,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [dist/commands/hello/index.ts](https://github.com/avvale/aurora-cli/blob/v4.2.23/dist/commands/hello/index.ts)_
+_See code: [dist/commands/hello/index.ts](https://github.com/avvale/aurora-cli/blob/v4.2.24/dist/commands/hello/index.ts)_
 
 ## `aurora hello world`
 
@@ -207,7 +207,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/keys.ts](https://github.com/avvale/aurora-cli/blob/v4.2.23/dist/commands/keys.ts)_
+_See code: [dist/commands/keys.ts](https://github.com/avvale/aurora-cli/blob/v4.2.24/dist/commands/keys.ts)_
 
 ## `aurora load FIRSTARG SECONDARG`
 
@@ -239,7 +239,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/load.ts](https://github.com/avvale/aurora-cli/blob/v4.2.23/dist/commands/load.ts)_
+_See code: [dist/commands/load.ts](https://github.com/avvale/aurora-cli/blob/v4.2.24/dist/commands/load.ts)_
 
 ## `aurora new FIRSTARG SECONDARG`
 
@@ -268,7 +268,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/new.ts](https://github.com/avvale/aurora-cli/blob/v4.2.23/dist/commands/new.ts)_
+_See code: [dist/commands/new.ts](https://github.com/avvale/aurora-cli/blob/v4.2.24/dist/commands/new.ts)_
 
 ## `aurora pipeline FIRSTARG`
 
@@ -296,7 +296,7 @@ EXAMPLES
   $ aurora --help
 ```
 
-_See code: [dist/commands/pipeline.ts](https://github.com/avvale/aurora-cli/blob/v4.2.23/dist/commands/pipeline.ts)_
+_See code: [dist/commands/pipeline.ts](https://github.com/avvale/aurora-cli/blob/v4.2.24/dist/commands/pipeline.ts)_
 
 ## `aurora plugins`
 
