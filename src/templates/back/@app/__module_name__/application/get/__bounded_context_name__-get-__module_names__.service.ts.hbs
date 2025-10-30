@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'Injectable') path='@nestjs/common')
-            (object items=(array 'QueryStatement' 'CQMetadata') path=config.auroraCorePackage)
+            (object items=(array 'CQMetadata' 'LiteralObject' 'QueryStatement') path=config.auroraCorePackage)
             (
                 object
                     items=
@@ -27,7 +27,7 @@ export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase sche
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<{{ schema.aggregateName }}[]>
+    ): Promise<{{ schema.aggregateName }}[] | LiteralObject[]>
     {
         return await this.repository.get({
             queryStatement,

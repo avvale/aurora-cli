@@ -32,8 +32,8 @@ env:
   NODE_VERSION: '22'
 
 jobs:
-  tests:
-    name: Build and test
+  deploy-artifact:
+    name: Build and test and deploy
     runs-on: ubuntu-latest
 
     outputs:
@@ -87,14 +87,10 @@ jobs:
       shell: bash
 
     - name: Zip artifact for deployment
-      run: zip release.zip ./dist/* ./package.json ./package-lock.json -r
+      run: zip artifact.zip ./dist/* ./package.json ./package-lock.json -r
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: tested-artifact
-        path: |
-          release.zip
+    - name: Unzip artifact for deployment
+      run: unzip -o artifact.zip -d deployment
 
     - name: Output decrypted env for next job
       id: decrypt-env
@@ -102,67 +98,53 @@ jobs:
         dot_env_b64=$(SOPS_AGE_KEY="$SOPS_AGE_KEY" sops --decrypt --input-type binary --output-type binary "$SOPS_DOT_ENV_ENC" | base64 -w0)
         printf 'dot_env_b64<<EOF\n%s\nEOF\n' "$dot_env_b64" >> "$GITHUB_OUTPUT"
 
-  deploy:
-    name: Rsync Plesk deploy
-    needs: tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: tested-artifact
+    - name: Unzip artifact for deployment
+      run: unzip -o artifact.zip -d deployment
 
-      - uses: geekyeggo/delete-artifact@v5
-        with:
-          name: tested-artifact
+    - name: Delete zip artifact
+      run: rm artifact.zip
 
-      - name: Unzip artifact for deployment
-        run: unzip -o release.zip -d src
+    - name: Create file to restart application
+      run: |
+        mkdir deployment/tmp
+        touch deployment/tmp/restart.txt
+      shell: bash
 
-      - name: Delete zip artifact
-        run: rm release.zip
+    - name: Deploy Plesk with rsync
+      uses: burnett01/rsync-deployments@7.0.1
+      with:
+        switches: -avzh --delete --exclude=".*"
+        path: deployment/
+        remote_path: $\{{ env.SERVER_PATH }}/httpdocs
+        remote_host: $\{{ env.SERVER_HOST }}
+        remote_port: $\{{ env.SERVER_PORT }}
+        remote_user: $\{{ env.SERVER_USERNAME }}
+        remote_key: $\{{ env.SERVER_KEY }}
+        remote_key_pass: $\{{ env.SERVER_KEY_PHRASE }}
 
-      - name: Create file to restart application
-        run: |
-          mkdir src/tmp
-          touch src/tmp/restart.txt
-        shell: bash
-
-      - name: Deploy Plesk with rsync
-        uses: burnett01/rsync-deployments@7.0.1
-        with:
-          switches: -avzh --delete --exclude=".*"
-          path: src/
-          remote_path: $\{{ env.SERVER_PATH }}/httpdocs
-          remote_host: $\{{ env.SERVER_HOST }}
-          remote_port: $\{{ env.SERVER_PORT }}
-          remote_user: $\{{ env.SERVER_USERNAME }}
-          remote_key: $\{{ env.SERVER_KEY }}
-          remote_key_pass: $\{{ env.SERVER_KEY_PHRASE }}
-
-      - name: Execute command on remote server
-        uses: appleboy/ssh-action@v1
-        env:
-          DOT_ENV_B64: $\{{ needs.tests.outputs.DOT_ENV_B64 }}
-        with:
-          host: $\{{ env.SERVER_HOST }}
-          username: $\{{ env.SERVER_USERNAME }}
-          key: $\{{ env.SERVER_KEY }}
-          passphrase: $\{{ env.SERVER_KEY_PHRASE }}
-          port: $\{{ env.SERVER_PORT }}
-          envs: DOT_ENV_B64, NODE_VERSION, OAUTH_PRIVATE_KEY, OAUTH_PUBLIC_KEY
-          script: |
-            PATH=$PATH:$\{{ env.SERVER_PATH }}/.nodenv/shims
-            whoami
-            ls -al
-            touch $\{{ env.SERVER_PATH }}/.node-version
-            echo "$NODE_VERSION" > $\{{ env.SERVER_PATH }}/.node-version
-            mkdir -p $\{{ env.SERVER_PATH }}/storage/app/public
-            ln -s $\{{ env.SERVER_PATH }}/storage/app/public $\{{ env.SERVER_PATH }}/httpdocs/public
-            touch $\{{ env.SERVER_PATH }}/oauth-private.key
-            echo "$OAUTH_PRIVATE_KEY" > $\{{ env.SERVER_PATH }}/oauth-private.key
-            touch $\{{ env.SERVER_PATH }}/oauth-public.key
-            echo "$OAUTH_PUBLIC_KEY" > $\{{ env.SERVER_PATH }}/oauth-public.key
-            touch $\{{ env.SERVER_PATH }}/.env
-            echo "$DOT_ENV_B64" | base64 -d > ${{ env.SERVER_PATH }}/.env
-            cd httpdocs && npm ci
+    - name: Execute command on remote server
+      uses: appleboy/ssh-action@v1
+      env:
+        DOT_ENV_B64: $\{{ needs.tests.outputs.DOT_ENV_B64 }}
+      with:
+        host: $\{{ env.SERVER_HOST }}
+        username: $\{{ env.SERVER_USERNAME }}
+        key: $\{{ env.SERVER_KEY }}
+        passphrase: $\{{ env.SERVER_KEY_PHRASE }}
+        port: $\{{ env.SERVER_PORT }}
+        envs: DOT_ENV_B64, NODE_VERSION, OAUTH_PRIVATE_KEY, OAUTH_PUBLIC_KEY
+        script: |
+          PATH=$PATH:$\{{ env.SERVER_PATH }}/.nodenv/shims
+          whoami
+          ls -al
+          touch $\{{ env.SERVER_PATH }}/.node-version
+          echo "$NODE_VERSION" > $\{{ env.SERVER_PATH }}/.node-version
+          mkdir -p $\{{ env.SERVER_PATH }}/storage/app/public
+          ln -s $\{{ env.SERVER_PATH }}/storage/app/public $\{{ env.SERVER_PATH }}/httpdocs/public
+          touch $\{{ env.SERVER_PATH }}/oauth-private.key
+          echo "$OAUTH_PRIVATE_KEY" > $\{{ env.SERVER_PATH }}/oauth-private.key
+          touch $\{{ env.SERVER_PATH }}/oauth-public.key
+          echo "$OAUTH_PUBLIC_KEY" > $\{{ env.SERVER_PATH }}/oauth-public.key
+          touch $\{{ env.SERVER_PATH }}/.env
+          echo "$DOT_ENV_B64" | base64 -d > $\{{ env.SERVER_PATH }}/.env
+          cd httpdocs && npm ci

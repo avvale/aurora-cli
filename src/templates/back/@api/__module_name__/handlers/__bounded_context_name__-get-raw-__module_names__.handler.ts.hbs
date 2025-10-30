@@ -1,0 +1,81 @@
+{{
+    setVar 'importsArray' (
+        array
+            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
+            (object items=schema.aggregateName path='@api/graphql')
+            (object items=(sumStrings schema.aggregateName 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+    )
+~}}
+{{#if (hasI18nProperties schema.aggregateProperties) }}
+{{
+    push importsArray
+        (object items=(array 'BadRequestException') path='@nestjs/common')
+        (object items=(array 'CoreAddI18nConstraintService' 'CoreGetSearchKeyLangService' 'Utils') path=config.auroraCorePackage)
+~}}
+{{/if}}
+{{#if schema.hasTenant}}
+{{
+    push importsArray
+        (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
+~}}
+{{/if}}
+{{{ importManager (object imports=importsArray) }}}
+@Injectable()
+export class {{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler
+{
+    {{#if (hasI18nProperties schema.aggregateProperties) }}
+    i18nColumns: string[] = [{{#each (getI18nSearchableProperties schema.aggregateProperties (array (sumStrings (toCamelCase schema.moduleName) 'Id'))) }}'{{ toCamelCase (getPropertyName this) }}'{{#unless @last}}, {{/unless}}{{/each}}];
+    i18nRelationship: string = '{{ toCamelCase schema.moduleName }}I18n';
+    i18nFunctionReplace = (key: string): string => this.i18nColumns.includes(key) ? `$${this.i18nRelationship}.${key}$` : key;
+
+    {{/if}}
+    constructor(
+        private readonly queryBus: IQueryBus,
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
+        private readonly coreAddI18nConstraintService: CoreAddI18nConstraintService,
+        private readonly coreGetSearchKeyLangService: CoreGetSearchKeyLangService,
+        {{/if}}
+    ) {}
+
+    async main(
+        {{#if schema.hasTenant}}
+        account: IamAccountResponse,
+        {{/if}}
+        queryStatement?: QueryStatement,
+        constraint?: QueryStatement,
+        timezone?: string,
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
+        contentLanguage?: string,
+        {{/if}}
+    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[] | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto[]>
+    {
+        {{#if (hasI18nProperties schema.aggregateProperties) }}
+        if (!contentLanguage) throw new BadRequestException('To get a multi-language objects, the content-language header must be defined.');
+
+        constraint = await this.coreAddI18nConstraintService.add(
+            constraint,
+            this.i18nRelationship,
+            contentLanguage,
+            {
+                searchKeyLang        : this.coreGetSearchKeyLangService.get(),
+                defineDefaultLanguage: false,
+            },
+        );
+
+        // Replace all i18n keys by ${{ toCamelCase schema.moduleName }}I18n.key$
+        queryStatement = Utils.deepMapKeys(queryStatement, this.i18nFunctionReplace);
+        constraint = Utils.deepMapKeys(constraint, this.i18nFunctionReplace);
+
+        {{/if}}
+        return await this.queryBus.ask(new {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Query(
+            queryStatement,
+            constraint,
+            {
+                timezone,
+                excludeMapModelToAggregate: true,
+            },
+        ));
+    }
+}
