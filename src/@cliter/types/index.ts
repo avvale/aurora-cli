@@ -195,6 +195,7 @@ export enum PropertyType
     'CHAR'              = 'char',
     'DATE'              = 'date',
     'DECIMAL'           = 'decimal',
+    'ENCRYPTED'         = 'encrypted',
     'ENUM'              = 'enum',
     'FLOAT'             = 'float',
     'ID'                = 'id',

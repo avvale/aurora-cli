@@ -70,6 +70,9 @@ export class MockerFixed
                 if (!maxLength) maxLength = 1;
                 return '*'.repeat(maxLength);
 
+            case 'encrypted':
+                return '*'.repeat(50);
+
             case 'tinyint':
             case 'tinyint.unsigned':
                 if (!maxLength) maxLength = 2;

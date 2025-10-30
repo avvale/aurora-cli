@@ -69,6 +69,9 @@ export class Mocker
             case 'random.alphaNumeric':
                 return faker.random.alphaNumeric(maxLength);
 
+            case 'encrypted':
+                return faker.random.alphaNumeric(50);
+
             case 'tinyint':
             case 'tinyint.unsigned':
                 if (!maxLength) maxLength = 2;
