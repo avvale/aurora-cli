@@ -30,7 +30,7 @@ export class OAuthUpdateAndIncrementAccessTokensCommandHandler implements IComma
                 token: new OAuthAccessTokenToken(command.payload.token, { undefinable: true }),
                 name: new OAuthAccessTokenName(command.payload.name),
                 isRevoked: new OAuthAccessTokenIsRevoked(command.payload.isRevoked, { undefinable: true }),
-                expiresAt: new OAuthAccessTokenExpiresAt(command.payload.expiresAt, {}, { removeTimezone: command.cQMetadata?.timezone }),
+                expiresAt: new OAuthAccessTokenExpiresAt(command.payload.expiresAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
             },
             command.queryStatement,
             command.constraint,

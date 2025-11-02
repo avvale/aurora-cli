@@ -42,7 +42,7 @@ export class MessageUpdateInboxByIdCommandHandler implements ICommandHandler<Mes
                 accountId: new MessageInboxAccountId(command.payload.accountId, { undefinable: true }),
                 accountCode: new MessageInboxAccountCode(command.payload.accountCode),
                 isImportant: new MessageInboxIsImportant(command.payload.isImportant, { undefinable: true }),
-                sentAt: new MessageInboxSentAt(command.payload.sentAt, { undefinable: true }, { removeTimezone: command.cQMetadata?.timezone }),
+                sentAt: new MessageInboxSentAt(command.payload.sentAt, { undefinable: true }, { applyTimezone: command.cQMetadata?.timezone }),
                 subject: new MessageInboxSubject(command.payload.subject, { undefinable: true }),
                 body: new MessageInboxBody(command.payload.body, { undefinable: true }),
                 link: new MessageInboxLink(command.payload.link),

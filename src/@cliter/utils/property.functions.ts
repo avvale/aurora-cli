@@ -17,6 +17,7 @@ export const isTimezoneProperty = (
     property: Property,
 ): boolean =>
 {
+    if (property.applyTimezone === false) return false;
     return property.type === PropertyType.TIMESTAMP;
 };
 

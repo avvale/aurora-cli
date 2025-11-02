@@ -11,7 +11,7 @@ export class {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase 
         public readonly event: {
             payload: {
                 {{#each (getUpdatedEventProperties schema.aggregateProperties) }}
-                {{#if (isAllowProperty ../schema.moduleName this) }}
+                {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
                 {{ toCamelCase (getPropertyName this) }}: {{ getPropertyJavascriptUpdateType this ../config }};
                 {{/if}}
                 {{/each}}

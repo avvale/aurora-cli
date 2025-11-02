@@ -37,7 +37,7 @@ export class ToolsCreateMigrationsCommandHandler implements ICommandHandler<Tool
                         upScript: new ToolsMigrationUpScript(migration.upScript),
                         downScript: new ToolsMigrationDownScript(migration.downScript),
                         sort: new ToolsMigrationSort(migration.sort),
-                        executedAt: new ToolsMigrationExecutedAt(migration.executedAt, {}, { removeTimezone: command.cQMetadata?.timezone }),
+                        executedAt: new ToolsMigrationExecutedAt(migration.executedAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
                     };
                 }),
             command.cQMetadata,

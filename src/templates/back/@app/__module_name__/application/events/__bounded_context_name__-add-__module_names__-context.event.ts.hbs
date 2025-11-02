@@ -96,7 +96,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
                     new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event({
                         payload: {
                             {{#each (getAggregateProperties schema.aggregateProperties) }}
-                            {{#if (isAllowProperty ../schema.moduleName this) }}
+                            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
                             {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
                             {{/if}}
                             {{/each}}
@@ -120,7 +120,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
                     new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event({
                         payload: {
                             {{#each (getAggregateProperties schema.aggregateProperties) }}
-                            {{#if (isAllowProperty ../schema.moduleName this) }}
+                            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
                             {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
                             {{/if}}
                             {{/each}}
@@ -143,7 +143,7 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
                 payload: this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
                     new {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleName }}Event({
                         payload: {
-                            {{#each (getAggregateProperties schema.aggregateProperties) }}
+                            {{#each (getAggregateProperties schema.aggregateProperties (object allowAutoIncrement=false)) }}
                             {{#if (isAllowProperty ../schema.moduleName this) }}
                             {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
                             {{/if}}

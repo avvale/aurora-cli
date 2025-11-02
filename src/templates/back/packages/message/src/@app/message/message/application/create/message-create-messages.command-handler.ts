@@ -46,7 +46,7 @@ export class MessageCreateMessagesCommandHandler implements ICommandHandler<Mess
                         tenantRecipientIds: new MessageMessageTenantRecipientIds(message.tenantRecipientIds),
                         scopeRecipients: new MessageMessageScopeRecipients(message.scopeRecipients),
                         tagRecipients: new MessageMessageTagRecipients(message.tagRecipients),
-                        sendAt: new MessageMessageSendAt(message.sendAt, {}, { removeTimezone: command.cQMetadata?.timezone }),
+                        sendAt: new MessageMessageSendAt(message.sendAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
                         isImportant: new MessageMessageIsImportant(message.isImportant),
                         subject: new MessageMessageSubject(message.subject),
                         body: new MessageMessageBody(message.body),

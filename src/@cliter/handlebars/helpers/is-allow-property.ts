@@ -8,9 +8,11 @@ handlebars.registerHelper('isAllowProperty', function(
     {
         allowOneToManyRelationShip = false,
         allowManyToManyRelationShip = true,
+        allowAutoIncrement = true,
     }: {
         allowOneToManyRelationShip: boolean;
         allowManyToManyRelationShip: boolean;
+        allowAutoIncrement: boolean;
     },
 ): boolean
 {
@@ -22,6 +24,8 @@ handlebars.registerHelper('isAllowProperty', function(
             property.name !== 'updatedAt' &&
             property.name !== 'deletedAt';
     }
+
+    if (property.autoIncrement && !allowAutoIncrement) return false;
 
     // avoid print property of relationship
     if (isRelationshipProperty(property) && property.relationship?.type === RelationshipType.ONE_TO_MANY) return allowOneToManyRelationShip;

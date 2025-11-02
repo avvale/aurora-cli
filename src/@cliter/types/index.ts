@@ -141,6 +141,7 @@ export interface Property
     indexName?: string;
     indexUsing?: PropertyIndexUsing;
     autoIncrement?: boolean;
+    applyTimezone?: boolean;
     decimals?: number[];
     enumOptions?: string[];
     length?: number;

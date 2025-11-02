@@ -43,7 +43,7 @@ export class MessageUpdateMessageByIdCommandHandler implements ICommandHandler<M
                 tenantRecipientIds: new MessageMessageTenantRecipientIds(command.payload.tenantRecipientIds),
                 scopeRecipients: new MessageMessageScopeRecipients(command.payload.scopeRecipients),
                 tagRecipients: new MessageMessageTagRecipients(command.payload.tagRecipients),
-                sendAt: new MessageMessageSendAt(command.payload.sendAt, {}, { removeTimezone: command.cQMetadata?.timezone }),
+                sendAt: new MessageMessageSendAt(command.payload.sendAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
                 isImportant: new MessageMessageIsImportant(command.payload.isImportant, { undefinable: true }),
                 subject: new MessageMessageSubject(command.payload.subject, { undefinable: true }),
                 body: new MessageMessageBody(command.payload.body, { undefinable: true }),

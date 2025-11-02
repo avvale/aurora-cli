@@ -26,7 +26,7 @@ export class OAuthUpdateAndIncrementRefreshTokensCommandHandler implements IComm
                 accessTokenId: new OAuthRefreshTokenAccessTokenId(command.payload.accessTokenId, { undefinable: true }),
                 token: new OAuthRefreshTokenToken(command.payload.token, { undefinable: true }),
                 isRevoked: new OAuthRefreshTokenIsRevoked(command.payload.isRevoked, { undefinable: true }),
-                expiresAt: new OAuthRefreshTokenExpiresAt(command.payload.expiresAt, {}, { removeTimezone: command.cQMetadata?.timezone }),
+                expiresAt: new OAuthRefreshTokenExpiresAt(command.payload.expiresAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
             },
             command.queryStatement,
             command.constraint,

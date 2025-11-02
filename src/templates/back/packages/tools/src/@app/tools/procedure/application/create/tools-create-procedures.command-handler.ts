@@ -44,8 +44,8 @@ export class ToolsCreateProceduresCommandHandler implements ICommandHandler<Tool
                         downScript: new ToolsProcedureDownScript(procedure.downScript),
                         sort: new ToolsProcedureSort(procedure.sort),
                         hash: new ToolsProcedureHash(procedure.hash),
-                        executedAt: new ToolsProcedureExecutedAt(procedure.executedAt, {}, { removeTimezone: command.cQMetadata?.timezone }),
-                        checkedAt: new ToolsProcedureCheckedAt(procedure.checkedAt, {}, { removeTimezone: command.cQMetadata?.timezone }),
+                        executedAt: new ToolsProcedureExecutedAt(procedure.executedAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
+                        checkedAt: new ToolsProcedureCheckedAt(procedure.checkedAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
                     };
                 }),
             command.cQMetadata,

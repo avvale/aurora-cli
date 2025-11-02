@@ -16,7 +16,7 @@
     )
 ~}}
 {{#each (getWithoutTimestampsProperties (getValueObjectsProperties schema.aggregateProperties)) }}
-{{#if (isAllowProperty ../schema.moduleName this) }}
+{{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
 {{
     push ../importsArray
         (
@@ -42,9 +42,9 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         await this.create{{ toPascalCase schema.moduleName }}Service.main(
             {
                 {{#each (getCreateCommandHandlerProperties schema.aggregateProperties) }}
-                {{#if (isAllowProperty ../schema.moduleName this) }}
+                {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
                 {{#if (isTimezoneProperty this) }}
-                {{ toCamelCase (getPropertyName this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }}(command.payload.{{ toCamelCase (getPropertyName this) }}, {}, { removeTimezone: command.cQMetadata?.timezone }),
+                {{ toCamelCase (getPropertyName this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }}(command.payload.{{ toCamelCase (getPropertyName this) }}, {}, { applyTimezone: command.cQMetadata?.timezone }),
                 {{else}}
                 {{#unless (isI18nAvailableLangsProperty . ../schema.aggregateProperties)}}
                 {{ toCamelCase (getPropertyName this) }}: new {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{> i18n }}{{ toPascalCase (getPropertyName this) }}(command.payload.{{ toCamelCase (getPropertyName this) }}),

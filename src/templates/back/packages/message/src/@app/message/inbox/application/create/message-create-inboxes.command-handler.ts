@@ -45,7 +45,7 @@ export class MessageCreateInboxesCommandHandler implements ICommandHandler<Messa
                         accountId: new MessageInboxAccountId(inbox.accountId),
                         accountCode: new MessageInboxAccountCode(inbox.accountCode),
                         isImportant: new MessageInboxIsImportant(inbox.isImportant),
-                        sentAt: new MessageInboxSentAt(inbox.sentAt, {}, { removeTimezone: command.cQMetadata?.timezone }),
+                        sentAt: new MessageInboxSentAt(inbox.sentAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
                         subject: new MessageInboxSubject(inbox.subject),
                         body: new MessageInboxBody(inbox.body),
                         link: new MessageInboxLink(inbox.link),
