@@ -1,6 +1,6 @@
 {
     "name": "@aurorajs.dev/cli",
-    "version": "4.2.26",
+    "version": "4.2.27",
     "description": "Aurora CLI",
     "author": "José Carlos Rodríguez Palacín <carlos.rodriguez.palacin@gmail.com>",
     "bin": {
