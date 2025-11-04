@@ -40,7 +40,7 @@ export class {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase sche
             query.cQMetadata,
         );
 
-        if (query.cQMetadata.excludeMapModelToAggregate) return models;
+        if (query.cQMetadata?.excludeMapModelToAggregate) return models;
 
         return this.mapper.mapAggregatesToResponses(models as {{ schema.aggregateName }}[]);
     }
