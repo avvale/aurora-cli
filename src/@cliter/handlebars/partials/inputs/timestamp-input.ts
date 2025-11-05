@@ -9,7 +9,7 @@ handlebars.registerPartial('timestampInput',
     <input
         matInput
         formControlName="{{ toCamelCase property.name }}"
-        [auDatetimepickerSqlFormat]
+        auDatetimepickerSqlFormat
         [mtxDatetimepicker]="{{ toCamelCase property.name }}Picker"
     >
     <mtx-datetimepicker-toggle
