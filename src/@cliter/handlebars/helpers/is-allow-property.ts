@@ -19,6 +19,7 @@ handlebars.registerHelper('isAllowProperty', function(
     if (property.isI18n)
     {
         return property.name !== 'id' &&
+            property.name !== 'rowId' &&
             property.name !== _.camelCase(moduleName) + 'Id' &&
             property.name !== 'createdAt' &&
             property.name !== 'updatedAt' &&

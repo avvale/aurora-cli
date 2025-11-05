@@ -1009,6 +1009,7 @@ export const getFormGroupFieldsProperties = (
     return properties
         ?.filter(property => !timestampProperties.includes(property.name))
         .filter(property => property.name !== 'availableLangs')
+        .filter(property => property.name !== 'rowId')
         .filter(property => property.name !== 'meta');
 };
 
