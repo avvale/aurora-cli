@@ -3,14 +3,15 @@ import { cliterConfig } from '../../config';
 import { TemplateGenerator } from '../../utils';
 import { GenerateCommandState, ResolverType, TemplateElement } from '../../types';
 
-export const generateAdditionalApiFiles = (generateCommandState: GenerateCommandState): void =>
+export const generateAdditionalApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (!generateCommandState.schema.additionalApis) return;
 
     for (const additionalApi of generateCommandState.schema.additionalApis)
     {
         // create module files
-        TemplateGenerator.generateStaticContents(
+        // eslint-disable-next-line no-await-in-loop
+        await TemplateGenerator.generateStaticContents(
             generateCommandState.command,
             TemplateElement.BACK_ADDITIONAL_API,
             path.join('src', cliterConfig.apiContainer), // relativeTargetBasePath,

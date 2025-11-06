@@ -3,7 +3,7 @@ import { GenerateCommandState, RelationshipType, TemplateElement } from '../../t
 import { TemplateGenerator, getValueObjectsProperties } from '../../utils';
 import * as path from 'node:path';
 
-export const generateAppFiles = (generateCommandState: GenerateCommandState): void =>
+export const generateAppFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (generateCommandState.schema.excludedFiles?.includes('src/@app/**')) return;
 
@@ -14,7 +14,7 @@ export const generateAppFiles = (generateCommandState: GenerateCommandState): vo
     );
 
     // create module files
-    TemplateGenerator.generateStaticContents(
+    await TemplateGenerator.generateStaticContents(
         generateCommandState.command,
         TemplateElement.BACK_APP,
         path.join('src', cliterConfig.appContainer),
@@ -36,7 +36,7 @@ export const generateAppFiles = (generateCommandState: GenerateCommandState): vo
     );
 
     // create value objects in module folder
-    TemplateGenerator.generateValueObjects(
+    await TemplateGenerator.generateValueObjects(
         generateCommandState.command,
         path.join('src', cliterConfig.appContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),

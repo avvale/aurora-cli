@@ -50,31 +50,31 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
             actions: row =>
             {
                 return [
                     {
-                        id         : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit',
+                        id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit',
                         translation: 'edit',
-                        icon       : 'mode_edit',
+                        icon: 'mode_edit',
                     },
                     {
-                        id         : '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete',
+                        id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete',
                         translation: 'delete',
-                        icon       : 'delete',
+                        icon: 'delete',
                     },
                 ];
             },
         },
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         {
-            type                : ColumnDataType.TRANSLATIONS_MENU,
-            field               : 'translations',
-            translation         : 'Translations',
-            sticky              : true,
+            type: ColumnDataType.TRANSLATIONS_MENU,
+            field: 'translations',
+            translation: 'Translations',
+            sticky: true,
             translationIconColor: row =>
             {
                 const langs = this.sessionService.get('langs');

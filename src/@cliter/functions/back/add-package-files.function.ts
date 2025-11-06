@@ -7,7 +7,7 @@ import { TemplateGenerator } from '../../utils';
 
 export const addPackageFiles = async (addCommandState: AddCommandState): Promise<void> =>
 {
-    TemplateGenerator.generateStaticContents(
+    await TemplateGenerator.generateStaticContents(
         addCommandState.command,
         TemplateElement.BACK_PACKAGES,
         path.join('.'),

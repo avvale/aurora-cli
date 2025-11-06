@@ -4,7 +4,7 @@ import { GenerateCommandState, RelationshipType, PropertyType, TemplateElement }
 import { TemplateGenerator, getManyToManyRelationshipProperties } from '../../utils';
 import * as path from 'node:path';
 
-export const generateApiPivotFiles = (generateCommandState: GenerateCommandState): void =>
+export const generateApiPivotFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (generateCommandState.schema.excludedFiles?.includes('src/@api/**')) return;
     if (!Array.isArray(generateCommandState.schema.aggregateProperties)) return;
@@ -18,7 +18,7 @@ export const generateApiPivotFiles = (generateCommandState: GenerateCommandState
             property.relationship.pivot.boundedContextName.toLowerCase().toKebabCase(),
         );
 
-        TemplateGenerator.generateStaticContents(
+        await TemplateGenerator.generateStaticContents(
             generateCommandState.command,
             TemplateElement.BACK_API,
             path.join('src', cliterConfig.apiContainer),

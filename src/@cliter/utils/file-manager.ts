@@ -134,7 +134,7 @@ export class FileManager
      *
      * @return {void}
      */
-    static generateContents(
+    static async generateContents(
         command: Command,
         originPath: string,
         relativeTargetBasePath: string,
@@ -166,7 +166,7 @@ export class FileManager
             currentProperty?: Property;
             useTemplateEngine?: boolean;
         } = {},
-    ): void
+    ): Promise<void>
     {
         const targetBasePath        = process.cwd();
         const templatesPath         = path.join(__dirname, '..', '..', 'templates');
@@ -223,7 +223,8 @@ export class FileManager
                 }
 
                 // generate file template
-                FileManager.manageTemplateFile(
+                // eslint-disable-next-line no-await-in-loop
+                await FileManager.manageTemplateFile(
                     command,
                     originFilePath,
                     file,
@@ -262,7 +263,8 @@ export class FileManager
                 }
 
                 // copy files/folder inside current folder recursively
-                FileManager.generateContents(
+                // eslint-disable-next-line no-await-in-loop
+                await FileManager.generateContents(
                     command,
                     path.join(originPath, file),
                     relativeTargetBasePath,
@@ -296,7 +298,7 @@ export class FileManager
      * @param {string} currentProperty - property to render value object or pivot table
      * @returns void
      */
-    static manageTemplateFile(
+    static async manageTemplateFile(
         command: Command,
         originFilePath: string,
         file: string,
@@ -334,7 +336,7 @@ export class FileManager
             currentProperty?: Property;
             useTemplateEngine?: boolean;
         } = {},
-    ): void
+    ): Promise<void>
     {
         // replace file name wildcards by bounded context name and module name, and remove .hbs extension
         const nameReplaced = FileManager.replaceFilename(
@@ -361,8 +363,10 @@ export class FileManager
         // check if file exists
         const existFile = fs.existsSync(writePath);
 
+        const fileExtension = path.extname(originFilePath.replace(/\.hbs$/, ''));
+
         // avoid render files like images, this image only will be copied, before check, delete .hbs extension
-        if (!cliterConfig.allowedRenderExtensions.includes(path.extname(originFilePath.replace(/\.hbs$/, ''))))
+        if (!cliterConfig.allowedRenderExtensions.includes(fileExtension))
         {
             if (existFile && !force)
             {
@@ -383,12 +387,13 @@ export class FileManager
         if (useTemplateEngine)
         {
             // replace variables with handlebars template engine
-            contents = templateEngine
+            contents = await templateEngine
                 .render(
                     contents,
                     {
                         ...templateData,
                         config: cliterConfig,
+                        writePath,
                         currentProperty,
                         boundedContextPrefix,
                         boundedContextSuffix,

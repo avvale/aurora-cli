@@ -6,7 +6,7 @@ import { cliterConfig } from '../../config';
 import { GenerateCommandState, RelationshipType, PropertyType, TemplateElement } from '../../types';
 import { TemplateGenerator } from '../../utils';
 
-export const generateApiFiles = (generateCommandState: GenerateCommandState): void =>
+export const generateApiFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (generateCommandState.schema.excludedFiles?.includes('src/@api/**')) return;
 
@@ -15,7 +15,7 @@ export const generateApiFiles = (generateCommandState: GenerateCommandState): vo
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
     );
 
-    TemplateGenerator.generateStaticContents(
+    await TemplateGenerator.generateStaticContents(
         generateCommandState.command,
         TemplateElement.BACK_API,
         path.join('src', cliterConfig.apiContainer),

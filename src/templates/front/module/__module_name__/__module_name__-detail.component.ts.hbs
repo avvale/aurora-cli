@@ -217,9 +217,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}OriginColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
             actions: row =>
             {
                 return [
@@ -249,9 +249,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     selectedCheckboxRowModel = new SelectionModel<any>(true, [], true, (a: {{ relationship.pivot.aggregateName }}, b: {{ relationship.pivot.aggregateName }}) => a.{{ toCamelCase relationship.singularName }}Id === b.{{ toCamelCase relationship.singularName }}Id);
     origin{{ toPascalCase relationship.pivot.moduleName }}ColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'actions',
-            sticky : true,
+            type: ColumnDataType.ACTIONS,
+            field: 'actions',
+            sticky: true,
             actions: row =>
             {
                 const actions = [];
@@ -331,9 +331,9 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig$: Observable<ColumnConfig[]>;
     origin{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
             actions: row =>
             {
                 const actions = [
@@ -363,11 +363,11 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}AsyncMatSelectSearchState = initAsyncMatSelectSearchState<{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}>();
     {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}ManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
         columnFilter: {
-            id      : uuid(),
-            field   : '{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.name::unaccent',
-            type    : ColumnDataType.STRING,
+            id: uuid(),
+            field: '{{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}.name::unaccent',
+            type: ColumnDataType.STRING,
             operator: Operator.iLike,
-            value   : null,
+            value: null,
         },
         paginationService   : this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service,
         paginationConstraint: {},

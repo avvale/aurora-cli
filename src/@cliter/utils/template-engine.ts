@@ -1,16 +1,16 @@
-
 import * as handlebars from 'handlebars';
 import * as handlebarsHelpers from 'handlebars-helpers';
 import '../handlebars/helpers';
 import '../handlebars/partials';
-import '../prototypes/string-to-camel-case.interface';
 import '../prototypes/string-to-camel-case';
-import '../prototypes/string-to-kebab-case.interface';
+import '../prototypes/string-to-camel-case.interface';
 import '../prototypes/string-to-kebab-case';
-import '../prototypes/string-to-pascal-case.interface';
+import '../prototypes/string-to-kebab-case.interface';
 import '../prototypes/string-to-pascal-case';
-import '../prototypes/string-to-snake-case.interface';
+import '../prototypes/string-to-pascal-case.interface';
 import '../prototypes/string-to-snake-case';
+import '../prototypes/string-to-snake-case.interface';
+import { formatCode } from './prettier-engine';
 
 const templateEngine =
 {
@@ -20,18 +20,23 @@ const templateEngine =
      * @param {any} data - Data helper to render templates
      * @return {string} Rendered template
      */
-    render(content: string, data: any): string
+    async render(
+        content: string,
+        data: any,
+    ): Promise<string>
     {
         // add helpers to handlebars template engine
         handlebarsHelpers({ handlebars });
 
-        return handlebars.compile(content)(
+        const code = handlebars.compile(content)(
             data,
             {
                 allowProtoPropertiesByDefault: true,
                 allowProtoMethodsByDefault   : true,
             },
         );
+
+        return formatCode(code, data.writePath, process.cwd());
     },
 };
 

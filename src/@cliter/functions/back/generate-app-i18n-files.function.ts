@@ -3,13 +3,13 @@ import { GenerateCommandState, RelationshipType, TemplateElement } from '../../t
 import { TemplateGenerator, hasI18nProperties } from '../../utils';
 import * as path from 'node:path';
 
-export const generateAppI18nFiles = (generateCommandState: GenerateCommandState): void =>
+export const generateAppI18nFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (generateCommandState.schema.excludedFiles?.includes('src/@app/**')) return;
 
     if (hasI18nProperties(generateCommandState.schema.aggregateProperties))
     {
-        TemplateGenerator.generateStaticContents(
+        await TemplateGenerator.generateStaticContents(
             generateCommandState.command,
             TemplateElement.BACK_I18N_APP,
             path.join('src', cliterConfig.appContainer),

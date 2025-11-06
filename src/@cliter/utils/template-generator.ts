@@ -22,7 +22,7 @@ export class TemplateGenerator
     // with templateElement know that type of element create, bounded_context, module, etc.
     // makes a wrapper of generateContents to centralize the content generation calls
     // from the template generator
-    static generateStaticContents(
+    static async generateStaticContents(
         command: Command,
         templateElement: TemplateElement,
         relativeTargetBasePath: string,
@@ -56,9 +56,9 @@ export class TemplateGenerator
             useTemplateEngine?: boolean;
             templateElementPath?: string;
         } = {},
-    ): void
+    ): Promise<void>
     {
-        FileManager.generateContents(
+        await FileManager.generateContents(
             command,
             path.join(
                 TemplateGenerator.templatePath,
@@ -164,7 +164,7 @@ export class TemplateGenerator
      * @param {string} moduleName Module name
      * @return void
      */
-    static generateValueObject(
+    static async generateValueObject(
         command: Command,
         relativeTargetBasePath: string,
         relativeTargetPath: string,
@@ -188,7 +188,7 @@ export class TemplateGenerator
             lockFiles?: LockFile[];
             templateData?: any;
         } = {},
-    ): void
+    ): Promise<void>
     {
         // read value object from our data type
         const originFilePath = path.join(
@@ -221,7 +221,7 @@ export class TemplateGenerator
         // check that exists value object template
         if (!fs.existsSync(originFilePath)) throw new Error('Value object not exist, must to create template ' + originFilePath);
 
-        FileManager.manageTemplateFile(
+        await FileManager.manageTemplateFile(
             command,
             originFilePath,
             '__bounded_context_name__-__module_name__-__property_name__.ts.hbs',

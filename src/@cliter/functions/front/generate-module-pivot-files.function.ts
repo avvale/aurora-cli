@@ -4,7 +4,7 @@ import { cliterConfig } from '../../config';
 import { GenerateCommandState, PropertyType, RelationshipType, TemplateElement } from '../../types';
 import { TemplateGenerator, getManyToManyRelationshipProperties } from '../../utils';
 
-export const generateModulePivotFiles = (generateCommandState: GenerateCommandState): void =>
+export const generateModulePivotFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (!Array.isArray(generateCommandState.schema.aggregateProperties)) return;
 
@@ -18,7 +18,7 @@ export const generateModulePivotFiles = (generateCommandState: GenerateCommandSt
             property.relationship.pivot.boundedContextName.toLowerCase().toKebabCase(),
         );
 
-        TemplateGenerator.generateStaticContents(
+        await TemplateGenerator.generateStaticContents(
             generateCommandState.command,
             TemplateElement.FRONT_MODULE,
             join('src', cliterConfig.dashboardContainer),

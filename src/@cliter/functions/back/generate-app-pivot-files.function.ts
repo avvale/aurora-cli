@@ -4,7 +4,7 @@ import { GenerateCommandState, RelationshipType, TemplateElement } from '../../t
 import { TemplateGenerator, getManyToManyRelationshipProperties, getValueObjectsProperties } from '../../utils';
 import * as path from 'node:path';
 
-export const generateAppPivotFiles = (generateCommandState: GenerateCommandState): void =>
+export const generateAppPivotFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
 {
     if (generateCommandState.schema.excludedFiles?.includes('src/@app/**')) return;
     if (!Array.isArray(generateCommandState.schema.aggregateProperties)) return;
@@ -19,7 +19,7 @@ export const generateAppPivotFiles = (generateCommandState: GenerateCommandState
         );
 
         // create module files
-        TemplateGenerator.generateStaticContents(
+        await TemplateGenerator.generateStaticContents(
             generateCommandState.command,
             TemplateElement.BACK_APP,
             path.join('src', cliterConfig.appContainer),
