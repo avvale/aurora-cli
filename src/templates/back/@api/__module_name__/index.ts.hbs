@@ -129,9 +129,15 @@ export { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 
 // export additionalApis
 {{#each schema.additionalApis}}
+{{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/controllers/' (getAdditionalApiFileName this) '.controller.ts'}}
 export { {{ getClassNameAdditionalApi this }}Controller } from './controllers/{{ getAdditionalApiFileName this }}.controller';
+{{/notInArray}}
+{{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/handlers/' (getAdditionalApiFileName this) '.handler.ts'}}
 export { {{ getClassNameAdditionalApi this }}Handler } from './handlers/{{ getAdditionalApiFileName this }}.handler';
+{{/notInArray}}
+{{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/resolvers/' (getAdditionalApiFileName this) '.resolver.ts'}}
 export { {{ getClassNameAdditionalApi this }}Resolver } from './resolvers/{{ getAdditionalApiFileName this }}.resolver';
+{{/notInArray}}
 {{/each}}
 {{/unlessEq}}
 
@@ -257,9 +263,15 @@ import { {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.modu
 
 // import additionalApis
 {{#each schema.additionalApis}}
+{{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/controllers/' (getAdditionalApiFileName this) '.controller.ts'}}
 import { {{ getClassNameAdditionalApi this }}Controller } from './controllers/{{ getAdditionalApiFileName this }}.controller';
+{{/notInArray}}
+{{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/handlers/' (getAdditionalApiFileName this) '.handler.ts'}}
 import { {{ getClassNameAdditionalApi this }}Handler } from './handlers/{{ getAdditionalApiFileName this }}.handler';
+{{/notInArray}}
+{{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/resolvers/' (getAdditionalApiFileName this) '.resolver.ts'}}
 import { {{ getClassNameAdditionalApi this }}Resolver } from './resolvers/{{ getAdditionalApiFileName this }}.resolver';
+{{/notInArray}}
 {{/each}}
 {{/unlessEq}}
 
@@ -304,7 +316,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
     // additionalApis
     {{#each schema.additionalApis}}
+    {{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/controllers/' (getAdditionalApiFileName this) '.controller.ts'}}
     {{ getClassNameAdditionalApi this }}Controller,
+    {{/notInArray}}
     {{/each}}
     {{/unlessEq}}
 ];
@@ -350,7 +364,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
     // additionalApis
     {{#each schema.additionalApis}}
+    {{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/resolvers/' (getAdditionalApiFileName this) '.resolver.ts'}}
     {{ getClassNameAdditionalApi this }}Resolver,
+    {{/notInArray}}
     {{/each}}
     {{/unlessEq}}
 ];
@@ -396,7 +412,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
     // additionalApis
     {{#each schema.additionalApis}}
+    {{#notInArray ../schema.excludedFiles 'src/' ../config.apiContainer '/' (toKebabCase ../schema.boundedContextName) '/' (toKebabCase ../schema.moduleName) '/handlers/' (getAdditionalApiFileName this) '.handler.ts'}}
     {{ getClassNameAdditionalApi this }}Handler,
+    {{/notInArray}}
     {{/each}}
     {{/unlessEq}}
 ];

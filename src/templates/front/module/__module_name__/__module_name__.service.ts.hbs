@@ -894,11 +894,13 @@ export class {{ toPascalCase schema.moduleName }}Service
             query = {},
             constraint = {},
             headers = {},
+            scope,
         }: {
             graphqlStatement?: DocumentNode;
             query?: QueryStatement;
             constraint?: QueryStatement;
             headers?: GraphQLHeaders;
+            scope?: string;
         } = {},
     ): Observable<{
         objects: {{ ../schema.aggregateName }}[];
@@ -907,7 +909,7 @@ export class {{ toPascalCase schema.moduleName }}Service
         return this.graphqlService
             .client()
             .watchQuery<{
-                objects: {{ ../schema.aggregateName }};
+                objects: {{ ../schema.aggregateName }}[];
             }>({
                 query    : graphqlStatement,
                 variables: {
@@ -922,10 +924,11 @@ export class {{ toPascalCase schema.moduleName }}Service
             .pipe(
                 first(),
                 map(result => result.data),
-                tap(data =>
-                {
-                    this.{{ toCamelCase ../schema.moduleNames }}Subject$.next(data.objects);
-                }),
+                tap((data) =>
+                    scope
+                    ? this.setScope{{ toPascalCase ../schema.moduleNames }}(scope, data.objects)
+                    : this.{{ toCamelCase ../schema.moduleNames }}Subject$.next(data.objects),
+                ),
             );
     }
 {{/each}}
