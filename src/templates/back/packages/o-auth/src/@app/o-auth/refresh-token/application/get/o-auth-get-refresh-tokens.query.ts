@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class OAuthGetRefreshTokensQuery
-{
+export class OAuthGetRefreshTokensQuery {
     constructor(
         public readonly queryStatement?: QueryStatement,
         public readonly constraint?: QueryStatement,

@@ -1,13 +1,17 @@
 import { OAuthApplicationClient } from '@api/graphql';
 import { OAuthDeleteApplicationClientByIdHandler } from '@api/o-auth/application-client';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.applicationClient.delete')
-export class OAuthDeleteApplicationClientByIdResolver
-{
+export class OAuthDeleteApplicationClientByIdResolver {
     constructor(
         private readonly handler: OAuthDeleteApplicationClientByIdHandler,
     ) {}
@@ -19,8 +23,7 @@ export class OAuthDeleteApplicationClientByIdResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<OAuthApplicationClient>
-    {
+    ): Promise<OAuthApplicationClient> {
         return await this.handler.main(
             applicationId,
             clientId,

@@ -1,8 +1,6 @@
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class IamDeleteTenantAccountByIdCommand
-{
+export class IamDeleteTenantAccountByIdCommand {
     constructor(
         public readonly tenantId: string,
         public readonly accountId: string,

@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class ToolsFindProcedureByIdQuery
-{
+export class ToolsFindProcedureByIdQuery {
     constructor(
         public readonly id: string,
         public readonly constraint?: QueryStatement,

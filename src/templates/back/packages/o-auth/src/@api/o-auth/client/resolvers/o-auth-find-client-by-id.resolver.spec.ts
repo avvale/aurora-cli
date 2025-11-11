@@ -1,50 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthFindClientByIdHandler, OAuthFindClientByIdResolver } from '@api/o-auth/client';
+import {
+    OAuthFindClientByIdHandler,
+    OAuthFindClientByIdResolver,
+} from '@api/o-auth/client';
 import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthFindClientByIdResolver', () =>
-{
+describe('OAuthFindClientByIdResolver', () => {
     let resolver: OAuthFindClientByIdResolver;
     let handler: OAuthFindClientByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthFindClientByIdResolver,
                 {
-                    provide : OAuthFindClientByIdHandler,
+                    provide: OAuthFindClientByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthFindClientByIdResolver>(OAuthFindClientByIdResolver);
-        handler = module.get<OAuthFindClientByIdHandler>(OAuthFindClientByIdHandler);
+        resolver = module.get<OAuthFindClientByIdResolver>(
+            OAuthFindClientByIdResolver,
+        );
+        handler = module.get<OAuthFindClientByIdHandler>(
+            OAuthFindClientByIdHandler,
+        );
     });
 
-    test('OAuthFindClientByIdResolver should be defined', () =>
-    {
+    test('OAuthFindClientByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthFindClientByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthFindClientByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an client by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
-            expect(await resolver.main(oAuthMockClientData[0].id)).toBe(oAuthMockClientData[0]);
+        test('should return an client by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockClientData[0])),
+            );
+            expect(await resolver.main(oAuthMockClientData[0].id)).toBe(
+                oAuthMockClientData[0],
+            );
         });
     });
 });

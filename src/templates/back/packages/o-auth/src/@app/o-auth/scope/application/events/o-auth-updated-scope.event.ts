@@ -1,12 +1,18 @@
-export class OAuthUpdatedScopeEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class OAuthUpdatedScopeEvent {
     constructor(
-        public readonly id: string,
-        public readonly code: string,
-        public readonly name: string,
-        public readonly roleIds: string[],
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                code: string;
+                name: string;
+                roleIds: string[];
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

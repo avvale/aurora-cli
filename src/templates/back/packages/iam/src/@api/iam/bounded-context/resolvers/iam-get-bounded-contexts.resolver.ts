@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.boundedContext.get')
-export class IamGetBoundedContextsResolver
-{
-    constructor(
-        private readonly handler: IamGetBoundedContextsHandler,
-    ) {}
+export class IamGetBoundedContextsResolver {
+    constructor(private readonly handler: IamGetBoundedContextsHandler) {}
 
     @Query('iamGetBoundedContexts')
     async main(
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<IamBoundedContext[]>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<IamBoundedContext[]> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

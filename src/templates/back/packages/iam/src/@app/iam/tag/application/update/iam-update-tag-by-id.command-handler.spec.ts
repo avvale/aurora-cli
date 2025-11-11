@@ -3,47 +3,48 @@ import { IamUpdateTagByIdCommandHandler } from '@app/iam/tag/application/update/
 import { IamUpdateTagByIdService } from '@app/iam/tag/application/update/iam-update-tag-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateTagByIdCommandHandler', () =>
-{
+describe('IamUpdateTagByIdCommandHandler', () => {
     let commandHandler: IamUpdateTagByIdCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamUpdateTagByIdCommandHandler,
                 {
-                    provide : IamUpdateTagByIdService,
+                    provide: IamUpdateTagByIdService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamUpdateTagByIdCommandHandler>(IamUpdateTagByIdCommandHandler);
+        commandHandler = module.get<IamUpdateTagByIdCommandHandler>(
+            IamUpdateTagByIdCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('UpdateTagByIdCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('UpdateTagByIdCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an tag created', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamUpdateTagByIdCommand(
-                    {
-                        id: iamMockTagData[0].id,
-                        name: iamMockTagData[0].name,
-                    },
-                    {},
-                    { timezone: process.env.TZ },
+        test('should return an tag created', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamUpdateTagByIdCommand(
+                        {
+                            id: iamMockTagData[0].id,
+                            rowId: iamMockTagData[0].rowId,
+                            name: iamMockTagData[0].name,
+                        },
+                        {},
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

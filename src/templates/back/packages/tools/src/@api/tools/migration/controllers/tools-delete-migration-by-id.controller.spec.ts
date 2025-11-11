@@ -1,47 +1,54 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsDeleteMigrationByIdController, ToolsDeleteMigrationByIdHandler } from '@api/tools/migration';
+import {
+    ToolsDeleteMigrationByIdController,
+    ToolsDeleteMigrationByIdHandler,
+} from '@api/tools/migration';
 import { toolsMockMigrationData } from '@app/tools/migration';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDeleteMigrationByIdController', () =>
-{
+describe('ToolsDeleteMigrationByIdController', () => {
     let controller: ToolsDeleteMigrationByIdController;
     let handler: ToolsDeleteMigrationByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                ToolsDeleteMigrationByIdController,
-            ],
+            imports: [],
+            controllers: [ToolsDeleteMigrationByIdController],
             providers: [
                 {
-                    provide : ToolsDeleteMigrationByIdHandler,
+                    provide: ToolsDeleteMigrationByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<ToolsDeleteMigrationByIdController>(ToolsDeleteMigrationByIdController);
-        handler = module.get<ToolsDeleteMigrationByIdHandler>(ToolsDeleteMigrationByIdHandler);
+        controller = module.get<ToolsDeleteMigrationByIdController>(
+            ToolsDeleteMigrationByIdController,
+        );
+        handler = module.get<ToolsDeleteMigrationByIdHandler>(
+            ToolsDeleteMigrationByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDeleteMigrationByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDeleteMigrationByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an migration deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData[0])));
-            expect(await controller.main(toolsMockMigrationData[0].id)).toBe(toolsMockMigrationData[0]);
+        test('should return an migration deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockMigrationData[0]),
+                    ),
+            );
+            expect(await controller.main(toolsMockMigrationData[0].id)).toBe(
+                toolsMockMigrationData[0],
+            );
         });
     });
 });

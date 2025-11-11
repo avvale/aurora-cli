@@ -3,10 +3,10 @@ import { IamTenantResponse } from '@app/iam/tenant';
 import { IamUserResponse } from '@app/iam/user';
 import { OAuthClientResponse } from '@app/o-auth/client';
 
-export class IamAccountResponse
-{
+export class IamAccountResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly type: string,
         public readonly code: string,
         public readonly email: string,

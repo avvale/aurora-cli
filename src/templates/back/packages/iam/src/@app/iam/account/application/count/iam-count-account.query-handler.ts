@@ -3,14 +3,12 @@ import { IamCountAccountService } from '@app/iam/account/application/count/iam-c
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamCountAccountQuery)
-export class IamCountAccountQueryHandler implements IQueryHandler<IamCountAccountQuery>
+export class IamCountAccountQueryHandler
+    implements IQueryHandler<IamCountAccountQuery>
 {
-    constructor(
-        private readonly countAccountService: IamCountAccountService,
-    ) {}
+    constructor(private readonly countAccountService: IamCountAccountService) {}
 
-    async execute(query: IamCountAccountQuery): Promise<number>
-    {
+    async execute(query: IamCountAccountQuery): Promise<number> {
         return await this.countAccountService.main(
             query.queryStatement,
             query.constraint,

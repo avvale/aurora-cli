@@ -1,10 +1,10 @@
 import { OAuthAccessTokenResponse } from '@app/o-auth/access-token';
 import { OAuthApplicationResponse } from '@app/o-auth/application';
 
-export class OAuthClientResponse
-{
+export class OAuthClientResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly grantType: string,
         public readonly name: string,
         public readonly secret: string,

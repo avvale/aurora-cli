@@ -1,5 +1,9 @@
 /* eslint-disable key-spacing */
-import { ToolsCreatedProcedureEvent, ToolsDeletedProcedureEvent, ToolsUpdatedProcedureEvent } from '@app/tools/procedure';
+import {
+    ToolsCreatedProcedureEvent,
+    ToolsDeletedProcedureEvent,
+    ToolsUpdatedProcedureEvent,
+} from '@app/tools/procedure';
 import {
     ToolsProcedureCheckedAt,
     ToolsProcedureCreatedAt,
@@ -12,6 +16,7 @@ import {
     ToolsProcedureIsExecuted,
     ToolsProcedureIsUpdated,
     ToolsProcedureName,
+    ToolsProcedureRowId,
     ToolsProcedureSort,
     ToolsProcedureType,
     ToolsProcedureUpdatedAt,
@@ -21,9 +26,9 @@ import {
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class ToolsProcedure extends AggregateRoot
-{
+export class ToolsProcedure extends AggregateRoot {
     id: ToolsProcedureId;
+    rowId: ToolsProcedureRowId;
     name: ToolsProcedureName;
     type: ToolsProcedureType;
     version: ToolsProcedureVersion;
@@ -42,6 +47,7 @@ export class ToolsProcedure extends AggregateRoot
 
     constructor(
         id: ToolsProcedureId,
+        rowId: ToolsProcedureRowId,
         name: ToolsProcedureName,
         type: ToolsProcedureType,
         version: ToolsProcedureVersion,
@@ -57,10 +63,10 @@ export class ToolsProcedure extends AggregateRoot
         createdAt: ToolsProcedureCreatedAt,
         updatedAt: ToolsProcedureUpdatedAt,
         deletedAt: ToolsProcedureDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.name = name;
         this.type = type;
         this.version = version;
@@ -80,6 +86,7 @@ export class ToolsProcedure extends AggregateRoot
 
     static register(
         id: ToolsProcedureId,
+        rowId: ToolsProcedureRowId,
         name: ToolsProcedureName,
         type: ToolsProcedureType,
         version: ToolsProcedureVersion,
@@ -95,10 +102,10 @@ export class ToolsProcedure extends AggregateRoot
         createdAt: ToolsProcedureCreatedAt,
         updatedAt: ToolsProcedureUpdatedAt,
         deletedAt: ToolsProcedureDeletedAt,
-    ): ToolsProcedure
-    {
+    ): ToolsProcedure {
         return new ToolsProcedure(
             id,
+            rowId,
             name,
             type,
             version,
@@ -117,13 +124,7 @@ export class ToolsProcedure extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: ToolsProcedure;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: ToolsProcedure; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsCreatedProcedureEvent({
                 payload: {
@@ -149,13 +150,7 @@ export class ToolsProcedure extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: ToolsProcedure;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: ToolsProcedure; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsUpdatedProcedureEvent({
                 payload: {
@@ -181,17 +176,12 @@ export class ToolsProcedure extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: ToolsProcedure;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: ToolsProcedure; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsDeletedProcedureEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     name: event.payload.name.value,
                     type: event.payload.type.value,
                     version: event.payload.version.value,
@@ -213,10 +203,10 @@ export class ToolsProcedure extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             name: this.name.value,
             type: this.type.value,
             version: this.version.value,
@@ -236,8 +226,7 @@ export class ToolsProcedure extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             name: this.name.value,

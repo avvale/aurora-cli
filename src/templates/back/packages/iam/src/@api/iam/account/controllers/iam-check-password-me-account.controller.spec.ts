@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamCheckPasswordMeAccountHandler } from '../handlers/iam-check-password-me-account.handler';
 import { IamCheckPasswordMeAccountController } from './iam-check-password-me-account.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCheckPasswordMeAccountController', () =>
-{
+describe('IamCheckPasswordMeAccountController', () => {
     let controller: IamCheckPasswordMeAccountController;
     let handler: IamCheckPasswordMeAccountHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamCheckPasswordMeAccountController,
-            ],
+            imports: [],
+            controllers: [IamCheckPasswordMeAccountController],
             providers: [
                 {
-                    provide : IamCheckPasswordMeAccountHandler,
+                    provide: IamCheckPasswordMeAccountHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamCheckPasswordMeAccountController>(IamCheckPasswordMeAccountController);
-        handler = module.get<IamCheckPasswordMeAccountHandler>(IamCheckPasswordMeAccountHandler);
+        controller = module.get<IamCheckPasswordMeAccountController>(
+            IamCheckPasswordMeAccountController,
+        );
+        handler = module.get<IamCheckPasswordMeAccountHandler>(
+            IamCheckPasswordMeAccountHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamCheckPasswordMeAccountController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCheckPasswordMeAccountController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

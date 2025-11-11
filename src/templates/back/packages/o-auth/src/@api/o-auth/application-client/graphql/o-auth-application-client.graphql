@@ -1,32 +1,26 @@
-
-type OAuthApplicationClient
-{
+type OAuthApplicationClient {
     applicationId: ID!
-    clientId: ID!
     application: OAuthApplication
+    clientId: ID!
     client: OAuthClient
 }
 
-input OAuthCreateApplicationClientInput
-{
+input OAuthCreateApplicationClientInput {
     applicationId: ID!
     clientId: ID!
 }
 
-input OAuthUpdateApplicationClientByIdInput
-{
+input OAuthUpdateApplicationClientByIdInput {
     applicationId: ID!
     clientId: ID!
 }
 
-input OAuthUpdateApplicationsClientsInput
-{
+input OAuthUpdateApplicationsClientsInput {
     applicationId: ID
     clientId: ID
 }
 
-type Query
-{
+type Query {
     oAuthFindApplicationClient(
         query: QueryStatement
         constraint: QueryStatement
@@ -47,11 +41,9 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     oAuthCreateApplicationClient(
         payload: OAuthCreateApplicationClientInput!
     ): OAuthApplicationClient
@@ -65,16 +57,6 @@ type Mutation
         constraint: QueryStatement
     ): OAuthApplicationClient
 
-    oAuthUpdateApplicationsClients(
-        payload: OAuthUpdateApplicationsClientsInput!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [OAuthApplicationClient]!
-
-    oAuthUpsertApplicationClient(
-        payload: OAuthUpdateApplicationClientByIdInput!
-    ): OAuthApplicationClient
-
     oAuthDeleteApplicationClientById(
         applicationId: ID!
         clientId: ID!
@@ -85,5 +67,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [OAuthApplicationClient]!
-
 }

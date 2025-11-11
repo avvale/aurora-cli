@@ -5,27 +5,22 @@ import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamCreateRolesHandler
-{
-    constructor(
-        private readonly commandBus: ICommandBus,
-    ) {}
+export class IamCreateRolesHandler {
+    constructor(private readonly commandBus: ICommandBus) {}
 
     async main(
         payload: IamCreateRoleInput[] | IamCreateRoleDto[],
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        await this.commandBus.dispatch(new IamCreateRolesCommand(
-            payload,
-            {
+    ): Promise<boolean> {
+        await this.commandBus.dispatch(
+            new IamCreateRolesCommand(payload, {
                 timezone,
                 repositoryOptions: {
                     auditing,
                 },
-            },
-        ));
+            }),
+        );
 
         return true;
     }

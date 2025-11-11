@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { ToolsCheckScriptProcedureHandler } from '../handlers/tools-check-script-procedure.handler';
 import { ToolsCheckScriptProcedureResolver } from './tools-check-script-procedure.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsCheckScriptProcedureResolver', () =>
-{
+describe('ToolsCheckScriptProcedureResolver', () => {
     let resolver: ToolsCheckScriptProcedureResolver;
     let handler: ToolsCheckScriptProcedureHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsCheckScriptProcedureResolver,
                 {
-                    provide : ToolsCheckScriptProcedureHandler,
+                    provide: ToolsCheckScriptProcedureHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsCheckScriptProcedureResolver>(ToolsCheckScriptProcedureResolver);
-        handler = module.get<ToolsCheckScriptProcedureHandler>(ToolsCheckScriptProcedureHandler);
+        resolver = module.get<ToolsCheckScriptProcedureResolver>(
+            ToolsCheckScriptProcedureResolver,
+        );
+        handler = module.get<ToolsCheckScriptProcedureHandler>(
+            ToolsCheckScriptProcedureHandler,
+        );
     });
 
-    test('ToolsCheckScriptProcedureResolver should be defined', () =>
-    {
+    test('ToolsCheckScriptProcedureResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsCheckScriptProcedureResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsCheckScriptProcedureResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

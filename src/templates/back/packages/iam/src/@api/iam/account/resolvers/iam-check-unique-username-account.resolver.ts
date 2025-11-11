@@ -4,8 +4,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth()
-export class IamCheckUniqueUsernameAccountResolver
-{
+export class IamCheckUniqueUsernameAccountResolver {
     constructor(
         private readonly handler: IamCheckUniqueUsernameAccountHandler,
     ) {}
@@ -14,11 +13,7 @@ export class IamCheckUniqueUsernameAccountResolver
     async main(
         @Args('username') username: string,
         @Args('avoidUsernames') avoidUsernames?: string[],
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            username,
-            avoidUsernames,
-        );
+    ): Promise<boolean> {
+        return await this.handler.main(username, avoidUsernames);
     }
 }

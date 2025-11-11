@@ -1,9 +1,14 @@
-import { IamFindPermissionQuery, IamPermissionMapper, IamPermissionResponse } from '@app/iam/permission';
+import {
+    IamFindPermissionQuery,
+    IamPermissionMapper,
+    IamPermissionResponse,
+} from '@app/iam/permission';
 import { IamFindPermissionService } from '@app/iam/permission/application/find/iam-find-permission.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamFindPermissionQuery)
-export class IamFindPermissionQueryHandler implements IQueryHandler<IamFindPermissionQuery>
+export class IamFindPermissionQueryHandler
+    implements IQueryHandler<IamFindPermissionQuery>
 {
     private readonly mapper: IamPermissionMapper = new IamPermissionMapper();
 
@@ -11,8 +16,9 @@ export class IamFindPermissionQueryHandler implements IQueryHandler<IamFindPermi
         private readonly findPermissionService: IamFindPermissionService,
     ) {}
 
-    async execute(query: IamFindPermissionQuery): Promise<IamPermissionResponse>
-    {
+    async execute(
+        query: IamFindPermissionQuery,
+    ): Promise<IamPermissionResponse> {
         const permission = await this.findPermissionService.main(
             query.queryStatement,
             query.constraint,

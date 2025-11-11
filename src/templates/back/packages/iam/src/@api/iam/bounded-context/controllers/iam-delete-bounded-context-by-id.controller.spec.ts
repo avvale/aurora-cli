@@ -1,47 +1,54 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamDeleteBoundedContextByIdController, IamDeleteBoundedContextByIdHandler } from '@api/iam/bounded-context';
+import {
+    IamDeleteBoundedContextByIdController,
+    IamDeleteBoundedContextByIdHandler,
+} from '@api/iam/bounded-context';
 import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteBoundedContextByIdController', () =>
-{
+describe('IamDeleteBoundedContextByIdController', () => {
     let controller: IamDeleteBoundedContextByIdController;
     let handler: IamDeleteBoundedContextByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamDeleteBoundedContextByIdController,
-            ],
+            imports: [],
+            controllers: [IamDeleteBoundedContextByIdController],
             providers: [
                 {
-                    provide : IamDeleteBoundedContextByIdHandler,
+                    provide: IamDeleteBoundedContextByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamDeleteBoundedContextByIdController>(IamDeleteBoundedContextByIdController);
-        handler = module.get<IamDeleteBoundedContextByIdHandler>(IamDeleteBoundedContextByIdHandler);
+        controller = module.get<IamDeleteBoundedContextByIdController>(
+            IamDeleteBoundedContextByIdController,
+        );
+        handler = module.get<IamDeleteBoundedContextByIdHandler>(
+            IamDeleteBoundedContextByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteBoundedContextByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteBoundedContextByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an boundedContext deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
-            expect(await controller.main(iamMockBoundedContextData[0].id)).toBe(iamMockBoundedContextData[0]);
+        test('should return an boundedContext deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockBoundedContextData[0]),
+                    ),
+            );
+            expect(await controller.main(iamMockBoundedContextData[0].id)).toBe(
+                iamMockBoundedContextData[0],
+            );
         });
     });
 });

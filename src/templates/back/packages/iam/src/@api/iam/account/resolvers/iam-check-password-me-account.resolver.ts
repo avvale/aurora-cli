@@ -6,21 +6,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth()
-export class IamCheckPasswordMeAccountResolver
-{
-    constructor(
-        private readonly handler: IamCheckPasswordMeAccountHandler,
-    ) {}
+export class IamCheckPasswordMeAccountResolver {
+    constructor(private readonly handler: IamCheckPasswordMeAccountHandler) {}
 
     @Query('iamCheckPasswordMeAccount')
     async main(
         @CurrentAccount() account: IamAccountResponse,
         @Args('password') password: string,
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            account,
-            password,
-        );
+    ): Promise<boolean> {
+        return await this.handler.main(account, password);
     }
 }

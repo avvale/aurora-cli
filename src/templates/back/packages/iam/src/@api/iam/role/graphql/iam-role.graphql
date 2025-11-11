@@ -1,7 +1,6 @@
-
-type IamRole
-{
+type IamRole {
     id: ID!
+    rowId: GraphQLInt!
     name: GraphQLString!
     isMaster: GraphQLBoolean!
     permissions: [IamPermission]
@@ -11,8 +10,7 @@ type IamRole
     deletedAt: GraphQLTimestamp
 }
 
-input IamCreateRoleInput
-{
+input IamCreateRoleInput {
     id: ID!
     name: GraphQLString!
     isMaster: GraphQLBoolean!
@@ -20,8 +18,7 @@ input IamCreateRoleInput
     accountIds: [ID]
 }
 
-input IamUpdateRoleByIdInput
-{
+input IamUpdateRoleByIdInput {
     id: ID!
     name: GraphQLString
     isMaster: GraphQLBoolean
@@ -29,8 +26,7 @@ input IamUpdateRoleByIdInput
     accountIds: [ID]
 }
 
-input IamUpdateRolesInput
-{
+input IamUpdateRolesInput {
     id: ID
     name: GraphQLString
     isMaster: GraphQLBoolean
@@ -38,45 +34,28 @@ input IamUpdateRolesInput
     accountIds: [ID]
 }
 
-input IamInheritRoleInput
-{
+input IamInheritRoleInput {
     parentRoleId: ID!
     childRoleId: ID!
 }
 
-type Query
-{
-    iamFindRole(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): IamRole
+type Query {
+    iamFindRole(query: QueryStatement, constraint: QueryStatement): IamRole
 
-    iamFindRoleById(
-        id: ID
-        constraint: QueryStatement
-    ): IamRole
+    iamFindRoleById(id: ID, constraint: QueryStatement): IamRole
 
-    iamGetRoles(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [IamRole]!
+    iamGetRoles(query: QueryStatement, constraint: QueryStatement): [IamRole]!
 
     iamPaginateRoles(
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    iamCreateRole(
-        payload: IamCreateRoleInput!
-    ): IamRole
+type Mutation {
+    iamCreateRole(payload: IamCreateRoleInput!): IamRole
 
-    iamCreateRoles(
-        payload: [IamCreateRoleInput]!
-    ): Boolean!
+    iamCreateRoles(payload: [IamCreateRoleInput]!): Boolean!
 
     iamUpdateRoleById(
         payload: IamUpdateRoleByIdInput!
@@ -89,24 +68,17 @@ type Mutation
         constraint: QueryStatement
     ): [IamRole]!
 
-    iamUpsertRole(
-        payload: IamUpdateRoleByIdInput!
-    ): IamRole
+    iamUpsertRole(payload: IamUpdateRoleByIdInput!): IamRole
 
-    iamDeleteRoleById(
-        id: ID!
-        constraint: QueryStatement
-    ): IamRole
+    iamDeleteRoleById(id: ID!, constraint: QueryStatement): IamRole
 
     iamDeleteRoles(
         query: QueryStatement
         constraint: QueryStatement
     ): [IamRole]!
 
-
     # additionalApis
     iamInheritPermissionsRoleRole(
         payload: IamInheritRoleInput!
     ): Boolean!
-
 }

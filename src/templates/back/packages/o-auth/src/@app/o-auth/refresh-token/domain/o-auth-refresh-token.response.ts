@@ -1,9 +1,9 @@
 import { OAuthAccessTokenResponse } from '@app/o-auth/access-token';
 
-export class OAuthRefreshTokenResponse
-{
+export class OAuthRefreshTokenResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly accessTokenId: string,
         public readonly token: string,
         public readonly isRevoked: boolean,

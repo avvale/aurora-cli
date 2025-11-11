@@ -1,28 +1,31 @@
-import { OAuthClientId } from './value-objects';
 import { OAuthClient } from '@app/o-auth/client';
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IRepository,
+    LiteralObject,
+    Pagination,
+    QueryStatement,
+} from '@aurorajs.dev/core';
+import { OAuthClientId } from './value-objects';
 
-export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
+export abstract class OAuthIClientRepository
+    implements IRepository<OAuthClient>
 {
     abstract readonly repository: any;
 
     // paginate records
-    abstract paginate(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<Pagination<OAuthClient>>;
+    abstract paginate(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<Pagination<OAuthClient>>;
 
     // find a single record
-    abstract find(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<OAuthClient | null>;
+    abstract find(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<OAuthClient | null>;
 
     // find a single record by id
     abstract findById(
@@ -32,34 +35,28 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<OAuthClient | null>;
 
     // get multiple records
-    abstract get(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<OAuthClient[]>;
+    abstract get(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<OAuthClient[]>;
 
     // get records with rawSQL
-    abstract rawSQL(
-        options?: {
-            rawSQL?: string;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<OAuthClient[]>;
+    abstract rawSQL(options?: {
+        rawSQL?: string;
+        cQMetadata?: CQMetadata;
+    }): Promise<OAuthClient[]>;
 
     // count records
-    abstract count(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<number>;
+    abstract count(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<number>;
 
     // max record
     abstract max(
@@ -68,7 +65,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // min record
@@ -78,7 +75,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // sum record
@@ -88,7 +85,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // ******************
@@ -103,7 +100,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             dataFactory?: (aggregate: OAuthClient) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement?: (aggregate: OAuthClient) => QueryStatement;
-        }
+        },
     ): Promise<void>;
 
     // create a single or multiple records
@@ -112,7 +109,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
         options?: {
             insertOptions?: LiteralObject;
             dataFactory?: (aggregate: OAuthClient) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update record by id
@@ -125,7 +122,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             dataFactory?: (aggregate: OAuthClient) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update records
@@ -137,7 +134,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: OAuthClient) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update and increment records
@@ -149,7 +146,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: OAuthClient) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // insert or update key identification element already existing in the table
@@ -158,7 +155,7 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
         options?: {
             upsertOptions?: LiteralObject;
             dataFactory?: (aggregate: OAuthClient) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete record
@@ -170,16 +167,14 @@ export abstract class OAuthIClientRepository implements IRepository<OAuthClient>
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete records
-    abstract delete(
-        options?: {
-            deleteOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
+    abstract delete(options?: {
+        deleteOptions?: LiteralObject;
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<void>;
 }

@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreatedRoleEvent
-{
+export class IamCreatedRoleEvent {
     constructor(
         public readonly event: {
             payload: {

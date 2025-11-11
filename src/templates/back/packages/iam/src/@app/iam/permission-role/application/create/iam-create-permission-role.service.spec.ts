@@ -1,20 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamIPermissionRoleRepository, iamMockPermissionRoleData, IamMockPermissionRoleRepository } from '@app/iam/permission-role';
+import {
+    IamIPermissionRoleRepository,
+    iamMockPermissionRoleData,
+    IamMockPermissionRoleRepository,
+} from '@app/iam/permission-role';
 import { IamCreatePermissionRoleService } from '@app/iam/permission-role/application/create/iam-create-permission-role.service';
 import {
     IamPermissionRolePermissionId,
     IamPermissionRoleRoleId,
 } from '@app/iam/permission-role/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreatePermissionRoleService', () =>
-
-{
+describe('IamCreatePermissionRoleService', () => {
     let service: IamCreatePermissionRoleService;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -24,36 +30,35 @@ describe('IamCreatePermissionRoleService', () =>
                 IamCreatePermissionRoleService,
                 IamMockPermissionRoleRepository,
                 {
-                    provide : IamIPermissionRoleRepository,
+                    provide: IamIPermissionRoleRepository,
                     useValue: {
-                        create: () => { /**/ },
+                        create: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(IamCreatePermissionRoleService);
     });
 
-    describe('main', () =>
-    {
-        test('IamCreatePermissionRoleService should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreatePermissionRoleService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should create a permissionRole and emit event', async () =>
-        {
+        test('should create a permissionRole and emit event', async () => {
             expect(
-                await service.main(
-                    {
-                        permissionId: new IamPermissionRolePermissionId(iamMockPermissionRoleData[0].permissionId),
-                        roleId: new IamPermissionRoleRoleId(iamMockPermissionRoleData[0].roleId),
-                    },
-                ),
-            )
-                .toBe(undefined);
+                await service.main({
+                    permissionId: new IamPermissionRolePermissionId(
+                        iamMockPermissionRoleData[0].permissionId,
+                    ),
+                    roleId: new IamPermissionRoleRoleId(
+                        iamMockPermissionRoleData[0].roleId,
+                    ),
+                }),
+            ).toBe(undefined);
         });
     });
 });

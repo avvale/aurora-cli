@@ -1,44 +1,47 @@
-import { OAuthDeleteApplicationByIdCommand, oAuthMockApplicationData } from '@app/o-auth/application';
+import {
+    OAuthDeleteApplicationByIdCommand,
+    oAuthMockApplicationData,
+} from '@app/o-auth/application';
 import { OAuthDeleteApplicationByIdCommandHandler } from '@app/o-auth/application/application/delete/o-auth-delete-application-by-id.command-handler';
 import { OAuthDeleteApplicationByIdService } from '@app/o-auth/application/application/delete/o-auth-delete-application-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteApplicationByIdCommandHandler', () =>
-{
+describe('OAuthDeleteApplicationByIdCommandHandler', () => {
     let commandHandler: OAuthDeleteApplicationByIdCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthDeleteApplicationByIdCommandHandler,
                 {
-                    provide : OAuthDeleteApplicationByIdService,
+                    provide: OAuthDeleteApplicationByIdService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<OAuthDeleteApplicationByIdCommandHandler>(OAuthDeleteApplicationByIdCommandHandler);
+        commandHandler = module.get<OAuthDeleteApplicationByIdCommandHandler>(
+            OAuthDeleteApplicationByIdCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteApplicationByIdCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteApplicationByIdCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the OAuthDeleteApplicationByIdService', async () =>
-        {
-            expect(await commandHandler.execute(
-                new OAuthDeleteApplicationByIdCommand(
-                    oAuthMockApplicationData[0].id,
+        test('should create the value object id and pass them as parameters to the OAuthDeleteApplicationByIdService', async () => {
+            expect(
+                await commandHandler.execute(
+                    new OAuthDeleteApplicationByIdCommand(
+                        oAuthMockApplicationData[0].id,
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

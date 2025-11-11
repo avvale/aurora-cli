@@ -19,14 +19,14 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsCreateProcedureCommand)
-export class ToolsCreateProcedureCommandHandler implements ICommandHandler<ToolsCreateProcedureCommand>
+export class ToolsCreateProcedureCommandHandler
+    implements ICommandHandler<ToolsCreateProcedureCommand>
 {
     constructor(
         private readonly createProcedureService: ToolsCreateProcedureService,
     ) {}
 
-    async execute(command: ToolsCreateProcedureCommand): Promise<void>
-    {
+    async execute(command: ToolsCreateProcedureCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createProcedureService.main(
             {
@@ -35,14 +35,28 @@ export class ToolsCreateProcedureCommandHandler implements ICommandHandler<Tools
                 type: new ToolsProcedureType(command.payload.type),
                 version: new ToolsProcedureVersion(command.payload.version),
                 isActive: new ToolsProcedureIsActive(command.payload.isActive),
-                isExecuted: new ToolsProcedureIsExecuted(command.payload.isExecuted),
-                isUpdated: new ToolsProcedureIsUpdated(command.payload.isUpdated),
+                isExecuted: new ToolsProcedureIsExecuted(
+                    command.payload.isExecuted,
+                ),
+                isUpdated: new ToolsProcedureIsUpdated(
+                    command.payload.isUpdated,
+                ),
                 upScript: new ToolsProcedureUpScript(command.payload.upScript),
-                downScript: new ToolsProcedureDownScript(command.payload.downScript),
+                downScript: new ToolsProcedureDownScript(
+                    command.payload.downScript,
+                ),
                 sort: new ToolsProcedureSort(command.payload.sort),
                 hash: new ToolsProcedureHash(command.payload.hash),
-                executedAt: new ToolsProcedureExecutedAt(command.payload.executedAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
-                checkedAt: new ToolsProcedureCheckedAt(command.payload.checkedAt, {}, { applyTimezone: command.cQMetadata?.timezone }),
+                executedAt: new ToolsProcedureExecutedAt(
+                    command.payload.executedAt,
+                    {},
+                    { applyTimezone: command.cQMetadata?.timezone },
+                ),
+                checkedAt: new ToolsProcedureCheckedAt(
+                    command.payload.checkedAt,
+                    {},
+                    { applyTimezone: command.cQMetadata?.timezone },
+                ),
             },
             command.cQMetadata,
         );

@@ -4,7 +4,6 @@ import {
     IamAccountCode,
     IamAccountCreatedAt,
     IamAccountDApplicationCodes,
-    IamAccountDeletedAt,
     IamAccountDPermissions,
     IamAccountDTenants,
     IamAccountEmail,
@@ -24,8 +23,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateAccountService
-{
+export class IamCreateAccountService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIAccountRepository,
@@ -50,11 +48,11 @@ export class IamCreateAccountService
             tenantIds: IamAccountTenantIds;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const account = IamAccount.register(
             payload.id,
+            undefined, // rowId
             payload.type,
             payload.code,
             payload.email,
@@ -74,17 +72,12 @@ export class IamCreateAccountService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            account,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(account, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const accountRegister = this.publisher.mergeObjectContext(
-            account,
-        );
+        const accountRegister = this.publisher.mergeObjectContext(account);
 
         accountRegister.created({
             payload: account,

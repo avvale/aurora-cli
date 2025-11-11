@@ -1,4 +1,7 @@
-import { OAuthApplicationClient, oAuthMockApplicationClientData } from '@app/o-auth/application-client';
+import {
+    OAuthApplicationClient,
+    oAuthMockApplicationClientData,
+} from '@app/o-auth/application-client';
 import {
     OAuthApplicationClientApplicationId,
     OAuthApplicationClientClientId,
@@ -8,26 +11,29 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class OAuthMockApplicationClientSeeder extends MockSeeder<OAuthApplicationClient>
-{
+export class OAuthMockApplicationClientSeeder extends MockSeeder<OAuthApplicationClient> {
     public collectionSource: OAuthApplicationClient[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const applicationClient of _.orderBy(oAuthMockApplicationClientData, ['id']))
-        {
+        for (const applicationClient of _.orderBy(
+            oAuthMockApplicationClientData,
+            ['id'],
+        )) {
             this.collectionSource.push(
                 OAuthApplicationClient.register(
-                    new OAuthApplicationClientApplicationId(applicationClient.applicationId),
-                    new OAuthApplicationClientClientId(applicationClient.clientId),
+                    new OAuthApplicationClientApplicationId(
+                        applicationClient.applicationId,
+                    ),
+                    new OAuthApplicationClientClientId(
+                        applicationClient.clientId,
+                    ),
                 ),
             );
         }

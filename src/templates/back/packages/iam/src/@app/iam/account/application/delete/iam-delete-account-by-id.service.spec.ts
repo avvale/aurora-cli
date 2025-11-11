@@ -1,18 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamIAccountRepository, iamMockAccountData, IamMockAccountRepository } from '@app/iam/account';
+import {
+    IamIAccountRepository,
+    iamMockAccountData,
+    IamMockAccountRepository,
+} from '@app/iam/account';
 import { IamDeleteAccountByIdService } from '@app/iam/account/application/delete/iam-delete-account-by-id.service';
 import { IamAccountId } from '@app/iam/account/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteAccountByIdService', () =>
-{
+describe('IamDeleteAccountByIdService', () => {
     let service: IamDeleteAccountByIdService;
     let repository: IamIAccountRepository;
     let mockRepository: IamMockAccountRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -22,38 +29,42 @@ describe('IamDeleteAccountByIdService', () =>
                 IamDeleteAccountByIdService,
                 IamMockAccountRepository,
                 {
-                    provide : IamIAccountRepository,
+                    provide: IamIAccountRepository,
                     useValue: {
-                        deleteById: id => { /**/ },
-                        findById  : id => { /**/ },
+                        deleteById: (id) => {
+                            /**/
+                        },
+                        findById: (id) => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(IamDeleteAccountByIdService);
         repository = module.get(IamIAccountRepository);
         mockRepository = module.get(IamMockAccountRepository);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteAccountByIdService should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteAccountByIdService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should delete account and emit event', async () =>
-        {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
+        test('should delete account and emit event', async () => {
+            jest.spyOn(repository, 'findById').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
             expect(
                 await service.main(
                     new IamAccountId(iamMockAccountData[0].id),
                     {},
                 ),
-            )
-                .toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

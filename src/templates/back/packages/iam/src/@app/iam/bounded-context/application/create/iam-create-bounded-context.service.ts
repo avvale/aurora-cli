@@ -1,7 +1,9 @@
-import { IamBoundedContext, IamIBoundedContextRepository } from '@app/iam/bounded-context';
+import {
+    IamBoundedContext,
+    IamIBoundedContextRepository,
+} from '@app/iam/bounded-context';
 import {
     IamBoundedContextCreatedAt,
-    IamBoundedContextDeletedAt,
     IamBoundedContextId,
     IamBoundedContextIsActive,
     IamBoundedContextName,
@@ -14,8 +16,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateBoundedContextService
-{
+export class IamCreateBoundedContextService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIBoundedContextRepository,
@@ -30,11 +31,11 @@ export class IamCreateBoundedContextService
             isActive: IamBoundedContextIsActive;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const boundedContext = IamBoundedContext.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.root,
             payload.sort,
@@ -44,17 +45,13 @@ export class IamCreateBoundedContextService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            boundedContext,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(boundedContext, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const boundedContextRegister = this.publisher.mergeObjectContext(
-            boundedContext,
-        );
+        const boundedContextRegister =
+            this.publisher.mergeObjectContext(boundedContext);
 
         boundedContextRegister.created({
             payload: boundedContext,

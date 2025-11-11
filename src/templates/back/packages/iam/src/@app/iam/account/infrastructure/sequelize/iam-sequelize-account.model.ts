@@ -6,38 +6,60 @@ import { IamTenantModel } from '@app/iam/tenant';
 import { IamTenantAccountModel } from '@app/iam/tenant-account';
 import { IamUserModel } from '@app/iam/user';
 import { OAuthClientModel } from '@app/o-auth/client';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, HasOne, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsTo,
+    BelongsToMany,
+    Column,
+    ForeignKey,
+    HasOne,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamAccount',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['code'],
-			unique: true,
-		},
-		{
-			fields: ['email'],
-			unique: true,
-		},
-		{
-			fields: ['username'],
-			unique: true,
-		},
-		{
-			fields: ['tags'],
-			unique: false,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['code'],
+            unique: true,
+        },
+        {
+            fields: ['email'],
+            unique: true,
+        },
+        {
+            fields: ['username'],
+            unique: true,
+        },
+        {
+            fields: ['tags'],
+            unique: false,
+        },
     ],
 })
-export class IamAccountModel extends Model<IamAccountModel>
-{
+export class IamAccountModel extends Model<IamAccountModel> {
     @AfterCreate
-    static auditingCreate(instance: IamAccountModel, options): void
-    {
+    static auditingCreate(instance: IamAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -48,8 +70,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamAccountModel, options): void
-    {
+    static auditingBulkCreate(instance: IamAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -60,8 +81,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamAccountModel, options): void
-    {
+    static auditingUpdate(instance: IamAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -72,8 +92,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -84,8 +103,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamAccountModel, options): void
-    {
+    static auditingDestroy(instance: IamAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -96,8 +114,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -108,8 +125,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamAccountModel, options): void
-    {
+    static auditingRestore(instance: IamAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -120,8 +136,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -132,8 +147,7 @@ export class IamAccountModel extends Model<IamAccountModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamAccountModel, options): void
-    {
+    static auditingUpsert(instance: IamAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -152,9 +166,17 @@ export class IamAccountModel extends Model<IamAccountModel>
     id: string;
 
     @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
+
+    @Column({
         field: 'type',
         allowNull: false,
-        type: DataTypes.ENUM('USER','SERVICE'),
+        type: DataTypes.ENUM('USER', 'SERVICE'),
     })
     type: string;
 
@@ -243,20 +265,17 @@ export class IamAccountModel extends Model<IamAccountModel>
     })
     meta: any;
 
-
     @BelongsToMany(() => IamRoleModel, {
         through: () => IamRoleAccountModel,
         uniqueKey: 'Uq01IamRoleAccount',
     })
     roles: IamRoleModel[];
 
-
     @BelongsToMany(() => IamTenantModel, {
         through: () => IamTenantAccountModel,
         uniqueKey: 'Uq01IamTenantAccount',
     })
     tenants: IamTenantModel[];
-
 
     @HasOne(() => IamUserModel)
     user: IamUserModel;
@@ -281,5 +300,4 @@ export class IamAccountModel extends Model<IamAccountModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

@@ -6,8 +6,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.role.update')
-export class IamInheritPermissionsRoleRoleResolver
-{
+export class IamInheritPermissionsRoleRoleResolver {
     constructor(
         private readonly handler: IamInheritPermissionsRoleRoleHandler,
     ) {}
@@ -17,12 +16,7 @@ export class IamInheritPermissionsRoleRoleResolver
         @Args('payload') payload: IamInheritRoleInput,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
+    ): Promise<boolean> {
+        return await this.handler.main(payload, timezone, auditing);
     }
 }

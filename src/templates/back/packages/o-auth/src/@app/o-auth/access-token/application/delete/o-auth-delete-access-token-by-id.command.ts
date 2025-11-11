@@ -1,8 +1,6 @@
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class OAuthDeleteAccessTokenByIdCommand
-{
+export class OAuthDeleteAccessTokenByIdCommand {
     constructor(
         public readonly id: string,
         public readonly constraint?: QueryStatement,

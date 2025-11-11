@@ -5,53 +5,51 @@ import { iamMockRoleData } from '@app/iam/role';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateRolesHandler', () =>
-{
+describe('IamUpdateRolesHandler', () => {
     let handler: IamUpdateRolesHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateRolesHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamUpdateRolesHandler>(IamUpdateRolesHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamUpdateRolesHandler should be defined', () =>
-    {
+    test('IamUpdateRolesHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateRolesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateRolesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a roles updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+        test('should return a roles updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockRoleData[0])),
+            );
             expect(
                 await handler.main(
                     <IamUpdateRolesInput>iamMockRoleData[0],
@@ -59,8 +57,7 @@ describe('IamUpdateRolesHandler', () =>
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockRoleData[0]);
+            ).toBe(iamMockRoleData[0]);
         });
     });
 });

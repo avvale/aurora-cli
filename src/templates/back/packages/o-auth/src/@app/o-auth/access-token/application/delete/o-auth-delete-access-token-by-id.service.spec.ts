@@ -1,18 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthIAccessTokenRepository, oAuthMockAccessTokenData, OAuthMockAccessTokenRepository } from '@app/o-auth/access-token';
+import {
+    OAuthIAccessTokenRepository,
+    oAuthMockAccessTokenData,
+    OAuthMockAccessTokenRepository,
+} from '@app/o-auth/access-token';
 import { OAuthDeleteAccessTokenByIdService } from '@app/o-auth/access-token/application/delete/o-auth-delete-access-token-by-id.service';
 import { OAuthAccessTokenId } from '@app/o-auth/access-token/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteAccessTokenByIdService', () =>
-{
+describe('OAuthDeleteAccessTokenByIdService', () => {
     let service: OAuthDeleteAccessTokenByIdService;
     let repository: OAuthIAccessTokenRepository;
     let mockRepository: OAuthMockAccessTokenRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -22,38 +29,42 @@ describe('OAuthDeleteAccessTokenByIdService', () =>
                 OAuthDeleteAccessTokenByIdService,
                 OAuthMockAccessTokenRepository,
                 {
-                    provide : OAuthIAccessTokenRepository,
+                    provide: OAuthIAccessTokenRepository,
                     useValue: {
-                        deleteById: id => { /**/ },
-                        findById  : id => { /**/ },
+                        deleteById: (id) => {
+                            /**/
+                        },
+                        findById: (id) => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthDeleteAccessTokenByIdService);
         repository = module.get(OAuthIAccessTokenRepository);
         mockRepository = module.get(OAuthMockAccessTokenRepository);
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteAccessTokenByIdService should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteAccessTokenByIdService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should delete accessToken and emit event', async () =>
-        {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
+        test('should delete accessToken and emit event', async () => {
+            jest.spyOn(repository, 'findById').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
             expect(
                 await service.main(
                     new OAuthAccessTokenId(oAuthMockAccessTokenData[0].id),
                     {},
                 ),
-            )
-                .toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

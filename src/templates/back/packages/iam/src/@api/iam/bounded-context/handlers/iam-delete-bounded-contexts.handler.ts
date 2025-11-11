@@ -1,12 +1,19 @@
 import { IamBoundedContext } from '@api/graphql';
 import { IamBoundedContextDto } from '@api/iam/bounded-context';
-import { IamDeleteBoundedContextsCommand, IamGetBoundedContextsQuery } from '@app/iam/bounded-context';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import {
+    IamDeleteBoundedContextsCommand,
+    IamGetBoundedContextsQuery,
+} from '@app/iam/bounded-context';
+import {
+    AuditingMeta,
+    ICommandBus,
+    IQueryBus,
+    QueryStatement,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamDeleteBoundedContextsHandler
-{
+export class IamDeleteBoundedContextsHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -17,26 +24,21 @@ export class IamDeleteBoundedContextsHandler
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamBoundedContext[] | IamBoundedContextDto[]>
-    {
-        const boundedContexts = await this.queryBus.ask(new IamGetBoundedContextsQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<IamBoundedContext[] | IamBoundedContextDto[]> {
+        const boundedContexts = await this.queryBus.ask(
+            new IamGetBoundedContextsQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
-        await this.commandBus.dispatch(new IamDeleteBoundedContextsCommand(
-            queryStatement,
-            constraint,
-            {
+        await this.commandBus.dispatch(
+            new IamDeleteBoundedContextsCommand(queryStatement, constraint, {
                 timezone,
                 repositoryOptions: {
                     auditing,
                 },
-            },
-        ));
+            }),
+        );
 
         return boundedContexts;
     }

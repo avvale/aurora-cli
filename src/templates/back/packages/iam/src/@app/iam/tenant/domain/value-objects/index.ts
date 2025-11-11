@@ -8,4 +8,5 @@ export { IamTenantLogo } from './iam-tenant-logo';
 export { IamTenantMeta } from './iam-tenant-meta';
 export { IamTenantName } from './iam-tenant-name';
 export { IamTenantParentId } from './iam-tenant-parent-id';
+export { IamTenantRowId } from './iam-tenant-row-id';
 export { IamTenantUpdatedAt } from './iam-tenant-updated-at';

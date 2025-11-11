@@ -3,439 +3,443 @@
     "files": [
         {
             "path": "src/@app/iam/iam.seed.ts",
-            "integrity": "sha1:f5604606b2c6790ea25d6362db9b858542ce7a63"
+            "integrity": "sha1:0769ae8c5ccfd75bc27d4590930b923a703dc2aa"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-context.command-handler.spec.ts",
-            "integrity": "sha1:8b46b0ba2ce9eb9070d8209978259e0ad5c202e1"
+            "integrity": "sha1:f13656b343ee6b8016075f6e40ff2d1a4c1ef4f5"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-context.command-handler.ts",
-            "integrity": "sha1:9af1a79a6c55dba34e790cf86d2179f1e1a24cd7"
+            "integrity": "sha1:6ffde17edac7a985f84c4a42706c14602eb48a73"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-context.command.ts",
-            "integrity": "sha1:c9a5f348fc60c959422b06f552e40547f66e2538"
+            "integrity": "sha1:23ece561bbba4bc9172e6a16174b716b7dd283fe"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-context.service.spec.ts",
-            "integrity": "sha1:7f13b0fc4d24a40e58b7d26d048bee3008fc4216"
+            "integrity": "sha1:0f8c92ba1799a47273165cabbafd2a422603c2e5"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-context.service.ts",
-            "integrity": "sha1:a4235078dd6c6b611b93a7d4992cb8adce79834b"
+            "integrity": "sha1:04b5f552d05174e332ea92e53faba6c75407a278"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-contexts.command-handler.spec.ts",
-            "integrity": "sha1:5996c70273c1158d595052ba3830f765798b86a9"
+            "integrity": "sha1:99654007dbbe49cabe683d8e9ecb58c269ec1184"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-contexts.command-handler.ts",
-            "integrity": "sha1:3b17e0a7b4c8f7d95f35bdaf8092a4e02213b157"
+            "integrity": "sha1:860116efc23373f72066f1aa0fdfab246ca7111f"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-contexts.command.ts",
-            "integrity": "sha1:5ad22a975ea96c4b6b4d412ba53bc82ad6206cac"
+            "integrity": "sha1:d100f3418ad16568195b33f981cdaae3fc0600ef"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:8c632a2c15760b935e81385ccac07ed4b2e8c1af"
+            "integrity": "sha1:95a2151f28fdff6c2a0be54a6b949f899397de7a"
         },
         {
             "path": "src/@app/iam/bounded-context/application/create/iam-create-bounded-contexts.service.ts",
-            "integrity": "sha1:baad6bbd19e19ceed8a71d407d02f1b7a10cbefe"
+            "integrity": "sha1:2955c0d9e7138c4755ee900f79cb0a988a5a11c8"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-context-by-id.command-handler.spec.ts",
-            "integrity": "sha1:b57e3466236c196c0d154935ad174cbe55071a70"
+            "integrity": "sha1:61b51af7baba4c383287fdb7236569c3aa13571d"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-context-by-id.command-handler.ts",
-            "integrity": "sha1:50034cd03124c0c040f30df4bbf35a73ffaa3d0d"
+            "integrity": "sha1:563e77085f9d791fbd726c72ebd7aba841f006f4"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-context-by-id.command.ts",
-            "integrity": "sha1:9169ba3660c503ba8d416055db58fce0e5718916"
+            "integrity": "sha1:bbc01f17993894df1d780071f2e5af4f519f25ee"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-context-by-id.service.spec.ts",
-            "integrity": "sha1:f36c9db16952762873812b54af7e5b51373a1408"
+            "integrity": "sha1:560b8b644c88fbef6d21c63d2e9bec51ceeec3e7"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-context-by-id.service.ts",
-            "integrity": "sha1:3066f7867860582fde3947a59df206e25df99ea2"
+            "integrity": "sha1:3d7acbbe1d1308453866148ce7bfb84809ff008b"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.command-handler.spec.ts",
-            "integrity": "sha1:d7f44305b3c2cb66362e031ee779036303b00908"
+            "integrity": "sha1:65f99324d4f98c4979590a54d7c7253a3daadbf2"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.command-handler.ts",
-            "integrity": "sha1:8fe2c48d60a439476b3f970f52303eceffe016d3"
+            "integrity": "sha1:e2bd80d864cd81d969e35c15d5a5f00d6e5dbd9c"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.command.ts",
-            "integrity": "sha1:8bb4795e8d063e1e14b7a285bd3756a27642a9ce"
+            "integrity": "sha1:4b84c63363a75adb3d677711371cd04c3bc1cd31"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:ef980012bcbec6aa0a4fd0f3c83f1f4e8a91605d"
+            "integrity": "sha1:671c5992eb7e5cc9f14aa50478f88b6d05bf878c"
         },
         {
             "path": "src/@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.service.ts",
-            "integrity": "sha1:25e1af9c0f30e48be4e1570e7e14bae2369e4d83"
+            "integrity": "sha1:05fdece9cb32ca31ca39e51f3df40287e04a0125"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-add-bounded-contexts-context.event.ts",
-            "integrity": "sha1:8a654e3e43a628498753f8704df27c6d58b7740b"
+            "integrity": "sha1:a3737554db70eadbabac52bc1c8d79a248bc4c26"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-created-bounded-context.event-handler.ts",
-            "integrity": "sha1:e4ce9b9c6f060b98d01530500729052076aaf368"
+            "integrity": "sha1:f82f1eb6ac47b4453c8a6fa96d734211b49b7ebf"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-created-bounded-context.event.ts",
-            "integrity": "sha1:893452a171e77422f7af4653fc28ee77a66ae734"
+            "integrity": "sha1:20d57012715d721372f009250b9dbfe5d3201d56"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-created-bounded-contexts.event-handler.ts",
-            "integrity": "sha1:c6f021be371b2f814bc886e069de8b70d62a0338"
+            "integrity": "sha1:c7c0a0459eec70a1cf03d7bd6f378de07807ca24"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-created-bounded-contexts.event.ts",
-            "integrity": "sha1:e9c897d3aa92a6f075578dd871e1d8b15ad03336"
+            "integrity": "sha1:7d191f70f5cc9b1fe7de19749e4719144fd819d9"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-deleted-bounded-context.event-handler.ts",
-            "integrity": "sha1:ccba93ec0cbdde83d2cfc0b1397eb586b8e58646"
+            "integrity": "sha1:fec576e4a054824fda95b61bb92996ce84fbfe56"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-deleted-bounded-context.event.ts",
-            "integrity": "sha1:2925dd958ccf7094020cd50245bc295137045990"
+            "integrity": "sha1:00233f1182b6e2d3e5abb5d046eda5b37b1492df"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-deleted-bounded-contexts.event-handler.ts",
-            "integrity": "sha1:08854af7825bca08820efe637e2968fb3f58550e"
+            "integrity": "sha1:6184f295b4aa819e261a308953a1734c43a596b0"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-deleted-bounded-contexts.event.ts",
-            "integrity": "sha1:6726a3a72a12b233b7c388dd5cb22b8e120aecd1"
+            "integrity": "sha1:5d597d3d4d3a3a43872a098aa2eb23c610e415eb"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-updated-bounded-context.event-handler.ts",
-            "integrity": "sha1:950afe9636efd3597296c98ce5ff2b6d20af4d38"
+            "integrity": "sha1:a9b204777b57b9f0481b2b36167469d65a6a7e6b"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-updated-bounded-context.event.ts",
-            "integrity": "sha1:e6c161bd5e1c992297baa50170f57cad6c2e44e1"
+            "integrity": "sha1:59329234def8cd99ca7c8fbb0100741bbd023a6d"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-updated-bounded-contexts.event-handler.ts",
-            "integrity": "sha1:5e02d562ce9baf44f4a1a8a5d7cf64c52d5e7d3f"
+            "integrity": "sha1:66e3827f379034de9f448448c19f433dd4587c04"
         },
         {
             "path": "src/@app/iam/bounded-context/application/events/iam-updated-bounded-contexts.event.ts",
-            "integrity": "sha1:32fc449dfbf98494b238d6348a3ba9690f3622dd"
+            "integrity": "sha1:5289288ec4e62f6f00ce072319f8536b59de4fd5"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context-by-id.query-handler.spec.ts",
-            "integrity": "sha1:95f28cca3704bb19260647c3d870e7d191c44802"
+            "integrity": "sha1:a46aa9d5a42a39fff1234753b94eaba1c7a06686"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context-by-id.query-handler.ts",
-            "integrity": "sha1:531dcaffc5a8a1fe49ce0adc5d6564a5aade8b40"
+            "integrity": "sha1:4c0f58e601a3720a44c92d9bf7e3547be38d38aa"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context-by-id.query.ts",
-            "integrity": "sha1:bc53f467e5264c21dffd6d6bb8ac62ad1738733b"
+            "integrity": "sha1:c274330bb9d033ed6fd0d3b0e7862f0b3acf7a09"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context-by-id.service.spec.ts",
-            "integrity": "sha1:c5b355a7d8f06dbb579a8c6ce8b863c2cb5f1841"
+            "integrity": "sha1:912118448fe1bd6437e7773a96b9c3d972b06132"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context-by-id.service.ts",
-            "integrity": "sha1:23622021d5694168a0ac2cfb517ef41088c2bc39"
+            "integrity": "sha1:b062987018cd23d0fb4a25482ffd85b595797d23"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context.query-handler.spec.ts",
-            "integrity": "sha1:ff658c98fe4619591a9bf432ec5b8a5a9f4dcdbf"
+            "integrity": "sha1:1cb59026c238acbefa84e237102a163dc6732b05"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context.query-handler.ts",
-            "integrity": "sha1:6b2162437e84ee764f6053e0579f1aed7996a9a6"
+            "integrity": "sha1:fbdf666411dd8cea6d533ecaa85fbeef47b8de60"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context.query.ts",
-            "integrity": "sha1:1339eae022c323c8cba95acbab060848c5a9d284"
+            "integrity": "sha1:8353fa032a38d02393be11b955bfbb4999aeb4c2"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context.service.spec.ts",
-            "integrity": "sha1:1720dd02527a074d2924a76b4e9d7285aef6aa03"
+            "integrity": "sha1:02b684a5e9d761695957093f02623b70e2d572b1"
         },
         {
             "path": "src/@app/iam/bounded-context/application/find/iam-find-bounded-context.service.ts",
-            "integrity": "sha1:95905ab746deb41d63e8190fa57e1f26cd8baa75"
+            "integrity": "sha1:61a6795dddc064c26bf7ad9efbd594f589c6cb6f"
         },
         {
             "path": "src/@app/iam/bounded-context/application/get/iam-get-bounded-contexts.query-handler.spec.ts",
-            "integrity": "sha1:7cc8a4da6c4527719cdf25e5f45e7c5a288f1960"
+            "integrity": "sha1:49ca2b9f2a409eef51b5a37b9e80af792d04b42a"
         },
         {
             "path": "src/@app/iam/bounded-context/application/get/iam-get-bounded-contexts.query-handler.ts",
-            "integrity": "sha1:302d71820f2bd0a822ab166a7a9642a365e0ecc6"
+            "integrity": "sha1:496c64b7873a57a6301821a2a8ce60f4f0f42874"
         },
         {
             "path": "src/@app/iam/bounded-context/application/get/iam-get-bounded-contexts.query.ts",
-            "integrity": "sha1:4cff2a12aa3cecbc00238e5b76264062448a3487"
+            "integrity": "sha1:165d1d5c07a818c513063b860deb05cda6557e6b"
         },
         {
             "path": "src/@app/iam/bounded-context/application/get/iam-get-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:11c46aa4140c47eddd7845c09b92178e8198029b"
+            "integrity": "sha1:097d5692929dc2c48223d7a70ee712cf7b852007"
         },
         {
             "path": "src/@app/iam/bounded-context/application/get/iam-get-bounded-contexts.service.ts",
-            "integrity": "sha1:03b97a13bc1b8d4e4fd40840ed3fcdbbad3d874e"
+            "integrity": "sha1:edfd4185338c9a8d25fc9d2fa74d6be0407e7931"
         },
         {
             "path": "src/@app/iam/bounded-context/application/paginate/iam-paginate-bounded-contexts.query-handler.spec.ts",
-            "integrity": "sha1:d88fcfdf748f28a4f18c096095c6a213ac4bff9d"
+            "integrity": "sha1:13d92379dc80f82da14ee072badba81d73d8935b"
         },
         {
             "path": "src/@app/iam/bounded-context/application/paginate/iam-paginate-bounded-contexts.query-handler.ts",
-            "integrity": "sha1:cf7256c70728af21e302697a6d76a2632f265549"
+            "integrity": "sha1:bb9c2715b1240e7db5b3e808bc8e27aaa49901e6"
         },
         {
             "path": "src/@app/iam/bounded-context/application/paginate/iam-paginate-bounded-contexts.query.ts",
-            "integrity": "sha1:6b36a9f2e0eebf0d2d539447b86d065ff5b0c69f"
+            "integrity": "sha1:fd6d9b35023a37e3fe17f971655668c1addf29e7"
         },
         {
             "path": "src/@app/iam/bounded-context/application/paginate/iam-paginate-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:4ebf1b3d9fce7081e2048d4346204d799c540850"
+            "integrity": "sha1:4832d119aab64f080e710f191eb4adc380f80c27"
         },
         {
             "path": "src/@app/iam/bounded-context/application/paginate/iam-paginate-bounded-contexts.service.ts",
-            "integrity": "sha1:309d819aac7ece40461692360cb6d1cf66f47aa4"
+            "integrity": "sha1:10edb276291bf7afebb6c0db270444a24d3c9efd"
         },
         {
             "path": "src/@app/iam/bounded-context/application/sagas/iam-bounded-context.sagas.ts",
-            "integrity": "sha1:e0e323645a094b3576a9128ba50eb828ecc43bfc"
+            "integrity": "sha1:222703a034f1489aff0c54676bed4325ff2e3ae7"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-context-by-id.command-handler.spec.ts",
-            "integrity": "sha1:49606d67e610c15e8ca7dacbaa2f634bca1cb947"
+            "integrity": "sha1:387d24bf9004bcefbe45af1f8d0b26936a4d6c6c"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-context-by-id.command-handler.ts",
-            "integrity": "sha1:f1ba6ed3d91c4dc47e4b28c51685e93a3cf722dc"
+            "integrity": "sha1:063e82dad8998e594fe5ba0350921d124c1529a0"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-context-by-id.command.ts",
-            "integrity": "sha1:1966c84e19bfcbff7fa5d6db5262a72a2a82b2a1"
+            "integrity": "sha1:a1e0e338a695f89e2fa422302702fb4f3bc721e0"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-context-by-id.service.spec.ts",
-            "integrity": "sha1:4feb84e8f2aacbaa6e32537ad03fca21935733a3"
+            "integrity": "sha1:99cf1449d77d7a825e2038b982cefb0d43df6372"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-context-by-id.service.ts",
-            "integrity": "sha1:28e8bb3fd1af7f39d8b539a4b453bac07d5bfc08"
+            "integrity": "sha1:dd0fc81a7a0847f4de8f1b8702db744838db7dc9"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-contexts.command-handler.spec.ts",
-            "integrity": "sha1:02c843143693b8fc53aab8d01d8e6f71451d726b"
+            "integrity": "sha1:b3f034becd1d50fe75eb5b1138a7e85a9f480805"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-contexts.command-handler.ts",
-            "integrity": "sha1:ef0f63ad2d2b38c770487382a1de77a438410297"
+            "integrity": "sha1:8b68a6e55bd959996e4397fe427211e5426a77d0"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-contexts.command.ts",
-            "integrity": "sha1:71180ce8dc2d0efce89825351adf29e5285aa85b"
+            "integrity": "sha1:62b050da46a5fda71a20190437963668273feecb"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-contexts.service.spec.ts",
-            "integrity": "sha1:69f01a0a1d98d055a1e3e3771d28f3b822b9c6b4"
+            "integrity": "sha1:aee5e9155194dadc15ea8b368aafa1d06e46ce03"
         },
         {
             "path": "src/@app/iam/bounded-context/application/update/iam-update-bounded-contexts.service.ts",
-            "integrity": "sha1:ac3975955a53aa64bc0df6b16171a9820af8f5d1"
+            "integrity": "sha1:f2064ecf5c72bd35c071856fc43804ca141ee6e4"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/iam-bounded-context.aggregate.ts",
-            "integrity": "sha1:ae862e341fb85e3349302cfd4bf545c366231e69"
+            "integrity": "sha1:0825ebbf0dab4867c7cb0bd8fbded1a01678e088"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/iam-bounded-context.mapper.ts",
-            "integrity": "sha1:a3fe6063be8a1e502bcc96e3e8bf426065f02efb"
+            "integrity": "sha1:8b2241eae47dc91159e227b9bf8efaaef76abe6f"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/iam-bounded-context.repository.ts",
-            "integrity": "sha1:232d04ef1ca10c9b9501d4aae1c38044f6211578"
+            "integrity": "sha1:07fa0868501244ea51863905922c1c39dac2dd73"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/iam-bounded-context.response.ts",
-            "integrity": "sha1:c00d5fd26f38e2f4049f4cdfae932d576d84d3dd"
+            "integrity": "sha1:dd500350fa1e48f1116938f4f89d4eb1808535fc"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/index.ts",
-            "integrity": "sha1:e304cc38f1b596c6173e1f2bee0263c9cb8a8861"
+            "integrity": "sha1:2772aa9a3836ad645c5f30b1edca204656045943"
         },
         {
             "path": "src/@app/iam/bounded-context/index.ts",
-            "integrity": "sha1:3449a60767d9f1ee6f9779ca6e78a17e674566ba"
+            "integrity": "sha1:391bde23c83f99fd20bcdfe7fa70682f1998763a"
         },
         {
             "path": "src/@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.data.ts",
-            "integrity": "sha1:da5edd529ce2f31a1e82c8958c602d2953ad99e0"
+            "integrity": "sha1:9ad93e00d270f13da25bb55c56ba043296f1451a"
         },
         {
             "path": "src/@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.repository.ts",
-            "integrity": "sha1:0b4c709c16793a16a6754660a819ce15e40cce87"
+            "integrity": "sha1:8731aee04e4e98f3f2dd47e7029040db2a72f56e"
         },
         {
             "path": "src/@app/iam/bounded-context/infrastructure/mock/iam-mock-bounded-context.seeder.ts",
-            "integrity": "sha1:0739fb4ca986f5710c1aea2436378119b1e0eab0"
+            "integrity": "sha1:68bc4666b898deecb8f3ef5210230e9c8997b701"
         },
         {
             "path": "src/@app/iam/bounded-context/infrastructure/sequelize/iam-sequelize-bounded-context.model.ts",
-            "integrity": "sha1:6ce783ee61252cc642c9761ec5e5641bcd509211"
+            "integrity": "sha1:cd510ffe5d35240268a7f0a487a8d7c7fbf17e3b"
         },
         {
             "path": "src/@app/iam/bounded-context/infrastructure/sequelize/iam-sequelize-bounded-context.repository.ts",
-            "integrity": "sha1:ca03c3f13dd0bb7c09925636ef1f92d5fc3e20ca"
+            "integrity": "sha1:1da3d58240c96b9dab2ad8fd529f586dcecffd3d"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-id.ts",
-            "integrity": "sha1:4aebe0ba0e91c63f108d871a67ef18dac2bd4891"
+            "integrity": "sha1:83c9e49973d563dc1268cd7a62a9b7092ec2937d"
+        },
+        {
+            "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-row-id.ts",
+            "integrity": "sha1:576ab06cf05be6db493e3c98907f70d402538bda"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-name.ts",
-            "integrity": "sha1:e272eb2c29b5e66188717d0a873e7d65600e7d8c"
+            "integrity": "sha1:712171625681fb50bb5532b12aea7f1f6d23fa15"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-root.ts",
-            "integrity": "sha1:dc47e12c844d4fcc47381b11f354521bbb3140fe"
+            "integrity": "sha1:d361dfc790a4b5497752e46c7cf21d9e131ec0c5"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-sort.ts",
-            "integrity": "sha1:01f260de106f1bcfbafd9cd1d042706583a4f6da"
+            "integrity": "sha1:f3d978d0d13c07ffbd57db2f4a92e5858220dad1"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-is-active.ts",
-            "integrity": "sha1:429971d6ffa7a39ae40e2afe572bd43129cd5155"
+            "integrity": "sha1:b9e74c8b4dd063c161f0b65fb0ac0ec0f1c943ee"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-created-at.ts",
-            "integrity": "sha1:22ee678485ba29879eee97889610ad30a2ff7b5e"
+            "integrity": "sha1:f8e115548b58dcc1103eb2e5f159bb04e4c2d605"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-updated-at.ts",
-            "integrity": "sha1:2ee074b70f4a4dcbf70c0562c804007fbc806120"
+            "integrity": "sha1:6bf88064e2e793d5f4f9092f11f0a75787af75db"
         },
         {
             "path": "src/@app/iam/bounded-context/domain/value-objects/iam-bounded-context-deleted-at.ts",
-            "integrity": "sha1:b4372f507c4bc509b34c358e92377ca174301354"
+            "integrity": "sha1:68d2dcb6f610e07b9b05a5301e730293a33f8c5b"
         },
         {
             "path": "src/@api/iam/iam.seeder.ts",
-            "integrity": "sha1:11a96ffd42691725c9db6c3405623396f385cf25"
+            "integrity": "sha1:41b500c0b59410f858295c0077da6819e4358301"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-create-bounded-context.controller.spec.ts",
-            "integrity": "sha1:cee63aae8a0dcadf6d99f8341f68768e9808385e"
+            "integrity": "sha1:3acefe27a0253588a790b6e807aa06a5119aedcb"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-create-bounded-context.controller.ts",
-            "integrity": "sha1:49d8ac2d6da675ad1e4ec2dfee62aa0fbe28d987"
+            "integrity": "sha1:b27fa285e0e685b87e5523af05e5dbf88ac446f0"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-create-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:c6c74e98930a6b279f4ce1cf5fd0d5cec517ef6b"
+            "integrity": "sha1:b4632764fdedc21fe5b0ca857d087303ac31ae25"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-create-bounded-contexts.controller.ts",
-            "integrity": "sha1:61b322dceafcf26cb4ae70d6fbd0b3b43e59f8d4"
+            "integrity": "sha1:e5a703de4b26eb79e9e4b36dd7ba01e843d89706"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-delete-bounded-context-by-id.controller.spec.ts",
-            "integrity": "sha1:46190d13484648677ba17b57e376554629414046"
+            "integrity": "sha1:52469984c4deb91cbf355d0e3d366895f18dd958"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-delete-bounded-context-by-id.controller.ts",
-            "integrity": "sha1:2d530bc7def8f3351e7c9f5a0f695e0b840f1b6e"
+            "integrity": "sha1:309c895d8f3852ce400083f84ae5d4c59f20f7f6"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-delete-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:5ecae8420bcdd8684d72f35f7f5edc90461d5ee1"
+            "integrity": "sha1:a240927cf35dd0d301c372651c490815e3847a6b"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-delete-bounded-contexts.controller.ts",
-            "integrity": "sha1:36cccf3429d627f5c171b1497746b72aa5759a66"
+            "integrity": "sha1:8e5691073d27e4ca1ad155598eadcf8db33fb4e5"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-find-bounded-context-by-id.controller.spec.ts",
-            "integrity": "sha1:c69381266ab94c906b1a006faa4bf6f14adcdd57"
+            "integrity": "sha1:3db1f2b6d92c7885e294dc109046f6b3440effd2"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-find-bounded-context-by-id.controller.ts",
-            "integrity": "sha1:958501dcfdf392261a81fcf989a2a6752bd56203"
+            "integrity": "sha1:364f07afaa06411b429212bc398068bd49ca706c"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-find-bounded-context.controller.spec.ts",
-            "integrity": "sha1:ff136f879f4e05c2931ff003fb5805b6a6edc79e"
+            "integrity": "sha1:88e2d0181077491099ef4af35602541cf1d7326d"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-find-bounded-context.controller.ts",
-            "integrity": "sha1:d4c16c04ecd37f7c640bc426bf4519bedaaf9755"
+            "integrity": "sha1:589c0029d8ec976fea1e7eb6747f955bcf9ab9ae"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-get-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:b203f4b9824a00ba40ca498fec2dde4cb21bc587"
+            "integrity": "sha1:ce4d8bc17650a759df9922756e5693a9a2880640"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-get-bounded-contexts.controller.ts",
-            "integrity": "sha1:0519b476924846acc9372b37dc0a27f5e0b245a3"
+            "integrity": "sha1:8f07bb4342566f9ea0a1d0070940ebf0ffc68ddb"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-paginate-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:a26143d745f5cf79e5b9140b6caabce5ffb4a78f"
+            "integrity": "sha1:725e883d3456d4014651d921b357e77318339efa"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-paginate-bounded-contexts.controller.ts",
-            "integrity": "sha1:3206331b882aec9c19981ea1ffbc94c124323db3"
+            "integrity": "sha1:28580fa4ca25a07273610ecf778bc7029e5422d4"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-update-bounded-context-by-id.controller.spec.ts",
-            "integrity": "sha1:83c972487192baff0df75ca29a4882de195c56f1"
+            "integrity": "sha1:3f9bdff861b0bd15f24656ae261b77af9fd91bc6"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-update-bounded-context-by-id.controller.ts",
-            "integrity": "sha1:6d9426f24d7d6a494816fd7a5fdcf23d7ef841ec"
+            "integrity": "sha1:53c96391fc657c4fce02bb37471be42da51909ec"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-update-bounded-contexts.controller.spec.ts",
-            "integrity": "sha1:ae7df1ea7829c285cf62b64d46935eec64bcd66e"
+            "integrity": "sha1:c29301bedbd3c17114705098c2d8daeb0b91e08c"
         },
         {
             "path": "src/@api/iam/bounded-context/controllers/iam-update-bounded-contexts.controller.ts",
-            "integrity": "sha1:6418f970c5cca5835cf00eadfde4c8c09c5acda0"
+            "integrity": "sha1:bc368c6c204e3e56468ae021c481a1dfb8201ff3"
         },
         {
             "path": "src/@api/iam/bounded-context/dto/iam-bounded-context.dto.ts",
-            "integrity": "sha1:e17de752827d9ab03a371515e9e3dc288a758858"
+            "integrity": "sha1:0142733fd8319bf2584b294f977f43227c3e38ea"
         },
         {
             "path": "src/@api/iam/bounded-context/dto/iam-create-bounded-context.dto.ts",
-            "integrity": "sha1:84cd3580c0466deffeb1ff66713a6f6487aea135"
+            "integrity": "sha1:ca2b93b122bd85496b07828c7e2e98be29e08e14"
         },
         {
             "path": "src/@api/iam/bounded-context/dto/iam-update-bounded-context-by-id.dto.ts",
-            "integrity": "sha1:861da2dedc7e5123aa9f12eb295340bd22210eb8"
+            "integrity": "sha1:7958c95f72b84d9db47f2ce78ddd79d9c97e29a4"
         },
         {
             "path": "src/@api/iam/bounded-context/dto/iam-update-bounded-contexts.dto.ts",
-            "integrity": "sha1:24a4aa6459c836be63dcc33ee29853e8b6cc8904"
+            "integrity": "sha1:9e099410535f9024b1f1475fcf07b0f59d0d789f"
         },
         {
             "path": "src/@api/iam/bounded-context/dto/index.ts",
@@ -443,187 +447,187 @@
         },
         {
             "path": "src/@api/iam/bounded-context/dto/public-api.ts",
-            "integrity": "sha1:d8232ebeb3bb18d53e83b25d1b0b05b002fa1221"
+            "integrity": "sha1:6f13dd1c2082aa64a7ab26ba629ac1415842ad2f"
         },
         {
             "path": "src/@api/iam/bounded-context/graphql/iam-bounded-context.graphql",
-            "integrity": "sha1:ebf6e0715eceb6aebde13ba059a0775c0c933989"
+            "integrity": "sha1:2b7614a66316f7d935b76d2fdc3a9003620a6afb"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-create-bounded-context.handler.spec.ts",
-            "integrity": "sha1:27fa1accbc5e85007e62c25bf43a8b59bd347e54"
+            "integrity": "sha1:696bf098bc5036afc7b9417cb79fa4fc9bd668df"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-create-bounded-context.handler.ts",
-            "integrity": "sha1:100d449d659c50446b2954e9a25d5453d227c20f"
+            "integrity": "sha1:4d1179ad9404375c6c16015adbaacd71a0613458"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-create-bounded-contexts.handler.spec.ts",
-            "integrity": "sha1:ca4adaa529d8d08003da97422cd7c9b0c20d1123"
+            "integrity": "sha1:d80d1b26029eda1e74e2794ee09c3c80e010fa1d"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-create-bounded-contexts.handler.ts",
-            "integrity": "sha1:23f83561cfa68c321f8a69cd1fdc715305f04740"
+            "integrity": "sha1:499f613aa4f63b236093c73e16f7548206e0450a"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-delete-bounded-context-by-id.handler.spec.ts",
-            "integrity": "sha1:b50a4671a3dcee71cc457698a0d999f257e47f81"
+            "integrity": "sha1:b309442641dc35030b415993ef0291ef1c6c6108"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-delete-bounded-context-by-id.handler.ts",
-            "integrity": "sha1:3f31a0f29b5bf9dbdc3ed8e28b1f277a831d0ffa"
+            "integrity": "sha1:085f7c66de98be12ac06acc9abddd0d00f59de12"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-delete-bounded-contexts.handler.spec.ts",
-            "integrity": "sha1:3dd6823e47bf2daff11b90b7b1d823edb57ae134"
+            "integrity": "sha1:4dfa6ab4a9618be69494ff88f33ac8ecdfa03328"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-delete-bounded-contexts.handler.ts",
-            "integrity": "sha1:d7a7610c1b6929c3c5a3b15751740bd7703cd834"
+            "integrity": "sha1:01b418f01c0976319272f4e1ed8180e2857c4532"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-find-bounded-context-by-id.handler.spec.ts",
-            "integrity": "sha1:f4de67a968b02dc5490d1c7e21bddc178213f552"
+            "integrity": "sha1:80420d324273601dadb8e2a403be057b0da8cce7"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-find-bounded-context-by-id.handler.ts",
-            "integrity": "sha1:2b23c0421fd5fa0312141afc11771f14626d3c9e"
+            "integrity": "sha1:51264e763f63cab7b1f4dd856103fd8dc806a36c"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-find-bounded-context.handler.spec.ts",
-            "integrity": "sha1:2551d6c673e5b04cc9ba75c7cc67a308cb311277"
+            "integrity": "sha1:f176c704d7f07f25255a1d8aa9dc045913b9fb9b"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-find-bounded-context.handler.ts",
-            "integrity": "sha1:3c98c5e6de92d8e749f0dd25a843e90cdb991009"
+            "integrity": "sha1:f64280e32f148e0901664d9899ac57bb5e836b06"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-get-bounded-contexts.handler.spec.ts",
-            "integrity": "sha1:dbe48c5af2e069b6ccc738ad3f83e670698657b3"
+            "integrity": "sha1:81d1e18fc6c6726c726a3d7232894342fe95b5d9"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-get-bounded-contexts.handler.ts",
-            "integrity": "sha1:6098f2aa317ecc0962ac9e8ca6775c90efd4f49e"
+            "integrity": "sha1:fad682a3be7316ac7259f99c186ba61ff796ef39"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-paginate-bounded-contexts.handler.spec.ts",
-            "integrity": "sha1:26ed17a28b5bb91d945d2b2d814eb8d4dd64c3f7"
+            "integrity": "sha1:43df3248c496dac997b23861696bceee6ba0b6a1"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-paginate-bounded-contexts.handler.ts",
-            "integrity": "sha1:fc60b75d036e2652ce327460a0dc3a86997b64d7"
+            "integrity": "sha1:e860a94eeddaf78dae0e449ce06c4d5ad6d8f435"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-update-bounded-context-by-id.handler.spec.ts",
-            "integrity": "sha1:c1b59ef87f5b34ab11fa1bd0005be05631f4c70f"
+            "integrity": "sha1:55789554d92b5836029aedbf1db58a013f81c574"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-update-bounded-context-by-id.handler.ts",
-            "integrity": "sha1:392e1e7273731c1a941bc240c6b58e11ffe0b1b4"
+            "integrity": "sha1:9becd7a35ff5eda9ea5cf396d0f21c353729dbf7"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-update-bounded-contexts.handler.spec.ts",
-            "integrity": "sha1:d2cef306bb9552dcb18139ccfad0771666a191dc"
+            "integrity": "sha1:9b374753612356c8a6fd53f3f7a98c105d3bbd85"
         },
         {
             "path": "src/@api/iam/bounded-context/handlers/iam-update-bounded-contexts.handler.ts",
-            "integrity": "sha1:c2633ccfc4bb3c14d9e7d9795e543a5dfd1e872c"
+            "integrity": "sha1:99ef2fea3363ee71de8eb8b3336c7404d5e1466b"
         },
         {
             "path": "src/@api/iam/bounded-context/index.ts",
-            "integrity": "sha1:9380f5c31ea53bc0f62dbbbc4cb8989989ef37cd"
+            "integrity": "sha1:a5caed77a931e7b6c34e7493c433d6625c866136"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-create-bounded-context.resolver.spec.ts",
-            "integrity": "sha1:cc2b6a0bfce8d87a049893027ea8f5de8853a4a9"
+            "integrity": "sha1:e2823386812a4b3b60c6176259ef199486e8f907"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-create-bounded-context.resolver.ts",
-            "integrity": "sha1:52cceb82111cfd29f3beeefd08dd856cc9b778fa"
+            "integrity": "sha1:6fcd0129e9493e4f2ef452ed4d1e7cb492600359"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-create-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:00315ad3e53f9684292bdf223cccb2e9c42821d3"
+            "integrity": "sha1:1ee4aa335763aff1077dbbbe4b6a862dee3be1b8"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-create-bounded-contexts.resolver.ts",
-            "integrity": "sha1:5548635eadf4d41bec281a62144870903e760666"
+            "integrity": "sha1:8af34aa776d8f5ed08a5d0cd05fd0d19cdc68b12"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-delete-bounded-context-by-id.resolver.spec.ts",
-            "integrity": "sha1:c7613aa6771d8000e9af39f8b1cd90471e4514be"
+            "integrity": "sha1:0098562a69e9698fa4e223a6c0f7e49df172bb6b"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-delete-bounded-context-by-id.resolver.ts",
-            "integrity": "sha1:6d14c77aabd13216e03a8cc86b0330ce33fb3750"
+            "integrity": "sha1:3ede403dfe6eab09d0f25351150dfb4fab8caaa5"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-delete-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:f190d17358cfcff5d92b05d222021017d5e9420b"
+            "integrity": "sha1:f2651771632a80f0d63d9d240c2b6471bbeb369a"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-delete-bounded-contexts.resolver.ts",
-            "integrity": "sha1:f59ee0b513bffac908287eb2ebf6fde2098c831c"
+            "integrity": "sha1:3f8bd15ce4d50442aae0ccf0b3cdca8f9b3d8683"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-find-bounded-context-by-id.resolver.spec.ts",
-            "integrity": "sha1:d7496929a46ada624c89a476cb038680ee7f4cf7"
+            "integrity": "sha1:a6bc8185d811574288eb613dd580433a161a4b7c"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-find-bounded-context-by-id.resolver.ts",
-            "integrity": "sha1:7188d5db91ce6b30d5b55d3cb9b9be863ddbfcf9"
+            "integrity": "sha1:8cdf586386d4f2637ac554d4750f05b8596cd467"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-find-bounded-context.resolver.spec.ts",
-            "integrity": "sha1:0366b10a4cc27970c1c12ab2f84d175926fe37cc"
+            "integrity": "sha1:0b439e135adfe9fd2d0820255b155bfc58f4754a"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-find-bounded-context.resolver.ts",
-            "integrity": "sha1:3ae2a8f479c6899c4fa4baf06f64514fdc495554"
+            "integrity": "sha1:4221cc51af06fd8335fd7661d3b23206d832ee15"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-get-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:b0fcea11a512f22801f3cc88d0098e728d18d370"
+            "integrity": "sha1:da468113767af3c0b75ab68358c6d5fffc1e4472"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-get-bounded-contexts.resolver.ts",
-            "integrity": "sha1:7635f0d000500855678f04a2b7422961d687a22f"
+            "integrity": "sha1:1481637f5393286f85af81063b2cc3e3a6b40aa9"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-paginate-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:22e5e0e628b4bb9c62f3bdd71b8349387dd5b87c"
+            "integrity": "sha1:5338108506cec1f6df36fb5cacec949c3caba593"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-paginate-bounded-contexts.resolver.ts",
-            "integrity": "sha1:815884562e5b2cb8d205bbf7916ffe18566446e2"
+            "integrity": "sha1:5d7481836e4afa205477a056cdc8206c8709c721"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-update-bounded-context-by-id.resolver.spec.ts",
-            "integrity": "sha1:b17c59e2d5f6a4517d85f3359b1159b273f985ce"
+            "integrity": "sha1:d37fd5b341f7315875a2602962d05e5f54e4811a"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-update-bounded-context-by-id.resolver.ts",
-            "integrity": "sha1:9287e6a15f5cf04d5527ecee86ffd2f6c4000b21"
+            "integrity": "sha1:1167c384656b2ad1e0d9beae6526133c88ba040d"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-update-bounded-contexts.resolver.spec.ts",
-            "integrity": "sha1:65f1c1fe2e693b8610bf8a25fd425b30d7d6bf73"
+            "integrity": "sha1:7519b056099440d7e5cf9c986f5382e227d04c8e"
         },
         {
             "path": "src/@api/iam/bounded-context/resolvers/iam-update-bounded-contexts.resolver.ts",
-            "integrity": "sha1:7e3d70da87e26a5a86369d29bf120060d6a2be4e"
+            "integrity": "sha1:8053321e84ce055e69273ea69a15a4b2e8d21c09"
         },
         {
             "path": "src/@api/iam/bounded-context/seeder/iam-bounded-context.seeder.ts",
-            "integrity": "sha1:a7a783db1fc08da650a4ae9c26a5d90b04990aae"
+            "integrity": "sha1:40ec41b088809619d81d0e6fb15ebee01cb4ce2b"
         },
         {
             "path": "test/acceptance/iam/bounded-context.e2e-spec.ts",
-            "integrity": "sha1:96a94163329e85d1ed67444f0d5a07e830ea7915"
+            "integrity": "sha1:c0bf17de50f6f1c3c6ac1b027f50b809c9727529"
         },
         {
             "path": "postman/iam/iam.bounded-context.postman.json",
-            "integrity": "sha1:d99411898637da8173cc0107d1580fd1f9b82165"
+            "integrity": "sha1:6a497d557a1ca22d025a49a673916cac5b1a3b82"
         }
     ]
 }

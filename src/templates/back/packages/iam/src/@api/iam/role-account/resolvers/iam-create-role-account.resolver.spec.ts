@@ -1,51 +1,61 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IamCreateRoleAccountInput } from '@api/graphql';
-import { IamCreateRoleAccountHandler, IamCreateRoleAccountResolver } from '@api/iam/role-account';
+import {
+    IamCreateRoleAccountHandler,
+    IamCreateRoleAccountResolver,
+} from '@api/iam/role-account';
 import { iamMockRoleAccountData } from '@app/iam/role-account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateRoleAccountResolver', () =>
-{
+describe('IamCreateRoleAccountResolver', () => {
     let resolver: IamCreateRoleAccountResolver;
     let handler: IamCreateRoleAccountHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreateRoleAccountResolver,
                 {
-                    provide : IamCreateRoleAccountHandler,
+                    provide: IamCreateRoleAccountHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamCreateRoleAccountResolver>(IamCreateRoleAccountResolver);
-        handler = module.get<IamCreateRoleAccountHandler>(IamCreateRoleAccountHandler);
+        resolver = module.get<IamCreateRoleAccountResolver>(
+            IamCreateRoleAccountResolver,
+        );
+        handler = module.get<IamCreateRoleAccountHandler>(
+            IamCreateRoleAccountHandler,
+        );
     });
 
-    test('IamCreateRoleAccountResolver should be defined', () =>
-    {
+    test('IamCreateRoleAccountResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateRoleAccountResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateRoleAccountResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an roleAccount created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleAccountData[0])));
-            expect(await resolver.main(<IamCreateRoleAccountInput>iamMockRoleAccountData[0])).toBe(iamMockRoleAccountData[0]);
+        test('should return an roleAccount created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockRoleAccountData[0]),
+                    ),
+            );
+            expect(
+                await resolver.main(
+                    <IamCreateRoleAccountInput>iamMockRoleAccountData[0],
+                ),
+            ).toBe(iamMockRoleAccountData[0]);
         });
     });
 });

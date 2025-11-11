@@ -12,23 +12,33 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsUpdateKeyValueByIdCommand)
-export class ToolsUpdateKeyValueByIdCommandHandler implements ICommandHandler<ToolsUpdateKeyValueByIdCommand>
+export class ToolsUpdateKeyValueByIdCommandHandler
+    implements ICommandHandler<ToolsUpdateKeyValueByIdCommand>
 {
     constructor(
         private readonly updateKeyValueByIdService: ToolsUpdateKeyValueByIdService,
     ) {}
 
-    async execute(command: ToolsUpdateKeyValueByIdCommand): Promise<void>
-    {
+    async execute(command: ToolsUpdateKeyValueByIdCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.updateKeyValueByIdService.main(
             {
                 id: new ToolsKeyValueId(command.payload.id),
-                key: new ToolsKeyValueKey(command.payload.key, { undefinable: true }),
-                type: new ToolsKeyValueType(command.payload.type, { undefinable: true }),
-                value: new ToolsKeyValueValue(command.payload.value, { undefinable: true }),
-                isActive: new ToolsKeyValueIsActive(command.payload.isActive, { undefinable: true }),
-                description: new ToolsKeyValueDescription(command.payload.description),
+                key: new ToolsKeyValueKey(command.payload.key, {
+                    undefinable: true,
+                }),
+                type: new ToolsKeyValueType(command.payload.type, {
+                    undefinable: true,
+                }),
+                value: new ToolsKeyValueValue(command.payload.value, {
+                    undefinable: true,
+                }),
+                isActive: new ToolsKeyValueIsActive(command.payload.isActive, {
+                    undefinable: true,
+                }),
+                description: new ToolsKeyValueDescription(
+                    command.payload.description,
+                ),
             },
             command.constraint,
             command.cQMetadata,

@@ -1,16 +1,15 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class IamForgotPasswordUserDto
-{
+export class IamForgotPasswordUserDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'email [input here api field description]',
     })
     email: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'origin [input here api field description]',
     })
     origin: string;

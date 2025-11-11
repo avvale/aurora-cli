@@ -5,10 +5,9 @@ enum OAuthClientGrantType {
     REFRESH_TOKEN
 }
 
-
-type OAuthClient
-{
+type OAuthClient {
     id: ID!
+    rowId: GraphQLInt!
     grantType: OAuthClientGrantType!
     name: GraphQLString!
     secret: GraphQLString!
@@ -26,8 +25,7 @@ type OAuthClient
     deletedAt: GraphQLTimestamp
 }
 
-input OAuthCreateClientInput
-{
+input OAuthCreateClientInput {
     id: ID!
     grantType: OAuthClientGrantType!
     name: GraphQLString!
@@ -42,8 +40,7 @@ input OAuthCreateClientInput
     applicationIds: [ID]
 }
 
-input OAuthUpdateClientByIdInput
-{
+input OAuthUpdateClientByIdInput {
     id: ID!
     grantType: OAuthClientGrantType
     name: GraphQLString
@@ -58,8 +55,7 @@ input OAuthUpdateClientByIdInput
     applicationIds: [ID]
 }
 
-input OAuthUpdateClientsInput
-{
+input OAuthUpdateClientsInput {
     id: ID
     grantType: OAuthClientGrantType
     name: GraphQLString
@@ -74,17 +70,13 @@ input OAuthUpdateClientsInput
     applicationIds: [ID]
 }
 
-type Query
-{
+type Query {
     oAuthFindClient(
         query: QueryStatement
         constraint: QueryStatement
     ): OAuthClient
 
-    oAuthFindClientById(
-        id: ID
-        constraint: QueryStatement
-    ): OAuthClient
+    oAuthFindClientById(id: ID, constraint: QueryStatement): OAuthClient
 
     oAuthGetClients(
         query: QueryStatement
@@ -95,42 +87,22 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    oAuthCreateClient(
-        payload: OAuthCreateClientInput!
-    ): OAuthClient
+type Mutation {
+    oAuthCreateClient(payload: OAuthCreateClientInput!): OAuthClient
 
-    oAuthCreateClients(
-        payload: [OAuthCreateClientInput]!
-    ): Boolean!
+    oAuthCreateClients(payload: [OAuthCreateClientInput]!): Boolean!
 
     oAuthUpdateClientById(
         payload: OAuthUpdateClientByIdInput!
         constraint: QueryStatement
     ): OAuthClient
 
-    oAuthUpdateClients(
-        payload: OAuthUpdateClientsInput!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [OAuthClient]!
-
-    oAuthUpsertClient(
-        payload: OAuthUpdateClientByIdInput!
-    ): OAuthClient
-
-    oAuthDeleteClientById(
-        id: ID!
-        constraint: QueryStatement
-    ): OAuthClient
+    oAuthDeleteClientById(id: ID!, constraint: QueryStatement): OAuthClient
 
     oAuthDeleteClients(
         query: QueryStatement
         constraint: QueryStatement
     ): [OAuthClient]!
-
 }

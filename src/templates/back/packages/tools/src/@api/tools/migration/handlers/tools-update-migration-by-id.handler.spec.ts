@@ -5,60 +5,63 @@ import { toolsMockMigrationData } from '@app/tools/migration';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsUpdateMigrationByIdHandler', () =>
-{
+describe('ToolsUpdateMigrationByIdHandler', () => {
     let handler: ToolsUpdateMigrationByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsUpdateMigrationByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsUpdateMigrationByIdHandler>(ToolsUpdateMigrationByIdHandler);
+        handler = module.get<ToolsUpdateMigrationByIdHandler>(
+            ToolsUpdateMigrationByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsUpdateMigrationByIdHandler should be defined', () =>
-    {
+    test('ToolsUpdateMigrationByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsUpdateMigrationByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsUpdateMigrationByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a migration updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData[0])));
+        test('should return a migration updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockMigrationData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     <ToolsUpdateMigrationByIdInput>toolsMockMigrationData[0],
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(toolsMockMigrationData[0]);
+                ),
+            ).toBe(toolsMockMigrationData[0]);
         });
     });
 });

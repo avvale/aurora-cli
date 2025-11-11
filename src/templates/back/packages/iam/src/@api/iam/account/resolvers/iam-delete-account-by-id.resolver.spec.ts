@@ -1,50 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamDeleteAccountByIdHandler, IamDeleteAccountByIdResolver } from '@api/iam/account';
+import {
+    IamDeleteAccountByIdHandler,
+    IamDeleteAccountByIdResolver,
+} from '@api/iam/account';
 import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteAccountByIdResolver', () =>
-{
+describe('IamDeleteAccountByIdResolver', () => {
     let resolver: IamDeleteAccountByIdResolver;
     let handler: IamDeleteAccountByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteAccountByIdResolver,
                 {
-                    provide : IamDeleteAccountByIdHandler,
+                    provide: IamDeleteAccountByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamDeleteAccountByIdResolver>(IamDeleteAccountByIdResolver);
-        handler = module.get<IamDeleteAccountByIdHandler>(IamDeleteAccountByIdHandler);
+        resolver = module.get<IamDeleteAccountByIdResolver>(
+            IamDeleteAccountByIdResolver,
+        );
+        handler = module.get<IamDeleteAccountByIdHandler>(
+            IamDeleteAccountByIdHandler,
+        );
     });
 
-    test('IamDeleteAccountByIdResolver should be defined', () =>
-    {
+    test('IamDeleteAccountByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteAccountByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteAccountByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an account deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
-            expect(await resolver.main(iamMockAccountData[0].id)).toBe(iamMockAccountData[0]);
+        test('should return an account deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockAccountData[0])),
+            );
+            expect(await resolver.main(iamMockAccountData[0].id)).toBe(
+                iamMockAccountData[0],
+            );
         });
     });
 });

@@ -3,42 +3,40 @@ import { IamDeleteUserByIdCommandHandler } from '@app/iam/user/application/delet
 import { IamDeleteUserByIdService } from '@app/iam/user/application/delete/iam-delete-user-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteUserByIdCommandHandler', () =>
-{
+describe('IamDeleteUserByIdCommandHandler', () => {
     let commandHandler: IamDeleteUserByIdCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamDeleteUserByIdCommandHandler,
                 {
-                    provide : IamDeleteUserByIdService,
+                    provide: IamDeleteUserByIdService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamDeleteUserByIdCommandHandler>(IamDeleteUserByIdCommandHandler);
+        commandHandler = module.get<IamDeleteUserByIdCommandHandler>(
+            IamDeleteUserByIdCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteUserByIdCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteUserByIdCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the IamDeleteUserByIdService', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamDeleteUserByIdCommand(
-                    iamMockUserData[0].id,
+        test('should create the value object id and pass them as parameters to the IamDeleteUserByIdService', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamDeleteUserByIdCommand(iamMockUserData[0].id),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

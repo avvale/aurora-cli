@@ -3,40 +3,38 @@ import { IamDeleteAccountsCommandHandler } from '@app/iam/account/application/de
 import { IamDeleteAccountsService } from '@app/iam/account/application/delete/iam-delete-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteAccountsCommandHandler', () =>
-{
+describe('IamDeleteAccountsCommandHandler', () => {
     let commandHandler: IamDeleteAccountsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamDeleteAccountsCommandHandler,
                 {
-                    provide : IamDeleteAccountsService,
+                    provide: IamDeleteAccountsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamDeleteAccountsCommandHandler>(IamDeleteAccountsCommandHandler);
+        commandHandler = module.get<IamDeleteAccountsCommandHandler>(
+            IamDeleteAccountsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteAccountsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteAccountsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamDeleteAccountsCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(new IamDeleteAccountsCommand()),
+            ).toBe(undefined);
         });
     });
 });

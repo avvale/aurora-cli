@@ -4,55 +4,55 @@ import { iamMockTenantAccountData } from '@app/iam/tenant-account';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTenantAccountByIdHandler', () =>
-{
+describe('IamFindTenantAccountByIdHandler', () => {
     let handler: IamFindTenantAccountByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindTenantAccountByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamFindTenantAccountByIdHandler>(IamFindTenantAccountByIdHandler);
+        handler = module.get<IamFindTenantAccountByIdHandler>(
+            IamFindTenantAccountByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamFindTenantAccountByIdHandler should be defined', () =>
-    {
+    test('IamFindTenantAccountByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTenantAccountByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTenantAccountByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an tenantAccount by id', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantAccountData[0])));
+        test('should return an tenantAccount by id', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockTenantAccountData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     iamMockTenantAccountData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockTenantAccountData[0]);
+            ).toBe(iamMockTenantAccountData[0]);
         });
     });
 });

@@ -1,49 +1,53 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamFindPermissionHandler, IamFindPermissionResolver } from '@api/iam/permission';
+import {
+    IamFindPermissionHandler,
+    IamFindPermissionResolver,
+} from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindPermissionResolver', () =>
-{
+describe('IamFindPermissionResolver', () => {
     let resolver: IamFindPermissionResolver;
     let handler: IamFindPermissionHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindPermissionResolver,
                 {
-                    provide : IamFindPermissionHandler,
+                    provide: IamFindPermissionHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamFindPermissionResolver>(IamFindPermissionResolver);
-        handler = module.get<IamFindPermissionHandler>(IamFindPermissionHandler);
+        resolver = module.get<IamFindPermissionResolver>(
+            IamFindPermissionResolver,
+        );
+        handler = module.get<IamFindPermissionHandler>(
+            IamFindPermissionHandler,
+        );
     });
 
-    test('IamFindPermissionResolver should be defined', () =>
-    {
+    test('IamFindPermissionResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindPermissionResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindPermissionResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a permission', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+        test('should return a permission', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(iamMockPermissionData[0])),
+            );
             expect(await resolver.main()).toBe(iamMockPermissionData[0]);
         });
     });

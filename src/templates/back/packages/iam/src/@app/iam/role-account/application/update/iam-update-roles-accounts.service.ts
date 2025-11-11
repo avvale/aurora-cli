@@ -1,4 +1,8 @@
-import { IamAddRolesAccountsContextEvent, IamIRoleAccountRepository, IamRoleAccount } from '@app/iam/role-account';
+import {
+    IamAddRolesAccountsContextEvent,
+    IamIRoleAccountRepository,
+    IamRoleAccount,
+} from '@app/iam/role-account';
 import {
     IamRoleAccountAccountId,
     IamRoleAccountRoleId,
@@ -8,8 +12,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdateRolesAccountsService
-{
+export class IamUpdateRolesAccountsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIRoleAccountRepository,
@@ -23,8 +26,7 @@ export class IamUpdateRolesAccountsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const roleAccount = IamRoleAccount.register(
             payload.roleId,
@@ -32,31 +34,23 @@ export class IamUpdateRolesAccountsService
         );
 
         // update
-        await this.repository.update(
-            roleAccount,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(roleAccount, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const rolesAccounts = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const rolesAccounts = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const rolesAccountsRegister = this.publisher.mergeObjectContext(
-            new IamAddRolesAccountsContextEvent(
-                rolesAccounts,
-                cQMetadata,
-            ),
+            new IamAddRolesAccountsContextEvent(rolesAccounts, cQMetadata),
         );
 
         rolesAccountsRegister.updated(); // apply event to model events

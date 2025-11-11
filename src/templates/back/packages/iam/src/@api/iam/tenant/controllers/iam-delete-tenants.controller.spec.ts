@@ -1,45 +1,45 @@
-import { IamDeleteTenantsController, IamDeleteTenantsHandler } from '@api/iam/tenant';
+import {
+    IamDeleteTenantsController,
+    IamDeleteTenantsHandler,
+} from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteTenantsController', () =>
-{
+describe('IamDeleteTenantsController', () => {
     let controller: IamDeleteTenantsController;
     let handler: IamDeleteTenantsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamDeleteTenantsController,
-            ],
+            imports: [],
+            controllers: [IamDeleteTenantsController],
             providers: [
                 {
-                    provide : IamDeleteTenantsHandler,
+                    provide: IamDeleteTenantsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamDeleteTenantsController>(IamDeleteTenantsController);
+        controller = module.get<IamDeleteTenantsController>(
+            IamDeleteTenantsController,
+        );
         handler = module.get<IamDeleteTenantsHandler>(IamDeleteTenantsHandler);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteTenantsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteTenantsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an iamMockTenantData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData)));
+        test('should return an iamMockTenantData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData)),
+            );
             expect(await controller.main()).toBe(iamMockTenantData);
         });
     });

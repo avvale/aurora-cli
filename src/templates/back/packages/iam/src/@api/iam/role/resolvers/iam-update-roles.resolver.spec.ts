@@ -4,48 +4,46 @@ import { IamUpdateRolesHandler, IamUpdateRolesResolver } from '@api/iam/role';
 import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateRolesResolver', () =>
-{
+describe('IamUpdateRolesResolver', () => {
     let resolver: IamUpdateRolesResolver;
     let handler: IamUpdateRolesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateRolesResolver,
                 {
-                    provide : IamUpdateRolesHandler,
+                    provide: IamUpdateRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<IamUpdateRolesResolver>(IamUpdateRolesResolver);
         handler = module.get<IamUpdateRolesHandler>(IamUpdateRolesHandler);
     });
 
-    test('IamUpdateRolesResolver should be defined', () =>
-    {
+    test('IamUpdateRolesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateRolesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateRolesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a roles updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
-            expect(await resolver.main(<IamUpdateRolesInput>iamMockRoleData[0])).toBe(iamMockRoleData[0]);
+        test('should return a roles updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockRoleData[0])),
+            );
+            expect(
+                await resolver.main(<IamUpdateRolesInput>iamMockRoleData[0]),
+            ).toBe(iamMockRoleData[0]);
         });
     });
 });

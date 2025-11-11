@@ -1,46 +1,51 @@
-import { IamUpdatePermissionByIdController, IamUpdatePermissionByIdHandler } from '@api/iam/permission';
+import {
+    IamUpdatePermissionByIdController,
+    IamUpdatePermissionByIdHandler,
+} from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdatePermissionByIdController', () =>
-{
+describe('IamUpdatePermissionByIdController', () => {
     let controller: IamUpdatePermissionByIdController;
     let handler: IamUpdatePermissionByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamUpdatePermissionByIdController,
-            ],
+            imports: [],
+            controllers: [IamUpdatePermissionByIdController],
             providers: [
                 {
-                    provide : IamUpdatePermissionByIdHandler,
+                    provide: IamUpdatePermissionByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamUpdatePermissionByIdController>(IamUpdatePermissionByIdController);
-        handler = module.get<IamUpdatePermissionByIdHandler>(IamUpdatePermissionByIdHandler);
+        controller = module.get<IamUpdatePermissionByIdController>(
+            IamUpdatePermissionByIdController,
+        );
+        handler = module.get<IamUpdatePermissionByIdHandler>(
+            IamUpdatePermissionByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdatePermissionByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdatePermissionByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a permission updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
-            expect(await controller.main(iamMockPermissionData[0])).toBe(iamMockPermissionData[0]);
+        test('should return a permission updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(iamMockPermissionData[0])),
+            );
+            expect(await controller.main(iamMockPermissionData[0])).toBe(
+                iamMockPermissionData[0],
+            );
         });
     });
 });

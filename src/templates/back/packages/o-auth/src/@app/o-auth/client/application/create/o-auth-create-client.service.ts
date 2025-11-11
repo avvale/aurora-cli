@@ -3,7 +3,6 @@ import {
     OAuthClientApplicationIds,
     OAuthClientAuthUrl,
     OAuthClientCreatedAt,
-    OAuthClientDeletedAt,
     OAuthClientExpiredAccessToken,
     OAuthClientExpiredRefreshToken,
     OAuthClientGrantType,
@@ -21,8 +20,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class OAuthCreateClientService
-{
+export class OAuthCreateClientService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: OAuthIClientRepository,
@@ -44,11 +42,11 @@ export class OAuthCreateClientService
             applicationIds: OAuthClientApplicationIds;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const client = OAuthClient.register(
             payload.id,
+            undefined, // rowId
             payload.grantType,
             payload.name,
             payload.secret,
@@ -65,19 +63,17 @@ export class OAuthCreateClientService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            client,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(client, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const clientRegister = this.publisher.mergeObjectContext(
-            client,
-        );
+        const clientRegister = this.publisher.mergeObjectContext(client);
 
-        clientRegister.created(client); // apply event to model events
+        clientRegister.created({
+            payload: client,
+            cQMetadata,
+        }); // apply event to model events
         clientRegister.commit(); // commit all events of model
     }
 }

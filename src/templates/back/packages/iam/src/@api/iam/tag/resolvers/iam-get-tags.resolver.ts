@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.tag.get')
-export class IamGetTagsResolver
-{
-    constructor(
-        private readonly handler: IamGetTagsHandler,
-    ) {}
+export class IamGetTagsResolver {
+    constructor(private readonly handler: IamGetTagsHandler) {}
 
     @Query('iamGetTags')
     async main(
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<IamTag[]>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<IamTag[]> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

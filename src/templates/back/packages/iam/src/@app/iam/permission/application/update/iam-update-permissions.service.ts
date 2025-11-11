@@ -1,8 +1,10 @@
-import { IamAddPermissionsContextEvent, IamIPermissionRepository, IamPermission } from '@app/iam/permission';
+import {
+    IamAddPermissionsContextEvent,
+    IamIPermissionRepository,
+    IamPermission,
+} from '@app/iam/permission';
 import {
     IamPermissionBoundedContextId,
-    IamPermissionCreatedAt,
-    IamPermissionDeletedAt,
     IamPermissionId,
     IamPermissionName,
     IamPermissionRoleIds,
@@ -13,8 +15,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdatePermissionsService
-{
+export class IamUpdatePermissionsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIPermissionRepository,
@@ -30,11 +31,11 @@ export class IamUpdatePermissionsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const permission = IamPermission.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.boundedContextId,
             payload.roleIds,
@@ -44,31 +45,23 @@ export class IamUpdatePermissionsService
         );
 
         // update
-        await this.repository.update(
-            permission,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(permission, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const permissions = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const permissions = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const permissionsRegister = this.publisher.mergeObjectContext(
-            new IamAddPermissionsContextEvent(
-                permissions,
-                cQMetadata,
-            ),
+            new IamAddPermissionsContextEvent(permissions, cQMetadata),
         );
 
         permissionsRegister.updated(); // apply event to model events

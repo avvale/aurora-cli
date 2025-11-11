@@ -11,14 +11,14 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateBoundedContextCommand)
-export class IamCreateBoundedContextCommandHandler implements ICommandHandler<IamCreateBoundedContextCommand>
+export class IamCreateBoundedContextCommandHandler
+    implements ICommandHandler<IamCreateBoundedContextCommand>
 {
     constructor(
         private readonly createBoundedContextService: IamCreateBoundedContextService,
     ) {}
 
-    async execute(command: IamCreateBoundedContextCommand): Promise<void>
-    {
+    async execute(command: IamCreateBoundedContextCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createBoundedContextService.main(
             {
@@ -26,7 +26,9 @@ export class IamCreateBoundedContextCommandHandler implements ICommandHandler<Ia
                 name: new IamBoundedContextName(command.payload.name),
                 root: new IamBoundedContextRoot(command.payload.root),
                 sort: new IamBoundedContextSort(command.payload.sort),
-                isActive: new IamBoundedContextIsActive(command.payload.isActive),
+                isActive: new IamBoundedContextIsActive(
+                    command.payload.isActive,
+                ),
             },
             command.cQMetadata,
         );

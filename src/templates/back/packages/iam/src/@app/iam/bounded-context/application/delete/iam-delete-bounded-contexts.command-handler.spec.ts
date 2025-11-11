@@ -3,40 +3,40 @@ import { IamDeleteBoundedContextsCommandHandler } from '@app/iam/bounded-context
 import { IamDeleteBoundedContextsService } from '@app/iam/bounded-context/application/delete/iam-delete-bounded-contexts.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteBoundedContextsCommandHandler', () =>
-{
+describe('IamDeleteBoundedContextsCommandHandler', () => {
     let commandHandler: IamDeleteBoundedContextsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamDeleteBoundedContextsCommandHandler,
                 {
-                    provide : IamDeleteBoundedContextsService,
+                    provide: IamDeleteBoundedContextsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamDeleteBoundedContextsCommandHandler>(IamDeleteBoundedContextsCommandHandler);
+        commandHandler = module.get<IamDeleteBoundedContextsCommandHandler>(
+            IamDeleteBoundedContextsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteBoundedContextsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteBoundedContextsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamDeleteBoundedContextsCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamDeleteBoundedContextsCommand(),
+                ),
+            ).toBe(undefined);
         });
     });
 });

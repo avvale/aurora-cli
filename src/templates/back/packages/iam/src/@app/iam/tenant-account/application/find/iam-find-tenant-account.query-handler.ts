@@ -1,18 +1,25 @@
-import { IamFindTenantAccountQuery, IamTenantAccountMapper, IamTenantAccountResponse } from '@app/iam/tenant-account';
+import {
+    IamFindTenantAccountQuery,
+    IamTenantAccountMapper,
+    IamTenantAccountResponse,
+} from '@app/iam/tenant-account';
 import { IamFindTenantAccountService } from '@app/iam/tenant-account/application/find/iam-find-tenant-account.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamFindTenantAccountQuery)
-export class IamFindTenantAccountQueryHandler implements IQueryHandler<IamFindTenantAccountQuery>
+export class IamFindTenantAccountQueryHandler
+    implements IQueryHandler<IamFindTenantAccountQuery>
 {
-    private readonly mapper: IamTenantAccountMapper = new IamTenantAccountMapper();
+    private readonly mapper: IamTenantAccountMapper =
+        new IamTenantAccountMapper();
 
     constructor(
         private readonly findTenantAccountService: IamFindTenantAccountService,
     ) {}
 
-    async execute(query: IamFindTenantAccountQuery): Promise<IamTenantAccountResponse>
-    {
+    async execute(
+        query: IamFindTenantAccountQuery,
+    ): Promise<IamTenantAccountResponse> {
         const tenantAccount = await this.findTenantAccountService.main(
             query.queryStatement,
             query.constraint,

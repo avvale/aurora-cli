@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('tools.migration.update')
-export class ToolsUpdateMigrationByIdResolver
-{
-    constructor(
-        private readonly handler: ToolsUpdateMigrationByIdHandler,
-    ) {}
+export class ToolsUpdateMigrationByIdResolver {
+    constructor(private readonly handler: ToolsUpdateMigrationByIdHandler) {}
 
     @Mutation('toolsUpdateMigrationById')
     async main(
         @Args('payload') payload: ToolsUpdateMigrationByIdInput,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<ToolsMigration>
-    {
-        return await this.handler.main(
-            payload,
-            constraint,
-            timezone,
-        );
+    ): Promise<ToolsMigration> {
+        return await this.handler.main(payload, constraint, timezone);
     }
 }

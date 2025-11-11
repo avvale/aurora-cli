@@ -1,11 +1,16 @@
-import { OAuthApplicationClient, OAuthIApplicationClientRepository } from '@app/o-auth/application-client';
-import { OAuthApplicationClientApplicationId, OAuthApplicationClientClientId } from '@app/o-auth/application-client/domain/value-objects';
+import {
+    OAuthApplicationClient,
+    OAuthIApplicationClientRepository,
+} from '@app/o-auth/application-client';
+import {
+    OAuthApplicationClientApplicationId,
+    OAuthApplicationClientClientId,
+} from '@app/o-auth/application-client/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class OAuthFindApplicationClientByIdService
-{
+export class OAuthFindApplicationClientByIdService {
     constructor(
         private readonly repository: OAuthIApplicationClientRepository,
     ) {}
@@ -15,18 +20,14 @@ export class OAuthFindApplicationClientByIdService
         clientId: OAuthApplicationClientClientId,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<OAuthApplicationClient>
-    {
-        return await this.repository.findById(
-            undefined,
-            {
-                constraint,
-                cQMetadata,
-                findArguments: {
-                    applicationId: applicationId.value,
-                    clientId: clientId.value,
-                },
+    ): Promise<OAuthApplicationClient> {
+        return await this.repository.findById(undefined, {
+            constraint,
+            cQMetadata,
+            findArguments: {
+                applicationId: applicationId.value,
+                clientId: clientId.value,
             },
-        );
+        });
     }
 }

@@ -1,4 +1,8 @@
-import { OAuthApplicationClient, OAuthIApplicationClientRepository, oAuthMockApplicationClientData } from '@app/o-auth/application-client';
+import {
+    OAuthApplicationClient,
+    OAuthIApplicationClientRepository,
+    oAuthMockApplicationClientData,
+} from '@app/o-auth/application-client';
 import {
     OAuthApplicationClientApplicationId,
     OAuthApplicationClientClientId,
@@ -7,38 +11,40 @@ import { MockRepository, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class OAuthMockApplicationClientRepository extends MockRepository<OAuthApplicationClient> implements OAuthIApplicationClientRepository
+export class OAuthMockApplicationClientRepository
+    extends MockRepository<OAuthApplicationClient>
+    implements OAuthIApplicationClientRepository
 {
     public readonly repository: any;
     public readonly aggregateName: string = 'OAuthApplicationClient';
     public collectionSource: OAuthApplicationClient[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this.createSourceMockData();
     }
 
-    public reset(): void
-    {
+    public reset(): void {
         this.createSourceMockData();
     }
 
-    private createSourceMockData(): void
-    {
+    private createSourceMockData(): void {
         this.collectionSource = [];
         const now = Utils.nowTimestamp();
 
-        for (const itemCollection of <any[]>oAuthMockApplicationClientData)
-        {
+        for (const itemCollection of <any[]>oAuthMockApplicationClientData) {
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
 
-            this.collectionSource.push(OAuthApplicationClient.register(
-                new OAuthApplicationClientApplicationId(itemCollection.applicationId),
-                new OAuthApplicationClientClientId(itemCollection.clientId),
-            ));
+            this.collectionSource.push(
+                OAuthApplicationClient.register(
+                    new OAuthApplicationClientApplicationId(
+                        itemCollection.applicationId,
+                    ),
+                    new OAuthApplicationClientClientId(itemCollection.clientId),
+                ),
+            );
         }
     }
 }

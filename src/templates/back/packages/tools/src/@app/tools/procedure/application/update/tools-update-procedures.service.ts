@@ -1,8 +1,10 @@
-import { ToolsAddProceduresContextEvent, ToolsIProcedureRepository, ToolsProcedure } from '@app/tools/procedure';
+import {
+    ToolsAddProceduresContextEvent,
+    ToolsIProcedureRepository,
+    ToolsProcedure,
+} from '@app/tools/procedure';
 import {
     ToolsProcedureCheckedAt,
-    ToolsProcedureCreatedAt,
-    ToolsProcedureDeletedAt,
     ToolsProcedureDownScript,
     ToolsProcedureExecutedAt,
     ToolsProcedureHash,
@@ -22,8 +24,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class ToolsUpdateProceduresService
-{
+export class ToolsUpdateProceduresService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ToolsIProcedureRepository,
@@ -48,11 +49,11 @@ export class ToolsUpdateProceduresService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const procedure = ToolsProcedure.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.type,
             payload.version,
@@ -71,31 +72,23 @@ export class ToolsUpdateProceduresService
         );
 
         // update
-        await this.repository.update(
-            procedure,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(procedure, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const procedures = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const procedures = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const proceduresRegister = this.publisher.mergeObjectContext(
-            new ToolsAddProceduresContextEvent(
-                procedures,
-                cQMetadata,
-            ),
+            new ToolsAddProceduresContextEvent(procedures, cQMetadata),
         );
 
         proceduresRegister.updated(); // apply event to model events

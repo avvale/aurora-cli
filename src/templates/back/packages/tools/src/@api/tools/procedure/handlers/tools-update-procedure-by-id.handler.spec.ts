@@ -5,60 +5,63 @@ import { toolsMockProcedureData } from '@app/tools/procedure';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsUpdateProcedureByIdHandler', () =>
-{
+describe('ToolsUpdateProcedureByIdHandler', () => {
     let handler: ToolsUpdateProcedureByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsUpdateProcedureByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsUpdateProcedureByIdHandler>(ToolsUpdateProcedureByIdHandler);
+        handler = module.get<ToolsUpdateProcedureByIdHandler>(
+            ToolsUpdateProcedureByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsUpdateProcedureByIdHandler should be defined', () =>
-    {
+    test('ToolsUpdateProcedureByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsUpdateProcedureByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsUpdateProcedureByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a procedure updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockProcedureData[0])));
+        test('should return a procedure updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockProcedureData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     <ToolsUpdateProcedureByIdInput>toolsMockProcedureData[0],
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(toolsMockProcedureData[0]);
+                ),
+            ).toBe(toolsMockProcedureData[0]);
         });
     });
 });

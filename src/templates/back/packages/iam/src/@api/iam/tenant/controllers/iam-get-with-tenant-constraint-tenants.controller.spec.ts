@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamGetWithTenantConstraintTenantsHandler } from '../handlers/iam-get-with-tenant-constraint-tenants.handler';
 import { IamGetWithTenantConstraintTenantsController } from './iam-get-with-tenant-constraint-tenants.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamGetWithTenantConstraintTenantsController', () =>
-{
+describe('IamGetWithTenantConstraintTenantsController', () => {
     let controller: IamGetWithTenantConstraintTenantsController;
     let handler: IamGetWithTenantConstraintTenantsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamGetWithTenantConstraintTenantsController,
-            ],
+            imports: [],
+            controllers: [IamGetWithTenantConstraintTenantsController],
             providers: [
                 {
-                    provide : IamGetWithTenantConstraintTenantsHandler,
+                    provide: IamGetWithTenantConstraintTenantsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamGetWithTenantConstraintTenantsController>(IamGetWithTenantConstraintTenantsController);
-        handler = module.get<IamGetWithTenantConstraintTenantsHandler>(IamGetWithTenantConstraintTenantsHandler);
+        controller = module.get<IamGetWithTenantConstraintTenantsController>(
+            IamGetWithTenantConstraintTenantsController,
+        );
+        handler = module.get<IamGetWithTenantConstraintTenantsHandler>(
+            IamGetWithTenantConstraintTenantsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamGetWithTenantConstraintTenantsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamGetWithTenantConstraintTenantsController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

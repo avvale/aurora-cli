@@ -12,14 +12,14 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateApplicationCommand)
-export class OAuthCreateApplicationCommandHandler implements ICommandHandler<OAuthCreateApplicationCommand>
+export class OAuthCreateApplicationCommandHandler
+    implements ICommandHandler<OAuthCreateApplicationCommand>
 {
     constructor(
         private readonly createApplicationService: OAuthCreateApplicationService,
     ) {}
 
-    async execute(command: OAuthCreateApplicationCommand): Promise<void>
-    {
+    async execute(command: OAuthCreateApplicationCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createApplicationService.main(
             {
@@ -27,8 +27,12 @@ export class OAuthCreateApplicationCommandHandler implements ICommandHandler<OAu
                 code: new OAuthApplicationCode(command.payload.code),
                 name: new OAuthApplicationName(command.payload.name),
                 secret: new OAuthApplicationSecret(command.payload.secret),
-                isMaster: new OAuthApplicationIsMaster(command.payload.isMaster),
-                clientIds: new OAuthApplicationClientIds(command.payload.clientIds),
+                isMaster: new OAuthApplicationIsMaster(
+                    command.payload.isMaster,
+                ),
+                clientIds: new OAuthApplicationClientIds(
+                    command.payload.clientIds,
+                ),
             },
             command.cQMetadata,
         );

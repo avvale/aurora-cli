@@ -1,561 +1,480 @@
 {
     "info": {
-		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-		"name"          : "@app - tools/procedure",
-		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - tools/procedure",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-			"name": "GraphQL - toolsCreateProcedure",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "GraphQL - toolsCreateProcedure",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:ToolsCreateProcedureInput!)\n{\n\ttoolsCreateProcedure (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 24857789587503930000, \n\t\t\"name\": \"Tasty Metal Hat\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"s2884tdd747bsnc\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Voluptates ex quis. Quidem eos quam fugiat necessitatibus id aut cum quo. Labore quia modi quia quisquam blanditiis illum. Et voluptate temporibus quia. Voluptatum rerum amet.\", \n\t\t\"downScript\": \"Ipsum corporis excepturi sequi veniam odio blanditiis reiciendis libero. Autem sit voluptatibus consectetur unde in qui aperiam ut illo. Eaque dolor aut illo voluptatem. Accusamus occaecati eos repellendus.\", \n\t\t\"sort\": 7117, \n\t\t\"hash\": \"4f72oxbawkdb85hzyzom06wivaq4j41c6s4rswy0j32mchtw8t1pvjkqiw8joo0\", \n\t\t\"executedAt\": \"2025-11-11 11:58:34\", \n\t\t\"checkedAt\": \"2025-11-10 16:42:48\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsCreateProcedures",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[ToolsCreateProcedureInput]!)\n{\n\ttoolsCreateProcedures (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"428bc4af-49c8-4f3e-b4a6-b6465018e0f1\", \n\t\t\t\"rowId\": 34535054621138874000, \n\t\t\t\"name\": \"Handcrafted Granite Pants\", \n\t\t\t\"type\": 'TRIGGER', \n\t\t\t\"version\": \"rkcsma5uzqmshnn\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Rerum neque minus non. Consectetur veniam molestias ut ad beatae alias. Quae sit vitae et dolor beatae sed officiis sit. Quia totam veritatis eaque. Quos eum corrupti et cumque quas. Minus natus alias amet et aut.\", \n\t\t\t\"downScript\": \"Et ratione quod quia accusamus voluptate nihil consequatur. Qui beatae et. Commodi commodi corrupti voluptate sit exercitationem inventore. Dolor iure optio quia in.\", \n\t\t\t\"sort\": 6486, \n\t\t\t\"hash\": \"9xo6je7f3p4toln09etwujcdtxgs8xksvlkiwp7t8enxkiakuq5l3y5eb63mfcq\", \n\t\t\t\"executedAt\": \"2025-11-11 03:03:30\", \n\t\t\t\"checkedAt\": \"2025-11-10 22:59:23\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8205dc3f-e1e6-4b94-bd87-8080340fbdca\", \n\t\t\t\"rowId\": 83371994598032180000, \n\t\t\t\"name\": \"Ergonomic Soft Chicken\", \n\t\t\t\"type\": 'FUNCTION', \n\t\t\t\"version\": \"txndy4qzxuahslm\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Laudantium itaque ex sunt nesciunt sapiente est molestias ab harum. Dignissimos commodi doloremque sit id asperiores facilis placeat. Dolorem non non cum. Consequatur non sit nam maxime sit quaerat quo. Qui ipsum voluptate eos molestiae sit. Recusandae ab quas laboriosam necessitatibus.\", \n\t\t\t\"downScript\": \"Voluptatem provident nulla placeat. Esse qui voluptate eos quasi numquam. Cum voluptas repellendus. Laudantium sit id delectus et amet impedit neque quidem. Sunt quia beatae suscipit laudantium.\", \n\t\t\t\"sort\": 6884, \n\t\t\t\"hash\": \"6g8tbvli37xpt68zsrg2c5oqg4my00r5wo9tk29vs2t02bpwu78iigepxizqaut\", \n\t\t\t\"executedAt\": \"2025-11-11 06:34:23\", \n\t\t\t\"checkedAt\": \"2025-11-10 22:44:34\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"35f80035-a3c0-4782-8a06-6e79637bdd9c\", \n\t\t\t\"rowId\": 27665218488852767000, \n\t\t\t\"name\": \"Fantastic Cotton Sausages\", \n\t\t\t\"type\": 'FUNCTION', \n\t\t\t\"version\": \"wiujc84zku5m9n4\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Minus dolore architecto unde aliquam doloremque blanditiis qui ea vero. Possimus ut dolorem est eum laboriosam voluptates ad excepturi. Doloremque et minima. Officia velit ut et esse illo vero optio consequatur.\", \n\t\t\t\"downScript\": \"Rerum a et omnis voluptatem iusto et. Explicabo doloribus dolor inventore aut officia. Omnis natus occaecati repellendus dolor possimus. Occaecati esse eaque quod perspiciatis recusandae.\", \n\t\t\t\"sort\": 7102, \n\t\t\t\"hash\": \"da9gwnyi0tl4f2yyk8ddeju9wmkwyvm6jx2flynm8sgcgvjg3yl1mqfcvr877bl\", \n\t\t\t\"executedAt\": \"2025-11-10 14:51:18\", \n\t\t\t\"checkedAt\": \"2025-11-10 23:19:00\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"43ab1a6c-cfc3-4948-9b8a-17ea873cabc9\", \n\t\t\t\"rowId\": 54029253539126900000, \n\t\t\t\"name\": \"Generic Granite Ball\", \n\t\t\t\"type\": 'PROCEDURE', \n\t\t\t\"version\": \"svnys2ndix1wux5\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Quia est consectetur deleniti eum. Deserunt qui in aliquam sapiente occaecati ut tenetur in. Perferendis sit qui praesentium minima at fuga sit deserunt quam. Et pariatur ducimus velit id.\", \n\t\t\t\"downScript\": \"Asperiores unde alias. Ratione minus quia asperiores consequatur eum. Exercitationem consequatur consequuntur aut excepturi velit et accusantium. Ut aut eveniet voluptatem modi dolorum cupiditate quo ipsum quia. Distinctio totam quia autem voluptates aut eos.\", \n\t\t\t\"sort\": 3988, \n\t\t\t\"hash\": \"3nw49fuv6mp2w50s4hc1lquwdjj2ktpnpqh0om96in26slakzn8gxzkp5wh8d56\", \n\t\t\t\"executedAt\": \"2025-11-11 01:57:27\", \n\t\t\t\"checkedAt\": \"2025-11-11 01:02:10\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1122832b-562f-43c3-a2cb-8b6aede10b14\", \n\t\t\t\"rowId\": 48757371895409460000, \n\t\t\t\"name\": \"Tasty Frozen Bacon\", \n\t\t\t\"type\": 'FUNCTION', \n\t\t\t\"version\": \"fhtj1x336rbgp84\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Distinctio voluptatibus veniam porro eius quod dignissimos. Aut voluptas dolor quas modi laudantium amet ipsam explicabo placeat. Doloremque inventore velit explicabo sunt optio eos. Labore aut rerum sint alias rem porro magni expedita. Iusto libero perspiciatis rerum ut totam consequatur accusamus.\", \n\t\t\t\"downScript\": \"Culpa eaque ut sunt exercitationem quia ut vel excepturi. Sunt id enim non molestiae. Ad saepe quae autem autem id consequatur minima quia minus.\", \n\t\t\t\"sort\": 3588, \n\t\t\t\"hash\": \"tjfjnvjd78820v9ejx3itayw0sm4bp45oy1ogr4qhelkpivm951l9iybp1cz3yn\", \n\t\t\t\"executedAt\": \"2025-11-11 06:51:57\", \n\t\t\t\"checkedAt\": \"2025-11-10 19:58:10\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9b30e5ae-9b26-484b-867d-68923e36a76b\", \n\t\t\t\"rowId\": 15542565201754194000, \n\t\t\t\"name\": \"Sleek Rubber Gloves\", \n\t\t\t\"type\": 'PROCEDURE', \n\t\t\t\"version\": \"kr0c465s2jaci8t\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Sit non distinctio. Saepe quia molestiae reprehenderit saepe. Nesciunt maxime fuga sapiente et dolorem. Qui voluptatem officiis perferendis beatae delectus sapiente et. Error aut nulla.\", \n\t\t\t\"downScript\": \"Magni illo et nihil ipsa qui. Nisi voluptatum vel quam aliquid maiores. Suscipit qui delectus culpa ut qui natus eos perferendis.\", \n\t\t\t\"sort\": 4270, \n\t\t\t\"hash\": \"xtr1rd7nh5kop1bu7j46cnf64h3sm87fibp9av3a9o0ecrkdlw8oh7u44js2rb2\", \n\t\t\t\"executedAt\": \"2025-11-10 18:58:01\", \n\t\t\t\"checkedAt\": \"2025-11-11 13:23:15\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6ff31e9d-9728-4fe3-8f9c-52a882ccd099\", \n\t\t\t\"rowId\": 33349816152733940000, \n\t\t\t\"name\": \"Generic Plastic Tuna\", \n\t\t\t\"type\": 'FUNCTION', \n\t\t\t\"version\": \"zg7ww20k7pje6w9\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Velit voluptatem sit autem. Exercitationem est non facilis dolor esse distinctio porro ut culpa. Enim qui temporibus qui porro quo. Incidunt et amet nisi quam earum. Est delectus sed qui. Accusamus autem dolor odit.\", \n\t\t\t\"downScript\": \"Cum possimus sed. Quos porro laborum sequi nam. Saepe aliquid odio recusandae dignissimos enim sed.\", \n\t\t\t\"sort\": 7119, \n\t\t\t\"hash\": \"dmtwivewuk2us2w0rltku6tzwlyvk0pgsy0d5hgaf27q242rmhbbjigqyx1dced\", \n\t\t\t\"executedAt\": \"2025-11-11 04:19:27\", \n\t\t\t\"checkedAt\": \"2025-11-11 08:18:43\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8380cc91-f3b6-4415-a2e7-c82a5bd411b5\", \n\t\t\t\"rowId\": 94890683462300350000, \n\t\t\t\"name\": \"Refined Concrete Keyboard\", \n\t\t\t\"type\": 'FUNCTION', \n\t\t\t\"version\": \"ojhhh5upppmbdfj\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Numquam iste voluptatum debitis consequatur aut odit. Tempora impedit suscipit quae atque voluptatem. Ut consectetur aliquam. Omnis in neque temporibus ea quod corrupti mollitia. Rem dolor fugit accusamus ut perspiciatis laboriosam quas cupiditate fuga. Laborum ad commodi sed.\", \n\t\t\t\"downScript\": \"Consequatur ab vel similique dolores nihil culpa cupiditate. Nobis voluptatibus dicta consequuntur et voluptatem vel. Molestias deserunt incidunt. Cum velit voluptatem quisquam praesentium at provident cupiditate magni temporibus. Unde ut dolorem dignissimos.\", \n\t\t\t\"sort\": 6263, \n\t\t\t\"hash\": \"2hfym3wjds6s2jah41kueq5j54o4lt2hax6yu169kmih0cq50lper4vlkkecrk9\", \n\t\t\t\"executedAt\": \"2025-11-11 11:35:57\", \n\t\t\t\"checkedAt\": \"2025-11-11 09:32:36\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3fa53540-24bc-4678-8125-6e42d3418e06\", \n\t\t\t\"rowId\": 35489129903441640000, \n\t\t\t\"name\": \"Unbranded Plastic Chair\", \n\t\t\t\"type\": 'PROCEDURE', \n\t\t\t\"version\": \"rkb3wj5e9l4fnfi\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Possimus soluta harum. Voluptatem quasi omnis nisi aliquid. Harum nostrum qui esse ullam quia qui quas qui minima.\", \n\t\t\t\"downScript\": \"Est non magnam sint ut libero cum. Et consequatur dicta magni unde tenetur exercitationem excepturi dolor. Et ipsam fugit reiciendis aliquam nesciunt eligendi dolorum suscipit ad. Veritatis ut error. Quia unde magnam similique at fugit.\", \n\t\t\t\"sort\": 4332, \n\t\t\t\"hash\": \"me4bj572arm70zstm2x5lk63t5jr2oizwl1rg6q6x3vd94crtduvyus5vinqkhr\", \n\t\t\t\"executedAt\": \"2025-11-11 05:07:56\", \n\t\t\t\"checkedAt\": \"2025-11-10 21:57:30\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b777ca89-4649-4464-9ff1-8494baf26ad4\", \n\t\t\t\"rowId\": 52191700967789800000, \n\t\t\t\"name\": \"Unbranded Concrete Pizza\", \n\t\t\t\"type\": 'TRIGGER', \n\t\t\t\"version\": \"6cyarnwy49foxs7\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Molestiae quae quia. Labore commodi quis sint omnis ea numquam non nesciunt hic. Facilis harum perferendis facere porro. Voluptas quae qui minus. Provident et magni dignissimos consequatur illum voluptatem corrupti itaque.\", \n\t\t\t\"downScript\": \"Pariatur dolor est expedita ratione voluptatibus rem sit voluptates. Sequi qui et expedita aut qui facilis aut doloribus. Aut iste ducimus quam et ipsam in. Error mollitia voluptatem possimus.\", \n\t\t\t\"sort\": 3578, \n\t\t\t\"hash\": \"1b7zopbg3mh6ou5cpzoq5a6lm84e4punyqrq5x88zmyqcmoi7sp9uail3v5lkuh\", \n\t\t\t\"executedAt\": \"2025-11-11 09:29:09\", \n\t\t\t\"checkedAt\": \"2025-11-10 17:31:24\"\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsPaginateProcedures",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\ttoolsPaginateProcedures (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsGetProcedures",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\ttoolsGetProcedures (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsFindProcedure",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\ttoolsFindProcedure (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsFindProcedureById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\ttoolsFindProcedureById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsUpdateProcedure",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:ToolsUpdateProcedureInput!)\n{\n\ttoolsUpdateProcedure (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 28197695931048456000, \n\t\t\"name\": \"Licensed Rubber Bacon\", \n\t\t\"type\": 'PROCEDURE', \n\t\t\"version\": \"54lmdtu8uh0q6r2\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Laudantium repellat soluta quia repellat itaque velit ducimus expedita. Quas ea omnis molestiae. Magni laboriosam nihil assumenda ipsum consequuntur. Nemo omnis non et. Facere sed saepe accusamus doloribus sapiente.\", \n\t\t\"downScript\": \"In a illum qui omnis autem illo. Hic ipsam est porro asperiores aut officia sit. Pariatur possimus optio.\", \n\t\t\"sort\": 9249, \n\t\t\"hash\": \"61vf2uvvjzw9ng2llhm48d10nq98md9tdcu1iev8k2hk8kicmapus0felyxwvc4\", \n\t\t\"executedAt\": \"2025-11-10 15:31:56\", \n\t\t\"checkedAt\": \"2025-11-11 07:44:44\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsDeleteProcedureById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\ttoolsDeleteProcedureById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsDeleteProcedures",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\ttoolsDeleteProcedures (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - tools/procedure/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:ToolsCreateProcedureInput!)\n{\n\ttoolsCreateProcedure (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Fantastic Fresh Mouse\", \n\t\t\"type\": 'TRIGGER', \n\t\t\"version\": \"mtaw7obycrmuhpn\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"In non dolor nisi officiis. Qui beatae error magni nihil eius assumenda omnis quo et. Et quod sed unde deleniti aut. Sunt sit quis natus maiores iusto possimus tempora.\", \n\t\t\"downScript\": \"Modi aperiam fugit error voluptatem. Laboriosam quibusdam quaerat odit commodi. Cum omnis officiis necessitatibus occaecati commodi dolores nobis omnis quia. Quam autem fugit veritatis ab perferendis culpa. Et quaerat officia quas et amet qui. Aut tenetur repellat similique inventore magni.\", \n\t\t\"sort\": 5928, \n\t\t\"hash\": \"yjwfngk5duja809qgdcfc4dw3s6hvwu31bp8vwdquh3w5akvf1je1iu7r0qqozj\", \n\t\t\"executedAt\": \"2025-07-29 02:15:42\", \n\t\t\"checkedAt\": \"2025-07-29 08:57:30\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 16706662496261677000, \n\t\"name\": \"Licensed Fresh Pizza\", \n\t\"type\": 'PROCEDURE', \n\t\"version\": \"wkflzyzi4xd36q0\", \n\t\"isActive\": true, \n\t\"isExecuted\": false, \n\t\"isUpdated\": false, \n\t\"upScript\": \"Nemo consequuntur ea doloremque. Possimus voluptatibus illum distinctio fugiat est enim ut cum. Cum voluptatum culpa distinctio voluptas consequatur autem laboriosam in sapiente. Voluptatem ut id commodi animi enim molestias. Libero aliquam aperiam. Non qui ut sit iusto dolore necessitatibus.\", \n\t\"downScript\": \"Qui quam delectus minima non sunt veniam necessitatibus qui. Exercitationem ut est quam natus sed cumque consequatur. Libero blanditiis occaecati dolorum qui quam earum voluptas. Consequuntur vel nam neque natus dolorem rerum magni repellendus aperiam. Accusantium ut ipsum eligendi dolores.\", \n\t\"sort\": 4912, \n\t\"hash\": \"hz4pih4fbu4ibfc67y4tjb2l400s4tv4my7x08axb9f9yla29rwmi9tpltcu5vl\", \n\t\"executedAt\": \"2025-11-11 04:34:04\", \n\t\"checkedAt\": \"2025-11-11 04:16:49\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedure/create",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "procedure", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsCreateProcedures",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:[ToolsCreateProcedureInput]!)\n{\n\ttoolsCreateProcedures (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"3d98abaa-abb2-453d-ba9b-d4676b388ecb\", \n\t\t\t\"name\": \"Incredible Fresh Sausages\", \n\t\t\t\"type\": 'TRIGGER', \n\t\t\t\"version\": \"pr6p6zuysiz0ekt\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Labore similique et. Ut facilis sed doloribus pariatur soluta reprehenderit ipsum iusto. Est aut quam deserunt voluptas. Soluta ex expedita provident repudiandae.\", \n\t\t\t\"downScript\": \"Aspernatur vel est architecto atque cupiditate odio suscipit quos ad. Quis et amet expedita qui. Rerum debitis ratione officia impedit distinctio corrupti.\", \n\t\t\t\"sort\": 8321, \n\t\t\t\"hash\": \"vmzw1ocr9v9a9z2ea7ez2yqdhx2k3d02j4vwthaebl8eyuoxtgvdb29mvtq3rqk\", \n\t\t\t\"executedAt\": \"2025-07-29 04:02:50\", \n\t\t\t\"checkedAt\": \"2025-07-29 11:15:25\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3c10e111-63bd-4fb0-b332-de6a1e61fde7\", \n\t\t\t\"name\": \"Handmade Concrete Keyboard\", \n\t\t\t\"type\": 'TRIGGER', \n\t\t\t\"version\": \"u0zfgtv2u01ma14\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Tempora perspiciatis esse inventore quo quia vero excepturi. Numquam ipsa quia. Nobis quis eos rerum et. Nam autem officiis nemo voluptate voluptate minus.\", \n\t\t\t\"downScript\": \"In aliquam et molestias eius libero quo architecto. Illum aperiam et harum. Natus repudiandae et facere sint sed et. Et quam consectetur harum voluptatem est saepe. Perspiciatis est et quia.\", \n\t\t\t\"sort\": 7382, \n\t\t\t\"hash\": \"lx037v14cos0e6f30aj3ychgc8sk0opuuhxkqcs699u28erzfwlki6uy3uwsvxr\", \n\t\t\t\"executedAt\": \"2025-07-29 17:17:26\", \n\t\t\t\"checkedAt\": \"2025-07-29 02:29:15\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"19d9b514-cca1-4141-86f0-ddf5fcac48e5\", \n\t\t\t\"name\": \"Licensed Plastic Bacon\", \n\t\t\t\"type\": 'PROCEDURE', \n\t\t\t\"version\": \"9cxdbu5zg7fmyox\", \n\t\t\t\"isActive\": false, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Odio reiciendis tempore iste aut. Fuga cum quasi et molestiae nesciunt neque fugit. Nostrum eum enim exercitationem tenetur assumenda corrupti quae dolor. Dolorum impedit vel consequatur magni in suscipit ipsa.\", \n\t\t\t\"downScript\": \"Molestias et amet cupiditate dignissimos qui officia accusantium. Natus ut omnis aut iusto quos voluptatem occaecati quia laudantium. Pariatur aut quibusdam nemo rerum dolorem expedita perspiciatis. Eum ipsum molestiae explicabo officiis quasi quod.\", \n\t\t\t\"sort\": 2515, \n\t\t\t\"hash\": \"c20mvrqycfnsnpzehr199urebzshdk8oo2bawfui0ckpi3l29yqz2mf282r0p8i\", \n\t\t\t\"executedAt\": \"2025-07-29 11:22:27\", \n\t\t\t\"checkedAt\": \"2025-07-29 12:11:14\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f8417d55-8442-4b43-91ea-bc8fdcda3a13\", \n\t\t\t\"name\": \"Handmade Wooden Shoes\", \n\t\t\t\"type\": 'PROCEDURE', \n\t\t\t\"version\": \"m5q7n9j4upgmax3\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"In laudantium nihil animi ipsa quis. Earum ducimus qui doloribus incidunt mollitia asperiores in voluptatem at. Natus rerum quod voluptatum in omnis nostrum.\", \n\t\t\t\"downScript\": \"Laborum voluptates alias aut eos porro quis fugiat quo magnam. Magnam enim aperiam eos. Minima tenetur quidem asperiores et iste aliquid. Corrupti perspiciatis doloribus et. Animi porro est officia accusantium est necessitatibus eligendi qui.\", \n\t\t\t\"sort\": 5075, \n\t\t\t\"hash\": \"fwdwjsmnquo9bzhh0i8txmsp5zv2b0obanqxgsjee6i4ljugua2yc2k91ibldjo\", \n\t\t\t\"executedAt\": \"2025-07-29 21:31:10\", \n\t\t\t\"checkedAt\": \"2025-07-29 20:50:46\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"aa22ff9c-2a49-4878-80a9-6e9b999a9673\", \n\t\t\t\"name\": \"Awesome Wooden Fish\", \n\t\t\t\"type\": 'PROCEDURE', \n\t\t\t\"version\": \"20utkzxnsaxjinc\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Eos est natus deserunt est. Occaecati sunt quae. Provident assumenda aliquid et ratione expedita maiores. Eaque aperiam facilis consequatur qui atque temporibus.\", \n\t\t\t\"downScript\": \"Est eum quae ex et qui. Error maiores placeat ab eum ipsa rem ea. Unde non quaerat doloribus et asperiores. Quis et ullam dolorem vero et. Distinctio voluptatem et ea. Animi vel enim corporis omnis adipisci accusamus quia.\", \n\t\t\t\"sort\": 5637, \n\t\t\t\"hash\": \"6kw0c2rhsdoyxfnbat7uay3g05nwaddc2btb8exvwjqakhceu869y2xwdwlyewa\", \n\t\t\t\"executedAt\": \"2025-07-29 04:32:50\", \n\t\t\t\"checkedAt\": \"2025-07-29 05:39:30\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0939e07d-a252-454f-9451-9bbce3707184\", \n\t\t\t\"name\": \"Fantastic Frozen Shirt\", \n\t\t\t\"type\": 'FUNCTION', \n\t\t\t\"version\": \"9unf2nli1vza9dc\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Repudiandae laborum hic. Iure est in rerum sit aliquam. Laborum ut dolorum et et nihil. Neque architecto labore voluptas cupiditate explicabo sint a molestiae dolor. Distinctio qui aut rerum sint ut rerum. Sit expedita expedita sunt aliquid sint commodi facere.\", \n\t\t\t\"downScript\": \"Autem ducimus rem et officia. Porro consequuntur minima cupiditate vel minus velit libero non ut. Illum fugit ut temporibus commodi consequatur consequatur. Ut dolorem repellat quibusdam similique architecto commodi dolores ullam. Tempora quia accusamus et.\", \n\t\t\t\"sort\": 1753, \n\t\t\t\"hash\": \"9n48tfghiqnjiaxbvpmst8a7qvip5y64f1rp6hq4m7za3s975c7bbfhl7sz7b27\", \n\t\t\t\"executedAt\": \"2025-07-29 21:49:36\", \n\t\t\t\"checkedAt\": \"2025-07-29 21:05:35\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b1f13043-6e54-4753-b29a-b50e367a4571\", \n\t\t\t\"name\": \"Small Rubber Ball\", \n\t\t\t\"type\": 'PROCEDURE', \n\t\t\t\"version\": \"vd3ecl0ctdu8vkq\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": true, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Modi voluptatem ut eos ut soluta porro porro dolores necessitatibus. Odit qui alias perferendis magni nihil aut minima. Doloribus sit dicta deleniti autem vel dignissimos nesciunt aspernatur magnam.\", \n\t\t\t\"downScript\": \"Sint aut est doloremque nisi esse optio. Architecto soluta et a nesciunt necessitatibus. Quod nemo voluptatibus dolores. Eligendi consequuntur voluptate nisi est sed eum sed officiis enim.\", \n\t\t\t\"sort\": 1132, \n\t\t\t\"hash\": \"mqb21wc6659f3wrs0ktkmmmitp4w3ais255cjldnwk5pmug9ajvpkp5drd9v6hw\", \n\t\t\t\"executedAt\": \"2025-07-29 06:04:12\", \n\t\t\t\"checkedAt\": \"2025-07-29 16:47:45\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a1b58c8a-ffdb-4cb6-a09d-22932585a111\", \n\t\t\t\"name\": \"Tasty Wooden Gloves\", \n\t\t\t\"type\": 'TRIGGER', \n\t\t\t\"version\": \"1keexofqns2jtia\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Quo in aut repudiandae dolores soluta voluptas id et saepe. Commodi molestias quisquam nemo ad. Omnis debitis sint placeat. Nobis a similique voluptas et in qui suscipit et.\", \n\t\t\t\"downScript\": \"Suscipit minus tenetur dicta placeat odit saepe qui. Culpa et aut ducimus porro praesentium. Harum rerum qui. Enim vel eum. Neque mollitia quia dolorem laudantium.\", \n\t\t\t\"sort\": 8304, \n\t\t\t\"hash\": \"yfrmirs5612yi7rud7yxf6u5un0ljfkfpznb5w1va45mih8dzm8zci9469db4qa\", \n\t\t\t\"executedAt\": \"2025-07-29 17:22:28\", \n\t\t\t\"checkedAt\": \"2025-07-29 19:10:49\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2a346f27-a2b2-43d1-8a1f-ac72cdfd56a1\", \n\t\t\t\"name\": \"Sleek Wooden Bacon\", \n\t\t\t\"type\": 'PROCEDURE', \n\t\t\t\"version\": \"b6wb3s19prrkgos\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": true, \n\t\t\t\"upScript\": \"Voluptatem autem rerum veniam voluptas id. Eum sed omnis commodi repudiandae distinctio optio. Fugiat atque et aut.\", \n\t\t\t\"downScript\": \"Quo fuga impedit debitis nostrum quaerat earum aut. Voluptates ut rem quo aut dicta praesentium illum. Molestiae officia et est nesciunt et velit expedita unde neque. Mollitia totam non sit voluptate harum cupiditate qui. Et hic nostrum corrupti minus labore dolorem asperiores ipsum recusandae. Blanditiis accusamus ut esse quaerat praesentium quos.\", \n\t\t\t\"sort\": 3304, \n\t\t\t\"hash\": \"0319jum391b30pft6w29acioxg2cguh5haeehit0sijmbyxb4ivl2aqfb6qczn9\", \n\t\t\t\"executedAt\": \"2025-07-29 19:37:00\", \n\t\t\t\"checkedAt\": \"2025-07-29 22:40:44\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d30b2d00-577c-494a-869d-e96a1ffe660e\", \n\t\t\t\"name\": \"Refined Rubber Bacon\", \n\t\t\t\"type\": 'FUNCTION', \n\t\t\t\"version\": \"4gzhw0c8m4ydlhe\", \n\t\t\t\"isActive\": true, \n\t\t\t\"isExecuted\": false, \n\t\t\t\"isUpdated\": false, \n\t\t\t\"upScript\": \"Consectetur quos libero dicta. Quia illo quia. Autem recusandae alias alias sint. Est error vitae.\", \n\t\t\t\"downScript\": \"Consequatur illum optio quibusdam commodi quae. Sed ut natus at molestias. Commodi rem maiores. Et perspiciatis repellat exercitationem cumque vero est voluptas alias nostrum.\", \n\t\t\t\"sort\": 5277, \n\t\t\t\"hash\": \"h7nlsa6dwg2aaqzu67qxnbe5o0ng1e1zfgsb1lrq1ed8svy94pxag0xz5qj2o5c\", \n\t\t\t\"executedAt\": \"2025-07-29 08:58:52\", \n\t\t\t\"checkedAt\": \"2025-07-29 01:46:49\"\n\t\t}\n\t]\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - toolsPaginateProcedures",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/procedures/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\ttoolsPaginateProcedures (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"1b086fc7-c571-4b12-9288-051070dbc78f\", \n\t\t\"rowId\": 40932154359541236000, \n\t\t\"name\": \"Awesome Metal Bacon\", \n\t\t\"type\": 'TRIGGER', \n\t\t\"version\": \"oxi8suepnkr9i25\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Et odio corporis blanditiis. Debitis optio sunt aut impedit iste vel vitae. Omnis modi et natus ea assumenda at ratione.\", \n\t\t\"downScript\": \"Saepe placeat est ullam dicta expedita deserunt veniam. Molestias magni ut eos inventore. Dicta velit quos.\", \n\t\t\"sort\": 4436, \n\t\t\"hash\": \"45mfo6f4undd913bl5u2vj0b9ga3bayk12nxwo18vlde82zh89oxv9wa191r9kc\", \n\t\t\"executedAt\": \"2025-11-10 17:11:10\", \n\t\t\"checkedAt\": \"2025-11-10 22:22:51\"\n\t}, \n\t{\n\t\t\"id\": \"b88971e0-722f-4645-98a4-3264657b7c25\", \n\t\t\"rowId\": 35355373355248435000, \n\t\t\"name\": \"Gorgeous Steel Ball\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"y22p0pw00xdsfta\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Est maxime quos molestiae porro dicta tempore. Est cupiditate aut dolor. Ab id dignissimos et incidunt magni dolor sit possimus. Qui quis asperiores aut porro inventore. Ut dicta ipsam repudiandae quidem ut quidem quaerat.\", \n\t\t\"downScript\": \"Molestias consequatur quia qui saepe voluptatum rerum atque aut. Natus officia iusto provident. Nobis velit itaque impedit. Laboriosam suscipit animi. Sit dolorem provident nemo quia sequi itaque velit quibusdam.\", \n\t\t\"sort\": 4263, \n\t\t\"hash\": \"zj272pxbrl2q72929c2nsr7jae8dpkbhtcmi026odk9mlxjm83tafxyp1o3mo1j\", \n\t\t\"executedAt\": \"2025-11-10 23:52:02\", \n\t\t\"checkedAt\": \"2025-11-11 04:43:34\"\n\t}, \n\t{\n\t\t\"id\": \"2afc0f7c-ba00-4a86-9d29-dae2560d7523\", \n\t\t\"rowId\": 94649761850243090000, \n\t\t\"name\": \"Unbranded Steel Pizza\", \n\t\t\"type\": 'PROCEDURE', \n\t\t\"version\": \"k298hpg1a95vng6\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Voluptas dolore expedita nobis. Suscipit fugit sint omnis voluptas sit. Non tempora non et nemo vel quo voluptatibus expedita.\", \n\t\t\"downScript\": \"Tempore fugiat voluptas odio minima accusamus molestias. Molestiae voluptatem illo est voluptatem facilis eum exercitationem cupiditate architecto. Ipsam doloribus non necessitatibus est consequatur expedita. Ipsam natus dicta sit quisquam sint.\", \n\t\t\"sort\": 2480, \n\t\t\"hash\": \"s6ybcgp6jcol4rzctelpmpnbenz4u0u91l7vuc4lkdd06an4q5vcfjkjquwxc57\", \n\t\t\"executedAt\": \"2025-11-11 10:49:22\", \n\t\t\"checkedAt\": \"2025-11-11 08:31:10\"\n\t}, \n\t{\n\t\t\"id\": \"01cab0f3-296d-49aa-a93b-e424ed005220\", \n\t\t\"rowId\": 32977282416604070000, \n\t\t\"name\": \"Unbranded Steel Bacon\", \n\t\t\"type\": 'PROCEDURE', \n\t\t\"version\": \"fam5moubo6d0dj7\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Totam assumenda sit. In suscipit omnis vel. Laudantium tenetur reprehenderit id inventore. Laboriosam assumenda odit voluptatem. Quis sunt unde eaque ut voluptates enim ut. Qui consequatur nihil molestias voluptate ut voluptatem.\", \n\t\t\"downScript\": \"Suscipit ab cupiditate magnam. Consequuntur facere quia repellat praesentium vel quam. Eos nam aut autem laboriosam deleniti fuga. Saepe impedit sit sint distinctio natus et sed.\", \n\t\t\"sort\": 6444, \n\t\t\"hash\": \"y9bbnd6mkpmd69kpq5vaw6ocymaoml0j440esb96a7pusr2nz00eh6mhk42zfjo\", \n\t\t\"executedAt\": \"2025-11-10 21:11:53\", \n\t\t\"checkedAt\": \"2025-11-10 21:26:28\"\n\t}, \n\t{\n\t\t\"id\": \"1b9cb1cd-10a9-4abb-91b2-f7c5b38cdb99\", \n\t\t\"rowId\": 78506688393343660000, \n\t\t\"name\": \"Licensed Soft Shoes\", \n\t\t\"type\": 'TRIGGER', \n\t\t\"version\": \"pb2689unx9vv788\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Facilis illo quas minus unde eius id rem ipsa. Et dolorem asperiores ex magnam laudantium esse veritatis. Et ipsum praesentium. Ad magni molestias sunt recusandae sapiente reiciendis corporis.\", \n\t\t\"downScript\": \"Esse autem est dicta inventore nihil et sit. Dolorem rerum illo voluptatem ullam eos accusamus. Et et laborum aut tenetur. Quaerat voluptatem quia maiores temporibus aut. Totam ut eum autem.\", \n\t\t\"sort\": 8321, \n\t\t\"hash\": \"gi2xz8q898f1m073jhdio08ldr5rszyklr4xhb57v0uw0a02zh4nruoe8934jey\", \n\t\t\"executedAt\": \"2025-11-10 17:41:51\", \n\t\t\"checkedAt\": \"2025-11-10 14:45:42\"\n\t}, \n\t{\n\t\t\"id\": \"1cfb02e6-b88f-45a0-9271-e67df8f335b7\", \n\t\t\"rowId\": 81802739086896040000, \n\t\t\"name\": \"Ergonomic Wooden Chair\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"13b30jaf8zu6yf7\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Quis culpa expedita voluptatibus officiis. Sit exercitationem et doloremque. Nisi sequi labore. Laborum vitae et aliquam sint quis dicta. Qui voluptas eos aliquam. Eos quia maiores ad eum suscipit rerum facere.\", \n\t\t\"downScript\": \"In dignissimos molestiae ducimus. Perferendis ipsam quisquam totam tenetur ut. Quisquam itaque suscipit mollitia et laudantium iste. Itaque adipisci saepe vel voluptas vero et. Sit et est minus pariatur. Sed est asperiores.\", \n\t\t\"sort\": 7135, \n\t\t\"hash\": \"j7a45akz6kwjii8zub9e1rvt2drvvbxh1xeolmns70wg9h1y9yer2y7w7tpo7h6\", \n\t\t\"executedAt\": \"2025-11-11 02:32:14\", \n\t\t\"checkedAt\": \"2025-11-11 00:55:15\"\n\t}, \n\t{\n\t\t\"id\": \"0db803c8-3a66-4977-89e6-e9feb54492d1\", \n\t\t\"rowId\": 27401045349010715000, \n\t\t\"name\": \"Refined Concrete Gloves\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"8um4cq66w0cnhm2\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Incidunt recusandae cum velit nobis quis alias aut dolores. Corporis rem mollitia officia molestiae officiis facere unde. Voluptate porro rem at quasi beatae natus a.\", \n\t\t\"downScript\": \"Facilis dolorum illum facere molestiae quis eaque laborum. Sunt qui sunt ut voluptatibus animi. Aspernatur voluptas minus omnis sed exercitationem voluptatem. Odio nemo provident. Est est aut reiciendis sint officiis atque sequi. Qui cum minus numquam mollitia.\", \n\t\t\"sort\": 6213, \n\t\t\"hash\": \"hzqet9wv1umgyvjp5soi0cvp0b1qgmv0w33axdpdsl8mjfvtm8kz1f49gehqza4\", \n\t\t\"executedAt\": \"2025-11-11 11:50:05\", \n\t\t\"checkedAt\": \"2025-11-11 05:42:45\"\n\t}, \n\t{\n\t\t\"id\": \"5c7ab55d-77d5-433c-ab97-9278f43aae02\", \n\t\t\"rowId\": 92196681397773570000, \n\t\t\"name\": \"Refined Granite Computer\", \n\t\t\"type\": 'TRIGGER', \n\t\t\"version\": \"bg6ej533a1hnq7f\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Autem assumenda sunt iure aut blanditiis id dolorem rem qui. Fugit nostrum sint voluptatum iste facilis et perferendis voluptate repellendus. Ipsa aut pariatur iusto error amet ab. Nemo et sit tempora molestias molestiae. Vitae distinctio alias reprehenderit itaque corrupti quibusdam totam numquam.\", \n\t\t\"downScript\": \"Vitae aliquam quos rerum qui et id. Neque ullam dolores incidunt voluptatibus suscipit. Sunt deleniti consequatur. Eos ducimus minus nulla. Autem maxime odit fugit fugit quos. Assumenda nulla repellat qui.\", \n\t\t\"sort\": 2118, \n\t\t\"hash\": \"7h57dxl23l2snw19wq0fsqkfaexpk0inqei3s7tntgf8p5882s8pj7fl0pqd70i\", \n\t\t\"executedAt\": \"2025-11-11 14:24:11\", \n\t\t\"checkedAt\": \"2025-11-10 20:57:47\"\n\t}, \n\t{\n\t\t\"id\": \"74ef0ebe-5196-4f8f-8355-b7a77a4a87cf\", \n\t\t\"rowId\": 81123043976418690000, \n\t\t\"name\": \"Fantastic Plastic Computer\", \n\t\t\"type\": 'PROCEDURE', \n\t\t\"version\": \"d9ke3j2wwbvwj00\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Id quo suscipit nemo eos ipsa doloribus dolores voluptatem. Dolorem eos accusamus rem harum velit repudiandae sed. Tempora quisquam architecto rerum hic. Perspiciatis dolorem rerum sed nisi. Cum sapiente sint autem. Quae minus quidem.\", \n\t\t\"downScript\": \"Facilis iure harum dicta magnam consequatur sit necessitatibus. Veniam dolorem enim quis repellat esse necessitatibus non quia voluptate. Incidunt atque nesciunt ad doloribus ad adipisci omnis eum.\", \n\t\t\"sort\": 1050, \n\t\t\"hash\": \"rpgzmjbpi323vk5c11awrc4f0cl1j0l79bv4rpn7okha881seah9239nxhh9p0g\", \n\t\t\"executedAt\": \"2025-11-10 20:29:21\", \n\t\t\"checkedAt\": \"2025-11-11 00:40:23\"\n\t}, \n\t{\n\t\t\"id\": \"aa43f7fe-8110-4635-ba7f-f26f7d72257e\", \n\t\t\"rowId\": 91454028014832780000, \n\t\t\"name\": \"Gorgeous Granite Chair\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"s3cojt1ysuku293\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Consequuntur architecto quia cumque illo recusandae. Nisi provident asperiores. Deserunt voluptates nulla quis ad repellendus. Consequatur est et quae architecto aspernatur. Ipsam dolorum id autem earum suscipit tempore itaque repellendus quos.\", \n\t\t\"downScript\": \"Ullam dolorem libero laboriosam neque totam repellat assumenda blanditiis. Sit quia odio assumenda eos omnis. Esse dicta consequuntur non.\", \n\t\t\"sort\": 4364, \n\t\t\"hash\": \"5t3ldbjxese7rh0fyygl58x7vox0im8l7d1plzkg7t6v7lqmxkwpo8hrs4z4qux\", \n\t\t\"executedAt\": \"2025-11-10 19:27:22\", \n\t\t\"checkedAt\": \"2025-11-11 04:15:36\"\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedures/create",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "procedures", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsGetProcedures",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/procedures/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\ttoolsGetProcedures (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedures/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "procedures", "paginate"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsFindProcedure",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/procedures/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\ttoolsFindProcedure (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedures/get",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "procedures", "get"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsFindProcedureById",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/procedure/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($id:ID)\n{\n\ttoolsFindProcedureById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedure/find",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "procedure", "find"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsUpdateProcedure",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/procedure/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:ToolsUpdateProcedureInput!)\n{\n\ttoolsUpdateProcedure (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Practical Wooden Table\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"wdo58x8ixniyp2e\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Quo itaque voluptate suscipit officiis quibusdam veniam. Labore voluptatem est dolor optio veritatis quaerat. Ipsum voluptates in sit distinctio earum. Placeat laboriosam molestias eos autem sed et aut est dolore.\", \n\t\t\"downScript\": \"A asperiores eum. Voluptas optio distinctio natus delectus velit. Eos possimus consequatur libero aliquam et et suscipit. Quia est fugit impedit quae occaecati. Quis ut laudantium eligendi tempora laudantium consectetur. Quis soluta consequatur tempora exercitationem quaerat placeat.\", \n\t\t\"sort\": 4814, \n\t\t\"hash\": \"qi1l5iw8492djd6ie5nmimlkyb68jjtcvl9ux0ryhgi9j16ly7t1tkus5qgcgn2\", \n\t\t\"executedAt\": \"2025-07-29 05:17:17\", \n\t\t\"checkedAt\": \"2025-07-29 07:21:39\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - toolsDeleteProcedureById",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\ttoolsDeleteProcedureById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - toolsDeleteProcedures",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\ttoolsDeleteProcedures (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\ttype\n\t\tversion\n\t\tisActive\n\t\tisExecuted\n\t\tisUpdated\n\t\tupScript\n\t\tdownScript\n\t\tsort\n\t\thash\n\t\texecutedAt\n\t\tcheckedAt\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/procedure/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Licensed Plastic Keyboard\", \n\t\"type\": 'PROCEDURE', \n\t\"version\": \"eczi8wewz03gcgu\", \n\t\"isActive\": false, \n\t\"isExecuted\": true, \n\t\"isUpdated\": false, \n\t\"upScript\": \"Ullam culpa beatae nostrum tenetur dolor nulla et aliquam architecto. Autem dolorem ratione suscipit amet. Rerum hic velit. Rem minus pariatur aut aut totam qui sint iure et. Recusandae corporis eius.\", \n\t\"downScript\": \"Accusantium fugiat omnis velit rerum sunt odio itaque. Id id et. Beatae dignissimos laboriosam laudantium ut. Molestias alias aliquam est nihil et alias quasi voluptatibus. Asperiores architecto rerum tenetur aut ab neque voluptatem molestiae modi. Aut natus rerum in sunt possimus quasi harum.\", \n\t\"sort\": 4749, \n\t\"hash\": \"4b5jgrst3a1fkmesw3hoencqz9bi02tfgeky89pgujlq0tqfjnl0e57n5g96rd5\", \n\t\"executedAt\": \"2025-07-29 23:09:14\", \n\t\"checkedAt\": \"2025-07-29 18:02:16\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedure/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"procedure",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/procedures/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"d753ec29-968d-40d3-b07e-9ffe81f20b5b\", \n\t\t\"name\": \"Ergonomic Rubber Chicken\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"q9yk1n4mltmaewh\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Repudiandae aut aliquid tempore. Ut sapiente earum ullam iste ut. Rem dolorum pariatur aperiam ad nisi et maiores modi. Incidunt saepe itaque et vitae labore laborum. Aperiam ipsam quo sed aut quia quo perferendis ab.\", \n\t\t\"downScript\": \"Dolorum et sed quia vitae quidem veniam dolorum ipsa. Ab quibusdam est nulla facilis. Eveniet id veritatis ab.\", \n\t\t\"sort\": 4804, \n\t\t\"hash\": \"qmqwsfcjtxm5jzafezeqbg4olaysasv381lmjcixj2va4woz5ynvgk5isnnh8vw\", \n\t\t\"executedAt\": \"2025-07-29 17:30:41\", \n\t\t\"checkedAt\": \"2025-07-29 13:44:25\"\n\t}, \n\t{\n\t\t\"id\": \"be0a03e0-a2a8-4a20-8342-641091a46b22\", \n\t\t\"name\": \"Small Granite Shirt\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"ff317cwwxyntdia\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Rerum rerum nobis sed nihil. Voluptates nemo modi deserunt repellendus voluptatum reprehenderit similique nostrum asperiores. Ut saepe repellat enim placeat quaerat aperiam alias rerum. Molestiae consequatur ratione aut.\", \n\t\t\"downScript\": \"Et hic ad cum eveniet dolorem eum doloribus. Officia voluptatem culpa eveniet aut dolor consequatur. Dolorem laborum id dolores qui enim ducimus reprehenderit praesentium. Molestiae enim numquam corporis reprehenderit illo eveniet.\", \n\t\t\"sort\": 6745, \n\t\t\"hash\": \"6sxel565v23v467mc0e6t5tjfit7xlk6fzab341xnu83lg0fm1sudu24n362qak\", \n\t\t\"executedAt\": \"2025-07-29 04:39:45\", \n\t\t\"checkedAt\": \"2025-07-29 06:40:54\"\n\t}, \n\t{\n\t\t\"id\": \"d5f981a5-1c5f-4cd3-bdb5-81496b58c5fb\", \n\t\t\"name\": \"Unbranded Fresh Chair\", \n\t\t\"type\": 'PROCEDURE', \n\t\t\"version\": \"bl2lgdyya5bfbxk\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Dolore et id fugiat temporibus. Quas vel et ex quasi. Incidunt non exercitationem rerum ullam et totam. Totam voluptatem non. Repellendus voluptatum eum atque.\", \n\t\t\"downScript\": \"Sed est itaque unde rerum et. Labore itaque iusto cum ut numquam adipisci. Accusamus est laudantium dolor. Officia perferendis quia. Iste dolorem quo officia asperiores aliquam dolorum iure.\", \n\t\t\"sort\": 4129, \n\t\t\"hash\": \"10p7szjmx7mzeesd10udpyius216z8rz9r1tlmt2xjnnnjvdll92swsh7l407vu\", \n\t\t\"executedAt\": \"2025-07-29 17:34:11\", \n\t\t\"checkedAt\": \"2025-07-29 21:58:06\"\n\t}, \n\t{\n\t\t\"id\": \"2d5deff4-ffdf-4f55-9ab5-da54603c486a\", \n\t\t\"name\": \"Intelligent Fresh Bacon\", \n\t\t\"type\": 'TRIGGER', \n\t\t\"version\": \"dii9xjidt2i4n0s\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Sit aliquid nemo delectus exercitationem asperiores sint est. Sed cum aut non non sunt rerum ut error. Quod sit labore. Repellat nihil minus a architecto aspernatur quia veritatis modi. Vero voluptate a ea.\", \n\t\t\"downScript\": \"Consequatur quia non numquam enim iste. Non recusandae reprehenderit eius dolor iure at maiores. Debitis debitis enim tempora quis. Deleniti ea et cum officia dolores pariatur voluptatibus quae quo. Et consequatur ipsum inventore libero. Beatae aliquam enim sit et saepe in.\", \n\t\t\"sort\": 4543, \n\t\t\"hash\": \"d7uhdnqjflno2f3ci600ydblr0vdnvpo7jvvza2vwn43vd2yvyz9y2tuuwga0uv\", \n\t\t\"executedAt\": \"2025-07-29 08:12:45\", \n\t\t\"checkedAt\": \"2025-07-29 03:42:16\"\n\t}, \n\t{\n\t\t\"id\": \"f6a772b0-80a9-4dbd-a627-26e77a9d076e\", \n\t\t\"name\": \"Practical Plastic Shirt\", \n\t\t\"type\": 'PROCEDURE', \n\t\t\"version\": \"mhs34jiuwb72wkh\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Sunt eum ut eos quia qui. Iusto voluptatum ullam molestias animi tenetur amet quis et non. Optio iusto deleniti animi. Atque qui quis nihil perspiciatis quaerat ipsum sit saepe. Ut veniam animi facere.\", \n\t\t\"downScript\": \"Voluptatum fugiat neque ipsa quas quibusdam. Maiores laborum et nam. Et eos earum hic quia eum facilis.\", \n\t\t\"sort\": 5754, \n\t\t\"hash\": \"6thxe83p6pyuc67agjn33mlfhc3gkr430mmo5sbx22eep0axtc5wrexc5wl6nch\", \n\t\t\"executedAt\": \"2025-07-29 04:51:38\", \n\t\t\"checkedAt\": \"2025-07-29 15:13:52\"\n\t}, \n\t{\n\t\t\"id\": \"e88387fe-4c4f-4bf8-875b-8d5141eb87ba\", \n\t\t\"name\": \"Intelligent Soft Soap\", \n\t\t\"type\": 'PROCEDURE', \n\t\t\"version\": \"phct98ou2jnnkmt\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Vel labore molestiae et ducimus ratione dolor. Qui eligendi maxime sapiente ullam. Nisi in accusamus consequuntur sint. Fugit in velit perferendis fuga nemo ad reprehenderit tempora. Odit consequatur aperiam aut aut tempore qui quia.\", \n\t\t\"downScript\": \"Animi aliquam molestias provident eum occaecati assumenda. Assumenda veritatis sit nobis perferendis. Iste qui quaerat architecto neque doloribus ad qui non omnis. Et debitis distinctio animi non natus sit. Iusto molestias sapiente harum non recusandae maiores. Sint ex impedit quos.\", \n\t\t\"sort\": 3944, \n\t\t\"hash\": \"kn31u4dgazfu4oyeg7ok43g823bbubwjcp1e8gkkfjkkbfd9ub797n1c7ar5jte\", \n\t\t\"executedAt\": \"2025-07-29 18:32:17\", \n\t\t\"checkedAt\": \"2025-07-29 10:25:53\"\n\t}, \n\t{\n\t\t\"id\": \"675ff6b1-31e6-45c1-8976-7445ff628586\", \n\t\t\"name\": \"Fantastic Frozen Table\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"29trno1zu43tp25\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Officia consequatur sint id. Rem voluptatem aspernatur aperiam perspiciatis aliquid quidem. Nostrum debitis quaerat dolorem quis laborum. Aut laborum et optio maiores neque. Quis sunt minus quia ab sed debitis non officia.\", \n\t\t\"downScript\": \"Temporibus et est aspernatur vitae. Suscipit illo sit et libero temporibus libero incidunt recusandae. Libero voluptatem praesentium sapiente illo nemo libero voluptas iure asperiores. Ex sint esse voluptatem quaerat velit ut aut. Facilis rerum voluptas. Dolor rerum quae ut a.\", \n\t\t\"sort\": 5099, \n\t\t\"hash\": \"6d2m8zvtn5a8o1ongsl5pbok3okpebzmeih08xs16cjljvj1n2oazhe4rv3wvot\", \n\t\t\"executedAt\": \"2025-07-29 13:35:10\", \n\t\t\"checkedAt\": \"2025-07-29 09:04:14\"\n\t}, \n\t{\n\t\t\"id\": \"3987ae6c-94f3-4522-8f4a-a466033261a0\", \n\t\t\"name\": \"Incredible Cotton Fish\", \n\t\t\"type\": 'FUNCTION', \n\t\t\"version\": \"j5k53s0fl7pwln5\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Aspernatur saepe eligendi a sit minima. Iusto omnis earum distinctio adipisci delectus labore est. A nihil eveniet deserunt beatae non nobis ab. Quis sit qui rem voluptatibus. Magnam sit voluptas inventore fugit molestiae quia minus maxime. At assumenda molestiae voluptatem et est maxime ratione excepturi.\", \n\t\t\"downScript\": \"Sed eos eos minima animi ut iusto voluptas. Cumque dolor officiis dicta est. Magni consectetur cumque dolore odit reprehenderit esse. Provident est aspernatur occaecati qui ut eum consequatur.\", \n\t\t\"sort\": 3793, \n\t\t\"hash\": \"k4xcwzq8twdp1k06cnseh03ilnjc4mkw1tkthyxfvilbkzwpokf1bxbxlxdjriy\", \n\t\t\"executedAt\": \"2025-07-29 01:34:27\", \n\t\t\"checkedAt\": \"2025-07-29 01:15:59\"\n\t}, \n\t{\n\t\t\"id\": \"e841652f-4289-49e0-a60b-dcbfa7dd72f7\", \n\t\t\"name\": \"Awesome Cotton Bacon\", \n\t\t\"type\": 'TRIGGER', \n\t\t\"version\": \"k75684ioklwa1s4\", \n\t\t\"isActive\": false, \n\t\t\"isExecuted\": false, \n\t\t\"isUpdated\": true, \n\t\t\"upScript\": \"Pariatur et ipsa repellat nulla rerum quo eaque. Exercitationem aspernatur eum iusto ea veniam. Hic aut sunt iure fugiat placeat laboriosam nesciunt eum. Impedit sed architecto sint consequatur ea dolorem. Inventore veniam eius consequatur.\", \n\t\t\"downScript\": \"Dolore eos eum veniam reprehenderit eos. Vero qui explicabo. Et placeat aut possimus tempore quis.\", \n\t\t\"sort\": 2746, \n\t\t\"hash\": \"bsmi9cod82ik711ee11iq52dkb9fjuux8yc6ci8hu21ww3h04w0oqtf61llm12g\", \n\t\t\"executedAt\": \"2025-07-29 09:34:49\", \n\t\t\"checkedAt\": \"2025-07-29 16:19:51\"\n\t}, \n\t{\n\t\t\"id\": \"555694ef-0e70-48d3-8610-7f49933e0292\", \n\t\t\"name\": \"Handcrafted Soft Hat\", \n\t\t\"type\": 'PROCEDURE', \n\t\t\"version\": \"2f4hxrttgoowrb7\", \n\t\t\"isActive\": true, \n\t\t\"isExecuted\": true, \n\t\t\"isUpdated\": false, \n\t\t\"upScript\": \"Consequuntur doloremque quia aliquam sint rerum totam. Est ut laborum exercitationem quia quia et amet amet est. Modi non rerum temporibus illum aut earum maiores est non. Iste quidem ut magnam exercitationem quis dolore quibusdam quis. Sit ipsa et id repellat tempore saepe accusamus quisquam.\", \n\t\t\"downScript\": \"Beatae nihil voluptatibus. Odio esse ea repellat. Voluptatem qui et. Nihil et modi.\", \n\t\t\"sort\": 4967, \n\t\t\"hash\": \"ou1z0uyccgamxjbdb3txg12orjamah7s37n9ezzffych3q0e5mx98zataj5hjk6\", \n\t\t\"executedAt\": \"2025-07-29 20:00:39\", \n\t\t\"checkedAt\": \"2025-07-29 16:25:59\"\n\t}\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedures/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"procedures",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/procedures/paginate",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedures/paginate",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-                        "procedures",
-                        "paginate"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/procedures/get",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedures/get",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"procedures",
-                        "get"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/procedure/find",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedure/find",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"procedure",
-                        "find"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/procedure/find/{id}",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedure/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"procedure",
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedure/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "tools",
+                        "procedure",
                         "find",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - tools/procedure/update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Ergonomic Granite Hat\", \n\t\"type\": 'FUNCTION', \n\t\"version\": \"hfxvugkkwoxktlg\", \n\t\"isActive\": true, \n\t\"isExecuted\": true, \n\t\"isUpdated\": true, \n\t\"upScript\": \"Earum dolores quo. Voluptatibus aspernatur dolorem. Enim cupiditate consequatur aperiam. Molestias adipisci qui quo iure.\", \n\t\"downScript\": \"Molestiae error est minima. Veritatis inventore tempora qui dolorem quia. Pariatur ut voluptatem. Consequatur molestiae omnis aut ad facere laudantium enim aperiam nihil. Odit excepturi ut sequi numquam ullam autem. Consectetur accusamus quos.\", \n\t\"sort\": 8980, \n\t\"hash\": \"yto1kfv97onywxnoiiny54fx9lk58hf4eb8d8aix7ss9ezzchu63lnvbc9p2omj\", \n\t\"executedAt\": \"2025-07-29 06:13:53\", \n\t\"checkedAt\": \"2025-07-29 14:42:22\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedure/update",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"procedure",
-                        "update"
-					]
-				}
-			},
-			"response": []
+            "name": "REST - tools/procedure/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 41503632897490860000, \n\t\"name\": \"Fantastic Plastic Table\", \n\t\"type\": 'FUNCTION', \n\t\"version\": \"c353y589qm01osi\", \n\t\"isActive\": false, \n\t\"isExecuted\": true, \n\t\"isUpdated\": false, \n\t\"upScript\": \"Dolor nemo debitis voluptas cupiditate omnis earum. Eum dignissimos deserunt earum qui corporis quaerat non quidem. Ex rem doloribus ut. Corrupti non eveniet libero officia rerum beatae sed quo. Quis magni sunt officia quam et error perferendis. Maxime ea fuga sunt magnam excepturi sed ex esse.\", \n\t\"downScript\": \"Consequatur ut voluptatem sunt aspernatur suscipit. Laboriosam maiores laudantium sed optio optio. Veritatis et eaque non ipsa laboriosam amet. Harum iste culpa quam in blanditiis. Corrupti libero nesciunt repellat aut eligendi in.\", \n\t\"sort\": 7889, \n\t\"hash\": \"l13pt3abbzx31rso5ahbpmuk3f2yv316r6cfhdhxyx9tonp4okf6jwqo290ao1q\", \n\t\"executedAt\": \"2025-11-11 13:06:01\", \n\t\"checkedAt\": \"2025-11-10 19:22:31\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedure/update",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "procedure", "update"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - tools/procedure/delete/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedure/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"procedure",
+            "name": "REST - tools/procedure/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedure/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "tools",
+                        "procedure",
                         "delete",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
-		},
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
         {
-			"name": "REST - tools/procedures/delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/procedures/delete",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"procedures",
-                        "delete"
-					]
-				}
-			},
-			"response": []
-		}
+            "name": "REST - tools/procedures/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/procedures/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "procedures", "delete"]
+                }
+            },
+            "response": []
+        }
     ],
     "variable": [
-		{
-			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-			"key": "URL",
-			"value": "http://localhost:8080",
-			"type": "string"
-		}
-	]
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
 }

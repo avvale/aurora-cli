@@ -4,56 +4,59 @@ import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteBoundedContextByIdController', () =>
-{
+describe('IamDeleteBoundedContextByIdController', () => {
     let handler: IamDeleteBoundedContextByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteBoundedContextByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamDeleteBoundedContextByIdHandler>(IamDeleteBoundedContextByIdHandler);
+        handler = module.get<IamDeleteBoundedContextByIdHandler>(
+            IamDeleteBoundedContextByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteBoundedContextByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteBoundedContextByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an boundedContext deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
+        test('should return an boundedContext deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockBoundedContextData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     iamMockBoundedContextData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockBoundedContextData[0]);
+            ).toBe(iamMockBoundedContextData[0]);
         });
     });
 });

@@ -5,60 +5,65 @@ import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdatePermissionRoleByIdHandler', () =>
-{
+describe('IamUpdatePermissionRoleByIdHandler', () => {
     let handler: IamUpdatePermissionRoleByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdatePermissionRoleByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamUpdatePermissionRoleByIdHandler>(IamUpdatePermissionRoleByIdHandler);
+        handler = module.get<IamUpdatePermissionRoleByIdHandler>(
+            IamUpdatePermissionRoleByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamUpdatePermissionRoleByIdHandler should be defined', () =>
-    {
+    test('IamUpdatePermissionRoleByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdatePermissionRoleByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdatePermissionRoleByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a permissionRole updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionRoleData[0])));
+        test('should return a permissionRole updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockPermissionRoleData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
-                    <IamUpdatePermissionRoleByIdInput>iamMockPermissionRoleData[0],
+                    <IamUpdatePermissionRoleByIdInput>(
+                        iamMockPermissionRoleData[0]
+                    ),
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(iamMockPermissionRoleData[0]);
+                ),
+            ).toBe(iamMockPermissionRoleData[0]);
         });
     });
 });

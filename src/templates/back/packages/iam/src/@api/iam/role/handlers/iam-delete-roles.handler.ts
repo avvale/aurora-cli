@@ -1,12 +1,16 @@
 import { IamRole } from '@api/graphql';
 import { IamRoleDto } from '@api/iam/role';
 import { IamDeleteRolesCommand, IamGetRolesQuery } from '@app/iam/role';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import {
+    AuditingMeta,
+    ICommandBus,
+    IQueryBus,
+    QueryStatement,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamDeleteRolesHandler
-{
+export class IamDeleteRolesHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -17,26 +21,21 @@ export class IamDeleteRolesHandler
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRole[] | IamRoleDto[]>
-    {
-        const roles = await this.queryBus.ask(new IamGetRolesQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<IamRole[] | IamRoleDto[]> {
+        const roles = await this.queryBus.ask(
+            new IamGetRolesQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
-        await this.commandBus.dispatch(new IamDeleteRolesCommand(
-            queryStatement,
-            constraint,
-            {
+        await this.commandBus.dispatch(
+            new IamDeleteRolesCommand(queryStatement, constraint, {
                 timezone,
                 repositoryOptions: {
                     auditing,
                 },
-            },
-        ));
+            }),
+        );
 
         return roles;
     }

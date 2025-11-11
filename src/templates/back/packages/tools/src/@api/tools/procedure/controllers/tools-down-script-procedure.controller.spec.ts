@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { ToolsDownScriptProcedureHandler } from '../handlers/tools-down-script-procedure.handler';
 import { ToolsDownScriptProcedureController } from './tools-down-script-procedure.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDownScriptProcedureController', () =>
-{
+describe('ToolsDownScriptProcedureController', () => {
     let controller: ToolsDownScriptProcedureController;
     let handler: ToolsDownScriptProcedureHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                ToolsDownScriptProcedureController,
-            ],
+            imports: [],
+            controllers: [ToolsDownScriptProcedureController],
             providers: [
                 {
-                    provide : ToolsDownScriptProcedureHandler,
+                    provide: ToolsDownScriptProcedureHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<ToolsDownScriptProcedureController>(ToolsDownScriptProcedureController);
-        handler = module.get<ToolsDownScriptProcedureHandler>(ToolsDownScriptProcedureHandler);
+        controller = module.get<ToolsDownScriptProcedureController>(
+            ToolsDownScriptProcedureController,
+        );
+        handler = module.get<ToolsDownScriptProcedureHandler>(
+            ToolsDownScriptProcedureHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDownScriptProcedureController should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDownScriptProcedureController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

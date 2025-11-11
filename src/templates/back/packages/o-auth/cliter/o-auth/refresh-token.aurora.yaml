@@ -14,6 +14,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: accessTokenId
     type: id
     nullable: false
@@ -44,6 +49,17 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - createBatch
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert
 excludedFiles:
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.ts
   - src/@api/o-auth/refresh-token/controllers/o-auth-create-refresh-token.controller.spec.ts

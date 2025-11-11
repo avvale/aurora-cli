@@ -1,8 +1,11 @@
-import { OAuthCreatedApplicationClientEvent } from './o-auth-created-application-client.event';
+import { OAuthCreatedApplicationClientEvent } from '@app/o-auth/application-client';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthCreatedApplicationsClientsEvent
-{
+export class OAuthCreatedApplicationsClientsEvent {
     constructor(
-        public readonly applicationsClients: OAuthCreatedApplicationClientEvent[],
+        public readonly event: {
+            payload: OAuthCreatedApplicationClientEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

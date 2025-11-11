@@ -4,55 +4,55 @@ import { toolsMockProcedureData } from '@app/tools/procedure';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsCreateProcedureHandler', () =>
-{
+describe('ToolsCreateProcedureHandler', () => {
     let handler: ToolsCreateProcedureHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsCreateProcedureHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsCreateProcedureHandler>(ToolsCreateProcedureHandler);
+        handler = module.get<ToolsCreateProcedureHandler>(
+            ToolsCreateProcedureHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('ToolsCreateProcedureHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsCreateProcedureHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an procedure created', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockProcedureData[0])));
+        test('should return an procedure created', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockProcedureData[0]),
+                    ),
+            );
             expect(
-                await handler.main(
-                    toolsMockProcedureData[0],
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(toolsMockProcedureData[0]);
+                await handler.main(toolsMockProcedureData[0], 'Europe/Madrid'),
+            ).toBe(toolsMockProcedureData[0]);
         });
     });
 });

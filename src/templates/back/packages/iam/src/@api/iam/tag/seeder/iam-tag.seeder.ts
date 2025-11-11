@@ -1,20 +1,16 @@
-import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 //
-import { iamMockTagData } from '@app/iam/tag';
 
 @Injectable()
-export class IamTagSeeder
-{
+export class IamTagSeeder {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
     ) {}
 
-    async main(): Promise<boolean>
-    {
-
+    async main(): Promise<boolean> {
         return true;
     }
 }

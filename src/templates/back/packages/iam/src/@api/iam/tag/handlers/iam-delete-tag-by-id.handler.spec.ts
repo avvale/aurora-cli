@@ -4,56 +4,50 @@ import { iamMockTagData } from '@app/iam/tag';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteTagByIdController', () =>
-{
+describe('IamDeleteTagByIdController', () => {
     let handler: IamDeleteTagByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteTagByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamDeleteTagByIdHandler>(IamDeleteTagByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteTagByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteTagByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an tag deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTagData[0])));
+        test('should return an tag deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTagData[0])),
+            );
             expect(
-                await handler.main(
-                    iamMockTagData[0].id,
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockTagData[0]);
+                await handler.main(iamMockTagData[0].id, {}, 'Europe/Madrid'),
+            ).toBe(iamMockTagData[0]);
         });
     });
 });

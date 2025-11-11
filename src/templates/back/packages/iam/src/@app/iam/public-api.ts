@@ -46,24 +46,7 @@ export const IamModels = [
     IamTagModel
 ];
 export const IamRepositories = [
-    {
-        provide : IamIRoleRepository,
-        useClass: IamSequelizeRoleRepository
-    },
-    {
-        provide : IamIAccountRepository,
-        useClass: IamSequelizeAccountRepository
-    },
-    {
-        provide : IamIUserRepository,
-        useClass: IamSequelizeUserRepository
-    },
-    {
-        provide : IamITenantRepository,
-        useClass: IamSequelizeTenantRepository
-    },
-
-    // ---- customizations ----
+    /* #region customizations */
     {
         provide : IamIPermissionRoleRepository,
         useClass: IamSequelizePermissionRoleRepository
@@ -131,7 +114,25 @@ export const IamRepositories = [
     {
         provide : IamIUserRepository,
         useClass: IamSequelizeUserRepository,
-    }
+    },
+    /* #endregion customizations */
+
+    {
+        provide : IamIRoleRepository,
+        useClass: IamSequelizeRoleRepository
+    },
+    {
+        provide : IamIAccountRepository,
+        useClass: IamSequelizeAccountRepository
+    },
+    {
+        provide : IamIUserRepository,
+        useClass: IamSequelizeUserRepository
+    },
+    {
+        provide : IamITenantRepository,
+        useClass: IamSequelizeTenantRepository
+    },
 ];
 export const IamSagas = [
     IamRoleSagas,

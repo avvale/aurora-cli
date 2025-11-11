@@ -1,28 +1,44 @@
-
-type IamBoundedContext
-{
-    """UUID for bounded context"""
+type IamBoundedContext {
+    """
+    UUID for bounded context
+    """
     id: ID!
-    """Name of the bounded context"""
+    rowId: GraphQLInt!
+    """
+    Name of the bounded context
+    """
     name: GraphQLString!
-    """root folder where the bounded context is located"""
+    """
+    root folder where the bounded context is located
+    """
     root: GraphQLString!
-    """Sort order of the bounded context"""
+    """
+    Sort order of the bounded context
+    """
     sort: GraphQLInt
-    """Indicates if the bounded context is active"""
+    """
+    Indicates if the bounded context is active
+    """
     isActive: GraphQLBoolean!
-    """List of permissions associated with the bounded context"""
+    """
+    List of permissions associated with the bounded context
+    """
     permissions: [IamPermission]
-    """Timestamp when the bounded context was created"""
+    """
+    Timestamp when the bounded context was created
+    """
     createdAt: GraphQLTimestamp
-    """Timestamp when the bounded context was last updated"""
+    """
+    Timestamp when the bounded context was last updated
+    """
     updatedAt: GraphQLTimestamp
-    """Timestamp when the bounded context was deleted"""
+    """
+    Timestamp when the bounded context was deleted
+    """
     deletedAt: GraphQLTimestamp
 }
 
-input IamCreateBoundedContextInput
-{
+input IamCreateBoundedContextInput {
     id: ID!
     name: GraphQLString!
     root: GraphQLString!
@@ -30,8 +46,7 @@ input IamCreateBoundedContextInput
     isActive: GraphQLBoolean!
 }
 
-input IamUpdateBoundedContextByIdInput
-{
+input IamUpdateBoundedContextByIdInput {
     id: ID!
     name: GraphQLString
     root: GraphQLString
@@ -39,8 +54,7 @@ input IamUpdateBoundedContextByIdInput
     isActive: GraphQLBoolean
 }
 
-input IamUpdateBoundedContextsInput
-{
+input IamUpdateBoundedContextsInput {
     id: ID
     name: GraphQLString
     root: GraphQLString
@@ -48,8 +62,7 @@ input IamUpdateBoundedContextsInput
     isActive: GraphQLBoolean
 }
 
-type Query
-{
+type Query {
     iamFindBoundedContext(
         query: QueryStatement
         constraint: QueryStatement
@@ -69,18 +82,14 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     iamCreateBoundedContext(
         payload: IamCreateBoundedContextInput!
     ): IamBoundedContext
 
-    iamCreateBoundedContexts(
-        payload: [IamCreateBoundedContextInput]!
-    ): Boolean!
+    iamCreateBoundedContexts(payload: [IamCreateBoundedContextInput]!): Boolean!
 
     iamUpdateBoundedContextById(
         payload: IamUpdateBoundedContextByIdInput!
@@ -102,5 +111,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [IamBoundedContext]!
-
 }

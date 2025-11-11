@@ -1,57 +1,61 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamPaginateRolesHandler, IamPaginateRolesResolver } from '@api/iam/role';
+import {
+    IamPaginateRolesHandler,
+    IamPaginateRolesResolver,
+} from '@api/iam/role';
 import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginateRolesResolver', () =>
-{
+describe('IamPaginateRolesResolver', () => {
     let resolver: IamPaginateRolesResolver;
     let handler: IamPaginateRolesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamPaginateRolesResolver,
                 {
-                    provide : IamPaginateRolesHandler,
+                    provide: IamPaginateRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamPaginateRolesResolver>(IamPaginateRolesResolver);
+        resolver = module.get<IamPaginateRolesResolver>(
+            IamPaginateRolesResolver,
+        );
         handler = module.get<IamPaginateRolesHandler>(IamPaginateRolesHandler);
     });
 
-    test('IamPaginateRolesResolver should be defined', () =>
-    {
+    test('IamPaginateRolesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginateRolesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginateRolesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a iamMockRoleData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : iamMockRoleData,
-            })));
+        test('should return a iamMockRoleData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: iamMockRoleData,
+                        }),
+                    ),
+            );
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : iamMockRoleData,
+                rows: iamMockRoleData,
             });
         });
     });

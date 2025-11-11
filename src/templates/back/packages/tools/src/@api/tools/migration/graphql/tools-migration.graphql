@@ -1,7 +1,17 @@
-
-type ToolsMigration
-{
+#region customizations
+input ToolsCreateMigrationTemplateInput {
     id: ID!
+    name: GraphQLString!
+    version: GraphQLString!
+    upScript: GraphQLString!
+    downScript: GraphQLString!
+    sort: GraphQLInt!
+}
+#endregion customizations
+
+type ToolsMigration {
+    id: ID!
+    rowId: GraphQLInt!
     name: GraphQLString!
     version: GraphQLString!
     isActive: GraphQLBoolean!
@@ -15,8 +25,7 @@ type ToolsMigration
     deletedAt: GraphQLTimestamp
 }
 
-input ToolsCreateMigrationInput
-{
+input ToolsCreateMigrationInput {
     id: ID!
     name: GraphQLString!
     version: GraphQLString!
@@ -27,8 +36,7 @@ input ToolsCreateMigrationInput
     executedAt: GraphQLTimestamp
 }
 
-input ToolsUpdateMigrationByIdInput
-{
+input ToolsUpdateMigrationByIdInput {
     id: ID!
     name: GraphQLString
     version: GraphQLString
@@ -39,8 +47,7 @@ input ToolsUpdateMigrationByIdInput
     executedAt: GraphQLTimestamp
 }
 
-input ToolsUpdateMigrationsInput
-{
+input ToolsUpdateMigrationsInput {
     id: ID
     name: GraphQLString
     version: GraphQLString
@@ -51,27 +58,13 @@ input ToolsUpdateMigrationsInput
     executedAt: GraphQLTimestamp
 }
 
-input ToolsCreateMigrationTemplateInput
-{
-    id: ID!
-    name: GraphQLString!
-    version: GraphQLString!
-    upScript: GraphQLString!
-    downScript: GraphQLString!
-    sort: GraphQLInt!
-}
-
-type Query
-{
+type Query {
     toolsFindMigration(
         query: QueryStatement
         constraint: QueryStatement
     ): ToolsMigration
 
-    toolsFindMigrationById(
-        id: ID
-        constraint: QueryStatement
-    ): ToolsMigration
+    toolsFindMigrationById(id: ID, constraint: QueryStatement): ToolsMigration
 
     toolsGetMigrations(
         query: QueryStatement
@@ -82,18 +75,12 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    toolsCreateMigration(
-        payload: ToolsCreateMigrationInput!
-    ): ToolsMigration
+type Mutation {
+    toolsCreateMigration(payload: ToolsCreateMigrationInput!): ToolsMigration
 
-    toolsCreateMigrations(
-        payload: [ToolsCreateMigrationInput]!
-    ): Boolean!
+    toolsCreateMigrations(payload: [ToolsCreateMigrationInput]!): Boolean!
 
     toolsUpdateMigrationById(
         payload: ToolsUpdateMigrationByIdInput!
@@ -116,16 +103,10 @@ type Mutation
         constraint: QueryStatement
     ): [ToolsMigration]!
 
-
     # additionalApis
-    toolsUpScriptMigration(
-        migrationId: ID!
-    ): Boolean!
+    toolsUpScriptMigration(migrationId: ID!): Boolean!
 
-    toolsDownScriptMigration(
-        migrationId: ID!
-    ): Boolean!
+    toolsDownScriptMigration(migrationId: ID!): Boolean!
 
     toolsRunScriptsMigration: Boolean!
-
 }

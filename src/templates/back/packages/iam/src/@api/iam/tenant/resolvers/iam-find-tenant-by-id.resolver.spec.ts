@@ -1,50 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamFindTenantByIdHandler, IamFindTenantByIdResolver } from '@api/iam/tenant';
+import {
+    IamFindTenantByIdHandler,
+    IamFindTenantByIdResolver,
+} from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTenantByIdResolver', () =>
-{
+describe('IamFindTenantByIdResolver', () => {
     let resolver: IamFindTenantByIdResolver;
     let handler: IamFindTenantByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindTenantByIdResolver,
                 {
-                    provide : IamFindTenantByIdHandler,
+                    provide: IamFindTenantByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamFindTenantByIdResolver>(IamFindTenantByIdResolver);
-        handler = module.get<IamFindTenantByIdHandler>(IamFindTenantByIdHandler);
+        resolver = module.get<IamFindTenantByIdResolver>(
+            IamFindTenantByIdResolver,
+        );
+        handler = module.get<IamFindTenantByIdHandler>(
+            IamFindTenantByIdHandler,
+        );
     });
 
-    test('IamFindTenantByIdResolver should be defined', () =>
-    {
+    test('IamFindTenantByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTenantByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTenantByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an tenant by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
-            expect(await resolver.main(iamMockTenantData[0].id)).toBe(iamMockTenantData[0]);
+        test('should return an tenant by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
+            expect(await resolver.main(iamMockTenantData[0].id)).toBe(
+                iamMockTenantData[0],
+            );
         });
     });
 });

@@ -8,26 +8,21 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @ApiTags('[o-auth] scope')
 @Controller('o-auth/scope/find')
 @Auth('oAuth.scope.get')
-export class OAuthFindScopeByIdController
-{
-    constructor(
-        private readonly handler: OAuthFindScopeByIdHandler,
-    ) {}
+export class OAuthFindScopeByIdController {
+    constructor(private readonly handler: OAuthFindScopeByIdHandler) {}
 
     @Post(':id')
     @HttpCode(200)
     @ApiOperation({ summary: 'Find scope by id' })
-    @ApiOkResponse({ description: 'The record has been successfully requested.', type: OAuthScopeDto })
+    @ApiOkResponse({
+        description: 'The record has been successfully requested.',
+        type: OAuthScopeDto,
+    })
     async main(
         @Param('id') id: string,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
+    ) {
+        return await this.handler.main(id, constraint, timezone);
     }
 }

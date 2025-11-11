@@ -4,61 +4,56 @@ import { iamMockRoleAccountData } from '@app/iam/role-account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteRolesAccountsHandler', () =>
-{
+describe('IamDeleteRolesAccountsHandler', () => {
     let handler: IamDeleteRolesAccountsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteRolesAccountsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamDeleteRolesAccountsHandler>(IamDeleteRolesAccountsHandler);
+        handler = module.get<IamDeleteRolesAccountsHandler>(
+            IamDeleteRolesAccountsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamDeleteRolesAccountsHandler should be defined', () =>
-    {
+    test('IamDeleteRolesAccountsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteRolesAccountsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteRolesAccountsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an iamMockRoleAccountData deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleAccountData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockRoleAccountData);
+        test('should return an iamMockRoleAccountData deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockRoleAccountData)),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                iamMockRoleAccountData,
+            );
         });
     });
 });

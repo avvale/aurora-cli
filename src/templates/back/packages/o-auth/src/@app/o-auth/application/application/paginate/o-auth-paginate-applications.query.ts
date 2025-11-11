@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class OAuthPaginateApplicationsQuery
-{
+export class OAuthPaginateApplicationsQuery {
     constructor(
         public readonly queryStatement?: QueryStatement,
         public readonly constraint?: QueryStatement,

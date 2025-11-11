@@ -1,23 +1,23 @@
 // export commands
 export { IamCreateTagCommand } from './application/create/iam-create-tag.command';
-export { IamUpdateTagByIdCommand } from './application/update/iam-update-tag-by-id.command';
 export { IamDeleteTagByIdCommand } from './application/delete/iam-delete-tag-by-id.command';
+export { IamUpdateTagByIdCommand } from './application/update/iam-update-tag-by-id.command';
 
 // export queries
-export { IamPaginateTagsQuery } from './application/paginate/iam-paginate-tags.query';
-export { IamGetTagsQuery } from './application/get/iam-get-tags.query';
-export { IamFindTagQuery } from './application/find/iam-find-tag.query';
 export { IamFindTagByIdQuery } from './application/find/iam-find-tag-by-id.query';
+export { IamFindTagQuery } from './application/find/iam-find-tag.query';
+export { IamGetTagsQuery } from './application/get/iam-get-tags.query';
+export { IamPaginateTagsQuery } from './application/paginate/iam-paginate-tags.query';
 
 // export mocks
 export { iamMockTagData } from './infrastructure/mock/iam-mock-tag.data';
-export { IamMockTagSeeder } from './infrastructure/mock/iam-mock-tag.seeder';
 export { IamMockTagRepository } from './infrastructure/mock/iam-mock-tag.repository';
+export { IamMockTagSeeder } from './infrastructure/mock/iam-mock-tag.seeder';
 
 // export events
 export { IamAddTagsContextEvent } from './application/events/iam-add-tags-context.event';
-export { IamCreatedTagsEvent } from './application/events/iam-created-tags.event';
 export { IamCreatedTagEvent } from './application/events/iam-created-tag.event';
+export { IamCreatedTagsEvent } from './application/events/iam-created-tags.event';
 export { IamDeletedTagEvent } from './application/events/iam-deleted-tag.event';
 export { IamUpdatedTagEvent } from './application/events/iam-updated-tag.event';
 
@@ -42,29 +42,29 @@ export { IamTagSagas } from './application/sagas/iam-tag.sagas';
 
 // command handlers
 import { IamCreateTagCommandHandler } from './application/create/iam-create-tag.command-handler';
-import { IamUpdateTagByIdCommandHandler } from './application/update/iam-update-tag-by-id.command-handler';
 import { IamDeleteTagByIdCommandHandler } from './application/delete/iam-delete-tag-by-id.command-handler';
+import { IamUpdateTagByIdCommandHandler } from './application/update/iam-update-tag-by-id.command-handler';
 
 // query handlers
-import { IamPaginateTagsQueryHandler } from './application/paginate/iam-paginate-tags.query-handler';
-import { IamGetTagsQueryHandler } from './application/get/iam-get-tags.query-handler';
-import { IamFindTagQueryHandler } from './application/find/iam-find-tag.query-handler';
 import { IamFindTagByIdQueryHandler } from './application/find/iam-find-tag-by-id.query-handler';
+import { IamFindTagQueryHandler } from './application/find/iam-find-tag.query-handler';
+import { IamGetTagsQueryHandler } from './application/get/iam-get-tags.query-handler';
+import { IamPaginateTagsQueryHandler } from './application/paginate/iam-paginate-tags.query-handler';
 
 // event handlers
 import { IamCreatedTagEventHandler } from './application/events/iam-created-tag.event-handler';
 import { IamCreatedTagsEventHandler } from './application/events/iam-created-tags.event-handler';
-import { IamUpdatedTagEventHandler } from './application/events/iam-updated-tag.event-handler';
 import { IamDeletedTagEventHandler } from './application/events/iam-deleted-tag.event-handler';
+import { IamUpdatedTagEventHandler } from './application/events/iam-updated-tag.event-handler';
 
 // services
 import { IamCreateTagService } from './application/create/iam-create-tag.service';
-import { IamPaginateTagsService } from './application/paginate/iam-paginate-tags.service';
-import { IamGetTagsService } from './application/get/iam-get-tags.service';
-import { IamFindTagService } from './application/find/iam-find-tag.service';
-import { IamFindTagByIdService } from './application/find/iam-find-tag-by-id.service';
-import { IamUpdateTagByIdService } from './application/update/iam-update-tag-by-id.service';
 import { IamDeleteTagByIdService } from './application/delete/iam-delete-tag-by-id.service';
+import { IamFindTagByIdService } from './application/find/iam-find-tag-by-id.service';
+import { IamFindTagService } from './application/find/iam-find-tag.service';
+import { IamGetTagsService } from './application/get/iam-get-tags.service';
+import { IamPaginateTagsService } from './application/paginate/iam-paginate-tags.service';
+import { IamUpdateTagByIdService } from './application/update/iam-update-tag-by-id.service';
 
 export const IamTagHandlers = [
     // commands

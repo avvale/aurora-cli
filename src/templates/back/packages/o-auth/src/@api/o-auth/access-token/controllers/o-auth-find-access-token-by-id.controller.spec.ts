@@ -1,46 +1,53 @@
-import { OAuthFindAccessTokenByIdController, OAuthFindAccessTokenByIdHandler } from '@api/o-auth/access-token';
+import {
+    OAuthFindAccessTokenByIdController,
+    OAuthFindAccessTokenByIdHandler,
+} from '@api/o-auth/access-token';
 import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthFindAccessTokenByIdController', () =>
-{
+describe('OAuthFindAccessTokenByIdController', () => {
     let controller: OAuthFindAccessTokenByIdController;
     let handler: OAuthFindAccessTokenByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                OAuthFindAccessTokenByIdController,
-            ],
+            imports: [],
+            controllers: [OAuthFindAccessTokenByIdController],
             providers: [
                 {
-                    provide : OAuthFindAccessTokenByIdHandler,
+                    provide: OAuthFindAccessTokenByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthFindAccessTokenByIdController>(OAuthFindAccessTokenByIdController);
-        handler = module.get<OAuthFindAccessTokenByIdHandler>(OAuthFindAccessTokenByIdHandler);
+        controller = module.get<OAuthFindAccessTokenByIdController>(
+            OAuthFindAccessTokenByIdController,
+        );
+        handler = module.get<OAuthFindAccessTokenByIdHandler>(
+            OAuthFindAccessTokenByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthFindAccessTokenByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthFindAccessTokenByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an accessToken by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData[0])));
-            expect(await controller.main(oAuthMockAccessTokenData[0].id)).toBe(oAuthMockAccessTokenData[0]);
+        test('should return an accessToken by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockAccessTokenData[0]),
+                    ),
+            );
+            expect(await controller.main(oAuthMockAccessTokenData[0].id)).toBe(
+                oAuthMockAccessTokenData[0],
+            );
         });
     });
 });

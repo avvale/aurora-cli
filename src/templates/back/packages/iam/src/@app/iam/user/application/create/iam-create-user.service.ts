@@ -3,7 +3,6 @@ import {
     IamUserAccountId,
     IamUserAvatar,
     IamUserCreatedAt,
-    IamUserDeletedAt,
     IamUserId,
     IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
@@ -21,8 +20,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateUserService
-{
+export class IamCreateUserService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIUserRepository,
@@ -44,11 +42,11 @@ export class IamCreateUserService
             meta: IamUserMeta;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const user = IamUser.register(
             payload.id,
+            undefined, // rowId
             payload.accountId,
             payload.name,
             payload.surname,
@@ -65,17 +63,12 @@ export class IamCreateUserService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            user,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(user, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const userRegister = this.publisher.mergeObjectContext(
-            user,
-        );
+        const userRegister = this.publisher.mergeObjectContext(user);
 
         userRegister.created({
             payload: user,

@@ -2,26 +2,45 @@
 /* eslint-disable key-spacing */
 import { OAuthApplicationClientModel } from '@app/o-auth/application-client';
 import { OAuthClientModel } from '@app/o-auth/client';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsToMany, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsToMany,
+    Column,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'OAuthApplication',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['code'],
-			unique: true,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['code'],
+            unique: true,
+        },
     ],
 })
-export class OAuthApplicationModel extends Model<OAuthApplicationModel>
-{
+export class OAuthApplicationModel extends Model<OAuthApplicationModel> {
     @AfterCreate
-    static auditingCreate(instance: OAuthApplicationModel, options): void
-    {
+    static auditingCreate(instance: OAuthApplicationModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -32,8 +51,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: OAuthApplicationModel, options): void
-    {
+    static auditingBulkCreate(instance: OAuthApplicationModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -44,8 +62,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: OAuthApplicationModel, options): void
-    {
+    static auditingUpdate(instance: OAuthApplicationModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -56,8 +73,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -68,8 +84,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: OAuthApplicationModel, options): void
-    {
+    static auditingDestroy(instance: OAuthApplicationModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -80,8 +95,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -92,8 +106,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: OAuthApplicationModel, options): void
-    {
+    static auditingRestore(instance: OAuthApplicationModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -104,8 +117,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -116,8 +128,7 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: OAuthApplicationModel, options): void
-    {
+    static auditingUpsert(instance: OAuthApplicationModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -134,6 +145,14 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'code',
@@ -164,7 +183,6 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
     })
     isMaster: boolean;
 
-
     @BelongsToMany(() => OAuthClientModel, {
         through: () => OAuthApplicationClientModel,
         uniqueKey: 'Uq01OAuthApplicationClient',
@@ -192,5 +210,4 @@ export class OAuthApplicationModel extends Model<OAuthApplicationModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

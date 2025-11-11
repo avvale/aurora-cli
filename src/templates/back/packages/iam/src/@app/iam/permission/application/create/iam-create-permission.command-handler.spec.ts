@@ -1,50 +1,55 @@
+import {
+    IamCreatePermissionCommand,
+    iamMockPermissionData,
+} from '@app/iam/permission';
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamCreatePermissionCommandHandler } from './iam-create-permission.command-handler';
 import { IamCreatePermissionService } from './iam-create-permission.service';
-import { IamCreatePermissionCommand, iamMockPermissionData } from '@app/iam/permission';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreatePermissionCommandHandler', () =>
-{
+describe('IamCreatePermissionCommandHandler', () => {
     let commandHandler: IamCreatePermissionCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreatePermissionCommandHandler,
                 {
-                    provide : IamCreatePermissionService,
+                    provide: IamCreatePermissionService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamCreatePermissionCommandHandler>(IamCreatePermissionCommandHandler);
+        commandHandler = module.get<IamCreatePermissionCommandHandler>(
+            IamCreatePermissionCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('CreatePermissionCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('CreatePermissionCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the IamCreatePermissionService', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamCreatePermissionCommand(
-                    {
-                        id: iamMockPermissionData[0].id,
-                        name: iamMockPermissionData[0].name,
-                        boundedContextId: iamMockPermissionData[0].boundedContextId,
-                        roleIds: iamMockPermissionData[0].roleIds,
-                    },
-                    { timezone: process.env.TZ },
+        test('should create the values objects and pass them as parameters to the IamCreatePermissionService', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamCreatePermissionCommand(
+                        {
+                            id: iamMockPermissionData[0].id,
+                            rowId: iamMockPermissionData[0].rowId,
+                            name: iamMockPermissionData[0].name,
+                            boundedContextId:
+                                iamMockPermissionData[0].boundedContextId,
+                            roleIds: iamMockPermissionData[0].roleIds,
+                        },
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

@@ -1,32 +1,26 @@
-
-type IamRoleAccount
-{
+type IamRoleAccount {
     roleId: ID!
     role: IamRole
     accountId: ID!
     account: IamAccount
 }
 
-input IamCreateRoleAccountInput
-{
+input IamCreateRoleAccountInput {
     roleId: ID!
     accountId: ID!
 }
 
-input IamUpdateRoleAccountByIdInput
-{
+input IamUpdateRoleAccountByIdInput {
     roleId: ID!
     accountId: ID!
 }
 
-input IamUpdateRolesAccountsInput
-{
+input IamUpdateRolesAccountsInput {
     roleId: ID
     accountId: ID
 }
 
-type Query
-{
+type Query {
     iamFindRoleAccount(
         query: QueryStatement
         constraint: QueryStatement
@@ -47,18 +41,12 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    iamCreateRoleAccount(
-        payload: IamCreateRoleAccountInput!
-    ): IamRoleAccount
+type Mutation {
+    iamCreateRoleAccount(payload: IamCreateRoleAccountInput!): IamRoleAccount
 
-    iamCreateRolesAccounts(
-        payload: [IamCreateRoleAccountInput]!
-    ): Boolean!
+    iamCreateRolesAccounts(payload: [IamCreateRoleAccountInput]!): Boolean!
 
     iamUpdateRoleAccountById(
         payload: IamUpdateRoleAccountByIdInput!
@@ -81,5 +69,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [IamRoleAccount]!
-
 }

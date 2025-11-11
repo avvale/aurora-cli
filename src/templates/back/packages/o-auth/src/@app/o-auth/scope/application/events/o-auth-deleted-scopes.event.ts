@@ -1,8 +1,11 @@
-import { OAuthDeletedScopeEvent } from './o-auth-deleted-scope.event';
+import { OAuthDeletedScopeEvent } from '@app/o-auth/scope';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthDeletedScopesEvent
-{
+export class OAuthDeletedScopesEvent {
     constructor(
-        public readonly scopes: OAuthDeletedScopeEvent[],
+        public readonly event: {
+            payload: OAuthDeletedScopeEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

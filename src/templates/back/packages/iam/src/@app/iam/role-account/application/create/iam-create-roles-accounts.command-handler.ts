@@ -8,24 +8,24 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateRolesAccountsCommand)
-export class IamCreateRolesAccountsCommandHandler implements ICommandHandler<IamCreateRolesAccountsCommand>
+export class IamCreateRolesAccountsCommandHandler
+    implements ICommandHandler<IamCreateRolesAccountsCommand>
 {
     constructor(
         private readonly createRolesAccountsService: IamCreateRolesAccountsService,
     ) {}
 
-    async execute(command: IamCreateRolesAccountsCommand): Promise<void>
-    {
+    async execute(command: IamCreateRolesAccountsCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createRolesAccountsService.main(
-            command.payload
-                .map(roleAccount =>
-                {
-                    return {
-                        roleId: new IamRoleAccountRoleId(roleAccount.roleId),
-                        accountId: new IamRoleAccountAccountId(roleAccount.accountId),
-                    };
-                }),
+            command.payload.map((roleAccount) => {
+                return {
+                    roleId: new IamRoleAccountRoleId(roleAccount.roleId),
+                    accountId: new IamRoleAccountAccountId(
+                        roleAccount.accountId,
+                    ),
+                };
+            }),
             command.cQMetadata,
         );
     }

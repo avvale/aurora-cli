@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class IamFindPermissionRoleByIdQuery
-{
+export class IamFindPermissionRoleByIdQuery {
     constructor(
         public readonly permissionId: string,
         public readonly roleId: string,

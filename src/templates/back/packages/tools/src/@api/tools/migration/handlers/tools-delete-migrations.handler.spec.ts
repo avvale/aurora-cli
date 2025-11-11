@@ -4,61 +4,56 @@ import { toolsMockMigrationData } from '@app/tools/migration';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDeleteMigrationsHandler', () =>
-{
+describe('ToolsDeleteMigrationsHandler', () => {
     let handler: ToolsDeleteMigrationsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsDeleteMigrationsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsDeleteMigrationsHandler>(ToolsDeleteMigrationsHandler);
+        handler = module.get<ToolsDeleteMigrationsHandler>(
+            ToolsDeleteMigrationsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsDeleteMigrationsHandler should be defined', () =>
-    {
+    test('ToolsDeleteMigrationsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDeleteMigrationsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDeleteMigrationsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an toolsMockMigrationData deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(toolsMockMigrationData);
+        test('should return an toolsMockMigrationData deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(toolsMockMigrationData)),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                toolsMockMigrationData,
+            );
         });
     });
 });

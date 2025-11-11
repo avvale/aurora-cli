@@ -4,62 +4,57 @@ import { iamMockTenantData } from '@app/iam/tenant';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginateTenantsHandler', () =>
-{
+describe('IamPaginateTenantsHandler', () => {
     let handler: IamPaginateTenantsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamPaginateTenantsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamPaginateTenantsHandler>(IamPaginateTenantsHandler);
+        handler = module.get<IamPaginateTenantsHandler>(
+            IamPaginateTenantsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamPaginateTenantsHandler should be defined', () =>
-    {
+    test('IamPaginateTenantsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginateTenantsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginateTenantsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a tenants', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+        test('should return a tenants', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: iamMockTenantData.length,
+                            count: iamMockTenantData.length,
+                            rows: iamMockTenantData,
+                        }),
+                    ),
+            );
+            expect(await handler.main({}, {})).toEqual({
                 total: iamMockTenantData.length,
                 count: iamMockTenantData.length,
-                rows : iamMockTenantData,
-            })));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                ),
-            )
-                .toEqual({
-                    total: iamMockTenantData.length,
-                    count: iamMockTenantData.length,
-                    rows : iamMockTenantData,
-                });
+                rows: iamMockTenantData,
+            });
         });
     });
 });

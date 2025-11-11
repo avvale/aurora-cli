@@ -4,61 +4,59 @@ import { oAuthMockApplicationClientData } from '@app/o-auth/application-client';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteApplicationsClientsHandler', () =>
-{
+describe('OAuthDeleteApplicationsClientsHandler', () => {
     let handler: OAuthDeleteApplicationsClientsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthDeleteApplicationsClientsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<OAuthDeleteApplicationsClientsHandler>(OAuthDeleteApplicationsClientsHandler);
+        handler = module.get<OAuthDeleteApplicationsClientsHandler>(
+            OAuthDeleteApplicationsClientsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('OAuthDeleteApplicationsClientsHandler should be defined', () =>
-    {
+    test('OAuthDeleteApplicationsClientsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteApplicationsClientsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteApplicationsClientsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an oAuthMockApplicationClientData deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationClientData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(oAuthMockApplicationClientData);
+        test('should return an oAuthMockApplicationClientData deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockApplicationClientData),
+                    ),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                oAuthMockApplicationClientData,
+            );
         });
     });
 });

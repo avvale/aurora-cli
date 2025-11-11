@@ -18,34 +18,40 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateClientsCommand)
-export class OAuthCreateClientsCommandHandler implements ICommandHandler<OAuthCreateClientsCommand>
+export class OAuthCreateClientsCommandHandler
+    implements ICommandHandler<OAuthCreateClientsCommand>
 {
     constructor(
         private readonly createClientsService: OAuthCreateClientsService,
     ) {}
 
-    async execute(command: OAuthCreateClientsCommand): Promise<void>
-    {
+    async execute(command: OAuthCreateClientsCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createClientsService.main(
-            command.payload
-                .map(client =>
-                {
-                    return {
-                        id: new OAuthClientId(client.id),
-                        grantType: new OAuthClientGrantType(client.grantType),
-                        name: new OAuthClientName(client.name),
-                        secret: new OAuthClientSecret(client.secret),
-                        authUrl: new OAuthClientAuthUrl(client.authUrl),
-                        redirect: new OAuthClientRedirect(client.redirect),
-                        scopeOptions: new OAuthClientScopeOptions(client.scopeOptions),
-                        expiredAccessToken: new OAuthClientExpiredAccessToken(client.expiredAccessToken),
-                        expiredRefreshToken: new OAuthClientExpiredRefreshToken(client.expiredRefreshToken),
-                        isActive: new OAuthClientIsActive(client.isActive),
-                        isMaster: new OAuthClientIsMaster(client.isMaster),
-                        applicationIds: new OAuthClientApplicationIds(client.applicationIds),
-                    };
-                }),
+            command.payload.map((client) => {
+                return {
+                    id: new OAuthClientId(client.id),
+                    grantType: new OAuthClientGrantType(client.grantType),
+                    name: new OAuthClientName(client.name),
+                    secret: new OAuthClientSecret(client.secret),
+                    authUrl: new OAuthClientAuthUrl(client.authUrl),
+                    redirect: new OAuthClientRedirect(client.redirect),
+                    scopeOptions: new OAuthClientScopeOptions(
+                        client.scopeOptions,
+                    ),
+                    expiredAccessToken: new OAuthClientExpiredAccessToken(
+                        client.expiredAccessToken,
+                    ),
+                    expiredRefreshToken: new OAuthClientExpiredRefreshToken(
+                        client.expiredRefreshToken,
+                    ),
+                    isActive: new OAuthClientIsActive(client.isActive),
+                    isMaster: new OAuthClientIsMaster(client.isMaster),
+                    applicationIds: new OAuthClientApplicationIds(
+                        client.applicationIds,
+                    ),
+                };
+            }),
             command.cQMetadata,
         );
     }

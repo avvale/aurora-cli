@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamFindTagHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class IamFindTagHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamTag | IamTagDto>
-    {
-        return await this.queryBus.ask(new IamFindTagQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<IamTag | IamTagDto> {
+        return await this.queryBus.ask(
+            new IamFindTagQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

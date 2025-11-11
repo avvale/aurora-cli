@@ -12,28 +12,28 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsCreateKeyValuesCommand)
-export class ToolsCreateKeyValuesCommandHandler implements ICommandHandler<ToolsCreateKeyValuesCommand>
+export class ToolsCreateKeyValuesCommandHandler
+    implements ICommandHandler<ToolsCreateKeyValuesCommand>
 {
     constructor(
         private readonly createKeyValuesService: ToolsCreateKeyValuesService,
     ) {}
 
-    async execute(command: ToolsCreateKeyValuesCommand): Promise<void>
-    {
+    async execute(command: ToolsCreateKeyValuesCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createKeyValuesService.main(
-            command.payload
-                .map(keyValue =>
-                {
-                    return {
-                        id: new ToolsKeyValueId(keyValue.id),
-                        key: new ToolsKeyValueKey(keyValue.key),
-                        type: new ToolsKeyValueType(keyValue.type),
-                        value: new ToolsKeyValueValue(keyValue.value),
-                        isActive: new ToolsKeyValueIsActive(keyValue.isActive),
-                        description: new ToolsKeyValueDescription(keyValue.description),
-                    };
-                }),
+            command.payload.map((keyValue) => {
+                return {
+                    id: new ToolsKeyValueId(keyValue.id),
+                    key: new ToolsKeyValueKey(keyValue.key),
+                    type: new ToolsKeyValueType(keyValue.type),
+                    value: new ToolsKeyValueValue(keyValue.value),
+                    isActive: new ToolsKeyValueIsActive(keyValue.isActive),
+                    description: new ToolsKeyValueDescription(
+                        keyValue.description,
+                    ),
+                };
+            }),
             command.cQMetadata,
         );
     }

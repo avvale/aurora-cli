@@ -1,5 +1,9 @@
 /* eslint-disable key-spacing */
-import { IamCreatedAccountEvent, IamDeletedAccountEvent, IamUpdatedAccountEvent } from '@app/iam/account';
+import {
+    IamCreatedAccountEvent,
+    IamDeletedAccountEvent,
+    IamUpdatedAccountEvent,
+} from '@app/iam/account';
 import {
     IamAccountClientId,
     IamAccountCode,
@@ -13,6 +17,7 @@ import {
     IamAccountIsActive,
     IamAccountMeta,
     IamAccountRoleIds,
+    IamAccountRowId,
     IamAccountScopes,
     IamAccountTags,
     IamAccountTenantIds,
@@ -27,9 +32,9 @@ import { OAuthClient } from '@app/o-auth/client';
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class IamAccount extends AggregateRoot
-{
+export class IamAccount extends AggregateRoot {
     id: IamAccountId;
+    rowId: IamAccountRowId;
     type: IamAccountType;
     code: IamAccountCode;
     email: IamAccountEmail;
@@ -54,6 +59,7 @@ export class IamAccount extends AggregateRoot
 
     constructor(
         id: IamAccountId,
+        rowId: IamAccountRowId,
         type: IamAccountType,
         code: IamAccountCode,
         email: IamAccountEmail,
@@ -75,10 +81,10 @@ export class IamAccount extends AggregateRoot
         client?: OAuthClient,
         roles?: IamRole[],
         tenants?: IamTenant[],
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.type = type;
         this.code = code;
         this.email = email;
@@ -104,6 +110,7 @@ export class IamAccount extends AggregateRoot
 
     static register(
         id: IamAccountId,
+        rowId: IamAccountRowId,
         type: IamAccountType,
         code: IamAccountCode,
         email: IamAccountEmail,
@@ -125,10 +132,10 @@ export class IamAccount extends AggregateRoot
         client?: OAuthClient,
         roles?: IamRole[],
         tenants?: IamTenant[],
-    ): IamAccount
-    {
+    ): IamAccount {
         return new IamAccount(
             id,
+            rowId,
             type,
             code,
             email,
@@ -153,13 +160,7 @@ export class IamAccount extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: IamAccount;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: IamAccount; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamCreatedAccountEvent({
                 payload: {
@@ -187,13 +188,7 @@ export class IamAccount extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: IamAccount;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: IamAccount; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamUpdatedAccountEvent({
                 payload: {
@@ -221,17 +216,12 @@ export class IamAccount extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: IamAccount;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: IamAccount; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamDeletedAccountEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     type: event.payload.type.value,
                     code: event.payload.code?.value,
                     email: event.payload.email?.value,
@@ -255,10 +245,10 @@ export class IamAccount extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             type: this.type.value,
             code: this.code?.value,
             email: this.email?.value,
@@ -278,14 +268,13 @@ export class IamAccount extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             user: this.user?.toDTO(),
             client: this.client?.toDTO(),
-            roles: this.roles?.map(item => item.toDTO()),
-            tenants: this.tenants?.map(item => item.toDTO()),
+            roles: this.roles?.map((item) => item.toDTO()),
+            tenants: this.tenants?.map((item) => item.toDTO()),
         };
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             type: this.type.value,
@@ -307,8 +296,8 @@ export class IamAccount extends AggregateRoot
             deletedAt: this.deletedAt?.value,
             user: this.user?.toDTO(),
             client: this.client?.toDTO(),
-            roles: this.roles?.map(item => item.toDTO()),
-            tenants: this.tenants?.map(item => item.toDTO()),
+            roles: this.roles?.map((item) => item.toDTO()),
+            tenants: this.tenants?.map((item) => item.toDTO()),
         };
     }
 }

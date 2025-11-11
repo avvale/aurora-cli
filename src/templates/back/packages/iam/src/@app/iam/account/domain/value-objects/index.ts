@@ -10,6 +10,7 @@ export { IamAccountId } from './iam-account-id';
 export { IamAccountIsActive } from './iam-account-is-active';
 export { IamAccountMeta } from './iam-account-meta';
 export { IamAccountRoleIds } from './iam-account-role-ids';
+export { IamAccountRowId } from './iam-account-row-id';
 export { IamAccountScopes } from './iam-account-scopes';
 export { IamAccountTags } from './iam-account-tags';
 export { IamAccountTenantIds } from './iam-account-tenant-ids';

@@ -1,20 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthIApplicationClientRepository, oAuthMockApplicationClientData, OAuthMockApplicationClientRepository } from '@app/o-auth/application-client';
+import {
+    OAuthIApplicationClientRepository,
+    oAuthMockApplicationClientData,
+    OAuthMockApplicationClientRepository,
+} from '@app/o-auth/application-client';
 import { OAuthCreateApplicationClientService } from '@app/o-auth/application-client/application/create/o-auth-create-application-client.service';
 import {
     OAuthApplicationClientApplicationId,
     OAuthApplicationClientClientId,
 } from '@app/o-auth/application-client/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthCreateApplicationClientService', () =>
-
-{
+describe('OAuthCreateApplicationClientService', () => {
     let service: OAuthCreateApplicationClientService;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -24,36 +30,35 @@ describe('OAuthCreateApplicationClientService', () =>
                 OAuthCreateApplicationClientService,
                 OAuthMockApplicationClientRepository,
                 {
-                    provide : OAuthIApplicationClientRepository,
+                    provide: OAuthIApplicationClientRepository,
                     useValue: {
-                        create: () => { /**/ },
+                        create: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthCreateApplicationClientService);
     });
 
-    describe('main', () =>
-    {
-        test('OAuthCreateApplicationClientService should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthCreateApplicationClientService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should create a applicationClient and emit event', async () =>
-        {
+        test('should create a applicationClient and emit event', async () => {
             expect(
-                await service.main(
-                    {
-                        applicationId: new OAuthApplicationClientApplicationId(oAuthMockApplicationClientData[0].applicationId),
-                        clientId: new OAuthApplicationClientClientId(oAuthMockApplicationClientData[0].clientId),
-                    },
-                ),
-            )
-                .toBe(undefined);
+                await service.main({
+                    applicationId: new OAuthApplicationClientApplicationId(
+                        oAuthMockApplicationClientData[0].applicationId,
+                    ),
+                    clientId: new OAuthApplicationClientClientId(
+                        oAuthMockApplicationClientData[0].clientId,
+                    ),
+                }),
+            ).toBe(undefined);
         });
     });
 });

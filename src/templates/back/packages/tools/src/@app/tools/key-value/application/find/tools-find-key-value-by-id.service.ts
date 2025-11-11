@@ -4,24 +4,17 @@ import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class ToolsFindKeyValueByIdService
-{
-    constructor(
-        private readonly repository: ToolsIKeyValueRepository,
-    ) {}
+export class ToolsFindKeyValueByIdService {
+    constructor(private readonly repository: ToolsIKeyValueRepository) {}
 
     async main(
         id: ToolsKeyValueId,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<ToolsKeyValue>
-    {
-        return await this.repository.findById(
-            id,
-            {
-                constraint,
-                cQMetadata,
-            },
-        );
+    ): Promise<ToolsKeyValue> {
+        return await this.repository.findById(id, {
+            constraint,
+            cQMetadata,
+        });
     }
 }

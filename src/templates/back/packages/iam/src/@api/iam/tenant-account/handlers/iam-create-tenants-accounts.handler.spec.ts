@@ -3,37 +3,35 @@ import { iamMockTenantAccountData } from '@app/iam/tenant-account';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTenantsAccountsHandler', () =>
-{
+describe('IamCreateTenantsAccountsHandler', () => {
     let handler: IamCreateTenantsAccountsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreateTenantsAccountsHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamCreateTenantsAccountsHandler>(IamCreateTenantsAccountsHandler);
+        handler = module.get<IamCreateTenantsAccountsHandler>(
+            IamCreateTenantsAccountsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTenantsAccountsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTenantsAccountsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an iamMockTenantAccountData created', async () =>
-        {
+        test('should return an iamMockTenantAccountData created', async () => {
             expect(await handler.main(iamMockTenantAccountData)).toBe(true);
         });
     });

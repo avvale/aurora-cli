@@ -1,8 +1,11 @@
-import { OAuthDeletedAccessTokenEvent } from './o-auth-deleted-access-token.event';
+import { OAuthDeletedAccessTokenEvent } from '@app/o-auth/access-token';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthDeletedAccessTokensEvent
-{
+export class OAuthDeletedAccessTokensEvent {
     constructor(
-        public readonly accessTokens: OAuthDeletedAccessTokenEvent[],
+        public readonly event: {
+            payload: OAuthDeletedAccessTokenEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

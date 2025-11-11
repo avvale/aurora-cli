@@ -11,6 +11,7 @@ import {
     ToolsProcedureIsExecuted,
     ToolsProcedureIsUpdated,
     ToolsProcedureName,
+    ToolsProcedureRowId,
     ToolsProcedureSort,
     ToolsProcedureType,
     ToolsProcedureUpdatedAt,
@@ -22,25 +23,22 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class ToolsMockProcedureSeeder extends MockSeeder<ToolsProcedure>
-{
+export class ToolsMockProcedureSeeder extends MockSeeder<ToolsProcedure> {
     public collectionSource: ToolsProcedure[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const procedure of _.orderBy(toolsMockProcedureData, ['id']))
-        {
+        for (const procedure of _.orderBy(toolsMockProcedureData, ['id'])) {
             this.collectionSource.push(
                 ToolsProcedure.register(
                     new ToolsProcedureId(procedure.id),
+                    new ToolsProcedureRowId(procedure.rowId),
                     new ToolsProcedureName(procedure.name),
                     new ToolsProcedureType(procedure.type),
                     new ToolsProcedureVersion(procedure.version),

@@ -1,50 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsDeleteKeyValueByIdHandler, ToolsDeleteKeyValueByIdResolver } from '@api/tools/key-value';
+import {
+    ToolsDeleteKeyValueByIdHandler,
+    ToolsDeleteKeyValueByIdResolver,
+} from '@api/tools/key-value';
 import { toolsMockKeyValueData } from '@app/tools/key-value';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDeleteKeyValueByIdResolver', () =>
-{
+describe('ToolsDeleteKeyValueByIdResolver', () => {
     let resolver: ToolsDeleteKeyValueByIdResolver;
     let handler: ToolsDeleteKeyValueByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsDeleteKeyValueByIdResolver,
                 {
-                    provide : ToolsDeleteKeyValueByIdHandler,
+                    provide: ToolsDeleteKeyValueByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsDeleteKeyValueByIdResolver>(ToolsDeleteKeyValueByIdResolver);
-        handler = module.get<ToolsDeleteKeyValueByIdHandler>(ToolsDeleteKeyValueByIdHandler);
+        resolver = module.get<ToolsDeleteKeyValueByIdResolver>(
+            ToolsDeleteKeyValueByIdResolver,
+        );
+        handler = module.get<ToolsDeleteKeyValueByIdHandler>(
+            ToolsDeleteKeyValueByIdHandler,
+        );
     });
 
-    test('ToolsDeleteKeyValueByIdResolver should be defined', () =>
-    {
+    test('ToolsDeleteKeyValueByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDeleteKeyValueByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDeleteKeyValueByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an keyValue deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockKeyValueData[0])));
-            expect(await resolver.main(toolsMockKeyValueData[0].id)).toBe(toolsMockKeyValueData[0]);
+        test('should return an keyValue deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(toolsMockKeyValueData[0])),
+            );
+            expect(await resolver.main(toolsMockKeyValueData[0].id)).toBe(
+                toolsMockKeyValueData[0],
+            );
         });
     });
 });

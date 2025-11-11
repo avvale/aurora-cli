@@ -3,44 +3,38 @@ import { ICommandBus, IQueryBus, Operator } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamCheckUniqueEmailAccountHandler
-{
+export class IamCheckUniqueEmailAccountHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
     ) {}
 
-    async main(
-        email: string,
-        avoidEmails?: string[],
-    ): Promise<boolean>
-    {
-        try
-        {
-            const account = await this.queryBus.ask(new IamFindAccountQuery(
-                {
+    async main(email: string, avoidEmails?: string[]): Promise<boolean> {
+        try {
+            const account = await this.queryBus.ask(
+                new IamFindAccountQuery({
                     where: {
                         [Operator.and]: [
                             { email },
-                            { email:
-                                {
-                                    [Operator.notIn]: avoidEmails.filter(email => email !== null),
+                            {
+                                email: {
+                                    [Operator.notIn]: avoidEmails.filter(
+                                        (email) => email !== null,
+                                    ),
                                 },
                             },
-                            { email:
-                                {
+                            {
+                                email: {
                                     [Operator.ne]: null,
                                 },
                             },
                         ],
                     },
-                },
-            ));
+                }),
+            );
 
             return !account;
-        }
-        catch (error)
-        {
+        } catch (error) {
             if (error.status === 404) return true;
         }
     }

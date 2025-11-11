@@ -3,42 +3,40 @@ import { IamDeleteTenantByIdCommandHandler } from '@app/iam/tenant/application/d
 import { IamDeleteTenantByIdService } from '@app/iam/tenant/application/delete/iam-delete-tenant-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteTenantByIdCommandHandler', () =>
-{
+describe('IamDeleteTenantByIdCommandHandler', () => {
     let commandHandler: IamDeleteTenantByIdCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamDeleteTenantByIdCommandHandler,
                 {
-                    provide : IamDeleteTenantByIdService,
+                    provide: IamDeleteTenantByIdService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamDeleteTenantByIdCommandHandler>(IamDeleteTenantByIdCommandHandler);
+        commandHandler = module.get<IamDeleteTenantByIdCommandHandler>(
+            IamDeleteTenantByIdCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteTenantByIdCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteTenantByIdCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the IamDeleteTenantByIdService', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamDeleteTenantByIdCommand(
-                    iamMockTenantData[0].id,
+        test('should create the value object id and pass them as parameters to the IamDeleteTenantByIdService', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamDeleteTenantByIdCommand(iamMockTenantData[0].id),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

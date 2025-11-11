@@ -1,49 +1,50 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamDeleteTenantsHandler, IamDeleteTenantsResolver } from '@api/iam/tenant';
+import {
+    IamDeleteTenantsHandler,
+    IamDeleteTenantsResolver,
+} from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteTenantsResolver', () =>
-{
+describe('IamDeleteTenantsResolver', () => {
     let resolver: IamDeleteTenantsResolver;
     let handler: IamDeleteTenantsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteTenantsResolver,
                 {
-                    provide : IamDeleteTenantsHandler,
+                    provide: IamDeleteTenantsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamDeleteTenantsResolver>(IamDeleteTenantsResolver);
+        resolver = module.get<IamDeleteTenantsResolver>(
+            IamDeleteTenantsResolver,
+        );
         handler = module.get<IamDeleteTenantsHandler>(IamDeleteTenantsHandler);
     });
 
-    test('IamDeleteTenantsResolver should be defined', () =>
-    {
+    test('IamDeleteTenantsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteTenantsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteTenantsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an iamMockTenantData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData)));
+        test('should return an iamMockTenantData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData)),
+            );
             expect(await resolver.main()).toBe(iamMockTenantData);
         });
     });

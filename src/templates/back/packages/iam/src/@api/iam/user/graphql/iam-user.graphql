@@ -1,7 +1,6 @@
-
-type IamUser
-{
+type IamUser {
     id: ID!
+    rowId: GraphQLInt!
     accountId: ID!
     account: IamAccount
     name: GraphQLString!
@@ -19,8 +18,7 @@ type IamUser
     deletedAt: GraphQLTimestamp
 }
 
-input IamCreateUserInput
-{
+input IamCreateUserInput {
     id: ID!
     name: GraphQLString!
     surname: GraphQLString
@@ -33,8 +31,7 @@ input IamCreateUserInput
     rememberToken: GraphQLString
 }
 
-input IamUpdateUserByIdInput
-{
+input IamUpdateUserByIdInput {
     id: ID!
     name: GraphQLString
     surname: GraphQLString
@@ -47,8 +44,7 @@ input IamUpdateUserByIdInput
     rememberToken: GraphQLString
 }
 
-input IamUpdateUsersInput
-{
+input IamUpdateUsersInput {
     id: ID
     name: GraphQLString
     surname: GraphQLString
@@ -61,51 +57,33 @@ input IamUpdateUsersInput
     rememberToken: GraphQLString
 }
 
-input IamForgotPasswordUserInput
-{
+input IamForgotPasswordUserInput {
     email: GraphQLString!
     origin: GraphQLString!
 }
 
-input IamResetPasswordUserInput
-{
+input IamResetPasswordUserInput {
     token: GraphQLString!
     password: GraphQLString!
 }
 
-type Query
-{
-    iamFindUser(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): IamUser
+type Query {
+    iamFindUser(query: QueryStatement, constraint: QueryStatement): IamUser
 
-    iamFindUserById(
-        id: ID
-        constraint: QueryStatement
-    ): IamUser
+    iamFindUserById(id: ID, constraint: QueryStatement): IamUser
 
-    iamGetUsers(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [IamUser]!
+    iamGetUsers(query: QueryStatement, constraint: QueryStatement): [IamUser]!
 
     iamPaginateUsers(
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    iamCreateUser(
-        payload: IamCreateUserInput!
-    ): IamUser
+type Mutation {
+    iamCreateUser(payload: IamCreateUserInput!): IamUser
 
-    iamCreateUsers(
-        payload: [IamCreateUserInput]!
-    ): Boolean!
+    iamCreateUsers(payload: [IamCreateUserInput]!): Boolean!
 
     iamUpdateUserById(
         payload: IamUpdateUserByIdInput!
@@ -118,28 +96,15 @@ type Mutation
         constraint: QueryStatement
     ): [IamUser]!
 
-    iamUpsertUser(
-        payload: IamUpdateUserByIdInput!
-    ): IamUser
-
-    iamDeleteUserById(
-        id: ID!
-        constraint: QueryStatement
-    ): IamUser
+    iamDeleteUserById(id: ID!, constraint: QueryStatement): IamUser
 
     iamDeleteUsers(
         query: QueryStatement
         constraint: QueryStatement
     ): [IamUser]!
 
-
     # additionalApis
-    iamForgotPasswordUser(
-        payload: IamForgotPasswordUserInput!
-    ): Boolean!
+    iamForgotPasswordUser(payload: IamForgotPasswordUserInput!): Boolean!
 
-    iamResetPasswordUser(
-        payload: IamResetPasswordUserInput!
-    ): Boolean!
-
+    iamResetPasswordUser(payload: IamResetPasswordUserInput!): Boolean!
 }

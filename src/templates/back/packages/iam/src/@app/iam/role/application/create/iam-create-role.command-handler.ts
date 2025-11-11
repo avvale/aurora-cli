@@ -11,21 +11,21 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateRoleCommand)
-export class IamCreateRoleCommandHandler implements ICommandHandler<IamCreateRoleCommand>
+export class IamCreateRoleCommandHandler
+    implements ICommandHandler<IamCreateRoleCommand>
 {
-    constructor(
-        private readonly createRoleService: IamCreateRoleService,
-    ) {}
+    constructor(private readonly createRoleService: IamCreateRoleService) {}
 
-    async execute(command: IamCreateRoleCommand): Promise<void>
-    {
+    async execute(command: IamCreateRoleCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createRoleService.main(
             {
                 id: new IamRoleId(command.payload.id),
                 name: new IamRoleName(command.payload.name),
                 isMaster: new IamRoleIsMaster(command.payload.isMaster),
-                permissionIds: new IamRolePermissionIds(command.payload.permissionIds),
+                permissionIds: new IamRolePermissionIds(
+                    command.payload.permissionIds,
+                ),
                 accountIds: new IamRoleAccountIds(command.payload.accountIds),
             },
             command.cQMetadata,

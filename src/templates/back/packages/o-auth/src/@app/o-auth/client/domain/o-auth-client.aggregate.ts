@@ -1,7 +1,11 @@
 /* eslint-disable key-spacing */
 import { OAuthAccessToken } from '@app/o-auth/access-token';
 import { OAuthApplication } from '@app/o-auth/application';
-import { OAuthCreatedClientEvent, OAuthDeletedClientEvent, OAuthUpdatedClientEvent } from '@app/o-auth/client';
+import {
+    OAuthCreatedClientEvent,
+    OAuthDeletedClientEvent,
+    OAuthUpdatedClientEvent,
+} from '@app/o-auth/client';
 import {
     OAuthClientApplicationIds,
     OAuthClientAuthUrl,
@@ -15,16 +19,17 @@ import {
     OAuthClientIsMaster,
     OAuthClientName,
     OAuthClientRedirect,
+    OAuthClientRowId,
     OAuthClientScopeOptions,
     OAuthClientSecret,
     OAuthClientUpdatedAt,
 } from '@app/o-auth/client/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthClient extends AggregateRoot
-{
+export class OAuthClient extends AggregateRoot {
     id: OAuthClientId;
+    rowId: OAuthClientRowId;
     grantType: OAuthClientGrantType;
     name: OAuthClientName;
     secret: OAuthClientSecret;
@@ -44,6 +49,7 @@ export class OAuthClient extends AggregateRoot
 
     constructor(
         id: OAuthClientId,
+        rowId: OAuthClientRowId,
         grantType: OAuthClientGrantType,
         name: OAuthClientName,
         secret: OAuthClientSecret,
@@ -60,10 +66,10 @@ export class OAuthClient extends AggregateRoot
         deletedAt: OAuthClientDeletedAt,
         accessTokens?: OAuthAccessToken[],
         applications?: OAuthApplication[],
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.grantType = grantType;
         this.name = name;
         this.secret = secret;
@@ -84,6 +90,7 @@ export class OAuthClient extends AggregateRoot
 
     static register(
         id: OAuthClientId,
+        rowId: OAuthClientRowId,
         grantType: OAuthClientGrantType,
         name: OAuthClientName,
         secret: OAuthClientSecret,
@@ -100,10 +107,10 @@ export class OAuthClient extends AggregateRoot
         deletedAt: OAuthClientDeletedAt,
         accessTokens?: OAuthAccessToken[],
         applications?: OAuthApplication[],
-    ): OAuthClient
-    {
+    ): OAuthClient {
         return new OAuthClient(
             id,
+            rowId,
             grantType,
             name,
             secret,
@@ -123,79 +130,89 @@ export class OAuthClient extends AggregateRoot
         );
     }
 
-    created(client: OAuthClient): void
-    {
+    created(event: { payload: OAuthClient; cQMetadata?: CQMetadata }): void {
         this.apply(
-            new OAuthCreatedClientEvent(
-                client.id.value,
-                client.grantType.value,
-                client.name.value,
-                client.secret.value,
-                client.authUrl?.value,
-                client.redirect?.value,
-                client.scopeOptions?.value,
-                client.expiredAccessToken?.value,
-                client.expiredRefreshToken?.value,
-                client.isActive.value,
-                client.isMaster.value,
-                client.applicationIds?.value,
-                client.createdAt?.value,
-                client.updatedAt?.value,
-                client.deletedAt?.value,
-            ),
+            new OAuthCreatedClientEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    grantType: event.payload.grantType.value,
+                    name: event.payload.name.value,
+                    secret: event.payload.secret.value,
+                    authUrl: event.payload.authUrl?.value,
+                    redirect: event.payload.redirect?.value,
+                    scopeOptions: event.payload.scopeOptions?.value,
+                    expiredAccessToken: event.payload.expiredAccessToken?.value,
+                    expiredRefreshToken:
+                        event.payload.expiredRefreshToken?.value,
+                    isActive: event.payload.isActive.value,
+                    isMaster: event.payload.isMaster.value,
+                    applicationIds: event.payload.applicationIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(client: OAuthClient): void
-    {
+    updated(event: { payload: OAuthClient; cQMetadata?: CQMetadata }): void {
         this.apply(
-            new OAuthUpdatedClientEvent(
-                client.id?.value,
-                client.grantType?.value,
-                client.name?.value,
-                client.secret?.value,
-                client.authUrl?.value,
-                client.redirect?.value,
-                client.scopeOptions?.value,
-                client.expiredAccessToken?.value,
-                client.expiredRefreshToken?.value,
-                client.isActive?.value,
-                client.isMaster?.value,
-                client.applicationIds?.value,
-                client.createdAt?.value,
-                client.updatedAt?.value,
-                client.deletedAt?.value,
-            ),
+            new OAuthUpdatedClientEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    grantType: event.payload.grantType?.value,
+                    name: event.payload.name?.value,
+                    secret: event.payload.secret?.value,
+                    authUrl: event.payload.authUrl?.value,
+                    redirect: event.payload.redirect?.value,
+                    scopeOptions: event.payload.scopeOptions?.value,
+                    expiredAccessToken: event.payload.expiredAccessToken?.value,
+                    expiredRefreshToken:
+                        event.payload.expiredRefreshToken?.value,
+                    isActive: event.payload.isActive?.value,
+                    isMaster: event.payload.isMaster?.value,
+                    applicationIds: event.payload.applicationIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(client: OAuthClient): void
-    {
+    deleted(event: { payload: OAuthClient; cQMetadata?: CQMetadata }): void {
         this.apply(
-            new OAuthDeletedClientEvent(
-                client.id.value,
-                client.grantType.value,
-                client.name.value,
-                client.secret.value,
-                client.authUrl?.value,
-                client.redirect?.value,
-                client.scopeOptions?.value,
-                client.expiredAccessToken?.value,
-                client.expiredRefreshToken?.value,
-                client.isActive.value,
-                client.isMaster.value,
-                client.applicationIds?.value,
-                client.createdAt?.value,
-                client.updatedAt?.value,
-                client.deletedAt?.value,
-            ),
+            new OAuthDeletedClientEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
+                    grantType: event.payload.grantType.value,
+                    name: event.payload.name.value,
+                    secret: event.payload.secret.value,
+                    authUrl: event.payload.authUrl?.value,
+                    redirect: event.payload.redirect?.value,
+                    scopeOptions: event.payload.scopeOptions?.value,
+                    expiredAccessToken: event.payload.expiredAccessToken?.value,
+                    expiredRefreshToken:
+                        event.payload.expiredRefreshToken?.value,
+                    isActive: event.payload.isActive.value,
+                    isMaster: event.payload.isMaster.value,
+                    applicationIds: event.payload.applicationIds?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             grantType: this.grantType.value,
             name: this.name.value,
             secret: this.secret.value,
@@ -210,14 +227,13 @@ export class OAuthClient extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            accessTokens: this.accessTokens?.map(item => item.toDTO()),
-            applications: this.applications?.map(item => item.toDTO()),
+            accessTokens: this.accessTokens?.map((item) => item.toDTO()),
+            applications: this.applications?.map((item) => item.toDTO()),
         };
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             grantType: this.grantType.value,
@@ -234,8 +250,8 @@ export class OAuthClient extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            accessTokens: this.accessTokens?.map(item => item.toDTO()),
-            applications: this.applications?.map(item => item.toDTO()),
+            accessTokens: this.accessTokens?.map((item) => item.toDTO()),
+            applications: this.applications?.map((item) => item.toDTO()),
         };
     }
 }

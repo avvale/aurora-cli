@@ -1,50 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamDeletePermissionByIdHandler, IamDeletePermissionByIdResolver } from '@api/iam/permission';
+import {
+    IamDeletePermissionByIdHandler,
+    IamDeletePermissionByIdResolver,
+} from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeletePermissionByIdResolver', () =>
-{
+describe('IamDeletePermissionByIdResolver', () => {
     let resolver: IamDeletePermissionByIdResolver;
     let handler: IamDeletePermissionByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeletePermissionByIdResolver,
                 {
-                    provide : IamDeletePermissionByIdHandler,
+                    provide: IamDeletePermissionByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamDeletePermissionByIdResolver>(IamDeletePermissionByIdResolver);
-        handler = module.get<IamDeletePermissionByIdHandler>(IamDeletePermissionByIdHandler);
+        resolver = module.get<IamDeletePermissionByIdResolver>(
+            IamDeletePermissionByIdResolver,
+        );
+        handler = module.get<IamDeletePermissionByIdHandler>(
+            IamDeletePermissionByIdHandler,
+        );
     });
 
-    test('IamDeletePermissionByIdResolver should be defined', () =>
-    {
+    test('IamDeletePermissionByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeletePermissionByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeletePermissionByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an permission deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
-            expect(await resolver.main(iamMockPermissionData[0].id)).toBe(iamMockPermissionData[0]);
+        test('should return an permission deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(iamMockPermissionData[0])),
+            );
+            expect(await resolver.main(iamMockPermissionData[0].id)).toBe(
+                iamMockPermissionData[0],
+            );
         });
     });
 });

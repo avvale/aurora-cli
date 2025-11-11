@@ -4,61 +4,57 @@ import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteAccessTokensHandler', () =>
-{
+describe('OAuthDeleteAccessTokensHandler', () => {
     let handler: OAuthDeleteAccessTokensHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthDeleteAccessTokensHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<OAuthDeleteAccessTokensHandler>(OAuthDeleteAccessTokensHandler);
+        handler = module.get<OAuthDeleteAccessTokensHandler>(
+            OAuthDeleteAccessTokensHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('OAuthDeleteAccessTokensHandler should be defined', () =>
-    {
+    test('OAuthDeleteAccessTokensHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteAccessTokensHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteAccessTokensHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an oAuthMockAccessTokenData deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(oAuthMockAccessTokenData);
+        test('should return an oAuthMockAccessTokenData deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(oAuthMockAccessTokenData)),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                oAuthMockAccessTokenData,
+            );
         });
     });
 });

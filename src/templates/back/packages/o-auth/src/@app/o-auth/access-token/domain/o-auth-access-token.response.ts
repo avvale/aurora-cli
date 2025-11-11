@@ -1,10 +1,10 @@
 import { OAuthClientResponse } from '@app/o-auth/client';
 import { OAuthRefreshTokenResponse } from '@app/o-auth/refresh-token';
 
-export class OAuthAccessTokenResponse
-{
+export class OAuthAccessTokenResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly clientId: string,
         public readonly accountId: string,
         public readonly token: string,

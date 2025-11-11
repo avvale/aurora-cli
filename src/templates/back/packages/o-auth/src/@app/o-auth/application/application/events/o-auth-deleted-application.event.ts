@@ -1,14 +1,21 @@
-export class OAuthDeletedApplicationEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class OAuthDeletedApplicationEvent {
     constructor(
-        public readonly id: string,
-        public readonly code: string,
-        public readonly name: string,
-        public readonly secret: string,
-        public readonly isMaster: boolean,
-        public readonly clientIds: string[],
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                rowId: number;
+                code: string;
+                name: string;
+                secret: string;
+                isMaster: boolean;
+                clientIds: string[];
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

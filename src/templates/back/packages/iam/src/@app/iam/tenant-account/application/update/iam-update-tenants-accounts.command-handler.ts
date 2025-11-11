@@ -8,19 +8,25 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamUpdateTenantsAccountsCommand)
-export class IamUpdateTenantsAccountsCommandHandler implements ICommandHandler<IamUpdateTenantsAccountsCommand>
+export class IamUpdateTenantsAccountsCommandHandler
+    implements ICommandHandler<IamUpdateTenantsAccountsCommand>
 {
     constructor(
         private readonly updateTenantsAccountsService: IamUpdateTenantsAccountsService,
     ) {}
 
-    async execute(command: IamUpdateTenantsAccountsCommand): Promise<void>
-    {
+    async execute(command: IamUpdateTenantsAccountsCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.updateTenantsAccountsService.main(
             {
-                tenantId: new IamTenantAccountTenantId(command.payload.tenantId, { undefinable: true }),
-                accountId: new IamTenantAccountAccountId(command.payload.accountId, { undefinable: true }),
+                tenantId: new IamTenantAccountTenantId(
+                    command.payload.tenantId,
+                    { undefinable: true },
+                ),
+                accountId: new IamTenantAccountAccountId(
+                    command.payload.accountId,
+                    { undefinable: true },
+                ),
             },
             command.queryStatement,
             command.constraint,

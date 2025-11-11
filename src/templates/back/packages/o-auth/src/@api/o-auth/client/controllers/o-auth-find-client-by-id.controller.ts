@@ -8,26 +8,21 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @ApiTags('[o-auth] client')
 @Controller('o-auth/client/find')
 @Auth('oAuth.client.get')
-export class OAuthFindClientByIdController
-{
-    constructor(
-        private readonly handler: OAuthFindClientByIdHandler,
-    ) {}
+export class OAuthFindClientByIdController {
+    constructor(private readonly handler: OAuthFindClientByIdHandler) {}
 
     @Post(':id')
     @HttpCode(200)
     @ApiOperation({ summary: 'Find client by id' })
-    @ApiOkResponse({ description: 'The record has been successfully requested.', type: OAuthClientDto })
+    @ApiOkResponse({
+        description: 'The record has been successfully requested.',
+        type: OAuthClientDto,
+    })
     async main(
         @Param('id') id: string,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
+    ) {
+        return await this.handler.main(id, constraint, timezone);
     }
 }

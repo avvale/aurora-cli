@@ -1,69 +1,47 @@
-
-type IamTag
-{
+type IamTag {
     id: ID!
+    rowId: GraphQLInt!
     name: GraphQLString!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
 }
 
-input IamCreateTagInput
-{
+input IamCreateTagInput {
     id: ID!
     name: GraphQLString!
 }
 
-input IamUpdateTagByIdInput
-{
+input IamUpdateTagByIdInput {
     id: ID!
     name: GraphQLString
 }
 
-input IamUpdateTagsInput
-{
+input IamUpdateTagsInput {
     id: ID
     name: GraphQLString
 }
 
-type Query
-{
-    iamFindTag(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): IamTag
+type Query {
+    iamFindTag(query: QueryStatement, constraint: QueryStatement): IamTag
 
-    iamFindTagById(
-        id: ID
-        constraint: QueryStatement
-    ): IamTag
+    iamFindTagById(id: ID, constraint: QueryStatement): IamTag
 
-    iamGetTags(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [IamTag]!
+    iamGetTags(query: QueryStatement, constraint: QueryStatement): [IamTag]!
 
     iamPaginateTags(
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    iamCreateTag(
-        payload: IamCreateTagInput!
-    ): IamTag
+type Mutation {
+    iamCreateTag(payload: IamCreateTagInput!): IamTag
 
     iamUpdateTagById(
         payload: IamUpdateTagByIdInput!
         constraint: QueryStatement
     ): IamTag
 
-    iamDeleteTagById(
-        id: ID!
-        constraint: QueryStatement
-    ): IamTag
-
+    iamDeleteTagById(id: ID!, constraint: QueryStatement): IamTag
 }

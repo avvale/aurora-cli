@@ -1,7 +1,5 @@
 import { IamITagRepository, IamTag } from '@app/iam/tag';
 import {
-    IamTagCreatedAt,
-    IamTagDeletedAt,
     IamTagId,
     IamTagName,
     IamTagUpdatedAt,
@@ -11,8 +9,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdateTagByIdService
-{
+export class IamUpdateTagByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamITagRepository,
@@ -25,11 +22,11 @@ export class IamUpdateTagByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const tag = IamTag.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             null, // createdAt
             new IamTagUpdatedAt({ currentTimestamp: true }),
@@ -37,19 +34,14 @@ export class IamUpdateTagByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            tag,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(tag, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const tagRegister = this.publisher.mergeObjectContext(
-            tag,
-        );
+        const tagRegister = this.publisher.mergeObjectContext(tag);
 
         tagRegister.updated({
             payload: tag,

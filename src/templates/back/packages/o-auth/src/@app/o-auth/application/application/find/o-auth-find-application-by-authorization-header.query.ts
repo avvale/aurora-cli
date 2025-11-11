@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class OAuthFindApplicationByAuthorizationHeaderQuery
-{
+export class OAuthFindApplicationByAuthorizationHeaderQuery {
     constructor(
         public readonly authorizationHeader: string,
         public readonly constraint?: QueryStatement,

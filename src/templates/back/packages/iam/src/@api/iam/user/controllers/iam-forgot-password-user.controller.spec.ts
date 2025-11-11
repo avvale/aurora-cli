@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamForgotPasswordUserHandler } from '../handlers/iam-forgot-password-user.handler';
 import { IamForgotPasswordUserController } from './iam-forgot-password-user.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamForgotPasswordUserController', () =>
-{
+describe('IamForgotPasswordUserController', () => {
     let controller: IamForgotPasswordUserController;
     let handler: IamForgotPasswordUserHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamForgotPasswordUserController,
-            ],
+            imports: [],
+            controllers: [IamForgotPasswordUserController],
             providers: [
                 {
-                    provide : IamForgotPasswordUserHandler,
+                    provide: IamForgotPasswordUserHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamForgotPasswordUserController>(IamForgotPasswordUserController);
-        handler = module.get<IamForgotPasswordUserHandler>(IamForgotPasswordUserHandler);
+        controller = module.get<IamForgotPasswordUserController>(
+            IamForgotPasswordUserController,
+        );
+        handler = module.get<IamForgotPasswordUserHandler>(
+            IamForgotPasswordUserHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamForgotPasswordUserController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamForgotPasswordUserController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class IamUpdateTagByIdCommand
-{
+export class IamUpdateTagByIdCommand {
     constructor(
         public readonly payload: {
             id: string;

@@ -2,20 +2,36 @@
 /* eslint-disable key-spacing */
 import { IamAccountModel } from '@app/iam/account';
 import { IamRoleModel } from '@app/iam/role';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsTo,
+    Column,
+    ForeignKey,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamRoleAccount',
     freezeTableName: true,
     timestamps: false,
 })
-export class IamRoleAccountModel extends Model<IamRoleAccountModel>
-{
+export class IamRoleAccountModel extends Model<IamRoleAccountModel> {
     @AfterCreate
-    static auditingCreate(instance: IamRoleAccountModel, options): void
-    {
+    static auditingCreate(instance: IamRoleAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -26,8 +42,7 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamRoleAccountModel, options): void
-    {
+    static auditingBulkCreate(instance: IamRoleAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -38,8 +53,7 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamRoleAccountModel, options): void
-    {
+    static auditingUpdate(instance: IamRoleAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -50,8 +64,7 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -62,8 +75,7 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamRoleAccountModel, options): void
-    {
+    static auditingDestroy(instance: IamRoleAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -74,8 +86,7 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -86,8 +97,7 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamRoleAccountModel, options): void
-    {
+    static auditingRestore(instance: IamRoleAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -98,8 +108,7 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -110,8 +119,7 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamRoleAccountModel, options): void
-    {
+    static auditingUpsert(instance: IamRoleAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -150,5 +158,4 @@ export class IamRoleAccountModel extends Model<IamRoleAccountModel>
         foreignKey: 'accountId',
     })
     account: IamAccountModel;
-
 }

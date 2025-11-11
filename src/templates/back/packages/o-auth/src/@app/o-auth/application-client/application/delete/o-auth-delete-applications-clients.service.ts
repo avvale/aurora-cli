@@ -1,11 +1,13 @@
-import { OAuthAddApplicationsClientsContextEvent, OAuthIApplicationClientRepository } from '@app/o-auth/application-client';
+import {
+    OAuthAddApplicationsClientsContextEvent,
+    OAuthIApplicationClientRepository,
+} from '@app/o-auth/application-client';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class OAuthDeleteApplicationsClientsService
-{
+export class OAuthDeleteApplicationsClientsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: OAuthIApplicationClientRepository,
@@ -15,8 +17,7 @@ export class OAuthDeleteApplicationsClientsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // get objects to delete
         const applicationsClients = await this.repository.get({
             queryStatement,
@@ -36,7 +37,10 @@ export class OAuthDeleteApplicationsClientsService
         // create AddApplicationsClientsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const applicationsClientsRegistered = this.publisher.mergeObjectContext(
-            new OAuthAddApplicationsClientsContextEvent(applicationsClients),
+            new OAuthAddApplicationsClientsContextEvent(
+                applicationsClients,
+                cQMetadata,
+            ),
         );
 
         applicationsClientsRegistered.deleted(); // apply event to model events

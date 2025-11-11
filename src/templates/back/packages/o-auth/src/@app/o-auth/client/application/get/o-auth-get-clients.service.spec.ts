@@ -1,16 +1,22 @@
-import { OAuthIClientRepository, OAuthMockClientRepository } from '@app/o-auth/client';
+import {
+    OAuthIClientRepository,
+    OAuthMockClientRepository,
+} from '@app/o-auth/client';
 import { OAuthGetClientsService } from '@app/o-auth/client/application/get/o-auth-get-clients.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthGetClientsService', () =>
-{
+describe('OAuthGetClientsService', () => {
     let service: OAuthGetClientsService;
     let repository: OAuthIClientRepository;
     let mockRepository: OAuthMockClientRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,30 +26,33 @@ describe('OAuthGetClientsService', () =>
                 OAuthGetClientsService,
                 OAuthMockClientRepository,
                 {
-                    provide : OAuthIClientRepository,
+                    provide: OAuthIClientRepository,
                     useValue: {
-                        get: () => { /**/ },
+                        get: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthGetClientsService);
         repository = module.get(OAuthIClientRepository);
         mockRepository = module.get(OAuthMockClientRepository);
     });
 
-    describe('main', () =>
-    {
-        test('GetClientsService should be defined', () =>
-        {
+    describe('main', () => {
+        test('GetClientsService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should get clients', async () =>
-        {
-            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
+        test('should get clients', async () => {
+            jest.spyOn(repository, 'get').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource),
+                    ),
+            );
             expect(await service.main()).toBe(mockRepository.collectionSource);
         });
     });

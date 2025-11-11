@@ -4,55 +4,50 @@ import { iamMockTagData } from '@app/iam/tag';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTagHandler', () =>
-{
+describe('IamCreateTagHandler', () => {
     let handler: IamCreateTagHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreateTagHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamCreateTagHandler>(IamCreateTagHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTagHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTagHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an tag created', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTagData[0])));
-            expect(
-                await handler.main(
-                    iamMockTagData[0],
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockTagData[0]);
+        test('should return an tag created', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTagData[0])),
+            );
+            expect(await handler.main(iamMockTagData[0], 'Europe/Madrid')).toBe(
+                iamMockTagData[0],
+            );
         });
     });
 });

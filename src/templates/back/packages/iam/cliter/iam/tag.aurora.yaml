@@ -14,6 +14,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: name
     type: varchar
     maxLength: 64
@@ -29,12 +34,13 @@ aggregateProperties:
     nullable: true
 excludedOperations:
   - count
+  - createBatch
+  - delete
+  - getRaw
   - max
   - min
   - rawSql
   - sum
+  - update
   - updateAndIncrement
   - upsert
-  - createBatch
-  - update
-  - delete

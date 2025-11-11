@@ -3,43 +3,42 @@ import { IamCreateAccountsCommandHandler } from '@app/iam/account/application/cr
 import { IamCreateAccountsService } from '@app/iam/account/application/create/iam-create-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('iamCreateAccountsCommandHandler', () =>
-{
+describe('iamCreateAccountsCommandHandler', () => {
     let commandHandler: IamCreateAccountsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreateAccountsCommandHandler,
                 {
-                    provide : IamCreateAccountsService,
+                    provide: IamCreateAccountsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamCreateAccountsCommandHandler>(IamCreateAccountsCommandHandler);
+        commandHandler = module.get<IamCreateAccountsCommandHandler>(
+            IamCreateAccountsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateAccountsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateAccountsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return IamMockAccountData created', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamCreateAccountsCommand(
-                    iamMockAccountData,
-                    { timezone: process.env.TZ },
+        test('should return IamMockAccountData created', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamCreateAccountsCommand(iamMockAccountData, {
+                        timezone: process.env.TZ,
+                    }),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

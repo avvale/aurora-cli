@@ -1,8 +1,7 @@
 import { ToolsCreatedKeyValueEvent } from '@app/tools/key-value';
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class ToolsCreatedKeyValuesEvent
-{
+export class ToolsCreatedKeyValuesEvent {
     constructor(
         public readonly event: {
             payload: ToolsCreatedKeyValueEvent[];

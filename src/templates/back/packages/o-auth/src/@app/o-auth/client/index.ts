@@ -1,39 +1,28 @@
 // export commands
 export { OAuthCreateClientCommand } from './application/create/o-auth-create-client.command';
 export { OAuthCreateClientsCommand } from './application/create/o-auth-create-clients.command';
-export { OAuthUpdateClientByIdCommand } from './application/update/o-auth-update-client-by-id.command';
-export { OAuthUpdateClientsCommand } from './application/update/o-auth-update-clients.command';
-export { OAuthUpdateAndIncrementClientsCommand } from './application/update/o-auth-update-and-increment-clients.command';
-export { OAuthUpsertClientCommand } from './application/upsert/o-auth-upsert-client.command';
 export { OAuthDeleteClientByIdCommand } from './application/delete/o-auth-delete-client-by-id.command';
 export { OAuthDeleteClientsCommand } from './application/delete/o-auth-delete-clients.command';
+export { OAuthUpdateClientByIdCommand } from './application/update/o-auth-update-client-by-id.command';
 
 // export queries
-export { OAuthPaginateClientsQuery } from './application/paginate/o-auth-paginate-clients.query';
-export { OAuthGetClientsQuery } from './application/get/o-auth-get-clients.query';
-export { OAuthFindClientQuery } from './application/find/o-auth-find-client.query';
 export { OAuthFindClientByIdQuery } from './application/find/o-auth-find-client-by-id.query';
-export { OAuthRawSQLClientsQuery } from './application/raw-sql/o-auth-raw-sql-clients.query';
-export { OAuthCountClientQuery } from './application/count/o-auth-count-client.query';
-export { OAuthMaxClientQuery } from './application/max/o-auth-max-client.query';
-export { OAuthMinClientQuery } from './application/min/o-auth-min-client.query';
-export { OAuthSumClientQuery } from './application/sum/o-auth-sum-client.query';
+export { OAuthFindClientQuery } from './application/find/o-auth-find-client.query';
+export { OAuthGetClientsQuery } from './application/get/o-auth-get-clients.query';
+export { OAuthPaginateClientsQuery } from './application/paginate/o-auth-paginate-clients.query';
 
 // export mocks
 export { oAuthMockClientData } from './infrastructure/mock/o-auth-mock-client.data';
-export { OAuthMockClientSeeder } from './infrastructure/mock/o-auth-mock-client.seeder';
 export { OAuthMockClientRepository } from './infrastructure/mock/o-auth-mock-client.repository';
+export { OAuthMockClientSeeder } from './infrastructure/mock/o-auth-mock-client.seeder';
 
 // export events
 export { OAuthAddClientsContextEvent } from './application/events/o-auth-add-clients-context.event';
-export { OAuthCreatedClientsEvent } from './application/events/o-auth-created-clients.event';
 export { OAuthCreatedClientEvent } from './application/events/o-auth-created-client.event';
-export { OAuthDeletedClientsEvent } from './application/events/o-auth-deleted-clients.event';
+export { OAuthCreatedClientsEvent } from './application/events/o-auth-created-clients.event';
 export { OAuthDeletedClientEvent } from './application/events/o-auth-deleted-client.event';
-export { OAuthUpdatedClientsEvent } from './application/events/o-auth-updated-clients.event';
+export { OAuthDeletedClientsEvent } from './application/events/o-auth-deleted-clients.event';
 export { OAuthUpdatedClientEvent } from './application/events/o-auth-updated-client.event';
-export { OAuthUpdatedAndIncrementedClientsEvent } from './application/events/o-auth-updated-and-incremented-clients.event';
-export { OAuthUpdatedAndIncrementedClientEvent } from './application/events/o-auth-updated-and-incremented-client.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -57,60 +46,39 @@ export { OAuthClientSagas } from './application/sagas/o-auth-client.sagas';
 // command handlers
 import { OAuthCreateClientCommandHandler } from './application/create/o-auth-create-client.command-handler';
 import { OAuthCreateClientsCommandHandler } from './application/create/o-auth-create-clients.command-handler';
-import { OAuthUpdateClientByIdCommandHandler } from './application/update/o-auth-update-client-by-id.command-handler';
-import { OAuthUpdateClientsCommandHandler } from './application/update/o-auth-update-clients.command-handler';
-import { OAuthUpdateAndIncrementClientsCommandHandler } from './application/update/o-auth-update-and-increment-clients.command-handler';
-import { OAuthUpsertClientCommandHandler } from './application/upsert/o-auth-upsert-client.command-handler';
 import { OAuthDeleteClientByIdCommandHandler } from './application/delete/o-auth-delete-client-by-id.command-handler';
 import { OAuthDeleteClientsCommandHandler } from './application/delete/o-auth-delete-clients.command-handler';
+import { OAuthUpdateClientByIdCommandHandler } from './application/update/o-auth-update-client-by-id.command-handler';
 
 // query handlers
-import { OAuthPaginateClientsQueryHandler } from './application/paginate/o-auth-paginate-clients.query-handler';
-import { OAuthGetClientsQueryHandler } from './application/get/o-auth-get-clients.query-handler';
-import { OAuthFindClientQueryHandler } from './application/find/o-auth-find-client.query-handler';
 import { OAuthFindClientByIdQueryHandler } from './application/find/o-auth-find-client-by-id.query-handler';
-import { OAuthRawSQLClientsQueryHandler } from './application/raw-sql/o-auth-raw-sql-clients.query-handler';
-import { OAuthCountClientQueryHandler } from './application/count/o-auth-count-client.query-handler';
-import { OAuthMaxClientQueryHandler } from './application/max/o-auth-max-client.query-handler';
-import { OAuthMinClientQueryHandler } from './application/min/o-auth-min-client.query-handler';
-import { OAuthSumClientQueryHandler } from './application/sum/o-auth-sum-client.query-handler';
+import { OAuthFindClientQueryHandler } from './application/find/o-auth-find-client.query-handler';
+import { OAuthGetClientsQueryHandler } from './application/get/o-auth-get-clients.query-handler';
+import { OAuthPaginateClientsQueryHandler } from './application/paginate/o-auth-paginate-clients.query-handler';
 
 // event handlers
 import { OAuthCreatedClientEventHandler } from './application/events/o-auth-created-client.event-handler';
 import { OAuthCreatedClientsEventHandler } from './application/events/o-auth-created-clients.event-handler';
-import { OAuthUpdatedClientEventHandler } from './application/events/o-auth-updated-client.event-handler';
-import { OAuthUpdatedClientsEventHandler } from './application/events/o-auth-updated-clients.event-handler';
-import { OAuthUpdatedAndIncrementedClientsEventHandler } from './application/events/o-auth-updated-and-incremented-clients.event-handler';
 import { OAuthDeletedClientEventHandler } from './application/events/o-auth-deleted-client.event-handler';
 import { OAuthDeletedClientsEventHandler } from './application/events/o-auth-deleted-clients.event-handler';
+import { OAuthUpdatedClientEventHandler } from './application/events/o-auth-updated-client.event-handler';
 
 // services
 import { OAuthCreateClientService } from './application/create/o-auth-create-client.service';
 import { OAuthCreateClientsService } from './application/create/o-auth-create-clients.service';
-import { OAuthPaginateClientsService } from './application/paginate/o-auth-paginate-clients.service';
-import { OAuthGetClientsService } from './application/get/o-auth-get-clients.service';
-import { OAuthFindClientService } from './application/find/o-auth-find-client.service';
-import { OAuthFindClientByIdService } from './application/find/o-auth-find-client-by-id.service';
-import { OAuthRawSQLClientsService } from './application/raw-sql/o-auth-raw-sql-clients.service';
-import { OAuthCountClientService } from './application/count/o-auth-count-client.service';
-import { OAuthMaxClientService } from './application/max/o-auth-max-client.service';
-import { OAuthMinClientService } from './application/min/o-auth-min-client.service';
-import { OAuthSumClientService } from './application/sum/o-auth-sum-client.service';
-import { OAuthUpdateClientByIdService } from './application/update/o-auth-update-client-by-id.service';
-import { OAuthUpdateClientsService } from './application/update/o-auth-update-clients.service';
-import { OAuthUpdateAndIncrementClientsService } from './application/update/o-auth-update-and-increment-clients.service';
-import { OAuthUpsertClientService } from './application/upsert/o-auth-upsert-client.service';
 import { OAuthDeleteClientByIdService } from './application/delete/o-auth-delete-client-by-id.service';
 import { OAuthDeleteClientsService } from './application/delete/o-auth-delete-clients.service';
+import { OAuthFindClientByIdService } from './application/find/o-auth-find-client-by-id.service';
+import { OAuthFindClientService } from './application/find/o-auth-find-client.service';
+import { OAuthGetClientsService } from './application/get/o-auth-get-clients.service';
+import { OAuthPaginateClientsService } from './application/paginate/o-auth-paginate-clients.service';
+import { OAuthUpdateClientByIdService } from './application/update/o-auth-update-client-by-id.service';
 
 export const OAuthClientHandlers = [
     // commands
     OAuthCreateClientCommandHandler,
     OAuthCreateClientsCommandHandler,
     OAuthUpdateClientByIdCommandHandler,
-    OAuthUpdateClientsCommandHandler,
-    OAuthUpdateAndIncrementClientsCommandHandler,
-    OAuthUpsertClientCommandHandler,
     OAuthDeleteClientByIdCommandHandler,
     OAuthDeleteClientsCommandHandler,
 
@@ -119,18 +87,11 @@ export const OAuthClientHandlers = [
     OAuthGetClientsQueryHandler,
     OAuthFindClientQueryHandler,
     OAuthFindClientByIdQueryHandler,
-    OAuthRawSQLClientsQueryHandler,
-    OAuthCountClientQueryHandler,
-    OAuthMaxClientQueryHandler,
-    OAuthMinClientQueryHandler,
-    OAuthSumClientQueryHandler,
 
     // events
     OAuthCreatedClientEventHandler,
     OAuthCreatedClientsEventHandler,
     OAuthUpdatedClientEventHandler,
-    OAuthUpdatedClientsEventHandler,
-    OAuthUpdatedAndIncrementedClientsEventHandler,
     OAuthDeletedClientEventHandler,
     OAuthDeletedClientsEventHandler,
 ];
@@ -142,15 +103,7 @@ export const OAuthClientServices = [
     OAuthGetClientsService,
     OAuthFindClientService,
     OAuthFindClientByIdService,
-    OAuthRawSQLClientsService,
-    OAuthCountClientService,
-    OAuthMaxClientService,
-    OAuthMinClientService,
-    OAuthSumClientService,
     OAuthUpdateClientByIdService,
-    OAuthUpdateClientsService,
-    OAuthUpdateAndIncrementClientsService,
-    OAuthUpsertClientService,
     OAuthDeleteClientByIdService,
     OAuthDeleteClientsService,
 ];

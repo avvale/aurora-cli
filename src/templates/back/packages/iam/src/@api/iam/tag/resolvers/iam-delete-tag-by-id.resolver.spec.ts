@@ -1,50 +1,53 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamDeleteTagByIdHandler, IamDeleteTagByIdResolver } from '@api/iam/tag';
+import {
+    IamDeleteTagByIdHandler,
+    IamDeleteTagByIdResolver,
+} from '@api/iam/tag';
 import { iamMockTagData } from '@app/iam/tag';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteTagByIdResolver', () =>
-{
+describe('IamDeleteTagByIdResolver', () => {
     let resolver: IamDeleteTagByIdResolver;
     let handler: IamDeleteTagByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteTagByIdResolver,
                 {
-                    provide : IamDeleteTagByIdHandler,
+                    provide: IamDeleteTagByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamDeleteTagByIdResolver>(IamDeleteTagByIdResolver);
+        resolver = module.get<IamDeleteTagByIdResolver>(
+            IamDeleteTagByIdResolver,
+        );
         handler = module.get<IamDeleteTagByIdHandler>(IamDeleteTagByIdHandler);
     });
 
-    test('IamDeleteTagByIdResolver should be defined', () =>
-    {
+    test('IamDeleteTagByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteTagByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteTagByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an tag deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTagData[0])));
-            expect(await resolver.main(iamMockTagData[0].id)).toBe(iamMockTagData[0]);
+        test('should return an tag deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTagData[0])),
+            );
+            expect(await resolver.main(iamMockTagData[0].id)).toBe(
+                iamMockTagData[0],
+            );
         });
     });
 });

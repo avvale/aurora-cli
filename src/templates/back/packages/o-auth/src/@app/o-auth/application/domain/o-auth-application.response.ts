@@ -1,9 +1,9 @@
 import { OAuthClientResponse } from '@app/o-auth/client';
 
-export class OAuthApplicationResponse
-{
+export class OAuthApplicationResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly code: string,
         public readonly name: string,
         public readonly secret: string,

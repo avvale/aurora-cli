@@ -1,59 +1,44 @@
-import { OAuthDeletedRefreshTokenEvent, OAuthDeletedRefreshTokensEvent, OAuthRefreshToken, OAuthUpdatedAndIncrementedRefreshTokenEvent, OAuthUpdatedAndIncrementedRefreshTokensEvent } from '@app/o-auth/refresh-token';
+import {
+    OAuthDeletedRefreshTokenEvent,
+    OAuthDeletedRefreshTokensEvent,
+    OAuthRefreshToken,
+} from '@app/o-auth/refresh-token';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthAddRefreshTokensContextEvent extends AggregateRoot
-{
+export class OAuthAddRefreshTokensContextEvent extends AggregateRoot {
     constructor(
         public readonly aggregateRoots: OAuthRefreshToken[] = [],
-    )
-    {
+        public readonly cQMetadata?: CQMetadata,
+    ) {
         super();
     }
 
-    *[Symbol.iterator]()
-    {
+    *[Symbol.iterator]() {
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-
-
-    updatedAndIncremented(): void
-    {
+    deleted(): void {
         this.apply(
-            new OAuthUpdatedAndIncrementedRefreshTokensEvent(
-                this.aggregateRoots.map(refreshToken =>
-                    new OAuthUpdatedAndIncrementedRefreshTokenEvent(
-                        refreshToken.id.value,
-                        refreshToken.accessTokenId.value,
-                        refreshToken.token.value,
-                        refreshToken.isRevoked.value,
-                        refreshToken.expiresAt?.value,
-                        refreshToken.createdAt?.value,
-                        refreshToken.updatedAt?.value,
-                        refreshToken.deletedAt?.value,
-                    ),
+            new OAuthDeletedRefreshTokensEvent({
+                payload: this.aggregateRoots.map(
+                    (refreshToken) =>
+                        new OAuthDeletedRefreshTokenEvent({
+                            payload: {
+                                id: refreshToken.id.value,
+                                rowId: refreshToken.rowId.value,
+                                accessTokenId: refreshToken.accessTokenId.value,
+                                token: refreshToken.token.value,
+                                isRevoked: refreshToken.isRevoked.value,
+                                expiresAt: refreshToken.expiresAt?.value,
+                                createdAt: refreshToken.createdAt?.value,
+                                updatedAt: refreshToken.updatedAt?.value,
+                                deletedAt: refreshToken.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
-        );
-    }
-
-    deleted(): void
-    {
-        this.apply(
-            new OAuthDeletedRefreshTokensEvent(
-                this.aggregateRoots.map(refreshToken =>
-                    new OAuthDeletedRefreshTokenEvent(
-                        refreshToken.id.value,
-                        refreshToken.accessTokenId.value,
-                        refreshToken.token.value,
-                        refreshToken.isRevoked.value,
-                        refreshToken.expiresAt?.value,
-                        refreshToken.createdAt?.value,
-                        refreshToken.updatedAt?.value,
-                        refreshToken.deletedAt?.value,
-                    ),
-                ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

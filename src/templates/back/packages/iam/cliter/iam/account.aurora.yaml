@@ -14,6 +14,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: type
     type: enum
     enumOptions:
@@ -120,6 +125,7 @@ aggregateProperties:
               avoidConstraint: true
         excludedOperations:
           - count
+          - getRaw
           - max
           - min
           - rawSql
@@ -165,6 +171,7 @@ aggregateProperties:
               avoidConstraint: true
         excludedOperations:
           - count
+          - getRaw
           - max
           - min
           - rawSql
@@ -206,7 +213,7 @@ additionalApis:
     resolverType: query
     httpMethod: post
 excludedOperations:
-  - count
+  - getRaw
   - max
   - min
   - rawSql

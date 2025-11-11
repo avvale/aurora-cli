@@ -1,53 +1,69 @@
-import { IamBoundedContextMapper, IamGetBoundedContextsQuery, IamIBoundedContextRepository, IamMockBoundedContextRepository } from '@app/iam/bounded-context';
+import {
+    IamBoundedContextMapper,
+    IamGetBoundedContextsQuery,
+    IamIBoundedContextRepository,
+    IamMockBoundedContextRepository,
+} from '@app/iam/bounded-context';
 import { IamGetBoundedContextsQueryHandler } from '@app/iam/bounded-context/application/get/iam-get-bounded-contexts.query-handler';
 import { IamGetBoundedContextsService } from '@app/iam/bounded-context/application/get/iam-get-bounded-contexts.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('GetBoundedContextsQueryHandler', () =>
-{
+describe('GetBoundedContextsQueryHandler', () => {
     let queryHandler: IamGetBoundedContextsQueryHandler;
     let service: IamGetBoundedContextsService;
     let repository: IamMockBoundedContextRepository;
     let mapper: IamBoundedContextMapper;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamGetBoundedContextsQueryHandler,
                 {
-                    provide : IamIBoundedContextRepository,
+                    provide: IamIBoundedContextRepository,
                     useClass: IamMockBoundedContextRepository,
                 },
                 {
-                    provide : IamGetBoundedContextsService,
+                    provide: IamGetBoundedContextsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        queryHandler = module.get<IamGetBoundedContextsQueryHandler>(IamGetBoundedContextsQueryHandler);
-        service = module.get<IamGetBoundedContextsService>(IamGetBoundedContextsService);
-        repository = <IamMockBoundedContextRepository>module.get<IamIBoundedContextRepository>(IamIBoundedContextRepository);
+        queryHandler = module.get<IamGetBoundedContextsQueryHandler>(
+            IamGetBoundedContextsQueryHandler,
+        );
+        service = module.get<IamGetBoundedContextsService>(
+            IamGetBoundedContextsService,
+        );
+        repository = <IamMockBoundedContextRepository>(
+            module.get<IamIBoundedContextRepository>(
+                IamIBoundedContextRepository,
+            )
+        );
         mapper = new IamBoundedContextMapper();
     });
 
-    describe('main', () =>
-    {
-        test('IamGetBoundedContextsQueryHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamGetBoundedContextsQueryHandler should be defined', () => {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an boundedContexts founded', async () =>
-        {
-            jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource)));
-            expect(await queryHandler.execute(
-                new IamGetBoundedContextsQuery(),
-            )).toStrictEqual(mapper.mapAggregatesToResponses(repository.collectionSource));
+        test('should return an boundedContexts founded', async () => {
+            jest.spyOn(service, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(repository.collectionSource),
+                    ),
+            );
+            expect(
+                await queryHandler.execute(new IamGetBoundedContextsQuery()),
+            ).toStrictEqual(
+                mapper.mapAggregatesToResponses(repository.collectionSource),
+            );
         });
     });
 });

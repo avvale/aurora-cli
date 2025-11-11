@@ -10,14 +10,12 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateScopeCommand)
-export class OAuthCreateScopeCommandHandler implements ICommandHandler<OAuthCreateScopeCommand>
+export class OAuthCreateScopeCommandHandler
+    implements ICommandHandler<OAuthCreateScopeCommand>
 {
-    constructor(
-        private readonly createScopeService: OAuthCreateScopeService,
-    ) {}
+    constructor(private readonly createScopeService: OAuthCreateScopeService) {}
 
-    async execute(command: OAuthCreateScopeCommand): Promise<void>
-    {
+    async execute(command: OAuthCreateScopeCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createScopeService.main(
             {

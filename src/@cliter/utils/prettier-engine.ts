@@ -29,9 +29,10 @@ export async function formatCode(
                 },
             );
     }
-    catch
+    catch (error)
     {
         console.log('%s prettier not found', chalk.yellow.bold('[INFO]'));
+        console.log(error);
         return code;
     }
 }

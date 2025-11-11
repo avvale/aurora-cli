@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsIProcedureRepository, ToolsMockProcedureRepository } from '@app/tools/procedure';
+import {
+    ToolsIProcedureRepository,
+    ToolsMockProcedureRepository,
+} from '@app/tools/procedure';
 import { ToolsCreateProceduresService } from '@app/tools/procedure/application/create/tools-create-procedures.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsCreateProceduresService', () =>
-{
+describe('ToolsCreateProceduresService', () => {
     let service: ToolsCreateProceduresService;
     let mockRepository: ToolsMockProcedureRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,34 +26,29 @@ describe('ToolsCreateProceduresService', () =>
                 ToolsCreateProceduresService,
                 ToolsMockProcedureRepository,
                 {
-                    provide : ToolsIProcedureRepository,
+                    provide: ToolsIProcedureRepository,
                     useValue: {
-                        insert: () => { /**/ },
+                        insert: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(ToolsCreateProceduresService);
         mockRepository = module.get(ToolsMockProcedureRepository);
     });
 
-    describe('main', () =>
-    {
-        test('CreateProceduresService should be defined', () =>
-        {
+    describe('main', () => {
+        test('CreateProceduresService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should create procedures and emit event', async () =>
-        {
-            expect(
-                await service.main(
-                    mockRepository.collectionSource,
-                ),
-            )
-                .toBe(undefined);
+        test('should create procedures and emit event', async () => {
+            expect(await service.main(mockRepository.collectionSource)).toBe(
+                undefined,
+            );
         });
     });
 });

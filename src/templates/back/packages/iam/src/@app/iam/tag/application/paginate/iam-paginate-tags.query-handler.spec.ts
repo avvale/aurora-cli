@@ -1,67 +1,76 @@
-import { IamITagRepository, IamMockTagRepository, IamPaginateTagsQuery } from '@app/iam/tag';
+import {
+    IamITagRepository,
+    IamMockTagRepository,
+    IamPaginateTagsQuery,
+} from '@app/iam/tag';
 import { IamPaginateTagsQueryHandler } from '@app/iam/tag/application/paginate/iam-paginate-tags.query-handler';
 import { IamPaginateTagsService } from '@app/iam/tag/application/paginate/iam-paginate-tags.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginateTagsQueryHandler', () =>
-{
+describe('IamPaginateTagsQueryHandler', () => {
     let queryHandler: IamPaginateTagsQueryHandler;
     let service: IamPaginateTagsService;
     let repository: IamMockTagRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamPaginateTagsQueryHandler,
                 {
-                    provide : IamITagRepository,
+                    provide: IamITagRepository,
                     useClass: IamMockTagRepository,
                 },
                 {
-                    provide : IamPaginateTagsService,
+                    provide: IamPaginateTagsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        queryHandler = module.get<IamPaginateTagsQueryHandler>(IamPaginateTagsQueryHandler);
+        queryHandler = module.get<IamPaginateTagsQueryHandler>(
+            IamPaginateTagsQueryHandler,
+        );
         service = module.get<IamPaginateTagsService>(IamPaginateTagsService);
-        repository = <IamMockTagRepository>module.get<IamITagRepository>(IamITagRepository);
+        repository = <IamMockTagRepository>(
+            module.get<IamITagRepository>(IamITagRepository)
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginateTagsQueryHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginateTagsQueryHandler should be defined', () => {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an tags paginated', async () =>
-        {
-            jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(
-                {
-                    count: 10,
-                    total: 100,
-                    rows : repository.collectionSource.slice(0,10),
-                },
-            )));
-            expect(await queryHandler.execute(
-                new IamPaginateTagsQuery(
-                    {
+        test('should return an tags paginated', async () => {
+            jest.spyOn(service, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            count: 10,
+                            total: 100,
+                            rows: repository.collectionSource.slice(0, 10),
+                        }),
+                    ),
+            );
+            expect(
+                await queryHandler.execute(
+                    new IamPaginateTagsQuery({
                         offset: 0,
-                        limit : 10,
-                    },
+                        limit: 10,
+                    }),
                 ),
-            )).toStrictEqual(
+            ).toStrictEqual(
                 new PaginationResponse(
                     100,
                     10,
-                    repository.collectionSource.slice(0,10).map(item => item.toDTO()),
+                    repository.collectionSource
+                        .slice(0, 10)
+                        .map((item) => item.toDTO()),
                 ),
             );
         });

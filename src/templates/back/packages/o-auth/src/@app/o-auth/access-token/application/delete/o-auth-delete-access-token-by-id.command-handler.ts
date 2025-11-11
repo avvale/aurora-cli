@@ -4,14 +4,14 @@ import { OAuthAccessTokenId } from '@app/o-auth/access-token/domain/value-object
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthDeleteAccessTokenByIdCommand)
-export class OAuthDeleteAccessTokenByIdCommandHandler implements ICommandHandler<OAuthDeleteAccessTokenByIdCommand>
+export class OAuthDeleteAccessTokenByIdCommandHandler
+    implements ICommandHandler<OAuthDeleteAccessTokenByIdCommand>
 {
     constructor(
         private readonly deleteAccessTokenByIdService: OAuthDeleteAccessTokenByIdService,
     ) {}
 
-    async execute(command: OAuthDeleteAccessTokenByIdCommand): Promise<void>
-    {
+    async execute(command: OAuthDeleteAccessTokenByIdCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteAccessTokenByIdService.main(
             new OAuthAccessTokenId(command.id),

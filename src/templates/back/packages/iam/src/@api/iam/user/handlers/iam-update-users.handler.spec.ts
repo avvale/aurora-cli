@@ -5,53 +5,51 @@ import { iamMockUserData } from '@app/iam/user';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateUsersHandler', () =>
-{
+describe('IamUpdateUsersHandler', () => {
     let handler: IamUpdateUsersHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateUsersHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamUpdateUsersHandler>(IamUpdateUsersHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamUpdateUsersHandler should be defined', () =>
-    {
+    test('IamUpdateUsersHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateUsersHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateUsersHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a users updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData[0])));
+        test('should return a users updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockUserData[0])),
+            );
             expect(
                 await handler.main(
                     <IamUpdateUsersInput>iamMockUserData[0],
@@ -59,8 +57,7 @@ describe('IamUpdateUsersHandler', () =>
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockUserData[0]);
+            ).toBe(iamMockUserData[0]);
         });
     });
 });

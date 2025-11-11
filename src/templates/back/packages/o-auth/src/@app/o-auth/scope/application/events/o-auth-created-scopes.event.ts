@@ -1,8 +1,11 @@
-import { OAuthCreatedScopeEvent } from './o-auth-created-scope.event';
+import { OAuthCreatedScopeEvent } from '@app/o-auth/scope';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthCreatedScopesEvent
-{
+export class OAuthCreatedScopesEvent {
     constructor(
-        public readonly scopes: OAuthCreatedScopeEvent[],
+        public readonly event: {
+            payload: OAuthCreatedScopeEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

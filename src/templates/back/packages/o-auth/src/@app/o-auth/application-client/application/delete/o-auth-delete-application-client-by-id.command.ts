@@ -1,8 +1,6 @@
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class OAuthDeleteApplicationClientByIdCommand
-{
+export class OAuthDeleteApplicationClientByIdCommand {
     constructor(
         public readonly applicationId: string,
         public readonly clientId: string,

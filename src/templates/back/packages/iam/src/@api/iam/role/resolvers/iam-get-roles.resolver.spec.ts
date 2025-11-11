@@ -3,47 +3,43 @@ import { IamGetRolesHandler, IamGetRolesResolver } from '@api/iam/role';
 import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamGetRolesResolver', () =>
-{
+describe('IamGetRolesResolver', () => {
     let resolver: IamGetRolesResolver;
     let handler: IamGetRolesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamGetRolesResolver,
                 {
-                    provide : IamGetRolesHandler,
+                    provide: IamGetRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<IamGetRolesResolver>(IamGetRolesResolver);
         handler = module.get<IamGetRolesHandler>(IamGetRolesHandler);
     });
 
-    test('IamGetRolesResolver should be defined', () =>
-    {
-        expect(resolver).   toBeDefined();
+    test('IamGetRolesResolver should be defined', () => {
+        expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamGetRolesResolver should be defined', () =>
-        {
-            expect(resolver).   toBeDefined();
+    describe('main', () => {
+        test('IamGetRolesResolver should be defined', () => {
+            expect(resolver).toBeDefined();
         });
 
-        test('should return a iamMockRoleData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData)));
+        test('should return a iamMockRoleData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockRoleData)),
+            );
             expect(await resolver.main()).toBe(iamMockRoleData);
         });
     });

@@ -1,20 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamITagRepository, iamMockTagData, IamMockTagRepository } from '@app/iam/tag';
+import {
+    IamITagRepository,
+    iamMockTagData,
+    IamMockTagRepository,
+} from '@app/iam/tag';
 import { IamCreateTagService } from '@app/iam/tag/application/create/iam-create-tag.service';
 import {
     IamTagId,
     IamTagName,
+    IamTagRowId,
 } from '@app/iam/tag/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTagService', () =>
-
-{
+describe('IamCreateTagService', () => {
     let service: IamCreateTagService;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -24,36 +31,32 @@ describe('IamCreateTagService', () =>
                 IamCreateTagService,
                 IamMockTagRepository,
                 {
-                    provide : IamITagRepository,
+                    provide: IamITagRepository,
                     useValue: {
-                        create: () => { /**/ },
+                        create: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(IamCreateTagService);
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTagService should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTagService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should create a tag and emit event', async () =>
-        {
+        test('should create a tag and emit event', async () => {
             expect(
-                await service.main(
-                    {
-                        id: new IamTagId(iamMockTagData[0].id),
-                        name: new IamTagName(iamMockTagData[0].name),
-                    },
-                ),
-            )
-                .toBe(undefined);
+                await service.main({
+                    id: new IamTagId(iamMockTagData[0].id),
+                    rowId: new IamTagRowId(iamMockTagData[0].rowId),
+                    name: new IamTagName(iamMockTagData[0].name),
+                }),
+            ).toBe(undefined);
         });
     });
 });

@@ -5,60 +5,65 @@ import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthUpdateApplicationByIdHandler', () =>
-{
+describe('OAuthUpdateApplicationByIdHandler', () => {
     let handler: OAuthUpdateApplicationByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthUpdateApplicationByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<OAuthUpdateApplicationByIdHandler>(OAuthUpdateApplicationByIdHandler);
+        handler = module.get<OAuthUpdateApplicationByIdHandler>(
+            OAuthUpdateApplicationByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('OAuthUpdateApplicationByIdHandler should be defined', () =>
-    {
+    test('OAuthUpdateApplicationByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthUpdateApplicationByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthUpdateApplicationByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a application updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+        test('should return a application updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockApplicationData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
-                    <OAuthUpdateApplicationByIdInput>oAuthMockApplicationData[0],
+                    <OAuthUpdateApplicationByIdInput>(
+                        oAuthMockApplicationData[0]
+                    ),
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(oAuthMockApplicationData[0]);
+                ),
+            ).toBe(oAuthMockApplicationData[0]);
         });
     });
 });

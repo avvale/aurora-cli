@@ -1,9 +1,11 @@
-import { IamAddUsersContextEvent, IamIUserRepository, IamUser } from '@app/iam/user';
+import {
+    IamAddUsersContextEvent,
+    IamIUserRepository,
+    IamUser,
+} from '@app/iam/user';
 import {
     IamUserAccountId,
     IamUserAvatar,
-    IamUserCreatedAt,
-    IamUserDeletedAt,
     IamUserId,
     IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
@@ -21,8 +23,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdateUsersService
-{
+export class IamUpdateUsersService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIUserRepository,
@@ -46,11 +47,11 @@ export class IamUpdateUsersService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const user = IamUser.register(
             payload.id,
+            undefined, // rowId
             payload.accountId,
             payload.name,
             payload.surname,
@@ -68,31 +69,23 @@ export class IamUpdateUsersService
         );
 
         // update
-        await this.repository.update(
-            user,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(user, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const users = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const users = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const usersRegister = this.publisher.mergeObjectContext(
-            new IamAddUsersContextEvent(
-                users,
-                cQMetadata,
-            ),
+            new IamAddUsersContextEvent(users, cQMetadata),
         );
 
         usersRegister.updated(); // apply event to model events

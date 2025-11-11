@@ -1,45 +1,50 @@
-import { OAuthGetRefreshTokensController, OAuthGetRefreshTokensHandler } from '@api/o-auth/refresh-token';
+import {
+    OAuthGetRefreshTokensController,
+    OAuthGetRefreshTokensHandler,
+} from '@api/o-auth/refresh-token';
 import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthGetRefreshTokensController', () =>
-{
+describe('OAuthGetRefreshTokensController', () => {
     let controller: OAuthGetRefreshTokensController;
     let handler: OAuthGetRefreshTokensHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                OAuthGetRefreshTokensController,
-            ],
+            imports: [],
+            controllers: [OAuthGetRefreshTokensController],
             providers: [
                 {
-                    provide : OAuthGetRefreshTokensHandler,
+                    provide: OAuthGetRefreshTokensHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthGetRefreshTokensController>(OAuthGetRefreshTokensController);
-        handler = module.get<OAuthGetRefreshTokensHandler>(OAuthGetRefreshTokensHandler);
+        controller = module.get<OAuthGetRefreshTokensController>(
+            OAuthGetRefreshTokensController,
+        );
+        handler = module.get<OAuthGetRefreshTokensHandler>(
+            OAuthGetRefreshTokensHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthGetRefreshTokensController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthGetRefreshTokensController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a oAuthMockRefreshTokenData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockRefreshTokenData)));
+        test('should return a oAuthMockRefreshTokenData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockRefreshTokenData),
+                    ),
+            );
             expect(await controller.main()).toBe(oAuthMockRefreshTokenData);
         });
     });

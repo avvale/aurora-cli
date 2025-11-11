@@ -4,24 +4,17 @@ import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class OAuthFindScopeByIdService
-{
-    constructor(
-        private readonly repository: OAuthIScopeRepository,
-    ) {}
+export class OAuthFindScopeByIdService {
+    constructor(private readonly repository: OAuthIScopeRepository) {}
 
     async main(
         id: OAuthScopeId,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<OAuthScope>
-    {
-        return await this.repository.findById(
-            id,
-            {
-                constraint,
-                cQMetadata,
-            },
-        );
+    ): Promise<OAuthScope> {
+        return await this.repository.findById(id, {
+            constraint,
+            cQMetadata,
+        });
     }
 }

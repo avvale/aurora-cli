@@ -1,44 +1,47 @@
-import { OAuthDeleteRefreshTokenByIdCommand, oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
+import {
+    OAuthDeleteRefreshTokenByIdCommand,
+    oAuthMockRefreshTokenData,
+} from '@app/o-auth/refresh-token';
 import { OAuthDeleteRefreshTokenByIdCommandHandler } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-token-by-id.command-handler';
 import { OAuthDeleteRefreshTokenByIdService } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-token-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteRefreshTokenByIdCommandHandler', () =>
-{
+describe('OAuthDeleteRefreshTokenByIdCommandHandler', () => {
     let commandHandler: OAuthDeleteRefreshTokenByIdCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthDeleteRefreshTokenByIdCommandHandler,
                 {
-                    provide : OAuthDeleteRefreshTokenByIdService,
+                    provide: OAuthDeleteRefreshTokenByIdService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<OAuthDeleteRefreshTokenByIdCommandHandler>(OAuthDeleteRefreshTokenByIdCommandHandler);
+        commandHandler = module.get<OAuthDeleteRefreshTokenByIdCommandHandler>(
+            OAuthDeleteRefreshTokenByIdCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteRefreshTokenByIdCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteRefreshTokenByIdCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the value object id and pass them as parameters to the OAuthDeleteRefreshTokenByIdService', async () =>
-        {
-            expect(await commandHandler.execute(
-                new OAuthDeleteRefreshTokenByIdCommand(
-                    oAuthMockRefreshTokenData[0].id,
+        test('should create the value object id and pass them as parameters to the OAuthDeleteRefreshTokenByIdService', async () => {
+            expect(
+                await commandHandler.execute(
+                    new OAuthDeleteRefreshTokenByIdCommand(
+                        oAuthMockRefreshTokenData[0].id,
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

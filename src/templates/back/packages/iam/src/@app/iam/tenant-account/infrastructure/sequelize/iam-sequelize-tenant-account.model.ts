@@ -2,20 +2,36 @@
 /* eslint-disable key-spacing */
 import { IamAccountModel } from '@app/iam/account';
 import { IamTenantModel } from '@app/iam/tenant';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsTo,
+    Column,
+    ForeignKey,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamTenantAccount',
     freezeTableName: true,
     timestamps: false,
 })
-export class IamTenantAccountModel extends Model<IamTenantAccountModel>
-{
+export class IamTenantAccountModel extends Model<IamTenantAccountModel> {
     @AfterCreate
-    static auditingCreate(instance: IamTenantAccountModel, options): void
-    {
+    static auditingCreate(instance: IamTenantAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -26,8 +42,7 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamTenantAccountModel, options): void
-    {
+    static auditingBulkCreate(instance: IamTenantAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -38,8 +53,7 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamTenantAccountModel, options): void
-    {
+    static auditingUpdate(instance: IamTenantAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -50,8 +64,7 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -62,8 +75,7 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamTenantAccountModel, options): void
-    {
+    static auditingDestroy(instance: IamTenantAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -74,8 +86,7 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -86,8 +97,7 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamTenantAccountModel, options): void
-    {
+    static auditingRestore(instance: IamTenantAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -98,8 +108,7 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -110,8 +119,7 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamTenantAccountModel, options): void
-    {
+    static auditingUpsert(instance: IamTenantAccountModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -150,5 +158,4 @@ export class IamTenantAccountModel extends Model<IamTenantAccountModel>
         foreignKey: 'accountId',
     })
     account: IamAccountModel;
-
 }

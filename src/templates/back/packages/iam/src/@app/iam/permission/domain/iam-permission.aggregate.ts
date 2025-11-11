@@ -1,6 +1,10 @@
 /* eslint-disable key-spacing */
 import { IamBoundedContext } from '@app/iam/bounded-context';
-import { IamCreatedPermissionEvent, IamDeletedPermissionEvent, IamUpdatedPermissionEvent } from '@app/iam/permission';
+import {
+    IamCreatedPermissionEvent,
+    IamDeletedPermissionEvent,
+    IamUpdatedPermissionEvent,
+} from '@app/iam/permission';
 import {
     IamPermissionBoundedContextId,
     IamPermissionCreatedAt,
@@ -8,15 +12,16 @@ import {
     IamPermissionId,
     IamPermissionName,
     IamPermissionRoleIds,
+    IamPermissionRowId,
     IamPermissionUpdatedAt,
 } from '@app/iam/permission/domain/value-objects';
 import { IamRole } from '@app/iam/role';
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class IamPermission extends AggregateRoot
-{
+export class IamPermission extends AggregateRoot {
     id: IamPermissionId;
+    rowId: IamPermissionRowId;
     name: IamPermissionName;
     boundedContextId: IamPermissionBoundedContextId;
     roleIds: IamPermissionRoleIds;
@@ -28,6 +33,7 @@ export class IamPermission extends AggregateRoot
 
     constructor(
         id: IamPermissionId,
+        rowId: IamPermissionRowId,
         name: IamPermissionName,
         boundedContextId: IamPermissionBoundedContextId,
         roleIds: IamPermissionRoleIds,
@@ -36,10 +42,10 @@ export class IamPermission extends AggregateRoot
         deletedAt: IamPermissionDeletedAt,
         boundedContext?: IamBoundedContext,
         roles?: IamRole[],
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.name = name;
         this.boundedContextId = boundedContextId;
         this.roleIds = roleIds;
@@ -52,6 +58,7 @@ export class IamPermission extends AggregateRoot
 
     static register(
         id: IamPermissionId,
+        rowId: IamPermissionRowId,
         name: IamPermissionName,
         boundedContextId: IamPermissionBoundedContextId,
         roleIds: IamPermissionRoleIds,
@@ -60,10 +67,10 @@ export class IamPermission extends AggregateRoot
         deletedAt: IamPermissionDeletedAt,
         boundedContext?: IamBoundedContext,
         roles?: IamRole[],
-    ): IamPermission
-    {
+    ): IamPermission {
         return new IamPermission(
             id,
+            rowId,
             name,
             boundedContextId,
             roleIds,
@@ -75,13 +82,7 @@ export class IamPermission extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: IamPermission;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: IamPermission; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamCreatedPermissionEvent({
                 payload: {
@@ -98,13 +99,7 @@ export class IamPermission extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: IamPermission;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: IamPermission; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamUpdatedPermissionEvent({
                 payload: {
@@ -121,17 +116,12 @@ export class IamPermission extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: IamPermission;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: IamPermission; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamDeletedPermissionEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     name: event.payload.name.value,
                     boundedContextId: event.payload.boundedContextId.value,
                     roleIds: event.payload.roleIds?.value,
@@ -144,10 +134,10 @@ export class IamPermission extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             name: this.name.value,
             boundedContextId: this.boundedContextId.value,
             roleIds: this.roleIds?.value,
@@ -155,13 +145,12 @@ export class IamPermission extends AggregateRoot
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
             boundedContext: this.boundedContext?.toDTO(),
-            roles: this.roles?.map(item => item.toDTO()),
+            roles: this.roles?.map((item) => item.toDTO()),
         };
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             name: this.name.value,
@@ -171,7 +160,7 @@ export class IamPermission extends AggregateRoot
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
             boundedContext: this.boundedContext?.toDTO(),
-            roles: this.roles?.map(item => item.toDTO()),
+            roles: this.roles?.map((item) => item.toDTO()),
         };
     }
 }

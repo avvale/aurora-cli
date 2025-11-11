@@ -1,4 +1,7 @@
-import { IamBoundedContext, iamMockBoundedContextData } from '@app/iam/bounded-context';
+import {
+    IamBoundedContext,
+    iamMockBoundedContextData,
+} from '@app/iam/bounded-context';
 import {
     IamBoundedContextCreatedAt,
     IamBoundedContextDeletedAt,
@@ -6,6 +9,7 @@ import {
     IamBoundedContextIsActive,
     IamBoundedContextName,
     IamBoundedContextRoot,
+    IamBoundedContextRowId,
     IamBoundedContextSort,
     IamBoundedContextUpdatedAt,
 } from '@app/iam/bounded-context/domain/value-objects';
@@ -14,25 +18,24 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class IamMockBoundedContextSeeder extends MockSeeder<IamBoundedContext>
-{
+export class IamMockBoundedContextSeeder extends MockSeeder<IamBoundedContext> {
     public collectionSource: IamBoundedContext[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const boundedContext of _.orderBy(iamMockBoundedContextData, ['id']))
-        {
+        for (const boundedContext of _.orderBy(iamMockBoundedContextData, [
+            'id',
+        ])) {
             this.collectionSource.push(
                 IamBoundedContext.register(
                     new IamBoundedContextId(boundedContext.id),
+                    new IamBoundedContextRowId(boundedContext.rowId),
                     new IamBoundedContextName(boundedContext.name),
                     new IamBoundedContextRoot(boundedContext.root),
                     new IamBoundedContextSort(boundedContext.sort),

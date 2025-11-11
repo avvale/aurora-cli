@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthIClientRepository, OAuthMockClientRepository } from '@app/o-auth/client';
+import {
+    OAuthIClientRepository,
+    OAuthMockClientRepository,
+} from '@app/o-auth/client';
 import { OAuthCreateClientsService } from '@app/o-auth/client/application/create/o-auth-create-clients.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthCreateClientsService', () =>
-{
+describe('OAuthCreateClientsService', () => {
     let service: OAuthCreateClientsService;
     let mockRepository: OAuthMockClientRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,34 +26,29 @@ describe('OAuthCreateClientsService', () =>
                 OAuthCreateClientsService,
                 OAuthMockClientRepository,
                 {
-                    provide : OAuthIClientRepository,
+                    provide: OAuthIClientRepository,
                     useValue: {
-                        insert: () => { /**/ },
+                        insert: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthCreateClientsService);
         mockRepository = module.get(OAuthMockClientRepository);
     });
 
-    describe('main', () =>
-    {
-        test('CreateClientsService should be defined', () =>
-        {
+    describe('main', () => {
+        test('CreateClientsService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should create clients and emit event', async () =>
-        {
-            expect(
-                await service.main(
-                    mockRepository.collectionSource,
-                ),
-            )
-                .toBe(undefined);
+        test('should create clients and emit event', async () => {
+            expect(await service.main(mockRepository.collectionSource)).toBe(
+                undefined,
+            );
         });
     });
 });

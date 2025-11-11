@@ -8,6 +8,7 @@ import {
     ToolsMigrationIsActive,
     ToolsMigrationIsExecuted,
     ToolsMigrationName,
+    ToolsMigrationRowId,
     ToolsMigrationSort,
     ToolsMigrationUpdatedAt,
     ToolsMigrationUpScript,
@@ -18,25 +19,22 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class ToolsMockMigrationSeeder extends MockSeeder<ToolsMigration>
-{
+export class ToolsMockMigrationSeeder extends MockSeeder<ToolsMigration> {
     public collectionSource: ToolsMigration[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const migration of _.orderBy(toolsMockMigrationData, ['id']))
-        {
+        for (const migration of _.orderBy(toolsMockMigrationData, ['id'])) {
             this.collectionSource.push(
                 ToolsMigration.register(
                     new ToolsMigrationId(migration.id),
+                    new ToolsMigrationRowId(migration.rowId),
                     new ToolsMigrationName(migration.name),
                     new ToolsMigrationVersion(migration.version),
                     new ToolsMigrationIsActive(migration.isActive),

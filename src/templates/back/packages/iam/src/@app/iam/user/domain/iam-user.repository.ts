@@ -1,28 +1,29 @@
-import { IamUserId } from './value-objects';
 import { IamUser } from '@app/iam/user';
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IRepository,
+    LiteralObject,
+    Pagination,
+    QueryStatement,
+} from '@aurorajs.dev/core';
+import { IamUserId } from './value-objects';
 
-export abstract class IamIUserRepository implements IRepository<IamUser>
-{
+export abstract class IamIUserRepository implements IRepository<IamUser> {
     abstract readonly repository: any;
 
     // paginate records
-    abstract paginate(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<Pagination<IamUser>>;
+    abstract paginate(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<Pagination<IamUser>>;
 
     // find a single record
-    abstract find(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<IamUser | null>;
+    abstract find(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<IamUser | null>;
 
     // find a single record by id
     abstract findById(
@@ -32,34 +33,28 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<IamUser | null>;
 
     // get multiple records
-    abstract get(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<IamUser[]>;
+    abstract get(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<IamUser[]>;
 
     // get records with rawSQL
-    abstract rawSQL(
-        options?: {
-            rawSQL?: string;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<IamUser[]>;
+    abstract rawSQL(options?: {
+        rawSQL?: string;
+        cQMetadata?: CQMetadata;
+    }): Promise<IamUser[]>;
 
     // count records
-    abstract count(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<number>;
+    abstract count(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<number>;
 
     // max record
     abstract max(
@@ -68,7 +63,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // min record
@@ -78,7 +73,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // sum record
@@ -88,7 +83,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // ******************
@@ -103,7 +98,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             dataFactory?: (aggregate: IamUser) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement?: (aggregate: IamUser) => QueryStatement;
-        }
+        },
     ): Promise<void>;
 
     // create a single or multiple records
@@ -112,7 +107,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
         options?: {
             insertOptions?: LiteralObject;
             dataFactory?: (aggregate: IamUser) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update record by id
@@ -125,7 +120,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             dataFactory?: (aggregate: IamUser) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update records
@@ -137,7 +132,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamUser) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update and increment records
@@ -149,7 +144,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: IamUser) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // insert or update key identification element already existing in the table
@@ -158,7 +153,7 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
         options?: {
             upsertOptions?: LiteralObject;
             dataFactory?: (aggregate: IamUser) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete record
@@ -170,16 +165,14 @@ export abstract class IamIUserRepository implements IRepository<IamUser>
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete records
-    abstract delete(
-        options?: {
-            deleteOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
+    abstract delete(options?: {
+        deleteOptions?: LiteralObject;
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<void>;
 }

@@ -1,5 +1,9 @@
 /* eslint-disable key-spacing */
-import { ToolsCreatedKeyValueEvent, ToolsDeletedKeyValueEvent, ToolsUpdatedKeyValueEvent } from '@app/tools/key-value';
+import {
+    ToolsCreatedKeyValueEvent,
+    ToolsDeletedKeyValueEvent,
+    ToolsUpdatedKeyValueEvent,
+} from '@app/tools/key-value';
 import {
     ToolsKeyValueCreatedAt,
     ToolsKeyValueDeletedAt,
@@ -7,6 +11,7 @@ import {
     ToolsKeyValueId,
     ToolsKeyValueIsActive,
     ToolsKeyValueKey,
+    ToolsKeyValueRowId,
     ToolsKeyValueType,
     ToolsKeyValueUpdatedAt,
     ToolsKeyValueValue,
@@ -14,9 +19,9 @@ import {
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class ToolsKeyValue extends AggregateRoot
-{
+export class ToolsKeyValue extends AggregateRoot {
     id: ToolsKeyValueId;
+    rowId: ToolsKeyValueRowId;
     key: ToolsKeyValueKey;
     type: ToolsKeyValueType;
     value: ToolsKeyValueValue;
@@ -28,6 +33,7 @@ export class ToolsKeyValue extends AggregateRoot
 
     constructor(
         id: ToolsKeyValueId,
+        rowId: ToolsKeyValueRowId,
         key: ToolsKeyValueKey,
         type: ToolsKeyValueType,
         value: ToolsKeyValueValue,
@@ -36,10 +42,10 @@ export class ToolsKeyValue extends AggregateRoot
         createdAt: ToolsKeyValueCreatedAt,
         updatedAt: ToolsKeyValueUpdatedAt,
         deletedAt: ToolsKeyValueDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.key = key;
         this.type = type;
         this.value = value;
@@ -52,6 +58,7 @@ export class ToolsKeyValue extends AggregateRoot
 
     static register(
         id: ToolsKeyValueId,
+        rowId: ToolsKeyValueRowId,
         key: ToolsKeyValueKey,
         type: ToolsKeyValueType,
         value: ToolsKeyValueValue,
@@ -60,10 +67,10 @@ export class ToolsKeyValue extends AggregateRoot
         createdAt: ToolsKeyValueCreatedAt,
         updatedAt: ToolsKeyValueUpdatedAt,
         deletedAt: ToolsKeyValueDeletedAt,
-    ): ToolsKeyValue
-    {
+    ): ToolsKeyValue {
         return new ToolsKeyValue(
             id,
+            rowId,
             key,
             type,
             value,
@@ -75,13 +82,7 @@ export class ToolsKeyValue extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: ToolsKeyValue;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: ToolsKeyValue; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsCreatedKeyValueEvent({
                 payload: {
@@ -100,13 +101,7 @@ export class ToolsKeyValue extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: ToolsKeyValue;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: ToolsKeyValue; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsUpdatedKeyValueEvent({
                 payload: {
@@ -125,17 +120,12 @@ export class ToolsKeyValue extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: ToolsKeyValue;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: ToolsKeyValue; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsDeletedKeyValueEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     key: event.payload.key.value,
                     type: event.payload.type.value,
                     value: event.payload.value.value,
@@ -150,10 +140,10 @@ export class ToolsKeyValue extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             key: this.key.value,
             type: this.type.value,
             value: this.value.value,
@@ -166,8 +156,7 @@ export class ToolsKeyValue extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             key: this.key.value,

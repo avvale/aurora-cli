@@ -1,58 +1,63 @@
-import { IamCreateUserCommandHandler } from './iam-create-user.command-handler';
-import { IamCreateUserService } from './iam-create-user.service';
 import { IamCreateUserCommand, iamMockUserData } from '@app/iam/user';
 import { Test, TestingModule } from '@nestjs/testing';
+import { IamCreateUserCommandHandler } from './iam-create-user.command-handler';
+import { IamCreateUserService } from './iam-create-user.service';
 
-describe('IamCreateUserCommandHandler', () =>
-{
+describe('IamCreateUserCommandHandler', () => {
     let commandHandler: IamCreateUserCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreateUserCommandHandler,
                 {
-                    provide : IamCreateUserService,
+                    provide: IamCreateUserService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamCreateUserCommandHandler>(IamCreateUserCommandHandler);
+        commandHandler = module.get<IamCreateUserCommandHandler>(
+            IamCreateUserCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('CreateUserCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('CreateUserCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the IamCreateUserService', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamCreateUserCommand(
-                    {
-                        id: iamMockUserData[0].id,
-                        accountId: iamMockUserData[0].accountId,
-                        name: iamMockUserData[0].name,
-                        surname: iamMockUserData[0].surname,
-                        avatar: iamMockUserData[0].avatar,
-                        mobile: iamMockUserData[0].mobile,
-                        langId: iamMockUserData[0].langId,
-                        password: iamMockUserData[0].password,
-                        isTwoFactorAuthenticationEnabled: iamMockUserData[0].isTwoFactorAuthenticationEnabled,
-                        twoFactorAuthenticationSecret: iamMockUserData[0].twoFactorAuthenticationSecret,
-                        rememberToken: iamMockUserData[0].rememberToken,
-                        meta: iamMockUserData[0].meta,
-                    },
-                    { timezone: process.env.TZ },
+        test('should create the values objects and pass them as parameters to the IamCreateUserService', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamCreateUserCommand(
+                        {
+                            id: iamMockUserData[0].id,
+                            rowId: iamMockUserData[0].rowId,
+                            accountId: iamMockUserData[0].accountId,
+                            name: iamMockUserData[0].name,
+                            surname: iamMockUserData[0].surname,
+                            avatar: iamMockUserData[0].avatar,
+                            mobile: iamMockUserData[0].mobile,
+                            langId: iamMockUserData[0].langId,
+                            password: iamMockUserData[0].password,
+                            isTwoFactorAuthenticationEnabled:
+                                iamMockUserData[0]
+                                    .isTwoFactorAuthenticationEnabled,
+                            twoFactorAuthenticationSecret:
+                                iamMockUserData[0]
+                                    .twoFactorAuthenticationSecret,
+                            rememberToken: iamMockUserData[0].rememberToken,
+                            meta: iamMockUserData[0].meta,
+                        },
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

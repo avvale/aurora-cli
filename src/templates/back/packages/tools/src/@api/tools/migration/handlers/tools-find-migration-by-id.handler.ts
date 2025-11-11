@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class ToolsFindMigrationByIdHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class ToolsFindMigrationByIdHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         id: string,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<ToolsMigration | ToolsMigrationDto>
-    {
-        return await this.queryBus.ask(new ToolsFindMigrationByIdQuery(
-            id,
-            constraint,
-            {
+    ): Promise<ToolsMigration | ToolsMigrationDto> {
+        return await this.queryBus.ask(
+            new ToolsFindMigrationByIdQuery(id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

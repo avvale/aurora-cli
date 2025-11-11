@@ -1,561 +1,480 @@
 {
     "info": {
-		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-		"name"          : "@app - iam/tag",
-		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - iam/tag",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-			"name": "GraphQL - iamCreateTag",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "GraphQL - iamCreateTag",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:IamCreateTagInput!)\n{\n\tiamCreateTag (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 89469392159942590000, \n\t\t\"name\": \"Refined Wooden Bacon\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamCreateTags",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[IamCreateTagInput]!)\n{\n\tiamCreateTags (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"6bfaf8e2-d992-4983-85f0-26aac7e86ef7\", \n\t\t\t\"rowId\": 15574805876280472000, \n\t\t\t\"name\": \"Refined Cotton Pants\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0cc9e393-a404-4bc4-83fd-63458aebdc31\", \n\t\t\t\"rowId\": 33008521877769590000, \n\t\t\t\"name\": \"Refined Cotton Chips\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fd0e3425-c600-40fc-aa6e-a31a76f42f3f\", \n\t\t\t\"rowId\": 29642486894288570000, \n\t\t\t\"name\": \"Refined Fresh Towels\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d4bacc5f-bc06-46bc-aba5-ecdeace4da2d\", \n\t\t\t\"rowId\": 12100979154819994000, \n\t\t\t\"name\": \"Small Fresh Cheese\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"71a09370-b777-4039-bfa8-312787bb63e9\", \n\t\t\t\"rowId\": 75093581541676740000, \n\t\t\t\"name\": \"Sleek Fresh Shirt\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c0a515f5-7bcf-48e5-bbae-fbbd7fd23e45\", \n\t\t\t\"rowId\": 47607658539764150000, \n\t\t\t\"name\": \"Practical Granite Bike\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b0ea31c0-153f-4bf5-a863-a0140eb0134e\", \n\t\t\t\"rowId\": 53307200598020680000, \n\t\t\t\"name\": \"Rustic Soft Gloves\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e2b8a4b3-7e0d-4e0b-a465-2a5fab01913b\", \n\t\t\t\"rowId\": 46867343491922120000, \n\t\t\t\"name\": \"Practical Metal Gloves\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"109a89a4-e5fa-4d3d-96d9-4af4a0c23d48\", \n\t\t\t\"rowId\": 98829805153136790000, \n\t\t\t\"name\": \"Gorgeous Plastic Sausages\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ede1b187-93c8-40aa-ba6b-5b983884c30c\", \n\t\t\t\"rowId\": 64544072793513910000, \n\t\t\t\"name\": \"Sleek Frozen Bike\"\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamPaginateTags",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateTags (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamGetTags",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tiamGetTags (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamFindTag",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tiamFindTag (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamFindTagById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\tiamFindTagById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamUpdateTag",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:IamUpdateTagInput!)\n{\n\tiamUpdateTag (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 63622153956891664000, \n\t\t\"name\": \"Practical Plastic Gloves\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamDeleteTagById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\tiamDeleteTagById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamDeleteTags",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteTags (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - iam/tag/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:IamCreateTagInput!)\n{\n\tiamCreateTag (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Small Plastic Fish\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 81027993070905030000, \n\t\"name\": \"Handcrafted Fresh Cheese\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tag/create",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tag", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamCreateTags",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:[IamCreateTagInput]!)\n{\n\tiamCreateTags (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"0949e8e9-7bb3-4d5b-92ca-da8581052c83\", \n\t\t\t\"name\": \"Gorgeous Fresh Chicken\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c122d017-fd0e-428f-b745-30de12d84b36\", \n\t\t\t\"name\": \"Refined Plastic Salad\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"38cf8305-8c0a-4934-b216-8e7b62193a1a\", \n\t\t\t\"name\": \"Refined Steel Chips\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"581645e1-8cec-400a-8cb3-9b2dd2e64a03\", \n\t\t\t\"name\": \"Refined Metal Mouse\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"639cb277-f73e-448e-aaf4-846b8f2a7051\", \n\t\t\t\"name\": \"Licensed Wooden Sausages\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5d6e1e88-6142-4914-a1a7-eac83617e533\", \n\t\t\t\"name\": \"Awesome Granite Shoes\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8e315ca4-5147-47a8-b29b-3149149a57a6\", \n\t\t\t\"name\": \"Fantastic Metal Tuna\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b347636b-6639-43ca-9a02-b60e29e96203\", \n\t\t\t\"name\": \"Practical Cotton Pizza\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f034c1e9-7eee-4f18-b0f8-ffbcbf3c8f18\", \n\t\t\t\"name\": \"Tasty Cotton Soap\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d38cefa4-219b-4cd1-9fed-2396cae30568\", \n\t\t\t\"name\": \"Licensed Concrete Sausages\"\n\t\t}\n\t]\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamPaginateTags",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tags/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateTags (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"abe6a033-7c1a-49a4-a4ba-fba459493524\", \n\t\t\"rowId\": 91317600476807710000, \n\t\t\"name\": \"Tasty Plastic Bike\"\n\t}, \n\t{\n\t\t\"id\": \"5d3df7e8-58b8-4a2f-90d6-543387f16fba\", \n\t\t\"rowId\": 30417201305228370000, \n\t\t\"name\": \"Ergonomic Rubber Chips\"\n\t}, \n\t{\n\t\t\"id\": \"f76e5bc7-45d4-4b60-b0b8-7cc8755e808d\", \n\t\t\"rowId\": 15244757464999186000, \n\t\t\"name\": \"Rustic Soft Chips\"\n\t}, \n\t{\n\t\t\"id\": \"7f4fb899-f020-45ec-97a2-472e79f846d9\", \n\t\t\"rowId\": 86118988172971410000, \n\t\t\"name\": \"Tasty Frozen Towels\"\n\t}, \n\t{\n\t\t\"id\": \"9c6b67c7-9a25-4906-95fe-a07300a4bcc7\", \n\t\t\"rowId\": 89173244173698240000, \n\t\t\"name\": \"Sleek Cotton Table\"\n\t}, \n\t{\n\t\t\"id\": \"d4bb1bd3-e521-4587-bc5d-494125929cdc\", \n\t\t\"rowId\": 92848263247190230000, \n\t\t\"name\": \"Gorgeous Rubber Pants\"\n\t}, \n\t{\n\t\t\"id\": \"1203fb72-8dc7-49ab-aa4e-b511d44e91e1\", \n\t\t\"rowId\": 39699106617349420000, \n\t\t\"name\": \"Rustic Concrete Salad\"\n\t}, \n\t{\n\t\t\"id\": \"3cf6ea70-6633-41c9-9efd-840f0ba9174d\", \n\t\t\"rowId\": 66291693589597680000, \n\t\t\"name\": \"Refined Metal Sausages\"\n\t}, \n\t{\n\t\t\"id\": \"3eedbc30-f91b-4c1b-8e12-7759c984cfde\", \n\t\t\"rowId\": 20190880509901742000, \n\t\t\"name\": \"Generic Frozen Salad\"\n\t}, \n\t{\n\t\t\"id\": \"f0f3737d-8f01-4067-9f31-520a8aa8ee4c\", \n\t\t\"rowId\": 98152722684845160000, \n\t\t\"name\": \"Intelligent Metal Bacon\"\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tags/create",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tags", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamGetTags",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tags/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamGetTags (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tags/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tags", "paginate"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamFindTag",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tags/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamFindTag (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tags/get",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tags", "get"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamFindTagById",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tag/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($id:ID)\n{\n\tiamFindTagById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tag/find",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tag", "find"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamUpdateTag",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tag/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:IamUpdateTagInput!)\n{\n\tiamUpdateTag (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Incredible Rubber Chair\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamDeleteTagById",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\tiamDeleteTagById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamDeleteTags",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteTags (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tag/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Intelligent Soft Ball\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tag/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tag",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tags/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"df56b3e6-479a-4fcf-a6ff-3642ccae0c75\", \n\t\t\"name\": \"Handmade Wooden Mouse\"\n\t}, \n\t{\n\t\t\"id\": \"e9c002ab-7e4d-48b0-b0c4-18e22fb89385\", \n\t\t\"name\": \"Generic Soft Ball\"\n\t}, \n\t{\n\t\t\"id\": \"9c75ec40-fe06-46db-8c8c-74840be7e1af\", \n\t\t\"name\": \"Handcrafted Wooden Shoes\"\n\t}, \n\t{\n\t\t\"id\": \"5f0a5334-8224-4ef6-b8f3-e6291f524d61\", \n\t\t\"name\": \"Unbranded Concrete Mouse\"\n\t}, \n\t{\n\t\t\"id\": \"a633f27f-09d7-48c0-b203-55f01f563082\", \n\t\t\"name\": \"Intelligent Plastic Towels\"\n\t}, \n\t{\n\t\t\"id\": \"c787def1-c5e9-4175-b5b1-3630d385de3b\", \n\t\t\"name\": \"Handcrafted Cotton Table\"\n\t}, \n\t{\n\t\t\"id\": \"3bf0c45e-1c50-4649-a279-ebeb0366e034\", \n\t\t\"name\": \"Rustic Frozen Tuna\"\n\t}, \n\t{\n\t\t\"id\": \"227044d3-4ae4-4400-9fb5-3b46086ab6d0\", \n\t\t\"name\": \"Refined Soft Computer\"\n\t}, \n\t{\n\t\t\"id\": \"6d775e6f-22a7-4aab-9aff-9bb30a1c0473\", \n\t\t\"name\": \"Generic Concrete Car\"\n\t}, \n\t{\n\t\t\"id\": \"46318035-9ab5-4566-ab81-f5623859cec3\", \n\t\t\"name\": \"Awesome Steel Gloves\"\n\t}\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tags/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tags",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tags/paginate",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tags/paginate",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-                        "tags",
-                        "paginate"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tags/get",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tags/get",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tags",
-                        "get"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tag/find",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tag/find",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tag",
-                        "find"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tag/find/{id}",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tag/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tag",
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tag/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "iam",
+                        "tag",
                         "find",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - iam/tag/update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Ergonomic Fresh Chair\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tag/update",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tag",
-                        "update"
-					]
-				}
-			},
-			"response": []
+            "name": "REST - iam/tag/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 11080628707223624000, \n\t\"name\": \"Ergonomic Metal Shirt\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tag/update",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tag", "update"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - iam/tag/delete/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tag/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tag",
+            "name": "REST - iam/tag/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tag/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "iam",
+                        "tag",
                         "delete",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
-		},
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
         {
-			"name": "REST - iam/tags/delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tags/delete",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tags",
-                        "delete"
-					]
-				}
-			},
-			"response": []
-		}
+            "name": "REST - iam/tags/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tags/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tags", "delete"]
+                }
+            },
+            "response": []
+        }
     ],
     "variable": [
-		{
-			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-			"key": "URL",
-			"value": "http://localhost:8080",
-			"type": "string"
-		}
-	]
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
 }

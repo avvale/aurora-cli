@@ -4,55 +4,58 @@ import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreatePermissionRoleHandler', () =>
-{
+describe('IamCreatePermissionRoleHandler', () => {
     let handler: IamCreatePermissionRoleHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreatePermissionRoleHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamCreatePermissionRoleHandler>(IamCreatePermissionRoleHandler);
+        handler = module.get<IamCreatePermissionRoleHandler>(
+            IamCreatePermissionRoleHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamCreatePermissionRoleHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreatePermissionRoleHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an permissionRole created', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionRoleData[0])));
+        test('should return an permissionRole created', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockPermissionRoleData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     iamMockPermissionRoleData[0],
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockPermissionRoleData[0]);
+            ).toBe(iamMockPermissionRoleData[0]);
         });
     });
 });

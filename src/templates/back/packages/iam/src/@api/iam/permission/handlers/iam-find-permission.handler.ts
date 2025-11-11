@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamFindPermissionHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class IamFindPermissionHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamPermission | IamPermissionDto>
-    {
-        return await this.queryBus.ask(new IamFindPermissionQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<IamPermission | IamPermissionDto> {
+        return await this.queryBus.ask(
+            new IamFindPermissionQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

@@ -1,7 +1,8 @@
-import { IamBoundedContext, IamIBoundedContextRepository } from '@app/iam/bounded-context';
 import {
-    IamBoundedContextCreatedAt,
-    IamBoundedContextDeletedAt,
+    IamBoundedContext,
+    IamIBoundedContextRepository,
+} from '@app/iam/bounded-context';
+import {
     IamBoundedContextId,
     IamBoundedContextIsActive,
     IamBoundedContextName,
@@ -14,8 +15,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdateBoundedContextByIdService
-{
+export class IamUpdateBoundedContextByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIBoundedContextRepository,
@@ -31,11 +31,11 @@ export class IamUpdateBoundedContextByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const boundedContext = IamBoundedContext.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.root,
             payload.sort,
@@ -46,19 +46,15 @@ export class IamUpdateBoundedContextByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            boundedContext,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(boundedContext, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const boundedContextRegister = this.publisher.mergeObjectContext(
-            boundedContext,
-        );
+        const boundedContextRegister =
+            this.publisher.mergeObjectContext(boundedContext);
 
         boundedContextRegister.updated({
             payload: boundedContext,

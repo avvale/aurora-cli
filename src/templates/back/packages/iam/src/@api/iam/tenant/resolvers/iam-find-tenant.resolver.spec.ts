@@ -3,47 +3,43 @@ import { IamFindTenantHandler, IamFindTenantResolver } from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTenantResolver', () =>
-{
+describe('IamFindTenantResolver', () => {
     let resolver: IamFindTenantResolver;
     let handler: IamFindTenantHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindTenantResolver,
                 {
-                    provide : IamFindTenantHandler,
+                    provide: IamFindTenantHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<IamFindTenantResolver>(IamFindTenantResolver);
         handler = module.get<IamFindTenantHandler>(IamFindTenantHandler);
     });
 
-    test('IamFindTenantResolver should be defined', () =>
-    {
+    test('IamFindTenantResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTenantResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTenantResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a tenant', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+        test('should return a tenant', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
             expect(await resolver.main()).toBe(iamMockTenantData[0]);
         });
     });

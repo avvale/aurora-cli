@@ -1,49 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsGetKeyValuesHandler, ToolsGetKeyValuesResolver } from '@api/tools/key-value';
+import {
+    ToolsGetKeyValuesHandler,
+    ToolsGetKeyValuesResolver,
+} from '@api/tools/key-value';
 import { toolsMockKeyValueData } from '@app/tools/key-value';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsGetKeyValuesResolver', () =>
-{
+describe('ToolsGetKeyValuesResolver', () => {
     let resolver: ToolsGetKeyValuesResolver;
     let handler: ToolsGetKeyValuesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsGetKeyValuesResolver,
                 {
-                    provide : ToolsGetKeyValuesHandler,
+                    provide: ToolsGetKeyValuesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsGetKeyValuesResolver>(ToolsGetKeyValuesResolver);
-        handler = module.get<ToolsGetKeyValuesHandler>(ToolsGetKeyValuesHandler);
+        resolver = module.get<ToolsGetKeyValuesResolver>(
+            ToolsGetKeyValuesResolver,
+        );
+        handler = module.get<ToolsGetKeyValuesHandler>(
+            ToolsGetKeyValuesHandler,
+        );
     });
 
-    test('ToolsGetKeyValuesResolver should be defined', () =>
-    {
-        expect(resolver).   toBeDefined();
+    test('ToolsGetKeyValuesResolver should be defined', () => {
+        expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsGetKeyValuesResolver should be defined', () =>
-        {
-            expect(resolver).   toBeDefined();
+    describe('main', () => {
+        test('ToolsGetKeyValuesResolver should be defined', () => {
+            expect(resolver).toBeDefined();
         });
 
-        test('should return a toolsMockKeyValueData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockKeyValueData)));
+        test('should return a toolsMockKeyValueData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(toolsMockKeyValueData)),
+            );
             expect(await resolver.main()).toBe(toolsMockKeyValueData);
         });
     });

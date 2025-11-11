@@ -1,93 +1,67 @@
-import { OAuthCreatedScopeEvent, OAuthCreatedScopesEvent, OAuthDeletedScopeEvent, OAuthDeletedScopesEvent, OAuthScope, OAuthUpdatedAndIncrementedScopeEvent, OAuthUpdatedAndIncrementedScopesEvent, OAuthUpdatedScopeEvent, OAuthUpdatedScopesEvent } from '@app/o-auth/scope';
+import {
+    OAuthCreatedScopeEvent,
+    OAuthCreatedScopesEvent,
+    OAuthDeletedScopeEvent,
+    OAuthDeletedScopesEvent,
+    OAuthScope,
+} from '@app/o-auth/scope';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthAddScopesContextEvent extends AggregateRoot
-{
+export class OAuthAddScopesContextEvent extends AggregateRoot {
     constructor(
         public readonly aggregateRoots: OAuthScope[] = [],
-    )
-    {
+        public readonly cQMetadata?: CQMetadata,
+    ) {
         super();
     }
 
-    *[Symbol.iterator]()
-    {
+    *[Symbol.iterator]() {
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created(): void
-    {
+    created(): void {
         this.apply(
-            new OAuthCreatedScopesEvent(
-                this.aggregateRoots.map(scope =>
-                    new OAuthCreatedScopeEvent(
-                        scope.id.value,
-                        scope.code.value,
-                        scope.name.value,
-                        scope.roleIds?.value,
-                        scope.createdAt?.value,
-                        scope.updatedAt?.value,
-                        scope.deletedAt?.value,
-                    ),
+            new OAuthCreatedScopesEvent({
+                payload: this.aggregateRoots.map(
+                    (scope) =>
+                        new OAuthCreatedScopeEvent({
+                            payload: {
+                                id: scope.id.value,
+                                code: scope.code.value,
+                                name: scope.name.value,
+                                roleIds: scope.roleIds?.value,
+                                createdAt: scope.createdAt?.value,
+                                updatedAt: scope.updatedAt?.value,
+                                deletedAt: scope.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
-    updated(): void
-    {
+    deleted(): void {
         this.apply(
-            new OAuthUpdatedScopesEvent(
-                this.aggregateRoots.map(scope =>
-                    new OAuthUpdatedScopeEvent(
-                        scope.id.value,
-                        scope.code.value,
-                        scope.name.value,
-                        scope.roleIds?.value,
-                        scope.createdAt?.value,
-                        scope.updatedAt?.value,
-                        scope.deletedAt?.value,
-                    ),
+            new OAuthDeletedScopesEvent({
+                payload: this.aggregateRoots.map(
+                    (scope) =>
+                        new OAuthDeletedScopeEvent({
+                            payload: {
+                                id: scope.id.value,
+                                rowId: scope.rowId.value,
+                                code: scope.code.value,
+                                name: scope.name.value,
+                                roleIds: scope.roleIds?.value,
+                                createdAt: scope.createdAt?.value,
+                                updatedAt: scope.updatedAt?.value,
+                                deletedAt: scope.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new OAuthUpdatedAndIncrementedScopesEvent(
-                this.aggregateRoots.map(scope =>
-                    new OAuthUpdatedAndIncrementedScopeEvent(
-                        scope.id.value,
-                        scope.code.value,
-                        scope.name.value,
-                        scope.roleIds?.value,
-                        scope.createdAt?.value,
-                        scope.updatedAt?.value,
-                        scope.deletedAt?.value,
-                    ),
-                ),
-            ),
-        );
-    }
-
-    deleted(): void
-    {
-        this.apply(
-            new OAuthDeletedScopesEvent(
-                this.aggregateRoots.map(scope =>
-                    new OAuthDeletedScopeEvent(
-                        scope.id.value,
-                        scope.code.value,
-                        scope.name.value,
-                        scope.roleIds?.value,
-                        scope.createdAt?.value,
-                        scope.updatedAt?.value,
-                        scope.deletedAt?.value,
-                    ),
-                ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

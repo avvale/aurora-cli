@@ -1,50 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsFindMigrationByIdHandler, ToolsFindMigrationByIdResolver } from '@api/tools/migration';
+import {
+    ToolsFindMigrationByIdHandler,
+    ToolsFindMigrationByIdResolver,
+} from '@api/tools/migration';
 import { toolsMockMigrationData } from '@app/tools/migration';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsFindMigrationByIdResolver', () =>
-{
+describe('ToolsFindMigrationByIdResolver', () => {
     let resolver: ToolsFindMigrationByIdResolver;
     let handler: ToolsFindMigrationByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsFindMigrationByIdResolver,
                 {
-                    provide : ToolsFindMigrationByIdHandler,
+                    provide: ToolsFindMigrationByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsFindMigrationByIdResolver>(ToolsFindMigrationByIdResolver);
-        handler = module.get<ToolsFindMigrationByIdHandler>(ToolsFindMigrationByIdHandler);
+        resolver = module.get<ToolsFindMigrationByIdResolver>(
+            ToolsFindMigrationByIdResolver,
+        );
+        handler = module.get<ToolsFindMigrationByIdHandler>(
+            ToolsFindMigrationByIdHandler,
+        );
     });
 
-    test('ToolsFindMigrationByIdResolver should be defined', () =>
-    {
+    test('ToolsFindMigrationByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsFindMigrationByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsFindMigrationByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an migration by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData[0])));
-            expect(await resolver.main(toolsMockMigrationData[0].id)).toBe(toolsMockMigrationData[0]);
+        test('should return an migration by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockMigrationData[0]),
+                    ),
+            );
+            expect(await resolver.main(toolsMockMigrationData[0].id)).toBe(
+                toolsMockMigrationData[0],
+            );
         });
     });
 });

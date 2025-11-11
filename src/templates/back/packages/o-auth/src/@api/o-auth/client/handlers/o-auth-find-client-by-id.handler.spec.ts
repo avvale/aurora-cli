@@ -4,55 +4,52 @@ import { oAuthMockClientData } from '@app/o-auth/client';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthFindClientByIdHandler', () =>
-{
+describe('OAuthFindClientByIdHandler', () => {
     let handler: OAuthFindClientByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthFindClientByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<OAuthFindClientByIdHandler>(OAuthFindClientByIdHandler);
+        handler = module.get<OAuthFindClientByIdHandler>(
+            OAuthFindClientByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('OAuthFindClientByIdHandler should be defined', () =>
-    {
+    test('OAuthFindClientByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthFindClientByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthFindClientByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an client by id', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
+        test('should return an client by id', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockClientData[0])),
+            );
             expect(
                 await handler.main(
                     oAuthMockClientData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(oAuthMockClientData[0]);
+            ).toBe(oAuthMockClientData[0]);
         });
     });
 });

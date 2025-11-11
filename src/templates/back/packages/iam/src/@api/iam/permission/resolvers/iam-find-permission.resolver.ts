@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.permission.get')
-export class IamFindPermissionResolver
-{
-    constructor(
-        private readonly handler: IamFindPermissionHandler,
-    ) {}
+export class IamFindPermissionResolver {
+    constructor(private readonly handler: IamFindPermissionHandler) {}
 
     @Query('iamFindPermission')
     async main(
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<IamPermission>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<IamPermission> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

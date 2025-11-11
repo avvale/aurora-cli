@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class OAuthUpdateApplicationByIdCommand
-{
+export class OAuthUpdateApplicationByIdCommand {
     constructor(
         public readonly payload: {
             id: string;

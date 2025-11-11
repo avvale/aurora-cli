@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.tenantAccount.create')
-export class IamCreateTenantAccountResolver
-{
-    constructor(
-        private readonly handler: IamCreateTenantAccountHandler,
-    ) {}
+export class IamCreateTenantAccountResolver {
+    constructor(private readonly handler: IamCreateTenantAccountHandler) {}
 
     @Mutation('iamCreateTenantAccount')
     async main(
         @Args('payload') payload: IamCreateTenantAccountInput,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<IamTenantAccount>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
+    ): Promise<IamTenantAccount> {
+        return await this.handler.main(payload, timezone, auditing);
     }
 }

@@ -4,62 +4,57 @@ import { iamMockRoleAccountData } from '@app/iam/role-account';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginateRolesAccountsHandler', () =>
-{
+describe('IamPaginateRolesAccountsHandler', () => {
     let handler: IamPaginateRolesAccountsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamPaginateRolesAccountsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamPaginateRolesAccountsHandler>(IamPaginateRolesAccountsHandler);
+        handler = module.get<IamPaginateRolesAccountsHandler>(
+            IamPaginateRolesAccountsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamPaginateRolesAccountsHandler should be defined', () =>
-    {
+    test('IamPaginateRolesAccountsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginateRolesAccountsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginateRolesAccountsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a rolesAccounts', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+        test('should return a rolesAccounts', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: iamMockRoleAccountData.length,
+                            count: iamMockRoleAccountData.length,
+                            rows: iamMockRoleAccountData,
+                        }),
+                    ),
+            );
+            expect(await handler.main({}, {})).toEqual({
                 total: iamMockRoleAccountData.length,
                 count: iamMockRoleAccountData.length,
-                rows : iamMockRoleAccountData,
-            })));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                ),
-            )
-                .toEqual({
-                    total: iamMockRoleAccountData.length,
-                    count: iamMockRoleAccountData.length,
-                    rows : iamMockRoleAccountData,
-                });
+                rows: iamMockRoleAccountData,
+            });
         });
     });
 });

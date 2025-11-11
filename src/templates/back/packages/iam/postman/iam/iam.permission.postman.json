@@ -1,561 +1,480 @@
 {
     "info": {
-		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-		"name"          : "@app - iam/permission",
-		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - iam/permission",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-			"name": "GraphQL - iamCreatePermission",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "GraphQL - iamCreatePermission",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:IamCreatePermissionInput!)\n{\n\tiamCreatePermission (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tboundedContextId\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 64634931345651690000, \n\t\t\"name\": \"Handmade Frozen Salad\", \n\t\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamCreatePermissions",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[IamCreatePermissionInput]!)\n{\n\tiamCreatePermissions (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"1bc7cb27-4abd-4c73-89fb-b602c7a194d0\", \n\t\t\t\"rowId\": 37117603555926620000, \n\t\t\t\"name\": \"Ergonomic Soft Keyboard\", \n\t\t\t\"boundedContextId\": \"94d6a450-658a-4b84-99ca-a49ae6c28d7f\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8c67aac3-7663-461a-8ee4-9e0c582931f5\", \n\t\t\t\"rowId\": 81759102256570930000, \n\t\t\t\"name\": \"Handmade Granite Chair\", \n\t\t\t\"boundedContextId\": \"87fc55a6-08d8-42ae-b857-c1a2db252979\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9efb3b04-0f2c-460b-9f91-05fce8d53a86\", \n\t\t\t\"rowId\": 76700092706544600000, \n\t\t\t\"name\": \"Ergonomic Wooden Shoes\", \n\t\t\t\"boundedContextId\": \"94a8f817-0ddb-4c2b-8319-fa3ca31eaaf5\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c53dead5-1dfd-4d07-a17d-b9067942ad64\", \n\t\t\t\"rowId\": 19545557194251400000, \n\t\t\t\"name\": \"Small Soft Salad\", \n\t\t\t\"boundedContextId\": \"fc663eb8-896d-4260-a130-cd5435dafcd3\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5fa8eecd-8ec9-4e70-9c46-5a09a96e9732\", \n\t\t\t\"rowId\": 70174351313252835000, \n\t\t\t\"name\": \"Handcrafted Plastic Gloves\", \n\t\t\t\"boundedContextId\": \"22d67f40-32b6-4aca-9e00-6dee855153ac\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ef5ea9a4-61e1-4d0a-ac5c-97d8581b387d\", \n\t\t\t\"rowId\": 47881555232685280000, \n\t\t\t\"name\": \"Tasty Soft Chicken\", \n\t\t\t\"boundedContextId\": \"c8ed558f-6e4d-4b46-9ac8-2f9d7437d704\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5477b75c-4b8f-4a64-866b-27e986d50e60\", \n\t\t\t\"rowId\": 31040438211999633000, \n\t\t\t\"name\": \"Ergonomic Granite Shirt\", \n\t\t\t\"boundedContextId\": \"0ea4450c-c8a2-4f3c-87b2-3a50bf85f7b9\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"7ea81918-4775-4b30-8ff2-db831707dd33\", \n\t\t\t\"rowId\": 46501347972714300000, \n\t\t\t\"name\": \"Small Rubber Gloves\", \n\t\t\t\"boundedContextId\": \"95522bf8-0287-4e91-9b87-68ce849c5b5b\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a3e70e51-5de5-47b5-bec7-fdcd9a9e0c66\", \n\t\t\t\"rowId\": 73155797036121235000, \n\t\t\t\"name\": \"Handmade Fresh Fish\", \n\t\t\t\"boundedContextId\": \"dfaa4651-7417-4035-a874-63e582d1bffc\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c9da75ba-4f44-413e-abad-5595f06e7cde\", \n\t\t\t\"rowId\": 65622623694463920000, \n\t\t\t\"name\": \"Unbranded Cotton Shoes\", \n\t\t\t\"boundedContextId\": \"e7f09a0d-fc9b-4d16-bf27-35f35f9a8336\"\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamPaginatePermissions",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginatePermissions (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamGetPermissions",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tiamGetPermissions (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamFindPermission",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tiamFindPermission (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamFindPermissionById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\tiamFindPermissionById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamUpdatePermission",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:IamUpdatePermissionInput!)\n{\n\tiamUpdatePermission (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 49742477244443950000, \n\t\t\"name\": \"Unbranded Steel Mouse\", \n\t\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"roleIds\": []\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamDeletePermissionById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\tiamDeletePermissionById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamDeletePermissions",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\tiamDeletePermissions (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - iam/permission/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:IamCreatePermissionInput!)\n{\n\tiamCreatePermission (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tboundedContextId\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Fantastic Metal Chips\", \n\t\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 74134078192876400000, \n\t\"name\": \"Small Fresh Gloves\", \n\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"roleIds\": []\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permission/create",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "permission", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamCreatePermissions",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:[IamCreatePermissionInput]!)\n{\n\tiamCreatePermissions (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"d81ceae9-2751-49f4-91e4-6ce6482dd603\", \n\t\t\t\"name\": \"Rustic Concrete Salad\", \n\t\t\t\"boundedContextId\": \"2a8ff751-b3ea-4f9f-9e19-3854160a0b08\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"df63c429-5a21-406c-9405-257fd6b50baf\", \n\t\t\t\"name\": \"Refined Cotton Cheese\", \n\t\t\t\"boundedContextId\": \"c77d9ad0-8548-4e15-b091-e1dabf9103d9\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e0976f27-6d0b-4535-b59a-6170f7deadc1\", \n\t\t\t\"name\": \"Sleek Metal Salad\", \n\t\t\t\"boundedContextId\": \"68dbb1f8-ec0d-4eb9-9048-52dfc951f0fc\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"cf93efb8-f7da-4a48-9e7d-66d30fd89a11\", \n\t\t\t\"name\": \"Awesome Concrete Sausages\", \n\t\t\t\"boundedContextId\": \"698df303-3799-46d5-9ea9-8d47d82ea7c2\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"752437e9-a463-4e5f-8c30-4500f494136b\", \n\t\t\t\"name\": \"Unbranded Concrete Ball\", \n\t\t\t\"boundedContextId\": \"c663ffa4-e8bf-456d-9204-f16ed729f528\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b61f9563-52cf-455a-b60a-b64c17bf677c\", \n\t\t\t\"name\": \"Fantastic Soft Shirt\", \n\t\t\t\"boundedContextId\": \"d84376cd-8bfb-4c9d-918e-668f74f8ef93\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c4633784-60d3-40a1-9d4f-5bcf99ee41b0\", \n\t\t\t\"name\": \"Refined Steel Ball\", \n\t\t\t\"boundedContextId\": \"47a29818-ace4-4e43-acaa-208b55536ee5\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ce7f8588-f564-4585-ad56-3e4bfa3cf7a4\", \n\t\t\t\"name\": \"Licensed Metal Chicken\", \n\t\t\t\"boundedContextId\": \"d1b3e0cb-878f-4e15-9551-de0412ec8891\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2d04ada8-b47e-4e27-9a33-10569187814f\", \n\t\t\t\"name\": \"Practical Frozen Table\", \n\t\t\t\"boundedContextId\": \"df4e85f3-ca29-4e0c-8fad-4c1dd0b86764\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9c92ff0c-a739-4c44-98bd-66c3fdcb5eb2\", \n\t\t\t\"name\": \"Refined Metal Chair\", \n\t\t\t\"boundedContextId\": \"a638b0e5-57d3-4f1d-a056-a24415889245\"\n\t\t}\n\t]\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamPaginatePermissions",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/permissions/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginatePermissions (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"4622c85e-2433-4595-879c-7aff968702f5\", \n\t\t\"rowId\": 57935691816844270000, \n\t\t\"name\": \"Generic Concrete Chicken\", \n\t\t\"boundedContextId\": \"da7b7e32-d482-4334-94ac-d8708b602698\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"3d3d7ba8-f3f3-4379-8e63-a99116aaaaf7\", \n\t\t\"rowId\": 45681977521714480000, \n\t\t\"name\": \"Gorgeous Wooden Fish\", \n\t\t\"boundedContextId\": \"2e538a48-abca-470e-ae88-174a64c316fd\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"28b25a9e-82ac-444f-9fde-a16fbc009301\", \n\t\t\"rowId\": 56539946438144705000, \n\t\t\"name\": \"Small Cotton Shirt\", \n\t\t\"boundedContextId\": \"cfcd2f9d-85e7-4d43-902f-416978c0e0f0\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"accb0bba-51f4-478d-a385-3b5e2da08aa4\", \n\t\t\"rowId\": 66115508613023170000, \n\t\t\"name\": \"Practical Plastic Shirt\", \n\t\t\"boundedContextId\": \"c5018630-7f18-45a9-a660-62e7f13d849e\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"f27919e1-f516-4856-953b-d867087c74c9\", \n\t\t\"rowId\": 28647716821334008000, \n\t\t\"name\": \"Incredible Concrete Hat\", \n\t\t\"boundedContextId\": \"69bb9665-d789-4bda-b4b6-2000600e28fe\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"8c3392a0-1edf-4721-b710-b5f58e8a90a8\", \n\t\t\"rowId\": 82733315863462200000, \n\t\t\"name\": \"Practical Metal Shoes\", \n\t\t\"boundedContextId\": \"12cfb40c-e3c3-4b1a-85a9-606ad65027eb\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"404fb861-bd13-4a23-8549-31ec4a0d8ba3\", \n\t\t\"rowId\": 82300555598012650000, \n\t\t\"name\": \"Practical Cotton Pizza\", \n\t\t\"boundedContextId\": \"9f961337-41a1-4b18-8e87-9572b5775a85\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"442b5150-e6a7-42cf-801e-93f3006d6625\", \n\t\t\"rowId\": 67168094742395110000, \n\t\t\"name\": \"Unbranded Frozen Tuna\", \n\t\t\"boundedContextId\": \"04f1f986-e7a6-4cf7-9d00-5d814327bd36\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"ddd9b6be-385f-47e1-9b81-f1e248d11650\", \n\t\t\"rowId\": 38829919281654374000, \n\t\t\"name\": \"Tasty Rubber Fish\", \n\t\t\"boundedContextId\": \"f99f3855-c357-4763-847f-c07688ca8138\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"ed85f91b-cb06-4706-9133-bcc9e62c099c\", \n\t\t\"rowId\": 65833200070697976000, \n\t\t\"name\": \"Awesome Metal Tuna\", \n\t\t\"boundedContextId\": \"7b47ac5e-74cd-46ac-b8c2-6ddeb8e5b9f9\", \n\t\t\"roleIds\": []\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permissions/create",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "permissions", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamGetPermissions",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/permissions/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamGetPermissions (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permissions/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "permissions", "paginate"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamFindPermission",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/permissions/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamFindPermission (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permissions/get",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "permissions", "get"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamFindPermissionById",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/permission/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($id:ID)\n{\n\tiamFindPermissionById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permission/find",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "permission", "find"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamUpdatePermission",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/permission/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:IamUpdatePermissionInput!)\n{\n\tiamUpdatePermission (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Rustic Plastic Fish\", \n\t\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"roleIds\": []\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamDeletePermissionById",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\tiamDeletePermissionById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamDeletePermissions",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeletePermissions (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/permission/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Fantastic Concrete Chair\", \n\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"roleIds\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permission/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"permission",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/permissions/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"f808180b-c375-4b57-af5b-36ef4000f761\", \n\t\t\"name\": \"Sleek Plastic Salad\", \n\t\t\"boundedContextId\": \"6883a809-df1b-4c86-ad96-664cbea5aaf4\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"a771f1c4-7882-43b0-834a-90a7264b125f\", \n\t\t\"name\": \"Handmade Wooden Towels\", \n\t\t\"boundedContextId\": \"91e0f173-9ff6-4b45-ba9b-75ee3332998e\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"5316fea2-ac9a-4be7-9ce7-13c2d9c66c4e\", \n\t\t\"name\": \"Intelligent Cotton Tuna\", \n\t\t\"boundedContextId\": \"15363fcd-769d-4e31-9f21-8e484027803b\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"30168d47-962d-4738-8216-227a5d9706fa\", \n\t\t\"name\": \"Unbranded Cotton Car\", \n\t\t\"boundedContextId\": \"a8353d15-0ffa-4822-85c7-24dfefd282d0\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"c116598f-c264-4775-bff6-bb2a5ae0134b\", \n\t\t\"name\": \"Practical Plastic Car\", \n\t\t\"boundedContextId\": \"7b88cfbb-265c-4317-b4f7-ae7bc433097c\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"d8a9f914-361d-446a-a0aa-71f4ac66fe4e\", \n\t\t\"name\": \"Intelligent Soft Chicken\", \n\t\t\"boundedContextId\": \"4ec8815e-56f7-46ea-bfed-1c775b3ce1dd\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"faea82c3-ad86-4182-b249-394db9847758\", \n\t\t\"name\": \"Handmade Wooden Salad\", \n\t\t\"boundedContextId\": \"a816fef1-19d4-41ea-878c-f0fa2cf0ac19\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"d17ff25a-5528-45d4-a466-7ba707b2b1d8\", \n\t\t\"name\": \"Handcrafted Metal Shoes\", \n\t\t\"boundedContextId\": \"b54966b2-a8f0-4edc-9181-685401225aa4\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"14dd1026-bccf-455d-b34d-2178a0d213a6\", \n\t\t\"name\": \"Intelligent Rubber Pizza\", \n\t\t\"boundedContextId\": \"24309072-a8a1-463d-aad5-41c4a15b0e27\", \n\t\t\"roleIds\": []\n\t}, \n\t{\n\t\t\"id\": \"d25b3bbd-14ca-4347-a627-f5af63e58b6d\", \n\t\t\"name\": \"Fantastic Cotton Keyboard\", \n\t\t\"boundedContextId\": \"cb45ae4f-1a69-4484-9821-e853a3f00e62\", \n\t\t\"roleIds\": []\n\t}\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permissions/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"permissions",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/permissions/paginate",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permissions/paginate",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-                        "permissions",
-                        "paginate"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/permissions/get",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permissions/get",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"permissions",
-                        "get"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/permission/find",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permission/find",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"permission",
-                        "find"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/permission/find/{id}",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permission/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"permission",
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permission/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "iam",
+                        "permission",
                         "find",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - iam/permission/update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Ergonomic Rubber Salad\", \n\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"roleIds\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permission/update",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"permission",
-                        "update"
-					]
-				}
-			},
-			"response": []
+            "name": "REST - iam/permission/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 79016424773960000000, \n\t\"name\": \"Small Steel Pizza\", \n\t\"boundedContextId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"roleIds\": []\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permission/update",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "permission", "update"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - iam/permission/delete/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permission/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"permission",
+            "name": "REST - iam/permission/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permission/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "iam",
+                        "permission",
                         "delete",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
-		},
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
         {
-			"name": "REST - iam/permissions/delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/permissions/delete",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"permissions",
-                        "delete"
-					]
-				}
-			},
-			"response": []
-		}
+            "name": "REST - iam/permissions/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/permissions/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "permissions", "delete"]
+                }
+            },
+            "response": []
+        }
     ],
     "variable": [
-		{
-			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-			"key": "URL",
-			"value": "http://localhost:8080",
-			"type": "string"
-		}
-	]
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
 }

@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsRunScriptsProcedureHandler } from './tools-run-scripts-procedure.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ToolsRunScriptsProcedureHandler } from './tools-run-scripts-procedure.handler';
 
-describe('ToolsRunScriptsProcedureHandler', () =>
-{
+describe('ToolsRunScriptsProcedureHandler', () => {
     let handler: ToolsRunScriptsProcedureHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsRunScriptsProcedureHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<ToolsRunScriptsProcedureHandler>(ToolsRunScriptsProcedureHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<ToolsRunScriptsProcedureHandler>(
+            ToolsRunScriptsProcedureHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('ToolsRunScriptsProcedureHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsRunScriptsProcedureHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

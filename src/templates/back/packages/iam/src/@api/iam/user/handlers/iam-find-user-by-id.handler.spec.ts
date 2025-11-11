@@ -4,55 +4,46 @@ import { iamMockUserData } from '@app/iam/user';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindUserByIdHandler', () =>
-{
+describe('IamFindUserByIdHandler', () => {
     let handler: IamFindUserByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindUserByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamFindUserByIdHandler>(IamFindUserByIdHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamFindUserByIdHandler should be defined', () =>
-    {
+    test('IamFindUserByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindUserByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindUserByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an user by id', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData[0])));
+        test('should return an user by id', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockUserData[0])),
+            );
             expect(
-                await handler.main(
-                    iamMockUserData[0].id,
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockUserData[0]);
+                await handler.main(iamMockUserData[0].id, {}, 'Europe/Madrid'),
+            ).toBe(iamMockUserData[0]);
         });
     });
 });

@@ -1,51 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IamCreateTenantInput } from '@api/graphql';
-import { IamCreateTenantHandler, IamCreateTenantResolver } from '@api/iam/tenant';
+import {
+    IamCreateTenantHandler,
+    IamCreateTenantResolver,
+} from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTenantResolver', () =>
-{
+describe('IamCreateTenantResolver', () => {
     let resolver: IamCreateTenantResolver;
     let handler: IamCreateTenantHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreateTenantResolver,
                 {
-                    provide : IamCreateTenantHandler,
+                    provide: IamCreateTenantHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<IamCreateTenantResolver>(IamCreateTenantResolver);
         handler = module.get<IamCreateTenantHandler>(IamCreateTenantHandler);
     });
 
-    test('IamCreateTenantResolver should be defined', () =>
-    {
+    test('IamCreateTenantResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTenantResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTenantResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an tenant created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
-            expect(await resolver.main(<IamCreateTenantInput>iamMockTenantData[0])).toBe(iamMockTenantData[0]);
+        test('should return an tenant created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
+            expect(
+                await resolver.main(<IamCreateTenantInput>iamMockTenantData[0]),
+            ).toBe(iamMockTenantData[0]);
         });
     });
 });

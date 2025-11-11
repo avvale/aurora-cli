@@ -1,4 +1,7 @@
-import { IamITenantAccountRepository, IamTenantAccount } from '@app/iam/tenant-account';
+import {
+    IamITenantAccountRepository,
+    IamTenantAccount,
+} from '@app/iam/tenant-account';
 import {
     IamTenantAccountAccountId,
     IamTenantAccountTenantId,
@@ -8,8 +11,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateTenantAccountService
-{
+export class IamCreateTenantAccountService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamITenantAccountRepository,
@@ -21,31 +23,26 @@ export class IamCreateTenantAccountService
             accountId: IamTenantAccountAccountId;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const tenantAccount = IamTenantAccount.register(
             payload.tenantId,
             payload.accountId,
         );
 
-        await this.repository.create(
-            tenantAccount,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-                finderQueryStatement: (aggregate: IamTenantAccount) => ({
-                    where: {
-                        tenantId: aggregate['tenantId']['value'],
-                        accountId: aggregate['accountId']['value'],
-                    },
-                }),
-            },
-        );
+        await this.repository.create(tenantAccount, {
+            createOptions: cQMetadata?.repositoryOptions,
+            finderQueryStatement: (aggregate: IamTenantAccount) => ({
+                where: {
+                    tenantId: aggregate['tenantId']['value'],
+                    accountId: aggregate['accountId']['value'],
+                },
+            }),
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const tenantAccountRegister = this.publisher.mergeObjectContext(
-            tenantAccount,
-        );
+        const tenantAccountRegister =
+            this.publisher.mergeObjectContext(tenantAccount);
 
         tenantAccountRegister.created({
             payload: tenantAccount,

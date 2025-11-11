@@ -1,49 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthFindRefreshTokenHandler, OAuthFindRefreshTokenResolver } from '@api/o-auth/refresh-token';
+import {
+    OAuthFindRefreshTokenHandler,
+    OAuthFindRefreshTokenResolver,
+} from '@api/o-auth/refresh-token';
 import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthFindRefreshTokenResolver', () =>
-{
+describe('OAuthFindRefreshTokenResolver', () => {
     let resolver: OAuthFindRefreshTokenResolver;
     let handler: OAuthFindRefreshTokenHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthFindRefreshTokenResolver,
                 {
-                    provide : OAuthFindRefreshTokenHandler,
+                    provide: OAuthFindRefreshTokenHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthFindRefreshTokenResolver>(OAuthFindRefreshTokenResolver);
-        handler = module.get<OAuthFindRefreshTokenHandler>(OAuthFindRefreshTokenHandler);
+        resolver = module.get<OAuthFindRefreshTokenResolver>(
+            OAuthFindRefreshTokenResolver,
+        );
+        handler = module.get<OAuthFindRefreshTokenHandler>(
+            OAuthFindRefreshTokenHandler,
+        );
     });
 
-    test('OAuthFindRefreshTokenResolver should be defined', () =>
-    {
+    test('OAuthFindRefreshTokenResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthFindRefreshTokenResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthFindRefreshTokenResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a refreshToken', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockRefreshTokenData[0])));
+        test('should return a refreshToken', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockRefreshTokenData[0]),
+                    ),
+            );
             expect(await resolver.main()).toBe(oAuthMockRefreshTokenData[0]);
         });
     });

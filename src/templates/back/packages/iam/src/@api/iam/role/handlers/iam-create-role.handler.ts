@@ -5,8 +5,7 @@ import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamCreateRoleHandler
-{
+export class IamCreateRoleHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -16,24 +15,24 @@ export class IamCreateRoleHandler
         payload: IamCreateRoleInput | IamCreateRoleDto,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRole | IamRoleDto>
-    {
-        await this.commandBus.dispatch(new IamCreateRoleCommand(
-            payload,
-            {
+    ): Promise<IamRole | IamRoleDto> {
+        await this.commandBus.dispatch(
+            new IamCreateRoleCommand(payload, {
                 timezone,
                 repositoryOptions: {
                     auditing,
                 },
-            },
-        ));
+            }),
+        );
 
-        return await this.queryBus.ask(new IamFindRoleByIdQuery(
-            payload.id,
-            {},
-            {
-                timezone,
-            },
-        ));
+        return await this.queryBus.ask(
+            new IamFindRoleByIdQuery(
+                payload.id,
+                {},
+                {
+                    timezone,
+                },
+            ),
+        );
     }
 }

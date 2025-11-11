@@ -6,8 +6,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.applicationClient.get')
-export class OAuthFindApplicationClientByIdResolver
-{
+export class OAuthFindApplicationClientByIdResolver {
     constructor(
         private readonly handler: OAuthFindApplicationClientByIdHandler,
     ) {}
@@ -18,8 +17,7 @@ export class OAuthFindApplicationClientByIdResolver
         @Args('clientId') clientId: string,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<OAuthApplicationClient>
-    {
+    ): Promise<OAuthApplicationClient> {
         return await this.handler.main(
             applicationId,
             clientId,

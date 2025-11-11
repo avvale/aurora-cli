@@ -4,55 +4,46 @@ import { iamMockRoleData } from '@app/iam/role';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamGetRolesHandler', () =>
-{
+describe('IamGetRolesHandler', () => {
     let handler: IamGetRolesHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamGetRolesHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamGetRolesHandler>(IamGetRolesHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamGetRolesHandler should be defined', () =>
-    {
+    test('IamGetRolesHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamGetRolesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamGetRolesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a iamMockRoleData', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockRoleData);
+        test('should return a iamMockRoleData', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockRoleData)),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                iamMockRoleData,
+            );
         });
     });
 });

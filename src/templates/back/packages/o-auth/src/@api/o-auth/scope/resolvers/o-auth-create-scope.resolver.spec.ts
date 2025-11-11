@@ -1,51 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { OAuthCreateScopeInput } from '@api/graphql';
-import { OAuthCreateScopeHandler, OAuthCreateScopeResolver } from '@api/o-auth/scope';
+import {
+    OAuthCreateScopeHandler,
+    OAuthCreateScopeResolver,
+} from '@api/o-auth/scope';
 import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthCreateScopeResolver', () =>
-{
+describe('OAuthCreateScopeResolver', () => {
     let resolver: OAuthCreateScopeResolver;
     let handler: OAuthCreateScopeHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthCreateScopeResolver,
                 {
-                    provide : OAuthCreateScopeHandler,
+                    provide: OAuthCreateScopeHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthCreateScopeResolver>(OAuthCreateScopeResolver);
+        resolver = module.get<OAuthCreateScopeResolver>(
+            OAuthCreateScopeResolver,
+        );
         handler = module.get<OAuthCreateScopeHandler>(OAuthCreateScopeHandler);
     });
 
-    test('OAuthCreateScopeResolver should be defined', () =>
-    {
+    test('OAuthCreateScopeResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthCreateScopeResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthCreateScopeResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an scope created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
-            expect(await resolver.main(<OAuthCreateScopeInput>oAuthMockScopeData[0])).toBe(oAuthMockScopeData[0]);
+        test('should return an scope created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockScopeData[0])),
+            );
+            expect(
+                await resolver.main(
+                    <OAuthCreateScopeInput>oAuthMockScopeData[0],
+                ),
+            ).toBe(oAuthMockScopeData[0]);
         });
     });
 });

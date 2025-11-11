@@ -16,6 +16,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: key
     type: varchar
     maxLength: 64
@@ -24,14 +29,15 @@ aggregateProperties:
   - name: type
     type: enum
     enumOptions:
-      - STRING
+      - ARRAY
       - BOOLEAN
-      - NUMBER
       - DATE
+      - NUMBER
+      - OBJECT
+      - SECRET
+      - STRING
       - TIME
       - TIMESTAMP
-      - OBJECT
-      - ARRAY
     nullable: false
   - name: value
     type: text
@@ -54,9 +60,11 @@ aggregateProperties:
     nullable: true
 excludedOperations:
   - count
+  - getRaw
   - max
   - min
   - rawSql
   - sum
+  - update
   - updateAndIncrement
   - upsert

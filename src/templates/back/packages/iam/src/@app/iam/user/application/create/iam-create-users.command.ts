@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreateUsersCommand
-{
+export class IamCreateUsersCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -16,7 +15,7 @@ export class IamCreateUsersCommand
             twoFactorAuthenticationSecret?: string;
             rememberToken?: string;
             meta?: any;
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

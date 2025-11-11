@@ -1,7 +1,6 @@
-
-type OAuthScope
-{
+type OAuthScope {
     id: ID!
+    rowId: GraphQLInt!
     code: GraphQLString!
     name: GraphQLString!
     roleIds: [ID]
@@ -10,41 +9,34 @@ type OAuthScope
     deletedAt: GraphQLTimestamp
 }
 
-input OAuthCreateScopeInput
-{
+input OAuthCreateScopeInput {
     id: ID!
     code: GraphQLString!
     name: GraphQLString!
     roleIds: [ID]
 }
 
-input OAuthUpdateScopeByIdInput
-{
+input OAuthUpdateScopeByIdInput {
     id: ID!
     code: GraphQLString
     name: GraphQLString
     roleIds: [ID]
 }
 
-input OAuthUpdateScopesInput
-{
+input OAuthUpdateScopesInput {
     id: ID
     code: GraphQLString
     name: GraphQLString
     roleIds: [ID]
 }
 
-type Query
-{
+type Query {
     oAuthFindScope(
         query: QueryStatement
         constraint: QueryStatement
     ): OAuthScope
 
-    oAuthFindScopeById(
-        id: ID
-        constraint: QueryStatement
-    ): OAuthScope
+    oAuthFindScopeById(id: ID, constraint: QueryStatement): OAuthScope
 
     oAuthGetScopes(
         query: QueryStatement
@@ -55,42 +47,20 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    oAuthCreateScope(
-        payload: OAuthCreateScopeInput!
-    ): OAuthScope
-
-    oAuthCreateScopes(
-        payload: [OAuthCreateScopeInput]!
-    ): Boolean!
+type Mutation {
+    oAuthCreateScope(payload: OAuthCreateScopeInput!): OAuthScope
 
     oAuthUpdateScopeById(
         payload: OAuthUpdateScopeByIdInput!
         constraint: QueryStatement
     ): OAuthScope
 
-    oAuthUpdateScopes(
-        payload: OAuthUpdateScopesInput!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [OAuthScope]!
-
-    oAuthUpsertScope(
-        payload: OAuthUpdateScopeByIdInput!
-    ): OAuthScope
-
-    oAuthDeleteScopeById(
-        id: ID!
-        constraint: QueryStatement
-    ): OAuthScope
+    oAuthDeleteScopeById(id: ID!, constraint: QueryStatement): OAuthScope
 
     oAuthDeleteScopes(
         query: QueryStatement
         constraint: QueryStatement
     ): [OAuthScope]!
-
 }

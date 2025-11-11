@@ -1,46 +1,42 @@
-import { OAuthCreateApplicationsClientsController, OAuthCreateApplicationsClientsHandler } from '@api/o-auth/application-client';
+import {
+    OAuthCreateApplicationsClientsController,
+    OAuthCreateApplicationsClientsHandler,
+} from '@api/o-auth/application-client';
 import { oAuthMockApplicationClientData } from '@app/o-auth/application-client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthCreateApplicationsClientsController', () =>
-{
+describe('OAuthCreateApplicationsClientsController', () => {
     let controller: OAuthCreateApplicationsClientsController;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            controllers: [
-                OAuthCreateApplicationsClientsController,
-            ],
+            controllers: [OAuthCreateApplicationsClientsController],
             providers: [
                 {
-                    provide : OAuthCreateApplicationsClientsHandler,
+                    provide: OAuthCreateApplicationsClientsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthCreateApplicationsClientsController>(OAuthCreateApplicationsClientsController);
+        controller = module.get<OAuthCreateApplicationsClientsController>(
+            OAuthCreateApplicationsClientsController,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthCreateApplicationsClientsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthCreateApplicationsClientsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an oAuthMockApplicationClientData created', async () =>
-        {
-            expect(
-                await controller.main(
-                    oAuthMockApplicationClientData,
-                ),
-            )
-                .toBe(undefined);
+        test('should return an oAuthMockApplicationClientData created', async () => {
+            expect(await controller.main(oAuthMockApplicationClientData)).toBe(
+                undefined,
+            );
         });
     });
 });

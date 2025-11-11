@@ -10,6 +10,7 @@ export { OAuthClientIsActive } from './o-auth-client-is-active';
 export { OAuthClientIsMaster } from './o-auth-client-is-master';
 export { OAuthClientName } from './o-auth-client-name';
 export { OAuthClientRedirect } from './o-auth-client-redirect';
+export { OAuthClientRowId } from './o-auth-client-row-id';
 export { OAuthClientScopeOptions } from './o-auth-client-scope-options';
 export { OAuthClientSecret } from './o-auth-client-secret';
 export { OAuthClientUpdatedAt } from './o-auth-client-updated-at';

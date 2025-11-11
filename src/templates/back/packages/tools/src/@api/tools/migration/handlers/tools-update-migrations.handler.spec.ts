@@ -5,53 +5,56 @@ import { toolsMockMigrationData } from '@app/tools/migration';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsUpdateMigrationsHandler', () =>
-{
+describe('ToolsUpdateMigrationsHandler', () => {
     let handler: ToolsUpdateMigrationsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsUpdateMigrationsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsUpdateMigrationsHandler>(ToolsUpdateMigrationsHandler);
+        handler = module.get<ToolsUpdateMigrationsHandler>(
+            ToolsUpdateMigrationsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsUpdateMigrationsHandler should be defined', () =>
-    {
+    test('ToolsUpdateMigrationsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsUpdateMigrationsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsUpdateMigrationsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a migrations updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData[0])));
+        test('should return a migrations updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockMigrationData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     <ToolsUpdateMigrationsInput>toolsMockMigrationData[0],
@@ -59,8 +62,7 @@ describe('ToolsUpdateMigrationsHandler', () =>
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(toolsMockMigrationData[0]);
+            ).toBe(toolsMockMigrationData[0]);
         });
     });
 });

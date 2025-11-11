@@ -10,6 +10,7 @@ export { IamUserMobile } from './iam-user-mobile';
 export { IamUserName } from './iam-user-name';
 export { IamUserPassword } from './iam-user-password';
 export { IamUserRememberToken } from './iam-user-remember-token';
+export { IamUserRowId } from './iam-user-row-id';
 export { IamUserSurname } from './iam-user-surname';
 export { IamUserTwoFactorAuthenticationSecret } from './iam-user-two-factor-authentication-secret';
 export { IamUserUpdatedAt } from './iam-user-updated-at';

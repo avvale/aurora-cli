@@ -3,37 +3,35 @@ import { oAuthMockClientData } from '@app/o-auth/client';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthCreateClientsHandler', () =>
-{
+describe('OAuthCreateClientsHandler', () => {
     let handler: OAuthCreateClientsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthCreateClientsHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<OAuthCreateClientsHandler>(OAuthCreateClientsHandler);
+        handler = module.get<OAuthCreateClientsHandler>(
+            OAuthCreateClientsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthCreateClientsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthCreateClientsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an oAuthMockClientData created', async () =>
-        {
+        test('should return an oAuthMockClientData created', async () => {
             expect(await handler.main(oAuthMockClientData)).toBe(true);
         });
     });

@@ -1,12 +1,22 @@
 import { IamRoleAccount, IamUpdateRolesAccountsInput } from '@api/graphql';
-import { IamRoleAccountDto, IamUpdateRolesAccountsDto } from '@api/iam/role-account';
-import { IamGetRolesAccountsQuery, IamUpdateRolesAccountsCommand } from '@app/iam/role-account';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import {
+    IamRoleAccountDto,
+    IamUpdateRolesAccountsDto,
+} from '@api/iam/role-account';
+import {
+    IamGetRolesAccountsQuery,
+    IamUpdateRolesAccountsCommand,
+} from '@app/iam/role-account';
+import {
+    AuditingMeta,
+    ICommandBus,
+    IQueryBus,
+    QueryStatement,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamUpdateRolesAccountsHandler
-{
+export class IamUpdateRolesAccountsHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -18,26 +28,25 @@ export class IamUpdateRolesAccountsHandler
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRoleAccount | IamRoleAccountDto>
-    {
-        await this.commandBus.dispatch(new IamUpdateRolesAccountsCommand(
-            payload,
-            queryStatement,
-            constraint,
-            {
-                timezone,
-                repositoryOptions: {
-                    auditing,
+    ): Promise<IamRoleAccount | IamRoleAccountDto> {
+        await this.commandBus.dispatch(
+            new IamUpdateRolesAccountsCommand(
+                payload,
+                queryStatement,
+                constraint,
+                {
+                    timezone,
+                    repositoryOptions: {
+                        auditing,
+                    },
                 },
-            },
-        ));
+            ),
+        );
 
-        return await this.queryBus.ask(new IamGetRolesAccountsQuery(
-            queryStatement,
-            constraint,
-            {
+        return await this.queryBus.ask(
+            new IamGetRolesAccountsQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

@@ -1,73 +1,58 @@
-import { OAuthApplicationClient, OAuthCreatedApplicationClientEvent, OAuthCreatedApplicationsClientsEvent, OAuthDeletedApplicationClientEvent, OAuthDeletedApplicationsClientsEvent, OAuthUpdatedAndIncrementedApplicationClientEvent, OAuthUpdatedAndIncrementedApplicationsClientsEvent, OAuthUpdatedApplicationClientEvent, OAuthUpdatedApplicationsClientsEvent } from '@app/o-auth/application-client';
+import {
+    OAuthApplicationClient,
+    OAuthCreatedApplicationClientEvent,
+    OAuthCreatedApplicationsClientsEvent,
+    OAuthDeletedApplicationClientEvent,
+    OAuthDeletedApplicationsClientsEvent,
+} from '@app/o-auth/application-client';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthAddApplicationsClientsContextEvent extends AggregateRoot
-{
+export class OAuthAddApplicationsClientsContextEvent extends AggregateRoot {
     constructor(
         public readonly aggregateRoots: OAuthApplicationClient[] = [],
-    )
-    {
+        public readonly cQMetadata?: CQMetadata,
+    ) {
         super();
     }
 
-    *[Symbol.iterator]()
-    {
+    *[Symbol.iterator]() {
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created(): void
-    {
+    created(): void {
         this.apply(
-            new OAuthCreatedApplicationsClientsEvent(
-                this.aggregateRoots.map(applicationClient =>
-                    new OAuthCreatedApplicationClientEvent(
-                        applicationClient.applicationId.value,
-                        applicationClient.clientId.value,
-                    ),
+            new OAuthCreatedApplicationsClientsEvent({
+                payload: this.aggregateRoots.map(
+                    (applicationClient) =>
+                        new OAuthCreatedApplicationClientEvent({
+                            payload: {
+                                applicationId:
+                                    applicationClient.applicationId.value,
+                                clientId: applicationClient.clientId.value,
+                            },
+                        }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
-    updated(): void
-    {
+    deleted(): void {
         this.apply(
-            new OAuthUpdatedApplicationsClientsEvent(
-                this.aggregateRoots.map(applicationClient =>
-                    new OAuthUpdatedApplicationClientEvent(
-                        applicationClient.applicationId.value,
-                        applicationClient.clientId.value,
-                    ),
+            new OAuthDeletedApplicationsClientsEvent({
+                payload: this.aggregateRoots.map(
+                    (applicationClient) =>
+                        new OAuthDeletedApplicationClientEvent({
+                            payload: {
+                                applicationId:
+                                    applicationClient.applicationId.value,
+                                clientId: applicationClient.clientId.value,
+                            },
+                        }),
                 ),
-            ),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new OAuthUpdatedAndIncrementedApplicationsClientsEvent(
-                this.aggregateRoots.map(applicationClient =>
-                    new OAuthUpdatedAndIncrementedApplicationClientEvent(
-                        applicationClient.applicationId.value,
-                        applicationClient.clientId.value,
-                    ),
-                ),
-            ),
-        );
-    }
-
-    deleted(): void
-    {
-        this.apply(
-            new OAuthDeletedApplicationsClientsEvent(
-                this.aggregateRoots.map(applicationClient =>
-                    new OAuthDeletedApplicationClientEvent(
-                        applicationClient.applicationId.value,
-                        applicationClient.clientId.value,
-                    ),
-                ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

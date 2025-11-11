@@ -16,6 +16,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: parentId
     type: id
     nullable: true
@@ -87,6 +92,7 @@ aggregateProperties:
               avoidConstraint: true
         excludedOperations:
           - count
+          - getRaw
           - max
           - min
           - rawSql
@@ -117,3 +123,11 @@ excludedFiles:
   - src/@api/iam/tenant/handlers/iam-get-with-tenant-constraint-tenants.handler.ts
   - src/@api/iam/tenant/handlers/iam-paginate-with-tenant-constraint-tenants.handler.spec.ts
   - src/@api/iam/tenant/handlers/iam-paginate-with-tenant-constraint-tenants.handler.ts
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - sum
+  - updateAndIncrement
+  - upsert

@@ -1,51 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IamUpdateRoleByIdInput } from '@api/graphql';
-import { IamUpdateRoleByIdHandler, IamUpdateRoleByIdResolver } from '@api/iam/role';
+import {
+    IamUpdateRoleByIdHandler,
+    IamUpdateRoleByIdResolver,
+} from '@api/iam/role';
 import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateRoleByIdResolver', () =>
-{
+describe('IamUpdateRoleByIdResolver', () => {
     let resolver: IamUpdateRoleByIdResolver;
     let handler: IamUpdateRoleByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateRoleByIdResolver,
                 {
-                    provide : IamUpdateRoleByIdHandler,
+                    provide: IamUpdateRoleByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamUpdateRoleByIdResolver>(IamUpdateRoleByIdResolver);
-        handler = module.get<IamUpdateRoleByIdHandler>(IamUpdateRoleByIdHandler);
+        resolver = module.get<IamUpdateRoleByIdResolver>(
+            IamUpdateRoleByIdResolver,
+        );
+        handler = module.get<IamUpdateRoleByIdHandler>(
+            IamUpdateRoleByIdHandler,
+        );
     });
 
-    test('IamUpdateRoleByIdResolver should be defined', () =>
-    {
+    test('IamUpdateRoleByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateRoleByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateRoleByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a role by id updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
-            expect(await resolver.main(<IamUpdateRoleByIdInput>iamMockRoleData[0])).toBe(iamMockRoleData[0]);
+        test('should return a role by id updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockRoleData[0])),
+            );
+            expect(
+                await resolver.main(<IamUpdateRoleByIdInput>iamMockRoleData[0]),
+            ).toBe(iamMockRoleData[0]);
         });
     });
 });

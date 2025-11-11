@@ -1,4 +1,8 @@
-import { IamITenantAccountRepository, iamMockTenantAccountData, IamTenantAccount } from '@app/iam/tenant-account';
+import {
+    IamITenantAccountRepository,
+    iamMockTenantAccountData,
+    IamTenantAccount,
+} from '@app/iam/tenant-account';
 import {
     IamTenantAccountAccountId,
     IamTenantAccountTenantId,
@@ -7,38 +11,38 @@ import { MockRepository, Utils } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamMockTenantAccountRepository extends MockRepository<IamTenantAccount> implements IamITenantAccountRepository
+export class IamMockTenantAccountRepository
+    extends MockRepository<IamTenantAccount>
+    implements IamITenantAccountRepository
 {
     public readonly repository: any;
     public readonly aggregateName: string = 'IamTenantAccount';
     public collectionSource: IamTenantAccount[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this.createSourceMockData();
     }
 
-    public reset(): void
-    {
+    public reset(): void {
         this.createSourceMockData();
     }
 
-    private createSourceMockData(): void
-    {
+    private createSourceMockData(): void {
         this.collectionSource = [];
         const now = Utils.nowTimestamp();
 
-        for (const itemCollection of <any[]>iamMockTenantAccountData)
-        {
+        for (const itemCollection of <any[]>iamMockTenantAccountData) {
             itemCollection['createdAt'] = now;
             itemCollection['updatedAt'] = now;
             itemCollection['deletedAt'] = null;
 
-            this.collectionSource.push(IamTenantAccount.register(
-                new IamTenantAccountTenantId(itemCollection.tenantId),
-                new IamTenantAccountAccountId(itemCollection.accountId),
-            ));
+            this.collectionSource.push(
+                IamTenantAccount.register(
+                    new IamTenantAccountTenantId(itemCollection.tenantId),
+                    new IamTenantAccountAccountId(itemCollection.accountId),
+                ),
+            );
         }
     }
 }

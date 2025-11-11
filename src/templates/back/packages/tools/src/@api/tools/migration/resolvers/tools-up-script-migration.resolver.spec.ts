@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { ToolsUpScriptMigrationHandler } from '../handlers/tools-up-script-migration.handler';
 import { ToolsUpScriptMigrationResolver } from './tools-up-script-migration.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsUpScriptMigrationResolver', () =>
-{
+describe('ToolsUpScriptMigrationResolver', () => {
     let resolver: ToolsUpScriptMigrationResolver;
     let handler: ToolsUpScriptMigrationHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsUpScriptMigrationResolver,
                 {
-                    provide : ToolsUpScriptMigrationHandler,
+                    provide: ToolsUpScriptMigrationHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsUpScriptMigrationResolver>(ToolsUpScriptMigrationResolver);
-        handler = module.get<ToolsUpScriptMigrationHandler>(ToolsUpScriptMigrationHandler);
+        resolver = module.get<ToolsUpScriptMigrationResolver>(
+            ToolsUpScriptMigrationResolver,
+        );
+        handler = module.get<ToolsUpScriptMigrationHandler>(
+            ToolsUpScriptMigrationHandler,
+        );
     });
 
-    test('ToolsUpScriptMigrationResolver should be defined', () =>
-    {
+    test('ToolsUpScriptMigrationResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsUpScriptMigrationResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsUpScriptMigrationResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

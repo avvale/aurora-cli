@@ -12,6 +12,7 @@ import {
     OAuthClientIsMaster,
     OAuthClientName,
     OAuthClientRedirect,
+    OAuthClientRowId,
     OAuthClientScopeOptions,
     OAuthClientSecret,
     OAuthClientUpdatedAt,
@@ -21,33 +22,34 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class OAuthMockClientSeeder extends MockSeeder<OAuthClient>
-{
+export class OAuthMockClientSeeder extends MockSeeder<OAuthClient> {
     public collectionSource: OAuthClient[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const client of _.orderBy(oAuthMockClientData, ['id']))
-        {
+        for (const client of _.orderBy(oAuthMockClientData, ['id'])) {
             this.collectionSource.push(
                 OAuthClient.register(
                     new OAuthClientId(client.id),
+                    new OAuthClientRowId(client.rowId),
                     new OAuthClientGrantType(client.grantType),
                     new OAuthClientName(client.name),
                     new OAuthClientSecret(client.secret),
                     new OAuthClientAuthUrl(client.authUrl),
                     new OAuthClientRedirect(client.redirect),
                     new OAuthClientScopeOptions(client.scopeOptions),
-                    new OAuthClientExpiredAccessToken(client.expiredAccessToken),
-                    new OAuthClientExpiredRefreshToken(client.expiredRefreshToken),
+                    new OAuthClientExpiredAccessToken(
+                        client.expiredAccessToken,
+                    ),
+                    new OAuthClientExpiredRefreshToken(
+                        client.expiredRefreshToken,
+                    ),
                     new OAuthClientIsActive(client.isActive),
                     new OAuthClientIsMaster(client.isMaster),
                     new OAuthClientApplicationIds(client.applicationIds),

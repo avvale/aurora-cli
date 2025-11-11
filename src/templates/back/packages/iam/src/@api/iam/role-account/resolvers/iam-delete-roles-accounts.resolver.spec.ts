@@ -1,49 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamDeleteRolesAccountsHandler, IamDeleteRolesAccountsResolver } from '@api/iam/role-account';
+import {
+    IamDeleteRolesAccountsHandler,
+    IamDeleteRolesAccountsResolver,
+} from '@api/iam/role-account';
 import { iamMockRoleAccountData } from '@app/iam/role-account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteRolesAccountsResolver', () =>
-{
+describe('IamDeleteRolesAccountsResolver', () => {
     let resolver: IamDeleteRolesAccountsResolver;
     let handler: IamDeleteRolesAccountsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteRolesAccountsResolver,
                 {
-                    provide : IamDeleteRolesAccountsHandler,
+                    provide: IamDeleteRolesAccountsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamDeleteRolesAccountsResolver>(IamDeleteRolesAccountsResolver);
-        handler = module.get<IamDeleteRolesAccountsHandler>(IamDeleteRolesAccountsHandler);
+        resolver = module.get<IamDeleteRolesAccountsResolver>(
+            IamDeleteRolesAccountsResolver,
+        );
+        handler = module.get<IamDeleteRolesAccountsHandler>(
+            IamDeleteRolesAccountsHandler,
+        );
     });
 
-    test('IamDeleteRolesAccountsResolver should be defined', () =>
-    {
+    test('IamDeleteRolesAccountsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteRolesAccountsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteRolesAccountsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an iamMockRoleAccountData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleAccountData)));
+        test('should return an iamMockRoleAccountData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockRoleAccountData)),
+            );
             expect(await resolver.main()).toBe(iamMockRoleAccountData);
         });
     });

@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('tools.keyValue.get')
-export class ToolsFindKeyValueByIdResolver
-{
-    constructor(
-        private readonly handler: ToolsFindKeyValueByIdHandler,
-    ) {}
+export class ToolsFindKeyValueByIdResolver {
+    constructor(private readonly handler: ToolsFindKeyValueByIdHandler) {}
 
     @Query('toolsFindKeyValueById')
     async main(
         @Args('id') id: string,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<ToolsKeyValue>
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
+    ): Promise<ToolsKeyValue> {
+        return await this.handler.main(id, constraint, timezone);
     }
 }

@@ -1,30 +1,30 @@
 // export commands
 export { ToolsCreateMigrationCommand } from './application/create/tools-create-migration.command';
 export { ToolsCreateMigrationsCommand } from './application/create/tools-create-migrations.command';
-export { ToolsUpdateMigrationByIdCommand } from './application/update/tools-update-migration-by-id.command';
-export { ToolsUpdateMigrationsCommand } from './application/update/tools-update-migrations.command';
 export { ToolsDeleteMigrationByIdCommand } from './application/delete/tools-delete-migration-by-id.command';
 export { ToolsDeleteMigrationsCommand } from './application/delete/tools-delete-migrations.command';
+export { ToolsUpdateMigrationByIdCommand } from './application/update/tools-update-migration-by-id.command';
+export { ToolsUpdateMigrationsCommand } from './application/update/tools-update-migrations.command';
 
 // export queries
-export { ToolsPaginateMigrationsQuery } from './application/paginate/tools-paginate-migrations.query';
-export { ToolsGetMigrationsQuery } from './application/get/tools-get-migrations.query';
-export { ToolsFindMigrationQuery } from './application/find/tools-find-migration.query';
 export { ToolsFindMigrationByIdQuery } from './application/find/tools-find-migration-by-id.query';
+export { ToolsFindMigrationQuery } from './application/find/tools-find-migration.query';
+export { ToolsGetMigrationsQuery } from './application/get/tools-get-migrations.query';
+export { ToolsPaginateMigrationsQuery } from './application/paginate/tools-paginate-migrations.query';
 
 // export mocks
 export { toolsMockMigrationData } from './infrastructure/mock/tools-mock-migration.data';
-export { ToolsMockMigrationSeeder } from './infrastructure/mock/tools-mock-migration.seeder';
 export { ToolsMockMigrationRepository } from './infrastructure/mock/tools-mock-migration.repository';
+export { ToolsMockMigrationSeeder } from './infrastructure/mock/tools-mock-migration.seeder';
 
 // export events
 export { ToolsAddMigrationsContextEvent } from './application/events/tools-add-migrations-context.event';
-export { ToolsCreatedMigrationsEvent } from './application/events/tools-created-migrations.event';
 export { ToolsCreatedMigrationEvent } from './application/events/tools-created-migration.event';
-export { ToolsDeletedMigrationsEvent } from './application/events/tools-deleted-migrations.event';
+export { ToolsCreatedMigrationsEvent } from './application/events/tools-created-migrations.event';
 export { ToolsDeletedMigrationEvent } from './application/events/tools-deleted-migration.event';
-export { ToolsUpdatedMigrationsEvent } from './application/events/tools-updated-migrations.event';
+export { ToolsDeletedMigrationsEvent } from './application/events/tools-deleted-migrations.event';
 export { ToolsUpdatedMigrationEvent } from './application/events/tools-updated-migration.event';
+export { ToolsUpdatedMigrationsEvent } from './application/events/tools-updated-migrations.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -48,36 +48,36 @@ export { ToolsMigrationSagas } from './application/sagas/tools-migration.sagas';
 // command handlers
 import { ToolsCreateMigrationCommandHandler } from './application/create/tools-create-migration.command-handler';
 import { ToolsCreateMigrationsCommandHandler } from './application/create/tools-create-migrations.command-handler';
-import { ToolsUpdateMigrationByIdCommandHandler } from './application/update/tools-update-migration-by-id.command-handler';
-import { ToolsUpdateMigrationsCommandHandler } from './application/update/tools-update-migrations.command-handler';
 import { ToolsDeleteMigrationByIdCommandHandler } from './application/delete/tools-delete-migration-by-id.command-handler';
 import { ToolsDeleteMigrationsCommandHandler } from './application/delete/tools-delete-migrations.command-handler';
+import { ToolsUpdateMigrationByIdCommandHandler } from './application/update/tools-update-migration-by-id.command-handler';
+import { ToolsUpdateMigrationsCommandHandler } from './application/update/tools-update-migrations.command-handler';
 
 // query handlers
-import { ToolsPaginateMigrationsQueryHandler } from './application/paginate/tools-paginate-migrations.query-handler';
-import { ToolsGetMigrationsQueryHandler } from './application/get/tools-get-migrations.query-handler';
-import { ToolsFindMigrationQueryHandler } from './application/find/tools-find-migration.query-handler';
 import { ToolsFindMigrationByIdQueryHandler } from './application/find/tools-find-migration-by-id.query-handler';
+import { ToolsFindMigrationQueryHandler } from './application/find/tools-find-migration.query-handler';
+import { ToolsGetMigrationsQueryHandler } from './application/get/tools-get-migrations.query-handler';
+import { ToolsPaginateMigrationsQueryHandler } from './application/paginate/tools-paginate-migrations.query-handler';
 
 // event handlers
 import { ToolsCreatedMigrationEventHandler } from './application/events/tools-created-migration.event-handler';
 import { ToolsCreatedMigrationsEventHandler } from './application/events/tools-created-migrations.event-handler';
-import { ToolsUpdatedMigrationEventHandler } from './application/events/tools-updated-migration.event-handler';
-import { ToolsUpdatedMigrationsEventHandler } from './application/events/tools-updated-migrations.event-handler';
 import { ToolsDeletedMigrationEventHandler } from './application/events/tools-deleted-migration.event-handler';
 import { ToolsDeletedMigrationsEventHandler } from './application/events/tools-deleted-migrations.event-handler';
+import { ToolsUpdatedMigrationEventHandler } from './application/events/tools-updated-migration.event-handler';
+import { ToolsUpdatedMigrationsEventHandler } from './application/events/tools-updated-migrations.event-handler';
 
 // services
 import { ToolsCreateMigrationService } from './application/create/tools-create-migration.service';
 import { ToolsCreateMigrationsService } from './application/create/tools-create-migrations.service';
-import { ToolsPaginateMigrationsService } from './application/paginate/tools-paginate-migrations.service';
-import { ToolsGetMigrationsService } from './application/get/tools-get-migrations.service';
-import { ToolsFindMigrationService } from './application/find/tools-find-migration.service';
-import { ToolsFindMigrationByIdService } from './application/find/tools-find-migration-by-id.service';
-import { ToolsUpdateMigrationByIdService } from './application/update/tools-update-migration-by-id.service';
-import { ToolsUpdateMigrationsService } from './application/update/tools-update-migrations.service';
 import { ToolsDeleteMigrationByIdService } from './application/delete/tools-delete-migration-by-id.service';
 import { ToolsDeleteMigrationsService } from './application/delete/tools-delete-migrations.service';
+import { ToolsFindMigrationByIdService } from './application/find/tools-find-migration-by-id.service';
+import { ToolsFindMigrationService } from './application/find/tools-find-migration.service';
+import { ToolsGetMigrationsService } from './application/get/tools-get-migrations.service';
+import { ToolsPaginateMigrationsService } from './application/paginate/tools-paginate-migrations.service';
+import { ToolsUpdateMigrationByIdService } from './application/update/tools-update-migration-by-id.service';
+import { ToolsUpdateMigrationsService } from './application/update/tools-update-migrations.service';
 
 export const ToolsMigrationHandlers = [
     // commands

@@ -1,45 +1,45 @@
-import { OAuthFindScopeController, OAuthFindScopeHandler } from '@api/o-auth/scope';
+import {
+    OAuthFindScopeController,
+    OAuthFindScopeHandler,
+} from '@api/o-auth/scope';
 import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthFindScopeController', () =>
-{
+describe('OAuthFindScopeController', () => {
     let controller: OAuthFindScopeController;
     let handler: OAuthFindScopeHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                OAuthFindScopeController,
-            ],
+            imports: [],
+            controllers: [OAuthFindScopeController],
             providers: [
                 {
-                    provide : OAuthFindScopeHandler,
+                    provide: OAuthFindScopeHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthFindScopeController>(OAuthFindScopeController);
+        controller = module.get<OAuthFindScopeController>(
+            OAuthFindScopeController,
+        );
         handler = module.get<OAuthFindScopeHandler>(OAuthFindScopeHandler);
     });
 
-    describe('main', () =>
-    {
-        test('OAuthFindScopeController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthFindScopeController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a scope', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
+        test('should return a scope', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockScopeData[0])),
+            );
             expect(await controller.main()).toBe(oAuthMockScopeData[0]);
         });
     });

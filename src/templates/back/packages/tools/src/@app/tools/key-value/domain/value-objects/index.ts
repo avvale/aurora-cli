@@ -4,6 +4,7 @@ export { ToolsKeyValueDescription } from './tools-key-value-description';
 export { ToolsKeyValueId } from './tools-key-value-id';
 export { ToolsKeyValueIsActive } from './tools-key-value-is-active';
 export { ToolsKeyValueKey } from './tools-key-value-key';
+export { ToolsKeyValueRowId } from './tools-key-value-row-id';
 export { ToolsKeyValueType } from './tools-key-value-type';
 export { ToolsKeyValueUpdatedAt } from './tools-key-value-updated-at';
 export { ToolsKeyValueValue } from './tools-key-value-value';

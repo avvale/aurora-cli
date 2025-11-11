@@ -1,59 +1,67 @@
-
-type IamPermission
-{
-    """UUID for permission"""
+type IamPermission {
+    """
+    UUID for permission
+    """
     id: ID!
-    """Permission name, this name is unique and used to evaluate if a user can consume or access a resource"""
+    rowId: GraphQLInt!
+    """
+    Permission name, this name is unique and used to evaluate if a user can consume or access a resource
+    """
     name: GraphQLString!
-    """UUID for bounded context, a permission is associated with a bounded context"""
+    """
+    UUID for bounded context, a permission is associated with a bounded context
+    """
     boundedContextId: ID!
-    """Bounded context object relationship to permission"""
+    """
+    Bounded context object relationship to permission
+    """
     boundedContext: IamBoundedContext
-    """List of roles associated with the permission"""
+    """
+    List of roles associated with the permission
+    """
     roles: [IamRole]
-    """Timestamp when the permission was created"""
+    """
+    Timestamp when the permission was created
+    """
     createdAt: GraphQLTimestamp
-    """Timestamp when the permission was last updated"""
+    """
+    Timestamp when the permission was last updated
+    """
     updatedAt: GraphQLTimestamp
-    """Timestamp when the permission was deleted"""
+    """
+    Timestamp when the permission was deleted
+    """
     deletedAt: GraphQLTimestamp
 }
 
-input IamCreatePermissionInput
-{
+input IamCreatePermissionInput {
     id: ID!
     name: GraphQLString!
     boundedContextId: ID!
     roleIds: [ID]
 }
 
-input IamUpdatePermissionByIdInput
-{
+input IamUpdatePermissionByIdInput {
     id: ID!
     name: GraphQLString
     boundedContextId: ID
     roleIds: [ID]
 }
 
-input IamUpdatePermissionsInput
-{
+input IamUpdatePermissionsInput {
     id: ID
     name: GraphQLString
     boundedContextId: ID
     roleIds: [ID]
 }
 
-type Query
-{
+type Query {
     iamFindPermission(
         query: QueryStatement
         constraint: QueryStatement
     ): IamPermission
 
-    iamFindPermissionById(
-        id: ID
-        constraint: QueryStatement
-    ): IamPermission
+    iamFindPermissionById(id: ID, constraint: QueryStatement): IamPermission
 
     iamGetPermissions(
         query: QueryStatement
@@ -64,18 +72,12 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    iamCreatePermission(
-        payload: IamCreatePermissionInput!
-    ): IamPermission
+type Mutation {
+    iamCreatePermission(payload: IamCreatePermissionInput!): IamPermission
 
-    iamCreatePermissions(
-        payload: [IamCreatePermissionInput]!
-    ): Boolean!
+    iamCreatePermissions(payload: [IamCreatePermissionInput]!): Boolean!
 
     iamUpdatePermissionById(
         payload: IamUpdatePermissionByIdInput!
@@ -88,14 +90,10 @@ type Mutation
         constraint: QueryStatement
     ): [IamPermission]!
 
-    iamDeletePermissionById(
-        id: ID!
-        constraint: QueryStatement
-    ): IamPermission
+    iamDeletePermissionById(id: ID!, constraint: QueryStatement): IamPermission
 
     iamDeletePermissions(
         query: QueryStatement
         constraint: QueryStatement
     ): [IamPermission]!
-
 }

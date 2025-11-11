@@ -1,11 +1,13 @@
-import { IamAddPermissionsRolesContextEvent, IamIPermissionRoleRepository } from '@app/iam/permission-role';
+import {
+    IamAddPermissionsRolesContextEvent,
+    IamIPermissionRoleRepository,
+} from '@app/iam/permission-role';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamDeletePermissionsRolesService
-{
+export class IamDeletePermissionsRolesService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIPermissionRoleRepository,
@@ -15,8 +17,7 @@ export class IamDeletePermissionsRolesService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // get objects to delete
         const permissionsRoles = await this.repository.get({
             queryStatement,

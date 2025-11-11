@@ -1,8 +1,6 @@
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class IamDeletePermissionRoleByIdCommand
-{
+export class IamDeletePermissionRoleByIdCommand {
     constructor(
         public readonly permissionId: string,
         public readonly roleId: string,

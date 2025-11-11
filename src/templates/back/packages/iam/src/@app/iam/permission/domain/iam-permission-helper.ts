@@ -1,10 +1,11 @@
+/* #region customizations */
+import { IamCreatePermissionsRolesCommand } from '@app/iam/permission-role';
+/* #endregion customizations */
+
 import { ICommandBus, IQueryBus, SeederPermission } from '@aurorajs.dev/core';
 import { IamCreatePermissionsCommand } from '../application/create/iam-create-permissions.command';
 import { IamAccountResponse, IamFindAccountByIdQuery, IamUpdateAccountByIdCommand } from '@app/iam/account';
 import { AccountPermissions } from '../../iam.types';
-
-// ---- customizations ----
-import { IamCreatePermissionsRolesCommand } from '@app/iam/permission-role';
 
 export class IamPermissionHelper
 {

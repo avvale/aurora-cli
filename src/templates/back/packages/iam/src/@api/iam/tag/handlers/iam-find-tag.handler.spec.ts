@@ -4,55 +4,46 @@ import { iamMockTagData } from '@app/iam/tag';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTagHandler', () =>
-{
+describe('IamFindTagHandler', () => {
     let handler: IamFindTagHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindTagHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamFindTagHandler>(IamFindTagHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamFindTagHandler should be defined', () =>
-    {
+    test('IamFindTagHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTagHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTagHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a tag', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTagData[0])));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockTagData[0]);
+        test('should return a tag', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTagData[0])),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                iamMockTagData[0],
+            );
         });
     });
 });

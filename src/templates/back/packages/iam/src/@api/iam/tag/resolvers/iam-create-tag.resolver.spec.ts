@@ -4,48 +4,46 @@ import { IamCreateTagHandler, IamCreateTagResolver } from '@api/iam/tag';
 import { iamMockTagData } from '@app/iam/tag';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTagResolver', () =>
-{
+describe('IamCreateTagResolver', () => {
     let resolver: IamCreateTagResolver;
     let handler: IamCreateTagHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreateTagResolver,
                 {
-                    provide : IamCreateTagHandler,
+                    provide: IamCreateTagHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<IamCreateTagResolver>(IamCreateTagResolver);
         handler = module.get<IamCreateTagHandler>(IamCreateTagHandler);
     });
 
-    test('IamCreateTagResolver should be defined', () =>
-    {
+    test('IamCreateTagResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTagResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTagResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an tag created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTagData[0])));
-            expect(await resolver.main(<IamCreateTagInput>iamMockTagData[0])).toBe(iamMockTagData[0]);
+        test('should return an tag created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTagData[0])),
+            );
+            expect(
+                await resolver.main(<IamCreateTagInput>iamMockTagData[0]),
+            ).toBe(iamMockTagData[0]);
         });
     });
 });

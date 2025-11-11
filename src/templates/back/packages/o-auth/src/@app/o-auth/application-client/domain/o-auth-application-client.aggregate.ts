@@ -1,16 +1,19 @@
 /* eslint-disable key-spacing */
 import { OAuthApplication } from '@app/o-auth/application';
-import { OAuthCreatedApplicationClientEvent, OAuthDeletedApplicationClientEvent, OAuthUpdatedApplicationClientEvent } from '@app/o-auth/application-client';
+import {
+    OAuthCreatedApplicationClientEvent,
+    OAuthDeletedApplicationClientEvent,
+    OAuthUpdatedApplicationClientEvent,
+} from '@app/o-auth/application-client';
 import {
     OAuthApplicationClientApplicationId,
     OAuthApplicationClientClientId,
 } from '@app/o-auth/application-client/domain/value-objects';
 import { OAuthClient } from '@app/o-auth/client';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthApplicationClient extends AggregateRoot
-{
+export class OAuthApplicationClient extends AggregateRoot {
     applicationId: OAuthApplicationClientApplicationId;
     clientId: OAuthApplicationClientClientId;
     application: OAuthApplication;
@@ -21,8 +24,7 @@ export class OAuthApplicationClient extends AggregateRoot
         clientId: OAuthApplicationClientClientId,
         application?: OAuthApplication,
         client?: OAuthClient,
-    )
-    {
+    ) {
         super();
         this.applicationId = applicationId;
         this.clientId = clientId;
@@ -35,8 +37,7 @@ export class OAuthApplicationClient extends AggregateRoot
         clientId: OAuthApplicationClientClientId,
         application?: OAuthApplication,
         client?: OAuthClient,
-    ): OAuthApplicationClient
-    {
+    ): OAuthApplicationClient {
         return new OAuthApplicationClient(
             applicationId,
             clientId,
@@ -45,38 +46,52 @@ export class OAuthApplicationClient extends AggregateRoot
         );
     }
 
-    created(applicationClient: OAuthApplicationClient): void
-    {
+    created(event: {
+        payload: OAuthApplicationClient;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new OAuthCreatedApplicationClientEvent(
-                applicationClient.applicationId.value,
-                applicationClient.clientId.value,
-            ),
+            new OAuthCreatedApplicationClientEvent({
+                payload: {
+                    applicationId: event.payload.applicationId.value,
+                    clientId: event.payload.clientId.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(applicationClient: OAuthApplicationClient): void
-    {
+    updated(event: {
+        payload: OAuthApplicationClient;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new OAuthUpdatedApplicationClientEvent(
-                applicationClient.applicationId?.value,
-                applicationClient.clientId?.value,
-            ),
+            new OAuthUpdatedApplicationClientEvent({
+                payload: {
+                    applicationId: event.payload.applicationId?.value,
+                    clientId: event.payload.clientId?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(applicationClient: OAuthApplicationClient): void
-    {
+    deleted(event: {
+        payload: OAuthApplicationClient;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new OAuthDeletedApplicationClientEvent(
-                applicationClient.applicationId.value,
-                applicationClient.clientId.value,
-            ),
+            new OAuthDeletedApplicationClientEvent({
+                payload: {
+                    applicationId: event.payload.applicationId.value,
+                    clientId: event.payload.clientId.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             applicationId: this.applicationId.value,
             clientId: this.clientId.value,
@@ -86,8 +101,7 @@ export class OAuthApplicationClient extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             applicationId: this.applicationId.value,
             clientId: this.clientId.value,

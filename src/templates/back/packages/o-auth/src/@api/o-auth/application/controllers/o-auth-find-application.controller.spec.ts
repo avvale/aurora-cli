@@ -1,45 +1,50 @@
-import { OAuthFindApplicationController, OAuthFindApplicationHandler } from '@api/o-auth/application';
+import {
+    OAuthFindApplicationController,
+    OAuthFindApplicationHandler,
+} from '@api/o-auth/application';
 import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthFindApplicationController', () =>
-{
+describe('OAuthFindApplicationController', () => {
     let controller: OAuthFindApplicationController;
     let handler: OAuthFindApplicationHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                OAuthFindApplicationController,
-            ],
+            imports: [],
+            controllers: [OAuthFindApplicationController],
             providers: [
                 {
-                    provide : OAuthFindApplicationHandler,
+                    provide: OAuthFindApplicationHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthFindApplicationController>(OAuthFindApplicationController);
-        handler = module.get<OAuthFindApplicationHandler>(OAuthFindApplicationHandler);
+        controller = module.get<OAuthFindApplicationController>(
+            OAuthFindApplicationController,
+        );
+        handler = module.get<OAuthFindApplicationHandler>(
+            OAuthFindApplicationHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthFindApplicationController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthFindApplicationController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a application', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
+        test('should return a application', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockApplicationData[0]),
+                    ),
+            );
             expect(await controller.main()).toBe(oAuthMockApplicationData[0]);
         });
     });

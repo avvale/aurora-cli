@@ -4,62 +4,57 @@ import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthPaginateScopesHandler', () =>
-{
+describe('OAuthPaginateScopesHandler', () => {
     let handler: OAuthPaginateScopesHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthPaginateScopesHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<OAuthPaginateScopesHandler>(OAuthPaginateScopesHandler);
+        handler = module.get<OAuthPaginateScopesHandler>(
+            OAuthPaginateScopesHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('OAuthPaginateScopesHandler should be defined', () =>
-    {
+    test('OAuthPaginateScopesHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthPaginateScopesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthPaginateScopesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a scopes', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+        test('should return a scopes', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: oAuthMockScopeData.length,
+                            count: oAuthMockScopeData.length,
+                            rows: oAuthMockScopeData,
+                        }),
+                    ),
+            );
+            expect(await handler.main({}, {})).toEqual({
                 total: oAuthMockScopeData.length,
                 count: oAuthMockScopeData.length,
-                rows : oAuthMockScopeData,
-            })));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                ),
-            )
-                .toEqual({
-                    total: oAuthMockScopeData.length,
-                    count: oAuthMockScopeData.length,
-                    rows : oAuthMockScopeData,
-                });
+                rows: oAuthMockScopeData,
+            });
         });
     });
 });

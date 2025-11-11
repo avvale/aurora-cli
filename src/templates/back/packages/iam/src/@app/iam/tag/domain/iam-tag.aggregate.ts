@@ -1,18 +1,23 @@
 /* eslint-disable key-spacing */
-import { IamCreatedTagEvent, IamDeletedTagEvent, IamUpdatedTagEvent } from '@app/iam/tag';
+import {
+    IamCreatedTagEvent,
+    IamDeletedTagEvent,
+    IamUpdatedTagEvent,
+} from '@app/iam/tag';
 import {
     IamTagCreatedAt,
     IamTagDeletedAt,
     IamTagId,
     IamTagName,
+    IamTagRowId,
     IamTagUpdatedAt,
 } from '@app/iam/tag/domain/value-objects';
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class IamTag extends AggregateRoot
-{
+export class IamTag extends AggregateRoot {
     id: IamTagId;
+    rowId: IamTagRowId;
     name: IamTagName;
     createdAt: IamTagCreatedAt;
     updatedAt: IamTagUpdatedAt;
@@ -20,14 +25,15 @@ export class IamTag extends AggregateRoot
 
     constructor(
         id: IamTagId,
+        rowId: IamTagRowId,
         name: IamTagName,
         createdAt: IamTagCreatedAt,
         updatedAt: IamTagUpdatedAt,
         deletedAt: IamTagDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -36,28 +42,16 @@ export class IamTag extends AggregateRoot
 
     static register(
         id: IamTagId,
+        rowId: IamTagRowId,
         name: IamTagName,
         createdAt: IamTagCreatedAt,
         updatedAt: IamTagUpdatedAt,
         deletedAt: IamTagDeletedAt,
-    ): IamTag
-    {
-        return new IamTag(
-            id,
-            name,
-            createdAt,
-            updatedAt,
-            deletedAt,
-        );
+    ): IamTag {
+        return new IamTag(id, rowId, name, createdAt, updatedAt, deletedAt);
     }
 
-    created(
-        event: {
-            payload: IamTag;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: IamTag; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamCreatedTagEvent({
                 payload: {
@@ -72,13 +66,7 @@ export class IamTag extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: IamTag;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: IamTag; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamUpdatedTagEvent({
                 payload: {
@@ -93,17 +81,12 @@ export class IamTag extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: IamTag;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: IamTag; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamDeletedTagEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     name: event.payload.name.value,
                     createdAt: event.payload.createdAt?.value,
                     updatedAt: event.payload.updatedAt?.value,
@@ -114,10 +97,10 @@ export class IamTag extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             name: this.name.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
@@ -126,8 +109,7 @@ export class IamTag extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             name: this.name.value,

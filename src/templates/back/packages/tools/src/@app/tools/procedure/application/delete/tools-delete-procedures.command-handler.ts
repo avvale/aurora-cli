@@ -3,14 +3,14 @@ import { ToolsDeleteProceduresService } from '@app/tools/procedure/application/d
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsDeleteProceduresCommand)
-export class ToolsDeleteProceduresCommandHandler implements ICommandHandler<ToolsDeleteProceduresCommand>
+export class ToolsDeleteProceduresCommandHandler
+    implements ICommandHandler<ToolsDeleteProceduresCommand>
 {
     constructor(
         private readonly deleteProceduresService: ToolsDeleteProceduresService,
     ) {}
 
-    async execute(command: ToolsDeleteProceduresCommand): Promise<void>
-    {
+    async execute(command: ToolsDeleteProceduresCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteProceduresService.main(
             command.queryStatement,

@@ -1,57 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthPaginateApplicationsHandler, OAuthPaginateApplicationsResolver } from '@api/o-auth/application';
+import {
+    OAuthPaginateApplicationsHandler,
+    OAuthPaginateApplicationsResolver,
+} from '@api/o-auth/application';
 import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthPaginateApplicationsResolver', () =>
-{
+describe('OAuthPaginateApplicationsResolver', () => {
     let resolver: OAuthPaginateApplicationsResolver;
     let handler: OAuthPaginateApplicationsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthPaginateApplicationsResolver,
                 {
-                    provide : OAuthPaginateApplicationsHandler,
+                    provide: OAuthPaginateApplicationsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthPaginateApplicationsResolver>(OAuthPaginateApplicationsResolver);
-        handler = module.get<OAuthPaginateApplicationsHandler>(OAuthPaginateApplicationsHandler);
+        resolver = module.get<OAuthPaginateApplicationsResolver>(
+            OAuthPaginateApplicationsResolver,
+        );
+        handler = module.get<OAuthPaginateApplicationsHandler>(
+            OAuthPaginateApplicationsHandler,
+        );
     });
 
-    test('OAuthPaginateApplicationsResolver should be defined', () =>
-    {
+    test('OAuthPaginateApplicationsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthPaginateApplicationsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthPaginateApplicationsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a oAuthMockApplicationData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : oAuthMockApplicationData,
-            })));
+        test('should return a oAuthMockApplicationData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: oAuthMockApplicationData,
+                        }),
+                    ),
+            );
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : oAuthMockApplicationData,
+                rows: oAuthMockApplicationData,
             });
         });
     });

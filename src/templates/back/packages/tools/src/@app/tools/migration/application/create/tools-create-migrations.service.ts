@@ -1,7 +1,10 @@
-import { ToolsAddMigrationsContextEvent, ToolsIMigrationRepository, ToolsMigration } from '@app/tools/migration';
+import {
+    ToolsAddMigrationsContextEvent,
+    ToolsIMigrationRepository,
+    ToolsMigration,
+} from '@app/tools/migration';
 import {
     ToolsMigrationCreatedAt,
-    ToolsMigrationDeletedAt,
     ToolsMigrationDownScript,
     ToolsMigrationExecutedAt,
     ToolsMigrationId,
@@ -18,8 +21,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class ToolsCreateMigrationsService
-{
+export class ToolsCreateMigrationsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ToolsIMigrationRepository,
@@ -36,41 +38,37 @@ export class ToolsCreateMigrationsService
             downScript: ToolsMigrationDownScript;
             sort: ToolsMigrationSort;
             executedAt: ToolsMigrationExecutedAt;
-        } [],
+        }[],
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
-        const migrations = payload.map(migration => ToolsMigration.register(
-            migration.id,
-            migration.name,
-            migration.version,
-            migration.isActive,
-            migration.isExecuted,
-            migration.upScript,
-            migration.downScript,
-            migration.sort,
-            migration.executedAt,
-            new ToolsMigrationCreatedAt({ currentTimestamp: true }),
-            new ToolsMigrationUpdatedAt({ currentTimestamp: true }),
-            null, // deleteAt
-        ));
+        const migrations = payload.map((migration) =>
+            ToolsMigration.register(
+                migration.id,
+                undefined, // rowId
+                migration.name,
+                migration.version,
+                migration.isActive,
+                migration.isExecuted,
+                migration.upScript,
+                migration.downScript,
+                migration.sort,
+                migration.executedAt,
+                new ToolsMigrationCreatedAt({ currentTimestamp: true }),
+                new ToolsMigrationUpdatedAt({ currentTimestamp: true }),
+                null, // deleteAt
+            ),
+        );
 
         // insert
-        await this.repository.insert(
-            migrations,
-            {
-                insertOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.insert(migrations, {
+            insertOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddMigrationsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const migrationsRegistered = this.publisher.mergeObjectContext(
-            new ToolsAddMigrationsContextEvent(
-                migrations,
-                cQMetadata,
-            ),
+            new ToolsAddMigrationsContextEvent(migrations, cQMetadata),
         );
 
         migrationsRegistered.created(); // apply event to model events

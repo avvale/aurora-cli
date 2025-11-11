@@ -1,53 +1,58 @@
-import { IamPaginateTenantsAccountsController, IamPaginateTenantsAccountsHandler } from '@api/iam/tenant-account';
+import {
+    IamPaginateTenantsAccountsController,
+    IamPaginateTenantsAccountsHandler,
+} from '@api/iam/tenant-account';
 import { iamMockTenantAccountData } from '@app/iam/tenant-account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginateTenantsAccountsController', () =>
-{
+describe('IamPaginateTenantsAccountsController', () => {
     let controller: IamPaginateTenantsAccountsController;
     let handler: IamPaginateTenantsAccountsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamPaginateTenantsAccountsController,
-            ],
+            imports: [],
+            controllers: [IamPaginateTenantsAccountsController],
             providers: [
                 {
-                    provide : IamPaginateTenantsAccountsHandler,
+                    provide: IamPaginateTenantsAccountsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamPaginateTenantsAccountsController>(IamPaginateTenantsAccountsController);
-        handler = module.get<IamPaginateTenantsAccountsHandler>(IamPaginateTenantsAccountsHandler);
+        controller = module.get<IamPaginateTenantsAccountsController>(
+            IamPaginateTenantsAccountsController,
+        );
+        handler = module.get<IamPaginateTenantsAccountsHandler>(
+            IamPaginateTenantsAccountsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginateTenantsAccountsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginateTenantsAccountsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a iamMockTenantAccountData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : iamMockTenantAccountData,
-            })));
+        test('should return a iamMockTenantAccountData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: iamMockTenantAccountData,
+                        }),
+                    ),
+            );
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : iamMockTenantAccountData,
+                rows: iamMockTenantAccountData,
             });
         });
     });

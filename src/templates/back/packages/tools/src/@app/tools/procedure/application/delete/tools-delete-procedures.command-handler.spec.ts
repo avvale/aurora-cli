@@ -3,40 +3,40 @@ import { ToolsDeleteProceduresCommandHandler } from '@app/tools/procedure/applic
 import { ToolsDeleteProceduresService } from '@app/tools/procedure/application/delete/tools-delete-procedures.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDeleteProceduresCommandHandler', () =>
-{
+describe('ToolsDeleteProceduresCommandHandler', () => {
     let commandHandler: ToolsDeleteProceduresCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ToolsDeleteProceduresCommandHandler,
                 {
-                    provide : ToolsDeleteProceduresService,
+                    provide: ToolsDeleteProceduresService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<ToolsDeleteProceduresCommandHandler>(ToolsDeleteProceduresCommandHandler);
+        commandHandler = module.get<ToolsDeleteProceduresCommandHandler>(
+            ToolsDeleteProceduresCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDeleteProceduresCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDeleteProceduresCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new ToolsDeleteProceduresCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(
+                    new ToolsDeleteProceduresCommand(),
+                ),
+            ).toBe(undefined);
         });
     });
 });

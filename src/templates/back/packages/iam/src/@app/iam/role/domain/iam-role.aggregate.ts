@@ -1,7 +1,11 @@
 /* eslint-disable key-spacing */
 import { IamAccount } from '@app/iam/account';
 import { IamPermission } from '@app/iam/permission';
-import { IamCreatedRoleEvent, IamDeletedRoleEvent, IamUpdatedRoleEvent } from '@app/iam/role';
+import {
+    IamCreatedRoleEvent,
+    IamDeletedRoleEvent,
+    IamUpdatedRoleEvent,
+} from '@app/iam/role';
 import {
     IamRoleAccountIds,
     IamRoleCreatedAt,
@@ -10,14 +14,15 @@ import {
     IamRoleIsMaster,
     IamRoleName,
     IamRolePermissionIds,
+    IamRoleRowId,
     IamRoleUpdatedAt,
 } from '@app/iam/role/domain/value-objects';
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class IamRole extends AggregateRoot
-{
+export class IamRole extends AggregateRoot {
     id: IamRoleId;
+    rowId: IamRoleRowId;
     name: IamRoleName;
     isMaster: IamRoleIsMaster;
     permissionIds: IamRolePermissionIds;
@@ -30,6 +35,7 @@ export class IamRole extends AggregateRoot
 
     constructor(
         id: IamRoleId,
+        rowId: IamRoleRowId,
         name: IamRoleName,
         isMaster: IamRoleIsMaster,
         permissionIds: IamRolePermissionIds,
@@ -39,10 +45,10 @@ export class IamRole extends AggregateRoot
         deletedAt: IamRoleDeletedAt,
         permissions?: IamPermission[],
         accounts?: IamAccount[],
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.name = name;
         this.isMaster = isMaster;
         this.permissionIds = permissionIds;
@@ -56,6 +62,7 @@ export class IamRole extends AggregateRoot
 
     static register(
         id: IamRoleId,
+        rowId: IamRoleRowId,
         name: IamRoleName,
         isMaster: IamRoleIsMaster,
         permissionIds: IamRolePermissionIds,
@@ -65,10 +72,10 @@ export class IamRole extends AggregateRoot
         deletedAt: IamRoleDeletedAt,
         permissions?: IamPermission[],
         accounts?: IamAccount[],
-    ): IamRole
-    {
+    ): IamRole {
         return new IamRole(
             id,
+            rowId,
             name,
             isMaster,
             permissionIds,
@@ -81,13 +88,7 @@ export class IamRole extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: IamRole;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: IamRole; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamCreatedRoleEvent({
                 payload: {
@@ -105,13 +106,7 @@ export class IamRole extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: IamRole;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: IamRole; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamUpdatedRoleEvent({
                 payload: {
@@ -129,17 +124,12 @@ export class IamRole extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: IamRole;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: IamRole; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamDeletedRoleEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     name: event.payload.name.value,
                     isMaster: event.payload.isMaster.value,
                     permissionIds: event.payload.permissionIds?.value,
@@ -153,10 +143,10 @@ export class IamRole extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             name: this.name.value,
             isMaster: this.isMaster.value,
             permissionIds: this.permissionIds?.value,
@@ -164,14 +154,13 @@ export class IamRole extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            permissions: this.permissions?.map(item => item.toDTO()),
-            accounts: this.accounts?.map(item => item.toDTO()),
+            permissions: this.permissions?.map((item) => item.toDTO()),
+            accounts: this.accounts?.map((item) => item.toDTO()),
         };
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             name: this.name.value,
@@ -181,8 +170,8 @@ export class IamRole extends AggregateRoot
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
-            permissions: this.permissions?.map(item => item.toDTO()),
-            accounts: this.accounts?.map(item => item.toDTO()),
+            permissions: this.permissions?.map((item) => item.toDTO()),
+            accounts: this.accounts?.map((item) => item.toDTO()),
         };
     }
 }

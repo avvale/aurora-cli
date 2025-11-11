@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class OAuthFindApplicationClientByIdQuery
-{
+export class OAuthFindApplicationClientByIdQuery {
     constructor(
         public readonly applicationId: string,
         public readonly clientId: string,

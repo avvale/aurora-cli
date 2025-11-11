@@ -16,6 +16,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: name
     type: varchar
     maxLength: 128
@@ -88,6 +93,7 @@ additionalApis:
     httpMethod: post
 excludedOperations:
   - count
+  - getRaw
   - max
   - min
   - rawSql

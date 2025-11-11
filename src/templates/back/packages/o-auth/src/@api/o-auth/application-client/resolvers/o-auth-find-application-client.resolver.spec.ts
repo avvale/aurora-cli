@@ -1,50 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthFindApplicationClientHandler, OAuthFindApplicationClientResolver } from '@api/o-auth/application-client';
+import {
+    OAuthFindApplicationClientHandler,
+    OAuthFindApplicationClientResolver,
+} from '@api/o-auth/application-client';
 import { oAuthMockApplicationClientData } from '@app/o-auth/application-client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthFindApplicationClientResolver', () =>
-{
+describe('OAuthFindApplicationClientResolver', () => {
     let resolver: OAuthFindApplicationClientResolver;
     let handler: OAuthFindApplicationClientHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthFindApplicationClientResolver,
                 {
-                    provide : OAuthFindApplicationClientHandler,
+                    provide: OAuthFindApplicationClientHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthFindApplicationClientResolver>(OAuthFindApplicationClientResolver);
-        handler = module.get<OAuthFindApplicationClientHandler>(OAuthFindApplicationClientHandler);
+        resolver = module.get<OAuthFindApplicationClientResolver>(
+            OAuthFindApplicationClientResolver,
+        );
+        handler = module.get<OAuthFindApplicationClientHandler>(
+            OAuthFindApplicationClientHandler,
+        );
     });
 
-    test('OAuthFindApplicationClientResolver should be defined', () =>
-    {
+    test('OAuthFindApplicationClientResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthFindApplicationClientResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthFindApplicationClientResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a applicationClient', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationClientData[0])));
-            expect(await resolver.main()).toBe(oAuthMockApplicationClientData[0]);
+        test('should return a applicationClient', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockApplicationClientData[0]),
+                    ),
+            );
+            expect(await resolver.main()).toBe(
+                oAuthMockApplicationClientData[0],
+            );
         });
     });
 });

@@ -12,6 +12,7 @@ import {
     IamUserName,
     IamUserPassword,
     IamUserRememberToken,
+    IamUserRowId,
     IamUserSurname,
     IamUserTwoFactorAuthenticationSecret,
     IamUserUpdatedAt,
@@ -21,34 +22,39 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class IamMockUserSeeder extends MockSeeder<IamUser>
-{
+export class IamMockUserSeeder extends MockSeeder<IamUser> {
     public collectionSource: IamUser[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const user of _.orderBy(iamMockUserData, ['id']))
-        {
+        for (const user of _.orderBy(iamMockUserData, ['id'])) {
             this.collectionSource.push(
                 IamUser.register(
                     new IamUserId(user.id),
+                    new IamUserRowId(user.rowId),
                     new IamUserAccountId(user.accountId),
                     new IamUserName(user.name),
                     new IamUserSurname(user.surname),
                     new IamUserAvatar(user.avatar),
                     new IamUserMobile(user.mobile),
                     new IamUserLangId(user.langId),
-                    new IamUserPassword(user.password, {}, { haveToEncrypt: true }),
-                    new IamUserIsTwoFactorAuthenticationEnabled(user.isTwoFactorAuthenticationEnabled),
-                    new IamUserTwoFactorAuthenticationSecret(user.twoFactorAuthenticationSecret),
+                    new IamUserPassword(
+                        user.password,
+                        {},
+                        { haveToEncrypt: true },
+                    ),
+                    new IamUserIsTwoFactorAuthenticationEnabled(
+                        user.isTwoFactorAuthenticationEnabled,
+                    ),
+                    new IamUserTwoFactorAuthenticationSecret(
+                        user.twoFactorAuthenticationSecret,
+                    ),
                     new IamUserRememberToken(user.rememberToken),
                     new IamUserMeta(user.meta),
                     new IamUserCreatedAt({ currentTimestamp: true }),

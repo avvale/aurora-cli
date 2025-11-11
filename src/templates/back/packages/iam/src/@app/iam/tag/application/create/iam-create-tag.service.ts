@@ -1,7 +1,6 @@
 import { IamITagRepository, IamTag } from '@app/iam/tag';
 import {
     IamTagCreatedAt,
-    IamTagDeletedAt,
     IamTagId,
     IamTagName,
     IamTagUpdatedAt,
@@ -11,8 +10,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateTagService
-{
+export class IamCreateTagService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamITagRepository,
@@ -24,28 +22,23 @@ export class IamCreateTagService
             name: IamTagName;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const tag = IamTag.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             new IamTagCreatedAt({ currentTimestamp: true }),
             new IamTagUpdatedAt({ currentTimestamp: true }),
             null, // deletedAt
         );
 
-        await this.repository.create(
-            tag,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(tag, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const tagRegister = this.publisher.mergeObjectContext(
-            tag,
-        );
+        const tagRegister = this.publisher.mergeObjectContext(tag);
 
         tagRegister.created({
             payload: tag,

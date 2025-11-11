@@ -1,51 +1,61 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IamCreatePermissionRoleInput } from '@api/graphql';
-import { IamCreatePermissionRoleHandler, IamCreatePermissionRoleResolver } from '@api/iam/permission-role';
+import {
+    IamCreatePermissionRoleHandler,
+    IamCreatePermissionRoleResolver,
+} from '@api/iam/permission-role';
 import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreatePermissionRoleResolver', () =>
-{
+describe('IamCreatePermissionRoleResolver', () => {
     let resolver: IamCreatePermissionRoleResolver;
     let handler: IamCreatePermissionRoleHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreatePermissionRoleResolver,
                 {
-                    provide : IamCreatePermissionRoleHandler,
+                    provide: IamCreatePermissionRoleHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamCreatePermissionRoleResolver>(IamCreatePermissionRoleResolver);
-        handler = module.get<IamCreatePermissionRoleHandler>(IamCreatePermissionRoleHandler);
+        resolver = module.get<IamCreatePermissionRoleResolver>(
+            IamCreatePermissionRoleResolver,
+        );
+        handler = module.get<IamCreatePermissionRoleHandler>(
+            IamCreatePermissionRoleHandler,
+        );
     });
 
-    test('IamCreatePermissionRoleResolver should be defined', () =>
-    {
+    test('IamCreatePermissionRoleResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCreatePermissionRoleResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreatePermissionRoleResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an permissionRole created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionRoleData[0])));
-            expect(await resolver.main(<IamCreatePermissionRoleInput>iamMockPermissionRoleData[0])).toBe(iamMockPermissionRoleData[0]);
+        test('should return an permissionRole created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockPermissionRoleData[0]),
+                    ),
+            );
+            expect(
+                await resolver.main(
+                    <IamCreatePermissionRoleInput>iamMockPermissionRoleData[0],
+                ),
+            ).toBe(iamMockPermissionRoleData[0]);
         });
     });
 });

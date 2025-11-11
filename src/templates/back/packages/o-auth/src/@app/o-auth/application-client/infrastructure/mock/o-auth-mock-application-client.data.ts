@@ -1,85 +1,85 @@
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
 
-export const oAuthMockApplicationClientData = [
+export const oAuthMockApplicationClientData: any[] = [
     {
-        applicationId: 'f61b384f-2011-4819-b224-5bd1f3f0bad6',
-        clientId: 'cb61cc1d-6aae-4abb-bb35-630f213f9132',
+        applicationId: 'e9848fdc-acc3-4663-8372-8b156a5ac61d',
+        clientId: '220f9f9c-1eb7-4734-996f-e8a1bc42cc11',
     },
     {
-        applicationId: '11d48fad-5c88-4d75-8ac0-303407765e4d',
-        clientId: '554a20c4-9a14-45f3-b228-481c139d4b7e',
+        applicationId: '122b7fe9-9e8a-4318-9ac6-81614ed4351f',
+        clientId: '5d2f19f8-036a-4895-ad31-cbf47efc9349',
     },
     {
-        applicationId: '0a2f9721-80fd-4755-9463-c43c12fa38d7',
-        clientId: '381930ac-72f7-4082-a33c-d0aedf6a549f',
+        applicationId: 'cd089139-aec4-4f7c-ab1e-931b80360074',
+        clientId: 'ecb840b1-9adb-4a0c-a423-900385ac37cc',
     },
     {
-        applicationId: '51a8d6c0-44fa-4998-ac83-832f5bf4a3ac',
-        clientId: 'e2ea6e20-1926-4897-8bbf-dab44b1abab8',
+        applicationId: '2c4d0fe4-31c0-438a-a590-d884f10346ed',
+        clientId: '6efb3471-0053-454a-8f16-348c6408e0bf',
     },
     {
-        applicationId: 'f3ddf5f3-45e2-4b8d-9749-2e96860ab102',
-        clientId: '5d0510df-7a1d-4597-b57b-3aeb768f0e49',
+        applicationId: '1d9ac9ee-0c1e-4ce5-bf06-88138a901423',
+        clientId: '3100d96c-3f71-4e64-8df6-5400048e79bf',
     },
     {
-        applicationId: '266a5668-5751-41da-829d-b887324f499d',
-        clientId: 'a4d41cf9-bb2c-4fdf-b0e8-fee27338232f',
+        applicationId: 'c3417aa7-3a54-4950-8f57-877d9a118200',
+        clientId: 'be357966-5d35-4b52-9061-d14083eabcab',
     },
     {
-        applicationId: '2db13504-9214-4ede-9ab8-da52bcdbd34e',
-        clientId: '8227dec7-bec2-4d39-a31e-397263063340',
+        applicationId: '25909a1c-34b5-4c03-8db8-c4d7ad6d3773',
+        clientId: '49b457c9-49b9-48e4-984d-ae5720c76ac6',
     },
     {
-        applicationId: '473c255d-69fe-430d-afef-45403343cf2b',
-        clientId: '90707136-a703-4ee3-9483-6b87f7fa4c23',
+        applicationId: '92b9abed-c23b-44bd-a77b-45bf52c4c4d0',
+        clientId: '8f8baf29-3ed3-4aac-bbc8-393e6014c960',
     },
     {
-        applicationId: '04b24322-e9b0-43c1-8a34-a0ab609ff306',
-        clientId: '808eb8b3-32ca-4f2f-b1d9-2ff7c218074c',
+        applicationId: '283c3f93-8be4-41a2-b117-f8a63785ba00',
+        clientId: '945a1bf3-7932-4471-9974-d23b4d6ebf6a',
     },
     {
-        applicationId: '0dce21dd-aff0-4631-8990-3b5a16e295a3',
-        clientId: '893e647d-725a-4d5f-81a8-a462d587f7f3',
+        applicationId: 'acb927d7-07b8-4a72-a013-d140206baac8',
+        clientId: '2718e23f-805f-458c-9a63-40b892211ee7',
     },
     {
-        applicationId: '1e4e260c-cfed-410c-8c93-8b21d957ea66',
-        clientId: 'e4d67efc-7f35-46e0-ba92-ece60ceabe2c',
+        applicationId: '61a58601-72a6-49a0-9e3f-04c62407f583',
+        clientId: '4d05ff24-7593-4671-a297-9bd7ce258344',
     },
     {
-        applicationId: 'e542a4a4-f6b6-4118-9f5c-d22463c8eb13',
-        clientId: '474fee74-7520-45bd-bf65-fc067db44b4b',
+        applicationId: 'eac791c7-f847-489d-a7b6-31cd4e498e9c',
+        clientId: '7d87e6b8-faa7-4e7f-a974-d60020fc5489',
     },
     {
-        applicationId: 'f0bfef4e-b612-4afc-8131-c0da49aa0872',
-        clientId: '50df2a9d-bcd9-4402-889e-1e37d89bed18',
+        applicationId: '3e967291-fb82-4ac6-8db5-8d912cc22897',
+        clientId: '48361c34-c00c-46bc-a67d-3653139d8322',
     },
     {
-        applicationId: 'd9b9f371-34f6-467d-b733-80bb60d52456',
-        clientId: 'bdc80b29-094a-4df0-b6b9-b3fefaa5b419',
+        applicationId: '006221dd-1609-44d8-86de-2f28e88bc886',
+        clientId: 'e658ad44-1848-4609-af11-c714cb0b5802',
     },
     {
-        applicationId: 'e48c7811-934b-49f1-8f49-cb5c120f089a',
-        clientId: '4759ce8a-f08c-4bdb-806d-62f50cfa11db',
+        applicationId: 'f33b992b-2fdf-4c2e-9a67-5696d50dfe55',
+        clientId: '5f0eb96a-6667-4bd8-8798-96f58ed3e1d6',
     },
     {
-        applicationId: '2bdedcf0-14b4-49ea-8eeb-c68d9dd3b721',
-        clientId: '81d7f7e2-2cb5-4524-bbb3-03cf5cd81d21',
+        applicationId: '86b86eba-c691-486a-a7e5-8c7df3cf0bc1',
+        clientId: '0bdddd77-8a3a-45dc-8668-a690ec8b0472',
     },
     {
-        applicationId: 'd9282dd8-b35b-41e5-9c61-3c0ca8e1c369',
-        clientId: '7b0d5b16-1c63-4168-8a35-e7d985b380b2',
+        applicationId: '2a4f8d54-d49f-4d5f-8435-0dada0a9f66f',
+        clientId: '7d4b7395-00cd-466d-bf7e-9872fe60aa90',
     },
     {
-        applicationId: '19a7b847-7b46-4716-a51c-09762ec92fce',
-        clientId: '85f33353-e71f-4229-939e-a89355b5f6da',
+        applicationId: '3176853b-ea14-4542-a800-2d06b6020d36',
+        clientId: 'bf0ab460-ecf3-47b2-8a54-ae3bc5f67c3a',
     },
     {
-        applicationId: '6a0b6c98-4a88-416f-bbcc-900451a73ae2',
-        clientId: '2c883c1e-e2bb-41d3-9ead-268d233bfb7a',
+        applicationId: 'c6013904-fc18-4a29-b056-333a860313f3',
+        clientId: '2383411e-d9a9-44f0-9dcb-bb584cf1c6e3',
     },
     {
-        applicationId: '0577c5f1-1ce6-46cb-849c-d46b290869fc',
-        clientId: 'bd8464af-5de2-4c7d-bb95-d82daf7242e5',
+        applicationId: 'de8a8bd4-adf3-4b52-a1cb-c17c6492786c',
+        clientId: 'fd0ca1ad-098f-4872-a42f-f790346df770',
     },
 ];

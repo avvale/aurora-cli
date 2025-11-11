@@ -1,8 +1,11 @@
-import { IamAddRolesContextEvent, IamIRoleRepository, IamRole } from '@app/iam/role';
+import {
+    IamAddRolesContextEvent,
+    IamIRoleRepository,
+    IamRole,
+} from '@app/iam/role';
 import {
     IamRoleAccountIds,
     IamRoleCreatedAt,
-    IamRoleDeletedAt,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -14,8 +17,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateRolesService
-{
+export class IamCreateRolesService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIRoleRepository,
@@ -28,37 +30,33 @@ export class IamCreateRolesService
             isMaster: IamRoleIsMaster;
             permissionIds: IamRolePermissionIds;
             accountIds: IamRoleAccountIds;
-        } [],
+        }[],
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
-        const roles = payload.map(role => IamRole.register(
-            role.id,
-            role.name,
-            role.isMaster,
-            role.permissionIds,
-            role.accountIds,
-            new IamRoleCreatedAt({ currentTimestamp: true }),
-            new IamRoleUpdatedAt({ currentTimestamp: true }),
-            null, // deleteAt
-        ));
+        const roles = payload.map((role) =>
+            IamRole.register(
+                role.id,
+                undefined, // rowId
+                role.name,
+                role.isMaster,
+                role.permissionIds,
+                role.accountIds,
+                new IamRoleCreatedAt({ currentTimestamp: true }),
+                new IamRoleUpdatedAt({ currentTimestamp: true }),
+                null, // deleteAt
+            ),
+        );
 
         // insert
-        await this.repository.insert(
-            roles,
-            {
-                insertOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.insert(roles, {
+            insertOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddRolesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const rolesRegistered = this.publisher.mergeObjectContext(
-            new IamAddRolesContextEvent(
-                roles,
-                cQMetadata,
-            ),
+            new IamAddRolesContextEvent(roles, cQMetadata),
         );
 
         rolesRegistered.created(); // apply event to model events

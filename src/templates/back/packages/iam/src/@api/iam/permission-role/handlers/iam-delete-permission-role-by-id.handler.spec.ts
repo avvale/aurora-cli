@@ -4,56 +4,59 @@ import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeletePermissionRoleByIdController', () =>
-{
+describe('IamDeletePermissionRoleByIdController', () => {
     let handler: IamDeletePermissionRoleByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeletePermissionRoleByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamDeletePermissionRoleByIdHandler>(IamDeletePermissionRoleByIdHandler);
+        handler = module.get<IamDeletePermissionRoleByIdHandler>(
+            IamDeletePermissionRoleByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeletePermissionRoleByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeletePermissionRoleByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an permissionRole deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionRoleData[0])));
+        test('should return an permissionRole deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockPermissionRoleData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     iamMockPermissionRoleData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockPermissionRoleData[0]);
+            ).toBe(iamMockPermissionRoleData[0]);
         });
     });
 });

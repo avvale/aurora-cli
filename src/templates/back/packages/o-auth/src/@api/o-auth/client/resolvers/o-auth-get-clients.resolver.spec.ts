@@ -1,49 +1,48 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthGetClientsHandler, OAuthGetClientsResolver } from '@api/o-auth/client';
+import {
+    OAuthGetClientsHandler,
+    OAuthGetClientsResolver,
+} from '@api/o-auth/client';
 import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthGetClientsResolver', () =>
-{
+describe('OAuthGetClientsResolver', () => {
     let resolver: OAuthGetClientsResolver;
     let handler: OAuthGetClientsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthGetClientsResolver,
                 {
-                    provide : OAuthGetClientsHandler,
+                    provide: OAuthGetClientsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<OAuthGetClientsResolver>(OAuthGetClientsResolver);
         handler = module.get<OAuthGetClientsHandler>(OAuthGetClientsHandler);
     });
 
-    test('OAuthGetClientsResolver should be defined', () =>
-    {
-        expect(resolver).   toBeDefined();
+    test('OAuthGetClientsResolver should be defined', () => {
+        expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthGetClientsResolver should be defined', () =>
-        {
-            expect(resolver).   toBeDefined();
+    describe('main', () => {
+        test('OAuthGetClientsResolver should be defined', () => {
+            expect(resolver).toBeDefined();
         });
 
-        test('should return a oAuthMockClientData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData)));
+        test('should return a oAuthMockClientData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockClientData)),
+            );
             expect(await resolver.main()).toBe(oAuthMockClientData);
         });
     });

@@ -4,56 +4,59 @@ import { toolsMockMigrationData } from '@app/tools/migration';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDeleteMigrationByIdController', () =>
-{
+describe('ToolsDeleteMigrationByIdController', () => {
     let handler: ToolsDeleteMigrationByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsDeleteMigrationByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsDeleteMigrationByIdHandler>(ToolsDeleteMigrationByIdHandler);
+        handler = module.get<ToolsDeleteMigrationByIdHandler>(
+            ToolsDeleteMigrationByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDeleteMigrationByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDeleteMigrationByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an migration deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData[0])));
+        test('should return an migration deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockMigrationData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     toolsMockMigrationData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(toolsMockMigrationData[0]);
+            ).toBe(toolsMockMigrationData[0]);
         });
     });
 });

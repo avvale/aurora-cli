@@ -1,16 +1,22 @@
-import { ToolsIMigrationRepository, ToolsMockMigrationRepository } from '@app/tools/migration';
+import {
+    ToolsIMigrationRepository,
+    ToolsMockMigrationRepository,
+} from '@app/tools/migration';
 import { ToolsGetMigrationsService } from '@app/tools/migration/application/get/tools-get-migrations.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsGetMigrationsService', () =>
-{
+describe('ToolsGetMigrationsService', () => {
     let service: ToolsGetMigrationsService;
     let repository: ToolsIMigrationRepository;
     let mockRepository: ToolsMockMigrationRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,30 +26,33 @@ describe('ToolsGetMigrationsService', () =>
                 ToolsGetMigrationsService,
                 ToolsMockMigrationRepository,
                 {
-                    provide : ToolsIMigrationRepository,
+                    provide: ToolsIMigrationRepository,
                     useValue: {
-                        get: () => { /**/ },
+                        get: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(ToolsGetMigrationsService);
         repository = module.get(ToolsIMigrationRepository);
         mockRepository = module.get(ToolsMockMigrationRepository);
     });
 
-    describe('main', () =>
-    {
-        test('GetMigrationsService should be defined', () =>
-        {
+    describe('main', () => {
+        test('GetMigrationsService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should get migrations', async () =>
-        {
-            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
+        test('should get migrations', async () => {
+            jest.spyOn(repository, 'get').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource),
+                    ),
+            );
             expect(await service.main()).toBe(mockRepository.collectionSource);
         });
     });

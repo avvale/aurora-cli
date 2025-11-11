@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamResetPasswordUserHandler } from '../handlers/iam-reset-password-user.handler';
 import { IamResetPasswordUserResolver } from './iam-reset-password-user.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamResetPasswordUserResolver', () =>
-{
+describe('IamResetPasswordUserResolver', () => {
     let resolver: IamResetPasswordUserResolver;
     let handler: IamResetPasswordUserHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamResetPasswordUserResolver,
                 {
-                    provide : IamResetPasswordUserHandler,
+                    provide: IamResetPasswordUserHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamResetPasswordUserResolver>(IamResetPasswordUserResolver);
-        handler = module.get<IamResetPasswordUserHandler>(IamResetPasswordUserHandler);
+        resolver = module.get<IamResetPasswordUserResolver>(
+            IamResetPasswordUserResolver,
+        );
+        handler = module.get<IamResetPasswordUserHandler>(
+            IamResetPasswordUserHandler,
+        );
     });
 
-    test('IamResetPasswordUserResolver should be defined', () =>
-    {
+    test('IamResetPasswordUserResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamResetPasswordUserResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamResetPasswordUserResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthIAccessTokenRepository, OAuthMockAccessTokenRepository } from '@app/o-auth/access-token';
+import {
+    OAuthIAccessTokenRepository,
+    OAuthMockAccessTokenRepository,
+} from '@app/o-auth/access-token';
 import { OAuthDeleteAccessTokensService } from '@app/o-auth/access-token/application/delete/o-auth-delete-access-tokens.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteAccessTokensService', () =>
-{
+describe('OAuthDeleteAccessTokensService', () => {
     let service: OAuthDeleteAccessTokensService;
     let repository: OAuthIAccessTokenRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,37 +26,33 @@ describe('OAuthDeleteAccessTokensService', () =>
                 OAuthDeleteAccessTokensService,
                 OAuthMockAccessTokenRepository,
                 {
-                    provide : OAuthIAccessTokenRepository,
+                    provide: OAuthIAccessTokenRepository,
                     useValue: {
-                        get   : () => { /**/ },
-                        delete: () => { /**/ },
+                        get: () => {
+                            /**/
+                        },
+                        delete: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthDeleteAccessTokensService);
         repository = module.get(OAuthIAccessTokenRepository);
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteAccessTokensService should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteAccessTokensService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should delete accessToken and emit event', async () =>
-        {
-            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
-            expect(
-                await service.main(
-                    {},
-                    {},
-                ),
-            )
-                .toBe(undefined);
+        test('should delete accessToken and emit event', async () => {
+            jest.spyOn(repository, 'get').mockImplementation(
+                () => new Promise((resolve) => resolve([])),
+            );
+            expect(await service.main({}, {})).toBe(undefined);
         });
     });
 });

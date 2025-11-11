@@ -1,5 +1,9 @@
 /* eslint-disable key-spacing */
-import { ToolsCreatedMigrationEvent, ToolsDeletedMigrationEvent, ToolsUpdatedMigrationEvent } from '@app/tools/migration';
+import {
+    ToolsCreatedMigrationEvent,
+    ToolsDeletedMigrationEvent,
+    ToolsUpdatedMigrationEvent,
+} from '@app/tools/migration';
 import {
     ToolsMigrationCreatedAt,
     ToolsMigrationDeletedAt,
@@ -9,6 +13,7 @@ import {
     ToolsMigrationIsActive,
     ToolsMigrationIsExecuted,
     ToolsMigrationName,
+    ToolsMigrationRowId,
     ToolsMigrationSort,
     ToolsMigrationUpdatedAt,
     ToolsMigrationUpScript,
@@ -17,9 +22,9 @@ import {
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class ToolsMigration extends AggregateRoot
-{
+export class ToolsMigration extends AggregateRoot {
     id: ToolsMigrationId;
+    rowId: ToolsMigrationRowId;
     name: ToolsMigrationName;
     version: ToolsMigrationVersion;
     isActive: ToolsMigrationIsActive;
@@ -34,6 +39,7 @@ export class ToolsMigration extends AggregateRoot
 
     constructor(
         id: ToolsMigrationId,
+        rowId: ToolsMigrationRowId,
         name: ToolsMigrationName,
         version: ToolsMigrationVersion,
         isActive: ToolsMigrationIsActive,
@@ -45,10 +51,10 @@ export class ToolsMigration extends AggregateRoot
         createdAt: ToolsMigrationCreatedAt,
         updatedAt: ToolsMigrationUpdatedAt,
         deletedAt: ToolsMigrationDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.name = name;
         this.version = version;
         this.isActive = isActive;
@@ -64,6 +70,7 @@ export class ToolsMigration extends AggregateRoot
 
     static register(
         id: ToolsMigrationId,
+        rowId: ToolsMigrationRowId,
         name: ToolsMigrationName,
         version: ToolsMigrationVersion,
         isActive: ToolsMigrationIsActive,
@@ -75,10 +82,10 @@ export class ToolsMigration extends AggregateRoot
         createdAt: ToolsMigrationCreatedAt,
         updatedAt: ToolsMigrationUpdatedAt,
         deletedAt: ToolsMigrationDeletedAt,
-    ): ToolsMigration
-    {
+    ): ToolsMigration {
         return new ToolsMigration(
             id,
+            rowId,
             name,
             version,
             isActive,
@@ -93,13 +100,7 @@ export class ToolsMigration extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: ToolsMigration;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: ToolsMigration; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsCreatedMigrationEvent({
                 payload: {
@@ -121,13 +122,7 @@ export class ToolsMigration extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: ToolsMigration;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: ToolsMigration; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsUpdatedMigrationEvent({
                 payload: {
@@ -149,17 +144,12 @@ export class ToolsMigration extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: ToolsMigration;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: ToolsMigration; cQMetadata?: CQMetadata }): void {
         this.apply(
             new ToolsDeletedMigrationEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     name: event.payload.name.value,
                     version: event.payload.version.value,
                     isActive: event.payload.isActive.value,
@@ -177,10 +167,10 @@ export class ToolsMigration extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             name: this.name.value,
             version: this.version.value,
             isActive: this.isActive.value,
@@ -196,8 +186,7 @@ export class ToolsMigration extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             name: this.name.value,

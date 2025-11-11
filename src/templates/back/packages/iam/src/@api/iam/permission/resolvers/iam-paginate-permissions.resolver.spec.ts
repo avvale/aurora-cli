@@ -1,57 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamPaginatePermissionsHandler, IamPaginatePermissionsResolver } from '@api/iam/permission';
+import {
+    IamPaginatePermissionsHandler,
+    IamPaginatePermissionsResolver,
+} from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginatePermissionsResolver', () =>
-{
+describe('IamPaginatePermissionsResolver', () => {
     let resolver: IamPaginatePermissionsResolver;
     let handler: IamPaginatePermissionsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamPaginatePermissionsResolver,
                 {
-                    provide : IamPaginatePermissionsHandler,
+                    provide: IamPaginatePermissionsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamPaginatePermissionsResolver>(IamPaginatePermissionsResolver);
-        handler = module.get<IamPaginatePermissionsHandler>(IamPaginatePermissionsHandler);
+        resolver = module.get<IamPaginatePermissionsResolver>(
+            IamPaginatePermissionsResolver,
+        );
+        handler = module.get<IamPaginatePermissionsHandler>(
+            IamPaginatePermissionsHandler,
+        );
     });
 
-    test('IamPaginatePermissionsResolver should be defined', () =>
-    {
+    test('IamPaginatePermissionsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginatePermissionsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginatePermissionsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a iamMockPermissionData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : iamMockPermissionData,
-            })));
+        test('should return a iamMockPermissionData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: iamMockPermissionData,
+                        }),
+                    ),
+            );
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : iamMockPermissionData,
+                rows: iamMockPermissionData,
             });
         });
     });

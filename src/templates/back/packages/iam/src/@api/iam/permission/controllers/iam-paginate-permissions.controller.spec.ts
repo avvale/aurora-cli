@@ -1,53 +1,58 @@
-import { IamPaginatePermissionsController, IamPaginatePermissionsHandler } from '@api/iam/permission';
+import {
+    IamPaginatePermissionsController,
+    IamPaginatePermissionsHandler,
+} from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginatePermissionsController', () =>
-{
+describe('IamPaginatePermissionsController', () => {
     let controller: IamPaginatePermissionsController;
     let handler: IamPaginatePermissionsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamPaginatePermissionsController,
-            ],
+            imports: [],
+            controllers: [IamPaginatePermissionsController],
             providers: [
                 {
-                    provide : IamPaginatePermissionsHandler,
+                    provide: IamPaginatePermissionsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamPaginatePermissionsController>(IamPaginatePermissionsController);
-        handler = module.get<IamPaginatePermissionsHandler>(IamPaginatePermissionsHandler);
+        controller = module.get<IamPaginatePermissionsController>(
+            IamPaginatePermissionsController,
+        );
+        handler = module.get<IamPaginatePermissionsHandler>(
+            IamPaginatePermissionsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginatePermissionsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginatePermissionsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a iamMockPermissionData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : iamMockPermissionData,
-            })));
+        test('should return a iamMockPermissionData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: iamMockPermissionData,
+                        }),
+                    ),
+            );
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : iamMockPermissionData,
+                rows: iamMockPermissionData,
             });
         });
     });

@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamPaginateWithTenantConstraintTenantsHandler } from '../handlers/iam-paginate-with-tenant-constraint-tenants.handler';
 import { IamPaginateWithTenantConstraintTenantsResolver } from './iam-paginate-with-tenant-constraint-tenants.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginateWithTenantConstraintTenantsResolver', () =>
-{
+describe('IamPaginateWithTenantConstraintTenantsResolver', () => {
     let resolver: IamPaginateWithTenantConstraintTenantsResolver;
     let handler: IamPaginateWithTenantConstraintTenantsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamPaginateWithTenantConstraintTenantsResolver,
                 {
-                    provide : IamPaginateWithTenantConstraintTenantsHandler,
+                    provide: IamPaginateWithTenantConstraintTenantsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamPaginateWithTenantConstraintTenantsResolver>(IamPaginateWithTenantConstraintTenantsResolver);
-        handler = module.get<IamPaginateWithTenantConstraintTenantsHandler>(IamPaginateWithTenantConstraintTenantsHandler);
+        resolver = module.get<IamPaginateWithTenantConstraintTenantsResolver>(
+            IamPaginateWithTenantConstraintTenantsResolver,
+        );
+        handler = module.get<IamPaginateWithTenantConstraintTenantsHandler>(
+            IamPaginateWithTenantConstraintTenantsHandler,
+        );
     });
 
-    test('IamPaginateWithTenantConstraintTenantsResolver should be defined', () =>
-    {
+    test('IamPaginateWithTenantConstraintTenantsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginateWithTenantConstraintTenantsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginateWithTenantConstraintTenantsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

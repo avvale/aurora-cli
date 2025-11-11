@@ -1,16 +1,18 @@
 import { IamUpdateUserByIdInput, IamUser } from '@api/graphql';
 import { IamUpdateUserByIdHandler } from '@api/iam/user';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.user.update')
-export class IamUpdateUserByIdResolver
-{
-    constructor(
-        private readonly handler: IamUpdateUserByIdHandler,
-    ) {}
+export class IamUpdateUserByIdResolver {
+    constructor(private readonly handler: IamUpdateUserByIdHandler) {}
 
     @Mutation('iamUpdateUserById')
     async main(
@@ -18,13 +20,7 @@ export class IamUpdateUserByIdResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<IamUser>
-    {
-        return await this.handler.main(
-            payload,
-            constraint,
-            timezone,
-            auditing,
-        );
+    ): Promise<IamUser> {
+        return await this.handler.main(payload, constraint, timezone, auditing);
     }
 }

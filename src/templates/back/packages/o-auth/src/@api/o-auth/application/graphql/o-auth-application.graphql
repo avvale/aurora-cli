@@ -1,7 +1,6 @@
-
-type OAuthApplication
-{
+type OAuthApplication {
     id: ID!
+    rowId: GraphQLInt!
     code: GraphQLString!
     name: GraphQLString!
     secret: GraphQLString!
@@ -12,8 +11,7 @@ type OAuthApplication
     deletedAt: GraphQLTimestamp
 }
 
-input OAuthCreateApplicationInput
-{
+input OAuthCreateApplicationInput {
     id: ID!
     code: GraphQLString!
     name: GraphQLString!
@@ -22,8 +20,7 @@ input OAuthCreateApplicationInput
     clientIds: [ID]
 }
 
-input OAuthUpdateApplicationByIdInput
-{
+input OAuthUpdateApplicationByIdInput {
     id: ID!
     code: GraphQLString
     name: GraphQLString
@@ -32,8 +29,7 @@ input OAuthUpdateApplicationByIdInput
     clientIds: [ID]
 }
 
-input OAuthUpdateApplicationsInput
-{
+input OAuthUpdateApplicationsInput {
     id: ID
     code: GraphQLString
     name: GraphQLString
@@ -42,8 +38,7 @@ input OAuthUpdateApplicationsInput
     clientIds: [ID]
 }
 
-type Query
-{
+type Query {
     oAuthFindApplication(
         query: QueryStatement
         constraint: QueryStatement
@@ -63,32 +58,18 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     oAuthCreateApplication(
         payload: OAuthCreateApplicationInput!
     ): OAuthApplication
 
-    oAuthCreateApplications(
-        payload: [OAuthCreateApplicationInput]!
-    ): Boolean!
+    oAuthCreateApplications(payload: [OAuthCreateApplicationInput]!): Boolean!
 
     oAuthUpdateApplicationById(
         payload: OAuthUpdateApplicationByIdInput!
         constraint: QueryStatement
-    ): OAuthApplication
-
-    oAuthUpdateApplications(
-        payload: OAuthUpdateApplicationsInput!
-        query: QueryStatement
-        constraint: QueryStatement
-    ): [OAuthApplication]!
-
-    oAuthUpsertApplication(
-        payload: OAuthUpdateApplicationByIdInput!
     ): OAuthApplication
 
     oAuthDeleteApplicationById(
@@ -100,5 +81,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [OAuthApplication]!
-
 }

@@ -1,4 +1,7 @@
-import { IamIPermissionRoleRepository, IamPermissionRole } from '@app/iam/permission-role';
+import {
+    IamIPermissionRoleRepository,
+    IamPermissionRole,
+} from '@app/iam/permission-role';
 import {
     IamPermissionRolePermissionId,
     IamPermissionRoleRoleId,
@@ -8,8 +11,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdatePermissionRoleByIdService
-{
+export class IamUpdatePermissionRoleByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIPermissionRoleRepository,
@@ -22,8 +24,7 @@ export class IamUpdatePermissionRoleByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const permissionRole = IamPermissionRole.register(
             payload.permissionId,
@@ -31,19 +32,15 @@ export class IamUpdatePermissionRoleByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            permissionRole,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(permissionRole, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const permissionRoleRegister = this.publisher.mergeObjectContext(
-            permissionRole,
-        );
+        const permissionRoleRegister =
+            this.publisher.mergeObjectContext(permissionRole);
 
         permissionRoleRegister.updated({
             payload: permissionRole,

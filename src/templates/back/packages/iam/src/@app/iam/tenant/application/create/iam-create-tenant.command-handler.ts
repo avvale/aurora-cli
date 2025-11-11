@@ -14,14 +14,12 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateTenantCommand)
-export class IamCreateTenantCommandHandler implements ICommandHandler<IamCreateTenantCommand>
+export class IamCreateTenantCommandHandler
+    implements ICommandHandler<IamCreateTenantCommand>
 {
-    constructor(
-        private readonly createTenantService: IamCreateTenantService,
-    ) {}
+    constructor(private readonly createTenantService: IamCreateTenantService) {}
 
-    async execute(command: IamCreateTenantCommand): Promise<void>
-    {
+    async execute(command: IamCreateTenantCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createTenantService.main(
             {

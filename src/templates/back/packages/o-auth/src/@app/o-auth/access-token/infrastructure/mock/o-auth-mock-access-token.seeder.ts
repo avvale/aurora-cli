@@ -1,4 +1,7 @@
-import { OAuthAccessToken, oAuthMockAccessTokenData } from '@app/o-auth/access-token';
+import {
+    OAuthAccessToken,
+    oAuthMockAccessTokenData,
+} from '@app/o-auth/access-token';
 import {
     OAuthAccessTokenAccountId,
     OAuthAccessTokenClientId,
@@ -8,6 +11,7 @@ import {
     OAuthAccessTokenId,
     OAuthAccessTokenIsRevoked,
     OAuthAccessTokenName,
+    OAuthAccessTokenRowId,
     OAuthAccessTokenToken,
     OAuthAccessTokenUpdatedAt,
 } from '@app/o-auth/access-token/domain/value-objects';
@@ -16,25 +20,22 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class OAuthMockAccessTokenSeeder extends MockSeeder<OAuthAccessToken>
-{
+export class OAuthMockAccessTokenSeeder extends MockSeeder<OAuthAccessToken> {
     public collectionSource: OAuthAccessToken[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const accessToken of _.orderBy(oAuthMockAccessTokenData, ['id']))
-        {
+        for (const accessToken of _.orderBy(oAuthMockAccessTokenData, ['id'])) {
             this.collectionSource.push(
                 OAuthAccessToken.register(
                     new OAuthAccessTokenId(accessToken.id),
+                    new OAuthAccessTokenRowId(accessToken.rowId),
                     new OAuthAccessTokenClientId(accessToken.clientId),
                     new OAuthAccessTokenAccountId(accessToken.accountId),
                     new OAuthAccessTokenToken(accessToken.token),

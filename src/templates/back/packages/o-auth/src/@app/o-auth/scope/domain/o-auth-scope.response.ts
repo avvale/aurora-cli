@@ -1,8 +1,7 @@
-
-export class OAuthScopeResponse
-{
+export class OAuthScopeResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly code: string,
         public readonly name: string,
         public readonly roleIds: string[],

@@ -2,26 +2,47 @@
 /* eslint-disable key-spacing */
 import { IamAccountModel } from '@app/iam/account';
 import { IamTenantAccountModel } from '@app/iam/tenant-account';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, BelongsToMany, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsTo,
+    BelongsToMany,
+    Column,
+    ForeignKey,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamTenant',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['code'],
-			unique: true,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['code'],
+            unique: true,
+        },
     ],
 })
-export class IamTenantModel extends Model<IamTenantModel>
-{
+export class IamTenantModel extends Model<IamTenantModel> {
     @AfterCreate
-    static auditingCreate(instance: IamTenantModel, options): void
-    {
+    static auditingCreate(instance: IamTenantModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -32,8 +53,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamTenantModel, options): void
-    {
+    static auditingBulkCreate(instance: IamTenantModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -44,8 +64,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamTenantModel, options): void
-    {
+    static auditingUpdate(instance: IamTenantModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -56,8 +75,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -68,8 +86,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamTenantModel, options): void
-    {
+    static auditingDestroy(instance: IamTenantModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -80,8 +97,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -92,8 +108,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamTenantModel, options): void
-    {
+    static auditingRestore(instance: IamTenantModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -104,8 +119,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -116,8 +130,7 @@ export class IamTenantModel extends Model<IamTenantModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamTenantModel, options): void
-    {
+    static auditingUpsert(instance: IamTenantModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -134,6 +147,14 @@ export class IamTenantModel extends Model<IamTenantModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @ForeignKey(() => IamTenantModel)
     @Column({
@@ -185,7 +206,6 @@ export class IamTenantModel extends Model<IamTenantModel>
     })
     meta: any;
 
-
     @BelongsToMany(() => IamAccountModel, {
         through: () => IamTenantAccountModel,
         uniqueKey: 'Uq01IamTenantAccount',
@@ -212,5 +232,4 @@ export class IamTenantModel extends Model<IamTenantModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

@@ -1,4 +1,7 @@
-import { IamITenantAccountRepository, IamTenantAccount } from '@app/iam/tenant-account';
+import {
+    IamITenantAccountRepository,
+    IamTenantAccount,
+} from '@app/iam/tenant-account';
 import {
     IamTenantAccountAccountId,
     IamTenantAccountTenantId,
@@ -8,8 +11,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdateTenantAccountByIdService
-{
+export class IamUpdateTenantAccountByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamITenantAccountRepository,
@@ -22,8 +24,7 @@ export class IamUpdateTenantAccountByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const tenantAccount = IamTenantAccount.register(
             payload.tenantId,
@@ -31,19 +32,15 @@ export class IamUpdateTenantAccountByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            tenantAccount,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(tenantAccount, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const tenantAccountRegister = this.publisher.mergeObjectContext(
-            tenantAccount,
-        );
+        const tenantAccountRegister =
+            this.publisher.mergeObjectContext(tenantAccount);
 
         tenantAccountRegister.updated({
             payload: tenantAccount,

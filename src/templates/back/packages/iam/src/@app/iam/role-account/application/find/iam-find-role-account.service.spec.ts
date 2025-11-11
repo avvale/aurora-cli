@@ -1,16 +1,22 @@
-import { IamIRoleAccountRepository, IamMockRoleAccountRepository } from '@app/iam/role-account';
+import {
+    IamIRoleAccountRepository,
+    IamMockRoleAccountRepository,
+} from '@app/iam/role-account';
 import { IamFindRoleAccountService } from '@app/iam/role-account/application/find/iam-find-role-account.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindRoleAccountService', () =>
-{
+describe('IamFindRoleAccountService', () => {
     let service: IamFindRoleAccountService;
     let repository: IamIRoleAccountRepository;
     let mockRepository: IamMockRoleAccountRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,31 +26,36 @@ describe('IamFindRoleAccountService', () =>
                 IamFindRoleAccountService,
                 IamMockRoleAccountRepository,
                 {
-                    provide : IamIRoleAccountRepository,
+                    provide: IamIRoleAccountRepository,
                     useValue: {
-                        find: () => { /**/ },
+                        find: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(IamFindRoleAccountService);
         repository = module.get(IamIRoleAccountRepository);
         mockRepository = module.get(IamMockRoleAccountRepository);
     });
 
-    describe('main', () =>
-    {
-        test('IamFindRoleAccountService should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindRoleAccountService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should find roleAccount', async () =>
-        {
-            jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main()).toBe(mockRepository.collectionSource[0]);
+        test('should find roleAccount', async () => {
+            jest.spyOn(repository, 'find').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
+            expect(await service.main()).toBe(
+                mockRepository.collectionSource[0],
+            );
         });
     });
 });

@@ -4,7 +4,11 @@
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { OAuthIScopeRepository, oAuthMockScopeData, OAuthMockScopeSeeder } from '@app/o-auth/scope';
+import {
+    OAuthIScopeRepository,
+    oAuthMockScopeData,
+    OAuthMockScopeSeeder,
+} from '@app/o-auth/scope';
 import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -16,8 +20,7 @@ import * as request from 'supertest';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('scope', () =>
-{
+describe('scope', () => {
     let app: INestApplication;
     let scopeRepository: OAuthIScopeRepository;
     let scopeSeeder: OAuthMockScopeSeeder;
@@ -28,37 +31,41 @@ describe('scope', () =>
     // set timeout to 60s by default are 5s
     jest.setTimeout(60000);
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
                 OAuthModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
-                    imports   : [ConfigModule],
-                    inject    : [ConfigService],
-                    useFactory: (configService: ConfigService) =>
-                    {
+                    imports: [ConfigModule],
+                    inject: [ConfigService],
+                    useFactory: (configService: ConfigService) => {
                         return {
-                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
-                            storage       : configService.get('TEST_DATABASE_STORAGE'),
-                            host          : configService.get('TEST_DATABASE_HOST'),
-                            port          : +configService.get('TEST_DATABASE_PORT'),
-                            username      : configService.get('TEST_DATABASE_USER'),
-                            password      : configService.get('TEST_DATABASE_PASSWORD'),
-                            database      : configService.get('TEST_DATABASE_SCHEMA'),
-                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
-                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            dialect: configService.get('TEST_DATABASE_DIALECT'),
+                            storage: configService.get('TEST_DATABASE_STORAGE'),
+                            host: configService.get('TEST_DATABASE_HOST'),
+                            port: +configService.get('TEST_DATABASE_PORT'),
+                            username: configService.get('TEST_DATABASE_USER'),
+                            password: configService.get(
+                                'TEST_DATABASE_PASSWORD',
+                            ),
+                            database: configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize: configService.get(
+                                'TEST_DATABASE_SYNCHRONIZE',
+                            ),
+                            logging:
+                                configService.get('TEST_DATABASE_LOGGIN') ===
+                                'true'
+                                    ? console.log
+                                    : false,
                             autoLoadModels: true,
-                            models        : [],
+                            models: [],
                         };
                     },
                 }),
             ],
-            providers: [
-                OAuthMockScopeSeeder,
-            ],
+            providers: [OAuthMockScopeSeeder],
         })
             .overrideGuard(AuthenticationJwtGuard)
             .useValue({ canActivate: () => true })
@@ -68,7 +75,9 @@ describe('scope', () =>
 
         mockData = oAuthMockScopeData;
         app = module.createNestApplication();
-        scopeRepository = module.get<OAuthIScopeRepository>(OAuthIScopeRepository);
+        scopeRepository = module.get<OAuthIScopeRepository>(
+            OAuthIScopeRepository,
+        );
         scopeSeeder = module.get<OAuthMockScopeSeeder>(OAuthMockScopeSeeder);
 
         // seed mock data in memory database
@@ -77,8 +86,7 @@ describe('scope', () =>
         await app.init();
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeId property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -87,14 +95,30 @@ describe('scope', () =>
                 id: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeRowId property can not to be null', () => {
+        return request(app.getHttpServer())
+            .post('/o-auth/scope/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: null,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeRowId must be defined, can not be null',
+                );
+            });
+    });
+
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -103,14 +127,14 @@ describe('scope', () =>
                 code: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeCode must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeCode must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -119,14 +143,14 @@ describe('scope', () =>
                 name: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeName must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeName must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeId property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -135,14 +159,30 @@ describe('scope', () =>
                 id: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeRowId property can not to be undefined', () => {
+        return request(app.getHttpServer())
+            .post('/o-auth/scope/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: undefined,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeRowId must be defined, can not be undefined',
+                );
+            });
+    });
+
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -151,14 +191,14 @@ describe('scope', () =>
                 code: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeCode must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeCode must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -167,14 +207,14 @@ describe('scope', () =>
                 name: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeName must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeName must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -183,14 +223,14 @@ describe('scope', () =>
                 id: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode is too large, has a maximum length of 64', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeCode is too large, has a maximum length of 64', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -199,14 +239,14 @@ describe('scope', () =>
                 code: '*****************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeCode is too large, has a maximum length of 64');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeCode is too large, has a maximum length of 64',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName is too large, has a maximum length of 128', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 400 Conflict, ScopeName is too large, has a maximum length of 128', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -215,15 +255,14 @@ describe('scope', () =>
                 name: '*********************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthScopeName is too large, has a maximum length of 128');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthScopeName is too large, has a maximum length of 128',
+                );
             });
     });
 
-
-    test('/REST:POST o-auth/scope/create - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/REST:POST o-auth/scope/create - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -231,53 +270,63 @@ describe('scope', () =>
             .expect(409);
     });
 
-    test('/REST:POST o-auth/scopes/paginate', () =>
-    {
+    test('/REST:POST o-auth/scopes/paginate', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scopes/paginate')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
+                query: {
                     offset: 0,
                     limit: 5,
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual({
                     total: scopeSeeder.collectionResponse.length,
                     count: scopeSeeder.collectionResponse.length,
-                    rows : scopeSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: scopeSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/REST:POST o-auth/scopes/get', () =>
-    {
+    test('/REST:POST o-auth/scopes/get', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scopes/get')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual(
-                    scopeSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    scopeSeeder.collectionResponse.map((item) =>
+                        expect.objectContaining(
+                            _.omit(item, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    ),
                 );
             });
     });
 
-    test('/REST:POST o-auth/scope/find - Got 404 Not Found', () =>
-    {
+    test('/REST:POST o-auth/scope/find - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '13e5f3b7-e953-560a-b8e7-da8bf93a7931',
                     },
                 },
@@ -285,8 +334,7 @@ describe('scope', () =>
             .expect(404);
     });
 
-    test('/REST:POST o-auth/scope/create', () =>
-    {
+    test('/REST:POST o-auth/scope/create', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/create')
             .set('Accept', 'application/json')
@@ -297,49 +345,47 @@ describe('scope', () =>
             .expect(201);
     });
 
-    test('/REST:POST o-auth/scope/find', () =>
-    {
+    test('/REST:POST o-auth/scope/find', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:POST o-auth/scope/find/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:POST o-auth/scope/find/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/find/544fb8a0-6763-5cf0-87cf-4ba8b63dad4c')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:POST o-auth/scope/find/{id}', () =>
-    {
+    test('/REST:POST o-auth/scope/find/{id}', () => {
         return request(app.getHttpServer())
             .post('/o-auth/scope/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:PUT o-auth/scope/update - Got 404 Not Found', () =>
-    {
+    test('/REST:PUT o-auth/scope/update - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .put('/o-auth/scope/update')
             .set('Accept', 'application/json')
@@ -350,8 +396,7 @@ describe('scope', () =>
             .expect(404);
     });
 
-    test('/REST:PUT o-auth/scope/update', () =>
-    {
+    test('/REST:PUT o-auth/scope/update', () => {
         return request(app.getHttpServer())
             .put('/o-auth/scope/update')
             .set('Accept', 'application/json')
@@ -360,30 +405,29 @@ describe('scope', () =>
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:DELETE o-auth/scope/delete/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:DELETE o-auth/scope/delete/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .delete('/o-auth/scope/delete/7e1473d9-a00b-5325-8bff-a61aa5ad2aa1')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE o-auth/scope/delete/{id}', () =>
-    {
+    test('/REST:DELETE o-auth/scope/delete/{id}', () => {
         return request(app.getHttpServer())
             .delete('/o-auth/scope/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL oAuthCreateScope - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/GraphQL oAuthCreateScope - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -394,28 +438,34 @@ describe('scope', () =>
                         oAuthCreateScope (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
                         }
                     }
                 `,
-                variables:
-                {
-                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
+                variables: {
+                    payload: _.omit(mockData[0], [
+                        'createdAt',
+                        'updatedAt',
+                        'deletedAt',
+                    ]),
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(409);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('already exist in database');
             });
     });
 
-    test('/GraphQL oAuthPaginateScopes', () =>
-    {
+    test('/GraphQL oAuthPaginateScopes', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -431,28 +481,34 @@ describe('scope', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
+                variables: {
+                    query: {
                         offset: 0,
                         limit: 5,
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body.data.oAuthPaginateScopes).toEqual({
                     total: scopeSeeder.collectionResponse.length,
                     count: scopeSeeder.collectionResponse.length,
-                    rows : scopeSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: scopeSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/GraphQL oAuthGetScopes', () =>
-    {
+    test('/GraphQL oAuthGetScopes', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -463,6 +519,7 @@ describe('scope', () =>
                         oAuthGetScopes (query:$query)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -474,17 +531,25 @@ describe('scope', () =>
                 variables: {},
             })
             .expect(200)
-            .then(res =>
-            {
-                for (const [index, value] of res.body.data.oAuthGetScopes.entries())
-                {
-                    expect(scopeSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+            .then((res) => {
+                for (const [
+                    index,
+                    value,
+                ] of res.body.data.oAuthGetScopes.entries()) {
+                    expect(scopeSeeder.collectionResponse[index]).toEqual(
+                        expect.objectContaining(
+                            _.omit(value, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    );
                 }
             });
     });
 
-    test('/GraphQL oAuthCreateScope', () =>
-    {
+    test('/GraphQL oAuthCreateScope', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -495,6 +560,7 @@ describe('scope', () =>
                         oAuthCreateScope (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -509,14 +575,15 @@ describe('scope', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthCreateScope).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthCreateScope).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthFindScope - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthFindScope - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -527,6 +594,7 @@ describe('scope', () =>
                         oAuthFindScope (query:$query)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -535,28 +603,27 @@ describe('scope', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: 'c05f5fd0-c01a-54fa-9e5c-d7bbd74e338c',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthFindScope', () =>
-    {
+    test('/GraphQL oAuthFindScope', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -567,6 +634,7 @@ describe('scope', () =>
                         oAuthFindScope (query:$query)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -575,26 +643,23 @@ describe('scope', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthFindScope.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthFindScope.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthFindScopeById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthFindScopeById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -605,6 +670,7 @@ describe('scope', () =>
                         oAuthFindScopeById (id:$id)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -618,16 +684,18 @@ describe('scope', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthFindScopeById', () =>
-    {
+    test('/GraphQL oAuthFindScopeById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -638,6 +706,7 @@ describe('scope', () =>
                         oAuthFindScopeById (id:$id)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -651,14 +720,14 @@ describe('scope', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthFindScopeById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthFindScopeById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthUpdateScopeById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthUpdateScopeById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -669,6 +738,7 @@ describe('scope', () =>
                         oAuthUpdateScopeById (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -685,16 +755,18 @@ describe('scope', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthUpdateScopeById', () =>
-    {
+    test('/GraphQL oAuthUpdateScopeById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -705,6 +777,7 @@ describe('scope', () =>
                         oAuthUpdateScopeById (payload:$payload)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -721,14 +794,14 @@ describe('scope', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthUpdateScopeById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthUpdateScopeById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthUpdateScopes', () =>
-    {
+    test('/GraphQL oAuthUpdateScopes', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -739,6 +812,7 @@ describe('scope', () =>
                         oAuthUpdateScopes (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -760,14 +834,14 @@ describe('scope', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthUpdateScopes[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthUpdateScopes[0].id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthDeleteScopeById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthDeleteScopeById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -778,6 +852,7 @@ describe('scope', () =>
                         oAuthDeleteScopeById (id:$id)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -791,16 +866,18 @@ describe('scope', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthDeleteScopeById', () =>
-    {
+    test('/GraphQL oAuthDeleteScopeById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -811,6 +888,7 @@ describe('scope', () =>
                         oAuthDeleteScopeById (id:$id)
                         {
                             id
+                            rowId
                             code
                             name
                             roleIds
@@ -824,14 +902,14 @@ describe('scope', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthDeleteScopeById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthDeleteScopeById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    afterAll(async () =>
-    {
+    afterAll(async () => {
         await scopeRepository.delete({
             queryStatement: {
                 where: {},

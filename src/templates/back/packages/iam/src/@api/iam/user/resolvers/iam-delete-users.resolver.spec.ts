@@ -3,47 +3,43 @@ import { IamDeleteUsersHandler, IamDeleteUsersResolver } from '@api/iam/user';
 import { iamMockUserData } from '@app/iam/user';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteUsersResolver', () =>
-{
+describe('IamDeleteUsersResolver', () => {
     let resolver: IamDeleteUsersResolver;
     let handler: IamDeleteUsersHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteUsersResolver,
                 {
-                    provide : IamDeleteUsersHandler,
+                    provide: IamDeleteUsersHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<IamDeleteUsersResolver>(IamDeleteUsersResolver);
         handler = module.get<IamDeleteUsersHandler>(IamDeleteUsersHandler);
     });
 
-    test('IamDeleteUsersResolver should be defined', () =>
-    {
+    test('IamDeleteUsersResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteUsersResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteUsersResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an iamMockUserData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData)));
+        test('should return an iamMockUserData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockUserData)),
+            );
             expect(await resolver.main()).toBe(iamMockUserData);
         });
     });

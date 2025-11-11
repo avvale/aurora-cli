@@ -5,8 +5,7 @@ import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamCreateTagHandler
-{
+export class IamCreateTagHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -16,24 +15,24 @@ export class IamCreateTagHandler
         payload: IamCreateTagInput | IamCreateTagDto,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamTag | IamTagDto>
-    {
-        await this.commandBus.dispatch(new IamCreateTagCommand(
-            payload,
-            {
+    ): Promise<IamTag | IamTagDto> {
+        await this.commandBus.dispatch(
+            new IamCreateTagCommand(payload, {
                 timezone,
                 repositoryOptions: {
                     auditing,
                 },
-            },
-        ));
+            }),
+        );
 
-        return await this.queryBus.ask(new IamFindTagByIdQuery(
-            payload.id,
-            {},
-            {
-                timezone,
-            },
-        ));
+        return await this.queryBus.ask(
+            new IamFindTagByIdQuery(
+                payload.id,
+                {},
+                {
+                    timezone,
+                },
+            ),
+        );
     }
 }

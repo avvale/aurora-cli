@@ -5,53 +5,51 @@ import { iamMockTenantData } from '@app/iam/tenant';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateTenantsHandler', () =>
-{
+describe('IamUpdateTenantsHandler', () => {
     let handler: IamUpdateTenantsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateTenantsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamUpdateTenantsHandler>(IamUpdateTenantsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamUpdateTenantsHandler should be defined', () =>
-    {
+    test('IamUpdateTenantsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateTenantsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateTenantsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a tenants updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+        test('should return a tenants updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
             expect(
                 await handler.main(
                     <IamUpdateTenantsInput>iamMockTenantData[0],
@@ -59,8 +57,7 @@ describe('IamUpdateTenantsHandler', () =>
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockTenantData[0]);
+            ).toBe(iamMockTenantData[0]);
         });
     });
 });

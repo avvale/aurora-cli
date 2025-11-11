@@ -1,6 +1,10 @@
 /* eslint-disable key-spacing */
 import { IamAccount } from '@app/iam/account';
-import { IamCreatedUserEvent, IamDeletedUserEvent, IamUpdatedUserEvent } from '@app/iam/user';
+import {
+    IamCreatedUserEvent,
+    IamDeletedUserEvent,
+    IamUpdatedUserEvent,
+} from '@app/iam/user';
 import {
     IamUserAccountId,
     IamUserAvatar,
@@ -14,6 +18,7 @@ import {
     IamUserName,
     IamUserPassword,
     IamUserRememberToken,
+    IamUserRowId,
     IamUserSurname,
     IamUserTwoFactorAuthenticationSecret,
     IamUserUpdatedAt,
@@ -21,9 +26,9 @@ import {
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class IamUser extends AggregateRoot
-{
+export class IamUser extends AggregateRoot {
     id: IamUserId;
+    rowId: IamUserRowId;
     accountId: IamUserAccountId;
     name: IamUserName;
     surname: IamUserSurname;
@@ -42,6 +47,7 @@ export class IamUser extends AggregateRoot
 
     constructor(
         id: IamUserId,
+        rowId: IamUserRowId,
         accountId: IamUserAccountId,
         name: IamUserName,
         surname: IamUserSurname,
@@ -57,10 +63,10 @@ export class IamUser extends AggregateRoot
         updatedAt: IamUserUpdatedAt,
         deletedAt: IamUserDeletedAt,
         account?: IamAccount,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.accountId = accountId;
         this.name = name;
         this.surname = surname;
@@ -68,7 +74,8 @@ export class IamUser extends AggregateRoot
         this.mobile = mobile;
         this.langId = langId;
         this.password = password;
-        this.isTwoFactorAuthenticationEnabled = isTwoFactorAuthenticationEnabled;
+        this.isTwoFactorAuthenticationEnabled =
+            isTwoFactorAuthenticationEnabled;
         this.twoFactorAuthenticationSecret = twoFactorAuthenticationSecret;
         this.rememberToken = rememberToken;
         this.meta = meta;
@@ -80,6 +87,7 @@ export class IamUser extends AggregateRoot
 
     static register(
         id: IamUserId,
+        rowId: IamUserRowId,
         accountId: IamUserAccountId,
         name: IamUserName,
         surname: IamUserSurname,
@@ -95,10 +103,10 @@ export class IamUser extends AggregateRoot
         updatedAt: IamUserUpdatedAt,
         deletedAt: IamUserDeletedAt,
         account?: IamAccount,
-    ): IamUser
-    {
+    ): IamUser {
         return new IamUser(
             id,
+            rowId,
             accountId,
             name,
             surname,
@@ -117,13 +125,7 @@ export class IamUser extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: IamUser;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: IamUser; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamCreatedUserEvent({
                 payload: {
@@ -135,8 +137,10 @@ export class IamUser extends AggregateRoot
                     mobile: event.payload.mobile?.value,
                     langId: event.payload.langId?.value,
                     password: event.payload.password.value,
-                    isTwoFactorAuthenticationEnabled: event.payload.isTwoFactorAuthenticationEnabled.value,
-                    twoFactorAuthenticationSecret: event.payload.twoFactorAuthenticationSecret?.value,
+                    isTwoFactorAuthenticationEnabled:
+                        event.payload.isTwoFactorAuthenticationEnabled.value,
+                    twoFactorAuthenticationSecret:
+                        event.payload.twoFactorAuthenticationSecret?.value,
                     rememberToken: event.payload.rememberToken?.value,
                     meta: event.payload.meta?.value,
                     createdAt: event.payload.createdAt?.value,
@@ -148,13 +152,7 @@ export class IamUser extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: IamUser;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: IamUser; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamUpdatedUserEvent({
                 payload: {
@@ -166,8 +164,10 @@ export class IamUser extends AggregateRoot
                     mobile: event.payload.mobile?.value,
                     langId: event.payload.langId?.value,
                     password: event.payload.password?.value,
-                    isTwoFactorAuthenticationEnabled: event.payload.isTwoFactorAuthenticationEnabled?.value,
-                    twoFactorAuthenticationSecret: event.payload.twoFactorAuthenticationSecret?.value,
+                    isTwoFactorAuthenticationEnabled:
+                        event.payload.isTwoFactorAuthenticationEnabled?.value,
+                    twoFactorAuthenticationSecret:
+                        event.payload.twoFactorAuthenticationSecret?.value,
                     rememberToken: event.payload.rememberToken?.value,
                     meta: event.payload.meta?.value,
                     createdAt: event.payload.createdAt?.value,
@@ -179,17 +179,12 @@ export class IamUser extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: IamUser;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: IamUser; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamDeletedUserEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     accountId: event.payload.accountId.value,
                     name: event.payload.name.value,
                     surname: event.payload.surname?.value,
@@ -197,8 +192,10 @@ export class IamUser extends AggregateRoot
                     mobile: event.payload.mobile?.value,
                     langId: event.payload.langId?.value,
                     password: event.payload.password.value,
-                    isTwoFactorAuthenticationEnabled: event.payload.isTwoFactorAuthenticationEnabled.value,
-                    twoFactorAuthenticationSecret: event.payload.twoFactorAuthenticationSecret?.value,
+                    isTwoFactorAuthenticationEnabled:
+                        event.payload.isTwoFactorAuthenticationEnabled.value,
+                    twoFactorAuthenticationSecret:
+                        event.payload.twoFactorAuthenticationSecret?.value,
                     rememberToken: event.payload.rememberToken?.value,
                     meta: event.payload.meta?.value,
                     createdAt: event.payload.createdAt?.value,
@@ -210,10 +207,10 @@ export class IamUser extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             accountId: this.accountId.value,
             name: this.name.value,
             surname: this.surname?.value,
@@ -221,8 +218,10 @@ export class IamUser extends AggregateRoot
             mobile: this.mobile?.value,
             langId: this.langId?.value,
             password: this.password.value,
-            isTwoFactorAuthenticationEnabled: this.isTwoFactorAuthenticationEnabled.value,
-            twoFactorAuthenticationSecret: this.twoFactorAuthenticationSecret?.value,
+            isTwoFactorAuthenticationEnabled:
+                this.isTwoFactorAuthenticationEnabled.value,
+            twoFactorAuthenticationSecret:
+                this.twoFactorAuthenticationSecret?.value,
             rememberToken: this.rememberToken?.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,
@@ -233,8 +232,7 @@ export class IamUser extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             accountId: this.accountId.value,
@@ -244,8 +242,10 @@ export class IamUser extends AggregateRoot
             mobile: this.mobile?.value,
             langId: this.langId?.value,
             password: this.password.value,
-            isTwoFactorAuthenticationEnabled: this.isTwoFactorAuthenticationEnabled.value,
-            twoFactorAuthenticationSecret: this.twoFactorAuthenticationSecret?.value,
+            isTwoFactorAuthenticationEnabled:
+                this.isTwoFactorAuthenticationEnabled.value,
+            twoFactorAuthenticationSecret:
+                this.twoFactorAuthenticationSecret?.value,
             rememberToken: this.rememberToken?.value,
             meta: this.meta?.value,
             createdAt: this.createdAt?.value,

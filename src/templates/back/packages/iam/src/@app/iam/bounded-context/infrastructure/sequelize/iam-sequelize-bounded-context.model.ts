@@ -1,20 +1,41 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { IamPermissionModel } from '@app/iam/permission';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    Column,
+    HasMany,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamBoundedContext',
     freezeTableName: true,
     timestamps: false,
+    indexes: [
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+    ],
 })
-export class IamBoundedContextModel extends Model<IamBoundedContextModel>
-{
+export class IamBoundedContextModel extends Model<IamBoundedContextModel> {
     @AfterCreate
-    static auditingCreate(instance: IamBoundedContextModel, options): void
-    {
+    static auditingCreate(instance: IamBoundedContextModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -25,8 +46,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamBoundedContextModel, options): void
-    {
+    static auditingBulkCreate(instance: IamBoundedContextModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -37,8 +57,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamBoundedContextModel, options): void
-    {
+    static auditingUpdate(instance: IamBoundedContextModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -49,8 +68,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -61,8 +79,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamBoundedContextModel, options): void
-    {
+    static auditingDestroy(instance: IamBoundedContextModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -73,8 +90,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -85,8 +101,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamBoundedContextModel, options): void
-    {
+    static auditingRestore(instance: IamBoundedContextModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -97,8 +112,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -109,8 +123,7 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamBoundedContextModel, options): void
-    {
+    static auditingUpsert(instance: IamBoundedContextModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -127,6 +140,14 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'name',
@@ -157,7 +178,6 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
     })
     isActive: boolean;
 
-
     @HasMany(() => IamPermissionModel, {
         constraints: false,
     })
@@ -183,5 +203,4 @@ export class IamBoundedContextModel extends Model<IamBoundedContextModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

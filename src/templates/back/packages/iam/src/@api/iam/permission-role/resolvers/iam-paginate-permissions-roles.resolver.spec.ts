@@ -1,57 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamPaginatePermissionsRolesHandler, IamPaginatePermissionsRolesResolver } from '@api/iam/permission-role';
+import {
+    IamPaginatePermissionsRolesHandler,
+    IamPaginatePermissionsRolesResolver,
+} from '@api/iam/permission-role';
 import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginatePermissionsRolesResolver', () =>
-{
+describe('IamPaginatePermissionsRolesResolver', () => {
     let resolver: IamPaginatePermissionsRolesResolver;
     let handler: IamPaginatePermissionsRolesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamPaginatePermissionsRolesResolver,
                 {
-                    provide : IamPaginatePermissionsRolesHandler,
+                    provide: IamPaginatePermissionsRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamPaginatePermissionsRolesResolver>(IamPaginatePermissionsRolesResolver);
-        handler = module.get<IamPaginatePermissionsRolesHandler>(IamPaginatePermissionsRolesHandler);
+        resolver = module.get<IamPaginatePermissionsRolesResolver>(
+            IamPaginatePermissionsRolesResolver,
+        );
+        handler = module.get<IamPaginatePermissionsRolesHandler>(
+            IamPaginatePermissionsRolesHandler,
+        );
     });
 
-    test('IamPaginatePermissionsRolesResolver should be defined', () =>
-    {
+    test('IamPaginatePermissionsRolesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginatePermissionsRolesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginatePermissionsRolesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a iamMockPermissionRoleData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : iamMockPermissionRoleData,
-            })));
+        test('should return a iamMockPermissionRoleData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: iamMockPermissionRoleData,
+                        }),
+                    ),
+            );
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : iamMockPermissionRoleData,
+                rows: iamMockPermissionRoleData,
             });
         });
     });

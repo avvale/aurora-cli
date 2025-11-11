@@ -1,13 +1,20 @@
-export class OAuthDeletedRefreshTokenEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class OAuthDeletedRefreshTokenEvent {
     constructor(
-        public readonly id: string,
-        public readonly accessTokenId: string,
-        public readonly token: string,
-        public readonly isRevoked: boolean,
-        public readonly expiresAt: string,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                rowId: number;
+                accessTokenId: string;
+                token: string;
+                isRevoked: boolean;
+                expiresAt: string;
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

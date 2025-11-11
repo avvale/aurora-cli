@@ -4,5 +4,6 @@ export { IamBoundedContextId } from './iam-bounded-context-id';
 export { IamBoundedContextIsActive } from './iam-bounded-context-is-active';
 export { IamBoundedContextName } from './iam-bounded-context-name';
 export { IamBoundedContextRoot } from './iam-bounded-context-root';
+export { IamBoundedContextRowId } from './iam-bounded-context-row-id';
 export { IamBoundedContextSort } from './iam-bounded-context-sort';
 export { IamBoundedContextUpdatedAt } from './iam-bounded-context-updated-at';

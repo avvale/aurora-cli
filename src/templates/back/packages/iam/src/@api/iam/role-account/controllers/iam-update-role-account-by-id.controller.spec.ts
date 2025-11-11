@@ -1,46 +1,53 @@
-import { IamUpdateRoleAccountByIdController, IamUpdateRoleAccountByIdHandler } from '@api/iam/role-account';
+import {
+    IamUpdateRoleAccountByIdController,
+    IamUpdateRoleAccountByIdHandler,
+} from '@api/iam/role-account';
 import { iamMockRoleAccountData } from '@app/iam/role-account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateRoleAccountByIdController', () =>
-{
+describe('IamUpdateRoleAccountByIdController', () => {
     let controller: IamUpdateRoleAccountByIdController;
     let handler: IamUpdateRoleAccountByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamUpdateRoleAccountByIdController,
-            ],
+            imports: [],
+            controllers: [IamUpdateRoleAccountByIdController],
             providers: [
                 {
-                    provide : IamUpdateRoleAccountByIdHandler,
+                    provide: IamUpdateRoleAccountByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamUpdateRoleAccountByIdController>(IamUpdateRoleAccountByIdController);
-        handler = module.get<IamUpdateRoleAccountByIdHandler>(IamUpdateRoleAccountByIdHandler);
+        controller = module.get<IamUpdateRoleAccountByIdController>(
+            IamUpdateRoleAccountByIdController,
+        );
+        handler = module.get<IamUpdateRoleAccountByIdHandler>(
+            IamUpdateRoleAccountByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateRoleAccountByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateRoleAccountByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a roleAccount updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleAccountData[0])));
-            expect(await controller.main(iamMockRoleAccountData[0])).toBe(iamMockRoleAccountData[0]);
+        test('should return a roleAccount updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockRoleAccountData[0]),
+                    ),
+            );
+            expect(await controller.main(iamMockRoleAccountData[0])).toBe(
+                iamMockRoleAccountData[0],
+            );
         });
     });
 });

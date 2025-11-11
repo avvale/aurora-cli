@@ -10,6 +10,7 @@ import {
     IamTenantMeta,
     IamTenantName,
     IamTenantParentId,
+    IamTenantRowId,
     IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { MockSeeder } from '@aurorajs.dev/core';
@@ -17,25 +18,22 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class IamMockTenantSeeder extends MockSeeder<IamTenant>
-{
+export class IamMockTenantSeeder extends MockSeeder<IamTenant> {
     public collectionSource: IamTenant[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const tenant of _.orderBy(iamMockTenantData, ['id']))
-        {
+        for (const tenant of _.orderBy(iamMockTenantData, ['id'])) {
             this.collectionSource.push(
                 IamTenant.register(
                     new IamTenantId(tenant.id),
+                    new IamTenantRowId(tenant.rowId),
                     new IamTenantParentId(tenant.parentId),
                     new IamTenantName(tenant.name),
                     new IamTenantCode(tenant.code),

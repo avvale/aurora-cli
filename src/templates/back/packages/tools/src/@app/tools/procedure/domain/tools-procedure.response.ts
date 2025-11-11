@@ -1,8 +1,7 @@
-
-export class ToolsProcedureResponse
-{
+export class ToolsProcedureResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly name: string,
         public readonly type: string,
         public readonly version: string,

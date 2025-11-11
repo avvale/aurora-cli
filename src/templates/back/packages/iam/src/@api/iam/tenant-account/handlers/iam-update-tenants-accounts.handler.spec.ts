@@ -5,53 +5,56 @@ import { iamMockTenantAccountData } from '@app/iam/tenant-account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateTenantsAccountsHandler', () =>
-{
+describe('IamUpdateTenantsAccountsHandler', () => {
     let handler: IamUpdateTenantsAccountsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateTenantsAccountsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamUpdateTenantsAccountsHandler>(IamUpdateTenantsAccountsHandler);
+        handler = module.get<IamUpdateTenantsAccountsHandler>(
+            IamUpdateTenantsAccountsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamUpdateTenantsAccountsHandler should be defined', () =>
-    {
+    test('IamUpdateTenantsAccountsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateTenantsAccountsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateTenantsAccountsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a tenantsAccounts updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantAccountData[0])));
+        test('should return a tenantsAccounts updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockTenantAccountData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     <IamUpdateTenantsAccountsInput>iamMockTenantAccountData[0],
@@ -59,8 +62,7 @@ describe('IamUpdateTenantsAccountsHandler', () =>
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockTenantAccountData[0]);
+            ).toBe(iamMockTenantAccountData[0]);
         });
     });
 });

@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { ToolsRunScriptsMigrationHandler } from '../handlers/tools-run-scripts-migration.handler';
 import { ToolsRunScriptsMigrationController } from './tools-run-scripts-migration.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsRunScriptsMigrationController', () =>
-{
+describe('ToolsRunScriptsMigrationController', () => {
     let controller: ToolsRunScriptsMigrationController;
     let handler: ToolsRunScriptsMigrationHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                ToolsRunScriptsMigrationController,
-            ],
+            imports: [],
+            controllers: [ToolsRunScriptsMigrationController],
             providers: [
                 {
-                    provide : ToolsRunScriptsMigrationHandler,
+                    provide: ToolsRunScriptsMigrationHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<ToolsRunScriptsMigrationController>(ToolsRunScriptsMigrationController);
-        handler = module.get<ToolsRunScriptsMigrationHandler>(ToolsRunScriptsMigrationHandler);
+        controller = module.get<ToolsRunScriptsMigrationController>(
+            ToolsRunScriptsMigrationController,
+        );
+        handler = module.get<ToolsRunScriptsMigrationHandler>(
+            ToolsRunScriptsMigrationHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsRunScriptsMigrationController should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsRunScriptsMigrationController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

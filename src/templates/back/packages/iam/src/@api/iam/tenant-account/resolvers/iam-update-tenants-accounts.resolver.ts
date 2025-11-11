@@ -1,16 +1,18 @@
 import { IamTenantAccount, IamUpdateTenantsAccountsInput } from '@api/graphql';
 import { IamUpdateTenantsAccountsHandler } from '@api/iam/tenant-account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.tenantAccount.update')
-export class IamUpdateTenantsAccountsResolver
-{
-    constructor(
-        private readonly handler: IamUpdateTenantsAccountsHandler,
-    ) {}
+export class IamUpdateTenantsAccountsResolver {
+    constructor(private readonly handler: IamUpdateTenantsAccountsHandler) {}
 
     @Mutation('iamUpdateTenantsAccounts')
     async main(
@@ -19,8 +21,7 @@ export class IamUpdateTenantsAccountsResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<IamTenantAccount>
-    {
+    ): Promise<IamTenantAccount> {
         return await this.handler.main(
             payload,
             queryStatement,

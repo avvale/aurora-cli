@@ -1,10 +1,22 @@
-import { OAuthClient, OAuthClientMapper, OAuthClientModel, OAuthIClientRepository } from '@app/o-auth/client';
-import { AuditingRunner, ICriteria, LiteralObject, SequelizeRepository } from '@aurorajs.dev/core';
+import {
+    OAuthClient,
+    OAuthClientMapper,
+    OAuthClientModel,
+    OAuthIClientRepository,
+} from '@app/o-auth/client';
+import {
+    AuditingRunner,
+    ICriteria,
+    LiteralObject,
+    SequelizeRepository,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
-export class OAuthSequelizeClientRepository extends SequelizeRepository<OAuthClient, OAuthClientModel> implements OAuthIClientRepository
+export class OAuthSequelizeClientRepository
+    extends SequelizeRepository<OAuthClient, OAuthClientModel>
+    implements OAuthIClientRepository
 {
     public readonly aggregateName: string = 'OAuthClient';
     public readonly mapper: OAuthClientMapper = new OAuthClientMapper();
@@ -14,8 +26,7 @@ export class OAuthSequelizeClientRepository extends SequelizeRepository<OAuthCli
         public readonly repository: typeof OAuthClientModel,
         public readonly criteria: ICriteria,
         public readonly auditingRunner: AuditingRunner,
-    )
-    {
+    ) {
         super();
     }
 
@@ -24,16 +35,18 @@ export class OAuthSequelizeClientRepository extends SequelizeRepository<OAuthCli
         aggregate: OAuthClient,
         model: OAuthClientModel,
         createOptions: LiteralObject,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // add many to many relation
-        if (aggregate.applicationIds.length > 0)
-        {
-            await model.$add(
-                'applications',
-                aggregate.applicationIds.value,
-                createOptions,
-            );
+        if (aggregate?.applicationIds.length > 0) {
+            try {
+                await model.$add(
+                    'applications',
+                    aggregate.applicationIds.value,
+                    createOptions,
+                );
+            } catch (error) {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
     }
 
@@ -42,16 +55,18 @@ export class OAuthSequelizeClientRepository extends SequelizeRepository<OAuthCli
         aggregate: OAuthClient,
         model: OAuthClientModel,
         updateByIdOptions: LiteralObject,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // set many to many relation
-        if (aggregate.applicationIds.isArray())
-        {
-            await model.$set(
-                'applications',
-                aggregate.applicationIds.value,
-                updateByIdOptions,
-            );
+        if (aggregate?.applicationIds.isArray()) {
+            try {
+                await model.$set(
+                    'applications',
+                    aggregate.applicationIds.value,
+                    updateByIdOptions,
+                );
+            } catch (error) {
+                console.error('[Error] SequelizeRepository:', error);
+            }
         }
     }
 }

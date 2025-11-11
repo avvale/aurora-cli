@@ -1,46 +1,48 @@
-import { IamUpdateTagByIdController, IamUpdateTagByIdHandler } from '@api/iam/tag';
+import {
+    IamUpdateTagByIdController,
+    IamUpdateTagByIdHandler,
+} from '@api/iam/tag';
 import { iamMockTagData } from '@app/iam/tag';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateTagByIdController', () =>
-{
+describe('IamUpdateTagByIdController', () => {
     let controller: IamUpdateTagByIdController;
     let handler: IamUpdateTagByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamUpdateTagByIdController,
-            ],
+            imports: [],
+            controllers: [IamUpdateTagByIdController],
             providers: [
                 {
-                    provide : IamUpdateTagByIdHandler,
+                    provide: IamUpdateTagByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamUpdateTagByIdController>(IamUpdateTagByIdController);
+        controller = module.get<IamUpdateTagByIdController>(
+            IamUpdateTagByIdController,
+        );
         handler = module.get<IamUpdateTagByIdHandler>(IamUpdateTagByIdHandler);
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateTagByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateTagByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a tag updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTagData[0])));
-            expect(await controller.main(iamMockTagData[0])).toBe(iamMockTagData[0]);
+        test('should return a tag updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTagData[0])),
+            );
+            expect(await controller.main(iamMockTagData[0])).toBe(
+                iamMockTagData[0],
+            );
         });
     });
 });

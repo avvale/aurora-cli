@@ -1,11 +1,13 @@
-import { IamAddTenantsAccountsContextEvent, IamITenantAccountRepository } from '@app/iam/tenant-account';
+import {
+    IamAddTenantsAccountsContextEvent,
+    IamITenantAccountRepository,
+} from '@app/iam/tenant-account';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamDeleteTenantsAccountsService
-{
+export class IamDeleteTenantsAccountsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamITenantAccountRepository,
@@ -15,8 +17,7 @@ export class IamDeleteTenantsAccountsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // get objects to delete
         const tenantsAccounts = await this.repository.get({
             queryStatement,
@@ -36,10 +37,7 @@ export class IamDeleteTenantsAccountsService
         // create AddTenantsAccountsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const tenantsAccountsRegistered = this.publisher.mergeObjectContext(
-            new IamAddTenantsAccountsContextEvent(
-                tenantsAccounts,
-                cQMetadata,
-            ),
+            new IamAddTenantsAccountsContextEvent(tenantsAccounts, cQMetadata),
         );
 
         tenantsAccountsRegistered.deleted(); // apply event to model events

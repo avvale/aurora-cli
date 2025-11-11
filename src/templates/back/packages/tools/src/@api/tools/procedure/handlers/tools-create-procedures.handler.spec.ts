@@ -3,37 +3,35 @@ import { toolsMockProcedureData } from '@app/tools/procedure';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsCreateProceduresHandler', () =>
-{
+describe('ToolsCreateProceduresHandler', () => {
     let handler: ToolsCreateProceduresHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ToolsCreateProceduresHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsCreateProceduresHandler>(ToolsCreateProceduresHandler);
+        handler = module.get<ToolsCreateProceduresHandler>(
+            ToolsCreateProceduresHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsCreateProceduresHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsCreateProceduresHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an toolsMockProcedureData created', async () =>
-        {
+        test('should return an toolsMockProcedureData created', async () => {
             expect(await handler.main(toolsMockProcedureData)).toBe(true);
         });
     });

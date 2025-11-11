@@ -1,21 +1,24 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { DataTypes } from 'sequelize';
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'ToolsProcedure',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['version'],
-			unique: false,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['version'],
+            unique: false,
+        },
     ],
 })
-export class ToolsProcedureModel extends Model<ToolsProcedureModel>
-{
+export class ToolsProcedureModel extends Model<ToolsProcedureModel> {
     @Column({
         field: 'id',
         primaryKey: true,
@@ -23,6 +26,14 @@ export class ToolsProcedureModel extends Model<ToolsProcedureModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'name',
@@ -34,7 +45,7 @@ export class ToolsProcedureModel extends Model<ToolsProcedureModel>
     @Column({
         field: 'type',
         allowNull: false,
-        type: DataTypes.ENUM('FUNCTION','PROCEDURE','TRIGGER'),
+        type: DataTypes.ENUM('FUNCTION', 'PROCEDURE', 'TRIGGER'),
     })
     type: string;
 
@@ -131,5 +142,4 @@ export class ToolsProcedureModel extends Model<ToolsProcedureModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

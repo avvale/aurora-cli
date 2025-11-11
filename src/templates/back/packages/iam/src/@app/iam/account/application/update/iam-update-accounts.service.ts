@@ -1,10 +1,12 @@
-import { IamAccount, IamAddAccountsContextEvent, IamIAccountRepository } from '@app/iam/account';
+import {
+    IamAccount,
+    IamAddAccountsContextEvent,
+    IamIAccountRepository,
+} from '@app/iam/account';
 import {
     IamAccountClientId,
     IamAccountCode,
-    IamAccountCreatedAt,
     IamAccountDApplicationCodes,
-    IamAccountDeletedAt,
     IamAccountDPermissions,
     IamAccountDTenants,
     IamAccountEmail,
@@ -24,8 +26,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdateAccountsService
-{
+export class IamUpdateAccountsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIAccountRepository,
@@ -52,11 +53,11 @@ export class IamUpdateAccountsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const account = IamAccount.register(
             payload.id,
+            undefined, // rowId
             payload.type,
             payload.code,
             payload.email,
@@ -77,31 +78,23 @@ export class IamUpdateAccountsService
         );
 
         // update
-        await this.repository.update(
-            account,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(account, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const accounts = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const accounts = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const accountsRegister = this.publisher.mergeObjectContext(
-            new IamAddAccountsContextEvent(
-                accounts,
-                cQMetadata,
-            ),
+            new IamAddAccountsContextEvent(accounts, cQMetadata),
         );
 
         accountsRegister.updated(); // apply event to model events

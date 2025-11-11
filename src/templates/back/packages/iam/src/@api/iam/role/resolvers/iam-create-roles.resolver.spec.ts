@@ -3,43 +3,40 @@ import { IamCreateRolesHandler, IamCreateRolesResolver } from '@api/iam/role';
 import { iamMockRoleData } from '@app/iam/role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateRolesResolver', () =>
-{
+describe('IamCreateRolesResolver', () => {
     let resolver: IamCreateRolesResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreateRolesResolver,
                 {
-                    provide : IamCreateRolesHandler,
+                    provide: IamCreateRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<IamCreateRolesResolver>(IamCreateRolesResolver);
     });
 
-    test('IamCreateRolesResolver should be defined', () =>
-    {
+    test('IamCreateRolesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateRolesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateRolesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an roles created', async () =>
-        {
-            expect(await resolver.main(<IamCreateRoleInput[]>iamMockRoleData)).toBe(undefined);
+        test('should return an roles created', async () => {
+            expect(
+                await resolver.main(<IamCreateRoleInput[]>iamMockRoleData),
+            ).toBe(undefined);
         });
     });
 });

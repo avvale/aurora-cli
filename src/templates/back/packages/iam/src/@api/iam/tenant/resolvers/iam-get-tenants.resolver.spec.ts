@@ -3,47 +3,43 @@ import { IamGetTenantsHandler, IamGetTenantsResolver } from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamGetTenantsResolver', () =>
-{
+describe('IamGetTenantsResolver', () => {
     let resolver: IamGetTenantsResolver;
     let handler: IamGetTenantsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamGetTenantsResolver,
                 {
-                    provide : IamGetTenantsHandler,
+                    provide: IamGetTenantsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         resolver = module.get<IamGetTenantsResolver>(IamGetTenantsResolver);
         handler = module.get<IamGetTenantsHandler>(IamGetTenantsHandler);
     });
 
-    test('IamGetTenantsResolver should be defined', () =>
-    {
-        expect(resolver).   toBeDefined();
+    test('IamGetTenantsResolver should be defined', () => {
+        expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamGetTenantsResolver should be defined', () =>
-        {
-            expect(resolver).   toBeDefined();
+    describe('main', () => {
+        test('IamGetTenantsResolver should be defined', () => {
+            expect(resolver).toBeDefined();
         });
 
-        test('should return a iamMockTenantData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData)));
+        test('should return a iamMockTenantData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData)),
+            );
             expect(await resolver.main()).toBe(iamMockTenantData);
         });
     });

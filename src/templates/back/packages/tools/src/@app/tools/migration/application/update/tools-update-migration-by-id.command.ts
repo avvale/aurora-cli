@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class ToolsUpdateMigrationByIdCommand
-{
+export class ToolsUpdateMigrationByIdCommand {
     constructor(
         public readonly payload: {
             id: string;

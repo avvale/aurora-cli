@@ -1,46 +1,50 @@
-import { IamUpdateAccountByIdController, IamUpdateAccountByIdHandler } from '@api/iam/account';
+import {
+    IamUpdateAccountByIdController,
+    IamUpdateAccountByIdHandler,
+} from '@api/iam/account';
 import { iamMockAccountData } from '@app/iam/account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateAccountByIdController', () =>
-{
+describe('IamUpdateAccountByIdController', () => {
     let controller: IamUpdateAccountByIdController;
     let handler: IamUpdateAccountByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamUpdateAccountByIdController,
-            ],
+            imports: [],
+            controllers: [IamUpdateAccountByIdController],
             providers: [
                 {
-                    provide : IamUpdateAccountByIdHandler,
+                    provide: IamUpdateAccountByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamUpdateAccountByIdController>(IamUpdateAccountByIdController);
-        handler = module.get<IamUpdateAccountByIdHandler>(IamUpdateAccountByIdHandler);
+        controller = module.get<IamUpdateAccountByIdController>(
+            IamUpdateAccountByIdController,
+        );
+        handler = module.get<IamUpdateAccountByIdHandler>(
+            IamUpdateAccountByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateAccountByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateAccountByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a account updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
-            expect(await controller.main(iamMockAccountData[0])).toBe(iamMockAccountData[0]);
+        test('should return a account updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockAccountData[0])),
+            );
+            expect(await controller.main(iamMockAccountData[0])).toBe(
+                iamMockAccountData[0],
+            );
         });
     });
 });

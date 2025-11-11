@@ -4,7 +4,11 @@
 import { IamModule } from '@api/iam/iam.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { IamIPermissionRepository, iamMockPermissionData, IamMockPermissionSeeder } from '@app/iam/permission';
+import {
+    IamIPermissionRepository,
+    iamMockPermissionData,
+    IamMockPermissionSeeder,
+} from '@app/iam/permission';
 import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -16,8 +20,7 @@ import * as request from 'supertest';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('permission', () =>
-{
+describe('permission', () => {
     let app: INestApplication;
     let permissionRepository: IamIPermissionRepository;
     let permissionSeeder: IamMockPermissionSeeder;
@@ -28,37 +31,41 @@ describe('permission', () =>
     // set timeout to 60s by default are 5s
     jest.setTimeout(60000);
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
                 IamModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
-                    imports   : [ConfigModule],
-                    inject    : [ConfigService],
-                    useFactory: (configService: ConfigService) =>
-                    {
+                    imports: [ConfigModule],
+                    inject: [ConfigService],
+                    useFactory: (configService: ConfigService) => {
                         return {
-                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
-                            storage       : configService.get('TEST_DATABASE_STORAGE'),
-                            host          : configService.get('TEST_DATABASE_HOST'),
-                            port          : +configService.get('TEST_DATABASE_PORT'),
-                            username      : configService.get('TEST_DATABASE_USER'),
-                            password      : configService.get('TEST_DATABASE_PASSWORD'),
-                            database      : configService.get('TEST_DATABASE_SCHEMA'),
-                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
-                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            dialect: configService.get('TEST_DATABASE_DIALECT'),
+                            storage: configService.get('TEST_DATABASE_STORAGE'),
+                            host: configService.get('TEST_DATABASE_HOST'),
+                            port: +configService.get('TEST_DATABASE_PORT'),
+                            username: configService.get('TEST_DATABASE_USER'),
+                            password: configService.get(
+                                'TEST_DATABASE_PASSWORD',
+                            ),
+                            database: configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize: configService.get(
+                                'TEST_DATABASE_SYNCHRONIZE',
+                            ),
+                            logging:
+                                configService.get('TEST_DATABASE_LOGGIN') ===
+                                'true'
+                                    ? console.log
+                                    : false,
                             autoLoadModels: true,
-                            models        : [],
+                            models: [],
                         };
                     },
                 }),
             ],
-            providers: [
-                IamMockPermissionSeeder,
-            ],
+            providers: [IamMockPermissionSeeder],
         })
             .overrideGuard(AuthenticationJwtGuard)
             .useValue({ canActivate: () => true })
@@ -68,8 +75,12 @@ describe('permission', () =>
 
         mockData = iamMockPermissionData;
         app = module.createNestApplication();
-        permissionRepository = module.get<IamIPermissionRepository>(IamIPermissionRepository);
-        permissionSeeder = module.get<IamMockPermissionSeeder>(IamMockPermissionSeeder);
+        permissionRepository = module.get<IamIPermissionRepository>(
+            IamIPermissionRepository,
+        );
+        permissionSeeder = module.get<IamMockPermissionSeeder>(
+            IamMockPermissionSeeder,
+        );
 
         // seed mock data in memory database
         await permissionRepository.insert(permissionSeeder.collectionSource);
@@ -77,8 +88,7 @@ describe('permission', () =>
         await app.init();
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionId property can not to be null', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -87,14 +97,30 @@ describe('permission', () =>
                 id: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName property can not to be null', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionRowId property can not to be null', () => {
+        return request(app.getHttpServer())
+            .post('/iam/permission/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: null,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionRowId must be defined, can not be null',
+                );
+            });
+    });
+
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -103,14 +129,14 @@ describe('permission', () =>
                 name: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionName must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionName must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionBoundedContextId property can not to be null', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionBoundedContextId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -119,14 +145,14 @@ describe('permission', () =>
                 boundedContextId: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionBoundedContextId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionBoundedContextId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionId property can not to be undefined', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -135,14 +161,30 @@ describe('permission', () =>
                 id: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName property can not to be undefined', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionRowId property can not to be undefined', () => {
+        return request(app.getHttpServer())
+            .post('/iam/permission/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: undefined,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionRowId must be defined, can not be undefined',
+                );
+            });
+    });
+
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -151,14 +193,14 @@ describe('permission', () =>
                 name: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionName must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionName must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionBoundedContextId property can not to be undefined', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionBoundedContextId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -167,14 +209,14 @@ describe('permission', () =>
                 boundedContextId: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionBoundedContextId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionBoundedContextId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -183,14 +225,14 @@ describe('permission', () =>
                 id: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionBoundedContextId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionBoundedContextId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -199,14 +241,14 @@ describe('permission', () =>
                 boundedContextId: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionBoundedContextId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionBoundedContextId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName is too large, has a maximum length of 128', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 400 Conflict, PermissionName is too large, has a maximum length of 128', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -215,15 +257,14 @@ describe('permission', () =>
                 name: '*********************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for IamPermissionName is too large, has a maximum length of 128');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamPermissionName is too large, has a maximum length of 128',
+                );
             });
     });
 
-
-    test('/REST:POST iam/permission/create - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/REST:POST iam/permission/create - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -231,53 +272,65 @@ describe('permission', () =>
             .expect(409);
     });
 
-    test('/REST:POST iam/permissions/paginate', () =>
-    {
+    test('/REST:POST iam/permissions/paginate', () => {
         return request(app.getHttpServer())
             .post('/iam/permissions/paginate')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
+                query: {
                     offset: 0,
                     limit: 5,
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual({
                     total: permissionSeeder.collectionResponse.length,
                     count: permissionSeeder.collectionResponse.length,
-                    rows : permissionSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'roleIds']))).slice(0, 5),
+                    rows: permissionSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                    'roleIds',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/REST:POST iam/permissions/get', () =>
-    {
+    test('/REST:POST iam/permissions/get', () => {
         return request(app.getHttpServer())
             .post('/iam/permissions/get')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual(
-                    permissionSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'roleIds']))),
+                    permissionSeeder.collectionResponse.map((item) =>
+                        expect.objectContaining(
+                            _.omit(item, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                                'roleIds',
+                            ]),
+                        ),
+                    ),
                 );
             });
     });
 
-    test('/REST:POST iam/permission/find - Got 404 Not Found', () =>
-    {
+    test('/REST:POST iam/permission/find - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: 'f93fb9f9-3302-5320-8b65-ba7668c86803',
                     },
                 },
@@ -285,8 +338,7 @@ describe('permission', () =>
             .expect(404);
     });
 
-    test('/REST:POST iam/permission/create', () =>
-    {
+    test('/REST:POST iam/permission/create', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/create')
             .set('Accept', 'application/json')
@@ -297,49 +349,47 @@ describe('permission', () =>
             .expect(201);
     });
 
-    test('/REST:POST iam/permission/find', () =>
-    {
+    test('/REST:POST iam/permission/find', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:POST iam/permission/find/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:POST iam/permission/find/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/find/704f8ef6-0cfb-5615-858c-24330d0447cf')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:POST iam/permission/find/{id}', () =>
-    {
+    test('/REST:POST iam/permission/find/{id}', () => {
         return request(app.getHttpServer())
             .post('/iam/permission/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:PUT iam/permission/update - Got 404 Not Found', () =>
-    {
+    test('/REST:PUT iam/permission/update - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .put('/iam/permission/update')
             .set('Accept', 'application/json')
@@ -350,8 +400,7 @@ describe('permission', () =>
             .expect(404);
     });
 
-    test('/REST:PUT iam/permission/update', () =>
-    {
+    test('/REST:PUT iam/permission/update', () => {
         return request(app.getHttpServer())
             .put('/iam/permission/update')
             .set('Accept', 'application/json')
@@ -360,30 +409,33 @@ describe('permission', () =>
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:DELETE iam/permission/delete/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:DELETE iam/permission/delete/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
-            .delete('/iam/permission/delete/6a34eee0-e47a-53fb-8e79-0165c19e0d40')
+            .delete(
+                '/iam/permission/delete/6a34eee0-e47a-53fb-8e79-0165c19e0d40',
+            )
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE iam/permission/delete/{id}', () =>
-    {
+    test('/REST:DELETE iam/permission/delete/{id}', () => {
         return request(app.getHttpServer())
-            .delete('/iam/permission/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete(
+                '/iam/permission/delete/5b19d6ac-4081-573b-96b3-56964d5326a8',
+            )
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL iamCreatePermission - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/GraphQL iamCreatePermission - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -394,27 +446,33 @@ describe('permission', () =>
                         iamCreatePermission (payload:$payload)
                         {
                             id
+                            rowId
                             name
                             boundedContextId
                         }
                     }
                 `,
-                variables:
-                {
-                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
+                variables: {
+                    payload: _.omit(mockData[0], [
+                        'createdAt',
+                        'updatedAt',
+                        'deletedAt',
+                    ]),
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(409);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('already exist in database');
             });
     });
 
-    test('/GraphQL iamPaginatePermissions', () =>
-    {
+    test('/GraphQL iamPaginatePermissions', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -430,28 +488,35 @@ describe('permission', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
+                variables: {
+                    query: {
                         offset: 0,
                         limit: 5,
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body.data.iamPaginatePermissions).toEqual({
                     total: permissionSeeder.collectionResponse.length,
                     count: permissionSeeder.collectionResponse.length,
-                    rows : permissionSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'roleIds']))).slice(0, 5),
+                    rows: permissionSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                    'roleIds',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/GraphQL iamGetPermissions', () =>
-    {
+    test('/GraphQL iamGetPermissions', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -462,6 +527,7 @@ describe('permission', () =>
                         iamGetPermissions (query:$query)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
@@ -471,17 +537,25 @@ describe('permission', () =>
                 variables: {},
             })
             .expect(200)
-            .then(res =>
-            {
-                for (const [index, value] of res.body.data.iamGetPermissions.entries())
-                {
-                    expect(permissionSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+            .then((res) => {
+                for (const [
+                    index,
+                    value,
+                ] of res.body.data.iamGetPermissions.entries()) {
+                    expect(permissionSeeder.collectionResponse[index]).toEqual(
+                        expect.objectContaining(
+                            _.omit(value, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    );
                 }
             });
     });
 
-    test('/GraphQL iamCreatePermission', () =>
-    {
+    test('/GraphQL iamCreatePermission', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -492,6 +566,7 @@ describe('permission', () =>
                         iamCreatePermission (payload:$payload)
                         {
                             id
+                            rowId
                             name
                             boundedContextId
                         }
@@ -505,14 +580,15 @@ describe('permission', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.iamCreatePermission).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.iamCreatePermission).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL iamFindPermission - Got 404 Not Found', () =>
-    {
+    test('/GraphQL iamFindPermission - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -523,34 +599,34 @@ describe('permission', () =>
                         iamFindPermission (query:$query)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '77a0eb4b-dc58-529b-aada-d0b216559be0',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL iamFindPermission', () =>
-    {
+    test('/GraphQL iamFindPermission', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -561,32 +637,30 @@ describe('permission', () =>
                         iamFindPermission (query:$query)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.iamFindPermission.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.iamFindPermission.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL iamFindPermissionById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL iamFindPermissionById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -597,6 +671,7 @@ describe('permission', () =>
                         iamFindPermissionById (id:$id)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
@@ -608,16 +683,18 @@ describe('permission', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL iamFindPermissionById', () =>
-    {
+    test('/GraphQL iamFindPermissionById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -628,6 +705,7 @@ describe('permission', () =>
                         iamFindPermissionById (id:$id)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
@@ -639,14 +717,14 @@ describe('permission', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.iamFindPermissionById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.iamFindPermissionById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL iamUpdatePermissionById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL iamUpdatePermissionById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -657,6 +735,7 @@ describe('permission', () =>
                         iamUpdatePermissionById (payload:$payload)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
@@ -671,16 +750,18 @@ describe('permission', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL iamUpdatePermissionById', () =>
-    {
+    test('/GraphQL iamUpdatePermissionById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -691,6 +772,7 @@ describe('permission', () =>
                         iamUpdatePermissionById (payload:$payload)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
@@ -705,14 +787,14 @@ describe('permission', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.iamUpdatePermissionById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.iamUpdatePermissionById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL iamUpdatePermissions', () =>
-    {
+    test('/GraphQL iamUpdatePermissions', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -723,6 +805,7 @@ describe('permission', () =>
                         iamUpdatePermissions (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
@@ -742,14 +825,14 @@ describe('permission', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.iamUpdatePermissions[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.iamUpdatePermissions[0].id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL iamDeletePermissionById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL iamDeletePermissionById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -760,6 +843,7 @@ describe('permission', () =>
                         iamDeletePermissionById (id:$id)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
@@ -771,16 +855,18 @@ describe('permission', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL iamDeletePermissionById', () =>
-    {
+    test('/GraphQL iamDeletePermissionById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -791,6 +877,7 @@ describe('permission', () =>
                         iamDeletePermissionById (id:$id)
                         {
                             id
+                            rowId
                             name
                             createdAt
                             updatedAt
@@ -802,14 +889,14 @@ describe('permission', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.iamDeletePermissionById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.iamDeletePermissionById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    afterAll(async () =>
-    {
+    afterAll(async () => {
         await permissionRepository.delete({
             queryStatement: {
                 where: {},

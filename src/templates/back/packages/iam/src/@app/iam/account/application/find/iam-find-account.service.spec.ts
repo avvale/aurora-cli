@@ -1,16 +1,22 @@
-import { IamIAccountRepository, IamMockAccountRepository } from '@app/iam/account';
+import {
+    IamIAccountRepository,
+    IamMockAccountRepository,
+} from '@app/iam/account';
 import { IamFindAccountService } from '@app/iam/account/application/find/iam-find-account.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindAccountService', () =>
-{
+describe('IamFindAccountService', () => {
     let service: IamFindAccountService;
     let repository: IamIAccountRepository;
     let mockRepository: IamMockAccountRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,31 +26,36 @@ describe('IamFindAccountService', () =>
                 IamFindAccountService,
                 IamMockAccountRepository,
                 {
-                    provide : IamIAccountRepository,
+                    provide: IamIAccountRepository,
                     useValue: {
-                        find: () => { /**/ },
+                        find: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(IamFindAccountService);
         repository = module.get(IamIAccountRepository);
         mockRepository = module.get(IamMockAccountRepository);
     });
 
-    describe('main', () =>
-    {
-        test('IamFindAccountService should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindAccountService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should find account', async () =>
-        {
-            jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main()).toBe(mockRepository.collectionSource[0]);
+        test('should find account', async () => {
+            jest.spyOn(repository, 'find').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
+            expect(await service.main()).toBe(
+                mockRepository.collectionSource[0],
+            );
         });
     });
 });

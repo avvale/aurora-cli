@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class ToolsCreateProcedureCommand
-{
+export class ToolsCreateProcedureCommand {
     constructor(
         public readonly payload: {
             id: string;

@@ -4,62 +4,57 @@ import { toolsMockKeyValueData } from '@app/tools/key-value';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsPaginateKeyValuesHandler', () =>
-{
+describe('ToolsPaginateKeyValuesHandler', () => {
     let handler: ToolsPaginateKeyValuesHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsPaginateKeyValuesHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsPaginateKeyValuesHandler>(ToolsPaginateKeyValuesHandler);
+        handler = module.get<ToolsPaginateKeyValuesHandler>(
+            ToolsPaginateKeyValuesHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsPaginateKeyValuesHandler should be defined', () =>
-    {
+    test('ToolsPaginateKeyValuesHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsPaginateKeyValuesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsPaginateKeyValuesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a keyValues', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+        test('should return a keyValues', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: toolsMockKeyValueData.length,
+                            count: toolsMockKeyValueData.length,
+                            rows: toolsMockKeyValueData,
+                        }),
+                    ),
+            );
+            expect(await handler.main({}, {})).toEqual({
                 total: toolsMockKeyValueData.length,
                 count: toolsMockKeyValueData.length,
-                rows : toolsMockKeyValueData,
-            })));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                ),
-            )
-                .toEqual({
-                    total: toolsMockKeyValueData.length,
-                    count: toolsMockKeyValueData.length,
-                    rows : toolsMockKeyValueData,
-                });
+                rows: toolsMockKeyValueData,
+            });
         });
     });
 });

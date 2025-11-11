@@ -1,45 +1,49 @@
 import { IamCreatePermissionRoleInput } from '@api/graphql';
-import { IamCreatePermissionsRolesHandler, IamCreatePermissionsRolesResolver } from '@api/iam/permission-role';
+import {
+    IamCreatePermissionsRolesHandler,
+    IamCreatePermissionsRolesResolver,
+} from '@api/iam/permission-role';
 import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreatePermissionsRolesResolver', () =>
-{
+describe('IamCreatePermissionsRolesResolver', () => {
     let resolver: IamCreatePermissionsRolesResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreatePermissionsRolesResolver,
                 {
-                    provide : IamCreatePermissionsRolesHandler,
+                    provide: IamCreatePermissionsRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamCreatePermissionsRolesResolver>(IamCreatePermissionsRolesResolver);
+        resolver = module.get<IamCreatePermissionsRolesResolver>(
+            IamCreatePermissionsRolesResolver,
+        );
     });
 
-    test('IamCreatePermissionsRolesResolver should be defined', () =>
-    {
+    test('IamCreatePermissionsRolesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCreatePermissionsRolesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreatePermissionsRolesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an permissionsRoles created', async () =>
-        {
-            expect(await resolver.main(<IamCreatePermissionRoleInput[]>iamMockPermissionRoleData)).toBe(undefined);
+        test('should return an permissionsRoles created', async () => {
+            expect(
+                await resolver.main(
+                    <IamCreatePermissionRoleInput[]>iamMockPermissionRoleData,
+                ),
+            ).toBe(undefined);
         });
     });
 });

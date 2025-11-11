@@ -4,55 +4,48 @@ import { toolsMockProcedureData } from '@app/tools/procedure';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsGetProceduresHandler', () =>
-{
+describe('ToolsGetProceduresHandler', () => {
     let handler: ToolsGetProceduresHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsGetProceduresHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsGetProceduresHandler>(ToolsGetProceduresHandler);
+        handler = module.get<ToolsGetProceduresHandler>(
+            ToolsGetProceduresHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsGetProceduresHandler should be defined', () =>
-    {
+    test('ToolsGetProceduresHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsGetProceduresHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsGetProceduresHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a toolsMockProcedureData', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockProcedureData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(toolsMockProcedureData);
+        test('should return a toolsMockProcedureData', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(toolsMockProcedureData)),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                toolsMockProcedureData,
+            );
         });
     });
 });

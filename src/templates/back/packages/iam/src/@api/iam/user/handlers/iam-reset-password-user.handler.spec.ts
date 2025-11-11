@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamResetPasswordUserHandler } from './iam-reset-password-user.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { IamResetPasswordUserHandler } from './iam-reset-password-user.handler';
 
-describe('IamResetPasswordUserHandler', () =>
-{
+describe('IamResetPasswordUserHandler', () => {
     let handler: IamResetPasswordUserHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamResetPasswordUserHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<IamResetPasswordUserHandler>(IamResetPasswordUserHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamResetPasswordUserHandler>(
+            IamResetPasswordUserHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamResetPasswordUserHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamResetPasswordUserHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

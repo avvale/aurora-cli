@@ -1,8 +1,11 @@
-import { OAuthDeletedRefreshTokenEvent } from './o-auth-deleted-refresh-token.event';
+import { OAuthDeletedRefreshTokenEvent } from '@app/o-auth/refresh-token';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthDeletedRefreshTokensEvent
-{
+export class OAuthDeletedRefreshTokensEvent {
     constructor(
-        public readonly refreshTokens: OAuthDeletedRefreshTokenEvent[],
+        public readonly event: {
+            payload: OAuthDeletedRefreshTokenEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

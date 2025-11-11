@@ -4,55 +4,50 @@ import { iamMockRoleData } from '@app/iam/role';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateRoleHandler', () =>
-{
+describe('IamCreateRoleHandler', () => {
     let handler: IamCreateRoleHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreateRoleHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamCreateRoleHandler>(IamCreateRoleHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateRoleHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateRoleHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an role created', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleData[0])));
+        test('should return an role created', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockRoleData[0])),
+            );
             expect(
-                await handler.main(
-                    iamMockRoleData[0],
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockRoleData[0]);
+                await handler.main(iamMockRoleData[0], 'Europe/Madrid'),
+            ).toBe(iamMockRoleData[0]);
         });
     });
 });

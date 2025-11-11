@@ -1,4 +1,7 @@
-import { IamIRoleAccountRepository, IamRoleAccount } from '@app/iam/role-account';
+import {
+    IamIRoleAccountRepository,
+    IamRoleAccount,
+} from '@app/iam/role-account';
 import {
     IamRoleAccountAccountId,
     IamRoleAccountRoleId,
@@ -8,8 +11,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateRoleAccountService
-{
+export class IamCreateRoleAccountService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIRoleAccountRepository,
@@ -21,31 +23,26 @@ export class IamCreateRoleAccountService
             accountId: IamRoleAccountAccountId;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const roleAccount = IamRoleAccount.register(
             payload.roleId,
             payload.accountId,
         );
 
-        await this.repository.create(
-            roleAccount,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-                finderQueryStatement: (aggregate: IamRoleAccount) => ({
-                    where: {
-                        roleId: aggregate['roleId']['value'],
-                        accountId: aggregate['accountId']['value'],
-                    },
-                }),
-            },
-        );
+        await this.repository.create(roleAccount, {
+            createOptions: cQMetadata?.repositoryOptions,
+            finderQueryStatement: (aggregate: IamRoleAccount) => ({
+                where: {
+                    roleId: aggregate['roleId']['value'],
+                    accountId: aggregate['accountId']['value'],
+                },
+            }),
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const roleAccountRegister = this.publisher.mergeObjectContext(
-            roleAccount,
-        );
+        const roleAccountRegister =
+            this.publisher.mergeObjectContext(roleAccount);
 
         roleAccountRegister.created({
             payload: roleAccount,

@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamFindTenantByIdHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class IamFindTenantByIdHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         id: string,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamTenant | IamTenantDto>
-    {
-        return await this.queryBus.ask(new IamFindTenantByIdQuery(
-            id,
-            constraint,
-            {
+    ): Promise<IamTenant | IamTenantDto> {
+        return await this.queryBus.ask(
+            new IamFindTenantByIdQuery(id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

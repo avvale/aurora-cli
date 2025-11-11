@@ -1,25 +1,43 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    Column,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'OAuthScope',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['code'],
-			unique: true,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['code'],
+            unique: true,
+        },
     ],
 })
-export class OAuthScopeModel extends Model<OAuthScopeModel>
-{
+export class OAuthScopeModel extends Model<OAuthScopeModel> {
     @AfterCreate
-    static auditingCreate(instance: OAuthScopeModel, options): void
-    {
+    static auditingCreate(instance: OAuthScopeModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -30,8 +48,7 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: OAuthScopeModel, options): void
-    {
+    static auditingBulkCreate(instance: OAuthScopeModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -42,8 +59,7 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: OAuthScopeModel, options): void
-    {
+    static auditingUpdate(instance: OAuthScopeModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -54,8 +70,7 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -66,8 +81,7 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: OAuthScopeModel, options): void
-    {
+    static auditingDestroy(instance: OAuthScopeModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -78,8 +92,7 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -90,8 +103,7 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: OAuthScopeModel, options): void
-    {
+    static auditingRestore(instance: OAuthScopeModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -102,8 +114,7 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -114,8 +125,7 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: OAuthScopeModel, options): void
-    {
+    static auditingUpsert(instance: OAuthScopeModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -132,6 +142,14 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'code',
@@ -174,5 +192,4 @@ export class OAuthScopeModel extends Model<OAuthScopeModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

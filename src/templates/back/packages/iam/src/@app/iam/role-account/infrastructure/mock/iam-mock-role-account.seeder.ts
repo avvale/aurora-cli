@@ -8,22 +8,18 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class IamMockRoleAccountSeeder extends MockSeeder<IamRoleAccount>
-{
+export class IamMockRoleAccountSeeder extends MockSeeder<IamRoleAccount> {
     public collectionSource: IamRoleAccount[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const roleAccount of _.orderBy(iamMockRoleAccountData, ['id']))
-        {
+        for (const roleAccount of _.orderBy(iamMockRoleAccountData, ['id'])) {
             this.collectionSource.push(
                 IamRoleAccount.register(
                     new IamRoleAccountRoleId(roleAccount.roleId),

@@ -1,7 +1,9 @@
-import { ToolsAddMigrationsContextEvent, ToolsIMigrationRepository, ToolsMigration } from '@app/tools/migration';
 import {
-    ToolsMigrationCreatedAt,
-    ToolsMigrationDeletedAt,
+    ToolsAddMigrationsContextEvent,
+    ToolsIMigrationRepository,
+    ToolsMigration,
+} from '@app/tools/migration';
+import {
     ToolsMigrationDownScript,
     ToolsMigrationExecutedAt,
     ToolsMigrationId,
@@ -18,8 +20,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class ToolsUpdateMigrationsService
-{
+export class ToolsUpdateMigrationsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ToolsIMigrationRepository,
@@ -40,11 +41,11 @@ export class ToolsUpdateMigrationsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const migration = ToolsMigration.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.version,
             payload.isActive,
@@ -59,31 +60,23 @@ export class ToolsUpdateMigrationsService
         );
 
         // update
-        await this.repository.update(
-            migration,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(migration, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const migrations = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const migrations = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const migrationsRegister = this.publisher.mergeObjectContext(
-            new ToolsAddMigrationsContextEvent(
-                migrations,
-                cQMetadata,
-            ),
+            new ToolsAddMigrationsContextEvent(migrations, cQMetadata),
         );
 
         migrationsRegister.updated(); // apply event to model events

@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreateTagCommand
-{
+export class IamCreateTagCommand {
     constructor(
         public readonly payload: {
             id: string;

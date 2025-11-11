@@ -1,45 +1,49 @@
 import { IamCreatePermissionInput } from '@api/graphql';
-import { IamCreatePermissionsHandler, IamCreatePermissionsResolver } from '@api/iam/permission';
+import {
+    IamCreatePermissionsHandler,
+    IamCreatePermissionsResolver,
+} from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreatePermissionsResolver', () =>
-{
+describe('IamCreatePermissionsResolver', () => {
     let resolver: IamCreatePermissionsResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreatePermissionsResolver,
                 {
-                    provide : IamCreatePermissionsHandler,
+                    provide: IamCreatePermissionsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamCreatePermissionsResolver>(IamCreatePermissionsResolver);
+        resolver = module.get<IamCreatePermissionsResolver>(
+            IamCreatePermissionsResolver,
+        );
     });
 
-    test('IamCreatePermissionsResolver should be defined', () =>
-    {
+    test('IamCreatePermissionsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCreatePermissionsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreatePermissionsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an permissions created', async () =>
-        {
-            expect(await resolver.main(<IamCreatePermissionInput[]>iamMockPermissionData)).toBe(undefined);
+        test('should return an permissions created', async () => {
+            expect(
+                await resolver.main(
+                    <IamCreatePermissionInput[]>iamMockPermissionData,
+                ),
+            ).toBe(undefined);
         });
     });
 });

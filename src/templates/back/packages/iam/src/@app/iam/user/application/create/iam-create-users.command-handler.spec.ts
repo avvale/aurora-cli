@@ -3,43 +3,42 @@ import { IamCreateUsersCommandHandler } from '@app/iam/user/application/create/i
 import { IamCreateUsersService } from '@app/iam/user/application/create/iam-create-users.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('iamCreateUsersCommandHandler', () =>
-{
+describe('iamCreateUsersCommandHandler', () => {
     let commandHandler: IamCreateUsersCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreateUsersCommandHandler,
                 {
-                    provide : IamCreateUsersService,
+                    provide: IamCreateUsersService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamCreateUsersCommandHandler>(IamCreateUsersCommandHandler);
+        commandHandler = module.get<IamCreateUsersCommandHandler>(
+            IamCreateUsersCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateUsersCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateUsersCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return IamMockUserData created', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamCreateUsersCommand(
-                    iamMockUserData,
-                    { timezone: process.env.TZ },
+        test('should return IamMockUserData created', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamCreateUsersCommand(iamMockUserData, {
+                        timezone: process.env.TZ,
+                    }),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

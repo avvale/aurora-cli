@@ -3,40 +3,40 @@ import { IamDeleteRolesAccountsCommandHandler } from '@app/iam/role-account/appl
 import { IamDeleteRolesAccountsService } from '@app/iam/role-account/application/delete/iam-delete-roles-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteRolesAccountsCommandHandler', () =>
-{
+describe('IamDeleteRolesAccountsCommandHandler', () => {
     let commandHandler: IamDeleteRolesAccountsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamDeleteRolesAccountsCommandHandler,
                 {
-                    provide : IamDeleteRolesAccountsService,
+                    provide: IamDeleteRolesAccountsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamDeleteRolesAccountsCommandHandler>(IamDeleteRolesAccountsCommandHandler);
+        commandHandler = module.get<IamDeleteRolesAccountsCommandHandler>(
+            IamDeleteRolesAccountsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteRolesAccountsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteRolesAccountsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamDeleteRolesAccountsCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamDeleteRolesAccountsCommand(),
+                ),
+            ).toBe(undefined);
         });
     });
 });

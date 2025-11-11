@@ -3,37 +3,35 @@ import { toolsMockKeyValueData } from '@app/tools/key-value';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsCreateKeyValuesHandler', () =>
-{
+describe('ToolsCreateKeyValuesHandler', () => {
     let handler: ToolsCreateKeyValuesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ToolsCreateKeyValuesHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsCreateKeyValuesHandler>(ToolsCreateKeyValuesHandler);
+        handler = module.get<ToolsCreateKeyValuesHandler>(
+            ToolsCreateKeyValuesHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsCreateKeyValuesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsCreateKeyValuesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an toolsMockKeyValueData created', async () =>
-        {
+        test('should return an toolsMockKeyValueData created', async () => {
             expect(await handler.main(toolsMockKeyValueData)).toBe(true);
         });
     });

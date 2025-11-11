@@ -1,48 +1,51 @@
+import {
+    IamCreateRoleAccountCommand,
+    iamMockRoleAccountData,
+} from '@app/iam/role-account';
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamCreateRoleAccountCommandHandler } from './iam-create-role-account.command-handler';
 import { IamCreateRoleAccountService } from './iam-create-role-account.service';
-import { IamCreateRoleAccountCommand, iamMockRoleAccountData } from '@app/iam/role-account';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateRoleAccountCommandHandler', () =>
-{
+describe('IamCreateRoleAccountCommandHandler', () => {
     let commandHandler: IamCreateRoleAccountCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreateRoleAccountCommandHandler,
                 {
-                    provide : IamCreateRoleAccountService,
+                    provide: IamCreateRoleAccountService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamCreateRoleAccountCommandHandler>(IamCreateRoleAccountCommandHandler);
+        commandHandler = module.get<IamCreateRoleAccountCommandHandler>(
+            IamCreateRoleAccountCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('CreateRoleAccountCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('CreateRoleAccountCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should create the values objects and pass them as parameters to the IamCreateRoleAccountService', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamCreateRoleAccountCommand(
-                    {
-                        roleId: iamMockRoleAccountData[0].roleId,
-                        accountId: iamMockRoleAccountData[0].accountId,
-                    },
-                    { timezone: process.env.TZ },
+        test('should create the values objects and pass them as parameters to the IamCreateRoleAccountService', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamCreateRoleAccountCommand(
+                        {
+                            roleId: iamMockRoleAccountData[0].roleId,
+                            accountId: iamMockRoleAccountData[0].accountId,
+                        },
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

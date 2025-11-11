@@ -4,24 +4,27 @@ import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(OAuthPaginateAccessTokensQuery)
-export class OAuthPaginateAccessTokensQueryHandler implements IQueryHandler<OAuthPaginateAccessTokensQuery>
+export class OAuthPaginateAccessTokensQueryHandler
+    implements IQueryHandler<OAuthPaginateAccessTokensQuery>
 {
     constructor(
         private readonly paginateAccessTokensService: OAuthPaginateAccessTokensService,
     ) {}
 
-    async execute(query: OAuthPaginateAccessTokensQuery): Promise<PaginationResponse>
-    {
-        const { total, count, rows } = await this.paginateAccessTokensService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
+    async execute(
+        query: OAuthPaginateAccessTokensQuery,
+    ): Promise<PaginationResponse> {
+        const { total, count, rows } =
+            await this.paginateAccessTokensService.main(
+                query.queryStatement,
+                query.constraint,
+                query.cQMetadata,
+            );
 
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO()),
+            rows.map((item) => item.toDTO()),
         );
     }
 }

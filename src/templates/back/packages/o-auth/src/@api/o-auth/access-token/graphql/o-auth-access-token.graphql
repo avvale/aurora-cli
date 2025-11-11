@@ -1,7 +1,6 @@
-
-type OAuthAccessToken
-{
+type OAuthAccessToken {
     id: ID!
+    rowId: GraphQLInt!
     clientId: ID!
     client: OAuthClient
     accountId: ID
@@ -15,8 +14,7 @@ type OAuthAccessToken
     deletedAt: GraphQLTimestamp
 }
 
-input OAuthCreateAccessTokenInput
-{
+input OAuthCreateAccessTokenInput {
     id: ID!
     clientId: ID!
     accountId: ID
@@ -27,8 +25,7 @@ input OAuthCreateAccessTokenInput
     refreshToken: OAuthCreateRefreshTokenInput
 }
 
-input OAuthUpdateAccessTokenByIdInput
-{
+input OAuthUpdateAccessTokenByIdInput {
     id: ID!
     clientId: ID
     accountId: ID
@@ -39,8 +36,7 @@ input OAuthUpdateAccessTokenByIdInput
     refreshToken: OAuthUpdateRefreshTokenByIdInput
 }
 
-input OAuthUpdateAccessTokensInput
-{
+input OAuthUpdateAccessTokensInput {
     id: ID
     clientId: ID
     accountId: ID
@@ -51,8 +47,7 @@ input OAuthUpdateAccessTokensInput
     refreshToken: OAuthUpdateRefreshTokensInput
 }
 
-type Query
-{
+type Query {
     oAuthFindAccessToken(
         query: QueryStatement
         constraint: QueryStatement
@@ -72,11 +67,9 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     oAuthDeleteAccessTokenById(
         id: ID!
         constraint: QueryStatement
@@ -86,5 +79,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [OAuthAccessToken]!
-
 }

@@ -5,8 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class OAuthDeleteAccessTokenByIdService
-{
+export class OAuthDeleteAccessTokenByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: OAuthIAccessTokenRepository,
@@ -16,33 +15,28 @@ export class OAuthDeleteAccessTokenByIdService
         id: OAuthAccessTokenId,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // get object to delete
-        const accessToken = await this.repository
-            .findById(
-                id,
-                {
-                    constraint,
-                    cQMetadata,
-                },
-            );
+        const accessToken = await this.repository.findById(id, {
+            constraint,
+            cQMetadata,
+        });
 
         // it is not necessary to pass the constraint in the delete, if the object
         // is not found in the findById, an exception will be thrown.
-        await this.repository
-            .deleteById(
-                accessToken.id,
-                {
-                    deleteOptions: cQMetadata?.repositoryOptions,
-                    cQMetadata,
-                },
-            );
+        await this.repository.deleteById(accessToken.id, {
+            deleteOptions: cQMetadata?.repositoryOptions,
+            cQMetadata,
+        });
 
         // insert EventBus in object, to be able to apply and commit events
-        const accessTokenRegister = this.publisher.mergeObjectContext(accessToken);
+        const accessTokenRegister =
+            this.publisher.mergeObjectContext(accessToken);
 
-        accessTokenRegister.deleted(accessToken); // apply event to model events
+        accessTokenRegister.deleted({
+            payload: accessToken,
+            cQMetadata,
+        }); // apply event to model events
         accessTokenRegister.commit(); // commit all events of model
     }
 }

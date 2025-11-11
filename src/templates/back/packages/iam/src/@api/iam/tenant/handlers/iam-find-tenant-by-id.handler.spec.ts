@@ -4,55 +4,52 @@ import { iamMockTenantData } from '@app/iam/tenant';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTenantByIdHandler', () =>
-{
+describe('IamFindTenantByIdHandler', () => {
     let handler: IamFindTenantByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindTenantByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamFindTenantByIdHandler>(IamFindTenantByIdHandler);
+        handler = module.get<IamFindTenantByIdHandler>(
+            IamFindTenantByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamFindTenantByIdHandler should be defined', () =>
-    {
+    test('IamFindTenantByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTenantByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTenantByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an tenant by id', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+        test('should return an tenant by id', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
             expect(
                 await handler.main(
                     iamMockTenantData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockTenantData[0]);
+            ).toBe(iamMockTenantData[0]);
         });
     });
 });

@@ -1,7 +1,6 @@
-
-type IamTenant
-{
+type IamTenant {
     id: ID!
+    rowId: GraphQLInt!
     parentId: ID
     parent: IamTenant
     name: GraphQLString!
@@ -10,16 +9,21 @@ type IamTenant
     isActive: GraphQLBoolean!
     meta: JSON
     accounts: [IamAccount]
-    """Timestamp when the tenant was created"""
+    """
+    Timestamp when the tenant was created
+    """
     createdAt: GraphQLTimestamp
-    """Timestamp when the tenant was last updated"""
+    """
+    Timestamp when the tenant was last updated
+    """
     updatedAt: GraphQLTimestamp
-    """Timestamp when the tenant was deleted"""
+    """
+    Timestamp when the tenant was deleted
+    """
     deletedAt: GraphQLTimestamp
 }
 
-input IamCreateTenantInput
-{
+input IamCreateTenantInput {
     id: ID!
     parentId: ID
     name: GraphQLString!
@@ -30,8 +34,7 @@ input IamCreateTenantInput
     accountIds: [ID]
 }
 
-input IamUpdateTenantByIdInput
-{
+input IamUpdateTenantByIdInput {
     id: ID!
     parentId: ID
     name: GraphQLString
@@ -42,8 +45,7 @@ input IamUpdateTenantByIdInput
     accountIds: [ID]
 }
 
-input IamUpdateTenantsInput
-{
+input IamUpdateTenantsInput {
     id: ID
     parentId: ID
     name: GraphQLString
@@ -54,17 +56,10 @@ input IamUpdateTenantsInput
     accountIds: [ID]
 }
 
-type Query
-{
-    iamFindTenant(
-        query: QueryStatement
-        constraint: QueryStatement
-    ): IamTenant
+type Query {
+    iamFindTenant(query: QueryStatement, constraint: QueryStatement): IamTenant
 
-    iamFindTenantById(
-        id: ID
-        constraint: QueryStatement
-    ): IamTenant
+    iamFindTenantById(id: ID, constraint: QueryStatement): IamTenant
 
     iamGetTenants(
         query: QueryStatement
@@ -76,7 +71,6 @@ type Query
         constraint: QueryStatement
     ): Pagination!
 
-
     # additionalApis
     iamGetWithTenantConstraintTenants(
         query: QueryStatement
@@ -87,18 +81,12 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    iamCreateTenant(
-        payload: IamCreateTenantInput!
-    ): IamTenant
+type Mutation {
+    iamCreateTenant(payload: IamCreateTenantInput!): IamTenant
 
-    iamCreateTenants(
-        payload: [IamCreateTenantInput]!
-    ): Boolean!
+    iamCreateTenants(payload: [IamCreateTenantInput]!): Boolean!
 
     iamUpdateTenantById(
         payload: IamUpdateTenantByIdInput!
@@ -111,18 +99,10 @@ type Mutation
         constraint: QueryStatement
     ): [IamTenant]!
 
-    iamUpsertTenant(
-        payload: IamUpdateTenantByIdInput!
-    ): IamTenant
-
-    iamDeleteTenantById(
-        id: ID!
-        constraint: QueryStatement
-    ): IamTenant
+    iamDeleteTenantById(id: ID!, constraint: QueryStatement): IamTenant
 
     iamDeleteTenants(
         query: QueryStatement
         constraint: QueryStatement
     ): [IamTenant]!
-
 }

@@ -4,20 +4,41 @@ import { IamAccountModel } from '@app/iam/account';
 import { IamPermissionModel } from '@app/iam/permission';
 import { IamPermissionRoleModel } from '@app/iam/permission-role';
 import { IamRoleAccountModel } from '@app/iam/role-account';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsToMany, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsToMany,
+    Column,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamRole',
     freezeTableName: true,
     timestamps: false,
+    indexes: [
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+    ],
 })
-export class IamRoleModel extends Model<IamRoleModel>
-{
+export class IamRoleModel extends Model<IamRoleModel> {
     @AfterCreate
-    static auditingCreate(instance: IamRoleModel, options): void
-    {
+    static auditingCreate(instance: IamRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -28,8 +49,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamRoleModel, options): void
-    {
+    static auditingBulkCreate(instance: IamRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -40,8 +60,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamRoleModel, options): void
-    {
+    static auditingUpdate(instance: IamRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -52,8 +71,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -64,8 +82,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamRoleModel, options): void
-    {
+    static auditingDestroy(instance: IamRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -76,8 +93,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -88,8 +104,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamRoleModel, options): void
-    {
+    static auditingRestore(instance: IamRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -100,8 +115,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -112,8 +126,7 @@ export class IamRoleModel extends Model<IamRoleModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamRoleModel, options): void
-    {
+    static auditingUpsert(instance: IamRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -132,6 +145,14 @@ export class IamRoleModel extends Model<IamRoleModel>
     id: string;
 
     @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
+
+    @Column({
         field: 'name',
         allowNull: false,
         type: DataTypes.STRING(128),
@@ -146,13 +167,11 @@ export class IamRoleModel extends Model<IamRoleModel>
     })
     isMaster: boolean;
 
-
     @BelongsToMany(() => IamPermissionModel, {
         through: () => IamPermissionRoleModel,
         uniqueKey: 'Uq01IamPermissionRole',
     })
     permissions: IamPermissionModel[];
-
 
     @BelongsToMany(() => IamAccountModel, {
         through: () => IamRoleAccountModel,
@@ -180,5 +199,4 @@ export class IamRoleModel extends Model<IamRoleModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

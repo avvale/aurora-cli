@@ -4,61 +4,54 @@ import { iamMockTenantData } from '@app/iam/tenant';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteTenantsHandler', () =>
-{
+describe('IamDeleteTenantsHandler', () => {
     let handler: IamDeleteTenantsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteTenantsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamDeleteTenantsHandler>(IamDeleteTenantsHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamDeleteTenantsHandler should be defined', () =>
-    {
+    test('IamDeleteTenantsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteTenantsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteTenantsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an iamMockTenantData deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockTenantData);
+        test('should return an iamMockTenantData deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData)),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                iamMockTenantData,
+            );
         });
     });
 });

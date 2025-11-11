@@ -1,51 +1,48 @@
-import { IamCreateTenantController, IamCreateTenantHandler } from '@api/iam/tenant';
+import {
+    IamCreateTenantController,
+    IamCreateTenantHandler,
+} from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTenantController', () =>
-{
+describe('IamCreateTenantController', () => {
     let controller: IamCreateTenantController;
     let handler: IamCreateTenantHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamCreateTenantController,
-            ],
+            imports: [],
+            controllers: [IamCreateTenantController],
             providers: [
                 {
-                    provide : IamCreateTenantHandler,
+                    provide: IamCreateTenantHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamCreateTenantController>(IamCreateTenantController);
+        controller = module.get<IamCreateTenantController>(
+            IamCreateTenantController,
+        );
         handler = module.get<IamCreateTenantHandler>(IamCreateTenantHandler);
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTenantController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTenantController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an tenant created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
-            expect(
-                await controller.main(
-                    iamMockTenantData[0],
-                ),
-            )
-                .toBe(iamMockTenantData[0]);
+        test('should return an tenant created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
+            expect(await controller.main(iamMockTenantData[0])).toBe(
+                iamMockTenantData[0],
+            );
         });
     });
 });

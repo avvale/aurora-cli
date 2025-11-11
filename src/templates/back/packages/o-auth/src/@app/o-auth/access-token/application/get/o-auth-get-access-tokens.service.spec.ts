@@ -1,16 +1,22 @@
-import { OAuthIAccessTokenRepository, OAuthMockAccessTokenRepository } from '@app/o-auth/access-token';
+import {
+    OAuthIAccessTokenRepository,
+    OAuthMockAccessTokenRepository,
+} from '@app/o-auth/access-token';
 import { OAuthGetAccessTokensService } from '@app/o-auth/access-token/application/get/o-auth-get-access-tokens.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthGetAccessTokensService', () =>
-{
+describe('OAuthGetAccessTokensService', () => {
     let service: OAuthGetAccessTokensService;
     let repository: OAuthIAccessTokenRepository;
     let mockRepository: OAuthMockAccessTokenRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,30 +26,33 @@ describe('OAuthGetAccessTokensService', () =>
                 OAuthGetAccessTokensService,
                 OAuthMockAccessTokenRepository,
                 {
-                    provide : OAuthIAccessTokenRepository,
+                    provide: OAuthIAccessTokenRepository,
                     useValue: {
-                        get: () => { /**/ },
+                        get: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthGetAccessTokensService);
         repository = module.get(OAuthIAccessTokenRepository);
         mockRepository = module.get(OAuthMockAccessTokenRepository);
     });
 
-    describe('main', () =>
-    {
-        test('GetAccessTokensService should be defined', () =>
-        {
+    describe('main', () => {
+        test('GetAccessTokensService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should get accessTokens', async () =>
-        {
-            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource)));
+        test('should get accessTokens', async () => {
+            jest.spyOn(repository, 'get').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource),
+                    ),
+            );
             expect(await service.main()).toBe(mockRepository.collectionSource);
         });
     });

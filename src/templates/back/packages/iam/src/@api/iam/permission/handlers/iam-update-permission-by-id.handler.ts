@@ -1,12 +1,23 @@
 import { IamPermission, IamUpdatePermissionByIdInput } from '@api/graphql';
-import { IamPermissionDto, IamUpdatePermissionByIdDto } from '@api/iam/permission';
-import { IamFindPermissionByIdQuery, IamUpdatePermissionByIdCommand } from '@app/iam/permission';
-import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import {
+    IamPermissionDto,
+    IamUpdatePermissionByIdDto,
+} from '@api/iam/permission';
+import {
+    IamFindPermissionByIdQuery,
+    IamUpdatePermissionByIdCommand,
+} from '@app/iam/permission';
+import {
+    AuditingMeta,
+    diff,
+    ICommandBus,
+    IQueryBus,
+    QueryStatement,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamUpdatePermissionByIdHandler
-{
+export class IamUpdatePermissionByIdHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -17,38 +28,35 @@ export class IamUpdatePermissionByIdHandler
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamPermission | IamPermissionDto>
-    {
-        const permission = await this.queryBus.ask(new IamFindPermissionByIdQuery(
-            payload.id,
-            constraint,
-            {
+    ): Promise<IamPermission | IamPermissionDto> {
+        const permission = await this.queryBus.ask(
+            new IamFindPermissionByIdQuery(payload.id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
         const dataToUpdate = diff(payload, permission);
 
-        await this.commandBus.dispatch(new IamUpdatePermissionByIdCommand(
-            {
-                ...dataToUpdate,
-                id: payload.id,
-            },
-            constraint,
-            {
-                timezone,
-                repositoryOptions: {
-                    auditing,
+        await this.commandBus.dispatch(
+            new IamUpdatePermissionByIdCommand(
+                {
+                    ...dataToUpdate,
+                    id: payload.id,
                 },
-            },
-        ));
+                constraint,
+                {
+                    timezone,
+                    repositoryOptions: {
+                        auditing,
+                    },
+                },
+            ),
+        );
 
-        return await this.queryBus.ask(new IamFindPermissionByIdQuery(
-            payload.id,
-            constraint,
-            {
+        return await this.queryBus.ask(
+            new IamFindPermissionByIdQuery(payload.id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

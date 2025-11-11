@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.application.create')
-export class OAuthCreateApplicationResolver
-{
-    constructor(
-        private readonly handler: OAuthCreateApplicationHandler,
-    ) {}
+export class OAuthCreateApplicationResolver {
+    constructor(private readonly handler: OAuthCreateApplicationHandler) {}
 
     @Mutation('oAuthCreateApplication')
     async main(
         @Args('payload') payload: OAuthCreateApplicationInput,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<OAuthApplication>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
+    ): Promise<OAuthApplication> {
+        return await this.handler.main(payload, timezone, auditing);
     }
 }

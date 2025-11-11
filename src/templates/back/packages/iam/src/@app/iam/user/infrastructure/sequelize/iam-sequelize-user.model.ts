@@ -1,20 +1,42 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { IamAccountModel } from '@app/iam/account';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsTo,
+    Column,
+    ForeignKey,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamUser',
     freezeTableName: true,
     timestamps: false,
+    indexes: [
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+    ],
 })
-export class IamUserModel extends Model<IamUserModel>
-{
+export class IamUserModel extends Model<IamUserModel> {
     @AfterCreate
-    static auditingCreate(instance: IamUserModel, options): void
-    {
+    static auditingCreate(instance: IamUserModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -25,8 +47,7 @@ export class IamUserModel extends Model<IamUserModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamUserModel, options): void
-    {
+    static auditingBulkCreate(instance: IamUserModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -37,8 +58,7 @@ export class IamUserModel extends Model<IamUserModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamUserModel, options): void
-    {
+    static auditingUpdate(instance: IamUserModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -49,8 +69,7 @@ export class IamUserModel extends Model<IamUserModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -61,8 +80,7 @@ export class IamUserModel extends Model<IamUserModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamUserModel, options): void
-    {
+    static auditingDestroy(instance: IamUserModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -73,8 +91,7 @@ export class IamUserModel extends Model<IamUserModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -85,8 +102,7 @@ export class IamUserModel extends Model<IamUserModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamUserModel, options): void
-    {
+    static auditingRestore(instance: IamUserModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -97,8 +113,7 @@ export class IamUserModel extends Model<IamUserModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -109,8 +124,7 @@ export class IamUserModel extends Model<IamUserModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamUserModel, options): void
-    {
+    static auditingUpsert(instance: IamUserModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -127,6 +141,14 @@ export class IamUserModel extends Model<IamUserModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @ForeignKey(() => IamAccountModel)
     @Column({
@@ -232,5 +254,4 @@ export class IamUserModel extends Model<IamUserModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

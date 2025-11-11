@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { ToolsUpScriptMigrationHandler } from '../handlers/tools-up-script-migration.handler';
 import { ToolsUpScriptMigrationController } from './tools-up-script-migration.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsUpScriptMigrationController', () =>
-{
+describe('ToolsUpScriptMigrationController', () => {
     let controller: ToolsUpScriptMigrationController;
     let handler: ToolsUpScriptMigrationHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                ToolsUpScriptMigrationController,
-            ],
+            imports: [],
+            controllers: [ToolsUpScriptMigrationController],
             providers: [
                 {
-                    provide : ToolsUpScriptMigrationHandler,
+                    provide: ToolsUpScriptMigrationHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<ToolsUpScriptMigrationController>(ToolsUpScriptMigrationController);
-        handler = module.get<ToolsUpScriptMigrationHandler>(ToolsUpScriptMigrationHandler);
+        controller = module.get<ToolsUpScriptMigrationController>(
+            ToolsUpScriptMigrationController,
+        );
+        handler = module.get<ToolsUpScriptMigrationHandler>(
+            ToolsUpScriptMigrationHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsUpScriptMigrationController should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsUpScriptMigrationController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

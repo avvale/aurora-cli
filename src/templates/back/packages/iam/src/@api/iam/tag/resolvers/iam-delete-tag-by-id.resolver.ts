@@ -1,16 +1,18 @@
 import { IamTag } from '@api/graphql';
 import { IamDeleteTagByIdHandler } from '@api/iam/tag';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.tag.delete')
-export class IamDeleteTagByIdResolver
-{
-    constructor(
-        private readonly handler: IamDeleteTagByIdHandler,
-    ) {}
+export class IamDeleteTagByIdResolver {
+    constructor(private readonly handler: IamDeleteTagByIdHandler) {}
 
     @Mutation('iamDeleteTagById')
     async main(
@@ -18,13 +20,7 @@ export class IamDeleteTagByIdResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<IamTag>
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-            auditing,
-        );
+    ): Promise<IamTag> {
+        return await this.handler.main(id, constraint, timezone, auditing);
     }
 }

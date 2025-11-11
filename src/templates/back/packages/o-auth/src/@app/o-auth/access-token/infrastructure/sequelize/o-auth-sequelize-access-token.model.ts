@@ -3,21 +3,31 @@
 import { OAuthClientModel } from '@app/o-auth/client';
 import { OAuthRefreshTokenModel } from '@app/o-auth/refresh-token';
 import { DataTypes } from 'sequelize';
-import { BelongsTo, Column, ForeignKey, HasOne, Model, Table } from 'sequelize-typescript';
+import {
+    BelongsTo,
+    Column,
+    ForeignKey,
+    HasOne,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'OAuthAccessToken',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['clientId'],
-			unique: false,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['clientId'],
+            unique: false,
+        },
     ],
 })
-export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
-{
+export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel> {
     @Column({
         field: 'id',
         primaryKey: true,
@@ -25,6 +35,14 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @ForeignKey(() => OAuthClientModel)
     @Column({
@@ -76,7 +94,6 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
     })
     expiresAt: string;
 
-
     @HasOne(() => OAuthRefreshTokenModel, {
         constraints: false,
     })
@@ -102,5 +119,4 @@ export class OAuthAccessTokenModel extends Model<OAuthAccessTokenModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

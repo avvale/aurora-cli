@@ -1,9 +1,12 @@
-import { IamAddTenantsContextEvent, IamITenantRepository, IamTenant } from '@app/iam/tenant';
+import {
+    IamAddTenantsContextEvent,
+    IamITenantRepository,
+    IamTenant,
+} from '@app/iam/tenant';
 import {
     IamTenantAccountIds,
     IamTenantCode,
     IamTenantCreatedAt,
-    IamTenantDeletedAt,
     IamTenantId,
     IamTenantIsActive,
     IamTenantLogo,
@@ -17,8 +20,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateTenantsService
-{
+export class IamCreateTenantsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamITenantRepository,
@@ -34,40 +36,36 @@ export class IamCreateTenantsService
             isActive: IamTenantIsActive;
             meta: IamTenantMeta;
             accountIds: IamTenantAccountIds;
-        } [],
+        }[],
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
-        const tenants = payload.map(tenant => IamTenant.register(
-            tenant.id,
-            tenant.parentId,
-            tenant.name,
-            tenant.code,
-            tenant.logo,
-            tenant.isActive,
-            tenant.meta,
-            tenant.accountIds,
-            new IamTenantCreatedAt({ currentTimestamp: true }),
-            new IamTenantUpdatedAt({ currentTimestamp: true }),
-            null, // deleteAt
-        ));
+        const tenants = payload.map((tenant) =>
+            IamTenant.register(
+                tenant.id,
+                undefined, // rowId
+                tenant.parentId,
+                tenant.name,
+                tenant.code,
+                tenant.logo,
+                tenant.isActive,
+                tenant.meta,
+                tenant.accountIds,
+                new IamTenantCreatedAt({ currentTimestamp: true }),
+                new IamTenantUpdatedAt({ currentTimestamp: true }),
+                null, // deleteAt
+            ),
+        );
 
         // insert
-        await this.repository.insert(
-            tenants,
-            {
-                insertOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.insert(tenants, {
+            insertOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddTenantsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const tenantsRegistered = this.publisher.mergeObjectContext(
-            new IamAddTenantsContextEvent(
-                tenants,
-                cQMetadata,
-            ),
+            new IamAddTenantsContextEvent(tenants, cQMetadata),
         );
 
         tenantsRegistered.created(); // apply event to model events

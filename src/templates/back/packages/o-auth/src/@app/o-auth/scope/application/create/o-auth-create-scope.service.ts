@@ -2,7 +2,6 @@ import { OAuthIScopeRepository, OAuthScope } from '@app/o-auth/scope';
 import {
     OAuthScopeCode,
     OAuthScopeCreatedAt,
-    OAuthScopeDeletedAt,
     OAuthScopeId,
     OAuthScopeName,
     OAuthScopeRoleIds,
@@ -13,8 +12,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class OAuthCreateScopeService
-{
+export class OAuthCreateScopeService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: OAuthIScopeRepository,
@@ -28,11 +26,11 @@ export class OAuthCreateScopeService
             roleIds: OAuthScopeRoleIds;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const scope = OAuthScope.register(
             payload.id,
+            undefined, // rowId
             payload.code,
             payload.name,
             payload.roleIds,
@@ -41,19 +39,17 @@ export class OAuthCreateScopeService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            scope,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(scope, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const scopeRegister = this.publisher.mergeObjectContext(
-            scope,
-        );
+        const scopeRegister = this.publisher.mergeObjectContext(scope);
 
-        scopeRegister.created(scope); // apply event to model events
+        scopeRegister.created({
+            payload: scope,
+            cQMetadata,
+        }); // apply event to model events
         scopeRegister.commit(); // commit all events of model
     }
 }

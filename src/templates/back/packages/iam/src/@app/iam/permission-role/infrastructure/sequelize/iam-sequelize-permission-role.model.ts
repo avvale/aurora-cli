@@ -2,20 +2,36 @@
 /* eslint-disable key-spacing */
 import { IamPermissionModel } from '@app/iam/permission';
 import { IamRoleModel } from '@app/iam/role';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsTo,
+    Column,
+    ForeignKey,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamPermissionRole',
     freezeTableName: true,
     timestamps: false,
 })
-export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
-{
+export class IamPermissionRoleModel extends Model<IamPermissionRoleModel> {
     @AfterCreate
-    static auditingCreate(instance: IamPermissionRoleModel, options): void
-    {
+    static auditingCreate(instance: IamPermissionRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -26,8 +42,7 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamPermissionRoleModel, options): void
-    {
+    static auditingBulkCreate(instance: IamPermissionRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -38,8 +53,7 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamPermissionRoleModel, options): void
-    {
+    static auditingUpdate(instance: IamPermissionRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -50,8 +64,7 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -62,8 +75,7 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamPermissionRoleModel, options): void
-    {
+    static auditingDestroy(instance: IamPermissionRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -74,8 +86,7 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -86,8 +97,7 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamPermissionRoleModel, options): void
-    {
+    static auditingRestore(instance: IamPermissionRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -98,8 +108,7 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -110,8 +119,7 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamPermissionRoleModel, options): void
-    {
+    static auditingUpsert(instance: IamPermissionRoleModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -150,5 +158,4 @@ export class IamPermissionRoleModel extends Model<IamPermissionRoleModel>
         foreignKey: 'roleId',
     })
     role: IamRoleModel;
-
 }

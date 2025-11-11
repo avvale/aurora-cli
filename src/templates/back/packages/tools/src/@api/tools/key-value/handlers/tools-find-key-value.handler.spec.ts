@@ -4,55 +4,49 @@ import { toolsMockKeyValueData } from '@app/tools/key-value';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsFindKeyValueHandler', () =>
-{
+describe('ToolsFindKeyValueHandler', () => {
     let handler: ToolsFindKeyValueHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsFindKeyValueHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsFindKeyValueHandler>(ToolsFindKeyValueHandler);
+        handler = module.get<ToolsFindKeyValueHandler>(
+            ToolsFindKeyValueHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsFindKeyValueHandler should be defined', () =>
-    {
+    test('ToolsFindKeyValueHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsFindKeyValueHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsFindKeyValueHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a keyValue', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockKeyValueData[0])));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(toolsMockKeyValueData[0]);
+        test('should return a keyValue', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(toolsMockKeyValueData[0])),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                toolsMockKeyValueData[0],
+            );
         });
     });
 });

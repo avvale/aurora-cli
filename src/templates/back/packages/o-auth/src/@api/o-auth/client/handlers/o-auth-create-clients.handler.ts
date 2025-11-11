@@ -5,27 +5,22 @@ import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class OAuthCreateClientsHandler
-{
-    constructor(
-        private readonly commandBus: ICommandBus,
-    ) {}
+export class OAuthCreateClientsHandler {
+    constructor(private readonly commandBus: ICommandBus) {}
 
     async main(
         payload: OAuthCreateClientInput[] | OAuthCreateClientDto[],
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        await this.commandBus.dispatch(new OAuthCreateClientsCommand(
-            payload,
-            {
+    ): Promise<boolean> {
+        await this.commandBus.dispatch(
+            new OAuthCreateClientsCommand(payload, {
                 timezone,
                 repositoryOptions: {
                     auditing,
                 },
-            },
-        ));
+            }),
+        );
 
         return true;
     }

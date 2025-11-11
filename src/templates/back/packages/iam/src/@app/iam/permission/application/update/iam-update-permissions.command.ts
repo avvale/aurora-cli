@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class IamUpdatePermissionsCommand
-{
+export class IamUpdatePermissionsCommand {
     constructor(
         public readonly payload: {
             id?: string;

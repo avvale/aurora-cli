@@ -1,46 +1,42 @@
-import { IamCreatePermissionsRolesController, IamCreatePermissionsRolesHandler } from '@api/iam/permission-role';
+import {
+    IamCreatePermissionsRolesController,
+    IamCreatePermissionsRolesHandler,
+} from '@api/iam/permission-role';
 import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreatePermissionsRolesController', () =>
-{
+describe('IamCreatePermissionsRolesController', () => {
     let controller: IamCreatePermissionsRolesController;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            controllers: [
-                IamCreatePermissionsRolesController,
-            ],
+            controllers: [IamCreatePermissionsRolesController],
             providers: [
                 {
-                    provide : IamCreatePermissionsRolesHandler,
+                    provide: IamCreatePermissionsRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamCreatePermissionsRolesController>(IamCreatePermissionsRolesController);
+        controller = module.get<IamCreatePermissionsRolesController>(
+            IamCreatePermissionsRolesController,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamCreatePermissionsRolesController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreatePermissionsRolesController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an iamMockPermissionRoleData created', async () =>
-        {
-            expect(
-                await controller.main(
-                    iamMockPermissionRoleData,
-                ),
-            )
-                .toBe(undefined);
+        test('should return an iamMockPermissionRoleData created', async () => {
+            expect(await controller.main(iamMockPermissionRoleData)).toBe(
+                undefined,
+            );
         });
     });
 });

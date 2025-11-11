@@ -1,561 +1,480 @@
 {
     "info": {
-		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-		"name"          : "@app - iam/bounded-context",
-		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - iam/bounded-context",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-			"name": "GraphQL - iamCreateBoundedContext",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "GraphQL - iamCreateBoundedContext",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:IamCreateBoundedContextInput!)\n{\n\tiamCreateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 16911512287945417000, \n\t\t\"name\": \"Small Concrete Computer\", \n\t\t\"root\": \"3aun0pg1qqidnmphqdhz7639hc7bcuwwx01gjzcd8roi46es0coabvzhhq4owrf\", \n\t\t\"sort\": 8650, \n\t\t\"isActive\": true\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamCreateBoundedContexts",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[IamCreateBoundedContextInput]!)\n{\n\tiamCreateBoundedContexts (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"6c62dfeb-56cb-4dd7-b865-fa263099cd48\", \n\t\t\t\"rowId\": 42860060117415576000, \n\t\t\t\"name\": \"Small Frozen Table\", \n\t\t\t\"root\": \"t4lm0m0le3otmj0j70xtbhup17jmssjihmagu85q2ctbij0l28fukuumaztqt55\", \n\t\t\t\"sort\": 6729, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5aaf840c-e8ec-496b-b289-872c4755794a\", \n\t\t\t\"rowId\": 68145156139834020000, \n\t\t\t\"name\": \"Unbranded Steel Chair\", \n\t\t\t\"root\": \"bkhecolc20l4vo5qcxd0tm9uhikahc5yvlrg4gj095aifm19efd5qop2uktm30m\", \n\t\t\t\"sort\": 4951, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5de12321-d9d0-4013-a090-5583bfc09201\", \n\t\t\t\"rowId\": 26785692948567335000, \n\t\t\t\"name\": \"Licensed Concrete Table\", \n\t\t\t\"root\": \"juns2cbtddheuz50whk9tcjz8cub75hamhitgzozkyww4eq1o1zr2jodxd2uws4\", \n\t\t\t\"sort\": 7078, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"53e2b4f6-61d7-4fc3-9b47-0f863b3f98d9\", \n\t\t\t\"rowId\": 38094560142174620000, \n\t\t\t\"name\": \"Refined Plastic Cheese\", \n\t\t\t\"root\": \"9hmu6kf3raxuo0fej1y08n0jv1qgr4p3e57s7l47pat4yq3n03v496xlrzy65p7\", \n\t\t\t\"sort\": 5584, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2e3c43e3-cf5a-46ae-81a1-e48ce6dee1cc\", \n\t\t\t\"rowId\": 10010630161281223000, \n\t\t\t\"name\": \"Intelligent Steel Bacon\", \n\t\t\t\"root\": \"fc973n6eejkj4rlrij8pvwlp92unfzvafuovhsq4zfzpgbhp03gdjaiemv15rkc\", \n\t\t\t\"sort\": 3118, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9cef73c2-f86d-4dea-9865-3ab2419a7d1b\", \n\t\t\t\"rowId\": 69836634725246020000, \n\t\t\t\"name\": \"Licensed Cotton Ball\", \n\t\t\t\"root\": \"zxl92016mim9agn6362rf2tpu45eprfvkxcmgssueilou5uddw1vtzhsnrug1bb\", \n\t\t\t\"sort\": 5908, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5ddcf3ac-6a40-4cac-8e25-adee811928ec\", \n\t\t\t\"rowId\": 82263709665608860000, \n\t\t\t\"name\": \"Gorgeous Steel Gloves\", \n\t\t\t\"root\": \"g9szoggefv9y31bjblyg8w2c9vnb13b4c7tbrjul7rx981e9er2y5f467oclsc4\", \n\t\t\t\"sort\": 5164, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"cd081528-025a-4ddd-83ec-8f54e93e1480\", \n\t\t\t\"rowId\": 57647214086042250000, \n\t\t\t\"name\": \"Awesome Fresh Mouse\", \n\t\t\t\"root\": \"y3yqid9tp4t11n0g75zlffudf0dmiuv58966lj86qlccayqi6yqjm1475dxl2ia\", \n\t\t\t\"sort\": 8907, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e30faa71-bba2-4975-ba53-ac8d8bbd70f0\", \n\t\t\t\"rowId\": 74975160200846300000, \n\t\t\t\"name\": \"Handcrafted Soft Shoes\", \n\t\t\t\"root\": \"4de7a2fpqa3ce7l0x0tkkpy4e5vzpmq2gsuc5wrfwbernboz1t5ph5rm93crk56\", \n\t\t\t\"sort\": 6287, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fb0fb187-3260-46af-b355-962b2335a2ec\", \n\t\t\t\"rowId\": 14428029191190557000, \n\t\t\t\"name\": \"Handcrafted Frozen Salad\", \n\t\t\t\"root\": \"kh8szz7jt4my7caksbo9aslsd65v1p9v0f5eq8d77lc8w7fq32f27hqhmhrm6ua\", \n\t\t\t\"sort\": 2891, \n\t\t\t\"isActive\": true\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamPaginateBoundedContexts",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateBoundedContexts (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamGetBoundedContexts",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tiamGetBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamFindBoundedContext",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tiamFindBoundedContext (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamFindBoundedContextById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\tiamFindBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamUpdateBoundedContext",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:IamUpdateBoundedContextInput!)\n{\n\tiamUpdateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 77855188525319650000, \n\t\t\"name\": \"Tasty Plastic Bacon\", \n\t\t\"root\": \"vw70mib39hecgz31ev8qov3mtp6lrh9s9mog4wtj52wffd8u43k40hq6fz10se1\", \n\t\t\"sort\": 3973, \n\t\t\"isActive\": false\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamDeleteBoundedContextById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\tiamDeleteBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamDeleteBoundedContexts",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - iam/bounded-context/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:IamCreateBoundedContextInput!)\n{\n\tiamCreateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Tasty Soft Soap\", \n\t\t\"root\": \"brvty85hx85yo8sjmwieznbe9em29xjvmgh5obaabswfpx7nhk76u9s0omvwlbt\", \n\t\t\"sort\": 6484, \n\t\t\"isActive\": false\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 56332093222785900000, \n\t\"name\": \"Handmade Frozen Mouse\", \n\t\"root\": \"rm9rxcpjgv4qr1jafte0tynur981m1njko3tmpyz0hhx1u94ii69rh97pkgy0jf\", \n\t\"sort\": 1877, \n\t\"isActive\": false\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-context/create",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "bounded-context", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamCreateBoundedContexts",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:[IamCreateBoundedContextInput]!)\n{\n\tiamCreateBoundedContexts (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"6c1a5771-556c-4b02-9452-f1a846099499\", \n\t\t\t\"name\": \"Rustic Metal Fish\", \n\t\t\t\"root\": \"x2e7engucugmr1v7dznlha5oy9o9wz0wk2g2ptvumy1tq3t4ghg539lgchdyzsm\", \n\t\t\t\"sort\": 8158, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b2374bdc-2a19-41ed-b946-3d02722ed238\", \n\t\t\t\"name\": \"Generic Steel Chair\", \n\t\t\t\"root\": \"i1jw2iewf40q91f3twpkvycsxdkggn185ind7qhgtswawz9m31n1xqsjgbjpuxx\", \n\t\t\t\"sort\": 8045, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f475b166-49e5-4064-a2cd-235ed65a4dcc\", \n\t\t\t\"name\": \"Small Wooden Fish\", \n\t\t\t\"root\": \"o0sixu0h82x8d90l7m6lke0jzhswjo7afftaomwmjnx0q6pajwduj37otncrxuv\", \n\t\t\t\"sort\": 4278, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8069f47b-41bd-4c6f-a227-fd4546bc1eee\", \n\t\t\t\"name\": \"Sleek Steel Car\", \n\t\t\t\"root\": \"i07dqlmituipm2z9w74xmitof1vhtmuhkfxacorkpiel2a3ov0gm1rf1wb2vavx\", \n\t\t\t\"sort\": 1190, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"96606756-bc9b-44d9-9313-11ace94518d8\", \n\t\t\t\"name\": \"Gorgeous Plastic Chips\", \n\t\t\t\"root\": \"qh6fxoupdlb69fuohcgvo7eyg5h9jpvdr0xjcm7oopia2l3jxxp2syai2g8sf3f\", \n\t\t\t\"sort\": 4038, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"af52aeb3-2e33-475b-abcd-cb25a3d2f0bd\", \n\t\t\t\"name\": \"Fantastic Fresh Computer\", \n\t\t\t\"root\": \"6gwj5tp66q06454o54o17qkbxqtiwqjg65xidkq91mq29mh82lhp5o305ayz6po\", \n\t\t\t\"sort\": 7285, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9dad2b61-670b-4be9-a51d-f71a9ef0b4f9\", \n\t\t\t\"name\": \"Tasty Metal Keyboard\", \n\t\t\t\"root\": \"kk0ay7abxy0r2eecx9cs1zkht6uk5i0cnwc6g2ygy5cfu3k38al1x44q8by64rn\", \n\t\t\t\"sort\": 6603, \n\t\t\t\"isActive\": false\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"09f5c766-9c57-4897-aa80-ce64bd2cdc8f\", \n\t\t\t\"name\": \"Intelligent Frozen Chicken\", \n\t\t\t\"root\": \"9cewjyxjspnyijibda86l141ghzovux5i5uc1yv8bo882trcplsy0t591h77quo\", \n\t\t\t\"sort\": 4641, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"de506665-bd2a-4cbb-a441-de1a2424f779\", \n\t\t\t\"name\": \"Unbranded Cotton Table\", \n\t\t\t\"root\": \"8kjllsm13n6ajb2wlap1xuycegyy67xhqlqz3uvbzb9teb08245ikgbhy6jy46d\", \n\t\t\t\"sort\": 4377, \n\t\t\t\"isActive\": true\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"492e2acf-c772-4052-8ae7-6d284638bd75\", \n\t\t\t\"name\": \"Ergonomic Fresh Chicken\", \n\t\t\t\"root\": \"mc2285jtsbgh6xg7rv18prplgmcpdojszgpfoh8muuhhqa7b14iybnpn2qw8ij5\", \n\t\t\t\"sort\": 7545, \n\t\t\t\"isActive\": false\n\t\t}\n\t]\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamPaginateBoundedContexts",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/bounded-contexts/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateBoundedContexts (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"9bae40dd-22c9-4d0d-b342-b95cfdeb5a87\", \n\t\t\"rowId\": 56707173730036870000, \n\t\t\"name\": \"Tasty Cotton Pizza\", \n\t\t\"root\": \"6dr46likyp84moppex967367pkkvybc7dkjglbvb8hvm4pjabizsdndabde3i6r\", \n\t\t\"sort\": 3858, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"4ea20976-b155-4cdb-9e55-302e5f9533be\", \n\t\t\"rowId\": 18083531701629220000, \n\t\t\"name\": \"Ergonomic Steel Soap\", \n\t\t\"root\": \"y8hys2qq2a8w0gr5rx4d9j1fwe5w2expxtxi3t0zb377o27ungqkobxfilb8n00\", \n\t\t\"sort\": 1258, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"3b0a8262-0ffc-43c8-9ab0-382f0d7608ff\", \n\t\t\"rowId\": 48353748780711950000, \n\t\t\"name\": \"Generic Rubber Chicken\", \n\t\t\"root\": \"v6uh20zi6cyhcxfnh8vuyc8xdvw97offpffe5gil19enmmervxo9gg9texsch62\", \n\t\t\"sort\": 3828, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"4e1e3e59-498b-4be2-80cc-81b8c1f28b76\", \n\t\t\"rowId\": 31299378954491134000, \n\t\t\"name\": \"Handcrafted Rubber Chips\", \n\t\t\"root\": \"sndt72nli3jz5jmos8utc73di4lz0dubp51hiyonowlkpkscgmb6auvm35bcpks\", \n\t\t\"sort\": 2823, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"248d0f26-d9f3-4777-98ff-98824163465b\", \n\t\t\"rowId\": 72437381396647970000, \n\t\t\"name\": \"Sleek Granite Soap\", \n\t\t\"root\": \"gdodxbutzgtnwubnvc1rjyj1l5zlpqcn85lghtkfmniuwt7dldfgv2ohbr7480e\", \n\t\t\"sort\": 1614, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"16c07211-1ae7-49b2-9e54-c4fb2f07ddd1\", \n\t\t\"rowId\": 63863233367689180000, \n\t\t\"name\": \"Generic Wooden Bacon\", \n\t\t\"root\": \"h8ez1zcarx9ttaz4tw2yzdfjqfsloqrh21z75e3853uao0zlz2ikpw4kmedc3jg\", \n\t\t\"sort\": 4150, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"b1a1b0dd-208b-46c6-b390-93ff634722f2\", \n\t\t\"rowId\": 61884890706278150000, \n\t\t\"name\": \"Fantastic Metal Chicken\", \n\t\t\"root\": \"oz5ot2rqsjeaofllz9kw2kmoi7i5q1msosyt3cosswzzwh40kla9h1udj27quo5\", \n\t\t\"sort\": 3042, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"2a97755d-0a95-4da0-a46b-649dcb8b2442\", \n\t\t\"rowId\": 69354045447397100000, \n\t\t\"name\": \"Intelligent Soft Bacon\", \n\t\t\"root\": \"7xzhxlroluprq31912brr2dxts7ye5qkxtbfynufynm9j4k3k0ongy9j5e3ucdp\", \n\t\t\"sort\": 2035, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"34889ef3-4e44-4294-93cb-540c8267b1af\", \n\t\t\"rowId\": 89763546070789640000, \n\t\t\"name\": \"Tasty Metal Salad\", \n\t\t\"root\": \"mcamcdriy3fb71fv3xpaq5ve5eo2nfsq8x4eri2t7pn3njlhcge2pglj3we8amy\", \n\t\t\"sort\": 4360, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"ecdea2a2-80c0-41f5-8edf-246a470db4c3\", \n\t\t\"rowId\": 66996449357346770000, \n\t\t\"name\": \"Awesome Soft Bacon\", \n\t\t\"root\": \"09a4d9ubtp5th34u2iyk78u0o2de4y8x3t54udnrfaz8wpuwaf9vwqfiqhkk3ps\", \n\t\t\"sort\": 8216, \n\t\t\"isActive\": false\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-contexts/create",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "bounded-contexts", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamGetBoundedContexts",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/bounded-contexts/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamGetBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-contexts/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "bounded-contexts", "paginate"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamFindBoundedContext",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/bounded-contexts/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamFindBoundedContext (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-contexts/get",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "bounded-contexts", "get"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamFindBoundedContextById",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/bounded-context/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($id:ID)\n{\n\tiamFindBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-context/find",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "bounded-context", "find"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamUpdateBoundedContext",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/bounded-context/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:IamUpdateBoundedContextInput!)\n{\n\tiamUpdateBoundedContext (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Practical Cotton Computer\", \n\t\t\"root\": \"brzr3zn7je6l2hgqm8vntid01ss06lv8rjc5dzv0anoittsryyntcywcmi9k15n\", \n\t\t\"sort\": 2354, \n\t\t\"isActive\": true\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamDeleteBoundedContextById",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\tiamDeleteBoundedContextById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamDeleteBoundedContexts",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteBoundedContexts (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\troot\n\t\tsort\n\t\tisActive\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/bounded-context/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Sleek Concrete Gloves\", \n\t\"root\": \"m51coiqqzp4zte7qdwdkqfkcfb5shoix3bj345aa69u7qq3u94ujlib6vubt3x7\", \n\t\"sort\": 4180, \n\t\"isActive\": true\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-context/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"bounded-context",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/bounded-contexts/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"209aa806-89fe-4b54-88bf-81edc091d545\", \n\t\t\"name\": \"Small Concrete Towels\", \n\t\t\"root\": \"xayh3trzk4xyv5en6y25iwfkv2y1zy03xmworefejikygd9afcd2ko7c6kpys83\", \n\t\t\"sort\": 5622, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"6122302a-7d27-4923-9383-607378daf3b3\", \n\t\t\"name\": \"Refined Steel Soap\", \n\t\t\"root\": \"i1da6z9rdpo1t3i6znrk0b2xbycsrhdi0js6vlbzk0tdd3v7e3n28e5kdj0hbt7\", \n\t\t\"sort\": 9638, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"1941b32b-e63e-4f11-95b3-3c27a5bf2029\", \n\t\t\"name\": \"Handcrafted Concrete Ball\", \n\t\t\"root\": \"8li4qtaqi2gsp3vy5ujz6c1sn0xww8wvctoi3pzscjc1w8l034n56s468vh0hrd\", \n\t\t\"sort\": 3324, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"52ce7a90-b891-4860-8e0b-81bc6ab53fb6\", \n\t\t\"name\": \"Handcrafted Granite Chips\", \n\t\t\"root\": \"7lmnkj994an0y54g81gdrw5p4sgpx9m4620b2onctzdfm35gyozvq0dc7mgyeb9\", \n\t\t\"sort\": 3076, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"e02cf24b-f09f-429d-bcda-dffa98899e68\", \n\t\t\"name\": \"Small Granite Shoes\", \n\t\t\"root\": \"phics5lyuc11q3swgy7gjepubs2zy2dnkm54zvy71mb1j9yo0w3bp80fd4to8sa\", \n\t\t\"sort\": 9422, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"cab5e768-1c10-4e0c-badd-9e5e5ead4954\", \n\t\t\"name\": \"Refined Plastic Tuna\", \n\t\t\"root\": \"3prhu0b6lxkm2ptod28ao8mp811ziyw6f65c0vrg84r3jvctmj6jykqsckxw4vt\", \n\t\t\"sort\": 6136, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"c19ad92a-a336-478d-b138-a120b633ed55\", \n\t\t\"name\": \"Incredible Wooden Table\", \n\t\t\"root\": \"ro5zjic7unl1upgsnfy9sz343574zhsielwbq03m69gpwsyestqxz9ou5f61c8b\", \n\t\t\"sort\": 3782, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"ca2a013e-d99a-4ec0-a077-930d1df65ead\", \n\t\t\"name\": \"Refined Steel Cheese\", \n\t\t\"root\": \"5dehy79rwq0povsuawybkc42nkow5eh41qeujk89j3ypw4p8wjynvv8gxihwz8i\", \n\t\t\"sort\": 2893, \n\t\t\"isActive\": false\n\t}, \n\t{\n\t\t\"id\": \"823e3b3c-4252-4758-bdca-47b4fe33b2fc\", \n\t\t\"name\": \"Handmade Wooden Bike\", \n\t\t\"root\": \"9ir6joa6427z557hjjedvxc03hrbugu5nl24x1w3mpkjy2s68tfxkdly1oc2taa\", \n\t\t\"sort\": 9447, \n\t\t\"isActive\": true\n\t}, \n\t{\n\t\t\"id\": \"7bc432ba-8f5d-4fec-b810-d0312324ca38\", \n\t\t\"name\": \"Practical Metal Chicken\", \n\t\t\"root\": \"xq6qsuabxgxel4h927nz8lr6f25g9ubysboarvaj81l13hbbq5gn3kwq4jte7v7\", \n\t\t\"sort\": 9354, \n\t\t\"isActive\": false\n\t}\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-contexts/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"bounded-contexts",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/bounded-contexts/paginate",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-contexts/paginate",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-                        "bounded-contexts",
-                        "paginate"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/bounded-contexts/get",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-contexts/get",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"bounded-contexts",
-                        "get"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/bounded-context/find",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-context/find",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"bounded-context",
-                        "find"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/bounded-context/find/{id}",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-context/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"bounded-context",
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-context/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "iam",
+                        "bounded-context",
                         "find",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - iam/bounded-context/update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handmade Soft Shirt\", \n\t\"root\": \"ryqeroef4j5i73ek3ij1pc80zvs6uua95igz01h9ju6x5blzoifnbz8sab4ejc2\", \n\t\"sort\": 3884, \n\t\"isActive\": false\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-context/update",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"bounded-context",
-                        "update"
-					]
-				}
-			},
-			"response": []
+            "name": "REST - iam/bounded-context/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 13175557371631845000, \n\t\"name\": \"Awesome Cotton Pizza\", \n\t\"root\": \"vf86bgi9v8i3knr46uldxc1idz0kwjg99h2gc4a70r9waz586szi5s2o1703z50\", \n\t\"sort\": 2158, \n\t\"isActive\": false\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-context/update",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "bounded-context", "update"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - iam/bounded-context/delete/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-context/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"bounded-context",
+            "name": "REST - iam/bounded-context/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-context/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "iam",
+                        "bounded-context",
                         "delete",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
-		},
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
         {
-			"name": "REST - iam/bounded-contexts/delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/bounded-contexts/delete",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"bounded-contexts",
-                        "delete"
-					]
-				}
-			},
-			"response": []
-		}
+            "name": "REST - iam/bounded-contexts/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/bounded-contexts/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "bounded-contexts", "delete"]
+                }
+            },
+            "response": []
+        }
     ],
     "variable": [
-		{
-			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-			"key": "URL",
-			"value": "http://localhost:8080",
-			"type": "string"
-		}
-	]
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
 }

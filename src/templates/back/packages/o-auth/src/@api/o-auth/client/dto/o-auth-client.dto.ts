@@ -4,103 +4,107 @@ import { OAuthAccessTokenDto } from '@api/o-auth/access-token';
 import { OAuthApplicationDto } from '@api/o-auth/application';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class OAuthClientDto
-{
+export class OAuthClientDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'id [input here api field description]',
     })
     id: string;
 
     @ApiProperty({
-        enum       : OAuthClientGrantType,
+        type: Number,
+        description: 'rowId [input here api field description]',
+    })
+    rowId: number;
+
+    @ApiProperty({
+        enum: OAuthClientGrantType,
         description: 'grantType [input here api field description]',
     })
     grantType: OAuthClientGrantType;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'name [input here api field description]',
     })
     name: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'secret [input here api field description]',
     })
     secret: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'authUrl [input here api field description]',
     })
     authUrl?: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'redirect [input here api field description]',
     })
     redirect?: string;
 
     @ApiProperty({
-        type       : Object,
+        type: Object,
         description: 'scopeOptions [input here api field description]',
     })
     scopeOptions?: any;
 
     @ApiProperty({
-        type       : Number,
+        type: Number,
         description: 'expiredAccessToken [input here api field description]',
     })
     expiredAccessToken?: number;
 
     @ApiProperty({
-        type       : Number,
+        type: Number,
         description: 'expiredRefreshToken [input here api field description]',
     })
     expiredRefreshToken?: number;
 
     @ApiProperty({
-        type       : Boolean,
+        type: Boolean,
         description: 'isActive [input here api field description]',
-        example    : true,
+        example: true,
     })
     isActive: boolean;
 
     @ApiProperty({
-        type       : Boolean,
+        type: Boolean,
         description: 'isMaster [input here api field description]',
     })
     isMaster: boolean;
 
     @ApiProperty({
-        type       : () => [OAuthApplicationDto],
+        type: () => [OAuthApplicationDto],
         description: 'applications [input here api field description]',
     })
     applications?: OAuthApplicationDto[];
 
     @ApiProperty({
-        type       : () => [OAuthAccessTokenDto],
+        type: () => [OAuthAccessTokenDto],
         description: 'accessTokens [input here api field description]',
     })
     accessTokens?: OAuthAccessTokenDto[];
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'createdAt [input here api field description]',
     })
     createdAt?: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'updatedAt [input here api field description]',
     })
     updatedAt?: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'deletedAt [input here api field description]',
     })
     deletedAt?: string;
-
 }

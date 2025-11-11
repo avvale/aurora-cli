@@ -1,51 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IamUpdateTenantsInput } from '@api/graphql';
-import { IamUpdateTenantsHandler, IamUpdateTenantsResolver } from '@api/iam/tenant';
+import {
+    IamUpdateTenantsHandler,
+    IamUpdateTenantsResolver,
+} from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateTenantsResolver', () =>
-{
+describe('IamUpdateTenantsResolver', () => {
     let resolver: IamUpdateTenantsResolver;
     let handler: IamUpdateTenantsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateTenantsResolver,
                 {
-                    provide : IamUpdateTenantsHandler,
+                    provide: IamUpdateTenantsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamUpdateTenantsResolver>(IamUpdateTenantsResolver);
+        resolver = module.get<IamUpdateTenantsResolver>(
+            IamUpdateTenantsResolver,
+        );
         handler = module.get<IamUpdateTenantsHandler>(IamUpdateTenantsHandler);
     });
 
-    test('IamUpdateTenantsResolver should be defined', () =>
-    {
+    test('IamUpdateTenantsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateTenantsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateTenantsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a tenants updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
-            expect(await resolver.main(<IamUpdateTenantsInput>iamMockTenantData[0])).toBe(iamMockTenantData[0]);
+        test('should return a tenants updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
+            expect(
+                await resolver.main(
+                    <IamUpdateTenantsInput>iamMockTenantData[0],
+                ),
+            ).toBe(iamMockTenantData[0]);
         });
     });
 });

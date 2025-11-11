@@ -3,14 +3,12 @@ import { IamDeleteRolesService } from '@app/iam/role/application/delete/iam-dele
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamDeleteRolesCommand)
-export class IamDeleteRolesCommandHandler implements ICommandHandler<IamDeleteRolesCommand>
+export class IamDeleteRolesCommandHandler
+    implements ICommandHandler<IamDeleteRolesCommand>
 {
-    constructor(
-        private readonly deleteRolesService: IamDeleteRolesService,
-    ) {}
+    constructor(private readonly deleteRolesService: IamDeleteRolesService) {}
 
-    async execute(command: IamDeleteRolesCommand): Promise<void>
-    {
+    async execute(command: IamDeleteRolesCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteRolesService.main(
             command.queryStatement,

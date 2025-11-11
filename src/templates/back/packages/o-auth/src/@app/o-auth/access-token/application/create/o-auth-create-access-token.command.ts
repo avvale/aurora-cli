@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthCreateAccessTokenCommand
-{
+export class OAuthCreateAccessTokenCommand {
     constructor(
         public readonly payload: {
             id: string;

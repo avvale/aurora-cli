@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreateBoundedContextsCommand
-{
+export class IamCreateBoundedContextsCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -9,7 +8,7 @@ export class IamCreateBoundedContextsCommand
             root: string;
             sort?: number;
             isActive: boolean;
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

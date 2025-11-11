@@ -2,8 +2,6 @@ import { OAuthClient, OAuthIClientRepository } from '@app/o-auth/client';
 import {
     OAuthClientApplicationIds,
     OAuthClientAuthUrl,
-    OAuthClientCreatedAt,
-    OAuthClientDeletedAt,
     OAuthClientExpiredAccessToken,
     OAuthClientExpiredRefreshToken,
     OAuthClientGrantType,
@@ -21,8 +19,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class OAuthUpdateClientByIdService
-{
+export class OAuthUpdateClientByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: OAuthIClientRepository,
@@ -45,11 +42,11 @@ export class OAuthUpdateClientByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const client = OAuthClient.register(
             payload.id,
+            undefined, // rowId
             payload.grantType,
             payload.name,
             payload.secret,
@@ -67,21 +64,19 @@ export class OAuthUpdateClientByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            client,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(client, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const clientRegister = this.publisher.mergeObjectContext(
-            client,
-        );
+        const clientRegister = this.publisher.mergeObjectContext(client);
 
-        clientRegister.updated(client); // apply event to model events
+        clientRegister.updated({
+            payload: client,
+            cQMetadata,
+        }); // apply event to model events
         clientRegister.commit(); // commit all events of model
     }
 }

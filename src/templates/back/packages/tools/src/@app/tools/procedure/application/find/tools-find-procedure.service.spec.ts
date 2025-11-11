@@ -1,16 +1,22 @@
-import { ToolsIProcedureRepository, ToolsMockProcedureRepository } from '@app/tools/procedure';
+import {
+    ToolsIProcedureRepository,
+    ToolsMockProcedureRepository,
+} from '@app/tools/procedure';
 import { ToolsFindProcedureService } from '@app/tools/procedure/application/find/tools-find-procedure.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsFindProcedureService', () =>
-{
+describe('ToolsFindProcedureService', () => {
     let service: ToolsFindProcedureService;
     let repository: ToolsIProcedureRepository;
     let mockRepository: ToolsMockProcedureRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,31 +26,36 @@ describe('ToolsFindProcedureService', () =>
                 ToolsFindProcedureService,
                 ToolsMockProcedureRepository,
                 {
-                    provide : ToolsIProcedureRepository,
+                    provide: ToolsIProcedureRepository,
                     useValue: {
-                        find: () => { /**/ },
+                        find: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(ToolsFindProcedureService);
         repository = module.get(ToolsIProcedureRepository);
         mockRepository = module.get(ToolsMockProcedureRepository);
     });
 
-    describe('main', () =>
-    {
-        test('ToolsFindProcedureService should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsFindProcedureService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should find procedure', async () =>
-        {
-            jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main()).toBe(mockRepository.collectionSource[0]);
+        test('should find procedure', async () => {
+            jest.spyOn(repository, 'find').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
+            expect(await service.main()).toBe(
+                mockRepository.collectionSource[0],
+            );
         });
     });
 });

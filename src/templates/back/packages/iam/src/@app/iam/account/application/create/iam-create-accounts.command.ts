@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreateAccountsCommand
-{
+export class IamCreateAccountsCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -19,7 +18,7 @@ export class IamCreateAccountsCommand
             meta?: any;
             roleIds?: string[];
             tenantIds?: string[];
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

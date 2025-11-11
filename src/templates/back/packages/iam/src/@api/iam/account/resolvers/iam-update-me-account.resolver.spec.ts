@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamUpdateMeAccountHandler } from '../handlers/iam-update-me-account.handler';
 import { IamUpdateMeAccountResolver } from './iam-update-me-account.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateMeAccountResolver', () =>
-{
+describe('IamUpdateMeAccountResolver', () => {
     let resolver: IamUpdateMeAccountResolver;
     let handler: IamUpdateMeAccountHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateMeAccountResolver,
                 {
-                    provide : IamUpdateMeAccountHandler,
+                    provide: IamUpdateMeAccountHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamUpdateMeAccountResolver>(IamUpdateMeAccountResolver);
-        handler = module.get<IamUpdateMeAccountHandler>(IamUpdateMeAccountHandler);
+        resolver = module.get<IamUpdateMeAccountResolver>(
+            IamUpdateMeAccountResolver,
+        );
+        handler = module.get<IamUpdateMeAccountHandler>(
+            IamUpdateMeAccountHandler,
+        );
     });
 
-    test('IamUpdateMeAccountResolver should be defined', () =>
-    {
+    test('IamUpdateMeAccountResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateMeAccountResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateMeAccountResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

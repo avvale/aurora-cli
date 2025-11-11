@@ -1,45 +1,47 @@
-import { ToolsDeleteMigrationsController, ToolsDeleteMigrationsHandler } from '@api/tools/migration';
+import {
+    ToolsDeleteMigrationsController,
+    ToolsDeleteMigrationsHandler,
+} from '@api/tools/migration';
 import { toolsMockMigrationData } from '@app/tools/migration';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDeleteMigrationsController', () =>
-{
+describe('ToolsDeleteMigrationsController', () => {
     let controller: ToolsDeleteMigrationsController;
     let handler: ToolsDeleteMigrationsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                ToolsDeleteMigrationsController,
-            ],
+            imports: [],
+            controllers: [ToolsDeleteMigrationsController],
             providers: [
                 {
-                    provide : ToolsDeleteMigrationsHandler,
+                    provide: ToolsDeleteMigrationsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<ToolsDeleteMigrationsController>(ToolsDeleteMigrationsController);
-        handler = module.get<ToolsDeleteMigrationsHandler>(ToolsDeleteMigrationsHandler);
+        controller = module.get<ToolsDeleteMigrationsController>(
+            ToolsDeleteMigrationsController,
+        );
+        handler = module.get<ToolsDeleteMigrationsHandler>(
+            ToolsDeleteMigrationsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDeleteMigrationsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDeleteMigrationsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an toolsMockMigrationData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData)));
+        test('should return an toolsMockMigrationData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(toolsMockMigrationData)),
+            );
             expect(await controller.main()).toBe(toolsMockMigrationData);
         });
     });

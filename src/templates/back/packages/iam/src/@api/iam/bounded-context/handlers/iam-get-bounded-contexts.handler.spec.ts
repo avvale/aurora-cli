@@ -4,55 +4,51 @@ import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamGetBoundedContextsHandler', () =>
-{
+describe('IamGetBoundedContextsHandler', () => {
     let handler: IamGetBoundedContextsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamGetBoundedContextsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamGetBoundedContextsHandler>(IamGetBoundedContextsHandler);
+        handler = module.get<IamGetBoundedContextsHandler>(
+            IamGetBoundedContextsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamGetBoundedContextsHandler should be defined', () =>
-    {
+    test('IamGetBoundedContextsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamGetBoundedContextsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamGetBoundedContextsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a iamMockBoundedContextData', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockBoundedContextData);
+        test('should return a iamMockBoundedContextData', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockBoundedContextData),
+                    ),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                iamMockBoundedContextData,
+            );
         });
     });
 });

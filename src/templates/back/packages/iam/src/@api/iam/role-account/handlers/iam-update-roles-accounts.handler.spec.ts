@@ -5,53 +5,56 @@ import { iamMockRoleAccountData } from '@app/iam/role-account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateRolesAccountsHandler', () =>
-{
+describe('IamUpdateRolesAccountsHandler', () => {
     let handler: IamUpdateRolesAccountsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateRolesAccountsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamUpdateRolesAccountsHandler>(IamUpdateRolesAccountsHandler);
+        handler = module.get<IamUpdateRolesAccountsHandler>(
+            IamUpdateRolesAccountsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamUpdateRolesAccountsHandler should be defined', () =>
-    {
+    test('IamUpdateRolesAccountsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateRolesAccountsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateRolesAccountsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a rolesAccounts updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleAccountData[0])));
+        test('should return a rolesAccounts updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockRoleAccountData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     <IamUpdateRolesAccountsInput>iamMockRoleAccountData[0],
@@ -59,8 +62,7 @@ describe('IamUpdateRolesAccountsHandler', () =>
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockRoleAccountData[0]);
+            ).toBe(iamMockRoleAccountData[0]);
         });
     });
 });

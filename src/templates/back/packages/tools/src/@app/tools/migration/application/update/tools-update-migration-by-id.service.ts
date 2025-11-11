@@ -1,7 +1,8 @@
-import { ToolsIMigrationRepository, ToolsMigration } from '@app/tools/migration';
 import {
-    ToolsMigrationCreatedAt,
-    ToolsMigrationDeletedAt,
+    ToolsIMigrationRepository,
+    ToolsMigration,
+} from '@app/tools/migration';
+import {
     ToolsMigrationDownScript,
     ToolsMigrationExecutedAt,
     ToolsMigrationId,
@@ -18,8 +19,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class ToolsUpdateMigrationByIdService
-{
+export class ToolsUpdateMigrationByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ToolsIMigrationRepository,
@@ -39,11 +39,11 @@ export class ToolsUpdateMigrationByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const migration = ToolsMigration.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.version,
             payload.isActive,
@@ -58,19 +58,14 @@ export class ToolsUpdateMigrationByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            migration,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(migration, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const migrationRegister = this.publisher.mergeObjectContext(
-            migration,
-        );
+        const migrationRegister = this.publisher.mergeObjectContext(migration);
 
         migrationRegister.updated({
             payload: migration,

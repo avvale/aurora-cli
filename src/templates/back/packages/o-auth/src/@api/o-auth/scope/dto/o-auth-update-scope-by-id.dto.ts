@@ -1,31 +1,29 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class OAuthUpdateScopeByIdDto
-{
+export class OAuthUpdateScopeByIdDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'id [input here api field description]',
     })
     id: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'code [input here api field description]',
-        example    : 'EDIT',
+        example: 'EDIT',
     })
     code?: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'name [input here api field description]',
     })
     name?: string;
 
     @ApiProperty({
-        type       : Array,
+        type: Array,
         description: 'roleIds [input here api field description]',
     })
     roleIds?: string[];
-
 }

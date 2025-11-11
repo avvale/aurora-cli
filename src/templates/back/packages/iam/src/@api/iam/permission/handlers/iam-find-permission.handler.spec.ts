@@ -4,55 +4,49 @@ import { iamMockPermissionData } from '@app/iam/permission';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindPermissionHandler', () =>
-{
+describe('IamFindPermissionHandler', () => {
     let handler: IamFindPermissionHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindPermissionHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamFindPermissionHandler>(IamFindPermissionHandler);
+        handler = module.get<IamFindPermissionHandler>(
+            IamFindPermissionHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamFindPermissionHandler should be defined', () =>
-    {
+    test('IamFindPermissionHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindPermissionHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindPermissionHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a permission', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockPermissionData[0]);
+        test('should return a permission', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(iamMockPermissionData[0])),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                iamMockPermissionData[0],
+            );
         });
     });
 });

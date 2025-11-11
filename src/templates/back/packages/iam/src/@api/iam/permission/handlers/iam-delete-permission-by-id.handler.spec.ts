@@ -4,56 +4,57 @@ import { iamMockPermissionData } from '@app/iam/permission';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeletePermissionByIdController', () =>
-{
+describe('IamDeletePermissionByIdController', () => {
     let handler: IamDeletePermissionByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeletePermissionByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamDeletePermissionByIdHandler>(IamDeletePermissionByIdHandler);
+        handler = module.get<IamDeletePermissionByIdHandler>(
+            IamDeletePermissionByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeletePermissionByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeletePermissionByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an permission deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+        test('should return an permission deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(iamMockPermissionData[0])),
+            );
             expect(
                 await handler.main(
                     iamMockPermissionData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockPermissionData[0]);
+            ).toBe(iamMockPermissionData[0]);
         });
     });
 });

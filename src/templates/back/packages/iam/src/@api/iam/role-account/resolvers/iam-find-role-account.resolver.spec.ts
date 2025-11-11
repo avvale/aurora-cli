@@ -1,49 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamFindRoleAccountHandler, IamFindRoleAccountResolver } from '@api/iam/role-account';
+import {
+    IamFindRoleAccountHandler,
+    IamFindRoleAccountResolver,
+} from '@api/iam/role-account';
 import { iamMockRoleAccountData } from '@app/iam/role-account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindRoleAccountResolver', () =>
-{
+describe('IamFindRoleAccountResolver', () => {
     let resolver: IamFindRoleAccountResolver;
     let handler: IamFindRoleAccountHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindRoleAccountResolver,
                 {
-                    provide : IamFindRoleAccountHandler,
+                    provide: IamFindRoleAccountHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamFindRoleAccountResolver>(IamFindRoleAccountResolver);
-        handler = module.get<IamFindRoleAccountHandler>(IamFindRoleAccountHandler);
+        resolver = module.get<IamFindRoleAccountResolver>(
+            IamFindRoleAccountResolver,
+        );
+        handler = module.get<IamFindRoleAccountHandler>(
+            IamFindRoleAccountHandler,
+        );
     });
 
-    test('IamFindRoleAccountResolver should be defined', () =>
-    {
+    test('IamFindRoleAccountResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindRoleAccountResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindRoleAccountResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a roleAccount', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockRoleAccountData[0])));
+        test('should return a roleAccount', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockRoleAccountData[0]),
+                    ),
+            );
             expect(await resolver.main()).toBe(iamMockRoleAccountData[0]);
         });
     });

@@ -3,40 +3,40 @@ import { OAuthDeleteApplicationsCommandHandler } from '@app/o-auth/application/a
 import { OAuthDeleteApplicationsService } from '@app/o-auth/application/application/delete/o-auth-delete-applications.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteApplicationsCommandHandler', () =>
-{
+describe('OAuthDeleteApplicationsCommandHandler', () => {
     let commandHandler: OAuthDeleteApplicationsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthDeleteApplicationsCommandHandler,
                 {
-                    provide : OAuthDeleteApplicationsService,
+                    provide: OAuthDeleteApplicationsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<OAuthDeleteApplicationsCommandHandler>(OAuthDeleteApplicationsCommandHandler);
+        commandHandler = module.get<OAuthDeleteApplicationsCommandHandler>(
+            OAuthDeleteApplicationsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteApplicationsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteApplicationsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new OAuthDeleteApplicationsCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(
+                    new OAuthDeleteApplicationsCommand(),
+                ),
+            ).toBe(undefined);
         });
     });
 });

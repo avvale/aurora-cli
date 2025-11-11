@@ -1,8 +1,11 @@
-import { OAuthDeletedApplicationEvent } from './o-auth-deleted-application.event';
+import { OAuthDeletedApplicationEvent } from '@app/o-auth/application';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthDeletedApplicationsEvent
-{
+export class OAuthDeletedApplicationsEvent {
     constructor(
-        public readonly applications: OAuthDeletedApplicationEvent[],
+        public readonly event: {
+            payload: OAuthDeletedApplicationEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

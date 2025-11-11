@@ -4,55 +4,58 @@ import { iamMockTenantAccountData } from '@app/iam/tenant-account';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTenantAccountHandler', () =>
-{
+describe('IamCreateTenantAccountHandler', () => {
     let handler: IamCreateTenantAccountHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreateTenantAccountHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamCreateTenantAccountHandler>(IamCreateTenantAccountHandler);
+        handler = module.get<IamCreateTenantAccountHandler>(
+            IamCreateTenantAccountHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTenantAccountHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTenantAccountHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an tenantAccount created', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantAccountData[0])));
+        test('should return an tenantAccount created', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockTenantAccountData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     iamMockTenantAccountData[0],
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockTenantAccountData[0]);
+            ).toBe(iamMockTenantAccountData[0]);
         });
     });
 });

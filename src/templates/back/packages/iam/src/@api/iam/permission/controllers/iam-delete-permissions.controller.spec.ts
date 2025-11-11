@@ -1,45 +1,47 @@
-import { IamDeletePermissionsController, IamDeletePermissionsHandler } from '@api/iam/permission';
+import {
+    IamDeletePermissionsController,
+    IamDeletePermissionsHandler,
+} from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeletePermissionsController', () =>
-{
+describe('IamDeletePermissionsController', () => {
     let controller: IamDeletePermissionsController;
     let handler: IamDeletePermissionsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamDeletePermissionsController,
-            ],
+            imports: [],
+            controllers: [IamDeletePermissionsController],
             providers: [
                 {
-                    provide : IamDeletePermissionsHandler,
+                    provide: IamDeletePermissionsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamDeletePermissionsController>(IamDeletePermissionsController);
-        handler = module.get<IamDeletePermissionsHandler>(IamDeletePermissionsHandler);
+        controller = module.get<IamDeletePermissionsController>(
+            IamDeletePermissionsController,
+        );
+        handler = module.get<IamDeletePermissionsHandler>(
+            IamDeletePermissionsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamDeletePermissionsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeletePermissionsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an iamMockPermissionData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData)));
+        test('should return an iamMockPermissionData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockPermissionData)),
+            );
             expect(await controller.main()).toBe(iamMockPermissionData);
         });
     });

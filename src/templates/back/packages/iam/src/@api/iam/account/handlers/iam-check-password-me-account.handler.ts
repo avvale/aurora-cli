@@ -4,8 +4,7 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamCheckPasswordMeAccountHandler
-{
+export class IamCheckPasswordMeAccountHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -14,12 +13,10 @@ export class IamCheckPasswordMeAccountHandler
     async main(
         account: IamAccountResponse,
         password: string,
-    ): Promise<boolean>
-    {
-        const user = await this.queryBus.ask(new IamFindUserByUsernamePasswordQuery(
-            account.username,
-            password,
-        ));
+    ): Promise<boolean> {
+        const user = await this.queryBus.ask(
+            new IamFindUserByUsernamePasswordQuery(account.username, password),
+        );
 
         return !!user;
     }

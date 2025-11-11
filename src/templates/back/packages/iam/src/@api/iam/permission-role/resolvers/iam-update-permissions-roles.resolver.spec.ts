@@ -1,51 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IamUpdatePermissionsRolesInput } from '@api/graphql';
-import { IamUpdatePermissionsRolesHandler, IamUpdatePermissionsRolesResolver } from '@api/iam/permission-role';
+import {
+    IamUpdatePermissionsRolesHandler,
+    IamUpdatePermissionsRolesResolver,
+} from '@api/iam/permission-role';
 import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdatePermissionsRolesResolver', () =>
-{
+describe('IamUpdatePermissionsRolesResolver', () => {
     let resolver: IamUpdatePermissionsRolesResolver;
     let handler: IamUpdatePermissionsRolesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdatePermissionsRolesResolver,
                 {
-                    provide : IamUpdatePermissionsRolesHandler,
+                    provide: IamUpdatePermissionsRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamUpdatePermissionsRolesResolver>(IamUpdatePermissionsRolesResolver);
-        handler = module.get<IamUpdatePermissionsRolesHandler>(IamUpdatePermissionsRolesHandler);
+        resolver = module.get<IamUpdatePermissionsRolesResolver>(
+            IamUpdatePermissionsRolesResolver,
+        );
+        handler = module.get<IamUpdatePermissionsRolesHandler>(
+            IamUpdatePermissionsRolesHandler,
+        );
     });
 
-    test('IamUpdatePermissionsRolesResolver should be defined', () =>
-    {
+    test('IamUpdatePermissionsRolesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdatePermissionsRolesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdatePermissionsRolesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a permissionsRoles updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionRoleData[0])));
-            expect(await resolver.main(<IamUpdatePermissionsRolesInput>iamMockPermissionRoleData[0])).toBe(iamMockPermissionRoleData[0]);
+        test('should return a permissionsRoles updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockPermissionRoleData[0]),
+                    ),
+            );
+            expect(
+                await resolver.main(
+                    <IamUpdatePermissionsRolesInput>(
+                        iamMockPermissionRoleData[0]
+                    ),
+                ),
+            ).toBe(iamMockPermissionRoleData[0]);
         });
     });
 });

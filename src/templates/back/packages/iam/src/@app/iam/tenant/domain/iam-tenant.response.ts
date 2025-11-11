@@ -1,9 +1,9 @@
 import { IamAccountResponse } from '@app/iam/account';
 
-export class IamTenantResponse
-{
+export class IamTenantResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly parentId: string,
         public readonly name: string,
         public readonly code: string,

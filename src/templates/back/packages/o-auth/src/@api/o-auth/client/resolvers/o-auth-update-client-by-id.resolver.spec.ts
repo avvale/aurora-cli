@@ -1,51 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { OAuthUpdateClientByIdInput } from '@api/graphql';
-import { OAuthUpdateClientByIdHandler, OAuthUpdateClientByIdResolver } from '@api/o-auth/client';
+import {
+    OAuthUpdateClientByIdHandler,
+    OAuthUpdateClientByIdResolver,
+} from '@api/o-auth/client';
 import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthUpdateClientByIdResolver', () =>
-{
+describe('OAuthUpdateClientByIdResolver', () => {
     let resolver: OAuthUpdateClientByIdResolver;
     let handler: OAuthUpdateClientByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthUpdateClientByIdResolver,
                 {
-                    provide : OAuthUpdateClientByIdHandler,
+                    provide: OAuthUpdateClientByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthUpdateClientByIdResolver>(OAuthUpdateClientByIdResolver);
-        handler = module.get<OAuthUpdateClientByIdHandler>(OAuthUpdateClientByIdHandler);
+        resolver = module.get<OAuthUpdateClientByIdResolver>(
+            OAuthUpdateClientByIdResolver,
+        );
+        handler = module.get<OAuthUpdateClientByIdHandler>(
+            OAuthUpdateClientByIdHandler,
+        );
     });
 
-    test('OAuthUpdateClientByIdResolver should be defined', () =>
-    {
+    test('OAuthUpdateClientByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthUpdateClientByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthUpdateClientByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a client by id updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
-            expect(await resolver.main(<OAuthUpdateClientByIdInput>oAuthMockClientData[0])).toBe(oAuthMockClientData[0]);
+        test('should return a client by id updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockClientData[0])),
+            );
+            expect(
+                await resolver.main(
+                    <OAuthUpdateClientByIdInput>oAuthMockClientData[0],
+                ),
+            ).toBe(oAuthMockClientData[0]);
         });
     });
 });

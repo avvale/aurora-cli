@@ -1,9 +1,12 @@
-import { OAuthAddApplicationsContextEvent, OAuthApplication, OAuthIApplicationRepository } from '@app/o-auth/application';
+import {
+    OAuthAddApplicationsContextEvent,
+    OAuthApplication,
+    OAuthIApplicationRepository,
+} from '@app/o-auth/application';
 import {
     OAuthApplicationClientIds,
     OAuthApplicationCode,
     OAuthApplicationCreatedAt,
-    OAuthApplicationDeletedAt,
     OAuthApplicationId,
     OAuthApplicationIsMaster,
     OAuthApplicationName,
@@ -15,8 +18,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class OAuthCreateApplicationsService
-{
+export class OAuthCreateApplicationsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: OAuthIApplicationRepository,
@@ -30,34 +32,35 @@ export class OAuthCreateApplicationsService
             secret: OAuthApplicationSecret;
             isMaster: OAuthApplicationIsMaster;
             clientIds: OAuthApplicationClientIds;
-        } [],
+        }[],
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
-        const aggregateApplications = payload.map(application => OAuthApplication.register(
-            application.id,
-            application.code,
-            application.name,
-            application.secret,
-            application.isMaster,
-            application.clientIds,
-            new OAuthApplicationCreatedAt({ currentTimestamp: true }),
-            new OAuthApplicationUpdatedAt({ currentTimestamp: true }),
-            null, // deleteAt
-        ));
+        const applications = payload.map((application) =>
+            OAuthApplication.register(
+                application.id,
+                undefined, // rowId
+                application.code,
+                application.name,
+                application.secret,
+                application.isMaster,
+                application.clientIds,
+                new OAuthApplicationCreatedAt({ currentTimestamp: true }),
+                new OAuthApplicationUpdatedAt({ currentTimestamp: true }),
+                null, // deleteAt
+            ),
+        );
 
         // insert
-        await this.repository.insert(
-            aggregateApplications,
-            {
-                insertOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.insert(applications, {
+            insertOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddApplicationsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const applicationsRegistered = this.publisher.mergeObjectContext(new OAuthAddApplicationsContextEvent(aggregateApplications));
+        const applicationsRegistered = this.publisher.mergeObjectContext(
+            new OAuthAddApplicationsContextEvent(applications, cQMetadata),
+        );
 
         applicationsRegistered.created(); // apply event to model events
         applicationsRegistered.commit(); // commit all events of model

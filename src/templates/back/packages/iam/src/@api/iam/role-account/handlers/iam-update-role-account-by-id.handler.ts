@@ -1,12 +1,23 @@
 import { IamRoleAccount, IamUpdateRoleAccountByIdInput } from '@api/graphql';
-import { IamRoleAccountDto, IamUpdateRoleAccountByIdDto } from '@api/iam/role-account';
-import { IamFindRoleAccountByIdQuery, IamUpdateRoleAccountByIdCommand } from '@app/iam/role-account';
-import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import {
+    IamRoleAccountDto,
+    IamUpdateRoleAccountByIdDto,
+} from '@api/iam/role-account';
+import {
+    IamFindRoleAccountByIdQuery,
+    IamUpdateRoleAccountByIdCommand,
+} from '@app/iam/role-account';
+import {
+    AuditingMeta,
+    diff,
+    ICommandBus,
+    IQueryBus,
+    QueryStatement,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamUpdateRoleAccountByIdHandler
-{
+export class IamUpdateRoleAccountByIdHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -17,41 +28,46 @@ export class IamUpdateRoleAccountByIdHandler
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRoleAccount | IamRoleAccountDto>
-    {
-        const roleAccount = await this.queryBus.ask(new IamFindRoleAccountByIdQuery(
-            payload.roleId,
-            payload.accountId,
-            constraint,
-            {
-                timezone,
-            },
-        ));
+    ): Promise<IamRoleAccount | IamRoleAccountDto> {
+        const roleAccount = await this.queryBus.ask(
+            new IamFindRoleAccountByIdQuery(
+                payload.roleId,
+                payload.accountId,
+                constraint,
+                {
+                    timezone,
+                },
+            ),
+        );
 
         const dataToUpdate = diff(payload, roleAccount);
 
-        await this.commandBus.dispatch(new IamUpdateRoleAccountByIdCommand(
-            {
-                ...dataToUpdate,
-                roleId: payload.roleId,
-                accountId: payload.accountId,
-            },
-            constraint,
-            {
-                timezone,
-                repositoryOptions: {
-                    auditing,
+        await this.commandBus.dispatch(
+            new IamUpdateRoleAccountByIdCommand(
+                {
+                    ...dataToUpdate,
+                    roleId: payload.roleId,
+                    accountId: payload.accountId,
                 },
-            },
-        ));
+                constraint,
+                {
+                    timezone,
+                    repositoryOptions: {
+                        auditing,
+                    },
+                },
+            ),
+        );
 
-        return await this.queryBus.ask(new IamFindRoleAccountByIdQuery(
-            payload.roleId,
-            payload.accountId,
-            constraint,
-            {
-                timezone,
-            },
-        ));
+        return await this.queryBus.ask(
+            new IamFindRoleAccountByIdQuery(
+                payload.roleId,
+                payload.accountId,
+                constraint,
+                {
+                    timezone,
+                },
+            ),
+        );
     }
 }

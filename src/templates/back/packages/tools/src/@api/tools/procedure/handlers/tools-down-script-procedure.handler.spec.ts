@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsDownScriptProcedureHandler } from './tools-down-script-procedure.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ToolsDownScriptProcedureHandler } from './tools-down-script-procedure.handler';
 
-describe('ToolsDownScriptProcedureHandler', () =>
-{
+describe('ToolsDownScriptProcedureHandler', () => {
     let handler: ToolsDownScriptProcedureHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsDownScriptProcedureHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<ToolsDownScriptProcedureHandler>(ToolsDownScriptProcedureHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<ToolsDownScriptProcedureHandler>(
+            ToolsDownScriptProcedureHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDownScriptProcedureHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDownScriptProcedureHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

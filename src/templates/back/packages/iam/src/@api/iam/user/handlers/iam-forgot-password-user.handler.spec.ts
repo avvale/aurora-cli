@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamForgotPasswordUserHandler } from './iam-forgot-password-user.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { IamForgotPasswordUserHandler } from './iam-forgot-password-user.handler';
 
-describe('IamForgotPasswordUserHandler', () =>
-{
+describe('IamForgotPasswordUserHandler', () => {
     let handler: IamForgotPasswordUserHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamForgotPasswordUserHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<IamForgotPasswordUserHandler>(IamForgotPasswordUserHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<IamForgotPasswordUserHandler>(
+            IamForgotPasswordUserHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamForgotPasswordUserHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamForgotPasswordUserHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

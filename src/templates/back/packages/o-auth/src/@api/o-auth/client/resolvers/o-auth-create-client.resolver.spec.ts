@@ -1,51 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { OAuthCreateClientInput } from '@api/graphql';
-import { OAuthCreateClientHandler, OAuthCreateClientResolver } from '@api/o-auth/client';
+import {
+    OAuthCreateClientHandler,
+    OAuthCreateClientResolver,
+} from '@api/o-auth/client';
 import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthCreateClientResolver', () =>
-{
+describe('OAuthCreateClientResolver', () => {
     let resolver: OAuthCreateClientResolver;
     let handler: OAuthCreateClientHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthCreateClientResolver,
                 {
-                    provide : OAuthCreateClientHandler,
+                    provide: OAuthCreateClientHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthCreateClientResolver>(OAuthCreateClientResolver);
-        handler = module.get<OAuthCreateClientHandler>(OAuthCreateClientHandler);
+        resolver = module.get<OAuthCreateClientResolver>(
+            OAuthCreateClientResolver,
+        );
+        handler = module.get<OAuthCreateClientHandler>(
+            OAuthCreateClientHandler,
+        );
     });
 
-    test('OAuthCreateClientResolver should be defined', () =>
-    {
+    test('OAuthCreateClientResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthCreateClientResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthCreateClientResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an client created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
-            expect(await resolver.main(<OAuthCreateClientInput>oAuthMockClientData[0])).toBe(oAuthMockClientData[0]);
+        test('should return an client created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockClientData[0])),
+            );
+            expect(
+                await resolver.main(
+                    <OAuthCreateClientInput>oAuthMockClientData[0],
+                ),
+            ).toBe(oAuthMockClientData[0]);
         });
     });
 });

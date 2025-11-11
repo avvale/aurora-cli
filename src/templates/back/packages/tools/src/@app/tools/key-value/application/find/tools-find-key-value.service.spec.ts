@@ -1,16 +1,22 @@
-import { ToolsIKeyValueRepository, ToolsMockKeyValueRepository } from '@app/tools/key-value';
+import {
+    ToolsIKeyValueRepository,
+    ToolsMockKeyValueRepository,
+} from '@app/tools/key-value';
 import { ToolsFindKeyValueService } from '@app/tools/key-value/application/find/tools-find-key-value.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsFindKeyValueService', () =>
-{
+describe('ToolsFindKeyValueService', () => {
     let service: ToolsFindKeyValueService;
     let repository: ToolsIKeyValueRepository;
     let mockRepository: ToolsMockKeyValueRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,31 +26,36 @@ describe('ToolsFindKeyValueService', () =>
                 ToolsFindKeyValueService,
                 ToolsMockKeyValueRepository,
                 {
-                    provide : ToolsIKeyValueRepository,
+                    provide: ToolsIKeyValueRepository,
                     useValue: {
-                        find: () => { /**/ },
+                        find: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(ToolsFindKeyValueService);
         repository = module.get(ToolsIKeyValueRepository);
         mockRepository = module.get(ToolsMockKeyValueRepository);
     });
 
-    describe('main', () =>
-    {
-        test('ToolsFindKeyValueService should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsFindKeyValueService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should find keyValue', async () =>
-        {
-            jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main()).toBe(mockRepository.collectionSource[0]);
+        test('should find keyValue', async () => {
+            jest.spyOn(repository, 'find').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
+            expect(await service.main()).toBe(
+                mockRepository.collectionSource[0],
+            );
         });
     });
 });

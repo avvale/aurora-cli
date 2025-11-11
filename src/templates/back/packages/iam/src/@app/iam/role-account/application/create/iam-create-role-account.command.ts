@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreateRoleAccountCommand
-{
+export class IamCreateRoleAccountCommand {
     constructor(
         public readonly payload: {
             roleId: string;

@@ -4,24 +4,17 @@ import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamFindAccountByIdService
-{
-    constructor(
-        private readonly repository: IamIAccountRepository,
-    ) {}
+export class IamFindAccountByIdService {
+    constructor(private readonly repository: IamIAccountRepository) {}
 
     async main(
         id: IamAccountId,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<IamAccount>
-    {
-        return await this.repository.findById(
-            id,
-            {
-                constraint,
-                cQMetadata,
-            },
-        );
+    ): Promise<IamAccount> {
+        return await this.repository.findById(id, {
+            constraint,
+            cQMetadata,
+        });
     }
 }

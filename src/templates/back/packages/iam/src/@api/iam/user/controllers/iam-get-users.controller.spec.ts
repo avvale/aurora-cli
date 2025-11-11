@@ -2,44 +2,39 @@ import { IamGetUsersController, IamGetUsersHandler } from '@api/iam/user';
 import { iamMockUserData } from '@app/iam/user';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamGetUsersController', () =>
-{
+describe('IamGetUsersController', () => {
     let controller: IamGetUsersController;
     let handler: IamGetUsersHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamGetUsersController,
-            ],
+            imports: [],
+            controllers: [IamGetUsersController],
             providers: [
                 {
-                    provide : IamGetUsersHandler,
+                    provide: IamGetUsersHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         controller = module.get<IamGetUsersController>(IamGetUsersController);
         handler = module.get<IamGetUsersHandler>(IamGetUsersHandler);
     });
 
-    describe('main', () =>
-    {
-        test('IamGetUsersController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamGetUsersController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a iamMockUserData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData)));
+        test('should return a iamMockUserData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockUserData)),
+            );
             expect(await controller.main()).toBe(iamMockUserData);
         });
     });

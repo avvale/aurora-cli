@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsRunScriptsMigrationHandler } from './tools-run-scripts-migration.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ToolsRunScriptsMigrationHandler } from './tools-run-scripts-migration.handler';
 
-describe('ToolsRunScriptsMigrationHandler', () =>
-{
+describe('ToolsRunScriptsMigrationHandler', () => {
     let handler: ToolsRunScriptsMigrationHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsRunScriptsMigrationHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<ToolsRunScriptsMigrationHandler>(ToolsRunScriptsMigrationHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<ToolsRunScriptsMigrationHandler>(
+            ToolsRunScriptsMigrationHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('ToolsRunScriptsMigrationHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsRunScriptsMigrationHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

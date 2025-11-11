@@ -1,9 +1,9 @@
 import { IamPermissionResponse } from '@app/iam/permission';
 
-export class IamBoundedContextResponse
-{
+export class IamBoundedContextResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly name: string,
         public readonly root: string,
         public readonly sort: number,

@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.accessToken.get')
-export class OAuthPaginateAccessTokensResolver
-{
-    constructor(
-        private readonly handler: OAuthPaginateAccessTokensHandler,
-    ) {}
+export class OAuthPaginateAccessTokensResolver {
+    constructor(private readonly handler: OAuthPaginateAccessTokensHandler) {}
 
     @Query('oAuthPaginateAccessTokens')
     async main(
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<Pagination>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<Pagination> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

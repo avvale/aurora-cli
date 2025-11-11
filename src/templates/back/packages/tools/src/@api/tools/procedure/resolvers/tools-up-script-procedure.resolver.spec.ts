@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { ToolsUpScriptProcedureHandler } from '../handlers/tools-up-script-procedure.handler';
 import { ToolsUpScriptProcedureResolver } from './tools-up-script-procedure.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsUpScriptProcedureResolver', () =>
-{
+describe('ToolsUpScriptProcedureResolver', () => {
     let resolver: ToolsUpScriptProcedureResolver;
     let handler: ToolsUpScriptProcedureHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsUpScriptProcedureResolver,
                 {
-                    provide : ToolsUpScriptProcedureHandler,
+                    provide: ToolsUpScriptProcedureHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsUpScriptProcedureResolver>(ToolsUpScriptProcedureResolver);
-        handler = module.get<ToolsUpScriptProcedureHandler>(ToolsUpScriptProcedureHandler);
+        resolver = module.get<ToolsUpScriptProcedureResolver>(
+            ToolsUpScriptProcedureResolver,
+        );
+        handler = module.get<ToolsUpScriptProcedureHandler>(
+            ToolsUpScriptProcedureHandler,
+        );
     });
 
-    test('ToolsUpScriptProcedureResolver should be defined', () =>
-    {
+    test('ToolsUpScriptProcedureResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsUpScriptProcedureResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsUpScriptProcedureResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

@@ -4,55 +4,46 @@ import { iamMockAccountData } from '@app/iam/account';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindAccountHandler', () =>
-{
+describe('IamFindAccountHandler', () => {
     let handler: IamFindAccountHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindAccountHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamFindAccountHandler>(IamFindAccountHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('IamFindAccountHandler should be defined', () =>
-    {
+    test('IamFindAccountHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindAccountHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindAccountHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a account', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockAccountData[0])));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockAccountData[0]);
+        test('should return a account', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockAccountData[0])),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                iamMockAccountData[0],
+            );
         });
     });
 });

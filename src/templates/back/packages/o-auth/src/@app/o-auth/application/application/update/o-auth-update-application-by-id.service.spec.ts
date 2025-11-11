@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthIApplicationRepository, oAuthMockApplicationData, OAuthMockApplicationRepository } from '@app/o-auth/application';
+import {
+    OAuthIApplicationRepository,
+    oAuthMockApplicationData,
+    OAuthMockApplicationRepository,
+} from '@app/o-auth/application';
 import { OAuthUpdateApplicationByIdService } from '@app/o-auth/application/application/update/o-auth-update-application-by-id.service';
 import {
     OAuthApplicationClientIds,
@@ -7,17 +11,21 @@ import {
     OAuthApplicationId,
     OAuthApplicationIsMaster,
     OAuthApplicationName,
+    OAuthApplicationRowId,
     OAuthApplicationSecret,
 } from '@app/o-auth/application/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthUpdateApplicationByIdService', () =>
-{
+describe('OAuthUpdateApplicationByIdService', () => {
     let service: OAuthUpdateApplicationByIdService;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -27,36 +35,49 @@ describe('OAuthUpdateApplicationByIdService', () =>
                 OAuthUpdateApplicationByIdService,
                 OAuthMockApplicationRepository,
                 {
-                    provide : OAuthIApplicationRepository,
+                    provide: OAuthIApplicationRepository,
                     useValue: {
-                        updateById: () => { /**/ },
+                        updateById: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthUpdateApplicationByIdService);
     });
 
-    describe('main', () =>
-    {
-        test('OAuthUpdateApplicationByIdService should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthUpdateApplicationByIdService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should update a application and emit event', async () =>
-        {
+        test('should update a application and emit event', async () => {
             expect(
                 await service.main(
                     {
-                        id: new OAuthApplicationId(oAuthMockApplicationData[0].id),
-                        code: new OAuthApplicationCode(oAuthMockApplicationData[0].code),
-                        name: new OAuthApplicationName(oAuthMockApplicationData[0].name),
-                        secret: new OAuthApplicationSecret(oAuthMockApplicationData[0].secret),
-                        isMaster: new OAuthApplicationIsMaster(oAuthMockApplicationData[0].isMaster),
-                        clientIds: new OAuthApplicationClientIds(oAuthMockApplicationData[0].clientIds),
+                        id: new OAuthApplicationId(
+                            oAuthMockApplicationData[0].id,
+                        ),
+                        rowId: new OAuthApplicationRowId(
+                            oAuthMockApplicationData[0].rowId,
+                        ),
+                        code: new OAuthApplicationCode(
+                            oAuthMockApplicationData[0].code,
+                        ),
+                        name: new OAuthApplicationName(
+                            oAuthMockApplicationData[0].name,
+                        ),
+                        secret: new OAuthApplicationSecret(
+                            oAuthMockApplicationData[0].secret,
+                        ),
+                        isMaster: new OAuthApplicationIsMaster(
+                            oAuthMockApplicationData[0].isMaster,
+                        ),
+                        clientIds: new OAuthApplicationClientIds(
+                            oAuthMockApplicationData[0].clientIds,
+                        ),
                     },
                     {},
                 ),

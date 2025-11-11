@@ -4,55 +4,50 @@ import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthCreateScopeHandler', () =>
-{
+describe('OAuthCreateScopeHandler', () => {
     let handler: OAuthCreateScopeHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthCreateScopeHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<OAuthCreateScopeHandler>(OAuthCreateScopeHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('OAuthCreateScopeHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthCreateScopeHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an scope created', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
+        test('should return an scope created', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockScopeData[0])),
+            );
             expect(
-                await handler.main(
-                    oAuthMockScopeData[0],
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(oAuthMockScopeData[0]);
+                await handler.main(oAuthMockScopeData[0], 'Europe/Madrid'),
+            ).toBe(oAuthMockScopeData[0]);
         });
     });
 });

@@ -1,45 +1,49 @@
 import { ToolsCreateMigrationInput } from '@api/graphql';
-import { ToolsCreateMigrationsHandler, ToolsCreateMigrationsResolver } from '@api/tools/migration';
+import {
+    ToolsCreateMigrationsHandler,
+    ToolsCreateMigrationsResolver,
+} from '@api/tools/migration';
 import { toolsMockMigrationData } from '@app/tools/migration';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsCreateMigrationsResolver', () =>
-{
+describe('ToolsCreateMigrationsResolver', () => {
     let resolver: ToolsCreateMigrationsResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ToolsCreateMigrationsResolver,
                 {
-                    provide : ToolsCreateMigrationsHandler,
+                    provide: ToolsCreateMigrationsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsCreateMigrationsResolver>(ToolsCreateMigrationsResolver);
+        resolver = module.get<ToolsCreateMigrationsResolver>(
+            ToolsCreateMigrationsResolver,
+        );
     });
 
-    test('ToolsCreateMigrationsResolver should be defined', () =>
-    {
+    test('ToolsCreateMigrationsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsCreateMigrationsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsCreateMigrationsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an migrations created', async () =>
-        {
-            expect(await resolver.main(<ToolsCreateMigrationInput[]>toolsMockMigrationData)).toBe(undefined);
+        test('should return an migrations created', async () => {
+            expect(
+                await resolver.main(
+                    <ToolsCreateMigrationInput[]>toolsMockMigrationData,
+                ),
+            ).toBe(undefined);
         });
     });
 });

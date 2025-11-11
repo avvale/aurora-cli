@@ -1,53 +1,58 @@
-import { IamPaginatePermissionsRolesController, IamPaginatePermissionsRolesHandler } from '@api/iam/permission-role';
+import {
+    IamPaginatePermissionsRolesController,
+    IamPaginatePermissionsRolesHandler,
+} from '@api/iam/permission-role';
 import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginatePermissionsRolesController', () =>
-{
+describe('IamPaginatePermissionsRolesController', () => {
     let controller: IamPaginatePermissionsRolesController;
     let handler: IamPaginatePermissionsRolesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamPaginatePermissionsRolesController,
-            ],
+            imports: [],
+            controllers: [IamPaginatePermissionsRolesController],
             providers: [
                 {
-                    provide : IamPaginatePermissionsRolesHandler,
+                    provide: IamPaginatePermissionsRolesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamPaginatePermissionsRolesController>(IamPaginatePermissionsRolesController);
-        handler = module.get<IamPaginatePermissionsRolesHandler>(IamPaginatePermissionsRolesHandler);
+        controller = module.get<IamPaginatePermissionsRolesController>(
+            IamPaginatePermissionsRolesController,
+        );
+        handler = module.get<IamPaginatePermissionsRolesHandler>(
+            IamPaginatePermissionsRolesHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginatePermissionsRolesController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginatePermissionsRolesController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a iamMockPermissionRoleData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : iamMockPermissionRoleData,
-            })));
+        test('should return a iamMockPermissionRoleData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: iamMockPermissionRoleData,
+                        }),
+                    ),
+            );
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : iamMockPermissionRoleData,
+                rows: iamMockPermissionRoleData,
             });
         });
     });

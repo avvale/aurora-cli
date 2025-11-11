@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('tools.procedure.get')
-export class ToolsPaginateProceduresResolver
-{
-    constructor(
-        private readonly handler: ToolsPaginateProceduresHandler,
-    ) {}
+export class ToolsPaginateProceduresResolver {
+    constructor(private readonly handler: ToolsPaginateProceduresHandler) {}
 
     @Query('toolsPaginateProcedures')
     async main(
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<Pagination>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<Pagination> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

@@ -1,8 +1,7 @@
 import { IamCreatedPermissionEvent } from '@app/iam/permission';
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreatedPermissionsEvent
-{
+export class IamCreatedPermissionsEvent {
     constructor(
         public readonly event: {
             payload: IamCreatedPermissionEvent[];

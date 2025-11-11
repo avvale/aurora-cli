@@ -1,45 +1,47 @@
-import { ToolsDeleteKeyValuesController, ToolsDeleteKeyValuesHandler } from '@api/tools/key-value';
+import {
+    ToolsDeleteKeyValuesController,
+    ToolsDeleteKeyValuesHandler,
+} from '@api/tools/key-value';
 import { toolsMockKeyValueData } from '@app/tools/key-value';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDeleteKeyValuesController', () =>
-{
+describe('ToolsDeleteKeyValuesController', () => {
     let controller: ToolsDeleteKeyValuesController;
     let handler: ToolsDeleteKeyValuesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                ToolsDeleteKeyValuesController,
-            ],
+            imports: [],
+            controllers: [ToolsDeleteKeyValuesController],
             providers: [
                 {
-                    provide : ToolsDeleteKeyValuesHandler,
+                    provide: ToolsDeleteKeyValuesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<ToolsDeleteKeyValuesController>(ToolsDeleteKeyValuesController);
-        handler = module.get<ToolsDeleteKeyValuesHandler>(ToolsDeleteKeyValuesHandler);
+        controller = module.get<ToolsDeleteKeyValuesController>(
+            ToolsDeleteKeyValuesController,
+        );
+        handler = module.get<ToolsDeleteKeyValuesHandler>(
+            ToolsDeleteKeyValuesHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDeleteKeyValuesController should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDeleteKeyValuesController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an toolsMockKeyValueData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockKeyValueData)));
+        test('should return an toolsMockKeyValueData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(toolsMockKeyValueData)),
+            );
             expect(await controller.main()).toBe(toolsMockKeyValueData);
         });
     });

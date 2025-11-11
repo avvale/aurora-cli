@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class ToolsCreateProceduresCommand
-{
+export class ToolsCreateProceduresCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -17,7 +16,7 @@ export class ToolsCreateProceduresCommand
             hash?: string;
             executedAt?: string;
             checkedAt?: string;
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('oAuth.refreshToken.get')
-export class OAuthGetRefreshTokensResolver
-{
-    constructor(
-        private readonly handler: OAuthGetRefreshTokensHandler,
-    ) {}
+export class OAuthGetRefreshTokensResolver {
+    constructor(private readonly handler: OAuthGetRefreshTokensHandler) {}
 
     @Query('oAuthGetRefreshTokens')
     async main(
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<OAuthRefreshToken[]>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<OAuthRefreshToken[]> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

@@ -1,6 +1,10 @@
 /* eslint-disable key-spacing */
 import { IamAccount } from '@app/iam/account';
-import { IamCreatedTenantEvent, IamDeletedTenantEvent, IamUpdatedTenantEvent } from '@app/iam/tenant';
+import {
+    IamCreatedTenantEvent,
+    IamDeletedTenantEvent,
+    IamUpdatedTenantEvent,
+} from '@app/iam/tenant';
 import {
     IamTenantAccountIds,
     IamTenantCode,
@@ -12,14 +16,15 @@ import {
     IamTenantMeta,
     IamTenantName,
     IamTenantParentId,
+    IamTenantRowId,
     IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class IamTenant extends AggregateRoot
-{
+export class IamTenant extends AggregateRoot {
     id: IamTenantId;
+    rowId: IamTenantRowId;
     parentId: IamTenantParentId;
     name: IamTenantName;
     code: IamTenantCode;
@@ -35,6 +40,7 @@ export class IamTenant extends AggregateRoot
 
     constructor(
         id: IamTenantId,
+        rowId: IamTenantRowId,
         parentId: IamTenantParentId,
         name: IamTenantName,
         code: IamTenantCode,
@@ -47,10 +53,10 @@ export class IamTenant extends AggregateRoot
         deletedAt: IamTenantDeletedAt,
         parent?: IamTenant,
         accounts?: IamAccount[],
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.parentId = parentId;
         this.name = name;
         this.code = code;
@@ -67,6 +73,7 @@ export class IamTenant extends AggregateRoot
 
     static register(
         id: IamTenantId,
+        rowId: IamTenantRowId,
         parentId: IamTenantParentId,
         name: IamTenantName,
         code: IamTenantCode,
@@ -79,10 +86,10 @@ export class IamTenant extends AggregateRoot
         deletedAt: IamTenantDeletedAt,
         parent?: IamTenant,
         accounts?: IamAccount[],
-    ): IamTenant
-    {
+    ): IamTenant {
         return new IamTenant(
             id,
+            rowId,
             parentId,
             name,
             code,
@@ -98,13 +105,7 @@ export class IamTenant extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: IamTenant;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: IamTenant; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamCreatedTenantEvent({
                 payload: {
@@ -125,13 +126,7 @@ export class IamTenant extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: IamTenant;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: IamTenant; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamUpdatedTenantEvent({
                 payload: {
@@ -152,17 +147,12 @@ export class IamTenant extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: IamTenant;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: IamTenant; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamDeletedTenantEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     parentId: event.payload.parentId?.value,
                     name: event.payload.name.value,
                     code: event.payload.code?.value,
@@ -179,10 +169,10 @@ export class IamTenant extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             parentId: this.parentId?.value,
             name: this.name.value,
             code: this.code?.value,
@@ -194,13 +184,12 @@ export class IamTenant extends AggregateRoot
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
             parent: this.parent?.toDTO(),
-            accounts: this.accounts?.map(item => item.toDTO()),
+            accounts: this.accounts?.map((item) => item.toDTO()),
         };
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             parentId: this.parentId?.value,
@@ -214,7 +203,7 @@ export class IamTenant extends AggregateRoot
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
             parent: this.parent?.toDTO(),
-            accounts: this.accounts?.map(item => item.toDTO()),
+            accounts: this.accounts?.map((item) => item.toDTO()),
         };
     }
 }

@@ -4,56 +4,52 @@ import { iamMockUserData } from '@app/iam/user';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteUserByIdController', () =>
-{
+describe('IamDeleteUserByIdController', () => {
     let handler: IamDeleteUserByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteUserByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamDeleteUserByIdHandler>(IamDeleteUserByIdHandler);
+        handler = module.get<IamDeleteUserByIdHandler>(
+            IamDeleteUserByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteUserByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteUserByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an user deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData[0])));
+        test('should return an user deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockUserData[0])),
+            );
             expect(
-                await handler.main(
-                    iamMockUserData[0].id,
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockUserData[0]);
+                await handler.main(iamMockUserData[0].id, {}, 'Europe/Madrid'),
+            ).toBe(iamMockUserData[0]);
         });
     });
 });

@@ -1,19 +1,39 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    Column,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'IamTag',
     freezeTableName: true,
     timestamps: false,
+    indexes: [
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+    ],
 })
-export class IamTagModel extends Model<IamTagModel>
-{
+export class IamTagModel extends Model<IamTagModel> {
     @AfterCreate
-    static auditingCreate(instance: IamTagModel, options): void
-    {
+    static auditingCreate(instance: IamTagModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -24,8 +44,7 @@ export class IamTagModel extends Model<IamTagModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: IamTagModel, options): void
-    {
+    static auditingBulkCreate(instance: IamTagModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -36,8 +55,7 @@ export class IamTagModel extends Model<IamTagModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: IamTagModel, options): void
-    {
+    static auditingUpdate(instance: IamTagModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -48,8 +66,7 @@ export class IamTagModel extends Model<IamTagModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -60,8 +77,7 @@ export class IamTagModel extends Model<IamTagModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: IamTagModel, options): void
-    {
+    static auditingDestroy(instance: IamTagModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -72,8 +88,7 @@ export class IamTagModel extends Model<IamTagModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -84,8 +99,7 @@ export class IamTagModel extends Model<IamTagModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: IamTagModel, options): void
-    {
+    static auditingRestore(instance: IamTagModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -96,8 +110,7 @@ export class IamTagModel extends Model<IamTagModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -108,8 +121,7 @@ export class IamTagModel extends Model<IamTagModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: IamTagModel, options): void
-    {
+    static auditingUpsert(instance: IamTagModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -126,6 +138,14 @@ export class IamTagModel extends Model<IamTagModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'name',
@@ -154,5 +174,4 @@ export class IamTagModel extends Model<IamTagModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

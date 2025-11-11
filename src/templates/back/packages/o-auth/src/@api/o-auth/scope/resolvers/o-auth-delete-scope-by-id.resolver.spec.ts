@@ -1,50 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthDeleteScopeByIdHandler, OAuthDeleteScopeByIdResolver } from '@api/o-auth/scope';
+import {
+    OAuthDeleteScopeByIdHandler,
+    OAuthDeleteScopeByIdResolver,
+} from '@api/o-auth/scope';
 import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteScopeByIdResolver', () =>
-{
+describe('OAuthDeleteScopeByIdResolver', () => {
     let resolver: OAuthDeleteScopeByIdResolver;
     let handler: OAuthDeleteScopeByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthDeleteScopeByIdResolver,
                 {
-                    provide : OAuthDeleteScopeByIdHandler,
+                    provide: OAuthDeleteScopeByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthDeleteScopeByIdResolver>(OAuthDeleteScopeByIdResolver);
-        handler = module.get<OAuthDeleteScopeByIdHandler>(OAuthDeleteScopeByIdHandler);
+        resolver = module.get<OAuthDeleteScopeByIdResolver>(
+            OAuthDeleteScopeByIdResolver,
+        );
+        handler = module.get<OAuthDeleteScopeByIdHandler>(
+            OAuthDeleteScopeByIdHandler,
+        );
     });
 
-    test('OAuthDeleteScopeByIdResolver should be defined', () =>
-    {
+    test('OAuthDeleteScopeByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteScopeByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteScopeByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an scope deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
-            expect(await resolver.main(oAuthMockScopeData[0].id)).toBe(oAuthMockScopeData[0]);
+        test('should return an scope deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockScopeData[0])),
+            );
+            expect(await resolver.main(oAuthMockScopeData[0].id)).toBe(
+                oAuthMockScopeData[0],
+            );
         });
     });
 });

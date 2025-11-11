@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthIRefreshTokenRepository, OAuthMockRefreshTokenRepository } from '@app/o-auth/refresh-token';
+import {
+    OAuthIRefreshTokenRepository,
+    OAuthMockRefreshTokenRepository,
+} from '@app/o-auth/refresh-token';
 import { OAuthDeleteRefreshTokensService } from '@app/o-auth/refresh-token/application/delete/o-auth-delete-refresh-tokens.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteRefreshTokensService', () =>
-{
+describe('OAuthDeleteRefreshTokensService', () => {
     let service: OAuthDeleteRefreshTokensService;
     let repository: OAuthIRefreshTokenRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,37 +26,33 @@ describe('OAuthDeleteRefreshTokensService', () =>
                 OAuthDeleteRefreshTokensService,
                 OAuthMockRefreshTokenRepository,
                 {
-                    provide : OAuthIRefreshTokenRepository,
+                    provide: OAuthIRefreshTokenRepository,
                     useValue: {
-                        get   : () => { /**/ },
-                        delete: () => { /**/ },
+                        get: () => {
+                            /**/
+                        },
+                        delete: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthDeleteRefreshTokensService);
         repository = module.get(OAuthIRefreshTokenRepository);
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteRefreshTokensService should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteRefreshTokensService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should delete refreshToken and emit event', async () =>
-        {
-            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
-            expect(
-                await service.main(
-                    {},
-                    {},
-                ),
-            )
-                .toBe(undefined);
+        test('should delete refreshToken and emit event', async () => {
+            jest.spyOn(repository, 'get').mockImplementation(
+                () => new Promise((resolve) => resolve([])),
+            );
+            expect(await service.main({}, {})).toBe(undefined);
         });
     });
 });

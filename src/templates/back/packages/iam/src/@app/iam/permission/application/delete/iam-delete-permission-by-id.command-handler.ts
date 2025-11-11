@@ -4,14 +4,14 @@ import { IamPermissionId } from '@app/iam/permission/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamDeletePermissionByIdCommand)
-export class IamDeletePermissionByIdCommandHandler implements ICommandHandler<IamDeletePermissionByIdCommand>
+export class IamDeletePermissionByIdCommandHandler
+    implements ICommandHandler<IamDeletePermissionByIdCommand>
 {
     constructor(
         private readonly deletePermissionByIdService: IamDeletePermissionByIdService,
     ) {}
 
-    async execute(command: IamDeletePermissionByIdCommand): Promise<void>
-    {
+    async execute(command: IamDeletePermissionByIdCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deletePermissionByIdService.main(
             new IamPermissionId(command.id),

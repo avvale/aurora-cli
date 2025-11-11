@@ -5,60 +5,61 @@ import { toolsMockKeyValueData } from '@app/tools/key-value';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsUpdateKeyValueByIdHandler', () =>
-{
+describe('ToolsUpdateKeyValueByIdHandler', () => {
     let handler: ToolsUpdateKeyValueByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsUpdateKeyValueByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsUpdateKeyValueByIdHandler>(ToolsUpdateKeyValueByIdHandler);
+        handler = module.get<ToolsUpdateKeyValueByIdHandler>(
+            ToolsUpdateKeyValueByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsUpdateKeyValueByIdHandler should be defined', () =>
-    {
+    test('ToolsUpdateKeyValueByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsUpdateKeyValueByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsUpdateKeyValueByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a keyValue updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockKeyValueData[0])));
+        test('should return a keyValue updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(toolsMockKeyValueData[0])),
+            );
             expect(
                 await handler.main(
                     <ToolsUpdateKeyValueByIdInput>toolsMockKeyValueData[0],
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(toolsMockKeyValueData[0]);
+                ),
+            ).toBe(toolsMockKeyValueData[0]);
         });
     });
 });

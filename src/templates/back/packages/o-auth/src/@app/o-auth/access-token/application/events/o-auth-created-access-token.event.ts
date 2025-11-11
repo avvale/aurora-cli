@@ -1,15 +1,21 @@
-export class OAuthCreatedAccessTokenEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class OAuthCreatedAccessTokenEvent {
     constructor(
-        public readonly id: string,
-        public readonly clientId: string,
-        public readonly accountId: string,
-        public readonly token: string,
-        public readonly name: string,
-        public readonly isRevoked: boolean,
-        public readonly expiresAt: string,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                clientId: string;
+                accountId: string;
+                token: string;
+                name: string;
+                isRevoked: boolean;
+                expiresAt: string;
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

@@ -11,27 +11,23 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateRolesCommand)
-export class IamCreateRolesCommandHandler implements ICommandHandler<IamCreateRolesCommand>
+export class IamCreateRolesCommandHandler
+    implements ICommandHandler<IamCreateRolesCommand>
 {
-    constructor(
-        private readonly createRolesService: IamCreateRolesService,
-    ) {}
+    constructor(private readonly createRolesService: IamCreateRolesService) {}
 
-    async execute(command: IamCreateRolesCommand): Promise<void>
-    {
+    async execute(command: IamCreateRolesCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createRolesService.main(
-            command.payload
-                .map(role =>
-                {
-                    return {
-                        id: new IamRoleId(role.id),
-                        name: new IamRoleName(role.name),
-                        isMaster: new IamRoleIsMaster(role.isMaster),
-                        permissionIds: new IamRolePermissionIds(role.permissionIds),
-                        accountIds: new IamRoleAccountIds(role.accountIds),
-                    };
-                }),
+            command.payload.map((role) => {
+                return {
+                    id: new IamRoleId(role.id),
+                    name: new IamRoleName(role.name),
+                    isMaster: new IamRoleIsMaster(role.isMaster),
+                    permissionIds: new IamRolePermissionIds(role.permissionIds),
+                    accountIds: new IamRoleAccountIds(role.accountIds),
+                };
+            }),
             command.cQMetadata,
         );
     }

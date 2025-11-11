@@ -1,63 +1,46 @@
-import { OAuthAccessToken, OAuthDeletedAccessTokenEvent, OAuthDeletedAccessTokensEvent, OAuthUpdatedAndIncrementedAccessTokenEvent, OAuthUpdatedAndIncrementedAccessTokensEvent } from '@app/o-auth/access-token';
+import {
+    OAuthAccessToken,
+    OAuthDeletedAccessTokenEvent,
+    OAuthDeletedAccessTokensEvent,
+} from '@app/o-auth/access-token';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthAddAccessTokensContextEvent extends AggregateRoot
-{
+export class OAuthAddAccessTokensContextEvent extends AggregateRoot {
     constructor(
         public readonly aggregateRoots: OAuthAccessToken[] = [],
-    )
-    {
+        public readonly cQMetadata?: CQMetadata,
+    ) {
         super();
     }
 
-    *[Symbol.iterator]()
-    {
+    *[Symbol.iterator]() {
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-
-
-    updatedAndIncremented(): void
-    {
+    deleted(): void {
         this.apply(
-            new OAuthUpdatedAndIncrementedAccessTokensEvent(
-                this.aggregateRoots.map(accessToken =>
-                    new OAuthUpdatedAndIncrementedAccessTokenEvent(
-                        accessToken.id.value,
-                        accessToken.clientId.value,
-                        accessToken.accountId?.value,
-                        accessToken.token.value,
-                        accessToken.name?.value,
-                        accessToken.isRevoked.value,
-                        accessToken.expiresAt?.value,
-                        accessToken.createdAt?.value,
-                        accessToken.updatedAt?.value,
-                        accessToken.deletedAt?.value,
-                    ),
+            new OAuthDeletedAccessTokensEvent({
+                payload: this.aggregateRoots.map(
+                    (accessToken) =>
+                        new OAuthDeletedAccessTokenEvent({
+                            payload: {
+                                id: accessToken.id.value,
+                                rowId: accessToken.rowId.value,
+                                clientId: accessToken.clientId.value,
+                                accountId: accessToken.accountId?.value,
+                                token: accessToken.token.value,
+                                name: accessToken.name?.value,
+                                isRevoked: accessToken.isRevoked.value,
+                                expiresAt: accessToken.expiresAt?.value,
+                                createdAt: accessToken.createdAt?.value,
+                                updatedAt: accessToken.updatedAt?.value,
+                                deletedAt: accessToken.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
-        );
-    }
-
-    deleted(): void
-    {
-        this.apply(
-            new OAuthDeletedAccessTokensEvent(
-                this.aggregateRoots.map(accessToken =>
-                    new OAuthDeletedAccessTokenEvent(
-                        accessToken.id.value,
-                        accessToken.clientId.value,
-                        accessToken.accountId?.value,
-                        accessToken.token.value,
-                        accessToken.name?.value,
-                        accessToken.isRevoked.value,
-                        accessToken.expiresAt?.value,
-                        accessToken.createdAt?.value,
-                        accessToken.updatedAt?.value,
-                        accessToken.deletedAt?.value,
-                    ),
-                ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

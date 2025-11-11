@@ -3,37 +3,35 @@ import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreatePermissionsRolesHandler', () =>
-{
+describe('IamCreatePermissionsRolesHandler', () => {
     let handler: IamCreatePermissionsRolesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreatePermissionsRolesHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamCreatePermissionsRolesHandler>(IamCreatePermissionsRolesHandler);
+        handler = module.get<IamCreatePermissionsRolesHandler>(
+            IamCreatePermissionsRolesHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamCreatePermissionsRolesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreatePermissionsRolesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an iamMockPermissionRoleData created', async () =>
-        {
+        test('should return an iamMockPermissionRoleData created', async () => {
             expect(await handler.main(iamMockPermissionRoleData)).toBe(true);
         });
     });

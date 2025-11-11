@@ -8,11 +8,8 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.account.get')
-export class IamPaginateWithTenantConstraintAccountsResolver
-{
-    constructor(
-        private readonly handler: IamPaginateAccountsHandler,
-    ) {}
+export class IamPaginateWithTenantConstraintAccountsResolver {
+    constructor(private readonly handler: IamPaginateAccountsHandler) {}
 
     @Query('iamPaginateWithTenantConstraintAccounts')
     @TenantConstraint({
@@ -23,12 +20,7 @@ export class IamPaginateWithTenantConstraintAccountsResolver
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<Pagination>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<Pagination> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

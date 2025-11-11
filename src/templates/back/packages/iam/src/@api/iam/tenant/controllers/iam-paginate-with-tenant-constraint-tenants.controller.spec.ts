@@ -1,40 +1,39 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamPaginateWithTenantConstraintTenantsHandler } from '../handlers/iam-paginate-with-tenant-constraint-tenants.handler';
 import { IamPaginateWithTenantConstraintTenantsController } from './iam-paginate-with-tenant-constraint-tenants.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamPaginateWithTenantConstraintTenantsController', () =>
-{
+describe('IamPaginateWithTenantConstraintTenantsController', () => {
     let controller: IamPaginateWithTenantConstraintTenantsController;
     let handler: IamPaginateWithTenantConstraintTenantsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamPaginateWithTenantConstraintTenantsController,
-            ],
+            imports: [],
+            controllers: [IamPaginateWithTenantConstraintTenantsController],
             providers: [
                 {
-                    provide : IamPaginateWithTenantConstraintTenantsHandler,
+                    provide: IamPaginateWithTenantConstraintTenantsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamPaginateWithTenantConstraintTenantsController>(IamPaginateWithTenantConstraintTenantsController);
-        handler = module.get<IamPaginateWithTenantConstraintTenantsHandler>(IamPaginateWithTenantConstraintTenantsHandler);
+        controller =
+            module.get<IamPaginateWithTenantConstraintTenantsController>(
+                IamPaginateWithTenantConstraintTenantsController,
+            );
+        handler = module.get<IamPaginateWithTenantConstraintTenantsHandler>(
+            IamPaginateWithTenantConstraintTenantsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamPaginateWithTenantConstraintTenantsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamPaginateWithTenantConstraintTenantsController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

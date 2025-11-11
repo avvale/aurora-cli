@@ -3,51 +3,52 @@ import { IamUpdateRolesCommandHandler } from '@app/iam/role/application/update/i
 import { IamUpdateRolesService } from '@app/iam/role/application/update/iam-update-roles.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateRolesCommandHandler', () =>
-{
+describe('IamUpdateRolesCommandHandler', () => {
     let commandHandler: IamUpdateRolesCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamUpdateRolesCommandHandler,
                 {
-                    provide : IamUpdateRolesService,
+                    provide: IamUpdateRolesService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamUpdateRolesCommandHandler>(IamUpdateRolesCommandHandler);
+        commandHandler = module.get<IamUpdateRolesCommandHandler>(
+            IamUpdateRolesCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('UpdateRolesCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('UpdateRolesCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an roles updated', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamUpdateRolesCommand(
-                    {
-                        id: iamMockRoleData[0].id,
-                        name: iamMockRoleData[0].name,
-                        isMaster: iamMockRoleData[0].isMaster,
-                        permissionIds: iamMockRoleData[0].permissionIds,
-                        accountIds: iamMockRoleData[0].accountIds,
-                    },
-                    {},
-                    {},
-                    { timezone: process.env.TZ },
+        test('should return an roles updated', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamUpdateRolesCommand(
+                        {
+                            id: iamMockRoleData[0].id,
+                            rowId: iamMockRoleData[0].rowId,
+                            name: iamMockRoleData[0].name,
+                            isMaster: iamMockRoleData[0].isMaster,
+                            permissionIds: iamMockRoleData[0].permissionIds,
+                            accountIds: iamMockRoleData[0].accountIds,
+                        },
+                        {},
+                        {},
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

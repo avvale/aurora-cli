@@ -4,56 +4,56 @@ import { iamMockTenantData } from '@app/iam/tenant';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteTenantByIdController', () =>
-{
+describe('IamDeleteTenantByIdController', () => {
     let handler: IamDeleteTenantByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeleteTenantByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<IamDeleteTenantByIdHandler>(IamDeleteTenantByIdHandler);
+        handler = module.get<IamDeleteTenantByIdHandler>(
+            IamDeleteTenantByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteTenantByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteTenantByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an tenant deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+        test('should return an tenant deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
             expect(
                 await handler.main(
                     iamMockTenantData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(iamMockTenantData[0]);
+            ).toBe(iamMockTenantData[0]);
         });
     });
 });

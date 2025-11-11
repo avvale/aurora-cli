@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class OAuthFindAccessTokenByIdHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class OAuthFindAccessTokenByIdHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         id: string,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<OAuthAccessToken | OAuthAccessTokenDto>
-    {
-        return await this.queryBus.ask(new OAuthFindAccessTokenByIdQuery(
-            id,
-            constraint,
-            {
+    ): Promise<OAuthAccessToken | OAuthAccessTokenDto> {
+        return await this.queryBus.ask(
+            new OAuthFindAccessTokenByIdQuery(id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

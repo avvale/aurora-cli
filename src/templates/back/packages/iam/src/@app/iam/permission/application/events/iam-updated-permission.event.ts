@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamUpdatedPermissionEvent
-{
+export class IamUpdatedPermissionEvent {
     constructor(
         public readonly event: {
             payload: {

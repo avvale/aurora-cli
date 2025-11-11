@@ -1,6 +1,10 @@
 /* eslint-disable key-spacing */
 import { IamPermission } from '@app/iam/permission';
-import { IamCreatedPermissionRoleEvent, IamDeletedPermissionRoleEvent, IamUpdatedPermissionRoleEvent } from '@app/iam/permission-role';
+import {
+    IamCreatedPermissionRoleEvent,
+    IamDeletedPermissionRoleEvent,
+    IamUpdatedPermissionRoleEvent,
+} from '@app/iam/permission-role';
 import {
     IamPermissionRolePermissionId,
     IamPermissionRoleRoleId,
@@ -9,8 +13,7 @@ import { IamRole } from '@app/iam/role';
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class IamPermissionRole extends AggregateRoot
-{
+export class IamPermissionRole extends AggregateRoot {
     permissionId: IamPermissionRolePermissionId;
     roleId: IamPermissionRoleRoleId;
     permission: IamPermission;
@@ -21,8 +24,7 @@ export class IamPermissionRole extends AggregateRoot
         roleId: IamPermissionRoleRoleId,
         permission?: IamPermission,
         role?: IamRole,
-    )
-    {
+    ) {
         super();
         this.permissionId = permissionId;
         this.roleId = roleId;
@@ -35,23 +37,14 @@ export class IamPermissionRole extends AggregateRoot
         roleId: IamPermissionRoleRoleId,
         permission?: IamPermission,
         role?: IamRole,
-    ): IamPermissionRole
-    {
-        return new IamPermissionRole(
-            permissionId,
-            roleId,
-            permission,
-            role,
-        );
+    ): IamPermissionRole {
+        return new IamPermissionRole(permissionId, roleId, permission, role);
     }
 
-    created(
-        event: {
-            payload: IamPermissionRole;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: {
+        payload: IamPermissionRole;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
             new IamCreatedPermissionRoleEvent({
                 payload: {
@@ -63,13 +56,10 @@ export class IamPermissionRole extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: IamPermissionRole;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: {
+        payload: IamPermissionRole;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
             new IamUpdatedPermissionRoleEvent({
                 payload: {
@@ -81,13 +71,10 @@ export class IamPermissionRole extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: IamPermissionRole;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: {
+        payload: IamPermissionRole;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
             new IamDeletedPermissionRoleEvent({
                 payload: {
@@ -99,8 +86,7 @@ export class IamPermissionRole extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             permissionId: this.permissionId.value,
             roleId: this.roleId.value,
@@ -110,8 +96,7 @@ export class IamPermissionRole extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             permissionId: this.permissionId.value,
             roleId: this.roleId.value,

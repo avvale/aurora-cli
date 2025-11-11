@@ -1,30 +1,30 @@
 // export commands
 export { IamCreateRoleCommand } from './application/create/iam-create-role.command';
 export { IamCreateRolesCommand } from './application/create/iam-create-roles.command';
-export { IamUpdateRoleByIdCommand } from './application/update/iam-update-role-by-id.command';
-export { IamUpdateRolesCommand } from './application/update/iam-update-roles.command';
 export { IamDeleteRoleByIdCommand } from './application/delete/iam-delete-role-by-id.command';
 export { IamDeleteRolesCommand } from './application/delete/iam-delete-roles.command';
+export { IamUpdateRoleByIdCommand } from './application/update/iam-update-role-by-id.command';
+export { IamUpdateRolesCommand } from './application/update/iam-update-roles.command';
 
 // export queries
-export { IamPaginateRolesQuery } from './application/paginate/iam-paginate-roles.query';
-export { IamGetRolesQuery } from './application/get/iam-get-roles.query';
-export { IamFindRoleQuery } from './application/find/iam-find-role.query';
 export { IamFindRoleByIdQuery } from './application/find/iam-find-role-by-id.query';
+export { IamFindRoleQuery } from './application/find/iam-find-role.query';
+export { IamGetRolesQuery } from './application/get/iam-get-roles.query';
+export { IamPaginateRolesQuery } from './application/paginate/iam-paginate-roles.query';
 
 // export mocks
 export { iamMockRoleData } from './infrastructure/mock/iam-mock-role.data';
-export { IamMockRoleSeeder } from './infrastructure/mock/iam-mock-role.seeder';
 export { IamMockRoleRepository } from './infrastructure/mock/iam-mock-role.repository';
+export { IamMockRoleSeeder } from './infrastructure/mock/iam-mock-role.seeder';
 
 // export events
 export { IamAddRolesContextEvent } from './application/events/iam-add-roles-context.event';
-export { IamCreatedRolesEvent } from './application/events/iam-created-roles.event';
 export { IamCreatedRoleEvent } from './application/events/iam-created-role.event';
-export { IamDeletedRolesEvent } from './application/events/iam-deleted-roles.event';
+export { IamCreatedRolesEvent } from './application/events/iam-created-roles.event';
 export { IamDeletedRoleEvent } from './application/events/iam-deleted-role.event';
-export { IamUpdatedRolesEvent } from './application/events/iam-updated-roles.event';
+export { IamDeletedRolesEvent } from './application/events/iam-deleted-roles.event';
 export { IamUpdatedRoleEvent } from './application/events/iam-updated-role.event';
+export { IamUpdatedRolesEvent } from './application/events/iam-updated-roles.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -48,36 +48,36 @@ export { IamRoleSagas } from './application/sagas/iam-role.sagas';
 // command handlers
 import { IamCreateRoleCommandHandler } from './application/create/iam-create-role.command-handler';
 import { IamCreateRolesCommandHandler } from './application/create/iam-create-roles.command-handler';
-import { IamUpdateRoleByIdCommandHandler } from './application/update/iam-update-role-by-id.command-handler';
-import { IamUpdateRolesCommandHandler } from './application/update/iam-update-roles.command-handler';
 import { IamDeleteRoleByIdCommandHandler } from './application/delete/iam-delete-role-by-id.command-handler';
 import { IamDeleteRolesCommandHandler } from './application/delete/iam-delete-roles.command-handler';
+import { IamUpdateRoleByIdCommandHandler } from './application/update/iam-update-role-by-id.command-handler';
+import { IamUpdateRolesCommandHandler } from './application/update/iam-update-roles.command-handler';
 
 // query handlers
-import { IamPaginateRolesQueryHandler } from './application/paginate/iam-paginate-roles.query-handler';
-import { IamGetRolesQueryHandler } from './application/get/iam-get-roles.query-handler';
-import { IamFindRoleQueryHandler } from './application/find/iam-find-role.query-handler';
 import { IamFindRoleByIdQueryHandler } from './application/find/iam-find-role-by-id.query-handler';
+import { IamFindRoleQueryHandler } from './application/find/iam-find-role.query-handler';
+import { IamGetRolesQueryHandler } from './application/get/iam-get-roles.query-handler';
+import { IamPaginateRolesQueryHandler } from './application/paginate/iam-paginate-roles.query-handler';
 
 // event handlers
 import { IamCreatedRoleEventHandler } from './application/events/iam-created-role.event-handler';
 import { IamCreatedRolesEventHandler } from './application/events/iam-created-roles.event-handler';
-import { IamUpdatedRoleEventHandler } from './application/events/iam-updated-role.event-handler';
-import { IamUpdatedRolesEventHandler } from './application/events/iam-updated-roles.event-handler';
 import { IamDeletedRoleEventHandler } from './application/events/iam-deleted-role.event-handler';
 import { IamDeletedRolesEventHandler } from './application/events/iam-deleted-roles.event-handler';
+import { IamUpdatedRoleEventHandler } from './application/events/iam-updated-role.event-handler';
+import { IamUpdatedRolesEventHandler } from './application/events/iam-updated-roles.event-handler';
 
 // services
 import { IamCreateRoleService } from './application/create/iam-create-role.service';
 import { IamCreateRolesService } from './application/create/iam-create-roles.service';
-import { IamPaginateRolesService } from './application/paginate/iam-paginate-roles.service';
-import { IamGetRolesService } from './application/get/iam-get-roles.service';
-import { IamFindRoleService } from './application/find/iam-find-role.service';
-import { IamFindRoleByIdService } from './application/find/iam-find-role-by-id.service';
-import { IamUpdateRoleByIdService } from './application/update/iam-update-role-by-id.service';
-import { IamUpdateRolesService } from './application/update/iam-update-roles.service';
 import { IamDeleteRoleByIdService } from './application/delete/iam-delete-role-by-id.service';
 import { IamDeleteRolesService } from './application/delete/iam-delete-roles.service';
+import { IamFindRoleByIdService } from './application/find/iam-find-role-by-id.service';
+import { IamFindRoleService } from './application/find/iam-find-role.service';
+import { IamGetRolesService } from './application/get/iam-get-roles.service';
+import { IamPaginateRolesService } from './application/paginate/iam-paginate-roles.service';
+import { IamUpdateRoleByIdService } from './application/update/iam-update-role-by-id.service';
+import { IamUpdateRolesService } from './application/update/iam-update-roles.service';
 
 export const IamRoleHandlers = [
     // commands

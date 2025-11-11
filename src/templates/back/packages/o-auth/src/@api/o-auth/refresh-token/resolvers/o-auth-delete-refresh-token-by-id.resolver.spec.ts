@@ -1,50 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthDeleteRefreshTokenByIdHandler, OAuthDeleteRefreshTokenByIdResolver } from '@api/o-auth/refresh-token';
+import {
+    OAuthDeleteRefreshTokenByIdHandler,
+    OAuthDeleteRefreshTokenByIdResolver,
+} from '@api/o-auth/refresh-token';
 import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteRefreshTokenByIdResolver', () =>
-{
+describe('OAuthDeleteRefreshTokenByIdResolver', () => {
     let resolver: OAuthDeleteRefreshTokenByIdResolver;
     let handler: OAuthDeleteRefreshTokenByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthDeleteRefreshTokenByIdResolver,
                 {
-                    provide : OAuthDeleteRefreshTokenByIdHandler,
+                    provide: OAuthDeleteRefreshTokenByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthDeleteRefreshTokenByIdResolver>(OAuthDeleteRefreshTokenByIdResolver);
-        handler = module.get<OAuthDeleteRefreshTokenByIdHandler>(OAuthDeleteRefreshTokenByIdHandler);
+        resolver = module.get<OAuthDeleteRefreshTokenByIdResolver>(
+            OAuthDeleteRefreshTokenByIdResolver,
+        );
+        handler = module.get<OAuthDeleteRefreshTokenByIdHandler>(
+            OAuthDeleteRefreshTokenByIdHandler,
+        );
     });
 
-    test('OAuthDeleteRefreshTokenByIdResolver should be defined', () =>
-    {
+    test('OAuthDeleteRefreshTokenByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteRefreshTokenByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteRefreshTokenByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an refreshToken deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockRefreshTokenData[0])));
-            expect(await resolver.main(oAuthMockRefreshTokenData[0].id)).toBe(oAuthMockRefreshTokenData[0]);
+        test('should return an refreshToken deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockRefreshTokenData[0]),
+                    ),
+            );
+            expect(await resolver.main(oAuthMockRefreshTokenData[0].id)).toBe(
+                oAuthMockRefreshTokenData[0],
+            );
         });
     });
 });

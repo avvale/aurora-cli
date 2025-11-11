@@ -1,46 +1,53 @@
-import { OAuthGetApplicationsClientsController, OAuthGetApplicationsClientsHandler } from '@api/o-auth/application-client';
+import {
+    OAuthGetApplicationsClientsController,
+    OAuthGetApplicationsClientsHandler,
+} from '@api/o-auth/application-client';
 import { oAuthMockApplicationClientData } from '@app/o-auth/application-client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthGetApplicationsClientsController', () =>
-{
+describe('OAuthGetApplicationsClientsController', () => {
     let controller: OAuthGetApplicationsClientsController;
     let handler: OAuthGetApplicationsClientsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                OAuthGetApplicationsClientsController,
-            ],
+            imports: [],
+            controllers: [OAuthGetApplicationsClientsController],
             providers: [
                 {
-                    provide : OAuthGetApplicationsClientsHandler,
+                    provide: OAuthGetApplicationsClientsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthGetApplicationsClientsController>(OAuthGetApplicationsClientsController);
-        handler = module.get<OAuthGetApplicationsClientsHandler>(OAuthGetApplicationsClientsHandler);
+        controller = module.get<OAuthGetApplicationsClientsController>(
+            OAuthGetApplicationsClientsController,
+        );
+        handler = module.get<OAuthGetApplicationsClientsHandler>(
+            OAuthGetApplicationsClientsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthGetApplicationsClientsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthGetApplicationsClientsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a oAuthMockApplicationClientData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationClientData)));
-            expect(await controller.main()).toBe(oAuthMockApplicationClientData);
+        test('should return a oAuthMockApplicationClientData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockApplicationClientData),
+                    ),
+            );
+            expect(await controller.main()).toBe(
+                oAuthMockApplicationClientData,
+            );
         });
     });
 });

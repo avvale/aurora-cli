@@ -1,16 +1,18 @@
 import { IamRoleAccount } from '@api/graphql';
 import { IamDeleteRoleAccountByIdHandler } from '@api/iam/role-account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.roleAccount.delete')
-export class IamDeleteRoleAccountByIdResolver
-{
-    constructor(
-        private readonly handler: IamDeleteRoleAccountByIdHandler,
-    ) {}
+export class IamDeleteRoleAccountByIdResolver {
+    constructor(private readonly handler: IamDeleteRoleAccountByIdHandler) {}
 
     @Mutation('iamDeleteRoleAccountById')
     async main(
@@ -19,8 +21,7 @@ export class IamDeleteRoleAccountByIdResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<IamRoleAccount>
-    {
+    ): Promise<IamRoleAccount> {
         return await this.handler.main(
             roleId,
             accountId,

@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthCreateClientsCommand
-{
+export class OAuthCreateClientsCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -16,7 +15,7 @@ export class OAuthCreateClientsCommand
             isActive: boolean;
             isMaster: boolean;
             applicationIds?: string[];
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

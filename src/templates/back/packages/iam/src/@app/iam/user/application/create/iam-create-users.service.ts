@@ -1,9 +1,12 @@
-import { IamAddUsersContextEvent, IamIUserRepository, IamUser } from '@app/iam/user';
+import {
+    IamAddUsersContextEvent,
+    IamIUserRepository,
+    IamUser,
+} from '@app/iam/user';
 import {
     IamUserAccountId,
     IamUserAvatar,
     IamUserCreatedAt,
-    IamUserDeletedAt,
     IamUserId,
     IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
@@ -21,8 +24,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateUsersService
-{
+export class IamCreateUsersService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIUserRepository,
@@ -42,44 +44,40 @@ export class IamCreateUsersService
             twoFactorAuthenticationSecret: IamUserTwoFactorAuthenticationSecret;
             rememberToken: IamUserRememberToken;
             meta: IamUserMeta;
-        } [],
+        }[],
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
-        const users = payload.map(user => IamUser.register(
-            user.id,
-            user.accountId,
-            user.name,
-            user.surname,
-            user.avatar,
-            user.mobile,
-            user.langId,
-            user.password,
-            user.isTwoFactorAuthenticationEnabled,
-            user.twoFactorAuthenticationSecret,
-            user.rememberToken,
-            user.meta,
-            new IamUserCreatedAt({ currentTimestamp: true }),
-            new IamUserUpdatedAt({ currentTimestamp: true }),
-            null, // deleteAt
-        ));
+        const users = payload.map((user) =>
+            IamUser.register(
+                user.id,
+                undefined, // rowId
+                user.accountId,
+                user.name,
+                user.surname,
+                user.avatar,
+                user.mobile,
+                user.langId,
+                user.password,
+                user.isTwoFactorAuthenticationEnabled,
+                user.twoFactorAuthenticationSecret,
+                user.rememberToken,
+                user.meta,
+                new IamUserCreatedAt({ currentTimestamp: true }),
+                new IamUserUpdatedAt({ currentTimestamp: true }),
+                null, // deleteAt
+            ),
+        );
 
         // insert
-        await this.repository.insert(
-            users,
-            {
-                insertOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.insert(users, {
+            insertOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddUsersContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const usersRegistered = this.publisher.mergeObjectContext(
-            new IamAddUsersContextEvent(
-                users,
-                cQMetadata,
-            ),
+            new IamAddUsersContextEvent(users, cQMetadata),
         );
 
         usersRegistered.created(); // apply event to model events

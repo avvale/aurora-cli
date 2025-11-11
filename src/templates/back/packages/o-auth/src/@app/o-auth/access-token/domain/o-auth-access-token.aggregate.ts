@@ -1,26 +1,29 @@
 /* eslint-disable key-spacing */
-import { AggregateRoot } from '@nestjs/cqrs';
-import { LiteralObject } from '@aurorajs.dev/core';
 import {
-    OAuthAccessTokenId,
-    OAuthAccessTokenClientId,
+    OAuthCreatedAccessTokenEvent,
+    OAuthDeletedAccessTokenEvent,
+} from '@app/o-auth/access-token';
+import {
     OAuthAccessTokenAccountId,
-    OAuthAccessTokenToken,
-    OAuthAccessTokenName,
-    OAuthAccessTokenIsRevoked,
-    OAuthAccessTokenExpiresAt,
+    OAuthAccessTokenClientId,
     OAuthAccessTokenCreatedAt,
-    OAuthAccessTokenUpdatedAt,
     OAuthAccessTokenDeletedAt,
-} from './value-objects';
-import { OAuthCreatedAccessTokenEvent } from '../application/events/o-auth-created-access-token.event';
-import { OAuthDeletedAccessTokenEvent } from '../application/events/o-auth-deleted-access-token.event';
-import { OAuthRefreshToken } from '@app/o-auth/refresh-token';
+    OAuthAccessTokenExpiresAt,
+    OAuthAccessTokenId,
+    OAuthAccessTokenIsRevoked,
+    OAuthAccessTokenName,
+    OAuthAccessTokenRowId,
+    OAuthAccessTokenToken,
+    OAuthAccessTokenUpdatedAt,
+} from '@app/o-auth/access-token/domain/value-objects';
 import { OAuthClient } from '@app/o-auth/client';
+import { OAuthRefreshToken } from '@app/o-auth/refresh-token';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
+import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthAccessToken extends AggregateRoot
-{
+export class OAuthAccessToken extends AggregateRoot {
     id: OAuthAccessTokenId;
+    rowId: OAuthAccessTokenRowId;
     clientId: OAuthAccessTokenClientId;
     accountId: OAuthAccessTokenAccountId;
     token: OAuthAccessTokenToken;
@@ -35,6 +38,7 @@ export class OAuthAccessToken extends AggregateRoot
 
     constructor(
         id: OAuthAccessTokenId,
+        rowId: OAuthAccessTokenRowId,
         clientId: OAuthAccessTokenClientId,
         accountId: OAuthAccessTokenAccountId,
         token: OAuthAccessTokenToken,
@@ -46,10 +50,10 @@ export class OAuthAccessToken extends AggregateRoot
         deletedAt: OAuthAccessTokenDeletedAt,
         refreshToken?: OAuthRefreshToken,
         client?: OAuthClient,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.clientId = clientId;
         this.accountId = accountId;
         this.token = token;
@@ -65,6 +69,7 @@ export class OAuthAccessToken extends AggregateRoot
 
     static register(
         id: OAuthAccessTokenId,
+        rowId: OAuthAccessTokenRowId,
         clientId: OAuthAccessTokenClientId,
         accountId: OAuthAccessTokenAccountId,
         token: OAuthAccessTokenToken,
@@ -76,10 +81,10 @@ export class OAuthAccessToken extends AggregateRoot
         deletedAt: OAuthAccessTokenDeletedAt,
         refreshToken?: OAuthRefreshToken,
         client?: OAuthClient,
-    ): OAuthAccessToken
-    {
+    ): OAuthAccessToken {
         return new OAuthAccessToken(
             id,
+            rowId,
             clientId,
             accountId,
             token,
@@ -94,46 +99,57 @@ export class OAuthAccessToken extends AggregateRoot
         );
     }
 
-    created(accessToken: OAuthAccessToken): void
-    {
+    created(event: {
+        payload: OAuthAccessToken;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new OAuthCreatedAccessTokenEvent(
-                accessToken.id.value,
-                accessToken.clientId.value,
-                accessToken.accountId?.value,
-                accessToken.token.value,
-                accessToken.name?.value,
-                accessToken.isRevoked.value,
-                accessToken.expiresAt?.value,
-                accessToken.createdAt?.value,
-                accessToken.updatedAt?.value,
-                accessToken.deletedAt?.value,
-            ),
+            new OAuthCreatedAccessTokenEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    clientId: event.payload.clientId.value,
+                    accountId: event.payload.accountId?.value,
+                    token: event.payload.token.value,
+                    name: event.payload.name?.value,
+                    isRevoked: event.payload.isRevoked.value,
+                    expiresAt: event.payload.expiresAt?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(accessToken: OAuthAccessToken): void
-    {
+    deleted(event: {
+        payload: OAuthAccessToken;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new OAuthDeletedAccessTokenEvent(
-                accessToken.id.value,
-                accessToken.clientId.value,
-                accessToken.accountId?.value,
-                accessToken.token.value,
-                accessToken.name?.value,
-                accessToken.isRevoked.value,
-                accessToken.expiresAt?.value,
-                accessToken.createdAt?.value,
-                accessToken.updatedAt?.value,
-                accessToken.deletedAt?.value,
-            ),
+            new OAuthDeletedAccessTokenEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
+                    clientId: event.payload.clientId.value,
+                    accountId: event.payload.accountId?.value,
+                    token: event.payload.token.value,
+                    name: event.payload.name?.value,
+                    isRevoked: event.payload.isRevoked.value,
+                    expiresAt: event.payload.expiresAt?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             clientId: this.clientId.value,
             accountId: this.accountId?.value,
             token: this.token.value,
@@ -149,8 +165,7 @@ export class OAuthAccessToken extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             clientId: this.clientId.value,

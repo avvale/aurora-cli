@@ -1,125 +1,87 @@
-import { OAuthClient, OAuthCreatedClientEvent, OAuthCreatedClientsEvent, OAuthDeletedClientEvent, OAuthDeletedClientsEvent, OAuthUpdatedAndIncrementedClientEvent, OAuthUpdatedAndIncrementedClientsEvent, OAuthUpdatedClientEvent, OAuthUpdatedClientsEvent } from '@app/o-auth/client';
+import {
+    OAuthClient,
+    OAuthCreatedClientEvent,
+    OAuthCreatedClientsEvent,
+    OAuthDeletedClientEvent,
+    OAuthDeletedClientsEvent,
+} from '@app/o-auth/client';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthAddClientsContextEvent extends AggregateRoot
-{
+export class OAuthAddClientsContextEvent extends AggregateRoot {
     constructor(
         public readonly aggregateRoots: OAuthClient[] = [],
-    )
-    {
+        public readonly cQMetadata?: CQMetadata,
+    ) {
         super();
     }
 
-    *[Symbol.iterator]()
-    {
+    *[Symbol.iterator]() {
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created(): void
-    {
+    created(): void {
         this.apply(
-            new OAuthCreatedClientsEvent(
-                this.aggregateRoots.map(client =>
-                    new OAuthCreatedClientEvent(
-                        client.id.value,
-                        client.grantType.value,
-                        client.name.value,
-                        client.secret.value,
-                        client.authUrl?.value,
-                        client.redirect?.value,
-                        client.scopeOptions?.value,
-                        client.expiredAccessToken?.value,
-                        client.expiredRefreshToken?.value,
-                        client.isActive.value,
-                        client.isMaster.value,
-                        client.applicationIds?.value,
-                        client.createdAt?.value,
-                        client.updatedAt?.value,
-                        client.deletedAt?.value,
-                    ),
+            new OAuthCreatedClientsEvent({
+                payload: this.aggregateRoots.map(
+                    (client) =>
+                        new OAuthCreatedClientEvent({
+                            payload: {
+                                id: client.id.value,
+                                grantType: client.grantType.value,
+                                name: client.name.value,
+                                secret: client.secret.value,
+                                authUrl: client.authUrl?.value,
+                                redirect: client.redirect?.value,
+                                scopeOptions: client.scopeOptions?.value,
+                                expiredAccessToken:
+                                    client.expiredAccessToken?.value,
+                                expiredRefreshToken:
+                                    client.expiredRefreshToken?.value,
+                                isActive: client.isActive.value,
+                                isMaster: client.isMaster.value,
+                                applicationIds: client.applicationIds?.value,
+                                createdAt: client.createdAt?.value,
+                                updatedAt: client.updatedAt?.value,
+                                deletedAt: client.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
-    updated(): void
-    {
+    deleted(): void {
         this.apply(
-            new OAuthUpdatedClientsEvent(
-                this.aggregateRoots.map(client =>
-                    new OAuthUpdatedClientEvent(
-                        client.id.value,
-                        client.grantType.value,
-                        client.name.value,
-                        client.secret.value,
-                        client.authUrl?.value,
-                        client.redirect?.value,
-                        client.scopeOptions?.value,
-                        client.expiredAccessToken?.value,
-                        client.expiredRefreshToken?.value,
-                        client.isActive.value,
-                        client.isMaster.value,
-                        client.applicationIds?.value,
-                        client.createdAt?.value,
-                        client.updatedAt?.value,
-                        client.deletedAt?.value,
-                    ),
+            new OAuthDeletedClientsEvent({
+                payload: this.aggregateRoots.map(
+                    (client) =>
+                        new OAuthDeletedClientEvent({
+                            payload: {
+                                id: client.id.value,
+                                rowId: client.rowId.value,
+                                grantType: client.grantType.value,
+                                name: client.name.value,
+                                secret: client.secret.value,
+                                authUrl: client.authUrl?.value,
+                                redirect: client.redirect?.value,
+                                scopeOptions: client.scopeOptions?.value,
+                                expiredAccessToken:
+                                    client.expiredAccessToken?.value,
+                                expiredRefreshToken:
+                                    client.expiredRefreshToken?.value,
+                                isActive: client.isActive.value,
+                                isMaster: client.isMaster.value,
+                                applicationIds: client.applicationIds?.value,
+                                createdAt: client.createdAt?.value,
+                                updatedAt: client.updatedAt?.value,
+                                deletedAt: client.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new OAuthUpdatedAndIncrementedClientsEvent(
-                this.aggregateRoots.map(client =>
-                    new OAuthUpdatedAndIncrementedClientEvent(
-                        client.id.value,
-                        client.grantType.value,
-                        client.name.value,
-                        client.secret.value,
-                        client.authUrl?.value,
-                        client.redirect?.value,
-                        client.scopeOptions?.value,
-                        client.expiredAccessToken?.value,
-                        client.expiredRefreshToken?.value,
-                        client.isActive.value,
-                        client.isMaster.value,
-                        client.applicationIds?.value,
-                        client.createdAt?.value,
-                        client.updatedAt?.value,
-                        client.deletedAt?.value,
-                    ),
-                ),
-            ),
-        );
-    }
-
-    deleted(): void
-    {
-        this.apply(
-            new OAuthDeletedClientsEvent(
-                this.aggregateRoots.map(client =>
-                    new OAuthDeletedClientEvent(
-                        client.id.value,
-                        client.grantType.value,
-                        client.name.value,
-                        client.secret.value,
-                        client.authUrl?.value,
-                        client.redirect?.value,
-                        client.scopeOptions?.value,
-                        client.expiredAccessToken?.value,
-                        client.expiredRefreshToken?.value,
-                        client.isActive.value,
-                        client.isMaster.value,
-                        client.applicationIds?.value,
-                        client.createdAt?.value,
-                        client.updatedAt?.value,
-                        client.deletedAt?.value,
-                    ),
-                ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

@@ -1,46 +1,53 @@
-import { IamUpdateBoundedContextsController, IamUpdateBoundedContextsHandler } from '@api/iam/bounded-context';
+import {
+    IamUpdateBoundedContextsController,
+    IamUpdateBoundedContextsHandler,
+} from '@api/iam/bounded-context';
 import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateBoundedContextsController', () =>
-{
+describe('IamUpdateBoundedContextsController', () => {
     let controller: IamUpdateBoundedContextsController;
     let handler: IamUpdateBoundedContextsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamUpdateBoundedContextsController,
-            ],
+            imports: [],
+            controllers: [IamUpdateBoundedContextsController],
             providers: [
                 {
-                    provide : IamUpdateBoundedContextsHandler,
+                    provide: IamUpdateBoundedContextsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamUpdateBoundedContextsController>(IamUpdateBoundedContextsController);
-        handler = module.get<IamUpdateBoundedContextsHandler>(IamUpdateBoundedContextsHandler);
+        controller = module.get<IamUpdateBoundedContextsController>(
+            IamUpdateBoundedContextsController,
+        );
+        handler = module.get<IamUpdateBoundedContextsHandler>(
+            IamUpdateBoundedContextsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateBoundedContextsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateBoundedContextsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a boundedContexts updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
-            expect(await controller.main(iamMockBoundedContextData[0])).toBe(iamMockBoundedContextData[0]);
+        test('should return a boundedContexts updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockBoundedContextData[0]),
+                    ),
+            );
+            expect(await controller.main(iamMockBoundedContextData[0])).toBe(
+                iamMockBoundedContextData[0],
+            );
         });
     });
 });

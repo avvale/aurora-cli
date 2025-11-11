@@ -1,7 +1,9 @@
-import { IamAddBoundedContextsContextEvent, IamBoundedContext, IamIBoundedContextRepository } from '@app/iam/bounded-context';
 import {
-    IamBoundedContextCreatedAt,
-    IamBoundedContextDeletedAt,
+    IamAddBoundedContextsContextEvent,
+    IamBoundedContext,
+    IamIBoundedContextRepository,
+} from '@app/iam/bounded-context';
+import {
     IamBoundedContextId,
     IamBoundedContextIsActive,
     IamBoundedContextName,
@@ -14,8 +16,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdateBoundedContextsService
-{
+export class IamUpdateBoundedContextsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIBoundedContextRepository,
@@ -32,11 +33,11 @@ export class IamUpdateBoundedContextsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const boundedContext = IamBoundedContext.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.root,
             payload.sort,
@@ -47,31 +48,23 @@ export class IamUpdateBoundedContextsService
         );
 
         // update
-        await this.repository.update(
-            boundedContext,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(boundedContext, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const boundedContexts = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const boundedContexts = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const boundedContextsRegister = this.publisher.mergeObjectContext(
-            new IamAddBoundedContextsContextEvent(
-                boundedContexts,
-                cQMetadata,
-            ),
+            new IamAddBoundedContextsContextEvent(boundedContexts, cQMetadata),
         );
 
         boundedContextsRegister.updated(); // apply event to model events

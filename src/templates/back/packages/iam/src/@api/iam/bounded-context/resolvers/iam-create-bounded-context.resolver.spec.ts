@@ -1,51 +1,61 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IamCreateBoundedContextInput } from '@api/graphql';
-import { IamCreateBoundedContextHandler, IamCreateBoundedContextResolver } from '@api/iam/bounded-context';
+import {
+    IamCreateBoundedContextHandler,
+    IamCreateBoundedContextResolver,
+} from '@api/iam/bounded-context';
 import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateBoundedContextResolver', () =>
-{
+describe('IamCreateBoundedContextResolver', () => {
     let resolver: IamCreateBoundedContextResolver;
     let handler: IamCreateBoundedContextHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreateBoundedContextResolver,
                 {
-                    provide : IamCreateBoundedContextHandler,
+                    provide: IamCreateBoundedContextHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamCreateBoundedContextResolver>(IamCreateBoundedContextResolver);
-        handler = module.get<IamCreateBoundedContextHandler>(IamCreateBoundedContextHandler);
+        resolver = module.get<IamCreateBoundedContextResolver>(
+            IamCreateBoundedContextResolver,
+        );
+        handler = module.get<IamCreateBoundedContextHandler>(
+            IamCreateBoundedContextHandler,
+        );
     });
 
-    test('IamCreateBoundedContextResolver should be defined', () =>
-    {
+    test('IamCreateBoundedContextResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateBoundedContextResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateBoundedContextResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an boundedContext created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockBoundedContextData[0])));
-            expect(await resolver.main(<IamCreateBoundedContextInput>iamMockBoundedContextData[0])).toBe(iamMockBoundedContextData[0]);
+        test('should return an boundedContext created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockBoundedContextData[0]),
+                    ),
+            );
+            expect(
+                await resolver.main(
+                    <IamCreateBoundedContextInput>iamMockBoundedContextData[0],
+                ),
+            ).toBe(iamMockBoundedContextData[0]);
         });
     });
 });

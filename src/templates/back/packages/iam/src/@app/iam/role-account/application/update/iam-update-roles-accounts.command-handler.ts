@@ -8,19 +8,24 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamUpdateRolesAccountsCommand)
-export class IamUpdateRolesAccountsCommandHandler implements ICommandHandler<IamUpdateRolesAccountsCommand>
+export class IamUpdateRolesAccountsCommandHandler
+    implements ICommandHandler<IamUpdateRolesAccountsCommand>
 {
     constructor(
         private readonly updateRolesAccountsService: IamUpdateRolesAccountsService,
     ) {}
 
-    async execute(command: IamUpdateRolesAccountsCommand): Promise<void>
-    {
+    async execute(command: IamUpdateRolesAccountsCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.updateRolesAccountsService.main(
             {
-                roleId: new IamRoleAccountRoleId(command.payload.roleId, { undefinable: true }),
-                accountId: new IamRoleAccountAccountId(command.payload.accountId, { undefinable: true }),
+                roleId: new IamRoleAccountRoleId(command.payload.roleId, {
+                    undefinable: true,
+                }),
+                accountId: new IamRoleAccountAccountId(
+                    command.payload.accountId,
+                    { undefinable: true },
+                ),
             },
             command.queryStatement,
             command.constraint,

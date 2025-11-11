@@ -6,11 +6,8 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.permissionRole.get')
-export class IamFindPermissionRoleByIdResolver
-{
-    constructor(
-        private readonly handler: IamFindPermissionRoleByIdHandler,
-    ) {}
+export class IamFindPermissionRoleByIdResolver {
+    constructor(private readonly handler: IamFindPermissionRoleByIdHandler) {}
 
     @Query('iamFindPermissionRoleById')
     async main(
@@ -18,8 +15,7 @@ export class IamFindPermissionRoleByIdResolver
         @Args('roleId') roleId: string,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<IamPermissionRole>
-    {
+    ): Promise<IamPermissionRole> {
         return await this.handler.main(
             permissionId,
             roleId,

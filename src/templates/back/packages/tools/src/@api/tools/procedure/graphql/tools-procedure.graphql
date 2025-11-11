@@ -1,13 +1,24 @@
+#region customizations
+input ToolsCreateProcedureTemplateInput {
+    id: ID!
+    name: GraphQLString!
+    type: ToolsProcedureType!
+    version: GraphQLString!
+    upScript: GraphQLString!
+    downScript: GraphQLString!
+    sort: GraphQLInt!
+}
+#endregion customizations
+
 enum ToolsProcedureType {
     FUNCTION
     PROCEDURE
     TRIGGER
 }
 
-
-type ToolsProcedure
-{
+type ToolsProcedure {
     id: ID!
+    rowId: GraphQLInt!
     name: GraphQLString!
     type: ToolsProcedureType!
     version: GraphQLString!
@@ -25,8 +36,7 @@ type ToolsProcedure
     deletedAt: GraphQLTimestamp
 }
 
-input ToolsCreateProcedureInput
-{
+input ToolsCreateProcedureInput {
     id: ID!
     name: GraphQLString!
     type: ToolsProcedureType!
@@ -39,8 +49,7 @@ input ToolsCreateProcedureInput
     checkedAt: GraphQLTimestamp
 }
 
-input ToolsUpdateProcedureByIdInput
-{
+input ToolsUpdateProcedureByIdInput {
     id: ID!
     name: GraphQLString
     type: ToolsProcedureType
@@ -53,8 +62,7 @@ input ToolsUpdateProcedureByIdInput
     checkedAt: GraphQLTimestamp
 }
 
-input ToolsUpdateProceduresInput
-{
+input ToolsUpdateProceduresInput {
     id: ID
     name: GraphQLString
     type: ToolsProcedureType
@@ -67,28 +75,13 @@ input ToolsUpdateProceduresInput
     checkedAt: GraphQLTimestamp
 }
 
-input ToolsCreateProcedureTemplateInput
-{
-    id: ID!
-    name: GraphQLString!
-    type: ToolsProcedureType!
-    version: GraphQLString!
-    upScript: GraphQLString!
-    downScript: GraphQLString!
-    sort: GraphQLInt!
-}
-
-type Query
-{
+type Query {
     toolsFindProcedure(
         query: QueryStatement
         constraint: QueryStatement
     ): ToolsProcedure
 
-    toolsFindProcedureById(
-        id: ID
-        constraint: QueryStatement
-    ): ToolsProcedure
+    toolsFindProcedureById(id: ID, constraint: QueryStatement): ToolsProcedure
 
     toolsGetProcedures(
         query: QueryStatement
@@ -99,18 +92,12 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    toolsCreateProcedure(
-        payload: ToolsCreateProcedureInput!
-    ): ToolsProcedure
+type Mutation {
+    toolsCreateProcedure(payload: ToolsCreateProcedureInput!): ToolsProcedure
 
-    toolsCreateProcedures(
-        payload: [ToolsCreateProcedureInput]!
-    ): Boolean!
+    toolsCreateProcedures(payload: [ToolsCreateProcedureInput]!): Boolean!
 
     toolsUpdateProcedureById(
         payload: ToolsUpdateProcedureByIdInput!
@@ -133,20 +120,12 @@ type Mutation
         constraint: QueryStatement
     ): [ToolsProcedure]!
 
-
     # additionalApis
-    toolsUpScriptProcedure(
-        procedureId: ID!
-    ): Boolean!
+    toolsUpScriptProcedure(procedureId: ID!): Boolean!
 
-    toolsDownScriptProcedure(
-        procedureId: ID!
-    ): Boolean!
+    toolsDownScriptProcedure(procedureId: ID!): Boolean!
 
-    toolsCheckScriptProcedure(
-        procedureId: ID!
-    ): Boolean!
+    toolsCheckScriptProcedure(procedureId: ID!): Boolean!
 
     toolsRunScriptsProcedure: Boolean!
-
 }

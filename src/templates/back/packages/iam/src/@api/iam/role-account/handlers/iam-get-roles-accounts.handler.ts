@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamGetRolesAccountsHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class IamGetRolesAccountsHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamRoleAccount[] | IamRoleAccountDto[]>
-    {
-        return await this.queryBus.ask(new IamGetRolesAccountsQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<IamRoleAccount[] | IamRoleAccountDto[]> {
+        return await this.queryBus.ask(
+            new IamGetRolesAccountsQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

@@ -1,45 +1,50 @@
-import { IamFindTenantAccountController, IamFindTenantAccountHandler } from '@api/iam/tenant-account';
+import {
+    IamFindTenantAccountController,
+    IamFindTenantAccountHandler,
+} from '@api/iam/tenant-account';
 import { iamMockTenantAccountData } from '@app/iam/tenant-account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTenantAccountController', () =>
-{
+describe('IamFindTenantAccountController', () => {
     let controller: IamFindTenantAccountController;
     let handler: IamFindTenantAccountHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamFindTenantAccountController,
-            ],
+            imports: [],
+            controllers: [IamFindTenantAccountController],
             providers: [
                 {
-                    provide : IamFindTenantAccountHandler,
+                    provide: IamFindTenantAccountHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamFindTenantAccountController>(IamFindTenantAccountController);
-        handler = module.get<IamFindTenantAccountHandler>(IamFindTenantAccountHandler);
+        controller = module.get<IamFindTenantAccountController>(
+            IamFindTenantAccountController,
+        );
+        handler = module.get<IamFindTenantAccountHandler>(
+            IamFindTenantAccountHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTenantAccountController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTenantAccountController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a tenantAccount', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantAccountData[0])));
+        test('should return a tenantAccount', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockTenantAccountData[0]),
+                    ),
+            );
             expect(await controller.main()).toBe(iamMockTenantAccountData[0]);
         });
     });

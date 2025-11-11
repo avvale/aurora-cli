@@ -1,45 +1,51 @@
 import { OAuthCreateApplicationClientInput } from '@api/graphql';
-import { OAuthCreateApplicationsClientsHandler, OAuthCreateApplicationsClientsResolver } from '@api/o-auth/application-client';
+import {
+    OAuthCreateApplicationsClientsHandler,
+    OAuthCreateApplicationsClientsResolver,
+} from '@api/o-auth/application-client';
 import { oAuthMockApplicationClientData } from '@app/o-auth/application-client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthCreateApplicationsClientsResolver', () =>
-{
+describe('OAuthCreateApplicationsClientsResolver', () => {
     let resolver: OAuthCreateApplicationsClientsResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthCreateApplicationsClientsResolver,
                 {
-                    provide : OAuthCreateApplicationsClientsHandler,
+                    provide: OAuthCreateApplicationsClientsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthCreateApplicationsClientsResolver>(OAuthCreateApplicationsClientsResolver);
+        resolver = module.get<OAuthCreateApplicationsClientsResolver>(
+            OAuthCreateApplicationsClientsResolver,
+        );
     });
 
-    test('OAuthCreateApplicationsClientsResolver should be defined', () =>
-    {
+    test('OAuthCreateApplicationsClientsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthCreateApplicationsClientsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthCreateApplicationsClientsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an applicationsClients created', async () =>
-        {
-            expect(await resolver.main(<OAuthCreateApplicationClientInput[]>oAuthMockApplicationClientData)).toBe(undefined);
+        test('should return an applicationsClients created', async () => {
+            expect(
+                await resolver.main(
+                    <OAuthCreateApplicationClientInput[]>(
+                        oAuthMockApplicationClientData
+                    ),
+                ),
+            ).toBe(undefined);
         });
     });
 });

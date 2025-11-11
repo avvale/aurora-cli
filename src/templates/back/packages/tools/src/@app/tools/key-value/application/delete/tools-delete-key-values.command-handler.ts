@@ -3,14 +3,14 @@ import { ToolsDeleteKeyValuesService } from '@app/tools/key-value/application/de
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsDeleteKeyValuesCommand)
-export class ToolsDeleteKeyValuesCommandHandler implements ICommandHandler<ToolsDeleteKeyValuesCommand>
+export class ToolsDeleteKeyValuesCommandHandler
+    implements ICommandHandler<ToolsDeleteKeyValuesCommand>
 {
     constructor(
         private readonly deleteKeyValuesService: ToolsDeleteKeyValuesService,
     ) {}
 
-    async execute(command: ToolsDeleteKeyValuesCommand): Promise<void>
-    {
+    async execute(command: ToolsDeleteKeyValuesCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteKeyValuesService.main(
             command.queryStatement,

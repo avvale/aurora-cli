@@ -1,26 +1,25 @@
-import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 //
-import { ToolsCreateKeyValuesCommand } from '@app/tools/key-value';
-import { toolsMockKeyValueData } from '@app/tools/key-value';
+import {
+    ToolsCreateKeyValuesCommand,
+    toolsMockKeyValueData,
+} from '@app/tools/key-value';
 
 @Injectable()
-export class ToolsKeyValueSeeder
-{
+export class ToolsKeyValueSeeder {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
     ) {}
 
-    async main(): Promise<boolean>
-    {
-        await this.commandBus.dispatch(new ToolsCreateKeyValuesCommand(
-            toolsMockKeyValueData,
-            {
-                timezone: process.env.TZ ,
-            },
-        ));
+    async main(): Promise<boolean> {
+        await this.commandBus.dispatch(
+            new ToolsCreateKeyValuesCommand(toolsMockKeyValueData, {
+                timezone: process.env.TZ,
+            }),
+        );
 
         return true;
     }

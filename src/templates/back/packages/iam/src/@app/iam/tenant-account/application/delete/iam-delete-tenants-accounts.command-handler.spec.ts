@@ -3,40 +3,40 @@ import { IamDeleteTenantsAccountsCommandHandler } from '@app/iam/tenant-account/
 import { IamDeleteTenantsAccountsService } from '@app/iam/tenant-account/application/delete/iam-delete-tenants-accounts.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeleteTenantsAccountsCommandHandler', () =>
-{
+describe('IamDeleteTenantsAccountsCommandHandler', () => {
     let commandHandler: IamDeleteTenantsAccountsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamDeleteTenantsAccountsCommandHandler,
                 {
-                    provide : IamDeleteTenantsAccountsService,
+                    provide: IamDeleteTenantsAccountsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamDeleteTenantsAccountsCommandHandler>(IamDeleteTenantsAccountsCommandHandler);
+        commandHandler = module.get<IamDeleteTenantsAccountsCommandHandler>(
+            IamDeleteTenantsAccountsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamDeleteTenantsAccountsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeleteTenantsAccountsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamDeleteTenantsAccountsCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamDeleteTenantsAccountsCommand(),
+                ),
+            ).toBe(undefined);
         });
     });
 });

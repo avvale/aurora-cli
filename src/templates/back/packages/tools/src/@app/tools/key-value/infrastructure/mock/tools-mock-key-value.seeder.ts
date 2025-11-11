@@ -6,6 +6,7 @@ import {
     ToolsKeyValueId,
     ToolsKeyValueIsActive,
     ToolsKeyValueKey,
+    ToolsKeyValueRowId,
     ToolsKeyValueType,
     ToolsKeyValueUpdatedAt,
     ToolsKeyValueValue,
@@ -15,25 +16,22 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class ToolsMockKeyValueSeeder extends MockSeeder<ToolsKeyValue>
-{
+export class ToolsMockKeyValueSeeder extends MockSeeder<ToolsKeyValue> {
     public collectionSource: ToolsKeyValue[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const keyValue of _.orderBy(toolsMockKeyValueData, ['id']))
-        {
+        for (const keyValue of _.orderBy(toolsMockKeyValueData, ['id'])) {
             this.collectionSource.push(
                 ToolsKeyValue.register(
                     new ToolsKeyValueId(keyValue.id),
+                    new ToolsKeyValueRowId(keyValue.rowId),
                     new ToolsKeyValueKey(keyValue.key),
                     new ToolsKeyValueType(keyValue.type),
                     new ToolsKeyValueValue(keyValue.value),

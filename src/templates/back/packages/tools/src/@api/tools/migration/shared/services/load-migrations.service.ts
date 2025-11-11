@@ -21,6 +21,7 @@ export class ToolsLoadMigrationsService
             {
                 repositoryOptions: {
                     updateOnDuplicate: ['name', 'version', 'upScript', 'downScript', 'sort'],
+                    conflictAttributes: ['id'],
                 },
             },
         ));

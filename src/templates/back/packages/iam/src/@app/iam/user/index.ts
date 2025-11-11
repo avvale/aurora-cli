@@ -1,39 +1,38 @@
+/* #region customizations */
+export { IamFindUserByUsernamePasswordQuery } from './application/find/iam-find-user-by-username-password.query';
+
+import { IamFindUserByUsernamePasswordQueryHandler } from './application/find/iam-find-user-by-username-password.query-handler';
+import { IamFindUserByUsernamePasswordService } from './application/find/iam-find-user-by-username-password.service';
+/* #endregion customizations */
+
 // export commands
 export { IamCreateUserCommand } from './application/create/iam-create-user.command';
 export { IamCreateUsersCommand } from './application/create/iam-create-users.command';
-export { IamUpdateUserByIdCommand } from './application/update/iam-update-user-by-id.command';
-export { IamUpdateUsersCommand } from './application/update/iam-update-users.command';
-export { IamUpdateAndIncrementUsersCommand } from './application/update/iam-update-and-increment-users.command';
-export { IamUpsertUserCommand } from './application/upsert/iam-upsert-user.command';
 export { IamDeleteUserByIdCommand } from './application/delete/iam-delete-user-by-id.command';
 export { IamDeleteUsersCommand } from './application/delete/iam-delete-users.command';
+export { IamUpdateUserByIdCommand } from './application/update/iam-update-user-by-id.command';
+export { IamUpdateUsersCommand } from './application/update/iam-update-users.command';
 
 // export queries
-export { IamPaginateUsersQuery } from './application/paginate/iam-paginate-users.query';
-export { IamGetUsersQuery } from './application/get/iam-get-users.query';
-export { IamFindUserQuery } from './application/find/iam-find-user.query';
-export { IamFindUserByIdQuery } from './application/find/iam-find-user-by-id.query';
-export { IamRawSQLUsersQuery } from './application/raw-sql/iam-raw-sql-users.query';
 export { IamCountUserQuery } from './application/count/iam-count-user.query';
-export { IamMaxUserQuery } from './application/max/iam-max-user.query';
-export { IamMinUserQuery } from './application/min/iam-min-user.query';
-export { IamSumUserQuery } from './application/sum/iam-sum-user.query';
+export { IamFindUserByIdQuery } from './application/find/iam-find-user-by-id.query';
+export { IamFindUserQuery } from './application/find/iam-find-user.query';
+export { IamGetUsersQuery } from './application/get/iam-get-users.query';
+export { IamPaginateUsersQuery } from './application/paginate/iam-paginate-users.query';
 
 // export mocks
 export { iamMockUserData } from './infrastructure/mock/iam-mock-user.data';
-export { IamMockUserSeeder } from './infrastructure/mock/iam-mock-user.seeder';
 export { IamMockUserRepository } from './infrastructure/mock/iam-mock-user.repository';
+export { IamMockUserSeeder } from './infrastructure/mock/iam-mock-user.seeder';
 
 // export events
 export { IamAddUsersContextEvent } from './application/events/iam-add-users-context.event';
-export { IamCreatedUsersEvent } from './application/events/iam-created-users.event';
 export { IamCreatedUserEvent } from './application/events/iam-created-user.event';
-export { IamDeletedUsersEvent } from './application/events/iam-deleted-users.event';
+export { IamCreatedUsersEvent } from './application/events/iam-created-users.event';
 export { IamDeletedUserEvent } from './application/events/iam-deleted-user.event';
-export { IamUpdatedUsersEvent } from './application/events/iam-updated-users.event';
+export { IamDeletedUsersEvent } from './application/events/iam-deleted-users.event';
 export { IamUpdatedUserEvent } from './application/events/iam-updated-user.event';
-export { IamUpdatedAndIncrementedUsersEvent } from './application/events/iam-updated-and-incremented-users.event';
-export { IamUpdatedAndIncrementedUserEvent } from './application/events/iam-updated-and-incremented-user.event';
+export { IamUpdatedUsersEvent } from './application/events/iam-updated-users.event';
 
 // export command handlers
 // can not export application command handlers, because Nest can't resolve dependencies
@@ -54,70 +53,52 @@ export { IamSequelizeUserRepository } from './infrastructure/sequelize/iam-seque
 // sagas
 export { IamUserSagas } from './application/sagas/iam-user.sagas';
 
-// ---- customizations ----
-export { IamFindUserByUsernamePasswordQuery } from './application/find/iam-find-user-by-username-password.query';
-
 // command handlers
 import { IamCreateUserCommandHandler } from './application/create/iam-create-user.command-handler';
 import { IamCreateUsersCommandHandler } from './application/create/iam-create-users.command-handler';
-import { IamUpdateUserByIdCommandHandler } from './application/update/iam-update-user-by-id.command-handler';
-import { IamUpdateUsersCommandHandler } from './application/update/iam-update-users.command-handler';
-import { IamUpdateAndIncrementUsersCommandHandler } from './application/update/iam-update-and-increment-users.command-handler';
-import { IamUpsertUserCommandHandler } from './application/upsert/iam-upsert-user.command-handler';
 import { IamDeleteUserByIdCommandHandler } from './application/delete/iam-delete-user-by-id.command-handler';
 import { IamDeleteUsersCommandHandler } from './application/delete/iam-delete-users.command-handler';
+import { IamUpdateUserByIdCommandHandler } from './application/update/iam-update-user-by-id.command-handler';
+import { IamUpdateUsersCommandHandler } from './application/update/iam-update-users.command-handler';
 
 // query handlers
-import { IamPaginateUsersQueryHandler } from './application/paginate/iam-paginate-users.query-handler';
-import { IamGetUsersQueryHandler } from './application/get/iam-get-users.query-handler';
-import { IamFindUserQueryHandler } from './application/find/iam-find-user.query-handler';
-import { IamFindUserByIdQueryHandler } from './application/find/iam-find-user-by-id.query-handler';
-import { IamRawSQLUsersQueryHandler } from './application/raw-sql/iam-raw-sql-users.query-handler';
 import { IamCountUserQueryHandler } from './application/count/iam-count-user.query-handler';
-import { IamMaxUserQueryHandler } from './application/max/iam-max-user.query-handler';
-import { IamMinUserQueryHandler } from './application/min/iam-min-user.query-handler';
-import { IamSumUserQueryHandler } from './application/sum/iam-sum-user.query-handler';
+import { IamFindUserByIdQueryHandler } from './application/find/iam-find-user-by-id.query-handler';
+import { IamFindUserQueryHandler } from './application/find/iam-find-user.query-handler';
+import { IamGetUsersQueryHandler } from './application/get/iam-get-users.query-handler';
+import { IamPaginateUsersQueryHandler } from './application/paginate/iam-paginate-users.query-handler';
 
 // event handlers
 import { IamCreatedUserEventHandler } from './application/events/iam-created-user.event-handler';
 import { IamCreatedUsersEventHandler } from './application/events/iam-created-users.event-handler';
-import { IamUpdatedUserEventHandler } from './application/events/iam-updated-user.event-handler';
-import { IamUpdatedUsersEventHandler } from './application/events/iam-updated-users.event-handler';
-import { IamUpdatedAndIncrementedUsersEventHandler } from './application/events/iam-updated-and-incremented-users.event-handler';
 import { IamDeletedUserEventHandler } from './application/events/iam-deleted-user.event-handler';
 import { IamDeletedUsersEventHandler } from './application/events/iam-deleted-users.event-handler';
+import { IamUpdatedUserEventHandler } from './application/events/iam-updated-user.event-handler';
+import { IamUpdatedUsersEventHandler } from './application/events/iam-updated-users.event-handler';
 
 // services
+import { IamCountUserService } from './application/count/iam-count-user.service';
 import { IamCreateUserService } from './application/create/iam-create-user.service';
 import { IamCreateUsersService } from './application/create/iam-create-users.service';
-import { IamPaginateUsersService } from './application/paginate/iam-paginate-users.service';
-import { IamGetUsersService } from './application/get/iam-get-users.service';
-import { IamFindUserService } from './application/find/iam-find-user.service';
-import { IamFindUserByIdService } from './application/find/iam-find-user-by-id.service';
-import { IamRawSQLUsersService } from './application/raw-sql/iam-raw-sql-users.service';
-import { IamCountUserService } from './application/count/iam-count-user.service';
-import { IamMaxUserService } from './application/max/iam-max-user.service';
-import { IamMinUserService } from './application/min/iam-min-user.service';
-import { IamSumUserService } from './application/sum/iam-sum-user.service';
-import { IamUpdateUserByIdService } from './application/update/iam-update-user-by-id.service';
-import { IamUpdateUsersService } from './application/update/iam-update-users.service';
-import { IamUpdateAndIncrementUsersService } from './application/update/iam-update-and-increment-users.service';
-import { IamUpsertUserService } from './application/upsert/iam-upsert-user.service';
 import { IamDeleteUserByIdService } from './application/delete/iam-delete-user-by-id.service';
 import { IamDeleteUsersService } from './application/delete/iam-delete-users.service';
-
-// ---- customizations ----
-import { IamFindUserByUsernamePasswordService } from './application/find/iam-find-user-by-username-password.service';
-import { IamFindUserByUsernamePasswordQueryHandler } from './application/find/iam-find-user-by-username-password.query-handler';
+import { IamFindUserByIdService } from './application/find/iam-find-user-by-id.service';
+import { IamFindUserService } from './application/find/iam-find-user.service';
+import { IamGetUsersService } from './application/get/iam-get-users.service';
+import { IamPaginateUsersService } from './application/paginate/iam-paginate-users.service';
+import { IamUpdateUserByIdService } from './application/update/iam-update-user-by-id.service';
+import { IamUpdateUsersService } from './application/update/iam-update-users.service';
 
 export const IamUserHandlers = [
+    /* #region customizations */
+    IamFindUserByUsernamePasswordQueryHandler,
+    /* #endregion customizations */
+
     // commands
     IamCreateUserCommandHandler,
     IamCreateUsersCommandHandler,
     IamUpdateUserByIdCommandHandler,
     IamUpdateUsersCommandHandler,
-    IamUpdateAndIncrementUsersCommandHandler,
-    IamUpsertUserCommandHandler,
     IamDeleteUserByIdCommandHandler,
     IamDeleteUsersCommandHandler,
 
@@ -126,44 +107,31 @@ export const IamUserHandlers = [
     IamGetUsersQueryHandler,
     IamFindUserQueryHandler,
     IamFindUserByIdQueryHandler,
-    IamRawSQLUsersQueryHandler,
     IamCountUserQueryHandler,
-    IamMaxUserQueryHandler,
-    IamMinUserQueryHandler,
-    IamSumUserQueryHandler,
-
-    // ---- customizations ----
-    IamFindUserByUsernamePasswordQueryHandler,
 
     // events
     IamCreatedUserEventHandler,
     IamCreatedUsersEventHandler,
     IamUpdatedUserEventHandler,
     IamUpdatedUsersEventHandler,
-    IamUpdatedAndIncrementedUsersEventHandler,
     IamDeletedUserEventHandler,
     IamDeletedUsersEventHandler,
 ];
 
 export const IamUserServices = [
+    /* #region customizations */
+    IamFindUserByUsernamePasswordService,
+    /* #endregion customizations */
+
     IamCreateUserService,
     IamCreateUsersService,
     IamPaginateUsersService,
     IamGetUsersService,
     IamFindUserService,
     IamFindUserByIdService,
-    IamRawSQLUsersService,
     IamCountUserService,
-    IamMaxUserService,
-    IamMinUserService,
-    IamSumUserService,
     IamUpdateUserByIdService,
     IamUpdateUsersService,
-    IamUpdateAndIncrementUsersService,
-    IamUpsertUserService,
     IamDeleteUserByIdService,
     IamDeleteUsersService,
-
-    // ---- customizations ----
-    IamFindUserByUsernamePasswordService,
 ];

@@ -1,51 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IamUpdateUserByIdInput } from '@api/graphql';
-import { IamUpdateUserByIdHandler, IamUpdateUserByIdResolver } from '@api/iam/user';
+import {
+    IamUpdateUserByIdHandler,
+    IamUpdateUserByIdResolver,
+} from '@api/iam/user';
 import { iamMockUserData } from '@app/iam/user';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamUpdateUserByIdResolver', () =>
-{
+describe('IamUpdateUserByIdResolver', () => {
     let resolver: IamUpdateUserByIdResolver;
     let handler: IamUpdateUserByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamUpdateUserByIdResolver,
                 {
-                    provide : IamUpdateUserByIdHandler,
+                    provide: IamUpdateUserByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamUpdateUserByIdResolver>(IamUpdateUserByIdResolver);
-        handler = module.get<IamUpdateUserByIdHandler>(IamUpdateUserByIdHandler);
+        resolver = module.get<IamUpdateUserByIdResolver>(
+            IamUpdateUserByIdResolver,
+        );
+        handler = module.get<IamUpdateUserByIdHandler>(
+            IamUpdateUserByIdHandler,
+        );
     });
 
-    test('IamUpdateUserByIdResolver should be defined', () =>
-    {
+    test('IamUpdateUserByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamUpdateUserByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamUpdateUserByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a user by id updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockUserData[0])));
-            expect(await resolver.main(<IamUpdateUserByIdInput>iamMockUserData[0])).toBe(iamMockUserData[0]);
+        test('should return a user by id updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockUserData[0])),
+            );
+            expect(
+                await resolver.main(<IamUpdateUserByIdInput>iamMockUserData[0]),
+            ).toBe(iamMockUserData[0]);
         });
     });
 });

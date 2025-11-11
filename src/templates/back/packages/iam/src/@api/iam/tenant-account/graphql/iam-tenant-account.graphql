@@ -1,32 +1,26 @@
-
-type IamTenantAccount
-{
+type IamTenantAccount {
     tenantId: ID!
     tenant: IamTenant
     accountId: ID!
     account: IamAccount
 }
 
-input IamCreateTenantAccountInput
-{
+input IamCreateTenantAccountInput {
     tenantId: ID!
     accountId: ID!
 }
 
-input IamUpdateTenantAccountByIdInput
-{
+input IamUpdateTenantAccountByIdInput {
     tenantId: ID!
     accountId: ID!
 }
 
-input IamUpdateTenantsAccountsInput
-{
+input IamUpdateTenantsAccountsInput {
     tenantId: ID
     accountId: ID
 }
 
-type Query
-{
+type Query {
     iamFindTenantAccount(
         query: QueryStatement
         constraint: QueryStatement
@@ -47,18 +41,14 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     iamCreateTenantAccount(
         payload: IamCreateTenantAccountInput!
     ): IamTenantAccount
 
-    iamCreateTenantsAccounts(
-        payload: [IamCreateTenantAccountInput]!
-    ): Boolean!
+    iamCreateTenantsAccounts(payload: [IamCreateTenantAccountInput]!): Boolean!
 
     iamUpdateTenantAccountById(
         payload: IamUpdateTenantAccountByIdInput!
@@ -81,5 +71,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [IamTenantAccount]!
-
 }

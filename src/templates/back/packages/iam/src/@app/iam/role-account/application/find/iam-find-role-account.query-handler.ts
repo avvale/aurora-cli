@@ -1,9 +1,14 @@
-import { IamFindRoleAccountQuery, IamRoleAccountMapper, IamRoleAccountResponse } from '@app/iam/role-account';
+import {
+    IamFindRoleAccountQuery,
+    IamRoleAccountMapper,
+    IamRoleAccountResponse,
+} from '@app/iam/role-account';
 import { IamFindRoleAccountService } from '@app/iam/role-account/application/find/iam-find-role-account.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamFindRoleAccountQuery)
-export class IamFindRoleAccountQueryHandler implements IQueryHandler<IamFindRoleAccountQuery>
+export class IamFindRoleAccountQueryHandler
+    implements IQueryHandler<IamFindRoleAccountQuery>
 {
     private readonly mapper: IamRoleAccountMapper = new IamRoleAccountMapper();
 
@@ -11,8 +16,9 @@ export class IamFindRoleAccountQueryHandler implements IQueryHandler<IamFindRole
         private readonly findRoleAccountService: IamFindRoleAccountService,
     ) {}
 
-    async execute(query: IamFindRoleAccountQuery): Promise<IamRoleAccountResponse>
-    {
+    async execute(
+        query: IamFindRoleAccountQuery,
+    ): Promise<IamRoleAccountResponse> {
         const roleAccount = await this.findRoleAccountService.main(
             query.queryStatement,
             query.constraint,

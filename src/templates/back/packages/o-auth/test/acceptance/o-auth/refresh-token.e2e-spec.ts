@@ -4,7 +4,11 @@
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { OAuthIRefreshTokenRepository, oAuthMockRefreshTokenData, OAuthMockRefreshTokenSeeder } from '@app/o-auth/refresh-token';
+import {
+    OAuthIRefreshTokenRepository,
+    oAuthMockRefreshTokenData,
+    OAuthMockRefreshTokenSeeder,
+} from '@app/o-auth/refresh-token';
 import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -16,8 +20,7 @@ import * as request from 'supertest';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('refresh-token', () =>
-{
+describe('refresh-token', () => {
     let app: INestApplication;
     let refreshTokenRepository: OAuthIRefreshTokenRepository;
     let refreshTokenSeeder: OAuthMockRefreshTokenSeeder;
@@ -28,37 +31,41 @@ describe('refresh-token', () =>
     // set timeout to 60s by default are 5s
     jest.setTimeout(60000);
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
                 OAuthModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
-                    imports   : [ConfigModule],
-                    inject    : [ConfigService],
-                    useFactory: (configService: ConfigService) =>
-                    {
+                    imports: [ConfigModule],
+                    inject: [ConfigService],
+                    useFactory: (configService: ConfigService) => {
                         return {
-                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
-                            storage       : configService.get('TEST_DATABASE_STORAGE'),
-                            host          : configService.get('TEST_DATABASE_HOST'),
-                            port          : +configService.get('TEST_DATABASE_PORT'),
-                            username      : configService.get('TEST_DATABASE_USER'),
-                            password      : configService.get('TEST_DATABASE_PASSWORD'),
-                            database      : configService.get('TEST_DATABASE_SCHEMA'),
-                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
-                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            dialect: configService.get('TEST_DATABASE_DIALECT'),
+                            storage: configService.get('TEST_DATABASE_STORAGE'),
+                            host: configService.get('TEST_DATABASE_HOST'),
+                            port: +configService.get('TEST_DATABASE_PORT'),
+                            username: configService.get('TEST_DATABASE_USER'),
+                            password: configService.get(
+                                'TEST_DATABASE_PASSWORD',
+                            ),
+                            database: configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize: configService.get(
+                                'TEST_DATABASE_SYNCHRONIZE',
+                            ),
+                            logging:
+                                configService.get('TEST_DATABASE_LOGGIN') ===
+                                'true'
+                                    ? console.log
+                                    : false,
                             autoLoadModels: true,
-                            models        : [],
+                            models: [],
                         };
                     },
                 }),
             ],
-            providers: [
-                OAuthMockRefreshTokenSeeder,
-            ],
+            providers: [OAuthMockRefreshTokenSeeder],
         })
             .overrideGuard(AuthenticationJwtGuard)
             .useValue({ canActivate: () => true })
@@ -68,17 +75,22 @@ describe('refresh-token', () =>
 
         mockData = oAuthMockRefreshTokenData;
         app = module.createNestApplication();
-        refreshTokenRepository = module.get<OAuthIRefreshTokenRepository>(OAuthIRefreshTokenRepository);
-        refreshTokenSeeder = module.get<OAuthMockRefreshTokenSeeder>(OAuthMockRefreshTokenSeeder);
+        refreshTokenRepository = module.get<OAuthIRefreshTokenRepository>(
+            OAuthIRefreshTokenRepository,
+        );
+        refreshTokenSeeder = module.get<OAuthMockRefreshTokenSeeder>(
+            OAuthMockRefreshTokenSeeder,
+        );
 
         // seed mock data in memory database
-        await refreshTokenRepository.insert(refreshTokenSeeder.collectionSource);
+        await refreshTokenRepository.insert(
+            refreshTokenSeeder.collectionSource,
+        );
 
         await app.init();
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenId property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -87,14 +99,30 @@ describe('refresh-token', () =>
                 id: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenAccessTokenId property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenRowId property can not to be null', () => {
+        return request(app.getHttpServer())
+            .post('/o-auth/refresh-token/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: null,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenRowId must be defined, can not be null',
+                );
+            });
+    });
+
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenAccessTokenId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -103,14 +131,14 @@ describe('refresh-token', () =>
                 accessTokenId: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenAccessTokenId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenAccessTokenId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenToken property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenToken property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -119,14 +147,14 @@ describe('refresh-token', () =>
                 token: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenToken must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenToken must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenIsRevoked property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenIsRevoked property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -135,14 +163,14 @@ describe('refresh-token', () =>
                 isRevoked: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenIsRevoked must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenIsRevoked must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenId property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -151,14 +179,30 @@ describe('refresh-token', () =>
                 id: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenAccessTokenId property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenRowId property can not to be undefined', () => {
+        return request(app.getHttpServer())
+            .post('/o-auth/refresh-token/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: undefined,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenRowId must be defined, can not be undefined',
+                );
+            });
+    });
+
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenAccessTokenId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -167,14 +211,14 @@ describe('refresh-token', () =>
                 accessTokenId: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenAccessTokenId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenAccessTokenId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenToken property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenToken property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -183,14 +227,14 @@ describe('refresh-token', () =>
                 token: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenToken must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenToken must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenIsRevoked property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenIsRevoked property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -199,14 +243,14 @@ describe('refresh-token', () =>
                 isRevoked: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenIsRevoked must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenIsRevoked must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -215,14 +259,14 @@ describe('refresh-token', () =>
                 id: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenAccessTokenId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenAccessTokenId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -231,14 +275,14 @@ describe('refresh-token', () =>
                 accessTokenId: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenAccessTokenId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenAccessTokenId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenIsRevoked has to be a boolean value', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenIsRevoked has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -247,13 +291,13 @@ describe('refresh-token', () =>
                 isRevoked: 'true',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenIsRevoked has to be a boolean value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenIsRevoked has to be a boolean value',
+                );
             });
     });
-    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenExpiresAt has to be a timestamp value', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 400 Conflict, RefreshTokenExpiresAt has to be a timestamp value', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -262,14 +306,14 @@ describe('refresh-token', () =>
                 expiresAt: '****',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthRefreshTokenExpiresAt has to be a timestamp value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthRefreshTokenExpiresAt has to be a timestamp value',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/create - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -277,53 +321,63 @@ describe('refresh-token', () =>
             .expect(409);
     });
 
-    test('/REST:POST o-auth/refresh-tokens/paginate', () =>
-    {
+    test('/REST:POST o-auth/refresh-tokens/paginate', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-tokens/paginate')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
+                query: {
                     offset: 0,
                     limit: 5,
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual({
                     total: refreshTokenSeeder.collectionResponse.length,
                     count: refreshTokenSeeder.collectionResponse.length,
-                    rows : refreshTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: refreshTokenSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/REST:POST o-auth/refresh-tokens/get', () =>
-    {
+    test('/REST:POST o-auth/refresh-tokens/get', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-tokens/get')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual(
-                    refreshTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    refreshTokenSeeder.collectionResponse.map((item) =>
+                        expect.objectContaining(
+                            _.omit(item, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    ),
                 );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/find - Got 404 Not Found', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/find - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: 'aed27b98-9952-5fe5-9c81-cb4f06857983',
                     },
                 },
@@ -331,8 +385,7 @@ describe('refresh-token', () =>
             .expect(404);
     });
 
-    test('/REST:POST o-auth/refresh-token/create', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/create', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/create')
             .set('Accept', 'application/json')
@@ -343,49 +396,51 @@ describe('refresh-token', () =>
             .expect(201);
     });
 
-    test('/REST:POST o-auth/refresh-token/find', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/find', () => {
         return request(app.getHttpServer())
             .post('/o-auth/refresh-token/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:POST o-auth/refresh-token/find/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/find/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
-            .post('/o-auth/refresh-token/find/a4e47a70-6ab3-518d-a9be-992dcd442c21')
+            .post(
+                '/o-auth/refresh-token/find/a4e47a70-6ab3-518d-a9be-992dcd442c21',
+            )
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:POST o-auth/refresh-token/find/{id}', () =>
-    {
+    test('/REST:POST o-auth/refresh-token/find/{id}', () => {
         return request(app.getHttpServer())
-            .post('/o-auth/refresh-token/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post(
+                '/o-auth/refresh-token/find/5b19d6ac-4081-573b-96b3-56964d5326a8',
+            )
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:PUT o-auth/refresh-token/update - Got 404 Not Found', () =>
-    {
+    test('/REST:PUT o-auth/refresh-token/update - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .put('/o-auth/refresh-token/update')
             .set('Accept', 'application/json')
@@ -396,8 +451,7 @@ describe('refresh-token', () =>
             .expect(404);
     });
 
-    test('/REST:PUT o-auth/refresh-token/update', () =>
-    {
+    test('/REST:PUT o-auth/refresh-token/update', () => {
         return request(app.getHttpServer())
             .put('/o-auth/refresh-token/update')
             .set('Accept', 'application/json')
@@ -406,30 +460,33 @@ describe('refresh-token', () =>
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:DELETE o-auth/refresh-token/delete/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:DELETE o-auth/refresh-token/delete/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
-            .delete('/o-auth/refresh-token/delete/813b1c20-c0a4-5a43-b276-e61bdf055b78')
+            .delete(
+                '/o-auth/refresh-token/delete/813b1c20-c0a4-5a43-b276-e61bdf055b78',
+            )
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE o-auth/refresh-token/delete/{id}', () =>
-    {
+    test('/REST:DELETE o-auth/refresh-token/delete/{id}', () => {
         return request(app.getHttpServer())
-            .delete('/o-auth/refresh-token/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete(
+                '/o-auth/refresh-token/delete/5b19d6ac-4081-573b-96b3-56964d5326a8',
+            )
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL oAuthCreateRefreshToken - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/GraphQL oAuthCreateRefreshToken - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -440,6 +497,7 @@ describe('refresh-token', () =>
                         oAuthCreateRefreshToken (payload:$payload)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -447,22 +505,27 @@ describe('refresh-token', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
+                variables: {
+                    payload: _.omit(mockData[0], [
+                        'createdAt',
+                        'updatedAt',
+                        'deletedAt',
+                    ]),
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(409);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('already exist in database');
             });
     });
 
-    test('/GraphQL oAuthPaginateRefreshTokens', () =>
-    {
+    test('/GraphQL oAuthPaginateRefreshTokens', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -478,28 +541,34 @@ describe('refresh-token', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
+                variables: {
+                    query: {
                         offset: 0,
                         limit: 5,
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body.data.oAuthPaginateRefreshTokens).toEqual({
                     total: refreshTokenSeeder.collectionResponse.length,
                     count: refreshTokenSeeder.collectionResponse.length,
-                    rows : refreshTokenSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: refreshTokenSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/GraphQL oAuthGetRefreshTokens', () =>
-    {
+    test('/GraphQL oAuthGetRefreshTokens', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -510,6 +579,7 @@ describe('refresh-token', () =>
                         oAuthGetRefreshTokens (query:$query)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -522,17 +592,27 @@ describe('refresh-token', () =>
                 variables: {},
             })
             .expect(200)
-            .then(res =>
-            {
-                for (const [index, value] of res.body.data.oAuthGetRefreshTokens.entries())
-                {
-                    expect(refreshTokenSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+            .then((res) => {
+                for (const [
+                    index,
+                    value,
+                ] of res.body.data.oAuthGetRefreshTokens.entries()) {
+                    expect(
+                        refreshTokenSeeder.collectionResponse[index],
+                    ).toEqual(
+                        expect.objectContaining(
+                            _.omit(value, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    );
                 }
             });
     });
 
-    test('/GraphQL oAuthCreateRefreshToken', () =>
-    {
+    test('/GraphQL oAuthCreateRefreshToken', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -543,6 +623,7 @@ describe('refresh-token', () =>
                         oAuthCreateRefreshToken (payload:$payload)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -558,14 +639,15 @@ describe('refresh-token', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthCreateRefreshToken).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthCreateRefreshToken).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthFindRefreshToken - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthFindRefreshToken - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -576,6 +658,7 @@ describe('refresh-token', () =>
                         oAuthFindRefreshToken (query:$query)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -585,28 +668,27 @@ describe('refresh-token', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: 'c55e7a55-2aa3-579c-b65e-35e07666231a',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthFindRefreshToken', () =>
-    {
+    test('/GraphQL oAuthFindRefreshToken', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -617,6 +699,7 @@ describe('refresh-token', () =>
                         oAuthFindRefreshToken (query:$query)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -626,26 +709,23 @@ describe('refresh-token', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthFindRefreshToken.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthFindRefreshToken.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthFindRefreshTokenById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthFindRefreshTokenById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -656,6 +736,7 @@ describe('refresh-token', () =>
                         oAuthFindRefreshTokenById (id:$id)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -670,16 +751,18 @@ describe('refresh-token', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthFindRefreshTokenById', () =>
-    {
+    test('/GraphQL oAuthFindRefreshTokenById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -690,6 +773,7 @@ describe('refresh-token', () =>
                         oAuthFindRefreshTokenById (id:$id)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -704,14 +788,14 @@ describe('refresh-token', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthFindRefreshTokenById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(
+                    res.body.data.oAuthFindRefreshTokenById.id,
+                ).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL oAuthUpdateRefreshTokenById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthUpdateRefreshTokenById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -722,6 +806,7 @@ describe('refresh-token', () =>
                         oAuthUpdateRefreshTokenById (payload:$payload)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -739,16 +824,18 @@ describe('refresh-token', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthUpdateRefreshTokenById', () =>
-    {
+    test('/GraphQL oAuthUpdateRefreshTokenById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -759,6 +846,7 @@ describe('refresh-token', () =>
                         oAuthUpdateRefreshTokenById (payload:$payload)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -776,14 +864,14 @@ describe('refresh-token', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthUpdateRefreshTokenById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(
+                    res.body.data.oAuthUpdateRefreshTokenById.id,
+                ).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL oAuthUpdateRefreshTokens', () =>
-    {
+    test('/GraphQL oAuthUpdateRefreshTokens', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -794,6 +882,7 @@ describe('refresh-token', () =>
                         oAuthUpdateRefreshTokens (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -816,14 +905,14 @@ describe('refresh-token', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthUpdateRefreshTokens[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(
+                    res.body.data.oAuthUpdateRefreshTokens[0].id,
+                ).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL oAuthDeleteRefreshTokenById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthDeleteRefreshTokenById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -834,6 +923,7 @@ describe('refresh-token', () =>
                         oAuthDeleteRefreshTokenById (id:$id)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -848,16 +938,18 @@ describe('refresh-token', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthDeleteRefreshTokenById', () =>
-    {
+    test('/GraphQL oAuthDeleteRefreshTokenById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -868,6 +960,7 @@ describe('refresh-token', () =>
                         oAuthDeleteRefreshTokenById (id:$id)
                         {
                             id
+                            rowId
                             accessTokenId
                             token
                             isRevoked
@@ -882,14 +975,14 @@ describe('refresh-token', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthDeleteRefreshTokenById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(
+                    res.body.data.oAuthDeleteRefreshTokenById.id,
+                ).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    afterAll(async () =>
-    {
+    afterAll(async () => {
         await refreshTokenRepository.delete({
             queryStatement: {
                 where: {},

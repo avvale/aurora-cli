@@ -1,10 +1,22 @@
-import { IamIPermissionRepository, IamPermission, IamPermissionMapper, IamPermissionModel } from '@app/iam/permission';
-import { AuditingRunner, ICriteria, LiteralObject, SequelizeRepository } from '@aurorajs.dev/core';
+import {
+    IamIPermissionRepository,
+    IamPermission,
+    IamPermissionMapper,
+    IamPermissionModel,
+} from '@app/iam/permission';
+import {
+    AuditingRunner,
+    ICriteria,
+    LiteralObject,
+    SequelizeRepository,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
-export class IamSequelizePermissionRepository extends SequelizeRepository<IamPermission, IamPermissionModel> implements IamIPermissionRepository
+export class IamSequelizePermissionRepository
+    extends SequelizeRepository<IamPermission, IamPermissionModel>
+    implements IamIPermissionRepository
 {
     public readonly aggregateName: string = 'IamPermission';
     public readonly mapper: IamPermissionMapper = new IamPermissionMapper();
@@ -14,8 +26,7 @@ export class IamSequelizePermissionRepository extends SequelizeRepository<IamPer
         public readonly repository: typeof IamPermissionModel,
         public readonly criteria: ICriteria,
         public readonly auditingRunner: AuditingRunner,
-    )
-    {
+    ) {
         super();
     }
 
@@ -24,21 +35,16 @@ export class IamSequelizePermissionRepository extends SequelizeRepository<IamPer
         aggregate: IamPermission,
         model: IamPermissionModel,
         createOptions: LiteralObject,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // add many to many relation
-        if (aggregate?.roleIds.length > 0)
-        {
-            try
-            {
+        if (aggregate?.roleIds.length > 0) {
+            try {
                 await model.$add(
                     'roles',
                     aggregate.roleIds.value,
                     createOptions,
                 );
-            }
-            catch (error)
-            {
+            } catch (error) {
                 console.error('[Error] SequelizeRepository:', error);
             }
         }
@@ -49,21 +55,16 @@ export class IamSequelizePermissionRepository extends SequelizeRepository<IamPer
         aggregate: IamPermission,
         model: IamPermissionModel,
         updateByIdOptions: LiteralObject,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // set many to many relation
-        if (aggregate?.roleIds.isArray())
-        {
-            try
-            {
+        if (aggregate?.roleIds.isArray()) {
+            try {
                 await model.$set(
                     'roles',
                     aggregate.roleIds.value,
                     updateByIdOptions,
                 );
-            }
-            catch (error)
-            {
+            } catch (error) {
                 console.error('[Error] SequelizeRepository:', error);
             }
         }

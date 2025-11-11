@@ -2,7 +2,6 @@ import { IamIPermissionRepository, IamPermission } from '@app/iam/permission';
 import {
     IamPermissionBoundedContextId,
     IamPermissionCreatedAt,
-    IamPermissionDeletedAt,
     IamPermissionId,
     IamPermissionName,
     IamPermissionRoleIds,
@@ -13,8 +12,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreatePermissionService
-{
+export class IamCreatePermissionService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIPermissionRepository,
@@ -28,11 +26,11 @@ export class IamCreatePermissionService
             roleIds: IamPermissionRoleIds;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const permission = IamPermission.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.boundedContextId,
             payload.roleIds,
@@ -41,17 +39,13 @@ export class IamCreatePermissionService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            permission,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(permission, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const permissionRegister = this.publisher.mergeObjectContext(
-            permission,
-        );
+        const permissionRegister =
+            this.publisher.mergeObjectContext(permission);
 
         permissionRegister.created({
             payload: permission,

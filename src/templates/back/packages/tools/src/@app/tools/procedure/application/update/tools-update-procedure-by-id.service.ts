@@ -1,8 +1,9 @@
-import { ToolsIProcedureRepository, ToolsProcedure } from '@app/tools/procedure';
+import {
+    ToolsIProcedureRepository,
+    ToolsProcedure,
+} from '@app/tools/procedure';
 import {
     ToolsProcedureCheckedAt,
-    ToolsProcedureCreatedAt,
-    ToolsProcedureDeletedAt,
     ToolsProcedureDownScript,
     ToolsProcedureExecutedAt,
     ToolsProcedureHash,
@@ -22,8 +23,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class ToolsUpdateProcedureByIdService
-{
+export class ToolsUpdateProcedureByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ToolsIProcedureRepository,
@@ -47,11 +47,11 @@ export class ToolsUpdateProcedureByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const procedure = ToolsProcedure.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.type,
             payload.version,
@@ -70,19 +70,14 @@ export class ToolsUpdateProcedureByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            procedure,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(procedure, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const procedureRegister = this.publisher.mergeObjectContext(
-            procedure,
-        );
+        const procedureRegister = this.publisher.mergeObjectContext(procedure);
 
         procedureRegister.updated({
             payload: procedure,

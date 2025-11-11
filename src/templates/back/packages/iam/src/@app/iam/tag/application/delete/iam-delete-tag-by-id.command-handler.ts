@@ -4,14 +4,14 @@ import { IamTagId } from '@app/iam/tag/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamDeleteTagByIdCommand)
-export class IamDeleteTagByIdCommandHandler implements ICommandHandler<IamDeleteTagByIdCommand>
+export class IamDeleteTagByIdCommandHandler
+    implements ICommandHandler<IamDeleteTagByIdCommand>
 {
     constructor(
         private readonly deleteTagByIdService: IamDeleteTagByIdService,
     ) {}
 
-    async execute(command: IamDeleteTagByIdCommand): Promise<void>
-    {
+    async execute(command: IamDeleteTagByIdCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteTagByIdService.main(
             new IamTagId(command.id),

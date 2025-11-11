@@ -4,55 +4,49 @@ import { oAuthMockAccessTokenData } from '@app/o-auth/access-token';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthGetAccessTokensHandler', () =>
-{
+describe('OAuthGetAccessTokensHandler', () => {
     let handler: OAuthGetAccessTokensHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthGetAccessTokensHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<OAuthGetAccessTokensHandler>(OAuthGetAccessTokensHandler);
+        handler = module.get<OAuthGetAccessTokensHandler>(
+            OAuthGetAccessTokensHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('OAuthGetAccessTokensHandler should be defined', () =>
-    {
+    test('OAuthGetAccessTokensHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthGetAccessTokensHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthGetAccessTokensHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a oAuthMockAccessTokenData', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockAccessTokenData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(oAuthMockAccessTokenData);
+        test('should return a oAuthMockAccessTokenData', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(oAuthMockAccessTokenData)),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                oAuthMockAccessTokenData,
+            );
         });
     });
 });

@@ -3,40 +3,40 @@ import { OAuthDeleteAccessTokensCommandHandler } from '@app/o-auth/access-token/
 import { OAuthDeleteAccessTokensService } from '@app/o-auth/access-token/application/delete/o-auth-delete-access-tokens.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteAccessTokensCommandHandler', () =>
-{
+describe('OAuthDeleteAccessTokensCommandHandler', () => {
     let commandHandler: OAuthDeleteAccessTokensCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthDeleteAccessTokensCommandHandler,
                 {
-                    provide : OAuthDeleteAccessTokensService,
+                    provide: OAuthDeleteAccessTokensService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<OAuthDeleteAccessTokensCommandHandler>(OAuthDeleteAccessTokensCommandHandler);
+        commandHandler = module.get<OAuthDeleteAccessTokensCommandHandler>(
+            OAuthDeleteAccessTokensCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteAccessTokensCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteAccessTokensCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new OAuthDeleteAccessTokensCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(
+                    new OAuthDeleteAccessTokensCommand(),
+                ),
+            ).toBe(undefined);
         });
     });
 });

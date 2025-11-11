@@ -3,40 +3,38 @@ import { OAuthDeleteClientsCommandHandler } from '@app/o-auth/client/application
 import { OAuthDeleteClientsService } from '@app/o-auth/client/application/delete/o-auth-delete-clients.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteClientsCommandHandler', () =>
-{
+describe('OAuthDeleteClientsCommandHandler', () => {
     let commandHandler: OAuthDeleteClientsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 OAuthDeleteClientsCommandHandler,
                 {
-                    provide : OAuthDeleteClientsService,
+                    provide: OAuthDeleteClientsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<OAuthDeleteClientsCommandHandler>(OAuthDeleteClientsCommandHandler);
+        commandHandler = module.get<OAuthDeleteClientsCommandHandler>(
+            OAuthDeleteClientsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteClientsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteClientsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new OAuthDeleteClientsCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(new OAuthDeleteClientsCommand()),
+            ).toBe(undefined);
         });
     });
 });

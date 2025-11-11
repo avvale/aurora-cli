@@ -2,44 +2,39 @@ import { IamGetTagsController, IamGetTagsHandler } from '@api/iam/tag';
 import { iamMockTagData } from '@app/iam/tag';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamGetTagsController', () =>
-{
+describe('IamGetTagsController', () => {
     let controller: IamGetTagsController;
     let handler: IamGetTagsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamGetTagsController,
-            ],
+            imports: [],
+            controllers: [IamGetTagsController],
             providers: [
                 {
-                    provide : IamGetTagsHandler,
+                    provide: IamGetTagsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         controller = module.get<IamGetTagsController>(IamGetTagsController);
         handler = module.get<IamGetTagsHandler>(IamGetTagsHandler);
     });
 
-    describe('main', () =>
-    {
-        test('IamGetTagsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamGetTagsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a iamMockTagData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTagData)));
+        test('should return a iamMockTagData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTagData)),
+            );
             expect(await controller.main()).toBe(iamMockTagData);
         });
     });

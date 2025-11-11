@@ -1,101 +1,71 @@
-import { OAuthApplication, OAuthCreatedApplicationEvent, OAuthCreatedApplicationsEvent, OAuthDeletedApplicationEvent, OAuthDeletedApplicationsEvent, OAuthUpdatedAndIncrementedApplicationEvent, OAuthUpdatedAndIncrementedApplicationsEvent, OAuthUpdatedApplicationEvent, OAuthUpdatedApplicationsEvent } from '@app/o-auth/application';
+import {
+    OAuthApplication,
+    OAuthCreatedApplicationEvent,
+    OAuthCreatedApplicationsEvent,
+    OAuthDeletedApplicationEvent,
+    OAuthDeletedApplicationsEvent,
+} from '@app/o-auth/application';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthAddApplicationsContextEvent extends AggregateRoot
-{
+export class OAuthAddApplicationsContextEvent extends AggregateRoot {
     constructor(
         public readonly aggregateRoots: OAuthApplication[] = [],
-    )
-    {
+        public readonly cQMetadata?: CQMetadata,
+    ) {
         super();
     }
 
-    *[Symbol.iterator]()
-    {
+    *[Symbol.iterator]() {
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created(): void
-    {
+    created(): void {
         this.apply(
-            new OAuthCreatedApplicationsEvent(
-                this.aggregateRoots.map(application =>
-                    new OAuthCreatedApplicationEvent(
-                        application.id.value,
-                        application.code.value,
-                        application.name.value,
-                        application.secret.value,
-                        application.isMaster.value,
-                        application.clientIds?.value,
-                        application.createdAt?.value,
-                        application.updatedAt?.value,
-                        application.deletedAt?.value,
-                    ),
+            new OAuthCreatedApplicationsEvent({
+                payload: this.aggregateRoots.map(
+                    (application) =>
+                        new OAuthCreatedApplicationEvent({
+                            payload: {
+                                id: application.id.value,
+                                code: application.code.value,
+                                name: application.name.value,
+                                secret: application.secret.value,
+                                isMaster: application.isMaster.value,
+                                clientIds: application.clientIds?.value,
+                                createdAt: application.createdAt?.value,
+                                updatedAt: application.updatedAt?.value,
+                                deletedAt: application.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
-    updated(): void
-    {
+    deleted(): void {
         this.apply(
-            new OAuthUpdatedApplicationsEvent(
-                this.aggregateRoots.map(application =>
-                    new OAuthUpdatedApplicationEvent(
-                        application.id.value,
-                        application.code.value,
-                        application.name.value,
-                        application.secret.value,
-                        application.isMaster.value,
-                        application.clientIds?.value,
-                        application.createdAt?.value,
-                        application.updatedAt?.value,
-                        application.deletedAt?.value,
-                    ),
+            new OAuthDeletedApplicationsEvent({
+                payload: this.aggregateRoots.map(
+                    (application) =>
+                        new OAuthDeletedApplicationEvent({
+                            payload: {
+                                id: application.id.value,
+                                rowId: application.rowId.value,
+                                code: application.code.value,
+                                name: application.name.value,
+                                secret: application.secret.value,
+                                isMaster: application.isMaster.value,
+                                clientIds: application.clientIds?.value,
+                                createdAt: application.createdAt?.value,
+                                updatedAt: application.updatedAt?.value,
+                                deletedAt: application.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
-        );
-    }
-
-    updatedAndIncremented(): void
-    {
-        this.apply(
-            new OAuthUpdatedAndIncrementedApplicationsEvent(
-                this.aggregateRoots.map(application =>
-                    new OAuthUpdatedAndIncrementedApplicationEvent(
-                        application.id.value,
-                        application.code.value,
-                        application.name.value,
-                        application.secret.value,
-                        application.isMaster.value,
-                        application.clientIds?.value,
-                        application.createdAt?.value,
-                        application.updatedAt?.value,
-                        application.deletedAt?.value,
-                    ),
-                ),
-            ),
-        );
-    }
-
-    deleted(): void
-    {
-        this.apply(
-            new OAuthDeletedApplicationsEvent(
-                this.aggregateRoots.map(application =>
-                    new OAuthDeletedApplicationEvent(
-                        application.id.value,
-                        application.code.value,
-                        application.name.value,
-                        application.secret.value,
-                        application.isMaster.value,
-                        application.clientIds?.value,
-                        application.createdAt?.value,
-                        application.updatedAt?.value,
-                        application.deletedAt?.value,
-                    ),
-                ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreatedBoundedContextEvent
-{
+export class IamCreatedBoundedContextEvent {
     constructor(
         public readonly event: {
             payload: {

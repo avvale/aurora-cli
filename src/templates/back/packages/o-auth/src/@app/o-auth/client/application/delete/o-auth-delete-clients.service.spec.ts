@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthIClientRepository, OAuthMockClientRepository } from '@app/o-auth/client';
+import {
+    OAuthIClientRepository,
+    OAuthMockClientRepository,
+} from '@app/o-auth/client';
 import { OAuthDeleteClientsService } from '@app/o-auth/client/application/delete/o-auth-delete-clients.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteClientsService', () =>
-{
+describe('OAuthDeleteClientsService', () => {
     let service: OAuthDeleteClientsService;
     let repository: OAuthIClientRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,37 +26,33 @@ describe('OAuthDeleteClientsService', () =>
                 OAuthDeleteClientsService,
                 OAuthMockClientRepository,
                 {
-                    provide : OAuthIClientRepository,
+                    provide: OAuthIClientRepository,
                     useValue: {
-                        get   : () => { /**/ },
-                        delete: () => { /**/ },
+                        get: () => {
+                            /**/
+                        },
+                        delete: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(OAuthDeleteClientsService);
         repository = module.get(OAuthIClientRepository);
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteClientsService should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteClientsService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should delete client and emit event', async () =>
-        {
-            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
-            expect(
-                await service.main(
-                    {},
-                    {},
-                ),
-            )
-                .toBe(undefined);
+        test('should delete client and emit event', async () => {
+            jest.spyOn(repository, 'get').mockImplementation(
+                () => new Promise((resolve) => resolve([])),
+            );
+            expect(await service.main({}, {})).toBe(undefined);
         });
     });
 });

@@ -1,16 +1,19 @@
 import { IamITagRepository, IamMockTagRepository } from '@app/iam/tag';
 import { IamFindTagService } from '@app/iam/tag/application/find/iam-find-tag.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTagService', () =>
-{
+describe('IamFindTagService', () => {
     let service: IamFindTagService;
     let repository: IamITagRepository;
     let mockRepository: IamMockTagRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,31 +23,36 @@ describe('IamFindTagService', () =>
                 IamFindTagService,
                 IamMockTagRepository,
                 {
-                    provide : IamITagRepository,
+                    provide: IamITagRepository,
                     useValue: {
-                        find: () => { /**/ },
+                        find: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(IamFindTagService);
         repository = module.get(IamITagRepository);
         mockRepository = module.get(IamMockTagRepository);
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTagService should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTagService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should find tag', async () =>
-        {
-            jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main()).toBe(mockRepository.collectionSource[0]);
+        test('should find tag', async () => {
+            jest.spyOn(repository, 'find').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
+            expect(await service.main()).toBe(
+                mockRepository.collectionSource[0],
+            );
         });
     });
 });

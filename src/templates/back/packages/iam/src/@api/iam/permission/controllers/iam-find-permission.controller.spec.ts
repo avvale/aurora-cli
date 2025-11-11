@@ -1,45 +1,48 @@
-import { IamFindPermissionController, IamFindPermissionHandler } from '@api/iam/permission';
+import {
+    IamFindPermissionController,
+    IamFindPermissionHandler,
+} from '@api/iam/permission';
 import { iamMockPermissionData } from '@app/iam/permission';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindPermissionController', () =>
-{
+describe('IamFindPermissionController', () => {
     let controller: IamFindPermissionController;
     let handler: IamFindPermissionHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamFindPermissionController,
-            ],
+            imports: [],
+            controllers: [IamFindPermissionController],
             providers: [
                 {
-                    provide : IamFindPermissionHandler,
+                    provide: IamFindPermissionHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamFindPermissionController>(IamFindPermissionController);
-        handler = module.get<IamFindPermissionHandler>(IamFindPermissionHandler);
+        controller = module.get<IamFindPermissionController>(
+            IamFindPermissionController,
+        );
+        handler = module.get<IamFindPermissionHandler>(
+            IamFindPermissionHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamFindPermissionController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindPermissionController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a permission', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionData[0])));
+        test('should return a permission', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(iamMockPermissionData[0])),
+            );
             expect(await controller.main()).toBe(iamMockPermissionData[0]);
         });
     });

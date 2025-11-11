@@ -1,53 +1,58 @@
-import { OAuthPaginateRefreshTokensController, OAuthPaginateRefreshTokensHandler } from '@api/o-auth/refresh-token';
+import {
+    OAuthPaginateRefreshTokensController,
+    OAuthPaginateRefreshTokensHandler,
+} from '@api/o-auth/refresh-token';
 import { oAuthMockRefreshTokenData } from '@app/o-auth/refresh-token';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthPaginateRefreshTokensController', () =>
-{
+describe('OAuthPaginateRefreshTokensController', () => {
     let controller: OAuthPaginateRefreshTokensController;
     let handler: OAuthPaginateRefreshTokensHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                OAuthPaginateRefreshTokensController,
-            ],
+            imports: [],
+            controllers: [OAuthPaginateRefreshTokensController],
             providers: [
                 {
-                    provide : OAuthPaginateRefreshTokensHandler,
+                    provide: OAuthPaginateRefreshTokensHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthPaginateRefreshTokensController>(OAuthPaginateRefreshTokensController);
-        handler = module.get<OAuthPaginateRefreshTokensHandler>(OAuthPaginateRefreshTokensHandler);
+        controller = module.get<OAuthPaginateRefreshTokensController>(
+            OAuthPaginateRefreshTokensController,
+        );
+        handler = module.get<OAuthPaginateRefreshTokensHandler>(
+            OAuthPaginateRefreshTokensHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthPaginateRefreshTokensController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthPaginateRefreshTokensController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a oAuthMockRefreshTokenData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : oAuthMockRefreshTokenData,
-            })));
+        test('should return a oAuthMockRefreshTokenData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: oAuthMockRefreshTokenData,
+                        }),
+                    ),
+            );
             expect(await controller.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : oAuthMockRefreshTokenData,
+                rows: oAuthMockRefreshTokenData,
             });
         });
     });

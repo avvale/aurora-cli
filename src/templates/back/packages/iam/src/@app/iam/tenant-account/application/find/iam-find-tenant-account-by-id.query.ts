@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class IamFindTenantAccountByIdQuery
-{
+export class IamFindTenantAccountByIdQuery {
     constructor(
         public readonly tenantId: string,
         public readonly accountId: string,

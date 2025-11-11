@@ -1,49 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OAuthDeleteClientsHandler, OAuthDeleteClientsResolver } from '@api/o-auth/client';
+import {
+    OAuthDeleteClientsHandler,
+    OAuthDeleteClientsResolver,
+} from '@api/o-auth/client';
 import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthDeleteClientsResolver', () =>
-{
+describe('OAuthDeleteClientsResolver', () => {
     let resolver: OAuthDeleteClientsResolver;
     let handler: OAuthDeleteClientsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthDeleteClientsResolver,
                 {
-                    provide : OAuthDeleteClientsHandler,
+                    provide: OAuthDeleteClientsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<OAuthDeleteClientsResolver>(OAuthDeleteClientsResolver);
-        handler = module.get<OAuthDeleteClientsHandler>(OAuthDeleteClientsHandler);
+        resolver = module.get<OAuthDeleteClientsResolver>(
+            OAuthDeleteClientsResolver,
+        );
+        handler = module.get<OAuthDeleteClientsHandler>(
+            OAuthDeleteClientsHandler,
+        );
     });
 
-    test('OAuthDeleteClientsResolver should be defined', () =>
-    {
+    test('OAuthDeleteClientsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthDeleteClientsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthDeleteClientsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an oAuthMockClientData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData)));
+        test('should return an oAuthMockClientData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockClientData)),
+            );
             expect(await resolver.main()).toBe(oAuthMockClientData);
         });
     });

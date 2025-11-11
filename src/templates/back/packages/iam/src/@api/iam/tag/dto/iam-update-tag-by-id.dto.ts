@@ -1,18 +1,16 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class IamUpdateTagByIdDto
-{
+export class IamUpdateTagByIdDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'id [input here api field description]',
     })
     id: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'name [input here api field description]',
     })
     name?: string;
-
 }

@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class IamCreateTenantCommand
-{
+export class IamCreateTenantCommand {
     constructor(
         public readonly payload: {
             id: string;

@@ -2,10 +2,10 @@ import { IamDeletedRoleAccountEvent } from '@app/iam/role-account';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(IamDeletedRoleAccountEvent)
-export class IamDeletedRoleAccountEventHandler implements IEventHandler<IamDeletedRoleAccountEvent>
+export class IamDeletedRoleAccountEventHandler
+    implements IEventHandler<IamDeletedRoleAccountEvent>
 {
-    handle(event: IamDeletedRoleAccountEvent): void
-    {
+    handle(event: IamDeletedRoleAccountEvent): void {
         // console.log('IamDeletedRoleAccountEvent: ', event);
     }
 }

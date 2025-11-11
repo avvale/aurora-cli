@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class IamFindUserByUsernamePasswordQuery
-{
+export class IamFindUserByUsernamePasswordQuery {
     constructor(
         public readonly username: string,
         public readonly password: string,

@@ -1,561 +1,480 @@
 {
     "info": {
-		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-		"name"          : "@app - tools/key-value",
-		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - tools/key-value",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-			"name": "GraphQL - toolsCreateKeyValue",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "GraphQL - toolsCreateKeyValue",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:ToolsCreateKeyValueInput!)\n{\n\ttoolsCreateKeyValue (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 37025983325362405000, \n\t\t\"key\": \"7mn0k1bxw2m5q03qhw1qnphnk0shelp150la8a28t1dt80s4tq4pxk1lguqozp5\", \n\t\t\"type\": 'TIMESTAMP', \n\t\t\"value\": \"Molestiae impedit alias sunt accusamus. Autem neque tempora architecto voluptatum accusamus et. Magnam dolores dolorem.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Odio harum dignissimos eius commodi quam autem. Accusamus eius exercitationem voluptatem. Necessitatibus dolores quas eveniet repellendus temporibus officia. Accusamus nihil officiis quo ipsam. Necessitatibus officiis voluptatem dolor voluptatem officia non qui.\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsCreateKeyValues",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[ToolsCreateKeyValueInput]!)\n{\n\ttoolsCreateKeyValues (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"4cab5f0c-2c1d-4675-940d-b8a6f4e5e43a\", \n\t\t\t\"rowId\": 25914659862689448000, \n\t\t\t\"key\": \"r6qb1fr7f46t8kz2dh0jpv9sdclbrps44b9kp9yacbyv1rsxaynpmxphc61d63a\", \n\t\t\t\"type\": 'BOOLEAN', \n\t\t\t\"value\": \"Aut maxime exercitationem quas blanditiis. Consequuntur quos ad excepturi error. Qui dolores aut eos vitae. Quo sit fuga ratione officiis a alias numquam.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Ut provident aperiam cupiditate et expedita dolor omnis rem. Minus beatae est. Aut officia molestiae earum repudiandae. Officia quam alias voluptas illo quidem.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b2e4a8d7-dabf-4a6a-8f2a-3ad894d8a222\", \n\t\t\t\"rowId\": 52407263998786050000, \n\t\t\t\"key\": \"0eqyiyeoiysoije9q7dehuixos84h9d9xkwkvo8eo3jr4anplg1nhjtl1b0ibl1\", \n\t\t\t\"type\": 'TIMESTAMP', \n\t\t\t\"value\": \"Saepe molestiae quam facere et molestiae natus placeat eaque. Repellat atque deserunt assumenda ipsam velit placeat sint expedita et. Nesciunt assumenda dolore molestiae omnis sed. Asperiores totam enim dolorem blanditiis dignissimos nisi impedit quae. Id dolores voluptas voluptatem necessitatibus. Alias aliquid alias corrupti voluptate commodi impedit quaerat officia.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Reiciendis natus reprehenderit quia doloribus. A sed perspiciatis. At quia nulla similique quo consequatur.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"728166c8-bdb6-47ae-9d46-b7ab2c5381c1\", \n\t\t\t\"rowId\": 76801022223821300000, \n\t\t\t\"key\": \"kidirxyfd2nek98ndvnz8pf9870dzria9zyd7pg8nh53epo13d42yax32e9wna8\", \n\t\t\t\"type\": 'BOOLEAN', \n\t\t\t\"value\": \"Sint et adipisci atque praesentium. Et repellendus quisquam qui recusandae exercitationem voluptatem qui. Alias est facere error hic. Nulla ut et fuga rerum tenetur quasi consectetur aut odio. Necessitatibus totam explicabo autem dolorem quidem expedita velit quam. Eos dolorem est architecto non veniam unde sed.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Dolore aliquam deserunt. Nesciunt et minima veritatis adipisci cupiditate est voluptatum perspiciatis dolorem. Quia nobis numquam optio fuga fugit nam et quo sed. Sit placeat voluptas ut nihil molestias. Qui molestiae porro quam id sed consequatur cupiditate. Excepturi ex quaerat.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8dc438a2-474d-4618-ba13-0d1392df2d70\", \n\t\t\t\"rowId\": 75464138651536440000, \n\t\t\t\"key\": \"s2o2uphr0eb4yh1icw6putxkzhsw6ncv89fqp0nay1gx0m1th6g3e7vcy6ht7vg\", \n\t\t\t\"type\": 'STRING', \n\t\t\t\"value\": \"Qui et maiores iste dolorem. Quo totam ut facere. Dignissimos repellat ipsam sed. Doloribus non est. Enim aut non ut.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Occaecati voluptates porro. Doloremque ea eius. Facilis enim nesciunt et est laboriosam aut. Officiis occaecati cupiditate officiis et expedita.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"61850d20-2425-4295-a319-7b69bc5ff530\", \n\t\t\t\"rowId\": 32471878936081285000, \n\t\t\t\"key\": \"sx4bweyxarwknmgxiwbapu8k0tri5537ppryooxikae6h8nfnyi6fdi6gvuwh7h\", \n\t\t\t\"type\": 'NUMBER', \n\t\t\t\"value\": \"Blanditiis ipsum necessitatibus minus sit non enim. Tempora vero id provident quia. Vel incidunt molestiae est fugit.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Et eos voluptas voluptas dolor sit. Ea dolorem iure quasi ut nemo quis sunt dolores dolores. Deleniti dolores aut molestiae et. Possimus dignissimos aperiam inventore eligendi laboriosam nihil vel laudantium cupiditate.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c6a24c50-7dfb-489d-b32b-5a2e2b50ced8\", \n\t\t\t\"rowId\": 25358504145728200000, \n\t\t\t\"key\": \"ed0pfeoxn6sv21av3k619ssch2nanymhclybarer1hz3fha9ro4o8geymvit9ep\", \n\t\t\t\"type\": 'NUMBER', \n\t\t\t\"value\": \"Voluptates vel laboriosam eaque natus. Voluptatem consequuntur molestias ea assumenda illum est rem non natus. Cumque possimus et dolores voluptatem nisi.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Nihil ullam tempora esse ipsum officia unde quis est temporibus. Officia est eligendi eveniet illum temporibus modi velit. Libero modi blanditiis. Reprehenderit corporis exercitationem.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6654f36e-c8df-45b8-a47e-bc1781405d33\", \n\t\t\t\"rowId\": 77878633371504600000, \n\t\t\t\"key\": \"1vg0g0eh7o5m1tbdzzws5zejujy606ilckn2ymyxl07kwqmoic2ijnuz1fkotdb\", \n\t\t\t\"type\": 'TIMESTAMP', \n\t\t\t\"value\": \"Assumenda quas occaecati. Error ut et est. Corporis eveniet incidunt velit expedita possimus quibusdam.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Veniam quia a rerum. Voluptatem autem a eos deleniti. Et iusto repudiandae sit quo ex vitae accusantium. At ut error est et sed deleniti. Non ullam perspiciatis sint nulla. Et debitis et tenetur animi.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"85d18696-8b33-4c63-a11a-d2f9d336f2f4\", \n\t\t\t\"rowId\": 11310551026915924000, \n\t\t\t\"key\": \"or768yru6r4z2ktohdatub9cakjtas6klrijmt1arx20ca1mszmy9nvh4gj73rm\", \n\t\t\t\"type\": 'OBJECT', \n\t\t\t\"value\": \"Ab ut voluptatem sit. Quos repellat autem sed totam. At optio adipisci voluptatem fugit.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Hic vero quam aut vel reiciendis ducimus ab quis. Velit modi quibusdam occaecati ipsam ut quo. Voluptate quidem omnis suscipit quas. Praesentium magnam minima. Officia reiciendis voluptatem harum. Vel sequi totam magnam.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"87a657e8-ed4c-42ec-86d1-ebe2d8f2bf67\", \n\t\t\t\"rowId\": 59684740309502670000, \n\t\t\t\"key\": \"2a8m2hl23eyp84zuie9ibluxg6quufr3niap1u97wmfawnkzq08fgygt0skq17z\", \n\t\t\t\"type\": 'STRING', \n\t\t\t\"value\": \"Repellat praesentium consequatur. Et voluptates et placeat explicabo officia autem ut quibusdam totam. Rerum dolores ut commodi dolorem excepturi et praesentium. Ducimus provident reprehenderit ipsum nisi suscipit. Fugiat facilis quibusdam culpa est laborum nulla. Id quam ex voluptatem sit aut.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Quaerat aut ut odit distinctio ex ab. Reiciendis a laboriosam delectus similique aut quo blanditiis fuga id. Illum voluptas quia. Quis quia earum dolorem pariatur dolorum in dolor illum expedita. Laboriosam voluptas vitae et dolor asperiores voluptas. Porro et necessitatibus omnis deleniti.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"2564acaa-f057-42d2-939d-537920a4794c\", \n\t\t\t\"rowId\": 29330090634275300000, \n\t\t\t\"key\": \"7cm79mlpugb97xkayasso4b4pgcn16olp83vzom7xfzx374jwrw1xxxp0f7s74s\", \n\t\t\t\"type\": 'ARRAY', \n\t\t\t\"value\": \"Est quos aperiam laborum a sit non molestiae. Et inventore consequatur at. Quisquam placeat nulla non. Et eius est ipsam et qui.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Explicabo recusandae molestiae illum voluptas cumque id inventore. Ipsum et dolor debitis et amet impedit iste aut. Temporibus hic nostrum unde fuga.\"\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsPaginateKeyValues",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\ttoolsPaginateKeyValues (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsGetKeyValues",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\ttoolsGetKeyValues (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsFindKeyValue",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\ttoolsFindKeyValue (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsFindKeyValueById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\ttoolsFindKeyValueById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsUpdateKeyValue",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:ToolsUpdateKeyValueInput!)\n{\n\ttoolsUpdateKeyValue (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 95715244295016680000, \n\t\t\"key\": \"wi4louoqmvv71etedrhaydbxgwpbeql2mcwbwsy73bk8kdnjwp4v2mghwx1sfxu\", \n\t\t\"type\": 'STRING', \n\t\t\"value\": \"Voluptate distinctio rem. A fugiat perferendis et expedita enim beatae omnis vel. Voluptatem et quis molestiae distinctio quibusdam et fugit. Libero voluptatibus inventore repudiandae vero.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Fugit dolor quod laborum. Consequuntur officia eius natus nemo delectus. Suscipit velit accusamus error officiis neque quas.\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsDeleteKeyValueById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\ttoolsDeleteKeyValueById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - toolsDeleteKeyValues",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\ttoolsDeleteKeyValues (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - tools/key-value/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:ToolsCreateKeyValueInput!)\n{\n\ttoolsCreateKeyValue (payload:$payload)\n\t{\n\t\tid\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"key\": \"jn70ucbp1iz8d4bxloqyvb7vx6f15ehp11x0jec2hnk236mih4f6w6urcxhteke\", \n\t\t\"type\": 'TIMESTAMP', \n\t\t\"value\": \"Voluptatem ut voluptas. Pariatur earum qui omnis nulla. Aut molestiae similique debitis. Occaecati aperiam cumque iure odio repellendus et harum qui perspiciatis.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Cupiditate porro inventore quibusdam. Hic voluptatibus labore. Non reprehenderit iure. Velit aliquid molestiae dolores. Aliquid aut eum non explicabo laborum. Sapiente assumenda qui ut maxime quia.\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 15441789522529688000, \n\t\"key\": \"7gksrlz44xyotzuzp37e366xkosnhf16sbxz0vwpzexfu3v7ynseaajgekfcn6e\", \n\t\"type\": 'BOOLEAN', \n\t\"value\": \"Expedita sed recusandae voluptatem. Est voluptatibus recusandae aut. Rerum voluptatum natus soluta labore quam explicabo qui aperiam. Rem earum reprehenderit. Culpa sit veniam quia ut repellendus in culpa cumque consequatur.\", \n\t\"isActive\": false, \n\t\"description\": \"Enim occaecati excepturi totam. Sunt cum quisquam dolorem non sint et cum. Veniam a ullam nam quis aliquam neque asperiores.\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-value/create",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "key-value", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsCreateKeyValues",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:[ToolsCreateKeyValueInput]!)\n{\n\ttoolsCreateKeyValues (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"fc8a6a07-aa97-4c6e-8f89-080f1ece4cdd\", \n\t\t\t\"key\": \"kdi2srgy0hl51kgo9d2u5120nmwxr6u8hk6zh04x77v8turhcu1spf1ujjj2a02\", \n\t\t\t\"type\": 'OBJECT', \n\t\t\t\"value\": \"Quidem et eaque molestiae optio consequatur soluta sed fugit voluptatem. Ut possimus aliquid provident. Quis doloremque eligendi corrupti et explicabo adipisci quis in sunt. Eaque aut rerum laudantium ut perferendis vitae sit.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Laudantium asperiores reprehenderit ab. Corporis officia delectus aspernatur. Suscipit adipisci non id. Voluptatum blanditiis aut.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e976aee1-394d-4974-a12a-1f086e7beac9\", \n\t\t\t\"key\": \"inkqr79x1ch4j3dh69uviz40vt98iag5jnrxdj7f8tzxpcpxmdgl6fp0srw0a74\", \n\t\t\t\"type\": 'OBJECT', \n\t\t\t\"value\": \"Et cum voluptates animi. Maxime deserunt architecto tempora tempora ducimus et nam assumenda. Quo consequuntur modi et sint vel.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Et architecto omnis id sit facere reprehenderit id a. Similique autem ipsa voluptates dolor ut voluptatem veniam unde. Est voluptas ipsa eos. Perferendis assumenda ipsum nihil. Voluptas nobis in nemo.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"112ae3d0-5daf-499a-9822-067f6c75deff\", \n\t\t\t\"key\": \"y1i0iq0sqpoyly033iijcb1da4jh2fibp762rp3bj1epx4jypn4wvfonmuauwkg\", \n\t\t\t\"type\": 'ARRAY', \n\t\t\t\"value\": \"In officia quo reiciendis non. Dignissimos assumenda necessitatibus autem a atque quas ducimus. Et sed in aut enim vitae omnis in labore vel. Nihil in dolores aperiam.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Sunt explicabo sed sit voluptatem eius iusto quam qui fugit. Non cupiditate temporibus distinctio nisi illum. Sequi quidem nam esse tenetur voluptatem magnam aut porro magnam. Blanditiis ea hic et deserunt nesciunt. Laudantium eum natus deserunt earum sed cumque expedita. Eius ad eum corporis libero.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"daa26b0f-e7c5-41d0-b380-e75cdc5ee4ef\", \n\t\t\t\"key\": \"2la3xe5oehe2uwhr1i07xw0r6gvv96e6nmga0gakga5so9ledftc2bixpd349mc\", \n\t\t\t\"type\": 'STRING', \n\t\t\t\"value\": \"Ea exercitationem libero doloremque est unde reprehenderit alias. Rerum molestiae eum tempore sed sequi veniam. Occaecati recusandae minus laudantium dolores provident ut autem distinctio sapiente. Consequatur deserunt et harum veritatis repellendus. Nihil et harum esse ut voluptatem adipisci voluptatem. Harum nemo saepe excepturi aut earum et.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Esse dignissimos voluptatem aliquid sit omnis recusandae ipsam. Sapiente minima omnis. Tempore molestiae sint eveniet et illum consequuntur est. Similique ut optio ipsum sint voluptatum voluptas iusto.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"69e11163-e518-4264-86d3-171487bc4a3f\", \n\t\t\t\"key\": \"2mxhnnp3r8ufx6wlvp2g23habvebjncgc54aevsvkjc7rx3v01wdq4dcyjmc6pv\", \n\t\t\t\"type\": 'STRING', \n\t\t\t\"value\": \"Illo voluptas recusandae repellendus. Optio beatae eum consequatur eum commodi consequatur veniam. Vel consequuntur similique ipsam consequatur voluptatem ratione sunt dicta. Voluptas sit et enim sint.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Sunt sed ut expedita iusto. Et sunt et quibusdam sequi. Sed est blanditiis velit iure natus pariatur iusto sapiente laborum. Temporibus molestiae sit. Dolorem quidem harum aliquid dolorem. Saepe minima unde aut aut vel possimus eveniet velit.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d46ddaee-8761-415a-9454-968a7b48e7be\", \n\t\t\t\"key\": \"wkc4dt961aczy4hsli53ywxkhu6p8n3wx8h67b8yyui6io5547pfoqh2t95w42x\", \n\t\t\t\"type\": 'STRING', \n\t\t\t\"value\": \"Non sint provident perspiciatis voluptatibus fugit odit. Ratione ut sed ipsa nihil cupiditate ea amet. Esse qui odit cumque sit quia omnis fugit veniam. Minus aut ducimus culpa eum.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Tempora quia quibusdam dicta consequatur sequi quos excepturi modi sint. Modi quo sint dicta consectetur itaque consequatur sit quae magni. Soluta inventore iste. Non qui eum est similique expedita dolores optio sint.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b6b35554-547a-4bd8-83b2-4921c3deec70\", \n\t\t\t\"key\": \"dznsq9dbm73xrxude6dg9p7dcgvntpwm337o7luw5s1gvmg3m4g423zdd7nqgk3\", \n\t\t\t\"type\": 'BOOLEAN', \n\t\t\t\"value\": \"Voluptatibus qui nesciunt ad fuga amet ut architecto quidem laborum. Itaque laborum sint occaecati nisi sit non. Corporis ab necessitatibus error ea est similique aut dolores. Aperiam distinctio quidem nulla incidunt.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Quas ut corporis earum. Autem placeat incidunt error quae repellat voluptatem. Voluptas sit vel excepturi libero inventore sed architecto et ut.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6a17bf06-5a52-4804-a2e3-b134b7d7f338\", \n\t\t\t\"key\": \"k35jrwrydu4kssrfpxo4hwtrcim1fa7ccyv53n0sy5mn4xt08ifj1sx9b9zyo3p\", \n\t\t\t\"type\": 'NUMBER', \n\t\t\t\"value\": \"Consectetur qui quos recusandae dolor et inventore dolores. Quia dolor deleniti laboriosam animi. Quae molestiae voluptatem aspernatur. Voluptas et repudiandae cum adipisci velit. Laudantium necessitatibus sint.\", \n\t\t\t\"isActive\": false, \n\t\t\t\"description\": \"Et temporibus sed eligendi. Aperiam nobis incidunt deleniti maxime quae qui maiores odio. Dolorum dolor quia qui. Facilis et quisquam provident adipisci ea. Error aut unde sapiente nulla debitis omnis. Soluta molestiae qui.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"90adf035-6440-49f4-8a7b-97b17001d8f0\", \n\t\t\t\"key\": \"xeum4shq5cbvw8zq6duqibfry9xyq0pbkbyewx4p22rgi4qjlqk54ioqyz1k622\", \n\t\t\t\"type\": 'STRING', \n\t\t\t\"value\": \"Aut vel quasi cum ut esse. In rerum consequatur est aliquam velit inventore aliquid maxime. Molestiae dignissimos ipsa dolore quod qui eos. Quam est excepturi alias eligendi fugit et perferendis voluptatem.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Vitae doloribus tempora. Et similique et aut deleniti ea. Voluptatum ea rem.\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9c7cbbd7-7fff-4858-826b-438c1259c83a\", \n\t\t\t\"key\": \"xjngywtirzign68wgpgkg1fuvespo1p5cw0kpi0muunhbh4pahml6atym78vko4\", \n\t\t\t\"type\": 'OBJECT', \n\t\t\t\"value\": \"Ex ullam mollitia. Adipisci amet fuga quasi delectus repellat nulla. Quae itaque molestiae natus est vitae sit voluptas. Voluptatem incidunt incidunt autem iure cupiditate qui rerum aut doloremque.\", \n\t\t\t\"isActive\": true, \n\t\t\t\"description\": \"Quis reprehenderit est cupiditate eius corporis modi aut unde dicta. Error quasi qui dolores fugiat aliquam consectetur est. Necessitatibus soluta cumque officiis tempora est aut suscipit. Et corporis labore et commodi molestias nobis aut. Doloribus molestias natus.\"\n\t\t}\n\t]\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - toolsPaginateKeyValues",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/key-values/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\ttoolsPaginateKeyValues (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"38d18aca-9459-4cc8-b7c0-603f7d27d0c0\", \n\t\t\"rowId\": 26325370777869880000, \n\t\t\"key\": \"bavan09e1qak8y9j86ghrrl6jz7dx7dgo6ybd5v4m6eq4p9pm00c3805o67wt58\", \n\t\t\"type\": 'DATE', \n\t\t\"value\": \"Architecto et maiores provident facilis est. Corrupti rerum alias. Aliquam quis neque debitis explicabo adipisci mollitia eius quas. Ullam nihil voluptatem officiis laudantium. Maxime officia dolore quia velit. Et ullam laboriosam aliquid temporibus tempora.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Quidem et consequatur et et aliquam eveniet vitae repudiandae. Rerum tempora dolore sunt iusto. Repellendus similique in debitis. Autem sit totam qui quam a.\"\n\t}, \n\t{\n\t\t\"id\": \"5b815581-8c3d-47b8-aeed-914850d40e01\", \n\t\t\"rowId\": 94402072661273510000, \n\t\t\"key\": \"k8lz6w4wdsziugq5hph1bm2xans2w5kzm5vrap5yzmm0y1xc76yy69its70lt9z\", \n\t\t\"type\": 'STRING', \n\t\t\"value\": \"Placeat odio odio qui qui totam odio. Pariatur iure doloremque quas optio alias ab distinctio id. Delectus quidem in. Est maiores unde.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Nemo expedita aut veritatis non quasi quas aperiam. Deserunt quia reiciendis dolorum ut quis ullam vero. Dolor in eveniet aut dolores est impedit temporibus. Aut ut quaerat ea qui velit pariatur natus veniam tempore. Nemo reprehenderit odio. Ut voluptates ullam error.\"\n\t}, \n\t{\n\t\t\"id\": \"79eb6fca-eb04-4b28-8a8f-a01f44c13730\", \n\t\t\"rowId\": 47190470378491150000, \n\t\t\"key\": \"dnw0qjfr034llaefohqveki2vzfo1oswtrg49lgv579eg8a7qcrng4uwnmdxdbt\", \n\t\t\"type\": 'TIME', \n\t\t\"value\": \"Aut ut aut rerum nesciunt consequatur aperiam quas. Sit porro illo illum. Ullam repellat aspernatur veritatis cum expedita non non. Id sunt error fugit et eius sunt. Corrupti eum minus quia esse commodi quaerat quam. Totam eos laudantium quod sed blanditiis doloremque eius at.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Illum unde asperiores neque aut aut quia. Fugit fuga doloribus et quibusdam. Autem labore ut reprehenderit nobis distinctio saepe.\"\n\t}, \n\t{\n\t\t\"id\": \"12fcec91-cb20-48e5-868a-a2e2e034ae06\", \n\t\t\"rowId\": 61319473770388190000, \n\t\t\"key\": \"6cn2lneqfoymf3cjmn830w3ig07w2rgz4vvdpqvwp19l49a6qj43pvfaejo3hlf\", \n\t\t\"type\": 'NUMBER', \n\t\t\"value\": \"Magnam magnam sed. Harum esse repudiandae culpa qui architecto corrupti atque. Quibusdam optio et voluptates voluptatum provident optio sit. Occaecati beatae beatae odio ad id illum et deleniti. Natus quisquam aut eos perferendis est.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Ut omnis ipsum adipisci quas qui veritatis aperiam. Voluptatum deserunt sed. Voluptas consequatur atque a veniam. Aut veritatis sequi. Laudantium occaecati ut voluptatem animi soluta quisquam voluptas.\"\n\t}, \n\t{\n\t\t\"id\": \"3b0d970d-5814-44da-a436-7eb0cc0797c0\", \n\t\t\"rowId\": 35236075374286533000, \n\t\t\"key\": \"y4eoqvfqnhil0hek023oxlmyit07fsjwwighuxwazs7cvwbhc6dvnlapguo2126\", \n\t\t\"type\": 'STRING', \n\t\t\"value\": \"Incidunt sit numquam quas vel quia consequatur dolor sit. Sit perferendis explicabo illum nesciunt mollitia excepturi nostrum est. Eum iste atque dolorem nulla quidem accusantium rem temporibus eius. Quo id reiciendis ipsum omnis.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Architecto autem corporis voluptatem iusto. Voluptate necessitatibus rerum fugiat nesciunt accusantium. Nemo tenetur nam officiis. Quo aut sapiente praesentium sed nemo explicabo mollitia culpa. Aut nemo quas delectus optio rerum facilis unde quo.\"\n\t}, \n\t{\n\t\t\"id\": \"3a752431-52c0-4d0c-a594-efb43cd7fffb\", \n\t\t\"rowId\": 37823489505928650000, \n\t\t\"key\": \"65an2jhzzb0egfxgz6zcmyjd6mgm4okolv7u5pb63ug6tbb80ru4v2m0w3bs1hq\", \n\t\t\"type\": 'NUMBER', \n\t\t\"value\": \"Repudiandae veniam qui sit ad tenetur aut sint. Quo aut enim. Rem et fuga ab.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Unde maiores ea aspernatur et. Facere quia modi odio nihil vero molestiae illum. Autem et et porro mollitia at culpa qui iusto est. Illo itaque atque ducimus ut amet. Voluptas molestias voluptas quis nam tenetur ipsa eaque.\"\n\t}, \n\t{\n\t\t\"id\": \"bcc83e79-bb14-479a-bc0b-51513ef426f4\", \n\t\t\"rowId\": 65450796027267875000, \n\t\t\"key\": \"xsnf5t9p6sde79tjaey5lretj7sgcsz8hezs6b96avv21e768i4k4cysol5pumn\", \n\t\t\"type\": 'SECRET', \n\t\t\"value\": \"Sint tempore enim velit dicta eum sequi necessitatibus. Et quaerat et rerum quidem aliquam ipsam ab magnam. Dolores dolor aut a quo debitis. Quisquam sed mollitia at doloribus nihil. Deserunt reiciendis consequatur corporis nihil. Est et ab possimus voluptas doloribus neque veniam quo.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Distinctio et et est et. Nihil et error quo. Sunt dolorem quia magnam hic et nihil. Corporis excepturi veniam libero consequatur est.\"\n\t}, \n\t{\n\t\t\"id\": \"e4c5c118-aa35-418b-b813-c6101a546625\", \n\t\t\"rowId\": 42216661010203660000, \n\t\t\"key\": \"revkgmt39iecebt07delr7h056ty4w3qqj6k4gi67y4cpxmdxap7r3300nu1ni1\", \n\t\t\"type\": 'NUMBER', \n\t\t\"value\": \"Fugit aut esse qui ex corrupti culpa. Excepturi voluptate omnis quidem accusamus atque. Nesciunt id tempora voluptas eveniet necessitatibus.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"At perspiciatis consequatur. Consequatur deleniti accusamus. Ex labore recusandae iusto quidem voluptatum. Non et cupiditate saepe et.\"\n\t}, \n\t{\n\t\t\"id\": \"a3b13bd1-d22f-4964-a6c5-49a5b9163e03\", \n\t\t\"rowId\": 69945892531036380000, \n\t\t\"key\": \"8s2jb3e06kvwwp8ytqkhoru22i0sm0kdvl6qypl564uulaxeytw8k66ltj05ent\", \n\t\t\"type\": 'DATE', \n\t\t\"value\": \"Iste omnis minus reiciendis est nihil impedit accusantium. Natus aut quas pariatur eum eius repellendus minima. Et quis odio nemo. Explicabo earum placeat.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Dolorem laboriosam sint aliquid quod autem veritatis ut corporis. Possimus qui non. Minus aut architecto architecto facere ratione excepturi laboriosam rerum.\"\n\t}, \n\t{\n\t\t\"id\": \"edab7176-01d6-411e-b4a2-2daa22ad386e\", \n\t\t\"rowId\": 68225810479205610000, \n\t\t\"key\": \"aq49uj59em5rlq18202cp9y59jyx95p26538lw2qwxm1f062l1cicn5rjbhwzkz\", \n\t\t\"type\": 'STRING', \n\t\t\"value\": \"Vitae sit et aliquam. Maxime voluptatibus sunt inventore perspiciatis consequuntur atque consequatur exercitationem. Cum quidem quam odit magnam molestiae totam animi accusantium. Repellat consequuntur ea. Nulla accusamus omnis aut omnis quaerat distinctio. Omnis est deserunt aut blanditiis aut incidunt tempore.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Iure nihil iusto voluptatem accusamus amet numquam. Aut nisi quis. Qui laboriosam molestiae ullam est rerum suscipit sapiente doloribus.\"\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-values/create",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "key-values", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsGetKeyValues",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/key-values/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\ttoolsGetKeyValues (query: $query)\n\t{\n\t\tid\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-values/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "key-values", "paginate"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsFindKeyValue",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/key-values/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\ttoolsFindKeyValue (query: $query)\n\t{\n\t\tid\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-values/get",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "key-values", "get"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsFindKeyValueById",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/key-value/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($id:ID)\n{\n\ttoolsFindKeyValueById (id:$id)\n\t{\n\t\tid\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-value/find",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "key-value", "find"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - toolsUpdateKeyValue",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - tools/key-value/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:ToolsUpdateKeyValueInput!)\n{\n\ttoolsUpdateKeyValue (payload:$payload)\n\t{\n\t\tid\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"key\": \"vhw8m46n8ueuvbt8i4j0q3z7l2t89006343zq6ixyti52okw9v5p788xnv6g9n7\", \n\t\t\"type\": 'NUMBER', \n\t\t\"value\": \"Explicabo rerum quia id itaque nisi omnis distinctio. Magni fugiat rerum dolorem eum neque. Nesciunt quia ut voluptatibus nesciunt iusto minus. Deserunt rerum ab non modi.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Id ipsum dolore ut incidunt. Molestias neque quisquam maiores. In sed animi et facere veritatis debitis et quos. Neque ut eius possimus rerum quis est et. Molestiae iure fuga voluptate voluptatem sit enim cumque rerum. Mollitia rem sed et.\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - toolsDeleteKeyValueById",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\ttoolsDeleteKeyValueById (id:$id)\n\t{\n\t\tid\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - toolsDeleteKeyValues",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\ttoolsDeleteKeyValues (query: $query)\n\t{\n\t\tid\n\t\tkey\n\t\ttype\n\t\tvalue\n\t\tisActive\n\t\tdescription\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/key-value/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"key\": \"12evlprdebjc76u44nzjq1g7ocfzlrevxefif5seywgybjr3osyswmks3pvhv7t\", \n\t\"type\": 'OBJECT', \n\t\"value\": \"Et iste sit aut consequatur. Saepe officia eos eligendi voluptas provident facilis veniam minus rem. Ducimus aliquid repellat repellat. Dolorem est nesciunt et consequuntur et sit. Ut aliquam culpa deleniti optio porro. Sit voluptate ducimus ut veniam eveniet maxime consequatur quaerat vel.\", \n\t\"isActive\": false, \n\t\"description\": \"Tenetur quia magni possimus quo itaque blanditiis quos mollitia libero. Corporis vel praesentium ipsum et. Consequatur nulla cumque consequuntur aperiam sint quod. Ipsam omnis vitae recusandae molestias. Est magnam non libero perspiciatis dolorem.\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-value/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"key-value",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/key-values/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"2b010d13-8285-41fc-b27f-db02c57ad5a5\", \n\t\t\"key\": \"l1c476vrw19kbeskfohyt06ejggafocf8pua1qwx1wldxrh8lukv58419exgdta\", \n\t\t\"type\": 'NUMBER', \n\t\t\"value\": \"Eum qui aut tenetur enim dicta vero. Sunt quidem est veritatis. Nobis voluptas quia ad quidem ea. Voluptatem molestiae culpa doloribus illum. Quod error aut magni recusandae. Assumenda impedit impedit architecto.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Aliquam ut quisquam molestias et. Molestiae sint illum. Voluptatum in ut velit voluptatem quis itaque modi corrupti. Autem voluptatem deserunt cupiditate temporibus labore. Adipisci inventore accusantium autem sed sapiente. Ducimus voluptatem voluptas nihil iure at illo alias hic.\"\n\t}, \n\t{\n\t\t\"id\": \"31ba2092-76c7-490a-a093-9a3d863ed10c\", \n\t\t\"key\": \"p7et3nmrzpwi2ebv3ebdql687ww3yvs35dmag5sn750y8l08777ejbvcbjrwqor\", \n\t\t\"type\": 'STRING', \n\t\t\"value\": \"Eos quidem atque a similique est. Voluptatem sapiente voluptates. Pariatur eius exercitationem non amet possimus.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Sit totam vitae nisi. Similique qui sequi cum rerum enim pariatur. Illum autem et sint. Ipsum numquam magni est voluptas ullam et sed quae illum.\"\n\t}, \n\t{\n\t\t\"id\": \"b3d598fd-a9bd-4307-a339-da2121f6bf77\", \n\t\t\"key\": \"tsib60c1jqw9x09y0yx74hgdqoylv5i8zjdzkpg2n8ovhhignu41bet0wcrcox4\", \n\t\t\"type\": 'BOOLEAN', \n\t\t\"value\": \"Est placeat maxime tenetur sapiente eius et. Quis commodi sapiente magni ut incidunt esse. Quas deserunt non sequi molestiae.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Rem eum quo. Aliquam voluptas quia vero corporis. Non animi fuga natus et sint quis totam tempore quo. Aut consectetur aut eum voluptatum laudantium.\"\n\t}, \n\t{\n\t\t\"id\": \"8391008d-fd38-48b7-9899-359a8c69a3c8\", \n\t\t\"key\": \"uzkk0jhax2femd8ie4knnt8at2j9kbj483crlpqoyv28ejszpffazgvykdwku2z\", \n\t\t\"type\": 'BOOLEAN', \n\t\t\"value\": \"Sunt dignissimos sit suscipit eos autem maxime. Quibusdam quis culpa nihil non voluptates recusandae tempore. Sunt hic earum molestias corporis doloribus cum suscipit qui distinctio. Non maxime nemo velit itaque nihil maiores esse repellat.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Aut numquam non et et. Neque ut facilis laboriosam commodi saepe qui deserunt. Nulla velit exercitationem quia et eum laudantium accusantium reprehenderit tempore. Veniam aut aspernatur. Suscipit similique aut.\"\n\t}, \n\t{\n\t\t\"id\": \"f0b21be1-f189-4ca2-a796-397392e39d7d\", \n\t\t\"key\": \"p43qcnucfjx4uvqzck9ij3azctuf14wgiruahvui7bq06tja6wkrs7qmdyh3f5z\", \n\t\t\"type\": 'TIME', \n\t\t\"value\": \"Non nulla sequi error est delectus aut dolor quod. Quia perferendis nisi maiores asperiores perferendis illum est architecto. Architecto eum nihil veniam.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Aut inventore esse vero necessitatibus ullam dolor non ex. Modi voluptatum iure. Et ipsum ipsa natus accusantium atque itaque. Et cupiditate molestiae qui dolorem voluptatem autem perferendis.\"\n\t}, \n\t{\n\t\t\"id\": \"7c1f0cd5-0809-491b-8347-e74b04b04def\", \n\t\t\"key\": \"gzdxlje7ao8y26t6wkfy0tcips0itkbsy711nmxnpl6kyzlv1pknt89q7pphuvs\", \n\t\t\"type\": 'TIME', \n\t\t\"value\": \"Nemo blanditiis repellendus sed esse est nesciunt tempora porro. Voluptatum ut suscipit earum facilis laudantium qui tempore voluptatem aspernatur. Est sint voluptas consequatur excepturi quis dignissimos. Eos nobis corporis dolore voluptas. Officia voluptas ut totam rerum ipsam repellendus ut ut et.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Blanditiis accusantium quibusdam est eveniet ut. Sit aperiam qui ut dignissimos illo sequi pariatur voluptas. Quia debitis sed et accusantium quo et. Sit voluptate quisquam occaecati sed aut beatae voluptatem commodi voluptas. Tempore natus voluptas. Voluptatem enim et.\"\n\t}, \n\t{\n\t\t\"id\": \"07608c1d-29bc-4652-9eac-618dd589b532\", \n\t\t\"key\": \"306yy14e0v9usbnewblcwf4f2lvlkz25wzyel52z6fv9di8jrgb0euzggs68cxs\", \n\t\t\"type\": 'STRING', \n\t\t\"value\": \"Laudantium eaque sed culpa vel neque aut. Sed quia consequatur dignissimos expedita veniam. Minima commodi officia architecto nulla amet ullam itaque. Aliquam nam eum ab.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Et sit inventore vel dolore eum odio voluptatem ex. In delectus doloribus. Maiores sit eius adipisci quos voluptatibus sit corrupti dolorum. Rerum explicabo optio. Asperiores numquam dolor quas praesentium asperiores.\"\n\t}, \n\t{\n\t\t\"id\": \"b315ea0a-d9e6-4a1b-9db2-04111d979092\", \n\t\t\"key\": \"imf5twuojv4lhytapfhwcx5al57tgsy9zpfbz03ajxnc4gngsdwup911tt2jz1v\", \n\t\t\"type\": 'STRING', \n\t\t\"value\": \"Explicabo dolorum aut voluptate. Et est vel quos. Nihil eligendi porro quam autem eos odio minima aut et. Velit corporis temporibus voluptate. Error modi harum qui tempora deleniti odit ratione similique.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Excepturi rem dolorem nemo voluptate at nesciunt maiores. Eligendi aut nulla quo. Aut esse eum dolorem. Quisquam cumque laborum architecto quia rerum aliquam quia delectus. Exercitationem labore velit vel officia nihil.\"\n\t}, \n\t{\n\t\t\"id\": \"b006e713-94cc-40ba-8b5f-584e74412f86\", \n\t\t\"key\": \"9vztf7whyff458vvo542fwk6twfo7w01jnz11bvhfsu14yg0lhuckg3id75n3qr\", \n\t\t\"type\": 'BOOLEAN', \n\t\t\"value\": \"Et debitis autem sint et itaque. Beatae voluptas et voluptas deserunt odit est aut quis. Est optio consectetur. Fuga voluptatibus harum nemo praesentium iure sint consequatur magnam.\", \n\t\t\"isActive\": false, \n\t\t\"description\": \"Voluptas nobis eveniet aut. Quo quia odit ut deleniti. Ratione cupiditate et ea laboriosam est iure est deserunt sed. Sequi voluptatem ut natus explicabo delectus veniam molestias. Illo in quis ipsum adipisci et maiores consequatur.\"\n\t}, \n\t{\n\t\t\"id\": \"c5e4a194-3e90-402b-9bc6-046359589a3a\", \n\t\t\"key\": \"6tx6rklup7tc5teralu9xr3y9sdx8zyd5xpg7qhkushotqq9qiw7iycsms7h5zc\", \n\t\t\"type\": 'TIMESTAMP', \n\t\t\"value\": \"Ea eos eos consequatur. Et consequatur ratione. Nihil nihil ipsum voluptatem error tenetur. Dicta perspiciatis fugit doloribus earum consequuntur aliquid. Et rerum sint quasi vero dolorum quisquam. Ducimus et optio.\", \n\t\t\"isActive\": true, \n\t\t\"description\": \"Sit assumenda perferendis eius ipsum ea. Qui fugit voluptates velit quod fugiat dicta aspernatur et. Commodi qui facere et ut sit occaecati id. Accusantium minima dolorem sit quisquam amet nam. Nisi mollitia in repellendus aut dolor qui illum et. Ad aspernatur autem nemo eaque deleniti nulla quibusdam rerum et.\"\n\t}\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-values/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"key-values",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/key-values/paginate",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-values/paginate",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-                        "key-values",
-                        "paginate"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/key-values/get",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-values/get",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"key-values",
-                        "get"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/key-value/find",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-value/find",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"key-value",
-                        "find"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - tools/key-value/find/{id}",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-value/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"key-value",
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-value/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "tools",
+                        "key-value",
                         "find",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - tools/key-value/update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"key\": \"ir6w0r2u9smvf0nsykettdvpy4feuphwxsj269hdhderdt5j8950vj77smu5qvb\", \n\t\"type\": 'OBJECT', \n\t\"value\": \"Nesciunt praesentium excepturi fugit nobis esse qui voluptas et. Et praesentium fuga. Dolor enim earum repellat laboriosam quia numquam autem. Aut molestiae assumenda earum qui unde fugit.\", \n\t\"isActive\": true, \n\t\"description\": \"Facilis quidem ea ut recusandae ut. Adipisci neque nemo ipsum possimus consequatur qui deserunt iste. Maxime fuga eum quisquam perferendis necessitatibus est alias. Architecto voluptatem quo ut omnis.\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-value/update",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"key-value",
-                        "update"
-					]
-				}
-			},
-			"response": []
+            "name": "REST - tools/key-value/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 17928997324153842000, \n\t\"key\": \"dt8x9q42n47kg2fook0br10u85162qcobj8s88wkwdaq9r0zfstpp3k03oe0cis\", \n\t\"type\": 'BOOLEAN', \n\t\"value\": \"Ut voluptatibus quisquam sed omnis voluptatem sed quidem exercitationem. Cum eveniet nisi neque beatae. Ipsum blanditiis autem vitae autem repellendus.\", \n\t\"isActive\": false, \n\t\"description\": \"Aut eius ratione. Laudantium explicabo eligendi qui. Facilis autem ut recusandae. Odit officia a ea maxime maxime est ex doloremque. Sed accusantium provident eos enim id.\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-value/update",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "key-value", "update"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - tools/key-value/delete/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-value/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"key-value",
+            "name": "REST - tools/key-value/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-value/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "tools",
+                        "key-value",
                         "delete",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
-		},
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
         {
-			"name": "REST - tools/key-values/delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/tools/key-values/delete",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"tools",
-						"key-values",
-                        "delete"
-					]
-				}
-			},
-			"response": []
-		}
+            "name": "REST - tools/key-values/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/tools/key-values/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["tools", "key-values", "delete"]
+                }
+            },
+            "response": []
+        }
     ],
     "variable": [
-		{
-			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-			"key": "URL",
-			"value": "http://localhost:8080",
-			"type": "string"
-		}
-	]
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
 }

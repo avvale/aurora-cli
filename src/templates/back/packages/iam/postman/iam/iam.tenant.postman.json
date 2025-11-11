@@ -1,561 +1,480 @@
 {
     "info": {
-		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-		"name"          : "@app - iam/tenant",
-		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - iam/tenant",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-			"name": "GraphQL - iamCreateTenant",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "GraphQL - iamCreateTenant",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:IamCreateTenantInput!)\n{\n\tiamCreateTenant (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tparentId\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 27581271549268697000, \n\t\t\"parentId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Tasty Frozen Towels\", \n\t\t\"code\": \"virsj1rga2deykjub5o3mx7wc07i1j08tvfa4dabc7fex45mjuaqjnldn61lxf5\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamCreateTenants",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[IamCreateTenantInput]!)\n{\n\tiamCreateTenants (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"aab38252-c074-4df3-a1f7-2600ebd5ec2b\", \n\t\t\t\"rowId\": 56647576037122020000, \n\t\t\t\"parentId\": \"cbe11832-3dc9-4b2e-8923-d90975894d41\", \n\t\t\t\"name\": \"Ergonomic Concrete Chicken\", \n\t\t\t\"code\": \"tuezg45at5c1zuymhjwd8l11qafq6ey14ase9a7klp3ryylynuusd5uub3injmz\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"f4b3ca2a-0771-4140-9412-d3afe06487a4\", \n\t\t\t\"rowId\": 14580866810759678000, \n\t\t\t\"parentId\": \"8b21b6ca-b4a5-4222-8222-a5ee3e1f00e1\", \n\t\t\t\"name\": \"Licensed Wooden Salad\", \n\t\t\t\"code\": \"k7kzypd6kz02enrljl7zgph6wv5jn2su7eiql5yws0jdgnzjr6webrm3dcgk8q3\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"81df87d2-f5d4-4fd6-8ebf-0ddbc91fb6f0\", \n\t\t\t\"rowId\": 80343133582193330000, \n\t\t\t\"parentId\": \"c9af9146-a729-4f06-8327-9c80a19677bc\", \n\t\t\t\"name\": \"Practical Metal Shoes\", \n\t\t\t\"code\": \"ism5qfp4vkiokfghz0t31ol0vfgaiarhvb3qfw338p4e76hiun0th82y5lm2tux\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"aa19e728-5715-42d0-aec4-cd007ad1af73\", \n\t\t\t\"rowId\": 55596708551657900000, \n\t\t\t\"parentId\": \"9648d8f8-dfcc-47c5-bbda-aeb370112bb0\", \n\t\t\t\"name\": \"Tasty Cotton Gloves\", \n\t\t\t\"code\": \"fj4hkiucutswpav6bwl43z9aho6eggsbh48wwwcjeo13np1el3020f2j8k9xxb1\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c7248d47-f4e5-4dee-837b-6af367d85fa4\", \n\t\t\t\"rowId\": 42522750787251720000, \n\t\t\t\"parentId\": \"ab6cad9d-19ba-4dad-852c-08ad9f5f927c\", \n\t\t\t\"name\": \"Tasty Frozen Computer\", \n\t\t\t\"code\": \"ewy8oe7bs3e7ixtmw25emhy3xadpk0gbsvwfxwkihkkh7n0u4f5onzgc1bluu03\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a15448b1-bbee-4c56-a64a-345e0ca8dd02\", \n\t\t\t\"rowId\": 37226895179341660000, \n\t\t\t\"parentId\": \"2b79bcdf-26d8-4136-94f1-4e1a7b5ab511\", \n\t\t\t\"name\": \"Unbranded Cotton Pants\", \n\t\t\t\"code\": \"6wyh6ijh5cf3mb4i048qenkww6o7866toptvvpwbasx916afrr09eudyd86523w\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0dfcab66-dbf5-4de0-a43c-3238d46eaace\", \n\t\t\t\"rowId\": 47843678356048370000, \n\t\t\t\"parentId\": \"a18b79f5-a32a-4105-9ece-38e95589e685\", \n\t\t\t\"name\": \"Practical Concrete Gloves\", \n\t\t\t\"code\": \"28puknrfvyjh11yl1bbvcpmdrkm2sml15ikc3uqhn76bb1io5zrbn8mpdl74529\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8cac5989-edb8-41db-89b9-93d6e9668467\", \n\t\t\t\"rowId\": 10261645734651961000, \n\t\t\t\"parentId\": \"1fa6faed-91a5-45ba-8356-47104709ad48\", \n\t\t\t\"name\": \"Small Fresh Hat\", \n\t\t\t\"code\": \"0qq8yf9sx82x9e9a55vu4akdqunropobbfnate8k2b4tqu6awqv9ybh2a66vjg0\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1555a2a6-5361-4a6c-aa96-7b8e01e902cd\", \n\t\t\t\"rowId\": 79041215382619290000, \n\t\t\t\"parentId\": \"3709ff7a-5133-41ee-a76c-a986a58db990\", \n\t\t\t\"name\": \"Incredible Fresh Shoes\", \n\t\t\t\"code\": \"q4bd6fy32ig21irqhqnu6ztmctrl325l3di2ka2x0g67qnf5qphnrtdre5vkewj\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"03ba7045-ba53-4027-afa7-92b35a8c6d8f\", \n\t\t\t\"rowId\": 98516998550525770000, \n\t\t\t\"parentId\": \"1a342b6c-c503-45d2-b2e2-0d4f37653593\", \n\t\t\t\"name\": \"Unbranded Wooden Tuna\", \n\t\t\t\"code\": \"wb2w8i10egq4llb77296xot7n0i6hu9hgvhovrna6p6apzns75egr0atgr2csnk\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamPaginateTenants",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateTenants (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamGetTenants",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tiamGetTenants (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamFindTenant",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tiamFindTenant (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamFindTenantById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\tiamFindTenantById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamUpdateTenant",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:IamUpdateTenantInput!)\n{\n\tiamUpdateTenant (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 38319078573836590000, \n\t\t\"parentId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Handmade Granite Shoes\", \n\t\t\"code\": \"1dy8xdk9j4ntjnbs9a4e24poj4b851dvkvvpfwbbyym9bndbjcyv1kevben6583\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamDeleteTenantById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\tiamDeleteTenantById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - iamDeleteTenants",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteTenants (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - iam/tenant/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:IamCreateTenantInput!)\n{\n\tiamCreateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tparentId\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"parentId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Sleek Cotton Computer\", \n\t\t\"code\": \"7ekxppm6vg562zvwsm1mserfc9gecn1jl715k3rd4t3ru75fkc9v2wo8ig86j0t\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 35300643827149332000, \n\t\"parentId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Handmade Plastic Towels\", \n\t\"code\": \"2hbj5izl5ivl4kh46u5isv2lomhyg76y6ygik3dmzd63z8bya8wy682uy9hh9sw\", \n\t\"logo\": { \"foo\" : \"bar\" }, \n\t\"isActive\": false, \n\t\"meta\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenant/create",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tenant", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamCreateTenants",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:[IamCreateTenantInput]!)\n{\n\tiamCreateTenants (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"1402ebbd-f268-44c0-a1b8-6c2495163f84\", \n\t\t\t\"parentId\": \"21aa1c6c-dced-491f-9a12-5ff7c47a60e2\", \n\t\t\t\"name\": \"Ergonomic Wooden Keyboard\", \n\t\t\t\"code\": \"i8bcikjogr9f5ektdq14odzlk7ztojratdqdwuh9n1vuksnfz3ejj8vm7pedb1w\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"0cc7e6ff-4431-402e-8bf9-97733599684a\", \n\t\t\t\"parentId\": \"9ccd9afd-b361-4934-b93b-6d5770b0bd2d\", \n\t\t\t\"name\": \"Rustic Rubber Towels\", \n\t\t\t\"code\": \"2a3f146706aizbotnwvh3zh444rgg9rbu2onpu84vjt3qfnkgyuw7hj2bbns1wn\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d15a1390-6544-4d2d-a163-41c0cf725295\", \n\t\t\t\"parentId\": \"205d440d-42e4-495a-8817-88720faaafdd\", \n\t\t\t\"name\": \"Handmade Fresh Soap\", \n\t\t\t\"code\": \"4djzcogxqqxcpv5ola2s1c1nr7lvbrkp9yvhsadrc5lhphv4ghw8scx6t99t53y\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"df23dd3e-f971-491a-aa56-fe342428fc35\", \n\t\t\t\"parentId\": \"e85dfbb9-dcd7-4515-9b81-8efba8fc6c36\", \n\t\t\t\"name\": \"Handcrafted Steel Computer\", \n\t\t\t\"code\": \"fqw3nsxapc3vf3hkpb2keogwgjc66j0yk4t7rnz8cwp8incg0m4t7b6einizd9h\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"18707795-174c-4902-85d1-7fdf1aeb1756\", \n\t\t\t\"parentId\": \"fe5b4b96-b139-4349-b343-58edb7b23ffc\", \n\t\t\t\"name\": \"Handmade Granite Car\", \n\t\t\t\"code\": \"6uv1xtlmx37w3fmn0r0bcm2bxx6f5s2j9ndbiul6lxgcgrvt4svpotpanj5iay1\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c7680e54-3aa7-4c2b-a9a4-8e239a92ffea\", \n\t\t\t\"parentId\": \"80d8f2e3-fd30-46de-b3bb-52b304748996\", \n\t\t\t\"name\": \"Small Granite Bacon\", \n\t\t\t\"code\": \"7p4q8kp2b5r1s9qpy7uc3cgf2d9x56zwwl3t1lk3v1pifs58ewfyc2glunhic9q\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e18d2655-188e-4c5e-85b9-fd53ef8b01a1\", \n\t\t\t\"parentId\": \"6038ba2e-44b7-4871-8fde-d5daf33fa263\", \n\t\t\t\"name\": \"Sleek Metal Pants\", \n\t\t\t\"code\": \"8h3wnaa72g8aemrtkib007c0w6qqz1t9e7cs1bcak94g3dpgy847bjtb1xi7s6q\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e9e89b0f-d545-4c25-acb8-1625fb8c199b\", \n\t\t\t\"parentId\": \"77aab0c0-d356-4056-b1ec-71c74c755722\", \n\t\t\t\"name\": \"Intelligent Metal Towels\", \n\t\t\t\"code\": \"6lt0pseh7q2ny88c8g4u68i7hsfc22b29gszhsfams8voiwhl8qd12ift3j8j97\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": true, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c1ce8980-ec7d-4ba6-96eb-257a0d704dc6\", \n\t\t\t\"parentId\": \"312e4a80-560c-4c5e-9342-251dc604cdcc\", \n\t\t\t\"name\": \"Practical Fresh Shoes\", \n\t\t\t\"code\": \"20h6fyfj290wrzfvowcz2wtya8lgme0gcssj4x956ysh04023cje1xjjd0u5k0r\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fa6197d7-4cdb-4265-b64f-6e128732f947\", \n\t\t\t\"parentId\": \"14e42972-c91c-4e14-b407-7e79ed642de7\", \n\t\t\t\"name\": \"Generic Frozen Computer\", \n\t\t\t\"code\": \"ulkxlzr85dgj6u5mvg5ga4b4t400lvhwirn0eehnfqrwxw7iph6vo5cdbbkakwl\", \n\t\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\t\"isActive\": false, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamPaginateTenants",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tenants/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tiamPaginateTenants (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"a003ffe0-6ba5-49f0-abfa-667977c431fd\", \n\t\t\"rowId\": 58108558194255550000, \n\t\t\"parentId\": \"5259cfcc-a1bd-4e27-b956-e70403b9709b\", \n\t\t\"name\": \"Practical Cotton Cheese\", \n\t\t\"code\": \"gzh0yeinh02evmgwies5jli78bf3suwv8dda1vn8v8xvx184etydtmz0s5i4e46\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"4b92055f-38ca-4941-95db-a515e364e071\", \n\t\t\"rowId\": 15919397918887068000, \n\t\t\"parentId\": \"505c09d8-5498-41e4-b3cb-8623913c86ea\", \n\t\t\"name\": \"Rustic Steel Mouse\", \n\t\t\"code\": \"j77mpru8nwlxaxx9u8wtmqfbeer041qzcinh6bn8i3m5wesmd1y8toeun3unrv3\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"6ee42d6b-4226-48fd-ad1d-e783828515e9\", \n\t\t\"rowId\": 17825769187682590000, \n\t\t\"parentId\": \"c05d2b6d-700c-4415-9993-158316b64c2d\", \n\t\t\"name\": \"Tasty Granite Table\", \n\t\t\"code\": \"g9drtzyrk9f69feu2eu9drnkrlepacw6sunxoe6nda21kr3d3ti0dq3enmplzln\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"edf87060-d799-4d85-bbc8-33736a599149\", \n\t\t\"rowId\": 13815002957223997000, \n\t\t\"parentId\": \"7d8321fc-a558-4b51-83df-ca7a65e8a3fe\", \n\t\t\"name\": \"Unbranded Fresh Shirt\", \n\t\t\"code\": \"pv4r6ldn2djbpvib3u8x4xir7vcaitof5fwi5ry8hpyyixcwpkb484gjgd7jt3e\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"11c54c72-8e24-419a-a8bd-d41d75cd7502\", \n\t\t\"rowId\": 84378877018276580000, \n\t\t\"parentId\": \"aca2a38b-294c-4468-bb74-d7afcf06b68d\", \n\t\t\"name\": \"Refined Steel Salad\", \n\t\t\"code\": \"slse57h4zfhikbpu1ckl5dkaea0xevnhfygz3wyegcfd0seto54q0upo6eol9ea\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"f7d24cb0-fb75-4514-b830-b9dc5d21f172\", \n\t\t\"rowId\": 55023832489608440000, \n\t\t\"parentId\": \"8ff27c10-d0da-4138-a891-aab1c50fa4e7\", \n\t\t\"name\": \"Intelligent Frozen Keyboard\", \n\t\t\"code\": \"hzwqyeuko8xzf89v0y6v3qfpgbug3zhncdhkyiilzwhklci36010s0k1im9hby5\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"b7454421-7272-4192-a53d-0c220f14560c\", \n\t\t\"rowId\": 73905527705762000000, \n\t\t\"parentId\": \"77639ac8-95c1-4c01-a4b8-6fb065f684bd\", \n\t\t\"name\": \"Handmade Soft Keyboard\", \n\t\t\"code\": \"ijftyi84lhxbqqi5yz1s5btdo54bngxt034yunxhqwu4zi6ym8fy00m7o9df149\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"dd9d2c55-a0fe-4cff-98c1-f0dac70749d4\", \n\t\t\"rowId\": 95664142344190690000, \n\t\t\"parentId\": \"60459e89-2210-4930-99b9-620ff6a08273\", \n\t\t\"name\": \"Practical Wooden Bike\", \n\t\t\"code\": \"wze5j281tkmkkpgo4fyz0dobalc9umndagrb0pcr3vs9v6lk270gkuhn8j2s3xo\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"d7813371-416d-4ac3-885f-be6050dd583c\", \n\t\t\"rowId\": 72768733036298950000, \n\t\t\"parentId\": \"4e6b0e15-0dd7-4970-9cbc-b64cfe41231b\", \n\t\t\"name\": \"Handcrafted Granite Shirt\", \n\t\t\"code\": \"ndloi216mt7u67brb93i5xz052z2mldqi4soz8sqim5lpjpckdqrdmzj54icts2\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"852bc7eb-3e1b-46a7-85ea-b5b29c0530d6\", \n\t\t\"rowId\": 94183883820528780000, \n\t\t\"parentId\": \"e4ed0bbe-047b-43ee-b291-031b72f8d346\", \n\t\t\"name\": \"Tasty Rubber Hat\", \n\t\t\"code\": \"75res8lvvph6exuw940hz10w20z3ym9nnmlwj4cr7xywe0x7hh526y8v1655eo5\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenants/create",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tenants", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamGetTenants",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tenants/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamGetTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenants/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tenants", "paginate"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamFindTenant",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tenants/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tiamFindTenant (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenants/get",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tenants", "get"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamFindTenantById",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tenant/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($id:ID)\n{\n\tiamFindTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenant/find",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tenant", "find"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - iamUpdateTenant",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - iam/tenant/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:IamUpdateTenantInput!)\n{\n\tiamUpdateTenant (payload:$payload)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"parentId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"name\": \"Small Granite Sausages\", \n\t\t\"code\": \"1foaqt4lwx2jcceirfzwy0vox7pe71o7vzg4ppuo3xqanhgxt9afq9gqxmiv1sj\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamDeleteTenantById",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\tiamDeleteTenantById (id:$id)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - iamDeleteTenants",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\tiamDeleteTenants (query: $query)\n\t{\n\t\tid\n\t\tname\n\t\tcode\n\t\tlogo\n\t\tisActive\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tenant/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"parentId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Rustic Concrete Sausages\", \n\t\"code\": \"4qgzc71n6er0ugt676mfprdc862im02rp8p2bewsn78yllrmcp8exxrjc5kmx41\", \n\t\"logo\": { \"foo\" : \"bar\" }, \n\t\"isActive\": true, \n\t\"meta\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenant/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tenant",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tenants/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"15641459-d043-4d27-98aa-b3bc199694f3\", \n\t\t\"parentId\": \"fa94109a-0ef2-4c06-9e71-3d2586552be8\", \n\t\t\"name\": \"Rustic Metal Tuna\", \n\t\t\"code\": \"rp6kep3nyhbwn3pdkningil4ivwa7icv9owk7x28g7ni4mbsj9oxzlt0sh9u2bd\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"73a4798e-cfd4-453c-b8ab-cab7cffd6ade\", \n\t\t\"parentId\": \"84a1ebb8-d0b1-4920-97ae-4236baae4b1a\", \n\t\t\"name\": \"Sleek Wooden Pants\", \n\t\t\"code\": \"vq8eaxwojcps29g9btyodinno3dbl839eohygcfhcm55odn232g7b16jbmrmyw0\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"3d0e1c57-9e1e-48f8-8ed7-688c618d6359\", \n\t\t\"parentId\": \"ee2124ce-5245-4c3b-bd7a-2f20686ac45b\", \n\t\t\"name\": \"Tasty Cotton Tuna\", \n\t\t\"code\": \"2xzmeubtrlo6o08p6usm3halfjy8sq9pujbvy9u492isvl6bqwsnfgsmevlm5ao\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"8583a70b-80d7-4748-85a6-f0c757a91a59\", \n\t\t\"parentId\": \"de30c128-ef7f-49a2-bd0b-6902fa2e0dc3\", \n\t\t\"name\": \"Handmade Steel Mouse\", \n\t\t\"code\": \"2cc6i955t1u44v1daibnev5db57ytbmw08denn5bxwv84ugaxrle0yxi67axblt\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"c41d4228-4ac1-4822-a84f-15669872a968\", \n\t\t\"parentId\": \"461d8ede-e929-4b48-8593-38e795e44d44\", \n\t\t\"name\": \"Handcrafted Metal Chips\", \n\t\t\"code\": \"dj6v0mddr56vnm2i1xgzmyqblkmd6ivkau9efkx8pbgpy6tiefz3230jkrqpu2s\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"145a28e3-76cf-4009-9db5-10f433edb873\", \n\t\t\"parentId\": \"4b30c0d9-98eb-4fe0-b905-5d5711951716\", \n\t\t\"name\": \"Practical Cotton Computer\", \n\t\t\"code\": \"le43t4trje1e0csvxuwxnog0fv3nxragh4n8t0tfyuxvkrlxh8g8gt6t3c54p7o\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"5a04729f-c153-4f9a-8430-843a068f8a58\", \n\t\t\"parentId\": \"a8769d53-af01-49e2-beb9-1d0905c0897c\", \n\t\t\"name\": \"Incredible Fresh Ball\", \n\t\t\"code\": \"dndqd0z68sgt4a01tt87ovtefy6wckihllu8yt7kx5kwop1bmd89lb96vasm89t\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"ca324540-ea33-4afe-9da5-b6bd86853175\", \n\t\t\"parentId\": \"d07fac3f-050c-49f9-b77a-47a42ab0ff64\", \n\t\t\"name\": \"Generic Granite Mouse\", \n\t\t\"code\": \"y6vamdhe6wgrw4nazeek4tpyo2zharldnmhskf7uq0cov27aq9dbm4j8r1a9yt3\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"35409506-a295-48cb-9b80-9144fe2965ec\", \n\t\t\"parentId\": \"973e6e6d-b7f6-45ac-aff4-a90c6b8f691c\", \n\t\t\"name\": \"Rustic Cotton Shoes\", \n\t\t\"code\": \"so51emyt2o3xf6osn3hw9i1rgn8qbexvl80i27lhiehiuztequ7s6iarl8afvhr\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": false, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}, \n\t{\n\t\t\"id\": \"dcdf5140-ca83-48d4-af41-749a5068cbdb\", \n\t\t\"parentId\": \"6f1faa06-23c1-47e8-971d-4e277c0e3578\", \n\t\t\"name\": \"Gorgeous Wooden Bacon\", \n\t\t\"code\": \"jk1trgaodpzjqf7adu4s4rrkoysdp6bdx82dcgtr98ok04vt3g0ydlt29hb67uy\", \n\t\t\"logo\": { \"foo\" : \"bar\" }, \n\t\t\"isActive\": true, \n\t\t\"meta\": { \"foo\" : \"bar\" }, \n\t\t\"accountIds\": []\n\t}\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenants/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tenants",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tenants/paginate",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenants/paginate",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-                        "tenants",
-                        "paginate"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tenants/get",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenants/get",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tenants",
-                        "get"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tenant/find",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenant/find",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tenant",
-                        "find"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - iam/tenant/find/{id}",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenant/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tenant",
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenant/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "iam",
+                        "tenant",
                         "find",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - iam/tenant/update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"parentId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Tasty Wooden Keyboard\", \n\t\"code\": \"tchbsa8fpanrwbtqw1ooenbb1ac4agh33rj2qttex63ee8kissay2axo8kxlqa3\", \n\t\"logo\": { \"foo\" : \"bar\" }, \n\t\"isActive\": false, \n\t\"meta\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenant/update",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tenant",
-                        "update"
-					]
-				}
-			},
-			"response": []
+            "name": "REST - iam/tenant/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 63421307924913100000, \n\t\"parentId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"name\": \"Small Plastic Shirt\", \n\t\"code\": \"0luf2c1y4xrze8zcptkbluds2yxm7w5i26qnray89x9n482j4a5vkhafpq0p652\", \n\t\"logo\": { \"foo\" : \"bar\" }, \n\t\"isActive\": true, \n\t\"meta\": { \"foo\" : \"bar\" }, \n\t\"accountIds\": []\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenant/update",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tenant", "update"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - iam/tenant/delete/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenant/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tenant",
+            "name": "REST - iam/tenant/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenant/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "iam",
+                        "tenant",
                         "delete",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
-		},
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
         {
-			"name": "REST - iam/tenants/delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/iam/tenants/delete",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"iam",
-						"tenants",
-                        "delete"
-					]
-				}
-			},
-			"response": []
-		}
+            "name": "REST - iam/tenants/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/iam/tenants/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["iam", "tenants", "delete"]
+                }
+            },
+            "response": []
+        }
     ],
     "variable": [
-		{
-			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-			"key": "URL",
-			"value": "http://localhost:8080",
-			"type": "string"
-		}
-	]
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
 }

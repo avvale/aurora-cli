@@ -1,49 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamFindTenantAccountHandler, IamFindTenantAccountResolver } from '@api/iam/tenant-account';
+import {
+    IamFindTenantAccountHandler,
+    IamFindTenantAccountResolver,
+} from '@api/iam/tenant-account';
 import { iamMockTenantAccountData } from '@app/iam/tenant-account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTenantAccountResolver', () =>
-{
+describe('IamFindTenantAccountResolver', () => {
     let resolver: IamFindTenantAccountResolver;
     let handler: IamFindTenantAccountHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamFindTenantAccountResolver,
                 {
-                    provide : IamFindTenantAccountHandler,
+                    provide: IamFindTenantAccountHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamFindTenantAccountResolver>(IamFindTenantAccountResolver);
-        handler = module.get<IamFindTenantAccountHandler>(IamFindTenantAccountHandler);
+        resolver = module.get<IamFindTenantAccountResolver>(
+            IamFindTenantAccountResolver,
+        );
+        handler = module.get<IamFindTenantAccountHandler>(
+            IamFindTenantAccountHandler,
+        );
     });
 
-    test('IamFindTenantAccountResolver should be defined', () =>
-    {
+    test('IamFindTenantAccountResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTenantAccountResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTenantAccountResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a tenantAccount', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantAccountData[0])));
+        test('should return a tenantAccount', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockTenantAccountData[0]),
+                    ),
+            );
             expect(await resolver.main()).toBe(iamMockTenantAccountData[0]);
         });
     });

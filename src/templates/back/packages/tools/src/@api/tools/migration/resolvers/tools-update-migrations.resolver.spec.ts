@@ -1,51 +1,61 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ToolsUpdateMigrationsInput } from '@api/graphql';
-import { ToolsUpdateMigrationsHandler, ToolsUpdateMigrationsResolver } from '@api/tools/migration';
+import {
+    ToolsUpdateMigrationsHandler,
+    ToolsUpdateMigrationsResolver,
+} from '@api/tools/migration';
 import { toolsMockMigrationData } from '@app/tools/migration';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsUpdateMigrationsResolver', () =>
-{
+describe('ToolsUpdateMigrationsResolver', () => {
     let resolver: ToolsUpdateMigrationsResolver;
     let handler: ToolsUpdateMigrationsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsUpdateMigrationsResolver,
                 {
-                    provide : ToolsUpdateMigrationsHandler,
+                    provide: ToolsUpdateMigrationsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsUpdateMigrationsResolver>(ToolsUpdateMigrationsResolver);
-        handler = module.get<ToolsUpdateMigrationsHandler>(ToolsUpdateMigrationsHandler);
+        resolver = module.get<ToolsUpdateMigrationsResolver>(
+            ToolsUpdateMigrationsResolver,
+        );
+        handler = module.get<ToolsUpdateMigrationsHandler>(
+            ToolsUpdateMigrationsHandler,
+        );
     });
 
-    test('ToolsUpdateMigrationsResolver should be defined', () =>
-    {
+    test('ToolsUpdateMigrationsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsUpdateMigrationsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsUpdateMigrationsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a migrations updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData[0])));
-            expect(await resolver.main(<ToolsUpdateMigrationsInput>toolsMockMigrationData[0])).toBe(toolsMockMigrationData[0]);
+        test('should return a migrations updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockMigrationData[0]),
+                    ),
+            );
+            expect(
+                await resolver.main(
+                    <ToolsUpdateMigrationsInput>toolsMockMigrationData[0],
+                ),
+            ).toBe(toolsMockMigrationData[0]);
         });
     });
 });

@@ -2,44 +2,41 @@ import { IamFindTenantController, IamFindTenantHandler } from '@api/iam/tenant';
 import { iamMockTenantData } from '@app/iam/tenant';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindTenantController', () =>
-{
+describe('IamFindTenantController', () => {
     let controller: IamFindTenantController;
     let handler: IamFindTenantHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                IamFindTenantController,
-            ],
+            imports: [],
+            controllers: [IamFindTenantController],
             providers: [
                 {
-                    provide : IamFindTenantHandler,
+                    provide: IamFindTenantHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamFindTenantController>(IamFindTenantController);
+        controller = module.get<IamFindTenantController>(
+            IamFindTenantController,
+        );
         handler = module.get<IamFindTenantHandler>(IamFindTenantHandler);
     });
 
-    describe('main', () =>
-    {
-        test('IamFindTenantController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindTenantController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a tenant', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+        test('should return a tenant', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
             expect(await controller.main()).toBe(iamMockTenantData[0]);
         });
     });

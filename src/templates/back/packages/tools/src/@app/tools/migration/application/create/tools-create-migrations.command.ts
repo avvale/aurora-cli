@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class ToolsCreateMigrationsCommand
-{
+export class ToolsCreateMigrationsCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -13,7 +12,7 @@ export class ToolsCreateMigrationsCommand
             downScript?: string;
             sort?: number;
             executedAt?: string;
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

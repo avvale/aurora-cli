@@ -5,60 +5,60 @@ import { oAuthMockScopeData } from '@app/o-auth/scope';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthUpdateScopeByIdHandler', () =>
-{
+describe('OAuthUpdateScopeByIdHandler', () => {
     let handler: OAuthUpdateScopeByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 OAuthUpdateScopeByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<OAuthUpdateScopeByIdHandler>(OAuthUpdateScopeByIdHandler);
+        handler = module.get<OAuthUpdateScopeByIdHandler>(
+            OAuthUpdateScopeByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('OAuthUpdateScopeByIdHandler should be defined', () =>
-    {
+    test('OAuthUpdateScopeByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('OAuthUpdateScopeByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthUpdateScopeByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a scope updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(oAuthMockScopeData[0])));
+        test('should return a scope updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockScopeData[0])),
+            );
             expect(
                 await handler.main(
                     <OAuthUpdateScopeByIdInput>oAuthMockScopeData[0],
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(oAuthMockScopeData[0]);
+                ),
+            ).toBe(oAuthMockScopeData[0]);
         });
     });
 });

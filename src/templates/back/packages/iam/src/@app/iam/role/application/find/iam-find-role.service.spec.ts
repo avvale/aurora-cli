@@ -1,16 +1,19 @@
 import { IamIRoleRepository, IamMockRoleRepository } from '@app/iam/role';
 import { IamFindRoleService } from '@app/iam/role/application/find/iam-find-role.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamFindRoleService', () =>
-{
+describe('IamFindRoleService', () => {
     let service: IamFindRoleService;
     let repository: IamIRoleRepository;
     let mockRepository: IamMockRoleRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,31 +23,36 @@ describe('IamFindRoleService', () =>
                 IamFindRoleService,
                 IamMockRoleRepository,
                 {
-                    provide : IamIRoleRepository,
+                    provide: IamIRoleRepository,
                     useValue: {
-                        find: () => { /**/ },
+                        find: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(IamFindRoleService);
         repository = module.get(IamIRoleRepository);
         mockRepository = module.get(IamMockRoleRepository);
     });
 
-    describe('main', () =>
-    {
-        test('IamFindRoleService should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamFindRoleService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should find role', async () =>
-        {
-            jest.spyOn(repository, 'find').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main()).toBe(mockRepository.collectionSource[0]);
+        test('should find role', async () => {
+            jest.spyOn(repository, 'find').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
+            expect(await service.main()).toBe(
+                mockRepository.collectionSource[0],
+            );
         });
     });
 });

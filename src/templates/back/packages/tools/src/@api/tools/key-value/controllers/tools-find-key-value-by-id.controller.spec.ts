@@ -1,46 +1,51 @@
-import { ToolsFindKeyValueByIdController, ToolsFindKeyValueByIdHandler } from '@api/tools/key-value';
+import {
+    ToolsFindKeyValueByIdController,
+    ToolsFindKeyValueByIdHandler,
+} from '@api/tools/key-value';
 import { toolsMockKeyValueData } from '@app/tools/key-value';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsFindKeyValueByIdController', () =>
-{
+describe('ToolsFindKeyValueByIdController', () => {
     let controller: ToolsFindKeyValueByIdController;
     let handler: ToolsFindKeyValueByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                ToolsFindKeyValueByIdController,
-            ],
+            imports: [],
+            controllers: [ToolsFindKeyValueByIdController],
             providers: [
                 {
-                    provide : ToolsFindKeyValueByIdHandler,
+                    provide: ToolsFindKeyValueByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<ToolsFindKeyValueByIdController>(ToolsFindKeyValueByIdController);
-        handler = module.get<ToolsFindKeyValueByIdHandler>(ToolsFindKeyValueByIdHandler);
+        controller = module.get<ToolsFindKeyValueByIdController>(
+            ToolsFindKeyValueByIdController,
+        );
+        handler = module.get<ToolsFindKeyValueByIdHandler>(
+            ToolsFindKeyValueByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsFindKeyValueByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsFindKeyValueByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an keyValue by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockKeyValueData[0])));
-            expect(await controller.main(toolsMockKeyValueData[0].id)).toBe(toolsMockKeyValueData[0]);
+        test('should return an keyValue by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(toolsMockKeyValueData[0])),
+            );
+            expect(await controller.main(toolsMockKeyValueData[0].id)).toBe(
+                toolsMockKeyValueData[0],
+            );
         });
     });
 });

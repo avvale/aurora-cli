@@ -1,50 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamDeletePermissionRoleByIdHandler, IamDeletePermissionRoleByIdResolver } from '@api/iam/permission-role';
+import {
+    IamDeletePermissionRoleByIdHandler,
+    IamDeletePermissionRoleByIdResolver,
+} from '@api/iam/permission-role';
 import { iamMockPermissionRoleData } from '@app/iam/permission-role';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeletePermissionRoleByIdResolver', () =>
-{
+describe('IamDeletePermissionRoleByIdResolver', () => {
     let resolver: IamDeletePermissionRoleByIdResolver;
     let handler: IamDeletePermissionRoleByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamDeletePermissionRoleByIdResolver,
                 {
-                    provide : IamDeletePermissionRoleByIdHandler,
+                    provide: IamDeletePermissionRoleByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamDeletePermissionRoleByIdResolver>(IamDeletePermissionRoleByIdResolver);
-        handler = module.get<IamDeletePermissionRoleByIdHandler>(IamDeletePermissionRoleByIdHandler);
+        resolver = module.get<IamDeletePermissionRoleByIdResolver>(
+            IamDeletePermissionRoleByIdResolver,
+        );
+        handler = module.get<IamDeletePermissionRoleByIdHandler>(
+            IamDeletePermissionRoleByIdHandler,
+        );
     });
 
-    test('IamDeletePermissionRoleByIdResolver should be defined', () =>
-    {
+    test('IamDeletePermissionRoleByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamDeletePermissionRoleByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeletePermissionRoleByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an permissionRole deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(iamMockPermissionRoleData[0])));
-            expect(await resolver.main(iamMockPermissionRoleData[0].id)).toBe(iamMockPermissionRoleData[0]);
+        test('should return an permissionRole deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(iamMockPermissionRoleData[0]),
+                    ),
+            );
+            expect(await resolver.main(iamMockPermissionRoleData[0].id)).toBe(
+                iamMockPermissionRoleData[0],
+            );
         });
     });
 });

@@ -1,4 +1,8 @@
-import { IamAddTenantsAccountsContextEvent, IamITenantAccountRepository, IamTenantAccount } from '@app/iam/tenant-account';
+import {
+    IamAddTenantsAccountsContextEvent,
+    IamITenantAccountRepository,
+    IamTenantAccount,
+} from '@app/iam/tenant-account';
 import {
     IamTenantAccountAccountId,
     IamTenantAccountTenantId,
@@ -8,8 +12,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamCreateTenantsAccountsService
-{
+export class IamCreateTenantsAccountsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamITenantAccountRepository,
@@ -19,31 +22,26 @@ export class IamCreateTenantsAccountsService
         payload: {
             tenantId: IamTenantAccountTenantId;
             accountId: IamTenantAccountAccountId;
-        } [],
+        }[],
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
-        const tenantsAccounts = payload.map(tenantAccount => IamTenantAccount.register(
-            tenantAccount.tenantId,
-            tenantAccount.accountId,
-        ));
+        const tenantsAccounts = payload.map((tenantAccount) =>
+            IamTenantAccount.register(
+                tenantAccount.tenantId,
+                tenantAccount.accountId,
+            ),
+        );
 
         // insert
-        await this.repository.insert(
-            tenantsAccounts,
-            {
-                insertOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.insert(tenantsAccounts, {
+            insertOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddTenantsAccountsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const tenantsAccountsRegistered = this.publisher.mergeObjectContext(
-            new IamAddTenantsAccountsContextEvent(
-                tenantsAccounts,
-                cQMetadata,
-            ),
+            new IamAddTenantsAccountsContextEvent(tenantsAccounts, cQMetadata),
         );
 
         tenantsAccountsRegistered.created(); // apply event to model events

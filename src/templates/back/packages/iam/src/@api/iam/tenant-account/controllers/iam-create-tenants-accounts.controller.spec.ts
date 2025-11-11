@@ -1,46 +1,42 @@
-import { IamCreateTenantsAccountsController, IamCreateTenantsAccountsHandler } from '@api/iam/tenant-account';
+import {
+    IamCreateTenantsAccountsController,
+    IamCreateTenantsAccountsHandler,
+} from '@api/iam/tenant-account';
 import { iamMockTenantAccountData } from '@app/iam/tenant-account';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTenantsAccountsController', () =>
-{
+describe('IamCreateTenantsAccountsController', () => {
     let controller: IamCreateTenantsAccountsController;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            controllers: [
-                IamCreateTenantsAccountsController,
-            ],
+            controllers: [IamCreateTenantsAccountsController],
             providers: [
                 {
-                    provide : IamCreateTenantsAccountsHandler,
+                    provide: IamCreateTenantsAccountsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<IamCreateTenantsAccountsController>(IamCreateTenantsAccountsController);
+        controller = module.get<IamCreateTenantsAccountsController>(
+            IamCreateTenantsAccountsController,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTenantsAccountsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTenantsAccountsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an iamMockTenantAccountData created', async () =>
-        {
-            expect(
-                await controller.main(
-                    iamMockTenantAccountData,
-                ),
-            )
-                .toBe(undefined);
+        test('should return an iamMockTenantAccountData created', async () => {
+            expect(await controller.main(iamMockTenantAccountData)).toBe(
+                undefined,
+            );
         });
     });
 });

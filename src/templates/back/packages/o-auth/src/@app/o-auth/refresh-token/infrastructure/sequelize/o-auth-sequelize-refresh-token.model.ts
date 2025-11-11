@@ -2,21 +2,30 @@
 /* eslint-disable key-spacing */
 import { OAuthAccessTokenModel } from '@app/o-auth/access-token';
 import { DataTypes } from 'sequelize';
-import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    BelongsTo,
+    Column,
+    ForeignKey,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'OAuthRefreshToken',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['accessTokenId'],
-			unique: false,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['accessTokenId'],
+            unique: false,
+        },
     ],
 })
-export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
-{
+export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel> {
     @Column({
         field: 'id',
         primaryKey: true,
@@ -24,6 +33,14 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @ForeignKey(() => OAuthAccessTokenModel)
     @Column({
@@ -81,5 +98,4 @@ export class OAuthRefreshTokenModel extends Model<OAuthRefreshTokenModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

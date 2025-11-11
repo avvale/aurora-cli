@@ -3,37 +3,35 @@ import { toolsMockMigrationData } from '@app/tools/migration';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsCreateMigrationsHandler', () =>
-{
+describe('ToolsCreateMigrationsHandler', () => {
     let handler: ToolsCreateMigrationsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ToolsCreateMigrationsHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsCreateMigrationsHandler>(ToolsCreateMigrationsHandler);
+        handler = module.get<ToolsCreateMigrationsHandler>(
+            ToolsCreateMigrationsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('ToolsCreateMigrationsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsCreateMigrationsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an toolsMockMigrationData created', async () =>
-        {
+        test('should return an toolsMockMigrationData created', async () => {
             expect(await handler.main(toolsMockMigrationData)).toBe(true);
         });
     });

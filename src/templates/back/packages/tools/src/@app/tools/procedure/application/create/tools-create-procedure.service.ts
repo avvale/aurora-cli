@@ -1,8 +1,10 @@
-import { ToolsIProcedureRepository, ToolsProcedure } from '@app/tools/procedure';
+import {
+    ToolsIProcedureRepository,
+    ToolsProcedure,
+} from '@app/tools/procedure';
 import {
     ToolsProcedureCheckedAt,
     ToolsProcedureCreatedAt,
-    ToolsProcedureDeletedAt,
     ToolsProcedureDownScript,
     ToolsProcedureExecutedAt,
     ToolsProcedureHash,
@@ -22,8 +24,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class ToolsCreateProcedureService
-{
+export class ToolsCreateProcedureService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ToolsIProcedureRepository,
@@ -46,11 +47,11 @@ export class ToolsCreateProcedureService
             checkedAt: ToolsProcedureCheckedAt;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const procedure = ToolsProcedure.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.type,
             payload.version,
@@ -68,17 +69,12 @@ export class ToolsCreateProcedureService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            procedure,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(procedure, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const procedureRegister = this.publisher.mergeObjectContext(
-            procedure,
-        );
+        const procedureRegister = this.publisher.mergeObjectContext(procedure);
 
         procedureRegister.created({
             payload: procedure,

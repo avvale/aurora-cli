@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.permissionRole.create')
-export class IamCreatePermissionRoleResolver
-{
-    constructor(
-        private readonly handler: IamCreatePermissionRoleHandler,
-    ) {}
+export class IamCreatePermissionRoleResolver {
+    constructor(private readonly handler: IamCreatePermissionRoleHandler) {}
 
     @Mutation('iamCreatePermissionRole')
     async main(
         @Args('payload') payload: IamCreatePermissionRoleInput,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<IamPermissionRole>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
+    ): Promise<IamPermissionRole> {
+        return await this.handler.main(payload, timezone, auditing);
     }
 }

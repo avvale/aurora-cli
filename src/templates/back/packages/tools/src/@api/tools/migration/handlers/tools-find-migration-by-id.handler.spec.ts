@@ -4,55 +4,55 @@ import { toolsMockMigrationData } from '@app/tools/migration';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsFindMigrationByIdHandler', () =>
-{
+describe('ToolsFindMigrationByIdHandler', () => {
     let handler: ToolsFindMigrationByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsFindMigrationByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<ToolsFindMigrationByIdHandler>(ToolsFindMigrationByIdHandler);
+        handler = module.get<ToolsFindMigrationByIdHandler>(
+            ToolsFindMigrationByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('ToolsFindMigrationByIdHandler should be defined', () =>
-    {
+    test('ToolsFindMigrationByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsFindMigrationByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsFindMigrationByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an migration by id', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData[0])));
+        test('should return an migration by id', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockMigrationData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     toolsMockMigrationData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(toolsMockMigrationData[0]);
+            ).toBe(toolsMockMigrationData[0]);
         });
     });
 });

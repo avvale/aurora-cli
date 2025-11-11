@@ -4,55 +4,50 @@ import { iamMockTenantData } from '@app/iam/tenant';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCreateTenantHandler', () =>
-{
+describe('IamCreateTenantHandler', () => {
     let handler: IamCreateTenantHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCreateTenantHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         handler = module.get<IamCreateTenantHandler>(IamCreateTenantHandler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTenantHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTenantHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an tenant created', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(iamMockTenantData[0])));
+        test('should return an tenant created', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(iamMockTenantData[0])),
+            );
             expect(
-                await handler.main(
-                    iamMockTenantData[0],
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(iamMockTenantData[0]);
+                await handler.main(iamMockTenantData[0], 'Europe/Madrid'),
+            ).toBe(iamMockTenantData[0]);
         });
     });
 });

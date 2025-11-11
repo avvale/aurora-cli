@@ -4,24 +4,17 @@ import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class IamFindRoleByIdService
-{
-    constructor(
-        private readonly repository: IamIRoleRepository,
-    ) {}
+export class IamFindRoleByIdService {
+    constructor(private readonly repository: IamIRoleRepository) {}
 
     async main(
         id: IamRoleId,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<IamRole>
-    {
-        return await this.repository.findById(
-            id,
-            {
-                constraint,
-                cQMetadata,
-            },
-        );
+    ): Promise<IamRole> {
+        return await this.repository.findById(id, {
+            constraint,
+            cQMetadata,
+        });
     }
 }

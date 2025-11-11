@@ -1,49 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsDeleteMigrationsHandler, ToolsDeleteMigrationsResolver } from '@api/tools/migration';
+import {
+    ToolsDeleteMigrationsHandler,
+    ToolsDeleteMigrationsResolver,
+} from '@api/tools/migration';
 import { toolsMockMigrationData } from '@app/tools/migration';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsDeleteMigrationsResolver', () =>
-{
+describe('ToolsDeleteMigrationsResolver', () => {
     let resolver: ToolsDeleteMigrationsResolver;
     let handler: ToolsDeleteMigrationsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsDeleteMigrationsResolver,
                 {
-                    provide : ToolsDeleteMigrationsHandler,
+                    provide: ToolsDeleteMigrationsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsDeleteMigrationsResolver>(ToolsDeleteMigrationsResolver);
-        handler = module.get<ToolsDeleteMigrationsHandler>(ToolsDeleteMigrationsHandler);
+        resolver = module.get<ToolsDeleteMigrationsResolver>(
+            ToolsDeleteMigrationsResolver,
+        );
+        handler = module.get<ToolsDeleteMigrationsHandler>(
+            ToolsDeleteMigrationsHandler,
+        );
     });
 
-    test('ToolsDeleteMigrationsResolver should be defined', () =>
-    {
+    test('ToolsDeleteMigrationsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsDeleteMigrationsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsDeleteMigrationsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an toolsMockMigrationData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData)));
+        test('should return an toolsMockMigrationData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(toolsMockMigrationData)),
+            );
             expect(await resolver.main()).toBe(toolsMockMigrationData);
         });
     });

@@ -1,12 +1,20 @@
 import { OAuthScope, OAuthUpdateScopeByIdInput } from '@api/graphql';
 import { OAuthScopeDto, OAuthUpdateScopeByIdDto } from '@api/o-auth/scope';
-import { OAuthFindScopeByIdQuery, OAuthUpdateScopeByIdCommand } from '@app/o-auth/scope';
-import { AuditingMeta, diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import {
+    OAuthFindScopeByIdQuery,
+    OAuthUpdateScopeByIdCommand,
+} from '@app/o-auth/scope';
+import {
+    AuditingMeta,
+    diff,
+    ICommandBus,
+    IQueryBus,
+    QueryStatement,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class OAuthUpdateScopeByIdHandler
-{
+export class OAuthUpdateScopeByIdHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -17,40 +25,37 @@ export class OAuthUpdateScopeByIdHandler
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<OAuthScope | OAuthScopeDto>
-    {
-        const scope = await this.queryBus.ask(new OAuthFindScopeByIdQuery(
-            payload.id,
-            constraint,
-            {
+    ): Promise<OAuthScope | OAuthScopeDto> {
+        const scope = await this.queryBus.ask(
+            new OAuthFindScopeByIdQuery(payload.id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
         const dataToUpdate = diff(payload, scope);
 
         if ('roleIds' in dataToUpdate) dataToUpdate.roleIds = payload.roleIds;
 
-        await this.commandBus.dispatch(new OAuthUpdateScopeByIdCommand(
-            {
-                ...dataToUpdate,
-                id: payload.id,
-            },
-            constraint,
-            {
-                timezone,
-                repositoryOptions: {
-                    auditing,
+        await this.commandBus.dispatch(
+            new OAuthUpdateScopeByIdCommand(
+                {
+                    ...dataToUpdate,
+                    id: payload.id,
                 },
-            },
-        ));
+                constraint,
+                {
+                    timezone,
+                    repositoryOptions: {
+                        auditing,
+                    },
+                },
+            ),
+        );
 
-        return await this.queryBus.ask(new OAuthFindScopeByIdQuery(
-            payload.id,
-            constraint,
-            {
+        return await this.queryBus.ask(
+            new OAuthFindScopeByIdQuery(payload.id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

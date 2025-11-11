@@ -9,6 +9,7 @@ export { ToolsProcedureIsActive } from './tools-procedure-is-active';
 export { ToolsProcedureIsExecuted } from './tools-procedure-is-executed';
 export { ToolsProcedureIsUpdated } from './tools-procedure-is-updated';
 export { ToolsProcedureName } from './tools-procedure-name';
+export { ToolsProcedureRowId } from './tools-procedure-row-id';
 export { ToolsProcedureSort } from './tools-procedure-sort';
 export { ToolsProcedureType } from './tools-procedure-type';
 export { ToolsProcedureUpScript } from './tools-procedure-up-script';

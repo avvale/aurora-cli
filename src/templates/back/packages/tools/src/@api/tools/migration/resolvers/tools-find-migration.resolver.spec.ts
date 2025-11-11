@@ -1,49 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ToolsFindMigrationHandler, ToolsFindMigrationResolver } from '@api/tools/migration';
+import {
+    ToolsFindMigrationHandler,
+    ToolsFindMigrationResolver,
+} from '@api/tools/migration';
 import { toolsMockMigrationData } from '@app/tools/migration';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('ToolsFindMigrationResolver', () =>
-{
+describe('ToolsFindMigrationResolver', () => {
     let resolver: ToolsFindMigrationResolver;
     let handler: ToolsFindMigrationHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 ToolsFindMigrationResolver,
                 {
-                    provide : ToolsFindMigrationHandler,
+                    provide: ToolsFindMigrationHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<ToolsFindMigrationResolver>(ToolsFindMigrationResolver);
-        handler = module.get<ToolsFindMigrationHandler>(ToolsFindMigrationHandler);
+        resolver = module.get<ToolsFindMigrationResolver>(
+            ToolsFindMigrationResolver,
+        );
+        handler = module.get<ToolsFindMigrationHandler>(
+            ToolsFindMigrationHandler,
+        );
     });
 
-    test('ToolsFindMigrationResolver should be defined', () =>
-    {
+    test('ToolsFindMigrationResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('ToolsFindMigrationResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('ToolsFindMigrationResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a migration', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(toolsMockMigrationData[0])));
+        test('should return a migration', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(toolsMockMigrationData[0]),
+                    ),
+            );
             expect(await resolver.main()).toBe(toolsMockMigrationData[0]);
         });
     });

@@ -3,43 +3,42 @@ import { IamCreateTenantsCommandHandler } from '@app/iam/tenant/application/crea
 import { IamCreateTenantsService } from '@app/iam/tenant/application/create/iam-create-tenants.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('iamCreateTenantsCommandHandler', () =>
-{
+describe('iamCreateTenantsCommandHandler', () => {
     let commandHandler: IamCreateTenantsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 IamCreateTenantsCommandHandler,
                 {
-                    provide : IamCreateTenantsService,
+                    provide: IamCreateTenantsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<IamCreateTenantsCommandHandler>(IamCreateTenantsCommandHandler);
+        commandHandler = module.get<IamCreateTenantsCommandHandler>(
+            IamCreateTenantsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('IamCreateTenantsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCreateTenantsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return IamMockTenantData created', async () =>
-        {
-            expect(await commandHandler.execute(
-                new IamCreateTenantsCommand(
-                    iamMockTenantData,
-                    { timezone: process.env.TZ },
+        test('should return IamMockTenantData created', async () => {
+            expect(
+                await commandHandler.execute(
+                    new IamCreateTenantsCommand(iamMockTenantData, {
+                        timezone: process.env.TZ,
+                    }),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

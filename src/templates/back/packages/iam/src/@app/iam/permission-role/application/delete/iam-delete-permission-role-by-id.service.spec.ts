@@ -1,18 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { IamIPermissionRoleRepository, iamMockPermissionRoleData, IamMockPermissionRoleRepository } from '@app/iam/permission-role';
+import {
+    IamIPermissionRoleRepository,
+    iamMockPermissionRoleData,
+    IamMockPermissionRoleRepository,
+} from '@app/iam/permission-role';
 import { IamDeletePermissionRoleByIdService } from '@app/iam/permission-role/application/delete/iam-delete-permission-role-by-id.service';
 import { IamPermissionRoleId } from '@app/iam/permission-role/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamDeletePermissionRoleByIdService', () =>
-{
+describe('IamDeletePermissionRoleByIdService', () => {
     let service: IamDeletePermissionRoleByIdService;
     let repository: IamIPermissionRoleRepository;
     let mockRepository: IamMockPermissionRoleRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -22,38 +29,42 @@ describe('IamDeletePermissionRoleByIdService', () =>
                 IamDeletePermissionRoleByIdService,
                 IamMockPermissionRoleRepository,
                 {
-                    provide : IamIPermissionRoleRepository,
+                    provide: IamIPermissionRoleRepository,
                     useValue: {
-                        deleteById: id => { /**/ },
-                        findById  : id => { /**/ },
+                        deleteById: (id) => {
+                            /**/
+                        },
+                        findById: (id) => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(IamDeletePermissionRoleByIdService);
         repository = module.get(IamIPermissionRoleRepository);
         mockRepository = module.get(IamMockPermissionRoleRepository);
     });
 
-    describe('main', () =>
-    {
-        test('IamDeletePermissionRoleByIdService should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamDeletePermissionRoleByIdService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should delete permissionRole and emit event', async () =>
-        {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
+        test('should delete permissionRole and emit event', async () => {
+            jest.spyOn(repository, 'findById').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
             expect(
                 await service.main(
                     new IamPermissionRoleId(iamMockPermissionRoleData[0].id),
                     {},
                 ),
-            )
-                .toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

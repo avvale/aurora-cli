@@ -13,24 +13,26 @@ import {
     IamUserName,
     IamUserPassword,
     IamUserRememberToken,
+    IamUserRowId,
     IamUserSurname,
     IamUserTwoFactorAuthenticationSecret,
     IamUserUpdatedAt,
 } from '@app/iam/user/domain/value-objects';
-import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IMapper,
+    LiteralObject,
+    MapperOptions,
+} from '@aurorajs.dev/core';
 
-export class IamUserMapper implements IMapper
-{
-    constructor(
-        public options: MapperOptions = { eagerLoading: true },
-    ) {}
+export class IamUserMapper implements IMapper {
+    constructor(public options: MapperOptions = { eagerLoading: true }) {}
 
     /**
      * Map object to aggregate
      * @param user
      */
-    mapModelToAggregate(user: LiteralObject, cQMetadata?: CQMetadata): IamUser
-    {
+    mapModelToAggregate(user: LiteralObject, cQMetadata?: CQMetadata): IamUser {
         if (!user) return;
 
         return this.makeAggregate(user, cQMetadata);
@@ -40,19 +42,20 @@ export class IamUserMapper implements IMapper
      * Map array of objects to array aggregates
      * @param users
      */
-    mapModelsToAggregates(users: LiteralObject[], cQMetadata?: CQMetadata): IamUser[]
-    {
+    mapModelsToAggregates(
+        users: LiteralObject[],
+        cQMetadata?: CQMetadata,
+    ): IamUser[] {
         if (!Array.isArray(users)) return;
 
-        return users.map(user => this.makeAggregate(user, cQMetadata));
+        return users.map((user) => this.makeAggregate(user, cQMetadata));
     }
 
     /**
      * Map aggregate to response
      * @param user
      */
-    mapAggregateToResponse(user: IamUser): IamUserResponse
-    {
+    mapAggregateToResponse(user: IamUser): IamUserResponse {
         return this.makeResponse(user);
     }
 
@@ -60,17 +63,19 @@ export class IamUserMapper implements IMapper
      * Map array of aggregates to array responses
      * @param users
      */
-    mapAggregatesToResponses(users: IamUser[]): IamUserResponse[]
-    {
+    mapAggregatesToResponses(users: IamUser[]): IamUserResponse[] {
         if (!Array.isArray(users)) return;
 
-        return users.map(user => this.makeResponse(user));
+        return users.map((user) => this.makeResponse(user));
     }
 
-    private makeAggregate(user: LiteralObject, cQMetadata?: CQMetadata): IamUser
-    {
+    private makeAggregate(
+        user: LiteralObject,
+        cQMetadata?: CQMetadata,
+    ): IamUser {
         return IamUser.register(
             new IamUserId(user.id, { undefinable: true }),
+            new IamUserRowId(user.rowId, { undefinable: true }),
             new IamUserAccountId(user.accountId, { undefinable: true }),
             new IamUserName(user.name, { undefinable: true }),
             new IamUserSurname(user.surname, { undefinable: true }),
@@ -78,23 +83,45 @@ export class IamUserMapper implements IMapper
             new IamUserMobile(user.mobile, { undefinable: true }),
             new IamUserLangId(user.langId, { undefinable: true }),
             new IamUserPassword(user.password, { undefinable: true }),
-            new IamUserIsTwoFactorAuthenticationEnabled(user.isTwoFactorAuthenticationEnabled, { undefinable: true }),
-            new IamUserTwoFactorAuthenticationSecret(user.twoFactorAuthenticationSecret, { undefinable: true }),
+            new IamUserIsTwoFactorAuthenticationEnabled(
+                user.isTwoFactorAuthenticationEnabled,
+                { undefinable: true },
+            ),
+            new IamUserTwoFactorAuthenticationSecret(
+                user.twoFactorAuthenticationSecret,
+                { undefinable: true },
+            ),
             new IamUserRememberToken(user.rememberToken, { undefinable: true }),
             new IamUserMeta(user.meta, { undefinable: true }),
-            new IamUserCreatedAt(user.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            new IamUserUpdatedAt(user.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            new IamUserDeletedAt(user.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new IamAccountMapper({ eagerLoading: true }).mapModelToAggregate(user.account, cQMetadata) : undefined,
+            new IamUserCreatedAt(
+                user.createdAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            new IamUserUpdatedAt(
+                user.updatedAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            new IamUserDeletedAt(
+                user.deletedAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            this.options.eagerLoading
+                ? new IamAccountMapper({
+                      eagerLoading: true,
+                  }).mapModelToAggregate(user.account, cQMetadata)
+                : undefined,
         );
     }
 
-    private makeResponse(user: IamUser): IamUserResponse
-    {
+    private makeResponse(user: IamUser): IamUserResponse {
         if (!user) return;
 
         return new IamUserResponse(
             user.id.value,
+            user.rowId.value,
             user.accountId.value,
             user.name.value,
             user.surname.value,
@@ -109,7 +136,11 @@ export class IamUserMapper implements IMapper
             user.createdAt.value,
             user.updatedAt.value,
             user.deletedAt.value,
-            this.options.eagerLoading ? new IamAccountMapper({ eagerLoading: true }).mapAggregateToResponse(user.account) : undefined,
+            this.options.eagerLoading
+                ? new IamAccountMapper({
+                      eagerLoading: true,
+                  }).mapAggregateToResponse(user.account)
+                : undefined,
         );
     }
 }

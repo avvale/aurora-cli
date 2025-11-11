@@ -5,21 +5,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('tools.procedure.execution')
-export class ToolsDownScriptProcedureResolver
-{
-    constructor(
-        private readonly handler: ToolsDownScriptProcedureHandler,
-    ) {}
+export class ToolsDownScriptProcedureResolver {
+    constructor(private readonly handler: ToolsDownScriptProcedureHandler) {}
 
     @Mutation('toolsDownScriptProcedure')
     async main(
         @Args('procedureId') procedureId: string,
         @Timezone() timezone?: string,
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            procedureId,
-            timezone,
-        );
+    ): Promise<boolean> {
+        return await this.handler.main(procedureId, timezone);
     }
 }

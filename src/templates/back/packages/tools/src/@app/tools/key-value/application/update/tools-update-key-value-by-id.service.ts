@@ -1,7 +1,5 @@
 import { ToolsIKeyValueRepository, ToolsKeyValue } from '@app/tools/key-value';
 import {
-    ToolsKeyValueCreatedAt,
-    ToolsKeyValueDeletedAt,
     ToolsKeyValueDescription,
     ToolsKeyValueId,
     ToolsKeyValueIsActive,
@@ -15,8 +13,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class ToolsUpdateKeyValueByIdService
-{
+export class ToolsUpdateKeyValueByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ToolsIKeyValueRepository,
@@ -33,11 +30,11 @@ export class ToolsUpdateKeyValueByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const keyValue = ToolsKeyValue.register(
             payload.id,
+            undefined, // rowId
             payload.key,
             payload.type,
             payload.value,
@@ -49,19 +46,14 @@ export class ToolsUpdateKeyValueByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            keyValue,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(keyValue, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const keyValueRegister = this.publisher.mergeObjectContext(
-            keyValue,
-        );
+        const keyValueRegister = this.publisher.mergeObjectContext(keyValue);
 
         keyValueRegister.updated({
             payload: keyValue,

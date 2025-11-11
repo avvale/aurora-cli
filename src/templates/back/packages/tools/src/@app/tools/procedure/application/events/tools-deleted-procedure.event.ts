@@ -1,11 +1,11 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class ToolsDeletedProcedureEvent
-{
+export class ToolsDeletedProcedureEvent {
     constructor(
         public readonly event: {
             payload: {
                 id: string;
+                rowId: number;
                 name: string;
                 type: string;
                 version: string;

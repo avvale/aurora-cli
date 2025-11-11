@@ -2,79 +2,77 @@
 import { OAuthClientGrantType } from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class OAuthUpdateClientsDto
-{
+export class OAuthUpdateClientsDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'id [input here api field description]',
     })
     id?: string;
 
     @ApiProperty({
-        enum       : OAuthClientGrantType,
+        enum: OAuthClientGrantType,
         description: 'grantType [input here api field description]',
     })
     grantType?: OAuthClientGrantType;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'name [input here api field description]',
     })
     name?: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'secret [input here api field description]',
     })
     secret?: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'authUrl [input here api field description]',
     })
     authUrl?: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'redirect [input here api field description]',
     })
     redirect?: string;
 
     @ApiProperty({
-        type       : Object,
+        type: Object,
         description: 'scopeOptions [input here api field description]',
     })
     scopeOptions?: any;
 
     @ApiProperty({
-        type       : Number,
+        type: Number,
         description: 'expiredAccessToken [input here api field description]',
     })
     expiredAccessToken?: number;
 
     @ApiProperty({
-        type       : Number,
+        type: Number,
         description: 'expiredRefreshToken [input here api field description]',
     })
     expiredRefreshToken?: number;
 
     @ApiProperty({
-        type       : Boolean,
+        type: Boolean,
         description: 'isActive [input here api field description]',
-        example    : true,
+        example: true,
     })
     isActive?: boolean;
 
     @ApiProperty({
-        type       : Boolean,
+        type: Boolean,
         description: 'isMaster [input here api field description]',
     })
     isMaster?: boolean;
 
     @ApiProperty({
-        type       : [String],
+        type: [String],
         description: 'applications [input here api field description]',
     })
     applicationIds?: string[];
-
 }

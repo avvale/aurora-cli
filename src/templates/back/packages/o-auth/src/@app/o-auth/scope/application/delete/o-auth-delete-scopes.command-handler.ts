@@ -3,14 +3,14 @@ import { OAuthDeleteScopesService } from '@app/o-auth/scope/application/delete/o
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthDeleteScopesCommand)
-export class OAuthDeleteScopesCommandHandler implements ICommandHandler<OAuthDeleteScopesCommand>
+export class OAuthDeleteScopesCommandHandler
+    implements ICommandHandler<OAuthDeleteScopesCommand>
 {
     constructor(
         private readonly deleteScopesService: OAuthDeleteScopesService,
     ) {}
 
-    async execute(command: OAuthDeleteScopesCommand): Promise<void>
-    {
+    async execute(command: OAuthDeleteScopesCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteScopesService.main(
             command.queryStatement,

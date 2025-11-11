@@ -2,8 +2,6 @@ import { IamIUserRepository, IamUser } from '@app/iam/user';
 import {
     IamUserAccountId,
     IamUserAvatar,
-    IamUserCreatedAt,
-    IamUserDeletedAt,
     IamUserId,
     IamUserIsTwoFactorAuthenticationEnabled,
     IamUserLangId,
@@ -21,8 +19,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class IamUpdateUserByIdService
-{
+export class IamUpdateUserByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: IamIUserRepository,
@@ -45,11 +42,11 @@ export class IamUpdateUserByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const user = IamUser.register(
             payload.id,
+            undefined, // rowId
             payload.accountId,
             payload.name,
             payload.surname,
@@ -67,19 +64,14 @@ export class IamUpdateUserByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            user,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(user, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const userRegister = this.publisher.mergeObjectContext(
-            user,
-        );
+        const userRegister = this.publisher.mergeObjectContext(user);
 
         userRegister.updated({
             payload: user,

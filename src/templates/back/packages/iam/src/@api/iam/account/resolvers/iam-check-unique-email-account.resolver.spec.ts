@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { IamCheckUniqueEmailAccountHandler } from '../handlers/iam-check-unique-email-account.handler';
 import { IamCheckUniqueEmailAccountResolver } from './iam-check-unique-email-account.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('IamCheckUniqueEmailAccountResolver', () =>
-{
+describe('IamCheckUniqueEmailAccountResolver', () => {
     let resolver: IamCheckUniqueEmailAccountResolver;
     let handler: IamCheckUniqueEmailAccountHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 IamCheckUniqueEmailAccountResolver,
                 {
-                    provide : IamCheckUniqueEmailAccountHandler,
+                    provide: IamCheckUniqueEmailAccountHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<IamCheckUniqueEmailAccountResolver>(IamCheckUniqueEmailAccountResolver);
-        handler = module.get<IamCheckUniqueEmailAccountHandler>(IamCheckUniqueEmailAccountHandler);
+        resolver = module.get<IamCheckUniqueEmailAccountResolver>(
+            IamCheckUniqueEmailAccountResolver,
+        );
+        handler = module.get<IamCheckUniqueEmailAccountHandler>(
+            IamCheckUniqueEmailAccountHandler,
+        );
     });
 
-    test('IamCheckUniqueEmailAccountResolver should be defined', () =>
-    {
+    test('IamCheckUniqueEmailAccountResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('IamCheckUniqueEmailAccountResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('IamCheckUniqueEmailAccountResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

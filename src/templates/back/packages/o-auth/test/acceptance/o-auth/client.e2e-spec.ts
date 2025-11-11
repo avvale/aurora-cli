@@ -4,7 +4,11 @@
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { OAuthModule } from '@api/o-auth/o-auth.module';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { OAuthIClientRepository, oAuthMockClientData, OAuthMockClientSeeder } from '@app/o-auth/client';
+import {
+    OAuthIClientRepository,
+    oAuthMockClientData,
+    OAuthMockClientSeeder,
+} from '@app/o-auth/client';
 import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -16,8 +20,7 @@ import * as request from 'supertest';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('client', () =>
-{
+describe('client', () => {
     let app: INestApplication;
     let clientRepository: OAuthIClientRepository;
     let clientSeeder: OAuthMockClientSeeder;
@@ -28,37 +31,41 @@ describe('client', () =>
     // set timeout to 60s by default are 5s
     jest.setTimeout(60000);
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
                 OAuthModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
-                    imports   : [ConfigModule],
-                    inject    : [ConfigService],
-                    useFactory: (configService: ConfigService) =>
-                    {
+                    imports: [ConfigModule],
+                    inject: [ConfigService],
+                    useFactory: (configService: ConfigService) => {
                         return {
-                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
-                            storage       : configService.get('TEST_DATABASE_STORAGE'),
-                            host          : configService.get('TEST_DATABASE_HOST'),
-                            port          : +configService.get('TEST_DATABASE_PORT'),
-                            username      : configService.get('TEST_DATABASE_USER'),
-                            password      : configService.get('TEST_DATABASE_PASSWORD'),
-                            database      : configService.get('TEST_DATABASE_SCHEMA'),
-                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
-                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            dialect: configService.get('TEST_DATABASE_DIALECT'),
+                            storage: configService.get('TEST_DATABASE_STORAGE'),
+                            host: configService.get('TEST_DATABASE_HOST'),
+                            port: +configService.get('TEST_DATABASE_PORT'),
+                            username: configService.get('TEST_DATABASE_USER'),
+                            password: configService.get(
+                                'TEST_DATABASE_PASSWORD',
+                            ),
+                            database: configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize: configService.get(
+                                'TEST_DATABASE_SYNCHRONIZE',
+                            ),
+                            logging:
+                                configService.get('TEST_DATABASE_LOGGIN') ===
+                                'true'
+                                    ? console.log
+                                    : false,
                             autoLoadModels: true,
-                            models        : [],
+                            models: [],
                         };
                     },
                 }),
             ],
-            providers: [
-                OAuthMockClientSeeder,
-            ],
+            providers: [OAuthMockClientSeeder],
         })
             .overrideGuard(AuthenticationJwtGuard)
             .useValue({ canActivate: () => true })
@@ -68,7 +75,9 @@ describe('client', () =>
 
         mockData = oAuthMockClientData;
         app = module.createNestApplication();
-        clientRepository = module.get<OAuthIClientRepository>(OAuthIClientRepository);
+        clientRepository = module.get<OAuthIClientRepository>(
+            OAuthIClientRepository,
+        );
         clientSeeder = module.get<OAuthMockClientSeeder>(OAuthMockClientSeeder);
 
         // seed mock data in memory database
@@ -77,8 +86,7 @@ describe('client', () =>
         await app.init();
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientId property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -87,14 +95,30 @@ describe('client', () =>
                 id: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientRowId property can not to be null', () => {
+        return request(app.getHttpServer())
+            .post('/o-auth/client/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: null,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientRowId must be defined, can not be null',
+                );
+            });
+    });
+
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -103,14 +127,14 @@ describe('client', () =>
                 grantType: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientGrantType must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientGrantType must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientName property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientName property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -119,14 +143,14 @@ describe('client', () =>
                 name: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientName must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientName must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientSecret property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientSecret property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -135,14 +159,14 @@ describe('client', () =>
                 secret: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientSecret must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientSecret must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsActive property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsActive property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -151,14 +175,14 @@ describe('client', () =>
                 isActive: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientIsActive must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientIsActive must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsMaster property can not to be null', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsMaster property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -167,14 +191,14 @@ describe('client', () =>
                 isMaster: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientIsMaster must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientIsMaster must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientId property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -183,14 +207,30 @@ describe('client', () =>
                 id: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientRowId property can not to be undefined', () => {
+        return request(app.getHttpServer())
+            .post('/o-auth/client/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: undefined,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientRowId must be defined, can not be undefined',
+                );
+            });
+    });
+
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -199,14 +239,14 @@ describe('client', () =>
                 grantType: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientGrantType must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientGrantType must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientName property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientName property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -215,14 +255,14 @@ describe('client', () =>
                 name: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientName must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientName must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientSecret property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientSecret property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -231,14 +271,14 @@ describe('client', () =>
                 secret: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientSecret must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientSecret must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsActive property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsActive property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -247,14 +287,14 @@ describe('client', () =>
                 isActive: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientIsActive must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientIsActive must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsMaster property can not to be undefined', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsMaster property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -263,14 +303,14 @@ describe('client', () =>
                 isMaster: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientIsMaster must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientIsMaster must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -279,14 +319,14 @@ describe('client', () =>
                 id: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientName is too large, has a maximum length of 128', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientName is too large, has a maximum length of 128', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -295,14 +335,14 @@ describe('client', () =>
                 name: '*********************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientName is too large, has a maximum length of 128');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientName is too large, has a maximum length of 128',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientSecret is too large, has a maximum length of 128', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientSecret is too large, has a maximum length of 128', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -311,76 +351,78 @@ describe('client', () =>
                 secret: '*********************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientSecret is too large, has a maximum length of 128');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientSecret is too large, has a maximum length of 128',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientAuthUrl is too large, has a maximum length of 2046', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientAuthUrl is too large, has a maximum length of 2046', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                authUrl: '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                authUrl:
+                    '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientAuthUrl is too large, has a maximum length of 2046');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientAuthUrl is too large, has a maximum length of 2046',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientRedirect is too large, has a maximum length of 2046', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientRedirect is too large, has a maximum length of 2046', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                redirect: '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                redirect:
+                    '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientRedirect is too large, has a maximum length of 2046');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientRedirect is too large, has a maximum length of 2046',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredAccessToken has to be a integer value', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredAccessToken has to be a integer value', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                expiredAccessToken: 100.10,
+                expiredAccessToken: 100.1,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientExpiredAccessToken has to be a integer value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientExpiredAccessToken has to be a integer value',
+                );
             });
     });
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredRefreshToken has to be a integer value', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredRefreshToken has to be a integer value', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                expiredRefreshToken: 100.10,
+                expiredRefreshToken: 100.1,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientExpiredRefreshToken has to be a integer value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientExpiredRefreshToken has to be a integer value',
+                );
             });
     });
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredAccessToken must have a positive sign', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredAccessToken must have a positive sign', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -389,13 +431,13 @@ describe('client', () =>
                 expiredAccessToken: -1,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('The numerical Value for OAuthClientExpiredAccessToken must have a positive sign, this field does not accept negative values');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'The numerical Value for OAuthClientExpiredAccessToken must have a positive sign, this field does not accept negative values',
+                );
             });
     });
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredRefreshToken must have a positive sign', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientExpiredRefreshToken must have a positive sign', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -404,13 +446,13 @@ describe('client', () =>
                 expiredRefreshToken: -1,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('The numerical Value for OAuthClientExpiredRefreshToken must have a positive sign, this field does not accept negative values');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'The numerical Value for OAuthClientExpiredRefreshToken must have a positive sign, this field does not accept negative values',
+                );
             });
     });
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsActive has to be a boolean value', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsActive has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -419,13 +461,13 @@ describe('client', () =>
                 isActive: 'true',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientIsActive has to be a boolean value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientIsActive has to be a boolean value',
+                );
             });
     });
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsMaster has to be a boolean value', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientIsMaster has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -434,13 +476,13 @@ describe('client', () =>
                 isMaster: 'true',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientIsMaster has to be a boolean value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientIsMaster has to be a boolean value',
+                );
             });
     });
-    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType has to be a enum option of AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD, REFRESH_TOKEN', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 400 Conflict, ClientGrantType has to be a enum option of AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD, REFRESH_TOKEN', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -449,14 +491,14 @@ describe('client', () =>
                 grantType: '****',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for OAuthClientGrantType has to be any of this options: AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD, REFRESH_TOKEN');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for OAuthClientGrantType has to be any of this options: AUTHORIZATION_CODE, CLIENT_CREDENTIALS, PASSWORD, REFRESH_TOKEN',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/create - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/REST:POST o-auth/client/create - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -464,53 +506,65 @@ describe('client', () =>
             .expect(409);
     });
 
-    test('/REST:POST o-auth/clients/paginate', () =>
-    {
+    test('/REST:POST o-auth/clients/paginate', () => {
         return request(app.getHttpServer())
             .post('/o-auth/clients/paginate')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
+                query: {
                     offset: 0,
                     limit: 5,
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual({
                     total: clientSeeder.collectionResponse.length,
                     count: clientSeeder.collectionResponse.length,
-                    rows : clientSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))).slice(0, 5),
+                    rows: clientSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                    'applicationIds',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/REST:POST o-auth/clients/get', () =>
-    {
+    test('/REST:POST o-auth/clients/get', () => {
         return request(app.getHttpServer())
             .post('/o-auth/clients/get')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual(
-                    clientSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))),
+                    clientSeeder.collectionResponse.map((item) =>
+                        expect.objectContaining(
+                            _.omit(item, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                                'applicationIds',
+                            ]),
+                        ),
+                    ),
                 );
             });
     });
 
-    test('/REST:POST o-auth/client/find - Got 404 Not Found', () =>
-    {
+    test('/REST:POST o-auth/client/find - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: 'd8821beb-2431-5471-9cee-affa8d6e4a19',
                     },
                 },
@@ -518,8 +572,7 @@ describe('client', () =>
             .expect(404);
     });
 
-    test('/REST:POST o-auth/client/create', () =>
-    {
+    test('/REST:POST o-auth/client/create', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/create')
             .set('Accept', 'application/json')
@@ -530,49 +583,47 @@ describe('client', () =>
             .expect(201);
     });
 
-    test('/REST:POST o-auth/client/find', () =>
-    {
+    test('/REST:POST o-auth/client/find', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:POST o-auth/client/find/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:POST o-auth/client/find/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/find/5d2f78b2-2712-5576-904d-1b3016da9df2')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:POST o-auth/client/find/{id}', () =>
-    {
+    test('/REST:POST o-auth/client/find/{id}', () => {
         return request(app.getHttpServer())
             .post('/o-auth/client/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:PUT o-auth/client/update - Got 404 Not Found', () =>
-    {
+    test('/REST:PUT o-auth/client/update - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .put('/o-auth/client/update')
             .set('Accept', 'application/json')
@@ -583,8 +634,7 @@ describe('client', () =>
             .expect(404);
     });
 
-    test('/REST:PUT o-auth/client/update', () =>
-    {
+    test('/REST:PUT o-auth/client/update', () => {
         return request(app.getHttpServer())
             .put('/o-auth/client/update')
             .set('Accept', 'application/json')
@@ -593,30 +643,33 @@ describe('client', () =>
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:DELETE o-auth/client/delete/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:DELETE o-auth/client/delete/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
-            .delete('/o-auth/client/delete/e56528ff-499a-545b-84f4-665e59b038fc')
+            .delete(
+                '/o-auth/client/delete/e56528ff-499a-545b-84f4-665e59b038fc',
+            )
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE o-auth/client/delete/{id}', () =>
-    {
+    test('/REST:DELETE o-auth/client/delete/{id}', () => {
         return request(app.getHttpServer())
-            .delete('/o-auth/client/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete(
+                '/o-auth/client/delete/5b19d6ac-4081-573b-96b3-56964d5326a8',
+            )
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL oAuthCreateClient - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/GraphQL oAuthCreateClient - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -627,6 +680,7 @@ describe('client', () =>
                         oAuthCreateClient (payload:$payload)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -640,22 +694,27 @@ describe('client', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
+                variables: {
+                    payload: _.omit(mockData[0], [
+                        'createdAt',
+                        'updatedAt',
+                        'deletedAt',
+                    ]),
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(409);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('already exist in database');
             });
     });
 
-    test('/GraphQL oAuthPaginateClients', () =>
-    {
+    test('/GraphQL oAuthPaginateClients', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -671,28 +730,35 @@ describe('client', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
+                variables: {
+                    query: {
                         offset: 0,
                         limit: 5,
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body.data.oAuthPaginateClients).toEqual({
                     total: clientSeeder.collectionResponse.length,
                     count: clientSeeder.collectionResponse.length,
-                    rows : clientSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt', 'applicationIds']))).slice(0, 5),
+                    rows: clientSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                    'applicationIds',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/GraphQL oAuthGetClients', () =>
-    {
+    test('/GraphQL oAuthGetClients', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -703,6 +769,7 @@ describe('client', () =>
                         oAuthGetClients (query:$query)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -721,17 +788,25 @@ describe('client', () =>
                 variables: {},
             })
             .expect(200)
-            .then(res =>
-            {
-                for (const [index, value] of res.body.data.oAuthGetClients.entries())
-                {
-                    expect(clientSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+            .then((res) => {
+                for (const [
+                    index,
+                    value,
+                ] of res.body.data.oAuthGetClients.entries()) {
+                    expect(clientSeeder.collectionResponse[index]).toEqual(
+                        expect.objectContaining(
+                            _.omit(value, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    );
                 }
             });
     });
 
-    test('/GraphQL oAuthCreateClient', () =>
-    {
+    test('/GraphQL oAuthCreateClient', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -742,6 +817,7 @@ describe('client', () =>
                         oAuthCreateClient (payload:$payload)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -763,14 +839,15 @@ describe('client', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthCreateClient).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthCreateClient).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthFindClient - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthFindClient - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -781,6 +858,7 @@ describe('client', () =>
                         oAuthFindClient (query:$query)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -796,28 +874,27 @@ describe('client', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '8a0554a1-a327-5284-9e9e-906f3059b0b1',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthFindClient', () =>
-    {
+    test('/GraphQL oAuthFindClient', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -828,6 +905,7 @@ describe('client', () =>
                         oAuthFindClient (query:$query)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -843,26 +921,23 @@ describe('client', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthFindClient.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthFindClient.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthFindClientById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthFindClientById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -873,6 +948,7 @@ describe('client', () =>
                         oAuthFindClientById (id:$id)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -893,16 +969,18 @@ describe('client', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthFindClientById', () =>
-    {
+    test('/GraphQL oAuthFindClientById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -913,6 +991,7 @@ describe('client', () =>
                         oAuthFindClientById (id:$id)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -933,14 +1012,14 @@ describe('client', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthFindClientById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthFindClientById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthUpdateClientById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthUpdateClientById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -951,6 +1030,7 @@ describe('client', () =>
                         oAuthUpdateClientById (payload:$payload)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -974,16 +1054,18 @@ describe('client', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthUpdateClientById', () =>
-    {
+    test('/GraphQL oAuthUpdateClientById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -994,6 +1076,7 @@ describe('client', () =>
                         oAuthUpdateClientById (payload:$payload)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -1017,14 +1100,14 @@ describe('client', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthUpdateClientById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthUpdateClientById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthUpdateClients', () =>
-    {
+    test('/GraphQL oAuthUpdateClients', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1035,6 +1118,7 @@ describe('client', () =>
                         oAuthUpdateClients (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -1063,14 +1147,14 @@ describe('client', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthUpdateClients[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthUpdateClients[0].id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL oAuthDeleteClientById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL oAuthDeleteClientById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1081,6 +1165,7 @@ describe('client', () =>
                         oAuthDeleteClientById (id:$id)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -1101,16 +1186,18 @@ describe('client', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL oAuthDeleteClientById', () =>
-    {
+    test('/GraphQL oAuthDeleteClientById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1121,6 +1208,7 @@ describe('client', () =>
                         oAuthDeleteClientById (id:$id)
                         {
                             id
+                            rowId
                             grantType
                             name
                             secret
@@ -1141,14 +1229,14 @@ describe('client', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.oAuthDeleteClientById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.oAuthDeleteClientById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    afterAll(async () =>
-    {
+    afterAll(async () => {
         await clientRepository.delete({
             queryStatement: {
                 where: {},

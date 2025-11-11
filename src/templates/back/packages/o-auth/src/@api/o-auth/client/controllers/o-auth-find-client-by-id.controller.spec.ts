@@ -1,46 +1,50 @@
-import { OAuthFindClientByIdController, OAuthFindClientByIdHandler } from '@api/o-auth/client';
+import {
+    OAuthFindClientByIdController,
+    OAuthFindClientByIdHandler,
+} from '@api/o-auth/client';
 import { oAuthMockClientData } from '@app/o-auth/client';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthFindClientByIdController', () =>
-{
+describe('OAuthFindClientByIdController', () => {
     let controller: OAuthFindClientByIdController;
     let handler: OAuthFindClientByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                OAuthFindClientByIdController,
-            ],
+            imports: [],
+            controllers: [OAuthFindClientByIdController],
             providers: [
                 {
-                    provide : OAuthFindClientByIdHandler,
+                    provide: OAuthFindClientByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthFindClientByIdController>(OAuthFindClientByIdController);
-        handler = module.get<OAuthFindClientByIdHandler>(OAuthFindClientByIdHandler);
+        controller = module.get<OAuthFindClientByIdController>(
+            OAuthFindClientByIdController,
+        );
+        handler = module.get<OAuthFindClientByIdHandler>(
+            OAuthFindClientByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthFindClientByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthFindClientByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an client by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockClientData[0])));
-            expect(await controller.main(oAuthMockClientData[0].id)).toBe(oAuthMockClientData[0]);
+        test('should return an client by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(oAuthMockClientData[0])),
+            );
+            expect(await controller.main(oAuthMockClientData[0].id)).toBe(
+                oAuthMockClientData[0],
+            );
         });
     });
 });

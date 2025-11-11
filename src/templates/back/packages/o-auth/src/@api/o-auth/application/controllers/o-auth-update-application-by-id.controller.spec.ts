@@ -1,46 +1,53 @@
-import { OAuthUpdateApplicationByIdController, OAuthUpdateApplicationByIdHandler } from '@api/o-auth/application';
+import {
+    OAuthUpdateApplicationByIdController,
+    OAuthUpdateApplicationByIdHandler,
+} from '@api/o-auth/application';
 import { oAuthMockApplicationData } from '@app/o-auth/application';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('OAuthUpdateApplicationByIdController', () =>
-{
+describe('OAuthUpdateApplicationByIdController', () => {
     let controller: OAuthUpdateApplicationByIdController;
     let handler: OAuthUpdateApplicationByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                OAuthUpdateApplicationByIdController,
-            ],
+            imports: [],
+            controllers: [OAuthUpdateApplicationByIdController],
             providers: [
                 {
-                    provide : OAuthUpdateApplicationByIdHandler,
+                    provide: OAuthUpdateApplicationByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<OAuthUpdateApplicationByIdController>(OAuthUpdateApplicationByIdController);
-        handler = module.get<OAuthUpdateApplicationByIdHandler>(OAuthUpdateApplicationByIdHandler);
+        controller = module.get<OAuthUpdateApplicationByIdController>(
+            OAuthUpdateApplicationByIdController,
+        );
+        handler = module.get<OAuthUpdateApplicationByIdHandler>(
+            OAuthUpdateApplicationByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('OAuthUpdateApplicationByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('OAuthUpdateApplicationByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a application updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(oAuthMockApplicationData[0])));
-            expect(await controller.main(oAuthMockApplicationData[0])).toBe(oAuthMockApplicationData[0]);
+        test('should return a application updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(oAuthMockApplicationData[0]),
+                    ),
+            );
+            expect(await controller.main(oAuthMockApplicationData[0])).toBe(
+                oAuthMockApplicationData[0],
+            );
         });
     });
 });

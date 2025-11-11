@@ -8,26 +8,21 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @ApiTags('[iam] role')
 @Controller('iam/role/find')
 @Auth('iam.role.get')
-export class IamFindRoleByIdController
-{
-    constructor(
-        private readonly handler: IamFindRoleByIdHandler,
-    ) {}
+export class IamFindRoleByIdController {
+    constructor(private readonly handler: IamFindRoleByIdHandler) {}
 
     @Post(':id')
     @HttpCode(200)
     @ApiOperation({ summary: 'Find role by id' })
-    @ApiOkResponse({ description: 'The record has been successfully requested.', type: IamRoleDto })
+    @ApiOkResponse({
+        description: 'The record has been successfully requested.',
+        type: IamRoleDto,
+    })
     async main(
         @Param('id') id: string,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    )
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
+    ) {
+        return await this.handler.main(id, constraint, timezone);
     }
 }

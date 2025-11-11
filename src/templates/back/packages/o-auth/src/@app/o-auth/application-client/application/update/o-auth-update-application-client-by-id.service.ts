@@ -1,4 +1,7 @@
-import { OAuthApplicationClient, OAuthIApplicationClientRepository } from '@app/o-auth/application-client';
+import {
+    OAuthApplicationClient,
+    OAuthIApplicationClientRepository,
+} from '@app/o-auth/application-client';
 import {
     OAuthApplicationClientApplicationId,
     OAuthApplicationClientClientId,
@@ -8,8 +11,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class OAuthUpdateApplicationClientByIdService
-{
+export class OAuthUpdateApplicationClientByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: OAuthIApplicationClientRepository,
@@ -22,8 +24,7 @@ export class OAuthUpdateApplicationClientByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const applicationClient = OAuthApplicationClient.register(
             payload.applicationId,
@@ -31,21 +32,20 @@ export class OAuthUpdateApplicationClientByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            applicationClient,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(applicationClient, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const applicationClientRegister = this.publisher.mergeObjectContext(
-            applicationClient,
-        );
+        const applicationClientRegister =
+            this.publisher.mergeObjectContext(applicationClient);
 
-        applicationClientRegister.updated(applicationClient); // apply event to model events
+        applicationClientRegister.updated({
+            payload: applicationClient,
+            cQMetadata,
+        }); // apply event to model events
         applicationClientRegister.commit(); // commit all events of model
     }
 }

@@ -1,4 +1,7 @@
-import { oAuthMockRefreshTokenData, OAuthRefreshToken } from '@app/o-auth/refresh-token';
+import {
+    oAuthMockRefreshTokenData,
+    OAuthRefreshToken,
+} from '@app/o-auth/refresh-token';
 import {
     OAuthRefreshTokenAccessTokenId,
     OAuthRefreshTokenCreatedAt,
@@ -6,6 +9,7 @@ import {
     OAuthRefreshTokenExpiresAt,
     OAuthRefreshTokenId,
     OAuthRefreshTokenIsRevoked,
+    OAuthRefreshTokenRowId,
     OAuthRefreshTokenToken,
     OAuthRefreshTokenUpdatedAt,
 } from '@app/o-auth/refresh-token/domain/value-objects';
@@ -14,26 +18,27 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class OAuthMockRefreshTokenSeeder extends MockSeeder<OAuthRefreshToken>
-{
+export class OAuthMockRefreshTokenSeeder extends MockSeeder<OAuthRefreshToken> {
     public collectionSource: OAuthRefreshToken[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const refreshToken of _.orderBy(oAuthMockRefreshTokenData, ['id']))
-        {
+        for (const refreshToken of _.orderBy(oAuthMockRefreshTokenData, [
+            'id',
+        ])) {
             this.collectionSource.push(
                 OAuthRefreshToken.register(
                     new OAuthRefreshTokenId(refreshToken.id),
-                    new OAuthRefreshTokenAccessTokenId(refreshToken.accessTokenId),
+                    new OAuthRefreshTokenRowId(refreshToken.rowId),
+                    new OAuthRefreshTokenAccessTokenId(
+                        refreshToken.accessTokenId,
+                    ),
                     new OAuthRefreshTokenToken(refreshToken.token),
                     new OAuthRefreshTokenIsRevoked(refreshToken.isRevoked),
                     new OAuthRefreshTokenExpiresAt(refreshToken.expiresAt),

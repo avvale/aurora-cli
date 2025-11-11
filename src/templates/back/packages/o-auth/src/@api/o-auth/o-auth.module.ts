@@ -1,3 +1,7 @@
+/* #region customizations */
+import { OAuthCredentialHandlers, OAuthCredentialServices } from '@app/o-auth/credential';
+/* #endregion customizations */
+
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SharedModule } from '@aurora/shared.module';
@@ -10,9 +14,6 @@ import { OAuthRefreshTokenApiHandlers, OAuthRefreshTokenApiControllers, OAuthRef
 import { OAuthCredentialControllers, OAuthCredentialResolvers, OAuthCredentialApiHandlers } from './credential';
 import { OAuthScopeApiHandlers, OAuthScopeApiControllers, OAuthScopeApiResolvers, OAuthScopeApiServices } from './scope';
 import { OAuthApplicationClientApiControllers, OAuthApplicationClientApiResolvers, OAuthApplicationClientApiHandlers, OAuthApplicationClientApiServices } from './application-client';
-
-// ---- customizations ----
-import { OAuthCredentialHandlers, OAuthCredentialServices } from '@app/o-auth/credential';
 
 @Module({
     imports: [
@@ -31,6 +32,11 @@ import { OAuthCredentialHandlers, OAuthCredentialServices } from '@app/o-auth/cr
         ...OAuthClientApiControllers,
     ],
     providers: [
+        /* #region customizations */
+        ...OAuthCredentialHandlers,
+        ...OAuthCredentialServices,
+        /* #endregion customizations */
+
         OAuthSeeder,
         ...OAuthHandlers,
         ...OAuthServices,
@@ -56,10 +62,6 @@ import { OAuthCredentialHandlers, OAuthCredentialServices } from '@app/o-auth/cr
         ...OAuthApplicationClientApiServices,
         ...OAuthClientApiResolvers,
         ...OAuthClientApiServices,
-
-        // ---- customizations ----
-        ...OAuthCredentialHandlers,
-        ...OAuthCredentialServices,
     ],
 })
 export class OAuthModule {}

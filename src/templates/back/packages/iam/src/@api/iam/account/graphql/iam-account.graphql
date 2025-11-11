@@ -1,12 +1,18 @@
+input IamUpdateMeAccountInput {
+    id: ID!
+    email: GraphQLString
+    username: GraphQLString
+    user: IamUpdateUserByIdInput
+}
+
 enum IamAccountType {
     USER
     SERVICE
 }
 
-
-type IamAccount
-{
+type IamAccount {
     id: ID!
+    rowId: GraphQLInt!
     type: IamAccountType!
     code: GraphQLString
     email: GraphQLString
@@ -28,8 +34,7 @@ type IamAccount
     deletedAt: GraphQLTimestamp
 }
 
-input IamCreateAccountInput
-{
+input IamCreateAccountInput {
     id: ID!
     type: IamAccountType!
     code: GraphQLString
@@ -46,8 +51,7 @@ input IamCreateAccountInput
     user: IamCreateUserInput
 }
 
-input IamUpdateAccountByIdInput
-{
+input IamUpdateAccountByIdInput {
     id: ID!
     type: IamAccountType
     code: GraphQLString
@@ -64,8 +68,7 @@ input IamUpdateAccountByIdInput
     user: IamUpdateUserByIdInput
 }
 
-input IamUpdateAccountsInput
-{
+input IamUpdateAccountsInput {
     id: ID
     type: IamAccountType
     code: GraphQLString
@@ -83,16 +86,11 @@ input IamUpdateAccountsInput
     user: IamUpdateUsersInput
 }
 
-input IamUpdateMeAccountInput
-{
-    id: ID!
-    email: GraphQLString
-    username: GraphQLString
-    user: IamUpdateUserByIdInput
-}
+type Query {
+    #region customizations
+    iamMeAccount: IamAccount
+    #endregion customizations
 
-type Query
-{
     iamFindAccount(
         query: QueryStatement
         constraint: QueryStatement
@@ -115,13 +113,8 @@ type Query
         constraint: QueryStatement
     ): Pagination!
 
-    # ---- customizations ----
-    iamMeAccount: IamAccount
-
     # additionalApis
-    iamCheckPasswordMeAccount(
-        password: GraphQLString!
-    ): Boolean!
+    iamCheckPasswordMeAccount(password: GraphQLString!): Boolean!
 
     iamCheckUniqueUsernameAccount(
         username: GraphQLString!
@@ -137,14 +130,10 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    iamCreateAccount(
-        payload: IamCreateAccountInput!
-    ): IamAccount
+type Mutation {
+    iamCreateAccount(payload: IamCreateAccountInput!): IamAccount
 
     iamUpdateAccountById(
         payload: IamUpdateAccountByIdInput!
@@ -157,26 +146,19 @@ type Mutation
         constraint: QueryStatement
     ): [IamAccount]!
 
-    iamUpsertAccount(
-        payload: IamUpdateAccountByIdInput!
-    ): IamAccount
+    iamUpsertAccount(payload: IamUpdateAccountByIdInput!): IamAccount
 
-    iamDeleteAccountById(
-        id: ID!
-        constraint: QueryStatement
-    ): IamAccount
+    iamDeleteAccountById(id: ID!, constraint: QueryStatement): IamAccount
 
     iamDeleteAccounts(
         query: QueryStatement
         constraint: QueryStatement
     ): [IamAccount]!
 
-    # ---- customizations ----
+    #region customizations
     iamCreateAccounts(payload: [IamCreateAccountInput]!): Boolean!
+    #endregion customizations
 
     # additionalApis
-    iamUpdateMeAccount(
-        payload: IamUpdateMeAccountInput!
-    ): Boolean!
-
+    iamUpdateMeAccount(payload: IamUpdateMeAccountInput!): Boolean!
 }

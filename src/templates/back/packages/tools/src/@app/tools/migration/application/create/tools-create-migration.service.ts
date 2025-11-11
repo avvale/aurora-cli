@@ -1,7 +1,9 @@
-import { ToolsIMigrationRepository, ToolsMigration } from '@app/tools/migration';
+import {
+    ToolsIMigrationRepository,
+    ToolsMigration,
+} from '@app/tools/migration';
 import {
     ToolsMigrationCreatedAt,
-    ToolsMigrationDeletedAt,
     ToolsMigrationDownScript,
     ToolsMigrationExecutedAt,
     ToolsMigrationId,
@@ -18,8 +20,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class ToolsCreateMigrationService
-{
+export class ToolsCreateMigrationService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: ToolsIMigrationRepository,
@@ -38,11 +39,11 @@ export class ToolsCreateMigrationService
             executedAt: ToolsMigrationExecutedAt;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const migration = ToolsMigration.register(
             payload.id,
+            undefined, // rowId
             payload.name,
             payload.version,
             payload.isActive,
@@ -56,17 +57,12 @@ export class ToolsCreateMigrationService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            migration,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(migration, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const migrationRegister = this.publisher.mergeObjectContext(
-            migration,
-        );
+        const migrationRegister = this.publisher.mergeObjectContext(migration);
 
         migrationRegister.created({
             payload: migration,

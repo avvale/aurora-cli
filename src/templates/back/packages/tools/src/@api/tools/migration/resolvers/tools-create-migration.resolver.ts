@@ -6,21 +6,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('tools.migration.create')
-export class ToolsCreateMigrationResolver
-{
-    constructor(
-        private readonly handler: ToolsCreateMigrationHandler,
-    ) {}
+export class ToolsCreateMigrationResolver {
+    constructor(private readonly handler: ToolsCreateMigrationHandler) {}
 
     @Mutation('toolsCreateMigration')
     async main(
         @Args('payload') payload: ToolsCreateMigrationInput,
         @Timezone() timezone?: string,
-    ): Promise<ToolsMigration>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-        );
+    ): Promise<ToolsMigration> {
+        return await this.handler.main(payload, timezone);
     }
 }

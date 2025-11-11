@@ -1,7 +1,11 @@
 /* eslint-disable key-spacing */
 import { IamAccount } from '@app/iam/account';
 import { IamRole } from '@app/iam/role';
-import { IamCreatedRoleAccountEvent, IamDeletedRoleAccountEvent, IamUpdatedRoleAccountEvent } from '@app/iam/role-account';
+import {
+    IamCreatedRoleAccountEvent,
+    IamDeletedRoleAccountEvent,
+    IamUpdatedRoleAccountEvent,
+} from '@app/iam/role-account';
 import {
     IamRoleAccountAccountId,
     IamRoleAccountRoleId,
@@ -9,8 +13,7 @@ import {
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class IamRoleAccount extends AggregateRoot
-{
+export class IamRoleAccount extends AggregateRoot {
     roleId: IamRoleAccountRoleId;
     accountId: IamRoleAccountAccountId;
     role: IamRole;
@@ -21,8 +24,7 @@ export class IamRoleAccount extends AggregateRoot
         accountId: IamRoleAccountAccountId,
         role?: IamRole,
         account?: IamAccount,
-    )
-    {
+    ) {
         super();
         this.roleId = roleId;
         this.accountId = accountId;
@@ -35,23 +37,11 @@ export class IamRoleAccount extends AggregateRoot
         accountId: IamRoleAccountAccountId,
         role?: IamRole,
         account?: IamAccount,
-    ): IamRoleAccount
-    {
-        return new IamRoleAccount(
-            roleId,
-            accountId,
-            role,
-            account,
-        );
+    ): IamRoleAccount {
+        return new IamRoleAccount(roleId, accountId, role, account);
     }
 
-    created(
-        event: {
-            payload: IamRoleAccount;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: IamRoleAccount; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamCreatedRoleAccountEvent({
                 payload: {
@@ -63,13 +53,7 @@ export class IamRoleAccount extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: IamRoleAccount;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: IamRoleAccount; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamUpdatedRoleAccountEvent({
                 payload: {
@@ -81,13 +65,7 @@ export class IamRoleAccount extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: IamRoleAccount;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: IamRoleAccount; cQMetadata?: CQMetadata }): void {
         this.apply(
             new IamDeletedRoleAccountEvent({
                 payload: {
@@ -99,8 +77,7 @@ export class IamRoleAccount extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             roleId: this.roleId.value,
             accountId: this.accountId.value,
@@ -110,8 +87,7 @@ export class IamRoleAccount extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             roleId: this.roleId.value,
             accountId: this.accountId.value,

@@ -1,9 +1,14 @@
-import { ToolsFindKeyValueQuery, ToolsKeyValueMapper, ToolsKeyValueResponse } from '@app/tools/key-value';
+import {
+    ToolsFindKeyValueQuery,
+    ToolsKeyValueMapper,
+    ToolsKeyValueResponse,
+} from '@app/tools/key-value';
 import { ToolsFindKeyValueService } from '@app/tools/key-value/application/find/tools-find-key-value.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(ToolsFindKeyValueQuery)
-export class ToolsFindKeyValueQueryHandler implements IQueryHandler<ToolsFindKeyValueQuery>
+export class ToolsFindKeyValueQueryHandler
+    implements IQueryHandler<ToolsFindKeyValueQuery>
 {
     private readonly mapper: ToolsKeyValueMapper = new ToolsKeyValueMapper();
 
@@ -11,8 +16,9 @@ export class ToolsFindKeyValueQueryHandler implements IQueryHandler<ToolsFindKey
         private readonly findKeyValueService: ToolsFindKeyValueService,
     ) {}
 
-    async execute(query: ToolsFindKeyValueQuery): Promise<ToolsKeyValueResponse>
-    {
+    async execute(
+        query: ToolsFindKeyValueQuery,
+    ): Promise<ToolsKeyValueResponse> {
         const keyValue = await this.findKeyValueService.main(
             query.queryStatement,
             query.constraint,

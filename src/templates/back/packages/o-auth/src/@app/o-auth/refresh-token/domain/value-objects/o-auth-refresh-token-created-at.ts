@@ -1,15 +1,28 @@
-import { DataValueObject, TimestampValueObject, ValidationRules } from '@aurorajs.dev/core';
+import {
+    DataValueObject,
+    TimestampValueObject,
+    ValidationRules,
+} from '@aurorajs.dev/core';
 
-export class OAuthRefreshTokenCreatedAt extends TimestampValueObject
-{
+export class OAuthRefreshTokenCreatedAt extends TimestampValueObject {
     public readonly type: string = 'OAuthRefreshTokenCreatedAt';
 
-    constructor(value: string | DataValueObject, validationRules: ValidationRules = {}, data: DataValueObject = {})
-    {
-        super(value, Object.assign({
-            name       : 'OAuthRefreshTokenCreatedAt',
-            nullable   : true,
-            undefinable: true,
-        }, validationRules), data);
+    constructor(
+        value: string | DataValueObject,
+        validationRules: ValidationRules = {},
+        data: DataValueObject = {},
+    ) {
+        super(
+            value,
+            Object.assign(
+                {
+                    name: 'OAuthRefreshTokenCreatedAt',
+                    nullable: true,
+                    undefinable: true,
+                },
+                validationRules,
+            ),
+            data,
+        );
     }
 }

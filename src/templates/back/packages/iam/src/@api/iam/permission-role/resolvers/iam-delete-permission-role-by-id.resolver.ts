@@ -1,16 +1,18 @@
 import { IamPermissionRole } from '@api/graphql';
 import { IamDeletePermissionRoleByIdHandler } from '@api/iam/permission-role';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('iam.permissionRole.delete')
-export class IamDeletePermissionRoleByIdResolver
-{
-    constructor(
-        private readonly handler: IamDeletePermissionRoleByIdHandler,
-    ) {}
+export class IamDeletePermissionRoleByIdResolver {
+    constructor(private readonly handler: IamDeletePermissionRoleByIdHandler) {}
 
     @Mutation('iamDeletePermissionRoleById')
     async main(
@@ -19,8 +21,7 @@ export class IamDeletePermissionRoleByIdResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<IamPermissionRole>
-    {
+    ): Promise<IamPermissionRole> {
         return await this.handler.main(
             permissionId,
             roleId,

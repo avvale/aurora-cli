@@ -1,36 +1,34 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class IamUpdateRoleByIdDto
-{
+export class IamUpdateRoleByIdDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'id [input here api field description]',
     })
     id: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'name [input here api field description]',
     })
     name?: string;
 
     @ApiProperty({
-        type       : Boolean,
+        type: Boolean,
         description: 'isMaster [input here api field description]',
     })
     isMaster?: boolean;
 
     @ApiProperty({
-        type       : [String],
+        type: [String],
         description: 'permissions [input here api field description]',
     })
     permissionIds?: string[];
 
     @ApiProperty({
-        type       : [String],
+        type: [String],
         description: 'accounts [input here api field description]',
     })
     accountIds?: string[];
-
 }

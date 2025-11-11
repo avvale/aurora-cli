@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class ToolsCreateKeyValuesCommand
-{
+export class ToolsCreateKeyValuesCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -10,7 +9,7 @@ export class ToolsCreateKeyValuesCommand
             value: string;
             isActive: boolean;
             description?: string;
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }
