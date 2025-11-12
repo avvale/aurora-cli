@@ -1,11 +1,13 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     externalId
     externalStatus
     accountId
     account {
         id
+        rowId
         type
         code
         email
@@ -36,11 +38,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query SupportPaginateIssues (
+    query SupportPaginateIssues(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: supportPaginateIssues (
+        pagination: supportPaginateIssues(
             query: $query
             constraint: $constraint
         ) {
@@ -52,14 +54,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query SupportGetIssues (
+    query SupportGetIssues(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: supportGetIssues (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: supportGetIssues(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -67,14 +66,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query SupportFindIssueById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: supportFindIssueById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query SupportFindIssueById($id: ID, $constraint: QueryStatement) {
+        object: supportFindIssueById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -82,14 +75,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query SupportFindIssue (
+    query SupportFindIssue(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: supportFindIssue (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: supportFindIssue(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -109,12 +99,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation SupportCreateIssues (
-        $payload: [SupportCreateIssueInput]!
-    ) {
-        supportCreateIssues (
-            payload: $payload
-        )
+    mutation SupportCreateIssues($payload: [SupportCreateIssueInput]!) {
+        supportCreateIssues(payload: $payload)
     }
 `;
 

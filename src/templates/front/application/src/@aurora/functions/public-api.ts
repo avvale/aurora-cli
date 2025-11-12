@@ -1,5 +1,6 @@
 export * from './array-to-map.function';
 export * from './base64-to-blob.function';
+export { Counter } from './counter';
 export * from './create-password.function';
 export * from './date-from-format.function';
 export * from './encrypt.function';

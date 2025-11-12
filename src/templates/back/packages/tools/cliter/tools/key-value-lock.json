@@ -7,23 +7,23 @@
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-value.command-handler.spec.ts",
-            "integrity": "sha1:8158d2da4113a0e6ddb06328ad5797e564a5bd66"
+            "integrity": "sha1:a8d2eabf1d0e6e8c5db29a9578be521b449d6a95"
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-value.command-handler.ts",
-            "integrity": "sha1:4fbb212aa7099d41a7a3b48ba8d8e56cf9818a99"
+            "integrity": "sha1:52e554e186ae1b4922b661806868d67cfb9a5310"
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-value.command.ts",
-            "integrity": "sha1:4d53bd13371b11e5922c2a6581cf7724841ed493"
+            "integrity": "sha1:97566e1965c6677c63be7a46d6c0fe664faea287"
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-value.service.spec.ts",
-            "integrity": "sha1:843ca7d549cee20b0d880437c55d296ff57d2e46"
+            "integrity": "sha1:563d245c85adb53f52a38a8480c0824a567488c5"
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-value.service.ts",
-            "integrity": "sha1:7ef12bc4ef3b70c4f1d3a39edff2c07bfd3a4a68"
+            "integrity": "sha1:87332ecf067ab9c321a75aba5a148ea24db2e6ed"
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-values.command-handler.spec.ts",
@@ -31,11 +31,11 @@
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-values.command-handler.ts",
-            "integrity": "sha1:0a5d72c281f752a4bd707568e1e44c930f89818c"
+            "integrity": "sha1:98ca47a57508128a4cd344342a53dde12a714629"
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-values.command.ts",
-            "integrity": "sha1:0a780caafbfdb8294de46fff0beedbfc278e6c04"
+            "integrity": "sha1:b943342e92cbcafef71928bb0d6c6cb7296a3598"
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-values.service.spec.ts",
@@ -43,7 +43,7 @@
         },
         {
             "path": "src/@app/tools/key-value/application/create/tools-create-key-values.service.ts",
-            "integrity": "sha1:e620f4c601b34de5d2079bb762dcecd626e91a29"
+            "integrity": "sha1:369d168e1726336ad22a13fd2096812fb36525dd"
         },
         {
             "path": "src/@app/tools/key-value/application/delete/tools-delete-key-value-by-id.command-handler.spec.ts",
@@ -87,7 +87,7 @@
         },
         {
             "path": "src/@app/tools/key-value/application/events/tools-add-key-values-context.event.ts",
-            "integrity": "sha1:cb816fb475f3c27e3d590be1e9734f7355e4a17a"
+            "integrity": "sha1:cb96f9bf5c62e882416ad91e18f6a4bece9a0b92"
         },
         {
             "path": "src/@app/tools/key-value/application/events/tools-created-key-value.event-handler.ts",
@@ -95,7 +95,7 @@
         },
         {
             "path": "src/@app/tools/key-value/application/events/tools-created-key-value.event.ts",
-            "integrity": "sha1:65ee840a7792ba9475f165cba9911eb72e3c8c0a"
+            "integrity": "sha1:2e0f22621b4b08021330068abab64f55c25286dd"
         },
         {
             "path": "src/@app/tools/key-value/application/events/tools-created-key-values.event-handler.ts",
@@ -111,7 +111,7 @@
         },
         {
             "path": "src/@app/tools/key-value/application/events/tools-deleted-key-value.event.ts",
-            "integrity": "sha1:d6ec59515835dc8a326d0d8cd3fc3f56f56a959b"
+            "integrity": "sha1:d7bd30098f7dd6aae45196ba675cdb69c4ed22e5"
         },
         {
             "path": "src/@app/tools/key-value/application/events/tools-deleted-key-values.event-handler.ts",
@@ -127,7 +127,7 @@
         },
         {
             "path": "src/@app/tools/key-value/application/events/tools-updated-key-value.event.ts",
-            "integrity": "sha1:0a856cc93cee35bde8c62b49654678eb05c9c330"
+            "integrity": "sha1:de7801e547b5375d097ef57b44c181368914ddd5"
         },
         {
             "path": "src/@app/tools/key-value/application/find/tools-find-key-value-by-id.query-handler.spec.ts",
@@ -215,31 +215,31 @@
         },
         {
             "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.command-handler.spec.ts",
-            "integrity": "sha1:4f3be48d94dad3c9896c409478e400d917841935"
+            "integrity": "sha1:956b1122229482623a9faf133d80ad7b866a68b7"
         },
         {
             "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.command-handler.ts",
-            "integrity": "sha1:aedd700071ff9b1dfc3c55418c0e71b151f1a453"
+            "integrity": "sha1:5abdae00b8390e3f79435c06d617d5effb6790ad"
         },
         {
             "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.command.ts",
-            "integrity": "sha1:8a743c4c74b562d554b91dbee30e9dfc7e52cd21"
+            "integrity": "sha1:015f54341600f99213f72717fadc21ebb67f2798"
         },
         {
             "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.service.spec.ts",
-            "integrity": "sha1:faafcb25292950b74d74eee2f94731e59a8ff7ab"
+            "integrity": "sha1:8b7f631a9913ba76c9a02b4a8884d26a931f04e6"
         },
         {
             "path": "src/@app/tools/key-value/application/update/tools-update-key-value-by-id.service.ts",
-            "integrity": "sha1:d0614d1747f6ad4452fd1e859d53c8812e57498a"
+            "integrity": "sha1:0f97ca06e1db1a6035b57d26740c84539579405a"
         },
         {
             "path": "src/@app/tools/key-value/domain/tools-key-value.aggregate.ts",
-            "integrity": "sha1:e902413f19622a9c39a6f0e635500f4e67c56aef"
+            "integrity": "sha1:2ce3909b5f012b05e1e6144c81e27224131bf416"
         },
         {
             "path": "src/@app/tools/key-value/domain/tools-key-value.mapper.ts",
-            "integrity": "sha1:93edd1d01faa69ea25e6b6e6beee42d7768d39eb"
+            "integrity": "sha1:b75a39b9a7a010ba7cb0957e75291ebed718e112"
         },
         {
             "path": "src/@app/tools/key-value/domain/tools-key-value.repository.ts",
@@ -247,11 +247,11 @@
         },
         {
             "path": "src/@app/tools/key-value/domain/tools-key-value.response.ts",
-            "integrity": "sha1:09b3d75871b8a1bf2ff5e6eac75090aaed7ac9b2"
+            "integrity": "sha1:190507a590370df3615d78acc0396ef5adc18f1e"
         },
         {
             "path": "src/@app/tools/key-value/domain/value-objects/index.ts",
-            "integrity": "sha1:e8c3e13718f329e9907367f67dd4e91441b59916"
+            "integrity": "sha1:abdac448896a86528149c90b1278d66b5877a56b"
         },
         {
             "path": "src/@app/tools/key-value/index.ts",
@@ -259,19 +259,19 @@
         },
         {
             "path": "src/@app/tools/key-value/infrastructure/mock/tools-mock-key-value.data.ts",
-            "integrity": "sha1:aa37fcd53615cd59783be6cb6278af490b505097"
+            "integrity": "sha1:40592557b5872f752062abfb3de035ad69f66579"
         },
         {
             "path": "src/@app/tools/key-value/infrastructure/mock/tools-mock-key-value.repository.ts",
-            "integrity": "sha1:e8fe010560f326a32aa938b6aa1ede1fd4c57fd3"
+            "integrity": "sha1:6ade04892701d3eedc1b0f1fa583597b615d6a5b"
         },
         {
             "path": "src/@app/tools/key-value/infrastructure/mock/tools-mock-key-value.seeder.ts",
-            "integrity": "sha1:6e0ac9f5aed172852f2e542462266e01b9414a77"
+            "integrity": "sha1:191a6bc52a24f6c6a148054cdb3148d55d730f59"
         },
         {
             "path": "src/@app/tools/key-value/infrastructure/sequelize/tools-sequelize-key-value.model.ts",
-            "integrity": "sha1:dac7f883724cf14adf5fb511cc036abb1f512150"
+            "integrity": "sha1:c6ad40977fff125cced71c701764558ba0244d96"
         },
         {
             "path": "src/@app/tools/key-value/infrastructure/sequelize/tools-sequelize-key-value.repository.ts",
@@ -286,12 +286,12 @@
             "integrity": "sha1:b3dc0309e468744731e64729a278620521dad462"
         },
         {
-            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-key.ts",
-            "integrity": "sha1:037a225ec1e03a7b064613311bac99de763b1112"
-        },
-        {
             "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-row-id.ts",
             "integrity": "sha1:de6479ab6c2b0f10af35153deffd74dd96f813ef"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-key.ts",
+            "integrity": "sha1:037a225ec1e03a7b064613311bac99de763b1112"
         },
         {
             "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-type.ts",
@@ -299,7 +299,11 @@
         },
         {
             "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-value.ts",
-            "integrity": "sha1:5cceb4c88ed297d5c4fa92a54eed0f147966c9db"
+            "integrity": "sha1:88d774cc3e2b9072dd4133b07a0359c24e14150e"
+        },
+        {
+            "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-is-cached.ts",
+            "integrity": "sha1:06d133b59f6bc3095a5bd37e2f8b9f553faf1add"
         },
         {
             "path": "src/@app/tools/key-value/domain/value-objects/tools-key-value-is-active.ts",
@@ -395,19 +399,19 @@
         },
         {
             "path": "src/@api/tools/key-value/dto/tools-key-value.dto.ts",
-            "integrity": "sha1:588c4415aea3eaeb63bcee50b0a33212db1400b0"
+            "integrity": "sha1:4ddadeb64f295676bbadb1131f95693fd0ceb77c"
         },
         {
             "path": "src/@api/tools/key-value/dto/tools-create-key-value.dto.ts",
-            "integrity": "sha1:8a988f64dcb3ff8492a935eb30b0c99de003397c"
+            "integrity": "sha1:e01b4ca4265c7944c7d8775e304a5f8fccfe42cc"
         },
         {
             "path": "src/@api/tools/key-value/dto/tools-update-key-value-by-id.dto.ts",
-            "integrity": "sha1:db822e8aa2bcbd96585f4c495b941e858943d899"
+            "integrity": "sha1:80f39c54faf21d4eea6402832cd03d7d3fa2969d"
         },
         {
             "path": "src/@api/tools/key-value/dto/tools-update-key-values.dto.ts",
-            "integrity": "sha1:98cef7234e28f91c7e623d02d6c431b09c700ebd"
+            "integrity": "sha1:317ce180cb84420e1a1c7a1bca2f161b262c5f24"
         },
         {
             "path": "src/@api/tools/key-value/dto/index.ts",
@@ -419,7 +423,7 @@
         },
         {
             "path": "src/@api/tools/key-value/graphql/tools-key-value.graphql",
-            "integrity": "sha1:a8673382acb461a209876991f025a28c00e54bfa"
+            "integrity": "sha1:b2e042d1aec72b64f07e4df6be0fb7833e794ed5"
         },
         {
             "path": "src/@api/tools/key-value/handlers/tools-create-key-value.handler.spec.ts",
@@ -575,11 +579,11 @@
         },
         {
             "path": "test/acceptance/tools/key-value.e2e-spec.ts",
-            "integrity": "sha1:d089227187bccdba8cda8d007f618c436e33ac1c"
+            "integrity": "sha1:e677dcf3240abed26fa7dba3e6744d0a1d2103d4"
         },
         {
             "path": "postman/tools/tools.key-value.postman.json",
-            "integrity": "sha1:65aea411d661a231433524cd97d9aab7b34007c6"
+            "integrity": "sha1:2cfde7a30a9aa969c0b8dc977dceb89c7adf4cca"
         }
     ]
 }

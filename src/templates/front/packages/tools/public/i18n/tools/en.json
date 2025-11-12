@@ -7,6 +7,7 @@
     "InstallScript": "Install Script",
     "InstallWarning": "You are about to install the {{ name }} script. Make sure you understand the implications before proceeding.",
     "IsActive": "Is active",
+    "IsCached": "IsCached",
     "IsExecuted": "Executed",
     "IsUpdated": "Updated",
     "Key": "Key",
@@ -22,6 +23,7 @@
         "TRIGGER": "Trigger"
     },
     "Procedures": "Procedures",
+    "RowId": "RowId",
     "Run": "Run",
     "RunScripts": "Ejecutar Scripts",
     "RunScriptsDisclaimer": "This will run the procedures less than or equal to the {{ version }} version not installed or updated in the order in which they are defined. Make sure you understand the implications before proceeding.",

@@ -1,0 +1,75 @@
+<div
+    matSnackBarActions
+    class="w-auto px-2 py-0 flex-col"
+    *transloco="let t"
+>
+    <form
+        id="supportIssueConfigSnackbarForm"
+        class="w-auto flex flex-col"
+        novalidate
+        [formGroup]="fg"
+        (ngSubmit)="onSubmit($event)"
+    >
+        <mat-form-field
+            appearance="outline"
+            class="col-12"
+            tiny
+        >
+            <mat-label>{{ t('support.Display') }}</mat-label>
+            <mat-select
+                formControlName="displaySurface"
+                panelClass="support-issue-config-select-panel"
+            >
+                <mat-option value="tab">{{ t('support.CurrentTab') }}</mat-option>
+                <mat-option value="window">{{ t('support.Window') }}</mat-option>
+                <mat-option value="screen">{{ t('support.FullScreen') }}</mat-option>
+            </mat-select>
+            <mat-icon matSuffix>airplay</mat-icon>
+            <mat-error>{{ formErrors?.displaySurface | async }}</mat-error>
+        </mat-form-field>
+        <mat-form-field
+            appearance="outline"
+            class="col-12"
+            tiny
+        >
+            <mat-label>{{ t('support.Audio') }}</mat-label>
+            <mat-select
+                formControlName="audioDeviceId"
+                panelClass="support-issue-config-select-panel"
+            >
+                <mat-option value="none">{{ t('support.NoMicrophone') }}</mat-option>
+                @for (inputDeviceInfo of inputDevicesInfo; track inputDeviceInfo.deviceId)
+                {
+                    <mat-option [value]="inputDeviceInfo.deviceId">
+                        {{ inputDeviceInfo.label }}
+                    </mat-option>
+                }
+            </mat-select>
+            <mat-icon matSuffix>mic</mat-icon>
+            <mat-error>{{ formErrors?.audioDeviceId | async }}</mat-error>
+        </mat-form-field>
+        <div>
+            <button
+                mat-flat-button
+                type="submit"
+                form="supportIssueConfigSnackbarForm"
+                color="warn"
+                class="px-3 text-sm leading-8"
+            >
+                <mat-icon
+                    fontSet="material-symbols-outlined"
+                >
+                    screen_record
+                </mat-icon>
+                {{ t('support.RecordClip') }}
+            </button>
+            <button
+                matIconButton class="ml-2"
+                (click)="dismiss()"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+
+        </div>
+    </form>
+</div>

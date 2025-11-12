@@ -15,7 +15,8 @@ type ToolsKeyValue {
     rowId: GraphQLInt!
     key: GraphQLString!
     type: ToolsKeyValueType!
-    value: GraphQLString!
+    value: GraphQLString
+    isCached: GraphQLBoolean!
     isActive: GraphQLBoolean!
     description: GraphQLString
     createdAt: GraphQLTimestamp
@@ -27,7 +28,8 @@ input ToolsCreateKeyValueInput {
     id: ID!
     key: GraphQLString!
     type: ToolsKeyValueType!
-    value: GraphQLString!
+    value: GraphQLString
+    isCached: GraphQLBoolean!
     isActive: GraphQLBoolean!
     description: GraphQLString
 }
@@ -37,6 +39,7 @@ input ToolsUpdateKeyValueByIdInput {
     key: GraphQLString
     type: ToolsKeyValueType
     value: GraphQLString
+    isCached: GraphQLBoolean
     isActive: GraphQLBoolean
     description: GraphQLString
 }
@@ -46,6 +49,7 @@ input ToolsUpdateKeyValuesInput {
     key: GraphQLString
     type: ToolsKeyValueType
     value: GraphQLString
+    isCached: GraphQLBoolean
     isActive: GraphQLBoolean
     description: GraphQLString
 }

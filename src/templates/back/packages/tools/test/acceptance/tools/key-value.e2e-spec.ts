@@ -152,18 +152,18 @@ describe('key-value', () => {
             });
     });
 
-    test('/REST:POST tools/key-value/create - Got 400 Conflict, KeyValueValue property can not to be null', () => {
+    test('/REST:POST tools/key-value/create - Got 400 Conflict, KeyValueIsCached property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/tools/key-value/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                value: null,
+                isCached: null,
             })
             .expect(400)
             .then((res) => {
                 expect(res.body.message).toContain(
-                    'Value for ToolsKeyValueValue must be defined, can not be null',
+                    'Value for ToolsKeyValueIsCached must be defined, can not be null',
                 );
             });
     });
@@ -248,18 +248,18 @@ describe('key-value', () => {
             });
     });
 
-    test('/REST:POST tools/key-value/create - Got 400 Conflict, KeyValueValue property can not to be undefined', () => {
+    test('/REST:POST tools/key-value/create - Got 400 Conflict, KeyValueIsCached property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/tools/key-value/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                value: undefined,
+                isCached: undefined,
             })
             .expect(400)
             .then((res) => {
                 expect(res.body.message).toContain(
-                    'Value for ToolsKeyValueValue must be defined, can not be undefined',
+                    'Value for ToolsKeyValueIsCached must be defined, can not be undefined',
                 );
             });
     });
@@ -312,6 +312,21 @@ describe('key-value', () => {
             });
     });
 
+    test('/REST:POST tools/key-value/create - Got 400 Conflict, KeyValueIsCached has to be a boolean value', () => {
+        return request(app.getHttpServer())
+            .post('/tools/key-value/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                isCached: 'true',
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for ToolsKeyValueIsCached has to be a boolean value',
+                );
+            });
+    });
     test('/REST:POST tools/key-value/create - Got 400 Conflict, KeyValueIsActive has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/tools/key-value/create')
@@ -527,6 +542,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                         }
@@ -610,6 +626,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -653,6 +670,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                         }
@@ -689,6 +707,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -731,6 +750,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -769,6 +789,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -807,6 +828,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -841,6 +863,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -882,6 +905,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -919,6 +943,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -961,6 +986,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt
@@ -999,6 +1025,7 @@ describe('key-value', () => {
                             key
                             type
                             value
+                            isCached
                             isActive
                             description
                             createdAt

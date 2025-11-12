@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     name
     boundedContextId
     roles {
@@ -16,6 +17,7 @@ export const relationsFields = `
         constraint: $constraintBoundedContexts
     ) {
         id
+        rowId
         name
         root
         sort
@@ -25,11 +27,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query IamPaginatePermissions (
+    query IamPaginatePermissions(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: iamPaginatePermissions (
+        pagination: iamPaginatePermissions(
             query: $query
             constraint: $constraint
         ) {
@@ -41,14 +43,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query IamGetPermissions (
+    query IamGetPermissions(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: iamGetPermissions (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: iamGetPermissions(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -65,14 +64,8 @@ export const getRelations = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindPermissionById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: iamFindPermissionById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query IamFindPermissionById($id: ID, $constraint: QueryStatement) {
+        object: iamFindPermissionById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -98,14 +91,11 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindPermission (
+    query IamFindPermission(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: iamFindPermission (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: iamFindPermission(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -125,12 +115,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation IamCreatePermissions (
-        $payload: [IamCreatePermissionInput]!
-    ) {
-        iamCreatePermissions (
-            payload: $payload
-        )
+    mutation IamCreatePermissions($payload: [IamCreatePermissionInput]!) {
+        iamCreatePermissions(payload: $payload)
     }
 `;
 

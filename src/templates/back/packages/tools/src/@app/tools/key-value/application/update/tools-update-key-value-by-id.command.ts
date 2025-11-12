@@ -7,6 +7,7 @@ export class ToolsUpdateKeyValueByIdCommand {
             key?: string;
             type?: string;
             value?: string;
+            isCached?: boolean;
             isActive?: boolean;
             description?: string;
         },

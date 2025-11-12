@@ -23,11 +23,15 @@ export class UserMetaStorageIamAdapterService extends UserMetaStorageService
         super();
     }
 
-    getUserMeta(keyUserMeta: string): Observable<UserMetaStorage>
+    getUserMeta(
+        keyUserMeta: string,
+    ): Observable<UserMetaStorage>
     {
         return this.graphqlService
             .client()
-            .watchQuery<{ iamGetUserMeta: UserMetaStorage; }>({
+            .watchQuery<{
+                iamFindUserMetaById: UserMetaStorage;
+            }>({
                 query    : findUserMetaById,
                 variables: {
                     id: keyUserMeta,
@@ -36,8 +40,8 @@ export class UserMetaStorageIamAdapterService extends UserMetaStorageService
             .valueChanges
             .pipe(
                 first(),
-                map(result => result.data.iamGetUserMeta),
-                tap(iamGetUserMeta => this.metaSubject$.next(iamGetUserMeta)),
+                map(result => result.data.iamFindUserMetaById),
+                tap(data => this.metaSubject$.next(data)),
             );
     }
 

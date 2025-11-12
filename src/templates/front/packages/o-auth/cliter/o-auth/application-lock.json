@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/o-auth.component.ts",
-            "integrity": "sha1:38168e361b46210416adfb1588bcb79f5d939810"
+            "integrity": "sha1:6e6f19ca4358c3ae81c6c40c9569cdcfdacd37e2"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-detail.component.html",
-            "integrity": "sha1:06c676e795388d56bd722433ff300214ea285771"
+            "integrity": "sha1:996f9639ebac23984c65c95c4d31828924b99941"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-detail.component.ts",
-            "integrity": "sha1:f74db5b34670357c1e45e2a3a498178c49f5c340"
+            "integrity": "sha1:f5129b0ed2ebe4384d976fdb087e91534a0fdbda"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-list.component.html",
-            "integrity": "sha1:459d60c3e3c78bc8b573637274e548a884f0c1ff"
+            "integrity": "sha1:d8c86ee17f4c67b3f5befbf5b0415fd306260e3e"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application-list.component.ts",
-            "integrity": "sha1:b1589ec010e827ddf31d95444bb69e31486d9652"
+            "integrity": "sha1:8c6080fcebb540de85565e0435dcd58c0e24fb80"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.columns-config.ts",
-            "integrity": "sha1:0a7012eea776720d96a1422fbbe62ca04c0112e9"
+            "integrity": "sha1:b7ae0ce8b72ccf3be75931bd458071c3148ba1f0"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.graphql.ts",
-            "integrity": "sha1:ce45bc89621e266640bb51956a4a10876433b647"
+            "integrity": "sha1:02b9f627e6e802cee3991baf862c8c24699dac64"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.resolvers.ts",
-            "integrity": "sha1:080e83063edbba6f7e4efbcda6796f6350c10ac1"
+            "integrity": "sha1:93541196253d1613764e26a30c3a7f120d6cc6f6"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/application.service.ts",
-            "integrity": "sha1:fdc6b2257dcd832ca480c2b2688708ce22830c3e"
+            "integrity": "sha1:e72ec58a17dd489195b442f1d9cd6bbb8ceeb44e"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/application/index.ts",
@@ -48,6 +48,34 @@
         {
             "path": "src/app/modules/admin/apps/o-auth/application/public-api.ts",
             "integrity": "sha1:077218cf66a11b4875f745a5d85e1da7d46c7379"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/o-auth.component.html",
+            "integrity": "sha1:a6aab421500581830708e34385e2166e7a039ba7"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/o-auth.component.ts",
+            "integrity": "sha1:6e6f19ca4358c3ae81c6c40c9569cdcfdacd37e2"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/application-client/application-client.columns-config.ts",
+            "integrity": "sha1:b4f9811a132bc61b1238af537f5e7d9d87f7aeb1"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/application-client/application-client.graphql.ts",
+            "integrity": "sha1:f55a6b6d6f2fc6b9d744bcb1b03d86de01bec20b"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/application-client/application-client.service.ts",
+            "integrity": "sha1:baeb7ab1b39dd3597ad294ebc4572829ee5e3212"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/application-client/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/o-auth/application-client/public-api.ts",
+            "integrity": "sha1:3b51dbebbd754cda3a5f898729946a0e0c1a2688"
         }
     ]
 }

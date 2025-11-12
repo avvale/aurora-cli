@@ -127,7 +127,7 @@ export class GridStateService
         return sort ?
             sort :
             {
-                active   : 'createdAt',
+                active   : 'rowId',
                 direction: 'desc',
             };
     }

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     name
     type
     version
@@ -21,11 +22,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query ToolsPaginateProcedures (
+    query ToolsPaginateProcedures(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: toolsPaginateProcedures (
+        pagination: toolsPaginateProcedures(
             query: $query
             constraint: $constraint
         ) {
@@ -37,14 +38,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query ToolsGetProcedures (
+    query ToolsGetProcedures(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: toolsGetProcedures (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: toolsGetProcedures(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -52,14 +50,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query ToolsFindProcedureById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: toolsFindProcedureById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query ToolsFindProcedureById($id: ID, $constraint: QueryStatement) {
+        object: toolsFindProcedureById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -67,14 +59,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query ToolsFindProcedure (
+    query ToolsFindProcedure(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: toolsFindProcedure (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: toolsFindProcedure(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -94,12 +83,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation ToolsCreateProcedures (
-        $payload: [ToolsCreateProcedureInput]!
-    ) {
-        toolsCreateProcedures (
-            payload: $payload
-        )
+    mutation ToolsCreateProcedures($payload: [ToolsCreateProcedureInput]!) {
+        toolsCreateProcedures(payload: $payload)
     }
 `;
 

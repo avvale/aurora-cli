@@ -7,15 +7,15 @@ import { Cache } from 'cache-manager';
 import { coreLangs } from './core-langs';
 
 @Injectable()
-export class CoreGetFallbackLangFromJsonService implements CoreGetFallbackLangService
+export class CoreGetFallbackLangFromJsonService
+    implements CoreGetFallbackLangService
 {
     constructor(
-        @Inject(CACHE_MANAGER) private cacheManager: Cache,
+        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
         private readonly configService: ConfigService,
     ) {}
 
-    async get<T>(): Promise<T>
-    {
+    async get<T>(): Promise<T> {
         // return cache langs
         const lang = await this.cacheManager.get<T>('common/fallback-lang');
         if (coreLangs) return lang;
@@ -25,19 +25,19 @@ export class CoreGetFallbackLangFromJsonService implements CoreGetFallbackLangSe
         return await this.cacheManager.get<T>('common/fallback-lang');
     }
 
-    async init(): Promise<void>
-    {
-        await this.cacheManager.set('common/fallback-lang', this.getJsonFallbackLang());
+    async init(): Promise<void> {
+        await this.cacheManager.set(
+            'common/fallback-lang',
+            this.getJsonFallbackLang(),
+        );
     }
 
-    getJsonFallbackLang(): CoreLang
-    {
+    getJsonFallbackLang(): CoreLang {
         const fallbackLangIso6392 = this.configService.get('APP_FALLBACK_LANG');
-        return coreLangs.find(lang => lang.iso6392 === fallbackLangIso6392);
+        return coreLangs.find((lang) => lang.iso6392 === fallbackLangIso6392);
     }
 
-    onApplicationBootstrap(): void
-    {
+    onApplicationBootstrap(): void {
         this.init();
     }
 }

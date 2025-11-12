@@ -9,8 +9,8 @@ export class ToolsKeyValueValue extends StringValueObject {
             Object.assign(
                 {
                     name: 'ToolsKeyValueValue',
-                    nullable: false,
-                    undefinable: false,
+                    nullable: true,
+                    undefinable: true,
                 },
                 validationRules,
             ),

@@ -1,11 +1,15 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-    selector       : 'au-iam',
-    templateUrl    : './iam.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'au-iam',
+    templateUrl: './iam.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports        : [RouterOutlet],
+    imports: [RouterOutlet],
 })
-export class IamComponent { }
+export class IamComponent {}

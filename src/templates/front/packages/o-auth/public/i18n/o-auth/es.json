@@ -31,6 +31,7 @@
     "RefreshTokens": "RefreshTokens",
     "RoleIds": "RoleIds",
     "Roles": "Roles",
+    "RowId": "RowId",
     "Scope": "Scope",
     "ScopeOptions": "Opciones de Scope",
     "Scopes": "Scopes",

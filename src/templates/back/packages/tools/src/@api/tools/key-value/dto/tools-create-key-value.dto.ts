@@ -25,7 +25,13 @@ export class ToolsCreateKeyValueDto {
         type: String,
         description: 'value [input here api field description]',
     })
-    value: string;
+    value?: string;
+
+    @ApiProperty({
+        type: Boolean,
+        description: 'isCached [input here api field description]',
+    })
+    isCached: boolean;
 
     @ApiProperty({
         type: Boolean,

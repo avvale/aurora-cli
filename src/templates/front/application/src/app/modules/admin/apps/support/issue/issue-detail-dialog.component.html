@@ -1,0 +1,191 @@
+<div class="relative inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-2 border-b bg-card dark:bg-transparent">
+
+        <div class="flex-1 min-w-0">
+            <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
+            <au-title>
+                <mat-icon
+                    svgIcon="bug_report"
+                    class="icon-size-8 mr-2"
+                >
+                </mat-icon>
+                {{ t('support.Issue') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            @if (currentViewAction.id === 'support::issue.detail.edit')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    class="ml-3"
+                    form="supportIssueFormDetail"
+                    color="accent"
+                    [disabled]="fg.pristine || ('support::issue.detail.update' | getSpinnerFlag | async)"
+                >
+                    @if ('support::issue.detail.update' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:edit"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Update') }}
+                </button>
+            }
+
+            @if (currentViewAction.id === 'support::issue.detail.new')
+            {
+                <button
+                    mat-flat-button
+                    type="submit"
+                    form="supportIssueFormDetail"
+                    class="ml-3"
+                    color="accent"
+                    [disabled]="fg.pristine || ('support::issue.detail.create' | getSpinnerFlag | async)"
+                >
+                    @if ('support::issue.detail.create' | getSpinnerFlag | async)
+                    {
+                        <mat-icon>
+                            <mat-spinner diameter="20"></mat-spinner>
+                        </mat-icon>
+                    }
+                    @else
+                    {
+                        <mat-icon
+                            svgIcon="mat_solid:save"
+                            class="icon-size-5 mr-2"
+                        >
+                        </mat-icon>
+                    }
+                    {{ t('Create') }}
+                </button>
+            }
+        </div>
+        <!-- / Actions -->
+
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div class="flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto" cdkScrollable>
+
+        <div class="form-card">
+
+            <form
+                id="supportIssueFormDetail"
+                novalidate
+                [formGroup]="fg"
+                (ngSubmit)="onSubmit($event)"
+            >
+
+                <div class="layout__container">
+
+                    <div class="col-12 pb-3">
+                        <div class="flex flex-wrap items-center gap-3">
+                            @if (recordingState() === 'idle')
+                            {
+                                <div class="flex flex-col items-start">
+                                    <button
+                                        mat-flat-button
+                                        type="button"
+                                        color="primary"
+                                        (click)="startScreenRecording()"
+                                    >
+                                        <mat-icon class="icon-size-5 mr-2">videocam</mat-icon>
+                                        Grabar pantalla
+                                    </button>
+                                    <div class="mt-1 text-xs text-gray-400">
+                                        Inicie grabación de pantalla para adjuntarla a la incidencia.
+                                    </div>
+                                </div>
+                            }
+
+                            @if (recordingState() === 'recording')
+                            {
+                                <button
+                                    mat-flat-button
+                                    type="button"
+                                    color="warn"
+                                    (click)="stopScreenRecording()"
+                                >
+                                    <mat-icon class="icon-size-5 mr-2">stop</mat-icon>
+                                    Detener grabación
+                                </button>
+                            }
+
+                            @if (recordingState() === 'recorded')
+                            {
+                                <button
+                                    mat-stroked-button
+                                    type="button"
+                                    color="primary"
+                                    (click)="openPreviewDialog()"
+                                    [disabled]="isPlaybackVisible()"
+                                >
+                                    <mat-icon class="icon-size-5 mr-2">play_arrow</mat-icon>
+                                    Reproducir grabación
+                                </button>
+
+                                <button
+                                    mat-stroked-button
+                                    type="button"
+                                    color="warn"
+                                    (click)="deleteRecording()"
+                                >
+                                    <mat-icon class="icon-size-5 mr-2">delete</mat-icon>
+                                    Borrar grabación
+                                </button>
+
+                            }
+                        </div>
+                    </div>
+
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('support.Subject') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="subject"
+                            maxlength="510"
+                            required
+                        >
+                        <mat-error>{{ formErrors?.subject | async }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('support.Description') }}</mat-label>
+                        <textarea
+                            matInput
+                            formControlName="description"
+                        >
+                        </textarea>
+                        <mat-error>{{ formErrors?.description | async }}</mat-error>
+                    </mat-form-field>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <!-- / Main -->
+
+</div>

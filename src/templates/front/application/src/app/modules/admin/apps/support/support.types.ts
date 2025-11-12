@@ -1,4 +1,4 @@
-import { IamAccount } from "@apps/iam";
+import { IamAccount } from '@apps/iam';
 
 export interface SupportIssue {
     id: string;
@@ -67,3 +67,6 @@ export interface SupportUpdateIssues {
     video?: any;
     meta?: any;
 }
+
+export type SupportIssueRecordingState = 'idle' | 'recording' | 'paused' | 'recorded';
+export type SupportIssueDisplaySurface = 'tab' | 'window' | 'screen' | 'any';

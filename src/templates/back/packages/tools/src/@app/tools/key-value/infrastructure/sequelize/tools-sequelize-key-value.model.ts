@@ -177,10 +177,18 @@ export class ToolsKeyValueModel extends Model<ToolsKeyValueModel> {
 
     @Column({
         field: 'value',
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.TEXT,
     })
     value: string;
+
+    @Column({
+        field: 'isCached',
+        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    })
+    isCached: boolean;
 
     @Column({
         field: 'isActive',

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     name
     isMaster
     permissions {
@@ -15,14 +16,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query IamPaginateRoles (
+    query IamPaginateRoles(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: iamPaginateRoles (
-            query: $query
-            constraint: $constraint
-        ) {
+        pagination: iamPaginateRoles(query: $query, constraint: $constraint) {
             total
             rows
             count
@@ -31,14 +29,8 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query IamGetRoles (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: iamGetRoles (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamGetRoles($query: QueryStatement, $constraint: QueryStatement) {
+        objects: iamGetRoles(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -46,14 +38,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindRoleById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: iamFindRoleById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query IamFindRoleById($id: ID, $constraint: QueryStatement) {
+        object: iamFindRoleById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -61,7 +47,7 @@ export const findByIdQuery = gql`
 `;
 
 export const findByIdWithRelationsQuery = gql`
-    query IamFindRoleById (
+    query IamFindRoleByIdWithRelations (
         $id: ID
         $constraint: QueryStatement
         $queryPaginatePermissionsRoles: QueryStatement
@@ -104,14 +90,8 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindRole (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: iamFindRole (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamFindRole($query: QueryStatement, $constraint: QueryStatement) {
+        object: iamFindRole(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -131,12 +111,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation IamCreateRoles (
-        $payload: [IamCreateRoleInput]!
-    ) {
-        iamCreateRoles (
-            payload: $payload
-        )
+    mutation IamCreateRoles($payload: [IamCreateRoleInput]!) {
+        iamCreateRoles(payload: $payload)
     }
 `;
 
@@ -200,10 +176,10 @@ export const deleteMutation = gql`
 
 // Mutation additionalApis
 export const inheritPermissionsRoleRoleMutation = gql`
-    mutation IamInheritPermissionsRoleRole (
+    mutation IamInheritPermissionsRoleRole(
         $payload: IamInheritRoleInput!
     ) {
-        iamInheritPermissionsRoleRole (
+        iamInheritPermissionsRoleRole(
             payload: $payload
         )
     }

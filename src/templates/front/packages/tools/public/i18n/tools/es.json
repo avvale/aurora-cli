@@ -7,6 +7,7 @@
     "InstallScript": "Instalar Script",
     "InstallWarning": "Va a realizar la instalación del script {{ name }}. Asegúrese de que comprende las implicaciones antes de proceder.",
     "IsActive": "Activo",
+    "IsCached": "Cacheado",
     "IsExecuted": "Ejecutado",
     "IsUpdated": "Actualizado",
     "Key": "Clave",
@@ -22,6 +23,7 @@
         "TRIGGER": "Trigger"
     },
     "Procedures": "Procedimientos",
+    "RowId": "RowId",
     "Run": "Ejecutar",
     "RunScripts": "Ejecutar Scripts",
     "RunScriptsDisclaimer": "Esto ejecutará los scripts inferiores o iguales a la versión {{ version }} no instalados o actualizados en el orden en que están definidos. Asegúrese de comprender las implicaciones antes de continuar.",

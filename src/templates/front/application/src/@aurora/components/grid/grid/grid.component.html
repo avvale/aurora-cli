@@ -666,7 +666,7 @@
     </div>
 
     <div class="grid-footer">
-        @if (hasPagination)
+        @if (hasPagination())
         {
             <mat-paginator
                 showFirstLastButtons
@@ -676,7 +676,7 @@
                 [length]="gridData?.count"
                 [pageIndex]="gridState?.page?.pageIndex"
                 [pageSize]="gridState?.page?.pageSize"
-                [pageSizeOptions]="[10, 20, 50, 100]"
+                [pageSizeOptions]="pageSizeOptions()"
             >
             </mat-paginator>
         }

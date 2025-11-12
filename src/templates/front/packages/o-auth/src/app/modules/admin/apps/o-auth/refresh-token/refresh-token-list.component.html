@@ -1,44 +1,44 @@
-<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden" *transloco="let t">
-
+<div
+    *transloco="let t"
+    class="absolute inset-0 flex min-w-0 flex-col overflow-hidden"
+>
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
-
-        <div class="flex-1 min-w-0">
+    <div
+        class="bg-card flex flex-0 flex-col border-b p-6 sm:flex-row sm:items-center sm:justify-between sm:px-10 sm:py-4 dark:bg-transparent"
+    >
+        <div class="min-w-0 flex-1">
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
+                    class="mr-2 icon-size-8"
                     svgIcon="mat_solid:password"
-                    class="icon-size-8 mr-2"
-                >
-                </mat-icon>
+                ></mat-icon>
                 {{ t('oAuth.RefreshToken') }}
             </au-title>
         </div>
 
         <!-- Actions -->
-        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+        <div class="mt-6 flex flex-shrink-0 items-center sm:ml-4 sm:mt-0">
             <button
-                mat-flat-button
                 class="ml-3"
-                color="accent"
                 [routerLink]="'new'"
+                mat-flat-button
+                color="accent"
             >
                 <mat-icon
+                    class="mr-2 icon-size-5"
                     svgIcon="mat_solid:password"
-                    class="icon-size-5 mr-2"
-                >
-                </mat-icon>
+                ></mat-icon>
                 {{ t('New.M') }}
             </button>
         </div>
         <!-- / Actions -->
-
     </div>
     <!-- / Header -->
 
     <!-- Main -->
     <div
-        class="flex flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto"
+        class="flex flex-auto overflow-y-auto px-6 pt-6 sm:px-10 sm:pt-10"
         cdkScrollable
     >
         <!-- Grid -->
@@ -49,58 +49,24 @@
             [id]="gridId"
             [originColumnsConfig]="originColumnsConfig"
         >
-            <au-grid-translations
-                [for]="gridId"
-                [actions]="t('Actions')"
-                [AND]="t('AND')"
-                [clearFilters]="t('ClearFilters')"
-                [clickAndDragInfo]="t('ClickAndDragInfo')"
-                [columns]="t('Columns')"
-                [field]="t('Field')"
-                [filter]="t('Filter')"
-                [operator]="t('Operator')"
-                [OR]="t('OR')"
-                [pleaseSelectField]="t('PleaseSelectField')"
-                [resetColumnsConfig]="t('ResetColumnsConfig')"
-                [translations]="t('Translations')"
-                [value]="t('Value')"
-                [paginator]="{
-                    firstPageLabel: t('Paginator.FirstPageLabel'),
-                    itemsPerPageLabel: t('Paginator.ItemsPerPageLabel'),
-                    lastPageLabel: t('Paginator.LastPageLabel'),
-                    nextPageLabel: t('Paginator.NextPageLabel'),
-                    ofLabel: t('Paginator.OfLabel'),
-                    previousPageLabel: t('Paginator.PreviousPageLabel')
-                }"
-                [operators]="{
-                    contains: t('Operators.Contains'),
-                    containsAny: t('Operators.ContainsAny'),
-                    endsWith: t('Operators.EndsWith'),
-                    equals: t('Operators.Equals'),
-                    greaterThan: t('Operators.GreaterThan'),
-                    greaterThanEqual: t('Operators.GreaterThanEqual'),
-                    lessThan: t('Operators.LessThan'),
-                    lessThanEqual: t('Operators.LessThanEqual'),
-                    mustContain: t('Operators.MustContain'),
-                    notEquals: t('Operators.NotEquals'),
-                    startsWith: t('Operators.StartsWith')
-                }"
-                [actionsMenu]="{
-                    edit: t('Edit'),
-                    delete: t('Delete')
-                }"
-            >
-                <au-grid-column-translation
-                    *ngFor="let columnConfig of originColumnsConfig"
-                    [field]="columnConfig.field"
-                >
-                    {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
-                </au-grid-column-translation>
+            <au-grid-translations [for]="gridId">
+                @for (
+                    columnConfig of originColumnsConfig;
+                    track columnConfig.field
+                ) {
+                    <au-grid-column-translation [field]="columnConfig.field">
+                        {{
+                            t(
+                                columnConfig.translation
+                                    ? columnConfig.translation
+                                    : columnConfig.field.toPascalCase()
+                            )
+                        }}
+                    </au-grid-column-translation>
+                }
             </au-grid-translations>
         </au-grid>
         <!-- / Grid -->
-
     </div>
     <!-- / Main -->
-
 </div>

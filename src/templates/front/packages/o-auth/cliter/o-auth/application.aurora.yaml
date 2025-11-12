@@ -14,6 +14,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: code
     type: varchar
     maxLength: 64
@@ -52,17 +57,33 @@ aggregateProperties:
           - name: applicationId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: OAuthApplication
-            modulePath: o-auth/application
+            relationship:
+              type: many-to-one
+              aggregateName: OAuthApplication
+              modulePath: o-auth/application
+              field: application
+              avoidConstraint: true
           - name: clientId
             type: id
             primaryKey: true
-            length: 36
             nullable: false
-            aggregateName: OAuthClient
-            modulePath: o-auth/client
+            relationship:
+              type: many-to-one
+              aggregateName: OAuthClient
+              modulePath: o-auth/client
+              field: client
+              avoidConstraint: true
+        excludedOperations:
+          - count
+          - getRaw
+          - max
+          - min
+          - rawSql
+          - sum
+          - update
+          - updateAndIncrement
+          - upsert
   - name: createdAt
     type: timestamp
     nullable: true
@@ -72,3 +93,13 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

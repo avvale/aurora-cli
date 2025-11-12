@@ -1,13 +1,28 @@
-import { ApplicationService } from '../application/application.service';
-import { OAuthApplication, OAuthClientGrantType, OAuthScope } from '../o-auth.types';
-import { KeyValuePipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { KeyValuePipe } from '@angular/common';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    signal,
+    ViewEncapsulation,
+    WritableSignal,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { OAuthApplication, OAuthClient, OAuthScope } from '@apps/o-auth';
+import { ApplicationService } from '@apps/o-auth/application';
 import { ClientService } from '@apps/o-auth/client';
-import { OAuthClient } from '@apps/o-auth/o-auth.types';
-import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
+import {
+    Action,
+    Crumb,
+    defaultDetailImports,
+    log,
+    mapActions,
+    OAuthClientGrantType,
+    SnackBarInvalidFormComponent,
+    uuid,
+    ViewDetailComponent,
+} from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { ScopeService } from '../scope';
 
@@ -16,14 +31,15 @@ import { ScopeService } from '../scope';
     templateUrl: './client-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultDetailImports,
-        MatCheckboxModule, MatSelectModule, NgForOf,
+        MatCheckboxModule,
+        MatSelectModule,
         KeyValuePipe,
     ],
 })
-export class ClientDetailComponent extends ViewDetailComponent
-{
+export class ClientDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     scopes$: Observable<OAuthScope[]>;
     oAuthClientGrantType = OAuthClientGrantType;
@@ -32,7 +48,7 @@ export class ClientDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: OAuthClient;
+    managedObject: WritableSignal<OAuthClient> = signal(null);
 
     // relationships
     applications$: Observable<OAuthApplication[]>;
@@ -40,7 +56,7 @@ export class ClientDetailComponent extends ViewDetailComponent
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'oAuth.Clients', routerLink: ['/o-auth/client']},
+        { translation: 'oAuth.Clients', routerLink: ['/o-auth/client'] },
         { translation: 'oAuth.Client' },
     ];
 
@@ -48,69 +64,67 @@ export class ClientDetailComponent extends ViewDetailComponent
         private readonly applicationService: ApplicationService,
         private readonly clientService: ClientService,
         private readonly scopeService: ScopeService,
-    )
-    {
+    ) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    {
+    init(): void {
         /**/
         this.applications$ = this.applicationService.applications$;
         this.scopes$ = this.scopeService.scopes$;
     }
 
-    onSubmit($event): void
-    {
+    onSubmit($event): void {
         // we have two nested forms, we check that the submit comes from the button
         // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
+        if (
+            $event.submitter.getAttribute('form') !==
+            $event.submitter.form.getAttribute('id')
+        ) {
             $event.preventDefault();
             $event.stopPropagation();
             return;
         }
 
         // manage validations before execute actions
-        if (this.fg.invalid)
-        {
+        if (this.fg.invalid) {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
 
-            this.snackBar.openFromComponent(
-                SnackBarInvalidFormComponent,
-                {
-                    data: {
-                        message   : `${this.translocoService.translate('InvalidForm')}`,
-                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
-                    },
-                    panelClass      : 'error-snackbar',
-                    verticalPosition: 'top',
-                    duration        : 10000,
+            this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+                data: {
+                    message: `${this.translocoService.translate('InvalidForm')}`,
+                    textButton: `${this.translocoService.translate('InvalidFormOk')}`,
                 },
-            );
+                panelClass: 'error-snackbar',
+                verticalPosition: 'top',
+                duration: 10000,
+            });
             return;
         }
 
         this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'oAuth::client.detail.new' : 'oAuth::client.detail.create',
-                    'oAuth::client.detail.edit': 'oAuth::client.detail.update',
-                },
-            ),
+            id: mapActions(this.currentViewAction.id, {
+                'oAuth::client.detail.new': 'oAuth::client.detail.create',
+                'oAuth::client.detail.edit': 'oAuth::client.detail.update',
+            }),
             isViewAction: false,
         });
     }
 
-    createForm(): void
-    {
+    createForm(): void {
         /* eslint-disable key-spacing */
         this.fg = this.fb.group({
-            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            id: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
             grantType: [null, [Validators.required]],
             name: ['', [Validators.required, Validators.maxLength(128)]],
             secret: ['', [Validators.required, Validators.maxLength(128)]],
@@ -126,38 +140,38 @@ export class ClientDetailComponent extends ViewDetailComponent
         /* eslint-enable key-spacing */
     }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'oAuth::client.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'oAuth::client.detail.edit':
-                this.clientService
-                    .client$
+                this.clientService.client$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
-                        this.managedObject = item;
+                    .subscribe((item) => {
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
 
                         // set many to many applications associations
-                        this.fg.get('applicationIds').setValue(item.applications.map(application => application.id));
+                        this.fg
+                            .get('applicationIds')
+                            .setValue(
+                                item.applications.map(
+                                    (application) => application.id,
+                                ),
+                            );
                     });
                 break;
 
             case 'oAuth::client.detail.create':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.clientService
-                            .create<OAuthClient>({
-                                object: this.fg.value,
-                            }),
+                        this.clientService.create<OAuthClient>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -165,26 +179,22 @@ export class ClientDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['o-auth/client']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'oAuth::client.detail.update':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.clientService
-                            .updateById<OAuthClient>({
-                                object: this.fg.value,
-                            }),
+                        this.clientService.updateById<OAuthClient>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -192,18 +202,16 @@ export class ClientDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['o-auth/client']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
         }
     }
 }

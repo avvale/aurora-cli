@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     clientId
     accountId
     token
@@ -19,11 +20,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query OAuthPaginateAccessTokens (
+    query OAuthPaginateAccessTokens(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: oAuthPaginateAccessTokens (
+        pagination: oAuthPaginateAccessTokens(
             query: $query
             constraint: $constraint
         ) {
@@ -35,14 +36,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query OAuthGetAccessTokens (
+    query OAuthGetAccessTokens(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: oAuthGetAccessTokens (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: oAuthGetAccessTokens(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -50,14 +48,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query OAuthFindAccessTokenById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: oAuthFindAccessTokenById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query OAuthFindAccessTokenById($id: ID, $constraint: QueryStatement) {
+        object: oAuthFindAccessTokenById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -65,14 +57,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query OAuthFindAccessToken (
+    query OAuthFindAccessToken(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: oAuthFindAccessToken (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: oAuthFindAccessToken(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -88,6 +77,12 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation OAuthCreateAccessTokens($payload: [OAuthCreateAccessTokenInput]!) {
+        oAuthCreateAccessTokens(payload: $payload)
     }
 `;
 

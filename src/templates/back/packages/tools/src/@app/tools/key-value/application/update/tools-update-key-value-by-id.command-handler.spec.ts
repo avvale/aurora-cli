@@ -44,6 +44,7 @@ describe('ToolsUpdateKeyValueByIdCommandHandler', () => {
                             key: toolsMockKeyValueData[0].key,
                             type: toolsMockKeyValueData[0].type,
                             value: toolsMockKeyValueData[0].value,
+                            isCached: toolsMockKeyValueData[0].isCached,
                             isActive: toolsMockKeyValueData[0].isActive,
                             description: toolsMockKeyValueData[0].description,
                         },

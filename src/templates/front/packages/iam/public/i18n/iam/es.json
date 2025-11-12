@@ -55,6 +55,7 @@
     "RoleIds": "RoleIds",
     "Roles": "Roles",
     "Root": "Root",
+    "RowId": "RowId",
     "Scopes": "Scopes",
     "SendEmailForgotPasswordError": "¡Corre o usuario no encontrado! ¿Está seguro de que ya es miembro?",
     "SendEmailForgotPasswordSuccessful": "¡Restablecimiento de contraseña enviado! Recibirás un correo electrónico si estás registrado en nuestro sistema",

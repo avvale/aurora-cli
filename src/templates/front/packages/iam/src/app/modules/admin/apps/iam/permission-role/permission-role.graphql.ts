@@ -10,11 +10,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query IamPaginatePermissionsRoles (
+    query IamPaginatePermissionsRoles(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: iamPaginatePermissionsRoles (
+        pagination: iamPaginatePermissionsRoles(
             query: $query
             constraint: $constraint
         ) {
@@ -26,11 +26,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query IamGetPermissionsRoles (
+    query IamGetPermissionsRoles(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: iamGetPermissionsRoles (
+        objects: iamGetPermissionsRoles(
             query: $query
             constraint: $constraint
         ) {
@@ -41,12 +41,12 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindPermissionRoleById (
+    query IamFindPermissionRoleById(
         $permissionId: ID
         $roleId: ID
         $constraint: QueryStatement
     ) {
-        object: iamFindPermissionRoleById (
+        object: iamFindPermissionRoleById(
             permissionId: $permissionId
             roleId: $roleId
             constraint: $constraint
@@ -60,14 +60,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindPermissionRole (
+    query IamFindPermissionRole(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: iamFindPermissionRole (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: iamFindPermissionRole(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -87,12 +84,10 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation IamCreatePermissionsRoles (
+    mutation IamCreatePermissionsRoles(
         $payload: [IamCreatePermissionRoleInput]!
     ) {
-        iamCreatePermissionsRoles (
-            payload: $payload
-        )
+        iamCreatePermissionsRoles(payload: $payload)
     }
 `;
 

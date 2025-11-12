@@ -11,6 +11,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: accountId
     type: id
     nullable: false
@@ -73,6 +78,14 @@ additionalApis:
   - path: iam/user/reset-password
     resolverType: mutation
     httpMethod: post
+excludedOperations:
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert
 excludedFiles:
   - src/@api/iam/user/handlers/iam-create-user.handler.spec.ts
   - src/@api/iam/user/handlers/iam-create-user.handler.ts

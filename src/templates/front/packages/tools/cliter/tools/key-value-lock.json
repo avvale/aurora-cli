@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/tools/tools.component.ts",
-            "integrity": "sha1:66dd95180dca167c44eaa08806590f37ced9d24b"
+            "integrity": "sha1:9cc858f808567bfb6332e5b955c3d3f4aef01ceb"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value-detail.component.html",
-            "integrity": "sha1:18cca6327bb21cf760a2b4556052d3838b86eafd"
+            "integrity": "sha1:df8be424e7c7cd847400874ac8ab9b2fcd2b0c22"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value-detail.component.ts",
-            "integrity": "sha1:cee3766618a1076e8c1ab053833d24725449367f"
+            "integrity": "sha1:3c7dfd2c35462b8354e26bdb425d88eb259d1fab"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value-list.component.html",
-            "integrity": "sha1:13b87f75abd64b0296194f92302ab5c29176e81c"
+            "integrity": "sha1:274f5eb3211f75edf0aa14a0021e316ee0402070"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value-list.component.ts",
-            "integrity": "sha1:1ec035ab3ec70aef8bad2d57aa439b369d47c28c"
+            "integrity": "sha1:7b5faf8156159b21a19e8c848c0235bcd2ec0a8a"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value.columns-config.ts",
-            "integrity": "sha1:e12858467a5e08bbd109c5d53700d5da6aa79f7f"
+            "integrity": "sha1:c9a20330a42f41e209febd1b878d7c3062b7f3f3"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value.graphql.ts",
-            "integrity": "sha1:c1c7d918b98454efd586fafc7492daaad18c12ba"
+            "integrity": "sha1:075559a13738d3662e72134629a8b9acc93736fb"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value.resolvers.ts",
-            "integrity": "sha1:eca7f175ba1778cfd61b964edbe85470857e8fcf"
+            "integrity": "sha1:0c07449330189d66d41d59316cc6e3efc95d8146"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value.service.ts",
-            "integrity": "sha1:606e6d100c0c250981ec4a4c7c110d8dd0aca587"
+            "integrity": "sha1:ef6f7cd2f0e80d9baf176e5e4d5f1c1b1cd96c86"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/index.ts",

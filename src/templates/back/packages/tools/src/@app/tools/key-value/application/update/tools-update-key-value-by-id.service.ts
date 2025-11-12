@@ -3,6 +3,7 @@ import {
     ToolsKeyValueDescription,
     ToolsKeyValueId,
     ToolsKeyValueIsActive,
+    ToolsKeyValueIsCached,
     ToolsKeyValueKey,
     ToolsKeyValueType,
     ToolsKeyValueUpdatedAt,
@@ -25,6 +26,7 @@ export class ToolsUpdateKeyValueByIdService {
             key?: ToolsKeyValueKey;
             type?: ToolsKeyValueType;
             value?: ToolsKeyValueValue;
+            isCached?: ToolsKeyValueIsCached;
             isActive?: ToolsKeyValueIsActive;
             description?: ToolsKeyValueDescription;
         },
@@ -38,6 +40,7 @@ export class ToolsUpdateKeyValueByIdService {
             payload.key,
             payload.type,
             payload.value,
+            payload.isCached,
             payload.isActive,
             payload.description,
             null, // createdAt

@@ -1,5 +1,11 @@
-import { KeyValuePipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, WritableSignal, signal } from '@angular/core';
+import { KeyValuePipe } from '@angular/common';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+    WritableSignal,
+    signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -10,10 +16,31 @@ import { AccountService } from '@apps/iam/account';
 import { IamAccount } from '@apps/iam/iam.types';
 import { ClientService } from '@apps/o-auth/client';
 import { OAuthClient, OAuthScope } from '@apps/o-auth/o-auth.types';
-import { Action, CoreGetLangsService, CoreLang, Crumb, MatPasswordStrengthModule, OAuthClientGrantType, SelectSearchService, SnackBarInvalidFormComponent, ViewDetailComponent, createPassword, defaultDetailImports, log, mapActions, uuid } from '@aurora';
+import {
+    Action,
+    CoreGetLangsService,
+    CoreLang,
+    Crumb,
+    MatPasswordStrengthModule,
+    OAuthClientGrantType,
+    SelectSearchService,
+    SnackBarInvalidFormComponent,
+    ViewDetailComponent,
+    createPassword,
+    defaultDetailImports,
+    log,
+    mapActions,
+    uuid,
+} from '@aurora';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { BehaviorSubject, Observable, ReplaySubject, lastValueFrom, takeUntil } from 'rxjs';
+import {
+    BehaviorSubject,
+    Observable,
+    ReplaySubject,
+    lastValueFrom,
+    takeUntil,
+} from 'rxjs';
 import { IamAccountType, IamRole, IamTag, IamTenant } from '../iam.types';
 import { RoleService } from '../role';
 import { uniqueEmailValidator, uniqueUsernameValidator } from '../shared';
@@ -25,25 +52,32 @@ import { TenantService } from '../tenant/tenant.service';
     templateUrl: './account-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultDetailImports,
-        MatCheckboxModule, MatSelectModule, NgForOf,
-        KeyValuePipe, MatToolbarModule, NgxMatSelectSearchModule,
+        MatCheckboxModule,
+        MatSelectModule,
+        KeyValuePipe,
+        MatToolbarModule,
+        NgxMatSelectSearchModule,
         MatPasswordStrengthModule,
     ],
 })
-export class AccountDetailComponent extends ViewDetailComponent
-{
+export class AccountDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     iamAccountType = IamAccountType;
     roles$: Observable<IamRole[]>;
     tags$: Observable<IamTag[]>;
     clients$: Observable<OAuthClient[]>;
     originClients: OAuthClient[];
-    scopeOptions$: BehaviorSubject<OAuthScope[]> = new BehaviorSubject<OAuthScope[]>([]);
+    scopeOptions$: BehaviorSubject<OAuthScope[]> = new BehaviorSubject<
+        OAuthScope[]
+    >([]);
     langs$: Observable<CoreLang[]>;
     tenantFilterCtrl: FormControl = new FormControl<string>('');
-    filteredTenants$: ReplaySubject<IamTenant[]> = new ReplaySubject<IamTenant[]>(1);
+    filteredTenants$: ReplaySubject<IamTenant[]> = new ReplaySubject<
+        IamTenant[]
+    >(1);
     showTenantsInput: WritableSignal<boolean> = signal(true);
     usernameStatus: WritableSignal<string> = signal('VALID');
     emailStatus: WritableSignal<string> = signal('VALID');
@@ -60,22 +94,19 @@ export class AccountDetailComponent extends ViewDetailComponent
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'iam.Accounts', routerLink: ['/iam/account']},
+        { translation: 'iam.Accounts', routerLink: ['/iam/account'] },
         { translation: 'iam.Account' },
     ];
 
-    get user(): FormGroup
-    {
+    get user(): FormGroup {
         return this.fg.get('user') as FormGroup;
     }
 
-    get email(): FormControl
-    {
+    get email(): FormControl {
         return this.fg.get('email') as FormControl;
     }
 
-    get username(): FormControl
-    {
+    get username(): FormControl {
         return this.fg.get('username') as FormControl;
     }
 
@@ -87,18 +118,18 @@ export class AccountDetailComponent extends ViewDetailComponent
         private readonly clientService: ClientService,
         private readonly coreGetLangsService: CoreGetLangsService,
         private readonly selectSearchService: SelectSearchService,
-    )
-    {
+    ) {
         super();
 
         // tenants
-        this.initTenantsFilter(this.activatedRoute.snapshot.data.data.iamGetTenants);
+        this.initTenantsFilter(
+            this.activatedRoute.snapshot.data.data.iamGetTenants,
+        );
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    {
+    init(): void {
         this.tenants$ = this.tenantService.tenants$;
         this.roles$ = this.roleService.roles$;
         this.tags$ = this.tagService.tags$;
@@ -109,19 +140,17 @@ export class AccountDetailComponent extends ViewDetailComponent
         this.originClients = this.clientService.clientsSubject$.value;
 
         // subscribe to async validators status
-        this.email
-            .statusChanges
-            .subscribe(status => this.emailStatus.set(status));
+        this.email.statusChanges.subscribe((status) =>
+            this.emailStatus.set(status),
+        );
 
-        this.username
-            .statusChanges
-            .subscribe(status => this.usernameStatus.set(status));
+        this.username.statusChanges.subscribe((status) =>
+            this.usernameStatus.set(status),
+        );
     }
 
-    initTenantsFilter(tenants: IamTenant[]): void
-    {
-        if (tenants.length === 1)
-        {
+    initTenantsFilter(tenants: IamTenant[]): void {
+        if (tenants.length === 1) {
             this.fg.get('tenantIds').setValue([tenants[0].id]);
             this.showTenantsInput.set(false);
         }
@@ -130,26 +159,24 @@ export class AccountDetailComponent extends ViewDetailComponent
         this.filteredTenants$.next(tenants);
 
         // listen for country search field value changes
-        this.tenantFilterCtrl
-            .valueChanges
+        this.tenantFilterCtrl.valueChanges
             .pipe(takeUntilDestroyed())
-            .subscribe(async () =>
-            {
-                this.selectSearchService
-                    .filterSelect<IamTenant>(
-                        this.tenantFilterCtrl,
-                        tenants,
-                        this.filteredTenants$,
-                    );
+            .subscribe(async () => {
+                this.selectSearchService.filterSelect<IamTenant>(
+                    this.tenantFilterCtrl,
+                    tenants,
+                    this.filteredTenants$,
+                );
             });
     }
 
-    onSubmit($event): void
-    {
+    onSubmit($event): void {
         // we have two nested forms, we check that the submit comes from the button
         // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
+        if (
+            $event.submitter.getAttribute('form') !==
+            $event.submitter.form.getAttribute('id')
+        ) {
             $event.preventDefault();
             $event.stopPropagation();
             return;
@@ -160,23 +187,19 @@ export class AccountDetailComponent extends ViewDetailComponent
         this.fg.get('user.repeatPassword')?.updateValueAndValidity();
 
         // manage validations before execute actions
-        if (this.fg.invalid)
-        {
+        if (this.fg.invalid) {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
 
-            this.snackBar.openFromComponent(
-                SnackBarInvalidFormComponent,
-                {
-                    data: {
-                        message: `${this.translocoService.translate('InvalidForm')}`,
-                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
-                    },
-                    panelClass: 'error-snackbar',
-                    verticalPosition: 'top',
-                    duration: 10000,
+            this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+                data: {
+                    message: `${this.translocoService.translate('InvalidForm')}`,
+                    textButton: `${this.translocoService.translate('InvalidFormOk')}`,
                 },
-            );
+                panelClass: 'error-snackbar',
+                verticalPosition: 'top',
+                duration: 10000,
+            });
             return;
         }
 
@@ -184,32 +207,44 @@ export class AccountDetailComponent extends ViewDetailComponent
         this.user.removeControl('repeatPassword');
 
         this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'iam::account.detail.new' : 'iam::account.detail.create',
-                    'iam::account.detail.edit': 'iam::account.detail.update',
-                },
-            ),
+            id: mapActions(this.currentViewAction.id, {
+                'iam::account.detail.new': 'iam::account.detail.create',
+                'iam::account.detail.edit': 'iam::account.detail.update',
+            }),
             isViewAction: false,
         });
     }
 
-    createForm(): void
-    {
+    createForm(): void {
         /* eslint-disable key-spacing */
         this.fg = this.fb.group({
-            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            id: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
             type: [null, [Validators.required]],
             code: ['', [Validators.maxLength(64)]],
-            email: ['', {
-                validators: [Validators.email, Validators.maxLength(128)],
-                updateOn: 'blur',
-            }],
-            username: ['', {
-                validators: [Validators.required, Validators.maxLength(128)],
-                updateOn: 'blur',
-            }],
+            email: [
+                '',
+                {
+                    validators: [Validators.email, Validators.maxLength(128)],
+                    updateOn: 'blur',
+                },
+            ],
+            username: [
+                '',
+                {
+                    validators: [
+                        Validators.required,
+                        Validators.maxLength(128),
+                    ],
+                    updateOn: 'blur',
+                },
+            ],
             isActive: true,
             clientId: null,
             tags: [],
@@ -230,16 +265,15 @@ export class AccountDetailComponent extends ViewDetailComponent
         /* eslint-enable key-spacing */
     }
 
-    handleCreatePassword(): void
-    {
+    handleCreatePassword(): void {
         const password = createPassword({
-            length   : 10,
-            numbers  : true,
-            symbols  : true,
+            length: 10,
+            numbers: true,
+            symbols: true,
             lowercase: true,
             uppercase: true,
-            exclude  : '"\'~`^()-_=+[{]}\\|;:,<.>/',
-            strict   : true,
+            exclude: '"\'~`^()-_=+[{]}\\|;:,<.>/',
+            strict: true,
         });
 
         this.fg.get('user.password').setValue(password);
@@ -251,19 +285,18 @@ export class AccountDetailComponent extends ViewDetailComponent
     handleChangeClient(
         $event: MatOptionSelectionChange,
         client: OAuthClient,
-    ): void
-    {
+    ): void {
         if ($event.isUserInput) this.scopeOptions$.next(client.scopeOptions);
     }
 
-    handleChangeAccountType($event): void
-    {
-        switch ($event.value)
-        {
+    handleChangeAccountType($event): void {
+        switch ($event.value) {
             case IamAccountType.USER:
                 this.clientService.clientsSubject$.next(
-                    this.originClients
-                        .filter(client => client.grantType === OAuthClientGrantType.PASSWORD),
+                    this.originClients.filter(
+                        (client) =>
+                            client.grantType === OAuthClientGrantType.PASSWORD,
+                    ),
                 );
 
                 this.setPasswordValidators(IamAccountType.USER);
@@ -271,8 +304,11 @@ export class AccountDetailComponent extends ViewDetailComponent
 
             case IamAccountType.SERVICE:
                 this.clientService.clientsSubject$.next(
-                    this.originClients
-                        .filter(client => client.grantType === OAuthClientGrantType.CLIENT_CREDENTIALS),
+                    this.originClients.filter(
+                        (client) =>
+                            client.grantType ===
+                            OAuthClientGrantType.CLIENT_CREDENTIALS,
+                    ),
                 );
 
                 this.setPasswordValidators(IamAccountType.SERVICE);
@@ -280,38 +316,76 @@ export class AccountDetailComponent extends ViewDetailComponent
         }
     }
 
-    setPasswordValidators(accountType: IamAccountType): void
-    {
-        switch (accountType)
-        {
+    setPasswordValidators(accountType: IamAccountType): void {
+        switch (accountType) {
             case IamAccountType.USER:
-                if (this.currentViewAction.id === 'iam::account.detail.new')
-                {
-                    this.fg.get('user.name').setValidators([Validators.required, Validators.maxLength(255)]);
-                    this.fg.get('user.surname').setValidators([Validators.required, Validators.maxLength(255)]);
+                if (this.currentViewAction.id === 'iam::account.detail.new') {
+                    this.fg
+                        .get('user.name')
+                        .setValidators([
+                            Validators.required,
+                            Validators.maxLength(255),
+                        ]);
+                    this.fg
+                        .get('user.surname')
+                        .setValidators([
+                            Validators.required,
+                            Validators.maxLength(255),
+                        ]);
                     this.fg.get('user.password').setValidators([
                         Validators.required,
                         Validators.minLength(8),
                         Validators.maxLength(30),
                         RxwebValidators.password({
-                            validation: { digit: true, specialCharacter: true, lowerCase: true, upperCase: true },
-                            message   : { digit: 'PasswordDigit', specialCharacter: 'PasswordSpecialCharacter', lowerCase: 'PasswordLowerCase', upperCase: 'PasswordUpperCase' },
+                            validation: {
+                                digit: true,
+                                specialCharacter: true,
+                                lowerCase: true,
+                                upperCase: true,
+                            },
+                            message: {
+                                digit: 'PasswordDigit',
+                                specialCharacter: 'PasswordSpecialCharacter',
+                                lowerCase: 'PasswordLowerCase',
+                                upperCase: 'PasswordUpperCase',
+                            },
                         }),
                     ]);
-                    this.fg.get('user.repeatPassword').setValidators([Validators.required, Validators.maxLength(50), RxwebValidators.compare({ fieldName: 'password' })]);
+                    this.fg
+                        .get('user.repeatPassword')
+                        .setValidators([
+                            Validators.required,
+                            Validators.maxLength(50),
+                            RxwebValidators.compare({ fieldName: 'password' }),
+                        ]);
                     this.fg.get('user.repeatPassword').updateValueAndValidity();
-                }
-                else if (this.currentViewAction.id === 'iam::account.detail.edit')
-                {
+                } else if (
+                    this.currentViewAction.id === 'iam::account.detail.edit'
+                ) {
                     this.fg.get('user.password').setValidators([
                         Validators.minLength(8),
                         Validators.maxLength(30),
                         RxwebValidators.password({
-                            validation: { digit: true, specialCharacter: true, lowerCase: true, upperCase: true },
-                            message   : { digit: 'PasswordDigit', specialCharacter: 'PasswordSpecialCharacter', lowerCase: 'PasswordLowerCase', upperCase: 'PasswordUpperCase' },
+                            validation: {
+                                digit: true,
+                                specialCharacter: true,
+                                lowerCase: true,
+                                upperCase: true,
+                            },
+                            message: {
+                                digit: 'PasswordDigit',
+                                specialCharacter: 'PasswordSpecialCharacter',
+                                lowerCase: 'PasswordLowerCase',
+                                upperCase: 'PasswordUpperCase',
+                            },
                         }),
                     ]);
-                    this.fg.get('user.repeatPassword').setValidators([Validators.maxLength(50), RxwebValidators.compare({ fieldName: 'password' })]);
+                    this.fg
+                        .get('user.repeatPassword')
+                        .setValidators([
+                            Validators.maxLength(50),
+                            RxwebValidators.compare({ fieldName: 'password' }),
+                        ]);
                     this.fg.get('user.repeatPassword').updateValueAndValidity();
                 }
                 break;
@@ -327,11 +401,9 @@ export class AccountDetailComponent extends ViewDetailComponent
         }
     }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'iam::account.detail.new':
                 this.fg.get('id').setValue(uuid());
@@ -346,11 +418,9 @@ export class AccountDetailComponent extends ViewDetailComponent
                 break;
 
             case 'iam::account.detail.edit':
-                this.accountService
-                    .account$
+                this.accountService.account$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
+                    .subscribe((item) => {
                         this.managedObject = item;
                         this.scopeOptions$.next(item.client.scopeOptions);
 
@@ -359,15 +429,23 @@ export class AccountDetailComponent extends ViewDetailComponent
                         this.fg.patchValue(item);
 
                         // set many to many associations
-                        this.fg.get('roleIds').setValue(item.roles.map(role => role.id));
-                        this.fg.get('tenantIds').setValue(item.tenants.map(tenant => tenant.id));
+                        this.fg
+                            .get('roleIds')
+                            .setValue(item.roles.map((role) => role.id));
+                        this.fg
+                            .get('tenantIds')
+                            .setValue(item.tenants.map((tenant) => tenant.id));
 
                         // load async validators
                         this.email.setAsyncValidators(
-                            uniqueEmailValidator(this.accountService, [item.email]),
+                            uniqueEmailValidator(this.accountService, [
+                                item.email,
+                            ]),
                         );
                         this.username.setAsyncValidators(
-                            uniqueUsernameValidator(this.accountService, [item.username]),
+                            uniqueUsernameValidator(this.accountService, [
+                                item.username,
+                            ]),
                         );
 
                         this.setPasswordValidators(item.type);
@@ -375,13 +453,11 @@ export class AccountDetailComponent extends ViewDetailComponent
                 break;
 
             case 'iam::account.detail.create':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.accountService
-                            .create<IamAccount>({
-                                object: this.fg.value,
-                            }),
+                        this.accountService.create<IamAccount>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -394,21 +470,17 @@ export class AccountDetailComponent extends ViewDetailComponent
                     );
 
                     this.router.navigate(['iam/account']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'iam::account.detail.update':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.accountService
-                            .updateById<IamAccount>({
-                                object: this.fg.value,
-                            }),
+                        this.accountService.updateById<IamAccount>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -421,13 +493,11 @@ export class AccountDetailComponent extends ViewDetailComponent
                     );
 
                     this.router.navigate(['iam/account']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
         }
     }
 }

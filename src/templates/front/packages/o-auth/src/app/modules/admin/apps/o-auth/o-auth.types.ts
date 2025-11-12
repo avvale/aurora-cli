@@ -235,3 +235,25 @@ export interface OAuthUpdateScopes {
     code?: string;
     name?: string;
 }
+
+export interface OAuthApplicationClient {
+    applicationId: string;
+    application: OAuthApplication;
+    clientId: string;
+    client: OAuthClient;
+}
+
+export interface OAuthCreateApplicationClient {
+    applicationId: string;
+    clientId: string;
+}
+
+export interface OAuthUpdateApplicationClientById {
+    applicationId?: string;
+    clientId?: string;
+}
+
+export interface OAuthUpdateApplicationsClients {
+    applicationId?: string;
+    clientId?: string;
+}

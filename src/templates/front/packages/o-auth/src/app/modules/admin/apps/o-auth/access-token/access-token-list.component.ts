@@ -1,57 +1,78 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { accessTokenColumnsConfig, AccessTokenService } from '@apps/o-auth/access-token';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+} from '@angular/core';
+import {
+    accessTokenColumnsConfig,
+    AccessTokenService,
+} from '@apps/o-auth/access-token';
 import { OAuthAccessToken } from '@apps/o-auth/o-auth.types';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import {
+    Action,
+    ColumnConfig,
+    ColumnDataType,
+    Crumb,
+    defaultListImports,
+    exportRows,
+    GridColumnsConfigStorageService,
+    GridData,
+    GridFiltersStorageService,
+    GridState,
+    GridStateService,
+    log,
+    queryStatementHandler,
+    ViewBaseComponent,
+} from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+
+export const accessTokenMainGridListId = 'oAuth::accessToken.list.mainGridList';
 
 @Component({
     selector: 'o-auth-access-token-list',
     templateUrl: './access-token-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ...defaultListImports,
-    ],
+    standalone: true,
+    imports: [...defaultListImports],
 })
-export class AccessTokenListComponent extends ViewBaseComponent
-{
+export class AccessTokenListComponent extends ViewBaseComponent {
     // ---- customizations ----
     // ..
 
     breadcrumb: Crumb[] = [
-        { translation: 'App', routerLink: ['/']},
+        { translation: 'App', routerLink: ['/'] },
         { translation: 'oAuth.AccessTokens' },
     ];
-    gridId: string = 'oAuth::accessToken.list.mainGridList';
+    gridId: string = accessTokenMainGridListId;
     gridData$: Observable<GridData<OAuthAccessToken>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
-            actions: row =>
-            {
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
+            actions: (row) => {
                 return [
                     {
-                        id         : 'oAuth::accessToken.list.edit',
+                        id: 'oAuth::accessToken.list.edit',
                         translation: 'edit',
-                        icon       : 'mode_edit',
+                        icon: 'mode_edit',
                     },
                     {
-                        id         : 'oAuth::accessToken.list.delete',
+                        id: 'oAuth::accessToken.list.delete',
                         translation: 'delete',
-                        icon       : 'delete',
+                        icon: 'delete',
                     },
                 ];
             },
         },
         {
-            type       : ColumnDataType.CHECKBOX,
-            field      : 'select',
+            type: ColumnDataType.CHECKBOX,
+            field: 'select',
             translation: 'Selects',
-            sticky     : true,
+            sticky: true,
         },
         ...accessTokenColumnsConfig,
     ];
@@ -61,31 +82,33 @@ export class AccessTokenListComponent extends ViewBaseComponent
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly accessTokenService: AccessTokenService,
-    )
-    {
+    ) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    { /**/ }
+    init(): void {
+        /**/
+    }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
+            /* #region common actions */
             case 'oAuth::accessToken.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
 
                 this.gridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.gridId),
-                    page         : this.gridStateService.getPage(this.gridId),
-                    sort         : this.gridStateService.getSort(this.gridId),
-                    search       : this.gridStateService.getSearchState(this.gridId),
+                    columnFilters:
+                        this.gridFiltersStorageService.getColumnFilterState(
+                            this.gridId,
+                        ),
+                    page: this.gridStateService.getPage(this.gridId),
+                    sort: this.gridStateService.getSort(this.gridId),
+                    search: this.gridStateService.getSearchState(this.gridId),
                 };
 
                 this.gridData$ = this.accessTokenService.pagination$;
@@ -94,93 +117,113 @@ export class AccessTokenListComponent extends ViewBaseComponent
             case 'oAuth::accessToken.list.pagination':
                 await lastValueFrom(
                     this.accessTokenService.pagination({
-                        query: action.meta.query ?
-                            action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: accessTokenColumnsConfig })
-                                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
-                                .setSort(this.gridStateService.getSort(this.gridId))
-                                .setPage(this.gridStateService.getPage(this.gridId))
-                                .setSearch(this.gridStateService.getSearchState(this.gridId))
-                                .getQueryStatement(),
+                        query: action.meta.query
+                            ? action.meta.query
+                            : queryStatementHandler({
+                                  columnsConfig: accessTokenColumnsConfig,
+                              })
+                                  .setColumFilters(
+                                      this.gridFiltersStorageService.getColumnFilterState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSort(
+                                      this.gridStateService.getSort(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setPage(
+                                      this.gridStateService.getPage(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSearch(
+                                      this.gridStateService.getSearchState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .getQueryStatement(),
                     }),
                 );
                 break;
 
             case 'oAuth::accessToken.list.edit':
-                this.router
-                    .navigate([
-                        'o-auth/access-token/edit',
-                        action.meta.row.id,
-                    ]);
+                this.router.navigate([
+                    'o-auth/access-token/edit',
+                    action.meta.row.id,
+                ]);
                 break;
 
             case 'oAuth::accessToken.list.delete':
                 const deleteDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('oAuth.AccessToken')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('oAuth.AccessToken') }),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
+                    title: `${this.translocoService.translate('Delete')} ${this.translocoService.translate('oAuth.AccessToken')}`,
+                    message: this.translocoService.translate(
+                        'DeletionWarning',
+                        {
+                            entity: this.translocoService.translate(
+                                'oAuth.AccessToken',
+                            ),
+                        },
+                    ),
+                    icon: {
+                        show: true,
+                        name: 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
                         confirm: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Remove'),
                             color: 'warn',
                         },
                         cancel: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Cancel'),
                         },
                     },
                     dismissible: true,
                 });
 
-                deleteDialogRef.afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
-                                await lastValueFrom(
-                                    this.accessTokenService
-                                        .deleteById<OAuthAccessToken>({
-                                            id: action.meta.row.id,
-                                        }),
-                                );
+                deleteDialogRef.afterClosed().subscribe(async (result) => {
+                    if (result === 'confirmed') {
+                        try {
+                            await lastValueFrom(
+                                this.accessTokenService.deleteById<OAuthAccessToken>(
+                                    {
+                                        id: action.meta.row.id,
+                                    },
+                                ),
+                            );
 
-                                this.actionService.action({
-                                    id          : 'oAuth::accessToken.list.pagination',
-                                    isViewAction: false,
-                                });
-                            }
-                            catch(error)
-                            {
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                            }
+                            this.actionService.action({
+                                id: 'oAuth::accessToken.list.pagination',
+                                isViewAction: false,
+                            });
+                        } catch (error) {
+                            log(
+                                `[DEBUG] Catch error in ${action.id} action: ${error}`,
+                            );
                         }
-                    });
+                    }
+                });
                 break;
 
             case 'oAuth::accessToken.list.export':
                 const rows = await lastValueFrom(
-                    this.accessTokenService
-                        .get({
-                            query: action.meta.query,
-                        }),
+                    this.accessTokenService.get({
+                        query: action.meta.query,
+                    }),
                 );
 
-                // format export rows
-                (rows.objects as any[]).forEach(row =>
-                {
-                    // row.id = row.id;
-                });
-
-                const columns: string[] = accessTokenColumnsConfig.map(accessTokenColumnConfig => accessTokenColumnConfig.field);
-                const headers: string[] = columns.map(column => this.translocoService.translate('oAuth.' + column.toPascalCase()));
+                const columns: string[] = accessTokenColumnsConfig.map(
+                    (accessTokenColumnConfig) => accessTokenColumnConfig.field,
+                );
+                const headers: string[] = accessTokenColumnsConfig.map(
+                    (accessTokenColumnConfig) =>
+                        this.translocoService.translate(
+                            accessTokenColumnConfig.translation,
+                        ),
+                );
 
                 exportRows(
                     rows.objects,
@@ -190,6 +233,7 @@ export class AccessTokenListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+            /* #endregion common actions */
         }
     }
 }

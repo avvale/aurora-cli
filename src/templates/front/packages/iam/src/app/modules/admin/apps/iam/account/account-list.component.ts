@@ -1,11 +1,39 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+} from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { accountColumnsConfig, AccountService } from '@apps/iam/account';
 import { IamAccount, IamTag, IamTenant } from '@apps/iam/iam.types';
 import { OAuthScope } from '@apps/o-auth';
 import { ScopeService } from '@apps/o-auth/scope';
-import { Action, AuthenticationService, AuthorizationService, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, IamService, initAsyncMatSelectSearch, initAsyncMatSelectSearchState, JoinPipe, log, manageAsyncMatSelectSearch, MapPipe, Operator, queryStatementHandler, uuid, ViewBaseComponent } from '@aurora';
+import {
+    Action,
+    AuthenticationService,
+    AuthorizationService,
+    ColumnConfig,
+    ColumnDataType,
+    Crumb,
+    defaultListImports,
+    exportRows,
+    GridColumnsConfigStorageService,
+    GridData,
+    GridFiltersStorageService,
+    GridState,
+    GridStateService,
+    initAsyncMatSelectSearch,
+    initAsyncMatSelectSearchState,
+    JoinPipe,
+    log,
+    manageAsyncMatSelectSearch,
+    MapPipe,
+    Operator,
+    queryStatementHandler,
+    uuid,
+    ViewBaseComponent,
+} from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { TagService } from '../tag';
 import { TenantService } from '../tenant';
@@ -13,62 +41,73 @@ import { TenantService } from '../tenant';
 export const accountMainGridListId = 'iam::account.list.mainGridList';
 
 @Component({
-    selector       : 'iam-account-list',
-    templateUrl    : './account-list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'iam-account-list',
+    templateUrl: './account-list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports        : [
+    imports: [
         ...defaultListImports,
-        JoinPipe, MapPipe, MatBadgeModule, MatTooltipModule,
+        JoinPipe,
+        MapPipe,
+        MatBadgeModule,
+        MatTooltipModule,
     ],
 })
-export class AccountListComponent extends ViewBaseComponent
-{
+export class AccountListComponent extends ViewBaseComponent {
     // ---- customizations ----
     /* #region variables to manage async-search-multiple-select account IamTenant[] */
-    tenantAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTenant>();
+    tenantAsyncMatSelectSearchState = initAsyncMatSelectSearchState<
+        string,
+        IamTenant
+    >();
     tenantManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
         columnFilter: {
-            id      : uuid(),
-            field   : 'IamTenant.name::unaccent',
-            type    : ColumnDataType.STRING,
+            id: uuid(),
+            field: 'IamTenant.name::unaccent',
+            type: ColumnDataType.STRING,
             operator: Operator.iLike,
-            value   : null,
+            value: null,
         },
-        paginationService   : this.tenantService,
+        paginationService: this.tenantService,
     });
     /* #endregion variables to manage async-search-multiple-select account IamTenant[] */
 
     /* #region variables to manage async-search-multiple-select account OAuthScope[] */
-    scopeAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, OAuthScope>();
+    scopeAsyncMatSelectSearchState = initAsyncMatSelectSearchState<
+        string,
+        OAuthScope
+    >();
     scopeManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
         columnFilter: {
-            id      : uuid(),
-            field   : 'OAuthScope.name::unaccent',
-            type    : ColumnDataType.STRING,
+            id: uuid(),
+            field: 'OAuthScope.name::unaccent',
+            type: ColumnDataType.STRING,
             operator: Operator.iLike,
-            value   : null,
+            value: null,
         },
         paginationService: this.scopeService,
     });
     /* #endregion variables to manage async-search-multiple-select account OAuthScope[] */
 
     /* #region variables to manage async-search-multiple-select account IamTag[] */
-    tagAsyncMatSelectSearchState = initAsyncMatSelectSearchState<string, IamTag>();
+    tagAsyncMatSelectSearchState = initAsyncMatSelectSearchState<
+        string,
+        IamTag
+    >();
     tagManageAsyncMatSelectSearch = manageAsyncMatSelectSearch({
         columnFilter: {
-            id      : uuid(),
-            field   : 'IamTag.name::unaccent',
-            type    : ColumnDataType.STRING,
+            id: uuid(),
+            field: 'IamTag.name::unaccent',
+            type: ColumnDataType.STRING,
             operator: Operator.iLike,
-            value   : null,
+            value: null,
         },
         paginationService: this.tagService,
     });
     /* #endregion variables to manage async-search-multiple-select account IamTag[] */
 
     breadcrumb: Crumb[] = [
-        { translation: 'App', routerLink: ['/']},
+        { translation: 'App', routerLink: ['/'] },
         { translation: 'iam.Accounts' },
     ];
     gridId: string = accountMainGridListId;
@@ -77,60 +116,62 @@ export class AccountListComponent extends ViewBaseComponent
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
-            actions: row =>
-            {
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
+            actions: (row) => {
                 const actions = [];
 
                 actions.push(
                     {
-                        id         : 'iam::account.list.edit',
+                        id: 'iam::account.list.edit',
                         translation: 'edit',
-                        icon       : 'mode_edit',
+                        icon: 'mode_edit',
                     },
                     {
-                        id         : 'iam::account.list.delete',
+                        id: 'iam::account.list.delete',
                         translation: 'delete',
-                        icon       : 'delete',
+                        icon: 'delete',
                     },
                 );
 
-                if (this.authorizationService.can('oAuth.credential.impersonalize'))
-                {
-                    actions.push(
-                        {
-                            id          : 'iam::account.list.impersonalize',
-                            isViewAction: false,
-                            translation : 'impersonalize',
-                            iconFontSet : 'material-symbols-outlined',
-                            icon        : 'photo_auto_merge',
-                        },
-                    );
+                if (
+                    this.authorizationService.can(
+                        'oAuth.credential.impersonalize',
+                    )
+                ) {
+                    actions.push({
+                        id: 'iam::account.list.impersonalize',
+                        isViewAction: false,
+                        translation: 'impersonalize',
+                        iconFontSet: 'material-symbols-outlined',
+                        icon: 'photo_auto_merge',
+                    });
                 }
 
                 return actions;
             },
         },
         {
-            type       : ColumnDataType.CHECKBOX,
-            field      : 'select',
+            type: ColumnDataType.CHECKBOX,
+            field: 'select',
             translation: 'Selects',
-            sticky     : true,
+            sticky: true,
         },
         ...accountColumnsConfig({
             translocoService: this.translocoService,
             tenantsAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.tenantAsyncMatSelectSearchState,
-                manageAsyncMatSelectSearch: this.tenantManageAsyncMatSelectSearch,
+                asyncMatSelectSearchState: this.tenantAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch:
+                    this.tenantManageAsyncMatSelectSearch,
             },
             scopesAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.scopeAsyncMatSelectSearchState,
-                manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
+                asyncMatSelectSearchState: this.scopeAsyncMatSelectSearchState,
+                manageAsyncMatSelectSearch:
+                    this.scopeManageAsyncMatSelectSearch,
             },
             tagsAsyncMatSelectSearch: {
-                asyncMatSelectSearchState : this.tagAsyncMatSelectSearchState,
+                asyncMatSelectSearchState: this.tagAsyncMatSelectSearchState,
                 manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
             },
         }),
@@ -146,50 +187,53 @@ export class AccountListComponent extends ViewBaseComponent
         private readonly tenantService: TenantService,
         private readonly scopeService: ScopeService,
         private readonly tagService: TagService,
-    )
-    {
+    ) {
         super();
 
         /* #region variables to manage async-search-multiple-select IamTenant[] */
         initAsyncMatSelectSearch<string, IamTenant>({
-            asyncMatSelectSearchState : this.tenantAsyncMatSelectSearchState,
+            asyncMatSelectSearchState: this.tenantAsyncMatSelectSearchState,
             manageAsyncMatSelectSearch: this.tenantManageAsyncMatSelectSearch,
-            itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTenants,
-            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTenants,
+            itemPagination:
+                this.activatedRoute.snapshot.data.data.iamGetTenants,
+            initSelectedItems:
+                this.activatedRoute.snapshot.data.data.iamGetSelectedTenants,
         });
         /* #endregion variables to manage async-search-multiple-select IamTenant[] */
 
-         /* #region variables to manage async-search-multiple-select OAuthScope[] */
+        /* #region variables to manage async-search-multiple-select OAuthScope[] */
         initAsyncMatSelectSearch<string, OAuthScope>({
-            asyncMatSelectSearchState : this.scopeAsyncMatSelectSearchState,
+            asyncMatSelectSearchState: this.scopeAsyncMatSelectSearchState,
             manageAsyncMatSelectSearch: this.scopeManageAsyncMatSelectSearch,
-            itemPagination            : this.activatedRoute.snapshot.data.data.oAuthGetScopes,
-            initSelectedItems         : this.activatedRoute.snapshot.data.data.oAuthGetSelectedScopes,
-            valueKey                  : 'code',
+            itemPagination:
+                this.activatedRoute.snapshot.data.data.oAuthGetScopes,
+            initSelectedItems:
+                this.activatedRoute.snapshot.data.data.oAuthGetSelectedScopes,
+            valueKey: 'code',
         });
         /* #endregion variables to manage async-search-multiple-select OAuthScope[] */
 
-         /* #region variables to manage async-search-multiple-select IamTag[] */
+        /* #region variables to manage async-search-multiple-select IamTag[] */
         initAsyncMatSelectSearch<string, IamTag>({
-            asyncMatSelectSearchState : this.tagAsyncMatSelectSearchState,
+            asyncMatSelectSearchState: this.tagAsyncMatSelectSearchState,
             manageAsyncMatSelectSearch: this.tagManageAsyncMatSelectSearch,
-            itemPagination            : this.activatedRoute.snapshot.data.data.iamGetTags,
-            initSelectedItems         : this.activatedRoute.snapshot.data.data.iamGetSelectedTags,
-            valueKey                  : 'name',
+            itemPagination: this.activatedRoute.snapshot.data.data.iamGetTags,
+            initSelectedItems:
+                this.activatedRoute.snapshot.data.data.iamGetSelectedTags,
+            valueKey: 'name',
         });
         /* #endregion variables to manage async-search-multiple-select IamTag[] */
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    { /**/ }
+    init(): void {
+        /**/
+    }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'iam::account.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
@@ -197,10 +241,13 @@ export class AccountListComponent extends ViewBaseComponent
                     .pipe(takeUntil(this.unsubscribeAll$));
 
                 this.gridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.gridId),
-                    page         : this.gridStateService.getPage(this.gridId),
-                    sort         : this.gridStateService.getSort(this.gridId),
-                    search       : this.gridStateService.getSearchState(this.gridId),
+                    columnFilters:
+                        this.gridFiltersStorageService.getColumnFilterState(
+                            this.gridId,
+                        ),
+                    page: this.gridStateService.getPage(this.gridId),
+                    sort: this.gridStateService.getSort(this.gridId),
+                    search: this.gridStateService.getSearchState(this.gridId),
                 };
 
                 this.gridData$ = this.accountService.pagination$;
@@ -209,19 +256,37 @@ export class AccountListComponent extends ViewBaseComponent
             case 'iam::account.list.pagination':
                 await lastValueFrom(
                     this.accountService.pagination({
-                        query: action.meta.query ?
-                            action.meta.query :
-                            queryStatementHandler({ columnsConfig: accountColumnsConfig() })
-                                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
-                                .setSort(this.gridStateService.getSort(this.gridId))
-                                .setPage(this.gridStateService.getPage(this.gridId))
-                                .setSearch(this.gridStateService.getSearchState(this.gridId))
-                                .getQueryStatement(),
+                        query: action.meta.query
+                            ? action.meta.query
+                            : queryStatementHandler({
+                                  columnsConfig: accountColumnsConfig(),
+                              })
+                                  .setColumFilters(
+                                      this.gridFiltersStorageService.getColumnFilterState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSort(
+                                      this.gridStateService.getSort(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setPage(
+                                      this.gridStateService.getPage(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSearch(
+                                      this.gridStateService.getSearchState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .getQueryStatement(),
                         constraint: {
                             include: [
                                 {
                                     association: 'user',
-                                    required   : true,
+                                    required: true,
                                 },
                                 {
                                     association: 'tenants',
@@ -233,73 +298,77 @@ export class AccountListComponent extends ViewBaseComponent
                 break;
 
             case 'iam::account.list.edit':
-                this.router
-                    .navigate([
-                        'iam/account/edit',
-                        action.meta.row.id,
-                    ]);
+                this.router.navigate(['iam/account/edit', action.meta.row.id]);
                 break;
 
             case 'iam::account.list.delete':
                 const deleteDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('iam.Account')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('iam.Account') }),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
+                    title: `${this.translocoService.translate('Delete')} ${this.translocoService.translate('iam.Account')}`,
+                    message: this.translocoService.translate(
+                        'DeletionWarning',
+                        {
+                            entity: this.translocoService.translate(
+                                'iam.Account',
+                            ),
+                        },
+                    ),
+                    icon: {
+                        show: true,
+                        name: 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
                         confirm: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Remove'),
                             color: 'warn',
                         },
                         cancel: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Cancel'),
                         },
                     },
                     dismissible: true,
                 });
 
-                deleteDialogRef.afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
-                                await lastValueFrom(
-                                    this.accountService
-                                        .deleteById<IamAccount>({
-                                            id: action.meta.row.id,
-                                        }),
-                                );
+                deleteDialogRef.afterClosed().subscribe(async (result) => {
+                    if (result === 'confirmed') {
+                        try {
+                            await lastValueFrom(
+                                this.accountService.deleteById<IamAccount>({
+                                    id: action.meta.row.id,
+                                }),
+                            );
 
-                                this.actionService.action({
-                                    id          : 'iam::account.list.pagination',
-                                    isViewAction: false,
-                                });
-                            }
-                            catch(error)
-                            {
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                            }
+                            this.actionService.action({
+                                id: 'iam::account.list.pagination',
+                                isViewAction: false,
+                            });
+                        } catch (error) {
+                            log(
+                                `[DEBUG] Catch error in ${action.id} action: ${error}`,
+                            );
                         }
-                    });
+                    }
+                });
                 break;
 
             case 'iam::account.list.export':
                 const rows = await lastValueFrom(
-                    this.accountService
-                        .get({
-                            query: action.meta.query,
-                        }),
+                    this.accountService.get({
+                        query: action.meta.query,
+                    }),
                 );
 
-                const columns: string[] = accountColumnsConfig().map(accountColumnConfig => accountColumnConfig.field);
-                const headers: string[] = accountColumnsConfig().map(accountColumnConfig => this.translocoService.translate(accountColumnConfig.translation));
+                const columns: string[] = accountColumnsConfig().map(
+                    (accountColumnConfig) => accountColumnConfig.field,
+                );
+                const headers: string[] = accountColumnsConfig().map(
+                    (accountColumnConfig) =>
+                        this.translocoService.translate(
+                            accountColumnConfig.translation,
+                        ),
+                );
 
                 exportRows(
                     rows.objects,
@@ -309,16 +378,17 @@ export class AccountListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
 
             case 'iam::account.list.impersonalize':
                 await lastValueFrom(
-                    this.authenticationService
-                        .impersonalize(action.meta.row.id)
+                    this.authenticationService.impersonalize(
+                        action.meta.row.id,
+                    ),
                 );
                 await this.router.navigate(['/']);
                 window.location.reload();
-                break
+                break;
         }
     }
 }

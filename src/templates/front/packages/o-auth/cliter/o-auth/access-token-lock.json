@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/o-auth.component.ts",
-            "integrity": "sha1:38168e361b46210416adfb1588bcb79f5d939810"
+            "integrity": "sha1:6e6f19ca4358c3ae81c6c40c9569cdcfdacd37e2"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token-detail.component.html",
-            "integrity": "sha1:8bc976f09b874632aed7693b0e1ed0a297e14e2b"
+            "integrity": "sha1:1343b3f76ef8cbfd06b46c8fe83c38a1577ec553"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token-detail.component.ts",
-            "integrity": "sha1:a5cfcc0513610c65f3dd66e2611e334fbe32c283"
+            "integrity": "sha1:73e8e8e31ab1ddb536604c4ad297bea019b40585"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token-list.component.html",
-            "integrity": "sha1:b802ec4563a8917beeda7267d9b45f87de7cea21"
+            "integrity": "sha1:39b11f75f60a48bd97fb75fe513e65db1be4a412"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token-list.component.ts",
-            "integrity": "sha1:442554c8ee26a05000d735cd3ccc91d17752b6ae"
+            "integrity": "sha1:a3d73d3fac95c55f0cbd11b32db2debd4ebb683f"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token.columns-config.ts",
-            "integrity": "sha1:d18b3ebb2f07125b5ef2d7fdf0f7798081fd7d3d"
+            "integrity": "sha1:2f5531c7d60c129eba7abcd722822975345e533c"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token.graphql.ts",
-            "integrity": "sha1:db9b59cfe8d24d2a6265832c6060deb29adf13b6"
+            "integrity": "sha1:5ae954534a700920893e854eb8c416918bfdf374"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token.resolvers.ts",
-            "integrity": "sha1:5372f62ef79add15c44d2a0b80ab5bf001a72066"
+            "integrity": "sha1:1577af9ca915cc89c3e67d7e9352c392bdb2b2f3"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/access-token.service.ts",
-            "integrity": "sha1:1eb9ba4df69192295956441df007eb2f85fa08f0"
+            "integrity": "sha1:5c5bade90280f146291943683a4e01ced9b4888f"
         },
         {
             "path": "src/app/modules/admin/apps/o-auth/access-token/index.ts",

@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/iam.component.ts",
-            "integrity": "sha1:880d86f19f8517bcd4f902bc02e5298a619d531e"
+            "integrity": "sha1:8fd8985fcacd3e5bc06202be4dc11db167503ec5"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-detail.component.html",
-            "integrity": "sha1:1a326d551ef6506ff4c7fba322fd4ebdb737ac49"
+            "integrity": "sha1:d3711ae6520ec06bf3e138f8d73dbfbd544d88ce"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-detail.component.ts",
-            "integrity": "sha1:80695f09e4e283bd53ccf71b6b2a5d47afc98f63"
+            "integrity": "sha1:a7a4346e7a47db634aa24fc689ad3ba3cfc06e3f"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-list.component.html",
-            "integrity": "sha1:d30046b35d7412d6ae308e9e2740ebbfda99a92a"
+            "integrity": "sha1:328f00f2197ddbc836c0c576aced1ab9a7e0c1f4"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag-list.component.ts",
-            "integrity": "sha1:3b68e466df847bb3aeeeb3d57db2f4fad98ff846"
+            "integrity": "sha1:c216bc75e4ad12ea9d38533070081579bc879fd7"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag.columns-config.ts",
-            "integrity": "sha1:8debce933a2323dceb581c060a9413aa3ce0cb95"
+            "integrity": "sha1:56c4dcf9a92703a7e7576d71ab67fec92ebf116e"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag.graphql.ts",
-            "integrity": "sha1:f21abb25fbdbe6ab5e12d29c82e3bb7fb23b045c"
+            "integrity": "sha1:42e9fbb39598eb0d8828a9abbc634332e9e6f2c9"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag.resolvers.ts",
-            "integrity": "sha1:cdf87b2d3a1c5c5a6c573d810f92d4061405fa5c"
+            "integrity": "sha1:2e7d3b0ac394f5df781535a4c816707b3aca3fa2"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/tag.service.ts",
-            "integrity": "sha1:c7000442bb9649778bfb63cd5234834b8c2b5d18"
+            "integrity": "sha1:75e14044277c2fbd24cf4c4ed236b1a581643218"
         },
         {
             "path": "src/app/modules/admin/apps/iam/tag/index.ts",

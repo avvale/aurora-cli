@@ -26,7 +26,7 @@ import { FuturisticLayoutComponent } from './layouts/vertical/futuristic/futuris
 import { ThinLayoutComponent } from './layouts/vertical/thin/thin.component';
 
 // ---- customizations ----
-import { EnvironmentsInformationComponent } from '@aurora';
+import { EnvironmentsInformationComponent, IamService } from '@aurora';
 
 @Component({
     selector: 'layout',
@@ -65,7 +65,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
         private _router: Router,
         private _fuseConfigService: FuseConfigService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fusePlatformService: FusePlatformService
+        private _fusePlatformService: FusePlatformService,
+        public readonly iamService: IamService,
     ) {}
 
     // -----------------------------------------------------------------------------------------------------

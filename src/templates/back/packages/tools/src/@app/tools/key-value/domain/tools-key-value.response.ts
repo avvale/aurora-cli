@@ -5,6 +5,7 @@ export class ToolsKeyValueResponse {
         public readonly key: string,
         public readonly type: string,
         public readonly value: string,
+        public readonly isCached: boolean,
         public readonly isActive: boolean,
         public readonly description: string,
         public readonly createdAt: string,

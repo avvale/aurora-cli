@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const findUserMetaById = gql`
-    query OrionFindUserMetaById ($id: ID!) {
+    query IamFindUserMetaById ($id: ID!) {
         iamFindUserMetaById (id:$id) {
             id
             meta

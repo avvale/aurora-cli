@@ -2,6 +2,12 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const issueColumnsConfig: ColumnConfig[] = [
     {
+        type: ColumnDataType.NUMBER,
+        field: 'rowId',
+        sort: 'rowId',
+        translation: 'support.RowId',
+    },
+    {
         type: ColumnDataType.STRING,
         field: 'externalId',
         sort: 'externalId',

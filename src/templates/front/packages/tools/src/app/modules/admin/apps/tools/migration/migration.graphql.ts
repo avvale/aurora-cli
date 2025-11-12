@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     name
     version
     isActive
@@ -18,11 +19,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query ToolsPaginateMigrations (
+    query ToolsPaginateMigrations(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: toolsPaginateMigrations (
+        pagination: toolsPaginateMigrations(
             query: $query
             constraint: $constraint
         ) {
@@ -34,14 +35,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query ToolsGetMigrations (
+    query ToolsGetMigrations(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: toolsGetMigrations (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: toolsGetMigrations(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -49,14 +47,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query ToolsFindMigrationById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: toolsFindMigrationById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query ToolsFindMigrationById($id: ID, $constraint: QueryStatement) {
+        object: toolsFindMigrationById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -64,14 +56,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query ToolsFindMigration (
+    query ToolsFindMigration(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: toolsFindMigration (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: toolsFindMigration(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -91,12 +80,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation ToolsCreateMigrations (
-        $payload: [ToolsCreateMigrationInput]!
-    ) {
-        toolsCreateMigrations (
-            payload: $payload
-        )
+    mutation ToolsCreateMigrations($payload: [ToolsCreateMigrationInput]!) {
+        toolsCreateMigrations(payload: $payload)
     }
 `;
 
@@ -160,22 +145,14 @@ export const deleteMutation = gql`
 
 // Mutation additionalApis
 export const upScriptMigrationMutation = gql`
-    mutation ToolsUpScriptMigration (
-        $migrationId: ID!
-    ) {
-        toolsUpScriptMigration (
-            migrationId: $migrationId
-        )
+    mutation ToolsUpScriptMigration($migrationId: ID!) {
+        toolsUpScriptMigration(migrationId: $migrationId)
     }
 `;
 
 export const downScriptMigrationMutation = gql`
-    mutation ToolsDownScriptMigration (
-        $migrationId: ID!
-    ) {
-        toolsDownScriptMigration (
-            migrationId: $migrationId
-        )
+    mutation ToolsDownScriptMigration($migrationId: ID!) {
+        toolsDownScriptMigration(migrationId: $migrationId)
     }
 `;
 

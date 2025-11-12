@@ -10,13 +10,16 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Inject, Injectable } from '@nestjs/common';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class ToolsDeleteKeyValueByIdHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     ) {}
 
     async main(
@@ -39,6 +42,8 @@ export class ToolsDeleteKeyValueByIdHandler {
                 },
             }),
         );
+
+        if (keyValue.isCached) await this.cacheManager.del(keyValue.key);
 
         return keyValue;
     }

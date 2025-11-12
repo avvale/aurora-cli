@@ -9,6 +9,7 @@ import {
     ToolsKeyValueDescription,
     ToolsKeyValueId,
     ToolsKeyValueIsActive,
+    ToolsKeyValueIsCached,
     ToolsKeyValueKey,
     ToolsKeyValueRowId,
     ToolsKeyValueType,
@@ -64,6 +65,9 @@ describe('ToolsCreateKeyValueService', () => {
                     type: new ToolsKeyValueType(toolsMockKeyValueData[0].type),
                     value: new ToolsKeyValueValue(
                         toolsMockKeyValueData[0].value,
+                    ),
+                    isCached: new ToolsKeyValueIsCached(
+                        toolsMockKeyValueData[0].isCached,
                     ),
                     isActive: new ToolsKeyValueIsActive(
                         toolsMockKeyValueData[0].isActive,

@@ -5,6 +5,7 @@ import {
     ToolsKeyValueDescription,
     ToolsKeyValueId,
     ToolsKeyValueIsActive,
+    ToolsKeyValueIsCached,
     ToolsKeyValueKey,
     ToolsKeyValueRowId,
     ToolsKeyValueType,
@@ -79,6 +80,7 @@ export class ToolsKeyValueMapper implements IMapper {
             new ToolsKeyValueKey(keyValue.key, { undefinable: true }),
             new ToolsKeyValueType(keyValue.type, { undefinable: true }),
             new ToolsKeyValueValue(keyValue.value, { undefinable: true }),
+            new ToolsKeyValueIsCached(keyValue.isCached, { undefinable: true }),
             new ToolsKeyValueIsActive(keyValue.isActive, { undefinable: true }),
             new ToolsKeyValueDescription(keyValue.description, {
                 undefinable: true,
@@ -110,6 +112,7 @@ export class ToolsKeyValueMapper implements IMapper {
             keyValue.key.value,
             keyValue.type.value,
             keyValue.value.value,
+            keyValue.isCached.value,
             keyValue.isActive.value,
             keyValue.description.value,
             keyValue.createdAt.value,

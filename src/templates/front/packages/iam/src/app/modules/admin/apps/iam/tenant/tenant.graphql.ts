@@ -1,9 +1,11 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     parentId
     parent {
         id
+        rowId
         name
         code
     }
@@ -25,6 +27,7 @@ export const relationsFields = `
         constraint: $constraintTenants
     ) {
         id
+        rowId
         name
         code
         logo
@@ -35,14 +38,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query IamPaginateTenants (
+    query IamPaginateTenants(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: iamPaginateTenants (
-            query: $query
-            constraint: $constraint
-        ) {
+        pagination: iamPaginateTenants(query: $query, constraint: $constraint) {
             total
             rows
             count
@@ -51,14 +51,8 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query IamGetTenants (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: iamGetTenants (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamGetTenants($query: QueryStatement, $constraint: QueryStatement) {
+        objects: iamGetTenants(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -75,14 +69,8 @@ export const getRelations = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindTenantById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: iamFindTenantById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query IamFindTenantById($id: ID, $constraint: QueryStatement) {
+        object: iamFindTenantById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -108,14 +96,8 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindTenant (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: iamFindTenant (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamFindTenant($query: QueryStatement, $constraint: QueryStatement) {
+        object: iamFindTenant(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -135,12 +117,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation IamCreateTenants (
-        $payload: [IamCreateTenantInput]!
-    ) {
-        iamCreateTenants (
-            payload: $payload
-        )
+    mutation IamCreateTenants($payload: [IamCreateTenantInput]!) {
+        iamCreateTenants(payload: $payload)
     }
 `;
 

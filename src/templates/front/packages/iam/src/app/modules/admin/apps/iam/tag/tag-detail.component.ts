@@ -1,8 +1,23 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    signal,
+    ViewEncapsulation,
+    WritableSignal,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
-import { IamTag } from '@apps/iam/iam.types';
+import { IamTag } from '@apps/iam';
 import { TagService } from '@apps/iam/tag';
-import { Action, Crumb, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, Utils, ViewDetailComponent } from '@aurora';
+import {
+    Action,
+    Crumb,
+    defaultDetailImports,
+    log,
+    mapActions,
+    SnackBarInvalidFormComponent,
+    uuid,
+    ViewDetailComponent,
+} from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
@@ -10,12 +25,10 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './tag-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ...defaultDetailImports,
-    ],
+    standalone: true,
+    imports: [...defaultDetailImports],
 })
-export class TagDetailComponent extends ViewDetailComponent
-{
+export class TagDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..
 
@@ -23,112 +36,102 @@ export class TagDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: IamTag;
+    managedObject: WritableSignal<IamTag> = signal(null);
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'iam.Tags', routerLink: ['/iam/tag']},
+        { translation: 'iam.Tags', routerLink: ['/iam/tag'] },
         { translation: 'iam.Tag' },
     ];
 
-    constructor(
-        private readonly tagService: TagService,
-    )
-    {
+    constructor(private readonly tagService: TagService) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    {
+    init(): void {
         /**/
     }
 
-    onSubmit($event): void
-    {
+    onSubmit($event): void {
         // we have two nested forms, we check that the submit comes from the button
         // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
+        if (
+            $event.submitter.getAttribute('form') !==
+            $event.submitter.form.getAttribute('id')
+        ) {
             $event.preventDefault();
             $event.stopPropagation();
             return;
         }
 
         // manage validations before execute actions
-        if (this.fg.invalid)
-        {
+        if (this.fg.invalid) {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
 
-            this.snackBar.openFromComponent(
-                SnackBarInvalidFormComponent,
-                {
-                    data: {
-                        message   : `${this.translocoService.translate('InvalidForm')}`,
-                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
-                    },
-                    panelClass      : 'error-snackbar',
-                    verticalPosition: 'top',
-                    duration        : 10000,
+            this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+                data: {
+                    message: `${this.translocoService.translate('InvalidForm')}`,
+                    textButton: `${this.translocoService.translate('InvalidFormOk')}`,
                 },
-            );
+                panelClass: 'error-snackbar',
+                verticalPosition: 'top',
+                duration: 10000,
+            });
             return;
         }
 
         this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'iam::tag.detail.new' : 'iam::tag.detail.create',
-                    'iam::tag.detail.edit': 'iam::tag.detail.update',
-                },
-            ),
+            id: mapActions(this.currentViewAction.id, {
+                'iam::tag.detail.new': 'iam::tag.detail.create',
+                'iam::tag.detail.edit': 'iam::tag.detail.update',
+            }),
             isViewAction: false,
         });
     }
 
-    createForm(): void
-    {
+    createForm(): void {
         /* eslint-disable key-spacing */
         this.fg = this.fb.group({
-            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            id: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
             name: ['', [Validators.required, Validators.maxLength(64)]],
         });
         /* eslint-enable key-spacing */
     }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'iam::tag.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'iam::tag.detail.edit':
-                this.tagService
-                    .tag$
+                this.tagService.tag$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
-                        this.managedObject = item;
+                    .subscribe((item) => {
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
                 break;
 
             case 'iam::tag.detail.create':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.tagService
-                            .create<IamTag>({
-                                object: this.fg.value,
-                            }),
+                        this.tagService.create<IamTag>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -136,26 +139,22 @@ export class TagDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['iam/tag']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'iam::tag.detail.update':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.tagService
-                            .updateById<IamTag>({
-                                object: this.fg.value,
-                            }),
+                        this.tagService.updateById<IamTag>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -163,18 +162,16 @@ export class TagDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['iam/tag']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
         }
     }
 }

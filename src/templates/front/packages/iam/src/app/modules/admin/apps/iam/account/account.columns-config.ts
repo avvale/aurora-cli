@@ -1,26 +1,22 @@
-import { ColumnConfig, ColumnDataType, getFieldValuesFromEnum, SearchComponentType } from '@aurora';
+import { ColumnConfig, ColumnDataType, SearchComponentType } from '@aurora';
 import { TranslocoService } from '@jsverse/transloco';
 
-export const accountColumnsConfig: (
-     param?: {
-        translocoService?: TranslocoService;
-        tenantsAsyncMatSelectSearch?: unknown;
-        scopesAsyncMatSelectSearch?: unknown;
-        tagsAsyncMatSelectSearch?: unknown;
-    }
-) => ColumnConfig[] = (
-    {
-        translocoService = null,
-        tenantsAsyncMatSelectSearch = null,
-        scopesAsyncMatSelectSearch = null,
-        tagsAsyncMatSelectSearch = null,
-    }: {
-        translocoService?: TranslocoService;
-        tenantsAsyncMatSelectSearch?: unknown;
-        scopesAsyncMatSelectSearch?: unknown;
-        tagsAsyncMatSelectSearch?: unknown;
-    } = {},
-) => [
+export const accountColumnsConfig: (param?: {
+    translocoService?: TranslocoService;
+    tenantsAsyncMatSelectSearch?: unknown;
+    scopesAsyncMatSelectSearch?: unknown;
+    tagsAsyncMatSelectSearch?: unknown;
+}) => ColumnConfig[] = ({
+    translocoService = null,
+    tenantsAsyncMatSelectSearch = null,
+    scopesAsyncMatSelectSearch = null,
+    tagsAsyncMatSelectSearch = null,
+}: {
+    translocoService?: TranslocoService;
+    tenantsAsyncMatSelectSearch?: unknown;
+    scopesAsyncMatSelectSearch?: unknown;
+    tagsAsyncMatSelectSearch?: unknown;
+} = {}) => [
     /*
     Account types currently disabled; user accounts and service accounts are displayed in separate sections.
     {

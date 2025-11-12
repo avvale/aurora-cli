@@ -56,8 +56,11 @@ export class GridComponent implements OnInit, AfterViewInit
     @Input() hasExportButton: boolean = true;
     @Input() hasSearch: boolean = true;
     @Input() hasColumnsConfigPropertiesButton: boolean = true;
-    @Input() hasPagination: boolean = true;
     @Input() hasDragAndDrop: boolean = false;
+    // show or hide paginator
+    hasPagination = input<boolean>(true);
+    // page size options for paginator
+    pageSizeOptions = input<number[]>([10, 25, 50, 100]);
 
     // manage all grid state, or part of it
     // set grid state to load grid with specific state with sort and filters

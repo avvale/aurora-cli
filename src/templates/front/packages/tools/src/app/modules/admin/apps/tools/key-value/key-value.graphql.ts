@@ -1,9 +1,11 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     key
     type
     value
+    isCached
     isActive
     description
     createdAt
@@ -15,11 +17,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query ToolsPaginateKeyValues (
+    query ToolsPaginateKeyValues(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: toolsPaginateKeyValues (
+        pagination: toolsPaginateKeyValues(
             query: $query
             constraint: $constraint
         ) {
@@ -31,14 +33,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query ToolsGetKeyValues (
+    query ToolsGetKeyValues(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: toolsGetKeyValues (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: toolsGetKeyValues(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -46,14 +45,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query ToolsFindKeyValueById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: toolsFindKeyValueById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query ToolsFindKeyValueById($id: ID, $constraint: QueryStatement) {
+        object: toolsFindKeyValueById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -61,14 +54,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query ToolsFindKeyValue (
+    query ToolsFindKeyValue(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: toolsFindKeyValue (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: toolsFindKeyValue(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -88,12 +78,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation ToolsCreateKeyValues (
-        $payload: [ToolsCreateKeyValueInput]!
-    ) {
-        toolsCreateKeyValues (
-            payload: $payload
-        )
+    mutation ToolsCreateKeyValues($payload: [ToolsCreateKeyValueInput]!) {
+        toolsCreateKeyValues(payload: $payload)
     }
 `;
 

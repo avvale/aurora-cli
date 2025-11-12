@@ -156,7 +156,7 @@ En la cabecera de una edición del mensaje en el Gestor de Mensajes, disponemos 
 
 **Destinatarios,** número total de cuentas que recibirán el mensaje.
 **Leídos,** número de mensajes leídos **al menos una vez**.
-**Por leer,** sale de la resta de destinatarios y **mensajes leídos al menos una vez**. 
+**Por leer,** sale de la resta de destinatarios y **mensajes leídos al menos una vez**.
 
 ## Log de mensajes
 Dentro del apartado **Log de Mensajes** tenemos la posibilidad de buscar en todos los buzones de entrada un mensaje concreto enviado a una cuenta concreta, para comprobar si ese mensaje en particular ha sido leído al menos una vez o leído.

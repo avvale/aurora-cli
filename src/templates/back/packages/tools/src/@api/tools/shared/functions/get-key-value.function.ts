@@ -2,17 +2,19 @@ import { ToolsKeyValue, ToolsKeyValueType } from '@api/graphql';
 import { ToolsFindKeyValueQuery } from '@app/tools/key-value';
 import { IQueryBus } from '@aurorajs.dev/core';
 
-export const getKeyValue = async <T = string | boolean | number | Array<any> | object>(
+export const getKeyValue = async <
+    T = string | boolean | number | Array<any> | object,
+>(
     queryBus: IQueryBus,
     key: string,
-): Promise<T> =>
-{
-    const keyValue: ToolsKeyValue = await queryBus.ask(new ToolsFindKeyValueQuery({ where: { key }}));
+): Promise<T> => {
+    const keyValue: ToolsKeyValue = await queryBus.ask(
+        new ToolsFindKeyValueQuery({ where: { key } }),
+    );
 
-    switch (keyValue.type)
-    {
+    switch (keyValue.type) {
         case ToolsKeyValueType.STRING:
-            return keyValue.value;
+            return keyValue.value as T;
 
         case ToolsKeyValueType.BOOLEAN:
             return (keyValue.value === 'true') as T;
@@ -22,6 +24,6 @@ export const getKeyValue = async <T = string | boolean | number | Array<any> | o
 
         case ToolsKeyValueType.ARRAY:
         case ToolsKeyValueType.OBJECT:
-            return JSON.parse(keyValue.value);
+            return JSON.parse(keyValue.value) as T;
     }
 };

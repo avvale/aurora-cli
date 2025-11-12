@@ -15,6 +15,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: name
     description: Permission name, this name is unique and used to evaluate if a user can consume or access a resource
     type: varchar
@@ -75,6 +80,7 @@ aggregateProperties:
               avoidConstraint: true
         excludedOperations:
           - count
+          - getRaw
           - max
           - min
           - rawSql
@@ -95,6 +101,7 @@ aggregateProperties:
     nullable: true
 excludedOperations:
   - count
+  - getRaw
   - max
   - min
   - rawSql

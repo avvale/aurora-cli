@@ -14,13 +14,16 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Inject, Injectable } from '@nestjs/common';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class ToolsUpdateKeyValueByIdHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     ) {}
 
     async main(
@@ -53,10 +56,24 @@ export class ToolsUpdateKeyValueByIdHandler {
             ),
         );
 
-        return await this.queryBus.ask(
+        const keyValueUpdated = await this.queryBus.ask<
+            ToolsFindKeyValueByIdQuery,
+            ToolsKeyValue
+        >(
             new ToolsFindKeyValueByIdQuery(payload.id, constraint, {
                 timezone,
             }),
         );
+
+        if (keyValueUpdated.isCached) {
+            await this.cacheManager.set(
+                keyValueUpdated.key,
+                keyValueUpdated.value,
+            );
+        } else if (payload.isCached === false) {
+            await this.cacheManager.del(keyValueUpdated.key);
+        }
+
+        return keyValueUpdated;
     }
 }

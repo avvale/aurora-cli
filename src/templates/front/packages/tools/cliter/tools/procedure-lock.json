@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/tools/tools.component.ts",
-            "integrity": "sha1:66dd95180dca167c44eaa08806590f37ced9d24b"
+            "integrity": "sha1:9cc858f808567bfb6332e5b955c3d3f4aef01ceb"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/procedure-detail.component.html",
-            "integrity": "sha1:6b9865f6c750729e0a066eb2e8da5fd42c0966c0"
+            "integrity": "sha1:c0ee9f539e4396dad7964b48f67b3954e868ce34"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/procedure-detail.component.ts",
-            "integrity": "sha1:9275e436ae46d8a3f6d33f2481b5098b83981c67"
+            "integrity": "sha1:d419a6711e5b581a5318053b7d9f972a5f50a999"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/procedure-list.component.html",
-            "integrity": "sha1:e34ad3abcf5dc901b72d60201fe1af1056feea5a"
+            "integrity": "sha1:4e9af71650ae6b5efd6bc8797bd9fdfe253875d2"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/procedure-list.component.ts",
-            "integrity": "sha1:76b323edc0f7e36083ebc3b613f1b2296c16dba1"
+            "integrity": "sha1:3f074c83531631955920179ba6cc7af6d7febe51"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/procedure.columns-config.ts",
-            "integrity": "sha1:7f692ba92892b34c5a057cb8a40c4d609755f787"
+            "integrity": "sha1:26a21ba7f087f78d72e365f106c2448f1d2461b1"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/procedure.graphql.ts",
-            "integrity": "sha1:54387ce69b6a013d33890e4dbff9e37444d4e679"
+            "integrity": "sha1:0b3cc7a8d8add86dc8b3b1b864a518c9c2a5f866"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/procedure.resolvers.ts",
-            "integrity": "sha1:f12c50439950be155f78b823210bcf6907709dff"
+            "integrity": "sha1:d47aeb7abffc9155584a2c31dfe39dc23cc7d6e3"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/procedure.service.ts",
-            "integrity": "sha1:13e96edcf1204b297e4d3573c3c05df2db5daff7"
+            "integrity": "sha1:7ca4abbff8a9708d7fba30d5411df3c328ab4dca"
         },
         {
             "path": "src/app/modules/admin/apps/tools/procedure/index.ts",

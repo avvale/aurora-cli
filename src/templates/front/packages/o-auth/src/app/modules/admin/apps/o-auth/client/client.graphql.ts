@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     grantType
     name
     secret
@@ -30,11 +31,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query OAuthPaginateClients (
+    query OAuthPaginateClients(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: oAuthPaginateClients (
+        pagination: oAuthPaginateClients(
             query: $query
             constraint: $constraint
         ) {
@@ -46,14 +47,8 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query OAuthGetClients (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: oAuthGetClients (
-            query: $query
-            constraint: $constraint
-        ) {
+    query OAuthGetClients($query: QueryStatement, $constraint: QueryStatement) {
+        objects: oAuthGetClients(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -61,20 +56,14 @@ export const getQuery = gql`
 `;
 
 export const getRelations = gql`
-    query IamClientRelations {
+    query OAuthGetClientsRelations {
         ${relationsFields}
     }
 `;
 
 export const findByIdQuery = gql`
-    query OAuthFindClientById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: oAuthFindClientById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query OAuthFindClientById($id: ID, $constraint: QueryStatement) {
+        object: oAuthFindClientById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -82,7 +71,7 @@ export const findByIdQuery = gql`
 `;
 
 export const findByIdWithRelationsQuery = gql`
-    query OAuthFindClientById (
+    query OAuthFindClientByIdWithRelations (
         $id: ID
         $constraint: QueryStatement
     ) {
@@ -103,14 +92,8 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query OAuthFindClient (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: oAuthFindClient (
-            query: $query
-            constraint: $constraint
-        ) {
+    query OAuthFindClient($query: QueryStatement, $constraint: QueryStatement) {
+        object: oAuthFindClient(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -126,6 +109,12 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation OAuthCreateClients($payload: [OAuthCreateClientInput]!) {
+        oAuthCreateClients(payload: $payload)
     }
 `;
 

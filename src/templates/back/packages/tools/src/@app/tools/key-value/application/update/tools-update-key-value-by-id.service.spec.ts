@@ -9,6 +9,7 @@ import {
     ToolsKeyValueDescription,
     ToolsKeyValueId,
     ToolsKeyValueIsActive,
+    ToolsKeyValueIsCached,
     ToolsKeyValueKey,
     ToolsKeyValueRowId,
     ToolsKeyValueType,
@@ -67,6 +68,9 @@ describe('ToolsUpdateKeyValueByIdService', () => {
                         ),
                         value: new ToolsKeyValueValue(
                             toolsMockKeyValueData[0].value,
+                        ),
+                        isCached: new ToolsKeyValueIsCached(
+                            toolsMockKeyValueData[0].isCached,
                         ),
                         isActive: new ToolsKeyValueIsActive(
                             toolsMockKeyValueData[0].isActive,

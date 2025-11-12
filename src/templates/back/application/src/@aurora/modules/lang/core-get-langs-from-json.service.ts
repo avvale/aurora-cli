@@ -6,14 +6,10 @@ import { Cache } from 'cache-manager';
 import { coreLangs } from './core-langs';
 
 @Injectable()
-export class CoreGetLangsFromJsonService implements CoreGetLangsService
-{
-    constructor(
-        @Inject(CACHE_MANAGER) private cacheManager: Cache,
-    ) {}
+export class CoreGetLangsFromJsonService implements CoreGetLangsService {
+    constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
 
-    async get<T>(): Promise<T[]>
-    {
+    async get<T>(): Promise<T[]> {
         // return cache langs
         const langs = await this.cacheManager.get<T[]>('common/langs');
         if (langs) return langs;
@@ -23,18 +19,15 @@ export class CoreGetLangsFromJsonService implements CoreGetLangsService
         return await this.cacheManager.get<T[]>('common/langs');
     }
 
-    async init(): Promise<void>
-    {
+    async init(): Promise<void> {
         await this.cacheManager.set('common/langs', this.getJsonLangs());
     }
 
-    getJsonLangs(): CoreLang[]
-    {
+    getJsonLangs(): CoreLang[] {
         return coreLangs;
     }
 
-    async onApplicationBootstrap(): Promise<void>
-    {
+    async onApplicationBootstrap(): Promise<void> {
         await this.init();
     }
 }

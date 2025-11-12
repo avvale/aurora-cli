@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/iam.component.ts",
-            "integrity": "sha1:48812be9558ebb77f30b655b3e2a7bed49f56bc4"
+            "integrity": "sha1:8fd8985fcacd3e5bc06202be4dc11db167503ec5"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-detail.component.html",
-            "integrity": "sha1:12bcf49fd851281e960403393b7acf7cf1341b7f"
+            "integrity": "sha1:d9d3d22e2566d89cbf85694ef1ced87af86e560d"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-detail.component.ts",
-            "integrity": "sha1:c29b550ed4229ee22d50521bfb622ba1b1f6ad83"
+            "integrity": "sha1:a6923ec46558aa352424e9ac760dbb72e42bd3b3"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-list.component.html",
-            "integrity": "sha1:bfe3414dad615925d3192cf7c276a6105af266ab"
+            "integrity": "sha1:31f9344ec89c69703fbc5f7b6dd951cd403c9d5e"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role-list.component.ts",
-            "integrity": "sha1:e41d58ee5646874086a39658397fad93b7ca49fe"
+            "integrity": "sha1:7bcfb291341a8fd7c1ff800fcf2be81359c77b34"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.columns-config.ts",
-            "integrity": "sha1:d1f3ee25575937d0b959eb044228a6925e109b22"
+            "integrity": "sha1:30e2021de8a1f456975f20d38c9949c21711f0bb"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.graphql.ts",
-            "integrity": "sha1:3a8565f71a74dae50cd2639b545d8154bcecfb17"
+            "integrity": "sha1:0c3969a1960c71311f7da2890235825de392e579"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.resolvers.ts",
-            "integrity": "sha1:13a7fc9a53c8a4ccb2aa94ccf2affa423b58f9ac"
+            "integrity": "sha1:997ae8b0ad83bc2d0c2cc011080972f04872253e"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/role.service.ts",
-            "integrity": "sha1:121b95447232fed11dd871cb0c8ec0d12e82dae5"
+            "integrity": "sha1:dc7a284711241518d6fd907df00cfe4e7f0fe12a"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role/index.ts",
@@ -55,7 +55,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/iam.component.ts",
-            "integrity": "sha1:48812be9558ebb77f30b655b3e2a7bed49f56bc4"
+            "integrity": "sha1:8fd8985fcacd3e5bc06202be4dc11db167503ec5"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission-role/permission-role.columns-config.ts",
@@ -63,11 +63,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission-role/permission-role.graphql.ts",
-            "integrity": "sha1:f1ca53110d7e8d1f35c6297be708c94379b1c26e"
+            "integrity": "sha1:03abdfe46a1688c0a048ead1cb0fa87f239938bb"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission-role/permission-role.service.ts",
-            "integrity": "sha1:19da77f2717eecce9f961a4feeaea026b57f925e"
+            "integrity": "sha1:ed2e30095d98e467add65ee160ac830733dbe6d4"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission-role/index.ts",
@@ -83,7 +83,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/iam.component.ts",
-            "integrity": "sha1:48812be9558ebb77f30b655b3e2a7bed49f56bc4"
+            "integrity": "sha1:8fd8985fcacd3e5bc06202be4dc11db167503ec5"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role-account/role-account.columns-config.ts",
@@ -91,11 +91,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/role-account/role-account.graphql.ts",
-            "integrity": "sha1:db8506aae523e47227fae9ad5020b30d7ffc84fb"
+            "integrity": "sha1:26c1e48d167b7fa4371e899f82c466c78bd57437"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role-account/role-account.service.ts",
-            "integrity": "sha1:8cba01a097b59eff7040103bda71a0aa58211268"
+            "integrity": "sha1:3f1c123e24bc029ddc60b88bac05e737cffd5c8b"
         },
         {
             "path": "src/app/modules/admin/apps/iam/role-account/index.ts",

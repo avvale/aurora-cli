@@ -14,6 +14,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: code
     type: varchar
     maxLength: 64
@@ -26,9 +31,9 @@ aggregateProperties:
     nullable: false
   - name: roleIds
     type: array
-    nullable: true
     arrayOptions:
       type: id
+    nullable: true
   - name: createdAt
     type: timestamp
     nullable: true
@@ -38,3 +43,14 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - createBatch
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

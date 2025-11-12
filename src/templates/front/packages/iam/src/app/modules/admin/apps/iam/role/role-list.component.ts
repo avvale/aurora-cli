@@ -1,10 +1,45 @@
-import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    TemplateRef,
+    ViewChild,
+    ViewEncapsulation,
+} from '@angular/core';
+import {
+    FormBuilder,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    Validators,
+} from '@angular/forms';
+import {
+    MatDialog,
+    MatDialogModule,
+    MatDialogRef,
+} from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { IamRole } from '@apps/iam/iam.types';
 import { roleColumnsConfig, RoleService } from '@apps/iam/role';
-import { Action, ColumnConfig, ColumnDataType, ContentDialogTemplateDirective, Crumb, defaultListImports, DialogComponent, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, queryStatementHandler, QueryStatementHandler, uuidValidate, ValidationMessagesService, ViewBaseComponent } from '@aurora';
+import {
+    Action,
+    ColumnConfig,
+    ColumnDataType,
+    ContentDialogTemplateDirective,
+    Crumb,
+    defaultListImports,
+    DialogComponent,
+    exportRows,
+    GridColumnsConfigStorageService,
+    GridData,
+    GridFiltersStorageService,
+    GridState,
+    GridStateService,
+    log,
+    queryStatementHandler,
+    uuidValidate,
+    ValidationMessagesService,
+    ViewBaseComponent,
+} from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { PermissionRoleService } from '../permission-role';
 
@@ -18,19 +53,22 @@ export const roleMainGridListId = 'iam::role.list.mainGridList';
     standalone: true,
     imports: [
         ...defaultListImports,
-        FormsModule, MatDialogModule, MatSelectModule, ReactiveFormsModule,
+        FormsModule,
+        MatDialogModule,
+        MatSelectModule,
+        ReactiveFormsModule,
     ],
 })
-export class RoleListComponent extends ViewBaseComponent
-{
+export class RoleListComponent extends ViewBaseComponent {
     // ---- customizations ----
-    @ViewChild('roleSelectorContentFormDialog') roleSelectorContentFormDialog?: TemplateRef<any>;
+    @ViewChild('roleSelectorContentFormDialog')
+    roleSelectorContentFormDialog?: TemplateRef<any>;
     roleSelectorDialogFg: FormGroup;
     roles$: Observable<IamRole[]>;
     contactFamilyUnitDialog: MatDialogRef<DialogComponent>;
 
     breadcrumb: Crumb[] = [
-        { translation: 'App', routerLink: ['/']},
+        { translation: 'App', routerLink: ['/'] },
         { translation: 'iam.Roles' },
     ];
     gridId: string = roleMainGridListId;
@@ -39,45 +77,44 @@ export class RoleListComponent extends ViewBaseComponent
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
-            actions: row =>
-            {
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
+            actions: (row) => {
                 return [
                     {
-                        id         : 'iam::role.list.edit',
+                        id: 'iam::role.list.edit',
                         translation: 'edit',
-                        icon       : 'mode_edit',
+                        icon: 'mode_edit',
                     },
                     {
-                        id         : 'iam::role.list.openRoleSelectorFormDialog',
+                        id: 'iam::role.list.openRoleSelectorFormDialog',
                         translation: 'inherit',
-                        icon       : 'layers',
+                        icon: 'layers',
                     },
                     {
-                        id         : 'iam::role.list.copyPermissions',
+                        id: 'iam::role.list.copyPermissions',
                         translation: 'copyPermissions',
-                        icon       : 'copy_all',
+                        icon: 'copy_all',
                     },
                     {
-                        id         : 'iam::role.list.importPermissions',
+                        id: 'iam::role.list.importPermissions',
                         translation: 'importPermissions',
-                        icon       : 'publish',
+                        icon: 'publish',
                     },
                     {
-                        id         : 'iam::role.list.delete',
+                        id: 'iam::role.list.delete',
                         translation: 'delete',
-                        icon       : 'delete',
+                        icon: 'delete',
                     },
                 ];
             },
         },
         {
-            type       : ColumnDataType.CHECKBOX,
-            field      : 'select',
+            type: ColumnDataType.CHECKBOX,
+            field: 'select',
             translation: 'Selects',
-            sticky     : true,
+            sticky: true,
         },
         ...roleColumnsConfig,
     ];
@@ -91,37 +128,34 @@ export class RoleListComponent extends ViewBaseComponent
         private readonly permissionRoleService: PermissionRoleService,
         private readonly fb: FormBuilder,
         private readonly dialog: MatDialog,
-    )
-    {
+    ) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    { /**/ }
+    init(): void {
+        /**/
+    }
 
     /* #region methods to role */
-    createContactFamilyUnitDialogForm(role: IamRole): void
-    {
+    createContactFamilyUnitDialogForm(role: IamRole): void {
         this.roleSelectorDialogFg = this.fb.group({
             parentRoleId: ['', [Validators.required]],
-            childRoleId : [role.id, [Validators.required]],
+            childRoleId: [role.id, [Validators.required]],
         });
     }
 
-    handleSubmitInheritRoleForm(): void
-    {
+    handleSubmitInheritRoleForm(): void {
         // manage validations before execute actions
-        if (this.roleSelectorDialogFg.invalid)
-        {
+        if (this.roleSelectorDialogFg.invalid) {
             log('[DEBUG] Error to validate form: ', this.roleSelectorDialogFg);
             this.validationMessagesService.validate();
             return;
         }
 
         this.actionService.action({
-            id          : 'iam::role.list.inheritPermissionsRole',
+            id: 'iam::role.list.inheritPermissionsRole',
             isViewAction: false,
         });
 
@@ -129,11 +163,9 @@ export class RoleListComponent extends ViewBaseComponent
     }
     /* #endregion methods to manage role */
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'iam::role.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
@@ -141,10 +173,13 @@ export class RoleListComponent extends ViewBaseComponent
                     .pipe(takeUntil(this.unsubscribeAll$));
 
                 this.gridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.gridId),
-                    page         : this.gridStateService.getPage(this.gridId),
-                    sort         : this.gridStateService.getSort(this.gridId),
-                    search       : this.gridStateService.getSearchState(this.gridId),
+                    columnFilters:
+                        this.gridFiltersStorageService.getColumnFilterState(
+                            this.gridId,
+                        ),
+                    page: this.gridStateService.getPage(this.gridId),
+                    sort: this.gridStateService.getSort(this.gridId),
+                    search: this.gridStateService.getSearchState(this.gridId),
                 };
 
                 this.gridData$ = this.roleService.pagination$;
@@ -154,86 +189,104 @@ export class RoleListComponent extends ViewBaseComponent
             case 'iam::role.list.pagination':
                 await lastValueFrom(
                     this.roleService.pagination({
-                        query: action.meta.query ?
-                            action.meta.query :
-                            queryStatementHandler({ columnsConfig: roleColumnsConfig })
-                                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
-                                .setSort(this.gridStateService.getSort(this.gridId))
-                                .setPage(this.gridStateService.getPage(this.gridId))
-                                .setSearch(this.gridStateService.getSearchState(this.gridId))
-                                .getQueryStatement(),
+                        query: action.meta.query
+                            ? action.meta.query
+                            : queryStatementHandler({
+                                  columnsConfig: roleColumnsConfig,
+                              })
+                                  .setColumFilters(
+                                      this.gridFiltersStorageService.getColumnFilterState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSort(
+                                      this.gridStateService.getSort(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setPage(
+                                      this.gridStateService.getPage(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSearch(
+                                      this.gridStateService.getSearchState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .getQueryStatement(),
                     }),
                 );
                 break;
 
             case 'iam::role.list.edit':
-                this.router
-                    .navigate([
-                        'iam/role/edit',
-                        action.meta.row.id,
-                    ]);
+                this.router.navigate(['iam/role/edit', action.meta.row.id]);
                 break;
 
             case 'iam::role.list.delete':
                 const deleteDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('iam.Role')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('iam.Role') }),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
+                    title: `${this.translocoService.translate('Delete')} ${this.translocoService.translate('iam.Role')}`,
+                    message: this.translocoService.translate(
+                        'DeletionWarning',
+                        { entity: this.translocoService.translate('iam.Role') },
+                    ),
+                    icon: {
+                        show: true,
+                        name: 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
                         confirm: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Remove'),
                             color: 'warn',
                         },
                         cancel: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Cancel'),
                         },
                     },
                     dismissible: true,
                 });
 
-                deleteDialogRef.afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
-                                await lastValueFrom(
-                                    this.roleService
-                                        .deleteById<IamRole>({
-                                            id: action.meta.row.id,
-                                        }),
-                                );
+                deleteDialogRef.afterClosed().subscribe(async (result) => {
+                    if (result === 'confirmed') {
+                        try {
+                            await lastValueFrom(
+                                this.roleService.deleteById<IamRole>({
+                                    id: action.meta.row.id,
+                                }),
+                            );
 
-                                this.actionService.action({
-                                    id: 'iam::role.list.pagination',
-                                    isViewAction: false,
-                                });
-                            }
-                            catch(error)
-                            {
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                            }
+                            this.actionService.action({
+                                id: 'iam::role.list.pagination',
+                                isViewAction: false,
+                            });
+                        } catch (error) {
+                            log(
+                                `[DEBUG] Catch error in ${action.id} action: ${error}`,
+                            );
                         }
-                    });
+                    }
+                });
                 break;
 
             case 'iam::role.list.export':
                 const rows = await lastValueFrom(
-                    this.roleService
-                        .get({
-                            query: action.meta.query,
-                        }),
+                    this.roleService.get({
+                        query: action.meta.query,
+                    }),
                 );
 
-                const columns: string[] = roleColumnsConfig.map(roleColumnConfig => roleColumnConfig.field);
-                const headers: string[] = roleColumnsConfig.map(roleColumnConfig => this.translocoService.translate(roleColumnConfig.translation));
+                const columns: string[] = roleColumnsConfig.map(
+                    (roleColumnConfig) => roleColumnConfig.field,
+                );
+                const headers: string[] = roleColumnsConfig.map(
+                    (roleColumnConfig) =>
+                        this.translocoService.translate(
+                            roleColumnConfig.translation,
+                        ),
+                );
 
                 exportRows(
                     rows.objects,
@@ -243,38 +296,37 @@ export class RoleListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
 
             /* #region custom actions */
             case 'iam::role.list.openRoleSelectorFormDialog':
                 this.createContactFamilyUnitDialogForm(action.meta.row);
-                this.contactFamilyUnitDialog = this.dialog
-                    .open(
-                        DialogComponent,
-                        {
-                            panelClass: 'au-dialog',
-                            width     : '60vw',
-                            maxWidth  : '2048px',
-                            minWidth  : '240px',
-                            height    : 'auto',
-                            data      : {
-                                icon   : 'layers',
-                                title  : `${this.translocoService.translate('iam.Roles')} ${this.translocoService.translate('For').toLowerCase()} ${action.meta.row.name}`,
-                                content: new ContentDialogTemplateDirective(this.roleSelectorContentFormDialog),
-                            },
+                this.contactFamilyUnitDialog = this.dialog.open(
+                    DialogComponent,
+                    {
+                        panelClass: 'au-dialog',
+                        width: '60vw',
+                        maxWidth: '2048px',
+                        minWidth: '240px',
+                        height: 'auto',
+                        data: {
+                            icon: 'layers',
+                            title: `${this.translocoService.translate('iam.Roles')} ${this.translocoService.translate('For').toLowerCase()} ${action.meta.row.name}`,
+                            content: new ContentDialogTemplateDirective(
+                                this.roleSelectorContentFormDialog,
+                            ),
                         },
-                    );
+                    },
+                );
 
                 break;
 
             case 'iam::role.list.inheritPermissionsRole':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.roleService
-                            .inheritPermissionsRoleRole({
-                                object: this.roleSelectorDialogFg.value,
-                            }),
+                        this.roleService.inheritPermissionsRoleRole({
+                            object: this.roleSelectorDialogFg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -282,107 +334,122 @@ export class RoleListComponent extends ViewBaseComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'iam::role.list.copyPermissions':
                 const role = await lastValueFrom(
-                    this.roleService
-                        .findById({
-                            id: action.meta.row.id,
-                            constraint: {
-                                include: [
-                                    {
-                                        association: 'permissions',
-                                    },
-                                ],
-                            },
-                        }),
+                    this.roleService.findById({
+                        id: action.meta.row.id,
+                        constraint: {
+                            include: [
+                                {
+                                    association: 'permissions',
+                                },
+                            ],
+                        },
+                    }),
                 );
 
-                navigator
-                    .clipboard
-                    .writeText(
-                        JSON.stringify(role.object.permissions.map(permission => permission.id))
-                    );
+                navigator.clipboard.writeText(
+                    JSON.stringify(
+                        role.object.permissions.map(
+                            (permission) => permission.id,
+                        ),
+                    ),
+                );
 
                 this.snackBar.open(
                     `${action.meta.row.name} ${this.translocoService.translate('iam.Permissions').toLowerCase()} ${this.translocoService.translate('iam.CopiedInClipboard')}`,
                     undefined,
                     {
                         verticalPosition: 'top',
-                        duration        : 3000,
+                        duration: 3000,
                     },
                 );
                 break;
 
             case 'iam::role.list.importPermissions':
-                const importPermissionsDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('iam.ImportPermissions')}`,
-                    message: this.translocoService.translate('iam.ImportPermissionsWarning', { role: action.meta.row.name }),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
-                        color: 'warn',
-                    },
-                    actions: {
-                        confirm: {
-                            show : true,
-                            label: this.translocoService.translate('Import'),
+                const importPermissionsDialogRef =
+                    this.confirmationService.open({
+                        title: `${this.translocoService.translate('iam.ImportPermissions')}`,
+                        message: this.translocoService.translate(
+                            'iam.ImportPermissionsWarning',
+                            { role: action.meta.row.name },
+                        ),
+                        icon: {
+                            show: true,
+                            name: 'heroicons_outline:exclamation-triangle',
                             color: 'warn',
                         },
-                        cancel: {
-                            show : true,
-                            label: this.translocoService.translate('Cancel'),
+                        actions: {
+                            confirm: {
+                                show: true,
+                                label: this.translocoService.translate(
+                                    'Import',
+                                ),
+                                color: 'warn',
+                            },
+                            cancel: {
+                                show: true,
+                                label: this.translocoService.translate(
+                                    'Cancel',
+                                ),
+                            },
                         },
-                    },
-                    dismissible: true,
-                });
+                        dismissible: true,
+                    });
 
-                importPermissionsDialogRef.afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
-                                const clipboardContent = await navigator
-                                    .clipboard
-                                    .readText();
-                                const permissionIds = JSON.parse(clipboardContent);
+                importPermissionsDialogRef
+                    .afterClosed()
+                    .subscribe(async (result) => {
+                        if (result === 'confirmed') {
+                            try {
+                                const clipboardContent =
+                                    await navigator.clipboard.readText();
+                                const permissionIds =
+                                    JSON.parse(clipboardContent);
 
-                                if (!Array.isArray(permissionIds)) throw new SyntaxError('Clipboard content is not an array');
-                                if (permissionIds.some(permissionId => !uuidValidate(permissionId))) throw new SyntaxError('Clipboard content contains invalid UUIDs');
+                                if (!Array.isArray(permissionIds))
+                                    throw new SyntaxError(
+                                        'Clipboard content is not an array',
+                                    );
+                                if (
+                                    permissionIds.some(
+                                        (permissionId) =>
+                                            !uuidValidate(permissionId),
+                                    )
+                                )
+                                    throw new SyntaxError(
+                                        'Clipboard content contains invalid UUIDs',
+                                    );
 
                                 // delete all permissions from the role
                                 await lastValueFrom(
-                                    this.permissionRoleService
-                                        .delete({
-                                            query: {
-                                                where: {
-                                                    roleId: action.meta.row.id,
-                                                },
+                                    this.permissionRoleService.delete({
+                                        query: {
+                                            where: {
+                                                roleId: action.meta.row.id,
                                             },
-                                        }),
+                                        },
+                                    }),
                                 );
 
                                 // insert new permissions in the role
                                 await lastValueFrom(
-                                    this.permissionRoleService
-                                        .insert({
-                                            objects: permissionIds
-                                                .map(permissionId => ({
-                                                    permissionId,
-                                                    roleId: action.meta.row.id,
-                                                })),
-                                        }),
+                                    this.permissionRoleService.insert({
+                                        objects: permissionIds.map(
+                                            (permissionId) => ({
+                                                permissionId,
+                                                roleId: action.meta.row.id,
+                                            }),
+                                        ),
+                                    }),
                                 );
 
                                 this.snackBar.open(
@@ -390,40 +457,42 @@ export class RoleListComponent extends ViewBaseComponent
                                     undefined,
                                     {
                                         verticalPosition: 'top',
-                                        duration        : 3000,
+                                        duration: 3000,
                                     },
                                 );
-                            }
-                            catch(error)
-                            {
-                                if (error.name === 'SyntaxError')
-                                {
+                            } catch (error) {
+                                if (error.name === 'SyntaxError') {
                                     this.confirmationService.open({
-                                        title  : `${this.translocoService.translate('Import')} ${this.translocoService.translate('iam.Permissions')}`,
-                                        message: this.translocoService.translate('iam.ImportPermissionSyntaxError'),
-                                        icon   : {
-                                            show : true,
-                                            name : 'heroicons_outline:exclamation-triangle',
+                                        title: `${this.translocoService.translate('Import')} ${this.translocoService.translate('iam.Permissions')}`,
+                                        message:
+                                            this.translocoService.translate(
+                                                'iam.ImportPermissionSyntaxError',
+                                            ),
+                                        icon: {
+                                            show: true,
+                                            name: 'heroicons_outline:exclamation-triangle',
                                             color: 'warn',
                                         },
                                         actions: {
                                             confirm: {
-                                                show : false,
+                                                show: false,
                                             },
                                             cancel: {
-                                                show : false,
+                                                show: false,
                                             },
                                         },
                                         dismissible: true,
                                     });
                                 }
 
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                                log(
+                                    `[DEBUG] Catch error in ${action.id} action: ${error}`,
+                                );
                             }
                         }
                     });
                 break;
-                /* #endregion custom actions */
+            /* #endregion custom actions */
         }
     }
 }

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     type
     code
     email
@@ -24,10 +25,12 @@ export const fields = `
     }
     tenants {
         id
+        rowId
         name
     }
     user {
         id
+        rowId
         name
         surname
         mobile
@@ -81,11 +84,11 @@ export const tagFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query IamPaginateAccounts (
+    query IamPaginateAccounts(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: iamPaginateAccounts (
+        pagination: iamPaginateAccounts(
             query: $query
             constraint: $constraint
         ) {
@@ -161,14 +164,8 @@ export const paginationWithRelationsQuery = gql`
 `;
 
 export const getQuery = gql`
-    query IamGetAccounts (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: iamGetAccounts (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamGetAccounts($query: QueryStatement, $constraint: QueryStatement) {
+        objects: iamGetAccounts(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -185,14 +182,8 @@ export const getRelations = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindAccountById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: iamFindAccountById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query IamFindAccountById($id: ID, $constraint: QueryStatement) {
+        object: iamFindAccountById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -220,14 +211,8 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindAccount (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: iamFindAccount (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamFindAccount($query: QueryStatement, $constraint: QueryStatement) {
+        object: iamFindAccount(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -247,12 +232,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation IamCreateAccounts (
-        $payload: [IamCreateAccountInput]!
-    ) {
-        iamCreateAccounts (
-            payload: $payload
-        )
+    mutation IamCreateAccounts($payload: [IamCreateAccountInput]!) {
+        iamCreateAccounts(payload: $payload)
     }
 `;
 
@@ -316,21 +297,17 @@ export const deleteMutation = gql`
 
 // Queries additionalApis
 export const checkPasswordMeAccountQuery = gql`
-    query IamCheckPasswordMeAccount (
-        $password: GraphQLString!
-    ) {
-        iamCheckPasswordMeAccount (
-            password: $password
-        )
+    query IamCheckPasswordMeAccount($password: GraphQLString!) {
+        iamCheckPasswordMeAccount(password: $password)
     }
 `;
 
 export const checkUniqueUsernameAccountQuery = gql`
-    query IamCheckUniqueUsernameAccount (
+    query IamCheckUniqueUsernameAccount(
         $username: GraphQLString!
         $avoidUsernames: [GraphQLString]
     ) {
-        iamCheckUniqueUsernameAccount (
+        iamCheckUniqueUsernameAccount(
             username: $username
             avoidUsernames: $avoidUsernames
         )
@@ -338,23 +315,20 @@ export const checkUniqueUsernameAccountQuery = gql`
 `;
 
 export const checkUniqueEmailAccountQuery = gql`
-    query IamCheckUniqueEmailAccount (
+    query IamCheckUniqueEmailAccount(
         $email: GraphQLString!
         $avoidEmails: [GraphQLString]
     ) {
-        iamCheckUniqueEmailAccount (
-            email: $email
-            avoidEmails: $avoidEmails
-        )
+        iamCheckUniqueEmailAccount(email: $email, avoidEmails: $avoidEmails)
     }
 `;
 
 export const paginateWithTenantConstraintAccountsQuery = gql`
-    query IamPaginateWithTenantConstraintAccounts (
+    query IamPaginateWithTenantConstraintAccounts(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: iamPaginateWithTenantConstraintAccounts (
+        pagination: iamPaginateWithTenantConstraintAccounts(
             query: $query
             constraint: $constraint
         ) {
@@ -367,11 +341,7 @@ export const paginateWithTenantConstraintAccountsQuery = gql`
 
 // Mutation additionalApis
 export const updateMeAccountMutation = gql`
-    mutation IamUpdateMeAccount (
-        $payload: IamUpdateMeAccountInput!
-    ) {
-        iamUpdateMeAccount (
-            payload: $payload
-        )
+    mutation IamUpdateMeAccount($payload: IamUpdateMeAccountInput!) {
+        iamUpdateMeAccount(payload: $payload)
     }
 `;

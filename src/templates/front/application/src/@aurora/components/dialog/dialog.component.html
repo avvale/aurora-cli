@@ -23,22 +23,29 @@
     mat-dialog-content
     class="dialog-content flex flex-col p-8 pt-2 h-full max-h-full"
 >
-    <div *ngIf="data.content">
-        <ng-container
-            *ngTemplateOutlet="data.content?.templateRef; context: { $implicit: dialogRef }"
-        >
-        </ng-container>
-    </div>
+    @if (data.component)
+    {
+        <ng-container *ngComponentOutlet="data.component; inputs: componentInputs"></ng-container>
+    }
+    @if (data.content)
+    {
+        <div>
+            <ng-container *ngTemplateOutlet="data.content?.templateRef; context: { $implicit: dialogRef }"></ng-container>
+        </div>
+    }
 </div>
 <div
     mat-dialog-actions
     class="dialog-actions p-0 min-h-0"
 >
-    <div *ngIf="data.footerActions">
-        <ng-container
-            class="block"
-            *ngTemplateOutlet="data.footerActions?.templateRef; context: { $implicit: dialogRef }"
-        >
-        </ng-container>
-    </div>
+    @if (data.footerActions)
+    {
+        <div>
+            <ng-container
+                class="block"
+                *ngTemplateOutlet="data.footerActions?.templateRef; context: { $implicit: dialogRef }"
+            >
+            </ng-container>
+        </div>
+    }
 </div>

@@ -21,14 +21,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query IamPaginateUsers (
+    query IamPaginateUsers(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: iamPaginateUsers (
-            query: $query
-            constraint: $constraint
-        ) {
+        pagination: iamPaginateUsers(query: $query, constraint: $constraint) {
             total
             rows
             count
@@ -37,14 +34,8 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query IamGetUsers (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: iamGetUsers (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamGetUsers($query: QueryStatement, $constraint: QueryStatement) {
+        objects: iamGetUsers(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -52,14 +43,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindUserById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: iamFindUserById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query IamFindUserById($id: ID, $constraint: QueryStatement) {
+        object: iamFindUserById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -67,14 +52,8 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindUser (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: iamFindUser (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamFindUser($query: QueryStatement, $constraint: QueryStatement) {
+        object: iamFindUser(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -94,12 +73,8 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation IamCreateUsers (
-        $payload: [IamCreateUserInput]!
-    ) {
-        iamCreateUsers (
-            payload: $payload
-        )
+    mutation IamCreateUsers($payload: [IamCreateUserInput]!) {
+        iamCreateUsers(payload: $payload)
     }
 `;
 

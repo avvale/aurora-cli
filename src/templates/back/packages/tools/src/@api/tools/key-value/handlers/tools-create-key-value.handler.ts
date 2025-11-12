@@ -5,13 +5,16 @@ import {
     ToolsFindKeyValueByIdQuery,
 } from '@app/tools/key-value';
 import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Inject, Injectable } from '@nestjs/common';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class ToolsCreateKeyValueHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
+        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     ) {}
 
     async main(
@@ -27,6 +30,9 @@ export class ToolsCreateKeyValueHandler {
                 },
             }),
         );
+
+        if (payload.isCached)
+            await this.cacheManager.set(payload.key, payload.value);
 
         return await this.queryBus.ask(
             new ToolsFindKeyValueByIdQuery(

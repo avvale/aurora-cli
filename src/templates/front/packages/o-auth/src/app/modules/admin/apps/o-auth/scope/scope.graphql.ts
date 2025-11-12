@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     code
     name
     roleIds
@@ -17,11 +18,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query OAuthPaginateScopes (
+    query OAuthPaginateScopes(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: oAuthPaginateScopes (
+        pagination: oAuthPaginateScopes(
             query: $query
             constraint: $constraint
         ) {
@@ -33,14 +34,8 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query OAuthGetScopes (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: oAuthGetScopes (
-            query: $query
-            constraint: $constraint
-        ) {
+    query OAuthGetScopes($query: QueryStatement, $constraint: QueryStatement) {
+        objects: oAuthGetScopes(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -54,14 +49,8 @@ export const getRelations = gql`
 `;
 
 export const findByIdQuery = gql`
-    query OAuthFindScopeById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: oAuthFindScopeById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query OAuthFindScopeById($id: ID, $constraint: QueryStatement) {
+        object: oAuthFindScopeById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -85,14 +74,8 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query OAuthFindScope (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: oAuthFindScope (
-            query: $query
-            constraint: $constraint
-        ) {
+    query OAuthFindScope($query: QueryStatement, $constraint: QueryStatement) {
+        object: oAuthFindScope(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     accessTokenId
     token
     isRevoked
@@ -14,11 +15,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query OAuthPaginateRefreshTokens (
+    query OAuthPaginateRefreshTokens(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: oAuthPaginateRefreshTokens (
+        pagination: oAuthPaginateRefreshTokens(
             query: $query
             constraint: $constraint
         ) {
@@ -30,14 +31,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query OAuthGetRefreshTokens (
+    query OAuthGetRefreshTokens(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: oAuthGetRefreshTokens (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: oAuthGetRefreshTokens(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -45,14 +43,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query OAuthFindRefreshTokenById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: oAuthFindRefreshTokenById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query OAuthFindRefreshTokenById($id: ID, $constraint: QueryStatement) {
+        object: oAuthFindRefreshTokenById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -60,14 +52,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query OAuthFindRefreshToken (
+    query OAuthFindRefreshToken(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: oAuthFindRefreshToken (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: oAuthFindRefreshToken(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -83,6 +72,14 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation OAuthCreateRefreshTokens(
+        $payload: [OAuthCreateRefreshTokenInput]!
+    ) {
+        oAuthCreateRefreshTokens(payload: $payload)
     }
 `;
 

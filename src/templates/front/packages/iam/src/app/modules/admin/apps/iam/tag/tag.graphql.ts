@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     name
     createdAt
     updatedAt
@@ -11,14 +12,8 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query IamPaginateTags (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        pagination: iamPaginateTags (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamPaginateTags($query: QueryStatement, $constraint: QueryStatement) {
+        pagination: iamPaginateTags(query: $query, constraint: $constraint) {
             total
             rows
             count
@@ -27,14 +22,8 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query IamGetTags (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: iamGetTags (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamGetTags($query: QueryStatement, $constraint: QueryStatement) {
+        objects: iamGetTags(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -42,14 +31,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindTagById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: iamFindTagById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query IamFindTagById($id: ID, $constraint: QueryStatement) {
+        object: iamFindTagById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -57,14 +40,8 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindTag (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: iamFindTag (
-            query: $query
-            constraint: $constraint
-        ) {
+    query IamFindTag($query: QueryStatement, $constraint: QueryStatement) {
+        object: iamFindTag(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -80,6 +57,12 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation IamCreateTags($payload: [IamCreateTagInput]!) {
+        iamCreateTags(payload: $payload)
     }
 `;
 

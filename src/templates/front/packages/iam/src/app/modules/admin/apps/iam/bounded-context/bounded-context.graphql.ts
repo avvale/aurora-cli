@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     name
     root
     sort
@@ -14,11 +15,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query IamPaginateBoundedContexts (
+    query IamPaginateBoundedContexts(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: iamPaginateBoundedContexts (
+        pagination: iamPaginateBoundedContexts(
             query: $query
             constraint: $constraint
         ) {
@@ -30,14 +31,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query IamGetBoundedContexts (
+    query IamGetBoundedContexts(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: iamGetBoundedContexts (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: iamGetBoundedContexts(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -45,14 +43,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query IamFindBoundedContextById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: iamFindBoundedContextById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query IamFindBoundedContextById($id: ID, $constraint: QueryStatement) {
+        object: iamFindBoundedContextById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -86,14 +78,11 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query IamFindBoundedContext (
+    query IamFindBoundedContext(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: iamFindBoundedContext (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: iamFindBoundedContext(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -113,12 +102,10 @@ export const createMutation = gql`
 `;
 
 export const insertMutation = gql`
-    mutation IamCreateBoundedContexts (
+    mutation IamCreateBoundedContexts(
         $payload: [IamCreateBoundedContextInput]!
     ) {
-        iamCreateBoundedContexts (
-            payload: $payload
-        )
+        iamCreateBoundedContexts(payload: $payload)
     }
 `;
 

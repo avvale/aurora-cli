@@ -15,6 +15,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: name
     description: Name of the bounded context
     type: varchar
@@ -62,6 +67,7 @@ aggregateProperties:
     nullable: true
 excludedOperations:
   - count
+  - getRaw
   - max
   - min
   - rawSql

@@ -29,6 +29,12 @@ export class ToolsUpdateKeyValuesDto {
 
     @ApiProperty({
         type: Boolean,
+        description: 'isCached [input here api field description]',
+    })
+    isCached?: boolean;
+
+    @ApiProperty({
+        type: Boolean,
         description: 'isActive [input here api field description]',
     })
     isActive?: boolean;

@@ -23,6 +23,12 @@ export const keyValueColumnsConfig: ColumnConfig[] = [
     },
     {
         type: ColumnDataType.BOOLEAN,
+        field: 'isCached',
+        sort: 'isCached',
+        translation: 'tools.IsCached',
+    },
+    {
+        type: ColumnDataType.BOOLEAN,
         field: 'isActive',
         sort: 'isActive',
         translation: 'tools.IsActive',

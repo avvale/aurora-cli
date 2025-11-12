@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     code
     name
     secret
@@ -14,11 +15,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query OAuthPaginateApplications (
+    query OAuthPaginateApplications(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: oAuthPaginateApplications (
+        pagination: oAuthPaginateApplications(
             query: $query
             constraint: $constraint
         ) {
@@ -30,14 +31,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query OAuthGetApplications (
+    query OAuthGetApplications(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: oAuthGetApplications (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: oAuthGetApplications(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -45,14 +43,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query OAuthFindApplicationById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: oAuthFindApplicationById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query OAuthFindApplicationById($id: ID, $constraint: QueryStatement) {
+        object: oAuthFindApplicationById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -60,14 +52,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query OAuthFindApplication (
+    query OAuthFindApplication(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: oAuthFindApplication (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: oAuthFindApplication(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -83,6 +72,12 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation OAuthCreateApplications($payload: [OAuthCreateApplicationInput]!) {
+        oAuthCreateApplications(payload: $payload)
     }
 `;
 

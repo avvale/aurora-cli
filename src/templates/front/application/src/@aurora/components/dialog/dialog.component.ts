@@ -1,5 +1,5 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, Type, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ContentDialogTemplateDirective } from './directives/content-dialog-template.directive';
@@ -13,7 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation  : ViewEncapsulation.None,
     imports        : [
-        MatButtonModule, MatDialogModule, MatIconModule, NgIf, NgTemplateOutlet,
+        MatButtonModule, MatDialogModule, MatIconModule,
+        NgComponentOutlet, NgTemplateOutlet,
     ],
 })
 export class DialogComponent
@@ -25,9 +26,18 @@ export class DialogComponent
             icon: string;
             svgIcon: string;
             currentActionId: string;
+            component: Type<unknown>;
+            componentInputs: Record<string, unknown>;
             content: ContentDialogTemplateDirective;
             headerActions?: ActionsDialogTemplateDirective;
             footerActions?: ActionsDialogTemplateDirective;
         },
     ) { }
+
+    get componentInputs(): Record<string, unknown>
+    {
+        return {
+            ...(this.data.componentInputs ?? {}),
+        };
+    }
 }

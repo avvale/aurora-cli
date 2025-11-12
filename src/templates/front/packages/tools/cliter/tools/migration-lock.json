@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/tools/tools.component.ts",
-            "integrity": "sha1:66dd95180dca167c44eaa08806590f37ced9d24b"
+            "integrity": "sha1:9cc858f808567bfb6332e5b955c3d3f4aef01ceb"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/migration-detail.component.html",
-            "integrity": "sha1:3a41cdf8a675c61288be28ebc83945e88e9226df"
+            "integrity": "sha1:218c003f16ccb1468bbf4f1ff153e5ae90c86f37"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/migration-detail.component.ts",
-            "integrity": "sha1:25ccdca8b158bc1c70a5931fc10fb244abd30c40"
+            "integrity": "sha1:395ce637823cfe88cedbcdc9cbee8a06589e7217"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/migration-list.component.html",
-            "integrity": "sha1:ffd1c491c53cf3d330f91d286e4668bbdd9fb360"
+            "integrity": "sha1:78faed8c2f77ebb437ef9c602ec38f7ec534f0c8"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/migration-list.component.ts",
-            "integrity": "sha1:cab4c7783263ef62d69441160c49e5197b9ad353"
+            "integrity": "sha1:3a8a689b20b7de0a7f933361f0b4450ac4bc3e89"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/migration.columns-config.ts",
-            "integrity": "sha1:47c066601a239c0171f7f3909955b37cfa0df84f"
+            "integrity": "sha1:fd9be7f1f736dd39f9f7de3454e4e0ffe976ae1f"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/migration.graphql.ts",
-            "integrity": "sha1:f9690a126047da8d9ff22e24e84c506cb7ec48f4"
+            "integrity": "sha1:fcdce4fd387666fd82919f901d99552b0183b05b"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/migration.resolvers.ts",
-            "integrity": "sha1:c4376a0fc80d639c57a81caa6d515505899d0aaf"
+            "integrity": "sha1:a6426271e7856cfe0c45996fc22e7f929e5d55b5"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/migration.service.ts",
-            "integrity": "sha1:95183d1f3ec12224d72f657832a22f45221802fc"
+            "integrity": "sha1:473a55267edd55298921b2c1b5c01683d025a25b"
         },
         {
             "path": "src/app/modules/admin/apps/tools/migration/index.ts",

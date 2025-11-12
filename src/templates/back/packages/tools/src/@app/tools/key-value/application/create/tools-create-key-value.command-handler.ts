@@ -5,6 +5,7 @@ import {
     ToolsKeyValueDescription,
     ToolsKeyValueId,
     ToolsKeyValueIsActive,
+    ToolsKeyValueIsCached,
     ToolsKeyValueKey,
     ToolsKeyValueType,
     ToolsKeyValueValue,
@@ -27,6 +28,7 @@ export class ToolsCreateKeyValueCommandHandler
                 key: new ToolsKeyValueKey(command.payload.key),
                 type: new ToolsKeyValueType(command.payload.type),
                 value: new ToolsKeyValueValue(command.payload.value),
+                isCached: new ToolsKeyValueIsCached(command.payload.isCached),
                 isActive: new ToolsKeyValueIsActive(command.payload.isActive),
                 description: new ToolsKeyValueDescription(
                     command.payload.description,
