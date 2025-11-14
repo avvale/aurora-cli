@@ -1,8 +1,11 @@
-import { QueueManagerCreatedJobRegistryEvent } from './queue-manager-created-job-registry.event';
+import { QueueManagerCreatedJobRegistryEvent } from '@app/queue-manager/job-registry';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class QueueManagerCreatedJobsRegistryEvent
-{
+export class QueueManagerCreatedJobsRegistryEvent {
     constructor(
-        public readonly jobsRegistry: QueueManagerCreatedJobRegistryEvent[],
+        public readonly event: {
+            payload: QueueManagerCreatedJobRegistryEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/queue-manager.component.ts",
-            "integrity": "sha1:8b727822baf9718adfa14cd880ad7c0e6568bc0d"
+            "integrity": "sha1:4291ce93f73ddd455886fc43334483d7853b7da7"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry-detail.component.html",
-            "integrity": "sha1:89d4e81960264521181cee923a6d861930f4c6cc"
+            "integrity": "sha1:d6f2598d38007f0dc735aa3d7e26163cf8a30184"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry-detail.component.ts",
-            "integrity": "sha1:e26eedde391eb072badb9728941d126480af5b3b"
+            "integrity": "sha1:c57c61c60fd7de3318a7db5b95a2574a30b5dbaa"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry-list.component.html",
-            "integrity": "sha1:90c7b299a6f70c0c7fccd2d6c59c0b23a49554cb"
+            "integrity": "sha1:3453f1a947d23a2e464c51b61a01c84a4597b11f"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry-list.component.ts",
-            "integrity": "sha1:58b38a20e5a11b426904e8513c7357786dce6578"
+            "integrity": "sha1:4e0937aee8f7f26a9f11d02ffd72895d313fecd1"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry.columns-config.ts",
-            "integrity": "sha1:dc3fe00c21357037d84d7cfa09ab0c51689da5be"
+            "integrity": "sha1:b9eb3918498b60e1cbda802480a64b8412a85ada"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry.graphql.ts",
-            "integrity": "sha1:0be585625ab5cfecb9f26f211f3813e3114bae75"
+            "integrity": "sha1:b21408d6f802ca6f6e539e7b62f86c883b81f0a0"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry.resolvers.ts",
-            "integrity": "sha1:34141cfbc8749a24ea223750eee706eb4447065f"
+            "integrity": "sha1:ba503bc11ec362e93e2ae9872eed108b3364eb24"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/job-registry.service.ts",
-            "integrity": "sha1:71cbdf6befcc6949288571d8b632ec69f71b442d"
+            "integrity": "sha1:b6f052ace2d70d29ad4fe952c70f8fb08acfe37b"
         },
         {
             "path": "src/app/modules/admin/apps/queue-manager/job-registry/index.ts",

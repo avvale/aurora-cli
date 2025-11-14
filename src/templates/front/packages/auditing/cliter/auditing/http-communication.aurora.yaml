@@ -6,11 +6,20 @@ aggregateName: AuditingHttpCommunication
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: http
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: http
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
     nullable: false
   - name: tags
     type: array
@@ -40,16 +49,16 @@ aggregateProperties:
     maxLength: 2046
     nullable: false
   - name: httpRequest
-    type: json
+    type: jsonb
     nullable: true
   - name: httpRequestRejected
-    type: json
+    type: jsonb
     nullable: true
   - name: httpResponse
-    type: json
+    type: jsonb
     nullable: true
   - name: httpResponseRejected
-    type: json
+    type: jsonb
     nullable: true
   - name: isReprocessing
     type: boolean
@@ -58,7 +67,6 @@ aggregateProperties:
     example: true
   - name: reprocessingHttpCommunicationId
     type: id
-    length: 36
     nullable: true
     index: index
   - name: createdAt
@@ -71,4 +79,12 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
-additionalApis: []
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

@@ -1,28 +1,31 @@
-import { AuditingHttpCommunicationId } from './value-objects';
 import { AuditingHttpCommunication } from '@app/auditing/http-communication';
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IRepository,
+    LiteralObject,
+    Pagination,
+    QueryStatement,
+} from '@aurorajs.dev/core';
+import { AuditingHttpCommunicationId } from './value-objects';
 
-export abstract class AuditingIHttpCommunicationRepository implements IRepository<AuditingHttpCommunication>
+export abstract class AuditingIHttpCommunicationRepository
+    implements IRepository<AuditingHttpCommunication>
 {
     abstract readonly repository: any;
 
     // paginate records
-    abstract paginate(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<Pagination<AuditingHttpCommunication>>;
+    abstract paginate(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<Pagination<AuditingHttpCommunication>>;
 
     // find a single record
-    abstract find(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<AuditingHttpCommunication | null>;
+    abstract find(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<AuditingHttpCommunication | null>;
 
     // find a single record by id
     abstract findById(
@@ -32,34 +35,28 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<AuditingHttpCommunication | null>;
 
     // get multiple records
-    abstract get(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<AuditingHttpCommunication[]>;
+    abstract get(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<AuditingHttpCommunication[]>;
 
     // get records with rawSQL
-    abstract rawSQL(
-        options?: {
-            rawSQL?: string;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<AuditingHttpCommunication[]>;
+    abstract rawSQL(options?: {
+        rawSQL?: string;
+        cQMetadata?: CQMetadata;
+    }): Promise<AuditingHttpCommunication[]>;
 
     // count records
-    abstract count(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<number>;
+    abstract count(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<number>;
 
     // max record
     abstract max(
@@ -68,7 +65,7 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // min record
@@ -78,7 +75,7 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // sum record
@@ -88,7 +85,7 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // ******************
@@ -100,10 +97,14 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
         httpCommunication: AuditingHttpCommunication,
         options?: {
             createOptions?: LiteralObject;
-            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
+            dataFactory?: (
+                aggregate: AuditingHttpCommunication,
+            ) => LiteralObject;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement?: (aggregate: AuditingHttpCommunication) => QueryStatement;
-        }
+            finderQueryStatement?: (
+                aggregate: AuditingHttpCommunication,
+            ) => QueryStatement;
+        },
     ): Promise<void>;
 
     // create a single or multiple records
@@ -111,8 +112,10 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
         httpCommunications: AuditingHttpCommunication[],
         options?: {
             insertOptions?: LiteralObject;
-            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
-        }
+            dataFactory?: (
+                aggregate: AuditingHttpCommunication,
+            ) => LiteralObject;
+        },
     ): Promise<void>;
 
     // update record by id
@@ -122,10 +125,12 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             updateByIdOptions?: LiteralObject;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
+            dataFactory?: (
+                aggregate: AuditingHttpCommunication,
+            ) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update records
@@ -136,8 +141,10 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
-        }
+            dataFactory?: (
+                aggregate: AuditingHttpCommunication,
+            ) => LiteralObject;
+        },
     ): Promise<void>;
 
     // update and increment records
@@ -148,8 +155,10 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
-        }
+            dataFactory?: (
+                aggregate: AuditingHttpCommunication,
+            ) => LiteralObject;
+        },
     ): Promise<void>;
 
     // insert or update key identification element already existing in the table
@@ -157,8 +166,10 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
         httpCommunication: AuditingHttpCommunication,
         options?: {
             upsertOptions?: LiteralObject;
-            dataFactory?: (aggregate: AuditingHttpCommunication) => LiteralObject;
-        }
+            dataFactory?: (
+                aggregate: AuditingHttpCommunication,
+            ) => LiteralObject;
+        },
     ): Promise<void>;
 
     // delete record
@@ -170,16 +181,14 @@ export abstract class AuditingIHttpCommunicationRepository implements IRepositor
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete records
-    abstract delete(
-        options?: {
-            deleteOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
+    abstract delete(options?: {
+        deleteOptions?: LiteralObject;
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<void>;
 }

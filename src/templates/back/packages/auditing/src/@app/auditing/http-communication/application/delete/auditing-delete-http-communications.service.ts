@@ -1,11 +1,13 @@
-import { AuditingAddHttpCommunicationsContextEvent, AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication';
+import {
+    AuditingAddHttpCommunicationsContextEvent,
+    AuditingIHttpCommunicationRepository,
+} from '@app/auditing/http-communication';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class AuditingDeleteHttpCommunicationsService
-{
+export class AuditingDeleteHttpCommunicationsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: AuditingIHttpCommunicationRepository,
@@ -15,8 +17,7 @@ export class AuditingDeleteHttpCommunicationsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // get objects to delete
         const httpCommunications = await this.repository.get({
             queryStatement,
@@ -36,7 +37,10 @@ export class AuditingDeleteHttpCommunicationsService
         // create AddHttpCommunicationsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const httpCommunicationsRegistered = this.publisher.mergeObjectContext(
-            new AuditingAddHttpCommunicationsContextEvent(httpCommunications),
+            new AuditingAddHttpCommunicationsContextEvent(
+                httpCommunications,
+                cQMetadata,
+            ),
         );
 
         httpCommunicationsRegistered.deleted(); // apply event to model events

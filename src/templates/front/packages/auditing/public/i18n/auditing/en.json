@@ -29,6 +29,7 @@
     "RollbackAlertMessage": "This action may break the referential integrity of the database, do it if you are sure of the changes to be made.",
     "RollbackSideEffectId": "RollbackSideEffectId",
     "RollbackSuccessfully": "Rollback successfully executed",
+    "RowId": "RowId",
     "SideEffect": "SideEffect",
     "SideEffects": "SideEffects",
     "Status": "Status",

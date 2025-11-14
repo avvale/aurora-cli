@@ -4,55 +4,51 @@ import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingGetSideEffectsHandler', () =>
-{
+describe('AuditingGetSideEffectsHandler', () => {
     let handler: AuditingGetSideEffectsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 AuditingGetSideEffectsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<AuditingGetSideEffectsHandler>(AuditingGetSideEffectsHandler);
+        handler = module.get<AuditingGetSideEffectsHandler>(
+            AuditingGetSideEffectsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('AuditingGetSideEffectsHandler should be defined', () =>
-    {
+    test('AuditingGetSideEffectsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('AuditingGetSideEffectsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingGetSideEffectsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a auditingMockSideEffectData', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(auditingMockSideEffectData);
+        test('should return a auditingMockSideEffectData', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(auditingMockSideEffectData),
+                    ),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                auditingMockSideEffectData,
+            );
         });
     });
 });

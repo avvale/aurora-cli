@@ -1,50 +1,62 @@
-import { QueueManagerQueue, QueueManagerUpdateQueueByIdInput } from '@api/graphql';
-import { QueueManagerQueueDto, QueueManagerUpdateQueueByIdDto } from '@api/queue-manager/queue';
-import { QueueManagerFindQueueByIdQuery, QueueManagerUpdateQueueByIdCommand } from '@app/queue-manager/queue';
-import { diff, ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import {
+    QueueManagerQueue,
+    QueueManagerUpdateQueueByIdInput,
+} from '@api/graphql';
+import {
+    QueueManagerQueueDto,
+    QueueManagerUpdateQueueByIdDto,
+} from '@api/queue-manager/queue';
+import {
+    QueueManagerFindQueueByIdQuery,
+    QueueManagerUpdateQueueByIdCommand,
+} from '@app/queue-manager/queue';
+import {
+    diff,
+    ICommandBus,
+    IQueryBus,
+    QueryStatement,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class QueueManagerUpdateQueueByIdHandler
-{
+export class QueueManagerUpdateQueueByIdHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
     ) {}
 
     async main(
-        payload: QueueManagerUpdateQueueByIdInput | QueueManagerUpdateQueueByIdDto,
+        payload:
+            | QueueManagerUpdateQueueByIdInput
+            | QueueManagerUpdateQueueByIdDto,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<QueueManagerQueue | QueueManagerQueueDto>
-    {
-        const queue = await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
-            payload.id,
-            constraint,
-            {
+    ): Promise<QueueManagerQueue | QueueManagerQueueDto> {
+        const queue = await this.queryBus.ask(
+            new QueueManagerFindQueueByIdQuery(payload.id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
         const dataToUpdate = diff(payload, queue);
 
-        await this.commandBus.dispatch(new QueueManagerUpdateQueueByIdCommand(
-            {
-                ...dataToUpdate,
-                id: payload.id,
-            },
-            constraint,
-            {
-                timezone,
-            },
-        ));
+        await this.commandBus.dispatch(
+            new QueueManagerUpdateQueueByIdCommand(
+                {
+                    ...dataToUpdate,
+                    id: payload.id,
+                },
+                constraint,
+                {
+                    timezone,
+                },
+            ),
+        );
 
-        return await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
-            payload.id,
-            constraint,
-            {
+        return await this.queryBus.ask(
+            new QueueManagerFindQueueByIdQuery(payload.id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

@@ -1,5 +1,9 @@
 /* eslint-disable key-spacing */
-import { AuditingCreatedHttpCommunicationEvent, AuditingDeletedHttpCommunicationEvent, AuditingUpdatedHttpCommunicationEvent } from '@app/auditing/http-communication';
+import {
+    AuditingCreatedHttpCommunicationEvent,
+    AuditingDeletedHttpCommunicationEvent,
+    AuditingUpdatedHttpCommunicationEvent,
+} from '@app/auditing/http-communication';
 import {
     AuditingHttpCommunicationCreatedAt,
     AuditingHttpCommunicationDeletedAt,
@@ -12,17 +16,18 @@ import {
     AuditingHttpCommunicationIsReprocessing,
     AuditingHttpCommunicationMethod,
     AuditingHttpCommunicationReprocessingHttpCommunicationId,
+    AuditingHttpCommunicationRowId,
     AuditingHttpCommunicationStatus,
     AuditingHttpCommunicationTags,
     AuditingHttpCommunicationUpdatedAt,
     AuditingHttpCommunicationUrl,
 } from '@app/auditing/http-communication/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class AuditingHttpCommunication extends AggregateRoot
-{
+export class AuditingHttpCommunication extends AggregateRoot {
     id: AuditingHttpCommunicationId;
+    rowId: AuditingHttpCommunicationRowId;
     tags: AuditingHttpCommunicationTags;
     event: AuditingHttpCommunicationEvent;
     status: AuditingHttpCommunicationStatus;
@@ -40,6 +45,7 @@ export class AuditingHttpCommunication extends AggregateRoot
 
     constructor(
         id: AuditingHttpCommunicationId,
+        rowId: AuditingHttpCommunicationRowId,
         tags: AuditingHttpCommunicationTags,
         event: AuditingHttpCommunicationEvent,
         status: AuditingHttpCommunicationStatus,
@@ -54,10 +60,10 @@ export class AuditingHttpCommunication extends AggregateRoot
         createdAt: AuditingHttpCommunicationCreatedAt,
         updatedAt: AuditingHttpCommunicationUpdatedAt,
         deletedAt: AuditingHttpCommunicationDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.tags = tags;
         this.event = event;
         this.status = status;
@@ -76,6 +82,7 @@ export class AuditingHttpCommunication extends AggregateRoot
 
     static register(
         id: AuditingHttpCommunicationId,
+        rowId: AuditingHttpCommunicationRowId,
         tags: AuditingHttpCommunicationTags,
         event: AuditingHttpCommunicationEvent,
         status: AuditingHttpCommunicationStatus,
@@ -90,10 +97,10 @@ export class AuditingHttpCommunication extends AggregateRoot
         createdAt: AuditingHttpCommunicationCreatedAt,
         updatedAt: AuditingHttpCommunicationUpdatedAt,
         deletedAt: AuditingHttpCommunicationDeletedAt,
-    ): AuditingHttpCommunication
-    {
+    ): AuditingHttpCommunication {
         return new AuditingHttpCommunication(
             id,
+            rowId,
             tags,
             event,
             status,
@@ -111,79 +118,104 @@ export class AuditingHttpCommunication extends AggregateRoot
         );
     }
 
-    created(httpCommunication: AuditingHttpCommunication): void
-    {
+    created(event: {
+        payload: AuditingHttpCommunication;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new AuditingCreatedHttpCommunicationEvent(
-                httpCommunication.id.value,
-                httpCommunication.tags?.value,
-                httpCommunication.event.value,
-                httpCommunication.status?.value,
-                httpCommunication.method.value,
-                httpCommunication.url.value,
-                httpCommunication.httpRequest?.value,
-                httpCommunication.httpRequestRejected?.value,
-                httpCommunication.httpResponse?.value,
-                httpCommunication.httpResponseRejected?.value,
-                httpCommunication.isReprocessing.value,
-                httpCommunication.reprocessingHttpCommunicationId?.value,
-                httpCommunication.createdAt?.value,
-                httpCommunication.updatedAt?.value,
-                httpCommunication.deletedAt?.value,
-            ),
+            new AuditingCreatedHttpCommunicationEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    tags: event.payload.tags?.value,
+                    event: event.payload.event.value,
+                    status: event.payload.status?.value,
+                    method: event.payload.method.value,
+                    url: event.payload.url.value,
+                    httpRequest: event.payload.httpRequest?.value,
+                    httpRequestRejected:
+                        event.payload.httpRequestRejected?.value,
+                    httpResponse: event.payload.httpResponse?.value,
+                    httpResponseRejected:
+                        event.payload.httpResponseRejected?.value,
+                    isReprocessing: event.payload.isReprocessing.value,
+                    reprocessingHttpCommunicationId:
+                        event.payload.reprocessingHttpCommunicationId?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(httpCommunication: AuditingHttpCommunication): void
-    {
+    updated(event: {
+        payload: AuditingHttpCommunication;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new AuditingUpdatedHttpCommunicationEvent(
-                httpCommunication.id?.value,
-                httpCommunication.tags?.value,
-                httpCommunication.event?.value,
-                httpCommunication.status?.value,
-                httpCommunication.method?.value,
-                httpCommunication.url?.value,
-                httpCommunication.httpRequest?.value,
-                httpCommunication.httpRequestRejected?.value,
-                httpCommunication.httpResponse?.value,
-                httpCommunication.httpResponseRejected?.value,
-                httpCommunication.isReprocessing?.value,
-                httpCommunication.reprocessingHttpCommunicationId?.value,
-                httpCommunication.createdAt?.value,
-                httpCommunication.updatedAt?.value,
-                httpCommunication.deletedAt?.value,
-            ),
+            new AuditingUpdatedHttpCommunicationEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    tags: event.payload.tags?.value,
+                    event: event.payload.event?.value,
+                    status: event.payload.status?.value,
+                    method: event.payload.method?.value,
+                    url: event.payload.url?.value,
+                    httpRequest: event.payload.httpRequest?.value,
+                    httpRequestRejected:
+                        event.payload.httpRequestRejected?.value,
+                    httpResponse: event.payload.httpResponse?.value,
+                    httpResponseRejected:
+                        event.payload.httpResponseRejected?.value,
+                    isReprocessing: event.payload.isReprocessing?.value,
+                    reprocessingHttpCommunicationId:
+                        event.payload.reprocessingHttpCommunicationId?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(httpCommunication: AuditingHttpCommunication): void
-    {
+    deleted(event: {
+        payload: AuditingHttpCommunication;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new AuditingDeletedHttpCommunicationEvent(
-                httpCommunication.id.value,
-                httpCommunication.tags?.value,
-                httpCommunication.event.value,
-                httpCommunication.status?.value,
-                httpCommunication.method.value,
-                httpCommunication.url.value,
-                httpCommunication.httpRequest?.value,
-                httpCommunication.httpRequestRejected?.value,
-                httpCommunication.httpResponse?.value,
-                httpCommunication.httpResponseRejected?.value,
-                httpCommunication.isReprocessing.value,
-                httpCommunication.reprocessingHttpCommunicationId?.value,
-                httpCommunication.createdAt?.value,
-                httpCommunication.updatedAt?.value,
-                httpCommunication.deletedAt?.value,
-            ),
+            new AuditingDeletedHttpCommunicationEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
+                    tags: event.payload.tags?.value,
+                    event: event.payload.event.value,
+                    status: event.payload.status?.value,
+                    method: event.payload.method.value,
+                    url: event.payload.url.value,
+                    httpRequest: event.payload.httpRequest?.value,
+                    httpRequestRejected:
+                        event.payload.httpRequestRejected?.value,
+                    httpResponse: event.payload.httpResponse?.value,
+                    httpResponseRejected:
+                        event.payload.httpResponseRejected?.value,
+                    isReprocessing: event.payload.isReprocessing.value,
+                    reprocessingHttpCommunicationId:
+                        event.payload.reprocessingHttpCommunicationId?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             tags: this.tags?.value,
             event: this.event.value,
             status: this.status?.value,
@@ -194,7 +226,8 @@ export class AuditingHttpCommunication extends AggregateRoot
             httpResponse: this.httpResponse?.value,
             httpResponseRejected: this.httpResponseRejected?.value,
             isReprocessing: this.isReprocessing.value,
-            reprocessingHttpCommunicationId: this.reprocessingHttpCommunicationId?.value,
+            reprocessingHttpCommunicationId:
+                this.reprocessingHttpCommunicationId?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
@@ -202,8 +235,7 @@ export class AuditingHttpCommunication extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             tags: this.tags?.value,
@@ -216,7 +248,8 @@ export class AuditingHttpCommunication extends AggregateRoot
             httpResponse: this.httpResponse?.value,
             httpResponseRejected: this.httpResponseRejected?.value,
             isReprocessing: this.isReprocessing.value,
-            reprocessingHttpCommunicationId: this.reprocessingHttpCommunicationId?.value,
+            reprocessingHttpCommunicationId:
+                this.reprocessingHttpCommunicationId?.value,
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,

@@ -6,10 +6,20 @@ aggregateName: QueueManagerJobRegistry
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: engineering
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: engineering
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
     nullable: false
   - name: queueName
     type: varchar
@@ -54,3 +64,12 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

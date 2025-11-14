@@ -1,10 +1,12 @@
-import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
-import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
+import {
+    QueueManagerIJobRegistryRepository,
+    QueueManagerJobRegistry,
+} from '@app/queue-manager/job-registry';
+import { CQMetadata, LiteralObject, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class QueueManagerGetJobsRegistryService
-{
+export class QueueManagerGetJobsRegistryService {
     constructor(
         private readonly repository: QueueManagerIJobRegistryRepository,
     ) {}
@@ -13,8 +15,7 @@ export class QueueManagerGetJobsRegistryService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<QueueManagerJobRegistry[]>
-    {
+    ): Promise<QueueManagerJobRegistry[] | LiteralObject[]> {
         return await this.repository.get({
             queryStatement,
             constraint,

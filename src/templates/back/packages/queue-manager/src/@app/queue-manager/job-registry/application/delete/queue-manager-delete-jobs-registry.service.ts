@@ -1,11 +1,13 @@
-import { QueueManagerAddJobsRegistryContextEvent, QueueManagerIJobRegistryRepository } from '@app/queue-manager/job-registry';
+import {
+    QueueManagerAddJobsRegistryContextEvent,
+    QueueManagerIJobRegistryRepository,
+} from '@app/queue-manager/job-registry';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class QueueManagerDeleteJobsRegistryService
-{
+export class QueueManagerDeleteJobsRegistryService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: QueueManagerIJobRegistryRepository,
@@ -15,8 +17,7 @@ export class QueueManagerDeleteJobsRegistryService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // get objects to delete
         const jobsRegistry = await this.repository.get({
             queryStatement,
@@ -36,7 +37,10 @@ export class QueueManagerDeleteJobsRegistryService
         // create AddJobsRegistryContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const jobsRegistryRegistered = this.publisher.mergeObjectContext(
-            new QueueManagerAddJobsRegistryContextEvent(jobsRegistry),
+            new QueueManagerAddJobsRegistryContextEvent(
+                jobsRegistry,
+                cQMetadata,
+            ),
         );
 
         jobsRegistryRegistered.deleted(); // apply event to model events

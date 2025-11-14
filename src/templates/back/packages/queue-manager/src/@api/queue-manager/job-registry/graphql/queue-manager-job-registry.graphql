@@ -7,10 +7,9 @@ enum QueueManagerJobRegistryState {
     PAUSED
 }
 
-
-type QueueManagerJobRegistry
-{
+type QueueManagerJobRegistry {
     id: ID!
+    rowId: GraphQLInt!
     queueName: GraphQLString!
     state: QueueManagerJobRegistryState!
     jobId: GraphQLString!
@@ -21,8 +20,7 @@ type QueueManagerJobRegistry
     deletedAt: GraphQLTimestamp
 }
 
-input QueueManagerCreateJobRegistryInput
-{
+input QueueManagerCreateJobRegistryInput {
     id: ID!
     queueName: GraphQLString!
     state: QueueManagerJobRegistryState!
@@ -31,8 +29,7 @@ input QueueManagerCreateJobRegistryInput
     tags: [GraphQLString]
 }
 
-input QueueManagerUpdateJobRegistryByIdInput
-{
+input QueueManagerUpdateJobRegistryByIdInput {
     id: ID!
     queueName: GraphQLString
     state: QueueManagerJobRegistryState
@@ -41,8 +38,7 @@ input QueueManagerUpdateJobRegistryByIdInput
     tags: [GraphQLString]
 }
 
-input QueueManagerUpdateJobsRegistryInput
-{
+input QueueManagerUpdateJobsRegistryInput {
     id: ID
     queueName: GraphQLString
     state: QueueManagerJobRegistryState
@@ -51,8 +47,7 @@ input QueueManagerUpdateJobsRegistryInput
     tags: [GraphQLString]
 }
 
-type Query
-{
+type Query {
     queueManagerFindJobRegistry(
         query: QueryStatement
         constraint: QueryStatement
@@ -72,11 +67,9 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     queueManagerCreateJobRegistry(
         payload: QueueManagerCreateJobRegistryInput!
     ): QueueManagerJobRegistry
@@ -96,10 +89,6 @@ type Mutation
         constraint: QueryStatement
     ): [QueueManagerJobRegistry]!
 
-    queueManagerUpsertJobRegistry(
-        payload: QueueManagerUpdateJobRegistryByIdInput!
-    ): QueueManagerJobRegistry
-
     queueManagerDeleteJobRegistryById(
         id: ID!
         constraint: QueryStatement
@@ -109,5 +98,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [QueueManagerJobRegistry]!
-
 }

@@ -1,10 +1,12 @@
-import { AuditingHttpCommunication, AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication';
+import {
+    AuditingHttpCommunication,
+    AuditingIHttpCommunicationRepository,
+} from '@app/auditing/http-communication';
 import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AuditingPaginateHttpCommunicationsService
-{
+export class AuditingPaginateHttpCommunicationsService {
     constructor(
         private readonly repository: AuditingIHttpCommunicationRepository,
     ) {}
@@ -13,8 +15,7 @@ export class AuditingPaginateHttpCommunicationsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<Pagination<AuditingHttpCommunication>>
-    {
+    ): Promise<Pagination<AuditingHttpCommunication>> {
         return await this.repository.paginate({
             queryStatement,
             constraint,

@@ -19,6 +19,7 @@ export { AuditingSideEffectOperationSort } from './auditing-side-effect-operatio
 export { AuditingSideEffectParams } from './auditing-side-effect-params';
 export { AuditingSideEffectQuery } from './auditing-side-effect-query';
 export { AuditingSideEffectRollbackSideEffectId } from './auditing-side-effect-rollback-side-effect-id';
+export { AuditingSideEffectRowId } from './auditing-side-effect-row-id';
 export { AuditingSideEffectTags } from './auditing-side-effect-tags';
 export { AuditingSideEffectUpdatedAt } from './auditing-side-effect-updated-at';
 export { AuditingSideEffectUserAgent } from './auditing-side-effect-user-agent';

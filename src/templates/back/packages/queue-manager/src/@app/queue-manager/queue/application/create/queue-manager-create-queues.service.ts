@@ -1,7 +1,10 @@
-import { QueueManagerAddQueuesContextEvent, QueueManagerIQueueRepository, QueueManagerQueue } from '@app/queue-manager/queue';
+import {
+    QueueManagerAddQueuesContextEvent,
+    QueueManagerIQueueRepository,
+    QueueManagerQueue,
+} from '@app/queue-manager/queue';
 import {
     QueueManagerQueueCreatedAt,
-    QueueManagerQueueDeletedAt,
     QueueManagerQueueId,
     QueueManagerQueueName,
     QueueManagerQueuePrefix,
@@ -12,8 +15,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class QueueManagerCreateQueuesService
-{
+export class QueueManagerCreateQueuesService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: QueueManagerIQueueRepository,
@@ -24,31 +26,32 @@ export class QueueManagerCreateQueuesService
             id: QueueManagerQueueId;
             prefix: QueueManagerQueuePrefix;
             name: QueueManagerQueueName;
-        } [],
+        }[],
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
-        const aggregateQueues = payload.map(queue => QueueManagerQueue.register(
-            queue.id,
-            queue.prefix,
-            queue.name,
-            new QueueManagerQueueCreatedAt({ currentTimestamp: true }),
-            new QueueManagerQueueUpdatedAt({ currentTimestamp: true }),
-            null, // deleteAt
-        ));
+        const queues = payload.map((queue) =>
+            QueueManagerQueue.register(
+                queue.id,
+                undefined, // rowId
+                queue.prefix,
+                queue.name,
+                new QueueManagerQueueCreatedAt({ currentTimestamp: true }),
+                new QueueManagerQueueUpdatedAt({ currentTimestamp: true }),
+                null, // deleteAt
+            ),
+        );
 
         // insert
-        await this.repository.insert(
-            aggregateQueues,
-            {
-                insertOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.insert(queues, {
+            insertOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddQueuesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const queuesRegistered = this.publisher.mergeObjectContext(new QueueManagerAddQueuesContextEvent(aggregateQueues));
+        const queuesRegistered = this.publisher.mergeObjectContext(
+            new QueueManagerAddQueuesContextEvent(queues, cQMetadata),
+        );
 
         queuesRegistered.created(); // apply event to model events
         queuesRegistered.commit(); // commit all events of model

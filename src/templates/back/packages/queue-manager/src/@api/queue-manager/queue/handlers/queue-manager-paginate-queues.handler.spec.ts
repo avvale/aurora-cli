@@ -4,62 +4,57 @@ import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerPaginateQueuesHandler', () =>
-{
+describe('QueueManagerPaginateQueuesHandler', () => {
     let handler: QueueManagerPaginateQueuesHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerPaginateQueuesHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<QueueManagerPaginateQueuesHandler>(QueueManagerPaginateQueuesHandler);
+        handler = module.get<QueueManagerPaginateQueuesHandler>(
+            QueueManagerPaginateQueuesHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('QueueManagerPaginateQueuesHandler should be defined', () =>
-    {
+    test('QueueManagerPaginateQueuesHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerPaginateQueuesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerPaginateQueuesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a queues', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+        test('should return a queues', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: queueManagerMockQueueData.length,
+                            count: queueManagerMockQueueData.length,
+                            rows: queueManagerMockQueueData,
+                        }),
+                    ),
+            );
+            expect(await handler.main({}, {})).toEqual({
                 total: queueManagerMockQueueData.length,
                 count: queueManagerMockQueueData.length,
-                rows : queueManagerMockQueueData,
-            })));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                ),
-            )
-                .toEqual({
-                    total: queueManagerMockQueueData.length,
-                    count: queueManagerMockQueueData.length,
-                    rows : queueManagerMockQueueData,
-                });
+                rows: queueManagerMockQueueData,
+            });
         });
     });
 });

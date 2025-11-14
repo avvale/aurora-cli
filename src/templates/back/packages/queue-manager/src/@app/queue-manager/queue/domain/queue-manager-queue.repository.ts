@@ -1,28 +1,31 @@
-import { QueueManagerQueueId } from './value-objects';
 import { QueueManagerQueue } from '@app/queue-manager/queue';
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IRepository,
+    LiteralObject,
+    Pagination,
+    QueryStatement,
+} from '@aurorajs.dev/core';
+import { QueueManagerQueueId } from './value-objects';
 
-export abstract class QueueManagerIQueueRepository implements IRepository<QueueManagerQueue>
+export abstract class QueueManagerIQueueRepository
+    implements IRepository<QueueManagerQueue>
 {
     abstract readonly repository: any;
 
     // paginate records
-    abstract paginate(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<Pagination<QueueManagerQueue>>;
+    abstract paginate(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<Pagination<QueueManagerQueue>>;
 
     // find a single record
-    abstract find(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<QueueManagerQueue | null>;
+    abstract find(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<QueueManagerQueue | null>;
 
     // find a single record by id
     abstract findById(
@@ -32,34 +35,28 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<QueueManagerQueue | null>;
 
     // get multiple records
-    abstract get(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<QueueManagerQueue[]>;
+    abstract get(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<QueueManagerQueue[]>;
 
     // get records with rawSQL
-    abstract rawSQL(
-        options?: {
-            rawSQL?: string;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<QueueManagerQueue[]>;
+    abstract rawSQL(options?: {
+        rawSQL?: string;
+        cQMetadata?: CQMetadata;
+    }): Promise<QueueManagerQueue[]>;
 
     // count records
-    abstract count(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<number>;
+    abstract count(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<number>;
 
     // max record
     abstract max(
@@ -68,7 +65,7 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // min record
@@ -78,7 +75,7 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // sum record
@@ -88,7 +85,7 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // ******************
@@ -102,8 +99,10 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             createOptions?: LiteralObject;
             dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement?: (aggregate: QueueManagerQueue) => QueryStatement;
-        }
+            finderQueryStatement?: (
+                aggregate: QueueManagerQueue,
+            ) => QueryStatement;
+        },
     ): Promise<void>;
 
     // create a single or multiple records
@@ -112,7 +111,7 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
         options?: {
             insertOptions?: LiteralObject;
             dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update record by id
@@ -125,7 +124,7 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update records
@@ -137,7 +136,7 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update and increment records
@@ -149,7 +148,7 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // insert or update key identification element already existing in the table
@@ -158,7 +157,7 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
         options?: {
             upsertOptions?: LiteralObject;
             dataFactory?: (aggregate: QueueManagerQueue) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete record
@@ -170,16 +169,14 @@ export abstract class QueueManagerIQueueRepository implements IRepository<QueueM
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete records
-    abstract delete(
-        options?: {
-            deleteOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
+    abstract delete(options?: {
+        deleteOptions?: LiteralObject;
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<void>;
 }

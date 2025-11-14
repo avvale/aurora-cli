@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AuditingGetSideEffectsHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class AuditingGetSideEffectsHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<AuditingSideEffect[] | AuditingSideEffectDto[]>
-    {
-        return await this.queryBus.ask(new AuditingGetSideEffectsQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<AuditingSideEffect[] | AuditingSideEffectDto[]> {
+        return await this.queryBus.ask(
+            new AuditingGetSideEffectsQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

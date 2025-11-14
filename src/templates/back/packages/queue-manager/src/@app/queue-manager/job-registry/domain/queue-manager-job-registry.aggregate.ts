@@ -1,5 +1,9 @@
 /* eslint-disable key-spacing */
-import { QueueManagerCreatedJobRegistryEvent, QueueManagerDeletedJobRegistryEvent, QueueManagerUpdatedJobRegistryEvent } from '@app/queue-manager/job-registry';
+import {
+    QueueManagerCreatedJobRegistryEvent,
+    QueueManagerDeletedJobRegistryEvent,
+    QueueManagerUpdatedJobRegistryEvent,
+} from '@app/queue-manager/job-registry';
 import {
     QueueManagerJobRegistryCreatedAt,
     QueueManagerJobRegistryDeletedAt,
@@ -7,16 +11,17 @@ import {
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
     QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryRowId,
     QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
     QueueManagerJobRegistryUpdatedAt,
 } from '@app/queue-manager/job-registry/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class QueueManagerJobRegistry extends AggregateRoot
-{
+export class QueueManagerJobRegistry extends AggregateRoot {
     id: QueueManagerJobRegistryId;
+    rowId: QueueManagerJobRegistryRowId;
     queueName: QueueManagerJobRegistryQueueName;
     state: QueueManagerJobRegistryState;
     jobId: QueueManagerJobRegistryJobId;
@@ -28,6 +33,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
 
     constructor(
         id: QueueManagerJobRegistryId,
+        rowId: QueueManagerJobRegistryRowId,
         queueName: QueueManagerJobRegistryQueueName,
         state: QueueManagerJobRegistryState,
         jobId: QueueManagerJobRegistryJobId,
@@ -36,10 +42,10 @@ export class QueueManagerJobRegistry extends AggregateRoot
         createdAt: QueueManagerJobRegistryCreatedAt,
         updatedAt: QueueManagerJobRegistryUpdatedAt,
         deletedAt: QueueManagerJobRegistryDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.queueName = queueName;
         this.state = state;
         this.jobId = jobId;
@@ -52,6 +58,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
 
     static register(
         id: QueueManagerJobRegistryId,
+        rowId: QueueManagerJobRegistryRowId,
         queueName: QueueManagerJobRegistryQueueName,
         state: QueueManagerJobRegistryState,
         jobId: QueueManagerJobRegistryJobId,
@@ -60,10 +67,10 @@ export class QueueManagerJobRegistry extends AggregateRoot
         createdAt: QueueManagerJobRegistryCreatedAt,
         updatedAt: QueueManagerJobRegistryUpdatedAt,
         deletedAt: QueueManagerJobRegistryDeletedAt,
-    ): QueueManagerJobRegistry
-    {
+    ): QueueManagerJobRegistry {
         return new QueueManagerJobRegistry(
             id,
+            rowId,
             queueName,
             state,
             jobId,
@@ -75,61 +82,77 @@ export class QueueManagerJobRegistry extends AggregateRoot
         );
     }
 
-    created(jobRegistry: QueueManagerJobRegistry): void
-    {
+    created(event: {
+        payload: QueueManagerJobRegistry;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new QueueManagerCreatedJobRegistryEvent(
-                jobRegistry.id.value,
-                jobRegistry.queueName.value,
-                jobRegistry.state.value,
-                jobRegistry.jobId.value,
-                jobRegistry.jobName?.value,
-                jobRegistry.tags?.value,
-                jobRegistry.createdAt?.value,
-                jobRegistry.updatedAt?.value,
-                jobRegistry.deletedAt?.value,
-            ),
+            new QueueManagerCreatedJobRegistryEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    queueName: event.payload.queueName.value,
+                    state: event.payload.state.value,
+                    jobId: event.payload.jobId.value,
+                    jobName: event.payload.jobName?.value,
+                    tags: event.payload.tags?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(jobRegistry: QueueManagerJobRegistry): void
-    {
+    updated(event: {
+        payload: QueueManagerJobRegistry;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new QueueManagerUpdatedJobRegistryEvent(
-                jobRegistry.id?.value,
-                jobRegistry.queueName?.value,
-                jobRegistry.state?.value,
-                jobRegistry.jobId?.value,
-                jobRegistry.jobName?.value,
-                jobRegistry.tags?.value,
-                jobRegistry.createdAt?.value,
-                jobRegistry.updatedAt?.value,
-                jobRegistry.deletedAt?.value,
-            ),
+            new QueueManagerUpdatedJobRegistryEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    queueName: event.payload.queueName?.value,
+                    state: event.payload.state?.value,
+                    jobId: event.payload.jobId?.value,
+                    jobName: event.payload.jobName?.value,
+                    tags: event.payload.tags?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(jobRegistry: QueueManagerJobRegistry): void
-    {
+    deleted(event: {
+        payload: QueueManagerJobRegistry;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new QueueManagerDeletedJobRegistryEvent(
-                jobRegistry.id.value,
-                jobRegistry.queueName.value,
-                jobRegistry.state.value,
-                jobRegistry.jobId.value,
-                jobRegistry.jobName?.value,
-                jobRegistry.tags?.value,
-                jobRegistry.createdAt?.value,
-                jobRegistry.updatedAt?.value,
-                jobRegistry.deletedAt?.value,
-            ),
+            new QueueManagerDeletedJobRegistryEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
+                    queueName: event.payload.queueName.value,
+                    state: event.payload.state.value,
+                    jobId: event.payload.jobId.value,
+                    jobName: event.payload.jobName?.value,
+                    tags: event.payload.tags?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             queueName: this.queueName.value,
             state: this.state.value,
             jobId: this.jobId.value,
@@ -142,8 +165,7 @@ export class QueueManagerJobRegistry extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             queueName: this.queueName.value,

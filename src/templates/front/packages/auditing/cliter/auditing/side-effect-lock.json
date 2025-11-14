@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/auditing/auditing.component.ts",
-            "integrity": "sha1:f159bf24b92632095210bb1cf822d90526fcf96d"
+            "integrity": "sha1:9e208fe6c7f6ca569eee8c7b9b2f3bc9ce0cfb48"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/side-effect-detail.component.html",
-            "integrity": "sha1:74a195a7cc239e3c1ab8a7fdcfba5302d67fd7ea"
+            "integrity": "sha1:34593588e451a93b3521a460cd0e06303d9c0f23"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/side-effect-detail.component.ts",
-            "integrity": "sha1:3c64f53f78a2dc6d9a87a10619ad8c17594c75c0"
+            "integrity": "sha1:789da7d488eed3994ede975f1f674440fc9bf79e"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/side-effect-list.component.html",
-            "integrity": "sha1:ed305d834727b11658dc1e31fc1b92eef7f43cde"
+            "integrity": "sha1:5b626f5add9677f0b8fe2140866ce03e94d50db1"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/side-effect-list.component.ts",
-            "integrity": "sha1:ae6c42b31191683af663d86b7edce9bb00b73dd8"
+            "integrity": "sha1:451733c40f319563881fe68381540a9c69510f7d"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/side-effect.columns-config.ts",
-            "integrity": "sha1:257ef491c1888691542d1fb85d92ac085f837c98"
+            "integrity": "sha1:541b9d83b698ecbeb4496a0f7fd8959494e1bd0b"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/side-effect.graphql.ts",
-            "integrity": "sha1:c5a3abcb7ca289a75b77b84d8b343f1721cc739f"
+            "integrity": "sha1:0123f29c53d55df5f1a8c33248715034b890a658"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/side-effect.resolvers.ts",
-            "integrity": "sha1:52cae4fbd72aeb9ee29ec3fb6946581eb7063e1e"
+            "integrity": "sha1:2cae37418ab257476d7fc7a6f019cedfab36cff1"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/side-effect.service.ts",
-            "integrity": "sha1:a62a5aebe0d6c9392dac1d753bc63af3f9f587b5"
+            "integrity": "sha1:ef4a4fec685b5610653d6974e82e16da36d23a47"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/side-effect/index.ts",

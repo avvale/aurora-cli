@@ -1,44 +1,45 @@
 /* eslint-disable indent */
-import { QueueManagerJobRegistryState, QueueManagerJobState } from '@api/graphql';
+import {
+    QueueManagerJobRegistryState,
+    QueueManagerJobState,
+} from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class QueueManagerCreateJobRegistryDto
-{
+export class QueueManagerCreateJobRegistryDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'id [input here api field description]',
     })
     id: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'queueName [input here api field description]',
     })
     queueName: string;
 
     @ApiProperty({
-        enum       : QueueManagerJobRegistryState,
+        enum: QueueManagerJobRegistryState,
         description: 'state [input here api field description]',
-        example    : QueueManagerJobState.COMPLETED,
+        example: QueueManagerJobState.COMPLETED,
     })
     state: QueueManagerJobRegistryState;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'jobId [input here api field description]',
     })
     jobId: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'jobName [input here api field description]',
     })
     jobName?: string;
 
     @ApiProperty({
-        type       : Array,
+        type: Array,
         description: 'tags [input here api field description]',
     })
     tags?: string[];
-
 }

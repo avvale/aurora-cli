@@ -1,49 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { QueueManagerDeleteJobsRegistryHandler, QueueManagerDeleteJobsRegistryResolver } from '@api/queue-manager/job-registry';
+import {
+    QueueManagerDeleteJobsRegistryHandler,
+    QueueManagerDeleteJobsRegistryResolver,
+} from '@api/queue-manager/job-registry';
 import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerDeleteJobsRegistryResolver', () =>
-{
+describe('QueueManagerDeleteJobsRegistryResolver', () => {
     let resolver: QueueManagerDeleteJobsRegistryResolver;
     let handler: QueueManagerDeleteJobsRegistryHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerDeleteJobsRegistryResolver,
                 {
-                    provide : QueueManagerDeleteJobsRegistryHandler,
+                    provide: QueueManagerDeleteJobsRegistryHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<QueueManagerDeleteJobsRegistryResolver>(QueueManagerDeleteJobsRegistryResolver);
-        handler = module.get<QueueManagerDeleteJobsRegistryHandler>(QueueManagerDeleteJobsRegistryHandler);
+        resolver = module.get<QueueManagerDeleteJobsRegistryResolver>(
+            QueueManagerDeleteJobsRegistryResolver,
+        );
+        handler = module.get<QueueManagerDeleteJobsRegistryHandler>(
+            QueueManagerDeleteJobsRegistryHandler,
+        );
     });
 
-    test('QueueManagerDeleteJobsRegistryResolver should be defined', () =>
-    {
+    test('QueueManagerDeleteJobsRegistryResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerDeleteJobsRegistryResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerDeleteJobsRegistryResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an queueManagerMockJobRegistryData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData)));
+        test('should return an queueManagerMockJobRegistryData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockJobRegistryData),
+                    ),
+            );
             expect(await resolver.main()).toBe(queueManagerMockJobRegistryData);
         });
     });

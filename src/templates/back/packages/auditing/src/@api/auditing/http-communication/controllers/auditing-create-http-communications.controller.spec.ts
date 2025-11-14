@@ -1,46 +1,42 @@
-import { AuditingCreateHttpCommunicationsController, AuditingCreateHttpCommunicationsHandler } from '@api/auditing/http-communication';
+import {
+    AuditingCreateHttpCommunicationsController,
+    AuditingCreateHttpCommunicationsHandler,
+} from '@api/auditing/http-communication';
 import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingCreateHttpCommunicationsController', () =>
-{
+describe('AuditingCreateHttpCommunicationsController', () => {
     let controller: AuditingCreateHttpCommunicationsController;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            controllers: [
-                AuditingCreateHttpCommunicationsController,
-            ],
+            controllers: [AuditingCreateHttpCommunicationsController],
             providers: [
                 {
-                    provide : AuditingCreateHttpCommunicationsHandler,
+                    provide: AuditingCreateHttpCommunicationsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<AuditingCreateHttpCommunicationsController>(AuditingCreateHttpCommunicationsController);
+        controller = module.get<AuditingCreateHttpCommunicationsController>(
+            AuditingCreateHttpCommunicationsController,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingCreateHttpCommunicationsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingCreateHttpCommunicationsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an auditingMockHttpCommunicationData created', async () =>
-        {
+        test('should return an auditingMockHttpCommunicationData created', async () => {
             expect(
-                await controller.main(
-                    auditingMockHttpCommunicationData,
-                ),
-            )
-                .toBe(undefined);
+                await controller.main(auditingMockHttpCommunicationData),
+            ).toBe(undefined);
         });
     });
 });

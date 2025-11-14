@@ -1,7 +1,9 @@
-import { AuditingHttpCommunication, AuditingIHttpCommunicationRepository } from '@app/auditing/http-communication';
+import {
+    AuditingHttpCommunication,
+    AuditingIHttpCommunicationRepository,
+} from '@app/auditing/http-communication';
 import {
     AuditingHttpCommunicationCreatedAt,
-    AuditingHttpCommunicationDeletedAt,
     AuditingHttpCommunicationEvent,
     AuditingHttpCommunicationHttpRequest,
     AuditingHttpCommunicationHttpRequestRejected,
@@ -21,8 +23,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class AuditingCreateHttpCommunicationService
-{
+export class AuditingCreateHttpCommunicationService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: AuditingIHttpCommunicationRepository,
@@ -44,11 +45,11 @@ export class AuditingCreateHttpCommunicationService
             reprocessingHttpCommunicationId: AuditingHttpCommunicationReprocessingHttpCommunicationId;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const httpCommunication = AuditingHttpCommunication.register(
             payload.id,
+            undefined, // rowId
             payload.tags,
             payload.event,
             payload.status,
@@ -65,19 +66,18 @@ export class AuditingCreateHttpCommunicationService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            httpCommunication,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(httpCommunication, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const httpCommunicationRegister = this.publisher.mergeObjectContext(
-            httpCommunication,
-        );
+        const httpCommunicationRegister =
+            this.publisher.mergeObjectContext(httpCommunication);
 
-        httpCommunicationRegister.created(httpCommunication); // apply event to model events
+        httpCommunicationRegister.created({
+            payload: httpCommunication,
+            cQMetadata,
+        }); // apply event to model events
         httpCommunicationRegister.commit(); // commit all events of model
     }
 }

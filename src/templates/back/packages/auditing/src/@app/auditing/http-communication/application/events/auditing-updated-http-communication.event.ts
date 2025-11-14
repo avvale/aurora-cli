@@ -1,20 +1,26 @@
-export class AuditingUpdatedHttpCommunicationEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class AuditingUpdatedHttpCommunicationEvent {
     constructor(
-        public readonly id: string,
-        public readonly tags: string[],
-        public readonly event: string,
-        public readonly status: number,
-        public readonly method: string,
-        public readonly url: string,
-        public readonly httpRequest: any,
-        public readonly httpRequestRejected: any,
-        public readonly httpResponse: any,
-        public readonly httpResponseRejected: any,
-        public readonly isReprocessing: boolean,
-        public readonly reprocessingHttpCommunicationId: string,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                tags: string[];
+                event: string;
+                status: number;
+                method: string;
+                url: string;
+                httpRequest: any;
+                httpRequestRejected: any;
+                httpResponse: any;
+                httpResponseRejected: any;
+                isReprocessing: boolean;
+                reprocessingHttpCommunicationId: string;
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

@@ -1,89 +1,88 @@
-import { QueueManagerCreatedQueueEvent, QueueManagerCreatedQueuesEvent, QueueManagerDeletedQueueEvent, QueueManagerDeletedQueuesEvent, QueueManagerQueue, QueueManagerUpdatedAndIncrementedQueueEvent, QueueManagerUpdatedAndIncrementedQueuesEvent, QueueManagerUpdatedQueueEvent, QueueManagerUpdatedQueuesEvent } from '@app/queue-manager/queue';
+import {
+    QueueManagerCreatedQueueEvent,
+    QueueManagerCreatedQueuesEvent,
+    QueueManagerDeletedQueueEvent,
+    QueueManagerDeletedQueuesEvent,
+    QueueManagerQueue,
+    QueueManagerUpdatedQueueEvent,
+    QueueManagerUpdatedQueuesEvent,
+} from '@app/queue-manager/queue';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class QueueManagerAddQueuesContextEvent extends AggregateRoot
-{
+export class QueueManagerAddQueuesContextEvent extends AggregateRoot {
     constructor(
         public readonly aggregateRoots: QueueManagerQueue[] = [],
-    )
-    {
+        public readonly cQMetadata?: CQMetadata,
+    ) {
         super();
     }
 
-    *[Symbol.iterator]()
-    {
+    *[Symbol.iterator]() {
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created(): void
-    {
+    created(): void {
         this.apply(
-            new QueueManagerCreatedQueuesEvent(
-                this.aggregateRoots.map(queue =>
-                    new QueueManagerCreatedQueueEvent(
-                        queue.id.value,
-                        queue.prefix.value,
-                        queue.name.value,
-                        queue.createdAt?.value,
-                        queue.updatedAt?.value,
-                        queue.deletedAt?.value,
-                    ),
+            new QueueManagerCreatedQueuesEvent({
+                payload: this.aggregateRoots.map(
+                    (queue) =>
+                        new QueueManagerCreatedQueueEvent({
+                            payload: {
+                                id: queue.id.value,
+                                prefix: queue.prefix.value,
+                                name: queue.name.value,
+                                createdAt: queue.createdAt?.value,
+                                updatedAt: queue.updatedAt?.value,
+                                deletedAt: queue.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
-    updated(): void
-    {
+    updated(): void {
         this.apply(
-            new QueueManagerUpdatedQueuesEvent(
-                this.aggregateRoots.map(queue =>
-                    new QueueManagerUpdatedQueueEvent(
-                        queue.id.value,
-                        queue.prefix.value,
-                        queue.name.value,
-                        queue.createdAt?.value,
-                        queue.updatedAt?.value,
-                        queue.deletedAt?.value,
-                    ),
+            new QueueManagerUpdatedQueuesEvent({
+                payload: this.aggregateRoots.map(
+                    (queue) =>
+                        new QueueManagerUpdatedQueueEvent({
+                            payload: {
+                                id: queue.id.value,
+                                prefix: queue.prefix.value,
+                                name: queue.name.value,
+                                createdAt: queue.createdAt?.value,
+                                updatedAt: queue.updatedAt?.value,
+                                deletedAt: queue.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
-    updatedAndIncremented(): void
-    {
+    deleted(): void {
         this.apply(
-            new QueueManagerUpdatedAndIncrementedQueuesEvent(
-                this.aggregateRoots.map(queue =>
-                    new QueueManagerUpdatedAndIncrementedQueueEvent(
-                        queue.id.value,
-                        queue.prefix.value,
-                        queue.name.value,
-                        queue.createdAt?.value,
-                        queue.updatedAt?.value,
-                        queue.deletedAt?.value,
-                    ),
+            new QueueManagerDeletedQueuesEvent({
+                payload: this.aggregateRoots.map(
+                    (queue) =>
+                        new QueueManagerDeletedQueueEvent({
+                            payload: {
+                                id: queue.id.value,
+                                rowId: queue.rowId.value,
+                                prefix: queue.prefix.value,
+                                name: queue.name.value,
+                                createdAt: queue.createdAt?.value,
+                                updatedAt: queue.updatedAt?.value,
+                                deletedAt: queue.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
-        );
-    }
-
-    deleted(): void
-    {
-        this.apply(
-            new QueueManagerDeletedQueuesEvent(
-                this.aggregateRoots.map(queue =>
-                    new QueueManagerDeletedQueueEvent(
-                        queue.id.value,
-                        queue.prefix.value,
-                        queue.name.value,
-                        queue.createdAt?.value,
-                        queue.updatedAt?.value,
-                        queue.deletedAt?.value,
-                    ),
-                ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

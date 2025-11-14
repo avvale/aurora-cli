@@ -1,7 +1,9 @@
-import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
+import {
+    QueueManagerIJobRegistryRepository,
+    QueueManagerJobRegistry,
+} from '@app/queue-manager/job-registry';
 import {
     QueueManagerJobRegistryCreatedAt,
-    QueueManagerJobRegistryDeletedAt,
     QueueManagerJobRegistryId,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
@@ -15,8 +17,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class QueueManagerCreateJobRegistryService
-{
+export class QueueManagerCreateJobRegistryService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: QueueManagerIJobRegistryRepository,
@@ -32,11 +33,11 @@ export class QueueManagerCreateJobRegistryService
             tags: QueueManagerJobRegistryTags;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const jobRegistry = QueueManagerJobRegistry.register(
             payload.id,
+            undefined, // rowId
             payload.queueName,
             payload.state,
             payload.jobId,
@@ -47,19 +48,18 @@ export class QueueManagerCreateJobRegistryService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            jobRegistry,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(jobRegistry, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const jobRegistryRegister = this.publisher.mergeObjectContext(
-            jobRegistry,
-        );
+        const jobRegistryRegister =
+            this.publisher.mergeObjectContext(jobRegistry);
 
-        jobRegistryRegister.created(jobRegistry); // apply event to model events
+        jobRegistryRegister.created({
+            payload: jobRegistry,
+            cQMetadata,
+        }); // apply event to model events
         jobRegistryRegister.commit(); // commit all events of model
     }
 }

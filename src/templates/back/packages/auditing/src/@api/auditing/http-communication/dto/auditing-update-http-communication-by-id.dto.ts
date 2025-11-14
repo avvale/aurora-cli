@@ -2,80 +2,79 @@
 import { AuditingHttpCommunicationEvent } from '@api/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class AuditingUpdateHttpCommunicationByIdDto
-{
+export class AuditingUpdateHttpCommunicationByIdDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'id [input here api field description]',
     })
     id: string;
 
     @ApiProperty({
-        type       : Array,
+        type: Array,
         description: 'tags [input here api field description]',
     })
     tags?: string[];
 
     @ApiProperty({
-        enum       : AuditingHttpCommunicationEvent,
+        enum: AuditingHttpCommunicationEvent,
         description: 'event [input here api field description]',
-        example    : AuditingHttpCommunicationEvent.REQUEST_FULFILLED,
+        example: AuditingHttpCommunicationEvent.REQUEST_FULFILLED,
     })
     event?: AuditingHttpCommunicationEvent;
 
     @ApiProperty({
-        type       : Number,
+        type: Number,
         description: 'status [input here api field description]',
     })
     status?: number;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'method [input here api field description]',
     })
     method?: string;
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'url [input here api field description]',
     })
     url?: string;
 
     @ApiProperty({
-        type       : Object,
+        type: Object,
         description: 'httpRequest [input here api field description]',
     })
     httpRequest?: any;
 
     @ApiProperty({
-        type       : Object,
+        type: Object,
         description: 'httpRequestRejected [input here api field description]',
     })
     httpRequestRejected?: any;
 
     @ApiProperty({
-        type       : Object,
+        type: Object,
         description: 'httpResponse [input here api field description]',
     })
     httpResponse?: any;
 
     @ApiProperty({
-        type       : Object,
+        type: Object,
         description: 'httpResponseRejected [input here api field description]',
     })
     httpResponseRejected?: any;
 
     @ApiProperty({
-        type       : Boolean,
+        type: Boolean,
         description: 'isReprocessing [input here api field description]',
-        example    : true,
+        example: true,
     })
     isReprocessing?: boolean;
 
     @ApiProperty({
-        type       : String,
-        description: 'reprocessingHttpCommunicationId [input here api field description]',
+        type: String,
+        description:
+            'reprocessingHttpCommunicationId [input here api field description]',
     })
     reprocessingHttpCommunicationId?: string;
-
 }

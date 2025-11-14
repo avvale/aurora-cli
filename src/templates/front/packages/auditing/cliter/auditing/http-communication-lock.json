@@ -7,39 +7,39 @@
         },
         {
             "path": "src/app/modules/admin/apps/auditing/auditing.component.ts",
-            "integrity": "sha1:f159bf24b92632095210bb1cf822d90526fcf96d"
+            "integrity": "sha1:9e208fe6c7f6ca569eee8c7b9b2f3bc9ce0cfb48"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/http-communication-detail.component.html",
-            "integrity": "sha1:4e8e3c3b739fd6d19492e0084ef3f0c8bb24fdf6"
+            "integrity": "sha1:11beddc227feef6a632b6d5ca17ac4b4f7628e82"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/http-communication-detail.component.ts",
-            "integrity": "sha1:84aa3336d14a834b4458e4d496ef37eaffae8c05"
+            "integrity": "sha1:c5a4edda78b523b621ef1f0f8ed822ed12fee650"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/http-communication-list.component.html",
-            "integrity": "sha1:0999250d81a593f42367bfccf82a538efffd1a85"
+            "integrity": "sha1:58f78b04a3aeafced52d00e48abac167c9e05701"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/http-communication-list.component.ts",
-            "integrity": "sha1:644dfa6b056352a11f49cf3825bbe03e07baa0f5"
+            "integrity": "sha1:091f0359d7af74c91c6de655c9065ff06efb7c63"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/http-communication.columns-config.ts",
-            "integrity": "sha1:d904c13ce9ce0283df36fd1ec28ccc6baeabac2e"
+            "integrity": "sha1:ab76f015c0b6ca89d562e6fbcfdf3d72c9dfe206"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/http-communication.graphql.ts",
-            "integrity": "sha1:d2e95a8d27ea0cd74aa51dfce96ce21352d8eb3e"
+            "integrity": "sha1:a37bfa908cc919b57feaf20ae9157ffd107d4193"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/http-communication.resolvers.ts",
-            "integrity": "sha1:6ef9e16a3668f68ebbec1971dfe2d7f1b19ca247"
+            "integrity": "sha1:b37467afdcd3adec34621565d740ea5befd04664"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/http-communication.service.ts",
-            "integrity": "sha1:d50762ca99e99e1a283ae3d82575b50d655c2f3a"
+            "integrity": "sha1:2ff1c05a0ce19a3162eecf92a6e78b4139ad0914"
         },
         {
             "path": "src/app/modules/admin/apps/auditing/http-communication/index.ts",

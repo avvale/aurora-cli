@@ -3,38 +3,38 @@ import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerCreateJobsRegistryHandler', () =>
-{
+describe('QueueManagerCreateJobsRegistryHandler', () => {
     let handler: QueueManagerCreateJobsRegistryHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 QueueManagerCreateJobsRegistryHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<QueueManagerCreateJobsRegistryHandler>(QueueManagerCreateJobsRegistryHandler);
+        handler = module.get<QueueManagerCreateJobsRegistryHandler>(
+            QueueManagerCreateJobsRegistryHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerCreateJobsRegistryHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerCreateJobsRegistryHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an queueManagerMockJobRegistryData created', async () =>
-        {
-            expect(await handler.main(queueManagerMockJobRegistryData)).toBe(true);
+        test('should return an queueManagerMockJobRegistryData created', async () => {
+            expect(await handler.main(queueManagerMockJobRegistryData)).toBe(
+                true,
+            );
         });
     });
 });

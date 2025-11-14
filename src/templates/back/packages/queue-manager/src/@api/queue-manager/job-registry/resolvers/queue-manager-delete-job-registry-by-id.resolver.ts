@@ -6,8 +6,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.jobRegistry.delete')
-export class QueueManagerDeleteJobRegistryByIdResolver
-{
+export class QueueManagerDeleteJobRegistryByIdResolver {
     constructor(
         private readonly handler: QueueManagerDeleteJobRegistryByIdHandler,
     ) {}
@@ -17,12 +16,7 @@ export class QueueManagerDeleteJobRegistryByIdResolver
         @Args('id') id: string,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<QueueManagerJobRegistry>
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
+    ): Promise<QueueManagerJobRegistry> {
+        return await this.handler.main(id, constraint, timezone);
     }
 }

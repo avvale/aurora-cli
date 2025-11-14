@@ -7,36 +7,38 @@ import { JwtService } from '@nestjs/jwt';
 import { IamAccountDto } from '../dto';
 
 @Injectable()
-export class IamMeAccountHandler
-{
+export class IamMeAccountHandler {
     constructor(
         private readonly queryBus: IQueryBus,
         private readonly jwtService: JwtService,
     ) {}
 
-    async main(
-        authorization: string,
-    ): Promise<IamAccount | IamAccountDto>
-    {
+    async main(authorization: string): Promise<IamAccount | IamAccountDto> {
         // get token from Headers
-        const jwt = <Jwt>this.jwtService.decode(authorization.replace('Bearer ', ''));
+        const jwt = <Jwt>(
+            this.jwtService.decode(authorization.replace('Bearer ', ''))
+        );
 
         // get access token from database
-        const accessToken = await this.queryBus.ask(new OAuthFindAccessTokenByIdQuery(jwt.jit));
+        const accessToken = await this.queryBus.ask(
+            new OAuthFindAccessTokenByIdQuery(jwt.jit),
+        );
 
         // get account who belongs this token
-        return await this.queryBus.ask(new IamFindAccountQuery({
-            where: {
-                id: accessToken.accountId,
-            },
-            include: [
-                {
-                    association: 'user',
+        return await this.queryBus.ask(
+            new IamFindAccountQuery({
+                where: {
+                    id: accessToken.accountId,
                 },
-                {
-                    association: 'tenants',
-                },
-            ],
-        }));
+                include: [
+                    {
+                        association: 'user',
+                    },
+                    {
+                        association: 'tenants',
+                    },
+                ],
+            }),
+        );
     }
 }

@@ -1,17 +1,24 @@
-import { AuditingIHttpCommunicationRepository, auditingMockHttpCommunicationData, AuditingMockHttpCommunicationRepository } from '@app/auditing/http-communication';
+import {
+    AuditingIHttpCommunicationRepository,
+    auditingMockHttpCommunicationData,
+    AuditingMockHttpCommunicationRepository,
+} from '@app/auditing/http-communication';
 import { AuditingFindHttpCommunicationByIdService } from '@app/auditing/http-communication/application/find/auditing-find-http-communication-by-id.service';
 import { AuditingHttpCommunicationId } from '@app/auditing/http-communication/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingFindHttpCommunicationByIdService', () =>
-{
+describe('AuditingFindHttpCommunicationByIdService', () => {
     let service: AuditingFindHttpCommunicationByIdService;
     let repository: AuditingIHttpCommunicationRepository;
     let mockRepository: AuditingMockHttpCommunicationRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -21,33 +28,40 @@ describe('AuditingFindHttpCommunicationByIdService', () =>
                 AuditingFindHttpCommunicationByIdService,
                 AuditingMockHttpCommunicationRepository,
                 {
-                    provide : AuditingIHttpCommunicationRepository,
+                    provide: AuditingIHttpCommunicationRepository,
                     useValue: {
-                        findById: id => { /**/ },
+                        findById: (id) => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(AuditingFindHttpCommunicationByIdService);
         repository = module.get(AuditingIHttpCommunicationRepository);
         mockRepository = module.get(AuditingMockHttpCommunicationRepository);
     });
 
-    describe('main', () =>
-    {
-        test('FindHttpCommunicationByIdService should be defined', () =>
-        {
+    describe('main', () => {
+        test('FindHttpCommunicationByIdService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should find httpCommunication by id', async () =>
-        {
-            jest.spyOn(repository, 'findById').mockImplementation(() => new Promise(resolve => resolve(mockRepository.collectionSource[0])));
-            expect(await service.main(
-                new AuditingHttpCommunicationId(auditingMockHttpCommunicationData[0].id),
-            )).toBe(mockRepository.collectionSource[0]);
+        test('should find httpCommunication by id', async () => {
+            jest.spyOn(repository, 'findById').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(mockRepository.collectionSource[0]),
+                    ),
+            );
+            expect(
+                await service.main(
+                    new AuditingHttpCommunicationId(
+                        auditingMockHttpCommunicationData[0].id,
+                    ),
+                ),
+            ).toBe(mockRepository.collectionSource[0]);
         });
     });
 });

@@ -1,26 +1,34 @@
-import { QueueManagerQueue, QueueManagerQueueResponse } from '@app/queue-manager/queue';
+import {
+    QueueManagerQueue,
+    QueueManagerQueueResponse,
+} from '@app/queue-manager/queue';
 import {
     QueueManagerQueueCreatedAt,
     QueueManagerQueueDeletedAt,
     QueueManagerQueueId,
     QueueManagerQueueName,
     QueueManagerQueuePrefix,
+    QueueManagerQueueRowId,
     QueueManagerQueueUpdatedAt,
 } from '@app/queue-manager/queue/domain/value-objects';
-import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IMapper,
+    LiteralObject,
+    MapperOptions,
+} from '@aurorajs.dev/core';
 
-export class QueueManagerQueueMapper implements IMapper
-{
-    constructor(
-        public options: MapperOptions = { eagerLoading: true },
-    ) {}
+export class QueueManagerQueueMapper implements IMapper {
+    constructor(public options: MapperOptions = { eagerLoading: true }) {}
 
     /**
      * Map object to aggregate
      * @param queue
      */
-    mapModelToAggregate(queue: LiteralObject, cQMetadata?: CQMetadata): QueueManagerQueue
-    {
+    mapModelToAggregate(
+        queue: LiteralObject,
+        cQMetadata?: CQMetadata,
+    ): QueueManagerQueue {
         if (!queue) return;
 
         return this.makeAggregate(queue, cQMetadata);
@@ -30,19 +38,22 @@ export class QueueManagerQueueMapper implements IMapper
      * Map array of objects to array aggregates
      * @param queues
      */
-    mapModelsToAggregates(queues: LiteralObject[], cQMetadata?: CQMetadata): QueueManagerQueue[]
-    {
+    mapModelsToAggregates(
+        queues: LiteralObject[],
+        cQMetadata?: CQMetadata,
+    ): QueueManagerQueue[] {
         if (!Array.isArray(queues)) return;
 
-        return queues.map(queue => this.makeAggregate(queue, cQMetadata));
+        return queues.map((queue) => this.makeAggregate(queue, cQMetadata));
     }
 
     /**
      * Map aggregate to response
      * @param queue
      */
-    mapAggregateToResponse(queue: QueueManagerQueue): QueueManagerQueueResponse
-    {
+    mapAggregateToResponse(
+        queue: QueueManagerQueue,
+    ): QueueManagerQueueResponse {
         return this.makeResponse(queue);
     }
 
@@ -50,31 +61,47 @@ export class QueueManagerQueueMapper implements IMapper
      * Map array of aggregates to array responses
      * @param queues
      */
-    mapAggregatesToResponses(queues: QueueManagerQueue[]): QueueManagerQueueResponse[]
-    {
+    mapAggregatesToResponses(
+        queues: QueueManagerQueue[],
+    ): QueueManagerQueueResponse[] {
         if (!Array.isArray(queues)) return;
 
-        return queues.map(queue => this.makeResponse(queue));
+        return queues.map((queue) => this.makeResponse(queue));
     }
 
-    private makeAggregate(queue: LiteralObject, cQMetadata?: CQMetadata): QueueManagerQueue
-    {
+    private makeAggregate(
+        queue: LiteralObject,
+        cQMetadata?: CQMetadata,
+    ): QueueManagerQueue {
         return QueueManagerQueue.register(
             new QueueManagerQueueId(queue.id, { undefinable: true }),
+            new QueueManagerQueueRowId(queue.rowId, { undefinable: true }),
             new QueueManagerQueuePrefix(queue.prefix, { undefinable: true }),
             new QueueManagerQueueName(queue.name, { undefinable: true }),
-            new QueueManagerQueueCreatedAt(queue.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            new QueueManagerQueueUpdatedAt(queue.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            new QueueManagerQueueDeletedAt(queue.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new QueueManagerQueueCreatedAt(
+                queue.createdAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            new QueueManagerQueueUpdatedAt(
+                queue.updatedAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            new QueueManagerQueueDeletedAt(
+                queue.deletedAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
         );
     }
 
-    private makeResponse(queue: QueueManagerQueue): QueueManagerQueueResponse
-    {
+    private makeResponse(queue: QueueManagerQueue): QueueManagerQueueResponse {
         if (!queue) return;
 
         return new QueueManagerQueueResponse(
             queue.id.value,
+            queue.rowId.value,
             queue.prefix.value,
             queue.name.value,
             queue.createdAt.value,

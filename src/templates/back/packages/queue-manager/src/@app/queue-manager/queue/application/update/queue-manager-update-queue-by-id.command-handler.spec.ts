@@ -1,50 +1,54 @@
-import { queueManagerMockQueueData, QueueManagerUpdateQueueByIdCommand } from '@app/queue-manager/queue';
+import {
+    queueManagerMockQueueData,
+    QueueManagerUpdateQueueByIdCommand,
+} from '@app/queue-manager/queue';
 import { QueueManagerUpdateQueueByIdCommandHandler } from '@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.command-handler';
 import { QueueManagerUpdateQueueByIdService } from '@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerUpdateQueueByIdCommandHandler', () =>
-{
+describe('QueueManagerUpdateQueueByIdCommandHandler', () => {
     let commandHandler: QueueManagerUpdateQueueByIdCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 QueueManagerUpdateQueueByIdCommandHandler,
                 {
-                    provide : QueueManagerUpdateQueueByIdService,
+                    provide: QueueManagerUpdateQueueByIdService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<QueueManagerUpdateQueueByIdCommandHandler>(QueueManagerUpdateQueueByIdCommandHandler);
+        commandHandler = module.get<QueueManagerUpdateQueueByIdCommandHandler>(
+            QueueManagerUpdateQueueByIdCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('UpdateQueueByIdCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('UpdateQueueByIdCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an queue created', async () =>
-        {
-            expect(await commandHandler.execute(
-                new QueueManagerUpdateQueueByIdCommand(
-                    {
-                        id: queueManagerMockQueueData[0].id,
-                        prefix: queueManagerMockQueueData[0].prefix,
-                        name: queueManagerMockQueueData[0].name,
-                    },
-                    {},
-                    { timezone: process.env.TZ },
+        test('should return an queue created', async () => {
+            expect(
+                await commandHandler.execute(
+                    new QueueManagerUpdateQueueByIdCommand(
+                        {
+                            id: queueManagerMockQueueData[0].id,
+                            rowId: queueManagerMockQueueData[0].rowId,
+                            prefix: queueManagerMockQueueData[0].prefix,
+                            name: queueManagerMockQueueData[0].name,
+                        },
+                        {},
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

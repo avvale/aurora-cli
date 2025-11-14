@@ -1,49 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { QueueManagerFindQueueHandler, QueueManagerFindQueueResolver } from '@api/queue-manager/queue';
+import {
+    QueueManagerFindQueueHandler,
+    QueueManagerFindQueueResolver,
+} from '@api/queue-manager/queue';
 import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerFindQueueResolver', () =>
-{
+describe('QueueManagerFindQueueResolver', () => {
     let resolver: QueueManagerFindQueueResolver;
     let handler: QueueManagerFindQueueHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerFindQueueResolver,
                 {
-                    provide : QueueManagerFindQueueHandler,
+                    provide: QueueManagerFindQueueHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<QueueManagerFindQueueResolver>(QueueManagerFindQueueResolver);
-        handler = module.get<QueueManagerFindQueueHandler>(QueueManagerFindQueueHandler);
+        resolver = module.get<QueueManagerFindQueueResolver>(
+            QueueManagerFindQueueResolver,
+        );
+        handler = module.get<QueueManagerFindQueueHandler>(
+            QueueManagerFindQueueHandler,
+        );
     });
 
-    test('QueueManagerFindQueueResolver should be defined', () =>
-    {
+    test('QueueManagerFindQueueResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerFindQueueResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerFindQueueResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a queue', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+        test('should return a queue', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockQueueData[0]),
+                    ),
+            );
             expect(await resolver.main()).toBe(queueManagerMockQueueData[0]);
         });
     });

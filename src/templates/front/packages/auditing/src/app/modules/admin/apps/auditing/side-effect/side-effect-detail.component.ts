@@ -1,13 +1,34 @@
-import { KeyValuePipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { KeyValuePipe } from '@angular/common';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    signal,
+    ViewEncapsulation,
+    WritableSignal,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
-import { AuditingSideEffect, AuditingSideEffectEvent} from '@apps/auditing/auditing.types';
+import {
+    AuditingSideEffect,
+    AuditingSideEffectEvent,
+} from '@apps/auditing/auditing.types';
 import { SideEffectService } from '@apps/auditing/side-effect';
-import { Action, CanPipe, Crumb, defaultDetailImports, IsObjectEmptyPipe, log, mapActions, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
+import {
+    Action,
+    CanPipe,
+    Crumb,
+    defaultDetailImports,
+    IsObjectEmptyPipe,
+    log,
+    mapActions,
+    MatFormFieldAppearanceComponent,
+    SnackBarInvalidFormComponent,
+    uuid,
+    ViewDetailComponent,
+} from '@aurora';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'auditing-side-effect-detail',
@@ -16,11 +37,16 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         ...defaultDetailImports,
-        CanPipe, IsObjectEmptyPipe, KeyValuePipe, MatCheckboxModule, MatFormFieldAppearanceComponent, MatSelectModule, NgForOf, NgxJsonViewerModule,
+        CanPipe,
+        IsObjectEmptyPipe,
+        KeyValuePipe,
+        MatCheckboxModule,
+        MatFormFieldAppearanceComponent,
+        MatSelectModule,
+        NgxJsonViewerModule,
     ],
 })
-export class SideEffectDetailComponent extends ViewDetailComponent
-{
+export class SideEffectDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     auditingSideEffectEvent = AuditingSideEffectEvent;
 
@@ -28,73 +54,105 @@ export class SideEffectDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: AuditingSideEffect;
+    managedObject: WritableSignal<AuditingSideEffect> = signal(null);
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'auditing.SideEffects', routerLink: ['/auditing/side-effect']},
+        {
+            translation: 'auditing.SideEffects',
+            routerLink: ['/auditing/side-effect'],
+        },
         { translation: 'auditing.SideEffect' },
     ];
 
-    constructor(
-        private readonly sideEffectService: SideEffectService,
-    )
-    {
+    constructor(private readonly sideEffectService: SideEffectService) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    {
+    init(): void {
         /**/
     }
 
-    onSubmit($event): void
-    {
+    onSubmit($event): void {
         // we have two nested forms, we check that the submit comes from the button
         // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
+        if (
+            $event.submitter.getAttribute('form') !==
+            $event.submitter.form.getAttribute('id')
+        ) {
             $event.preventDefault();
             $event.stopPropagation();
             return;
         }
 
         // manage validations before execute actions
-        if (this.fg.invalid)
-        {
+        if (this.fg.invalid) {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+                data: {
+                    message: `${this.translocoService.translate('InvalidForm')}`,
+                    textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                },
+                panelClass: 'error-snackbar',
+                verticalPosition: 'top',
+                duration: 10000,
+            });
             return;
         }
 
         this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'auditing::sideEffect.detail.new' : 'auditing::sideEffect.detail.create',
-                    'auditing::sideEffect.detail.edit': 'auditing::sideEffect.detail.update',
-                },
-            ),
+            id: mapActions(this.currentViewAction.id, {
+                'auditing::sideEffect.detail.new':
+                    'auditing::sideEffect.detail.create',
+                'auditing::sideEffect.detail.edit':
+                    'auditing::sideEffect.detail.update',
+            }),
             isViewAction: false,
         });
     }
 
-    createForm(): void
-    {
+    createForm(): void {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
-            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            id: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
             tags: null,
             modelPath: ['', [Validators.required, Validators.maxLength(1022)]],
             modelName: ['', [Validators.required, Validators.maxLength(255)]],
-            operationId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
+            operationId: [
+                '',
+                [Validators.minLength(36), Validators.maxLength(36)],
+            ],
             operationSort: null,
-            accountId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            accountId: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
             email: ['', [Validators.required, Validators.maxLength(127)]],
-            event: ['', [Validators.required]],
-            auditableId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            event: [null, [Validators.required]],
+            auditableId: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
             oldValue: null,
             newValue: null,
             ip: ['', [Validators.maxLength(19)]],
@@ -105,40 +163,38 @@ export class SideEffectDetailComponent extends ViewDetailComponent
             body: null,
             userAgent: ['', [Validators.maxLength(1022)]],
             isRollback: false,
-            rollbackSideEffectId: ['', [Validators.minLength(36), Validators.maxLength(36)]],
+            rollbackSideEffectId: [
+                '',
+                [Validators.minLength(36), Validators.maxLength(36)],
+            ],
         });
+        /* eslint-enable key-spacing */
     }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'auditing::sideEffect.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'auditing::sideEffect.detail.edit':
-                this.sideEffectService
-                    .sideEffect$
+                this.sideEffectService.sideEffect$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
-                        this.managedObject = item;
+                    .subscribe((item) => {
+                        this.managedObject.set(item);
                         this.fg.disable();
                         this.fg.patchValue(item);
                     });
                 break;
 
             case 'auditing::sideEffect.detail.create':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.sideEffectService
-                            .create<AuditingSideEffect>({
-                                object: this.fg.value,
-                            }),
+                        this.sideEffectService.create<AuditingSideEffect>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -146,26 +202,22 @@ export class SideEffectDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['auditing/side-effect']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'auditing::sideEffect.detail.update':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.sideEffectService
-                            .updateById<AuditingSideEffect>({
-                                object: this.fg.value,
-                            }),
+                        this.sideEffectService.updateById<AuditingSideEffect>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -173,58 +225,63 @@ export class SideEffectDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['auditing/side-effect']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
 
             // ---- customizations ----
             case 'auditing::sideEffect.detail.rollback':
-                const closeAndSapCommunicationDialogRef = this.confirmationService.open({
-                    title  : this.translocoService.translate('auditing.Rollback'),
-                    message: this.translocoService.translate('auditing.RollbackAlertMessage'),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
-                        color: 'warn',
-                    },
-                    actions: {
-                        confirm: {
-                            show : true,
-                            label: this.translocoService.translate('auditing.Rollback'),
+                const closeAndSapCommunicationDialogRef =
+                    this.confirmationService.open({
+                        title: this.translocoService.translate(
+                            'auditing.Rollback',
+                        ),
+                        message: this.translocoService.translate(
+                            'auditing.RollbackAlertMessage',
+                        ),
+                        icon: {
+                            show: true,
+                            name: 'heroicons_outline:exclamation-triangle',
                             color: 'warn',
                         },
-                        cancel: {
-                            show : true,
-                            label: this.translocoService.translate('Cancel'),
+                        actions: {
+                            confirm: {
+                                show: true,
+                                label: this.translocoService.translate(
+                                    'auditing.Rollback',
+                                ),
+                                color: 'warn',
+                            },
+                            cancel: {
+                                show: true,
+                                label: this.translocoService.translate(
+                                    'Cancel',
+                                ),
+                            },
                         },
-                    },
-                    dismissible: true,
-                });
+                        dismissible: true,
+                    });
 
                 closeAndSapCommunicationDialogRef
                     .afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
+                    .subscribe(async (result) => {
+                        if (result === 'confirmed') {
+                            try {
                                 await lastValueFrom(
-                                    this.sideEffectService
-                                        .rollbackSideEffect<boolean>({
+                                    this.sideEffectService.rollbackSideEffect<boolean>(
+                                        {
                                             object: {
-                                                id: this.managedObject.id,
+                                                id: this.managedObject().id,
                                             },
-                                        }),
+                                        },
+                                    ),
                                 );
 
                                 this.snackBar.open(
@@ -232,13 +289,13 @@ export class SideEffectDetailComponent extends ViewDetailComponent
                                     undefined,
                                     {
                                         verticalPosition: 'top',
-                                        duration        : 3000,
+                                        duration: 3000,
                                     },
                                 );
-                            }
-                            catch(error)
-                            {
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+                            } catch (error) {
+                                log(
+                                    `[DEBUG] Catch error in ${action.id} action: ${error}`,
+                                );
                             }
                         }
                     });

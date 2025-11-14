@@ -1,29 +1,36 @@
-export class AuditingDeletedSideEffectEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class AuditingDeletedSideEffectEvent {
     constructor(
-        public readonly id: string,
-        public readonly tags: string[],
-        public readonly modelPath: string,
-        public readonly modelName: string,
-        public readonly operationId: string,
-        public readonly operationSort: number,
-        public readonly accountId: string,
-        public readonly email: string,
-        public readonly event: string,
-        public readonly auditableId: string,
-        public readonly oldValue: any,
-        public readonly newValue: any,
-        public readonly ip: string,
-        public readonly method: string,
-        public readonly baseUrl: string,
-        public readonly params: any,
-        public readonly query: any,
-        public readonly body: any,
-        public readonly userAgent: string,
-        public readonly isRollback: boolean,
-        public readonly rollbackSideEffectId: string,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                rowId: number;
+                tags: string[];
+                modelPath: string;
+                modelName: string;
+                operationId: string;
+                operationSort: number;
+                accountId: string;
+                email: string;
+                event: string;
+                auditableId: string;
+                oldValue: any;
+                newValue: any;
+                ip: string;
+                method: string;
+                baseUrl: string;
+                params: any;
+                query: any;
+                body: any;
+                userAgent: string;
+                isRollback: boolean;
+                rollbackSideEffectId: string;
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

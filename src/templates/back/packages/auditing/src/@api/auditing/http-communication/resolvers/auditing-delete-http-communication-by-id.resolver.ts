@@ -6,8 +6,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('auditing.httpCommunication.delete')
-export class AuditingDeleteHttpCommunicationByIdResolver
-{
+export class AuditingDeleteHttpCommunicationByIdResolver {
     constructor(
         private readonly handler: AuditingDeleteHttpCommunicationByIdHandler,
     ) {}
@@ -17,12 +16,7 @@ export class AuditingDeleteHttpCommunicationByIdResolver
         @Args('id') id: string,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<AuditingHttpCommunication>
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
+    ): Promise<AuditingHttpCommunication> {
+        return await this.handler.main(id, constraint, timezone);
     }
 }

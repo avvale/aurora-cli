@@ -1,45 +1,49 @@
-import { AuditingCreateHttpCommunicationsCommand, auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
+import {
+    AuditingCreateHttpCommunicationsCommand,
+    auditingMockHttpCommunicationData,
+} from '@app/auditing/http-communication';
 import { AuditingCreateHttpCommunicationsCommandHandler } from '@app/auditing/http-communication/application/create/auditing-create-http-communications.command-handler';
 import { AuditingCreateHttpCommunicationsService } from '@app/auditing/http-communication/application/create/auditing-create-http-communications.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('auditingCreateHttpCommunicationsCommandHandler', () =>
-{
+describe('auditingCreateHttpCommunicationsCommandHandler', () => {
     let commandHandler: AuditingCreateHttpCommunicationsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 AuditingCreateHttpCommunicationsCommandHandler,
                 {
-                    provide : AuditingCreateHttpCommunicationsService,
+                    provide: AuditingCreateHttpCommunicationsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<AuditingCreateHttpCommunicationsCommandHandler>(AuditingCreateHttpCommunicationsCommandHandler);
+        commandHandler =
+            module.get<AuditingCreateHttpCommunicationsCommandHandler>(
+                AuditingCreateHttpCommunicationsCommandHandler,
+            );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingCreateHttpCommunicationsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingCreateHttpCommunicationsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return AuditingMockHttpCommunicationData created', async () =>
-        {
-            expect(await commandHandler.execute(
-                new AuditingCreateHttpCommunicationsCommand(
-                    auditingMockHttpCommunicationData,
-                    { timezone: process.env.TZ },
+        test('should return AuditingMockHttpCommunicationData created', async () => {
+            expect(
+                await commandHandler.execute(
+                    new AuditingCreateHttpCommunicationsCommand(
+                        auditingMockHttpCommunicationData,
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

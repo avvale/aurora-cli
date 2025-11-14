@@ -1,561 +1,480 @@
 {
     "info": {
-		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-		"name"          : "@app - queue-manager/job-registry",
-		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - queue-manager/job-registry",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-			"name": "GraphQL - queueManagerCreateJobRegistry",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "GraphQL - queueManagerCreateJobRegistry",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:QueueManagerCreateJobRegistryInput!)\n{\n\tqueueManagerCreateJobRegistry (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 80413920144086020000, \n\t\t\"queueName\": \"z6hs47qn9zo14s7dadmgid4skvpjnc8f0xranmr6ys3d46cnthwn7i8zcylgjg\", \n\t\t\"state\": 'ACTIVE', \n\t\t\"jobId\": \"900shwq0n6jzhxb5a710x6rjvj9zw2rr6qt\", \n\t\t\"jobName\": \"lqm97stgbyxnjrdo8nsqpigz0f7a3bkmobd7nbir7fj84cfei6bt6jepznqrbi\", \n\t\t\"tags\": []\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerCreateJobsRegistry",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[QueueManagerCreateJobRegistryInput]!)\n{\n\tqueueManagerCreateJobsRegistry (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"9965cfbe-3410-49af-b170-f4318dc57081\", \n\t\t\t\"rowId\": 86898760682014930000, \n\t\t\t\"queueName\": \"jghtwcvywn9h3foq94jsjgi02z1qxbzwk739kl3gt9rwj2xy8o7mvzjh8xu43i\", \n\t\t\t\"state\": 'PAUSED', \n\t\t\t\"jobId\": \"b7ke14cobgjjl708v52e331skouwtc232sn\", \n\t\t\t\"jobName\": \"xwisuz6dljk451pm31pngki7poc04ndf2r0uu1gf8h45t9uofucs8n2wsd0r4j\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1c901bec-a9e0-4df5-b834-0e30b9ae16d0\", \n\t\t\t\"rowId\": 30273934183385805000, \n\t\t\t\"queueName\": \"irri0x80a62hrxqnsu2fblb39wzscj6zutb2l7i2p8p764ldtpz4r158zyefqq\", \n\t\t\t\"state\": 'PAUSED', \n\t\t\t\"jobId\": \"7dkwatbd1oyuh0je64d7v64wpnqgvgarm13\", \n\t\t\t\"jobName\": \"jbpsyj3hggplajd074o8bofj4hbl2z1gr0dz2m3wq3of0scmirwjt15tv184z2\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4f7152bd-7ca6-4424-8b34-c77654f44a5b\", \n\t\t\t\"rowId\": 51547463901433270000, \n\t\t\t\"queueName\": \"dcolb5p67sxw9jv7dc2uuhfmitqg4lf7hwqjxt6rxtxjuk1byg6elhl9xi6mfv\", \n\t\t\t\"state\": 'ACTIVE', \n\t\t\t\"jobId\": \"9wpvjrlcis04r6w7g7wawg2jvtl8tgj2fpv\", \n\t\t\t\"jobName\": \"imqc694mss725l3twdt0z9s4hxla6zrrcacqaftjn6yl0o8e4t5vq3gks9geok\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"9f341cf9-345a-469a-bea8-b0f81ae114d2\", \n\t\t\t\"rowId\": 60546165806284644000, \n\t\t\t\"queueName\": \"emstvcucdgnnzdry77ywd5wwro2y8afii4h93i89xgh6bvfqufnbiv50pn9762\", \n\t\t\t\"state\": 'ACTIVE', \n\t\t\t\"jobId\": \"yp3vhrpuhen8a8pnv13e1y88lg8dzn7q2ta\", \n\t\t\t\"jobName\": \"zea0bw44mwgl03fq6pz4da65t9u76i8aow7jt19e3ullrnjo2m5rdnn7p5l40u\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1f39aa28-c4db-4263-b0c7-8907abad72d1\", \n\t\t\t\"rowId\": 83044766587291830000, \n\t\t\t\"queueName\": \"djk0lt7lznbmrvn51t24jquctx4520nw53mie67ooijt6g2z620xfmnjn2dusw\", \n\t\t\t\"state\": 'COMPLETED', \n\t\t\t\"jobId\": \"xo1kvqmnn63cfmflh3qfvh80h23agootngl\", \n\t\t\t\"jobName\": \"xwc9vpwzjza2mredhmkdqn412ud1mfhge1yvrvaaxikclfjdhfniwbrexlrw07\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"35041e6e-073d-46f8-ae2e-94abc68bc3d6\", \n\t\t\t\"rowId\": 82680526342015030000, \n\t\t\t\"queueName\": \"n6qun69x4z8awefrrv6eda8uhoj9zye1ygq2yt3wesa8z238zbvpmhblnb2syu\", \n\t\t\t\"state\": 'ACTIVE', \n\t\t\t\"jobId\": \"9pxl3rjfkbyilz2dan7nwd9whhnob6w1rf4\", \n\t\t\t\"jobName\": \"sq9gw6rrpdua1cc3nvib56dcgkep2k3lm2drszqleu6b25gfpl7jbs38a6uktb\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"129040eb-8f18-4bc3-9d78-31d9b4e038f9\", \n\t\t\t\"rowId\": 91391133385144190000, \n\t\t\t\"queueName\": \"p95ad1kc7iuaudt6482316u7ywi9uavp3hw2a2ccl5bn72ll8rgpdf7ilsdjd4\", \n\t\t\t\"state\": 'DELAYED', \n\t\t\t\"jobId\": \"ioy5fmwpp5ydw9sxjrqn7yksx9v1fazxswr\", \n\t\t\t\"jobName\": \"evjhn9ytkzixm2cm6qs9065yjvym8hj2s1mv0ustusr9xejseb34z2j0jsit6j\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"323f69f2-2f31-4547-ba4a-0fed3263128a\", \n\t\t\t\"rowId\": 19750983163518304000, \n\t\t\t\"queueName\": \"cqfiyukwmeik2xcfjgs0edvpxikfwj14343us1sdm3z17gxnu9j3t3dtsz16ym\", \n\t\t\t\"state\": 'DELAYED', \n\t\t\t\"jobId\": \"v6tu0v4084coo203gxdvkixyty0xhdf32l5\", \n\t\t\t\"jobName\": \"hdz5za7hysyowd4ybc67256npq8wnl61mxv37u9k80z6i0dknoaumi2h11gqm6\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"47b5522d-7206-4fc7-a2bc-c46870aa9959\", \n\t\t\t\"rowId\": 86603356375014160000, \n\t\t\t\"queueName\": \"azn7y46pqp7v74fm3snar99yobdl7nxe5har0adi90ou5n4sri218uxv315y7u\", \n\t\t\t\"state\": 'WAITING', \n\t\t\t\"jobId\": \"twk6wjdmgnf6vclmdfa9i0f99g7zd3bg4bn\", \n\t\t\t\"jobName\": \"nfvpvnb2jf5mtkfo14r622lh5aqi6lpf88l9iedzc4ebaoazj8p1gkbp3185mh\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1eabadc5-ab49-41bf-9386-99517112dc04\", \n\t\t\t\"rowId\": 93044671358862110000, \n\t\t\t\"queueName\": \"3o26cmjrbz8gsfykqpwhn5j43gsbb4kj3a1v8lbknnlvgghr48c7kpvago6wlm\", \n\t\t\t\"state\": 'PAUSED', \n\t\t\t\"jobId\": \"dndboai0tp7to0q9npwl2tcrsgtx0aq3qmd\", \n\t\t\t\"jobName\": \"gjwcuw9wxplqesknjvpj7h0psnkmywxv2c2nemer6wmkh0wgdbmbe988ka09du\", \n\t\t\t\"tags\": []\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerPaginateJobsRegistry",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tqueueManagerPaginateJobsRegistry (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerGetJobsRegistry",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tqueueManagerGetJobsRegistry (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerFindJobRegistry",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tqueueManagerFindJobRegistry (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerFindJobRegistryById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\tqueueManagerFindJobRegistryById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerUpdateJobRegistry",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:QueueManagerUpdateJobRegistryInput!)\n{\n\tqueueManagerUpdateJobRegistry (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 85851080448753160000, \n\t\t\"queueName\": \"5r8ct6nzav7tc1ezypu75uksfkya8o1oiqu88tl5k6icswc3j20ha2z8a2gsl6\", \n\t\t\"state\": 'COMPLETED', \n\t\t\"jobId\": \"wymeaptezkk58zese43gpug65yanybf1449\", \n\t\t\"jobName\": \"xzckq6m9v6bqgwlxz5ylbgovxd9s877yynq91mej51ft3xgbr8gpbbls77j6vj\", \n\t\t\"tags\": []\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerDeleteJobRegistryById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\tqueueManagerDeleteJobRegistryById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerDeleteJobsRegistry",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\tqueueManagerDeleteJobsRegistry (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - queue-manager/job-registry/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:QueueManagerCreateJobRegistryInput!)\n{\n\tqueueManagerCreateJobRegistry (payload:$payload)\n\t{\n\t\tid\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"queueName\": \"bceat9wnixnmxx88y0xbt72go6mq54rev7eirr5tjsv461zjtl4kq4orylnybq\", \n\t\t\"state\": 'DELAYED', \n\t\t\"jobId\": \"nvxjnw2wmrvrm9j49zw3xxrqrf1rum9ldpi\", \n\t\t\"jobName\": \"nq31fkzhlwukhyam5qodj74y4wic9wzeu3q89iy66poa0hw31vj3kwamt5hweb\", \n\t\t\"tags\": []\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 34311438302091756000, \n\t\"queueName\": \"ziul3uk4bl38clpqy1xuhbsq37j7ocgluou50oayzlie294n5fmtey5c9ernfd\", \n\t\"state\": 'WAITING', \n\t\"jobId\": \"pef5bl0eemtljjosi41ame0rz28w3hcadjl\", \n\t\"jobName\": \"l5fd7slv9ajf71kcmbug8d1vwbmutebnj56tkwt2d1nkw9pli55ye0oud8vuwl\", \n\t\"tags\": []\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/job-registry/create",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "job-registry", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerCreateJobsRegistry",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:[QueueManagerCreateJobRegistryInput]!)\n{\n\tqueueManagerCreateJobsRegistry (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"ee7d9771-be25-439e-950b-49e073a087a4\", \n\t\t\t\"queueName\": \"uv5t4a3cgfmrpedw5yu93t2ngxos0ytxiy9mssfmtjx7rou6ehkkdsgky1kigv\", \n\t\t\t\"state\": 'ACTIVE', \n\t\t\t\"jobId\": \"wl01f2kas84o6izsxo471px48keb0skug1g\", \n\t\t\t\"jobName\": \"lxs97hq3c8yj7ofgrxcx63azmgh8242bdi0q3zm0jd5t3b7pw5arpx5wca5c4z\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b03e4b58-33ee-4a1e-a65f-804b7f6616a1\", \n\t\t\t\"queueName\": \"u6zt3bj4tbo2b7y97ykvaazxfwriqraaiyctzmeshviw8onpg27jl33g9wetdb\", \n\t\t\t\"state\": 'DELAYED', \n\t\t\t\"jobId\": \"fm0ugd1ojdb1pf3ox533l92fcx8sdhgzdsv\", \n\t\t\t\"jobName\": \"io0u2tyh1p2wb72eucg5xy52wdlg77qk7294xh92dozx3vbn5fihadxvmn00kw\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d4219c32-77e0-47c2-82b6-d877e58cb0b5\", \n\t\t\t\"queueName\": \"5uui8hos3o1wni2rzuisngktkwyn6lerrbmr1ch6rfvacem27c89kyv2a1jodv\", \n\t\t\t\"state\": 'FAILED', \n\t\t\t\"jobId\": \"lweqtzqkjpjj32w4tewu4986cwztqm0zv39\", \n\t\t\t\"jobName\": \"deot1z7p4k2rpa2mjlab6yb3u4i9u8b1bw2delzbw7i67wd6mom399bl7o0n2g\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"663ca03a-af9c-4a98-93e3-cbc4df2e50d8\", \n\t\t\t\"queueName\": \"wp5lp92w6avl1ou727ahn7cvyc26pob3zm6s21i11kjzzliusn0jhcoplfzzpo\", \n\t\t\t\"state\": 'ACTIVE', \n\t\t\t\"jobId\": \"eoox1hdzge3diou4pdokn1uaetbvdmbvu5w\", \n\t\t\t\"jobName\": \"c8e52xcc4coyt4wy9opthobvyjun0o2hge7f2ymswclj2ouf4irtfp4pz3d7il\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"55902ef1-32d6-451a-9881-e9c555a998d0\", \n\t\t\t\"queueName\": \"3jvbxmcglbb8v330oy8w5x2pv4ncmlipywx6rrj3e0kyz68glkh9zicn26w43h\", \n\t\t\t\"state\": 'COMPLETED', \n\t\t\t\"jobId\": \"81nk892r7wsgwh3gyknnn9bvnqvhfkgoj6y\", \n\t\t\t\"jobName\": \"bcsc23b6g7x3mhvsopoazv5tzg2fhvyolw5p0bt8fu7dx6kklsb5xxp5v69emu\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"c52bee60-04c5-43bc-98df-56a60990f8cd\", \n\t\t\t\"queueName\": \"nss635xzgm79scny06fj8g5lx55ketzxh8e11iez3gspr3ddmsub8ruhdduffj\", \n\t\t\t\"state\": 'ACTIVE', \n\t\t\t\"jobId\": \"afje0n0g0d4ugk4kv6n0ainml5st7l2sg3f\", \n\t\t\t\"jobName\": \"u404wtpjj7cbsav1gettckhbk4zkuc7akaei15h91w12j3ckpppoxj8chhtu4g\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5ed1794d-9a9a-4a49-8340-255754e1c8c8\", \n\t\t\t\"queueName\": \"zkvoqhq6bz7tyj49lv95hr9hf5upogt497whgizexggtp1ii6stug714otm20i\", \n\t\t\t\"state\": 'DELAYED', \n\t\t\t\"jobId\": \"2tvp7sck1wccqsv1xx32vdodoe2kngfy8w0\", \n\t\t\t\"jobName\": \"hbd9df1ncj7qtie0urr5cwog7svv1hqfmixixp91erp2ec3pw4s1514st9zvqj\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"68e9fee2-3ef9-4580-a6d9-ab837ccd2918\", \n\t\t\t\"queueName\": \"ceqx751noqnq1s6q6eion8cpvzv259yzxhxla1qlavizfix5gb15qnhu7r9olc\", \n\t\t\t\"state\": 'WAITING', \n\t\t\t\"jobId\": \"0052mli52lhrsk2mfengaro54svagv3ddub\", \n\t\t\t\"jobName\": \"27xrp9n9yax2d5yo142ig75tw7z2qwwr0tw37f8os1ll44qjx59mk2hrxg1h57\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"97df677a-6f91-4e20-83ee-9a202c111487\", \n\t\t\t\"queueName\": \"q2ihw320x9qha3p3bhw3hn6h4i4nm1zuhmr8y443g8knfkntur3fh62jpagf5p\", \n\t\t\t\"state\": 'DELAYED', \n\t\t\t\"jobId\": \"albc78af53mkcwwy85qqa3fl3uiasjx21m7\", \n\t\t\t\"jobName\": \"fi8n8lu6zsx3vc8h2adz2p9hktknytsm2be0zhhi52rohrc8211rvht2xyn6i9\", \n\t\t\t\"tags\": []\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1ea95689-756e-40ae-887f-c99a09df42a2\", \n\t\t\t\"queueName\": \"jz4lmqjl2ltr4b2jupag560h073khc040o0wlwluy1rgw7w0tql8z4osx23b4y\", \n\t\t\t\"state\": 'WAITING', \n\t\t\t\"jobId\": \"c6mqbpln7cokrfp3yhv5p1304e82eob4okl\", \n\t\t\t\"jobName\": \"fmlunpqiwdhjog308joq2dv2k9ghdjh47jn3rdocft7s28e4j5dalhoh4u9i67\", \n\t\t\t\"tags\": []\n\t\t}\n\t]\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - queueManagerPaginateJobsRegistry",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/jobs-registry/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tqueueManagerPaginateJobsRegistry (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"e0dfa565-4e9f-4295-a8fa-8dc691a18768\", \n\t\t\"rowId\": 60697511004751850000, \n\t\t\"queueName\": \"hzf4qo3u6vhwbt182y4ezo3ogntuegzp6z7oscigne0w6lvnf8qyubr9lnb8bn\", \n\t\t\"state\": 'WAITING', \n\t\t\"jobId\": \"zuep1t67g2yn3bl6ajy4ftqcxeioesaw9on\", \n\t\t\"jobName\": \"h9keb9s9wqhlplrbs7ugfizsferpjy91hpxhzg6p6bvuta4n5yukv7aou201kl\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"03acfa79-bdbf-49b2-a271-2a86bde54608\", \n\t\t\"rowId\": 91738432226262560000, \n\t\t\"queueName\": \"gm08p59kz1gni2hb1uz8ow81duuhh6uha5okhrpo2hh066h937i27eqh5uku2k\", \n\t\t\"state\": 'WAITING', \n\t\t\"jobId\": \"0zg4qvsikwq7kn4idl3ix3yj6yxnie0jemn\", \n\t\t\"jobName\": \"xlmedo1nj2twmi50tbdandtnm80xwxz2b79qrjxlxew9x3bhwe5pdvdrx1no7q\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"423c503d-1527-4214-b90b-d761d3a98486\", \n\t\t\"rowId\": 49882736451729620000, \n\t\t\"queueName\": \"y5zvzwxu29qm738nsokh9oe7ky5rj4q971s9jieal2cchzhjyveg4n0588ul4a\", \n\t\t\"state\": 'FAILED', \n\t\t\"jobId\": \"howlebodv33npojlfm161ft51tec104zhw9\", \n\t\t\"jobName\": \"962zsix6r5rdgot8gvf5c7egnk0upyvpm3oou6jlndyax3v7rdj2x9dp3jxztg\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"ffa23cd1-a75f-43a3-a955-372c9876b1ea\", \n\t\t\"rowId\": 99243347422569070000, \n\t\t\"queueName\": \"2ctdb9x5eqpemf34le0failenutof9bze5g19pa8q8fnyyllvt79ld3ejwvaw2\", \n\t\t\"state\": 'FAILED', \n\t\t\"jobId\": \"1aimzbpwx7vvty7ub80s15mxqy1iqgaz7os\", \n\t\t\"jobName\": \"5jbqzo2327l0kjtwl3s5dftcktlm7pp6vksj74w1f8zxdrc4eee5ilcn7f5yqt\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"a0046c74-acd4-4831-b057-5e4f0b2b9b1f\", \n\t\t\"rowId\": 75200809969627190000, \n\t\t\"queueName\": \"rztps7h0vnslwxmaa0tk8lx1wd20vr1zxf5r46r92om2pgf8w1drdrmv3o74vx\", \n\t\t\"state\": 'DELAYED', \n\t\t\"jobId\": \"yu4btaa0wbm2x9m39i26r9v95p1hei4qpdz\", \n\t\t\"jobName\": \"4zlhxlbf5f2e5uo4uqqk34n4ebfvrr2gkew0jmig8kx1s2v0skyhwiwyojovox\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"7c8526cd-019d-4e99-9a0f-d9ae7e1ab592\", \n\t\t\"rowId\": 92321233623012410000, \n\t\t\"queueName\": \"dvnzn2w76br9eu7j1uwot7p01wzm2vo3kh54j8t5x8ym0u37dehp8797z08sfc\", \n\t\t\"state\": 'COMPLETED', \n\t\t\"jobId\": \"0m66e4is7j1yrv3jmmblna8snfp8v5z4nmf\", \n\t\t\"jobName\": \"zyg5e4rdm8zpi9k49uc96xtjrq26qn1yy2tz3kyc1hgcleb0krigocef3ip6h8\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"d63d21b6-5b76-4c80-974e-5b81aa4405f8\", \n\t\t\"rowId\": 30806762561334510000, \n\t\t\"queueName\": \"reci9nsosp2y3sswrg36ishkw9vmnbvrtmm1es490xmz7nmkhrmp95mmnklbi5\", \n\t\t\"state\": 'DELAYED', \n\t\t\"jobId\": \"qxr2jbq6zggc4a4hiyr219bmvypqhb24gsi\", \n\t\t\"jobName\": \"vdk2y1wmz8byn7ldwxytkhrkvfucowy1ojevi6wg6a1jrd5uqqopw5y5eihgea\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"375e400b-7b2f-4ee8-afaa-0a9ef1048683\", \n\t\t\"rowId\": 52148544354307810000, \n\t\t\"queueName\": \"ebr7epmbztxlboy331xtw1icgwociwb296rx069q6l2izn5v3mi87y27rpbcy2\", \n\t\t\"state\": 'FAILED', \n\t\t\"jobId\": \"fgrc05jtyyc2kfoxzrd2sakav60u78iduav\", \n\t\t\"jobName\": \"xvxbitv6w3end4m1jr961ye0xbh2unqt6s6yqvr7puc8z2tu7gnehfatq0foty\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"00fadca0-b0cf-4475-b054-c472f2753209\", \n\t\t\"rowId\": 31670147455078367000, \n\t\t\"queueName\": \"mdxyy5kwd4porfldg6e0ejphj39xm5z60bzufsqjl3ebzlu6uwaf4urjor8xh4\", \n\t\t\"state\": 'FAILED', \n\t\t\"jobId\": \"drjwnmpgxz7w99ge2se93f39acqp94mu0uy\", \n\t\t\"jobName\": \"zkl6zt0s158xvhy877wuucx584i3h7h6a22djruaj7hz4r06fckgypwi3kzayw\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"668549d5-01e0-4b6a-b6d8-2485e69aa570\", \n\t\t\"rowId\": 18171854113392046000, \n\t\t\"queueName\": \"yscmr39yu8v025qpon8lgio3o35v2m2rx7761vb7wwzanekabnhtdcewa8v2om\", \n\t\t\"state\": 'FAILED', \n\t\t\"jobId\": \"3kbs4o5b4amua6ibzzq6ulap9a9nvp00u5v\", \n\t\t\"jobName\": \"q8msv1mduoyjmm98rb8aagp8st2up502iiqv46z0qoy9sxka7o9vr2jepj1wmn\", \n\t\t\"tags\": []\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/jobs-registry/create",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "jobs-registry", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerGetJobsRegistry",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/jobs-registry/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tqueueManagerGetJobsRegistry (query: $query)\n\t{\n\t\tid\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/jobs-registry/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "jobs-registry", "paginate"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerFindJobRegistry",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/jobs-registry/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tqueueManagerFindJobRegistry (query: $query)\n\t{\n\t\tid\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/jobs-registry/get",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "jobs-registry", "get"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerFindJobRegistryById",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/job-registry/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($id:ID)\n{\n\tqueueManagerFindJobRegistryById (id:$id)\n\t{\n\t\tid\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/job-registry/find",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "job-registry", "find"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerUpdateJobRegistry",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/job-registry/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:QueueManagerUpdateJobRegistryInput!)\n{\n\tqueueManagerUpdateJobRegistry (payload:$payload)\n\t{\n\t\tid\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"queueName\": \"yjfp4e9tlioy24c3vft964yxkmosmd6iox235wywp5hz0b15z3evpfhk6km842\", \n\t\t\"state\": 'FAILED', \n\t\t\"jobId\": \"dllrexa34zfdrlcejms6pmrmgto5qflpghu\", \n\t\t\"jobName\": \"f4r7ro1mr7tp2u9tvv2rnjjgt9vxjfj6hkt21rnuhmy8idyemt3yflp0qq0et9\", \n\t\t\"tags\": []\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - queueManagerDeleteJobRegistryById",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\tqueueManagerDeleteJobRegistryById (id:$id)\n\t{\n\t\tid\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - queueManagerDeleteJobsRegistry",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\tqueueManagerDeleteJobsRegistry (query: $query)\n\t{\n\t\tid\n\t\tqueueName\n\t\tstate\n\t\tjobId\n\t\tjobName\n\t\ttags\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/job-registry/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"queueName\": \"j34ff3ndpg9xy463yt2wmz34avdlmrcto6567xoblkbl75cp79yvufoe5041qx\", \n\t\"state\": 'PAUSED', \n\t\"jobId\": \"wu24nxvbxqolt2rnwyza86pgnnwxe8am79r\", \n\t\"jobName\": \"06rx39v59jse1b6p4yw7mum1978o53rtphh9yrxkfs26tblqjh21dv1v4ststq\", \n\t\"tags\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/job-registry/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"job-registry",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/jobs-registry/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"199e0db2-d6a8-4671-a50d-238373bd4286\", \n\t\t\"queueName\": \"jrrlgd9a4ikuir90gpgn9zs8o4fmxrr5p55ttknt2dtx7kgfj0mxys6jynay15\", \n\t\t\"state\": 'ACTIVE', \n\t\t\"jobId\": \"pkmh6bomnnuxw8me5ovkf4q8xeq8mlblhiv\", \n\t\t\"jobName\": \"84myr1pbj2sd2pc0y2a4uiq7v2mnuwukwu5y763uxbwxmis4fwcqfdg7yryp6z\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"a01ba828-e8f3-42af-9f5d-5c0bbe25eaeb\", \n\t\t\"queueName\": \"tkg8tvyixtm72za91zckno2s7xexacye9c37unkd7bt5pfxqundghfvp7t630z\", \n\t\t\"state\": 'DELAYED', \n\t\t\"jobId\": \"olotj8mmpc9kkdx4kdemjaz4cp5vglqsbgo\", \n\t\t\"jobName\": \"jhx3e26gflqwindw358vmow1g3e3ybxlwg218bkce8yey659tsbwcdvhdyijj1\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"f64b29e0-1c0b-4814-bd03-33271fe89acb\", \n\t\t\"queueName\": \"8hjphymoo1e2tw25kby6se4y62c15ob2e7kc3h6w7a705l4cxvp9l824lcoqbr\", \n\t\t\"state\": 'FAILED', \n\t\t\"jobId\": \"zx50jfe3pvbxc5t5wjgetfq52irzzo1p2mh\", \n\t\t\"jobName\": \"gmxgytr769hk9alslmbghcg10f44tnjx5mjd8mmu4ag7rqerwywuh0qiqp7s6e\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"e7b43952-7a28-4212-b182-2f7569b0497a\", \n\t\t\"queueName\": \"32ale5lqgakh6whm3dh089k9uv4rfbabhrut9rcfzixgz9fh96w2rc8urh6us7\", \n\t\t\"state\": 'COMPLETED', \n\t\t\"jobId\": \"8ceu4nzuusi3uljslolkfd4hzp0virvhzmw\", \n\t\t\"jobName\": \"xwa0m0bawadkmws09jnz16o0hrmknphu0xpjqs8z461t35yug5t102exsya38i\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"12df44cf-e4a3-429f-ab19-11e4f222fa77\", \n\t\t\"queueName\": \"axahxx0mqnvlkejk948a0rspgir1dazuanmjjed3wurvg80fsy6s8omgypxy7o\", \n\t\t\"state\": 'PAUSED', \n\t\t\"jobId\": \"fm9aw1135k29h51oc0ngo9yaabgoabn69or\", \n\t\t\"jobName\": \"y45jp4gvpsoe8zmxrcbd2rd5pv8x0wszu9jqavlc6b7scejfyl6h6y7u1cpsko\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"5a956e90-92cd-438b-a0f6-db6802c6bb3d\", \n\t\t\"queueName\": \"lyvn29zrpnjl5y88ukyiszeyfzpnpdsqs05xafq6b95d7ausb5pf02nqec6ch4\", \n\t\t\"state\": 'ACTIVE', \n\t\t\"jobId\": \"wdap0u573j8gmr2u05b1hhuqxp7lkipwuub\", \n\t\t\"jobName\": \"c3g3snddmmr5mta9n9vmq4sv9plfur2zd02niydy74t5xxtuo6d6iqf73tzpao\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"b51bb760-0494-4561-a5e1-5534de2031aa\", \n\t\t\"queueName\": \"j77scb1p5iucypqk9qvijq4tx9tkczlrzxs6ptiir4dd0ipvqcwuy8vvzpo4yo\", \n\t\t\"state\": 'ACTIVE', \n\t\t\"jobId\": \"qln12i5c5rlri1tancg6pv9p2sm99paqvi6\", \n\t\t\"jobName\": \"l3wscj1lfqr1k0pbxlv3h8ynyod6vhxwiqlj0cygfs6khqgo8s0brfq3pnqnzg\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"a1096740-3845-4636-a3d9-69fdad0ae130\", \n\t\t\"queueName\": \"exua0pdfhh3bsm2k5sgv2ryb0ss305ri7r76xi47pp3ud1gfqjt7fddvs4e92z\", \n\t\t\"state\": 'ACTIVE', \n\t\t\"jobId\": \"w9qzf6xaen3c3qymkp0cadhf3ntqa88j2jl\", \n\t\t\"jobName\": \"e7dqznqr3we7ms4vdbydftjkypdem5nu8lin63jzv5uqhpmroby71s1q88frt1\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"301c68db-cd1a-4e94-963c-ad89a1d541df\", \n\t\t\"queueName\": \"o7r4gb74dgf9smjkgqf33lk4evywkubf1a6sbonfxeh82wupxtecqixiihqxue\", \n\t\t\"state\": 'COMPLETED', \n\t\t\"jobId\": \"6uaorqtudcjgrnfz730cb8peovmo9935zbr\", \n\t\t\"jobName\": \"fketg1n51eect7y2pa6285jwy8qkrhttzpgwk5r7qcpey5g44u7jza9hc0c72g\", \n\t\t\"tags\": []\n\t}, \n\t{\n\t\t\"id\": \"f9865384-5428-4fab-87c8-b370e46f0482\", \n\t\t\"queueName\": \"4798ni183kzz9bzpek54dtb63zixtonz2dsxkgtqkz58psoz03bd9fbf4izruy\", \n\t\t\"state\": 'WAITING', \n\t\t\"jobId\": \"lcjxti24mtuwnx7x01ra31xo19pk0m2vrtr\", \n\t\t\"jobName\": \"kx4aydja8wbwob4ovy7h1upmimhwuqffa4jggxoe85axdfp8va718hcqxmmeis\", \n\t\t\"tags\": []\n\t}\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/jobs-registry/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"jobs-registry",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/jobs-registry/paginate",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/jobs-registry/paginate",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-                        "jobs-registry",
-                        "paginate"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/jobs-registry/get",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/jobs-registry/get",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"jobs-registry",
-                        "get"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/job-registry/find",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/job-registry/find",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"job-registry",
-                        "find"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/job-registry/find/{id}",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/job-registry/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"job-registry",
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/job-registry/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "queue-manager",
+                        "job-registry",
                         "find",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - queue-manager/job-registry/update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"queueName\": \"69he4k16iqj8875l3e3bv0fo2c80jmo1le3fpb09xdva4shzacpcy7iehfykph\", \n\t\"state\": 'WAITING', \n\t\"jobId\": \"c3nx1kqp6jspw4rnwlos67jbsjy3cyuuo3y\", \n\t\"jobName\": \"1s2qi30b9puiwgjiylk5wq56mp38lj80cy4zccscwvqhfgeamw9uzvnbfl2fyd\", \n\t\"tags\": []\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/job-registry/update",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"job-registry",
-                        "update"
-					]
-				}
-			},
-			"response": []
+            "name": "REST - queue-manager/job-registry/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 12030962834979015000, \n\t\"queueName\": \"insmwfptzj3b7p2s8bckvs380n68mzzwonznxpamcaf014wmb6s8f0bhlgworc\", \n\t\"state\": 'ACTIVE', \n\t\"jobId\": \"36yh6yyusvasak9m1rj5ysfmgk8uhm8ix8z\", \n\t\"jobName\": \"x583p90cerrao6e0azfs0yu7tbf033a9nnsgogiy1teh9ogthhq3ruu89jgcze\", \n\t\"tags\": []\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/job-registry/update",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "job-registry", "update"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - queue-manager/job-registry/delete/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/job-registry/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"job-registry",
+            "name": "REST - queue-manager/job-registry/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/job-registry/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "queue-manager",
+                        "job-registry",
                         "delete",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
-		},
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
         {
-			"name": "REST - queue-manager/jobs-registry/delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/jobs-registry/delete",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"jobs-registry",
-                        "delete"
-					]
-				}
-			},
-			"response": []
-		}
+            "name": "REST - queue-manager/jobs-registry/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/jobs-registry/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "jobs-registry", "delete"]
+                }
+            },
+            "response": []
+        }
     ],
     "variable": [
-		{
-			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-			"key": "URL",
-			"value": "http://localhost:8080",
-			"type": "string"
-		}
-	]
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
 }

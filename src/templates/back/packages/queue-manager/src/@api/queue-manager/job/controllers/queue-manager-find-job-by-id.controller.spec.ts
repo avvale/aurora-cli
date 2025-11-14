@@ -2,49 +2,46 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
-import { QueueManagerFindJobByIdController } from './queue-manager-find-job-by-id.controller';
 import { QueueManagerFindJobByIdHandler } from '../handlers/queue-manager-find-job-by-id.handler';
+import { QueueManagerFindJobByIdController } from './queue-manager-find-job-by-id.controller';
 
 // sources
 // import { jobs } from '@app/queue-manager/job/infrastructure/mock/mock-job.data';
 
-describe('QueueManagerFindJobByIdController', () =>
-{
+describe('QueueManagerFindJobByIdController', () => {
     let controller: QueueManagerFindJobByIdController;
     let handler: QueueManagerFindJobByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                QueueManagerFindJobByIdController,
-            ],
+            imports: [],
+            controllers: [QueueManagerFindJobByIdController],
             providers: [
                 {
-                    provide : QueueManagerFindJobByIdHandler,
+                    provide: QueueManagerFindJobByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<QueueManagerFindJobByIdController>(QueueManagerFindJobByIdController);
-        handler = module.get<QueueManagerFindJobByIdHandler>(QueueManagerFindJobByIdHandler);
+        controller = module.get<QueueManagerFindJobByIdController>(
+            QueueManagerFindJobByIdController,
+        );
+        handler = module.get<QueueManagerFindJobByIdHandler>(
+            QueueManagerFindJobByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerFindJobByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerFindJobByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an job by id', async () =>
-        {
+        test('should return an job by id', async () => {
             /* jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(jobs[0])));
             expect(await controller.main(jobs[0].id)).toBe(jobs[0]); */
         });

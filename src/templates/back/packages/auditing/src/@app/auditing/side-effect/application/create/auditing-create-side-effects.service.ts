@@ -1,11 +1,14 @@
-import { AuditingAddSideEffectsContextEvent, AuditingISideEffectRepository, AuditingSideEffect } from '@app/auditing/side-effect';
+import {
+    AuditingAddSideEffectsContextEvent,
+    AuditingISideEffectRepository,
+    AuditingSideEffect,
+} from '@app/auditing/side-effect';
 import {
     AuditingSideEffectAccountId,
     AuditingSideEffectAuditableId,
     AuditingSideEffectBaseUrl,
     AuditingSideEffectBody,
     AuditingSideEffectCreatedAt,
-    AuditingSideEffectDeletedAt,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
     AuditingSideEffectId,
@@ -30,8 +33,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class AuditingCreateSideEffectsService
-{
+export class AuditingCreateSideEffectsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: AuditingISideEffectRepository,
@@ -60,49 +62,50 @@ export class AuditingCreateSideEffectsService
             userAgent: AuditingSideEffectUserAgent;
             isRollback: AuditingSideEffectIsRollback;
             rollbackSideEffectId: AuditingSideEffectRollbackSideEffectId;
-        } [],
+        }[],
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
-        const aggregateSideEffects = payload.map(sideEffect => AuditingSideEffect.register(
-            sideEffect.id,
-            sideEffect.tags,
-            sideEffect.modelPath,
-            sideEffect.modelName,
-            sideEffect.operationId,
-            sideEffect.operationSort,
-            sideEffect.accountId,
-            sideEffect.email,
-            sideEffect.event,
-            sideEffect.auditableId,
-            sideEffect.oldValue,
-            sideEffect.newValue,
-            sideEffect.ip,
-            sideEffect.method,
-            sideEffect.baseUrl,
-            sideEffect.params,
-            sideEffect.query,
-            sideEffect.body,
-            sideEffect.userAgent,
-            sideEffect.isRollback,
-            sideEffect.rollbackSideEffectId,
-            new AuditingSideEffectCreatedAt({ currentTimestamp: true }),
-            new AuditingSideEffectUpdatedAt({ currentTimestamp: true }),
-            null, // deleteAt
-        ));
+        const sideEffects = payload.map((sideEffect) =>
+            AuditingSideEffect.register(
+                sideEffect.id,
+                undefined, // rowId
+                sideEffect.tags,
+                sideEffect.modelPath,
+                sideEffect.modelName,
+                sideEffect.operationId,
+                sideEffect.operationSort,
+                sideEffect.accountId,
+                sideEffect.email,
+                sideEffect.event,
+                sideEffect.auditableId,
+                sideEffect.oldValue,
+                sideEffect.newValue,
+                sideEffect.ip,
+                sideEffect.method,
+                sideEffect.baseUrl,
+                sideEffect.params,
+                sideEffect.query,
+                sideEffect.body,
+                sideEffect.userAgent,
+                sideEffect.isRollback,
+                sideEffect.rollbackSideEffectId,
+                new AuditingSideEffectCreatedAt({ currentTimestamp: true }),
+                new AuditingSideEffectUpdatedAt({ currentTimestamp: true }),
+                null, // deleteAt
+            ),
+        );
 
         // insert
-        await this.repository.insert(
-            aggregateSideEffects,
-            {
-                insertOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.insert(sideEffects, {
+            insertOptions: cQMetadata?.repositoryOptions,
+        });
 
         // create AddSideEffectsContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
-        const sideEffectsRegistered = this.publisher.mergeObjectContext(new AuditingAddSideEffectsContextEvent(aggregateSideEffects));
+        const sideEffectsRegistered = this.publisher.mergeObjectContext(
+            new AuditingAddSideEffectsContextEvent(sideEffects, cQMetadata),
+        );
 
         sideEffectsRegistered.created(); // apply event to model events
         sideEffectsRegistered.commit(); // commit all events of model

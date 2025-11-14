@@ -1,46 +1,53 @@
-import { AuditingFindSideEffectByIdController, AuditingFindSideEffectByIdHandler } from '@api/auditing/side-effect';
+import {
+    AuditingFindSideEffectByIdController,
+    AuditingFindSideEffectByIdHandler,
+} from '@api/auditing/side-effect';
 import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingFindSideEffectByIdController', () =>
-{
+describe('AuditingFindSideEffectByIdController', () => {
     let controller: AuditingFindSideEffectByIdController;
     let handler: AuditingFindSideEffectByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                AuditingFindSideEffectByIdController,
-            ],
+            imports: [],
+            controllers: [AuditingFindSideEffectByIdController],
             providers: [
                 {
-                    provide : AuditingFindSideEffectByIdHandler,
+                    provide: AuditingFindSideEffectByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<AuditingFindSideEffectByIdController>(AuditingFindSideEffectByIdController);
-        handler = module.get<AuditingFindSideEffectByIdHandler>(AuditingFindSideEffectByIdHandler);
+        controller = module.get<AuditingFindSideEffectByIdController>(
+            AuditingFindSideEffectByIdController,
+        );
+        handler = module.get<AuditingFindSideEffectByIdHandler>(
+            AuditingFindSideEffectByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingFindSideEffectByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingFindSideEffectByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an sideEffect by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
-            expect(await controller.main(auditingMockSideEffectData[0].id)).toBe(auditingMockSideEffectData[0]);
+        test('should return an sideEffect by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(auditingMockSideEffectData[0]),
+                    ),
+            );
+            expect(
+                await controller.main(auditingMockSideEffectData[0].id),
+            ).toBe(auditingMockSideEffectData[0]);
         });
     });
 });

@@ -3,38 +3,38 @@ import { auditingMockHttpCommunicationData } from '@app/auditing/http-communicat
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingCreateHttpCommunicationsHandler', () =>
-{
+describe('AuditingCreateHttpCommunicationsHandler', () => {
     let handler: AuditingCreateHttpCommunicationsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 AuditingCreateHttpCommunicationsHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<AuditingCreateHttpCommunicationsHandler>(AuditingCreateHttpCommunicationsHandler);
+        handler = module.get<AuditingCreateHttpCommunicationsHandler>(
+            AuditingCreateHttpCommunicationsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingCreateHttpCommunicationsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingCreateHttpCommunicationsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an auditingMockHttpCommunicationData created', async () =>
-        {
-            expect(await handler.main(auditingMockHttpCommunicationData)).toBe(true);
+        test('should return an auditingMockHttpCommunicationData created', async () => {
+            expect(await handler.main(auditingMockHttpCommunicationData)).toBe(
+                true,
+            );
         });
     });
 });

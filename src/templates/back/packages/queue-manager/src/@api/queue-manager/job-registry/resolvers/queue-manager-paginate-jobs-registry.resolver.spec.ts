@@ -1,57 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { QueueManagerPaginateJobsRegistryHandler, QueueManagerPaginateJobsRegistryResolver } from '@api/queue-manager/job-registry';
+import {
+    QueueManagerPaginateJobsRegistryHandler,
+    QueueManagerPaginateJobsRegistryResolver,
+} from '@api/queue-manager/job-registry';
 import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerPaginateJobsRegistryResolver', () =>
-{
+describe('QueueManagerPaginateJobsRegistryResolver', () => {
     let resolver: QueueManagerPaginateJobsRegistryResolver;
     let handler: QueueManagerPaginateJobsRegistryHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerPaginateJobsRegistryResolver,
                 {
-                    provide : QueueManagerPaginateJobsRegistryHandler,
+                    provide: QueueManagerPaginateJobsRegistryHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<QueueManagerPaginateJobsRegistryResolver>(QueueManagerPaginateJobsRegistryResolver);
-        handler = module.get<QueueManagerPaginateJobsRegistryHandler>(QueueManagerPaginateJobsRegistryHandler);
+        resolver = module.get<QueueManagerPaginateJobsRegistryResolver>(
+            QueueManagerPaginateJobsRegistryResolver,
+        );
+        handler = module.get<QueueManagerPaginateJobsRegistryHandler>(
+            QueueManagerPaginateJobsRegistryHandler,
+        );
     });
 
-    test('QueueManagerPaginateJobsRegistryResolver should be defined', () =>
-    {
+    test('QueueManagerPaginateJobsRegistryResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerPaginateJobsRegistryResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerPaginateJobsRegistryResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a queueManagerMockJobRegistryData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : queueManagerMockJobRegistryData,
-            })));
+        test('should return a queueManagerMockJobRegistryData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: queueManagerMockJobRegistryData,
+                        }),
+                    ),
+            );
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : queueManagerMockJobRegistryData,
+                rows: queueManagerMockJobRegistryData,
             });
         });
     });

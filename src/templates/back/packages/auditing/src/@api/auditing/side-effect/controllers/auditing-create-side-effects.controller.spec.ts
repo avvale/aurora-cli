@@ -1,46 +1,42 @@
-import { AuditingCreateSideEffectsController, AuditingCreateSideEffectsHandler } from '@api/auditing/side-effect';
+import {
+    AuditingCreateSideEffectsController,
+    AuditingCreateSideEffectsHandler,
+} from '@api/auditing/side-effect';
 import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingCreateSideEffectsController', () =>
-{
+describe('AuditingCreateSideEffectsController', () => {
     let controller: AuditingCreateSideEffectsController;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            controllers: [
-                AuditingCreateSideEffectsController,
-            ],
+            controllers: [AuditingCreateSideEffectsController],
             providers: [
                 {
-                    provide : AuditingCreateSideEffectsHandler,
+                    provide: AuditingCreateSideEffectsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<AuditingCreateSideEffectsController>(AuditingCreateSideEffectsController);
+        controller = module.get<AuditingCreateSideEffectsController>(
+            AuditingCreateSideEffectsController,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingCreateSideEffectsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingCreateSideEffectsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an auditingMockSideEffectData created', async () =>
-        {
-            expect(
-                await controller.main(
-                    auditingMockSideEffectData,
-                ),
-            )
-                .toBe(undefined);
+        test('should return an auditingMockSideEffectData created', async () => {
+            expect(await controller.main(auditingMockSideEffectData)).toBe(
+                undefined,
+            );
         });
     });
 });

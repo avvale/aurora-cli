@@ -6,11 +6,8 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.queue.update')
-export class QueueManagerUpdateQueuesResolver
-{
-    constructor(
-        private readonly handler: QueueManagerUpdateQueuesHandler,
-    ) {}
+export class QueueManagerUpdateQueuesResolver {
+    constructor(private readonly handler: QueueManagerUpdateQueuesHandler) {}
 
     @Mutation('queueManagerUpdateQueues')
     async main(
@@ -18,8 +15,7 @@ export class QueueManagerUpdateQueuesResolver
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<QueueManagerQueue>
-    {
+    ): Promise<QueueManagerQueue> {
         return await this.handler.main(
             payload,
             queryStatement,

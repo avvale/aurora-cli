@@ -6,10 +6,20 @@ aggregateName: AuditingHttpCommunication
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: http
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: http
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
     nullable: false
   - name: tags
     type: array
@@ -69,3 +79,12 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

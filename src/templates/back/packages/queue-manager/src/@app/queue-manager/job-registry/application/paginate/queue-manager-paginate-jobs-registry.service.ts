@@ -1,10 +1,12 @@
-import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
+import {
+    QueueManagerIJobRegistryRepository,
+    QueueManagerJobRegistry,
+} from '@app/queue-manager/job-registry';
 import { CQMetadata, Pagination, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class QueueManagerPaginateJobsRegistryService
-{
+export class QueueManagerPaginateJobsRegistryService {
     constructor(
         private readonly repository: QueueManagerIJobRegistryRepository,
     ) {}
@@ -13,8 +15,7 @@ export class QueueManagerPaginateJobsRegistryService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<Pagination<QueueManagerJobRegistry>>
-    {
+    ): Promise<Pagination<QueueManagerJobRegistry>> {
         return await this.repository.paginate({
             queryStatement,
             constraint,

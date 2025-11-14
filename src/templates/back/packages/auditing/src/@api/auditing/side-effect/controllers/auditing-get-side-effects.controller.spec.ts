@@ -1,45 +1,50 @@
-import { AuditingGetSideEffectsController, AuditingGetSideEffectsHandler } from '@api/auditing/side-effect';
+import {
+    AuditingGetSideEffectsController,
+    AuditingGetSideEffectsHandler,
+} from '@api/auditing/side-effect';
 import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingGetSideEffectsController', () =>
-{
+describe('AuditingGetSideEffectsController', () => {
     let controller: AuditingGetSideEffectsController;
     let handler: AuditingGetSideEffectsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                AuditingGetSideEffectsController,
-            ],
+            imports: [],
+            controllers: [AuditingGetSideEffectsController],
             providers: [
                 {
-                    provide : AuditingGetSideEffectsHandler,
+                    provide: AuditingGetSideEffectsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<AuditingGetSideEffectsController>(AuditingGetSideEffectsController);
-        handler = module.get<AuditingGetSideEffectsHandler>(AuditingGetSideEffectsHandler);
+        controller = module.get<AuditingGetSideEffectsController>(
+            AuditingGetSideEffectsController,
+        );
+        handler = module.get<AuditingGetSideEffectsHandler>(
+            AuditingGetSideEffectsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingGetSideEffectsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingGetSideEffectsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a auditingMockSideEffectData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData)));
+        test('should return a auditingMockSideEffectData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(auditingMockSideEffectData),
+                    ),
+            );
             expect(await controller.main()).toBe(auditingMockSideEffectData);
         });
     });

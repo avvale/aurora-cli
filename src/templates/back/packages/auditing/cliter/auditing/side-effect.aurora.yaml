@@ -6,10 +6,20 @@ aggregateName: AuditingSideEffect
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: app_registration
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: app_registration
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
     nullable: false
   - name: tags
     type: array
@@ -118,3 +128,12 @@ additionalApis:
   - path: auditing/side-effect/rollback
     resolverType: mutation
     httpMethod: post
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

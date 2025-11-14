@@ -1,4 +1,7 @@
-import { auditingMockSideEffectData, AuditingSideEffect } from '@app/auditing/side-effect';
+import {
+    auditingMockSideEffectData,
+    AuditingSideEffect,
+} from '@app/auditing/side-effect';
 import {
     AuditingSideEffectAccountId,
     AuditingSideEffectAuditableId,
@@ -21,6 +24,7 @@ import {
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
     AuditingSideEffectRollbackSideEffectId,
+    AuditingSideEffectRowId,
     AuditingSideEffectTags,
     AuditingSideEffectUpdatedAt,
     AuditingSideEffectUserAgent,
@@ -30,30 +34,31 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class AuditingMockSideEffectSeeder extends MockSeeder<AuditingSideEffect>
-{
+export class AuditingMockSideEffectSeeder extends MockSeeder<AuditingSideEffect> {
     public collectionSource: AuditingSideEffect[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const sideEffect of _.orderBy(auditingMockSideEffectData, ['id']))
-        {
+        for (const sideEffect of _.orderBy(auditingMockSideEffectData, [
+            'id',
+        ])) {
             this.collectionSource.push(
                 AuditingSideEffect.register(
                     new AuditingSideEffectId(sideEffect.id),
+                    new AuditingSideEffectRowId(sideEffect.rowId),
                     new AuditingSideEffectTags(sideEffect.tags),
                     new AuditingSideEffectModelPath(sideEffect.modelPath),
                     new AuditingSideEffectModelName(sideEffect.modelName),
                     new AuditingSideEffectOperationId(sideEffect.operationId),
-                    new AuditingSideEffectOperationSort(sideEffect.operationSort),
+                    new AuditingSideEffectOperationSort(
+                        sideEffect.operationSort,
+                    ),
                     new AuditingSideEffectAccountId(sideEffect.accountId),
                     new AuditingSideEffectEmail(sideEffect.email),
                     new AuditingSideEffectEvent(sideEffect.event),
@@ -68,7 +73,9 @@ export class AuditingMockSideEffectSeeder extends MockSeeder<AuditingSideEffect>
                     new AuditingSideEffectBody(sideEffect.body),
                     new AuditingSideEffectUserAgent(sideEffect.userAgent),
                     new AuditingSideEffectIsRollback(sideEffect.isRollback),
-                    new AuditingSideEffectRollbackSideEffectId(sideEffect.rollbackSideEffectId),
+                    new AuditingSideEffectRollbackSideEffectId(
+                        sideEffect.rollbackSideEffectId,
+                    ),
                     new AuditingSideEffectCreatedAt({ currentTimestamp: true }),
                     new AuditingSideEffectUpdatedAt({ currentTimestamp: true }),
                     new AuditingSideEffectDeletedAt(null),

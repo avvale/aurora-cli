@@ -9,14 +9,14 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(QueueManagerCreateQueueCommand)
-export class QueueManagerCreateQueueCommandHandler implements ICommandHandler<QueueManagerCreateQueueCommand>
+export class QueueManagerCreateQueueCommandHandler
+    implements ICommandHandler<QueueManagerCreateQueueCommand>
 {
     constructor(
         private readonly createQueueService: QueueManagerCreateQueueService,
     ) {}
 
-    async execute(command: QueueManagerCreateQueueCommand): Promise<void>
-    {
+    async execute(command: QueueManagerCreateQueueCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createQueueService.main(
             {

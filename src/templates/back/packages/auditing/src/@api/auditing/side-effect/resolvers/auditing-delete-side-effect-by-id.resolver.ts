@@ -6,8 +6,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('auditing.sideEffect.delete')
-export class AuditingDeleteSideEffectByIdResolver
-{
+export class AuditingDeleteSideEffectByIdResolver {
     constructor(
         private readonly handler: AuditingDeleteSideEffectByIdHandler,
     ) {}
@@ -17,12 +16,7 @@ export class AuditingDeleteSideEffectByIdResolver
         @Args('id') id: string,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<AuditingSideEffect>
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
+    ): Promise<AuditingSideEffect> {
+        return await this.handler.main(id, constraint, timezone);
     }
 }

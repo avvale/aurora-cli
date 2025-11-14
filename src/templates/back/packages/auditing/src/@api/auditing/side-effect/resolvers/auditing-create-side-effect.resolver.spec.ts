@@ -1,51 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AuditingCreateSideEffectHandler, AuditingCreateSideEffectResolver } from '@api/auditing/side-effect';
+import {
+    AuditingCreateSideEffectHandler,
+    AuditingCreateSideEffectResolver,
+} from '@api/auditing/side-effect';
 import { AuditingCreateSideEffectInput } from '@api/graphql';
 import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingCreateSideEffectResolver', () =>
-{
+describe('AuditingCreateSideEffectResolver', () => {
     let resolver: AuditingCreateSideEffectResolver;
     let handler: AuditingCreateSideEffectHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 AuditingCreateSideEffectResolver,
                 {
-                    provide : AuditingCreateSideEffectHandler,
+                    provide: AuditingCreateSideEffectHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<AuditingCreateSideEffectResolver>(AuditingCreateSideEffectResolver);
-        handler = module.get<AuditingCreateSideEffectHandler>(AuditingCreateSideEffectHandler);
+        resolver = module.get<AuditingCreateSideEffectResolver>(
+            AuditingCreateSideEffectResolver,
+        );
+        handler = module.get<AuditingCreateSideEffectHandler>(
+            AuditingCreateSideEffectHandler,
+        );
     });
 
-    test('AuditingCreateSideEffectResolver should be defined', () =>
-    {
+    test('AuditingCreateSideEffectResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('AuditingCreateSideEffectResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingCreateSideEffectResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an sideEffect created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
-            expect(await resolver.main(<AuditingCreateSideEffectInput>auditingMockSideEffectData[0])).toBe(auditingMockSideEffectData[0]);
+        test('should return an sideEffect created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(auditingMockSideEffectData[0]),
+                    ),
+            );
+            expect(
+                await resolver.main(
+                    <AuditingCreateSideEffectInput>(
+                        auditingMockSideEffectData[0]
+                    ),
+                ),
+            ).toBe(auditingMockSideEffectData[0]);
         });
     });
 });

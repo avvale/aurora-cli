@@ -1,11 +1,13 @@
-import { AuditingISideEffectRepository, AuditingSideEffect } from '@app/auditing/side-effect';
+import {
+    AuditingISideEffectRepository,
+    AuditingSideEffect,
+} from '@app/auditing/side-effect';
 import {
     AuditingSideEffectAccountId,
     AuditingSideEffectAuditableId,
     AuditingSideEffectBaseUrl,
     AuditingSideEffectBody,
     AuditingSideEffectCreatedAt,
-    AuditingSideEffectDeletedAt,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
     AuditingSideEffectId,
@@ -30,8 +32,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class AuditingCreateSideEffectService
-{
+export class AuditingCreateSideEffectService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: AuditingISideEffectRepository,
@@ -62,11 +63,11 @@ export class AuditingCreateSideEffectService
             rollbackSideEffectId: AuditingSideEffectRollbackSideEffectId;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const sideEffect = AuditingSideEffect.register(
             payload.id,
+            undefined, // rowId
             payload.tags,
             payload.modelPath,
             payload.modelName,
@@ -92,19 +93,18 @@ export class AuditingCreateSideEffectService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            sideEffect,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(sideEffect, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const sideEffectRegister = this.publisher.mergeObjectContext(
-            sideEffect,
-        );
+        const sideEffectRegister =
+            this.publisher.mergeObjectContext(sideEffect);
 
-        sideEffectRegister.created(sideEffect); // apply event to model events
+        sideEffectRegister.created({
+            payload: sideEffect,
+            cQMetadata,
+        }); // apply event to model events
         sideEffectRegister.commit(); // commit all events of model
     }
 }

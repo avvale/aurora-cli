@@ -1,19 +1,24 @@
 /* eslint-disable key-spacing */
-import { QueueManagerCreatedQueueEvent, QueueManagerDeletedQueueEvent, QueueManagerUpdatedQueueEvent } from '@app/queue-manager/queue';
+import {
+    QueueManagerCreatedQueueEvent,
+    QueueManagerDeletedQueueEvent,
+    QueueManagerUpdatedQueueEvent,
+} from '@app/queue-manager/queue';
 import {
     QueueManagerQueueCreatedAt,
     QueueManagerQueueDeletedAt,
     QueueManagerQueueId,
     QueueManagerQueueName,
     QueueManagerQueuePrefix,
+    QueueManagerQueueRowId,
     QueueManagerQueueUpdatedAt,
 } from '@app/queue-manager/queue/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class QueueManagerQueue extends AggregateRoot
-{
+export class QueueManagerQueue extends AggregateRoot {
     id: QueueManagerQueueId;
+    rowId: QueueManagerQueueRowId;
     prefix: QueueManagerQueuePrefix;
     name: QueueManagerQueueName;
     createdAt: QueueManagerQueueCreatedAt;
@@ -22,15 +27,16 @@ export class QueueManagerQueue extends AggregateRoot
 
     constructor(
         id: QueueManagerQueueId,
+        rowId: QueueManagerQueueRowId,
         prefix: QueueManagerQueuePrefix,
         name: QueueManagerQueueName,
         createdAt: QueueManagerQueueCreatedAt,
         updatedAt: QueueManagerQueueUpdatedAt,
         deletedAt: QueueManagerQueueDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.prefix = prefix;
         this.name = name;
         this.createdAt = createdAt;
@@ -40,15 +46,16 @@ export class QueueManagerQueue extends AggregateRoot
 
     static register(
         id: QueueManagerQueueId,
+        rowId: QueueManagerQueueRowId,
         prefix: QueueManagerQueuePrefix,
         name: QueueManagerQueueName,
         createdAt: QueueManagerQueueCreatedAt,
         updatedAt: QueueManagerQueueUpdatedAt,
         deletedAt: QueueManagerQueueDeletedAt,
-    ): QueueManagerQueue
-    {
+    ): QueueManagerQueue {
         return new QueueManagerQueue(
             id,
+            rowId,
             prefix,
             name,
             createdAt,
@@ -57,52 +64,68 @@ export class QueueManagerQueue extends AggregateRoot
         );
     }
 
-    created(queue: QueueManagerQueue): void
-    {
+    created(event: {
+        payload: QueueManagerQueue;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new QueueManagerCreatedQueueEvent(
-                queue.id.value,
-                queue.prefix.value,
-                queue.name.value,
-                queue.createdAt?.value,
-                queue.updatedAt?.value,
-                queue.deletedAt?.value,
-            ),
+            new QueueManagerCreatedQueueEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    prefix: event.payload.prefix.value,
+                    name: event.payload.name.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(queue: QueueManagerQueue): void
-    {
+    updated(event: {
+        payload: QueueManagerQueue;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new QueueManagerUpdatedQueueEvent(
-                queue.id?.value,
-                queue.prefix?.value,
-                queue.name?.value,
-                queue.createdAt?.value,
-                queue.updatedAt?.value,
-                queue.deletedAt?.value,
-            ),
+            new QueueManagerUpdatedQueueEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    prefix: event.payload.prefix?.value,
+                    name: event.payload.name?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(queue: QueueManagerQueue): void
-    {
+    deleted(event: {
+        payload: QueueManagerQueue;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new QueueManagerDeletedQueueEvent(
-                queue.id.value,
-                queue.prefix.value,
-                queue.name.value,
-                queue.createdAt?.value,
-                queue.updatedAt?.value,
-                queue.deletedAt?.value,
-            ),
+            new QueueManagerDeletedQueueEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
+                    prefix: event.payload.prefix.value,
+                    name: event.payload.name.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             prefix: this.prefix.value,
             name: this.name.value,
             createdAt: this.createdAt?.value,
@@ -112,8 +135,7 @@ export class QueueManagerQueue extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             prefix: this.prefix.value,

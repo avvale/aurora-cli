@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     prefix
     name
     waitingJobs
@@ -18,11 +19,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query QueueManagerPaginateQueues (
+    query QueueManagerPaginateQueues(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: queueManagerPaginateQueues (
+        pagination: queueManagerPaginateQueues(
             query: $query
             constraint: $constraint
         ) {
@@ -34,14 +35,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query QueueManagerGetQueues (
+    query QueueManagerGetQueues(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: queueManagerGetQueues (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: queueManagerGetQueues(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -49,14 +47,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query QueueManagerFindQueueById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: queueManagerFindQueueById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query QueueManagerFindQueueById($id: ID, $constraint: QueryStatement) {
+        object: queueManagerFindQueueById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -64,20 +56,17 @@ export const findByIdQuery = gql`
 `;
 
 export const findByIdWithRelationsQuery = gql`
-    query QueueManagerFindQueueById (
+    query QueueManagerFindQueueById(
         $id: ID
         $constraint: QueryStatement
         $queryPaginateJobs: QueryStatement
         $constraintPaginateJobs: QueryStatement
     ) {
-        object: queueManagerFindQueueById (
-            id: $id
-            constraint: $constraint
-        ) {
+        object: queueManagerFindQueueById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
-        queueManagerPaginateJobs (
+        queueManagerPaginateJobs(
             query: $queryPaginateJobs
             constraint: $constraintPaginateJobs
         ) {
@@ -89,14 +78,11 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query QueueManagerFindQueue (
+    query QueueManagerFindQueue(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: queueManagerFindQueue (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: queueManagerFindQueue(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }

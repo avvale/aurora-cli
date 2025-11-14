@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     tags
     modelPath
     modelName
@@ -30,11 +31,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query AuditingPaginateSideEffects (
+    query AuditingPaginateSideEffects(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: auditingPaginateSideEffects (
+        pagination: auditingPaginateSideEffects(
             query: $query
             constraint: $constraint
         ) {
@@ -46,11 +47,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query AuditingGetSideEffects (
+    query AuditingGetSideEffects(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: auditingGetSideEffects (
+        objects: auditingGetSideEffects(
             query: $query
             constraint: $constraint
         ) {
@@ -61,14 +62,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query AuditingFindSideEffectById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: auditingFindSideEffectById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query AuditingFindSideEffectById($id: ID, $constraint: QueryStatement) {
+        object: auditingFindSideEffectById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -76,14 +71,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query AuditingFindSideEffect (
+    query AuditingFindSideEffect(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: auditingFindSideEffect (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: auditingFindSideEffect(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -99,6 +91,14 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation AuditingCreateSideEffects(
+        $payload: [AuditingCreateSideEffectInput]!
+    ) {
+        auditingCreateSideEffects(payload: $payload)
     }
 `;
 
@@ -162,13 +162,10 @@ export const deleteMutation = gql`
 
 // Mutation additionalApis
 export const rollbackSideEffectMutation = gql`
-    mutation AuditingRollbackSideEffect (
+    mutation AuditingRollbackSideEffect(
         $payload: AuditingUpdateSideEffectByIdInput!
         $constraint: QueryStatement
     ) {
-        auditingRollbackSideEffect (
-            payload: $payload
-            constraint: $constraint
-        )
+        auditingRollbackSideEffect(payload: $payload, constraint: $constraint)
     }
 `;

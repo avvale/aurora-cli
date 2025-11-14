@@ -1,12 +1,14 @@
 import { AuditingSideEffectDto } from '@api/auditing/side-effect';
 import { AuditingSideEffect } from '@api/graphql';
-import { AuditingDeleteSideEffectByIdCommand, AuditingFindSideEffectByIdQuery } from '@app/auditing/side-effect';
+import {
+    AuditingDeleteSideEffectByIdCommand,
+    AuditingFindSideEffectByIdQuery,
+} from '@app/auditing/side-effect';
 import { ICommandBus, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AuditingDeleteSideEffectByIdHandler
-{
+export class AuditingDeleteSideEffectByIdHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -16,23 +18,18 @@ export class AuditingDeleteSideEffectByIdHandler
         id: string,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<AuditingSideEffect | AuditingSideEffectDto>
-    {
-        const sideEffect = await this.queryBus.ask(new AuditingFindSideEffectByIdQuery(
-            id,
-            constraint,
-            {
+    ): Promise<AuditingSideEffect | AuditingSideEffectDto> {
+        const sideEffect = await this.queryBus.ask(
+            new AuditingFindSideEffectByIdQuery(id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
-        await this.commandBus.dispatch(new AuditingDeleteSideEffectByIdCommand(
-            id,
-            constraint,
-            {
+        await this.commandBus.dispatch(
+            new AuditingDeleteSideEffectByIdCommand(id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
         return sideEffect;
     }

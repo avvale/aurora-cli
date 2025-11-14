@@ -1,45 +1,51 @@
-import { AuditingCreateHttpCommunicationsHandler, AuditingCreateHttpCommunicationsResolver } from '@api/auditing/http-communication';
+import {
+    AuditingCreateHttpCommunicationsHandler,
+    AuditingCreateHttpCommunicationsResolver,
+} from '@api/auditing/http-communication';
 import { AuditingCreateHttpCommunicationInput } from '@api/graphql';
 import { auditingMockHttpCommunicationData } from '@app/auditing/http-communication';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingCreateHttpCommunicationsResolver', () =>
-{
+describe('AuditingCreateHttpCommunicationsResolver', () => {
     let resolver: AuditingCreateHttpCommunicationsResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 AuditingCreateHttpCommunicationsResolver,
                 {
-                    provide : AuditingCreateHttpCommunicationsHandler,
+                    provide: AuditingCreateHttpCommunicationsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<AuditingCreateHttpCommunicationsResolver>(AuditingCreateHttpCommunicationsResolver);
+        resolver = module.get<AuditingCreateHttpCommunicationsResolver>(
+            AuditingCreateHttpCommunicationsResolver,
+        );
     });
 
-    test('AuditingCreateHttpCommunicationsResolver should be defined', () =>
-    {
+    test('AuditingCreateHttpCommunicationsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('AuditingCreateHttpCommunicationsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingCreateHttpCommunicationsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an httpCommunications created', async () =>
-        {
-            expect(await resolver.main(<AuditingCreateHttpCommunicationInput[]>auditingMockHttpCommunicationData)).toBe(undefined);
+        test('should return an httpCommunications created', async () => {
+            expect(
+                await resolver.main(
+                    <AuditingCreateHttpCommunicationInput[]>(
+                        auditingMockHttpCommunicationData
+                    ),
+                ),
+            ).toBe(undefined);
         });
     });
 });

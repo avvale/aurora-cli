@@ -1,57 +1,75 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+} from '@angular/core';
 import { queueColumnsConfig, QueueService } from '@apps/queue-manager/queue';
 import { QueueManagerQueue } from '@apps/queue-manager/queue-manager.types';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import {
+    Action,
+    ColumnConfig,
+    ColumnDataType,
+    Crumb,
+    defaultListImports,
+    exportRows,
+    GridColumnsConfigStorageService,
+    GridData,
+    GridFiltersStorageService,
+    GridState,
+    GridStateService,
+    log,
+    queryStatementHandler,
+    ViewBaseComponent,
+} from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+
+export const queueMainGridListId = 'queueManager::queue.list.mainGridList';
 
 @Component({
     selector: 'queue-manager-queue-list',
     templateUrl: './queue-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ...defaultListImports,
-    ],
+    standalone: true,
+    imports: [...defaultListImports],
 })
-export class QueueListComponent extends ViewBaseComponent
-{
+export class QueueListComponent extends ViewBaseComponent {
     // ---- customizations ----
     // ..
 
     breadcrumb: Crumb[] = [
-        { translation: 'App', routerLink: ['/']},
+        { translation: 'App', routerLink: ['/'] },
         { translation: 'queueManager.Queues' },
     ];
-    gridId: string = 'queueManager::queue.list.mainGridList';
+    gridId: string = queueMainGridListId;
     gridData$: Observable<GridData<QueueManagerQueue>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
-            actions: row =>
-            {
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
+            actions: (row) => {
                 return [
                     {
-                        id         : 'queueManager::queue.list.edit',
+                        id: 'queueManager::queue.list.edit',
                         translation: 'edit',
-                        icon       : 'mode_edit',
+                        icon: 'mode_edit',
                     },
                     {
-                        id         : 'queueManager::queue.list.delete',
+                        id: 'queueManager::queue.list.delete',
                         translation: 'delete',
-                        icon       : 'delete',
+                        icon: 'delete',
                     },
                 ];
             },
         },
         {
-            type       : ColumnDataType.CHECKBOX,
-            field      : 'select',
+            type: ColumnDataType.CHECKBOX,
+            field: 'select',
             translation: 'Selects',
-            sticky     : true,
+            sticky: true,
         },
         ...queueColumnsConfig,
     ];
@@ -61,31 +79,33 @@ export class QueueListComponent extends ViewBaseComponent
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly queueService: QueueService,
-    )
-    {
+    ) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    { /**/ }
+    init(): void {
+        /**/
+    }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
+            /* #region common actions */
             case 'queueManager::queue.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
 
                 this.gridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.gridId),
-                    page         : this.gridStateService.getPage(this.gridId),
-                    sort         : this.gridStateService.getSort(this.gridId),
-                    search       : this.gridStateService.getSearchState(this.gridId),
+                    columnFilters:
+                        this.gridFiltersStorageService.getColumnFilterState(
+                            this.gridId,
+                        ),
+                    page: this.gridStateService.getPage(this.gridId),
+                    sort: this.gridStateService.getSort(this.gridId),
+                    search: this.gridStateService.getSearchState(this.gridId),
                 };
 
                 this.gridData$ = this.queueService.pagination$;
@@ -94,93 +114,113 @@ export class QueueListComponent extends ViewBaseComponent
             case 'queueManager::queue.list.pagination':
                 await lastValueFrom(
                     this.queueService.pagination({
-                        query: action.meta.query ?
-                            action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: queueColumnsConfig })
-                                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
-                                .setSort(this.gridStateService.getSort(this.gridId))
-                                .setPage(this.gridStateService.getPage(this.gridId))
-                                .setSearch(this.gridStateService.getSearchState(this.gridId))
-                                .getQueryStatement(),
+                        query: action.meta.query
+                            ? action.meta.query
+                            : queryStatementHandler({
+                                  columnsConfig: queueColumnsConfig,
+                              })
+                                  .setColumFilters(
+                                      this.gridFiltersStorageService.getColumnFilterState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSort(
+                                      this.gridStateService.getSort(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setPage(
+                                      this.gridStateService.getPage(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSearch(
+                                      this.gridStateService.getSearchState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .getQueryStatement(),
                     }),
                 );
                 break;
 
             case 'queueManager::queue.list.edit':
-                this.router
-                    .navigate([
-                        'queue-manager/queue/edit',
-                        action.meta.row.id,
-                    ]);
+                this.router.navigate([
+                    'queue-manager/queue/edit',
+                    action.meta.row.id,
+                ]);
                 break;
 
             case 'queueManager::queue.list.delete':
                 const deleteDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('queueManager.Queue')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('queueManager.Queue') }),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
+                    title: `${this.translocoService.translate('Delete')} ${this.translocoService.translate('queueManager.Queue')}`,
+                    message: this.translocoService.translate(
+                        'DeletionWarning',
+                        {
+                            entity: this.translocoService.translate(
+                                'queueManager.Queue',
+                            ),
+                        },
+                    ),
+                    icon: {
+                        show: true,
+                        name: 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
                         confirm: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Remove'),
                             color: 'warn',
                         },
                         cancel: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Cancel'),
                         },
                     },
                     dismissible: true,
                 });
 
-                deleteDialogRef.afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
-                                await lastValueFrom(
-                                    this.queueService
-                                        .deleteById<QueueManagerQueue>({
-                                            id: action.meta.row.id,
-                                        }),
-                                );
+                deleteDialogRef.afterClosed().subscribe(async (result) => {
+                    if (result === 'confirmed') {
+                        try {
+                            await lastValueFrom(
+                                this.queueService.deleteById<QueueManagerQueue>(
+                                    {
+                                        id: action.meta.row.id,
+                                    },
+                                ),
+                            );
 
-                                this.actionService.action({
-                                    id          : 'queueManager::queue.list.pagination',
-                                    isViewAction: false,
-                                });
-                            }
-                            catch(error)
-                            {
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                            }
+                            this.actionService.action({
+                                id: 'queueManager::queue.list.pagination',
+                                isViewAction: false,
+                            });
+                        } catch (error) {
+                            log(
+                                `[DEBUG] Catch error in ${action.id} action: ${error}`,
+                            );
                         }
-                    });
+                    }
+                });
                 break;
 
             case 'queueManager::queue.list.export':
                 const rows = await lastValueFrom(
-                    this.queueService
-                        .get({
-                            query: action.meta.query,
-                        }),
+                    this.queueService.get({
+                        query: action.meta.query,
+                    }),
                 );
 
-                // format export rows
-                (rows.objects as any[]).forEach(row =>
-                {
-                    // row.id = row.id;
-                });
-
-                const columns: string[] = queueColumnsConfig.map(queueColumnConfig => queueColumnConfig.field);
-                const headers: string[] = columns.map(column => this.translocoService.translate('queueManager.' + column.toPascalCase()));
+                const columns: string[] = queueColumnsConfig.map(
+                    (queueColumnConfig) => queueColumnConfig.field,
+                );
+                const headers: string[] = queueColumnsConfig.map(
+                    (queueColumnConfig) =>
+                        this.translocoService.translate(
+                            queueColumnConfig.translation,
+                        ),
+                );
 
                 exportRows(
                     rows.objects,
@@ -190,6 +230,7 @@ export class QueueListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+            /* #endregion common actions */
         }
     }
 }

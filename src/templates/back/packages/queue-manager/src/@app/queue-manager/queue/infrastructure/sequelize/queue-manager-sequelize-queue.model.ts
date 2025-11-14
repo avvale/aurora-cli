@@ -1,21 +1,24 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { DataTypes } from 'sequelize';
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'QueueManagerQueue',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['prefix', 'name'],
-			unique: true,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['prefix', 'name'],
+            unique: true,
+        },
     ],
 })
-export class QueueManagerQueueModel extends Model<QueueManagerQueueModel>
-{
+export class QueueManagerQueueModel extends Model<QueueManagerQueueModel> {
     @Column({
         field: 'id',
         primaryKey: true,
@@ -23,6 +26,14 @@ export class QueueManagerQueueModel extends Model<QueueManagerQueueModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'prefix',
@@ -58,5 +69,4 @@ export class QueueManagerQueueModel extends Model<QueueManagerQueueModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

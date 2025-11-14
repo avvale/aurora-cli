@@ -2,30 +2,32 @@ import { ColumnConfig, ColumnDataType } from '@aurora';
 
 export const httpCommunicationColumnsConfig: ColumnConfig[] = [
     {
-        type       : ColumnDataType.STRING,
-        field      : 'createdAt',
-        sort       : 'createdAt',
-        bodyClass  : 'min-w-48',
+        type: ColumnDataType.STRING,
+        field: 'createdAt',
+        sort: 'createdAt',
+        bodyClass: 'min-w-48',
         translation: 'Created.M',
     },
     {
-        type : ColumnDataType.STRING,
+        type: ColumnDataType.STRING,
         field: 'tags',
-        sort : 'tags',
+        sort: 'tags',
     },
     {
-        type : ColumnDataType.NUMBER,
+        type: ColumnDataType.NUMBER,
         field: 'status',
-        sort : 'status',
+        sort: 'status',
     },
     {
-        type : ColumnDataType.STRING,
+        type: ColumnDataType.STRING,
         field: 'method',
-        sort : 'method',
+        sort: 'method',
+        translation: 'auditing.Method',
     },
     {
-        type : ColumnDataType.STRING,
+        type: ColumnDataType.STRING,
         field: 'url',
-        sort : 'url',
+        sort: 'url',
+        translation: 'auditing.Url',
     },
 ];

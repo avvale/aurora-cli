@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class AuditingUpdateSideEffectByIdCommand
-{
+export class AuditingUpdateSideEffectByIdCommand {
     constructor(
         public readonly payload: {
             id: string;

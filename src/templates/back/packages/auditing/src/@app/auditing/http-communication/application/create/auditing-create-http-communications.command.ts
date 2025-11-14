@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class AuditingCreateHttpCommunicationsCommand
-{
+export class AuditingCreateHttpCommunicationsCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -16,7 +15,7 @@ export class AuditingCreateHttpCommunicationsCommand
             httpResponseRejected?: any;
             isReprocessing: boolean;
             reprocessingHttpCommunicationId?: string;
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

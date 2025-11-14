@@ -1,52 +1,74 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+} from '@angular/core';
 import { AuditingSideEffect } from '@apps/auditing/auditing.types';
-import { sideEffectColumnsConfig, SideEffectService } from '@apps/auditing/side-effect';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultListImports, exportRows, GridColumnsConfigStorageService, GridData, GridFiltersStorageService, GridState, GridStateService, log, QueryStatementHandler, ViewBaseComponent } from '@aurora';
+import {
+    sideEffectColumnsConfig,
+    SideEffectService,
+} from '@apps/auditing/side-effect';
+import {
+    Action,
+    ColumnConfig,
+    ColumnDataType,
+    Crumb,
+    defaultListImports,
+    exportRows,
+    GridColumnsConfigStorageService,
+    GridData,
+    GridFiltersStorageService,
+    GridState,
+    GridStateService,
+    log,
+    queryStatementHandler,
+    ViewBaseComponent,
+} from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
+
+export const sideEffectMainGridListId =
+    'auditing::sideEffect.list.mainGridList';
 
 @Component({
     selector: 'auditing-side-effect-list',
     templateUrl: './side-effect-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ...defaultListImports,
-    ],
+    standalone: true,
+    imports: [...defaultListImports],
 })
-export class SideEffectListComponent extends ViewBaseComponent
-{
+export class SideEffectListComponent extends ViewBaseComponent {
     // ---- customizations ----
     // ..
 
     breadcrumb: Crumb[] = [
-        { translation: 'App', routerLink: ['/']},
+        { translation: 'App', routerLink: ['/'] },
         { translation: 'auditing.SideEffects' },
     ];
-    gridId: string = 'auditing::sideEffect.list.mainGridList';
+    gridId: string = sideEffectMainGridListId;
     gridData$: Observable<GridData<AuditingSideEffect>>;
     gridState: GridState = {};
     columnsConfig$: Observable<ColumnConfig[]>;
     originColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
-            actions: row =>
-            {
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
+            actions: (row) => {
                 return [
                     {
-                        id         : 'auditing::sideEffect.list.edit',
+                        id: 'auditing::sideEffect.list.edit',
                         translation: 'edit',
-                        icon       : 'photo_camera',
+                        icon: 'photo_camera',
                     },
                 ];
             },
         },
         {
-            type       : ColumnDataType.CHECKBOX,
-            field      : 'select',
+            type: ColumnDataType.CHECKBOX,
+            field: 'select',
             translation: 'Selects',
-            sticky     : true,
+            sticky: true,
         },
         ...sideEffectColumnsConfig,
     ];
@@ -56,31 +78,33 @@ export class SideEffectListComponent extends ViewBaseComponent
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
         private readonly sideEffectService: SideEffectService,
-    )
-    {
+    ) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    { /**/ }
+    init(): void {
+        /**/
+    }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
+            /* #region common actions */
             case 'auditing::sideEffect.list.view':
                 this.columnsConfig$ = this.gridColumnsConfigStorageService
                     .getColumnsConfig(this.gridId, this.originColumnsConfig)
                     .pipe(takeUntil(this.unsubscribeAll$));
 
                 this.gridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.gridId),
-                    page         : this.gridStateService.getPage(this.gridId),
-                    sort         : this.gridStateService.getSort(this.gridId),
-                    search       : this.gridStateService.getSearchState(this.gridId),
+                    columnFilters:
+                        this.gridFiltersStorageService.getColumnFilterState(
+                            this.gridId,
+                        ),
+                    page: this.gridStateService.getPage(this.gridId),
+                    sort: this.gridStateService.getSort(this.gridId),
+                    search: this.gridStateService.getSearchState(this.gridId),
                 };
 
                 this.gridData$ = this.sideEffectService.pagination$;
@@ -89,93 +113,113 @@ export class SideEffectListComponent extends ViewBaseComponent
             case 'auditing::sideEffect.list.pagination':
                 await lastValueFrom(
                     this.sideEffectService.pagination({
-                        query: action.meta.query ?
-                            action.meta.query :
-                            QueryStatementHandler
-                                .init({ columnsConfig: sideEffectColumnsConfig })
-                                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
-                                .setSort(this.gridStateService.getSort(this.gridId))
-                                .setPage(this.gridStateService.getPage(this.gridId))
-                                .setSearch(this.gridStateService.getSearchState(this.gridId))
-                                .getQueryStatement(),
+                        query: action.meta.query
+                            ? action.meta.query
+                            : queryStatementHandler({
+                                  columnsConfig: sideEffectColumnsConfig,
+                              })
+                                  .setColumFilters(
+                                      this.gridFiltersStorageService.getColumnFilterState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSort(
+                                      this.gridStateService.getSort(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setPage(
+                                      this.gridStateService.getPage(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .setSearch(
+                                      this.gridStateService.getSearchState(
+                                          this.gridId,
+                                      ),
+                                  )
+                                  .getQueryStatement(),
                     }),
                 );
                 break;
 
             case 'auditing::sideEffect.list.edit':
-                this.router
-                    .navigate([
-                        'auditing/side-effect/edit',
-                        action.meta.row.id,
-                    ]);
+                this.router.navigate([
+                    'auditing/side-effect/edit',
+                    action.meta.row.id,
+                ]);
                 break;
 
             case 'auditing::sideEffect.list.delete':
                 const deleteDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('auditing.SideEffect')}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('auditing.SideEffect') }),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
+                    title: `${this.translocoService.translate('Delete')} ${this.translocoService.translate('auditing.SideEffect')}`,
+                    message: this.translocoService.translate(
+                        'DeletionWarning',
+                        {
+                            entity: this.translocoService.translate(
+                                'auditing.SideEffect',
+                            ),
+                        },
+                    ),
+                    icon: {
+                        show: true,
+                        name: 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
                         confirm: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Remove'),
                             color: 'warn',
                         },
                         cancel: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Cancel'),
                         },
                     },
                     dismissible: true,
                 });
 
-                deleteDialogRef.afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
-                                await lastValueFrom(
-                                    this.sideEffectService
-                                        .deleteById<AuditingSideEffect>({
-                                            id: action.meta.row.id,
-                                        }),
-                                );
+                deleteDialogRef.afterClosed().subscribe(async (result) => {
+                    if (result === 'confirmed') {
+                        try {
+                            await lastValueFrom(
+                                this.sideEffectService.deleteById<AuditingSideEffect>(
+                                    {
+                                        id: action.meta.row.id,
+                                    },
+                                ),
+                            );
 
-                                this.actionService.action({
-                                    id          : 'auditing::sideEffect.list.pagination',
-                                    isViewAction: false,
-                                });
-                            }
-                            catch(error)
-                            {
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                            }
+                            this.actionService.action({
+                                id: 'auditing::sideEffect.list.pagination',
+                                isViewAction: false,
+                            });
+                        } catch (error) {
+                            log(
+                                `[DEBUG] Catch error in ${action.id} action: ${error}`,
+                            );
                         }
-                    });
+                    }
+                });
                 break;
 
             case 'auditing::sideEffect.list.export':
                 const rows = await lastValueFrom(
-                    this.sideEffectService
-                        .get({
-                            query: action.meta.query,
-                        }),
+                    this.sideEffectService.get({
+                        query: action.meta.query,
+                    }),
                 );
 
-                // format export rows
-                (rows.objects as any[]).forEach(row =>
-                {
-                    // row.id = row.id;
-                });
-
-                const columns: string[] = sideEffectColumnsConfig.map(sideEffectColumnConfig => sideEffectColumnConfig.field);
-                const headers: string[] = columns.map(column => this.translocoService.translate('auditing.' + column.toPascalCase()));
+                const columns: string[] = sideEffectColumnsConfig.map(
+                    (sideEffectColumnConfig) => sideEffectColumnConfig.field,
+                );
+                const headers: string[] = sideEffectColumnsConfig.map(
+                    (sideEffectColumnConfig) =>
+                        this.translocoService.translate(
+                            sideEffectColumnConfig.translation,
+                        ),
+                );
 
                 exportRows(
                     rows.objects,
@@ -185,6 +229,7 @@ export class SideEffectListComponent extends ViewBaseComponent
                     action.meta.format,
                 );
                 break;
+            /* #endregion common actions */
         }
     }
 }

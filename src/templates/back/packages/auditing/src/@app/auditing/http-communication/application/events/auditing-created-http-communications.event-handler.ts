@@ -2,10 +2,10 @@ import { AuditingCreatedHttpCommunicationsEvent } from '@app/auditing/http-commu
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(AuditingCreatedHttpCommunicationsEvent)
-export class AuditingCreatedHttpCommunicationsEventHandler implements IEventHandler<AuditingCreatedHttpCommunicationsEvent>
+export class AuditingCreatedHttpCommunicationsEventHandler
+    implements IEventHandler<AuditingCreatedHttpCommunicationsEvent>
 {
-    handle(event: AuditingCreatedHttpCommunicationsEvent): void
-    {
+    handle(event: AuditingCreatedHttpCommunicationsEvent): void {
         // console.log('CreatedHttpCommunicationsEvent: ', event);
     }
 }

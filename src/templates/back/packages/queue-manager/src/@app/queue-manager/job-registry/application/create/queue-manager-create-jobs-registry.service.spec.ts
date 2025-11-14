@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { QueueManagerIJobRegistryRepository, QueueManagerMockJobRegistryRepository } from '@app/queue-manager/job-registry';
+import {
+    QueueManagerIJobRegistryRepository,
+    QueueManagerMockJobRegistryRepository,
+} from '@app/queue-manager/job-registry';
 import { QueueManagerCreateJobsRegistryService } from '@app/queue-manager/job-registry/application/create/queue-manager-create-jobs-registry.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerCreateJobsRegistryService', () =>
-{
+describe('QueueManagerCreateJobsRegistryService', () => {
     let service: QueueManagerCreateJobsRegistryService;
     let mockRepository: QueueManagerMockJobRegistryRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,34 +26,29 @@ describe('QueueManagerCreateJobsRegistryService', () =>
                 QueueManagerCreateJobsRegistryService,
                 QueueManagerMockJobRegistryRepository,
                 {
-                    provide : QueueManagerIJobRegistryRepository,
+                    provide: QueueManagerIJobRegistryRepository,
                     useValue: {
-                        insert: () => { /**/ },
+                        insert: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(QueueManagerCreateJobsRegistryService);
         mockRepository = module.get(QueueManagerMockJobRegistryRepository);
     });
 
-    describe('main', () =>
-    {
-        test('CreateJobsRegistryService should be defined', () =>
-        {
+    describe('main', () => {
+        test('CreateJobsRegistryService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should create jobsRegistry and emit event', async () =>
-        {
-            expect(
-                await service.main(
-                    mockRepository.collectionSource,
-                ),
-            )
-                .toBe(undefined);
+        test('should create jobsRegistry and emit event', async () => {
+            expect(await service.main(mockRepository.collectionSource)).toBe(
+                undefined,
+            );
         });
     });
 });

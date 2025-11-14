@@ -18,6 +18,7 @@
     "QueueManager": "Gestor de Queues",
     "QueueName": "QueueName",
     "Queues": "Queues",
+    "RowId": "RowId",
     "State": "State",
     "Tags": "Tags",
     "WaitingJobs": "Esperando"

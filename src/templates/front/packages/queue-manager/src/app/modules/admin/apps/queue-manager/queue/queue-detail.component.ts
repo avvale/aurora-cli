@@ -1,39 +1,80 @@
-import { NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    signal,
+    ViewChild,
+    ViewEncapsulation,
+    WritableSignal,
+} from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { QueueService } from '@apps/queue-manager/queue';
-import { QueueJobType, QueueManagerJob, QueueManagerQueue } from '@apps/queue-manager/queue-manager.types';
-import { Action, ColumnConfig, ColumnDataType, Crumb, defaultDetailImports, GridColumnsConfigStorageService, GridColumnTranslationComponent, GridCustomButtonsHeaderDialogTemplateDirective, GridData, GridElementsManagerComponent, GridFiltersStorageService, GridFormElementDetailDialogTemplateDirective, GridState, GridStateService, GridTranslationsComponent, IsObjectEmptyPipe, log, mapActions, MatFormFieldAppearanceComponent, QueryStatementHandler, Utils, ViewDetailComponent } from '@aurora';
+import {
+    QueueJobType,
+    QueueManagerJob,
+    QueueManagerQueue,
+} from '@apps/queue-manager/queue-manager.types';
+import {
+    Action,
+    ColumnConfig,
+    ColumnDataType,
+    Crumb,
+    defaultDetailImports,
+    GridColumnsConfigStorageService,
+    GridColumnTranslationComponent,
+    GridCustomButtonsHeaderDialogTemplateDirective,
+    GridData,
+    GridElementsManagerComponent,
+    GridFiltersStorageService,
+    GridFormElementDetailDialogTemplateDirective,
+    GridState,
+    GridStateService,
+    GridTranslationsComponent,
+    IsObjectEmptyPipe,
+    log,
+    mapActions,
+    MatFormFieldAppearanceComponent,
+    QueryStatementHandler,
+    SnackBarInvalidFormComponent,
+    uuid,
+    ViewDetailComponent,
+} from '@aurora';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
-import { Observable, lastValueFrom, takeUntil } from 'rxjs';
-import { JobService } from '../job/job.service';
+import { lastValueFrom, Observable, takeUntil } from 'rxjs';
 import { jobColumnsConfig } from '../job/job.columns-config';
+import { JobService } from '../job/job.service';
 
 @Component({
     selector: 'queue-manager-queue-detail',
     templateUrl: './queue-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultDetailImports,
-        GridColumnTranslationComponent, GridCustomButtonsHeaderDialogTemplateDirective, GridElementsManagerComponent, GridTranslationsComponent, MatFormFieldAppearanceComponent, NgForOf,
-        GridFormElementDetailDialogTemplateDirective, IsObjectEmptyPipe, NgxJsonViewerModule
+        GridColumnTranslationComponent,
+        GridCustomButtonsHeaderDialogTemplateDirective,
+        GridElementsManagerComponent,
+        GridTranslationsComponent,
+        MatFormFieldAppearanceComponent,
+        GridFormElementDetailDialogTemplateDirective,
+        IsObjectEmptyPipe,
+        NgxJsonViewerModule,
     ],
 })
-export class QueueDetailComponent extends ViewDetailComponent
-{
+export class QueueDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
-    currentJobType: QueueJobType  = 'failed';
+    currentJobType: QueueJobType = 'failed';
 
     // Object retrieved from the database request,
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: QueueManagerQueue;
+    managedObject: WritableSignal<QueueManagerQueue> = signal(null);
 
     // relationships
     /* #region  variables to manage grid-elements-manager jobs */
-    @ViewChild('jobsGridElementsManager') jobsComponent: GridElementsManagerComponent;
+    @ViewChild('jobsGridElementsManager')
+    jobsComponent: GridElementsManagerComponent;
     managedJob: QueueManagerJob;
     jobDialogFg: FormGroup;
     jobsGridId: string = 'queueManager::queue.detail.jobsGridList';
@@ -42,30 +83,29 @@ export class QueueDetailComponent extends ViewDetailComponent
     jobsColumnsConfig$: Observable<ColumnConfig[]>;
     jobsOriginColumnsConfig: ColumnConfig[] = [
         {
-            type   : ColumnDataType.ACTIONS,
-            field  : 'Actions',
-            sticky : true,
-            actions: row =>
-            {
+            type: ColumnDataType.ACTIONS,
+            field: 'Actions',
+            sticky: true,
+            actions: (row) => {
                 return [
                     {
-                        id         : 'queueManager::queue.detail.editJob',
+                        id: 'queueManager::queue.detail.editJob',
                         translation: 'edit',
-                        icon       : 'mode_edit',
+                        icon: 'mode_edit',
                     },
                     {
-                        id         : 'queueManager::queue.detail.removeJob',
+                        id: 'queueManager::queue.detail.removeJob',
                         translation: 'remove',
-                        icon       : 'delete',
+                        icon: 'delete',
                     },
                 ];
             },
         },
         {
-            type       : ColumnDataType.CHECKBOX,
-            field      : 'select',
+            type: ColumnDataType.CHECKBOX,
+            field: 'select',
             translation: 'Selects',
-            sticky     : true,
+            sticky: true,
         },
         ...jobColumnsConfig,
     ];
@@ -73,7 +113,10 @@ export class QueueDetailComponent extends ViewDetailComponent
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'queueManager.Queues', routerLink: ['/queue-manager/queue']},
+        {
+            translation: 'queueManager.Queues',
+            routerLink: ['/queue-manager/queue'],
+        },
         { translation: 'queueManager.Queue' },
     ];
 
@@ -83,112 +126,137 @@ export class QueueDetailComponent extends ViewDetailComponent
         private readonly gridColumnsConfigStorageService: GridColumnsConfigStorageService,
         private readonly gridFiltersStorageService: GridFiltersStorageService,
         private readonly gridStateService: GridStateService,
-    )
-    {
+    ) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    {
+    init(): void {
         /**/
     }
 
-    onSubmit($event): void
-    {
+    onSubmit($event): void {
         // we have two nested forms, we check that the submit comes from the button
         // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
+        if (
+            $event.submitter.getAttribute('form') !==
+            $event.submitter.form.getAttribute('id')
+        ) {
             $event.preventDefault();
             $event.stopPropagation();
             return;
         }
 
         // manage validations before execute actions
-        if (this.fg.invalid)
-        {
+        if (this.fg.invalid) {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+                data: {
+                    message: `${this.translocoService.translate('InvalidForm')}`,
+                    textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                },
+                panelClass: 'error-snackbar',
+                verticalPosition: 'top',
+                duration: 10000,
+            });
             return;
         }
 
         this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'queueManager::queue.detail.new' : 'queueManager::queue.detail.create',
-                    'queueManager::queue.detail.edit': 'queueManager::queue.detail.update',
-                },
-            ),
+            id: mapActions(this.currentViewAction.id, {
+                'queueManager::queue.detail.new':
+                    'queueManager::queue.detail.create',
+                'queueManager::queue.detail.edit':
+                    'queueManager::queue.detail.update',
+            }),
             isViewAction: false,
         });
     }
 
-    createForm(): void
-    {
+    createForm(): void {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
-            id    : [{ value: '', disabled: true }, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            prefix: [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(63)]],
-            name  : [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(63)]],
+            id: [
+                { value: '', disabled: true },
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
+            prefix: [
+                { value: '', disabled: true },
+                [Validators.required, Validators.maxLength(63)],
+            ],
+            name: [
+                { value: '', disabled: true },
+                [Validators.required, Validators.maxLength(63)],
+            ],
         });
+        /* eslint-enable key-spacing */
     }
 
     /* #region methods to manage Jobs */
-    createJobDialogForm(): void
-    {
+    createJobDialogForm(): void {
         this.jobDialogFg = this.fb.group({
-            id          : [{ value: '', disabled: true }],
-            name        : [{ value: '', disabled: true }],
-            delay       : [{ value: '', disabled: true }],
+            id: [{ value: '', disabled: true }],
+            name: [{ value: '', disabled: true }],
+            delay: [{ value: '', disabled: true }],
             failedReason: [{ value: '', disabled: true }],
         });
     }
     /* #endregion methods to manage Jobs */
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'queueManager::queue.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'queueManager::queue.detail.edit':
-                this.queueService
-                    .queue$
+                this.queueService.queue$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
-                        this.managedObject = item;
+                    .subscribe((item) => {
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
 
                 // jobs grid
                 this.jobsColumnsConfig$ = this.gridColumnsConfigStorageService
-                    .getColumnsConfig(this.jobsGridId, this.jobsOriginColumnsConfig)
+                    .getColumnsConfig(
+                        this.jobsGridId,
+                        this.jobsOriginColumnsConfig,
+                    )
                     .pipe(takeUntil(this.unsubscribeAll$));
 
                 this.jobsGridState = {
-                    columnFilters: this.gridFiltersStorageService.getColumnFilterState(this.jobsGridId),
-                    page         : this.gridStateService.getPage(this.jobsGridId),
-                    sort         : this.gridStateService.getSort(this.jobsGridId),
-                    search       : this.gridStateService.getSearchState(this.jobsGridId),
+                    columnFilters:
+                        this.gridFiltersStorageService.getColumnFilterState(
+                            this.jobsGridId,
+                        ),
+                    page: this.gridStateService.getPage(this.jobsGridId),
+                    sort: this.gridStateService.getSort(this.jobsGridId),
+                    search: this.gridStateService.getSearchState(
+                        this.jobsGridId,
+                    ),
                 };
 
                 this.jobsGridData$ = this.jobService.pagination$;
 
                 // subscription to get job in edit author action
-                this.jobService
-                    .job$
+                this.jobService.job$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(job =>
-                    {
-                        if (job && this.currentAction.id === 'queueManager::queue.detail.editJob')
-                        {
+                    .subscribe((job) => {
+                        if (
+                            job &&
+                            this.currentAction.id ===
+                                'queueManager::queue.detail.editJob'
+                        ) {
                             this.managedJob = job;
                             this.jobDialogFg.patchValue(job);
                         }
@@ -197,13 +265,11 @@ export class QueueDetailComponent extends ViewDetailComponent
                 break;
 
             case 'queueManager::queue.detail.create':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.queueService
-                            .create<QueueManagerQueue>({
-                                object: this.fg.value,
-                            }),
+                        this.queueService.create<QueueManagerQueue>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -211,26 +277,22 @@ export class QueueDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['queue-manager/queue']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'queueManager::queue.detail.update':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.queueService
-                            .updateById<QueueManagerQueue>({
-                                object: this.fg.value,
-                            }),
+                        this.queueService.updateById<QueueManagerQueue>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -238,120 +300,133 @@ export class QueueDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['queue-manager/queue']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
 
             /* #region actions to manage jobs grid-elements-manager */
             case 'queueManager::queue.detail.changeTypeJobsPagination':
                 this.currentJobType = action.meta.jobType;
 
                 // reset request pagination
-                this.gridStateService.setPageState(this.jobsGridId, { pageIndex: 0, pageSize: 10 });
+                this.gridStateService.setPageState(this.jobsGridId, {
+                    pageIndex: 0,
+                    pageSize: 10,
+                });
                 // reset grid component pagination
-                this.jobsGridState = { ...this.jobsGridState, page: { pageIndex: 0, pageSize: 10 }};
+                this.jobsGridState = {
+                    ...this.jobsGridState,
+                    page: { pageIndex: 0, pageSize: 10 },
+                };
 
                 this.actionService.action({
-                    id          : 'queueManager::queue.detail.jobsPagination',
+                    id: 'queueManager::queue.detail.jobsPagination',
                     isViewAction: false,
-                    noCache     : true,
+                    noCache: true,
                 });
                 break;
 
             case 'queueManager::queue.detail.jobsPagination':
                 await lastValueFrom(
-                    this.jobService
-                        .pagination({
-                            query: action.meta.query ?
-                                action.meta.query :
-                                QueryStatementHandler
-                                    .init({ columnsConfig: jobColumnsConfig })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.jobsGridId))
-                                    .setSort(this.gridStateService.getSort(this.jobsGridId))
-                                    .setPage(this.gridStateService.getPage(this.jobsGridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.jobsGridId))
-                                    .getQueryStatement(),
-                            constraint: {
-                                where: {
-                                    queueId: this.managedObject.id,
-                                    jobType: this.currentJobType,
-                                },
+                    this.jobService.pagination({
+                        query: action.meta.query
+                            ? action.meta.query
+                            : QueryStatementHandler.init({
+                                  columnsConfig: jobColumnsConfig,
+                              })
+                                  .setColumFilters(
+                                      this.gridFiltersStorageService.getColumnFilterState(
+                                          this.jobsGridId,
+                                      ),
+                                  )
+                                  .setSort(
+                                      this.gridStateService.getSort(
+                                          this.jobsGridId,
+                                      ),
+                                  )
+                                  .setPage(
+                                      this.gridStateService.getPage(
+                                          this.jobsGridId,
+                                      ),
+                                  )
+                                  .setSearch(
+                                      this.gridStateService.getSearchState(
+                                          this.jobsGridId,
+                                      ),
+                                  )
+                                  .getQueryStatement(),
+                        constraint: {
+                            where: {
+                                queueId: this.managedObject().id,
+                                jobType: this.currentJobType,
                             },
-                        }),
+                        },
+                    }),
                 );
                 break;
 
             case 'queueManager::queue.detail.editJob':
                 this.createJobDialogForm();
                 await lastValueFrom(
-                    this.jobService
-                        .findById({
-                            id  : action.meta.row.id,
-                            name: this.managedObject.name,
-                        }),
+                    this.jobService.findById({
+                        id: action.meta.row.id,
+                        name: this.managedObject().name,
+                    }),
                 );
                 this.jobsComponent.handleElementDetailDialog(action.id);
                 break;
 
             case 'queueManager::queue.detail.removeJob':
                 const removeJobDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('Delete')} ${this.translocoService.translate('queueManager.Job')} ${action.meta.row.id}`,
+                    title: `${this.translocoService.translate('Delete')} ${this.translocoService.translate('queueManager.Job')} ${action.meta.row.id}`,
                     message: `${this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('queueManager.Job') })} ${action.meta.row.id}`,
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
+                    icon: {
+                        show: true,
+                        name: 'heroicons_outline:exclamation-triangle',
                         color: 'warn',
                     },
                     actions: {
                         confirm: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Remove'),
                             color: 'warn',
                         },
                         cancel: {
-                            show : true,
+                            show: true,
                             label: this.translocoService.translate('Cancel'),
                         },
                     },
                     dismissible: true,
                 });
 
-                removeJobDialogRef
-                    .afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
-                                await lastValueFrom(
-                                    this.jobService
-                                        .deleteById<QueueManagerJob>({
-                                            id: action.meta.row.id,
-                                            name: this.managedObject.name,
-                                        }),
-                                );
+                removeJobDialogRef.afterClosed().subscribe(async (result) => {
+                    if (result === 'confirmed') {
+                        try {
+                            await lastValueFrom(
+                                this.jobService.deleteById<QueueManagerJob>({
+                                    id: action.meta.row.id,
+                                    name: this.managedObject().name,
+                                }),
+                            );
 
-                                this.actionService.action({
-                                    id          : 'queueManager::queue.detail.jobsPagination',
-                                    isViewAction: false,
-                                });
-                            }
-                            catch(error)
-                            {
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                            }
+                            this.actionService.action({
+                                id: 'queueManager::queue.detail.jobsPagination',
+                                isViewAction: false,
+                            });
+                        } catch (error) {
+                            log(
+                                `[DEBUG] Catch error in ${action.id} action: ${error}`,
+                            );
                         }
-                    });
+                    }
+                });
                 break;
             /* #endregion actions to manage jobs grid-elements-manager */
         }

@@ -3,40 +3,40 @@ import { QueueManagerDeleteQueuesCommandHandler } from '@app/queue-manager/queue
 import { QueueManagerDeleteQueuesService } from '@app/queue-manager/queue/application/delete/queue-manager-delete-queues.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerDeleteQueuesCommandHandler', () =>
-{
+describe('QueueManagerDeleteQueuesCommandHandler', () => {
     let commandHandler: QueueManagerDeleteQueuesCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 QueueManagerDeleteQueuesCommandHandler,
                 {
-                    provide : QueueManagerDeleteQueuesService,
+                    provide: QueueManagerDeleteQueuesService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<QueueManagerDeleteQueuesCommandHandler>(QueueManagerDeleteQueuesCommandHandler);
+        commandHandler = module.get<QueueManagerDeleteQueuesCommandHandler>(
+            QueueManagerDeleteQueuesCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerDeleteQueuesCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerDeleteQueuesCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new QueueManagerDeleteQueuesCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(
+                    new QueueManagerDeleteQueuesCommand(),
+                ),
+            ).toBe(undefined);
         });
     });
 });

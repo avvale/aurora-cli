@@ -9,6 +9,7 @@ export { AuditingHttpCommunicationId } from './auditing-http-communication-id';
 export { AuditingHttpCommunicationIsReprocessing } from './auditing-http-communication-is-reprocessing';
 export { AuditingHttpCommunicationMethod } from './auditing-http-communication-method';
 export { AuditingHttpCommunicationReprocessingHttpCommunicationId } from './auditing-http-communication-reprocessing-http-communication-id';
+export { AuditingHttpCommunicationRowId } from './auditing-http-communication-row-id';
 export { AuditingHttpCommunicationStatus } from './auditing-http-communication-status';
 export { AuditingHttpCommunicationTags } from './auditing-http-communication-tags';
 export { AuditingHttpCommunicationUpdatedAt } from './auditing-http-communication-updated-at';

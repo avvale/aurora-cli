@@ -1,45 +1,51 @@
 import { QueueManagerCreateJobRegistryInput } from '@api/graphql';
-import { QueueManagerCreateJobsRegistryHandler, QueueManagerCreateJobsRegistryResolver } from '@api/queue-manager/job-registry';
+import {
+    QueueManagerCreateJobsRegistryHandler,
+    QueueManagerCreateJobsRegistryResolver,
+} from '@api/queue-manager/job-registry';
 import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerCreateJobsRegistryResolver', () =>
-{
+describe('QueueManagerCreateJobsRegistryResolver', () => {
     let resolver: QueueManagerCreateJobsRegistryResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 QueueManagerCreateJobsRegistryResolver,
                 {
-                    provide : QueueManagerCreateJobsRegistryHandler,
+                    provide: QueueManagerCreateJobsRegistryHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<QueueManagerCreateJobsRegistryResolver>(QueueManagerCreateJobsRegistryResolver);
+        resolver = module.get<QueueManagerCreateJobsRegistryResolver>(
+            QueueManagerCreateJobsRegistryResolver,
+        );
     });
 
-    test('QueueManagerCreateJobsRegistryResolver should be defined', () =>
-    {
+    test('QueueManagerCreateJobsRegistryResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerCreateJobsRegistryResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerCreateJobsRegistryResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an jobsRegistry created', async () =>
-        {
-            expect(await resolver.main(<QueueManagerCreateJobRegistryInput[]>queueManagerMockJobRegistryData)).toBe(undefined);
+        test('should return an jobsRegistry created', async () => {
+            expect(
+                await resolver.main(
+                    <QueueManagerCreateJobRegistryInput[]>(
+                        queueManagerMockJobRegistryData
+                    ),
+                ),
+            ).toBe(undefined);
         });
     });
 });

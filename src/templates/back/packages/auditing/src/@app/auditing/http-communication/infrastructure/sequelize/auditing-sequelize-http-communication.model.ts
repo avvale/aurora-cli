@@ -1,29 +1,32 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { DataTypes } from 'sequelize';
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'AuditingHttpCommunication',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['tags'],
-			unique: false,
-		},
-		{
-			fields: ['reprocessingHttpCommunicationId'],
-			unique: false,
-		},
-		{
-			fields: ['createdAt'],
-			unique: false,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['tags'],
+            unique: false,
+        },
+        {
+            fields: ['reprocessingHttpCommunicationId'],
+            unique: false,
+        },
+        {
+            fields: ['createdAt'],
+            unique: false,
+        },
     ],
 })
-export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicationModel>
-{
+export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicationModel> {
     @Column({
         field: 'id',
         primaryKey: true,
@@ -31,6 +34,14 @@ export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicat
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'tags',
@@ -42,7 +53,12 @@ export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicat
     @Column({
         field: 'event',
         allowNull: false,
-        type: DataTypes.ENUM('REQUEST_FULFILLED','REQUEST_REJECTED','RESPONSE_FULFILLED','RESPONSE_REJECTED'),
+        type: DataTypes.ENUM(
+            'REQUEST_FULFILLED',
+            'REQUEST_REJECTED',
+            'RESPONSE_FULFILLED',
+            'RESPONSE_REJECTED',
+        ),
     })
     event: string;
 
@@ -130,5 +146,4 @@ export class AuditingHttpCommunicationModel extends Model<AuditingHttpCommunicat
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

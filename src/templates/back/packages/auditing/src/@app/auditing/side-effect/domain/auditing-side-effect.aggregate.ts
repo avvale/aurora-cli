@@ -1,5 +1,9 @@
 /* eslint-disable key-spacing */
-import { AuditingCreatedSideEffectEvent, AuditingDeletedSideEffectEvent, AuditingUpdatedSideEffectEvent } from '@app/auditing/side-effect';
+import {
+    AuditingCreatedSideEffectEvent,
+    AuditingDeletedSideEffectEvent,
+    AuditingUpdatedSideEffectEvent,
+} from '@app/auditing/side-effect';
 import {
     AuditingSideEffectAccountId,
     AuditingSideEffectAuditableId,
@@ -22,16 +26,17 @@ import {
     AuditingSideEffectParams,
     AuditingSideEffectQuery,
     AuditingSideEffectRollbackSideEffectId,
+    AuditingSideEffectRowId,
     AuditingSideEffectTags,
     AuditingSideEffectUpdatedAt,
     AuditingSideEffectUserAgent,
 } from '@app/auditing/side-effect/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class AuditingSideEffect extends AggregateRoot
-{
+export class AuditingSideEffect extends AggregateRoot {
     id: AuditingSideEffectId;
+    rowId: AuditingSideEffectRowId;
     tags: AuditingSideEffectTags;
     modelPath: AuditingSideEffectModelPath;
     modelName: AuditingSideEffectModelName;
@@ -58,6 +63,7 @@ export class AuditingSideEffect extends AggregateRoot
 
     constructor(
         id: AuditingSideEffectId,
+        rowId: AuditingSideEffectRowId,
         tags: AuditingSideEffectTags,
         modelPath: AuditingSideEffectModelPath,
         modelName: AuditingSideEffectModelName,
@@ -81,10 +87,10 @@ export class AuditingSideEffect extends AggregateRoot
         createdAt: AuditingSideEffectCreatedAt,
         updatedAt: AuditingSideEffectUpdatedAt,
         deletedAt: AuditingSideEffectDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.tags = tags;
         this.modelPath = modelPath;
         this.modelName = modelName;
@@ -112,6 +118,7 @@ export class AuditingSideEffect extends AggregateRoot
 
     static register(
         id: AuditingSideEffectId,
+        rowId: AuditingSideEffectRowId,
         tags: AuditingSideEffectTags,
         modelPath: AuditingSideEffectModelPath,
         modelName: AuditingSideEffectModelName,
@@ -135,10 +142,10 @@ export class AuditingSideEffect extends AggregateRoot
         createdAt: AuditingSideEffectCreatedAt,
         updatedAt: AuditingSideEffectUpdatedAt,
         deletedAt: AuditingSideEffectDeletedAt,
-    ): AuditingSideEffect
-    {
+    ): AuditingSideEffect {
         return new AuditingSideEffect(
             id,
+            rowId,
             tags,
             modelPath,
             modelName,
@@ -165,106 +172,125 @@ export class AuditingSideEffect extends AggregateRoot
         );
     }
 
-    created(sideEffect: AuditingSideEffect): void
-    {
+    created(event: {
+        payload: AuditingSideEffect;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new AuditingCreatedSideEffectEvent(
-                sideEffect.id.value,
-                sideEffect.tags?.value,
-                sideEffect.modelPath.value,
-                sideEffect.modelName.value,
-                sideEffect.operationId?.value,
-                sideEffect.operationSort?.value,
-                sideEffect.accountId.value,
-                sideEffect.email.value,
-                sideEffect.event.value,
-                sideEffect.auditableId?.value,
-                sideEffect.oldValue?.value,
-                sideEffect.newValue?.value,
-                sideEffect.ip?.value,
-                sideEffect.method?.value,
-                sideEffect.baseUrl?.value,
-                sideEffect.params?.value,
-                sideEffect.query?.value,
-                sideEffect.body?.value,
-                sideEffect.userAgent?.value,
-                sideEffect.isRollback.value,
-                sideEffect.rollbackSideEffectId?.value,
-                sideEffect.createdAt?.value,
-                sideEffect.updatedAt?.value,
-                sideEffect.deletedAt?.value,
-            ),
+            new AuditingCreatedSideEffectEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    tags: event.payload.tags?.value,
+                    modelPath: event.payload.modelPath.value,
+                    modelName: event.payload.modelName.value,
+                    operationId: event.payload.operationId?.value,
+                    operationSort: event.payload.operationSort?.value,
+                    accountId: event.payload.accountId.value,
+                    email: event.payload.email.value,
+                    event: event.payload.event.value,
+                    auditableId: event.payload.auditableId?.value,
+                    oldValue: event.payload.oldValue?.value,
+                    newValue: event.payload.newValue?.value,
+                    ip: event.payload.ip?.value,
+                    method: event.payload.method?.value,
+                    baseUrl: event.payload.baseUrl?.value,
+                    params: event.payload.params?.value,
+                    query: event.payload.query?.value,
+                    body: event.payload.body?.value,
+                    userAgent: event.payload.userAgent?.value,
+                    isRollback: event.payload.isRollback.value,
+                    rollbackSideEffectId:
+                        event.payload.rollbackSideEffectId?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(sideEffect: AuditingSideEffect): void
-    {
+    updated(event: {
+        payload: AuditingSideEffect;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new AuditingUpdatedSideEffectEvent(
-                sideEffect.id?.value,
-                sideEffect.tags?.value,
-                sideEffect.modelPath?.value,
-                sideEffect.modelName?.value,
-                sideEffect.operationId?.value,
-                sideEffect.operationSort?.value,
-                sideEffect.accountId?.value,
-                sideEffect.email?.value,
-                sideEffect.event?.value,
-                sideEffect.auditableId?.value,
-                sideEffect.oldValue?.value,
-                sideEffect.newValue?.value,
-                sideEffect.ip?.value,
-                sideEffect.method?.value,
-                sideEffect.baseUrl?.value,
-                sideEffect.params?.value,
-                sideEffect.query?.value,
-                sideEffect.body?.value,
-                sideEffect.userAgent?.value,
-                sideEffect.isRollback?.value,
-                sideEffect.rollbackSideEffectId?.value,
-                sideEffect.createdAt?.value,
-                sideEffect.updatedAt?.value,
-                sideEffect.deletedAt?.value,
-            ),
+            new AuditingUpdatedSideEffectEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    tags: event.payload.tags?.value,
+                    modelPath: event.payload.modelPath?.value,
+                    modelName: event.payload.modelName?.value,
+                    operationId: event.payload.operationId?.value,
+                    operationSort: event.payload.operationSort?.value,
+                    accountId: event.payload.accountId?.value,
+                    email: event.payload.email?.value,
+                    event: event.payload.event?.value,
+                    auditableId: event.payload.auditableId?.value,
+                    oldValue: event.payload.oldValue?.value,
+                    newValue: event.payload.newValue?.value,
+                    ip: event.payload.ip?.value,
+                    method: event.payload.method?.value,
+                    baseUrl: event.payload.baseUrl?.value,
+                    params: event.payload.params?.value,
+                    query: event.payload.query?.value,
+                    body: event.payload.body?.value,
+                    userAgent: event.payload.userAgent?.value,
+                    isRollback: event.payload.isRollback?.value,
+                    rollbackSideEffectId:
+                        event.payload.rollbackSideEffectId?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(sideEffect: AuditingSideEffect): void
-    {
+    deleted(event: {
+        payload: AuditingSideEffect;
+        cQMetadata?: CQMetadata;
+    }): void {
         this.apply(
-            new AuditingDeletedSideEffectEvent(
-                sideEffect.id.value,
-                sideEffect.tags?.value,
-                sideEffect.modelPath.value,
-                sideEffect.modelName.value,
-                sideEffect.operationId?.value,
-                sideEffect.operationSort?.value,
-                sideEffect.accountId.value,
-                sideEffect.email.value,
-                sideEffect.event.value,
-                sideEffect.auditableId?.value,
-                sideEffect.oldValue?.value,
-                sideEffect.newValue?.value,
-                sideEffect.ip?.value,
-                sideEffect.method?.value,
-                sideEffect.baseUrl?.value,
-                sideEffect.params?.value,
-                sideEffect.query?.value,
-                sideEffect.body?.value,
-                sideEffect.userAgent?.value,
-                sideEffect.isRollback.value,
-                sideEffect.rollbackSideEffectId?.value,
-                sideEffect.createdAt?.value,
-                sideEffect.updatedAt?.value,
-                sideEffect.deletedAt?.value,
-            ),
+            new AuditingDeletedSideEffectEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
+                    tags: event.payload.tags?.value,
+                    modelPath: event.payload.modelPath.value,
+                    modelName: event.payload.modelName.value,
+                    operationId: event.payload.operationId?.value,
+                    operationSort: event.payload.operationSort?.value,
+                    accountId: event.payload.accountId.value,
+                    email: event.payload.email.value,
+                    event: event.payload.event.value,
+                    auditableId: event.payload.auditableId?.value,
+                    oldValue: event.payload.oldValue?.value,
+                    newValue: event.payload.newValue?.value,
+                    ip: event.payload.ip?.value,
+                    method: event.payload.method?.value,
+                    baseUrl: event.payload.baseUrl?.value,
+                    params: event.payload.params?.value,
+                    query: event.payload.query?.value,
+                    body: event.payload.body?.value,
+                    userAgent: event.payload.userAgent?.value,
+                    isRollback: event.payload.isRollback.value,
+                    rollbackSideEffectId:
+                        event.payload.rollbackSideEffectId?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             tags: this.tags?.value,
             modelPath: this.modelPath.value,
             modelName: this.modelName.value,
@@ -292,8 +318,7 @@ export class AuditingSideEffect extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             tags: this.tags?.value,

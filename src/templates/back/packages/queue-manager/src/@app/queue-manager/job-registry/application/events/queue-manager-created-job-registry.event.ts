@@ -1,14 +1,20 @@
-export class QueueManagerCreatedJobRegistryEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class QueueManagerCreatedJobRegistryEvent {
     constructor(
-        public readonly id: string,
-        public readonly queueName: string,
-        public readonly state: string,
-        public readonly jobId: string,
-        public readonly jobName: string,
-        public readonly tags: string[],
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                queueName: string;
+                state: string;
+                jobId: string;
+                jobName: string;
+                tags: string[];
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

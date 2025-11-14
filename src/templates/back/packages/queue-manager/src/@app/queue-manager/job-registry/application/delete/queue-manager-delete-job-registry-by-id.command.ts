@@ -1,8 +1,6 @@
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class QueueManagerDeleteJobRegistryByIdCommand
-{
+export class QueueManagerDeleteJobRegistryByIdCommand {
     constructor(
         public readonly id: string,
         public readonly constraint?: QueryStatement,

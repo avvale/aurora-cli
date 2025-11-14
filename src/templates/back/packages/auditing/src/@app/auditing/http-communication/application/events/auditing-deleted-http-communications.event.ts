@@ -1,8 +1,11 @@
-import { AuditingDeletedHttpCommunicationEvent } from './auditing-deleted-http-communication.event';
+import { AuditingDeletedHttpCommunicationEvent } from '@app/auditing/http-communication';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class AuditingDeletedHttpCommunicationsEvent
-{
+export class AuditingDeletedHttpCommunicationsEvent {
     constructor(
-        public readonly httpCommunications: AuditingDeletedHttpCommunicationEvent[],
+        public readonly event: {
+            payload: AuditingDeletedHttpCommunicationEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

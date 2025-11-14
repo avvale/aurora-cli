@@ -1,45 +1,50 @@
-import { QueueManagerFindQueueController, QueueManagerFindQueueHandler } from '@api/queue-manager/queue';
+import {
+    QueueManagerFindQueueController,
+    QueueManagerFindQueueHandler,
+} from '@api/queue-manager/queue';
 import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerFindQueueController', () =>
-{
+describe('QueueManagerFindQueueController', () => {
     let controller: QueueManagerFindQueueController;
     let handler: QueueManagerFindQueueHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                QueueManagerFindQueueController,
-            ],
+            imports: [],
+            controllers: [QueueManagerFindQueueController],
             providers: [
                 {
-                    provide : QueueManagerFindQueueHandler,
+                    provide: QueueManagerFindQueueHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<QueueManagerFindQueueController>(QueueManagerFindQueueController);
-        handler = module.get<QueueManagerFindQueueHandler>(QueueManagerFindQueueHandler);
+        controller = module.get<QueueManagerFindQueueController>(
+            QueueManagerFindQueueController,
+        );
+        handler = module.get<QueueManagerFindQueueHandler>(
+            QueueManagerFindQueueHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerFindQueueController should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerFindQueueController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a queue', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
+        test('should return a queue', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockQueueData[0]),
+                    ),
+            );
             expect(await controller.main()).toBe(queueManagerMockQueueData[0]);
         });
     });

@@ -1,11 +1,13 @@
-import { AuditingAddSideEffectsContextEvent, AuditingISideEffectRepository, AuditingSideEffect } from '@app/auditing/side-effect';
+import {
+    AuditingAddSideEffectsContextEvent,
+    AuditingISideEffectRepository,
+    AuditingSideEffect,
+} from '@app/auditing/side-effect';
 import {
     AuditingSideEffectAccountId,
     AuditingSideEffectAuditableId,
     AuditingSideEffectBaseUrl,
     AuditingSideEffectBody,
-    AuditingSideEffectCreatedAt,
-    AuditingSideEffectDeletedAt,
     AuditingSideEffectEmail,
     AuditingSideEffectEvent,
     AuditingSideEffectId,
@@ -30,8 +32,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class AuditingUpdateSideEffectsService
-{
+export class AuditingUpdateSideEffectsService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: AuditingISideEffectRepository,
@@ -64,11 +65,11 @@ export class AuditingUpdateSideEffectsService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const sideEffect = AuditingSideEffect.register(
             payload.id,
+            undefined, // rowId
             payload.tags,
             payload.modelPath,
             payload.modelName,
@@ -95,28 +96,23 @@ export class AuditingUpdateSideEffectsService
         );
 
         // update
-        await this.repository.update(
-            sideEffect,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(sideEffect, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const sideEffects = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const sideEffects = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const sideEffectsRegister = this.publisher.mergeObjectContext(
-            new AuditingAddSideEffectsContextEvent(sideEffects),
+            new AuditingAddSideEffectsContextEvent(sideEffects, cQMetadata),
         );
 
         sideEffectsRegister.updated(); // apply event to model events

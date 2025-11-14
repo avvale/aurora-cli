@@ -1,51 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { QueueManagerUpdateQueueByIdInput } from '@api/graphql';
-import { QueueManagerUpdateQueueByIdHandler, QueueManagerUpdateQueueByIdResolver } from '@api/queue-manager/queue';
+import {
+    QueueManagerUpdateQueueByIdHandler,
+    QueueManagerUpdateQueueByIdResolver,
+} from '@api/queue-manager/queue';
 import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerUpdateQueueByIdResolver', () =>
-{
+describe('QueueManagerUpdateQueueByIdResolver', () => {
     let resolver: QueueManagerUpdateQueueByIdResolver;
     let handler: QueueManagerUpdateQueueByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerUpdateQueueByIdResolver,
                 {
-                    provide : QueueManagerUpdateQueueByIdHandler,
+                    provide: QueueManagerUpdateQueueByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<QueueManagerUpdateQueueByIdResolver>(QueueManagerUpdateQueueByIdResolver);
-        handler = module.get<QueueManagerUpdateQueueByIdHandler>(QueueManagerUpdateQueueByIdHandler);
+        resolver = module.get<QueueManagerUpdateQueueByIdResolver>(
+            QueueManagerUpdateQueueByIdResolver,
+        );
+        handler = module.get<QueueManagerUpdateQueueByIdHandler>(
+            QueueManagerUpdateQueueByIdHandler,
+        );
     });
 
-    test('QueueManagerUpdateQueueByIdResolver should be defined', () =>
-    {
+    test('QueueManagerUpdateQueueByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerUpdateQueueByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerUpdateQueueByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a queue by id updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
-            expect(await resolver.main(<QueueManagerUpdateQueueByIdInput>queueManagerMockQueueData[0])).toBe(queueManagerMockQueueData[0]);
+        test('should return a queue by id updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockQueueData[0]),
+                    ),
+            );
+            expect(
+                await resolver.main(
+                    <QueueManagerUpdateQueueByIdInput>(
+                        queueManagerMockQueueData[0]
+                    ),
+                ),
+            ).toBe(queueManagerMockQueueData[0]);
         });
     });
 });

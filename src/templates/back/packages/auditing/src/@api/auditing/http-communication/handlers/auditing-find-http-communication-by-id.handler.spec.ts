@@ -4,55 +4,55 @@ import { auditingMockHttpCommunicationData } from '@app/auditing/http-communicat
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingFindHttpCommunicationByIdHandler', () =>
-{
+describe('AuditingFindHttpCommunicationByIdHandler', () => {
     let handler: AuditingFindHttpCommunicationByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 AuditingFindHttpCommunicationByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<AuditingFindHttpCommunicationByIdHandler>(AuditingFindHttpCommunicationByIdHandler);
+        handler = module.get<AuditingFindHttpCommunicationByIdHandler>(
+            AuditingFindHttpCommunicationByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('AuditingFindHttpCommunicationByIdHandler should be defined', () =>
-    {
+    test('AuditingFindHttpCommunicationByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('AuditingFindHttpCommunicationByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingFindHttpCommunicationByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an httpCommunication by id', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+        test('should return an httpCommunication by id', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(auditingMockHttpCommunicationData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     auditingMockHttpCommunicationData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(auditingMockHttpCommunicationData[0]);
+            ).toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

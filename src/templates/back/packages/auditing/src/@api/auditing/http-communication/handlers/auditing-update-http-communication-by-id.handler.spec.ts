@@ -5,60 +5,65 @@ import { auditingMockHttpCommunicationData } from '@app/auditing/http-communicat
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingUpdateHttpCommunicationByIdHandler', () =>
-{
+describe('AuditingUpdateHttpCommunicationByIdHandler', () => {
     let handler: AuditingUpdateHttpCommunicationByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 AuditingUpdateHttpCommunicationByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<AuditingUpdateHttpCommunicationByIdHandler>(AuditingUpdateHttpCommunicationByIdHandler);
+        handler = module.get<AuditingUpdateHttpCommunicationByIdHandler>(
+            AuditingUpdateHttpCommunicationByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('AuditingUpdateHttpCommunicationByIdHandler should be defined', () =>
-    {
+    test('AuditingUpdateHttpCommunicationByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('AuditingUpdateHttpCommunicationByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingUpdateHttpCommunicationByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a httpCommunication updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData[0])));
+        test('should return a httpCommunication updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(auditingMockHttpCommunicationData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
-                    <AuditingUpdateHttpCommunicationByIdInput>auditingMockHttpCommunicationData[0],
+                    <AuditingUpdateHttpCommunicationByIdInput>(
+                        auditingMockHttpCommunicationData[0]
+                    ),
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(auditingMockHttpCommunicationData[0]);
+                ),
+            ).toBe(auditingMockHttpCommunicationData[0]);
         });
     });
 });

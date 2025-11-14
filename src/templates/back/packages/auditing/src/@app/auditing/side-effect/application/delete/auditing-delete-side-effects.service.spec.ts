@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AuditingISideEffectRepository, AuditingMockSideEffectRepository } from '@app/auditing/side-effect';
+import {
+    AuditingISideEffectRepository,
+    AuditingMockSideEffectRepository,
+} from '@app/auditing/side-effect';
 import { AuditingDeleteSideEffectsService } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effects.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingDeleteSideEffectsService', () =>
-{
+describe('AuditingDeleteSideEffectsService', () => {
     let service: AuditingDeleteSideEffectsService;
     let repository: AuditingISideEffectRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,37 +26,33 @@ describe('AuditingDeleteSideEffectsService', () =>
                 AuditingDeleteSideEffectsService,
                 AuditingMockSideEffectRepository,
                 {
-                    provide : AuditingISideEffectRepository,
+                    provide: AuditingISideEffectRepository,
                     useValue: {
-                        get   : () => { /**/ },
-                        delete: () => { /**/ },
+                        get: () => {
+                            /**/
+                        },
+                        delete: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(AuditingDeleteSideEffectsService);
         repository = module.get(AuditingISideEffectRepository);
     });
 
-    describe('main', () =>
-    {
-        test('AuditingDeleteSideEffectsService should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingDeleteSideEffectsService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should delete sideEffect and emit event', async () =>
-        {
-            jest.spyOn(repository, 'get').mockImplementation(() => new Promise(resolve => resolve([])));
-            expect(
-                await service.main(
-                    {},
-                    {},
-                ),
-            )
-                .toBe(undefined);
+        test('should delete sideEffect and emit event', async () => {
+            jest.spyOn(repository, 'get').mockImplementation(
+                () => new Promise((resolve) => resolve([])),
+            );
+            expect(await service.main({}, {})).toBe(undefined);
         });
     });
 });

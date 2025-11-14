@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { AuditingRollbackSideEffectHandler } from '../handlers/auditing-rollback-side-effect.handler';
 import { AuditingRollbackSideEffectController } from './auditing-rollback-side-effect.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingRollbackSideEffectController', () =>
-{
+describe('AuditingRollbackSideEffectController', () => {
     let controller: AuditingRollbackSideEffectController;
     let handler: AuditingRollbackSideEffectHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                AuditingRollbackSideEffectController,
-            ],
+            imports: [],
+            controllers: [AuditingRollbackSideEffectController],
             providers: [
                 {
-                    provide : AuditingRollbackSideEffectHandler,
+                    provide: AuditingRollbackSideEffectHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<AuditingRollbackSideEffectController>(AuditingRollbackSideEffectController);
-        handler = module.get<AuditingRollbackSideEffectHandler>(AuditingRollbackSideEffectHandler);
+        controller = module.get<AuditingRollbackSideEffectController>(
+            AuditingRollbackSideEffectController,
+        );
+        handler = module.get<AuditingRollbackSideEffectHandler>(
+            AuditingRollbackSideEffectHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingRollbackSideEffectController should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingRollbackSideEffectController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

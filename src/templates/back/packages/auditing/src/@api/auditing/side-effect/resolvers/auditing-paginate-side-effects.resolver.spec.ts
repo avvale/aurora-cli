@@ -1,57 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AuditingPaginateSideEffectsHandler, AuditingPaginateSideEffectsResolver } from '@api/auditing/side-effect';
+import {
+    AuditingPaginateSideEffectsHandler,
+    AuditingPaginateSideEffectsResolver,
+} from '@api/auditing/side-effect';
 import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingPaginateSideEffectsResolver', () =>
-{
+describe('AuditingPaginateSideEffectsResolver', () => {
     let resolver: AuditingPaginateSideEffectsResolver;
     let handler: AuditingPaginateSideEffectsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 AuditingPaginateSideEffectsResolver,
                 {
-                    provide : AuditingPaginateSideEffectsHandler,
+                    provide: AuditingPaginateSideEffectsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<AuditingPaginateSideEffectsResolver>(AuditingPaginateSideEffectsResolver);
-        handler = module.get<AuditingPaginateSideEffectsHandler>(AuditingPaginateSideEffectsHandler);
+        resolver = module.get<AuditingPaginateSideEffectsResolver>(
+            AuditingPaginateSideEffectsResolver,
+        );
+        handler = module.get<AuditingPaginateSideEffectsHandler>(
+            AuditingPaginateSideEffectsHandler,
+        );
     });
 
-    test('AuditingPaginateSideEffectsResolver should be defined', () =>
-    {
+    test('AuditingPaginateSideEffectsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('AuditingPaginateSideEffectsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingPaginateSideEffectsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a auditingMockSideEffectData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : auditingMockSideEffectData,
-            })));
+        test('should return a auditingMockSideEffectData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: auditingMockSideEffectData,
+                        }),
+                    ),
+            );
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : auditingMockSideEffectData,
+                rows: auditingMockSideEffectData,
             });
         });
     });

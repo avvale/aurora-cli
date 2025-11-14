@@ -1,47 +1,54 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { QueueManagerDeleteJobRegistryByIdController, QueueManagerDeleteJobRegistryByIdHandler } from '@api/queue-manager/job-registry';
+import {
+    QueueManagerDeleteJobRegistryByIdController,
+    QueueManagerDeleteJobRegistryByIdHandler,
+} from '@api/queue-manager/job-registry';
 import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerDeleteJobRegistryByIdController', () =>
-{
+describe('QueueManagerDeleteJobRegistryByIdController', () => {
     let controller: QueueManagerDeleteJobRegistryByIdController;
     let handler: QueueManagerDeleteJobRegistryByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                QueueManagerDeleteJobRegistryByIdController,
-            ],
+            imports: [],
+            controllers: [QueueManagerDeleteJobRegistryByIdController],
             providers: [
                 {
-                    provide : QueueManagerDeleteJobRegistryByIdHandler,
+                    provide: QueueManagerDeleteJobRegistryByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<QueueManagerDeleteJobRegistryByIdController>(QueueManagerDeleteJobRegistryByIdController);
-        handler = module.get<QueueManagerDeleteJobRegistryByIdHandler>(QueueManagerDeleteJobRegistryByIdHandler);
+        controller = module.get<QueueManagerDeleteJobRegistryByIdController>(
+            QueueManagerDeleteJobRegistryByIdController,
+        );
+        handler = module.get<QueueManagerDeleteJobRegistryByIdHandler>(
+            QueueManagerDeleteJobRegistryByIdHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerDeleteJobRegistryByIdController should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerDeleteJobRegistryByIdController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an jobRegistry deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
-            expect(await controller.main(queueManagerMockJobRegistryData[0].id)).toBe(queueManagerMockJobRegistryData[0]);
+        test('should return an jobRegistry deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockJobRegistryData[0]),
+                    ),
+            );
+            expect(
+                await controller.main(queueManagerMockJobRegistryData[0].id),
+            ).toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

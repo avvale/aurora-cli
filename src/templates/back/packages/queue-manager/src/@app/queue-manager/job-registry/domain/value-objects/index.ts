@@ -4,6 +4,7 @@ export { QueueManagerJobRegistryId } from './queue-manager-job-registry-id';
 export { QueueManagerJobRegistryJobId } from './queue-manager-job-registry-job-id';
 export { QueueManagerJobRegistryJobName } from './queue-manager-job-registry-job-name';
 export { QueueManagerJobRegistryQueueName } from './queue-manager-job-registry-queue-name';
+export { QueueManagerJobRegistryRowId } from './queue-manager-job-registry-row-id';
 export { QueueManagerJobRegistryState } from './queue-manager-job-registry-state';
 export { QueueManagerJobRegistryTags } from './queue-manager-job-registry-tags';
 export { QueueManagerJobRegistryUpdatedAt } from './queue-manager-job-registry-updated-at';

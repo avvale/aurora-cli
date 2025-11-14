@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class QueueManagerCreateQueueCommand
-{
+export class QueueManagerCreateQueueCommand {
     constructor(
         public readonly payload: {
             id: string;

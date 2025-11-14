@@ -4,55 +4,51 @@ import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerFindQueueHandler', () =>
-{
+describe('QueueManagerFindQueueHandler', () => {
     let handler: QueueManagerFindQueueHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerFindQueueHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<QueueManagerFindQueueHandler>(QueueManagerFindQueueHandler);
+        handler = module.get<QueueManagerFindQueueHandler>(
+            QueueManagerFindQueueHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('QueueManagerFindQueueHandler should be defined', () =>
-    {
+    test('QueueManagerFindQueueHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerFindQueueHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerFindQueueHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a queue', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockQueueData[0])));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(queueManagerMockQueueData[0]);
+        test('should return a queue', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockQueueData[0]),
+                    ),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                queueManagerMockQueueData[0],
+            );
         });
     });
 });

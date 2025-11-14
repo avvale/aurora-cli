@@ -1,51 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { QueueManagerUpdateJobsRegistryInput } from '@api/graphql';
-import { QueueManagerUpdateJobsRegistryHandler, QueueManagerUpdateJobsRegistryResolver } from '@api/queue-manager/job-registry';
+import {
+    QueueManagerUpdateJobsRegistryHandler,
+    QueueManagerUpdateJobsRegistryResolver,
+} from '@api/queue-manager/job-registry';
 import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerUpdateJobsRegistryResolver', () =>
-{
+describe('QueueManagerUpdateJobsRegistryResolver', () => {
     let resolver: QueueManagerUpdateJobsRegistryResolver;
     let handler: QueueManagerUpdateJobsRegistryHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerUpdateJobsRegistryResolver,
                 {
-                    provide : QueueManagerUpdateJobsRegistryHandler,
+                    provide: QueueManagerUpdateJobsRegistryHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<QueueManagerUpdateJobsRegistryResolver>(QueueManagerUpdateJobsRegistryResolver);
-        handler = module.get<QueueManagerUpdateJobsRegistryHandler>(QueueManagerUpdateJobsRegistryHandler);
+        resolver = module.get<QueueManagerUpdateJobsRegistryResolver>(
+            QueueManagerUpdateJobsRegistryResolver,
+        );
+        handler = module.get<QueueManagerUpdateJobsRegistryHandler>(
+            QueueManagerUpdateJobsRegistryHandler,
+        );
     });
 
-    test('QueueManagerUpdateJobsRegistryResolver should be defined', () =>
-    {
+    test('QueueManagerUpdateJobsRegistryResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerUpdateJobsRegistryResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerUpdateJobsRegistryResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a jobsRegistry updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
-            expect(await resolver.main(<QueueManagerUpdateJobsRegistryInput>queueManagerMockJobRegistryData[0])).toBe(queueManagerMockJobRegistryData[0]);
+        test('should return a jobsRegistry updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockJobRegistryData[0]),
+                    ),
+            );
+            expect(
+                await resolver.main(
+                    <QueueManagerUpdateJobsRegistryInput>(
+                        queueManagerMockJobRegistryData[0]
+                    ),
+                ),
+            ).toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

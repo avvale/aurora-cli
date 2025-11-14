@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class AuditingUpdateHttpCommunicationsCommand
-{
+export class AuditingUpdateHttpCommunicationsCommand {
     constructor(
         public readonly payload: {
             id?: string;

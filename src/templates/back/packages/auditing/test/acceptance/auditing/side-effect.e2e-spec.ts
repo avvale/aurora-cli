@@ -4,7 +4,11 @@
 import { AuditingModule } from '@api/auditing/auditing.module';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { AuditingISideEffectRepository, auditingMockSideEffectData, AuditingMockSideEffectSeeder } from '@app/auditing/side-effect';
+import {
+    AuditingISideEffectRepository,
+    auditingMockSideEffectData,
+    AuditingMockSideEffectSeeder,
+} from '@app/auditing/side-effect';
 import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -16,8 +20,7 @@ import * as request from 'supertest';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('side-effect', () =>
-{
+describe('side-effect', () => {
     let app: INestApplication;
     let sideEffectRepository: AuditingISideEffectRepository;
     let sideEffectSeeder: AuditingMockSideEffectSeeder;
@@ -28,37 +31,41 @@ describe('side-effect', () =>
     // set timeout to 60s by default are 5s
     jest.setTimeout(60000);
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
                 AuditingModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
-                    imports   : [ConfigModule],
-                    inject    : [ConfigService],
-                    useFactory: (configService: ConfigService) =>
-                    {
+                    imports: [ConfigModule],
+                    inject: [ConfigService],
+                    useFactory: (configService: ConfigService) => {
                         return {
-                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
-                            storage       : configService.get('TEST_DATABASE_STORAGE'),
-                            host          : configService.get('TEST_DATABASE_HOST'),
-                            port          : +configService.get('TEST_DATABASE_PORT'),
-                            username      : configService.get('TEST_DATABASE_USER'),
-                            password      : configService.get('TEST_DATABASE_PASSWORD'),
-                            database      : configService.get('TEST_DATABASE_SCHEMA'),
-                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
-                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            dialect: configService.get('TEST_DATABASE_DIALECT'),
+                            storage: configService.get('TEST_DATABASE_STORAGE'),
+                            host: configService.get('TEST_DATABASE_HOST'),
+                            port: +configService.get('TEST_DATABASE_PORT'),
+                            username: configService.get('TEST_DATABASE_USER'),
+                            password: configService.get(
+                                'TEST_DATABASE_PASSWORD',
+                            ),
+                            database: configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize: configService.get(
+                                'TEST_DATABASE_SYNCHRONIZE',
+                            ),
+                            logging:
+                                configService.get('TEST_DATABASE_LOGGIN') ===
+                                'true'
+                                    ? console.log
+                                    : false,
                             autoLoadModels: true,
-                            models        : [],
+                            models: [],
                         };
                     },
                 }),
             ],
-            providers: [
-                AuditingMockSideEffectSeeder,
-            ],
+            providers: [AuditingMockSideEffectSeeder],
         })
             .overrideGuard(AuthenticationJwtGuard)
             .useValue({ canActivate: () => true })
@@ -68,8 +75,12 @@ describe('side-effect', () =>
 
         mockData = auditingMockSideEffectData;
         app = module.createNestApplication();
-        sideEffectRepository = module.get<AuditingISideEffectRepository>(AuditingISideEffectRepository);
-        sideEffectSeeder = module.get<AuditingMockSideEffectSeeder>(AuditingMockSideEffectSeeder);
+        sideEffectRepository = module.get<AuditingISideEffectRepository>(
+            AuditingISideEffectRepository,
+        );
+        sideEffectSeeder = module.get<AuditingMockSideEffectSeeder>(
+            AuditingMockSideEffectSeeder,
+        );
 
         // seed mock data in memory database
         await sideEffectRepository.insert(sideEffectSeeder.collectionSource);
@@ -77,8 +88,7 @@ describe('side-effect', () =>
         await app.init();
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectId property can not to be null', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -87,14 +97,30 @@ describe('side-effect', () =>
                 id: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelPath property can not to be null', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectRowId property can not to be null', () => {
+        return request(app.getHttpServer())
+            .post('/auditing/side-effect/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: null,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectRowId must be defined, can not be null',
+                );
+            });
+    });
+
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelPath property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -103,14 +129,14 @@ describe('side-effect', () =>
                 modelPath: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectModelPath must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectModelPath must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelName property can not to be null', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelName property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -119,14 +145,14 @@ describe('side-effect', () =>
                 modelName: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectModelName must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectModelName must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectAccountId property can not to be null', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectAccountId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -135,14 +161,14 @@ describe('side-effect', () =>
                 accountId: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectAccountId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectAccountId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEmail property can not to be null', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEmail property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -151,14 +177,14 @@ describe('side-effect', () =>
                 email: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectEmail must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectEmail must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEvent property can not to be null', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEvent property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -167,14 +193,14 @@ describe('side-effect', () =>
                 event: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectEvent must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectEvent must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIsRollback property can not to be null', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIsRollback property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -183,14 +209,14 @@ describe('side-effect', () =>
                 isRollback: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectIsRollback must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectIsRollback must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectId property can not to be undefined', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -199,14 +225,30 @@ describe('side-effect', () =>
                 id: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelPath property can not to be undefined', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectRowId property can not to be undefined', () => {
+        return request(app.getHttpServer())
+            .post('/auditing/side-effect/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: undefined,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectRowId must be defined, can not be undefined',
+                );
+            });
+    });
+
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelPath property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -215,14 +257,14 @@ describe('side-effect', () =>
                 modelPath: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectModelPath must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectModelPath must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelName property can not to be undefined', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelName property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -231,14 +273,14 @@ describe('side-effect', () =>
                 modelName: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectModelName must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectModelName must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectAccountId property can not to be undefined', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectAccountId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -247,14 +289,14 @@ describe('side-effect', () =>
                 accountId: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectAccountId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectAccountId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEmail property can not to be undefined', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEmail property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -263,14 +305,14 @@ describe('side-effect', () =>
                 email: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectEmail must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectEmail must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEvent property can not to be undefined', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEvent property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -279,14 +321,14 @@ describe('side-effect', () =>
                 event: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectEvent must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectEvent must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIsRollback property can not to be undefined', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIsRollback property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -295,14 +337,14 @@ describe('side-effect', () =>
                 isRollback: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectIsRollback must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectIsRollback must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -311,14 +353,14 @@ describe('side-effect', () =>
                 id: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectOperationId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectOperationId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -327,14 +369,14 @@ describe('side-effect', () =>
                 operationId: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectOperationId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectOperationId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectAccountId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectAccountId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -343,14 +385,14 @@ describe('side-effect', () =>
                 accountId: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectAccountId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectAccountId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectAuditableId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectAuditableId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -359,14 +401,14 @@ describe('side-effect', () =>
                 auditableId: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectAuditableId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectAuditableId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectRollbackSideEffectId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectRollbackSideEffectId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -375,46 +417,48 @@ describe('side-effect', () =>
                 rollbackSideEffectId: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectRollbackSideEffectId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectRollbackSideEffectId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelPath is too large, has a maximum length of 1022', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelPath is too large, has a maximum length of 1022', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                modelPath: '***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                modelPath:
+                    '***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectModelPath is too large, has a maximum length of 1022');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectModelPath is too large, has a maximum length of 1022',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelName is too large, has a maximum length of 255', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectModelName is too large, has a maximum length of 255', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                modelName: '****************************************************************************************************************************************************************************************************************************************************************',
+                modelName:
+                    '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectModelName is too large, has a maximum length of 255');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectModelName is too large, has a maximum length of 255',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEmail is too large, has a maximum length of 127', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEmail is too large, has a maximum length of 127', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -423,14 +467,14 @@ describe('side-effect', () =>
                 email: '********************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectEmail is too large, has a maximum length of 127');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectEmail is too large, has a maximum length of 127',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIp is too large, has a maximum length of 19', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIp is too large, has a maximum length of 19', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -439,46 +483,48 @@ describe('side-effect', () =>
                 ip: '********************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectIp is too large, has a maximum length of 19');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectIp is too large, has a maximum length of 19',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectBaseUrl is too large, has a maximum length of 2046', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectBaseUrl is too large, has a maximum length of 2046', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                baseUrl: '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                baseUrl:
+                    '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectBaseUrl is too large, has a maximum length of 2046');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectBaseUrl is too large, has a maximum length of 2046',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectUserAgent is too large, has a maximum length of 1022', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectUserAgent is too large, has a maximum length of 1022', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                userAgent: '***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+                userAgent:
+                    '***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectUserAgent is too large, has a maximum length of 1022');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectUserAgent is too large, has a maximum length of 1022',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIsRollback has to be a boolean value', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectIsRollback has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -487,13 +533,13 @@ describe('side-effect', () =>
                 isRollback: 'true',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectIsRollback has to be a boolean value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectIsRollback has to be a boolean value',
+                );
             });
     });
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEvent has to be a enum option of CREATED, BULK_CREATED, UPDATED, BULK_UPDATED, DELETED, BULK_DELETED, RESTORED, BULK_RESTORED, UPSERTED', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectEvent has to be a enum option of CREATED, BULK_CREATED, UPDATED, BULK_UPDATED, DELETED, BULK_DELETED, RESTORED, BULK_RESTORED, UPSERTED', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -502,13 +548,13 @@ describe('side-effect', () =>
                 event: '****',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectEvent has to be any of this options: CREATED, BULK_CREATED, UPDATED, BULK_UPDATED, DELETED, BULK_DELETED, RESTORED, BULK_RESTORED, UPSERTED');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectEvent has to be any of this options: CREATED, BULK_CREATED, UPDATED, BULK_UPDATED, DELETED, BULK_DELETED, RESTORED, BULK_RESTORED, UPSERTED',
+                );
             });
     });
-    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectMethod has to be a enum option of GET, POST, UPDATE, DELETE', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 400 Conflict, SideEffectMethod has to be a enum option of GET, POST, UPDATE, DELETE', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -517,14 +563,14 @@ describe('side-effect', () =>
                 method: '****',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for AuditingSideEffectMethod has to be any of this options: GET, POST, UPDATE, DELETE');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for AuditingSideEffectMethod has to be any of this options: GET, POST, UPDATE, DELETE',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/create - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/REST:POST auditing/side-effect/create - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -532,53 +578,63 @@ describe('side-effect', () =>
             .expect(409);
     });
 
-    test('/REST:POST auditing/side-effects/paginate', () =>
-    {
+    test('/REST:POST auditing/side-effects/paginate', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effects/paginate')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
+                query: {
                     offset: 0,
                     limit: 5,
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual({
                     total: sideEffectSeeder.collectionResponse.length,
                     count: sideEffectSeeder.collectionResponse.length,
-                    rows : sideEffectSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: sideEffectSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/REST:POST auditing/side-effects/get', () =>
-    {
+    test('/REST:POST auditing/side-effects/get', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effects/get')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual(
-                    sideEffectSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    sideEffectSeeder.collectionResponse.map((item) =>
+                        expect.objectContaining(
+                            _.omit(item, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    ),
                 );
             });
     });
 
-    test('/REST:POST auditing/side-effect/find - Got 404 Not Found', () =>
-    {
+    test('/REST:POST auditing/side-effect/find - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: 'dee557e5-718f-5a9f-b111-472f1678040d',
                     },
                 },
@@ -586,8 +642,7 @@ describe('side-effect', () =>
             .expect(404);
     });
 
-    test('/REST:POST auditing/side-effect/create', () =>
-    {
+    test('/REST:POST auditing/side-effect/create', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/create')
             .set('Accept', 'application/json')
@@ -598,49 +653,51 @@ describe('side-effect', () =>
             .expect(201);
     });
 
-    test('/REST:POST auditing/side-effect/find', () =>
-    {
+    test('/REST:POST auditing/side-effect/find', () => {
         return request(app.getHttpServer())
             .post('/auditing/side-effect/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:POST auditing/side-effect/find/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:POST auditing/side-effect/find/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
-            .post('/auditing/side-effect/find/5b25b039-7edd-500c-ae7e-0e3ac21889cc')
+            .post(
+                '/auditing/side-effect/find/5b25b039-7edd-500c-ae7e-0e3ac21889cc',
+            )
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:POST auditing/side-effect/find/{id}', () =>
-    {
+    test('/REST:POST auditing/side-effect/find/{id}', () => {
         return request(app.getHttpServer())
-            .post('/auditing/side-effect/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .post(
+                '/auditing/side-effect/find/5b19d6ac-4081-573b-96b3-56964d5326a8',
+            )
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:PUT auditing/side-effect/update - Got 404 Not Found', () =>
-    {
+    test('/REST:PUT auditing/side-effect/update - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .put('/auditing/side-effect/update')
             .set('Accept', 'application/json')
@@ -651,8 +708,7 @@ describe('side-effect', () =>
             .expect(404);
     });
 
-    test('/REST:PUT auditing/side-effect/update', () =>
-    {
+    test('/REST:PUT auditing/side-effect/update', () => {
         return request(app.getHttpServer())
             .put('/auditing/side-effect/update')
             .set('Accept', 'application/json')
@@ -661,30 +717,33 @@ describe('side-effect', () =>
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:DELETE auditing/side-effect/delete/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:DELETE auditing/side-effect/delete/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
-            .delete('/auditing/side-effect/delete/d988a82c-7a9f-581b-bc8d-1aedb40045ec')
+            .delete(
+                '/auditing/side-effect/delete/d988a82c-7a9f-581b-bc8d-1aedb40045ec',
+            )
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE auditing/side-effect/delete/{id}', () =>
-    {
+    test('/REST:DELETE auditing/side-effect/delete/{id}', () => {
         return request(app.getHttpServer())
-            .delete('/auditing/side-effect/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete(
+                '/auditing/side-effect/delete/5b19d6ac-4081-573b-96b3-56964d5326a8',
+            )
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL auditingCreateSideEffect - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/GraphQL auditingCreateSideEffect - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -695,6 +754,7 @@ describe('side-effect', () =>
                         auditingCreateSideEffect (payload:$payload)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -718,22 +778,27 @@ describe('side-effect', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
+                variables: {
+                    payload: _.omit(mockData[0], [
+                        'createdAt',
+                        'updatedAt',
+                        'deletedAt',
+                    ]),
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(409);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('already exist in database');
             });
     });
 
-    test('/GraphQL auditingPaginateSideEffects', () =>
-    {
+    test('/GraphQL auditingPaginateSideEffects', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -749,28 +814,34 @@ describe('side-effect', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
+                variables: {
+                    query: {
                         offset: 0,
                         limit: 5,
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body.data.auditingPaginateSideEffects).toEqual({
                     total: sideEffectSeeder.collectionResponse.length,
                     count: sideEffectSeeder.collectionResponse.length,
-                    rows : sideEffectSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: sideEffectSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/GraphQL auditingGetSideEffects', () =>
-    {
+    test('/GraphQL auditingGetSideEffects', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -781,6 +852,7 @@ describe('side-effect', () =>
                         auditingGetSideEffects (query:$query)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -809,17 +881,25 @@ describe('side-effect', () =>
                 variables: {},
             })
             .expect(200)
-            .then(res =>
-            {
-                for (const [index, value] of res.body.data.auditingGetSideEffects.entries())
-                {
-                    expect(sideEffectSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+            .then((res) => {
+                for (const [
+                    index,
+                    value,
+                ] of res.body.data.auditingGetSideEffects.entries()) {
+                    expect(sideEffectSeeder.collectionResponse[index]).toEqual(
+                        expect.objectContaining(
+                            _.omit(value, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    );
                 }
             });
     });
 
-    test('/GraphQL auditingCreateSideEffect', () =>
-    {
+    test('/GraphQL auditingCreateSideEffect', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -830,6 +910,7 @@ describe('side-effect', () =>
                         auditingCreateSideEffect (payload:$payload)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -861,14 +942,15 @@ describe('side-effect', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.auditingCreateSideEffect).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.auditingCreateSideEffect).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL auditingFindSideEffect - Got 404 Not Found', () =>
-    {
+    test('/GraphQL auditingFindSideEffect - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -879,6 +961,7 @@ describe('side-effect', () =>
                         auditingFindSideEffect (query:$query)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -904,28 +987,27 @@ describe('side-effect', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: 'd2b9dac5-9371-5271-ac9c-b84a91ea16ec',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL auditingFindSideEffect', () =>
-    {
+    test('/GraphQL auditingFindSideEffect', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -936,6 +1018,7 @@ describe('side-effect', () =>
                         auditingFindSideEffect (query:$query)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -961,26 +1044,23 @@ describe('side-effect', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.auditingFindSideEffect.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.auditingFindSideEffect.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL auditingFindSideEffectById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL auditingFindSideEffectById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -991,6 +1071,7 @@ describe('side-effect', () =>
                         auditingFindSideEffectById (id:$id)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -1021,16 +1102,18 @@ describe('side-effect', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL auditingFindSideEffectById', () =>
-    {
+    test('/GraphQL auditingFindSideEffectById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1041,6 +1124,7 @@ describe('side-effect', () =>
                         auditingFindSideEffectById (id:$id)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -1071,14 +1155,14 @@ describe('side-effect', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.auditingFindSideEffectById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(
+                    res.body.data.auditingFindSideEffectById.id,
+                ).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL auditingUpdateSideEffectById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL auditingUpdateSideEffectById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1089,6 +1173,7 @@ describe('side-effect', () =>
                         auditingUpdateSideEffectById (payload:$payload)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -1122,16 +1207,18 @@ describe('side-effect', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL auditingUpdateSideEffectById', () =>
-    {
+    test('/GraphQL auditingUpdateSideEffectById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1142,6 +1229,7 @@ describe('side-effect', () =>
                         auditingUpdateSideEffectById (payload:$payload)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -1175,14 +1263,14 @@ describe('side-effect', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.auditingUpdateSideEffectById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(
+                    res.body.data.auditingUpdateSideEffectById.id,
+                ).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL auditingUpdateSideEffects', () =>
-    {
+    test('/GraphQL auditingUpdateSideEffects', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1193,6 +1281,7 @@ describe('side-effect', () =>
                         auditingUpdateSideEffects (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -1231,14 +1320,14 @@ describe('side-effect', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.auditingUpdateSideEffects[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(
+                    res.body.data.auditingUpdateSideEffects[0].id,
+                ).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    test('/GraphQL auditingDeleteSideEffectById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL auditingDeleteSideEffectById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1249,6 +1338,7 @@ describe('side-effect', () =>
                         auditingDeleteSideEffectById (id:$id)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -1279,16 +1369,18 @@ describe('side-effect', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL auditingDeleteSideEffectById', () =>
-    {
+    test('/GraphQL auditingDeleteSideEffectById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1299,6 +1391,7 @@ describe('side-effect', () =>
                         auditingDeleteSideEffectById (id:$id)
                         {
                             id
+                            rowId
                             tags
                             modelPath
                             modelName
@@ -1329,14 +1422,14 @@ describe('side-effect', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.auditingDeleteSideEffectById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(
+                    res.body.data.auditingDeleteSideEffectById.id,
+                ).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
             });
     });
 
-    afterAll(async () =>
-    {
+    afterAll(async () => {
         await sideEffectRepository.delete({
             queryStatement: {
                 where: {},

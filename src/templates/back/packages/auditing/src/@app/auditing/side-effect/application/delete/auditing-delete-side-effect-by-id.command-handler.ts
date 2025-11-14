@@ -4,14 +4,14 @@ import { AuditingSideEffectId } from '@app/auditing/side-effect/domain/value-obj
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(AuditingDeleteSideEffectByIdCommand)
-export class AuditingDeleteSideEffectByIdCommandHandler implements ICommandHandler<AuditingDeleteSideEffectByIdCommand>
+export class AuditingDeleteSideEffectByIdCommandHandler
+    implements ICommandHandler<AuditingDeleteSideEffectByIdCommand>
 {
     constructor(
         private readonly deleteSideEffectByIdService: AuditingDeleteSideEffectByIdService,
     ) {}
 
-    async execute(command: AuditingDeleteSideEffectByIdCommand): Promise<void>
-    {
+    async execute(command: AuditingDeleteSideEffectByIdCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteSideEffectByIdService.main(
             new AuditingSideEffectId(command.id),

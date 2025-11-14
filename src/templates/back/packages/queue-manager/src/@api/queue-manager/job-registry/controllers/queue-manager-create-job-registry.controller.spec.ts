@@ -1,51 +1,53 @@
-import { QueueManagerCreateJobRegistryController, QueueManagerCreateJobRegistryHandler } from '@api/queue-manager/job-registry';
+import {
+    QueueManagerCreateJobRegistryController,
+    QueueManagerCreateJobRegistryHandler,
+} from '@api/queue-manager/job-registry';
 import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerCreateJobRegistryController', () =>
-{
+describe('QueueManagerCreateJobRegistryController', () => {
     let controller: QueueManagerCreateJobRegistryController;
     let handler: QueueManagerCreateJobRegistryHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                QueueManagerCreateJobRegistryController,
-            ],
+            imports: [],
+            controllers: [QueueManagerCreateJobRegistryController],
             providers: [
                 {
-                    provide : QueueManagerCreateJobRegistryHandler,
+                    provide: QueueManagerCreateJobRegistryHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<QueueManagerCreateJobRegistryController>(QueueManagerCreateJobRegistryController);
-        handler = module.get<QueueManagerCreateJobRegistryHandler>(QueueManagerCreateJobRegistryHandler);
+        controller = module.get<QueueManagerCreateJobRegistryController>(
+            QueueManagerCreateJobRegistryController,
+        );
+        handler = module.get<QueueManagerCreateJobRegistryHandler>(
+            QueueManagerCreateJobRegistryHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerCreateJobRegistryController should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerCreateJobRegistryController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an jobRegistry created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
+        test('should return an jobRegistry created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockJobRegistryData[0]),
+                    ),
+            );
             expect(
-                await controller.main(
-                    queueManagerMockJobRegistryData[0],
-                ),
-            )
-                .toBe(queueManagerMockJobRegistryData[0]);
+                await controller.main(queueManagerMockJobRegistryData[0]),
+            ).toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

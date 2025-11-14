@@ -1,4 +1,7 @@
-import { QueueManagerJobRegistry, QueueManagerUpdateJobsRegistryInput } from '@api/graphql';
+import {
+    QueueManagerJobRegistry,
+    QueueManagerUpdateJobsRegistryInput,
+} from '@api/graphql';
 import { QueueManagerUpdateJobsRegistryHandler } from '@api/queue-manager/job-registry';
 import { Auth } from '@aurora/decorators';
 import { QueryStatement, Timezone } from '@aurorajs.dev/core';
@@ -6,8 +9,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.jobRegistry.update')
-export class QueueManagerUpdateJobsRegistryResolver
-{
+export class QueueManagerUpdateJobsRegistryResolver {
     constructor(
         private readonly handler: QueueManagerUpdateJobsRegistryHandler,
     ) {}
@@ -18,8 +20,7 @@ export class QueueManagerUpdateJobsRegistryResolver
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<QueueManagerJobRegistry>
-    {
+    ): Promise<QueueManagerJobRegistry> {
         return await this.handler.main(
             payload,
             queryStatement,

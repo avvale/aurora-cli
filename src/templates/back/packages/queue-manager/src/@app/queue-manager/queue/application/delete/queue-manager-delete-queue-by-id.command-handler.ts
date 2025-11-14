@@ -4,14 +4,14 @@ import { QueueManagerQueueId } from '@app/queue-manager/queue/domain/value-objec
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(QueueManagerDeleteQueueByIdCommand)
-export class QueueManagerDeleteQueueByIdCommandHandler implements ICommandHandler<QueueManagerDeleteQueueByIdCommand>
+export class QueueManagerDeleteQueueByIdCommandHandler
+    implements ICommandHandler<QueueManagerDeleteQueueByIdCommand>
 {
     constructor(
         private readonly deleteQueueByIdService: QueueManagerDeleteQueueByIdService,
     ) {}
 
-    async execute(command: QueueManagerDeleteQueueByIdCommand): Promise<void>
-    {
+    async execute(command: QueueManagerDeleteQueueByIdCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteQueueByIdService.main(
             new QueueManagerQueueId(command.id),

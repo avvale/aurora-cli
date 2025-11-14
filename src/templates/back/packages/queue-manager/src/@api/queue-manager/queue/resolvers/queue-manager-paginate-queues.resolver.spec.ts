@@ -1,57 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { QueueManagerPaginateQueuesHandler, QueueManagerPaginateQueuesResolver } from '@api/queue-manager/queue';
+import {
+    QueueManagerPaginateQueuesHandler,
+    QueueManagerPaginateQueuesResolver,
+} from '@api/queue-manager/queue';
 import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerPaginateQueuesResolver', () =>
-{
+describe('QueueManagerPaginateQueuesResolver', () => {
     let resolver: QueueManagerPaginateQueuesResolver;
     let handler: QueueManagerPaginateQueuesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerPaginateQueuesResolver,
                 {
-                    provide : QueueManagerPaginateQueuesHandler,
+                    provide: QueueManagerPaginateQueuesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<QueueManagerPaginateQueuesResolver>(QueueManagerPaginateQueuesResolver);
-        handler = module.get<QueueManagerPaginateQueuesHandler>(QueueManagerPaginateQueuesHandler);
+        resolver = module.get<QueueManagerPaginateQueuesResolver>(
+            QueueManagerPaginateQueuesResolver,
+        );
+        handler = module.get<QueueManagerPaginateQueuesHandler>(
+            QueueManagerPaginateQueuesHandler,
+        );
     });
 
-    test('QueueManagerPaginateQueuesResolver should be defined', () =>
-    {
+    test('QueueManagerPaginateQueuesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerPaginateQueuesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerPaginateQueuesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a queueManagerMockQueueData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : queueManagerMockQueueData,
-            })));
+        test('should return a queueManagerMockQueueData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: queueManagerMockQueueData,
+                        }),
+                    ),
+            );
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : queueManagerMockQueueData,
+                rows: queueManagerMockQueueData,
             });
         });
     });

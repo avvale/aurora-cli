@@ -3,37 +3,35 @@ import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingCreateSideEffectsHandler', () =>
-{
+describe('AuditingCreateSideEffectsHandler', () => {
     let handler: AuditingCreateSideEffectsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 AuditingCreateSideEffectsHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<AuditingCreateSideEffectsHandler>(AuditingCreateSideEffectsHandler);
+        handler = module.get<AuditingCreateSideEffectsHandler>(
+            AuditingCreateSideEffectsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingCreateSideEffectsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingCreateSideEffectsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an auditingMockSideEffectData created', async () =>
-        {
+        test('should return an auditingMockSideEffectData created', async () => {
             expect(await handler.main(auditingMockSideEffectData)).toBe(true);
         });
     });

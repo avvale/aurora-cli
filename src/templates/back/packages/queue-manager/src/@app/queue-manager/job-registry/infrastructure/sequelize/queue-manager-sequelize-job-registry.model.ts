@@ -1,29 +1,32 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { DataTypes } from 'sequelize';
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'QueueManagerJobRegistry',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['state'],
-			unique: false,
-		},
-		{
-			fields: ['jobId'],
-			unique: false,
-		},
-		{
-			fields: ['tags'],
-			unique: false,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['state'],
+            unique: false,
+        },
+        {
+            fields: ['jobId'],
+            unique: false,
+        },
+        {
+            fields: ['tags'],
+            unique: false,
+        },
     ],
 })
-export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryModel>
-{
+export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryModel> {
     @Column({
         field: 'id',
         primaryKey: true,
@@ -31,6 +34,14 @@ export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryM
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'queueName',
@@ -42,7 +53,14 @@ export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryM
     @Column({
         field: 'state',
         allowNull: false,
-        type: DataTypes.ENUM('COMPLETED','WAITING','ACTIVE','DELAYED','FAILED','PAUSED'),
+        type: DataTypes.ENUM(
+            'COMPLETED',
+            'WAITING',
+            'ACTIVE',
+            'DELAYED',
+            'FAILED',
+            'PAUSED',
+        ),
         defaultValue: 'WAITING',
     })
     state: string;
@@ -89,5 +107,4 @@ export class QueueManagerJobRegistryModel extends Model<QueueManagerJobRegistryM
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

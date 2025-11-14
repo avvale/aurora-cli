@@ -3,40 +3,40 @@ import { AuditingDeleteSideEffectsCommandHandler } from '@app/auditing/side-effe
 import { AuditingDeleteSideEffectsService } from '@app/auditing/side-effect/application/delete/auditing-delete-side-effects.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingDeleteSideEffectsCommandHandler', () =>
-{
+describe('AuditingDeleteSideEffectsCommandHandler', () => {
     let commandHandler: AuditingDeleteSideEffectsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 AuditingDeleteSideEffectsCommandHandler,
                 {
-                    provide : AuditingDeleteSideEffectsService,
+                    provide: AuditingDeleteSideEffectsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<AuditingDeleteSideEffectsCommandHandler>(AuditingDeleteSideEffectsCommandHandler);
+        commandHandler = module.get<AuditingDeleteSideEffectsCommandHandler>(
+            AuditingDeleteSideEffectsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('AuditingDeleteSideEffectsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingDeleteSideEffectsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new AuditingDeleteSideEffectsCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(
+                    new AuditingDeleteSideEffectsCommand(),
+                ),
+            ).toBe(undefined);
         });
     });
 });

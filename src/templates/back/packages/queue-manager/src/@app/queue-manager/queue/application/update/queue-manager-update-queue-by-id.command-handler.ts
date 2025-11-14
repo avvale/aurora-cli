@@ -9,20 +9,24 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(QueueManagerUpdateQueueByIdCommand)
-export class QueueManagerUpdateQueueByIdCommandHandler implements ICommandHandler<QueueManagerUpdateQueueByIdCommand>
+export class QueueManagerUpdateQueueByIdCommandHandler
+    implements ICommandHandler<QueueManagerUpdateQueueByIdCommand>
 {
     constructor(
         private readonly updateQueueByIdService: QueueManagerUpdateQueueByIdService,
     ) {}
 
-    async execute(command: QueueManagerUpdateQueueByIdCommand): Promise<void>
-    {
+    async execute(command: QueueManagerUpdateQueueByIdCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.updateQueueByIdService.main(
             {
                 id: new QueueManagerQueueId(command.payload.id),
-                prefix: new QueueManagerQueuePrefix(command.payload.prefix, { undefinable: true }),
-                name: new QueueManagerQueueName(command.payload.name, { undefinable: true }),
+                prefix: new QueueManagerQueuePrefix(command.payload.prefix, {
+                    undefinable: true,
+                }),
+                name: new QueueManagerQueueName(command.payload.name, {
+                    undefinable: true,
+                }),
             },
             command.constraint,
             command.cQMetadata,

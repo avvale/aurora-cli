@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class AuditingCreateSideEffectsCommand
-{
+export class AuditingCreateSideEffectsCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -25,7 +24,7 @@ export class AuditingCreateSideEffectsCommand
             userAgent?: string;
             isRollback: boolean;
             rollbackSideEffectId?: string;
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

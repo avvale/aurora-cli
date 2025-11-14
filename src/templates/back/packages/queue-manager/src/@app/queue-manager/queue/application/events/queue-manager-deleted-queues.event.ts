@@ -1,8 +1,11 @@
-import { QueueManagerDeletedQueueEvent } from './queue-manager-deleted-queue.event';
+import { QueueManagerDeletedQueueEvent } from '@app/queue-manager/queue';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class QueueManagerDeletedQueuesEvent
-{
+export class QueueManagerDeletedQueuesEvent {
     constructor(
-        public readonly queues: QueueManagerDeletedQueueEvent[],
+        public readonly event: {
+            payload: QueueManagerDeletedQueueEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

@@ -1,8 +1,7 @@
-
-export class QueueManagerJobRegistryResponse
-{
+export class QueueManagerJobRegistryResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly queueName: string,
         public readonly state: string,
         public readonly jobId: string,

@@ -4,14 +4,16 @@ import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(QueueManagerPaginateQueuesQuery)
-export class QueueManagerPaginateQueuesQueryHandler implements IQueryHandler<QueueManagerPaginateQueuesQuery>
+export class QueueManagerPaginateQueuesQueryHandler
+    implements IQueryHandler<QueueManagerPaginateQueuesQuery>
 {
     constructor(
         private readonly paginateQueuesService: QueueManagerPaginateQueuesService,
     ) {}
 
-    async execute(query: QueueManagerPaginateQueuesQuery): Promise<PaginationResponse>
-    {
+    async execute(
+        query: QueueManagerPaginateQueuesQuery,
+    ): Promise<PaginationResponse> {
         const { total, count, rows } = await this.paginateQueuesService.main(
             query.queryStatement,
             query.constraint,
@@ -21,7 +23,7 @@ export class QueueManagerPaginateQueuesQueryHandler implements IQueryHandler<Que
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO()),
+            rows.map((item) => item.toDTO()),
         );
     }
 }

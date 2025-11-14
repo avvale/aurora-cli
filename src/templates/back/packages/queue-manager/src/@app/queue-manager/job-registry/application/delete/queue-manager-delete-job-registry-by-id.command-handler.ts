@@ -4,14 +4,16 @@ import { QueueManagerJobRegistryId } from '@app/queue-manager/job-registry/domai
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(QueueManagerDeleteJobRegistryByIdCommand)
-export class QueueManagerDeleteJobRegistryByIdCommandHandler implements ICommandHandler<QueueManagerDeleteJobRegistryByIdCommand>
+export class QueueManagerDeleteJobRegistryByIdCommandHandler
+    implements ICommandHandler<QueueManagerDeleteJobRegistryByIdCommand>
 {
     constructor(
         private readonly deleteJobRegistryByIdService: QueueManagerDeleteJobRegistryByIdService,
     ) {}
 
-    async execute(command: QueueManagerDeleteJobRegistryByIdCommand): Promise<void>
-    {
+    async execute(
+        command: QueueManagerDeleteJobRegistryByIdCommand,
+    ): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteJobRegistryByIdService.main(
             new QueueManagerJobRegistryId(command.id),

@@ -4,61 +4,59 @@ import { auditingMockHttpCommunicationData } from '@app/auditing/http-communicat
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingDeleteHttpCommunicationsHandler', () =>
-{
+describe('AuditingDeleteHttpCommunicationsHandler', () => {
     let handler: AuditingDeleteHttpCommunicationsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 AuditingDeleteHttpCommunicationsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<AuditingDeleteHttpCommunicationsHandler>(AuditingDeleteHttpCommunicationsHandler);
+        handler = module.get<AuditingDeleteHttpCommunicationsHandler>(
+            AuditingDeleteHttpCommunicationsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('AuditingDeleteHttpCommunicationsHandler should be defined', () =>
-    {
+    test('AuditingDeleteHttpCommunicationsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('AuditingDeleteHttpCommunicationsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingDeleteHttpCommunicationsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an auditingMockHttpCommunicationData deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(auditingMockHttpCommunicationData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(auditingMockHttpCommunicationData);
+        test('should return an auditingMockHttpCommunicationData deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(auditingMockHttpCommunicationData),
+                    ),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                auditingMockHttpCommunicationData,
+            );
         });
     });
 });

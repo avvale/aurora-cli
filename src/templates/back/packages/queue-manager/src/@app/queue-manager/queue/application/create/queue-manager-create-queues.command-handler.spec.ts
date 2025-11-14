@@ -1,45 +1,48 @@
-import { QueueManagerCreateQueuesCommand, queueManagerMockQueueData } from '@app/queue-manager/queue';
+import {
+    QueueManagerCreateQueuesCommand,
+    queueManagerMockQueueData,
+} from '@app/queue-manager/queue';
 import { QueueManagerCreateQueuesCommandHandler } from '@app/queue-manager/queue/application/create/queue-manager-create-queues.command-handler';
 import { QueueManagerCreateQueuesService } from '@app/queue-manager/queue/application/create/queue-manager-create-queues.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('queueManagerCreateQueuesCommandHandler', () =>
-{
+describe('queueManagerCreateQueuesCommandHandler', () => {
     let commandHandler: QueueManagerCreateQueuesCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 QueueManagerCreateQueuesCommandHandler,
                 {
-                    provide : QueueManagerCreateQueuesService,
+                    provide: QueueManagerCreateQueuesService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<QueueManagerCreateQueuesCommandHandler>(QueueManagerCreateQueuesCommandHandler);
+        commandHandler = module.get<QueueManagerCreateQueuesCommandHandler>(
+            QueueManagerCreateQueuesCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerCreateQueuesCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerCreateQueuesCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return QueueManagerMockQueueData created', async () =>
-        {
-            expect(await commandHandler.execute(
-                new QueueManagerCreateQueuesCommand(
-                    queueManagerMockQueueData,
-                    { timezone: process.env.TZ },
+        test('should return QueueManagerMockQueueData created', async () => {
+            expect(
+                await commandHandler.execute(
+                    new QueueManagerCreateQueuesCommand(
+                        queueManagerMockQueueData,
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

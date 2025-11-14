@@ -1,50 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AuditingDeleteSideEffectByIdHandler, AuditingDeleteSideEffectByIdResolver } from '@api/auditing/side-effect';
+import {
+    AuditingDeleteSideEffectByIdHandler,
+    AuditingDeleteSideEffectByIdResolver,
+} from '@api/auditing/side-effect';
 import { auditingMockSideEffectData } from '@app/auditing/side-effect';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('AuditingDeleteSideEffectByIdResolver', () =>
-{
+describe('AuditingDeleteSideEffectByIdResolver', () => {
     let resolver: AuditingDeleteSideEffectByIdResolver;
     let handler: AuditingDeleteSideEffectByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 AuditingDeleteSideEffectByIdResolver,
                 {
-                    provide : AuditingDeleteSideEffectByIdHandler,
+                    provide: AuditingDeleteSideEffectByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<AuditingDeleteSideEffectByIdResolver>(AuditingDeleteSideEffectByIdResolver);
-        handler = module.get<AuditingDeleteSideEffectByIdHandler>(AuditingDeleteSideEffectByIdHandler);
+        resolver = module.get<AuditingDeleteSideEffectByIdResolver>(
+            AuditingDeleteSideEffectByIdResolver,
+        );
+        handler = module.get<AuditingDeleteSideEffectByIdHandler>(
+            AuditingDeleteSideEffectByIdHandler,
+        );
     });
 
-    test('AuditingDeleteSideEffectByIdResolver should be defined', () =>
-    {
+    test('AuditingDeleteSideEffectByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('AuditingDeleteSideEffectByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('AuditingDeleteSideEffectByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an sideEffect deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(auditingMockSideEffectData[0])));
-            expect(await resolver.main(auditingMockSideEffectData[0].id)).toBe(auditingMockSideEffectData[0]);
+        test('should return an sideEffect deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(auditingMockSideEffectData[0]),
+                    ),
+            );
+            expect(await resolver.main(auditingMockSideEffectData[0].id)).toBe(
+                auditingMockSideEffectData[0],
+            );
         });
     });
 });

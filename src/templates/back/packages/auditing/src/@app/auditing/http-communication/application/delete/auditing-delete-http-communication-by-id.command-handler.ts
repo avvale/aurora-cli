@@ -4,14 +4,16 @@ import { AuditingHttpCommunicationId } from '@app/auditing/http-communication/do
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(AuditingDeleteHttpCommunicationByIdCommand)
-export class AuditingDeleteHttpCommunicationByIdCommandHandler implements ICommandHandler<AuditingDeleteHttpCommunicationByIdCommand>
+export class AuditingDeleteHttpCommunicationByIdCommandHandler
+    implements ICommandHandler<AuditingDeleteHttpCommunicationByIdCommand>
 {
     constructor(
         private readonly deleteHttpCommunicationByIdService: AuditingDeleteHttpCommunicationByIdService,
     ) {}
 
-    async execute(command: AuditingDeleteHttpCommunicationByIdCommand): Promise<void>
-    {
+    async execute(
+        command: AuditingDeleteHttpCommunicationByIdCommand,
+    ): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteHttpCommunicationByIdService.main(
             new AuditingHttpCommunicationId(command.id),

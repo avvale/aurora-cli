@@ -6,8 +6,7 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class QueueManagerFindQueueByIdHandler
-{
+export class QueueManagerFindQueueByIdHandler {
     constructor(
         private readonly queryBus: IQueryBus,
         private readonly queueRedisImplementationService: QueueRedisImplementationService,
@@ -17,16 +16,15 @@ export class QueueManagerFindQueueByIdHandler
         id: string,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<QueueManagerQueue | QueueManagerQueueDto>
-    {
-        const queue = await this.queryBus.ask(new QueueManagerFindQueueByIdQuery(
-            id,
-            constraint,
-            {
+    ): Promise<QueueManagerQueue | QueueManagerQueueDto> {
+        const queue = await this.queryBus.ask(
+            new QueueManagerFindQueueByIdQuery(id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
-        return await this.queueRedisImplementationService.addQueueCounters(queue);
+        return await this.queueRedisImplementationService.addQueueCounters(
+            queue,
+        );
     }
 }

@@ -1,26 +1,25 @@
-import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 //
-import { QueueManagerCreateQueuesCommand } from '@app/queue-manager/queue';
-import { queueManagerMockQueueData } from '@app/queue-manager/queue';
+import {
+    QueueManagerCreateQueuesCommand,
+    queueManagerMockQueueData,
+} from '@app/queue-manager/queue';
 
 @Injectable()
-export class QueueManagerQueueSeeder
-{
+export class QueueManagerQueueSeeder {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
     ) {}
 
-    async main(): Promise<boolean>
-    {
-        await this.commandBus.dispatch(new QueueManagerCreateQueuesCommand(
-            queueManagerMockQueueData,
-            {
-                timezone: process.env.TZ ,
-            },
-        ));
+    async main(): Promise<boolean> {
+        await this.commandBus.dispatch(
+            new QueueManagerCreateQueuesCommand(queueManagerMockQueueData, {
+                timezone: process.env.TZ,
+            }),
+        );
 
         return true;
     }

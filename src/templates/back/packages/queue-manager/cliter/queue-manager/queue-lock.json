@@ -3,591 +3,435 @@
     "files": [
         {
             "path": "src/@app/queue-manager/queue-manager.seed.ts",
-            "integrity": "sha1:2ef451efc3816fd4b12f74087b1feff8a7acab44"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/count/queue-manager-count-queue.query-handler.spec.ts",
-            "integrity": "sha1:e1ceaa6d2fdee1639ef7fed228ae2ae1bcddc590"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/count/queue-manager-count-queue.query-handler.ts",
-            "integrity": "sha1:28975467eda875286458ff7b9b3c307b0674a929"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/count/queue-manager-count-queue.query.ts",
-            "integrity": "sha1:00bebffd89778519d2c13dd6fcb409c3bc126d40"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/count/queue-manager-count-queue.service.spec.ts",
-            "integrity": "sha1:974565e9e22324acc0c23f6ec0a697fdcda94031"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/count/queue-manager-count-queue.service.ts",
-            "integrity": "sha1:0e2adbf39b0609c3b3e8a9f4b82787d4ec54fef4"
+            "integrity": "sha1:8539cdfe75bf628f6e500914fa86eb1f6355840b"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queue.command-handler.spec.ts",
-            "integrity": "sha1:21b8c1949d9b7e26aaa13fa51d5aa9fce2f094b8"
+            "integrity": "sha1:9890ef00de4c526d7702ffc561136053fcfb48de"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queue.command-handler.ts",
-            "integrity": "sha1:72cb9e77f854b08d996d3ccdbc6f055979b521ec"
+            "integrity": "sha1:4e800bfa0653ee68f6995be96b4ccb559808fdeb"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queue.command.ts",
-            "integrity": "sha1:88ee434790ea82acf5952eedc669ba9a2a27d407"
+            "integrity": "sha1:839de7bd1d63f83e3a43a7f2a38b53f3160dfdf5"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queue.service.spec.ts",
-            "integrity": "sha1:0af2e50d09ebfaa81bd592f3abecc274bbd7bf82"
+            "integrity": "sha1:7265be755012156325855e6075c3808de4fab997"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queue.service.ts",
-            "integrity": "sha1:7adf8c5f2e8bfa9bd83cb51afaaa44578af7c123"
+            "integrity": "sha1:42ecf40a4af351751dd5a63535fed846092c3a0d"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queues.command-handler.spec.ts",
-            "integrity": "sha1:238050a78f229b004e8f569cb75ce0bbabccfe19"
+            "integrity": "sha1:477fac036e97b3a54e384c56f3d0aa37f7cb96c5"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queues.command-handler.ts",
-            "integrity": "sha1:8efb5cb464876e7b27901c409059d1646b861ea1"
+            "integrity": "sha1:eee67e358ed644c4bdd6bc3c15e5dcd2282f91e1"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queues.command.ts",
-            "integrity": "sha1:2cd87b01ffeb3056f79149781efa9efd944895ba"
+            "integrity": "sha1:a3598c709cab2bd01ba37e536de1c636ba76ecc5"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queues.service.spec.ts",
-            "integrity": "sha1:81293f03dfbf6aad6d49d5ffba598c33ec4e6f83"
+            "integrity": "sha1:edb67435c4d092ff686d59ceb3683a1879755fef"
         },
         {
             "path": "src/@app/queue-manager/queue/application/create/queue-manager-create-queues.service.ts",
-            "integrity": "sha1:acb90f4ebd329dca598068a6568cef9a9e65ff0e"
+            "integrity": "sha1:20be72ef3e51c87273bf8174bac1b9b48285e43c"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queue-by-id.command-handler.spec.ts",
-            "integrity": "sha1:33944d182d9da44d47bdef05b3ee5a8e6ac40a42"
+            "integrity": "sha1:c1f636b3fc80076ee8e32fc3612d89df911be9c4"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queue-by-id.command-handler.ts",
-            "integrity": "sha1:95ebccaebec00553090e2d4c92b50d742e11dd74"
+            "integrity": "sha1:6ac7a98f73f598aeee6c0dc846a5f81dad0ed697"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queue-by-id.command.ts",
-            "integrity": "sha1:c16471f5c34c93417a231701980ead03fdb1221b"
+            "integrity": "sha1:17edbb7fb9a1941e44b7b4e0161f094d5072bd60"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queue-by-id.service.spec.ts",
-            "integrity": "sha1:5c0802647a80b3e697625a691341c2dbc8f053cf"
+            "integrity": "sha1:6a9048266cbd1532f00881e97ef2713ef8647b9d"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queue-by-id.service.ts",
-            "integrity": "sha1:17e2fbcc91d38737ed23e7ea4b6e75800da49bda"
+            "integrity": "sha1:5c29fee88833296f9d38e2564a4c26d9c57979e7"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queues.command-handler.spec.ts",
-            "integrity": "sha1:469f302f1a3609c6f3cd7859a3bdb7392e3a8a02"
+            "integrity": "sha1:1cb56dae8eb6daef379020b03c7870da00cd2393"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queues.command-handler.ts",
-            "integrity": "sha1:7fc108a63e497e22357b4149a09e532ad2767032"
+            "integrity": "sha1:6c124e68d8fa5edc2af35921bcc7de63bdcabaa7"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queues.command.ts",
-            "integrity": "sha1:0c5579216eb70d4d140d5c5433b7f0ec29e86568"
+            "integrity": "sha1:871fefc28e57029970c05cd55aa3219aec040d03"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queues.service.spec.ts",
-            "integrity": "sha1:e42345e8863adc2d017de5ad85c9892018367fdc"
+            "integrity": "sha1:636f5d4328f5823c9cad011624b546774402d992"
         },
         {
             "path": "src/@app/queue-manager/queue/application/delete/queue-manager-delete-queues.service.ts",
-            "integrity": "sha1:c6a1095e61b8f2a959eef8419b379f4961692192"
+            "integrity": "sha1:a66dae10c1f403ce7087765fd6f3a1d9c1fad6f9"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-add-queues-context.event.ts",
-            "integrity": "sha1:99bd6736a054e238ed2d304deccb1cb900e21e2d"
+            "integrity": "sha1:09813109aa829c5c993cf5c1c426d3fe7a80b454"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-created-queue.event-handler.ts",
-            "integrity": "sha1:024adac072654e51ba1706b071095e1e527ec5c4"
+            "integrity": "sha1:b3854a1772f171e5557fe08587e1b0e90c5c99c0"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-created-queue.event.ts",
-            "integrity": "sha1:84114822f40ea767782e2234f9fa6e66bd213845"
+            "integrity": "sha1:b6f205ece745a50e5c2d9e008acf4f84802621c9"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-created-queues.event-handler.ts",
-            "integrity": "sha1:5979a54086ebf25bef719cbecf895d1b2ffc7f0c"
+            "integrity": "sha1:03465c4804756eb96693314c746dc4956d46f703"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-created-queues.event.ts",
-            "integrity": "sha1:063ae90264e821c329771d2ad5219defcc608cdf"
+            "integrity": "sha1:58447b90a76f3dd366eab3ca84512d446ee079c7"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-deleted-queue.event-handler.ts",
-            "integrity": "sha1:40c76a6684312d418f413004713d3b4de8cd7f33"
+            "integrity": "sha1:caa5bc8373b776fe271b94f0c9196b9a0ad9df32"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-deleted-queue.event.ts",
-            "integrity": "sha1:39e7646ef0ff51a75c9b48a3763a47300165f37d"
+            "integrity": "sha1:3ee64b3a4ae78325d474ae925abd4297ae3a76ef"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-deleted-queues.event-handler.ts",
-            "integrity": "sha1:c880776cc0b78cd7408e9f71e3a08ddea99bf3ae"
+            "integrity": "sha1:2ee80ec482af4d17061c7dac7253314020d6489c"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-deleted-queues.event.ts",
-            "integrity": "sha1:f5bd05da7dd2114e1fbc489f45523a67c8c86212"
+            "integrity": "sha1:e6158bf1aa49d94c79d1475a5e7ffb3e088b8e51"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-updated-queue.event-handler.ts",
-            "integrity": "sha1:1e86243921cf0065e26ceffcdb44d3294c895c4b"
+            "integrity": "sha1:02b47315e76ee9204b36aff291eea1deb732fb50"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-updated-queue.event.ts",
-            "integrity": "sha1:79e4ab253adb47e769c0babe644a504398b9a981"
+            "integrity": "sha1:94a18e587d30e40fbb50802123a783e0bf47e0d2"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-updated-queues.event-handler.ts",
-            "integrity": "sha1:dd48989a050af23d911936c12d85be4557f5c518"
+            "integrity": "sha1:539b66eb1a96863a3281321f2e156fab1d2780c1"
         },
         {
             "path": "src/@app/queue-manager/queue/application/events/queue-manager-updated-queues.event.ts",
-            "integrity": "sha1:8362ace2caede4de707335aa03d20b58b163380e"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/events/queue-manager-updated-and-incremented-queue.event.ts",
-            "integrity": "sha1:25e94095c0d8d957eb4f7e9fa487433abace8a00"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/events/queue-manager-updated-and-incremented-queues.event-handler.ts",
-            "integrity": "sha1:18eda2de61aa51c6a69c4afc636ca6e8bf864b84"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/events/queue-manager-updated-and-incremented-queues.event.ts",
-            "integrity": "sha1:88f9e8f2bafa4ea8914da76b81dd3add94305965"
+            "integrity": "sha1:6fbb32fa8c23aa2026c27ba118d5e905bf22b4ef"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.query-handler.spec.ts",
-            "integrity": "sha1:195de3b3c843c9093ae4f26a3cdb37d46b25142b"
+            "integrity": "sha1:b12e6c77ea17bff2b6cf6b5617eebcc9d011cc85"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.query-handler.ts",
-            "integrity": "sha1:4cfe758e0e343492c8aaafa912e75d25a9a66290"
+            "integrity": "sha1:3a477b367b84725fc37183bb4c8bc5df700b318e"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.query.ts",
-            "integrity": "sha1:192e5aeabde4f1c3ec8d96d6e020804183c1ab20"
+            "integrity": "sha1:973f58dcd8ca6caf556aacceb778cf73c8b0ffc6"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.service.spec.ts",
-            "integrity": "sha1:2b26effe5ff5f5b5ca3206357542311170be91cc"
+            "integrity": "sha1:50ea4f8c6dde4cd48a34cf10cfb4fda6435edfdd"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue-by-id.service.ts",
-            "integrity": "sha1:dadce0eb0ec826a30b6aff84697ada31a9a43fe3"
+            "integrity": "sha1:4056a94dcbfaf5b6c53059ff3172ff69d1ea64fd"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue.query-handler.spec.ts",
-            "integrity": "sha1:e6d65f70db6892df8c0d8e056f87076465b8ca52"
+            "integrity": "sha1:9a51d4e2dbf5702421f5fe7c9475f022e242d0a9"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue.query-handler.ts",
-            "integrity": "sha1:79fd04715c78ab1fafc0eddca54de80d97cd8232"
+            "integrity": "sha1:bd2a5eb0bab747f07920111c6a9ab829284d3877"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue.query.ts",
-            "integrity": "sha1:75686cb497437080b8e928c90a29d8d76c712559"
+            "integrity": "sha1:db4b04f17d1c1081ab4b8b752ee87101c4f9317b"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue.service.spec.ts",
-            "integrity": "sha1:91fda81c33e122630fe785fdc9d3e4cfc7ec95b6"
+            "integrity": "sha1:5cdf55d52282c355bb5ad77fac6b8359b3cf85cd"
         },
         {
             "path": "src/@app/queue-manager/queue/application/find/queue-manager-find-queue.service.ts",
-            "integrity": "sha1:eae119e12bf8fae0dd04f7e8abfbd0dd90308dd6"
+            "integrity": "sha1:90bca3c9432c5eecb5904e1040cdb9f64504a06e"
         },
         {
             "path": "src/@app/queue-manager/queue/application/get/queue-manager-get-queues.query-handler.spec.ts",
-            "integrity": "sha1:8a445a72378a27ad6da897798a548da67c441d33"
+            "integrity": "sha1:e513b12192ec235265fdd603c739c896dff6e9da"
         },
         {
             "path": "src/@app/queue-manager/queue/application/get/queue-manager-get-queues.query-handler.ts",
-            "integrity": "sha1:a4f9a12c05693b9a8b59955b6f6d25ae74de1fe0"
+            "integrity": "sha1:331f9e53df3e06b52cb8d86bdfda649cd3de6503"
         },
         {
             "path": "src/@app/queue-manager/queue/application/get/queue-manager-get-queues.query.ts",
-            "integrity": "sha1:e0ba56fc7a2771cea77a64abc4212d841dac0850"
+            "integrity": "sha1:d524701ab5a023892c987c728660583c4c4666cb"
         },
         {
             "path": "src/@app/queue-manager/queue/application/get/queue-manager-get-queues.service.spec.ts",
-            "integrity": "sha1:85ad3f913cade3c0c5d78c79e06b11f42980f761"
+            "integrity": "sha1:46dac6d8b39b2b35bbb8b4051fe523188b0a90ac"
         },
         {
             "path": "src/@app/queue-manager/queue/application/get/queue-manager-get-queues.service.ts",
-            "integrity": "sha1:699d0c54509d5e23efe3c638280174f1f2ac3187"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/max/queue-manager-max-queue.query-handler.spec.ts",
-            "integrity": "sha1:8a85cbaa6d951fe2bb27d4d24af84b9c7d117cfc"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/max/queue-manager-max-queue.query-handler.ts",
-            "integrity": "sha1:3256dca47697c7947234896e2de64759e8b7bbb6"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/max/queue-manager-max-queue.query.ts",
-            "integrity": "sha1:1c681c3bff0d4b102d85337eef0e9459a31328bd"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/max/queue-manager-max-queue.service.spec.ts",
-            "integrity": "sha1:7e7cb27a35766120af7ea7ddee6b1368b5f1a4a8"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/max/queue-manager-max-queue.service.ts",
-            "integrity": "sha1:7e2784f61f05f7b6fde179f2e672bec6210c03e5"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/min/queue-manager-min-queue.query-handler.spec.ts",
-            "integrity": "sha1:f0ef95c8de5218aed6548e424c9616f13d9a31b3"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/min/queue-manager-min-queue.query-handler.ts",
-            "integrity": "sha1:3834baf8fe58c14acb46f9c44c596092bd664633"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/min/queue-manager-min-queue.query.ts",
-            "integrity": "sha1:edc729347b9e54b015b91a1a9f459c082b3ee98a"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/min/queue-manager-min-queue.service.spec.ts",
-            "integrity": "sha1:e289684c5b18bab9cc1316102f1844a19227d8fb"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/min/queue-manager-min-queue.service.ts",
-            "integrity": "sha1:337788a7e6fc23b08d4a8c52b0fb86c6c673a11e"
+            "integrity": "sha1:6f638e76759b22f2c113e04f0c9e740005ddd1d3"
         },
         {
             "path": "src/@app/queue-manager/queue/application/paginate/queue-manager-paginate-queues.query-handler.spec.ts",
-            "integrity": "sha1:ddad61985bdd886e21e745af6f0d1c74d6e7a4d3"
+            "integrity": "sha1:49be96f2301012c88469dc5ac0ede643b7a7d439"
         },
         {
             "path": "src/@app/queue-manager/queue/application/paginate/queue-manager-paginate-queues.query-handler.ts",
-            "integrity": "sha1:58b96cc34ef5dca75d0fadadb8c01f61f737ab78"
+            "integrity": "sha1:ad16875e4ca2f680afb7eb9e0d68cc2fdaa4e196"
         },
         {
             "path": "src/@app/queue-manager/queue/application/paginate/queue-manager-paginate-queues.query.ts",
-            "integrity": "sha1:343cf0a3d0d9d6af8a1d7714dea152f48c42de91"
+            "integrity": "sha1:7e095ee2d7c915365d76b444d666667fa2f7c1ed"
         },
         {
             "path": "src/@app/queue-manager/queue/application/paginate/queue-manager-paginate-queues.service.spec.ts",
-            "integrity": "sha1:8c2ca14ed815de2d551b14cd15e523aa2b839618"
+            "integrity": "sha1:8f74c70ce7ce0a19b5bcd37785eeec497c327d22"
         },
         {
             "path": "src/@app/queue-manager/queue/application/paginate/queue-manager-paginate-queues.service.ts",
-            "integrity": "sha1:b50ed77bbe5d9f8137c43325690934e57f3b8632"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.query-handler.spec.ts",
-            "integrity": "sha1:6d1dab7c60147c6a58d9770570886c11d627a241"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.query-handler.ts",
-            "integrity": "sha1:f3ce8a9e5204290e200b0dbb6f7364e3860f76a9"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.query.ts",
-            "integrity": "sha1:ffcbe792713be04655c169962a77d8063eeb26d2"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.service.spec.ts",
-            "integrity": "sha1:5d969336319232679c12f667a7a384dfbee3941b"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/raw-sql/queue-manager-raw-sql-queues.service.ts",
-            "integrity": "sha1:e9bedf6ba454fc56828f662f6ef46bb6ae87f9bd"
+            "integrity": "sha1:67e8c84cc1e499e54dd6670319852ba5f68be027"
         },
         {
             "path": "src/@app/queue-manager/queue/application/sagas/queue-manager-queue.sagas.ts",
-            "integrity": "sha1:1a6e264ee34bf147875dbdea3fddd3a51da3206f"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/sum/queue-manager-sum-queue.query-handler.spec.ts",
-            "integrity": "sha1:30a694eca6587f62ff3ee1bf489bbe679a38b7f1"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/sum/queue-manager-sum-queue.query-handler.ts",
-            "integrity": "sha1:60b5ca72f3b5b814759b46c63b4ad1a18d802873"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/sum/queue-manager-sum-queue.query.ts",
-            "integrity": "sha1:6d46ccec26083b49186bc98cd35ab1f6fc7e9dcd"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/sum/queue-manager-sum-queue.service.spec.ts",
-            "integrity": "sha1:fc1a81117b7c13a98cbad183c2358dd716bbcec2"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/sum/queue-manager-sum-queue.service.ts",
-            "integrity": "sha1:abccbf4ec94b90d79500121f4d085da0408767df"
+            "integrity": "sha1:3cca152f1eee06213a2004f9440c00ba1cd6b9ca"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.command-handler.spec.ts",
-            "integrity": "sha1:afca35954912fba3161f01398080ed88fbabee97"
+            "integrity": "sha1:acfeaf2685235346e74567db6e784ae491ad8c41"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.command-handler.ts",
-            "integrity": "sha1:fc76aff96430ca24f2f09ed90897f2526a3cbc9a"
+            "integrity": "sha1:3dee1a6806a7def1638c4f6b5f5ed464591b933e"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.command.ts",
-            "integrity": "sha1:b5339c43b547a86bd8ff36168e24a5d1078be58b"
+            "integrity": "sha1:443c3d613f1051584328b0cc313db6d3ee765ae4"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.service.spec.ts",
-            "integrity": "sha1:c7a82a83659e3e119666788c31b790b9d79ecdce"
+            "integrity": "sha1:e39278e4d172120384077d0c2a7558f2dfd3d3c8"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queue-by-id.service.ts",
-            "integrity": "sha1:7b02cae666b91aa2d867bb4c99be7872afae6c51"
+            "integrity": "sha1:d71b61f7063418b08dc6b8444de17aa81a59c6d1"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queues.command-handler.spec.ts",
-            "integrity": "sha1:8f3fea5973f486f8f6c86365452e19a0ed6bcea3"
+            "integrity": "sha1:57e8ce63058dc029ae4155873f62d3115b014e04"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queues.command-handler.ts",
-            "integrity": "sha1:2bbabcd4a530081b38303165b06ed1a0da020074"
+            "integrity": "sha1:4d798d0595219d619427efaa800c4e2e72df3a61"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queues.command.ts",
-            "integrity": "sha1:20cd7590cee3c9fa4333393f1a1b7c965e38387e"
+            "integrity": "sha1:fe37d5371482f75e422f49c3c8cdd7283f6e9f15"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queues.service.spec.ts",
-            "integrity": "sha1:373b6326e1dab0b1993b512243a59908bd02f432"
+            "integrity": "sha1:7afc90fd8bb1bfcb58e8b51514a4359753d0b09a"
         },
         {
             "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-queues.service.ts",
-            "integrity": "sha1:5354d9827aa140854f7bf53f8d41241d92d1e9ca"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-and-increment-queues.command-handler.spec.ts",
-            "integrity": "sha1:4744e7cabc44f4d618d157474cab866c473bb2ce"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-and-increment-queues.command-handler.ts",
-            "integrity": "sha1:dca8642ddf5470e7d3785dc6a43e9089fe16727a"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-and-increment-queues.command.ts",
-            "integrity": "sha1:aa00bd9022081a51b5e339123ad95ea85dc21dcf"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-and-increment-queues.service.spec.ts",
-            "integrity": "sha1:193bbabb55a02dfea2ab5a71de35a6eb9ddc3103"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/update/queue-manager-update-and-increment-queues.service.ts",
-            "integrity": "sha1:632d8de82001b617c3f0f221417046ee8ed718cc"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/upsert/queue-manager-upsert-queue.command-handler.spec.ts",
-            "integrity": "sha1:567587563a758033db7fd23c5f3ab080da0e9342"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/upsert/queue-manager-upsert-queue.command-handler.ts",
-            "integrity": "sha1:f56edc1720d28c3c711c114c42fef37c49b624df"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/upsert/queue-manager-upsert-queue.command.ts",
-            "integrity": "sha1:266337d55e7c3c9a7641e64acff06ef67a4e6a9e"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/upsert/queue-manager-upsert-queue.service.spec.ts",
-            "integrity": "sha1:3cfd5707581453a59e9d50d6eab03ebf119e40da"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/application/upsert/queue-manager-upsert-queue.service.ts",
-            "integrity": "sha1:cf7b3aff0da9f1a0771c7f432f2ce1253437471c"
+            "integrity": "sha1:871e2b147443ba700631a3b5704381056e122d07"
         },
         {
             "path": "src/@app/queue-manager/queue/domain/queue-manager-queue.aggregate.ts",
-            "integrity": "sha1:bfbe2b4c8ee5fb0de34cc9aecae29c8ccdb75083"
+            "integrity": "sha1:57b024302e037fa8e525e5d136aef296c1ec7c89"
         },
         {
             "path": "src/@app/queue-manager/queue/domain/queue-manager-queue.mapper.ts",
-            "integrity": "sha1:3026ffa20763af235531311d1c3e66b564a8c5d0"
+            "integrity": "sha1:cf1e8742a99bc1cddd6edd77f20300e645188b8a"
         },
         {
             "path": "src/@app/queue-manager/queue/domain/queue-manager-queue.repository.ts",
-            "integrity": "sha1:3b5a7abd308ce1eb336638c39499c068881ab968"
+            "integrity": "sha1:133d8dd183e374206617a3bfa1eb9254df8ee103"
         },
         {
             "path": "src/@app/queue-manager/queue/domain/queue-manager-queue.response.ts",
-            "integrity": "sha1:c6982d8ab6a0c596fe7a9ca6fb038943c5486950"
+            "integrity": "sha1:989f49268117452a23737aa54bdeee872aeed2da"
         },
         {
             "path": "src/@app/queue-manager/queue/domain/value-objects/index.ts",
-            "integrity": "sha1:3a7f2e0414a8849ca38e950a34997b899f6bf0e5"
+            "integrity": "sha1:2cdd737f4293e78bf553adb72fca791452e289db"
         },
         {
             "path": "src/@app/queue-manager/queue/index.ts",
-            "integrity": "sha1:6a55e89c736e051b4184bb74c563e505eec571ed"
+            "integrity": "sha1:0733bbdd33fc7735818d7dd5eca6e88a54a29d1c"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.data.ts",
-            "integrity": "sha1:e02d6f7e2c87ee018c5022c7e35fe5e21bc742dd"
+            "integrity": "sha1:ab53e8e356e006405304cb991948db15e97814f5"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.repository.ts",
-            "integrity": "sha1:6685cc5c89e6a0842f52ae3f37de604e8b248071"
+            "integrity": "sha1:524acf779fb7e3d7897b0115a27908a7cc53b041"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/mock/queue-manager-mock-queue.seeder.ts",
-            "integrity": "sha1:51d38399c2b93842aeb6ced1f1a4c193bb38b3d4"
+            "integrity": "sha1:7d4ac0f11d9f54a802ff7d82f1de6dbaf1d81104"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/sequelize/queue-manager-sequelize-queue.model.ts",
-            "integrity": "sha1:8524e27e7bf49d6742af833a1d0c06a800c65b67"
+            "integrity": "sha1:477ebb59ef173094e346e1529b550658deabdb21"
         },
         {
             "path": "src/@app/queue-manager/queue/infrastructure/sequelize/queue-manager-sequelize-queue.repository.ts",
-            "integrity": "sha1:b4750cfcb5769171ef467954cdba2c4d6f0943ee"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-id.ts",
-            "integrity": "sha1:6a4f45372f88ac31c34a32b307a5eebfc6a7bdbb"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-prefix.ts",
-            "integrity": "sha1:e04cfba1054308592e219298bc62a98b45d3ca2c"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-name.ts",
-            "integrity": "sha1:1db85ae05efa17b333b6040c8e4958de2247131b"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-created-at.ts",
-            "integrity": "sha1:5284d1157696e1b7bc6a865a3af0cb596630de04"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-updated-at.ts",
-            "integrity": "sha1:f7bc2f79d7e0c4f6a3f20da062c6258b387de3b1"
-        },
-        {
-            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-deleted-at.ts",
-            "integrity": "sha1:960371e3d01f4c869a834bf3503cb9c3f7361a41"
+            "integrity": "sha1:5c47eda4239d2cbc3fb0b9cd0c6442c13dcdebdc"
         },
         {
             "path": "src/@api/queue-manager/queue-manager.seeder.ts",
-            "integrity": "sha1:d7ff005816c298c8fb7826b29adb7b8f7dd70c41"
+            "integrity": "sha1:6c6e4fa0d9b6e030be373466bb1794b683158e58"
+        },
+        {
+            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-id.ts",
+            "integrity": "sha1:89637e9bd911e6fbccee0698fc7886dccd74cb8d"
+        },
+        {
+            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-row-id.ts",
+            "integrity": "sha1:92b298bf85074c5b863dd36a674f1601efff43b6"
+        },
+        {
+            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-prefix.ts",
+            "integrity": "sha1:1a22f036f3717b24ed878fac46dad1fcc0cf4e42"
+        },
+        {
+            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-name.ts",
+            "integrity": "sha1:ffba88764a04e14f026f1d029c8f4e7e9fdd6aa4"
+        },
+        {
+            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-created-at.ts",
+            "integrity": "sha1:f7b765ada3a81f6bb59dcb5529fb17391654f721"
+        },
+        {
+            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-updated-at.ts",
+            "integrity": "sha1:246803fe8dac2fe7a27c07522925005fa7a98f95"
+        },
+        {
+            "path": "src/@app/queue-manager/queue/domain/value-objects/queue-manager-queue-deleted-at.ts",
+            "integrity": "sha1:a8317bcb16dd2266d7646d3831cf3ae3f737268b"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-create-queue.controller.spec.ts",
-            "integrity": "sha1:ce29c1d67d1644e5a144d5bd0af9150bf1db1dcb"
+            "integrity": "sha1:246515a5d04e96447cd3847ed59498b966b39ed5"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-create-queue.controller.ts",
-            "integrity": "sha1:4003a4dd4201c2de0149b25e8d5274ffd1701b76"
+            "integrity": "sha1:f0f530712efb1ab6461987da6d02fd7027169b75"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-create-queues.controller.spec.ts",
-            "integrity": "sha1:518ed109b506e9150b2a24bff69adb25ac17c7d7"
+            "integrity": "sha1:0cae52cda059fb75380d081348b190ed5c967632"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-create-queues.controller.ts",
-            "integrity": "sha1:4b4ded27cedf30d0c10a0acfa942f42548d8bdaa"
+            "integrity": "sha1:8434608383e25c2b02a2cd53cbe8abb432305fed"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-delete-queue-by-id.controller.spec.ts",
-            "integrity": "sha1:fd26ce8e1806e6bd0a7dfb71b74f69f5832179a7"
+            "integrity": "sha1:02c81a8c175618d46711bfdd97ce9e7a2a3f3190"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-delete-queue-by-id.controller.ts",
-            "integrity": "sha1:040357197ac5f747c87a5f26c3e06c8e5f9856a2"
+            "integrity": "sha1:a156bd7f5f2b618028d58635e1bb8738769ff29c"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-delete-queues.controller.spec.ts",
-            "integrity": "sha1:61b8c319e26a75a81b64c88846a94fd6ed0c4815"
+            "integrity": "sha1:e173d92e4f24a5f4b9dcc49a2c6fc18f15200e2b"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-delete-queues.controller.ts",
-            "integrity": "sha1:e7b81aec1217d0e9b170d582f83281ea26b52993"
+            "integrity": "sha1:76fdb0940061df791c8d90ad4ca25455d6a71c5a"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-find-queue-by-id.controller.spec.ts",
-            "integrity": "sha1:3982fc20a9baf9036049eb24b750b1f6c066b3cd"
+            "integrity": "sha1:1d0aa3dd28852af180e619e1ad7016c2967d9e6b"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-find-queue-by-id.controller.ts",
-            "integrity": "sha1:675a50229a6e7a18013d9608f3d1c116f2db7655"
+            "integrity": "sha1:4cd1e3ac54c59a336c65d5b1ffeb6c6ceb8858c3"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-find-queue.controller.spec.ts",
-            "integrity": "sha1:981edf4617103108e66d92803e83dcc26285908b"
+            "integrity": "sha1:6a755a5e2d5a2589307f6a92a728befba98aad15"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-find-queue.controller.ts",
-            "integrity": "sha1:29b0d4f5eb38d87f566c250f2818228dea6f8cdf"
+            "integrity": "sha1:3e3c50b2213c60ed5e7764b8583e6767cf82a974"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-get-queues.controller.spec.ts",
-            "integrity": "sha1:88b11c1e57d04dc1ff22063fa82f039dff7cd82b"
+            "integrity": "sha1:5703aa6e35cd95559880726d6e8b3ae5bf297145"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-get-queues.controller.ts",
-            "integrity": "sha1:aa5f89d11ca0fbd8caa0e001e379dd3c57f70e0c"
+            "integrity": "sha1:e2f0340e54e4021e18330c7e4277483807c79178"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-paginate-queues.controller.spec.ts",
-            "integrity": "sha1:fc51ff8310c813d589e222aa7fbdbf08470b1156"
+            "integrity": "sha1:29316adcddea0ec5b3e630a1e73f877e23db4c19"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-paginate-queues.controller.ts",
-            "integrity": "sha1:a2b9d207566f32140abf4c943cd736400e1dd3eb"
+            "integrity": "sha1:560535043ccfbd91a8a9f23c4ea95215115ee087"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-update-queue-by-id.controller.spec.ts",
-            "integrity": "sha1:e7508d6011485131576086aa64114bc765c0ab24"
+            "integrity": "sha1:38903f6ce1ae0cb8df21945ee902752d161b2192"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-update-queue-by-id.controller.ts",
-            "integrity": "sha1:7457047819f43a2808170eecc3effee3d6fc02b3"
+            "integrity": "sha1:f40aa4c9436ee9635cccb2f636d3b0982d1c6f51"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-update-queues.controller.spec.ts",
-            "integrity": "sha1:50f873ee87223d948467a1cc60830de65ec7d8d8"
+            "integrity": "sha1:e225ac9668de932ced73c25bf6fd5228b46899c2"
         },
         {
             "path": "src/@api/queue-manager/queue/controllers/queue-manager-update-queues.controller.ts",
-            "integrity": "sha1:cf058e9fcdea1891af651e89ad4abd645747b91e"
-        },
-        {
-            "path": "src/@api/queue-manager/queue/controllers/queue-manager-upsert-queue.controller.spec.ts",
-            "integrity": "sha1:2e630b33d03a0dee0f3796ea68591c4191e916af"
-        },
-        {
-            "path": "src/@api/queue-manager/queue/controllers/queue-manager-upsert-queue.controller.ts",
-            "integrity": "sha1:5766470ec710df40c5dd6beb591485046b3bb834"
+            "integrity": "sha1:d3ae915d99bea8fe2a12615e78d51e8d00175496"
         },
         {
             "path": "src/@api/queue-manager/queue/dto/queue-manager-queue.dto.ts",
-            "integrity": "sha1:fdf0e4dd37b1391125fe2274a36dec6f04bc21aa"
+            "integrity": "sha1:32c06f78707418aaa296f914f99008186ad2654f"
         },
         {
             "path": "src/@api/queue-manager/queue/dto/queue-manager-create-queue.dto.ts",
-            "integrity": "sha1:a97b00c5fb9914ba9e5f4c8447ecb4b7155fc0ca"
+            "integrity": "sha1:f141875efb87a50912be31795d8dbf243742f511"
         },
         {
             "path": "src/@api/queue-manager/queue/dto/queue-manager-update-queue-by-id.dto.ts",
-            "integrity": "sha1:27f6777569cdf7137292c05dddeb692f3c1cf051"
+            "integrity": "sha1:d745c6257a137e2b34ce16e91a32ec961d3b64b0"
         },
         {
             "path": "src/@api/queue-manager/queue/dto/queue-manager-update-queues.dto.ts",
-            "integrity": "sha1:85a0dc4b09328f64b7c868cd085d77208e10f7d3"
+            "integrity": "sha1:ee332c044d6a874950389dd0f7c39661bd227bb9"
         },
         {
             "path": "src/@api/queue-manager/queue/dto/index.ts",
@@ -595,203 +439,187 @@
         },
         {
             "path": "src/@api/queue-manager/queue/dto/public-api.ts",
-            "integrity": "sha1:fb9e2f97bd4f7a1087a4fd96c3afada0d0e60539"
+            "integrity": "sha1:6339b51934e481843cc40d0395549576fd2949ed"
         },
         {
             "path": "src/@api/queue-manager/queue/graphql/queue-manager-queue.graphql",
-            "integrity": "sha1:19e207e285d374deee343e011caed2e7cec81027"
+            "integrity": "sha1:ec8de5c06ad76cde55f8c53280d6d6eb63a49097"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-create-queue.handler.spec.ts",
-            "integrity": "sha1:32e06e51a0985107dc24e75aa90c74bed00cab68"
+            "integrity": "sha1:9303b8afd9c891b24cd5ef8f46af9f13fd4b11c0"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-create-queue.handler.ts",
-            "integrity": "sha1:200c04330a3c5a04b374364a4819bbd89d213f55"
+            "integrity": "sha1:dd4c23cf7200a025a84fd5c1a8ea6de421748cb7"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-create-queues.handler.spec.ts",
-            "integrity": "sha1:4772e85be4fed93612f2a01dfe1be8c3e99d3814"
+            "integrity": "sha1:90eedb8542d069f6a12533f6c1da3dec7bcca268"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-create-queues.handler.ts",
-            "integrity": "sha1:5c312dca8c0520ac8f07afad82f24a49f84f114e"
+            "integrity": "sha1:4444251e2b9bfef581314ba8f0875a4e7042c924"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-delete-queue-by-id.handler.spec.ts",
-            "integrity": "sha1:79bdb5d377d09f39408532c79fca46b932a20098"
+            "integrity": "sha1:8cd713ea1283ca05532b88196f0f42c4c8fa0aef"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-delete-queue-by-id.handler.ts",
-            "integrity": "sha1:e47cf14860b5f0502d47443512fd0ed435083390"
+            "integrity": "sha1:62a9ee74d1eb6e41e0eba92e06bfab5760909ea6"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-delete-queues.handler.spec.ts",
-            "integrity": "sha1:80f1a602d87f449b46af63c94c39f68e521feaff"
+            "integrity": "sha1:22a4bddb7d217a92c8cdd087e482e00b86b52abe"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-delete-queues.handler.ts",
-            "integrity": "sha1:7a7341bb4638072d7d140b381ae9bb5f7d7d23ec"
+            "integrity": "sha1:ec878633dc580bc0be7c4e2d68d03cf5a2d096d8"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-find-queue-by-id.handler.spec.ts",
-            "integrity": "sha1:9cbc809e555ed74e571f0ec49738a3e7cac0b301"
+            "integrity": "sha1:6e989066ad8d158a73512fbd243a45f8320fae22"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-find-queue-by-id.handler.ts",
-            "integrity": "sha1:da8f9525bd9c1a43b909b1191859fec3866b67f8"
+            "integrity": "sha1:2dc0732785429684d710b263b7a91ed509bcdcad"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-find-queue.handler.spec.ts",
-            "integrity": "sha1:c3c18b9032e68053c8402ca0e7974cd4e450ab42"
+            "integrity": "sha1:361986ab19b59aa856b13407768f85855e8ecf47"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-find-queue.handler.ts",
-            "integrity": "sha1:876919a8009bc8051e8e9a1a9da296006d0ed1b5"
+            "integrity": "sha1:79b1efa875897da4cb95dd1ad1b27110ee5def1c"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-get-queues.handler.spec.ts",
-            "integrity": "sha1:24d894d55558315fcb5561e345702dac8bd24d78"
+            "integrity": "sha1:93ee7c961845d216e182298780161e3105001a29"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-get-queues.handler.ts",
-            "integrity": "sha1:e423cc9c9816c48e59c783115ccff6270e35d77a"
+            "integrity": "sha1:43d8214c69034b46cb383d662ebde54c8422f824"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-paginate-queues.handler.spec.ts",
-            "integrity": "sha1:1badc961537c5c375c15bad1cf34dcd445f7b1da"
+            "integrity": "sha1:7f0e5964c293d944d46ef894ccce16349073a654"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-paginate-queues.handler.ts",
-            "integrity": "sha1:8692318a239942909bb6743045771f4fb1afd4cd"
+            "integrity": "sha1:e3fb6fd52fcccf3328507876b7e2b2794489f066"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-update-queue-by-id.handler.spec.ts",
-            "integrity": "sha1:3d2adb2c47561f7732211b91978ea9c577e12987"
+            "integrity": "sha1:d26eae90575d7895900ad73825e0e2d930a3f68a"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-update-queue-by-id.handler.ts",
-            "integrity": "sha1:653f7492dab4357ffd047bb335ced3c1425d19f5"
+            "integrity": "sha1:5d2b59095c79d3ea7176ef4643aa5bea6a7f3cbd"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-update-queues.handler.spec.ts",
-            "integrity": "sha1:6cc9c07bcc337296dc8f2a1f87c4268ff6578d76"
+            "integrity": "sha1:08ff9a5ed6d89d0a2a6ffd1670f98d2249ed9307"
         },
         {
             "path": "src/@api/queue-manager/queue/handlers/queue-manager-update-queues.handler.ts",
-            "integrity": "sha1:d3da0e3ed84099f5d961622a101270940a6a64dd"
-        },
-        {
-            "path": "src/@api/queue-manager/queue/handlers/queue-manager-upsert-queue.handler.spec.ts",
-            "integrity": "sha1:c58cdc2c3acdd81d252920fa682d0747a8df053f"
-        },
-        {
-            "path": "src/@api/queue-manager/queue/handlers/queue-manager-upsert-queue.handler.ts",
-            "integrity": "sha1:98359a7633750b99af3328bb86c03de973f85b58"
+            "integrity": "sha1:ee13e022afd1590119a4c82d74171b9c6bbfab13"
         },
         {
             "path": "src/@api/queue-manager/queue/index.ts",
-            "integrity": "sha1:4743c300427bf75ec04c622f997a121db6571d41"
+            "integrity": "sha1:ee742aec193aa2a5f29154dc4db3c699aaf8d04d"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-create-queue.resolver.spec.ts",
-            "integrity": "sha1:ca0688bce8d18ddddfd507fc02e2f09caac26290"
+            "integrity": "sha1:bc0ab4925581c11143eb41aed6da65ea4479fb53"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-create-queue.resolver.ts",
-            "integrity": "sha1:711ed7e3a590ad5a65734f9dd7fda64e6a82c5c2"
+            "integrity": "sha1:87cdd3c45f2a9071524177d4cbb8ba10cb13c8cc"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-create-queues.resolver.spec.ts",
-            "integrity": "sha1:7705ef652c70802f83b4da8f4ceca4c50a7ef47b"
+            "integrity": "sha1:d8fbfc6fa0fddfce6844b983202cc69f86abe667"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-create-queues.resolver.ts",
-            "integrity": "sha1:63659c951ae47816f6e8c8dcc7acca69b587c122"
+            "integrity": "sha1:f276618195d5379d978317d90861c7ede5a64e94"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-delete-queue-by-id.resolver.spec.ts",
-            "integrity": "sha1:97b80082fd4c7b621da198bb020d3f87f805414a"
+            "integrity": "sha1:db1b18a5084cc8375826c45ada8991531ecfc2a4"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-delete-queue-by-id.resolver.ts",
-            "integrity": "sha1:8221f6f68839714d02ee553ad28e3d6bc35f9520"
+            "integrity": "sha1:a85be232b4a02dd324dccd07408c6005b29c7578"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-delete-queues.resolver.spec.ts",
-            "integrity": "sha1:034857beccc629625e1934cbbc5dd5ca35ffbf8e"
+            "integrity": "sha1:7a5bcd695abb28f6d018fc8da7d872bd6b53b9fe"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-delete-queues.resolver.ts",
-            "integrity": "sha1:77096944e818a58cf24a82fffb45e7b13622b0b6"
+            "integrity": "sha1:2b190970eb8424502a0bceab5744c73468e2499a"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-find-queue-by-id.resolver.spec.ts",
-            "integrity": "sha1:618ecbe69a349f94c1fa85308c5d9d946b824861"
+            "integrity": "sha1:e8f32371609762b1844c8e706abbe9af18806893"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-find-queue-by-id.resolver.ts",
-            "integrity": "sha1:184ca04fb55256e6240def63a005b848d4d525a7"
+            "integrity": "sha1:20c83b75f8c56e6818808e23fd6c99df8013e015"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-find-queue.resolver.spec.ts",
-            "integrity": "sha1:319100d168799f75c29f2e219437051f03607d1e"
+            "integrity": "sha1:59582ffa56dfc84d38b10900b943d04a2d177fd6"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-find-queue.resolver.ts",
-            "integrity": "sha1:6417c2cbd74a891f6ee4bcb8007f405ad47a61d2"
+            "integrity": "sha1:66bab940b1e28eee904be67173dff80b68c80519"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-get-queues.resolver.spec.ts",
-            "integrity": "sha1:f2d829e5c066a65727fdbdfd65b35671fa0014a4"
+            "integrity": "sha1:4b8be2540be9b41cf8572659e0de4fb0c1c31fd1"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-get-queues.resolver.ts",
-            "integrity": "sha1:dd07c758475336bd40b89d690b572addf8653ff3"
+            "integrity": "sha1:236e584a41df1595863b74d59f7a7de92b1252e2"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-paginate-queues.resolver.spec.ts",
-            "integrity": "sha1:0c0a183f586d3a6c9ea3e8487dadcce81fc95d01"
+            "integrity": "sha1:a0ee9501e243669babe9d70f378c335bbec0a325"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-paginate-queues.resolver.ts",
-            "integrity": "sha1:3a6decb9b9b08280378c2191748ef3a184fed50d"
+            "integrity": "sha1:144c300d2e92149d9d37e804c7399b8bdfdf9e9b"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-update-queue-by-id.resolver.spec.ts",
-            "integrity": "sha1:cc180010a31e0b8b8f2f6380a38823ccf9eee0a0"
+            "integrity": "sha1:8f802d46c0f31de301af936b8e7047ea137a76c4"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-update-queue-by-id.resolver.ts",
-            "integrity": "sha1:75155dcacf47ed7ca6ecdfa7a24f9bc20bbd0a03"
+            "integrity": "sha1:31f072255bfd8da67d77a7109ee7187cd68596e3"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-update-queues.resolver.spec.ts",
-            "integrity": "sha1:50fa5feb21e17d380de60b3bbdfd39b28a3e127f"
+            "integrity": "sha1:0e2c4175b910dd96e3750ba72a6e87475e35a2ff"
         },
         {
             "path": "src/@api/queue-manager/queue/resolvers/queue-manager-update-queues.resolver.ts",
-            "integrity": "sha1:deeea069d852db7de9ce0dd93d9aceb5196fff7f"
-        },
-        {
-            "path": "src/@api/queue-manager/queue/resolvers/queue-manager-upsert-queue.resolver.spec.ts",
-            "integrity": "sha1:9f15b0237e1595f1b92ef8a672fe34c0755a1ad7"
-        },
-        {
-            "path": "src/@api/queue-manager/queue/resolvers/queue-manager-upsert-queue.resolver.ts",
-            "integrity": "sha1:be3d8f7e8e7f3f799d930004b3aa3ea44fdca3d8"
+            "integrity": "sha1:e85c12051c541e16123d01ebd55c42fc07d4e9b6"
         },
         {
             "path": "src/@api/queue-manager/queue/seeder/queue-manager-queue.seeder.ts",
-            "integrity": "sha1:43554e280f34835d7ba7873b344456de9b190439"
+            "integrity": "sha1:bd91a64c09deef26395b4d8be09036f5862308f7"
         },
         {
             "path": "test/acceptance/queue-manager/queue.e2e-spec.ts",
-            "integrity": "sha1:6fd7ca5672e1d5ef792e822b7176af381a8ee1bd"
+            "integrity": "sha1:cf00bcb292cdf4851d5a61ead86f6ac2a8ff3a32"
         },
         {
             "path": "postman/queue-manager/queue-manager.queue.postman.json",
-            "integrity": "sha1:f18202fa6ea1734d590eccab00af28c9583b68c2"
+            "integrity": "sha1:25c49df1fe119667b5cc13e00524ac2ac80f5e27"
         }
     ]
 }

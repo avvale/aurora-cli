@@ -26,6 +26,14 @@ export const QueueManagerRepositories = [
     {
         provide : QueueManagerIJobRegistryRepository,
         useClass: QueueManagerSequelizeJobRegistryRepository
+    },
+    {
+        provide : QueueManagerIQueueRepository,
+        useClass: QueueManagerSequelizeQueueRepository,
+    },
+    {
+        provide : QueueManagerIJobRegistryRepository,
+        useClass: QueueManagerSequelizeJobRegistryRepository,
     }
 ];
 export const QueueManagerSagas = [

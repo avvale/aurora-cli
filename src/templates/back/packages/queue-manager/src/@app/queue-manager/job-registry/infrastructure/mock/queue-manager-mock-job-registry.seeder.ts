@@ -1,4 +1,7 @@
-import { QueueManagerJobRegistry, queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
+import {
+    QueueManagerJobRegistry,
+    queueManagerMockJobRegistryData,
+} from '@app/queue-manager/job-registry';
 import {
     QueueManagerJobRegistryCreatedAt,
     QueueManagerJobRegistryDeletedAt,
@@ -6,6 +9,7 @@ import {
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
     QueueManagerJobRegistryQueueName,
+    QueueManagerJobRegistryRowId,
     QueueManagerJobRegistryState,
     QueueManagerJobRegistryTags,
     QueueManagerJobRegistryUpdatedAt,
@@ -15,32 +19,35 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class QueueManagerMockJobRegistrySeeder extends MockSeeder<QueueManagerJobRegistry>
-{
+export class QueueManagerMockJobRegistrySeeder extends MockSeeder<QueueManagerJobRegistry> {
     public collectionSource: QueueManagerJobRegistry[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const jobRegistry of _.orderBy(queueManagerMockJobRegistryData, ['id']))
-        {
+        for (const jobRegistry of _.orderBy(queueManagerMockJobRegistryData, [
+            'id',
+        ])) {
             this.collectionSource.push(
                 QueueManagerJobRegistry.register(
                     new QueueManagerJobRegistryId(jobRegistry.id),
+                    new QueueManagerJobRegistryRowId(jobRegistry.rowId),
                     new QueueManagerJobRegistryQueueName(jobRegistry.queueName),
                     new QueueManagerJobRegistryState(jobRegistry.state),
                     new QueueManagerJobRegistryJobId(jobRegistry.jobId),
                     new QueueManagerJobRegistryJobName(jobRegistry.jobName),
                     new QueueManagerJobRegistryTags(jobRegistry.tags),
-                    new QueueManagerJobRegistryCreatedAt({ currentTimestamp: true }),
-                    new QueueManagerJobRegistryUpdatedAt({ currentTimestamp: true }),
+                    new QueueManagerJobRegistryCreatedAt({
+                        currentTimestamp: true,
+                    }),
+                    new QueueManagerJobRegistryUpdatedAt({
+                        currentTimestamp: true,
+                    }),
                     new QueueManagerJobRegistryDeletedAt(null),
                 ),
             );

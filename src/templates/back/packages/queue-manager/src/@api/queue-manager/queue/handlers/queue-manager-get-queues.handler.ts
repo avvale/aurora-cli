@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class QueueManagerGetQueuesHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class QueueManagerGetQueuesHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<QueueManagerQueue[] | QueueManagerQueueDto[]>
-    {
-        return await this.queryBus.ask(new QueueManagerGetQueuesQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<QueueManagerQueue[] | QueueManagerQueueDto[]> {
+        return await this.queryBus.ask(
+            new QueueManagerGetQueuesQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

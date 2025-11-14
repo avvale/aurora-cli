@@ -1,8 +1,7 @@
-
-export class AuditingHttpCommunicationResponse
-{
+export class AuditingHttpCommunicationResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly tags: string[],
         public readonly event: string,
         public readonly status: number,

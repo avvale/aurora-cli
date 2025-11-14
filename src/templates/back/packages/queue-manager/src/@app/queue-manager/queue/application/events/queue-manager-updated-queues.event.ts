@@ -1,8 +1,11 @@
-import { QueueManagerUpdatedQueueEvent } from './queue-manager-updated-queue.event';
+import { QueueManagerUpdatedQueueEvent } from '@app/queue-manager/queue';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class QueueManagerUpdatedQueuesEvent
-{
+export class QueueManagerUpdatedQueuesEvent {
     constructor(
-        public readonly queues: QueueManagerUpdatedQueueEvent[],
+        public readonly event: {
+            payload: QueueManagerUpdatedQueueEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

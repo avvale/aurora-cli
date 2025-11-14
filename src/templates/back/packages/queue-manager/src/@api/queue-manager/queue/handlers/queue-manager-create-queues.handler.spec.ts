@@ -3,37 +3,35 @@ import { queueManagerMockQueueData } from '@app/queue-manager/queue';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerCreateQueuesHandler', () =>
-{
+describe('QueueManagerCreateQueuesHandler', () => {
     let handler: QueueManagerCreateQueuesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 QueueManagerCreateQueuesHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<QueueManagerCreateQueuesHandler>(QueueManagerCreateQueuesHandler);
+        handler = module.get<QueueManagerCreateQueuesHandler>(
+            QueueManagerCreateQueuesHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerCreateQueuesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerCreateQueuesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an queueManagerMockQueueData created', async () =>
-        {
+        test('should return an queueManagerMockQueueData created', async () => {
             expect(await handler.main(queueManagerMockQueueData)).toBe(true);
         });
     });

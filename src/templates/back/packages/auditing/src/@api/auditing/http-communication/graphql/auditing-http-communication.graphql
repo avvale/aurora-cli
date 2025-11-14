@@ -5,10 +5,9 @@ enum AuditingHttpCommunicationEvent {
     RESPONSE_REJECTED
 }
 
-
-type AuditingHttpCommunication
-{
+type AuditingHttpCommunication {
     id: ID!
+    rowId: GraphQLInt!
     tags: [GraphQLString]
     event: AuditingHttpCommunicationEvent!
     status: GraphQLInt
@@ -25,8 +24,7 @@ type AuditingHttpCommunication
     deletedAt: GraphQLTimestamp
 }
 
-input AuditingCreateHttpCommunicationInput
-{
+input AuditingCreateHttpCommunicationInput {
     id: ID!
     tags: [GraphQLString]
     event: AuditingHttpCommunicationEvent!
@@ -41,8 +39,7 @@ input AuditingCreateHttpCommunicationInput
     reprocessingHttpCommunicationId: ID
 }
 
-input AuditingUpdateHttpCommunicationByIdInput
-{
+input AuditingUpdateHttpCommunicationByIdInput {
     id: ID!
     tags: [GraphQLString]
     event: AuditingHttpCommunicationEvent
@@ -57,8 +54,7 @@ input AuditingUpdateHttpCommunicationByIdInput
     reprocessingHttpCommunicationId: ID
 }
 
-input AuditingUpdateHttpCommunicationsInput
-{
+input AuditingUpdateHttpCommunicationsInput {
     id: ID
     tags: [GraphQLString]
     event: AuditingHttpCommunicationEvent
@@ -73,8 +69,7 @@ input AuditingUpdateHttpCommunicationsInput
     reprocessingHttpCommunicationId: ID
 }
 
-type Query
-{
+type Query {
     auditingFindHttpCommunication(
         query: QueryStatement
         constraint: QueryStatement
@@ -94,11 +89,9 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     auditingCreateHttpCommunication(
         payload: AuditingCreateHttpCommunicationInput!
     ): AuditingHttpCommunication
@@ -118,10 +111,6 @@ type Mutation
         constraint: QueryStatement
     ): [AuditingHttpCommunication]!
 
-    auditingUpsertHttpCommunication(
-        payload: AuditingUpdateHttpCommunicationByIdInput!
-    ): AuditingHttpCommunication
-
     auditingDeleteHttpCommunicationById(
         id: ID!
         constraint: QueryStatement
@@ -131,5 +120,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [AuditingHttpCommunication]!
-
 }

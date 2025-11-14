@@ -1,8 +1,11 @@
-import { AuditingDeletedSideEffectEvent } from './auditing-deleted-side-effect.event';
+import { AuditingDeletedSideEffectEvent } from '@app/auditing/side-effect';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class AuditingDeletedSideEffectsEvent
-{
+export class AuditingDeletedSideEffectsEvent {
     constructor(
-        public readonly sideEffects: AuditingDeletedSideEffectEvent[],
+        public readonly event: {
+            payload: AuditingDeletedSideEffectEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

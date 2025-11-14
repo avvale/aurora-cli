@@ -1,28 +1,31 @@
-import { QueueManagerJobRegistryId } from './value-objects';
 import { QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IRepository,
+    LiteralObject,
+    Pagination,
+    QueryStatement,
+} from '@aurorajs.dev/core';
+import { QueueManagerJobRegistryId } from './value-objects';
 
-export abstract class QueueManagerIJobRegistryRepository implements IRepository<QueueManagerJobRegistry>
+export abstract class QueueManagerIJobRegistryRepository
+    implements IRepository<QueueManagerJobRegistry>
 {
     abstract readonly repository: any;
 
     // paginate records
-    abstract paginate(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<Pagination<QueueManagerJobRegistry>>;
+    abstract paginate(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<Pagination<QueueManagerJobRegistry>>;
 
     // find a single record
-    abstract find(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<QueueManagerJobRegistry | null>;
+    abstract find(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<QueueManagerJobRegistry | null>;
 
     // find a single record by id
     abstract findById(
@@ -32,34 +35,28 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<QueueManagerJobRegistry | null>;
 
     // get multiple records
-    abstract get(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<QueueManagerJobRegistry[]>;
+    abstract get(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<QueueManagerJobRegistry[]>;
 
     // get records with rawSQL
-    abstract rawSQL(
-        options?: {
-            rawSQL?: string;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<QueueManagerJobRegistry[]>;
+    abstract rawSQL(options?: {
+        rawSQL?: string;
+        cQMetadata?: CQMetadata;
+    }): Promise<QueueManagerJobRegistry[]>;
 
     // count records
-    abstract count(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<number>;
+    abstract count(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<number>;
 
     // max record
     abstract max(
@@ -68,7 +65,7 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // min record
@@ -78,7 +75,7 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // sum record
@@ -88,7 +85,7 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // ******************
@@ -102,8 +99,10 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             createOptions?: LiteralObject;
             dataFactory?: (aggregate: QueueManagerJobRegistry) => LiteralObject;
             // arguments to find object and check if object is duplicated
-            finderQueryStatement?: (aggregate: QueueManagerJobRegistry) => QueryStatement;
-        }
+            finderQueryStatement?: (
+                aggregate: QueueManagerJobRegistry,
+            ) => QueryStatement;
+        },
     ): Promise<void>;
 
     // create a single or multiple records
@@ -112,7 +111,7 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
         options?: {
             insertOptions?: LiteralObject;
             dataFactory?: (aggregate: QueueManagerJobRegistry) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update record by id
@@ -125,7 +124,7 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             dataFactory?: (aggregate: QueueManagerJobRegistry) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update records
@@ -137,7 +136,7 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: QueueManagerJobRegistry) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update and increment records
@@ -149,7 +148,7 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: QueueManagerJobRegistry) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // insert or update key identification element already existing in the table
@@ -158,7 +157,7 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
         options?: {
             upsertOptions?: LiteralObject;
             dataFactory?: (aggregate: QueueManagerJobRegistry) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete record
@@ -170,16 +169,14 @@ export abstract class QueueManagerIJobRegistryRepository implements IRepository<
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete records
-    abstract delete(
-        options?: {
-            deleteOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
+    abstract delete(options?: {
+        deleteOptions?: LiteralObject;
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<void>;
 }

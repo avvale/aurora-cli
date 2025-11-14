@@ -1,8 +1,7 @@
-
-export class AuditingSideEffectResponse
-{
+export class AuditingSideEffectResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly tags: string[],
         public readonly modelPath: string,
         public readonly modelName: string,

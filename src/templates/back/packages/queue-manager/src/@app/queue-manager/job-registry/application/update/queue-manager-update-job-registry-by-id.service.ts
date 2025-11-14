@@ -1,7 +1,8 @@
-import { QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
 import {
-    QueueManagerJobRegistryCreatedAt,
-    QueueManagerJobRegistryDeletedAt,
+    QueueManagerIJobRegistryRepository,
+    QueueManagerJobRegistry,
+} from '@app/queue-manager/job-registry';
+import {
     QueueManagerJobRegistryId,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
@@ -15,8 +16,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class QueueManagerUpdateJobRegistryByIdService
-{
+export class QueueManagerUpdateJobRegistryByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: QueueManagerIJobRegistryRepository,
@@ -33,11 +33,11 @@ export class QueueManagerUpdateJobRegistryByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const jobRegistry = QueueManagerJobRegistry.register(
             payload.id,
+            undefined, // rowId
             payload.queueName,
             payload.state,
             payload.jobId,
@@ -49,21 +49,20 @@ export class QueueManagerUpdateJobRegistryByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            jobRegistry,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(jobRegistry, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const jobRegistryRegister = this.publisher.mergeObjectContext(
-            jobRegistry,
-        );
+        const jobRegistryRegister =
+            this.publisher.mergeObjectContext(jobRegistry);
 
-        jobRegistryRegister.updated(jobRegistry); // apply event to model events
+        jobRegistryRegister.updated({
+            payload: jobRegistry,
+            cQMetadata,
+        }); // apply event to model events
         jobRegistryRegister.commit(); // commit all events of model
     }
 }

@@ -1,46 +1,42 @@
-import { QueueManagerCreateJobsRegistryController, QueueManagerCreateJobsRegistryHandler } from '@api/queue-manager/job-registry';
+import {
+    QueueManagerCreateJobsRegistryController,
+    QueueManagerCreateJobsRegistryHandler,
+} from '@api/queue-manager/job-registry';
 import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerCreateJobsRegistryController', () =>
-{
+describe('QueueManagerCreateJobsRegistryController', () => {
     let controller: QueueManagerCreateJobsRegistryController;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            controllers: [
-                QueueManagerCreateJobsRegistryController,
-            ],
+            controllers: [QueueManagerCreateJobsRegistryController],
             providers: [
                 {
-                    provide : QueueManagerCreateJobsRegistryHandler,
+                    provide: QueueManagerCreateJobsRegistryHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<QueueManagerCreateJobsRegistryController>(QueueManagerCreateJobsRegistryController);
+        controller = module.get<QueueManagerCreateJobsRegistryController>(
+            QueueManagerCreateJobsRegistryController,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerCreateJobsRegistryController should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerCreateJobsRegistryController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an queueManagerMockJobRegistryData created', async () =>
-        {
-            expect(
-                await controller.main(
-                    queueManagerMockJobRegistryData,
-                ),
-            )
-                .toBe(undefined);
+        test('should return an queueManagerMockJobRegistryData created', async () => {
+            expect(await controller.main(queueManagerMockJobRegistryData)).toBe(
+                undefined,
+            );
         });
     });
 });

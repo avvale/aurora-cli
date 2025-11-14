@@ -6,24 +6,33 @@ aggregateName: QueueManagerQueue
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: chat_paste_go
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: chat_paste_go
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
     nullable: false
   - name: prefix
     type: varchar
     maxLength: 63
     nullable: false
     index: unique
-    indexName: uniquePrefixName
+    indexFields:
+      - prefix
+      - name
   - name: name
     type: varchar
     maxLength: 63
     nullable: false
-    index: unique
-    indexName: uniquePrefixName
   - name: createdAt
     type: timestamp
     nullable: true
@@ -33,3 +42,12 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

@@ -1,23 +1,41 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Injector,
+    signal,
+    ViewEncapsulation,
+    WritableSignal,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AuditingHttpCommunication } from '@apps/auditing/auditing.types';
 import { HttpCommunicationService } from '@apps/auditing/http-communication';
-import { Action, Crumb, defaultDetailImports, log, mapActions, MatFormFieldAppearanceComponent, Utils, ViewDetailComponent } from '@aurora';
-import { lastValueFrom, takeUntil } from 'rxjs';
+import {
+    Action,
+    Crumb,
+    defaultDetailImports,
+    log,
+    mapActions,
+    MatFormFieldAppearanceComponent,
+    SnackBarInvalidFormComponent,
+    uuid,
+    ViewDetailComponent,
+} from '@aurora';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'auditing-http-communication-detail',
     templateUrl: './http-communication-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultDetailImports,
-        MatFormFieldAppearanceComponent, NgxJsonViewerModule,
+        MatFormFieldAppearanceComponent,
+        NgxJsonViewerModule,
     ],
 })
-export class HttpCommunicationDetailComponent extends ViewDetailComponent
-{
+export class HttpCommunicationDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..
 
@@ -25,106 +43,127 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: AuditingHttpCommunication;
+    managedObject: WritableSignal<AuditingHttpCommunication> = signal(null);
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'auditing.HttpCommunications', routerLink: ['/auditing/http-communication']},
+        {
+            translation: 'auditing.HttpCommunications',
+            routerLink: ['/auditing/http-communication'],
+        },
         { translation: 'auditing.HttpCommunication' },
     ];
 
     constructor(
-		private readonly httpCommunicationService: HttpCommunicationService,
-		protected readonly injector: Injector,
-    )
-    {
+        private readonly httpCommunicationService: HttpCommunicationService,
+        protected readonly injector: Injector,
+    ) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    {
+    init(): void {
         /**/
     }
 
-    onSubmit($event): void
-    {
+    onSubmit($event): void {
         // we have two nested forms, we check that the submit comes from the button
         // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
+        if (
+            $event.submitter.getAttribute('form') !==
+            $event.submitter.form.getAttribute('id')
+        ) {
             $event.preventDefault();
             $event.stopPropagation();
             return;
         }
 
         // manage validations before execute actions
-        if (this.fg.invalid)
-        {
+        if (this.fg.invalid) {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+                data: {
+                    message: `${this.translocoService.translate('InvalidForm')}`,
+                    textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                },
+                panelClass: 'error-snackbar',
+                verticalPosition: 'top',
+                duration: 10000,
+            });
             return;
         }
 
         this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'auditing::httpCommunication.detail.new' : 'auditing::httpCommunication.detail.create',
-                    'auditing::httpCommunication.detail.edit': 'auditing::httpCommunication.detail.update',
-                },
-            ),
+            id: mapActions(this.currentViewAction.id, {
+                'auditing::httpCommunication.detail.new':
+                    'auditing::httpCommunication.detail.create',
+                'auditing::httpCommunication.detail.edit':
+                    'auditing::httpCommunication.detail.update',
+            }),
             isViewAction: false,
         });
     }
 
-    createForm(): void
-    {
+    createForm(): void {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
-            id                  : ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            code                : [{ value: '', disabled: true }],
-            event               : [{ value: '', disabled: true }],
-            status              : [{ value: '', disabled: true }],
-            method              : [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(25)]],
-            url                 : [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(2046)]],
-            httpRequest         : null,
-            httpRequestRejected : null,
-            httpResponse        : null,
+            id: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
+            code: [{ value: '', disabled: true }],
+            tags: [{ value: [], disabled: true }],
+            event: [{ value: '', disabled: true }],
+            status: [{ value: '', disabled: true }],
+            method: [
+                { value: '', disabled: true },
+                [Validators.required, Validators.maxLength(25)],
+            ],
+            url: [
+                { value: '', disabled: true },
+                [Validators.required, Validators.maxLength(2046)],
+            ],
+            httpRequest: null,
+            httpRequestRejected: null,
+            httpResponse: null,
             httpResponseRejected: null,
         });
+        /* eslint-enable key-spacing */
     }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'auditing::httpCommunication.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'auditing::httpCommunication.detail.edit':
-                this.httpCommunicationService
-                    .httpCommunication$
+                this.httpCommunicationService.httpCommunication$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
-                        this.managedObject = item;
+                    .subscribe((item) => {
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
                 break;
 
             case 'auditing::httpCommunication.detail.create':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.httpCommunicationService
-                            .create<AuditingHttpCommunication>({
+                        this.httpCommunicationService.create<AuditingHttpCommunication>(
+                            {
                                 object: this.fg.value,
-                            }),
+                            },
+                        ),
                     );
 
                     this.snackBar.open(
@@ -132,26 +171,24 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['auditing/http-communication']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'auditing::httpCommunication.detail.update':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.httpCommunicationService
-                            .updateById<AuditingHttpCommunication>({
+                        this.httpCommunicationService.updateById<AuditingHttpCommunication>(
+                            {
                                 object: this.fg.value,
-                            }),
+                            },
+                        ),
                     );
 
                     this.snackBar.open(
@@ -159,18 +196,16 @@ export class HttpCommunicationDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['auditing/http-communication']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
         }
     }
 }

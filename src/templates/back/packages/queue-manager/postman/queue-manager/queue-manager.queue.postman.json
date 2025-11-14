@@ -1,561 +1,480 @@
 {
     "info": {
-		"_postman_id"   : "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-		"name"          : "@app - queue-manager/queue",
-		"schema"        : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - queue-manager/queue",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-			"name": "GraphQL - queueManagerCreateQueue",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "GraphQL - queueManagerCreateQueue",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:QueueManagerCreateQueueInput!)\n{\n\tqueueManagerCreateQueue (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tprefix\n\t\tname\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 73339408732145110000, \n\t\t\"prefix\": \"jo1dawwx67nxkoj4fynot0xeu1r5nwcnypdq9y9q6q5zswrr1aeswfycscdo5f\", \n\t\t\"name\": \"Generic Frozen Shoes\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerCreateQueues",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[QueueManagerCreateQueueInput]!)\n{\n\tqueueManagerCreateQueues (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"a9579ac8-4da9-4ff4-8282-2a91782e5a3c\", \n\t\t\t\"rowId\": 32316629678798557000, \n\t\t\t\"prefix\": \"itfjmdarg49zj48rpjrcllmkfudihvyuf2kxk27z9txj9nzbbbf92sojr1pnbx\", \n\t\t\t\"name\": \"Small Wooden Keyboard\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1bd66e63-1f50-4648-9e9c-5b46e3c36ef6\", \n\t\t\t\"rowId\": 76055578842476300000, \n\t\t\t\"prefix\": \"n5fhcr2yq8esm4npynmh34fsfx4k6piz3bw3h2id7vqtygpncozt3bfz844swa\", \n\t\t\t\"name\": \"Tasty Wooden Tuna\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"8eef68c5-ee94-4830-b958-f382f9fc32f4\", \n\t\t\t\"rowId\": 78291533579211830000, \n\t\t\t\"prefix\": \"pjnd9954t4is386cvs50ketccp14hqywmv7c03j9zg2imfnb16da96ykq6w2ra\", \n\t\t\t\"name\": \"Tasty Plastic Bike\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"ce9e4925-5fb8-4ad8-90ca-140a7388d779\", \n\t\t\t\"rowId\": 84877112025228300000, \n\t\t\t\"prefix\": \"1jpruuabthrld6disch6ch2eans5qrs2vvsn30q5gwmg12elleozjgudyzr4pd\", \n\t\t\t\"name\": \"Fantastic Steel Towels\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d7cff6e4-bee7-40c5-a4e0-3bd71e8eb9b1\", \n\t\t\t\"rowId\": 46967926605154574000, \n\t\t\t\"prefix\": \"h2rdx5uv9az1wrcnfd2oouh9k3dq5dxo38a4yt0vnlwam9ibzua2sw4cf9i43t\", \n\t\t\t\"name\": \"Generic Cotton Computer\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a36ee21c-f542-4387-b473-dd2ddb293d97\", \n\t\t\t\"rowId\": 22277518029819396000, \n\t\t\t\"prefix\": \"j8r1ffsd77ofyg8r4qznt27jtk0veg9afggvhevkqajdnkoa63o9zdfqzr5jrm\", \n\t\t\t\"name\": \"Rustic Frozen Tuna\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"e760a42b-7aed-4628-8e63-7bdde601efc5\", \n\t\t\t\"rowId\": 74429181668953000000, \n\t\t\t\"prefix\": \"phe0m655lfvc17zmxr24h3wenvbaus8lb8nv8xw0n8hvmjkife24xwa3p2m0tr\", \n\t\t\t\"name\": \"Ergonomic Rubber Tuna\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3b01d3ad-3728-40d1-b494-4fd7d2f55c93\", \n\t\t\t\"rowId\": 67764634792348990000, \n\t\t\t\"prefix\": \"r6dfcp4p20ptincxraakewg19fdgw413c7zamnvo6cydudyx201q0kyiggchu1\", \n\t\t\t\"name\": \"Handcrafted Wooden Sausages\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"df56aaf3-ecba-4e72-a5f0-4aac13ad3a85\", \n\t\t\t\"rowId\": 67105793042347114000, \n\t\t\t\"prefix\": \"9dlhhwn9n8yifxipo8848u657szszc2e5rgfjcwe2wamif9pm7mlzo07ifprcd\", \n\t\t\t\"name\": \"Awesome Cotton Chips\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"45d6f545-6458-4d86-8ffc-a6453e0e6243\", \n\t\t\t\"rowId\": 12738599857758996000, \n\t\t\t\"prefix\": \"2lbeoukuk0zc88sj21d2iaaw266grxsjxnzahmawqa9zdfshtl1mc3bzq3j0i8\", \n\t\t\t\"name\": \"Handmade Plastic Pants\"\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerPaginateQueues",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tqueueManagerPaginateQueues (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerGetQueues",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tqueueManagerGetQueues (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerFindQueue",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tqueueManagerFindQueue (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerFindQueueById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\tqueueManagerFindQueueById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerUpdateQueue",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:QueueManagerUpdateQueueInput!)\n{\n\tqueueManagerUpdateQueue (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 55903262350996505000, \n\t\t\"prefix\": \"4cvi56o0gzf6p4tftk48snmbkwikis7t7i6wp5evpgirho63q4xv71y5vpz27d\", \n\t\t\"name\": \"Fantastic Cotton Hat\"\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerDeleteQueueById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\tqueueManagerDeleteQueueById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - queueManagerDeleteQueues",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\tqueueManagerDeleteQueues (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - queue-manager/queue/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:QueueManagerCreateQueueInput!)\n{\n\tqueueManagerCreateQueue (payload:$payload)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t}\n}",
-                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"prefix\": \"xu1x8s5d48donxzqk5pey8hog3h570gwye2v2obmu07r2qwn26bwq2ey48q1ml\", \n\t\t\"name\": \"Practical Wooden Keyboard\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 87739304436144750000, \n\t\"prefix\": \"43jmeq966bp4filjrdm0qimontr0te3h1mg7ogetrivfhkv5hx3z4p465pb94z\", \n\t\"name\": \"Ergonomic Rubber Computer\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queue/create",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "queue", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerCreateQueues",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:[QueueManagerCreateQueueInput]!)\n{\n\tqueueManagerCreateQueues (payload:$payload)\n}",
-						"variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"a126b9e6-6ef9-49b5-871b-71d439624242\", \n\t\t\t\"prefix\": \"9efcapleis2gkh3kfzcw5ec20zkh8lkbfavjdkqayuw5rpalds9ikicr9v4pe7\", \n\t\t\t\"name\": \"Small Soft Gloves\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"bda4914b-fc9d-4438-8c50-ec82b876e1b7\", \n\t\t\t\"prefix\": \"yhd78rrv4f94tvjgd2rh19yqldaqvh0sf2ivmngj1h2h8bmbepmydbdvisjeh2\", \n\t\t\t\"name\": \"Intelligent Concrete Hat\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fa683a83-6920-4d44-9352-e0cc3fd71c49\", \n\t\t\t\"prefix\": \"tzwe246nvbmvk8szmsmni18ugcq9gha2glhgbdqdps6gsceoruhcgp4153hbm8\", \n\t\t\t\"name\": \"Handcrafted Metal Car\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"b830d40d-7f4f-4689-8e7e-5c7392c76310\", \n\t\t\t\"prefix\": \"8fakwdivi6cdbdorno3buousm30xlp6n4aydagdghpff7ioqprmfjmws4keqib\", \n\t\t\t\"name\": \"Small Fresh Bacon\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4fbfc55f-3ffe-4f43-b5b9-e06ddb51cada\", \n\t\t\t\"prefix\": \"b16ns96a61piw2encoxronu5q4yifqfs8umfi0gi8txrm40r42ltthxmknvq88\", \n\t\t\t\"name\": \"Ergonomic Steel Pizza\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"6d28f09a-ce48-4239-842d-d0b08828f0a0\", \n\t\t\t\"prefix\": \"2oz6bba317ykl9woaslzvjeuic1ylxtxsfarnagouuk0cn80whq82bqjwg3p86\", \n\t\t\t\"name\": \"Awesome Fresh Chips\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"d221af80-98ba-42f5-a5fb-085ef0cc5d28\", \n\t\t\t\"prefix\": \"cxa970b2ha9e27ih1ecqs0nn2mhgemh9wvf803khuofjudle94rsp0snjxtz7t\", \n\t\t\t\"name\": \"Awesome Soft Chips\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"3c185a3d-2085-4a9b-9bb9-6b13c71aa1d9\", \n\t\t\t\"prefix\": \"04l8etjufncrl9au0r5s5pn4898bynklp03z5rwdplaa423cb551sxzfynft77\", \n\t\t\t\"name\": \"Generic Wooden Mouse\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"7b3043eb-4b27-4bd3-b2b2-a2ec82fec93f\", \n\t\t\t\"prefix\": \"mv4r63cq8cxq5uk92n39y7xv78dn3dnj37ya2yzid50w9rvgchd1df5uqfcjnv\", \n\t\t\t\"name\": \"Sleek Cotton Tuna\"\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1dce157b-fc6a-48a8-8e6c-12fbf81d8943\", \n\t\t\t\"prefix\": \"3rqiyty4o9tccmycdj69u43fa25n1e80nxe4i4cukc88othfk4qn4vi7aigfsy\", \n\t\t\t\"name\": \"Small Wooden Shirt\"\n\t\t}\n\t]\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - queueManagerPaginateQueues",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/queues/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tqueueManagerPaginateQueues (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"ff14e2bf-2730-4ccd-97ed-664ef9d0f641\", \n\t\t\"rowId\": 75168054245008150000, \n\t\t\"prefix\": \"w9u2wxzt5ant7nepfml9g8tdipevrfks6jnssap3gioopsqusfcr2j6bju8knn\", \n\t\t\"name\": \"Refined Concrete Car\"\n\t}, \n\t{\n\t\t\"id\": \"c3776ad0-291a-45e3-9733-a58ae8e8784b\", \n\t\t\"rowId\": 92431455842120860000, \n\t\t\"prefix\": \"cl4h72b06es602peqy983wyqoze0nz7e30yk9k0p1lsncc06i3te8uei2qvkcx\", \n\t\t\"name\": \"Small Soft Cheese\"\n\t}, \n\t{\n\t\t\"id\": \"bfbbd661-b3f7-44a2-adde-d7c38b1adba5\", \n\t\t\"rowId\": 61117172038041100000, \n\t\t\"prefix\": \"f1mlhd0q06lqf03f4kspw2bg9s6riso7wd8k6c9b7p15ms4ppjnzilbsjj5lni\", \n\t\t\"name\": \"Awesome Plastic Towels\"\n\t}, \n\t{\n\t\t\"id\": \"65925621-871c-43da-bb57-74c2fd68e09f\", \n\t\t\"rowId\": 94264016422661210000, \n\t\t\"prefix\": \"olbpe0xd3zxu8b1pcj19yoik4jcwrxedc9n33ifezdfigrkir22upmji3zltzo\", \n\t\t\"name\": \"Awesome Fresh Bacon\"\n\t}, \n\t{\n\t\t\"id\": \"0f8e9f55-4840-4ee9-846f-e1a44b5bbaea\", \n\t\t\"rowId\": 38190898476660556000, \n\t\t\"prefix\": \"o15sjlizhuao3shf70vdn2mgpkk1gaq0wc9cfjl29gc9sl0g0asileb2o2j2x3\", \n\t\t\"name\": \"Intelligent Cotton Car\"\n\t}, \n\t{\n\t\t\"id\": \"0d39e496-6ba0-41bc-a290-27fcf401af33\", \n\t\t\"rowId\": 93174940253591670000, \n\t\t\"prefix\": \"pvnns4zvoxsaq75nizz1jdb6n2ldkwxa1qfo79l0xhdu5wfp1xo5dw89nbjqht\", \n\t\t\"name\": \"Fantastic Steel Bike\"\n\t}, \n\t{\n\t\t\"id\": \"6b615283-0aba-4872-82cb-cc31542d0fc0\", \n\t\t\"rowId\": 93258528503331910000, \n\t\t\"prefix\": \"8aidd7m75vb9j70at5s5b3dmbhwiwver50ccbwy4yvndn1icn0d65q5tvj4od0\", \n\t\t\"name\": \"Generic Soft Pizza\"\n\t}, \n\t{\n\t\t\"id\": \"0d6b71f7-657d-4490-9091-d9aeace5199e\", \n\t\t\"rowId\": 84218041218503670000, \n\t\t\"prefix\": \"1juvodc0f2rk8yji6ohp0cjewr0rw0xmcgrne61qocemko36k0zkw71um2a6gq\", \n\t\t\"name\": \"Tasty Rubber Car\"\n\t}, \n\t{\n\t\t\"id\": \"c17cbd52-91d0-4924-938f-04aaed5013ed\", \n\t\t\"rowId\": 62933798973245100000, \n\t\t\"prefix\": \"e31fziw3mat08tvfvp6t4z7bpr34dzovw5dkuahyxw2wnrefrbnhful28nwmzg\", \n\t\t\"name\": \"Practical Concrete Sausages\"\n\t}, \n\t{\n\t\t\"id\": \"96b83df1-e8b4-4f76-89a1-355d924479bb\", \n\t\t\"rowId\": 77064451973595770000, \n\t\t\"prefix\": \"9k0r4osvse1p5ye1mjjlpwbv4yaeawofdbnm308mz70z4bnxalczsvk9yyzlby\", \n\t\t\"name\": \"Refined Concrete Cheese\"\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queues/create",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "queues", "create"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerGetQueues",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/queues/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tqueueManagerGetQueues (query: $query)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queues/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "queues", "paginate"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerFindQueue",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/queues/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($query:QueryStatement)\n{\n\tqueueManagerFindQueue (query: $query)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queues/get",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "queues", "get"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerFindQueueById",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/queue/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "query ($id:ID)\n{\n\tqueueManagerFindQueueById (id:$id)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queue/find",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "queue", "find"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "GraphQL - queueManagerUpdateQueue",
-			"request": {
-				"method": "POST",
-				"header": [
+            "name": "REST - queue-manager/queue/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
                 ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($payload:QueueManagerUpdateQueueInput!)\n{\n\tqueueManagerUpdateQueue (payload:$payload)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"prefix\": \"wtimjqlhefzw1xqjr8v22968yudrlm5n8v33qgeu9ageocvo2j4771736a8fpt\", \n\t\t\"name\": \"Handmade Metal Tuna\"\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - queueManagerDeleteQueueById",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($id:ID!)\n{\n\tqueueManagerDeleteQueueById (id:$id)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "GraphQL - queueManagerDeleteQueues",
-			"request": {
-				"method": "POST",
-				"header": [
-                ],
-				"body": {
-					"mode": "graphql",
-					"graphql": {
-						"query": "mutation ($query:QueryStatement)\n{\n\tqueueManagerDeleteQueues (query: $query)\n\t{\n\t\tid\n\t\tprefix\n\t\tname\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
-						"variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/graphql",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"graphql"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/queue/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"prefix\": \"12s67hsxrw2p18txs65l1yrk88w7ken83wia3vm5ny3omb7d522f9j7ezc1pq0\", \n\t\"name\": \"Intelligent Metal Pizza\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queue/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"queue",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/queues/create",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key"   : "Content-Type",
-						"name"  : "Content-Type",
-						"type"  : "text",
-						"value" : "application/json"
-					}				],
-				"body": {
-					"mode"  : "raw",
-					"raw"   : "[\n\t{\n\t\t\"id\": \"94f0828d-1e2b-4349-8380-8c879cfece29\", \n\t\t\"prefix\": \"x32l1wf4rbcm9s9w5ubtmqjp3clx2y1uicrh0188av8smxkbe0i2if0f89rhhp\", \n\t\t\"name\": \"Handcrafted Wooden Pants\"\n\t}, \n\t{\n\t\t\"id\": \"54cf60e3-3589-4679-9689-955f671ac586\", \n\t\t\"prefix\": \"x6u1r032jz8oiu5hmo3s6vcqcad14vtwpfy58p2yg267yp39ca53dn8aeiyivs\", \n\t\t\"name\": \"Ergonomic Metal Salad\"\n\t}, \n\t{\n\t\t\"id\": \"bf594266-982a-4ec9-bde4-6d4de1d2ff43\", \n\t\t\"prefix\": \"i7yyhqiqwmucic3gsbgpew7ovmgs6fgg35j5o912rb6yb2k5znzzfkppvusju7\", \n\t\t\"name\": \"Licensed Steel Soap\"\n\t}, \n\t{\n\t\t\"id\": \"3de784e6-e656-4591-9a36-42b2ccdb0e77\", \n\t\t\"prefix\": \"txyvbk6vs4lyvbfx6lucqqym0wjp9b5g7dgnt3lm1x8i59de2ao28prmeif3w7\", \n\t\t\"name\": \"Licensed Cotton Chicken\"\n\t}, \n\t{\n\t\t\"id\": \"49bb1773-c582-435d-ab0f-35d91322f3a6\", \n\t\t\"prefix\": \"0mg5vix3zol3c0g0568ywws27uwyniah37155k32qq3sf2olkwejiqtdsv5f6y\", \n\t\t\"name\": \"Generic Plastic Towels\"\n\t}, \n\t{\n\t\t\"id\": \"3b48391b-20a4-4db7-ab0d-2a01e746f1be\", \n\t\t\"prefix\": \"gpnleara3yewmnnzfkcxfbwnbsje4q381sui55ikhfzrvsb527rp2bekiw8o5g\", \n\t\t\"name\": \"Small Steel Salad\"\n\t}, \n\t{\n\t\t\"id\": \"b7d443c7-33a7-419c-88f0-5ae00bafcd4a\", \n\t\t\"prefix\": \"9hhwlgitvrlsdofzggmbwsx57vlak5ihrgs0azib8gte5694h5bsk4k6o3o2ps\", \n\t\t\"name\": \"Rustic Steel Fish\"\n\t}, \n\t{\n\t\t\"id\": \"11c2b346-c56c-47b4-8992-6d572fc526bd\", \n\t\t\"prefix\": \"c5bx41kpx9brjzwfmhxqqs0zrtqoom9w4l35wvofszfzr18jbblarxh398wdxh\", \n\t\t\"name\": \"Practical Metal Shoes\"\n\t}, \n\t{\n\t\t\"id\": \"fb1c6707-feb0-4f08-aede-c991d100ed4c\", \n\t\t\"prefix\": \"ez9j9o5ce0zxg0kukchncmeuegslg0hh2j0wlswwi60mw868z474hw6o8yekj9\", \n\t\t\"name\": \"Sleek Steel Car\"\n\t}, \n\t{\n\t\t\"id\": \"7b9a0ff4-da3b-4387-9c65-666b116b0340\", \n\t\t\"prefix\": \"edwvfyiqdcgdotugms7r9xx58zzulpy1jjiu2k59buw6ljh6vbqglnmmy8zos2\", \n\t\t\"name\": \"Generic Soft Shirt\"\n\t}\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queues/create",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"queues",
-                        "create"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/queues/paginate",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queues/paginate",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-                        "queues",
-                        "paginate"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/queues/get",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queues/get",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"queues",
-                        "get"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/queue/find",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queue/find",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"queue",
-                        "find"
-					]
-				}
-			},
-			"response": []
-        },
-        {
-			"name": "REST - queue-manager/queue/find/{id}",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queue/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"queue",
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queue/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "queue-manager",
+                        "queue",
                         "find",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - queue-manager/queue/update",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw"   : "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"prefix\": \"quj5et08dbvifscpr1j0vgxqlu3m8ncmtfggckdacsu37m05n08wzgrxue78jc\", \n\t\"name\": \"Refined Frozen Bacon\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queue/update",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"queue",
-                        "update"
-					]
-				}
-			},
-			"response": []
+            "name": "REST - queue-manager/queue/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 52266027721373830000, \n\t\"prefix\": \"40os7zpfu6splg9i756krvfmh2ha9ejaxunjc1d7qpspzazx9wbasiy90khegf\", \n\t\"name\": \"Ergonomic Granite Pizza\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queue/update",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "queue", "update"]
+                }
+            },
+            "response": []
         },
         {
-			"name": "REST - queue-manager/queue/delete/{id}",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queue/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"queue",
+            "name": "REST - queue-manager/queue/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queue/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "queue-manager",
+                        "queue",
                         "delete",
-						"5b19d6ac-4081-573b-96b3-56964d5326a8"
-					]
-				}
-			},
-			"response": []
-		},
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
         {
-			"name": "REST - queue-manager/queues/delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{URL}}/queue-manager/queues/delete",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"queue-manager",
-						"queues",
-                        "delete"
-					]
-				}
-			},
-			"response": []
-		}
+            "name": "REST - queue-manager/queues/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/queue-manager/queues/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["queue-manager", "queues", "delete"]
+                }
+            },
+            "response": []
+        }
     ],
     "variable": [
-		{
-			"id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
-			"key": "URL",
-			"value": "http://localhost:8080",
-			"type": "string"
-		}
-	]
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
 }

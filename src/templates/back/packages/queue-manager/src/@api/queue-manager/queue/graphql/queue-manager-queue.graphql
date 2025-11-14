@@ -1,7 +1,6 @@
-
-type QueueManagerQueue
-{
+type QueueManagerQueue {
     id: ID!
+    rowId: GraphQLInt!
     prefix: GraphQLString!
     name: GraphQLString!
     waitingJobs: GraphQLInt!
@@ -15,29 +14,25 @@ type QueueManagerQueue
     deletedAt: GraphQLTimestamp
 }
 
-input QueueManagerCreateQueueInput
-{
+input QueueManagerCreateQueueInput {
     id: ID!
     prefix: GraphQLString!
     name: GraphQLString!
 }
 
-input QueueManagerUpdateQueueByIdInput
-{
+input QueueManagerUpdateQueueByIdInput {
     id: ID!
     prefix: GraphQLString
     name: GraphQLString
 }
 
-input QueueManagerUpdateQueuesInput
-{
+input QueueManagerUpdateQueuesInput {
     id: ID
     prefix: GraphQLString
     name: GraphQLString
 }
 
-type Query
-{
+type Query {
     queueManagerFindQueue(
         query: QueryStatement
         constraint: QueryStatement
@@ -57,18 +52,14 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     queueManagerCreateQueue(
         payload: QueueManagerCreateQueueInput!
     ): QueueManagerQueue
 
-    queueManagerCreateQueues(
-        payload: [QueueManagerCreateQueueInput]!
-    ): Boolean!
+    queueManagerCreateQueues(payload: [QueueManagerCreateQueueInput]!): Boolean!
 
     queueManagerUpdateQueueById(
         payload: QueueManagerUpdateQueueByIdInput!
@@ -81,10 +72,6 @@ type Mutation
         constraint: QueryStatement
     ): [QueueManagerQueue]!
 
-    queueManagerUpsertQueue(
-        payload: QueueManagerUpdateQueueByIdInput!
-    ): QueueManagerQueue
-
     queueManagerDeleteQueueById(
         id: ID!
         constraint: QueryStatement
@@ -94,5 +81,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [QueueManagerQueue]!
-
 }

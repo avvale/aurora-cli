@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('auditing.sideEffect.get')
-export class AuditingGetSideEffectsResolver
-{
-    constructor(
-        private readonly handler: AuditingGetSideEffectsHandler,
-    ) {}
+export class AuditingGetSideEffectsResolver {
+    constructor(private readonly handler: AuditingGetSideEffectsHandler) {}
 
     @Query('auditingGetSideEffects')
     async main(
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<AuditingSideEffect[]>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<AuditingSideEffect[]> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

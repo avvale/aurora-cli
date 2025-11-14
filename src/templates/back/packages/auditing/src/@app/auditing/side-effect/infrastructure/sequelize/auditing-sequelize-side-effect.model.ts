@@ -1,37 +1,40 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { DataTypes } from 'sequelize';
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table({
     modelName: 'AuditingSideEffect',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['tags'],
-			unique: false,
-		},
-		{
-			fields: ['operationId'],
-			unique: false,
-		},
-		{
-			fields: ['accountId'],
-			unique: false,
-		},
-		{
-			fields: ['rollbackSideEffectId'],
-			unique: false,
-		},
-		{
-			fields: ['createdAt'],
-			unique: false,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['tags'],
+            unique: false,
+        },
+        {
+            fields: ['operationId'],
+            unique: false,
+        },
+        {
+            fields: ['accountId'],
+            unique: false,
+        },
+        {
+            fields: ['rollbackSideEffectId'],
+            unique: false,
+        },
+        {
+            fields: ['createdAt'],
+            unique: false,
+        },
     ],
 })
-export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
-{
+export class AuditingSideEffectModel extends Model<AuditingSideEffectModel> {
     @Column({
         field: 'id',
         primaryKey: true,
@@ -39,6 +42,14 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
         type: DataTypes.UUID,
     })
     id: string;
+
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
 
     @Column({
         field: 'tags',
@@ -92,7 +103,17 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'event',
         allowNull: false,
-        type: DataTypes.ENUM('CREATED','BULK_CREATED','UPDATED','BULK_UPDATED','DELETED','BULK_DELETED','RESTORED','BULK_RESTORED','UPSERTED'),
+        type: DataTypes.ENUM(
+            'CREATED',
+            'BULK_CREATED',
+            'UPDATED',
+            'BULK_UPDATED',
+            'DELETED',
+            'BULK_DELETED',
+            'RESTORED',
+            'BULK_RESTORED',
+            'UPSERTED',
+        ),
     })
     event: string;
 
@@ -127,7 +148,7 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
     @Column({
         field: 'method',
         allowNull: true,
-        type: DataTypes.ENUM('GET','POST','UPDATE','DELETE'),
+        type: DataTypes.ENUM('GET', 'POST', 'UPDATE', 'DELETE'),
     })
     method: string;
 
@@ -201,5 +222,4 @@ export class AuditingSideEffectModel extends Model<AuditingSideEffectModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

@@ -1,7 +1,9 @@
-import { QueueManagerAddJobsRegistryContextEvent, QueueManagerIJobRegistryRepository, QueueManagerJobRegistry } from '@app/queue-manager/job-registry';
 import {
-    QueueManagerJobRegistryCreatedAt,
-    QueueManagerJobRegistryDeletedAt,
+    QueueManagerAddJobsRegistryContextEvent,
+    QueueManagerIJobRegistryRepository,
+    QueueManagerJobRegistry,
+} from '@app/queue-manager/job-registry';
+import {
     QueueManagerJobRegistryId,
     QueueManagerJobRegistryJobId,
     QueueManagerJobRegistryJobName,
@@ -15,8 +17,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class QueueManagerUpdateJobsRegistryService
-{
+export class QueueManagerUpdateJobsRegistryService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: QueueManagerIJobRegistryRepository,
@@ -34,11 +35,11 @@ export class QueueManagerUpdateJobsRegistryService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const jobRegistry = QueueManagerJobRegistry.register(
             payload.id,
+            undefined, // rowId
             payload.queueName,
             payload.state,
             payload.jobId,
@@ -50,28 +51,26 @@ export class QueueManagerUpdateJobsRegistryService
         );
 
         // update
-        await this.repository.update(
-            jobRegistry,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(jobRegistry, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const jobsRegistry = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const jobsRegistry = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const jobsRegistryRegister = this.publisher.mergeObjectContext(
-            new QueueManagerAddJobsRegistryContextEvent(jobsRegistry),
+            new QueueManagerAddJobsRegistryContextEvent(
+                jobsRegistry,
+                cQMetadata,
+            ),
         );
 
         jobsRegistryRegister.updated(); // apply event to model events

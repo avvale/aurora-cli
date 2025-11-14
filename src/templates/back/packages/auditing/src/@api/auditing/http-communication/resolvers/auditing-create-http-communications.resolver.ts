@@ -6,8 +6,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('auditing.httpCommunication.create')
-export class AuditingCreateHttpCommunicationsResolver
-{
+export class AuditingCreateHttpCommunicationsResolver {
     constructor(
         private readonly handler: AuditingCreateHttpCommunicationsHandler,
     ) {}
@@ -16,11 +15,7 @@ export class AuditingCreateHttpCommunicationsResolver
     async main(
         @Args('payload') payload: AuditingCreateHttpCommunicationInput[],
         @Timezone() timezone?: string,
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-        );
+    ): Promise<boolean> {
+        return await this.handler.main(payload, timezone);
     }
 }

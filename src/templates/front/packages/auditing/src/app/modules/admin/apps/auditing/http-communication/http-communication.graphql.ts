@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     tags
     event
     status
@@ -19,11 +20,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query AuditingPaginateHttpCommunications (
+    query AuditingPaginateHttpCommunications(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: auditingPaginateHttpCommunications (
+        pagination: auditingPaginateHttpCommunications(
             query: $query
             constraint: $constraint
         ) {
@@ -35,11 +36,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query AuditingGetHttpCommunications (
+    query AuditingGetHttpCommunications(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: auditingGetHttpCommunications (
+        objects: auditingGetHttpCommunications(
             query: $query
             constraint: $constraint
         ) {
@@ -50,11 +51,11 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query AuditingFindHttpCommunicationById (
+    query AuditingFindHttpCommunicationById(
         $id: ID
         $constraint: QueryStatement
     ) {
-        object: auditingFindHttpCommunicationById (
+        object: auditingFindHttpCommunicationById(
             id: $id
             constraint: $constraint
         ) {
@@ -65,11 +66,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query AuditingFindHttpCommunication (
+    query AuditingFindHttpCommunication(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: auditingFindHttpCommunication (
+        object: auditingFindHttpCommunication(
             query: $query
             constraint: $constraint
         ) {
@@ -88,6 +89,14 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation AuditingCreateHttpCommunications(
+        $payload: [AuditingCreateHttpCommunicationInput]!
+    ) {
+        auditingCreateHttpCommunications(payload: $payload)
     }
 `;
 

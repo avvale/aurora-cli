@@ -5,60 +5,65 @@ import { queueManagerMockJobRegistryData } from '@app/queue-manager/job-registry
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('QueueManagerUpdateJobRegistryByIdHandler', () =>
-{
+describe('QueueManagerUpdateJobRegistryByIdHandler', () => {
     let handler: QueueManagerUpdateJobRegistryByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 QueueManagerUpdateJobRegistryByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<QueueManagerUpdateJobRegistryByIdHandler>(QueueManagerUpdateJobRegistryByIdHandler);
+        handler = module.get<QueueManagerUpdateJobRegistryByIdHandler>(
+            QueueManagerUpdateJobRegistryByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('QueueManagerUpdateJobRegistryByIdHandler should be defined', () =>
-    {
+    test('QueueManagerUpdateJobRegistryByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('QueueManagerUpdateJobRegistryByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('QueueManagerUpdateJobRegistryByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a jobRegistry updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(queueManagerMockJobRegistryData[0])));
+        test('should return a jobRegistry updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(queueManagerMockJobRegistryData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
-                    <QueueManagerUpdateJobRegistryByIdInput>queueManagerMockJobRegistryData[0],
+                    <QueueManagerUpdateJobRegistryByIdInput>(
+                        queueManagerMockJobRegistryData[0]
+                    ),
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(queueManagerMockJobRegistryData[0]);
+                ),
+            ).toBe(queueManagerMockJobRegistryData[0]);
         });
     });
 });

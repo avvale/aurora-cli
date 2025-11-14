@@ -6,11 +6,20 @@ aggregateName: AuditingSideEffect
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: app_registration
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: app_registration
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
     nullable: false
   - name: tags
     type: array
@@ -28,7 +37,6 @@ aggregateProperties:
     nullable: false
   - name: operationId
     type: id
-    length: 36
     nullable: true
     index: index
   - name: operationSort
@@ -37,7 +45,6 @@ aggregateProperties:
     nullable: true
   - name: accountId
     type: id
-    length: 36
     nullable: false
     index: index
   - name: email
@@ -61,13 +68,12 @@ aggregateProperties:
     example: AuditingSideEffectEvent.CREATED
   - name: auditableId
     type: id
-    length: 36
     nullable: true
   - name: oldValue
-    type: json
+    type: jsonb
     nullable: true
   - name: newValue
-    type: json
+    type: jsonb
     nullable: true
   - name: ip
     type: varchar
@@ -80,20 +86,20 @@ aggregateProperties:
       - POST
       - UPDATE
       - DELETE
-    nullable: false
+    nullable: true
     example: AuditingSideEffectMethod.POST
   - name: baseUrl
     type: varchar
     maxLength: 2046
     nullable: true
   - name: params
-    type: json
+    type: jsonb
     nullable: true
   - name: query
-    type: json
+    type: jsonb
     nullable: true
   - name: body
-    type: json
+    type: jsonb
     nullable: true
   - name: userAgent
     type: varchar
@@ -106,7 +112,6 @@ aggregateProperties:
     example: true
   - name: rollbackSideEffectId
     type: id
-    length: 36
     nullable: true
     index: index
   - name: createdAt
@@ -123,3 +128,12 @@ additionalApis:
   - path: auditing/side-effect/rollback
     resolverType: mutation
     httpMethod: post
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert
