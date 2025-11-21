@@ -6,7 +6,7 @@ export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase s
     constructor(
         public readonly payload: {
             {{#each (getUpsertCommandProperties schema.aggregateProperties) }}
-            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
+            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false allowReadonly=false)) }}
             {{ toCamelCase (getPropertyName this) }}{{#unless primaryKey}}?{{/unless}}: {{ getPropertyJavascriptUpdateType this ../config }};
             {{/if}}
             {{/each}}

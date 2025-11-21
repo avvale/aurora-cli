@@ -33,7 +33,7 @@
 export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto
 {
 {{#each (gerDtoInputProperties schema.aggregateProperties) }}
-{{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
+{{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false allowReadonly=false)) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}

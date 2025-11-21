@@ -48,7 +48,9 @@ type {{ schema.aggregateName }}
     """{{ description }}"""
     {{/if}}
     {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
-    {{#if relationship.description}}"""{{ relationship.description }}"""{{/if}}
+    {{#if relationship.description}}
+    """{{ relationship.description }}"""
+    {{/if}}
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}
 {{else ~}}
     {{#if description}}
@@ -81,7 +83,7 @@ type {{ schema.aggregateName }}
 input {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input
 {
 {{#each (getGraphqlInputProperties schema.aggregateProperties) }}
-{{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true allowAutoIncrement=false)) }}
+{{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true allowAutoIncrement=false allowReadonly=false)) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
@@ -114,7 +116,7 @@ input {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.m
 input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput
 {
 {{#each (getGraphqlInputProperties schema.aggregateProperties) }}
-{{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true allowAutoIncrement=false)) }}
+{{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true allowAutoIncrement=false allowReadonly=false)) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}
@@ -147,7 +149,7 @@ input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.m
 input {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Input
 {
 {{#each (getGraphqlInputProperties schema.aggregateProperties) }}
-{{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true allowAutoIncrement=false)) }}
+{{#if (isAllowProperty ../schema.moduleName this (object allowOneToManyRelationShip=true allowAutoIncrement=false allowReadonly=false)) }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{setVar 'isCommonProperty' false ~}}

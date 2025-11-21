@@ -303,7 +303,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             new {{ toPascalCase schema.boundedContextName }}Created{{ toPascalCase schema.moduleName }}Event({
                 payload: {
                     {{#each (getAggregateProperties schema.aggregateProperties) }}
-                    {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
+                    {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false allowReadonly=false)) }}
                     {{ toCamelCase (getPropertyName this) }}: event.payload.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
                     {{/if}}
                     {{/each}}
@@ -326,7 +326,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             new {{ toPascalCase schema.boundedContextName }}Updated{{ toPascalCase schema.moduleName }}Event({
                 payload: {
                     {{#each (getAggregateProperties schema.aggregateProperties) }}
-                    {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
+                    {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false allowReadonly=false)) }}
                     {{ toCamelCase (getPropertyName this) }}: event.payload.{{ toCamelCase (getPropertyName this) }}?.value,
                     {{/if}}
                     {{/each}}
@@ -425,7 +425,7 @@ export class {{ schema.aggregateName }} extends AggregateRoot
         return {
             {{! PROPERTIES }}
             {{#each (getAggregateProperties schema.aggregateProperties) }}
-            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false)) }}
+            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false allowReadonly=false)) }}
             {{#if (isBinaryProperty this) }}
             {{ toCamelCase (getPropertyName this) }}: this.{{ toCamelCase (getPropertyName this) }}{{#if nullable }}?{{/if}}.buffer,
             {{else}}

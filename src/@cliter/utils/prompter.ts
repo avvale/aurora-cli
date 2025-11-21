@@ -370,6 +370,7 @@ export const Prompter =
             type         : response.type,
             primaryKey   : response.name === 'id' ? true : undefined, // by default if field name is id will be primary key
             autoIncrement: response.autoIncrement,
+            readonly     : response.readonly,
             enumOptions  : response.enumOptions,
             decimals     : response.decimals,
             length       : response.length,
