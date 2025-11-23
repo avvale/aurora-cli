@@ -1,6 +1,15 @@
 import { ColumnConfig, ColumnDataType } from '@aurora';
+import { TranslocoService } from '@jsverse/transloco';
 
-export const {{ toCamelCase schema.moduleName }}ColumnsConfig: ColumnConfig[] = [
+export const {{ toCamelCase schema.moduleName }}ColumnsConfig: (
+    properties?: { translator?: TranslocoService }
+) => ColumnConfig[] = (
+    {
+        translator = null,
+    }: {
+        translator?: TranslocoService
+    } = {}
+): ColumnConfig[] => [
     {{#each (getGridFieldsProperties schema.aggregateProperties) }}
     {{#if (isAllowProperty ../schema.moduleName this (object allowManyToManyRelationShip=false)) }}
     {{! avoid print ids }}

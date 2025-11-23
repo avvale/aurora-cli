@@ -122,7 +122,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             translation: 'Selects',
             sticky     : true,
         },
-        ...{{ toCamelCase schema.moduleName }}ColumnsConfig,
+        ...{{ toCamelCase schema.moduleName }}ColumnsConfig({ translator: this.translocoService }),
     ];
 
     constructor(
@@ -179,7 +179,7 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                     this.{{ toCamelCase schema.moduleName }}Service.pagination({
                         query: action.meta.query ?
                             action.meta.query :
-                            queryStatementHandler({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
+                            queryStatementHandler({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig() })
                                 .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
                                 .setSort(this.gridStateService.getSort(this.gridId))
                                 .setPage(this.gridStateService.getPage(this.gridId))
@@ -275,8 +275,8 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                         }),
                 );
 
-                const columns: string[] = {{ toCamelCase schema.moduleName }}ColumnsConfig.map({{ toCamelCase schema.moduleName }}ColumnConfig => {{ toCamelCase schema.moduleName }}ColumnConfig.field);
-                const headers: string[] = {{ toCamelCase schema.moduleName }}ColumnsConfig.map({{ toCamelCase schema.moduleName }}ColumnConfig => this.translocoService.translate({{ toCamelCase schema.moduleName }}ColumnConfig.translation));
+                const columns: string[] = {{ toCamelCase schema.moduleName }}ColumnsConfig().map({{ toCamelCase schema.moduleName }}ColumnConfig => {{ toCamelCase schema.moduleName }}ColumnConfig.field);
+                const headers: string[] = {{ toCamelCase schema.moduleName }}ColumnsConfig().map({{ toCamelCase schema.moduleName }}ColumnConfig => this.translocoService.translate({{ toCamelCase schema.moduleName }}ColumnConfig.translation));
 
                 exportRows(
                     rows.objects,

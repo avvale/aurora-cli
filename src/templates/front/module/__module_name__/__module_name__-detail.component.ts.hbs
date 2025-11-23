@@ -620,7 +620,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             id: '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase name }}Pagination',
             isViewAction: false,
             meta: {
-                query: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                query: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase name }}GridId))
                     .setSort(this.gridStateService.getSort(this.{{ toCamelCase name }}GridId))
                     .setPage(this.gridStateService.getPage(this.{{ toCamelCase name }}GridId))
@@ -979,7 +979,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
-                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
@@ -1137,7 +1137,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
-                                queryStatementHandler({ columnsConfig: {{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig })
+                                queryStatementHandler({ columnsConfig: {{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig() })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
                                     .setSort(this.gridStateService.getSort(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
                                     .setPage(this.gridStateService.getPage(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
@@ -1218,7 +1218,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
-                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
@@ -1304,7 +1304,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         .pagination({
                             query: action.meta.query ?
                                 action.meta.query :
-                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
                                     .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                                     .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))

@@ -129,7 +129,7 @@ export const {{ toCamelCase schema.moduleName }}PaginationResolver: ResolveFn<Gr
     gridStateService.setExportActionId(gridId, '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.export');
 
     return {{ toCamelCase schema.moduleName }}Service.pagination({
-        query: queryStatementHandler({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig() })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState(gridId))
             .setSort(gridStateService.getSort(gridId))
             .setPage(gridStateService.getPage(gridId))
@@ -279,7 +279,7 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
                     }],
                 },
                 {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
-                queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+                queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
                     .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                     .setSort(gridStateService.getSort({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                     .setPage(gridStateService.getPage({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
@@ -306,7 +306,7 @@ export const {{ toCamelCase schema.moduleName }}NewResolver: ResolveFn<{
             .getQueryStatement(),
     {{/each}}
     {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
-        queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+        queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
             .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
             .setSort(gridStateService.getSort({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
             .setPage(gridStateService.getPage({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
@@ -535,7 +535,7 @@ export const {{ toCamelCase schema.moduleName }}EditResolver: ResolveFn<{
                 .getQueryStatement(),
             {{/each}}
             {{#each (getGridSelectElementWebComponentsProperties schema.aggregateProperties) }}
-            queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+            queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
                 .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                 .setSort(gridStateService.getSort({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                 .setPage(gridStateService.getPage({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
@@ -544,7 +544,7 @@ export const {{ toCamelCase schema.moduleName }}EditResolver: ResolveFn<{
             constraintPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: { /**/ },
             {{/each}}
             {{#each (getGridElementsManagerWebComponentsProperties schema.aggregateProperties) }}
-            queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+            queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
                 .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                 .setSort(gridStateService.getSort({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                 .setPage(gridStateService.getPage({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
@@ -563,7 +563,7 @@ export const {{ toCamelCase schema.moduleName }}EditResolver: ResolveFn<{
                 .setPage(gridStateService.getPage({{ toCamelCase relationship.pivot.moduleName }}GridId))
                 .setSearch(gridStateService.getSearchState({{ toCamelCase relationship.pivot.moduleName }}GridId))
                 .getQueryStatement(),
-            queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig })
+            queryPaginate{{ toPascalCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
                 .setColumFilters(gridFiltersStorageService.getColumnFilterState({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
                 .setSort(gridStateService.getSort({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId, { active: 'name', direction: 'asc' }))
                 .setPage(gridStateService.getPage({{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
