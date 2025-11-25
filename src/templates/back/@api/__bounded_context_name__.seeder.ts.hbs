@@ -5,7 +5,7 @@ import { ICommandBus } from '@aurorajs.dev/core';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 
 @Injectable()
-export class SupportSeeder implements OnApplicationBootstrap {
+export class {{ toPascalCase schema.boundedContextName }}Seeder implements OnApplicationBootstrap {
     constructor(private readonly commandBus: ICommandBus) {}
 
     async onApplicationBootstrap(): Promise<void> {
