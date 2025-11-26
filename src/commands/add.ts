@@ -1,32 +1,49 @@
 /* eslint-disable complexity */
 import { Args, Command, Flags, ux } from '@oclif/core';
 import * as fs from 'node:fs';
-import { ArrayLiteralExpression, ObjectLiteralExpression, SyntaxKind, Writers } from 'ts-morph';
-import { BackHandler, FrontHandler, Installer, Prompter, Scope } from '../@cliter';
+import {
+    ArrayLiteralExpression,
+    ObjectLiteralExpression,
+    SyntaxKind,
+    Writers,
+} from 'ts-morph';
+import {
+    BackHandler,
+    FrontHandler,
+    Installer,
+    Prompter,
+    Scope,
+} from '../@cliter';
 import { exec } from '../@cliter/functions/common';
-import { ArrayDriver, ArrowFunctionDriver, CallExpressionDriver, CommonDriver, DecoratorDriver, ImportDriver, ObjectDriver, VariableDriver, getInitializer } from '../@cliter/utils/code-writer/public-api';
+import {
+    ArrayDriver,
+    ArrowFunctionDriver,
+    CallExpressionDriver,
+    CommonDriver,
+    DecoratorDriver,
+    getInitializer,
+    ImportDriver,
+    ObjectDriver,
+    VariableDriver,
+} from '../@cliter/utils/code-writer/public-api';
 
-export class Add extends Command
-{
+export class Add extends Command {
     static description = 'Add a aurora package';
 
     static flags = {
-        help : Flags.help({ char: 'h' }),
+        help: Flags.help({ char: 'h' }),
         force: Flags.boolean({
-            char       : 'f',
+            char: 'f',
             description: 'Overwrite existing files.',
         }),
     };
 
     static args = {
         firstArg: Args.string({
-            name       : 'scope',
-            required   : true,
+            name: 'scope',
+            required: true,
             description: 'Scope where our command will act.',
-            options    : [
-                Scope.BACK,
-                Scope.FRONT,
-            ],
+            options: [Scope.BACK, Scope.FRONT],
         }),
     };
 
@@ -36,11 +53,12 @@ export class Add extends Command
         '$ aurora --help',
     ];
 
-    async run(): Promise<void>
-    {
+    async run(): Promise<void> {
         const { args, flags } = await this.parse(Add);
 
-        const { packageName }: any = await Prompter.promptAddPackage(args.firstArg);
+        const { packageName }: any = await Prompter.promptAddPackage(
+            args.firstArg,
+        );
 
         // define state like a generate command
         const addCommandState = {
@@ -49,80 +67,138 @@ export class Add extends Command
             packageName,
         };
 
-        if (args.firstArg === Scope.BACK)
-        {
+        if (args.firstArg === Scope.BACK) {
             if (
                 !(
                     fs.existsSync('src/@api') &&
                     fs.existsSync('src/@app') &&
                     fs.existsSync('src/@aurora')
                 )
-            )
-            {
-                throw new Error('No Aurora back application is detected in the current directory.');
+            ) {
+                throw new Error(
+                    'No Aurora back application is detected in the current directory.',
+                );
             }
 
-            switch (packageName)
-            {
+            switch (packageName) {
                 case 'auditing': {
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@nestjs/axios', '@nestjs/schedule']);
+                    await exec('npm', [
+                        'install',
+                        '@nestjs/axios',
+                        '@nestjs/schedule',
+                    ]);
                     await exec('npm', ['install', '-D', '@types/cron']);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    const appModuleClassDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(appModuleSourceFile, 'AppModule', 'Module');
-                    Installer.declareBackPackageModule(appModuleSourceFile, 'auditing', ['AuditingModule']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
+                    const appModuleClassDecoratorArguments =
+                        DecoratorDriver.getClassDecoratorArguments(
+                            appModuleSourceFile,
+                            'AppModule',
+                            'Module',
+                        );
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'auditing',
+                        ['AuditingModule'],
+                    );
 
                     // add ScheduleModule
-                    if (!ImportDriver.hasImportDeclarations(appModuleSourceFile, 'ScheduleModule'))
-                    {
+                    if (
+                        !ImportDriver.hasImportDeclarations(
+                            appModuleSourceFile,
+                            'ScheduleModule',
+                        )
+                    ) {
                         ImportDriver.createImportItems(
                             appModuleSourceFile,
                             '@nestjs/schedule',
                             ['ScheduleModule'],
                         );
 
-                        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(appModuleClassDecoratorArguments, 'imports');
+                        const importsArray =
+                            ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                                appModuleClassDecoratorArguments,
+                                'imports',
+                            );
                         // TODO, replace addElement with ArrayDriver.addArrayItems
-                        importsArray.addElement('ScheduleModule.forRoot()', { useNewLines: true });
+                        importsArray.addElement('ScheduleModule.forRoot()', {
+                            useNewLines: true,
+                        });
                     }
 
                     appModuleSourceFile.saveSync();
 
                     // shared.module.ts file
-                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
-                    const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
+                    const sharedModuleSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'shared.module.ts',
+                        ]);
+                    const classDecoratorArguments =
+                        DecoratorDriver.getClassDecoratorArguments(
+                            sharedModuleSourceFile,
+                            'SharedModule',
+                            'Module',
+                        );
 
-                    if (!ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'HttpModule'))
-                    {
+                    if (
+                        !ImportDriver.hasImportDeclarations(
+                            sharedModuleSourceFile,
+                            'HttpModule',
+                        )
+                    ) {
                         ImportDriver.createImportItems(
                             sharedModuleSourceFile,
                             '@nestjs/axios',
                             ['HttpModule'],
                         );
 
-                        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+                        const importsArray =
+                            ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                                classDecoratorArguments,
+                                'imports',
+                            );
                         // TODO, replace addElement with ArrayDriver.addArrayItems
-                        importsArray.addElement('HttpModule', { useNewLines: true });
+                        importsArray.addElement('HttpModule', {
+                            useNewLines: true,
+                        });
                     }
 
-                    if (!ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuditingAxiosInterceptorService'))
-                    {
+                    if (
+                        !ImportDriver.hasImportDeclarations(
+                            sharedModuleSourceFile,
+                            'AuditingAxiosInterceptorService',
+                        )
+                    ) {
                         ImportDriver.createImportItems(
                             sharedModuleSourceFile,
                             '@api/auditing/shared',
                             ['AuditingAxiosInterceptorService'],
                         );
 
-                        const providersArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'providers');
+                        const providersArray =
+                            ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                                classDecoratorArguments,
+                                'providers',
+                            );
                         // TODO, replace addElement with ArrayDriver.addArrayItems
-                        providersArray.addElement('AuditingAxiosInterceptorService', { useNewLines: true });
+                        providersArray.addElement(
+                            'AuditingAxiosInterceptorService',
+                            { useNewLines: true },
+                        );
                     }
 
                     ImportDriver.createImportItems(
@@ -151,21 +227,43 @@ export class Add extends Command
                 case 'common': {
                     await BackHandler.addPackage(addCommandState);
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(appModuleSourceFile, 'common', ['CommonModule']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'common',
+                        ['CommonModule'],
+                    );
                     appModuleSourceFile.saveSync();
 
                     // shared.module.ts file
-                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
-                    const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
+                    const sharedModuleSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'shared.module.ts',
+                        ]);
+                    const classDecoratorArguments =
+                        DecoratorDriver.getClassDecoratorArguments(
+                            sharedModuleSourceFile,
+                            'SharedModule',
+                            'Module',
+                        );
 
                     ImportDriver.createImportItems(
                         sharedModuleSourceFile,
                         '@api/common/shared',
-                        ['CommonAttachmentsService', 'CommonGetLangsFromDbService'],
+                        [
+                            'CommonAttachmentsService',
+                            'CommonGetLangsFromDbService',
+                        ],
                     );
 
                     DecoratorDriver.changeModuleDecoratorPropertyAdapter(
@@ -177,14 +275,22 @@ export class Add extends Command
                         'CommonGetLangsFromDbService',
                     );
 
-                    const providersArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'providers');
+                    const providersArray =
+                        ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                            classDecoratorArguments,
+                            'providers',
+                        );
                     ArrayDriver.addArrayItems(
                         appModuleSourceFile,
                         ['CommonAttachmentsService'],
                         providersArray,
                     );
 
-                    const exportsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'exports');
+                    const exportsArray =
+                        ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                            classDecoratorArguments,
+                            'exports',
+                        );
                     ArrayDriver.addArrayItems(
                         appModuleSourceFile,
                         ['CommonAttachmentsService'],
@@ -206,25 +312,47 @@ export class Add extends Command
                     await exec('npm', ['install', 'nestjs-i18n']);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(appModuleSourceFile, 'iam', ['IamModule']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'iam',
+                        ['IamModule'],
+                    );
                     appModuleSourceFile.saveSync();
 
                     // change auth decorator
-                    const authDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+                    const authDecoratorSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'decorators',
+                            'auth.decorator.ts',
+                        ]);
                     ImportDriver.createImportItems(
                         authDecoratorSourceFile,
                         '@api/iam/shared/guards/authorization-permissions.guard',
                         ['AuthorizationPermissionsGuard'],
                     );
 
-                    const callExpression = CallExpressionDriver.findCallExpression(authDecoratorSourceFile, 'UseGuards');
-                    if (callExpression)
-                    {
-                        CallExpressionDriver.replaceArgument(callExpression, 'AuthorizationDisabledAdapterGuard', 'AuthorizationPermissionsGuard');
+                    const callExpression =
+                        CallExpressionDriver.findCallExpression(
+                            authDecoratorSourceFile,
+                            'UseGuards',
+                        );
+                    if (callExpression) {
+                        CallExpressionDriver.replaceArgument(
+                            callExpression,
+                            'AuthorizationDisabledAdapterGuard',
+                            'AuthorizationPermissionsGuard',
+                        );
                     }
 
                     authDecoratorSourceFile.saveSync();
@@ -240,14 +368,27 @@ export class Add extends Command
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@modelcontextprotocol/sdk', 'zod']);
+                    await exec('npm', [
+                        'install',
+                        '@modelcontextprotocol/sdk',
+                        'zod',
+                    ]);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(appModuleSourceFile, 'mcp', ['McpModule']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'mcp',
+                        ['McpModule'],
+                    );
 
                     appModuleSourceFile.saveSync();
 
@@ -257,9 +398,18 @@ export class Add extends Command
                 case 'message': {
                     await BackHandler.addPackage(addCommandState);
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(appModuleSourceFile, 'message', ['MessageModule']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'message',
+                        ['MessageModule'],
+                    );
 
                     appModuleSourceFile.saveSync();
 
@@ -274,13 +424,24 @@ export class Add extends Command
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@nestjs/passport', 'passport', 'passport-jwt', 'jwks-rsa']);
+                    await exec('npm', [
+                        'install',
+                        '@nestjs/passport',
+                        'passport',
+                        'passport-jwt',
+                        'jwks-rsa',
+                    ]);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
                     Installer.declareBackPackageModule(
                         appModuleSourceFile,
                         'ms-entra-id',
@@ -289,7 +450,13 @@ export class Add extends Command
 
                     appModuleSourceFile.saveSync();
 
-                    const authenticationDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+                    const authenticationDecoratorSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'decorators',
+                            'auth.decorator.ts',
+                        ]);
 
                     // auth.decorator.ts file, add MsEntraIdAuthenticationGuard import
                     ImportDriver.createImportItems(
@@ -305,12 +472,21 @@ export class Add extends Command
                         ['MsEntraIdAuthorizationGuard'],
                     );
 
-                    const callExpression = CallExpressionDriver.findCallExpression(authenticationDecoratorSourceFile, 'UseGuards');
-                    if (callExpression)
-                    {
+                    const callExpression =
+                        CallExpressionDriver.findCallExpression(
+                            authenticationDecoratorSourceFile,
+                            'UseGuards',
+                        );
+                    if (callExpression) {
                         CallExpressionDriver.removeAllArguments(callExpression);
-                        CallExpressionDriver.addArgument(callExpression, 'MsEntraIdAuthenticationGuard');
-                        CallExpressionDriver.addArgument(callExpression, 'MsEntraIdAuthorizationGuard');
+                        CallExpressionDriver.addArgument(
+                            callExpression,
+                            'MsEntraIdAuthenticationGuard',
+                        );
+                        CallExpressionDriver.addArgument(
+                            callExpression,
+                            'MsEntraIdAuthorizationGuard',
+                        );
                     }
 
                     authenticationDecoratorSourceFile.saveSync();
@@ -325,11 +501,24 @@ export class Add extends Command
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@microsoft/microsoft-graph-client']);
+                    await exec('npm', [
+                        'install',
+                        '@microsoft/microsoft-graph-client',
+                    ]);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const mailerTransportModule = CommonDriver.createSourceFile(project, ['src', '@config', 'mailer', 'mailer-transport.module.ts']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const mailerTransportModule = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            '@config',
+                            'mailer',
+                            'mailer-transport.module.ts',
+                        ],
+                    );
 
                     ImportDriver.createImportItems(
                         mailerTransportModule,
@@ -356,47 +545,102 @@ export class Add extends Command
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@nestjs/jwt', '@nestjs/passport', 'passport-jwt']);
+                    await exec('npm', [
+                        'install',
+                        '@nestjs/jwt',
+                        '@nestjs/passport',
+                        'passport-jwt',
+                    ]);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(appModuleSourceFile, 'o-auth', ['OAuthModule']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'o-auth',
+                        ['OAuthModule'],
+                    );
                     appModuleSourceFile.saveSync();
 
                     // imports to shared module
-                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
-                    if (!ImportDriver.hasImportDeclarations(sharedModuleSourceFile, 'AuthJwtStrategyRegistryModule'))
-                    {
+                    const sharedModuleSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'shared.module.ts',
+                        ]);
+                    if (
+                        !ImportDriver.hasImportDeclarations(
+                            sharedModuleSourceFile,
+                            'AuthJwtStrategyRegistryModule',
+                        )
+                    ) {
                         ImportDriver.createImportItems(
                             sharedModuleSourceFile,
                             '@app/o-auth/shared',
                             ['AuthJwtStrategyRegistryModule', 'jwtConfig'],
                         );
 
-                        const classDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(sharedModuleSourceFile, 'SharedModule', 'Module');
-                        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'imports');
+                        const classDecoratorArguments =
+                            DecoratorDriver.getClassDecoratorArguments(
+                                sharedModuleSourceFile,
+                                'SharedModule',
+                                'Module',
+                            );
+                        const importsArray =
+                            ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                                classDecoratorArguments,
+                                'imports',
+                            );
                         // TODO, replace addElement with ArrayDriver.addArrayItems
-                        importsArray.addElement('AuthJwtStrategyRegistryModule.forRoot(jwtConfig)', { useNewLines: true });
-                        const exportsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(classDecoratorArguments, 'exports');
+                        importsArray.addElement(
+                            'AuthJwtStrategyRegistryModule.forRoot(jwtConfig)',
+                            { useNewLines: true },
+                        );
+                        const exportsArray =
+                            ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                                classDecoratorArguments,
+                                'exports',
+                            );
                         // TODO, replace addElement with ArrayDriver.addArrayItems
-                        exportsArray.addElement('AuthJwtStrategyRegistryModule', { useNewLines: true });
+                        exportsArray.addElement(
+                            'AuthJwtStrategyRegistryModule',
+                            { useNewLines: true },
+                        );
                     }
 
                     sharedModuleSourceFile.saveSync();
 
                     // change Auth decorator
-                    const authDecoratorSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'decorators', 'auth.decorator.ts']);
+                    const authDecoratorSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'decorators',
+                            'auth.decorator.ts',
+                        ]);
                     ImportDriver.createImportItems(
                         authDecoratorSourceFile,
                         '@api/o-auth/shared/guards/authentication-jwt.guard',
                         ['AuthenticationJwtGuard'],
                     );
 
-                    const callExpression = CallExpressionDriver.findCallExpression(authDecoratorSourceFile, 'UseGuards');
-                    if (callExpression)
-                    {
-                        CallExpressionDriver.replaceArgument(callExpression, 'AuthenticationDisabledAdapterGuard', 'AuthenticationJwtGuard');
+                    const callExpression =
+                        CallExpressionDriver.findCallExpression(
+                            authDecoratorSourceFile,
+                            'UseGuards',
+                        );
+                    if (callExpression) {
+                        CallExpressionDriver.replaceArgument(
+                            callExpression,
+                            'AuthenticationDisabledAdapterGuard',
+                            'AuthenticationJwtGuard',
+                        );
                     }
 
                     authDecoratorSourceFile.saveSync();
@@ -412,28 +656,58 @@ export class Add extends Command
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@nestjs/bullmq', '@nestjs/schedule', 'bullmq', 'redis']);
+                    await exec('npm', [
+                        'install',
+                        '@nestjs/bullmq',
+                        '@nestjs/schedule',
+                        'bullmq',
+                        'redis',
+                    ]);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    const appModuleClassDecoratorArguments = DecoratorDriver.getClassDecoratorArguments(appModuleSourceFile, 'AppModule', 'Module');
-                    Installer.declareBackPackageModule(appModuleSourceFile, 'queue-manager', ['QueueManagerModule']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
+                    const appModuleClassDecoratorArguments =
+                        DecoratorDriver.getClassDecoratorArguments(
+                            appModuleSourceFile,
+                            'AppModule',
+                            'Module',
+                        );
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'queue-manager',
+                        ['QueueManagerModule'],
+                    );
 
                     // add ScheduleModule
-                    if (!ImportDriver.hasImportDeclarations(appModuleSourceFile, 'ScheduleModule'))
-                    {
+                    if (
+                        !ImportDriver.hasImportDeclarations(
+                            appModuleSourceFile,
+                            'ScheduleModule',
+                        )
+                    ) {
                         ImportDriver.createImportItems(
                             appModuleSourceFile,
                             '@nestjs/schedule',
                             ['ScheduleModule'],
                         );
 
-                        const importsArray = ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(appModuleClassDecoratorArguments, 'imports');
+                        const importsArray =
+                            ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                                appModuleClassDecoratorArguments,
+                                'imports',
+                            );
                         // TODO, replace addElement with ArrayDriver.addArrayItems
-                        importsArray.addElement('ScheduleModule.forRoot()', { useNewLines: true });
+                        importsArray.addElement('ScheduleModule.forRoot()', {
+                            useNewLines: true,
+                        });
                     }
 
                     appModuleSourceFile.saveSync();
@@ -450,12 +724,18 @@ export class Add extends Command
 
                     ux.action.start('Installing dependencies');
                     await exec('npm', ['install', 'sharp']);
+                    await exec('npm', ['install', '-D', '@types/multer']);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
                     Installer.declareBackPackageModule(
                         appModuleSourceFile,
                         'storage-account',
@@ -464,12 +744,20 @@ export class Add extends Command
 
                     appModuleSourceFile.saveSync();
 
-                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+                    const sharedModuleSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'shared.module.ts',
+                        ]);
 
                     ImportDriver.createImportItems(
                         sharedModuleSourceFile,
                         '@api/storage-account/file-manager',
-                        ['StorageAccountFileManagerService', 'StorageAccountLocalFileManagerService'],
+                        [
+                            'StorageAccountFileManagerService',
+                            'StorageAccountLocalFileManagerService',
+                        ],
                     );
 
                     DecoratorDriver.addDecoratorAdapter(
@@ -505,9 +793,16 @@ export class Add extends Command
                     await exec('npm', ['install', '@azure/storage-blob']);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
-                    const sharedModuleSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'shared.module.ts']);
+                    const sharedModuleSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'shared.module.ts',
+                        ]);
 
                     ImportDriver.createImportItems(
                         sharedModuleSourceFile,
@@ -536,9 +831,18 @@ export class Add extends Command
                 case 'tools': {
                     await BackHandler.addPackage(addCommandState);
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
-                    Installer.declareBackPackageModule(appModuleSourceFile, 'tools', ['ToolsModule']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
+                    Installer.declareBackPackageModule(
+                        appModuleSourceFile,
+                        'tools',
+                        ['ToolsModule'],
+                    );
 
                     appModuleSourceFile.saveSync();
 
@@ -552,10 +856,15 @@ export class Add extends Command
                 case 'whatsapp': {
                     await BackHandler.addPackage(addCommandState);
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // app.module.ts file
-                    const appModuleSourceFile = CommonDriver.createSourceFile(project, ['src', 'app.module.ts']);
+                    const appModuleSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app.module.ts'],
+                    );
                     Installer.declareBackPackageModule(
                         appModuleSourceFile,
                         'whatsapp',
@@ -573,31 +882,43 @@ export class Add extends Command
             }
         }
 
-        if (args.firstArg === Scope.FRONT)
-        {
-            if (
-                !(
-                    fs.existsSync('src/@fuse') &&
-                    fs.existsSync('src/@aurora')
-                )
-            )
-            {
-                throw new Error('No Aurora front application is detected in the current directory.');
+        if (args.firstArg === Scope.FRONT) {
+            if (!(fs.existsSync('src/@fuse') && fs.existsSync('src/@aurora'))) {
+                throw new Error(
+                    'No Aurora front application is detected in the current directory.',
+                );
             }
 
-            switch (packageName)
-            {
+            switch (packageName) {
                 case 'auditing': {
                     await FrontHandler.addPackage(addCommandState);
 
                     // add module in main navigation menu
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'auditing', 'auditingNavigation');
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const navigationSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            'app',
+                            'modules',
+                            'admin',
+                            'admin.navigation.ts',
+                        ],
+                    );
+                    Installer.declareFrontNavigationMenu(
+                        navigationSourceFile,
+                        'auditing',
+                        'auditingNavigation',
+                    );
                     navigationSourceFile.saveSync();
 
                     // add lazy loading module to app routes
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
                     Installer.declareFrontRouting(routesSourceFile, 'auditing');
                     routesSourceFile.saveSync();
                     break;
@@ -607,27 +928,53 @@ export class Add extends Command
                     await FrontHandler.addPackage(addCommandState);
 
                     // add module in main navigation menu
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'common', 'commonNavigation');
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const navigationSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            'app',
+                            'modules',
+                            'admin',
+                            'admin.navigation.ts',
+                        ],
+                    );
+                    Installer.declareFrontNavigationMenu(
+                        navigationSourceFile,
+                        'common',
+                        'commonNavigation',
+                    );
                     navigationSourceFile.saveSync();
 
                     // add lazy loading module to app routes
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
                     Installer.declareFrontRouting(routesSourceFile, 'common');
                     routesSourceFile.saveSync();
                     break;
                 }
 
                 case 'environments': {
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
-                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
-                        auroraProviderSourceFile,
-                        'provideAurora',
-                    );
+                    const auroraProviderSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            'app',
+                            'aurora.provider.ts',
+                        ]);
+                    const returnArray =
+                        ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                            auroraProviderSourceFile,
+                            'provideAurora',
+                        );
                     ArrayDriver.removeProviderArray(
                         returnArray,
                         'EnvironmentsInformationService',
@@ -640,21 +987,45 @@ export class Add extends Command
                 case 'iam': {
                     await FrontHandler.addPackage(addCommandState);
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'iam', 'iamNavigation');
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const navigationSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            'app',
+                            'modules',
+                            'admin',
+                            'admin.navigation.ts',
+                        ],
+                    );
+                    Installer.declareFrontNavigationMenu(
+                        navigationSourceFile,
+                        'iam',
+                        'iamNavigation',
+                    );
                     navigationSourceFile.saveSync();
 
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
                     Installer.declareFrontRouting(routesSourceFile, 'iam');
                     routesSourceFile.saveSync();
 
                     // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
-                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
-                        auroraProviderSourceFile,
-                        'provideAurora',
-                    );
+                    const auroraProviderSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            'app',
+                            'aurora.provider.ts',
+                        ]);
+                    const returnArray =
+                        ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                            auroraProviderSourceFile,
+                            'provideAurora',
+                        );
 
                     // TODO, comprobar si hace falta borrar AuthorizationService
                     // remove AuthorizationService, will be replaced by AuthorizationAzureAdAdapterService defined in provideAzureAd()
@@ -663,8 +1034,12 @@ export class Add extends Command
                         'AuthorizationService',
                     ); */
 
-                    if (!ImportDriver.hasImportDeclarations(auroraProviderSourceFile, 'UserMetaStorageIamAdapterService'))
-                    {
+                    if (
+                        !ImportDriver.hasImportDeclarations(
+                            auroraProviderSourceFile,
+                            'UserMetaStorageIamAdapterService',
+                        )
+                    ) {
                         ImportDriver.createImportItems(
                             auroraProviderSourceFile,
                             'app/modules/admin/apps/iam',
@@ -694,13 +1069,31 @@ export class Add extends Command
                     await FrontHandler.addPackage(addCommandState);
 
                     // add module in main navigation menu
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'message', 'messageNavigation');
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const navigationSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            'app',
+                            'modules',
+                            'admin',
+                            'admin.navigation.ts',
+                        ],
+                    );
+                    Installer.declareFrontNavigationMenu(
+                        navigationSourceFile,
+                        'message',
+                        'messageNavigation',
+                    );
                     navigationSourceFile.saveSync();
 
                     // add lazy loading module to app routes
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
                     Installer.declareFrontRouting(routesSourceFile, 'message');
                     routesSourceFile.saveSync();
 
@@ -709,13 +1102,26 @@ export class Add extends Command
 
                 case 'msEntraId': {
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', '@azure/msal-angular', '@azure/msal-browser']);
+                    await exec('npm', [
+                        'install',
+                        '@azure/msal-angular',
+                        '@azure/msal-browser',
+                    ]);
                     ux.action.stop('Completed!');
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // apollo.provider.ts
-                    const auroraApolloProviderSourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'modules', 'graphql', 'apollo.provider.ts']);
+                    const auroraApolloProviderSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'modules',
+                            'graphql',
+                            'apollo.provider.ts',
+                        ]);
 
                     ImportDriver.createImportItems(
                         auroraApolloProviderSourceFile,
@@ -723,24 +1129,59 @@ export class Add extends Command
                         ['MsalService'],
                     );
 
-                    const auroraApolloProviderVariable = auroraApolloProviderSourceFile.getVariableDeclarationOrThrow('provideApollo');
-                    const auroraApolloProviderAnonymousFunction = auroraApolloProviderVariable.getInitializerIfKindOrThrow(SyntaxKind.ArrowFunction);
-                    const provideApolloLibraryCall = auroraApolloProviderAnonymousFunction.getDescendantsOfKind(SyntaxKind.CallExpression).find(call => call.getExpression().getText().includes('provideApolloLibrary'));
-                    const arrowFunction = provideApolloLibraryCall?.getFirstDescendantByKind(SyntaxKind.ArrowFunction);
-                    const bodyBlock = arrowFunction?.getBody()?.asKind(SyntaxKind.Block);
-                    const returnStatement = bodyBlock?.getStatements().find(s => s.getKind() === SyntaxKind.ReturnStatement);
-                    if (returnStatement)
-                    {
-                        bodyBlock?.insertStatements(returnStatement.getChildIndex(), ['const msalService = inject(MsalService);']);
+                    const auroraApolloProviderVariable =
+                        auroraApolloProviderSourceFile.getVariableDeclarationOrThrow(
+                            'provideApollo',
+                        );
+                    const auroraApolloProviderAnonymousFunction =
+                        auroraApolloProviderVariable.getInitializerIfKindOrThrow(
+                            SyntaxKind.ArrowFunction,
+                        );
+                    const provideApolloLibraryCall =
+                        auroraApolloProviderAnonymousFunction
+                            .getDescendantsOfKind(SyntaxKind.CallExpression)
+                            .find((call) =>
+                                call
+                                    .getExpression()
+                                    .getText()
+                                    .includes('provideApolloLibrary'),
+                            );
+                    const arrowFunction =
+                        provideApolloLibraryCall?.getFirstDescendantByKind(
+                            SyntaxKind.ArrowFunction,
+                        );
+                    const bodyBlock = arrowFunction
+                        ?.getBody()
+                        ?.asKind(SyntaxKind.Block);
+                    const returnStatement = bodyBlock
+                        ?.getStatements()
+                        .find(
+                            (s) => s.getKind() === SyntaxKind.ReturnStatement,
+                        );
+                    if (returnStatement) {
+                        bodyBlock?.insertStatements(
+                            returnStatement.getChildIndex(),
+                            ['const msalService = inject(MsalService);'],
+                        );
                     }
 
-                    const returnCall = returnStatement?.getFirstDescendantByKind(SyntaxKind.CallExpression);
+                    const returnCall =
+                        returnStatement?.getFirstDescendantByKind(
+                            SyntaxKind.CallExpression,
+                        );
                     returnCall?.addArgument('msalService');
 
                     auroraApolloProviderSourceFile.saveSync();
 
                     // apollo.factory.ts
-                    const auroraApolloFactorySourceFile = CommonDriver.createSourceFile(project, ['src', '@aurora', 'modules', 'graphql', 'apollo.factory.ts']);
+                    const auroraApolloFactorySourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'modules',
+                            'graphql',
+                            'apollo.factory.ts',
+                        ]);
 
                     ImportDriver.createImportItems(
                         auroraApolloFactorySourceFile,
@@ -754,22 +1195,52 @@ export class Add extends Command
                         ['msEntraIdAuthLink'],
                     );
 
-                    const auroraApolloFactoryVariable = auroraApolloFactorySourceFile.getVariableDeclarationOrThrow('apolloFactory');
-                    const auroraApolloFactoryArrowFunction = auroraApolloFactoryVariable.getInitializerIfKindOrThrow(SyntaxKind.ArrowFunction);
-                    auroraApolloFactoryArrowFunction.addParameter({ name: 'msalService', type: 'MsalService' });
+                    const auroraApolloFactoryVariable =
+                        auroraApolloFactorySourceFile.getVariableDeclarationOrThrow(
+                            'apolloFactory',
+                        );
+                    const auroraApolloFactoryArrowFunction =
+                        auroraApolloFactoryVariable.getInitializerIfKindOrThrow(
+                            SyntaxKind.ArrowFunction,
+                        );
+                    auroraApolloFactoryArrowFunction.addParameter({
+                        name: 'msalService',
+                        type: 'MsalService',
+                    });
 
-                    const auroraApolloFactoryArrowFunctionBody = auroraApolloFactoryArrowFunction.getBody().asKind(SyntaxKind.Block);
-                    const linkStatement = auroraApolloFactoryArrowFunctionBody?.getStatements().find(statement => statement.getText().includes('ApolloLink.from'));
-                    const callExpr = linkStatement?.getFirstDescendantByKindOrThrow(SyntaxKind.CallExpression);
+                    const auroraApolloFactoryArrowFunctionBody =
+                        auroraApolloFactoryArrowFunction
+                            .getBody()
+                            .asKind(SyntaxKind.Block);
+                    const linkStatement = auroraApolloFactoryArrowFunctionBody
+                        ?.getStatements()
+                        .find((statement) =>
+                            statement.getText().includes('ApolloLink.from'),
+                        );
+                    const callExpr =
+                        linkStatement?.getFirstDescendantByKindOrThrow(
+                            SyntaxKind.CallExpression,
+                        );
                     const arrayArg = callExpr?.getArguments()[0];
-                    const arrayLiteral = arrayArg?.asKindOrThrow(SyntaxKind.ArrayLiteralExpression);
-                    arrayLiteral?.insertElement(0, 'msEntraIdAuthLink(msalService)');
+                    const arrayLiteral = arrayArg?.asKindOrThrow(
+                        SyntaxKind.ArrayLiteralExpression,
+                    );
+                    arrayLiteral?.insertElement(
+                        0,
+                        'msEntraIdAuthLink(msalService)',
+                    );
 
                     auroraApolloFactorySourceFile.saveSync();
 
                     // app.routes.ts
-                    const appRoutesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
-                    const authGuardImport = appRoutesSourceFile.getImportDeclaration('app/core/auth/guards/auth.guard');
+                    const appRoutesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
+                    const authGuardImport =
+                        appRoutesSourceFile.getImportDeclaration(
+                            'app/core/auth/guards/auth.guard',
+                        );
                     if (authGuardImport) authGuardImport.remove();
 
                     ImportDriver.createImportItems(
@@ -781,11 +1252,17 @@ export class Add extends Command
                     appRoutesSourceFile.saveSync();
 
                     // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
-                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
-                        auroraProviderSourceFile,
-                        'provideAurora',
-                    );
+                    const auroraProviderSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            'app',
+                            'aurora.provider.ts',
+                        ]);
+                    const returnArray =
+                        ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                            auroraProviderSourceFile,
+                            'provideAurora',
+                        );
 
                     // import MsEntraId provider
                     ImportDriver.createImportItems(
@@ -794,13 +1271,12 @@ export class Add extends Command
                         ['provideMsEntraId'],
                     );
                     // TODO, replace addElement with ArrayDriver.addArrayItems
-                    returnArray?.addElement('provideMsEntraId()', { useNewLines: true });
+                    returnArray?.addElement('provideMsEntraId()', {
+                        useNewLines: true,
+                    });
 
                     // remove AuthGuard, will be replaced by MsalGuard defined in provideAzureAd()
-                    ArrayDriver.removeProviderArray(
-                        returnArray,
-                        'AuthGuard',
-                    );
+                    ArrayDriver.removeProviderArray(returnArray, 'AuthGuard');
 
                     // remove AuthenticationService, will be replaced by AuthenticationAzureAdAdapterService defined in provideAzureAd()
                     ArrayDriver.removeProviderArray(
@@ -815,74 +1291,103 @@ export class Add extends Command
                     );
 
                     // remove IamService, will be replaced by IamAzureAdAdapterService defined in provideAzureAd()
-                    ArrayDriver.removeProviderArray(
-                        returnArray,
-                        'IamService',
-                    );
+                    ArrayDriver.removeProviderArray(returnArray, 'IamService');
 
                     auroraProviderSourceFile.organizeImports();
                     auroraProviderSourceFile.saveSync();
 
                     // implement environments azure ad variables
-                    const environmentFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.ts']);
-                    const environmentVariable = VariableDriver.getVariable(environmentFile, 'environment');
-                    const environmentObject = <ObjectLiteralExpression>getInitializer(environmentVariable);
+                    const environmentFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'environments', 'environment.ts'],
+                    );
+                    const environmentVariable = VariableDriver.getVariable(
+                        environmentFile,
+                        'environment',
+                    );
+                    const environmentObject = <ObjectLiteralExpression>(
+                        getInitializer(environmentVariable)
+                    );
                     environmentObject?.addPropertyAssignment({
-                        name       : 'msEntraId',
+                        name: 'msEntraId',
                         initializer: Writers.object({
-                            tenant     : '\'\'',
-                            authority  : '\'\'',
-                            clientId   : '\'\'',
-                            redirectUri: '\'\'',
-                            scopes     : '[\'api://********-****-****-****-************/access_as_user\']',
+                            tenant: "''",
+                            authority: "''",
+                            clientId: "''",
+                            redirectUri: "''",
+                            scopes: "['api://********-****-****-****-************/access_as_user']",
                         }),
                     });
                     environmentFile.saveSync();
 
                     // implement environments entra id variables
-                    const environmentProdFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.prod.ts']);
-                    const environmentProdVariable = VariableDriver.getVariable(environmentProdFile, 'environment');
-                    const environmentProdObject = <ObjectLiteralExpression>getInitializer(environmentProdVariable);
+                    const environmentProdFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'environments', 'environment.prod.ts'],
+                    );
+                    const environmentProdVariable = VariableDriver.getVariable(
+                        environmentProdFile,
+                        'environment',
+                    );
+                    const environmentProdObject = <ObjectLiteralExpression>(
+                        getInitializer(environmentProdVariable)
+                    );
                     environmentProdObject?.addPropertyAssignment({
-                        name       : 'msEntraId',
+                        name: 'msEntraId',
                         initializer: Writers.object({
-                            tenant     : '\'\'',
-                            authority  : '\'\'',
-                            clientId   : '\'\'',
-                            redirectUri: '\'\'',
-                            scopes     : '[\'api://********-****-****-****-************/access_as_user\']',
+                            tenant: "''",
+                            authority: "''",
+                            clientId: "''",
+                            redirectUri: "''",
+                            scopes: "['api://********-****-****-****-************/access_as_user']",
                         }),
                     });
                     environmentProdFile.saveSync();
 
                     // implement environments entra id variables
-                    const environmentLocalFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.local.ts']);
-                    const environmentLocalVariable = VariableDriver.getVariable(environmentLocalFile, 'environment');
-                    const environmentLocalObject = <ObjectLiteralExpression>getInitializer(environmentLocalVariable);
+                    const environmentLocalFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'environments', 'environment.local.ts'],
+                    );
+                    const environmentLocalVariable = VariableDriver.getVariable(
+                        environmentLocalFile,
+                        'environment',
+                    );
+                    const environmentLocalObject = <ObjectLiteralExpression>(
+                        getInitializer(environmentLocalVariable)
+                    );
                     environmentLocalObject?.addPropertyAssignment({
-                        name       : 'msEntraId',
+                        name: 'msEntraId',
                         initializer: Writers.object({
-                            tenant     : '\'\'',
-                            authority  : '\'\'',
-                            clientId   : '\'\'',
-                            redirectUri: '\'\'',
-                            scopes     : '[\'api://********-****-****-****-************/access_as_user\']',
+                            tenant: "''",
+                            authority: "''",
+                            clientId: "''",
+                            redirectUri: "''",
+                            scopes: "['api://********-****-****-****-************/access_as_user']",
                         }),
                     });
                     environmentLocalFile.saveSync();
 
                     // implement environments entra id variables
-                    const environmentDevFile = CommonDriver.createSourceFile(project, ['src', 'environments', 'environment.dev.ts']);
-                    const environmentDevVariable = VariableDriver.getVariable(environmentDevFile, 'environment');
-                    const environmentDevObject = <ObjectLiteralExpression>getInitializer(environmentDevVariable);
+                    const environmentDevFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'environments', 'environment.dev.ts'],
+                    );
+                    const environmentDevVariable = VariableDriver.getVariable(
+                        environmentDevFile,
+                        'environment',
+                    );
+                    const environmentDevObject = <ObjectLiteralExpression>(
+                        getInitializer(environmentDevVariable)
+                    );
                     environmentDevObject?.addPropertyAssignment({
-                        name       : 'msEntraId',
+                        name: 'msEntraId',
                         initializer: Writers.object({
-                            tenant     : '\'\'',
-                            authority  : '\'\'',
-                            clientId   : '\'\'',
-                            redirectUri: '\'\'',
-                            scopes     : '[\'api://********-****-****-****-************/access_as_user\']',
+                            tenant: "''",
+                            authority: "''",
+                            clientId: "''",
+                            redirectUri: "''",
+                            scopes: "['api://********-****-****-****-************/access_as_user']",
                         }),
                     });
                     environmentDevFile.saveSync();
@@ -893,21 +1398,45 @@ export class Add extends Command
                 case 'oAuth': {
                     await FrontHandler.addPackage(addCommandState);
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'oAuth', 'oAuthNavigation');
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const navigationSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            'app',
+                            'modules',
+                            'admin',
+                            'admin.navigation.ts',
+                        ],
+                    );
+                    Installer.declareFrontNavigationMenu(
+                        navigationSourceFile,
+                        'oAuth',
+                        'oAuthNavigation',
+                    );
                     navigationSourceFile.saveSync();
 
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
                     Installer.declareFrontRouting(routesSourceFile, 'oAuth');
                     routesSourceFile.saveSync();
 
                     // aurora.providers.ts
-                    const auroraProviderSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'aurora.provider.ts']);
-                    const returnArray = ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
-                        auroraProviderSourceFile,
-                        'provideAurora',
-                    );
+                    const auroraProviderSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            'app',
+                            'aurora.provider.ts',
+                        ]);
+                    const returnArray =
+                        ArrowFunctionDriver.getReturnDefaultArrayFromVariable(
+                            auroraProviderSourceFile,
+                            'provideAurora',
+                        );
 
                     // change AuthenticationService
                     ArrayDriver.changeProviderArray(
@@ -917,10 +1446,7 @@ export class Add extends Command
                     );
 
                     // remove AuthGuard
-                    ArrayDriver.removeProviderArray(
-                        returnArray,
-                        'AuthGuard',
-                    );
+                    ArrayDriver.removeProviderArray(returnArray, 'AuthGuard');
 
                     auroraProviderSourceFile.saveSync();
                     break;
@@ -929,13 +1455,34 @@ export class Add extends Command
                 case 'queueManager': {
                     await FrontHandler.addPackage(addCommandState);
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'queueManager', 'queueManagerNavigation');
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const navigationSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            'app',
+                            'modules',
+                            'admin',
+                            'admin.navigation.ts',
+                        ],
+                    );
+                    Installer.declareFrontNavigationMenu(
+                        navigationSourceFile,
+                        'queueManager',
+                        'queueManagerNavigation',
+                    );
                     navigationSourceFile.saveSync();
 
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
-                    Installer.declareFrontRouting(routesSourceFile, 'queueManager');
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
+                    Installer.declareFrontRouting(
+                        routesSourceFile,
+                        'queueManager',
+                    );
                     routesSourceFile.saveSync();
                     break;
                 }
@@ -944,10 +1491,15 @@ export class Add extends Command
                     await FrontHandler.addPackage(addCommandState);
 
                     // add module in main navigation menu
-                    const project = CommonDriver.createProject(['tsconfig.json']);
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
 
                     // add lazy loading module to app routes
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
                     Installer.declareFrontRouting(routesSourceFile, 'settings');
                     routesSourceFile.saveSync();
                     break;
@@ -961,13 +1513,31 @@ export class Add extends Command
                     await FrontHandler.addPackage(addCommandState);
 
                     // add module in main navigation menu
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'tools', 'toolsNavigation');
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const navigationSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            'app',
+                            'modules',
+                            'admin',
+                            'admin.navigation.ts',
+                        ],
+                    );
+                    Installer.declareFrontNavigationMenu(
+                        navigationSourceFile,
+                        'tools',
+                        'toolsNavigation',
+                    );
                     navigationSourceFile.saveSync();
 
                     // add lazy loading module to app routes
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
                     Installer.declareFrontRouting(routesSourceFile, 'tools');
                     routesSourceFile.saveSync();
 
@@ -977,12 +1547,30 @@ export class Add extends Command
                 case 'whatsapp': {
                     await FrontHandler.addPackage(addCommandState);
 
-                    const project = CommonDriver.createProject(['tsconfig.json']);
-                    const navigationSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'modules', 'admin', 'admin.navigation.ts']);
-                    Installer.declareFrontNavigationMenu(navigationSourceFile, 'whatsapp', 'whatsappNavigation');
+                    const project = CommonDriver.createProject([
+                        'tsconfig.json',
+                    ]);
+                    const navigationSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        [
+                            'src',
+                            'app',
+                            'modules',
+                            'admin',
+                            'admin.navigation.ts',
+                        ],
+                    );
+                    Installer.declareFrontNavigationMenu(
+                        navigationSourceFile,
+                        'whatsapp',
+                        'whatsappNavigation',
+                    );
                     navigationSourceFile.saveSync();
 
-                    const routesSourceFile = CommonDriver.createSourceFile(project, ['src', 'app', 'app.routes.ts']);
+                    const routesSourceFile = CommonDriver.createSourceFile(
+                        project,
+                        ['src', 'app', 'app.routes.ts'],
+                    );
                     Installer.declareFrontRouting(routesSourceFile, 'whatsapp');
                     routesSourceFile.saveSync();
                     break;
