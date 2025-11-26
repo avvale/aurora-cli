@@ -24,7 +24,6 @@ import {
     unlinkSync,
 } from 'node:fs';
 import { extname } from 'node:path';
-import * as sharp from 'sharp';
 import { StorageAccountFileManagerService } from './storage-account-file-manager.service';
 
 @Injectable()
@@ -97,6 +96,22 @@ export class StorageAccountLocalFileManagerService
         return responses;
     }
 
+    getNextAvailableFilename(
+        containerName: string,
+        basePathSegments: string[],
+        filename: string,
+    ): Promise<string> {
+        throw new Error('Method not implemented.');
+    }
+
+    getNextAvailableFoldername(
+        containerName: string,
+        basePathSegments: string[],
+        rootFolderPath: string,
+    ): Promise<string> {
+        throw new Error('Method not implemented.');
+    }
+
     async uploadFile(
         filePayload: StorageAccountFileManagerFileUploadedInput,
         {
@@ -111,12 +126,7 @@ export class StorageAccountLocalFileManagerService
         const absoluteDirectoryPath =
             storagePublicAbsoluteDirectoryPath(relativePathSegments);
 
-        const {
-            createReadStream,
-            filename: originFilename,
-            mimetype,
-            encoding,
-        } = await filePayload.file;
+        const { stream, filename: originFilename, mimetype } = filePayload.file;
         const extensionFile =
             extname(originFilename).toLowerCase() === '.jpeg'
                 ? '.jpg'
@@ -130,9 +140,6 @@ export class StorageAccountLocalFileManagerService
         // create directory if not exists
         if (!existsSync(absoluteDirectoryPath))
             mkdirSync(absoluteDirectoryPath, { recursive: true });
-
-        // Create readable stream
-        const stream = createReadStream();
 
         // promise to store the file in the filesystem.
         // no await here to allow parallel uploads
@@ -160,11 +167,7 @@ export class StorageAccountLocalFileManagerService
             url,
             isCropable,
             isUploaded: true,
-            meta: {
-                fileMeta: isCropable
-                    ? await sharp(absolutePath).metadata()
-                    : stats,
-            },
+            meta: {},
         };
 
         // add cropable properties
@@ -212,7 +215,7 @@ export class StorageAccountLocalFileManagerService
     ): Promise<StorageAccountFileManagerFile[]> {
         const responses = [];
         for (const filePayload of filePayloads) {
-            const savedFile = this.uploadFile(filePayload);
+            const savedFile = this.uploadFile(filePayload, { filenameFormat });
             responses.push(savedFile);
         }
         return Promise.all(responses);
