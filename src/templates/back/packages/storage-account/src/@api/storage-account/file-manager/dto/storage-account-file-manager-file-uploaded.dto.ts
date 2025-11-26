@@ -1,40 +1,39 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class StorageAccountFileManagerFileUploadedDto
-{
+export class StorageAccountFileManagerFileUploadedDto {
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'id [input here api field description]',
     })
     id: string;
 
     @ApiProperty({
-        type       : Object,
+        type: Object,
         description: 'file [input here api field description]',
     })
     file: any;
 
     @ApiProperty({
-        type       : [String],
+        type: [String],
         description: 'relativePathSegments [input here api field description]',
     })
     relativePathSegments: string[];
 
     @ApiProperty({
-        type       : String,
+        type: String,
         description: 'containerName [input here api field description]',
     })
     containerName?: string;
 
     @ApiProperty({
-        type       : Boolean,
+        type: Boolean,
         description: 'hasCreateLibrary [input here api field description]',
     })
     hasCreateLibrary?: boolean;
 
     @ApiProperty({
-        type       : Object,
+        type: Object,
         description: 'meta [input here api field description]',
     })
     meta?: any;

@@ -18,6 +18,8 @@ export class ToolsCreateKeyValuesHandler {
                 timezone,
                 repositoryOptions: {
                     auditing,
+                    updateOnDuplicate: ['value'],
+                    conflictAttributes: ['id'],
                 },
             }),
         );

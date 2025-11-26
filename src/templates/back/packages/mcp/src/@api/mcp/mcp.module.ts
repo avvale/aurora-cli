@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
+import { Module } from '@nestjs/common';
+import { McpAuthService } from './mcp.auth.service';
 import { McpController } from './mcp.controller';
 import { McpNestGraphQLServer } from './mcp.server';
-import { McpAuthService } from './mcp.auth.service';
 
 @Module({
     imports: [HttpModule],
@@ -10,4 +10,3 @@ import { McpAuthService } from './mcp.auth.service';
     providers: [McpNestGraphQLServer, McpAuthService],
 })
 export class McpModule {}
-

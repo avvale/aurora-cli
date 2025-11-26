@@ -1,15 +1,28 @@
-import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { z } from 'zod';
-import { GraphQLArgument, GraphQLInputType, GraphQLSchema, getNamedType, isInputObjectType, isListType, isNonNullType, isScalarType, isObjectType, isInterfaceType, isUnionType, isEnumType, GraphQLType } from 'graphql';
-import { firstValueFrom } from 'rxjs';
 import { SchemaStoreService } from '@aurora/modules/graphql';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { HttpService } from '@nestjs/axios';
+import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
+import {
+    GraphQLArgument,
+    GraphQLInputType,
+    GraphQLSchema,
+    GraphQLType,
+    getNamedType,
+    isEnumType,
+    isInputObjectType,
+    isInterfaceType,
+    isListType,
+    isNonNullType,
+    isObjectType,
+    isScalarType,
+    isUnionType,
+} from 'graphql';
+import { firstValueFrom } from 'rxjs';
+import { z } from 'zod';
 import { McpAuthService } from './mcp.auth.service';
 
 @Injectable()
-export class McpNestGraphQLServer implements OnApplicationBootstrap
-{
+export class McpNestGraphQLServer implements OnApplicationBootstrap {
     private schema!: GraphQLSchema;
 
     constructor(
@@ -18,57 +31,52 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         private readonly auth: McpAuthService,
     ) {}
 
-    async onApplicationBootstrap(): Promise<void>
-    {
-        this.schema = await this.waitForSchema();
+    async onApplicationBootstrap(): Promise<void> {
+        // this.schema = await this.waitForSchema();
     }
 
     private async waitForSchema(
         timeoutMs = 15000,
         intervalMs = 50,
-    ): Promise<GraphQLSchema>
-    {
+    ): Promise<GraphQLSchema> {
         const start = Date.now();
-        while (true)
-        {
-            try
-            {
+        while (true) {
+            try {
                 const s = this.schemaStoreService.getSchema();
                 if (s) return s;
-            }
-            catch
-            {
+            } catch {
                 // Ignore errors
             }
 
-            if (Date.now() - start > timeoutMs) throw new Error('GraphQL schema not ready (timeout)');
-            await new Promise(r => setTimeout(r, intervalMs));
+            if (Date.now() - start > timeoutMs)
+                throw new Error('GraphQL schema not ready (timeout)');
+            await new Promise((r) => setTimeout(r, intervalMs));
         }
     }
 
     // Factory: create a fresh MCP server instance with all resources/tools
-    createServer(): McpServer
-    {
+    createServer(): McpServer {
         const server = new McpServer({ name: 'nestjs-mcp', version: '1.0.0' });
         this.initFromSchema(server);
         return server;
     }
 
-    private initFromSchema(server: McpServer): void
-    {
+    private initFromSchema(server: McpServer): void {
         // 1) Resource: full GraphQL SDL
         server.registerResource(
             'graphql-schema',
             'gql://schema',
             {
-                title      : 'GraphQL Schema (SDL)',
+                title: 'GraphQL Schema (SDL)',
                 description: `Complete GraphQL API schema in SDL format, contains metadata
                 with help for the compression of fields and queries, as well as instructions
                 for the composition of a QueryStatement object.`,
                 mimeType: 'text/plain',
             },
-            uri => ({
-                contents: [{ uri: uri.href, text: this.schemaStoreService.getSDL() }],
+            (uri) => ({
+                contents: [
+                    { uri: uri.href, text: this.schemaStoreService.getSDL() },
+                ],
             }),
         );
 
@@ -76,14 +84,15 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         server.registerPrompt(
             'graphql-quickstart',
             {
-                title      : 'GraphQL Quickstart',
-                description: 'Brief help to use the GraphQL tools of this server.',
+                title: 'GraphQL Quickstart',
+                description:
+                    'Brief help to use the GraphQL tools of this server.',
             },
             () => ({
                 description: 'How to get started',
-                messages   : [
+                messages: [
                     {
-                        role   : 'user',
+                        role: 'user',
                         content: {
                             type: 'text',
                             text: [
@@ -108,14 +117,15 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         server.registerPrompt(
             'graphql-operators',
             {
-                title      : 'QueryStatement Operators Guide',
-                description: 'Full reference and examples for WHERE/operators in QueryStatement.',
+                title: 'QueryStatement Operators Guide',
+                description:
+                    'Full reference and examples for WHERE/operators in QueryStatement.',
             },
             () => ({
                 description: 'Operator reference and examples',
-                messages   : [
+                messages: [
                     {
-                        role   : 'user',
+                        role: 'user',
                         content: {
                             type: 'text',
                             text: [
@@ -182,42 +192,66 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         server.registerTool(
             'graphql-execute',
             {
-                title      : 'GraphQL execute',
-                description: 'Executes GraphQL operations (queries) against this API.',
+                title: 'GraphQL execute',
+                description:
+                    'Executes GraphQL operations (queries) against this API.',
                 inputSchema: {
-                    document     : z.string().describe('GraphQL document/operation.'),
-                    variables    : z.record(z.any()).optional(),
+                    document: z
+                        .string()
+                        .describe('GraphQL document/operation.'),
+                    variables: z.record(z.any()).optional(),
                     operationName: z.string().optional(),
-                    headers      : z.record(z.string()).optional(),
+                    headers: z.record(z.string()).optional(),
                 },
             },
-            async ({ document, variables, operationName, headers }) =>
-            {
-                try
-                {
-                    const { status, data } = await this.execHttp({ document, variables, operationName, headers });
+            async ({ document, variables, operationName, headers }) => {
+                try {
+                    const { status, data } = await this.execHttp({
+                        document,
+                        variables,
+                        operationName,
+                        headers,
+                    });
                     const text = JSON.stringify({ status, data }, null, 2);
-                    return { content: [{ type: 'text', text }]};
-                }
-                catch (e)
-                {
-                    return { content: [{ type: 'text', text: String(e instanceof Error ? e.message : e) }], isError: true } as const;
+                    return { content: [{ type: 'text', text }] };
+                } catch (e) {
+                    return {
+                        content: [
+                            {
+                                type: 'text',
+                                text: String(
+                                    e instanceof Error ? e.message : e,
+                                ),
+                            },
+                        ],
+                        isError: true,
+                    } as const;
                 }
             },
         );
 
         // 3) Introspection: one tool per Query field, with INCLUDE/EXCLUDE logic
         const q = this.schema.getQueryType();
-        if (q)
-        {
+        if (q) {
             const include = (process.env.MCP_INCLUDE_API_TOOLS || '').trim();
             const includeAll = include.length === 0 || include === '*';
-            const includeSet = new Set(includeAll ? [] : include.split(',').map(s => s.trim()).filter(Boolean));
-            const excludeSet = new Set((process.env.MCP_EXCLUDE_API_TOOLS || '').split(',').map(s => s.trim()).filter(Boolean));
+            const includeSet = new Set(
+                includeAll
+                    ? []
+                    : include
+                          .split(',')
+                          .map((s) => s.trim())
+                          .filter(Boolean),
+            );
+            const excludeSet = new Set(
+                (process.env.MCP_EXCLUDE_API_TOOLS || '')
+                    .split(',')
+                    .map((s) => s.trim())
+                    .filter(Boolean),
+            );
 
             const fields = q.getFields();
-            for (const fieldName of Object.keys(fields))
-            {
+            for (const fieldName of Object.keys(fields)) {
                 if (!includeAll && !includeSet.has(fieldName)) continue;
                 if (excludeSet.size && excludeSet.has(fieldName)) continue;
 
@@ -231,16 +265,19 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
                 server.registerTool(
                     `gql-query-${fieldName}`,
                     {
-                        title      : `Query ${fieldName}`,
-                        description: field.description ?? `GraphQL query ${fieldName}`,
+                        title: `Query ${fieldName}`,
+                        description:
+                            field.description ?? `GraphQL query ${fieldName}`,
                         inputSchema,
                     },
-                    async toolArgs =>
-                    {
+                    async (toolArgs) => {
                         const variables = toolArgs as Record<string, unknown>;
-                        const { status, data } = await this.execHttp({ document, variables });
+                        const { status, data } = await this.execHttp({
+                            document,
+                            variables,
+                        });
                         const text = JSON.stringify({ status, data }, null, 2);
-                        return { content: [{ type: 'text', text }]};
+                        return { content: [{ type: 'text', text }] };
                     },
                 );
             }
@@ -250,46 +287,43 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         server.registerTool(
             'auth-login',
             {
-                title      : 'Authentication (PASSWORD)',
-                description: 'Gets JWT using grant PASSWORD when there is no MCP_AUTH_USERNAME / MCP_AUTH_CLIENT_SECRET in the environment variables',
+                title: 'Authentication (PASSWORD)',
+                description:
+                    'Gets JWT using grant PASSWORD when there is no MCP_AUTH_USERNAME / MCP_AUTH_CLIENT_SECRET in the environment variables',
                 inputSchema: {
                     username: z.string(),
                     password: z.string(),
                 },
             },
-            async ({ username, password }) =>
-            {
+            async ({ username, password }) => {
                 await this.auth.loginWithPassword(username, password);
-                return { content: [{ type: 'text', text: 'Login OK' }]};
+                return { content: [{ type: 'text', text: 'Login OK' }] };
             },
         );
     }
 
-    private async execHttp(
-        {
-            document,
-            variables,
-            operationName,
-            headers,
-        }: {
-            document: string;
-            variables?: Record<string, unknown>;
-            operationName?: string;
-            headers?: Record<string, string>;
-        },
-    )
-    {
+    private async execHttp({
+        document,
+        variables,
+        operationName,
+        headers,
+    }: {
+        document: string;
+        variables?: Record<string, unknown>;
+        operationName?: string;
+        headers?: Record<string, string>;
+    }) {
         console.log('MCP exec:', JSON.stringify(variables, null, 2));
-        const baseURL = process.env.SELF_BASE_URL || `http://localhost:${process.env.APP_PORT || 3000}`;
+        const baseURL =
+            process.env.SELF_BASE_URL ||
+            `http://localhost:${process.env.APP_PORT || 3000}`;
         // Enforce/normalize QueryStatement operators
-        const enforce   = process.env.MCP_QS_ENFORCE_BRACKETS === 'true';
+        const enforce = process.env.MCP_QS_ENFORCE_BRACKETS === 'true';
         const normalize = process.env.MCP_QS_NORMALIZE !== 'false';
 
-        if (variables && enforce)
-        {
+        if (variables && enforce) {
             const offenders = this.findUnbracketedOperators(variables);
-            if (offenders.length)
-            {
+            if (offenders.length) {
                 const hint = [
                     'Invalid WHERE operators: use quoted bracket keys, e.g. "[startsWith]".',
                     `Offending paths: ${offenders.join(', ')}`,
@@ -299,32 +333,38 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
             }
         }
         // Normalize QueryStatement operators if requested (default: on)
-        if (variables && normalize) variables = this.normalizeQueryStatementOperators(variables) as Record<string, unknown>;
+        if (variables && normalize)
+            variables = this.normalizeQueryStatementOperators(
+                variables,
+            ) as Record<string, unknown>;
 
         if (process.env.MCP_AUTH === 'true') await this.auth.ensureAuth();
 
-        const makeRequest = async (authHeader?: string) => firstValueFrom(this.http.post<any>(
-            `${baseURL}/graphql`,
-            { query: document, variables, operationName },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...(authHeader ? { Authorization: authHeader } : {}),
-                    ...(headers ?? {}),
-                },
-                validateStatus: () => true,
-                timeout       : 60000,
-            },
-        ));
+        const makeRequest = async (authHeader?: string) =>
+            firstValueFrom(
+                this.http.post<any>(
+                    `${baseURL}/graphql`,
+                    { query: document, variables, operationName },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            ...(authHeader
+                                ? { Authorization: authHeader }
+                                : {}),
+                            ...(headers ?? {}),
+                        },
+                        validateStatus: () => true,
+                        timeout: 60000,
+                    },
+                ),
+            );
 
         // Attempt with current token
         let res = await makeRequest(this.auth.getAuthHeader());
-        if (res.status === 401)
-        {
+        if (res.status === 401) {
             // Try refresh flow
             const refreshed = await this.auth.refreshIfNeeded();
-            if (refreshed)
-            {
+            if (refreshed) {
                 res = await makeRequest(this.auth.getAuthHeader());
             }
         }
@@ -332,28 +372,53 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
     }
 
     // --- Operator normalization utilities ----------------------------------
-    private readonly lcToCanonical: Record<string, string> = Object.fromEntries([
-        // canonical
-        ['and','and'], ['or','or'], ['not','not'],
-        ['eq','eq'], ['ne','ne'], ['is','is'],
-        ['gt','gt'], ['gte','gte'], ['lt','lt'], ['lte','lte'],
-        ['between','between'], ['notbetween','notBetween'],
-        ['in','in'], ['notin','notIn'],
-        ['like','like'], ['notlike','notLike'], ['ilike','iLike'], ['notilike','notILike'],
-        ['startswith','startsWith'], ['endswith','endsWith'], ['substring','substring'],
-        ['regexp','regexp'], ['notregexp','notRegexp'], ['iregexp','iRegexp'], ['notiregexp','notIRegexp'],
-        ['col','col'],
-        ['overlap','overlap'], ['contains','contains'], ['contained','contained'], ['any','any'],
-        // common misspellings
-        ['startwith','startsWith'], ['endwith','endsWith'], ['startwiths','startsWith'], ['endwiths','endsWith'],
-    ]);
+    private readonly lcToCanonical: Record<string, string> = Object.fromEntries(
+        [
+            // canonical
+            ['and', 'and'],
+            ['or', 'or'],
+            ['not', 'not'],
+            ['eq', 'eq'],
+            ['ne', 'ne'],
+            ['is', 'is'],
+            ['gt', 'gt'],
+            ['gte', 'gte'],
+            ['lt', 'lt'],
+            ['lte', 'lte'],
+            ['between', 'between'],
+            ['notbetween', 'notBetween'],
+            ['in', 'in'],
+            ['notin', 'notIn'],
+            ['like', 'like'],
+            ['notlike', 'notLike'],
+            ['ilike', 'iLike'],
+            ['notilike', 'notILike'],
+            ['startswith', 'startsWith'],
+            ['endswith', 'endsWith'],
+            ['substring', 'substring'],
+            ['regexp', 'regexp'],
+            ['notregexp', 'notRegexp'],
+            ['iregexp', 'iRegexp'],
+            ['notiregexp', 'notIRegexp'],
+            ['col', 'col'],
+            ['overlap', 'overlap'],
+            ['contains', 'contains'],
+            ['contained', 'contained'],
+            ['any', 'any'],
+            // common misspellings
+            ['startwith', 'startsWith'],
+            ['endwith', 'endsWith'],
+            ['startwiths', 'startsWith'],
+            ['endwiths', 'endsWith'],
+        ],
+    );
 
-    private isBracketed(key: string): boolean { return key.startsWith('[') && key.endsWith(']'); }
+    private isBracketed(key: string): boolean {
+        return key.startsWith('[') && key.endsWith(']');
+    }
 
-    private normalizeOpKey(key: string): string | undefined
-    {
-        if (this.isBracketed(key))
-        {
+    private normalizeOpKey(key: string): string | undefined {
+        if (this.isBracketed(key)) {
             const inner = key.slice(1, -1);
             const canonical = this.lcToCanonical[inner.toLowerCase()];
             return canonical ? `[${canonical}]` : key;
@@ -362,30 +427,40 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         return canonical ? `[${canonical}]` : undefined;
     }
 
-    private normalizeQueryStatementOperators(value: unknown, underWhere = false): unknown
-    {
-        if (Array.isArray(value)) return value.map(v => this.normalizeQueryStatementOperators(v, underWhere));
-        if (value && typeof value === 'object')
-        {
+    private normalizeQueryStatementOperators(
+        value: unknown,
+        underWhere = false,
+    ): unknown {
+        if (Array.isArray(value))
+            return value.map((v) =>
+                this.normalizeQueryStatementOperators(v, underWhere),
+            );
+        if (value && typeof value === 'object') {
             const src = value as Record<string, unknown>;
             const dst: Record<string, unknown> = {};
-            for (const [k, v] of Object.entries(src))
-            {
+            for (const [k, v] of Object.entries(src)) {
                 const keyLower = k.toLowerCase();
-                const isWhereLike = keyLower === 'where' || (this.isBracketed(k) && ['[and]','[or]','[not]'].includes(k.toLowerCase()));
+                const isWhereLike =
+                    keyLower === 'where' ||
+                    (this.isBracketed(k) &&
+                        ['[and]', '[or]', '[not]'].includes(k.toLowerCase()));
                 const childUnderWhere = underWhere || isWhereLike;
 
-                if (childUnderWhere)
-                {
+                if (childUnderWhere) {
                     const maybe = this.normalizeOpKey(k);
-                    if (maybe)
-                    {
-                        dst[maybe] = this.normalizeQueryStatementOperators(v, true);
+                    if (maybe) {
+                        dst[maybe] = this.normalizeQueryStatementOperators(
+                            v,
+                            true,
+                        );
                         continue;
                     }
                 }
 
-                dst[k] = this.normalizeQueryStatementOperators(v, childUnderWhere);
+                dst[k] = this.normalizeQueryStatementOperators(
+                    v,
+                    childUnderWhere,
+                );
             }
             return dst;
         }
@@ -393,39 +468,54 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
     }
 
     // Detect any unbracketed operator keys inside where contexts
-    private findUnbracketedOperators(value: unknown, path: string[] = [], underWhere = false): string[]
-    {
+    private findUnbracketedOperators(
+        value: unknown,
+        path: string[] = [],
+        underWhere = false,
+    ): string[] {
         const offenders: string[] = [];
-        if (Array.isArray(value))
-        {
-            value.forEach((v, i) => offenders.push(...this.findUnbracketedOperators(v, [...path, String(i)], underWhere)));
+        if (Array.isArray(value)) {
+            value.forEach((v, i) =>
+                offenders.push(
+                    ...this.findUnbracketedOperators(
+                        v,
+                        [...path, String(i)],
+                        underWhere,
+                    ),
+                ),
+            );
             return offenders;
         }
-        if (value && typeof value === 'object')
-        {
+        if (value && typeof value === 'object') {
             const src = value as Record<string, unknown>;
-            for (const [k, v] of Object.entries(src))
-            {
+            for (const [k, v] of Object.entries(src)) {
                 const keyLower = k.toLowerCase();
-                const isWhereLike = keyLower === 'where' || (this.isBracketed(k) && ['[and]','[or]','[not]'].includes(k.toLowerCase()));
+                const isWhereLike =
+                    keyLower === 'where' ||
+                    (this.isBracketed(k) &&
+                        ['[and]', '[or]', '[not]'].includes(k.toLowerCase()));
                 const childUnderWhere = underWhere || isWhereLike;
 
-                if (childUnderWhere)
-                {
+                if (childUnderWhere) {
                     const canonical = this.lcToCanonical[k.toLowerCase()];
-                    if (canonical && !this.isBracketed(k)) offenders.push([...path, k].join('.'));
+                    if (canonical && !this.isBracketed(k))
+                        offenders.push([...path, k].join('.'));
                 }
-                offenders.push(...this.findUnbracketedOperators(v, [...path, k], childUnderWhere));
+                offenders.push(
+                    ...this.findUnbracketedOperators(
+                        v,
+                        [...path, k],
+                        childUnderWhere,
+                    ),
+                );
             }
         }
         return offenders;
     }
 
-    private argsToZodSchema(args: readonly GraphQLArgument[])
-    {
+    private argsToZodSchema(args: readonly GraphQLArgument[]) {
         const shape: Record<string, z.ZodTypeAny> = {};
-        for (const a of args)
-        {
+        for (const a of args) {
             const zt = this.zodFromInputType(a.type);
             shape[a.name] = isNonNullType(a.type) ? zt : zt.optional();
         }
@@ -444,20 +534,18 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
      * @param t - The GraphQL input type to convert.
      * @returns A Zod schema representing the input type.
      */
-    private zodFromInputType(t: GraphQLInputType): z.ZodTypeAny
-    {
+    private zodFromInputType(t: GraphQLInputType): z.ZodTypeAny {
         const nonNull = isNonNullType(t);
         const inner = nonNull ? t.ofType : t;
 
-        if (isListType(inner)) return z.array(this.zodFromInputType(inner.ofType));
+        if (isListType(inner))
+            return z.array(this.zodFromInputType(inner.ofType));
 
         const named = getNamedType(inner);
-        if (isInputObjectType(named))
-        {
+        if (isInputObjectType(named)) {
             const fields = named.getFields();
             const shape: Record<string, z.ZodTypeAny> = {};
-            for (const fName of Object.keys(fields))
-            {
+            for (const fName of Object.keys(fields)) {
                 const f = fields[fName];
                 const fZ = this.zodFromInputType(f.type);
                 shape[fName] = isNonNullType(f.type) ? fZ : fZ.optional();
@@ -465,10 +553,8 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
             return z.object(shape);
         }
 
-        if (isScalarType(named))
-        {
-            switch (named.name)
-            {
+        if (isScalarType(named)) {
+            switch (named.name) {
                 case 'GraphQLString':
                 case 'String':
                 case 'ID':
@@ -491,17 +577,18 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         return z.unknown();
     }
 
-    private buildVarDefsAndArgs(args: readonly GraphQLArgument[])
-    {
+    private buildVarDefsAndArgs(args: readonly GraphQLArgument[]) {
         const varDefs: string[] = [];
         const assigns: string[] = [];
-        for (const a of args)
-        {
+        for (const a of args) {
             const gType = this.gqlTypeFromInput(a.type);
             varDefs.push(`$${a.name}: ${gType}`);
             assigns.push(`${a.name}: $${a.name}`);
         }
-        return { varDefs: varDefs.join(', '), argAssigns: args.length ? `(${assigns.join(', ')})` : '' };
+        return {
+            varDefs: varDefs.join(', '),
+            argAssigns: args.length ? `(${assigns.join(', ')})` : '',
+        };
     }
 
     // Build a reasonable selection set for a given output type
@@ -509,8 +596,7 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
     // - Objects/Interfaces: first-level scalar/enum fields (preferring `id` if exists)
     // - Lists: unwrap and apply same logic to item type
     // - Unions: __typename
-    private buildSelection(t: GraphQLType): string
-    {
+    private buildSelection(t: GraphQLType): string {
         // unwrap list/non-null wrappers
         let inner: any = t as any;
         while (isNonNullType(inner) || isListType(inner)) inner = inner.ofType;
@@ -524,19 +610,18 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         if (isUnionType(named)) return '{ __typename }';
 
         // Objects and Interfaces: pick scalar/enum fields
-        if (isObjectType(named) || isInterfaceType(named))
-        {
+        if (isObjectType(named) || isInterfaceType(named)) {
             const fields = named.getFields();
             const fieldNames = Object.keys(fields);
 
             const selections: string[] = [];
             if (fieldNames.includes('id')) selections.push('id');
 
-            for (const fname of fieldNames)
-            {
+            for (const fname of fieldNames) {
                 if (fname === 'id') continue;
                 const fType = getNamedType(fields[fname].type);
-                if (isScalarType(fType) || isEnumType(fType)) selections.push(fname);
+                if (isScalarType(fType) || isEnumType(fType))
+                    selections.push(fname);
             }
 
             // Fallback to typename if we couldn't find anything
@@ -548,15 +633,12 @@ export class McpNestGraphQLServer implements OnApplicationBootstrap
         return '';
     }
 
-    private gqlTypeFromInput(t: GraphQLInputType): string
-    {
+    private gqlTypeFromInput(t: GraphQLInputType): string {
         if (isNonNullType(t)) return `${this.gqlTypeFromInput(t.ofType)}!`;
         if (isListType(t)) return `[${this.gqlTypeFromInput(t.ofType)}]`;
         const named = getNamedType(t);
-        if (isScalarType(named))
-        {
-            switch (named.name)
-            {
+        if (isScalarType(named)) {
+            switch (named.name) {
                 case 'GraphQLString':
                 case 'String':
                 case 'ID':

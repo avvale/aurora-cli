@@ -5,18 +5,16 @@ import { StorageAccountFileManagerService } from '@api/storage-account/file-mana
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class StorageAccountGetBase64FileFileManagerHandler
-{
+export class StorageAccountGetBase64FileFileManagerHandler {
     constructor(
         private readonly storageAccountFileManagerService: StorageAccountFileManagerService,
     ) {}
 
     main(
-        file: StorageAccountFileManagerFileInput | StorageAccountFileManagerFileDto,
-    )
-    {
-        return this.storageAccountFileManagerService.getBase64File(
-            file,
-        );
+        file:
+            | StorageAccountFileManagerFileInput
+            | StorageAccountFileManagerFileDto,
+    ) {
+        return this.storageAccountFileManagerService.getBase64File(file);
     }
 }

@@ -5,8 +5,7 @@ import { firstValueFrom } from 'rxjs';
 type GrantType = 'CLIENT_CREDENTIALS' | 'PASSWORD' | 'REFRESH_TOKEN';
 
 @Injectable()
-export class McpAuthService
-{
+export class McpAuthService {
     private readonly logger = new Logger(McpAuthService.name);
 
     private accessToken?: string;
@@ -20,30 +19,31 @@ export class McpAuthService
 
     constructor(private readonly http: HttpService) {}
 
-    getAuthHeader(): string | undefined
-    {
+    getAuthHeader(): string | undefined {
         return this.accessToken ? `Bearer ${this.accessToken}` : undefined;
     }
 
-    async ensureAuth(): Promise<void>
-    {
+    async ensureAuth(): Promise<void> {
         if (this.accessToken) return;
 
         const envUser = process.env.MCP_AUTH_USERNAME;
         const envClientSecret = process.env.MCP_AUTH_CLIENT_SECRET;
 
-        if (envUser && envClientSecret)
-        {
+        if (envUser && envClientSecret) {
             await this.loginWithClientCredentials(envUser, envClientSecret);
             return;
         }
 
         // No env credentials available. The client should call the auth.login tool.
-        throw new Error('Authentication required. Call tool "auth.login" with username and password.');
+        throw new Error(
+            'Authentication required. Call tool "auth.login" with username and password.',
+        );
     }
 
-    async loginWithClientCredentials(username: string, clientSecret: string): Promise<void>
-    {
+    async loginWithClientCredentials(
+        username: string,
+        clientSecret: string,
+    ): Promise<void> {
         const payload = {
             payload: {
                 grantType: 'CLIENT_CREDENTIALS',
@@ -59,8 +59,7 @@ export class McpAuthService
         this.lastPassword = undefined;
     }
 
-    async loginWithPassword(username: string, password: string): Promise<void>
-    {
+    async loginWithPassword(username: string, password: string): Promise<void> {
         const payload = {
             payload: {
                 grantType: 'PASSWORD',
@@ -76,48 +75,60 @@ export class McpAuthService
         this.lastClientSecret = undefined;
     }
 
-    async refreshIfNeeded(): Promise<boolean>
-    {
+    async refreshIfNeeded(): Promise<boolean> {
         if (!this.refreshToken) return false;
-        try
-        {
+        try {
             const payload = {
                 payload: {
-                    grantType   : 'REFRESH_TOKEN',
+                    grantType: 'REFRESH_TOKEN',
                     refreshToken: this.refreshToken,
                 },
             };
             const res = await this.fetchAuthTokens(payload);
             this.setTokens(res.accessToken, res.refreshToken);
             return true;
-        }
-        catch (e)
-        {
-            this.logger.warn(`Refresh token failed: ${e instanceof Error ? e.message : String(e)}`);
+        } catch (e) {
+            this.logger.warn(
+                `Refresh token failed: ${e instanceof Error ? e.message : String(e)}`,
+            );
             // Try to re-login using the last method
-            if (this.lastAuthGrant === 'CLIENT_CREDENTIALS' && this.lastUsername && this.lastClientSecret)
-            {
-                await this.loginWithClientCredentials(this.lastUsername, this.lastClientSecret);
+            if (
+                this.lastAuthGrant === 'CLIENT_CREDENTIALS' &&
+                this.lastUsername &&
+                this.lastClientSecret
+            ) {
+                await this.loginWithClientCredentials(
+                    this.lastUsername,
+                    this.lastClientSecret,
+                );
                 return true;
             }
-            if (this.lastAuthGrant === 'PASSWORD' && this.lastUsername && this.lastPassword)
-            {
-                await this.loginWithPassword(this.lastUsername, this.lastPassword);
+            if (
+                this.lastAuthGrant === 'PASSWORD' &&
+                this.lastUsername &&
+                this.lastPassword
+            ) {
+                await this.loginWithPassword(
+                    this.lastUsername,
+                    this.lastPassword,
+                );
                 return true;
             }
             return false;
         }
     }
 
-    private setTokens(accessToken: string, refreshToken?: string | null): void
-    {
+    private setTokens(accessToken: string, refreshToken?: string | null): void {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken ?? null;
     }
 
-    private async fetchAuthTokens(variables: Record<string, unknown>): Promise<{ accessToken: string; refreshToken?: string | null; }>
-    {
-        const baseURL = process.env.SELF_BASE_URL || `http://localhost:${process.env.APP_PORT || 3000}`;
+    private async fetchAuthTokens(
+        variables: Record<string, unknown>,
+    ): Promise<{ accessToken: string; refreshToken?: string | null }> {
+        const baseURL =
+            process.env.SELF_BASE_URL ||
+            `http://localhost:${process.env.APP_PORT || 3000}`;
         const AUTH_MUTATION = `
             mutation ($payload: OAuthCreateCredentialsInput!) {
                 oAuthCreateCredentials (payload:$payload) {
@@ -126,24 +137,26 @@ export class McpAuthService
                 }
             }`;
 
-        const { status, data } = await firstValueFrom(this.http.post<any>(
-            `${baseURL}/graphql`,
-            { query: AUTH_MUTATION, variables },
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization : `Basic ${process.env.MCP_AUTH_BASIC_AUTHORIZATION}`,
+        const { status, data } = await firstValueFrom(
+            this.http.post<any>(
+                `${baseURL}/graphql`,
+                { query: AUTH_MUTATION, variables },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Basic ${process.env.MCP_AUTH_BASIC_AUTHORIZATION}`,
+                    },
+                    validateStatus: () => true,
+                    timeout: 30000,
                 },
-                validateStatus: () => true,
-                timeout       : 30000,
-            },
-        ));
+            ),
+        );
 
-        if (status === 200 && data?.data?.oAuthCreateCredentials?.accessToken)
-        {
+        if (status === 200 && data?.data?.oAuthCreateCredentials?.accessToken) {
             return {
-                accessToken : data.data.oAuthCreateCredentials.accessToken,
-                refreshToken: data.data.oAuthCreateCredentials.refreshToken ?? null,
+                accessToken: data.data.oAuthCreateCredentials.accessToken,
+                refreshToken:
+                    data.data.oAuthCreateCredentials.refreshToken ?? null,
             };
         }
 
@@ -151,4 +164,3 @@ export class McpAuthService
         throw new Error(`Auth failed (status ${status}): ${errMsg}`);
     }
 }
-

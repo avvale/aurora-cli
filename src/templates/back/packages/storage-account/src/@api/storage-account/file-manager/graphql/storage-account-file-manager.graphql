@@ -1,10 +1,8 @@
-type StorageAccountFileManagerBase64
-{
+type StorageAccountFileManagerBase64 {
     base64: GraphQLString!
 }
 
-type StorageAccountFileManagerFile
-{
+type StorageAccountFileManagerFile {
     id: ID!
     originFilename: GraphQLString!
     filename: GraphQLString!
@@ -13,8 +11,8 @@ type StorageAccountFileManagerFile
     relativePathSegments: [GraphQLString!]!
     width: GraphQLInt
     height: GraphQLInt
-    size: GraphQLInt!
-    url: GraphQLString!
+    size: GraphQLInt
+    url: GraphQLString
     isCropable: GraphQLBoolean!
     isUploaded: GraphQLBoolean!
     libraryId: ID
@@ -23,8 +21,7 @@ type StorageAccountFileManagerFile
     meta: JSON
 }
 
-type StorageAccountFileManagerLibraryFile
-{
+type StorageAccountFileManagerLibraryFile {
     id: ID!
     originFilename: GraphQLString!
     filename: GraphQLString!
@@ -38,15 +35,13 @@ type StorageAccountFileManagerLibraryFile
     meta: JSON
 }
 
-input StorageAccountFileManagerFileInput
-{
+input StorageAccountFileManagerFileInput {
     filename: GraphQLString!
     relativePathSegments: [GraphQLString]!
-    containerName: GraphQLString,
+    containerName: GraphQLString
 }
 
-input StorageAccountFileManagerFileUploadedInput
-{
+input StorageAccountFileManagerFileUploadedInput {
     id: ID!
     file: Upload!
     relativePathSegments: [GraphQLString]!
@@ -55,8 +50,7 @@ input StorageAccountFileManagerFileUploadedInput
     meta: JSON
 }
 
-type Query
-{
+type Query {
     storageAccountGetBase64FileFileManager(
         file: StorageAccountFileManagerFileInput!
     ): StorageAccountFileManagerBase64
@@ -66,8 +60,7 @@ type Query
     ): [StorageAccountFileManagerBase64]
 }
 
-type Mutation
-{
+type Mutation {
     storageAccountCopyFileManager(
         src: StorageAccountFileManagerFileInput!
         dest: StorageAccountFileManagerFileInput!

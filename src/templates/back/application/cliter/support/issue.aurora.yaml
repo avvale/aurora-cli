@@ -63,7 +63,7 @@ aggregateProperties:
   - name: attachments
     type: jsonb
     nullable: true
-  - name: video
+  - name: screenRecording
     type: jsonb
     nullable: true
   - name: meta

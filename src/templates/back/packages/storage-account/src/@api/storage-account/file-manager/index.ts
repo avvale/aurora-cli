@@ -58,5 +58,4 @@ export const StorageAccountFileManagerApiHandlers = [
     StorageAccountUploadFilesFileManagerHandler,
 ];
 
-export const StorageAccountFileManagerApiServices = [
-];
+export const StorageAccountFileManagerApiServices = [];

@@ -5,8 +5,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('storageAccount.fileManager.copy')
-export class StorageAccountCopyFileManagerResolver
-{
+export class StorageAccountCopyFileManagerResolver {
     constructor(
         private readonly handler: StorageAccountCopyFileManagerHandler,
     ) {}
@@ -15,12 +14,7 @@ export class StorageAccountCopyFileManagerResolver
     async main(
         @Args('src') src: StorageAccountFileManagerFileInput,
         @Args('dest') dest: StorageAccountFileManagerFileInput,
-    ): Promise<void>
-    {
-        return await this.handler.main(
-            src,
-            dest,
-        );
+    ): Promise<void> {
+        return await this.handler.main(src, dest);
     }
 }
-

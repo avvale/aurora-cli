@@ -3,24 +3,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 // modules
+import { SupportModule } from '@api/support/support.module';
 import { CoreModule } from '@aurora/core.module';
 import { RootModule, ServerStaticModule } from '@aurora/modules';
-import { GraphQLAIModule } from '@api/graphql-ai/graphql-ai.module';
-import { SupportModule } from '@api/support/support.module';
 
 @Module({
     imports: [
         RootModule,
         CoreModule,
         ServerStaticModule,
-        GraphQLAIModule,
-        SupportModule
+        // McpModule,
+        // GraphQLAIModule,
+        SupportModule,
     ],
-    controllers: [
-        AppController,
-    ],
-    providers: [
-        AppService,
-    ],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}

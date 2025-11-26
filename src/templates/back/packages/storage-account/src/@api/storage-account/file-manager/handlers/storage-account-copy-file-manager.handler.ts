@@ -5,20 +5,19 @@ import { StorageAccountFileManagerService } from '@api/storage-account/file-mana
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class StorageAccountCopyFileManagerHandler
-{
+export class StorageAccountCopyFileManagerHandler {
     constructor(
         private readonly storageAccountFileManagerService: StorageAccountFileManagerService,
     ) {}
 
     main(
-        src: StorageAccountFileManagerFileInput | StorageAccountFileManagerFileDto,
-        dest: StorageAccountFileManagerFileInput | StorageAccountFileManagerFileDto,
-    )
-    {
-        return this.storageAccountFileManagerService.copy(
-            src,
-            dest,
-        );
+        src:
+            | StorageAccountFileManagerFileInput
+            | StorageAccountFileManagerFileDto,
+        dest:
+            | StorageAccountFileManagerFileInput
+            | StorageAccountFileManagerFileDto,
+    ) {
+        return this.storageAccountFileManagerService.copy(src, dest);
     }
 }
