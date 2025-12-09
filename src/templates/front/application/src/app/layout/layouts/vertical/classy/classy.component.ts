@@ -17,7 +17,12 @@ import { UserComponent } from 'app/layout/common/user/user.component';
 import { Subject, takeUntil } from 'rxjs';
 
 // ---- customizations ----
-import { Account, EnvironmentsInformationComponent, IamService, ImpersonalizeWarningComponent } from '@aurora';
+import {
+    Account,
+    EnvironmentsInformationComponent,
+    IamService,
+    ImpersonalizeWarningComponent,
+} from '@aurora';
 import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
@@ -37,7 +42,7 @@ import { TranslocoModule } from '@jsverse/transloco';
         // ---- customizations ----
         EnvironmentsInformationComponent,
         ImpersonalizeWarningComponent,
-        TranslocoModule,
+        TranslocoModule
     ],
 })
 export class ClassyLayoutComponent implements OnInit, OnDestroy {
@@ -58,7 +63,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
         private _userService: UserService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
         private _fuseNavigationService: FuseNavigationService,
-        private iamService: IamService
+        private iamService: IamService,
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -126,7 +131,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
         // Get the navigation
         const navigation =
             this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(
-                name
+                name,
             );
 
         if (navigation) {

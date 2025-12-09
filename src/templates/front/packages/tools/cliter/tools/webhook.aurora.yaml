@@ -1,0 +1,75 @@
+version: 0.0.1
+boundedContextName: tools
+moduleName: webhook
+moduleNames: webhooks
+aggregateName: ToolsWebhook
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: phishing
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: phishing
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+  - name: name
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: service
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: endpoint
+    type: varchar
+    maxLength: 255
+    nullable: false
+  - name: externalId
+    type: varchar
+    maxLength: 64
+    nullable: true
+    index: index
+  - name: events
+    type: array
+    arrayOptions:
+      type: varchar
+    nullable: true
+  - name: secret
+    type: varchar
+    maxLength: 128
+    nullable: true
+  - name: meta
+    type: jsonb
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis:
+  - path: tools/webhook/digest
+    resolverType: mutation
+    httpMethod: post
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

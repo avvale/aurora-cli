@@ -1,26 +1,27 @@
-<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden" *transloco="let t">
-
+<div
+    *transloco="let t"
+    class="absolute inset-0 flex min-w-0 flex-col overflow-hidden"
+>
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
-
-        <div class="flex-1 min-w-0">
+    <div
+        class="bg-card flex flex-0 flex-col border-b p-6 sm:flex-row sm:items-center sm:justify-between sm:px-10 sm:py-4 dark:bg-transparent"
+    >
+        <div class="min-w-0 flex-1">
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
+                    class="mr-2 icon-size-8"
                     svgIcon="mat_solid:move_to_inbox"
-                    class="icon-size-8 mr-2"
-                >
-                </mat-icon>
+                ></mat-icon>
                 {{ t('message.Inbox') }}
             </au-title>
         </div>
-
     </div>
     <!-- / Header -->
 
     <!-- Main -->
     <div
-        class="flex flex-auto pt-6 px-6 sm:pt-10 sm:px-10 overflow-y-auto"
+        class="flex flex-auto overflow-y-auto px-6 pt-6 sm:px-10 sm:pt-10"
         cdkScrollable
     >
         <!-- Grid -->
@@ -31,20 +32,24 @@
             [id]="gridId"
             [originColumnsConfig]="originColumnsConfig"
         >
-            <au-grid-translations
-                [for]="gridId"
-            >
-                @for (columnConfig of originColumnsConfig; track columnConfig.field)
-                {
+            <au-grid-translations [for]="gridId">
+                @for (
+                    columnConfig of originColumnsConfig;
+                    track columnConfig.field
+                ) {
                     <au-grid-column-translation [field]="columnConfig.field">
-                        {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                        {{
+                            t(
+                                columnConfig.translation
+                                    ? columnConfig.translation
+                                    : columnConfig.field.toPascalCase()
+                            )
+                        }}
                     </au-grid-column-translation>
                 }
             </au-grid-translations>
         </au-grid>
         <!-- / Grid -->
-
     </div>
     <!-- / Main -->
-
 </div>

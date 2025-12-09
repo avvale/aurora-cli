@@ -52,4 +52,5 @@ publish-all:
 		gulp publishQueueManager && \
 		gulp publishSearchEngine && \
 		gulp publishSettings && \
+		gulp publishSupport && \
 		gulp publishTools

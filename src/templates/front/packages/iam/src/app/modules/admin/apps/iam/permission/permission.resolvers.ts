@@ -38,7 +38,9 @@ export const permissionPaginationResolver: ResolveFn<
     gridStateService.setExportActionId(gridId, 'iam::permission.list.export');
 
     return permissionService.pagination({
-        query: queryStatementHandler({ columnsConfig: permissionColumnsConfig })
+        query: queryStatementHandler({
+            columnsConfig: permissionColumnsConfig(),
+        })
             .setColumFilters(
                 gridFiltersStorageService.getColumnFilterState(gridId),
             )

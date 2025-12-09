@@ -74,7 +74,7 @@ export class PermissionListComponent extends ViewBaseComponent {
             translation: 'Selects',
             sticky: true,
         },
-        ...permissionColumnsConfig,
+        ...permissionColumnsConfig({ translator: this.translocoService }),
     ];
 
     constructor(
@@ -120,7 +120,7 @@ export class PermissionListComponent extends ViewBaseComponent {
                         query: action.meta.query
                             ? action.meta.query
                             : queryStatementHandler({
-                                  columnsConfig: permissionColumnsConfig,
+                                  columnsConfig: permissionColumnsConfig(),
                               })
                                   .setColumFilters(
                                       this.gridFiltersStorageService.getColumnFilterState(
@@ -215,14 +215,17 @@ export class PermissionListComponent extends ViewBaseComponent {
                     }),
                 );
 
-                const columns: string[] = permissionColumnsConfig.map(
+                const columns: string[] = permissionColumnsConfig({
+                    translator: this.translocoService,
+                }).map(
                     (permissionColumnConfig) => permissionColumnConfig.field,
                 );
-                const headers: string[] = permissionColumnsConfig.map(
-                    (permissionColumnConfig) =>
-                        this.translocoService.translate(
-                            permissionColumnConfig.translation,
-                        ),
+                const headers: string[] = permissionColumnsConfig({
+                    translator: this.translocoService,
+                }).map((permissionColumnConfig) =>
+                    this.translocoService.translate(
+                        permissionColumnConfig.translation,
+                    ),
                 );
 
                 exportRows(

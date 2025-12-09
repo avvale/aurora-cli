@@ -112,7 +112,9 @@ export class RoleDetailComponent extends ViewDetailComponent {
             translation: 'Selects',
             sticky: true,
         },
-        ...permissionRoleColumnsConfig,
+        ...permissionRoleColumnsConfig({
+            translator: this.translocoService,
+        }),
     ];
 
     // permissions dialog
@@ -153,7 +155,7 @@ export class RoleDetailComponent extends ViewDetailComponent {
             translation: 'Selects',
             sticky: true,
         },
-        ...permissionColumnsConfig,
+        ...permissionColumnsConfig({ translator: this.translocoService }),
     ];
     /* #endregion variables to manage grid-select-multiple-elements permissions }} */
 
@@ -264,7 +266,7 @@ export class RoleDetailComponent extends ViewDetailComponent {
             isViewAction: false,
             meta: {
                 query: queryStatementHandler({
-                    columnsConfig: permissionColumnsConfig,
+                    columnsConfig: permissionColumnsConfig(),
                 })
                     .setColumFilters(
                         this.gridFiltersStorageService.getColumnFilterState(
@@ -567,7 +569,7 @@ export class RoleDetailComponent extends ViewDetailComponent {
                         query: action.meta.query
                             ? action.meta.query
                             : queryStatementHandler({
-                                  columnsConfig: permissionRoleColumnsConfig,
+                                  columnsConfig: permissionRoleColumnsConfig(),
                               })
                                   .setColumFilters(
                                       this.gridFiltersStorageService.getColumnFilterState(
@@ -658,7 +660,7 @@ export class RoleDetailComponent extends ViewDetailComponent {
                         query: action.meta.query
                             ? action.meta.query
                             : queryStatementHandler({
-                                  columnsConfig: permissionColumnsConfig,
+                                  columnsConfig: permissionColumnsConfig(),
                               })
                                   .setColumFilters(
                                       this.gridFiltersStorageService.getColumnFilterState(
@@ -735,9 +737,11 @@ export class RoleDetailComponent extends ViewDetailComponent {
                     }),
                 );
 
-                const permissionColumns: string[] = permissionColumnsConfig.map(
-                    (permissionColumnConfig) => permissionColumnConfig.field,
-                );
+                const permissionColumns: string[] =
+                    permissionColumnsConfig().map(
+                        (permissionColumnConfig) =>
+                            permissionColumnConfig.field,
+                    );
                 const permissionHeaders = permissionColumns.map((column) =>
                     this.translocoService.translate(
                         'iam.' + column.toPascalCase(),

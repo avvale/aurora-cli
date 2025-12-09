@@ -8,5 +8,4 @@ import { RouterOutlet } from '@angular/router';
     encapsulation: ViewEncapsulation.None,
     imports: [MatSidenavModule, RouterOutlet],
 })
-export class MessageCenterComponent
-{ }
+export class MessageCenterComponent {}

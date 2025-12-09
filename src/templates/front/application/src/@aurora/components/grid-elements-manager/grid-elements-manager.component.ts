@@ -1,8 +1,24 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    ContentChildren,
+    EventEmitter,
+    input,
+    Input,
+    output,
+    Output,
+    QueryList,
+} from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Action } from '@aurora/aurora.types';
-import { GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective } from '@aurora/components/grid';
+import {
+    GridCellValueTemplateDirective,
+    GridComponent,
+    GridCustomHeaderTemplateDirective,
+} from '@aurora/components/grid';
 import { ColumnConfig, GridData, GridState } from '../grid/grid.types';
 import { GridCustomButtonsHeaderDialogTemplateDirective } from './directives/grid-custom-buttons-header-dialog-template.directive';
 import { GridElementsManagerCellValueTemplateDirective } from './directives/grid-elements-manager-cell-value-template.directive';
@@ -14,11 +30,15 @@ import { GridElementDetailDialogComponent } from './grid-element-detail-dialog.c
     templateUrl: './grid-elements-manager.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-        GridCellValueTemplateDirective, GridComponent, GridCustomHeaderTemplateDirective, NgForOf, NgIf, NgTemplateOutlet,
+        GridCellValueTemplateDirective,
+        GridComponent,
+        GridCustomHeaderTemplateDirective,
+        NgForOf,
+        NgIf,
+        NgTemplateOutlet,
     ],
 })
-export class GridElementsManagerComponent
-{
+export class GridElementsManagerComponent {
     @Input() id: string = 'grid';
     // component label
     @Input() label: string;
@@ -40,46 +60,59 @@ export class GridElementsManagerComponent
     @Input() hasSearch: boolean = true;
     @Input() hasFilterButton: boolean = true;
 
+    hasPagination = input<boolean>(true);
+    pageSizeOptions = input<number[]>([10, 25, 50, 100]);
+    hasDragAndDrop = input<boolean>(true);
+
     // outputs
     @Output() action = new EventEmitter<Action>();
     @Output() columnFiltersChange = new EventEmitter<GridState>();
     @Output() columnsConfigChange = new EventEmitter<ColumnConfig[]>();
-    @Output() dialogClose = new EventEmitter<MatDialogRef<GridElementDetailDialogComponent>>();
-    @Output() dialogOpen = new EventEmitter<MatDialogRef<GridElementDetailDialogComponent>>();
+    @Output() dialogClose = new EventEmitter<
+        MatDialogRef<GridElementDetailDialogComponent>
+    >();
+    @Output() dialogOpen = new EventEmitter<
+        MatDialogRef<GridElementDetailDialogComponent>
+    >();
     @Output() dialogAfterViewInit = new EventEmitter<void>();
     @Output() stateChange = new EventEmitter<GridState>();
     @Output() search = new EventEmitter<GridState>();
 
+    rowDrop = output<CdkDragDrop<any>>();
+
     // add custom buttons header
-    @ContentChild(GridCustomButtonsHeaderDialogTemplateDirective) gridCustomButtonsHeaderDialogTemplate?: GridCustomButtonsHeaderDialogTemplateDirective;
+    @ContentChild(GridCustomButtonsHeaderDialogTemplateDirective)
+    gridCustomButtonsHeaderDialogTemplate?: GridCustomButtonsHeaderDialogTemplateDirective;
     // directive to set form item detail
-    @ContentChild(GridFormElementDetailDialogTemplateDirective) gridFormElementDetailDialogTemplate?: GridFormElementDetailDialogTemplateDirective;
+    @ContentChild(GridFormElementDetailDialogTemplateDirective)
+    gridFormElementDetailDialogTemplate?: GridFormElementDetailDialogTemplateDirective;
     // directive to set custom values in cells
-    @ContentChildren(GridElementsManagerCellValueTemplateDirective) gridElementsManagerCellValueTemplate?: QueryList<GridElementsManagerCellValueTemplateDirective>;
+    @ContentChildren(GridElementsManagerCellValueTemplateDirective)
+    gridElementsManagerCellValueTemplate?: QueryList<GridElementsManagerCellValueTemplateDirective>;
 
-    constructor(
-        private readonly dialog: MatDialog,
-    ) {}
+    constructor(private readonly dialog: MatDialog) {}
 
-    handleElementDetailDialog(actionId: string): void
-    {
-        const elementDetailDialogRef = this.dialog.open(GridElementDetailDialogComponent,
+    handleElementDetailDialog(actionId: string): void {
+        const elementDetailDialogRef = this.dialog.open(
+            GridElementDetailDialogComponent,
             {
                 panelClass: 'au-dialog',
-                width     : this.dialogWidth,
-                maxWidth  : this.dialogMaxWidth,
-                minWidth  : this.dialogMinWidth,
-                height    : this.dialogHeight,
-                autoFocus : false,
-                data      : {
-                    title                              : this.dialogTitle,
-                    icon                               : this.dialogIcon,
-                    svgIcon                            : this.dialogSvgIcon,
-                    fontSet                            : this.dialogFontSet,
-                    currentActionId                    : actionId,
-                    gridFormElementDetailDialogTemplate: this.gridFormElementDetailDialogTemplate,
+                width: this.dialogWidth,
+                maxWidth: this.dialogMaxWidth,
+                minWidth: this.dialogMinWidth,
+                height: this.dialogHeight,
+                autoFocus: false,
+                data: {
+                    title: this.dialogTitle,
+                    icon: this.dialogIcon,
+                    svgIcon: this.dialogSvgIcon,
+                    fontSet: this.dialogFontSet,
+                    currentActionId: actionId,
+                    gridFormElementDetailDialogTemplate:
+                        this.gridFormElementDetailDialogTemplate,
                 },
-            });
+            },
+        );
 
         elementDetailDialogRef
             .afterOpened()
@@ -90,9 +123,8 @@ export class GridElementsManagerComponent
             .subscribe(() => this.dialogClose.next(elementDetailDialogRef));
 
         // subscription to know when components loaded in dialog are ready
-        elementDetailDialogRef
-            .componentInstance
-            .afterViewInit
-            .subscribe(() => this.dialogAfterViewInit.next());
+        elementDetailDialogRef.componentInstance.afterViewInit.subscribe(() =>
+            this.dialogAfterViewInit.next(),
+        );
     }
 }

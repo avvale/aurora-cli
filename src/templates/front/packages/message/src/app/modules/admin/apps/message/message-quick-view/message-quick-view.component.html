@@ -1,13 +1,16 @@
 <!-- Messages toggle -->
 <button
+    #messagesOrigin
     mat-icon-button
     (click)="openPanel()"
-    #messagesOrigin
 >
-    @if (unreadMessagesNumber() > 0)
-    {
-        <span class="absolute top-0 right-0 left-0 flex items-center justify-center h-3 z-10">
-            <span class="flex items-center justify-center shrink-0 min-w-4 h-4 px-1 ml-4 mt-2.5 rounded-full bg-indigo-600 text-indigo-50 text-xs font-medium">
+    @if (unreadMessagesNumber() > 0) {
+        <span
+            class="absolute left-0 right-0 top-0 z-10 flex h-3 items-center justify-center"
+        >
+            <span
+                class="ml-4 mt-2.5 flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full bg-indigo-600 px-1 text-xs font-medium text-indigo-50"
+            >
                 {{ unreadMessagesNumber() }}
             </span>
         </span>
@@ -16,112 +19,129 @@
 </button>
 
 <!-- Messages panel -->
-<ng-template #messagesPanel *transloco="let t">
-
-    <div class="fixed inset-0 sm:static sm:inset-auto flex flex-col sm:min-w-90 sm:w-90 sm:rounded-2xl overflow-hidden shadow-lg">
-
+<ng-template
+    *transloco="let t"
+    #messagesPanel
+>
+    <div
+        class="fixed inset-0 flex flex-col overflow-hidden shadow-lg sm:static sm:inset-auto sm:w-90 sm:min-w-90 sm:rounded-2xl"
+    >
         <!-- Header -->
-        <div class="flex shrink-0 items-center py-4 pr-4 pl-6 bg-primary text-on-primary">
-            <div class="sm:hidden -ml-1 mr-3">
+        <div
+            class="flex shrink-0 items-center bg-primary py-4 pl-6 pr-4 text-on-primary"
+        >
+            <div class="-ml-1 mr-3 sm:hidden">
                 <button
                     mat-icon-button
-                    (click)="closePanel()">
+                    (click)="closePanel()"
+                >
                     <mat-icon
-                        class="icon-size-5 text-current"
+                        class="text-current icon-size-5"
                         [svgIcon]="'heroicons_solid:x-mark'"
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                 </button>
             </div>
-            <div class="text-lg font-medium leading-10">{{ t('message.Messages') }}</div>
+            <div class="text-lg font-medium leading-10">
+                {{ t('message.Messages') }}
+            </div>
             <div class="ml-auto">
                 <button
-                    mat-icon-button
                     [disabled]="unreadMessagesNumber() === 0"
                     [matTooltip]="t('message.GoToMessageCenter')"
-                    (click)="goToMessageCenter()">
+                    mat-icon-button
+                    (click)="goToMessageCenter()"
+                >
                     <mat-icon
-                        class="icon-size-5 text-current"
+                        class="text-current icon-size-5"
                         [svgIcon]="'heroicons_solid:envelope-open'"
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                 </button>
             </div>
         </div>
 
         <!-- Content -->
-        <div class="relative flex flex-col flex-auto sm:max-h-120 divide-y overflow-y-auto bg-card">
+        <div
+            class="bg-card relative flex flex-auto flex-col divide-y overflow-y-auto sm:max-h-120"
+        >
             <!-- Messages -->
 
-            @for (message of messages(); track message.id)
-            {
+            @for (message of messages(); track message.id) {
                 <div
-                    class="flex group hover:bg-gray-50 dark:hover:bg-black dark:hover:bg-opacity-5"
-                    [ngClass]="{'unread': !message.isRead}"
+                    class="group flex hover:bg-gray-50 dark:hover:bg-black dark:hover:bg-opacity-5"
+                    [ngClass]="{ unread: !message.isRead }"
                 >
                     <!-- Message with a link -->
-                    @if (message.link)
-                    {
-                        @if (message.isInternalLink)
-                        {
+                    @if (message.link) {
+                        @if (message.isInternalLink) {
                             <!-- Router links -->
-                            <a class="flex flex-auto py-5 pl-6 cursor-pointer"
-                               [routerLink]="message.link"
+                            <a
+                                class="flex flex-auto cursor-pointer py-5 pl-6"
+                                [routerLink]="message.link"
                             >
-                                <ng-container *ngTemplateOutlet="messageContent"></ng-container>
+                                <ng-container
+                                    *ngTemplateOutlet="messageContent"
+                                ></ng-container>
                             </a>
-                        }
-                        @else
-                        {
+                        } @else {
                             <!-- Normal links -->
-                            <a class="flex flex-auto py-5 pl-6 cursor-pointer"
-                               [href]="message.link"
+                            <a
+                                class="flex flex-auto cursor-pointer py-5 pl-6"
+                                [href]="message.link"
                             >
-                                <ng-container *ngTemplateOutlet="messageContent"></ng-container>
+                                <ng-container
+                                    *ngTemplateOutlet="messageContent"
+                                ></ng-container>
                             </a>
                         }
                     }
 
                     <!-- Message without a link -->
-                    @if (!message.link)
-                    {
+                    @if (!message.link) {
                         <div class="flex flex-auto py-5 pl-6">
-                            <ng-container *ngTemplateOutlet="messageContent"></ng-container>
+                            <ng-container
+                                *ngTemplateOutlet="messageContent"
+                            ></ng-container>
                         </div>
                     }
 
                     <!-- Actions -->
-                    <div class="relative flex flex-col my-5 mr-6 ml-2">
+                    <div class="relative my-5 ml-2 mr-6 flex flex-col">
                         <!-- Indicator -->
                         <button
-                            class="w-6 h-6 min-h-6"
+                            class="h-6 min-h-6 w-6"
+                            [routerLink]="[
+                                'message',
+                                'message-center',
+                                message.id,
+                            ]"
+                            [matTooltip]="
+                                message.isRead
+                                    ? t('message.Read')
+                                    : t('message.UnRead')
+                            "
                             mat-icon-button
-                            [routerLink]="['message', 'message-center', message.id]"
-                            [matTooltip]="message.isRead ? t('message.Read') : t('message.UnRead')"
                         >
                             <span
-                                class="w-2 h-2 rounded-full"
+                                class="h-2 w-2 rounded-full"
                                 [ngClass]="{
-                                    'bg-gray-400 dark:bg-gray-500 sm:opacity-0 sm:group-hover:opacity-100': message.isRead,
-                                    'bg-primary': !message.isRead
+                                    'bg-gray-400 sm:opacity-0 sm:group-hover:opacity-100 dark:bg-gray-500':
+                                        message.isRead,
+                                    'bg-primary': !message.isRead,
                                 }"
-                            >
-                            </span>
+                            ></span>
                         </button>
                         <!-- Remove -->
-                        @if (message.isRead)
-                        {
+                        @if (message.isRead) {
                             <button
-                                class="w-6 h-6 min-h-6 sm:opacity-0 sm:group-hover:opacity-100"
+                                class="h-6 min-h-6 w-6 sm:opacity-0 sm:group-hover:opacity-100"
+                                [matTooltip]="t('Remove')"
                                 mat-icon-button
                                 (click)="deleteMessage(message)"
-                                [matTooltip]="t('Remove')"
                             >
                                 <mat-icon
                                     class="icon-size-4"
                                     [svgIcon]="'heroicons_solid:x-mark'"
-                                >
-                                </mat-icon>
+                                ></mat-icon>
                             </button>
                         }
                     </div>
@@ -130,70 +150,78 @@
                 <!-- Message content template -->
                 <ng-template #messageContent>
                     <!-- Icon -->
-                    @if(message.icon && !message.image)
-                    {
-                        <div class="flex shrink-0 items-center justify-center w-8 h-8 mr-4 rounded-full bg-gray-100 dark:bg-gray-700">
+                    @if (message.icon && !message.image) {
+                        <div
+                            class="mr-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-700"
+                        >
                             <mat-icon
                                 class="icon-size-5"
                                 [svgIcon]="message.icon"
-                            >
-                            </mat-icon>
+                            ></mat-icon>
                         </div>
                     }
                     <!-- Image -->
-                    @if(message.image)
-                    {
+                    @if (message.image) {
                         <img
-                            class="shrink-0 w-8 h-8 mr-4 rounded-full overflow-hidden object-cover object-center"
+                            class="mr-4 h-8 w-8 shrink-0 overflow-hidden rounded-full object-cover object-center"
                             [src]="message.image"
                             [alt]="'Message image'"
-                        >
+                        />
                     }
                     <!-- subject, body & time -->
-                    <div class="flex flex-col flex-auto">
-                        @if (message.subject)
-                        {
+                    <div class="flex flex-auto flex-col">
+                        @if (message.subject) {
                             <a
-                                class="font-semibold line-clamp-1"
-                                [routerLink]="['message', 'message-center', message.id]"
+                                class="line-clamp-1 font-semibold"
+                                [routerLink]="[
+                                    'message',
+                                    'message-center',
+                                    message.id,
+                                ]"
                             >
-                                @if (message.attachments?.length > 0)
-                                {
+                                @if (message.attachments?.length > 0) {
                                     <mat-icon
                                         class="icon-size-4"
                                         [svgIcon]="'heroicons_solid:paper-clip'"
-                                    >
-                                    </mat-icon>
+                                    ></mat-icon>
                                 }
                                 {{ message.subject }}
                             </a>
                         }
-                        @if (message.body)
-                        {
+                        @if (message.body) {
                             <div
                                 class="line-clamp-2"
                                 [innerHTML]="message.body"
-                            >
-                            </div>
+                            ></div>
                         }
-                        <div class="mt-2 text-sm leading-none text-secondary">
-                            {{ message.sentAt | date:'MMM dd, h:mm a' }}
+                        <div class="text-secondary mt-2 text-sm leading-none">
+                            {{ message.sentAt | date: 'MMM dd, h:mm a' }}
                         </div>
                     </div>
                 </ng-template>
             }
 
             <!-- No messages -->
-            @if (messages().length === 0)
-            {
-                <div class="flex flex-col flex-auto items-center justify-center sm:justify-start py-12 px-8">
-                    <div class="flex flex-0 items-center justify-center w-14 h-14 rounded-full bg-primary-100 dark:bg-primary-600">
+            @if (messages().length === 0) {
+                <div
+                    class="flex flex-auto flex-col items-center justify-center px-8 py-12 sm:justify-start"
+                >
+                    <div
+                        class="flex h-14 w-14 flex-0 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-600"
+                    >
                         <mat-icon
                             class="text-primary-700 dark:text-primary-50"
-                            [svgIcon]="'heroicons_outline:inbox'"></mat-icon>
+                            [svgIcon]="'heroicons_outline:inbox'"
+                        ></mat-icon>
                     </div>
-                    <div class="mt-5 text-2xl font-semibold tracking-tight">{{ t('message.NoMessages') }}</div>
-                    <div class="w-full max-w-60 mt-1 text-md text-center text-secondary">{{ t('message.NoMessagesDescription') }}</div>
+                    <div class="mt-5 text-2xl font-semibold tracking-tight">
+                        {{ t('message.NoMessages') }}
+                    </div>
+                    <div
+                        class="text-secondary mt-1 w-full max-w-60 text-center text-md"
+                    >
+                        {{ t('message.NoMessagesDescription') }}
+                    </div>
                 </div>
             }
         </div>

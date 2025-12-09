@@ -1,11 +1,11 @@
 import { FuseNavigationItem } from '@fuse/components/navigation';
 
 export const toolsNavigation: FuseNavigationItem = {
-    id      : 'tools',
-    title   : 'Tools',
-    type    : 'collapsable',
-    icon    : 'mat_outline:construction',
-    meta : {
+    id: 'tools',
+    title: 'Tools',
+    type: 'collapsable',
+    icon: 'mat_outline:construction',
+    meta: {
         permission: 'tools.access',
     },
     children: [
@@ -38,8 +38,19 @@ export const toolsNavigation: FuseNavigationItem = {
             iconFontSet: 'material-symbols-outlined',
             icon: 'repartition',
             link: '/tools/migration',
-            meta : {
+            meta: {
                 permission: 'tools.migration.access',
+            },
+        },
+        {
+            id: 'webhooks',
+            title: 'Webhook',
+            type: 'basic',
+            iconFontSet: 'material-symbols-outlined',
+            icon: 'phishing',
+            link: '/tools/webhook',
+            meta: {
+                permission: 'tools.webhook.access',
             },
         },
     ],

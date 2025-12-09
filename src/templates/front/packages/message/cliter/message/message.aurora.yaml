@@ -16,6 +16,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: tenantIds
     type: array
     arrayOptions:
@@ -125,3 +130,11 @@ additionalApis:
   - path: message/message/draft-message
     resolverType: mutation
     httpMethod: post
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - upsert

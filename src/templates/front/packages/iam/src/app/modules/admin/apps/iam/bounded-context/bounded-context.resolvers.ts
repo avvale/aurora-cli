@@ -96,7 +96,7 @@ export const boundedContextEditResolver: ResolveFn<{
     return boundedContextService.findByIdWithRelations({
         id: route.paramMap.get('id'),
         queryPaginatePermissions: queryStatementHandler({
-            columnsConfig: permissionColumnsConfig,
+            columnsConfig: permissionColumnsConfig(),
         })
             .setColumFilters(
                 gridFiltersStorageService.getColumnFilterState(

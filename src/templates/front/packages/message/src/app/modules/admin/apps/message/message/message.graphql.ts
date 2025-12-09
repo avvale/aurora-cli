@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     tenantIds
     status
     accountRecipientIds
@@ -78,11 +79,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query MessagePaginateMessages (
+    query MessagePaginateMessages(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: messagePaginateMessages (
+        pagination: messagePaginateMessages(
             query: $query
             constraint: $constraint
         ) {
@@ -94,14 +95,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query MessageGetMessages (
+    query MessageGetMessages(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: messageGetMessages (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: messageGetMessages(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -128,14 +126,8 @@ export const getRelations = gql`
 `;
 
 export const findByIdQuery = gql`
-    query MessageFindMessageById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: messageFindMessageById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query MessageFindMessageById($id: ID, $constraint: QueryStatement) {
+        object: messageFindMessageById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -171,14 +163,11 @@ export const findByIdWithRelationsQuery = gql`
 `;
 
 export const findQuery = gql`
-    query MessageFindMessage (
+    query MessageFindMessage(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: messageFindMessage (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: messageFindMessage(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -257,14 +246,14 @@ export const deleteMutation = gql`
 
 // Queries additionalApis
 export const countTotalRecipientsMessageQuery = gql`
-    query MessageCountTotalRecipientsMessage (
+    query MessageCountTotalRecipientsMessage(
         $tenantRecipientIds: [ID]
         $scopeRecipients: [GraphQLString]
         $tagRecipients: [GraphQLString]
         $accountRecipientIds: [ID]
         $constraint: QueryStatement
     ) {
-        messageCountTotalRecipientsMessage (
+        messageCountTotalRecipientsMessage(
             tenantRecipientIds: $tenantRecipientIds
             scopeRecipients: $scopeRecipients
             tagRecipients: $tagRecipients
@@ -276,12 +265,12 @@ export const countTotalRecipientsMessageQuery = gql`
 
 // Mutation additionalApis
 export const removeAttachmentMessageMutation = gql`
-    mutation MessageRemoveAttachmentMessage (
+    mutation MessageRemoveAttachmentMessage(
         $message: MessageUpdateMessageByIdInput!
         $attachmentId: ID!
         $constraint: QueryStatement
     ) {
-        messageRemoveAttachmentMessage (
+        messageRemoveAttachmentMessage(
             message: $message
             attachmentId: $attachmentId
             constraint: $constraint
@@ -290,25 +279,19 @@ export const removeAttachmentMessageMutation = gql`
 `;
 
 export const sendMessageMessageMutation = gql`
-    mutation MessageSendMessageMessage (
+    mutation MessageSendMessageMessage(
         $message: MessageUpdateMessageByIdInput!
         $constraint: QueryStatement
     ) {
-        messageSendMessageMessage (
-            message: $message
-            constraint: $constraint
-        )
+        messageSendMessageMessage(message: $message, constraint: $constraint)
     }
 `;
 
 export const draftMessageMessageMutation = gql`
-    mutation MessageDraftMessageMessage (
+    mutation MessageDraftMessageMessage(
         $message: MessageUpdateMessageByIdInput!
         $constraint: QueryStatement
     ) {
-        messageDraftMessageMessage (
-            message: $message
-            constraint: $constraint
-        )
+        messageDraftMessageMessage(message: $message, constraint: $constraint)
     }
 `;

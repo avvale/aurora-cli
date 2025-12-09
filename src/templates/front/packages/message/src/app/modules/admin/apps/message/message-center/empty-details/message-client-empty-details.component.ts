@@ -6,9 +6,6 @@ import { TranslocoModule } from '@jsverse/transloco';
     selector: 'message-client-empty-details',
     templateUrl: './message-client-empty-details.component.html',
     encapsulation: ViewEncapsulation.None,
-    imports: [
-        MatIconModule, TranslocoModule,
-    ],
+    imports: [MatIconModule, TranslocoModule],
 })
-export class MessageClientEmptyDetailsComponent
-{ }
+export class MessageClientEmptyDetailsComponent {}

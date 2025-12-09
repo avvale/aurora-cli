@@ -1,0 +1,53 @@
+{
+    "version": "0.0.1",
+    "files": [
+        {
+            "path": "src/app/modules/admin/apps/support/support.component.html",
+            "integrity": "sha1:a6aab421500581830708e34385e2166e7a039ba7"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/support.component.ts",
+            "integrity": "sha1:eb74f122637c2d641d22c6efa5ba9fb7cd811c5b"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/issue-detail.component.html",
+            "integrity": "sha1:4b69eae7a355599a695e5f15938024f4007747ba"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/issue-detail.component.ts",
+            "integrity": "sha1:bea999b948ab57452df3593617b26ac42238a8d9"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/issue-list.component.html",
+            "integrity": "sha1:09ba954c7f281dd8830c9e96d32b7ba9faf585d6"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/issue-list.component.ts",
+            "integrity": "sha1:a7f5aac9f39caba147bcd2c546ca66f5190d929b"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/issue.columns-config.ts",
+            "integrity": "sha1:73be8f3bcb02b80ce244a69fd90194dcb257b750"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/issue.graphql.ts",
+            "integrity": "sha1:bd0e79ea97466af102128bd846d3c35f13252dcc"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/issue.resolvers.ts",
+            "integrity": "sha1:c87ebe849b0679e4c08f7ededf1e4368d0abd6a7"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/issue.service.ts",
+            "integrity": "sha1:264318192d7e24e211898923fa737ecf38e04435"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/index.ts",
+            "integrity": "sha1:0668bfe7d206f064143571f4c397ca726db8cdaf"
+        },
+        {
+            "path": "src/app/modules/admin/apps/support/issue/public-api.ts",
+            "integrity": "sha1:34378f8ebe9018d1204172343315ce6738326259"
+        }
+    ]
+}

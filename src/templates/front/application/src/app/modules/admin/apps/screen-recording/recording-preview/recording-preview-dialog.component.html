@@ -1,0 +1,48 @@
+<div
+    *transloco="let t"
+    class="relative inset-0 flex w-full flex-col overflow-hidden"
+>
+    <!-- Header -->
+    <div
+        class="bg-card flex flex-0 flex-col border-b p-6 sm:flex-row sm:items-center sm:justify-between sm:px-2 sm:py-4 dark:bg-transparent"
+    >
+        <div class="min-w-0 flex-1">
+            <au-title>
+                <mat-icon class="mr-2 icon-size-8">video_file</mat-icon>
+                {{ t('screenRecording.ShowScreenRecording') }}
+            </au-title>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-6 flex flex-shrink-0 items-center sm:ml-4 sm:mt-0">
+            <button
+                class="ml-2"
+                [disableRipple]="true"
+                [mat-dialog-close]="undefined"
+                mat-icon-button
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <!-- / Actions -->
+    </div>
+    <!-- / Header -->
+
+    <!-- Main -->
+    <div
+        class="flex-auto overflow-y-auto px-2 pt-6"
+        cdkScrollable
+    >
+        <div class="form-card px-1 pt-1">
+            <div class="layout__container">
+                <video
+                    class="col-12 mt-2 rounded border"
+                    [src]="data.videoUrl"
+                    controls
+                    autoplay
+                ></video>
+            </div>
+        </div>
+    </div>
+    <!-- / Main -->
+</div>

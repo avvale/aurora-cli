@@ -38,7 +38,12 @@
             [id]="gridId"
             [originColumnsConfig]="originColumnsConfig"
         >
-            <au-grid-translations [for]="gridId">
+            <au-grid-translations
+                [for]="gridId"
+                [actionsMenu]="{
+                    view: t('View'),
+                }"
+            >
                 @for (
                     columnConfig of originColumnsConfig;
                     track columnConfig.field

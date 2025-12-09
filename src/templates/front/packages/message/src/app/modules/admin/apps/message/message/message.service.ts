@@ -4,61 +4,92 @@ import { IamAccount, IamTag, IamTenant } from '@apps/iam';
 import { AccountService } from '@apps/iam/account';
 import { TagService } from '@apps/iam/tag';
 import { TenantService } from '@apps/iam/tenant';
-import { countTotalRecipientsMessageQuery, createMutation, deleteByIdMutation, deleteMutation, draftMessageMessageMutation, fields, findByIdQuery, findByIdWithRelationsQuery, findQuery, getQuery, getRelations, paginationQuery, removeAttachmentMessageMutation, sendMessageMessageMutation, updateByIdMutation, updateMutation } from '@apps/message/message';
-import { MessageCreateMessage, MessageMessage, MessageUpdateMessageById, MessageUpdateMessages } from '@apps/message/message.types';
+import {
+    countTotalRecipientsMessageQuery,
+    createMutation,
+    deleteByIdMutation,
+    deleteMutation,
+    draftMessageMessageMutation,
+    fields,
+    findByIdQuery,
+    findByIdWithRelationsQuery,
+    findQuery,
+    getQuery,
+    getRelations,
+    paginationQuery,
+    removeAttachmentMessageMutation,
+    sendMessageMessageMutation,
+    updateByIdMutation,
+    updateMutation,
+} from '@apps/message/message';
+import {
+    MessageCreateMessage,
+    MessageMessage,
+    MessageUpdateMessageById,
+    MessageUpdateMessages,
+} from '@apps/message/message.types';
 import { OAuthScope } from '@apps/o-auth';
 import { ScopeService } from '@apps/o-auth/scope';
-import { GraphQLHeaders, GraphQLService, GridData, parseGqlFields, QueryStatement } from '@aurora';
+import {
+    GraphQLHeaders,
+    GraphQLService,
+    GridData,
+    parseGqlFields,
+    QueryStatement,
+} from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
 import { messageSelectedAccountsScopePagination } from './message-detail.component';
 
 @Injectable({
     providedIn: 'root',
 })
-export class MessageService
-{
-    paginationSubject$: BehaviorSubject<GridData<MessageMessage> | null> = new BehaviorSubject(null);
-    messageSubject$: BehaviorSubject<MessageMessage | null> = new BehaviorSubject(null);
-    messagesSubject$: BehaviorSubject<MessageMessage[] | null> = new BehaviorSubject(null);
+export class MessageService {
+    paginationSubject$: BehaviorSubject<GridData<MessageMessage> | null> =
+        new BehaviorSubject(null);
+    messageSubject$: BehaviorSubject<MessageMessage | null> =
+        new BehaviorSubject(null);
+    messagesSubject$: BehaviorSubject<MessageMessage[] | null> =
+        new BehaviorSubject(null);
 
     // scoped subjects
-    paginationScoped: { [key: string]: BehaviorSubject<GridData<MessageMessage> | null>; } = {};
-    messageScoped: { [key: string]: BehaviorSubject<MessageMessage | null>; } = {};
-    messagesScoped: { [key: string]: BehaviorSubject<MessageMessage[] | null>; } = {};
+    paginationScoped: {
+        [key: string]: BehaviorSubject<GridData<MessageMessage> | null>;
+    } = {};
+    messageScoped: { [key: string]: BehaviorSubject<MessageMessage | null> } =
+        {};
+    messagesScoped: {
+        [key: string]: BehaviorSubject<MessageMessage[] | null>;
+    } = {};
 
     private tenantService = inject(TenantService);
     private scopeService = inject(ScopeService);
     private tagService = inject(TagService);
     private accountService = inject(AccountService);
 
-    constructor(
-        private readonly graphqlService: GraphQLService,
-    ) {}
+    constructor(private readonly graphqlService: GraphQLService) {}
 
     /**
-    * Getters
-    */
-    get pagination$(): Observable<GridData<MessageMessage>>
-    {
+     * Getters
+     */
+    get pagination$(): Observable<GridData<MessageMessage>> {
         return this.paginationSubject$.asObservable();
     }
 
-    get message$(): Observable<MessageMessage>
-    {
+    get message$(): Observable<MessageMessage> {
         return this.messageSubject$.asObservable();
     }
 
-    get messages$(): Observable<MessageMessage[]>
-    {
+    get messages$(): Observable<MessageMessage[]> {
         return this.messagesSubject$.asObservable();
     }
 
     // allows to store different types of pagination under different scopes this allows us
     // to have multiple observables with different streams of pagination data.
-    setScopePagination(scope: string, pagination: GridData<MessageMessage>): void
-    {
-        if (this.paginationScoped[scope])
-        {
+    setScopePagination(
+        scope: string,
+        pagination: GridData<MessageMessage>,
+    ): void {
+        if (this.paginationScoped[scope]) {
             this.paginationScoped[scope].next(pagination);
             return;
         }
@@ -67,16 +98,14 @@ export class MessageService
     }
 
     // get pagination observable by scope
-    getScopePagination(scope: string): Observable<GridData<MessageMessage>>
-    {
-        if (this.paginationScoped[scope]) return this.paginationScoped[scope].asObservable();
-        return null;
+    getScopePagination(scope: string): Observable<GridData<MessageMessage>> {
+        if (!this.paginationScoped[scope])
+            this.paginationScoped[scope] = new BehaviorSubject(null);
+        return this.paginationScoped[scope].asObservable();
     }
 
-    setScopeMessage(scope: string, object: MessageMessage): void
-    {
-        if (this.messageScoped[scope])
-        {
+    setScopeMessage(scope: string, object: MessageMessage): void {
+        if (this.messageScoped[scope]) {
             this.messageScoped[scope].next(object);
             return;
         }
@@ -84,16 +113,14 @@ export class MessageService
         this.messageScoped[scope] = new BehaviorSubject(object);
     }
 
-    getScopeMessage(scope: string): Observable<MessageMessage>
-    {
-        if (this.messageScoped[scope]) return this.messageScoped[scope].asObservable();
-        return null;
+    getScopeMessage(scope: string): Observable<MessageMessage> {
+        if (!this.messageScoped[scope])
+            this.messageScoped[scope] = new BehaviorSubject(null);
+        return this.messageScoped[scope].asObservable();
     }
 
-    setScopeMessages(scope: string, objects: MessageMessage[]): void
-    {
-        if (this.messagesScoped[scope])
-        {
+    setScopeMessages(scope: string, objects: MessageMessage[]): void {
+        if (this.messagesScoped[scope]) {
             this.messagesScoped[scope].next(objects);
             return;
         }
@@ -101,33 +128,30 @@ export class MessageService
         this.messagesScoped[scope] = new BehaviorSubject(objects);
     }
 
-    getScopeMessages(scope: string): Observable<MessageMessage[]>
-    {
-        if (this.messagesScoped[scope]) return this.messagesScoped[scope].asObservable();
-        return null;
+    getScopeMessages(scope: string): Observable<MessageMessage[]> {
+        if (!this.messagesScoped[scope])
+            this.messagesScoped[scope] = new BehaviorSubject(null);
+        return this.messagesScoped[scope].asObservable();
     }
 
-    pagination(
-        {
-            graphqlStatement = paginationQuery,
-            query = {},
-            constraint = {},
-            headers = {},
-            scope,
-        }: {
-            graphqlStatement?: DocumentNode;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-            scope?: string;
-        } = {},
-    ): Observable<GridData<MessageMessage>>
-    {
+    pagination({
+        graphqlStatement = paginationQuery,
+        query = {},
+        constraint = {},
+        headers = {},
+        scope,
+    }: {
+        graphqlStatement?: DocumentNode;
+        query?: QueryStatement;
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+        scope?: string;
+    } = {}): Observable<GridData<MessageMessage>> {
         // get result, map ang throw data across observable
         return this.graphqlService
             .client()
-            .watchQuery<{ pagination: GridData<MessageMessage>; }>({
-                query    : graphqlStatement,
+            .watchQuery<{ pagination: GridData<MessageMessage> }>({
+                query: graphqlStatement,
                 variables: {
                     query,
                     constraint,
@@ -136,38 +160,38 @@ export class MessageService
                     headers,
                 },
             })
-            .valueChanges
-            .pipe(
+            .valueChanges.pipe(
                 first(),
-                map(result => result.data.pagination),
-                tap(pagination => scope ? this.setScopePagination(scope, pagination) : this.paginationSubject$.next(pagination)),
+                map((result) => result.data.pagination),
+                tap((pagination) =>
+                    scope
+                        ? this.setScopePagination(scope, pagination)
+                        : this.paginationSubject$.next(pagination),
+                ),
             );
     }
 
-    findById(
-        {
-            graphqlStatement = findByIdQuery,
-            id = '',
-            constraint = {},
-            headers = {},
-            scope,
-        }: {
-            graphqlStatement?: DocumentNode;
-            id?: string;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-            scope?: string;
-        } = {},
-    ): Observable<{
+    findById({
+        graphqlStatement = findByIdQuery,
+        id = null,
+        constraint = {},
+        headers = {},
+        scope,
+    }: {
+        graphqlStatement?: DocumentNode;
+        id?: string;
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+        scope?: string;
+    } = {}): Observable<{
         object: MessageMessage;
-    }>
-    {
+    }> {
         return this.graphqlService
             .client()
             .watchQuery<{
                 object: MessageMessage;
             }>({
-                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                query: parseGqlFields(graphqlStatement, fields, constraint),
                 variables: {
                     id,
                     constraint,
@@ -176,53 +200,54 @@ export class MessageService
                     headers,
                 },
             })
-            .valueChanges
-            .pipe(
+            .valueChanges.pipe(
                 first(),
-                map(result => result.data),
-                tap(data => scope ? this.setScopeMessage(scope, data.object) : this.messageSubject$.next(data.object)),
+                map((result) => result.data),
+                tap((data) =>
+                    scope
+                        ? this.setScopeMessage(scope, data.object)
+                        : this.messageSubject$.next(data.object),
+                ),
             );
     }
 
-    findByIdWithRelations(
-        {
-            graphqlStatement = findByIdWithRelationsQuery,
-            id = '',
-            constraint = {},
-            headers = {},
-            queryGetTenants = {},
-            constraintGetTenants = {},
-            queryGetScopes = {},
-            constraintGetScopes = {},
-            queryGetTags = {},
-            constraintGetTags = {},
-            queryGetSelectedTenants = {},
-            constraintGetSelectedTenants = {},
-            queryGetSelectedScopes = {},
-            constraintGetSelectedScopes = {},
-            queryGetSelectedTags = {},
-            constraintGetSelectedTags = {},
-            scope,
-        }: {
-            graphqlStatement?: DocumentNode;
-            id?: string;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-            queryGetTenants?: QueryStatement;
-            constraintGetTenants?: QueryStatement;
-            queryGetScopes?: QueryStatement;
-            constraintGetScopes?: QueryStatement;
-            queryGetTags?: QueryStatement;
-            constraintGetTags?: QueryStatement;
-            queryGetSelectedTenants?: QueryStatement;
-            constraintGetSelectedTenants?: QueryStatement;
-            queryGetSelectedScopes?: QueryStatement;
-            constraintGetSelectedScopes?: QueryStatement;
-            queryGetSelectedTags?: QueryStatement;
-            constraintGetSelectedTags?: QueryStatement;
-            scope?: string;
-        } = {},
-    ): Observable<{
+    findByIdWithRelations({
+        graphqlStatement = findByIdWithRelationsQuery,
+        id = '',
+        constraint = {},
+        headers = {},
+        queryGetTenants = {},
+        constraintGetTenants = {},
+        queryGetScopes = {},
+        constraintGetScopes = {},
+        queryGetTags = {},
+        constraintGetTags = {},
+        queryGetSelectedTenants = {},
+        constraintGetSelectedTenants = {},
+        queryGetSelectedScopes = {},
+        constraintGetSelectedScopes = {},
+        queryGetSelectedTags = {},
+        constraintGetSelectedTags = {},
+        scope,
+    }: {
+        graphqlStatement?: DocumentNode;
+        id?: string;
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+        queryGetTenants?: QueryStatement;
+        constraintGetTenants?: QueryStatement;
+        queryGetScopes?: QueryStatement;
+        constraintGetScopes?: QueryStatement;
+        queryGetTags?: QueryStatement;
+        constraintGetTags?: QueryStatement;
+        queryGetSelectedTenants?: QueryStatement;
+        constraintGetSelectedTenants?: QueryStatement;
+        queryGetSelectedScopes?: QueryStatement;
+        constraintGetSelectedScopes?: QueryStatement;
+        queryGetSelectedTags?: QueryStatement;
+        constraintGetSelectedTags?: QueryStatement;
+        scope?: string;
+    } = {}): Observable<{
         object: MessageMessage;
         iamGetTenants: IamTenant[];
         oAuthGetScopes: OAuthScope[];
@@ -231,8 +256,7 @@ export class MessageService
         oAuthGetSelectedScopes: OAuthScope[];
         iamGetSelectedTags: IamTag[];
         iamPaginateSelectedAccounts: GridData<IamAccount>;
-    }>
-    {
+    }> {
         return this.graphqlService
             .client()
             .watchQuery<{
@@ -245,7 +269,7 @@ export class MessageService
                 iamGetSelectedTags: IamTag[];
                 iamPaginateSelectedAccounts: GridData<IamAccount>;
             }>({
-                query    : parseGqlFields(graphqlStatement, fields, constraint),
+                query: parseGqlFields(graphqlStatement, fields, constraint),
                 variables: {
                     id,
                     constraint,
@@ -266,18 +290,13 @@ export class MessageService
                     headers,
                 },
             })
-            .valueChanges
-            .pipe(
+            .valueChanges.pipe(
                 first(),
-                map(result => result.data),
-                tap(data =>
-                {
-                    if (scope)
-                    {
+                map((result) => result.data),
+                tap((data) => {
+                    if (scope) {
                         this.setScopeMessage(scope, data.object);
-                    }
-                    else
-                    {
+                    } else {
                         this.messageSubject$.next(data.object);
                     }
                     this.tenantService.tenantsSubject$.next(data.iamGetTenants);
@@ -291,30 +310,32 @@ export class MessageService
             );
     }
 
-    find(
-        {
-            graphqlStatement = findQuery,
-            query = {},
-            constraint = {},
-            headers = {},
-            scope,
-        }: {
-            graphqlStatement?: DocumentNode;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-            scope?: string;
-        } = {},
-    ): Observable<{
+    find({
+        graphqlStatement = findQuery,
+        query = {},
+        constraint = {},
+        headers = {},
+        scope,
+    }: {
+        graphqlStatement?: DocumentNode;
+        query?: QueryStatement;
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+        scope?: string;
+    } = {}): Observable<{
         object: MessageMessage;
-    }>
-    {
+    }> {
         return this.graphqlService
             .client()
             .watchQuery<{
                 object: MessageMessage;
             }>({
-                query    : parseGqlFields(graphqlStatement, fields, query, constraint),
+                query: parseGqlFields(
+                    graphqlStatement,
+                    fields,
+                    query,
+                    constraint,
+                ),
                 variables: {
                     query,
                     constraint,
@@ -323,38 +344,43 @@ export class MessageService
                     headers,
                 },
             })
-            .valueChanges
-            .pipe(
+            .valueChanges.pipe(
                 first(),
-                map(result => result.data),
-                tap(data => scope ? this.setScopeMessage(scope, data.object) : this.messageSubject$.next(data.object)),
+                map((result) => result.data),
+                tap((data) =>
+                    scope
+                        ? this.setScopeMessage(scope, data.object)
+                        : this.messageSubject$.next(data.object),
+                ),
             );
     }
 
-    get(
-        {
-            graphqlStatement = getQuery,
-            query = {},
-            constraint = {},
-            headers = {},
-            scope,
-        }: {
-            graphqlStatement?: DocumentNode;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-            scope?: string;
-        } = {},
-    ): Observable<{
+    get({
+        graphqlStatement = getQuery,
+        query = {},
+        constraint = {},
+        headers = {},
+        scope,
+    }: {
+        graphqlStatement?: DocumentNode;
+        query?: QueryStatement;
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+        scope?: string;
+    } = {}): Observable<{
         objects: MessageMessage[];
-    }>
-    {
+    }> {
         return this.graphqlService
             .client()
             .watchQuery<{
                 objects: MessageMessage[];
             }>({
-                query    : parseGqlFields(graphqlStatement, fields, query, constraint),
+                query: parseGqlFields(
+                    graphqlStatement,
+                    fields,
+                    query,
+                    constraint,
+                ),
                 variables: {
                     query,
                     constraint,
@@ -363,53 +389,53 @@ export class MessageService
                     headers,
                 },
             })
-            .valueChanges
-            .pipe(
+            .valueChanges.pipe(
                 first(),
-                map(result => result.data),
-                tap(data => scope ? this.setScopeMessages(scope, data.objects) : this.messagesSubject$.next(data.objects)),
+                map((result) => result.data),
+                tap((data) =>
+                    scope
+                        ? this.setScopeMessages(scope, data.objects)
+                        : this.messagesSubject$.next(data.objects),
+                ),
             );
     }
 
-    getRelations(
-        {
-            queryGetTenants = {},
-            constraintGetTenants = {},
-            queryGetScopes = {},
-            constraintGetScopes = {},
-            queryGetTags = {},
-            constraintGetTags = {},
-            queryGetSelectedTenants = {},
-            constraintGetSelectedTenants = {},
-            queryGetSelectedScopes = {},
-            constraintGetSelectedScopes = {},
-            queryGetSelectedTags = {},
-            constraintGetSelectedTags = {},
-            headers = {},
-        }: {
-            queryGetTenants?: QueryStatement;
-            constraintGetTenants?: QueryStatement;
-            queryGetScopes?: QueryStatement;
-            constraintGetScopes?: QueryStatement;
-            queryGetTags?: QueryStatement;
-            constraintGetTags?: QueryStatement;
-            queryGetSelectedTenants?: QueryStatement;
-            constraintGetSelectedTenants?: QueryStatement;
-            queryGetSelectedScopes?: QueryStatement;
-            constraintGetSelectedScopes?: QueryStatement;
-            queryGetSelectedTags?: QueryStatement;
-            constraintGetSelectedTags?: QueryStatement;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<{
+    getRelations({
+        queryGetTenants = {},
+        constraintGetTenants = {},
+        queryGetScopes = {},
+        constraintGetScopes = {},
+        queryGetTags = {},
+        constraintGetTags = {},
+        queryGetSelectedTenants = {},
+        constraintGetSelectedTenants = {},
+        queryGetSelectedScopes = {},
+        constraintGetSelectedScopes = {},
+        queryGetSelectedTags = {},
+        constraintGetSelectedTags = {},
+        headers = {},
+    }: {
+        queryGetTenants?: QueryStatement;
+        constraintGetTenants?: QueryStatement;
+        queryGetScopes?: QueryStatement;
+        constraintGetScopes?: QueryStatement;
+        queryGetTags?: QueryStatement;
+        constraintGetTags?: QueryStatement;
+        queryGetSelectedTenants?: QueryStatement;
+        constraintGetSelectedTenants?: QueryStatement;
+        queryGetSelectedScopes?: QueryStatement;
+        constraintGetSelectedScopes?: QueryStatement;
+        queryGetSelectedTags?: QueryStatement;
+        constraintGetSelectedTags?: QueryStatement;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<{
         iamGetTenants: IamTenant[];
         oAuthGetScopes: OAuthScope[];
         iamGetTags: IamTag[];
         iamGetSelectedTenants: IamTenant[];
         oAuthGetSelectedScopes: OAuthScope[];
         iamGetSelectedTags: IamTag[];
-    }>
-    {
+    }> {
         return this.graphqlService
             .client()
             .watchQuery<{
@@ -420,7 +446,7 @@ export class MessageService
                 oAuthGetSelectedScopes: OAuthScope[];
                 iamGetSelectedTags: IamTag[];
             }>({
-                query    : getRelations,
+                query: getRelations,
                 variables: {
                     queryGetTenants,
                     constraintGetTenants,
@@ -439,16 +465,17 @@ export class MessageService
                     headers,
                 },
             })
-            .valueChanges
-            .pipe(
+            .valueChanges.pipe(
                 first(),
-                map(result => result.data),
-                tap(data =>
-                {
+                map((result) => result.data),
+                tap((data) => {
                     this.tenantService.tenantsSubject$.next(data.iamGetTenants);
                     this.scopeService.scopesSubject$.next(data.oAuthGetScopes);
                     this.tagService.tagsSubject$.next(data.iamGetTags);
-                    this.accountService.setScopePagination(messageSelectedAccountsScopePagination, { count: 0, total: 0, rows: [] });
+                    this.accountService.setScopePagination(
+                        messageSelectedAccountsScopePagination,
+                        { count: 0, total: 0, rows: [] },
+                    );
 
                     // select tenants are obtained by activatedRoute.snapshot.data.data.iamGetSelectedTenants
                     // select tenants are obtained by activatedRoute.snapshot.data.data.oAuthGetSelectedScopes
@@ -457,168 +484,140 @@ export class MessageService
             );
     }
 
-    create<T>(
-        {
-            graphqlStatement = createMutation,
-            object = null,
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            object?: MessageCreateMessage;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    payload: object,
-                },
-                context: {
-                    headers,
-                },
-            });
+    create<T>({
+        graphqlStatement = createMutation,
+        object = null,
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        object?: MessageCreateMessage;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<FetchResult<T>> {
+        return this.graphqlService.client().mutate({
+            mutation: graphqlStatement,
+            variables: {
+                payload: object,
+            },
+            context: {
+                headers,
+            },
+        });
     }
 
-    updateById<T>(
-        {
-            graphqlStatement = updateByIdMutation,
-            object = null,
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            object?: MessageUpdateMessageById;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    payload: object,
-                },
-                context: {
-                    headers,
-                },
-            });
+    updateById<T>({
+        graphqlStatement = updateByIdMutation,
+        object = null,
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        object?: MessageUpdateMessageById;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<FetchResult<T>> {
+        return this.graphqlService.client().mutate({
+            mutation: graphqlStatement,
+            variables: {
+                payload: object,
+            },
+            context: {
+                headers,
+            },
+        });
     }
 
-    update<T>(
-        {
-            graphqlStatement = updateMutation,
-            object = null,
-            query = {},
-            constraint = {},
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            object?: MessageUpdateMessages;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    payload: object,
-                    query,
-                    constraint,
-                },
-                context: {
-                    headers,
-                },
-            });
+    update<T>({
+        graphqlStatement = updateMutation,
+        object = null,
+        query = {},
+        constraint = {},
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        object?: MessageUpdateMessages;
+        query?: QueryStatement;
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<FetchResult<T>> {
+        return this.graphqlService.client().mutate({
+            mutation: graphqlStatement,
+            variables: {
+                payload: object,
+                query,
+                constraint,
+            },
+            context: {
+                headers,
+            },
+        });
     }
 
-    deleteById<T>(
-        {
-            graphqlStatement = deleteByIdMutation,
-            id = '',
-            constraint = {},
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            id?: string;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    id,
-                    constraint,
-                },
-                context: {
-                    headers,
-                },
-            });
+    deleteById<T>({
+        graphqlStatement = deleteByIdMutation,
+        id = null,
+        constraint = {},
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        id?: string;
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<FetchResult<T>> {
+        return this.graphqlService.client().mutate({
+            mutation: graphqlStatement,
+            variables: {
+                id,
+                constraint,
+            },
+            context: {
+                headers,
+            },
+        });
     }
 
-    delete<T>(
-        {
-            graphqlStatement = deleteMutation,
-            query = {},
-            constraint = {},
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            query?: QueryStatement;
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    query,
-                    constraint,
-                },
-                context: {
-                    headers,
-                },
-            });
+    delete<T>({
+        graphqlStatement = deleteMutation,
+        query = {},
+        constraint = {},
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        query?: QueryStatement;
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<FetchResult<T>> {
+        return this.graphqlService.client().mutate({
+            mutation: graphqlStatement,
+            variables: {
+                query,
+                constraint,
+            },
+            context: {
+                headers,
+            },
+        });
     }
 
     // Queries additionalApis
-    countTotalRecipientsMessage(
-        {
-            graphqlStatement = countTotalRecipientsMessageQuery,
-            tenantRecipientIds,
-            scopeRecipients,
-            tagRecipients,
-            accountRecipientIds,
-            constraint = {},
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            tenantRecipientIds?: string[];
-            scopeRecipients?: string[];
-            tagRecipients?: string[];
-            accountRecipientIds?: string[];
-            constraint?: QueryStatement;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<{ messageCountTotalRecipientsMessage: number; }>
-    {
+    countTotalRecipientsMessage({
+        graphqlStatement = countTotalRecipientsMessageQuery,
+        tenantRecipientIds,
+        scopeRecipients,
+        tagRecipients,
+        accountRecipientIds,
+        constraint = {},
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        tenantRecipientIds?: string[];
+        scopeRecipients?: string[];
+        tagRecipients?: string[];
+        accountRecipientIds?: string[];
+        constraint?: QueryStatement;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<{ messageCountTotalRecipientsMessage: number }> {
         return this.graphqlService
             .client()
-            .watchQuery<{ messageCountTotalRecipientsMessage: number; }>({
-                query    : graphqlStatement,
+            .watchQuery<{ messageCountTotalRecipientsMessage: number }>({
+                query: graphqlStatement,
                 variables: {
                     tenantRecipientIds,
                     scopeRecipients,
@@ -630,89 +629,73 @@ export class MessageService
                     headers,
                 },
             })
-            .valueChanges
-            .pipe(
+            .valueChanges.pipe(
                 first(),
-                map(result => result.data),
+                map((result) => result.data),
             );
     }
 
     // Mutation additionalApis
-    removeAttachmentMessage<T>(
-        {
-            graphqlStatement = removeAttachmentMessageMutation,
-            message,
-            attachmentId,
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            message?: MessageUpdateMessageById;
-            attachmentId?: string;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    message,
-                    attachmentId,
-                },
-                context: {
-                    headers,
-                },
-            });
+    removeAttachmentMessage<T>({
+        graphqlStatement = removeAttachmentMessageMutation,
+        message,
+        attachmentId,
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        message?: MessageUpdateMessageById;
+        attachmentId?: string;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<FetchResult<T>> {
+        return this.graphqlService.client().mutate({
+            mutation: graphqlStatement,
+            variables: {
+                message,
+                attachmentId,
+            },
+            context: {
+                headers,
+            },
+        });
     }
 
-    sendMessageMessage<T>(
-        {
-            graphqlStatement = sendMessageMessageMutation,
-            message,
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            message?: MessageUpdateMessageById;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    message,
-                },
-                context: {
-                    headers,
-                },
-            });
+    sendMessageMessage<T>({
+        graphqlStatement = sendMessageMessageMutation,
+        message,
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        message?: MessageUpdateMessageById;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<FetchResult<T>> {
+        return this.graphqlService.client().mutate({
+            mutation: graphqlStatement,
+            variables: {
+                message,
+            },
+            context: {
+                headers,
+            },
+        });
     }
 
-    draftMessageMessage<T>(
-        {
-            graphqlStatement = draftMessageMessageMutation,
-            message,
-            headers = {},
-        }: {
-            graphqlStatement?: DocumentNode;
-            message?: MessageUpdateMessageById;
-            headers?: GraphQLHeaders;
-        } = {},
-    ): Observable<FetchResult<T>>
-    {
-        return this.graphqlService
-            .client()
-            .mutate({
-                mutation : graphqlStatement,
-                variables: {
-                    message,
-                },
-                context: {
-                    headers,
-                },
-            });
+    draftMessageMessage<T>({
+        graphqlStatement = draftMessageMessageMutation,
+        message,
+        headers = {},
+    }: {
+        graphqlStatement?: DocumentNode;
+        message?: MessageUpdateMessageById;
+        headers?: GraphQLHeaders;
+    } = {}): Observable<FetchResult<T>> {
+        return this.graphqlService.client().mutate({
+            mutation: graphqlStatement,
+            variables: {
+                message,
+            },
+            context: {
+                headers,
+            },
+        });
     }
 }

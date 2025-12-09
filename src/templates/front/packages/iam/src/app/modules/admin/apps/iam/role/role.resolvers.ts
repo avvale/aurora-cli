@@ -110,7 +110,7 @@ export const roleEditResolver: ResolveFn<{
             ],
         },
         queryPaginatePermissionsRoles: queryStatementHandler({
-            columnsConfig: permissionColumnsConfig,
+            columnsConfig: permissionColumnsConfig(),
         })
             .setColumFilters(
                 gridFiltersStorageService.getColumnFilterState(
@@ -127,7 +127,7 @@ export const roleEditResolver: ResolveFn<{
             .setSearch(gridStateService.getSearchState(permissionRoleGridId))
             .getQueryStatement(),
         queryPaginatePermissions: queryStatementHandler({
-            columnsConfig: permissionColumnsConfig,
+            columnsConfig: permissionColumnsConfig(),
         })
             .setColumFilters(
                 gridFiltersStorageService.getColumnFilterState(

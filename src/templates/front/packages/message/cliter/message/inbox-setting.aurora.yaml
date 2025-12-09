@@ -14,12 +14,17 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: accountId
     type: id
     nullable: false
     index: unique
-  - name: sort
-    type: int
+  - name: lastReadMessageRowId
+    type: bigint
     nullable: false
   - name: createdAt
     type: timestamp
@@ -30,3 +35,12 @@ aggregateProperties:
   - name: deletedAt
     type: timestamp
     nullable: true
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

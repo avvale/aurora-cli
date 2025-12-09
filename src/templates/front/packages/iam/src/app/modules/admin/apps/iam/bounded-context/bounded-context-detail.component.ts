@@ -93,7 +93,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent {
                 return actions;
             },
         },
-        ...permissionColumnsConfig,
+        ...permissionColumnsConfig({ translator: this.translocoService }),
     ];
     /* #endregion variables to manage grid-elements-manager permissions */
 
@@ -340,7 +340,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent {
                         query: action.meta.query
                             ? action.meta.query
                             : queryStatementHandler({
-                                  columnsConfig: permissionColumnsConfig,
+                                  columnsConfig: permissionColumnsConfig(),
                               })
                                   .setColumFilters(
                                       this.gridFiltersStorageService.getColumnFilterState(
@@ -497,13 +497,14 @@ export class BoundedContextDetailComponent extends ViewDetailComponent {
                     }),
                 );
 
-                const permissionColumns: string[] = permissionColumnsConfig.map(
-                    (permissionColumnConfig) => permissionColumnConfig.field,
-                );
-                const permissionHeaders = permissionColumns.map((column) =>
-                    this.translocoService.translate(
-                        'iam.' + column.toPascalCase(),
-                    ),
+                const permissionColumns: string[] =
+                    permissionColumnsConfig().map(
+                        (permissionColumnConfig) =>
+                            permissionColumnConfig.field,
+                    );
+                const permissionHeaders = permissionColumnsConfig().map(
+                    (column) =>
+                        this.translocoService.translate(column.translation),
                 );
 
                 exportRows(

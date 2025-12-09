@@ -1,9 +1,25 @@
-import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    signal,
+    ViewEncapsulation,
+    WritableSignal,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MessageInbox } from '@apps/message';
 import { InboxService } from '@apps/message/inbox';
-import { MessageInbox } from '@apps/message/message.types';
-import { Action, Crumb, DatetimepickerSqlFormatDirective, defaultDetailImports, log, mapActions, SnackBarInvalidFormComponent, uuid, ViewDetailComponent } from '@aurora';
+import {
+    Action,
+    Crumb,
+    DatetimepickerSqlFormatDirective,
+    defaultDetailImports,
+    log,
+    mapActions,
+    SnackBarInvalidFormComponent,
+    uuid,
+    ViewDetailComponent,
+} from '@aurora';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { QuillEditorComponent } from 'ngx-quill';
 import { lastValueFrom, takeUntil } from 'rxjs';
@@ -13,14 +29,16 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './inbox-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [
         ...defaultDetailImports,
-        DatetimepickerSqlFormatDirective, MatCheckboxModule, MtxDatetimepickerModule,
+        DatetimepickerSqlFormatDirective,
+        MatCheckboxModule,
+        MtxDatetimepickerModule,
         QuillEditorComponent,
     ],
 })
-export class InboxDetailComponent extends ViewDetailComponent
-{
+export class InboxDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..
 
@@ -33,7 +51,7 @@ export class InboxDetailComponent extends ViewDetailComponent
         toolbar: [
             ['bold', 'italic', 'underline', 'strike'],
             ['link'],
-            [{ align: []}, { list: 'ordered' }, { list: 'bullet' }],
+            [{ align: [] }, { list: 'ordered' }, { list: 'bullet' }],
             ['clean'],
         ],
     };
@@ -41,77 +59,83 @@ export class InboxDetailComponent extends ViewDetailComponent
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'message.Inboxes', routerLink: ['/message/inbox']},
+        { translation: 'message.Inboxes', routerLink: ['/message/inbox'] },
         { translation: 'message.Inbox' },
     ];
 
-    constructor(
-        private readonly inboxService: InboxService,
-    )
-    {
+    constructor(private readonly inboxService: InboxService) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    {
+    init(): void {
         /**/
     }
 
-    onSubmit($event): void
-    {
+    onSubmit($event): void {
         // we have two nested forms, we check that the submit comes from the button
         // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
+        if (
+            $event.submitter.getAttribute('form') !==
+            $event.submitter.form.getAttribute('id')
+        ) {
             $event.preventDefault();
             $event.stopPropagation();
             return;
         }
 
         // manage validations before execute actions
-        if (this.fg.invalid)
-        {
+        if (this.fg.invalid) {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
 
-            this.snackBar.openFromComponent(
-                SnackBarInvalidFormComponent,
-                {
-                    data: {
-                        message: `${this.translocoService.translate('InvalidForm')}`,
-                        textButton: `${this.translocoService.translate('InvalidFormOk')}`,
-                    },
-                    panelClass: 'error-snackbar',
-                    verticalPosition: 'top',
-                    duration: 10000,
+            this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+                data: {
+                    message: `${this.translocoService.translate('InvalidForm')}`,
+                    textButton: `${this.translocoService.translate('InvalidFormOk')}`,
                 },
-            );
+                panelClass: 'error-snackbar',
+                verticalPosition: 'top',
+                duration: 10000,
+            });
             return;
         }
 
         this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'message::inbox.detail.new' : 'message::inbox.detail.create',
-                    'message::inbox.detail.edit': 'message::inbox.detail.update',
-                },
-            ),
+            id: mapActions(this.currentViewAction.id, {
+                'message::inbox.detail.new': 'message::inbox.detail.create',
+                'message::inbox.detail.edit': 'message::inbox.detail.update',
+            }),
             isViewAction: false,
         });
     }
 
-    createForm(): void
-    {
+    createForm(): void {
         /* eslint-disable key-spacing */
         this.fg = this.fb.group({
-            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            id: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
             tenantIds: [],
-            messageId: [null, [Validators.minLength(36), Validators.maxLength(36)]],
-            sort: [null, [Validators.required]],
-            accountId: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
+            messageId: [
+                null,
+                [Validators.minLength(36), Validators.maxLength(36)],
+            ],
+            messageRowId: [null, [Validators.required]],
+            accountId: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
             accountCode: ['', [Validators.maxLength(128)]],
             isImportant: [false, [Validators.required]],
             sentAt: ['', [Validators.required]],
@@ -128,35 +152,29 @@ export class InboxDetailComponent extends ViewDetailComponent
         /* eslint-enable key-spacing */
     }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'message::inbox.detail.new':
                 this.fg.get('id').setValue(uuid());
                 break;
 
             case 'message::inbox.detail.edit':
-                this.inboxService
-                    .inbox$
+                this.inboxService.inbox$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
+                    .subscribe((item) => {
                         this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
                 break;
 
             case 'message::inbox.detail.create':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.inboxService
-                            .create<MessageInbox>({
-                                object: this.fg.value,
-                            }),
+                        this.inboxService.create<MessageInbox>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -169,21 +187,17 @@ export class InboxDetailComponent extends ViewDetailComponent
                     );
 
                     this.router.navigate(['message/inbox']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'message::inbox.detail.update':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.inboxService
-                            .updateById<MessageInbox>({
-                                object: this.fg.value,
-                            }),
+                        this.inboxService.updateById<MessageInbox>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -196,13 +210,11 @@ export class InboxDetailComponent extends ViewDetailComponent
                     );
 
                     this.router.navigate(['message/inbox']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
         }
     }
 }

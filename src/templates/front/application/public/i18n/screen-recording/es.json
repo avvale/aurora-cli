@@ -1,0 +1,6 @@
+{
+    "ScreenRecordingExists": "Ya existe una grabación de pantalla en curso.",
+    "ScreenRecordingNotSupported": "La grabación de pantalla no es compatible con este navegador.",
+    "ScreenRecordingStopError": "Ocurrió un error al detener la grabación de pantalla.",
+    "ShowScreenRecording": "Mostrar grabación de pantalla"
+}

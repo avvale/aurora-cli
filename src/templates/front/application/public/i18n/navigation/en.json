@@ -11,11 +11,14 @@
     "boundedContexts": "Bounded Contexts",
     "clients": "Clients",
     "collections": "Collections",
+    "comments": "Comments",
+    "configs": "Configs",
     "countries": "Countries",
     "example": "Example",
     "exampleSection": "Example Section",
     "fields": "Fields",
     "httpCommunications": "Http Communications",
+    "inboxSettings": "InboxSettings",
     "inboxes": "Message Logs",
     "issues": "Issues",
     "jobsRegistry": "Jobs Registry",
@@ -38,5 +41,6 @@
     "tags": "Tags",
     "tenants": "Tenants",
     "tools": "Tools",
-    "users": "Users"
+    "users": "Users",
+    "webhooks": "Webhooks"
 }

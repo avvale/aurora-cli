@@ -1,6 +1,13 @@
 import { ColumnConfig, ColumnDataType } from '@aurora';
+import { TranslocoService } from '@jsverse/transloco';
 
-export const permissionRoleColumnsConfig: ColumnConfig[] = [
+export const permissionRoleColumnsConfig: (properties?: {
+    translator?: TranslocoService;
+}) => ColumnConfig[] = ({
+    translator = null,
+}: {
+    translator?: TranslocoService;
+} = {}): ColumnConfig[] => [
     {
         type: ColumnDataType.STRING,
         field: 'permission.name',

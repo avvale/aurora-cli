@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, WritableSignal, inject, signal } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ViewEncapsulation,
+    WritableSignal,
+    inject,
+    signal,
+} from '@angular/core';
 import { EnvironmentsInformationService } from '../environments-information.service';
 
 @Component({
@@ -7,14 +14,16 @@ import { EnvironmentsInformationService } from '../environments-information.serv
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
-export class RibbonEnvironmentComponent
-{
+export class RibbonEnvironmentComponent {
     title: WritableSignal<string> = signal('Production');
     environmentsInformationService = inject(EnvironmentsInformationService);
 
-    ngOnInit(): void
-    {
-        this.environmentsInformationService.environmentsInformation$
-            .subscribe(environmentsInformation => this.title.set(environmentsInformation.server.environment?.toPascalCase()));
+    ngOnInit(): void {
+        this.environmentsInformationService.environmentsInformation$.subscribe(
+            (environmentsInformation) =>
+                this.title.set(
+                    environmentsInformation.back.environment?.toPascalCase(),
+                ),
+        );
     }
 }

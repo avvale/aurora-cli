@@ -1,8 +1,7 @@
 import { ColumnConfig, ColumnFilterStorage } from '@aurora';
 import { BehaviorSubject } from 'rxjs';
 
-export interface Action
-{
+export interface Action {
     id: string;
     isViewAction?: boolean; // if true set variable currentViewAction, this variable is taken into account, to show or not, elements of the view
     beforeRunAction?: (action: Action) => void;
@@ -19,8 +18,7 @@ export type ApiEnvironment = 'sandbox' | 'live';
 
 export type Appearance = 'legacy' | 'standard' | 'fill' | 'outline';
 
-export interface BoundedContext
-{
+export interface BoundedContext {
     id: string;
     name: string;
     root?: string;
@@ -30,14 +28,12 @@ export interface BoundedContext
     updatedAt: string;
 }
 
-export interface Credentials
-{
+export interface Credentials {
     accessToken: string;
     refreshToken: string;
 }
 
-export interface Config
-{
+export interface Config {
     readonly graphQLUri: string;
     readonly restUrl: string;
     readonly siteUrl: string;
@@ -60,8 +56,8 @@ export interface CoreFile {
     mimetype: string;
     extension: string;
     relativePathSegments: string[];
-    width?:number;
-    height?:number;
+    width?: number;
+    height?: number;
     size: number;
     url: string;
     isCropable: boolean;
@@ -86,8 +82,7 @@ export interface CoreLibraryFile {
     meta?: JSON;
 }
 
-export interface Environment
-{
+export interface Environment {
     production: boolean;
     debug: boolean;
     api: {
@@ -107,55 +102,54 @@ export interface Environment
     // theme: Theme;
 }
 
-export interface RouteData
-{
+export interface RouteData {
     permission: string;
-    [key:string]: any;
-}
-
-export interface Session
-{
-    columnFilters?: { [key:string]: ColumnFilterStorage; };
     [key: string]: any;
 }
 
-export interface Translatable
-{
+export interface Session {
+    columnFilters?: { [key: string]: ColumnFilterStorage };
+    [key: string]: any;
+}
+
+export interface Translatable {
     availableLangs: string[];
 }
 
-export interface ColumnConfigStorage
-{
+export interface ColumnConfigStorage {
     id: string; // id of grid where apply filter
     hash: string;
     columnsConfig: ColumnConfig[];
 }
 
 export interface UserMetaStorage {
-    columnsConfigStorage?: { [key:string]: ColumnConfigStorage; };
+    columnsConfigStorage?: { [key: string]: ColumnConfigStorage };
     [key: string]: any;
 }
 
-
-
-
-// TODO, tipos por revisar
-export enum FieldAppearance
-{
-    FILL     = 'fill',
-    LEGACY   = 'legacy',
-    STANDARD = 'standard',
-    OUTLINE  = 'outline',
+export interface StorageAccountFileManagerFileUploadedInput {
+    id: string;
+    file: any;
+    relativePathSegments: string[];
+    containerName?: string;
+    hasCreateLibrary?: boolean;
+    meta?: any;
 }
 
-export interface Property
-{
+// TODO, tipos por revisar
+export enum FieldAppearance {
+    FILL = 'fill',
+    LEGACY = 'legacy',
+    STANDARD = 'standard',
+    OUTLINE = 'outline',
+}
+
+export interface Property {
     key: string;
     value: string;
 }
 
-export interface Theme
-{
+export interface Theme {
     colorTheme: string; // TODO comprobar
     /*
     favicon: string;

@@ -1,0 +1,83 @@
+<div
+    class="w-auto border-e-2 border-white/20 px-2 py-0"
+    matSnackBarLabel
+>
+    <div class="flex h-full items-center px-2">
+        @if (recordingService.recordingState() === 'recording') {
+            <mat-icon
+                class="mr-2 animate-pulse text-red-500 icon-size-5"
+                svgIcon="mat_solid:circle"
+            ></mat-icon>
+        }
+        <p class="m-0 text-white">
+            {{ counterValue() }}
+        </p>
+    </div>
+</div>
+<div
+    class="w-auto px-2 py-0"
+    matSnackBarActions
+>
+    <button
+        class="min-w-min px-2"
+        mat-button
+        (click)="restartRecording()"
+    >
+        <mat-icon
+            class="mr-0 text-white icon-size-5"
+            svgIcon="mat_solid:restart_alt"
+        ></mat-icon>
+    </button>
+    <button
+        class="min-w-min px-2"
+        mat-button
+        (click)="stopRecording()"
+    >
+        <mat-icon
+            class="mr-0 text-white icon-size-5"
+            svgIcon="mat_solid:stop"
+        ></mat-icon>
+    </button>
+    @if (recordingService.recordingState() === 'recording') {
+        <button
+            class="min-w-min px-2"
+            mat-button
+            (click)="pauseRecording()"
+        >
+            <mat-icon
+                class="mr-0 text-white icon-size-5"
+                svgIcon="mat_solid:pause"
+            ></mat-icon>
+        </button>
+    }
+    @if (
+        recordingService.recordingState() === 'idle' ||
+        recordingService.recordingState() === 'paused'
+    ) {
+        <button
+            class="min-w-min px-2"
+            mat-button
+            (click)="
+                recordingService.recordingState() === 'idle'
+                    ? startRecording()
+                    : resumeRecording()
+            "
+        >
+            <mat-icon
+                class="mr-0 text-white icon-size-5"
+                svgIcon="mat_solid:play_arrow"
+            ></mat-icon>
+        </button>
+    }
+    <button
+        class="min-w-min px-2"
+        mat-button
+        matSnackBarAction
+        (click)="discardRecording()"
+    >
+        <mat-icon
+            class="mr-0 text-white icon-size-5"
+            svgIcon="mat_solid:delete"
+        ></mat-icon>
+    </button>
+</div>

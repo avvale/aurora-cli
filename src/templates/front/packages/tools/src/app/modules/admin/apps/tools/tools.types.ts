@@ -1,14 +1,15 @@
 export enum ToolsProcedureType {
     FUNCTION = 'FUNCTION',
     PROCEDURE = 'PROCEDURE',
-    TRIGGER = 'TRIGGER'
+    TRIGGER = 'TRIGGER',
 }
 
 export interface ToolsKeyValue {
     id: string;
-    code: string;
+    key: string;
     type: string;
     value: string;
+    isCached: boolean;
     isActive: boolean;
     createdAt?: string;
     updatedAt?: string;
@@ -17,10 +18,11 @@ export interface ToolsKeyValue {
 
 export interface ToolsCreateKeyValue {
     id: string;
-    code: string;
+    key: string;
     type: string;
     value: string;
     isActive: boolean;
+    isCached: boolean;
 }
 
 export interface ToolsUpdateKeyValueById {
@@ -135,4 +137,55 @@ export interface ToolsUpdateMigrations {
     downScript?: string;
     sort?: number;
     executedAt?: string;
+}
+
+export interface ToolsWebhook {
+    id: string;
+    rowId: number;
+    name: string;
+    service: string;
+    endpoint: string;
+    externalId?: string;
+    events?;
+    secret?: string;
+    meta?: any;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface ToolsCreateWebhook {
+    id: string;
+    rowId: number;
+    name: string;
+    service: string;
+    endpoint: string;
+    externalId?: string;
+    events?: string[];
+    secret?: string;
+    meta?: any;
+}
+
+export interface ToolsUpdateWebhookById {
+    id: string;
+    rowId?: number;
+    name?: string;
+    service?: string;
+    endpoint?: string;
+    externalId?: string;
+    events?;
+    secret?: string;
+    meta?: any;
+}
+
+export interface ToolsUpdateWebhooks {
+    id?: string;
+    rowId?: number;
+    name?: string;
+    service?: string;
+    endpoint?: string;
+    externalId?: string;
+    events?: string[];
+    secret?: string;
+    meta?: any;
 }

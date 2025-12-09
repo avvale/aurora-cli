@@ -4,12 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'getColorStatusMessage',
     pure: true,
 })
-export class GetColorStatusMessagePipe implements PipeTransform
-{
-    transform(issue: string): string
-    {
-        switch (issue)
-        {
+export class GetColorStatusMessagePipe implements PipeTransform {
+    transform(issue: string): string {
+        switch (issue) {
             case 'DRAFT':
                 return 'primary';
             case 'SENT':

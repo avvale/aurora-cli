@@ -1,0 +1,120 @@
+version: 0.0.1
+boundedContextName: support
+moduleName: issue
+moduleNames: issues
+aggregateName: SupportIssue
+hasOAuth: true
+hasTenant: false
+hasAuditing: true
+front:
+  solidIcon: bug_report
+  outlineIcon: bug_report
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+  - name: externalId
+    type: varchar
+    maxLength: 64
+    nullable: true
+    index: index
+  - name: externalStatus
+    type: varchar
+    maxLength: 36
+    nullable: true
+  - name: externalColorStatus
+    type: varchar
+    maxLength: 16
+    nullable: true
+  - name: accountId
+    type: id
+    nullable: true
+    relationship:
+      type: many-to-one
+      aggregateName: IamAccount
+      modulePath: iam/account
+      field: account
+      avoidConstraint: true
+    index: index
+  - name: accountUsername
+    type: varchar
+    maxLength: 128
+    nullable: true
+  - name: displayName
+    type: varchar
+    maxLength: 128
+    nullable: true
+  - name: frontEnvironment
+    type: varchar
+    maxLength: 36
+    nullable: true
+  - name: frontVersion
+    type: varchar
+    maxLength: 16
+    nullable: true
+  - name: backEnvironment
+    type: varchar
+    maxLength: 36
+    nullable: true
+  - name: backVersion
+    type: varchar
+    maxLength: 16
+    nullable: true
+  - name: subject
+    type: varchar
+    maxLength: 510
+    nullable: false
+  - name: description
+    type: text
+    nullable: false
+  - name: attachments
+    type: jsonb
+    nullable: true
+  - name: screenRecording
+    type: jsonb
+    nullable: true
+  - name: comments
+    type: relationship
+    nullable: true
+    relationship:
+      type: one-to-many
+      singularName: comment
+      aggregateName: SupportComment
+      modulePath: support/comment
+      avoidConstraint: true
+  - name: meta
+    type: jsonb
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+additionalApis:
+  - path: support/config/create-webhook
+    resolverType: mutation
+    httpMethod: post
+  - path: support/config/delete-webhook
+    resolverType: mutation
+    httpMethod: post
+excludedOperations:
+  - count
+  - createBatch
+  - delete
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

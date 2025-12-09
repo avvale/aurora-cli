@@ -1,7 +1,19 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { DatePipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation, WritableSignal, computed, inject, signal } from '@angular/core';
+import { DatePipe, NgClass, NgTemplateOutlet } from '@angular/common';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    OnDestroy,
+    OnInit,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation,
+    WritableSignal,
+    inject,
+    signal,
+} from '@angular/core';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -21,19 +33,24 @@ export const messageQuickViewMessagesScope = 'message::QuickViewMessages';
     changeDetection: ChangeDetectionStrategy.OnPush,
     exportAs: 'messageQuickView',
     imports: [
-        MatButtonModule, MatIconModule, MatTooltipModule,
-        NgClass, NgTemplateOutlet, RouterLink, TranslocoModule, DatePipe,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        NgClass,
+        NgTemplateOutlet,
+        RouterLink,
+        TranslocoModule,
+        DatePipe,
     ],
     providers: [
         {
-            provide : TRANSLOCO_SCOPE,
+            provide: TRANSLOCO_SCOPE,
             useValue: 'message',
-            multi   : true,
+            multi: true,
         },
     ],
 })
-export class MessageQuickViewComponent implements OnInit, OnDestroy
-{
+export class MessageQuickViewComponent implements OnInit, OnDestroy {
     @ViewChild('messagesOrigin') private messagesOrigin: MatButton;
     @ViewChild('messagesPanel') private messagesPanel: TemplateRef<any>;
 
@@ -54,14 +71,12 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
     constructor(
         private overlay: Overlay,
         private viewContainerRef: ViewContainerRef,
-    )
-    { }
+    ) {}
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
-    async ngOnInit(): Promise<void>
-    {
+    async ngOnInit(): Promise<void> {
         this.unreadMessagesNumber = this.messageService.unreadMessagesNumber;
 
         // Get the messages
@@ -72,24 +87,21 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
         this.inboxService
             .getScopePagination(messageQuickViewMessagesScope)
             .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe((inboxCustomerPagination: GridData<MessageInbox>) =>
-            {
+            .subscribe((inboxCustomerPagination: GridData<MessageInbox>) => {
                 // Load the messages
                 this.messages.set(inboxCustomerPagination.rows);
             });
 
         // Subscribe to toggle message as read
-        this.messageService
-            .toggleMessageAsRead$
+        this.messageService.toggleMessageAsRead$
             .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe(async (toggleMessage: MessageInbox) =>
-            {
+            .subscribe(async (toggleMessage: MessageInbox) => {
                 // mark message as read/unread if it is in the list
                 const messages = this.messages();
                 this.messages.set(
-                    messages.map(message =>
-                    {
-                        if (message.id === toggleMessage.id) message.isRead = !message.isRead;
+                    messages.map((message) => {
+                        if (message.id === toggleMessage.id)
+                            message.isRead = !message.isRead;
                         return message;
                     }),
                 );
@@ -99,20 +111,20 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
             });
 
         // Subscribe to message as deleted
-        this.messageService
-            .deletedMessage$
+        this.messageService.deletedMessage$
             .pipe(takeUntil(this.unsubscribeAll$))
-            .subscribe(async (deletedMessage: MessageInbox) =>
-            {
+            .subscribe(async (deletedMessage: MessageInbox) => {
                 // only update the messages if the deleted message is in the list
-                if (this.messages().some(message => message.id === deletedMessage.id))
-                {
+                if (
+                    this.messages().some(
+                        (message) => message.id === deletedMessage.id,
+                    )
+                ) {
                     this.getMessages();
                 }
 
                 // count unread messages if deleted message is unread
-                if (!deletedMessage.isRead)
-                {
+                if (!deletedMessage.isRead) {
                     this.messageService.countUnreadMessages();
                 }
             });
@@ -121,15 +133,13 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this.unsubscribeAll$.next(null);
         this.unsubscribeAll$.complete();
 
         // Dispose the overlay
-        if (this.overlayRef)
-        {
+        if (this.overlayRef) {
             this.overlayRef.dispose();
         }
     }
@@ -138,63 +148,57 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
-    async getMessages(): Promise<GridData<MessageInbox>>
-    {
+    async getMessages(): Promise<GridData<MessageInbox>> {
         // Get the messages
         return await lastValueFrom(
-            this.inboxService
-                .paginateCustomerQuickVewMessagesInbox({
-                    query: {
-                        limit : 10,
-                        offset: 0,
-                        order : [['sort', 'desc']],
-                    },
-                }),
+            this.inboxService.paginateCustomerQuickVewMessagesInbox({
+                query: {
+                    limit: 10,
+                    offset: 0,
+                    order: [['messageRowId', 'desc']],
+                },
+            }),
         );
     }
 
     /**
      * Open the messages panel
      */
-    openPanel(): void
-    {
+    openPanel(): void {
         // Return if the messages panel or its origin is not defined
-        if (!this.messagesPanel || !this.messagesOrigin)
-        {
+        if (!this.messagesPanel || !this.messagesOrigin) {
             return;
         }
 
         // Create the overlay if it doesn't exist
-        if (!this.overlayRef)
-        {
+        if (!this.overlayRef) {
             this.createOverlay();
         }
 
         // Attach the portal to the overlay
-        this.overlayRef.attach(new TemplatePortal(this.messagesPanel, this.viewContainerRef));
+        this.overlayRef.attach(
+            new TemplatePortal(this.messagesPanel, this.viewContainerRef),
+        );
     }
 
     /**
      * Close the messages panel
      */
-    closePanel(): void
-    {
+    closePanel(): void {
         this.overlayRef.detach();
     }
 
     /**
      * Mark all messages as read
      */
-    goToMessageCenter(): void
-    {
+    goToMessageCenter(): void {
         this.router.navigate(['message', 'message-center']);
     }
 
     /**
      * Delete the given message
      */
-    deleteMessage(message: MessageInbox): void
-    {
+    deleteMessage(message: MessageInbox): void {
         this.messageService.deleteMessage(message);
         this.messageService.countUnreadMessages();
     }
@@ -206,39 +210,41 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
     /**
      * Create the overlay
      */
-    private createOverlay(): void
-    {
+    private createOverlay(): void {
         // Create the overlay
         this.overlayRef = this.overlay.create({
-            hasBackdrop     : true,
-            backdropClass   : 'fuse-backdrop-on-mobile',
-            scrollStrategy  : this.overlay.scrollStrategies.block(),
-            positionStrategy: this.overlay.position()
-                .flexibleConnectedTo(this.messagesOrigin._elementRef.nativeElement)
+            hasBackdrop: true,
+            backdropClass: 'fuse-backdrop-on-mobile',
+            scrollStrategy: this.overlay.scrollStrategies.block(),
+            positionStrategy: this.overlay
+                .position()
+                .flexibleConnectedTo(
+                    this.messagesOrigin._elementRef.nativeElement,
+                )
                 .withLockedPosition(true)
                 .withPush(true)
                 .withPositions([
                     {
-                        originX : 'start',
-                        originY : 'bottom',
+                        originX: 'start',
+                        originY: 'bottom',
                         overlayX: 'start',
                         overlayY: 'top',
                     },
                     {
-                        originX : 'start',
-                        originY : 'top',
+                        originX: 'start',
+                        originY: 'top',
                         overlayX: 'start',
                         overlayY: 'bottom',
                     },
                     {
-                        originX : 'end',
-                        originY : 'bottom',
+                        originX: 'end',
+                        originY: 'bottom',
                         overlayX: 'end',
                         overlayY: 'top',
                     },
                     {
-                        originX : 'end',
-                        originY : 'top',
+                        originX: 'end',
+                        originY: 'top',
                         overlayX: 'end',
                         overlayY: 'bottom',
                     },
@@ -246,8 +252,7 @@ export class MessageQuickViewComponent implements OnInit, OnDestroy
         });
 
         // Detach the overlay from the portal on backdrop click
-        this.overlayRef.backdropClick().subscribe(() =>
-        {
+        this.overlayRef.backdropClick().subscribe(() => {
             this.overlayRef.detach();
         });
     }

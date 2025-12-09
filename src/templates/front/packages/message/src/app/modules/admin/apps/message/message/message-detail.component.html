@@ -1,22 +1,25 @@
-<div class="absolute inset-0 overflow-hidden flex flex-col w-full" *transloco="let t">
-
+<div
+    *transloco="let t"
+    class="absolute inset-0 flex w-full flex-col overflow-hidden"
+>
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-4 sm:px-10 border-b bg-card dark:bg-transparent">
-
-        <div class="flex-1 min-w-0">
+    <div
+        class="bg-card flex flex-0 flex-col border-b p-6 sm:flex-row sm:items-center sm:justify-between sm:px-10 sm:py-4 dark:bg-transparent"
+    >
+        <div class="min-w-0 flex-1">
             <au-breadcrumb [data]="breadcrumb"></au-breadcrumb>
             <au-title>
                 <mat-icon
+                    class="mr-2 icon-size-8"
                     fontSet="material-symbols-outlined"
-                    class="icon-size-8 mr-2"
                 >
                     notification_multiple
                 </mat-icon>
                 {{ t('message.Message') }}
                 <au-chip
+                    class="ml-4"
                     [color]="status() | getColorStatusMessage"
                     size="small"
-                    class="ml-4"
                 >
                     {{ t('message.Statuses.' + status()) }}
                 </au-chip>
@@ -24,240 +27,334 @@
         </div>
 
         <!-- Actions -->
-        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
-
+        <div class="mt-6 flex flex-shrink-0 items-center sm:ml-4 sm:mt-0">
             @if (
                 currentViewAction.id === 'message::message.detail.edit' &&
                 managedObject()?.status !== messageMessageStatus.SENT
-            )
-            {
+            ) {
                 <button
-                    mat-flat-button
                     type="submit"
                     class="ml-3"
+                    [disabled]="
+                        fg.pristine ||
+                        ('message::message.detail.update'
+                            | getSpinnerFlag
+                            | async)
+                    "
+                    mat-flat-button
                     form="messageMessageFormDetail"
                     color="accent"
-                    [disabled]="fg.pristine || ('message::message.detail.update' | getSpinnerFlag | async)"
                 >
-                    @if ('message::message.detail.update' | getSpinnerFlag | async)
-                    {
-                        <mat-icon *ngIf="'message::message.detail.update' | getSpinnerFlag | async">
+                    @if (
+                        'message::message.detail.update'
+                            | getSpinnerFlag
+                            | async
+                    ) {
+                        <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
-                    }
-                    @else
-                    {
+                    } @else {
                         <mat-icon
+                            class="mr-2 icon-size-5"
                             svgIcon="mat_solid:edit"
-                            class="icon-size-5 mr-2"
                             color="accent"
-                        >
-                        </mat-icon>
+                        ></mat-icon>
                     }
                     {{ t('Update') }}
                 </button>
 
-                @if (status() === messageMessageStatus.DRAFT)
-                {
+                @if (status() === messageMessageStatus.DRAFT) {
                     <button
-                        mat-flat-button
                         class="ml-3"
+                        mat-flat-button
                         color="accent"
                         (click)="
                             actionService.action({
-                                id          : 'message::message.detail.sendMessage',
+                                id: 'message::message.detail.sendMessage',
                                 isViewAction: false,
-                                meta        : {
-                                    message: managedObject()
-                                }
+                                meta: {
+                                    message: managedObject(),
+                                },
                             })
                         "
                     >
                         <mat-icon
                             class="icon-size-5"
                             svgIcon="mat_outline:send"
-                        >
-                        </mat-icon>
+                        ></mat-icon>
                         {{ t('Send') }}
                     </button>
-                }
-                @else
-                {
+                } @else {
                     <button
-                        mat-flat-button
                         class="ml-3"
+                        mat-flat-button
                         color="accent"
                         (click)="
                             actionService.action({
-                                id          : 'message::message.detail.draftMessage',
+                                id: 'message::message.detail.draftMessage',
                                 isViewAction: false,
-                                meta        : {
-                                    message: managedObject()
-                                }
+                                meta: {
+                                    message: managedObject(),
+                                },
                             })
                         "
                     >
                         <mat-icon
                             class="icon-size-5"
                             svgIcon="mat_outline:drafts"
-                        >
-                        </mat-icon>
+                        ></mat-icon>
                         {{ t('message.Draft') }}
                     </button>
                 }
             }
 
-            @if (currentViewAction?.id === 'message::message.detail.new')
-            {
+            @if (currentViewAction?.id === 'message::message.detail.new') {
                 <button
-                    mat-flat-button
                     type="submit"
-                    form="messageMessageFormDetail"
                     class="ml-3"
+                    [disabled]="
+                        fg.pristine ||
+                        ('message::message.detail.create'
+                            | getSpinnerFlag
+                            | async)
+                    "
+                    mat-flat-button
+                    form="messageMessageFormDetail"
                     color="accent"
-                    [disabled]="fg.pristine || ('message::message.detail.create' | getSpinnerFlag | async)"
                 >
-                    @if ('message::message.detail.create' | getSpinnerFlag | async)
-                    {
+                    @if (
+                        'message::message.detail.create'
+                            | getSpinnerFlag
+                            | async
+                    ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
-                    }
-                    @else
-                    {
+                    } @else {
                         <mat-icon
+                            class="mr-2 icon-size-5"
                             svgIcon="mat_solid:save"
-                            class="icon-size-5 mr-2"
-                        >
-                        </mat-icon>
+                        ></mat-icon>
                     }
                     {{ t('Create') }}
                 </button>
             }
         </div>
         <!-- / Actions -->
-
     </div>
     <!-- / Header -->
 
     <!-- Main -->
-    <div class="flex-auto pt-6 px-6 sm:pt-6 sm:px-6 overflow-y-auto" cdkScrollable>
-
+    <div
+        class="flex-auto overflow-y-auto px-6 pt-6 sm:px-6 sm:pt-6"
+        cdkScrollable
+    >
         <div class="layout__container mb-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full min-w-0 col-12">
+            <div
+                class="col-12 grid w-full min-w-0 grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3"
+            >
                 <!-- Recipients -->
-                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                <div
+                    class="bg-card flex flex-auto flex-col overflow-hidden rounded-2xl p-6 shadow"
+                >
                     <div class="flex items-start justify-between">
-                        <div class="text-lg font-medium tracking-tight leading-6 truncate">{{ t('message.Recipients') }}</div>
+                        <div
+                            class="truncate text-lg font-medium leading-6 tracking-tight"
+                        >
+                            {{ t('message.Recipients') }}
+                        </div>
                     </div>
-                    <div class="flex flex-col items-center mt-2">
-                        <div class="text-4xl sm:text-5xl font-bold tracking-tight leading-none text-blue-500">{{ totalRecipients() }}</div>
-                        <div class="text-base font-medium text-blue-600 dark:text-blue-500">{{ t('message.Users') }}</div>
+                    <div class="mt-2 flex flex-col items-center">
+                        <div
+                            class="text-4xl font-bold leading-none tracking-tight text-blue-500 sm:text-5xl"
+                        >
+                            {{ totalRecipients() }}
+                        </div>
+                        <div
+                            class="text-base font-medium text-blue-600 dark:text-blue-500"
+                        >
+                            {{ t('message.Users') }}
+                        </div>
                     </div>
                 </div>
                 <!-- Reads -->
-                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                <div
+                    class="bg-card flex flex-auto flex-col overflow-hidden rounded-2xl p-6 shadow"
+                >
                     <div class="flex items-start justify-between">
-                        <div class="text-lg font-medium tracking-tight leading-6 truncate">{{ t('message.Reads') }}</div>
+                        <div
+                            class="truncate text-lg font-medium leading-6 tracking-tight"
+                        >
+                            {{ t('message.Reads') }}
+                        </div>
                     </div>
-                    <div class="flex flex-col items-center mt-2">
-                        <div class="text-4xl sm:text-5xl font-bold tracking-tight leading-none text-green-500">{{ managedObject()?.reads || 0 }}</div>
-                        <div class="text-base font-medium text-green-600 dark:text-green-500">{{ t('message.Messages') }}</div>
+                    <div class="mt-2 flex flex-col items-center">
+                        <div
+                            class="text-4xl font-bold leading-none tracking-tight text-green-500 sm:text-5xl"
+                        >
+                            {{ managedObject()?.reads || 0 }}
+                        </div>
+                        <div
+                            class="text-base font-medium text-green-600 dark:text-green-500"
+                        >
+                            {{ t('message.Messages') }}
+                        </div>
                     </div>
                 </div>
                 <!-- PerRead -->
-                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                <div
+                    class="bg-card flex flex-auto flex-col overflow-hidden rounded-2xl p-6 shadow"
+                >
                     <div class="flex items-start justify-between">
-                        <div class="text-lg font-medium tracking-tight leading-6 truncate">{{ t('message.PerRead') }}</div>
+                        <div
+                            class="truncate text-lg font-medium leading-6 tracking-tight"
+                        >
+                            {{ t('message.PerRead') }}
+                        </div>
                     </div>
-                    <div class="flex flex-col items-center mt-2">
-                        <div class="text-4xl sm:text-5xl font-bold tracking-tight leading-none text-amber-500">{{ totalRecipients() - managedObject()?.reads }}</div>
-                        <div class="text-base font-medium text-amber-600 dark:text-amber-500">{{ t('message.Messages') }}</div>
+                    <div class="mt-2 flex flex-col items-center">
+                        <div
+                            class="text-4xl font-bold leading-none tracking-tight text-amber-500 sm:text-5xl"
+                        >
+                            {{ totalRecipients() - managedObject()?.reads }}
+                        </div>
+                        <div
+                            class="text-base font-medium text-amber-600 dark:text-amber-500"
+                        >
+                            {{ t('message.Messages') }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="form-card">
-
             <form
                 id="messageMessageFormDetail"
-                novalidate
                 [formGroup]="fg"
+                novalidate
                 (ngSubmit)="onSubmit($event)"
             >
                 <mat-tab-group>
-
                     <mat-tab [label]="t('message.Recipients')">
                         <div class="layout__container">
-
-                            @if (showTenantsBelongsInput())
-                            {
+                            @if (showTenantsBelongsInput()) {
                                 <mat-form-field
                                     appearance="outline"
                                     class="col-12"
                                 >
-                                    <mat-label>{{ t('message.TenantManagers') }}</mat-label>
+                                    <mat-label>
+                                        {{ t('message.TenantManagers') }}
+                                    </mat-label>
                                     <mat-select
                                         formControlName="tenantIds"
                                         multiple
                                         auScrollEnd
                                         (scrollEnd)="
                                             tenantAsyncMatSelectSearch({
-                                                asyncMatSelectSearchState: tenantManagersAsyncMatSelectSearchState,
+                                                asyncMatSelectSearchState:
+                                                    tenantManagersAsyncMatSelectSearchState,
                                                 isFromScrollEndEvent: true,
-                                                noResultsFoundTranslation: t('NoResultsFound'),
+                                                noResultsFoundTranslation:
+                                                    t('NoResultsFound'),
                                             })
                                         "
                                     >
                                         <mat-option>
                                             <ngx-mat-select-search
-                                                [formControl]="tenantManagersAsyncMatSelectSearchState.itemFilterCtrl"
-                                                [placeholderLabel]="t('message.FindTenant')"
-                                                [noEntriesFoundLabel]="t('NoResultsFound')"
-                                            >
-                                            </ngx-mat-select-search>
+                                                [formControl]="
+                                                    tenantManagersAsyncMatSelectSearchState.itemFilterCtrl
+                                                "
+                                                [placeholderLabel]="
+                                                    t('message.FindTenant')
+                                                "
+                                                [noEntriesFoundLabel]="
+                                                    t('NoResultsFound')
+                                                "
+                                            ></ngx-mat-select-search>
                                         </mat-option>
-                                        @if (tenantManagersAsyncMatSelectSearchState.selectedItems().size > 0)
-                                        {
-                                            <mat-optgroup [label]="t('SelectedOptions')">
-                                                @for (tenant of tenantManagersAsyncMatSelectSearchState.selectedItems().values(); track tenant.id)
-                                                {
+                                        @if (
+                                            tenantManagersAsyncMatSelectSearchState.selectedItems()
+                                                .size > 0
+                                        ) {
+                                            <mat-optgroup
+                                                [label]="t('SelectedOptions')"
+                                            >
+                                                @for (
+                                                    tenant of tenantManagersAsyncMatSelectSearchState
+                                                        .selectedItems()
+                                                        .values();
+                                                    track tenant.id
+                                                ) {
                                                     <mat-option
                                                         [value]="tenant.id"
-                                                        auMatSelectAddSelectedDirective
                                                         [object]="tenant"
-                                                        [selectedItems]="tenantManagersAsyncMatSelectSearchState.selectedItems"
+                                                        [selectedItems]="
+                                                            tenantManagersAsyncMatSelectSearchState.selectedItems
+                                                        "
+                                                        auMatSelectAddSelectedDirective
                                                     >
-                                                        {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
+                                                        {{ tenant.name
+                                                        }}{{
+                                                            tenant.parent
+                                                                ? ' [' +
+                                                                  tenant.parent
+                                                                      ?.name +
+                                                                  ']'
+                                                                : ''
+                                                        }}
                                                     </mat-option>
                                                 }
                                             </mat-optgroup>
                                             <mat-divider></mat-divider>
                                         }
-                                        @for (tenant of tenantManagersAsyncMatSelectSearchState.filteredItems().values(); track tenant.id)
-                                        {
-                                            @if (!tenantManagersAsyncMatSelectSearchState.selectedItems().has(tenant.id))
-                                            {
+                                        @for (
+                                            tenant of tenantManagersAsyncMatSelectSearchState
+                                                .filteredItems()
+                                                .values();
+                                            track tenant.id
+                                        ) {
+                                            @if (
+                                                !tenantManagersAsyncMatSelectSearchState
+                                                    .selectedItems()
+                                                    .has(tenant.id)
+                                            ) {
                                                 <mat-option
                                                     [value]="tenant.id"
-                                                    [disabled]="tenant.id === null"
-                                                    auMatSelectAddSelectedDirective
+                                                    [disabled]="
+                                                        tenant.id === null
+                                                    "
                                                     [object]="tenant"
-                                                    [selectedItems]="tenantManagersAsyncMatSelectSearchState.selectedItems"
+                                                    [selectedItems]="
+                                                        tenantManagersAsyncMatSelectSearchState.selectedItems
+                                                    "
+                                                    auMatSelectAddSelectedDirective
                                                 >
-                                                    {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
+                                                    {{ tenant.name
+                                                    }}{{
+                                                        tenant.parent
+                                                            ? ' [' +
+                                                              tenant.parent
+                                                                  ?.name +
+                                                              ']'
+                                                            : ''
+                                                    }}
                                                 </mat-option>
                                             }
                                         }
                                     </mat-select>
-                                    @if (tenantManagersAsyncMatSelectSearchState.isLoading())
-                                    {
+                                    @if (
+                                        tenantManagersAsyncMatSelectSearchState.isLoading()
+                                    ) {
                                         <mat-icon matSuffix>
-                                            <mat-spinner diameter="20"></mat-spinner>
+                                            <mat-spinner
+                                                diameter="20"
+                                            ></mat-spinner>
                                         </mat-icon>
                                     }
-                                    <mat-error>{{ formErrors?.tenantIds | async }}</mat-error>
+                                    <mat-error>
+                                        {{ formErrors?.tenantIds | async }}
+                                    </mat-error>
                                 </mat-form-field>
                             }
 
@@ -265,164 +362,272 @@
                                 appearance="outline"
                                 class="col-12"
                             >
-                                <mat-label>{{ t('message.TenantRecipients') }}</mat-label>
+                                <mat-label>
+                                    {{ t('message.TenantRecipients') }}
+                                </mat-label>
                                 <mat-select
                                     formControlName="tenantRecipientIds"
                                     multiple
                                     auScrollEnd
                                     (scrollEnd)="
                                         tenantAsyncMatSelectSearch({
-                                            asyncMatSelectSearchState: tenantRecipientsAsyncMatSelectSearchState,
+                                            asyncMatSelectSearchState:
+                                                tenantRecipientsAsyncMatSelectSearchState,
                                             isFromScrollEndEvent: true,
-                                            noResultsFoundTranslation: t('NoResultsFound'),
+                                            noResultsFoundTranslation:
+                                                t('NoResultsFound'),
                                         })
                                     "
                                 >
                                     <mat-option>
                                         <ngx-mat-select-search
-                                            [formControl]="tenantRecipientsAsyncMatSelectSearchState.itemFilterCtrl"
-                                            [placeholderLabel]="t('message.FindTenant')"
-                                            [noEntriesFoundLabel]="t('NoResultsFound')"
-                                        >
-                                        </ngx-mat-select-search>
+                                            [formControl]="
+                                                tenantRecipientsAsyncMatSelectSearchState.itemFilterCtrl
+                                            "
+                                            [placeholderLabel]="
+                                                t('message.FindTenant')
+                                            "
+                                            [noEntriesFoundLabel]="
+                                                t('NoResultsFound')
+                                            "
+                                        ></ngx-mat-select-search>
                                     </mat-option>
-                                    @if (tenantRecipientsAsyncMatSelectSearchState.selectedItems().size > 0)
-                                    {
-                                        <mat-optgroup [label]="t('SelectedOptions')">
-                                            @for (tenant of tenantRecipientsAsyncMatSelectSearchState.selectedItems().values(); track tenant.id)
-                                            {
+                                    @if (
+                                        tenantRecipientsAsyncMatSelectSearchState.selectedItems()
+                                            .size > 0
+                                    ) {
+                                        <mat-optgroup
+                                            [label]="t('SelectedOptions')"
+                                        >
+                                            @for (
+                                                tenant of tenantRecipientsAsyncMatSelectSearchState
+                                                    .selectedItems()
+                                                    .values();
+                                                track tenant.id
+                                            ) {
                                                 <mat-option
                                                     [value]="tenant.id"
-                                                    auMatSelectAddSelectedDirective
                                                     [object]="tenant"
-                                                    [selectedItems]="tenantRecipientsAsyncMatSelectSearchState.selectedItems"
+                                                    [selectedItems]="
+                                                        tenantRecipientsAsyncMatSelectSearchState.selectedItems
+                                                    "
+                                                    auMatSelectAddSelectedDirective
                                                 >
-                                                    {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
+                                                    {{ tenant.name
+                                                    }}{{
+                                                        tenant.parent
+                                                            ? ' [' +
+                                                              tenant.parent
+                                                                  ?.name +
+                                                              ']'
+                                                            : ''
+                                                    }}
                                                 </mat-option>
                                             }
                                         </mat-optgroup>
                                         <mat-divider></mat-divider>
                                     }
-                                    @for (tenant of tenantRecipientsAsyncMatSelectSearchState.filteredItems().values(); track tenant.id)
-                                    {
-                                        @if (!tenantRecipientsAsyncMatSelectSearchState.selectedItems().has(tenant.id))
-                                        {
+                                    @for (
+                                        tenant of tenantRecipientsAsyncMatSelectSearchState
+                                            .filteredItems()
+                                            .values();
+                                        track tenant.id
+                                    ) {
+                                        @if (
+                                            !tenantRecipientsAsyncMatSelectSearchState
+                                                .selectedItems()
+                                                .has(tenant.id)
+                                        ) {
                                             <mat-option
                                                 [value]="tenant.id"
                                                 [disabled]="tenant.id === null"
-                                                auMatSelectAddSelectedDirective
                                                 [object]="tenant"
-                                                [selectedItems]="tenantRecipientsAsyncMatSelectSearchState.selectedItems"
+                                                [selectedItems]="
+                                                    tenantRecipientsAsyncMatSelectSearchState.selectedItems
+                                                "
+                                                auMatSelectAddSelectedDirective
                                             >
-                                                {{ tenant.name }}{{ (tenant.parent ? ' [' + tenant.parent?.name + ']' : '') }}
+                                                {{ tenant.name
+                                                }}{{
+                                                    tenant.parent
+                                                        ? ' [' +
+                                                          tenant.parent?.name +
+                                                          ']'
+                                                        : ''
+                                                }}
                                             </mat-option>
                                         }
                                     }
                                 </mat-select>
-                                @if (tenantRecipientsAsyncMatSelectSearchState.isLoading())
-                                {
+                                @if (
+                                    tenantRecipientsAsyncMatSelectSearchState.isLoading()
+                                ) {
                                     <mat-icon matSuffix>
-                                        <mat-spinner diameter="20"></mat-spinner>
+                                        <mat-spinner
+                                            diameter="20"
+                                        ></mat-spinner>
                                     </mat-icon>
                                 }
-                                <mat-error>{{ formErrors?.tenantRecipientIds | async }}</mat-error>
+                                <mat-error>
+                                    {{ formErrors?.tenantRecipientIds | async }}
+                                </mat-error>
                             </mat-form-field>
                             <mat-form-field
                                 appearance="outline"
                                 class="col-12"
                             >
-                                <mat-label>{{ t('message.ScopeRecipients') }}</mat-label>
+                                <mat-label>
+                                    {{ t('message.ScopeRecipients') }}
+                                </mat-label>
                                 <mat-select
                                     formControlName="scopeRecipients"
                                     multiple
                                 >
                                     <mat-option>
                                         <ngx-mat-select-search
-                                            [formControl]="scopeRecipientFilterCtrl"
-                                            [placeholderLabel]="t('message.FindScope')"
-                                            [noEntriesFoundLabel]="t('NoResultsFound')"
-                                        >
-                                        </ngx-mat-select-search>
+                                            [formControl]="
+                                                scopeRecipientFilterCtrl
+                                            "
+                                            [placeholderLabel]="
+                                                t('message.FindScope')
+                                            "
+                                            [noEntriesFoundLabel]="
+                                                t('NoResultsFound')
+                                            "
+                                        ></ngx-mat-select-search>
                                     </mat-option>
-                                    @for (scope of filteredScopeRecipients$ | async; track scope)
-                                    {
+                                    @for (
+                                        scope of filteredScopeRecipients$
+                                            | async;
+                                        track scope
+                                    ) {
                                         <mat-option [value]="scope.code">
                                             {{ scope.name }}
                                         </mat-option>
                                     }
                                 </mat-select>
-                                <mat-error>{{ formErrors?.scopeRecipients | async }}</mat-error>
+                                <mat-error>
+                                    {{ formErrors?.scopeRecipients | async }}
+                                </mat-error>
                             </mat-form-field>
                             <mat-form-field
                                 appearance="outline"
                                 class="col-12"
                             >
-                                <mat-label>{{ t('message.TagRecipients') }}</mat-label>
+                                <mat-label>
+                                    {{ t('message.TagRecipients') }}
+                                </mat-label>
                                 <mat-select
                                     formControlName="tagRecipients"
                                     multiple
                                 >
                                     <mat-option>
                                         <ngx-mat-select-search
-                                            [formControl]="tagRecipientFilterCtrl"
-                                            [placeholderLabel]="t('message.FindTag')"
-                                            [noEntriesFoundLabel]="t('NoResultsFound')"
-                                        >
-                                        </ngx-mat-select-search>
+                                            [formControl]="
+                                                tagRecipientFilterCtrl
+                                            "
+                                            [placeholderLabel]="
+                                                t('message.FindTag')
+                                            "
+                                            [noEntriesFoundLabel]="
+                                                t('NoResultsFound')
+                                            "
+                                        ></ngx-mat-select-search>
                                     </mat-option>
-                                    @for (tag of filteredTagRecipients$ | async; track tag.name)
-                                    {
+                                    @for (
+                                        tag of filteredTagRecipients$ | async;
+                                        track tag.name
+                                    ) {
                                         <mat-option [value]="tag.name">
                                             {{ tag.name }}
                                         </mat-option>
                                     }
                                 </mat-select>
-                                <mat-error>{{ formErrors?.tagRecipients | async }}</mat-error>
+                                <mat-error>
+                                    {{ formErrors?.tagRecipients | async }}
+                                </mat-error>
                             </mat-form-field>
 
                             <!-- #region component to manage account recipients -->
                             <au-grid-select-multiple-elements
+                                #messageAccountsGridSelectMultipleElements
                                 class="col-12 mt-0"
                                 [id]="messageAccountsGridId"
                                 [label]="t('message.AccountRecipients')"
                                 [gridId]="messageAccountsGridId"
-                                [originColumnsConfig]="originMessageAccountsColumnsConfig"
-                                [columnsConfig]="messageAccountsColumnsConfig$ | async"
+                                [originColumnsConfig]="
+                                    originMessageAccountsColumnsConfig
+                                "
+                                [columnsConfig]="
+                                    messageAccountsColumnsConfig$ | async
+                                "
                                 [gridData]="messageAccountsGridData$ | async"
                                 [gridState]="messageAccountsGridState"
-                                [dialogColumnsConfig]="accountsDialogColumnsConfig$ | async"
-                                [dialogGridData]="accountsDialogGridData$ | async"
+                                [dialogColumnsConfig]="
+                                    accountsDialogColumnsConfig$ | async
+                                "
+                                [dialogGridData]="
+                                    accountsDialogGridData$ | async
+                                "
                                 [dialogGridId]="accountsDialogGridId"
-                                [dialogOriginColumnsConfig]="accountsDialogOriginColumnsConfig"
-                                [selectedCheckboxRowModel]="selectedCheckboxRowModel"
-                                (dialogSelectedCheckboxRowModelChange)="handleAccountsDialogRowsSectionChange($event)"
-                                (selectedCheckboxRowModelChange)="handleAccountsRowsSectionChange($event)"
-                                #messageAccountsGridSelectMultipleElements
+                                [dialogOriginColumnsConfig]="
+                                    accountsDialogOriginColumnsConfig
+                                "
+                                [selectedCheckboxRowModel]="
+                                    selectedCheckboxRowModel
+                                "
+                                (dialogSelectedCheckboxRowModelChange)="
+                                    handleAccountsDialogRowsSectionChange(
+                                        $event
+                                    )
+                                "
+                                (selectedCheckboxRowModelChange)="
+                                    handleAccountsRowsSectionChange($event)
+                                "
                             >
                                 <au-grid-translations
                                     [for]="messageAccountsGridId"
                                     [actionsMenu]="{
                                         unlink: t('Unlink'),
                                         cancel: t('Cancel'),
-                                        close: t('Close')
+                                        close: t('Close'),
                                     }"
                                 >
-                                    @for (columnConfig of originMessageAccountsColumnsConfig; track columnConfig.field)
-                                    {
-                                        <au-grid-column-translation [field]="columnConfig.field">
-                                            {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                                    @for (
+                                        columnConfig of originMessageAccountsColumnsConfig;
+                                        track columnConfig.field
+                                    ) {
+                                        <au-grid-column-translation
+                                            [field]="columnConfig.field"
+                                        >
+                                            {{
+                                                t(
+                                                    columnConfig.translation
+                                                        ? columnConfig.translation
+                                                        : columnConfig.field.toPascalCase()
+                                                )
+                                            }}
                                         </au-grid-column-translation>
                                     }
                                 </au-grid-translations>
                                 <au-grid-translations
                                     [for]="accountsDialogGridId"
                                 >
-                                    @for (columnConfig of accountsDialogColumnsConfig$ | async; track columnConfig.field)
-                                    {
+                                    @for (
+                                        columnConfig of accountsDialogColumnsConfig$
+                                            | async;
+                                        track columnConfig.field
+                                    ) {
                                         <au-grid-column-translation
                                             [field]="columnConfig.field"
                                         >
-                                            {{ t(columnConfig.translation ? columnConfig.translation : columnConfig.field.toPascalCase()) }}
+                                            {{
+                                                t(
+                                                    columnConfig.translation
+                                                        ? columnConfig.translation
+                                                        : columnConfig.field.toPascalCase()
+                                                )
+                                            }}
                                         </au-grid-column-translation>
                                     }
                                 </au-grid-translations>
@@ -430,30 +635,44 @@
                                     auGridSelectMultipleCustomHeaderTemplate
                                     position="left"
                                 >
-                                    @if (managedObject()?.status !== messageMessageStatus.SENT)
-                                    {
-                                        <div class="flex justify-start items-center">
+                                    @if (
+                                        managedObject()?.status !==
+                                        messageMessageStatus.SENT
+                                    ) {
+                                        <div
+                                            class="flex items-center justify-start"
+                                        >
                                             <button
-                                                mat-icon-button
-                                                class="mr-2"
                                                 type="button"
-                                                (click)="handleOpenAccountsDialog()"
+                                                class="mr-2"
+                                                mat-icon-button
+                                                (click)="
+                                                    handleOpenAccountsDialog()
+                                                "
                                             >
-                                                <mat-icon svgIcon="mat_solid:add"></mat-icon>
-                                                <span class="cdk-visually-hidden">
+                                                <mat-icon
+                                                    svgIcon="mat_solid:add"
+                                                ></mat-icon>
+                                                <span
+                                                    class="cdk-visually-hidden"
+                                                >
                                                     Add new item
                                                 </span>
                                             </button>
                                             <button
+                                                [disabled]="
+                                                    messageAccountsSelectedRows.length ===
+                                                    0
+                                                "
                                                 mat-flat-button
-                                                [disabled]="messageAccountsSelectedRows.length === 0"
-                                                (click)="handleRemoveMessageAccountsSelected()"
+                                                (click)="
+                                                    handleRemoveMessageAccountsSelected()
+                                                "
                                             >
                                                 <mat-icon
                                                     class="mr-2"
                                                     svgIcon="mat_solid:link_off"
-                                                >
-                                                </mat-icon>
+                                                ></mat-icon>
                                                 {{ t('RemoveSelected') }}
                                             </button>
                                         </div>
@@ -465,11 +684,18 @@
                                 >
                                     <ng-container>
                                         <button
+                                            [disabled]="
+                                                accountsDialogSelectedRows.length ===
+                                                0
+                                            "
                                             mat-flat-button
-                                            [disabled]="accountsDialogSelectedRows.length === 0"
-                                            (click)="handleAddAccountsSelected()"
+                                            (click)="
+                                                handleAddAccountsSelected()
+                                            "
                                         >
-                                            <mat-icon class="mr-2">add_link</mat-icon>
+                                            <mat-icon class="mr-2">
+                                                add_link
+                                            </mat-icon>
                                             {{ t('AddSelected') }}
                                         </button>
                                     </ng-container>
@@ -490,13 +716,19 @@
                                     let-columnConfig="columnConfig"
                                     let-row="row"
                                 >
-                                   <mat-icon
-                                        fontSet="material-symbols-outlined"
-                                        class="icon-size-6 mr-2 cursor-pointer"
-                                        [matTooltip]="tenants | map:'name' | join"
+                                    <mat-icon
                                         aria-hidden="false"
+                                        class="mr-2 cursor-pointer icon-size-6"
+                                        [matTooltip]="
+                                            tenants | map: 'name' | join
+                                        "
+                                        fontSet="material-symbols-outlined"
                                         matBadgeSize="small"
-                                        matBadge="{{ tenants.length > 0 ? tenants.length : '' }}"
+                                        matBadge="{{
+                                            tenants.length > 0
+                                                ? tenants.length
+                                                : ''
+                                        }}"
                                     >
                                         tenancy
                                     </mat-icon>
@@ -509,12 +741,16 @@
                                     let-row="row"
                                 >
                                     <mat-icon
-                                        fontSet="material-symbols-outlined"
-                                        class="icon-size-6 mr-2 cursor-pointer"
-                                        [matTooltip]="scopes | join"
                                         aria-hidden="false"
+                                        class="mr-2 cursor-pointer icon-size-6"
+                                        [matTooltip]="scopes | join"
+                                        fontSet="material-symbols-outlined"
                                         matBadgeSize="small"
-                                        matBadge="{{ scopes?.length > 0 ? scopes.length : '' }}"
+                                        matBadge="{{
+                                            scopes?.length > 0
+                                                ? scopes.length
+                                                : ''
+                                        }}"
                                     >
                                         ads_click
                                     </mat-icon>
@@ -527,12 +763,14 @@
                                     let-row="row"
                                 >
                                     <mat-icon
-                                        fontSet="material-symbols-outlined"
-                                        class="icon-size-6 mr-2 cursor-pointer"
-                                        [matTooltip]="tags | join"
                                         aria-hidden="false"
+                                        class="mr-2 cursor-pointer icon-size-6"
+                                        [matTooltip]="tags | join"
+                                        fontSet="material-symbols-outlined"
                                         matBadgeSize="small"
-                                        matBadge="{{ tags?.length > 0 ? tags.length : '' }}"
+                                        matBadge="{{
+                                            tags?.length > 0 ? tags.length : ''
+                                        }}"
                                     >
                                         tag
                                     </mat-icon>
@@ -544,13 +782,19 @@
                                     let-columnConfig="columnConfig"
                                     let-row="row"
                                 >
-                                   <mat-icon
-                                        fontSet="material-symbols-outlined"
-                                        class="icon-size-6 mr-2 cursor-pointer"
-                                        [matTooltip]="tenants | map:'name' | join"
+                                    <mat-icon
                                         aria-hidden="false"
+                                        class="mr-2 cursor-pointer icon-size-6"
+                                        [matTooltip]="
+                                            tenants | map: 'name' | join
+                                        "
+                                        fontSet="material-symbols-outlined"
                                         matBadgeSize="small"
-                                        matBadge="{{ tenants.length > 0 ? tenants.length : '' }}"
+                                        matBadge="{{
+                                            tenants.length > 0
+                                                ? tenants.length
+                                                : ''
+                                        }}"
                                     >
                                         tenancy
                                     </mat-icon>
@@ -563,12 +807,16 @@
                                     let-row="row"
                                 >
                                     <mat-icon
-                                        fontSet="material-symbols-outlined"
-                                        class="icon-size-6 mr-2 cursor-pointer"
-                                        [matTooltip]="scopes | join"
                                         aria-hidden="false"
+                                        class="mr-2 cursor-pointer icon-size-6"
+                                        [matTooltip]="scopes | join"
+                                        fontSet="material-symbols-outlined"
                                         matBadgeSize="small"
-                                        matBadge="{{ scopes?.length > 0 ? scopes.length : '' }}"
+                                        matBadge="{{
+                                            scopes?.length > 0
+                                                ? scopes.length
+                                                : ''
+                                        }}"
                                     >
                                         ads_click
                                     </mat-icon>
@@ -581,58 +829,56 @@
                                     let-row="row"
                                 >
                                     <mat-icon
-                                        fontSet="material-symbols-outlined"
-                                        class="icon-size-6 mr-2 cursor-pointer"
-                                        [matTooltip]="tags | join"
                                         aria-hidden="false"
+                                        class="mr-2 cursor-pointer icon-size-6"
+                                        [matTooltip]="tags | join"
+                                        fontSet="material-symbols-outlined"
                                         matBadgeSize="small"
-                                        matBadge="{{ tags?.length > 0 ? tags.length : '' }}"
+                                        matBadge="{{
+                                            tags?.length > 0 ? tags.length : ''
+                                        }}"
                                     >
                                         tag
                                     </mat-icon>
                                 </ng-template>
                             </au-grid-select-multiple-elements>
                             <!-- #endregion component to manage account recipients -->
-
                         </div>
                     </mat-tab>
 
                     <mat-tab [label]="t('message.MessageWriting')">
                         <div class="layout__container">
-
                             <mat-form-field
                                 appearance="outline"
                                 class="au-datepicker col-4"
                             >
                                 <mat-label>{{ t('message.SendAt') }}</mat-label>
                                 <input
+                                    [mtxDatetimepicker]="sendAtPicker"
                                     matInput
                                     formControlName="sendAt"
                                     auDatetimepickerSqlFormat
-                                    [mtxDatetimepicker]="sendAtPicker"
-                                >
+                                />
                                 <mtx-datetimepicker-toggle
                                     [for]="sendAtPicker"
                                     matSuffix
-                                >
-                                </mtx-datetimepicker-toggle>
+                                ></mtx-datetimepicker-toggle>
                                 <mtx-datetimepicker
                                     #sendAtPicker
                                     type="datetime"
-                                    mode="landscape"
                                     [multiYearSelector]="false"
-                                    startView="month"
                                     [twelvehour]="false"
                                     [timeInterval]="1"
                                     [touchUi]="false"
-                                >
-                                </mtx-datetimepicker>
-                                <mat-error>{{ formErrors?.sendAt | async }}</mat-error>
+                                    mode="landscape"
+                                    startView="month"
+                                ></mtx-datetimepicker>
+                                <mat-error>
+                                    {{ formErrors?.sendAt | async }}
+                                </mat-error>
                             </mat-form-field>
                             <div class="col-4 pt-5">
-                                <mat-checkbox
-                                    formControlName="isImportant"
-                                >
+                                <mat-checkbox formControlName="isImportant">
                                     {{ t('message.IsImportant') }}
                                 </mat-checkbox>
                             </div>
@@ -640,39 +886,54 @@
                                 appearance="outline"
                                 class="col-12"
                             >
-                                <mat-label>{{ t('message.Subject') }}</mat-label>
+                                <mat-label>
+                                    {{ t('message.Subject') }}
+                                </mat-label>
                                 <input
                                     matInput
                                     formControlName="subject"
                                     maxlength="255"
                                     required
-                                >
-                                <mat-error>{{ formErrors?.subject | async }}</mat-error>
+                                />
+                                <mat-error>
+                                    {{ formErrors?.subject | async }}
+                                </mat-error>
                             </mat-form-field>
                             <div class="col-12">
                                 <editor
-                                    [init]="initEditor | setValueObject : 'placeholder' : t('message.StartHereToWriteYourMessage')"
+                                    [init]="
+                                        initEditor
+                                            | setValueObject
+                                                : 'placeholder'
+                                                : t(
+                                                      'message.StartHereToWriteYourMessage'
+                                                  )
+                                    "
                                     [licenseKey]="tinymceLicenseKey"
                                     [apiKey]="tinymceApiKey"
                                     formControlName="body"
-                                >
-                                </editor>
-                                <mat-error>{{ formErrors?.body | async }}</mat-error>
+                                ></editor>
+                                <mat-error>
+                                    {{ formErrors?.body | async }}
+                                </mat-error>
                             </div>
 
-                            @if (false)
-                            {
+                            @if (false) {
                                 <mat-form-field
                                     appearance="outline"
                                     class="col-12"
                                 >
-                                    <mat-label>{{ t('message.Link') }}</mat-label>
+                                    <mat-label>
+                                        {{ t('message.Link') }}
+                                    </mat-label>
                                     <input
                                         matInput
                                         formControlName="link"
                                         maxlength="2046"
-                                    >
-                                    <mat-error>{{ formErrors?.link | async }}</mat-error>
+                                    />
+                                    <mat-error>
+                                        {{ formErrors?.link | async }}
+                                    </mat-error>
                                 </mat-form-field>
                                 <div class="col-4 pt-5">
                                     <mat-checkbox
@@ -685,18 +946,24 @@
                                     appearance="outline"
                                     class="col-8"
                                 >
-                                    <mat-label>{{ t('message.Icon') }}</mat-label>
+                                    <mat-label>
+                                        {{ t('message.Icon') }}
+                                    </mat-label>
                                     <input
                                         matInput
                                         formControlName="icon"
                                         maxlength="64"
-                                    >
-                                    <mat-error>{{ formErrors?.icon | async }}</mat-error>
+                                    />
+                                    <mat-error>
+                                        {{ formErrors?.icon | async }}
+                                    </mat-error>
                                 </mat-form-field>
                             }
 
-                            @if (managedObject()?.status !== messageMessageStatus.SENT)
-                            {
+                            @if (
+                                managedObject()?.status !==
+                                messageMessageStatus.SENT
+                            ) {
                                 <au-file-upload
                                     class="col-12"
                                     [isMultiple]="true"
@@ -704,133 +971,161 @@
                                     [browseLabel]="t('BrowseLabel')"
                                     (onFileDrop)="
                                         actionService.action({
-                                            id          : 'message::message.detail.addAttachment',
+                                            id: 'message::message.detail.addAttachment',
                                             isViewAction: false,
                                             meta: {
-                                                files: $event
-                                            }
+                                                files: $event,
+                                            },
                                         })
                                     "
-                                >
-                                </au-file-upload>
+                                ></au-file-upload>
                             }
 
                             <div class="col-12">
-                                @for (attachment of this.fg.get('attachmentsInputFile').value; track attachment.name; let i = $index)
-                                {
-                                    <div class="flex justify-between items-center p-4 mb-2 border rounded">
+                                @for (
+                                    attachment of this.fg.get(
+                                        'attachmentsInputFile'
+                                    ).value;
+                                    track attachment.name;
+                                    let i = $index
+                                ) {
+                                    <div
+                                        class="mb-2 flex items-center justify-between rounded border p-4"
+                                    >
                                         <p
-                                            class="text-base flex items-center cursor-pointer"
+                                            class="flex cursor-pointer items-center text-base"
                                             (click)="
                                                 actionService.action({
                                                     id: 'message::message.detail.downloadAttachment',
                                                     isViewAction: false,
                                                     meta: {
-                                                        attachment
-                                                    }
+                                                        attachment,
+                                                    },
                                                 })
                                             "
                                         >
                                             <mat-icon
-                                                class="icon-size-5 mr-2"
-                                                [svgIcon]="'heroicons_solid:document'"
-                                            >
-                                            </mat-icon>
+                                                class="mr-2 icon-size-5"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document'
+                                                "
+                                            ></mat-icon>
                                             {{ attachment.name }}
                                         </p>
                                         <p class="text-base opacity-60">
                                             {{ attachment.type }}
                                         </p>
                                         <p class="text-base opacity-60">
-                                            {{ (attachment.size | formatFileSize).size }}{{ (attachment.size | formatFileSize).unit }}
+                                            {{
+                                                (
+                                                    attachment.size
+                                                    | formatFileSize
+                                                ).size
+                                            }}{{
+                                                (
+                                                    attachment.size
+                                                    | formatFileSize
+                                                ).unit
+                                            }}
                                         </p>
                                         <button
                                             class="ml-3"
                                             mat-icon-button
                                             (click)="
                                                 actionService.action({
-                                                    id          : 'message::message.detail.removeAttachment',
+                                                    id: 'message::message.detail.removeAttachment',
                                                     isViewAction: false,
-                                                    meta    : {
+                                                    meta: {
                                                         attachment,
                                                         index: i,
-                                                    }
+                                                    },
                                                 })
                                             "
                                         >
                                             <mat-icon
                                                 class="icon-size-5"
                                                 svgIcon="mat_solid:delete"
-                                            >
-                                            </mat-icon>
+                                            ></mat-icon>
                                         </button>
                                     </div>
                                 }
 
-                                @for (attachment of managedObject()?.attachments; track attachment.id)
-                                {
-                                    <div class="flex justify-between items-center p-4 mb-2 border rounded">
+                                @for (
+                                    attachment of managedObject()?.attachments;
+                                    track attachment.id
+                                ) {
+                                    <div
+                                        class="mb-2 flex items-center justify-between rounded border p-4"
+                                    >
                                         <p
-                                            class="text-base flex items-center cursor-pointer"
+                                            class="flex cursor-pointer items-center text-base"
                                             (click)="
                                                 actionService.action({
                                                     id: 'message::message.detail.downloadAttachment',
                                                     isViewAction: false,
                                                     meta: {
-                                                        attachment
-                                                    }
+                                                        attachment,
+                                                    },
                                                 })
                                             "
                                         >
                                             <mat-icon
-                                                class="icon-size-5 mr-2"
-                                                [svgIcon]="'heroicons_solid:document'"
-                                            >
-                                            </mat-icon>
+                                                class="mr-2 icon-size-5"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document'
+                                                "
+                                            ></mat-icon>
                                             {{ attachment.originFilename }}
                                         </p>
                                         <p class="text-base opacity-60">
                                             {{ attachment.mimetype }}
                                         </p>
                                         <p class="text-base opacity-60">
-                                            {{ (attachment.size | formatFileSize).size }}{{ (attachment.size | formatFileSize).unit }}
+                                            {{
+                                                (
+                                                    attachment.size
+                                                    | formatFileSize
+                                                ).size
+                                            }}{{
+                                                (
+                                                    attachment.size
+                                                    | formatFileSize
+                                                ).unit
+                                            }}
                                         </p>
-                                        @if (managedObject()?.status !== messageMessageStatus.SENT)
-                                        {
+                                        @if (
+                                            managedObject()?.status !==
+                                            messageMessageStatus.SENT
+                                        ) {
                                             <button
                                                 class="ml-3"
                                                 mat-icon-button
                                                 (click)="
                                                     actionService.action({
-                                                        id          : 'message::message.detail.removeAttachment',
+                                                        id: 'message::message.detail.removeAttachment',
                                                         isViewAction: false,
-                                                        meta    : {
+                                                        meta: {
                                                             attachment,
-                                                            message: managedObject()
-                                                        }
+                                                            message:
+                                                                managedObject(),
+                                                        },
                                                     })
                                                 "
                                             >
                                                 <mat-icon
                                                     class="icon-size-5"
                                                     svgIcon="mat_solid:delete"
-                                                >
-                                                </mat-icon>
+                                                ></mat-icon>
                                             </button>
                                         }
                                     </div>
                                 }
                             </div>
-
                         </div>
                     </mat-tab>
                 </mat-tab-group>
-
             </form>
-
         </div>
-
     </div>
     <!-- / Main -->
-
 </div>

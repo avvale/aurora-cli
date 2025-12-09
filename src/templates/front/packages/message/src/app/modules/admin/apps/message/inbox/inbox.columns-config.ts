@@ -1,19 +1,28 @@
 import { ColumnConfig, ColumnDataType } from '@aurora';
+import { TranslocoService } from '@jsverse/transloco';
 
-export const inboxColumnsConfig: ColumnConfig[] = [
+export const inboxColumnsConfig: (properties?: {
+    translator?: TranslocoService;
+}) => ColumnConfig[] = ({
+    translator = null,
+}: {
+    translator?: TranslocoService;
+} = {}): ColumnConfig[] => [
     {
         type: ColumnDataType.STRING,
         field: 'tenantIds',
         sort: 'tenantIds',
         translation: 'message.TenantIds',
         hidden: true,
+        searchable: false,
     },
     {
         type: ColumnDataType.NUMBER,
-        field: 'sort',
-        sort: 'sort',
-        translation: 'message.Sort',
+        field: 'messageRowId',
+        sort: 'messageRowId',
+        translation: 'message.MessageRowId',
         hidden: true,
+        searchable: false,
     },
     {
         type: ColumnDataType.STRING,
@@ -29,7 +38,7 @@ export const inboxColumnsConfig: ColumnConfig[] = [
         translation: 'message.IsImportant',
     },
     {
-        type: ColumnDataType.STRING,
+        type: ColumnDataType.TIMESTAMP,
         field: 'sentAt',
         sort: 'sentAt',
         translation: 'message.SentAt',
@@ -49,36 +58,18 @@ export const inboxColumnsConfig: ColumnConfig[] = [
         isUnaccent: true,
         hidden: true,
     },
-    /* {
-        type       : ColumnDataType.STRING,
-        field      : 'link',
-        sort       : 'link',
-        translation: 'message.Link',
-        isUnaccent : true,
-    },
-    {
-        type       : ColumnDataType.BOOLEAN,
-        field      : 'isInternalLink',
-        sort       : 'isInternalLink',
-        translation: 'message.IsInternalLink',
-    },
-    {
-        type       : ColumnDataType.STRING,
-        field      : 'icon',
-        sort       : 'icon',
-        translation: 'message.Icon',
-        isUnaccent : true,
-    }, */
     {
         type: ColumnDataType.BOOLEAN,
         field: 'isRead',
         sort: 'isRead',
         translation: 'message.IsRead',
+        searchable: false,
     },
     {
         type: ColumnDataType.BOOLEAN,
         field: 'isReadAtLeastOnce',
         sort: 'isReadAtLeastOnce',
         translation: 'message.IsReadAtLeastOnce',
+        searchable: false,
     },
 ];

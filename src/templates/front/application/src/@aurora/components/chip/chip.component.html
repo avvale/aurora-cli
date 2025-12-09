@@ -1,4 +1,8 @@
-<span class="flex justify-center leading-none border rounded-3xl chipsize-{{ size }} chipbg-{{ color }}">
+<span
+    class="flex justify-center rounded-3xl border leading-none"
+    [ngClass]="['chipsize-' + size, isPaletteColor ? 'chipbg-' + color : '']"
+    [ngStyle]="backgroundStyles"
+>
     <span class="font-normal tracking-wide text-gray-100">
         <ng-content></ng-content>
     </span>

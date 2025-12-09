@@ -1,54 +1,53 @@
 /* eslint-disable max-len */
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { EnvironmentInformation, EnvironmentsInformation } from './environments-information.types';
 import { BehaviorSubject, Observable } from 'rxjs';
 import packageFile from '../../../../package.json';
+import {
+    EnvironmentInformation,
+    EnvironmentsInformation,
+} from './environments-information.types';
 
 @Injectable({
     providedIn: 'root',
 })
-export class EnvironmentsInformationService
-{
-    environmentsInformationSubject$: BehaviorSubject<EnvironmentsInformation | null> = new BehaviorSubject({
-        app: {
-            name       : '',
-            version    : '0.0.0',
-            environment: 'Production',
-        },
-        server: {
-            name       : '',
-            version    : '0.0.0',
-            environment: 'Production',
-        },
-    });
+export class EnvironmentsInformationService {
+    environmentsInformationSubject$: BehaviorSubject<EnvironmentsInformation | null> =
+        new BehaviorSubject({
+            front: {
+                name: '',
+                version: '0.0.0',
+                environment: 'Production',
+            },
+            back: {
+                name: '',
+                version: '0.0.0',
+                environment: 'Production',
+            },
+        });
 
-    get environmentsInformation$(): Observable<EnvironmentsInformation>
-    {
+    get environmentsInformation$(): Observable<EnvironmentsInformation> {
         return this.environmentsInformationSubject$.asObservable();
     }
 
-    constructor(
-        private http: HttpClient,
-    )
-    {
+    constructor(private http: HttpClient) {
         this.init();
     }
 
-    init(): void
-    {
+    init(): void {
         this.http
-            .get<EnvironmentInformation>(`${environment.api.rest}/core/environment-information`)
-            .subscribe(environmentInformationServer =>
-            {
+            .get<EnvironmentInformation>(
+                `${environment.api.rest}/core/environment-information`,
+            )
+            .subscribe((environmentInformationServer) => {
                 this.environmentsInformationSubject$.next({
-                    app: {
-                        name       : packageFile.name,
-                        version    : packageFile.version,
+                    front: {
+                        name: packageFile.name,
+                        version: packageFile.version,
                         environment: environmentInformationServer.environment,
                     },
-                    server: environmentInformationServer,
+                    back: environmentInformationServer,
                 });
             });
     }

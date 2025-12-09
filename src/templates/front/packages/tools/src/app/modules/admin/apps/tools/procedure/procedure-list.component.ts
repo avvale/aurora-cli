@@ -273,7 +273,7 @@ export class ProcedureListComponent extends ViewBaseComponent {
                     title: `${this.translocoService.translate('tools.RunScripts')}`,
                     message: this.translocoService.translate(
                         'tools.RunScriptsDisclaimer',
-                        { version: environmentsInformation.server.version },
+                        { version: environmentsInformation.back.version },
                     ),
                     icon: {
                         show: true,
