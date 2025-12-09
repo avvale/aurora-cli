@@ -4,14 +4,14 @@ import { MessageInboxId } from '@app/message/inbox/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(MessageDeleteInboxByIdCommand)
-export class MessageDeleteInboxByIdCommandHandler implements ICommandHandler<MessageDeleteInboxByIdCommand>
+export class MessageDeleteInboxByIdCommandHandler
+    implements ICommandHandler<MessageDeleteInboxByIdCommand>
 {
     constructor(
         private readonly deleteInboxByIdService: MessageDeleteInboxByIdService,
     ) {}
 
-    async execute(command: MessageDeleteInboxByIdCommand): Promise<void>
-    {
+    async execute(command: MessageDeleteInboxByIdCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteInboxByIdService.main(
             new MessageInboxId(command.id),

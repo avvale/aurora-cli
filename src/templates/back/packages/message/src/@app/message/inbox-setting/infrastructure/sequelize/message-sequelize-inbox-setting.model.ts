@@ -1,25 +1,43 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    Column,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'MessageInboxSetting',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['accountId'],
-			unique: true,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['accountId'],
+            unique: true,
+        },
     ],
 })
-export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
-{
+export class MessageInboxSettingModel extends Model<MessageInboxSettingModel> {
     @AfterCreate
-    static auditingCreate(instance: MessageInboxSettingModel, options): void
-    {
+    static auditingCreate(instance: MessageInboxSettingModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -30,8 +48,10 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: MessageInboxSettingModel, options): void
-    {
+    static auditingBulkCreate(
+        instance: MessageInboxSettingModel,
+        options,
+    ): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -42,8 +62,7 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: MessageInboxSettingModel, options): void
-    {
+    static auditingUpdate(instance: MessageInboxSettingModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -54,8 +73,7 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -66,8 +84,7 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: MessageInboxSettingModel, options): void
-    {
+    static auditingDestroy(instance: MessageInboxSettingModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -78,8 +95,7 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -90,8 +106,7 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: MessageInboxSettingModel, options): void
-    {
+    static auditingRestore(instance: MessageInboxSettingModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -102,8 +117,7 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -114,8 +128,7 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: MessageInboxSettingModel, options): void
-    {
+    static auditingUpsert(instance: MessageInboxSettingModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -134,6 +147,14 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     id: string;
 
     @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
+
+    @Column({
         field: 'accountId',
         allowNull: false,
         type: DataTypes.UUID,
@@ -141,11 +162,11 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
     accountId: string;
 
     @Column({
-        field: 'sort',
+        field: 'lastReadMessageRowId',
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
     })
-    sort: number;
+    lastReadMessageRowId: number;
 
     @Column({
         field: 'createdAt',
@@ -167,5 +188,4 @@ export class MessageInboxSettingModel extends Model<MessageInboxSettingModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

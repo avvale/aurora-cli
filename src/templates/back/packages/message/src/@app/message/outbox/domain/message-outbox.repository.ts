@@ -1,28 +1,31 @@
-import { MessageOutboxId } from './value-objects';
 import { MessageOutbox } from '@app/message/outbox';
-import { CQMetadata, IRepository, LiteralObject, Pagination, QueryStatement } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IRepository,
+    LiteralObject,
+    Pagination,
+    QueryStatement,
+} from '@aurorajs.dev/core';
+import { MessageOutboxId } from './value-objects';
 
-export abstract class MessageIOutboxRepository implements IRepository<MessageOutbox>
+export abstract class MessageIOutboxRepository
+    implements IRepository<MessageOutbox>
 {
     abstract readonly repository: any;
 
     // paginate records
-    abstract paginate(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<Pagination<MessageOutbox>>;
+    abstract paginate(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<Pagination<MessageOutbox>>;
 
     // find a single record
-    abstract find(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<MessageOutbox | null>;
+    abstract find(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<MessageOutbox | null>;
 
     // find a single record by id
     abstract findById(
@@ -32,34 +35,28 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<MessageOutbox | null>;
 
     // get multiple records
-    abstract get(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<MessageOutbox[]>;
+    abstract get(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<MessageOutbox[]>;
 
     // get records with rawSQL
-    abstract rawSQL(
-        options?: {
-            rawSQL?: string;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<MessageOutbox[]>;
+    abstract rawSQL(options?: {
+        rawSQL?: string;
+        cQMetadata?: CQMetadata;
+    }): Promise<MessageOutbox[]>;
 
     // count records
-    abstract count(
-        options?: {
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<number>;
+    abstract count(options?: {
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<number>;
 
     // max record
     abstract max(
@@ -68,7 +65,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // min record
@@ -78,7 +75,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // sum record
@@ -88,7 +85,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             queryStatement?: QueryStatement;
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
-        }
+        },
     ): Promise<number>;
 
     // ******************
@@ -103,7 +100,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             dataFactory?: (aggregate: MessageOutbox) => LiteralObject;
             // arguments to find object and check if object is duplicated
             finderQueryStatement?: (aggregate: MessageOutbox) => QueryStatement;
-        }
+        },
     ): Promise<void>;
 
     // create a single or multiple records
@@ -112,7 +109,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
         options?: {
             insertOptions?: LiteralObject;
             dataFactory?: (aggregate: MessageOutbox) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update record by id
@@ -125,7 +122,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             dataFactory?: (aggregate: MessageOutbox) => LiteralObject;
             // arguments to find object to update, with i18n we use langId and id relationship with parent entity
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update records
@@ -137,7 +134,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: MessageOutbox) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // update and increment records
@@ -149,7 +146,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             constraint?: QueryStatement;
             cQMetadata?: CQMetadata;
             dataFactory?: (aggregate: MessageOutbox) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // insert or update key identification element already existing in the table
@@ -158,7 +155,7 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
         options?: {
             upsertOptions?: LiteralObject;
             dataFactory?: (aggregate: MessageOutbox) => LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete record
@@ -170,16 +167,14 @@ export abstract class MessageIOutboxRepository implements IRepository<MessageOut
             cQMetadata?: CQMetadata;
             // if id is a composite key, pass find arguments, example: { key1: value1, key2: value2, ...}
             findArguments?: LiteralObject;
-        }
+        },
     ): Promise<void>;
 
     // delete records
-    abstract delete(
-        options?: {
-            deleteOptions?: LiteralObject;
-            queryStatement?: QueryStatement;
-            constraint?: QueryStatement;
-            cQMetadata?: CQMetadata;
-        }
-    ): Promise<void>;
+    abstract delete(options?: {
+        deleteOptions?: LiteralObject;
+        queryStatement?: QueryStatement;
+        constraint?: QueryStatement;
+        cQMetadata?: CQMetadata;
+    }): Promise<void>;
 }

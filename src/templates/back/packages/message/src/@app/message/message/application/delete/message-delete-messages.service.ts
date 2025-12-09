@@ -1,11 +1,13 @@
-import { MessageAddMessagesContextEvent, MessageIMessageRepository } from '@app/message/message';
+import {
+    MessageAddMessagesContextEvent,
+    MessageIMessageRepository,
+} from '@app/message/message';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class MessageDeleteMessagesService
-{
+export class MessageDeleteMessagesService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: MessageIMessageRepository,
@@ -15,8 +17,7 @@ export class MessageDeleteMessagesService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // get objects to delete
         const messages = await this.repository.get({
             queryStatement,
@@ -36,10 +37,7 @@ export class MessageDeleteMessagesService
         // create AddMessagesContextEvent to have object wrapper to add event publisher functionality
         // insert EventBus in object, to be able to apply and commit events
         const messagesRegistered = this.publisher.mergeObjectContext(
-            new MessageAddMessagesContextEvent(
-                messages,
-                cQMetadata,
-            ),
+            new MessageAddMessagesContextEvent(messages, cQMetadata),
         );
 
         messagesRegistered.deleted(); // apply event to model events

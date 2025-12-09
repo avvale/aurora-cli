@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageCreateOutboxCommand
-{
+export class MessageCreateOutboxCommand {
     constructor(
         public readonly payload: {
             id: string;

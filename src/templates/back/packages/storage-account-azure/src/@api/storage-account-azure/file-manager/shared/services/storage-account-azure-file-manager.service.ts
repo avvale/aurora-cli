@@ -132,6 +132,43 @@ export class StorageAccountAzureFileManagerService
         return await Promise.all(responses);
     }
 
+    async getStreamFile(
+        filePayload: StorageAccountFileManagerFileInput,
+    ): Promise<NodeJS.ReadableStream> {
+        if (!filePayload.filename)
+            throw new BadRequestException(
+                'Filename to create blob must be defined',
+            );
+        if (!Array.isArray(filePayload.relativePathSegments))
+            throw new BadRequestException(
+                'RelativePathSegments to create blob must be defined and must be an array, current value: ' +
+                    JSON.stringify(filePayload.relativePathSegments),
+            );
+
+        // get container name from file or use default
+        const containerName =
+            filePayload.containerName || this.containerName || 'default';
+
+        const containerClient =
+            this.blobServiceClient.getContainerClient(containerName);
+
+        const blobPath = [
+            ...filePayload.relativePathSegments,
+            filePayload.filename,
+        ].join('/');
+
+        const blockBlobClient = containerClient.getBlockBlobClient(blobPath);
+
+        const downloadBlockBlobResponse = await blockBlobClient.download();
+
+        if (!downloadBlockBlobResponse.readableStreamBody)
+            throw new BadRequestException(
+                'Not found attachment stream for ' + blobPath,
+            );
+
+        return downloadBlockBlobResponse.readableStreamBody;
+    }
+
     async getNextAvailableFilename(
         containerName: string,
         basePathSegments: string[],
@@ -249,6 +286,7 @@ export class StorageAccountAzureFileManagerService
             id: filePayload.id,
             originFilename,
             filename,
+            containerName: containerName,
             mimetype,
             extension: extensionFile,
             relativePathSegments,

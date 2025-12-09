@@ -6,25 +6,19 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class MessageFindMessageHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class MessageFindMessageHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         account: IamAccountResponse,
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<MessageMessage | MessageMessageDto>
-    {
-        return await this.queryBus.ask(new MessageFindMessageQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<MessageMessage | MessageMessageDto> {
+        return await this.queryBus.ask(
+            new MessageFindMessageQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

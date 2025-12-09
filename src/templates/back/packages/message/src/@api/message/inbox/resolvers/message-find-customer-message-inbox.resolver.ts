@@ -7,8 +7,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth()
-export class MessageFindCustomerMessageInboxResolver
-{
+export class MessageFindCustomerMessageInboxResolver {
     constructor(
         private readonly handler: MessageFindCustomerMessageInboxHandler,
     ) {}
@@ -19,8 +18,7 @@ export class MessageFindCustomerMessageInboxResolver
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<MessageInbox>
-    {
+    ): Promise<MessageInbox> {
         return await this.handler.main(
             account,
             queryStatement,

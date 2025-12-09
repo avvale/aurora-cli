@@ -723,7 +723,7 @@ export class Add extends Command {
                     await BackHandler.addPackage(addCommandState);
 
                     ux.action.start('Installing dependencies');
-                    await exec('npm', ['install', 'sharp']);
+                    await exec('npm', ['install', 'sharp', 'form-data']);
                     await exec('npm', ['install', '-D', '@types/multer']);
                     ux.action.stop('Completed!');
 

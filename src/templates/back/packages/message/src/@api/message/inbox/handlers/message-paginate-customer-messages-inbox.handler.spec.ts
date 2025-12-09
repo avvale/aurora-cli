@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessagePaginateCustomerMessagesInboxHandler } from './message-paginate-customer-messages-inbox.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { MessagePaginateCustomerMessagesInboxHandler } from './message-paginate-customer-messages-inbox.handler';
 
-describe('MessagePaginateCustomerMessagesInboxHandler', () =>
-{
+describe('MessagePaginateCustomerMessagesInboxHandler', () => {
     let handler: MessagePaginateCustomerMessagesInboxHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessagePaginateCustomerMessagesInboxHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<MessagePaginateCustomerMessagesInboxHandler>(MessagePaginateCustomerMessagesInboxHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<MessagePaginateCustomerMessagesInboxHandler>(
+            MessagePaginateCustomerMessagesInboxHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessagePaginateCustomerMessagesInboxHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessagePaginateCustomerMessagesInboxHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

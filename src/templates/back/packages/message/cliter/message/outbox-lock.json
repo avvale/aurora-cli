@@ -3,611 +3,451 @@
     "files": [
         {
             "path": "src/@app/message/message.seed.ts",
-            "integrity": "sha1:8761f5f8f92d0cd317e68672942b07541bddeebd"
-        },
-        {
-            "path": "src/@app/message/outbox/application/count/message-count-outbox.query-handler.spec.ts",
-            "integrity": "sha1:7d80235c3545a3a6df2d61c5d1cd6e65ce425028"
-        },
-        {
-            "path": "src/@app/message/outbox/application/count/message-count-outbox.query-handler.ts",
-            "integrity": "sha1:0b3149aa4e14933cac33005bb4901e2cb8acfe6c"
-        },
-        {
-            "path": "src/@app/message/outbox/application/count/message-count-outbox.query.ts",
-            "integrity": "sha1:6fe7fe44247102d4c67c13b84b802cccf28b7fca"
-        },
-        {
-            "path": "src/@app/message/outbox/application/count/message-count-outbox.service.spec.ts",
-            "integrity": "sha1:9cb3b77aa850cf47b537455a1ab02e4cd61a70ac"
-        },
-        {
-            "path": "src/@app/message/outbox/application/count/message-count-outbox.service.ts",
-            "integrity": "sha1:136111d9c23fa83f5f9d242f37a20d32ad69ca0a"
+            "integrity": "sha1:77c68c18b6dc8ad74b1d72b016089fb4212724c0"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outbox.command-handler.spec.ts",
-            "integrity": "sha1:2ef98ac6709c02d374f6a3627a2bbbd12c2d6577"
+            "integrity": "sha1:5cc3abb1dc1b3dcbb45a0b556ae87f444d0975dc"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outbox.command-handler.ts",
-            "integrity": "sha1:4769f07dec53ca9ce75a6728dad9a53515c187c9"
+            "integrity": "sha1:124584dd09aa17528c3febcfab6d41bc0b49ef2a"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outbox.command.ts",
-            "integrity": "sha1:215b326661a911363a150c00a94d923ad5edcf43"
+            "integrity": "sha1:8acc3b4e3a922901596302cfd9f9b1e7a0159e52"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outbox.service.spec.ts",
-            "integrity": "sha1:2147606bed8712c03a1c0e7bde884345552181b3"
+            "integrity": "sha1:c43ae7b233c66abb224ae7892aff56cfaa048907"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outbox.service.ts",
-            "integrity": "sha1:2f98fe3184f9203db2c1e11184a50ebc5771a21a"
+            "integrity": "sha1:caeb9f968baab43adb757e140c01496c9d8d6eb9"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outboxes.command-handler.spec.ts",
-            "integrity": "sha1:74ce86f88de6385127bd294ea79f67603bf60b2c"
+            "integrity": "sha1:1f2bb9ef0b798eea14ad5cd3b2414bc495982754"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outboxes.command-handler.ts",
-            "integrity": "sha1:9d9ec17169ff9e0e21db21c4c351caa1921eff1f"
+            "integrity": "sha1:da4309544aeb8fa22d2867ef8347d4493afdb33c"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outboxes.command.ts",
-            "integrity": "sha1:e38a3ca664938e36dba9bb3b03a2742e07a12218"
+            "integrity": "sha1:6e44deb16e82c8916c41b2100e36f55fb45dc3cd"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outboxes.service.spec.ts",
-            "integrity": "sha1:4706797f5548893c526c7e7409ff264721f33e69"
+            "integrity": "sha1:295fab8733b8d879dd9cf4801d23f03700baa29f"
         },
         {
             "path": "src/@app/message/outbox/application/create/message-create-outboxes.service.ts",
-            "integrity": "sha1:d8a43431c5e6361632c0a5341e05bb0d0b490188"
+            "integrity": "sha1:e29d945d1d11bded02565da3beddd3f8e664c83c"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outbox-by-id.command-handler.spec.ts",
-            "integrity": "sha1:84c21bd0122b05f3513ec5d4fed30ad8f35d4b82"
+            "integrity": "sha1:3ffec6db2ba53658b733f059e6d0228b7c7876c1"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outbox-by-id.command-handler.ts",
-            "integrity": "sha1:87d7aa9085ffa8cbf35d56375f8bc4bb449fb089"
+            "integrity": "sha1:d53b2378baa240e8ca751c88a65f0ca46e0ea6b2"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outbox-by-id.command.ts",
-            "integrity": "sha1:16398bf2c88108df1c2e701bff6108ec9acc9b9f"
+            "integrity": "sha1:ec0b439581bbd004fbb382a7fbda99dfededb876"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outbox-by-id.service.spec.ts",
-            "integrity": "sha1:3459bbf9b5661a21c17978c558fdac27c83ab5f4"
+            "integrity": "sha1:7ab2e2a120017800a6b0dbe38c911d863c572531"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outbox-by-id.service.ts",
-            "integrity": "sha1:dee8c64df2db6e44d0f0ab8cf096e27dd4ce9e2f"
+            "integrity": "sha1:6b5a6816353602eecd04cd4312db7c202c15207a"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outboxes.command-handler.spec.ts",
-            "integrity": "sha1:9c23f9bf43e4e3bbbd2bfc8f374f31c723cdbfff"
+            "integrity": "sha1:e002aeb71e674e690ab2841a756336a5a14c56da"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outboxes.command-handler.ts",
-            "integrity": "sha1:5fbad7d2010742e22bc609fa1ef8e8a88733c6d0"
+            "integrity": "sha1:a31e73a4f8f9bb80da30a746cf1ba04d75ac0d4c"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outboxes.command.ts",
-            "integrity": "sha1:7c409da9b829a8d9f19ce63a2b68a1f844a3aeba"
+            "integrity": "sha1:986f7319ade20c17269f98a419e1ac6e4aef5af2"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outboxes.service.spec.ts",
-            "integrity": "sha1:4e777710ebe984a79cf7b0aacca6b0a3e1aafa92"
+            "integrity": "sha1:5747b93e2c28d3348ef4a346527d0e095ffa3f55"
         },
         {
             "path": "src/@app/message/outbox/application/delete/message-delete-outboxes.service.ts",
-            "integrity": "sha1:ff08b0bbca598aaa3bf3dbba9a8de6e8b7839ffb"
+            "integrity": "sha1:50de13395faf73d936b18b666e6f12df0e18c088"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-add-outboxes-context.event.ts",
-            "integrity": "sha1:0f273aedbd714dc10062352ac402a5f45550faa8"
+            "integrity": "sha1:1fe70ee9ae955ad58b15b2c7221f161b0ec86f1d"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-created-outbox.event-handler.ts",
-            "integrity": "sha1:8e8b0e291d01bcdaaaeb7da42acc3426fa55c9f2"
+            "integrity": "sha1:e6f998aec48338f2089503fd6597acb4b0f938f9"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-created-outbox.event.ts",
-            "integrity": "sha1:bce0900573106b665a1eb045b28452a0f373f908"
+            "integrity": "sha1:bf9d1ac3b3c4c605db7d444ceeb4d291b72216c3"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-created-outboxes.event-handler.ts",
-            "integrity": "sha1:ed7b75d31b46495822d12265b4125cb84ae00451"
+            "integrity": "sha1:68a49f1ef5fc2ed3eae671d62ad93db293b6eeaf"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-created-outboxes.event.ts",
-            "integrity": "sha1:f60de0fd68f996c7fdcc68941fab74c0bb675189"
+            "integrity": "sha1:7303ba79ed50c2e6745986d6c57e7df47e4b873a"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-deleted-outbox.event-handler.ts",
-            "integrity": "sha1:159cfc4f48e98765d0f4123bff401f23ed3013be"
+            "integrity": "sha1:63843036be18041230cca76c215fa1531d2b2aee"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-deleted-outbox.event.ts",
-            "integrity": "sha1:9a8db006bb397442da5cec1cf500483a680dfc35"
+            "integrity": "sha1:ed8f2f6fcd2f33df0af5cd1988f78ab33a08223c"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-deleted-outboxes.event-handler.ts",
-            "integrity": "sha1:2f7ef441c6783b1776b80b4f680db0af37ded42d"
+            "integrity": "sha1:5a4188066152e1cc164e27b91a592728493c5f6d"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-deleted-outboxes.event.ts",
-            "integrity": "sha1:bdbaf06496a381a81a8e9616579203be8b8c760f"
+            "integrity": "sha1:99a419811cdd966c7e560d1fccd28b9ef7f842ea"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-updated-outbox.event-handler.ts",
-            "integrity": "sha1:75f4583b5b220656718384c168a9fdc7302d65b5"
+            "integrity": "sha1:f60b997425b2c0d2fec2cc0d3f55fc3f8b6bf52e"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-updated-outbox.event.ts",
-            "integrity": "sha1:c80a14ce8cc9dedd0112fcf5c0ddcb29b88382f1"
+            "integrity": "sha1:ee53370cbe37312f266c9e1eec85510e98bcc93e"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-updated-outboxes.event-handler.ts",
-            "integrity": "sha1:174b85c7a236ad158affdb4ad2336c84db31cbae"
+            "integrity": "sha1:bdb9f8b526cd3c6a0db97bec35a741d9944f9979"
         },
         {
             "path": "src/@app/message/outbox/application/events/message-updated-outboxes.event.ts",
-            "integrity": "sha1:d8b2d1c840bfa350d79b0f06f86faec90ad569b9"
-        },
-        {
-            "path": "src/@app/message/outbox/application/events/message-updated-and-incremented-outbox.event.ts",
-            "integrity": "sha1:ea20788ee2e57454943e2e243152d43dbacdba85"
-        },
-        {
-            "path": "src/@app/message/outbox/application/events/message-updated-and-incremented-outboxes.event-handler.ts",
-            "integrity": "sha1:6495f0590b6b1aa9181754cdbc05e7a4d27fb24c"
-        },
-        {
-            "path": "src/@app/message/outbox/application/events/message-updated-and-incremented-outboxes.event.ts",
-            "integrity": "sha1:58a3c1222f7d145c6d04de02535ffe99ba41d1f0"
+            "integrity": "sha1:4be72f5bf322030937c1ac8393fb373318bb1840"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox-by-id.query-handler.spec.ts",
-            "integrity": "sha1:ff8959a6726ffd7069978ba2a69817a7d6ae205a"
+            "integrity": "sha1:785997e2967c1c6b87bc12a8613ab586c6a00a1d"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox-by-id.query-handler.ts",
-            "integrity": "sha1:7431ee57e88ee6e8b8cd8e79bcfe5b8033bc8dde"
+            "integrity": "sha1:a1f70c4b5eb4fb833b8c23bf2c79c621062d81e0"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox-by-id.query.ts",
-            "integrity": "sha1:ea51bff55b37b841f226206e8fa34d0e0ab89b03"
+            "integrity": "sha1:a512109b4bf128a4150c2f767e58a7ed1ec7577e"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox-by-id.service.spec.ts",
-            "integrity": "sha1:646c93681ffd25b080d595ae24cdbf3707b86fb0"
+            "integrity": "sha1:42b6f67cb7428466d24bb591c220a5bc8a634129"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox-by-id.service.ts",
-            "integrity": "sha1:02e9e6bc7e61f8e7b798eecff0db4c4df844f81b"
+            "integrity": "sha1:f51c7fa04e86619e2b47391e64952df0dcfb46c3"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox.query-handler.spec.ts",
-            "integrity": "sha1:b70e7b5fc47ad774ef2942fb71410c915b59c464"
+            "integrity": "sha1:5c6b4a27b667bb46506d3d4b68e10011b2af6bea"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox.query-handler.ts",
-            "integrity": "sha1:879dd2c4930f8477e1ab9fe172acf5da44df3896"
+            "integrity": "sha1:c8f74f28e5dc72fcc053420933898c1ca2b45397"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox.query.ts",
-            "integrity": "sha1:d9873e7d2841c66ab66ff1327dca78035284c277"
+            "integrity": "sha1:249e4192898edcb3985177183bf302dba48c6426"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox.service.spec.ts",
-            "integrity": "sha1:4cfc022124aa5d79b9d12557907454c02ae061ea"
+            "integrity": "sha1:1ae81c5b5a1644a860b4acb79616ff190be679bd"
         },
         {
             "path": "src/@app/message/outbox/application/find/message-find-outbox.service.ts",
-            "integrity": "sha1:f0146c77bfd72acd755747bb4a961620dca304c1"
+            "integrity": "sha1:907f5b163f2335f976ccb834a9396d77200fc869"
         },
         {
             "path": "src/@app/message/outbox/application/get/message-get-outboxes.query-handler.spec.ts",
-            "integrity": "sha1:b743ef6c9653c8613151f47fe3875e4192128b8e"
+            "integrity": "sha1:c2d7e91b682fd8b35c0448e9683776e682c68f32"
         },
         {
             "path": "src/@app/message/outbox/application/get/message-get-outboxes.query-handler.ts",
-            "integrity": "sha1:3bf82c44352a1a885659d6ed003de60631896483"
+            "integrity": "sha1:f30809f24fd78b7ab7b23edb0b130982b0dab194"
         },
         {
             "path": "src/@app/message/outbox/application/get/message-get-outboxes.query.ts",
-            "integrity": "sha1:c8b912233bf2324b5029390b56ad2f4318a818aa"
+            "integrity": "sha1:d74e5b438f02f90dff916ea50ac09dc63c3b9ec2"
         },
         {
             "path": "src/@app/message/outbox/application/get/message-get-outboxes.service.spec.ts",
-            "integrity": "sha1:8d7d7ffc9b4e1ccf48a689530ed06e4c453611c8"
+            "integrity": "sha1:d7a8be175684df6b3b95eb2e5a459ff421d8715a"
         },
         {
             "path": "src/@app/message/outbox/application/get/message-get-outboxes.service.ts",
-            "integrity": "sha1:0a470d41e1c017f9ec6251260685f0251bd81158"
-        },
-        {
-            "path": "src/@app/message/outbox/application/max/message-max-outbox.query-handler.spec.ts",
-            "integrity": "sha1:9afc4d36729784835e3a23b6a19f7529fbea150c"
-        },
-        {
-            "path": "src/@app/message/outbox/application/max/message-max-outbox.query-handler.ts",
-            "integrity": "sha1:c9d22258c8057aafea7519ff64d9b569a3ee31f3"
-        },
-        {
-            "path": "src/@app/message/outbox/application/max/message-max-outbox.query.ts",
-            "integrity": "sha1:a8cdee764a9e151d7ceb3573fb27eb7536cafcb9"
-        },
-        {
-            "path": "src/@app/message/outbox/application/max/message-max-outbox.service.spec.ts",
-            "integrity": "sha1:7ca686d3848d9d206e7f625ca5cff78e02dce4ad"
-        },
-        {
-            "path": "src/@app/message/outbox/application/max/message-max-outbox.service.ts",
-            "integrity": "sha1:19140609173f4c6bd568b9765c157a04af85d0f6"
-        },
-        {
-            "path": "src/@app/message/outbox/application/min/message-min-outbox.query-handler.spec.ts",
-            "integrity": "sha1:56922d383f147d6762d4d119a52831d958c29ca9"
-        },
-        {
-            "path": "src/@app/message/outbox/application/min/message-min-outbox.query-handler.ts",
-            "integrity": "sha1:eee30c395461f34e84c9f65d1e615f15a1c3e57b"
-        },
-        {
-            "path": "src/@app/message/outbox/application/min/message-min-outbox.query.ts",
-            "integrity": "sha1:8954aa86d6581e53ebd96da77e6a3a10d8546442"
-        },
-        {
-            "path": "src/@app/message/outbox/application/min/message-min-outbox.service.spec.ts",
-            "integrity": "sha1:8228aa7bbead25b9905f0cb94da9b752c94fab75"
-        },
-        {
-            "path": "src/@app/message/outbox/application/min/message-min-outbox.service.ts",
-            "integrity": "sha1:69829572a2a5677f61b1544cbd5a412212b09fe4"
+            "integrity": "sha1:27fcb1a8543859738582f275ef2ffbdd108ded29"
         },
         {
             "path": "src/@app/message/outbox/application/paginate/message-paginate-outboxes.query-handler.spec.ts",
-            "integrity": "sha1:4eb3af217f643636b4f5fd4908521c07a5109b35"
+            "integrity": "sha1:5f075b81390ee004cf96389d2aeb612e2a35ba44"
         },
         {
             "path": "src/@app/message/outbox/application/paginate/message-paginate-outboxes.query-handler.ts",
-            "integrity": "sha1:0a93f8f2a9c4a483ffaad024b4981c0514e9d74e"
+            "integrity": "sha1:4e8d5cbc3d9f81667872409896e92499e8cf970b"
         },
         {
             "path": "src/@app/message/outbox/application/paginate/message-paginate-outboxes.query.ts",
-            "integrity": "sha1:57e99977e4396278dcf4cab4ff631d1261854387"
+            "integrity": "sha1:a1b902f3a5ddf64001e5392cba0c33d2734f876a"
         },
         {
             "path": "src/@app/message/outbox/application/paginate/message-paginate-outboxes.service.spec.ts",
-            "integrity": "sha1:f015cc24eb77717f2723a07b1799be5654e2d8ad"
+            "integrity": "sha1:ae2a0d8ec0f7bc1ae9a083765e29854f041b7f3a"
         },
         {
             "path": "src/@app/message/outbox/application/paginate/message-paginate-outboxes.service.ts",
-            "integrity": "sha1:b0060dd40727cccc07df50ec8e0252b013312c41"
-        },
-        {
-            "path": "src/@app/message/outbox/application/raw-sql/message-raw-sql-outboxes.query-handler.spec.ts",
-            "integrity": "sha1:75ec1920aa5bc50ab9b5d0edc6596f2bf96c3fd3"
-        },
-        {
-            "path": "src/@app/message/outbox/application/raw-sql/message-raw-sql-outboxes.query-handler.ts",
-            "integrity": "sha1:506aede1e43d628a1c99259e8774b2fbf43796be"
-        },
-        {
-            "path": "src/@app/message/outbox/application/raw-sql/message-raw-sql-outboxes.query.ts",
-            "integrity": "sha1:456c81e933c5d408fbff84cd720172b965c88cfa"
-        },
-        {
-            "path": "src/@app/message/outbox/application/raw-sql/message-raw-sql-outboxes.service.spec.ts",
-            "integrity": "sha1:34581c8d106134b0ebd007c520cd1495d1e765c1"
-        },
-        {
-            "path": "src/@app/message/outbox/application/raw-sql/message-raw-sql-outboxes.service.ts",
-            "integrity": "sha1:36e25c120f7f35a6a1803cb5972dce51ae2432e2"
+            "integrity": "sha1:7e35b5c54f7bc89b7e7bf1d0c57d49565c3c3094"
         },
         {
             "path": "src/@app/message/outbox/application/sagas/message-outbox.sagas.ts",
-            "integrity": "sha1:1b1a1159d20fd87f8c7a04c7f0596cd257b02487"
-        },
-        {
-            "path": "src/@app/message/outbox/application/sum/message-sum-outbox.query-handler.spec.ts",
-            "integrity": "sha1:c72e4487df062407e9e9819150ef94739a1bce51"
-        },
-        {
-            "path": "src/@app/message/outbox/application/sum/message-sum-outbox.query-handler.ts",
-            "integrity": "sha1:65f603b3d64d4486ebbe9d9a502842b73a28937c"
-        },
-        {
-            "path": "src/@app/message/outbox/application/sum/message-sum-outbox.query.ts",
-            "integrity": "sha1:0579de0e2fa443240c47d08d9dfc21d56caf27e4"
-        },
-        {
-            "path": "src/@app/message/outbox/application/sum/message-sum-outbox.service.spec.ts",
-            "integrity": "sha1:7374a6b76b702cb16ce607184a611c3a9387c21d"
-        },
-        {
-            "path": "src/@app/message/outbox/application/sum/message-sum-outbox.service.ts",
-            "integrity": "sha1:0ef577114e0df9d35d40f62503dc10a22f6c6528"
+            "integrity": "sha1:76eb456cb21c6f2a3993377fc5e85f18a130b9d3"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outbox-by-id.command-handler.spec.ts",
-            "integrity": "sha1:dac573d673f831d05fd64aa5cb5e4f2bff8d7126"
+            "integrity": "sha1:6b27d1265ae5bee1fc9d6d68b009536c321cd702"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outbox-by-id.command-handler.ts",
-            "integrity": "sha1:c5c027680cb16dd1c8192b5a63c2c3ac12be0ceb"
+            "integrity": "sha1:d55a7c635bf6b88fc99bff4e27d6a90bdd8bfbf4"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outbox-by-id.command.ts",
-            "integrity": "sha1:dadedf936213e16aa130b671b47fac6f0aa14115"
+            "integrity": "sha1:583e35d3c621b87c955b1c262d02471a458a346a"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outbox-by-id.service.spec.ts",
-            "integrity": "sha1:c63f82f2e7a5d7874fd0c01acdb91adf6c00e3dd"
+            "integrity": "sha1:15e978b58a33cb5fce5a93e10632600b4a414d54"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outbox-by-id.service.ts",
-            "integrity": "sha1:4de1e3de061a96bce559e382f10a71944ab90da9"
+            "integrity": "sha1:47839edaa8e1dbb4c3667503e7a675ddc7fafb4b"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outboxes.command-handler.spec.ts",
-            "integrity": "sha1:2f9a57ba8372b1ab113563f78d49f2b9adc490b3"
+            "integrity": "sha1:2332f95731c3ddd55fccc9514b92283503cadcdf"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outboxes.command-handler.ts",
-            "integrity": "sha1:f12446d696dad94842e404a63b5ced2b7f8071ff"
+            "integrity": "sha1:79daeed63df04143e7e283cebcb5e926adbd9fbd"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outboxes.command.ts",
-            "integrity": "sha1:3388971f24a74b7a37cf3f3384ef01562c8b9682"
+            "integrity": "sha1:bcd4bb53f5710d717d473f9e20ed41d542718857"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outboxes.service.spec.ts",
-            "integrity": "sha1:0fe94145deeef214672f57b0d1407741c6c33d35"
+            "integrity": "sha1:50e306426d58cb6c0a906bde2d0c40c8e746e897"
         },
         {
             "path": "src/@app/message/outbox/application/update/message-update-outboxes.service.ts",
-            "integrity": "sha1:1a5e626a708adb3520650e617d43d3ac509c6229"
-        },
-        {
-            "path": "src/@app/message/outbox/application/update/message-update-and-increment-outboxes.command-handler.spec.ts",
-            "integrity": "sha1:0ced9d995499d5cae9723ebd4aed54620a352f4c"
-        },
-        {
-            "path": "src/@app/message/outbox/application/update/message-update-and-increment-outboxes.command-handler.ts",
-            "integrity": "sha1:26f69e93ca1baf652d9fd69ff1090702c25a688b"
-        },
-        {
-            "path": "src/@app/message/outbox/application/update/message-update-and-increment-outboxes.command.ts",
-            "integrity": "sha1:8b61813ae6c94a0f5648b3194aca4cadfa746e6c"
-        },
-        {
-            "path": "src/@app/message/outbox/application/update/message-update-and-increment-outboxes.service.spec.ts",
-            "integrity": "sha1:f3275b89063a2fda87faa4540c895163f326d11a"
-        },
-        {
-            "path": "src/@app/message/outbox/application/update/message-update-and-increment-outboxes.service.ts",
-            "integrity": "sha1:dacaa7eb158d4c932f6c7a92611c6dbebc3f3803"
-        },
-        {
-            "path": "src/@app/message/outbox/application/upsert/message-upsert-outbox.command-handler.spec.ts",
-            "integrity": "sha1:0b26eb52345cdcd082a05b258948fb95b51694f1"
-        },
-        {
-            "path": "src/@app/message/outbox/application/upsert/message-upsert-outbox.command-handler.ts",
-            "integrity": "sha1:3c809df0c04ae3b1b05aa204989c0df0dbb6aaa2"
-        },
-        {
-            "path": "src/@app/message/outbox/application/upsert/message-upsert-outbox.command.ts",
-            "integrity": "sha1:b79f363aa2acb95b47d627baaf39b97bbec8a65a"
-        },
-        {
-            "path": "src/@app/message/outbox/application/upsert/message-upsert-outbox.service.spec.ts",
-            "integrity": "sha1:4cb8bee646568c691551d481c8bb194c6aa046ac"
-        },
-        {
-            "path": "src/@app/message/outbox/application/upsert/message-upsert-outbox.service.ts",
-            "integrity": "sha1:178808dc3fe2d3581b21cc7728cc96ba0ba8a020"
+            "integrity": "sha1:feac13c5a370838e11b04a520756825064f1992b"
         },
         {
             "path": "src/@app/message/outbox/domain/message-outbox.aggregate.ts",
-            "integrity": "sha1:ab270c4948393c0b4c0285dc992d26310d3455da"
+            "integrity": "sha1:4e9a9552f38f153d30ed255e6c2240219ff2ee32"
         },
         {
             "path": "src/@app/message/outbox/domain/message-outbox.mapper.ts",
-            "integrity": "sha1:c0d87584fb28cf2354deb25d6bd933962a683991"
+            "integrity": "sha1:5ea389be57ce263ed047e82ad2f2b32793bc88c2"
         },
         {
             "path": "src/@app/message/outbox/domain/message-outbox.repository.ts",
-            "integrity": "sha1:6243158095ad02e81456b9a83f8110f35e560192"
+            "integrity": "sha1:edb9d4da0187fdbfcd766e7fbf036fc6fd42158a"
         },
         {
             "path": "src/@app/message/outbox/domain/message-outbox.response.ts",
-            "integrity": "sha1:dd7abb4cd701375c3c114429d16d3c6a0b434302"
+            "integrity": "sha1:4cdc9beef1ed55676d71f710f0b67c1fbb2d3c13"
         },
         {
             "path": "src/@app/message/outbox/domain/value-objects/index.ts",
-            "integrity": "sha1:fea3f22785b83f691bcfb69fc9a23cd19a290a35"
+            "integrity": "sha1:41292c1a0732b167107d9bdc5575e32706fbf30d"
         },
         {
             "path": "src/@app/message/outbox/index.ts",
-            "integrity": "sha1:143c7e0e0493ca312ce97c64638b76a723b8aa0b"
+            "integrity": "sha1:419dba44997701184c8f722f077a0ca7dd6ba317"
         },
         {
             "path": "src/@app/message/outbox/infrastructure/mock/message-mock-outbox.data.ts",
-            "integrity": "sha1:4b349132b4221da86497328f38b32539e0f8b2d1"
+            "integrity": "sha1:77974fecf7af89797635b0fc664eed49bbd94268"
         },
         {
             "path": "src/@app/message/outbox/infrastructure/mock/message-mock-outbox.repository.ts",
-            "integrity": "sha1:1161a6dc9c295567cb6dd41627d30683e86a1a43"
+            "integrity": "sha1:009cf5a223dbb04367f6dd5536a473e8b7c60449"
         },
         {
             "path": "src/@app/message/outbox/infrastructure/mock/message-mock-outbox.seeder.ts",
-            "integrity": "sha1:3789a4fdaad82fbe971b968d61f6194072023128"
+            "integrity": "sha1:499ab78a19cca56514c6e9b97ac2f3b94ae41eec"
         },
         {
             "path": "src/@app/message/outbox/infrastructure/sequelize/message-sequelize-outbox.model.ts",
-            "integrity": "sha1:db9f009f8263a754ae1fc536e1e1dbcb3af99b09"
+            "integrity": "sha1:642bae1af3eb7f55324915fa8760c73961efb3c7"
         },
         {
             "path": "src/@app/message/outbox/infrastructure/sequelize/message-sequelize-outbox.repository.ts",
-            "integrity": "sha1:a5def45ebca4bd7331794cb2ba14fc63b84c8fe0"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-id.ts",
-            "integrity": "sha1:eea489093bc8470cd874956a403da1285dab6572"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-message-id.ts",
-            "integrity": "sha1:7dfbf75b23e6450323876aa09690ee499ab699ff"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-sort.ts",
-            "integrity": "sha1:302c87285c839fd5e354ddf484f1b5f0ce52c713"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-account-recipient-ids.ts",
-            "integrity": "sha1:f86d5948cd8794e70edae38a52df08fda612b35e"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-tenant-recipient-ids.ts",
-            "integrity": "sha1:9340f150f2c41942d192464c952c4cc1ba072ff4"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-scope-recipients.ts",
-            "integrity": "sha1:20975f553c9aab7dd6a45daeebf1b354d04ef64b"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-tag-recipients.ts",
-            "integrity": "sha1:0d304bed0186ead370344325b94b8afc2573e0be"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-meta.ts",
-            "integrity": "sha1:ac09e33dfd3493d12c396def59a9d46d026e033a"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-created-at.ts",
-            "integrity": "sha1:474723e937aa5b177573b12680f5df80dbf4930d"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-updated-at.ts",
-            "integrity": "sha1:dd3a2cfbd8b4cd93d8064597e0084d83880423e6"
-        },
-        {
-            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-deleted-at.ts",
-            "integrity": "sha1:11df53c80f7651ce431927aeb986bfee30da6582"
+            "integrity": "sha1:2f3686c1c07fc24df67ea908064bb9d50d14c096"
         },
         {
             "path": "src/@api/message/message.seeder.ts",
-            "integrity": "sha1:5539cc0b1ec4b3a699f17c585eec7113a0f669b5"
+            "integrity": "sha1:00f51a5cd95260fecb0dade35c21d54867ee433a"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-id.ts",
+            "integrity": "sha1:a4c68bd89238ba072aa3076ebac5192d01e8afd2"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-account-recipient-ids.ts",
+            "integrity": "sha1:ca652a0e9c7f57c01a2707dfa637bd5314ff2fff"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-tenant-recipient-ids.ts",
+            "integrity": "sha1:1a400c1c11d12596a6068f41427a4f30e4ef0b1a"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-row-id.ts",
+            "integrity": "sha1:4c345bb0693341f31d079be8035fcea571dd84fb"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-tag-recipients.ts",
+            "integrity": "sha1:f256da1374b2a037e72996f6a8b13c55899685f7"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-scope-recipients.ts",
+            "integrity": "sha1:44b0ed7929b3f649953a4f79d69c6edd61754674"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-message-id.ts",
+            "integrity": "sha1:d3855845dc09f1dbad9103c2327d8e28b1fae11f"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-meta.ts",
+            "integrity": "sha1:e40e8d7fe454e89250309bddbf8040a469ff1229"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-updated-at.ts",
+            "integrity": "sha1:78f63fba58d1d549b54556bd688a46501bdba33a"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-created-at.ts",
+            "integrity": "sha1:30bf9d9de96ea85a46cb0f256984325d03b87eec"
+        },
+        {
+            "path": "src/@app/message/outbox/domain/value-objects/message-outbox-deleted-at.ts",
+            "integrity": "sha1:780156231690e01cc7085890ec649ebc4dd692e1"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-create-outbox.controller.spec.ts",
-            "integrity": "sha1:edad192cf27de574897186e6b1ad727eb437074b"
+            "integrity": "sha1:03908e2a2757659933633bc1203ef0591da10108"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-create-outbox.controller.ts",
-            "integrity": "sha1:e4e46b0f9d43c706db44ae286bcfa47c414ad7af"
+            "integrity": "sha1:b5907b07e1b83568b5c27bbe43f27a9f457b238e"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-create-outboxes.controller.spec.ts",
-            "integrity": "sha1:4dc95aa8b19d0c87ed56f1e7444974e24fa3cf77"
+            "integrity": "sha1:7280d02df670b8837596d4c6753ac7ad3030826e"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-create-outboxes.controller.ts",
-            "integrity": "sha1:de02e4088bc15bdbe21a3793d145e7d71f4dcaa7"
+            "integrity": "sha1:3aae1baeed1cae37792d69b895f7efc19df6ca20"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-delete-outbox-by-id.controller.spec.ts",
-            "integrity": "sha1:083d0ae0a8c2b1e8cb27b3b5644298635dc471f8"
+            "integrity": "sha1:6765518205dd4c49ffdb9bea4fd2fc56d1c57b5a"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-delete-outbox-by-id.controller.ts",
-            "integrity": "sha1:d62b64b4a33f32a7c0c286c0c3ab62c61a026253"
+            "integrity": "sha1:450d265aa23d765ed361d154e3482bfea6167fc4"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-delete-outboxes.controller.spec.ts",
-            "integrity": "sha1:ab029767a2267823d4a2d05cdb2cc604e184ab26"
+            "integrity": "sha1:d40b820ac4b10feaee5fd11ec522d65c30738300"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-delete-outboxes.controller.ts",
-            "integrity": "sha1:acfcda74b5fe187afca2caa0bf817b39c43bfa32"
+            "integrity": "sha1:764eaac23382dce0cb559bd9cbda590c7ed1a22c"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-find-outbox-by-id.controller.spec.ts",
-            "integrity": "sha1:016c1893ada7d3596976135bd7b978dc883c30fd"
+            "integrity": "sha1:8f4b38e4ffd478f617cdc7a0eca84d8cad930385"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-find-outbox-by-id.controller.ts",
-            "integrity": "sha1:7ebfa21e397da32a554f1cff3e76e04d3f79576f"
+            "integrity": "sha1:a3cd8bf53123bdee1600d417f9085a6714399240"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-find-outbox.controller.spec.ts",
-            "integrity": "sha1:1c6efff283d8d039f0acd219e965e91b49ca408f"
+            "integrity": "sha1:5d7a348ebfb498b3792d334f4761650df7f9e196"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-find-outbox.controller.ts",
-            "integrity": "sha1:6ec037b5d850b595e2600564b3f70e0311d3a9c8"
+            "integrity": "sha1:defa313ffd95eba5d793afd0bc8165bfd7359486"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-get-outboxes.controller.spec.ts",
-            "integrity": "sha1:2c4a827dedd54ee25f27ceb8463156571c135deb"
+            "integrity": "sha1:09465f61d3ef423bb479d68cbc7c08bdf9679eb1"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-get-outboxes.controller.ts",
-            "integrity": "sha1:69d13ac3de3bcd1bbeab223c593c7c9349efceb6"
+            "integrity": "sha1:f17c2e3af9dc10e54b3f24cb88eaa4d59c18df84"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-paginate-outboxes.controller.spec.ts",
-            "integrity": "sha1:bd60e222d1e017096ab1b21a5a23d982f2d677d8"
+            "integrity": "sha1:914c798edd60fb06b1a716f850473643ff382d13"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-paginate-outboxes.controller.ts",
-            "integrity": "sha1:800d4da31a2551f62bd32edeb4ef8eef99998b11"
+            "integrity": "sha1:b89588d22bb2d0c5cf028822d297a87d17a375b7"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-update-outbox-by-id.controller.spec.ts",
-            "integrity": "sha1:4582c4e7ef545cd9b7bbffae0ecfd309452c9e8a"
+            "integrity": "sha1:953a49eabd1bf74bc449a11020d6ec9cea9471a0"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-update-outbox-by-id.controller.ts",
-            "integrity": "sha1:c23c0b720a91ee219ce66bb8e6cbc8422c71e480"
+            "integrity": "sha1:b3003359d17ef91edb659e9d0321129d5dd387eb"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-update-outboxes.controller.spec.ts",
-            "integrity": "sha1:ee8f22be40e0d2a1d69607a4a89a17d395be93e5"
+            "integrity": "sha1:ed0a6c7b83d6750c650e4a3da6734f1a68de199c"
         },
         {
             "path": "src/@api/message/outbox/controllers/message-update-outboxes.controller.ts",
-            "integrity": "sha1:d423fca46e77586bee7aef2fd26134d497cb355d"
-        },
-        {
-            "path": "src/@api/message/outbox/controllers/message-upsert-outbox.controller.spec.ts",
-            "integrity": "sha1:1a3bee7a8a03122f85d0f14b273bd001f86990b7"
-        },
-        {
-            "path": "src/@api/message/outbox/controllers/message-upsert-outbox.controller.ts",
-            "integrity": "sha1:99b07da904eeb7cf71cec0b14292aa556f0a62e3"
+            "integrity": "sha1:5ab7df987db8b10dcccff3b48429e410358f87c4"
         },
         {
             "path": "src/@api/message/outbox/dto/message-outbox.dto.ts",
-            "integrity": "sha1:7ec1ce0fd070f8117062b8bedb1cb7869eb04ad2"
+            "integrity": "sha1:6025d319f7a14906f82cff2db9d1d41440011954"
         },
         {
             "path": "src/@api/message/outbox/dto/message-create-outbox.dto.ts",
-            "integrity": "sha1:83be08c1120a683a9aff823c2ef8d3d4af1294f0"
+            "integrity": "sha1:ed2a64e396e123c4d8f7b833b3559aa73333ecf8"
         },
         {
             "path": "src/@api/message/outbox/dto/message-update-outbox-by-id.dto.ts",
-            "integrity": "sha1:2f3cfae9a3d4b113a14579bc25047b776a0416ae"
+            "integrity": "sha1:58c811379102dfa64f603e8bf1c7ebd06fe20a59"
         },
         {
             "path": "src/@api/message/outbox/dto/message-update-outboxes.dto.ts",
-            "integrity": "sha1:65a3cc9b41e11fdb586f1ea0e6cbb78a159129a7"
+            "integrity": "sha1:5881e2f3ee64bf54aefb963942bd47ff7db73070"
         },
         {
             "path": "src/@api/message/outbox/dto/index.ts",
@@ -615,203 +455,187 @@
         },
         {
             "path": "src/@api/message/outbox/dto/public-api.ts",
-            "integrity": "sha1:e36f07ffa9a1fb33ed1810e7641c063aeeaa3ad7"
+            "integrity": "sha1:05b96d3bd065f742826104a27c3b558266d14804"
         },
         {
             "path": "src/@api/message/outbox/graphql/message-outbox.graphql",
-            "integrity": "sha1:3083a34907b5f7e2c88ba7e172e672db570de7a3"
+            "integrity": "sha1:95da4f36afa39382c7151f83a619adf1231d9587"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-create-outbox.handler.spec.ts",
-            "integrity": "sha1:259ec9fd3fb143c8958271a47cbc5e180a2173c6"
+            "integrity": "sha1:10995276727bf236bf2eb980f19f2f8c910e21b3"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-create-outbox.handler.ts",
-            "integrity": "sha1:b03887113ae2336345f8bcbad742ce47564a1553"
+            "integrity": "sha1:30825556c457e3c87f7c311ac534f71bcb990ef2"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-create-outboxes.handler.spec.ts",
-            "integrity": "sha1:df95393a03bae153d327db0ab4b44c656f1e7ea6"
+            "integrity": "sha1:41adbdc215575bb6ff5150649c7cc89721ef4705"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-create-outboxes.handler.ts",
-            "integrity": "sha1:a7262b3ec607c8337e6edb72351445c89975fd8c"
+            "integrity": "sha1:f3405efe5dad14547b17240941707cf05981bc50"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-delete-outbox-by-id.handler.spec.ts",
-            "integrity": "sha1:4df58a252012794fcde65f70f953f74d1c566a0e"
+            "integrity": "sha1:3c08c7b73caaf8bc99e27fbf64b9d63423483fc9"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-delete-outbox-by-id.handler.ts",
-            "integrity": "sha1:8c3227f11c8057eaea65128699649b545512d497"
+            "integrity": "sha1:1ff79f704e70dc2b37f199fb6ec17b9497123ed1"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-delete-outboxes.handler.spec.ts",
-            "integrity": "sha1:065aea6edc15dd9074bd8b510bf42ee12aa2a5fc"
+            "integrity": "sha1:f81426e4099a4f9e4e0d3604092b0158b95458c4"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-delete-outboxes.handler.ts",
-            "integrity": "sha1:531e1de7ae5966d90b8b63391d27fb39ae3eaf6b"
+            "integrity": "sha1:889ec183a943b3080b5f3ad92372f503d4353489"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-find-outbox-by-id.handler.spec.ts",
-            "integrity": "sha1:a04dd270b5b92a6e864eda71245e84750debafe9"
+            "integrity": "sha1:82106757537209b781666d1974d6df5bf3fcd45f"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-find-outbox-by-id.handler.ts",
-            "integrity": "sha1:d34ddb9d353a108386851cf20bfca03464b7735e"
+            "integrity": "sha1:b136189891070e6d6f8c88f90a8f6a3da2bc7c3c"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-find-outbox.handler.spec.ts",
-            "integrity": "sha1:53511f1382936736350af95e91a1254f66a7bdfb"
+            "integrity": "sha1:bbf7e863039cb49b9e7e4fb21177dabd05349614"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-find-outbox.handler.ts",
-            "integrity": "sha1:77ee5c8ca71df0014beb14b63d7634bd0bf69d05"
+            "integrity": "sha1:18233c1401f4f1571053738f366887711cd45c9b"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-get-outboxes.handler.spec.ts",
-            "integrity": "sha1:2930dcfc1e0d2b15446fd492419756bc1b132ee4"
+            "integrity": "sha1:3bcf4d82e0fa55801efbe4c1563dc26df2e99714"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-get-outboxes.handler.ts",
-            "integrity": "sha1:32c19f23c420c541440c33d56af4ec29bcf72a9b"
+            "integrity": "sha1:825642b47cfbedf68951d74a7e71715b5be4b303"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-paginate-outboxes.handler.spec.ts",
-            "integrity": "sha1:e26a5065369d17144822817c981d59b8a65353de"
+            "integrity": "sha1:1699bcc09437a97025b4864c6904cdbcc375c93a"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-paginate-outboxes.handler.ts",
-            "integrity": "sha1:3a6ea46a9bf72785affd4587c2316326b58c993d"
+            "integrity": "sha1:130b0ed867f9dd20fd5a8f5285709120009e259a"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-update-outbox-by-id.handler.spec.ts",
-            "integrity": "sha1:44410126f2c822d5b039dc0a85545e6954c7650b"
+            "integrity": "sha1:470d8d4bf37b844d36b93866add7baf542c1c567"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-update-outbox-by-id.handler.ts",
-            "integrity": "sha1:a593689b77344c3f0c67f3e0187fba83f4583e98"
+            "integrity": "sha1:cd217803b65dcc477c07a4428f653065771ad051"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-update-outboxes.handler.spec.ts",
-            "integrity": "sha1:e33368993aaea6472bff699758bc950385072bd7"
+            "integrity": "sha1:1fbc0359822666e80a8fdda7a4ff4af57ce1f215"
         },
         {
             "path": "src/@api/message/outbox/handlers/message-update-outboxes.handler.ts",
-            "integrity": "sha1:0b4da3037d92e3e0914b8423054423dc1d01dd63"
-        },
-        {
-            "path": "src/@api/message/outbox/handlers/message-upsert-outbox.handler.spec.ts",
-            "integrity": "sha1:30419c011070f1150e16ebd3ccf02e044a3b5a60"
-        },
-        {
-            "path": "src/@api/message/outbox/handlers/message-upsert-outbox.handler.ts",
-            "integrity": "sha1:fa9c3b29b9b948d16343ee0d8d08635455a3c77e"
+            "integrity": "sha1:f6422d4cf3809a9e9f96d880968079aa12ea0ed2"
         },
         {
             "path": "src/@api/message/outbox/index.ts",
-            "integrity": "sha1:019b29a576e7cecd35b18ccd15b05a489349dead"
+            "integrity": "sha1:27ec467f68449fd757431d414c1defe1754ad080"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-create-outbox.resolver.spec.ts",
-            "integrity": "sha1:0716372ccb19f31d29410506b29591529465d4ae"
+            "integrity": "sha1:580df88c86e48514fbb27f30e68241481019d8c0"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-create-outbox.resolver.ts",
-            "integrity": "sha1:32779c10507c5885efecbf723127a080dfe6c6a0"
+            "integrity": "sha1:2019cd13856f45aeb3fc94b8a98619e6cb2d3233"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-create-outboxes.resolver.spec.ts",
-            "integrity": "sha1:a5e5e6a19679d1c21cc97b4146670ce97333085b"
+            "integrity": "sha1:a73161b59555e922226624e346fd3514725a2f78"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-create-outboxes.resolver.ts",
-            "integrity": "sha1:70250bb1d2109c93e74d0c3b10609eb5b8878195"
+            "integrity": "sha1:732fca70d321488cfd5c1af6d55df16fd3c574c2"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-delete-outbox-by-id.resolver.spec.ts",
-            "integrity": "sha1:6a2072af85dea0309b5cf210990e081f8bc63a70"
+            "integrity": "sha1:ddb575d6887d755b6f5efa191f7b2a45b522f5fa"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-delete-outbox-by-id.resolver.ts",
-            "integrity": "sha1:cbfd5fac2387477aa5a8e9548b6574f2a709e9fe"
+            "integrity": "sha1:c83542e48e4c4144c01417d89e47221f5ebd3fbb"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-delete-outboxes.resolver.spec.ts",
-            "integrity": "sha1:49fc231bd68c026e0c37df1db189472ee138b2f6"
+            "integrity": "sha1:1a99f65b759c04950e4aec79da5f885c4dcb83b5"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-delete-outboxes.resolver.ts",
-            "integrity": "sha1:cf59ea39fcc0c36091f17e5ff06d53095e6b73f6"
+            "integrity": "sha1:ceb8ff72f920d47e14d3410dda20f16703dc92c7"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-find-outbox-by-id.resolver.spec.ts",
-            "integrity": "sha1:302be16f3e33a0bf336cd7df5e9c774602356152"
+            "integrity": "sha1:9d4e105954f1d4482ecf4d2a896e6e4da89cffe8"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-find-outbox-by-id.resolver.ts",
-            "integrity": "sha1:8da33af2512ed98f3ad180ea15096effda73e4a8"
+            "integrity": "sha1:562cba417907ae2c1a4f198d093d7c3c6b9b19d0"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-find-outbox.resolver.spec.ts",
-            "integrity": "sha1:2cde19d6a1d946eb1e2bdf2178a6c8bee9be266d"
+            "integrity": "sha1:2d57f04d425170ff734f72e38e40ba9e2f4840b2"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-find-outbox.resolver.ts",
-            "integrity": "sha1:38757cb8aa5cd0dbceb7330d1a337187f38533a1"
+            "integrity": "sha1:c03564ec967d9c85c0861a90d992439c1588f78a"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-get-outboxes.resolver.spec.ts",
-            "integrity": "sha1:4c3db0a3363037f3f3245f10738cc5b8fbd5f7ac"
+            "integrity": "sha1:2ddcf1e7b5b372621aa972df5ea9fa118f64c870"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-get-outboxes.resolver.ts",
-            "integrity": "sha1:a127d7ebd9c38e6b13ea9367cb1d90770cb23561"
+            "integrity": "sha1:b6d12619d92fd6e4208206765b04b9920130f93d"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-paginate-outboxes.resolver.spec.ts",
-            "integrity": "sha1:dce3fe5e504d3ef8437dbc6ef93abf7b2794d565"
+            "integrity": "sha1:6433d28dfe750978c946fcacecf347f4aa92855e"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-paginate-outboxes.resolver.ts",
-            "integrity": "sha1:ed20cf615cb27551cc5cb1545fe6de17bbc8ee6d"
+            "integrity": "sha1:e5ab499834a8a314da755d7641f2e889b85c3bfc"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-update-outbox-by-id.resolver.spec.ts",
-            "integrity": "sha1:f734b47b19fdf4fac973c700dd534a2dea1f6ba5"
+            "integrity": "sha1:560b4f6e778046d2def53e69b4b7f2631f03e3e1"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-update-outbox-by-id.resolver.ts",
-            "integrity": "sha1:6a3ac6562c1cf9d731126f12c55ef729e09e7c88"
+            "integrity": "sha1:2f6f4dead098d36d7d07e33d21b1d7c56e4ae9bd"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-update-outboxes.resolver.spec.ts",
-            "integrity": "sha1:0caa1dd5b52ad304e7ad9cf8b78368f981c1ad15"
+            "integrity": "sha1:ef6b4d7f2ff77311fdf6e26844ade9fabaa67aaf"
         },
         {
             "path": "src/@api/message/outbox/resolvers/message-update-outboxes.resolver.ts",
-            "integrity": "sha1:7c121660284036d8730d258150731f4056435397"
-        },
-        {
-            "path": "src/@api/message/outbox/resolvers/message-upsert-outbox.resolver.spec.ts",
-            "integrity": "sha1:574ecbb96ca3235ec090396f5d222b06e127e5fe"
-        },
-        {
-            "path": "src/@api/message/outbox/resolvers/message-upsert-outbox.resolver.ts",
-            "integrity": "sha1:bad6708758f46d26b31cd92aafe307bf74509fb4"
+            "integrity": "sha1:59fd2c233d7436c63ae7be614d460d97f1edaa50"
         },
         {
             "path": "src/@api/message/outbox/seeder/message-outbox.seeder.ts",
-            "integrity": "sha1:5c2c80cc2dd24c19806b8f052291a63550a58d8b"
+            "integrity": "sha1:1aa95eb5c9b4572ae81a3b9ade384d9e03533307"
         },
         {
             "path": "test/acceptance/message/outbox.e2e-spec.ts",
-            "integrity": "sha1:7c87bef89c536cab0e2f2048b143a473e4b057fd"
+            "integrity": "sha1:1dd5ba65f75f798952293aa94c8c43460980063b"
         },
         {
             "path": "postman/message/message.outbox.postman.json",
-            "integrity": "sha1:ce1d9675788a8ca526f9df6a816fade4ade02adf"
+            "integrity": "sha1:3c0ba483c8813340acd4aabe3871f51557248ae2"
         }
     ]
 }

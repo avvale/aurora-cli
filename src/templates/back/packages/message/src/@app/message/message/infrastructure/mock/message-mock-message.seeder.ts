@@ -13,6 +13,7 @@ import {
     MessageMessageLink,
     MessageMessageMeta,
     MessageMessageReads,
+    MessageMessageRowId,
     MessageMessageScopeRecipients,
     MessageMessageSendAt,
     MessageMessageStatus,
@@ -28,29 +29,30 @@ import { Injectable } from '@nestjs/common';
 import * as _ from 'lodash';
 
 @Injectable()
-export class MessageMockMessageSeeder extends MockSeeder<MessageMessage>
-{
+export class MessageMockMessageSeeder extends MockSeeder<MessageMessage> {
     public collectionSource: MessageMessage[];
 
-    constructor()
-    {
+    constructor() {
         super();
         this._createMock();
     }
 
-    private _createMock(): void
-    {
+    private _createMock(): void {
         this.collectionSource = [];
 
-        for (const message of _.orderBy(messageMockMessageData, ['id']))
-        {
+        for (const message of _.orderBy(messageMockMessageData, ['id'])) {
             this.collectionSource.push(
                 MessageMessage.register(
                     new MessageMessageId(message.id),
+                    new MessageMessageRowId(message.rowId),
                     new MessageMessageTenantIds(message.tenantIds),
                     new MessageMessageStatus(message.status),
-                    new MessageMessageAccountRecipientIds(message.accountRecipientIds),
-                    new MessageMessageTenantRecipientIds(message.tenantRecipientIds),
+                    new MessageMessageAccountRecipientIds(
+                        message.accountRecipientIds,
+                    ),
+                    new MessageMessageTenantRecipientIds(
+                        message.tenantRecipientIds,
+                    ),
                     new MessageMessageScopeRecipients(message.scopeRecipients),
                     new MessageMessageTagRecipients(message.tagRecipients),
                     new MessageMessageSendAt(message.sendAt),

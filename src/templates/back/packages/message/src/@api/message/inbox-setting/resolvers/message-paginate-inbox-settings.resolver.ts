@@ -6,8 +6,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.inboxSetting.get')
-export class MessagePaginateInboxSettingsResolver
-{
+export class MessagePaginateInboxSettingsResolver {
     constructor(
         private readonly handler: MessagePaginateInboxSettingsHandler,
     ) {}
@@ -17,12 +16,7 @@ export class MessagePaginateInboxSettingsResolver
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<Pagination>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<Pagination> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

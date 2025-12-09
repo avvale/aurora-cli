@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { MessageCountUnreadCustomerMessageInboxHandler } from '../handlers/message-count-unread-customer-message-inbox.handler';
 import { MessageCountUnreadCustomerMessageInboxResolver } from './message-count-unread-customer-message-inbox.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCountUnreadCustomerMessageInboxResolver', () =>
-{
+describe('MessageCountUnreadCustomerMessageInboxResolver', () => {
     let resolver: MessageCountUnreadCustomerMessageInboxResolver;
     let handler: MessageCountUnreadCustomerMessageInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageCountUnreadCustomerMessageInboxResolver,
                 {
-                    provide : MessageCountUnreadCustomerMessageInboxHandler,
+                    provide: MessageCountUnreadCustomerMessageInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageCountUnreadCustomerMessageInboxResolver>(MessageCountUnreadCustomerMessageInboxResolver);
-        handler = module.get<MessageCountUnreadCustomerMessageInboxHandler>(MessageCountUnreadCustomerMessageInboxHandler);
+        resolver = module.get<MessageCountUnreadCustomerMessageInboxResolver>(
+            MessageCountUnreadCustomerMessageInboxResolver,
+        );
+        handler = module.get<MessageCountUnreadCustomerMessageInboxHandler>(
+            MessageCountUnreadCustomerMessageInboxHandler,
+        );
     });
 
-    test('MessageCountUnreadCustomerMessageInboxResolver should be defined', () =>
-    {
+    test('MessageCountUnreadCustomerMessageInboxResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageCountUnreadCustomerMessageInboxResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCountUnreadCustomerMessageInboxResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageCheckMessagesInboxHandler } from './message-check-messages-inbox.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { MessageCheckMessagesInboxHandler } from './message-check-messages-inbox.handler';
 
-describe('MessageCheckMessagesInboxHandler', () =>
-{
+describe('MessageCheckMessagesInboxHandler', () => {
     let handler: MessageCheckMessagesInboxHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageCheckMessagesInboxHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<MessageCheckMessagesInboxHandler>(MessageCheckMessagesInboxHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<MessageCheckMessagesInboxHandler>(
+            MessageCheckMessagesInboxHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessageCheckMessagesInboxHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCheckMessagesInboxHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

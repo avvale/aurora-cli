@@ -1,89 +1,91 @@
-import { MessageCreatedInboxSettingEvent, MessageCreatedInboxSettingsEvent, MessageDeletedInboxSettingEvent, MessageDeletedInboxSettingsEvent, MessageInboxSetting, MessageUpdatedAndIncrementedInboxSettingEvent, MessageUpdatedAndIncrementedInboxSettingsEvent, MessageUpdatedInboxSettingEvent, MessageUpdatedInboxSettingsEvent } from '@app/message/inbox-setting';
+import {
+    MessageCreatedInboxSettingEvent,
+    MessageCreatedInboxSettingsEvent,
+    MessageDeletedInboxSettingEvent,
+    MessageDeletedInboxSettingsEvent,
+    MessageInboxSetting,
+    MessageUpdatedInboxSettingEvent,
+    MessageUpdatedInboxSettingsEvent,
+} from '@app/message/inbox-setting';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class MessageAddInboxSettingsContextEvent extends AggregateRoot
-{
+export class MessageAddInboxSettingsContextEvent extends AggregateRoot {
     constructor(
         public readonly aggregateRoots: MessageInboxSetting[] = [],
-    )
-    {
+        public readonly cQMetadata?: CQMetadata,
+    ) {
         super();
     }
 
-    *[Symbol.iterator]()
-    {
+    *[Symbol.iterator]() {
         for (const aggregateRoot of this.aggregateRoots) yield aggregateRoot;
     }
 
-    created(): void
-    {
+    created(): void {
         this.apply(
-            new MessageCreatedInboxSettingsEvent(
-                this.aggregateRoots.map(inboxSetting =>
-                    new MessageCreatedInboxSettingEvent(
-                        inboxSetting.id.value,
-                        inboxSetting.accountId.value,
-                        inboxSetting.sort.value,
-                        inboxSetting.createdAt?.value,
-                        inboxSetting.updatedAt?.value,
-                        inboxSetting.deletedAt?.value,
-                    ),
+            new MessageCreatedInboxSettingsEvent({
+                payload: this.aggregateRoots.map(
+                    (inboxSetting) =>
+                        new MessageCreatedInboxSettingEvent({
+                            payload: {
+                                id: inboxSetting.id.value,
+                                accountId: inboxSetting.accountId.value,
+                                lastReadMessageRowId:
+                                    inboxSetting.lastReadMessageRowId.value,
+                                createdAt: inboxSetting.createdAt?.value,
+                                updatedAt: inboxSetting.updatedAt?.value,
+                                deletedAt: inboxSetting.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
-    updated(): void
-    {
+    updated(): void {
         this.apply(
-            new MessageUpdatedInboxSettingsEvent(
-                this.aggregateRoots.map(inboxSetting =>
-                    new MessageUpdatedInboxSettingEvent(
-                        inboxSetting.id.value,
-                        inboxSetting.accountId.value,
-                        inboxSetting.sort.value,
-                        inboxSetting.createdAt?.value,
-                        inboxSetting.updatedAt?.value,
-                        inboxSetting.deletedAt?.value,
-                    ),
+            new MessageUpdatedInboxSettingsEvent({
+                payload: this.aggregateRoots.map(
+                    (inboxSetting) =>
+                        new MessageUpdatedInboxSettingEvent({
+                            payload: {
+                                id: inboxSetting.id.value,
+                                accountId: inboxSetting.accountId.value,
+                                lastReadMessageRowId:
+                                    inboxSetting.lastReadMessageRowId.value,
+                                createdAt: inboxSetting.createdAt?.value,
+                                updatedAt: inboxSetting.updatedAt?.value,
+                                deletedAt: inboxSetting.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 
-    updatedAndIncremented(): void
-    {
+    deleted(): void {
         this.apply(
-            new MessageUpdatedAndIncrementedInboxSettingsEvent(
-                this.aggregateRoots.map(inboxSetting =>
-                    new MessageUpdatedAndIncrementedInboxSettingEvent(
-                        inboxSetting.id.value,
-                        inboxSetting.accountId.value,
-                        inboxSetting.sort.value,
-                        inboxSetting.createdAt?.value,
-                        inboxSetting.updatedAt?.value,
-                        inboxSetting.deletedAt?.value,
-                    ),
+            new MessageDeletedInboxSettingsEvent({
+                payload: this.aggregateRoots.map(
+                    (inboxSetting) =>
+                        new MessageDeletedInboxSettingEvent({
+                            payload: {
+                                id: inboxSetting.id.value,
+                                rowId: inboxSetting.rowId.value,
+                                accountId: inboxSetting.accountId.value,
+                                lastReadMessageRowId:
+                                    inboxSetting.lastReadMessageRowId.value,
+                                createdAt: inboxSetting.createdAt?.value,
+                                updatedAt: inboxSetting.updatedAt?.value,
+                                deletedAt: inboxSetting.deletedAt?.value,
+                            },
+                        }),
                 ),
-            ),
-        );
-    }
-
-    deleted(): void
-    {
-        this.apply(
-            new MessageDeletedInboxSettingsEvent(
-                this.aggregateRoots.map(inboxSetting =>
-                    new MessageDeletedInboxSettingEvent(
-                        inboxSetting.id.value,
-                        inboxSetting.accountId.value,
-                        inboxSetting.sort.value,
-                        inboxSetting.createdAt?.value,
-                        inboxSetting.updatedAt?.value,
-                        inboxSetting.deletedAt?.value,
-                    ),
-                ),
-            ),
+                cQMetadata: this.cQMetadata,
+            }),
         );
     }
 }

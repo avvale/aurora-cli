@@ -1,5 +1,9 @@
 /* eslint-disable key-spacing */
-import { MessageCreatedMessageEvent, MessageDeletedMessageEvent, MessageUpdatedMessageEvent } from '@app/message/message';
+import {
+    MessageCreatedMessageEvent,
+    MessageDeletedMessageEvent,
+    MessageUpdatedMessageEvent,
+} from '@app/message/message';
 import {
     MessageMessageAccountRecipientIds,
     MessageMessageAttachments,
@@ -14,6 +18,7 @@ import {
     MessageMessageLink,
     MessageMessageMeta,
     MessageMessageReads,
+    MessageMessageRowId,
     MessageMessageScopeRecipients,
     MessageMessageSendAt,
     MessageMessageStatus,
@@ -27,9 +32,9 @@ import {
 import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class MessageMessage extends AggregateRoot
-{
+export class MessageMessage extends AggregateRoot {
     id: MessageMessageId;
+    rowId: MessageMessageRowId;
     tenantIds: MessageMessageTenantIds;
     status: MessageMessageStatus;
     accountRecipientIds: MessageMessageAccountRecipientIds;
@@ -54,6 +59,7 @@ export class MessageMessage extends AggregateRoot
 
     constructor(
         id: MessageMessageId,
+        rowId: MessageMessageRowId,
         tenantIds: MessageMessageTenantIds,
         status: MessageMessageStatus,
         accountRecipientIds: MessageMessageAccountRecipientIds,
@@ -75,10 +81,10 @@ export class MessageMessage extends AggregateRoot
         createdAt: MessageMessageCreatedAt,
         updatedAt: MessageMessageUpdatedAt,
         deletedAt: MessageMessageDeletedAt,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.tenantIds = tenantIds;
         this.status = status;
         this.accountRecipientIds = accountRecipientIds;
@@ -104,6 +110,7 @@ export class MessageMessage extends AggregateRoot
 
     static register(
         id: MessageMessageId,
+        rowId: MessageMessageRowId,
         tenantIds: MessageMessageTenantIds,
         status: MessageMessageStatus,
         accountRecipientIds: MessageMessageAccountRecipientIds,
@@ -125,10 +132,10 @@ export class MessageMessage extends AggregateRoot
         createdAt: MessageMessageCreatedAt,
         updatedAt: MessageMessageUpdatedAt,
         deletedAt: MessageMessageDeletedAt,
-    ): MessageMessage
-    {
+    ): MessageMessage {
         return new MessageMessage(
             id,
+            rowId,
             tenantIds,
             status,
             accountRecipientIds,
@@ -153,20 +160,15 @@ export class MessageMessage extends AggregateRoot
         );
     }
 
-    created(
-        event: {
-            payload: MessageMessage;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    created(event: { payload: MessageMessage; cQMetadata?: CQMetadata }): void {
         this.apply(
             new MessageCreatedMessageEvent({
                 payload: {
                     id: event.payload.id.value,
                     tenantIds: event.payload.tenantIds?.value,
                     status: event.payload.status.value,
-                    accountRecipientIds: event.payload.accountRecipientIds?.value,
+                    accountRecipientIds:
+                        event.payload.accountRecipientIds?.value,
                     tenantRecipientIds: event.payload.tenantRecipientIds?.value,
                     scopeRecipients: event.payload.scopeRecipients?.value,
                     tagRecipients: event.payload.tagRecipients?.value,
@@ -191,20 +193,15 @@ export class MessageMessage extends AggregateRoot
         );
     }
 
-    updated(
-        event: {
-            payload: MessageMessage;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    updated(event: { payload: MessageMessage; cQMetadata?: CQMetadata }): void {
         this.apply(
             new MessageUpdatedMessageEvent({
                 payload: {
                     id: event.payload.id?.value,
                     tenantIds: event.payload.tenantIds?.value,
                     status: event.payload.status?.value,
-                    accountRecipientIds: event.payload.accountRecipientIds?.value,
+                    accountRecipientIds:
+                        event.payload.accountRecipientIds?.value,
                     tenantRecipientIds: event.payload.tenantRecipientIds?.value,
                     scopeRecipients: event.payload.scopeRecipients?.value,
                     tagRecipients: event.payload.tagRecipients?.value,
@@ -229,20 +226,16 @@ export class MessageMessage extends AggregateRoot
         );
     }
 
-    deleted(
-        event: {
-            payload: MessageMessage;
-            cQMetadata?: CQMetadata;
-        },
-    ): void
-    {
+    deleted(event: { payload: MessageMessage; cQMetadata?: CQMetadata }): void {
         this.apply(
             new MessageDeletedMessageEvent({
                 payload: {
                     id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
                     tenantIds: event.payload.tenantIds?.value,
                     status: event.payload.status.value,
-                    accountRecipientIds: event.payload.accountRecipientIds?.value,
+                    accountRecipientIds:
+                        event.payload.accountRecipientIds?.value,
                     tenantRecipientIds: event.payload.tenantRecipientIds?.value,
                     scopeRecipients: event.payload.scopeRecipients?.value,
                     tagRecipients: event.payload.tagRecipients?.value,
@@ -267,10 +260,10 @@ export class MessageMessage extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             tenantIds: this.tenantIds?.value,
             status: this.status.value,
             accountRecipientIds: this.accountRecipientIds?.value,
@@ -296,8 +289,7 @@ export class MessageMessage extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             tenantIds: this.tenantIds?.value,

@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageIMessageRepository, MessageMockMessageRepository } from '@app/message/message';
+import {
+    MessageIMessageRepository,
+    MessageMockMessageRepository,
+} from '@app/message/message';
 import { MessageCreateMessagesService } from '@app/message/message/application/create/message-create-messages.service';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCreateMessagesService', () =>
-{
+describe('MessageCreateMessagesService', () => {
     let service: MessageCreateMessagesService;
     let mockRepository: MessageMockMessageRepository;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -20,34 +26,29 @@ describe('MessageCreateMessagesService', () =>
                 MessageCreateMessagesService,
                 MessageMockMessageRepository,
                 {
-                    provide : MessageIMessageRepository,
+                    provide: MessageIMessageRepository,
                     useValue: {
-                        insert: () => { /**/ },
+                        insert: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(MessageCreateMessagesService);
         mockRepository = module.get(MessageMockMessageRepository);
     });
 
-    describe('main', () =>
-    {
-        test('CreateMessagesService should be defined', () =>
-        {
+    describe('main', () => {
+        test('CreateMessagesService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should create messages and emit event', async () =>
-        {
-            expect(
-                await service.main(
-                    mockRepository.collectionSource,
-                ),
-            )
-                .toBe(undefined);
+        test('should create messages and emit event', async () => {
+            expect(await service.main(mockRepository.collectionSource)).toBe(
+                undefined,
+            );
         });
     });
 });

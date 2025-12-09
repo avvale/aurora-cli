@@ -1,11 +1,11 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageDeletedMessageEvent
-{
+export class MessageDeletedMessageEvent {
     constructor(
         public readonly event: {
             payload: {
                 id: string;
+                rowId: number;
                 tenantIds: string[];
                 status: string;
                 accountRecipientIds: string[];

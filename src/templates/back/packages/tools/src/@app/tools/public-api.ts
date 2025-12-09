@@ -3,23 +3,27 @@ import { ToolsKeyValueHandlers, ToolsKeyValueServices, ToolsKeyValueModel, Tools
 import { ToolsProcedureHandlers, ToolsProcedureServices, ToolsProcedureModel, ToolsIProcedureRepository, ToolsSequelizeProcedureRepository, ToolsProcedureSagas } from './procedure';
 import { ToolsInformationSchemaHandlers, ToolsInformationSchemaServices, ToolsSequelizeInformationSchemaRepository } from './information-schema';
 import { ToolsMigrationHandlers, ToolsMigrationServices, ToolsMigrationModel, ToolsIMigrationRepository, ToolsSequelizeMigrationRepository, ToolsMigrationSagas } from './migration';
+import { ToolsWebhookHandlers, ToolsWebhookServices, ToolsWebhookModel, ToolsIWebhookRepository, ToolsSequelizeWebhookRepository, ToolsWebhookSagas } from './webhook';
 
 export const ToolsHandlers = [
     ...ToolsKeyValueHandlers,
     ...ToolsProcedureHandlers,
     ...ToolsInformationSchemaHandlers,
-    ...ToolsMigrationHandlers
+    ...ToolsMigrationHandlers,
+    ...ToolsWebhookHandlers
 ];
 export const ToolsServices = [
     ...ToolsKeyValueServices,
     ...ToolsProcedureServices,
     ...ToolsInformationSchemaServices,
-    ...ToolsMigrationServices
+    ...ToolsMigrationServices,
+    ...ToolsWebhookServices
 ];
 export const ToolsModels = [
     ToolsKeyValueModel,
     ToolsProcedureModel,
-    ToolsMigrationModel
+    ToolsMigrationModel,
+    ToolsWebhookModel
 ];
 export const ToolsRepositories = [
     {
@@ -34,10 +38,15 @@ export const ToolsRepositories = [
     {
         provide : ToolsIMigrationRepository,
         useClass: ToolsSequelizeMigrationRepository,
+    },
+    {
+        provide : ToolsIWebhookRepository,
+        useClass: ToolsSequelizeWebhookRepository,
     }
 ];
 export const ToolsSagas = [
     ToolsKeyValueSagas,
     ToolsProcedureSagas,
-    ToolsMigrationSagas
+    ToolsMigrationSagas,
+    ToolsWebhookSagas
 ];

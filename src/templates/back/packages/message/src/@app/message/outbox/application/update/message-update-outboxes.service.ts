@@ -1,13 +1,14 @@
-import { MessageAddOutboxesContextEvent, MessageIOutboxRepository, MessageOutbox } from '@app/message/outbox';
+import {
+    MessageAddOutboxesContextEvent,
+    MessageIOutboxRepository,
+    MessageOutbox,
+} from '@app/message/outbox';
 import {
     MessageOutboxAccountRecipientIds,
-    MessageOutboxCreatedAt,
-    MessageOutboxDeletedAt,
     MessageOutboxId,
     MessageOutboxMessageId,
     MessageOutboxMeta,
     MessageOutboxScopeRecipients,
-    MessageOutboxSort,
     MessageOutboxTagRecipients,
     MessageOutboxTenantRecipientIds,
     MessageOutboxUpdatedAt,
@@ -17,8 +18,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class MessageUpdateOutboxesService
-{
+export class MessageUpdateOutboxesService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: MessageIOutboxRepository,
@@ -28,7 +28,6 @@ export class MessageUpdateOutboxesService
         payload: {
             id?: MessageOutboxId;
             messageId?: MessageOutboxMessageId;
-            sort?: MessageOutboxSort;
             accountRecipientIds?: MessageOutboxAccountRecipientIds;
             tenantRecipientIds?: MessageOutboxTenantRecipientIds;
             scopeRecipients?: MessageOutboxScopeRecipients;
@@ -38,13 +37,12 @@ export class MessageUpdateOutboxesService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const outbox = MessageOutbox.register(
             payload.id,
+            undefined, // rowId
             payload.messageId,
-            payload.sort,
             payload.accountRecipientIds,
             payload.tenantRecipientIds,
             payload.scopeRecipients,
@@ -56,28 +54,23 @@ export class MessageUpdateOutboxesService
         );
 
         // update
-        await this.repository.update(
-            outbox,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(outbox, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const outboxes = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const outboxes = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const outboxesRegister = this.publisher.mergeObjectContext(
-            new MessageAddOutboxesContextEvent(outboxes),
+            new MessageAddOutboxesContextEvent(outboxes, cQMetadata),
         );
 
         outboxesRegister.updated(); // apply event to model events

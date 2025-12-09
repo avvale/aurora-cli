@@ -1,11 +1,17 @@
-export class MessageUpdatedInboxSettingEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class MessageUpdatedInboxSettingEvent {
     constructor(
-        public readonly id: string,
-        public readonly accountId: string,
-        public readonly sort: number,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                accountId: string;
+                lastReadMessageRowId: number;
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

@@ -1,13 +1,10 @@
 import { MessageIOutboxRepository, MessageOutbox } from '@app/message/outbox';
 import {
     MessageOutboxAccountRecipientIds,
-    MessageOutboxCreatedAt,
-    MessageOutboxDeletedAt,
     MessageOutboxId,
     MessageOutboxMessageId,
     MessageOutboxMeta,
     MessageOutboxScopeRecipients,
-    MessageOutboxSort,
     MessageOutboxTagRecipients,
     MessageOutboxTenantRecipientIds,
     MessageOutboxUpdatedAt,
@@ -17,8 +14,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class MessageUpdateOutboxByIdService
-{
+export class MessageUpdateOutboxByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: MessageIOutboxRepository,
@@ -28,7 +24,6 @@ export class MessageUpdateOutboxByIdService
         payload: {
             id: MessageOutboxId;
             messageId?: MessageOutboxMessageId;
-            sort?: MessageOutboxSort;
             accountRecipientIds?: MessageOutboxAccountRecipientIds;
             tenantRecipientIds?: MessageOutboxTenantRecipientIds;
             scopeRecipients?: MessageOutboxScopeRecipients;
@@ -37,13 +32,12 @@ export class MessageUpdateOutboxByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const outbox = MessageOutbox.register(
             payload.id,
+            undefined, // rowId
             payload.messageId,
-            payload.sort,
             payload.accountRecipientIds,
             payload.tenantRecipientIds,
             payload.scopeRecipients,
@@ -55,21 +49,19 @@ export class MessageUpdateOutboxByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            outbox,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(outbox, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const outboxRegister = this.publisher.mergeObjectContext(
-            outbox,
-        );
+        const outboxRegister = this.publisher.mergeObjectContext(outbox);
 
-        outboxRegister.updated(outbox); // apply event to model events
+        outboxRegister.updated({
+            payload: outbox,
+            cQMetadata,
+        }); // apply event to model events
         outboxRegister.commit(); // commit all events of model
     }
 }

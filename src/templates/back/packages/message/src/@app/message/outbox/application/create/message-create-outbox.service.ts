@@ -2,12 +2,10 @@ import { MessageIOutboxRepository, MessageOutbox } from '@app/message/outbox';
 import {
     MessageOutboxAccountRecipientIds,
     MessageOutboxCreatedAt,
-    MessageOutboxDeletedAt,
     MessageOutboxId,
     MessageOutboxMessageId,
     MessageOutboxMeta,
     MessageOutboxScopeRecipients,
-    MessageOutboxSort,
     MessageOutboxTagRecipients,
     MessageOutboxTenantRecipientIds,
     MessageOutboxUpdatedAt,
@@ -17,8 +15,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class MessageCreateOutboxService
-{
+export class MessageCreateOutboxService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: MessageIOutboxRepository,
@@ -35,13 +32,12 @@ export class MessageCreateOutboxService
             meta: MessageOutboxMeta;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const outbox = MessageOutbox.register(
             payload.id,
+            undefined, // rowId
             payload.messageId,
-            new MessageOutboxSort(undefined, { undefinable: true }), // sort is auto increment
             payload.accountRecipientIds,
             payload.tenantRecipientIds,
             payload.scopeRecipients,
@@ -52,19 +48,17 @@ export class MessageCreateOutboxService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            outbox,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(outbox, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const outboxRegister = this.publisher.mergeObjectContext(
-            outbox,
-        );
+        const outboxRegister = this.publisher.mergeObjectContext(outbox);
 
-        outboxRegister.created(outbox); // apply event to model events
+        outboxRegister.created({
+            payload: outbox,
+            cQMetadata,
+        }); // apply event to model events
         outboxRegister.commit(); // commit all events of model
     }
 }

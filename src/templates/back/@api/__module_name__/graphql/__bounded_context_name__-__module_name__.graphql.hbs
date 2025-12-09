@@ -239,10 +239,12 @@ type Query
 type Mutation
 {
     {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts'}}
+    {{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts') }}
     {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}(
         payload: {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Input!
     ): {{ schema.aggregateName }}
 
+    {{/isAllowPath}}
     {{/notInArray}}
     {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.resolver.ts') }}
     {{ toCamelCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}(

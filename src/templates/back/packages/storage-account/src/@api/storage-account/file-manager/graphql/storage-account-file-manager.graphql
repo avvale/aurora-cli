@@ -9,6 +9,7 @@ type StorageAccountFileManagerFile {
     mimetype: GraphQLString!
     extension: GraphQLString!
     relativePathSegments: [GraphQLString!]!
+    containerName: GraphQLString
     width: GraphQLInt
     height: GraphQLInt
     size: GraphQLInt

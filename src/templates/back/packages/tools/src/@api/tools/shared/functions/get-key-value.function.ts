@@ -1,13 +1,16 @@
 import { ToolsKeyValue, ToolsKeyValueType } from '@api/graphql';
 import { ToolsFindKeyValueQuery } from '@app/tools/key-value';
 import { IQueryBus } from '@aurorajs.dev/core';
+import { ModuleRef } from '@nestjs/core';
 
 export const getKeyValue = async <
     T = string | boolean | number | Array<any> | object,
 >(
-    queryBus: IQueryBus,
+    moduleRef: ModuleRef,
     key: string,
 ): Promise<T> => {
+    const queryBus = moduleRef.get(IQueryBus);
+
     const keyValue: ToolsKeyValue = await queryBus.ask(
         new ToolsFindKeyValueQuery({ where: { key } }),
     );

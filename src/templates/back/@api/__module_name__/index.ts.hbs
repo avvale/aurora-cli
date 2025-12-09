@@ -14,7 +14,9 @@ export { {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schem
 
 // export handlers
 {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/handlers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.handler.ts'}}
+{{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'handlers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.handler.ts') }}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.handler';
+{{/isAllowPath}}
 {{/notInArray}}
 {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'handlers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.handler.ts') }}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.handler';
@@ -52,7 +54,9 @@ export { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 
 // export controllers
 {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/controllers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.controller.ts'}}
+{{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'controllers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.controller.ts') }}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller } from './controllers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.controller';
+{{/isAllowPath}}
 {{/notInArray}}
 {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'controllers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.controller.ts') }}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Controller } from './controllers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.controller';
@@ -90,7 +94,9 @@ export { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 
 // export resolvers
 {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts'}}
+{{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts') }}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.resolver';
+{{/isAllowPath}}
 {{/notInArray}}
 {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.resolver.ts') }}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.resolver';
@@ -143,7 +149,9 @@ export { {{ getClassNameAdditionalApi this }}Resolver } from './resolvers/{{ get
 
 // import controllers
 {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/controllers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.controller.ts'}}
+{{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'controllers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.controller.ts') }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller } from './controllers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.controller';
+{{/isAllowPath}}
 {{/notInArray}}
 {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'controllers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.controller.ts') }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Controller } from './controllers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.controller';
@@ -181,7 +189,9 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 
 // import resolvers
 {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts'}}
+{{#isAllowPath schema 'create' 'src/' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts') }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.resolver';
+{{/isAllowPath}}
 {{/notInArray}}
 {{#isAllowPath schema 'createBatch' 'src/' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.resolver.ts') }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Resolver } from './resolvers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.resolver';
@@ -219,7 +229,9 @@ import { {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schem
 
 // import handlers
 {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/handlers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.handler.ts'}}
+{{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'handlers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.handler.ts') }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.handler';
+{{/isAllowPath}}
 {{/notInArray}}
 {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'handlers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.handler.ts') }}
 import { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler } from './handlers/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleNames }}.handler';
@@ -277,7 +289,9 @@ import { {{ getClassNameAdditionalApi this }}Resolver } from './resolvers/{{ get
 
 export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}ApiControllers = [
     {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/controllers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.controller.ts'}}
+    {{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'controllers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.controller.ts') }}
     {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Controller,
+    {{/isAllowPath}}
     {{/notInArray}}
     {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'controllers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.controller.ts') }}
     {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Controller,
@@ -325,7 +339,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
 export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}ApiResolvers = [
     {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/resolvers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts'}}
+    {{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.resolver.ts') }}
     {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Resolver,
+    {{/isAllowPath}}
     {{/notInArray}}
     {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'resolvers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.resolver.ts') }}
     {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Resolver,
@@ -373,7 +389,9 @@ export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
 export const {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}ApiHandlers = [
     {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/handlers/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.handler.ts'}}
+    {{#isAllowPath schema 'create' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'handlers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.handler.ts') }}
     {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Handler,
+    {{/isAllowPath}}
     {{/notInArray}}
     {{#isAllowPath schema 'createBatch' 'src' config.apiContainer (toKebabCase schema.boundedContextName) (toKebabCase schema.moduleName) 'handlers' (sumStrings (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleNames) '.handler.ts') }}
     {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleNames }}Handler,

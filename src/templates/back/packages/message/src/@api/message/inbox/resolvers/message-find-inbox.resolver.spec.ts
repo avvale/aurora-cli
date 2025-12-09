@@ -1,49 +1,51 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageFindInboxHandler, MessageFindInboxResolver } from '@api/message/inbox';
+import {
+    MessageFindInboxHandler,
+    MessageFindInboxResolver,
+} from '@api/message/inbox';
 import { messageMockInboxData } from '@app/message/inbox';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindInboxResolver', () =>
-{
+describe('MessageFindInboxResolver', () => {
     let resolver: MessageFindInboxResolver;
     let handler: MessageFindInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageFindInboxResolver,
                 {
-                    provide : MessageFindInboxHandler,
+                    provide: MessageFindInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageFindInboxResolver>(MessageFindInboxResolver);
+        resolver = module.get<MessageFindInboxResolver>(
+            MessageFindInboxResolver,
+        );
         handler = module.get<MessageFindInboxHandler>(MessageFindInboxHandler);
     });
 
-    test('MessageFindInboxResolver should be defined', () =>
-    {
+    test('MessageFindInboxResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindInboxResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindInboxResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a inbox', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxData[0])));
+        test('should return a inbox', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockInboxData[0])),
+            );
             expect(await resolver.main()).toBe(messageMockInboxData[0]);
         });
     });

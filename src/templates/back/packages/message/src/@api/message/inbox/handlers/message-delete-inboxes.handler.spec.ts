@@ -4,61 +4,56 @@ import { messageMockInboxData } from '@app/message/inbox';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteInboxesHandler', () =>
-{
+describe('MessageDeleteInboxesHandler', () => {
     let handler: MessageDeleteInboxesHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageDeleteInboxesHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageDeleteInboxesHandler>(MessageDeleteInboxesHandler);
+        handler = module.get<MessageDeleteInboxesHandler>(
+            MessageDeleteInboxesHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('MessageDeleteInboxesHandler should be defined', () =>
-    {
+    test('MessageDeleteInboxesHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteInboxesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteInboxesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an messageMockInboxData deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxData)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(messageMockInboxData);
+        test('should return an messageMockInboxData deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () => new Promise((resolve) => resolve(messageMockInboxData)),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                messageMockInboxData,
+            );
         });
     });
 });

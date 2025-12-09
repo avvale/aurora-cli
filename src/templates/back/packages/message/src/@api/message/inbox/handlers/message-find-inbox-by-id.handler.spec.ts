@@ -4,55 +4,53 @@ import { messageMockInboxData } from '@app/message/inbox';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindInboxByIdHandler', () =>
-{
+describe('MessageFindInboxByIdHandler', () => {
     let handler: MessageFindInboxByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageFindInboxByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageFindInboxByIdHandler>(MessageFindInboxByIdHandler);
+        handler = module.get<MessageFindInboxByIdHandler>(
+            MessageFindInboxByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('MessageFindInboxByIdHandler should be defined', () =>
-    {
+    test('MessageFindInboxByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindInboxByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindInboxByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an inbox by id', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxData[0])));
+        test('should return an inbox by id', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockInboxData[0])),
+            );
             expect(
                 await handler.main(
                     messageMockInboxData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(messageMockInboxData[0]);
+            ).toBe(messageMockInboxData[0]);
         });
     });
 });

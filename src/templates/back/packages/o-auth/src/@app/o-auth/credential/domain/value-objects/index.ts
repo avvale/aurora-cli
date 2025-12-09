@@ -5,4 +5,3 @@ export { OAuthCredentialGrantType } from './o-auth-credential-grant-type';
 export { OAuthCredentialRedirect } from './o-auth-credential-redirect';
 export { OAuthCredentialRefreshToken } from './o-auth-credential-refresh-token';
 export { OAuthCredentialUsername } from './o-auth-credential-username';
-

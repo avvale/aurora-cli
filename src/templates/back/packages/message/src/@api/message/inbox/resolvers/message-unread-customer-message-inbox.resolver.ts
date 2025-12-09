@@ -3,13 +3,18 @@ import { TenantPolicy } from '@api/iam/shared';
 import { MessageUnreadCustomerMessageInboxHandler } from '@api/message/inbox';
 import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, CurrentAccount, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    CurrentAccount,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.inbox.update')
-export class MessageUnreadCustomerMessageInboxResolver
-{
+export class MessageUnreadCustomerMessageInboxResolver {
     constructor(
         private readonly handler: MessageUnreadCustomerMessageInboxHandler,
     ) {}
@@ -22,8 +27,7 @@ export class MessageUnreadCustomerMessageInboxResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
+    ): Promise<boolean> {
         return await this.handler.main(
             account,
             inbox,

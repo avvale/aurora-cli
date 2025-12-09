@@ -1,51 +1,59 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MessageUpdateInboxByIdInput } from '@api/graphql';
-import { MessageUpdateInboxByIdHandler, MessageUpdateInboxByIdResolver } from '@api/message/inbox';
+import {
+    MessageUpdateInboxByIdHandler,
+    MessageUpdateInboxByIdResolver,
+} from '@api/message/inbox';
 import { messageMockInboxData } from '@app/message/inbox';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageUpdateInboxByIdResolver', () =>
-{
+describe('MessageUpdateInboxByIdResolver', () => {
     let resolver: MessageUpdateInboxByIdResolver;
     let handler: MessageUpdateInboxByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageUpdateInboxByIdResolver,
                 {
-                    provide : MessageUpdateInboxByIdHandler,
+                    provide: MessageUpdateInboxByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageUpdateInboxByIdResolver>(MessageUpdateInboxByIdResolver);
-        handler = module.get<MessageUpdateInboxByIdHandler>(MessageUpdateInboxByIdHandler);
+        resolver = module.get<MessageUpdateInboxByIdResolver>(
+            MessageUpdateInboxByIdResolver,
+        );
+        handler = module.get<MessageUpdateInboxByIdHandler>(
+            MessageUpdateInboxByIdHandler,
+        );
     });
 
-    test('MessageUpdateInboxByIdResolver should be defined', () =>
-    {
+    test('MessageUpdateInboxByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageUpdateInboxByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageUpdateInboxByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a inbox by id updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxData[0])));
-            expect(await resolver.main(<MessageUpdateInboxByIdInput>messageMockInboxData[0])).toBe(messageMockInboxData[0]);
+        test('should return a inbox by id updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockInboxData[0])),
+            );
+            expect(
+                await resolver.main(
+                    <MessageUpdateInboxByIdInput>messageMockInboxData[0],
+                ),
+            ).toBe(messageMockInboxData[0]);
         });
     });
 });

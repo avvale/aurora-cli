@@ -13,11 +13,8 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class OAuthCreateCredentialService
-{
-    constructor(
-        private readonly publisher: EventPublisher,
-    ) {}
+export class OAuthCreateCredentialService {
+    constructor(private readonly publisher: EventPublisher) {}
 
     async main(
         payload: {
@@ -30,8 +27,7 @@ export class OAuthCreateCredentialService
             redirect: OAuthCredentialRedirect;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const credential = OAuthCredential.register(
             payload.grantType,
@@ -44,9 +40,8 @@ export class OAuthCreateCredentialService
         );
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const credentialRegister = this.publisher.mergeObjectContext(
-            credential,
-        );
+        const credentialRegister =
+            this.publisher.mergeObjectContext(credential);
 
         credentialRegister.created(credential); // apply event to model events
         credentialRegister.commit(); // commit all events of model

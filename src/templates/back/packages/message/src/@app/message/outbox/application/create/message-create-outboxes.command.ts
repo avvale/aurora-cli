@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageCreateOutboxesCommand
-{
+export class MessageCreateOutboxesCommand {
     constructor(
         public readonly payload: {
             id: string;
@@ -11,7 +10,7 @@ export class MessageCreateOutboxesCommand
             scopeRecipients?: string[];
             tagRecipients?: string[];
             meta?: any;
-        } [],
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

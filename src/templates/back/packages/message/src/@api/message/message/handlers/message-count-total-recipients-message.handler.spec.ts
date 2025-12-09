@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageCountTotalRecipientsMessageHandler } from './message-count-total-recipients-message.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { MessageCountTotalRecipientsMessageHandler } from './message-count-total-recipients-message.handler';
 
-describe('MessageCountTotalRecipientsMessageHandler', () =>
-{
+describe('MessageCountTotalRecipientsMessageHandler', () => {
     let handler: MessageCountTotalRecipientsMessageHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageCountTotalRecipientsMessageHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<MessageCountTotalRecipientsMessageHandler>(MessageCountTotalRecipientsMessageHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<MessageCountTotalRecipientsMessageHandler>(
+            MessageCountTotalRecipientsMessageHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessageCountTotalRecipientsMessageHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCountTotalRecipientsMessageHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

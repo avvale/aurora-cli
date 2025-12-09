@@ -1,50 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageDeleteMessageByIdHandler, MessageDeleteMessageByIdResolver } from '@api/message/message';
+import {
+    MessageDeleteMessageByIdHandler,
+    MessageDeleteMessageByIdResolver,
+} from '@api/message/message';
 import { messageMockMessageData } from '@app/message/message';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteMessageByIdResolver', () =>
-{
+describe('MessageDeleteMessageByIdResolver', () => {
     let resolver: MessageDeleteMessageByIdResolver;
     let handler: MessageDeleteMessageByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageDeleteMessageByIdResolver,
                 {
-                    provide : MessageDeleteMessageByIdHandler,
+                    provide: MessageDeleteMessageByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageDeleteMessageByIdResolver>(MessageDeleteMessageByIdResolver);
-        handler = module.get<MessageDeleteMessageByIdHandler>(MessageDeleteMessageByIdHandler);
+        resolver = module.get<MessageDeleteMessageByIdResolver>(
+            MessageDeleteMessageByIdResolver,
+        );
+        handler = module.get<MessageDeleteMessageByIdHandler>(
+            MessageDeleteMessageByIdHandler,
+        );
     });
 
-    test('MessageDeleteMessageByIdResolver should be defined', () =>
-    {
+    test('MessageDeleteMessageByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteMessageByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteMessageByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an message deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockMessageData[0])));
-            expect(await resolver.main(messageMockMessageData[0].id)).toBe(messageMockMessageData[0]);
+        test('should return an message deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockMessageData[0]),
+                    ),
+            );
+            expect(await resolver.main(messageMockMessageData[0].id)).toBe(
+                messageMockMessageData[0],
+            );
         });
     });
 });

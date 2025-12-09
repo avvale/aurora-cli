@@ -5,53 +5,54 @@ import { messageMockOutboxData } from '@app/message/outbox';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageUpdateOutboxesHandler', () =>
-{
+describe('MessageUpdateOutboxesHandler', () => {
     let handler: MessageUpdateOutboxesHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageUpdateOutboxesHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageUpdateOutboxesHandler>(MessageUpdateOutboxesHandler);
+        handler = module.get<MessageUpdateOutboxesHandler>(
+            MessageUpdateOutboxesHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('MessageUpdateOutboxesHandler should be defined', () =>
-    {
+    test('MessageUpdateOutboxesHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageUpdateOutboxesHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageUpdateOutboxesHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a outboxes updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockOutboxData[0])));
+        test('should return a outboxes updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockOutboxData[0])),
+            );
             expect(
                 await handler.main(
                     <MessageUpdateOutboxesInput>messageMockOutboxData[0],
@@ -59,8 +60,7 @@ describe('MessageUpdateOutboxesHandler', () =>
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(messageMockOutboxData[0]);
+            ).toBe(messageMockOutboxData[0]);
         });
     });
 });

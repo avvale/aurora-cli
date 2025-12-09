@@ -42,6 +42,4 @@ export const OAuthCredentialHandlers = [
     OAuthCreatedCredentialEventHandler,
 ];
 
-export const OAuthCredentialServices = [
-    OAuthCreateCredentialService,
-];
+export const OAuthCredentialServices = [OAuthCreateCredentialService];

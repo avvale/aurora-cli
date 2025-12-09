@@ -5,6 +5,8 @@ export const mapControllerFilesWithStream = (
     files: StorageAccountFileManagerFileUploadedInput[],
     binaries: Express.Multer.File[],
 ): StorageAccountFileManagerFileUploadedInput[] => {
+    if (!Array.isArray(files)) return files;
+
     return files.map((file, index) => ({
         ...file,
         file: {

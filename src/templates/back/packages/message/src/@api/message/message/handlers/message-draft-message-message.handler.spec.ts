@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageDraftMessageMessageHandler } from './message-draft-message-message.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { MessageDraftMessageMessageHandler } from './message-draft-message-message.handler';
 
-describe('MessageDraftMessageMessageHandler', () =>
-{
+describe('MessageDraftMessageMessageHandler', () => {
     let handler: MessageDraftMessageMessageHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageDraftMessageMessageHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<MessageDraftMessageMessageHandler>(MessageDraftMessageMessageHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<MessageDraftMessageMessageHandler>(
+            MessageDraftMessageMessageHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessageDraftMessageMessageHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDraftMessageMessageHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

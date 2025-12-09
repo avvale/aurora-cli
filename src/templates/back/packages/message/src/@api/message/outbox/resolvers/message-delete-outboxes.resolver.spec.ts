@@ -1,49 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageDeleteOutboxesHandler, MessageDeleteOutboxesResolver } from '@api/message/outbox';
+import {
+    MessageDeleteOutboxesHandler,
+    MessageDeleteOutboxesResolver,
+} from '@api/message/outbox';
 import { messageMockOutboxData } from '@app/message/outbox';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteOutboxesResolver', () =>
-{
+describe('MessageDeleteOutboxesResolver', () => {
     let resolver: MessageDeleteOutboxesResolver;
     let handler: MessageDeleteOutboxesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageDeleteOutboxesResolver,
                 {
-                    provide : MessageDeleteOutboxesHandler,
+                    provide: MessageDeleteOutboxesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageDeleteOutboxesResolver>(MessageDeleteOutboxesResolver);
-        handler = module.get<MessageDeleteOutboxesHandler>(MessageDeleteOutboxesHandler);
+        resolver = module.get<MessageDeleteOutboxesResolver>(
+            MessageDeleteOutboxesResolver,
+        );
+        handler = module.get<MessageDeleteOutboxesHandler>(
+            MessageDeleteOutboxesHandler,
+        );
     });
 
-    test('MessageDeleteOutboxesResolver should be defined', () =>
-    {
+    test('MessageDeleteOutboxesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteOutboxesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteOutboxesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an messageMockOutboxData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockOutboxData)));
+        test('should return an messageMockOutboxData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(messageMockOutboxData)),
+            );
             expect(await resolver.main()).toBe(messageMockOutboxData);
         });
     });

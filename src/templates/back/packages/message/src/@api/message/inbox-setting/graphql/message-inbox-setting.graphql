@@ -1,37 +1,32 @@
-
-type MessageInboxSetting
-{
+type MessageInboxSetting {
     id: ID!
+    rowId: GraphQLInt!
     accountId: ID!
-    sort: GraphQLInt!
+    lastReadMessageRowId: GraphQLInt!
     createdAt: GraphQLTimestamp
     updatedAt: GraphQLTimestamp
     deletedAt: GraphQLTimestamp
 }
 
-input MessageCreateInboxSettingInput
-{
+input MessageCreateInboxSettingInput {
     id: ID!
     accountId: ID!
-    sort: GraphQLInt!
+    lastReadMessageRowId: GraphQLInt!
 }
 
-input MessageUpdateInboxSettingByIdInput
-{
+input MessageUpdateInboxSettingByIdInput {
     id: ID!
     accountId: ID
-    sort: GraphQLInt
+    lastReadMessageRowId: GraphQLInt
 }
 
-input MessageUpdateInboxSettingsInput
-{
+input MessageUpdateInboxSettingsInput {
     id: ID
     accountId: ID
-    sort: GraphQLInt
+    lastReadMessageRowId: GraphQLInt
 }
 
-type Query
-{
+type Query {
     messageFindInboxSetting(
         query: QueryStatement
         constraint: QueryStatement
@@ -51,11 +46,9 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
+type Mutation {
     messageCreateInboxSetting(
         payload: MessageCreateInboxSettingInput!
     ): MessageInboxSetting
@@ -75,10 +68,6 @@ type Mutation
         constraint: QueryStatement
     ): [MessageInboxSetting]!
 
-    messageUpsertInboxSetting(
-        payload: MessageUpdateInboxSettingByIdInput!
-    ): MessageInboxSetting
-
     messageDeleteInboxSettingById(
         id: ID!
         constraint: QueryStatement
@@ -88,5 +77,4 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [MessageInboxSetting]!
-
 }

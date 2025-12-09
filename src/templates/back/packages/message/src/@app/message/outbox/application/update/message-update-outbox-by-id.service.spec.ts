@@ -1,25 +1,32 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageIOutboxRepository, messageMockOutboxData, MessageMockOutboxRepository } from '@app/message/outbox';
+import {
+    MessageIOutboxRepository,
+    messageMockOutboxData,
+    MessageMockOutboxRepository,
+} from '@app/message/outbox';
 import { MessageUpdateOutboxByIdService } from '@app/message/outbox/application/update/message-update-outbox-by-id.service';
 import {
     MessageOutboxAccountRecipientIds,
     MessageOutboxId,
     MessageOutboxMessageId,
     MessageOutboxMeta,
+    MessageOutboxRowId,
     MessageOutboxScopeRecipients,
-    MessageOutboxSort,
     MessageOutboxTagRecipients,
     MessageOutboxTenantRecipientIds,
 } from '@app/message/outbox/domain/value-objects';
-import { CommandBus, EventBus, EventPublisher, UnhandledExceptionBus } from '@nestjs/cqrs';
+import {
+    CommandBus,
+    EventBus,
+    EventPublisher,
+    UnhandledExceptionBus,
+} from '@nestjs/cqrs';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageUpdateOutboxByIdService', () =>
-{
+describe('MessageUpdateOutboxByIdService', () => {
     let service: MessageUpdateOutboxByIdService;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 CommandBus,
@@ -29,38 +36,51 @@ describe('MessageUpdateOutboxByIdService', () =>
                 MessageUpdateOutboxByIdService,
                 MessageMockOutboxRepository,
                 {
-                    provide : MessageIOutboxRepository,
+                    provide: MessageIOutboxRepository,
                     useValue: {
-                        updateById: () => { /**/ },
+                        updateById: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
         service = module.get(MessageUpdateOutboxByIdService);
     });
 
-    describe('main', () =>
-    {
-        test('MessageUpdateOutboxByIdService should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageUpdateOutboxByIdService should be defined', () => {
             expect(service).toBeDefined();
         });
 
-        test('should update a outbox and emit event', async () =>
-        {
+        test('should update a outbox and emit event', async () => {
             expect(
                 await service.main(
                     {
                         id: new MessageOutboxId(messageMockOutboxData[0].id),
-                        messageId: new MessageOutboxMessageId(messageMockOutboxData[0].messageId),
-                        sort: new MessageOutboxSort(messageMockOutboxData[0].sort),
-                        accountRecipientIds: new MessageOutboxAccountRecipientIds(messageMockOutboxData[0].accountRecipientIds),
-                        tenantRecipientIds: new MessageOutboxTenantRecipientIds(messageMockOutboxData[0].tenantRecipientIds),
-                        scopeRecipients: new MessageOutboxScopeRecipients(messageMockOutboxData[0].scopeRecipients),
-                        tagRecipients: new MessageOutboxTagRecipients(messageMockOutboxData[0].tagRecipients),
-                        meta: new MessageOutboxMeta(messageMockOutboxData[0].meta),
+                        rowId: new MessageOutboxRowId(
+                            messageMockOutboxData[0].rowId,
+                        ),
+                        messageId: new MessageOutboxMessageId(
+                            messageMockOutboxData[0].messageId,
+                        ),
+                        accountRecipientIds:
+                            new MessageOutboxAccountRecipientIds(
+                                messageMockOutboxData[0].accountRecipientIds,
+                            ),
+                        tenantRecipientIds: new MessageOutboxTenantRecipientIds(
+                            messageMockOutboxData[0].tenantRecipientIds,
+                        ),
+                        scopeRecipients: new MessageOutboxScopeRecipients(
+                            messageMockOutboxData[0].scopeRecipients,
+                        ),
+                        tagRecipients: new MessageOutboxTagRecipients(
+                            messageMockOutboxData[0].tagRecipients,
+                        ),
+                        meta: new MessageOutboxMeta(
+                            messageMockOutboxData[0].meta,
+                        ),
                     },
                     {},
                 ),

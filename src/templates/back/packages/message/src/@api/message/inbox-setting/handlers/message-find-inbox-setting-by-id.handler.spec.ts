@@ -4,55 +4,55 @@ import { messageMockInboxSettingData } from '@app/message/inbox-setting';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindInboxSettingByIdHandler', () =>
-{
+describe('MessageFindInboxSettingByIdHandler', () => {
     let handler: MessageFindInboxSettingByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageFindInboxSettingByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageFindInboxSettingByIdHandler>(MessageFindInboxSettingByIdHandler);
+        handler = module.get<MessageFindInboxSettingByIdHandler>(
+            MessageFindInboxSettingByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('MessageFindInboxSettingByIdHandler should be defined', () =>
-    {
+    test('MessageFindInboxSettingByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindInboxSettingByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindInboxSettingByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an inboxSetting by id', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxSettingData[0])));
+        test('should return an inboxSetting by id', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockInboxSettingData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     messageMockInboxSettingData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(messageMockInboxSettingData[0]);
+            ).toBe(messageMockInboxSettingData[0]);
         });
     });
 });

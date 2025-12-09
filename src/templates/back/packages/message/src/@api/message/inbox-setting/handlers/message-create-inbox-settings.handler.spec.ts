@@ -3,37 +3,35 @@ import { messageMockInboxSettingData } from '@app/message/inbox-setting';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCreateInboxSettingsHandler', () =>
-{
+describe('MessageCreateInboxSettingsHandler', () => {
     let handler: MessageCreateInboxSettingsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 MessageCreateInboxSettingsHandler,
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageCreateInboxSettingsHandler>(MessageCreateInboxSettingsHandler);
+        handler = module.get<MessageCreateInboxSettingsHandler>(
+            MessageCreateInboxSettingsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageCreateInboxSettingsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCreateInboxSettingsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an messageMockInboxSettingData created', async () =>
-        {
+        test('should return an messageMockInboxSettingData created', async () => {
             expect(await handler.main(messageMockInboxSettingData)).toBe(true);
         });
     });

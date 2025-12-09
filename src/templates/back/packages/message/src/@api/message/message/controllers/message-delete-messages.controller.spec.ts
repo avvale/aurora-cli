@@ -1,45 +1,47 @@
-import { MessageDeleteMessagesController, MessageDeleteMessagesHandler } from '@api/message/message';
+import {
+    MessageDeleteMessagesController,
+    MessageDeleteMessagesHandler,
+} from '@api/message/message';
 import { messageMockMessageData } from '@app/message/message';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteMessagesController', () =>
-{
+describe('MessageDeleteMessagesController', () => {
     let controller: MessageDeleteMessagesController;
     let handler: MessageDeleteMessagesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageDeleteMessagesController,
-            ],
+            imports: [],
+            controllers: [MessageDeleteMessagesController],
             providers: [
                 {
-                    provide : MessageDeleteMessagesHandler,
+                    provide: MessageDeleteMessagesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageDeleteMessagesController>(MessageDeleteMessagesController);
-        handler = module.get<MessageDeleteMessagesHandler>(MessageDeleteMessagesHandler);
+        controller = module.get<MessageDeleteMessagesController>(
+            MessageDeleteMessagesController,
+        );
+        handler = module.get<MessageDeleteMessagesHandler>(
+            MessageDeleteMessagesHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteMessagesController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteMessagesController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an messageMockMessageData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockMessageData)));
+        test('should return an messageMockMessageData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () => new Promise((resolve) => resolve(messageMockMessageData)),
+            );
             expect(await controller.main()).toBe(messageMockMessageData);
         });
     });

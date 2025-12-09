@@ -1,8 +1,11 @@
-import { MessageUpdatedOutboxEvent } from './message-updated-outbox.event';
+import { MessageUpdatedOutboxEvent } from '@app/message/outbox';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageUpdatedOutboxesEvent
-{
+export class MessageUpdatedOutboxesEvent {
     constructor(
-        public readonly outboxes: MessageUpdatedOutboxEvent[],
+        public readonly event: {
+            payload: MessageUpdatedOutboxEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

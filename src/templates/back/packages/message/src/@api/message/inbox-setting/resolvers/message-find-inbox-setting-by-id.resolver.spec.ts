@@ -1,50 +1,58 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageFindInboxSettingByIdHandler, MessageFindInboxSettingByIdResolver } from '@api/message/inbox-setting';
+import {
+    MessageFindInboxSettingByIdHandler,
+    MessageFindInboxSettingByIdResolver,
+} from '@api/message/inbox-setting';
 import { messageMockInboxSettingData } from '@app/message/inbox-setting';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindInboxSettingByIdResolver', () =>
-{
+describe('MessageFindInboxSettingByIdResolver', () => {
     let resolver: MessageFindInboxSettingByIdResolver;
     let handler: MessageFindInboxSettingByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageFindInboxSettingByIdResolver,
                 {
-                    provide : MessageFindInboxSettingByIdHandler,
+                    provide: MessageFindInboxSettingByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageFindInboxSettingByIdResolver>(MessageFindInboxSettingByIdResolver);
-        handler = module.get<MessageFindInboxSettingByIdHandler>(MessageFindInboxSettingByIdHandler);
+        resolver = module.get<MessageFindInboxSettingByIdResolver>(
+            MessageFindInboxSettingByIdResolver,
+        );
+        handler = module.get<MessageFindInboxSettingByIdHandler>(
+            MessageFindInboxSettingByIdHandler,
+        );
     });
 
-    test('MessageFindInboxSettingByIdResolver should be defined', () =>
-    {
+    test('MessageFindInboxSettingByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindInboxSettingByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindInboxSettingByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an inboxSetting by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxSettingData[0])));
-            expect(await resolver.main(messageMockInboxSettingData[0].id)).toBe(messageMockInboxSettingData[0]);
+        test('should return an inboxSetting by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockInboxSettingData[0]),
+                    ),
+            );
+            expect(await resolver.main(messageMockInboxSettingData[0].id)).toBe(
+                messageMockInboxSettingData[0],
+            );
         });
     });
 });

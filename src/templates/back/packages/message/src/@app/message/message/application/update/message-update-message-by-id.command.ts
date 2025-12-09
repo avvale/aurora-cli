@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class MessageUpdateMessageByIdCommand
-{
+export class MessageUpdateMessageByIdCommand {
     constructor(
         public readonly payload: {
             id: string;

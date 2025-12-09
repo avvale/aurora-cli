@@ -1,0 +1,96 @@
+type SupportComment {
+    id: ID!
+    rowId: GraphQLInt!
+    externalId: GraphQLString
+    issueId: ID
+    issue: SupportIssue
+    accountId: ID
+    account: IamAccount
+    accountUsername: GraphQLString
+    displayName: GraphQLString
+    description: GraphQLString!
+    attachments: JSON
+    screenRecording: JSON
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input SupportCreateCommentInput {
+    id: ID!
+    externalId: GraphQLString
+    issueId: ID
+    accountId: ID
+    accountUsername: GraphQLString
+    displayName: GraphQLString
+    description: GraphQLString!
+    attachments: JSON
+    screenRecording: JSON
+    meta: JSON
+}
+
+input SupportUpdateCommentByIdInput {
+    id: ID!
+    externalId: GraphQLString
+    issueId: ID
+    accountId: ID
+    accountUsername: GraphQLString
+    displayName: GraphQLString
+    description: GraphQLString
+    attachments: JSON
+    screenRecording: JSON
+    meta: JSON
+}
+
+input SupportUpdateCommentsInput {
+    id: ID
+    externalId: GraphQLString
+    issueId: ID
+    accountId: ID
+    accountUsername: GraphQLString
+    displayName: GraphQLString
+    description: GraphQLString
+    attachments: JSON
+    screenRecording: JSON
+    meta: JSON
+}
+
+type Query {
+    supportFindComment(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): SupportComment
+
+    supportFindCommentById(id: ID, constraint: QueryStatement): SupportComment
+
+    supportGetComments(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [SupportComment]!
+
+    supportPaginateComments(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+}
+
+type Mutation {
+    supportCreateComment(payload: SupportCreateCommentInput!): SupportComment
+
+    supportUpdateCommentById(
+        payload: SupportUpdateCommentByIdInput!
+        constraint: QueryStatement
+    ): SupportComment
+
+    supportUpdateComments(
+        payload: SupportUpdateCommentsInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [SupportComment]!
+
+    supportDeleteCommentById(
+        id: ID!
+        constraint: QueryStatement
+    ): SupportComment
+}

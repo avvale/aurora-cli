@@ -1,10 +1,12 @@
-import { MessageIMessageRepository, MessageMessage } from '@app/message/message';
+import {
+    MessageIMessageRepository,
+    MessageMessage,
+} from '@app/message/message';
 import {
     MessageMessageAccountRecipientIds,
     MessageMessageAttachments,
     MessageMessageBody,
     MessageMessageCreatedAt,
-    MessageMessageDeletedAt,
     MessageMessageIcon,
     MessageMessageId,
     MessageMessageImage,
@@ -28,8 +30,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class MessageCreateMessageService
-{
+export class MessageCreateMessageService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: MessageIMessageRepository,
@@ -58,11 +59,11 @@ export class MessageCreateMessageService
             meta: MessageMessageMeta;
         },
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const message = MessageMessage.register(
             payload.id,
+            undefined, // rowId
             payload.tenantIds,
             payload.status,
             payload.accountRecipientIds,
@@ -86,17 +87,12 @@ export class MessageCreateMessageService
             null, // deletedAt
         );
 
-        await this.repository.create(
-            message,
-            {
-                createOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.create(message, {
+            createOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const messageRegister = this.publisher.mergeObjectContext(
-            message,
-        );
+        const messageRegister = this.publisher.mergeObjectContext(message);
 
         messageRegister.created({
             payload: message,

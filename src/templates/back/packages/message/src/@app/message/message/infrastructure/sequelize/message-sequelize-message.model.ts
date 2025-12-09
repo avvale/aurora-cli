@@ -1,46 +1,64 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    Column,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'MessageMessage',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['tenantIds'],
-			unique: false,
-			using: 'GIN',
-		},
-		{
-			fields: ['accountRecipientIds'],
-			unique: false,
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['tenantIds'],
+            unique: false,
             using: 'GIN',
-		},
-		{
-			fields: ['tenantRecipientIds'],
-			unique: false,
+        },
+        {
+            fields: ['accountRecipientIds'],
+            unique: false,
             using: 'GIN',
-		},
-		{
-			fields: ['scopeRecipients'],
-			unique: false,
+        },
+        {
+            fields: ['tenantRecipientIds'],
+            unique: false,
             using: 'GIN',
-		},
-		{
-			fields: ['tagRecipients'],
-			unique: false,
+        },
+        {
+            fields: ['scopeRecipients'],
+            unique: false,
             using: 'GIN',
-		},
+        },
+        {
+            fields: ['tagRecipients'],
+            unique: false,
+            using: 'GIN',
+        },
     ],
 })
-export class MessageMessageModel extends Model<MessageMessageModel>
-{
+export class MessageMessageModel extends Model<MessageMessageModel> {
     @AfterCreate
-    static auditingCreate(instance: MessageMessageModel, options): void
-    {
+    static auditingCreate(instance: MessageMessageModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -51,8 +69,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: MessageMessageModel, options): void
-    {
+    static auditingBulkCreate(instance: MessageMessageModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -63,8 +80,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: MessageMessageModel, options): void
-    {
+    static auditingUpdate(instance: MessageMessageModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -75,8 +91,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -87,8 +102,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: MessageMessageModel, options): void
-    {
+    static auditingDestroy(instance: MessageMessageModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -99,8 +113,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -111,8 +124,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: MessageMessageModel, options): void
-    {
+    static auditingRestore(instance: MessageMessageModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -123,8 +135,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -135,8 +146,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: MessageMessageModel, options): void
-    {
+    static auditingUpsert(instance: MessageMessageModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -155,6 +165,14 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     id: string;
 
     @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
+
+    @Column({
         field: 'tenantIds',
         allowNull: true,
         type: DataTypes.ARRAY(DataTypes.UUID),
@@ -164,7 +182,7 @@ export class MessageMessageModel extends Model<MessageMessageModel>
     @Column({
         field: 'status',
         allowNull: false,
-        type: DataTypes.ENUM('DRAFT','PENDING','SENT'),
+        type: DataTypes.ENUM('DRAFT', 'PENDING', 'SENT'),
     })
     status: string;
 
@@ -302,5 +320,4 @@ export class MessageMessageModel extends Model<MessageMessageModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { MessageCheckMessagesInboxHandler } from '../handlers/message-check-messages-inbox.handler';
 import { MessageCheckMessagesInboxResolver } from './message-check-messages-inbox.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCheckMessagesInboxResolver', () =>
-{
+describe('MessageCheckMessagesInboxResolver', () => {
     let resolver: MessageCheckMessagesInboxResolver;
     let handler: MessageCheckMessagesInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageCheckMessagesInboxResolver,
                 {
-                    provide : MessageCheckMessagesInboxHandler,
+                    provide: MessageCheckMessagesInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageCheckMessagesInboxResolver>(MessageCheckMessagesInboxResolver);
-        handler = module.get<MessageCheckMessagesInboxHandler>(MessageCheckMessagesInboxHandler);
+        resolver = module.get<MessageCheckMessagesInboxResolver>(
+            MessageCheckMessagesInboxResolver,
+        );
+        handler = module.get<MessageCheckMessagesInboxHandler>(
+            MessageCheckMessagesInboxHandler,
+        );
     });
 
-    test('MessageCheckMessagesInboxResolver should be defined', () =>
-    {
+    test('MessageCheckMessagesInboxResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageCheckMessagesInboxResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCheckMessagesInboxResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

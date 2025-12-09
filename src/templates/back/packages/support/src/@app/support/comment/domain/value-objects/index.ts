@@ -1,0 +1,14 @@
+export { SupportCommentAccountId } from './support-comment-account-id';
+export { SupportCommentAccountUsername } from './support-comment-account-username';
+export { SupportCommentAttachments } from './support-comment-attachments';
+export { SupportCommentCreatedAt } from './support-comment-created-at';
+export { SupportCommentDeletedAt } from './support-comment-deleted-at';
+export { SupportCommentDescription } from './support-comment-description';
+export { SupportCommentDisplayName } from './support-comment-display-name';
+export { SupportCommentExternalId } from './support-comment-external-id';
+export { SupportCommentId } from './support-comment-id';
+export { SupportCommentIssueId } from './support-comment-issue-id';
+export { SupportCommentMeta } from './support-comment-meta';
+export { SupportCommentRowId } from './support-comment-row-id';
+export { SupportCommentScreenRecording } from './support-comment-screen-recording';
+export { SupportCommentUpdatedAt } from './support-comment-updated-at';

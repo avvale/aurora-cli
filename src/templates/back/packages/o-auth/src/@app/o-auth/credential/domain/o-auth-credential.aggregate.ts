@@ -12,8 +12,7 @@ import {
 import { LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class OAuthCredential extends AggregateRoot
-{
+export class OAuthCredential extends AggregateRoot {
     grantType: OAuthCredentialGrantType;
     accountId: OAuthCredentialAccountId;
     username: OAuthCredentialUsername;
@@ -30,8 +29,7 @@ export class OAuthCredential extends AggregateRoot
         accessTokenId: OAuthCredentialAccessTokenId,
         refreshToken: OAuthCredentialRefreshToken,
         redirect: OAuthCredentialRedirect,
-    )
-    {
+    ) {
         super();
         this.grantType = grantType;
         this.accountId = accountId;
@@ -50,8 +48,7 @@ export class OAuthCredential extends AggregateRoot
         accessTokenId: OAuthCredentialAccessTokenId,
         refreshToken: OAuthCredentialRefreshToken,
         redirect: OAuthCredentialRedirect,
-    ): OAuthCredential
-    {
+    ): OAuthCredential {
         return new OAuthCredential(
             grantType,
             accountId,
@@ -63,8 +60,7 @@ export class OAuthCredential extends AggregateRoot
         );
     }
 
-    created(credential: OAuthCredential): void
-    {
+    created(credential: OAuthCredential): void {
         this.apply(
             new OAuthCreatedCredentialEvent(
                 credential.grantType.value,
@@ -78,8 +74,7 @@ export class OAuthCredential extends AggregateRoot
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             grantType: this.grantType.value,
             accountId: this.accountId.value,

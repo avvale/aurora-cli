@@ -1,16 +1,18 @@
 import { MessageOutbox, MessageUpdateOutboxesInput } from '@api/graphql';
 import { MessageUpdateOutboxesHandler } from '@api/message/outbox';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.outbox.update')
-export class MessageUpdateOutboxesResolver
-{
-    constructor(
-        private readonly handler: MessageUpdateOutboxesHandler,
-    ) {}
+export class MessageUpdateOutboxesResolver {
+    constructor(private readonly handler: MessageUpdateOutboxesHandler) {}
 
     @Mutation('messageUpdateOutboxes')
     async main(
@@ -19,8 +21,7 @@ export class MessageUpdateOutboxesResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<MessageOutbox>
-    {
+    ): Promise<MessageOutbox> {
         return await this.handler.main(
             payload,
             queryStatement,

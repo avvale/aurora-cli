@@ -3,6 +3,8 @@ import { StorageAccountFileManagerFileUploadedInput } from '@api/graphql';
 export const mapResolverFilesWithStream = async (
     files: StorageAccountFileManagerFileUploadedInput[],
 ): Promise<StorageAccountFileManagerFileUploadedInput[]> => {
+    if (!Array.isArray(files)) return files;
+
     return Promise.all(
         files.map(async (f) => {
             const upload = await f.file;

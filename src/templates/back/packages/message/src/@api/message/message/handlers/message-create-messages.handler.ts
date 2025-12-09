@@ -6,33 +6,37 @@ import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class MessageCreateMessagesHandler
-{
-    constructor(
-        private readonly commandBus: ICommandBus,
-    ) {}
+export class MessageCreateMessagesHandler {
+    constructor(private readonly commandBus: ICommandBus) {}
 
     async main(
         account: IamAccountResponse,
         payload: MessageCreateMessageInput[] | MessageCreateMessageDto[],
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        await this.commandBus.dispatch(new MessageCreateMessagesCommand(
-            payload.map((message: MessageCreateMessageInput | MessageCreateMessageDto) => ({
-                ...message,
-                totalRecipients: 0,
-                reads          : 0,
-                status         : MessageMessageStatus.DRAFT,
-            })),
-            {
-                timezone,
-                repositoryOptions: {
-                    auditing,
+    ): Promise<boolean> {
+        await this.commandBus.dispatch(
+            new MessageCreateMessagesCommand(
+                payload.map(
+                    (
+                        message:
+                            | MessageCreateMessageInput
+                            | MessageCreateMessageDto,
+                    ) => ({
+                        ...message,
+                        totalRecipients: 0,
+                        reads: 0,
+                        status: MessageMessageStatus.DRAFT,
+                    }),
+                ),
+                {
+                    timezone,
+                    repositoryOptions: {
+                        auditing,
+                    },
                 },
-            },
-        ));
+            ),
+        );
 
         return true;
     }

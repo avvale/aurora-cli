@@ -5,60 +5,61 @@ import { messageMockOutboxData } from '@app/message/outbox';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageUpdateOutboxByIdHandler', () =>
-{
+describe('MessageUpdateOutboxByIdHandler', () => {
     let handler: MessageUpdateOutboxByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageUpdateOutboxByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageUpdateOutboxByIdHandler>(MessageUpdateOutboxByIdHandler);
+        handler = module.get<MessageUpdateOutboxByIdHandler>(
+            MessageUpdateOutboxByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('MessageUpdateOutboxByIdHandler should be defined', () =>
-    {
+    test('MessageUpdateOutboxByIdHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageUpdateOutboxByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageUpdateOutboxByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a outbox updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockOutboxData[0])));
+        test('should return a outbox updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockOutboxData[0])),
+            );
             expect(
                 await handler.main(
                     <MessageUpdateOutboxByIdInput>messageMockOutboxData[0],
                     {},
                     'Europe/Madrid',
-                ))
-                .toBe(messageMockOutboxData[0]);
+                ),
+            ).toBe(messageMockOutboxData[0]);
         });
     });
 });

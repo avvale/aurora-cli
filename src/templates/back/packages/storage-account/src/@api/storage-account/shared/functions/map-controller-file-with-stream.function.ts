@@ -5,6 +5,8 @@ export const mapControllerFileWithStream = (
     file: StorageAccountFileManagerFileUploadedInput,
     binary: Express.Multer.File,
 ): StorageAccountFileManagerFileUploadedInput => {
+    if (!file) return file;
+
     return {
         ...file,
         file: {

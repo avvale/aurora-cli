@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { MessageReadCustomerMessageInboxHandler } from '../handlers/message-read-customer-message-inbox.handler';
 import { MessageReadCustomerMessageInboxResolver } from './message-read-customer-message-inbox.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageReadCustomerMessageInboxResolver', () =>
-{
+describe('MessageReadCustomerMessageInboxResolver', () => {
     let resolver: MessageReadCustomerMessageInboxResolver;
     let handler: MessageReadCustomerMessageInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageReadCustomerMessageInboxResolver,
                 {
-                    provide : MessageReadCustomerMessageInboxHandler,
+                    provide: MessageReadCustomerMessageInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageReadCustomerMessageInboxResolver>(MessageReadCustomerMessageInboxResolver);
-        handler = module.get<MessageReadCustomerMessageInboxHandler>(MessageReadCustomerMessageInboxHandler);
+        resolver = module.get<MessageReadCustomerMessageInboxResolver>(
+            MessageReadCustomerMessageInboxResolver,
+        );
+        handler = module.get<MessageReadCustomerMessageInboxHandler>(
+            MessageReadCustomerMessageInboxHandler,
+        );
     });
 
-    test('MessageReadCustomerMessageInboxResolver should be defined', () =>
-    {
+    test('MessageReadCustomerMessageInboxResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageReadCustomerMessageInboxResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageReadCustomerMessageInboxResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

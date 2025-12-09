@@ -1,45 +1,50 @@
-import { MessageDeleteInboxSettingsController, MessageDeleteInboxSettingsHandler } from '@api/message/inbox-setting';
+import {
+    MessageDeleteInboxSettingsController,
+    MessageDeleteInboxSettingsHandler,
+} from '@api/message/inbox-setting';
 import { messageMockInboxSettingData } from '@app/message/inbox-setting';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteInboxSettingsController', () =>
-{
+describe('MessageDeleteInboxSettingsController', () => {
     let controller: MessageDeleteInboxSettingsController;
     let handler: MessageDeleteInboxSettingsHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageDeleteInboxSettingsController,
-            ],
+            imports: [],
+            controllers: [MessageDeleteInboxSettingsController],
             providers: [
                 {
-                    provide : MessageDeleteInboxSettingsHandler,
+                    provide: MessageDeleteInboxSettingsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageDeleteInboxSettingsController>(MessageDeleteInboxSettingsController);
-        handler = module.get<MessageDeleteInboxSettingsHandler>(MessageDeleteInboxSettingsHandler);
+        controller = module.get<MessageDeleteInboxSettingsController>(
+            MessageDeleteInboxSettingsController,
+        );
+        handler = module.get<MessageDeleteInboxSettingsHandler>(
+            MessageDeleteInboxSettingsHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteInboxSettingsController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteInboxSettingsController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an messageMockInboxSettingData deleted', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxSettingData)));
+        test('should return an messageMockInboxSettingData deleted', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockInboxSettingData),
+                    ),
+            );
             expect(await controller.main()).toBe(messageMockInboxSettingData);
         });
     });

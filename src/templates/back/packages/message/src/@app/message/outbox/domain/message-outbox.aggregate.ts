@@ -1,6 +1,10 @@
 /* eslint-disable key-spacing */
 import { MessageMessage } from '@app/message/message';
-import { MessageCreatedOutboxEvent, MessageDeletedOutboxEvent, MessageUpdatedOutboxEvent } from '@app/message/outbox';
+import {
+    MessageCreatedOutboxEvent,
+    MessageDeletedOutboxEvent,
+    MessageUpdatedOutboxEvent,
+} from '@app/message/outbox';
 import {
     MessageOutboxAccountRecipientIds,
     MessageOutboxCreatedAt,
@@ -8,20 +12,19 @@ import {
     MessageOutboxId,
     MessageOutboxMessageId,
     MessageOutboxMeta,
+    MessageOutboxRowId,
     MessageOutboxScopeRecipients,
-    MessageOutboxSort,
     MessageOutboxTagRecipients,
     MessageOutboxTenantRecipientIds,
     MessageOutboxUpdatedAt,
 } from '@app/message/outbox/domain/value-objects';
-import { LiteralObject, Utils } from '@aurorajs.dev/core';
+import { CQMetadata, LiteralObject } from '@aurorajs.dev/core';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-export class MessageOutbox extends AggregateRoot
-{
+export class MessageOutbox extends AggregateRoot {
     id: MessageOutboxId;
+    rowId: MessageOutboxRowId;
     messageId: MessageOutboxMessageId;
-    sort: MessageOutboxSort;
     accountRecipientIds: MessageOutboxAccountRecipientIds;
     tenantRecipientIds: MessageOutboxTenantRecipientIds;
     scopeRecipients: MessageOutboxScopeRecipients;
@@ -34,8 +37,8 @@ export class MessageOutbox extends AggregateRoot
 
     constructor(
         id: MessageOutboxId,
+        rowId: MessageOutboxRowId,
         messageId: MessageOutboxMessageId,
-        sort: MessageOutboxSort,
         accountRecipientIds: MessageOutboxAccountRecipientIds,
         tenantRecipientIds: MessageOutboxTenantRecipientIds,
         scopeRecipients: MessageOutboxScopeRecipients,
@@ -45,12 +48,11 @@ export class MessageOutbox extends AggregateRoot
         updatedAt: MessageOutboxUpdatedAt,
         deletedAt: MessageOutboxDeletedAt,
         message?: MessageMessage,
-    )
-    {
+    ) {
         super();
         this.id = id;
+        this.rowId = rowId;
         this.messageId = messageId;
-        this.sort = sort;
         this.accountRecipientIds = accountRecipientIds;
         this.tenantRecipientIds = tenantRecipientIds;
         this.scopeRecipients = scopeRecipients;
@@ -64,8 +66,8 @@ export class MessageOutbox extends AggregateRoot
 
     static register(
         id: MessageOutboxId,
+        rowId: MessageOutboxRowId,
         messageId: MessageOutboxMessageId,
-        sort: MessageOutboxSort,
         accountRecipientIds: MessageOutboxAccountRecipientIds,
         tenantRecipientIds: MessageOutboxTenantRecipientIds,
         scopeRecipients: MessageOutboxScopeRecipients,
@@ -75,12 +77,11 @@ export class MessageOutbox extends AggregateRoot
         updatedAt: MessageOutboxUpdatedAt,
         deletedAt: MessageOutboxDeletedAt,
         message?: MessageMessage,
-    ): MessageOutbox
-    {
+    ): MessageOutbox {
         return new MessageOutbox(
             id,
+            rowId,
             messageId,
-            sort,
             accountRecipientIds,
             tenantRecipientIds,
             scopeRecipients,
@@ -93,69 +94,75 @@ export class MessageOutbox extends AggregateRoot
         );
     }
 
-    created(outbox: MessageOutbox): void
-    {
+    created(event: { payload: MessageOutbox; cQMetadata?: CQMetadata }): void {
         this.apply(
-            new MessageCreatedOutboxEvent(
-                outbox.id.value,
-                outbox.messageId.value,
-                outbox.sort.value,
-                outbox.accountRecipientIds?.value,
-                outbox.tenantRecipientIds?.value,
-                outbox.scopeRecipients?.value,
-                outbox.tagRecipients?.value,
-                outbox.meta?.value,
-                outbox.createdAt?.value,
-                outbox.updatedAt?.value,
-                outbox.deletedAt?.value,
-            ),
+            new MessageCreatedOutboxEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    messageId: event.payload.messageId.value,
+                    accountRecipientIds:
+                        event.payload.accountRecipientIds?.value,
+                    tenantRecipientIds: event.payload.tenantRecipientIds?.value,
+                    scopeRecipients: event.payload.scopeRecipients?.value,
+                    tagRecipients: event.payload.tagRecipients?.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    updated(outbox: MessageOutbox): void
-    {
+    updated(event: { payload: MessageOutbox; cQMetadata?: CQMetadata }): void {
         this.apply(
-            new MessageUpdatedOutboxEvent(
-                outbox.id?.value,
-                outbox.messageId?.value,
-                outbox.sort?.value,
-                outbox.accountRecipientIds?.value,
-                outbox.tenantRecipientIds?.value,
-                outbox.scopeRecipients?.value,
-                outbox.tagRecipients?.value,
-                outbox.meta?.value,
-                outbox.createdAt?.value,
-                outbox.updatedAt?.value,
-                outbox.deletedAt?.value,
-            ),
+            new MessageUpdatedOutboxEvent({
+                payload: {
+                    id: event.payload.id?.value,
+                    messageId: event.payload.messageId?.value,
+                    accountRecipientIds:
+                        event.payload.accountRecipientIds?.value,
+                    tenantRecipientIds: event.payload.tenantRecipientIds?.value,
+                    scopeRecipients: event.payload.scopeRecipients?.value,
+                    tagRecipients: event.payload.tagRecipients?.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    deleted(outbox: MessageOutbox): void
-    {
+    deleted(event: { payload: MessageOutbox; cQMetadata?: CQMetadata }): void {
         this.apply(
-            new MessageDeletedOutboxEvent(
-                outbox.id.value,
-                outbox.messageId.value,
-                outbox.sort.value,
-                outbox.accountRecipientIds?.value,
-                outbox.tenantRecipientIds?.value,
-                outbox.scopeRecipients?.value,
-                outbox.tagRecipients?.value,
-                outbox.meta?.value,
-                outbox.createdAt?.value,
-                outbox.updatedAt?.value,
-                outbox.deletedAt?.value,
-            ),
+            new MessageDeletedOutboxEvent({
+                payload: {
+                    id: event.payload.id.value,
+                    rowId: event.payload.rowId.value,
+                    messageId: event.payload.messageId.value,
+                    accountRecipientIds:
+                        event.payload.accountRecipientIds?.value,
+                    tenantRecipientIds: event.payload.tenantRecipientIds?.value,
+                    scopeRecipients: event.payload.scopeRecipients?.value,
+                    tagRecipients: event.payload.tagRecipients?.value,
+                    meta: event.payload.meta?.value,
+                    createdAt: event.payload.createdAt?.value,
+                    updatedAt: event.payload.updatedAt?.value,
+                    deletedAt: event.payload.deletedAt?.value,
+                },
+                cQMetadata: event.cQMetadata,
+            }),
         );
     }
 
-    toDTO(): LiteralObject
-    {
+    toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            rowId: this.rowId.value,
             messageId: this.messageId.value,
-            sort: this.sort.value,
             accountRecipientIds: this.accountRecipientIds?.value,
             tenantRecipientIds: this.tenantRecipientIds?.value,
             scopeRecipients: this.scopeRecipients?.value,
@@ -169,12 +176,10 @@ export class MessageOutbox extends AggregateRoot
     }
 
     // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
-    {
+    toRepository(): LiteralObject {
         return {
             id: this.id.value,
             messageId: this.messageId.value,
-            sort: this.sort.value,
             accountRecipientIds: this.accountRecipientIds?.value,
             tenantRecipientIds: this.tenantRecipientIds?.value,
             scopeRecipients: this.scopeRecipients?.value,

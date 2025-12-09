@@ -1,45 +1,47 @@
-import { MessageCreateOutboxesCommand, messageMockOutboxData } from '@app/message/outbox';
+import {
+    MessageCreateOutboxesCommand,
+    messageMockOutboxData,
+} from '@app/message/outbox';
 import { MessageCreateOutboxesCommandHandler } from '@app/message/outbox/application/create/message-create-outboxes.command-handler';
 import { MessageCreateOutboxesService } from '@app/message/outbox/application/create/message-create-outboxes.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('messageCreateOutboxesCommandHandler', () =>
-{
+describe('messageCreateOutboxesCommandHandler', () => {
     let commandHandler: MessageCreateOutboxesCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 MessageCreateOutboxesCommandHandler,
                 {
-                    provide : MessageCreateOutboxesService,
+                    provide: MessageCreateOutboxesService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<MessageCreateOutboxesCommandHandler>(MessageCreateOutboxesCommandHandler);
+        commandHandler = module.get<MessageCreateOutboxesCommandHandler>(
+            MessageCreateOutboxesCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageCreateOutboxesCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCreateOutboxesCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return MessageMockOutboxData created', async () =>
-        {
-            expect(await commandHandler.execute(
-                new MessageCreateOutboxesCommand(
-                    messageMockOutboxData,
-                    { timezone: process.env.TZ },
+        test('should return MessageMockOutboxData created', async () => {
+            expect(
+                await commandHandler.execute(
+                    new MessageCreateOutboxesCommand(messageMockOutboxData, {
+                        timezone: process.env.TZ,
+                    }),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

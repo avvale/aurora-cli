@@ -4,55 +4,53 @@ import { messageMockInboxData } from '@app/message/inbox';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCreateInboxHandler', () =>
-{
+describe('MessageCreateInboxHandler', () => {
     let handler: MessageCreateInboxHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageCreateInboxHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageCreateInboxHandler>(MessageCreateInboxHandler);
+        handler = module.get<MessageCreateInboxHandler>(
+            MessageCreateInboxHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessageCreateInboxHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCreateInboxHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an inbox created', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxData[0])));
+        test('should return an inbox created', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockInboxData[0])),
+            );
             expect(
-                await handler.main(
-                    messageMockInboxData[0],
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(messageMockInboxData[0]);
+                await handler.main(messageMockInboxData[0], 'Europe/Madrid'),
+            ).toBe(messageMockInboxData[0]);
         });
     });
 });

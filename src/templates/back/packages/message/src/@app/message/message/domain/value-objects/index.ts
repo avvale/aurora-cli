@@ -11,6 +11,7 @@ export { MessageMessageIsInternalLink } from './message-message-is-internal-link
 export { MessageMessageLink } from './message-message-link';
 export { MessageMessageMeta } from './message-message-meta';
 export { MessageMessageReads } from './message-message-reads';
+export { MessageMessageRowId } from './message-message-row-id';
 export { MessageMessageScopeRecipients } from './message-message-scope-recipients';
 export { MessageMessageSendAt } from './message-message-send-at';
 export { MessageMessageStatus } from './message-message-status';

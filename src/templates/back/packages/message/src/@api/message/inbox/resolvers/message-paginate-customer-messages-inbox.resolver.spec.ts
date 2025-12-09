@@ -1,43 +1,42 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { MessagePaginateCustomerMessagesInboxHandler } from '../handlers/message-paginate-customer-messages-inbox.handler';
 import { MessagePaginateCustomerMessagesInboxResolver } from './message-paginate-customer-messages-inbox.resolver';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessagePaginateCustomerMessagesInboxResolver', () =>
-{
+describe('MessagePaginateCustomerMessagesInboxResolver', () => {
     let resolver: MessagePaginateCustomerMessagesInboxResolver;
     let handler: MessagePaginateCustomerMessagesInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessagePaginateCustomerMessagesInboxResolver,
                 {
-                    provide : MessagePaginateCustomerMessagesInboxHandler,
+                    provide: MessagePaginateCustomerMessagesInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessagePaginateCustomerMessagesInboxResolver>(MessagePaginateCustomerMessagesInboxResolver);
-        handler = module.get<MessagePaginateCustomerMessagesInboxHandler>(MessagePaginateCustomerMessagesInboxHandler);
+        resolver = module.get<MessagePaginateCustomerMessagesInboxResolver>(
+            MessagePaginateCustomerMessagesInboxResolver,
+        );
+        handler = module.get<MessagePaginateCustomerMessagesInboxHandler>(
+            MessagePaginateCustomerMessagesInboxHandler,
+        );
     });
 
-    test('MessagePaginateCustomerMessagesInboxResolver should be defined', () =>
-    {
+    test('MessagePaginateCustomerMessagesInboxResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessagePaginateCustomerMessagesInboxResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessagePaginateCustomerMessagesInboxResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
     });

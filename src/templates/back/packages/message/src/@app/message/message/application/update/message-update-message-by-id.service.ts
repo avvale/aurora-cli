@@ -1,10 +1,11 @@
-import { MessageIMessageRepository, MessageMessage } from '@app/message/message';
+import {
+    MessageIMessageRepository,
+    MessageMessage,
+} from '@app/message/message';
 import {
     MessageMessageAccountRecipientIds,
     MessageMessageAttachments,
     MessageMessageBody,
-    MessageMessageCreatedAt,
-    MessageMessageDeletedAt,
     MessageMessageIcon,
     MessageMessageId,
     MessageMessageImage,
@@ -28,8 +29,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class MessageUpdateMessageByIdService
-{
+export class MessageUpdateMessageByIdService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: MessageIMessageRepository,
@@ -59,11 +59,11 @@ export class MessageUpdateMessageByIdService
         },
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const message = MessageMessage.register(
             payload.id,
+            undefined, // rowId
             payload.tenantIds,
             payload.status,
             payload.accountRecipientIds,
@@ -88,19 +88,14 @@ export class MessageUpdateMessageByIdService
         );
 
         // update by id
-        await this.repository.updateById(
-            message,
-            {
-                constraint,
-                cQMetadata,
-                updateByIdOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.updateById(message, {
+            constraint,
+            cQMetadata,
+            updateByIdOptions: cQMetadata?.repositoryOptions,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const messageRegister = this.publisher.mergeObjectContext(
-            message,
-        );
+        const messageRegister = this.publisher.mergeObjectContext(message);
 
         messageRegister.updated({
             payload: message,

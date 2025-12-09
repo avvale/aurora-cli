@@ -1,8 +1,11 @@
-import { MessageCreatedInboxSettingEvent } from './message-created-inbox-setting.event';
+import { MessageCreatedInboxSettingEvent } from '@app/message/inbox-setting';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageCreatedInboxSettingsEvent
-{
+export class MessageCreatedInboxSettingsEvent {
     constructor(
-        public readonly inboxSettings: MessageCreatedInboxSettingEvent[],
+        public readonly event: {
+            payload: MessageCreatedInboxSettingEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

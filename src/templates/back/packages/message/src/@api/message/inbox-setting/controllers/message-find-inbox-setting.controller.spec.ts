@@ -1,46 +1,53 @@
-import { MessageFindInboxSettingController, MessageFindInboxSettingHandler } from '@api/message/inbox-setting';
+import {
+    MessageFindInboxSettingController,
+    MessageFindInboxSettingHandler,
+} from '@api/message/inbox-setting';
 import { messageMockInboxSettingData } from '@app/message/inbox-setting';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindInboxSettingController', () =>
-{
+describe('MessageFindInboxSettingController', () => {
     let controller: MessageFindInboxSettingController;
     let handler: MessageFindInboxSettingHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageFindInboxSettingController,
-            ],
+            imports: [],
+            controllers: [MessageFindInboxSettingController],
             providers: [
                 {
-                    provide : MessageFindInboxSettingHandler,
+                    provide: MessageFindInboxSettingHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageFindInboxSettingController>(MessageFindInboxSettingController);
-        handler = module.get<MessageFindInboxSettingHandler>(MessageFindInboxSettingHandler);
+        controller = module.get<MessageFindInboxSettingController>(
+            MessageFindInboxSettingController,
+        );
+        handler = module.get<MessageFindInboxSettingHandler>(
+            MessageFindInboxSettingHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindInboxSettingController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindInboxSettingController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a inboxSetting', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxSettingData[0])));
-            expect(await controller.main()).toBe(messageMockInboxSettingData[0]);
+        test('should return a inboxSetting', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockInboxSettingData[0]),
+                    ),
+            );
+            expect(await controller.main()).toBe(
+                messageMockInboxSettingData[0],
+            );
         });
     });
 });

@@ -143,8 +143,8 @@ export class {{ toPascalCase schema.boundedContextName }}Add{{ toPascalCase sche
                 payload: this.aggregateRoots.map({{ toCamelCase schema.moduleName }} =>
                     new {{ toPascalCase schema.boundedContextName }}UpdatedAndIncremented{{ toPascalCase schema.moduleName }}Event({
                         payload: {
-                            {{#each (getAggregateProperties schema.aggregateProperties (object allowAutoIncrement=false allowReadonly=false)) }}
-                            {{#if (isAllowProperty ../schema.moduleName this) }}
+                            {{#each (getAggregateProperties schema.aggregateProperties) }}
+                            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false allowReadonly=false)) }}
                             {{ toCamelCase (getPropertyName this) }}: {{ toCamelCase ../schema.moduleName }}.{{ toCamelCase (getPropertyName this) }}{{#if nullable}}?{{/if}}.value,
                             {{/if}}
                             {{/each}}

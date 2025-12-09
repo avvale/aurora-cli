@@ -4,56 +4,59 @@ import { messageMockMessageData } from '@app/message/message';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteMessageByIdController', () =>
-{
+describe('MessageDeleteMessageByIdController', () => {
     let handler: MessageDeleteMessageByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageDeleteMessageByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageDeleteMessageByIdHandler>(MessageDeleteMessageByIdHandler);
+        handler = module.get<MessageDeleteMessageByIdHandler>(
+            MessageDeleteMessageByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteMessageByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteMessageByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an message deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockMessageData[0])));
+        test('should return an message deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockMessageData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
                     messageMockMessageData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(messageMockMessageData[0]);
+            ).toBe(messageMockMessageData[0]);
         });
     });
 });

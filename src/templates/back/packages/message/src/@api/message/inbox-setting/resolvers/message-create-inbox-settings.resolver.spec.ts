@@ -1,45 +1,51 @@
 import { MessageCreateInboxSettingInput } from '@api/graphql';
-import { MessageCreateInboxSettingsHandler, MessageCreateInboxSettingsResolver } from '@api/message/inbox-setting';
+import {
+    MessageCreateInboxSettingsHandler,
+    MessageCreateInboxSettingsResolver,
+} from '@api/message/inbox-setting';
 import { messageMockInboxSettingData } from '@app/message/inbox-setting';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCreateInboxSettingsResolver', () =>
-{
+describe('MessageCreateInboxSettingsResolver', () => {
     let resolver: MessageCreateInboxSettingsResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 MessageCreateInboxSettingsResolver,
                 {
-                    provide : MessageCreateInboxSettingsHandler,
+                    provide: MessageCreateInboxSettingsHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageCreateInboxSettingsResolver>(MessageCreateInboxSettingsResolver);
+        resolver = module.get<MessageCreateInboxSettingsResolver>(
+            MessageCreateInboxSettingsResolver,
+        );
     });
 
-    test('MessageCreateInboxSettingsResolver should be defined', () =>
-    {
+    test('MessageCreateInboxSettingsResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageCreateInboxSettingsResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCreateInboxSettingsResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an inboxSettings created', async () =>
-        {
-            expect(await resolver.main(<MessageCreateInboxSettingInput[]>messageMockInboxSettingData)).toBe(undefined);
+        test('should return an inboxSettings created', async () => {
+            expect(
+                await resolver.main(
+                    <MessageCreateInboxSettingInput[]>(
+                        messageMockInboxSettingData
+                    ),
+                ),
+            ).toBe(undefined);
         });
     });
 });

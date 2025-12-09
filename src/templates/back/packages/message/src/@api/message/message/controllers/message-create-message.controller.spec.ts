@@ -1,51 +1,53 @@
-import { MessageCreateMessageController, MessageCreateMessageHandler } from '@api/message/message';
+import {
+    MessageCreateMessageController,
+    MessageCreateMessageHandler,
+} from '@api/message/message';
 import { messageMockMessageData } from '@app/message/message';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCreateMessageController', () =>
-{
+describe('MessageCreateMessageController', () => {
     let controller: MessageCreateMessageController;
     let handler: MessageCreateMessageHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageCreateMessageController,
-            ],
+            imports: [],
+            controllers: [MessageCreateMessageController],
             providers: [
                 {
-                    provide : MessageCreateMessageHandler,
+                    provide: MessageCreateMessageHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageCreateMessageController>(MessageCreateMessageController);
-        handler = module.get<MessageCreateMessageHandler>(MessageCreateMessageHandler);
+        controller = module.get<MessageCreateMessageController>(
+            MessageCreateMessageController,
+        );
+        handler = module.get<MessageCreateMessageHandler>(
+            MessageCreateMessageHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageCreateMessageController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCreateMessageController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return an message created', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockMessageData[0])));
-            expect(
-                await controller.main(
-                    messageMockMessageData[0],
-                ),
-            )
-                .toBe(messageMockMessageData[0]);
+        test('should return an message created', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockMessageData[0]),
+                    ),
+            );
+            expect(await controller.main(messageMockMessageData[0])).toBe(
+                messageMockMessageData[0],
+            );
         });
     });
 });

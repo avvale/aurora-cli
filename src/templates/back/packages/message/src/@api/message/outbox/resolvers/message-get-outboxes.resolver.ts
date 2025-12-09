@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.outbox.get')
-export class MessageGetOutboxesResolver
-{
-    constructor(
-        private readonly handler: MessageGetOutboxesHandler,
-    ) {}
+export class MessageGetOutboxesResolver {
+    constructor(private readonly handler: MessageGetOutboxesHandler) {}
 
     @Query('messageGetOutboxes')
     async main(
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<MessageOutbox[]>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
+    ): Promise<MessageOutbox[]> {
+        return await this.handler.main(queryStatement, constraint, timezone);
     }
 }

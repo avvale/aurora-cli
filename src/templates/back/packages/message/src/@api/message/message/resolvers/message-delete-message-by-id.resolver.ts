@@ -3,16 +3,19 @@ import { TenantConstraint } from '@api/iam/shared';
 import { MessageDeleteMessageByIdHandler } from '@api/message/message';
 import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, CurrentAccount, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    CurrentAccount,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.message.delete')
-export class MessageDeleteMessageByIdResolver
-{
-    constructor(
-        private readonly handler: MessageDeleteMessageByIdHandler,
-    ) {}
+export class MessageDeleteMessageByIdResolver {
+    constructor(private readonly handler: MessageDeleteMessageByIdHandler) {}
 
     @Mutation('messageDeleteMessageById')
     @TenantConstraint()
@@ -22,8 +25,7 @@ export class MessageDeleteMessageByIdResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<MessageMessage>
-    {
+    ): Promise<MessageMessage> {
         return await this.handler.main(
             account,
             id,

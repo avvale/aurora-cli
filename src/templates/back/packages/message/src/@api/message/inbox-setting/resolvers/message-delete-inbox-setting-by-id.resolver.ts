@@ -1,13 +1,17 @@
 import { MessageInboxSetting } from '@api/graphql';
 import { MessageDeleteInboxSettingByIdHandler } from '@api/message/inbox-setting';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.inboxSetting.delete')
-export class MessageDeleteInboxSettingByIdResolver
-{
+export class MessageDeleteInboxSettingByIdResolver {
     constructor(
         private readonly handler: MessageDeleteInboxSettingByIdHandler,
     ) {}
@@ -18,13 +22,7 @@ export class MessageDeleteInboxSettingByIdResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<MessageInboxSetting>
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-            auditing,
-        );
+    ): Promise<MessageInboxSetting> {
+        return await this.handler.main(id, constraint, timezone, auditing);
     }
 }

@@ -1,57 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessagePaginateInboxesHandler, MessagePaginateInboxesResolver } from '@api/message/inbox';
+import {
+    MessagePaginateInboxesHandler,
+    MessagePaginateInboxesResolver,
+} from '@api/message/inbox';
 import { messageMockInboxData } from '@app/message/inbox';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessagePaginateInboxesResolver', () =>
-{
+describe('MessagePaginateInboxesResolver', () => {
     let resolver: MessagePaginateInboxesResolver;
     let handler: MessagePaginateInboxesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessagePaginateInboxesResolver,
                 {
-                    provide : MessagePaginateInboxesHandler,
+                    provide: MessagePaginateInboxesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessagePaginateInboxesResolver>(MessagePaginateInboxesResolver);
-        handler = module.get<MessagePaginateInboxesHandler>(MessagePaginateInboxesHandler);
+        resolver = module.get<MessagePaginateInboxesResolver>(
+            MessagePaginateInboxesResolver,
+        );
+        handler = module.get<MessagePaginateInboxesHandler>(
+            MessagePaginateInboxesHandler,
+        );
     });
 
-    test('MessagePaginateInboxesResolver should be defined', () =>
-    {
+    test('MessagePaginateInboxesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessagePaginateInboxesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessagePaginateInboxesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return a messageMockInboxData', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve({
-                total: 5,
-                count: 5,
-                rows : messageMockInboxData,
-            })));
+        test('should return a messageMockInboxData', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve({
+                            total: 5,
+                            count: 5,
+                            rows: messageMockInboxData,
+                        }),
+                    ),
+            );
             expect(await resolver.main()).toStrictEqual({
                 total: 5,
                 count: 5,
-                rows : messageMockInboxData,
+                rows: messageMockInboxData,
             });
         });
     });

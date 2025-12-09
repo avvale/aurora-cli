@@ -3,14 +3,14 @@ import { MessageDeleteMessagesService } from '@app/message/message/application/d
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(MessageDeleteMessagesCommand)
-export class MessageDeleteMessagesCommandHandler implements ICommandHandler<MessageDeleteMessagesCommand>
+export class MessageDeleteMessagesCommandHandler
+    implements ICommandHandler<MessageDeleteMessagesCommand>
 {
     constructor(
         private readonly deleteMessagesService: MessageDeleteMessagesService,
     ) {}
 
-    async execute(command: MessageDeleteMessagesCommand): Promise<void>
-    {
+    async execute(command: MessageDeleteMessagesCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.deleteMessagesService.main(
             command.queryStatement,

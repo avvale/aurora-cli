@@ -1,50 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageFindOutboxByIdHandler, MessageFindOutboxByIdResolver } from '@api/message/outbox';
+import {
+    MessageFindOutboxByIdHandler,
+    MessageFindOutboxByIdResolver,
+} from '@api/message/outbox';
 import { messageMockOutboxData } from '@app/message/outbox';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindOutboxByIdResolver', () =>
-{
+describe('MessageFindOutboxByIdResolver', () => {
     let resolver: MessageFindOutboxByIdResolver;
     let handler: MessageFindOutboxByIdHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageFindOutboxByIdResolver,
                 {
-                    provide : MessageFindOutboxByIdHandler,
+                    provide: MessageFindOutboxByIdHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageFindOutboxByIdResolver>(MessageFindOutboxByIdResolver);
-        handler = module.get<MessageFindOutboxByIdHandler>(MessageFindOutboxByIdHandler);
+        resolver = module.get<MessageFindOutboxByIdResolver>(
+            MessageFindOutboxByIdResolver,
+        );
+        handler = module.get<MessageFindOutboxByIdHandler>(
+            MessageFindOutboxByIdHandler,
+        );
     });
 
-    test('MessageFindOutboxByIdResolver should be defined', () =>
-    {
+    test('MessageFindOutboxByIdResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindOutboxByIdResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindOutboxByIdResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an outbox by id', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockOutboxData[0])));
-            expect(await resolver.main(messageMockOutboxData[0].id)).toBe(messageMockOutboxData[0]);
+        test('should return an outbox by id', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockOutboxData[0])),
+            );
+            expect(await resolver.main(messageMockOutboxData[0].id)).toBe(
+                messageMockOutboxData[0],
+            );
         });
     });
 });

@@ -1,51 +1,57 @@
-import { messageMockInboxSettingData, MessageUpdateInboxSettingsCommand } from '@app/message/inbox-setting';
+import {
+    messageMockInboxSettingData,
+    MessageUpdateInboxSettingsCommand,
+} from '@app/message/inbox-setting';
 import { MessageUpdateInboxSettingsCommandHandler } from '@app/message/inbox-setting/application/update/message-update-inbox-settings.command-handler';
 import { MessageUpdateInboxSettingsService } from '@app/message/inbox-setting/application/update/message-update-inbox-settings.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageUpdateInboxSettingsCommandHandler', () =>
-{
+describe('MessageUpdateInboxSettingsCommandHandler', () => {
     let commandHandler: MessageUpdateInboxSettingsCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 MessageUpdateInboxSettingsCommandHandler,
                 {
-                    provide : MessageUpdateInboxSettingsService,
+                    provide: MessageUpdateInboxSettingsService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<MessageUpdateInboxSettingsCommandHandler>(MessageUpdateInboxSettingsCommandHandler);
+        commandHandler = module.get<MessageUpdateInboxSettingsCommandHandler>(
+            MessageUpdateInboxSettingsCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('UpdateInboxSettingsCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('UpdateInboxSettingsCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return an inboxSettings updated', async () =>
-        {
-            expect(await commandHandler.execute(
-                new MessageUpdateInboxSettingsCommand(
-                    {
-                        id: messageMockInboxSettingData[0].id,
-                        accountId: messageMockInboxSettingData[0].accountId,
-                        sort: messageMockInboxSettingData[0].sort,
-                    },
-                    {},
-                    {},
-                    { timezone: process.env.TZ },
+        test('should return an inboxSettings updated', async () => {
+            expect(
+                await commandHandler.execute(
+                    new MessageUpdateInboxSettingsCommand(
+                        {
+                            id: messageMockInboxSettingData[0].id,
+                            rowId: messageMockInboxSettingData[0].rowId,
+                            accountId: messageMockInboxSettingData[0].accountId,
+                            lastReadMessageRowId:
+                                messageMockInboxSettingData[0]
+                                    .lastReadMessageRowId,
+                        },
+                        {},
+                        {},
+                        { timezone: process.env.TZ },
+                    ),
                 ),
-            )).toBe(undefined);
+            ).toBe(undefined);
         });
     });
 });

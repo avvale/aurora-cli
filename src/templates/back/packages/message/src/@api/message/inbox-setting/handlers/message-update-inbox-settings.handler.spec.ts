@@ -5,62 +5,66 @@ import { messageMockInboxSettingData } from '@app/message/inbox-setting';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageUpdateInboxSettingsHandler', () =>
-{
+describe('MessageUpdateInboxSettingsHandler', () => {
     let handler: MessageUpdateInboxSettingsHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageUpdateInboxSettingsHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageUpdateInboxSettingsHandler>(MessageUpdateInboxSettingsHandler);
+        handler = module.get<MessageUpdateInboxSettingsHandler>(
+            MessageUpdateInboxSettingsHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('MessageUpdateInboxSettingsHandler should be defined', () =>
-    {
+    test('MessageUpdateInboxSettingsHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageUpdateInboxSettingsHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageUpdateInboxSettingsHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a inboxSettings updated', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxSettingData[0])));
+        test('should return a inboxSettings updated', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockInboxSettingData[0]),
+                    ),
+            );
             expect(
                 await handler.main(
-                    <MessageUpdateInboxSettingsInput>messageMockInboxSettingData[0],
+                    <MessageUpdateInboxSettingsInput>(
+                        messageMockInboxSettingData[0]
+                    ),
                     {},
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(messageMockInboxSettingData[0]);
+            ).toBe(messageMockInboxSettingData[0]);
         });
     });
 });

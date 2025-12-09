@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { MessageCheckMessagesInboxHandler } from '../handlers/message-check-messages-inbox.handler';
 import { MessageCheckMessagesInboxController } from './message-check-messages-inbox.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCheckMessagesInboxController', () =>
-{
+describe('MessageCheckMessagesInboxController', () => {
     let controller: MessageCheckMessagesInboxController;
     let handler: MessageCheckMessagesInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageCheckMessagesInboxController,
-            ],
+            imports: [],
+            controllers: [MessageCheckMessagesInboxController],
             providers: [
                 {
-                    provide : MessageCheckMessagesInboxHandler,
+                    provide: MessageCheckMessagesInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageCheckMessagesInboxController>(MessageCheckMessagesInboxController);
-        handler = module.get<MessageCheckMessagesInboxHandler>(MessageCheckMessagesInboxHandler);
+        controller = module.get<MessageCheckMessagesInboxController>(
+            MessageCheckMessagesInboxController,
+        );
+        handler = module.get<MessageCheckMessagesInboxHandler>(
+            MessageCheckMessagesInboxHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageCheckMessagesInboxController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCheckMessagesInboxController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

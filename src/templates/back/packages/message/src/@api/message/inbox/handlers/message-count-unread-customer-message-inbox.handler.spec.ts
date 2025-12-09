@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageCountUnreadCustomerMessageInboxHandler } from './message-count-unread-customer-message-inbox.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { MessageCountUnreadCustomerMessageInboxHandler } from './message-count-unread-customer-message-inbox.handler';
 
-describe('MessageCountUnreadCustomerMessageInboxHandler', () =>
-{
+describe('MessageCountUnreadCustomerMessageInboxHandler', () => {
     let handler: MessageCountUnreadCustomerMessageInboxHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageCountUnreadCustomerMessageInboxHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<MessageCountUnreadCustomerMessageInboxHandler>(MessageCountUnreadCustomerMessageInboxHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<MessageCountUnreadCustomerMessageInboxHandler>(
+            MessageCountUnreadCustomerMessageInboxHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessageCountUnreadCustomerMessageInboxHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCountUnreadCustomerMessageInboxHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

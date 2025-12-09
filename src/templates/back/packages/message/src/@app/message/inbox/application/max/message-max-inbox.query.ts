@@ -1,7 +1,6 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class MessageMaxInboxQuery
-{
+export class MessageMaxInboxQuery {
     constructor(
         public readonly column: string,
         public readonly queryStatement?: QueryStatement,

@@ -4,7 +4,11 @@
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { MessageModule } from '@api/message/message.module';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { MessageIOutboxRepository, messageMockOutboxData, MessageMockOutboxSeeder } from '@app/message/outbox';
+import {
+    MessageIOutboxRepository,
+    messageMockOutboxData,
+    MessageMockOutboxSeeder,
+} from '@app/message/outbox';
 import { GraphQLConfigModule } from '@aurora/modules';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -16,8 +20,7 @@ import * as request from 'supertest';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('outbox', () =>
-{
+describe('outbox', () => {
     let app: INestApplication;
     let outboxRepository: MessageIOutboxRepository;
     let outboxSeeder: MessageMockOutboxSeeder;
@@ -28,37 +31,41 @@ describe('outbox', () =>
     // set timeout to 60s by default are 5s
     jest.setTimeout(60000);
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
                 MessageModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
-                    imports   : [ConfigModule],
-                    inject    : [ConfigService],
-                    useFactory: (configService: ConfigService) =>
-                    {
+                    imports: [ConfigModule],
+                    inject: [ConfigService],
+                    useFactory: (configService: ConfigService) => {
                         return {
-                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
-                            storage       : configService.get('TEST_DATABASE_STORAGE'),
-                            host          : configService.get('TEST_DATABASE_HOST'),
-                            port          : +configService.get('TEST_DATABASE_PORT'),
-                            username      : configService.get('TEST_DATABASE_USER'),
-                            password      : configService.get('TEST_DATABASE_PASSWORD'),
-                            database      : configService.get('TEST_DATABASE_SCHEMA'),
-                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
-                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            dialect: configService.get('TEST_DATABASE_DIALECT'),
+                            storage: configService.get('TEST_DATABASE_STORAGE'),
+                            host: configService.get('TEST_DATABASE_HOST'),
+                            port: +configService.get('TEST_DATABASE_PORT'),
+                            username: configService.get('TEST_DATABASE_USER'),
+                            password: configService.get(
+                                'TEST_DATABASE_PASSWORD',
+                            ),
+                            database: configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize: configService.get(
+                                'TEST_DATABASE_SYNCHRONIZE',
+                            ),
+                            logging:
+                                configService.get('TEST_DATABASE_LOGGIN') ===
+                                'true'
+                                    ? console.log
+                                    : false,
                             autoLoadModels: true,
-                            models        : [],
+                            models: [],
                         };
                     },
                 }),
             ],
-            providers: [
-                MessageMockOutboxSeeder,
-            ],
+            providers: [MessageMockOutboxSeeder],
         })
             .overrideGuard(AuthenticationJwtGuard)
             .useValue({ canActivate: () => true })
@@ -68,8 +75,12 @@ describe('outbox', () =>
 
         mockData = messageMockOutboxData;
         app = module.createNestApplication();
-        outboxRepository = module.get<MessageIOutboxRepository>(MessageIOutboxRepository);
-        outboxSeeder = module.get<MessageMockOutboxSeeder>(MessageMockOutboxSeeder);
+        outboxRepository = module.get<MessageIOutboxRepository>(
+            MessageIOutboxRepository,
+        );
+        outboxSeeder = module.get<MessageMockOutboxSeeder>(
+            MessageMockOutboxSeeder,
+        );
 
         // seed mock data in memory database
         await outboxRepository.insert(outboxSeeder.collectionSource);
@@ -77,8 +88,7 @@ describe('outbox', () =>
         await app.init();
     });
 
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxId property can not to be null', () =>
-    {
+    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/create')
             .set('Accept', 'application/json')
@@ -87,14 +97,30 @@ describe('outbox', () =>
                 id: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageOutboxId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxMessageId property can not to be null', () =>
-    {
+    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxRowId property can not to be null', () => {
+        return request(app.getHttpServer())
+            .post('/message/outbox/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: null,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageOutboxRowId must be defined, can not be null',
+                );
+            });
+    });
+
+    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxMessageId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/create')
             .set('Accept', 'application/json')
@@ -103,30 +129,14 @@ describe('outbox', () =>
                 messageId: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxMessageId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageOutboxMessageId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxSort property can not to be null', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/message/outbox/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                sort: null,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxSort must be defined, can not be null');
-            });
-    });
-
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxId property can not to be undefined', () =>
-    {
+    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/create')
             .set('Accept', 'application/json')
@@ -135,14 +145,30 @@ describe('outbox', () =>
                 id: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageOutboxId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxMessageId property can not to be undefined', () =>
-    {
+    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxRowId property can not to be undefined', () => {
+        return request(app.getHttpServer())
+            .post('/message/outbox/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: undefined,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageOutboxRowId must be defined, can not be undefined',
+                );
+            });
+    });
+
+    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxMessageId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/create')
             .set('Accept', 'application/json')
@@ -151,30 +177,14 @@ describe('outbox', () =>
                 messageId: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxMessageId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageOutboxMessageId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxSort property can not to be undefined', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/message/outbox/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                sort: undefined,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxSort must be defined, can not be undefined');
-            });
-    });
-
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/create')
             .set('Accept', 'application/json')
@@ -183,14 +193,14 @@ describe('outbox', () =>
                 id: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageOutboxId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxMessageId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxMessageId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/create')
             .set('Accept', 'application/json')
@@ -199,30 +209,14 @@ describe('outbox', () =>
                 messageId: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxMessageId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageOutboxMessageId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST message/outbox/create - Got 400 Conflict, OutboxSort has to be a integer value', () =>
-    {
-        return request(app.getHttpServer())
-            .post('/message/outbox/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                sort: 100.10,
-            })
-            .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageOutboxSort has to be a integer value');
-            });
-    });
-
-    test('/REST:POST message/outbox/create - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/REST:POST message/outbox/create - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/create')
             .set('Accept', 'application/json')
@@ -230,53 +224,63 @@ describe('outbox', () =>
             .expect(409);
     });
 
-    test('/REST:POST message/outboxes/paginate', () =>
-    {
+    test('/REST:POST message/outboxes/paginate', () => {
         return request(app.getHttpServer())
             .post('/message/outboxes/paginate')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
+                query: {
                     offset: 0,
                     limit: 5,
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual({
                     total: outboxSeeder.collectionResponse.length,
                     count: outboxSeeder.collectionResponse.length,
-                    rows : outboxSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: outboxSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/REST:POST message/outboxes/get', () =>
-    {
+    test('/REST:POST message/outboxes/get', () => {
         return request(app.getHttpServer())
             .post('/message/outboxes/get')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual(
-                    outboxSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    outboxSeeder.collectionResponse.map((item) =>
+                        expect.objectContaining(
+                            _.omit(item, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    ),
                 );
             });
     });
 
-    test('/REST:POST message/outbox/find - Got 404 Not Found', () =>
-    {
+    test('/REST:POST message/outbox/find - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '91e1d6b0-3ca2-5e58-bce7-7431976ae7c1',
                     },
                 },
@@ -284,8 +288,7 @@ describe('outbox', () =>
             .expect(404);
     });
 
-    test('/REST:POST message/outbox/create', () =>
-    {
+    test('/REST:POST message/outbox/create', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/create')
             .set('Accept', 'application/json')
@@ -296,49 +299,47 @@ describe('outbox', () =>
             .expect(201);
     });
 
-    test('/REST:POST message/outbox/find', () =>
-    {
+    test('/REST:POST message/outbox/find', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:POST message/outbox/find/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:POST message/outbox/find/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/find/91a32f57-dc71-57b3-addc-e729b08c4a76')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:POST message/outbox/find/{id}', () =>
-    {
+    test('/REST:POST message/outbox/find/{id}', () => {
         return request(app.getHttpServer())
             .post('/message/outbox/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:PUT message/outbox/update - Got 404 Not Found', () =>
-    {
+    test('/REST:PUT message/outbox/update - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .put('/message/outbox/update')
             .set('Accept', 'application/json')
@@ -349,8 +350,7 @@ describe('outbox', () =>
             .expect(404);
     });
 
-    test('/REST:PUT message/outbox/update', () =>
-    {
+    test('/REST:PUT message/outbox/update', () => {
         return request(app.getHttpServer())
             .put('/message/outbox/update')
             .set('Accept', 'application/json')
@@ -359,30 +359,33 @@ describe('outbox', () =>
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:DELETE message/outbox/delete/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:DELETE message/outbox/delete/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
-            .delete('/message/outbox/delete/2fd77443-aa21-5049-b85f-b865d8fb2f65')
+            .delete(
+                '/message/outbox/delete/2fd77443-aa21-5049-b85f-b865d8fb2f65',
+            )
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE message/outbox/delete/{id}', () =>
-    {
+    test('/REST:DELETE message/outbox/delete/{id}', () => {
         return request(app.getHttpServer())
-            .delete('/message/outbox/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete(
+                '/message/outbox/delete/5b19d6ac-4081-573b-96b3-56964d5326a8',
+            )
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL messageCreateOutbox - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/GraphQL messageCreateOutbox - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -393,8 +396,8 @@ describe('outbox', () =>
                         messageCreateOutbox (payload:$payload)
                         {
                             id
+                            rowId
                             messageId
-                            sort
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -403,22 +406,27 @@ describe('outbox', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
+                variables: {
+                    payload: _.omit(mockData[0], [
+                        'createdAt',
+                        'updatedAt',
+                        'deletedAt',
+                    ]),
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(409);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('already exist in database');
             });
     });
 
-    test('/GraphQL messagePaginateOutboxes', () =>
-    {
+    test('/GraphQL messagePaginateOutboxes', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -434,28 +442,34 @@ describe('outbox', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
+                variables: {
+                    query: {
                         offset: 0,
                         limit: 5,
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body.data.messagePaginateOutboxes).toEqual({
                     total: outboxSeeder.collectionResponse.length,
                     count: outboxSeeder.collectionResponse.length,
-                    rows : outboxSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: outboxSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/GraphQL messageGetOutboxes', () =>
-    {
+    test('/GraphQL messageGetOutboxes', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -466,7 +480,7 @@ describe('outbox', () =>
                         messageGetOutboxes (query:$query)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -480,17 +494,25 @@ describe('outbox', () =>
                 variables: {},
             })
             .expect(200)
-            .then(res =>
-            {
-                for (const [index, value] of res.body.data.messageGetOutboxes.entries())
-                {
-                    expect(outboxSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+            .then((res) => {
+                for (const [
+                    index,
+                    value,
+                ] of res.body.data.messageGetOutboxes.entries()) {
+                    expect(outboxSeeder.collectionResponse[index]).toEqual(
+                        expect.objectContaining(
+                            _.omit(value, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    );
                 }
             });
     });
 
-    test('/GraphQL messageCreateOutbox', () =>
-    {
+    test('/GraphQL messageCreateOutbox', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -501,8 +523,8 @@ describe('outbox', () =>
                         messageCreateOutbox (payload:$payload)
                         {
                             id
+                            rowId
                             messageId
-                            sort
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -519,14 +541,15 @@ describe('outbox', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageCreateOutbox).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageCreateOutbox).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageFindOutbox - Got 404 Not Found', () =>
-    {
+    test('/GraphQL messageFindOutbox - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -537,7 +560,7 @@ describe('outbox', () =>
                         messageFindOutbox (query:$query)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -548,28 +571,27 @@ describe('outbox', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '8cf59389-00ed-59bb-8631-2ab41a7cf2a6',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL messageFindOutbox', () =>
-    {
+    test('/GraphQL messageFindOutbox', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -580,7 +602,7 @@ describe('outbox', () =>
                         messageFindOutbox (query:$query)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -591,26 +613,23 @@ describe('outbox', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageFindOutbox.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageFindOutbox.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageFindOutboxById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL messageFindOutboxById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -621,7 +640,7 @@ describe('outbox', () =>
                         messageFindOutboxById (id:$id)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -637,16 +656,18 @@ describe('outbox', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL messageFindOutboxById', () =>
-    {
+    test('/GraphQL messageFindOutboxById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -657,7 +678,7 @@ describe('outbox', () =>
                         messageFindOutboxById (id:$id)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -673,14 +694,14 @@ describe('outbox', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageFindOutboxById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageFindOutboxById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageUpdateOutboxById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL messageUpdateOutboxById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -691,7 +712,7 @@ describe('outbox', () =>
                         messageUpdateOutboxById (payload:$payload)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -710,16 +731,18 @@ describe('outbox', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL messageUpdateOutboxById', () =>
-    {
+    test('/GraphQL messageUpdateOutboxById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -730,7 +753,7 @@ describe('outbox', () =>
                         messageUpdateOutboxById (payload:$payload)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -749,14 +772,14 @@ describe('outbox', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageUpdateOutboxById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageUpdateOutboxById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageUpdateOutboxes', () =>
-    {
+    test('/GraphQL messageUpdateOutboxes', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -767,7 +790,7 @@ describe('outbox', () =>
                         messageUpdateOutboxes (payload:$payload query:$query)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -791,14 +814,14 @@ describe('outbox', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageUpdateOutboxes[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageUpdateOutboxes[0].id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageDeleteOutboxById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL messageDeleteOutboxById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -809,7 +832,7 @@ describe('outbox', () =>
                         messageDeleteOutboxById (id:$id)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -825,16 +848,18 @@ describe('outbox', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL messageDeleteOutboxById', () =>
-    {
+    test('/GraphQL messageDeleteOutboxById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -845,7 +870,7 @@ describe('outbox', () =>
                         messageDeleteOutboxById (id:$id)
                         {
                             id
-                            sort
+                            rowId
                             accountRecipientIds
                             tenantRecipientIds
                             scopeRecipients
@@ -861,14 +886,14 @@ describe('outbox', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageDeleteOutboxById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageDeleteOutboxById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    afterAll(async () =>
-    {
+    afterAll(async () => {
         await outboxRepository.delete({
             queryStatement: {
                 where: {},

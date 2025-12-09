@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { MessagePaginateCustomerMessagesInboxHandler } from '../handlers/message-paginate-customer-messages-inbox.handler';
 import { MessagePaginateCustomerMessagesInboxController } from './message-paginate-customer-messages-inbox.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessagePaginateCustomerMessagesInboxController', () =>
-{
+describe('MessagePaginateCustomerMessagesInboxController', () => {
     let controller: MessagePaginateCustomerMessagesInboxController;
     let handler: MessagePaginateCustomerMessagesInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessagePaginateCustomerMessagesInboxController,
-            ],
+            imports: [],
+            controllers: [MessagePaginateCustomerMessagesInboxController],
             providers: [
                 {
-                    provide : MessagePaginateCustomerMessagesInboxHandler,
+                    provide: MessagePaginateCustomerMessagesInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessagePaginateCustomerMessagesInboxController>(MessagePaginateCustomerMessagesInboxController);
-        handler = module.get<MessagePaginateCustomerMessagesInboxHandler>(MessagePaginateCustomerMessagesInboxHandler);
+        controller = module.get<MessagePaginateCustomerMessagesInboxController>(
+            MessagePaginateCustomerMessagesInboxController,
+        );
+        handler = module.get<MessagePaginateCustomerMessagesInboxHandler>(
+            MessagePaginateCustomerMessagesInboxHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessagePaginateCustomerMessagesInboxController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessagePaginateCustomerMessagesInboxController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

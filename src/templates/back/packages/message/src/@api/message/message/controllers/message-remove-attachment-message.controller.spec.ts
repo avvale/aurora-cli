@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { MessageRemoveAttachmentMessageHandler } from '../handlers/message-remove-attachment-message.handler';
 import { MessageRemoveAttachmentMessageController } from './message-remove-attachment-message.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageRemoveAttachmentMessageController', () =>
-{
+describe('MessageRemoveAttachmentMessageController', () => {
     let controller: MessageRemoveAttachmentMessageController;
     let handler: MessageRemoveAttachmentMessageHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageRemoveAttachmentMessageController,
-            ],
+            imports: [],
+            controllers: [MessageRemoveAttachmentMessageController],
             providers: [
                 {
-                    provide : MessageRemoveAttachmentMessageHandler,
+                    provide: MessageRemoveAttachmentMessageHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageRemoveAttachmentMessageController>(MessageRemoveAttachmentMessageController);
-        handler = module.get<MessageRemoveAttachmentMessageHandler>(MessageRemoveAttachmentMessageHandler);
+        controller = module.get<MessageRemoveAttachmentMessageController>(
+            MessageRemoveAttachmentMessageController,
+        );
+        handler = module.get<MessageRemoveAttachmentMessageHandler>(
+            MessageRemoveAttachmentMessageHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageRemoveAttachmentMessageController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageRemoveAttachmentMessageController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

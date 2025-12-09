@@ -13,23 +13,33 @@ import {
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateCredentialCommand)
-export class OAuthCreateCredentialCommandHandler implements ICommandHandler<OAuthCreateCredentialCommand>
+export class OAuthCreateCredentialCommandHandler
+    implements ICommandHandler<OAuthCreateCredentialCommand>
 {
     constructor(
         private readonly createCredentialService: OAuthCreateCredentialService,
     ) {}
 
-    async execute(command: OAuthCreateCredentialCommand): Promise<void>
-    {
+    async execute(command: OAuthCreateCredentialCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.createCredentialService.main(
             {
-                grantType: new OAuthCredentialGrantType(command.payload.grantType),
-                accountId: new OAuthCredentialAccountId(command.payload.accountId),
+                grantType: new OAuthCredentialGrantType(
+                    command.payload.grantType,
+                ),
+                accountId: new OAuthCredentialAccountId(
+                    command.payload.accountId,
+                ),
                 username: new OAuthCredentialUsername(command.payload.username),
-                clientSecret: new OAuthCredentialClientSecret(command.payload.clientSecret),
-                accessTokenId: new OAuthCredentialAccessTokenId(command.payload.accessTokenId),
-                refreshToken: new OAuthCredentialRefreshToken(command.payload.refreshToken),
+                clientSecret: new OAuthCredentialClientSecret(
+                    command.payload.clientSecret,
+                ),
+                accessTokenId: new OAuthCredentialAccessTokenId(
+                    command.payload.accessTokenId,
+                ),
+                refreshToken: new OAuthCredentialRefreshToken(
+                    command.payload.refreshToken,
+                ),
                 redirect: new OAuthCredentialRedirect(command.payload.redirect),
             },
             command.cQMetadata,

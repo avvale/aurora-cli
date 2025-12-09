@@ -1,38 +1,58 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { MessageMessageModel } from '@app/message/message';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+    AuditingSideEffectEvent,
+    SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+    AfterBulkCreate,
+    AfterBulkDestroy,
+    AfterBulkRestore,
+    AfterBulkUpdate,
+    AfterCreate,
+    AfterDestroy,
+    AfterRestore,
+    AfterUpdate,
+    AfterUpsert,
+    BelongsTo,
+    Column,
+    ForeignKey,
+    Model,
+    Table,
+} from 'sequelize-typescript';
 
 @Table({
     modelName: 'MessageOutbox',
     freezeTableName: true,
     timestamps: false,
     indexes: [
-		{
-			fields: ['accountRecipientIds'],
-			unique: false,
-		},
-		{
-			fields: ['tenantRecipientIds'],
-			unique: false,
-		},
-		{
-			fields: ['scopeRecipients'],
-			unique: false,
-		},
-		{
-			fields: ['tagRecipients'],
-			unique: false,
-		},
+        {
+            fields: ['rowId'],
+            unique: true,
+        },
+        {
+            fields: ['accountRecipientIds'],
+            unique: false,
+        },
+        {
+            fields: ['tenantRecipientIds'],
+            unique: false,
+        },
+        {
+            fields: ['scopeRecipients'],
+            unique: false,
+        },
+        {
+            fields: ['tagRecipients'],
+            unique: false,
+        },
     ],
 })
-export class MessageOutboxModel extends Model<MessageOutboxModel>
-{
+export class MessageOutboxModel extends Model<MessageOutboxModel> {
     @AfterCreate
-    static auditingCreate(instance: MessageOutboxModel, options): void
-    {
+    static auditingCreate(instance: MessageOutboxModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -43,8 +63,7 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     }
 
     @AfterBulkCreate
-    static auditingBulkCreate(instance: MessageOutboxModel, options): void
-    {
+    static auditingBulkCreate(instance: MessageOutboxModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -55,8 +74,7 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     }
 
     @AfterUpdate
-    static auditingUpdate(instance: MessageOutboxModel, options): void
-    {
+    static auditingUpdate(instance: MessageOutboxModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -67,8 +85,7 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     }
 
     @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
+    static auditingBulkUpdate(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -79,8 +96,7 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     }
 
     @AfterDestroy
-    static auditingDestroy(instance: MessageOutboxModel, options): void
-    {
+    static auditingDestroy(instance: MessageOutboxModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -91,8 +107,7 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     }
 
     @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
+    static auditingBulkDestroy(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -103,8 +118,7 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     }
 
     @AfterRestore
-    static auditingRestore(instance: MessageOutboxModel, options): void
-    {
+    static auditingRestore(instance: MessageOutboxModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -115,8 +129,7 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     }
 
     @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
+    static auditingBulkRestore(options): void {
         SequelizeAuditingAgent.registerSideEffect(
             null,
             options,
@@ -127,8 +140,7 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     }
 
     @AfterUpsert
-    static auditingUpsert(instance: MessageOutboxModel, options): void
-    {
+    static auditingUpsert(instance: MessageOutboxModel, options): void {
         SequelizeAuditingAgent.registerSideEffect(
             instance,
             options,
@@ -146,6 +158,14 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
     })
     id: string;
 
+    @Column({
+        field: 'rowId',
+        autoIncrement: true,
+        allowNull: false,
+        type: DataTypes.BIGINT,
+    })
+    rowId: number;
+
     @ForeignKey(() => MessageMessageModel)
     @Column({
         field: 'messageId',
@@ -159,14 +179,6 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
         foreignKey: 'messageId',
     })
     message: MessageMessageModel;
-
-    @Column({
-        field: 'sort',
-        autoIncrement: true,
-        allowNull: false,
-        type: DataTypes.INTEGER,
-    })
-    sort: number;
 
     @Column({
         field: 'accountRecipientIds',
@@ -223,5 +235,4 @@ export class MessageOutboxModel extends Model<MessageOutboxModel>
         type: DataTypes.DATE,
     })
     deletedAt: string;
-
 }

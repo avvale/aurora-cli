@@ -1,0 +1,121 @@
+type SupportIssue {
+    id: ID!
+    rowId: GraphQLInt!
+    externalId: GraphQLString
+    externalStatus: GraphQLString
+    externalColorStatus: GraphQLString
+    accountId: ID
+    account: IamAccount
+    accountUsername: GraphQLString
+    displayName: GraphQLString
+    frontEnvironment: GraphQLString
+    frontVersion: GraphQLString
+    backEnvironment: GraphQLString
+    backVersion: GraphQLString
+    subject: GraphQLString!
+    description: GraphQLString!
+    attachments: JSON
+    screenRecording: JSON
+    comments: [SupportComment]
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input SupportCreateIssueInput {
+    id: ID!
+    externalId: GraphQLString
+    externalStatus: GraphQLString
+    externalColorStatus: GraphQLString
+    accountId: ID
+    accountUsername: GraphQLString
+    displayName: GraphQLString
+    frontEnvironment: GraphQLString
+    frontVersion: GraphQLString
+    backEnvironment: GraphQLString
+    backVersion: GraphQLString
+    subject: GraphQLString!
+    description: GraphQLString!
+    attachments: [StorageAccountFileManagerFileUploadedInput]
+    screenRecording: StorageAccountFileManagerFileUploadedInput
+    meta: JSON
+}
+
+input SupportUpdateIssueByIdInput {
+    id: ID!
+    externalId: GraphQLString
+    externalStatus: GraphQLString
+    externalColorStatus: GraphQLString
+    accountId: ID
+    accountUsername: GraphQLString
+    displayName: GraphQLString
+    frontEnvironment: GraphQLString
+    frontVersion: GraphQLString
+    backEnvironment: GraphQLString
+    backVersion: GraphQLString
+    subject: GraphQLString
+    description: GraphQLString
+    attachments: [StorageAccountFileManagerFileUploadedInput]
+    screenRecording: StorageAccountFileManagerFileUploadedInput
+    meta: JSON
+}
+
+input SupportUpdateIssuesInput {
+    id: ID
+    externalId: GraphQLString
+    externalStatus: GraphQLString
+    externalColorStatus: GraphQLString
+    accountId: ID
+    accountUsername: GraphQLString
+    displayName: GraphQLString
+    frontEnvironment: GraphQLString
+    frontVersion: GraphQLString
+    backEnvironment: GraphQLString
+    backVersion: GraphQLString
+    subject: GraphQLString
+    description: GraphQLString
+    attachments: [StorageAccountFileManagerFileUploadedInput]
+    screenRecording: StorageAccountFileManagerFileUploadedInput
+    meta: JSON
+}
+
+type Query {
+    supportFindIssue(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): SupportIssue
+
+    supportFindIssueById(id: ID, constraint: QueryStatement): SupportIssue
+
+    supportGetIssues(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [SupportIssue]!
+
+    supportPaginateIssues(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+}
+
+type Mutation {
+    supportCreateIssue(payload: SupportCreateIssueInput!): SupportIssue
+
+    supportUpdateIssueById(
+        payload: SupportUpdateIssueByIdInput!
+        constraint: QueryStatement
+    ): SupportIssue
+
+    supportUpdateIssues(
+        payload: SupportUpdateIssuesInput!
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [SupportIssue]!
+
+    supportDeleteIssueById(id: ID!, constraint: QueryStatement): SupportIssue
+
+    # additionalApis
+    supportCreateWebhookConfig: ToolsWebhook!
+    supportDeleteWebhookConfig: Boolean!
+}

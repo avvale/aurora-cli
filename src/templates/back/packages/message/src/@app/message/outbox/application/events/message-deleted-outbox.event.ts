@@ -1,16 +1,22 @@
-export class MessageDeletedOutboxEvent
-{
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class MessageDeletedOutboxEvent {
     constructor(
-        public readonly id: string,
-        public readonly messageId: string,
-        public readonly sort: number,
-        public readonly accountRecipientIds: string[],
-        public readonly tenantRecipientIds: string[],
-        public readonly scopeRecipients: string[],
-        public readonly tagRecipients: string[],
-        public readonly meta: any,
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
+        public readonly event: {
+            payload: {
+                id: string;
+                rowId: number;
+                messageId: string;
+                accountRecipientIds: string[];
+                tenantRecipientIds: string[];
+                scopeRecipients: string[];
+                tagRecipients: string[];
+                meta: any;
+                createdAt: string;
+                updatedAt: string;
+                deletedAt: string;
+            };
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

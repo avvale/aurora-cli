@@ -1,45 +1,49 @@
 import { MessageCreateMessageInput } from '@api/graphql';
-import { MessageCreateMessagesHandler, MessageCreateMessagesResolver } from '@api/message/message';
+import {
+    MessageCreateMessagesHandler,
+    MessageCreateMessagesResolver,
+} from '@api/message/message';
 import { messageMockMessageData } from '@app/message/message';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageCreateMessagesResolver', () =>
-{
+describe('MessageCreateMessagesResolver', () => {
     let resolver: MessageCreateMessagesResolver;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 MessageCreateMessagesResolver,
                 {
-                    provide : MessageCreateMessagesHandler,
+                    provide: MessageCreateMessagesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        resolver = module.get<MessageCreateMessagesResolver>(MessageCreateMessagesResolver);
+        resolver = module.get<MessageCreateMessagesResolver>(
+            MessageCreateMessagesResolver,
+        );
     });
 
-    test('MessageCreateMessagesResolver should be defined', () =>
-    {
+    test('MessageCreateMessagesResolver should be defined', () => {
         expect(resolver).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageCreateMessagesResolver should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageCreateMessagesResolver should be defined', () => {
             expect(resolver).toBeDefined();
         });
 
-        test('should return an messages created', async () =>
-        {
-            expect(await resolver.main(<MessageCreateMessageInput[]>messageMockMessageData)).toBe(undefined);
+        test('should return an messages created', async () => {
+            expect(
+                await resolver.main(
+                    <MessageCreateMessageInput[]>messageMockMessageData,
+                ),
+            ).toBe(undefined);
         });
     });
 });

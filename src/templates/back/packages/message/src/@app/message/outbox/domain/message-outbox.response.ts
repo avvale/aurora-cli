@@ -1,11 +1,10 @@
 import { MessageMessageResponse } from '@app/message/message';
 
-export class MessageOutboxResponse
-{
+export class MessageOutboxResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly messageId: string,
-        public readonly sort: number,
         public readonly accountRecipientIds: string[],
         public readonly tenantRecipientIds: string[],
         public readonly scopeRecipients: string[],

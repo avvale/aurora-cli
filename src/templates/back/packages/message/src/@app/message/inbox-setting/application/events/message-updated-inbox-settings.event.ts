@@ -1,8 +1,11 @@
-import { MessageUpdatedInboxSettingEvent } from './message-updated-inbox-setting.event';
+import { MessageUpdatedInboxSettingEvent } from '@app/message/inbox-setting';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageUpdatedInboxSettingsEvent
-{
+export class MessageUpdatedInboxSettingsEvent {
     constructor(
-        public readonly inboxSettings: MessageUpdatedInboxSettingEvent[],
+        public readonly event: {
+            payload: MessageUpdatedInboxSettingEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

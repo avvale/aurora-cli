@@ -1,13 +1,12 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageCreateInboxSettingsCommand
-{
+export class MessageCreateInboxSettingsCommand {
     constructor(
         public readonly payload: {
             id: string;
             accountId: string;
-            sort: number;
-        } [],
+            lastReadMessageRowId: number;
+        }[],
         public readonly cQMetadata?: CQMetadata,
     ) {}
 }

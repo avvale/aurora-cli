@@ -14,6 +14,11 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
   - name: tenantIds
     type: array
     arrayOptions:
@@ -29,8 +34,8 @@ aggregateProperties:
       key: id
       field: message
       avoidConstraint: true
-  - name: sort
-    type: int
+  - name: messageRowId
+    type: bigint
     nullable: false
   - name: accountId
     type: id
@@ -111,3 +116,10 @@ additionalApis:
   - path: message/inbox/count-unread-customer-message
     resolverType: query
     httpMethod: post
+excludedOperations:
+  - getRaw
+  - min
+  - rawSql
+  - sum
+  - updateAndIncrement
+  - upsert

@@ -1,7 +1,6 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class OAuthCreateCredentialCommand
-{
+export class OAuthCreateCredentialCommand {
     constructor(
         public readonly payload: {
             grantType: string;

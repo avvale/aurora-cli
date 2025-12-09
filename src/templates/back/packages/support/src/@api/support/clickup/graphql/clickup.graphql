@@ -1,0 +1,44 @@
+type ClickupSpace {
+    id: ID!
+    name: GraphQLString
+    color: GraphQLString
+    private: GraphQLBoolean
+    avatar: GraphQLString
+    admin_can_manage: GraphQLBoolean
+}
+
+type ClickupFolder {
+    id: ID!
+    name: GraphQLString
+    orderindex: GraphQLInt
+    content: GraphQLString
+    status: GraphQLString
+    priority: GraphQLString
+    assignee: GraphQLString
+    task_count: GraphQLInt
+    due_date: GraphQLString
+    start_date: GraphQLString
+    archived: GraphQLBoolean
+    override_statuses: GraphQLBoolean
+}
+
+type ClickupList {
+    id: ID!
+    name: GraphQLString
+    orderindex: GraphQLInt
+    content: GraphQLString
+    status: GraphQLString
+    priority: GraphQLString
+    assignee: GraphQLString
+    task_count: GraphQLInt
+    due_date: GraphQLString
+    start_date: GraphQLString
+    archived: GraphQLBoolean
+    override_statuses: GraphQLBoolean
+}
+
+type Query {
+    clickupSpaces(teamId: GraphQLString): [ClickupSpace]!
+    clickupFolders(spaceId: GraphQLString): [ClickupFolder]!
+    clickupLists(folderId: GraphQLString): [ClickupList]!
+}

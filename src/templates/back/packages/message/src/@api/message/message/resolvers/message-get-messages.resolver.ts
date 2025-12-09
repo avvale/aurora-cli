@@ -8,11 +8,8 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.message.get')
-export class MessageGetMessagesResolver
-{
-    constructor(
-        private readonly handler: MessageGetMessagesHandler,
-    ) {}
+export class MessageGetMessagesResolver {
+    constructor(private readonly handler: MessageGetMessagesHandler) {}
 
     @Query('messageGetMessages')
     @TenantConstraint()
@@ -21,8 +18,7 @@ export class MessageGetMessagesResolver
         @Args('query') queryStatement?: QueryStatement,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
-    ): Promise<MessageMessage[]>
-    {
+    ): Promise<MessageMessage[]> {
         return await this.handler.main(
             account,
             queryStatement,

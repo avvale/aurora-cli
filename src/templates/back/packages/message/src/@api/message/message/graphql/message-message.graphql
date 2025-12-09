@@ -4,10 +4,9 @@ enum MessageMessageStatus {
     SENT
 }
 
-
-type MessageMessage
-{
+type MessageMessage {
     id: ID!
+    rowId: GraphQLInt!
     tenantIds: [ID]
     status: MessageMessageStatus!
     accountRecipientIds: [ID]
@@ -31,10 +30,10 @@ type MessageMessage
     deletedAt: GraphQLTimestamp
 }
 
-input MessageCreateMessageInput
-{
+input MessageCreateMessageInput {
     id: ID!
     tenantIds: [ID]
+
     accountRecipientIds: [ID]
     tenantRecipientIds: [ID]
     scopeRecipients: [GraphQLString]
@@ -51,8 +50,7 @@ input MessageCreateMessageInput
     meta: JSON
 }
 
-input MessageUpdateMessageByIdInput
-{
+input MessageUpdateMessageByIdInput {
     id: ID!
     tenantIds: [ID]
     accountRecipientIds: [ID]
@@ -71,8 +69,7 @@ input MessageUpdateMessageByIdInput
     meta: JSON
 }
 
-input MessageUpdateMessagesInput
-{
+input MessageUpdateMessagesInput {
     id: ID
     tenantIds: [ID]
     status: MessageMessageStatus
@@ -94,17 +91,13 @@ input MessageUpdateMessagesInput
     meta: JSON
 }
 
-type Query
-{
+type Query {
     messageFindMessage(
         query: QueryStatement
         constraint: QueryStatement
     ): MessageMessage
 
-    messageFindMessageById(
-        id: ID
-        constraint: QueryStatement
-    ): MessageMessage
+    messageFindMessageById(id: ID, constraint: QueryStatement): MessageMessage
 
     messageGetMessages(
         query: QueryStatement
@@ -116,7 +109,6 @@ type Query
         constraint: QueryStatement
     ): Pagination!
 
-
     # additionalApis
     messageCountTotalRecipientsMessage(
         tenantRecipientIds: [ID]
@@ -125,18 +117,12 @@ type Query
         accountRecipientIds: [ID]
         constraint: QueryStatement
     ): GraphQLInt!
-
 }
 
-type Mutation
-{
-    messageCreateMessage(
-        payload: MessageCreateMessageInput!
-    ): MessageMessage
+type Mutation {
+    messageCreateMessage(payload: MessageCreateMessageInput!): MessageMessage
 
-    messageCreateMessages(
-        payload: [MessageCreateMessageInput]!
-    ): Boolean!
+    messageCreateMessages(payload: [MessageCreateMessageInput]!): Boolean!
 
     messageUpdateMessageById(
         payload: MessageUpdateMessageByIdInput!
@@ -149,10 +135,6 @@ type Mutation
         constraint: QueryStatement
     ): [MessageMessage]!
 
-    messageUpsertMessage(
-        payload: MessageUpdateMessageByIdInput!
-    ): MessageMessage
-
     messageDeleteMessageById(
         id: ID!
         constraint: QueryStatement
@@ -162,7 +144,6 @@ type Mutation
         query: QueryStatement
         constraint: QueryStatement
     ): [MessageMessage]!
-
 
     # additionalApis
     messageRemoveAttachmentMessage(
@@ -180,5 +161,4 @@ type Mutation
         message: MessageUpdateMessageByIdInput!
         constraint: QueryStatement
     ): Boolean!
-
 }

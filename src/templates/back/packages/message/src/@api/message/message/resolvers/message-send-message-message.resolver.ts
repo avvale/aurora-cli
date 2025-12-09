@@ -3,16 +3,19 @@ import { TenantPolicy } from '@api/iam/shared';
 import { MessageSendMessageMessageHandler } from '@api/message/message';
 import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, CurrentAccount, QueryStatement, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    CurrentAccount,
+    QueryStatement,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.message.update')
-export class MessageSendMessageMessageResolver
-{
-    constructor(
-        private readonly handler: MessageSendMessageMessageHandler,
-    ) {}
+export class MessageSendMessageMessageResolver {
+    constructor(private readonly handler: MessageSendMessageMessageHandler) {}
 
     @Mutation('messageSendMessageMessage')
     @TenantPolicy()
@@ -22,8 +25,7 @@ export class MessageSendMessageMessageResolver
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
+    ): Promise<boolean> {
         return await this.handler.main(
             account,
             message,

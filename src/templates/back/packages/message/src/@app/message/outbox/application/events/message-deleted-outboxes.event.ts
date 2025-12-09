@@ -1,8 +1,11 @@
-import { MessageDeletedOutboxEvent } from './message-deleted-outbox.event';
+import { MessageDeletedOutboxEvent } from '@app/message/outbox';
+import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageDeletedOutboxesEvent
-{
+export class MessageDeletedOutboxesEvent {
     constructor(
-        public readonly outboxes: MessageDeletedOutboxEvent[],
+        public readonly event: {
+            payload: MessageDeletedOutboxEvent[];
+            cQMetadata?: CQMetadata;
+        },
     ) {}
 }

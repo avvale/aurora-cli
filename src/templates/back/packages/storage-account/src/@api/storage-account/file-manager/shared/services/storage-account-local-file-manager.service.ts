@@ -17,6 +17,7 @@ import {
 import { BadRequestException, Injectable } from '@nestjs/common';
 import {
     copyFileSync,
+    createReadStream,
     existsSync,
     mkdirSync,
     readFileSync,
@@ -96,6 +97,33 @@ export class StorageAccountLocalFileManagerService
         return responses;
     }
 
+    getStreamFile(
+        filePayload: StorageAccountFileManagerFileInput,
+    ): NodeJS.ReadableStream {
+        if (!filePayload.filename)
+            throw new BadRequestException(
+                'Filename to create blob must be defined',
+            );
+        if (!Array.isArray(filePayload.relativePathSegments))
+            throw new BadRequestException(
+                'RelativePathSegments to create blob must be defined and must be an array, current value: ' +
+                    JSON.stringify(filePayload.relativePathSegments),
+            );
+
+        const absoluteAttachmentPath = storagePublicAbsolutePath(
+            filePayload.relativePathSegments,
+            filePayload.filename,
+        );
+
+        if (existsSync(absoluteAttachmentPath)) {
+            return createReadStream(absoluteAttachmentPath);
+        }
+
+        throw new BadRequestException(
+            'Not found attachment file ' + absoluteAttachmentPath,
+        );
+    }
+
     getNextAvailableFilename(
         containerName: string,
         basePathSegments: string[],
@@ -160,6 +188,7 @@ export class StorageAccountLocalFileManagerService
             id: filePayload.id,
             originFilename,
             filename,
+            containerName: filePayload.containerName,
             mimetype,
             extension: extensionFile,
             relativePathSegments,

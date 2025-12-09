@@ -1,10 +1,12 @@
-import { MessageAddMessagesContextEvent, MessageIMessageRepository, MessageMessage } from '@app/message/message';
+import {
+    MessageAddMessagesContextEvent,
+    MessageIMessageRepository,
+    MessageMessage,
+} from '@app/message/message';
 import {
     MessageMessageAccountRecipientIds,
     MessageMessageAttachments,
     MessageMessageBody,
-    MessageMessageCreatedAt,
-    MessageMessageDeletedAt,
     MessageMessageIcon,
     MessageMessageId,
     MessageMessageImage,
@@ -28,8 +30,7 @@ import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class MessageUpdateMessagesService
-{
+export class MessageUpdateMessagesService {
     constructor(
         private readonly publisher: EventPublisher,
         private readonly repository: MessageIMessageRepository,
@@ -60,11 +61,11 @@ export class MessageUpdateMessagesService
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // create aggregate with factory pattern
         const message = MessageMessage.register(
             payload.id,
+            undefined, // rowId
             payload.tenantIds,
             payload.status,
             payload.accountRecipientIds,
@@ -89,31 +90,23 @@ export class MessageUpdateMessagesService
         );
 
         // update
-        await this.repository.update(
-            message,
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-                updateOptions: cQMetadata?.repositoryOptions,
-            },
-        );
+        await this.repository.update(message, {
+            queryStatement,
+            constraint,
+            cQMetadata,
+            updateOptions: cQMetadata?.repositoryOptions,
+        });
 
         // get objects to delete
-        const messages = await this.repository.get(
-            {
-                queryStatement,
-                constraint,
-                cQMetadata,
-            },
-        );
+        const messages = await this.repository.get({
+            queryStatement,
+            constraint,
+            cQMetadata,
+        });
 
         // merge EventBus methods with object returned by the repository, to be able to apply and commit events
         const messagesRegister = this.publisher.mergeObjectContext(
-            new MessageAddMessagesContextEvent(
-                messages,
-                cQMetadata,
-            ),
+            new MessageAddMessagesContextEvent(messages, cQMetadata),
         );
 
         messagesRegister.updated(); // apply event to model events

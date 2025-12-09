@@ -3,14 +3,12 @@ import { MessageCountInboxService } from '@app/message/inbox/application/count/m
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(MessageCountInboxQuery)
-export class MessageCountInboxQueryHandler implements IQueryHandler<MessageCountInboxQuery>
+export class MessageCountInboxQueryHandler
+    implements IQueryHandler<MessageCountInboxQuery>
 {
-    constructor(
-        private readonly countInboxService: MessageCountInboxService,
-    ) {}
+    constructor(private readonly countInboxService: MessageCountInboxService) {}
 
-    async execute(query: MessageCountInboxQuery): Promise<number>
-    {
+    async execute(query: MessageCountInboxQuery): Promise<number> {
         return await this.countInboxService.main(
             query.queryStatement,
             query.constraint,

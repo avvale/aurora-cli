@@ -1,0 +1,480 @@
+{
+    "info": {
+        "_postman_id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+        "name": "@app - support/comment",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "GraphQL - supportCreateComment",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:SupportCreateCommentInput!)\n{\n\tsupportCreateComment (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\texternalId\n\t\tissueId\n\t\taccountId\n\t\taccountUsername\n\t\tdisplayName\n\t\tdescription\n\t\tattachments\n\t\tscreenRecording\n\t\tmeta\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 30552552462182870000, \n\t\t\"externalId\": \"gq271kfi01q5b8vot7qq8bhqeh1s2tldp58u2swkqnihgnlge963mk12ta5kpk3\", \n\t\t\"issueId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountUsername\": \"4oqlyj1zooj4h3rlouppo2fk365y52bktkrc0e1s0juhhm40dhmla4nnhws1945owdghq7xkgt8xzj7f2bw333ay1o62ekdrtv6verbggaexa88s6unpt81qyktgkiv\", \n\t\t\"displayName\": \"nkgl8se1g9rrsugpgkuipjy8gb6gml29yrl2meym26yvfb8hjevxcf7xzlwx0q5mhajodkw2pwalove0ym0fckctgr6c5wx6uzkegi8vx6w2s45ywh8z7jqumxfa4x3\", \n\t\t\"description\": \"A sed tempore est rerum et autem autem. Porro dolorem odio vero cupiditate voluptatem rerum voluptate. Expedita et perferendis aliquam est voluptates. Eos et quia est sint id placeat qui. Odio nobis quibusdam et minus. Molestiae sunt doloremque itaque illo suscipit et fugit alias.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - supportCreateComments",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:[SupportCreateCommentInput]!)\n{\n\tsupportCreateComments (payload:$payload)\n}",
+                        "variables": "{\n\t\"payload\":\n\t[\n\t\t{\n\t\t\t\"id\": \"85c31fae-e108-4c2d-b43a-c25eff22066b\", \n\t\t\t\"rowId\": 47201316107543360000, \n\t\t\t\"externalId\": \"ipv51yypk5rteevn3fxg2rhj6haczfxhxig0k8vhc3t89tgor55c1e49ncdxko2\", \n\t\t\t\"issueId\": \"4bfabe55-c2e8-4954-99ba-637d08c3937c\", \n\t\t\t\"accountId\": \"00fa1e20-c5de-4670-bb71-9808b2768692\", \n\t\t\t\"accountUsername\": \"btenrb6y1dsecz7ymw4rzs9aws9jw6elpoz662mavi5su78aglp5ejsvlj40wd1j7gtbp42zvmeu14zvc5za297vnj4whkwt3llvwxyspgkmzp8w0agtsg67u48w5qw\", \n\t\t\t\"displayName\": \"jdnz7ozs270dsg8hhvwsvg8g5lvmxp4evoagbtdqyvrhun6ef3xtoxia8qc5qbbo5qneo00c4ol0vjm13r4dqap5wxal73eq19z0efrley91e2r5sjbc7tqk6dmvpa4\", \n\t\t\t\"description\": \"Vel alias ut animi quia est. Atque consectetur nihil accusantium ea eligendi. Fugit quia eos accusantium. Aut ratione rerum illo sunt rerum minus. Est incidunt nobis inventore sed. Itaque et aut dolorem soluta.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"4bf30c10-92d5-457f-b86e-30f2139e5f40\", \n\t\t\t\"rowId\": 40919583025517540000, \n\t\t\t\"externalId\": \"ai6yefezoqh26eguxvyy4xulyvdzss7b48ads27kl26l6kpjej351hh2r0fvenw\", \n\t\t\t\"issueId\": \"97403bb8-0097-434f-860d-497c8ac9f7fe\", \n\t\t\t\"accountId\": \"2facc95a-b7be-41ea-a713-e34b76d05bd1\", \n\t\t\t\"accountUsername\": \"r2ppddvsbrcnyn39eg0hoguam32g843zau9dv1pyq2zfxsteesmcrudcwy5ovgraxcfxme6feeoyc73y4a9gvog6vzpmrndsvs4ybksmpf9jdrn95sw0pd6fn7kulq4\", \n\t\t\t\"displayName\": \"m09n30bjdxra62ozodwbhym28wbbl24nhw0mk2fn6an6bsh26fmgwxu64hhrxw3fv3c71uk8dmcq0dfrf7d31fh7dr5sfedqcyhslf0vfkh3o2p4t4c1huan6t0c1dy\", \n\t\t\t\"description\": \"Dolor quisquam aspernatur. Odio in sit. Tempore rerum vel pariatur veniam sunt voluptatem unde. Non facere omnis esse possimus adipisci qui non est. Ea odio ab voluptate impedit sint aut deleniti eos.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"679d455c-a53f-47ad-a7dd-12dfb25fd585\", \n\t\t\t\"rowId\": 54424175342920065000, \n\t\t\t\"externalId\": \"ozc2ssoau7spcqhjxjb28v61yuo0nrpllref7khfeutjy3l15j03tbu0bvyh8vf\", \n\t\t\t\"issueId\": \"da343d8a-2085-4ce0-aa3a-a9b9584528ba\", \n\t\t\t\"accountId\": \"7b447dc0-90e9-4117-a45b-2f57844bee4e\", \n\t\t\t\"accountUsername\": \"qkonsw4goykt3uul0ero6p8ut6odoeycn6ypcrynhpd982kp7y86z2dhtaf9j9pt5b5od8hkgco14w54yu8iucmiucnhb6p3fp5erso3ptwx5yh8b3tpeczpsrna9cr\", \n\t\t\t\"displayName\": \"2z7m66gyg1i6ojsf97n0qv3isrrfi82z3m2q58l7b147tgmzosufvscz8hjrvstgmtgksabvw3rndqvtmvh73smvsdepafcmyc25s4js32r3zkcgrfd9cic50c6s77f\", \n\t\t\t\"description\": \"Quidem dolorum ut. Quidem cum reiciendis dolor nemo id. Est sit aut deserunt.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"fead5b50-4aed-487d-826c-31aedc21bee6\", \n\t\t\t\"rowId\": 66782799705888874000, \n\t\t\t\"externalId\": \"b9v37e1053x24sjylnjog7snx6weho6zlis7m4sf71ar4iy1va8xxicmkedbyu3\", \n\t\t\t\"issueId\": \"51345f56-0acd-4cc5-8223-78b02a55b06c\", \n\t\t\t\"accountId\": \"6382f31d-7c81-4dec-8546-2f6e8a430516\", \n\t\t\t\"accountUsername\": \"p59kqadmawpumckvyncevl27zjl3zkh92693v68bod37y74v3v5vz6ioh1vouo8cxtj69myfd9ah8ktcf2q7vl4ph7wf0yd29l8jjyof5sd7mzwca1h7h08u3ncgstp\", \n\t\t\t\"displayName\": \"qo9gs5z3fv1cfs93kcv7wo05qle12e712r0uldyr8rlclef4dpxh4xne3e1gnsjuzy1097i3pi5d1zkdvegf9yb09fo41ptwftkjdol2b2mds8jifn0tggqhfru0oti\", \n\t\t\t\"description\": \"Enim veritatis aut dolorum voluptas atque maiores. Consequatur voluptatibus aut neque quis. Laborum ut sit. Repellendus aperiam dicta recusandae. Eligendi expedita reprehenderit voluptates at molestiae.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"5c16b9f0-8116-413c-8c0f-142d28f60707\", \n\t\t\t\"rowId\": 19820873614882160000, \n\t\t\t\"externalId\": \"qwctc0q6230nzf7ja9gdo314db13pq6g7ija4mb1l7j9ixm34virizxk9z2cv8k\", \n\t\t\t\"issueId\": \"99654c60-01d9-433b-97c5-f350c838d182\", \n\t\t\t\"accountId\": \"116c7a38-92d9-4495-8f8a-43c111d307f7\", \n\t\t\t\"accountUsername\": \"v2kvv00coqoxxtonlldfj61avr0x6my037249lw9nhr7zhaw2qspr2ifestr2d8x41zztqrpxs719pcjr11pbh73md5udpi51i1u691pa1nf85e9weozdj76hfmir76\", \n\t\t\t\"displayName\": \"ksx01nofwn6wefiph6mecimx881qfr1t47wlri36bhujiq346g61vpusnojjxtaz54iwu2xip7b97kjqoleta4mag5wcibgnfml9kne7l12vos1i350abfms25ellzz\", \n\t\t\t\"description\": \"Porro nobis ipsam. Omnis tempora neque maxime maiores at quia minus. Provident omnis dignissimos cum deleniti non quas consequatur. Beatae ut omnis hic. Nam repellat temporibus maxime neque veniam quos dolorum. Veritatis et qui nihil accusantium.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"30c28c13-b20e-4b70-b105-f3e3d5eda4af\", \n\t\t\t\"rowId\": 34697501499096773000, \n\t\t\t\"externalId\": \"kxm1ocfp718icovi2u9hzdxuuedcfgf182wkhfkn5evsr781fj6w6594b6l8qfr\", \n\t\t\t\"issueId\": \"33eff2e8-85a5-4e64-927c-5209ce1d8a41\", \n\t\t\t\"accountId\": \"8a847585-fff7-4ca9-97bc-1ee393df64c4\", \n\t\t\t\"accountUsername\": \"iajkfbg2wgx1sxjfwvardxde1ghbysbzt0ky37e0lpuxfa54ut6xq07lk48bim1z8b20quevf9z154zwsvcmso2xphl451yb9q2gnl9rqx3sjmxaxt7pv4a23y2pluc\", \n\t\t\t\"displayName\": \"1gmd59tt971e7uh3bnto9thvixauig4fm1q1qnp1jfxpwvjp0ho1wi19amxwy829lm1jk9ezglzng8nn5v0xx5dmf4zq7ceni9y32xgpzt0wwlnc3q3z0ubtpbyj98r\", \n\t\t\t\"description\": \"Amet consequatur ad quidem qui consequuntur reprehenderit enim esse omnis. Aut assumenda perferendis. Dolorem illo a dolor. Ratione eos beatae. Doloremque atque culpa ut cum iste odio accusantium occaecati. Omnis soluta inventore.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"02edba08-ec24-4ed6-90e3-3aa169e2ddcc\", \n\t\t\t\"rowId\": 77063045496517970000, \n\t\t\t\"externalId\": \"t7kj0983hqp8yr0zgyjdovndhkqnc7ucwnw8ounbov54a9455u17opkdpi2vvqs\", \n\t\t\t\"issueId\": \"2136a4dc-845e-467b-9adf-2280ffdfc75d\", \n\t\t\t\"accountId\": \"1f5eee46-63d2-48e0-b4b1-9f1b439bb4e3\", \n\t\t\t\"accountUsername\": \"rbrile383hi5hqmhk1q21nd2nlm0115s22qajlsy74pcd8q81jgguqlivoas92c1aeojgppja2txmmfxotr7web7z6teuf0mxdp6j19a5f8yvsy92dapgbl2eq9e7bg\", \n\t\t\t\"displayName\": \"a3vgy3nkvlq1p7h0w9crhjagpxapeu03nrdlobz4bjou2x4y8p0aaze5h92xuf77tq86h8u3odzkblws4uqwam6ap9ndovy77sivckm379z9fu2x3s1hr6s8dhwx79e\", \n\t\t\t\"description\": \"Et rerum voluptate quia qui. Et ut quia sed voluptatibus et. Officia vero ea odit tempora sed voluptatem eligendi. Ipsam nostrum eum et minus sit. Ut enim accusantium accusamus. Recusandae libero aspernatur amet aut natus quo.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"1f6d9243-e381-4949-982d-a6061414e783\", \n\t\t\t\"rowId\": 44788826024844214000, \n\t\t\t\"externalId\": \"8hge4wozcvy29fo1y4dkcoj8t0jiomxl9fm8djuofg55rat0anyd0tao9lrdqre\", \n\t\t\t\"issueId\": \"ad3f8013-7888-4235-9e2c-8b2c07264806\", \n\t\t\t\"accountId\": \"6081c291-014f-49a7-9019-c7776397c6ca\", \n\t\t\t\"accountUsername\": \"obbzhcspfdw0db8hk4cgz98tc5yswywcap7nyr0bhotwzh4v2g54e1xvy8ifnvzk17uvque6lfqnb3r7xgn0s1x64zav840dod8qibpq2bkiu1rz1ra7stmeecmep73\", \n\t\t\t\"displayName\": \"s4sfatorsf1rxb060497f7f36rqdok775ggyrmykvirtggrst6744h3efu705jcda10mgt1bodgqswva6rpzxv4shpaee2jr6v5k483kg5o60mxqo5jq0oi02mbybw5\", \n\t\t\t\"description\": \"Et autem in nisi laboriosam quo quisquam ea molestiae nemo. Non rerum accusantium expedita sint. Adipisci sequi vel ipsa et velit quasi voluptas quibusdam. Aut aliquam iste odio omnis et ipsa. Magnam eveniet dolores omnis repellendus sed. Est totam earum dolores est tempora quia.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"98f49cd4-3b53-4a63-aefe-5650afa06b80\", \n\t\t\t\"rowId\": 60663498255742616000, \n\t\t\t\"externalId\": \"xcxof1owrt69a807dcktp9s5jg6uqe500wdgpm91qn8gfoh2fzafpl18dzwsf93\", \n\t\t\t\"issueId\": \"c0651ff6-b4ee-4a4a-859d-00399d854160\", \n\t\t\t\"accountId\": \"698a25fb-4ee9-4d15-b658-ba569e28cdf0\", \n\t\t\t\"accountUsername\": \"3y8qo4k999t1r6w4wqimlenbz5w96l6nuto8wm0tf7o1j0gxznht8o3ms7x3u9zc0c5dofv34u99noejros0kg2wlmrh6cpf28x6s3zesc0f4qbhuhne3a6hz8tpcy6\", \n\t\t\t\"displayName\": \"wun2qxb94yf6w863fwdyrxf5kddlrvs2f1xbrc9va8u2686vfiqw0j9vuycp7zinvkhwoufbdevmsc5k64dira1l8l4yim6wssb9sdz51c5xedu2qms3wdpr9tnf2xe\", \n\t\t\t\"description\": \"Facere ut accusamus et qui. Eaque ullam porro et accusantium dolores et. Perspiciatis hic et in reprehenderit ipsam vero cum accusantium sunt. Quod molestias eveniet quisquam. Commodi non culpa. Iusto modi est.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}, \n\t\t{\n\t\t\t\"id\": \"a28cb5b3-9bda-4695-a788-5b981ecb9724\", \n\t\t\t\"rowId\": 17164189940363650000, \n\t\t\t\"externalId\": \"8w679tpji9pvwugbxoi0am9ek4uor029bbzaiopgn3nhg2yh7sr156ul1tzgerm\", \n\t\t\t\"issueId\": \"3c46a858-9286-47d8-82fb-4bff3d591ac6\", \n\t\t\t\"accountId\": \"db4d71fe-6731-4154-addc-56aacae92d80\", \n\t\t\t\"accountUsername\": \"vuyqaxhzfoihu8tn41cd7z55wt2fggzcdnsxpvl3dxeoq35dp54g2z06x4ndbnwah9z0moru7vqy1vs8l1epdywmsvlrr20qlz4f0i5f8mdbfugv0xcb824u47dh87k\", \n\t\t\t\"displayName\": \"fcssug50s3dwtfmuoxa0q1j4abzw37ottmela55ztb1ovq6n30dpugcnj0wjjxbs5atzzzwifj5x2637l3lmferosn9jykequxloeudbn61xknfz6zp4e3uzssodj6q\", \n\t\t\t\"description\": \"Est doloremque voluptatum sunt velit sed. Error quis voluptate sint possimus aut. Et asperiores earum ullam doloremque ut. Facilis delectus dolorem quos soluta laborum quam asperiores. Aut est necessitatibus est enim illo inventore nesciunt.\", \n\t\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\t\"meta\": { \"foo\" : \"bar\" }\n\t\t}\n\t]\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - supportPaginateComments",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement $constraint:QueryStatement)\n{\n\tsupportPaginateComments (query:$query constraint:$constraint)\n\t{\n\t\ttotal\n\t\tcount\n\t\trows\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - supportGetComments",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tsupportGetComments (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\texternalId\n\t\taccountUsername\n\t\tdisplayName\n\t\tdescription\n\t\tattachments\n\t\tscreenRecording\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - supportFindComment",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($query:QueryStatement)\n{\n\tsupportFindComment (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\texternalId\n\t\taccountUsername\n\t\tdisplayName\n\t\tdescription\n\t\tattachments\n\t\tscreenRecording\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - supportFindCommentById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "query ($id:ID)\n{\n\tsupportFindCommentById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\texternalId\n\t\taccountUsername\n\t\tdisplayName\n\t\tdescription\n\t\tattachments\n\t\tscreenRecording\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - supportUpdateComment",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($payload:SupportUpdateCommentInput!)\n{\n\tsupportUpdateComment (payload:$payload)\n\t{\n\t\tid\n\t\trowId\n\t\texternalId\n\t\taccountUsername\n\t\tdisplayName\n\t\tdescription\n\t\tattachments\n\t\tscreenRecording\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"payload\":\n\t{\n\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"rowId\": 55126074726605650000, \n\t\t\"externalId\": \"45bdsnys85bbu6tgewb2gpjdrflk9jzuflkml15pbeobs8tc1afbkg5zztw6oym\", \n\t\t\"issueId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\t\"accountUsername\": \"cneavfi84qayyn4kq8hgt82ok2suak6vbbb8vb2h2yfc9d7btkvs5sauv7o5144jn6dgeuo3gdwcjg82p13u51hyy4pf1wfkjj7xokol5h8l8624z8sv0pikc48cpty\", \n\t\t\"displayName\": \"y55thifgcydwh33vm3n3cb80ytptibs0ev9al0gwlpo9qu9rp7r526e1lbf9o8bpop2ind5fr20jqb3xty55gpfyw5et1rb91xqwntg4zlk997kmqr3ntphjq2t2tit\", \n\t\t\"description\": \"Aspernatur libero consequuntur. Qui ab unde soluta id officia adipisci accusantium. Aspernatur perferendis itaque magnam facere nihil nihil occaecati et architecto.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - supportDeleteCommentById",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($id:ID!)\n{\n\tsupportDeleteCommentById (id:$id)\n\t{\n\t\tid\n\t\trowId\n\t\texternalId\n\t\taccountUsername\n\t\tdisplayName\n\t\tdescription\n\t\tattachments\n\t\tscreenRecording\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "GraphQL - supportDeleteComments",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                    "mode": "graphql",
+                    "graphql": {
+                        "query": "mutation ($query:QueryStatement)\n{\n\tsupportDeleteComments (query: $query)\n\t{\n\t\tid\n\t\trowId\n\t\texternalId\n\t\taccountUsername\n\t\tdisplayName\n\t\tdescription\n\t\tattachments\n\t\tscreenRecording\n\t\tmeta\n\t\tcreatedAt\n\t\tupdatedAt\n\t}\n}",
+                        "variables": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}"
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/graphql",
+                    "host": ["{{URL}}"],
+                    "path": ["graphql"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comment/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 77001540065399390000, \n\t\"externalId\": \"c9hps619uu0jktqtb0pm63hyi3v6qbacpdgot82k3f6fn46sx44qoxy7iucnjon\", \n\t\"issueId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountUsername\": \"qfg0smxt2fz93geyyyi8yvsdxn3ktve6uc62gflif73bapwxfocv6814hlhhu0phwx4gfgcfqezo0g0d1ztrzs414woh89w72xuwcp7ulb0ir12zzqqzxudj21ybdbn\", \n\t\"displayName\": \"nroilr3xwz5z3aufalcxidfyh7q9gww0v7ygcvztigdz9nacr7vnpra7vycem1yn514c2mck2sotllekmrx5395ffph0jcwuzo6jt1zd779e4esyfug7amnphwn2muv\", \n\t\"description\": \"Adipisci rerum maiores vitae laudantium. Delectus sit officia eligendi labore. Consequatur non eum perferendis. Veritatis totam incidunt tempora.\", \n\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\"meta\": { \"foo\" : \"bar\" }\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comment/create",
+                    "host": ["{{URL}}"],
+                    "path": ["support", "comment", "create"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comments/create",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "[\n\t{\n\t\t\"id\": \"462f6e7a-7146-49ed-b888-94c2b50192b8\", \n\t\t\"rowId\": 94373227780230460000, \n\t\t\"externalId\": \"089wykenfd8kgjp4ivbtep3lgd61bayt0xdg7039c5emzuc4od1ovrt35pw4efs\", \n\t\t\"issueId\": \"842d0ce0-cc54-4136-a9e5-b200b98e9df5\", \n\t\t\"accountId\": \"925d0522-0b98-4902-9ecc-2f86fc2a5bdd\", \n\t\t\"accountUsername\": \"frobx07mbeebykhrvrq0tfjbwangowaypudso71e6a9t1vc3m26q4tkok4oa0cfxjyal9q4hwhyy7vvbs4kupta3y1u3v71ernd5jefj15gumlf4jhrli7r3xsfxvgi\", \n\t\t\"displayName\": \"be9ey6qgaegngelgxn9oewb78xtk9y1egube0hlqabkuqx799kbg02qupn0ub3gavf6oi3a42jbz0grnpzkcwli0bcn5zhdncj2k8fsgszhdr4wbico1xqtsuuqsc4r\", \n\t\t\"description\": \"Sint repudiandae sit numquam expedita placeat. Et dolores illum. Maxime ut ut ea perspiciatis hic. Repudiandae quos velit dicta sapiente animi beatae eveniet atque at. Soluta dolorem totam ducimus iusto et occaecati eveniet qui.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"8b69e09f-b96f-4727-abee-dd52fcbc53da\", \n\t\t\"rowId\": 19806931759300510000, \n\t\t\"externalId\": \"tusggd2wfdohek4zepxxpnoa57uwioybezg71nq9n8wnfewgftq16i3vu35imfj\", \n\t\t\"issueId\": \"d50ed2ee-912a-4b15-bc55-3a8bf456c9e7\", \n\t\t\"accountId\": \"da4fae32-749c-4cb0-afb3-df147de17fbe\", \n\t\t\"accountUsername\": \"um8mmffeaolh5mllywx5pxxzn6gmmenqmax4kepq5jjuqzjfubk4levkyb84nmmktx9jbdhy0yh3yslncg0hxltpdytsr3bhjb3sh6lp7nr4feboyknogq48ji53b2o\", \n\t\t\"displayName\": \"ozlfkjr2xm07akt30ese139j8vuwlem6025lkex8wtusi03rso75f8oc4fjyy2typbhqy2jgrte2opw9h09qa1licnm8il6h16tpe81mz7zrwzw07cig3zvywlaz8pn\", \n\t\t\"description\": \"Et sed cumque reiciendis necessitatibus. Est quis tempora cupiditate ut est et magnam laborum. Unde dolor deserunt expedita et et. Quasi nihil sequi occaecati nihil. Voluptates quis quibusdam beatae tempore facere quae debitis ratione. Inventore ut sint.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"38d81caa-e602-4125-ba9a-772303921650\", \n\t\t\"rowId\": 33126389255974320000, \n\t\t\"externalId\": \"rfxpkl82q2vcp63sdif6ci9fndfm7gmbs8y92e29hi33aofh9hj2f8lcpce3kvu\", \n\t\t\"issueId\": \"c1556dcf-08d0-4b58-8059-5a79a55be8d5\", \n\t\t\"accountId\": \"74ace186-52e6-4805-8cb3-e516a67cd4a0\", \n\t\t\"accountUsername\": \"ilyth9ufr87b5v0prn83qp4zea21rvsmx6y14mub5e4esi60xiwroois9f7vz7j2cl84n3d6bw5lv6e0j8b6511rchbts6nzvcwyzc5lzvp4ufh2qnklqvaxopisl4l\", \n\t\t\"displayName\": \"p8ivf6y5ws9rilyb4f60sa4p2x7f76kxhy2yze497dpxe06f6nzffmsqc7kvoz3j6hg4kyrea5nmi4jkr6k6gkhm76hf0ihv1kr8mckx8v61y2bh5cqcdzrxx6m4xwa\", \n\t\t\"description\": \"Doloremque assumenda eos voluptatibus dolorum ut recusandae consequuntur qui. Voluptas rerum et et qui porro non. Ut nihil amet voluptas porro sit nostrum sequi a.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"fc892e20-8894-4be0-842b-06707da68023\", \n\t\t\"rowId\": 11551790611933530000, \n\t\t\"externalId\": \"ktcsibw4w4b359r0ojwwicf17ew25ritswtalmbt772r09o8s9urdz0q68i9uuz\", \n\t\t\"issueId\": \"f81757ac-37fe-46ab-94f9-0bf38f8c55c6\", \n\t\t\"accountId\": \"3522c666-d431-4e38-bce9-e765d3ecaac1\", \n\t\t\"accountUsername\": \"9u6ep2rudud300ssjy7sh2529fypxc5gizkr33q9j1ktpjltvv2a3gtjchasfqvb3khcvshcocc94yb6onn272hc8fgtc3r4qy0scx2bcauzyrs6ja2kb7p3dlw10m2\", \n\t\t\"displayName\": \"ntl60npsnyxyt3l5h8n05xhxzztlr22pw26u2aw7hifz3ebew2518zw9sj3yqvy5cqk568o8vyotjo7lcuk3060crwc2qa3j9vkq9ibam3yle5lcfnf069054ca9amt\", \n\t\t\"description\": \"Eos doloremque excepturi deserunt temporibus ea ratione rerum voluptatibus explicabo. Eius necessitatibus qui id iusto quae ut ab. Nesciunt et consequatur fuga incidunt in laborum sed. Officiis quidem dolor libero eius delectus cupiditate sed.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5de140a4-0b52-4baf-b268-2cb0e1f6d8f9\", \n\t\t\"rowId\": 76958075587060530000, \n\t\t\"externalId\": \"qto1d3ryinuasm46g7l7426fk9w4ct6ynduu6q3trflyk947qknpov6exv1z1dz\", \n\t\t\"issueId\": \"6f9f4107-def6-4fca-8912-e4056d4ea4d1\", \n\t\t\"accountId\": \"4693e4ad-9b76-4c66-ba25-8307bbb4824d\", \n\t\t\"accountUsername\": \"e020ugnebf7qyp97l3afs9l6ga9vhmu95p860tm3w3oc1os2xfpb6gau32da3chof7ujm5mb9s3zbgi1ea9dpt53sd7kvtgsgpcu2mdvo2xzqhedgtk2dtwvphozqg7\", \n\t\t\"displayName\": \"fbyuwj0uoafytp5xn33j3p42yjtc7r1xg4hakvyx1744kzdar9p522qflq24pd4loqovfko6hsxad59yzhgxmtvly48lha2djnnlm8tybnnikp3f0p1t0yxj57qfs2x\", \n\t\t\"description\": \"Rerum voluptatem dolorem doloremque quas fugiat. Porro sed consequatur possimus ad suscipit. Dolor illo velit sint fuga excepturi. Sed qui voluptas atque qui saepe qui consequuntur asperiores. Modi voluptates est blanditiis voluptatem necessitatibus beatae aliquid odit.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"ede0963b-2236-4345-89a5-8dd4761641ad\", \n\t\t\"rowId\": 60993633883006880000, \n\t\t\"externalId\": \"fv1t1ijra4xl5gx3h761e53a6s742pfw6r60ood99ukdajdb5b0gkx6vgj4w7ms\", \n\t\t\"issueId\": \"1a0d7aa8-b0ec-4344-9f1a-4f49e4905c56\", \n\t\t\"accountId\": \"ed7dfd70-aad4-4ef0-8162-ba87913a0b73\", \n\t\t\"accountUsername\": \"786rzhek3j27d095t74jz8eezurbb3t9106rn27g2je0k6rurm2nwwt43108h753j91laxdd7dnf1slb7kk28kxlvnbfaa50ux32b5mrdvwkjze6kxliytmmglhb01q\", \n\t\t\"displayName\": \"yor3eljb5hcdjbzmsl1s5vjhkh3o5gxu28rcv7xtr6gqmpwjqy9m68yl7rfj4z18o52gew98ck0dlqlo952pzhwxo4ejm5y8kfrjqdpyhv7s9l4qvzrirokouhl1y5u\", \n\t\t\"description\": \"Enim eum omnis quo nobis neque sit atque perspiciatis. Eum laudantium assumenda explicabo provident dolorum quae architecto odit. Corporis quaerat voluptate nisi a doloribus nihil eum. Eos nam et laborum dolorum ut.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"5eb02e37-985d-4a08-8d7f-690e40089376\", \n\t\t\"rowId\": 63650818425025460000, \n\t\t\"externalId\": \"2o4nrwvegfzu1f78ty96jgy512p9v1biyzgcwy889162knsblbwbr0edq1vcfd4\", \n\t\t\"issueId\": \"15ca09fd-9907-4d1d-b7c9-b3a3737fcc79\", \n\t\t\"accountId\": \"0a4ce296-7f7e-4b78-9a7c-a661256421aa\", \n\t\t\"accountUsername\": \"dc36vrfh8tylut7jk7oxw69sh4772iarydpr85tq2fw1ww8k0z84zg6s1mdh7b39mopsw245vfjyh25m8lxtdmtvth05croq8ur29ckb7powev1lyj2joabxctegkv3\", \n\t\t\"displayName\": \"ufy0u74ut6drswlf07xr95t4kxt981552w04b0zwdlagnrc1xbldve1t8zsxir06rjk17wfm5ymiudj4193s5mi4oepkf4zl5nuwvppplxun622ywu8k2mariyufccx\", \n\t\t\"description\": \"Omnis modi ut. Asperiores velit qui veniam non eveniet qui dignissimos nesciunt dolor. Dolores quia eveniet et expedita porro accusantium non consectetur sit. Nam quis inventore omnis. Qui et sint sint vitae sed id saepe.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"9ba7b201-47d0-4db5-8498-d383f9479211\", \n\t\t\"rowId\": 59182384712777420000, \n\t\t\"externalId\": \"ib32gaabe50ijxtg394f8vnmmsk21m2a2ocaxh84wmxudvygkam13ed5270493y\", \n\t\t\"issueId\": \"c4ede07a-53bc-49c8-b9de-5779dac4a1d5\", \n\t\t\"accountId\": \"f659edd1-cb20-4bbf-8e16-492cc59dab6b\", \n\t\t\"accountUsername\": \"xz630s6ogevxa7uw7wujkwg7dbt0f77xe371p3dszold4xb6a0wilv9kae1wctre3qlehfdqyslqdz7c5xt7vpkcec6j8g37ed3878bbknbfgrcph73l9ab4iw8m45w\", \n\t\t\"displayName\": \"hmt30x6wcjtd01ccnbdrnla4s5g3qye1x07bfe0w9f1h2x82egve9nmk05rejz5qkmvnzzhqwvbftiasr9wvb3o0fsljk6b94ab1i8jdlysgtxpkcv6pi227klrgsd3\", \n\t\t\"description\": \"Qui dolores sint et tempora assumenda laudantium. Voluptatem quas impedit nobis explicabo id vero. Ut voluptas sed consectetur quasi modi et saepe quia. Aut dolores perspiciatis minus pariatur. Culpa ullam tenetur in nulla quo aliquid qui itaque.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"b393b23c-2edc-416c-b791-da0de1197d47\", \n\t\t\"rowId\": 71162452338172580000, \n\t\t\"externalId\": \"loo99aamy9njxg8tj48fdj47re8v3zutbrqhsoo1mhtfk6e2oz5lpkqytodcmzj\", \n\t\t\"issueId\": \"6dfda71f-149b-4309-ab82-faee32bbf59a\", \n\t\t\"accountId\": \"0e4445f2-319d-4820-9165-a6d328afcbc0\", \n\t\t\"accountUsername\": \"p0kn9i35fd52l4qo5f9gn8eyfnt19q5025iehjgcrvffe5t1h0jt9ppa063zf120b122nil0cauwn642jwe5vilh4e5jhcrn7udrvao4sur3jmsgcqfqjz49vn0dvgb\", \n\t\t\"displayName\": \"y8nz03d927x3jz6uoc07fy98ho9ru2830p8sjtq4imblpwt2i9mczw95gr3tzx7w0fp1680s3rwnyokt4pm1md7o3mw4l968jtr41iz1bfx2bu38k2w1q26ius40p0k\", \n\t\t\"description\": \"Non reprehenderit ducimus. Eum vel quo. Expedita suscipit consequatur.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}, \n\t{\n\t\t\"id\": \"59dd064d-5979-4c72-9d3e-c446fec4378d\", \n\t\t\"rowId\": 14183765192497830000, \n\t\t\"externalId\": \"ysux6g8ymvuadpdp4jngylpxwgxocum08qzekysm8kdj4xdimwjepak4ntbxtcp\", \n\t\t\"issueId\": \"39dd2eca-752f-4bc0-8bd0-7a2b0f20d662\", \n\t\t\"accountId\": \"08fa9487-89ce-411f-858f-fff35f0b57c0\", \n\t\t\"accountUsername\": \"jkwue660a7tdn0c1pc56zc5kabttkj13sbvycbjs4x7k4saouazfn7mbt55wedblppj2muszt6zpudr65vdotiv5af7reiiqi1t6qjk6mjvxwua5ubmhmphrhkgekrm\", \n\t\t\"displayName\": \"45limw1uqg0b4el6t80wt8moemgh3b4n7rz3o42zkpzcal0h4u4efm4zyaoyju2wi6o02g0gw1rehj26xg19n8m8lix1r4yprnrh6iv2i8rotq12c7rtxpgoeogvdep\", \n\t\t\"description\": \"Ut in dicta illo eligendi rerum distinctio ipsum et. Odit id modi. Sequi eveniet libero quis eveniet officiis. Ipsa repudiandae dignissimos ea totam ducimus quam et. Inventore dolores suscipit aut rerum possimus et rerum consequuntur.\", \n\t\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\t\"meta\": { \"foo\" : \"bar\" }\n\t}\n]",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comments/create",
+                    "host": ["{{URL}}"],
+                    "path": ["support", "comments", "create"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comments/paginate",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"offset\": 0,\n\t\t\"limit\": 10\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comments/paginate",
+                    "host": ["{{URL}}"],
+                    "path": ["support", "comments", "paginate"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comments/get",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{ \n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comments/get",
+                    "host": ["{{URL}}"],
+                    "path": ["support", "comments", "get"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comment/find",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\"\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comment/find",
+                    "host": ["{{URL}}"],
+                    "path": ["support", "comment", "find"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comment/find/{id}",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comment/find/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "support",
+                        "comment",
+                        "find",
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comment/update",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"id\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"rowId\": 49100543346256806000, \n\t\"externalId\": \"gvizp07uafbp05m4za0l0eu03i2vigpgcdhp6b6uc3hgbprgkm3qe555q7gwfn9\", \n\t\"issueId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountId\": \"5b19d6ac-4081-573b-96b3-56964d5326a8\", \n\t\"accountUsername\": \"4c4c01nkcthy7r9dwapfynf5q2ugz6sirols3cwvq26x06p2f1v8mo36z8ft0pxojqrey8m9zz5efekbuc90ogqm8hax9wnmhnwzvriza2yavr91qfjkof7jnpfcsui\", \n\t\"displayName\": \"vooe96kgyo93aa3egsymf08lstgv9of277h1d8ztdw8i88f2qf127kl5wzja691ji79a6e2nzx7istf50pu94x3ugk2w3mnyzlppkc3jhl6tdtlmeeykcfmfl1sqk3c\", \n\t\"description\": \"Quisquam et quisquam exercitationem sapiente iste voluptatem enim. Adipisci soluta voluptates nihil itaque maxime ipsum quaerat. Praesentium similique voluptatibus labore unde vero cupiditate labore.\", \n\t\"attachments\": { \"foo\" : \"bar\" }, \n\t\"screenRecording\": { \"foo\" : \"bar\" }, \n\t\"meta\": { \"foo\" : \"bar\" }\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comment/update",
+                    "host": ["{{URL}}"],
+                    "path": ["support", "comment", "update"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comment/delete/{id}",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comment/delete/5b19d6ac-4081-573b-96b3-56964d5326a8",
+                    "host": ["{{URL}}"],
+                    "path": [
+                        "support",
+                        "comment",
+                        "delete",
+                        "5b19d6ac-4081-573b-96b3-56964d5326a8"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "REST - support/comments/delete",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "name": "Content-Type",
+                        "type": "text",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"query\":\n\t{\n\t\t\"where\":\n\t\t{\n\t\t\t\"id\":\n\t\t\t{\n\t\t\t\t\"[substring]\": \"\"\n\t\t\t}\n\t\t}\n\t}\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{URL}}/support/comments/delete",
+                    "host": ["{{URL}}"],
+                    "path": ["support", "comments", "delete"]
+                }
+            },
+            "response": []
+        }
+    ],
+    "variable": [
+        {
+            "id": "d9bc3afc-fd40-5505-b57f-8f5d5118e01b",
+            "key": "URL",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
+}

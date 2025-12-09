@@ -1,14 +1,15 @@
 /* eslint-disable max-len */
 /* eslint-disable quotes */
 /* eslint-disable key-spacing */
-import { TenantPolicy } from '@api/iam/shared';
 import { AuthorizationPermissionsGuard } from '@api/iam/shared/guards/authorization-permissions.guard';
 import { MessageModule } from '@api/message/message.module';
 import { AuthenticationJwtGuard } from '@api/o-auth/shared/guards/authentication-jwt.guard';
-import { IamAccountResponse } from '@app/iam/account';
-import { MessageIMessageRepository, messageMockMessageData, MessageMockMessageSeeder } from '@app/message/message';
+import {
+    MessageIMessageRepository,
+    messageMockMessageData,
+    MessageMockMessageSeeder,
+} from '@app/message/message';
 import { GraphQLConfigModule } from '@aurora/modules';
-import { CurrentAccount } from '@aurorajs.dev/core';
 import { INestApplication } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -19,8 +20,7 @@ import * as request from 'supertest';
 // disable import foreign modules, can be micro-services
 const importForeignModules = [];
 
-describe('message', () =>
-{
+describe('message', () => {
     let app: INestApplication;
     let messageRepository: MessageIMessageRepository;
     let messageSeeder: MessageMockMessageSeeder;
@@ -31,37 +31,41 @@ describe('message', () =>
     // set timeout to 60s by default are 5s
     jest.setTimeout(60000);
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ...importForeignModules,
                 MessageModule,
                 GraphQLConfigModule,
                 SequelizeModule.forRootAsync({
-                    imports   : [ConfigModule],
-                    inject    : [ConfigService],
-                    useFactory: (configService: ConfigService) =>
-                    {
+                    imports: [ConfigModule],
+                    inject: [ConfigService],
+                    useFactory: (configService: ConfigService) => {
                         return {
-                            dialect       : configService.get('TEST_DATABASE_DIALECT'),
-                            storage       : configService.get('TEST_DATABASE_STORAGE'),
-                            host          : configService.get('TEST_DATABASE_HOST'),
-                            port          : +configService.get('TEST_DATABASE_PORT'),
-                            username      : configService.get('TEST_DATABASE_USER'),
-                            password      : configService.get('TEST_DATABASE_PASSWORD'),
-                            database      : configService.get('TEST_DATABASE_SCHEMA'),
-                            synchronize   : configService.get('TEST_DATABASE_SYNCHRONIZE'),
-                            logging       : configService.get('TEST_DATABASE_LOGGIN') === 'true' ? console.log : false,
+                            dialect: configService.get('TEST_DATABASE_DIALECT'),
+                            storage: configService.get('TEST_DATABASE_STORAGE'),
+                            host: configService.get('TEST_DATABASE_HOST'),
+                            port: +configService.get('TEST_DATABASE_PORT'),
+                            username: configService.get('TEST_DATABASE_USER'),
+                            password: configService.get(
+                                'TEST_DATABASE_PASSWORD',
+                            ),
+                            database: configService.get('TEST_DATABASE_SCHEMA'),
+                            synchronize: configService.get(
+                                'TEST_DATABASE_SYNCHRONIZE',
+                            ),
+                            logging:
+                                configService.get('TEST_DATABASE_LOGGIN') ===
+                                'true'
+                                    ? console.log
+                                    : false,
                             autoLoadModels: true,
-                            models        : [],
+                            models: [],
                         };
                     },
                 }),
             ],
-            providers: [
-                MessageMockMessageSeeder,
-            ],
+            providers: [MessageMockMessageSeeder],
         })
             .overrideGuard(AuthenticationJwtGuard)
             .useValue({ canActivate: () => true })
@@ -71,8 +75,12 @@ describe('message', () =>
 
         mockData = messageMockMessageData;
         app = module.createNestApplication();
-        messageRepository = module.get<MessageIMessageRepository>(MessageIMessageRepository);
-        messageSeeder = module.get<MessageMockMessageSeeder>(MessageMockMessageSeeder);
+        messageRepository = module.get<MessageIMessageRepository>(
+            MessageIMessageRepository,
+        );
+        messageSeeder = module.get<MessageMockMessageSeeder>(
+            MessageMockMessageSeeder,
+        );
 
         // seed mock data in memory database
         await messageRepository.insert(messageSeeder.collectionSource);
@@ -80,8 +88,7 @@ describe('message', () =>
         await app.init();
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageId property can not to be null', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageId property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -90,14 +97,30 @@ describe('message', () =>
                 id: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageId must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageId must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageStatus property can not to be null', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageRowId property can not to be null', () => {
+        return request(app.getHttpServer())
+            .post('/message/message/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: null,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageRowId must be defined, can not be null',
+                );
+            });
+    });
+
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageStatus property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -106,14 +129,14 @@ describe('message', () =>
                 status: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageStatus must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageStatus must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageIsImportant property can not to be null', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageIsImportant property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -122,14 +145,14 @@ describe('message', () =>
                 isImportant: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageIsImportant must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageIsImportant must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageSubject property can not to be null', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageSubject property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -138,14 +161,14 @@ describe('message', () =>
                 subject: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageSubject must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageSubject must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageBody property can not to be null', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageBody property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -154,14 +177,14 @@ describe('message', () =>
                 body: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageBody must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageBody must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageTotalRecipients property can not to be null', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageTotalRecipients property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -170,14 +193,14 @@ describe('message', () =>
                 totalRecipients: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageTotalRecipients must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageTotalRecipients must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageReads property can not to be null', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageReads property can not to be null', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -186,14 +209,14 @@ describe('message', () =>
                 reads: null,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageReads must be defined, can not be null');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageReads must be defined, can not be null',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageId property can not to be undefined', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageId property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -202,14 +225,30 @@ describe('message', () =>
                 id: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageId must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageId must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageStatus property can not to be undefined', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageRowId property can not to be undefined', () => {
+        return request(app.getHttpServer())
+            .post('/message/message/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                rowId: undefined,
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageRowId must be defined, can not be undefined',
+                );
+            });
+    });
+
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageStatus property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -218,14 +257,14 @@ describe('message', () =>
                 status: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageStatus must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageStatus must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageIsImportant property can not to be undefined', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageIsImportant property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -234,14 +273,14 @@ describe('message', () =>
                 isImportant: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageIsImportant must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageIsImportant must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageSubject property can not to be undefined', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageSubject property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -250,14 +289,14 @@ describe('message', () =>
                 subject: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageSubject must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageSubject must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageBody property can not to be undefined', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageBody property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -266,14 +305,14 @@ describe('message', () =>
                 body: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageBody must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageBody must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageTotalRecipients property can not to be undefined', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageTotalRecipients property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -282,14 +321,14 @@ describe('message', () =>
                 totalRecipients: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageTotalRecipients must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageTotalRecipients must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageReads property can not to be undefined', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageReads property can not to be undefined', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -298,14 +337,14 @@ describe('message', () =>
                 reads: undefined,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageReads must be defined, can not be undefined');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageReads must be defined, can not be undefined',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageId is not allowed, must be a length of 36', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -314,30 +353,31 @@ describe('message', () =>
                 id: '*************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageId is not allowed, must be a length of 36');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageId is not allowed, must be a length of 36',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageSubject is too large, has a maximum length of 255', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageSubject is too large, has a maximum length of 255', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                subject: '****************************************************************************************************************************************************************************************************************************************************************',
+                subject:
+                    '****************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageSubject is too large, has a maximum length of 255');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageSubject is too large, has a maximum length of 255',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageLink is too large, has a maximum length of 2046', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageLink is too large, has a maximum length of 2046', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -346,14 +386,14 @@ describe('message', () =>
                 link: '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageLink is too large, has a maximum length of 2046');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageLink is too large, has a maximum length of 2046',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageIcon is too large, has a maximum length of 64', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageIcon is too large, has a maximum length of 64', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -362,44 +402,44 @@ describe('message', () =>
                 icon: '*****************************************************************',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageIcon is too large, has a maximum length of 64');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageIcon is too large, has a maximum length of 64',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageTotalRecipients has to be a integer value', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageTotalRecipients has to be a integer value', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                totalRecipients: 100.10,
+                totalRecipients: 100.1,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageTotalRecipients has to be a integer value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageTotalRecipients has to be a integer value',
+                );
             });
     });
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageReads has to be a integer value', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageReads has to be a integer value', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
             .send({
                 ...mockData[0],
-                reads: 100.10,
+                reads: 100.1,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageReads has to be a integer value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageReads has to be a integer value',
+                );
             });
     });
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageTotalRecipients must have a positive sign', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageTotalRecipients must have a positive sign', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -408,13 +448,13 @@ describe('message', () =>
                 totalRecipients: -1,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('The numerical Value for MessageMessageTotalRecipients must have a positive sign, this field does not accept negative values');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'The numerical Value for MessageMessageTotalRecipients must have a positive sign, this field does not accept negative values',
+                );
             });
     });
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageReads must have a positive sign', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageReads must have a positive sign', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -423,13 +463,13 @@ describe('message', () =>
                 reads: -1,
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('The numerical Value for MessageMessageReads must have a positive sign, this field does not accept negative values');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'The numerical Value for MessageMessageReads must have a positive sign, this field does not accept negative values',
+                );
             });
     });
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageIsImportant has to be a boolean value', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageIsImportant has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -438,13 +478,13 @@ describe('message', () =>
                 isImportant: 'true',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageIsImportant has to be a boolean value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageIsImportant has to be a boolean value',
+                );
             });
     });
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageIsInternalLink has to be a boolean value', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageIsInternalLink has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -453,13 +493,13 @@ describe('message', () =>
                 isInternalLink: 'true',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageIsInternalLink has to be a boolean value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageIsInternalLink has to be a boolean value',
+                );
             });
     });
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageStatus has to be a enum option of DRAFT, PENDING, SENT', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageStatus has to be a enum option of DRAFT, PENDING, SENT', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -468,13 +508,13 @@ describe('message', () =>
                 status: '****',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageStatus has to be any of this options: DRAFT, PENDING, SENT');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageStatus has to be any of this options: DRAFT, PENDING, SENT',
+                );
             });
     });
-    test('/REST:POST message/message/create - Got 400 Conflict, MessageSendAt has to be a timestamp value', () =>
-    {
+    test('/REST:POST message/message/create - Got 400 Conflict, MessageSendAt has to be a timestamp value', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -483,14 +523,14 @@ describe('message', () =>
                 sendAt: '****',
             })
             .expect(400)
-            .then(res =>
-            {
-                expect(res.body.message).toContain('Value for MessageMessageSendAt has to be a timestamp value');
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for MessageMessageSendAt has to be a timestamp value',
+                );
             });
     });
 
-    test('/REST:POST message/message/create - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/REST:POST message/message/create - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -498,53 +538,63 @@ describe('message', () =>
             .expect(409);
     });
 
-    test('/REST:POST message/messages/paginate', () =>
-    {
+    test('/REST:POST message/messages/paginate', () => {
         return request(app.getHttpServer())
             .post('/message/messages/paginate')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
+                query: {
                     offset: 0,
                     limit: 5,
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual({
                     total: messageSeeder.collectionResponse.length,
                     count: messageSeeder.collectionResponse.length,
-                    rows : messageSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: messageSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/REST:POST message/messages/get', () =>
-    {
+    test('/REST:POST message/messages/get', () => {
         return request(app.getHttpServer())
             .post('/message/messages/get')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toEqual(
-                    messageSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))),
+                    messageSeeder.collectionResponse.map((item) =>
+                        expect.objectContaining(
+                            _.omit(item, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    ),
                 );
             });
     });
 
-    test('/REST:POST message/message/find - Got 404 Not Found', () =>
-    {
+    test('/REST:POST message/message/find - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/message/message/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '4122c24f-9cc1-5ef0-b37b-deef30a6160c',
                     },
                 },
@@ -552,8 +602,7 @@ describe('message', () =>
             .expect(404);
     });
 
-    test('/REST:POST message/message/create', () =>
-    {
+    test('/REST:POST message/message/create', () => {
         return request(app.getHttpServer())
             .post('/message/message/create')
             .set('Accept', 'application/json')
@@ -564,49 +613,47 @@ describe('message', () =>
             .expect(201);
     });
 
-    test('/REST:POST message/message/find', () =>
-    {
+    test('/REST:POST message/message/find', () => {
         return request(app.getHttpServer())
             .post('/message/message/find')
             .set('Accept', 'application/json')
             .send({
-                query:
-                {
-                    where:
-                    {
+                query: {
+                    where: {
                         id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:POST message/message/find/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:POST message/message/find/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/message/message/find/272d64b5-63a4-50bd-a8d4-6aeba1d57705')
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:POST message/message/find/{id}', () =>
-    {
+    test('/REST:POST message/message/find/{id}', () => {
         return request(app.getHttpServer())
             .post('/message/message/find/5b19d6ac-4081-573b-96b3-56964d5326a8')
             .set('Accept', 'application/json')
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:PUT message/message/update - Got 404 Not Found', () =>
-    {
+    test('/REST:PUT message/message/update - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .put('/message/message/update')
             .set('Accept', 'application/json')
@@ -617,8 +664,7 @@ describe('message', () =>
             .expect(404);
     });
 
-    test('/REST:PUT message/message/update', () =>
-    {
+    test('/REST:PUT message/message/update', () => {
         return request(app.getHttpServer())
             .put('/message/message/update')
             .set('Accept', 'application/json')
@@ -627,30 +673,33 @@ describe('message', () =>
                 id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/REST:DELETE message/message/delete/{id} - Got 404 Not Found', () =>
-    {
+    test('/REST:DELETE message/message/delete/{id} - Got 404 Not Found', () => {
         return request(app.getHttpServer())
-            .delete('/message/message/delete/ac4e01e4-711b-58cc-95fd-6bd1df7c7e98')
+            .delete(
+                '/message/message/delete/ac4e01e4-711b-58cc-95fd-6bd1df7c7e98',
+            )
             .set('Accept', 'application/json')
             .expect(404);
     });
 
-    test('/REST:DELETE message/message/delete/{id}', () =>
-    {
+    test('/REST:DELETE message/message/delete/{id}', () => {
         return request(app.getHttpServer())
-            .delete('/message/message/delete/5b19d6ac-4081-573b-96b3-56964d5326a8')
+            .delete(
+                '/message/message/delete/5b19d6ac-4081-573b-96b3-56964d5326a8',
+            )
             .set('Accept', 'application/json')
             .expect(200);
     });
 
-    test('/GraphQL messageCreateMessage - Got 409 Conflict, item already exist in database', () =>
-    {
+    test('/GraphQL messageCreateMessage - Got 409 Conflict, item already exist in database', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -661,6 +710,7 @@ describe('message', () =>
                         messageCreateMessage (payload:$payload)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -682,22 +732,27 @@ describe('message', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    payload: _.omit(mockData[0], ['createdAt','updatedAt','deletedAt']),
+                variables: {
+                    payload: _.omit(mockData[0], [
+                        'createdAt',
+                        'updatedAt',
+                        'deletedAt',
+                    ]),
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(409);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('already exist in database');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(409);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('already exist in database');
             });
     });
 
-    test('/GraphQL messagePaginateMessages', () =>
-    {
+    test('/GraphQL messagePaginateMessages', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -713,28 +768,34 @@ describe('message', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
+                variables: {
+                    query: {
                         offset: 0,
                         limit: 5,
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body.data.messagePaginateMessages).toEqual({
                     total: messageSeeder.collectionResponse.length,
                     count: messageSeeder.collectionResponse.length,
-                    rows : messageSeeder.collectionResponse.map(item => expect.objectContaining(_.omit(item, ['createdAt', 'updatedAt', 'deletedAt']))).slice(0, 5),
+                    rows: messageSeeder.collectionResponse
+                        .map((item) =>
+                            expect.objectContaining(
+                                _.omit(item, [
+                                    'createdAt',
+                                    'updatedAt',
+                                    'deletedAt',
+                                ]),
+                            ),
+                        )
+                        .slice(0, 5),
                 });
             });
     });
 
-    test('/GraphQL messageGetMessages', () =>
-    {
+    test('/GraphQL messageGetMessages', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -745,6 +806,7 @@ describe('message', () =>
                         messageGetMessages (query:$query)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -771,17 +833,25 @@ describe('message', () =>
                 variables: {},
             })
             .expect(200)
-            .then(res =>
-            {
-                for (const [index, value] of res.body.data.messageGetMessages.entries())
-                {
-                    expect(messageSeeder.collectionResponse[index]).toEqual(expect.objectContaining(_.omit(value, ['createdAt', 'updatedAt', 'deletedAt'])));
+            .then((res) => {
+                for (const [
+                    index,
+                    value,
+                ] of res.body.data.messageGetMessages.entries()) {
+                    expect(messageSeeder.collectionResponse[index]).toEqual(
+                        expect.objectContaining(
+                            _.omit(value, [
+                                'createdAt',
+                                'updatedAt',
+                                'deletedAt',
+                            ]),
+                        ),
+                    );
                 }
             });
     });
 
-    test('/GraphQL messageCreateMessage', () =>
-    {
+    test('/GraphQL messageCreateMessage', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -792,6 +862,7 @@ describe('message', () =>
                         messageCreateMessage (payload:$payload)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -821,14 +892,15 @@ describe('message', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageCreateMessage).toHaveProperty('id', '5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageCreateMessage).toHaveProperty(
+                    'id',
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageFindMessage - Got 404 Not Found', () =>
-    {
+    test('/GraphQL messageFindMessage - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -839,6 +911,7 @@ describe('message', () =>
                         messageFindMessage (query:$query)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -862,28 +935,27 @@ describe('message', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '37534922-00fc-5a08-961d-0663c93812f5',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL messageFindMessage', () =>
-    {
+    test('/GraphQL messageFindMessage', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -894,6 +966,7 @@ describe('message', () =>
                         messageFindMessage (query:$query)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -917,26 +990,23 @@ describe('message', () =>
                         }
                     }
                 `,
-                variables:
-                {
-                    query:
-                    {
-                        where:
-                        {
+                variables: {
+                    query: {
+                        where: {
                             id: '5b19d6ac-4081-573b-96b3-56964d5326a8',
                         },
                     },
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageFindMessage.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageFindMessage.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageFindMessageById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL messageFindMessageById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -947,6 +1017,7 @@ describe('message', () =>
                         messageFindMessageById (id:$id)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -975,16 +1046,18 @@ describe('message', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL messageFindMessageById', () =>
-    {
+    test('/GraphQL messageFindMessageById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -995,6 +1068,7 @@ describe('message', () =>
                         messageFindMessageById (id:$id)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -1023,14 +1097,14 @@ describe('message', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageFindMessageById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageFindMessageById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageUpdateMessageById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL messageUpdateMessageById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1041,6 +1115,7 @@ describe('message', () =>
                         messageUpdateMessageById (payload:$payload)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -1072,16 +1147,18 @@ describe('message', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL messageUpdateMessageById', () =>
-    {
+    test('/GraphQL messageUpdateMessageById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1092,6 +1169,7 @@ describe('message', () =>
                         messageUpdateMessageById (payload:$payload)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -1123,14 +1201,14 @@ describe('message', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageUpdateMessageById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageUpdateMessageById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageUpdateMessages', () =>
-    {
+    test('/GraphQL messageUpdateMessages', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1141,6 +1219,7 @@ describe('message', () =>
                         messageUpdateMessages (payload:$payload query:$query)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -1177,14 +1256,14 @@ describe('message', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageUpdateMessages[0].id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageUpdateMessages[0].id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    test('/GraphQL messageDeleteMessageById - Got 404 Not Found', () =>
-    {
+    test('/GraphQL messageDeleteMessageById - Got 404 Not Found', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1195,6 +1274,7 @@ describe('message', () =>
                         messageDeleteMessageById (id:$id)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -1223,16 +1303,18 @@ describe('message', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
+            .then((res) => {
                 expect(res.body).toHaveProperty('errors');
-                expect(res.body.errors[0].extensions.originalError.statusCode).toBe(404);
-                expect(res.body.errors[0].extensions.originalError.message).toContain('not found');
+                expect(
+                    res.body.errors[0].extensions.originalError.statusCode,
+                ).toBe(404);
+                expect(
+                    res.body.errors[0].extensions.originalError.message,
+                ).toContain('not found');
             });
     });
 
-    test('/GraphQL messageDeleteMessageById', () =>
-    {
+    test('/GraphQL messageDeleteMessageById', () => {
         return request(app.getHttpServer())
             .post('/graphql')
             .set('Accept', 'application/json')
@@ -1243,6 +1325,7 @@ describe('message', () =>
                         messageDeleteMessageById (id:$id)
                         {
                             id
+                            rowId
                             tenantIds
                             status
                             accountRecipientIds
@@ -1271,14 +1354,14 @@ describe('message', () =>
                 },
             })
             .expect(200)
-            .then(res =>
-            {
-                expect(res.body.data.messageDeleteMessageById.id).toStrictEqual('5b19d6ac-4081-573b-96b3-56964d5326a8');
+            .then((res) => {
+                expect(res.body.data.messageDeleteMessageById.id).toStrictEqual(
+                    '5b19d6ac-4081-573b-96b3-56964d5326a8',
+                );
             });
     });
 
-    afterAll(async () =>
-    {
+    afterAll(async () => {
         await messageRepository.delete({
             queryStatement: {
                 where: {},

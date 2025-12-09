@@ -1,5 +1,4 @@
-export class OAuthCreatedCredentialEvent
-{
+export class OAuthCreatedCredentialEvent {
     constructor(
         public readonly grantType: string,
         public readonly accountId: string,

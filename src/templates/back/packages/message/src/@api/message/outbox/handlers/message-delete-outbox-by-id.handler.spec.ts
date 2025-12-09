@@ -4,56 +4,57 @@ import { messageMockOutboxData } from '@app/message/outbox';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteOutboxByIdController', () =>
-{
+describe('MessageDeleteOutboxByIdController', () => {
     let handler: MessageDeleteOutboxByIdHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageDeleteOutboxByIdHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageDeleteOutboxByIdHandler>(MessageDeleteOutboxByIdHandler);
+        handler = module.get<MessageDeleteOutboxByIdHandler>(
+            MessageDeleteOutboxByIdHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteOutboxByIdHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteOutboxByIdHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return an outbox deleted', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockOutboxData[0])));
+        test('should return an outbox deleted', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockOutboxData[0])),
+            );
             expect(
                 await handler.main(
                     messageMockOutboxData[0].id,
                     {},
                     'Europe/Madrid',
                 ),
-            )
-                .toBe(messageMockOutboxData[0]);
+            ).toBe(messageMockOutboxData[0]);
         });
     });
 });

@@ -1,8 +1,7 @@
-
-export class MessageMessageResponse
-{
+export class MessageMessageResponse {
     constructor(
         public readonly id: string,
+        public readonly rowId: number,
         public readonly tenantIds: string[],
         public readonly status: string,
         public readonly accountRecipientIds: string[],

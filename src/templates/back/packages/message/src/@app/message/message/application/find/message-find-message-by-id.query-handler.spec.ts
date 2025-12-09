@@ -1,56 +1,72 @@
-import { MessageFindMessageByIdQuery, MessageIMessageRepository, MessageMessageMapper, messageMockMessageData, MessageMockMessageRepository } from '@app/message/message';
+import {
+    MessageFindMessageByIdQuery,
+    MessageIMessageRepository,
+    MessageMessageMapper,
+    messageMockMessageData,
+    MessageMockMessageRepository,
+} from '@app/message/message';
 import { MessageFindMessageByIdQueryHandler } from '@app/message/message/application/find/message-find-message-by-id.query-handler';
 import { MessageFindMessageByIdService } from '@app/message/message/application/find/message-find-message-by-id.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindMessageByIdQueryHandler', () =>
-{
+describe('MessageFindMessageByIdQueryHandler', () => {
     let queryHandler: MessageFindMessageByIdQueryHandler;
     let service: MessageFindMessageByIdService;
     let repository: MessageMockMessageRepository;
     let mapper: MessageMessageMapper;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 MessageFindMessageByIdQueryHandler,
                 {
-                    provide : MessageIMessageRepository,
+                    provide: MessageIMessageRepository,
                     useClass: MessageMockMessageRepository,
                 },
                 {
-                    provide : MessageFindMessageByIdService,
+                    provide: MessageFindMessageByIdService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        queryHandler = module.get<MessageFindMessageByIdQueryHandler>(MessageFindMessageByIdQueryHandler);
-        service = module.get<MessageFindMessageByIdService>(MessageFindMessageByIdService);
-        repository = <MessageMockMessageRepository>module.get<MessageIMessageRepository>(MessageIMessageRepository);
+        queryHandler = module.get<MessageFindMessageByIdQueryHandler>(
+            MessageFindMessageByIdQueryHandler,
+        );
+        service = module.get<MessageFindMessageByIdService>(
+            MessageFindMessageByIdService,
+        );
+        repository = <MessageMockMessageRepository>(
+            module.get<MessageIMessageRepository>(MessageIMessageRepository)
+        );
         mapper = new MessageMessageMapper();
     });
 
-    describe('main', () =>
-    {
-        test('FindMessageByIdQueryHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('FindMessageByIdQueryHandler should be defined', () => {
             expect(queryHandler).toBeDefined();
         });
 
-        test('should return an message founded', async () =>
-        {
-            jest.spyOn(service, 'main').mockImplementation(() => new Promise(resolve => resolve(repository.collectionSource[0])));
-            expect(await queryHandler.execute(
-                new MessageFindMessageByIdQuery(
-                    messageMockMessageData[0].id,
-
+        test('should return an message founded', async () => {
+            jest.spyOn(service, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(repository.collectionSource[0]),
+                    ),
+            );
+            expect(
+                await queryHandler.execute(
+                    new MessageFindMessageByIdQuery(
+                        messageMockMessageData[0].id,
+                    ),
                 ),
-            )).toStrictEqual(mapper.mapAggregateToResponse(repository.collectionSource[0]));
+            ).toStrictEqual(
+                mapper.mapAggregateToResponse(repository.collectionSource[0]),
+            );
         });
     });
 });

@@ -59,6 +59,7 @@ publish-all:
 		gulp publishQueueManager && \
 		gulp publishStorageAccount && \
 		gulp publishStorageAccountAzure && \
+		gulp publishSupport && \
 		gulp publishTools && \
 		gulp publishWhatsapp
 

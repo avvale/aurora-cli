@@ -4,25 +4,34 @@ import { MessageUpdateInboxSettingsService } from '@app/message/inbox-setting/ap
 import {
     MessageInboxSettingAccountId,
     MessageInboxSettingId,
-    MessageInboxSettingSort,
+    MessageInboxSettingLastReadMessageRowId,
 } from '@app/message/inbox-setting/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(MessageUpdateInboxSettingsCommand)
-export class MessageUpdateInboxSettingsCommandHandler implements ICommandHandler<MessageUpdateInboxSettingsCommand>
+export class MessageUpdateInboxSettingsCommandHandler
+    implements ICommandHandler<MessageUpdateInboxSettingsCommand>
 {
     constructor(
         private readonly updateInboxSettingsService: MessageUpdateInboxSettingsService,
     ) {}
 
-    async execute(command: MessageUpdateInboxSettingsCommand): Promise<void>
-    {
+    async execute(command: MessageUpdateInboxSettingsCommand): Promise<void> {
         // call to use case and implements ValueObjects
         await this.updateInboxSettingsService.main(
             {
-                id: new MessageInboxSettingId(command.payload.id, { undefinable: true }),
-                accountId: new MessageInboxSettingAccountId(command.payload.accountId, { undefinable: true }),
-                sort: new MessageInboxSettingSort(command.payload.sort, { undefinable: true }),
+                id: new MessageInboxSettingId(command.payload.id, {
+                    undefinable: true,
+                }),
+                accountId: new MessageInboxSettingAccountId(
+                    command.payload.accountId,
+                    { undefinable: true },
+                ),
+                lastReadMessageRowId:
+                    new MessageInboxSettingLastReadMessageRowId(
+                        command.payload.lastReadMessageRowId,
+                        { undefinable: true },
+                    ),
             },
             command.queryStatement,
             command.constraint,

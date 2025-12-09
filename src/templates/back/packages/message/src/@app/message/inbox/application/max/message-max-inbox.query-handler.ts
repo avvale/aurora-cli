@@ -3,14 +3,12 @@ import { MessageMaxInboxService } from '@app/message/inbox/application/max/messa
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(MessageMaxInboxQuery)
-export class MessageMaxInboxQueryHandler implements IQueryHandler<MessageMaxInboxQuery>
+export class MessageMaxInboxQueryHandler
+    implements IQueryHandler<MessageMaxInboxQuery>
 {
-    constructor(
-        private readonly maxInboxService: MessageMaxInboxService,
-    ) {}
+    constructor(private readonly maxInboxService: MessageMaxInboxService) {}
 
-    async execute(query: MessageMaxInboxQuery): Promise<number>
-    {
+    async execute(query: MessageMaxInboxQuery): Promise<number> {
         return await this.maxInboxService.main(
             query.column,
             query.queryStatement,

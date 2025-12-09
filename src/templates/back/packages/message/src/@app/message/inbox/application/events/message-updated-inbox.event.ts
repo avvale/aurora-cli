@@ -1,14 +1,13 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
-export class MessageUpdatedInboxEvent
-{
+export class MessageUpdatedInboxEvent {
     constructor(
         public readonly event: {
             payload: {
                 id: string;
                 tenantIds: string[];
                 messageId: string;
-                sort: number;
+                messageRowId: number;
                 accountId: string;
                 accountCode: string;
                 isImportant: boolean;

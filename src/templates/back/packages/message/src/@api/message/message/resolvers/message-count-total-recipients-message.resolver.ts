@@ -5,8 +5,7 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.message.update')
-export class MessageCountTotalRecipientsMessageResolver
-{
+export class MessageCountTotalRecipientsMessageResolver {
     constructor(
         private readonly handler: MessageCountTotalRecipientsMessageHandler,
     ) {}
@@ -18,8 +17,7 @@ export class MessageCountTotalRecipientsMessageResolver
         @Args('tagRecipients') tagRecipients: string[],
         @Args('accountRecipientIds') accountRecipientIds: string[],
         @Args('constraint') constraint?: QueryStatement,
-    ): Promise<number>
-    {
+    ): Promise<number> {
         return await this.handler.main(
             tenantRecipientIds,
             scopeRecipients,

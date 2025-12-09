@@ -1,11 +1,10 @@
-
-type MessageInbox
-{
+type MessageInbox {
     id: ID!
+    rowId: GraphQLInt!
     tenantIds: [ID]
     messageId: ID
     message: MessageMessage
-    sort: GraphQLInt!
+    messageRowId: GraphQLInt!
     accountId: ID!
     accountCode: GraphQLString
     isImportant: GraphQLBoolean!
@@ -25,12 +24,11 @@ type MessageInbox
     deletedAt: GraphQLTimestamp
 }
 
-input MessageCreateInboxInput
-{
+input MessageCreateInboxInput {
     id: ID!
     tenantIds: [ID]
     messageId: ID
-    sort: GraphQLInt!
+    messageRowId: GraphQLInt!
     accountId: ID!
     accountCode: GraphQLString
     isImportant: GraphQLBoolean!
@@ -47,12 +45,11 @@ input MessageCreateInboxInput
     meta: JSON
 }
 
-input MessageUpdateInboxByIdInput
-{
+input MessageUpdateInboxByIdInput {
     id: ID!
     tenantIds: [ID]
     messageId: ID
-    sort: GraphQLInt
+    messageRowId: GraphQLInt
     accountId: ID
     accountCode: GraphQLString
     isImportant: GraphQLBoolean
@@ -69,12 +66,11 @@ input MessageUpdateInboxByIdInput
     meta: JSON
 }
 
-input MessageUpdateInboxesInput
-{
+input MessageUpdateInboxesInput {
     id: ID
     tenantIds: [ID]
     messageId: ID
-    sort: GraphQLInt
+    messageRowId: GraphQLInt
     accountId: ID
     accountCode: GraphQLString
     isImportant: GraphQLBoolean
@@ -91,17 +87,13 @@ input MessageUpdateInboxesInput
     meta: JSON
 }
 
-type Query
-{
+type Query {
     messageFindInbox(
         query: QueryStatement
         constraint: QueryStatement
     ): MessageInbox
 
-    messageFindInboxById(
-        id: ID
-        constraint: QueryStatement
-    ): MessageInbox
+    messageFindInboxById(id: ID, constraint: QueryStatement): MessageInbox
 
     messageGetInboxes(
         query: QueryStatement
@@ -112,7 +104,6 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 
     # additionalApis
     messagePaginateCustomerMessagesInbox(
@@ -129,18 +120,12 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): GraphQLInt!
-
 }
 
-type Mutation
-{
-    messageCreateInbox(
-        payload: MessageCreateInboxInput!
-    ): MessageInbox
+type Mutation {
+    messageCreateInbox(payload: MessageCreateInboxInput!): MessageInbox
 
-    messageCreateInboxes(
-        payload: [MessageCreateInboxInput]!
-    ): Boolean!
+    messageCreateInboxes(payload: [MessageCreateInboxInput]!): Boolean!
 
     messageUpdateInboxById(
         payload: MessageUpdateInboxByIdInput!
@@ -153,20 +138,12 @@ type Mutation
         constraint: QueryStatement
     ): [MessageInbox]!
 
-    messageUpsertInbox(
-        payload: MessageUpdateInboxByIdInput!
-    ): MessageInbox
-
-    messageDeleteInboxById(
-        id: ID!
-        constraint: QueryStatement
-    ): MessageInbox
+    messageDeleteInboxById(id: ID!, constraint: QueryStatement): MessageInbox
 
     messageDeleteInboxes(
         query: QueryStatement
         constraint: QueryStatement
     ): [MessageInbox]!
-
 
     # additionalApis
     messageCheckMessagesInbox: Boolean!
@@ -185,5 +162,4 @@ type Mutation
         inbox: MessageUpdateInboxByIdInput!
         constraint: QueryStatement
     ): Boolean!
-
 }

@@ -1,12 +1,7 @@
-import { MessageCreatedOutboxEvent } from '@app/message/outbox';
 import { Injectable } from '@nestjs/common';
-import { ICommand, ofType, Saga } from '@nestjs/cqrs';
-import { Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
 
 @Injectable()
-export class MessageOutboxSagas
-{
+export class MessageOutboxSagas {
     /* @Saga()
     dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {

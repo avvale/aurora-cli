@@ -1,40 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Test, TestingModule } from '@nestjs/testing';
 import { MessageDeleteCustomerMessageInboxHandler } from '../handlers/message-delete-customer-message-inbox.handler';
 import { MessageDeleteCustomerMessageInboxController } from './message-delete-customer-message-inbox.controller';
-import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteCustomerMessageInboxController', () =>
-{
+describe('MessageDeleteCustomerMessageInboxController', () => {
     let controller: MessageDeleteCustomerMessageInboxController;
     let handler: MessageDeleteCustomerMessageInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageDeleteCustomerMessageInboxController,
-            ],
+            imports: [],
+            controllers: [MessageDeleteCustomerMessageInboxController],
             providers: [
                 {
-                    provide : MessageDeleteCustomerMessageInboxHandler,
+                    provide: MessageDeleteCustomerMessageInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageDeleteCustomerMessageInboxController>(MessageDeleteCustomerMessageInboxController);
-        handler = module.get<MessageDeleteCustomerMessageInboxHandler>(MessageDeleteCustomerMessageInboxHandler);
+        controller = module.get<MessageDeleteCustomerMessageInboxController>(
+            MessageDeleteCustomerMessageInboxController,
+        );
+        handler = module.get<MessageDeleteCustomerMessageInboxHandler>(
+            MessageDeleteCustomerMessageInboxHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteCustomerMessageInboxController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteCustomerMessageInboxController should be defined', () => {
             expect(controller).toBeDefined();
         });
     });

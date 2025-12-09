@@ -1,46 +1,51 @@
-import { MessageUpdateOutboxesController, MessageUpdateOutboxesHandler } from '@api/message/outbox';
+import {
+    MessageUpdateOutboxesController,
+    MessageUpdateOutboxesHandler,
+} from '@api/message/outbox';
 import { messageMockOutboxData } from '@app/message/outbox';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageUpdateOutboxesController', () =>
-{
+describe('MessageUpdateOutboxesController', () => {
     let controller: MessageUpdateOutboxesController;
     let handler: MessageUpdateOutboxesHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageUpdateOutboxesController,
-            ],
+            imports: [],
+            controllers: [MessageUpdateOutboxesController],
             providers: [
                 {
-                    provide : MessageUpdateOutboxesHandler,
+                    provide: MessageUpdateOutboxesHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageUpdateOutboxesController>(MessageUpdateOutboxesController);
-        handler = module.get<MessageUpdateOutboxesHandler>(MessageUpdateOutboxesHandler);
+        controller = module.get<MessageUpdateOutboxesController>(
+            MessageUpdateOutboxesController,
+        );
+        handler = module.get<MessageUpdateOutboxesHandler>(
+            MessageUpdateOutboxesHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageUpdateOutboxesController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageUpdateOutboxesController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a outboxes updated', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockOutboxData[0])));
-            expect(await controller.main(messageMockOutboxData[0])).toBe(messageMockOutboxData[0]);
+        test('should return a outboxes updated', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockOutboxData[0])),
+            );
+            expect(await controller.main(messageMockOutboxData[0])).toBe(
+                messageMockOutboxData[0],
+            );
         });
     });
 });

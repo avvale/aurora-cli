@@ -1,0 +1,87 @@
+type ToolsWebhook {
+    id: ID!
+    rowId: GraphQLInt!
+    name: GraphQLString!
+    service: GraphQLString!
+    endpoint: GraphQLString!
+    externalId: GraphQLString
+    events: [GraphQLString]
+    secret: GraphQLString
+    meta: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input ToolsCreateWebhookInput {
+    id: ID!
+    name: GraphQLString!
+    service: GraphQLString!
+    endpoint: GraphQLString!
+    externalId: GraphQLString
+    events: [GraphQLString]
+    secret: GraphQLString
+    meta: JSON
+}
+
+input ToolsUpdateWebhookByIdInput {
+    id: ID!
+    name: GraphQLString
+    service: GraphQLString
+    endpoint: GraphQLString
+    externalId: GraphQLString
+    events: [GraphQLString]
+    secret: GraphQLString
+    meta: JSON
+}
+
+input ToolsUpdateWebhooksInput {
+    id: ID
+    name: GraphQLString
+    service: GraphQLString
+    endpoint: GraphQLString
+    externalId: GraphQLString
+    events: [GraphQLString]
+    secret: GraphQLString
+    meta: JSON
+}
+
+type Query {
+    toolsFindWebhook(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): ToolsWebhook
+
+    toolsFindWebhookById(id: ID, constraint: QueryStatement): ToolsWebhook
+
+    toolsGetWebhooks(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsWebhook]!
+
+    toolsPaginateWebhooks(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+}
+
+type Mutation {
+    toolsCreateWebhook(payload: ToolsCreateWebhookInput!): ToolsWebhook
+
+    toolsCreateWebhooks(payload: [ToolsCreateWebhookInput]!): Boolean!
+
+    toolsUpdateWebhookById(
+        payload: ToolsUpdateWebhookByIdInput!
+        constraint: QueryStatement
+    ): ToolsWebhook
+
+    toolsDeleteWebhookById(id: ID!, constraint: QueryStatement): ToolsWebhook
+
+    toolsDeleteWebhooks(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsWebhook]!
+
+    # additionalApis
+    toolsDigestWebhook(payload: JSON!): Boolean!
+}

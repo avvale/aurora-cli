@@ -1,13 +1,12 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class MessageUpdateInboxesCommand
-{
+export class MessageUpdateInboxesCommand {
     constructor(
         public readonly payload: {
             id?: string;
             tenantIds?: string[];
             messageId?: string;
-            sort?: number;
+            messageRowId?: number;
             accountId?: string;
             accountCode?: string;
             isImportant?: boolean;

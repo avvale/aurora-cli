@@ -1,10 +1,8 @@
-
-type MessageOutbox
-{
+type MessageOutbox {
     id: ID!
+    rowId: GraphQLInt!
     messageId: ID!
     message: MessageMessage
-    sort: GraphQLInt!
     accountRecipientIds: [ID]
     tenantRecipientIds: [ID]
     scopeRecipients: [GraphQLString]
@@ -15,8 +13,7 @@ type MessageOutbox
     deletedAt: GraphQLTimestamp
 }
 
-input MessageCreateOutboxInput
-{
+input MessageCreateOutboxInput {
     id: ID!
     messageId: ID!
     accountRecipientIds: [ID]
@@ -26,8 +23,7 @@ input MessageCreateOutboxInput
     meta: JSON
 }
 
-input MessageUpdateOutboxByIdInput
-{
+input MessageUpdateOutboxByIdInput {
     id: ID!
     messageId: ID
     accountRecipientIds: [ID]
@@ -37,8 +33,7 @@ input MessageUpdateOutboxByIdInput
     meta: JSON
 }
 
-input MessageUpdateOutboxesInput
-{
+input MessageUpdateOutboxesInput {
     id: ID
     messageId: ID
     accountRecipientIds: [ID]
@@ -48,17 +43,13 @@ input MessageUpdateOutboxesInput
     meta: JSON
 }
 
-type Query
-{
+type Query {
     messageFindOutbox(
         query: QueryStatement
         constraint: QueryStatement
     ): MessageOutbox
 
-    messageFindOutboxById(
-        id: ID
-        constraint: QueryStatement
-    ): MessageOutbox
+    messageFindOutboxById(id: ID, constraint: QueryStatement): MessageOutbox
 
     messageGetOutboxes(
         query: QueryStatement
@@ -69,18 +60,12 @@ type Query
         query: QueryStatement
         constraint: QueryStatement
     ): Pagination!
-
 }
 
-type Mutation
-{
-    messageCreateOutbox(
-        payload: MessageCreateOutboxInput!
-    ): MessageOutbox
+type Mutation {
+    messageCreateOutbox(payload: MessageCreateOutboxInput!): MessageOutbox
 
-    messageCreateOutboxes(
-        payload: [MessageCreateOutboxInput]!
-    ): Boolean!
+    messageCreateOutboxes(payload: [MessageCreateOutboxInput]!): Boolean!
 
     messageUpdateOutboxById(
         payload: MessageUpdateOutboxByIdInput!
@@ -93,18 +78,10 @@ type Mutation
         constraint: QueryStatement
     ): [MessageOutbox]!
 
-    messageUpsertOutbox(
-        payload: MessageUpdateOutboxByIdInput!
-    ): MessageOutbox
-
-    messageDeleteOutboxById(
-        id: ID!
-        constraint: QueryStatement
-    ): MessageOutbox
+    messageDeleteOutboxById(id: ID!, constraint: QueryStatement): MessageOutbox
 
     messageDeleteOutboxes(
         query: QueryStatement
         constraint: QueryStatement
     ): [MessageOutbox]!
-
 }

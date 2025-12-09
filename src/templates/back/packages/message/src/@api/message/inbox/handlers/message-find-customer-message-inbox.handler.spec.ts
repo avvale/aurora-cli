@@ -1,46 +1,46 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MessageFindCustomerMessageInboxHandler } from './message-find-customer-message-inbox.handler';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
+import { MessageFindCustomerMessageInboxHandler } from './message-find-customer-message-inbox.handler';
 
-describe('MessageFindCustomerMessageInboxHandler', () =>
-{
+describe('MessageFindCustomerMessageInboxHandler', () => {
     let handler: MessageFindCustomerMessageInboxHandler;
     let queryBus: IQueryBus;
     let commandBus: ICommandBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageFindCustomerMessageInboxHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
                 {
-                    provide : ICommandBus,
+                    provide: ICommandBus,
                     useValue: {
-                        dispatch: () => { /**/ },
+                        dispatch: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler     = module.get<MessageFindCustomerMessageInboxHandler>(MessageFindCustomerMessageInboxHandler);
-        queryBus    = module.get<IQueryBus>(IQueryBus);
-        commandBus  = module.get<ICommandBus>(ICommandBus);
+        handler = module.get<MessageFindCustomerMessageInboxHandler>(
+            MessageFindCustomerMessageInboxHandler,
+        );
+        queryBus = module.get<IQueryBus>(IQueryBus);
+        commandBus = module.get<ICommandBus>(ICommandBus);
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindCustomerMessageInboxHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindCustomerMessageInboxHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
     });

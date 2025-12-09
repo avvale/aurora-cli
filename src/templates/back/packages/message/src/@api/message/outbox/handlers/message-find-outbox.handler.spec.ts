@@ -4,55 +4,49 @@ import { messageMockOutboxData } from '@app/message/outbox';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindOutboxHandler', () =>
-{
+describe('MessageFindOutboxHandler', () => {
     let handler: MessageFindOutboxHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageFindOutboxHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageFindOutboxHandler>(MessageFindOutboxHandler);
+        handler = module.get<MessageFindOutboxHandler>(
+            MessageFindOutboxHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('MessageFindOutboxHandler should be defined', () =>
-    {
+    test('MessageFindOutboxHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindOutboxHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindOutboxHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a outbox', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockOutboxData[0])));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(messageMockOutboxData[0]);
+        test('should return a outbox', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockOutboxData[0])),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                messageMockOutboxData[0],
+            );
         });
     });
 });

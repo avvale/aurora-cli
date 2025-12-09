@@ -4,55 +4,51 @@ import { messageMockMessageData } from '@app/message/message';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindMessageHandler', () =>
-{
+describe('MessageFindMessageHandler', () => {
     let handler: MessageFindMessageHandler;
     let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
+            imports: [],
             providers: [
                 MessageFindMessageHandler,
                 {
-                    provide : IQueryBus,
+                    provide: IQueryBus,
                     useValue: {
-                        ask: () => { /**/ },
+                        ask: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        handler = module.get<MessageFindMessageHandler>(MessageFindMessageHandler);
+        handler = module.get<MessageFindMessageHandler>(
+            MessageFindMessageHandler,
+        );
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('MessageFindMessageHandler should be defined', () =>
-    {
+    test('MessageFindMessageHandler should be defined', () => {
         expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindMessageHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindMessageHandler should be defined', () => {
             expect(handler).toBeDefined();
         });
 
-        test('should return a message', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(messageMockMessageData[0])));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(messageMockMessageData[0]);
+        test('should return a message', async () => {
+            jest.spyOn(queryBus, 'ask').mockImplementation(
+                () =>
+                    new Promise((resolve) =>
+                        resolve(messageMockMessageData[0]),
+                    ),
+            );
+            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+                messageMockMessageData[0],
+            );
         });
     });
 });

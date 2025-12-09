@@ -3,11 +3,8 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class MessageCountTotalRecipientsMessageHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class MessageCountTotalRecipientsMessageHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         tenantRecipientIds: string[],
@@ -15,8 +12,7 @@ export class MessageCountTotalRecipientsMessageHandler
         tagRecipients: string[],
         accountRecipientIds: string[],
         constraint?: QueryStatement,
-    ): Promise<number>
-    {
+    ): Promise<number> {
         return await countTotalRecipients({
             queryBus: this.queryBus,
             tenantRecipientIds,

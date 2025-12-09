@@ -1,15 +1,23 @@
 import { MessageMessage } from '@api/graphql';
 import { MessageMessageDto } from '@api/message/message';
 import { IamAccountResponse } from '@app/iam/account';
-import { MessageDeleteMessageByIdCommand, MessageFindMessageByIdQuery } from '@app/message/message';
+import {
+    MessageDeleteMessageByIdCommand,
+    MessageFindMessageByIdQuery,
+} from '@app/message/message';
 import { MessageDeleteOutboxesCommand } from '@app/message/outbox';
-import { AuditingMeta, ICommandBus, IQueryBus, QueryStatement, storagePublicAbsolutePath } from '@aurorajs.dev/core';
+import {
+    AuditingMeta,
+    ICommandBus,
+    IQueryBus,
+    QueryStatement,
+    storagePublicAbsolutePath,
+} from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { existsSync, unlinkSync } from 'node:fs';
 
 @Injectable()
-export class MessageDeleteMessageByIdHandler
-{
+export class MessageDeleteMessageByIdHandler {
     constructor(
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
@@ -21,47 +29,42 @@ export class MessageDeleteMessageByIdHandler
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<MessageMessage | MessageMessageDto>
-    {
-        const message = await this.queryBus.ask(new MessageFindMessageByIdQuery(
-            id,
-            constraint,
-            {
+    ): Promise<MessageMessage | MessageMessageDto> {
+        const message = await this.queryBus.ask(
+            new MessageFindMessageByIdQuery(id, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
 
-        await this.commandBus.dispatch(new MessageDeleteMessageByIdCommand(
-            id,
-            constraint,
-            {
+        await this.commandBus.dispatch(
+            new MessageDeleteMessageByIdCommand(id, constraint, {
                 timezone,
                 repositoryOptions: {
                     auditing,
                 },
-            },
-        ));
+            }),
+        );
 
         // delete message from outbox too
-        await this.commandBus.dispatch(new MessageDeleteOutboxesCommand(
-            {
-                where: {
-                    messageId: id,
+        await this.commandBus.dispatch(
+            new MessageDeleteOutboxesCommand(
+                {
+                    where: {
+                        messageId: id,
+                    },
                 },
-            },
-            {},
-            {
-                timezone,
-                repositoryOptions: {
-                    auditing,
+                {},
+                {
+                    timezone,
+                    repositoryOptions: {
+                        auditing,
+                    },
                 },
-            },
-        ));
+            ),
+        );
 
-        if (Array.isArray(message.attachments))
-        {
-            for (const attachment of message.attachments)
-            {
+        if (Array.isArray(message.attachments)) {
+            for (const attachment of message.attachments) {
                 // delete attachment file
                 const absolutePath = storagePublicAbsolutePath(
                     attachment.relativePathSegments,

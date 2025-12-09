@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class MessageFindOutboxHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class MessageFindOutboxHandler {
+    constructor(private readonly queryBus: IQueryBus) {}
 
     async main(
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<MessageOutbox | MessageOutboxDto>
-    {
-        return await this.queryBus.ask(new MessageFindOutboxQuery(
-            queryStatement,
-            constraint,
-            {
+    ): Promise<MessageOutbox | MessageOutboxDto> {
+        return await this.queryBus.ask(
+            new MessageFindOutboxQuery(queryStatement, constraint, {
                 timezone,
-            },
-        ));
+            }),
+        );
     }
 }

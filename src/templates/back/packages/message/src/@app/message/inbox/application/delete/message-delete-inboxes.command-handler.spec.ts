@@ -3,40 +3,38 @@ import { MessageDeleteInboxesCommandHandler } from '@app/message/inbox/applicati
 import { MessageDeleteInboxesService } from '@app/message/inbox/application/delete/message-delete-inboxes.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageDeleteInboxesCommandHandler', () =>
-{
+describe('MessageDeleteInboxesCommandHandler', () => {
     let commandHandler: MessageDeleteInboxesCommandHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 MessageDeleteInboxesCommandHandler,
                 {
-                    provide : MessageDeleteInboxesService,
+                    provide: MessageDeleteInboxesService,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        commandHandler = module.get<MessageDeleteInboxesCommandHandler>(MessageDeleteInboxesCommandHandler);
+        commandHandler = module.get<MessageDeleteInboxesCommandHandler>(
+            MessageDeleteInboxesCommandHandler,
+        );
     });
 
-    describe('main', () =>
-    {
-        test('MessageDeleteInboxesCommandHandler should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageDeleteInboxesCommandHandler should be defined', () => {
             expect(commandHandler).toBeDefined();
         });
 
-        test('should return void', async () =>
-        {
-            expect(await commandHandler.execute(
-                new MessageDeleteInboxesCommand(),
-            )).toBe(undefined);
+        test('should return void', async () => {
+            expect(
+                await commandHandler.execute(new MessageDeleteInboxesCommand()),
+            ).toBe(undefined);
         });
     });
 });

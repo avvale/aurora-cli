@@ -1,45 +1,46 @@
-import { MessageFindInboxController, MessageFindInboxHandler } from '@api/message/inbox';
+import {
+    MessageFindInboxController,
+    MessageFindInboxHandler,
+} from '@api/message/inbox';
 import { messageMockInboxData } from '@app/message/inbox';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('MessageFindInboxController', () =>
-{
+describe('MessageFindInboxController', () => {
     let controller: MessageFindInboxController;
     let handler: MessageFindInboxHandler;
 
-    beforeAll(async () =>
-    {
+    beforeAll(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            controllers: [
-                MessageFindInboxController,
-            ],
+            imports: [],
+            controllers: [MessageFindInboxController],
             providers: [
                 {
-                    provide : MessageFindInboxHandler,
+                    provide: MessageFindInboxHandler,
                     useValue: {
-                        main: () => { /**/ },
+                        main: () => {
+                            /**/
+                        },
                     },
                 },
             ],
-        })
-            .compile();
+        }).compile();
 
-        controller = module.get<MessageFindInboxController>(MessageFindInboxController);
+        controller = module.get<MessageFindInboxController>(
+            MessageFindInboxController,
+        );
         handler = module.get<MessageFindInboxHandler>(MessageFindInboxHandler);
     });
 
-    describe('main', () =>
-    {
-        test('MessageFindInboxController should be defined', () =>
-        {
+    describe('main', () => {
+        test('MessageFindInboxController should be defined', () => {
             expect(controller).toBeDefined();
         });
 
-        test('should return a inbox', async () =>
-        {
-            jest.spyOn(handler, 'main').mockImplementation(() => new Promise(resolve => resolve(messageMockInboxData[0])));
+        test('should return a inbox', async () => {
+            jest.spyOn(handler, 'main').mockImplementation(
+                () =>
+                    new Promise((resolve) => resolve(messageMockInboxData[0])),
+            );
             expect(await controller.main()).toBe(messageMockInboxData[0]);
         });
     });

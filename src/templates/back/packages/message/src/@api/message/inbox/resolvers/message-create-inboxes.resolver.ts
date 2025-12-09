@@ -3,16 +3,18 @@ import { TenantPolicy } from '@api/iam/shared';
 import { MessageCreateInboxesHandler } from '@api/message/inbox';
 import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
-import { Auditing, AuditingMeta, CurrentAccount, Timezone } from '@aurorajs.dev/core';
+import {
+    Auditing,
+    AuditingMeta,
+    CurrentAccount,
+    Timezone,
+} from '@aurorajs.dev/core';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('message.inbox.create')
-export class MessageCreateInboxesResolver
-{
-    constructor(
-        private readonly handler: MessageCreateInboxesHandler,
-    ) {}
+export class MessageCreateInboxesResolver {
+    constructor(private readonly handler: MessageCreateInboxesHandler) {}
 
     @Mutation('messageCreateInboxes')
     @TenantPolicy()
@@ -21,13 +23,7 @@ export class MessageCreateInboxesResolver
         @Args('payload') payload: MessageCreateInboxInput[],
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            account,
-            payload,
-            timezone,
-            auditing,
-        );
+    ): Promise<boolean> {
+        return await this.handler.main(account, payload, timezone, auditing);
     }
 }
