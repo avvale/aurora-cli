@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 // modules
-import { SupportModule } from '@api/support/support.module';
 import { CoreModule } from '@aurora/core.module';
 import { RootModule, ServerStaticModule } from '@aurora/modules';
 
@@ -11,10 +10,7 @@ import { RootModule, ServerStaticModule } from '@aurora/modules';
     imports: [
         RootModule,
         CoreModule,
-        ServerStaticModule,
-        // McpModule,
-        // GraphQLAIModule,
-        SupportModule,
+        ServerStaticModule
     ],
     controllers: [AppController],
     providers: [AppService],
