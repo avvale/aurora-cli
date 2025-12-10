@@ -1,21 +1,38 @@
 /* eslint-disable unicorn/no-static-only-class */
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { addPackageFiles, addPivotReferences, addReferences, generateAdditionalApiFiles, generateApiFiles, generateApiPivotFiles, generateAppFiles, generateAppI18nFiles, generateAppPivotFiles, generatePostmanFiles, generateTestingFiles } from '../functions/back';
+import {
+    addPackageFiles,
+    addPivotReferences,
+    addReferences,
+    generateAdditionalApiFiles,
+    generateApiFiles,
+    generateApiPivotFiles,
+    generateAppFiles,
+    generateAppI18nFiles,
+    generateAppPivotFiles,
+    generatePostmanFiles,
+    generateTestingFiles,
+} from '../functions/back';
 import { generateJsonLockFile } from '../functions/common';
 import { GlobalState } from '../store';
-import { AddCommandState, GenerateCommandState, NewBackCommandState, TemplateElement } from '../types';
+import {
+    AddCommandState,
+    GenerateCommandState,
+    NewBackCommandState,
+    TemplateElement,
+} from '../types';
 import { YamlManager } from '../utils';
 import { TemplateGenerator } from '../utils/template-generator';
 
-export class BackHandler
-{
-    static async new(newBackCommandState: NewBackCommandState): Promise<void>
-    {
-        if (!newBackCommandState.appName) throw new Error('To create back application is required app name');
+export class BackHandler {
+    static async new(newBackCommandState: NewBackCommandState): Promise<void> {
+        if (!newBackCommandState.appName)
+            throw new Error('To create back application is required app name');
 
         // create directory for application
-        if (!fs.existsSync(newBackCommandState.appName)) fs.mkdirSync(newBackCommandState.appName, { recursive: true });
+        if (!fs.existsSync(newBackCommandState.appName))
+            fs.mkdirSync(newBackCommandState.appName, { recursive: true });
 
         await TemplateGenerator.generateStaticContents(
             newBackCommandState.command,
@@ -23,8 +40,9 @@ export class BackHandler
             path.join(newBackCommandState.appName),
             '.',
             {
-                force  : newBackCommandState.flags.force,
+                force: newBackCommandState.flags.force,
                 verbose: newBackCommandState.flags.verbose,
+                useTemplateEngine: false,
             },
         );
     }
@@ -33,12 +51,10 @@ export class BackHandler
         generateCommandState: GenerateCommandState,
         {
             hasGenerateTestingFiles = false,
-        }:
-        {
+        }: {
             hasGenerateTestingFiles?: boolean;
         } = {},
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // generate @app module files
         await generateAppFiles(generateCommandState);
 
@@ -64,7 +80,8 @@ export class BackHandler
         addPivotReferences(generateCommandState);
 
         // flag to generate e2e tests, this test can overwrite custom tests
-        if (hasGenerateTestingFiles) await generateTestingFiles(generateCommandState);
+        if (hasGenerateTestingFiles)
+            await generateTestingFiles(generateCommandState);
 
         // generate postman files
         await generatePostmanFiles(generateCommandState);
@@ -74,12 +91,13 @@ export class BackHandler
 
         generateJsonLockFile(
             generateCommandState,
-            GlobalState.hasValue('lockFiles') ? GlobalState.getValue('lockFiles') : [],
+            GlobalState.hasValue('lockFiles')
+                ? GlobalState.getValue('lockFiles')
+                : [],
         );
     }
 
-    static async addPackage(addCommandState: AddCommandState): Promise<void>
-    {
+    static async addPackage(addCommandState: AddCommandState): Promise<void> {
         await addPackageFiles(addCommandState);
     }
 }

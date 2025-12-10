@@ -9,13 +9,12 @@ import { GlobalState } from '../store';
 import { AdditionalApi, LockFile, Property } from '../types';
 import { getAdditionalApiFileName } from './additional-api.functions';
 import { Cypher } from './cypher';
+import { excludeFiles } from './exclude-files.functions';
+import { excludeOperations } from './exclude-operations.functions';
 import { getPropertyName } from './property.functions';
 import templateEngine from './template-engine';
-import { excludeOperations } from './exclude-operations.functions';
-import { excludeFiles } from './exclude-files.functions';
 
-export class FileManager
-{
+export class FileManager {
     /**
      * Render file name and folder name
      * @param {string} name - name that include key to replace
@@ -45,47 +44,79 @@ export class FileManager
             moduleNameSuffix?: string; // use to set i18n items
             currentProperty?: Property;
         } = {},
-    ): string
-    {
+    ): string {
         // remove .hbs extension
         if (name.endsWith('.hbs')) name = name.replace(/\.hbs$/, '');
 
-        if (name.includes('__bounded_context_name__'))
-        {
-            if (boundedContextName === '') throw new Error('Variable boundedContextName is required to replace __bounded_context_name__ in file name');
-            name = name.replace(/__bounded_context_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + boundedContextName.toKebabCase() + (boundedContextSuffix ? '-' + boundedContextSuffix : ''));
+        if (name.includes('__bounded_context_name__')) {
+            if (boundedContextName === '')
+                throw new Error(
+                    'Variable boundedContextName is required to replace __bounded_context_name__ in file name',
+                );
+            name = name.replace(
+                /__bounded_context_name__/gi,
+                (boundedContextPrefix ? boundedContextPrefix + '-' : '') +
+                    boundedContextName.toKebabCase() +
+                    (boundedContextSuffix ? '-' + boundedContextSuffix : ''),
+            );
         }
 
-        if (name.includes('__module_name__'))
-        {
-            if (moduleName === '') throw new Error('Variable moduleName is required to replace __module_name__ in file name');
-            name = name.replace(/__module_name__/gi, (moduleNamePrefix ? moduleNamePrefix + '-' : '') + moduleName.toKebabCase() + (moduleNameSuffix ? '-' + moduleNameSuffix : ''));
+        if (name.includes('__module_name__')) {
+            if (moduleName === '')
+                throw new Error(
+                    'Variable moduleName is required to replace __module_name__ in file name',
+                );
+            name = name.replace(
+                /__module_name__/gi,
+                (moduleNamePrefix ? moduleNamePrefix + '-' : '') +
+                    moduleName.toKebabCase() +
+                    (moduleNameSuffix ? '-' + moduleNameSuffix : ''),
+            );
         }
 
-        if (name.includes('__module_names__'))
-        {
-            if (moduleNames === '') throw new Error('Variable moduleNames is required to replace __module_names__ in file name');
-            name = name.replace(/__module_names__/gi, moduleNames.toKebabCase());
+        if (name.includes('__module_names__')) {
+            if (moduleNames === '')
+                throw new Error(
+                    'Variable moduleNames is required to replace __module_names__ in file name',
+                );
+            name = name.replace(
+                /__module_names__/gi,
+                moduleNames.toKebabCase(),
+            );
         }
 
-        if (name.includes('__additional_api_name__'))
-        {
-            name = name.replace(/__additional_api_name__/gi, (boundedContextPrefix ? boundedContextPrefix + '-' : '') + (additionalApi ? getAdditionalApiFileName(additionalApi) : ''));
+        if (name.includes('__additional_api_name__')) {
+            name = name.replace(
+                /__additional_api_name__/gi,
+                (boundedContextPrefix ? boundedContextPrefix + '-' : '') +
+                    (additionalApi
+                        ? getAdditionalApiFileName(additionalApi)
+                        : ''),
+            );
         }
 
-        if (name.includes('__property_name__') && currentProperty)
-        {
-            name = name.replace(/__property_name__/gi, getPropertyName(currentProperty).toKebabCase());
+        if (name.includes('__property_name__') && currentProperty) {
+            name = name.replace(
+                /__property_name__/gi,
+                getPropertyName(currentProperty).toKebabCase(),
+            );
         }
 
-        if (name.includes('__property_origin_name__') && currentProperty)
-        {
-            name = name.replace(/__property_origin_name__/gi, currentProperty.name.toKebabCase());
+        if (name.includes('__property_origin_name__') && currentProperty) {
+            name = name.replace(
+                /__property_origin_name__/gi,
+                currentProperty.name.toKebabCase(),
+            );
         }
 
-        if (name.includes('__property_relationship_singular_name__') && currentProperty?.relationship?.singularName)
-        {
-            name = name.replace(/__property_relationship_singular_name__/gi, currentProperty.relationship.singularName.toKebabCase());
+        if (
+            name.includes('__property_relationship_singular_name__') &&
+            currentProperty?.relationship?.singularName
+        ) {
+            name = name.replace(
+                /__property_relationship_singular_name__/gi,
+                currentProperty.relationship.singularName.toKebabCase(),
+            );
         }
 
         return name;
@@ -96,14 +127,12 @@ export class FileManager
      * @param {string} currentPath - current path to explore
      * @return {void}
      */
-    static deleteOriginFiles(currentPath: string): void
-    {
+    static deleteOriginFiles(currentPath: string): void {
         // read all files/folders (1 level) from template folder
         const files = fs.readdirSync(currentPath);
 
         // loop each file/folder
-        for (const file of files)
-        {
+        for (const file of files) {
             const originFilePath = path.join(currentPath, file);
 
             // get stats about the current file
@@ -112,12 +141,14 @@ export class FileManager
             // skip files that should not be explorer
             if (cliterConfig.skipDirectories.includes(file)) continue;
 
-            if (stats.isFile() && (file.endsWith('.origin.ts') || file.endsWith('.origin.graphql') || file.endsWith('.origin.html')))
-            {
+            if (
+                stats.isFile() &&
+                (file.endsWith('.origin.ts') ||
+                    file.endsWith('.origin.graphql') ||
+                    file.endsWith('.origin.html'))
+            ) {
                 fs.unlinkSync(path.join(currentPath, file));
-            }
-            else if (stats.isDirectory())
-            {
+            } else if (stats.isDirectory()) {
                 // copy files/folder inside current folder recursively
                 FileManager.deleteOriginFiles(path.join(currentPath, file));
             }
@@ -166,11 +197,10 @@ export class FileManager
             currentProperty?: Property;
             useTemplateEngine?: boolean;
         } = {},
-    ): Promise<void>
-    {
-        const targetBasePath        = process.cwd();
-        const templatesPath         = path.join(__dirname, '..', '..', 'templates');
-        const excludeOperationsObj  = excludeOperations(
+    ): Promise<void> {
+        const targetBasePath = process.cwd();
+        const templatesPath = path.join(__dirname, '..', '..', 'templates');
+        const excludeOperationsObj = excludeOperations(
             excludedOperations,
             boundedContextName,
             moduleName,
@@ -181,44 +211,69 @@ export class FileManager
         const filesToCreate = fs.readdirSync(originPath);
 
         // loop each file/folder
-        for (const file of filesToCreate)
-        {
+        for (const file of filesToCreate) {
             const originFilePath = path.join(originPath, file);
 
             // replace file name wildcards by bounded context name and module name, and remove .hbs extension
-            const nameReplaced = FileManager.replaceFilename(
-                file,
-                {
-                    boundedContextName,
-                    moduleName,
-                    moduleNames,
-                    additionalApi,
-                },
-            );
+            const nameReplaced = FileManager.replaceFilename(file, {
+                boundedContextName,
+                moduleName,
+                moduleNames,
+                additionalApi,
+            });
 
             // get stats about the current file
             const stats = fs.statSync(originFilePath);
 
-            if (stats.isFile())
-            {
+            if (stats.isFile()) {
                 // avoid overwriting some files that cannot be overwritten, if file exist
                 if (
-                    fs.existsSync(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)) &&
+                    fs.existsSync(
+                        path.join(
+                            relativeTargetBasePath,
+                            relativeTargetPath,
+                            nameReplaced,
+                        ),
+                    ) &&
                     force &&
                     cliterConfig.avoidOverwritingFilesIfExist.includes(
-                        path.join(...(originPath.replace(templatesPath + path.sep, '') + path.sep + file.replace(/\.hbs$/, '')).split(path.sep)),
+                        path.join(
+                            ...(
+                                originPath.replace(
+                                    templatesPath + path.sep,
+                                    '',
+                                ) +
+                                path.sep +
+                                file.replace(/\.hbs$/, '')
+                            ).split(path.sep),
+                        ),
                     )
-                ) continue;
+                )
+                    continue;
 
                 // check if file to create is excluded in schema.
                 // schema may not exist if is a new project from master,
                 // when we have not yet created any bounded context or module
                 if (
-                    !excludeFiles(excludedFiles).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)) ||
-                    !excludeOperationsObj.isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced))
-                )
-                {
-                    command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
+                    !excludeFiles(excludedFiles).isAllowPath(
+                        path.join(
+                            relativeTargetBasePath,
+                            relativeTargetPath,
+                            nameReplaced,
+                        ),
+                    ) ||
+                    !excludeOperationsObj.isAllowPath(
+                        path.join(
+                            relativeTargetBasePath,
+                            relativeTargetPath,
+                            nameReplaced,
+                        ),
+                    )
+                ) {
+                    command.log(
+                        `%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,
+                        chalk.yellow.inverse.bold('[EXCLUDED]'),
+                    );
                     continue;
                 }
 
@@ -242,24 +297,51 @@ export class FileManager
                         useTemplateEngine,
                     },
                 );
-            }
-            else if (stats.isDirectory())
-            {
-                if (!excludeOperationsObj.isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
-                {
-                    command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
+            } else if (stats.isDirectory()) {
+                if (
+                    !excludeOperationsObj.isAllowPath(
+                        path.join(
+                            relativeTargetBasePath,
+                            relativeTargetPath,
+                            nameReplaced,
+                        ),
+                    )
+                ) {
+                    command.log(
+                        `%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,
+                        chalk.yellow.inverse.bold('[EXCLUDED]'),
+                    );
                     continue;
                 }
 
-                if (fs.existsSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, nameReplaced)))
-                {
-                    if (verbose) command.log(`${chalk.yellow.bold('[DIRECTORY EXIST]')} Directory ${nameReplaced} exist`);
-                }
-                else
-                {
+                if (
+                    fs.existsSync(
+                        path.join(
+                            targetBasePath,
+                            relativeTargetBasePath,
+                            relativeTargetPath,
+                            nameReplaced,
+                        ),
+                    )
+                ) {
+                    if (verbose)
+                        command.log(
+                            `${chalk.yellow.bold('[DIRECTORY EXIST]')} Directory ${nameReplaced} exist`,
+                        );
+                } else {
                     // create folder in destination folder
-                    fs.mkdirSync(path.join(targetBasePath, relativeTargetBasePath, relativeTargetPath, nameReplaced), { recursive: true });
-                    command.log(`${chalk.greenBright.bold('[DIRECTORY CREATED]')} Directory ${nameReplaced} created`);
+                    fs.mkdirSync(
+                        path.join(
+                            targetBasePath,
+                            relativeTargetBasePath,
+                            relativeTargetPath,
+                            nameReplaced,
+                        ),
+                        { recursive: true },
+                    );
+                    command.log(
+                        `${chalk.greenBright.bold('[DIRECTORY CREATED]')} Directory ${nameReplaced} created`,
+                    );
                 }
 
                 // copy files/folder inside current folder recursively
@@ -336,23 +418,19 @@ export class FileManager
             currentProperty?: Property;
             useTemplateEngine?: boolean;
         } = {},
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // replace file name wildcards by bounded context name and module name, and remove .hbs extension
-        const nameReplaced = FileManager.replaceFilename(
-            file,
-            {
-                boundedContextName,
-                moduleName,
-                moduleNames,
-                additionalApi,
-                boundedContextPrefix,
-                boundedContextSuffix,
-                moduleNamePrefix,
-                moduleNameSuffix,
-                currentProperty,
-            },
-        );
+        const nameReplaced = FileManager.replaceFilename(file, {
+            boundedContextName,
+            moduleName,
+            moduleNames,
+            additionalApi,
+            boundedContextPrefix,
+            boundedContextSuffix,
+            moduleNamePrefix,
+            moduleNameSuffix,
+            currentProperty,
+        });
 
         // relative path with file to create, example: src/@app/common/lang/application/create/create-lang.command.ts
         const relativeFilePath = path.join(relativeTargetPath, nameReplaced);
@@ -363,19 +441,27 @@ export class FileManager
         // check if file exists
         const existFile = fs.existsSync(writePath);
 
-        const fileExtension = path.extname(originFilePath.replace(/\.hbs$/, ''));
+        const fileExtension = path.extname(
+            originFilePath.replace(/\.hbs$/, ''),
+        );
 
         // avoid render files like images, this image only will be copied, before check, delete .hbs extension
-        if (!cliterConfig.allowedRenderExtensions.includes(fileExtension))
-        {
-            if (existFile && !force)
-            {
-                command.log(`%s ${nameReplaced} exist`,  chalk.yellow.bold('[INFO]'));
-            }
-            else
-            {
-                fs.copyFileSync(originFilePath, writePath, fs.constants.COPYFILE_FICLONE);
-                command.log(`%s ${nameReplaced}`, chalk.green.bold('[FILE COPIED]'));
+        if (!cliterConfig.allowedRenderExtensions.includes(fileExtension)) {
+            if (existFile && !force) {
+                command.log(
+                    `%s ${nameReplaced} exist`,
+                    chalk.yellow.bold('[INFO]'),
+                );
+            } else {
+                fs.copyFileSync(
+                    originFilePath,
+                    writePath,
+                    fs.constants.COPYFILE_FICLONE,
+                );
+                command.log(
+                    `%s ${nameReplaced}`,
+                    chalk.green.bold('[FILE COPIED]'),
+                );
             }
 
             return;
@@ -384,62 +470,69 @@ export class FileManager
         // read file content from file template
         let contents = fs.readFileSync(originFilePath, 'utf8');
 
-        if (useTemplateEngine)
-        {
+        if (useTemplateEngine) {
             // replace variables with handlebars template engine
-            contents = await templateEngine
-                .render(
-                    contents,
-                    {
-                        ...templateData,
-                        config: cliterConfig,
-                        writePath,
-                        currentProperty,
-                        boundedContextPrefix,
-                        boundedContextSuffix,
-                        moduleNamePrefix,
-                        moduleNameSuffix,
-                    },
-                );
+            contents = await templateEngine.render(contents, {
+                ...templateData,
+                config: cliterConfig,
+                writePath,
+                currentProperty,
+                boundedContextPrefix,
+                boundedContextSuffix,
+                moduleNamePrefix,
+                moduleNameSuffix,
+            });
         }
 
         // if exist file is has not force flag, avoid overwrite file
-        if (existFile && !force)
-        {
-            command.log(`%s ${nameReplaced} exist`, chalk.yellow.bold('[INFO]'));
-        }
-        else
-        {
+        if (existFile && !force) {
+            command.log(
+                `%s ${nameReplaced} exist`,
+                chalk.yellow.bold('[INFO]'),
+            );
+        } else {
             // check hash for overwrite
-            if (existFile)
-            {
+            if (existFile) {
                 // find lockFile by path
-                const currentLockfile           = lockFiles.find(lockFile => lockFile.path === relativeFilePath);
-                const currentFile               = fs.readFileSync(writePath, 'utf8');
-                const currentFileFirstLine      = _.head(currentFile.split(/\r?\n/));
-                const currentFileFirstLineHash  = currentFileFirstLine ? Cypher.sha1(currentFileFirstLine) : undefined;
-                const currentFileHash           = Cypher.sha1(currentFile);
+                const currentLockfile = lockFiles.find(
+                    (lockFile) => lockFile.path === relativeFilePath,
+                );
+                const currentFile = fs.readFileSync(writePath, 'utf8');
+                const currentFileFirstLine = _.head(currentFile.split(/\r?\n/));
+                const currentFileFirstLineHash = currentFileFirstLine
+                    ? Cypher.sha1(currentFileFirstLine)
+                    : undefined;
+                const currentFileHash = Cypher.sha1(currentFile);
 
                 if (
                     currentFileHash === cliterConfig.fileTags.ignoredFile ||
-                    currentFileFirstLineHash === cliterConfig.fileTags.ignoredFile ||
-                    currentFileHash === cliterConfig.fileTags.ignoredGraphQLFile ||
-                    currentFileFirstLineHash === cliterConfig.fileTags.ignoredGraphQLFile ||
+                    currentFileFirstLineHash ===
+                        cliterConfig.fileTags.ignoredFile ||
+                    currentFileHash ===
+                        cliterConfig.fileTags.ignoredGraphQLFile ||
+                    currentFileFirstLineHash ===
+                        cliterConfig.fileTags.ignoredGraphQLFile ||
                     currentFileHash === cliterConfig.fileTags.ignoredHtmlFile ||
-                    currentFileFirstLineHash === cliterConfig.fileTags.ignoredHtmlFile
-                )
-                {
-                    command.log(`%s ${nameReplaced}`, chalk.cyanBright.bold('[IGNORED FILE]'));
-                }
-                else if (!currentLockfile || currentLockfile.integrity === `sha1:${currentFileHash}`)
-                {
+                    currentFileFirstLineHash ===
+                        cliterConfig.fileTags.ignoredHtmlFile
+                ) {
+                    command.log(
+                        `%s ${nameReplaced}`,
+                        chalk.cyanBright.bold('[IGNORED FILE]'),
+                    );
+                } else if (
+                    !currentLockfile ||
+                    currentLockfile.integrity === `sha1:${currentFileHash}`
+                ) {
                     // the file has been modified
                     fs.writeFileSync(writePath, contents, 'utf8');
 
-                    if (verbose) command.log(`%s ${nameReplaced}`, chalk.magenta.bold('[FILE OVERWRITE]'));
-                }
-                else
-                {
+                    if (verbose)
+                        command.log(
+                            `%s ${nameReplaced}`,
+                            chalk.magenta.bold('[FILE OVERWRITE]'),
+                        );
+                } else {
                     // the file has been modified and we create under .origin the file that would be created
                     fs.writeFileSync(
                         writePath.replace(/\.(?=[^.]*$)/, '.origin.'),
@@ -447,57 +540,55 @@ export class FileManager
                         'utf8',
                     );
 
-                    const originFileName = nameReplaced.replace(/\.(?=[^.]*$)/, '.origin.');
+                    const originFileName = nameReplaced.replace(
+                        /\.(?=[^.]*$)/,
+                        '.origin.',
+                    );
 
                     // save origin files in global state to be checked after in reviewOverwrites method
-                    if (GlobalState.hasValue('originFiles'))
-                    {
-                        GlobalState.getValue('originFiles')
-                            .push(
-                                path.join(
-                                    relativeTargetPath,
-                                    originFileName,
-                                ),
-                            );
-                    }
-                    else
-                    {
+                    if (GlobalState.hasValue('originFiles')) {
+                        GlobalState.getValue('originFiles').push(
+                            path.join(relativeTargetPath, originFileName),
+                        );
+                    } else {
                         GlobalState.setValue('originFiles', [
-                            path.join(
-                                relativeTargetPath,
-                                originFileName,
-                            ),
+                            path.join(relativeTargetPath, originFileName),
                         ]);
                     }
 
-                    command.log(`%s ${originFileName}`, chalk.redBright.bold('[ORIGIN FILE CREATED]'));
+                    command.log(
+                        `%s ${originFileName}`,
+                        chalk.redBright.bold('[ORIGIN FILE CREATED]'),
+                    );
                 }
-            }
-            else
-            {
+            } else {
                 fs.writeFileSync(writePath, contents, 'utf8');
 
-                command.log(`%s ${nameReplaced}`, chalk.green.bold('[FILE CREATED]'));
+                command.log(
+                    `%s ${nameReplaced}`,
+                    chalk.green.bold('[FILE CREATED]'),
+                );
             }
 
             // adapt separator from current OS
-            const posixRelativeFilePath = path.sep === '\\' ? relativeFilePath.replace(/\\/g, '/') : relativeFilePath;
+            const posixRelativeFilePath =
+                path.sep === '\\'
+                    ? relativeFilePath.replace(/\\/g, '/')
+                    : relativeFilePath;
 
             // save lock files in global state to be stored in a file
-            if (GlobalState.hasValue('lockFiles'))
-            {
-                GlobalState.getValue('lockFiles')
-                    .push({
-                        path     : posixRelativeFilePath,
-                        integrity: `sha1:${Cypher.sha1(contents)}`,
-                    });
-            }
-            else
-            {
-                GlobalState.setValue('lockFiles', [{
-                    path     : posixRelativeFilePath,
+            if (GlobalState.hasValue('lockFiles')) {
+                GlobalState.getValue('lockFiles').push({
+                    path: posixRelativeFilePath,
                     integrity: `sha1:${Cypher.sha1(contents)}`,
-                }]);
+                });
+            } else {
+                GlobalState.setValue('lockFiles', [
+                    {
+                        path: posixRelativeFilePath,
+                        integrity: `sha1:${Cypher.sha1(contents)}`,
+                    },
+                ]);
             }
         }
     }

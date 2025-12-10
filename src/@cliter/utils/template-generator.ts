@@ -4,11 +4,10 @@ import * as chalk from 'chalk';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { AdditionalApi, LockFile, Property, TemplateElement } from '../types';
-import { FileManager } from './file-manager';
 import { excludeFiles } from './exclude-files.functions';
+import { FileManager } from './file-manager';
 
-export class TemplateGenerator
-{
+export class TemplateGenerator {
     public static readonly templatePath: string = path.join(
         __dirname,
         '..',
@@ -56,8 +55,7 @@ export class TemplateGenerator
             useTemplateEngine?: boolean;
             templateElementPath?: string;
         } = {},
-    ): Promise<void>
-    {
+    ): Promise<void> {
         await FileManager.generateContents(
             command,
             path.join(
@@ -87,15 +85,15 @@ export class TemplateGenerator
     static createDirectory(
         relativeTargetBasePath: string,
         directory: string,
-    ): void
-    {
+    ): void {
         const modulePath = path.join(
             TemplateGenerator.projectDirectory,
             relativeTargetBasePath,
             directory,
         );
 
-        if (!fs.existsSync(modulePath)) fs.mkdirSync(modulePath, { recursive: true });
+        if (!fs.existsSync(modulePath))
+            fs.mkdirSync(modulePath, { recursive: true });
     }
 
     /**
@@ -130,13 +128,11 @@ export class TemplateGenerator
             lockFiles?: LockFile[];
             templateData?: any;
         } = {},
-    ): void
-    {
+    ): void {
         if (!Array.isArray(valueObjects)) return;
 
         // iterate properties to generate ValueObjects
-        for (const property of valueObjects)
-        {
+        for (const property of valueObjects) {
             TemplateGenerator.generateValueObject(
                 command,
                 relativeTargetBasePath,
@@ -188,8 +184,7 @@ export class TemplateGenerator
             lockFiles?: LockFile[];
             templateData?: any;
         } = {},
-    ): Promise<void>
-    {
+    ): Promise<void> {
         // read value object from our data type
         const originFilePath = path.join(
             TemplateGenerator.templatePath,
@@ -212,23 +207,43 @@ export class TemplateGenerator
         // check if file to create is excluded in schema.
         // schema may not exist if is a new project from master,
         // when we have not yet created any bounded context or module
-        if (!excludeFiles(excludedFiles).isAllowPath(path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)))
-        {
-            command.log(`%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,  chalk.yellow.inverse.bold('[EXCLUDED]'));
+        if (
+            !excludeFiles(excludedFiles).isAllowPath(
+                path.join(
+                    relativeTargetBasePath,
+                    relativeTargetPath,
+                    nameReplaced,
+                ),
+            )
+        ) {
+            command.log(
+                `%s ${path.join(relativeTargetBasePath, relativeTargetPath, nameReplaced)} excluded`,
+                chalk.yellow.inverse.bold('[EXCLUDED]'),
+            );
             return;
         }
 
         // check that exists value object template
-        if (!fs.existsSync(originFilePath)) throw new Error('Value object not exist, must to create template ' + originFilePath);
+        if (!fs.existsSync(originFilePath))
+            throw new Error(
+                'Value object not exist, must to create template ' +
+                    originFilePath,
+            );
 
         await FileManager.manageTemplateFile(
             command,
             originFilePath,
             '__bounded_context_name__-__module_name__-__property_name__.ts.hbs',
-            path.join(relativeTargetBasePath, relativeTargetPath, moduleName, 'domain', 'value-objects'),
+            path.join(
+                relativeTargetBasePath,
+                relativeTargetPath,
+                moduleName,
+                'domain',
+                'value-objects',
+            ),
             {
                 moduleNameSuffix: property.isI18n ? 'i18n' : '',
-                currentProperty : property,
+                currentProperty: property,
                 boundedContextName,
                 moduleName,
                 moduleNames,
