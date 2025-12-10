@@ -35,7 +35,6 @@ export const procedureMainGridListId = 'tools::procedure.list.mainGridList';
     templateUrl: './procedure-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports, ChipComponent],
 })
 export class ProcedureListComponent extends ViewBaseComponent {

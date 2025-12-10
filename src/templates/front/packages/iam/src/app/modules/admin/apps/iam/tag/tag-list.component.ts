@@ -30,7 +30,6 @@ export const tagMainGridListId = 'iam::tag.list.mainGridList';
     templateUrl: './tag-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class TagListComponent extends ViewBaseComponent {
@@ -208,9 +207,9 @@ export class TagListComponent extends ViewBaseComponent {
                 );
                 const headers: string[] = tagColumnsConfig.map(
                     (tagColumnConfig) =>
-                    this.translocoService.translate(
+                        this.translocoService.translate(
                             tagColumnConfig.translation,
-                    ),
+                        ),
                 );
 
                 exportRows(

@@ -30,7 +30,6 @@ export const tenantMainGridListId = 'iam::tenant.list.mainGridList';
     templateUrl: './tenant-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class TenantListComponent extends ViewBaseComponent {

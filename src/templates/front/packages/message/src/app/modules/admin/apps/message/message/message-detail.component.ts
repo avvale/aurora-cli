@@ -92,7 +92,6 @@ export const messageAccountsScopeDialogPagination =
     templateUrl: './message-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         GridSelectMultipleCellValueTemplateDirective,

@@ -1,11 +1,31 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChildren, effect, input, InputSignal, output, OutputEmitterRef, QueryList, signal, untracked, ViewChild, ViewEncapsulation, WritableSignal } from '@angular/core';
+import {
+    Component,
+    ContentChildren,
+    effect,
+    input,
+    InputSignal,
+    output,
+    OutputEmitterRef,
+    QueryList,
+    signal,
+    untracked,
+    ViewChild,
+    ViewEncapsulation,
+    WritableSignal,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Account, ChatMessage, ChatTimelineContentTemplateDirective, MarkdownService, SpinnerType } from '@aurora';
+import {
+    Account,
+    ChatMessage,
+    ChatTimelineContentTemplateDirective,
+    MarkdownService,
+    SpinnerType,
+} from '@aurora';
 import { MarkdownToHtmlPipe } from '@aurora/pipes/markdown-to-html.pipe';
 import { last } from 'lodash-es';
 import { IsMinePipe } from './pipes/is-mine.pipe';
@@ -39,10 +59,10 @@ import { FilterChatTimelineContentTemplatePositionPipe } from './pipes/filter-ch
         TextFieldModule,
     ],
 })
-export class ChatTimelineComponent
-{
+export class ChatTimelineComponent {
     @ViewChild('messageInput') messageInput;
-    @ContentChildren(ChatTimelineContentTemplateDirective) chatTimelineContentsTemplate?: QueryList<ChatTimelineContentTemplateDirective>;
+    @ContentChildren(ChatTimelineContentTemplateDirective)
+    chatTimelineContentsTemplate?: QueryList<ChatTimelineContentTemplateDirective>;
 
     // inputs
     spinnerType = SpinnerType;
@@ -61,56 +81,47 @@ export class ChatTimelineComponent
     deleteMessage: OutputEmitterRef<ChatMessage> = output();
     scroll: OutputEmitterRef<Event> = output();
 
-    constructor(
-        private markdownService: MarkdownService,
-    )
-    {
+    constructor(private markdownService: MarkdownService) {
         effect(() => {
             const messages = this.chatMessages();
 
-            untracked(() =>
-            {
+            untracked(() => {
                 this.isTyped.set(this.typeLastMessage());
 
-                if (this.isTyped())
-                {
+                if (this.isTyped()) {
                     this.typewriterMessage(messages);
                 }
             });
         });
     }
 
-    typewriterMessage(messages: ChatMessage[]): void
-    {
+    typewriterMessage(messages: ChatMessage[]): void {
         const message: string = last(messages).message;
-        if (this.typedMessage().length < message.length)
-        {
+        if (this.typedMessage().length < message.length) {
             this.typedMessage.set(
                 this.markdownService.markdownToHtml(
-                    message.substring(0, this.typedMessage().length + 1)
-                ) as string
+                    message.substring(0, this.typedMessage().length + 1),
+                ) as string,
             );
-            setTimeout(() => this.typewriterMessage(messages), this.speedTyped());
-        }
-        else
-        {
+            setTimeout(
+                () => this.typewriterMessage(messages),
+                this.speedTyped(),
+            );
+        } else {
             this.isTyped.set(false);
         }
     }
 
-    handlerSendMessage(message: string): void
-    {
+    handlerSendMessage(message: string): void {
         this.sendMessage.emit(message);
         this.messageInput.nativeElement.value = '';
     }
 
-    handlerDeleteMessage(message: ChatMessage): void
-    {
+    handlerDeleteMessage(message: ChatMessage): void {
         this.deleteMessage.emit(message);
     }
 
-    handlerScroll($event: Event): void
-    {
+    handlerScroll($event: Event): void {
         this.scroll.emit($event);
     }
 }

@@ -39,7 +39,6 @@ import { IssueService } from '../issue';
     templateUrl: './config-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultDetailImports, MatSelectModule],
 })
 export class ConfigDetailComponent extends ViewDetailComponent {

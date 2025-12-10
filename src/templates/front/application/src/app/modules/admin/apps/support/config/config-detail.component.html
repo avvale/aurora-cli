@@ -181,59 +181,67 @@
                             {{ formErrors?.listId | async }}
                         </mat-error>
                     </mat-form-field>
-                    <mat-form-field
-                        appearance="outline"
-                        class="col-9"
-                    >
-                        <mat-label>{{ t('support.WebhookId') }}</mat-label>
-                        <input
-                            matInput
-                            formControlName="webhookId"
-                            maxlength="255"
-                        />
-                        <mat-error>
-                            {{ formErrors?.webhookId | async }}
-                        </mat-error>
-                    </mat-form-field>
-                    <div class="col-3 mt-2">
-                        @if (fg.get('webhookId')?.value) {
-                            <button
-                                type="button"
-                                class="ml-3"
-                                mat-flat-button
-                                color="warn"
-                                (click)="
-                                    actionService.action({
-                                        id: 'support::config.detail.deleteWebhook',
-                                        isViewAction: false,
-                                    })
-                                "
-                            >
-                                <mat-icon class="mr-2 icon-size-5">
-                                    phishing
-                                </mat-icon>
-                                {{ t('support.DeleteWebhook') }}
-                            </button>
-                        } @else {
-                            <button
-                                type="button"
-                                class="ml-3"
-                                mat-flat-button
-                                color="accent"
-                                (click)="
-                                    actionService.action({
-                                        id: 'support::config.detail.createWebhook',
-                                        isViewAction: false,
-                                    })
-                                "
-                            >
-                                <mat-icon class="mr-2 icon-size-5">
-                                    phishing
-                                </mat-icon>
-                                {{ t('support.CreateWebhook') }}
-                            </button>
-                        }
-                    </div>
+
+                    @if (
+                        apiKey.value &&
+                        spaceId.value &&
+                        folderId.value &&
+                        listId.value
+                    ) {
+                        <mat-form-field
+                            appearance="outline"
+                            class="col-9"
+                        >
+                            <mat-label>{{ t('support.WebhookId') }}</mat-label>
+                            <input
+                                matInput
+                                formControlName="webhookId"
+                                maxlength="255"
+                            />
+                            <mat-error>
+                                {{ formErrors?.webhookId | async }}
+                            </mat-error>
+                        </mat-form-field>
+                        <div class="col-3 mt-2">
+                            @if (fg.get('webhookId')?.value) {
+                                <button
+                                    type="button"
+                                    class="ml-3"
+                                    mat-flat-button
+                                    color="warn"
+                                    (click)="
+                                        actionService.action({
+                                            id: 'support::config.detail.deleteWebhook',
+                                            isViewAction: false,
+                                        })
+                                    "
+                                >
+                                    <mat-icon class="mr-2 icon-size-5">
+                                        phishing
+                                    </mat-icon>
+                                    {{ t('support.DeleteWebhook') }}
+                                </button>
+                            } @else {
+                                <button
+                                    type="button"
+                                    class="ml-3"
+                                    mat-flat-button
+                                    color="accent"
+                                    (click)="
+                                        actionService.action({
+                                            id: 'support::config.detail.createWebhook',
+                                            isViewAction: false,
+                                        })
+                                    "
+                                >
+                                    <mat-icon class="mr-2 icon-size-5">
+                                        phishing
+                                    </mat-icon>
+                                    {{ t('support.CreateWebhook') }}
+                                </button>
+                            }
+                        </div>
+                    }
                 </div>
             </form>
         </div>

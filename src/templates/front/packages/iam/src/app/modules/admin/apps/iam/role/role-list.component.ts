@@ -50,7 +50,6 @@ export const roleMainGridListId = 'iam::role.list.mainGridList';
     templateUrl: './role-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultListImports,
         FormsModule,

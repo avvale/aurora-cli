@@ -53,7 +53,6 @@ export const permissionsGridId = 'iam::role.detail.permissionsGridList';
     templateUrl: './role-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         GridSelectMultipleElementsModule,

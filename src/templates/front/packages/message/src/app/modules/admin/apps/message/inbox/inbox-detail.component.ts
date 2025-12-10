@@ -29,7 +29,6 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './inbox-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         DatetimepickerSqlFormatDirective,

@@ -34,7 +34,6 @@ export const httpCommunicationMainGridListId =
     templateUrl: './http-communication-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class HttpCommunicationListComponent extends ViewBaseComponent {

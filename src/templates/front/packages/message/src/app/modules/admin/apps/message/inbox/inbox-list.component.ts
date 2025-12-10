@@ -30,7 +30,6 @@ export const inboxMainGridListId = 'message::inbox.list.mainGridList';
     templateUrl: './inbox-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class InboxListComponent extends ViewBaseComponent {

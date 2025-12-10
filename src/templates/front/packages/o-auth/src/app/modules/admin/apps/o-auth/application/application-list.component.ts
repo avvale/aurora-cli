@@ -33,7 +33,6 @@ export const applicationMainGridListId = 'oAuth::application.list.mainGridList';
     templateUrl: './application-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class ApplicationListComponent extends ViewBaseComponent {

@@ -39,7 +39,6 @@ export const issueMainGridListId = 'support::issue.list.mainGridList';
     templateUrl: './issue-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports, ChipComponent, UpperCasePipe],
 })
 export class IssueListComponent extends ViewBaseComponent {

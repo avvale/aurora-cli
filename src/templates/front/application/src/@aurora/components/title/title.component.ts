@@ -4,6 +4,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     selector: 'au-title',
     templateUrl: './title.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
 })
 export class TitleComponent {}

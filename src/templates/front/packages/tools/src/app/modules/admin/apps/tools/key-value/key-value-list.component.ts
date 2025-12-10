@@ -30,7 +30,6 @@ export const keyValueMainGridListId = 'tools::keyValue.list.mainGridList';
     templateUrl: './key-value-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class KeyValueListComponent extends ViewBaseComponent {

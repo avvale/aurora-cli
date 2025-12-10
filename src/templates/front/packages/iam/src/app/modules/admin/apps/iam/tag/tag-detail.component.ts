@@ -25,7 +25,6 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './tag-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultDetailImports],
 })
 export class TagDetailComponent extends ViewDetailComponent {

@@ -42,7 +42,6 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
     templateUrl: './bounded-context-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         GridElementsManagerModule,

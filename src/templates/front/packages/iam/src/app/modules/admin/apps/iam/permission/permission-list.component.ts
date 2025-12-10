@@ -33,7 +33,6 @@ export const permissionMainGridListId = 'iam::permission.list.mainGridList';
     templateUrl: './permission-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class PermissionListComponent extends ViewBaseComponent {

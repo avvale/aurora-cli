@@ -30,7 +30,6 @@ export const webhookMainGridListId = 'tools::webhook.list.mainGridList';
     templateUrl: './webhook-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class WebhookListComponent extends ViewBaseComponent {

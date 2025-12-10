@@ -30,7 +30,6 @@ import { lastValueFrom, Observable, ReplaySubject, takeUntil } from 'rxjs';
     templateUrl: './tenant-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         MatCheckboxModule,

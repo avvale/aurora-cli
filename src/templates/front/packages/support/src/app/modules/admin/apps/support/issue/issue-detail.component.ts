@@ -34,7 +34,6 @@ import { firstValueFrom, lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './issue-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         ChipComponent,

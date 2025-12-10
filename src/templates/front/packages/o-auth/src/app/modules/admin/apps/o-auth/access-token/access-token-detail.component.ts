@@ -28,7 +28,6 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './access-token-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultDetailImports,
         DatetimepickerSqlFormatDirective,

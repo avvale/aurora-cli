@@ -33,7 +33,6 @@ export const messageMainGridListId = 'message::message.list.mainGridList';
     templateUrl: './message-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         ...defaultListImports,
         ChipComponent,

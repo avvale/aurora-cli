@@ -30,7 +30,6 @@ export const clientMainGridListId = 'oAuth::client.list.mainGridList';
     templateUrl: './client-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class ClientListComponent extends ViewBaseComponent {

@@ -92,6 +92,16 @@ export const configEditResolver: ResolveFn<{
                 }
             }
 
+            if (Object.keys(observables$).length === 0) {
+                configResponse.next({
+                    keyValues: data.objects,
+                    spaces: [],
+                    folders: [],
+                    lists: [],
+                });
+                return;
+            }
+
             forkJoin(observables$).subscribe((clickupData: any) => {
                 configResponse.next({
                     keyValues: data.objects,

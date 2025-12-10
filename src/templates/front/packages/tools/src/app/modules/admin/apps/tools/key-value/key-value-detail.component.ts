@@ -27,7 +27,6 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './key-value-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultDetailImports, MatCheckboxModule, MatSelectModule],
 })
 export class KeyValueDetailComponent extends ViewDetailComponent {

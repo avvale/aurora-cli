@@ -17,28 +17,32 @@ import dayjs from 'dayjs';
 
 @Component({
     selector: 'au-datepicker',
-    template: ` <mat-form-field
-        [appearance]="appearance"
-        [attr.tiny]="tiny"
-        [attr.small]="small"
-    >
-        <mat-label>{{ label }}</mat-label>
-        <input
-            autocomplete="off"
-            matInput
-            [formControl]="control.control"
-            [required]="required"
-            [matDatepicker]="picker"
-            [value]="dateValue"
-            (dateInput)="handleDateInput('input', $event)"
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker">
-        </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error>{{ error }}</mat-error>
-    </mat-form-field>`,
-    styleUrls: ['./datepicker.component.scss'],
     standalone: false,
+    template: `
+        <mat-form-field
+            [attr.tiny]="tiny"
+            [attr.small]="small"
+            [appearance]="appearance"
+        >
+            <mat-label>{{ label }}</mat-label>
+            <input
+                [formControl]="control.control"
+                [required]="required"
+                [matDatepicker]="picker"
+                [value]="dateValue"
+                autocomplete="off"
+                matInput
+                (dateInput)="handleDateInput('input', $event)"
+            />
+            <mat-datepicker-toggle
+                [for]="picker"
+                matSuffix
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>{{ error }}</mat-error>
+        </mat-form-field>
+    `,
+    styleUrls: ['./datepicker.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

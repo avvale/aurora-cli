@@ -25,7 +25,6 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './webhook-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultDetailImports],
 })
 export class WebhookDetailComponent extends ViewDetailComponent {

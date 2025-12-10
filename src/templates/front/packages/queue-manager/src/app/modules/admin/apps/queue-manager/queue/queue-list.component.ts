@@ -30,7 +30,6 @@ export const queueMainGridListId = 'queueManager::queue.list.mainGridList';
     templateUrl: './queue-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class QueueListComponent extends ViewBaseComponent {

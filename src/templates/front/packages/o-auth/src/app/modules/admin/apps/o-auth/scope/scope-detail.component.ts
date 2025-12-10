@@ -28,7 +28,6 @@ import { Observable, lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './scope-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultDetailImports, MatSelectModule],
 })
 export class ScopeDetailComponent extends ViewDetailComponent {

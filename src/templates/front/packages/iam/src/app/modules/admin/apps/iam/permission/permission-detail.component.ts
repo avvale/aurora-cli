@@ -27,7 +27,6 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
     templateUrl: './permission-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultDetailImports, MatSelectModule],
 })
 export class PermissionDetailComponent extends ViewDetailComponent {

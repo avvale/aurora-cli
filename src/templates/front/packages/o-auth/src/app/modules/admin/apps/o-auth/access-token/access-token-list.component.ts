@@ -33,7 +33,6 @@ export const accessTokenMainGridListId = 'oAuth::accessToken.list.mainGridList';
     templateUrl: './access-token-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class AccessTokenListComponent extends ViewBaseComponent {

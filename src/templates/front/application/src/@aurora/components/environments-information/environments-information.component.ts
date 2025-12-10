@@ -10,7 +10,6 @@ import { EnvironmentsInformation } from './environments-information.types';
     selector: 'au-environments-information',
     templateUrl: './environments-information.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
 })
 export class EnvironmentsInformationComponent {
     environmentsInformation: EnvironmentsInformation;

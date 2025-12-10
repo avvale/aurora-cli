@@ -34,7 +34,6 @@ export const refreshTokenMainGridListId =
     templateUrl: './refresh-token-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class RefreshTokenListComponent extends ViewBaseComponent {

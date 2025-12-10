@@ -34,7 +34,6 @@ export const boundedContextMainGridListId =
     templateUrl: './bounded-context-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class BoundedContextListComponent extends ViewBaseComponent {

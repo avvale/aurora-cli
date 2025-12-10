@@ -34,7 +34,6 @@ export const migrationMainGridListId = 'tools::migration.list.mainGridList';
     templateUrl: './migration-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class MigrationListComponent extends ViewBaseComponent {

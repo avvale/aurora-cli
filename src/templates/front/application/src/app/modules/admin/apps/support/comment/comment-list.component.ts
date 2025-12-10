@@ -30,7 +30,6 @@ export const commentMainGridListId = 'support::comment.list.mainGridList';
     templateUrl: './comment-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class CommentListComponent extends ViewBaseComponent {

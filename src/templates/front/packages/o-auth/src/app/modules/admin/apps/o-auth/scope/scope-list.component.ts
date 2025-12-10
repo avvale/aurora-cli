@@ -30,7 +30,6 @@ export const scopeMainGridListId = 'oAuth::scope.list.mainGridList';
     templateUrl: './scope-list.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [...defaultListImports],
 })
 export class ScopeListComponent extends ViewBaseComponent {
