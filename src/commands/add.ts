@@ -850,6 +850,60 @@ export class Add extends Command {
 
                     appModuleSourceFile.saveSync();
 
+                    // imports to shared module
+                    const sharedModuleSourceFile =
+                        CommonDriver.createSourceFile(project, [
+                            'src',
+                            '@aurora',
+                            'shared.module.ts',
+                        ]);
+
+                    const classDecoratorArguments =
+                        DecoratorDriver.getClassDecoratorArguments(
+                            sharedModuleSourceFile,
+                            'SharedModule',
+                            'Module',
+                        );
+
+                    if (
+                        !ImportDriver.hasImportDeclarations(
+                            sharedModuleSourceFile,
+                            'HttpModule',
+                        )
+                    ) {
+                        ImportDriver.createImportItems(
+                            sharedModuleSourceFile,
+                            '@nestjs/axios',
+                            ['HttpModule'],
+                        );
+
+                        const importsArray =
+                            ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                                classDecoratorArguments,
+                                'imports',
+                            );
+
+                        ArrayDriver.addArrayItems(
+                            sharedModuleSourceFile,
+                            ['HttpModule'],
+                            importsArray,
+                        );
+
+                        const exportsArray =
+                            ObjectDriver.getInitializerProperty<ArrayLiteralExpression>(
+                                classDecoratorArguments,
+                                'exports',
+                            );
+
+                        ArrayDriver.addArrayItems(
+                            sharedModuleSourceFile,
+                            ['HttpModule'],
+                            exportsArray,
+                        );
+                    }
+
+                    sharedModuleSourceFile.saveSync();
+
                     ux.action.start('Generating graphql types');
                     await exec('npm', ['run', 'graphql:types']);
                     ux.action.stop('Completed!');
