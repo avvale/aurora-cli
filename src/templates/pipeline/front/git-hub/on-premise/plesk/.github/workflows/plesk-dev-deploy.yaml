@@ -16,11 +16,11 @@ env:
     SERVER_KEY_PHRASE: $\{{ secrets.PLESK_DEV_SERVER_KEY_PHRASE }}
     # default port SFTP 22
     SERVER_PORT: 22
-    SERVER_HOST: $\{{ secrets.PLESK_DEV_SERVER_HOST }}
+    SERVER_HOST: $\{{ vars.PLESK_DEV_SERVER_HOST }}
     # SFTP/SSH username
     SERVER_USERNAME: $\{{ secrets.PLESK_DEV_SERVER_USERNAME }}
     # example /var/www/vhosts/contoso.com
-    SERVER_PATH: $\{{ secrets.PLESK_DEV_SERVER_PATH }}
+    SERVER_PATH: $\{{ vars.PLESK_DEV_SERVER_PATH }}
 
     # Node version
     NODE_VERSION: '22'
