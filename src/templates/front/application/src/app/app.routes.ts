@@ -80,8 +80,7 @@ export const appRoutes: Route[] = [
         },
         // prettier-ignore
         children: [
-            { path: 'example', loadChildren: () => import('app/modules/admin/example/example.routes') },
-            { path: 'support', loadChildren: () => import('app/modules/admin/apps/support/support.routes') },
+            { path: 'example', loadChildren: () => import('app/modules/admin/example/example.routes') }
         ],
     },
 
