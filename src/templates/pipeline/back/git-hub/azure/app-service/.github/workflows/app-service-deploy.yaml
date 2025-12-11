@@ -1,110 +1,110 @@
 name: Build and Deploy Aurora on Azure App Service
 
 on:
-  push:
-    branches:
-      - 'main'
+    push:
+        branches:
+            - "main"
 
-  workflow_dispatch:
+    workflow_dispatch:
 
 env:
-  # application secrets
-  OAUTH_PRIVATE_KEY: $\{{ secrets.AZURE_XXXXXXXX_OAUTH_PRIVATE_KEY }}
-  OAUTH_PUBLIC_KEY: $\{{ secrets.AZURE_XXXXXXXX_OAUTH_PUBLIC_KEY }}
-  DOT_ENV: $\{{ secrets.AZURE_XXXXXXXX_DOT_ENV }}
+    # application secrets
+    OAUTH_PRIVATE_KEY: $\{{ secrets.AZURE_XXXXXXXX_OAUTH_PRIVATE_KEY }}
+    OAUTH_PUBLIC_KEY: $\{{ secrets.AZURE_XXXXXXXX_OAUTH_PUBLIC_KEY }}
+    DOT_ENV: $\{{ secrets.AZURE_XXXXXXXX_DOT_ENV }}
 
-  # Azure App Service credentials
-  AZURE_WEBAPP_PUBLISH_PROFILE: $\{{ secrets.AZURE_XXXXXXXX_WEBAPP_PUBLISH_PROFILE }}
-  AZURE_WEBAPP_NAME: $\{{ secrets.AZURE_XXXXXXXX_WEBAPP_NAME }}
+    # Azure App Service credentials
+    AZURE_WEBAPP_PUBLISH_PROFILE: $\{{ secrets.AZURE_XXXXXXXX_WEBAPP_PUBLISH_PROFILE }}
+    AZURE_WEBAPP_NAME: $\{{ secrets.AZURE_XXXXXXXX_WEBAPP_NAME }}
 
-  # Node version
-  NODE_VERSION: '22'
+    # Node version
+    NODE_VERSION: "22"
 
 jobs:
-  tests:
-    name: Build and test
-    runs-on: ubuntu-22.04
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    tests:
+        name: Build and test
+        runs-on: ubuntu-22.04
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-    - name: Create OAuth Keys and dot file
-      run: |
-        touch oauth-private.key
-        echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
-        touch oauth-public.key
-        echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
-        touch .env
-        echo "$DOT_ENV" > .env
-      shell: bash
+            - name: Create OAuth Keys and dot file
+              run: |
+                  touch oauth-private.key
+                  echo "$OAUTH_PRIVATE_KEY" > oauth-private.key
+                  touch oauth-public.key
+                  echo "$OAUTH_PUBLIC_KEY" > oauth-public.key
+                  touch .env
+                  echo "$DOT_ENV" > .env
+              shell: bash
 
-    - name: Install node
-      uses: actions/setup-node@v3
-      with:
-        node-version: '$\{{ env.NODE_VERSION }}'
+            - name: Install node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '$\{{ env.NODE_VERSION }}'
 
-    - name: npm install, build, and test
-      run: |
-        npm ci
-        npm run build --if-present
-        # npm run test --if-present
-        # npm run test:e2e --if-present
+            - name: npm install, build, and test
+              run: |
+                  npm ci
+                  npm run build --if-present
+                  # npm run test --if-present
+                  # npm run test:e2e --if-present
 
-    - name: Copy graphQL files
-      run: |
-        mkdir ./dist/src/graphql \;
-        find ./src -name '*.graphql' -exec cp "{}" ./dist/src/graphql \;
-      shell: bash
+            - name: Copy graphQL files
+              run: |
+                  mkdir ./dist/src/graphql \;
+                  find ./src -name '*.graphql' -exec cp "{}" ./dist/src/graphql \;
+              shell: bash
 
-    - name: Zip artifact for deployment
-      run: zip release.zip ./node_modules/* ./dist/* ./package.json ./package-lock.json -r
+            - name: Zip artifact for deployment
+              run: zip release.zip ./node_modules/* ./dist/* ./package.json ./package-lock.json -r
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: tested-artifact
-        path: |
-          release.zip
+            - name: Upload artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: tested-artifact
+                  path: |
+                      release.zip
 
-  deploy:
-    name: App Service Deploy
-    needs: tests
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: tested-artifact
+    deploy:
+        name: App Service Deploy
+        needs: tests
+        runs-on: ubuntu-22.04
+        steps:
+            - name: Download artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: tested-artifact
 
-      - uses: geekyeggo/delete-artifact@v5
-        with:
-          name: tested-artifact
+            - uses: geekyeggo/delete-artifact@v5
+              with:
+                  name: tested-artifact
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip -d deploy
+            - name: Unzip artifact for deployment
+              run: unzip release.zip -d deploy
 
-      - name: Delete zip artifact
-        run: rm release.zip
+            - name: Delete zip artifact
+              run: rm release.zip
 
-      - name: Install node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '$\{{ env.NODE_VERSION }}'
+            - name: Install node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '$\{{ env.NODE_VERSION }}'
 
-      - name: Create OAuth Keys and dot file
-        run: |
-          touch ./deploy/oauth-private.key
-          echo "$OAUTH_PRIVATE_KEY" > ./deploy/oauth-private.key
-          touch ./deploy/oauth-public.key
-          echo "$OAUTH_PUBLIC_KEY" > ./deploy/oauth-public.key
-          touch ./deploy/.env
-          echo "$DOT_ENV" > ./deploy/.env
-        shell: bash
+            - name: Create OAuth Keys and dot file
+              run: |
+                  touch ./deploy/oauth-private.key
+                  echo "$OAUTH_PRIVATE_KEY" > ./deploy/oauth-private.key
+                  touch ./deploy/oauth-public.key
+                  echo "$OAUTH_PUBLIC_KEY" > ./deploy/oauth-public.key
+                  touch ./deploy/.env
+                  echo "$DOT_ENV" > ./deploy/.env
+              shell: bash
 
-      - name: Azure Web App Deploy
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: $\{{ env.AZURE_WEBAPP_NAME }}
-          slot-name: Production
-          publish-profile: $\{{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ./deploy
+            - name: Azure Web App Deploy
+              uses: azure/webapps-deploy@v2
+              with:
+                  app-name: $\{{ env.AZURE_WEBAPP_NAME }}
+                  slot-name: Production
+                  publish-profile: $\{{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+                  package: ./deploy

@@ -1,60 +1,60 @@
 name: Build and Deploy Back on Google App Engine
 
 on:
-  push:
-    branches:
-      - 'main'
+    push:
+        branches:
+            - "main"
 
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
-  tests:
-    name: Build and test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Install node
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-    - name: Install dependencies
-      run: npm ci
-    - name: Create .env file
-      run: |
-        touch .env
-        echo "$DOT_ENV" > .env
-      shell: bash
-      env:
-        DOT_ENV: ${{secrets.DOT_ENV}}
-    - name: Unit testing
-      run: npm run test
-    - name: Acceptance testing
-      run: npm run test:e2e
+    tests:
+        name: Build and test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Install node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "16"
+            - name: Install dependencies
+              run: npm ci
+            - name: Create .env file
+              run: |
+                  touch .env
+                  echo "$DOT_ENV" > .env
+              shell: bash
+              env:
+                  DOT_ENV: ${{secrets.DOT_ENV}}
+            - name: Unit testing
+              run: npm run test
+            - name: Acceptance testing
+              run: npm run test:e2e
 
-  deploy:
-    name: GCP App Engine Deploy
-    needs: tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm ci
-      - name: Create .env file
-        run: |
-          touch .env
-          echo "$DOT_ENV" > .env
-        shell: bash
-        env:
-          DOT_ENV: ${{secrets.DOT_ENV}}
-      - name: Build project
-        run: npm run build
-      - name: Deploy Google App Engine
-        uses: google-github-actions/deploy-appengine@main
-        with:
-          credentials: ${{ secrets.GCP_CREDENTIALS }}
+    deploy:
+        name: GCP App Engine Deploy
+        needs: tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Install node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "16"
+            - name: Install dependencies
+              run: npm ci
+            - name: Create .env file
+              run: |
+                  touch .env
+                  echo "$DOT_ENV" > .env
+              shell: bash
+              env:
+                  DOT_ENV: ${{secrets.DOT_ENV}}
+            - name: Build project
+              run: npm run build
+            - name: Deploy Google App Engine
+              uses: google-github-actions/deploy-appengine@main
+              with:
+                  credentials: ${{ secrets.GCP_CREDENTIALS }}

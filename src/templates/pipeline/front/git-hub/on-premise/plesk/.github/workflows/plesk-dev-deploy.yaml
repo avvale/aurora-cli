@@ -1,0 +1,69 @@
+name: Testing, Build and Deploy Back on Plesk
+
+on:
+    push:
+        branches:
+            - "environments/plesk-dev"
+
+    workflow_dispatch:
+
+env:
+    # https://www.plesk.com/kb/support/how-to-set-up-ssh-keys-for-plesk-server/
+    # don't forget set like bin/bash ftp user
+    # SSH private key
+    SERVER_KEY: $\{{ secrets.PLESK_DEV_SERVER_KEY }}
+    # security phrase for SSH private key
+    SERVER_KEY_PHRASE: $\{{ secrets.PLESK_DEV_SERVER_KEY_PHRASE }}
+    # default port SFTP 22
+    SERVER_PORT: 22
+    SERVER_HOST: $\{{ secrets.PLESK_DEV_SERVER_HOST }}
+    # SFTP/SSH username
+    SERVER_USERNAME: $\{{ secrets.PLESK_DEV_SERVER_USERNAME }}
+    # example /var/www/vhosts/contoso.com
+    SERVER_PATH: $\{{ secrets.PLESK_DEV_SERVER_PATH }}
+
+    # Node version
+    NODE_VERSION: "22"
+
+jobs:
+    deploy-artifact:
+        name: Build and test and deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            - name: Install node
+              uses: actions/setup-node@v6
+              with:
+                  node-version: '$\{{ env.NODE_VERSION }}'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Unit testing
+              run: npm run test
+
+            - name: Build project
+              run: npm run build -- --configuration=development
+
+            - name: Zip artifact for deployment
+              run: cd dist/fuse/browser && zip artifact.zip ./* -r
+
+            - name: Unzip artifact for deployment
+              run: unzip -o artifact.zip -d deployment
+
+            - name: Delete zip artifact
+              run: rm artifact.zip
+
+            - name: Deploy Plesk with rsync
+              uses: burnett01/rsync-deployments@v8
+              with:
+                  switches: -avzh --delete --exclude=".*"
+                  path: deployment/
+                  remote_path: $\{{ env.SERVER_PATH }}/httpdocs
+                  remote_host: $\{{ env.SERVER_HOST }}
+                  remote_port: $\{{ env.SERVER_PORT }}
+                  remote_user: $\{{ env.SERVER_USERNAME }}
+                  remote_key: $\{{ env.SERVER_KEY }}
+                  remote_key_pass: $\{{ env.SERVER_KEY_PHRASE }}
