@@ -48,7 +48,7 @@ jobs:
               run: npm run build -- --configuration=development
 
             - name: Zip artifact for deployment
-              run: cd dist/fuse/browser && zip artifact.zip ./* -r
+              run: cd dist/fuse/browser && zip ../../../artifact.zip /* -r
 
             - name: Unzip artifact for deployment
               run: unzip -o artifact.zip -d deployment

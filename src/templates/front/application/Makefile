@@ -50,6 +50,7 @@ publish-all:
 		gulp publishMessage && \
 		gulp publishOAuth && \
 		gulp publishQueueManager && \
+		gulp publishScreenRecording && \
 		gulp publishSearchEngine && \
 		gulp publishSettings && \
 		gulp publishSupport && \

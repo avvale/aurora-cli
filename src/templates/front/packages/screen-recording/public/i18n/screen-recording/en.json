@@ -1,0 +1,6 @@
+{
+    "ScreenRecordingExists": "A screen recording is already in progress.",
+    "ScreenRecordingNotSupported": "Screen recording is not supported in this browser.",
+    "ScreenRecordingStopError": "An error occurred while stopping the screen recording.",
+    "ShowScreenRecording": "Show Screen Recording"
+}

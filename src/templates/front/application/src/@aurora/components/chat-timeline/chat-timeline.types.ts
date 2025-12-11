@@ -1,7 +1,6 @@
 import { Account } from '@aurora';
 
-export enum SpinnerType
-{
+export enum SpinnerType {
     BUBBLE = 'BUBBLE',
     PLAIN = 'PLAIN',
 }
@@ -15,4 +14,5 @@ export interface ChatMessage {
     account: Account;
     status: string;
     message: string;
+    createdAt: string;
 }

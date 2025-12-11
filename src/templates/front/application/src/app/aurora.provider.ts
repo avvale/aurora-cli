@@ -5,6 +5,7 @@ import { AuroraGridManagerService, AuthenticationAuroraAdapterService, Authentic
 import '@aurora/aurora.prototypes';
 import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 import { provideMonacoEditor } from 'ngx-monaco-editor-v2';
+import { AuthGuard } from '@core/auth';
 
 export const provideAurora = (): Array<Provider | EnvironmentProviders> =>
 {

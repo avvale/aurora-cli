@@ -583,7 +583,7 @@ export class Add extends Command {
                         ImportDriver.createImportItems(
                             sharedModuleSourceFile,
                             '@app/o-auth/shared',
-                            ['AuthJwtStrategyRegistryModule', 'jwtConfig'],
+                            ['AuthJwtStrategyRegistryModule'],
                         );
 
                         const classDecoratorArguments =
@@ -599,7 +599,7 @@ export class Add extends Command {
                             );
                         // TODO, replace addElement with ArrayDriver.addArrayItems
                         importsArray.addElement(
-                            'AuthJwtStrategyRegistryModule.forRoot(jwtConfig)',
+                            'AuthJwtStrategyRegistryModule.forRoot()',
                             { useNewLines: true },
                         );
                         const exportsArray =
@@ -1527,6 +1527,11 @@ export class Add extends Command {
                     );
                     Installer.declareFrontRouting(routesSourceFile, 'settings');
                     routesSourceFile.saveSync();
+                    break;
+                }
+
+                case 'screenRecording': {
+                    await FrontHandler.addPackage(addCommandState);
                     break;
                 }
 
