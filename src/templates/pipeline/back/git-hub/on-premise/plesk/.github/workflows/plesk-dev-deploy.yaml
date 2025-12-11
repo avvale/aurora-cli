@@ -3,7 +3,7 @@ name: Testing, Build and Deploy Back on Plesk
 on:
     push:
         branches:
-            - "environments/plesk-dev"
+            - 'environments/plesk-dev'
 
     workflow_dispatch:
 
@@ -29,7 +29,7 @@ env:
     SOPS_AGE_SECRET_KEY: $\{{ secrets.PLESK_DEV_SOPS_AGE_SECRET_KEY }}
 
     # Node version
-    NODE_VERSION: "22"
+    NODE_VERSION: '22'
 
 jobs:
     deploy-artifact:
@@ -88,7 +88,9 @@ jobs:
               shell: bash
 
             - name: Zip artifact for deployment
-              run: zip artifact.zip ./dist/* ./package.json ./package-lock.json -r
+              run:
+                  zip artifact.zip ./dist/* ./package.json ./package-lock.json
+                  -r
 
             - name: Unzip artifact for deployment
               run: unzip -o artifact.zip -d deployment
@@ -133,7 +135,9 @@ jobs:
                   key: $\{{ env.SERVER_KEY }}
                   passphrase: $\{{ env.SERVER_KEY_PHRASE }}
                   port: $\{{ env.SERVER_PORT }}
-                  envs: DOT_ENV_B64, NODE_VERSION, OAUTH_PRIVATE_KEY, OAUTH_PUBLIC_KEY
+                  envs:
+                      DOT_ENV_B64, NODE_VERSION, OAUTH_PRIVATE_KEY,
+                      OAUTH_PUBLIC_KEY
                   script: |
                       PATH=$PATH:$\{{ env.SERVER_PATH }}/.nodenv/shims
                       whoami
