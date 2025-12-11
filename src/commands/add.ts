@@ -831,6 +831,10 @@ export class Add extends Command {
                 case 'support': {
                     await BackHandler.addPackage(addCommandState);
 
+                    ux.action.start('Installing dependencies');
+                    await exec('npm', ['install', '@nestjs/axios', 'axios']);
+                    ux.action.stop('Completed!');
+
                     const project = CommonDriver.createProject([
                         'tsconfig.json',
                     ]);
