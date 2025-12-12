@@ -182,7 +182,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 
     private makeResponse({{ toCamelCase schema.moduleName }}: {{ schema.aggregateName }}): {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response
     {
-        if (!{{ toCamelCase schema.moduleName }}) return;
+        if (!{{ toCamelCase schema.moduleName }}) return null;
 
         return new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Response(
             {{! PROPERTIES }}
