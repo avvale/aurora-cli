@@ -1,7 +1,7 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'Injectable' 'NotFoundException') path='@nestjs/common')
             (object items=(array 'diff' 'ICommandBus' 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items=(array schema.aggregateName (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdInput')) path='@api/graphql')
             (
@@ -100,6 +100,11 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
                 timezone,
             },
         ));
+
+        if (!{{ toCamelCase schema.moduleName }})
+            throw new NotFoundException(
+                `{{ toPascalCase schema.aggregateName }} with id: ${payload.id}, not found`,
+            );
 
         const dataToUpdate = diff(payload, {{ toCamelCase schema.moduleName }});
 

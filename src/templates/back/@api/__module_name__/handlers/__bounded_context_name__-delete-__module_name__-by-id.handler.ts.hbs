@@ -1,7 +1,7 @@
 {{
     setVar 'importsArray' (
         array
-            (object items=(array 'Injectable') path='@nestjs/common')
+            (object items=(array 'Injectable' 'NotFoundException') path='@nestjs/common')
             (object items=(array 'ICommandBus' 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items=schema.aggregateName path='@api/graphql')
             (
@@ -94,6 +94,11 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
                 timezone,
             },
         ));
+
+        if (!{{ toCamelCase schema.moduleName }})
+            throw new NotFoundException(
+                `{{ toPascalCase schema.aggregateName }} with id: ${id}, not found`,
+            );
 
         await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommand(
             {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}
