@@ -98,7 +98,7 @@ export class IamPermissionRoleMapper implements IMapper {
     private makeResponse(
         permissionRole: IamPermissionRole,
     ): IamPermissionRoleResponse {
-        if (!permissionRole) return;
+        if (!permissionRole) return null;
 
         return new IamPermissionRoleResponse(
             permissionRole.permissionId.value,

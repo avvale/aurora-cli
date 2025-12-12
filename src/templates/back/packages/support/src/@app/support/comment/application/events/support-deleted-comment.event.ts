@@ -5,8 +5,10 @@ export class SupportDeletedCommentEvent {
         public readonly event: {
             payload: {
                 id: string;
+                parentId: string;
                 rowId: number;
                 externalId: string;
+                externalParentId: string;
                 issueId: string;
                 accountId: string;
                 accountUsername: string;

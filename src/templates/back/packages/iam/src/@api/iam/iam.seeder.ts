@@ -33,18 +33,11 @@ export class IamSeeder {
     ) {}
 
     async main(): Promise<boolean> {
-        try {
-            this.administratorAccount = await this.queryBus.ask(
-                new IamFindAccountByIdQuery(
-                    IamPermissionHelper.administratorAccountId,
-                ),
-            );
-        } catch (error) {
-            // avoid error 404
-            if (error?.response?.statusCode === 404) {
-                /**/
-            }
-        }
+        this.administratorAccount = await this.queryBus.ask(
+            new IamFindAccountByIdQuery(
+                IamPermissionHelper.administratorAccountId,
+            ),
+        );
 
         if (this.administratorAccount) {
             // create bounded contexts and permissions

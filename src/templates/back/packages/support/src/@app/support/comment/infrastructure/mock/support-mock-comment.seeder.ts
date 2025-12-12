@@ -8,9 +8,11 @@ import {
     SupportCommentDescription,
     SupportCommentDisplayName,
     SupportCommentExternalId,
+    SupportCommentExternalParentId,
     SupportCommentId,
     SupportCommentIssueId,
     SupportCommentMeta,
+    SupportCommentParentId,
     SupportCommentRowId,
     SupportCommentScreenRecording,
     SupportCommentUpdatedAt,
@@ -35,8 +37,12 @@ export class SupportMockCommentSeeder extends MockSeeder<SupportComment> {
             this.collectionSource.push(
                 SupportComment.register(
                     new SupportCommentId(comment.id),
+                    new SupportCommentParentId(comment.parentId),
                     new SupportCommentRowId(comment.rowId),
                     new SupportCommentExternalId(comment.externalId),
+                    new SupportCommentExternalParentId(
+                        comment.externalParentId,
+                    ),
                     new SupportCommentIssueId(comment.issueId),
                     new SupportCommentAccountId(comment.accountId),
                     new SupportCommentAccountUsername(comment.accountUsername),

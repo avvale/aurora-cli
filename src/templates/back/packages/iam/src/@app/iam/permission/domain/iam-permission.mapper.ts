@@ -110,7 +110,7 @@ export class IamPermissionMapper implements IMapper {
     }
 
     private makeResponse(permission: IamPermission): IamPermissionResponse {
-        if (!permission) return;
+        if (!permission) return null;
 
         return new IamPermissionResponse(
             permission.id.value,

@@ -20,6 +20,7 @@ import {
     Inject,
     Injectable,
     Logger,
+    NotFoundException,
 } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { lastValueFrom } from 'rxjs';
@@ -44,6 +45,11 @@ export class SupportDeleteCommentByIdHandler {
                 timezone,
             }),
         );
+
+        if (!comment)
+            throw new NotFoundException(
+                `SupportComment with id: ${id}, not found`,
+            );
 
         await this.commandBus.dispatch(
             new SupportDeleteCommentByIdCommand(id, constraint, {

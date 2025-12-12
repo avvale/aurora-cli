@@ -5,7 +5,9 @@ export class SupportUpdatedCommentEvent {
         public readonly event: {
             payload: {
                 id: string;
+                parentId: string;
                 externalId: string;
+                externalParentId: string;
                 issueId: string;
                 accountId: string;
                 accountUsername: string;

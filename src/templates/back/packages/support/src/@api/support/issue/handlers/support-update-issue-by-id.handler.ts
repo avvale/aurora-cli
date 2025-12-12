@@ -16,7 +16,7 @@ import {
     QueryStatement,
 } from '@aurorajs.dev/core';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { lastValueFrom } from 'rxjs';
 
@@ -40,6 +40,11 @@ export class SupportUpdateIssueByIdHandler {
                 timezone,
             }),
         );
+
+        if (!issue)
+            throw new NotFoundException(
+                `SupportIssue with id: ${payload.id}, not found`,
+            );
 
         const dataToUpdate = diff(payload, issue);
 

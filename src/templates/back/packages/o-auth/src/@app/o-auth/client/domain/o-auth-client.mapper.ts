@@ -128,7 +128,7 @@ export class OAuthClientMapper implements IMapper {
     }
 
     private makeResponse(client: OAuthClient): OAuthClientResponse {
-        if (!client) return;
+        if (!client) return null;
 
         return new OAuthClientResponse(
             client.id.value,

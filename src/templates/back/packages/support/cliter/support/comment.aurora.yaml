@@ -14,6 +14,16 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+  - name: parentId
+    type: id
+    nullable: true
+    relationship:
+      type: many-to-one
+      aggregateName: SupportComment
+      modulePath: support/comment
+      key: id
+      field: parent
+      avoidConstraint: true
   - name: rowId
     type: bigint
     index: unique
@@ -24,6 +34,16 @@ aggregateProperties:
     maxLength: 64
     nullable: true
     index: index
+  - name: externalParentId
+    type: id
+    nullable: true
+    relationship:
+      type: many-to-one
+      aggregateName: SupportComment
+      modulePath: support/comment
+      key: id
+      field: externalParent
+      avoidConstraint: true
   - name: issueId
     type: id
     nullable: true

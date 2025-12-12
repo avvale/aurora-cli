@@ -19,7 +19,7 @@ import {
     QueryStatement,
 } from '@aurorajs.dev/core';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { lastValueFrom } from 'rxjs';
 
@@ -43,6 +43,11 @@ export class SupportUpdateCommentByIdHandler {
                 timezone,
             }),
         );
+
+        if (!comment)
+            throw new NotFoundException(
+                `SupportComment with id: ${payload.id}, not found`,
+            );
 
         const dataToUpdate = diff(payload, comment);
 

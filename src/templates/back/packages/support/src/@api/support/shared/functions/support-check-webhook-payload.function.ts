@@ -10,7 +10,7 @@ export const supportCheckWebhookPayload = async (
     moduleRef: ModuleRef,
     payload: ToolsDigestedWebhookEvent,
 ): Promise<boolean> => {
-    const queryBus = moduleRef.get(IQueryBus);
+    const queryBus = moduleRef.get(IQueryBus, { strict: false });
 
     // set headers to lowercase
     const lowercasedHeaders = Object.fromEntries(

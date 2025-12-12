@@ -104,7 +104,7 @@ export class ToolsWebhookMapper implements IMapper {
     }
 
     private makeResponse(webhook: ToolsWebhook): ToolsWebhookResponse {
-        if (!webhook) return;
+        if (!webhook) return null;
 
         return new ToolsWebhookResponse(
             webhook.id.value,

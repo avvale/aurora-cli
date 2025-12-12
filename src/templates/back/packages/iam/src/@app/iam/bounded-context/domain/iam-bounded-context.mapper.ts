@@ -126,7 +126,7 @@ export class IamBoundedContextMapper implements IMapper {
     private makeResponse(
         boundedContext: IamBoundedContext,
     ): IamBoundedContextResponse {
-        if (!boundedContext) return;
+        if (!boundedContext) return null;
 
         return new IamBoundedContextResponse(
             boundedContext.id.value,

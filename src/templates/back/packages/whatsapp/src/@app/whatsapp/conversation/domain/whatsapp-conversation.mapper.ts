@@ -1,4 +1,7 @@
-import { WhatsappConversation, WhatsappConversationResponse } from '@app/whatsapp/conversation';
+import {
+    WhatsappConversation,
+    WhatsappConversationResponse,
+} from '@app/whatsapp/conversation';
 import {
     WhatsappConversationCategory,
     WhatsappConversationCreatedAt,
@@ -13,20 +16,24 @@ import {
     WhatsappConversationWabaConversationId,
 } from '@app/whatsapp/conversation/domain/value-objects';
 import { WhatsappTimelineMapper } from '@app/whatsapp/timeline';
-import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IMapper,
+    LiteralObject,
+    MapperOptions,
+} from '@aurorajs.dev/core';
 
-export class WhatsappConversationMapper implements IMapper
-{
-    constructor(
-        public options: MapperOptions = { eagerLoading: true },
-    ) {}
+export class WhatsappConversationMapper implements IMapper {
+    constructor(public options: MapperOptions = { eagerLoading: true }) {}
 
     /**
      * Map object to aggregate
      * @param conversation
      */
-    mapModelToAggregate(conversation: LiteralObject, cQMetadata?: CQMetadata): WhatsappConversation
-    {
+    mapModelToAggregate(
+        conversation: LiteralObject,
+        cQMetadata?: CQMetadata,
+    ): WhatsappConversation {
         if (!conversation) return;
 
         return this.makeAggregate(conversation, cQMetadata);
@@ -36,19 +43,24 @@ export class WhatsappConversationMapper implements IMapper
      * Map array of objects to array aggregates
      * @param conversations
      */
-    mapModelsToAggregates(conversations: LiteralObject[], cQMetadata?: CQMetadata): WhatsappConversation[]
-    {
+    mapModelsToAggregates(
+        conversations: LiteralObject[],
+        cQMetadata?: CQMetadata,
+    ): WhatsappConversation[] {
         if (!Array.isArray(conversations)) return;
 
-        return conversations.map(conversation => this.makeAggregate(conversation, cQMetadata));
+        return conversations.map((conversation) =>
+            this.makeAggregate(conversation, cQMetadata),
+        );
     }
 
     /**
      * Map aggregate to response
      * @param conversation
      */
-    mapAggregateToResponse(conversation: WhatsappConversation): WhatsappConversationResponse
-    {
+    mapAggregateToResponse(
+        conversation: WhatsappConversation,
+    ): WhatsappConversationResponse {
         return this.makeResponse(conversation);
     }
 
@@ -56,34 +68,71 @@ export class WhatsappConversationMapper implements IMapper
      * Map array of aggregates to array responses
      * @param conversations
      */
-    mapAggregatesToResponses(conversations: WhatsappConversation[]): WhatsappConversationResponse[]
-    {
+    mapAggregatesToResponses(
+        conversations: WhatsappConversation[],
+    ): WhatsappConversationResponse[] {
         if (!Array.isArray(conversations)) return;
 
-        return conversations.map(conversation => this.makeResponse(conversation));
-    }
-
-    private makeAggregate(conversation: LiteralObject, cQMetadata?: CQMetadata): WhatsappConversation
-    {
-        return WhatsappConversation.register(
-            new WhatsappConversationId(conversation.id, { undefinable: true }),
-            new WhatsappConversationWabaConversationId(conversation.wabaConversationId, { undefinable: true }),
-            new WhatsappConversationTimelineId(conversation.timelineId, { undefinable: true }),
-            new WhatsappConversationWabaContactId(conversation.wabaContactId, { undefinable: true }),
-            new WhatsappConversationExpiration(conversation.expiration, { undefinable: true }),
-            new WhatsappConversationCategory(conversation.category, { undefinable: true }),
-            new WhatsappConversationIsBillable(conversation.isBillable, { undefinable: true }),
-            new WhatsappConversationPricingModel(conversation.pricingModel, { undefinable: true }),
-            new WhatsappConversationCreatedAt(conversation.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            new WhatsappConversationUpdatedAt(conversation.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            new WhatsappConversationDeletedAt(conversation.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            this.options.eagerLoading ? new WhatsappTimelineMapper({ eagerLoading: true }).mapModelToAggregate(conversation.timeline, cQMetadata) : undefined,
+        return conversations.map((conversation) =>
+            this.makeResponse(conversation),
         );
     }
 
-    private makeResponse(conversation: WhatsappConversation): WhatsappConversationResponse
-    {
-        if (!conversation) return;
+    private makeAggregate(
+        conversation: LiteralObject,
+        cQMetadata?: CQMetadata,
+    ): WhatsappConversation {
+        return WhatsappConversation.register(
+            new WhatsappConversationId(conversation.id, { undefinable: true }),
+            new WhatsappConversationWabaConversationId(
+                conversation.wabaConversationId,
+                { undefinable: true },
+            ),
+            new WhatsappConversationTimelineId(conversation.timelineId, {
+                undefinable: true,
+            }),
+            new WhatsappConversationWabaContactId(conversation.wabaContactId, {
+                undefinable: true,
+            }),
+            new WhatsappConversationExpiration(conversation.expiration, {
+                undefinable: true,
+            }),
+            new WhatsappConversationCategory(conversation.category, {
+                undefinable: true,
+            }),
+            new WhatsappConversationIsBillable(conversation.isBillable, {
+                undefinable: true,
+            }),
+            new WhatsappConversationPricingModel(conversation.pricingModel, {
+                undefinable: true,
+            }),
+            new WhatsappConversationCreatedAt(
+                conversation.createdAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            new WhatsappConversationUpdatedAt(
+                conversation.updatedAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            new WhatsappConversationDeletedAt(
+                conversation.deletedAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            this.options.eagerLoading
+                ? new WhatsappTimelineMapper({
+                      eagerLoading: true,
+                  }).mapModelToAggregate(conversation.timeline, cQMetadata)
+                : undefined,
+        );
+    }
+
+    private makeResponse(
+        conversation: WhatsappConversation,
+    ): WhatsappConversationResponse {
+        if (!conversation) return null;
 
         return new WhatsappConversationResponse(
             conversation.id.value,
@@ -97,7 +146,11 @@ export class WhatsappConversationMapper implements IMapper
             conversation.createdAt.value,
             conversation.updatedAt.value,
             conversation.deletedAt.value,
-            this.options.eagerLoading ? new WhatsappTimelineMapper({ eagerLoading: true }).mapAggregateToResponse(conversation.timeline) : undefined,
+            this.options.eagerLoading
+                ? new WhatsappTimelineMapper({
+                      eagerLoading: true,
+                  }).mapAggregateToResponse(conversation.timeline)
+                : undefined,
         );
     }
 }

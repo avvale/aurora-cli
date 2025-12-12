@@ -9,7 +9,7 @@ export const getKeyValue = async <
     moduleRef: ModuleRef,
     key: string,
 ): Promise<T> => {
-    const queryBus = moduleRef.get(IQueryBus);
+    const queryBus = moduleRef.get(IQueryBus, { strict: false });
 
     const keyValue: ToolsKeyValue = await queryBus.ask(
         new ToolsFindKeyValueQuery({ where: { key } }),

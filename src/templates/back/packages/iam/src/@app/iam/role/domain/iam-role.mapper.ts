@@ -103,7 +103,7 @@ export class IamRoleMapper implements IMapper {
     }
 
     private makeResponse(role: IamRole): IamRoleResponse {
-        if (!role) return;
+        if (!role) return null;
 
         return new IamRoleResponse(
             role.id.value,

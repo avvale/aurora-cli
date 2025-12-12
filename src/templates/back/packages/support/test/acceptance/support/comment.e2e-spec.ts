@@ -200,6 +200,38 @@ describe('comment', () => {
             });
     });
 
+    test('/REST:POST support/comment/create - Got 400 Conflict, CommentParentId is not allowed, must be a length of 36', () => {
+        return request(app.getHttpServer())
+            .post('/support/comment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                parentId: '*************************************',
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for SupportCommentParentId is not allowed, must be a length of 36',
+                );
+            });
+    });
+
+    test('/REST:POST support/comment/create - Got 400 Conflict, CommentExternalParentId is not allowed, must be a length of 36', () => {
+        return request(app.getHttpServer())
+            .post('/support/comment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                externalParentId: '*************************************',
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for SupportCommentExternalParentId is not allowed, must be a length of 36',
+                );
+            });
+    });
+
     test('/REST:POST support/comment/create - Got 400 Conflict, CommentIssueId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/support/comment/create')
@@ -463,8 +495,10 @@ describe('comment', () => {
                         supportCreateComment (payload:$payload)
                         {
                             id
+                            parentId
                             rowId
                             externalId
+                            externalParentId
                             issueId
                             accountId
                             accountUsername
@@ -595,8 +629,10 @@ describe('comment', () => {
                         supportCreateComment (payload:$payload)
                         {
                             id
+                            parentId
                             rowId
                             externalId
+                            externalParentId
                             issueId
                             accountId
                             accountUsername

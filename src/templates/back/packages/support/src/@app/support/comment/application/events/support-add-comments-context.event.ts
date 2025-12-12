@@ -28,7 +28,10 @@ export class SupportAddCommentsContextEvent extends AggregateRoot {
                         new SupportCreatedCommentEvent({
                             payload: {
                                 id: comment.id.value,
+                                parentId: comment.parentId?.value,
                                 externalId: comment.externalId?.value,
+                                externalParentId:
+                                    comment.externalParentId?.value,
                                 issueId: comment.issueId?.value,
                                 accountId: comment.accountId?.value,
                                 accountUsername: comment.accountUsername?.value,
@@ -56,7 +59,10 @@ export class SupportAddCommentsContextEvent extends AggregateRoot {
                         new SupportUpdatedCommentEvent({
                             payload: {
                                 id: comment.id.value,
+                                parentId: comment.parentId?.value,
                                 externalId: comment.externalId?.value,
+                                externalParentId:
+                                    comment.externalParentId?.value,
                                 issueId: comment.issueId?.value,
                                 accountId: comment.accountId?.value,
                                 accountUsername: comment.accountUsername?.value,

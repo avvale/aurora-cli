@@ -2,7 +2,7 @@ import { IamBoundedContext } from '@api/graphql';
 import { IamBoundedContextDto } from '@api/iam/bounded-context';
 import { IamFindBoundedContextQuery } from '@app/iam/bounded-context';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamFindBoundedContextHandler {
@@ -13,10 +13,15 @@ export class IamFindBoundedContextHandler {
         constraint?: QueryStatement,
         timezone?: string,
     ): Promise<IamBoundedContext | IamBoundedContextDto> {
-        return await this.queryBus.ask(
+        const boundedContext = await this.queryBus.ask(
             new IamFindBoundedContextQuery(queryStatement, constraint, {
                 timezone,
             }),
         );
+
+        if (!boundedContext)
+            throw new NotFoundException(`IamBoundedContext not found`);
+
+        return boundedContext;
     }
 }

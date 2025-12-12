@@ -17,7 +17,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateBoundedContextByIdHandler {
@@ -39,6 +39,11 @@ export class IamUpdateBoundedContextByIdHandler {
                 timezone,
             }),
         );
+
+        if (!boundedContext)
+            throw new NotFoundException(
+                `IamBoundedContext with id: ${payload.id}, not found`,
+            );
 
         const dataToUpdate = diff(payload, boundedContext);
 

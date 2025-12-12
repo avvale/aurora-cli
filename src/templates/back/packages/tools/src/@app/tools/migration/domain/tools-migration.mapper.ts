@@ -118,7 +118,7 @@ export class ToolsMigrationMapper implements IMapper {
     }
 
     private makeResponse(migration: ToolsMigration): ToolsMigrationResponse {
-        if (!migration) return;
+        if (!migration) return null;
 
         return new ToolsMigrationResponse(
             migration.id.value,

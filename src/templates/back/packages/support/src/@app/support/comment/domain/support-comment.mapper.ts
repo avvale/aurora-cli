@@ -9,9 +9,11 @@ import {
     SupportCommentDescription,
     SupportCommentDisplayName,
     SupportCommentExternalId,
+    SupportCommentExternalParentId,
     SupportCommentId,
     SupportCommentIssueId,
     SupportCommentMeta,
+    SupportCommentParentId,
     SupportCommentRowId,
     SupportCommentScreenRecording,
     SupportCommentUpdatedAt,
@@ -81,8 +83,12 @@ export class SupportCommentMapper implements IMapper {
     ): SupportComment {
         return SupportComment.register(
             new SupportCommentId(comment.id, { undefinable: true }),
+            new SupportCommentParentId(comment.parentId, { undefinable: true }),
             new SupportCommentRowId(comment.rowId, { undefinable: true }),
             new SupportCommentExternalId(comment.externalId, {
+                undefinable: true,
+            }),
+            new SupportCommentExternalParentId(comment.externalParentId, {
                 undefinable: true,
             }),
             new SupportCommentIssueId(comment.issueId, { undefinable: true }),
@@ -121,6 +127,16 @@ export class SupportCommentMapper implements IMapper {
                 { addTimezone: cQMetadata?.timezone },
             ),
             this.options.eagerLoading
+                ? new SupportCommentMapper({
+                      eagerLoading: true,
+                  }).mapModelToAggregate(comment.parent, cQMetadata)
+                : undefined,
+            this.options.eagerLoading
+                ? new SupportCommentMapper({
+                      eagerLoading: true,
+                  }).mapModelToAggregate(comment.externalParent, cQMetadata)
+                : undefined,
+            this.options.eagerLoading
                 ? new SupportIssueMapper({
                       eagerLoading: true,
                   }).mapModelToAggregate(comment.issue, cQMetadata)
@@ -134,12 +150,14 @@ export class SupportCommentMapper implements IMapper {
     }
 
     private makeResponse(comment: SupportComment): SupportCommentResponse {
-        if (!comment) return;
+        if (!comment) return null;
 
         return new SupportCommentResponse(
             comment.id.value,
+            comment.parentId.value,
             comment.rowId.value,
             comment.externalId.value,
+            comment.externalParentId.value,
             comment.issueId.value,
             comment.accountId.value,
             comment.accountUsername.value,
@@ -151,6 +169,16 @@ export class SupportCommentMapper implements IMapper {
             comment.createdAt.value,
             comment.updatedAt.value,
             comment.deletedAt.value,
+            this.options.eagerLoading
+                ? new SupportCommentMapper({
+                      eagerLoading: true,
+                  }).mapAggregateToResponse(comment.parent)
+                : undefined,
+            this.options.eagerLoading
+                ? new SupportCommentMapper({
+                      eagerLoading: true,
+                  }).mapAggregateToResponse(comment.externalParent)
+                : undefined,
             this.options.eagerLoading
                 ? new SupportIssueMapper({
                       eagerLoading: true,

@@ -117,7 +117,7 @@ export class IamUserMapper implements IMapper {
     }
 
     private makeResponse(user: IamUser): IamUserResponse {
-        if (!user) return;
+        if (!user) return null;
 
         return new IamUserResponse(
             user.id.value,

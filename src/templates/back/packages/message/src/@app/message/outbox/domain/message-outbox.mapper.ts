@@ -114,7 +114,7 @@ export class MessageOutboxMapper implements IMapper {
     }
 
     private makeResponse(outbox: MessageOutbox): MessageOutboxResponse {
-        if (!outbox) return;
+        if (!outbox) return null;
 
         return new MessageOutboxResponse(
             outbox.id.value,

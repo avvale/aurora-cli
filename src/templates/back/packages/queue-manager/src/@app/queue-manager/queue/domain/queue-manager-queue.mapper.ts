@@ -97,7 +97,7 @@ export class QueueManagerQueueMapper implements IMapper {
     }
 
     private makeResponse(queue: QueueManagerQueue): QueueManagerQueueResponse {
-        if (!queue) return;
+        if (!queue) return null;
 
         return new QueueManagerQueueResponse(
             queue.id.value,

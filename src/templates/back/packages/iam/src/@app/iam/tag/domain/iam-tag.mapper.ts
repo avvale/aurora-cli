@@ -82,7 +82,7 @@ export class IamTagMapper implements IMapper {
     }
 
     private makeResponse(tag: IamTag): IamTagResponse {
-        if (!tag) return;
+        if (!tag) return null;
 
         return new IamTagResponse(
             tag.id.value,

@@ -174,7 +174,7 @@ export class AuditingSideEffectMapper implements IMapper {
     private makeResponse(
         sideEffect: AuditingSideEffect,
     ): AuditingSideEffectResponse {
-        if (!sideEffect) return;
+        if (!sideEffect) return null;
 
         return new AuditingSideEffectResponse(
             sideEffect.id.value,

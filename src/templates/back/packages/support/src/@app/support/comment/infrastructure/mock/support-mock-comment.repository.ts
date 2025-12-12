@@ -12,9 +12,11 @@ import {
     SupportCommentDescription,
     SupportCommentDisplayName,
     SupportCommentExternalId,
+    SupportCommentExternalParentId,
     SupportCommentId,
     SupportCommentIssueId,
     SupportCommentMeta,
+    SupportCommentParentId,
     SupportCommentRowId,
     SupportCommentScreenRecording,
     SupportCommentUpdatedAt,
@@ -52,8 +54,12 @@ export class SupportMockCommentRepository
             this.collectionSource.push(
                 SupportComment.register(
                     new SupportCommentId(itemCollection.id),
+                    new SupportCommentParentId(itemCollection.parentId),
                     new SupportCommentRowId(itemCollection.rowId),
                     new SupportCommentExternalId(itemCollection.externalId),
+                    new SupportCommentExternalParentId(
+                        itemCollection.externalParentId,
+                    ),
                     new SupportCommentIssueId(itemCollection.issueId),
                     new SupportCommentAccountId(itemCollection.accountId),
                     new SupportCommentAccountUsername(

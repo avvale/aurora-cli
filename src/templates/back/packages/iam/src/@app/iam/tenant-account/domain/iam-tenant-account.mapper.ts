@@ -97,7 +97,7 @@ export class IamTenantAccountMapper implements IMapper {
     private makeResponse(
         tenantAccount: IamTenantAccount,
     ): IamTenantAccountResponse {
-        if (!tenantAccount) return;
+        if (!tenantAccount) return null;
 
         return new IamTenantAccountResponse(
             tenantAccount.tenantId.value,

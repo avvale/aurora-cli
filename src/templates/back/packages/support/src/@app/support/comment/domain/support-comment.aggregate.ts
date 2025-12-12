@@ -14,9 +14,11 @@ import {
     SupportCommentDescription,
     SupportCommentDisplayName,
     SupportCommentExternalId,
+    SupportCommentExternalParentId,
     SupportCommentId,
     SupportCommentIssueId,
     SupportCommentMeta,
+    SupportCommentParentId,
     SupportCommentRowId,
     SupportCommentScreenRecording,
     SupportCommentUpdatedAt,
@@ -27,8 +29,10 @@ import { AggregateRoot } from '@nestjs/cqrs';
 
 export class SupportComment extends AggregateRoot {
     id: SupportCommentId;
+    parentId: SupportCommentParentId;
     rowId: SupportCommentRowId;
     externalId: SupportCommentExternalId;
+    externalParentId: SupportCommentExternalParentId;
     issueId: SupportCommentIssueId;
     accountId: SupportCommentAccountId;
     accountUsername: SupportCommentAccountUsername;
@@ -40,13 +44,17 @@ export class SupportComment extends AggregateRoot {
     createdAt: SupportCommentCreatedAt;
     updatedAt: SupportCommentUpdatedAt;
     deletedAt: SupportCommentDeletedAt;
+    parent: SupportComment;
+    externalParent: SupportComment;
     issue: SupportIssue;
     account: IamAccount;
 
     constructor(
         id: SupportCommentId,
+        parentId: SupportCommentParentId,
         rowId: SupportCommentRowId,
         externalId: SupportCommentExternalId,
+        externalParentId: SupportCommentExternalParentId,
         issueId: SupportCommentIssueId,
         accountId: SupportCommentAccountId,
         accountUsername: SupportCommentAccountUsername,
@@ -58,13 +66,17 @@ export class SupportComment extends AggregateRoot {
         createdAt: SupportCommentCreatedAt,
         updatedAt: SupportCommentUpdatedAt,
         deletedAt: SupportCommentDeletedAt,
+        parent?: SupportComment,
+        externalParent?: SupportComment,
         issue?: SupportIssue,
         account?: IamAccount,
     ) {
         super();
         this.id = id;
+        this.parentId = parentId;
         this.rowId = rowId;
         this.externalId = externalId;
+        this.externalParentId = externalParentId;
         this.issueId = issueId;
         this.accountId = accountId;
         this.accountUsername = accountUsername;
@@ -76,14 +88,18 @@ export class SupportComment extends AggregateRoot {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+        this.parent = parent;
+        this.externalParent = externalParent;
         this.issue = issue;
         this.account = account;
     }
 
     static register(
         id: SupportCommentId,
+        parentId: SupportCommentParentId,
         rowId: SupportCommentRowId,
         externalId: SupportCommentExternalId,
+        externalParentId: SupportCommentExternalParentId,
         issueId: SupportCommentIssueId,
         accountId: SupportCommentAccountId,
         accountUsername: SupportCommentAccountUsername,
@@ -95,13 +111,17 @@ export class SupportComment extends AggregateRoot {
         createdAt: SupportCommentCreatedAt,
         updatedAt: SupportCommentUpdatedAt,
         deletedAt: SupportCommentDeletedAt,
+        parent?: SupportComment,
+        externalParent?: SupportComment,
         issue?: SupportIssue,
         account?: IamAccount,
     ): SupportComment {
         return new SupportComment(
             id,
+            parentId,
             rowId,
             externalId,
+            externalParentId,
             issueId,
             accountId,
             accountUsername,
@@ -113,6 +133,8 @@ export class SupportComment extends AggregateRoot {
             createdAt,
             updatedAt,
             deletedAt,
+            parent,
+            externalParent,
             issue,
             account,
         );
@@ -123,7 +145,9 @@ export class SupportComment extends AggregateRoot {
             new SupportCreatedCommentEvent({
                 payload: {
                     id: event.payload.id.value,
+                    parentId: event.payload.parentId?.value,
                     externalId: event.payload.externalId?.value,
+                    externalParentId: event.payload.externalParentId?.value,
                     issueId: event.payload.issueId?.value,
                     accountId: event.payload.accountId?.value,
                     accountUsername: event.payload.accountUsername?.value,
@@ -146,7 +170,9 @@ export class SupportComment extends AggregateRoot {
             new SupportUpdatedCommentEvent({
                 payload: {
                     id: event.payload.id?.value,
+                    parentId: event.payload.parentId?.value,
                     externalId: event.payload.externalId?.value,
+                    externalParentId: event.payload.externalParentId?.value,
                     issueId: event.payload.issueId?.value,
                     accountId: event.payload.accountId?.value,
                     accountUsername: event.payload.accountUsername?.value,
@@ -169,8 +195,10 @@ export class SupportComment extends AggregateRoot {
             new SupportDeletedCommentEvent({
                 payload: {
                     id: event.payload.id.value,
+                    parentId: event.payload.parentId?.value,
                     rowId: event.payload.rowId.value,
                     externalId: event.payload.externalId?.value,
+                    externalParentId: event.payload.externalParentId?.value,
                     issueId: event.payload.issueId?.value,
                     accountId: event.payload.accountId?.value,
                     accountUsername: event.payload.accountUsername?.value,
@@ -191,8 +219,10 @@ export class SupportComment extends AggregateRoot {
     toDTO(): LiteralObject {
         return {
             id: this.id.value,
+            parentId: this.parentId?.value,
             rowId: this.rowId.value,
             externalId: this.externalId?.value,
+            externalParentId: this.externalParentId?.value,
             issueId: this.issueId?.value,
             accountId: this.accountId?.value,
             accountUsername: this.accountUsername?.value,
@@ -204,6 +234,8 @@ export class SupportComment extends AggregateRoot {
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
+            parent: this.parent?.toDTO(),
+            externalParent: this.externalParent?.toDTO(),
             issue: this.issue?.toDTO(),
             account: this.account?.toDTO(),
         };
@@ -213,7 +245,9 @@ export class SupportComment extends AggregateRoot {
     toRepository(): LiteralObject {
         return {
             id: this.id.value,
+            parentId: this.parentId?.value,
             externalId: this.externalId?.value,
+            externalParentId: this.externalParentId?.value,
             issueId: this.issueId?.value,
             accountId: this.accountId?.value,
             accountUsername: this.accountUsername?.value,
@@ -225,6 +259,8 @@ export class SupportComment extends AggregateRoot {
             createdAt: this.createdAt?.value,
             updatedAt: this.updatedAt?.value,
             deletedAt: this.deletedAt?.value,
+            parent: this.parent?.toDTO(),
+            externalParent: this.externalParent?.toDTO(),
             issue: this.issue?.toDTO(),
             account: this.account?.toDTO(),
         };

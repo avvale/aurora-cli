@@ -150,7 +150,7 @@ export class SupportIssueMapper implements IMapper {
     }
 
     private makeResponse(issue: SupportIssue): SupportIssueResponse {
-        if (!issue) return;
+        if (!issue) return null;
 
         return new SupportIssueResponse(
             issue.id.value,

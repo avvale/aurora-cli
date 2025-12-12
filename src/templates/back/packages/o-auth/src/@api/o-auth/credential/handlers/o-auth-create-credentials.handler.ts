@@ -66,49 +66,42 @@ export class OAuthCreateCredentialsHandler {
         }
 
         if (payload.grantType === OAuthClientGrantType.CLIENT_CREDENTIALS) {
-            try {
-                // get account with username
-                const account = await this.queryBus.ask(
-                    new IamFindAccountQuery({
-                        where: {
-                            username: payload.username,
-                            type: IamAccountType.SERVICE,
-                            isActive: true,
-                        },
+            // get account with username
+            const account = await this.queryBus.ask(
+                new IamFindAccountQuery({
+                    where: {
+                        username: payload.username,
+                        type: IamAccountType.SERVICE,
+                        isActive: true,
+                    },
+                }),
+            );
+            if (!account) throw new UnauthorizedException();
+
+            // get client
+            const client = await this.queryBus.ask(
+                new OAuthFindClientQuery({
+                    where: {
+                        id: account.clientId,
+                        secret: payload.clientSecret,
+                        grantType: OAuthClientGrantType.CLIENT_CREDENTIALS,
+                    },
+                }),
+            );
+            if (!client) throw new UnauthorizedException();
+
+            // get account to create credential and consolidate permissions
+            await this.consolidatePermissions(
+                await this.queryBus.ask(
+                    new IamFindAccountByIdQuery(account.id, {
+                        include: [{ association: 'roles' }],
                     }),
-                );
+                ),
+                timezone,
+                auditing,
+            );
 
-                // get client
-                const client = await this.queryBus.ask(
-                    new OAuthFindClientQuery({
-                        where: {
-                            id: account.clientId,
-                            secret: payload.clientSecret,
-                            grantType: OAuthClientGrantType.CLIENT_CREDENTIALS,
-                        },
-                    }),
-                );
-
-                // get account to create credential and consolidate permissions
-                await this.consolidatePermissions(
-                    await this.queryBus.ask(
-                        new IamFindAccountByIdQuery(account.id, {
-                            include: [{ association: 'roles' }],
-                        }),
-                    ),
-                    timezone,
-                    auditing,
-                );
-
-                return await this.createCredential(client, account);
-            } catch (error) {
-                // if account not found throw unauthorized exception
-                // if client not found throw unauthorized exception
-                if (error.status === 404) {
-                    throw new UnauthorizedException();
-                }
-                throw error;
-            }
+            return await this.createCredential(client, account);
         }
 
         if (payload.grantType === OAuthClientGrantType.PASSWORD) {

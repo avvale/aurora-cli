@@ -123,7 +123,7 @@ export class QueueManagerJobRegistryMapper implements IMapper {
     private makeResponse(
         jobRegistry: QueueManagerJobRegistry,
     ): QueueManagerJobRegistryResponse {
-        if (!jobRegistry) return;
+        if (!jobRegistry) return null;
 
         return new QueueManagerJobRegistryResponse(
             jobRegistry.id.value,

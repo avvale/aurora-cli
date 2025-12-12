@@ -40,8 +40,11 @@ describe('SupportCreateCommentCommandHandler', () => {
                     new SupportCreateCommentCommand(
                         {
                             id: supportMockCommentData[0].id,
+                            parentId: supportMockCommentData[0].parentId,
                             rowId: supportMockCommentData[0].rowId,
                             externalId: supportMockCommentData[0].externalId,
+                            externalParentId:
+                                supportMockCommentData[0].externalParentId,
                             issueId: supportMockCommentData[0].issueId,
                             accountId: supportMockCommentData[0].accountId,
                             accountUsername:

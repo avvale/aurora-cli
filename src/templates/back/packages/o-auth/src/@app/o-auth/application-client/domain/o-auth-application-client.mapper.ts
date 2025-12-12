@@ -101,7 +101,7 @@ export class OAuthApplicationClientMapper implements IMapper {
     private makeResponse(
         applicationClient: OAuthApplicationClient,
     ): OAuthApplicationClientResponse {
-        if (!applicationClient) return;
+        if (!applicationClient) return null;
 
         return new OAuthApplicationClientResponse(
             applicationClient.applicationId.value,

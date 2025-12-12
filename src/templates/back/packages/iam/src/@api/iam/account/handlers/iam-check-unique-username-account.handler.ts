@@ -7,25 +7,21 @@ export class IamCheckUniqueUsernameAccountHandler {
     constructor(private readonly queryBus: IQueryBus) {}
 
     async main(username: string, avoidUsernames?: string[]): Promise<boolean> {
-        try {
-            const account = await this.queryBus.ask(
-                new IamFindAccountQuery({
-                    where: {
-                        [Operator.and]: [
-                            { username },
-                            {
-                                username: {
-                                    [Operator.notIn]: avoidUsernames,
-                                },
+        const account = await this.queryBus.ask(
+            new IamFindAccountQuery({
+                where: {
+                    [Operator.and]: [
+                        { username },
+                        {
+                            username: {
+                                [Operator.notIn]: avoidUsernames,
                             },
-                        ],
-                    },
-                }),
-            );
+                        },
+                    ],
+                },
+            }),
+        );
 
-            return !account;
-        } catch (error) {
-            if (error.status === 404) return true;
-        }
+        return !account;
     }
 }

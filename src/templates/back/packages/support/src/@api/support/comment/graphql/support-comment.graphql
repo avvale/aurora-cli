@@ -1,7 +1,11 @@
 type SupportComment {
     id: ID!
+    parentId: ID
+    parent: SupportComment
     rowId: GraphQLInt!
     externalId: GraphQLString
+    externalParentId: ID
+    externalParent: SupportComment
     issueId: ID
     issue: SupportIssue
     accountId: ID
@@ -19,7 +23,9 @@ type SupportComment {
 
 input SupportCreateCommentInput {
     id: ID!
+    parentId: ID
     externalId: GraphQLString
+    externalParentId: ID
     issueId: ID
     accountId: ID
     accountUsername: GraphQLString
@@ -32,7 +38,9 @@ input SupportCreateCommentInput {
 
 input SupportUpdateCommentByIdInput {
     id: ID!
+    parentId: ID
     externalId: GraphQLString
+    externalParentId: ID
     issueId: ID
     accountId: ID
     accountUsername: GraphQLString
@@ -45,7 +53,9 @@ input SupportUpdateCommentByIdInput {
 
 input SupportUpdateCommentsInput {
     id: ID
+    parentId: ID
     externalId: GraphQLString
+    externalParentId: ID
     issueId: ID
     accountId: ID
     accountUsername: GraphQLString

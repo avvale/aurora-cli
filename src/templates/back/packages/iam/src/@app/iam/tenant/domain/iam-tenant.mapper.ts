@@ -111,7 +111,7 @@ export class IamTenantMapper implements IMapper {
     }
 
     private makeResponse(tenant: IamTenant): IamTenantResponse {
-        if (!tenant) return;
+        if (!tenant) return null;
 
         return new IamTenantResponse(
             tenant.id.value,

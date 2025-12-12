@@ -133,7 +133,7 @@ export class OAuthAccessTokenMapper implements IMapper {
     private makeResponse(
         accessToken: OAuthAccessToken,
     ): OAuthAccessTokenResponse {
-        if (!accessToken) return;
+        if (!accessToken) return null;
 
         return new OAuthAccessTokenResponse(
             accessToken.id.value,

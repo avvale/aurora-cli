@@ -9,9 +9,11 @@ import {
     SupportCommentDescription,
     SupportCommentDisplayName,
     SupportCommentExternalId,
+    SupportCommentExternalParentId,
     SupportCommentId,
     SupportCommentIssueId,
     SupportCommentMeta,
+    SupportCommentParentId,
     SupportCommentScreenRecording,
     SupportCommentUpdatedAt,
 } from '@app/support/comment/domain/value-objects';
@@ -29,7 +31,9 @@ export class SupportUpdateCommentByIdService {
     async main(
         payload: {
             id: SupportCommentId;
+            parentId?: SupportCommentParentId;
             externalId?: SupportCommentExternalId;
+            externalParentId?: SupportCommentExternalParentId;
             issueId?: SupportCommentIssueId;
             accountId?: SupportCommentAccountId;
             accountUsername?: SupportCommentAccountUsername;
@@ -45,8 +49,10 @@ export class SupportUpdateCommentByIdService {
         // create aggregate with factory pattern
         const comment = SupportComment.register(
             payload.id,
+            payload.parentId,
             undefined, // rowId
             payload.externalId,
+            payload.externalParentId,
             payload.issueId,
             payload.accountId,
             payload.accountUsername,

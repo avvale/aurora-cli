@@ -91,7 +91,7 @@ export class IamRoleAccountMapper implements IMapper {
     }
 
     private makeResponse(roleAccount: IamRoleAccount): IamRoleAccountResponse {
-        if (!roleAccount) return;
+        if (!roleAccount) return null;
 
         return new IamRoleAccountResponse(
             roleAccount.roleId.value,

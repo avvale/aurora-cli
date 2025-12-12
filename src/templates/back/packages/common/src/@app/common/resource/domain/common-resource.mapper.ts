@@ -75,7 +75,7 @@ export class CommonResourceMapper implements IMapper
 
     private makeResponse(resource: CommonResource): CommonResourceResponse
     {
-        if (!resource) return;
+        if (!resource) return null;
 
         return new CommonResourceResponse(
             resource.id.value,

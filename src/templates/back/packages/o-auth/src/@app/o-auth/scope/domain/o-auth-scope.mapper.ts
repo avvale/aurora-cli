@@ -92,7 +92,7 @@ export class OAuthScopeMapper implements IMapper {
     }
 
     private makeResponse(scope: OAuthScope): OAuthScopeResponse {
-        if (!scope) return;
+        if (!scope) return null;
 
         return new OAuthScopeResponse(
             scope.id.value,

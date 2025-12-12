@@ -22,7 +22,11 @@
     ],
     "bracketSameLine": false,
     "bracketSpacing": true,
-    "plugins": ["prettier-plugin-organize-attributes", "prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
+    "plugins": [
+        "prettier-plugin-organize-attributes",
+        "prettier-plugin-organize-imports",
+        "prettier-plugin-tailwindcss"
+    ],
     "htmlWhitespaceSensitivity": "ignore",
     "printWidth": 80,
     "semi": true,

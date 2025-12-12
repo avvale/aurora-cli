@@ -26,7 +26,7 @@ export class SupportCreateIssueHandler {
         private readonly storageAccountFileManagerService: StorageAccountFileManagerService,
         private readonly clickupService: ClickupService,
         @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-    ) { }
+    ) {}
 
     async main(
         account: IamAccountResponse,
@@ -56,9 +56,9 @@ export class SupportCreateIssueHandler {
 
         const screenRecordingUploaded = payload.screenRecording
             ? await this.storageAccountFileManagerService.uploadFile({
-                ...payload.screenRecording,
-                name: payload.screenRecording.file.name,
-            })
+                  ...payload.screenRecording,
+                  name: payload.screenRecording.file.name,
+              })
             : null;
 
         const clickupTaskPlatformApiKey = await this.cacheManager.get<string>(

@@ -142,7 +142,7 @@ export class MessageInboxMapper implements IMapper {
     }
 
     private makeResponse(inbox: MessageInbox): MessageInboxResponse {
-        if (!inbox) return;
+        if (!inbox) return null;
 
         return new MessageInboxResponse(
             inbox.id.value,

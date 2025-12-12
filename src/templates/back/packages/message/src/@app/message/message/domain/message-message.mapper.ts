@@ -148,7 +148,7 @@ export class MessageMessageMapper implements IMapper {
     }
 
     private makeResponse(message: MessageMessage): MessageMessageResponse {
-        if (!message) return;
+        if (!message) return null;
 
         return new MessageMessageResponse(
             message.id.value,

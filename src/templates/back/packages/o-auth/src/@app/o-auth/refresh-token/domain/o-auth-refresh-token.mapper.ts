@@ -125,7 +125,7 @@ export class OAuthRefreshTokenMapper implements IMapper {
     private makeResponse(
         refreshToken: OAuthRefreshToken,
     ): OAuthRefreshTokenResponse {
-        if (!refreshToken) return;
+        if (!refreshToken) return null;
 
         return new OAuthRefreshTokenResponse(
             refreshToken.id.value,

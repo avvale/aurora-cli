@@ -10,7 +10,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteBoundedContextByIdHandler {
@@ -30,6 +30,11 @@ export class IamDeleteBoundedContextByIdHandler {
                 timezone,
             }),
         );
+
+        if (!boundedContext)
+            throw new NotFoundException(
+                `IamBoundedContext with id: ${id}, not found`,
+            );
 
         await this.commandBus.dispatch(
             new IamDeleteBoundedContextByIdCommand(id, constraint, {

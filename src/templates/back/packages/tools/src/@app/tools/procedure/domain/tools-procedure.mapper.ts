@@ -132,7 +132,7 @@ export class ToolsProcedureMapper implements IMapper {
     }
 
     private makeResponse(procedure: ToolsProcedure): ToolsProcedureResponse {
-        if (!procedure) return;
+        if (!procedure) return null;
 
         return new ToolsProcedureResponse(
             procedure.id.value,

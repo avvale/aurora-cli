@@ -2,7 +2,7 @@ import { SupportIssue } from '@api/graphql';
 import { SupportIssueDto } from '@api/support/issue';
 import { SupportFindIssueByIdQuery } from '@app/support/issue';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class SupportFindIssueByIdHandler {
@@ -13,10 +13,17 @@ export class SupportFindIssueByIdHandler {
         constraint?: QueryStatement,
         timezone?: string,
     ): Promise<SupportIssue | SupportIssueDto> {
-        return await this.queryBus.ask(
+        const issue = await this.queryBus.ask(
             new SupportFindIssueByIdQuery(id, constraint, {
                 timezone,
             }),
         );
+
+        if (!issue)
+            throw new NotFoundException(
+                `SupportIssue with id: ${id}, not found`,
+            );
+
+        return issue;
     }
 }

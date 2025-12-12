@@ -67,11 +67,13 @@ export class SupportCreateWebhookConfigHandler {
             'taskTimeEstimateUpdated',
         ];
 
+        const endpoint = `${this.configService.get('APP_URL')}/tools/webhook/digest`;
+
         const webhookResponse = await lastValueFrom(
             this.clickupService.createWebhook(
                 supportTaskPlatformTeamId,
                 {
-                    endpoint: `${this.configService.get('APP_URL')}/webhooks`,
+                    endpoint,
                     events,
                     spaceId: +supportTaskPlatformSpaceId,
                     folderId: +supportTaskPlatformFolderId,
@@ -90,7 +92,7 @@ export class SupportCreateWebhookConfigHandler {
                     id: webhookId,
                     name: 'Support ClickUp Webhook Subscription',
                     service: 'clickup',
-                    endpoint: `${this.configService.get('APP_URL')}/tools/webhook/digest`,
+                    endpoint,
                     externalId: webhookResponse.webhook.id,
                     events,
                     secret: webhookResponse.webhook.secret,

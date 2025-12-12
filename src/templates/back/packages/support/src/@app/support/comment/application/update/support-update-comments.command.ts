@@ -4,7 +4,9 @@ export class SupportUpdateCommentsCommand {
     constructor(
         public readonly payload: {
             id?: string;
+            parentId?: string;
             externalId?: string;
+            externalParentId?: string;
             issueId?: string;
             accountId?: string;
             accountUsername?: string;

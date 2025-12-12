@@ -151,6 +151,20 @@ export class SupportCommentModel extends Model<SupportCommentModel> {
     })
     id: string;
 
+    @ForeignKey(() => SupportCommentModel)
+    @Column({
+        field: 'parentId',
+        allowNull: true,
+        type: DataTypes.UUID,
+    })
+    parentId: string;
+
+    @BelongsTo(() => SupportCommentModel, {
+        constraints: false,
+        foreignKey: 'parentId',
+    })
+    parent: SupportCommentModel;
+
     @Column({
         field: 'rowId',
         autoIncrement: true,
@@ -165,6 +179,20 @@ export class SupportCommentModel extends Model<SupportCommentModel> {
         type: DataTypes.STRING(64),
     })
     externalId: string;
+
+    @ForeignKey(() => SupportCommentModel)
+    @Column({
+        field: 'externalParentId',
+        allowNull: true,
+        type: DataTypes.UUID,
+    })
+    externalParentId: string;
+
+    @BelongsTo(() => SupportCommentModel, {
+        constraints: false,
+        foreignKey: 'externalParentId',
+    })
+    externalParent: SupportCommentModel;
 
     @ForeignKey(() => SupportIssueModel)
     @Column({

@@ -110,7 +110,7 @@ export class MessageInboxSettingMapper implements IMapper {
     private makeResponse(
         inboxSetting: MessageInboxSetting,
     ): MessageInboxSettingResponse {
-        if (!inboxSetting) return;
+        if (!inboxSetting) return null;
 
         return new MessageInboxSettingResponse(
             inboxSetting.id.value,

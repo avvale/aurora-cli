@@ -14,20 +14,24 @@ import {
     CommonLangSort,
     CommonLangUpdatedAt,
 } from '@app/common/lang/domain/value-objects';
-import { CQMetadata, IMapper, LiteralObject, MapperOptions } from '@aurorajs.dev/core';
+import {
+    CQMetadata,
+    IMapper,
+    LiteralObject,
+    MapperOptions,
+} from '@aurorajs.dev/core';
 
-export class CommonLangMapper implements IMapper
-{
-    constructor(
-        public options: MapperOptions = { eagerLoading: true },
-    ) {}
+export class CommonLangMapper implements IMapper {
+    constructor(public options: MapperOptions = { eagerLoading: true }) {}
 
     /**
      * Map object to aggregate
      * @param lang
      */
-    mapModelToAggregate(lang: LiteralObject, cQMetadata?: CQMetadata): CommonLang
-    {
+    mapModelToAggregate(
+        lang: LiteralObject,
+        cQMetadata?: CQMetadata,
+    ): CommonLang {
         if (!lang) return;
 
         return this.makeAggregate(lang, cQMetadata);
@@ -37,19 +41,20 @@ export class CommonLangMapper implements IMapper
      * Map array of objects to array aggregates
      * @param langs
      */
-    mapModelsToAggregates(langs: LiteralObject[], cQMetadata?: CQMetadata): CommonLang[]
-    {
+    mapModelsToAggregates(
+        langs: LiteralObject[],
+        cQMetadata?: CQMetadata,
+    ): CommonLang[] {
         if (!Array.isArray(langs)) return;
 
-        return langs.map(lang => this.makeAggregate(lang, cQMetadata));
+        return langs.map((lang) => this.makeAggregate(lang, cQMetadata));
     }
 
     /**
      * Map aggregate to response
      * @param lang
      */
-    mapAggregateToResponse(lang: CommonLang): CommonLangResponse
-    {
+    mapAggregateToResponse(lang: CommonLang): CommonLangResponse {
         return this.makeResponse(lang);
     }
 
@@ -57,15 +62,16 @@ export class CommonLangMapper implements IMapper
      * Map array of aggregates to array responses
      * @param langs
      */
-    mapAggregatesToResponses(langs: CommonLang[]): CommonLangResponse[]
-    {
+    mapAggregatesToResponses(langs: CommonLang[]): CommonLangResponse[] {
         if (!Array.isArray(langs)) return;
 
-        return langs.map(lang => this.makeResponse(lang));
+        return langs.map((lang) => this.makeResponse(lang));
     }
 
-    private makeAggregate(lang: LiteralObject, cQMetadata?: CQMetadata): CommonLang
-    {
+    private makeAggregate(
+        lang: LiteralObject,
+        cQMetadata?: CQMetadata,
+    ): CommonLang {
         return CommonLang.register(
             new CommonLangId(lang.id, { undefinable: true }),
             new CommonLangName(lang.name, { undefinable: true }),
@@ -77,15 +83,26 @@ export class CommonLangMapper implements IMapper
             new CommonLangDir(lang.dir, { undefinable: true }),
             new CommonLangSort(lang.sort, { undefinable: true }),
             new CommonLangIsActive(lang.isActive, { undefinable: true }),
-            new CommonLangCreatedAt(lang.createdAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            new CommonLangUpdatedAt(lang.updatedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
-            new CommonLangDeletedAt(lang.deletedAt, { undefinable: true }, { addTimezone: cQMetadata?.timezone }),
+            new CommonLangCreatedAt(
+                lang.createdAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            new CommonLangUpdatedAt(
+                lang.updatedAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
+            new CommonLangDeletedAt(
+                lang.deletedAt,
+                { undefinable: true },
+                { addTimezone: cQMetadata?.timezone },
+            ),
         );
     }
 
-    private makeResponse(lang: CommonLang): CommonLangResponse
-    {
-        if (!lang) return;
+    private makeResponse(lang: CommonLang): CommonLangResponse {
+        if (!lang) return null;
 
         return new CommonLangResponse(
             lang.id.value,

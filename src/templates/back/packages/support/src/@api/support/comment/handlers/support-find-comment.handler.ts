@@ -2,7 +2,7 @@ import { SupportComment } from '@api/graphql';
 import { SupportCommentDto } from '@api/support/comment';
 import { SupportFindCommentQuery } from '@app/support/comment';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class SupportFindCommentHandler {
@@ -13,10 +13,14 @@ export class SupportFindCommentHandler {
         constraint?: QueryStatement,
         timezone?: string,
     ): Promise<SupportComment | SupportCommentDto> {
-        return await this.queryBus.ask(
+        const comment = await this.queryBus.ask(
             new SupportFindCommentQuery(queryStatement, constraint, {
                 timezone,
             }),
         );
+
+        if (!comment) throw new NotFoundException(`SupportComment not found`);
+
+        return comment;
     }
 }

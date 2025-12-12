@@ -8,9 +8,11 @@ import {
     SupportCommentDescription,
     SupportCommentDisplayName,
     SupportCommentExternalId,
+    SupportCommentExternalParentId,
     SupportCommentId,
     SupportCommentIssueId,
     SupportCommentMeta,
+    SupportCommentParentId,
     SupportCommentScreenRecording,
 } from '@app/support/comment/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
@@ -28,8 +30,12 @@ export class SupportUpdateCommentByIdCommandHandler
         await this.updateCommentByIdService.main(
             {
                 id: new SupportCommentId(command.payload.id),
+                parentId: new SupportCommentParentId(command.payload.parentId),
                 externalId: new SupportCommentExternalId(
                     command.payload.externalId,
+                ),
+                externalParentId: new SupportCommentExternalParentId(
+                    command.payload.externalParentId,
                 ),
                 issueId: new SupportCommentIssueId(command.payload.issueId),
                 accountId: new SupportCommentAccountId(

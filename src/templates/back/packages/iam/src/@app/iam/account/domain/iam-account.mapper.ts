@@ -145,7 +145,7 @@ export class IamAccountMapper implements IMapper {
     }
 
     private makeResponse(account: IamAccount): IamAccountResponse {
-        if (!account) return;
+        if (!account) return null;
 
         return new IamAccountResponse(
             account.id.value,

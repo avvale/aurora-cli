@@ -12,9 +12,11 @@ import {
     SupportCommentDescription,
     SupportCommentDisplayName,
     SupportCommentExternalId,
+    SupportCommentExternalParentId,
     SupportCommentId,
     SupportCommentIssueId,
     SupportCommentMeta,
+    SupportCommentParentId,
     SupportCommentRowId,
     SupportCommentScreenRecording,
 } from '@app/support/comment/domain/value-objects';
@@ -62,11 +64,17 @@ describe('SupportUpdateCommentByIdService', () => {
                 await service.main(
                     {
                         id: new SupportCommentId(supportMockCommentData[0].id),
+                        parentId: new SupportCommentParentId(
+                            supportMockCommentData[0].parentId,
+                        ),
                         rowId: new SupportCommentRowId(
                             supportMockCommentData[0].rowId,
                         ),
                         externalId: new SupportCommentExternalId(
                             supportMockCommentData[0].externalId,
+                        ),
+                        externalParentId: new SupportCommentExternalParentId(
+                            supportMockCommentData[0].externalParentId,
                         ),
                         issueId: new SupportCommentIssueId(
                             supportMockCommentData[0].issueId,

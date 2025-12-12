@@ -10,9 +10,23 @@ export class SupportUpdateCommentsDto {
 
     @ApiProperty({
         type: String,
+        description: 'parentId [input here api field description]',
+        example: '186fc6f7-0160-5e63-9872-355a648c32d2',
+    })
+    parentId?: string;
+
+    @ApiProperty({
+        type: String,
         description: 'externalId [input here api field description]',
     })
     externalId?: string;
+
+    @ApiProperty({
+        type: String,
+        description: 'externalParentId [input here api field description]',
+        example: '93074465-eda9-5551-bf46-a102be35dc28',
+    })
+    externalParentId?: string;
 
     @ApiProperty({
         type: String,

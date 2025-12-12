@@ -10,7 +10,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class SupportDeleteIssueByIdHandler {
@@ -30,6 +30,11 @@ export class SupportDeleteIssueByIdHandler {
                 timezone,
             }),
         );
+
+        if (!issue)
+            throw new NotFoundException(
+                `SupportIssue with id: ${id}, not found`,
+            );
 
         await this.commandBus.dispatch(
             new SupportDeleteIssueByIdCommand(id, constraint, {

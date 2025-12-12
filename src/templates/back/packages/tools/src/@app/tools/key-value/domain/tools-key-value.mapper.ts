@@ -104,7 +104,7 @@ export class ToolsKeyValueMapper implements IMapper {
     }
 
     private makeResponse(keyValue: ToolsKeyValue): ToolsKeyValueResponse {
-        if (!keyValue) return;
+        if (!keyValue) return null;
 
         return new ToolsKeyValueResponse(
             keyValue.id.value,

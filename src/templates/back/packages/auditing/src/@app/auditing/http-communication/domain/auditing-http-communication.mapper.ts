@@ -153,7 +153,7 @@ export class AuditingHttpCommunicationMapper implements IMapper {
     private makeResponse(
         httpCommunication: AuditingHttpCommunication,
     ): AuditingHttpCommunicationResponse {
-        if (!httpCommunication) return;
+        if (!httpCommunication) return null;
 
         return new AuditingHttpCommunicationResponse(
             httpCommunication.id.value,
