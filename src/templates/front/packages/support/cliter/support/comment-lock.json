@@ -15,7 +15,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment-detail.component.ts",
-            "integrity": "sha1:94061c7924df2c1c4d92746b84dc48285375fb96"
+            "integrity": "sha1:b8ace86fdf1b4e99e1985099cd2002c30019824e"
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment-list.component.html",
@@ -23,15 +23,15 @@
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment-list.component.ts",
-            "integrity": "sha1:d2c85bf26a5aebfa372108d0a116bb21d3e791aa"
+            "integrity": "sha1:4676a7e43faa7dc4051dcbd6c1f9a5c4af9405b7"
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment.columns-config.ts",
-            "integrity": "sha1:55c00f64500017d4b0300521285143c3ca736f1c"
+            "integrity": "sha1:591298d6d00ba9e39ed39f47faab3788134ce282"
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment.graphql.ts",
-            "integrity": "sha1:a3f17370a5eaabf68ca7b3db85babffcc506f652"
+            "integrity": "sha1:2ca5731bf73da224a58cb526f091aa3650cc29a7"
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment.resolvers.ts",

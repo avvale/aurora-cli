@@ -25,9 +25,36 @@ export class ConfigRecordingService {
         };
     }
 
-    /** Lista micrófonos disponibles. Requiere permiso para ver `label`. */
     async listAudioInputDevices(): Promise<MediaDeviceInfo[]> {
+        if (!navigator.mediaDevices?.enumerateDevices) {
+            console.warn(
+                'navigator.mediaDevices.enumerateDevices not supported. Ensure you are using HTTPS',
+            );
+            return [];
+        }
+
         const devices = await navigator.mediaDevices.enumerateDevices();
         return devices.filter((d) => d.kind === 'audioinput');
+    }
+
+    async requestAudioPermissions(): Promise<boolean> {
+        if (!navigator.mediaDevices?.getUserMedia) {
+            return false;
+        }
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                audio: true,
+            });
+            // Stop tracks immediately, we just wanted the permission
+            stream.getTracks().forEach((track) => track.stop());
+            return true;
+        } catch (error) {
+            console.warn(
+                'Permissions denied or error requesting audio:',
+                error,
+            );
+            return false;
+        }
     }
 }

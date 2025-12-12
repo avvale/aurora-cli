@@ -21,13 +21,15 @@ import { IssueService } from '@apps/support/issue';
 import {
     Action,
     defaultDetailImports,
+    EnvironmentsInformation,
+    EnvironmentsInformationService,
     log,
     SnackBarInvalidFormComponent,
     StorageAccountFileManagerFileUploadedInput,
     uuid,
     ViewDetailComponent,
 } from '@aurora';
-import { lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 
 @Component({
     selector: 'support-issue-detail-dialog',
@@ -53,6 +55,7 @@ export class IssueDetailDialogComponent extends ViewDetailComponent {
 
     constructor(
         private readonly issueService: IssueService,
+        private readonly environmentsInformationService: EnvironmentsInformationService,
         private readonly dialog: MatDialog,
         public readonly dialogRef: MatDialogRef<IssueDetailDialogComponent>,
         @Inject(MAT_DIALOG_DATA)
@@ -126,9 +129,22 @@ export class IssueDetailDialogComponent extends ViewDetailComponent {
 
             case 'support::issue.detailDialog.create':
                 try {
+                    const environments: EnvironmentsInformation =
+                        await firstValueFrom(
+                            this.environmentsInformationService
+                                .environmentsInformation$,
+                        );
+
                     await lastValueFrom(
                         this.issueService.create<SupportIssue>({
-                            object: this.fg.value,
+                            object: {
+                                ...this.fg.value,
+                                frontVersion: environments.front.version,
+                                frontEnvironment:
+                                    environments.front.environment,
+                                backVersion: environments.back.version,
+                                backEnvironment: environments.back.environment,
+                            },
                         }),
                     );
 

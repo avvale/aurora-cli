@@ -7,80 +7,100 @@ hasOAuth: true
 hasTenant: false
 hasAuditing: true
 front:
-  solidIcon: comment
-  outlineIcon: comment
+    solidIcon: comment
+    outlineIcon: comment
 aggregateProperties:
-  - name: id
-    type: id
-    primaryKey: true
-    nullable: false
-  - name: rowId
-    type: bigint
-    index: unique
-    autoIncrement: true
-    nullable: false
-  - name: externalId
-    type: varchar
-    maxLength: 64
-    nullable: true
-    index: index
-  - name: issueId
-    type: id
-    nullable: true
-    relationship:
-      type: many-to-one
-      aggregateName: SupportIssue
-      modulePath: support/issue
-      key: id
-      field: issue
-      avoidConstraint: true
-  - name: accountId
-    type: id
-    nullable: true
-    relationship:
-      type: many-to-one
-      aggregateName: IamAccount
-      modulePath: iam/account
-      field: account
-      avoidConstraint: true
-    index: index
-  - name: accountUsername
-    type: varchar
-    maxLength: 128
-    nullable: true
-  - name: displayName
-    type: varchar
-    maxLength: 128
-    nullable: true
-  - name: description
-    type: text
-    nullable: false
-  - name: attachments
-    type: jsonb
-    nullable: true
-  - name: screenRecording
-    type: jsonb
-    nullable: true
-  - name: meta
-    type: jsonb
-    nullable: true
-  - name: createdAt
-    type: timestamp
-    nullable: true
-  - name: updatedAt
-    type: timestamp
-    nullable: true
-  - name: deletedAt
-    type: timestamp
-    nullable: true
+    - name: id
+      type: id
+      primaryKey: true
+      nullable: false
+    - name: parentId
+      type: id
+      nullable: true
+      relationship:
+          type: many-to-one
+          aggregateName: SupportComment
+          modulePath: support/comment
+          key: id
+          field: parent
+          avoidConstraint: true
+    - name: rowId
+      type: bigint
+      index: unique
+      autoIncrement: true
+      nullable: false
+    - name: externalId
+      type: varchar
+      maxLength: 64
+      nullable: true
+      index: index
+    - name: externalParentId
+      type: id
+      nullable: true
+      relationship:
+          type: many-to-one
+          aggregateName: SupportComment
+          modulePath: support/comment
+          key: id
+          field: externalParent
+          avoidConstraint: true
+    - name: issueId
+      type: id
+      nullable: true
+      relationship:
+          type: many-to-one
+          aggregateName: SupportIssue
+          modulePath: support/issue
+          key: id
+          field: issue
+          avoidConstraint: true
+    - name: accountId
+      type: id
+      nullable: true
+      relationship:
+          type: many-to-one
+          aggregateName: IamAccount
+          modulePath: iam/account
+          field: account
+          avoidConstraint: true
+      index: index
+    - name: accountUsername
+      type: varchar
+      maxLength: 128
+      nullable: true
+    - name: displayName
+      type: varchar
+      maxLength: 128
+      nullable: true
+    - name: description
+      type: text
+      nullable: false
+    - name: attachments
+      type: jsonb
+      nullable: true
+    - name: screenRecording
+      type: jsonb
+      nullable: true
+    - name: meta
+      type: jsonb
+      nullable: true
+    - name: createdAt
+      type: timestamp
+      nullable: true
+    - name: updatedAt
+      type: timestamp
+      nullable: true
+    - name: deletedAt
+      type: timestamp
+      nullable: true
 excludedOperations:
-  - count
-  - createBatch
-  - delete
-  - getRaw
-  - max
-  - min
-  - rawSql
-  - sum
-  - updateAndIncrement
-  - upsert
+    - count
+    - createBatch
+    - delete
+    - getRaw
+    - max
+    - min
+    - rawSql
+    - sum
+    - updateAndIncrement
+    - upsert

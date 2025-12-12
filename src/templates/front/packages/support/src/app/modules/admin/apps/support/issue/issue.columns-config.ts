@@ -14,6 +14,7 @@ export const issueColumnsConfig: (properties?: {
         sort: 'externalStatus',
         translation: 'support.ExternalStatus',
         isUnaccent: true,
+        bodyClass: 'min-w-36',
     },
     {
         type: ColumnDataType.STRING,

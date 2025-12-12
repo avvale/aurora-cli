@@ -9,6 +9,14 @@ export const commentColumnsConfig: (properties?: {
     translator?: TranslocoService;
 } = {}): ColumnConfig[] => [
     {
+        type: ColumnDataType.STRING,
+        field: 'parent.name',
+        searchableField: '$parent.name$',
+        sort: 'parent.name',
+        translation: 'Name',
+        isUnaccent: true,
+    },
+    {
         type: ColumnDataType.NUMBER,
         field: 'rowId',
         sort: 'rowId',
@@ -19,6 +27,14 @@ export const commentColumnsConfig: (properties?: {
         field: 'externalId',
         sort: 'externalId',
         translation: 'support.ExternalId',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
+        field: 'externalParent.name',
+        searchableField: '$externalParent.name$',
+        sort: 'externalParent.name',
+        translation: 'Name',
         isUnaccent: true,
     },
     {

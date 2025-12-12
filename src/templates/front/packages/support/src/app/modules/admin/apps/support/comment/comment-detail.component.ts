@@ -104,7 +104,15 @@ export class CommentDetailComponent extends ViewDetailComponent {
                     Validators.maxLength(36),
                 ],
             ],
+            parentId: [
+                null,
+                [Validators.minLength(36), Validators.maxLength(36)],
+            ],
             externalId: ['', [Validators.maxLength(64)]],
+            externalParentId: [
+                null,
+                [Validators.minLength(36), Validators.maxLength(36)],
+            ],
             issueId: [
                 null,
                 [Validators.minLength(36), Validators.maxLength(36)],

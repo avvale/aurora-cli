@@ -54,8 +54,19 @@ export class ConfigRecordingSnackbarComponent extends ViewDetailComponent {
     }
 
     async init(): Promise<void> {
+        // in some browsers/environments, enumerateDevices returns nothing or empty labels
+        // if permission has not been requested before.
+        const hasPermission =
+            await this.configRecordingService.requestAudioPermissions();
+        if (!hasPermission) {
+            log(
+                '[DEBUG] Audio permission could not be obtained or getUserMedia failed. Devices may not appear correctly',
+            );
+        }
+
         this.inputDevicesInfo =
             await this.configRecordingService.listAudioInputDevices();
+        log('[DEBUG] Devices found:', this.inputDevicesInfo);
     }
 
     onSubmit($event): void {

@@ -16,8 +16,8 @@
                 {{ t('support.Issue') }}
                 @if (currentViewAction.id === 'support::issue.detail.edit') {
                     <au-chip
-                        [color]="managedObject().externalColorStatus"
                         class="ml-4"
+                        [color]="managedObject().externalColorStatus"
                         size="tiny"
                     >
                         {{ managedObject().externalStatus | uppercase }}
@@ -93,10 +93,12 @@
     <!-- / Header -->
 
     <!-- Main -->
-    <div class="flex flex-col md:flex-row flex-auto overflow-y-auto md:overflow-hidden bg-gray-100 dark:bg-gray-900">
+    <div
+        class="flex flex-auto flex-col overflow-y-auto bg-gray-100 md:flex-row md:overflow-hidden dark:bg-gray-900"
+    >
         <!-- Left Column: Form -->
         <div
-            class="flex-auto md:overflow-y-auto px-6 pt-6 md:px-10 md:pt-10"
+            class="flex-auto px-6 pt-6 md:overflow-y-auto md:px-10 md:pt-10"
             cdkScrollable
         >
             <div class="bg-card mb-8 rounded-2xl p-8 shadow">
@@ -143,7 +145,8 @@
                                     <div class="text-secondary text-sm">
                                         {{
                                             managedObject()?.createdAt
-                                                | dateFormat: 'D MMMM YYYY, HH:mm'
+                                                | dateFormat
+                                                    : 'D MMMM YYYY, HH:mm'
                                         }}
                                     </div>
                                 </div>
@@ -158,14 +161,19 @@
                                         }})
                                     </span>
                                     <span>
-                                        Back: {{ managedObject()?.backVersion }}
-                                        ({{ managedObject()?.backEnvironment }})
+                                        Back:
+                                        {{ managedObject()?.backVersion }} ({{
+                                            managedObject()?.backEnvironment
+                                        }})
                                     </span>
                                 </div>
                             </div>
                         }
 
-                        <mat-form-field appearance="outline" class="w-full">
+                        <mat-form-field
+                            appearance="outline"
+                            class="w-full"
+                        >
                             <mat-label>{{ t('support.Subject') }}</mat-label>
                             <input
                                 matInput
@@ -178,14 +186,17 @@
                             </mat-error>
                         </mat-form-field>
 
-                        <mat-form-field appearance="outline" class="w-full">
+                        <mat-form-field
+                            appearance="outline"
+                            class="w-full"
+                        >
                             <mat-label>
                                 {{ t('support.Description') }}
                             </mat-label>
                             <textarea
+                                class="min-h-32"
                                 matInput
                                 formControlName="description"
-                                class="min-h-32"
                             ></textarea>
                             <mat-error>
                                 {{ formErrors?.description | async }}
@@ -199,14 +210,16 @@
         <!-- Right Column: Comments -->
         @if (currentViewAction.id !== 'support::issue.detail.new') {
             <div
-                class="bg-card w-full flex-none md:overflow-y-auto border-t md:border-t-0 md:border-l p-6 md:w-96 dark:bg-transparent"
+                class="bg-card w-full flex-none border-t p-6 md:w-96 md:overflow-y-auto md:border-l md:border-t-0 dark:bg-transparent"
             >
                 <div class="mb-6 flex items-center justify-between">
-                    <h3 class="text-lg font-bold">{{ t('support.Activity') }}</h3>
+                    <h3 class="text-lg font-bold">
+                        {{ t('support.Activity') }}
+                    </h3>
                     <button
                         type="button"
-                        mat-stroked-button
                         [disabled]="commentFg.value?.id"
+                        mat-stroked-button
                         (click)="
                             actionService.action({
                                 id: 'support::issue.detail.newComment',
@@ -215,7 +228,7 @@
                         "
                     >
                         <mat-icon
-                            class="icon-size-5 mr-2"
+                            class="mr-2 icon-size-5"
                             svgIcon="heroicons_solid:chat-bubble-left-ellipsis"
                         ></mat-icon>
                         {{ t('New.M') }}
@@ -229,23 +242,23 @@
                     (ngSubmit)="onSubmitComment($event)"
                 >
                     @if (commentFg.value?.id) {
-                        <div class="bg-gray-50 mb-6 rounded-xl border p-3">
+                        <div class="mb-6 rounded-xl border bg-gray-50 p-3">
                             <mat-form-field
                                 appearance="outline"
                                 class="w-full"
                                 subscriptSizing="dynamic"
                             >
                                 <textarea
+                                    [placeholder]="t('support.Comment')"
                                     matInput
                                     formControlName="description"
                                     rows="3"
-                                    [placeholder]="t('support.Comment')"
                                 ></textarea>
                             </mat-form-field>
                             <div class="mt-2 flex justify-end gap-3">
                                 <button
                                     type="button"
-                                    class="!h-8 !min-h-8 !px-4 !text-xs !rounded-full"
+                                    class="!h-8 !min-h-8 !rounded-full !px-4 !text-xs"
                                     mat-button
                                     (click)="
                                         actionService.action({
@@ -258,7 +271,7 @@
                                 </button>
                                 <button
                                     type="submit"
-                                    class="!h-8 !min-h-8 !px-4 !text-xs !rounded-full"
+                                    class="!h-8 !min-h-8 !rounded-full !px-4 !text-xs"
                                     mat-flat-button
                                     color="primary"
                                 >
@@ -277,19 +290,29 @@
                             <div
                                 class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-300"
                             >
-                                <mat-icon class="icon-size-5">person</mat-icon>
+                                @if (comment.accountId) {
+                                    <mat-icon class="icon-size-5">
+                                        person
+                                    </mat-icon>
+                                } @else {
+                                    <mat-icon class="icon-size-5">
+                                        contact_support
+                                    </mat-icon>
+                                }
                             </div>
 
                             <div class="flex-auto">
                                 <div
                                     class="flex items-baseline justify-between gap-2"
                                 >
-                                    <span class="font-semibold">
+                                    <span class="text-sm font-semibold">
                                         {{ comment.displayName }}
                                     </span>
                                     <span class="text-secondary text-xs">
                                         {{
-                                            comment.createdAt | dateFormat: 'D MMM YYYY, HH:mm'
+                                            comment.createdAt
+                                                | dateFormat
+                                                    : 'D MMM YYYY, HH:mm'
                                         }}
                                     </span>
                                 </div>
@@ -307,7 +330,7 @@
                                         <button
                                             aria-label="Edit comment"
                                             type="button"
-                                            class="!h-8 !min-h-8 !w-8 mr-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                                            class="mr-1 !h-8 !min-h-8 !w-8 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                                             mat-icon-button
                                             (click)="
                                                 actionService.action({

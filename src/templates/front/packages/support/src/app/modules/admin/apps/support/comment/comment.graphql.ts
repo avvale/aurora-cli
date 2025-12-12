@@ -1,8 +1,10 @@
 import gql from 'graphql-tag';
 
 export const fields = `
+    parentId
     rowId
     externalId
+    externalParentId
     issueId
     accountId
     accountUsername
