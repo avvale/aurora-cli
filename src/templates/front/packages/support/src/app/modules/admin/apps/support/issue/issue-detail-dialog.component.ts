@@ -18,6 +18,7 @@ import { SupportIssue } from '@apps/support';
 import { IssueService } from '@apps/support/issue';
 import {
     Action,
+    ActionScope,
     defaultDetailImports,
     EnvironmentsInformation,
     EnvironmentsInformationService,
@@ -36,6 +37,7 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultDetailImports, MatDialogModule],
 })
+@ActionScope('support::issue.detailDialog')
 export class IssueDetailDialogComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..

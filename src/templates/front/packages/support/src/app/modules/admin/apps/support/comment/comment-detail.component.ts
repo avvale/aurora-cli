@@ -10,6 +10,7 @@ import { SupportComment } from '@apps/support';
 import { CommentService } from '@apps/support/comment';
 import {
     Action,
+    ActionScope,
     Crumb,
     defaultDetailImports,
     log,
@@ -27,6 +28,7 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultDetailImports],
 })
+@ActionScope('support::comment.detail')
 export class CommentDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..

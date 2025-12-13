@@ -13,6 +13,7 @@ import { SupportIssue } from '@apps/support';
 import { issueColumnsConfig, IssueService } from '@apps/support/issue';
 import {
     Action,
+    ActionScope,
     ChipComponent,
     ColumnConfig,
     ColumnDataType,
@@ -41,6 +42,7 @@ export const issueMainGridListId = 'support::issue.list.mainGridList';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultListImports, ChipComponent, UpperCasePipe],
 })
+@ActionScope('support::issue.list')
 export class IssueListComponent extends ViewBaseComponent {
     // ---- customizations ----
     // ..

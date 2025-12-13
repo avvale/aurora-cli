@@ -11,11 +11,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment-detail.component.html",
-            "integrity": "sha1:908cb80c6ffec64e782440bded6c533fd402baac"
+            "integrity": "sha1:55b91d5b108ba61113071c381ee430ae7b19385b"
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment-detail.component.ts",
-            "integrity": "sha1:b8ace86fdf1b4e99e1985099cd2002c30019824e"
+            "integrity": "sha1:6c80e47f558d7e358e0b9dd3c126d3510e2987c5"
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment-list.component.html",
@@ -23,7 +23,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment-list.component.ts",
-            "integrity": "sha1:4676a7e43faa7dc4051dcbd6c1f9a5c4af9405b7"
+            "integrity": "sha1:753c1c4f5332ad7b016933cc1c3b4fefd0e7b539"
         },
         {
             "path": "src/app/modules/admin/apps/support/comment/comment.columns-config.ts",

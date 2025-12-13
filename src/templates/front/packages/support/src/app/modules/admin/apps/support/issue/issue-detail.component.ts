@@ -14,6 +14,7 @@ import { CommentService } from '@apps/support/comment';
 import { IssueService } from '@apps/support/issue';
 import {
     Action,
+    ActionScope,
     ChipComponent,
     Crumb,
     DateFormatPipe,
@@ -41,6 +42,7 @@ import { firstValueFrom, lastValueFrom, takeUntil } from 'rxjs';
         UpperCasePipe,
     ],
 })
+@ActionScope('support::issue.detail')
 export class IssueDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     commentFg: FormGroup;

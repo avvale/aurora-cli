@@ -79,7 +79,7 @@ export const issueEditResolver: ResolveFn<{
                     association: 'comments',
                 },
             ],
-            order: [['comments', 'rowId', 'DESC']],
+            order: [['comments', 'rowId', 'desc']],
         },
     });
 };

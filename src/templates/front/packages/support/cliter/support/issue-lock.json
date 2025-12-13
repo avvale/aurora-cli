@@ -11,11 +11,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/support/issue/issue-detail.component.html",
-            "integrity": "sha1:4b69eae7a355599a695e5f15938024f4007747ba"
+            "integrity": "sha1:85c22270bfecde041085397dec65c4a52d5e2e38"
         },
         {
             "path": "src/app/modules/admin/apps/support/issue/issue-detail.component.ts",
-            "integrity": "sha1:bea999b948ab57452df3593617b26ac42238a8d9"
+            "integrity": "sha1:301504c551b3664af425dec339405eab71200508"
         },
         {
             "path": "src/app/modules/admin/apps/support/issue/issue-list.component.html",
@@ -23,7 +23,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/support/issue/issue-list.component.ts",
-            "integrity": "sha1:a7f5aac9f39caba147bcd2c546ca66f5190d929b"
+            "integrity": "sha1:f9af6a6aab628ad9e05c40dff1a09cb7ba2e75ac"
         },
         {
             "path": "src/app/modules/admin/apps/support/issue/issue.columns-config.ts",

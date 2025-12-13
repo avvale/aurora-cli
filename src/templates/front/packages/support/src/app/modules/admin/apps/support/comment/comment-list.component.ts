@@ -7,6 +7,7 @@ import { SupportComment } from '@apps/support';
 import { commentColumnsConfig, CommentService } from '@apps/support/comment';
 import {
     Action,
+    ActionScope,
     ColumnConfig,
     ColumnDataType,
     Crumb,
@@ -32,6 +33,7 @@ export const commentMainGridListId = 'support::comment.list.mainGridList';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultListImports],
 })
+@ActionScope('support::comment.list')
 export class CommentListComponent extends ViewBaseComponent {
     // ---- customizations ----
     // ..

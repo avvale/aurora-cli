@@ -24,6 +24,7 @@ import { ToolsKeyValue } from '@apps/tools';
 import { KeyValueService } from '@apps/tools/key-value';
 import {
     Action,
+    ActionScope,
     Crumb,
     defaultDetailImports,
     log,
@@ -41,6 +42,7 @@ import { IssueService } from '../issue';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultDetailImports, MatSelectModule],
 })
+@ActionScope('support::config.detail')
 export class ConfigDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     spaces$: Observable<ClickupSpace[]>;
