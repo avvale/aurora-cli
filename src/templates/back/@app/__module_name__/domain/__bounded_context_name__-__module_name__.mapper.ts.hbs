@@ -34,6 +34,7 @@
 {{/each}}
 {{! ONE TO ONE Relationship }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -42,10 +43,12 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
 {{! MANY TO ONE Relationship }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -54,10 +57,12 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
+{{/unlessEq}}
 {{/unless}}
 {{/each}}
 {{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -66,9 +71,11 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
 {{! MANY TO MANY Relationship }}
 {{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties)}}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -77,6 +84,7 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
 {{! PIVOT TABLE Relationship }}
 {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}

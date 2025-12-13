@@ -5,7 +5,9 @@
             (object items=(array 'ApiProperty') path='@nestjs/swagger')
     )
 ~}}
-{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
+{{! ONE TO ONE Relationship with field }}
+{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -14,9 +16,12 @@
                 path=(sumStrings ../config.apiContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
+{{! ONE TO ONE Relationship without field }}
 {{#each (getWithImportRelationshipManyToOneProperties schema.aggregateProperties) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -25,9 +30,12 @@
                 path=(sumStrings ../config.apiContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
         )
 ~}}
+{{/unlessEq}}
 {{/unless}}
 {{/each}}
+{{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties schema.aggregateProperties) }}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -36,8 +44,11 @@
                 path=(sumStrings ../config.apiContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
-{{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}
+{{! MANY TO MANY Relationship }}
+{{#each (getWithImportRelationshipManyToManyProperties schema.aggregateProperties) }}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -46,7 +57,9 @@
                 path=(sumStrings ../config.apiContainer '/' (toKebabCase (getBoundedContextNameFromPropertyRelationship relationship.modulePath)) '/' (toKebabCase (getModuleNameFromPropertyRelationship relationship.modulePath)))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
+{{! PIVOT TABLE Relationship }}
 {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
 {{
     push ../importsArray

@@ -55,6 +55,7 @@
 {{/or}}
 {{! ONE TO ONE Relationship }}
 {{#each (getWithImportRelationshipOneToOneProperties (getNotI18nProperties schema.aggregateProperties)) }}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -63,10 +64,12 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
 {{! MANY TO ONE Relationship }}
 {{#each (getWithImportRelationshipManyToOneProperties (getNotI18nProperties schema.aggregateProperties)) }}
 {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -75,10 +78,12 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
+{{/unlessEq}}
 {{/unless}}
 {{/each}}
 {{! ONE TO MANY Relationship }}
 {{#each (getWithImportRelationshipOneToManyProperties (getNotI18nProperties schema.aggregateProperties)) }}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -87,9 +92,11 @@
                 path=(ternary relationship.packageName relationship.packageName (sumStrings ../config.appContainer '/' relationship.modulePath))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
 {{! MANY TO MANY Relationship }}
 {{#each (getWithImportRelationshipManyToManyProperties (getNotI18nProperties schema.aggregateProperties)) }}
+{{#unlessEq relationship.aggregateName ../schema.aggregateName}}
 {{
     push ../importsArray
         (
@@ -103,6 +110,7 @@
                 path=(sumStrings ../config.appContainer '/' (toKebabCase relationship.pivot.boundedContextName) '/' (toKebabCase relationship.pivot.moduleName))
         )
 ~}}
+{{/unlessEq}}
 {{/each}}
 {{! PIVOT TABLE Relationship }}
 {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
