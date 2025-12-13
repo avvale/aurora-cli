@@ -90,10 +90,11 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
             },
         ));
 
-        if (!{{ toCamelCase schema.moduleName }})
+        if (!{{ toCamelCase schema.moduleName }}) {
             throw new NotFoundException(
                 `{{ toPascalCase schema.aggregateName }} with id: ${id}, not found`,
             );
+        }
 
         await this.commandBus.dispatch(new {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase schema.moduleName }}ByIdCommand(
             {{#each (getPrimaryKeyProperties schema.aggregateProperties) }}

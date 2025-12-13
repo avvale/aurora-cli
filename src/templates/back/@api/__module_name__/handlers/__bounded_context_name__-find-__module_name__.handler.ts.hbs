@@ -79,10 +79,11 @@ export class {{ toPascalCase schema.boundedContextName }}Find{{ toPascalCase sch
             },
         ));
 
-        if (!{{ toCamelCase schema.moduleName }})
+        if (!{{ toCamelCase schema.moduleName }}) {
             throw new NotFoundException(
                 `{{ toPascalCase schema.aggregateName }} not found`,
             );
+        }
 
         return {{ toCamelCase schema.moduleName }};
     }
