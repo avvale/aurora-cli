@@ -28,7 +28,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('tools::keyValue.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -36,7 +36,9 @@
                     color="accent"
                 >
                     @if (
-                        'tools::keyValue.detail.update' | getSpinnerFlag | async
+                        'tools::keyValue.detail.update'
+                            | getActionStatus
+                            | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -58,7 +60,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('tools::keyValue.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -66,7 +68,9 @@
                     color="accent"
                 >
                     @if (
-                        'tools::keyValue.detail.create' | getSpinnerFlag | async
+                        'tools::keyValue.detail.create'
+                            | getActionStatus
+                            | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>

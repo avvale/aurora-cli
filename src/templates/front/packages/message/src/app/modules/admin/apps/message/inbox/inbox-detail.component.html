@@ -26,7 +26,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('message::inbox.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -34,7 +34,7 @@
                     color="accent"
                 >
                     @if (
-                        'message::inbox.detail.update' | getSpinnerFlag | async
+                        'message::inbox.detail.update' | getActionStatus | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -56,7 +56,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('message::inbox.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -64,7 +64,7 @@
                     color="accent"
                 >
                     @if (
-                        'message::inbox.detail.create' | getSpinnerFlag | async
+                        'message::inbox.detail.create' | getActionStatus | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>

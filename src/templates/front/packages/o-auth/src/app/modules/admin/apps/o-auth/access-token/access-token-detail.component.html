@@ -26,7 +26,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('oAuth::accessToken.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -35,7 +35,7 @@
                 >
                     @if (
                         'oAuth::accessToken.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async
                     ) {
                         <mat-icon>
@@ -58,7 +58,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('oAuth::accessToken.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -67,7 +67,7 @@
                 >
                     @if (
                         'oAuth::accessToken.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async
                     ) {
                         <mat-icon>

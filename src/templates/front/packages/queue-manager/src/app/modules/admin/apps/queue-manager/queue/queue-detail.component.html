@@ -28,7 +28,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('queueManager::queue.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -37,7 +37,7 @@
                 >
                     @if (
                         'queueManager::queue.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async
                     ) {
                         <mat-icon>
@@ -60,7 +60,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('queueManager::queue.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -69,7 +69,7 @@
                 >
                     @if (
                         'queueManager::queue.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async
                     ) {
                         <mat-icon>

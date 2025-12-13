@@ -1,21 +1,25 @@
-<div class="w-full max-w-3xl" *transloco="let t">
-
+<div
+    *transloco="let t"
+    class="w-full max-w-3xl"
+>
     <!-- Form -->
     <form
-        novalidate
         [formGroup]="fg"
+        novalidate
         (ngSubmit)="onSubmit($event)"
     >
         <!-- Section -->
         <div class="w-full">
             <div class="text-xl">{{ t('Profile') }}</div>
-            <div class="text-secondary">{{ t('settings.ProfileDescription') }}</div>
+            <div class="text-secondary">
+                {{ t('settings.ProfileDescription') }}
+            </div>
         </div>
-        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+        <div class="mt-8 grid w-full gap-6 sm:grid-cols-4">
             <!-- Name -->
             <div
-                formGroupName="user"
                 class="sm:col-span-4"
+                formGroupName="user"
             >
                 <mat-form-field
                     class="w-full"
@@ -26,19 +30,18 @@
                         class="icon-size-5"
                         svgIcon="heroicons_solid:user"
                         matPrefix
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                     <input
                         matInput
                         formControlName="name"
                         maxlength="255"
-                    >
+                    />
                     <mat-error>{{ formErrors['user.name'] | async }}</mat-error>
                 </mat-form-field>
             </div>
             <div
-                formGroupName="user"
                 class="sm:col-span-4"
+                formGroupName="user"
             >
                 <mat-form-field
                     class="w-full"
@@ -49,14 +52,15 @@
                         class="icon-size-5"
                         svgIcon="heroicons_solid:user-group"
                         matPrefix
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                     <input
                         matInput
                         formControlName="surname"
                         maxlength="255"
-                    >
-                    <mat-error>{{ formErrors['user.surname'] | async }}</mat-error>
+                    />
+                    <mat-error>
+                        {{ formErrors['user.surname'] | async }}
+                    </mat-error>
                 </mat-form-field>
             </div>
             <!-- Username -->
@@ -76,22 +80,18 @@
                         matInput
                         formControlName="username"
                         maxlength="128"
-                        (input)="$event.target.value = $event.target.value.toLowerCase()"
-                    >
-                    @if (usernameStatus() === 'PENDING')
-                    {
+                        (input)="
+                            $event.target.value =
+                                $event.target.value.toLowerCase()
+                        "
+                    />
+                    @if (usernameStatus() === 'PENDING') {
                         <mat-icon matSuffix>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
-                    }
-                    @else if (usernameStatus() === 'VALID')
-                    {
-                        <mat-icon matSuffix>
-                            check
-                        </mat-icon>
-                    }
-                    @else
-                    {
+                    } @else if (usernameStatus() === 'VALID') {
+                        <mat-icon matSuffix>check</mat-icon>
+                    } @else {
                         <mat-icon
                             matSuffix
                             fontSet="material-symbols-outlined"
@@ -110,9 +110,11 @@
         <!-- Section -->
         <div class="w-full">
             <div class="text-xl">{{ t('PersonalInformation') }}</div>
-            <div class="text-secondary">{{ t('PersonalInformationDescription') }}</div>
+            <div class="text-secondary">
+                {{ t('PersonalInformationDescription') }}
+            </div>
         </div>
-        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+        <div class="mt-8 grid w-full gap-6 sm:grid-cols-4">
             <!-- Email -->
             <div class="sm:col-span-2">
                 <mat-form-field
@@ -124,28 +126,23 @@
                         class="icon-size-5"
                         [svgIcon]="'heroicons_solid:envelope'"
                         matPrefix
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                     <input
                         matInput
                         formControlName="email"
                         maxlength="128"
-                        (input)="$event.target.value = $event.target.value.toLowerCase()"
-                    >
-                    @if (emailStatus() === 'PENDING')
-                    {
+                        (input)="
+                            $event.target.value =
+                                $event.target.value.toLowerCase()
+                        "
+                    />
+                    @if (emailStatus() === 'PENDING') {
                         <mat-icon matSuffix>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
-                    }
-                    @else if (emailStatus() === 'VALID')
-                    {
-                        <mat-icon matSuffix>
-                            check
-                        </mat-icon>
-                    }
-                    @else
-                    {
+                    } @else if (emailStatus() === 'VALID') {
+                        <mat-icon matSuffix>check</mat-icon>
+                    } @else {
                         <mat-icon
                             matSuffix
                             fontSet="material-symbols-outlined"
@@ -158,8 +155,8 @@
             </div>
             <!-- Language -->
             <div
-                formGroupName="user"
                 class="sm:col-span-2"
+                formGroupName="user"
             >
                 <mat-form-field
                     class="w-full"
@@ -170,11 +167,9 @@
                         class="icon-size-5"
                         svgIcon="heroicons_solid:globe-alt"
                         matPrefix
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                     <mat-select formControlName="langId">
-                        @for (lang of langs$ | async; track lang.id)
-                        {
+                        @for (lang of langs$ | async; track lang.id) {
                             <mat-option [value]="lang.id">
                                 {{ lang.name }}
                             </mat-option>
@@ -185,20 +180,24 @@
         </div>
 
         <!-- Divider -->
-        <div class="mt-11 mb-10 border-t"></div>
+        <div class="mb-10 mt-11 border-t"></div>
 
         <!-- Actions -->
         <div class="flex items-center justify-end">
             <button
-                class="ml-4"
-                mat-flat-button
                 type="submit"
+                class="ml-4"
+                [disabled]="
+                    fg.pristine ||
+                    ('settings::account.detail.update'
+                        | getActionStatus
+                        | async)
+                "
+                mat-flat-button
                 color="primary"
-                [disabled]="fg.pristine || ('settings::account.detail.update' | getSpinnerFlag | async)"
             >
                 {{ t('Update') }}
             </button>
         </div>
     </form>
-
 </div>

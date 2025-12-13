@@ -1,17 +1,21 @@
-<div class="w-full max-w-3xl" *transloco="let t">
-
+<div
+    *transloco="let t"
+    class="w-full max-w-3xl"
+>
     <!-- Form -->
     <form
-        novalidate
         [formGroup]="fg"
+        novalidate
         (ngSubmit)="onSubmit($event)"
     >
         <!-- Section -->
         <div class="w-full">
             <div class="text-xl">{{ t('settings.ChangeYourPassword') }}</div>
-            <div class="text-secondary">{{ t('settings.ChangeYourPasswordDescription') }}</div>
+            <div class="text-secondary">
+                {{ t('settings.ChangeYourPasswordDescription') }}
+            </div>
         </div>
-        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+        <div class="mt-8 grid w-full gap-6 sm:grid-cols-4">
             <!-- Current password -->
             <div class="sm:col-span-4">
                 <mat-form-field
@@ -23,27 +27,19 @@
                         class="icon-size-5"
                         svgIcon="heroicons_solid:key"
                         matPrefix
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                     <input
-                        matInput
                         [type]="showCurrentPassword.type"
+                        matInput
                         formControlName="currentPassword"
-                    >
-                    @if (currentPasswordStatus() === 'PENDING')
-                    {
+                    />
+                    @if (currentPasswordStatus() === 'PENDING') {
                         <mat-icon matSuffix>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
-                    }
-                    @else if (currentPasswordStatus() === 'VALID')
-                    {
-                        <mat-icon matSuffix>
-                            check
-                        </mat-icon>
-                    }
-                    @else
-                    {
+                    } @else if (currentPasswordStatus() === 'VALID') {
+                        <mat-icon matSuffix>check</mat-icon>
+                    } @else {
                         <mat-icon
                             matSuffix
                             fontSet="material-symbols-outlined"
@@ -53,11 +49,12 @@
                     }
                     <mat-pass-toggle-visibility
                         #showCurrentPassword
-                        matSuffix
                         class="ml-2"
-                    >
-                    </mat-pass-toggle-visibility>
-                    <mat-error>{{ formErrors['currentPassword'] | async }}</mat-error>
+                        matSuffix
+                    ></mat-pass-toggle-visibility>
+                    <mat-error>
+                        {{ formErrors['currentPassword'] | async }}
+                    </mat-error>
                 </mat-form-field>
             </div>
             <!-- New password -->
@@ -71,34 +68,32 @@
                         class="icon-size-5"
                         [svgIcon]="'heroicons_solid:key'"
                         matPrefix
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                     <input
-                        matInput
                         #newPasswordInput
-                        formControlName="newPassword"
                         [type]="showNewPassword.type"
-                    >
+                        matInput
+                        formControlName="newPassword"
+                    />
                     <button
-                        matSuffix
-                        mat-icon-button
                         type="button"
                         [aria-label]="t('iam.CreatePassword')"
+                        matSuffix
+                        mat-icon-button
                         (click)="handleCreateNewPassword()"
                     >
                         <mat-icon>sync</mat-icon>
                     </button>
                     <mat-pass-toggle-visibility
-                        matSuffix
-                        class="ml-2"
                         #showNewPassword
-                    >
-                    </mat-pass-toggle-visibility>
+                        class="ml-2"
+                        matSuffix
+                    ></mat-pass-toggle-visibility>
                 </mat-form-field>
                 <mat-error>{{ formErrors['newPassword'] | async }}</mat-error>
                 <mat-password-strength
                     #passwordStrengthComponent
-                    class="col-start-1 col-6"
+                    class="col-6 col-start-1"
                     [password]="newPasswordInput.value"
                     [enableLengthRule]="true"
                     [min]="8"
@@ -107,8 +102,7 @@
                     [enableUpperCaseLetterRule]="true"
                     [enableDigitRule]="true"
                     [enableSpecialCharRule]="true"
-                >
-                </mat-password-strength>
+                ></mat-password-strength>
             </div>
 
             <!-- Repeat new password -->
@@ -122,16 +116,19 @@
                         class="icon-size-5"
                         [svgIcon]="'heroicons_solid:key'"
                         matPrefix
-                    >
-                    </mat-icon>
+                    ></mat-icon>
                     <input
-                        matInput
                         [formControlName]="'repeatNewPassword'"
                         [type]="showNewPassword.type"
-                    >
+                        matInput
+                    />
                 </mat-form-field>
-                <mat-error>{{ formErrors['repeatNewPassword'] | async }}</mat-error>
-                <div class="mt-1 text-md text-hint">{{ t('settings.MinimumPasswordComplexity') }}</div>
+                <mat-error>
+                    {{ formErrors['repeatNewPassword'] | async }}
+                </mat-error>
+                <div class="text-hint mt-1 text-md">
+                    {{ t('settings.MinimumPasswordComplexity') }}
+                </div>
             </div>
         </div>
 
@@ -141,15 +138,19 @@
         <!-- Actions -->
         <div class="flex items-center justify-end">
             <button
-                class="ml-4"
-                mat-flat-button
                 type="submit"
+                class="ml-4"
+                [disabled]="
+                    fg.pristine ||
+                    ('settings::security.detail.update'
+                        | getActionStatus
+                        | async)
+                "
+                mat-flat-button
                 color="primary"
-                [disabled]="fg.pristine || ('settings::security.detail.update' | getSpinnerFlag | async)"
             >
                 {{ t('Update') }}
             </button>
         </div>
     </form>
-
 </div>

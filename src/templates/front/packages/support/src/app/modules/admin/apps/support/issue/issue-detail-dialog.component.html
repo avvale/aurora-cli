@@ -25,7 +25,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('support::issue.detailDialog.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -34,7 +34,7 @@
                 >
                     @if (
                         'support::issue.detailDialog.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async
                     ) {
                         <mat-icon>

@@ -38,7 +38,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('message::message.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -47,7 +47,7 @@
                 >
                     @if (
                         'message::message.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async
                     ) {
                         <mat-icon>
@@ -115,7 +115,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('message::message.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -124,7 +124,7 @@
                 >
                     @if (
                         'message::message.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async
                     ) {
                         <mat-icon>

@@ -25,14 +25,14 @@
                     class="ml-3"
                     [disabled]="
                         fg.pristine ||
-                        ('oAuth::scope.detail.update' | getSpinnerFlag | async)
+                        ('oAuth::scope.detail.update' | getActionStatus | async)
                     "
                     mat-flat-button
                     form="oAuthScopeFormDetail"
                     color="accent"
                 >
                     @if (
-                        'oAuth::scope.detail.update' | getSpinnerFlag | async
+                        'oAuth::scope.detail.update' | getActionStatus | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -53,14 +53,14 @@
                     class="ml-3"
                     [disabled]="
                         fg.pristine ||
-                        ('oAuth::scope.detail.create' | getSpinnerFlag | async)
+                        ('oAuth::scope.detail.create' | getActionStatus | async)
                     "
                     mat-flat-button
                     form="oAuthScopeFormDetail"
                     color="accent"
                 >
                     @if (
-                        'oAuth::scope.detail.create' | getSpinnerFlag | async
+                        'oAuth::scope.detail.create' | getActionStatus | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>

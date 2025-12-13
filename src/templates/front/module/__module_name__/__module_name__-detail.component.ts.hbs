@@ -3,7 +3,7 @@
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'signal' 'ViewEncapsulation' 'WritableSignal') path='@angular/core')
             (object items='Validators' path='@angular/forms')
-            (object items=(array 'Action' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'SnackBarInvalidFormComponent' 'uuid' 'ViewDetailComponent') path='@aurora')
+            (object items=(array 'Action' 'ActionScope' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'SnackBarInvalidFormComponent' 'uuid' 'ViewDetailComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName))
@@ -183,6 +183,7 @@ export const {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship
         {{/if}}
     ],
 })
+@ActionScope('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail')
 export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDetailComponent
 {
     // ---- customizations ----

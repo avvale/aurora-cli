@@ -1,1 +1,1 @@
-export { provideDateTimeFormat, provideDateTimeLocale } from './date-time.provider';
+export * from './public-api';

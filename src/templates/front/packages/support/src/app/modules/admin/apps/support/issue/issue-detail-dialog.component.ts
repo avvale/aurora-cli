@@ -1,9 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    DestroyRef,
     Inject,
-    inject,
     signal,
     ViewEncapsulation,
     WritableSignal,
@@ -51,7 +49,6 @@ export class IssueDetailDialogComponent extends ViewDetailComponent {
     screenRecordingVideoUrl = signal<string | null>(null);
     private previewDialogRef: MatDialogRef<RecordingPreviewDialogComponent> | null =
         null;
-    private readonly destroyRef = inject(DestroyRef);
 
     constructor(
         private readonly issueService: IssueService,

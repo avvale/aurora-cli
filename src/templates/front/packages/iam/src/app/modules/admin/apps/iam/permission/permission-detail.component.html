@@ -26,7 +26,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('iam::permission.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -34,7 +34,9 @@
                     color="accent"
                 >
                     @if (
-                        'iam::permission.detail.update' | getSpinnerFlag | async
+                        'iam::permission.detail.update'
+                            | getActionStatus
+                            | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -56,7 +58,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('iam::permission.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -64,7 +66,9 @@
                     color="accent"
                 >
                     @if (
-                        'iam::permission.detail.create' | getSpinnerFlag | async
+                        'iam::permission.detail.create'
+                            | getActionStatus
+                            | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>

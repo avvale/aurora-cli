@@ -27,13 +27,15 @@
                     class="ml-3"
                     [disabled]="
                         fg.pristine ||
-                        ('iam::tenant.detail.update' | getSpinnerFlag | async)
+                        ('iam::tenant.detail.update' | getActionStatus | async)
                     "
                     mat-flat-button
                     form="iamTenantFormDetail"
                     color="accent"
                 >
-                    @if ('iam::tenant.detail.update' | getSpinnerFlag | async) {
+                    @if (
+                        'iam::tenant.detail.update' | getActionStatus | async
+                    ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
@@ -53,13 +55,15 @@
                     class="ml-3"
                     [disabled]="
                         fg.pristine ||
-                        ('iam::tenant.detail.create' | getSpinnerFlag | async)
+                        ('iam::tenant.detail.create' | getActionStatus | async)
                     "
                     mat-flat-button
                     form="iamTenantFormDetail"
                     color="accent"
                 >
-                    @if ('iam::tenant.detail.create' | getSpinnerFlag | async) {
+                    @if (
+                        'iam::tenant.detail.create' | getActionStatus | async
+                    ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>

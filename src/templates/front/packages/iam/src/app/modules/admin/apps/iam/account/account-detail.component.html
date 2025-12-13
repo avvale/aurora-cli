@@ -25,14 +25,14 @@
                     class="ml-3"
                     [disabled]="
                         fg.pristine ||
-                        ('iam::account.detail.update' | getSpinnerFlag | async)
+                        ('iam::account.detail.update' | getActionStatus | async)
                     "
                     mat-flat-button
                     form="iamAccountFormDetail"
                     color="accent"
                 >
                     @if (
-                        'iam::account.detail.update' | getSpinnerFlag | async
+                        'iam::account.detail.update' | getActionStatus | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -53,14 +53,14 @@
                     class="ml-3"
                     [disabled]="
                         fg.pristine ||
-                        ('iam::account.detail.create' | getSpinnerFlag | async)
+                        ('iam::account.detail.create' | getActionStatus | async)
                     "
                     mat-flat-button
                     form="iamAccountFormDetail"
                     color="accent"
                 >
                     @if (
-                        'iam::account.detail.create' | getSpinnerFlag | async
+                        'iam::account.detail.create' | getActionStatus | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -132,7 +132,10 @@
                         >
                             <mat-label>{{ t('iam.Client') }}</mat-label>
                             <mat-select formControlName="clientId">
-                                @for (client of clients$ | async; track client.id) {
+                                @for (
+                                    client of clients$ | async;
+                                    track client.id
+                                ) {
                                     <mat-option
                                         [value]="client.id"
                                         (onSelectionChange)="

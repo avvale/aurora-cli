@@ -25,13 +25,13 @@
                     class="ml-3"
                     [disabled]="
                         fg.pristine ||
-                        ('iam::role.detail.update' | getSpinnerFlag | async)
+                        ('iam::role.detail.update' | getActionStatus | async)
                     "
                     mat-flat-button
                     form="iamRoleFormDetail"
                     color="accent"
                 >
-                    @if ('iam::role.detail.update' | getSpinnerFlag | async) {
+                    @if ('iam::role.detail.update' | getActionStatus | async) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>
@@ -51,13 +51,13 @@
                     class="ml-3"
                     [disabled]="
                         fg.pristine ||
-                        ('iam::role.detail.create' | getSpinnerFlag | async)
+                        ('iam::role.detail.create' | getActionStatus | async)
                     "
                     mat-flat-button
                     form="iamRoleFormDetail"
                     color="accent"
                 >
-                    @if ('iam::role.detail.create' | getSpinnerFlag | async) {
+                    @if ('iam::role.detail.create' | getActionStatus | async) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
                         </mat-icon>

@@ -35,7 +35,7 @@
                     type="button"
                     class="ml-3"
                     color="warn"
-                    [disabled]="'{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete' | getSpinnerFlag | async"
+                    [disabled]="'{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete' | getActionStatus | async"
                     (click)="
                         actionService.action({
                             id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete',
@@ -43,7 +43,7 @@
                         })
                     "
                 >
-                @if ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete' | getSpinnerFlag | async)
+                @if ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.delete' | getActionStatus | async)
                 {
                     <mat-icon>
                         <mat-spinner diameter="20"></mat-spinner>
@@ -68,9 +68,9 @@
                     class="ml-3"
                     form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
                     color="accent"
-                    [disabled]="fg.pristine || ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' | getSpinnerFlag | async)"
+                    [disabled]="fg.pristine || ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' | getActionStatus | async)"
                 >
-                    @if ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' | getSpinnerFlag | async)
+                    @if ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.update' | getActionStatus | async)
                     {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -96,9 +96,9 @@
                     form="{{ toCamelCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}FormDetail"
                     class="ml-3"
                     color="accent"
-                    [disabled]="fg.pristine || ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create' | getSpinnerFlag | async)"
+                    [disabled]="fg.pristine || ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create' | getActionStatus | async)"
                 >
-                    @if ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create' | getSpinnerFlag | async)
+                    @if ('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.detail.create' | getActionStatus | async)
                     {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>

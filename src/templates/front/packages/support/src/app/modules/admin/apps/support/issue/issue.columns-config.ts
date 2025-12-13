@@ -66,18 +66,4 @@ export const issueColumnsConfig: (properties?: {
         translation: 'support.Subject',
         isUnaccent: true,
     },
-    {
-        type: ColumnDataType.JSONB,
-        field: 'attachments',
-        sort: 'attachments',
-        translation: 'support.Attachments',
-        isUnaccent: true,
-    },
-    {
-        type: ColumnDataType.JSONB,
-        field: 'screenRecording',
-        sort: 'screenRecording',
-        translation: 'support.ScreenRecording',
-        isUnaccent: true,
-    },
 ];

@@ -28,7 +28,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('support::config.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -36,7 +36,9 @@
                     color="accent"
                 >
                     @if (
-                        'support::config.detail.update' | getSpinnerFlag | async
+                        'support::config.detail.update'
+                            | getActionStatus
+                            | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>
@@ -58,7 +60,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('support::config.detail.create'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -66,7 +68,9 @@
                     color="accent"
                 >
                     @if (
-                        'support::config.detail.create' | getSpinnerFlag | async
+                        'support::config.detail.create'
+                            | getActionStatus
+                            | async
                     ) {
                         <mat-icon>
                             <mat-spinner diameter="20"></mat-spinner>

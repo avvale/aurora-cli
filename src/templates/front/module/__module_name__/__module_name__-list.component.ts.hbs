@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'ViewEncapsulation') path='@angular/core')
-            (object items=(array 'Action' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'defaultListImports' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService'  'log' 'queryStatementHandler' 'ViewBaseComponent') path='@aurora')
+            (object items=(array 'Action' 'ActionScope' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'defaultListImports' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService'  'log' 'queryStatementHandler' 'ViewBaseComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'Observable' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName))
             (
@@ -34,6 +34,7 @@ export const {{ toCamelCase schema.moduleName }}MainGridListId = '{{ toCamelCase
         ...defaultListImports,
     ],
 })
+@ActionScope('{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list')
 export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseComponent
 {
     // ---- customizations ----

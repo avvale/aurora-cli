@@ -46,7 +46,7 @@
                     [disabled]="
                         fg.pristine ||
                         ('tools::procedure.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async)
                     "
                     mat-flat-button
@@ -55,7 +55,7 @@
                 >
                     @if (
                         'tools::procedure.detail.update'
-                            | getSpinnerFlag
+                            | getActionStatus
                             | async
                     ) {
                         <mat-icon>
