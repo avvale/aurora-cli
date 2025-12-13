@@ -89,17 +89,32 @@ export class SupportDigestedWebhookEventHandler
 
                 if (comment) break;
 
-                await this.commandBus.dispatch(
-                    new SupportCreateCommentCommand({
-                        id: uuid(),
-                        parentId: null,
-                        externalId: firstHistory.comment.id,
-                        externalParentId: firstHistory.comment.parent,
-                        description: firstHistory.comment.text_content,
-                        issueId: task.id,
-                        displayName: firstHistory.user.username,
+                const parentComment = await this.queryBus.ask(
+                    new SupportFindCommentQuery({
+                        where: {
+                            externalId: firstHistory.comment.parent,
+                        },
                     }),
                 );
+
+                try {
+                    await this.commandBus.dispatch(
+                        new SupportCreateCommentCommand({
+                            id: uuid(),
+                            parentId: parentComment ? parentComment.id : null,
+                            externalId: firstHistory.comment.id,
+                            externalParentId: firstHistory.comment.parent,
+                            description: firstHistory.comment.text_content,
+                            issueId: task.id,
+                            displayName: firstHistory.user.username,
+                        }),
+                    );
+                } catch (error) {
+                    Logger.error(
+                        `Error creating comment from webhook: ${error}`,
+                        'SupportDigestWebhooksHandler',
+                    );
+                }
 
                 break;
             }
