@@ -18,6 +18,13 @@ export const issueColumnsConfig: (properties?: {
     },
     {
         type: ColumnDataType.STRING,
+        field: 'subject',
+        sort: 'subject',
+        translation: 'support.Subject',
+        isUnaccent: true,
+    },
+    {
+        type: ColumnDataType.STRING,
         field: 'displayName',
         sort: 'displayName',
         translation: 'support.DisplayName',
@@ -57,13 +64,6 @@ export const issueColumnsConfig: (properties?: {
         field: 'backVersion',
         sort: 'backVersion',
         translation: 'support.BackVersion',
-        isUnaccent: true,
-    },
-    {
-        type: ColumnDataType.STRING,
-        field: 'subject',
-        sort: 'subject',
-        translation: 'support.Subject',
         isUnaccent: true,
     },
 ];
