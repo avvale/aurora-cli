@@ -1,9 +1,5 @@
 import { SupportComment, SupportUpdateCommentsInput } from '@api/graphql';
 import {
-    SupportCommentDto,
-    SupportUpdateCommentsDto,
-} from '@api/support/comment';
-import {
     SupportGetCommentsQuery,
     SupportUpdateCommentsCommand,
 } from '@app/support/comment';
@@ -23,12 +19,12 @@ export class SupportUpdateCommentsHandler {
     ) {}
 
     async main(
-        payload: SupportUpdateCommentsInput | SupportUpdateCommentsDto,
+        payload: SupportUpdateCommentsInput,
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<SupportComment | SupportCommentDto> {
+    ): Promise<SupportComment> {
         await this.commandBus.dispatch(
             new SupportUpdateCommentsCommand(
                 payload,

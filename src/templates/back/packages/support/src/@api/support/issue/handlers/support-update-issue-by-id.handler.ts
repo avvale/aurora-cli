@@ -3,7 +3,6 @@ import {
     CLICKUP_TASK_PLATFORM_API_KEY,
     ClickupService,
 } from '@api/support/clickup/shared';
-import { SupportIssueDto, SupportUpdateIssueByIdDto } from '@api/support/issue';
 import {
     SupportFindIssueByIdQuery,
     SupportUpdateIssueByIdCommand,
@@ -30,11 +29,11 @@ export class SupportUpdateIssueByIdHandler {
     ) {}
 
     async main(
-        payload: SupportUpdateIssueByIdInput | SupportUpdateIssueByIdDto,
+        payload: SupportUpdateIssueByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<SupportIssue | SupportIssueDto> {
+    ): Promise<SupportIssue> {
         const issue = await this.queryBus.ask(
             new SupportFindIssueByIdQuery(payload.id, constraint, {
                 timezone,

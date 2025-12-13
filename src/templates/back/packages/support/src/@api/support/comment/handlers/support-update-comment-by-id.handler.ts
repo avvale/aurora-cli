@@ -4,10 +4,6 @@ import {
     ClickupService,
 } from '@api/support/clickup/shared';
 import {
-    SupportCommentDto,
-    SupportUpdateCommentByIdDto,
-} from '@api/support/comment';
-import {
     SupportFindCommentByIdQuery,
     SupportUpdateCommentByIdCommand,
 } from '@app/support/comment';
@@ -33,11 +29,11 @@ export class SupportUpdateCommentByIdHandler {
     ) {}
 
     async main(
-        payload: SupportUpdateCommentByIdInput | SupportUpdateCommentByIdDto,
+        payload: SupportUpdateCommentByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<SupportComment | SupportCommentDto> {
+    ): Promise<SupportComment> {
         const comment = await this.queryBus.ask(
             new SupportFindCommentByIdQuery(payload.id, constraint, {
                 timezone,

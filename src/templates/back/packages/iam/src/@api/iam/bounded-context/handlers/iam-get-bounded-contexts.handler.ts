@@ -1,5 +1,4 @@
 import { IamBoundedContext } from '@api/graphql';
-import { IamBoundedContextDto } from '@api/iam/bounded-context';
 import { IamGetBoundedContextsQuery } from '@app/iam/bounded-context';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -12,7 +11,7 @@ export class IamGetBoundedContextsHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamBoundedContext[] | IamBoundedContextDto[]> {
+    ): Promise<IamBoundedContext[]> {
         return await this.queryBus.ask(
             new IamGetBoundedContextsQuery(queryStatement, constraint, {
                 timezone,

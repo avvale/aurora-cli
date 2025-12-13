@@ -35,7 +35,8 @@ aggregateProperties:
     nullable: true
     index: index
   - name: externalParentId
-    type: id
+    type: varchar
+    maxLength: 64
     nullable: true
     relationship:
       type: many-to-one

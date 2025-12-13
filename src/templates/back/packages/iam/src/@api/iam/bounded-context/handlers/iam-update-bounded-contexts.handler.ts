@@ -1,9 +1,5 @@
 import { IamBoundedContext, IamUpdateBoundedContextsInput } from '@api/graphql';
 import {
-    IamBoundedContextDto,
-    IamUpdateBoundedContextsDto,
-} from '@api/iam/bounded-context';
-import {
     IamGetBoundedContextsQuery,
     IamUpdateBoundedContextsCommand,
 } from '@app/iam/bounded-context';
@@ -23,12 +19,12 @@ export class IamUpdateBoundedContextsHandler {
     ) {}
 
     async main(
-        payload: IamUpdateBoundedContextsInput | IamUpdateBoundedContextsDto,
+        payload: IamUpdateBoundedContextsInput,
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamBoundedContext | IamBoundedContextDto> {
+    ): Promise<IamBoundedContext> {
         await this.commandBus.dispatch(
             new IamUpdateBoundedContextsCommand(
                 payload,

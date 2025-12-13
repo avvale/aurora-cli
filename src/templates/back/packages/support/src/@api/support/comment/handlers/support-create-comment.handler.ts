@@ -3,10 +3,6 @@ import {
     CLICKUP_TASK_PLATFORM_API_KEY,
     ClickupService,
 } from '@api/support/clickup/shared';
-import {
-    SupportCommentDto,
-    SupportCreateCommentDto,
-} from '@api/support/comment';
 import { IamAccountResponse } from '@app/iam/account/domain/iam-account.response';
 import {
     SupportCreateCommentCommand,
@@ -31,10 +27,10 @@ export class SupportCreateCommentHandler {
 
     async main(
         account: IamAccountResponse,
-        payload: SupportCreateCommentInput | SupportCreateCommentDto,
+        payload: SupportCreateCommentInput,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<SupportComment | SupportCommentDto> {
+    ): Promise<SupportComment> {
         await this.commandBus.dispatch(
             new SupportCreateCommentCommand(
                 {

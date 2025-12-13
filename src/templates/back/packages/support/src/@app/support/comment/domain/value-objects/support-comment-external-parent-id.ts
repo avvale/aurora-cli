@@ -1,17 +1,9 @@
-import {
-    DataValueObject,
-    UuidValueObject,
-    ValidationRules,
-} from '@aurorajs.dev/core';
+import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class SupportCommentExternalParentId extends UuidValueObject {
+export class SupportCommentExternalParentId extends StringValueObject {
     public readonly type: string = 'SupportCommentExternalParentId';
 
-    constructor(
-        value: string,
-        validationRules: ValidationRules = {},
-        data: DataValueObject = {},
-    ) {
+    constructor(value: string, validationRules: ValidationRules = {}) {
         super(
             value,
             Object.assign(
@@ -19,11 +11,10 @@ export class SupportCommentExternalParentId extends UuidValueObject {
                     name: 'SupportCommentExternalParentId',
                     nullable: true,
                     undefinable: true,
-                    length: 36,
+                    maxLength: 64,
                 },
                 validationRules,
             ),
-            data,
         );
     }
 }

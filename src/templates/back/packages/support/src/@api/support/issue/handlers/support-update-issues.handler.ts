@@ -1,5 +1,4 @@
 import { SupportIssue, SupportUpdateIssuesInput } from '@api/graphql';
-import { SupportIssueDto, SupportUpdateIssuesDto } from '@api/support/issue';
 import {
     SupportGetIssuesQuery,
     SupportUpdateIssuesCommand,
@@ -20,12 +19,12 @@ export class SupportUpdateIssuesHandler {
     ) {}
 
     async main(
-        payload: SupportUpdateIssuesInput | SupportUpdateIssuesDto,
+        payload: SupportUpdateIssuesInput,
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<SupportIssue | SupportIssueDto> {
+    ): Promise<SupportIssue> {
         await this.commandBus.dispatch(
             new SupportUpdateIssuesCommand(
                 payload,

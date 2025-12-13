@@ -1,5 +1,4 @@
 import { SupportComment } from '@api/graphql';
-import { SupportCommentDto } from '@api/support/comment';
 import { SupportGetCommentsQuery } from '@app/support/comment';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -12,7 +11,7 @@ export class SupportGetCommentsHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<SupportComment[] | SupportCommentDto[]> {
+    ): Promise<SupportComment[]> {
         return await this.queryBus.ask(
             new SupportGetCommentsQuery(queryStatement, constraint, {
                 timezone,

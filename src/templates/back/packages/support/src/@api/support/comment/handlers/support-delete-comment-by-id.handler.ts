@@ -3,7 +3,6 @@ import {
     CLICKUP_TASK_PLATFORM_API_KEY,
     ClickupService,
 } from '@api/support/clickup/shared';
-import { SupportCommentDto } from '@api/support/comment';
 import {
     SupportDeleteCommentByIdCommand,
     SupportFindCommentByIdQuery,
@@ -39,7 +38,7 @@ export class SupportDeleteCommentByIdHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<SupportComment | SupportCommentDto> {
+    ): Promise<SupportComment> {
         const comment = await this.queryBus.ask(
             new SupportFindCommentByIdQuery(id, constraint, {
                 timezone,

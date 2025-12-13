@@ -5,7 +5,6 @@ import {
     CLICKUP_TASK_PLATFORM_LIST_ID,
     ClickupService,
 } from '@api/support/clickup/shared';
-import { SupportCreateIssueDto, SupportIssueDto } from '@api/support/issue';
 import { IamAccountResponse } from '@app/iam/account/domain/iam-account.response';
 import {
     SupportCreateIssueCommand,
@@ -30,10 +29,10 @@ export class SupportCreateIssueHandler {
 
     async main(
         account: IamAccountResponse,
-        payload: SupportCreateIssueInput | SupportCreateIssueDto,
+        payload: SupportCreateIssueInput,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<SupportIssue | SupportIssueDto> {
+    ): Promise<SupportIssue> {
         await this.commandBus.dispatch(
             new SupportCreateIssueCommand(
                 {
@@ -55,10 +54,9 @@ export class SupportCreateIssueHandler {
         );
 
         const screenRecordingUploaded = payload.screenRecording
-            ? await this.storageAccountFileManagerService.uploadFile({
-                  ...payload.screenRecording,
-                  name: payload.screenRecording.file.name,
-              })
+            ? await this.storageAccountFileManagerService.uploadFile(
+                  payload.screenRecording,
+              )
             : null;
 
         const clickupTaskPlatformApiKey = await this.cacheManager.get<string>(

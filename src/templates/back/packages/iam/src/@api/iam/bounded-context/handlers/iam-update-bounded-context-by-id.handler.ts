@@ -3,10 +3,6 @@ import {
     IamUpdateBoundedContextByIdInput,
 } from '@api/graphql';
 import {
-    IamBoundedContextDto,
-    IamUpdateBoundedContextByIdDto,
-} from '@api/iam/bounded-context';
-import {
     IamFindBoundedContextByIdQuery,
     IamUpdateBoundedContextByIdCommand,
 } from '@app/iam/bounded-context';
@@ -27,13 +23,11 @@ export class IamUpdateBoundedContextByIdHandler {
     ) {}
 
     async main(
-        payload:
-            | IamUpdateBoundedContextByIdInput
-            | IamUpdateBoundedContextByIdDto,
+        payload: IamUpdateBoundedContextByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamBoundedContext | IamBoundedContextDto> {
+    ): Promise<IamBoundedContext> {
         const boundedContext = await this.queryBus.ask(
             new IamFindBoundedContextByIdQuery(payload.id, constraint, {
                 timezone,

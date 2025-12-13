@@ -1,5 +1,4 @@
 import { IamBoundedContext } from '@api/graphql';
-import { IamBoundedContextDto } from '@api/iam/bounded-context';
 import {
     IamDeleteBoundedContextsCommand,
     IamGetBoundedContextsQuery,
@@ -24,7 +23,7 @@ export class IamDeleteBoundedContextsHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamBoundedContext[] | IamBoundedContextDto[]> {
+    ): Promise<IamBoundedContext[]> {
         const boundedContexts = await this.queryBus.ask(
             new IamGetBoundedContextsQuery(queryStatement, constraint, {
                 timezone,

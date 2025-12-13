@@ -27,6 +27,7 @@ export class ClickupService {
     apiCreateTask = '/api/v2/list/:listId/task';
     apiGetTask = '/api/v2/task/:taskId';
     apiUpdateTask = '/api/v2/task/:taskId';
+    apiDeleteTask = '/api/v2/task/:taskId';
 
     // attachments
     apiCreateAttachment = '/api/v2/task/:taskId/attachment';
@@ -179,6 +180,21 @@ export class ClickupService {
             {
                 ...task,
             },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: options.authorization,
+                },
+            },
+        );
+    }
+
+    deleteTask(
+        taskId: string,
+        options: { authorization: string },
+    ): Observable<any> {
+        return this.httpService.delete(
+            `${this.apiUrl}${Str.replaceParams(this.apiDeleteTask, { taskId })}`,
             {
                 headers: {
                     'Content-Type': 'application/json',

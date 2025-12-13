@@ -1,9 +1,5 @@
 import { IamBoundedContext, IamCreateBoundedContextInput } from '@api/graphql';
 import {
-    IamBoundedContextDto,
-    IamCreateBoundedContextDto,
-} from '@api/iam/bounded-context';
-import {
     IamCreateBoundedContextCommand,
     IamFindBoundedContextByIdQuery,
 } from '@app/iam/bounded-context';
@@ -18,10 +14,10 @@ export class IamCreateBoundedContextHandler {
     ) {}
 
     async main(
-        payload: IamCreateBoundedContextInput | IamCreateBoundedContextDto,
+        payload: IamCreateBoundedContextInput,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamBoundedContext | IamBoundedContextDto> {
+    ): Promise<IamBoundedContext> {
         await this.commandBus.dispatch(
             new IamCreateBoundedContextCommand(payload, {
                 timezone,

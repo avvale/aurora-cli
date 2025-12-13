@@ -216,22 +216,6 @@ describe('comment', () => {
             });
     });
 
-    test('/REST:POST support/comment/create - Got 400 Conflict, CommentExternalParentId is not allowed, must be a length of 36', () => {
-        return request(app.getHttpServer())
-            .post('/support/comment/create')
-            .set('Accept', 'application/json')
-            .send({
-                ...mockData[0],
-                externalParentId: '*************************************',
-            })
-            .expect(400)
-            .then((res) => {
-                expect(res.body.message).toContain(
-                    'Value for SupportCommentExternalParentId is not allowed, must be a length of 36',
-                );
-            });
-    });
-
     test('/REST:POST support/comment/create - Got 400 Conflict, CommentIssueId is not allowed, must be a length of 36', () => {
         return request(app.getHttpServer())
             .post('/support/comment/create')
@@ -277,6 +261,23 @@ describe('comment', () => {
             .then((res) => {
                 expect(res.body.message).toContain(
                     'Value for SupportCommentExternalId is too large, has a maximum length of 64',
+                );
+            });
+    });
+
+    test('/REST:POST support/comment/create - Got 400 Conflict, CommentExternalParentId is too large, has a maximum length of 64', () => {
+        return request(app.getHttpServer())
+            .post('/support/comment/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                externalParentId:
+                    '*****************************************************************',
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for SupportCommentExternalParentId is too large, has a maximum length of 64',
                 );
             });
     });

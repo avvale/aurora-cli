@@ -184,7 +184,7 @@ export class SupportCommentModel extends Model<SupportCommentModel> {
     @Column({
         field: 'externalParentId',
         allowNull: true,
-        type: DataTypes.UUID,
+        type: DataTypes.STRING(64),
     })
     externalParentId: string;
 

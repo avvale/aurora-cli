@@ -1,5 +1,4 @@
 import { SupportIssue } from '@api/graphql';
-import { SupportIssueDto } from '@api/support/issue';
 import { SupportFindIssueQuery } from '@app/support/issue';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -12,7 +11,7 @@ export class SupportFindIssueHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<SupportIssue | SupportIssueDto> {
+    ): Promise<SupportIssue> {
         const issue = await this.queryBus.ask(
             new SupportFindIssueQuery(queryStatement, constraint, {
                 timezone,
