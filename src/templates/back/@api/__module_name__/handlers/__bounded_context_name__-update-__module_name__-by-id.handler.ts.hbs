@@ -9,16 +9,6 @@
                     items=
                     (
                         array
-                            (sumStrings schema.aggregateName 'Dto')
-                            (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdDto')
-                    )
-                    path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
-            )
-            (
-                object
-                    items=
-                    (
-                        array
                             (sumStrings (toPascalCase schema.boundedContextName) 'Find' (toPascalCase schema.moduleName) 'ByIdQuery')
                             (sumStrings (toPascalCase schema.boundedContextName) 'Update' (toPascalCase schema.moduleName) 'ByIdCommand')
                     )
@@ -63,7 +53,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{#if schema.hasTenant}}
         account: IamAccountResponse,
         {{/if}}
-        payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput | {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdDto,
+        payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleName }}ByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
         {{#if (hasI18nProperties schema.aggregateProperties) }}
@@ -72,7 +62,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{#if schema.hasAuditing}}
         auditing?: AuditingMeta,
         {{/if}}
-    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }} | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto>
+    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}>
     {
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         if (!contentLanguage) throw new BadRequestException('To update a multi-language object, the content-language header must be defined.');

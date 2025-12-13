@@ -4,7 +4,6 @@
             (object items=(array 'Injectable') path='@nestjs/common')
             (object items=(array 'ICommandBus' 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items=schema.aggregateName path='@api/graphql')
-            (object items=(sumStrings schema.aggregateName 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (
                 object
                     items=
@@ -64,7 +63,7 @@ export class {{ toPascalCase schema.boundedContextName }}Delete{{ toPascalCase s
         {{#if schema.hasAuditing}}
         auditing?: AuditingMeta,
         {{/if}}
-    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[] | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto[]>
+    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[]>
     {
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         if (!contentLanguage) throw new BadRequestException('To delete an multi-language objects, the content-language header must be defined.');

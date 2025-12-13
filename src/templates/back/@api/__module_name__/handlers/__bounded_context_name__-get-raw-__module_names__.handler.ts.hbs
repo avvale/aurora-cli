@@ -4,7 +4,6 @@
             (object items=(array 'Injectable') path='@nestjs/common')
             (object items=(array 'IQueryBus' 'QueryStatement') path=config.auroraCorePackage)
             (object items=schema.aggregateName path='@api/graphql')
-            (object items=(sumStrings schema.aggregateName 'Dto') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
             (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Query') path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
@@ -49,7 +48,7 @@ export class {{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase s
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         contentLanguage?: string,
         {{/if}}
-    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[] | {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Dto[]>
+    ): Promise<{{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}[]>
     {
         {{#if (hasI18nProperties schema.aggregateProperties) }}
         if (!contentLanguage) throw new BadRequestException('To get a multi-language objects, the content-language header must be defined.');
