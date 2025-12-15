@@ -8,6 +8,7 @@
                     items=
                     (
                         array
+                            (sumStrings schema.aggregateName 'Mapper')
                             (sumStrings (toPascalCase schema.boundedContextName) 'Paginate' (toPascalCase schema.moduleNames) 'Query')
                     )
                     path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName))
@@ -23,6 +24,8 @@
 @QueryHandler({{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Query)
 export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}QueryHandler implements IQueryHandler<{{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Query>
 {
+    private readonly mapper: {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}Mapper();
+
     constructor(
         private readonly paginate{{ toPascalCase schema.moduleNames }}Service: {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase schema.moduleNames }}Service,
     ) {}
@@ -38,7 +41,7 @@ export class {{ toPascalCase schema.boundedContextName }}Paginate{{ toPascalCase
         return new PaginationResponse(
             total,
             count,
-            rows.map(item => item.toDTO()),
+            this.mapper.mapAggregatesToResponses(rows),
         );
     }
 }

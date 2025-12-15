@@ -45,6 +45,7 @@ input StorageAccountFileManagerFileInput {
 input StorageAccountFileManagerFileUploadedInput {
     id: ID!
     file: Upload!
+    size: GraphQLInt
     relativePathSegments: [GraphQLString]!
     containerName: GraphQLString
     hasCreateLibrary: GraphQLBoolean

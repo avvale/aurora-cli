@@ -777,6 +777,32 @@ export class Add extends Command {
                         'StorageAccountFileManagerService',
                     );
 
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@api/storage-account/file-manager',
+                        [
+                            'StorageAccountSharedAccessSignatureService',
+                            'StorageAccountLocalSharedAccessSignatureService',
+                        ],
+                    );
+
+                    DecoratorDriver.addDecoratorAdapter(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'providers',
+                        'StorageAccountSharedAccessSignatureService',
+                        'StorageAccountLocalSharedAccessSignatureService',
+                    );
+
+                    DecoratorDriver.addModuleDecoratorProperty(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'exports',
+                        'StorageAccountSharedAccessSignatureService',
+                    );
+
                     sharedModuleSourceFile.saveSync();
 
                     ux.action.start('Generating graphql types');
@@ -817,6 +843,21 @@ export class Add extends Command {
                         'providers',
                         'StorageAccountFileManagerService',
                         'StorageAccountAzureFileManagerService',
+                    );
+
+                    ImportDriver.createImportItems(
+                        sharedModuleSourceFile,
+                        '@app/storage-account-azure/file-manager',
+                        ['StorageAccountAzureSharedAccessSignatureService'],
+                    );
+
+                    DecoratorDriver.changeModuleDecoratorPropertyAdapter(
+                        sharedModuleSourceFile,
+                        'SharedModule',
+                        'Module',
+                        'providers',
+                        'StorageAccountSharedAccessSignatureService',
+                        'StorageAccountAzureSharedAccessSignatureService',
                     );
 
                     sharedModuleSourceFile.saveSync();

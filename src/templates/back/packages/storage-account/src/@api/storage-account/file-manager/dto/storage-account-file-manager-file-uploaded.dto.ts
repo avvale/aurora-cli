@@ -15,6 +15,12 @@ export class StorageAccountFileManagerFileUploadedDto {
     file: any;
 
     @ApiProperty({
+        type: Number,
+        description: 'size [input here api field description]',
+    })
+    size: number;
+
+    @ApiProperty({
         type: [String],
         description: 'relativePathSegments [input here api field description]',
     })

@@ -1,4 +1,8 @@
 import { IamAccountMapper } from '@app/iam/account';
+import {
+    storageAccountApplySharedAccessSignatureFunction,
+    StorageAccountSharedAccessSignatureService,
+} from '@app/storage-account/shared-access-signature';
 import { SupportCommentMapper } from '@app/support/comment';
 import { SupportIssue, SupportIssueResponse } from '@app/support/issue';
 import {
@@ -29,7 +33,9 @@ import {
     LiteralObject,
     MapperOptions,
 } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class SupportIssueMapper implements IMapper {
     constructor(public options: MapperOptions = { eagerLoading: true }) {}
 
@@ -63,18 +69,32 @@ export class SupportIssueMapper implements IMapper {
      * Map aggregate to response
      * @param issue
      */
-    mapAggregateToResponse(issue: SupportIssue): SupportIssueResponse {
-        return this.makeResponse(issue);
+    mapAggregateToResponse(
+        issue: SupportIssue,
+        storageAccountSharedAccessSignatureService?: StorageAccountSharedAccessSignatureService,
+    ): SupportIssueResponse {
+        return this.makeResponse(
+            issue,
+            storageAccountSharedAccessSignatureService,
+        );
     }
 
     /**
      * Map array of aggregates to array responses
      * @param issues
      */
-    mapAggregatesToResponses(issues: SupportIssue[]): SupportIssueResponse[] {
+    mapAggregatesToResponses(
+        issues: SupportIssue[],
+        storageAccountSharedAccessSignatureService?: StorageAccountSharedAccessSignatureService,
+    ): SupportIssueResponse[] {
         if (!Array.isArray(issues)) return;
 
-        return issues.map((issue) => this.makeResponse(issue));
+        return issues.map((issue) =>
+            this.makeResponse(
+                issue,
+                storageAccountSharedAccessSignatureService,
+            ),
+        );
     }
 
     private makeAggregate(
@@ -149,8 +169,20 @@ export class SupportIssueMapper implements IMapper {
         );
     }
 
-    private makeResponse(issue: SupportIssue): SupportIssueResponse {
+    private makeResponse(
+        issue: SupportIssue,
+        storageAccountSharedAccessSignatureService?: StorageAccountSharedAccessSignatureService,
+    ): SupportIssueResponse {
         if (!issue) return null;
+
+        const screenRecording =
+            storageAccountApplySharedAccessSignatureFunction(
+                issue.screenRecording.value?.url,
+                storageAccountSharedAccessSignatureService,
+                {
+                    wrapperObject: issue.screenRecording.value,
+                },
+            );
 
         return new SupportIssueResponse(
             issue.id.value,
@@ -168,7 +200,7 @@ export class SupportIssueMapper implements IMapper {
             issue.subject.value,
             issue.description.value,
             issue.attachments.value,
-            issue.screenRecording.value,
+            screenRecording,
             issue.meta.value,
             issue.createdAt.value,
             issue.updatedAt.value,

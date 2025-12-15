@@ -1,4 +1,7 @@
-import { SupportPaginateIssuesQuery } from '@app/support/issue';
+import {
+    SupportIssueMapper,
+    SupportPaginateIssuesQuery,
+} from '@app/support/issue';
 import { SupportPaginateIssuesService } from '@app/support/issue/application/paginate/support-paginate-issues.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +10,8 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class SupportPaginateIssuesQueryHandler
     implements IQueryHandler<SupportPaginateIssuesQuery>
 {
+    private readonly mapper: SupportIssueMapper = new SupportIssueMapper();
+
     constructor(
         private readonly paginateIssuesService: SupportPaginateIssuesService,
     ) {}
@@ -23,7 +28,7 @@ export class SupportPaginateIssuesQueryHandler
         return new PaginationResponse(
             total,
             count,
-            rows.map((item) => item.toDTO()),
+            this.mapper.mapAggregatesToResponses(rows),
         );
     }
 }

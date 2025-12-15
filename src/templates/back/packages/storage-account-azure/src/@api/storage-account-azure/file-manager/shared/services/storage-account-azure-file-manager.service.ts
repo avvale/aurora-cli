@@ -290,7 +290,7 @@ export class StorageAccountAzureFileManagerService
             mimetype,
             extension: extensionFile,
             relativePathSegments,
-            size: null,
+            size: filePayload.size,
             url: sanitizedUrl,
             isCropable,
             isUploaded: true,

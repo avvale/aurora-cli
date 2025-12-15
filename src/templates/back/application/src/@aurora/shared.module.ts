@@ -1,5 +1,13 @@
-import { CoreGetFallbackLangFromJsonService, CoreGetLangsFromJsonService } from '@aurora/modules';
-import { AuditingRunner, AuditingRunnerDisabledImplementationService, AuroraMetadataModule, CoreAddI18nConstraintService, CoreGetContentLanguageObjectService, CoreGetFallbackLangService, CoreGetLangsService, CoreGetSearchKeyLangService, CoreModule } from '@aurorajs.dev/core';
+import {
+    AuditingRunner,
+    AuroraMetadataModule,
+    CoreAddI18nConstraintService,
+    CoreGetContentLanguageObjectService,
+    CoreGetFallbackLangService,
+    CoreGetLangsService,
+    CoreGetSearchKeyLangService,
+    CoreModule,
+} from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -11,18 +19,21 @@ import { SentryModule } from './modules';
         AuroraMetadataModule,
         CacheModule.register({ isGlobal: true, ttl: 0 }),
         ConfigModule.forRoot({
-            isGlobal   : true,
+            isGlobal: true,
             envFilePath: ['../.env', '.env'],
         }),
         CoreModule,
         CqrsModule,
         SentryModule.forRootAsync({
-            imports   : [ConfigModule],
-            inject    : [ConfigService],
+            imports: [ConfigModule],
+            inject: [ConfigService],
             useFactory: (configService: ConfigService) => ({
-                dsn        : configService.get('SENTRY_DSN'),
+                dsn: configService.get('SENTRY_DSN'),
                 environment: configService.get('SENTRY_ENVIRONMENT'),
-                release    : configService.get('SENTRY_PROJECT') + '@' + process.env.npm_package_version,
+                release:
+                    configService.get('SENTRY_PROJECT') +
+                    '@' +
+                    process.env.npm_package_version,
             }),
         }),
     ],
@@ -31,15 +42,15 @@ import { SentryModule } from './modules';
         CoreGetContentLanguageObjectService,
         CoreGetSearchKeyLangService,
         {
-            provide : AuditingRunner,
+            provide: AuditingRunner,
             useClass: AuditingRunnerDisabledImplementationService,
         },
         {
-            provide : CoreGetLangsService,
+            provide: CoreGetLangsService,
             useClass: CoreGetLangsFromJsonService,
         },
         {
-            provide : CoreGetFallbackLangService,
+            provide: CoreGetFallbackLangService,
             useClass: CoreGetFallbackLangFromJsonService,
         }
     ],
