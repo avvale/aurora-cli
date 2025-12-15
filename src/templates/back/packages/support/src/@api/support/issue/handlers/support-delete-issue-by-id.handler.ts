@@ -16,7 +16,7 @@ import {
     QueryStatement,
 } from '@aurorajs.dev/core';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { lastValueFrom } from 'rxjs';
 
@@ -70,7 +70,13 @@ export class SupportDeleteIssueByIdHandler {
             this.clickupService.deleteTask(issue.externalId, {
                 authorization: clickupTaskPlatformApiKey,
             }),
-        );
+        ).catch((error) => {
+            if (error.status === 401)
+                Logger.error(
+                    `Unauthorized request to ClickUp API when deleting task with id: ${issue.id}. Please check that the CLICKUP_TASK_PLATFORM_API_KEY value is correct in the KeyValues section.`,
+                    'SupportDeleteIssueByIdHandler',
+                );
+        });
 
         return issue;
     }
