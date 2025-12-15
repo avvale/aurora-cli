@@ -1,0 +1,13 @@
+import { CQMetadata } from '@aurorajs.dev/core';
+
+export class ToolsCreateWebhookLogCommand {
+    constructor(
+        public readonly payload: {
+            id: string;
+            url: string;
+            headerRequest?: any;
+            bodyRequest?: any;
+        },
+        public readonly cQMetadata?: CQMetadata,
+    ) {}
+}

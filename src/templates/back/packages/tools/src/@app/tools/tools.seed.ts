@@ -17,6 +17,7 @@ export const permissions = [
         roleIds: [],
     },
 
+    // tools.keyValue
     {
         id: 'ba716b6f-66ff-4fe4-bee0-e019d0cc6fed',
         name: 'tools.keyValue.access',
@@ -54,6 +55,7 @@ export const permissions = [
         roleIds: [],
     },
 
+    // tools.procedure
     {
         id: 'ea095c30-b427-4197-860e-ec12cade009c',
         name: 'tools.procedure.access',
@@ -97,6 +99,7 @@ export const permissions = [
         roleIds: [],
     },
 
+    // tools.migration
     {
         id: '8f7dbbcc-a6bf-4c9e-972c-b41cd61ed3f2',
         name: 'tools.migration.access',
@@ -140,6 +143,15 @@ export const permissions = [
         roleIds: [],
     },
 
+    // tools.webhooks
+    {
+        id: '36210631-ce49-4432-8215-907bab7ebcb0',
+        name: 'tools.webhooks.access',
+        boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304',
+        roleIds: [],
+    },
+
+    // tools.webhook
     {
         id: 'f9eb7593-52a2-43fd-8820-c7a7e541b6d6',
         name: 'tools.webhook.access',
@@ -173,6 +185,26 @@ export const permissions = [
     {
         id: '24d2c8a3-9766-4feb-a8a4-6c9f83e918b8',
         name: 'tools.webhook.delete',
+        boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304',
+        roleIds: [],
+    },
+
+    // tools.webhookLog
+    {
+        id: '3d278009-17a5-4c9c-b427-4f90385f9bf8',
+        name: 'tools.webhookLog.access',
+        boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304',
+        roleIds: [],
+    },
+    {
+        id: '48f08da1-ee9d-4798-a619-55487fdfb884',
+        name: 'tools.webhookLog.get',
+        boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304',
+        roleIds: [],
+    },
+    {
+        id: 'c2a47816-5e3d-4783-9378-e0b6773e8c26',
+        name: 'tools.webhookLog.delete',
         boundedContextId: '82cdf742-62ee-40f5-82e7-530e39710304',
         roleIds: [],
     },

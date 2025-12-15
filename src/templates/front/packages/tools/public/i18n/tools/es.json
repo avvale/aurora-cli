@@ -1,4 +1,5 @@
 {
+    "BodyRequest": "BodyRequest",
     "CheckedAt": "Comprobado",
     "Description": "Description",
     "DownScript": "Script de desinstalación",
@@ -7,10 +8,12 @@
     "ExecutedAt": "Ejecutado el",
     "ExternalId": "ExternalId",
     "Hash": "Hash",
+    "HeaderRequest": "HeaderRequest",
     "InstallScript": "Instalar Script",
     "InstallWarning": "Va a realizar la instalación del script {{ name }}. Asegúrese de que comprende las implicaciones antes de proceder.",
     "IsActive": "Activo",
     "IsCached": "Cacheado",
+    "IsEncrypted": "IsEncrypted",
     "IsExecuted": "Ejecutado",
     "IsUpdated": "Actualizado",
     "Key": "Clave",
@@ -40,8 +43,11 @@
     "UninstallScript": "Desinstalar Script",
     "UninstallWarning": "Va a realizar la desinstalación del script {{ name }}. Asegúrese de que comprende las implicaciones antes de proceder.",
     "UpScript": "Script de instalación",
+    "Url": "Url",
     "Value": "Valor",
     "Version": "Versión",
     "Webhook": "Webhook",
+    "WebhookLog": "Webhook Log",
+    "WebhookLogs": "Webhook Logs",
     "Webhooks": "Webhooks"
 }

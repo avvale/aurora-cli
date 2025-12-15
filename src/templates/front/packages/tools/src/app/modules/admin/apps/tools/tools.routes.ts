@@ -13,6 +13,9 @@ import { migrationEditResolver, migrationNewResolver, migrationPaginationResolve
 import { WebhookListComponent } from './webhook/webhook-list.component';
 import { WebhookDetailComponent } from './webhook/webhook-detail.component';
 import { webhookEditResolver, webhookNewResolver, webhookPaginationResolver } from './webhook/webhook.resolvers';
+import { WebhookLogListComponent } from './webhook-log/webhook-log-list.component';
+import { WebhookLogDetailComponent } from './webhook-log/webhook-log-detail.component';
+import { webhookLogEditResolver, webhookLogNewResolver, webhookLogPaginationResolver } from './webhook-log/webhook-log.resolvers';
 
 export default [
     {
@@ -31,6 +34,9 @@ export default [
             { path: 'webhook', component: WebhookListComponent, resolve: { data: webhookPaginationResolver }, data: { permission: 'tools.webhook.get' }},
             { path: 'webhook/new', component: WebhookDetailComponent, resolve: { data: webhookNewResolver }, data: { permission: 'tools.webhook.create' }},
             { path: 'webhook/edit/:id', component: WebhookDetailComponent, resolve: { data: webhookEditResolver }, data: { permission: 'tools.webhook.get' }},
+            { path: 'webhook-log', component: WebhookLogListComponent, resolve: { data: webhookLogPaginationResolver }, data: { permission: 'tools.webhookLog.get' }},
+            { path: 'webhook-log/new', component: WebhookLogDetailComponent, resolve: { data: webhookLogNewResolver }, data: { permission: 'tools.webhookLog.create' }},
+            { path: 'webhook-log/edit/:id', component: WebhookLogDetailComponent, resolve: { data: webhookLogEditResolver }, data: { permission: 'tools.webhookLog.get' }},
         ],
         providers: [
             {

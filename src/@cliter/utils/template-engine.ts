@@ -12,29 +12,21 @@ import '../prototypes/string-to-snake-case';
 import '../prototypes/string-to-snake-case.interface';
 import { formatCode } from './prettier-engine';
 
-const templateEngine =
-{
+const templateEngine = {
     /**
      * Render templates with handlebars template engine.
      * @param {string} content - Template content
      * @param {any} data - Data helper to render templates
      * @return {string} Rendered template
      */
-    async render(
-        content: string,
-        data: any,
-    ): Promise<string>
-    {
+    async render(content: string, data: any): Promise<string> {
         // add helpers to handlebars template engine
         handlebarsHelpers({ handlebars });
 
-        const code = handlebars.compile(content)(
-            data,
-            {
-                allowProtoPropertiesByDefault: true,
-                allowProtoMethodsByDefault   : true,
-            },
-        );
+        const code = handlebars.compile(content)(data, {
+            allowProtoPropertiesByDefault: true,
+            allowProtoMethodsByDefault: true,
+        });
 
         return formatCode(code, data.writePath, process.cwd());
     },

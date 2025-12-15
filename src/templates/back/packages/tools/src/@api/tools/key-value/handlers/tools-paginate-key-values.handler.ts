@@ -1,6 +1,6 @@
-import { Pagination } from '@api/graphql';
+import { Pagination, ToolsKeyValueType } from '@api/graphql';
 import { ToolsPaginateKeyValuesQuery } from '@app/tools/key-value';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Crypt, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -12,10 +12,18 @@ export class ToolsPaginateKeyValuesHandler {
         constraint?: QueryStatement,
         timezone?: string,
     ): Promise<Pagination> {
-        return await this.queryBus.ask(
+        const keyValuesPaginated = await this.queryBus.ask(
             new ToolsPaginateKeyValuesQuery(queryStatement, constraint, {
                 timezone,
             }),
         );
+
+        for (const keyValue of keyValuesPaginated.rows) {
+            if (keyValue.type === ToolsKeyValueType.SECRET)
+                keyValue.value = Crypt.decryptWithAuroraPrivateKey(
+                    keyValue.value,
+                );
+        }
+        return keyValuesPaginated;
     }
 }

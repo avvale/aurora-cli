@@ -1,6 +1,6 @@
 import { ToolsKeyValue, ToolsKeyValueType } from '@api/graphql';
 import { ToolsFindKeyValueQuery } from '@app/tools/key-value';
-import { IQueryBus } from '@aurorajs.dev/core';
+import { Crypt, IQueryBus } from '@aurorajs.dev/core';
 import { ModuleRef } from '@nestjs/core';
 
 export const getKeyValue = async <
@@ -14,6 +14,13 @@ export const getKeyValue = async <
     const keyValue: ToolsKeyValue = await queryBus.ask(
         new ToolsFindKeyValueQuery({ where: { key } }),
     );
+
+    if (!keyValue) return null;
+
+    if (keyValue.type === ToolsKeyValueType.SECRET)
+        keyValue.value = Crypt.decryptWithAuroraPrivateKey(
+            keyValue.value as string,
+        );
 
     switch (keyValue.type) {
         case ToolsKeyValueType.STRING:

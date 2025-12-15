@@ -189,3 +189,38 @@ export interface ToolsUpdateWebhooks {
     secret?: string;
     meta?: any;
 }
+
+export interface ToolsWebhookLog {
+    id: string;
+    rowId: number;
+    url: string;
+    headerRequest?: any;
+    bodyRequest?: any;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
+}
+
+export interface ToolsCreateWebhookLog {
+    id: string;
+    rowId: number;
+    url: string;
+    headerRequest?: any;
+    bodyRequest?: any;
+}
+
+export interface ToolsUpdateWebhookLogById {
+    id: string;
+    rowId?: number;
+    url?: string;
+    headerRequest?: any;
+    bodyRequest?: any;
+}
+
+export interface ToolsUpdateWebhookLogs {
+    id?: string;
+    rowId?: number;
+    url?: string;
+    headerRequest?: any;
+    bodyRequest?: any;
+}

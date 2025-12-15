@@ -11,19 +11,19 @@
         },
         {
             "path": "src/app/modules/admin/apps/tools/webhook/webhook-detail.component.html",
-            "integrity": "sha1:ba55db31dbf9bbe6a363c8b5614ade52c5333714"
+            "integrity": "sha1:8032db22a491f8028a1d98605a5e3b07a896460d"
         },
         {
             "path": "src/app/modules/admin/apps/tools/webhook/webhook-detail.component.ts",
-            "integrity": "sha1:85b2a1c49ad882926998af85213aefe8d2271101"
+            "integrity": "sha1:b490d21e7913bb40f1a220f3be55dd23d1086d16"
         },
         {
             "path": "src/app/modules/admin/apps/tools/webhook/webhook-list.component.html",
-            "integrity": "sha1:6c3d567941b81bd94f51e992d2b2e4ad7efc5815"
+            "integrity": "sha1:6f83cd06c24d7bdc0c63e8f4e041336a73776a7a"
         },
         {
             "path": "src/app/modules/admin/apps/tools/webhook/webhook-list.component.ts",
-            "integrity": "sha1:75aff3433a7b5ab2607585046c3f31dc0186f4b2"
+            "integrity": "sha1:140941c7903edba0301e3d5247722e84c8e1322a"
         },
         {
             "path": "src/app/modules/admin/apps/tools/webhook/webhook.columns-config.ts",

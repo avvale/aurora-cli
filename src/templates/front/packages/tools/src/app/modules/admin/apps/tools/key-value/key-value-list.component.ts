@@ -3,10 +3,11 @@ import {
     Component,
     ViewEncapsulation,
 } from '@angular/core';
+import { ToolsKeyValue } from '@apps/tools';
 import { keyValueColumnsConfig, KeyValueService } from '@apps/tools/key-value';
-import { ToolsKeyValue } from '@apps/tools/tools.types';
 import {
     Action,
+    ActionScope,
     ColumnConfig,
     ColumnDataType,
     Crumb,
@@ -32,6 +33,7 @@ export const keyValueMainGridListId = 'tools::keyValue.list.mainGridList';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultListImports],
 })
+@ActionScope('tools::keyValue.list')
 export class KeyValueListComponent extends ViewBaseComponent {
     // ---- customizations ----
     // ..
@@ -70,7 +72,7 @@ export class KeyValueListComponent extends ViewBaseComponent {
             translation: 'Selects',
             sticky: true,
         },
-        ...keyValueColumnsConfig,
+        ...keyValueColumnsConfig({ translator: this.translocoService }),
     ];
 
     constructor(
@@ -116,7 +118,7 @@ export class KeyValueListComponent extends ViewBaseComponent {
                         query: action.meta.query
                             ? action.meta.query
                             : queryStatementHandler({
-                                  columnsConfig: keyValueColumnsConfig,
+                                  columnsConfig: keyValueColumnsConfig(),
                               })
                                   .setColumFilters(
                                       this.gridFiltersStorageService.getColumnFilterState(
@@ -209,10 +211,10 @@ export class KeyValueListComponent extends ViewBaseComponent {
                     }),
                 );
 
-                const columns: string[] = keyValueColumnsConfig.map(
+                const columns: string[] = keyValueColumnsConfig().map(
                     (keyValueColumnConfig) => keyValueColumnConfig.field,
                 );
-                const headers: string[] = keyValueColumnsConfig.map(
+                const headers: string[] = keyValueColumnsConfig().map(
                     (keyValueColumnConfig) =>
                         this.translocoService.translate(
                             keyValueColumnConfig.translation,

@@ -10,6 +10,7 @@ import { ToolsWebhook } from '@apps/tools';
 import { WebhookService } from '@apps/tools/webhook';
 import {
     Action,
+    ActionScope,
     Crumb,
     defaultDetailImports,
     log,
@@ -27,6 +28,7 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultDetailImports],
 })
+@ActionScope('tools::webhook.detail')
 export class WebhookDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..

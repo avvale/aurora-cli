@@ -1,0 +1,53 @@
+version: 0.0.1
+boundedContextName: tools
+moduleName: webhook-log
+moduleNames: webhook-logs
+aggregateName: ToolsWebhookLog
+hasOAuth: true
+hasTenant: false
+hasAuditing: false
+front:
+  outlineFontSetIcon: material-symbols-outlined
+  outlineIcon: library_books
+  solidFontSetIcon: material-symbols-outlined
+  solidIcon: library_books
+aggregateProperties:
+  - name: id
+    type: id
+    primaryKey: true
+    nullable: false
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+  - name: url
+    type: varchar
+    maxLength: 2046
+    nullable: false
+  - name: headerRequest
+    type: jsonb
+    nullable: true
+  - name: bodyRequest
+    type: jsonb
+    nullable: true
+  - name: createdAt
+    type: timestamp
+    nullable: true
+    index: index
+  - name: updatedAt
+    type: timestamp
+    nullable: true
+  - name: deletedAt
+    type: timestamp
+    nullable: true
+excludedOperations:
+  - count
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

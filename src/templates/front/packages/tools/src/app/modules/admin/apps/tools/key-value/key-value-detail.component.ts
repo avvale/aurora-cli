@@ -12,6 +12,7 @@ import { ToolsKeyValue } from '@apps/tools';
 import { KeyValueService } from '@apps/tools/key-value';
 import {
     Action,
+    ActionScope,
     Crumb,
     defaultDetailImports,
     log,
@@ -29,6 +30,7 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultDetailImports, MatCheckboxModule, MatSelectModule],
 })
+@ActionScope('tools::keyValue.detail')
 export class KeyValueDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..

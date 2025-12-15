@@ -23,11 +23,11 @@ import { AccountService } from '@apps/iam/account';
 import { checkPasswordValidator } from '@apps/iam/shared';
 import {
     Action,
+    GetActionStatusPipe,
     MatPasswordStrengthModule,
     SnackBarInvalidFormComponent,
     ViewDetailComponent,
     createPassword,
-    getActionStatusPipe,
     log,
 } from '@aurora';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -42,7 +42,7 @@ import { lastValueFrom } from 'rxjs';
     imports: [
         AsyncPipe,
         FormsModule,
-        getActionStatusPipe,
+        GetActionStatusPipe,
         MatButtonModule,
         MatFormFieldModule,
         MatIconModule,

@@ -82,6 +82,7 @@ import { ToolsWebhookSeeder } from './seeder/tools-webhook.seeder';
 import { ToolsDigestWebhookController } from './controllers/tools-digest-webhook.controller';
 import { ToolsDigestWebhookHandler } from './handlers/tools-digest-webhook.handler';
 import { ToolsDigestWebhookResolver } from './resolvers/tools-digest-webhook.resolver';
+import { ToolsWebhookKeyValueService } from './shared/tools-webhook-key-value.service';
 
 export const ToolsWebhookApiControllers = [
     ToolsCreateWebhookController,
@@ -128,4 +129,7 @@ export const ToolsWebhookApiHandlers = [
     ToolsDigestWebhookHandler,
 ];
 
-export const ToolsWebhookApiServices = [ToolsWebhookSeeder];
+export const ToolsWebhookApiServices = [
+    ToolsWebhookSeeder,
+    ToolsWebhookKeyValueService,
+];

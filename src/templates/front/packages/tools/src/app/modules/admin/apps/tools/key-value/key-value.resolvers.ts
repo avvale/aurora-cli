@@ -37,7 +37,7 @@ export const keyValuePaginationResolver: ResolveFn<GridData<ToolsKeyValue>> = (
     gridStateService.setExportActionId(gridId, 'tools::keyValue.list.export');
 
     return keyValueService.pagination({
-        query: queryStatementHandler({ columnsConfig: keyValueColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: keyValueColumnsConfig() })
             .setColumFilters(
                 gridFiltersStorageService.getColumnFilterState(gridId),
             )

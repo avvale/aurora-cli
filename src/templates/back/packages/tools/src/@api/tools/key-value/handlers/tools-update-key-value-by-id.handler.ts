@@ -1,21 +1,22 @@
-import { ToolsKeyValue, ToolsUpdateKeyValueByIdInput } from '@api/graphql';
 import {
-    ToolsKeyValueDto,
-    ToolsUpdateKeyValueByIdDto,
-} from '@api/tools/key-value';
+    ToolsKeyValue,
+    ToolsKeyValueType,
+    ToolsUpdateKeyValueByIdInput,
+} from '@api/graphql';
 import {
     ToolsFindKeyValueByIdQuery,
     ToolsUpdateKeyValueByIdCommand,
 } from '@app/tools/key-value';
 import {
     AuditingMeta,
+    Crypt,
     diff,
     ICommandBus,
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
 @Injectable()
@@ -27,18 +28,45 @@ export class ToolsUpdateKeyValueByIdHandler {
     ) {}
 
     async main(
-        payload: ToolsUpdateKeyValueByIdInput | ToolsUpdateKeyValueByIdDto,
+        payload: ToolsUpdateKeyValueByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<ToolsKeyValue | ToolsKeyValueDto> {
+    ): Promise<ToolsKeyValue> {
         const keyValue = await this.queryBus.ask(
             new ToolsFindKeyValueByIdQuery(payload.id, constraint, {
                 timezone,
             }),
         );
 
+        if (!keyValue) {
+            throw new NotFoundException(
+                `ToolsKeyValue with id: ${payload.id}, not found`,
+            );
+        }
+
         const dataToUpdate = diff(payload, keyValue);
+
+        if ('value' in dataToUpdate) {
+            if (payload.type === ToolsKeyValueType.SECRET)
+                dataToUpdate.value = Crypt.encryptWithAuroraPublicKey(
+                    dataToUpdate.value,
+                );
+            if (payload.type === ToolsKeyValueType.BOOLEAN)
+                dataToUpdate.value = dataToUpdate.value === 'true';
+        }
+
+        if ('type' in dataToUpdate) {
+            if (dataToUpdate.type === ToolsKeyValueType.SECRET) {
+                dataToUpdate.value = Crypt.encryptWithAuroraPublicKey(
+                    keyValue.value,
+                );
+            } else if (keyValue.type === ToolsKeyValueType.SECRET) {
+                dataToUpdate.value = Crypt.decryptWithAuroraPrivateKey(
+                    keyValue.value,
+                );
+            }
+        }
 
         await this.commandBus.dispatch(
             new ToolsUpdateKeyValueByIdCommand(
@@ -64,6 +92,12 @@ export class ToolsUpdateKeyValueByIdHandler {
                 timezone,
             }),
         );
+
+        if (keyValueUpdated.type === ToolsKeyValueType.SECRET) {
+            keyValueUpdated.value = Crypt.decryptWithAuroraPrivateKey(
+                keyValueUpdated.value,
+            );
+        }
 
         if (keyValueUpdated.isCached) {
             await this.cacheManager.set(

@@ -1,12 +1,20 @@
 import { ToolsKeyValueType } from '@api/graphql';
+import { createKeyValue } from '@api/tools/key-value/shared';
 import {
-    ToolsCreateKeyValueCommand,
     ToolsGetKeyValuesQuery,
     ToolsKeyValueResponse,
+    ToolsUpdateKeyValueByIdCommand,
 } from '@app/tools/key-value';
-import { ICommandBus, IQueryBus, Operator, uuid } from '@aurorajs.dev/core';
+import {
+    Crypt,
+    ICommandBus,
+    IQueryBus,
+    Operator,
+    uuid,
+} from '@aurorajs.dev/core';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import { Cache } from 'cache-manager';
 
 export const CLICKUP_TASK_PLATFORM_API_KEY = 'CLICKUP_TASK_PLATFORM_API_KEY';
@@ -21,6 +29,7 @@ export const CLICKUP_TASK_PLATFORM_WEBHOOK_ID =
 @Injectable()
 export class SupportConfigService {
     constructor(
+        private readonly moduleRef: ModuleRef,
         private readonly commandBus: ICommandBus,
         private readonly queryBus: IQueryBus,
         @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
@@ -53,22 +62,36 @@ export class SupportConfigService {
         );
 
         if (clickupTaskPlatformApiKey) {
-            await this.cacheManager.set(
-                CLICKUP_TASK_PLATFORM_API_KEY,
-                clickupTaskPlatformApiKey.value,
-            );
+            try {
+                await this.cacheManager.set(
+                    CLICKUP_TASK_PLATFORM_API_KEY,
+                    Crypt.decryptWithAuroraPrivateKey(
+                        clickupTaskPlatformApiKey.value,
+                    ),
+                );
+            } catch {
+                Logger.warn(
+                    `Failed to decrypt ${CLICKUP_TASK_PLATFORM_API_KEY}. Resetting value.`,
+                    'SupportConfigService',
+                );
+
+                await this.commandBus.dispatch(
+                    new ToolsUpdateKeyValueByIdCommand({
+                        id: clickupTaskPlatformApiKey.id,
+                        value: null,
+                    }),
+                );
+            }
         } else {
-            void this.commandBus.dispatch(
-                new ToolsCreateKeyValueCommand({
-                    id: uuid(),
-                    key: CLICKUP_TASK_PLATFORM_API_KEY as string,
-                    type: ToolsKeyValueType.SECRET,
-                    value: null,
-                    isCached: true,
-                    isActive: true,
-                    description: 'API key for the clickup task platform',
-                }),
-            );
+            void createKeyValue(this.moduleRef, {
+                id: uuid(),
+                key: CLICKUP_TASK_PLATFORM_API_KEY as string,
+                type: ToolsKeyValueType.SECRET,
+                value: null,
+                isCached: true,
+                isActive: true,
+                description: 'API key for the clickup task platform',
+            });
         }
         /* #endregion CLICKUP_TASK_PLATFORM_API_KEY */
 
@@ -83,17 +106,15 @@ export class SupportConfigService {
                 clickupTaskPlatformTeamId.value,
             );
         } else {
-            void this.commandBus.dispatch(
-                new ToolsCreateKeyValueCommand({
-                    id: uuid(),
-                    key: CLICKUP_TASK_PLATFORM_TEAM_ID as string,
-                    type: ToolsKeyValueType.STRING,
-                    value: null,
-                    isCached: true,
-                    isActive: true,
-                    description: 'Team ID for the clickup task platform',
-                }),
-            );
+            void createKeyValue(this.moduleRef, {
+                id: uuid(),
+                key: CLICKUP_TASK_PLATFORM_TEAM_ID as string,
+                type: ToolsKeyValueType.STRING,
+                value: null,
+                isCached: true,
+                isActive: true,
+                description: 'Team ID for the clickup task platform',
+            });
         }
         /* #endregion CLICKUP_TASK_PLATFORM_TEAM_ID */
 
@@ -108,17 +129,15 @@ export class SupportConfigService {
                 clickupTaskPlatformSpaceId.value,
             );
         } else {
-            void this.commandBus.dispatch(
-                new ToolsCreateKeyValueCommand({
-                    id: uuid(),
-                    key: CLICKUP_TASK_PLATFORM_SPACE_ID as string,
-                    type: ToolsKeyValueType.STRING,
-                    value: null,
-                    isCached: true,
-                    isActive: true,
-                    description: 'Space ID for the clickup task platform',
-                }),
-            );
+            void createKeyValue(this.moduleRef, {
+                id: uuid(),
+                key: CLICKUP_TASK_PLATFORM_SPACE_ID as string,
+                type: ToolsKeyValueType.STRING,
+                value: null,
+                isCached: true,
+                isActive: true,
+                description: 'Space ID for the clickup task platform',
+            });
         }
         /* #endregion CLICKUP_TASK_PLATFORM_SPACE_ID */
 
@@ -133,17 +152,15 @@ export class SupportConfigService {
                 clickupTaskPlatformFolderId.value,
             );
         } else {
-            void this.commandBus.dispatch(
-                new ToolsCreateKeyValueCommand({
-                    id: uuid(),
-                    key: CLICKUP_TASK_PLATFORM_FOLDER_ID,
-                    type: ToolsKeyValueType.STRING,
-                    value: null,
-                    isCached: true,
-                    isActive: true,
-                    description: 'Folder ID for the clickup task platform',
-                }),
-            );
+            void createKeyValue(this.moduleRef, {
+                id: uuid(),
+                key: CLICKUP_TASK_PLATFORM_FOLDER_ID,
+                type: ToolsKeyValueType.STRING,
+                value: null,
+                isCached: true,
+                isActive: true,
+                description: 'Folder ID for the clickup task platform',
+            });
         }
         /* #endregion CLICKUP_TASK_PLATFORM_FOLDER_ID */
 
@@ -158,17 +175,15 @@ export class SupportConfigService {
                 clickupTaskPlatformListId.value,
             );
         } else {
-            void this.commandBus.dispatch(
-                new ToolsCreateKeyValueCommand({
-                    id: uuid(),
-                    key: CLICKUP_TASK_PLATFORM_LIST_ID,
-                    type: ToolsKeyValueType.STRING,
-                    value: null,
-                    isCached: true,
-                    isActive: true,
-                    description: 'List ID for the clickup task platform',
-                }),
-            );
+            void createKeyValue(this.moduleRef, {
+                id: uuid(),
+                key: CLICKUP_TASK_PLATFORM_LIST_ID,
+                type: ToolsKeyValueType.STRING,
+                value: null,
+                isCached: true,
+                isActive: true,
+                description: 'List ID for the clickup task platform',
+            });
         }
         /* #endregion CLICKUP_TASK_PLATFORM_LIST_ID */
 
@@ -183,17 +198,15 @@ export class SupportConfigService {
                 clickupTaskPlatformWebhookId.value,
             );
         } else {
-            void this.commandBus.dispatch(
-                new ToolsCreateKeyValueCommand({
-                    id: uuid(),
-                    key: CLICKUP_TASK_PLATFORM_WEBHOOK_ID,
-                    type: ToolsKeyValueType.STRING,
-                    value: null,
-                    isCached: true,
-                    isActive: true,
-                    description: 'Webhook ID for the clickup task platform',
-                }),
-            );
+            void createKeyValue(this.moduleRef, {
+                id: uuid(),
+                key: CLICKUP_TASK_PLATFORM_WEBHOOK_ID,
+                type: ToolsKeyValueType.STRING,
+                value: null,
+                isCached: true,
+                isActive: true,
+                description: 'Webhook ID for the clickup task platform',
+            });
         }
         /* #endregion CLICKUP_TASK_PLATFORM_WEBHOOK_ID */
     }

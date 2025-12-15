@@ -42,5 +42,6 @@
     "tenants": "Tenants",
     "tools": "Tools",
     "users": "Users",
+    "webhookLogs": "Webhook Logs",
     "webhooks": "Webhooks"
 }

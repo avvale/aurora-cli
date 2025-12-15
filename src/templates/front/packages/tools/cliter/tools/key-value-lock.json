@@ -11,11 +11,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value-detail.component.html",
-            "integrity": "sha1:df8be424e7c7cd847400874ac8ab9b2fcd2b0c22"
+            "integrity": "sha1:cfce7a0f1d7f292fa794563adddaf15fe0c00455"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value-detail.component.ts",
-            "integrity": "sha1:3c7dfd2c35462b8354e26bdb425d88eb259d1fab"
+            "integrity": "sha1:e93e18e95dbd4d932845c0b364543394553a60e6"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value-list.component.html",
@@ -23,11 +23,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value-list.component.ts",
-            "integrity": "sha1:7b5faf8156159b21a19e8c848c0235bcd2ec0a8a"
+            "integrity": "sha1:7bc4066d43106a9da95ceef1ec558906bba8f025"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value.columns-config.ts",
-            "integrity": "sha1:c9a20330a42f41e209febd1b878d7c3062b7f3f3"
+            "integrity": "sha1:3cec14d6dec75d8334eefae109597f72b97d01ed"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value.graphql.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value.resolvers.ts",
-            "integrity": "sha1:0c07449330189d66d41d59316cc6e3efc95d8146"
+            "integrity": "sha1:bea03d220864067708a0ca352ae5589454a67262"
         },
         {
             "path": "src/app/modules/admin/apps/tools/key-value/key-value.service.ts",

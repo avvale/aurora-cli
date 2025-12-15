@@ -1,25 +1,53 @@
+import {
+    ToolsHandlers,
+    ToolsModels,
+    ToolsRepositories,
+    ToolsSagas,
+    ToolsServices,
+} from '@app/tools';
+import { SharedModule } from '@aurora/shared.module';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { SharedModule } from '@aurora/shared.module';
+import {
+    ToolsKeyValueApiControllers,
+    ToolsKeyValueApiHandlers,
+    ToolsKeyValueApiResolvers,
+    ToolsKeyValueApiServices,
+} from './key-value';
+import {
+    ToolsMigrationApiControllers,
+    ToolsMigrationApiHandlers,
+    ToolsMigrationApiResolvers,
+    ToolsMigrationApiServices,
+} from './migration';
+import {
+    ToolsProcedureApiControllers,
+    ToolsProcedureApiHandlers,
+    ToolsProcedureApiResolvers,
+    ToolsProcedureApiServices,
+} from './procedure';
 import { ToolsSeeder } from './tools.seeder';
-import { ToolsModels, ToolsHandlers, ToolsServices, ToolsRepositories, ToolsSagas } from '@app/tools';
-import { ToolsKeyValueApiControllers, ToolsKeyValueApiResolvers, ToolsKeyValueApiHandlers, ToolsKeyValueApiServices } from './key-value';
-import { ToolsProcedureApiControllers, ToolsProcedureApiResolvers, ToolsProcedureApiHandlers, ToolsProcedureApiServices } from './procedure';
-import { ToolsMigrationApiControllers, ToolsMigrationApiResolvers, ToolsMigrationApiHandlers, ToolsMigrationApiServices } from './migration';
-import { ToolsWebhookApiControllers, ToolsWebhookApiResolvers, ToolsWebhookApiHandlers, ToolsWebhookApiServices } from './webhook';
+import {
+    ToolsWebhookApiControllers,
+    ToolsWebhookApiHandlers,
+    ToolsWebhookApiResolvers,
+    ToolsWebhookApiServices,
+} from './webhook';
+import {
+    ToolsWebhookLogApiControllers,
+    ToolsWebhookLogApiHandlers,
+    ToolsWebhookLogApiResolvers,
+    ToolsWebhookLogApiServices,
+} from './webhook-log';
 
 @Module({
-    imports: [
-        SharedModule,
-        SequelizeModule.forFeature([
-            ...ToolsModels,
-        ]),
-    ],
+    imports: [SharedModule, SequelizeModule.forFeature([...ToolsModels])],
     controllers: [
         ...ToolsKeyValueApiControllers,
         ...ToolsProcedureApiControllers,
         ...ToolsMigrationApiControllers,
-        ...ToolsWebhookApiControllers
+        ...ToolsWebhookApiControllers,
+        ...ToolsWebhookLogApiControllers,
     ],
     providers: [
         ToolsSeeder,
@@ -38,7 +66,10 @@ import { ToolsWebhookApiControllers, ToolsWebhookApiResolvers, ToolsWebhookApiHa
         ...ToolsMigrationApiServices,
         ...ToolsWebhookApiResolvers,
         ...ToolsWebhookApiHandlers,
-        ...ToolsWebhookApiServices
+        ...ToolsWebhookApiServices,
+        ...ToolsWebhookLogApiResolvers,
+        ...ToolsWebhookLogApiHandlers,
+        ...ToolsWebhookLogApiServices,
     ],
 })
 export class ToolsModule {}

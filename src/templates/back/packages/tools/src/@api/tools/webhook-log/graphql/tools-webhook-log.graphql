@@ -1,0 +1,71 @@
+type ToolsWebhookLog {
+    id: ID!
+    rowId: GraphQLInt!
+    url: GraphQLString!
+    headerRequest: JSON
+    bodyRequest: JSON
+    createdAt: GraphQLTimestamp
+    updatedAt: GraphQLTimestamp
+    deletedAt: GraphQLTimestamp
+}
+
+input ToolsCreateWebhookLogInput {
+    id: ID!
+    url: GraphQLString!
+    headerRequest: JSON
+    bodyRequest: JSON
+}
+
+input ToolsUpdateWebhookLogByIdInput {
+    id: ID!
+    url: GraphQLString
+    headerRequest: JSON
+    bodyRequest: JSON
+}
+
+input ToolsUpdateWebhookLogsInput {
+    id: ID
+    url: GraphQLString
+    headerRequest: JSON
+    bodyRequest: JSON
+}
+
+type Query {
+    toolsFindWebhookLog(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): ToolsWebhookLog
+
+    toolsFindWebhookLogById(id: ID, constraint: QueryStatement): ToolsWebhookLog
+
+    toolsGetWebhookLogs(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsWebhookLog]!
+
+    toolsPaginateWebhookLogs(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): Pagination!
+}
+
+type Mutation {
+    toolsCreateWebhookLog(payload: ToolsCreateWebhookLogInput!): ToolsWebhookLog
+
+    toolsCreateWebhookLogs(payload: [ToolsCreateWebhookLogInput]!): Boolean!
+
+    toolsUpdateWebhookLogById(
+        payload: ToolsUpdateWebhookLogByIdInput!
+        constraint: QueryStatement
+    ): ToolsWebhookLog
+
+    toolsDeleteWebhookLogById(
+        id: ID!
+        constraint: QueryStatement
+    ): ToolsWebhookLog
+
+    toolsDeleteWebhookLogs(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [ToolsWebhookLog]!
+}

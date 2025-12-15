@@ -1,5 +1,4 @@
 import { ToolsKeyValue } from '@api/graphql';
-import { ToolsKeyValueDto } from '@api/tools/key-value';
 import {
     ToolsDeleteKeyValueByIdCommand,
     ToolsFindKeyValueByIdQuery,
@@ -11,7 +10,7 @@ import {
     QueryStatement,
 } from '@aurorajs.dev/core';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 
 @Injectable()
@@ -27,12 +26,18 @@ export class ToolsDeleteKeyValueByIdHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<ToolsKeyValue | ToolsKeyValueDto> {
+    ): Promise<ToolsKeyValue> {
         const keyValue = await this.queryBus.ask(
             new ToolsFindKeyValueByIdQuery(id, constraint, {
                 timezone,
             }),
         );
+
+        if (!keyValue) {
+            throw new NotFoundException(
+                `ToolsKeyValue with id: ${id}, not found`,
+            );
+        }
 
         await this.commandBus.dispatch(
             new ToolsDeleteKeyValueByIdCommand(id, constraint, {
@@ -43,7 +48,7 @@ export class ToolsDeleteKeyValueByIdHandler {
             }),
         );
 
-        if (keyValue.isCached) await this.cacheManager.del(keyValue.key);
+        if (keyValue.isCached) void this.cacheManager.del(keyValue.key);
 
         return keyValue;
     }

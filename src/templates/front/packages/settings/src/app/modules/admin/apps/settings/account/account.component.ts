@@ -32,10 +32,10 @@ import {
     Action,
     CoreGetLangsService,
     CoreLang,
+    GetActionStatusPipe,
     IamService,
     SnackBarInvalidFormComponent,
     ViewDetailComponent,
-    getActionStatusPipe,
     log,
 } from '@aurora';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -50,7 +50,7 @@ import { Observable, lastValueFrom, takeUntil } from 'rxjs';
     imports: [
         AsyncPipe,
         FormsModule,
-        getActionStatusPipe,
+        GetActionStatusPipe,
         MatButtonModule,
         MatFormFieldModule,
         MatIconModule,

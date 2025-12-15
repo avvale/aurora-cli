@@ -8,7 +8,7 @@ import {
     CLICKUP_TASK_PLATFORM_WEBHOOK_ID,
     ClickupService,
 } from '@api/support/clickup/shared';
-import { setKeyValue } from '@api/tools/shared';
+import { setKeyValue } from '@api/tools/key-value/shared';
 import {
     ToolsCreateWebhookCommand,
     ToolsFindWebhookByIdQuery,

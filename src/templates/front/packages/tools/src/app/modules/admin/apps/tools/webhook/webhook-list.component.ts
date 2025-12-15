@@ -7,6 +7,7 @@ import { ToolsWebhook } from '@apps/tools';
 import { webhookColumnsConfig, WebhookService } from '@apps/tools/webhook';
 import {
     Action,
+    ActionScope,
     ColumnConfig,
     ColumnDataType,
     Crumb,
@@ -32,6 +33,7 @@ export const webhookMainGridListId = 'tools::webhook.list.mainGridList';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultListImports],
 })
+@ActionScope('tools::webhook.list')
 export class WebhookListComponent extends ViewBaseComponent {
     // ---- customizations ----
     // ..

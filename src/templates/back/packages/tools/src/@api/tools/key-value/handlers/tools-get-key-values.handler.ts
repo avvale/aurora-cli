@@ -1,7 +1,6 @@
-import { ToolsKeyValue } from '@api/graphql';
-import { ToolsKeyValueDto } from '@api/tools/key-value';
+import { ToolsKeyValue, ToolsKeyValueType } from '@api/graphql';
 import { ToolsGetKeyValuesQuery } from '@app/tools/key-value';
-import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
+import { Crypt, IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -12,11 +11,20 @@ export class ToolsGetKeyValuesHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<ToolsKeyValue[] | ToolsKeyValueDto[]> {
-        return await this.queryBus.ask(
+    ): Promise<ToolsKeyValue[]> {
+        const keyValues = await this.queryBus.ask(
             new ToolsGetKeyValuesQuery(queryStatement, constraint, {
                 timezone,
             }),
         );
+
+        for (const keyValue of keyValues) {
+            if (keyValue.type === ToolsKeyValueType.SECRET)
+                keyValue.value = Crypt.decryptWithAuroraPrivateKey(
+                    keyValue.value,
+                );
+        }
+
+        return keyValues;
     }
 }

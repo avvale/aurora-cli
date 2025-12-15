@@ -8,9 +8,9 @@ hasTenant: false
 hasAuditing: true
 front:
   outlineFontSetIcon: material-symbols-outlined
-  outlineIcon: phishing
+  outlineIcon: webhook
   solidFontSetIcon: material-symbols-outlined
-  solidIcon: phishing
+  solidIcon: webhook
 aggregateProperties:
   - name: id
     type: id

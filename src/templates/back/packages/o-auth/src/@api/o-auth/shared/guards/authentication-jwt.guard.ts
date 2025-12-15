@@ -16,7 +16,14 @@ export class AuthenticationJwtGuard extends AuthGuard('jwt') {
     // Account returned by jwt.strategy in validate method (JwtStrategy)
     handleRequest<AccountResponse>(err, user, info): AccountResponse {
         // You can throw an exception based on either "info" or "err" arguments
-        if (err || !user) throw err || new UnauthorizedException();
+        if (err || !user)
+            throw (
+                err ||
+                new UnauthorizedException({
+                    statusCode: 401,
+                    message: 'OAuthAccessToken not allowed',
+                })
+            );
         return user;
     }
 }

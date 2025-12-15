@@ -1,4 +1,5 @@
 {
+    "BodyRequest": "BodyRequest",
     "CheckedAt": "Checked",
     "Description": "Description",
     "DownScript": "DownScript",
@@ -7,10 +8,12 @@
     "ExecutedAt": "Executed at",
     "ExternalId": "ExternalId",
     "Hash": "Hash",
+    "HeaderRequest": "HeaderRequest",
     "InstallScript": "Install Script",
     "InstallWarning": "You are about to install the {{ name }} script. Make sure you understand the implications before proceeding.",
     "IsActive": "Is active",
     "IsCached": "IsCached",
+    "IsEncrypted": "IsEncrypted",
     "IsExecuted": "Executed",
     "IsUpdated": "Updated",
     "Key": "Key",
@@ -40,8 +43,11 @@
     "UninstallScript": "Uninstall Script",
     "UninstallWarning": "You are about to uninstall the {{ name }} script. Make sure you understand the implications before proceeding.",
     "UpScript": "UpScript",
+    "Url": "Url",
     "Value": "Value",
     "Version": "Version",
     "Webhook": "Webhook",
+    "WebhookLog": "Webhook Log",
+    "WebhookLogs": "Webhook Logs",
     "Webhooks": "Webhooks"
 }

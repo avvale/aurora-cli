@@ -24,7 +24,6 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
                 ofType(Created{{ toPascalCase schema.moduleName }}Event),
                 delay(1000),
                 map(event => {
-                    console.log('Inside [HeroesGameSagas] Saga');
                     return 'command';
                 }),
             );

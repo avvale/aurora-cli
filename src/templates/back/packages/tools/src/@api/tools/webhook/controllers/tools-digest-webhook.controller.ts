@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Body, Controller, Headers, Post } from '@nestjs/common';
+import { Body, Controller, Headers, Post, Req } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Request } from 'express';
 import { ToolsDigestWebhookHandler } from '../handlers/tools-digest-webhook.handler';
 
 @ApiTags('[tools] webhook')
@@ -14,7 +15,11 @@ export class ToolsDigestWebhookController {
         description: 'Defines the action performed',
         type: Boolean,
     })
-    async main(@Headers() headers: any, @Body() payload: any) {
-        return await this.handler.main(headers, payload);
+    async main(
+        @Req() request: Request,
+        @Headers() headers: any,
+        @Body() payload: any,
+    ) {
+        return await this.handler.main(request, headers, payload);
     }
 }
