@@ -18,10 +18,11 @@ export class SupportFindIssueByIdHandler {
             }),
         );
 
-        if (!issue)
+        if (!issue) {
             throw new NotFoundException(
                 `SupportIssue with id: ${id}, not found`,
             );
+        }
 
         return issue;
     }

@@ -6,6 +6,6 @@ export class SupportUpdatedIssueEventHandler
     implements IEventHandler<SupportUpdatedIssueEvent>
 {
     handle(event: SupportUpdatedIssueEvent): void {
-        // console.log('UpdatedIssueEvent: ', event);
+        // 'UpdatedIssueEvent'
     }
 }

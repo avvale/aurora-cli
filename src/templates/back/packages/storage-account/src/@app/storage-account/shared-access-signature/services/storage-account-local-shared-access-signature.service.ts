@@ -1,4 +1,4 @@
-import { StorageAccountSharedAccessSignatureService } from '@api/storage-account/file-manager/shared';
+import { StorageAccountSharedAccessSignatureService } from '@app/storage-account/shared-access-signature';
 import { Injectable, Logger } from '@nestjs/common';
 
 @Injectable()

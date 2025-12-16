@@ -33,9 +33,7 @@ import {
     LiteralObject,
     MapperOptions,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
 
-@Injectable()
 export class SupportIssueMapper implements IMapper {
     constructor(public options: MapperOptions = { eagerLoading: true }) {}
 

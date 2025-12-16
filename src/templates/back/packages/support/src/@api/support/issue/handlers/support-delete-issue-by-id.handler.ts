@@ -4,7 +4,6 @@ import {
     CLICKUP_TASK_PLATFORM_API_KEY,
     ClickupService,
 } from '@api/support/clickup/shared';
-import { SupportIssueDto } from '@api/support/issue';
 import {
     SupportDeleteIssueByIdCommand,
     SupportFindIssueByIdQuery,
@@ -35,17 +34,18 @@ export class SupportDeleteIssueByIdHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<SupportIssue | SupportIssueDto> {
+    ): Promise<SupportIssue> {
         const issue = await this.queryBus.ask(
             new SupportFindIssueByIdQuery(id, constraint, {
                 timezone,
             }),
         );
 
-        if (!issue)
+        if (!issue) {
             throw new NotFoundException(
                 `SupportIssue with id: ${id}, not found`,
             );
+        }
 
         await this.commandBus.dispatch(
             new SupportDeleteIssueByIdCommand(id, constraint, {

@@ -6,6 +6,6 @@ export class SupportCreatedIssuesEventHandler
     implements IEventHandler<SupportCreatedIssuesEvent>
 {
     handle(event: SupportCreatedIssuesEvent): void {
-        // console.log('CreatedIssuesEvent: ', event);
+        // 'CreatedIssuesEvent';
     }
 }

@@ -18,7 +18,9 @@ export class SupportFindIssueHandler {
             }),
         );
 
-        if (!issue) throw new NotFoundException(`SupportIssue not found`);
+        if (!issue) {
+            throw new NotFoundException(`SupportIssue not found`);
+        }
 
         return issue;
     }

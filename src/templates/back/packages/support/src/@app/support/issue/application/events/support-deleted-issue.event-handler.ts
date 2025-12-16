@@ -6,6 +6,6 @@ export class SupportDeletedIssueEventHandler
     implements IEventHandler<SupportDeletedIssueEvent>
 {
     handle(event: SupportDeletedIssueEvent): void {
-        // console.log('SupportDeletedIssueEvent: ', event);
+        // SupportDeletedIssueEvent'
     }
 }

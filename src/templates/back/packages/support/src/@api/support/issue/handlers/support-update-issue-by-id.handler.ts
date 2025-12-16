@@ -40,10 +40,11 @@ export class SupportUpdateIssueByIdHandler {
             }),
         );
 
-        if (!issue)
+        if (!issue) {
             throw new NotFoundException(
                 `SupportIssue with id: ${payload.id}, not found`,
             );
+        }
 
         const dataToUpdate = diff(payload, issue);
 
