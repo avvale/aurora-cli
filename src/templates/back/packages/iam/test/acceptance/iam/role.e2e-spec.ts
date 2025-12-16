@@ -244,6 +244,23 @@ describe('role', () => {
             });
     });
 
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleDefaultRedirection is too large, has a maximum length of 2046', () => {
+        return request(app.getHttpServer())
+            .post('/iam/role/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                defaultRedirection:
+                    '*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************',
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamRoleDefaultRedirection is too large, has a maximum length of 2046',
+                );
+            });
+    });
+
     test('/REST:POST iam/role/create - Got 400 Conflict, RoleIsMaster has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/iam/role/create')
@@ -442,6 +459,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                         }
                     }
@@ -524,6 +542,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -564,6 +583,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                         }
                     }
@@ -597,6 +617,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -636,6 +657,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -671,6 +693,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -706,6 +729,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -737,6 +761,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -775,6 +800,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -809,6 +835,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -848,6 +875,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt
@@ -883,6 +911,7 @@ describe('role', () => {
                             id
                             rowId
                             name
+                            defaultRedirection
                             isMaster
                             createdAt
                             updatedAt

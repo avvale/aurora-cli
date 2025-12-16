@@ -5,6 +5,7 @@ export { IamRoleRoleId } from './iam-role-role-id';
 
 export { IamRoleAccountIds } from './iam-role-account-ids';
 export { IamRoleCreatedAt } from './iam-role-created-at';
+export { IamRoleDefaultRedirection } from './iam-role-default-redirection';
 export { IamRoleDeletedAt } from './iam-role-deleted-at';
 export { IamRoleId } from './iam-role-id';
 export { IamRoleIsMaster } from './iam-role-is-master';

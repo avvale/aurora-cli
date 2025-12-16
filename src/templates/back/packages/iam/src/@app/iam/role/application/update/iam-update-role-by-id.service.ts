@@ -1,6 +1,7 @@
 import { IamIRoleRepository, IamRole } from '@app/iam/role';
 import {
     IamRoleAccountIds,
+    IamRoleDefaultRedirection,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -22,6 +23,7 @@ export class IamUpdateRoleByIdService {
         payload: {
             id: IamRoleId;
             name?: IamRoleName;
+            defaultRedirection?: IamRoleDefaultRedirection;
             isMaster?: IamRoleIsMaster;
             permissionIds?: IamRolePermissionIds;
             accountIds?: IamRoleAccountIds;
@@ -34,6 +36,7 @@ export class IamUpdateRoleByIdService {
             payload.id,
             undefined, // rowId
             payload.name,
+            payload.defaultRedirection,
             payload.isMaster,
             payload.permissionIds,
             payload.accountIds,

@@ -2,6 +2,7 @@ type IamRole {
     id: ID!
     rowId: GraphQLInt!
     name: GraphQLString!
+    defaultRedirection: GraphQLString
     isMaster: GraphQLBoolean!
     permissions: [IamPermission]
     accounts: [IamAccount]
@@ -13,6 +14,7 @@ type IamRole {
 input IamCreateRoleInput {
     id: ID!
     name: GraphQLString!
+    defaultRedirection: GraphQLString
     isMaster: GraphQLBoolean!
     permissionIds: [ID]
     accountIds: [ID]
@@ -21,6 +23,7 @@ input IamCreateRoleInput {
 input IamUpdateRoleByIdInput {
     id: ID!
     name: GraphQLString
+    defaultRedirection: GraphQLString
     isMaster: GraphQLBoolean
     permissionIds: [ID]
     accountIds: [ID]
@@ -29,6 +32,7 @@ input IamUpdateRoleByIdInput {
 input IamUpdateRolesInput {
     id: ID
     name: GraphQLString
+    defaultRedirection: GraphQLString
     isMaster: GraphQLBoolean
     permissionIds: [ID]
     accountIds: [ID]
@@ -68,8 +72,6 @@ type Mutation {
         constraint: QueryStatement
     ): [IamRole]!
 
-    iamUpsertRole(payload: IamUpdateRoleByIdInput!): IamRole
-
     iamDeleteRoleById(id: ID!, constraint: QueryStatement): IamRole
 
     iamDeleteRoles(
@@ -78,7 +80,5 @@ type Mutation {
     ): [IamRole]!
 
     # additionalApis
-    iamInheritPermissionsRoleRole(
-        payload: IamInheritRoleInput!
-    ): Boolean!
+    iamInheritPermissionsRoleRole(payload: IamInheritRoleInput!): Boolean!
 }

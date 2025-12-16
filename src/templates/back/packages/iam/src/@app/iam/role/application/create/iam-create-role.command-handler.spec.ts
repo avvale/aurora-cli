@@ -39,6 +39,8 @@ describe('IamCreateRoleCommandHandler', () => {
                             id: iamMockRoleData[0].id,
                             rowId: iamMockRoleData[0].rowId,
                             name: iamMockRoleData[0].name,
+                            defaultRedirection:
+                                iamMockRoleData[0].defaultRedirection,
                             isMaster: iamMockRoleData[0].isMaster,
                             permissionIds: iamMockRoleData[0].permissionIds,
                             accountIds: iamMockRoleData[0].accountIds,

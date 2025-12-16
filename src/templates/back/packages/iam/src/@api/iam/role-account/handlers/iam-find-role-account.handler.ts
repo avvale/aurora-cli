@@ -1,8 +1,7 @@
 import { IamRoleAccount } from '@api/graphql';
-import { IamRoleAccountDto } from '@api/iam/role-account';
 import { IamFindRoleAccountQuery } from '@app/iam/role-account';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamFindRoleAccountHandler {
@@ -12,11 +11,17 @@ export class IamFindRoleAccountHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamRoleAccount | IamRoleAccountDto> {
-        return await this.queryBus.ask(
+    ): Promise<IamRoleAccount> {
+        const roleAccount = await this.queryBus.ask(
             new IamFindRoleAccountQuery(queryStatement, constraint, {
                 timezone,
             }),
         );
+
+        if (!roleAccount) {
+            throw new NotFoundException(`IamRoleAccount not found`);
+        }
+
+        return roleAccount;
     }
 }

@@ -1,9 +1,5 @@
 import { IamCreateRoleAccountInput, IamRoleAccount } from '@api/graphql';
 import {
-    IamCreateRoleAccountDto,
-    IamRoleAccountDto,
-} from '@api/iam/role-account';
-import {
     IamCreateRoleAccountCommand,
     IamFindRoleAccountByIdQuery,
 } from '@app/iam/role-account';
@@ -18,10 +14,10 @@ export class IamCreateRoleAccountHandler {
     ) {}
 
     async main(
-        payload: IamCreateRoleAccountInput | IamCreateRoleAccountDto,
+        payload: IamCreateRoleAccountInput,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRoleAccount | IamRoleAccountDto> {
+    ): Promise<IamRoleAccount> {
         await this.commandBus.dispatch(
             new IamCreateRoleAccountCommand(payload, {
                 timezone,

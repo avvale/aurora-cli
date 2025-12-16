@@ -1,5 +1,4 @@
 import { IamRole } from '@api/graphql';
-import { IamRoleDto } from '@api/iam/role';
 import { IamGetRolesQuery } from '@app/iam/role';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -12,7 +11,7 @@ export class IamGetRolesHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamRole[] | IamRoleDto[]> {
+    ): Promise<IamRole[]> {
         return await this.queryBus.ask(
             new IamGetRolesQuery(queryStatement, constraint, {
                 timezone,

@@ -15,6 +15,12 @@ export class IamUpdateRolesDto {
     name?: string;
 
     @ApiProperty({
+        type: String,
+        description: 'defaultRedirection [input here api field description]',
+    })
+    defaultRedirection?: string;
+
+    @ApiProperty({
         type: Boolean,
         description: 'isMaster [input here api field description]',
     })

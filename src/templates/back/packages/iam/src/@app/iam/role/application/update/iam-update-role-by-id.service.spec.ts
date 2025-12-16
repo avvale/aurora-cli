@@ -7,6 +7,7 @@ import {
 import { IamUpdateRoleByIdService } from '@app/iam/role/application/update/iam-update-role-by-id.service';
 import {
     IamRoleAccountIds,
+    IamRoleDefaultRedirection,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -59,6 +60,9 @@ describe('IamUpdateRoleByIdService', () => {
                         id: new IamRoleId(iamMockRoleData[0].id),
                         rowId: new IamRoleRowId(iamMockRoleData[0].rowId),
                         name: new IamRoleName(iamMockRoleData[0].name),
+                        defaultRedirection: new IamRoleDefaultRedirection(
+                            iamMockRoleData[0].defaultRedirection,
+                        ),
                         isMaster: new IamRoleIsMaster(
                             iamMockRoleData[0].isMaster,
                         ),

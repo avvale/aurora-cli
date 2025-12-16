@@ -6,6 +6,6 @@ export class IamDeletedPermissionRoleEventHandler
     implements IEventHandler<IamDeletedPermissionRoleEvent>
 {
     handle(event: IamDeletedPermissionRoleEvent): void {
-        // console.log('IamDeletedPermissionRoleEvent: ', event);
+        // IamDeletedPermissionRoleEvent'
     }
 }

@@ -1,5 +1,4 @@
 import { IamPermissionRole } from '@api/graphql';
-import { IamPermissionRoleDto } from '@api/iam/permission-role';
 import {
     IamDeletePermissionsRolesCommand,
     IamGetPermissionsRolesQuery,
@@ -24,7 +23,7 @@ export class IamDeletePermissionsRolesHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamPermissionRole[] | IamPermissionRoleDto[]> {
+    ): Promise<IamPermissionRole[]> {
         const permissionsRoles = await this.queryBus.ask(
             new IamGetPermissionsRolesQuery(queryStatement, constraint, {
                 timezone,

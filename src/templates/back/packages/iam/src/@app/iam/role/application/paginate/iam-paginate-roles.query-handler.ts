@@ -1,4 +1,4 @@
-import { IamPaginateRolesQuery } from '@app/iam/role';
+import { IamPaginateRolesQuery, IamRoleMapper } from '@app/iam/role';
 import { IamPaginateRolesService } from '@app/iam/role/application/paginate/iam-paginate-roles.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +7,8 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class IamPaginateRolesQueryHandler
     implements IQueryHandler<IamPaginateRolesQuery>
 {
+    private readonly mapper: IamRoleMapper = new IamRoleMapper();
+
     constructor(
         private readonly paginateRolesService: IamPaginateRolesService,
     ) {}
@@ -21,7 +23,7 @@ export class IamPaginateRolesQueryHandler
         return new PaginationResponse(
             total,
             count,
-            rows.map((item) => item.toDTO()),
+            this.mapper.mapAggregatesToResponses(rows),
         );
     }
 }

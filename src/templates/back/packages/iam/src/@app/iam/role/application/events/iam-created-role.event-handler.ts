@@ -6,6 +6,6 @@ export class IamCreatedRoleEventHandler
     implements IEventHandler<IamCreatedRoleEvent>
 {
     handle(event: IamCreatedRoleEvent): void {
-        // console.log('IamCreatedRoleEvent: ', event);
+        // 'IamCreatedRoleEvent'
     }
 }

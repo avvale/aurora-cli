@@ -1,5 +1,4 @@
 import { IamCreateRoleInput, IamRole } from '@api/graphql';
-import { IamCreateRoleDto, IamRoleDto } from '@api/iam/role';
 import { IamCreateRoleCommand, IamFindRoleByIdQuery } from '@app/iam/role';
 import { AuditingMeta, ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -12,10 +11,10 @@ export class IamCreateRoleHandler {
     ) {}
 
     async main(
-        payload: IamCreateRoleInput | IamCreateRoleDto,
+        payload: IamCreateRoleInput,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRole | IamRoleDto> {
+    ): Promise<IamRole> {
         await this.commandBus.dispatch(
             new IamCreateRoleCommand(payload, {
                 timezone,

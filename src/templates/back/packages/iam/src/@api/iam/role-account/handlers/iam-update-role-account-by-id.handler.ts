@@ -1,9 +1,5 @@
 import { IamRoleAccount, IamUpdateRoleAccountByIdInput } from '@api/graphql';
 import {
-    IamRoleAccountDto,
-    IamUpdateRoleAccountByIdDto,
-} from '@api/iam/role-account';
-import {
     IamFindRoleAccountByIdQuery,
     IamUpdateRoleAccountByIdCommand,
 } from '@app/iam/role-account';
@@ -14,7 +10,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateRoleAccountByIdHandler {
@@ -24,11 +20,11 @@ export class IamUpdateRoleAccountByIdHandler {
     ) {}
 
     async main(
-        payload: IamUpdateRoleAccountByIdInput | IamUpdateRoleAccountByIdDto,
+        payload: IamUpdateRoleAccountByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRoleAccount | IamRoleAccountDto> {
+    ): Promise<IamRoleAccount> {
         const roleAccount = await this.queryBus.ask(
             new IamFindRoleAccountByIdQuery(
                 payload.roleId,
@@ -39,6 +35,12 @@ export class IamUpdateRoleAccountByIdHandler {
                 },
             ),
         );
+
+        if (!roleAccount) {
+            throw new NotFoundException(
+                `IamRoleAccount with roleId: ${payload.roleId} accountId: ${payload.accountId}, not found`,
+            );
+        }
 
         const dataToUpdate = diff(payload, roleAccount);
 

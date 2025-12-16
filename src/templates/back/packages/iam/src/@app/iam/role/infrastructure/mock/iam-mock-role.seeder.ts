@@ -2,6 +2,7 @@ import { iamMockRoleData, IamRole } from '@app/iam/role';
 import {
     IamRoleAccountIds,
     IamRoleCreatedAt,
+    IamRoleDefaultRedirection,
     IamRoleDeletedAt,
     IamRoleId,
     IamRoleIsMaster,
@@ -32,6 +33,7 @@ export class IamMockRoleSeeder extends MockSeeder<IamRole> {
                     new IamRoleId(role.id),
                     new IamRoleRowId(role.rowId),
                     new IamRoleName(role.name),
+                    new IamRoleDefaultRedirection(role.defaultRedirection),
                     new IamRoleIsMaster(role.isMaster),
                     /* #region customizations */
                     new IamRolePermissionIds(

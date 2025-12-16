@@ -31,6 +31,8 @@ export class IamAddRolesContextEvent extends AggregateRoot {
                             payload: {
                                 id: role.id.value,
                                 name: role.name.value,
+                                defaultRedirection:
+                                    role.defaultRedirection?.value,
                                 isMaster: role.isMaster.value,
                                 permissionIds: role.permissionIds?.value,
                                 accountIds: role.accountIds?.value,
@@ -54,6 +56,8 @@ export class IamAddRolesContextEvent extends AggregateRoot {
                             payload: {
                                 id: role.id.value,
                                 name: role.name.value,
+                                defaultRedirection:
+                                    role.defaultRedirection?.value,
                                 isMaster: role.isMaster.value,
                                 permissionIds: role.permissionIds?.value,
                                 accountIds: role.accountIds?.value,
@@ -78,6 +82,8 @@ export class IamAddRolesContextEvent extends AggregateRoot {
                                 id: role.id.value,
                                 rowId: role.rowId.value,
                                 name: role.name.value,
+                                defaultRedirection:
+                                    role.defaultRedirection?.value,
                                 isMaster: role.isMaster.value,
                                 permissionIds: role.permissionIds?.value,
                                 accountIds: role.accountIds?.value,

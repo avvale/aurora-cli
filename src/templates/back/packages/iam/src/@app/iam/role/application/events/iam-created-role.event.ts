@@ -6,6 +6,7 @@ export class IamCreatedRoleEvent {
             payload: {
                 id: string;
                 name: string;
+                defaultRedirection: string;
                 isMaster: boolean;
                 permissionIds: string[];
                 accountIds: string[];

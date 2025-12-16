@@ -23,6 +23,10 @@ aggregateProperties:
     type: varchar
     maxLength: 128
     nullable: false
+  - name: defaultRedirection
+    type: varchar
+    maxLength: 2046
+    nullable: true
   - name: isMaster
     type: boolean
     nullable: false

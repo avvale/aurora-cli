@@ -21,6 +21,7 @@ import {
 import { RoleService } from '@apps/iam/role';
 import {
     Action,
+    ActionScope,
     ColumnConfig,
     ColumnDataType,
     Crumb,
@@ -59,6 +60,7 @@ export const permissionsGridId = 'iam::role.detail.permissionsGridList';
         MatCheckboxModule,
     ],
 })
+@ActionScope('iam::role.detail')
 export class RoleDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..
@@ -232,6 +234,7 @@ export class RoleDetailComponent extends ViewDetailComponent {
                 ],
             ],
             name: ['', [Validators.required, Validators.maxLength(128)]],
+            defaultRedirection: ['', [Validators.maxLength(2046)]],
             isMaster: false,
             permissionIds: [],
         });

@@ -6,6 +6,6 @@ export class IamCreatedPermissionRoleEventHandler
     implements IEventHandler<IamCreatedPermissionRoleEvent>
 {
     handle(event: IamCreatedPermissionRoleEvent): void {
-        // console.log('IamCreatedPermissionRoleEvent: ', event);
+        // 'IamCreatedPermissionRoleEvent'
     }
 }

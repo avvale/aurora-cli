@@ -23,6 +23,7 @@
     "DScopes": "DScopes",
     "DTenants": "DTenants",
     "Data": "Data",
+    "DefaultRedirection": "DefaultRedirection",
     "Email": "Email",
     "EmailRequired": "Email o usuario es obligatorio",
     "FindTenant": "Encuentra un tenant...",

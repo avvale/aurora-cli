@@ -3,10 +3,6 @@ import {
     IamUpdatePermissionRoleByIdInput,
 } from '@api/graphql';
 import {
-    IamPermissionRoleDto,
-    IamUpdatePermissionRoleByIdDto,
-} from '@api/iam/permission-role';
-import {
     IamFindPermissionRoleByIdQuery,
     IamUpdatePermissionRoleByIdCommand,
 } from '@app/iam/permission-role';
@@ -17,7 +13,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdatePermissionRoleByIdHandler {
@@ -27,13 +23,11 @@ export class IamUpdatePermissionRoleByIdHandler {
     ) {}
 
     async main(
-        payload:
-            | IamUpdatePermissionRoleByIdInput
-            | IamUpdatePermissionRoleByIdDto,
+        payload: IamUpdatePermissionRoleByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamPermissionRole | IamPermissionRoleDto> {
+    ): Promise<IamPermissionRole> {
         const permissionRole = await this.queryBus.ask(
             new IamFindPermissionRoleByIdQuery(
                 payload.permissionId,
@@ -44,6 +38,12 @@ export class IamUpdatePermissionRoleByIdHandler {
                 },
             ),
         );
+
+        if (!permissionRole) {
+            throw new NotFoundException(
+                `IamPermissionRole with permissionId: ${payload.permissionId} roleId: ${payload.roleId}, not found`,
+            );
+        }
 
         const dataToUpdate = diff(payload, permissionRole);
 

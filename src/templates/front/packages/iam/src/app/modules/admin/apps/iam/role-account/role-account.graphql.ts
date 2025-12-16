@@ -5,6 +5,7 @@ export const fields = `
         id
         rowId
         name
+        defaultRedirection
         isMaster
     }
     account {

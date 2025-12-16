@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const fields = `
     rowId
     name
+    defaultRedirection
     isMaster
     permissions {
         id
@@ -47,7 +48,7 @@ export const findByIdQuery = gql`
 `;
 
 export const findByIdWithRelationsQuery = gql`
-    query IamFindRoleByIdWithRelations (
+    query IamFindRoleByIdWithRelations(
         $id: ID
         $constraint: QueryStatement
         $queryPaginatePermissionsRoles: QueryStatement
@@ -57,14 +58,11 @@ export const findByIdWithRelationsQuery = gql`
         $queryGetPermissionsRoles: QueryStatement
         $constraintGetPermissionsRoles: QueryStatement
     ) {
-        object: iamFindRoleById (
-            id: $id
-            constraint: $constraint
-        ) {
+        object: iamFindRoleById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
-        iamPaginatePermissionsRoles (
+        iamPaginatePermissionsRoles(
             query: $queryPaginatePermissionsRoles
             constraint: $constraintPaginatePermissionsRoles
         ) {
@@ -72,7 +70,7 @@ export const findByIdWithRelationsQuery = gql`
             rows
             count
         }
-        iamPaginatePermissions (
+        iamPaginatePermissions(
             query: $queryPaginatePermissions
             constraint: $constraintPaginatePermissions
         ) {
@@ -80,7 +78,7 @@ export const findByIdWithRelationsQuery = gql`
             rows
             count
         }
-        iamGetPermissionsRoles (
+        iamGetPermissionsRoles(
             query: $queryGetPermissionsRoles
             constraint: $constraintGetPermissionsRoles
         ) {
@@ -176,11 +174,7 @@ export const deleteMutation = gql`
 
 // Mutation additionalApis
 export const inheritPermissionsRoleRoleMutation = gql`
-    mutation IamInheritPermissionsRoleRole(
-        $payload: IamInheritRoleInput!
-    ) {
-        iamInheritPermissionsRoleRole(
-            payload: $payload
-        )
+    mutation IamInheritPermissionsRoleRole($payload: IamInheritRoleInput!) {
+        iamInheritPermissionsRoleRole(payload: $payload)
     }
 `;

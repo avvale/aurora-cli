@@ -1,8 +1,7 @@
 import { IamPermissionRole } from '@api/graphql';
-import { IamPermissionRoleDto } from '@api/iam/permission-role';
 import { IamFindPermissionRoleByIdQuery } from '@app/iam/permission-role';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamFindPermissionRoleByIdHandler {
@@ -13,8 +12,8 @@ export class IamFindPermissionRoleByIdHandler {
         roleId: string,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamPermissionRole | IamPermissionRoleDto> {
-        return await this.queryBus.ask(
+    ): Promise<IamPermissionRole> {
+        const permissionRole = await this.queryBus.ask(
             new IamFindPermissionRoleByIdQuery(
                 permissionId,
                 roleId,
@@ -24,5 +23,13 @@ export class IamFindPermissionRoleByIdHandler {
                 },
             ),
         );
+
+        if (!permissionRole) {
+            throw new NotFoundException(
+                `IamPermissionRole with permissionId: ${permissionId} roleId: ${roleId}, not found`,
+            );
+        }
+
+        return permissionRole;
     }
 }

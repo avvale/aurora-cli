@@ -101,6 +101,20 @@
                         />
                         <mat-error>{{ formErrors?.name | async }}</mat-error>
                     </mat-form-field>
+                    <mat-form-field
+                        appearance="outline"
+                        class="col-12"
+                    >
+                        <mat-label>{{ t('iam.DefaultRedirection') }}</mat-label>
+                        <input
+                            matInput
+                            formControlName="defaultRedirection"
+                            maxlength="2046"
+                        />
+                        <mat-error>
+                            {{ formErrors?.defaultRedirection | async }}
+                        </mat-error>
+                    </mat-form-field>
                     <div class="col-3 pt-5">
                         <mat-checkbox formControlName="isMaster">
                             {{ t('iam.IsMaster') }}

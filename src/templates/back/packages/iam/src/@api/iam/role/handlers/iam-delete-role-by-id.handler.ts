@@ -1,5 +1,4 @@
 import { IamRole } from '@api/graphql';
-import { IamRoleDto } from '@api/iam/role';
 import { IamDeleteRoleByIdCommand, IamFindRoleByIdQuery } from '@app/iam/role';
 import {
     AuditingMeta,
@@ -7,7 +6,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteRoleByIdHandler {
@@ -21,12 +20,16 @@ export class IamDeleteRoleByIdHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRole | IamRoleDto> {
+    ): Promise<IamRole> {
         const role = await this.queryBus.ask(
             new IamFindRoleByIdQuery(id, constraint, {
                 timezone,
             }),
         );
+
+        if (!role) {
+            throw new NotFoundException(`IamRole with id: ${id}, not found`);
+        }
 
         await this.commandBus.dispatch(
             new IamDeleteRoleByIdCommand(id, constraint, {

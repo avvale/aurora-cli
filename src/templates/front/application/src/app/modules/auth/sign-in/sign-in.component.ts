@@ -18,10 +18,15 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
 
 // ---- customizations ----
-import { AuthenticationService, IamService, SessionService, log } from '@aurora';
+import {
+    AuthenticationService,
+    IamService,
+    SessionService,
+    log,
+} from '@aurora';
+import { AuthorizationService } from '@aurora/modules/authorization/authorization.service';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { catchError, lastValueFrom, of, throwError } from 'rxjs';
-import { AuthorizationService } from '@aurora/modules/authorization/authorization.service';
 
 @Component({
     selector: 'auth-sign-in',
@@ -41,11 +46,10 @@ import { AuthorizationService } from '@aurora/modules/authorization/authorizatio
 
         // ---- customizations ----
         TranslocoModule,
-        RouterModule
+        RouterModule,
     ],
 })
-export class AuthSignInComponent implements OnInit
-{
+export class AuthSignInComponent implements OnInit {
     @ViewChild('signInNgForm') signInNgForm: NgForm;
 
     alert: { type: FuseAlertType; message: string } = {
@@ -68,7 +72,7 @@ export class AuthSignInComponent implements OnInit
         private authenticationService: AuthenticationService,
         private authorizationService: AuthorizationService,
         private iamService: IamService,
-        private translocoService: TranslocoService
+        private translocoService: TranslocoService,
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -78,8 +82,7 @@ export class AuthSignInComponent implements OnInit
     /**
      * On init
      */
-    async ngOnInit(): Promise<void>
-    {
+    async ngOnInit(): Promise<void> {
         // Create the form
         this.signInForm = this._formBuilder.group({
             email: ['', [Validators.required]],
@@ -102,8 +105,7 @@ export class AuthSignInComponent implements OnInit
     /**
      * Sign in
      */
-    signIn(): void
-    {
+    signIn(): void {
         // Return if the form is invalid
         if (this.signInForm.invalid) {
             return;
@@ -118,8 +120,7 @@ export class AuthSignInComponent implements OnInit
         this.authenticationService
             .signIn(this.signInForm.value)
             .pipe(
-                catchError(error =>
-                {
+                catchError((error) => {
                     if (
                         error.message === 'Unauthorized' ||
                         error.message === 'IamUser not found'
@@ -130,15 +131,16 @@ export class AuthSignInComponent implements OnInit
                 }),
             )
             .subscribe({
-                next: async response =>
-                {
-                    const data = response === true ? await lastValueFrom(this.iamService.get()) : null;
+                next: async (response) => {
+                    const data =
+                        response === true
+                            ? await lastValueFrom(this.iamService.get())
+                            : null;
 
                     if (
                         response.code === 401 ||
                         !this.authorizationService.can('aurora.access')
-                    )
-                    {
+                    ) {
                         log(`[DEBUG] Error to login application: ${response}`);
 
                         // Re-enable the form
@@ -147,24 +149,26 @@ export class AuthSignInComponent implements OnInit
                         // Reset the form
                         this.signInNgForm.resetForm();
 
-                        if (response.code === 401)
-                        {
+                        if (response.code === 401) {
                             // the authenticationService.signOut() does so in apollo.factory.ts
 
                             // Set the alert
                             this.alert = {
                                 type: 'error',
-                                message: this.translocoService.translate('validations.Login'),
+                                message:
+                                    this.translocoService.translate(
+                                        'validations.Login',
+                                    ),
                             };
-                        }
-                        else
-                        {
+                        } else {
                             this.authenticationService.signOut();
 
                             // Set the alert
                             this.alert = {
                                 type: 'error',
-                                message: this.translocoService.translate('validations.AccessDenied'),
+                                message: this.translocoService.translate(
+                                    'validations.AccessDenied',
+                                ),
                             };
                         }
 
@@ -174,17 +178,32 @@ export class AuthSignInComponent implements OnInit
                         return;
                     }
 
+                    // get first role with defaultRedirection
+                    const role = data.me.roles.find(
+                        (role) => role.defaultRedirection,
+                    );
+
                     // Set the redirect url.
                     // The '/signed-in-redirect' is a dummy url to catch the request and redirect the user
                     // to the correct page after a successful sign in. This way, that url can be set via
                     // routing file and we don't have to touch here.
-                    const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/signed-in-redirect';
+                    const redirectURL =
+                        this._activatedRoute.snapshot.queryParamMap.get(
+                            'redirectURL',
+                        ) ||
+                        role?.defaultRedirection ||
+                        '/signed-in-redirect';
 
                     // once we have executed iamService.get(), after that, user will be available in iamService.me
                     // set user preferred lang
                     const langs = this.sessionService.get('langs');
-                    const userPreferredLang = langs.find(lang => lang.id === data.me.user.langId);
-                    if (userPreferredLang) this.translocoService.setActiveLang(userPreferredLang.iso6392);
+                    const userPreferredLang = langs.find(
+                        (lang) => lang.id === data.me.user.langId,
+                    );
+                    if (userPreferredLang)
+                        this.translocoService.setActiveLang(
+                            userPreferredLang.iso6392,
+                        );
 
                     // Navigate to the redirect url
                     this._router.navigateByUrl(redirectURL);

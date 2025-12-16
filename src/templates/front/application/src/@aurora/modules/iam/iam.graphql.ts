@@ -1,10 +1,8 @@
 import gql from 'graphql-tag';
 
-export const iamMeAccount =  gql`
-    query iamMeAccount
-    {
-        iamMeAccount
-        {
+export const iamMeAccount = gql`
+    query iamMeAccount {
+        iamMeAccount {
             id
             clientId
             email
@@ -18,6 +16,7 @@ export const iamMeAccount =  gql`
             roles {
                 id
                 name
+                defaultRedirection
             }
             tenants {
                 id

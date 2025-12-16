@@ -1,5 +1,4 @@
 import { IamRole, IamUpdateRolesInput } from '@api/graphql';
-import { IamRoleDto, IamUpdateRolesDto } from '@api/iam/role';
 import { IamGetRolesQuery, IamUpdateRolesCommand } from '@app/iam/role';
 import {
     AuditingMeta,
@@ -17,12 +16,12 @@ export class IamUpdateRolesHandler {
     ) {}
 
     async main(
-        payload: IamUpdateRolesInput | IamUpdateRolesDto,
+        payload: IamUpdateRolesInput,
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamRole | IamRoleDto> {
+    ): Promise<IamRole> {
         await this.commandBus.dispatch(
             new IamUpdateRolesCommand(payload, queryStatement, constraint, {
                 timezone,

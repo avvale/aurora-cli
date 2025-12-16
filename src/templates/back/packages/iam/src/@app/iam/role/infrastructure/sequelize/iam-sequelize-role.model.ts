@@ -160,6 +160,13 @@ export class IamRoleModel extends Model<IamRoleModel> {
     name: string;
 
     @Column({
+        field: 'defaultRedirection',
+        allowNull: true,
+        type: DataTypes.STRING(2046),
+    })
+    defaultRedirection: string;
+
+    @Column({
         field: 'isMaster',
         allowNull: false,
         type: DataTypes.BOOLEAN,

@@ -4,6 +4,7 @@ import { IamRole, IamRoleResponse } from '@app/iam/role';
 import {
     IamRoleAccountIds,
     IamRoleCreatedAt,
+    IamRoleDefaultRedirection,
     IamRoleDeletedAt,
     IamRoleId,
     IamRoleIsMaster,
@@ -71,6 +72,9 @@ export class IamRoleMapper implements IMapper {
             new IamRoleId(role.id, { undefinable: true }),
             new IamRoleRowId(role.rowId, { undefinable: true }),
             new IamRoleName(role.name, { undefinable: true }),
+            new IamRoleDefaultRedirection(role.defaultRedirection, {
+                undefinable: true,
+            }),
             new IamRoleIsMaster(role.isMaster, { undefinable: true }),
             new IamRolePermissionIds(role.permissionIds, { undefinable: true }),
             new IamRoleAccountIds(role.accountIds, { undefinable: true }),
@@ -109,6 +113,7 @@ export class IamRoleMapper implements IMapper {
             role.id.value,
             role.rowId.value,
             role.name.value,
+            role.defaultRedirection.value,
             role.isMaster.value,
             role.permissionIds.value,
             role.accountIds.value,

@@ -42,7 +42,7 @@ export const rolePaginationResolver: ResolveFn<GridData<IamRole>> = (
     roleService.get().subscribe();
 
     return roleService.pagination({
-        query: queryStatementHandler({ columnsConfig: roleColumnsConfig })
+        query: queryStatementHandler({ columnsConfig: roleColumnsConfig() })
             .setColumFilters(
                 gridFiltersStorageService.getColumnFilterState(gridId),
             )

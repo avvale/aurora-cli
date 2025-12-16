@@ -1,5 +1,4 @@
 import { IamPermissionRole } from '@api/graphql';
-import { IamPermissionRoleDto } from '@api/iam/permission-role';
 import { IamGetPermissionsRolesQuery } from '@app/iam/permission-role';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -12,7 +11,7 @@ export class IamGetPermissionsRolesHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamPermissionRole[] | IamPermissionRoleDto[]> {
+    ): Promise<IamPermissionRole[]> {
         return await this.queryBus.ask(
             new IamGetPermissionsRolesQuery(queryStatement, constraint, {
                 timezone,

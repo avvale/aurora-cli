@@ -1,10 +1,10 @@
-export interface Account
-{
+export interface Account {
     id: string;
     email: string;
     username: string;
     isActive: boolean;
     clientId: string;
+    roles?: Role[];
     dApplicationCodes: string[];
     dPermissions: AccountPermissions;
     dTenants: string[];
@@ -15,14 +15,12 @@ export interface Account
     updatedAt: string;
 }
 
-export interface AccountPermissions
-{
+export interface AccountPermissions {
     [key: string]: string[];
     all: string[];
 }
 
-export interface User
-{
+export interface User {
     name: string;
     surname?: string;
     status: string;
@@ -32,4 +30,10 @@ export interface User
     password?: string;
     rememberToken?: string;
     meta?: any;
+}
+
+export interface Role {
+    id: string;
+    name: string;
+    defaultRedirection?: string;
 }

@@ -1,5 +1,4 @@
 import { IamPermissionRole } from '@api/graphql';
-import { IamPermissionRoleDto } from '@api/iam/permission-role';
 import {
     IamDeletePermissionRoleByIdCommand,
     IamFindPermissionRoleByIdQuery,
@@ -10,7 +9,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamDeletePermissionRoleByIdHandler {
@@ -25,7 +24,7 @@ export class IamDeletePermissionRoleByIdHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamPermissionRole | IamPermissionRoleDto> {
+    ): Promise<IamPermissionRole> {
         const permissionRole = await this.queryBus.ask(
             new IamFindPermissionRoleByIdQuery(
                 permissionId,
@@ -36,6 +35,12 @@ export class IamDeletePermissionRoleByIdHandler {
                 },
             ),
         );
+
+        if (!permissionRole) {
+            throw new NotFoundException(
+                `IamPermissionRole with permissionId: ${permissionId} roleId: ${roleId}, not found`,
+            );
+        }
 
         await this.commandBus.dispatch(
             new IamDeletePermissionRoleByIdCommand(

@@ -5,6 +5,7 @@ import {
 } from '@app/iam/role';
 import {
     IamRoleAccountIds,
+    IamRoleDefaultRedirection,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -26,6 +27,7 @@ export class IamUpdateRolesService {
         payload: {
             id?: IamRoleId;
             name?: IamRoleName;
+            defaultRedirection?: IamRoleDefaultRedirection;
             isMaster?: IamRoleIsMaster;
             permissionIds?: IamRolePermissionIds;
             accountIds?: IamRoleAccountIds;
@@ -39,6 +41,7 @@ export class IamUpdateRolesService {
             payload.id,
             undefined, // rowId
             payload.name,
+            payload.defaultRedirection,
             payload.isMaster,
             payload.permissionIds,
             payload.accountIds,

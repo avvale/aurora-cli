@@ -22,6 +22,7 @@ import { IamRole } from '@apps/iam/iam.types';
 import { roleColumnsConfig, RoleService } from '@apps/iam/role';
 import {
     Action,
+    ActionScope,
     ColumnConfig,
     ColumnDataType,
     ContentDialogTemplateDirective,
@@ -58,6 +59,7 @@ export const roleMainGridListId = 'iam::role.list.mainGridList';
         ReactiveFormsModule,
     ],
 })
+@ActionScope('iam::role.list')
 export class RoleListComponent extends ViewBaseComponent {
     // ---- customizations ----
     @ViewChild('roleSelectorContentFormDialog')
@@ -115,7 +117,7 @@ export class RoleListComponent extends ViewBaseComponent {
             translation: 'Selects',
             sticky: true,
         },
-        ...roleColumnsConfig,
+        ...roleColumnsConfig({ translator: this.translocoService }),
     ];
 
     constructor(
@@ -191,7 +193,7 @@ export class RoleListComponent extends ViewBaseComponent {
                         query: action.meta.query
                             ? action.meta.query
                             : queryStatementHandler({
-                                  columnsConfig: roleColumnsConfig,
+                                  columnsConfig: roleColumnsConfig(),
                               })
                                   .setColumFilters(
                                       this.gridFiltersStorageService.getColumnFilterState(
@@ -277,10 +279,10 @@ export class RoleListComponent extends ViewBaseComponent {
                     }),
                 );
 
-                const columns: string[] = roleColumnsConfig.map(
+                const columns: string[] = roleColumnsConfig().map(
                     (roleColumnConfig) => roleColumnConfig.field,
                 );
-                const headers: string[] = roleColumnsConfig.map(
+                const headers: string[] = roleColumnsConfig().map(
                     (roleColumnConfig) =>
                         this.translocoService.translate(
                             roleColumnConfig.translation,

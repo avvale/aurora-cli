@@ -3,6 +3,7 @@ import { IamUpdateRolesCommand } from '@app/iam/role';
 import { IamUpdateRolesService } from '@app/iam/role/application/update/iam-update-roles.service';
 import {
     IamRoleAccountIds,
+    IamRoleDefaultRedirection,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -24,6 +25,9 @@ export class IamUpdateRolesCommandHandler
                 name: new IamRoleName(command.payload.name, {
                     undefinable: true,
                 }),
+                defaultRedirection: new IamRoleDefaultRedirection(
+                    command.payload.defaultRedirection,
+                ),
                 isMaster: new IamRoleIsMaster(command.payload.isMaster, {
                     undefinable: true,
                 }),

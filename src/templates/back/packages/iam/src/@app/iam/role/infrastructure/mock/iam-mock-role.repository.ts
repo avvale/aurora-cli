@@ -2,6 +2,7 @@ import { IamIRoleRepository, iamMockRoleData, IamRole } from '@app/iam/role';
 import {
     IamRoleAccountIds,
     IamRoleCreatedAt,
+    IamRoleDefaultRedirection,
     IamRoleDeletedAt,
     IamRoleId,
     IamRoleIsMaster,
@@ -45,6 +46,9 @@ export class IamMockRoleRepository
                     new IamRoleId(itemCollection.id),
                     new IamRoleRowId(itemCollection.rowId),
                     new IamRoleName(itemCollection.name),
+                    new IamRoleDefaultRedirection(
+                        itemCollection.defaultRedirection,
+                    ),
                     new IamRoleIsMaster(itemCollection.isMaster),
                     new IamRolePermissionIds(itemCollection.permissionIds),
                     new IamRoleAccountIds(itemCollection.accountIds),

@@ -3,10 +3,6 @@ import {
     IamUpdatePermissionsRolesInput,
 } from '@api/graphql';
 import {
-    IamPermissionRoleDto,
-    IamUpdatePermissionsRolesDto,
-} from '@api/iam/permission-role';
-import {
     IamGetPermissionsRolesQuery,
     IamUpdatePermissionsRolesCommand,
 } from '@app/iam/permission-role';
@@ -26,12 +22,12 @@ export class IamUpdatePermissionsRolesHandler {
     ) {}
 
     async main(
-        payload: IamUpdatePermissionsRolesInput | IamUpdatePermissionsRolesDto,
+        payload: IamUpdatePermissionsRolesInput,
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamPermissionRole | IamPermissionRoleDto> {
+    ): Promise<IamPermissionRole> {
         await this.commandBus.dispatch(
             new IamUpdatePermissionsRolesCommand(
                 payload,

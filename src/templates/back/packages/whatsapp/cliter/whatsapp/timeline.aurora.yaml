@@ -17,6 +17,7 @@ aggregateProperties:
       type: id
     nullable: true
     index: index
+    indexUsing: GIN
   - name: wabaPhoneNumberId
     type: varchar
     maxLength: 36

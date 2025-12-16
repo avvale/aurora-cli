@@ -59,30 +59,31 @@ aggregateProperties:
       avoidConstraint: true
   - name: tags
     type: array
+    arrayOptions:
+      type: varchar
+      maxLength: 64
     nullable: true
     index: index
-    arrayOptions:
-      type: varchar
-      maxLength: 64
+    indexUsing: GIN
   - name: scopes
     type: array
-    nullable: true
     arrayOptions:
       type: varchar
       maxLength: 64
+    nullable: true
   - name: dApplicationCodes
     type: array
-    nullable: false
     arrayOptions:
       type: varchar
+    nullable: false
   - name: dPermissions
     type: jsonb
     nullable: false
   - name: dTenants
     type: array
-    nullable: false
     arrayOptions:
       type: id
+    nullable: false
   - name: meta
     type: jsonb
     nullable: true

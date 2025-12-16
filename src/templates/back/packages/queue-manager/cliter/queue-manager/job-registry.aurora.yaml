@@ -55,6 +55,7 @@ aggregateProperties:
       maxLength: 63
     nullable: true
     index: index
+    indexUsing: GIN
   - name: createdAt
     type: timestamp
     nullable: true

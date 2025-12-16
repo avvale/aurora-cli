@@ -6,6 +6,6 @@ export class IamDeletedRoleEventHandler
     implements IEventHandler<IamDeletedRoleEvent>
 {
     handle(event: IamDeletedRoleEvent): void {
-        // console.log('IamDeletedRoleEvent: ', event);
+        // IamDeletedRoleEvent'
     }
 }

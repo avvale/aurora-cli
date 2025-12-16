@@ -1,9 +1,5 @@
 import { IamCreatePermissionRoleInput, IamPermissionRole } from '@api/graphql';
 import {
-    IamCreatePermissionRoleDto,
-    IamPermissionRoleDto,
-} from '@api/iam/permission-role';
-import {
     IamCreatePermissionRoleCommand,
     IamFindPermissionRoleByIdQuery,
 } from '@app/iam/permission-role';
@@ -18,10 +14,10 @@ export class IamCreatePermissionRoleHandler {
     ) {}
 
     async main(
-        payload: IamCreatePermissionRoleInput | IamCreatePermissionRoleDto,
+        payload: IamCreatePermissionRoleInput,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamPermissionRole | IamPermissionRoleDto> {
+    ): Promise<IamPermissionRole> {
         await this.commandBus.dispatch(
             new IamCreatePermissionRoleCommand(payload, {
                 timezone,

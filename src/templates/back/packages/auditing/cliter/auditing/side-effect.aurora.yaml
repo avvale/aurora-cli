@@ -27,6 +27,7 @@ aggregateProperties:
       type: varchar
     nullable: true
     index: index
+    indexUsing: GIN
   - name: modelPath
     type: varchar
     maxLength: 1022

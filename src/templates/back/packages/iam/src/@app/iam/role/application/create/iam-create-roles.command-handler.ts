@@ -3,6 +3,7 @@ import { IamCreateRolesCommand } from '@app/iam/role';
 import { IamCreateRolesService } from '@app/iam/role/application/create/iam-create-roles.service';
 import {
     IamRoleAccountIds,
+    IamRoleDefaultRedirection,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -23,6 +24,9 @@ export class IamCreateRolesCommandHandler
                 return {
                     id: new IamRoleId(role.id),
                     name: new IamRoleName(role.name),
+                    defaultRedirection: new IamRoleDefaultRedirection(
+                        role.defaultRedirection,
+                    ),
                     isMaster: new IamRoleIsMaster(role.isMaster),
                     permissionIds: new IamRolePermissionIds(role.permissionIds),
                     accountIds: new IamRoleAccountIds(role.accountIds),

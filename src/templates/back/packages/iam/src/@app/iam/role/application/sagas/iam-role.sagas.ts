@@ -10,7 +10,6 @@ export class IamRoleSagas {
                 ofType(CreatedRoleEvent),
                 delay(1000),
                 map(event => {
-                    console.log('Inside [HeroesGameSagas] Saga');
                     return 'command';
                 }),
             );
