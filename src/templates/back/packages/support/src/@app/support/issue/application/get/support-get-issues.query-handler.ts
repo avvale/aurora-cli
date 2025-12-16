@@ -1,3 +1,4 @@
+import { StorageAccountSharedAccessSignatureService } from '@app/storage-account/shared-access-signature';
 import {
     SupportGetIssuesQuery,
     SupportIssue,
@@ -14,7 +15,10 @@ export class SupportGetIssuesQueryHandler
 {
     private readonly mapper: SupportIssueMapper = new SupportIssueMapper();
 
-    constructor(private readonly getIssuesService: SupportGetIssuesService) {}
+    constructor(
+        private readonly getIssuesService: SupportGetIssuesService,
+        private readonly storageAccountSharedAccessSignatureService: StorageAccountSharedAccessSignatureService,
+    ) {}
 
     async execute(
         query: SupportGetIssuesQuery,
@@ -27,6 +31,9 @@ export class SupportGetIssuesQueryHandler
 
         if (query.cQMetadata?.excludeMapModelToAggregate) return models;
 
-        return this.mapper.mapAggregatesToResponses(models as SupportIssue[]);
+        return this.mapper.mapAggregatesToResponses(
+            models as SupportIssue[],
+            this.storageAccountSharedAccessSignatureService,
+        );
     }
 }

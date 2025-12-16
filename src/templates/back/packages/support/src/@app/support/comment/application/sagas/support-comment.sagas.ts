@@ -10,7 +10,6 @@ export class SupportCommentSagas {
                 ofType(CreatedCommentEvent),
                 delay(1000),
                 map(event => {
-                    console.log('Inside [HeroesGameSagas] Saga');
                     return 'command';
                 }),
             );

@@ -1,3 +1,4 @@
+import { StorageAccountSharedAccessSignatureService } from '@app/storage-account/shared-access-signature';
 import {
     SupportFindIssueQuery,
     SupportIssueMapper,
@@ -12,7 +13,10 @@ export class SupportFindIssueQueryHandler
 {
     private readonly mapper: SupportIssueMapper = new SupportIssueMapper();
 
-    constructor(private readonly findIssueService: SupportFindIssueService) {}
+    constructor(
+        private readonly findIssueService: SupportFindIssueService,
+        private readonly storageAccountSharedAccessSignatureService: StorageAccountSharedAccessSignatureService,
+    ) {}
 
     async execute(query: SupportFindIssueQuery): Promise<SupportIssueResponse> {
         const issue = await this.findIssueService.main(
@@ -21,6 +25,9 @@ export class SupportFindIssueQueryHandler
             query.cQMetadata,
         );
 
-        return this.mapper.mapAggregateToResponse(issue);
+        return this.mapper.mapAggregateToResponse(
+            issue,
+            this.storageAccountSharedAccessSignatureService,
+        );
     }
 }

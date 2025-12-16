@@ -103,4 +103,9 @@ type Mutation {
         id: ID!
         constraint: QueryStatement
     ): SupportComment
+
+    supportDeleteComments(
+        query: QueryStatement
+        constraint: QueryStatement
+    ): [SupportComment]!
 }

@@ -1,3 +1,4 @@
+import { StorageAccountSharedAccessSignatureService } from '@app/storage-account/shared-access-signature';
 import {
     SupportFindIssueByIdQuery,
     SupportIssueMapper,
@@ -15,6 +16,7 @@ export class SupportFindIssueByIdQueryHandler
 
     constructor(
         private readonly findIssueByIdService: SupportFindIssueByIdService,
+        private readonly storageAccountSharedAccessSignatureService: StorageAccountSharedAccessSignatureService,
     ) {}
 
     async execute(
@@ -26,6 +28,9 @@ export class SupportFindIssueByIdQueryHandler
             query.cQMetadata,
         );
 
-        return this.mapper.mapAggregateToResponse(issue);
+        return this.mapper.mapAggregateToResponse(
+            issue,
+            this.storageAccountSharedAccessSignatureService,
+        );
     }
 }

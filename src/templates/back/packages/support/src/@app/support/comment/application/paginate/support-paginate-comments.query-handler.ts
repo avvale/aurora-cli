@@ -1,4 +1,7 @@
-import { SupportPaginateCommentsQuery } from '@app/support/comment';
+import {
+    SupportCommentMapper,
+    SupportPaginateCommentsQuery,
+} from '@app/support/comment';
 import { SupportPaginateCommentsService } from '@app/support/comment/application/paginate/support-paginate-comments.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +10,8 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class SupportPaginateCommentsQueryHandler
     implements IQueryHandler<SupportPaginateCommentsQuery>
 {
+    private readonly mapper: SupportCommentMapper = new SupportCommentMapper();
+
     constructor(
         private readonly paginateCommentsService: SupportPaginateCommentsService,
     ) {}
@@ -23,7 +28,7 @@ export class SupportPaginateCommentsQueryHandler
         return new PaginationResponse(
             total,
             count,
-            rows.map((item) => item.toDTO()),
+            this.mapper.mapAggregatesToResponses(rows),
         );
     }
 }

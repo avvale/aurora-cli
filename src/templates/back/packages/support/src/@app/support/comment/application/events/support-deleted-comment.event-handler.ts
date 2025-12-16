@@ -6,6 +6,6 @@ export class SupportDeletedCommentEventHandler
     implements IEventHandler<SupportDeletedCommentEvent>
 {
     handle(event: SupportDeletedCommentEvent): void {
-        // console.log('SupportDeletedCommentEvent: ', event);
+        // SupportDeletedCommentEvent'
     }
 }

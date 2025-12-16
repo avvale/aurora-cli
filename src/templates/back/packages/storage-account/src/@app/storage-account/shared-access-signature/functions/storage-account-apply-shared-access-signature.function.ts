@@ -21,5 +21,5 @@ export const storageAccountApplySharedAccessSignatureFunction = (
             console.error(e);
         }
     }
-    return url;
+    return wrapperObject || url;
 };

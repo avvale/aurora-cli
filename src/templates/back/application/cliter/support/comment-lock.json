@@ -46,12 +46,32 @@
             "integrity": "sha1:45d1c8a7700fed5b91b5c2a6742658815b95ec32"
         },
         {
+            "path": "src/@app/support/comment/application/delete/support-delete-comments.command-handler.spec.ts",
+            "integrity": "sha1:f87a2862942b01fa3d494698eea773a1572875b5"
+        },
+        {
+            "path": "src/@app/support/comment/application/delete/support-delete-comments.command-handler.ts",
+            "integrity": "sha1:51dd3780a12cd500b5eebda5e2d4a5642d82b9e5"
+        },
+        {
+            "path": "src/@app/support/comment/application/delete/support-delete-comments.command.ts",
+            "integrity": "sha1:84a5a71ad7214aecd25b4b5dd378fa25a0d509da"
+        },
+        {
+            "path": "src/@app/support/comment/application/delete/support-delete-comments.service.spec.ts",
+            "integrity": "sha1:538e81c8ea77507c7f3ddb7ae053c0aeb7d31026"
+        },
+        {
+            "path": "src/@app/support/comment/application/delete/support-delete-comments.service.ts",
+            "integrity": "sha1:a6c3f045d5e68733e32c4dd37281e8a997befa5e"
+        },
+        {
             "path": "src/@app/support/comment/application/events/support-add-comments-context.event.ts",
-            "integrity": "sha1:09468b38fdf59269305bf421882ede5faa79a3b8"
+            "integrity": "sha1:7e2656efd702b6b2941cf21269262665586ed2a3"
         },
         {
             "path": "src/@app/support/comment/application/events/support-created-comment.event-handler.ts",
-            "integrity": "sha1:15442b1b3d6affe3b3a1d52f559a0375cc7f2f45"
+            "integrity": "sha1:9d9a1b7efcf29e0ea87a51c7b8e9ea3f388552d0"
         },
         {
             "path": "src/@app/support/comment/application/events/support-created-comment.event.ts",
@@ -59,7 +79,7 @@
         },
         {
             "path": "src/@app/support/comment/application/events/support-created-comments.event-handler.ts",
-            "integrity": "sha1:14c817443c40e916a35c97562264b7548a8957f0"
+            "integrity": "sha1:66e42dfaae2e33d4ffd79a80f0128cacba0ac83b"
         },
         {
             "path": "src/@app/support/comment/application/events/support-created-comments.event.ts",
@@ -67,15 +87,23 @@
         },
         {
             "path": "src/@app/support/comment/application/events/support-deleted-comment.event-handler.ts",
-            "integrity": "sha1:c2e3cd6143082e86c871edd55b57121c61c356a9"
+            "integrity": "sha1:4a750f769ad6df22429358f17938ca7fd94e7e7f"
         },
         {
             "path": "src/@app/support/comment/application/events/support-deleted-comment.event.ts",
             "integrity": "sha1:0375248e049d8a43d9f3683c9918b9774957db13"
         },
         {
+            "path": "src/@app/support/comment/application/events/support-deleted-comments.event-handler.ts",
+            "integrity": "sha1:4ae65ecbbd4e31ad20b9fb6a3d5cd49a92f360fd"
+        },
+        {
+            "path": "src/@app/support/comment/application/events/support-deleted-comments.event.ts",
+            "integrity": "sha1:e0c9da31e836accf4a450c7f2f18288650f1a6dd"
+        },
+        {
             "path": "src/@app/support/comment/application/events/support-updated-comment.event-handler.ts",
-            "integrity": "sha1:f99f5d261008a239c5de258e28ec54b20730f3ce"
+            "integrity": "sha1:e20befff62d1b840439616e40a67047d1e825a78"
         },
         {
             "path": "src/@app/support/comment/application/events/support-updated-comment.event.ts",
@@ -83,7 +111,7 @@
         },
         {
             "path": "src/@app/support/comment/application/events/support-updated-comments.event-handler.ts",
-            "integrity": "sha1:cf8b5bf0745a567998cc53d3df70061dbded7526"
+            "integrity": "sha1:cf4ec3ea325e0056f68459210c8e66930202b73f"
         },
         {
             "path": "src/@app/support/comment/application/events/support-updated-comments.event.ts",
@@ -155,7 +183,7 @@
         },
         {
             "path": "src/@app/support/comment/application/paginate/support-paginate-comments.query-handler.ts",
-            "integrity": "sha1:5d3dcca0df7b46d52fd3f7187c1608f2b5d85aad"
+            "integrity": "sha1:7f5a242f1c59e787bf470383f695693a3e012763"
         },
         {
             "path": "src/@app/support/comment/application/paginate/support-paginate-comments.query.ts",
@@ -171,7 +199,7 @@
         },
         {
             "path": "src/@app/support/comment/application/sagas/support-comment.sagas.ts",
-            "integrity": "sha1:f0b6b89bae0805e201599ed0ad750bce10e380cd"
+            "integrity": "sha1:291fbc8b2a664c50c7bc1e8b31530ad30d3806da"
         },
         {
             "path": "src/@app/support/comment/application/update/support-update-comment-by-id.command-handler.spec.ts",
@@ -235,11 +263,11 @@
         },
         {
             "path": "src/@app/support/comment/index.ts",
-            "integrity": "sha1:cdc67299d3ce1d0b4759c1eb447faba648dd6123"
+            "integrity": "sha1:e48b1efe0a5009a70c881f2e776db0d29178656e"
         },
         {
             "path": "src/@app/support/comment/infrastructure/mock/support-mock-comment.data.ts",
-            "integrity": "sha1:ce02d5503539bdb88eb1ab3ce4c30e61a1c370ff"
+            "integrity": "sha1:a9144edd0b83c9d5c7c04485b00afdddc1312414"
         },
         {
             "path": "src/@app/support/comment/infrastructure/mock/support-mock-comment.repository.ts",
@@ -294,12 +322,12 @@
             "integrity": "sha1:3b3177215802c0162b81e9dd8dcddd8db4959b66"
         },
         {
-            "path": "src/@app/support/comment/domain/value-objects/support-comment-description.ts",
-            "integrity": "sha1:778e28de681cdc0d9ee0d417e365cdf38a958eab"
-        },
-        {
             "path": "src/@app/support/comment/domain/value-objects/support-comment-display-name.ts",
             "integrity": "sha1:f816fd2e2ed3de0cfe6e825fddb0a0f534e6d627"
+        },
+        {
+            "path": "src/@app/support/comment/domain/value-objects/support-comment-description.ts",
+            "integrity": "sha1:778e28de681cdc0d9ee0d417e365cdf38a958eab"
         },
         {
             "path": "src/@app/support/comment/domain/value-objects/support-comment-attachments.ts",
@@ -318,12 +346,12 @@
             "integrity": "sha1:f93367a2acbb6d9fe892d00eb26a389553b2d499"
         },
         {
-            "path": "src/@app/support/comment/domain/value-objects/support-comment-updated-at.ts",
-            "integrity": "sha1:6e1eb6916ecfdb0eb5fa9b08215d94212562599f"
-        },
-        {
             "path": "src/@app/support/comment/domain/value-objects/support-comment-deleted-at.ts",
             "integrity": "sha1:ad3ed81327cf82c141aa5c987aa8e2151793fb3f"
+        },
+        {
+            "path": "src/@app/support/comment/domain/value-objects/support-comment-updated-at.ts",
+            "integrity": "sha1:6e1eb6916ecfdb0eb5fa9b08215d94212562599f"
         },
         {
             "path": "src/@api/support/comment/controllers/support-create-comment.controller.spec.ts",
@@ -340,6 +368,14 @@
         {
             "path": "src/@api/support/comment/controllers/support-delete-comment-by-id.controller.ts",
             "integrity": "sha1:9f5f3789f20faab9b638ab778193368f067c86bf"
+        },
+        {
+            "path": "src/@api/support/comment/controllers/support-delete-comments.controller.spec.ts",
+            "integrity": "sha1:0a607872f5081117fafab8154fcc8a81f7ede71d"
+        },
+        {
+            "path": "src/@api/support/comment/controllers/support-delete-comments.controller.ts",
+            "integrity": "sha1:67fda5961b5ebf47f386ff35f78f8f5e21f8d449"
         },
         {
             "path": "src/@api/support/comment/controllers/support-find-comment-by-id.controller.spec.ts",
@@ -415,7 +451,7 @@
         },
         {
             "path": "src/@api/support/comment/graphql/support-comment.graphql",
-            "integrity": "sha1:426b9bc77f7732ea4a75eac87251d012ce531132"
+            "integrity": "sha1:4ebf062875eec22bc01ddedbab49113dbd91d286"
         },
         {
             "path": "src/@api/support/comment/handlers/support-create-comment.handler.spec.ts",
@@ -432,6 +468,14 @@
         {
             "path": "src/@api/support/comment/handlers/support-delete-comment-by-id.handler.ts",
             "integrity": "sha1:82d780f35ac843004c9473d235e98114dc31110c"
+        },
+        {
+            "path": "src/@api/support/comment/handlers/support-delete-comments.handler.spec.ts",
+            "integrity": "sha1:87777a3a8a8b33fb10ef4e0fd1d0cfc586a77b70"
+        },
+        {
+            "path": "src/@api/support/comment/handlers/support-delete-comments.handler.ts",
+            "integrity": "sha1:d39dfcc56e0bedd8fd4fa36a3f474b852f6273ad"
         },
         {
             "path": "src/@api/support/comment/handlers/support-find-comment-by-id.handler.spec.ts",
@@ -483,7 +527,7 @@
         },
         {
             "path": "src/@api/support/comment/index.ts",
-            "integrity": "sha1:4656889d0ee44d12bc534784b49f745d6d6cb033"
+            "integrity": "sha1:6b45c8ff31ef63ec0db06e1acac3aa57be25a8f6"
         },
         {
             "path": "src/@api/support/comment/resolvers/support-create-comment.resolver.spec.ts",
@@ -500,6 +544,14 @@
         {
             "path": "src/@api/support/comment/resolvers/support-delete-comment-by-id.resolver.ts",
             "integrity": "sha1:cbb6eafd29fba1e0ee689e61aece478ece1dbb5b"
+        },
+        {
+            "path": "src/@api/support/comment/resolvers/support-delete-comments.resolver.spec.ts",
+            "integrity": "sha1:f117556236c200447e405a3cff3bbace13de5236"
+        },
+        {
+            "path": "src/@api/support/comment/resolvers/support-delete-comments.resolver.ts",
+            "integrity": "sha1:a231ee17b71ed4c154c23b63abd030545732fe89"
         },
         {
             "path": "src/@api/support/comment/resolvers/support-find-comment-by-id.resolver.spec.ts",
@@ -559,7 +611,7 @@
         },
         {
             "path": "postman/support/support.comment.postman.json",
-            "integrity": "sha1:789605bbf2edbba745cc97049f4e877cd6a083fa"
+            "integrity": "sha1:dd3e3e73e3b3ddca3476f669209d190b26e6c8dc"
         }
     ]
 }

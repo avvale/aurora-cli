@@ -2,6 +2,8 @@ import {
     SupportComment,
     SupportCreatedCommentEvent,
     SupportCreatedCommentsEvent,
+    SupportDeletedCommentEvent,
+    SupportDeletedCommentsEvent,
     SupportUpdatedCommentEvent,
     SupportUpdatedCommentsEvent,
 } from '@app/support/comment';
@@ -60,6 +62,38 @@ export class SupportAddCommentsContextEvent extends AggregateRoot {
                             payload: {
                                 id: comment.id.value,
                                 parentId: comment.parentId?.value,
+                                externalId: comment.externalId?.value,
+                                externalParentId:
+                                    comment.externalParentId?.value,
+                                issueId: comment.issueId?.value,
+                                accountId: comment.accountId?.value,
+                                accountUsername: comment.accountUsername?.value,
+                                displayName: comment.displayName?.value,
+                                description: comment.description.value,
+                                attachments: comment.attachments?.value,
+                                screenRecording: comment.screenRecording?.value,
+                                meta: comment.meta?.value,
+                                createdAt: comment.createdAt?.value,
+                                updatedAt: comment.updatedAt?.value,
+                                deletedAt: comment.deletedAt?.value,
+                            },
+                        }),
+                ),
+                cQMetadata: this.cQMetadata,
+            }),
+        );
+    }
+
+    deleted(): void {
+        this.apply(
+            new SupportDeletedCommentsEvent({
+                payload: this.aggregateRoots.map(
+                    (comment) =>
+                        new SupportDeletedCommentEvent({
+                            payload: {
+                                id: comment.id.value,
+                                parentId: comment.parentId?.value,
+                                rowId: comment.rowId.value,
                                 externalId: comment.externalId?.value,
                                 externalParentId:
                                     comment.externalParentId?.value,

@@ -97,7 +97,6 @@ aggregateProperties:
 excludedOperations:
   - count
   - createBatch
-  - delete
   - getRaw
   - max
   - min

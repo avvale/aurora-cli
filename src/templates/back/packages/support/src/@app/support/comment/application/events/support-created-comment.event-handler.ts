@@ -6,6 +6,6 @@ export class SupportCreatedCommentEventHandler
     implements IEventHandler<SupportCreatedCommentEvent>
 {
     handle(event: SupportCreatedCommentEvent): void {
-        // console.log('SupportCreatedCommentEvent: ', event);
+        // 'SupportCreatedCommentEvent'
     }
 }

@@ -1,6 +1,7 @@
 // export commands
 export { SupportCreateCommentCommand } from './application/create/support-create-comment.command';
 export { SupportDeleteCommentByIdCommand } from './application/delete/support-delete-comment-by-id.command';
+export { SupportDeleteCommentsCommand } from './application/delete/support-delete-comments.command';
 export { SupportUpdateCommentByIdCommand } from './application/update/support-update-comment-by-id.command';
 export { SupportUpdateCommentsCommand } from './application/update/support-update-comments.command';
 
@@ -20,6 +21,7 @@ export { SupportAddCommentsContextEvent } from './application/events/support-add
 export { SupportCreatedCommentEvent } from './application/events/support-created-comment.event';
 export { SupportCreatedCommentsEvent } from './application/events/support-created-comments.event';
 export { SupportDeletedCommentEvent } from './application/events/support-deleted-comment.event';
+export { SupportDeletedCommentsEvent } from './application/events/support-deleted-comments.event';
 export { SupportUpdatedCommentEvent } from './application/events/support-updated-comment.event';
 export { SupportUpdatedCommentsEvent } from './application/events/support-updated-comments.event';
 
@@ -45,6 +47,7 @@ export { SupportCommentSagas } from './application/sagas/support-comment.sagas';
 // command handlers
 import { SupportCreateCommentCommandHandler } from './application/create/support-create-comment.command-handler';
 import { SupportDeleteCommentByIdCommandHandler } from './application/delete/support-delete-comment-by-id.command-handler';
+import { SupportDeleteCommentsCommandHandler } from './application/delete/support-delete-comments.command-handler';
 import { SupportUpdateCommentByIdCommandHandler } from './application/update/support-update-comment-by-id.command-handler';
 import { SupportUpdateCommentsCommandHandler } from './application/update/support-update-comments.command-handler';
 
@@ -58,12 +61,14 @@ import { SupportPaginateCommentsQueryHandler } from './application/paginate/supp
 import { SupportCreatedCommentEventHandler } from './application/events/support-created-comment.event-handler';
 import { SupportCreatedCommentsEventHandler } from './application/events/support-created-comments.event-handler';
 import { SupportDeletedCommentEventHandler } from './application/events/support-deleted-comment.event-handler';
+import { SupportDeletedCommentsEventHandler } from './application/events/support-deleted-comments.event-handler';
 import { SupportUpdatedCommentEventHandler } from './application/events/support-updated-comment.event-handler';
 import { SupportUpdatedCommentsEventHandler } from './application/events/support-updated-comments.event-handler';
 
 // services
 import { SupportCreateCommentService } from './application/create/support-create-comment.service';
 import { SupportDeleteCommentByIdService } from './application/delete/support-delete-comment-by-id.service';
+import { SupportDeleteCommentsService } from './application/delete/support-delete-comments.service';
 import { SupportFindCommentByIdService } from './application/find/support-find-comment-by-id.service';
 import { SupportFindCommentService } from './application/find/support-find-comment.service';
 import { SupportGetCommentsService } from './application/get/support-get-comments.service';
@@ -77,6 +82,7 @@ export const SupportCommentHandlers = [
     SupportUpdateCommentByIdCommandHandler,
     SupportUpdateCommentsCommandHandler,
     SupportDeleteCommentByIdCommandHandler,
+    SupportDeleteCommentsCommandHandler,
 
     // queries
     SupportPaginateCommentsQueryHandler,
@@ -90,6 +96,7 @@ export const SupportCommentHandlers = [
     SupportUpdatedCommentEventHandler,
     SupportUpdatedCommentsEventHandler,
     SupportDeletedCommentEventHandler,
+    SupportDeletedCommentsEventHandler,
 ];
 
 export const SupportCommentServices = [
@@ -101,4 +108,5 @@ export const SupportCommentServices = [
     SupportUpdateCommentByIdService,
     SupportUpdateCommentsService,
     SupportDeleteCommentByIdService,
+    SupportDeleteCommentsService,
 ];

@@ -4,6 +4,7 @@ import {
     CLICKUP_TASK_PLATFORM_API_KEY,
     ClickupService,
 } from '@api/support/clickup/shared';
+import { SupportDeleteCommentsCommand } from '@app/support/comment';
 import {
     SupportDeleteIssueByIdCommand,
     SupportFindIssueByIdQuery,
@@ -54,6 +55,19 @@ export class SupportDeleteIssueByIdHandler {
                     auditing,
                 },
             }),
+        );
+
+        void this.commandBus.dispatch(
+            new SupportDeleteCommentsCommand(
+                { where: { issueId: id } },
+                {},
+                {
+                    timezone,
+                    repositoryOptions: {
+                        auditing,
+                    },
+                },
+            ),
         );
 
         if (issue.screenRecording) {

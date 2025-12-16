@@ -40,10 +40,11 @@ export class SupportUpdateCommentByIdHandler {
             }),
         );
 
-        if (!comment)
+        if (!comment) {
             throw new NotFoundException(
                 `SupportComment with id: ${payload.id}, not found`,
             );
+        }
 
         const dataToUpdate = diff(payload, comment);
 

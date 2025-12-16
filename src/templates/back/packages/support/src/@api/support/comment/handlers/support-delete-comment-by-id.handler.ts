@@ -45,10 +45,11 @@ export class SupportDeleteCommentByIdHandler {
             }),
         );
 
-        if (!comment)
+        if (!comment) {
             throw new NotFoundException(
                 `SupportComment with id: ${id}, not found`,
             );
+        }
 
         await this.commandBus.dispatch(
             new SupportDeleteCommentByIdCommand(id, constraint, {

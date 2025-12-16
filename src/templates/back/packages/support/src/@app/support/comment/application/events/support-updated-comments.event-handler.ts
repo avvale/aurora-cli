@@ -6,6 +6,6 @@ export class SupportUpdatedCommentsEventHandler
     implements IEventHandler<SupportUpdatedCommentsEvent>
 {
     handle(event: SupportUpdatedCommentsEvent): void {
-        // console.log('SupportUpdatedCommentsEvent: ', event);
+        // 'SupportUpdatedCommentsEvent'
     }
 }

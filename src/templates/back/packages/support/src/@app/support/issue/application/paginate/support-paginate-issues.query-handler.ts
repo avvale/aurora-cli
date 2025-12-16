@@ -1,3 +1,4 @@
+import { StorageAccountSharedAccessSignatureService } from '@app/storage-account/shared-access-signature';
 import {
     SupportIssueMapper,
     SupportPaginateIssuesQuery,
@@ -14,6 +15,7 @@ export class SupportPaginateIssuesQueryHandler
 
     constructor(
         private readonly paginateIssuesService: SupportPaginateIssuesService,
+        private readonly storageAccountSharedAccessSignatureService: StorageAccountSharedAccessSignatureService,
     ) {}
 
     async execute(
@@ -28,7 +30,10 @@ export class SupportPaginateIssuesQueryHandler
         return new PaginationResponse(
             total,
             count,
-            this.mapper.mapAggregatesToResponses(rows),
+            this.mapper.mapAggregatesToResponses(
+                rows,
+                this.storageAccountSharedAccessSignatureService,
+            ),
         );
     }
 }
