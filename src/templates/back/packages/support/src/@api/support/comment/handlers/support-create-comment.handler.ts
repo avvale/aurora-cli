@@ -31,17 +31,17 @@ export class SupportCreateCommentHandler {
         timezone?: string,
         auditing?: AuditingMeta,
     ): Promise<SupportComment> {
+        const displayName =
+            account.user.name +
+            (account.user.surname ? ' ' + account.user.surname : '');
+
         await this.commandBus.dispatch(
             new SupportCreateCommentCommand(
                 {
                     ...payload,
                     accountId: account.id,
                     accountUsername: account.username,
-                    displayName:
-                        account.user.name +
-                        (account.user.surname
-                            ? ' ' + account.user.surname
-                            : ''),
+                    displayName,
                 },
                 {
                     timezone,
@@ -64,7 +64,7 @@ export class SupportCreateCommentHandler {
             this.clickupService.createTaskComment(
                 issue.externalId,
                 {
-                    comment: payload.description,
+                    comment: displayName + ', dice:\n' + payload.description,
                     notifyAll: true,
                 },
                 { authorization: clickupTaskPlatformApiKey },

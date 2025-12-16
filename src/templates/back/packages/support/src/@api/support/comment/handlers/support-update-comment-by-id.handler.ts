@@ -3,6 +3,7 @@ import {
     CLICKUP_TASK_PLATFORM_API_KEY,
     ClickupService,
 } from '@api/support/clickup/shared';
+import { IamAccountResponse } from '@app/iam/account';
 import {
     SupportFindCommentByIdQuery,
     SupportUpdateCommentByIdCommand,
@@ -29,6 +30,7 @@ export class SupportUpdateCommentByIdHandler {
     ) {}
 
     async main(
+        account: IamAccountResponse,
         payload: SupportUpdateCommentByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
@@ -70,11 +72,16 @@ export class SupportUpdateCommentByIdHandler {
                     CLICKUP_TASK_PLATFORM_API_KEY,
                 );
 
+            const displayName =
+                account.user.name +
+                (account.user.surname ? ' ' + account.user.surname : '');
+
             void lastValueFrom(
                 this.clickupService.updateComment(
                     comment.externalId,
                     {
-                        comment: payload.description,
+                        comment:
+                            displayName + ', dice:\n' + payload.description,
                         resolved: false,
                     },
                     { authorization: clickupTaskPlatformApiKey },
