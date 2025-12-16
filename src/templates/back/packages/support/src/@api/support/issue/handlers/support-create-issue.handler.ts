@@ -33,16 +33,16 @@ export class SupportCreateIssueHandler {
         timezone?: string,
         auditing?: AuditingMeta,
     ): Promise<SupportIssue> {
+        const displayName =
+            account.user.name +
+            (account.user.surname ? ' ' + account.user.surname : '');
+
         await this.commandBus.dispatch(
             new SupportCreateIssueCommand(
                 {
                     ...payload,
                     accountUsername: account.username,
-                    displayName:
-                        account.user.name +
-                        (account.user.surname
-                            ? ' ' + account.user.surname
-                            : ''),
+                    displayName,
                 },
                 {
                     timezone,
@@ -72,7 +72,8 @@ export class SupportCreateIssueHandler {
                 clickupTaskPlatformListId,
                 {
                     name: payload.subject,
-                    description: payload.description,
+                    description:
+                        displayName + ', dice:\n' + payload.description,
                 },
                 { authorization: clickupTaskPlatformApiKey },
             ),

@@ -1,9 +1,11 @@
 import { SupportIssue, SupportUpdateIssueByIdInput } from '@api/graphql';
 import { SupportUpdateIssueByIdHandler } from '@api/support/issue';
+import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
 import {
     Auditing,
     AuditingMeta,
+    CurrentAccount,
     QueryStatement,
     Timezone,
 } from '@aurorajs.dev/core';
@@ -16,11 +18,18 @@ export class SupportUpdateIssueByIdResolver {
 
     @Mutation('supportUpdateIssueById')
     async main(
+        @CurrentAccount() account: IamAccountResponse,
         @Args('payload') payload: SupportUpdateIssueByIdInput,
         @Args('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
     ): Promise<SupportIssue> {
-        return await this.handler.main(payload, constraint, timezone, auditing);
+        return await this.handler.main(
+            account,
+            payload,
+            constraint,
+            timezone,
+            auditing,
+        );
     }
 }

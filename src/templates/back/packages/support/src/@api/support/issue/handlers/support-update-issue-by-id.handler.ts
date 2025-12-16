@@ -3,6 +3,7 @@ import {
     CLICKUP_TASK_PLATFORM_API_KEY,
     ClickupService,
 } from '@api/support/clickup/shared';
+import { IamAccountResponse } from '@app/iam/account';
 import {
     SupportFindIssueByIdQuery,
     SupportUpdateIssueByIdCommand,
@@ -29,6 +30,7 @@ export class SupportUpdateIssueByIdHandler {
     ) {}
 
     async main(
+        account: IamAccountResponse,
         payload: SupportUpdateIssueByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
@@ -70,12 +72,17 @@ export class SupportUpdateIssueByIdHandler {
                     CLICKUP_TASK_PLATFORM_API_KEY,
                 );
 
+            const displayName =
+                account.user.name +
+                (account.user.surname ? ' ' + account.user.surname : '');
+
             void lastValueFrom(
                 this.clickupService.updateTask(
                     issue.externalId,
                     {
                         name: payload.subject,
-                        description: payload.description,
+                        description:
+                            displayName + ', dice:\n' + payload.description,
                     },
                     { authorization: clickupTaskPlatformApiKey },
                 ),
