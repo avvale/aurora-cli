@@ -29,7 +29,7 @@ env:
     SOPS_AGE_SECRET_KEY: $\{{ secrets.PLESK_DEV_SOPS_AGE_SECRET_KEY }}
 
     # Node version
-    NODE_VERSION: '22'
+    NODE_VERSION: '24'
 
 jobs:
     deploy-artifact:

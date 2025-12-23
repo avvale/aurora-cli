@@ -21,9 +21,11 @@ env:
     SERVER_USERNAME: $\{{ secrets.PLESK_DEV_SERVER_USERNAME }}
     # example /var/www/vhosts/contoso.com
     SERVER_PATH: $\{{ vars.PLESK_DEV_SERVER_PATH }}
+    # Environment configuration
+    ENVIRONMENT_CONFIGURATION: $\{{ vars.PLESK_DEV_ENVIRONMENT_CONFIGURATION }}
 
     # Node version
-    NODE_VERSION: '22'
+    NODE_VERSION: '24'
 
 jobs:
     deploy-artifact:
@@ -45,10 +47,12 @@ jobs:
               run: npm run test
 
             - name: Build project
-              run: npm run build -- --configuration=development
+              run:
+                  npm run build -- --configuration=${{
+                  env.ENVIRONMENT_CONFIGURATION }}
 
             - name: Zip artifact for deployment
-              run: cd dist/fuse/browser && zip ../../../artifact.zip /* -r
+              run: cd dist/fuse/browser && zip ../../../artifact.zip ./* -r
 
             - name: Unzip artifact for deployment
               run: unzip -o artifact.zip -d deployment
