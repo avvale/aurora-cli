@@ -48,7 +48,7 @@ jobs:
 
             - name: Build project
               run:
-                  npm run build -- --configuration=${{
+                  npm run build -- --configuration=$\{{
                   env.ENVIRONMENT_CONFIGURATION }}
 
             - name: Zip artifact for deployment
