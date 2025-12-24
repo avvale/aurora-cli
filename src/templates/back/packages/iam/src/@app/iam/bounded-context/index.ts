@@ -1,7 +1,3 @@
-/* #region customizations */
-export { IamBoundedContextHelper } from './domain/iam-bounded-context-helper';
-/* #endregion customizations */
-
 // export commands
 export { IamCreateBoundedContextCommand } from './application/create/iam-create-bounded-context.command';
 export { IamCreateBoundedContextsCommand } from './application/create/iam-create-bounded-contexts.command';

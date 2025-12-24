@@ -8,7 +8,7 @@ import {
     users,
 } from '@app/iam/iam.seed';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 
 // sources
 import {
@@ -16,15 +16,18 @@ import {
     IamCreateAccountsCommand,
     IamFindAccountByIdQuery,
 } from '@app/iam/account';
-import { IamBoundedContextHelper } from '@app/iam/bounded-context';
-import { IamPermissionHelper } from '@app/iam/permission';
+import { IamCreateBoundedContextsCommand } from '@app/iam/bounded-context';
+import {
+    IamCreatePermissionsCommand,
+    IamPermissionHelper,
+} from '@app/iam/permission';
 import { IamCreateRolesCommand } from '@app/iam/role';
 import { IamCreateRolesAccountsCommand } from '@app/iam/role-account';
 import { IamCreateTenantsCommand } from '@app/iam/tenant';
 import { IamCreateUsersCommand } from '@app/iam/user';
 
 @Injectable()
-export class IamSeeder {
+export class IamSeeder implements OnApplicationBootstrap {
     administratorAccount: IamAccount;
 
     constructor(
@@ -41,11 +44,7 @@ export class IamSeeder {
 
         if (this.administratorAccount) {
             // create bounded contexts and permissions
-            await IamBoundedContextHelper.createBoundedContexts(
-                this.commandBus,
-                boundedContexts,
-            );
-            await IamPermissionHelper.createPermissions(
+            await IamPermissionHelper.createAdministratorPermissions(
                 this.commandBus,
                 this.queryBus,
                 permissions,
@@ -71,12 +70,8 @@ export class IamSeeder {
                 new IamCreateRolesAccountsCommand(rolesAccounts),
             );
 
-            // create bounded contexts and permissions
-            await IamBoundedContextHelper.createBoundedContexts(
-                this.commandBus,
-                boundedContexts,
-            );
-            await IamPermissionHelper.createPermissions(
+            // create administrator permissions
+            await IamPermissionHelper.createAdministratorPermissions(
                 this.commandBus,
                 this.queryBus,
                 permissions,
@@ -84,5 +79,26 @@ export class IamSeeder {
         }
 
         return true;
+    }
+
+    async onApplicationBootstrap(): Promise<void> {
+        await this.commandBus.dispatch(
+            new IamCreateBoundedContextsCommand(boundedContexts, {
+                timezone: process.env.TZ,
+                repositoryOptions: {
+                    updateOnDuplicate: ['name', 'root', 'sort', 'isActive'],
+                    conflictAttributes: ['id'],
+                },
+            }),
+        );
+        void this.commandBus.dispatch(
+            new IamCreatePermissionsCommand(permissions, {
+                timezone: process.env.TZ,
+                repositoryOptions: {
+                    updateOnDuplicate: ['name', 'boundedContextId'],
+                    conflictAttributes: ['id'],
+                },
+            }),
+        );
     }
 }
