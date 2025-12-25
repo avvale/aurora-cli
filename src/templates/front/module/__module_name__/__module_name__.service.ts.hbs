@@ -40,7 +40,7 @@
 ~}}
 {{#unlessEq (countWebComponentsProperties schema.aggregateProperties) 0 }}
 {{ push importsArray
-    (object items=(array 'findByIdWithRelationsQuery') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
+    (object items=(array 'findByIdWithRelationsQuery') path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName))
 ~}}
 {{/unlessEq}}
 {{#or
