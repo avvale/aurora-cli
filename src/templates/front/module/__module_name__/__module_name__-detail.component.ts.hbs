@@ -232,7 +232,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 ];
             },
         },
-        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
+        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig({ translator: this.translocoService }),
     ];
     /* #endregion variables to manage grid-select-element {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} */
     {{/eq}}
@@ -272,7 +272,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             translation: 'Selects',
             sticky: true,
         },
-        ...{{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig,
+        ...{{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig({ translator: this.translocoService }),
     ];
 
     // {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} dialog
@@ -317,7 +317,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             translation: 'Selects',
             sticky: true,
         },
-        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
+        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig({ translator: this.translocoService }),
     ];
     /* #endregion variables to manage grid-select-multiple-elements {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} }} */
     {{/eq}}
@@ -354,7 +354,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 return actions;
             },
         },
-        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig,
+        ...{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig({ translator: this.translocoService }),
     ];
     /* #endregion variables to manage grid-elements-manager {{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }} */
     {{/eq}}
@@ -1008,8 +1008,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         }),
                 );
 
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig.map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig().map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig().map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => this.translocoService.translate({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.translation));
 
                 exportRows(
                     {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows.objects,
@@ -1282,8 +1282,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         }),
                 );
 
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig.map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig().map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig().map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => this.translocoService.translate({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.translation));
 
                 exportRows(
                     {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows.objects,
@@ -1435,8 +1435,8 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                         }),
                 );
 
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig.map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns.map(column => this.translocoService.translate('{{ toCamelCase ../schema.boundedContextName }}.' + column.toPascalCase()));
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig().map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns.map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => this.translocoService.translate({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.translation));
 
                 exportRows(
                     {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows.objects,
