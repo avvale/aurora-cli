@@ -3,10 +3,6 @@ import {
     IamUpdateTenantAccountByIdInput,
 } from '@api/graphql';
 import {
-    IamTenantAccountDto,
-    IamUpdateTenantAccountByIdDto,
-} from '@api/iam/tenant-account';
-import {
     IamFindTenantAccountByIdQuery,
     IamUpdateTenantAccountByIdCommand,
 } from '@app/iam/tenant-account';
@@ -17,7 +13,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateTenantAccountByIdHandler {
@@ -27,13 +23,11 @@ export class IamUpdateTenantAccountByIdHandler {
     ) {}
 
     async main(
-        payload:
-            | IamUpdateTenantAccountByIdInput
-            | IamUpdateTenantAccountByIdDto,
+        payload: IamUpdateTenantAccountByIdInput,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamTenantAccount | IamTenantAccountDto> {
+    ): Promise<IamTenantAccount> {
         const tenantAccount = await this.queryBus.ask(
             new IamFindTenantAccountByIdQuery(
                 payload.tenantId,
@@ -44,6 +38,12 @@ export class IamUpdateTenantAccountByIdHandler {
                 },
             ),
         );
+
+        if (!tenantAccount) {
+            throw new NotFoundException(
+                `IamTenantAccount with tenantId: ${payload.tenantId}, accountId: ${payload.accountId}, not found`,
+            );
+        }
 
         const dataToUpdate = diff(payload, tenantAccount);
 

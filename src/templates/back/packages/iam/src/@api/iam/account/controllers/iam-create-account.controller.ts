@@ -30,15 +30,15 @@ export class IamCreateAccountController {
     })
     async main(
         @CurrentAccount() account: IamAccountResponse,
-        @Body() payload: IamCreateAccountDto,
         @Headers() headers: LiteralObject,
+        @Body() payload: IamCreateAccountDto,
         @Timezone() timezone?: string,
         @Auditing() auditing?: AuditingMeta,
     ) {
         return await this.handler.main(
             account,
-            payload,
             headers,
+            payload,
             timezone,
             auditing,
         );

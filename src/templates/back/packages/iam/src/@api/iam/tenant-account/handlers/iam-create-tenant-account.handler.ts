@@ -1,9 +1,5 @@
 import { IamCreateTenantAccountInput, IamTenantAccount } from '@api/graphql';
 import {
-    IamCreateTenantAccountDto,
-    IamTenantAccountDto,
-} from '@api/iam/tenant-account';
-import {
     IamCreateTenantAccountCommand,
     IamFindTenantAccountByIdQuery,
 } from '@app/iam/tenant-account';
@@ -18,10 +14,10 @@ export class IamCreateTenantAccountHandler {
     ) {}
 
     async main(
-        payload: IamCreateTenantAccountInput | IamCreateTenantAccountDto,
+        payload: IamCreateTenantAccountInput,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamTenantAccount | IamTenantAccountDto> {
+    ): Promise<IamTenantAccount> {
         await this.commandBus.dispatch(
             new IamCreateTenantAccountCommand(payload, {
                 timezone,

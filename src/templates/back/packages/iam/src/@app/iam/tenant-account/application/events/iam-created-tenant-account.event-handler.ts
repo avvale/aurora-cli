@@ -6,6 +6,6 @@ export class IamCreatedTenantAccountEventHandler
     implements IEventHandler<IamCreatedTenantAccountEvent>
 {
     handle(event: IamCreatedTenantAccountEvent): void {
-        // console.log('IamCreatedTenantAccountEvent: ', event);
+        // 'IamCreatedTenantAccountEvent'
     }
 }

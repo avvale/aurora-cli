@@ -6,6 +6,6 @@ export class IamDeletedAccountEventHandler
     implements IEventHandler<IamDeletedAccountEvent>
 {
     handle(event: IamDeletedAccountEvent): void {
-        // console.log('IamDeletedAccountEvent: ', event);
+        // IamDeletedAccountEvent'
     }
 }

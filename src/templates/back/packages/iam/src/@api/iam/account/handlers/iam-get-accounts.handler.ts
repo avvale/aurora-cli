@@ -1,5 +1,4 @@
 import { IamAccount } from '@api/graphql';
-import { IamAccountDto } from '@api/iam/account';
 import { IamGetAccountsQuery } from '@app/iam/account';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -12,7 +11,7 @@ export class IamGetAccountsHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamAccount[] | IamAccountDto[]> {
+    ): Promise<IamAccount[]> {
         return await this.queryBus.ask(
             new IamGetAccountsQuery(queryStatement, constraint, {
                 timezone,

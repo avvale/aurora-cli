@@ -6,6 +6,6 @@ export class IamUpdatedAccountEventHandler
     implements IEventHandler<IamUpdatedAccountEvent>
 {
     handle(event: IamUpdatedAccountEvent): void {
-        // console.log('UpdatedAccountEvent: ', event);
+        // 'UpdatedAccountEvent'
     }
 }

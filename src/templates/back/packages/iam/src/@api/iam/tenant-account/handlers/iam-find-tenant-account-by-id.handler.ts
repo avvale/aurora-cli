@@ -1,8 +1,7 @@
 import { IamTenantAccount } from '@api/graphql';
-import { IamTenantAccountDto } from '@api/iam/tenant-account';
 import { IamFindTenantAccountByIdQuery } from '@app/iam/tenant-account';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamFindTenantAccountByIdHandler {
@@ -13,11 +12,19 @@ export class IamFindTenantAccountByIdHandler {
         accountId: string,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamTenantAccount | IamTenantAccountDto> {
-        return await this.queryBus.ask(
+    ): Promise<IamTenantAccount> {
+        const tenantAccount = await this.queryBus.ask(
             new IamFindTenantAccountByIdQuery(tenantId, accountId, constraint, {
                 timezone,
             }),
         );
+
+        if (!tenantAccount) {
+            throw new NotFoundException(
+                `IamTenantAccount with tenantId: ${tenantId}, accountId: ${accountId}, not found`,
+            );
+        }
+
+        return tenantAccount;
     }
 }

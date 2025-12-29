@@ -15,8 +15,8 @@ export class IamCreateAccountHandler {
 
     async main(
         account: IamAccountResponse,
-        payload: IamCreateAccountInput | IamCreateAccountDto,
         headers: LiteralObject,
+        payload: IamCreateAccountInput | IamCreateAccountDto,
         timezone?: string,
         auditing?: AuditingMeta,
     ): Promise<IamAccount | IamAccountDto> {

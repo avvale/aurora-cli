@@ -6,6 +6,6 @@ export class IamDeletedTenantsAccountsEventHandler
     implements IEventHandler<IamDeletedTenantsAccountsEvent>
 {
     handle(event: IamDeletedTenantsAccountsEvent): void {
-        // console.log('DeletedTenantsAccountsEvent: ', event);
+        // 'DeletedTenantsAccountsEvent'
     }
 }

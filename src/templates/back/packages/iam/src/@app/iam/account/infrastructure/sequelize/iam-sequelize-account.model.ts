@@ -54,6 +54,7 @@ import {
         {
             fields: ['tags'],
             unique: false,
+            using: 'GIN',
         },
     ],
 })

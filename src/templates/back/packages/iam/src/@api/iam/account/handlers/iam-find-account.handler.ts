@@ -1,8 +1,7 @@
 import { IamAccount } from '@api/graphql';
-import { IamAccountDto } from '@api/iam/account';
 import { IamFindAccountQuery } from '@app/iam/account';
 import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamFindAccountHandler {
@@ -12,11 +11,17 @@ export class IamFindAccountHandler {
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
-    ): Promise<IamAccount | IamAccountDto> {
-        return await this.queryBus.ask(
+    ): Promise<IamAccount> {
+        const account = await this.queryBus.ask(
             new IamFindAccountQuery(queryStatement, constraint, {
                 timezone,
             }),
         );
+
+        if (!account) {
+            throw new NotFoundException(`IamAccount not found`);
+        }
+
+        return account;
     }
 }

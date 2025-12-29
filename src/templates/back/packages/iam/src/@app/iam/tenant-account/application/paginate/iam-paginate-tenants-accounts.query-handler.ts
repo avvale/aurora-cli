@@ -1,4 +1,7 @@
-import { IamPaginateTenantsAccountsQuery } from '@app/iam/tenant-account';
+import {
+    IamPaginateTenantsAccountsQuery,
+    IamTenantAccountMapper,
+} from '@app/iam/tenant-account';
 import { IamPaginateTenantsAccountsService } from '@app/iam/tenant-account/application/paginate/iam-paginate-tenants-accounts.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +10,9 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class IamPaginateTenantsAccountsQueryHandler
     implements IQueryHandler<IamPaginateTenantsAccountsQuery>
 {
+    private readonly mapper: IamTenantAccountMapper =
+        new IamTenantAccountMapper();
+
     constructor(
         private readonly paginateTenantsAccountsService: IamPaginateTenantsAccountsService,
     ) {}
@@ -24,7 +30,7 @@ export class IamPaginateTenantsAccountsQueryHandler
         return new PaginationResponse(
             total,
             count,
-            rows.map((item) => item.toDTO()),
+            this.mapper.mapAggregatesToResponses(rows),
         );
     }
 }

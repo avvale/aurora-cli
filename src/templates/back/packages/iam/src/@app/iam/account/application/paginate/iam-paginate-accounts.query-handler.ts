@@ -1,4 +1,4 @@
-import { IamPaginateAccountsQuery } from '@app/iam/account';
+import { IamAccountMapper, IamPaginateAccountsQuery } from '@app/iam/account';
 import { IamPaginateAccountsService } from '@app/iam/account/application/paginate/iam-paginate-accounts.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
@@ -7,6 +7,8 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 export class IamPaginateAccountsQueryHandler
     implements IQueryHandler<IamPaginateAccountsQuery>
 {
+    private readonly mapper: IamAccountMapper = new IamAccountMapper();
+
     constructor(
         private readonly paginateAccountsService: IamPaginateAccountsService,
     ) {}
@@ -23,7 +25,7 @@ export class IamPaginateAccountsQueryHandler
         return new PaginationResponse(
             total,
             count,
-            rows.map((item) => item.toDTO()),
+            this.mapper.mapAggregatesToResponses(rows),
         );
     }
 }

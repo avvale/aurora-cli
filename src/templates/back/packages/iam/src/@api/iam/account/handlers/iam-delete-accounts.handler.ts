@@ -1,5 +1,4 @@
 import { IamAccount } from '@api/graphql';
-import { IamAccountDto } from '@api/iam/account';
 import {
     IamDeleteAccountsCommand,
     IamGetAccountsQuery,
@@ -24,7 +23,7 @@ export class IamDeleteAccountsHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamAccount[] | IamAccountDto[]> {
+    ): Promise<IamAccount[]> {
         const accounts = await this.queryBus.ask(
             new IamGetAccountsQuery(queryStatement, constraint, {
                 timezone,

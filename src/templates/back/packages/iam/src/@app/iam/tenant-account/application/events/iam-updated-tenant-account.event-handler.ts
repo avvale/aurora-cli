@@ -6,6 +6,6 @@ export class IamUpdatedTenantAccountEventHandler
     implements IEventHandler<IamUpdatedTenantAccountEvent>
 {
     handle(event: IamUpdatedTenantAccountEvent): void {
-        // console.log('UpdatedTenantAccountEvent: ', event);
+        // 'UpdatedTenantAccountEvent'
     }
 }

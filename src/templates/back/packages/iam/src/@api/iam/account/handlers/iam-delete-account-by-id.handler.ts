@@ -1,5 +1,4 @@
 import { IamAccount } from '@api/graphql';
-import { IamAccountDto } from '@api/iam/account';
 import {
     IamDeleteAccountByIdCommand,
     IamFindAccountByIdQuery,
@@ -10,7 +9,7 @@ import {
     IQueryBus,
     QueryStatement,
 } from '@aurorajs.dev/core';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteAccountByIdHandler {
@@ -24,12 +23,16 @@ export class IamDeleteAccountByIdHandler {
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamAccount | IamAccountDto> {
+    ): Promise<IamAccount> {
         const account = await this.queryBus.ask(
             new IamFindAccountByIdQuery(id, constraint, {
                 timezone,
             }),
         );
+
+        if (!account) {
+            throw new NotFoundException(`IamAccount with id: ${id}, not found`);
+        }
 
         await this.commandBus.dispatch(
             new IamDeleteAccountByIdCommand(id, constraint, {

@@ -1,9 +1,5 @@
 import { IamTenantAccount, IamUpdateTenantsAccountsInput } from '@api/graphql';
 import {
-    IamTenantAccountDto,
-    IamUpdateTenantsAccountsDto,
-} from '@api/iam/tenant-account';
-import {
     IamGetTenantsAccountsQuery,
     IamUpdateTenantsAccountsCommand,
 } from '@app/iam/tenant-account';
@@ -23,12 +19,12 @@ export class IamUpdateTenantsAccountsHandler {
     ) {}
 
     async main(
-        payload: IamUpdateTenantsAccountsInput | IamUpdateTenantsAccountsDto,
+        payload: IamUpdateTenantsAccountsInput,
         queryStatement?: QueryStatement,
         constraint?: QueryStatement,
         timezone?: string,
         auditing?: AuditingMeta,
-    ): Promise<IamTenantAccount | IamTenantAccountDto> {
+    ): Promise<IamTenantAccount> {
         await this.commandBus.dispatch(
             new IamUpdateTenantsAccountsCommand(
                 payload,

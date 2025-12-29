@@ -1,4 +1,18 @@
-import { CoreEnvironmentInformationController, CoreGetFallbackLangController, CoreGetFallbackLangHandler, CoreGetFallbackLangResolver, CoreGetLangsController, CoreGetLangsHandler, CoreGetLangsResolver, CoreGetSearchKeyLangController, CoreGetSearchKeyLangHandler, CoreGetSearchKeyLangResolver, CorePreparationRequestController, CoreStatusController, SequelizeConfigModule } from '@aurorajs.dev/core';
+import {
+    CoreEnvironmentInformationController,
+    CoreGetFallbackLangController,
+    CoreGetFallbackLangHandler,
+    CoreGetFallbackLangResolver,
+    CoreGetLangsController,
+    CoreGetLangsHandler,
+    CoreGetLangsResolver,
+    CoreGetSearchKeyLangController,
+    CoreGetSearchKeyLangHandler,
+    CoreGetSearchKeyLangResolver,
+    CorePreparationRequestController,
+    CoreStatusController,
+    SequelizeConfigModule,
+} from '@aurorajs.dev/core';
 import { Module } from '@nestjs/common';
 import { GraphQLConfigModule, MailerCLientModule } from './modules';
 import { BootstrapService } from './services/bootstrap.service';

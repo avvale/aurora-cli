@@ -6,12 +6,17 @@ import { join } from 'path';
 @Module({
     imports: [
         ServeStaticModule.forRootAsync({
-            imports   : [ConfigModule],
-            inject    : [ConfigService],
-            useFactory: (configService: ConfigService) => [{
-                rootPath : join(process.cwd(), configService.get('STORAGE_ACCOUNT_PUBLIC_PATH')),
-                serveRoot: `/${configService.get('STORAGE_ACCOUNT_PUBLIC_PATH')}`,
-            }],
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: (configService: ConfigService) => [
+                {
+                    rootPath: join(
+                        process.cwd(),
+                        configService.get('STORAGE_ACCOUNT_PUBLIC_PATH'),
+                    ),
+                    serveRoot: `/${configService.get('STORAGE_ACCOUNT_PUBLIC_PATH')}`,
+                },
+            ],
         }),
     ],
 })

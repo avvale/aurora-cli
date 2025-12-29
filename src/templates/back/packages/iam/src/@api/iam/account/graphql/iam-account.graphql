@@ -146,8 +146,6 @@ type Mutation {
         constraint: QueryStatement
     ): [IamAccount]!
 
-    iamUpsertAccount(payload: IamUpdateAccountByIdInput!): IamAccount
-
     iamDeleteAccountById(id: ID!, constraint: QueryStatement): IamAccount
 
     iamDeleteAccounts(

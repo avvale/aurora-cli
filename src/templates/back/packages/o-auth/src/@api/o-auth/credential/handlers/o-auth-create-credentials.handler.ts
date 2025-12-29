@@ -51,8 +51,8 @@ export class OAuthCreateCredentialsHandler {
     ) {}
 
     async main(
-        payload: OAuthCreateCredentialsInput | OAuthCreateCredentialsDto,
         authorization: string,
+        payload: OAuthCreateCredentialsInput | OAuthCreateCredentialsDto,
         timezone?: string,
         auditing?: AuditingMeta,
     ): Promise<OAuthCredentials | OAuthCredentialsDto> {
