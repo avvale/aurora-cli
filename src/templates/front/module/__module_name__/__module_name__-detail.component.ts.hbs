@@ -1321,7 +1321,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
 
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
                 this.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogForm();
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.handleElementDetailDialog(action.id);
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.handleElementDetailDialog({ action });
                 this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('id').setValue(uuid());
                 this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}DialogFg.get('{{ getForeignKey (object relationship=relationship schema=../schema) }}').setValue(this.managedObject().id);
                 break;
@@ -1353,7 +1353,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                             },
                         }),
                 );
-                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.handleElementDetailDialog(action.id);
+                this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}Component.handleElementDetailDialog({ action });
                 break;
 
             case '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.update{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}':
