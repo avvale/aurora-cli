@@ -235,6 +235,7 @@ export class RoleDetailComponent extends ViewDetailComponent {
             ],
             name: ['', [Validators.required, Validators.maxLength(128)]],
             defaultRedirection: ['', [Validators.maxLength(2046)]],
+            hasHiddenVerticalNavigation: false,
             isMaster: false,
             permissionIds: [],
         });

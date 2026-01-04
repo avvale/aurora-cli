@@ -379,7 +379,7 @@ export class QueueDetailComponent extends ViewDetailComponent {
                         name: this.managedObject().name,
                     }),
                 );
-                this.jobsComponent.handleElementDetailDialog(action.id);
+                this.jobsComponent.handleElementDetailDialog({ action });
                 break;
 
             case 'queueManager::queue.detail.removeJob':

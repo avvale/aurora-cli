@@ -8,6 +8,7 @@ export class IamDeletedRoleEvent {
                 rowId: number;
                 name: string;
                 defaultRedirection: string;
+                hasHiddenVerticalNavigation: boolean;
                 isMaster: boolean;
                 permissionIds: string[];
                 accountIds: string[];

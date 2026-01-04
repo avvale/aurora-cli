@@ -12,6 +12,7 @@ import { BoundedContextService } from '@apps/iam/bounded-context';
 import { PermissionService } from '@apps/iam/permission';
 import {
     Action,
+    ActionScope,
     Crumb,
     defaultDetailImports,
     log,
@@ -29,6 +30,7 @@ import { lastValueFrom, Observable, takeUntil } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultDetailImports, MatSelectModule],
 })
+@ActionScope('iam::permission.detail')
 export class PermissionDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..

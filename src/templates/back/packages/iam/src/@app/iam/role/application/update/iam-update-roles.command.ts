@@ -6,6 +6,7 @@ export class IamUpdateRolesCommand {
             id?: string;
             name?: string;
             defaultRedirection?: string;
+            hasHiddenVerticalNavigation?: boolean;
             isMaster?: boolean;
             permissionIds?: string[];
             accountIds?: string[];

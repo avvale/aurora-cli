@@ -4,6 +4,7 @@ import {
     IamRoleCreatedAt,
     IamRoleDefaultRedirection,
     IamRoleDeletedAt,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -48,6 +49,9 @@ export class IamMockRoleRepository
                     new IamRoleName(itemCollection.name),
                     new IamRoleDefaultRedirection(
                         itemCollection.defaultRedirection,
+                    ),
+                    new IamRoleHasHiddenVerticalNavigation(
+                        itemCollection.hasHiddenVerticalNavigation,
                     ),
                     new IamRoleIsMaster(itemCollection.isMaster),
                     new IamRolePermissionIds(itemCollection.permissionIds),

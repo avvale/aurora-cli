@@ -13,12 +13,13 @@ import {
     QueryList,
 } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Action } from '@aurora/aurora.types';
 import {
+    Action,
+    BlurActiveElement,
     GridCellValueTemplateDirective,
     GridComponent,
     GridCustomHeaderTemplateDirective,
-} from '@aurora/components/grid';
+} from '@aurora';
 import { ColumnConfig, GridData, GridState } from '../grid/grid.types';
 import { GridCustomButtonsHeaderDialogTemplateDirective } from './directives/grid-custom-buttons-header-dialog-template.directive';
 import { GridElementsManagerCellValueTemplateDirective } from './directives/grid-elements-manager-cell-value-template.directive';
@@ -60,10 +61,6 @@ export class GridElementsManagerComponent {
     @Input() hasSearch: boolean = true;
     @Input() hasFilterButton: boolean = true;
 
-    hasPagination = input<boolean>(true);
-    pageSizeOptions = input<number[]>([10, 25, 50, 100]);
-    hasDragAndDrop = input<boolean>(true);
-
     // outputs
     @Output() action = new EventEmitter<Action>();
     @Output() columnFiltersChange = new EventEmitter<GridState>();
@@ -79,6 +76,9 @@ export class GridElementsManagerComponent {
     @Output() search = new EventEmitter<GridState>();
 
     rowDrop = output<CdkDragDrop<any>>();
+    hasPagination = input<boolean>(true);
+    pageSizeOptions = input<number[]>([10, 25, 50, 100]);
+    hasDragAndDrop = input<boolean>(true);
 
     // add custom buttons header
     @ContentChild(GridCustomButtonsHeaderDialogTemplateDirective)
@@ -92,7 +92,9 @@ export class GridElementsManagerComponent {
 
     constructor(private readonly dialog: MatDialog) {}
 
-    handleElementDetailDialog(actionId: string): void {
+    @BlurActiveElement()
+    handleElementDetailDialog(options?: any): void {
+        (document.activeElement as HTMLElement)?.blur();
         const elementDetailDialogRef = this.dialog.open(
             GridElementDetailDialogComponent,
             {
@@ -101,13 +103,14 @@ export class GridElementsManagerComponent {
                 maxWidth: this.dialogMaxWidth,
                 minWidth: this.dialogMinWidth,
                 height: this.dialogHeight,
-                autoFocus: false,
+                autoFocus: true,
+                restoreFocus: true,
                 data: {
+                    options,
                     title: this.dialogTitle,
                     icon: this.dialogIcon,
                     svgIcon: this.dialogSvgIcon,
                     fontSet: this.dialogFontSet,
-                    currentActionId: actionId,
                     gridFormElementDetailDialogTemplate:
                         this.gridFormElementDetailDialogTemplate,
                 },

@@ -167,6 +167,14 @@ export class IamRoleModel extends Model<IamRoleModel> {
     defaultRedirection: string;
 
     @Column({
+        field: 'hasHiddenVerticalNavigation',
+        allowNull: true,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    })
+    hasHiddenVerticalNavigation: boolean;
+
+    @Column({
         field: 'isMaster',
         allowNull: false,
         type: DataTypes.BOOLEAN,

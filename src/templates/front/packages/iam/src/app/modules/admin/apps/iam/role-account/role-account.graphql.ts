@@ -6,6 +6,7 @@ export const fields = `
         rowId
         name
         defaultRedirection
+        hasHiddenVerticalNavigation
         isMaster
     }
     account {

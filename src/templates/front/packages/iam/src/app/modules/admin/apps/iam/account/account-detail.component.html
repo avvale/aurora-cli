@@ -161,6 +161,7 @@
                             matInput
                             formControlName="email"
                             maxlength="128"
+                            autocomplete="username"
                             (input)="
                                 $event.target.value =
                                     $event.target.value.toLowerCase()
@@ -193,6 +194,7 @@
                                 matInput
                                 formControlName="username"
                                 maxlength="128"
+                                autocomplete="username"
                                 (input)="
                                     $event.target.value =
                                         $event.target.value.toLowerCase()
@@ -427,7 +429,7 @@
                                 <button
                                     type="button"
                                     class="mr-2"
-                                    [aria-label]="t('iam.CreatePassword')"
+                                    [aria-label]="t('CreatePassword')"
                                     matSuffix
                                     mat-icon-button
                                     (click)="handleCreatePassword()"

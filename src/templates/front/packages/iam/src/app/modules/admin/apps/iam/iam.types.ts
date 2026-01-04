@@ -41,7 +41,7 @@ export interface IamCreateAccount {
     meta?: any;
     roleIds?: string[];
     tenantIds?: string[];
-    user?;
+    user?: IamCreateUser;
 }
 
 export interface IamUpdateAccountById {
@@ -80,7 +80,7 @@ export interface IamUpdateAccounts {
 
 export enum IamAccountType {
     USER = 'USER',
-    SERVICE = 'SERVICE'
+    SERVICE = 'SERVICE',
 }
 
 /******************
@@ -215,8 +215,7 @@ export interface IamCreatePermissionRole {
 /*******
  * tag *
  *******/
-export interface IamTag
-{
+export interface IamTag {
     id: string;
     name: string;
 }

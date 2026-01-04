@@ -1,13 +1,41 @@
 type IamRole {
     id: ID!
     rowId: GraphQLInt!
+    """
+    The name of the role
+    """
     name: GraphQLString!
+    """
+    The default redirection URL for the role, after login will be redirected to this URL
+    """
     defaultRedirection: GraphQLString
+    """
+    Indicates if vertical navigation should be hidden
+    """
+    hasHiddenVerticalNavigation: GraphQLBoolean
+    """
+    Indicates if the role is created by default and cannot be deleted
+    """
     isMaster: GraphQLBoolean!
+    """
+    The permissions that belong to the role
+    """
     permissions: [IamPermission]
+    """
+    The accounts that belong to the role
+    """
     accounts: [IamAccount]
+    """
+    The timestamp when the role was created
+    """
     createdAt: GraphQLTimestamp
+    """
+    The timestamp when the role was last updated
+    """
     updatedAt: GraphQLTimestamp
+    """
+    The timestamp when the role was deleted
+    """
     deletedAt: GraphQLTimestamp
 }
 
@@ -15,6 +43,7 @@ input IamCreateRoleInput {
     id: ID!
     name: GraphQLString!
     defaultRedirection: GraphQLString
+    hasHiddenVerticalNavigation: GraphQLBoolean
     isMaster: GraphQLBoolean!
     permissionIds: [ID]
     accountIds: [ID]
@@ -24,6 +53,7 @@ input IamUpdateRoleByIdInput {
     id: ID!
     name: GraphQLString
     defaultRedirection: GraphQLString
+    hasHiddenVerticalNavigation: GraphQLBoolean
     isMaster: GraphQLBoolean
     permissionIds: [ID]
     accountIds: [ID]
@@ -33,15 +63,18 @@ input IamUpdateRolesInput {
     id: ID
     name: GraphQLString
     defaultRedirection: GraphQLString
+    hasHiddenVerticalNavigation: GraphQLBoolean
     isMaster: GraphQLBoolean
     permissionIds: [ID]
     accountIds: [ID]
 }
 
+#region customizations
 input IamInheritRoleInput {
     parentRoleId: ID!
     childRoleId: ID!
 }
+#endregion customizations
 
 type Query {
     iamFindRole(query: QueryStatement, constraint: QueryStatement): IamRole

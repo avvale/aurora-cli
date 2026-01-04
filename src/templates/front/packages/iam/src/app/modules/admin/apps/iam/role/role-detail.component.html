@@ -115,6 +115,13 @@
                             {{ formErrors?.defaultRedirection | async }}
                         </mat-error>
                     </mat-form-field>
+                    <div class="col-4 pt-5">
+                        <mat-checkbox
+                            formControlName="hasHiddenVerticalNavigation"
+                        >
+                            {{ t('iam.HasHiddenVerticalNavigation') }}
+                        </mat-checkbox>
+                    </div>
                     <div class="col-3 pt-5">
                         <mat-checkbox formControlName="isMaster">
                             {{ t('iam.IsMaster') }}
@@ -124,7 +131,7 @@
                     @if (currentViewAction.id === 'iam::role.detail.edit') {
                         <au-grid-select-multiple-elements
                             #permissionsGridSelectMultipleElements
-                            class="col-12 mt-0"
+                            class="col-12 mt-5"
                             [label]="t('iam.Permissions')"
                             [gridId]="permissionRoleGridId"
                             [originColumnsConfig]="

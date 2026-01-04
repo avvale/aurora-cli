@@ -41,6 +41,8 @@ describe('IamCreateRoleCommandHandler', () => {
                             name: iamMockRoleData[0].name,
                             defaultRedirection:
                                 iamMockRoleData[0].defaultRedirection,
+                            hasHiddenVerticalNavigation:
+                                iamMockRoleData[0].hasHiddenVerticalNavigation,
                             isMaster: iamMockRoleData[0].isMaster,
                             permissionIds: iamMockRoleData[0].permissionIds,
                             accountIds: iamMockRoleData[0].accountIds,

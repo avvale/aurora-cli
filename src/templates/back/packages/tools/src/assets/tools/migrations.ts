@@ -3,14 +3,16 @@ import { ToolsCreateMigrationTemplateInput } from '@api/graphql';
 export const migrations: ToolsCreateMigrationTemplateInput[] = [
     {
         id: '98978f96-b617-469f-b80c-2a30c5516f47',
-        name: 'Add defaultRedirection to IamRole',
+        name: 'Add defaultRedirection and hasHiddenVerticalNavigation to IamRole',
         version: '0.0.6',
         sort: 8,
         upScript: `
             ALTER TABLE public."IamRole" ADD COLUMN "defaultRedirection" VARCHAR(2046) NULL;
+            ALTER TABLE public."IamRole" ADD COLUMN "hasHiddenVerticalNavigation" BOOLEAN NOT NULL DEFAULT false;
         `,
         downScript: `
             ALTER TABLE public."IamRole" DROP COLUMN IF EXISTS "defaultRedirection";
+            ALTER TABLE public."IamRole" DROP COLUMN IF EXISTS "hasHiddenVerticalNavigation";
         `,
     },
     {

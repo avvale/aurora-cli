@@ -24,6 +24,12 @@ export const roleColumnsConfig: (properties?: {
     },
     {
         type: ColumnDataType.BOOLEAN,
+        field: 'hasHiddenVerticalNavigation',
+        sort: 'hasHiddenVerticalNavigation',
+        translation: 'iam.HasHiddenVerticalNavigation',
+    },
+    {
+        type: ColumnDataType.BOOLEAN,
         field: 'isMaster',
         sort: 'isMaster',
         translation: 'IsMaster',

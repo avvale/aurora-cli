@@ -107,6 +107,16 @@
                             ],
                             "outputHashing": "all"
                         },
+                        "quality": {
+                            "optimization": false,
+                            "extractLicenses": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.qa.ts"
+                                }
+                            ]
+                        },
                         "development": {
                             "optimization": false,
                             "extractLicenses": false,
@@ -136,6 +146,9 @@
                     "configurations": {
                         "production": {
                             "buildTarget": "fuse:build:production"
+                        },
+                        "quality": {
+                            "buildTarget": "fuse:build:quality"
                         },
                         "development": {
                             "buildTarget": "fuse:build:development"

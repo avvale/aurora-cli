@@ -8,6 +8,7 @@ import { IamUpdateRoleByIdService } from '@app/iam/role/application/update/iam-u
 import {
     IamRoleAccountIds,
     IamRoleDefaultRedirection,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -63,6 +64,10 @@ describe('IamUpdateRoleByIdService', () => {
                         defaultRedirection: new IamRoleDefaultRedirection(
                             iamMockRoleData[0].defaultRedirection,
                         ),
+                        hasHiddenVerticalNavigation:
+                            new IamRoleHasHiddenVerticalNavigation(
+                                iamMockRoleData[0].hasHiddenVerticalNavigation,
+                            ),
                         isMaster: new IamRoleIsMaster(
                             iamMockRoleData[0].isMaster,
                         ),

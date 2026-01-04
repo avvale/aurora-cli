@@ -7,6 +7,7 @@ export class IamCreatedRoleEvent {
                 id: string;
                 name: string;
                 defaultRedirection: string;
+                hasHiddenVerticalNavigation: boolean;
                 isMaster: boolean;
                 permissionIds: string[];
                 accountIds: string[];

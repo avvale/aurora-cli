@@ -3,7 +3,6 @@ import {
     IamAccountType,
     IamCreateAccountInput,
 } from '@api/graphql';
-import { IamAccountDto, IamCreateAccountDto } from '@api/iam/account';
 import {
     IamAccountResponse,
     IamCreateAccountCommand,
@@ -41,10 +40,10 @@ export const createAccount = async ({
     moduleRef?: ModuleRef;
     account?: IamAccountResponse;
     headers?: LiteralObject;
-    payload?: IamCreateAccountInput | IamCreateAccountDto;
+    payload?: IamCreateAccountInput;
     timezone?: string;
     auditing?: AuditingMeta;
-} = {}): Promise<IamAccount | IamAccountDto> => {
+} = {}): Promise<IamAccount> => {
     if (!moduleRef)
         throw new BadRequestException('moduleRef parameter is required');
     if (!payload)

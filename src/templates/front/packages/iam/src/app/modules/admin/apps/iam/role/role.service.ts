@@ -16,6 +16,7 @@ import {
     deleteMutation,
     fields,
     findByIdQuery,
+    findByIdWithRelationsQuery,
     findQuery,
     getQuery,
     insertMutation,
@@ -31,10 +32,7 @@ import {
     QueryStatement,
 } from '@aurora';
 import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
-import {
-    findByIdWithRelationsQuery,
-    inheritPermissionsRoleRoleMutation,
-} from './role.graphql';
+import { inheritPermissionsRoleRoleMutation } from './role.graphql';
 
 @Injectable({
     providedIn: 'root',

@@ -373,7 +373,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent {
 
             case 'iam::boundedContext.detail.newPermission':
                 this.createPermissionDialogForm();
-                this.permissionsComponent.handleElementDetailDialog(action.id);
+                this.permissionsComponent.handleElementDetailDialog({ action });
                 this.permissionDialogFg.get('id').setValue(uuid());
                 this.permissionDialogFg
                     .get('boundedContextId')
@@ -405,7 +405,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent {
                         },
                     }),
                 );
-                this.permissionsComponent.handleElementDetailDialog(action.id);
+                this.permissionsComponent.handleElementDetailDialog({ action });
                 break;
 
             case 'iam::boundedContext.detail.updatePermission':

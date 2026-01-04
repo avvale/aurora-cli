@@ -3,13 +3,14 @@ import {
     Component,
     ViewEncapsulation,
 } from '@angular/core';
-import { IamPermission } from '@apps/iam/iam.types';
+import { IamPermission } from '@apps/iam';
 import {
     permissionColumnsConfig,
     PermissionService,
 } from '@apps/iam/permission';
 import {
     Action,
+    ActionScope,
     ColumnConfig,
     ColumnDataType,
     Crumb,
@@ -35,6 +36,7 @@ export const permissionMainGridListId = 'iam::permission.list.mainGridList';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [...defaultListImports],
 })
+@ActionScope('iam::permission.list')
 export class PermissionListComponent extends ViewBaseComponent {
     // ---- customizations ----
     // ..

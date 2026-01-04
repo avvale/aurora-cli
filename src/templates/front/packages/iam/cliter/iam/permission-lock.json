@@ -11,11 +11,11 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-detail.component.html",
-            "integrity": "sha1:df7aa759d7e12b05171959a221f96e70a0ce1599"
+            "integrity": "sha1:2d89bd5d5edca9fdd799421b772e8ae638bab0c0"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-detail.component.ts",
-            "integrity": "sha1:8e7f41a1ed487d044d9085429af2fa2dfba8e045"
+            "integrity": "sha1:022b47f35904ca2bad5f0e8fa6fef1d2d5ca9889"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-list.component.html",
@@ -23,7 +23,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-list.component.ts",
-            "integrity": "sha1:81143fb0792f8467823388dff4978df8d061be94"
+            "integrity": "sha1:017c4ce2207544677688e9eb9230f4fb19cf7d26"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission.columns-config.ts",
@@ -31,7 +31,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission.graphql.ts",
-            "integrity": "sha1:4f6d1a7032e3ab5bc82952a171d70efcdec2bc6c"
+            "integrity": "sha1:6a0e1a1776a22d455e9f5f8117c0cabb679b21c5"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission.resolvers.ts",
@@ -39,7 +39,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission.service.ts",
-            "integrity": "sha1:75b664a15b5a44de0f2c554e270846f8abb97d60"
+            "integrity": "sha1:13b051ff5ebc49857854315d237c59f75294d99a"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/index.ts",
@@ -63,7 +63,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission-role/permission-role.graphql.ts",
-            "integrity": "sha1:03abdfe46a1688c0a048ead1cb0fa87f239938bb"
+            "integrity": "sha1:8aac4cd3a5b864896b37672a307c7907c24c8cea"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission-role/permission-role.service.ts",

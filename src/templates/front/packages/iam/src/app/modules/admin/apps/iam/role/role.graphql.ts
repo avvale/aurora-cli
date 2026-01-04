@@ -4,6 +4,7 @@ export const fields = `
     rowId
     name
     defaultRedirection
+    hasHiddenVerticalNavigation
     isMaster
     permissions {
         id

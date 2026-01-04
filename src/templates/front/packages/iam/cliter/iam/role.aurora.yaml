@@ -20,19 +20,29 @@ aggregateProperties:
     autoIncrement: true
     nullable: false
   - name: name
+    description: The name of the role
     type: varchar
     maxLength: 128
     nullable: false
   - name: defaultRedirection
+    description: The default redirection URL for the role, after login will be redirected to this URL
     type: varchar
     maxLength: 2046
     nullable: true
+  - name: hasHiddenVerticalNavigation
+    description: Indicates if vertical navigation should be hidden
+    type: boolean
+    nullable: true
+    defaultValue: false
+    example: true
   - name: isMaster
+    description: Indicates if the role is created by default and cannot be deleted
     type: boolean
     nullable: false
     defaultValue: false
     example: false
   - name: permissions
+    description: The permissions that belong to the role
     type: relationship
     nullable: true
     webComponent:
@@ -81,6 +91,7 @@ aggregateProperties:
           - updateAndIncrement
           - upsert
   - name: accounts
+    description: The accounts that belong to the role
     type: relationship
     nullable: true
     relationship:
@@ -127,12 +138,15 @@ aggregateProperties:
           - updateAndIncrement
           - upsert
   - name: createdAt
+    description: The timestamp when the role was created
     type: timestamp
     nullable: true
   - name: updatedAt
+    description: The timestamp when the role was last updated
     type: timestamp
     nullable: true
   - name: deletedAt
+    description: The timestamp when the role was deleted
     type: timestamp
     nullable: true
 additionalApis:

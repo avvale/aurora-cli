@@ -6,6 +6,7 @@ import {
 import {
     IamRoleAccountIds,
     IamRoleDefaultRedirection,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -28,6 +29,7 @@ export class IamUpdateRolesService {
             id?: IamRoleId;
             name?: IamRoleName;
             defaultRedirection?: IamRoleDefaultRedirection;
+            hasHiddenVerticalNavigation?: IamRoleHasHiddenVerticalNavigation;
             isMaster?: IamRoleIsMaster;
             permissionIds?: IamRolePermissionIds;
             accountIds?: IamRoleAccountIds;
@@ -42,6 +44,7 @@ export class IamUpdateRolesService {
             undefined, // rowId
             payload.name,
             payload.defaultRedirection,
+            payload.hasHiddenVerticalNavigation,
             payload.isMaster,
             payload.permissionIds,
             payload.accountIds,

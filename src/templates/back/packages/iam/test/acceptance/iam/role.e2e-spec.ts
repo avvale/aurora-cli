@@ -261,6 +261,21 @@ describe('role', () => {
             });
     });
 
+    test('/REST:POST iam/role/create - Got 400 Conflict, RoleHasHiddenVerticalNavigation has to be a boolean value', () => {
+        return request(app.getHttpServer())
+            .post('/iam/role/create')
+            .set('Accept', 'application/json')
+            .send({
+                ...mockData[0],
+                hasHiddenVerticalNavigation: 'true',
+            })
+            .expect(400)
+            .then((res) => {
+                expect(res.body.message).toContain(
+                    'Value for IamRoleHasHiddenVerticalNavigation has to be a boolean value',
+                );
+            });
+    });
     test('/REST:POST iam/role/create - Got 400 Conflict, RoleIsMaster has to be a boolean value', () => {
         return request(app.getHttpServer())
             .post('/iam/role/create')
@@ -460,6 +475,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                         }
                     }
@@ -543,6 +559,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -584,6 +601,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                         }
                     }
@@ -618,6 +636,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -658,6 +677,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -694,6 +714,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -730,6 +751,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -762,6 +784,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -801,6 +824,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -836,6 +860,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -876,6 +901,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt
@@ -912,6 +938,7 @@ describe('role', () => {
                             rowId
                             name
                             defaultRedirection
+                            hasHiddenVerticalNavigation
                             isMaster
                             createdAt
                             updatedAt

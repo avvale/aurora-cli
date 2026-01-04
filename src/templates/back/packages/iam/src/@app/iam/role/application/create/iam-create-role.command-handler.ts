@@ -4,6 +4,7 @@ import { IamCreateRoleService } from '@app/iam/role/application/create/iam-creat
 import {
     IamRoleAccountIds,
     IamRoleDefaultRedirection,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -26,6 +27,10 @@ export class IamCreateRoleCommandHandler
                 defaultRedirection: new IamRoleDefaultRedirection(
                     command.payload.defaultRedirection,
                 ),
+                hasHiddenVerticalNavigation:
+                    new IamRoleHasHiddenVerticalNavigation(
+                        command.payload.hasHiddenVerticalNavigation,
+                    ),
                 isMaster: new IamRoleIsMaster(command.payload.isMaster),
                 permissionIds: new IamRolePermissionIds(
                     command.payload.permissionIds,

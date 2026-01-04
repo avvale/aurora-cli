@@ -10,31 +10,40 @@ export class IamCreateRoleDto {
 
     @ApiProperty({
         type: String,
-        description: 'name [input here api field description]',
+        description: 'The name of the role',
     })
     name: string;
 
     @ApiProperty({
         type: String,
-        description: 'defaultRedirection [input here api field description]',
+        description:
+            'The default redirection URL for the role, after login will be redirected to this URL',
     })
     defaultRedirection?: string;
 
     @ApiProperty({
         type: Boolean,
-        description: 'isMaster [input here api field description]',
+        description: 'Indicates if vertical navigation should be hidden',
+        example: true,
+    })
+    hasHiddenVerticalNavigation?: boolean;
+
+    @ApiProperty({
+        type: Boolean,
+        description:
+            'Indicates if the role is created by default and cannot be deleted',
     })
     isMaster: boolean;
 
     @ApiProperty({
         type: [String],
-        description: 'permissions [input here api field description]',
+        description: 'The permissions that belong to the role',
     })
     permissionIds?: string[];
 
     @ApiProperty({
         type: [String],
-        description: 'accounts [input here api field description]',
+        description: 'The accounts that belong to the role',
     })
     accountIds?: string[];
 }

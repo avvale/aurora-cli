@@ -8,6 +8,7 @@ import { IamCreateRoleService } from '@app/iam/role/application/create/iam-creat
 import {
     IamRoleAccountIds,
     IamRoleDefaultRedirection,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -62,6 +63,10 @@ describe('IamCreateRoleService', () => {
                     defaultRedirection: new IamRoleDefaultRedirection(
                         iamMockRoleData[0].defaultRedirection,
                     ),
+                    hasHiddenVerticalNavigation:
+                        new IamRoleHasHiddenVerticalNavigation(
+                            iamMockRoleData[0].hasHiddenVerticalNavigation,
+                        ),
                     isMaster: new IamRoleIsMaster(iamMockRoleData[0].isMaster),
                     permissionIds: new IamRolePermissionIds(
                         iamMockRoleData[0].permissionIds,

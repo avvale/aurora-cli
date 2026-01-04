@@ -33,6 +33,8 @@ export class IamAddRolesContextEvent extends AggregateRoot {
                                 name: role.name.value,
                                 defaultRedirection:
                                     role.defaultRedirection?.value,
+                                hasHiddenVerticalNavigation:
+                                    role.hasHiddenVerticalNavigation?.value,
                                 isMaster: role.isMaster.value,
                                 permissionIds: role.permissionIds?.value,
                                 accountIds: role.accountIds?.value,
@@ -58,6 +60,8 @@ export class IamAddRolesContextEvent extends AggregateRoot {
                                 name: role.name.value,
                                 defaultRedirection:
                                     role.defaultRedirection?.value,
+                                hasHiddenVerticalNavigation:
+                                    role.hasHiddenVerticalNavigation?.value,
                                 isMaster: role.isMaster.value,
                                 permissionIds: role.permissionIds?.value,
                                 accountIds: role.accountIds?.value,
@@ -84,6 +88,8 @@ export class IamAddRolesContextEvent extends AggregateRoot {
                                 name: role.name.value,
                                 defaultRedirection:
                                     role.defaultRedirection?.value,
+                                hasHiddenVerticalNavigation:
+                                    role.hasHiddenVerticalNavigation?.value,
                                 isMaster: role.isMaster.value,
                                 permissionIds: role.permissionIds?.value,
                                 accountIds: role.accountIds?.value,

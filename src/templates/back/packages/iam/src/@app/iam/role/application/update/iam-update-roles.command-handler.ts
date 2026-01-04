@@ -4,6 +4,7 @@ import { IamUpdateRolesService } from '@app/iam/role/application/update/iam-upda
 import {
     IamRoleAccountIds,
     IamRoleDefaultRedirection,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -28,6 +29,10 @@ export class IamUpdateRolesCommandHandler
                 defaultRedirection: new IamRoleDefaultRedirection(
                     command.payload.defaultRedirection,
                 ),
+                hasHiddenVerticalNavigation:
+                    new IamRoleHasHiddenVerticalNavigation(
+                        command.payload.hasHiddenVerticalNavigation,
+                    ),
                 isMaster: new IamRoleIsMaster(command.payload.isMaster, {
                     undefinable: true,
                 }),

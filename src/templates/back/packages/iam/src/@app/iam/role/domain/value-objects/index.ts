@@ -7,6 +7,7 @@ export { IamRoleAccountIds } from './iam-role-account-ids';
 export { IamRoleCreatedAt } from './iam-role-created-at';
 export { IamRoleDefaultRedirection } from './iam-role-default-redirection';
 export { IamRoleDeletedAt } from './iam-role-deleted-at';
+export { IamRoleHasHiddenVerticalNavigation } from './iam-role-has-hidden-vertical-navigation';
 export { IamRoleId } from './iam-role-id';
 export { IamRoleIsMaster } from './iam-role-is-master';
 export { IamRoleName } from './iam-role-name';

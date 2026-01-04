@@ -92,21 +92,27 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
                 this.navigation = navigation;
             });
 
-        // ---- customizations ----
+        /* #region customizations */
         // Subscribe to the account service
         this.iamService.account$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((account: Account) => {
                 this.account = account;
-            });
+                const hasHideVerticalNavigation = account.roles.some(
+                    (role) => role['hasHideVerticalNavigation'],
+                );
 
-        // Subscribe to media changes
-        this._fuseMediaWatcherService.onMediaChange$
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(({ matchingAliases }) => {
-                // Check if the screen is small
-                this.isScreenSmall = !matchingAliases.includes('md');
+                // Subscribe to media changes
+                this._fuseMediaWatcherService.onMediaChange$
+                    .pipe(takeUntil(this._unsubscribeAll))
+                    .subscribe(({ matchingAliases }) => {
+                        // Check if the screen is small
+                        this.isScreenSmall = hasHideVerticalNavigation
+                            ? hasHideVerticalNavigation
+                            : !matchingAliases.includes('md');
+                    });
             });
+        /* #endregion customizations */
     }
 
     /**

@@ -1,5 +1,6 @@
 export * from '@aurora/aurora.types';
 export * from '@aurora/components';
+export * from '@aurora/decorators';
 export * from '@aurora/directives';
 export * from '@aurora/foundations';
 export * from '@aurora/functions';

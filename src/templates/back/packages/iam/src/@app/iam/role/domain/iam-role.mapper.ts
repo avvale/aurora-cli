@@ -6,6 +6,7 @@ import {
     IamRoleCreatedAt,
     IamRoleDefaultRedirection,
     IamRoleDeletedAt,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -75,6 +76,10 @@ export class IamRoleMapper implements IMapper {
             new IamRoleDefaultRedirection(role.defaultRedirection, {
                 undefinable: true,
             }),
+            new IamRoleHasHiddenVerticalNavigation(
+                role.hasHiddenVerticalNavigation,
+                { undefinable: true },
+            ),
             new IamRoleIsMaster(role.isMaster, { undefinable: true }),
             new IamRolePermissionIds(role.permissionIds, { undefinable: true }),
             new IamRoleAccountIds(role.accountIds, { undefinable: true }),
@@ -114,6 +119,7 @@ export class IamRoleMapper implements IMapper {
             role.rowId.value,
             role.name.value,
             role.defaultRedirection.value,
+            role.hasHiddenVerticalNavigation.value,
             role.isMaster.value,
             role.permissionIds.value,
             role.accountIds.value,

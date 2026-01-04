@@ -7,6 +7,7 @@ import {
     IamRoleAccountIds,
     IamRoleCreatedAt,
     IamRoleDefaultRedirection,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -29,6 +30,7 @@ export class IamCreateRolesService {
             id: IamRoleId;
             name: IamRoleName;
             defaultRedirection: IamRoleDefaultRedirection;
+            hasHiddenVerticalNavigation: IamRoleHasHiddenVerticalNavigation;
             isMaster: IamRoleIsMaster;
             permissionIds: IamRolePermissionIds;
             accountIds: IamRoleAccountIds;
@@ -42,6 +44,7 @@ export class IamCreateRolesService {
                 undefined, // rowId
                 role.name,
                 role.defaultRedirection,
+                role.hasHiddenVerticalNavigation,
                 role.isMaster,
                 role.permissionIds,
                 role.accountIds,

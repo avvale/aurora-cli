@@ -2,6 +2,7 @@ import { IamIRoleRepository, IamRole } from '@app/iam/role';
 import {
     IamRoleAccountIds,
     IamRoleDefaultRedirection,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -24,6 +25,7 @@ export class IamUpdateRoleByIdService {
             id: IamRoleId;
             name?: IamRoleName;
             defaultRedirection?: IamRoleDefaultRedirection;
+            hasHiddenVerticalNavigation?: IamRoleHasHiddenVerticalNavigation;
             isMaster?: IamRoleIsMaster;
             permissionIds?: IamRolePermissionIds;
             accountIds?: IamRoleAccountIds;
@@ -37,6 +39,7 @@ export class IamUpdateRoleByIdService {
             undefined, // rowId
             payload.name,
             payload.defaultRedirection,
+            payload.hasHiddenVerticalNavigation,
             payload.isMaster,
             payload.permissionIds,
             payload.accountIds,

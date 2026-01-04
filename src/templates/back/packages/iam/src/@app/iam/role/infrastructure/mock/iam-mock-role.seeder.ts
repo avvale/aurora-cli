@@ -4,6 +4,7 @@ import {
     IamRoleCreatedAt,
     IamRoleDefaultRedirection,
     IamRoleDeletedAt,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -34,6 +35,9 @@ export class IamMockRoleSeeder extends MockSeeder<IamRole> {
                     new IamRoleRowId(role.rowId),
                     new IamRoleName(role.name),
                     new IamRoleDefaultRedirection(role.defaultRedirection),
+                    new IamRoleHasHiddenVerticalNavigation(
+                        role.hasHiddenVerticalNavigation,
+                    ),
                     new IamRoleIsMaster(role.isMaster),
                     /* #region customizations */
                     new IamRolePermissionIds(

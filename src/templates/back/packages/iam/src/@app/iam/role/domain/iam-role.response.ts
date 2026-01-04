@@ -7,6 +7,7 @@ export class IamRoleResponse {
         public readonly rowId: number,
         public readonly name: string,
         public readonly defaultRedirection: string,
+        public readonly hasHiddenVerticalNavigation: boolean,
         public readonly isMaster: boolean,
         public readonly permissionIds: string[],
         public readonly accountIds: string[],

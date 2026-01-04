@@ -11,6 +11,7 @@ import {
     IamRoleCreatedAt,
     IamRoleDefaultRedirection,
     IamRoleDeletedAt,
+    IamRoleHasHiddenVerticalNavigation,
     IamRoleId,
     IamRoleIsMaster,
     IamRoleName,
@@ -26,6 +27,7 @@ export class IamRole extends AggregateRoot {
     rowId: IamRoleRowId;
     name: IamRoleName;
     defaultRedirection: IamRoleDefaultRedirection;
+    hasHiddenVerticalNavigation: IamRoleHasHiddenVerticalNavigation;
     isMaster: IamRoleIsMaster;
     permissionIds: IamRolePermissionIds;
     accountIds: IamRoleAccountIds;
@@ -40,6 +42,7 @@ export class IamRole extends AggregateRoot {
         rowId: IamRoleRowId,
         name: IamRoleName,
         defaultRedirection: IamRoleDefaultRedirection,
+        hasHiddenVerticalNavigation: IamRoleHasHiddenVerticalNavigation,
         isMaster: IamRoleIsMaster,
         permissionIds: IamRolePermissionIds,
         accountIds: IamRoleAccountIds,
@@ -54,6 +57,7 @@ export class IamRole extends AggregateRoot {
         this.rowId = rowId;
         this.name = name;
         this.defaultRedirection = defaultRedirection;
+        this.hasHiddenVerticalNavigation = hasHiddenVerticalNavigation;
         this.isMaster = isMaster;
         this.permissionIds = permissionIds;
         this.accountIds = accountIds;
@@ -69,6 +73,7 @@ export class IamRole extends AggregateRoot {
         rowId: IamRoleRowId,
         name: IamRoleName,
         defaultRedirection: IamRoleDefaultRedirection,
+        hasHiddenVerticalNavigation: IamRoleHasHiddenVerticalNavigation,
         isMaster: IamRoleIsMaster,
         permissionIds: IamRolePermissionIds,
         accountIds: IamRoleAccountIds,
@@ -83,6 +88,7 @@ export class IamRole extends AggregateRoot {
             rowId,
             name,
             defaultRedirection,
+            hasHiddenVerticalNavigation,
             isMaster,
             permissionIds,
             accountIds,
@@ -101,6 +107,8 @@ export class IamRole extends AggregateRoot {
                     id: event.payload.id.value,
                     name: event.payload.name.value,
                     defaultRedirection: event.payload.defaultRedirection?.value,
+                    hasHiddenVerticalNavigation:
+                        event.payload.hasHiddenVerticalNavigation?.value,
                     isMaster: event.payload.isMaster.value,
                     permissionIds: event.payload.permissionIds?.value,
                     accountIds: event.payload.accountIds?.value,
@@ -120,6 +128,8 @@ export class IamRole extends AggregateRoot {
                     id: event.payload.id?.value,
                     name: event.payload.name?.value,
                     defaultRedirection: event.payload.defaultRedirection?.value,
+                    hasHiddenVerticalNavigation:
+                        event.payload.hasHiddenVerticalNavigation?.value,
                     isMaster: event.payload.isMaster?.value,
                     permissionIds: event.payload.permissionIds?.value,
                     accountIds: event.payload.accountIds?.value,
@@ -140,6 +150,8 @@ export class IamRole extends AggregateRoot {
                     rowId: event.payload.rowId.value,
                     name: event.payload.name.value,
                     defaultRedirection: event.payload.defaultRedirection?.value,
+                    hasHiddenVerticalNavigation:
+                        event.payload.hasHiddenVerticalNavigation?.value,
                     isMaster: event.payload.isMaster.value,
                     permissionIds: event.payload.permissionIds?.value,
                     accountIds: event.payload.accountIds?.value,
@@ -158,6 +170,8 @@ export class IamRole extends AggregateRoot {
             rowId: this.rowId.value,
             name: this.name.value,
             defaultRedirection: this.defaultRedirection?.value,
+            hasHiddenVerticalNavigation:
+                this.hasHiddenVerticalNavigation?.value,
             isMaster: this.isMaster.value,
             permissionIds: this.permissionIds?.value,
             accountIds: this.accountIds?.value,
@@ -175,6 +189,8 @@ export class IamRole extends AggregateRoot {
             id: this.id.value,
             name: this.name.value,
             defaultRedirection: this.defaultRedirection?.value,
+            hasHiddenVerticalNavigation:
+                this.hasHiddenVerticalNavigation?.value,
             isMaster: this.isMaster.value,
             permissionIds: this.permissionIds?.value,
             accountIds: this.accountIds?.value,
