@@ -99,7 +99,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             .subscribe((account: Account) => {
                 this.account = account;
                 const hasHideVerticalNavigation = account.roles.some(
-                    (role) => role['hasHideVerticalNavigation'],
+                    (role) => role.hasHiddenVerticalNavigation,
                 );
 
                 // Subscribe to media changes

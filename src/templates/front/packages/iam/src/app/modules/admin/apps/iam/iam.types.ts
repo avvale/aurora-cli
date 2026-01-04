@@ -131,6 +131,8 @@ export interface IamUpdateBoundedContexts {
 export interface IamRole {
     id: string;
     name: string;
+    defaultRedirection?: string;
+    hasHiddenVerticalNavigation: boolean;
     isMaster: boolean;
     permissions?: IamPermission[];
     accounts?: IamAccount[];

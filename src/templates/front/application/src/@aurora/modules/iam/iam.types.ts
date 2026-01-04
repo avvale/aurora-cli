@@ -36,4 +36,5 @@ export interface Role {
     id: string;
     name: string;
     defaultRedirection?: string;
+    hasHiddenVerticalNavigation: boolean;
 }
