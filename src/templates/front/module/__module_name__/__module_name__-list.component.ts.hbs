@@ -2,7 +2,7 @@
     setVar 'importsArray' (
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'ViewEncapsulation') path='@angular/core')
-            (object items=(array 'Action' 'ActionScope' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'defaultListImports' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'GridState' 'GridStateService'  'log' 'queryStatementHandler' 'ViewBaseComponent') path='@aurora')
+            (object items=(array 'Action' 'ActionScope' 'ColumnConfig' 'ColumnDataType' 'Crumb' 'defaultListImports' 'exportRows' 'GridColumnsConfigStorageService' 'GridData' 'GridFiltersStorageService' 'gridQueryHandler' 'GridState' 'GridStateService'  'log' 'ViewBaseComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'Observable' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName))
             (
@@ -177,14 +177,13 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
             case '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.pagination':
                 await lastValueFrom(
                     this.{{ toCamelCase schema.moduleName }}Service.pagination({
-                        query: action.meta.query ?
-                            action.meta.query :
-                            queryStatementHandler({ columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig() })
-                                .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.gridId))
-                                .setSort(this.gridStateService.getSort(this.gridId))
-                                .setPage(this.gridStateService.getPage(this.gridId))
-                                .setSearch(this.gridStateService.getSearchState(this.gridId))
-                                .getQueryStatement(),
+                        query: gridQueryHandler({
+                            gridFiltersStorageService: this.gridFiltersStorageService,
+                            gridStateService: this.gridStateService,
+                            gridId: this.gridId,
+                            columnsConfig: {{ toCamelCase schema.moduleName }}ColumnsConfig(),
+                            query: action.meta.query,
+                        }),
                         {{#if (hasI18nProperties schema.aggregateProperties) }}
                         headers: {
                             'Content-Language': this.sessionService.get('fallbackLang')[this.sessionService.get('searchKeyLang')],

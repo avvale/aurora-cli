@@ -620,12 +620,12 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
             id: '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.{{ toCamelCase name }}Pagination',
             isViewAction: false,
             meta: {
-                query: queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
-                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase name }}GridId))
-                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase name }}GridId))
-                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase name }}GridId))
-                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase name }}GridId))
-                    .getQueryStatement(),
+                query: gridQueryHandler({
+                    gridFiltersStorageService: this.gridFiltersStorageService,
+                    gridStateService: this.gridStateService,
+                    gridId: this.{{ toCamelCase name }}GridId,
+                    columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig()
+                }),
             },
             afterRunAction: () =>
             {
@@ -977,14 +977,13 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 await lastValueFrom(
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .pagination({
-                            query: action.meta.query ?
-                                action.meta.query :
-                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .getQueryStatement(),
+                            query: gridQueryHandler({
+                                gridFiltersStorageService: this.gridFiltersStorageService,
+                                gridStateService: this.gridStateService,
+                                gridId: this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId,
+                                columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig(),
+                                query: action.meta.query,
+                            }),
                         }),
                 );
                 break;
@@ -1135,14 +1134,13 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 await lastValueFrom(
                     this.{{ toCamelCase relationship.pivot.moduleName }}Service
                         .pagination({
-                            query: action.meta.query ?
-                                action.meta.query :
-                                queryStatementHandler({ columnsConfig: {{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig() })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
-                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
-                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase relationship.pivot.moduleName }}GridId))
-                                    .getQueryStatement(),
+                            query: gridQueryHandler({
+                                gridFiltersStorageService: this.gridFiltersStorageService,
+                                gridStateService: this.gridStateService,
+                                gridId: this.{{ toCamelCase relationship.pivot.moduleName }}GridId,
+                                columnsConfig: {{ toCamelCase relationship.pivot.moduleName }}ColumnsConfig(),
+                                query: action.meta.query,
+                            }),
                             constraint: {
                                 where: {
                                     {{ toCamelCase ../schema.moduleName }}Id: this.managedObject().id,
@@ -1216,14 +1214,13 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 await lastValueFrom(
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .pagination({
-                            query: action.meta.query ?
-                                action.meta.query :
-                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .getQueryStatement(),
+                            query: gridQueryHandler({
+                                gridFiltersStorageService: this.gridFiltersStorageService,
+                                gridStateService: this.gridStateService,
+                                gridId: this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId,
+                                columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig(),
+                                query: action.meta.query,
+                            }),
                         }),
                 );
                 break;
@@ -1302,14 +1299,13 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 await lastValueFrom(
                     this.{{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Service
                         .pagination({
-                            query: action.meta.query ?
-                                action.meta.query :
-                                queryStatementHandler({ columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig() })
-                                    .setColumFilters(this.gridFiltersStorageService.getColumnFilterState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setSort(this.gridStateService.getSort(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setPage(this.gridStateService.getPage(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .setSearch(this.gridStateService.getSearchState(this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId))
-                                    .getQueryStatement(),
+                            query: gridQueryHandler({
+                                gridFiltersStorageService: this.gridFiltersStorageService,
+                                gridStateService: this.gridStateService,
+                                gridId: this.{{ toCamelCase (getModuleNamesFromPropertyRelationship relationship.modulePath) }}GridId,
+                                columnsConfig: {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig(),
+                                query: action.meta.query,
+                            }),
                             constraint: {
                                 where: {
                                     {{ getForeignKey (object relationship=relationship schema=../schema) }}: this.managedObject().id,
