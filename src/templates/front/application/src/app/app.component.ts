@@ -1,22 +1,21 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-// ---- customizations ----
+/* #region customizations */
 import { RibbonEnvironmentComponent } from '@aurora';
 import { environment } from 'environments/environment';
+/* #endregion customizations */
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    imports: [
-        RibbonEnvironmentComponent, RouterOutlet,
-    ],
+    imports: [RibbonEnvironmentComponent, RouterOutlet],
 })
 export class AppComponent {
-
-    // ---- customizations ----
+    /* #region customizations */
     environment = environment;
+    /* #endregion customizations */
 
     /**
      * Constructor

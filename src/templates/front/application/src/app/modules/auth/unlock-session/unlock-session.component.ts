@@ -16,8 +16,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
 
-// ---- customizations ----
+/* #region customizations */
 import { AuthenticationService, IamService } from '@aurora';
+/* #endregion customizations */
 
 @Component({
     selector: 'auth-unlock-session',
@@ -56,9 +57,10 @@ export class AuthUnlockSessionComponent implements OnInit {
         private _formBuilder: UntypedFormBuilder,
         private _router: Router,
 
-        // ---- customizations ----
+        /* #region customizations */
         private authenticationService: AuthenticationService,
-        private iamService: IamService
+        private iamService: IamService,
+        /* #endregion customizations */
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -119,7 +121,7 @@ export class AuthUnlockSessionComponent implements OnInit {
                     // routing file and we don't have to touch here.
                     const redirectURL =
                         this._activatedRoute.snapshot.queryParamMap.get(
-                            'redirectURL'
+                            'redirectURL',
                         ) || '/signed-in-redirect';
 
                     // Navigate to the redirect url
@@ -145,7 +147,7 @@ export class AuthUnlockSessionComponent implements OnInit {
 
                     // Show the alert
                     this.showAlert = true;
-                }
+                },
             );
     }
 }

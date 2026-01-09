@@ -205,7 +205,7 @@ export class CollectionDetailComponent extends ViewDetailComponent {
 
         // depending on the dialog action we invoke a createField or updateField action
         this.actionService.action({
-            id: mapActions(dialog.componentInstance.data.currentActionId, {
+            id: mapActions(dialog.componentInstance.data.options.action.id, {
                 'searchEngine::collection.detail.newField':
                     'searchEngine::collection.detail.createField',
                 'searchEngine::collection.detail.editField':

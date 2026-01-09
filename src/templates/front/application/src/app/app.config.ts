@@ -1,4 +1,7 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+    provideHttpClient,
+    withInterceptorsFromDi,
+} from '@angular/common/http';
 import {
     ApplicationConfig,
     inject,
@@ -18,20 +21,21 @@ import { MockApiService } from 'app/mock-api';
 import { firstValueFrom } from 'rxjs';
 import { TranslocoHttpLoader } from './core/transloco/transloco.http-loader';
 
-// ---- customizations ----
+/* #region customizations */
 import { provideAurora } from 'app/aurora.provider';
 import { environment } from 'environments/environment';
+/* #endregion customizations */
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideAnimations(),
         provideHttpClient(
             // add interceptors from DI, to enable the HTTP_INTERCEPTORS token
-            withInterceptorsFromDi()
+            withInterceptorsFromDi(),
         ),
         provideRouter(
             appRoutes,
-            withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
+            withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
         ),
 
         // Material Date Adapter
@@ -129,7 +133,8 @@ export const appConfig: ApplicationConfig = {
             },
         }),
 
-        //  ---- customizations ----
+        /* #region customizations */
         provideAurora(),
+        /* #endregion customizations */
     ],
 };

@@ -216,7 +216,7 @@ export class BoundedContextDetailComponent extends ViewDetailComponent {
 
         // depending on the dialog action we invoke a createPermission or updatePermission action
         this.actionService.action({
-            id: mapActions(dialog.componentInstance.data.currentActionId, {
+            id: mapActions(dialog.componentInstance.data.options.action.id, {
                 'iam::boundedContext.detail.newPermission':
                     'iam::boundedContext.detail.createPermission',
                 'iam::boundedContext.detail.editPermission':

@@ -17,8 +17,9 @@ import { Router, RouterLink } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertComponent, FuseAlertType } from '@fuse/components/alert';
 
-// ---- customizations ----
+/* #region customizations */
 import { AuthenticationService } from '@aurora';
+/* #endregion customizations */
 
 @Component({
     selector: 'auth-sign-up',
@@ -55,8 +56,9 @@ export class AuthSignUpComponent implements OnInit {
         private _formBuilder: UntypedFormBuilder,
         private _router: Router,
 
-        // ---- customizations ----
-        private authenticationService: AuthenticationService
+        /* #region customizations */
+        private authenticationService: AuthenticationService,
+        /* #endregion customizations */
     ) {}
 
     // -----------------------------------------------------------------------------------------------------
@@ -117,7 +119,7 @@ export class AuthSignUpComponent implements OnInit {
 
                 // Show the alert
                 this.showAlert = true;
-            }
+            },
         );
     }
 }

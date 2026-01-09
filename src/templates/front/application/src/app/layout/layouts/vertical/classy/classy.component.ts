@@ -2,6 +2,12 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import {
+    Account,
+    EnvironmentsInformationComponent,
+    IamService,
+    ImpersonalizeWarningComponent,
+} from '@aurora';
 import { FuseFullscreenComponent } from '@fuse/components/fullscreen';
 import { FuseLoadingBarComponent } from '@fuse/components/loading-bar';
 import {
@@ -9,21 +15,13 @@ import {
     FuseVerticalNavigationComponent,
 } from '@fuse/components/navigation';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
+import { TranslocoModule } from '@jsverse/transloco';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { UserService } from 'app/core/user/user.service';
 import { LanguagesComponent } from 'app/layout/common/languages/languages.component';
 import { UserComponent } from 'app/layout/common/user/user.component';
 import { Subject, takeUntil } from 'rxjs';
-
-// ---- customizations ----
-import {
-    Account,
-    EnvironmentsInformationComponent,
-    IamService,
-    ImpersonalizeWarningComponent,
-} from '@aurora';
-import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'classy-layout',
@@ -42,7 +40,7 @@ import { TranslocoModule } from '@jsverse/transloco';
         // ---- customizations ----
         EnvironmentsInformationComponent,
         ImpersonalizeWarningComponent,
-        TranslocoModule
+        TranslocoModule,
     ],
 })
 export class ClassyLayoutComponent implements OnInit, OnDestroy {
@@ -98,7 +96,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((account: Account) => {
                 this.account = account;
-                const hasHideVerticalNavigation = account.roles.some(
+                const hasHiddenVerticalNavigation = account.roles.some(
                     (role) => role.hasHiddenVerticalNavigation,
                 );
 
@@ -107,8 +105,8 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
                     .pipe(takeUntil(this._unsubscribeAll))
                     .subscribe(({ matchingAliases }) => {
                         // Check if the screen is small
-                        this.isScreenSmall = hasHideVerticalNavigation
-                            ? hasHideVerticalNavigation
+                        this.isScreenSmall = hasHiddenVerticalNavigation
+                            ? hasHiddenVerticalNavigation
                             : !matchingAliases.includes('md');
                     });
             });

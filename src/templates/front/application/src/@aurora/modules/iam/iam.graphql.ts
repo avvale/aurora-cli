@@ -17,6 +17,7 @@ export const iamMeAccount = gql`
                 id
                 name
                 defaultRedirection
+                hasHiddenVerticalNavigation
             }
             tenants {
                 id

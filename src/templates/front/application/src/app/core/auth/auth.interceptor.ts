@@ -8,8 +8,9 @@ import { inject } from '@angular/core';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { Observable, catchError, throwError } from 'rxjs';
 
-// ---- customizations ----
+/* #region customizations */
 import { AuthenticationService } from '@aurora';
+/* #endregion customizations */
 
 /**
  * Intercept
@@ -19,7 +20,7 @@ import { AuthenticationService } from '@aurora';
  */
 export const authInterceptor = (
     req: HttpRequest<unknown>,
-    next: HttpHandlerFn
+    next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> => {
     const authService = inject(AuthenticationService);
 
@@ -41,7 +42,7 @@ export const authInterceptor = (
         newReq = req.clone({
             headers: req.headers.set(
                 'Authorization',
-                'Bearer ' + authService.accessToken
+                'Bearer ' + authService.accessToken,
             ),
         });
     }
@@ -59,6 +60,6 @@ export const authInterceptor = (
             }
 
             return throwError(error);
-        })
+        }),
     );
 };

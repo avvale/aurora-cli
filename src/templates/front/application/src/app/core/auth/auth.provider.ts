@@ -7,8 +7,9 @@ import {
 } from '@angular/core';
 import { authInterceptor } from 'app/core/auth/auth.interceptor';
 
-// ---- customizations ----
+/* #region customizations */
 import { AuthenticationService } from '@aurora';
+/* #endregion customizations */
 
 export const provideAuth = (): Array<Provider | EnvironmentProviders> => {
     return [
