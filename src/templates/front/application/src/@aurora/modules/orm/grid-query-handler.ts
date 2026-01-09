@@ -22,7 +22,7 @@ import { QueryStatement } from './sql-statement';
  * @param {any[]} [params.defaultSort] - The default sort order to apply (default: ['rowId', 'desc']).
  * @returns {QueryStatement} The configured query statement.
  */
-export const sortHandler = ({
+export const gridQueryHandler = ({
     gridFiltersStorageService,
     gridStateService,
     gridId = null,
@@ -40,15 +40,15 @@ export const sortHandler = ({
     const queryStatement = query
         ? query
         : queryStatementHandler({
-              columnsConfig: columnsConfig,
-          })
-              .setColumFilters(
-                  gridFiltersStorageService.getColumnFilterState(gridId),
-              )
-              .setSort(gridStateService.getSort(gridId))
-              .setPage(gridStateService.getPage(gridId))
-              .setSearch(gridStateService.getSearchState(gridId))
-              .getQueryStatement();
+            columnsConfig: columnsConfig,
+        })
+            .setColumFilters(
+                gridFiltersStorageService.getColumnFilterState(gridId)
+            )
+            .setSort(gridStateService.getSort(gridId))
+            .setPage(gridStateService.getPage(gridId))
+            .setSearch(gridStateService.getSearchState(gridId))
+            .getQueryStatement();
 
     if (
         queryStatement.order &&
