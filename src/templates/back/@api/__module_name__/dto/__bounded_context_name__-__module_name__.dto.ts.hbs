@@ -91,7 +91,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : String,
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         example    : '{{ uuid name }}',
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string;
@@ -107,7 +107,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : () => [{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Dto],
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : '{{ example }}',
         {{/if }}
@@ -117,7 +117,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#if relationship.isDenormalized}}
     @ApiProperty({
         type       : Array,
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase relationship.singularName }}Ids [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase relationship.singularName }}Ids [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
@@ -130,7 +130,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         type       : () => [{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}Dto],
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : '{{ example }}',
         {{/if }}
@@ -143,14 +143,14 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#eq type ../propertyType.ID ~}}
     @ApiProperty({
         type       : String,
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         example    : '{{ uuid name }}',
     })
     {{ toCamelCase name }}{{#if nullable }}?{{/if}}: string;
 
     @ApiProperty({
         type       : () => {{ relationship.aggregateName }}Dto,
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
@@ -160,7 +160,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{else ~}}
     @ApiProperty({
         type       : () => {{ relationship.aggregateName }}Dto,
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
@@ -173,7 +173,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
     {{setVar 'isCommonProperty' false ~}}
     @ApiProperty({
         enum       : {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }},
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
@@ -184,7 +184,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#if ../isCommonProperty}}
     @ApiProperty({
         type       : {{ getSwaggerTypeProperty this ../config }},
-        description: '{{#if description }}{{ description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ toCamelCase name }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}
@@ -195,7 +195,7 @@ export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.
 {{#if (isPivotProperty this) }}
     @ApiProperty({
         type       : () => {{ aggregateName }}Dto,
-        description: '{{#if description }}{{ description }}{{else}}{{ aggregateName }} [input here api field description]{{/if }}',
+        description: '{{#if description }}{{ singleLine description }}{{else}}{{ aggregateName }} [input here api field description]{{/if }}',
         {{#if example }}
         example    : {{#if (hasQuotationProperty this ../config) }}'{{/if }}{{ example }}{{#if (hasQuotationProperty this ../config) }}'{{/if }},
         {{/if }}

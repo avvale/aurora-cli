@@ -15,18 +15,18 @@ type {{ schema.aggregateName }}
 {{setVar 'isCommonProperty' true ~}}
 {{#eq relationship.type ../relationshipType.MANY_TO_ONE}}
     {{#if description}}
-    """{{ description }}"""
+    """{{ singleLine description }}"""
     {{/if}}
     {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
     {{#if relationship.description}}
-    """{{ relationship.description }}"""
+    """{{ singleLine relationship.description }}"""
     {{/if}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.MANY_TO_MANY}}
     {{#if description}}
-    """{{ description }}"""
+    """{{ singleLine description }}"""
     {{/if}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase name }}: [{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}]{{#unless nullable }}!{{/unless}}
@@ -36,7 +36,7 @@ type {{ schema.aggregateName }}
 {{/eq}}
 {{#eq relationship.type ../relationshipType.ONE_TO_MANY}}
     {{#if description}}
-    """{{ description }}"""
+    """{{ singleLine description }}"""
     {{/if}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase name }}: [{{ getAggregateNameFromPropertyRelationship relationship.modulePath }}]{{#unless nullable }}!{{/unless}}
@@ -45,30 +45,30 @@ type {{ schema.aggregateName }}
     {{setVar 'isCommonProperty' false ~}}
 {{#eq type ../propertyType.ID ~}}
     {{#if description}}
-    """{{ description }}"""
+    """{{ singleLine description }}"""
     {{/if}}
     {{ toCamelCase name }}: ID{{#unless nullable }}!{{/unless}}
     {{#if relationship.description}}
-    """{{ relationship.description }}"""
+    """{{ singleLine relationship.description }}"""
     {{/if}}
     {{ toCamelCase relationship.field }}: {{ relationship.aggregateName }}
 {{else ~}}
     {{#if description}}
-    """{{ description }}"""
+    """{{ singleLine description }}"""
     {{/if}}
     {{ toCamelCase name }}: {{ relationship.aggregateName }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{/eq}}
 {{#eq type ../propertyType.ENUM}}
     {{#if description}}
-    """{{ description }}"""
+    """{{ singleLine description }}"""
     {{/if}}
     {{setVar 'isCommonProperty' false ~}}
     {{ toCamelCase name }}: {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }}{{#unless nullable }}!{{/unless}}
 {{/eq}}
 {{#if ../isCommonProperty}}
     {{#if description}}
-    """{{ description }}"""
+    """{{ singleLine description }}"""
     {{/if}}
     {{ toCamelCase name }}: {{ getGraphqlTypeProperty this ../config }}{{#unless nullable }}!{{/unless}}
 {{/if}}
