@@ -182,6 +182,7 @@ import './random-integer-digits';
 import './replace-i18n';
 import './return-type-manager';
 import './set-var';
+import './single-line';
 import './string-to-camel-case';
 import './string-to-kebab-case';
 import './string-to-pascal-case';
