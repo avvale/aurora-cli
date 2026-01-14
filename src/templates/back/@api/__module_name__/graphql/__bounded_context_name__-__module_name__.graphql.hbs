@@ -1,3 +1,5 @@
+# @aurora-generated
+# @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
 {{#if (hasProperties schema.aggregateProperties) }}
 {{#each (getEnumProperties schema.aggregateProperties) }}
 enum {{ toPascalCase ../schema.boundedContextName }}{{ toPascalCase ../schema.moduleName }}{{ toPascalCase name }} {
