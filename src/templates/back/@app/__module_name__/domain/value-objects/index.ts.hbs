@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 {{ setVar 'exportsArray' (array) ~}}
 {{#each (getValueObjectsProperties schema.aggregateProperties) }}
 {{#if (isAllowProperty ../schema.moduleName this) }}

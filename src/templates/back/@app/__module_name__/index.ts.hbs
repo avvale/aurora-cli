@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 // export commands
 {{#notInArray schema.excludedFiles 'src/' config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName) '/application/create/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.command.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Command } from './application/create/{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.command';

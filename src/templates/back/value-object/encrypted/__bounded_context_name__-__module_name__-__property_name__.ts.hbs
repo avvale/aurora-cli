@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 import { DataValueObject, EncryptedValueObject, ValidationRules } from '{{ config.auroraCorePackage }}';
 
 export class {{ toPascalCase schema.boundedContextName }}{{ toPascalCase moduleNamePrefix }}{{ toPascalCase schema.moduleName }}{{ replaceI18n (toPascalCase moduleNameSuffix) }}{{ toPascalCase (getPropertyName currentProperty) }} extends EncryptedValueObject

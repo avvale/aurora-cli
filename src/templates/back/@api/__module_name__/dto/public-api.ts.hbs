@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 {{#notInArray schema.excludedFiles 'src/' config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)  '/dto/' (toKebabCase schema.boundedContextName) '-create-' (toKebabCase schema.moduleName) '.dto.ts'}}
 export { {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase schema.moduleName }}Dto } from './{{ toKebabCase schema.boundedContextName }}-create-{{ toKebabCase schema.moduleName }}.dto';
 {{/notInArray}}

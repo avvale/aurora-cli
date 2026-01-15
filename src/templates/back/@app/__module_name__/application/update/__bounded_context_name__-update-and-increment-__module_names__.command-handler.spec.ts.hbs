@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 {{
     setVar 'importsArray' (
         array
@@ -56,7 +60,6 @@ describe('{{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPas
 
         test('should return an {{ toCamelCase schema.moduleNames }} updated', async () =>
         {
-            /* eslint-disable key-spacing */
             expect(await commandHandler.execute(
                 new {{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPascalCase schema.moduleNames }}Command(
                     {

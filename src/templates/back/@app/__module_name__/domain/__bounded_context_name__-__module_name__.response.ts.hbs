@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 {{ setVar 'importsArray' (array) ~}}
 {{! ONE TO ONE Relationship with field }}
 {{#each (getWithImportRelationshipOneToOneProperties schema.aggregateProperties) }}

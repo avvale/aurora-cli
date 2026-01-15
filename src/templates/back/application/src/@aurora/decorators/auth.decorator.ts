@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import { Permissions, AuthenticationDisabledAdapterGuard, AuthorizationDisabledAdapterGuard } from '@aurorajs.dev/core';
 import { applyDecorators, UseGuards } from '@nestjs/common';
 

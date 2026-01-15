@@ -1,4 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 {{
     setVar 'importsArray' (
         array
@@ -92,7 +95,6 @@ describe('{{ toPascalCase schema.boundedContextName }}UpdateAndIncrement{{ toPas
 
         test('should update a {{ toCamelCase schema.moduleNames }} and emit event', async () =>
         {
-            /* eslint-disable key-spacing */
             expect(
                 await service.main(
                     {

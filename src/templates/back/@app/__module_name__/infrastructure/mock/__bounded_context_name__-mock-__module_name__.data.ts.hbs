@@ -1,5 +1,7 @@
-/* eslint-disable quotes */
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 {{ setVar 'importsArray' (array) ~}}
 {{#if (hasEnumProperties schema.aggregateProperties) }}
 {{#each (getEnumProperties schema.aggregateProperties) }}
