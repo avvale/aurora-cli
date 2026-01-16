@@ -39,9 +39,9 @@ describe('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase sche
                 {{/if}}
             ],
             providers: [
-                {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver,
+                {{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Resolver,
                 {
-                    provide : {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler,
+                    provide : {{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -50,18 +50,18 @@ describe('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase sche
         })
             .compile();
 
-        resolver = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver);
-        handler = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler);
+        resolver = module.get<{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Resolver>({{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Resolver);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler);
     });
 
-    test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
+    test('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
     {
         expect(resolver).   toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Resolver should be defined', () =>
         {
             expect(resolver).   toBeDefined();
         });

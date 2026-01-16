@@ -8,7 +8,7 @@
             (object items=(array 'Test' 'TestingModule')  path='@nestjs/testing')
             (object items=(array 'IQueryBus') path=config.auroraCorePackage)
             (object items=(sumStrings (toCamelCase schema.boundedContextName) 'Mock' (toPascalCase schema.moduleName) 'Data')  path=(sumStrings config.appContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
-            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'Get' (toPascalCase schema.moduleNames) 'Handler') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
+            (object items=(sumStrings (toPascalCase schema.boundedContextName) 'GetRaw' (toPascalCase schema.moduleNames) 'Handler') path=(sumStrings config.apiContainer '/' (toKebabCase schema.boundedContextName) '/' (toKebabCase schema.moduleName)))
     )
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
@@ -35,7 +35,7 @@ describe('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase sche
                 {{/if}}
             ],
             providers: [
-                {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler,
+                {{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler,
                 {{#if (hasI18nProperties schema.aggregateProperties) }}
                 CoreAddI18nConstraintService,
                 {
@@ -69,18 +69,18 @@ describe('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase sche
         })
             .compile();
 
-        handler = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler);
         queryBus = module.get<IQueryBus>(IQueryBus);
     });
 
-    test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
+    test('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
     {
         expect(handler).toBeDefined();
     });
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler should be defined', () =>
         {
             expect(handler).toBeDefined();
         });
