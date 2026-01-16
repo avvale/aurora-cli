@@ -55,7 +55,7 @@ export class MessageCreateMessagesCommandHandler
                     sendAt: new MessageMessageSendAt(
                         message.sendAt,
                         {},
-                        { applyTimezone: command.cQMetadata?.timezone },
+                        { addTimezone: command.cQMetadata?.timezone },
                     ),
                     isImportant: new MessageMessageIsImportant(
                         message.isImportant,

@@ -50,12 +50,12 @@ export class ToolsCreateProcedureCommandHandler
                 executedAt: new ToolsProcedureExecutedAt(
                     command.payload.executedAt,
                     {},
-                    { applyTimezone: command.cQMetadata?.timezone },
+                    { addTimezone: command.cQMetadata?.timezone },
                 ),
                 checkedAt: new ToolsProcedureCheckedAt(
                     command.payload.checkedAt,
                     {},
-                    { applyTimezone: command.cQMetadata?.timezone },
+                    { addTimezone: command.cQMetadata?.timezone },
                 ),
             },
             command.cQMetadata,

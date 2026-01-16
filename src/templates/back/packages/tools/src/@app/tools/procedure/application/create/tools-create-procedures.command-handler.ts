@@ -49,12 +49,12 @@ export class ToolsCreateProceduresCommandHandler
                     executedAt: new ToolsProcedureExecutedAt(
                         procedure.executedAt,
                         {},
-                        { applyTimezone: command.cQMetadata?.timezone },
+                        { addTimezone: command.cQMetadata?.timezone },
                     ),
                     checkedAt: new ToolsProcedureCheckedAt(
                         procedure.checkedAt,
                         {},
-                        { applyTimezone: command.cQMetadata?.timezone },
+                        { addTimezone: command.cQMetadata?.timezone },
                     ),
                 };
             }),

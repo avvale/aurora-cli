@@ -49,7 +49,7 @@
     (unlessEq (countMultipleSelectElementWebComponentsProperties schema.aggregateProperties) 0)
 }}
 {{ push importsArray
-    (object items=(array 'getRelations') path=(sumStrings './' (toKebabCase schema.moduleName) '.graphql'))
+    (object items=(array 'getRelations') path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName))
 ~}}
 {{/or}}
 {{#each schema.additionalApis}}

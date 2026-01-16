@@ -56,7 +56,7 @@ export class MessageUpdateInboxByIdCommandHandler
                 sentAt: new MessageInboxSentAt(
                     command.payload.sentAt,
                     { undefinable: true },
-                    { applyTimezone: command.cQMetadata?.timezone },
+                    { addTimezone: command.cQMetadata?.timezone },
                 ),
                 subject: new MessageInboxSubject(command.payload.subject, {
                     undefinable: true,

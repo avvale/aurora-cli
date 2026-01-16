@@ -48,7 +48,7 @@ export class ToolsUpdateMigrationByIdCommandHandler
                 executedAt: new ToolsMigrationExecutedAt(
                     command.payload.executedAt,
                     {},
-                    { applyTimezone: command.cQMetadata?.timezone },
+                    { addTimezone: command.cQMetadata?.timezone },
                 ),
             },
             command.constraint,

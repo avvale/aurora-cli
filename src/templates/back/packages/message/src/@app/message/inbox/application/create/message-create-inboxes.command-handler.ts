@@ -48,7 +48,7 @@ export class MessageCreateInboxesCommandHandler
                     sentAt: new MessageInboxSentAt(
                         inbox.sentAt,
                         {},
-                        { applyTimezone: command.cQMetadata?.timezone },
+                        { addTimezone: command.cQMetadata?.timezone },
                     ),
                     subject: new MessageInboxSubject(inbox.subject),
                     body: new MessageInboxBody(inbox.body),

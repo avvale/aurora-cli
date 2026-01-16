@@ -42,7 +42,7 @@ export class ToolsCreateMigrationsCommandHandler
                     executedAt: new ToolsMigrationExecutedAt(
                         migration.executedAt,
                         {},
-                        { applyTimezone: command.cQMetadata?.timezone },
+                        { addTimezone: command.cQMetadata?.timezone },
                     ),
                 };
             }),

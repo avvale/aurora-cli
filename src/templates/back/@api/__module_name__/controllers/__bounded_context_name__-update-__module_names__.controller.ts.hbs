@@ -40,7 +40,7 @@
 ~}}
 {{/if}}
 {{#if schema.hasTenant}}
-{{ 
+{{
     push importsArray
         (object items='IamAccountResponse' path=(sumStrings config.appContainer '/iam/account'))
         (object items='TenantPolicy' path=(sumStrings config.apiContainer '/iam/shared'))
@@ -69,7 +69,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
         {{#if schema.hasTenant}}
         @CurrentAccount() account: IamAccountResponse,
         {{/if}}
-        @Body() payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Dto,
+        @Body('payload') payload: {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase schema.moduleNames }}Dto,
         @Body('query') queryStatement?: QueryStatement,
         @Body('constraint') constraint?: QueryStatement,
         @Timezone() timezone?: string,

@@ -50,7 +50,7 @@ export class ToolsUpdateMigrationsCommandHandler
                 executedAt: new ToolsMigrationExecutedAt(
                     command.payload.executedAt,
                     {},
-                    { applyTimezone: command.cQMetadata?.timezone },
+                    { addTimezone: command.cQMetadata?.timezone },
                 ),
             },
             command.queryStatement,

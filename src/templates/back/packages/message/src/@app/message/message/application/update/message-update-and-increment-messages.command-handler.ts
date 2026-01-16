@@ -62,7 +62,7 @@ export class MessageUpdateAndIncrementMessagesCommandHandler
                 sendAt: new MessageMessageSendAt(
                     command.payload.sendAt,
                     {},
-                    { applyTimezone: command.cQMetadata?.timezone },
+                    { addTimezone: command.cQMetadata?.timezone },
                 ),
                 isImportant: new MessageMessageIsImportant(
                     command.payload.isImportant,
