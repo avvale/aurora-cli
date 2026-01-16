@@ -40,11 +40,11 @@ describe('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase sche
                 {{/if}}
             ],
             controllers: [
-                {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Controller,
+                {{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Controller,
             ],
             providers: [
                 {
-                    provide : {{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler,
+                    provide : {{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler,
                     useValue: {
                         main: () => { /**/ },
                     },
@@ -53,13 +53,13 @@ describe('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase sche
         })
             .compile();
 
-        controller = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Controller>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Controller);
-        handler = module.get<{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Handler);
+        controller = module.get<{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Controller>({{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Controller);
+        handler = module.get<{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler>({{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Handler);
     });
 
     describe('main', () =>
     {
-        test('{{ toPascalCase schema.boundedContextName }}Get{{ toPascalCase schema.moduleNames }}Controller should be defined', () =>
+        test('{{ toPascalCase schema.boundedContextName }}GetRaw{{ toPascalCase schema.moduleNames }}Controller should be defined', () =>
         {
             expect(controller).toBeDefined();
         });
