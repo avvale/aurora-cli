@@ -2,8 +2,13 @@
  * @aurora-generated
  * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
  */
-import { CQMetadata } from '{{ config.auroraCorePackage }}';
-
+{{
+    setVar 'importsArray' (
+        array
+            (object items='CQMetadata' path=config.auroraCorePackage)
+    )
+~}}
+{{{ importManager (object imports=importsArray) }}}
 export class {{ toPascalCase schema.boundedContextName }}Upsert{{ toPascalCase schema.moduleName }}Command
 {
     {{! don`t set nullable properties to avoid error "A required parameter cannot follow an optional parameter.ts(1016)" }}
