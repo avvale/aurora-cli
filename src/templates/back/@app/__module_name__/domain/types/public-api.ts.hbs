@@ -8,7 +8,7 @@
     push ../exportsArray
         (
             object
-                items=(sumStrings ../schema.aggregateName (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                items=(sumStrings ../schema.aggregateName (addI18nPropertySignature this) (toPascalCase (getPropertyName this)) 'Enum')
                 path=(sumStrings './' (toKebabCase ../schema.boundedContextName) '-' (toKebabCase ../schema.moduleName) '-' (addI18nPropertySignature this true) (toKebabCase (getPropertyName this)) '.enum')
         )
 ~}}
