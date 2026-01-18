@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
-import { TemplateGenerator, getManyToManyRelationshipProperties, getValueObjectsProperties } from '../../utils';
+import { TemplateGenerator, getManyToManyRelationshipProperties, getValueObjectsProperties, getEnumProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const generateAppPivotFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
@@ -52,6 +52,27 @@ export const generateAppPivotFiles = async (generateCommandState: GenerateComman
             path.join('src', cliterConfig.appContainer),
             property.relationship.pivot.boundedContextName.toLowerCase().toKebabCase(),
             getValueObjectsProperties(property.relationship.pivot.aggregateProperties),
+            {
+                boundedContextName: property.relationship.pivot.boundedContextName,
+                moduleName        : property.relationship.pivot.moduleName,
+                moduleNames       : property.relationship.pivot.moduleNames,
+                excludedFiles     : generateCommandState.schema.excludedFiles,
+                force             : generateCommandState.flags.force,
+                verbose           : generateCommandState.flags.verbose,
+                lockFiles         : generateCommandState.lockFiles,
+                templateData      : {
+                    ...generateCommandState,
+                    schema: property.relationship?.pivot, // overwrite schema property
+                },
+            },
+        );
+
+        // create types (enums) in module folder
+        TemplateGenerator.generateTypes(
+            generateCommandState.command,
+            path.join('src', cliterConfig.appContainer),
+            property.relationship.pivot.boundedContextName.toLowerCase().toKebabCase(),
+            getEnumProperties(property.relationship.pivot.aggregateProperties),
             {
                 boundedContextName: property.relationship.pivot.boundedContextName,
                 moduleName        : property.relationship.pivot.moduleName,

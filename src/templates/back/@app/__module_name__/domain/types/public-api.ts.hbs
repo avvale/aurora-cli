@@ -1,0 +1,16 @@
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
+{{ setVar 'exportsArray' (array) ~}}
+{{#each (getEnumProperties schema.aggregateProperties) }}
+{{
+    push ../exportsArray
+        (
+            object
+                items=(sumStrings ../schema.aggregateName (addI18nPropertySignature this) (toPascalCase (getPropertyName this)))
+                path=(sumStrings './' (toKebabCase ../schema.boundedContextName) '-' (toKebabCase ../schema.moduleName) '-' (addI18nPropertySignature this true) (toKebabCase (getPropertyName this)) '.enum')
+        )
+~}}
+{{/each}}
+{{{ importManager (object imports=exportsArray commandType='export') }}}

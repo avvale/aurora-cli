@@ -1,6 +1,6 @@
 import { cliterConfig } from '../../config';
 import { GenerateCommandState, RelationshipType, TemplateElement } from '../../types';
-import { TemplateGenerator, getValueObjectsProperties } from '../../utils';
+import { TemplateGenerator, getValueObjectsProperties, getEnumProperties } from '../../utils';
 import * as path from 'node:path';
 
 export const generateAppFiles = async (generateCommandState: GenerateCommandState): Promise<void> =>
@@ -41,6 +41,26 @@ export const generateAppFiles = async (generateCommandState: GenerateCommandStat
         path.join('src', cliterConfig.appContainer),
         generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
         getValueObjectsProperties(generateCommandState.schema.aggregateProperties),
+        {
+            boundedContextName: generateCommandState.schema.boundedContextName,
+            moduleName        : generateCommandState.schema.moduleName,
+            moduleNames       : generateCommandState.schema.moduleNames,
+            excludedFiles     : generateCommandState.schema.excludedFiles,
+            force             : generateCommandState.flags.force,
+            verbose           : generateCommandState.flags.verbose,
+            lockFiles         : generateCommandState.lockFiles,
+            templateData      : {
+                ...generateCommandState,
+            },
+        },
+    );
+
+    // create types (enums) in module folder
+    await TemplateGenerator.generateTypes(
+        generateCommandState.command,
+        path.join('src', cliterConfig.appContainer),
+        generateCommandState.schema.boundedContextName.toLowerCase().toKebabCase(),
+        getEnumProperties(generateCommandState.schema.aggregateProperties),
         {
             boundedContextName: generateCommandState.schema.boundedContextName,
             moduleName        : generateCommandState.schema.moduleName,
