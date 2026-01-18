@@ -4,10 +4,11 @@ import { CliterConfig, Property, getPropertyJavascriptResponseType } from '../..
 handlebars.registerHelper('getPropertyJavascriptResponseType', function(
     property: Property,
     config: CliterConfig,
-): string | undefined
+): handlebars.SafeString | undefined
 {
-    return getPropertyJavascriptResponseType(
+    const result = getPropertyJavascriptResponseType(
         property,
         config,
     );
+    return result ? new handlebars.SafeString(result) : undefined;
 });

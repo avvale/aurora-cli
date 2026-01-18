@@ -4,10 +4,11 @@ import { CliterConfig, Property, getPropertyJavascriptUpdateType } from '../..';
 handlebars.registerHelper('getPropertyJavascriptUpdateType', function(
     property: Property,
     config: CliterConfig,
-): string | undefined
+): handlebars.SafeString | undefined
 {
-    return getPropertyJavascriptUpdateType(
+    const result = getPropertyJavascriptUpdateType(
         property,
         config,
     );
+    return result ? new handlebars.SafeString(result) : undefined;
 });

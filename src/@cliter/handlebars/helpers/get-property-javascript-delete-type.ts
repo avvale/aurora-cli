@@ -4,10 +4,11 @@ import { CliterConfig, Property, getPropertyJavascriptDeleteType } from '../..';
 handlebars.registerHelper('getPropertyJavascriptDeleteType', function(
     property: Property,
     config: CliterConfig,
-): string | undefined
+): handlebars.SafeString | undefined
 {
-    return getPropertyJavascriptDeleteType(
+    const result = getPropertyJavascriptDeleteType(
         property,
         config,
     );
+    return result ? new handlebars.SafeString(result) : undefined;
 });

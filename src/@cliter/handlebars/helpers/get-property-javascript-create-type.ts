@@ -4,10 +4,11 @@ import { CliterConfig, Property, getPropertyJavascriptCreateType } from '../..';
 handlebars.registerHelper('getPropertyJavascriptCreateType', function(
     property: Property,
     config: CliterConfig,
-): string | undefined
+): handlebars.SafeString | undefined
 {
-    return getPropertyJavascriptCreateType(
+    const result = getPropertyJavascriptCreateType(
         property,
         config,
     );
+    return result ? new handlebars.SafeString(result) : undefined;
 });

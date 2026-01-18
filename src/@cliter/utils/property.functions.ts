@@ -417,6 +417,16 @@ export const getPropertyJavascriptType = (
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
 
+// generate union literal type for enum property (e.g., 'ACTIVE' | 'INACTIVE')
+export const getEnumUnionLiteralType = (
+    property: Property,
+): string =>
+{
+    const options = getPropertyEnumOptions(property);
+    if (!options || options.length === 0) return 'string';
+    return options.map(option => `'${option}'`).join(' | ');
+};
+
 export const getPropertyJavascriptCreateType = (
     property: Property,
     config: CliterConfig,
@@ -425,6 +435,7 @@ export const getPropertyJavascriptCreateType = (
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
     if (property.type === PropertyType.ARRAY && property.arrayOptions)    return `${config.propertyTypesEquivalenceJavascriptTypes[property.arrayOptions.type]}[]`;
+    if (property.type === PropertyType.ENUM)                              return getEnumUnionLiteralType(property);
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
@@ -437,6 +448,7 @@ export const getPropertyJavascriptUpdateType = (
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
     if (property.type === PropertyType.ARRAY && property.arrayOptions)    return `${config.propertyTypesEquivalenceJavascriptTypes[property.arrayOptions.type]}[]`;
+    if (property.type === PropertyType.ENUM)                              return getEnumUnionLiteralType(property);
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
@@ -449,6 +461,7 @@ export const getPropertyJavascriptDeleteType = (
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
     if (property.type === PropertyType.ARRAY && property.arrayOptions)    return `${config.propertyTypesEquivalenceJavascriptTypes[property.arrayOptions.type]}[]`;
+    if (property.type === PropertyType.ENUM)                              return getEnumUnionLiteralType(property);
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
@@ -461,6 +474,7 @@ export const getPropertyJavascriptResponseType = (
     if (property.relationship?.type === RelationshipType.MANY_TO_MANY)    return config.propertyTypesEquivalenceJavascriptTypes.manyToMany;
     if (property.type === PropertyType.RELATIONSHIP)                      return `${property.relationship?.aggregateName}[]`;
     if (property.type === PropertyType.ARRAY && property.arrayOptions)    return `${config.propertyTypesEquivalenceJavascriptTypes[property.arrayOptions.type]}[]`;
+    if (property.type === PropertyType.ENUM)                              return getEnumUnionLiteralType(property);
 
     return config.propertyTypesEquivalenceJavascriptTypes[property.type];
 };
