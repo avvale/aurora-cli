@@ -14,3 +14,6 @@
 ~}}
 {{/each}}
 {{{ importManager (object imports=exportsArray commandType='export') }}}
+{{#unless (hasEnumProperties schema.aggregateProperties)}}
+export {};
+{{/unless}}
