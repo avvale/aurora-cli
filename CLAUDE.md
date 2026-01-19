@@ -1,8 +1,4 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Project Overview
+# Aurora CLI Project
 
 Aurora CLI (`@aurorajs.dev/cli`) is a code generation tool built with [oclif](https://oclif.io) that scaffolds NestJS backend applications and Angular frontend applications following Domain-Driven Design (DDD) principles. It generates bounded contexts, modules, APIs, value objects, and related boilerplate code from YAML schema definitions.
 
