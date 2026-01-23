@@ -40,6 +40,13 @@ export interface GeneratePipelineCommandState extends CommandState {
     service: string;
 }
 
+export interface GenerateAiCommandState extends CommandState {
+    scope: string;
+    from: string;
+    to: string;
+    service: string;
+}
+
 export enum HttpMethodType {
     GET = 'get',
     HEAD = 'head',
@@ -234,6 +241,7 @@ export enum ScopeElement {
 }
 
 export enum TemplateElement {
+    AI = 'ai',
     BACK_ADDITIONAL_API = 'back/additional-@api',
     BACK_API = 'back/@api',
     BACK_APP = 'back/@app',
@@ -246,6 +254,7 @@ export enum TemplateElement {
     BACK_TEST = 'back/test',
     BACK_PACKAGES = 'back/packages',
     BACK_POSTMAN = 'back/postman',
+    BACK_TYPE = 'back/types',
     BACK_VALUE_OBJECT = 'back/value-object',
     PIPELINE = 'pipeline',
     FRONT_APPLICATION = 'front/application',

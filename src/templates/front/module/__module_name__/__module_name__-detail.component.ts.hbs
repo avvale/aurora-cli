@@ -1,9 +1,13 @@
+/**
+ * @aurora-generated
+ * @source cliter/{{ toKebabCase schema.boundedContextName }}/{{ toKebabCase schema.moduleName }}.aurora.yaml
+ */
 {{
     setVar 'importsArray' (
         array
             (object items=(array 'ChangeDetectionStrategy' 'Component' 'signal' 'ViewEncapsulation' 'WritableSignal') path='@angular/core')
             (object items='Validators' path='@angular/forms')
-            (object items=(array 'Action' 'ActionScope' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'SnackBarInvalidFormComponent' 'uuid' 'ViewDetailComponent') path='@aurora')
+            (object items=(array 'Action' 'ActionScope' 'Crumb' 'defaultDetailImports' 'log' 'mapActions' 'gridQueryHandler' 'SnackBarInvalidFormComponent' 'uuid' 'ViewDetailComponent') path='@aurora')
             (object items=(array 'lastValueFrom' 'takeUntil') path='rxjs')
             (object items=schema.aggregateName path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName))
             (object items=(sumStrings (toPascalCase schema.moduleName) 'Service') path=(sumStrings config.appsContainer '/' toKebabCase schema.boundedContextName '/' toKebabCase schema.moduleName))
@@ -697,7 +701,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
         // depending on the dialog action we invoke a create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} or update{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }} action
         this.actionService.action({
             id: mapActions(
-                dialog.componentInstance.data.currentActionId,
+                dialog.componentInstance.data.options.action.id,
                 {
                     '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.new{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}' : '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.create{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
                     '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.edit{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}': '{{ toCamelCase ../schema.boundedContextName }}::{{ toCamelCase ../schema.moduleName }}.detail.update{{ toPascalCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}',
@@ -1432,7 +1436,7 @@ export class {{ toPascalCase schema.moduleName }}DetailComponent extends ViewDet
                 );
 
                 const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig().map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.field);
-                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Columns.map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => this.translocoService.translate({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.translation));
+                const {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Headers: string[] = {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnsConfig().map({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig => this.translocoService.translate({{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}ColumnConfig.translation));
 
                 exportRows(
                     {{ toCamelCase (getModuleNameFromPropertyRelationship relationship.modulePath) }}Rows.objects,
