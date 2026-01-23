@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { SentryService } from './sentry.service';
 import { ConfigurableModuleClass } from './sentry.module-definition';
+import { SentryService } from './sentry.service';
 
 @Module({
-    providers: [SentryService],
-    exports  : [SentryService],
+  providers: [SentryService],
+  exports: [SentryService],
 })
-export class SentryModule extends ConfigurableModuleClass { }
+export class SentryModule extends ConfigurableModuleClass {}

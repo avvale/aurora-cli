@@ -7,27 +7,27 @@ import { coreLangs } from './core-langs';
 
 @Injectable()
 export class CoreGetLangsFromJsonService implements CoreGetLangsService {
-    constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
+  constructor(@Inject(CACHE_MANAGER) private readonly cacheManager: Cache) {}
 
-    async get<T>(): Promise<T[]> {
-        // return cache langs
-        const langs = await this.cacheManager.get<T[]>('common/langs');
-        if (langs) return langs;
+  async get<T>(): Promise<T[]> {
+    // return cache langs
+    const langs = await this.cacheManager.get<T[]>('common/langs');
+    if (langs) return langs;
 
-        // get langs from json and return cache langs if cache is expired
-        await this.init();
-        return await this.cacheManager.get<T[]>('common/langs');
-    }
+    // get langs from json and return cache langs if cache is expired
+    await this.init();
+    return await this.cacheManager.get<T[]>('common/langs');
+  }
 
-    async init(): Promise<void> {
-        await this.cacheManager.set('common/langs', this.getJsonLangs());
-    }
+  async init(): Promise<void> {
+    await this.cacheManager.set('common/langs', this.getJsonLangs());
+  }
 
-    getJsonLangs(): CoreLang[] {
-        return coreLangs;
-    }
+  getJsonLangs(): CoreLang[] {
+    return coreLangs;
+  }
 
-    async onApplicationBootstrap(): Promise<void> {
-        await this.init();
-    }
+  async onApplicationBootstrap(): Promise<void> {
+    await this.init();
+  }
 }

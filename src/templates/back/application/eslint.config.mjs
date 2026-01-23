@@ -33,7 +33,7 @@ export default tseslint.config(
             '@typescript-eslint/no-unsafe-call': 'off',
             '@typescript-eslint/no-unsafe-return': 'off',
             '@typescript-eslint/no-floating-promises': 'warn',
-            'prettier/prettier': ['error', { endOfLine: 'auto' }],
+            'prettier/prettier': ['error', { endOfLine: 'auto', tabWidth: 2 }],
         },
     },
 );

@@ -1,40 +1,45 @@
+import {
+  ICommandBus,
+  ICriteria,
+  IQueryBus,
+  NestCommandBus,
+  NestQueryBus,
+  SequelizeCriteria,
+} from '@aurorajs.dev/core';
 import { Global, Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { ICommandBus, ICriteria, IQueryBus, NestCommandBus, NestQueryBus, SequelizeCriteria } from '@aurorajs.dev/core';
 
 @Global()
 @Module({
-    imports: [
-        CqrsModule,
-    ],
-    providers: [
-        {
-            provide : ICommandBus,
-            useClass: NestCommandBus,
-        },
-        {
-            provide : IQueryBus,
-            useClass: NestQueryBus,
-        },
-        {
-            provide : ICriteria,
-            useClass: SequelizeCriteria,
-        },
-    ],
-    exports: [
-        CqrsModule,
-        {
-            provide : ICommandBus,
-            useClass: NestCommandBus,
-        },
-        {
-            provide : IQueryBus,
-            useClass: NestQueryBus,
-        },
-        {
-            provide : ICriteria,
-            useClass: SequelizeCriteria,
-        },
-    ],
+  imports: [CqrsModule],
+  providers: [
+    {
+      provide: ICommandBus,
+      useClass: NestCommandBus,
+    },
+    {
+      provide: IQueryBus,
+      useClass: NestQueryBus,
+    },
+    {
+      provide: ICriteria,
+      useClass: SequelizeCriteria,
+    },
+  ],
+  exports: [
+    CqrsModule,
+    {
+      provide: ICommandBus,
+      useClass: NestCommandBus,
+    },
+    {
+      provide: IQueryBus,
+      useClass: NestQueryBus,
+    },
+    {
+      provide: ICriteria,
+      useClass: SequelizeCriteria,
+    },
+  ],
 })
 export class CqrsConfigModule {}

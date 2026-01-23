@@ -3,7 +3,7 @@ import { SchemaStoreService } from './schema-store.service';
 
 @Global()
 @Module({
-    providers: [SchemaStoreService],
-    exports  : [SchemaStoreService],
+  providers: [SchemaStoreService],
+  exports: [SchemaStoreService],
 })
 export class SchemaStoreModule {}

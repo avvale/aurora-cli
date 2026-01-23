@@ -2,10 +2,10 @@ import { Permissions, AuthenticationDisabledAdapterGuard, AuthorizationDisabledA
 import { applyDecorators, UseGuards } from '@nestjs/common';
 
 export function Auth(
-    ...permissions: string[]
+  ...permissions: string[]
 ): MethodDecorator & ClassDecorator {
-    return applyDecorators(
-        Permissions(...permissions),
-        UseGuards(AuthenticationDisabledAdapterGuard, AuthorizationDisabledAdapterGuard),
-    );
+  return applyDecorators(
+    Permissions(...permissions),
+    UseGuards(AuthenticationDisabledAdapterGuard, AuthorizationDisabledAdapterGuard),
+  );
 }

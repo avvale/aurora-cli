@@ -1,0 +1,19 @@
+{
+    "credentialsPath": "./scripts/aurora-sheets-sync/credentials/service-account.json",
+    "boundedContexts": {
+        "iam": {
+            "spreadsheetId": "YOUR_SPREADSHEET_ID_HERE",
+            "description": "Identity and Access Management"
+        },
+        "common": {
+            "spreadsheetId": "YOUR_SPREADSHEET_ID_HERE",
+            "description": "Common module schemas"
+        },
+        "o-auth": {
+            "spreadsheetId": "YOUR_SPREADSHEET_ID_HERE",
+            "description": "OAuth 2.0 module schemas"
+        }
+    },
+    "backupsPath": "backups/aurora-schemas",
+    "cliterPath": "cliter"
+}

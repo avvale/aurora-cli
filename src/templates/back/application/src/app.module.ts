@@ -7,12 +7,12 @@ import { CoreModule } from '@aurora/core.module';
 import { RootModule, ServerStaticModule } from '@aurora/modules';
 
 @Module({
-    imports: [
-        RootModule,
-        CoreModule,
-        ServerStaticModule
-    ],
-    controllers: [AppController],
-    providers: [AppService],
+  imports: [
+    RootModule,
+    CoreModule,
+    ServerStaticModule
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
