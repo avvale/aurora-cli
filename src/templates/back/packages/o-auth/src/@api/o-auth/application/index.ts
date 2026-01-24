@@ -74,39 +74,39 @@ import { OAuthUpdateApplicationByIdHandler } from './handlers/o-auth-update-appl
 import { OAuthApplicationSeeder } from './seeder/o-auth-application.seeder';
 
 export const OAuthApplicationApiControllers = [
-    OAuthCreateApplicationController,
-    OAuthCreateApplicationsController,
-    OAuthPaginateApplicationsController,
-    OAuthGetApplicationsController,
-    OAuthFindApplicationByIdController,
-    OAuthFindApplicationController,
-    OAuthUpdateApplicationByIdController,
-    OAuthDeleteApplicationByIdController,
-    OAuthDeleteApplicationsController,
+  OAuthCreateApplicationController,
+  OAuthCreateApplicationsController,
+  OAuthPaginateApplicationsController,
+  OAuthGetApplicationsController,
+  OAuthFindApplicationByIdController,
+  OAuthFindApplicationController,
+  OAuthUpdateApplicationByIdController,
+  OAuthDeleteApplicationByIdController,
+  OAuthDeleteApplicationsController,
 ];
 
 export const OAuthApplicationApiResolvers = [
-    OAuthCreateApplicationResolver,
-    OAuthCreateApplicationsResolver,
-    OAuthPaginateApplicationsResolver,
-    OAuthGetApplicationsResolver,
-    OAuthFindApplicationByIdResolver,
-    OAuthFindApplicationResolver,
-    OAuthUpdateApplicationByIdResolver,
-    OAuthDeleteApplicationByIdResolver,
-    OAuthDeleteApplicationsResolver,
+  OAuthCreateApplicationResolver,
+  OAuthCreateApplicationsResolver,
+  OAuthPaginateApplicationsResolver,
+  OAuthGetApplicationsResolver,
+  OAuthFindApplicationByIdResolver,
+  OAuthFindApplicationResolver,
+  OAuthUpdateApplicationByIdResolver,
+  OAuthDeleteApplicationByIdResolver,
+  OAuthDeleteApplicationsResolver,
 ];
 
 export const OAuthApplicationApiHandlers = [
-    OAuthCreateApplicationHandler,
-    OAuthCreateApplicationsHandler,
-    OAuthPaginateApplicationsHandler,
-    OAuthGetApplicationsHandler,
-    OAuthFindApplicationByIdHandler,
-    OAuthFindApplicationHandler,
-    OAuthUpdateApplicationByIdHandler,
-    OAuthDeleteApplicationByIdHandler,
-    OAuthDeleteApplicationsHandler,
+  OAuthCreateApplicationHandler,
+  OAuthCreateApplicationsHandler,
+  OAuthPaginateApplicationsHandler,
+  OAuthGetApplicationsHandler,
+  OAuthFindApplicationByIdHandler,
+  OAuthFindApplicationHandler,
+  OAuthUpdateApplicationByIdHandler,
+  OAuthDeleteApplicationByIdHandler,
+  OAuthDeleteApplicationsHandler,
 ];
 
 export const OAuthApplicationApiServices = [OAuthApplicationSeeder];

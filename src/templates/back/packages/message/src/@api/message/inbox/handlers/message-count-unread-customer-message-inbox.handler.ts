@@ -5,25 +5,25 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageCountUnreadCustomerMessageInboxHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        account: IamAccountResponse,
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-    ): Promise<number> {
-        return await this.queryBus.ask(
-            new MessageCountInboxQuery(
-                {
-                    ...queryStatement,
-                    where: {
-                        ...queryStatement?.where,
-                        accountId: account.id,
-                        isRead: false,
-                    },
-                },
-                constraint,
-            ),
-        );
-    }
+  async main(
+    account: IamAccountResponse,
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+  ): Promise<number> {
+    return await this.queryBus.ask(
+      new MessageCountInboxQuery(
+        {
+          ...queryStatement,
+          where: {
+            ...queryStatement?.where,
+            accountId: account.id,
+            isRead: false,
+          },
+        },
+        constraint,
+      ),
+    );
+  }
 }

@@ -8,22 +8,22 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth()
 export class MessagePaginateCustomerMessagesInboxResolver {
-    constructor(
-        private readonly handler: MessagePaginateCustomerMessagesInboxHandler,
-    ) {}
+  constructor(
+    private readonly handler: MessagePaginateCustomerMessagesInboxHandler,
+  ) {}
 
-    @Query('messagePaginateCustomerMessagesInbox')
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination> {
-        return await this.handler.main(
-            account,
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('messagePaginateCustomerMessagesInbox')
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(
+      account,
+      queryStatement,
+      constraint,
+      timezone,
+    );
+  }
 }

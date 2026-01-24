@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(OAuthUpdatedScopeEvent)
 export class OAuthUpdatedScopeEventHandler
-    implements IEventHandler<OAuthUpdatedScopeEvent>
+  implements IEventHandler<OAuthUpdatedScopeEvent>
 {
-    handle(event: OAuthUpdatedScopeEvent): void {
-        // console.log('UpdatedScopeEvent: ', event);
-    }
+  handle(event: OAuthUpdatedScopeEvent): void {
+    // console.log('UpdatedScopeEvent: ', event);
+  }
 }

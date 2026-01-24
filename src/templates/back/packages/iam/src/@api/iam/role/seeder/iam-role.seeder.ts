@@ -6,18 +6,18 @@ import { IamCreateRolesCommand, iamMockRoleData } from '@app/iam/role';
 
 @Injectable()
 export class IamRoleSeeder {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new IamCreateRolesCommand(iamMockRoleData, {
-                timezone: process.env.TZ,
-            }),
-        );
+  async main(): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new IamCreateRolesCommand(iamMockRoleData, {
+        timezone: process.env.TZ,
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

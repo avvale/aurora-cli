@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('whatsapp.message.update')
-export class WhatsappUpdateMessageByIdResolver
-{
-    constructor(
-        private readonly handler: WhatsappUpdateMessageByIdHandler,
-    ) {}
+export class WhatsappUpdateMessageByIdResolver {
+  constructor(private readonly handler: WhatsappUpdateMessageByIdHandler) {}
 
-    @Mutation('whatsappUpdateMessageById')
-    async main(
-        @Args('payload') payload: WhatsappUpdateMessageByIdInput,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<WhatsappMessage>
-    {
-        return await this.handler.main(
-            payload,
-            constraint,
-            timezone,
-        );
-    }
+  @Mutation('whatsappUpdateMessageById')
+  async main(
+    @Args('payload') payload: WhatsappUpdateMessageByIdInput,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<WhatsappMessage> {
+    return await this.handler.main(payload, constraint, timezone);
+  }
 }

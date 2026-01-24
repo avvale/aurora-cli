@@ -10,19 +10,19 @@ import { AuditingRollbackSideEffectHandler } from '../handlers/auditing-rollback
 @Controller('auditing/side-effect/rollback')
 @Auth('auditing.sideEffect.update')
 export class AuditingRollbackSideEffectController {
-    constructor(private readonly handler: AuditingRollbackSideEffectHandler) {}
+  constructor(private readonly handler: AuditingRollbackSideEffectHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(
-        @Body() payload: AuditingUpdateSideEffectByIdDto,
-        @Body('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ) {
-        return await this.handler.main(payload, constraint, timezone);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(
+    @Body() payload: AuditingUpdateSideEffectByIdDto,
+    @Body('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ) {
+    return await this.handler.main(payload, constraint, timezone);
+  }
 }

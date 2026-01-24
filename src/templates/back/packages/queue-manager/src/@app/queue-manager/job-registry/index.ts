@@ -80,38 +80,38 @@ import { QueueManagerUpdateJobRegistryByIdService } from './application/update/q
 import { QueueManagerUpdateJobsRegistryService } from './application/update/queue-manager-update-jobs-registry.service';
 
 export const QueueManagerJobRegistryHandlers = [
-    // commands
-    QueueManagerCreateJobRegistryCommandHandler,
-    QueueManagerCreateJobsRegistryCommandHandler,
-    QueueManagerUpdateJobRegistryByIdCommandHandler,
-    QueueManagerUpdateJobsRegistryCommandHandler,
-    QueueManagerDeleteJobRegistryByIdCommandHandler,
-    QueueManagerDeleteJobsRegistryCommandHandler,
+  // commands
+  QueueManagerCreateJobRegistryCommandHandler,
+  QueueManagerCreateJobsRegistryCommandHandler,
+  QueueManagerUpdateJobRegistryByIdCommandHandler,
+  QueueManagerUpdateJobsRegistryCommandHandler,
+  QueueManagerDeleteJobRegistryByIdCommandHandler,
+  QueueManagerDeleteJobsRegistryCommandHandler,
 
-    // queries
-    QueueManagerPaginateJobsRegistryQueryHandler,
-    QueueManagerGetJobsRegistryQueryHandler,
-    QueueManagerFindJobRegistryQueryHandler,
-    QueueManagerFindJobRegistryByIdQueryHandler,
+  // queries
+  QueueManagerPaginateJobsRegistryQueryHandler,
+  QueueManagerGetJobsRegistryQueryHandler,
+  QueueManagerFindJobRegistryQueryHandler,
+  QueueManagerFindJobRegistryByIdQueryHandler,
 
-    // events
-    QueueManagerCreatedJobRegistryEventHandler,
-    QueueManagerCreatedJobsRegistryEventHandler,
-    QueueManagerUpdatedJobRegistryEventHandler,
-    QueueManagerUpdatedJobsRegistryEventHandler,
-    QueueManagerDeletedJobRegistryEventHandler,
-    QueueManagerDeletedJobsRegistryEventHandler,
+  // events
+  QueueManagerCreatedJobRegistryEventHandler,
+  QueueManagerCreatedJobsRegistryEventHandler,
+  QueueManagerUpdatedJobRegistryEventHandler,
+  QueueManagerUpdatedJobsRegistryEventHandler,
+  QueueManagerDeletedJobRegistryEventHandler,
+  QueueManagerDeletedJobsRegistryEventHandler,
 ];
 
 export const QueueManagerJobRegistryServices = [
-    QueueManagerCreateJobRegistryService,
-    QueueManagerCreateJobsRegistryService,
-    QueueManagerPaginateJobsRegistryService,
-    QueueManagerGetJobsRegistryService,
-    QueueManagerFindJobRegistryService,
-    QueueManagerFindJobRegistryByIdService,
-    QueueManagerUpdateJobRegistryByIdService,
-    QueueManagerUpdateJobsRegistryService,
-    QueueManagerDeleteJobRegistryByIdService,
-    QueueManagerDeleteJobsRegistryService,
+  QueueManagerCreateJobRegistryService,
+  QueueManagerCreateJobsRegistryService,
+  QueueManagerPaginateJobsRegistryService,
+  QueueManagerGetJobsRegistryService,
+  QueueManagerFindJobRegistryService,
+  QueueManagerFindJobRegistryByIdService,
+  QueueManagerUpdateJobRegistryByIdService,
+  QueueManagerUpdateJobsRegistryService,
+  QueueManagerDeleteJobRegistryByIdService,
+  QueueManagerDeleteJobsRegistryService,
 ];

@@ -4,40 +4,39 @@ import { OAuthDeleteApplicationsClientsService } from '@app/o-auth/application-c
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteApplicationsClientsCommandHandler', () => {
-    let commandHandler: OAuthDeleteApplicationsClientsCommandHandler;
+  let commandHandler: OAuthDeleteApplicationsClientsCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                OAuthDeleteApplicationsClientsCommandHandler,
-                {
-                    provide: OAuthDeleteApplicationsClientsService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        OAuthDeleteApplicationsClientsCommandHandler,
+        {
+          provide: OAuthDeleteApplicationsClientsService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler =
-            module.get<OAuthDeleteApplicationsClientsCommandHandler>(
-                OAuthDeleteApplicationsClientsCommandHandler,
-            );
+    commandHandler = module.get<OAuthDeleteApplicationsClientsCommandHandler>(
+      OAuthDeleteApplicationsClientsCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('OAuthDeleteApplicationsClientsCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('OAuthDeleteApplicationsClientsCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(
-                    new OAuthDeleteApplicationsClientsCommand(),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(
+          new OAuthDeleteApplicationsClientsCommand(),
+        ),
+      ).toBe(undefined);
     });
+  });
 });

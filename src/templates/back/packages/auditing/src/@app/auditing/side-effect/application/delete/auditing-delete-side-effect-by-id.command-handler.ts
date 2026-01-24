@@ -5,18 +5,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(AuditingDeleteSideEffectByIdCommand)
 export class AuditingDeleteSideEffectByIdCommandHandler
-    implements ICommandHandler<AuditingDeleteSideEffectByIdCommand>
+  implements ICommandHandler<AuditingDeleteSideEffectByIdCommand>
 {
-    constructor(
-        private readonly deleteSideEffectByIdService: AuditingDeleteSideEffectByIdService,
-    ) {}
+  constructor(
+    private readonly deleteSideEffectByIdService: AuditingDeleteSideEffectByIdService,
+  ) {}
 
-    async execute(command: AuditingDeleteSideEffectByIdCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteSideEffectByIdService.main(
-            new AuditingSideEffectId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: AuditingDeleteSideEffectByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteSideEffectByIdService.main(
+      new AuditingSideEffectId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

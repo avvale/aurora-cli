@@ -4,15 +4,15 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(MessageCountInboxQuery)
 export class MessageCountInboxQueryHandler
-    implements IQueryHandler<MessageCountInboxQuery>
+  implements IQueryHandler<MessageCountInboxQuery>
 {
-    constructor(private readonly countInboxService: MessageCountInboxService) {}
+  constructor(private readonly countInboxService: MessageCountInboxService) {}
 
-    async execute(query: MessageCountInboxQuery): Promise<number> {
-        return await this.countInboxService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: MessageCountInboxQuery): Promise<number> {
+    return await this.countInboxService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

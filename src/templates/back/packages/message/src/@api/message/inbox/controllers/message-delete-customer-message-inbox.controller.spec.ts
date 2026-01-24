@@ -4,36 +4,36 @@ import { MessageDeleteCustomerMessageInboxHandler } from '../handlers/message-de
 import { MessageDeleteCustomerMessageInboxController } from './message-delete-customer-message-inbox.controller';
 
 describe('MessageDeleteCustomerMessageInboxController', () => {
-    let controller: MessageDeleteCustomerMessageInboxController;
-    let handler: MessageDeleteCustomerMessageInboxHandler;
+  let controller: MessageDeleteCustomerMessageInboxController;
+  let handler: MessageDeleteCustomerMessageInboxHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            controllers: [MessageDeleteCustomerMessageInboxController],
-            providers: [
-                {
-                    provide: MessageDeleteCustomerMessageInboxHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      controllers: [MessageDeleteCustomerMessageInboxController],
+      providers: [
+        {
+          provide: MessageDeleteCustomerMessageInboxHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        controller = module.get<MessageDeleteCustomerMessageInboxController>(
-            MessageDeleteCustomerMessageInboxController,
-        );
-        handler = module.get<MessageDeleteCustomerMessageInboxHandler>(
-            MessageDeleteCustomerMessageInboxHandler,
-        );
+    controller = module.get<MessageDeleteCustomerMessageInboxController>(
+      MessageDeleteCustomerMessageInboxController,
+    );
+    handler = module.get<MessageDeleteCustomerMessageInboxHandler>(
+      MessageDeleteCustomerMessageInboxHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('MessageDeleteCustomerMessageInboxController should be defined', () => {
+      expect(controller).toBeDefined();
     });
-
-    describe('main', () => {
-        test('MessageDeleteCustomerMessageInboxController should be defined', () => {
-            expect(controller).toBeDefined();
-        });
-    });
+  });
 });

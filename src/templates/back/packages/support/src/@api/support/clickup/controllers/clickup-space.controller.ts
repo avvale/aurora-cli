@@ -9,15 +9,15 @@ import { ClickupSpaceHandler } from '../handlers/clickup-space.handler';
 @Controller('clickup/team/:teamId/space')
 @Auth('clickup.space.get')
 export class ClickupSpaceController {
-    constructor(private readonly handler: ClickupSpaceHandler) {}
+  constructor(private readonly handler: ClickupSpaceHandler) {}
 
-    @Get()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: [ClickupSpaceDto],
-    })
-    async main(@Param('teamId') teamId?: string) {
-        return await this.handler.main(teamId);
-    }
+  @Get()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: [ClickupSpaceDto],
+  })
+  async main(@Param('teamId') teamId?: string) {
+    return await this.handler.main(teamId);
+  }
 }

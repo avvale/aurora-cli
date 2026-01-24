@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(IamUpdatedTagEvent)
 export class IamUpdatedTagEventHandler
-    implements IEventHandler<IamUpdatedTagEvent>
+  implements IEventHandler<IamUpdatedTagEvent>
 {
-    handle(event: IamUpdatedTagEvent): void {
-        // console.log('UpdatedTagEvent: ', event);
-    }
+  handle(event: IamUpdatedTagEvent): void {
+    // console.log('UpdatedTagEvent: ', event);
+  }
 }

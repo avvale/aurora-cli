@@ -1,30 +1,28 @@
 import {
-    SupportCommentMapper,
-    SupportCommentResponse,
-    SupportFindCommentQuery,
+  SupportCommentMapper,
+  SupportCommentResponse,
+  SupportFindCommentQuery,
 } from '@app/support/comment';
 import { SupportFindCommentService } from '@app/support/comment/application/find/support-find-comment.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(SupportFindCommentQuery)
 export class SupportFindCommentQueryHandler
-    implements IQueryHandler<SupportFindCommentQuery>
+  implements IQueryHandler<SupportFindCommentQuery>
 {
-    private readonly mapper: SupportCommentMapper = new SupportCommentMapper();
+  private readonly mapper: SupportCommentMapper = new SupportCommentMapper();
 
-    constructor(
-        private readonly findCommentService: SupportFindCommentService,
-    ) {}
+  constructor(private readonly findCommentService: SupportFindCommentService) {}
 
-    async execute(
-        query: SupportFindCommentQuery,
-    ): Promise<SupportCommentResponse> {
-        const comment = await this.findCommentService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
+  async execute(
+    query: SupportFindCommentQuery,
+  ): Promise<SupportCommentResponse> {
+    const comment = await this.findCommentService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
 
-        return this.mapper.mapAggregateToResponse(comment);
-    }
+    return this.mapper.mapAggregateToResponse(comment);
+  }
 }

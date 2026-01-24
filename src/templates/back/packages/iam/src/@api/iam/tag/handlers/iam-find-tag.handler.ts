@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamFindTagHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<IamTag | IamTagDto> {
-        return await this.queryBus.ask(
-            new IamFindTagQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<IamTag | IamTagDto> {
+    return await this.queryBus.ask(
+      new IamFindTagQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(SupportDeletedCommentsEvent)
 export class SupportDeletedCommentsEventHandler
-    implements IEventHandler<SupportDeletedCommentsEvent>
+  implements IEventHandler<SupportDeletedCommentsEvent>
 {
-    handle(event: SupportDeletedCommentsEvent): void {
-        // 'DeletedCommentsEvent'
-    }
+  handle(event: SupportDeletedCommentsEvent): void {
+    // 'DeletedCommentsEvent'
+  }
 }

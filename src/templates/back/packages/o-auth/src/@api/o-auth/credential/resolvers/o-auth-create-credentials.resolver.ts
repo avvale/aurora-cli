@@ -6,20 +6,20 @@ import { OAuthCreateCredentialsHandler } from '../handlers/o-auth-create-credent
 
 @Resolver()
 export class OAuthCreateCredentialsResolver {
-    constructor(private readonly handler: OAuthCreateCredentialsHandler) {}
+  constructor(private readonly handler: OAuthCreateCredentialsHandler) {}
 
-    @Mutation('oAuthCreateCredentials')
-    async main(
-        @GqlHeaders() headers: any,
-        @Args('payload') payload: OAuthCreateCredentialsInput,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<OAuthCredentials> {
-        return await this.handler.main(
-            headers.authorization,
-            payload,
-            timezone,
-            auditing,
-        );
-    }
+  @Mutation('oAuthCreateCredentials')
+  async main(
+    @GqlHeaders() headers: any,
+    @Args('payload') payload: OAuthCreateCredentialsInput,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<OAuthCredentials> {
+    return await this.handler.main(
+      headers.authorization,
+      payload,
+      timezone,
+      auditing,
+    );
+  }
 }

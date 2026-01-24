@@ -5,18 +5,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsDeleteWebhookByIdCommand)
 export class ToolsDeleteWebhookByIdCommandHandler
-    implements ICommandHandler<ToolsDeleteWebhookByIdCommand>
+  implements ICommandHandler<ToolsDeleteWebhookByIdCommand>
 {
-    constructor(
-        private readonly deleteWebhookByIdService: ToolsDeleteWebhookByIdService,
-    ) {}
+  constructor(
+    private readonly deleteWebhookByIdService: ToolsDeleteWebhookByIdService,
+  ) {}
 
-    async execute(command: ToolsDeleteWebhookByIdCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteWebhookByIdService.main(
-            new ToolsWebhookId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: ToolsDeleteWebhookByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteWebhookByIdService.main(
+      new ToolsWebhookId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

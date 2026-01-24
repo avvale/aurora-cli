@@ -4,35 +4,35 @@ import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('MessageCreateMessagesHandler', () => {
-    let handler: MessageCreateMessagesHandler;
+  let handler: MessageCreateMessagesHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                MessageCreateMessagesHandler,
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        MessageCreateMessagesHandler,
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<MessageCreateMessagesHandler>(
-            MessageCreateMessagesHandler,
-        );
+    handler = module.get<MessageCreateMessagesHandler>(
+      MessageCreateMessagesHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('MessageCreateMessagesHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('MessageCreateMessagesHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an messageMockMessageData created', async () => {
-            expect(await handler.main(messageMockMessageData)).toBe(true);
-        });
+    test('should return an messageMockMessageData created', async () => {
+      expect(await handler.main(messageMockMessageData)).toBe(true);
     });
+  });
 });

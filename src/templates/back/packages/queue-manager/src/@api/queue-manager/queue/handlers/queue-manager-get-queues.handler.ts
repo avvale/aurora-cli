@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerGetQueuesHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<QueueManagerQueue[] | QueueManagerQueueDto[]> {
-        return await this.queryBus.ask(
-            new QueueManagerGetQueuesQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<QueueManagerQueue[] | QueueManagerQueueDto[]> {
+    return await this.queryBus.ask(
+      new QueueManagerGetQueuesQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

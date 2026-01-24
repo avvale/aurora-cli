@@ -7,13 +7,13 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('auditing.sideEffect.create')
 export class AuditingCreateSideEffectsResolver {
-    constructor(private readonly handler: AuditingCreateSideEffectsHandler) {}
+  constructor(private readonly handler: AuditingCreateSideEffectsHandler) {}
 
-    @Mutation('auditingCreateSideEffects')
-    async main(
-        @Args('payload') payload: AuditingCreateSideEffectInput[],
-        @Timezone() timezone?: string,
-    ): Promise<boolean> {
-        return await this.handler.main(payload, timezone);
-    }
+  @Mutation('auditingCreateSideEffects')
+  async main(
+    @Args('payload') payload: AuditingCreateSideEffectInput[],
+    @Timezone() timezone?: string,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone);
+  }
 }

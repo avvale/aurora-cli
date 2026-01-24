@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
-    QueueManagerJobRegistryDto,
-    QueueManagerUpdateJobRegistryByIdDto,
-    QueueManagerUpdateJobRegistryByIdHandler,
+  QueueManagerJobRegistryDto,
+  QueueManagerUpdateJobRegistryByIdDto,
+  QueueManagerUpdateJobRegistryByIdHandler,
 } from '@api/queue-manager/job-registry';
 import { Auth } from '@aurora/decorators';
 import { QueryStatement, Timezone } from '@aurorajs.dev/core';
@@ -13,21 +13,21 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @Controller('queue-manager/job-registry/update')
 @Auth('queueManager.jobRegistry.update')
 export class QueueManagerUpdateJobRegistryByIdController {
-    constructor(
-        private readonly handler: QueueManagerUpdateJobRegistryByIdHandler,
-    ) {}
+  constructor(
+    private readonly handler: QueueManagerUpdateJobRegistryByIdHandler,
+  ) {}
 
-    @Put()
-    @ApiOperation({ summary: 'Update job-registry by id' })
-    @ApiOkResponse({
-        description: 'The record has been successfully updated.',
-        type: QueueManagerJobRegistryDto,
-    })
-    async main(
-        @Body() payload: QueueManagerUpdateJobRegistryByIdDto,
-        @Body('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ) {
-        return await this.handler.main(payload, constraint, timezone);
-    }
+  @Put()
+  @ApiOperation({ summary: 'Update job-registry by id' })
+  @ApiOkResponse({
+    description: 'The record has been successfully updated.',
+    type: QueueManagerJobRegistryDto,
+  })
+  async main(
+    @Body() payload: QueueManagerUpdateJobRegistryByIdDto,
+    @Body('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ) {
+    return await this.handler.main(payload, constraint, timezone);
+  }
 }

@@ -4,39 +4,37 @@ import { MessageDeleteInboxSettingsService } from '@app/message/inbox-setting/ap
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('MessageDeleteInboxSettingsCommandHandler', () => {
-    let commandHandler: MessageDeleteInboxSettingsCommandHandler;
+  let commandHandler: MessageDeleteInboxSettingsCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                MessageDeleteInboxSettingsCommandHandler,
-                {
-                    provide: MessageDeleteInboxSettingsService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        MessageDeleteInboxSettingsCommandHandler,
+        {
+          provide: MessageDeleteInboxSettingsService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<MessageDeleteInboxSettingsCommandHandler>(
-            MessageDeleteInboxSettingsCommandHandler,
-        );
+    commandHandler = module.get<MessageDeleteInboxSettingsCommandHandler>(
+      MessageDeleteInboxSettingsCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('MessageDeleteInboxSettingsCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('MessageDeleteInboxSettingsCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(
-                    new MessageDeleteInboxSettingsCommand(),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(new MessageDeleteInboxSettingsCommand()),
+      ).toBe(undefined);
     });
+  });
 });

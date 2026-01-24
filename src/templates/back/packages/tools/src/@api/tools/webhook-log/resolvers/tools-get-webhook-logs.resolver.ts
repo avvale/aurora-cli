@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.webhookLog.get')
 export class ToolsGetWebhookLogsResolver {
-    constructor(private readonly handler: ToolsGetWebhookLogsHandler) {}
+  constructor(private readonly handler: ToolsGetWebhookLogsHandler) {}
 
-    @Query('toolsGetWebhookLogs')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<ToolsWebhookLog[]> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('toolsGetWebhookLogs')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<ToolsWebhookLog[]> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

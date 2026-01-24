@@ -5,23 +5,21 @@ import { Injectable } from '@nestjs/common';
 import { IamUserMetaDto } from '../dto';
 
 @Injectable()
-export class IamFindUserMetaByIdHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class IamFindUserMetaByIdHandler {
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        id: string,
-        timezone?: string,
-    ): Promise<IamUserMeta | IamUserMetaDto>
-    {
-        return await this.queryBus.ask(new IamFindUserByIdQuery(
-            id,
-            {},
-            {
-                timezone,
-            },
-        ));
-    }
+  async main(
+    id: string,
+    timezone?: string,
+  ): Promise<IamUserMeta | IamUserMetaDto> {
+    return await this.queryBus.ask(
+      new IamFindUserByIdQuery(
+        id,
+        {},
+        {
+          timezone,
+        },
+      ),
+    );
+  }
 }

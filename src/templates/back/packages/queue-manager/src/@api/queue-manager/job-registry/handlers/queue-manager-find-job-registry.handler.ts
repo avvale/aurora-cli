@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerFindJobRegistryHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<QueueManagerJobRegistry | QueueManagerJobRegistryDto> {
-        return await this.queryBus.ask(
-            new QueueManagerFindJobRegistryQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<QueueManagerJobRegistry | QueueManagerJobRegistryDto> {
+    return await this.queryBus.ask(
+      new QueueManagerFindJobRegistryQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

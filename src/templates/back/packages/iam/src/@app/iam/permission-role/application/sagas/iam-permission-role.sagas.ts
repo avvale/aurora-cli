@@ -1,8 +1,12 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission-role.aurora.yaml
+ */
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamPermissionRoleSagas {
-    /* @Saga()
+  /* @Saga()
     dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$

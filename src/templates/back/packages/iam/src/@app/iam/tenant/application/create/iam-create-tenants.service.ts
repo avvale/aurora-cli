@@ -1,19 +1,19 @@
 import {
-    IamAddTenantsContextEvent,
-    IamITenantRepository,
-    IamTenant,
+  IamAddTenantsContextEvent,
+  IamITenantRepository,
+  IamTenant,
 } from '@app/iam/tenant';
 import {
-    IamTenantAccountIds,
-    IamTenantCode,
-    IamTenantCreatedAt,
-    IamTenantId,
-    IamTenantIsActive,
-    IamTenantLogo,
-    IamTenantMeta,
-    IamTenantName,
-    IamTenantParentId,
-    IamTenantUpdatedAt,
+  IamTenantAccountIds,
+  IamTenantCode,
+  IamTenantCreatedAt,
+  IamTenantId,
+  IamTenantIsActive,
+  IamTenantLogo,
+  IamTenantMeta,
+  IamTenantName,
+  IamTenantParentId,
+  IamTenantUpdatedAt,
 } from '@app/iam/tenant/domain/value-objects';
 import { CQMetadata } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -21,54 +21,54 @@ import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class IamCreateTenantsService {
-    constructor(
-        private readonly publisher: EventPublisher,
-        private readonly repository: IamITenantRepository,
-    ) {}
+  constructor(
+    private readonly publisher: EventPublisher,
+    private readonly repository: IamITenantRepository,
+  ) {}
 
-    async main(
-        payload: {
-            id: IamTenantId;
-            parentId: IamTenantParentId;
-            name: IamTenantName;
-            code: IamTenantCode;
-            logo: IamTenantLogo;
-            isActive: IamTenantIsActive;
-            meta: IamTenantMeta;
-            accountIds: IamTenantAccountIds;
-        }[],
-        cQMetadata?: CQMetadata,
-    ): Promise<void> {
-        // create aggregate with factory pattern
-        const tenants = payload.map((tenant) =>
-            IamTenant.register(
-                tenant.id,
-                undefined, // rowId
-                tenant.parentId,
-                tenant.name,
-                tenant.code,
-                tenant.logo,
-                tenant.isActive,
-                tenant.meta,
-                tenant.accountIds,
-                new IamTenantCreatedAt({ currentTimestamp: true }),
-                new IamTenantUpdatedAt({ currentTimestamp: true }),
-                null, // deleteAt
-            ),
-        );
+  async main(
+    payload: {
+      id: IamTenantId;
+      parentId: IamTenantParentId;
+      name: IamTenantName;
+      code: IamTenantCode;
+      logo: IamTenantLogo;
+      isActive: IamTenantIsActive;
+      meta: IamTenantMeta;
+      accountIds: IamTenantAccountIds;
+    }[],
+    cQMetadata?: CQMetadata,
+  ): Promise<void> {
+    // create aggregate with factory pattern
+    const tenants = payload.map((tenant) =>
+      IamTenant.register(
+        tenant.id,
+        undefined, // rowId
+        tenant.parentId,
+        tenant.name,
+        tenant.code,
+        tenant.logo,
+        tenant.isActive,
+        tenant.meta,
+        tenant.accountIds,
+        new IamTenantCreatedAt({ currentTimestamp: true }),
+        new IamTenantUpdatedAt({ currentTimestamp: true }),
+        null, // deleteAt
+      ),
+    );
 
-        // insert
-        await this.repository.insert(tenants, {
-            insertOptions: cQMetadata?.repositoryOptions,
-        });
+    // insert
+    await this.repository.insert(tenants, {
+      insertOptions: cQMetadata?.repositoryOptions,
+    });
 
-        // create AddTenantsContextEvent to have object wrapper to add event publisher functionality
-        // insert EventBus in object, to be able to apply and commit events
-        const tenantsRegistered = this.publisher.mergeObjectContext(
-            new IamAddTenantsContextEvent(tenants, cQMetadata),
-        );
+    // create AddTenantsContextEvent to have object wrapper to add event publisher functionality
+    // insert EventBus in object, to be able to apply and commit events
+    const tenantsRegistered = this.publisher.mergeObjectContext(
+      new IamAddTenantsContextEvent(tenants, cQMetadata),
+    );
 
-        tenantsRegistered.created(); // apply event to model events
-        tenantsRegistered.commit(); // commit all events of model
-    }
+    tenantsRegistered.created(); // apply event to model events
+    tenantsRegistered.commit(); // commit all events of model
+  }
 }

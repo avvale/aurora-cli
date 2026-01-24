@@ -11,20 +11,35 @@ front:
   outlineIcon: flowsheet
   solidFontSetIcon: material-symbols-outlined
   solidIcon: flowsheet
+description: >
+  Module for managing database stored procedures, functions, and triggers.
+  Tracks versioning, execution status, and provides up/down migration scripts
+  for procedural database objects. Works alongside the migration module for
+  complete database schema management.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the procedure. UUID v4 format, generated automatically
+      on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incremented numeric identifier. Used for sorting and quick lookups.
+      Guaranteed to be sequential and unique.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      Name of the stored procedure, function, or trigger. Must match the actual
+      database object name for proper tracking. Example: "calculate_order_total"
+      or "trigger_audit_log".
   - name: type
     type: enum
     enumOptions:
@@ -32,52 +47,96 @@ aggregateProperties:
       - PROCEDURE
       - TRIGGER
     nullable: false
+    description: >
+      Type of database object. FUNCTION: Returns a value and can be used in SELECT
+      statements. PROCEDURE: Executes actions without returning a value. TRIGGER:
+      Automatically fires on table events (INSERT/UPDATE/DELETE).
   - name: version
     type: varchar
     maxLength: 16
     nullable: false
     index: index
+    description: >
+      Semantic version number of the procedure. Format: MAJOR.MINOR.PATCH
+      (e.g., "1.0.0", "2.3.1"). Used to track changes and ensure correct
+      execution order.
   - name: isActive
     type: boolean
     nullable: false
     defaultValue: false
+    description: >
+      Indicates if this procedure version is currently active in the database.
+      Only one version per procedure name should be active.
   - name: isExecuted
     type: boolean
     nullable: false
     defaultValue: false
+    description: >
+      Indicates if the upScript has been executed against the database. Set
+      automatically by the run-scripts API endpoint.
   - name: isUpdated
     type: boolean
     nullable: false
     defaultValue: false
+    description: >
+      Indicates if the procedure was modified after initial execution. Detected
+      via hash comparison. Used to trigger re-deployment.
   - name: upScript
     type: text
     nullable: true
+    description: >
+      SQL script to create or update the stored procedure/function/trigger.
+      Contains the full CREATE OR REPLACE statement. Executed when deploying
+      the procedure.
   - name: downScript
     type: text
     nullable: true
+    description: >
+      SQL script to remove or revert the stored procedure/function/trigger.
+      Typically a DROP statement. Used for rollback scenarios.
   - name: sort
     type: smallint
     unsigned: true
     nullable: true
+    description: >
+      Execution order within the same version. Lower numbers execute first.
+      Used when multiple procedures have dependencies.
   - name: hash
     type: varchar
     maxLength: 64
     nullable: true
+    description: >
+      SHA-256 hash of the upScript content. Used to detect changes between local
+      script and deployed version. Triggers isUpdated flag when mismatch detected.
   - name: executedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the upScript was successfully executed. Automatically set
+      by the run-scripts endpoint.
   - name: checkedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of last hash verification against deployed database object.
+      Updated by check-script endpoint.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when this procedure record was created in the system.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when this procedure record was last modified. Automatically
+      updated on any field change.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. When set, the procedure is marked for removal but
+      kept for audit trail.
 additionalApis:
   - path: tools/procedure/up-script
     resolverType: mutation

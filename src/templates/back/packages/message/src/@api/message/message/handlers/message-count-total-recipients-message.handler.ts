@@ -4,21 +4,21 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageCountTotalRecipientsMessageHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        tenantRecipientIds: string[],
-        scopeRecipients: string[],
-        tagRecipients: string[],
-        accountRecipientIds: string[],
-        constraint?: QueryStatement,
-    ): Promise<number> {
-        return await countTotalRecipients({
-            queryBus: this.queryBus,
-            tenantRecipientIds,
-            scopeRecipients,
-            tagRecipients,
-            accountRecipientIds,
-        });
-    }
+  async main(
+    tenantRecipientIds: string[],
+    scopeRecipients: string[],
+    tagRecipients: string[],
+    accountRecipientIds: string[],
+    constraint?: QueryStatement,
+  ): Promise<number> {
+    return await countTotalRecipients({
+      queryBus: this.queryBus,
+      tenantRecipientIds,
+      scopeRecipients,
+      tagRecipients,
+      accountRecipientIds,
+    });
+  }
 }

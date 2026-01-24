@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission-role.aurora.yaml
+ */
 // export DTOs
 export { IamCreatePermissionRoleDto } from './dto/iam-create-permission-role.dto';
 export { IamPermissionRoleDto } from './dto/iam-permission-role.dto';
@@ -80,42 +84,42 @@ import { IamUpdatePermissionsRolesHandler } from './handlers/iam-update-permissi
 import { IamPermissionRoleSeeder } from './seeder/iam-permission-role.seeder';
 
 export const IamPermissionRoleApiControllers = [
-    IamCreatePermissionRoleController,
-    IamCreatePermissionsRolesController,
-    IamPaginatePermissionsRolesController,
-    IamGetPermissionsRolesController,
-    IamFindPermissionRoleByIdController,
-    IamFindPermissionRoleController,
-    IamUpdatePermissionRoleByIdController,
-    IamUpdatePermissionsRolesController,
-    IamDeletePermissionRoleByIdController,
-    IamDeletePermissionsRolesController,
+  IamCreatePermissionRoleController,
+  IamCreatePermissionsRolesController,
+  IamPaginatePermissionsRolesController,
+  IamGetPermissionsRolesController,
+  IamFindPermissionRoleByIdController,
+  IamFindPermissionRoleController,
+  IamUpdatePermissionRoleByIdController,
+  IamUpdatePermissionsRolesController,
+  IamDeletePermissionRoleByIdController,
+  IamDeletePermissionsRolesController,
 ];
 
 export const IamPermissionRoleApiResolvers = [
-    IamCreatePermissionRoleResolver,
-    IamCreatePermissionsRolesResolver,
-    IamPaginatePermissionsRolesResolver,
-    IamGetPermissionsRolesResolver,
-    IamFindPermissionRoleByIdResolver,
-    IamFindPermissionRoleResolver,
-    IamUpdatePermissionRoleByIdResolver,
-    IamUpdatePermissionsRolesResolver,
-    IamDeletePermissionRoleByIdResolver,
-    IamDeletePermissionsRolesResolver,
+  IamCreatePermissionRoleResolver,
+  IamCreatePermissionsRolesResolver,
+  IamPaginatePermissionsRolesResolver,
+  IamGetPermissionsRolesResolver,
+  IamFindPermissionRoleByIdResolver,
+  IamFindPermissionRoleResolver,
+  IamUpdatePermissionRoleByIdResolver,
+  IamUpdatePermissionsRolesResolver,
+  IamDeletePermissionRoleByIdResolver,
+  IamDeletePermissionsRolesResolver,
 ];
 
 export const IamPermissionRoleApiHandlers = [
-    IamCreatePermissionRoleHandler,
-    IamCreatePermissionsRolesHandler,
-    IamPaginatePermissionsRolesHandler,
-    IamGetPermissionsRolesHandler,
-    IamFindPermissionRoleByIdHandler,
-    IamFindPermissionRoleHandler,
-    IamUpdatePermissionRoleByIdHandler,
-    IamUpdatePermissionsRolesHandler,
-    IamDeletePermissionRoleByIdHandler,
-    IamDeletePermissionsRolesHandler,
+  IamCreatePermissionRoleHandler,
+  IamCreatePermissionsRolesHandler,
+  IamPaginatePermissionsRolesHandler,
+  IamGetPermissionsRolesHandler,
+  IamFindPermissionRoleByIdHandler,
+  IamFindPermissionRoleHandler,
+  IamUpdatePermissionRoleByIdHandler,
+  IamUpdatePermissionsRolesHandler,
+  IamDeletePermissionRoleByIdHandler,
+  IamDeletePermissionsRolesHandler,
 ];
 
 export const IamPermissionRoleApiServices = [IamPermissionRoleSeeder];

@@ -11,27 +11,27 @@ import { MessageFindCustomerMessageInboxHandler } from '../handlers/message-find
 @Controller('message/inbox/find-customer-message')
 @Auth()
 export class MessageFindCustomerMessageInboxController {
-    constructor(
-        private readonly handler: MessageFindCustomerMessageInboxHandler,
-    ) {}
+  constructor(
+    private readonly handler: MessageFindCustomerMessageInboxHandler,
+  ) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: [MessageInboxDto],
-    })
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Body('query') queryStatement?: QueryStatement,
-        @Body('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ) {
-        return await this.handler.main(
-            account,
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: [MessageInboxDto],
+  })
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Body('query') queryStatement?: QueryStatement,
+    @Body('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ) {
+    return await this.handler.main(
+      account,
+      queryStatement,
+      constraint,
+      timezone,
+    );
+  }
 }

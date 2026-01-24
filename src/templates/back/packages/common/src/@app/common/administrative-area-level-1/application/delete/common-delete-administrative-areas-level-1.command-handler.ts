@@ -3,19 +3,21 @@ import { CommonDeleteAdministrativeAreasLevel1Service } from '@app/common/admini
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonDeleteAdministrativeAreasLevel1Command)
-export class CommonDeleteAdministrativeAreasLevel1CommandHandler implements ICommandHandler<CommonDeleteAdministrativeAreasLevel1Command>
+export class CommonDeleteAdministrativeAreasLevel1CommandHandler
+  implements ICommandHandler<CommonDeleteAdministrativeAreasLevel1Command>
 {
-    constructor(
-        private readonly deleteAdministrativeAreasLevel1Service: CommonDeleteAdministrativeAreasLevel1Service,
-    ) {}
+  constructor(
+    private readonly deleteAdministrativeAreasLevel1Service: CommonDeleteAdministrativeAreasLevel1Service,
+  ) {}
 
-    async execute(command: CommonDeleteAdministrativeAreasLevel1Command): Promise<void>
-    {
-        // call to use case and implements ValueObjects
-        await this.deleteAdministrativeAreasLevel1Service.main(
-            command.queryStatement,
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(
+    command: CommonDeleteAdministrativeAreasLevel1Command,
+  ): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteAdministrativeAreasLevel1Service.main(
+      command.queryStatement,
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

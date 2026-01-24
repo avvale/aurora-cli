@@ -5,25 +5,23 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamPaginateRolesQuery)
 export class IamPaginateRolesQueryHandler
-    implements IQueryHandler<IamPaginateRolesQuery>
+  implements IQueryHandler<IamPaginateRolesQuery>
 {
-    private readonly mapper: IamRoleMapper = new IamRoleMapper();
+  private readonly mapper: IamRoleMapper = new IamRoleMapper();
 
-    constructor(
-        private readonly paginateRolesService: IamPaginateRolesService,
-    ) {}
+  constructor(private readonly paginateRolesService: IamPaginateRolesService) {}
 
-    async execute(query: IamPaginateRolesQuery): Promise<PaginationResponse> {
-        const { total, count, rows } = await this.paginateRolesService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
+  async execute(query: IamPaginateRolesQuery): Promise<PaginationResponse> {
+    const { total, count, rows } = await this.paginateRolesService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
 
-        return new PaginationResponse(
-            total,
-            count,
-            this.mapper.mapAggregatesToResponses(rows),
-        );
-    }
+    return new PaginationResponse(
+      total,
+      count,
+      this.mapper.mapAggregatesToResponses(rows),
+    );
+  }
 }

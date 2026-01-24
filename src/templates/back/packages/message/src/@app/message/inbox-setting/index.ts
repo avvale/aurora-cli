@@ -80,38 +80,38 @@ import { MessageUpdateInboxSettingByIdService } from './application/update/messa
 import { MessageUpdateInboxSettingsService } from './application/update/message-update-inbox-settings.service';
 
 export const MessageInboxSettingHandlers = [
-    // commands
-    MessageCreateInboxSettingCommandHandler,
-    MessageCreateInboxSettingsCommandHandler,
-    MessageUpdateInboxSettingByIdCommandHandler,
-    MessageUpdateInboxSettingsCommandHandler,
-    MessageDeleteInboxSettingByIdCommandHandler,
-    MessageDeleteInboxSettingsCommandHandler,
+  // commands
+  MessageCreateInboxSettingCommandHandler,
+  MessageCreateInboxSettingsCommandHandler,
+  MessageUpdateInboxSettingByIdCommandHandler,
+  MessageUpdateInboxSettingsCommandHandler,
+  MessageDeleteInboxSettingByIdCommandHandler,
+  MessageDeleteInboxSettingsCommandHandler,
 
-    // queries
-    MessagePaginateInboxSettingsQueryHandler,
-    MessageGetInboxSettingsQueryHandler,
-    MessageFindInboxSettingQueryHandler,
-    MessageFindInboxSettingByIdQueryHandler,
+  // queries
+  MessagePaginateInboxSettingsQueryHandler,
+  MessageGetInboxSettingsQueryHandler,
+  MessageFindInboxSettingQueryHandler,
+  MessageFindInboxSettingByIdQueryHandler,
 
-    // events
-    MessageCreatedInboxSettingEventHandler,
-    MessageCreatedInboxSettingsEventHandler,
-    MessageUpdatedInboxSettingEventHandler,
-    MessageUpdatedInboxSettingsEventHandler,
-    MessageDeletedInboxSettingEventHandler,
-    MessageDeletedInboxSettingsEventHandler,
+  // events
+  MessageCreatedInboxSettingEventHandler,
+  MessageCreatedInboxSettingsEventHandler,
+  MessageUpdatedInboxSettingEventHandler,
+  MessageUpdatedInboxSettingsEventHandler,
+  MessageDeletedInboxSettingEventHandler,
+  MessageDeletedInboxSettingsEventHandler,
 ];
 
 export const MessageInboxSettingServices = [
-    MessageCreateInboxSettingService,
-    MessageCreateInboxSettingsService,
-    MessagePaginateInboxSettingsService,
-    MessageGetInboxSettingsService,
-    MessageFindInboxSettingService,
-    MessageFindInboxSettingByIdService,
-    MessageUpdateInboxSettingByIdService,
-    MessageUpdateInboxSettingsService,
-    MessageDeleteInboxSettingByIdService,
-    MessageDeleteInboxSettingsService,
+  MessageCreateInboxSettingService,
+  MessageCreateInboxSettingsService,
+  MessagePaginateInboxSettingsService,
+  MessageGetInboxSettingsService,
+  MessageFindInboxSettingService,
+  MessageFindInboxSettingByIdService,
+  MessageUpdateInboxSettingByIdService,
+  MessageUpdateInboxSettingsService,
+  MessageDeleteInboxSettingByIdService,
+  MessageDeleteInboxSettingsService,
 ];

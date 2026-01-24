@@ -11,16 +11,26 @@ front:
   solidIcon: notification_multiple
   outlineFontSetIcon: material-symbols-outlined
   outlineIcon: notification_multiple
+description: >
+    Core module for the messaging system. Contains messages sent by administrators
+    to users through the inbox system. Supports draft, pending and sent states with
+    delivery tracking, recipient filtering by accounts, tenants, scopes and tags.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+        Unique identifier for the message. UUID v4 format, generated automatically
+        on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+        Sequential numeric identifier for ordering and efficient pagination. Auto-incremented.
+        Used for tracking last read messages and determining message chronology.
   - name: tenantIds
     type: array
     arrayOptions:
@@ -28,6 +38,10 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of tenant IDs to filter message visibility. If NULL, message is visible
+        to all tenants. Used to scope messages to specific organizational units.
+        GIN index for efficient array containment queries.
   - name: status
     type: enum
     enumOptions:
@@ -35,6 +49,10 @@ aggregateProperties:
       - PENDING
       - SENT
     nullable: false
+    description: >
+        Current status of the message. DRAFT: Being edited, not ready to send.
+        PENDING: Scheduled for delivery at sendAt timestamp. SENT: Delivered to recipients
+        and visible in their inboxes.
   - name: accountRecipientIds
     type: array
     arrayOptions:
@@ -42,6 +60,10 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of specific account IDs to receive this message. NULL means no specific
+        account targeting. Combined with other recipient filters (tenant, scope, tag)
+        to determine final recipient list. GIN index for fast lookups.
   - name: tenantRecipientIds
     type: array
     arrayOptions:
@@ -49,6 +71,10 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of tenant IDs whose users should receive this message. NULL means no
+        tenant-based targeting. All users within specified tenants become recipients.
+        GIN index for efficient filtering.
   - name: scopeRecipients
     type: array
     arrayOptions:
@@ -57,6 +83,10 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of scope identifiers (e.g., 'ADMIN', 'MANAGER', 'USER') for role-based
+        targeting. NULL means no scope filtering. Users matching any scope receive
+        the message. Max 64 characters per scope identifier.
   - name: tagRecipients
     type: array
     arrayOptions:
@@ -65,58 +95,120 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of custom tags for flexible recipient segmentation (e.g., 'premium-users',
+        'beta-testers'). NULL means no tag filtering. Users with any matching tag
+        receive the message. Max 64 characters per tag.
   - name: sendAt
     type: timestamp
     nullable: true
+    description: >
+        Scheduled delivery timestamp for the message. NULL means immediate delivery.
+        When status is PENDING, system checks this timestamp to determine when to
+        send. Cannot be in the past.
   - name: isImportant
     type: boolean
     nullable: false
+    description: >
+        Indicates if the message is marked as high priority. Important messages
+        appear prominently in user inboxes with visual indicators and may trigger
+        special notifications.
   - name: subject
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+        Message subject line displayed in inbox list view. Required field, max 255
+        characters. Should be concise and descriptive to help users identify message
+        purpose at a glance.
   - name: body
     type: text
     nullable: false
+    description: >
+        Full message content in text or HTML format. Required field with unlimited
+        length. Contains the main communication to recipients. May include formatting
+        and embedded links.
   - name: link
     type: varchar
     maxLength: 2046
     nullable: true
+    description: >
+        Optional URL for call-to-action or additional information. NULL if no link
+        attached. Max 2046 characters to support long URLs with query parameters.
+        Can be internal (app route) or external (web URL).
   - name: isInternalLink
     type: boolean
     nullable: true
+    description: >
+        Indicates if link points to internal application route (true) or external
+        URL (false). NULL when no link is set. Used to determine navigation behavior:
+        internal links use router, external links open in new tab.
   - name: image
     type: jsonb
     nullable: true
+    description: >
+        JSON object containing image metadata (URL, dimensions, alt text) for message
+        header or content. NULL if no image attached. Supports rich media messages
+        and visual communication.
   - name: icon
     type: varchar
     maxLength: 64
     nullable: true
+    description: >
+        Icon identifier (e.g., Material Icons name) to display with the message.
+        NULL if no icon specified. Max 64 characters. Provides visual categorization
+        and improves scannability in inbox.
   - name: attachments
     type: jsonb
     nullable: true
+    description: >
+        JSON array of attachment objects with file metadata (name, size, type, URL).
+        NULL if no attachments. Supports document sharing and file distribution
+        through messaging system.
   - name: totalRecipients
     type: int
     nullable: false
     unsigned: true
     defaultValue: 0
+    description: >
+        Total count of users who received this message. Calculated when message
+        is sent based on recipient filters. Defaults to 0. Used for analytics and
+        delivery tracking. Never negative.
   - name: reads
     type: int
     nullable: false
     unsigned: true
     defaultValue: 0
+    description: >
+        Count of unique users who have read this message. Incremented when a user
+        marks message as read. Defaults to 0. Used for engagement metrics and read
+        rate calculation. Never negative.
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+        Flexible JSON field for additional metadata not covered by schema. NULL if
+        no extra data. May include tracking info, A/B test variants, campaign IDs,
+        or custom business attributes.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp when the message record was created. Auto-set by Aurora auditing.
+        NULL only in edge cases. Used for sorting and filtering messages chronologically.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp of last modification to the message. Auto-updated by Aurora auditing.
+        NULL if never modified. Useful for tracking draft edits and change history.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+        Soft delete timestamp. NULL means active message. When set, message is hidden
+        from normal queries but preserved for audit trail. Supports data recovery
+        and compliance requirements.
 additionalApis:
   - path: message/message/remove-attachment
     resolverType: mutation

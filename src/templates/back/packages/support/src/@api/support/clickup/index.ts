@@ -38,21 +38,21 @@ import { SupportConfigService } from './shared/clickup-key-value.service';
 import { ClickupService } from './shared/clickup.service';
 
 export const SupportClickupApiControllers = [
-    ClickupSpaceController,
-    ClickupFolderController,
-    ClickupListController,
+  ClickupSpaceController,
+  ClickupFolderController,
+  ClickupListController,
 ];
 
 export const SupportClickupApiResolvers = [
-    ClickupSpaceResolver,
-    ClickupFolderResolver,
-    ClickupListResolver,
+  ClickupSpaceResolver,
+  ClickupFolderResolver,
+  ClickupListResolver,
 ];
 
 export const SupportClickupApiHandlers = [
-    ClickupSpaceHandler,
-    ClickupFolderHandler,
-    ClickupListHandler,
+  ClickupSpaceHandler,
+  ClickupFolderHandler,
+  ClickupListHandler,
 ];
 
 export const SupportClickupApiServices = [SupportConfigService, ClickupService];

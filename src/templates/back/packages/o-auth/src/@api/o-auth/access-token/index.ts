@@ -55,30 +55,30 @@ import { OAuthPaginateAccessTokensHandler } from './handlers/o-auth-paginate-acc
 // import seeder
 
 export const OAuthAccessTokenApiControllers = [
-    OAuthPaginateAccessTokensController,
-    OAuthGetAccessTokensController,
-    OAuthFindAccessTokenByIdController,
-    OAuthFindAccessTokenController,
-    OAuthDeleteAccessTokenByIdController,
-    OAuthDeleteAccessTokensController,
+  OAuthPaginateAccessTokensController,
+  OAuthGetAccessTokensController,
+  OAuthFindAccessTokenByIdController,
+  OAuthFindAccessTokenController,
+  OAuthDeleteAccessTokenByIdController,
+  OAuthDeleteAccessTokensController,
 ];
 
 export const OAuthAccessTokenApiResolvers = [
-    OAuthPaginateAccessTokensResolver,
-    OAuthGetAccessTokensResolver,
-    OAuthFindAccessTokenByIdResolver,
-    OAuthFindAccessTokenResolver,
-    OAuthDeleteAccessTokenByIdResolver,
-    OAuthDeleteAccessTokensResolver,
+  OAuthPaginateAccessTokensResolver,
+  OAuthGetAccessTokensResolver,
+  OAuthFindAccessTokenByIdResolver,
+  OAuthFindAccessTokenResolver,
+  OAuthDeleteAccessTokenByIdResolver,
+  OAuthDeleteAccessTokensResolver,
 ];
 
 export const OAuthAccessTokenApiHandlers = [
-    OAuthPaginateAccessTokensHandler,
-    OAuthGetAccessTokensHandler,
-    OAuthFindAccessTokenByIdHandler,
-    OAuthFindAccessTokenHandler,
-    OAuthDeleteAccessTokenByIdHandler,
-    OAuthDeleteAccessTokensHandler,
+  OAuthPaginateAccessTokensHandler,
+  OAuthGetAccessTokensHandler,
+  OAuthFindAccessTokenByIdHandler,
+  OAuthFindAccessTokenHandler,
+  OAuthDeleteAccessTokenByIdHandler,
+  OAuthDeleteAccessTokensHandler,
 ];
 
 export const OAuthAccessTokenApiServices = [];

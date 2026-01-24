@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(QueueManagerUpdatedJobRegistryEvent)
 export class QueueManagerUpdatedJobRegistryEventHandler
-    implements IEventHandler<QueueManagerUpdatedJobRegistryEvent>
+  implements IEventHandler<QueueManagerUpdatedJobRegistryEvent>
 {
-    handle(event: QueueManagerUpdatedJobRegistryEvent): void {
-        // console.log('UpdatedJobRegistryEvent: ', event);
-    }
+  handle(event: QueueManagerUpdatedJobRegistryEvent): void {
+    // console.log('UpdatedJobRegistryEvent: ', event);
+  }
 }

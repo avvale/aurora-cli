@@ -6,23 +6,17 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.administrativeAreaLevel1.create')
-export class CommonCreateAdministrativeAreasLevel1Resolver
-{
-    constructor(
-        private readonly handler: CommonCreateAdministrativeAreasLevel1Handler,
-    ) {}
+export class CommonCreateAdministrativeAreasLevel1Resolver {
+  constructor(
+    private readonly handler: CommonCreateAdministrativeAreasLevel1Handler,
+  ) {}
 
-    @Mutation('commonCreateAdministrativeAreasLevel1')
-    async main(
-        @Args('payload') payload: CommonCreateAdministrativeAreaLevel1Input[],
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
-    }
+  @Mutation('commonCreateAdministrativeAreasLevel1')
+  async main(
+    @Args('payload') payload: CommonCreateAdministrativeAreaLevel1Input[],
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

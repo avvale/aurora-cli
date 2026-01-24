@@ -3,19 +3,17 @@ import { WhatsappMinMessageService } from '@app/whatsapp/message/application/min
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(WhatsappMinMessageQuery)
-export class WhatsappMinMessageQueryHandler implements IQueryHandler<WhatsappMinMessageQuery>
+export class WhatsappMinMessageQueryHandler
+  implements IQueryHandler<WhatsappMinMessageQuery>
 {
-    constructor(
-        private readonly minMessageService: WhatsappMinMessageService,
-    ) {}
+  constructor(private readonly minMessageService: WhatsappMinMessageService) {}
 
-    async execute(query: WhatsappMinMessageQuery): Promise<number>
-    {
-        return await this.minMessageService.main(
-            query.column,
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: WhatsappMinMessageQuery): Promise<number> {
+    return await this.minMessageService.main(
+      query.column,
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

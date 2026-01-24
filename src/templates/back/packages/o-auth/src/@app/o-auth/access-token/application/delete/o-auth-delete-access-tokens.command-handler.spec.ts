@@ -4,39 +4,37 @@ import { OAuthDeleteAccessTokensService } from '@app/o-auth/access-token/applica
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteAccessTokensCommandHandler', () => {
-    let commandHandler: OAuthDeleteAccessTokensCommandHandler;
+  let commandHandler: OAuthDeleteAccessTokensCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                OAuthDeleteAccessTokensCommandHandler,
-                {
-                    provide: OAuthDeleteAccessTokensService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        OAuthDeleteAccessTokensCommandHandler,
+        {
+          provide: OAuthDeleteAccessTokensService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<OAuthDeleteAccessTokensCommandHandler>(
-            OAuthDeleteAccessTokensCommandHandler,
-        );
+    commandHandler = module.get<OAuthDeleteAccessTokensCommandHandler>(
+      OAuthDeleteAccessTokensCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('OAuthDeleteAccessTokensCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('OAuthDeleteAccessTokensCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(
-                    new OAuthDeleteAccessTokensCommand(),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(new OAuthDeleteAccessTokensCommand()),
+      ).toBe(undefined);
     });
+  });
 });

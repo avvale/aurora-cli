@@ -4,113 +4,113 @@ import { DataTypes } from 'sequelize';
 import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table({
-    modelName: 'ToolsMigration',
-    freezeTableName: true,
-    timestamps: false,
-    indexes: [
-        {
-            fields: ['rowId'],
-            unique: true,
-        },
-        {
-            fields: ['version'],
-            unique: false,
-        },
-    ],
+  modelName: 'ToolsMigration',
+  freezeTableName: true,
+  timestamps: false,
+  indexes: [
+    {
+      fields: ['rowId'],
+      unique: true,
+    },
+    {
+      fields: ['version'],
+      unique: false,
+    },
+  ],
 })
 export class ToolsMigrationModel extends Model<ToolsMigrationModel> {
-    @Column({
-        field: 'id',
-        primaryKey: true,
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    id: string;
+  @Column({
+    field: 'id',
+    primaryKey: true,
+    allowNull: false,
+    type: DataTypes.UUID,
+  })
+  id: string;
 
-    @Column({
-        field: 'rowId',
-        autoIncrement: true,
-        allowNull: false,
-        type: DataTypes.BIGINT,
-    })
-    rowId: number;
+  @Column({
+    field: 'rowId',
+    autoIncrement: true,
+    allowNull: false,
+    type: DataTypes.BIGINT,
+  })
+  rowId: number;
 
-    @Column({
-        field: 'name',
-        allowNull: false,
-        type: DataTypes.STRING(128),
-    })
-    name: string;
+  @Column({
+    field: 'name',
+    allowNull: false,
+    type: DataTypes.STRING(128),
+  })
+  name: string;
 
-    @Column({
-        field: 'version',
-        allowNull: false,
-        type: DataTypes.STRING(16),
-    })
-    version: string;
+  @Column({
+    field: 'version',
+    allowNull: false,
+    type: DataTypes.STRING(16),
+  })
+  version: string;
 
-    @Column({
-        field: 'isActive',
-        allowNull: false,
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-    })
-    isActive: boolean;
+  @Column({
+    field: 'isActive',
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  })
+  isActive: boolean;
 
-    @Column({
-        field: 'isExecuted',
-        allowNull: false,
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-    })
-    isExecuted: boolean;
+  @Column({
+    field: 'isExecuted',
+    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  })
+  isExecuted: boolean;
 
-    @Column({
-        field: 'upScript',
-        allowNull: true,
-        type: DataTypes.TEXT,
-    })
-    upScript: string;
+  @Column({
+    field: 'upScript',
+    allowNull: true,
+    type: DataTypes.TEXT,
+  })
+  upScript: string;
 
-    @Column({
-        field: 'downScript',
-        allowNull: true,
-        type: DataTypes.TEXT,
-    })
-    downScript: string;
+  @Column({
+    field: 'downScript',
+    allowNull: true,
+    type: DataTypes.TEXT,
+  })
+  downScript: string;
 
-    @Column({
-        field: 'sort',
-        allowNull: true,
-        type: DataTypes.SMALLINT,
-    })
-    sort: number;
+  @Column({
+    field: 'sort',
+    allowNull: true,
+    type: DataTypes.SMALLINT,
+  })
+  sort: number;
 
-    @Column({
-        field: 'executedAt',
-        allowNull: true,
-        type: DataTypes.DATE,
-    })
-    executedAt: string;
+  @Column({
+    field: 'executedAt',
+    allowNull: true,
+    type: DataTypes.DATE,
+  })
+  executedAt: string;
 
-    @Column({
-        field: 'createdAt',
-        allowNull: true,
-        type: DataTypes.DATE,
-    })
-    createdAt: string;
+  @Column({
+    field: 'createdAt',
+    allowNull: true,
+    type: DataTypes.DATE,
+  })
+  createdAt: string;
 
-    @Column({
-        field: 'updatedAt',
-        allowNull: true,
-        type: DataTypes.DATE,
-    })
-    updatedAt: string;
+  @Column({
+    field: 'updatedAt',
+    allowNull: true,
+    type: DataTypes.DATE,
+  })
+  updatedAt: string;
 
-    @Column({
-        field: 'deletedAt',
-        allowNull: true,
-        type: DataTypes.DATE,
-    })
-    deletedAt: string;
+  @Column({
+    field: 'deletedAt',
+    allowNull: true,
+    type: DataTypes.DATE,
+  })
+  deletedAt: string;
 }

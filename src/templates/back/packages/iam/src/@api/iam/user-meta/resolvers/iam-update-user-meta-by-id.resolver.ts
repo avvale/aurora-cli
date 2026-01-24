@@ -1,31 +1,23 @@
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { CurrentAccount, Timezone } from '@aurorajs.dev/core';
 import { Auth } from '@aurora/decorators';
+import { CurrentAccount, Timezone } from '@aurorajs.dev/core';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 // @app
-import { IamUpdateUserMetaByIdHandler } from '../handlers/iam-update-user-meta-by-id.handler';
-import { IamUserMeta, IamUpdateUserMetaByIdInput } from '@api/graphql';
+import { IamUpdateUserMetaByIdInput, IamUserMeta } from '@api/graphql';
 import { IamAccountResponse } from '@app/iam/account/domain/iam-account.response';
+import { IamUpdateUserMetaByIdHandler } from '../handlers/iam-update-user-meta-by-id.handler';
 
 @Resolver()
 @Auth('iam.userData.update')
-export class IamUpdateUserMetaByIdResolver
-{
-    constructor(
-        private readonly handler: IamUpdateUserMetaByIdHandler,
-    ) {}
+export class IamUpdateUserMetaByIdResolver {
+  constructor(private readonly handler: IamUpdateUserMetaByIdHandler) {}
 
-    @Mutation('iamUpdateUserMetaById')
-    async main(
-        @Args('payload') payload: IamUpdateUserMetaByIdInput,
-        @CurrentAccount() account: IamAccountResponse,
-        @Timezone() timezone?: string,
-    ): Promise<IamUserMeta>
-    {
-        return await this.handler.main(
-            payload,
-            account,
-            timezone,
-        );
-    }
+  @Mutation('iamUpdateUserMetaById')
+  async main(
+    @Args('payload') payload: IamUpdateUserMetaByIdInput,
+    @CurrentAccount() account: IamAccountResponse,
+    @Timezone() timezone?: string,
+  ): Promise<IamUserMeta> {
+    return await this.handler.main(payload, account, timezone);
+  }
 }

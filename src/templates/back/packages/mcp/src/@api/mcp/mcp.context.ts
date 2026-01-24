@@ -2,9 +2,8 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 
 export type McpReqCtx = {
-    sessionId?: string;
+  sessionId?: string;
 };
 
 export const mcpAls = new AsyncLocalStorage<McpReqCtx>();
 export const getMcpCtx = () => mcpAls.getStore() ?? {};
-

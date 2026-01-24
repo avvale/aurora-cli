@@ -90,48 +90,48 @@ import { IamUpdateUserByIdService } from './application/update/iam-update-user-b
 import { IamUpdateUsersService } from './application/update/iam-update-users.service';
 
 export const IamUserHandlers = [
-    /* #region customizations */
-    IamFindUserByUsernamePasswordQueryHandler,
-    /* #endregion customizations */
+  /* #region customizations */
+  IamFindUserByUsernamePasswordQueryHandler,
+  /* #endregion customizations */
 
-    // commands
-    IamCreateUserCommandHandler,
-    IamCreateUsersCommandHandler,
-    IamUpdateUserByIdCommandHandler,
-    IamUpdateUsersCommandHandler,
-    IamDeleteUserByIdCommandHandler,
-    IamDeleteUsersCommandHandler,
+  // commands
+  IamCreateUserCommandHandler,
+  IamCreateUsersCommandHandler,
+  IamUpdateUserByIdCommandHandler,
+  IamUpdateUsersCommandHandler,
+  IamDeleteUserByIdCommandHandler,
+  IamDeleteUsersCommandHandler,
 
-    // queries
-    IamPaginateUsersQueryHandler,
-    IamGetUsersQueryHandler,
-    IamFindUserQueryHandler,
-    IamFindUserByIdQueryHandler,
-    IamCountUserQueryHandler,
+  // queries
+  IamPaginateUsersQueryHandler,
+  IamGetUsersQueryHandler,
+  IamFindUserQueryHandler,
+  IamFindUserByIdQueryHandler,
+  IamCountUserQueryHandler,
 
-    // events
-    IamCreatedUserEventHandler,
-    IamCreatedUsersEventHandler,
-    IamUpdatedUserEventHandler,
-    IamUpdatedUsersEventHandler,
-    IamDeletedUserEventHandler,
-    IamDeletedUsersEventHandler,
+  // events
+  IamCreatedUserEventHandler,
+  IamCreatedUsersEventHandler,
+  IamUpdatedUserEventHandler,
+  IamUpdatedUsersEventHandler,
+  IamDeletedUserEventHandler,
+  IamDeletedUsersEventHandler,
 ];
 
 export const IamUserServices = [
-    /* #region customizations */
-    IamFindUserByUsernamePasswordService,
-    /* #endregion customizations */
+  /* #region customizations */
+  IamFindUserByUsernamePasswordService,
+  /* #endregion customizations */
 
-    IamCreateUserService,
-    IamCreateUsersService,
-    IamPaginateUsersService,
-    IamGetUsersService,
-    IamFindUserService,
-    IamFindUserByIdService,
-    IamCountUserService,
-    IamUpdateUserByIdService,
-    IamUpdateUsersService,
-    IamDeleteUserByIdService,
-    IamDeleteUsersService,
+  IamCreateUserService,
+  IamCreateUsersService,
+  IamPaginateUsersService,
+  IamGetUsersService,
+  IamFindUserService,
+  IamFindUserByIdService,
+  IamCountUserService,
+  IamUpdateUserByIdService,
+  IamUpdateUsersService,
+  IamDeleteUserByIdService,
+  IamDeleteUsersService,
 ];

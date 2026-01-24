@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(MessageDeletedInboxSettingsEvent)
 export class MessageDeletedInboxSettingsEventHandler
-    implements IEventHandler<MessageDeletedInboxSettingsEvent>
+  implements IEventHandler<MessageDeletedInboxSettingsEvent>
 {
-    handle(event: MessageDeletedInboxSettingsEvent): void {
-        // console.log('DeletedInboxSettingsEvent: ', event);
-    }
+  handle(event: MessageDeletedInboxSettingsEvent): void {
+    // console.log('DeletedInboxSettingsEvent: ', event);
+  }
 }

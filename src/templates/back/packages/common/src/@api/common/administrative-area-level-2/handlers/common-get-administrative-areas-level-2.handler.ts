@@ -5,24 +5,20 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class CommonGetAdministrativeAreasLevel2Handler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class CommonGetAdministrativeAreasLevel2Handler {
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<CommonAdministrativeAreaLevel2[] | CommonAdministrativeAreaLevel2Dto[]>
-    {
-        return await this.queryBus.ask(new CommonGetAdministrativeAreasLevel2Query(
-            queryStatement,
-            constraint,
-            {
-                timezone,
-            },
-        ));
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<
+    CommonAdministrativeAreaLevel2[] | CommonAdministrativeAreaLevel2Dto[]
+  > {
+    return await this.queryBus.ask(
+      new CommonGetAdministrativeAreasLevel2Query(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

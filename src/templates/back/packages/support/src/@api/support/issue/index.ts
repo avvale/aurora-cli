@@ -84,48 +84,48 @@ import { SupportCreateWebhookConfigResolver } from './resolvers/support-create-w
 import { SupportDeleteWebhookConfigResolver } from './resolvers/support-delete-webhook-config.resolver';
 
 export const SupportIssueApiControllers = [
-    SupportCreateIssueController,
-    SupportPaginateIssuesController,
-    SupportGetIssuesController,
-    SupportFindIssueByIdController,
-    SupportFindIssueController,
-    SupportUpdateIssueByIdController,
-    SupportUpdateIssuesController,
-    SupportDeleteIssueByIdController,
+  SupportCreateIssueController,
+  SupportPaginateIssuesController,
+  SupportGetIssuesController,
+  SupportFindIssueByIdController,
+  SupportFindIssueController,
+  SupportUpdateIssueByIdController,
+  SupportUpdateIssuesController,
+  SupportDeleteIssueByIdController,
 
-    // additionalApis
-    SupportCreateWebhookConfigController,
-    SupportDeleteWebhookConfigController,
+  // additionalApis
+  SupportCreateWebhookConfigController,
+  SupportDeleteWebhookConfigController,
 ];
 
 export const SupportIssueApiResolvers = [
-    SupportCreateIssueResolver,
-    SupportPaginateIssuesResolver,
-    SupportGetIssuesResolver,
-    SupportFindIssueByIdResolver,
-    SupportFindIssueResolver,
-    SupportUpdateIssueByIdResolver,
-    SupportUpdateIssuesResolver,
-    SupportDeleteIssueByIdResolver,
+  SupportCreateIssueResolver,
+  SupportPaginateIssuesResolver,
+  SupportGetIssuesResolver,
+  SupportFindIssueByIdResolver,
+  SupportFindIssueResolver,
+  SupportUpdateIssueByIdResolver,
+  SupportUpdateIssuesResolver,
+  SupportDeleteIssueByIdResolver,
 
-    // additionalApis
-    SupportCreateWebhookConfigResolver,
-    SupportDeleteWebhookConfigResolver,
+  // additionalApis
+  SupportCreateWebhookConfigResolver,
+  SupportDeleteWebhookConfigResolver,
 ];
 
 export const SupportIssueApiHandlers = [
-    SupportCreateIssueHandler,
-    SupportPaginateIssuesHandler,
-    SupportGetIssuesHandler,
-    SupportFindIssueByIdHandler,
-    SupportFindIssueHandler,
-    SupportUpdateIssueByIdHandler,
-    SupportUpdateIssuesHandler,
-    SupportDeleteIssueByIdHandler,
+  SupportCreateIssueHandler,
+  SupportPaginateIssuesHandler,
+  SupportGetIssuesHandler,
+  SupportFindIssueByIdHandler,
+  SupportFindIssueHandler,
+  SupportUpdateIssueByIdHandler,
+  SupportUpdateIssuesHandler,
+  SupportDeleteIssueByIdHandler,
 
-    // additionalApis
-    SupportCreateWebhookConfigHandler,
-    SupportDeleteWebhookConfigHandler,
+  // additionalApis
+  SupportCreateWebhookConfigHandler,
+  SupportDeleteWebhookConfigHandler,
 ];
 
 export const SupportIssueApiServices = [SupportIssueSeeder];

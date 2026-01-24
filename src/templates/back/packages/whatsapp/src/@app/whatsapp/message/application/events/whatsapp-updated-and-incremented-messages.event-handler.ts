@@ -2,10 +2,10 @@ import { WhatsappUpdatedAndIncrementedMessagesEvent } from '@app/whatsapp/messag
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(WhatsappUpdatedAndIncrementedMessagesEvent)
-export class WhatsappUpdatedAndIncrementedMessagesEventHandler implements IEventHandler<WhatsappUpdatedAndIncrementedMessagesEvent>
+export class WhatsappUpdatedAndIncrementedMessagesEventHandler
+  implements IEventHandler<WhatsappUpdatedAndIncrementedMessagesEvent>
 {
-    handle(event: WhatsappUpdatedAndIncrementedMessagesEvent): void
-    {
-        // console.log('WhatsappUpdatedAndIncrementedMessagesEvent: ', event);
-    }
+  handle(event: WhatsappUpdatedAndIncrementedMessagesEvent): void {
+    // console.log('WhatsappUpdatedAndIncrementedMessagesEvent: ', event);
+  }
 }

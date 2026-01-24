@@ -1,30 +1,30 @@
 import {
-    AuditingISideEffectRepository,
-    AuditingSideEffect,
+  AuditingISideEffectRepository,
+  AuditingSideEffect,
 } from '@app/auditing/side-effect';
 import {
-    AuditingSideEffectAccountId,
-    AuditingSideEffectAuditableId,
-    AuditingSideEffectBaseUrl,
-    AuditingSideEffectBody,
-    AuditingSideEffectEmail,
-    AuditingSideEffectEvent,
-    AuditingSideEffectId,
-    AuditingSideEffectIp,
-    AuditingSideEffectIsRollback,
-    AuditingSideEffectMethod,
-    AuditingSideEffectModelName,
-    AuditingSideEffectModelPath,
-    AuditingSideEffectNewValue,
-    AuditingSideEffectOldValue,
-    AuditingSideEffectOperationId,
-    AuditingSideEffectOperationSort,
-    AuditingSideEffectParams,
-    AuditingSideEffectQuery,
-    AuditingSideEffectRollbackSideEffectId,
-    AuditingSideEffectTags,
-    AuditingSideEffectUpdatedAt,
-    AuditingSideEffectUserAgent,
+  AuditingSideEffectAccountId,
+  AuditingSideEffectAuditableId,
+  AuditingSideEffectBaseUrl,
+  AuditingSideEffectBody,
+  AuditingSideEffectEmail,
+  AuditingSideEffectEvent,
+  AuditingSideEffectId,
+  AuditingSideEffectIp,
+  AuditingSideEffectIsRollback,
+  AuditingSideEffectMethod,
+  AuditingSideEffectModelName,
+  AuditingSideEffectModelPath,
+  AuditingSideEffectNewValue,
+  AuditingSideEffectOldValue,
+  AuditingSideEffectOperationId,
+  AuditingSideEffectOperationSort,
+  AuditingSideEffectParams,
+  AuditingSideEffectQuery,
+  AuditingSideEffectRollbackSideEffectId,
+  AuditingSideEffectTags,
+  AuditingSideEffectUpdatedAt,
+  AuditingSideEffectUserAgent,
 } from '@app/auditing/side-effect/domain/value-objects';
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -32,82 +32,81 @@ import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
 export class AuditingUpdateSideEffectByIdService {
-    constructor(
-        private readonly publisher: EventPublisher,
-        private readonly repository: AuditingISideEffectRepository,
-    ) {}
+  constructor(
+    private readonly publisher: EventPublisher,
+    private readonly repository: AuditingISideEffectRepository,
+  ) {}
 
-    async main(
-        payload: {
-            id: AuditingSideEffectId;
-            tags?: AuditingSideEffectTags;
-            modelPath?: AuditingSideEffectModelPath;
-            modelName?: AuditingSideEffectModelName;
-            operationId?: AuditingSideEffectOperationId;
-            operationSort?: AuditingSideEffectOperationSort;
-            accountId?: AuditingSideEffectAccountId;
-            email?: AuditingSideEffectEmail;
-            event?: AuditingSideEffectEvent;
-            auditableId?: AuditingSideEffectAuditableId;
-            oldValue?: AuditingSideEffectOldValue;
-            newValue?: AuditingSideEffectNewValue;
-            ip?: AuditingSideEffectIp;
-            method?: AuditingSideEffectMethod;
-            baseUrl?: AuditingSideEffectBaseUrl;
-            params?: AuditingSideEffectParams;
-            query?: AuditingSideEffectQuery;
-            body?: AuditingSideEffectBody;
-            userAgent?: AuditingSideEffectUserAgent;
-            isRollback?: AuditingSideEffectIsRollback;
-            rollbackSideEffectId?: AuditingSideEffectRollbackSideEffectId;
-        },
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<void> {
-        // create aggregate with factory pattern
-        const sideEffect = AuditingSideEffect.register(
-            payload.id,
-            undefined, // rowId
-            payload.tags,
-            payload.modelPath,
-            payload.modelName,
-            payload.operationId,
-            payload.operationSort,
-            payload.accountId,
-            payload.email,
-            payload.event,
-            payload.auditableId,
-            payload.oldValue,
-            payload.newValue,
-            payload.ip,
-            payload.method,
-            payload.baseUrl,
-            payload.params,
-            payload.query,
-            payload.body,
-            payload.userAgent,
-            payload.isRollback,
-            payload.rollbackSideEffectId,
-            null, // createdAt
-            new AuditingSideEffectUpdatedAt({ currentTimestamp: true }),
-            null, // deletedAt
-        );
+  async main(
+    payload: {
+      id: AuditingSideEffectId;
+      tags?: AuditingSideEffectTags;
+      modelPath?: AuditingSideEffectModelPath;
+      modelName?: AuditingSideEffectModelName;
+      operationId?: AuditingSideEffectOperationId;
+      operationSort?: AuditingSideEffectOperationSort;
+      accountId?: AuditingSideEffectAccountId;
+      email?: AuditingSideEffectEmail;
+      event?: AuditingSideEffectEvent;
+      auditableId?: AuditingSideEffectAuditableId;
+      oldValue?: AuditingSideEffectOldValue;
+      newValue?: AuditingSideEffectNewValue;
+      ip?: AuditingSideEffectIp;
+      method?: AuditingSideEffectMethod;
+      baseUrl?: AuditingSideEffectBaseUrl;
+      params?: AuditingSideEffectParams;
+      query?: AuditingSideEffectQuery;
+      body?: AuditingSideEffectBody;
+      userAgent?: AuditingSideEffectUserAgent;
+      isRollback?: AuditingSideEffectIsRollback;
+      rollbackSideEffectId?: AuditingSideEffectRollbackSideEffectId;
+    },
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<void> {
+    // create aggregate with factory pattern
+    const sideEffect = AuditingSideEffect.register(
+      payload.id,
+      undefined, // rowId
+      payload.tags,
+      payload.modelPath,
+      payload.modelName,
+      payload.operationId,
+      payload.operationSort,
+      payload.accountId,
+      payload.email,
+      payload.event,
+      payload.auditableId,
+      payload.oldValue,
+      payload.newValue,
+      payload.ip,
+      payload.method,
+      payload.baseUrl,
+      payload.params,
+      payload.query,
+      payload.body,
+      payload.userAgent,
+      payload.isRollback,
+      payload.rollbackSideEffectId,
+      null, // createdAt
+      new AuditingSideEffectUpdatedAt({ currentTimestamp: true }),
+      null, // deletedAt
+    );
 
-        // update by id
-        await this.repository.updateById(sideEffect, {
-            constraint,
-            cQMetadata,
-            updateByIdOptions: cQMetadata?.repositoryOptions,
-        });
+    // update by id
+    await this.repository.updateById(sideEffect, {
+      constraint,
+      cQMetadata,
+      updateByIdOptions: cQMetadata?.repositoryOptions,
+    });
 
-        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const sideEffectRegister =
-            this.publisher.mergeObjectContext(sideEffect);
+    // merge EventBus methods with object returned by the repository, to be able to apply and commit events
+    const sideEffectRegister = this.publisher.mergeObjectContext(sideEffect);
 
-        sideEffectRegister.updated({
-            payload: sideEffect,
-            cQMetadata,
-        }); // apply event to model events
-        sideEffectRegister.commit(); // commit all events of model
-    }
+    sideEffectRegister.updated({
+      payload: sideEffect,
+      cQMetadata,
+    }); // apply event to model events
+    sideEffectRegister.commit(); // commit all events of model
+  }
 }

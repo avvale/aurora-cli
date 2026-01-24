@@ -4,40 +4,40 @@ import { MessageDraftMessageMessageHandler } from '../handlers/message-draft-mes
 import { MessageDraftMessageMessageResolver } from './message-draft-message-message.resolver';
 
 describe('MessageDraftMessageMessageResolver', () => {
-    let resolver: MessageDraftMessageMessageResolver;
-    let handler: MessageDraftMessageMessageHandler;
+  let resolver: MessageDraftMessageMessageResolver;
+  let handler: MessageDraftMessageMessageHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                MessageDraftMessageMessageResolver,
-                {
-                    provide: MessageDraftMessageMessageHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        MessageDraftMessageMessageResolver,
+        {
+          provide: MessageDraftMessageMessageHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<MessageDraftMessageMessageResolver>(
-            MessageDraftMessageMessageResolver,
-        );
-        handler = module.get<MessageDraftMessageMessageHandler>(
-            MessageDraftMessageMessageHandler,
-        );
-    });
+    resolver = module.get<MessageDraftMessageMessageResolver>(
+      MessageDraftMessageMessageResolver,
+    );
+    handler = module.get<MessageDraftMessageMessageHandler>(
+      MessageDraftMessageMessageHandler,
+    );
+  });
 
+  test('MessageDraftMessageMessageResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('MessageDraftMessageMessageResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
-
-    describe('main', () => {
-        test('MessageDraftMessageMessageResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-    });
+  });
 });

@@ -108,60 +108,60 @@ import { MessageRemoveAttachmentMessageResolver } from './resolvers/message-remo
 import { MessageSendMessageMessageResolver } from './resolvers/message-send-message-message.resolver';
 
 export const MessageMessageApiControllers = [
-    MessageCreateMessageController,
-    MessageCreateMessagesController,
-    MessagePaginateMessagesController,
-    MessageGetMessagesController,
-    MessageFindMessageByIdController,
-    MessageFindMessageController,
-    MessageUpdateMessageByIdController,
-    MessageUpdateMessagesController,
-    MessageDeleteMessageByIdController,
-    MessageDeleteMessagesController,
+  MessageCreateMessageController,
+  MessageCreateMessagesController,
+  MessagePaginateMessagesController,
+  MessageGetMessagesController,
+  MessageFindMessageByIdController,
+  MessageFindMessageController,
+  MessageUpdateMessageByIdController,
+  MessageUpdateMessagesController,
+  MessageDeleteMessageByIdController,
+  MessageDeleteMessagesController,
 
-    // additionalApis
-    MessageRemoveAttachmentMessageController,
-    MessageCountTotalRecipientsMessageController,
-    MessageSendMessageMessageController,
-    MessageDraftMessageMessageController,
+  // additionalApis
+  MessageRemoveAttachmentMessageController,
+  MessageCountTotalRecipientsMessageController,
+  MessageSendMessageMessageController,
+  MessageDraftMessageMessageController,
 ];
 
 export const MessageMessageApiResolvers = [
-    MessageCreateMessageResolver,
-    MessageCreateMessagesResolver,
-    MessagePaginateMessagesResolver,
-    MessageGetMessagesResolver,
-    MessageFindMessageByIdResolver,
-    MessageFindMessageResolver,
-    MessageUpdateMessageByIdResolver,
-    MessageUpdateMessagesResolver,
-    MessageDeleteMessageByIdResolver,
-    MessageDeleteMessagesResolver,
+  MessageCreateMessageResolver,
+  MessageCreateMessagesResolver,
+  MessagePaginateMessagesResolver,
+  MessageGetMessagesResolver,
+  MessageFindMessageByIdResolver,
+  MessageFindMessageResolver,
+  MessageUpdateMessageByIdResolver,
+  MessageUpdateMessagesResolver,
+  MessageDeleteMessageByIdResolver,
+  MessageDeleteMessagesResolver,
 
-    // additionalApis
-    MessageRemoveAttachmentMessageResolver,
-    MessageCountTotalRecipientsMessageResolver,
-    MessageSendMessageMessageResolver,
-    MessageDraftMessageMessageResolver,
+  // additionalApis
+  MessageRemoveAttachmentMessageResolver,
+  MessageCountTotalRecipientsMessageResolver,
+  MessageSendMessageMessageResolver,
+  MessageDraftMessageMessageResolver,
 ];
 
 export const MessageMessageApiHandlers = [
-    MessageCreateMessageHandler,
-    MessageCreateMessagesHandler,
-    MessagePaginateMessagesHandler,
-    MessageGetMessagesHandler,
-    MessageFindMessageByIdHandler,
-    MessageFindMessageHandler,
-    MessageUpdateMessageByIdHandler,
-    MessageUpdateMessagesHandler,
-    MessageDeleteMessageByIdHandler,
-    MessageDeleteMessagesHandler,
+  MessageCreateMessageHandler,
+  MessageCreateMessagesHandler,
+  MessagePaginateMessagesHandler,
+  MessageGetMessagesHandler,
+  MessageFindMessageByIdHandler,
+  MessageFindMessageHandler,
+  MessageUpdateMessageByIdHandler,
+  MessageUpdateMessagesHandler,
+  MessageDeleteMessageByIdHandler,
+  MessageDeleteMessagesHandler,
 
-    // additionalApis
-    MessageRemoveAttachmentMessageHandler,
-    MessageCountTotalRecipientsMessageHandler,
-    MessageSendMessageMessageHandler,
-    MessageDraftMessageMessageHandler,
+  // additionalApis
+  MessageRemoveAttachmentMessageHandler,
+  MessageCountTotalRecipientsMessageHandler,
+  MessageSendMessageMessageHandler,
+  MessageDraftMessageMessageHandler,
 ];
 
 export const MessageMessageApiServices = [MessageMessageSeeder];

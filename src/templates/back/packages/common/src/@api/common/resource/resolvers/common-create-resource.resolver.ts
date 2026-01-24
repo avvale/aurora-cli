@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.resource.create')
-export class CommonCreateResourceResolver
-{
-    constructor(
-        private readonly handler: CommonCreateResourceHandler,
-    ) {}
+export class CommonCreateResourceResolver {
+  constructor(private readonly handler: CommonCreateResourceHandler) {}
 
-    @Mutation('commonCreateResource')
-    async main(
-        @Args('payload') payload: CommonCreateResourceInput,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<CommonResource>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
-    }
+  @Mutation('commonCreateResource')
+  async main(
+    @Args('payload') payload: CommonCreateResourceInput,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<CommonResource> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

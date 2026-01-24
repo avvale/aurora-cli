@@ -7,14 +7,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('oAuth.application.create')
 export class OAuthCreateApplicationsResolver {
-    constructor(private readonly handler: OAuthCreateApplicationsHandler) {}
+  constructor(private readonly handler: OAuthCreateApplicationsHandler) {}
 
-    @Mutation('oAuthCreateApplications')
-    async main(
-        @Args('payload') payload: OAuthCreateApplicationInput[],
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean> {
-        return await this.handler.main(payload, timezone, auditing);
-    }
+  @Mutation('oAuthCreateApplications')
+  async main(
+    @Args('payload') payload: OAuthCreateApplicationInput[],
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

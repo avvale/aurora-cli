@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.migration.get')
 export class ToolsFindMigrationResolver {
-    constructor(private readonly handler: ToolsFindMigrationHandler) {}
+  constructor(private readonly handler: ToolsFindMigrationHandler) {}
 
-    @Query('toolsFindMigration')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<ToolsMigration> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('toolsFindMigration')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<ToolsMigration> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

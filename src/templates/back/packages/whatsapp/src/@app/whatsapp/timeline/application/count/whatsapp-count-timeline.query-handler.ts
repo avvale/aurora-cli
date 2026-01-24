@@ -3,18 +3,18 @@ import { WhatsappCountTimelineService } from '@app/whatsapp/timeline/application
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(WhatsappCountTimelineQuery)
-export class WhatsappCountTimelineQueryHandler implements IQueryHandler<WhatsappCountTimelineQuery>
+export class WhatsappCountTimelineQueryHandler
+  implements IQueryHandler<WhatsappCountTimelineQuery>
 {
-    constructor(
-        private readonly countTimelineService: WhatsappCountTimelineService,
-    ) {}
+  constructor(
+    private readonly countTimelineService: WhatsappCountTimelineService,
+  ) {}
 
-    async execute(query: WhatsappCountTimelineQuery): Promise<number>
-    {
-        return await this.countTimelineService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: WhatsappCountTimelineQuery): Promise<number> {
+    return await this.countTimelineService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

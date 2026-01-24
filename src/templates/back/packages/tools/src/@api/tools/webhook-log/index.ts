@@ -74,39 +74,39 @@ import { ToolsUpdateWebhookLogByIdHandler } from './handlers/tools-update-webhoo
 import { ToolsWebhookLogSeeder } from './seeder/tools-webhook-log.seeder';
 
 export const ToolsWebhookLogApiControllers = [
-    ToolsCreateWebhookLogController,
-    ToolsCreateWebhookLogsController,
-    ToolsPaginateWebhookLogsController,
-    ToolsGetWebhookLogsController,
-    ToolsFindWebhookLogByIdController,
-    ToolsFindWebhookLogController,
-    ToolsUpdateWebhookLogByIdController,
-    ToolsDeleteWebhookLogByIdController,
-    ToolsDeleteWebhookLogsController,
+  ToolsCreateWebhookLogController,
+  ToolsCreateWebhookLogsController,
+  ToolsPaginateWebhookLogsController,
+  ToolsGetWebhookLogsController,
+  ToolsFindWebhookLogByIdController,
+  ToolsFindWebhookLogController,
+  ToolsUpdateWebhookLogByIdController,
+  ToolsDeleteWebhookLogByIdController,
+  ToolsDeleteWebhookLogsController,
 ];
 
 export const ToolsWebhookLogApiResolvers = [
-    ToolsCreateWebhookLogResolver,
-    ToolsCreateWebhookLogsResolver,
-    ToolsPaginateWebhookLogsResolver,
-    ToolsGetWebhookLogsResolver,
-    ToolsFindWebhookLogByIdResolver,
-    ToolsFindWebhookLogResolver,
-    ToolsUpdateWebhookLogByIdResolver,
-    ToolsDeleteWebhookLogByIdResolver,
-    ToolsDeleteWebhookLogsResolver,
+  ToolsCreateWebhookLogResolver,
+  ToolsCreateWebhookLogsResolver,
+  ToolsPaginateWebhookLogsResolver,
+  ToolsGetWebhookLogsResolver,
+  ToolsFindWebhookLogByIdResolver,
+  ToolsFindWebhookLogResolver,
+  ToolsUpdateWebhookLogByIdResolver,
+  ToolsDeleteWebhookLogByIdResolver,
+  ToolsDeleteWebhookLogsResolver,
 ];
 
 export const ToolsWebhookLogApiHandlers = [
-    ToolsCreateWebhookLogHandler,
-    ToolsCreateWebhookLogsHandler,
-    ToolsPaginateWebhookLogsHandler,
-    ToolsGetWebhookLogsHandler,
-    ToolsFindWebhookLogByIdHandler,
-    ToolsFindWebhookLogHandler,
-    ToolsUpdateWebhookLogByIdHandler,
-    ToolsDeleteWebhookLogByIdHandler,
-    ToolsDeleteWebhookLogsHandler,
+  ToolsCreateWebhookLogHandler,
+  ToolsCreateWebhookLogsHandler,
+  ToolsPaginateWebhookLogsHandler,
+  ToolsGetWebhookLogsHandler,
+  ToolsFindWebhookLogByIdHandler,
+  ToolsFindWebhookLogHandler,
+  ToolsUpdateWebhookLogByIdHandler,
+  ToolsDeleteWebhookLogByIdHandler,
+  ToolsDeleteWebhookLogsHandler,
 ];
 
 export const ToolsWebhookLogApiServices = [ToolsWebhookLogSeeder];

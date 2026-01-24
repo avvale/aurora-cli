@@ -3,24 +3,24 @@ import { Injectable } from '@nestjs/common';
 
 //
 import {
-    MessageCreateInboxSettingsCommand,
-    messageMockInboxSettingData,
+  MessageCreateInboxSettingsCommand,
+  messageMockInboxSettingData,
 } from '@app/message/inbox-setting';
 
 @Injectable()
 export class MessageInboxSettingSeeder {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new MessageCreateInboxSettingsCommand(messageMockInboxSettingData, {
-                timezone: process.env.TZ,
-            }),
-        );
+  async main(): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new MessageCreateInboxSettingsCommand(messageMockInboxSettingData, {
+        timezone: process.env.TZ,
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

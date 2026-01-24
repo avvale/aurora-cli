@@ -4,17 +4,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageCountInboxService {
-    constructor(private readonly repository: MessageIInboxRepository) {}
+  constructor(private readonly repository: MessageIInboxRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<number> {
-        return await this.repository.count({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<number> {
+    return await this.repository.count({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

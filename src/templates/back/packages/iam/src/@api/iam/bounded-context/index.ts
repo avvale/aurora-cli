@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/bounded-context.aurora.yaml
+ */
 // export DTOs
 export { IamBoundedContextDto } from './dto/iam-bounded-context.dto';
 export { IamCreateBoundedContextDto } from './dto/iam-create-bounded-context.dto';
@@ -80,42 +84,42 @@ import { IamUpdateBoundedContextsHandler } from './handlers/iam-update-bounded-c
 import { IamBoundedContextSeeder } from './seeder/iam-bounded-context.seeder';
 
 export const IamBoundedContextApiControllers = [
-    IamCreateBoundedContextController,
-    IamCreateBoundedContextsController,
-    IamPaginateBoundedContextsController,
-    IamGetBoundedContextsController,
-    IamFindBoundedContextByIdController,
-    IamFindBoundedContextController,
-    IamUpdateBoundedContextByIdController,
-    IamUpdateBoundedContextsController,
-    IamDeleteBoundedContextByIdController,
-    IamDeleteBoundedContextsController,
+  IamCreateBoundedContextController,
+  IamCreateBoundedContextsController,
+  IamPaginateBoundedContextsController,
+  IamGetBoundedContextsController,
+  IamFindBoundedContextByIdController,
+  IamFindBoundedContextController,
+  IamUpdateBoundedContextByIdController,
+  IamUpdateBoundedContextsController,
+  IamDeleteBoundedContextByIdController,
+  IamDeleteBoundedContextsController,
 ];
 
 export const IamBoundedContextApiResolvers = [
-    IamCreateBoundedContextResolver,
-    IamCreateBoundedContextsResolver,
-    IamPaginateBoundedContextsResolver,
-    IamGetBoundedContextsResolver,
-    IamFindBoundedContextByIdResolver,
-    IamFindBoundedContextResolver,
-    IamUpdateBoundedContextByIdResolver,
-    IamUpdateBoundedContextsResolver,
-    IamDeleteBoundedContextByIdResolver,
-    IamDeleteBoundedContextsResolver,
+  IamCreateBoundedContextResolver,
+  IamCreateBoundedContextsResolver,
+  IamPaginateBoundedContextsResolver,
+  IamGetBoundedContextsResolver,
+  IamFindBoundedContextByIdResolver,
+  IamFindBoundedContextResolver,
+  IamUpdateBoundedContextByIdResolver,
+  IamUpdateBoundedContextsResolver,
+  IamDeleteBoundedContextByIdResolver,
+  IamDeleteBoundedContextsResolver,
 ];
 
 export const IamBoundedContextApiHandlers = [
-    IamCreateBoundedContextHandler,
-    IamCreateBoundedContextsHandler,
-    IamPaginateBoundedContextsHandler,
-    IamGetBoundedContextsHandler,
-    IamFindBoundedContextByIdHandler,
-    IamFindBoundedContextHandler,
-    IamUpdateBoundedContextByIdHandler,
-    IamUpdateBoundedContextsHandler,
-    IamDeleteBoundedContextByIdHandler,
-    IamDeleteBoundedContextsHandler,
+  IamCreateBoundedContextHandler,
+  IamCreateBoundedContextsHandler,
+  IamPaginateBoundedContextsHandler,
+  IamGetBoundedContextsHandler,
+  IamFindBoundedContextByIdHandler,
+  IamFindBoundedContextHandler,
+  IamUpdateBoundedContextByIdHandler,
+  IamUpdateBoundedContextsHandler,
+  IamDeleteBoundedContextByIdHandler,
+  IamDeleteBoundedContextsHandler,
 ];
 
 export const IamBoundedContextApiServices = [IamBoundedContextSeeder];

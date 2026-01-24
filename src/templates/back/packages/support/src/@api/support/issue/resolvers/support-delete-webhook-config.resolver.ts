@@ -6,13 +6,13 @@ import { Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('support.issue.update')
 export class SupportDeleteWebhookConfigResolver {
-    constructor(private readonly handler: SupportDeleteWebhookConfigHandler) {}
+  constructor(private readonly handler: SupportDeleteWebhookConfigHandler) {}
 
-    @Mutation('supportDeleteWebhookConfig')
-    async main(
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean> {
-        return await this.handler.main(timezone, auditing);
-    }
+  @Mutation('supportDeleteWebhookConfig')
+  async main(
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    return await this.handler.main(timezone, auditing);
+  }
 }

@@ -86,41 +86,41 @@ import { MessageUpdateMessageByIdService } from './application/update/message-up
 import { MessageUpdateMessagesService } from './application/update/message-update-messages.service';
 
 export const MessageMessageHandlers = [
-    // commands
-    MessageCreateMessageCommandHandler,
-    MessageCreateMessagesCommandHandler,
-    MessageUpdateMessageByIdCommandHandler,
-    MessageUpdateMessagesCommandHandler,
-    MessageUpdateAndIncrementMessagesCommandHandler,
-    MessageDeleteMessageByIdCommandHandler,
-    MessageDeleteMessagesCommandHandler,
+  // commands
+  MessageCreateMessageCommandHandler,
+  MessageCreateMessagesCommandHandler,
+  MessageUpdateMessageByIdCommandHandler,
+  MessageUpdateMessagesCommandHandler,
+  MessageUpdateAndIncrementMessagesCommandHandler,
+  MessageDeleteMessageByIdCommandHandler,
+  MessageDeleteMessagesCommandHandler,
 
-    // queries
-    MessagePaginateMessagesQueryHandler,
-    MessageGetMessagesQueryHandler,
-    MessageFindMessageQueryHandler,
-    MessageFindMessageByIdQueryHandler,
+  // queries
+  MessagePaginateMessagesQueryHandler,
+  MessageGetMessagesQueryHandler,
+  MessageFindMessageQueryHandler,
+  MessageFindMessageByIdQueryHandler,
 
-    // events
-    MessageCreatedMessageEventHandler,
-    MessageCreatedMessagesEventHandler,
-    MessageUpdatedMessageEventHandler,
-    MessageUpdatedMessagesEventHandler,
-    MessageUpdatedAndIncrementedMessagesEventHandler,
-    MessageDeletedMessageEventHandler,
-    MessageDeletedMessagesEventHandler,
+  // events
+  MessageCreatedMessageEventHandler,
+  MessageCreatedMessagesEventHandler,
+  MessageUpdatedMessageEventHandler,
+  MessageUpdatedMessagesEventHandler,
+  MessageUpdatedAndIncrementedMessagesEventHandler,
+  MessageDeletedMessageEventHandler,
+  MessageDeletedMessagesEventHandler,
 ];
 
 export const MessageMessageServices = [
-    MessageCreateMessageService,
-    MessageCreateMessagesService,
-    MessagePaginateMessagesService,
-    MessageGetMessagesService,
-    MessageFindMessageService,
-    MessageFindMessageByIdService,
-    MessageUpdateMessageByIdService,
-    MessageUpdateMessagesService,
-    MessageUpdateAndIncrementMessagesService,
-    MessageDeleteMessageByIdService,
-    MessageDeleteMessagesService,
+  MessageCreateMessageService,
+  MessageCreateMessagesService,
+  MessagePaginateMessagesService,
+  MessageGetMessagesService,
+  MessageFindMessageService,
+  MessageFindMessageByIdService,
+  MessageUpdateMessageByIdService,
+  MessageUpdateMessagesService,
+  MessageUpdateAndIncrementMessagesService,
+  MessageDeleteMessageByIdService,
+  MessageDeleteMessagesService,
 ];

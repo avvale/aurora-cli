@@ -5,57 +5,53 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthCreateApplicationHandler', () => {
-    let handler: OAuthCreateApplicationHandler;
-    let queryBus: IQueryBus;
+  let handler: OAuthCreateApplicationHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                OAuthCreateApplicationHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        OAuthCreateApplicationHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<OAuthCreateApplicationHandler>(
-            OAuthCreateApplicationHandler,
+    handler = module.get<OAuthCreateApplicationHandler>(
+      OAuthCreateApplicationHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  describe('main', () => {
+    test('OAuthCreateApplicationHandler should be defined', () => {
+      expect(handler).toBeDefined();
+    });
+
+    test('should return an application created', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () => new Promise((resolve) => resolve(oAuthMockApplicationData[0])),
         );
-        queryBus = module.get<IQueryBus>(IQueryBus);
+      expect(
+        await handler.main(oAuthMockApplicationData[0], 'Europe/Madrid'),
+      ).toBe(oAuthMockApplicationData[0]);
     });
-
-    describe('main', () => {
-        test('OAuthCreateApplicationHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an application created', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve(oAuthMockApplicationData[0]),
-                    ),
-            );
-            expect(
-                await handler.main(
-                    oAuthMockApplicationData[0],
-                    'Europe/Madrid',
-                ),
-            ).toBe(oAuthMockApplicationData[0]);
-        });
-    });
+  });
 });

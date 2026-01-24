@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('queueManager.queue.get')
 export class QueueManagerPaginateQueuesResolver {
-    constructor(private readonly handler: QueueManagerPaginateQueuesHandler) {}
+  constructor(private readonly handler: QueueManagerPaginateQueuesHandler) {}
 
-    @Query('queueManagerPaginateQueues')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('queueManagerPaginateQueues')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

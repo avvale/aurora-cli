@@ -4,15 +4,15 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamCountUserQuery)
 export class IamCountUserQueryHandler
-    implements IQueryHandler<IamCountUserQuery>
+  implements IQueryHandler<IamCountUserQuery>
 {
-    constructor(private readonly countUserService: IamCountUserService) {}
+  constructor(private readonly countUserService: IamCountUserService) {}
 
-    async execute(query: IamCountUserQuery): Promise<number> {
-        return await this.countUserService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: IamCountUserQuery): Promise<number> {
+    return await this.countUserService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

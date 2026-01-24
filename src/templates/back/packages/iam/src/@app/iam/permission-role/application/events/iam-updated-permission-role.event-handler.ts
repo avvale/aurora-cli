@@ -1,11 +1,15 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission-role.aurora.yaml
+ */
 import { IamUpdatedPermissionRoleEvent } from '@app/iam/permission-role';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(IamUpdatedPermissionRoleEvent)
 export class IamUpdatedPermissionRoleEventHandler
-    implements IEventHandler<IamUpdatedPermissionRoleEvent>
+  implements IEventHandler<IamUpdatedPermissionRoleEvent>
 {
-    handle(event: IamUpdatedPermissionRoleEvent): void {
-        // 'UpdatedPermissionRoleEvent'
-    }
+  handle(event: IamUpdatedPermissionRoleEvent): void {
+    // 'UpdatedPermissionRoleEvent'
+  }
 }

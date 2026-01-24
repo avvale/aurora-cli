@@ -4,17 +4,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamFindRoleService {
-    constructor(private readonly repository: IamIRoleRepository) {}
+  constructor(private readonly repository: IamIRoleRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<IamRole> {
-        return await this.repository.find({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<IamRole> {
+    return await this.repository.find({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

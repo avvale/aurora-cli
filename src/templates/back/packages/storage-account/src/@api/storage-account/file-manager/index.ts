@@ -35,27 +35,27 @@ import { StorageAccountUploadFileFileManagerHandler } from './handlers/storage-a
 import { StorageAccountUploadFilesFileManagerHandler } from './handlers/storage-account-upload-files-file-manager.handler';
 
 export const StorageAccountFileManagerApiControllers = [
-    StorageAccountCopyFileManagerController,
-    StorageAccountGetBase64FileFileManagerController,
-    StorageAccountGetBase64FilesFileManagerController,
-    StorageAccountUploadFileFileManagerController,
-    StorageAccountUploadFilesFileManagerController,
+  StorageAccountCopyFileManagerController,
+  StorageAccountGetBase64FileFileManagerController,
+  StorageAccountGetBase64FilesFileManagerController,
+  StorageAccountUploadFileFileManagerController,
+  StorageAccountUploadFilesFileManagerController,
 ];
 
 export const StorageAccountFileManagerApiResolvers = [
-    StorageAccountCopyFileManagerResolver,
-    StorageAccountGetBase64FileFileManagerResolver,
-    StorageAccountGetBase64FilesFileManagerResolver,
-    StorageAccountUploadFileFileManagerResolver,
-    StorageAccountUploadFilesFileManagerResolver,
+  StorageAccountCopyFileManagerResolver,
+  StorageAccountGetBase64FileFileManagerResolver,
+  StorageAccountGetBase64FilesFileManagerResolver,
+  StorageAccountUploadFileFileManagerResolver,
+  StorageAccountUploadFilesFileManagerResolver,
 ];
 
 export const StorageAccountFileManagerApiHandlers = [
-    StorageAccountCopyFileManagerHandler,
-    StorageAccountGetBase64FileFileManagerHandler,
-    StorageAccountGetBase64FilesFileManagerHandler,
-    StorageAccountUploadFileFileManagerHandler,
-    StorageAccountUploadFilesFileManagerHandler,
+  StorageAccountCopyFileManagerHandler,
+  StorageAccountGetBase64FileFileManagerHandler,
+  StorageAccountGetBase64FilesFileManagerHandler,
+  StorageAccountUploadFileFileManagerHandler,
+  StorageAccountUploadFilesFileManagerHandler,
 ];
 
 export const StorageAccountFileManagerApiServices = [];

@@ -4,40 +4,40 @@ import { ToolsRunScriptsMigrationHandler } from '../handlers/tools-run-scripts-m
 import { ToolsRunScriptsMigrationResolver } from './tools-run-scripts-migration.resolver';
 
 describe('ToolsRunScriptsMigrationResolver', () => {
-    let resolver: ToolsRunScriptsMigrationResolver;
-    let handler: ToolsRunScriptsMigrationHandler;
+  let resolver: ToolsRunScriptsMigrationResolver;
+  let handler: ToolsRunScriptsMigrationHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                ToolsRunScriptsMigrationResolver,
-                {
-                    provide: ToolsRunScriptsMigrationHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        ToolsRunScriptsMigrationResolver,
+        {
+          provide: ToolsRunScriptsMigrationHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<ToolsRunScriptsMigrationResolver>(
-            ToolsRunScriptsMigrationResolver,
-        );
-        handler = module.get<ToolsRunScriptsMigrationHandler>(
-            ToolsRunScriptsMigrationHandler,
-        );
-    });
+    resolver = module.get<ToolsRunScriptsMigrationResolver>(
+      ToolsRunScriptsMigrationResolver,
+    );
+    handler = module.get<ToolsRunScriptsMigrationHandler>(
+      ToolsRunScriptsMigrationHandler,
+    );
+  });
 
+  test('ToolsRunScriptsMigrationResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('ToolsRunScriptsMigrationResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
-
-    describe('main', () => {
-        test('ToolsRunScriptsMigrationResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-    });
+  });
 });

@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('iam.tenant.get')
 export class IamGetTenantsResolver {
-    constructor(private readonly handler: IamGetTenantsHandler) {}
+  constructor(private readonly handler: IamGetTenantsHandler) {}
 
-    @Query('iamGetTenants')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<IamTenant[]> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('iamGetTenants')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<IamTenant[]> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

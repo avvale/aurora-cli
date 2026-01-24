@@ -6,6 +6,14 @@ aggregateName: IamTag
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+description: >
+  Lightweight tagging system for categorizing and organizing IAM entities (primarily accounts).
+  Tags are simple name-based labels used for filtering, grouping, and metadata management
+  without requiring complex taxonomies. Supports basic CRUD operations with most aggregate
+  operations disabled for simplicity. Tags can be referenced in account filters and queries
+  using array operations. This module provides a flexible categorization mechanism independent
+  of formal organizational structures like tenants or roles.
+  Related modules: iam/account (primary consumer of tags).
 front:
   solidIcon: mat_solid:tag
   outlineIcon: mat_outline:tag
@@ -14,24 +22,55 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the tag. UUID v4 format, generated automatically on creation.
+      Used as primary key and for referencing this tag across the system.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing sequential identifier for the tag.
+      Used for internal ordering, efficient queries, and legacy system compatibility.
+      Unlike the UUID 'id', this provides a human-readable sequential number
+      that maintains insertion order. Useful for pagination and sorting operations.
   - name: name
     type: varchar
     maxLength: 64
+    index: unique
     nullable: false
+    description: >
+      The tag name or label (e.g., "VIP", "Beta-Tester", "EMEA-Region", "Finance-Department").
+      Limited to 64 characters for consistency with account.tags array elements.
+      Should be descriptive and follow organizational naming conventions.
+      Case-sensitive for precise matching. Recommended format: PascalCase or kebab-case
+      for multi-word tags. Cannot be empty. Enforced as unique at database level to
+      prevent duplicate tags and ensure consistent referencing across accounts.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the tag was created. Automatically set on record insertion.
+      Part of the audit trail for tracking tag lifecycle and usage patterns.
+      Used for reporting on tag creation and organizational metadata evolution.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last modification to this tag. Automatically updated on any
+      field change (typically name changes). Used for tracking tag evolution and
+      cache invalidation. Helps identify recently modified tags for synchronization
+      and audit purposes.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates an active tag. When set, the tag is
+      excluded from normal queries but preserved for audit trail and historical
+      data integrity. Soft-deleted tags remain referenced in account.tags arrays
+      until those accounts are updated. Used for maintaining data consistency
+      while allowing tag cleanup. Tags can be recovered by setting this to NULL.
 excludedOperations:
   - count
   - createBatch

@@ -80,38 +80,38 @@ import { IamUpdateTenantAccountByIdService } from './application/update/iam-upda
 import { IamUpdateTenantsAccountsService } from './application/update/iam-update-tenants-accounts.service';
 
 export const IamTenantAccountHandlers = [
-    // commands
-    IamCreateTenantAccountCommandHandler,
-    IamCreateTenantsAccountsCommandHandler,
-    IamUpdateTenantAccountByIdCommandHandler,
-    IamUpdateTenantsAccountsCommandHandler,
-    IamDeleteTenantAccountByIdCommandHandler,
-    IamDeleteTenantsAccountsCommandHandler,
+  // commands
+  IamCreateTenantAccountCommandHandler,
+  IamCreateTenantsAccountsCommandHandler,
+  IamUpdateTenantAccountByIdCommandHandler,
+  IamUpdateTenantsAccountsCommandHandler,
+  IamDeleteTenantAccountByIdCommandHandler,
+  IamDeleteTenantsAccountsCommandHandler,
 
-    // queries
-    IamPaginateTenantsAccountsQueryHandler,
-    IamGetTenantsAccountsQueryHandler,
-    IamFindTenantAccountQueryHandler,
-    IamFindTenantAccountByIdQueryHandler,
+  // queries
+  IamPaginateTenantsAccountsQueryHandler,
+  IamGetTenantsAccountsQueryHandler,
+  IamFindTenantAccountQueryHandler,
+  IamFindTenantAccountByIdQueryHandler,
 
-    // events
-    IamCreatedTenantAccountEventHandler,
-    IamCreatedTenantsAccountsEventHandler,
-    IamUpdatedTenantAccountEventHandler,
-    IamUpdatedTenantsAccountsEventHandler,
-    IamDeletedTenantAccountEventHandler,
-    IamDeletedTenantsAccountsEventHandler,
+  // events
+  IamCreatedTenantAccountEventHandler,
+  IamCreatedTenantsAccountsEventHandler,
+  IamUpdatedTenantAccountEventHandler,
+  IamUpdatedTenantsAccountsEventHandler,
+  IamDeletedTenantAccountEventHandler,
+  IamDeletedTenantsAccountsEventHandler,
 ];
 
 export const IamTenantAccountServices = [
-    IamCreateTenantAccountService,
-    IamCreateTenantsAccountsService,
-    IamPaginateTenantsAccountsService,
-    IamGetTenantsAccountsService,
-    IamFindTenantAccountService,
-    IamFindTenantAccountByIdService,
-    IamUpdateTenantAccountByIdService,
-    IamUpdateTenantsAccountsService,
-    IamDeleteTenantAccountByIdService,
-    IamDeleteTenantsAccountsService,
+  IamCreateTenantAccountService,
+  IamCreateTenantsAccountsService,
+  IamPaginateTenantsAccountsService,
+  IamGetTenantsAccountsService,
+  IamFindTenantAccountService,
+  IamFindTenantAccountByIdService,
+  IamUpdateTenantAccountByIdService,
+  IamUpdateTenantsAccountsService,
+  IamDeleteTenantAccountByIdService,
+  IamDeleteTenantsAccountsService,
 ];

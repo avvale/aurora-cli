@@ -6,24 +6,24 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToolsCreateProceduresHandler {
-    constructor(private readonly commandBus: ICommandBus) {}
+  constructor(private readonly commandBus: ICommandBus) {}
 
-    async main(
-        payload: ToolsCreateProcedureInput[] | ToolsCreateProcedureDto[],
-        timezone?: string,
-    ): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new ToolsCreateProceduresCommand(
-            payload
-                .map(procedure => ({
-                    ...procedure,
-                    isExecuted: false,
-                })),
-            {
-                timezone,
-            }),
-        );
+  async main(
+    payload: ToolsCreateProcedureInput[] | ToolsCreateProcedureDto[],
+    timezone?: string,
+  ): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new ToolsCreateProceduresCommand(
+        payload.map((procedure) => ({
+          ...procedure,
+          isExecuted: false,
+        })),
+        {
+          timezone,
+        },
+      ),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

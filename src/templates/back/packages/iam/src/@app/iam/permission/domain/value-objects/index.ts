@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission.aurora.yaml
+ */
 export { IamPermissionBoundedContextId } from './iam-permission-bounded-context-id';
 export { IamPermissionCreatedAt } from './iam-permission-created-at';
 export { IamPermissionDeletedAt } from './iam-permission-deleted-at';

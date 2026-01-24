@@ -1,8 +1,8 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
 export class IamRawSQLTenantsQuery {
-    constructor(
-        public readonly rawSQL?: string,
-        public readonly cQMetadata?: CQMetadata,
-    ) {}
+  constructor(
+    public readonly rawSQL?: string,
+    public readonly cQMetadata?: CQMetadata,
+  ) {}
 }

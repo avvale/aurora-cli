@@ -7,13 +7,13 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('queueManager.queue.create')
 export class QueueManagerCreateQueueResolver {
-    constructor(private readonly handler: QueueManagerCreateQueueHandler) {}
+  constructor(private readonly handler: QueueManagerCreateQueueHandler) {}
 
-    @Mutation('queueManagerCreateQueue')
-    async main(
-        @Args('payload') payload: QueueManagerCreateQueueInput,
-        @Timezone() timezone?: string,
-    ): Promise<QueueManagerQueue> {
-        return await this.handler.main(payload, timezone);
-    }
+  @Mutation('queueManagerCreateQueue')
+  async main(
+    @Args('payload') payload: QueueManagerCreateQueueInput,
+    @Timezone() timezone?: string,
+  ): Promise<QueueManagerQueue> {
+    return await this.handler.main(payload, timezone);
+  }
 }

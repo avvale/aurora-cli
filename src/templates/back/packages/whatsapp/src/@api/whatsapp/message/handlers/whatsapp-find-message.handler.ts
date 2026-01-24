@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class WhatsappFindMessageHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class WhatsappFindMessageHandler {
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<WhatsappMessage | WhatsappMessageDto>
-    {
-        return await this.queryBus.ask(new WhatsappFindMessageQuery(
-            queryStatement,
-            constraint,
-            {
-                timezone,
-            },
-        ));
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<WhatsappMessage | WhatsappMessageDto> {
+    return await this.queryBus.ask(
+      new WhatsappFindMessageQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

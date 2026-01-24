@@ -9,21 +9,21 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('message.message.get')
 export class MessagePaginateMessagesResolver {
-    constructor(private readonly handler: MessagePaginateMessagesHandler) {}
+  constructor(private readonly handler: MessagePaginateMessagesHandler) {}
 
-    @Query('messagePaginateMessages')
-    @TenantConstraint()
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination> {
-        return await this.handler.main(
-            account,
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('messagePaginateMessages')
+  @TenantConstraint()
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(
+      account,
+      queryStatement,
+      constraint,
+      timezone,
+    );
+  }
 }

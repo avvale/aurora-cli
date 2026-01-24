@@ -6,23 +6,17 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.attachmentFamily.get')
-export class CommonPaginateAttachmentFamiliesResolver
-{
-    constructor(
-        private readonly handler: CommonPaginateAttachmentFamiliesHandler,
-    ) {}
+export class CommonPaginateAttachmentFamiliesResolver {
+  constructor(
+    private readonly handler: CommonPaginateAttachmentFamiliesHandler,
+  ) {}
 
-    @Query('commonPaginateAttachmentFamilies')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('commonPaginateAttachmentFamilies')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

@@ -7,13 +7,13 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.webhookLog.create')
 export class ToolsCreateWebhookLogResolver {
-    constructor(private readonly handler: ToolsCreateWebhookLogHandler) {}
+  constructor(private readonly handler: ToolsCreateWebhookLogHandler) {}
 
-    @Mutation('toolsCreateWebhookLog')
-    async main(
-        @Args('payload') payload: ToolsCreateWebhookLogInput,
-        @Timezone() timezone?: string,
-    ): Promise<ToolsWebhookLog> {
-        return await this.handler.main(payload, timezone);
-    }
+  @Mutation('toolsCreateWebhookLog')
+  async main(
+    @Args('payload') payload: ToolsCreateWebhookLogInput,
+    @Timezone() timezone?: string,
+  ): Promise<ToolsWebhookLog> {
+    return await this.handler.main(payload, timezone);
+  }
 }

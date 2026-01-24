@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('support.issue.get')
 export class SupportFindIssueResolver {
-    constructor(private readonly handler: SupportFindIssueHandler) {}
+  constructor(private readonly handler: SupportFindIssueHandler) {}
 
-    @Query('supportFindIssue')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<SupportIssue> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('supportFindIssue')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<SupportIssue> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

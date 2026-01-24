@@ -4,36 +4,36 @@ import { SupportCreateWebhookConfigHandler } from '../handlers/support-create-we
 import { SupportCreateWebhookConfigController } from './support-create-webhook-config.controller';
 
 describe('SupportCreateWebhookConfigController', () => {
-    let controller: SupportCreateWebhookConfigController;
-    let handler: SupportCreateWebhookConfigHandler;
+  let controller: SupportCreateWebhookConfigController;
+  let handler: SupportCreateWebhookConfigHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            controllers: [SupportCreateWebhookConfigController],
-            providers: [
-                {
-                    provide: SupportCreateWebhookConfigHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      controllers: [SupportCreateWebhookConfigController],
+      providers: [
+        {
+          provide: SupportCreateWebhookConfigHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        controller = module.get<SupportCreateWebhookConfigController>(
-            SupportCreateWebhookConfigController,
-        );
-        handler = module.get<SupportCreateWebhookConfigHandler>(
-            SupportCreateWebhookConfigHandler,
-        );
+    controller = module.get<SupportCreateWebhookConfigController>(
+      SupportCreateWebhookConfigController,
+    );
+    handler = module.get<SupportCreateWebhookConfigHandler>(
+      SupportCreateWebhookConfigHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('SupportCreateWebhookConfigController should be defined', () => {
+      expect(controller).toBeDefined();
     });
-
-    describe('main', () => {
-        test('SupportCreateWebhookConfigController should be defined', () => {
-            expect(controller).toBeDefined();
-        });
-    });
+  });
 });

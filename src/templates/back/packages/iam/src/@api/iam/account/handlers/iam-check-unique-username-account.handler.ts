@@ -4,24 +4,24 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCheckUniqueUsernameAccountHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(username: string, avoidUsernames?: string[]): Promise<boolean> {
-        const account = await this.queryBus.ask(
-            new IamFindAccountQuery({
-                where: {
-                    [Operator.and]: [
-                        { username },
-                        {
-                            username: {
-                                [Operator.notIn]: avoidUsernames,
-                            },
-                        },
-                    ],
-                },
-            }),
-        );
+  async main(username: string, avoidUsernames?: string[]): Promise<boolean> {
+    const account = await this.queryBus.ask(
+      new IamFindAccountQuery({
+        where: {
+          [Operator.and]: [
+            { username },
+            {
+              username: {
+                [Operator.notIn]: avoidUsernames,
+              },
+            },
+          ],
+        },
+      }),
+    );
 
-        return !account;
-    }
+    return !account;
+  }
 }

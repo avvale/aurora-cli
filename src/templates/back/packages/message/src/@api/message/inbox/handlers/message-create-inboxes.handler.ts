@@ -7,23 +7,23 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageCreateInboxesHandler {
-    constructor(private readonly commandBus: ICommandBus) {}
+  constructor(private readonly commandBus: ICommandBus) {}
 
-    async main(
-        account: IamAccountResponse,
-        payload: MessageCreateInboxInput[] | MessageCreateInboxDto[],
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new MessageCreateInboxesCommand(payload, {
-                timezone,
-                repositoryOptions: {
-                    auditing,
-                },
-            }),
-        );
+  async main(
+    account: IamAccountResponse,
+    payload: MessageCreateInboxInput[] | MessageCreateInboxDto[],
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new MessageCreateInboxesCommand(payload, {
+        timezone,
+        repositoryOptions: {
+          auditing,
+        },
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

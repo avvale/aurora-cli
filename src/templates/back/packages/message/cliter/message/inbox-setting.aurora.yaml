@@ -9,32 +9,62 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:language
   outlineIcon: mat_outline:language
+description: >
+    User-specific inbox configuration and state tracking. Stores the last read
+    message ID per account to efficiently calculate unread message counts.
+    One record per account with unique constraint.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+        Unique identifier for the inbox setting record. UUID v4 format, generated
+        automatically on creation. One record per user account.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+        Sequential numeric identifier for efficient ordering. Auto-incremented.
+        Unique across all inbox settings. Used for internal references and sorting.
   - name: accountId
     type: id
     nullable: false
     index: unique
+    description: >
+        Foreign key to the user account. Required field with unique constraint,
+        ensuring one inbox setting per account. Used to lookup user's last read
+        position for unread count calculation.
   - name: lastReadMessageRowId
     type: bigint
     nullable: false
+    description: >
+        Sequential ID (rowId) of the last message the user has read. Required field.
+        Messages with rowId greater than this value are considered unread. Efficiently
+        calculates unread count with simple numeric comparison.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp when the inbox setting record was created. Auto-set by Aurora
+        auditing. NULL only in edge cases. Typically set when user first receives
+        a message or accesses inbox.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp of last update to inbox settings (e.g., lastReadMessageRowId change).
+        Auto-updated by Aurora auditing. NULL if never modified. Updated frequently
+        as user reads new messages.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+        Soft delete timestamp. NULL means active setting. When set, inbox setting
+        is hidden from normal queries but preserved for audit trail. Rarely used,
+        typically only when account is deleted.
 excludedOperations:
   - count
   - getRaw

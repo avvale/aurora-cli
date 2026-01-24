@@ -80,38 +80,38 @@ import { ToolsUpdateProcedureByIdService } from './application/update/tools-upda
 import { ToolsUpdateProceduresService } from './application/update/tools-update-procedures.service';
 
 export const ToolsProcedureHandlers = [
-    // commands
-    ToolsCreateProcedureCommandHandler,
-    ToolsCreateProceduresCommandHandler,
-    ToolsUpdateProcedureByIdCommandHandler,
-    ToolsUpdateProceduresCommandHandler,
-    ToolsDeleteProcedureByIdCommandHandler,
-    ToolsDeleteProceduresCommandHandler,
+  // commands
+  ToolsCreateProcedureCommandHandler,
+  ToolsCreateProceduresCommandHandler,
+  ToolsUpdateProcedureByIdCommandHandler,
+  ToolsUpdateProceduresCommandHandler,
+  ToolsDeleteProcedureByIdCommandHandler,
+  ToolsDeleteProceduresCommandHandler,
 
-    // queries
-    ToolsPaginateProceduresQueryHandler,
-    ToolsGetProceduresQueryHandler,
-    ToolsFindProcedureQueryHandler,
-    ToolsFindProcedureByIdQueryHandler,
+  // queries
+  ToolsPaginateProceduresQueryHandler,
+  ToolsGetProceduresQueryHandler,
+  ToolsFindProcedureQueryHandler,
+  ToolsFindProcedureByIdQueryHandler,
 
-    // events
-    ToolsCreatedProcedureEventHandler,
-    ToolsCreatedProceduresEventHandler,
-    ToolsUpdatedProcedureEventHandler,
-    ToolsUpdatedProceduresEventHandler,
-    ToolsDeletedProcedureEventHandler,
-    ToolsDeletedProceduresEventHandler,
+  // events
+  ToolsCreatedProcedureEventHandler,
+  ToolsCreatedProceduresEventHandler,
+  ToolsUpdatedProcedureEventHandler,
+  ToolsUpdatedProceduresEventHandler,
+  ToolsDeletedProcedureEventHandler,
+  ToolsDeletedProceduresEventHandler,
 ];
 
 export const ToolsProcedureServices = [
-    ToolsCreateProcedureService,
-    ToolsCreateProceduresService,
-    ToolsPaginateProceduresService,
-    ToolsGetProceduresService,
-    ToolsFindProcedureService,
-    ToolsFindProcedureByIdService,
-    ToolsUpdateProcedureByIdService,
-    ToolsUpdateProceduresService,
-    ToolsDeleteProcedureByIdService,
-    ToolsDeleteProceduresService,
+  ToolsCreateProcedureService,
+  ToolsCreateProceduresService,
+  ToolsPaginateProceduresService,
+  ToolsGetProceduresService,
+  ToolsFindProcedureService,
+  ToolsFindProcedureByIdService,
+  ToolsUpdateProcedureByIdService,
+  ToolsUpdateProceduresService,
+  ToolsDeleteProcedureByIdService,
+  ToolsDeleteProceduresService,
 ];

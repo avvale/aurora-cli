@@ -7,14 +7,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.webhookLog.delete')
 export class ToolsDeleteWebhookLogByIdResolver {
-    constructor(private readonly handler: ToolsDeleteWebhookLogByIdHandler) {}
+  constructor(private readonly handler: ToolsDeleteWebhookLogByIdHandler) {}
 
-    @Mutation('toolsDeleteWebhookLogById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<ToolsWebhookLog> {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Mutation('toolsDeleteWebhookLogById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<ToolsWebhookLog> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

@@ -7,15 +7,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('auditing.httpCommunication.create')
 export class AuditingCreateHttpCommunicationsResolver {
-    constructor(
-        private readonly handler: AuditingCreateHttpCommunicationsHandler,
-    ) {}
+  constructor(
+    private readonly handler: AuditingCreateHttpCommunicationsHandler,
+  ) {}
 
-    @Mutation('auditingCreateHttpCommunications')
-    async main(
-        @Args('payload') payload: AuditingCreateHttpCommunicationInput[],
-        @Timezone() timezone?: string,
-    ): Promise<boolean> {
-        return await this.handler.main(payload, timezone);
-    }
+  @Mutation('auditingCreateHttpCommunications')
+  async main(
+    @Args('payload') payload: AuditingCreateHttpCommunicationInput[],
+    @Timezone() timezone?: string,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone);
+  }
 }

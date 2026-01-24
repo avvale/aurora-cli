@@ -6,23 +6,21 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamUpdateTagByIdCommand)
 export class IamUpdateTagByIdCommandHandler
-    implements ICommandHandler<IamUpdateTagByIdCommand>
+  implements ICommandHandler<IamUpdateTagByIdCommand>
 {
-    constructor(
-        private readonly updateTagByIdService: IamUpdateTagByIdService,
-    ) {}
+  constructor(private readonly updateTagByIdService: IamUpdateTagByIdService) {}
 
-    async execute(command: IamUpdateTagByIdCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.updateTagByIdService.main(
-            {
-                id: new IamTagId(command.payload.id),
-                name: new IamTagName(command.payload.name, {
-                    undefinable: true,
-                }),
-            },
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: IamUpdateTagByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.updateTagByIdService.main(
+      {
+        id: new IamTagId(command.payload.id),
+        name: new IamTagName(command.payload.name, {
+          undefinable: true,
+        }),
+      },
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

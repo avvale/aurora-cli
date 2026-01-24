@@ -4,39 +4,37 @@ import { SupportDeleteCommentsService } from '@app/support/comment/application/d
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('SupportDeleteCommentsCommandHandler', () => {
-    let commandHandler: SupportDeleteCommentsCommandHandler;
+  let commandHandler: SupportDeleteCommentsCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                SupportDeleteCommentsCommandHandler,
-                {
-                    provide: SupportDeleteCommentsService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        SupportDeleteCommentsCommandHandler,
+        {
+          provide: SupportDeleteCommentsService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<SupportDeleteCommentsCommandHandler>(
-            SupportDeleteCommentsCommandHandler,
-        );
+    commandHandler = module.get<SupportDeleteCommentsCommandHandler>(
+      SupportDeleteCommentsCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('SupportDeleteCommentsCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('SupportDeleteCommentsCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(
-                    new SupportDeleteCommentsCommand(),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(new SupportDeleteCommentsCommand()),
+      ).toBe(undefined);
     });
+  });
 });

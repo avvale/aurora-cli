@@ -3,10 +3,10 @@
 import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
 import {
-    Auditing,
-    AuditingMeta,
-    CurrentAccount,
-    Timezone,
+  Auditing,
+  AuditingMeta,
+  CurrentAccount,
+  Timezone,
 } from '@aurorajs.dev/core';
 import { Controller, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -16,19 +16,19 @@ import { MessageCheckMessagesInboxHandler } from '../handlers/message-check-mess
 @Controller('message/inbox/check-messages')
 @Auth()
 export class MessageCheckMessagesInboxController {
-    constructor(private readonly handler: MessageCheckMessagesInboxHandler) {}
+  constructor(private readonly handler: MessageCheckMessagesInboxHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ) {
-        return await this.handler.main(account, timezone, auditing);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ) {
+    return await this.handler.main(account, timezone, auditing);
+  }
 }

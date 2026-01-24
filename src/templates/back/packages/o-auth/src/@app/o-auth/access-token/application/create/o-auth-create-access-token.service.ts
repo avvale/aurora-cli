@@ -1,19 +1,19 @@
 import {
-    OAuthAccessToken,
-    OAuthIAccessTokenRepository,
+  OAuthAccessToken,
+  OAuthIAccessTokenRepository,
 } from '@app/o-auth/access-token';
 import {
-    OAuthAccessTokenAccountId,
-    OAuthAccessTokenClientId,
-    OAuthAccessTokenCreatedAt,
-    OAuthAccessTokenExpiredAccessToken,
-    OAuthAccessTokenExpiresAt,
-    OAuthAccessTokenId,
-    OAuthAccessTokenIsRevoked,
-    OAuthAccessTokenName,
-    OAuthAccessTokenScopes,
-    OAuthAccessTokenToken,
-    OAuthAccessTokenUpdatedAt,
+  OAuthAccessTokenAccountId,
+  OAuthAccessTokenClientId,
+  OAuthAccessTokenCreatedAt,
+  OAuthAccessTokenExpiredAccessToken,
+  OAuthAccessTokenExpiresAt,
+  OAuthAccessTokenId,
+  OAuthAccessTokenIsRevoked,
+  OAuthAccessTokenName,
+  OAuthAccessTokenScopes,
+  OAuthAccessTokenToken,
+  OAuthAccessTokenUpdatedAt,
 } from '@app/o-auth/access-token/domain/value-objects';
 import { CQMetadata, Jwt, now } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
@@ -22,76 +22,75 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class OAuthCreateAccessTokenService {
-    constructor(
-        private readonly publisher: EventPublisher,
-        private readonly repository: OAuthIAccessTokenRepository,
-        private readonly jwtService: JwtService,
-    ) {}
+  constructor(
+    private readonly publisher: EventPublisher,
+    private readonly repository: OAuthIAccessTokenRepository,
+    private readonly jwtService: JwtService,
+  ) {}
 
-    async main(
-        payload: {
-            id: OAuthAccessTokenId;
-            clientId: OAuthAccessTokenClientId;
-            scopes: OAuthAccessTokenScopes;
-            accountId: OAuthAccessTokenAccountId;
-            name: OAuthAccessTokenName;
-            expiredAccessToken: OAuthAccessTokenExpiredAccessToken;
-        },
-        cQMetadata?: CQMetadata,
-    ): Promise<void> {
-        // compose access token
-        const momentExpiredAccessToken = payload.expiredAccessToken.value
-            ? now().add(payload.expiredAccessToken.value, 'seconds')
-            : null;
-        const accessTokenPayload: Jwt = {
-            jit: payload.id.value,
-            aci: payload.accountId.value,
-            iss: 'Aurora OAuth',
-            iat: parseInt(now().format('X')),
-            nbf: parseInt(now().format('X')),
-            exp: momentExpiredAccessToken
-                ? parseInt(momentExpiredAccessToken.format('X'))
-                : null,
-            scopes: Array.isArray(payload.scopes.value)
-                ? payload.scopes.value.join(' ')
-                : undefined,
-        };
+  async main(
+    payload: {
+      id: OAuthAccessTokenId;
+      clientId: OAuthAccessTokenClientId;
+      scopes: OAuthAccessTokenScopes;
+      accountId: OAuthAccessTokenAccountId;
+      name: OAuthAccessTokenName;
+      expiredAccessToken: OAuthAccessTokenExpiredAccessToken;
+    },
+    cQMetadata?: CQMetadata,
+  ): Promise<void> {
+    // compose access token
+    const momentExpiredAccessToken = payload.expiredAccessToken.value
+      ? now().add(payload.expiredAccessToken.value, 'seconds')
+      : null;
+    const accessTokenPayload: Jwt = {
+      jit: payload.id.value,
+      aci: payload.accountId.value,
+      iss: 'Aurora OAuth',
+      iat: parseInt(now().format('X')),
+      nbf: parseInt(now().format('X')),
+      exp: momentExpiredAccessToken
+        ? parseInt(momentExpiredAccessToken.format('X'))
+        : null,
+      scopes: Array.isArray(payload.scopes.value)
+        ? payload.scopes.value.join(' ')
+        : undefined,
+    };
 
-        const accessTokenValueObject = new OAuthAccessTokenToken(
-            this.jwtService.sign(accessTokenPayload),
-        );
+    const accessTokenValueObject = new OAuthAccessTokenToken(
+      this.jwtService.sign(accessTokenPayload),
+    );
 
-        // create aggregate with factory pattern
-        const accessToken = OAuthAccessToken.register(
-            payload.id,
-            undefined, // rowId
-            payload.clientId,
-            payload.accountId,
-            accessTokenValueObject,
-            payload.name,
-            new OAuthAccessTokenIsRevoked(false),
-            new OAuthAccessTokenExpiresAt(
-                momentExpiredAccessToken
-                    ? momentExpiredAccessToken.format('YYYY-MM-DD H:mm:ss')
-                    : null,
-            ),
-            new OAuthAccessTokenCreatedAt({ currentTimestamp: true }),
-            new OAuthAccessTokenUpdatedAt({ currentTimestamp: true }),
-            null, // deletedAt
-        );
+    // create aggregate with factory pattern
+    const accessToken = OAuthAccessToken.register(
+      payload.id,
+      undefined, // rowId
+      payload.clientId,
+      payload.accountId,
+      accessTokenValueObject,
+      payload.name,
+      new OAuthAccessTokenIsRevoked(false),
+      new OAuthAccessTokenExpiresAt(
+        momentExpiredAccessToken
+          ? momentExpiredAccessToken.format('YYYY-MM-DD H:mm:ss')
+          : null,
+      ),
+      new OAuthAccessTokenCreatedAt({ currentTimestamp: true }),
+      new OAuthAccessTokenUpdatedAt({ currentTimestamp: true }),
+      null, // deletedAt
+    );
 
-        await this.repository.create(accessToken, {
-            createOptions: cQMetadata?.repositoryOptions,
-        });
+    await this.repository.create(accessToken, {
+      createOptions: cQMetadata?.repositoryOptions,
+    });
 
-        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const accessTokenRegister =
-            this.publisher.mergeObjectContext(accessToken);
+    // merge EventBus methods with object returned by the repository, to be able to apply and commit events
+    const accessTokenRegister = this.publisher.mergeObjectContext(accessToken);
 
-        accessTokenRegister.created({
-            payload: accessToken,
-            cQMetadata,
-        }); // apply event to model events
-        accessTokenRegister.commit(); // commit all events of model
-    }
+    accessTokenRegister.created({
+      payload: accessToken,
+      cQMetadata,
+    }); // apply event to model events
+    accessTokenRegister.commit(); // commit all events of model
+  }
 }

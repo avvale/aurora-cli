@@ -1,28 +1,28 @@
 import {
-    DataValueObject,
-    TimestampValueObject,
-    ValidationRules,
+  DataValueObject,
+  TimestampValueObject,
+  ValidationRules,
 } from '@aurorajs.dev/core';
 
 export class IamTagCreatedAt extends TimestampValueObject {
-    public readonly type: string = 'IamTagCreatedAt';
+  public readonly type: string = 'IamTagCreatedAt';
 
-    constructor(
-        value: string | DataValueObject,
-        validationRules: ValidationRules = {},
-        data: DataValueObject = {},
-    ) {
-        super(
-            value,
-            Object.assign(
-                {
-                    name: 'IamTagCreatedAt',
-                    nullable: true,
-                    undefinable: true,
-                },
-                validationRules,
-            ),
-            data,
-        );
-    }
+  constructor(
+    value: string | DataValueObject,
+    validationRules: ValidationRules = {},
+    data: DataValueObject = {},
+  ) {
+    super(
+      value,
+      Object.assign(
+        {
+          name: 'IamTagCreatedAt',
+          nullable: true,
+          undefinable: true,
+        },
+        validationRules,
+      ),
+      data,
+    );
+  }
 }

@@ -81,38 +81,38 @@ import { ToolsPaginateWebhooksService } from './application/paginate/tools-pagin
 import { ToolsUpdateWebhookByIdService } from './application/update/tools-update-webhook-by-id.service';
 
 export const ToolsWebhookHandlers = [
-    // commands
-    ToolsCreateWebhookCommandHandler,
-    ToolsCreateWebhooksCommandHandler,
-    ToolsUpdateWebhookByIdCommandHandler,
-    ToolsDeleteWebhookByIdCommandHandler,
-    ToolsDeleteWebhooksCommandHandler,
-    ToolsDigestWebhookCommandHandler,
+  // commands
+  ToolsCreateWebhookCommandHandler,
+  ToolsCreateWebhooksCommandHandler,
+  ToolsUpdateWebhookByIdCommandHandler,
+  ToolsDeleteWebhookByIdCommandHandler,
+  ToolsDeleteWebhooksCommandHandler,
+  ToolsDigestWebhookCommandHandler,
 
-    // queries
-    ToolsPaginateWebhooksQueryHandler,
-    ToolsGetWebhooksQueryHandler,
-    ToolsFindWebhookQueryHandler,
-    ToolsFindWebhookByIdQueryHandler,
+  // queries
+  ToolsPaginateWebhooksQueryHandler,
+  ToolsGetWebhooksQueryHandler,
+  ToolsFindWebhookQueryHandler,
+  ToolsFindWebhookByIdQueryHandler,
 
-    // events
-    ToolsCreatedWebhookEventHandler,
-    ToolsCreatedWebhooksEventHandler,
-    ToolsUpdatedWebhookEventHandler,
-    ToolsDeletedWebhookEventHandler,
-    ToolsDeletedWebhooksEventHandler,
-    ToolsDigestedWebhookEventHandler,
+  // events
+  ToolsCreatedWebhookEventHandler,
+  ToolsCreatedWebhooksEventHandler,
+  ToolsUpdatedWebhookEventHandler,
+  ToolsDeletedWebhookEventHandler,
+  ToolsDeletedWebhooksEventHandler,
+  ToolsDigestedWebhookEventHandler,
 ];
 
 export const ToolsWebhookServices = [
-    ToolsCreateWebhookService,
-    ToolsCreateWebhooksService,
-    ToolsPaginateWebhooksService,
-    ToolsGetWebhooksService,
-    ToolsFindWebhookService,
-    ToolsFindWebhookByIdService,
-    ToolsUpdateWebhookByIdService,
-    ToolsDeleteWebhookByIdService,
-    ToolsDeleteWebhooksService,
-    ToolsDigestWebhookService,
+  ToolsCreateWebhookService,
+  ToolsCreateWebhooksService,
+  ToolsPaginateWebhooksService,
+  ToolsGetWebhooksService,
+  ToolsFindWebhookService,
+  ToolsFindWebhookByIdService,
+  ToolsUpdateWebhookByIdService,
+  ToolsDeleteWebhookByIdService,
+  ToolsDeleteWebhooksService,
+  ToolsDigestWebhookService,
 ];

@@ -6,13 +6,13 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.procedure.get')
 export class ToolsCheckScriptProcedureResolver {
-    constructor(private readonly handler: ToolsCheckScriptProcedureHandler) {}
+  constructor(private readonly handler: ToolsCheckScriptProcedureHandler) {}
 
-    @Mutation('toolsCheckScriptProcedure')
-    async main(
-        @Args('procedureId') procedureId: string,
-        @Timezone() timezone?: string,
-    ): Promise<boolean> {
-        return await this.handler.main(procedureId, timezone);
-    }
+  @Mutation('toolsCheckScriptProcedure')
+  async main(
+    @Args('procedureId') procedureId: string,
+    @Timezone() timezone?: string,
+  ): Promise<boolean> {
+    return await this.handler.main(procedureId, timezone);
+  }
 }

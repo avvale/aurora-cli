@@ -5,21 +5,21 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamPaginateTagsQuery)
 export class IamPaginateTagsQueryHandler
-    implements IQueryHandler<IamPaginateTagsQuery>
+  implements IQueryHandler<IamPaginateTagsQuery>
 {
-    constructor(private readonly paginateTagsService: IamPaginateTagsService) {}
+  constructor(private readonly paginateTagsService: IamPaginateTagsService) {}
 
-    async execute(query: IamPaginateTagsQuery): Promise<PaginationResponse> {
-        const { total, count, rows } = await this.paginateTagsService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
+  async execute(query: IamPaginateTagsQuery): Promise<PaginationResponse> {
+    const { total, count, rows } = await this.paginateTagsService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
 
-        return new PaginationResponse(
-            total,
-            count,
-            rows.map((item) => item.toDTO()),
-        );
-    }
+    return new PaginationResponse(
+      total,
+      count,
+      rows.map((item) => item.toDTO()),
+    );
+  }
 }

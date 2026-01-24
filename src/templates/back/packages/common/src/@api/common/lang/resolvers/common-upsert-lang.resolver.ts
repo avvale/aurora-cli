@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.lang.upsert')
-export class CommonUpsertLangResolver
-{
-    constructor(
-        private readonly handler: CommonUpsertLangHandler,
-    ) {}
+export class CommonUpsertLangResolver {
+  constructor(private readonly handler: CommonUpsertLangHandler) {}
 
-    @Mutation('commonUpsertLang')
-    async main(
-        @Args('payload') payload: CommonUpdateLangByIdInput,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<CommonLang>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
-    }
+  @Mutation('commonUpsertLang')
+  async main(
+    @Args('payload') payload: CommonUpdateLangByIdInput,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<CommonLang> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

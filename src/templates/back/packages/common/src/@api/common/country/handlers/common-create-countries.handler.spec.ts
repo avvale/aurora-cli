@@ -3,38 +3,36 @@ import { commonMockCountryData } from '@app/common/country';
 import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('CommonCreateCountriesHandler', () =>
-{
-    let handler: CommonCreateCountriesHandler;
+describe('CommonCreateCountriesHandler', () => {
+  let handler: CommonCreateCountriesHandler;
 
-    beforeAll(async () =>
-    {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                CommonCreateCountriesHandler,
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
-            ],
-        })
-            .compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        CommonCreateCountriesHandler,
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<CommonCreateCountriesHandler>(CommonCreateCountriesHandler);
+    handler = module.get<CommonCreateCountriesHandler>(
+      CommonCreateCountriesHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('CommonCreateCountriesHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
 
-    describe('main', () =>
-    {
-        test('CommonCreateCountriesHandler should be defined', () =>
-        {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an commonMockCountryData created', async () =>
-        {
-            expect(await handler.main(commonMockCountryData)).toBe(true);
-        });
+    test('should return an commonMockCountryData created', async () => {
+      expect(await handler.main(commonMockCountryData)).toBe(true);
     });
+  });
 });

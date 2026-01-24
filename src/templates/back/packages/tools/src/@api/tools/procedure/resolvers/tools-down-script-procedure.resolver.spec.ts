@@ -4,40 +4,40 @@ import { ToolsDownScriptProcedureHandler } from '../handlers/tools-down-script-p
 import { ToolsDownScriptProcedureResolver } from './tools-down-script-procedure.resolver';
 
 describe('ToolsDownScriptProcedureResolver', () => {
-    let resolver: ToolsDownScriptProcedureResolver;
-    let handler: ToolsDownScriptProcedureHandler;
+  let resolver: ToolsDownScriptProcedureResolver;
+  let handler: ToolsDownScriptProcedureHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                ToolsDownScriptProcedureResolver,
-                {
-                    provide: ToolsDownScriptProcedureHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        ToolsDownScriptProcedureResolver,
+        {
+          provide: ToolsDownScriptProcedureHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<ToolsDownScriptProcedureResolver>(
-            ToolsDownScriptProcedureResolver,
-        );
-        handler = module.get<ToolsDownScriptProcedureHandler>(
-            ToolsDownScriptProcedureHandler,
-        );
-    });
+    resolver = module.get<ToolsDownScriptProcedureResolver>(
+      ToolsDownScriptProcedureResolver,
+    );
+    handler = module.get<ToolsDownScriptProcedureHandler>(
+      ToolsDownScriptProcedureHandler,
+    );
+  });
 
+  test('ToolsDownScriptProcedureResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('ToolsDownScriptProcedureResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
-
-    describe('main', () => {
-        test('ToolsDownScriptProcedureResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-    });
+  });
 });

@@ -38,21 +38,21 @@ import { ToolsRawSQLInformationSchemasQueryHandler } from './application/raw-sql
 import { ToolsCreatedInformationSchemaRequestEventHandler } from './application/events/tools-created-information-schema-request.event-handler';
 
 // services
-import { ToolsRawSQLInformationSchemasService } from './application/raw-sql/tools-raw-sql-information-schemas.service';
 import { ToolsRawSQLInformationSchemaService } from './application/raw-sql/tools-raw-sql-information-schema.service';
+import { ToolsRawSQLInformationSchemasService } from './application/raw-sql/tools-raw-sql-information-schemas.service';
 
 export const ToolsInformationSchemaHandlers = [
-    // commands
-    ToolsRawSQLInformationSchemaCommandHandler,
+  // commands
+  ToolsRawSQLInformationSchemaCommandHandler,
 
-    // queries
-    ToolsRawSQLInformationSchemasQueryHandler,
+  // queries
+  ToolsRawSQLInformationSchemasQueryHandler,
 
-    // events
-    ToolsCreatedInformationSchemaRequestEventHandler,
+  // events
+  ToolsCreatedInformationSchemaRequestEventHandler,
 ];
 
 export const ToolsInformationSchemaServices = [
-    ToolsRawSQLInformationSchemasService,
-    ToolsRawSQLInformationSchemaService,
+  ToolsRawSQLInformationSchemasService,
+  ToolsRawSQLInformationSchemaService,
 ];

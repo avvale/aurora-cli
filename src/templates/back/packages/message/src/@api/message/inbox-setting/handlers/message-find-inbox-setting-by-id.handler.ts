@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageFindInboxSettingByIdHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        id: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<MessageInboxSetting | MessageInboxSettingDto> {
-        return await this.queryBus.ask(
-            new MessageFindInboxSettingByIdQuery(id, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    id: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<MessageInboxSetting | MessageInboxSettingDto> {
+    return await this.queryBus.ask(
+      new MessageFindInboxSettingByIdQuery(id, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('whatsapp.message.get')
-export class WhatsappGetMessagesResolver
-{
-    constructor(
-        private readonly handler: WhatsappGetMessagesHandler,
-    ) {}
+export class WhatsappGetMessagesResolver {
+  constructor(private readonly handler: WhatsappGetMessagesHandler) {}
 
-    @Query('whatsappGetMessages')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<WhatsappMessage[]>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('whatsappGetMessages')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<WhatsappMessage[]> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

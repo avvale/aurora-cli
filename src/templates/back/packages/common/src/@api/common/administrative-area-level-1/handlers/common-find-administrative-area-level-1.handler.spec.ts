@@ -4,55 +4,53 @@ import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrati
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('CommonFindAdministrativeAreaLevel1Handler', () =>
-{
-    let handler: CommonFindAdministrativeAreaLevel1Handler;
-    let queryBus: IQueryBus;
+describe('CommonFindAdministrativeAreaLevel1Handler', () => {
+  let handler: CommonFindAdministrativeAreaLevel1Handler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            providers: [
-                CommonFindAdministrativeAreaLevel1Handler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
-            ],
-        })
-            .compile();
-
-        handler = module.get<CommonFindAdministrativeAreaLevel1Handler>(CommonFindAdministrativeAreaLevel1Handler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
-
-    test('CommonFindAdministrativeAreaLevel1Handler should be defined', () =>
-    {
-        expect(handler).toBeDefined();
-    });
-
-    describe('main', () =>
-    {
-        test('CommonFindAdministrativeAreaLevel1Handler should be defined', () =>
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        CommonFindAdministrativeAreaLevel1Handler,
         {
-            expect(handler).toBeDefined();
-        });
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        test('should return a administrativeAreaLevel1', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel1Data[0])));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(commonMockAdministrativeAreaLevel1Data[0]);
-        });
+    handler = module.get<CommonFindAdministrativeAreaLevel1Handler>(
+      CommonFindAdministrativeAreaLevel1Handler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  test('CommonFindAdministrativeAreaLevel1Handler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
+    test('CommonFindAdministrativeAreaLevel1Handler should be defined', () => {
+      expect(handler).toBeDefined();
     });
+
+    test('should return a administrativeAreaLevel1', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () =>
+            new Promise((resolve) =>
+              resolve(commonMockAdministrativeAreaLevel1Data[0]),
+            ),
+        );
+      expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+        commonMockAdministrativeAreaLevel1Data[0],
+      );
+    });
+  });
 });

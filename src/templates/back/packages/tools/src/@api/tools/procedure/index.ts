@@ -112,65 +112,65 @@ import { ToolsLoadProceduresService } from './shared/services/load-procedures.se
 /* #endregion customizations */
 
 export const ToolsProcedureApiControllers = [
-    ToolsCreateProcedureController,
-    ToolsCreateProceduresController,
-    ToolsPaginateProceduresController,
-    ToolsGetProceduresController,
-    ToolsFindProcedureByIdController,
-    ToolsFindProcedureController,
-    ToolsUpdateProcedureByIdController,
-    ToolsUpdateProceduresController,
-    ToolsDeleteProcedureByIdController,
-    ToolsDeleteProceduresController,
+  ToolsCreateProcedureController,
+  ToolsCreateProceduresController,
+  ToolsPaginateProceduresController,
+  ToolsGetProceduresController,
+  ToolsFindProcedureByIdController,
+  ToolsFindProcedureController,
+  ToolsUpdateProcedureByIdController,
+  ToolsUpdateProceduresController,
+  ToolsDeleteProcedureByIdController,
+  ToolsDeleteProceduresController,
 
-    // additionalApis
-    ToolsUpScriptProcedureController,
-    ToolsDownScriptProcedureController,
-    ToolsCheckScriptProcedureController,
-    ToolsRunScriptsProcedureController,
+  // additionalApis
+  ToolsUpScriptProcedureController,
+  ToolsDownScriptProcedureController,
+  ToolsCheckScriptProcedureController,
+  ToolsRunScriptsProcedureController,
 ];
 
 export const ToolsProcedureApiResolvers = [
-    ToolsCreateProcedureResolver,
-    ToolsCreateProceduresResolver,
-    ToolsPaginateProceduresResolver,
-    ToolsGetProceduresResolver,
-    ToolsFindProcedureByIdResolver,
-    ToolsFindProcedureResolver,
-    ToolsUpdateProcedureByIdResolver,
-    ToolsUpdateProceduresResolver,
-    ToolsDeleteProcedureByIdResolver,
-    ToolsDeleteProceduresResolver,
+  ToolsCreateProcedureResolver,
+  ToolsCreateProceduresResolver,
+  ToolsPaginateProceduresResolver,
+  ToolsGetProceduresResolver,
+  ToolsFindProcedureByIdResolver,
+  ToolsFindProcedureResolver,
+  ToolsUpdateProcedureByIdResolver,
+  ToolsUpdateProceduresResolver,
+  ToolsDeleteProcedureByIdResolver,
+  ToolsDeleteProceduresResolver,
 
-    // additionalApis
-    ToolsUpScriptProcedureResolver,
-    ToolsDownScriptProcedureResolver,
-    ToolsCheckScriptProcedureResolver,
-    ToolsRunScriptsProcedureResolver,
+  // additionalApis
+  ToolsUpScriptProcedureResolver,
+  ToolsDownScriptProcedureResolver,
+  ToolsCheckScriptProcedureResolver,
+  ToolsRunScriptsProcedureResolver,
 ];
 
 export const ToolsProcedureApiHandlers = [
-    ToolsCreateProcedureHandler,
-    ToolsCreateProceduresHandler,
-    ToolsPaginateProceduresHandler,
-    ToolsGetProceduresHandler,
-    ToolsFindProcedureByIdHandler,
-    ToolsFindProcedureHandler,
-    ToolsUpdateProcedureByIdHandler,
-    ToolsUpdateProceduresHandler,
-    ToolsDeleteProcedureByIdHandler,
-    ToolsDeleteProceduresHandler,
+  ToolsCreateProcedureHandler,
+  ToolsCreateProceduresHandler,
+  ToolsPaginateProceduresHandler,
+  ToolsGetProceduresHandler,
+  ToolsFindProcedureByIdHandler,
+  ToolsFindProcedureHandler,
+  ToolsUpdateProcedureByIdHandler,
+  ToolsUpdateProceduresHandler,
+  ToolsDeleteProcedureByIdHandler,
+  ToolsDeleteProceduresHandler,
 
-    // additionalApis
-    ToolsUpScriptProcedureHandler,
-    ToolsDownScriptProcedureHandler,
-    ToolsCheckScriptProcedureHandler,
-    ToolsRunScriptsProcedureHandler,
+  // additionalApis
+  ToolsUpScriptProcedureHandler,
+  ToolsDownScriptProcedureHandler,
+  ToolsCheckScriptProcedureHandler,
+  ToolsRunScriptsProcedureHandler,
 ];
 
 export const ToolsProcedureApiServices = [
-    ToolsProcedureSeeder,
-    /* #region customizations */
-    ToolsLoadProceduresService,
-    /* #endregion customizations */
+  ToolsProcedureSeeder,
+  /* #region customizations */
+  ToolsLoadProceduresService,
+  /* #endregion customizations */
 ];

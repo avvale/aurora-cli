@@ -5,18 +5,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthDeleteAccessTokenByIdCommand)
 export class OAuthDeleteAccessTokenByIdCommandHandler
-    implements ICommandHandler<OAuthDeleteAccessTokenByIdCommand>
+  implements ICommandHandler<OAuthDeleteAccessTokenByIdCommand>
 {
-    constructor(
-        private readonly deleteAccessTokenByIdService: OAuthDeleteAccessTokenByIdService,
-    ) {}
+  constructor(
+    private readonly deleteAccessTokenByIdService: OAuthDeleteAccessTokenByIdService,
+  ) {}
 
-    async execute(command: OAuthDeleteAccessTokenByIdCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteAccessTokenByIdService.main(
-            new OAuthAccessTokenId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: OAuthDeleteAccessTokenByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteAccessTokenByIdService.main(
+      new OAuthAccessTokenId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

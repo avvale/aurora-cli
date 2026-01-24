@@ -90,51 +90,51 @@ import { IamInheritPermissionsRoleRoleHandler } from './handlers/iam-inherit-per
 import { IamInheritPermissionsRoleRoleResolver } from './resolvers/iam-inherit-permissions-role-role.resolver';
 
 export const IamRoleApiControllers = [
-    IamCreateRoleController,
-    IamCreateRolesController,
-    IamPaginateRolesController,
-    IamGetRolesController,
-    IamFindRoleByIdController,
-    IamFindRoleController,
-    IamUpdateRoleByIdController,
-    IamUpdateRolesController,
-    IamDeleteRoleByIdController,
-    IamDeleteRolesController,
+  IamCreateRoleController,
+  IamCreateRolesController,
+  IamPaginateRolesController,
+  IamGetRolesController,
+  IamFindRoleByIdController,
+  IamFindRoleController,
+  IamUpdateRoleByIdController,
+  IamUpdateRolesController,
+  IamDeleteRoleByIdController,
+  IamDeleteRolesController,
 
-    // additionalApis
-    IamInheritPermissionsRoleRoleController,
+  // additionalApis
+  IamInheritPermissionsRoleRoleController,
 ];
 
 export const IamRoleApiResolvers = [
-    IamCreateRoleResolver,
-    IamCreateRolesResolver,
-    IamPaginateRolesResolver,
-    IamGetRolesResolver,
-    IamFindRoleByIdResolver,
-    IamFindRoleResolver,
-    IamUpdateRoleByIdResolver,
-    IamUpdateRolesResolver,
-    IamDeleteRoleByIdResolver,
-    IamDeleteRolesResolver,
+  IamCreateRoleResolver,
+  IamCreateRolesResolver,
+  IamPaginateRolesResolver,
+  IamGetRolesResolver,
+  IamFindRoleByIdResolver,
+  IamFindRoleResolver,
+  IamUpdateRoleByIdResolver,
+  IamUpdateRolesResolver,
+  IamDeleteRoleByIdResolver,
+  IamDeleteRolesResolver,
 
-    // additionalApis
-    IamInheritPermissionsRoleRoleResolver,
+  // additionalApis
+  IamInheritPermissionsRoleRoleResolver,
 ];
 
 export const IamRoleApiHandlers = [
-    IamCreateRoleHandler,
-    IamCreateRolesHandler,
-    IamPaginateRolesHandler,
-    IamGetRolesHandler,
-    IamFindRoleByIdHandler,
-    IamFindRoleHandler,
-    IamUpdateRoleByIdHandler,
-    IamUpdateRolesHandler,
-    IamDeleteRoleByIdHandler,
-    IamDeleteRolesHandler,
+  IamCreateRoleHandler,
+  IamCreateRolesHandler,
+  IamPaginateRolesHandler,
+  IamGetRolesHandler,
+  IamFindRoleByIdHandler,
+  IamFindRoleHandler,
+  IamUpdateRoleByIdHandler,
+  IamUpdateRolesHandler,
+  IamDeleteRoleByIdHandler,
+  IamDeleteRolesHandler,
 
-    // additionalApis
-    IamInheritPermissionsRoleRoleHandler,
+  // additionalApis
+  IamInheritPermissionsRoleRoleHandler,
 ];
 
 export const IamRoleApiServices = [IamRoleSeeder];

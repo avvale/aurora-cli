@@ -4,17 +4,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessagePaginateOutboxesService {
-    constructor(private readonly repository: MessageIOutboxRepository) {}
+  constructor(private readonly repository: MessageIOutboxRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<Pagination<MessageOutbox>> {
-        return await this.repository.paginate({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<Pagination<MessageOutbox>> {
+    return await this.repository.paginate({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

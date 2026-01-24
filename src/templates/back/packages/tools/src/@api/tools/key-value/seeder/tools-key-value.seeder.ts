@@ -3,24 +3,24 @@ import { Injectable } from '@nestjs/common';
 
 //
 import {
-    ToolsCreateKeyValuesCommand,
-    toolsMockKeyValueData,
+  ToolsCreateKeyValuesCommand,
+  toolsMockKeyValueData,
 } from '@app/tools/key-value';
 
 @Injectable()
 export class ToolsKeyValueSeeder {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new ToolsCreateKeyValuesCommand(toolsMockKeyValueData, {
-                timezone: process.env.TZ,
-            }),
-        );
+  async main(): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new ToolsCreateKeyValuesCommand(toolsMockKeyValueData, {
+        timezone: process.env.TZ,
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

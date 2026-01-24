@@ -9,15 +9,15 @@ import { ToolsCheckScriptProcedureHandler } from '../handlers/tools-check-script
 @Controller('tools/procedure/check-script')
 @Auth('tools.procedure.get')
 export class ToolsCheckScriptProcedureController {
-    constructor(private readonly handler: ToolsCheckScriptProcedureHandler) {}
+  constructor(private readonly handler: ToolsCheckScriptProcedureHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(@Body() procedureId: string, @Timezone() timezone?: string) {
-        return await this.handler.main(procedureId, timezone);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(@Body() procedureId: string, @Timezone() timezone?: string) {
+    return await this.handler.main(procedureId, timezone);
+  }
 }

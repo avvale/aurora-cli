@@ -8,49 +8,49 @@ import { IamUserPassword } from '../../domain/value-objects';
 
 @Injectable()
 export class IamFindUserByUsernamePasswordService {
-    constructor(private readonly repository: IamIUserRepository) {}
+  constructor(private readonly repository: IamIUserRepository) {}
 
-    public async main(
-        username: IamAccountUsername,
-        password: IamUserPassword,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<IamUser> {
-        const user = await this.repository.find({
-            queryStatement: {
-                include: [
-                    {
-                        association: 'account',
-                        where: {
-                            username: username.value,
-                        },
-                    },
-                ],
+  public async main(
+    username: IamAccountUsername,
+    password: IamUserPassword,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<IamUser> {
+    const user = await this.repository.find({
+      queryStatement: {
+        include: [
+          {
+            association: 'account',
+            where: {
+              username: username.value,
             },
-            constraint,
-            cQMetadata,
-        });
+          },
+        ],
+      },
+      constraint,
+      cQMetadata,
+    });
 
-        // check user active, and correct password
-        if (
-            user &&
-            user.account.isActive &&
-            bcrypt.compareSync(password.value, user.password.value)
-        ) {
-            // set validation rule to undefinable
-            user.password.validationRules = Object.assign(
-                user.password.validationRules,
-                {
-                    undefinable: true,
-                },
-            );
+    // check user active, and correct password
+    if (
+      user &&
+      user.account.isActive &&
+      bcrypt.compareSync(password.value, user.password.value)
+    ) {
+      // set validation rule to undefinable
+      user.password.validationRules = Object.assign(
+        user.password.validationRules,
+        {
+          undefinable: true,
+        },
+      );
 
-            // delete password from response
-            user.password.value = undefined;
+      // delete password from response
+      user.password.value = undefined;
 
-            return user;
-        }
-
-        return null;
+      return user;
     }
+
+    return null;
+  }
 }

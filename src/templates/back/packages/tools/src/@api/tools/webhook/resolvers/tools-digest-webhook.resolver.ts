@@ -5,14 +5,14 @@ import { Request } from 'express';
 
 @Resolver()
 export class ToolsDigestWebhookResolver {
-    constructor(private readonly handler: ToolsDigestWebhookHandler) {}
+  constructor(private readonly handler: ToolsDigestWebhookHandler) {}
 
-    @Mutation('toolsDigestWebhook')
-    async main(
-        @GqlRequest() request: Request,
-        @GqlHeaders() headers: any,
-        @Args('payload') payload: any,
-    ): Promise<boolean> {
-        return await this.handler.main(request, headers, payload);
-    }
+  @Mutation('toolsDigestWebhook')
+  async main(
+    @GqlRequest() request: Request,
+    @GqlHeaders() headers: any,
+    @Args('payload') payload: any,
+  ): Promise<boolean> {
+    return await this.handler.main(request, headers, payload);
+  }
 }

@@ -75,35 +75,35 @@ import { OAuthPaginateClientsService } from './application/paginate/o-auth-pagin
 import { OAuthUpdateClientByIdService } from './application/update/o-auth-update-client-by-id.service';
 
 export const OAuthClientHandlers = [
-    // commands
-    OAuthCreateClientCommandHandler,
-    OAuthCreateClientsCommandHandler,
-    OAuthUpdateClientByIdCommandHandler,
-    OAuthDeleteClientByIdCommandHandler,
-    OAuthDeleteClientsCommandHandler,
+  // commands
+  OAuthCreateClientCommandHandler,
+  OAuthCreateClientsCommandHandler,
+  OAuthUpdateClientByIdCommandHandler,
+  OAuthDeleteClientByIdCommandHandler,
+  OAuthDeleteClientsCommandHandler,
 
-    // queries
-    OAuthPaginateClientsQueryHandler,
-    OAuthGetClientsQueryHandler,
-    OAuthFindClientQueryHandler,
-    OAuthFindClientByIdQueryHandler,
+  // queries
+  OAuthPaginateClientsQueryHandler,
+  OAuthGetClientsQueryHandler,
+  OAuthFindClientQueryHandler,
+  OAuthFindClientByIdQueryHandler,
 
-    // events
-    OAuthCreatedClientEventHandler,
-    OAuthCreatedClientsEventHandler,
-    OAuthUpdatedClientEventHandler,
-    OAuthDeletedClientEventHandler,
-    OAuthDeletedClientsEventHandler,
+  // events
+  OAuthCreatedClientEventHandler,
+  OAuthCreatedClientsEventHandler,
+  OAuthUpdatedClientEventHandler,
+  OAuthDeletedClientEventHandler,
+  OAuthDeletedClientsEventHandler,
 ];
 
 export const OAuthClientServices = [
-    OAuthCreateClientService,
-    OAuthCreateClientsService,
-    OAuthPaginateClientsService,
-    OAuthGetClientsService,
-    OAuthFindClientService,
-    OAuthFindClientByIdService,
-    OAuthUpdateClientByIdService,
-    OAuthDeleteClientByIdService,
-    OAuthDeleteClientsService,
+  OAuthCreateClientService,
+  OAuthCreateClientsService,
+  OAuthPaginateClientsService,
+  OAuthGetClientsService,
+  OAuthFindClientService,
+  OAuthFindClientByIdService,
+  OAuthUpdateClientByIdService,
+  OAuthDeleteClientByIdService,
+  OAuthDeleteClientsService,
 ];

@@ -5,62 +5,68 @@ import { commonMockAdministrativeAreaLevel1Data } from '@app/common/administrati
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('CommonUpdateAdministrativeAreasLevel1Handler', () =>
-{
-    let handler: CommonUpdateAdministrativeAreasLevel1Handler;
-    let queryBus: IQueryBus;
+describe('CommonUpdateAdministrativeAreasLevel1Handler', () => {
+  let handler: CommonUpdateAdministrativeAreasLevel1Handler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            providers: [
-                CommonUpdateAdministrativeAreasLevel1Handler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
-            ],
-        })
-            .compile();
-
-        handler = module.get<CommonUpdateAdministrativeAreasLevel1Handler>(CommonUpdateAdministrativeAreasLevel1Handler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
-
-    test('CommonUpdateAdministrativeAreasLevel1Handler should be defined', () =>
-    {
-        expect(handler).toBeDefined();
-    });
-
-    describe('main', () =>
-    {
-        test('CommonUpdateAdministrativeAreasLevel1Handler should be defined', () =>
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        CommonUpdateAdministrativeAreasLevel1Handler,
         {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return a administrativeAreasLevel1 updated', async () =>
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel1Data[0])));
-            expect(
-                await handler.main(
-                    <CommonUpdateAdministrativeAreasLevel1Input>commonMockAdministrativeAreaLevel1Data[0],
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(commonMockAdministrativeAreaLevel1Data[0]);
-        });
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
+
+    handler = module.get<CommonUpdateAdministrativeAreasLevel1Handler>(
+      CommonUpdateAdministrativeAreasLevel1Handler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  test('CommonUpdateAdministrativeAreasLevel1Handler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
+    test('CommonUpdateAdministrativeAreasLevel1Handler should be defined', () => {
+      expect(handler).toBeDefined();
     });
+
+    test('should return a administrativeAreasLevel1 updated', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () =>
+            new Promise((resolve) =>
+              resolve(commonMockAdministrativeAreaLevel1Data[0]),
+            ),
+        );
+      expect(
+        await handler.main(
+          <CommonUpdateAdministrativeAreasLevel1Input>(
+            commonMockAdministrativeAreaLevel1Data[0]
+          ),
+          {},
+          {},
+          'Europe/Madrid',
+        ),
+      ).toBe(commonMockAdministrativeAreaLevel1Data[0]);
+    });
+  });
 });

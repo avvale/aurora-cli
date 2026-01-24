@@ -9,14 +9,23 @@ hasAuditing: true
 front:
   solidIcon: comment
   outlineIcon: comment
+description: >
+  Comments on support issues. Supports threaded conversations with parent-child
+  relationships, external system sync, and rich content including attachments and
+  screen recordings.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the comment. UUID v4 format, generated automatically
+      on creation.
   - name: parentId
     type: id
     nullable: true
+    description: >
+      Parent comment ID for threaded conversations. NULL for top-level comments.
     relationship:
       type: many-to-one
       aggregateName: SupportComment
@@ -29,15 +38,24 @@ aggregateProperties:
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing numeric identifier for internal use and ordering. Unique
+      across all comments.
   - name: externalId
     type: varchar
     maxLength: 64
     nullable: true
     index: index
+    description: >
+      External system identifier for synchronization with third-party platforms
+      (e.g., Jira, GitHub).
   - name: externalParentId
     type: varchar
     maxLength: 64
     nullable: true
+    description: >
+      External parent identifier for maintaining comment hierarchy in synchronized
+      systems.
     relationship:
       type: many-to-one
       aggregateName: SupportComment
@@ -48,6 +66,8 @@ aggregateProperties:
   - name: issueId
     type: id
     nullable: true
+    description: >
+      Reference to the parent support issue.
     relationship:
       type: many-to-one
       aggregateName: SupportIssue
@@ -58,6 +78,9 @@ aggregateProperties:
   - name: accountId
     type: id
     nullable: true
+    description: >
+      ID of the authenticated account that created the comment. NULL for external
+      users.
     relationship:
       type: many-to-one
       aggregateName: IamAccount
@@ -69,31 +92,50 @@ aggregateProperties:
     type: varchar
     maxLength: 128
     nullable: true
+    description: >
+      Username snapshot at comment creation time. Denormalized for performance.
   - name: displayName
     type: varchar
     maxLength: 128
     nullable: true
+    description: >
+      Display name for external users not authenticated in the system.
   - name: description
     type: text
     nullable: false
+    description: >
+      Main content of the comment. Supports markdown or plain text.
   - name: attachments
     type: jsonb
     nullable: true
+    description: >
+      JSON array of attachment metadata (URLs, filenames, sizes, mimeTypes).
   - name: screenRecording
     type: jsonb
     nullable: true
+    description: >
+      Screen recording metadata for visual bug reports.
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+      Extensible metadata field for custom attributes or integration-specific data.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the comment was created. Auto-set on record creation.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the comment was last updated. Auto-set on record modification.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active record. When set, record is
+      excluded from normal queries.
 excludedOperations:
   - count
   - createBatch

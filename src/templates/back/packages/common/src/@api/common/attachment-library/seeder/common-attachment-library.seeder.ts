@@ -1,27 +1,29 @@
-import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 //
-import { CommonCreateAttachmentLibrariesCommand } from '@app/common/attachment-library';
-import { commonMockAttachmentLibraryData } from '@app/common/attachment-library';
+import {
+  CommonCreateAttachmentLibrariesCommand,
+  commonMockAttachmentLibraryData,
+} from '@app/common/attachment-library';
 
 @Injectable()
-export class CommonAttachmentLibrarySeeder
-{
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class CommonAttachmentLibrarySeeder {
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(): Promise<boolean>
-    {
-        await this.commandBus.dispatch(new CommonCreateAttachmentLibrariesCommand(
-            commonMockAttachmentLibraryData,
-            {
-                timezone: process.env.TZ ,
-            },
-        ));
+  async main(): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new CommonCreateAttachmentLibrariesCommand(
+        commonMockAttachmentLibraryData,
+        {
+          timezone: process.env.TZ,
+        },
+      ),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

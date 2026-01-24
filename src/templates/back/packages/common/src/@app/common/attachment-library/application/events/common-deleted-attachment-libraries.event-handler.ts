@@ -2,10 +2,10 @@ import { CommonDeletedAttachmentLibrariesEvent } from '@app/common/attachment-li
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(CommonDeletedAttachmentLibrariesEvent)
-export class CommonDeletedAttachmentLibrariesEventHandler implements IEventHandler<CommonDeletedAttachmentLibrariesEvent>
+export class CommonDeletedAttachmentLibrariesEventHandler
+  implements IEventHandler<CommonDeletedAttachmentLibrariesEvent>
 {
-    handle(event: CommonDeletedAttachmentLibrariesEvent): void
-    {
-        // console.log('DeletedAttachmentLibrariesEvent: ', event);
-    }
+  handle(event: CommonDeletedAttachmentLibrariesEvent): void {
+    // console.log('DeletedAttachmentLibrariesEvent: ', event);
+  }
 }

@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission.aurora.yaml
+ */
 /* #region customizations */
 export { IamPermissionHelper } from './domain/iam-permission-helper';
 /* #endregion customizations */
@@ -84,38 +88,38 @@ import { IamUpdatePermissionByIdService } from './application/update/iam-update-
 import { IamUpdatePermissionsService } from './application/update/iam-update-permissions.service';
 
 export const IamPermissionHandlers = [
-    // commands
-    IamCreatePermissionCommandHandler,
-    IamCreatePermissionsCommandHandler,
-    IamUpdatePermissionByIdCommandHandler,
-    IamUpdatePermissionsCommandHandler,
-    IamDeletePermissionByIdCommandHandler,
-    IamDeletePermissionsCommandHandler,
+  // commands
+  IamCreatePermissionCommandHandler,
+  IamCreatePermissionsCommandHandler,
+  IamUpdatePermissionByIdCommandHandler,
+  IamUpdatePermissionsCommandHandler,
+  IamDeletePermissionByIdCommandHandler,
+  IamDeletePermissionsCommandHandler,
 
-    // queries
-    IamPaginatePermissionsQueryHandler,
-    IamGetPermissionsQueryHandler,
-    IamFindPermissionQueryHandler,
-    IamFindPermissionByIdQueryHandler,
+  // queries
+  IamPaginatePermissionsQueryHandler,
+  IamGetPermissionsQueryHandler,
+  IamFindPermissionQueryHandler,
+  IamFindPermissionByIdQueryHandler,
 
-    // events
-    IamCreatedPermissionEventHandler,
-    IamCreatedPermissionsEventHandler,
-    IamUpdatedPermissionEventHandler,
-    IamUpdatedPermissionsEventHandler,
-    IamDeletedPermissionEventHandler,
-    IamDeletedPermissionsEventHandler,
+  // events
+  IamCreatedPermissionEventHandler,
+  IamCreatedPermissionsEventHandler,
+  IamUpdatedPermissionEventHandler,
+  IamUpdatedPermissionsEventHandler,
+  IamDeletedPermissionEventHandler,
+  IamDeletedPermissionsEventHandler,
 ];
 
 export const IamPermissionServices = [
-    IamCreatePermissionService,
-    IamCreatePermissionsService,
-    IamPaginatePermissionsService,
-    IamGetPermissionsService,
-    IamFindPermissionService,
-    IamFindPermissionByIdService,
-    IamUpdatePermissionByIdService,
-    IamUpdatePermissionsService,
-    IamDeletePermissionByIdService,
-    IamDeletePermissionsService,
+  IamCreatePermissionService,
+  IamCreatePermissionsService,
+  IamPaginatePermissionsService,
+  IamGetPermissionsService,
+  IamFindPermissionService,
+  IamFindPermissionByIdService,
+  IamUpdatePermissionByIdService,
+  IamUpdatePermissionsService,
+  IamDeletePermissionByIdService,
+  IamDeletePermissionsService,
 ];

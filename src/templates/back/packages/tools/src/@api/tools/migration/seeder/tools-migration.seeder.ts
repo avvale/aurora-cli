@@ -3,24 +3,24 @@ import { Injectable } from '@nestjs/common';
 
 //
 import {
-    ToolsCreateMigrationsCommand,
-    toolsMockMigrationData,
+  ToolsCreateMigrationsCommand,
+  toolsMockMigrationData,
 } from '@app/tools/migration';
 
 @Injectable()
 export class ToolsMigrationSeeder {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new ToolsCreateMigrationsCommand(toolsMockMigrationData, {
-                timezone: process.env.TZ,
-            }),
-        );
+  async main(): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new ToolsCreateMigrationsCommand(toolsMockMigrationData, {
+        timezone: process.env.TZ,
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

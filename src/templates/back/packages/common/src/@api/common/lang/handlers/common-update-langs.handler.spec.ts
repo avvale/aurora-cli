@@ -5,62 +5,61 @@ import { commonMockLangData } from '@app/common/lang';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('CommonUpdateLangsHandler', () =>
-{
-    let handler: CommonUpdateLangsHandler;
-    let queryBus: IQueryBus;
+describe('CommonUpdateLangsHandler', () => {
+  let handler: CommonUpdateLangsHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            providers: [
-                CommonUpdateLangsHandler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
-            ],
-        })
-            .compile();
-
-        handler = module.get<CommonUpdateLangsHandler>(CommonUpdateLangsHandler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
-
-    test('CommonUpdateLangsHandler should be defined', () =>
-    {
-        expect(handler).toBeDefined();
-    });
-
-    describe('main', () =>
-    {
-        test('CommonUpdateLangsHandler should be defined', () =>
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        CommonUpdateLangsHandler,
         {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return a langs updated', async () =>
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockLangData[0])));
-            expect(
-                await handler.main(
-                    <CommonUpdateLangsInput>commonMockLangData[0],
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(commonMockLangData[0]);
-        });
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
+
+    handler = module.get<CommonUpdateLangsHandler>(CommonUpdateLangsHandler);
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  test('CommonUpdateLangsHandler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
+    test('CommonUpdateLangsHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
+
+    test('should return a langs updated', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () => new Promise((resolve) => resolve(commonMockLangData[0])),
+        );
+      expect(
+        await handler.main(
+          <CommonUpdateLangsInput>commonMockLangData[0],
+          {},
+          {},
+          'Europe/Madrid',
+        ),
+      ).toBe(commonMockLangData[0]);
+    });
+  });
 });

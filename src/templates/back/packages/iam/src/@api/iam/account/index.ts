@@ -113,71 +113,71 @@ import { IamPaginateWithTenantConstraintAccountsResolver } from './resolvers/iam
 import { IamUpdateMeAccountResolver } from './resolvers/iam-update-me-account.resolver';
 
 export const IamAccountApiControllers = [
-    /* #region customizations */
-    IamMeAccountController,
-    /* #endregion customizations */
+  /* #region customizations */
+  IamMeAccountController,
+  /* #endregion customizations */
 
-    IamCreateAccountController,
-    IamPaginateAccountsController,
-    IamGetAccountsController,
-    IamFindAccountByIdController,
-    IamFindAccountController,
-    IamUpdateAccountByIdController,
-    IamUpdateAccountsController,
-    IamDeleteAccountByIdController,
-    IamDeleteAccountsController,
+  IamCreateAccountController,
+  IamPaginateAccountsController,
+  IamGetAccountsController,
+  IamFindAccountByIdController,
+  IamFindAccountController,
+  IamUpdateAccountByIdController,
+  IamUpdateAccountsController,
+  IamDeleteAccountByIdController,
+  IamDeleteAccountsController,
 
-    // additionalApis
-    IamUpdateMeAccountController,
-    IamCheckPasswordMeAccountController,
-    IamCheckUniqueUsernameAccountController,
-    IamCheckUniqueEmailAccountController,
-    IamPaginateWithTenantConstraintAccountsController,
+  // additionalApis
+  IamUpdateMeAccountController,
+  IamCheckPasswordMeAccountController,
+  IamCheckUniqueUsernameAccountController,
+  IamCheckUniqueEmailAccountController,
+  IamPaginateWithTenantConstraintAccountsController,
 ];
 
 export const IamAccountApiResolvers = [
-    /* #region customizations */
-    IamMeAccountResolver,
-    /* #endregion customizations */
+  /* #region customizations */
+  IamMeAccountResolver,
+  /* #endregion customizations */
 
-    IamCreateAccountResolver,
-    IamPaginateAccountsResolver,
-    IamGetAccountsResolver,
-    IamFindAccountByIdResolver,
-    IamFindAccountResolver,
-    IamUpdateAccountByIdResolver,
-    IamUpdateAccountsResolver,
-    IamDeleteAccountByIdResolver,
-    IamDeleteAccountsResolver,
+  IamCreateAccountResolver,
+  IamPaginateAccountsResolver,
+  IamGetAccountsResolver,
+  IamFindAccountByIdResolver,
+  IamFindAccountResolver,
+  IamUpdateAccountByIdResolver,
+  IamUpdateAccountsResolver,
+  IamDeleteAccountByIdResolver,
+  IamDeleteAccountsResolver,
 
-    // additionalApis
-    IamUpdateMeAccountResolver,
-    IamCheckPasswordMeAccountResolver,
-    IamCheckUniqueUsernameAccountResolver,
-    IamCheckUniqueEmailAccountResolver,
-    IamPaginateWithTenantConstraintAccountsResolver,
+  // additionalApis
+  IamUpdateMeAccountResolver,
+  IamCheckPasswordMeAccountResolver,
+  IamCheckUniqueUsernameAccountResolver,
+  IamCheckUniqueEmailAccountResolver,
+  IamPaginateWithTenantConstraintAccountsResolver,
 ];
 
 export const IamAccountApiHandlers = [
-    /* #region customizations */
-    IamMeAccountHandler,
-    /* #endregion customizations */
+  /* #region customizations */
+  IamMeAccountHandler,
+  /* #endregion customizations */
 
-    IamCreateAccountHandler,
-    IamPaginateAccountsHandler,
-    IamGetAccountsHandler,
-    IamFindAccountByIdHandler,
-    IamFindAccountHandler,
-    IamUpdateAccountByIdHandler,
-    IamUpdateAccountsHandler,
-    IamDeleteAccountByIdHandler,
-    IamDeleteAccountsHandler,
+  IamCreateAccountHandler,
+  IamPaginateAccountsHandler,
+  IamGetAccountsHandler,
+  IamFindAccountByIdHandler,
+  IamFindAccountHandler,
+  IamUpdateAccountByIdHandler,
+  IamUpdateAccountsHandler,
+  IamDeleteAccountByIdHandler,
+  IamDeleteAccountsHandler,
 
-    // additionalApis
-    IamUpdateMeAccountHandler,
-    IamCheckPasswordMeAccountHandler,
-    IamCheckUniqueUsernameAccountHandler,
-    IamCheckUniqueEmailAccountHandler,
+  // additionalApis
+  IamUpdateMeAccountHandler,
+  IamCheckPasswordMeAccountHandler,
+  IamCheckUniqueUsernameAccountHandler,
+  IamCheckUniqueEmailAccountHandler,
 ];
 
 export const IamAccountApiServices = [IamAccountSeeder];

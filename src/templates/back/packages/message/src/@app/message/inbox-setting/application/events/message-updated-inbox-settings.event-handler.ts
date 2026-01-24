@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(MessageUpdatedInboxSettingsEvent)
 export class MessageUpdatedInboxSettingsEventHandler
-    implements IEventHandler<MessageUpdatedInboxSettingsEvent>
+  implements IEventHandler<MessageUpdatedInboxSettingsEvent>
 {
-    handle(event: MessageUpdatedInboxSettingsEvent): void {
-        // console.log('MessageUpdatedInboxSettingsEvent: ', event);
-    }
+  handle(event: MessageUpdatedInboxSettingsEvent): void {
+    // console.log('MessageUpdatedInboxSettingsEvent: ', event);
+  }
 }

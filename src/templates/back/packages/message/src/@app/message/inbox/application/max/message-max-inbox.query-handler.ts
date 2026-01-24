@@ -4,16 +4,16 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(MessageMaxInboxQuery)
 export class MessageMaxInboxQueryHandler
-    implements IQueryHandler<MessageMaxInboxQuery>
+  implements IQueryHandler<MessageMaxInboxQuery>
 {
-    constructor(private readonly maxInboxService: MessageMaxInboxService) {}
+  constructor(private readonly maxInboxService: MessageMaxInboxService) {}
 
-    async execute(query: MessageMaxInboxQuery): Promise<number> {
-        return await this.maxInboxService.main(
-            query.column,
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: MessageMaxInboxQuery): Promise<number> {
+    return await this.maxInboxService.main(
+      query.column,
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

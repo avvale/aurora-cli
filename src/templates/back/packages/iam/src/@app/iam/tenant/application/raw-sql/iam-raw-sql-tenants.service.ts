@@ -4,12 +4,12 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamRawSQLTenantsService {
-    constructor(private readonly repository: IamITenantRepository) {}
+  constructor(private readonly repository: IamITenantRepository) {}
 
-    async main(rawSQL?: string, cQMetadata?: CQMetadata): Promise<IamTenant[]> {
-        return await this.repository.rawSQL({
-            rawSQL,
-            cQMetadata,
-        });
-    }
+  async main(rawSQL?: string, cQMetadata?: CQMetadata): Promise<IamTenant[]> {
+    return await this.repository.rawSQL({
+      rawSQL,
+      cQMetadata,
+    });
+  }
 }

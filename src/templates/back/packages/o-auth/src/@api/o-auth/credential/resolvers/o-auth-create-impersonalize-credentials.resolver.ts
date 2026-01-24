@@ -6,23 +6,17 @@ import { OAuthCreateImpersonalizeCredentialsHandler } from '../handlers/o-auth-c
 
 @Resolver()
 @Auth('oAuth.credential.impersonalize')
-export class OAuthCreateImpersonalizeCredentialsResolver
-{
-    constructor(
-        private readonly handler: OAuthCreateImpersonalizeCredentialsHandler,
-    ) {}
+export class OAuthCreateImpersonalizeCredentialsResolver {
+  constructor(
+    private readonly handler: OAuthCreateImpersonalizeCredentialsHandler,
+  ) {}
 
-    @Mutation('oAuthCreateImpersonalizeCredentials')
-    async main(
-        @Args('accountId') accountId: string,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<OAuthCredentials>
-    {
-        return await this.handler.main(
-            accountId,
-            timezone,
-            auditing,
-        );
-    }
+  @Mutation('oAuthCreateImpersonalizeCredentials')
+  async main(
+    @Args('accountId') accountId: string,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<OAuthCredentials> {
+    return await this.handler.main(accountId, timezone, auditing);
+  }
 }

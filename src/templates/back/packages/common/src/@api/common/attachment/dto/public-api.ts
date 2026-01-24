@@ -4,7 +4,7 @@ export { CommonCropAttachmentLibraryDto } from './common-crop-attachment-library
 export { CommonCropAttachmentDto } from './common-crop-attachment.dto';
 /* #endregion customizations */
 
-export { CommonCreateAttachmentDto } from './common-create-attachment.dto';
-export { CommonUpdateAttachmentsDto } from './common-update-attachments.dto';
-export { CommonUpdateAttachmentByIdDto } from './common-update-attachment-by-id.dto';
 export { CommonAttachmentDto } from './common-attachment.dto';
+export { CommonCreateAttachmentDto } from './common-create-attachment.dto';
+export { CommonUpdateAttachmentByIdDto } from './common-update-attachment-by-id.dto';
+export { CommonUpdateAttachmentsDto } from './common-update-attachments.dto';

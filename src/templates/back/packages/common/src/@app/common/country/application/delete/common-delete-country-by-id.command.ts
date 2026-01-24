@@ -1,11 +1,9 @@
-import { QueryStatement } from '@aurorajs.dev/core';
-import { CQMetadata } from '@aurorajs.dev/core';
+import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class CommonDeleteCountryByIdCommand
-{
-    constructor(
-        public readonly id: string,
-        public readonly constraint?: QueryStatement,
-        public readonly cQMetadata?: CQMetadata,
-    ) {}
+export class CommonDeleteCountryByIdCommand {
+  constructor(
+    public readonly id: string,
+    public readonly constraint?: QueryStatement,
+    public readonly cQMetadata?: CQMetadata,
+  ) {}
 }

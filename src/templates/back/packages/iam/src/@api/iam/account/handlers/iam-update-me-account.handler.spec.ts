@@ -4,44 +4,42 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { IamUpdateMeAccountHandler } from './iam-update-me-account.handler';
 
 describe('IamUpdateMeAccountHandler', () => {
-    let handler: IamUpdateMeAccountHandler;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+  let handler: IamUpdateMeAccountHandler;
+  let queryBus: IQueryBus;
+  let commandBus: ICommandBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                IamUpdateMeAccountHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        IamUpdateMeAccountHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<IamUpdateMeAccountHandler>(
-            IamUpdateMeAccountHandler,
-        );
-        queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
+    handler = module.get<IamUpdateMeAccountHandler>(IamUpdateMeAccountHandler);
+    queryBus = module.get<IQueryBus>(IQueryBus);
+    commandBus = module.get<ICommandBus>(ICommandBus);
+  });
+
+  describe('main', () => {
+    test('IamUpdateMeAccountHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
-
-    describe('main', () => {
-        test('IamUpdateMeAccountHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-    });
+  });
 });

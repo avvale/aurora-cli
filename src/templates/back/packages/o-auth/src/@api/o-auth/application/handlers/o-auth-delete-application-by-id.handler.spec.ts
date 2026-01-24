@@ -5,58 +5,53 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteApplicationByIdController', () => {
-    let handler: OAuthDeleteApplicationByIdHandler;
-    let queryBus: IQueryBus;
+  let handler: OAuthDeleteApplicationByIdHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                OAuthDeleteApplicationByIdHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        OAuthDeleteApplicationByIdHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<OAuthDeleteApplicationByIdHandler>(
-            OAuthDeleteApplicationByIdHandler,
+    handler = module.get<OAuthDeleteApplicationByIdHandler>(
+      OAuthDeleteApplicationByIdHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  describe('main', () => {
+    test('OAuthDeleteApplicationByIdHandler should be defined', () => {
+      expect(handler).toBeDefined();
+    });
+
+    test('should return an application deleted', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () => new Promise((resolve) => resolve(oAuthMockApplicationData[0])),
         );
-        queryBus = module.get<IQueryBus>(IQueryBus);
+      expect(
+        await handler.main(oAuthMockApplicationData[0].id, {}, 'Europe/Madrid'),
+      ).toBe(oAuthMockApplicationData[0]);
     });
-
-    describe('main', () => {
-        test('OAuthDeleteApplicationByIdHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an application deleted', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve(oAuthMockApplicationData[0]),
-                    ),
-            );
-            expect(
-                await handler.main(
-                    oAuthMockApplicationData[0].id,
-                    {},
-                    'Europe/Madrid',
-                ),
-            ).toBe(oAuthMockApplicationData[0]);
-        });
-    });
+  });
 });

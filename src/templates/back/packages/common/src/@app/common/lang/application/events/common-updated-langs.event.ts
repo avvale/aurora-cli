@@ -1,8 +1,5 @@
 import { CommonUpdatedLangEvent } from './common-updated-lang.event';
 
-export class CommonUpdatedLangsEvent
-{
-    constructor(
-        public readonly langs: CommonUpdatedLangEvent[],
-    ) {}
+export class CommonUpdatedLangsEvent {
+  constructor(public readonly langs: CommonUpdatedLangEvent[]) {}
 }

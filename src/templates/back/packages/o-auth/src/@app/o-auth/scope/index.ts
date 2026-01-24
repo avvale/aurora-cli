@@ -72,33 +72,33 @@ import { OAuthPaginateScopesService } from './application/paginate/o-auth-pagina
 import { OAuthUpdateScopeByIdService } from './application/update/o-auth-update-scope-by-id.service';
 
 export const OAuthScopeHandlers = [
-    // commands
-    OAuthCreateScopeCommandHandler,
-    OAuthUpdateScopeByIdCommandHandler,
-    OAuthDeleteScopeByIdCommandHandler,
-    OAuthDeleteScopesCommandHandler,
+  // commands
+  OAuthCreateScopeCommandHandler,
+  OAuthUpdateScopeByIdCommandHandler,
+  OAuthDeleteScopeByIdCommandHandler,
+  OAuthDeleteScopesCommandHandler,
 
-    // queries
-    OAuthPaginateScopesQueryHandler,
-    OAuthGetScopesQueryHandler,
-    OAuthFindScopeQueryHandler,
-    OAuthFindScopeByIdQueryHandler,
+  // queries
+  OAuthPaginateScopesQueryHandler,
+  OAuthGetScopesQueryHandler,
+  OAuthFindScopeQueryHandler,
+  OAuthFindScopeByIdQueryHandler,
 
-    // events
-    OAuthCreatedScopeEventHandler,
-    OAuthCreatedScopesEventHandler,
-    OAuthUpdatedScopeEventHandler,
-    OAuthDeletedScopeEventHandler,
-    OAuthDeletedScopesEventHandler,
+  // events
+  OAuthCreatedScopeEventHandler,
+  OAuthCreatedScopesEventHandler,
+  OAuthUpdatedScopeEventHandler,
+  OAuthDeletedScopeEventHandler,
+  OAuthDeletedScopesEventHandler,
 ];
 
 export const OAuthScopeServices = [
-    OAuthCreateScopeService,
-    OAuthPaginateScopesService,
-    OAuthGetScopesService,
-    OAuthFindScopeService,
-    OAuthFindScopeByIdService,
-    OAuthUpdateScopeByIdService,
-    OAuthDeleteScopeByIdService,
-    OAuthDeleteScopesService,
+  OAuthCreateScopeService,
+  OAuthPaginateScopesService,
+  OAuthGetScopesService,
+  OAuthFindScopeService,
+  OAuthFindScopeByIdService,
+  OAuthUpdateScopeByIdService,
+  OAuthDeleteScopeByIdService,
+  OAuthDeleteScopesService,
 ];

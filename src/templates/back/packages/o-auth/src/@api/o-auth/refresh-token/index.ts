@@ -55,30 +55,30 @@ import { OAuthPaginateRefreshTokensHandler } from './handlers/o-auth-paginate-re
 // import seeder
 
 export const OAuthRefreshTokenApiControllers = [
-    OAuthPaginateRefreshTokensController,
-    OAuthGetRefreshTokensController,
-    OAuthFindRefreshTokenByIdController,
-    OAuthFindRefreshTokenController,
-    OAuthDeleteRefreshTokenByIdController,
-    OAuthDeleteRefreshTokensController,
+  OAuthPaginateRefreshTokensController,
+  OAuthGetRefreshTokensController,
+  OAuthFindRefreshTokenByIdController,
+  OAuthFindRefreshTokenController,
+  OAuthDeleteRefreshTokenByIdController,
+  OAuthDeleteRefreshTokensController,
 ];
 
 export const OAuthRefreshTokenApiResolvers = [
-    OAuthPaginateRefreshTokensResolver,
-    OAuthGetRefreshTokensResolver,
-    OAuthFindRefreshTokenByIdResolver,
-    OAuthFindRefreshTokenResolver,
-    OAuthDeleteRefreshTokenByIdResolver,
-    OAuthDeleteRefreshTokensResolver,
+  OAuthPaginateRefreshTokensResolver,
+  OAuthGetRefreshTokensResolver,
+  OAuthFindRefreshTokenByIdResolver,
+  OAuthFindRefreshTokenResolver,
+  OAuthDeleteRefreshTokenByIdResolver,
+  OAuthDeleteRefreshTokensResolver,
 ];
 
 export const OAuthRefreshTokenApiHandlers = [
-    OAuthPaginateRefreshTokensHandler,
-    OAuthGetRefreshTokensHandler,
-    OAuthFindRefreshTokenByIdHandler,
-    OAuthFindRefreshTokenHandler,
-    OAuthDeleteRefreshTokenByIdHandler,
-    OAuthDeleteRefreshTokensHandler,
+  OAuthPaginateRefreshTokensHandler,
+  OAuthGetRefreshTokensHandler,
+  OAuthFindRefreshTokenByIdHandler,
+  OAuthFindRefreshTokenHandler,
+  OAuthDeleteRefreshTokenByIdHandler,
+  OAuthDeleteRefreshTokensHandler,
 ];
 
 export const OAuthRefreshTokenApiServices = [];

@@ -3,19 +3,19 @@ import { CommonDeleteAttachmentFamiliesService } from '@app/common/attachment-fa
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonDeleteAttachmentFamiliesCommand)
-export class CommonDeleteAttachmentFamiliesCommandHandler implements ICommandHandler<CommonDeleteAttachmentFamiliesCommand>
+export class CommonDeleteAttachmentFamiliesCommandHandler
+  implements ICommandHandler<CommonDeleteAttachmentFamiliesCommand>
 {
-    constructor(
-        private readonly deleteAttachmentFamiliesService: CommonDeleteAttachmentFamiliesService,
-    ) {}
+  constructor(
+    private readonly deleteAttachmentFamiliesService: CommonDeleteAttachmentFamiliesService,
+  ) {}
 
-    async execute(command: CommonDeleteAttachmentFamiliesCommand): Promise<void>
-    {
-        // call to use case and implements ValueObjects
-        await this.deleteAttachmentFamiliesService.main(
-            command.queryStatement,
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: CommonDeleteAttachmentFamiliesCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteAttachmentFamiliesService.main(
+      command.queryStatement,
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

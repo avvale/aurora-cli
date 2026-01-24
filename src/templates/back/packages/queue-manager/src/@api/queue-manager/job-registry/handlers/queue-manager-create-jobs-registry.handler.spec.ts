@@ -4,37 +4,35 @@ import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerCreateJobsRegistryHandler', () => {
-    let handler: QueueManagerCreateJobsRegistryHandler;
+  let handler: QueueManagerCreateJobsRegistryHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                QueueManagerCreateJobsRegistryHandler,
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        QueueManagerCreateJobsRegistryHandler,
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<QueueManagerCreateJobsRegistryHandler>(
-            QueueManagerCreateJobsRegistryHandler,
-        );
+    handler = module.get<QueueManagerCreateJobsRegistryHandler>(
+      QueueManagerCreateJobsRegistryHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('QueueManagerCreateJobsRegistryHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('QueueManagerCreateJobsRegistryHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an queueManagerMockJobRegistryData created', async () => {
-            expect(await handler.main(queueManagerMockJobRegistryData)).toBe(
-                true,
-            );
-        });
+    test('should return an queueManagerMockJobRegistryData created', async () => {
+      expect(await handler.main(queueManagerMockJobRegistryData)).toBe(true);
     });
+  });
 });

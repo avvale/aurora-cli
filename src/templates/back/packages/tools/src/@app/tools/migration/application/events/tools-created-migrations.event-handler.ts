@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(ToolsCreatedMigrationsEvent)
 export class ToolsCreatedMigrationsEventHandler
-    implements IEventHandler<ToolsCreatedMigrationsEvent>
+  implements IEventHandler<ToolsCreatedMigrationsEvent>
 {
-    handle(event: ToolsCreatedMigrationsEvent): void {
-        // console.log('CreatedMigrationsEvent: ', event);
-    }
+  handle(event: ToolsCreatedMigrationsEvent): void {
+    // console.log('CreatedMigrationsEvent: ', event);
+  }
 }

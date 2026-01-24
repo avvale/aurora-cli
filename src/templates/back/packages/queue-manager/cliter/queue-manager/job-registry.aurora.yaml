@@ -11,20 +11,33 @@ front:
   outlineIcon: engineering
   solidFontSetIcon: material-symbols-outlined
   solidIcon: engineering
+description: >
+  Tracks all jobs within queues. Records lifecycle state (waiting, active,
+  completed, failed, etc.) and provides flexible querying via tags. Central
+  registry for monitoring and managing job execution across all queues.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the job registry record. UUID v4 format, generated
+      automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing numeric identifier for database ordering and efficient
+      queries. Unique across all job registry records.
   - name: queueName
     type: varchar
     maxLength: 63
     nullable: false
+    description: >
+      Fully qualified name of the queue this job belongs to. References queue for
+      processing. Format: 'prefix:name' or just 'name' if no prefix.
   - name: state
     type: enum
     enumOptions:
@@ -38,16 +51,28 @@ aggregateProperties:
     defaultValue: WAITING
     index: index
     example: QueueManagerJobState.COMPLETED
+    description: >
+      Current lifecycle state of the job. WAITING: Queued for processing. ACTIVE:
+      Currently being processed. DELAYED: Scheduled for future execution. COMPLETED:
+      Successfully finished. FAILED: Execution errors occurred. PAUSED: Temporarily
+      suspended.
   - name: jobId
     type: varchar
     maxLength: 36
     nullable: false
     index: index
+    description: >
+      Unique identifier of the job within its queue. UUID format. Used to track and
+      reference specific job instances for status queries and operations.
   - name: jobName
     type: varchar
     maxLength: 63
     nullable: true
     defaultValue: __default__
+    description: >
+      Named identifier for job type or processor (e.g., 'sendEmail', 'generateReport',
+      'processPayment'). Defaults to '__default__' for unnamed jobs. Used to route
+      jobs to appropriate handlers.
   - name: tags
     type: array
     arrayOptions:
@@ -56,15 +81,28 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+      Categorization tags for flexible querying and filtering. GIN indexed for
+      efficient array operations. Examples: ['priority:high', 'user:123', 'tenant:acme',
+      'type:export'].
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the job was registered in the system. Automatically set when
+      job is added to queue.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last modification to the job record. Updated on state changes
+      and other modifications.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active job record. When set, job is
+      marked as deleted but preserved for audit trail and historical analysis.
 excludedOperations:
   - count
   - getRaw

@@ -9,21 +9,21 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('message.message.get')
 export class MessageGetMessagesResolver {
-    constructor(private readonly handler: MessageGetMessagesHandler) {}
+  constructor(private readonly handler: MessageGetMessagesHandler) {}
 
-    @Query('messageGetMessages')
-    @TenantConstraint()
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<MessageMessage[]> {
-        return await this.handler.main(
-            account,
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('messageGetMessages')
+  @TenantConstraint()
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<MessageMessage[]> {
+    return await this.handler.main(
+      account,
+      queryStatement,
+      constraint,
+      timezone,
+    );
+  }
 }

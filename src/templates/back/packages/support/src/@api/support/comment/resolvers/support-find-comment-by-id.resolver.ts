@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('support.comment.get')
 export class SupportFindCommentByIdResolver {
-    constructor(private readonly handler: SupportFindCommentByIdHandler) {}
+  constructor(private readonly handler: SupportFindCommentByIdHandler) {}
 
-    @Query('supportFindCommentById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<SupportComment> {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Query('supportFindCommentById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<SupportComment> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

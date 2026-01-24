@@ -5,18 +5,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(SupportDeleteCommentByIdCommand)
 export class SupportDeleteCommentByIdCommandHandler
-    implements ICommandHandler<SupportDeleteCommentByIdCommand>
+  implements ICommandHandler<SupportDeleteCommentByIdCommand>
 {
-    constructor(
-        private readonly deleteCommentByIdService: SupportDeleteCommentByIdService,
-    ) {}
+  constructor(
+    private readonly deleteCommentByIdService: SupportDeleteCommentByIdService,
+  ) {}
 
-    async execute(command: SupportDeleteCommentByIdCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteCommentByIdService.main(
-            new SupportCommentId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: SupportDeleteCommentByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteCommentByIdService.main(
+      new SupportCommentId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('message.inboxSetting.get')
 export class MessageFindInboxSettingByIdResolver {
-    constructor(private readonly handler: MessageFindInboxSettingByIdHandler) {}
+  constructor(private readonly handler: MessageFindInboxSettingByIdHandler) {}
 
-    @Query('messageFindInboxSettingById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<MessageInboxSetting> {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Query('messageFindInboxSettingById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<MessageInboxSetting> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

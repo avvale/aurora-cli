@@ -9,16 +9,16 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('message.message.get')
 export class MessageFindMessageByIdResolver {
-    constructor(private readonly handler: MessageFindMessageByIdHandler) {}
+  constructor(private readonly handler: MessageFindMessageByIdHandler) {}
 
-    @Query('messageFindMessageById')
-    @TenantConstraint()
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<MessageMessage> {
-        return await this.handler.main(account, id, constraint, timezone);
-    }
+  @Query('messageFindMessageById')
+  @TenantConstraint()
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<MessageMessage> {
+    return await this.handler.main(account, id, constraint, timezone);
+  }
 }

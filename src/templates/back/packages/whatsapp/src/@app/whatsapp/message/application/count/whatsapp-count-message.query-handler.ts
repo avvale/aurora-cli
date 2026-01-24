@@ -3,18 +3,18 @@ import { WhatsappCountMessageService } from '@app/whatsapp/message/application/c
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(WhatsappCountMessageQuery)
-export class WhatsappCountMessageQueryHandler implements IQueryHandler<WhatsappCountMessageQuery>
+export class WhatsappCountMessageQueryHandler
+  implements IQueryHandler<WhatsappCountMessageQuery>
 {
-    constructor(
-        private readonly countMessageService: WhatsappCountMessageService,
-    ) {}
+  constructor(
+    private readonly countMessageService: WhatsappCountMessageService,
+  ) {}
 
-    async execute(query: WhatsappCountMessageQuery): Promise<number>
-    {
-        return await this.countMessageService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: WhatsappCountMessageQuery): Promise<number> {
+    return await this.countMessageService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

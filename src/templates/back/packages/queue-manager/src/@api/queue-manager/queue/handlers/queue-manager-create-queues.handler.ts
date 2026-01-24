@@ -6,18 +6,18 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerCreateQueuesHandler {
-    constructor(private readonly commandBus: ICommandBus) {}
+  constructor(private readonly commandBus: ICommandBus) {}
 
-    async main(
-        payload: QueueManagerCreateQueueInput[] | QueueManagerCreateQueueDto[],
-        timezone?: string,
-    ): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new QueueManagerCreateQueuesCommand(payload, {
-                timezone,
-            }),
-        );
+  async main(
+    payload: QueueManagerCreateQueueInput[] | QueueManagerCreateQueueDto[],
+    timezone?: string,
+  ): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new QueueManagerCreateQueuesCommand(payload, {
+        timezone,
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

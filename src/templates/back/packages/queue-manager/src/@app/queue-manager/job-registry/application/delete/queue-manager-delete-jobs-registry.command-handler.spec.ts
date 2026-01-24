@@ -4,40 +4,39 @@ import { QueueManagerDeleteJobsRegistryService } from '@app/queue-manager/job-re
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerDeleteJobsRegistryCommandHandler', () => {
-    let commandHandler: QueueManagerDeleteJobsRegistryCommandHandler;
+  let commandHandler: QueueManagerDeleteJobsRegistryCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                QueueManagerDeleteJobsRegistryCommandHandler,
-                {
-                    provide: QueueManagerDeleteJobsRegistryService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        QueueManagerDeleteJobsRegistryCommandHandler,
+        {
+          provide: QueueManagerDeleteJobsRegistryService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler =
-            module.get<QueueManagerDeleteJobsRegistryCommandHandler>(
-                QueueManagerDeleteJobsRegistryCommandHandler,
-            );
+    commandHandler = module.get<QueueManagerDeleteJobsRegistryCommandHandler>(
+      QueueManagerDeleteJobsRegistryCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('QueueManagerDeleteJobsRegistryCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('QueueManagerDeleteJobsRegistryCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(
-                    new QueueManagerDeleteJobsRegistryCommand(),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(
+          new QueueManagerDeleteJobsRegistryCommand(),
+        ),
+      ).toBe(undefined);
     });
+  });
 });

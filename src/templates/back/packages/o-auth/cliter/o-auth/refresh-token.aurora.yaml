@@ -9,16 +9,24 @@ hasAuditing: false
 front:
   solidIcon: mat_solid:password
   outlineIcon: mat_outline:password
+description: >
+  Module containing OAuth 2.0 refresh tokens. Refresh tokens are long-lived credentials used
+  to obtain new access tokens without requiring user re-authentication. Each refresh token
+  is associated with a single access token and can be revoked for security purposes.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the refresh token. UUID v4 format, generated automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing row identifier. Used for internal ordering and as a numeric alternative to UUID.
   - name: accessTokenId
     type: id
     nullable: false
@@ -29,26 +37,45 @@ aggregateProperties:
       field: accessToken
       avoidConstraint: true
     index: index
+    description: >
+      ID of the associated access token. One-to-one relationship ensures each refresh token
+      is tied to a specific access token instance.
   - name: token
     type: text
     nullable: false
+    description: >
+      The refresh token string. JWT or opaque token value. SECURITY: Must be stored securely
+      and treated as a sensitive credential. Used to request new access tokens.
   - name: isRevoked
     type: boolean
     nullable: false
     defaultValue: false
     example: true
+    description: >
+      Indicates whether the refresh token has been revoked. Revoked tokens cannot be used to
+      obtain new access tokens. Set to true on logout or security events.
   - name: expiresAt
     type: timestamp
     nullable: true
+    description: >
+      Expiration timestamp for the refresh token. After this time, the token cannot be used
+      to obtain new access tokens. NULL means no expiration (not recommended for security).
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the refresh token was created. Automatically set on creation.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the refresh token was last updated. Automatically updated on modification.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL means active token. When set, token is excluded from normal
+      queries but preserved for audit trail.
 excludedOperations:
   - count
   - createBatch

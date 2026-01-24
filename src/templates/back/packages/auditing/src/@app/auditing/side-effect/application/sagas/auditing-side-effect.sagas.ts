@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingSideEffectSagas {
-    /* @Saga()
+  /* @Saga()
     dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$

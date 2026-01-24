@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(AuditingUpdatedSideEffectsEvent)
 export class AuditingUpdatedSideEffectsEventHandler
-    implements IEventHandler<AuditingUpdatedSideEffectsEvent>
+  implements IEventHandler<AuditingUpdatedSideEffectsEvent>
 {
-    handle(event: AuditingUpdatedSideEffectsEvent): void {
-        // console.log('AuditingUpdatedSideEffectsEvent: ', event);
-    }
+  handle(event: AuditingUpdatedSideEffectsEvent): void {
+    // console.log('AuditingUpdatedSideEffectsEvent: ', event);
+  }
 }

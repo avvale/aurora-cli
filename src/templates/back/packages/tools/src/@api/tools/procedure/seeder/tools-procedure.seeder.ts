@@ -3,24 +3,24 @@ import { Injectable } from '@nestjs/common';
 
 //
 import {
-    ToolsCreateProceduresCommand,
-    toolsMockProcedureData,
+  ToolsCreateProceduresCommand,
+  toolsMockProcedureData,
 } from '@app/tools/procedure';
 
 @Injectable()
 export class ToolsProcedureSeeder {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new ToolsCreateProceduresCommand(toolsMockProcedureData, {
-                timezone: process.env.TZ,
-            }),
-        );
+  async main(): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new ToolsCreateProceduresCommand(toolsMockProcedureData, {
+        timezone: process.env.TZ,
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

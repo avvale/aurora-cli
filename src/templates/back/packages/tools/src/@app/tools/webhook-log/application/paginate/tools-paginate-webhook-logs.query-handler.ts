@@ -5,26 +5,25 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(ToolsPaginateWebhookLogsQuery)
 export class ToolsPaginateWebhookLogsQueryHandler
-    implements IQueryHandler<ToolsPaginateWebhookLogsQuery>
+  implements IQueryHandler<ToolsPaginateWebhookLogsQuery>
 {
-    constructor(
-        private readonly paginateWebhookLogsService: ToolsPaginateWebhookLogsService,
-    ) {}
+  constructor(
+    private readonly paginateWebhookLogsService: ToolsPaginateWebhookLogsService,
+  ) {}
 
-    async execute(
-        query: ToolsPaginateWebhookLogsQuery,
-    ): Promise<PaginationResponse> {
-        const { total, count, rows } =
-            await this.paginateWebhookLogsService.main(
-                query.queryStatement,
-                query.constraint,
-                query.cQMetadata,
-            );
+  async execute(
+    query: ToolsPaginateWebhookLogsQuery,
+  ): Promise<PaginationResponse> {
+    const { total, count, rows } = await this.paginateWebhookLogsService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
 
-        return new PaginationResponse(
-            total,
-            count,
-            rows.map((item) => item.toDTO()),
-        );
-    }
+    return new PaginationResponse(
+      total,
+      count,
+      rows.map((item) => item.toDTO()),
+    );
+  }
 }

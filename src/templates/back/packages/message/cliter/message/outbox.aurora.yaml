@@ -9,16 +9,26 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:language
   outlineIcon: mat_outline:language
+description: >
+    Outbox pattern implementation for tracking sent messages. Stores recipient
+    lists and metadata for each message dispatch. Used for delivery status
+    tracking, analytics, and potential message replay scenarios.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+        Unique identifier for the outbox entry. UUID v4 format, generated automatically
+        on creation. One entry per message send operation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+        Sequential numeric identifier for efficient ordering and pagination. Auto-incremented.
+        Used for chronological sorting of message dispatch events.
   - name: messageId
     type: id
     nullable: false
@@ -29,6 +39,10 @@ aggregateProperties:
       key: id
       field: message
       avoidConstraint: true
+    description: >
+        Foreign key to the original message in message module. Required field.
+        avoidConstraint allows message deletion without cascading to outbox. Used
+        to link back to message details and track which message was sent.
   - name: accountRecipientIds
     type: array
     arrayOptions:
@@ -36,6 +50,10 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of specific account IDs who received this message dispatch. NULL if
+        no specific account targeting was used. Snapshot of recipient criteria at
+        send time. GIN index for recipient analysis queries.
   - name: tenantRecipientIds
     type: array
     arrayOptions:
@@ -43,6 +61,10 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of tenant IDs whose users received this message. NULL if no tenant-based
+        targeting. Snapshot of tenant filter at send time. Used for tenant-level
+        analytics and delivery tracking. GIN indexed.
   - name: scopeRecipients
     type: array
     arrayOptions:
@@ -51,6 +73,10 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of scope identifiers (e.g., 'ADMIN', 'MANAGER') used for recipient
+        targeting. NULL if no scope filtering applied. Snapshot of scope criteria
+        at send time. Max 64 characters per scope. GIN indexed.
   - name: tagRecipients
     type: array
     arrayOptions:
@@ -59,18 +85,38 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+        Array of custom tags used for recipient segmentation at send time. NULL
+        if no tag filtering applied. Snapshot of tag criteria. Max 64 characters
+        per tag. Used for campaign analysis and replay scenarios. GIN indexed.
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+        Flexible JSON field for dispatch-specific metadata. NULL if no extra data.
+        May include delivery metrics, batch info, send duration, error logs, or
+        custom tracking data for analytics and debugging.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp when the outbox entry was created (message sent). Auto-set by
+        Aurora auditing. NULL only in edge cases. Represents the actual send time
+        for delivery tracking and analytics.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp of last modification to outbox entry. Auto-updated by Aurora
+        auditing. NULL if never modified. May be updated if delivery status or
+        meta information changes.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+        Soft delete timestamp. NULL means active outbox entry. When set, entry
+        is hidden from normal queries but preserved for audit trail and compliance.
+        Used to clean up old dispatch records.
 excludedOperations:
   - count
   - getRaw

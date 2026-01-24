@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(ToolsDeletedWebhookLogEvent)
 export class ToolsDeletedWebhookLogEventHandler
-    implements IEventHandler<ToolsDeletedWebhookLogEvent>
+  implements IEventHandler<ToolsDeletedWebhookLogEvent>
 {
-    handle(event: ToolsDeletedWebhookLogEvent): void {
-        // console.log('ToolsDeletedWebhookLogEvent: ', event);
-    }
+  handle(event: ToolsDeletedWebhookLogEvent): void {
+    // console.log('ToolsDeletedWebhookLogEvent: ', event);
+  }
 }

@@ -5,10 +5,7 @@ import * as path from 'path';
 import { GoogleSheetsAuth } from '../auth/google-auth';
 import { SheetsConfigManager } from '../config/sheets-config';
 import { propertyToSheetRow } from '../transformers/property-transformer';
-import {
-  createPropertyWithoutPivot,
-  separatePropertiesAndPivots,
-} from '../transformers/relationship-transformer';
+import { createPropertyWithoutPivot } from '../transformers/relationship-transformer';
 import {
   AuroraProperty,
   AuroraSchema,
@@ -453,22 +450,14 @@ async function updateModuleSheet(
   }
 
   // Build data rows for properties only (no metadata, no header row)
+  // IMPORTANT: Preserve original order from YAML
   const dataRows: string[][] = [];
 
-  // Separate regular properties from pivot-containing properties
-  const { regularProperties, pivotProperties } = separatePropertiesAndPivots(
-    schema.aggregateProperties || [],
-  );
-
-  // Add regular properties
-  for (const prop of regularProperties) {
-    dataRows.push(mapPropertyToRow(prop, headers, moduleSheetIds));
-  }
-
-  // Add pivot-containing properties (simplified, without pivot details in this sheet)
-  for (const prop of pivotProperties) {
-    const simplified = createPropertyWithoutPivot(prop);
-    dataRows.push(mapPropertyToRow(simplified, headers, moduleSheetIds));
+  for (const prop of schema.aggregateProperties || []) {
+    // For pivot-containing properties, simplify them (remove pivot details)
+    // but keep them in their original position
+    const processedProp = createPropertyWithoutPivot(prop);
+    dataRows.push(mapPropertyToRow(processedProp, headers, moduleSheetIds));
   }
 
   // Calculate last column letter based on headers count

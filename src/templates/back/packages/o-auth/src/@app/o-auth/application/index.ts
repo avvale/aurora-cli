@@ -68,6 +68,8 @@ import { OAuthCreateApplicationService } from './application/create/o-auth-creat
 import { OAuthCreateApplicationsService } from './application/create/o-auth-create-applications.service';
 import { OAuthDeleteApplicationByIdService } from './application/delete/o-auth-delete-application-by-id.service';
 import { OAuthDeleteApplicationsService } from './application/delete/o-auth-delete-applications.service';
+import { OAuthFindApplicationByAuthorizationHeaderQueryHandler } from './application/find/o-auth-find-application-by-authorization-header.query-handler';
+import { OAuthFindApplicationByAuthorizationHeaderService } from './application/find/o-auth-find-application-by-authorization-header.service';
 import { OAuthFindApplicationByIdService } from './application/find/o-auth-find-application-by-id.service';
 import { OAuthFindApplicationService } from './application/find/o-auth-find-application.service';
 import { OAuthGetApplicationsService } from './application/get/o-auth-get-applications.service';
@@ -76,48 +78,46 @@ import { OAuthUpdateApplicationByIdService } from './application/update/o-auth-u
 
 /* #region customizations */
 export { OAuthFindApplicationByAuthorizationHeaderQuery } from './application/find/o-auth-find-application-by-authorization-header.query';
-import { OAuthFindApplicationByAuthorizationHeaderQueryHandler } from './application/find/o-auth-find-application-by-authorization-header.query-handler';
-import { OAuthFindApplicationByAuthorizationHeaderService } from './application/find/o-auth-find-application-by-authorization-header.service';
 /* #endregion customizations */
 
 export const OAuthApplicationHandlers = [
-    /* #region customizations */
-    OAuthFindApplicationByAuthorizationHeaderQueryHandler,
-    /* #endregion customizations */
+  /* #region customizations */
+  OAuthFindApplicationByAuthorizationHeaderQueryHandler,
+  /* #endregion customizations */
 
-    // commands
-    OAuthCreateApplicationCommandHandler,
-    OAuthCreateApplicationsCommandHandler,
-    OAuthUpdateApplicationByIdCommandHandler,
-    OAuthDeleteApplicationByIdCommandHandler,
-    OAuthDeleteApplicationsCommandHandler,
+  // commands
+  OAuthCreateApplicationCommandHandler,
+  OAuthCreateApplicationsCommandHandler,
+  OAuthUpdateApplicationByIdCommandHandler,
+  OAuthDeleteApplicationByIdCommandHandler,
+  OAuthDeleteApplicationsCommandHandler,
 
-    // queries
-    OAuthPaginateApplicationsQueryHandler,
-    OAuthGetApplicationsQueryHandler,
-    OAuthFindApplicationQueryHandler,
-    OAuthFindApplicationByIdQueryHandler,
+  // queries
+  OAuthPaginateApplicationsQueryHandler,
+  OAuthGetApplicationsQueryHandler,
+  OAuthFindApplicationQueryHandler,
+  OAuthFindApplicationByIdQueryHandler,
 
-    // events
-    OAuthCreatedApplicationEventHandler,
-    OAuthCreatedApplicationsEventHandler,
-    OAuthUpdatedApplicationEventHandler,
-    OAuthDeletedApplicationEventHandler,
-    OAuthDeletedApplicationsEventHandler,
+  // events
+  OAuthCreatedApplicationEventHandler,
+  OAuthCreatedApplicationsEventHandler,
+  OAuthUpdatedApplicationEventHandler,
+  OAuthDeletedApplicationEventHandler,
+  OAuthDeletedApplicationsEventHandler,
 ];
 
 export const OAuthApplicationServices = [
-    /* #region customizations */
-    OAuthFindApplicationByAuthorizationHeaderService,
-    /* #endregion customizations */
+  /* #region customizations */
+  OAuthFindApplicationByAuthorizationHeaderService,
+  /* #endregion customizations */
 
-    OAuthCreateApplicationService,
-    OAuthCreateApplicationsService,
-    OAuthPaginateApplicationsService,
-    OAuthGetApplicationsService,
-    OAuthFindApplicationService,
-    OAuthFindApplicationByIdService,
-    OAuthUpdateApplicationByIdService,
-    OAuthDeleteApplicationByIdService,
-    OAuthDeleteApplicationsService,
+  OAuthCreateApplicationService,
+  OAuthCreateApplicationsService,
+  OAuthPaginateApplicationsService,
+  OAuthGetApplicationsService,
+  OAuthFindApplicationService,
+  OAuthFindApplicationByIdService,
+  OAuthUpdateApplicationByIdService,
+  OAuthDeleteApplicationByIdService,
+  OAuthDeleteApplicationsService,
 ];

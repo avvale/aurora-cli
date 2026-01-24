@@ -5,16 +5,16 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthFindScopeByIdService {
-    constructor(private readonly repository: OAuthIScopeRepository) {}
+  constructor(private readonly repository: OAuthIScopeRepository) {}
 
-    async main(
-        id: OAuthScopeId,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<OAuthScope> {
-        return await this.repository.findById(id, {
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    id: OAuthScopeId,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<OAuthScope> {
+    return await this.repository.findById(id, {
+      constraint,
+      cQMetadata,
+    });
+  }
 }

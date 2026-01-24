@@ -90,51 +90,51 @@ import { AuditingRollbackSideEffectHandler } from './handlers/auditing-rollback-
 import { AuditingRollbackSideEffectResolver } from './resolvers/auditing-rollback-side-effect.resolver';
 
 export const AuditingSideEffectApiControllers = [
-    AuditingCreateSideEffectController,
-    AuditingCreateSideEffectsController,
-    AuditingPaginateSideEffectsController,
-    AuditingGetSideEffectsController,
-    AuditingFindSideEffectByIdController,
-    AuditingFindSideEffectController,
-    AuditingUpdateSideEffectByIdController,
-    AuditingUpdateSideEffectsController,
-    AuditingDeleteSideEffectByIdController,
-    AuditingDeleteSideEffectsController,
+  AuditingCreateSideEffectController,
+  AuditingCreateSideEffectsController,
+  AuditingPaginateSideEffectsController,
+  AuditingGetSideEffectsController,
+  AuditingFindSideEffectByIdController,
+  AuditingFindSideEffectController,
+  AuditingUpdateSideEffectByIdController,
+  AuditingUpdateSideEffectsController,
+  AuditingDeleteSideEffectByIdController,
+  AuditingDeleteSideEffectsController,
 
-    // additionalApis
-    AuditingRollbackSideEffectController,
+  // additionalApis
+  AuditingRollbackSideEffectController,
 ];
 
 export const AuditingSideEffectApiResolvers = [
-    AuditingCreateSideEffectResolver,
-    AuditingCreateSideEffectsResolver,
-    AuditingPaginateSideEffectsResolver,
-    AuditingGetSideEffectsResolver,
-    AuditingFindSideEffectByIdResolver,
-    AuditingFindSideEffectResolver,
-    AuditingUpdateSideEffectByIdResolver,
-    AuditingUpdateSideEffectsResolver,
-    AuditingDeleteSideEffectByIdResolver,
-    AuditingDeleteSideEffectsResolver,
+  AuditingCreateSideEffectResolver,
+  AuditingCreateSideEffectsResolver,
+  AuditingPaginateSideEffectsResolver,
+  AuditingGetSideEffectsResolver,
+  AuditingFindSideEffectByIdResolver,
+  AuditingFindSideEffectResolver,
+  AuditingUpdateSideEffectByIdResolver,
+  AuditingUpdateSideEffectsResolver,
+  AuditingDeleteSideEffectByIdResolver,
+  AuditingDeleteSideEffectsResolver,
 
-    // additionalApis
-    AuditingRollbackSideEffectResolver,
+  // additionalApis
+  AuditingRollbackSideEffectResolver,
 ];
 
 export const AuditingSideEffectApiHandlers = [
-    AuditingCreateSideEffectHandler,
-    AuditingCreateSideEffectsHandler,
-    AuditingPaginateSideEffectsHandler,
-    AuditingGetSideEffectsHandler,
-    AuditingFindSideEffectByIdHandler,
-    AuditingFindSideEffectHandler,
-    AuditingUpdateSideEffectByIdHandler,
-    AuditingUpdateSideEffectsHandler,
-    AuditingDeleteSideEffectByIdHandler,
-    AuditingDeleteSideEffectsHandler,
+  AuditingCreateSideEffectHandler,
+  AuditingCreateSideEffectsHandler,
+  AuditingPaginateSideEffectsHandler,
+  AuditingGetSideEffectsHandler,
+  AuditingFindSideEffectByIdHandler,
+  AuditingFindSideEffectHandler,
+  AuditingUpdateSideEffectByIdHandler,
+  AuditingUpdateSideEffectsHandler,
+  AuditingDeleteSideEffectByIdHandler,
+  AuditingDeleteSideEffectsHandler,
 
-    // additionalApis
-    AuditingRollbackSideEffectHandler,
+  // additionalApis
+  AuditingRollbackSideEffectHandler,
 ];
 
 export const AuditingSideEffectApiServices = [AuditingSideEffectSeeder];

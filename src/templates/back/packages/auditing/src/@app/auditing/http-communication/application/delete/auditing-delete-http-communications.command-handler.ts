@@ -4,20 +4,20 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(AuditingDeleteHttpCommunicationsCommand)
 export class AuditingDeleteHttpCommunicationsCommandHandler
-    implements ICommandHandler<AuditingDeleteHttpCommunicationsCommand>
+  implements ICommandHandler<AuditingDeleteHttpCommunicationsCommand>
 {
-    constructor(
-        private readonly deleteHttpCommunicationsService: AuditingDeleteHttpCommunicationsService,
-    ) {}
+  constructor(
+    private readonly deleteHttpCommunicationsService: AuditingDeleteHttpCommunicationsService,
+  ) {}
 
-    async execute(
-        command: AuditingDeleteHttpCommunicationsCommand,
-    ): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteHttpCommunicationsService.main(
-            command.queryStatement,
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(
+    command: AuditingDeleteHttpCommunicationsCommand,
+  ): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteHttpCommunicationsService.main(
+      command.queryStatement,
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

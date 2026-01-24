@@ -5,26 +5,26 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(OAuthPaginateApplicationsClientsQuery)
 export class OAuthPaginateApplicationsClientsQueryHandler
-    implements IQueryHandler<OAuthPaginateApplicationsClientsQuery>
+  implements IQueryHandler<OAuthPaginateApplicationsClientsQuery>
 {
-    constructor(
-        private readonly paginateApplicationsClientsService: OAuthPaginateApplicationsClientsService,
-    ) {}
+  constructor(
+    private readonly paginateApplicationsClientsService: OAuthPaginateApplicationsClientsService,
+  ) {}
 
-    async execute(
-        query: OAuthPaginateApplicationsClientsQuery,
-    ): Promise<PaginationResponse> {
-        const { total, count, rows } =
-            await this.paginateApplicationsClientsService.main(
-                query.queryStatement,
-                query.constraint,
-                query.cQMetadata,
-            );
+  async execute(
+    query: OAuthPaginateApplicationsClientsQuery,
+  ): Promise<PaginationResponse> {
+    const { total, count, rows } =
+      await this.paginateApplicationsClientsService.main(
+        query.queryStatement,
+        query.constraint,
+        query.cQMetadata,
+      );
 
-        return new PaginationResponse(
-            total,
-            count,
-            rows.map((item) => item.toDTO()),
-        );
-    }
+    return new PaginationResponse(
+      total,
+      count,
+      rows.map((item) => item.toDTO()),
+    );
+  }
 }

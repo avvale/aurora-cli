@@ -4,19 +4,19 @@ import { ToolsInformationSchemaRawSql } from '@app/tools/information-schema/doma
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsRawSQLInformationSchemaCommand)
-export class ToolsRawSQLInformationSchemaCommandHandler implements ICommandHandler<ToolsRawSQLInformationSchemaCommand>
+export class ToolsRawSQLInformationSchemaCommandHandler
+  implements ICommandHandler<ToolsRawSQLInformationSchemaCommand>
 {
-    constructor(
-        private readonly rawSQLInformationSchemaService: ToolsRawSQLInformationSchemaService,
-    ) {}
+  constructor(
+    private readonly rawSQLInformationSchemaService: ToolsRawSQLInformationSchemaService,
+  ) {}
 
-    async execute(command: ToolsRawSQLInformationSchemaCommand): Promise<void>
-    {
-        await this.rawSQLInformationSchemaService.main(
-            {
-                rawSQL: new ToolsInformationSchemaRawSql(command.payload.rawSQL),
-            },
-            command.cQMetadata,
-        );
-    }
+  async execute(command: ToolsRawSQLInformationSchemaCommand): Promise<void> {
+    await this.rawSQLInformationSchemaService.main(
+      {
+        rawSQL: new ToolsInformationSchemaRawSql(command.payload.rawSQL),
+      },
+      command.cQMetadata,
+    );
+  }
 }

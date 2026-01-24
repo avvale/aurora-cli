@@ -9,15 +9,15 @@ import { ToolsDownScriptProcedureHandler } from '../handlers/tools-down-script-p
 @Controller('tools/procedure/down-script')
 @Auth('tools.procedure.execution')
 export class ToolsDownScriptProcedureController {
-    constructor(private readonly handler: ToolsDownScriptProcedureHandler) {}
+  constructor(private readonly handler: ToolsDownScriptProcedureHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(@Body() procedureId: string, @Timezone() timezone?: string) {
-        return await this.handler.main(procedureId, timezone);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(@Body() procedureId: string, @Timezone() timezone?: string) {
+    return await this.handler.main(procedureId, timezone);
+  }
 }

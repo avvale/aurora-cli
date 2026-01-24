@@ -1,6 +1,6 @@
 import {
-    OAuthApplicationMapper,
-    OAuthApplicationResponse,
+  OAuthApplicationMapper,
+  OAuthApplicationResponse,
 } from '@app/o-auth/application';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { OAuthApplicationAuthorizationHeader } from '../../domain/value-objects/o-auth-application-authorization-header';
@@ -9,27 +9,25 @@ import { OAuthFindApplicationByAuthorizationHeaderService } from './o-auth-find-
 
 @QueryHandler(OAuthFindApplicationByAuthorizationHeaderQuery)
 export class OAuthFindApplicationByAuthorizationHeaderQueryHandler
-    implements IQueryHandler<OAuthFindApplicationByAuthorizationHeaderQuery>
+  implements IQueryHandler<OAuthFindApplicationByAuthorizationHeaderQuery>
 {
-    private readonly mapper: OAuthApplicationMapper =
-        new OAuthApplicationMapper();
+  private readonly mapper: OAuthApplicationMapper =
+    new OAuthApplicationMapper();
 
-    constructor(
-        private readonly findApplicationByAuthorizationHeaderService: OAuthFindApplicationByAuthorizationHeaderService,
-    ) {}
+  constructor(
+    private readonly findApplicationByAuthorizationHeaderService: OAuthFindApplicationByAuthorizationHeaderService,
+  ) {}
 
-    async execute(
-        query: OAuthFindApplicationByAuthorizationHeaderQuery,
-    ): Promise<OAuthApplicationResponse> {
-        const application =
-            await this.findApplicationByAuthorizationHeaderService.main(
-                new OAuthApplicationAuthorizationHeader(
-                    query.authorizationHeader,
-                ),
-                query.constraint,
-                query.cQMetadata,
-            );
+  async execute(
+    query: OAuthFindApplicationByAuthorizationHeaderQuery,
+  ): Promise<OAuthApplicationResponse> {
+    const application =
+      await this.findApplicationByAuthorizationHeaderService.main(
+        new OAuthApplicationAuthorizationHeader(query.authorizationHeader),
+        query.constraint,
+        query.cQMetadata,
+      );
 
-        return this.mapper.mapAggregateToResponse(application);
-    }
+    return this.mapper.mapAggregateToResponse(application);
+  }
 }

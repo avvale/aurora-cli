@@ -5,54 +5,53 @@ import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthFindRefreshTokenByIdHandler', () => {
-    let handler: OAuthFindRefreshTokenByIdHandler;
-    let queryBus: IQueryBus;
+  let handler: OAuthFindRefreshTokenByIdHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                OAuthFindRefreshTokenByIdHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        OAuthFindRefreshTokenByIdHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<OAuthFindRefreshTokenByIdHandler>(
-            OAuthFindRefreshTokenByIdHandler,
-        );
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
+    handler = module.get<OAuthFindRefreshTokenByIdHandler>(
+      OAuthFindRefreshTokenByIdHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
 
+  test('OAuthFindRefreshTokenByIdHandler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
     test('OAuthFindRefreshTokenByIdHandler should be defined', () => {
-        expect(handler).toBeDefined();
+      expect(handler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('OAuthFindRefreshTokenByIdHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an refreshToken by id', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve(oAuthMockRefreshTokenData[0]),
-                    ),
-            );
-            expect(
-                await handler.main(
-                    oAuthMockRefreshTokenData[0].id,
-                    {},
-                    'Europe/Madrid',
-                ),
-            ).toBe(oAuthMockRefreshTokenData[0]);
-        });
+    test('should return an refreshToken by id', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () => new Promise((resolve) => resolve(oAuthMockRefreshTokenData[0])),
+        );
+      expect(
+        await handler.main(
+          oAuthMockRefreshTokenData[0].id,
+          {},
+          'Europe/Madrid',
+        ),
+      ).toBe(oAuthMockRefreshTokenData[0]);
     });
+  });
 });

@@ -4,19 +4,19 @@ import { WhatsappTimelineId } from '@app/whatsapp/timeline/domain/value-objects'
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(WhatsappDeleteTimelineByIdCommand)
-export class WhatsappDeleteTimelineByIdCommandHandler implements ICommandHandler<WhatsappDeleteTimelineByIdCommand>
+export class WhatsappDeleteTimelineByIdCommandHandler
+  implements ICommandHandler<WhatsappDeleteTimelineByIdCommand>
 {
-    constructor(
-        private readonly deleteTimelineByIdService: WhatsappDeleteTimelineByIdService,
-    ) {}
+  constructor(
+    private readonly deleteTimelineByIdService: WhatsappDeleteTimelineByIdService,
+  ) {}
 
-    async execute(command: WhatsappDeleteTimelineByIdCommand): Promise<void>
-    {
-        // call to use case and implements ValueObjects
-        await this.deleteTimelineByIdService.main(
-            new WhatsappTimelineId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: WhatsappDeleteTimelineByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteTimelineByIdService.main(
+      new WhatsappTimelineId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

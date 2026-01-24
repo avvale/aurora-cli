@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
-    OAuthDeleteRefreshTokenByIdHandler,
-    OAuthRefreshTokenDto,
+  OAuthDeleteRefreshTokenByIdHandler,
+  OAuthRefreshTokenDto,
 } from '@api/o-auth/refresh-token';
 import { Auth } from '@aurora/decorators';
 import { QueryStatement, Timezone } from '@aurorajs.dev/core';
@@ -12,19 +12,19 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @Controller('o-auth/refresh-token/delete')
 @Auth('oAuth.refreshToken.delete')
 export class OAuthDeleteRefreshTokenByIdController {
-    constructor(private readonly handler: OAuthDeleteRefreshTokenByIdHandler) {}
+  constructor(private readonly handler: OAuthDeleteRefreshTokenByIdHandler) {}
 
-    @Delete(':id')
-    @ApiOperation({ summary: 'Delete refresh-token by id' })
-    @ApiOkResponse({
-        description: 'The record has been deleted successfully.',
-        type: OAuthRefreshTokenDto,
-    })
-    async main(
-        @Param('id') id: string,
-        @Body('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ) {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Delete(':id')
+  @ApiOperation({ summary: 'Delete refresh-token by id' })
+  @ApiOkResponse({
+    description: 'The record has been deleted successfully.',
+    type: OAuthRefreshTokenDto,
+  })
+  async main(
+    @Param('id') id: string,
+    @Body('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ) {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

@@ -62,33 +62,33 @@ import { IamUpdateTagByIdHandler } from './handlers/iam-update-tag-by-id.handler
 import { IamTagSeeder } from './seeder/iam-tag.seeder';
 
 export const IamTagApiControllers = [
-    IamCreateTagController,
-    IamPaginateTagsController,
-    IamGetTagsController,
-    IamFindTagByIdController,
-    IamFindTagController,
-    IamUpdateTagByIdController,
-    IamDeleteTagByIdController,
+  IamCreateTagController,
+  IamPaginateTagsController,
+  IamGetTagsController,
+  IamFindTagByIdController,
+  IamFindTagController,
+  IamUpdateTagByIdController,
+  IamDeleteTagByIdController,
 ];
 
 export const IamTagApiResolvers = [
-    IamCreateTagResolver,
-    IamPaginateTagsResolver,
-    IamGetTagsResolver,
-    IamFindTagByIdResolver,
-    IamFindTagResolver,
-    IamUpdateTagByIdResolver,
-    IamDeleteTagByIdResolver,
+  IamCreateTagResolver,
+  IamPaginateTagsResolver,
+  IamGetTagsResolver,
+  IamFindTagByIdResolver,
+  IamFindTagResolver,
+  IamUpdateTagByIdResolver,
+  IamDeleteTagByIdResolver,
 ];
 
 export const IamTagApiHandlers = [
-    IamCreateTagHandler,
-    IamPaginateTagsHandler,
-    IamGetTagsHandler,
-    IamFindTagByIdHandler,
-    IamFindTagHandler,
-    IamUpdateTagByIdHandler,
-    IamDeleteTagByIdHandler,
+  IamCreateTagHandler,
+  IamPaginateTagsHandler,
+  IamGetTagsHandler,
+  IamFindTagByIdHandler,
+  IamFindTagHandler,
+  IamUpdateTagByIdHandler,
+  IamDeleteTagByIdHandler,
 ];
 
 export const IamTagApiServices = [IamTagSeeder];

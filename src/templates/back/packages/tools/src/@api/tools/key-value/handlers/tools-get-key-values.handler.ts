@@ -5,26 +5,24 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToolsGetKeyValuesHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<ToolsKeyValue[]> {
-        const keyValues = await this.queryBus.ask(
-            new ToolsGetKeyValuesQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<ToolsKeyValue[]> {
+    const keyValues = await this.queryBus.ask(
+      new ToolsGetKeyValuesQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
 
-        for (const keyValue of keyValues) {
-            if (keyValue.type === ToolsKeyValueType.SECRET)
-                keyValue.value = Crypt.decryptWithAuroraPrivateKey(
-                    keyValue.value,
-                );
-        }
-
-        return keyValues;
+    for (const keyValue of keyValues) {
+      if (keyValue.type === ToolsKeyValueType.SECRET)
+        keyValue.value = Crypt.decryptWithAuroraPrivateKey(keyValue.value);
     }
+
+    return keyValues;
+  }
 }

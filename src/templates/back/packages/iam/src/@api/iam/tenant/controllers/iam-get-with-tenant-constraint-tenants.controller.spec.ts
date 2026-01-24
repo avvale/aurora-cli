@@ -4,36 +4,36 @@ import { IamGetWithTenantConstraintTenantsHandler } from '../handlers/iam-get-wi
 import { IamGetWithTenantConstraintTenantsController } from './iam-get-with-tenant-constraint-tenants.controller';
 
 describe('IamGetWithTenantConstraintTenantsController', () => {
-    let controller: IamGetWithTenantConstraintTenantsController;
-    let handler: IamGetWithTenantConstraintTenantsHandler;
+  let controller: IamGetWithTenantConstraintTenantsController;
+  let handler: IamGetWithTenantConstraintTenantsHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            controllers: [IamGetWithTenantConstraintTenantsController],
-            providers: [
-                {
-                    provide: IamGetWithTenantConstraintTenantsHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      controllers: [IamGetWithTenantConstraintTenantsController],
+      providers: [
+        {
+          provide: IamGetWithTenantConstraintTenantsHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        controller = module.get<IamGetWithTenantConstraintTenantsController>(
-            IamGetWithTenantConstraintTenantsController,
-        );
-        handler = module.get<IamGetWithTenantConstraintTenantsHandler>(
-            IamGetWithTenantConstraintTenantsHandler,
-        );
+    controller = module.get<IamGetWithTenantConstraintTenantsController>(
+      IamGetWithTenantConstraintTenantsController,
+    );
+    handler = module.get<IamGetWithTenantConstraintTenantsHandler>(
+      IamGetWithTenantConstraintTenantsHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('IamGetWithTenantConstraintTenantsController should be defined', () => {
+      expect(controller).toBeDefined();
     });
-
-    describe('main', () => {
-        test('IamGetWithTenantConstraintTenantsController should be defined', () => {
-            expect(controller).toBeDefined();
-        });
-    });
+  });
 });

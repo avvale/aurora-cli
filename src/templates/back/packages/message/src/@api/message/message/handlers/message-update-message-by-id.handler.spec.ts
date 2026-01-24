@@ -6,62 +6,61 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('MessageUpdateMessageByIdHandler', () => {
-    let handler: MessageUpdateMessageByIdHandler;
-    let queryBus: IQueryBus;
+  let handler: MessageUpdateMessageByIdHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                MessageUpdateMessageByIdHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        MessageUpdateMessageByIdHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<MessageUpdateMessageByIdHandler>(
-            MessageUpdateMessageByIdHandler,
-        );
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
+    handler = module.get<MessageUpdateMessageByIdHandler>(
+      MessageUpdateMessageByIdHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
 
+  test('MessageUpdateMessageByIdHandler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
     test('MessageUpdateMessageByIdHandler should be defined', () => {
-        expect(handler).toBeDefined();
+      expect(handler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('MessageUpdateMessageByIdHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return a message updated', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve(messageMockMessageData[0]),
-                    ),
-            );
-            expect(
-                await handler.main(
-                    <MessageUpdateMessageByIdInput>messageMockMessageData[0],
-                    {},
-                    'Europe/Madrid',
-                ),
-            ).toBe(messageMockMessageData[0]);
-        });
+    test('should return a message updated', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () => new Promise((resolve) => resolve(messageMockMessageData[0])),
+        );
+      expect(
+        await handler.main(
+          <MessageUpdateMessageByIdInput>messageMockMessageData[0],
+          {},
+          'Europe/Madrid',
+        ),
+      ).toBe(messageMockMessageData[0]);
     });
+  });
 });

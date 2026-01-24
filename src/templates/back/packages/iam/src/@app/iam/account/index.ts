@@ -83,40 +83,40 @@ import { IamUpdateAccountByIdService } from './application/update/iam-update-acc
 import { IamUpdateAccountsService } from './application/update/iam-update-accounts.service';
 
 export const IamAccountHandlers = [
-    // commands
-    IamCreateAccountCommandHandler,
-    IamCreateAccountsCommandHandler,
-    IamUpdateAccountByIdCommandHandler,
-    IamUpdateAccountsCommandHandler,
-    IamDeleteAccountByIdCommandHandler,
-    IamDeleteAccountsCommandHandler,
+  // commands
+  IamCreateAccountCommandHandler,
+  IamCreateAccountsCommandHandler,
+  IamUpdateAccountByIdCommandHandler,
+  IamUpdateAccountsCommandHandler,
+  IamDeleteAccountByIdCommandHandler,
+  IamDeleteAccountsCommandHandler,
 
-    // queries
-    IamPaginateAccountsQueryHandler,
-    IamGetAccountsQueryHandler,
-    IamFindAccountQueryHandler,
-    IamFindAccountByIdQueryHandler,
-    IamCountAccountQueryHandler,
+  // queries
+  IamPaginateAccountsQueryHandler,
+  IamGetAccountsQueryHandler,
+  IamFindAccountQueryHandler,
+  IamFindAccountByIdQueryHandler,
+  IamCountAccountQueryHandler,
 
-    // events
-    IamCreatedAccountEventHandler,
-    IamCreatedAccountsEventHandler,
-    IamUpdatedAccountEventHandler,
-    IamUpdatedAccountsEventHandler,
-    IamDeletedAccountEventHandler,
-    IamDeletedAccountsEventHandler,
+  // events
+  IamCreatedAccountEventHandler,
+  IamCreatedAccountsEventHandler,
+  IamUpdatedAccountEventHandler,
+  IamUpdatedAccountsEventHandler,
+  IamDeletedAccountEventHandler,
+  IamDeletedAccountsEventHandler,
 ];
 
 export const IamAccountServices = [
-    IamCreateAccountService,
-    IamCreateAccountsService,
-    IamPaginateAccountsService,
-    IamGetAccountsService,
-    IamFindAccountService,
-    IamFindAccountByIdService,
-    IamCountAccountService,
-    IamUpdateAccountByIdService,
-    IamUpdateAccountsService,
-    IamDeleteAccountByIdService,
-    IamDeleteAccountsService,
+  IamCreateAccountService,
+  IamCreateAccountsService,
+  IamPaginateAccountsService,
+  IamGetAccountsService,
+  IamFindAccountService,
+  IamFindAccountByIdService,
+  IamCountAccountService,
+  IamUpdateAccountByIdService,
+  IamUpdateAccountsService,
+  IamDeleteAccountByIdService,
+  IamDeleteAccountsService,
 ];

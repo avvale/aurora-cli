@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToolsFindProcedureByIdHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        id: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<ToolsProcedure | ToolsProcedureDto> {
-        return await this.queryBus.ask(
-            new ToolsFindProcedureByIdQuery(id, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    id: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<ToolsProcedure | ToolsProcedureDto> {
+    return await this.queryBus.ask(
+      new ToolsFindProcedureByIdQuery(id, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

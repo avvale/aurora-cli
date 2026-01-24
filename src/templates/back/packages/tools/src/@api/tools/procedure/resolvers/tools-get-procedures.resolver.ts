@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.procedure.get')
 export class ToolsGetProceduresResolver {
-    constructor(private readonly handler: ToolsGetProceduresHandler) {}
+  constructor(private readonly handler: ToolsGetProceduresHandler) {}
 
-    @Query('toolsGetProcedures')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<ToolsProcedure[]> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('toolsGetProcedures')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<ToolsProcedure[]> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

@@ -74,39 +74,39 @@ import { SupportUpdateCommentsHandler } from './handlers/support-update-comments
 import { SupportCommentSeeder } from './seeder/support-comment.seeder';
 
 export const SupportCommentApiControllers = [
-    SupportCreateCommentController,
-    SupportPaginateCommentsController,
-    SupportGetCommentsController,
-    SupportFindCommentByIdController,
-    SupportFindCommentController,
-    SupportUpdateCommentByIdController,
-    SupportUpdateCommentsController,
-    SupportDeleteCommentByIdController,
-    SupportDeleteCommentsController,
+  SupportCreateCommentController,
+  SupportPaginateCommentsController,
+  SupportGetCommentsController,
+  SupportFindCommentByIdController,
+  SupportFindCommentController,
+  SupportUpdateCommentByIdController,
+  SupportUpdateCommentsController,
+  SupportDeleteCommentByIdController,
+  SupportDeleteCommentsController,
 ];
 
 export const SupportCommentApiResolvers = [
-    SupportCreateCommentResolver,
-    SupportPaginateCommentsResolver,
-    SupportGetCommentsResolver,
-    SupportFindCommentByIdResolver,
-    SupportFindCommentResolver,
-    SupportUpdateCommentByIdResolver,
-    SupportUpdateCommentsResolver,
-    SupportDeleteCommentByIdResolver,
-    SupportDeleteCommentsResolver,
+  SupportCreateCommentResolver,
+  SupportPaginateCommentsResolver,
+  SupportGetCommentsResolver,
+  SupportFindCommentByIdResolver,
+  SupportFindCommentResolver,
+  SupportUpdateCommentByIdResolver,
+  SupportUpdateCommentsResolver,
+  SupportDeleteCommentByIdResolver,
+  SupportDeleteCommentsResolver,
 ];
 
 export const SupportCommentApiHandlers = [
-    SupportCreateCommentHandler,
-    SupportPaginateCommentsHandler,
-    SupportGetCommentsHandler,
-    SupportFindCommentByIdHandler,
-    SupportFindCommentHandler,
-    SupportUpdateCommentByIdHandler,
-    SupportUpdateCommentsHandler,
-    SupportDeleteCommentByIdHandler,
-    SupportDeleteCommentsHandler,
+  SupportCreateCommentHandler,
+  SupportPaginateCommentsHandler,
+  SupportGetCommentsHandler,
+  SupportFindCommentByIdHandler,
+  SupportFindCommentHandler,
+  SupportUpdateCommentByIdHandler,
+  SupportUpdateCommentsHandler,
+  SupportDeleteCommentByIdHandler,
+  SupportDeleteCommentsHandler,
 ];
 
 export const SupportCommentApiServices = [SupportCommentSeeder];

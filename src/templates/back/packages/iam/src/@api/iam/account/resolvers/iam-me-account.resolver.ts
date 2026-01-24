@@ -6,10 +6,10 @@ import { IamMeAccountHandler } from '../handlers/iam-me-account.handler';
 @Resolver()
 @Auth()
 export class IamMeAccountResolver {
-    constructor(private readonly handler: IamMeAccountHandler) {}
+  constructor(private readonly handler: IamMeAccountHandler) {}
 
-    @Query('iamMeAccount')
-    async main(@GqlHeaders() headers: any): Promise<IamAccount> {
-        return await this.handler.main(headers.authorization);
-    }
+  @Query('iamMeAccount')
+  async main(@GqlHeaders() headers: any): Promise<IamAccount> {
+    return await this.handler.main(headers.authorization);
+  }
 }

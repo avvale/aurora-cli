@@ -11,54 +11,106 @@ front:
   outlineIcon: webhook
   solidFontSetIcon: material-symbols-outlined
   solidIcon: webhook
+description: >
+  Module for managing outbound webhook configurations. Enables event-driven
+  integrations by registering endpoints that receive HTTP callbacks when
+  specified events occur. Supports HMAC signature verification for secure
+  payload delivery and flexible metadata for service-specific configurations.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the webhook configuration. UUID v4 format, generated
+      automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing numeric identifier. Used for efficient sorting and
+      internal ordering. Unique across all webhook records.
   - name: name
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+      Human-readable name for the webhook configuration. Used for identification
+      in administrative interfaces. Should describe the integration purpose
+      (e.g., 'Slack Notifications', 'CRM Sync', 'Audit Logger').
   - name: service
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+      Identifier of the target service or integration. Used to categorize
+      webhooks by destination system (e.g., 'slack', 'salesforce', 'custom').
+      Enables filtering and grouping of related webhook configurations.
   - name: endpoint
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+      Target URL that receives webhook HTTP POST requests. Must be a valid
+      HTTPS URL for production environments. The endpoint should be capable
+      of handling the payload format and responding within timeout limits.
   - name: externalId
     type: varchar
     maxLength: 64
     nullable: true
     index: index
+    description: >
+      Optional identifier from the external system. Used to correlate webhook
+      configurations with resources in third-party services. Indexed for
+      efficient lookups during synchronization or external API callbacks.
   - name: events
     type: array
     arrayOptions:
       type: varchar
     nullable: true
+    description: >
+      List of event types that trigger this webhook. Uses dot notation for
+      namespacing (e.g., 'user.created', 'order.completed', 'payment.failed').
+      NULL or empty array means the webhook receives all events. Supports
+      wildcard patterns (e.g., 'user.*' for all user events).
   - name: secret
     type: varchar
     maxLength: 128
     nullable: true
+    description: >
+      Shared secret for HMAC signature generation. Used to sign webhook
+      payloads so receivers can verify authenticity. Should be a secure
+      random string. The signature is typically sent in the X-Webhook-Signature
+      header. NULL disables signature verification.
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+      Flexible JSON metadata for service-specific configurations. Stores
+      additional parameters required by specific integrations such as custom
+      headers, authentication tokens, retry policies, or transformation rules.
+      Schema varies by service type.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the webhook was registered. Automatically set by the
+      system. Part of the audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last configuration update. Automatically updated by
+      the system on each modification. Part of the audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active webhook. When set, the
+      webhook is disabled and excluded from event delivery but preserved
+      for audit history and potential reactivation.
 additionalApis:
   - path: tools/webhook/digest
     resolverType: mutation

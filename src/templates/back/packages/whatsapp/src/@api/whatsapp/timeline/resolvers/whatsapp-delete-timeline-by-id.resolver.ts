@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('whatsapp.timeline.delete')
-export class WhatsappDeleteTimelineByIdResolver
-{
-    constructor(
-        private readonly handler: WhatsappDeleteTimelineByIdHandler,
-    ) {}
+export class WhatsappDeleteTimelineByIdResolver {
+  constructor(private readonly handler: WhatsappDeleteTimelineByIdHandler) {}
 
-    @Mutation('whatsappDeleteTimelineById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<WhatsappTimeline>
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
-    }
+  @Mutation('whatsappDeleteTimelineById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<WhatsappTimeline> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

@@ -1,66 +1,71 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/bounded-context.aurora.yaml
+ */
 import {
-    IamBoundedContext,
-    IamUpdateBoundedContextByIdInput,
+  IamBoundedContext,
+  IamUpdateBoundedContextByIdInput,
 } from '@api/graphql';
 import {
-    IamFindBoundedContextByIdQuery,
-    IamUpdateBoundedContextByIdCommand,
+  IamFindBoundedContextByIdQuery,
+  IamUpdateBoundedContextByIdCommand,
 } from '@app/iam/bounded-context';
 import {
-    AuditingMeta,
-    diff,
-    ICommandBus,
-    IQueryBus,
-    QueryStatement,
+  AuditingMeta,
+  diff,
+  ICommandBus,
+  IQueryBus,
+  QueryStatement,
 } from '@aurorajs.dev/core';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamUpdateBoundedContextByIdHandler {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(
-        payload: IamUpdateBoundedContextByIdInput,
-        constraint?: QueryStatement,
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<IamBoundedContext> {
-        const boundedContext = await this.queryBus.ask(
-            new IamFindBoundedContextByIdQuery(payload.id, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    payload: IamUpdateBoundedContextByIdInput,
+    constraint?: QueryStatement,
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<IamBoundedContext> {
+    const boundedContext = await this.queryBus.ask(
+      new IamFindBoundedContextByIdQuery(payload.id, constraint, {
+        timezone,
+      }),
+    );
 
-        if (!boundedContext)
-            throw new NotFoundException(
-                `IamBoundedContext with id: ${payload.id}, not found`,
-            );
-
-        const dataToUpdate = diff(payload, boundedContext);
-
-        await this.commandBus.dispatch(
-            new IamUpdateBoundedContextByIdCommand(
-                {
-                    ...dataToUpdate,
-                    id: payload.id,
-                },
-                constraint,
-                {
-                    timezone,
-                    repositoryOptions: {
-                        auditing,
-                    },
-                },
-            ),
-        );
-
-        return await this.queryBus.ask(
-            new IamFindBoundedContextByIdQuery(payload.id, constraint, {
-                timezone,
-            }),
-        );
+    if (!boundedContext) {
+      throw new NotFoundException(
+        `IamBoundedContext with id: ${payload.id}, not found`,
+      );
     }
+
+    const dataToUpdate = diff(payload, boundedContext);
+
+    await this.commandBus.dispatch(
+      new IamUpdateBoundedContextByIdCommand(
+        {
+          ...dataToUpdate,
+          id: payload.id,
+        },
+        constraint,
+        {
+          timezone,
+          repositoryOptions: {
+            auditing,
+          },
+        },
+      ),
+    );
+
+    return await this.queryBus.ask(
+      new IamFindBoundedContextByIdQuery(payload.id, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

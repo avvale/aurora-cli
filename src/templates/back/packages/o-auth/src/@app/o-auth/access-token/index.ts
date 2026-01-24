@@ -65,29 +65,29 @@ import { OAuthGetAccessTokensService } from './application/get/o-auth-get-access
 import { OAuthPaginateAccessTokensService } from './application/paginate/o-auth-paginate-access-tokens.service';
 
 export const OAuthAccessTokenHandlers = [
-    // commands
-    OAuthCreateAccessTokenCommandHandler,
-    OAuthDeleteAccessTokenByIdCommandHandler,
-    OAuthDeleteAccessTokensCommandHandler,
+  // commands
+  OAuthCreateAccessTokenCommandHandler,
+  OAuthDeleteAccessTokenByIdCommandHandler,
+  OAuthDeleteAccessTokensCommandHandler,
 
-    // queries
-    OAuthPaginateAccessTokensQueryHandler,
-    OAuthGetAccessTokensQueryHandler,
-    OAuthFindAccessTokenQueryHandler,
-    OAuthFindAccessTokenByIdQueryHandler,
+  // queries
+  OAuthPaginateAccessTokensQueryHandler,
+  OAuthGetAccessTokensQueryHandler,
+  OAuthFindAccessTokenQueryHandler,
+  OAuthFindAccessTokenByIdQueryHandler,
 
-    // events
-    OAuthCreatedAccessTokenEventHandler,
-    OAuthDeletedAccessTokenEventHandler,
-    OAuthDeletedAccessTokensEventHandler,
+  // events
+  OAuthCreatedAccessTokenEventHandler,
+  OAuthDeletedAccessTokenEventHandler,
+  OAuthDeletedAccessTokensEventHandler,
 ];
 
 export const OAuthAccessTokenServices = [
-    OAuthCreateAccessTokenService,
-    OAuthPaginateAccessTokensService,
-    OAuthGetAccessTokensService,
-    OAuthFindAccessTokenService,
-    OAuthFindAccessTokenByIdService,
-    OAuthDeleteAccessTokenByIdService,
-    OAuthDeleteAccessTokensService,
+  OAuthCreateAccessTokenService,
+  OAuthPaginateAccessTokensService,
+  OAuthGetAccessTokensService,
+  OAuthFindAccessTokenService,
+  OAuthFindAccessTokenByIdService,
+  OAuthDeleteAccessTokenByIdService,
+  OAuthDeleteAccessTokensService,
 ];

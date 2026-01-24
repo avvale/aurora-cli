@@ -7,14 +7,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('iam.roleAccount.create')
 export class IamCreateRolesAccountsResolver {
-    constructor(private readonly handler: IamCreateRolesAccountsHandler) {}
+  constructor(private readonly handler: IamCreateRolesAccountsHandler) {}
 
-    @Mutation('iamCreateRolesAccounts')
-    async main(
-        @Args('payload') payload: IamCreateRoleAccountInput[],
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean> {
-        return await this.handler.main(payload, timezone, auditing);
-    }
+  @Mutation('iamCreateRolesAccounts')
+  async main(
+    @Args('payload') payload: IamCreateRoleAccountInput[],
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

@@ -5,16 +5,16 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToolsFindWebhookByIdService {
-    constructor(private readonly repository: ToolsIWebhookRepository) {}
+  constructor(private readonly repository: ToolsIWebhookRepository) {}
 
-    async main(
-        id: ToolsWebhookId,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<ToolsWebhook> {
-        return await this.repository.findById(id, {
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    id: ToolsWebhookId,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<ToolsWebhook> {
+    return await this.repository.findById(id, {
+      constraint,
+      cQMetadata,
+    });
+  }
 }

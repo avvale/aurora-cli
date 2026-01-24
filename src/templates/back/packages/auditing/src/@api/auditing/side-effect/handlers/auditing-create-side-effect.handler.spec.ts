@@ -5,57 +5,54 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingCreateSideEffectHandler', () => {
-    let handler: AuditingCreateSideEffectHandler;
-    let queryBus: IQueryBus;
+  let handler: AuditingCreateSideEffectHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                AuditingCreateSideEffectHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        AuditingCreateSideEffectHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<AuditingCreateSideEffectHandler>(
-            AuditingCreateSideEffectHandler,
+    handler = module.get<AuditingCreateSideEffectHandler>(
+      AuditingCreateSideEffectHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  describe('main', () => {
+    test('AuditingCreateSideEffectHandler should be defined', () => {
+      expect(handler).toBeDefined();
+    });
+
+    test('should return an sideEffect created', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () =>
+            new Promise((resolve) => resolve(auditingMockSideEffectData[0])),
         );
-        queryBus = module.get<IQueryBus>(IQueryBus);
+      expect(
+        await handler.main(auditingMockSideEffectData[0], 'Europe/Madrid'),
+      ).toBe(auditingMockSideEffectData[0]);
     });
-
-    describe('main', () => {
-        test('AuditingCreateSideEffectHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an sideEffect created', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve(auditingMockSideEffectData[0]),
-                    ),
-            );
-            expect(
-                await handler.main(
-                    auditingMockSideEffectData[0],
-                    'Europe/Madrid',
-                ),
-            ).toBe(auditingMockSideEffectData[0]);
-        });
-    });
+  });
 });

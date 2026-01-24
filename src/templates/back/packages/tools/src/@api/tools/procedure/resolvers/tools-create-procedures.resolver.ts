@@ -7,13 +7,13 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.procedure.create')
 export class ToolsCreateProceduresResolver {
-    constructor(private readonly handler: ToolsCreateProceduresHandler) {}
+  constructor(private readonly handler: ToolsCreateProceduresHandler) {}
 
-    @Mutation('toolsCreateProcedures')
-    async main(
-        @Args('payload') payload: ToolsCreateProcedureInput[],
-        @Timezone() timezone?: string,
-    ): Promise<boolean> {
-        return await this.handler.main(payload, timezone);
-    }
+  @Mutation('toolsCreateProcedures')
+  async main(
+    @Args('payload') payload: ToolsCreateProcedureInput[],
+    @Timezone() timezone?: string,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone);
+  }
 }

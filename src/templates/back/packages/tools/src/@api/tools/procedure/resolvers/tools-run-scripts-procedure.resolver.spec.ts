@@ -4,40 +4,40 @@ import { ToolsRunScriptsProcedureHandler } from '../handlers/tools-run-scripts-p
 import { ToolsRunScriptsProcedureResolver } from './tools-run-scripts-procedure.resolver';
 
 describe('ToolsRunScriptsProcedureResolver', () => {
-    let resolver: ToolsRunScriptsProcedureResolver;
-    let handler: ToolsRunScriptsProcedureHandler;
+  let resolver: ToolsRunScriptsProcedureResolver;
+  let handler: ToolsRunScriptsProcedureHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                ToolsRunScriptsProcedureResolver,
-                {
-                    provide: ToolsRunScriptsProcedureHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        ToolsRunScriptsProcedureResolver,
+        {
+          provide: ToolsRunScriptsProcedureHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<ToolsRunScriptsProcedureResolver>(
-            ToolsRunScriptsProcedureResolver,
-        );
-        handler = module.get<ToolsRunScriptsProcedureHandler>(
-            ToolsRunScriptsProcedureHandler,
-        );
-    });
+    resolver = module.get<ToolsRunScriptsProcedureResolver>(
+      ToolsRunScriptsProcedureResolver,
+    );
+    handler = module.get<ToolsRunScriptsProcedureHandler>(
+      ToolsRunScriptsProcedureHandler,
+    );
+  });
 
+  test('ToolsRunScriptsProcedureResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('ToolsRunScriptsProcedureResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
-
-    describe('main', () => {
-        test('ToolsRunScriptsProcedureResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-    });
+  });
 });

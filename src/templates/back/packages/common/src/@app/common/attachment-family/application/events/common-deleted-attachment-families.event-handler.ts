@@ -2,10 +2,10 @@ import { CommonDeletedAttachmentFamiliesEvent } from '@app/common/attachment-fam
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(CommonDeletedAttachmentFamiliesEvent)
-export class CommonDeletedAttachmentFamiliesEventHandler implements IEventHandler<CommonDeletedAttachmentFamiliesEvent>
+export class CommonDeletedAttachmentFamiliesEventHandler
+  implements IEventHandler<CommonDeletedAttachmentFamiliesEvent>
 {
-    handle(event: CommonDeletedAttachmentFamiliesEvent): void
-    {
-        // console.log('DeletedAttachmentFamiliesEvent: ', event);
-    }
+  handle(event: CommonDeletedAttachmentFamiliesEvent): void {
+    // console.log('DeletedAttachmentFamiliesEvent: ', event);
+  }
 }

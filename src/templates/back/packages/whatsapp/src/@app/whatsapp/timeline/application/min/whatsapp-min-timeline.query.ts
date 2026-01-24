@@ -1,11 +1,10 @@
 import { CQMetadata, QueryStatement } from '@aurorajs.dev/core';
 
-export class WhatsappMinTimelineQuery
-{
-    constructor(
-        public readonly column: string,
-        public readonly queryStatement?: QueryStatement,
-        public readonly constraint?: QueryStatement,
-        public readonly cQMetadata?: CQMetadata,
-    ) {}
+export class WhatsappMinTimelineQuery {
+  constructor(
+    public readonly column: string,
+    public readonly queryStatement?: QueryStatement,
+    public readonly constraint?: QueryStatement,
+    public readonly cQMetadata?: CQMetadata,
+  ) {}
 }

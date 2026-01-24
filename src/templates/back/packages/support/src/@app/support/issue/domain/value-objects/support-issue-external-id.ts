@@ -1,20 +1,20 @@
 import { StringValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class SupportIssueExternalId extends StringValueObject {
-    public readonly type: string = 'SupportIssueExternalId';
+  public readonly type: string = 'SupportIssueExternalId';
 
-    constructor(value: string, validationRules: ValidationRules = {}) {
-        super(
-            value,
-            Object.assign(
-                {
-                    name: 'SupportIssueExternalId',
-                    nullable: true,
-                    undefinable: true,
-                    maxLength: 64,
-                },
-                validationRules,
-            ),
-        );
-    }
+  constructor(value: string, validationRules: ValidationRules = {}) {
+    super(
+      value,
+      Object.assign(
+        {
+          name: 'SupportIssueExternalId',
+          nullable: true,
+          undefinable: true,
+          maxLength: 64,
+        },
+        validationRules,
+      ),
+    );
+  }
 }

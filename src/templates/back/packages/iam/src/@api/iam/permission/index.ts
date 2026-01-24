@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission.aurora.yaml
+ */
 // export DTOs
 export { IamCreatePermissionDto } from './dto/iam-create-permission.dto';
 export { IamPermissionDto } from './dto/iam-permission.dto';
@@ -80,42 +84,42 @@ import { IamUpdatePermissionsHandler } from './handlers/iam-update-permissions.h
 import { IamPermissionSeeder } from './seeder/iam-permission.seeder';
 
 export const IamPermissionApiControllers = [
-    IamCreatePermissionController,
-    IamCreatePermissionsController,
-    IamPaginatePermissionsController,
-    IamGetPermissionsController,
-    IamFindPermissionByIdController,
-    IamFindPermissionController,
-    IamUpdatePermissionByIdController,
-    IamUpdatePermissionsController,
-    IamDeletePermissionByIdController,
-    IamDeletePermissionsController,
+  IamCreatePermissionController,
+  IamCreatePermissionsController,
+  IamPaginatePermissionsController,
+  IamGetPermissionsController,
+  IamFindPermissionByIdController,
+  IamFindPermissionController,
+  IamUpdatePermissionByIdController,
+  IamUpdatePermissionsController,
+  IamDeletePermissionByIdController,
+  IamDeletePermissionsController,
 ];
 
 export const IamPermissionApiResolvers = [
-    IamCreatePermissionResolver,
-    IamCreatePermissionsResolver,
-    IamPaginatePermissionsResolver,
-    IamGetPermissionsResolver,
-    IamFindPermissionByIdResolver,
-    IamFindPermissionResolver,
-    IamUpdatePermissionByIdResolver,
-    IamUpdatePermissionsResolver,
-    IamDeletePermissionByIdResolver,
-    IamDeletePermissionsResolver,
+  IamCreatePermissionResolver,
+  IamCreatePermissionsResolver,
+  IamPaginatePermissionsResolver,
+  IamGetPermissionsResolver,
+  IamFindPermissionByIdResolver,
+  IamFindPermissionResolver,
+  IamUpdatePermissionByIdResolver,
+  IamUpdatePermissionsResolver,
+  IamDeletePermissionByIdResolver,
+  IamDeletePermissionsResolver,
 ];
 
 export const IamPermissionApiHandlers = [
-    IamCreatePermissionHandler,
-    IamCreatePermissionsHandler,
-    IamPaginatePermissionsHandler,
-    IamGetPermissionsHandler,
-    IamFindPermissionByIdHandler,
-    IamFindPermissionHandler,
-    IamUpdatePermissionByIdHandler,
-    IamUpdatePermissionsHandler,
-    IamDeletePermissionByIdHandler,
-    IamDeletePermissionsHandler,
+  IamCreatePermissionHandler,
+  IamCreatePermissionsHandler,
+  IamPaginatePermissionsHandler,
+  IamGetPermissionsHandler,
+  IamFindPermissionByIdHandler,
+  IamFindPermissionHandler,
+  IamUpdatePermissionByIdHandler,
+  IamUpdatePermissionsHandler,
+  IamDeletePermissionByIdHandler,
+  IamDeletePermissionsHandler,
 ];
 
 export const IamPermissionApiServices = [IamPermissionSeeder];

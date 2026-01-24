@@ -1,41 +1,43 @@
-import { Injectable } from '@nestjs/common';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Injectable } from '@nestjs/common';
 
 // @app
-import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
+import { IamUpdateUserMetaByIdInput, IamUserMeta } from '@api/graphql';
 import { IamAccountResponse } from '@app/iam/account';
-import { IamUserMeta, IamUpdateUserMetaByIdInput } from '@api/graphql';
-import { IamUserMetaDto, IamUpdateUserMetaByIdDto } from '../dto';
+import { IamFindUserByIdQuery, IamUpdateUserByIdCommand } from '@app/iam/user';
+import { IamUpdateUserMetaByIdDto, IamUserMetaDto } from '../dto';
 
 @Injectable()
-export class IamUpdateUserMetaByIdHandler
-{
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class IamUpdateUserMetaByIdHandler {
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(
-        payload: IamUpdateUserMetaByIdInput | IamUpdateUserMetaByIdDto,
-        account: IamAccountResponse,
-        timezone?: string,
-    ): Promise<IamUserMeta | IamUserMetaDto>
-    {
-        await this.commandBus.dispatch(new IamUpdateUserByIdCommand(
-            {
-                ...payload,
-                id: account.user.id,
-            },
-            {},
-            { timezone },
-        ));
+  async main(
+    payload: IamUpdateUserMetaByIdInput | IamUpdateUserMetaByIdDto,
+    account: IamAccountResponse,
+    timezone?: string,
+  ): Promise<IamUserMeta | IamUserMetaDto> {
+    await this.commandBus.dispatch(
+      new IamUpdateUserByIdCommand(
+        {
+          ...payload,
+          id: account.user.id,
+        },
+        {},
+        { timezone },
+      ),
+    );
 
-        return await this.queryBus.ask(new IamFindUserByIdQuery(
-            account.user.id,
-            {},
-            {
-                timezone,
-            },
-        ));
-    }
+    return await this.queryBus.ask(
+      new IamFindUserByIdQuery(
+        account.user.id,
+        {},
+        {
+          timezone,
+        },
+      ),
+    );
+  }
 }

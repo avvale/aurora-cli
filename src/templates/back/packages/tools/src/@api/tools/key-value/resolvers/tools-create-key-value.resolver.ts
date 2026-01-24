@@ -7,14 +7,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.keyValue.create')
 export class ToolsCreateKeyValueResolver {
-    constructor(private readonly handler: ToolsCreateKeyValueHandler) {}
+  constructor(private readonly handler: ToolsCreateKeyValueHandler) {}
 
-    @Mutation('toolsCreateKeyValue')
-    async main(
-        @Args('payload') payload: ToolsCreateKeyValueInput,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<ToolsKeyValue> {
-        return await this.handler.main(payload, timezone, auditing);
-    }
+  @Mutation('toolsCreateKeyValue')
+  async main(
+    @Args('payload') payload: ToolsCreateKeyValueInput,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<ToolsKeyValue> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

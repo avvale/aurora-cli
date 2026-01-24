@@ -2,10 +2,10 @@ import { CommonCreatedAttachmentLibraryEvent } from '@app/common/attachment-libr
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(CommonCreatedAttachmentLibraryEvent)
-export class CommonCreatedAttachmentLibraryEventHandler implements IEventHandler<CommonCreatedAttachmentLibraryEvent>
+export class CommonCreatedAttachmentLibraryEventHandler
+  implements IEventHandler<CommonCreatedAttachmentLibraryEvent>
 {
-    handle(event: CommonCreatedAttachmentLibraryEvent): void
-    {
-        // console.log('CommonCreatedAttachmentLibraryEvent: ', event);
-    }
+  handle(event: CommonCreatedAttachmentLibraryEvent): void {
+    // console.log('CommonCreatedAttachmentLibraryEvent: ', event);
+  }
 }

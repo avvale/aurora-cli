@@ -4,17 +4,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamFindTenantService {
-    constructor(private readonly repository: IamITenantRepository) {}
+  constructor(private readonly repository: IamITenantRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<IamTenant> {
-        return await this.repository.find({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<IamTenant> {
+    return await this.repository.find({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

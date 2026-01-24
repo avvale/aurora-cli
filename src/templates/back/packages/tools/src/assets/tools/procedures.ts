@@ -1,7 +1,7 @@
-import { ToolsCreateProcedureTemplateInput, ToolsProcedureType } from '@api/graphql';
+import { ToolsCreateProcedureTemplateInput } from '@api/graphql';
 
 export const procedures: ToolsCreateProcedureTemplateInput[] = [
-    /* {
+  /* {
         id      : '1cd0c79e-b83b-4ebf-b112-063669703cdc',
         name    : 'insert_user',
         type    : ToolsProcedureType.PROCEDURE,

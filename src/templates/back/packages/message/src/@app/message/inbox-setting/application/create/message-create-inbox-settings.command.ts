@@ -1,12 +1,12 @@
 import { CQMetadata } from '@aurorajs.dev/core';
 
 export class MessageCreateInboxSettingsCommand {
-    constructor(
-        public readonly payload: {
-            id: string;
-            accountId: string;
-            lastReadMessageRowId: number;
-        }[],
-        public readonly cQMetadata?: CQMetadata,
-    ) {}
+  constructor(
+    public readonly payload: {
+      id: string;
+      accountId: string;
+      lastReadMessageRowId: number;
+    }[],
+    public readonly cQMetadata?: CQMetadata,
+  ) {}
 }

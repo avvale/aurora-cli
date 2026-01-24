@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(MessageDeletedOutboxesEvent)
 export class MessageDeletedOutboxesEventHandler
-    implements IEventHandler<MessageDeletedOutboxesEvent>
+  implements IEventHandler<MessageDeletedOutboxesEvent>
 {
-    handle(event: MessageDeletedOutboxesEvent): void {
-        // console.log('DeletedOutboxesEvent: ', event);
-    }
+  handle(event: MessageDeletedOutboxesEvent): void {
+    // console.log('DeletedOutboxesEvent: ', event);
+  }
 }

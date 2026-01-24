@@ -6,6 +6,16 @@ aggregateName: IamTenant
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+description: >
+  Multi-tenancy module managing organizational structures and data isolation
+  boundaries. Tenants represent isolated organizations (companies, departments,
+  clients) with their own data spaces and user groups. Supports hierarchical
+  tenant structures through parent-child relationships, enabling complex
+  organizational models. Each tenant can have multiple accounts, and accounts
+  can belong to multiple tenants for cross-organizational collaboration.
+  Controls branding (logo), activation status, and custom metadata per
+  organization. Related modules: iam/account (users), iam/user (personal info),
+  iam/role (permissions).
 front:
   outlineFontSetIcon: material-symbols-outlined
   outlineIcon: tenancy
@@ -16,11 +26,21 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the tenant. UUID v4 format, generated automatically
+      on creation. Used as primary key for referencing this tenant across the
+      system and in all tenant-scoped data queries. Critical for data isolation
+      and multi-tenancy enforcement.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing sequential identifier for the tenant. Used for internal
+      ordering, reporting, and legacy system compatibility. Unlike the UUID
+      'id', this provides a human-readable sequential number useful for tenant
+      numbering schemes and administrative reference.
   - name: parentId
     type: id
     nullable: true
@@ -33,26 +53,79 @@ aggregateProperties:
       avoidConstraint: true
     webComponent:
       type: select
+    description: >
+      Self-referential relationship to parent tenant, enabling hierarchical
+      organizational structures. NULL indicates a root-level tenant with no
+      parent. Non-null values create parent-child relationships for modeling
+      company divisions, subsidiary organizations, or departmental hierarchies.
+      Constraint avoided to prevent circular dependency issues during tenant
+      creation and reorganization. Used for permission inheritance patterns and
+      aggregated reporting across organizational hierarchies.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      Display name of the tenant organization (e.g., "Acme Corporation", "Sales
+      Department"). Required field used throughout the UI for identifying the
+      tenant context. Should be meaningful and recognizable to users. Used in
+      tenant selection interfaces, headers, and audit logs. Maximum 128
+      characters to accommodate full legal names or descriptive departmental
+      identifiers.
   - name: code
     type: varchar
     maxLength: 64
     nullable: true
     index: unique
+    description: >
+      Optional unique identifier code for the tenant, typically used for short
+      references, URL slugs, or integration identifiers. Must be unique across
+      all tenants when provided. Common formats: uppercase acronyms (e.g.,
+      "ACME"), lowercase slugs (e.g., "acme-corp"), or external system IDs. NULL
+      indicates no code assigned. Useful for API integrations, subdomain
+      generation, or customer-facing tenant identification without exposing
+      UUIDs. Maximum 64 characters for flexibility with various coding schemes.
   - name: logo
     type: jsonb
     nullable: true
+    description: >
+      Optional JSON structure storing tenant branding logo information.
+      Typically contains image metadata such as file paths, URLs, dimensions, or
+      base64 data. Example structure: { "url": "/assets/logos/tenant-123.png",
+      "width": 200, "height": 60 }. Used for white-labeling and customizing the
+      UI per tenant. NULL indicates default system logo should be used. JSONB
+      format allows flexible storage of various image metadata formats while
+      supporting efficient querying in PostgreSQL.
+
   - name: isActive
     type: boolean
     nullable: false
     defaultValue: false
     example: true
+    description: >
+      Indicates whether the tenant is currently active and allowed to access the
+      system. Defaults to false (inactive) for controlled onboarding - tenants
+      must be explicitly activated after setup, typically after subscription
+      verification or configuration completion. Inactive tenants cannot
+      authenticate or access any resources, effectively suspending the entire
+      organization's access. Used for subscription management, payment
+      enforcement, or temporary suspension scenarios. This is separate from
+      soft-delete (deletedAt) - inactive tenants can be reactivated without data
+      restoration.
+
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+      Optional JSON field for storing custom tenant metadata and configuration
+      properties. Use for tenant-specific settings that don't warrant dedicated
+      columns. Examples: subscription tier, feature flags, billing information,
+      contact details, time zone preferences, localization settings, custom
+      branding colors, or integration configuration. NULL indicates no custom
+      metadata. No schema validation enforced - use carefully with
+      application-level validation. JSONB format enables efficient querying and
+      indexing of specific metadata keys in PostgreSQL.
+
   - name: accounts
     type: relationship
     nullable: true
@@ -80,6 +153,9 @@ aggregateProperties:
               modulePath: iam/tenant
               field: tenant
               avoidConstraint: true
+            description: >
+              Reference to the tenant in this tenant-account association. Part
+              of composite primary key ensuring unique account-tenant pairs.
           - name: accountId
             type: id
             primaryKey: true
@@ -90,6 +166,9 @@ aggregateProperties:
               modulePath: iam/account
               field: account
               avoidConstraint: true
+            description: >
+              Reference to the account in this tenant-account association. Part
+              of composite primary key ensuring unique account-tenant pairs.
         excludedOperations:
           - count
           - getRaw
@@ -99,16 +178,49 @@ aggregateProperties:
           - sum
           - updateAndIncrement
           - upsert
+    description: >
+      Many-to-many relationship defining which accounts (users/services) belong
+      to this tenant. An account can be associated with multiple tenants,
+      enabling cross-organizational access (e.g., consultants working with
+      multiple clients, shared service accounts). A tenant typically has many
+      accounts representing its users and service integrations. When accounts
+      are added/removed from a tenant, the denormalizedTenantIds array in the
+      account entity is automatically updated for query performance
+      optimization. NULL or empty indicates a tenant with no assigned users (new
+      or archived tenant). Critical for multi-tenancy data isolation and access
+      control enforcement.
+
   - name: createdAt
-    description: Timestamp when the tenant was created
+    description: >
+      Timestamp when the tenant was created. Automatically set on record
+      creation. Part of the audit trail for tracking organizational onboarding
+      and lifecycle. Used for tenant age calculations, subscription start dates,
+      and compliance reporting.
     type: timestamp
     nullable: true
+
   - name: updatedAt
-    description: Timestamp when the tenant was last updated
+    description: >
+      Timestamp of the last modification to this tenant. Automatically updated
+      on any field change (name, code, logo, isActive, meta, or relationship
+      changes). Used for tracking tenant evolution, cache invalidation, and
+      audit compliance. Important for monitoring organizational changes and
+      maintaining synchronization with external systems. Critical for compliance
+      with organizational change tracking.
     type: timestamp
     nullable: true
+
   - name: deletedAt
-    description: Timestamp when the tenant was deleted
+    description: >
+      Soft delete timestamp. NULL indicates an active tenant. When set, the
+      tenant is hidden from normal queries but preserved for audit purposes,
+      historical data integrity, and potential recovery. Deleted tenants cannot
+      authenticate or be selected in tenant context switches, but their data
+      remains accessible for administrative review and compliance audits.
+      Accounts associated with deleted tenants retain the relationship for
+      historical tracking. Used for compliance with data retention policies
+      while maintaining multi-tenancy referential integrity. Consider data
+      archival before deletion.
     type: timestamp
     nullable: true
 additionalApis:

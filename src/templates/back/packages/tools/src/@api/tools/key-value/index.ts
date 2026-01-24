@@ -74,39 +74,39 @@ import { ToolsUpdateKeyValueByIdHandler } from './handlers/tools-update-key-valu
 import { ToolsKeyValueSeeder } from './seeder/tools-key-value.seeder';
 
 export const ToolsKeyValueApiControllers = [
-    ToolsCreateKeyValueController,
-    ToolsCreateKeyValuesController,
-    ToolsPaginateKeyValuesController,
-    ToolsGetKeyValuesController,
-    ToolsFindKeyValueByIdController,
-    ToolsFindKeyValueController,
-    ToolsUpdateKeyValueByIdController,
-    ToolsDeleteKeyValueByIdController,
-    ToolsDeleteKeyValuesController,
+  ToolsCreateKeyValueController,
+  ToolsCreateKeyValuesController,
+  ToolsPaginateKeyValuesController,
+  ToolsGetKeyValuesController,
+  ToolsFindKeyValueByIdController,
+  ToolsFindKeyValueController,
+  ToolsUpdateKeyValueByIdController,
+  ToolsDeleteKeyValueByIdController,
+  ToolsDeleteKeyValuesController,
 ];
 
 export const ToolsKeyValueApiResolvers = [
-    ToolsCreateKeyValueResolver,
-    ToolsCreateKeyValuesResolver,
-    ToolsPaginateKeyValuesResolver,
-    ToolsGetKeyValuesResolver,
-    ToolsFindKeyValueByIdResolver,
-    ToolsFindKeyValueResolver,
-    ToolsUpdateKeyValueByIdResolver,
-    ToolsDeleteKeyValueByIdResolver,
-    ToolsDeleteKeyValuesResolver,
+  ToolsCreateKeyValueResolver,
+  ToolsCreateKeyValuesResolver,
+  ToolsPaginateKeyValuesResolver,
+  ToolsGetKeyValuesResolver,
+  ToolsFindKeyValueByIdResolver,
+  ToolsFindKeyValueResolver,
+  ToolsUpdateKeyValueByIdResolver,
+  ToolsDeleteKeyValueByIdResolver,
+  ToolsDeleteKeyValuesResolver,
 ];
 
 export const ToolsKeyValueApiHandlers = [
-    ToolsCreateKeyValueHandler,
-    ToolsCreateKeyValuesHandler,
-    ToolsPaginateKeyValuesHandler,
-    ToolsGetKeyValuesHandler,
-    ToolsFindKeyValueByIdHandler,
-    ToolsFindKeyValueHandler,
-    ToolsUpdateKeyValueByIdHandler,
-    ToolsDeleteKeyValueByIdHandler,
-    ToolsDeleteKeyValuesHandler,
+  ToolsCreateKeyValueHandler,
+  ToolsCreateKeyValuesHandler,
+  ToolsPaginateKeyValuesHandler,
+  ToolsGetKeyValuesHandler,
+  ToolsFindKeyValueByIdHandler,
+  ToolsFindKeyValueHandler,
+  ToolsUpdateKeyValueByIdHandler,
+  ToolsDeleteKeyValueByIdHandler,
+  ToolsDeleteKeyValuesHandler,
 ];
 
 export const ToolsKeyValueApiServices = [ToolsKeyValueSeeder];

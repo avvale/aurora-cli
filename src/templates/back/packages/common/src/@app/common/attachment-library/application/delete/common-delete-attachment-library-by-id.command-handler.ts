@@ -4,19 +4,21 @@ import { CommonAttachmentLibraryId } from '@app/common/attachment-library/domain
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonDeleteAttachmentLibraryByIdCommand)
-export class CommonDeleteAttachmentLibraryByIdCommandHandler implements ICommandHandler<CommonDeleteAttachmentLibraryByIdCommand>
+export class CommonDeleteAttachmentLibraryByIdCommandHandler
+  implements ICommandHandler<CommonDeleteAttachmentLibraryByIdCommand>
 {
-    constructor(
-        private readonly deleteAttachmentLibraryByIdService: CommonDeleteAttachmentLibraryByIdService,
-    ) {}
+  constructor(
+    private readonly deleteAttachmentLibraryByIdService: CommonDeleteAttachmentLibraryByIdService,
+  ) {}
 
-    async execute(command: CommonDeleteAttachmentLibraryByIdCommand): Promise<void>
-    {
-        // call to use case and implements ValueObjects
-        await this.deleteAttachmentLibraryByIdService.main(
-            new CommonAttachmentLibraryId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(
+    command: CommonDeleteAttachmentLibraryByIdCommand,
+  ): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteAttachmentLibraryByIdService.main(
+      new CommonAttachmentLibraryId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

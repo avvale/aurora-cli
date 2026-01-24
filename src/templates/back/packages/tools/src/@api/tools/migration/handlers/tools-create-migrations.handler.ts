@@ -6,24 +6,24 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToolsCreateMigrationsHandler {
-    constructor(private readonly commandBus: ICommandBus) {}
+  constructor(private readonly commandBus: ICommandBus) {}
 
-    async main(
-        payload: ToolsCreateMigrationInput[] | ToolsCreateMigrationDto[],
-        timezone?: string,
-    ): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new ToolsCreateMigrationsCommand(
-                payload.map((migration) => ({
-                    ...migration,
-                    isExecuted: false,
-                })),
-                {
-                    timezone,
-                },
-            ),
-        );
+  async main(
+    payload: ToolsCreateMigrationInput[] | ToolsCreateMigrationDto[],
+    timezone?: string,
+  ): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new ToolsCreateMigrationsCommand(
+        payload.map((migration) => ({
+          ...migration,
+          isExecuted: false,
+        })),
+        {
+          timezone,
+        },
+      ),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

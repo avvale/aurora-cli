@@ -5,28 +5,25 @@ import { AuditingMeta, ICommandBus } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class CommonCreateAdministrativeAreasLevel2Handler
-{
-    constructor(
-        private readonly commandBus: ICommandBus,
-    ) {}
+export class CommonCreateAdministrativeAreasLevel2Handler {
+  constructor(private readonly commandBus: ICommandBus) {}
 
-    async main(
-        payload: CommonCreateAdministrativeAreaLevel2Input[] | CommonCreateAdministrativeAreaLevel2Dto[],
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        await this.commandBus.dispatch(new CommonCreateAdministrativeAreasLevel2Command(
-            payload,
-            {
-                timezone,
-                repositoryOptions: {
-                    auditing,
-                },
-            },
-        ));
+  async main(
+    payload:
+      | CommonCreateAdministrativeAreaLevel2Input[]
+      | CommonCreateAdministrativeAreaLevel2Dto[],
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new CommonCreateAdministrativeAreasLevel2Command(payload, {
+        timezone,
+        repositoryOptions: {
+          auditing,
+        },
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.attachment.get')
-export class CommonFindAttachmentByIdResolver
-{
-    constructor(
-        private readonly handler: CommonFindAttachmentByIdHandler,
-    ) {}
+export class CommonFindAttachmentByIdResolver {
+  constructor(private readonly handler: CommonFindAttachmentByIdHandler) {}
 
-    @Query('commonFindAttachmentById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<CommonAttachment>
-    {
-        return await this.handler.main(
-            id,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('commonFindAttachmentById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<CommonAttachment> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

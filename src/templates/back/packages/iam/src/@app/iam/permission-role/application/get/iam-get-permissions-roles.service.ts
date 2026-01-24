@@ -1,23 +1,27 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission-role.aurora.yaml
+ */
 import {
-    IamIPermissionRoleRepository,
-    IamPermissionRole,
+  IamIPermissionRoleRepository,
+  IamPermissionRole,
 } from '@app/iam/permission-role';
 import { CQMetadata, LiteralObject, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamGetPermissionsRolesService {
-    constructor(private readonly repository: IamIPermissionRoleRepository) {}
+  constructor(private readonly repository: IamIPermissionRoleRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<IamPermissionRole[] | LiteralObject[]> {
-        return await this.repository.get({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<IamPermissionRole[] | LiteralObject[]> {
+    return await this.repository.get({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

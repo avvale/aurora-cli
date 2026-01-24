@@ -1,10 +1,8 @@
-export interface AccountPermissions
-{
-    [key: string]: string[];
-    all: string[];
+export interface AccountPermissions {
+  [key: string]: string[];
+  all: string[];
 }
 
-export enum IamPermissions
-{
-    SUDO = 'aurora.sudo',
+export enum IamPermissions {
+  SUDO = 'aurora.sudo',
 }

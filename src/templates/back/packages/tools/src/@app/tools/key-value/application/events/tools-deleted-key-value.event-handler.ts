@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(ToolsDeletedKeyValueEvent)
 export class ToolsDeletedKeyValueEventHandler
-    implements IEventHandler<ToolsDeletedKeyValueEvent>
+  implements IEventHandler<ToolsDeletedKeyValueEvent>
 {
-    handle(event: ToolsDeletedKeyValueEvent): void {
-        // console.log('ToolsDeletedKeyValueEvent: ', event);
-    }
+  handle(event: ToolsDeletedKeyValueEvent): void {
+    // console.log('ToolsDeletedKeyValueEvent: ', event);
+  }
 }

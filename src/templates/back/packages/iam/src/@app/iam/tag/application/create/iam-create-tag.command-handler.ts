@@ -6,18 +6,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(IamCreateTagCommand)
 export class IamCreateTagCommandHandler
-    implements ICommandHandler<IamCreateTagCommand>
+  implements ICommandHandler<IamCreateTagCommand>
 {
-    constructor(private readonly createTagService: IamCreateTagService) {}
+  constructor(private readonly createTagService: IamCreateTagService) {}
 
-    async execute(command: IamCreateTagCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.createTagService.main(
-            {
-                id: new IamTagId(command.payload.id),
-                name: new IamTagName(command.payload.name),
-            },
-            command.cQMetadata,
-        );
-    }
+  async execute(command: IamCreateTagCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.createTagService.main(
+      {
+        id: new IamTagId(command.payload.id),
+        name: new IamTagName(command.payload.name),
+      },
+      command.cQMetadata,
+    );
+  }
 }

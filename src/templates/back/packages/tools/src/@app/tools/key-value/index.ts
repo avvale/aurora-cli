@@ -75,35 +75,35 @@ import { ToolsPaginateKeyValuesService } from './application/paginate/tools-pagi
 import { ToolsUpdateKeyValueByIdService } from './application/update/tools-update-key-value-by-id.service';
 
 export const ToolsKeyValueHandlers = [
-    // commands
-    ToolsCreateKeyValueCommandHandler,
-    ToolsCreateKeyValuesCommandHandler,
-    ToolsUpdateKeyValueByIdCommandHandler,
-    ToolsDeleteKeyValueByIdCommandHandler,
-    ToolsDeleteKeyValuesCommandHandler,
+  // commands
+  ToolsCreateKeyValueCommandHandler,
+  ToolsCreateKeyValuesCommandHandler,
+  ToolsUpdateKeyValueByIdCommandHandler,
+  ToolsDeleteKeyValueByIdCommandHandler,
+  ToolsDeleteKeyValuesCommandHandler,
 
-    // queries
-    ToolsPaginateKeyValuesQueryHandler,
-    ToolsGetKeyValuesQueryHandler,
-    ToolsFindKeyValueQueryHandler,
-    ToolsFindKeyValueByIdQueryHandler,
+  // queries
+  ToolsPaginateKeyValuesQueryHandler,
+  ToolsGetKeyValuesQueryHandler,
+  ToolsFindKeyValueQueryHandler,
+  ToolsFindKeyValueByIdQueryHandler,
 
-    // events
-    ToolsCreatedKeyValueEventHandler,
-    ToolsCreatedKeyValuesEventHandler,
-    ToolsUpdatedKeyValueEventHandler,
-    ToolsDeletedKeyValueEventHandler,
-    ToolsDeletedKeyValuesEventHandler,
+  // events
+  ToolsCreatedKeyValueEventHandler,
+  ToolsCreatedKeyValuesEventHandler,
+  ToolsUpdatedKeyValueEventHandler,
+  ToolsDeletedKeyValueEventHandler,
+  ToolsDeletedKeyValuesEventHandler,
 ];
 
 export const ToolsKeyValueServices = [
-    ToolsCreateKeyValueService,
-    ToolsCreateKeyValuesService,
-    ToolsPaginateKeyValuesService,
-    ToolsGetKeyValuesService,
-    ToolsFindKeyValueService,
-    ToolsFindKeyValueByIdService,
-    ToolsUpdateKeyValueByIdService,
-    ToolsDeleteKeyValueByIdService,
-    ToolsDeleteKeyValuesService,
+  ToolsCreateKeyValueService,
+  ToolsCreateKeyValuesService,
+  ToolsPaginateKeyValuesService,
+  ToolsGetKeyValuesService,
+  ToolsFindKeyValueService,
+  ToolsFindKeyValueByIdService,
+  ToolsUpdateKeyValueByIdService,
+  ToolsDeleteKeyValueByIdService,
+  ToolsDeleteKeyValuesService,
 ];

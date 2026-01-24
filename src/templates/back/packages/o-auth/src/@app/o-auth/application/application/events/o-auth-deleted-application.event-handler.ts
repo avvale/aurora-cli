@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(OAuthDeletedApplicationEvent)
 export class OAuthDeletedApplicationEventHandler
-    implements IEventHandler<OAuthDeletedApplicationEvent>
+  implements IEventHandler<OAuthDeletedApplicationEvent>
 {
-    handle(event: OAuthDeletedApplicationEvent): void {
-        // console.log('OAuthDeletedApplicationEvent: ', event);
-    }
+  handle(event: OAuthDeletedApplicationEvent): void {
+    // console.log('OAuthDeletedApplicationEvent: ', event);
+  }
 }

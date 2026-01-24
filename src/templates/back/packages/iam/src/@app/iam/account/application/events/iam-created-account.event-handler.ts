@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(IamCreatedAccountEvent)
 export class IamCreatedAccountEventHandler
-    implements IEventHandler<IamCreatedAccountEvent>
+  implements IEventHandler<IamCreatedAccountEvent>
 {
-    handle(event: IamCreatedAccountEvent): void {
-        // 'IamCreatedAccountEvent'
-    }
+  handle(event: IamCreatedAccountEvent): void {
+    // 'IamCreatedAccountEvent'
+  }
 }

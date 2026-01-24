@@ -83,40 +83,40 @@ import { IamUpdateTenantByIdService } from './application/update/iam-update-tena
 import { IamUpdateTenantsService } from './application/update/iam-update-tenants.service';
 
 export const IamTenantHandlers = [
-    // commands
-    IamCreateTenantCommandHandler,
-    IamCreateTenantsCommandHandler,
-    IamUpdateTenantByIdCommandHandler,
-    IamUpdateTenantsCommandHandler,
-    IamDeleteTenantByIdCommandHandler,
-    IamDeleteTenantsCommandHandler,
+  // commands
+  IamCreateTenantCommandHandler,
+  IamCreateTenantsCommandHandler,
+  IamUpdateTenantByIdCommandHandler,
+  IamUpdateTenantsCommandHandler,
+  IamDeleteTenantByIdCommandHandler,
+  IamDeleteTenantsCommandHandler,
 
-    // queries
-    IamPaginateTenantsQueryHandler,
-    IamGetTenantsQueryHandler,
-    IamFindTenantQueryHandler,
-    IamFindTenantByIdQueryHandler,
-    IamRawSQLTenantsQueryHandler,
+  // queries
+  IamPaginateTenantsQueryHandler,
+  IamGetTenantsQueryHandler,
+  IamFindTenantQueryHandler,
+  IamFindTenantByIdQueryHandler,
+  IamRawSQLTenantsQueryHandler,
 
-    // events
-    IamCreatedTenantEventHandler,
-    IamCreatedTenantsEventHandler,
-    IamUpdatedTenantEventHandler,
-    IamUpdatedTenantsEventHandler,
-    IamDeletedTenantEventHandler,
-    IamDeletedTenantsEventHandler,
+  // events
+  IamCreatedTenantEventHandler,
+  IamCreatedTenantsEventHandler,
+  IamUpdatedTenantEventHandler,
+  IamUpdatedTenantsEventHandler,
+  IamDeletedTenantEventHandler,
+  IamDeletedTenantsEventHandler,
 ];
 
 export const IamTenantServices = [
-    IamCreateTenantService,
-    IamCreateTenantsService,
-    IamPaginateTenantsService,
-    IamGetTenantsService,
-    IamFindTenantService,
-    IamFindTenantByIdService,
-    IamRawSQLTenantsService,
-    IamUpdateTenantByIdService,
-    IamUpdateTenantsService,
-    IamDeleteTenantByIdService,
-    IamDeleteTenantsService,
+  IamCreateTenantService,
+  IamCreateTenantsService,
+  IamPaginateTenantsService,
+  IamGetTenantsService,
+  IamFindTenantService,
+  IamFindTenantByIdService,
+  IamRawSQLTenantsService,
+  IamUpdateTenantByIdService,
+  IamUpdateTenantsService,
+  IamDeleteTenantByIdService,
+  IamDeleteTenantsService,
 ];

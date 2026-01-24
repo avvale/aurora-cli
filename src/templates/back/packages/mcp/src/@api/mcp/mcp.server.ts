@@ -3,19 +3,19 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { HttpService } from '@nestjs/axios';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 import {
-    GraphQLArgument,
-    GraphQLInputType,
-    GraphQLSchema,
-    GraphQLType,
-    getNamedType,
-    isEnumType,
-    isInputObjectType,
-    isInterfaceType,
-    isListType,
-    isNonNullType,
-    isObjectType,
-    isScalarType,
-    isUnionType,
+  GraphQLArgument,
+  GraphQLInputType,
+  GraphQLSchema,
+  GraphQLType,
+  getNamedType,
+  isEnumType,
+  isInputObjectType,
+  isInterfaceType,
+  isListType,
+  isNonNullType,
+  isObjectType,
+  isScalarType,
+  isUnionType,
 } from 'graphql';
 import { firstValueFrom } from 'rxjs';
 import { z } from 'zod';
@@ -23,641 +23,613 @@ import { McpAuthService } from './mcp.auth.service';
 
 @Injectable()
 export class McpNestGraphQLServer implements OnApplicationBootstrap {
-    private schema!: GraphQLSchema;
+  private schema!: GraphQLSchema;
 
-    constructor(
-        private readonly schemaStoreService: SchemaStoreService,
-        private readonly http: HttpService,
-        private readonly auth: McpAuthService,
-    ) {}
+  constructor(
+    private readonly schemaStoreService: SchemaStoreService,
+    private readonly http: HttpService,
+    private readonly auth: McpAuthService,
+  ) {}
 
-    async onApplicationBootstrap(): Promise<void> {
-        // this.schema = await this.waitForSchema();
+  async onApplicationBootstrap(): Promise<void> {
+    // this.schema = await this.waitForSchema();
+  }
+
+  private async waitForSchema(
+    timeoutMs = 15000,
+    intervalMs = 50,
+  ): Promise<GraphQLSchema> {
+    const start = Date.now();
+    while (true) {
+      try {
+        const s = this.schemaStoreService.getSchema();
+        if (s) return s;
+      } catch {
+        // Ignore errors
+      }
+
+      if (Date.now() - start > timeoutMs)
+        throw new Error('GraphQL schema not ready (timeout)');
+      await new Promise((r) => setTimeout(r, intervalMs));
     }
+  }
 
-    private async waitForSchema(
-        timeoutMs = 15000,
-        intervalMs = 50,
-    ): Promise<GraphQLSchema> {
-        const start = Date.now();
-        while (true) {
-            try {
-                const s = this.schemaStoreService.getSchema();
-                if (s) return s;
-            } catch {
-                // Ignore errors
-            }
+  // Factory: create a fresh MCP server instance with all resources/tools
+  createServer(): McpServer {
+    const server = new McpServer({ name: 'nestjs-mcp', version: '1.0.0' });
+    this.initFromSchema(server);
+    return server;
+  }
 
-            if (Date.now() - start > timeoutMs)
-                throw new Error('GraphQL schema not ready (timeout)');
-            await new Promise((r) => setTimeout(r, intervalMs));
-        }
-    }
-
-    // Factory: create a fresh MCP server instance with all resources/tools
-    createServer(): McpServer {
-        const server = new McpServer({ name: 'nestjs-mcp', version: '1.0.0' });
-        this.initFromSchema(server);
-        return server;
-    }
-
-    private initFromSchema(server: McpServer): void {
-        // 1) Resource: full GraphQL SDL
-        server.registerResource(
-            'graphql-schema',
-            'gql://schema',
-            {
-                title: 'GraphQL Schema (SDL)',
-                description: `Complete GraphQL API schema in SDL format, contains metadata
+  private initFromSchema(server: McpServer): void {
+    // 1) Resource: full GraphQL SDL
+    server.registerResource(
+      'graphql-schema',
+      'gql://schema',
+      {
+        title: 'GraphQL Schema (SDL)',
+        description: `Complete GraphQL API schema in SDL format, contains metadata
                 with help for the compression of fields and queries, as well as instructions
                 for the composition of a QueryStatement object.`,
-                mimeType: 'text/plain',
-            },
-            (uri) => ({
-                contents: [
-                    { uri: uri.href, text: this.schemaStoreService.getSDL() },
-                ],
-            }),
-        );
-
-        // 1.b) Minimal prompt so clients don't error on prompts/list
-        server.registerPrompt(
-            'graphql-quickstart',
-            {
-                title: 'GraphQL Quickstart',
-                description:
-                    'Brief help to use the GraphQL tools of this server.',
-            },
-            () => ({
-                description: 'How to get started',
-                messages: [
-                    {
-                        role: 'user',
-                        content: {
-                            type: 'text',
-                            text: [
-                                'Use the "graphql-execute" tool to execute arbitrary GraphQL documents,',
-                                'or any of the "gql-query-*" generated by introspection.',
-                                '',
-                                'IMPORTANT: When composing QueryStatement variables, WHERE operators',
-                                'must be quoted keys wrapped in square brackets (e.g., "[gte]", "[startsWith]"):',
-                                '',
-                                'Correct:',
-                                '{ "where": { "name": { "[startsWith]": "Carlos" } } }',
-                                'Incorrect:',
-                                '{ "where": { "name": { startsWith: "Carlos" } } }',
-                            ].join('\n'),
-                        },
-                    },
-                ],
-            }),
-        );
-
-        // 1.c) Full operator guide prompt (curated from core.graphql)
-        server.registerPrompt(
-            'graphql-operators',
-            {
-                title: 'QueryStatement Operators Guide',
-                description:
-                    'Full reference and examples for WHERE/operators in QueryStatement.',
-            },
-            () => ({
-                description: 'Operator reference and examples',
-                messages: [
-                    {
-                        role: 'user',
-                        content: {
-                            type: 'text',
-                            text: [
-                                'QueryStatement — WHERE/operators usage (Sequelize-like)',
-                                '',
-                                'GENERAL NOTES',
-                                '- Operators must be quoted keys wrapped in brackets: "[gte]", "[or]", etc.',
-                                '- Example: { "where": { "age": { "[gte]": 18 } } }',
-                                '',
-                                'LOGICAL',
-                                '{ "where": { "[and]": [ { "status": "active" }, { "age": { "[gte]": 18 } } ] } }',
-                                '{ "where": { "[or]":  [ { "role": "admin" }, { "role": "editor" } ] } }',
-                                '{ "where": { "[not]": { "deletedAt": { "[ne]": null } } } }',
-                                '',
-                                'EQUALITY & NULLS',
-                                '{ "where": { "id": 123 } }',
-                                '{ "where": { "id": { "[eq]": 123 } } }',
-                                '{ "where": { "tenantId": { "[ne]": "public" } } }',
-                                '{ "where": { "deletedAt": { "[is]": null } } }',
-                                '',
-                                'COMPARISONS',
-                                '{ "where": { "price": { "[gt]": 10 } } }',
-                                '{ "where": { "price": { "[gte]": 10, "[lte]": 100 } } }',
-                                '{ "where": { "createdAt": { "[lt]": "2025-01-01T00:00:00Z" } } }',
-                                '',
-                                'RANGES',
-                                '{ "where": { "score": { "[between]": [70, 90] } } }',
-                                '{ "where": { "score": { "[notBetween]": [0, 10] } } }',
-                                '',
-                                'SETS',
-                                '{ "where": { "status": { "[in]": ["draft", "published"] } } }',
-                                '{ "where": { "status": { "[notIn]": ["archived"] } } }',
-                                '',
-                                'PATTERN MATCHING (strings)',
-                                '{ "where": { "name": { "[like]": "%desk%" } } }',
-                                '{ "where": { "name": { "[notLike]": "Admin%" } } }',
-                                '{ "where": { "name": { "[iLike]": "%madrid%" } } }',
-                                '{ "where": { "name": { "[notILike]": "TEST%" } } }',
-                                '{ "where": { "name": { "[startsWith]": "Pro" } } }',
-                                '{ "where": { "name": { "[endsWith]": "Max" } } }',
-                                '{ "where": { "name": { "[substring]": "Air" } } }',
-                                '{ "where": { "sku":  { "[regexp]": "^[A-Z]{3}-[0-9]+$" } } }',
-                                '{ "where": { "sku":  { "[notRegexp]": "test" } } }',
-                                '{ "where": { "sku":  { "[iRegexp]": "abc" } } }',
-                                '{ "where": { "sku":  { "[notIRegexp]": "xyz" } } }',
-                                '',
-                                'COLUMN vs COLUMN',
-                                '{ "where": { "updatedAt": { "[col]": "createdAt" } } }',
-                                '',
-                                'ARRAYS',
-                                '{ "where": { "tags": { "[overlap]": ["react", "node"] } } }',
-                                '{ "where": { "tags": { "[contains]": ["graphql"] } } }',
-                                '{ "where": { "roles": { "[any]": ["admin", "editor"] } } }',
-                                '',
-                                'Tip: Check the resource "graphql-schema" for full SDL and more examples.',
-                            ].join('\n'),
-                        },
-                    },
-                ],
-            }),
-        );
-
-        // 2) Tool: generic GraphQL executor (allows queries y mutations)
-        server.registerTool(
-            'graphql-execute',
-            {
-                title: 'GraphQL execute',
-                description:
-                    'Executes GraphQL operations (queries) against this API.',
-                inputSchema: {
-                    document: z
-                        .string()
-                        .describe('GraphQL document/operation.'),
-                    variables: z.record(z.any()).optional(),
-                    operationName: z.string().optional(),
-                    headers: z.record(z.string()).optional(),
-                },
-            },
-            async ({ document, variables, operationName, headers }) => {
-                try {
-                    const { status, data } = await this.execHttp({
-                        document,
-                        variables,
-                        operationName,
-                        headers,
-                    });
-                    const text = JSON.stringify({ status, data }, null, 2);
-                    return { content: [{ type: 'text', text }] };
-                } catch (e) {
-                    return {
-                        content: [
-                            {
-                                type: 'text',
-                                text: String(
-                                    e instanceof Error ? e.message : e,
-                                ),
-                            },
-                        ],
-                        isError: true,
-                    } as const;
-                }
-            },
-        );
-
-        // 3) Introspection: one tool per Query field, with INCLUDE/EXCLUDE logic
-        const q = this.schema.getQueryType();
-        if (q) {
-            const include = (process.env.MCP_INCLUDE_API_TOOLS || '').trim();
-            const includeAll = include.length === 0 || include === '*';
-            const includeSet = new Set(
-                includeAll
-                    ? []
-                    : include
-                          .split(',')
-                          .map((s) => s.trim())
-                          .filter(Boolean),
-            );
-            const excludeSet = new Set(
-                (process.env.MCP_EXCLUDE_API_TOOLS || '')
-                    .split(',')
-                    .map((s) => s.trim())
-                    .filter(Boolean),
-            );
-
-            const fields = q.getFields();
-            for (const fieldName of Object.keys(fields)) {
-                if (!includeAll && !includeSet.has(fieldName)) continue;
-                if (excludeSet.size && excludeSet.has(fieldName)) continue;
-
-                const field = fields[fieldName];
-                const args = field.args;
-                const inputSchema = this.argsToZodSchema(args);
-                const { varDefs, argAssigns } = this.buildVarDefsAndArgs(args);
-                const selection = this.buildSelection(field.type);
-                const document = `query ${fieldName}${varDefs ? `(${varDefs})` : ''} { ${fieldName}${argAssigns} ${selection} }`;
-
-                server.registerTool(
-                    `gql-query-${fieldName}`,
-                    {
-                        title: `Query ${fieldName}`,
-                        description:
-                            field.description ?? `GraphQL query ${fieldName}`,
-                        inputSchema,
-                    },
-                    async (toolArgs) => {
-                        const variables = toolArgs as Record<string, unknown>;
-                        const { status, data } = await this.execHttp({
-                            document,
-                            variables,
-                        });
-                        const text = JSON.stringify({ status, data }, null, 2);
-                        return { content: [{ type: 'text', text }] };
-                    },
-                );
-            }
-        }
-
-        // 4) Auth tool: password grant when env variables are not provided
-        server.registerTool(
-            'auth-login',
-            {
-                title: 'Authentication (PASSWORD)',
-                description:
-                    'Gets JWT using grant PASSWORD when there is no MCP_AUTH_USERNAME / MCP_AUTH_CLIENT_SECRET in the environment variables',
-                inputSchema: {
-                    username: z.string(),
-                    password: z.string(),
-                },
-            },
-            async ({ username, password }) => {
-                await this.auth.loginWithPassword(username, password);
-                return { content: [{ type: 'text', text: 'Login OK' }] };
-            },
-        );
-    }
-
-    private async execHttp({
-        document,
-        variables,
-        operationName,
-        headers,
-    }: {
-        document: string;
-        variables?: Record<string, unknown>;
-        operationName?: string;
-        headers?: Record<string, string>;
-    }) {
-        console.log('MCP exec:', JSON.stringify(variables, null, 2));
-        const baseURL =
-            process.env.SELF_BASE_URL ||
-            `http://localhost:${process.env.APP_PORT || 3000}`;
-        // Enforce/normalize QueryStatement operators
-        const enforce = process.env.MCP_QS_ENFORCE_BRACKETS === 'true';
-        const normalize = process.env.MCP_QS_NORMALIZE !== 'false';
-
-        if (variables && enforce) {
-            const offenders = this.findUnbracketedOperators(variables);
-            if (offenders.length) {
-                const hint = [
-                    'Invalid WHERE operators: use quoted bracket keys, e.g. "[startsWith]".',
-                    `Offending paths: ${offenders.join(', ')}`,
-                    'See prompts: graphql-operators (full guide) or graphql-quickstart (short).',
-                ].join('\n');
-                throw new Error(hint);
-            }
-        }
-        // Normalize QueryStatement operators if requested (default: on)
-        if (variables && normalize)
-            variables = this.normalizeQueryStatementOperators(
-                variables,
-            ) as Record<string, unknown>;
-
-        if (process.env.MCP_AUTH === 'true') await this.auth.ensureAuth();
-
-        const makeRequest = async (authHeader?: string) =>
-            firstValueFrom(
-                this.http.post<any>(
-                    `${baseURL}/graphql`,
-                    { query: document, variables, operationName },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            ...(authHeader
-                                ? { Authorization: authHeader }
-                                : {}),
-                            ...(headers ?? {}),
-                        },
-                        validateStatus: () => true,
-                        timeout: 60000,
-                    },
-                ),
-            );
-
-        // Attempt with current token
-        let res = await makeRequest(this.auth.getAuthHeader());
-        if (res.status === 401) {
-            // Try refresh flow
-            const refreshed = await this.auth.refreshIfNeeded();
-            if (refreshed) {
-                res = await makeRequest(this.auth.getAuthHeader());
-            }
-        }
-        return { status: res.status, data: res.data };
-    }
-
-    // --- Operator normalization utilities ----------------------------------
-    private readonly lcToCanonical: Record<string, string> = Object.fromEntries(
-        [
-            // canonical
-            ['and', 'and'],
-            ['or', 'or'],
-            ['not', 'not'],
-            ['eq', 'eq'],
-            ['ne', 'ne'],
-            ['is', 'is'],
-            ['gt', 'gt'],
-            ['gte', 'gte'],
-            ['lt', 'lt'],
-            ['lte', 'lte'],
-            ['between', 'between'],
-            ['notbetween', 'notBetween'],
-            ['in', 'in'],
-            ['notin', 'notIn'],
-            ['like', 'like'],
-            ['notlike', 'notLike'],
-            ['ilike', 'iLike'],
-            ['notilike', 'notILike'],
-            ['startswith', 'startsWith'],
-            ['endswith', 'endsWith'],
-            ['substring', 'substring'],
-            ['regexp', 'regexp'],
-            ['notregexp', 'notRegexp'],
-            ['iregexp', 'iRegexp'],
-            ['notiregexp', 'notIRegexp'],
-            ['col', 'col'],
-            ['overlap', 'overlap'],
-            ['contains', 'contains'],
-            ['contained', 'contained'],
-            ['any', 'any'],
-            // common misspellings
-            ['startwith', 'startsWith'],
-            ['endwith', 'endsWith'],
-            ['startwiths', 'startsWith'],
-            ['endwiths', 'endsWith'],
-        ],
+        mimeType: 'text/plain',
+      },
+      (uri) => ({
+        contents: [{ uri: uri.href, text: this.schemaStoreService.getSDL() }],
+      }),
     );
 
-    private isBracketed(key: string): boolean {
-        return key.startsWith('[') && key.endsWith(']');
+    // 1.b) Minimal prompt so clients don't error on prompts/list
+    server.registerPrompt(
+      'graphql-quickstart',
+      {
+        title: 'GraphQL Quickstart',
+        description: 'Brief help to use the GraphQL tools of this server.',
+      },
+      () => ({
+        description: 'How to get started',
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'text',
+              text: [
+                'Use the "graphql-execute" tool to execute arbitrary GraphQL documents,',
+                'or any of the "gql-query-*" generated by introspection.',
+                '',
+                'IMPORTANT: When composing QueryStatement variables, WHERE operators',
+                'must be quoted keys wrapped in square brackets (e.g., "[gte]", "[startsWith]"):',
+                '',
+                'Correct:',
+                '{ "where": { "name": { "[startsWith]": "Carlos" } } }',
+                'Incorrect:',
+                '{ "where": { "name": { startsWith: "Carlos" } } }',
+              ].join('\n'),
+            },
+          },
+        ],
+      }),
+    );
+
+    // 1.c) Full operator guide prompt (curated from core.graphql)
+    server.registerPrompt(
+      'graphql-operators',
+      {
+        title: 'QueryStatement Operators Guide',
+        description:
+          'Full reference and examples for WHERE/operators in QueryStatement.',
+      },
+      () => ({
+        description: 'Operator reference and examples',
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'text',
+              text: [
+                'QueryStatement — WHERE/operators usage (Sequelize-like)',
+                '',
+                'GENERAL NOTES',
+                '- Operators must be quoted keys wrapped in brackets: "[gte]", "[or]", etc.',
+                '- Example: { "where": { "age": { "[gte]": 18 } } }',
+                '',
+                'LOGICAL',
+                '{ "where": { "[and]": [ { "status": "active" }, { "age": { "[gte]": 18 } } ] } }',
+                '{ "where": { "[or]":  [ { "role": "admin" }, { "role": "editor" } ] } }',
+                '{ "where": { "[not]": { "deletedAt": { "[ne]": null } } } }',
+                '',
+                'EQUALITY & NULLS',
+                '{ "where": { "id": 123 } }',
+                '{ "where": { "id": { "[eq]": 123 } } }',
+                '{ "where": { "tenantId": { "[ne]": "public" } } }',
+                '{ "where": { "deletedAt": { "[is]": null } } }',
+                '',
+                'COMPARISONS',
+                '{ "where": { "price": { "[gt]": 10 } } }',
+                '{ "where": { "price": { "[gte]": 10, "[lte]": 100 } } }',
+                '{ "where": { "createdAt": { "[lt]": "2025-01-01T00:00:00Z" } } }',
+                '',
+                'RANGES',
+                '{ "where": { "score": { "[between]": [70, 90] } } }',
+                '{ "where": { "score": { "[notBetween]": [0, 10] } } }',
+                '',
+                'SETS',
+                '{ "where": { "status": { "[in]": ["draft", "published"] } } }',
+                '{ "where": { "status": { "[notIn]": ["archived"] } } }',
+                '',
+                'PATTERN MATCHING (strings)',
+                '{ "where": { "name": { "[like]": "%desk%" } } }',
+                '{ "where": { "name": { "[notLike]": "Admin%" } } }',
+                '{ "where": { "name": { "[iLike]": "%madrid%" } } }',
+                '{ "where": { "name": { "[notILike]": "TEST%" } } }',
+                '{ "where": { "name": { "[startsWith]": "Pro" } } }',
+                '{ "where": { "name": { "[endsWith]": "Max" } } }',
+                '{ "where": { "name": { "[substring]": "Air" } } }',
+                '{ "where": { "sku":  { "[regexp]": "^[A-Z]{3}-[0-9]+$" } } }',
+                '{ "where": { "sku":  { "[notRegexp]": "test" } } }',
+                '{ "where": { "sku":  { "[iRegexp]": "abc" } } }',
+                '{ "where": { "sku":  { "[notIRegexp]": "xyz" } } }',
+                '',
+                'COLUMN vs COLUMN',
+                '{ "where": { "updatedAt": { "[col]": "createdAt" } } }',
+                '',
+                'ARRAYS',
+                '{ "where": { "tags": { "[overlap]": ["react", "node"] } } }',
+                '{ "where": { "tags": { "[contains]": ["graphql"] } } }',
+                '{ "where": { "roles": { "[any]": ["admin", "editor"] } } }',
+                '',
+                'Tip: Check the resource "graphql-schema" for full SDL and more examples.',
+              ].join('\n'),
+            },
+          },
+        ],
+      }),
+    );
+
+    // 2) Tool: generic GraphQL executor (allows queries y mutations)
+    server.registerTool(
+      'graphql-execute',
+      {
+        title: 'GraphQL execute',
+        description: 'Executes GraphQL operations (queries) against this API.',
+        inputSchema: {
+          document: z.string().describe('GraphQL document/operation.'),
+          variables: z.record(z.any()).optional(),
+          operationName: z.string().optional(),
+          headers: z.record(z.string()).optional(),
+        },
+      },
+      async ({ document, variables, operationName, headers }) => {
+        try {
+          const { status, data } = await this.execHttp({
+            document,
+            variables,
+            operationName,
+            headers,
+          });
+          const text = JSON.stringify({ status, data }, null, 2);
+          return { content: [{ type: 'text', text }] };
+        } catch (e) {
+          return {
+            content: [
+              {
+                type: 'text',
+                text: String(e instanceof Error ? e.message : e),
+              },
+            ],
+            isError: true,
+          } as const;
+        }
+      },
+    );
+
+    // 3) Introspection: one tool per Query field, with INCLUDE/EXCLUDE logic
+    const q = this.schema.getQueryType();
+    if (q) {
+      const include = (process.env.MCP_INCLUDE_API_TOOLS || '').trim();
+      const includeAll = include.length === 0 || include === '*';
+      const includeSet = new Set(
+        includeAll
+          ? []
+          : include
+              .split(',')
+              .map((s) => s.trim())
+              .filter(Boolean),
+      );
+      const excludeSet = new Set(
+        (process.env.MCP_EXCLUDE_API_TOOLS || '')
+          .split(',')
+          .map((s) => s.trim())
+          .filter(Boolean),
+      );
+
+      const fields = q.getFields();
+      for (const fieldName of Object.keys(fields)) {
+        if (!includeAll && !includeSet.has(fieldName)) continue;
+        if (excludeSet.size && excludeSet.has(fieldName)) continue;
+
+        const field = fields[fieldName];
+        const args = field.args;
+        const inputSchema = this.argsToZodSchema(args);
+        const { varDefs, argAssigns } = this.buildVarDefsAndArgs(args);
+        const selection = this.buildSelection(field.type);
+        const document = `query ${fieldName}${varDefs ? `(${varDefs})` : ''} { ${fieldName}${argAssigns} ${selection} }`;
+
+        server.registerTool(
+          `gql-query-${fieldName}`,
+          {
+            title: `Query ${fieldName}`,
+            description: field.description ?? `GraphQL query ${fieldName}`,
+            inputSchema,
+          },
+          async (toolArgs) => {
+            const variables = toolArgs as Record<string, unknown>;
+            const { status, data } = await this.execHttp({
+              document,
+              variables,
+            });
+            const text = JSON.stringify({ status, data }, null, 2);
+            return { content: [{ type: 'text', text }] };
+          },
+        );
+      }
     }
 
-    private normalizeOpKey(key: string): string | undefined {
-        if (this.isBracketed(key)) {
-            const inner = key.slice(1, -1);
-            const canonical = this.lcToCanonical[inner.toLowerCase()];
-            return canonical ? `[${canonical}]` : key;
+    // 4) Auth tool: password grant when env variables are not provided
+    server.registerTool(
+      'auth-login',
+      {
+        title: 'Authentication (PASSWORD)',
+        description:
+          'Gets JWT using grant PASSWORD when there is no MCP_AUTH_USERNAME / MCP_AUTH_CLIENT_SECRET in the environment variables',
+        inputSchema: {
+          username: z.string(),
+          password: z.string(),
+        },
+      },
+      async ({ username, password }) => {
+        await this.auth.loginWithPassword(username, password);
+        return { content: [{ type: 'text', text: 'Login OK' }] };
+      },
+    );
+  }
+
+  private async execHttp({
+    document,
+    variables,
+    operationName,
+    headers,
+  }: {
+    document: string;
+    variables?: Record<string, unknown>;
+    operationName?: string;
+    headers?: Record<string, string>;
+  }) {
+    console.log('MCP exec:', JSON.stringify(variables, null, 2));
+    const baseURL =
+      process.env.SELF_BASE_URL ||
+      `http://localhost:${process.env.APP_PORT || 3000}`;
+    // Enforce/normalize QueryStatement operators
+    const enforce = process.env.MCP_QS_ENFORCE_BRACKETS === 'true';
+    const normalize = process.env.MCP_QS_NORMALIZE !== 'false';
+
+    if (variables && enforce) {
+      const offenders = this.findUnbracketedOperators(variables);
+      if (offenders.length) {
+        const hint = [
+          'Invalid WHERE operators: use quoted bracket keys, e.g. "[startsWith]".',
+          `Offending paths: ${offenders.join(', ')}`,
+          'See prompts: graphql-operators (full guide) or graphql-quickstart (short).',
+        ].join('\n');
+        throw new Error(hint);
+      }
+    }
+    // Normalize QueryStatement operators if requested (default: on)
+    if (variables && normalize)
+      variables = this.normalizeQueryStatementOperators(variables) as Record<
+        string,
+        unknown
+      >;
+
+    if (process.env.MCP_AUTH === 'true') await this.auth.ensureAuth();
+
+    const makeRequest = async (authHeader?: string) =>
+      firstValueFrom(
+        this.http.post<any>(
+          `${baseURL}/graphql`,
+          { query: document, variables, operationName },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              ...(authHeader ? { Authorization: authHeader } : {}),
+              ...(headers ?? {}),
+            },
+            validateStatus: () => true,
+            timeout: 60000,
+          },
+        ),
+      );
+
+    // Attempt with current token
+    let res = await makeRequest(this.auth.getAuthHeader());
+    if (res.status === 401) {
+      // Try refresh flow
+      const refreshed = await this.auth.refreshIfNeeded();
+      if (refreshed) {
+        res = await makeRequest(this.auth.getAuthHeader());
+      }
+    }
+    return { status: res.status, data: res.data };
+  }
+
+  // --- Operator normalization utilities ----------------------------------
+  private readonly lcToCanonical: Record<string, string> = Object.fromEntries([
+    // canonical
+    ['and', 'and'],
+    ['or', 'or'],
+    ['not', 'not'],
+    ['eq', 'eq'],
+    ['ne', 'ne'],
+    ['is', 'is'],
+    ['gt', 'gt'],
+    ['gte', 'gte'],
+    ['lt', 'lt'],
+    ['lte', 'lte'],
+    ['between', 'between'],
+    ['notbetween', 'notBetween'],
+    ['in', 'in'],
+    ['notin', 'notIn'],
+    ['like', 'like'],
+    ['notlike', 'notLike'],
+    ['ilike', 'iLike'],
+    ['notilike', 'notILike'],
+    ['startswith', 'startsWith'],
+    ['endswith', 'endsWith'],
+    ['substring', 'substring'],
+    ['regexp', 'regexp'],
+    ['notregexp', 'notRegexp'],
+    ['iregexp', 'iRegexp'],
+    ['notiregexp', 'notIRegexp'],
+    ['col', 'col'],
+    ['overlap', 'overlap'],
+    ['contains', 'contains'],
+    ['contained', 'contained'],
+    ['any', 'any'],
+    // common misspellings
+    ['startwith', 'startsWith'],
+    ['endwith', 'endsWith'],
+    ['startwiths', 'startsWith'],
+    ['endwiths', 'endsWith'],
+  ]);
+
+  private isBracketed(key: string): boolean {
+    return key.startsWith('[') && key.endsWith(']');
+  }
+
+  private normalizeOpKey(key: string): string | undefined {
+    if (this.isBracketed(key)) {
+      const inner = key.slice(1, -1);
+      const canonical = this.lcToCanonical[inner.toLowerCase()];
+      return canonical ? `[${canonical}]` : key;
+    }
+    const canonical = this.lcToCanonical[key.toLowerCase()];
+    return canonical ? `[${canonical}]` : undefined;
+  }
+
+  private normalizeQueryStatementOperators(
+    value: unknown,
+    underWhere = false,
+  ): unknown {
+    if (Array.isArray(value))
+      return value.map((v) =>
+        this.normalizeQueryStatementOperators(v, underWhere),
+      );
+    if (value && typeof value === 'object') {
+      const src = value as Record<string, unknown>;
+      const dst: Record<string, unknown> = {};
+      for (const [k, v] of Object.entries(src)) {
+        const keyLower = k.toLowerCase();
+        const isWhereLike =
+          keyLower === 'where' ||
+          (this.isBracketed(k) &&
+            ['[and]', '[or]', '[not]'].includes(k.toLowerCase()));
+        const childUnderWhere = underWhere || isWhereLike;
+
+        if (childUnderWhere) {
+          const maybe = this.normalizeOpKey(k);
+          if (maybe) {
+            dst[maybe] = this.normalizeQueryStatementOperators(v, true);
+            continue;
+          }
         }
-        const canonical = this.lcToCanonical[key.toLowerCase()];
-        return canonical ? `[${canonical}]` : undefined;
+
+        dst[k] = this.normalizeQueryStatementOperators(v, childUnderWhere);
+      }
+      return dst;
+    }
+    return value;
+  }
+
+  // Detect any unbracketed operator keys inside where contexts
+  private findUnbracketedOperators(
+    value: unknown,
+    path: string[] = [],
+    underWhere = false,
+  ): string[] {
+    const offenders: string[] = [];
+    if (Array.isArray(value)) {
+      value.forEach((v, i) =>
+        offenders.push(
+          ...this.findUnbracketedOperators(v, [...path, String(i)], underWhere),
+        ),
+      );
+      return offenders;
+    }
+    if (value && typeof value === 'object') {
+      const src = value as Record<string, unknown>;
+      for (const [k, v] of Object.entries(src)) {
+        const keyLower = k.toLowerCase();
+        const isWhereLike =
+          keyLower === 'where' ||
+          (this.isBracketed(k) &&
+            ['[and]', '[or]', '[not]'].includes(k.toLowerCase()));
+        const childUnderWhere = underWhere || isWhereLike;
+
+        if (childUnderWhere) {
+          const canonical = this.lcToCanonical[k.toLowerCase()];
+          if (canonical && !this.isBracketed(k))
+            offenders.push([...path, k].join('.'));
+        }
+        offenders.push(
+          ...this.findUnbracketedOperators(v, [...path, k], childUnderWhere),
+        );
+      }
+    }
+    return offenders;
+  }
+
+  private argsToZodSchema(args: readonly GraphQLArgument[]) {
+    const shape: Record<string, z.ZodTypeAny> = {};
+    for (const a of args) {
+      const zt = this.zodFromInputType(a.type);
+      shape[a.name] = isNonNullType(a.type) ? zt : zt.optional();
+    }
+    return shape;
+  }
+
+  /**
+   * Converts a GraphQL input type to a corresponding Zod schema.
+   *
+   * This method recursively traverses the provided GraphQL input type and generates
+   * a Zod schema that matches its structure and constraints. It supports non-null types,
+   * lists, input objects, and scalar types (such as String, Boolean, Int, Float, ID, and JSON).
+   * For input object types, it builds a Zod object schema with fields mapped to their respective
+   * Zod types, marking fields as optional if they are nullable in the GraphQL schema.
+   *
+   * @param t - The GraphQL input type to convert.
+   * @returns A Zod schema representing the input type.
+   */
+  private zodFromInputType(t: GraphQLInputType): z.ZodTypeAny {
+    const nonNull = isNonNullType(t);
+    const inner = nonNull ? t.ofType : t;
+
+    if (isListType(inner)) return z.array(this.zodFromInputType(inner.ofType));
+
+    const named = getNamedType(inner);
+    if (isInputObjectType(named)) {
+      const fields = named.getFields();
+      const shape: Record<string, z.ZodTypeAny> = {};
+      for (const fName of Object.keys(fields)) {
+        const f = fields[fName];
+        const fZ = this.zodFromInputType(f.type);
+        shape[fName] = isNonNullType(f.type) ? fZ : fZ.optional();
+      }
+      return z.object(shape);
     }
 
-    private normalizeQueryStatementOperators(
-        value: unknown,
-        underWhere = false,
-    ): unknown {
-        if (Array.isArray(value))
-            return value.map((v) =>
-                this.normalizeQueryStatementOperators(v, underWhere),
-            );
-        if (value && typeof value === 'object') {
-            const src = value as Record<string, unknown>;
-            const dst: Record<string, unknown> = {};
-            for (const [k, v] of Object.entries(src)) {
-                const keyLower = k.toLowerCase();
-                const isWhereLike =
-                    keyLower === 'where' ||
-                    (this.isBracketed(k) &&
-                        ['[and]', '[or]', '[not]'].includes(k.toLowerCase()));
-                const childUnderWhere = underWhere || isWhereLike;
+    if (isScalarType(named)) {
+      switch (named.name) {
+        case 'GraphQLString':
+        case 'String':
+        case 'ID':
+          return z.string();
+        case 'GraphQLBoolean':
+        case 'Boolean':
+          return z.boolean();
+        case 'GraphQLInt':
+        case 'Int':
+          return z.number().int();
+        case 'GraphQLFloat':
+        case 'Float':
+          return z.number();
+        case 'JSON':
+          return z.record(z.any());
+        default:
+          return z.string().describe(`scalar ${named.name}`);
+      }
+    }
+    return z.unknown();
+  }
 
-                if (childUnderWhere) {
-                    const maybe = this.normalizeOpKey(k);
-                    if (maybe) {
-                        dst[maybe] = this.normalizeQueryStatementOperators(
-                            v,
-                            true,
-                        );
-                        continue;
-                    }
-                }
+  private buildVarDefsAndArgs(args: readonly GraphQLArgument[]) {
+    const varDefs: string[] = [];
+    const assigns: string[] = [];
+    for (const a of args) {
+      const gType = this.gqlTypeFromInput(a.type);
+      varDefs.push(`$${a.name}: ${gType}`);
+      assigns.push(`${a.name}: $${a.name}`);
+    }
+    return {
+      varDefs: varDefs.join(', '),
+      argAssigns: args.length ? `(${assigns.join(', ')})` : '',
+    };
+  }
 
-                dst[k] = this.normalizeQueryStatementOperators(
-                    v,
-                    childUnderWhere,
-                );
-            }
-            return dst;
-        }
-        return value;
+  // Build a reasonable selection set for a given output type
+  // - Scalars/Enums: no selection
+  // - Objects/Interfaces: first-level scalar/enum fields (preferring `id` if exists)
+  // - Lists: unwrap and apply same logic to item type
+  // - Unions: __typename
+  private buildSelection(t: GraphQLType): string {
+    // unwrap list/non-null wrappers
+    let inner: any = t as any;
+    while (isNonNullType(inner) || isListType(inner)) inner = inner.ofType;
+
+    const named = getNamedType(inner);
+
+    // Scalars or Enums do not take a sub-selection
+    if (isScalarType(named) || isEnumType(named)) return '';
+
+    // Unions: safest is asking for __typename
+    if (isUnionType(named)) return '{ __typename }';
+
+    // Objects and Interfaces: pick scalar/enum fields
+    if (isObjectType(named) || isInterfaceType(named)) {
+      const fields = named.getFields();
+      const fieldNames = Object.keys(fields);
+
+      const selections: string[] = [];
+      if (fieldNames.includes('id')) selections.push('id');
+
+      for (const fname of fieldNames) {
+        if (fname === 'id') continue;
+        const fType = getNamedType(fields[fname].type);
+        if (isScalarType(fType) || isEnumType(fType)) selections.push(fname);
+      }
+
+      // Fallback to typename if we couldn't find anything
+      if (selections.length === 0) selections.push('__typename');
+      return `{ ${selections.join(' ')} }`;
     }
 
-    // Detect any unbracketed operator keys inside where contexts
-    private findUnbracketedOperators(
-        value: unknown,
-        path: string[] = [],
-        underWhere = false,
-    ): string[] {
-        const offenders: string[] = [];
-        if (Array.isArray(value)) {
-            value.forEach((v, i) =>
-                offenders.push(
-                    ...this.findUnbracketedOperators(
-                        v,
-                        [...path, String(i)],
-                        underWhere,
-                    ),
-                ),
-            );
-            return offenders;
-        }
-        if (value && typeof value === 'object') {
-            const src = value as Record<string, unknown>;
-            for (const [k, v] of Object.entries(src)) {
-                const keyLower = k.toLowerCase();
-                const isWhereLike =
-                    keyLower === 'where' ||
-                    (this.isBracketed(k) &&
-                        ['[and]', '[or]', '[not]'].includes(k.toLowerCase()));
-                const childUnderWhere = underWhere || isWhereLike;
+    // Default: no selection
+    return '';
+  }
 
-                if (childUnderWhere) {
-                    const canonical = this.lcToCanonical[k.toLowerCase()];
-                    if (canonical && !this.isBracketed(k))
-                        offenders.push([...path, k].join('.'));
-                }
-                offenders.push(
-                    ...this.findUnbracketedOperators(
-                        v,
-                        [...path, k],
-                        childUnderWhere,
-                    ),
-                );
-            }
-        }
-        return offenders;
+  private gqlTypeFromInput(t: GraphQLInputType): string {
+    if (isNonNullType(t)) return `${this.gqlTypeFromInput(t.ofType)}!`;
+    if (isListType(t)) return `[${this.gqlTypeFromInput(t.ofType)}]`;
+    const named = getNamedType(t);
+    if (isScalarType(named)) {
+      switch (named.name) {
+        case 'GraphQLString':
+        case 'String':
+        case 'ID':
+          return 'String';
+        case 'GraphQLBoolean':
+        case 'Boolean':
+          return 'Boolean';
+        case 'GraphQLInt':
+        case 'Int':
+          return 'Int';
+        case 'GraphQLFloat':
+        case 'Float':
+          return 'Float';
+        default:
+          return named.name;
+      }
     }
 
-    private argsToZodSchema(args: readonly GraphQLArgument[]) {
-        const shape: Record<string, z.ZodTypeAny> = {};
-        for (const a of args) {
-            const zt = this.zodFromInputType(a.type);
-            shape[a.name] = isNonNullType(a.type) ? zt : zt.optional();
-        }
-        return shape;
-    }
-
-    /**
-     * Converts a GraphQL input type to a corresponding Zod schema.
-     *
-     * This method recursively traverses the provided GraphQL input type and generates
-     * a Zod schema that matches its structure and constraints. It supports non-null types,
-     * lists, input objects, and scalar types (such as String, Boolean, Int, Float, ID, and JSON).
-     * For input object types, it builds a Zod object schema with fields mapped to their respective
-     * Zod types, marking fields as optional if they are nullable in the GraphQL schema.
-     *
-     * @param t - The GraphQL input type to convert.
-     * @returns A Zod schema representing the input type.
-     */
-    private zodFromInputType(t: GraphQLInputType): z.ZodTypeAny {
-        const nonNull = isNonNullType(t);
-        const inner = nonNull ? t.ofType : t;
-
-        if (isListType(inner))
-            return z.array(this.zodFromInputType(inner.ofType));
-
-        const named = getNamedType(inner);
-        if (isInputObjectType(named)) {
-            const fields = named.getFields();
-            const shape: Record<string, z.ZodTypeAny> = {};
-            for (const fName of Object.keys(fields)) {
-                const f = fields[fName];
-                const fZ = this.zodFromInputType(f.type);
-                shape[fName] = isNonNullType(f.type) ? fZ : fZ.optional();
-            }
-            return z.object(shape);
-        }
-
-        if (isScalarType(named)) {
-            switch (named.name) {
-                case 'GraphQLString':
-                case 'String':
-                case 'ID':
-                    return z.string();
-                case 'GraphQLBoolean':
-                case 'Boolean':
-                    return z.boolean();
-                case 'GraphQLInt':
-                case 'Int':
-                    return z.number().int();
-                case 'GraphQLFloat':
-                case 'Float':
-                    return z.number();
-                case 'JSON':
-                    return z.record(z.any());
-                default:
-                    return z.string().describe(`scalar ${named.name}`);
-            }
-        }
-        return z.unknown();
-    }
-
-    private buildVarDefsAndArgs(args: readonly GraphQLArgument[]) {
-        const varDefs: string[] = [];
-        const assigns: string[] = [];
-        for (const a of args) {
-            const gType = this.gqlTypeFromInput(a.type);
-            varDefs.push(`$${a.name}: ${gType}`);
-            assigns.push(`${a.name}: $${a.name}`);
-        }
-        return {
-            varDefs: varDefs.join(', '),
-            argAssigns: args.length ? `(${assigns.join(', ')})` : '',
-        };
-    }
-
-    // Build a reasonable selection set for a given output type
-    // - Scalars/Enums: no selection
-    // - Objects/Interfaces: first-level scalar/enum fields (preferring `id` if exists)
-    // - Lists: unwrap and apply same logic to item type
-    // - Unions: __typename
-    private buildSelection(t: GraphQLType): string {
-        // unwrap list/non-null wrappers
-        let inner: any = t as any;
-        while (isNonNullType(inner) || isListType(inner)) inner = inner.ofType;
-
-        const named = getNamedType(inner);
-
-        // Scalars or Enums do not take a sub-selection
-        if (isScalarType(named) || isEnumType(named)) return '';
-
-        // Unions: safest is asking for __typename
-        if (isUnionType(named)) return '{ __typename }';
-
-        // Objects and Interfaces: pick scalar/enum fields
-        if (isObjectType(named) || isInterfaceType(named)) {
-            const fields = named.getFields();
-            const fieldNames = Object.keys(fields);
-
-            const selections: string[] = [];
-            if (fieldNames.includes('id')) selections.push('id');
-
-            for (const fname of fieldNames) {
-                if (fname === 'id') continue;
-                const fType = getNamedType(fields[fname].type);
-                if (isScalarType(fType) || isEnumType(fType))
-                    selections.push(fname);
-            }
-
-            // Fallback to typename if we couldn't find anything
-            if (selections.length === 0) selections.push('__typename');
-            return `{ ${selections.join(' ')} }`;
-        }
-
-        // Default: no selection
-        return '';
-    }
-
-    private gqlTypeFromInput(t: GraphQLInputType): string {
-        if (isNonNullType(t)) return `${this.gqlTypeFromInput(t.ofType)}!`;
-        if (isListType(t)) return `[${this.gqlTypeFromInput(t.ofType)}]`;
-        const named = getNamedType(t);
-        if (isScalarType(named)) {
-            switch (named.name) {
-                case 'GraphQLString':
-                case 'String':
-                case 'ID':
-                    return 'String';
-                case 'GraphQLBoolean':
-                case 'Boolean':
-                    return 'Boolean';
-                case 'GraphQLInt':
-                case 'Int':
-                    return 'Int';
-                case 'GraphQLFloat':
-                case 'Float':
-                    return 'Float';
-                default:
-                    return named.name;
-            }
-        }
-
-        if (isInputObjectType(named)) return named.name;
-        return 'String';
-    }
+    if (isInputObjectType(named)) return named.name;
+    return 'String';
+  }
 }

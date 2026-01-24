@@ -80,38 +80,38 @@ import { AuditingUpdateSideEffectByIdService } from './application/update/auditi
 import { AuditingUpdateSideEffectsService } from './application/update/auditing-update-side-effects.service';
 
 export const AuditingSideEffectHandlers = [
-    // commands
-    AuditingCreateSideEffectCommandHandler,
-    AuditingCreateSideEffectsCommandHandler,
-    AuditingUpdateSideEffectByIdCommandHandler,
-    AuditingUpdateSideEffectsCommandHandler,
-    AuditingDeleteSideEffectByIdCommandHandler,
-    AuditingDeleteSideEffectsCommandHandler,
+  // commands
+  AuditingCreateSideEffectCommandHandler,
+  AuditingCreateSideEffectsCommandHandler,
+  AuditingUpdateSideEffectByIdCommandHandler,
+  AuditingUpdateSideEffectsCommandHandler,
+  AuditingDeleteSideEffectByIdCommandHandler,
+  AuditingDeleteSideEffectsCommandHandler,
 
-    // queries
-    AuditingPaginateSideEffectsQueryHandler,
-    AuditingGetSideEffectsQueryHandler,
-    AuditingFindSideEffectQueryHandler,
-    AuditingFindSideEffectByIdQueryHandler,
+  // queries
+  AuditingPaginateSideEffectsQueryHandler,
+  AuditingGetSideEffectsQueryHandler,
+  AuditingFindSideEffectQueryHandler,
+  AuditingFindSideEffectByIdQueryHandler,
 
-    // events
-    AuditingCreatedSideEffectEventHandler,
-    AuditingCreatedSideEffectsEventHandler,
-    AuditingUpdatedSideEffectEventHandler,
-    AuditingUpdatedSideEffectsEventHandler,
-    AuditingDeletedSideEffectEventHandler,
-    AuditingDeletedSideEffectsEventHandler,
+  // events
+  AuditingCreatedSideEffectEventHandler,
+  AuditingCreatedSideEffectsEventHandler,
+  AuditingUpdatedSideEffectEventHandler,
+  AuditingUpdatedSideEffectsEventHandler,
+  AuditingDeletedSideEffectEventHandler,
+  AuditingDeletedSideEffectsEventHandler,
 ];
 
 export const AuditingSideEffectServices = [
-    AuditingCreateSideEffectService,
-    AuditingCreateSideEffectsService,
-    AuditingPaginateSideEffectsService,
-    AuditingGetSideEffectsService,
-    AuditingFindSideEffectService,
-    AuditingFindSideEffectByIdService,
-    AuditingUpdateSideEffectByIdService,
-    AuditingUpdateSideEffectsService,
-    AuditingDeleteSideEffectByIdService,
-    AuditingDeleteSideEffectsService,
+  AuditingCreateSideEffectService,
+  AuditingCreateSideEffectsService,
+  AuditingPaginateSideEffectsService,
+  AuditingGetSideEffectsService,
+  AuditingFindSideEffectService,
+  AuditingFindSideEffectByIdService,
+  AuditingUpdateSideEffectByIdService,
+  AuditingUpdateSideEffectsService,
+  AuditingDeleteSideEffectByIdService,
+  AuditingDeleteSideEffectsService,
 ];

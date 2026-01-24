@@ -7,14 +7,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('queueManager.queue.delete')
 export class QueueManagerDeleteQueueByIdResolver {
-    constructor(private readonly handler: QueueManagerDeleteQueueByIdHandler) {}
+  constructor(private readonly handler: QueueManagerDeleteQueueByIdHandler) {}
 
-    @Mutation('queueManagerDeleteQueueById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<QueueManagerQueue> {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Mutation('queueManagerDeleteQueueById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<QueueManagerQueue> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

@@ -5,18 +5,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsDeleteMigrationByIdCommand)
 export class ToolsDeleteMigrationByIdCommandHandler
-    implements ICommandHandler<ToolsDeleteMigrationByIdCommand>
+  implements ICommandHandler<ToolsDeleteMigrationByIdCommand>
 {
-    constructor(
-        private readonly deleteMigrationByIdService: ToolsDeleteMigrationByIdService,
-    ) {}
+  constructor(
+    private readonly deleteMigrationByIdService: ToolsDeleteMigrationByIdService,
+  ) {}
 
-    async execute(command: ToolsDeleteMigrationByIdCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteMigrationByIdService.main(
-            new ToolsMigrationId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: ToolsDeleteMigrationByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteMigrationByIdService.main(
+      new ToolsMigrationId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

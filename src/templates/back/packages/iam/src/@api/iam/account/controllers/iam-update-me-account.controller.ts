@@ -2,10 +2,10 @@
 import { IamAccountResponse } from '@app/iam/account';
 import { Auth } from '@aurora/decorators';
 import {
-    Auditing,
-    AuditingMeta,
-    CurrentAccount,
-    Timezone,
+  Auditing,
+  AuditingMeta,
+  CurrentAccount,
+  Timezone,
 } from '@aurorajs.dev/core';
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
@@ -16,20 +16,20 @@ import { IamUpdateMeAccountHandler } from '../handlers/iam-update-me-account.han
 @Controller('iam/account/update-me')
 @Auth('iam.accountSettings.update')
 export class IamUpdateMeAccountController {
-    constructor(private readonly handler: IamUpdateMeAccountHandler) {}
+  constructor(private readonly handler: IamUpdateMeAccountHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Body() payload: IamUpdateMeAccountDto,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ) {
-        return await this.handler.main(account, payload, timezone, auditing);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Body() payload: IamUpdateMeAccountDto,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ) {
+    return await this.handler.main(account, payload, timezone, auditing);
+  }
 }

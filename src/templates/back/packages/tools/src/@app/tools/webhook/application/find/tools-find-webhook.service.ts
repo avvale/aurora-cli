@@ -4,17 +4,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToolsFindWebhookService {
-    constructor(private readonly repository: ToolsIWebhookRepository) {}
+  constructor(private readonly repository: ToolsIWebhookRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<ToolsWebhook> {
-        return await this.repository.find({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<ToolsWebhook> {
+    return await this.repository.find({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

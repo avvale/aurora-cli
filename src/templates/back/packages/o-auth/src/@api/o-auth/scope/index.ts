@@ -68,36 +68,36 @@ import { OAuthUpdateScopeByIdHandler } from './handlers/o-auth-update-scope-by-i
 import { OAuthScopeSeeder } from './seeder/o-auth-scope.seeder';
 
 export const OAuthScopeApiControllers = [
-    OAuthCreateScopeController,
-    OAuthPaginateScopesController,
-    OAuthGetScopesController,
-    OAuthFindScopeByIdController,
-    OAuthFindScopeController,
-    OAuthUpdateScopeByIdController,
-    OAuthDeleteScopeByIdController,
-    OAuthDeleteScopesController,
+  OAuthCreateScopeController,
+  OAuthPaginateScopesController,
+  OAuthGetScopesController,
+  OAuthFindScopeByIdController,
+  OAuthFindScopeController,
+  OAuthUpdateScopeByIdController,
+  OAuthDeleteScopeByIdController,
+  OAuthDeleteScopesController,
 ];
 
 export const OAuthScopeApiResolvers = [
-    OAuthCreateScopeResolver,
-    OAuthPaginateScopesResolver,
-    OAuthGetScopesResolver,
-    OAuthFindScopeByIdResolver,
-    OAuthFindScopeResolver,
-    OAuthUpdateScopeByIdResolver,
-    OAuthDeleteScopeByIdResolver,
-    OAuthDeleteScopesResolver,
+  OAuthCreateScopeResolver,
+  OAuthPaginateScopesResolver,
+  OAuthGetScopesResolver,
+  OAuthFindScopeByIdResolver,
+  OAuthFindScopeResolver,
+  OAuthUpdateScopeByIdResolver,
+  OAuthDeleteScopeByIdResolver,
+  OAuthDeleteScopesResolver,
 ];
 
 export const OAuthScopeApiHandlers = [
-    OAuthCreateScopeHandler,
-    OAuthPaginateScopesHandler,
-    OAuthGetScopesHandler,
-    OAuthFindScopeByIdHandler,
-    OAuthFindScopeHandler,
-    OAuthUpdateScopeByIdHandler,
-    OAuthDeleteScopeByIdHandler,
-    OAuthDeleteScopesHandler,
+  OAuthCreateScopeHandler,
+  OAuthPaginateScopesHandler,
+  OAuthGetScopesHandler,
+  OAuthFindScopeByIdHandler,
+  OAuthFindScopeHandler,
+  OAuthUpdateScopeByIdHandler,
+  OAuthDeleteScopeByIdHandler,
+  OAuthDeleteScopesHandler,
 ];
 
 export const OAuthScopeApiServices = [OAuthScopeSeeder];

@@ -80,38 +80,38 @@ import { IamUpdateRoleByIdService } from './application/update/iam-update-role-b
 import { IamUpdateRolesService } from './application/update/iam-update-roles.service';
 
 export const IamRoleHandlers = [
-    // commands
-    IamCreateRoleCommandHandler,
-    IamCreateRolesCommandHandler,
-    IamUpdateRoleByIdCommandHandler,
-    IamUpdateRolesCommandHandler,
-    IamDeleteRoleByIdCommandHandler,
-    IamDeleteRolesCommandHandler,
+  // commands
+  IamCreateRoleCommandHandler,
+  IamCreateRolesCommandHandler,
+  IamUpdateRoleByIdCommandHandler,
+  IamUpdateRolesCommandHandler,
+  IamDeleteRoleByIdCommandHandler,
+  IamDeleteRolesCommandHandler,
 
-    // queries
-    IamPaginateRolesQueryHandler,
-    IamGetRolesQueryHandler,
-    IamFindRoleQueryHandler,
-    IamFindRoleByIdQueryHandler,
+  // queries
+  IamPaginateRolesQueryHandler,
+  IamGetRolesQueryHandler,
+  IamFindRoleQueryHandler,
+  IamFindRoleByIdQueryHandler,
 
-    // events
-    IamCreatedRoleEventHandler,
-    IamCreatedRolesEventHandler,
-    IamUpdatedRoleEventHandler,
-    IamUpdatedRolesEventHandler,
-    IamDeletedRoleEventHandler,
-    IamDeletedRolesEventHandler,
+  // events
+  IamCreatedRoleEventHandler,
+  IamCreatedRolesEventHandler,
+  IamUpdatedRoleEventHandler,
+  IamUpdatedRolesEventHandler,
+  IamDeletedRoleEventHandler,
+  IamDeletedRolesEventHandler,
 ];
 
 export const IamRoleServices = [
-    IamCreateRoleService,
-    IamCreateRolesService,
-    IamPaginateRolesService,
-    IamGetRolesService,
-    IamFindRoleService,
-    IamFindRoleByIdService,
-    IamUpdateRoleByIdService,
-    IamUpdateRolesService,
-    IamDeleteRoleByIdService,
-    IamDeleteRolesService,
+  IamCreateRoleService,
+  IamCreateRolesService,
+  IamPaginateRolesService,
+  IamGetRolesService,
+  IamFindRoleService,
+  IamFindRoleByIdService,
+  IamUpdateRoleByIdService,
+  IamUpdateRolesService,
+  IamDeleteRoleByIdService,
+  IamDeleteRolesService,
 ];

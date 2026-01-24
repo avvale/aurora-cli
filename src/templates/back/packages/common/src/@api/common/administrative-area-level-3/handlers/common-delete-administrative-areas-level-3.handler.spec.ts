@@ -4,61 +4,61 @@ import { commonMockAdministrativeAreaLevel3Data } from '@app/common/administrati
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('CommonDeleteAdministrativeAreasLevel3Handler', () =>
-{
-    let handler: CommonDeleteAdministrativeAreasLevel3Handler;
-    let queryBus: IQueryBus;
+describe('CommonDeleteAdministrativeAreasLevel3Handler', () => {
+  let handler: CommonDeleteAdministrativeAreasLevel3Handler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            providers: [
-                CommonDeleteAdministrativeAreasLevel3Handler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
-            ],
-        })
-            .compile();
-
-        handler = module.get<CommonDeleteAdministrativeAreasLevel3Handler>(CommonDeleteAdministrativeAreasLevel3Handler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
-
-    test('CommonDeleteAdministrativeAreasLevel3Handler should be defined', () =>
-    {
-        expect(handler).toBeDefined();
-    });
-
-    describe('main', () =>
-    {
-        test('CommonDeleteAdministrativeAreasLevel3Handler should be defined', () =>
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        CommonDeleteAdministrativeAreasLevel3Handler,
         {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an commonMockAdministrativeAreaLevel3Data deleted', async () =>
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
         {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve(commonMockAdministrativeAreaLevel3Data)));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                    'Europe/Madrid',
-                ),
-            )
-                .toBe(commonMockAdministrativeAreaLevel3Data);
-        });
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
+
+    handler = module.get<CommonDeleteAdministrativeAreasLevel3Handler>(
+      CommonDeleteAdministrativeAreasLevel3Handler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  test('CommonDeleteAdministrativeAreasLevel3Handler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
+    test('CommonDeleteAdministrativeAreasLevel3Handler should be defined', () => {
+      expect(handler).toBeDefined();
     });
+
+    test('should return an commonMockAdministrativeAreaLevel3Data deleted', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () =>
+            new Promise((resolve) =>
+              resolve(commonMockAdministrativeAreaLevel3Data),
+            ),
+        );
+      expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+        commonMockAdministrativeAreaLevel3Data,
+      );
+    });
+  });
 });

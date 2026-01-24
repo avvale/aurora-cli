@@ -3,19 +3,19 @@ import { WhatsappMaxTimelineService } from '@app/whatsapp/timeline/application/m
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(WhatsappMaxTimelineQuery)
-export class WhatsappMaxTimelineQueryHandler implements IQueryHandler<WhatsappMaxTimelineQuery>
+export class WhatsappMaxTimelineQueryHandler
+  implements IQueryHandler<WhatsappMaxTimelineQuery>
 {
-    constructor(
-        private readonly maxTimelineService: WhatsappMaxTimelineService,
-    ) {}
+  constructor(
+    private readonly maxTimelineService: WhatsappMaxTimelineService,
+  ) {}
 
-    async execute(query: WhatsappMaxTimelineQuery): Promise<number>
-    {
-        return await this.maxTimelineService.main(
-            query.column,
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: WhatsappMaxTimelineQuery): Promise<number> {
+    return await this.maxTimelineService.main(
+      query.column,
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

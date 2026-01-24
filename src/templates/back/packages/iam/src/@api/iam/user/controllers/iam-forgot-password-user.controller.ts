@@ -8,18 +8,18 @@ import { IamForgotPasswordUserHandler } from '../handlers/iam-forgot-password-us
 @ApiTags('[iam] user')
 @Controller('iam/user/forgot-password')
 export class IamForgotPasswordUserController {
-    constructor(private readonly handler: IamForgotPasswordUserHandler) {}
+  constructor(private readonly handler: IamForgotPasswordUserHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(
-        @Body() payload: IamForgotPasswordUserDto,
-        @Auditing() auditing?: AuditingMeta,
-    ) {
-        return await this.handler.main(payload, auditing);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(
+    @Body() payload: IamForgotPasswordUserDto,
+    @Auditing() auditing?: AuditingMeta,
+  ) {
+    return await this.handler.main(payload, auditing);
+  }
 }

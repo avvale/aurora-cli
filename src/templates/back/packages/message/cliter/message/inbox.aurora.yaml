@@ -9,21 +9,35 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:move_to_inbox
   outlineIcon: mat_outline:move_to_inbox
+description: >
+    User inbox module storing individual message instances for each recipient.
+    Contains denormalized message data for fast access and tracks read status
+    per user. References the message module for the original message source.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+        Unique identifier for the inbox entry. UUID v4 format, generated automatically
+        on creation. One entry per user per message.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+        Sequential numeric identifier for efficient ordering and pagination. Auto-incremented.
+        Used for chronological sorting and determining message sequence in user inbox.
   - name: tenantIds
     type: array
     arrayOptions:
       type: id
     nullable: true
+    description: >
+        Array of tenant IDs for multi-tenancy support. NULL if not tenant-scoped.
+        Inherited from the original message. Used to filter inbox contents by
+        organizational context.
   - name: messageId
     type: id
     nullable: true
@@ -34,66 +48,142 @@ aggregateProperties:
       key: id
       field: message
       avoidConstraint: true
+    description: >
+        Foreign key to the original message in message module. NULL if original
+        message was deleted. avoidConstraint allows message deletion without cascading
+        to inbox entries. Used to fetch full message details on demand.
   - name: messageRowId
     type: bigint
     nullable: false
+    description: >
+        Denormalized sequential ID from the original message. Required for efficient
+        chronological sorting and tracking last read position. Never NULL even if
+        original message is deleted.
   - name: accountId
     type: id
     nullable: false
     index: index
+    description: >
+        ID of the user account who owns this inbox entry. Required field, indexed
+        for fast per-user queries. Each message sent to N users creates N inbox
+        entries with different accountIds.
   - name: accountCode
     type: varchar
     maxLength: 128
     nullable: true
     index: index
+    description: >
+        Optional human-readable account identifier (e.g., username, email) for
+        display purposes. NULL if not available. Max 128 characters. Indexed for
+        search by user code.
   - name: isImportant
     type: boolean
     nullable: false
+    description: >
+        Denormalized priority flag from original message. Indicates if message is
+        high priority. Required field. Used to visually highlight important messages
+        in inbox UI without joining to message table.
   - name: sentAt
     type: timestamp
     nullable: false
+    description: >
+        Timestamp when the message was delivered to this user's inbox. Required
+        field. Used for chronological sorting and determining message age. Matches
+        the send timestamp from original message.
   - name: subject
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+        Denormalized message subject for fast list rendering. Required field, max
+        255 characters. Avoids JOIN to message table when displaying inbox list.
+        Preserved even if original message is deleted.
   - name: body
     type: text
     nullable: false
+    description: >
+        Denormalized full message content. Required field with unlimited length.
+        Stored per inbox entry for fast access and preservation if original message
+        is modified or deleted.
   - name: link
     type: varchar
     maxLength: 2046
     nullable: true
+    description: >
+        Denormalized call-to-action URL from original message. NULL if no link.
+        Max 2046 characters. Preserved for user access even if original message
+        is deleted.
   - name: isInternalLink
     type: boolean
     nullable: true
+    description: >
+        Denormalized flag indicating internal (true) vs external (false) link.
+        NULL when no link is set. Used to determine navigation behavior without
+        accessing original message.
   - name: image
     type: jsonb
     nullable: true
+    description: >
+        Denormalized JSON object with image metadata (URL, dimensions, alt text).
+        NULL if no image. Preserved for display even if original message is deleted
+        or modified.
   - name: icon
     type: varchar
     maxLength: 64
     nullable: true
+    description: >
+        Denormalized icon identifier (e.g., Material Icons name). NULL if no icon.
+        Max 64 characters. Displayed in inbox list for visual categorization without
+        joining to message table.
   - name: attachments
     type: jsonb
     nullable: true
+    description: >
+        Denormalized JSON array of attachment objects with file metadata. NULL if
+        no attachments. Preserved for user access even if original message is deleted.
+        Each inbox entry maintains its own copy.
   - name: isRead
     type: boolean
     nullable: false
+    description: >
+        Current read status for this user. Required field. True if user has marked
+        message as read, false otherwise. Updated via read/unread APIs. Used to
+        visually distinguish read vs unread messages.
   - name: isReadAtLeastOnce
     type: boolean
     nullable: false
+    description: >
+        Historical flag indicating if message was ever read by this user. Required
+        field. Once set to true, remains true even if user marks as unread. Used
+        for engagement analytics and distinguishing truly new messages.
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+        Flexible JSON field for user-specific metadata. NULL if no extra data.
+        May include user-specific tracking, read timestamps, custom flags, or
+        personalization data not covered by schema.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp when the inbox entry was created (message delivered to user).
+        Auto-set by Aurora auditing. NULL only in edge cases. Matches sentAt in
+        most scenarios.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp of last modification to inbox entry (e.g., read status change).
+        Auto-updated by Aurora auditing. NULL if never modified. Used for tracking
+        user interactions.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+        Soft delete timestamp for when user deleted message from their inbox. NULL
+        means message is visible. When set, message is hidden from user's inbox
+        but preserved for recovery and auditing.
 additionalApis:
   - path: message/inbox/check-messages
     resolverType: mutation

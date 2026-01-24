@@ -1,42 +1,40 @@
 import {
-    MessageCreateOutboxesController,
-    MessageCreateOutboxesHandler,
+  MessageCreateOutboxesController,
+  MessageCreateOutboxesHandler,
 } from '@api/message/outbox';
 import { messageMockOutboxData } from '@app/message/outbox';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('MessageCreateOutboxesController', () => {
-    let controller: MessageCreateOutboxesController;
+  let controller: MessageCreateOutboxesController;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            controllers: [MessageCreateOutboxesController],
-            providers: [
-                {
-                    provide: MessageCreateOutboxesHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [MessageCreateOutboxesController],
+      providers: [
+        {
+          provide: MessageCreateOutboxesHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        controller = module.get<MessageCreateOutboxesController>(
-            MessageCreateOutboxesController,
-        );
+    controller = module.get<MessageCreateOutboxesController>(
+      MessageCreateOutboxesController,
+    );
+  });
+
+  describe('main', () => {
+    test('MessageCreateOutboxesController should be defined', () => {
+      expect(controller).toBeDefined();
     });
 
-    describe('main', () => {
-        test('MessageCreateOutboxesController should be defined', () => {
-            expect(controller).toBeDefined();
-        });
-
-        test('should return an messageMockOutboxData created', async () => {
-            expect(await controller.main(messageMockOutboxData)).toBe(
-                undefined,
-            );
-        });
+    test('should return an messageMockOutboxData created', async () => {
+      expect(await controller.main(messageMockOutboxData)).toBe(undefined);
     });
+  });
 });

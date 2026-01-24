@@ -7,16 +7,16 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('oAuth.applicationClient.get')
 export class OAuthPaginateApplicationsClientsResolver {
-    constructor(
-        private readonly handler: OAuthPaginateApplicationsClientsHandler,
-    ) {}
+  constructor(
+    private readonly handler: OAuthPaginateApplicationsClientsHandler,
+  ) {}
 
-    @Query('oAuthPaginateApplicationsClients')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('oAuthPaginateApplicationsClients')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

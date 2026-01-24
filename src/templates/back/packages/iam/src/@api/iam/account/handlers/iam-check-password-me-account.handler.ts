@@ -5,19 +5,16 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCheckPasswordMeAccountHandler {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(
-        account: IamAccountResponse,
-        password: string,
-    ): Promise<boolean> {
-        const user = await this.queryBus.ask(
-            new IamFindUserByUsernamePasswordQuery(account.username, password),
-        );
+  async main(account: IamAccountResponse, password: string): Promise<boolean> {
+    const user = await this.queryBus.ask(
+      new IamFindUserByUsernamePasswordQuery(account.username, password),
+    );
 
-        return !!user;
-    }
+    return !!user;
+  }
 }

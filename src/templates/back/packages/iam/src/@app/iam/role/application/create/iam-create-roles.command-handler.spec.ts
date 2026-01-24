@@ -4,41 +4,41 @@ import { IamCreateRolesService } from '@app/iam/role/application/create/iam-crea
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('iamCreateRolesCommandHandler', () => {
-    let commandHandler: IamCreateRolesCommandHandler;
+  let commandHandler: IamCreateRolesCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamCreateRolesCommandHandler,
-                {
-                    provide: IamCreateRolesService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamCreateRolesCommandHandler,
+        {
+          provide: IamCreateRolesService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<IamCreateRolesCommandHandler>(
-            IamCreateRolesCommandHandler,
-        );
+    commandHandler = module.get<IamCreateRolesCommandHandler>(
+      IamCreateRolesCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('IamCreateRolesCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('IamCreateRolesCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return IamMockRoleData created', async () => {
-            expect(
-                await commandHandler.execute(
-                    new IamCreateRolesCommand(iamMockRoleData, {
-                        timezone: process.env.TZ,
-                    }),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return IamMockRoleData created', async () => {
+      expect(
+        await commandHandler.execute(
+          new IamCreateRolesCommand(iamMockRoleData, {
+            timezone: process.env.TZ,
+          }),
+        ),
+      ).toBe(undefined);
     });
+  });
 });

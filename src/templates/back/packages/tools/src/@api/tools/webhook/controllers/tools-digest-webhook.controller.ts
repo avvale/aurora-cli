@@ -7,19 +7,19 @@ import { ToolsDigestWebhookHandler } from '../handlers/tools-digest-webhook.hand
 @ApiTags('[tools] webhook')
 @Controller('tools/webhook/digest')
 export class ToolsDigestWebhookController {
-    constructor(private readonly handler: ToolsDigestWebhookHandler) {}
+  constructor(private readonly handler: ToolsDigestWebhookHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(
-        @Req() request: Request,
-        @Headers() headers: any,
-        @Body() payload: any,
-    ) {
-        return await this.handler.main(request, headers, payload);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(
+    @Req() request: Request,
+    @Headers() headers: any,
+    @Body() payload: any,
+  ) {
+    return await this.handler.main(request, headers, payload);
+  }
 }

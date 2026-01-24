@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(AuditingDeletedHttpCommunicationsEvent)
 export class AuditingDeletedHttpCommunicationsEventHandler
-    implements IEventHandler<AuditingDeletedHttpCommunicationsEvent>
+  implements IEventHandler<AuditingDeletedHttpCommunicationsEvent>
 {
-    handle(event: AuditingDeletedHttpCommunicationsEvent): void {
-        // console.log('DeletedHttpCommunicationsEvent: ', event);
-    }
+  handle(event: AuditingDeletedHttpCommunicationsEvent): void {
+    // console.log('DeletedHttpCommunicationsEvent: ', event);
+  }
 }

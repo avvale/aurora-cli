@@ -5,56 +5,56 @@ import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingPaginateSideEffectsHandler', () => {
-    let handler: AuditingPaginateSideEffectsHandler;
-    let queryBus: IQueryBus;
+  let handler: AuditingPaginateSideEffectsHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                AuditingPaginateSideEffectsHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        AuditingPaginateSideEffectsHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<AuditingPaginateSideEffectsHandler>(
-            AuditingPaginateSideEffectsHandler,
-        );
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
+    handler = module.get<AuditingPaginateSideEffectsHandler>(
+      AuditingPaginateSideEffectsHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
 
+  test('AuditingPaginateSideEffectsHandler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
     test('AuditingPaginateSideEffectsHandler should be defined', () => {
-        expect(handler).toBeDefined();
+      expect(handler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('AuditingPaginateSideEffectsHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return a sideEffects', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve({
-                            total: auditingMockSideEffectData.length,
-                            count: auditingMockSideEffectData.length,
-                            rows: auditingMockSideEffectData,
-                        }),
-                    ),
-            );
-            expect(await handler.main({}, {})).toEqual({
-                total: auditingMockSideEffectData.length,
-                count: auditingMockSideEffectData.length,
-                rows: auditingMockSideEffectData,
-            });
-        });
+    test('should return a sideEffects', async () => {
+      jest.spyOn(queryBus, 'ask').mockImplementation(
+        () =>
+          new Promise((resolve) =>
+            resolve({
+              total: auditingMockSideEffectData.length,
+              count: auditingMockSideEffectData.length,
+              rows: auditingMockSideEffectData,
+            }),
+          ),
+      );
+      expect(await handler.main({}, {})).toEqual({
+        total: auditingMockSideEffectData.length,
+        count: auditingMockSideEffectData.length,
+        rows: auditingMockSideEffectData,
+      });
     });
+  });
 });

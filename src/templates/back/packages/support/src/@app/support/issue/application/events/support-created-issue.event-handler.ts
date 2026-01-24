@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(SupportCreatedIssueEvent)
 export class SupportCreatedIssueEventHandler
-    implements IEventHandler<SupportCreatedIssueEvent>
+  implements IEventHandler<SupportCreatedIssueEvent>
 {
-    handle(event: SupportCreatedIssueEvent): void {
-        // 'SupportCreatedIssueEvent'
-    }
+  handle(event: SupportCreatedIssueEvent): void {
+    // 'SupportCreatedIssueEvent'
+  }
 }

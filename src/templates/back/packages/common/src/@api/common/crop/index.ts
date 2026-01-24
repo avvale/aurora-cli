@@ -19,17 +19,10 @@ import { CommonCreateCropResolver } from './resolvers/common-create-crop.resolve
 // import handlers
 import { CommonCreateCropHandler } from './handlers/common-create-crop.handler';
 
-export const CommonCropApiControllers = [
-    CommonCreateCropController,
-];
+export const CommonCropApiControllers = [CommonCreateCropController];
 
-export const CommonCropApiResolvers = [
-    CommonCreateCropResolver,
-];
+export const CommonCropApiResolvers = [CommonCreateCropResolver];
 
-export const CommonCropApiHandlers = [
-    CommonCreateCropHandler,
-];
+export const CommonCropApiHandlers = [CommonCreateCropHandler];
 
-export const CommonCropApiServices = [
-];
+export const CommonCropApiServices = [];

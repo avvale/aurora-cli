@@ -80,38 +80,38 @@ import { AuditingUpdateHttpCommunicationByIdService } from './application/update
 import { AuditingUpdateHttpCommunicationsService } from './application/update/auditing-update-http-communications.service';
 
 export const AuditingHttpCommunicationHandlers = [
-    // commands
-    AuditingCreateHttpCommunicationCommandHandler,
-    AuditingCreateHttpCommunicationsCommandHandler,
-    AuditingUpdateHttpCommunicationByIdCommandHandler,
-    AuditingUpdateHttpCommunicationsCommandHandler,
-    AuditingDeleteHttpCommunicationByIdCommandHandler,
-    AuditingDeleteHttpCommunicationsCommandHandler,
+  // commands
+  AuditingCreateHttpCommunicationCommandHandler,
+  AuditingCreateHttpCommunicationsCommandHandler,
+  AuditingUpdateHttpCommunicationByIdCommandHandler,
+  AuditingUpdateHttpCommunicationsCommandHandler,
+  AuditingDeleteHttpCommunicationByIdCommandHandler,
+  AuditingDeleteHttpCommunicationsCommandHandler,
 
-    // queries
-    AuditingPaginateHttpCommunicationsQueryHandler,
-    AuditingGetHttpCommunicationsQueryHandler,
-    AuditingFindHttpCommunicationQueryHandler,
-    AuditingFindHttpCommunicationByIdQueryHandler,
+  // queries
+  AuditingPaginateHttpCommunicationsQueryHandler,
+  AuditingGetHttpCommunicationsQueryHandler,
+  AuditingFindHttpCommunicationQueryHandler,
+  AuditingFindHttpCommunicationByIdQueryHandler,
 
-    // events
-    AuditingCreatedHttpCommunicationEventHandler,
-    AuditingCreatedHttpCommunicationsEventHandler,
-    AuditingUpdatedHttpCommunicationEventHandler,
-    AuditingUpdatedHttpCommunicationsEventHandler,
-    AuditingDeletedHttpCommunicationEventHandler,
-    AuditingDeletedHttpCommunicationsEventHandler,
+  // events
+  AuditingCreatedHttpCommunicationEventHandler,
+  AuditingCreatedHttpCommunicationsEventHandler,
+  AuditingUpdatedHttpCommunicationEventHandler,
+  AuditingUpdatedHttpCommunicationsEventHandler,
+  AuditingDeletedHttpCommunicationEventHandler,
+  AuditingDeletedHttpCommunicationsEventHandler,
 ];
 
 export const AuditingHttpCommunicationServices = [
-    AuditingCreateHttpCommunicationService,
-    AuditingCreateHttpCommunicationsService,
-    AuditingPaginateHttpCommunicationsService,
-    AuditingGetHttpCommunicationsService,
-    AuditingFindHttpCommunicationService,
-    AuditingFindHttpCommunicationByIdService,
-    AuditingUpdateHttpCommunicationByIdService,
-    AuditingUpdateHttpCommunicationsService,
-    AuditingDeleteHttpCommunicationByIdService,
-    AuditingDeleteHttpCommunicationsService,
+  AuditingCreateHttpCommunicationService,
+  AuditingCreateHttpCommunicationsService,
+  AuditingPaginateHttpCommunicationsService,
+  AuditingGetHttpCommunicationsService,
+  AuditingFindHttpCommunicationService,
+  AuditingFindHttpCommunicationByIdService,
+  AuditingUpdateHttpCommunicationByIdService,
+  AuditingUpdateHttpCommunicationsService,
+  AuditingDeleteHttpCommunicationByIdService,
+  AuditingDeleteHttpCommunicationsService,
 ];

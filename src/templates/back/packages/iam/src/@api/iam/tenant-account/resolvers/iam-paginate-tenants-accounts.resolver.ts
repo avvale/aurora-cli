@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('iam.tenantAccount.get')
 export class IamPaginateTenantsAccountsResolver {
-    constructor(private readonly handler: IamPaginateTenantsAccountsHandler) {}
+  constructor(private readonly handler: IamPaginateTenantsAccountsHandler) {}
 
-    @Query('iamPaginateTenantsAccounts')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('iamPaginateTenantsAccounts')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

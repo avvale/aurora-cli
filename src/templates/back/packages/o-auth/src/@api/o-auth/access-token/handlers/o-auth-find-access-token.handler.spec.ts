@@ -5,50 +5,49 @@ import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthFindAccessTokenHandler', () => {
-    let handler: OAuthFindAccessTokenHandler;
-    let queryBus: IQueryBus;
+  let handler: OAuthFindAccessTokenHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                OAuthFindAccessTokenHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        OAuthFindAccessTokenHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<OAuthFindAccessTokenHandler>(
-            OAuthFindAccessTokenHandler,
-        );
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
+    handler = module.get<OAuthFindAccessTokenHandler>(
+      OAuthFindAccessTokenHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
 
+  test('OAuthFindAccessTokenHandler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
     test('OAuthFindAccessTokenHandler should be defined', () => {
-        expect(handler).toBeDefined();
+      expect(handler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('OAuthFindAccessTokenHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return a accessToken', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve(oAuthMockAccessTokenData[0]),
-                    ),
-            );
-            expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
-                oAuthMockAccessTokenData[0],
-            );
-        });
+    test('should return a accessToken', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () => new Promise((resolve) => resolve(oAuthMockAccessTokenData[0])),
+        );
+      expect(await handler.main({}, {}, 'Europe/Madrid')).toBe(
+        oAuthMockAccessTokenData[0],
+      );
     });
+  });
 });

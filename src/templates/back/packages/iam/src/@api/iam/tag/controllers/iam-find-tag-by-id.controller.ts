@@ -9,20 +9,20 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @Controller('iam/tag/find')
 @Auth('iam.tag.get')
 export class IamFindTagByIdController {
-    constructor(private readonly handler: IamFindTagByIdHandler) {}
+  constructor(private readonly handler: IamFindTagByIdHandler) {}
 
-    @Post(':id')
-    @HttpCode(200)
-    @ApiOperation({ summary: 'Find tag by id' })
-    @ApiOkResponse({
-        description: 'The record has been successfully requested.',
-        type: IamTagDto,
-    })
-    async main(
-        @Param('id') id: string,
-        @Body('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ) {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Post(':id')
+  @HttpCode(200)
+  @ApiOperation({ summary: 'Find tag by id' })
+  @ApiOkResponse({
+    description: 'The record has been successfully requested.',
+    type: IamTagDto,
+  })
+  async main(
+    @Param('id') id: string,
+    @Body('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ) {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

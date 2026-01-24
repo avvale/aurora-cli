@@ -4,62 +4,57 @@ import { commonMockAdministrativeAreaLevel2Data } from '@app/common/administrati
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('CommonPaginateAdministrativeAreasLevel2Handler', () =>
-{
-    let handler: CommonPaginateAdministrativeAreasLevel2Handler;
-    let queryBus: IQueryBus;
+describe('CommonPaginateAdministrativeAreasLevel2Handler', () => {
+  let handler: CommonPaginateAdministrativeAreasLevel2Handler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            providers: [
-                CommonPaginateAdministrativeAreasLevel2Handler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
-            ],
-        })
-            .compile();
-
-        handler = module.get<CommonPaginateAdministrativeAreasLevel2Handler>(CommonPaginateAdministrativeAreasLevel2Handler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
-
-    test('CommonPaginateAdministrativeAreasLevel2Handler should be defined', () =>
-    {
-        expect(handler).toBeDefined();
-    });
-
-    describe('main', () =>
-    {
-        test('CommonPaginateAdministrativeAreasLevel2Handler should be defined', () =>
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        CommonPaginateAdministrativeAreasLevel2Handler,
         {
-            expect(handler).toBeDefined();
-        });
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        test('should return a administrativeAreasLevel2', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: commonMockAdministrativeAreaLevel2Data.length,
-                count: commonMockAdministrativeAreaLevel2Data.length,
-                rows : commonMockAdministrativeAreaLevel2Data,
-            })));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                ),
-            )
-                .toEqual({
-                    total: commonMockAdministrativeAreaLevel2Data.length,
-                    count: commonMockAdministrativeAreaLevel2Data.length,
-                    rows : commonMockAdministrativeAreaLevel2Data,
-                });
-        });
+    handler = module.get<CommonPaginateAdministrativeAreasLevel2Handler>(
+      CommonPaginateAdministrativeAreasLevel2Handler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  test('CommonPaginateAdministrativeAreasLevel2Handler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
+    test('CommonPaginateAdministrativeAreasLevel2Handler should be defined', () => {
+      expect(handler).toBeDefined();
     });
+
+    test('should return a administrativeAreasLevel2', async () => {
+      jest.spyOn(queryBus, 'ask').mockImplementation(
+        () =>
+          new Promise((resolve) =>
+            resolve({
+              total: commonMockAdministrativeAreaLevel2Data.length,
+              count: commonMockAdministrativeAreaLevel2Data.length,
+              rows: commonMockAdministrativeAreaLevel2Data,
+            }),
+          ),
+      );
+      expect(await handler.main({}, {})).toEqual({
+        total: commonMockAdministrativeAreaLevel2Data.length,
+        count: commonMockAdministrativeAreaLevel2Data.length,
+        rows: commonMockAdministrativeAreaLevel2Data,
+      });
+    });
+  });
 });

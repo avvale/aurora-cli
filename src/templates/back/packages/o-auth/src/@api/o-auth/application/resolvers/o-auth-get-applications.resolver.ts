@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('oAuth.application.get')
 export class OAuthGetApplicationsResolver {
-    constructor(private readonly handler: OAuthGetApplicationsHandler) {}
+  constructor(private readonly handler: OAuthGetApplicationsHandler) {}
 
-    @Query('oAuthGetApplications')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<OAuthApplication[]> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('oAuthGetApplications')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<OAuthApplication[]> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

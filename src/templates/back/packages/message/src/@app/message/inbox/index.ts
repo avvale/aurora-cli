@@ -86,42 +86,42 @@ import { MessageUpdateInboxByIdService } from './application/update/message-upda
 import { MessageUpdateInboxesService } from './application/update/message-update-inboxes.service';
 
 export const MessageInboxHandlers = [
-    // commands
-    MessageCreateInboxCommandHandler,
-    MessageCreateInboxesCommandHandler,
-    MessageUpdateInboxByIdCommandHandler,
-    MessageUpdateInboxesCommandHandler,
-    MessageDeleteInboxByIdCommandHandler,
-    MessageDeleteInboxesCommandHandler,
+  // commands
+  MessageCreateInboxCommandHandler,
+  MessageCreateInboxesCommandHandler,
+  MessageUpdateInboxByIdCommandHandler,
+  MessageUpdateInboxesCommandHandler,
+  MessageDeleteInboxByIdCommandHandler,
+  MessageDeleteInboxesCommandHandler,
 
-    // queries
-    MessagePaginateInboxesQueryHandler,
-    MessageGetInboxesQueryHandler,
-    MessageFindInboxQueryHandler,
-    MessageFindInboxByIdQueryHandler,
-    MessageCountInboxQueryHandler,
-    MessageMaxInboxQueryHandler,
+  // queries
+  MessagePaginateInboxesQueryHandler,
+  MessageGetInboxesQueryHandler,
+  MessageFindInboxQueryHandler,
+  MessageFindInboxByIdQueryHandler,
+  MessageCountInboxQueryHandler,
+  MessageMaxInboxQueryHandler,
 
-    // events
-    MessageCreatedInboxEventHandler,
-    MessageCreatedInboxesEventHandler,
-    MessageUpdatedInboxEventHandler,
-    MessageUpdatedInboxesEventHandler,
-    MessageDeletedInboxEventHandler,
-    MessageDeletedInboxesEventHandler,
+  // events
+  MessageCreatedInboxEventHandler,
+  MessageCreatedInboxesEventHandler,
+  MessageUpdatedInboxEventHandler,
+  MessageUpdatedInboxesEventHandler,
+  MessageDeletedInboxEventHandler,
+  MessageDeletedInboxesEventHandler,
 ];
 
 export const MessageInboxServices = [
-    MessageCreateInboxService,
-    MessageCreateInboxesService,
-    MessagePaginateInboxesService,
-    MessageGetInboxesService,
-    MessageFindInboxService,
-    MessageFindInboxByIdService,
-    MessageCountInboxService,
-    MessageMaxInboxService,
-    MessageUpdateInboxByIdService,
-    MessageUpdateInboxesService,
-    MessageDeleteInboxByIdService,
-    MessageDeleteInboxesService,
+  MessageCreateInboxService,
+  MessageCreateInboxesService,
+  MessagePaginateInboxesService,
+  MessageGetInboxesService,
+  MessageFindInboxService,
+  MessageFindInboxByIdService,
+  MessageCountInboxService,
+  MessageMaxInboxService,
+  MessageUpdateInboxByIdService,
+  MessageUpdateInboxesService,
+  MessageDeleteInboxByIdService,
+  MessageDeleteInboxesService,
 ];

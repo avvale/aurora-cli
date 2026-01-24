@@ -10,18 +10,17 @@ import { OAuthCreateImpersonalizeCredentialsResolver } from './resolvers/o-auth-
 import { OAuthCreateCredentialsHandler } from './handlers/o-auth-create-credentials.handler';
 import { OAuthCreateImpersonalizeCredentialsHandler } from './handlers/o-auth-create-impersonalize-credentials.handler';
 
-
 export const OAuthCredentialControllers = [
-    OAuthCreateCredentialsController,
-    OAuthCreateImpersonalizeCredentialsController,
+  OAuthCreateCredentialsController,
+  OAuthCreateImpersonalizeCredentialsController,
 ];
 
 export const OAuthCredentialResolvers = [
-    OAuthCreateCredentialsResolver,
-    OAuthCreateImpersonalizeCredentialsResolver,
+  OAuthCreateCredentialsResolver,
+  OAuthCreateImpersonalizeCredentialsResolver,
 ];
 
 export const OAuthCredentialApiHandlers = [
-    OAuthCreateCredentialsHandler,
-    OAuthCreateImpersonalizeCredentialsHandler,
+  OAuthCreateCredentialsHandler,
+  OAuthCreateImpersonalizeCredentialsHandler,
 ];

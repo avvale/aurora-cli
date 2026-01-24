@@ -1,6 +1,10 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission-role.aurora.yaml
+ */
 import {
-    IamPaginatePermissionsRolesQuery,
-    IamPermissionRoleMapper,
+  IamPaginatePermissionsRolesQuery,
+  IamPermissionRoleMapper,
 } from '@app/iam/permission-role';
 import { IamPaginatePermissionsRolesService } from '@app/iam/permission-role/application/paginate/iam-paginate-permissions-roles.service';
 import { PaginationResponse } from '@aurorajs.dev/core';
@@ -8,29 +12,29 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(IamPaginatePermissionsRolesQuery)
 export class IamPaginatePermissionsRolesQueryHandler
-    implements IQueryHandler<IamPaginatePermissionsRolesQuery>
+  implements IQueryHandler<IamPaginatePermissionsRolesQuery>
 {
-    private readonly mapper: IamPermissionRoleMapper =
-        new IamPermissionRoleMapper();
+  private readonly mapper: IamPermissionRoleMapper =
+    new IamPermissionRoleMapper();
 
-    constructor(
-        private readonly paginatePermissionsRolesService: IamPaginatePermissionsRolesService,
-    ) {}
+  constructor(
+    private readonly paginatePermissionsRolesService: IamPaginatePermissionsRolesService,
+  ) {}
 
-    async execute(
-        query: IamPaginatePermissionsRolesQuery,
-    ): Promise<PaginationResponse> {
-        const { total, count, rows } =
-            await this.paginatePermissionsRolesService.main(
-                query.queryStatement,
-                query.constraint,
-                query.cQMetadata,
-            );
+  async execute(
+    query: IamPaginatePermissionsRolesQuery,
+  ): Promise<PaginationResponse> {
+    const { total, count, rows } =
+      await this.paginatePermissionsRolesService.main(
+        query.queryStatement,
+        query.constraint,
+        query.cQMetadata,
+      );
 
-        return new PaginationResponse(
-            total,
-            count,
-            this.mapper.mapAggregatesToResponses(rows),
-        );
-    }
+    return new PaginationResponse(
+      total,
+      count,
+      this.mapper.mapAggregatesToResponses(rows),
+    );
+  }
 }

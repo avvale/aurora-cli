@@ -9,37 +9,59 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:apps
   outlineIcon: mat_outline:apps
+description: >
+  Module containing OAuth 2.0 applications. Applications represent first-party or third-party
+  services that can authenticate and authorize through the OAuth system. Applications can
+  have multiple clients and use a secret for secure authentication.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the application. UUID v4 format, generated automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing row identifier. Used for internal ordering and as a numeric alternative to UUID.
   - name: code
     type: varchar
     maxLength: 64
     nullable: false
     index: unique
+    description: >
+      Unique code identifier for the application. Used as the client_id in OAuth flows.
+      Convention: Lowercase, hyphen-separated (e.g., my-app, mobile-client).
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      Human-readable name for the application. Displayed in authorization prompts and admin interfaces.
   - name: secret
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      Application secret used for authentication. SECURITY: Must be stored securely, hashed,
+      and never exposed to clients. Used as client_secret in confidential OAuth flows.
   - name: isMaster
     type: boolean
     nullable: false
     defaultValue: false
     example: false
+    description: >
+      Indicates whether this is a master application with elevated privileges. Master applications
+      typically have access to all scopes and bypass certain restrictions.
   - name: clients
     type: relationship
     nullable: true
+    description: >
+      Many-to-many relationship with OAuth clients. An application can have multiple clients
+      representing different grant types or deployment environments.
     relationship:
       type: many-to-many
       singularName: client
@@ -87,12 +109,19 @@ aggregateProperties:
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the application was created. Automatically set on creation.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the application was last updated. Automatically updated on modification.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL means active application. When set, application is excluded
+      from normal queries but preserved for audit trail.
 excludedOperations:
   - count
   - getRaw

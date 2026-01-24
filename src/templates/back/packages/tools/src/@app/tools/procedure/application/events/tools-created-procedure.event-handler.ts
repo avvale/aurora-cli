@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(ToolsCreatedProcedureEvent)
 export class ToolsCreatedProcedureEventHandler
-    implements IEventHandler<ToolsCreatedProcedureEvent>
+  implements IEventHandler<ToolsCreatedProcedureEvent>
 {
-    handle(event: ToolsCreatedProcedureEvent): void {
-        // console.log('ToolsCreatedProcedureEvent: ', event);
-    }
+  handle(event: ToolsCreatedProcedureEvent): void {
+    // console.log('ToolsCreatedProcedureEvent: ', event);
+  }
 }

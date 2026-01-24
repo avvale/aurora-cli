@@ -1,44 +1,48 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/bounded-context.aurora.yaml
+ */
 import { IamBoundedContext } from '@api/graphql';
 import {
-    IamDeleteBoundedContextsCommand,
-    IamGetBoundedContextsQuery,
+  IamDeleteBoundedContextsCommand,
+  IamGetBoundedContextsQuery,
 } from '@app/iam/bounded-context';
 import {
-    AuditingMeta,
-    ICommandBus,
-    IQueryBus,
-    QueryStatement,
+  AuditingMeta,
+  ICommandBus,
+  IQueryBus,
+  QueryStatement,
 } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteBoundedContextsHandler {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<IamBoundedContext[]> {
-        const boundedContexts = await this.queryBus.ask(
-            new IamGetBoundedContextsQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<IamBoundedContext[]> {
+    const boundedContexts = await this.queryBus.ask(
+      new IamGetBoundedContextsQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
 
-        await this.commandBus.dispatch(
-            new IamDeleteBoundedContextsCommand(queryStatement, constraint, {
-                timezone,
-                repositoryOptions: {
-                    auditing,
-                },
-            }),
-        );
+    await this.commandBus.dispatch(
+      new IamDeleteBoundedContextsCommand(queryStatement, constraint, {
+        timezone,
+        repositoryOptions: {
+          auditing,
+        },
+      }),
+    );
 
-        return boundedContexts;
-    }
+    return boundedContexts;
+  }
 }

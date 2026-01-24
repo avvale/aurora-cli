@@ -6,11 +6,20 @@ aggregateName: WhatsappTimeline
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+description: >
+  Central entity linking conversations and messages for a unique combination of
+  business phone number and customer contact. Provides unified view of all
+  interactions between a specific customer and business line. Referenced by both
+  conversation and message modules to maintain relationship context and enable
+  efficient querying of interaction history.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the timeline record. UUID v4 format, generated
+      automatically on creation.
   - name: accounts
     type: array
     arrayOptions:
@@ -18,6 +27,10 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+      Array of account IDs that have access to or are assigned to this timeline.
+      Used for access control and multi-agent assignment. GIN index enables
+      efficient querying of timelines by account membership.
   - name: wabaPhoneNumberId
     type: varchar
     maxLength: 36
@@ -26,19 +39,37 @@ aggregateProperties:
     indexFields:
       - wabaPhoneNumberId
       - wabaContactId
+    description: >
+      WhatsApp Business API phone number identifier. Identifies the business
+      phone line used for this timeline. Combined with wabaContactId in unique
+      composite index to ensure one timeline per business-customer pair.
   - name: wabaContactId
     type: varchar
     maxLength: 36
     nullable: false
+    description: >
+      WhatsApp Business API contact identifier. Identifies the customer contact
+      for this timeline. Part of composite unique index with wabaPhoneNumberId
+      ensuring each customer-business pair has exactly one timeline.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when this timeline was created. Automatically set on first
+      message or conversation with this customer-business pair.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last update to this timeline record. Automatically
+      updated on any modification, such as account assignment changes.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active timeline. When set, timeline
+      and its associated conversations/messages are excluded from normal queries
+      but preserved for audit and historical purposes.
 excludedFiles:
   - src/@api/whatsapp/timeline/dto/whatsapp-create-timeline.dto.ts
   - src/@api/whatsapp/timeline/controllers/whatsapp-create-timeline.controller.spec.ts

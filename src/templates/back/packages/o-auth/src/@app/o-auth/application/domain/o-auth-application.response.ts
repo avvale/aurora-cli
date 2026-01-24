@@ -1,17 +1,17 @@
 import { OAuthClientResponse } from '@app/o-auth/client';
 
 export class OAuthApplicationResponse {
-    constructor(
-        public readonly id: string,
-        public readonly rowId: number,
-        public readonly code: string,
-        public readonly name: string,
-        public readonly secret: string,
-        public readonly isMaster: boolean,
-        public readonly clientIds: string[],
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
-        public readonly clients: OAuthClientResponse[],
-    ) {}
+  constructor(
+    public readonly id: string,
+    public readonly rowId: number,
+    public readonly code: string,
+    public readonly name: string,
+    public readonly secret: string,
+    public readonly isMaster: boolean,
+    public readonly clientIds: string[],
+    public readonly createdAt: string,
+    public readonly updatedAt: string,
+    public readonly deletedAt: string,
+    public readonly clients: OAuthClientResponse[],
+  ) {}
 }

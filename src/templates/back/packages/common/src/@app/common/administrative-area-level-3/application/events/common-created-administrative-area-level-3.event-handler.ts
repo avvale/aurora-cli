@@ -2,10 +2,10 @@ import { CommonCreatedAdministrativeAreaLevel3Event } from '@app/common/administ
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(CommonCreatedAdministrativeAreaLevel3Event)
-export class CommonCreatedAdministrativeAreaLevel3EventHandler implements IEventHandler<CommonCreatedAdministrativeAreaLevel3Event>
+export class CommonCreatedAdministrativeAreaLevel3EventHandler
+  implements IEventHandler<CommonCreatedAdministrativeAreaLevel3Event>
 {
-    handle(event: CommonCreatedAdministrativeAreaLevel3Event): void
-    {
-        // console.log('CommonCreatedAdministrativeAreaLevel3Event: ', event);
-    }
+  handle(event: CommonCreatedAdministrativeAreaLevel3Event): void {
+    // console.log('CommonCreatedAdministrativeAreaLevel3Event: ', event);
+  }
 }

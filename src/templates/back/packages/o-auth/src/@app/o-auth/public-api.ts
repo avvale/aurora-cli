@@ -1,66 +1,108 @@
 /* eslint-disable comma-dangle */
-import { OAuthScopeHandlers, OAuthScopeServices, OAuthScopeModel, OAuthIScopeRepository, OAuthSequelizeScopeRepository, OAuthScopeSagas } from './scope';
-import { OAuthRefreshTokenHandlers, OAuthRefreshTokenServices, OAuthRefreshTokenModel, OAuthIRefreshTokenRepository, OAuthSequelizeRefreshTokenRepository, OAuthRefreshTokenSagas } from './refresh-token';
-import { OAuthClientHandlers, OAuthClientServices, OAuthClientModel, OAuthIClientRepository, OAuthSequelizeClientRepository, OAuthClientSagas } from './client';
-import { OAuthApplicationClientHandlers, OAuthApplicationClientServices, OAuthApplicationClientModel, OAuthIApplicationClientRepository, OAuthSequelizeApplicationClientRepository, OAuthApplicationClientSagas } from './application-client';
-import { OAuthApplicationHandlers, OAuthApplicationServices, OAuthApplicationModel, OAuthIApplicationRepository, OAuthSequelizeApplicationRepository, OAuthApplicationSagas } from './application';
-import { OAuthAccessTokenHandlers, OAuthAccessTokenServices, OAuthAccessTokenModel, OAuthIAccessTokenRepository, OAuthSequelizeAccessTokenRepository, OAuthAccessTokenSagas } from './access-token';
+import {
+  OAuthAccessTokenHandlers,
+  OAuthAccessTokenModel,
+  OAuthAccessTokenSagas,
+  OAuthAccessTokenServices,
+  OAuthIAccessTokenRepository,
+  OAuthSequelizeAccessTokenRepository,
+} from './access-token';
+import {
+  OAuthApplicationHandlers,
+  OAuthApplicationModel,
+  OAuthApplicationSagas,
+  OAuthApplicationServices,
+  OAuthIApplicationRepository,
+  OAuthSequelizeApplicationRepository,
+} from './application';
+import {
+  OAuthApplicationClientHandlers,
+  OAuthApplicationClientModel,
+  OAuthApplicationClientSagas,
+  OAuthApplicationClientServices,
+  OAuthIApplicationClientRepository,
+  OAuthSequelizeApplicationClientRepository,
+} from './application-client';
+import {
+  OAuthClientHandlers,
+  OAuthClientModel,
+  OAuthClientSagas,
+  OAuthClientServices,
+  OAuthIClientRepository,
+  OAuthSequelizeClientRepository,
+} from './client';
+import {
+  OAuthIRefreshTokenRepository,
+  OAuthRefreshTokenHandlers,
+  OAuthRefreshTokenModel,
+  OAuthRefreshTokenSagas,
+  OAuthRefreshTokenServices,
+  OAuthSequelizeRefreshTokenRepository,
+} from './refresh-token';
+import {
+  OAuthIScopeRepository,
+  OAuthScopeHandlers,
+  OAuthScopeModel,
+  OAuthScopeSagas,
+  OAuthScopeServices,
+  OAuthSequelizeScopeRepository,
+} from './scope';
 
 export const OAuthHandlers = [
-    ...OAuthScopeHandlers,
-    ...OAuthRefreshTokenHandlers,
-    ...OAuthClientHandlers,
-    ...OAuthApplicationClientHandlers,
-    ...OAuthApplicationHandlers,
-    ...OAuthAccessTokenHandlers
+  ...OAuthScopeHandlers,
+  ...OAuthRefreshTokenHandlers,
+  ...OAuthClientHandlers,
+  ...OAuthApplicationClientHandlers,
+  ...OAuthApplicationHandlers,
+  ...OAuthAccessTokenHandlers,
 ];
 export const OAuthServices = [
-    ...OAuthScopeServices,
-    ...OAuthRefreshTokenServices,
-    ...OAuthClientServices,
-    ...OAuthApplicationClientServices,
-    ...OAuthApplicationServices,
-    ...OAuthAccessTokenServices
+  ...OAuthScopeServices,
+  ...OAuthRefreshTokenServices,
+  ...OAuthClientServices,
+  ...OAuthApplicationClientServices,
+  ...OAuthApplicationServices,
+  ...OAuthAccessTokenServices,
 ];
 export const OAuthModels = [
-    OAuthScopeModel,
-    OAuthRefreshTokenModel,
-    OAuthClientModel,
-    OAuthApplicationClientModel,
-    OAuthApplicationModel,
-    OAuthAccessTokenModel
+  OAuthScopeModel,
+  OAuthRefreshTokenModel,
+  OAuthClientModel,
+  OAuthApplicationClientModel,
+  OAuthApplicationModel,
+  OAuthAccessTokenModel,
 ];
 export const OAuthRepositories = [
-    {
-        provide : OAuthIScopeRepository,
-        useClass: OAuthSequelizeScopeRepository,
-    },
-    {
-        provide : OAuthIRefreshTokenRepository,
-        useClass: OAuthSequelizeRefreshTokenRepository,
-    },
-    {
-        provide : OAuthIClientRepository,
-        useClass: OAuthSequelizeClientRepository,
-    },
-    {
-        provide : OAuthIApplicationClientRepository,
-        useClass: OAuthSequelizeApplicationClientRepository,
-    },
-    {
-        provide : OAuthIApplicationRepository,
-        useClass: OAuthSequelizeApplicationRepository,
-    },
-    {
-        provide : OAuthIAccessTokenRepository,
-        useClass: OAuthSequelizeAccessTokenRepository,
-    }
+  {
+    provide: OAuthIScopeRepository,
+    useClass: OAuthSequelizeScopeRepository,
+  },
+  {
+    provide: OAuthIRefreshTokenRepository,
+    useClass: OAuthSequelizeRefreshTokenRepository,
+  },
+  {
+    provide: OAuthIClientRepository,
+    useClass: OAuthSequelizeClientRepository,
+  },
+  {
+    provide: OAuthIApplicationClientRepository,
+    useClass: OAuthSequelizeApplicationClientRepository,
+  },
+  {
+    provide: OAuthIApplicationRepository,
+    useClass: OAuthSequelizeApplicationRepository,
+  },
+  {
+    provide: OAuthIAccessTokenRepository,
+    useClass: OAuthSequelizeAccessTokenRepository,
+  },
 ];
 export const OAuthSagas = [
-    OAuthScopeSagas,
-    OAuthRefreshTokenSagas,
-    OAuthClientSagas,
-    OAuthApplicationClientSagas,
-    OAuthApplicationSagas,
-    OAuthAccessTokenSagas
+  OAuthScopeSagas,
+  OAuthRefreshTokenSagas,
+  OAuthClientSagas,
+  OAuthApplicationClientSagas,
+  OAuthApplicationSagas,
+  OAuthAccessTokenSagas,
 ];

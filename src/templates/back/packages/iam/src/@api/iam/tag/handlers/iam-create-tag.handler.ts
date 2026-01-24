@@ -6,33 +6,33 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCreateTagHandler {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(
-        payload: IamCreateTagInput | IamCreateTagDto,
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<IamTag | IamTagDto> {
-        await this.commandBus.dispatch(
-            new IamCreateTagCommand(payload, {
-                timezone,
-                repositoryOptions: {
-                    auditing,
-                },
-            }),
-        );
+  async main(
+    payload: IamCreateTagInput | IamCreateTagDto,
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<IamTag | IamTagDto> {
+    await this.commandBus.dispatch(
+      new IamCreateTagCommand(payload, {
+        timezone,
+        repositoryOptions: {
+          auditing,
+        },
+      }),
+    );
 
-        return await this.queryBus.ask(
-            new IamFindTagByIdQuery(
-                payload.id,
-                {},
-                {
-                    timezone,
-                },
-            ),
-        );
-    }
+    return await this.queryBus.ask(
+      new IamFindTagByIdQuery(
+        payload.id,
+        {},
+        {
+          timezone,
+        },
+      ),
+    );
+  }
 }

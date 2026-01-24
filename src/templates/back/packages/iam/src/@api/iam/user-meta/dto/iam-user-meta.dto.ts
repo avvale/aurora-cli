@@ -1,17 +1,16 @@
 /* eslint-disable indent */
 import { ApiProperty } from '@nestjs/swagger';
 
-export class IamUserMetaDto
-{
-    @ApiProperty({
-        type       : String,
-        description: 'id [input here api field description]',
-    })
-    id: string;
+export class IamUserMetaDto {
+  @ApiProperty({
+    type: String,
+    description: 'id [input here api field description]',
+  })
+  id: string;
 
-    @ApiProperty({
-        type       : Object,
-        description: 'data [input here api field description]',
-    })
-    data: any;
+  @ApiProperty({
+    type: Object,
+    description: 'data [input here api field description]',
+  })
+  data: any;
 }

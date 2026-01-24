@@ -5,13 +5,13 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 export class IamResetPasswordUserResolver {
-    constructor(private readonly handler: IamResetPasswordUserHandler) {}
+  constructor(private readonly handler: IamResetPasswordUserHandler) {}
 
-    @Mutation('iamResetPasswordUser')
-    async main(
-        @Args('payload') payload: IamResetPasswordUserInput,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean> {
-        return await this.handler.main(payload, auditing);
-    }
+  @Mutation('iamResetPasswordUser')
+  async main(
+    @Args('payload') payload: IamResetPasswordUserInput,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, auditing);
+  }
 }

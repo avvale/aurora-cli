@@ -8,24 +8,24 @@ import { IamFindUserByUsernamePasswordService } from './iam-find-user-by-usernam
 
 @QueryHandler(IamFindUserByUsernamePasswordQuery)
 export class IamFindUserByUsernamePasswordQueryHandler
-    implements IQueryHandler<IamFindUserByUsernamePasswordQuery>
+  implements IQueryHandler<IamFindUserByUsernamePasswordQuery>
 {
-    private readonly mapper: IamUserMapper = new IamUserMapper();
+  private readonly mapper: IamUserMapper = new IamUserMapper();
 
-    constructor(
-        private readonly findUserByUsernamePasswordService: IamFindUserByUsernamePasswordService,
-    ) {}
+  constructor(
+    private readonly findUserByUsernamePasswordService: IamFindUserByUsernamePasswordService,
+  ) {}
 
-    async execute(
-        query: IamFindUserByUsernamePasswordQuery,
-    ): Promise<IamUserResponse> {
-        const user = await this.findUserByUsernamePasswordService.main(
-            new IamAccountUsername(query.username),
-            new IamUserPassword(query.password),
-            query.constraint,
-            query.cQMetadata,
-        );
+  async execute(
+    query: IamFindUserByUsernamePasswordQuery,
+  ): Promise<IamUserResponse> {
+    const user = await this.findUserByUsernamePasswordService.main(
+      new IamAccountUsername(query.username),
+      new IamUserPassword(query.password),
+      query.constraint,
+      query.cQMetadata,
+    );
 
-        return this.mapper.mapAggregateToResponse(user);
-    }
+    return this.mapper.mapAggregateToResponse(user);
+  }
 }

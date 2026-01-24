@@ -1,49 +1,53 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/bounded-context.aurora.yaml
+ */
 import { IamCreateBoundedContextInput } from '@api/graphql';
 import {
-    IamCreateBoundedContextsHandler,
-    IamCreateBoundedContextsResolver,
+  IamCreateBoundedContextsHandler,
+  IamCreateBoundedContextsResolver,
 } from '@api/iam/bounded-context';
 import { iamMockBoundedContextData } from '@app/iam/bounded-context';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateBoundedContextsResolver', () => {
-    let resolver: IamCreateBoundedContextsResolver;
+  let resolver: IamCreateBoundedContextsResolver;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamCreateBoundedContextsResolver,
-                {
-                    provide: IamCreateBoundedContextsHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamCreateBoundedContextsResolver,
+        {
+          provide: IamCreateBoundedContextsHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<IamCreateBoundedContextsResolver>(
-            IamCreateBoundedContextsResolver,
-        );
-    });
+    resolver = module.get<IamCreateBoundedContextsResolver>(
+      IamCreateBoundedContextsResolver,
+    );
+  });
 
+  test('IamCreateBoundedContextsResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('IamCreateBoundedContextsResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
 
-    describe('main', () => {
-        test('IamCreateBoundedContextsResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-
-        test('should return an boundedContexts created', async () => {
-            expect(
-                await resolver.main(
-                    <IamCreateBoundedContextInput[]>iamMockBoundedContextData,
-                ),
-            ).toBe(undefined);
-        });
+    test('should return an boundedContexts created', async () => {
+      expect(
+        await resolver.main(
+          <IamCreateBoundedContextInput[]>iamMockBoundedContextData,
+        ),
+      ).toBe(undefined);
     });
+  });
 });

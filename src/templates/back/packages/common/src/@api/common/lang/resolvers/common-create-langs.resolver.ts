@@ -6,23 +6,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.lang.create')
-export class CommonCreateLangsResolver
-{
-    constructor(
-        private readonly handler: CommonCreateLangsHandler,
-    ) {}
+export class CommonCreateLangsResolver {
+  constructor(private readonly handler: CommonCreateLangsHandler) {}
 
-    @Mutation('commonCreateLangs')
-    async main(
-        @Args('payload') payload: CommonCreateLangInput[],
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
-    }
+  @Mutation('commonCreateLangs')
+  async main(
+    @Args('payload') payload: CommonCreateLangInput[],
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

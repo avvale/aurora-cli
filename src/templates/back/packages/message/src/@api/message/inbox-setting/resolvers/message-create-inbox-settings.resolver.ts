@@ -7,14 +7,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('message.inboxSetting.create')
 export class MessageCreateInboxSettingsResolver {
-    constructor(private readonly handler: MessageCreateInboxSettingsHandler) {}
+  constructor(private readonly handler: MessageCreateInboxSettingsHandler) {}
 
-    @Mutation('messageCreateInboxSettings')
-    async main(
-        @Args('payload') payload: MessageCreateInboxSettingInput[],
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean> {
-        return await this.handler.main(payload, timezone, auditing);
-    }
+  @Mutation('messageCreateInboxSettings')
+  async main(
+    @Args('payload') payload: MessageCreateInboxSettingInput[],
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

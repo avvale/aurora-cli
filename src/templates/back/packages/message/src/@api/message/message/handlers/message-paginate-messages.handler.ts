@@ -6,18 +6,18 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessagePaginateMessagesHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        account: IamAccountResponse,
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<Pagination> {
-        return await this.queryBus.ask(
-            new MessagePaginateMessagesQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    account: IamAccountResponse,
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<Pagination> {
+    return await this.queryBus.ask(
+      new MessagePaginateMessagesQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

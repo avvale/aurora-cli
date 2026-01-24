@@ -80,38 +80,38 @@ import { IamUpdateRoleAccountByIdService } from './application/update/iam-update
 import { IamUpdateRolesAccountsService } from './application/update/iam-update-roles-accounts.service';
 
 export const IamRoleAccountHandlers = [
-    // commands
-    IamCreateRoleAccountCommandHandler,
-    IamCreateRolesAccountsCommandHandler,
-    IamUpdateRoleAccountByIdCommandHandler,
-    IamUpdateRolesAccountsCommandHandler,
-    IamDeleteRoleAccountByIdCommandHandler,
-    IamDeleteRolesAccountsCommandHandler,
+  // commands
+  IamCreateRoleAccountCommandHandler,
+  IamCreateRolesAccountsCommandHandler,
+  IamUpdateRoleAccountByIdCommandHandler,
+  IamUpdateRolesAccountsCommandHandler,
+  IamDeleteRoleAccountByIdCommandHandler,
+  IamDeleteRolesAccountsCommandHandler,
 
-    // queries
-    IamPaginateRolesAccountsQueryHandler,
-    IamGetRolesAccountsQueryHandler,
-    IamFindRoleAccountQueryHandler,
-    IamFindRoleAccountByIdQueryHandler,
+  // queries
+  IamPaginateRolesAccountsQueryHandler,
+  IamGetRolesAccountsQueryHandler,
+  IamFindRoleAccountQueryHandler,
+  IamFindRoleAccountByIdQueryHandler,
 
-    // events
-    IamCreatedRoleAccountEventHandler,
-    IamCreatedRolesAccountsEventHandler,
-    IamUpdatedRoleAccountEventHandler,
-    IamUpdatedRolesAccountsEventHandler,
-    IamDeletedRoleAccountEventHandler,
-    IamDeletedRolesAccountsEventHandler,
+  // events
+  IamCreatedRoleAccountEventHandler,
+  IamCreatedRolesAccountsEventHandler,
+  IamUpdatedRoleAccountEventHandler,
+  IamUpdatedRolesAccountsEventHandler,
+  IamDeletedRoleAccountEventHandler,
+  IamDeletedRolesAccountsEventHandler,
 ];
 
 export const IamRoleAccountServices = [
-    IamCreateRoleAccountService,
-    IamCreateRolesAccountsService,
-    IamPaginateRolesAccountsService,
-    IamGetRolesAccountsService,
-    IamFindRoleAccountService,
-    IamFindRoleAccountByIdService,
-    IamUpdateRoleAccountByIdService,
-    IamUpdateRolesAccountsService,
-    IamDeleteRoleAccountByIdService,
-    IamDeleteRolesAccountsService,
+  IamCreateRoleAccountService,
+  IamCreateRolesAccountsService,
+  IamPaginateRolesAccountsService,
+  IamGetRolesAccountsService,
+  IamFindRoleAccountService,
+  IamFindRoleAccountByIdService,
+  IamUpdateRoleAccountByIdService,
+  IamUpdateRolesAccountsService,
+  IamDeleteRoleAccountByIdService,
+  IamDeleteRolesAccountsService,
 ];

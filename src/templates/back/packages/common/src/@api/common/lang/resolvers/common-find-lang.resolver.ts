@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.lang.get')
-export class CommonFindLangResolver
-{
-    constructor(
-        private readonly handler: CommonFindLangHandler,
-    ) {}
+export class CommonFindLangResolver {
+  constructor(private readonly handler: CommonFindLangHandler) {}
 
-    @Query('commonFindLang')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<CommonLang>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('commonFindLang')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<CommonLang> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

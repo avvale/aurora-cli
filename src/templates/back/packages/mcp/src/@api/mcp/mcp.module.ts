@@ -5,8 +5,8 @@ import { McpController } from './mcp.controller';
 import { McpNestGraphQLServer } from './mcp.server';
 
 @Module({
-    imports: [HttpModule],
-    controllers: [McpController],
-    providers: [McpNestGraphQLServer, McpAuthService],
+  imports: [HttpModule],
+  controllers: [McpController],
+  providers: [McpNestGraphQLServer, McpAuthService],
 })
 export class McpModule {}

@@ -80,38 +80,38 @@ import { MessageUpdateOutboxByIdService } from './application/update/message-upd
 import { MessageUpdateOutboxesService } from './application/update/message-update-outboxes.service';
 
 export const MessageOutboxHandlers = [
-    // commands
-    MessageCreateOutboxCommandHandler,
-    MessageCreateOutboxesCommandHandler,
-    MessageUpdateOutboxByIdCommandHandler,
-    MessageUpdateOutboxesCommandHandler,
-    MessageDeleteOutboxByIdCommandHandler,
-    MessageDeleteOutboxesCommandHandler,
+  // commands
+  MessageCreateOutboxCommandHandler,
+  MessageCreateOutboxesCommandHandler,
+  MessageUpdateOutboxByIdCommandHandler,
+  MessageUpdateOutboxesCommandHandler,
+  MessageDeleteOutboxByIdCommandHandler,
+  MessageDeleteOutboxesCommandHandler,
 
-    // queries
-    MessagePaginateOutboxesQueryHandler,
-    MessageGetOutboxesQueryHandler,
-    MessageFindOutboxQueryHandler,
-    MessageFindOutboxByIdQueryHandler,
+  // queries
+  MessagePaginateOutboxesQueryHandler,
+  MessageGetOutboxesQueryHandler,
+  MessageFindOutboxQueryHandler,
+  MessageFindOutboxByIdQueryHandler,
 
-    // events
-    MessageCreatedOutboxEventHandler,
-    MessageCreatedOutboxesEventHandler,
-    MessageUpdatedOutboxEventHandler,
-    MessageUpdatedOutboxesEventHandler,
-    MessageDeletedOutboxEventHandler,
-    MessageDeletedOutboxesEventHandler,
+  // events
+  MessageCreatedOutboxEventHandler,
+  MessageCreatedOutboxesEventHandler,
+  MessageUpdatedOutboxEventHandler,
+  MessageUpdatedOutboxesEventHandler,
+  MessageDeletedOutboxEventHandler,
+  MessageDeletedOutboxesEventHandler,
 ];
 
 export const MessageOutboxServices = [
-    MessageCreateOutboxService,
-    MessageCreateOutboxesService,
-    MessagePaginateOutboxesService,
-    MessageGetOutboxesService,
-    MessageFindOutboxService,
-    MessageFindOutboxByIdService,
-    MessageUpdateOutboxByIdService,
-    MessageUpdateOutboxesService,
-    MessageDeleteOutboxByIdService,
-    MessageDeleteOutboxesService,
+  MessageCreateOutboxService,
+  MessageCreateOutboxesService,
+  MessagePaginateOutboxesService,
+  MessageGetOutboxesService,
+  MessageFindOutboxService,
+  MessageFindOutboxByIdService,
+  MessageUpdateOutboxByIdService,
+  MessageUpdateOutboxesService,
+  MessageDeleteOutboxByIdService,
+  MessageDeleteOutboxesService,
 ];

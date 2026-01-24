@@ -6,23 +6,23 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthFindApplicationClientByIdHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        applicationId: string,
-        clientId: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<OAuthApplicationClient | OAuthApplicationClientDto> {
-        return await this.queryBus.ask(
-            new OAuthFindApplicationClientByIdQuery(
-                applicationId,
-                clientId,
-                constraint,
-                {
-                    timezone,
-                },
-            ),
-        );
-    }
+  async main(
+    applicationId: string,
+    clientId: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<OAuthApplicationClient | OAuthApplicationClientDto> {
+    return await this.queryBus.ask(
+      new OAuthFindApplicationClientByIdQuery(
+        applicationId,
+        clientId,
+        constraint,
+        {
+          timezone,
+        },
+      ),
+    );
+  }
 }

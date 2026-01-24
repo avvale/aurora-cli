@@ -9,22 +9,20 @@ import { ClickupService } from '../shared/clickup.service';
 
 @Injectable()
 export class ClickupFolderHandler {
-    constructor(
-        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-        private readonly clickupService: ClickupService,
-    ) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+    private readonly clickupService: ClickupService,
+  ) {}
 
-    async main(
-        spaceId?: string,
-    ): Promise<ClickupFolder[] | ClickupFolderDto[]> {
-        const supportTaskPlatformApiKey = await this.cacheManager.get<string>(
-            CLICKUP_TASK_PLATFORM_API_KEY,
-        );
+  async main(spaceId?: string): Promise<ClickupFolder[] | ClickupFolderDto[]> {
+    const supportTaskPlatformApiKey = await this.cacheManager.get<string>(
+      CLICKUP_TASK_PLATFORM_API_KEY,
+    );
 
-        return await lastValueFrom(
-            this.clickupService.getFolders(spaceId, {
-                authorization: supportTaskPlatformApiKey,
-            }),
-        );
-    }
+    return await lastValueFrom(
+      this.clickupService.getFolders(spaceId, {
+        authorization: supportTaskPlatformApiKey,
+      }),
+    );
+  }
 }

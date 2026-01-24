@@ -77,36 +77,36 @@ import { SupportUpdateCommentByIdService } from './application/update/support-up
 import { SupportUpdateCommentsService } from './application/update/support-update-comments.service';
 
 export const SupportCommentHandlers = [
-    // commands
-    SupportCreateCommentCommandHandler,
-    SupportUpdateCommentByIdCommandHandler,
-    SupportUpdateCommentsCommandHandler,
-    SupportDeleteCommentByIdCommandHandler,
-    SupportDeleteCommentsCommandHandler,
+  // commands
+  SupportCreateCommentCommandHandler,
+  SupportUpdateCommentByIdCommandHandler,
+  SupportUpdateCommentsCommandHandler,
+  SupportDeleteCommentByIdCommandHandler,
+  SupportDeleteCommentsCommandHandler,
 
-    // queries
-    SupportPaginateCommentsQueryHandler,
-    SupportGetCommentsQueryHandler,
-    SupportFindCommentQueryHandler,
-    SupportFindCommentByIdQueryHandler,
+  // queries
+  SupportPaginateCommentsQueryHandler,
+  SupportGetCommentsQueryHandler,
+  SupportFindCommentQueryHandler,
+  SupportFindCommentByIdQueryHandler,
 
-    // events
-    SupportCreatedCommentEventHandler,
-    SupportCreatedCommentsEventHandler,
-    SupportUpdatedCommentEventHandler,
-    SupportUpdatedCommentsEventHandler,
-    SupportDeletedCommentEventHandler,
-    SupportDeletedCommentsEventHandler,
+  // events
+  SupportCreatedCommentEventHandler,
+  SupportCreatedCommentsEventHandler,
+  SupportUpdatedCommentEventHandler,
+  SupportUpdatedCommentsEventHandler,
+  SupportDeletedCommentEventHandler,
+  SupportDeletedCommentsEventHandler,
 ];
 
 export const SupportCommentServices = [
-    SupportCreateCommentService,
-    SupportPaginateCommentsService,
-    SupportGetCommentsService,
-    SupportFindCommentService,
-    SupportFindCommentByIdService,
-    SupportUpdateCommentByIdService,
-    SupportUpdateCommentsService,
-    SupportDeleteCommentByIdService,
-    SupportDeleteCommentsService,
+  SupportCreateCommentService,
+  SupportPaginateCommentsService,
+  SupportGetCommentsService,
+  SupportFindCommentService,
+  SupportFindCommentByIdService,
+  SupportUpdateCommentByIdService,
+  SupportUpdateCommentsService,
+  SupportDeleteCommentByIdService,
+  SupportDeleteCommentsService,
 ];

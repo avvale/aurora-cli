@@ -5,17 +5,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ToolsGetWebhookLogsHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<ToolsWebhookLog[]> {
-        return await this.queryBus.ask(
-            new ToolsGetWebhookLogsQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<ToolsWebhookLog[]> {
+    return await this.queryBus.ask(
+      new ToolsGetWebhookLogsQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

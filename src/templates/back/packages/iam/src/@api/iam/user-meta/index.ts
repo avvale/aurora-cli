@@ -11,16 +11,16 @@ import { IamFindUserMetaByIdHandler } from './handlers/iam-find-user-meta-by-id.
 import { IamUpdateUserMetaByIdHandler } from './handlers/iam-update-user-meta-by-id.handler';
 
 export const IamUserMetaControllers = [
-    IamFindUserMetaByIdController,
-    IamUpdateUserMetaByIdController,
+  IamFindUserMetaByIdController,
+  IamUpdateUserMetaByIdController,
 ];
 
 export const IamUserMetaResolvers = [
-    IamFindUserMetaByIdResolver,
-    IamUpdateUserMetaByIdResolver,
+  IamFindUserMetaByIdResolver,
+  IamUpdateUserMetaByIdResolver,
 ];
 
 export const IamUserMetaApiHandlers = [
-    IamFindUserMetaByIdHandler,
-    IamUpdateUserMetaByIdHandler,
+  IamFindUserMetaByIdHandler,
+  IamUpdateUserMetaByIdHandler,
 ];

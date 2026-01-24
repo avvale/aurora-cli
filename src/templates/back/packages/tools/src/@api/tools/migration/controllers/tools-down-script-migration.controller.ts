@@ -9,15 +9,15 @@ import { ToolsDownScriptMigrationHandler } from '../handlers/tools-down-script-m
 @Controller('tools/migration/down-script')
 @Auth('tools.migration.update')
 export class ToolsDownScriptMigrationController {
-    constructor(private readonly handler: ToolsDownScriptMigrationHandler) {}
+  constructor(private readonly handler: ToolsDownScriptMigrationHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(@Body() migrationId: string, @Timezone() timezone?: string) {
-        return await this.handler.main(migrationId, timezone);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(@Body() migrationId: string, @Timezone() timezone?: string) {
+    return await this.handler.main(migrationId, timezone);
+  }
 }

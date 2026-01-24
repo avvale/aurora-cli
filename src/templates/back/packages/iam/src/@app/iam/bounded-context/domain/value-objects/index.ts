@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/bounded-context.aurora.yaml
+ */
 export { IamBoundedContextCreatedAt } from './iam-bounded-context-created-at';
 export { IamBoundedContextDeletedAt } from './iam-bounded-context-deleted-at';
 export { IamBoundedContextId } from './iam-bounded-context-id';

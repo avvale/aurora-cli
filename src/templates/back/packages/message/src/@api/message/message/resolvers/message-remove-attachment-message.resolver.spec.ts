@@ -4,40 +4,40 @@ import { MessageRemoveAttachmentMessageHandler } from '../handlers/message-remov
 import { MessageRemoveAttachmentMessageResolver } from './message-remove-attachment-message.resolver';
 
 describe('MessageRemoveAttachmentMessageResolver', () => {
-    let resolver: MessageRemoveAttachmentMessageResolver;
-    let handler: MessageRemoveAttachmentMessageHandler;
+  let resolver: MessageRemoveAttachmentMessageResolver;
+  let handler: MessageRemoveAttachmentMessageHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                MessageRemoveAttachmentMessageResolver,
-                {
-                    provide: MessageRemoveAttachmentMessageHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        MessageRemoveAttachmentMessageResolver,
+        {
+          provide: MessageRemoveAttachmentMessageHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<MessageRemoveAttachmentMessageResolver>(
-            MessageRemoveAttachmentMessageResolver,
-        );
-        handler = module.get<MessageRemoveAttachmentMessageHandler>(
-            MessageRemoveAttachmentMessageHandler,
-        );
-    });
+    resolver = module.get<MessageRemoveAttachmentMessageResolver>(
+      MessageRemoveAttachmentMessageResolver,
+    );
+    handler = module.get<MessageRemoveAttachmentMessageHandler>(
+      MessageRemoveAttachmentMessageHandler,
+    );
+  });
 
+  test('MessageRemoveAttachmentMessageResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('MessageRemoveAttachmentMessageResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
-
-    describe('main', () => {
-        test('MessageRemoveAttachmentMessageResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-    });
+  });
 });

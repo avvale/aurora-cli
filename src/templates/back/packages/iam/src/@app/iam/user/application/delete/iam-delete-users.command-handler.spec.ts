@@ -4,37 +4,37 @@ import { IamDeleteUsersService } from '@app/iam/user/application/delete/iam-dele
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteUsersCommandHandler', () => {
-    let commandHandler: IamDeleteUsersCommandHandler;
+  let commandHandler: IamDeleteUsersCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamDeleteUsersCommandHandler,
-                {
-                    provide: IamDeleteUsersService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamDeleteUsersCommandHandler,
+        {
+          provide: IamDeleteUsersService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<IamDeleteUsersCommandHandler>(
-            IamDeleteUsersCommandHandler,
-        );
+    commandHandler = module.get<IamDeleteUsersCommandHandler>(
+      IamDeleteUsersCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('IamDeleteUsersCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('IamDeleteUsersCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(new IamDeleteUsersCommand()),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(await commandHandler.execute(new IamDeleteUsersCommand())).toBe(
+        undefined,
+      );
     });
+  });
 });

@@ -11,16 +11,26 @@ front:
   outlineIcon: chat_paste_go
   solidFontSetIcon: material-symbols-outlined
   solidIcon: chat_paste_go
+description: >
+  Message queues in the system. Each queue is uniquely identified by prefix and
+  name combination. Queues serve as containers for jobs and organize work by
+  bounded context or functional area.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the queue. UUID v4 format, generated automatically on
+      creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing numeric identifier for database ordering and efficient
+      queries. Unique across all queue records.
   - name: prefix
     type: varchar
     maxLength: 63
@@ -29,19 +39,34 @@ aggregateProperties:
     indexFields:
       - prefix
       - name
+    description: >
+      Queue namespace prefix. Combined with name to form unique identifier.
+      Represents bounded context or service (e.g., 'iam', 'notification', 'export').
   - name: name
     type: varchar
     maxLength: 63
     nullable: false
+    description: >
+      Queue name within prefix namespace. Describes queue purpose (e.g., 'email',
+      'export', 'import'). Combined with prefix forms unique queue identifier.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the queue was registered in the system. Automatically set on
+      creation.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last modification to the queue record. Automatically updated
+      on changes.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active queue. When set, queue is marked
+      as deleted but preserved for audit trail.
 excludedOperations:
   - count
   - getRaw

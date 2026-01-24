@@ -4,17 +4,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthGetClientsService {
-    constructor(private readonly repository: OAuthIClientRepository) {}
+  constructor(private readonly repository: OAuthIClientRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<OAuthClient[] | LiteralObject[]> {
-        return await this.repository.get({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<OAuthClient[] | LiteralObject[]> {
+    return await this.repository.get({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

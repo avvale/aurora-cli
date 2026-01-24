@@ -5,17 +5,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SupportGetCommentsHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<SupportComment[]> {
-        return await this.queryBus.ask(
-            new SupportGetCommentsQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<SupportComment[]> {
+    return await this.queryBus.ask(
+      new SupportGetCommentsQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

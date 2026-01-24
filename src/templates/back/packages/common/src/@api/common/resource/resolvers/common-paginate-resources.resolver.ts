@@ -6,23 +6,15 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.resource.get')
-export class CommonPaginateResourcesResolver
-{
-    constructor(
-        private readonly handler: CommonPaginateResourcesHandler,
-    ) {}
+export class CommonPaginateResourcesResolver {
+  constructor(private readonly handler: CommonPaginateResourcesHandler) {}
 
-    @Query('commonPaginateResources')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('commonPaginateResources')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

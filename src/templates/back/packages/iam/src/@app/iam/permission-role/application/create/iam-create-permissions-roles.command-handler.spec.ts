@@ -1,48 +1,51 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission-role.aurora.yaml
+ */
 import {
-    IamCreatePermissionsRolesCommand,
-    iamMockPermissionRoleData,
+  IamCreatePermissionsRolesCommand,
+  iamMockPermissionRoleData,
 } from '@app/iam/permission-role';
 import { IamCreatePermissionsRolesCommandHandler } from '@app/iam/permission-role/application/create/iam-create-permissions-roles.command-handler';
 import { IamCreatePermissionsRolesService } from '@app/iam/permission-role/application/create/iam-create-permissions-roles.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('iamCreatePermissionsRolesCommandHandler', () => {
-    let commandHandler: IamCreatePermissionsRolesCommandHandler;
+  let commandHandler: IamCreatePermissionsRolesCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamCreatePermissionsRolesCommandHandler,
-                {
-                    provide: IamCreatePermissionsRolesService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamCreatePermissionsRolesCommandHandler,
+        {
+          provide: IamCreatePermissionsRolesService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<IamCreatePermissionsRolesCommandHandler>(
-            IamCreatePermissionsRolesCommandHandler,
-        );
+    commandHandler = module.get<IamCreatePermissionsRolesCommandHandler>(
+      IamCreatePermissionsRolesCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('IamCreatePermissionsRolesCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('IamCreatePermissionsRolesCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return IamMockPermissionRoleData created', async () => {
-            expect(
-                await commandHandler.execute(
-                    new IamCreatePermissionsRolesCommand(
-                        iamMockPermissionRoleData,
-                        { timezone: process.env.TZ },
-                    ),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return IamMockPermissionRoleData created', async () => {
+      expect(
+        await commandHandler.execute(
+          new IamCreatePermissionsRolesCommand(iamMockPermissionRoleData, {
+            timezone: process.env.TZ,
+          }),
+        ),
+      ).toBe(undefined);
     });
+  });
 });

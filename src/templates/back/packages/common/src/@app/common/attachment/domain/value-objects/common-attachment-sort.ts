@@ -1,16 +1,20 @@
 import { SmallintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
-export class CommonAttachmentSort extends SmallintValueObject
-{
-    public readonly type: string = 'CommonAttachmentSort';
+export class CommonAttachmentSort extends SmallintValueObject {
+  public readonly type: string = 'CommonAttachmentSort';
 
-    constructor(value: number, validationRules: ValidationRules = {})
-    {
-        super(value, Object.assign({
-            name       : 'CommonAttachmentSort',
-            nullable   : true,
-            undefinable: true,
-            unsigned   : true,
-        }, validationRules));
-    }
+  constructor(value: number, validationRules: ValidationRules = {}) {
+    super(
+      value,
+      Object.assign(
+        {
+          name: 'CommonAttachmentSort',
+          nullable: true,
+          undefinable: true,
+          unsigned: true,
+        },
+        validationRules,
+      ),
+    );
+  }
 }

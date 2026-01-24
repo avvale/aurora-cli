@@ -5,18 +5,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(ToolsDeleteProcedureByIdCommand)
 export class ToolsDeleteProcedureByIdCommandHandler
-    implements ICommandHandler<ToolsDeleteProcedureByIdCommand>
+  implements ICommandHandler<ToolsDeleteProcedureByIdCommand>
 {
-    constructor(
-        private readonly deleteProcedureByIdService: ToolsDeleteProcedureByIdService,
-    ) {}
+  constructor(
+    private readonly deleteProcedureByIdService: ToolsDeleteProcedureByIdService,
+  ) {}
 
-    async execute(command: ToolsDeleteProcedureByIdCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteProcedureByIdService.main(
-            new ToolsProcedureId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: ToolsDeleteProcedureByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteProcedureByIdService.main(
+      new ToolsProcedureId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

@@ -4,17 +4,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthFindScopeService {
-    constructor(private readonly repository: OAuthIScopeRepository) {}
+  constructor(private readonly repository: OAuthIScopeRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<OAuthScope> {
-        return await this.repository.find({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<OAuthScope> {
+    return await this.repository.find({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

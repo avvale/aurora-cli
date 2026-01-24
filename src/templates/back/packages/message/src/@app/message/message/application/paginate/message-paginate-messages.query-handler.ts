@@ -5,25 +5,25 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(MessagePaginateMessagesQuery)
 export class MessagePaginateMessagesQueryHandler
-    implements IQueryHandler<MessagePaginateMessagesQuery>
+  implements IQueryHandler<MessagePaginateMessagesQuery>
 {
-    constructor(
-        private readonly paginateMessagesService: MessagePaginateMessagesService,
-    ) {}
+  constructor(
+    private readonly paginateMessagesService: MessagePaginateMessagesService,
+  ) {}
 
-    async execute(
-        query: MessagePaginateMessagesQuery,
-    ): Promise<PaginationResponse> {
-        const { total, count, rows } = await this.paginateMessagesService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
+  async execute(
+    query: MessagePaginateMessagesQuery,
+  ): Promise<PaginationResponse> {
+    const { total, count, rows } = await this.paginateMessagesService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
 
-        return new PaginationResponse(
-            total,
-            count,
-            rows.map((item) => item.toDTO()),
-        );
-    }
+    return new PaginationResponse(
+      total,
+      count,
+      rows.map((item) => item.toDTO()),
+    );
+  }
 }

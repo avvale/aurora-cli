@@ -9,32 +9,50 @@ hasAuditing: true
 front:
   solidIcon: bug_report
   outlineIcon: bug_report
+description: >
+  Core module for support issue tracking. Manages bug reports, feature requests,
+  and support tickets. Integrates with external issue tracking systems.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the issue. UUID v4 format, generated automatically
+      on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing numeric identifier for internal use and ordering. Unique
+      across all issues.
   - name: externalId
     type: varchar
     maxLength: 64
     nullable: true
     index: index
+    description: >
+      External system identifier for bidirectional sync with platforms like Jira
+      or GitHub.
   - name: externalStatus
     type: varchar
     maxLength: 36
     nullable: true
+    description: >
+      Status value from the external tracking system for synchronization.
   - name: externalColorStatus
     type: varchar
     maxLength: 16
     nullable: true
+    description: >
+      Color code from external system for status visualization (HEX format).
   - name: accountId
     type: id
     nullable: true
+    description: >
+      ID of the account that reported the issue. NULL for anonymous reports.
     relationship:
       type: many-to-one
       aggregateName: IamAccount
@@ -46,42 +64,64 @@ aggregateProperties:
     type: varchar
     maxLength: 128
     nullable: true
+    description: >
+      Username snapshot at issue creation time. Denormalized for performance.
   - name: displayName
     type: varchar
     maxLength: 128
     nullable: true
+    description: >
+      Display name for users not authenticated in the system.
   - name: frontEnvironment
     type: varchar
     maxLength: 36
     nullable: true
+    description: >
+      Frontend environment where issue occurred (development, staging, production).
   - name: frontVersion
     type: varchar
     maxLength: 16
     nullable: true
+    description: >
+      Frontend application version at time of issue. Semver format.
   - name: backEnvironment
     type: varchar
     maxLength: 36
     nullable: true
+    description: >
+      Backend environment where issue occurred.
   - name: backVersion
     type: varchar
     maxLength: 16
     nullable: true
+    description: >
+      Backend application version at time of issue. Semver format.
   - name: subject
     type: varchar
     maxLength: 510
     nullable: false
+    description: >
+      Brief summary of the issue. Limited to ensure concise, scannable titles.
   - name: description
     type: text
     nullable: false
+    description: >
+      Detailed description including reproduction steps, expected vs actual behavior.
   - name: attachments
     type: jsonb
     nullable: true
+    description: >
+      JSON array of attachment metadata (screenshots, logs, files).
   - name: screenRecording
     type: jsonb
     nullable: true
+    description: >
+      Screen recording metadata showing the bug in action.
   - name: comments
     type: relationship
     nullable: true
+    description: >
+      One-to-many relationship with comments associated to this issue.
     relationship:
       type: one-to-many
       singularName: comment
@@ -91,15 +131,24 @@ aggregateProperties:
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+      Extensible metadata for custom attributes, labels, or priorities.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the issue was created. Auto-set on record creation.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the issue was last updated. Auto-set on record modification.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active record. When set, record is
+      excluded from normal queries.
 additionalApis:
   - path: support/config/create-webhook
     resolverType: mutation

@@ -6,16 +6,29 @@ aggregateName: WhatsappMessage
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+description: >
+  Represents individual WhatsApp messages (inbound and outbound). Each message
+  contains the full payload (text, media, templates, etc.) as JSONB, delivery
+  status tracking, and metadata. Links to timeline and conversation for context.
+  Supports all WhatsApp message types including text, media, interactive buttons,
+  and templates.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the message record. UUID v4 format, generated
+      automatically on creation.
   - name: wabaMessageId
     type: varchar
     maxLength: 128
     nullable: false
     index: unique
+    description: >
+      WhatsApp Business API message identifier. Unique ID assigned by WhatsApp
+      for each message sent or received. Used to track delivery status and match
+      webhook events to messages.
   - name: timelineId
     type: id
     nullable: false
@@ -26,6 +39,10 @@ aggregateProperties:
       key: id
       field: timeline
       avoidConstraint: true
+    description: >
+      Reference to the timeline this message belongs to. Links to the central
+      timeline entity providing unified view of all messages and conversations
+      for a specific customer contact and business phone number.
   - name: conversationId
     type: id
     nullable: true
@@ -36,6 +53,10 @@ aggregateProperties:
       key: id
       field: conversation
       avoidConstraint: true
+    description: >
+      Reference to the conversation this message belongs to. NULL if message
+      is outside a conversation window or conversation not yet created. Links
+      message to its billing and pricing context.
   - name: statuses
     type: array
     nullable: false
@@ -46,12 +67,21 @@ aggregateProperties:
         - DELIVERED
         - READ
         - SENT
+    description: >
+      Message delivery status tracking array. Contains chronological list of
+      status changes: SENT (submitted to WhatsApp), DELIVERED (received by
+      customer device), READ (opened by customer), ACCEPTED (WhatsApp accepted
+      for delivery). Updated via webhook events.
   - name: direction
     type: enum
     enumOptions:
       - INPUT
       - OUTPUT
     nullable: false
+    description: >
+      Message direction. INPUT: inbound message from customer to business.
+      OUTPUT: outbound message from business to customer. Used for filtering,
+      analytics, and determining billing responsibility.
   - name: accountId
     type: id
     nullable: true
@@ -61,15 +91,27 @@ aggregateProperties:
       modulePath: iam/account
       field: account
     index: index
+    description: >
+      Reference to the user account that sent or is assigned to this message.
+      NULL for inbound messages from customers. For outbound messages, identifies
+      the agent or system account responsible for sending.
   - name: wabaContactId
     type: varchar
     maxLength: 36
     nullable: false
     index: index
+    description: >
+      WhatsApp Business API contact identifier. Identifies the customer contact
+      involved in this message. Indexed for fast retrieval of all messages for
+      a specific contact.
   - name: contactName
     type: varchar
     maxLength: 127
     nullable: true
+    description: >
+      Display name of the contact. Cached from WhatsApp profile for quick access.
+      NULL if name not available or not yet synced. Used for display in UI without
+      additional lookups.
   - name: type
     type: enum
     nullable: false
@@ -89,18 +131,40 @@ aggregateProperties:
       - TEXT
       - UNKNOWN
       - VIDEO
+    description: >
+      WhatsApp message type. Defines the content format and structure in payload.
+      TEXT: plain text. IMAGE/VIDEO/AUDIO/DOCUMENT: media attachments. TEMPLATE:
+      pre-approved message templates. INTERACTIVE: buttons, lists. BUTTON: quick
+      reply. CONTACTS: vCard. LOCATION: geo coordinates. REACTION: emoji response.
+      STICKER: WhatsApp sticker. ORDER: commerce transaction. SYSTEM: status
+      updates. UNKNOWN: unrecognized type.
   - name: payload
     type: jsonb
     nullable: false
+    description: >
+      Full message content as JSONB. Structure varies by message type. Contains
+      all data from WhatsApp API including text, media URLs, button definitions,
+      template parameters, metadata, etc. Queryable using PostgreSQL JSONB
+      operators for filtering and analysis.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when this message record was created in the system. Automatically
+      set on insertion. May differ from WhatsApp message timestamp in payload.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last update to this message record. Automatically updated
+      on any modification, typically when delivery status changes.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active record. When set, message
+      is excluded from normal queries but preserved for audit trail, compliance,
+      and historical reporting.
 excludedFiles:
   - src/@api/whatsapp/message/dto/whatsapp-create-message.dto.ts
   - src/@api/whatsapp/message/controllers/whatsapp-create-message.controller.spec.ts

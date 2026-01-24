@@ -5,26 +5,26 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class ToolsFindKeyValueHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<ToolsKeyValue> {
-        const keyValue = await this.queryBus.ask(
-            new ToolsFindKeyValueQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<ToolsKeyValue> {
+    const keyValue = await this.queryBus.ask(
+      new ToolsFindKeyValueQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
 
-        if (!keyValue) {
-            throw new NotFoundException(`ToolsKeyValue not found`);
-        }
-
-        if (keyValue.type === ToolsKeyValueType.SECRET)
-            keyValue.value = Crypt.decryptWithAuroraPrivateKey(keyValue.value);
-
-        return keyValue;
+    if (!keyValue) {
+      throw new NotFoundException(`ToolsKeyValue not found`);
     }
+
+    if (keyValue.type === ToolsKeyValueType.SECRET)
+      keyValue.value = Crypt.decryptWithAuroraPrivateKey(keyValue.value);
+
+    return keyValue;
+  }
 }

@@ -9,40 +9,79 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:groups
   outlineIcon: mat_outline:groups
+description: >
+  Core role-based access control (RBAC) module managing user roles and their associated permissions.
+  Roles group permissions into reusable sets that can be assigned to accounts, enabling centralized
+  authorization management. Each role defines a set of capabilities and can control UI behavior
+  through navigation settings. Supports master roles (system-defined, non-deletable) and custom roles.
+  Related modules: iam/permission (capabilities), iam/account (users), iam/bounded-context (domains).
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the role. UUID v4 format, generated automatically on creation.
+      Used as primary key for referencing this role across the system.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing sequential identifier for the role.
+      Used for internal ordering and optimized queries. Unlike the UUID 'id',
+      this provides a human-readable sequential number for database operations.
   - name: name
-    description: The name of the role
+    description: >
+      Human-readable name for the role (e.g., "Administrator", "Content Editor").
+      Must be unique across all roles. Used in UI displays and audit logs.
+      Should clearly indicate the role's purpose and permissions scope.
+      Cannot be empty and must be meaningful for access control documentation.
     type: varchar
     maxLength: 128
     nullable: false
   - name: defaultRedirection
-    description: The default redirection URL for the role, after login will be redirected to this URL
+    description: >
+      Default landing page URL after successful authentication. Users with this role
+      will be redirected to this path after login. Must be a valid relative or absolute URL
+      (max 2046 characters per RFC 3986 recommendations). NULL indicates system default
+      redirection will be used. Used to create role-specific workflows and user experiences.
+      Example values: "/dashboard", "/reports/overview", "https://external-app.com/portal"
     type: varchar
     maxLength: 2046
     nullable: true
   - name: hasHiddenVerticalNavigation
-    description: Indicates if vertical navigation should be hidden
+    description: >
+      Controls visibility of the vertical navigation menu in the UI for users with this role.
+      When true, the left sidebar navigation is hidden, creating a simplified interface.
+      Useful for restricted roles that should only access specific pages via direct links
+      or custom dashboards (e.g., kiosk mode, limited-access users).
+      Defaults to false (navigation visible). NULL treated as false.
     type: boolean
     nullable: true
     defaultValue: false
     example: true
   - name: isMaster
-    description: Indicates if the role is created by default and cannot be deleted
+    description: >
+      Indicates if the role is created by default and cannot be deleted.
+      Master roles are system-defined, typically created during application bootstrap
+      (e.g., "SuperAdmin", "SystemAdmin"). They are protected from deletion to ensure
+      system integrity and prevent lockout scenarios. Custom roles have isMaster=false
+      and can be deleted if not in use. Required field, defaults to false.
     type: boolean
     nullable: false
     defaultValue: false
     example: false
   - name: permissions
-    description: The permissions that belong to the role
+    description: >
+      Many-to-many relationship defining the permissions granted to this role.
+      Each role can have zero or more permissions representing specific capabilities
+      (e.g., "Iam.CreateUser", "Sales.ViewReports"). Users assigned this role inherit
+      all associated permissions for authorization checks. Managed through the
+      iam_permissions_roles pivot table. Changes to role permissions automatically
+      trigger updates to denormalized permission data in all associated accounts.
+      NULL or empty indicates a role with no permissions (no access granted).
     type: relationship
     nullable: true
     webComponent:
@@ -91,7 +130,14 @@ aggregateProperties:
           - updateAndIncrement
           - upsert
   - name: accounts
-    description: The accounts that belong to the role
+    description: >
+      Many-to-many relationship with accounts that have been assigned this role.
+      An account can have multiple roles, and a role can be assigned to multiple accounts.
+      This enables flexible RBAC where users inherit permissions from all their assigned roles.
+      Managed through the iam_roles_accounts pivot table. When this relationship changes,
+      the affected accounts' denormalized permission structures (denormalizedPermissions,
+      denormalizedApplicationCodes) are automatically recalculated for fast authorization.
+      NULL or empty indicates a role not yet assigned to any accounts.
     type: relationship
     nullable: true
     relationship:
@@ -138,15 +184,29 @@ aggregateProperties:
           - updateAndIncrement
           - upsert
   - name: createdAt
-    description: The timestamp when the role was created
+    description: >
+      Timestamp when the role was created. Automatically set on record creation.
+      Part of the audit trail for tracking role lifecycle and compliance requirements.
+      Used for reporting on role creation patterns and security audits.
     type: timestamp
     nullable: true
   - name: updatedAt
-    description: The timestamp when the role was last updated
+    description: >
+      Timestamp of the last modification to this role. Automatically updated on any
+      field change. Used for tracking role evolution, cache invalidation, and audit
+      compliance. Particularly important for security audits to track when role
+      permissions or settings were modified. Critical for compliance with access
+      control change tracking requirements.
     type: timestamp
     nullable: true
   - name: deletedAt
-    description: The timestamp when the role was deleted
+    description: >
+      Soft delete timestamp. NULL indicates an active role. When set, the role is
+      hidden from normal queries but preserved for audit purposes and historical
+      data integrity. Deleted roles cannot be assigned to new accounts, but existing
+      assignments remain in the database for audit trails. Master roles (isMaster=true)
+      are protected and cannot be deleted. Used for compliance with data retention
+      policies while maintaining referential integrity.
     type: timestamp
     nullable: true
 additionalApis:

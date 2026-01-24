@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(ToolsCreatedWebhookLogEvent)
 export class ToolsCreatedWebhookLogEventHandler
-    implements IEventHandler<ToolsCreatedWebhookLogEvent>
+  implements IEventHandler<ToolsCreatedWebhookLogEvent>
 {
-    handle(event: ToolsCreatedWebhookLogEvent): void {
-        // console.log('ToolsCreatedWebhookLogEvent: ', event);
-    }
+  handle(event: ToolsCreatedWebhookLogEvent): void {
+    // console.log('ToolsCreatedWebhookLogEvent: ', event);
+  }
 }

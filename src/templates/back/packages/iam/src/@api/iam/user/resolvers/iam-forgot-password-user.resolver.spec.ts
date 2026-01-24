@@ -4,40 +4,40 @@ import { IamForgotPasswordUserHandler } from '../handlers/iam-forgot-password-us
 import { IamForgotPasswordUserResolver } from './iam-forgot-password-user.resolver';
 
 describe('IamForgotPasswordUserResolver', () => {
-    let resolver: IamForgotPasswordUserResolver;
-    let handler: IamForgotPasswordUserHandler;
+  let resolver: IamForgotPasswordUserResolver;
+  let handler: IamForgotPasswordUserHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                IamForgotPasswordUserResolver,
-                {
-                    provide: IamForgotPasswordUserHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        IamForgotPasswordUserResolver,
+        {
+          provide: IamForgotPasswordUserHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<IamForgotPasswordUserResolver>(
-            IamForgotPasswordUserResolver,
-        );
-        handler = module.get<IamForgotPasswordUserHandler>(
-            IamForgotPasswordUserHandler,
-        );
-    });
+    resolver = module.get<IamForgotPasswordUserResolver>(
+      IamForgotPasswordUserResolver,
+    );
+    handler = module.get<IamForgotPasswordUserHandler>(
+      IamForgotPasswordUserHandler,
+    );
+  });
 
+  test('IamForgotPasswordUserResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('IamForgotPasswordUserResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
-
-    describe('main', () => {
-        test('IamForgotPasswordUserResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-    });
+  });
 });

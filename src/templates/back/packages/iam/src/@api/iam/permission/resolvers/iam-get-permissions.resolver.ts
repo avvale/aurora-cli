@@ -1,3 +1,7 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission.aurora.yaml
+ */
 import { IamPermission } from '@api/graphql';
 import { IamGetPermissionsHandler } from '@api/iam/permission';
 import { Auth } from '@aurora/decorators';
@@ -7,14 +11,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('iam.permission.get')
 export class IamGetPermissionsResolver {
-    constructor(private readonly handler: IamGetPermissionsHandler) {}
+  constructor(private readonly handler: IamGetPermissionsHandler) {}
 
-    @Query('iamGetPermissions')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<IamPermission[]> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('iamGetPermissions')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<IamPermission[]> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

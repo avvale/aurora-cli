@@ -4,24 +4,27 @@ import { PaginationResponse } from '@aurorajs.dev/core';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(CommonPaginateAdministrativeAreasLevel3Query)
-export class CommonPaginateAdministrativeAreasLevel3QueryHandler implements IQueryHandler<CommonPaginateAdministrativeAreasLevel3Query>
+export class CommonPaginateAdministrativeAreasLevel3QueryHandler
+  implements IQueryHandler<CommonPaginateAdministrativeAreasLevel3Query>
 {
-    constructor(
-        private readonly paginateAdministrativeAreasLevel3Service: CommonPaginateAdministrativeAreasLevel3Service,
-    ) {}
+  constructor(
+    private readonly paginateAdministrativeAreasLevel3Service: CommonPaginateAdministrativeAreasLevel3Service,
+  ) {}
 
-    async execute(query: CommonPaginateAdministrativeAreasLevel3Query): Promise<PaginationResponse>
-    {
-        const { total, count, rows } = await this.paginateAdministrativeAreasLevel3Service.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
+  async execute(
+    query: CommonPaginateAdministrativeAreasLevel3Query,
+  ): Promise<PaginationResponse> {
+    const { total, count, rows } =
+      await this.paginateAdministrativeAreasLevel3Service.main(
+        query.queryStatement,
+        query.constraint,
+        query.cQMetadata,
+      );
 
-        return new PaginationResponse(
-            total,
-            count,
-            rows.map(item => item.toDTO()),
-        );
-    }
+    return new PaginationResponse(
+      total,
+      count,
+      rows.map((item) => item.toDTO()),
+    );
+  }
 }

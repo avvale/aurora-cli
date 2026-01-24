@@ -65,29 +65,29 @@ import { OAuthGetRefreshTokensService } from './application/get/o-auth-get-refre
 import { OAuthPaginateRefreshTokensService } from './application/paginate/o-auth-paginate-refresh-tokens.service';
 
 export const OAuthRefreshTokenHandlers = [
-    // commands
-    OAuthCreateRefreshTokenCommandHandler,
-    OAuthDeleteRefreshTokenByIdCommandHandler,
-    OAuthDeleteRefreshTokensCommandHandler,
+  // commands
+  OAuthCreateRefreshTokenCommandHandler,
+  OAuthDeleteRefreshTokenByIdCommandHandler,
+  OAuthDeleteRefreshTokensCommandHandler,
 
-    // queries
-    OAuthPaginateRefreshTokensQueryHandler,
-    OAuthGetRefreshTokensQueryHandler,
-    OAuthFindRefreshTokenQueryHandler,
-    OAuthFindRefreshTokenByIdQueryHandler,
+  // queries
+  OAuthPaginateRefreshTokensQueryHandler,
+  OAuthGetRefreshTokensQueryHandler,
+  OAuthFindRefreshTokenQueryHandler,
+  OAuthFindRefreshTokenByIdQueryHandler,
 
-    // events
-    OAuthCreatedRefreshTokenEventHandler,
-    OAuthDeletedRefreshTokenEventHandler,
-    OAuthDeletedRefreshTokensEventHandler,
+  // events
+  OAuthCreatedRefreshTokenEventHandler,
+  OAuthDeletedRefreshTokenEventHandler,
+  OAuthDeletedRefreshTokensEventHandler,
 ];
 
 export const OAuthRefreshTokenServices = [
-    OAuthCreateRefreshTokenService,
-    OAuthPaginateRefreshTokensService,
-    OAuthGetRefreshTokensService,
-    OAuthFindRefreshTokenService,
-    OAuthFindRefreshTokenByIdService,
-    OAuthDeleteRefreshTokenByIdService,
-    OAuthDeleteRefreshTokensService,
+  OAuthCreateRefreshTokenService,
+  OAuthPaginateRefreshTokensService,
+  OAuthGetRefreshTokensService,
+  OAuthFindRefreshTokenService,
+  OAuthFindRefreshTokenByIdService,
+  OAuthDeleteRefreshTokenByIdService,
+  OAuthDeleteRefreshTokensService,
 ];

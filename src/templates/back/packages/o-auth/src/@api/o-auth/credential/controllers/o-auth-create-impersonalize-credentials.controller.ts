@@ -9,25 +9,22 @@ import { OAuthCreateImpersonalizeCredentialsHandler } from '../handlers/o-auth-c
 @ApiTags('[o-auth] impersonalize')
 @Controller('o-auth/impersonalize-credentials')
 @Auth('oAuth.credential.impersonalize')
-export class OAuthCreateImpersonalizeCredentialsController
-{
-    constructor(
-        private readonly handler: OAuthCreateImpersonalizeCredentialsHandler,
-    ) {}
+export class OAuthCreateImpersonalizeCredentialsController {
+  constructor(
+    private readonly handler: OAuthCreateImpersonalizeCredentialsHandler,
+  ) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Create impersonalize credential' })
-    @ApiCreatedResponse({ description: 'The credential obtained impersonalize.', type: OAuthCreateCredentialsDto })
-    async main(
-        @Body() accountId: string,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    )
-    {
-        return await this.handler.main(
-            accountId,
-            timezone,
-            auditing,
-        );
-    }
+  @Post()
+  @ApiOperation({ summary: 'Create impersonalize credential' })
+  @ApiCreatedResponse({
+    description: 'The credential obtained impersonalize.',
+    type: OAuthCreateCredentialsDto,
+  })
+  async main(
+    @Body() accountId: string,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ) {
+    return await this.handler.main(accountId, timezone, auditing);
+  }
 }

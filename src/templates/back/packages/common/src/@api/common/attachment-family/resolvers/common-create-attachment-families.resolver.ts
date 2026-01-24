@@ -6,23 +6,17 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.attachmentFamily.create')
-export class CommonCreateAttachmentFamiliesResolver
-{
-    constructor(
-        private readonly handler: CommonCreateAttachmentFamiliesHandler,
-    ) {}
+export class CommonCreateAttachmentFamiliesResolver {
+  constructor(
+    private readonly handler: CommonCreateAttachmentFamiliesHandler,
+  ) {}
 
-    @Mutation('commonCreateAttachmentFamilies')
-    async main(
-        @Args('payload') payload: CommonCreateAttachmentFamilyInput[],
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<boolean>
-    {
-        return await this.handler.main(
-            payload,
-            timezone,
-            auditing,
-        );
-    }
+  @Mutation('commonCreateAttachmentFamilies')
+  async main(
+    @Args('payload') payload: CommonCreateAttachmentFamilyInput[],
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

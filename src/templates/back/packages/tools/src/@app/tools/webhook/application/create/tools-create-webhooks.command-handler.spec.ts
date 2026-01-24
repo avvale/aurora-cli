@@ -1,47 +1,47 @@
 import {
-    ToolsCreateWebhooksCommand,
-    toolsMockWebhookData,
+  ToolsCreateWebhooksCommand,
+  toolsMockWebhookData,
 } from '@app/tools/webhook';
 import { ToolsCreateWebhooksCommandHandler } from '@app/tools/webhook/application/create/tools-create-webhooks.command-handler';
 import { ToolsCreateWebhooksService } from '@app/tools/webhook/application/create/tools-create-webhooks.service';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('toolsCreateWebhooksCommandHandler', () => {
-    let commandHandler: ToolsCreateWebhooksCommandHandler;
+  let commandHandler: ToolsCreateWebhooksCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                ToolsCreateWebhooksCommandHandler,
-                {
-                    provide: ToolsCreateWebhooksService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        ToolsCreateWebhooksCommandHandler,
+        {
+          provide: ToolsCreateWebhooksService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<ToolsCreateWebhooksCommandHandler>(
-            ToolsCreateWebhooksCommandHandler,
-        );
+    commandHandler = module.get<ToolsCreateWebhooksCommandHandler>(
+      ToolsCreateWebhooksCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('ToolsCreateWebhooksCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('ToolsCreateWebhooksCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return ToolsMockWebhookData created', async () => {
-            expect(
-                await commandHandler.execute(
-                    new ToolsCreateWebhooksCommand(toolsMockWebhookData, {
-                        timezone: process.env.TZ,
-                    }),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return ToolsMockWebhookData created', async () => {
+      expect(
+        await commandHandler.execute(
+          new ToolsCreateWebhooksCommand(toolsMockWebhookData, {
+            timezone: process.env.TZ,
+          }),
+        ),
+      ).toBe(undefined);
     });
+  });
 });

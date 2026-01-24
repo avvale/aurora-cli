@@ -5,16 +5,16 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageFindInboxByIdService {
-    constructor(private readonly repository: MessageIInboxRepository) {}
+  constructor(private readonly repository: MessageIInboxRepository) {}
 
-    async main(
-        id: MessageInboxId,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<MessageInbox> {
-        return await this.repository.findById(id, {
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    id: MessageInboxId,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<MessageInbox> {
+    return await this.repository.findById(id, {
+      constraint,
+      cQMetadata,
+    });
+  }
 }

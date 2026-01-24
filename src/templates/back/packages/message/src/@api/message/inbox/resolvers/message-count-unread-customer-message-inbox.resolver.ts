@@ -8,17 +8,17 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('message.inbox.get')
 export class MessageCountUnreadCustomerMessageInboxResolver {
-    constructor(
-        private readonly handler: MessageCountUnreadCustomerMessageInboxHandler,
-    ) {}
+  constructor(
+    private readonly handler: MessageCountUnreadCustomerMessageInboxHandler,
+  ) {}
 
-    @Query('messageCountUnreadCustomerMessageInbox')
-    @TenantConstraint()
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-    ): Promise<number> {
-        return await this.handler.main(account, queryStatement, constraint);
-    }
+  @Query('messageCountUnreadCustomerMessageInbox')
+  @TenantConstraint()
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+  ): Promise<number> {
+    return await this.handler.main(account, queryStatement, constraint);
+  }
 }

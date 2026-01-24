@@ -9,56 +9,111 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:building-library
   outlineIcon: mat_outline:building-library
+description: >
+    Central file repository for reusable attachments shared across multiple entities.
+    Referenced by attachment module when files are stored in library rather than
+    uploaded individually. Optimizes storage by avoiding file duplication.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
+    description: >
+        Unique identifier for the library attachment. UUID v4 format, generated
+        automatically on creation.
   - name: originFilename
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+        Original filename as uploaded by the user, including extension (e.g., "vacation-photo.jpg").
+        Preserved for display purposes and download. Maximum 255 characters to accommodate
+        long filenames.
   - name: filename
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+        System-generated unique filename for storage, typically includes UUID to prevent
+        collisions (e.g., "a1b2c3d4-e5f6-7890-abcd-ef1234567890.jpg"). Used for actual
+        file storage and retrieval. Maximum 255 characters.
   - name: mimetype
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: false
+    description: >
+        MIME type of the file (e.g., "image/jpeg", "image/png", "application/pdf").
+        Used for content type headers and file validation. Determines how browsers
+        handle the file (display, download, etc.).
   - name: extension
     type: varchar
     maxLength: 10
     nullable: false
+    description: >
+        File extension without the dot (e.g., "jpg", "png", "pdf"). Extracted from
+        original filename or derived from MIME type. Used for file type validation
+        and icon display. Maximum 10 characters.
   - name: relativePathSegments
     type: json
     nullable: false
+    description: >
+        JSON array of path segments for organized storage (e.g., ["2024", "01", "products"]).
+        Combined with filename to construct full file path. Enables hierarchical
+        storage organization (by date, category, etc.). Required field.
   - name: width
     type: int
     unsigned: true
     nullable: false
+    description: >
+        Image width in pixels. For non-image files, typically set to 0. Used for
+        responsive image selection and display sizing. Required field for consistency.
   - name: height
     type: int
     unsigned: true
     nullable: false
+    description: >
+        Image height in pixels. For non-image files, typically set to 0. Used for
+        responsive image selection and aspect ratio calculations. Required field
+        for consistency.
   - name: size
     type: int
     unsigned: true
     nullable: false
+    description: >
+        File size in bytes. Used for storage quota management, upload limits, and
+        displaying file size to users. Required field. Unsigned integer allows files
+        up to 4GB.
   - name: url
     type: varchar
-    maxLength: 2047
+    maxLength: 2046
     nullable: false
+    description: >
+        Full public URL to access the file (e.g., "https://cdn.example.com/uploads/2024/01/file.jpg").
+        Can be absolute URL (CDN) or relative path. Used for direct file access in
+        frontend. Maximum 2046 characters for long URLs.
   - name: meta
     type: json
     nullable: true
+    description: >
+        Additional metadata about the file in JSON format (e.g., EXIF data for images,
+        camera model, GPS coordinates, color profile). Optional. Can store custom
+        properties for specific use cases.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp when the file was uploaded to the library. Automatically set on
+        insertion. Part of audit trail. Used for cleanup of old files.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp of the last update to the record metadata (not the file itself).
+        Automatically updated on modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+        Soft delete timestamp. NULL indicates active file. When set, file is excluded
+        from library browsing but not physically deleted. Allows recovery and maintains
+        references from attachment module.

@@ -4,37 +4,36 @@ import { MessageCountUnreadCustomerMessageInboxHandler } from '../handlers/messa
 import { MessageCountUnreadCustomerMessageInboxController } from './message-count-unread-customer-message-inbox.controller';
 
 describe('MessageCountUnreadCustomerMessageInboxController', () => {
-    let controller: MessageCountUnreadCustomerMessageInboxController;
-    let handler: MessageCountUnreadCustomerMessageInboxHandler;
+  let controller: MessageCountUnreadCustomerMessageInboxController;
+  let handler: MessageCountUnreadCustomerMessageInboxHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            controllers: [MessageCountUnreadCustomerMessageInboxController],
-            providers: [
-                {
-                    provide: MessageCountUnreadCustomerMessageInboxHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      controllers: [MessageCountUnreadCustomerMessageInboxController],
+      providers: [
+        {
+          provide: MessageCountUnreadCustomerMessageInboxHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        controller =
-            module.get<MessageCountUnreadCustomerMessageInboxController>(
-                MessageCountUnreadCustomerMessageInboxController,
-            );
-        handler = module.get<MessageCountUnreadCustomerMessageInboxHandler>(
-            MessageCountUnreadCustomerMessageInboxHandler,
-        );
+    controller = module.get<MessageCountUnreadCustomerMessageInboxController>(
+      MessageCountUnreadCustomerMessageInboxController,
+    );
+    handler = module.get<MessageCountUnreadCustomerMessageInboxHandler>(
+      MessageCountUnreadCustomerMessageInboxHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('MessageCountUnreadCustomerMessageInboxController should be defined', () => {
+      expect(controller).toBeDefined();
     });
-
-    describe('main', () => {
-        test('MessageCountUnreadCustomerMessageInboxController should be defined', () => {
-            expect(controller).toBeDefined();
-        });
-    });
+  });
 });

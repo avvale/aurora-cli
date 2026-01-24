@@ -9,40 +9,63 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:ads_click
   outlineIcon: mat_outline:ads_click
+description: >
+  Module containing OAuth 2.0 scopes that define granular permissions for API access.
+  Scopes are associated with roles and used to limit access tokens to specific operations
+  within the authorization framework.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the scope. UUID v4 format, generated automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing row identifier. Used for internal ordering and as a numeric alternative to UUID.
   - name: code
     type: varchar
     maxLength: 64
     nullable: false
     index: unique
     example: EDIT
+    description: >
+      Unique code identifier for the scope. Used in OAuth flows to request specific permissions.
+      Convention: Uppercase, underscore-separated (e.g., READ_USERS, EDIT_POSTS).
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      Human-readable name for the scope. Displayed in authorization prompts and admin interfaces.
   - name: roleIds
     type: array
     arrayOptions:
       type: id
     nullable: true
+    description: >
+      Array of role IDs that have access to this scope. Links scopes to the IAM role system for
+      permission management. NULL means no role restrictions.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the scope was created. Automatically set on creation.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the scope was last updated. Automatically updated on modification.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL means active scope. When set, scope is excluded from normal
+      queries but preserved for audit trail.
 excludedOperations:
   - count
   - createBatch

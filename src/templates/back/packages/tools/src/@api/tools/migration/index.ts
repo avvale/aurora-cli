@@ -106,60 +106,60 @@ import { ToolsLoadMigrationsService } from './shared/services/load-migrations.se
 /* #endregion customizations */
 
 export const ToolsMigrationApiControllers = [
-    ToolsCreateMigrationController,
-    ToolsCreateMigrationsController,
-    ToolsPaginateMigrationsController,
-    ToolsGetMigrationsController,
-    ToolsFindMigrationByIdController,
-    ToolsFindMigrationController,
-    ToolsUpdateMigrationByIdController,
-    ToolsUpdateMigrationsController,
-    ToolsDeleteMigrationByIdController,
-    ToolsDeleteMigrationsController,
+  ToolsCreateMigrationController,
+  ToolsCreateMigrationsController,
+  ToolsPaginateMigrationsController,
+  ToolsGetMigrationsController,
+  ToolsFindMigrationByIdController,
+  ToolsFindMigrationController,
+  ToolsUpdateMigrationByIdController,
+  ToolsUpdateMigrationsController,
+  ToolsDeleteMigrationByIdController,
+  ToolsDeleteMigrationsController,
 
-    // additionalApis
-    ToolsUpScriptMigrationController,
-    ToolsDownScriptMigrationController,
-    ToolsRunScriptsMigrationController,
+  // additionalApis
+  ToolsUpScriptMigrationController,
+  ToolsDownScriptMigrationController,
+  ToolsRunScriptsMigrationController,
 ];
 
 export const ToolsMigrationApiResolvers = [
-    ToolsCreateMigrationResolver,
-    ToolsCreateMigrationsResolver,
-    ToolsPaginateMigrationsResolver,
-    ToolsGetMigrationsResolver,
-    ToolsFindMigrationByIdResolver,
-    ToolsFindMigrationResolver,
-    ToolsUpdateMigrationByIdResolver,
-    ToolsUpdateMigrationsResolver,
-    ToolsDeleteMigrationByIdResolver,
-    ToolsDeleteMigrationsResolver,
+  ToolsCreateMigrationResolver,
+  ToolsCreateMigrationsResolver,
+  ToolsPaginateMigrationsResolver,
+  ToolsGetMigrationsResolver,
+  ToolsFindMigrationByIdResolver,
+  ToolsFindMigrationResolver,
+  ToolsUpdateMigrationByIdResolver,
+  ToolsUpdateMigrationsResolver,
+  ToolsDeleteMigrationByIdResolver,
+  ToolsDeleteMigrationsResolver,
 
-    // additionalApis
-    ToolsUpScriptMigrationResolver,
-    ToolsDownScriptMigrationResolver,
-    ToolsRunScriptsMigrationResolver,
+  // additionalApis
+  ToolsUpScriptMigrationResolver,
+  ToolsDownScriptMigrationResolver,
+  ToolsRunScriptsMigrationResolver,
 ];
 
 export const ToolsMigrationApiHandlers = [
-    ToolsCreateMigrationHandler,
-    ToolsCreateMigrationsHandler,
-    ToolsPaginateMigrationsHandler,
-    ToolsGetMigrationsHandler,
-    ToolsFindMigrationByIdHandler,
-    ToolsFindMigrationHandler,
-    ToolsUpdateMigrationByIdHandler,
-    ToolsUpdateMigrationsHandler,
-    ToolsDeleteMigrationByIdHandler,
-    ToolsDeleteMigrationsHandler,
+  ToolsCreateMigrationHandler,
+  ToolsCreateMigrationsHandler,
+  ToolsPaginateMigrationsHandler,
+  ToolsGetMigrationsHandler,
+  ToolsFindMigrationByIdHandler,
+  ToolsFindMigrationHandler,
+  ToolsUpdateMigrationByIdHandler,
+  ToolsUpdateMigrationsHandler,
+  ToolsDeleteMigrationByIdHandler,
+  ToolsDeleteMigrationsHandler,
 
-    // additionalApis
-    ToolsUpScriptMigrationHandler,
-    ToolsDownScriptMigrationHandler,
-    ToolsRunScriptsMigrationHandler,
+  // additionalApis
+  ToolsUpScriptMigrationHandler,
+  ToolsDownScriptMigrationHandler,
+  ToolsRunScriptsMigrationHandler,
 ];
 
 export const ToolsMigrationApiServices = [
-    ToolsMigrationSeeder,
-    ToolsLoadMigrationsService,
+  ToolsMigrationSeeder,
+  ToolsLoadMigrationsService,
 ];

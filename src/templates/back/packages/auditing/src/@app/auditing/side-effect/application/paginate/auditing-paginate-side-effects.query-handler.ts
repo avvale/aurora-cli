@@ -5,26 +5,25 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(AuditingPaginateSideEffectsQuery)
 export class AuditingPaginateSideEffectsQueryHandler
-    implements IQueryHandler<AuditingPaginateSideEffectsQuery>
+  implements IQueryHandler<AuditingPaginateSideEffectsQuery>
 {
-    constructor(
-        private readonly paginateSideEffectsService: AuditingPaginateSideEffectsService,
-    ) {}
+  constructor(
+    private readonly paginateSideEffectsService: AuditingPaginateSideEffectsService,
+  ) {}
 
-    async execute(
-        query: AuditingPaginateSideEffectsQuery,
-    ): Promise<PaginationResponse> {
-        const { total, count, rows } =
-            await this.paginateSideEffectsService.main(
-                query.queryStatement,
-                query.constraint,
-                query.cQMetadata,
-            );
+  async execute(
+    query: AuditingPaginateSideEffectsQuery,
+  ): Promise<PaginationResponse> {
+    const { total, count, rows } = await this.paginateSideEffectsService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
 
-        return new PaginationResponse(
-            total,
-            count,
-            rows.map((item) => item.toDTO()),
-        );
-    }
+    return new PaginationResponse(
+      total,
+      count,
+      rows.map((item) => item.toDTO()),
+    );
+  }
 }

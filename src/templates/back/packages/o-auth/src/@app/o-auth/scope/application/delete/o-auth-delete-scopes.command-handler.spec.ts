@@ -4,37 +4,37 @@ import { OAuthDeleteScopesService } from '@app/o-auth/scope/application/delete/o
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('OAuthDeleteScopesCommandHandler', () => {
-    let commandHandler: OAuthDeleteScopesCommandHandler;
+  let commandHandler: OAuthDeleteScopesCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                OAuthDeleteScopesCommandHandler,
-                {
-                    provide: OAuthDeleteScopesService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        OAuthDeleteScopesCommandHandler,
+        {
+          provide: OAuthDeleteScopesService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<OAuthDeleteScopesCommandHandler>(
-            OAuthDeleteScopesCommandHandler,
-        );
+    commandHandler = module.get<OAuthDeleteScopesCommandHandler>(
+      OAuthDeleteScopesCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('OAuthDeleteScopesCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('OAuthDeleteScopesCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(new OAuthDeleteScopesCommand()),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(await commandHandler.execute(new OAuthDeleteScopesCommand())).toBe(
+        undefined,
+      );
     });
+  });
 });

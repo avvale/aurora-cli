@@ -92,52 +92,52 @@ import { IamGetWithTenantConstraintTenantsResolver } from './resolvers/iam-get-w
 import { IamPaginateWithTenantConstraintTenantsResolver } from './resolvers/iam-paginate-with-tenant-constraint-tenants.resolver';
 
 export const IamTenantApiControllers = [
-    IamCreateTenantController,
-    IamCreateTenantsController,
-    IamPaginateTenantsController,
-    IamGetTenantsController,
-    IamFindTenantByIdController,
-    IamFindTenantController,
-    IamUpdateTenantByIdController,
-    IamUpdateTenantsController,
-    IamDeleteTenantByIdController,
-    IamDeleteTenantsController,
+  IamCreateTenantController,
+  IamCreateTenantsController,
+  IamPaginateTenantsController,
+  IamGetTenantsController,
+  IamFindTenantByIdController,
+  IamFindTenantController,
+  IamUpdateTenantByIdController,
+  IamUpdateTenantsController,
+  IamDeleteTenantByIdController,
+  IamDeleteTenantsController,
 
-    // additionalApis
-    IamGetWithTenantConstraintTenantsController,
-    IamPaginateWithTenantConstraintTenantsController,
+  // additionalApis
+  IamGetWithTenantConstraintTenantsController,
+  IamPaginateWithTenantConstraintTenantsController,
 ];
 
 export const IamTenantApiResolvers = [
-    IamCreateTenantResolver,
-    IamCreateTenantsResolver,
-    IamPaginateTenantsResolver,
-    IamGetTenantsResolver,
-    IamFindTenantByIdResolver,
-    IamFindTenantResolver,
-    IamUpdateTenantByIdResolver,
-    IamUpdateTenantsResolver,
-    IamDeleteTenantByIdResolver,
-    IamDeleteTenantsResolver,
+  IamCreateTenantResolver,
+  IamCreateTenantsResolver,
+  IamPaginateTenantsResolver,
+  IamGetTenantsResolver,
+  IamFindTenantByIdResolver,
+  IamFindTenantResolver,
+  IamUpdateTenantByIdResolver,
+  IamUpdateTenantsResolver,
+  IamDeleteTenantByIdResolver,
+  IamDeleteTenantsResolver,
 
-    // additionalApis
-    IamGetWithTenantConstraintTenantsResolver,
-    IamPaginateWithTenantConstraintTenantsResolver,
+  // additionalApis
+  IamGetWithTenantConstraintTenantsResolver,
+  IamPaginateWithTenantConstraintTenantsResolver,
 ];
 
 export const IamTenantApiHandlers = [
-    IamCreateTenantHandler,
-    IamCreateTenantsHandler,
-    IamPaginateTenantsHandler,
-    IamGetTenantsHandler,
-    IamFindTenantByIdHandler,
-    IamFindTenantHandler,
-    IamUpdateTenantByIdHandler,
-    IamUpdateTenantsHandler,
-    IamDeleteTenantByIdHandler,
-    IamDeleteTenantsHandler,
+  IamCreateTenantHandler,
+  IamCreateTenantsHandler,
+  IamPaginateTenantsHandler,
+  IamGetTenantsHandler,
+  IamFindTenantByIdHandler,
+  IamFindTenantHandler,
+  IamUpdateTenantByIdHandler,
+  IamUpdateTenantsHandler,
+  IamDeleteTenantByIdHandler,
+  IamDeleteTenantsHandler,
 
-    // additionalApis
+  // additionalApis
 ];
 
 export const IamTenantApiServices = [IamTenantSeeder];

@@ -72,33 +72,33 @@ import { SupportUpdateIssueByIdService } from './application/update/support-upda
 import { SupportUpdateIssuesService } from './application/update/support-update-issues.service';
 
 export const SupportIssueHandlers = [
-    // commands
-    SupportCreateIssueCommandHandler,
-    SupportUpdateIssueByIdCommandHandler,
-    SupportUpdateIssuesCommandHandler,
-    SupportDeleteIssueByIdCommandHandler,
+  // commands
+  SupportCreateIssueCommandHandler,
+  SupportUpdateIssueByIdCommandHandler,
+  SupportUpdateIssuesCommandHandler,
+  SupportDeleteIssueByIdCommandHandler,
 
-    // queries
-    SupportPaginateIssuesQueryHandler,
-    SupportGetIssuesQueryHandler,
-    SupportFindIssueQueryHandler,
-    SupportFindIssueByIdQueryHandler,
+  // queries
+  SupportPaginateIssuesQueryHandler,
+  SupportGetIssuesQueryHandler,
+  SupportFindIssueQueryHandler,
+  SupportFindIssueByIdQueryHandler,
 
-    // events
-    SupportCreatedIssueEventHandler,
-    SupportCreatedIssuesEventHandler,
-    SupportUpdatedIssueEventHandler,
-    SupportUpdatedIssuesEventHandler,
-    SupportDeletedIssueEventHandler,
+  // events
+  SupportCreatedIssueEventHandler,
+  SupportCreatedIssuesEventHandler,
+  SupportUpdatedIssueEventHandler,
+  SupportUpdatedIssuesEventHandler,
+  SupportDeletedIssueEventHandler,
 ];
 
 export const SupportIssueServices = [
-    SupportCreateIssueService,
-    SupportPaginateIssuesService,
-    SupportGetIssuesService,
-    SupportFindIssueService,
-    SupportFindIssueByIdService,
-    SupportUpdateIssueByIdService,
-    SupportUpdateIssuesService,
-    SupportDeleteIssueByIdService,
+  SupportCreateIssueService,
+  SupportPaginateIssuesService,
+  SupportGetIssuesService,
+  SupportFindIssueService,
+  SupportFindIssueByIdService,
+  SupportUpdateIssueByIdService,
+  SupportUpdateIssuesService,
+  SupportDeleteIssueByIdService,
 ];

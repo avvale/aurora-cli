@@ -7,18 +7,18 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MessageFindInboxHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        account: IamAccountResponse,
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<MessageInbox | MessageInboxDto> {
-        return await this.queryBus.ask(
-            new MessageFindInboxQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    account: IamAccountResponse,
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<MessageInbox | MessageInboxDto> {
+    return await this.queryBus.ask(
+      new MessageFindInboxQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

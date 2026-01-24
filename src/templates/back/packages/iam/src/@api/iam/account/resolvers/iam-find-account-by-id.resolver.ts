@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('iam.account.get')
 export class IamFindAccountByIdResolver {
-    constructor(private readonly handler: IamFindAccountByIdHandler) {}
+  constructor(private readonly handler: IamFindAccountByIdHandler) {}
 
-    @Query('iamFindAccountById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<IamAccount> {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Query('iamFindAccountById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<IamAccount> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

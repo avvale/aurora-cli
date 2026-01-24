@@ -1,13 +1,8 @@
-import { CommonCreatedAdministrativeAreaLevel2Event } from '@app/common/administrative-area-level-2';
 import { Injectable } from '@nestjs/common';
-import { ICommand, ofType, Saga } from '@nestjs/cqrs';
-import { Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
 
 @Injectable()
-export class CommonAdministrativeAreaLevel2Sagas
-{
-    /* @Saga()
+export class CommonAdministrativeAreaLevel2Sagas {
+  /* @Saga()
     dragonKilled = (events$: Observable<any>): Observable<ICommand> =>
     {
         return events$

@@ -4,44 +4,44 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { IamInheritPermissionsRoleRoleHandler } from './iam-inherit-permissions-role-role.handler';
 
 describe('IamInheritPermissionsRoleRoleHandler', () => {
-    let handler: IamInheritPermissionsRoleRoleHandler;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+  let handler: IamInheritPermissionsRoleRoleHandler;
+  let queryBus: IQueryBus;
+  let commandBus: ICommandBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                IamInheritPermissionsRoleRoleHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        IamInheritPermissionsRoleRoleHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<IamInheritPermissionsRoleRoleHandler>(
-            IamInheritPermissionsRoleRoleHandler,
-        );
-        queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
+    handler = module.get<IamInheritPermissionsRoleRoleHandler>(
+      IamInheritPermissionsRoleRoleHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+    commandBus = module.get<ICommandBus>(ICommandBus);
+  });
+
+  describe('main', () => {
+    test('IamInheritPermissionsRoleRoleHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
-
-    describe('main', () => {
-        test('IamInheritPermissionsRoleRoleHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-    });
+  });
 });

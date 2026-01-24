@@ -9,18 +9,18 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('iam.account.get')
 export class IamPaginateWithTenantConstraintAccountsResolver {
-    constructor(private readonly handler: IamPaginateAccountsHandler) {}
+  constructor(private readonly handler: IamPaginateAccountsHandler) {}
 
-    @Query('iamPaginateWithTenantConstraintAccounts')
-    @TenantConstraint({
-        targetProperty: 'dTenants',
-    })
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('iamPaginateWithTenantConstraintAccounts')
+  @TenantConstraint({
+    targetProperty: 'dTenants',
+  })
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

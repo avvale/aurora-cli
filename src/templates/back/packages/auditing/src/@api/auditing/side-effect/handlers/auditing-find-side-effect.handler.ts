@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingFindSideEffectHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<AuditingSideEffect | AuditingSideEffectDto> {
-        return await this.queryBus.ask(
-            new AuditingFindSideEffectQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<AuditingSideEffect | AuditingSideEffectDto> {
+    return await this.queryBus.ask(
+      new AuditingFindSideEffectQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

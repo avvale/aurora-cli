@@ -5,15 +5,13 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth()
 export class IamCheckUniqueUsernameAccountResolver {
-    constructor(
-        private readonly handler: IamCheckUniqueUsernameAccountHandler,
-    ) {}
+  constructor(private readonly handler: IamCheckUniqueUsernameAccountHandler) {}
 
-    @Query('iamCheckUniqueUsernameAccount')
-    async main(
-        @Args('username') username: string,
-        @Args('avoidUsernames') avoidUsernames?: string[],
-    ): Promise<boolean> {
-        return await this.handler.main(username, avoidUsernames);
-    }
+  @Query('iamCheckUniqueUsernameAccount')
+  async main(
+    @Args('username') username: string,
+    @Args('avoidUsernames') avoidUsernames?: string[],
+  ): Promise<boolean> {
+    return await this.handler.main(username, avoidUsernames);
+  }
 }

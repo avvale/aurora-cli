@@ -5,25 +5,23 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class SupportFindCommentByIdHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        id: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<SupportComment> {
-        const comment = await this.queryBus.ask(
-            new SupportFindCommentByIdQuery(id, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    id: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<SupportComment> {
+    const comment = await this.queryBus.ask(
+      new SupportFindCommentByIdQuery(id, constraint, {
+        timezone,
+      }),
+    );
 
-        if (!comment) {
-            throw new NotFoundException(
-                `SupportComment with id: ${id}, not found`,
-            );
-        }
-
-        return comment;
+    if (!comment) {
+      throw new NotFoundException(`SupportComment with id: ${id}, not found`);
     }
+
+    return comment;
+  }
 }

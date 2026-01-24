@@ -84,48 +84,48 @@ import { IamForgotPasswordUserResolver } from './resolvers/iam-forgot-password-u
 import { IamResetPasswordUserResolver } from './resolvers/iam-reset-password-user.resolver';
 
 export const IamUserApiControllers = [
-    IamPaginateUsersController,
-    IamGetUsersController,
-    IamFindUserByIdController,
-    IamFindUserController,
-    IamUpdateUserByIdController,
-    IamUpdateUsersController,
-    IamDeleteUserByIdController,
-    IamDeleteUsersController,
+  IamPaginateUsersController,
+  IamGetUsersController,
+  IamFindUserByIdController,
+  IamFindUserController,
+  IamUpdateUserByIdController,
+  IamUpdateUsersController,
+  IamDeleteUserByIdController,
+  IamDeleteUsersController,
 
-    // additionalApis
-    IamForgotPasswordUserController,
-    IamResetPasswordUserController,
+  // additionalApis
+  IamForgotPasswordUserController,
+  IamResetPasswordUserController,
 ];
 
 export const IamUserApiResolvers = [
-    IamPaginateUsersResolver,
-    IamGetUsersResolver,
-    IamFindUserByIdResolver,
-    IamFindUserResolver,
-    IamUpdateUserByIdResolver,
-    IamUpdateUsersResolver,
-    IamDeleteUserByIdResolver,
-    IamDeleteUsersResolver,
+  IamPaginateUsersResolver,
+  IamGetUsersResolver,
+  IamFindUserByIdResolver,
+  IamFindUserResolver,
+  IamUpdateUserByIdResolver,
+  IamUpdateUsersResolver,
+  IamDeleteUserByIdResolver,
+  IamDeleteUsersResolver,
 
-    // additionalApis
-    IamForgotPasswordUserResolver,
-    IamResetPasswordUserResolver,
+  // additionalApis
+  IamForgotPasswordUserResolver,
+  IamResetPasswordUserResolver,
 ];
 
 export const IamUserApiHandlers = [
-    IamPaginateUsersHandler,
-    IamGetUsersHandler,
-    IamFindUserByIdHandler,
-    IamFindUserHandler,
-    IamUpdateUserByIdHandler,
-    IamUpdateUsersHandler,
-    IamDeleteUserByIdHandler,
-    IamDeleteUsersHandler,
+  IamPaginateUsersHandler,
+  IamGetUsersHandler,
+  IamFindUserByIdHandler,
+  IamFindUserHandler,
+  IamUpdateUserByIdHandler,
+  IamUpdateUsersHandler,
+  IamDeleteUserByIdHandler,
+  IamDeleteUsersHandler,
 
-    // additionalApis
-    IamForgotPasswordUserHandler,
-    IamResetPasswordUserHandler,
+  // additionalApis
+  IamForgotPasswordUserHandler,
+  IamResetPasswordUserHandler,
 ];
 
 export const IamUserApiServices = [IamUserSeeder];

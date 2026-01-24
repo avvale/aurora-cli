@@ -12,22 +12,22 @@ import { MessageCountUnreadCustomerMessageInboxHandler } from '../handlers/messa
 @Controller('message/inbox/count-unread-customer-message')
 @Auth('message.inbox.get')
 export class MessageCountUnreadCustomerMessageInboxController {
-    constructor(
-        private readonly handler: MessageCountUnreadCustomerMessageInboxHandler,
-    ) {}
+  constructor(
+    private readonly handler: MessageCountUnreadCustomerMessageInboxHandler,
+  ) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: [MessageInboxDto],
-    })
-    @TenantConstraint()
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Body('query') queryStatement?: QueryStatement,
-        @Body('constraint') constraint?: QueryStatement,
-    ) {
-        return await this.handler.main(account, queryStatement, constraint);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: [MessageInboxDto],
+  })
+  @TenantConstraint()
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Body('query') queryStatement?: QueryStatement,
+    @Body('constraint') constraint?: QueryStatement,
+  ) {
+    return await this.handler.main(account, queryStatement, constraint);
+  }
 }

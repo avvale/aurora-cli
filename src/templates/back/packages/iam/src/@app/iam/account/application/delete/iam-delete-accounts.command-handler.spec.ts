@@ -4,37 +4,37 @@ import { IamDeleteAccountsService } from '@app/iam/account/application/delete/ia
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteAccountsCommandHandler', () => {
-    let commandHandler: IamDeleteAccountsCommandHandler;
+  let commandHandler: IamDeleteAccountsCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamDeleteAccountsCommandHandler,
-                {
-                    provide: IamDeleteAccountsService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamDeleteAccountsCommandHandler,
+        {
+          provide: IamDeleteAccountsService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<IamDeleteAccountsCommandHandler>(
-            IamDeleteAccountsCommandHandler,
-        );
+    commandHandler = module.get<IamDeleteAccountsCommandHandler>(
+      IamDeleteAccountsCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('IamDeleteAccountsCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('IamDeleteAccountsCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(new IamDeleteAccountsCommand()),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(await commandHandler.execute(new IamDeleteAccountsCommand())).toBe(
+        undefined,
+      );
     });
+  });
 });

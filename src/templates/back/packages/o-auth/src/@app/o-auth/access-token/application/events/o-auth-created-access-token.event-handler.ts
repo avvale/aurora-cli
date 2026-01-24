@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(OAuthCreatedAccessTokenEvent)
 export class OAuthCreatedAccessTokenEventHandler
-    implements IEventHandler<OAuthCreatedAccessTokenEvent>
+  implements IEventHandler<OAuthCreatedAccessTokenEvent>
 {
-    handle(event: OAuthCreatedAccessTokenEvent): void {
-        // console.log('OAuthCreatedAccessTokenEvent: ', event);
-    }
+  handle(event: OAuthCreatedAccessTokenEvent): void {
+    // console.log('OAuthCreatedAccessTokenEvent: ', event);
+  }
 }

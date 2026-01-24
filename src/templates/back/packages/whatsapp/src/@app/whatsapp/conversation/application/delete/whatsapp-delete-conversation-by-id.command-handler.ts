@@ -4,19 +4,19 @@ import { WhatsappConversationId } from '@app/whatsapp/conversation/domain/value-
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(WhatsappDeleteConversationByIdCommand)
-export class WhatsappDeleteConversationByIdCommandHandler implements ICommandHandler<WhatsappDeleteConversationByIdCommand>
+export class WhatsappDeleteConversationByIdCommandHandler
+  implements ICommandHandler<WhatsappDeleteConversationByIdCommand>
 {
-    constructor(
-        private readonly deleteConversationByIdService: WhatsappDeleteConversationByIdService,
-    ) {}
+  constructor(
+    private readonly deleteConversationByIdService: WhatsappDeleteConversationByIdService,
+  ) {}
 
-    async execute(command: WhatsappDeleteConversationByIdCommand): Promise<void>
-    {
-        // call to use case and implements ValueObjects
-        await this.deleteConversationByIdService.main(
-            new WhatsappConversationId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: WhatsappDeleteConversationByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteConversationByIdService.main(
+      new WhatsappConversationId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

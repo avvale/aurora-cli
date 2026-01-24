@@ -9,16 +9,24 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:workspaces
   outlineIcon: mat_outline:workspaces
+description: >
+  Module containing OAuth 2.0 clients. Clients represent different grant types and configurations
+  for applications. Each client defines how authentication flows work, token lifetimes, redirect
+  URLs, and available scopes. Clients belong to applications in a many-to-many relationship.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the client. UUID v4 format, generated automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing row identifier. Used for internal ordering and as a numeric alternative to UUID.
   - name: grantType
     type: enum
     enumOptions:
@@ -27,46 +35,80 @@ aggregateProperties:
       - PASSWORD
       - REFRESH_TOKEN
     nullable: false
+    description: >
+      OAuth 2.0 grant type for this client. AUTHORIZATION_CODE: Web apps with server backend.
+      CLIENT_CREDENTIALS: Machine-to-machine authentication. PASSWORD: Legacy username/password
+      flow. REFRESH_TOKEN: Used to obtain new access tokens.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      Human-readable name for the client. Displayed in authorization prompts and admin interfaces.
+      Example: "Web Application", "Mobile App - iOS".
   - name: secret
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      Client secret used for authentication. SECURITY: Must be stored securely, hashed, and
+      only shared with confidential clients. Not used for public clients (e.g., mobile apps).
   - name: authUrl
     type: varchar
     maxLength: 2046
     nullable: true
+    description: >
+      Authorization URL for the OAuth flow. Used in authorization_code grant to redirect users
+      for authentication. NULL for grant types that don't require user authorization.
   - name: redirect
     type: varchar
     maxLength: 2046
     nullable: true
+    description: >
+      Redirect URI where the authorization server sends the user after authorization. Must match
+      exactly for security. Multiple URIs can be stored as JSON array in production systems.
   - name: scopeOptions
     type: json
     nullable: true
-  - name: expiredAccessToken
+    description: >
+      JSON array of available scope codes for this client. Defines which permissions can be
+      requested. Example: ["read:users", "write:posts"]. NULL means all scopes available.
+  - name: accessTokenLifetimeSeconds
     type: int
     unsigned: true
     nullable: true
-  - name: expiredRefreshToken
+    description: >
+      Lifetime of access tokens in seconds. Determines how long access tokens remain valid
+      after creation. Typical values: 3600 (1 hour) to 86400 (24 hours). NULL uses system default.
+  - name: refreshTokenLifetimeSeconds
     type: int
     unsigned: true
     nullable: true
+    description: >
+      Lifetime of refresh tokens in seconds. Determines how long refresh tokens remain valid.
+      Typically much longer than access tokens: 2592000 (30 days) to 31536000 (1 year). NULL uses system default.
   - name: isActive
     type: boolean
     nullable: false
     defaultValue: false
     example: true
+    description: >
+      Indicates whether the client is currently active and can be used for authentication.
+      Inactive clients are rejected in OAuth flows. Use to temporarily disable clients.
   - name: isMaster
     type: boolean
     nullable: false
     defaultValue: false
     example: false
+    description: >
+      Indicates whether this is a master client with elevated privileges. Master clients
+      typically have access to all scopes and bypass certain restrictions.
   - name: applications
     type: relationship
     nullable: true
+    description: >
+      Many-to-many relationship with OAuth applications. A client can belong to multiple
+      applications, allowing shared client configurations across different services.
     relationship:
       type: many-to-many
       singularName: application
@@ -116,6 +158,9 @@ aggregateProperties:
   - name: accessTokens
     type: relationship
     nullable: true
+    description: >
+      One-to-many relationship with access tokens. A client can have multiple active access
+      tokens, each representing a different user session or API consumer.
     relationship:
       type: one-to-many
       singularName: accessToken
@@ -125,12 +170,19 @@ aggregateProperties:
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the client was created. Automatically set on creation.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the client was last updated. Automatically updated on modification.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL means active client. When set, client is excluded from
+      normal queries but preserved for audit trail.
 excludedOperations:
   - count
   - getRaw

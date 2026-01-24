@@ -7,14 +7,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.keyValue.get')
 export class ToolsFindKeyValueResolver {
-    constructor(private readonly handler: ToolsFindKeyValueHandler) {}
+  constructor(private readonly handler: ToolsFindKeyValueHandler) {}
 
-    @Query('toolsFindKeyValue')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<ToolsKeyValue> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('toolsFindKeyValue')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<ToolsKeyValue> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

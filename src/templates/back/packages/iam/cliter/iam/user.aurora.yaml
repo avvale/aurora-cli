@@ -6,16 +6,31 @@ aggregateName: IamUser
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+description: >
+  User profile and authentication credentials module storing personal information
+  and security data for authenticated users. Each user record is linked one-to-one
+  with an IamAccount and contains sensitive authentication data including hashed
+  passwords, 2FA secrets, and remember tokens. Handles password reset workflows
+  through additional APIs (forgot-password, reset-password). Stores personal
+  identifiable information (PII) requiring GDPR compliance and data protection.
+  Related modules: iam/account (authentication entity), common/lang (localization).
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the user. UUID v4 format, generated automatically on creation.
+      Used as primary key for referencing this user across the system.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing sequential identifier for the user.
+      Used for internal ordering, optimized queries, and legacy system compatibility.
+      Unlike the UUID 'id', this provides a human-readable sequential number.
   - name: accountId
     type: id
     nullable: false
@@ -24,53 +39,155 @@ aggregateProperties:
       aggregateName: IamAccount
       modulePath: iam/account
       field: account
+    description: >
+      Reference to the associated account entity (one-to-one relationship).
+      Each user must be linked to exactly one account, which handles authentication,
+      authorization, and role assignments. The account contains type, email, username,
+      and OAuth client information. This separation allows service accounts to exist
+      without user profiles, while user accounts always have profile data.
+      Must reference an existing active account.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      User's first name or given name. Required field for all user accounts.
+      Used in UI displays, email communications, and audit logs. Maximum 128 characters
+      to accommodate international names with special characters. Should be stored as
+      provided by the user without normalization to respect cultural naming conventions.
+      This is separate from the account username used for authentication.
   - name: surname
     type: varchar
     maxLength: 255
     nullable: true
+    description: >
+      User's last name or family name. Optional field (NULL allowed) as some cultures
+      may not use surnames. Maximum 255 characters to accommodate compound or hyphenated
+      surnames. Used together with 'name' for full name display and formal communications.
+      NULL indicates no surname provided or applicable.
   - name: avatar
     type: varchar
     maxLength: 255
     nullable: true
+    description: >
+      URL or file path to the user's profile picture/avatar image.
+      Maximum 255 characters for file path or URL. NULL indicates no avatar set
+      (system should display default placeholder). Should reference secure storage
+      (cloud storage bucket, CDN, or protected local path). For security, validate
+      file type and size before storage. Used in UI headers, comments, and user listings.
+      Example formats: "/storage/avatars/uuid.jpg" or "https://cdn.example.com/avatars/uuid.png"
   - name: mobile
     type: varchar
     maxLength: 64
     nullable: true
+    description: >
+      User's mobile phone number in international format. Optional field (NULL allowed).
+      Maximum 64 characters to accommodate international numbers with country codes
+      and extensions. Should be stored in E.164 format when possible (e.g., +14155552671)
+      for consistency. Used for SMS notifications, 2FA via SMS, and emergency contact.
+      NULL indicates no mobile number provided. Consider GDPR implications for storage.
   - name: langId
     type: id
     nullable: true
+    description: >
+      Reference to the user's preferred language/locale for UI and communications.
+      Links to common/lang module for internationalization (i18n) support.
+      NULL indicates system default language should be used. When set, all emails,
+      notifications, and UI elements should be rendered in this language.
+      Example: links to 'en-US', 'es-ES', 'fr-FR' language records.
+      Used by frontend for locale selection and backend for localized email templates.
   - name: password
     type: password
     maxLength: 255
     nullable: false
+    description: >
+      Hashed password for user authentication. NEVER stored in plain text.
+      Aurora automatically applies bcrypt hashing with salt (work factor 10-12).
+      Maximum 255 characters to accommodate hashed output (bcrypt produces 60 chars,
+      but allows room for future algorithm changes). Required field - users must set
+      password on creation. Updated through secure password change flows with current
+      password verification. Used in authentication middleware for login validation.
+      Password reset flows bypass this through token-based validation (see rememberToken).
+      Minimum requirements enforced at application layer: 8+ characters, complexity rules.
   - name: isTwoFactorAuthenticationEnabled
     type: boolean
     nullable: false
     defaultValue: false
+    description: >
+      Indicates whether two-factor authentication (2FA/MFA) is enabled for this user.
+      When true, login requires both password AND time-based one-time password (TOTP)
+      from authenticator app. Defaults to false (2FA disabled) - users must explicitly
+      enable and configure 2FA. When enabled, twoFactorAuthenticationSecret must be set.
+      Enhances account security by requiring a second authentication factor.
+      Cannot be disabled without proper identity verification to prevent account takeover.
   - name: twoFactorAuthenticationSecret
     type: varchar
-    maxLength: 16
+    maxLength: 32
     nullable: true
+    description: >
+      Base32-encoded secret key for TOTP (Time-based One-Time Password) generation.
+      Up to 32 characters in Base32 alphabet (A-Z, 2-7) per RFC 4648 and RFC 6238.
+      Longer secrets (160+ bits) provide stronger security against brute-force attacks.
+      NULL when 2FA is disabled. Generated during 2FA setup and shared with user via
+      QR code for authenticator app (Google Authenticator, Authy, etc.). MUST be stored
+      encrypted at rest for security. Used by authentication service to validate TOTP
+      codes during login. Should NEVER be exposed in APIs or logs. If compromised,
+      must be regenerated through 2FA reset flow. Paired with isTwoFactorAuthenticationEnabled.
   - name: rememberToken
     type: varchar
     maxLength: 255
     nullable: true
+    description: >
+      Secure token for "remember me" functionality and password reset workflows.
+      NULL when not in use. Generated as cryptographically secure random string
+      (recommended: 64+ characters, URL-safe). Used for two purposes:
+      1) Password reset: Temporary token sent via email, single-use, expires after
+         15-60 minutes. Invalidated after use or password change.
+      2) Remember me: Long-lived token stored in browser cookie for auto-login,
+         expires after 30-90 days of inactivity.
+      Should be hashed before storage for security. Regenerated on each use or
+      invalidated on security events (password change, logout from all devices).
+      NEVER expose in logs or error messages.
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+      Optional JSONB field for storing custom user metadata and preferences.
+      Use for application-specific data that doesn't warrant dedicated columns.
+      Common uses: UI preferences (theme, layout), notification settings,
+      onboarding status, feature flags, custom profile fields, integration metadata.
+      NULL indicates no custom metadata. Uses JSONB (PostgreSQL) for efficient
+      querying and indexing. No schema validation - structure determined by application.
+      Example: {"theme": "dark", "emailNotifications": true, "onboardingComplete": true}
+      Avoid storing sensitive data here - use dedicated encrypted fields instead.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the user profile was created. Automatically set on record insertion.
+      Part of audit trail for compliance and user lifecycle tracking. Used for reporting
+      on user registration patterns and account age calculations. Important for GDPR
+      data retention policies and user activity analysis.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last modification to this user profile. Automatically updated
+      on any field change. Used for tracking profile changes, cache invalidation,
+      and security audits. Important for detecting suspicious account modifications
+      and compliance with data change tracking requirements. Critical for audit logs
+      when combined with hasAuditing=true for tracking who made changes.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp for user accounts. NULL indicates an active user.
+      When set, the user is excluded from normal queries but preserved for audit
+      trail, legal compliance, and data retention policies. Soft-deleted users
+      cannot authenticate or be assigned to new resources. Used for GDPR "right to
+      be forgotten" compliance while maintaining referential integrity for historical
+      records (orders, audit logs, etc.). Consider anonymization of PII data
+      (name, email, mobile) after soft delete for privacy compliance.
 additionalApis:
   - path: iam/user/forgot-password
     resolverType: mutation

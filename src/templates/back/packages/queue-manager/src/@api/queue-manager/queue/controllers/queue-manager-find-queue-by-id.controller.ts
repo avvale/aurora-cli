@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
-    QueueManagerFindQueueByIdHandler,
-    QueueManagerQueueDto,
+  QueueManagerFindQueueByIdHandler,
+  QueueManagerQueueDto,
 } from '@api/queue-manager/queue';
 import { Auth } from '@aurora/decorators';
 import { QueryStatement, Timezone } from '@aurorajs.dev/core';
@@ -12,20 +12,20 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @Controller('queue-manager/queue/find')
 @Auth('queueManager.queue.get')
 export class QueueManagerFindQueueByIdController {
-    constructor(private readonly handler: QueueManagerFindQueueByIdHandler) {}
+  constructor(private readonly handler: QueueManagerFindQueueByIdHandler) {}
 
-    @Post(':id')
-    @HttpCode(200)
-    @ApiOperation({ summary: 'Find queue by id' })
-    @ApiOkResponse({
-        description: 'The record has been successfully requested.',
-        type: QueueManagerQueueDto,
-    })
-    async main(
-        @Param('id') id: string,
-        @Body('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ) {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Post(':id')
+  @HttpCode(200)
+  @ApiOperation({ summary: 'Find queue by id' })
+  @ApiOkResponse({
+    description: 'The record has been successfully requested.',
+    type: QueueManagerQueueDto,
+  })
+  async main(
+    @Param('id') id: string,
+    @Body('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ) {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

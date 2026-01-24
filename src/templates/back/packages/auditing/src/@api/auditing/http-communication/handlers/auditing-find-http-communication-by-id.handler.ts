@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AuditingFindHttpCommunicationByIdHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        id: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<AuditingHttpCommunication | AuditingHttpCommunicationDto> {
-        return await this.queryBus.ask(
-            new AuditingFindHttpCommunicationByIdQuery(id, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    id: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<AuditingHttpCommunication | AuditingHttpCommunicationDto> {
+    return await this.queryBus.ask(
+      new AuditingFindHttpCommunicationByIdQuery(id, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

@@ -1,112 +1,110 @@
 import {
-    QueueManagerQueue,
-    QueueManagerQueueResponse,
+  QueueManagerQueue,
+  QueueManagerQueueResponse,
 } from '@app/queue-manager/queue';
 import {
-    QueueManagerQueueCreatedAt,
-    QueueManagerQueueDeletedAt,
-    QueueManagerQueueId,
-    QueueManagerQueueName,
-    QueueManagerQueuePrefix,
-    QueueManagerQueueRowId,
-    QueueManagerQueueUpdatedAt,
+  QueueManagerQueueCreatedAt,
+  QueueManagerQueueDeletedAt,
+  QueueManagerQueueId,
+  QueueManagerQueueName,
+  QueueManagerQueuePrefix,
+  QueueManagerQueueRowId,
+  QueueManagerQueueUpdatedAt,
 } from '@app/queue-manager/queue/domain/value-objects';
 import {
-    CQMetadata,
-    IMapper,
-    LiteralObject,
-    MapperOptions,
+  CQMetadata,
+  IMapper,
+  LiteralObject,
+  MapperOptions,
 } from '@aurorajs.dev/core';
 
 export class QueueManagerQueueMapper implements IMapper {
-    constructor(public options: MapperOptions = { eagerLoading: true }) {}
+  constructor(public options: MapperOptions = { eagerLoading: true }) {}
 
-    /**
-     * Map object to aggregate
-     * @param queue
-     */
-    mapModelToAggregate(
-        queue: LiteralObject,
-        cQMetadata?: CQMetadata,
-    ): QueueManagerQueue {
-        if (!queue) return;
+  /**
+   * Map object to aggregate
+   * @param queue
+   */
+  mapModelToAggregate(
+    queue: LiteralObject,
+    cQMetadata?: CQMetadata,
+  ): QueueManagerQueue {
+    if (!queue) return;
 
-        return this.makeAggregate(queue, cQMetadata);
-    }
+    return this.makeAggregate(queue, cQMetadata);
+  }
 
-    /**
-     * Map array of objects to array aggregates
-     * @param queues
-     */
-    mapModelsToAggregates(
-        queues: LiteralObject[],
-        cQMetadata?: CQMetadata,
-    ): QueueManagerQueue[] {
-        if (!Array.isArray(queues)) return;
+  /**
+   * Map array of objects to array aggregates
+   * @param queues
+   */
+  mapModelsToAggregates(
+    queues: LiteralObject[],
+    cQMetadata?: CQMetadata,
+  ): QueueManagerQueue[] {
+    if (!Array.isArray(queues)) return;
 
-        return queues.map((queue) => this.makeAggregate(queue, cQMetadata));
-    }
+    return queues.map((queue) => this.makeAggregate(queue, cQMetadata));
+  }
 
-    /**
-     * Map aggregate to response
-     * @param queue
-     */
-    mapAggregateToResponse(
-        queue: QueueManagerQueue,
-    ): QueueManagerQueueResponse {
-        return this.makeResponse(queue);
-    }
+  /**
+   * Map aggregate to response
+   * @param queue
+   */
+  mapAggregateToResponse(queue: QueueManagerQueue): QueueManagerQueueResponse {
+    return this.makeResponse(queue);
+  }
 
-    /**
-     * Map array of aggregates to array responses
-     * @param queues
-     */
-    mapAggregatesToResponses(
-        queues: QueueManagerQueue[],
-    ): QueueManagerQueueResponse[] {
-        if (!Array.isArray(queues)) return;
+  /**
+   * Map array of aggregates to array responses
+   * @param queues
+   */
+  mapAggregatesToResponses(
+    queues: QueueManagerQueue[],
+  ): QueueManagerQueueResponse[] {
+    if (!Array.isArray(queues)) return;
 
-        return queues.map((queue) => this.makeResponse(queue));
-    }
+    return queues.map((queue) => this.makeResponse(queue));
+  }
 
-    private makeAggregate(
-        queue: LiteralObject,
-        cQMetadata?: CQMetadata,
-    ): QueueManagerQueue {
-        return QueueManagerQueue.register(
-            new QueueManagerQueueId(queue.id, { undefinable: true }),
-            new QueueManagerQueueRowId(queue.rowId, { undefinable: true }),
-            new QueueManagerQueuePrefix(queue.prefix, { undefinable: true }),
-            new QueueManagerQueueName(queue.name, { undefinable: true }),
-            new QueueManagerQueueCreatedAt(
-                queue.createdAt,
-                { undefinable: true },
-                { addTimezone: cQMetadata?.timezone },
-            ),
-            new QueueManagerQueueUpdatedAt(
-                queue.updatedAt,
-                { undefinable: true },
-                { addTimezone: cQMetadata?.timezone },
-            ),
-            new QueueManagerQueueDeletedAt(
-                queue.deletedAt,
-                { undefinable: true },
-                { addTimezone: cQMetadata?.timezone },
-            ),
-        );
-    }
+  private makeAggregate(
+    queue: LiteralObject,
+    cQMetadata?: CQMetadata,
+  ): QueueManagerQueue {
+    return QueueManagerQueue.register(
+      new QueueManagerQueueId(queue.id, { undefinable: true }),
+      new QueueManagerQueueRowId(queue.rowId, { undefinable: true }),
+      new QueueManagerQueuePrefix(queue.prefix, { undefinable: true }),
+      new QueueManagerQueueName(queue.name, { undefinable: true }),
+      new QueueManagerQueueCreatedAt(
+        queue.createdAt,
+        { undefinable: true },
+        { addTimezone: cQMetadata?.timezone },
+      ),
+      new QueueManagerQueueUpdatedAt(
+        queue.updatedAt,
+        { undefinable: true },
+        { addTimezone: cQMetadata?.timezone },
+      ),
+      new QueueManagerQueueDeletedAt(
+        queue.deletedAt,
+        { undefinable: true },
+        { addTimezone: cQMetadata?.timezone },
+      ),
+    );
+  }
 
-    private makeResponse(queue: QueueManagerQueue): QueueManagerQueueResponse {
-        if (!queue) return null;
+  private makeResponse(queue: QueueManagerQueue): QueueManagerQueueResponse {
+    if (!queue) return null;
 
-        return new QueueManagerQueueResponse(
-            queue.id.value,
-            queue.rowId.value,
-            queue.prefix.value,
-            queue.name.value,
-            queue.createdAt.value,
-            queue.updatedAt.value,
-            queue.deletedAt.value,
-        );
-    }
+    return new QueueManagerQueueResponse(
+      queue.id.value,
+      queue.rowId.value,
+      queue.prefix.value,
+      queue.name.value,
+      queue.createdAt.value,
+      queue.updatedAt.value,
+      queue.deletedAt.value,
+    );
+  }
 }

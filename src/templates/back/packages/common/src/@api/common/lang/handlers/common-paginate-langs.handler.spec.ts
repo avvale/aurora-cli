@@ -4,62 +4,57 @@ import { commonMockLangData } from '@app/common/lang';
 import { IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-describe('CommonPaginateLangsHandler', () =>
-{
-    let handler: CommonPaginateLangsHandler;
-    let queryBus: IQueryBus;
+describe('CommonPaginateLangsHandler', () => {
+  let handler: CommonPaginateLangsHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            providers: [
-                CommonPaginateLangsHandler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
-            ],
-        })
-            .compile();
-
-        handler = module.get<CommonPaginateLangsHandler>(CommonPaginateLangsHandler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
-    });
-
-    test('CommonPaginateLangsHandler should be defined', () =>
-    {
-        expect(handler).toBeDefined();
-    });
-
-    describe('main', () =>
-    {
-        test('CommonPaginateLangsHandler should be defined', () =>
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        CommonPaginateLangsHandler,
         {
-            expect(handler).toBeDefined();
-        });
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        test('should return a langs', async () =>
-        {
-            jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
-                total: commonMockLangData.length,
-                count: commonMockLangData.length,
-                rows : commonMockLangData,
-            })));
-            expect(
-                await handler.main(
-                    {},
-                    {},
-                ),
-            )
-                .toEqual({
-                    total: commonMockLangData.length,
-                    count: commonMockLangData.length,
-                    rows : commonMockLangData,
-                });
-        });
+    handler = module.get<CommonPaginateLangsHandler>(
+      CommonPaginateLangsHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  test('CommonPaginateLangsHandler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
+    test('CommonPaginateLangsHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
+
+    test('should return a langs', async () => {
+      jest.spyOn(queryBus, 'ask').mockImplementation(
+        () =>
+          new Promise((resolve) =>
+            resolve({
+              total: commonMockLangData.length,
+              count: commonMockLangData.length,
+              rows: commonMockLangData,
+            }),
+          ),
+      );
+      expect(await handler.main({}, {})).toEqual({
+        total: commonMockLangData.length,
+        count: commonMockLangData.length,
+        rows: commonMockLangData,
+      });
+    });
+  });
 });

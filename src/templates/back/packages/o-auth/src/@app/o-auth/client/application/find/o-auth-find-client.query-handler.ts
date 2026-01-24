@@ -1,26 +1,26 @@
 import {
-    OAuthClientMapper,
-    OAuthClientResponse,
-    OAuthFindClientQuery,
+  OAuthClientMapper,
+  OAuthClientResponse,
+  OAuthFindClientQuery,
 } from '@app/o-auth/client';
 import { OAuthFindClientService } from '@app/o-auth/client/application/find/o-auth-find-client.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(OAuthFindClientQuery)
 export class OAuthFindClientQueryHandler
-    implements IQueryHandler<OAuthFindClientQuery>
+  implements IQueryHandler<OAuthFindClientQuery>
 {
-    private readonly mapper: OAuthClientMapper = new OAuthClientMapper();
+  private readonly mapper: OAuthClientMapper = new OAuthClientMapper();
 
-    constructor(private readonly findClientService: OAuthFindClientService) {}
+  constructor(private readonly findClientService: OAuthFindClientService) {}
 
-    async execute(query: OAuthFindClientQuery): Promise<OAuthClientResponse> {
-        const client = await this.findClientService.main(
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
+  async execute(query: OAuthFindClientQuery): Promise<OAuthClientResponse> {
+    const client = await this.findClientService.main(
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
 
-        return this.mapper.mapAggregateToResponse(client);
-    }
+    return this.mapper.mapAggregateToResponse(client);
+  }
 }

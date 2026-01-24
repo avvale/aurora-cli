@@ -1,85 +1,87 @@
-/* eslint-disable quotes */
-/* eslint-disable key-spacing */
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission-role.aurora.yaml
+ */
 
 export const iamMockPermissionRoleData: any[] = [
-    {
-        permissionId: 'ee363465-ef85-44bc-8031-645e62e4786d',
-        roleId: '3d9f2890-2445-4a41-a3be-2353ee3a0cd9',
-    },
-    {
-        permissionId: 'cfa16a1f-244e-400a-9d14-629086ff90c9',
-        roleId: '54a181ca-5875-41d5-be38-70daaae1abbc',
-    },
-    {
-        permissionId: 'c29a24b0-f97d-4119-87a1-ce89f01b800c',
-        roleId: '0225ff1d-3304-49a3-82d5-488897e3eabe',
-    },
-    {
-        permissionId: '7c45ddfb-41a6-44ba-9161-a463047f6719',
-        roleId: 'cc634ab6-05dd-4051-b8e8-d7a0dc257e9b',
-    },
-    {
-        permissionId: 'b585955f-64f5-4f6a-944b-9bedd307697a',
-        roleId: 'f3b26508-dca6-441f-9a05-60b75ff6d4d4',
-    },
-    {
-        permissionId: '9f6facf7-46e6-485c-af80-011ea93a571b',
-        roleId: 'c5ca84e1-3ec1-4cba-9777-1fbe99cb55ab',
-    },
-    {
-        permissionId: '47dbd098-641f-4d52-aec3-18b076929e3e',
-        roleId: 'dafdd6b4-0e8b-4dad-a297-5d704a15e18b',
-    },
-    {
-        permissionId: '35ae0a0d-71f4-4035-a781-2d1447bbd47b',
-        roleId: '0b14df7c-2797-4f17-bc75-cf88a064a94b',
-    },
-    {
-        permissionId: 'a145fd44-b8ce-4e0c-9d11-4f41081a1ca7',
-        roleId: 'a6889aba-ed67-41d3-8c83-2c9841c1483b',
-    },
-    {
-        permissionId: '153b6f63-4e69-42eb-8aa0-b6ef6c443527',
-        roleId: '8169eaa6-0543-47bb-8380-7c850e692711',
-    },
-    {
-        permissionId: '87c285cd-f424-4668-88c0-07699f1966aa',
-        roleId: 'ebc1c62f-1895-4414-ad6c-87df6077b1b2',
-    },
-    {
-        permissionId: '9ede325c-c47b-4d50-9406-3037ed3695b6',
-        roleId: '99baffd7-71f0-4df8-8bc3-5b9bce0f7f79',
-    },
-    {
-        permissionId: '7c8328c0-1991-4995-b9f6-c919d967e87d',
-        roleId: 'c69c4593-5f5f-4e07-80c7-2690999da1c1',
-    },
-    {
-        permissionId: 'adb359af-8778-4967-9a7f-47b6b53ad99a',
-        roleId: 'f669e70a-ba46-4e2e-8653-f57db96f02c6',
-    },
-    {
-        permissionId: '11401111-738b-4331-bb85-2a342363b0e0',
-        roleId: '51414d65-09b3-4f65-81b8-e70a05b2e3ae',
-    },
-    {
-        permissionId: '10857e42-3257-4369-bec7-a4e7880de39d',
-        roleId: '0b0ff787-f9ec-4d74-92d4-dbf62b5e482a',
-    },
-    {
-        permissionId: '023afca3-70ea-4ad5-9795-d7e6e6404f85',
-        roleId: '24743570-7a75-4154-bece-dd7c8640d618',
-    },
-    {
-        permissionId: '4895fef5-e696-4697-90be-dc36e25ac6b9',
-        roleId: '8671094c-dff6-4c13-996d-0cefaa679bf8',
-    },
-    {
-        permissionId: 'f53609a9-b384-4043-a10a-fd784e1e60d0',
-        roleId: '08299b0b-9a5c-4670-a0e5-e53c4156ad8d',
-    },
-    {
-        permissionId: 'f8c26651-0c44-42be-949b-713d36e57a51',
-        roleId: '32313919-a7f8-49fd-9c9a-d27930eeb83d',
-    },
+  {
+    permissionId: 'bb07b52d-93e9-4b5c-bf3c-cb1b0eb3d603',
+    roleId: '65bd7f75-4f29-417c-a602-7d94e74598a3',
+  },
+  {
+    permissionId: '8dd35f3a-fa6f-47d5-9424-73a4bc7e19bd',
+    roleId: 'a30e5b09-1914-4377-829e-36548c769269',
+  },
+  {
+    permissionId: 'a5886b72-8053-49b0-b4f3-fb1a709f4db3',
+    roleId: '7293d606-2348-4010-bb73-a503e1811ae3',
+  },
+  {
+    permissionId: '036255fa-f743-4745-968e-71ea561908b7',
+    roleId: '6e0da99b-5fbf-4ef1-b5c1-97af0b09ece1',
+  },
+  {
+    permissionId: '06789467-43b1-46d4-b54e-2f94431a9c90',
+    roleId: '734f94d1-5f06-4433-880e-ca0287c7edd2',
+  },
+  {
+    permissionId: 'd57e54a0-b77b-4c62-8c59-4fb2e3d2f8b7',
+    roleId: '9a0057db-07b7-4478-b9fe-9e1489b0bc38',
+  },
+  {
+    permissionId: '302c4924-9412-48a6-ba52-6574015b8207',
+    roleId: '56795898-b61b-4185-ab84-5b8da2d7d19c',
+  },
+  {
+    permissionId: '90edadc6-32bb-4b39-b8c4-8316bef1fc4f',
+    roleId: '74179de3-8a07-465d-af19-8a258c91982d',
+  },
+  {
+    permissionId: '6b7d357f-3f17-410a-a668-dc626c24d73c',
+    roleId: '589e5c98-49d4-4967-a5f4-f68ae50c000f',
+  },
+  {
+    permissionId: '7774013a-dec9-434d-a5df-aa61c29071da',
+    roleId: 'c124d456-7d43-4f76-9be2-f358583f443a',
+  },
+  {
+    permissionId: '43b7e6a3-c46b-4134-ba4a-2656e04adc58',
+    roleId: '9236da89-764f-4d62-b714-6502699344d0',
+  },
+  {
+    permissionId: '4bda661c-9a9e-4e7d-b889-349df05a8f9f',
+    roleId: '41adee6b-6a10-4cff-ae87-469bb59942ae',
+  },
+  {
+    permissionId: 'a5ee8728-dab0-40da-a292-19013563db14',
+    roleId: 'f6ba5177-6b71-43a5-b98f-4fd400425bc6',
+  },
+  {
+    permissionId: '361f2ed7-37e4-4932-b1ee-df9c80542bb2',
+    roleId: 'b7ec5274-086e-4b34-9f9a-fd5658880dc4',
+  },
+  {
+    permissionId: '915b7d10-1455-4ac5-90a7-cd6ea0ad28b8',
+    roleId: '7ae899bc-0352-49f5-b63c-2d7c72c0c343',
+  },
+  {
+    permissionId: 'cb889b7a-5a8f-42c1-b332-fc6bcface122',
+    roleId: 'c0419163-cac8-4f62-a534-1e175474e552',
+  },
+  {
+    permissionId: 'aa5b790e-e6d2-4cf6-96fe-0dac7fd0245a',
+    roleId: '01ace836-cd35-460f-ac9a-4453c65fecdd',
+  },
+  {
+    permissionId: '91669cfe-ef64-48d1-a36a-2deb22ce317f',
+    roleId: '29480247-9f59-4f47-bdf1-0e02b37f8f4e',
+  },
+  {
+    permissionId: 'bb4d95ec-a039-463b-a599-c7d6a071224b',
+    roleId: 'e609f004-3398-4c9a-95c0-5969a06508c5',
+  },
+  {
+    permissionId: 'a761f9d1-2cda-4410-beb9-2694f1dcee52',
+    roleId: '68326b93-58b2-41fc-842f-a1c2b202a638',
+  },
 ];

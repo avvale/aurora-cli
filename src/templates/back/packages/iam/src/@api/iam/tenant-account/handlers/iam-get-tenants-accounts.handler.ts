@@ -5,17 +5,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamGetTenantsAccountsHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<IamTenantAccount[]> {
-        return await this.queryBus.ask(
-            new IamGetTenantsAccountsQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<IamTenantAccount[]> {
+    return await this.queryBus.ask(
+      new IamGetTenantsAccountsQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

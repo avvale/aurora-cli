@@ -1,191 +1,177 @@
-export interface WhatsappButton
-{
-    text: string;
-    payload: string;
+export interface WhatsappButton {
+  text: string;
+  payload: string;
 }
 
-export interface WhatsappChange
-{
-    field: string;
-    value: WhatsappValue;
+export interface WhatsappChange {
+  field: string;
+  value: WhatsappValue;
 }
 
-export interface WhatsappContact
-{
-    wa_id: string;
-    profile: WhatsappProfile;
+export interface WhatsappContact {
+  wa_id: string;
+  profile: WhatsappProfile;
 }
 
-export interface WhatsappContext
-{
-    id: string;
-    from: string;
+export interface WhatsappContext {
+  id: string;
+  from: string;
 }
 
-export interface WhatsappConversation
-{
-    id: string;
-    expiration_timestamp: string;
+export interface WhatsappConversation {
+  id: string;
+  expiration_timestamp: string;
 }
 
-export interface WhatsappEntry
-{
-    id: string;
-    changes: WhatsappChange[];
+export interface WhatsappEntry {
+  id: string;
+  changes: WhatsappChange[];
 }
 
-export interface WhatsappInteractive
-{
-    type: WhatsappInteractiveType;
-    header: WhatsappInteractiveHeader;
-    body: WhatsappInteractiveBody;
-    footer: WhatsappInteractiveFooter;
-    action: any;
-    list_reply: WhatsappInteractiveListReply;
+export interface WhatsappInteractive {
+  type: WhatsappInteractiveType;
+  header: WhatsappInteractiveHeader;
+  body: WhatsappInteractiveBody;
+  footer: WhatsappInteractiveFooter;
+  action: any;
+  list_reply: WhatsappInteractiveListReply;
 }
 
-export interface WhatsappInteractiveBody
-{
-    text?: string;
+export interface WhatsappInteractiveBody {
+  text?: string;
 }
 
-export interface WhatsappInteractiveFooter
-{
-    text?: string;
+export interface WhatsappInteractiveFooter {
+  text?: string;
 }
 
-export interface WhatsappInteractiveHeader
-{
-    type: WhatsappInteractiveHeaderType;
-    document?: object;
-    image?: object;
-    video?: object;
-    text?: string;
+export interface WhatsappInteractiveHeader {
+  type: WhatsappInteractiveHeaderType;
+  document?: object;
+  image?: object;
+  video?: object;
+  text?: string;
 }
 
-export type WhatsappInteractiveHeaderType = 'text' | 'video' | 'image' | 'document';
+export type WhatsappInteractiveHeaderType =
+  | 'text'
+  | 'video'
+  | 'image'
+  | 'document';
 
-export interface WhatsappInteractiveListReply
-{
-    id: string;
-    title: string;
-    description: string;
+export interface WhatsappInteractiveListReply {
+  id: string;
+  title: string;
+  description: string;
 }
 
 export type WhatsappInteractiveType =
-    'button' |
-    'catalog_message' |
-    'flow' |
-    'list' |
-    'list_reply' |
-    'product_list' |
-    'product';
+  | 'button'
+  | 'catalog_message'
+  | 'flow'
+  | 'list'
+  | 'list_reply'
+  | 'product_list'
+  | 'product';
 
-
-export interface WhatsappLocation
-{
-    latitude: string;
-    longitude: string;
-    name: string;
-    address: string;
+export interface WhatsappLocation {
+  latitude: string;
+  longitude: string;
+  name: string;
+  address: string;
 }
 
-export interface WhatsappMessage
-{
-    id: string;
-    from: string;
-    type: WhatsappMessageType;
-    reaction?: WhatsappReaction;
-    text?: WhatsappMessageText;
-    sticker?: WhatsappSticker;
-    location?: WhatsappLocation;
-    button?: WhatsappButton;
-    interactive?: WhatsappInteractive;
-    context?: WhatsappContext;
-    timestamp: string;
+export interface WhatsappMessage {
+  id: string;
+  from: string;
+  type: WhatsappMessageType;
+  reaction?: WhatsappReaction;
+  text?: WhatsappMessageText;
+  sticker?: WhatsappSticker;
+  location?: WhatsappLocation;
+  button?: WhatsappButton;
+  interactive?: WhatsappInteractive;
+  context?: WhatsappContext;
+  timestamp: string;
 }
 
-export interface WhatsappMessageText
-{
-    body: string;
+export interface WhatsappMessageText {
+  body: string;
 }
 
-export type WhatsappMessageType = 'audio' | 'button' | 'contacts' | 'documents' | 'image' | 'interactive' | 'location' | 'order' | 'reaction' | 'sticker' | 'system' | 'template' | 'text' | 'unknown' | 'video';
+export type WhatsappMessageType =
+  | 'audio'
+  | 'button'
+  | 'contacts'
+  | 'documents'
+  | 'image'
+  | 'interactive'
+  | 'location'
+  | 'order'
+  | 'reaction'
+  | 'sticker'
+  | 'system'
+  | 'template'
+  | 'text'
+  | 'unknown'
+  | 'video';
 
-export interface WhatsappMetadata
-{
-    display_phone_number: string;
-    phone_number_id: string;
+export interface WhatsappMetadata {
+  display_phone_number: string;
+  phone_number_id: string;
 }
 
-export interface WhatsappPayload
-{
-    object: string;
-    entry: WhatsappEntry[];
+export interface WhatsappPayload {
+  object: string;
+  entry: WhatsappEntry[];
 }
 
-export interface WhatsappPricing
-{
-    billable: boolean;
-    pricing_model: string;
-    category: string;
+export interface WhatsappPricing {
+  billable: boolean;
+  pricing_model: string;
+  category: string;
 }
 
-export interface WhatsappProfile
-{
-    name: string;
+export interface WhatsappProfile {
+  name: string;
 }
 
-export interface WhatsappReaction
-{
-    message_id: string;
-    emoji: string;
+export interface WhatsappReaction {
+  message_id: string;
+  emoji: string;
 }
 
-export interface WhatsappStatus
-{
-    id: string;
-    status: string;
-    timestamp: string;
-    conversation: WhatsappConversation;
-    pricing: WhatsappPricing;
+export interface WhatsappStatus {
+  id: string;
+  status: string;
+  timestamp: string;
+  conversation: WhatsappConversation;
+  pricing: WhatsappPricing;
 }
 
-export interface WhatsappSticker
-{
-    mime_type: string;
-    sha256: string;
-    id: string;
+export interface WhatsappSticker {
+  mime_type: string;
+  sha256: string;
+  id: string;
 }
 
-export interface WhatsappValue
-{
-    messaging_product: string;
-    metadata: WhatsappMetadata;
-    contacts: WhatsappContact[];
-    messages: WhatsappMessage[];
-    statuses: WhatsappStatus[];
+export interface WhatsappValue {
+  messaging_product: string;
+  metadata: WhatsappMetadata;
+  contacts: WhatsappContact[];
+  messages: WhatsappMessage[];
+  statuses: WhatsappStatus[];
 }
-
-
-
-
-
-
-
-
 
 // https://github.com/apimatic/whatsapp-typescript-sdk/tree/main/src/models
-export interface Button
-{
-    id: string;
-    title: string | number;
+export interface Button {
+  id: string;
+  title: string | number;
 }
 
-export interface ReplyButton
-{
-    type: 'reply';
-    reply: Button;
+export interface ReplyButton {
+  type: 'reply';
+  reply: Button;
 }
 
 import type { RequireAtLeastOne } from 'type-fest';
@@ -193,269 +179,285 @@ import type { RequireAtLeastOne } from 'type-fest';
 // https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages
 
 interface Message {
-    messaging_product: 'whatsapp';
-    recipient_type: 'individual';
-    to: string;
+  messaging_product: 'whatsapp';
+  recipient_type: 'individual';
+  to: string;
 }
 
 interface ContactName {
-    first_name?: string;
-    last_name?: string;
-    middle_name?: string;
-    suffix?: string;
-    prefix?: string;
+  first_name?: string;
+  last_name?: string;
+  middle_name?: string;
+  suffix?: string;
+  prefix?: string;
 }
 
 export interface Contact {
-    addresses?: {
-        street?: string;
-        city?: string;
-        state?: string;
-        zip?: string;
-        country?: string;
-        country_code?: string;
-        type?: 'HOME' | 'WORK';
-    }[];
-    birthday?: string; // YYYY-MM-DD
-    emails?: {
-        email?: string;
-        type: 'HOME' | 'WORK';
-    }[];
-    name: {
-        formatted_name: string;
-    } & RequireAtLeastOne<ContactName, 'first_name' | 'last_name' | 'middle_name' | 'prefix' | 'suffix'>;
-    org?: {
-        company?: string;
-        department?: string;
-        title?: string;
-    };
-    phones?: {
-        phone?: string;
-        type?: 'CELL' | 'MAIN' | 'IPHONE' | 'HOME' | 'WORK';
-        wa_id?: string;
-    }[];
-    urls?: {
-        url?: string;
-        type?: 'HOME' | 'WORK';
-    }[];
+  addresses?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    country?: string;
+    country_code?: string;
+    type?: 'HOME' | 'WORK';
+  }[];
+  birthday?: string; // YYYY-MM-DD
+  emails?: {
+    email?: string;
+    type: 'HOME' | 'WORK';
+  }[];
+  name: {
+    formatted_name: string;
+  } & RequireAtLeastOne<
+    ContactName,
+    'first_name' | 'last_name' | 'middle_name' | 'prefix' | 'suffix'
+  >;
+  org?: {
+    company?: string;
+    department?: string;
+    title?: string;
+  };
+  phones?: {
+    phone?: string;
+    type?: 'CELL' | 'MAIN' | 'IPHONE' | 'HOME' | 'WORK';
+    wa_id?: string;
+  }[];
+  urls?: {
+    url?: string;
+    type?: 'HOME' | 'WORK';
+  }[];
 }
 
 interface InteractiveHeaderText {
-    type: 'text';
-    text: string;
+  type: 'text';
+  text: string;
 }
 
 interface InteractiveHeaderVideo {
-    type: 'video';
-    video: Media;
+  type: 'video';
+  video: Media;
 }
 
 interface InteractiveHeaderImage {
-    type: 'image';
-    image: Media;
+  type: 'image';
+  image: Media;
 }
 
 interface InteractiveHeaderDocument {
-    type: 'document';
-    document: Media;
+  type: 'document';
+  document: Media;
 }
 
-export type InteractiveHeader = InteractiveHeaderText | InteractiveHeaderVideo |
-    InteractiveHeaderImage | InteractiveHeaderDocument;
+export type InteractiveHeader =
+  | InteractiveHeaderText
+  | InteractiveHeaderVideo
+  | InteractiveHeaderImage
+  | InteractiveHeaderDocument;
 
 export interface InteractiveBase {
-    body: {
-        text: string;
-    };
-    footer?: {
-        text: string;
-    };
-    header?: InteractiveHeader;
+  body: {
+    text: string;
+  };
+  footer?: {
+    text: string;
+  };
+  header?: InteractiveHeader;
 }
 
 export interface InteractiveReplyButton {
-    type: 'button';
-    action: {
-        buttons: ReplyButton[];
-    };
+  type: 'button';
+  action: {
+    buttons: ReplyButton[];
+  };
 }
 
 export interface InteractiveListMessage {
-    type: 'list';
-    action: {
-        button: string;
-        sections: {
-            title: string;
-            rows: {
-                id: string | number;
-                title: string | number;
-                description?: string;
-            }[];
-        }[];
-    };
+  type: 'list';
+  action: {
+    button: string;
+    sections: {
+      title: string;
+      rows: {
+        id: string | number;
+        title: string | number;
+        description?: string;
+      }[];
+    }[];
+  };
 }
 
-type Interactive = InteractiveBase & (InteractiveReplyButton | InteractiveListMessage);
+type Interactive = InteractiveBase &
+  (InteractiveReplyButton | InteractiveListMessage);
 
 export interface Location {
-    longitude: number;
-    latitude: number;
-    name?: string;
-    address?: string;
+  longitude: number;
+  latitude: number;
+  name?: string;
+  address?: string;
 }
 
 export interface MediaWithId {
-    id: string;
+  id: string;
 }
 
 export interface MediaWithLink {
-    link: string; // http/https
+  link: string; // http/https
 }
 
 export interface MediaBase {
-    caption?: string;
-    filename?: string;
+  caption?: string;
+  filename?: string;
 }
 
 export type Media = MediaBase & (MediaWithId | MediaWithLink);
 
 interface ParameterText {
-    type: 'text';
-    text: string;
+  type: 'text';
+  text: string;
 }
 
 interface ParameterCurrency {
-    type: 'currency';
-    fallback_value: string;
-    code: string;
-    amount_1000: number;
+  type: 'currency';
+  fallback_value: string;
+  code: string;
+  amount_1000: number;
 }
 
 interface ParameterDateTime {
-    type: 'date_time';
-    fallback_value: string;
+  type: 'date_time';
+  fallback_value: string;
 }
 
 interface ParameterImage {
-    type: 'image';
-    image: Media;
+  type: 'image';
+  image: Media;
 }
 
 interface ParameterDocument {
-    type: 'document';
-    document: Media;
+  type: 'document';
+  document: Media;
 }
 
 interface ParameterVideo {
-    type: 'video';
-    video: Media;
+  type: 'video';
+  video: Media;
 }
 
 interface TemplateComponentTypeHeader {
-    type: 'header';
+  type: 'header';
 }
 
 interface TemplateComponentTypeBody {
-    type: 'body';
-    parameters: (
-        ParameterText | ParameterCurrency | ParameterDateTime |
-        ParameterImage | ParameterDocument | ParameterVideo
-    )[];
+  type: 'body';
+  parameters: (
+    | ParameterText
+    | ParameterCurrency
+    | ParameterDateTime
+    | ParameterImage
+    | ParameterDocument
+    | ParameterVideo
+  )[];
 }
 
 interface TemplateComponentTypeButtonQuickReply {
-    sub_type: 'quick_reply';
-    parameters: {
-        type: 'payload' | 'text';
-        payload: any;
-        text: string;
-    }[];
+  sub_type: 'quick_reply';
+  parameters: {
+    type: 'payload' | 'text';
+    payload: any;
+    text: string;
+  }[];
 }
 
 interface TemplateComponentTypeButtonUrl {
-    sub_type: 'url';
-    parameters: {
-        type?: 'payload' | 'text';
-        payload?: any;
-        text: string;
-    }[];
+  sub_type: 'url';
+  parameters: {
+    type?: 'payload' | 'text';
+    payload?: any;
+    text: string;
+  }[];
 }
 
 interface TemplateComponentTypeButtonBase {
-    type: 'button';
-    index: 0 | 1 | 2;
+  type: 'button';
+  index: 0 | 1 | 2;
 }
 
-type TemplateComponentTypeButton = TemplateComponentTypeButtonBase & (
-    TemplateComponentTypeButtonQuickReply | TemplateComponentTypeButtonUrl
-);
+type TemplateComponentTypeButton = TemplateComponentTypeButtonBase &
+  (TemplateComponentTypeButtonQuickReply | TemplateComponentTypeButtonUrl);
 
-export type TemplateComponent = TemplateComponentTypeHeader | TemplateComponentTypeBody |
-    TemplateComponentTypeButton;
+export type TemplateComponent =
+  | TemplateComponentTypeHeader
+  | TemplateComponentTypeBody
+  | TemplateComponentTypeButton;
 
 export interface Template {
-    name: string;
-    language: {
-        policy?: 'deterministic';
-        code: string; // https://developers.facebook.com/docs/whatsapp/api/messages/message-templates#supported-languages
-    };
-    components?: TemplateComponent[];
+  name: string;
+  language: {
+    policy?: 'deterministic';
+    code: string; // https://developers.facebook.com/docs/whatsapp/api/messages/message-templates#supported-languages
+  };
+  components?: TemplateComponent[];
 }
 
 export interface Text {
-    body: string;
-    preview_url?: boolean;
+  body: string;
+  preview_url?: boolean;
 }
 
 export interface AudioMessage extends Message {
-    type: 'audio';
-    audio: Media;
+  type: 'audio';
+  audio: Media;
 }
 
 export interface ContactMessage extends Message {
-    type: 'contacts';
-    contacts: Contact[];
+  type: 'contacts';
+  contacts: Contact[];
 }
 
 export interface DocumentMessage extends Message {
-    type: 'document';
-    document: Media;
+  type: 'document';
+  document: Media;
 }
 
 export interface ImageMessage extends Message {
-    type: 'image';
-    image: Media;
+  type: 'image';
+  image: Media;
 }
 
 export interface InteractiveMessage extends Message {
-    type: 'interactive';
-    interactive: Interactive;
+  type: 'interactive';
+  interactive: Interactive;
 }
 
 export interface LocationMessage extends Message {
-    type: 'location';
-    location: Location;
+  type: 'location';
+  location: Location;
 }
 
 export interface StickerMessage extends Message {
-    type: 'sticker';
-    sticker: Media;
+  type: 'sticker';
+  sticker: Media;
 }
 
 export interface TemplateMessage extends Message {
-    type: 'template';
-    template: Template;
+  type: 'template';
+  template: Template;
 }
 
 export interface TextMessage extends Message {
-    type: 'text';
-    text: Text;
+  type: 'text';
+  text: Text;
 }
 
 export interface VideoMessage extends Message {
-    type: 'video';
-    video: Media;
+  type: 'video';
+  video: Media;
 }
 
-export type MediaMessage = AudioMessage | DocumentMessage | ImageMessage |
-    StickerMessage | VideoMessage;
+export type MediaMessage =
+  | AudioMessage
+  | DocumentMessage
+  | ImageMessage
+  | StickerMessage
+  | VideoMessage;

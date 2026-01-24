@@ -33,13 +33,13 @@ import { OAuthCreatedCredentialEventHandler } from './application/events/o-auth-
 import { OAuthCreateCredentialService } from './application/create/o-auth-create-credential.service';
 
 export const OAuthCredentialHandlers = [
-    // commands
-    OAuthCreateCredentialCommandHandler,
+  // commands
+  OAuthCreateCredentialCommandHandler,
 
-    // queries
+  // queries
 
-    // events
-    OAuthCreatedCredentialEventHandler,
+  // events
+  OAuthCreatedCredentialEventHandler,
 ];
 
 export const OAuthCredentialServices = [OAuthCreateCredentialService];

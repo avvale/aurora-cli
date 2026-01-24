@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(ToolsCreatedKeyValueEvent)
 export class ToolsCreatedKeyValueEventHandler
-    implements IEventHandler<ToolsCreatedKeyValueEvent>
+  implements IEventHandler<ToolsCreatedKeyValueEvent>
 {
-    handle(event: ToolsCreatedKeyValueEvent): void {
-        // console.log('ToolsCreatedKeyValueEvent: ', event);
-    }
+  handle(event: ToolsCreatedKeyValueEvent): void {
+    // console.log('ToolsCreatedKeyValueEvent: ', event);
+  }
 }

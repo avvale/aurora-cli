@@ -85,51 +85,51 @@ import { ToolsDigestWebhookResolver } from './resolvers/tools-digest-webhook.res
 import { ToolsWebhookKeyValueService } from './shared/tools-webhook-key-value.service';
 
 export const ToolsWebhookApiControllers = [
-    ToolsCreateWebhookController,
-    ToolsCreateWebhooksController,
-    ToolsPaginateWebhooksController,
-    ToolsGetWebhooksController,
-    ToolsFindWebhookByIdController,
-    ToolsFindWebhookController,
-    ToolsUpdateWebhookByIdController,
-    ToolsDeleteWebhookByIdController,
-    ToolsDeleteWebhooksController,
+  ToolsCreateWebhookController,
+  ToolsCreateWebhooksController,
+  ToolsPaginateWebhooksController,
+  ToolsGetWebhooksController,
+  ToolsFindWebhookByIdController,
+  ToolsFindWebhookController,
+  ToolsUpdateWebhookByIdController,
+  ToolsDeleteWebhookByIdController,
+  ToolsDeleteWebhooksController,
 
-    // additionalApis
-    ToolsDigestWebhookController,
+  // additionalApis
+  ToolsDigestWebhookController,
 ];
 
 export const ToolsWebhookApiResolvers = [
-    ToolsCreateWebhookResolver,
-    ToolsCreateWebhooksResolver,
-    ToolsPaginateWebhooksResolver,
-    ToolsGetWebhooksResolver,
-    ToolsFindWebhookByIdResolver,
-    ToolsFindWebhookResolver,
-    ToolsUpdateWebhookByIdResolver,
-    ToolsDeleteWebhookByIdResolver,
-    ToolsDeleteWebhooksResolver,
+  ToolsCreateWebhookResolver,
+  ToolsCreateWebhooksResolver,
+  ToolsPaginateWebhooksResolver,
+  ToolsGetWebhooksResolver,
+  ToolsFindWebhookByIdResolver,
+  ToolsFindWebhookResolver,
+  ToolsUpdateWebhookByIdResolver,
+  ToolsDeleteWebhookByIdResolver,
+  ToolsDeleteWebhooksResolver,
 
-    // additionalApis
-    ToolsDigestWebhookResolver,
+  // additionalApis
+  ToolsDigestWebhookResolver,
 ];
 
 export const ToolsWebhookApiHandlers = [
-    ToolsCreateWebhookHandler,
-    ToolsCreateWebhooksHandler,
-    ToolsPaginateWebhooksHandler,
-    ToolsGetWebhooksHandler,
-    ToolsFindWebhookByIdHandler,
-    ToolsFindWebhookHandler,
-    ToolsUpdateWebhookByIdHandler,
-    ToolsDeleteWebhookByIdHandler,
-    ToolsDeleteWebhooksHandler,
+  ToolsCreateWebhookHandler,
+  ToolsCreateWebhooksHandler,
+  ToolsPaginateWebhooksHandler,
+  ToolsGetWebhooksHandler,
+  ToolsFindWebhookByIdHandler,
+  ToolsFindWebhookHandler,
+  ToolsUpdateWebhookByIdHandler,
+  ToolsDeleteWebhookByIdHandler,
+  ToolsDeleteWebhooksHandler,
 
-    // additionalApis
-    ToolsDigestWebhookHandler,
+  // additionalApis
+  ToolsDigestWebhookHandler,
 ];
 
 export const ToolsWebhookApiServices = [
-    ToolsWebhookSeeder,
-    ToolsWebhookKeyValueService,
+  ToolsWebhookSeeder,
+  ToolsWebhookKeyValueService,
 ];

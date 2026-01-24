@@ -4,17 +4,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SupportGetIssuesService {
-    constructor(private readonly repository: SupportIIssueRepository) {}
+  constructor(private readonly repository: SupportIIssueRepository) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        cQMetadata?: CQMetadata,
-    ): Promise<SupportIssue[] | LiteralObject[]> {
-        return await this.repository.get({
-            queryStatement,
-            constraint,
-            cQMetadata,
-        });
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    cQMetadata?: CQMetadata,
+  ): Promise<SupportIssue[] | LiteralObject[]> {
+    return await this.repository.get({
+      queryStatement,
+      constraint,
+      cQMetadata,
+    });
+  }
 }

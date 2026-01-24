@@ -6,16 +6,27 @@ aggregateName: WhatsappConversation
 hasOAuth: true
 hasTenant: false
 hasAuditing: false
+description: >
+  Represents WhatsApp Business API conversations with customers. Each conversation
+  is a 24-hour messaging window initiated by customer or business. Links to timeline
+  for full conversation history. Contains pricing category and billing information
+  for cost tracking and attribution.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the conversation record. UUID v4 format, generated
+      automatically on creation.
   - name: wabaConversationId
     type: varchar
     maxLength: 63
     nullable: false
     index: unique
+    description: >
+      WhatsApp Business API conversation identifier. Unique ID assigned by WhatsApp
+      when a conversation window is opened. Used for API calls and webhook events.
   - name: timelineId
     type: id
     nullable: false
@@ -26,35 +37,68 @@ aggregateProperties:
       key: id
       field: timeline
       avoidConstraint: true
+    description: >
+      Reference to the timeline this conversation belongs to. Links to the central
+      timeline entity that groups all conversations and messages for a specific
+      customer contact and business phone number combination.
   - name: wabaContactId
     type: varchar
     maxLength: 36
     nullable: false
     index: index
+    description: >
+      WhatsApp Business API contact identifier. Unique ID for the customer contact
+      in this conversation. Indexed for fast lookup of conversations by contact.
   - name: expiration
     type: varchar
     maxLength: 36
     nullable: false
+    description: >
+      Conversation expiration timestamp. Indicates when the 24-hour conversation
+      window closes. After expiration, a new conversation must be initiated to
+      send messages to the customer.
   - name: category
     type: varchar
     maxLength: 63
     nullable: false
+    description: >
+      Conversation pricing category assigned by WhatsApp. Determines billing rate
+      based on conversation type (e.g., marketing, utility, authentication, service).
+      Used for cost calculation and reporting.
   - name: isBillable
     type: boolean
     nullable: false
+    description: >
+      Indicates whether this conversation is billable. Some conversations may be
+      free (e.g., first 1000 per month) or within a free tier. Used for accurate
+      cost tracking and billing reports.
   - name: pricingModel
     type: varchar
     maxLength: 36
     nullable: false
+    description: >
+      WhatsApp Business API pricing model applied to this conversation. Defines
+      how the conversation is billed (e.g., CBP - Conversation-Based Pricing).
+      Used for billing calculations and cost attribution.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when this conversation record was created in the system. Automatically
+      set on insertion.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last update to this conversation record. Automatically
+      updated on any modification.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active record. When set, conversation
+      is excluded from normal queries but preserved for audit trail and historical
+      reporting.
 excludedFiles:
   - src/@api/whatsapp/conversation/dto/whatsapp-create-conversation.dto.ts
   - src/@api/whatsapp/conversation/controllers/whatsapp-create-conversation.controller.spec.ts

@@ -4,33 +4,33 @@ import { ICommandBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamCreateTenantsHandler', () => {
-    let handler: IamCreateTenantsHandler;
+  let handler: IamCreateTenantsHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamCreateTenantsHandler,
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamCreateTenantsHandler,
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<IamCreateTenantsHandler>(IamCreateTenantsHandler);
+    handler = module.get<IamCreateTenantsHandler>(IamCreateTenantsHandler);
+  });
+
+  describe('main', () => {
+    test('IamCreateTenantsHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('IamCreateTenantsHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an iamMockTenantData created', async () => {
-            expect(await handler.main(iamMockTenantData)).toBe(true);
-        });
+    test('should return an iamMockTenantData created', async () => {
+      expect(await handler.main(iamMockTenantData)).toBe(true);
     });
+  });
 });

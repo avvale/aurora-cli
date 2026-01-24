@@ -4,37 +4,37 @@ import { MessageDeleteInboxesService } from '@app/message/inbox/application/dele
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('MessageDeleteInboxesCommandHandler', () => {
-    let commandHandler: MessageDeleteInboxesCommandHandler;
+  let commandHandler: MessageDeleteInboxesCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                MessageDeleteInboxesCommandHandler,
-                {
-                    provide: MessageDeleteInboxesService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        MessageDeleteInboxesCommandHandler,
+        {
+          provide: MessageDeleteInboxesService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<MessageDeleteInboxesCommandHandler>(
-            MessageDeleteInboxesCommandHandler,
-        );
+    commandHandler = module.get<MessageDeleteInboxesCommandHandler>(
+      MessageDeleteInboxesCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('MessageDeleteInboxesCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('MessageDeleteInboxesCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(new MessageDeleteInboxesCommand()),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(new MessageDeleteInboxesCommand()),
+      ).toBe(undefined);
     });
+  });
 });

@@ -4,19 +4,19 @@ import { CommonLangId } from '@app/common/lang/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonDeleteLangByIdCommand)
-export class CommonDeleteLangByIdCommandHandler implements ICommandHandler<CommonDeleteLangByIdCommand>
+export class CommonDeleteLangByIdCommandHandler
+  implements ICommandHandler<CommonDeleteLangByIdCommand>
 {
-    constructor(
-        private readonly deleteLangByIdService: CommonDeleteLangByIdService,
-    ) {}
+  constructor(
+    private readonly deleteLangByIdService: CommonDeleteLangByIdService,
+  ) {}
 
-    async execute(command: CommonDeleteLangByIdCommand): Promise<void>
-    {
-        // call to use case and implements ValueObjects
-        await this.deleteLangByIdService.main(
-            new CommonLangId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: CommonDeleteLangByIdCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteLangByIdService.main(
+      new CommonLangId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

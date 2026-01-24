@@ -5,23 +5,23 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamFindTenantAccountHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<IamTenantAccount> {
-        const tenantAccount = await this.queryBus.ask(
-            new IamFindTenantAccountQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<IamTenantAccount> {
+    const tenantAccount = await this.queryBus.ask(
+      new IamFindTenantAccountQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
 
-        if (!tenantAccount) {
-            throw new NotFoundException(`IamTenantAccount not found`);
-        }
-
-        return tenantAccount;
+    if (!tenantAccount) {
+      throw new NotFoundException(`IamTenantAccount not found`);
     }
+
+    return tenantAccount;
+  }
 }

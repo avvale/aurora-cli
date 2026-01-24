@@ -1,42 +1,56 @@
-import { QueueManagerQueueHandlers, QueueManagerQueueServices, QueueManagerQueueModel, QueueManagerIQueueRepository, QueueManagerSequelizeQueueRepository, QueueManagerQueueSagas } from './queue';
-import { QueueManagerJobRegistryHandlers, QueueManagerJobRegistryServices, QueueManagerJobRegistryModel, QueueManagerIJobRegistryRepository, QueueManagerSequelizeJobRegistryRepository, QueueManagerJobRegistrySagas } from './job-registry';
+import {
+  QueueManagerIJobRegistryRepository,
+  QueueManagerJobRegistryHandlers,
+  QueueManagerJobRegistryModel,
+  QueueManagerJobRegistrySagas,
+  QueueManagerJobRegistryServices,
+  QueueManagerSequelizeJobRegistryRepository,
+} from './job-registry';
+import {
+  QueueManagerIQueueRepository,
+  QueueManagerQueueHandlers,
+  QueueManagerQueueModel,
+  QueueManagerQueueSagas,
+  QueueManagerQueueServices,
+  QueueManagerSequelizeQueueRepository,
+} from './queue';
 
-export * from './queue';
 export * from './job-registry';
+export * from './queue';
 export * from './queue-manager.types';
-export { QueueDefinition, QUEUE_REDIS } from './queue-manager.types';
+export { QUEUE_REDIS, QueueDefinition } from './queue-manager.types';
 
 export const QueueManagerHandlers = [
-    ...QueueManagerQueueHandlers,
-    ...QueueManagerJobRegistryHandlers,
+  ...QueueManagerQueueHandlers,
+  ...QueueManagerJobRegistryHandlers,
 ];
 export const QueueManagerServices = [
-    ...QueueManagerQueueServices,
-    ...QueueManagerJobRegistryServices
+  ...QueueManagerQueueServices,
+  ...QueueManagerJobRegistryServices,
 ];
 export const QueueManagerModels = [
-    QueueManagerQueueModel,
-    QueueManagerJobRegistryModel
+  QueueManagerQueueModel,
+  QueueManagerJobRegistryModel,
 ];
 export const QueueManagerRepositories = [
-    {
-        provide : QueueManagerIQueueRepository,
-        useClass: QueueManagerSequelizeQueueRepository
-    },
-    {
-        provide : QueueManagerIJobRegistryRepository,
-        useClass: QueueManagerSequelizeJobRegistryRepository
-    },
-    {
-        provide : QueueManagerIQueueRepository,
-        useClass: QueueManagerSequelizeQueueRepository,
-    },
-    {
-        provide : QueueManagerIJobRegistryRepository,
-        useClass: QueueManagerSequelizeJobRegistryRepository,
-    }
+  {
+    provide: QueueManagerIQueueRepository,
+    useClass: QueueManagerSequelizeQueueRepository,
+  },
+  {
+    provide: QueueManagerIJobRegistryRepository,
+    useClass: QueueManagerSequelizeJobRegistryRepository,
+  },
+  {
+    provide: QueueManagerIQueueRepository,
+    useClass: QueueManagerSequelizeQueueRepository,
+  },
+  {
+    provide: QueueManagerIJobRegistryRepository,
+    useClass: QueueManagerSequelizeJobRegistryRepository,
+  },
 ];
 export const QueueManagerSagas = [
-    QueueManagerQueueSagas,
-    QueueManagerJobRegistrySagas
+  QueueManagerQueueSagas,
+  QueueManagerJobRegistrySagas,
 ];

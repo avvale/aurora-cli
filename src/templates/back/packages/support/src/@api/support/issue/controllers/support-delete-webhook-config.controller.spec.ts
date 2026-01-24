@@ -4,36 +4,36 @@ import { SupportDeleteWebhookConfigHandler } from '../handlers/support-delete-we
 import { SupportDeleteWebhookConfigController } from './support-delete-webhook-config.controller';
 
 describe('SupportDeleteWebhookConfigController', () => {
-    let controller: SupportDeleteWebhookConfigController;
-    let handler: SupportDeleteWebhookConfigHandler;
+  let controller: SupportDeleteWebhookConfigController;
+  let handler: SupportDeleteWebhookConfigHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            controllers: [SupportDeleteWebhookConfigController],
-            providers: [
-                {
-                    provide: SupportDeleteWebhookConfigHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      controllers: [SupportDeleteWebhookConfigController],
+      providers: [
+        {
+          provide: SupportDeleteWebhookConfigHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        controller = module.get<SupportDeleteWebhookConfigController>(
-            SupportDeleteWebhookConfigController,
-        );
-        handler = module.get<SupportDeleteWebhookConfigHandler>(
-            SupportDeleteWebhookConfigHandler,
-        );
+    controller = module.get<SupportDeleteWebhookConfigController>(
+      SupportDeleteWebhookConfigController,
+    );
+    handler = module.get<SupportDeleteWebhookConfigHandler>(
+      SupportDeleteWebhookConfigHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('SupportDeleteWebhookConfigController should be defined', () => {
+      expect(controller).toBeDefined();
     });
-
-    describe('main', () => {
-        test('SupportDeleteWebhookConfigController should be defined', () => {
-            expect(controller).toBeDefined();
-        });
-    });
+  });
 });

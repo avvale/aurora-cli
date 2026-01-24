@@ -2,10 +2,10 @@ import { AuditingDeletedHttpCommunicationEvent } from '@app/auditing/http-commun
 import { CQMetadata } from '@aurorajs.dev/core';
 
 export class AuditingDeletedHttpCommunicationsEvent {
-    constructor(
-        public readonly event: {
-            payload: AuditingDeletedHttpCommunicationEvent[];
-            cQMetadata?: CQMetadata;
-        },
-    ) {}
+  constructor(
+    public readonly event: {
+      payload: AuditingDeletedHttpCommunicationEvent[];
+      cQMetadata?: CQMetadata;
+    },
+  ) {}
 }

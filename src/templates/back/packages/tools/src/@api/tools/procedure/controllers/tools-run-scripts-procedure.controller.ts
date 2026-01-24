@@ -9,15 +9,15 @@ import { ToolsRunScriptsProcedureHandler } from '../handlers/tools-run-scripts-p
 @Controller('tools/procedure/run-scripts')
 @Auth('tools.procedure.update')
 export class ToolsRunScriptsProcedureController {
-    constructor(private readonly handler: ToolsRunScriptsProcedureHandler) {}
+  constructor(private readonly handler: ToolsRunScriptsProcedureHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(@Timezone() timezone?: string) {
-        return await this.handler.main(timezone);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(@Timezone() timezone?: string) {
+    return await this.handler.main(timezone);
+  }
 }

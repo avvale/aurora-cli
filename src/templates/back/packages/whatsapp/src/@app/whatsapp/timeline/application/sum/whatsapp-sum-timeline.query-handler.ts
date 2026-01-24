@@ -3,19 +3,19 @@ import { WhatsappSumTimelineService } from '@app/whatsapp/timeline/application/s
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(WhatsappSumTimelineQuery)
-export class WhatsappSumTimelineQueryHandler implements IQueryHandler<WhatsappSumTimelineQuery>
+export class WhatsappSumTimelineQueryHandler
+  implements IQueryHandler<WhatsappSumTimelineQuery>
 {
-    constructor(
-        private readonly sumTimelineService: WhatsappSumTimelineService,
-    ) {}
+  constructor(
+    private readonly sumTimelineService: WhatsappSumTimelineService,
+  ) {}
 
-    async execute(query: WhatsappSumTimelineQuery): Promise<number>
-    {
-        return await this.sumTimelineService.main(
-            query.column,
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: WhatsappSumTimelineQuery): Promise<number> {
+    return await this.sumTimelineService.main(
+      query.column,
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

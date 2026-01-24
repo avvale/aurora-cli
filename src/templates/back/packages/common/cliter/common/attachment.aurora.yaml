@@ -9,15 +9,20 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:paper-clip
   outlineIcon: mat_outline:paper-clip
+description: >
+    Core module for file attachments linked to entities. Handles uploaded files, metadata,
+    and relationships to resources. Supports image cropping, multiple sizes, and
+    language-specific attachments. Can reference attachment-library for shared files.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
+    description: >
+        Unique identifier for the attachment. UUID v4 format, generated automatically
+        on creation.
   - name: familyId
     type: id
-    length: 36
     nullable: true
     relationship:
       type: many-to-one
@@ -26,14 +31,20 @@ aggregateProperties:
       key: id
       field: family
       avoidConstraint: true
+    description: >
+        Foreign key to attachment family defining image processing rules. NULL means
+        no special processing applied. Determines dimensions, quality, and format
+        transformations for uploaded images.
   - name: attachableId
     type: id
-    length: 36
     nullable: false
     index: index
+    description: >
+        Polymorphic foreign key - ID of the entity this attachment belongs to
+        (e.g., product ID, user ID, article ID). Type determined by resource. Indexed
+        for efficient queries. Required field.
   - name: langId
     type: id
-    length: 36
     nullable: true
     relationship:
       type: many-to-one
@@ -42,61 +53,116 @@ aggregateProperties:
       key: id
       field: lang
       avoidConstraint: true
+    description: >
+        Foreign key to language for localized attachments. NULL means attachment
+        applies to all languages. Used for language-specific images (e.g., localized
+        product images, translated banners).
   - name: sort
     type: smallint
     unsigned: true
     nullable: true
+    description: >
+        Display order for multiple attachments on same entity. Lower values appear
+        first. NULL values typically sorted last. Used for gallery ordering, featured
+        image selection.
   - name: alt
     type: varchar
     maxLength: 255
     nullable: true
+    description: >
+        Alt text for images (accessibility and SEO). Describes image content for
+        screen readers and when image fails to load. Should be concise but descriptive.
+        Maximum 255 characters.
   - name: title
     type: varchar
     maxLength: 255
     nullable: true
+    description: >
+        Title or caption for the attachment. Displayed as tooltip, caption, or
+        heading. Can differ from filename. Used for descriptive labels in UI.
+        Maximum 255 characters.
   - name: originFilename
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+        Original filename as uploaded by the user, including extension (e.g., "product-photo.jpg").
+        Preserved for display purposes and download. Required field. Maximum 255
+        characters.
   - name: filename
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+        System-generated unique filename for storage, typically includes UUID to
+        prevent collisions (e.g., "a1b2c3d4-e5f6-7890-abcd-ef1234567890.jpg"). Used
+        for actual file storage and retrieval. Required field. Maximum 255 characters.
   - name: mimetype
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: false
+    description: >
+        MIME type of the file (e.g., "image/jpeg", "image/png", "application/pdf").
+        Used for content type headers and file validation. Determines how browsers
+        handle the file. Required field.
   - name: extension
     type: varchar
     maxLength: 10
     nullable: false
+    description: >
+        File extension without the dot (e.g., "jpg", "png", "pdf"). Extracted from
+        original filename or derived from MIME type. Used for file type validation
+        and icon display. Required field. Maximum 10 characters.
   - name: relativePathSegments
     type: json
     nullable: false
+    description: >
+        JSON array of path segments for organized storage (e.g., ["2024", "01", "products",
+        "product-id"]). Combined with filename to construct full file path. Enables
+        hierarchical storage organization. Required field.
   - name: width
     type: int
     unsigned: true
     nullable: true
+    description: >
+        Image width in pixels after processing. NULL for non-image files. Used for
+        responsive image selection and display sizing. Automatically set during
+        upload/processing.
   - name: height
     type: int
     unsigned: true
     nullable: true
+    description: >
+        Image height in pixels after processing. NULL for non-image files. Used
+        for responsive image selection and aspect ratio calculations. Automatically
+        set during upload/processing.
   - name: size
     type: int
     unsigned: true
     nullable: false
+    description: >
+        File size in bytes. Used for storage quota management, upload limits, and
+        displaying file size to users. Required field. Automatically set during
+        upload. Unsigned integer allows files up to 4GB.
   - name: url
     type: varchar
-    maxLength: 2047
+    maxLength: 2046
     nullable: false
+    description: >
+        Full public URL to access the file (e.g., "https://cdn.example.com/uploads/2024/01/file.jpg").
+        Can be absolute URL (CDN) or relative path. Used for direct file access in
+        frontend. Required field. Maximum 2046 characters.
   - name: isCropable
     type: boolean
     nullable: false
     defaultValue: false
     example: true
+    description: >
+        Indicates if the image can be cropped by users. TRUE: Enables crop UI in
+        frontend. FALSE: Image used as-is. Default FALSE. Used for user profile
+        pictures, product images where framing matters.
   - name: libraryId
     type: id
-    length: 36
     nullable: true
     relationship:
       type: many-to-one
@@ -105,25 +171,52 @@ aggregateProperties:
       key: id
       field: library
       avoidConstraint: true
+    description: >
+        Foreign key to library attachment if this attachment references a shared
+        file. NULL means file uploaded directly. Used to reuse files across entities
+        without duplication. Links to central repository.
   - name: libraryFilename
     type: varchar
     maxLength: 255
     nullable: true
+    description: >
+        Filename reference when using library attachment. Can differ from library's
+        filename if renamed for this context. NULL if not using library. Used for
+        custom naming while still referencing shared file.
   - name: sizes
     type: json
     nullable: true
+    description: >
+        JSON object containing URLs and metadata for generated image variations
+        (e.g., {"thumbnail": {url: "...", width: 150, height: 150}, "medium": {...}}).
+        Generated based on attachment family's sizes configuration. Used for responsive
+        images.
   - name: meta
     type: json
     nullable: true
+    description: >
+        Additional metadata about the file in JSON format (e.g., EXIF data for
+        images, camera model, GPS coordinates, color profile, crop coordinates).
+        Optional. Can store custom properties for specific use cases.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp when the attachment was created. Automatically set on insertion.
+        Part of audit trail. Used for sorting recent uploads.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp of the last update to the attachment record or file replacement.
+        Automatically updated on modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+        Soft delete timestamp. NULL indicates active attachment. When set, attachment
+        is excluded from entity but file preserved. Allows recovery. Physical file
+        deletion typically happens in background cleanup process.
 additionalApis:
   - path: common/attachment/delete
     resolverType: mutation

@@ -1,3 +1,6 @@
+# @aurora-generated
+# @source cliter/iam/permission-role.aurora.yaml
+
 type IamPermissionRole {
     permissionId: ID!
     permission: IamPermission

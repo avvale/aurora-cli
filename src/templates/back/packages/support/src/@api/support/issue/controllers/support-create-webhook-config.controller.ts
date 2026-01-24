@@ -9,18 +9,18 @@ import { SupportCreateWebhookConfigHandler } from '../handlers/support-create-we
 @Controller('support/config/create-webhook')
 @Auth('support.issue.update')
 export class SupportCreateWebhookConfigController {
-    constructor(private readonly handler: SupportCreateWebhookConfigHandler) {}
+  constructor(private readonly handler: SupportCreateWebhookConfigHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ) {
-        return await this.handler.main(timezone, auditing);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ) {
+    return await this.handler.main(timezone, auditing);
+  }
 }

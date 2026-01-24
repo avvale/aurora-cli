@@ -7,24 +7,22 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class QueueManagerFindQueueByIdHandler {
-    constructor(
-        private readonly queryBus: IQueryBus,
-        private readonly queueRedisImplementationService: QueueRedisImplementationService,
-    ) {}
+  constructor(
+    private readonly queryBus: IQueryBus,
+    private readonly queueRedisImplementationService: QueueRedisImplementationService,
+  ) {}
 
-    async main(
-        id: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<QueueManagerQueue | QueueManagerQueueDto> {
-        const queue = await this.queryBus.ask(
-            new QueueManagerFindQueueByIdQuery(id, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    id: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<QueueManagerQueue | QueueManagerQueueDto> {
+    const queue = await this.queryBus.ask(
+      new QueueManagerFindQueueByIdQuery(id, constraint, {
+        timezone,
+      }),
+    );
 
-        return await this.queueRedisImplementationService.addQueueCounters(
-            queue,
-        );
-    }
+    return await this.queueRedisImplementationService.addQueueCounters(queue);
+  }
 }

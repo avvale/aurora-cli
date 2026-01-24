@@ -1,49 +1,54 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/bounded-context.aurora.yaml
+ */
 import { IamBoundedContext } from '@api/graphql';
 import {
-    IamDeleteBoundedContextByIdCommand,
-    IamFindBoundedContextByIdQuery,
+  IamDeleteBoundedContextByIdCommand,
+  IamFindBoundedContextByIdQuery,
 } from '@app/iam/bounded-context';
 import {
-    AuditingMeta,
-    ICommandBus,
-    IQueryBus,
-    QueryStatement,
+  AuditingMeta,
+  ICommandBus,
+  IQueryBus,
+  QueryStatement,
 } from '@aurorajs.dev/core';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamDeleteBoundedContextByIdHandler {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(
-        id: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<IamBoundedContext> {
-        const boundedContext = await this.queryBus.ask(
-            new IamFindBoundedContextByIdQuery(id, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    id: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<IamBoundedContext> {
+    const boundedContext = await this.queryBus.ask(
+      new IamFindBoundedContextByIdQuery(id, constraint, {
+        timezone,
+      }),
+    );
 
-        if (!boundedContext)
-            throw new NotFoundException(
-                `IamBoundedContext with id: ${id}, not found`,
-            );
-
-        await this.commandBus.dispatch(
-            new IamDeleteBoundedContextByIdCommand(id, constraint, {
-                timezone,
-                repositoryOptions: {
-                    auditing,
-                },
-            }),
-        );
-
-        return boundedContext;
+    if (!boundedContext) {
+      throw new NotFoundException(
+        `IamBoundedContext with id: ${id}, not found`,
+      );
     }
+
+    await this.commandBus.dispatch(
+      new IamDeleteBoundedContextByIdCommand(id, constraint, {
+        timezone,
+        repositoryOptions: {
+          auditing,
+        },
+      }),
+    );
+
+    return boundedContext;
+  }
 }

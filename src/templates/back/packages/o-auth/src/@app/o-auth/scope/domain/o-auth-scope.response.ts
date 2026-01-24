@@ -1,12 +1,12 @@
 export class OAuthScopeResponse {
-    constructor(
-        public readonly id: string,
-        public readonly rowId: number,
-        public readonly code: string,
-        public readonly name: string,
-        public readonly roleIds: string[],
-        public readonly createdAt: string,
-        public readonly updatedAt: string,
-        public readonly deletedAt: string,
-    ) {}
+  constructor(
+    public readonly id: string,
+    public readonly rowId: number,
+    public readonly code: string,
+    public readonly name: string,
+    public readonly roleIds: string[],
+    public readonly createdAt: string,
+    public readonly updatedAt: string,
+    public readonly deletedAt: string,
+  ) {}
 }

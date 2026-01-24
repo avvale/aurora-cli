@@ -11,27 +11,27 @@ import { MessagePaginateCustomerMessagesInboxHandler } from '../handlers/message
 @Controller('message/inbox/paginate-customer-messages')
 @Auth()
 export class MessagePaginateCustomerMessagesInboxController {
-    constructor(
-        private readonly handler: MessagePaginateCustomerMessagesInboxHandler,
-    ) {}
+  constructor(
+    private readonly handler: MessagePaginateCustomerMessagesInboxHandler,
+  ) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: [MessageInboxDto],
-    })
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Body('query') queryStatement?: QueryStatement,
-        @Body('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ) {
-        return await this.handler.main(
-            account,
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: [MessageInboxDto],
+  })
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Body('query') queryStatement?: QueryStatement,
+    @Body('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ) {
+    return await this.handler.main(
+      account,
+      queryStatement,
+      constraint,
+      timezone,
+    );
+  }
 }

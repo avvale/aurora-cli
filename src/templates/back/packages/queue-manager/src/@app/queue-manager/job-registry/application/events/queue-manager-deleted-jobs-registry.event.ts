@@ -2,10 +2,10 @@ import { QueueManagerDeletedJobRegistryEvent } from '@app/queue-manager/job-regi
 import { CQMetadata } from '@aurorajs.dev/core';
 
 export class QueueManagerDeletedJobsRegistryEvent {
-    constructor(
-        public readonly event: {
-            payload: QueueManagerDeletedJobRegistryEvent[];
-            cQMetadata?: CQMetadata;
-        },
-    ) {}
+  constructor(
+    public readonly event: {
+      payload: QueueManagerDeletedJobRegistryEvent[];
+      cQMetadata?: CQMetadata;
+    },
+  ) {}
 }

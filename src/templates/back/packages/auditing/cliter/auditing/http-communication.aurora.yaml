@@ -11,16 +11,25 @@ front:
   outlineIcon: http
   solidFontSetIcon: material-symbols-outlined
   solidIcon: http
+description: >
+  Module for auditing HTTP communications between systems. Records all HTTP
+  requests and responses (both successful and failed) for debugging,
+  compliance, and reprocessing purposes. Supports retry tracking and links
+  related communications for troubleshooting.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the HTTP communication record. UUID v4 format, generated automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Sequential numeric identifier for sorting and pagination. Auto-incremented, unique per record. Used for efficient range queries.
   - name: tags
     type: array
     arrayOptions:
@@ -28,6 +37,8 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+      Array of string tags for categorizing and filtering HTTP communications. Indexed with GIN for fast search. Example: ['external-api', 'retry', 'critical'].
   - name: event
     type: enum
     enumOptions:
@@ -37,49 +48,75 @@ aggregateProperties:
       - RESPONSE_REJECTED
     nullable: false
     example: AuditingHttpCommunicationEvent.REQUEST_FULFILLED
+    description: >
+      Type of HTTP communication event. REQUEST_FULFILLED: successful request. REQUEST_REJECTED: request failed. RESPONSE_FULFILLED: successful response. RESPONSE_REJECTED: response failed.
   - name: status
     type: smallint
     unsigned: true
     nullable: true
+    description: >
+      HTTP status code of the response (e.g., 200, 404, 500). NULL if request failed before receiving a response.
   - name: method
     type: varchar
     maxLength: 25
     nullable: false
+    description: >
+      HTTP method used for the request (GET, POST, PUT, PATCH, DELETE). Max 25 characters.
   - name: url
     type: varchar
     maxLength: 2046
     nullable: false
-  - name: httpRequest
+    description: >
+      Full URL of the HTTP request including protocol, host, path, and query string. Max 2046 characters.
+  - name: requestData
     type: jsonb
     nullable: true
-  - name: httpRequestRejected
+    description: >
+      Complete HTTP request data including headers, body, and metadata. Stored as JSONB for queryability. NULL if request failed before serialization.
+  - name: requestError
     type: jsonb
     nullable: true
-  - name: httpResponse
+    description: >
+      Error details when request preparation or sending fails. Contains error message and context. NULL for successful requests.
+  - name: responseData
     type: jsonb
     nullable: true
-  - name: httpResponseRejected
+    description: >
+      Complete HTTP response data including status, headers, and body. Stored as JSONB. NULL if response was not received.
+  - name: responseError
     type: jsonb
     nullable: true
+    description: >
+      Error details when response processing fails. Contains error message and context. NULL for successful responses.
   - name: isReprocessing
     type: boolean
     nullable: false
     defaultValue: false
     example: true
-  - name: reprocessingHttpCommunicationId
+    description: >
+      Flag indicating if this is a reprocessed communication. TRUE: retry attempt. FALSE: original request. Default: false.
+  - name: originalCommunicationId
     type: id
     nullable: true
     index: index
+    description: >
+      Reference to the original HTTP communication being reprocessed. NULL for original requests. Indexed for linking retry chains.
   - name: createdAt
     type: timestamp
     nullable: true
     index: index
+    description: >
+      Timestamp when the HTTP communication was recorded. Indexed for time-range queries.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last update to this record. Automatically set on modifications.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active record. When set, record is excluded from normal queries but preserved for audit.
 excludedOperations:
   - count
   - getRaw

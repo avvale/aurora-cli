@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(OAuthDeletedRefreshTokensEvent)
 export class OAuthDeletedRefreshTokensEventHandler
-    implements IEventHandler<OAuthDeletedRefreshTokensEvent>
+  implements IEventHandler<OAuthDeletedRefreshTokensEvent>
 {
-    handle(event: OAuthDeletedRefreshTokensEvent): void {
-        // console.log('DeletedRefreshTokensEvent: ', event);
-    }
+  handle(event: OAuthDeletedRefreshTokensEvent): void {
+    // console.log('DeletedRefreshTokensEvent: ', event);
+  }
 }

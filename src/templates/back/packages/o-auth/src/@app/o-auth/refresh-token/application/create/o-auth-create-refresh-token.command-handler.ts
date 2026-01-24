@@ -2,33 +2,33 @@
 import { OAuthCreateRefreshTokenCommand } from '@app/o-auth/refresh-token';
 import { OAuthCreateRefreshTokenService } from '@app/o-auth/refresh-token/application/create/o-auth-create-refresh-token.service';
 import {
-    OAuthRefreshTokenAccessTokenId,
-    OAuthRefreshTokenExpiredRefreshToken,
-    OAuthRefreshTokenId,
+  OAuthRefreshTokenAccessTokenId,
+  OAuthRefreshTokenExpiredRefreshToken,
+  OAuthRefreshTokenId,
 } from '@app/o-auth/refresh-token/domain/value-objects';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthCreateRefreshTokenCommand)
 export class OAuthCreateRefreshTokenCommandHandler
-    implements ICommandHandler<OAuthCreateRefreshTokenCommand>
+  implements ICommandHandler<OAuthCreateRefreshTokenCommand>
 {
-    constructor(
-        private readonly createRefreshTokenService: OAuthCreateRefreshTokenService,
-    ) {}
+  constructor(
+    private readonly createRefreshTokenService: OAuthCreateRefreshTokenService,
+  ) {}
 
-    async execute(command: OAuthCreateRefreshTokenCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.createRefreshTokenService.main(
-            {
-                id: new OAuthRefreshTokenId(command.payload.id),
-                accessTokenId: new OAuthRefreshTokenAccessTokenId(
-                    command.payload.accessTokenId,
-                ),
-                expiredRefreshToken: new OAuthRefreshTokenExpiredRefreshToken(
-                    command.payload.expiredRefreshToken,
-                ),
-            },
-            command.cQMetadata,
-        );
-    }
+  async execute(command: OAuthCreateRefreshTokenCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.createRefreshTokenService.main(
+      {
+        id: new OAuthRefreshTokenId(command.payload.id),
+        accessTokenId: new OAuthRefreshTokenAccessTokenId(
+          command.payload.accessTokenId,
+        ),
+        expiredRefreshToken: new OAuthRefreshTokenExpiredRefreshToken(
+          command.payload.expiredRefreshToken,
+        ),
+      },
+      command.cQMetadata,
+    );
+  }
 }

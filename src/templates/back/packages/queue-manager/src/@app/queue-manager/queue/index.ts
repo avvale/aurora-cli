@@ -80,38 +80,38 @@ import { QueueManagerUpdateQueueByIdService } from './application/update/queue-m
 import { QueueManagerUpdateQueuesService } from './application/update/queue-manager-update-queues.service';
 
 export const QueueManagerQueueHandlers = [
-    // commands
-    QueueManagerCreateQueueCommandHandler,
-    QueueManagerCreateQueuesCommandHandler,
-    QueueManagerUpdateQueueByIdCommandHandler,
-    QueueManagerUpdateQueuesCommandHandler,
-    QueueManagerDeleteQueueByIdCommandHandler,
-    QueueManagerDeleteQueuesCommandHandler,
+  // commands
+  QueueManagerCreateQueueCommandHandler,
+  QueueManagerCreateQueuesCommandHandler,
+  QueueManagerUpdateQueueByIdCommandHandler,
+  QueueManagerUpdateQueuesCommandHandler,
+  QueueManagerDeleteQueueByIdCommandHandler,
+  QueueManagerDeleteQueuesCommandHandler,
 
-    // queries
-    QueueManagerPaginateQueuesQueryHandler,
-    QueueManagerGetQueuesQueryHandler,
-    QueueManagerFindQueueQueryHandler,
-    QueueManagerFindQueueByIdQueryHandler,
+  // queries
+  QueueManagerPaginateQueuesQueryHandler,
+  QueueManagerGetQueuesQueryHandler,
+  QueueManagerFindQueueQueryHandler,
+  QueueManagerFindQueueByIdQueryHandler,
 
-    // events
-    QueueManagerCreatedQueueEventHandler,
-    QueueManagerCreatedQueuesEventHandler,
-    QueueManagerUpdatedQueueEventHandler,
-    QueueManagerUpdatedQueuesEventHandler,
-    QueueManagerDeletedQueueEventHandler,
-    QueueManagerDeletedQueuesEventHandler,
+  // events
+  QueueManagerCreatedQueueEventHandler,
+  QueueManagerCreatedQueuesEventHandler,
+  QueueManagerUpdatedQueueEventHandler,
+  QueueManagerUpdatedQueuesEventHandler,
+  QueueManagerDeletedQueueEventHandler,
+  QueueManagerDeletedQueuesEventHandler,
 ];
 
 export const QueueManagerQueueServices = [
-    QueueManagerCreateQueueService,
-    QueueManagerCreateQueuesService,
-    QueueManagerPaginateQueuesService,
-    QueueManagerGetQueuesService,
-    QueueManagerFindQueueService,
-    QueueManagerFindQueueByIdService,
-    QueueManagerUpdateQueueByIdService,
-    QueueManagerUpdateQueuesService,
-    QueueManagerDeleteQueueByIdService,
-    QueueManagerDeleteQueuesService,
+  QueueManagerCreateQueueService,
+  QueueManagerCreateQueuesService,
+  QueueManagerPaginateQueuesService,
+  QueueManagerGetQueuesService,
+  QueueManagerFindQueueService,
+  QueueManagerFindQueueByIdService,
+  QueueManagerUpdateQueueByIdService,
+  QueueManagerUpdateQueuesService,
+  QueueManagerDeleteQueueByIdService,
+  QueueManagerDeleteQueuesService,
 ];

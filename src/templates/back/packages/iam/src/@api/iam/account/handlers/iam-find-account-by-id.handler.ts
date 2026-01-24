@@ -5,23 +5,23 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class IamFindAccountByIdHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        id: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<IamAccount> {
-        const account = await this.queryBus.ask(
-            new IamFindAccountByIdQuery(id, constraint, {
-                timezone,
-            }),
-        );
+  async main(
+    id: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<IamAccount> {
+    const account = await this.queryBus.ask(
+      new IamFindAccountByIdQuery(id, constraint, {
+        timezone,
+      }),
+    );
 
-        if (!account) {
-            throw new NotFoundException(`IamAccount with id: ${id}, not found`);
-        }
-
-        return account;
+    if (!account) {
+      throw new NotFoundException(`IamAccount with id: ${id}, not found`);
     }
+
+    return account;
+  }
 }

@@ -5,21 +5,14 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('queueManager.job.get')
-export class QueueManagerFindJobByIdResolver
-{
-    constructor(
-        private readonly handler: QueueManagerFindJobByIdHandler,
-    ) {}
+export class QueueManagerFindJobByIdResolver {
+  constructor(private readonly handler: QueueManagerFindJobByIdHandler) {}
 
-    @Query('queueManagerFindJobById')
-    async main(
-        @Args('id') id: string,
-        @Args('name') name: string,
-    ): Promise<QueueManagerJob>
-    {
-        return await this.handler.main(
-            id,
-            name,
-        );
-    }
+  @Query('queueManagerFindJobById')
+  async main(
+    @Args('id') id: string,
+    @Args('name') name: string,
+  ): Promise<QueueManagerJob> {
+    return await this.handler.main(id, name);
+  }
 }

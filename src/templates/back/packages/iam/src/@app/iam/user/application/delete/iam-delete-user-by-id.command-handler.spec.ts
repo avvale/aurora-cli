@@ -4,39 +4,39 @@ import { IamDeleteUserByIdService } from '@app/iam/user/application/delete/iam-d
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteUserByIdCommandHandler', () => {
-    let commandHandler: IamDeleteUserByIdCommandHandler;
+  let commandHandler: IamDeleteUserByIdCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamDeleteUserByIdCommandHandler,
-                {
-                    provide: IamDeleteUserByIdService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamDeleteUserByIdCommandHandler,
+        {
+          provide: IamDeleteUserByIdService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<IamDeleteUserByIdCommandHandler>(
-            IamDeleteUserByIdCommandHandler,
-        );
+    commandHandler = module.get<IamDeleteUserByIdCommandHandler>(
+      IamDeleteUserByIdCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('IamDeleteUserByIdCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('IamDeleteUserByIdCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should create the value object id and pass them as parameters to the IamDeleteUserByIdService', async () => {
-            expect(
-                await commandHandler.execute(
-                    new IamDeleteUserByIdCommand(iamMockUserData[0].id),
-                ),
-            ).toBe(undefined);
-        });
+    test('should create the value object id and pass them as parameters to the IamDeleteUserByIdService', async () => {
+      expect(
+        await commandHandler.execute(
+          new IamDeleteUserByIdCommand(iamMockUserData[0].id),
+        ),
+      ).toBe(undefined);
     });
+  });
 });

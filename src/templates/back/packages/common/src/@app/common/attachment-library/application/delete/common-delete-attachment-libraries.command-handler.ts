@@ -3,19 +3,21 @@ import { CommonDeleteAttachmentLibrariesService } from '@app/common/attachment-l
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(CommonDeleteAttachmentLibrariesCommand)
-export class CommonDeleteAttachmentLibrariesCommandHandler implements ICommandHandler<CommonDeleteAttachmentLibrariesCommand>
+export class CommonDeleteAttachmentLibrariesCommandHandler
+  implements ICommandHandler<CommonDeleteAttachmentLibrariesCommand>
 {
-    constructor(
-        private readonly deleteAttachmentLibrariesService: CommonDeleteAttachmentLibrariesService,
-    ) {}
+  constructor(
+    private readonly deleteAttachmentLibrariesService: CommonDeleteAttachmentLibrariesService,
+  ) {}
 
-    async execute(command: CommonDeleteAttachmentLibrariesCommand): Promise<void>
-    {
-        // call to use case and implements ValueObjects
-        await this.deleteAttachmentLibrariesService.main(
-            command.queryStatement,
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(
+    command: CommonDeleteAttachmentLibrariesCommand,
+  ): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteAttachmentLibrariesService.main(
+      command.queryStatement,
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

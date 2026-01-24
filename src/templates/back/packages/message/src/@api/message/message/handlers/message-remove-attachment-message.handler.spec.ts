@@ -4,44 +4,44 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MessageRemoveAttachmentMessageHandler } from './message-remove-attachment-message.handler';
 
 describe('MessageRemoveAttachmentMessageHandler', () => {
-    let handler: MessageRemoveAttachmentMessageHandler;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+  let handler: MessageRemoveAttachmentMessageHandler;
+  let queryBus: IQueryBus;
+  let commandBus: ICommandBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                MessageRemoveAttachmentMessageHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        MessageRemoveAttachmentMessageHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<MessageRemoveAttachmentMessageHandler>(
-            MessageRemoveAttachmentMessageHandler,
-        );
-        queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
+    handler = module.get<MessageRemoveAttachmentMessageHandler>(
+      MessageRemoveAttachmentMessageHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+    commandBus = module.get<ICommandBus>(ICommandBus);
+  });
+
+  describe('main', () => {
+    test('MessageRemoveAttachmentMessageHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
-
-    describe('main', () => {
-        test('MessageRemoveAttachmentMessageHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-    });
+  });
 });

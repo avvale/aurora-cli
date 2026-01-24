@@ -5,20 +5,20 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(QueueManagerDeleteJobRegistryByIdCommand)
 export class QueueManagerDeleteJobRegistryByIdCommandHandler
-    implements ICommandHandler<QueueManagerDeleteJobRegistryByIdCommand>
+  implements ICommandHandler<QueueManagerDeleteJobRegistryByIdCommand>
 {
-    constructor(
-        private readonly deleteJobRegistryByIdService: QueueManagerDeleteJobRegistryByIdService,
-    ) {}
+  constructor(
+    private readonly deleteJobRegistryByIdService: QueueManagerDeleteJobRegistryByIdService,
+  ) {}
 
-    async execute(
-        command: QueueManagerDeleteJobRegistryByIdCommand,
-    ): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteJobRegistryByIdService.main(
-            new QueueManagerJobRegistryId(command.id),
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(
+    command: QueueManagerDeleteJobRegistryByIdCommand,
+  ): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteJobRegistryByIdService.main(
+      new QueueManagerJobRegistryId(command.id),
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

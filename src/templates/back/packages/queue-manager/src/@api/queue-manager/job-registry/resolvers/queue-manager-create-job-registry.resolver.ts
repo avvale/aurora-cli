@@ -1,6 +1,6 @@
 import {
-    QueueManagerCreateJobRegistryInput,
-    QueueManagerJobRegistry,
+  QueueManagerCreateJobRegistryInput,
+  QueueManagerJobRegistry,
 } from '@api/graphql';
 import { QueueManagerCreateJobRegistryHandler } from '@api/queue-manager/job-registry';
 import { Auth } from '@aurora/decorators';
@@ -10,15 +10,13 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('queueManager.jobRegistry.create')
 export class QueueManagerCreateJobRegistryResolver {
-    constructor(
-        private readonly handler: QueueManagerCreateJobRegistryHandler,
-    ) {}
+  constructor(private readonly handler: QueueManagerCreateJobRegistryHandler) {}
 
-    @Mutation('queueManagerCreateJobRegistry')
-    async main(
-        @Args('payload') payload: QueueManagerCreateJobRegistryInput,
-        @Timezone() timezone?: string,
-    ): Promise<QueueManagerJobRegistry> {
-        return await this.handler.main(payload, timezone);
-    }
+  @Mutation('queueManagerCreateJobRegistry')
+  async main(
+    @Args('payload') payload: QueueManagerCreateJobRegistryInput,
+    @Timezone() timezone?: string,
+  ): Promise<QueueManagerJobRegistry> {
+    return await this.handler.main(payload, timezone);
+  }
 }

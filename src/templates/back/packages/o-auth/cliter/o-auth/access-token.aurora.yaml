@@ -9,16 +9,24 @@ hasAuditing: false
 front:
   solidIcon: mat_solid:password
   outlineIcon: mat_outline:password
+description: >
+  Module containing OAuth 2.0 access tokens. Access tokens are short-lived credentials used
+  to authenticate API requests. Each token is associated with a client and optionally an account,
+  and can have an associated refresh token for obtaining new access tokens.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the access token. UUID v4 format, generated automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing row identifier. Used for internal ordering and as a numeric alternative to UUID.
   - name: clientId
     type: id
     nullable: false
@@ -30,27 +38,48 @@ aggregateProperties:
       field: client
       avoidConstraint: true
     index: index
+    description: >
+      ID of the OAuth client that owns this access token. Links the token to the application
+      and grant type used for authorization.
   - name: accountId
     type: id
     nullable: true
+    description: >
+      ID of the account (user) associated with this token. NULL for client_credentials grants
+      that don't represent a specific user. Used to link tokens to user identity.
   - name: token
     type: text
     nullable: false
+    description: >
+      The access token string. JWT or opaque token value. SECURITY: Transmitted in Authorization
+      headers for API authentication. Should be short-lived to minimize security risk.
   - name: name
     type: varchar
     maxLength: 128
     nullable: true
+    description: >
+      Optional descriptive name for the access token. Useful for personal access tokens or
+      long-lived tokens to identify their purpose (e.g., "Mobile App", "CI/CD Pipeline").
   - name: isRevoked
     type: boolean
     nullable: false
     defaultValue: false
     example: false
+    description: >
+      Indicates whether the access token has been revoked. Revoked tokens are rejected for
+      API authentication. Set to true on logout, security events, or manual revocation.
   - name: expiresAt
     type: timestamp
     nullable: true
+    description: >
+      Expiration timestamp for the access token. After this time, the token is invalid for
+      API requests. Typically set to minutes or hours from creation for security.
   - name: refreshToken
     type: relationship
     nullable: true
+    description: >
+      One-to-one relationship with a refresh token. When present, the refresh token can be
+      used to obtain a new access token after this one expires.
     relationship:
       type: one-to-one
       aggregateName: OAuthRefreshToken
@@ -59,12 +88,19 @@ aggregateProperties:
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the access token was created. Automatically set on creation.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the access token was last updated. Automatically updated on modification.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL means active token. When set, token is excluded from normal
+      queries but preserved for audit trail.
 excludedOperations:
   - count
   - createBatch

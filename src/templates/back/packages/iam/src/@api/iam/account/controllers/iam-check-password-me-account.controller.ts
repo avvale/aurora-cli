@@ -10,18 +10,18 @@ import { IamCheckPasswordMeAccountHandler } from '../handlers/iam-check-password
 @Controller('iam/account/check-password-me')
 @Auth()
 export class IamCheckPasswordMeAccountController {
-    constructor(private readonly handler: IamCheckPasswordMeAccountHandler) {}
+  constructor(private readonly handler: IamCheckPasswordMeAccountHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(
-        @CurrentAccount() account: IamAccountResponse,
-        @Body() password: string,
-    ) {
-        return await this.handler.main(account, password);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(
+    @CurrentAccount() account: IamAccountResponse,
+    @Body() password: string,
+  ) {
+    return await this.handler.main(account, password);
+  }
 }

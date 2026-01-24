@@ -1,233 +1,248 @@
 /* eslint-disable indent */
 /* eslint-disable key-spacing */
 import { CommonResourceModel } from '@app/common/resource';
-import { AuditingSideEffectEvent, SequelizeAuditingAgent } from '@aurorajs.dev/core';
+import {
+  AuditingSideEffectEvent,
+  SequelizeAuditingAgent,
+} from '@aurorajs.dev/core';
 import { DataTypes } from 'sequelize';
-import { AfterBulkCreate, AfterBulkDestroy, AfterBulkRestore, AfterBulkUpdate, AfterCreate, AfterDestroy, AfterRestore, AfterUpdate, AfterUpsert, BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import {
+  AfterBulkCreate,
+  AfterBulkDestroy,
+  AfterBulkRestore,
+  AfterBulkUpdate,
+  AfterCreate,
+  AfterDestroy,
+  AfterRestore,
+  AfterUpdate,
+  AfterUpsert,
+  BelongsTo,
+  Column,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 
 @Table({
-    modelName: 'CommonAttachmentFamily',
-    freezeTableName: true,
-    timestamps: false,
-    indexes: [
-		{
-			fields: ['resourceId'],
-			unique: false,
-		},
-		{
-			fields: ['code'],
-			unique: true,
-		},
-
-    ],
+  modelName: 'CommonAttachmentFamily',
+  freezeTableName: true,
+  timestamps: false,
+  indexes: [
+    {
+      fields: ['resourceId'],
+      unique: false,
+    },
+    {
+      fields: ['code'],
+      unique: true,
+    },
+  ],
 })
-export class CommonAttachmentFamilyModel extends Model<CommonAttachmentFamilyModel>
-{
-    @AfterCreate
-    static auditingCreate(instance: CommonAttachmentFamilyModel, options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            instance,
-            options,
-            AuditingSideEffectEvent.CREATED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+export class CommonAttachmentFamilyModel extends Model<CommonAttachmentFamilyModel> {
+  @AfterCreate
+  static auditingCreate(instance: CommonAttachmentFamilyModel, options): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      instance,
+      options,
+      AuditingSideEffectEvent.CREATED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @AfterBulkCreate
-    static auditingBulkCreate(instance: CommonAttachmentFamilyModel, options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            instance,
-            options,
-            AuditingSideEffectEvent.BULK_CREATED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+  @AfterBulkCreate
+  static auditingBulkCreate(
+    instance: CommonAttachmentFamilyModel,
+    options,
+  ): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      instance,
+      options,
+      AuditingSideEffectEvent.BULK_CREATED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @AfterUpdate
-    static auditingUpdate(instance: CommonAttachmentFamilyModel, options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            instance,
-            options,
-            AuditingSideEffectEvent.UPDATED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+  @AfterUpdate
+  static auditingUpdate(instance: CommonAttachmentFamilyModel, options): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      instance,
+      options,
+      AuditingSideEffectEvent.UPDATED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @AfterBulkUpdate
-    static auditingBulkUpdate(options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            null,
-            options,
-            AuditingSideEffectEvent.BULK_UPDATED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+  @AfterBulkUpdate
+  static auditingBulkUpdate(options): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      null,
+      options,
+      AuditingSideEffectEvent.BULK_UPDATED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @AfterDestroy
-    static auditingDestroy(instance: CommonAttachmentFamilyModel, options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            instance,
-            options,
-            AuditingSideEffectEvent.DELETED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+  @AfterDestroy
+  static auditingDestroy(instance: CommonAttachmentFamilyModel, options): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      instance,
+      options,
+      AuditingSideEffectEvent.DELETED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @AfterBulkDestroy
-    static auditingBulkDestroy(options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            null,
-            options,
-            AuditingSideEffectEvent.BULK_DELETED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+  @AfterBulkDestroy
+  static auditingBulkDestroy(options): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      null,
+      options,
+      AuditingSideEffectEvent.BULK_DELETED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @AfterRestore
-    static auditingRestore(instance: CommonAttachmentFamilyModel, options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            instance,
-            options,
-            AuditingSideEffectEvent.RESTORED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+  @AfterRestore
+  static auditingRestore(instance: CommonAttachmentFamilyModel, options): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      instance,
+      options,
+      AuditingSideEffectEvent.RESTORED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @AfterBulkRestore
-    static auditingBulkRestore(options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            null,
-            options,
-            AuditingSideEffectEvent.BULK_RESTORED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+  @AfterBulkRestore
+  static auditingBulkRestore(options): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      null,
+      options,
+      AuditingSideEffectEvent.BULK_RESTORED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @AfterUpsert
-    static auditingUpsert(instance: CommonAttachmentFamilyModel, options): void
-    {
-        SequelizeAuditingAgent.registerSideEffect(
-            instance,
-            options,
-            AuditingSideEffectEvent.UPSERTED,
-            '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
-            'CommonAttachmentFamilyModel',
-        );
-    }
+  @AfterUpsert
+  static auditingUpsert(instance: CommonAttachmentFamilyModel, options): void {
+    SequelizeAuditingAgent.registerSideEffect(
+      instance,
+      options,
+      AuditingSideEffectEvent.UPSERTED,
+      '@app/common/attachment-family/infrastructure/sequelize/common-sequelize-attachment-family.model',
+      'CommonAttachmentFamilyModel',
+    );
+  }
 
-    @Column({
-        field: 'id',
-        primaryKey: true,
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    id: string;
+  @Column({
+    field: 'id',
+    primaryKey: true,
+    allowNull: false,
+    type: DataTypes.UUID,
+  })
+  id: string;
 
-    @ForeignKey(() => CommonResourceModel)
-    @Column({
-        field: 'resourceId',
-        allowNull: false,
-        type: DataTypes.UUID,
-    })
-    resourceId: string;
+  @ForeignKey(() => CommonResourceModel)
+  @Column({
+    field: 'resourceId',
+    allowNull: false,
+    type: DataTypes.UUID,
+  })
+  resourceId: string;
 
-    @BelongsTo(() => CommonResourceModel, {
-        constraints: false,
-        foreignKey: 'resourceId',
-    })
-    resource: CommonResourceModel;
+  @BelongsTo(() => CommonResourceModel, {
+    constraints: false,
+    foreignKey: 'resourceId',
+  })
+  resource: CommonResourceModel;
 
-    @Column({
-        field: 'code',
-        allowNull: false,
-        type: DataTypes.STRING(63),
-    })
-    code: string;
+  @Column({
+    field: 'code',
+    allowNull: false,
+    type: DataTypes.STRING(63),
+  })
+  code: string;
 
-    @Column({
-        field: 'name',
-        allowNull: false,
-        type: DataTypes.STRING(100),
-    })
-    name: string;
+  @Column({
+    field: 'name',
+    allowNull: false,
+    type: DataTypes.STRING(100),
+  })
+  name: string;
 
-    @Column({
-        field: 'width',
-        allowNull: true,
-        type: DataTypes.INTEGER,
-    })
-    width: number;
+  @Column({
+    field: 'width',
+    allowNull: true,
+    type: DataTypes.INTEGER,
+  })
+  width: number;
 
-    @Column({
-        field: 'height',
-        allowNull: true,
-        type: DataTypes.INTEGER,
-    })
-    height: number;
+  @Column({
+    field: 'height',
+    allowNull: true,
+    type: DataTypes.INTEGER,
+  })
+  height: number;
 
-    @Column({
-        field: 'fitType',
-        allowNull: true,
-        type: DataTypes.ENUM('FIT_CROP','FIT_WIDTH','FIT_HEIGHT','FIT_WIDTH_FREE_CROP','FIT_HEIGHT_FREE_CROP'),
-    })
-    fitType: string;
+  @Column({
+    field: 'fitType',
+    allowNull: true,
+    type: DataTypes.ENUM(
+      'FIT_CROP',
+      'FIT_WIDTH',
+      'FIT_HEIGHT',
+      'FIT_WIDTH_FREE_CROP',
+      'FIT_HEIGHT_FREE_CROP',
+    ),
+  })
+  fitType: string;
 
-    @Column({
-        field: 'quality',
-        allowNull: true,
-        type: DataTypes.SMALLINT,
-    })
-    quality: number;
+  @Column({
+    field: 'quality',
+    allowNull: true,
+    type: DataTypes.SMALLINT,
+  })
+  quality: number;
 
-    @Column({
-        field: 'sizes',
-        allowNull: true,
-        type: DataTypes.JSON,
-    })
-    sizes: any;
+  @Column({
+    field: 'sizes',
+    allowNull: true,
+    type: DataTypes.JSON,
+  })
+  sizes: any;
 
-    @Column({
-        field: 'format',
-        allowNull: true,
-        type: DataTypes.ENUM('JPG','PNG','GIF','TIF','BMP'),
-    })
-    format: string;
+  @Column({
+    field: 'format',
+    allowNull: true,
+    type: DataTypes.ENUM('JPG', 'PNG', 'GIF', 'TIF', 'BMP'),
+  })
+  format: string;
 
-    @Column({
-        field: 'createdAt',
-        allowNull: true,
-        type: DataTypes.DATE,
-    })
-    createdAt: string;
+  @Column({
+    field: 'createdAt',
+    allowNull: true,
+    type: DataTypes.DATE,
+  })
+  createdAt: string;
 
-    @Column({
-        field: 'updatedAt',
-        allowNull: true,
-        type: DataTypes.DATE,
-    })
-    updatedAt: string;
+  @Column({
+    field: 'updatedAt',
+    allowNull: true,
+    type: DataTypes.DATE,
+  })
+  updatedAt: string;
 
-    @Column({
-        field: 'deletedAt',
-        allowNull: true,
-        type: DataTypes.DATE,
-    })
-    deletedAt: string;
-
+  @Column({
+    field: 'deletedAt',
+    allowNull: true,
+    type: DataTypes.DATE,
+  })
+  deletedAt: string;
 }

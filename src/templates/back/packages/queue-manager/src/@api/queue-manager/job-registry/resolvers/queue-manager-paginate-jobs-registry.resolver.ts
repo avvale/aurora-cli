@@ -7,16 +7,16 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('queueManager.jobRegistry.get')
 export class QueueManagerPaginateJobsRegistryResolver {
-    constructor(
-        private readonly handler: QueueManagerPaginateJobsRegistryHandler,
-    ) {}
+  constructor(
+    private readonly handler: QueueManagerPaginateJobsRegistryHandler,
+  ) {}
 
-    @Query('queueManagerPaginateJobsRegistry')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<Pagination> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Query('queueManagerPaginateJobsRegistry')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<Pagination> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

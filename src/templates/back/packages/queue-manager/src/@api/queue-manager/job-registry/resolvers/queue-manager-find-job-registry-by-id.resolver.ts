@@ -7,16 +7,16 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('queueManager.jobRegistry.get')
 export class QueueManagerFindJobRegistryByIdResolver {
-    constructor(
-        private readonly handler: QueueManagerFindJobRegistryByIdHandler,
-    ) {}
+  constructor(
+    private readonly handler: QueueManagerFindJobRegistryByIdHandler,
+  ) {}
 
-    @Query('queueManagerFindJobRegistryById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<QueueManagerJobRegistry> {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Query('queueManagerFindJobRegistryById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<QueueManagerJobRegistry> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

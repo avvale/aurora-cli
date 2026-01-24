@@ -67,30 +67,30 @@ import { IamPaginateTagsService } from './application/paginate/iam-paginate-tags
 import { IamUpdateTagByIdService } from './application/update/iam-update-tag-by-id.service';
 
 export const IamTagHandlers = [
-    // commands
-    IamCreateTagCommandHandler,
-    IamUpdateTagByIdCommandHandler,
-    IamDeleteTagByIdCommandHandler,
+  // commands
+  IamCreateTagCommandHandler,
+  IamUpdateTagByIdCommandHandler,
+  IamDeleteTagByIdCommandHandler,
 
-    // queries
-    IamPaginateTagsQueryHandler,
-    IamGetTagsQueryHandler,
-    IamFindTagQueryHandler,
-    IamFindTagByIdQueryHandler,
+  // queries
+  IamPaginateTagsQueryHandler,
+  IamGetTagsQueryHandler,
+  IamFindTagQueryHandler,
+  IamFindTagByIdQueryHandler,
 
-    // events
-    IamCreatedTagEventHandler,
-    IamCreatedTagsEventHandler,
-    IamUpdatedTagEventHandler,
-    IamDeletedTagEventHandler,
+  // events
+  IamCreatedTagEventHandler,
+  IamCreatedTagsEventHandler,
+  IamUpdatedTagEventHandler,
+  IamDeletedTagEventHandler,
 ];
 
 export const IamTagServices = [
-    IamCreateTagService,
-    IamPaginateTagsService,
-    IamGetTagsService,
-    IamFindTagService,
-    IamFindTagByIdService,
-    IamUpdateTagByIdService,
-    IamDeleteTagByIdService,
+  IamCreateTagService,
+  IamPaginateTagsService,
+  IamGetTagsService,
+  IamFindTagService,
+  IamFindTagByIdService,
+  IamUpdateTagByIdService,
+  IamDeleteTagByIdService,
 ];

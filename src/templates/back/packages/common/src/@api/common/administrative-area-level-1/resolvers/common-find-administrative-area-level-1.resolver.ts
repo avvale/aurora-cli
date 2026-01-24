@@ -6,23 +6,17 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('common.administrativeAreaLevel1.get')
-export class CommonFindAdministrativeAreaLevel1Resolver
-{
-    constructor(
-        private readonly handler: CommonFindAdministrativeAreaLevel1Handler,
-    ) {}
+export class CommonFindAdministrativeAreaLevel1Resolver {
+  constructor(
+    private readonly handler: CommonFindAdministrativeAreaLevel1Handler,
+  ) {}
 
-    @Query('commonFindAdministrativeAreaLevel1')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<CommonAdministrativeAreaLevel1>
-    {
-        return await this.handler.main(
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Query('commonFindAdministrativeAreaLevel1')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<CommonAdministrativeAreaLevel1> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

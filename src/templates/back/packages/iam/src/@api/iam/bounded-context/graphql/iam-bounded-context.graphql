@@ -1,39 +1,45 @@
+# @aurora-generated
+# @source cliter/iam/bounded-context.aurora.yaml
+
 type IamBoundedContext {
     """
-    UUID for bounded context
+    Unique identifier for the bounded context. UUID v4 format, generated automatically on creation. Used as primary key and for references.
     """
     id: ID!
+    """
+    Auto-incremented sequential identifier for internal database indexing. Used for ordered retrieval and performance optimization. Unique across all bounded contexts.
+    """
     rowId: GraphQLInt!
     """
-    Name of the bounded context
+    Human-readable name of the bounded context. Used for display purposes in UI and documentation. Should be unique and descriptive of the domain area it represents (e.g., &#x27;Identity and Access Management&#x27;, &#x27;Library Management&#x27;).
     """
     name: GraphQLString!
     """
-    root folder where the bounded context is located
+    Root directory path where the bounded context code is located. Typically matches the module structure (e.g., &#x27;iam&#x27;, &#x27;library&#x27;, &#x27;catalog&#x27;). Used by code generation tools and for file organization. Must match actual filesystem structure.
     """
     root: GraphQLString!
     """
-    Sort order of the bounded context
+    Display order for UI lists and navigation menus. Lower numbers appear first. NULL values are sorted last. Allows manual organization of bounded contexts in administrative interfaces.
     """
     sort: GraphQLInt
     """
-    Indicates if the bounded context is active
+    Indicates if the bounded context is currently active and available. Inactive bounded contexts are hidden from UI and their permissions are not enforced. Use for temporary disabling without deletion.
     """
     isActive: GraphQLBoolean!
     """
-    List of permissions associated with the bounded context
+    Collection of permissions associated with this bounded context. Each permission defines access to specific operations within the bounded context&#x27;s modules. Managed through the grid elements manager component.
     """
     permissions: [IamPermission]
     """
-    Timestamp when the bounded context was created
+    Timestamp when the bounded context was created. Automatically set on record creation. Used for audit trail and historical tracking.
     """
     createdAt: GraphQLTimestamp
     """
-    Timestamp when the bounded context was last updated
+    Timestamp when the bounded context was last updated. Automatically updated on any modification. Used for audit trail and change tracking.
     """
     updatedAt: GraphQLTimestamp
     """
-    Timestamp when the bounded context was deleted
+    Soft delete timestamp. NULL indicates active record. When set, the bounded context is excluded from normal queries but preserved for audit and recovery purposes. Cascade affects associated permissions.
     """
     deletedAt: GraphQLTimestamp
 }

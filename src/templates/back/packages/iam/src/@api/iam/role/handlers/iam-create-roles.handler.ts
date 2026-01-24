@@ -5,22 +5,22 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class IamCreateRolesHandler {
-    constructor(private readonly commandBus: ICommandBus) {}
+  constructor(private readonly commandBus: ICommandBus) {}
 
-    async main(
-        payload: IamCreateRoleInput[],
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<boolean> {
-        await this.commandBus.dispatch(
-            new IamCreateRolesCommand(payload, {
-                timezone,
-                repositoryOptions: {
-                    auditing,
-                },
-            }),
-        );
+  async main(
+    payload: IamCreateRoleInput[],
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    await this.commandBus.dispatch(
+      new IamCreateRolesCommand(payload, {
+        timezone,
+        repositoryOptions: {
+          auditing,
+        },
+      }),
+    );
 
-        return true;
-    }
+    return true;
+  }
 }

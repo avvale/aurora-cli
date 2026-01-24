@@ -9,18 +9,18 @@ import { SupportDeleteWebhookConfigHandler } from '../handlers/support-delete-we
 @Controller('support/config/delete-webhook')
 @Auth('support.issue.update')
 export class SupportDeleteWebhookConfigController {
-    constructor(private readonly handler: SupportDeleteWebhookConfigHandler) {}
+  constructor(private readonly handler: SupportDeleteWebhookConfigHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ) {
-        return await this.handler.main(timezone, auditing);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ) {
+    return await this.handler.main(timezone, auditing);
+  }
 }

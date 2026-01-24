@@ -4,44 +4,44 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ToolsDownScriptProcedureHandler } from './tools-down-script-procedure.handler';
 
 describe('ToolsDownScriptProcedureHandler', () => {
-    let handler: ToolsDownScriptProcedureHandler;
-    let queryBus: IQueryBus;
-    let commandBus: ICommandBus;
+  let handler: ToolsDownScriptProcedureHandler;
+  let queryBus: IQueryBus;
+  let commandBus: ICommandBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                ToolsDownScriptProcedureHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        ToolsDownScriptProcedureHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<ToolsDownScriptProcedureHandler>(
-            ToolsDownScriptProcedureHandler,
-        );
-        queryBus = module.get<IQueryBus>(IQueryBus);
-        commandBus = module.get<ICommandBus>(ICommandBus);
+    handler = module.get<ToolsDownScriptProcedureHandler>(
+      ToolsDownScriptProcedureHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+    commandBus = module.get<ICommandBus>(ICommandBus);
+  });
+
+  describe('main', () => {
+    test('ToolsDownScriptProcedureHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
-
-    describe('main', () => {
-        test('ToolsDownScriptProcedureHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-    });
+  });
 });

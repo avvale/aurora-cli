@@ -6,25 +6,21 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
 @Resolver()
 @Auth('whatsapp.timeline.update')
-export class WhatsappUpdateTimelinesResolver
-{
-    constructor(
-        private readonly handler: WhatsappUpdateTimelinesHandler,
-    ) {}
+export class WhatsappUpdateTimelinesResolver {
+  constructor(private readonly handler: WhatsappUpdateTimelinesHandler) {}
 
-    @Mutation('whatsappUpdateTimelines')
-    async main(
-        @Args('payload') payload: WhatsappUpdateTimelinesInput,
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<WhatsappTimeline>
-    {
-        return await this.handler.main(
-            payload,
-            queryStatement,
-            constraint,
-            timezone,
-        );
-    }
+  @Mutation('whatsappUpdateTimelines')
+  async main(
+    @Args('payload') payload: WhatsappUpdateTimelinesInput,
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<WhatsappTimeline> {
+    return await this.handler.main(
+      payload,
+      queryStatement,
+      constraint,
+      timezone,
+    );
+  }
 }

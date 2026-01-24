@@ -75,35 +75,35 @@ import { OAuthPaginateApplicationsClientsService } from './application/paginate/
 import { OAuthUpdateApplicationClientByIdService } from './application/update/o-auth-update-application-client-by-id.service';
 
 export const OAuthApplicationClientHandlers = [
-    // commands
-    OAuthCreateApplicationClientCommandHandler,
-    OAuthCreateApplicationsClientsCommandHandler,
-    OAuthUpdateApplicationClientByIdCommandHandler,
-    OAuthDeleteApplicationClientByIdCommandHandler,
-    OAuthDeleteApplicationsClientsCommandHandler,
+  // commands
+  OAuthCreateApplicationClientCommandHandler,
+  OAuthCreateApplicationsClientsCommandHandler,
+  OAuthUpdateApplicationClientByIdCommandHandler,
+  OAuthDeleteApplicationClientByIdCommandHandler,
+  OAuthDeleteApplicationsClientsCommandHandler,
 
-    // queries
-    OAuthPaginateApplicationsClientsQueryHandler,
-    OAuthGetApplicationsClientsQueryHandler,
-    OAuthFindApplicationClientQueryHandler,
-    OAuthFindApplicationClientByIdQueryHandler,
+  // queries
+  OAuthPaginateApplicationsClientsQueryHandler,
+  OAuthGetApplicationsClientsQueryHandler,
+  OAuthFindApplicationClientQueryHandler,
+  OAuthFindApplicationClientByIdQueryHandler,
 
-    // events
-    OAuthCreatedApplicationClientEventHandler,
-    OAuthCreatedApplicationsClientsEventHandler,
-    OAuthUpdatedApplicationClientEventHandler,
-    OAuthDeletedApplicationClientEventHandler,
-    OAuthDeletedApplicationsClientsEventHandler,
+  // events
+  OAuthCreatedApplicationClientEventHandler,
+  OAuthCreatedApplicationsClientsEventHandler,
+  OAuthUpdatedApplicationClientEventHandler,
+  OAuthDeletedApplicationClientEventHandler,
+  OAuthDeletedApplicationsClientsEventHandler,
 ];
 
 export const OAuthApplicationClientServices = [
-    OAuthCreateApplicationClientService,
-    OAuthCreateApplicationsClientsService,
-    OAuthPaginateApplicationsClientsService,
-    OAuthGetApplicationsClientsService,
-    OAuthFindApplicationClientService,
-    OAuthFindApplicationClientByIdService,
-    OAuthUpdateApplicationClientByIdService,
-    OAuthDeleteApplicationClientByIdService,
-    OAuthDeleteApplicationsClientsService,
+  OAuthCreateApplicationClientService,
+  OAuthCreateApplicationsClientsService,
+  OAuthPaginateApplicationsClientsService,
+  OAuthGetApplicationsClientsService,
+  OAuthFindApplicationClientService,
+  OAuthFindApplicationClientByIdService,
+  OAuthUpdateApplicationClientByIdService,
+  OAuthDeleteApplicationClientByIdService,
+  OAuthDeleteApplicationsClientsService,
 ];

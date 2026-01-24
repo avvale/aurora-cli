@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(SupportUpdatedCommentEvent)
 export class SupportUpdatedCommentEventHandler
-    implements IEventHandler<SupportUpdatedCommentEvent>
+  implements IEventHandler<SupportUpdatedCommentEvent>
 {
-    handle(event: SupportUpdatedCommentEvent): void {
-        // 'UpdatedCommentEvent'
-    }
+  handle(event: SupportUpdatedCommentEvent): void {
+    // 'UpdatedCommentEvent'
+  }
 }

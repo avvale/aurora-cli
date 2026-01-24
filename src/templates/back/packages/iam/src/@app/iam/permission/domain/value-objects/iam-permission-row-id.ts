@@ -1,20 +1,24 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission.aurora.yaml
+ */
 import { BigintValueObject, ValidationRules } from '@aurorajs.dev/core';
 
 export class IamPermissionRowId extends BigintValueObject {
-    public readonly type: string = 'IamPermissionRowId';
+  public readonly type: string = 'IamPermissionRowId';
 
-    constructor(value: number, validationRules: ValidationRules = {}) {
-        super(
-            value,
-            Object.assign(
-                {
-                    name: 'IamPermissionRowId',
-                    nullable: false,
-                    undefinable: false,
-                    unsigned: false,
-                },
-                validationRules,
-            ),
-        );
-    }
+  constructor(value: number, validationRules: ValidationRules = {}) {
+    super(
+      value,
+      Object.assign(
+        {
+          name: 'IamPermissionRowId',
+          nullable: false,
+          undefinable: false,
+          unsigned: false,
+        },
+        validationRules,
+      ),
+    );
+  }
 }

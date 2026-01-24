@@ -6,6 +6,14 @@ aggregateName: IamAccount
 hasOAuth: true
 hasTenant: false
 hasAuditing: true
+description: >
+  Core authentication and authorization module managing user and service
+  accounts. Accounts represent authenticated entities in the system with
+  assigned roles and permissions. Supports multi-tenancy, OAuth 2.0 integration,
+  and denormalized permission structures for fast authorization checks. Each
+  account can be of type USER (person) or SERVICE (API integration) and must be
+  associated with an OAuth client. Related modules: iam/user (personal info),
+  iam/role (permissions), iam/tenant (organizations).
 front:
   solidIcon: mat_solid:manage_accounts
   outlineIcon: mat_outline:manage_accounts
@@ -14,39 +22,72 @@ aggregateProperties:
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the account. Used as primary key across the system.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing sequential identifier for the account. Used for internal
+      ordering and legacy system compatibility. Unlike the UUID 'id', this
+      provides a human-readable sequential number.
   - name: type
     type: enum
-    enumOptions:
-      - USER
-      - SERVICE
+    enumOptions: [USER, SERVICE]
     nullable: false
     example: IamAccountType.USER
+    description: >
+      Type of account determining authentication and authorization behavior.
+      USER: Regular user account with login credentials, associated with a
+      person. SERVICE: Service account for API integrations and automated
+      systems, typically without login UI access. Service accounts may have
+      different permission scopes.
   - name: code
     type: varchar
     maxLength: 64
     nullable: true
     index: unique
+    description: >
+      Optional unique identifier code for the account, typically used for
+      external system integrations or customer-facing account numbers. Must be
+      unique across all accounts. Can be NULL for accounts that don't require
+      external identification codes.
   - name: email
     type: varchar
     maxLength: 128
     nullable: true
     index: unique
-    example: john@gmial.com
+    example: john@gmail.com
+    description: >
+      Primary email address for the account. Used for authentication and
+      notifications. Must be unique across all accounts. Can be NULL for service
+      accounts that don't require email-based communication. Validated against
+      RFC 5322 format.
   - name: username
     type: varchar
     maxLength: 128
     nullable: false
     index: unique
+    description: >
+      Unique username for account identification and login. Must be unique
+      across all accounts. Required for all account types. Typically follows
+      naming conventions: lowercase, alphanumeric with hyphens/underscores.
+      Cannot be changed after account creation to maintain audit trail
+      integrity.
   - name: isActive
     type: boolean
     nullable: false
     defaultValue: false
     example: true
+    description: >
+      Indicates whether the account is currently active and allowed to
+      authenticate. Defaults to false (inactive) for security - accounts must be
+      explicitly activated after creation, typically after email verification or
+      admin approval. Inactive accounts cannot log in or access protected
+      resources. This is separate from soft-delete (deletedAt) - inactive
+      accounts can be reactivated.
   - name: clientId
     type: id
     nullable: false
@@ -57,36 +98,75 @@ aggregateProperties:
       key: id
       field: client
       avoidConstraint: true
+    description: >
+      Reference to the OAuth client application that this account belongs to.
+      Each account must be associated with exactly one OAuth client for proper
+      authentication and authorization scoping. The client determines available
+      permissions and resources for the account.
   - name: tags
     type: array
     arrayOptions:
       type: varchar
-      maxLength: 64
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+      Optional array of tags for categorizing and filtering accounts. Each tag
+      is limited to 64 characters. Uses GIN index for efficient array search
+      operations. Common uses: department tags, customer segments, feature
+      flags, or custom organizational categories. NULL indicates no tags
+      assigned.
   - name: scopes
     type: array
     arrayOptions:
       type: varchar
-      maxLength: 64
     nullable: true
-  - name: dApplicationCodes
+    description: >
+      OAuth 2.0 scopes defining the access permissions for this account. Scopes
+      limit what resources and operations the account can access. Each scope is
+      a string up to 64 characters (e.g., "read:users", "write:posts"). NULL
+      indicates default scope set. Used by OAuth authorization flows.
+  - name: denormalizedApplicationCodes
     type: array
     arrayOptions:
       type: varchar
     nullable: false
-  - name: dPermissions
+    description: >
+      Denormalized array of application codes that this account has access to.
+      Stored for query performance optimization to avoid joins. Should be kept
+      in sync with the account's roles and permissions. Updated automatically
+      when roles or permissions change. Required field - empty array indicates
+      no application access.
+  - name: denormalizedPermissions
     type: jsonb
     nullable: false
-  - name: dTenants
+    description: >
+      Denormalized JSON structure containing the flattened permission tree for
+      this account. Combines permissions from all assigned roles for fast
+      authorization checks. Structure: { "permission.key": true,
+      "resource:action": true } Automatically recalculated when roles or role
+      permissions change. Required field - empty object indicates no permissions
+      granted. Uses JSONB for efficient querying and indexing in PostgreSQL.
+  - name: denormalizedTenantIds
     type: array
     arrayOptions:
       type: id
     nullable: false
+    description: >
+      Denormalized array of tenant IDs that this account belongs to. Stored for
+      query performance to quickly filter data by tenant access. Should match
+      the many-to-many relationship in the tenants field. Updated automatically
+      when tenant associations change. Required field - empty array indicates no
+      tenant access.
   - name: meta
     type: jsonb
     nullable: true
+    description: >
+      Optional JSON field for storing custom account metadata and properties.
+      Use for application-specific data that doesn't warrant dedicated columns.
+      Examples: UI preferences, feature flags, custom fields, integration
+      metadata. NULL indicates no custom metadata. No schema validation - use
+      carefully.
   - name: roles
     type: relationship
     nullable: true
@@ -114,6 +194,7 @@ aggregateProperties:
               modulePath: iam/role
               field: role
               avoidConstraint: true
+            description: Reference to the role in this account-role association
           - name: accountId
             type: id
             primaryKey: true
@@ -124,6 +205,7 @@ aggregateProperties:
               modulePath: iam/account
               field: account
               avoidConstraint: true
+            description: Reference to the account in this account-role association
         excludedOperations:
           - count
           - getRaw
@@ -133,6 +215,12 @@ aggregateProperties:
           - sum
           - updateAndIncrement
           - upsert
+    description: >
+      Many-to-many relationship defining the roles assigned to this account. An
+      account can have zero or more roles. Roles determine the permissions and
+      access levels for the account. NULL or empty indicates no roles assigned
+      (account has no permissions). When roles change, denormalizedPermissions
+      and denormalizedApplicationCodes are automatically updated.
   - name: tenants
     type: relationship
     nullable: true
@@ -160,6 +248,7 @@ aggregateProperties:
               modulePath: iam/tenant
               field: tenant
               avoidConstraint: true
+            description: Reference to the tenant in this account-tenant association
           - name: accountId
             type: id
             primaryKey: true
@@ -170,6 +259,7 @@ aggregateProperties:
               modulePath: iam/account
               field: account
               avoidConstraint: true
+            description: Reference to the account in this account-tenant association
         excludedOperations:
           - count
           - getRaw
@@ -181,6 +271,12 @@ aggregateProperties:
           - upsert
     webComponent:
       type: multiple-select
+    description: >
+      Many-to-many relationship defining which tenants (organizations) this
+      account belongs to. Enables multi-tenancy where one account can access
+      multiple organizations. NULL or empty indicates no tenant associations.
+      When tenants change, denormalizedTenantIds is automatically updated. Used
+      for data isolation and access control in multi-tenant environments.
   - name: user
     type: relationship
     nullable: true
@@ -188,15 +284,34 @@ aggregateProperties:
       type: one-to-one
       aggregateName: IamUser
       modulePath: iam/user
+    description: >
+      One-to-one relationship to the user profile containing personal
+      information. For USER type accounts, this links to the associated user
+      profile with name, surname, password, and other personal details. NULL for
+      SERVICE type accounts which don't have user profiles. The user entity
+      contains authentication credentials and personal data.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the account was created. Automatically set on record
+      insertion. Part of audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the account was last updated. Automatically updated on any
+      field modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates an active (non-deleted) account.
+      When set, the account is excluded from normal queries but preserved for
+      audit trail and potential recovery. Soft-deleted accounts cannot
+      authenticate. This is different from isActive=false: deleted accounts are
+      permanently removed from operations, while inactive accounts can be
+      reactivated.
 additionalApis:
   - path: iam/account/update-me
     resolverType: mutation

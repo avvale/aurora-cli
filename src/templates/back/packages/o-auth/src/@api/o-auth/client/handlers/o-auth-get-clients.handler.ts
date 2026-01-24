@@ -6,17 +6,17 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class OAuthGetClientsHandler {
-    constructor(private readonly queryBus: IQueryBus) {}
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        queryStatement?: QueryStatement,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<OAuthClient[] | OAuthClientDto[]> {
-        return await this.queryBus.ask(
-            new OAuthGetClientsQuery(queryStatement, constraint, {
-                timezone,
-            }),
-        );
-    }
+  async main(
+    queryStatement?: QueryStatement,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<OAuthClient[] | OAuthClientDto[]> {
+    return await this.queryBus.ask(
+      new OAuthGetClientsQuery(queryStatement, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

@@ -4,61 +4,59 @@ import { IamUpdateUserByIdService } from '@app/iam/user/application/update/iam-u
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamUpdateUserByIdCommandHandler', () => {
-    let commandHandler: IamUpdateUserByIdCommandHandler;
+  let commandHandler: IamUpdateUserByIdCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamUpdateUserByIdCommandHandler,
-                {
-                    provide: IamUpdateUserByIdService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamUpdateUserByIdCommandHandler,
+        {
+          provide: IamUpdateUserByIdService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<IamUpdateUserByIdCommandHandler>(
-            IamUpdateUserByIdCommandHandler,
-        );
+    commandHandler = module.get<IamUpdateUserByIdCommandHandler>(
+      IamUpdateUserByIdCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('UpdateUserByIdCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('UpdateUserByIdCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return an user created', async () => {
-            expect(
-                await commandHandler.execute(
-                    new IamUpdateUserByIdCommand(
-                        {
-                            id: iamMockUserData[0].id,
-                            rowId: iamMockUserData[0].rowId,
-                            accountId: iamMockUserData[0].accountId,
-                            name: iamMockUserData[0].name,
-                            surname: iamMockUserData[0].surname,
-                            avatar: iamMockUserData[0].avatar,
-                            mobile: iamMockUserData[0].mobile,
-                            langId: iamMockUserData[0].langId,
-                            password: iamMockUserData[0].password,
-                            isTwoFactorAuthenticationEnabled:
-                                iamMockUserData[0]
-                                    .isTwoFactorAuthenticationEnabled,
-                            twoFactorAuthenticationSecret:
-                                iamMockUserData[0]
-                                    .twoFactorAuthenticationSecret,
-                            rememberToken: iamMockUserData[0].rememberToken,
-                            meta: iamMockUserData[0].meta,
-                        },
-                        {},
-                        { timezone: process.env.TZ },
-                    ),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return an user created', async () => {
+      expect(
+        await commandHandler.execute(
+          new IamUpdateUserByIdCommand(
+            {
+              id: iamMockUserData[0].id,
+              rowId: iamMockUserData[0].rowId,
+              accountId: iamMockUserData[0].accountId,
+              name: iamMockUserData[0].name,
+              surname: iamMockUserData[0].surname,
+              avatar: iamMockUserData[0].avatar,
+              mobile: iamMockUserData[0].mobile,
+              langId: iamMockUserData[0].langId,
+              password: iamMockUserData[0].password,
+              isTwoFactorAuthenticationEnabled:
+                iamMockUserData[0].isTwoFactorAuthenticationEnabled,
+              twoFactorAuthenticationSecret:
+                iamMockUserData[0].twoFactorAuthenticationSecret,
+              rememberToken: iamMockUserData[0].rememberToken,
+              meta: iamMockUserData[0].meta,
+            },
+            {},
+            { timezone: process.env.TZ },
+          ),
+        ),
+      ).toBe(undefined);
     });
+  });
 });

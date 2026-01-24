@@ -74,39 +74,39 @@ import { OAuthUpdateClientByIdHandler } from './handlers/o-auth-update-client-by
 import { OAuthClientSeeder } from './seeder/o-auth-client.seeder';
 
 export const OAuthClientApiControllers = [
-    OAuthCreateClientController,
-    OAuthCreateClientsController,
-    OAuthPaginateClientsController,
-    OAuthGetClientsController,
-    OAuthFindClientByIdController,
-    OAuthFindClientController,
-    OAuthUpdateClientByIdController,
-    OAuthDeleteClientByIdController,
-    OAuthDeleteClientsController,
+  OAuthCreateClientController,
+  OAuthCreateClientsController,
+  OAuthPaginateClientsController,
+  OAuthGetClientsController,
+  OAuthFindClientByIdController,
+  OAuthFindClientController,
+  OAuthUpdateClientByIdController,
+  OAuthDeleteClientByIdController,
+  OAuthDeleteClientsController,
 ];
 
 export const OAuthClientApiResolvers = [
-    OAuthCreateClientResolver,
-    OAuthCreateClientsResolver,
-    OAuthPaginateClientsResolver,
-    OAuthGetClientsResolver,
-    OAuthFindClientByIdResolver,
-    OAuthFindClientResolver,
-    OAuthUpdateClientByIdResolver,
-    OAuthDeleteClientByIdResolver,
-    OAuthDeleteClientsResolver,
+  OAuthCreateClientResolver,
+  OAuthCreateClientsResolver,
+  OAuthPaginateClientsResolver,
+  OAuthGetClientsResolver,
+  OAuthFindClientByIdResolver,
+  OAuthFindClientResolver,
+  OAuthUpdateClientByIdResolver,
+  OAuthDeleteClientByIdResolver,
+  OAuthDeleteClientsResolver,
 ];
 
 export const OAuthClientApiHandlers = [
-    OAuthCreateClientHandler,
-    OAuthCreateClientsHandler,
-    OAuthPaginateClientsHandler,
-    OAuthGetClientsHandler,
-    OAuthFindClientByIdHandler,
-    OAuthFindClientHandler,
-    OAuthUpdateClientByIdHandler,
-    OAuthDeleteClientByIdHandler,
-    OAuthDeleteClientsHandler,
+  OAuthCreateClientHandler,
+  OAuthCreateClientsHandler,
+  OAuthPaginateClientsHandler,
+  OAuthGetClientsHandler,
+  OAuthFindClientByIdHandler,
+  OAuthFindClientHandler,
+  OAuthUpdateClientByIdHandler,
+  OAuthDeleteClientByIdHandler,
+  OAuthDeleteClientsHandler,
 ];
 
 export const OAuthClientApiServices = [OAuthClientSeeder];

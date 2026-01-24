@@ -9,20 +9,20 @@ import { ClickupService } from '../shared/clickup.service';
 
 @Injectable()
 export class ClickupSpaceHandler {
-    constructor(
-        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-        private readonly clickupService: ClickupService,
-    ) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+    private readonly clickupService: ClickupService,
+  ) {}
 
-    async main(teamId?: string): Promise<ClickupSpace[] | ClickupSpaceDto[]> {
-        const supportTaskPlatformApiKey = await this.cacheManager.get<string>(
-            CLICKUP_TASK_PLATFORM_API_KEY,
-        );
+  async main(teamId?: string): Promise<ClickupSpace[] | ClickupSpaceDto[]> {
+    const supportTaskPlatformApiKey = await this.cacheManager.get<string>(
+      CLICKUP_TASK_PLATFORM_API_KEY,
+    );
 
-        return await lastValueFrom(
-            this.clickupService.getSpaces(teamId, {
-                authorization: supportTaskPlatformApiKey,
-            }),
-        );
-    }
+    return await lastValueFrom(
+      this.clickupService.getSpaces(teamId, {
+        authorization: supportTaskPlatformApiKey,
+      }),
+    );
+  }
 }

@@ -8,25 +8,20 @@ import { OAuthCreateCredentialsHandler } from '../handlers/o-auth-create-credent
 @ApiTags('[o-auth] credential')
 @Controller('o-auth/credentials')
 export class OAuthCreateCredentialsController {
-    constructor(private readonly handler: OAuthCreateCredentialsHandler) {}
+  constructor(private readonly handler: OAuthCreateCredentialsHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Create credential' })
-    @ApiCreatedResponse({
-        description: 'The credential obtained after login.',
-        type: OAuthCreateCredentialsDto,
-    })
-    async main(
-        @Headers('Authorization') authorization: string,
-        @Body() payload: OAuthCreateCredentialsDto,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ) {
-        return await this.handler.main(
-            authorization,
-            payload,
-            timezone,
-            auditing,
-        );
-    }
+  @Post()
+  @ApiOperation({ summary: 'Create credential' })
+  @ApiCreatedResponse({
+    description: 'The credential obtained after login.',
+    type: OAuthCreateCredentialsDto,
+  })
+  async main(
+    @Headers('Authorization') authorization: string,
+    @Body() payload: OAuthCreateCredentialsDto,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ) {
+    return await this.handler.main(authorization, payload, timezone, auditing);
+  }
 }

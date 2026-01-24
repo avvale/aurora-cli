@@ -9,40 +9,50 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:extension
   outlineIcon: mat_outline:extension
+description: |
+  Core module that defines the bounded contexts of the application. A bounded context represents a logical boundary within the domain, grouping related modules and their permissions. Used by the IAM system to organize and manage access control across different functional areas of the application.
 aggregateProperties:
   - name: id
-    description: UUID for bounded context
+    description: |
+      Unique identifier for the bounded context. UUID v4 format, generated automatically on creation. Used as primary key and for references.
     type: id
     primaryKey: true
     nullable: false
   - name: rowId
+    description: |
+      Auto-incremented sequential identifier for internal database indexing. Used for ordered retrieval and performance optimization. Unique across all bounded contexts.
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
   - name: name
-    description: Name of the bounded context
+    description: |
+      Human-readable name of the bounded context. Used for display purposes in UI and documentation. Should be unique and descriptive of the domain area it represents (e.g., 'Identity and Access Management', 'Library Management').
     type: varchar
     maxLength: 128
     nullable: false
   - name: root
-    description: root folder where the bounded context is located
+    description: |
+      Root directory path where the bounded context code is located. Typically matches the module structure (e.g., 'iam', 'library', 'catalog'). Used by code generation tools and for file organization. Must match actual filesystem structure.
     type: varchar
     maxLength: 64
     nullable: false
   - name: sort
-    description: Sort order of the bounded context
+    description: |
+      Display order for UI lists and navigation menus. Lower numbers appear first. NULL values are sorted last. Allows manual organization of bounded contexts in administrative interfaces.
     type: smallint
     unsigned: true
     nullable: true
   - name: isActive
-    description: Indicates if the bounded context is active
+    description: |
+      Indicates if the bounded context is currently active and available. Inactive bounded contexts are hidden from UI and their permissions are not enforced. Use for temporary disabling without deletion.
     type: boolean
     nullable: false
     defaultValue: false
     example: true
   - name: permissions
-    description: List of permissions associated with the bounded context
+    description: |
+      Collection of permissions associated with this bounded context. Each permission defines access to specific operations within the bounded context's modules. Managed through the grid elements manager component.
     type: relationship
     nullable: true
     relationship:
@@ -54,15 +64,18 @@ aggregateProperties:
     webComponent:
       type: grid-elements-manager
   - name: createdAt
-    description: Timestamp when the bounded context was created
+    description: |
+      Timestamp when the bounded context was created. Automatically set on record creation. Used for audit trail and historical tracking.
     type: timestamp
     nullable: true
   - name: updatedAt
-    description: Timestamp when the bounded context was last updated
+    description: |
+      Timestamp when the bounded context was last updated. Automatically updated on any modification. Used for audit trail and change tracking.
     type: timestamp
     nullable: true
   - name: deletedAt
-    description: Timestamp when the bounded context was deleted
+    description: |
+      Soft delete timestamp. NULL indicates active record. When set, the bounded context is excluded from normal queries but preserved for audit and recovery purposes. Cascade affects associated permissions.
     type: timestamp
     nullable: true
 excludedOperations:

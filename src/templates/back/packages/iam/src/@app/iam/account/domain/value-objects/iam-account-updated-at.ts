@@ -1,28 +1,28 @@
 import {
-    DataValueObject,
-    TimestampValueObject,
-    ValidationRules,
+  DataValueObject,
+  TimestampValueObject,
+  ValidationRules,
 } from '@aurorajs.dev/core';
 
 export class IamAccountUpdatedAt extends TimestampValueObject {
-    public readonly type: string = 'IamAccountUpdatedAt';
+  public readonly type: string = 'IamAccountUpdatedAt';
 
-    constructor(
-        value: string | DataValueObject,
-        validationRules: ValidationRules = {},
-        data: DataValueObject = {},
-    ) {
-        super(
-            value,
-            Object.assign(
-                {
-                    name: 'IamAccountUpdatedAt',
-                    nullable: true,
-                    undefinable: true,
-                },
-                validationRules,
-            ),
-            data,
-        );
-    }
+  constructor(
+    value: string | DataValueObject,
+    validationRules: ValidationRules = {},
+    data: DataValueObject = {},
+  ) {
+    super(
+      value,
+      Object.assign(
+        {
+          name: 'IamAccountUpdatedAt',
+          nullable: true,
+          undefinable: true,
+        },
+        validationRules,
+      ),
+      data,
+    );
+  }
 }

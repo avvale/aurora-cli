@@ -7,64 +7,64 @@ import { IamInheritRoleDto } from '../dto';
 
 @Injectable()
 export class IamInheritPermissionsRoleRoleHandler {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(
-        payload: IamInheritRoleInput | IamInheritRoleDto,
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<boolean> {
-        const parentRole = await this.queryBus.ask(
-            new IamFindRoleByIdQuery(
-                payload.parentRoleId,
-                {
-                    include: ['permissions'],
-                },
-                {
-                    timezone,
-                },
-            ),
-        );
+  async main(
+    payload: IamInheritRoleInput | IamInheritRoleDto,
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<boolean> {
+    const parentRole = await this.queryBus.ask(
+      new IamFindRoleByIdQuery(
+        payload.parentRoleId,
+        {
+          include: ['permissions'],
+        },
+        {
+          timezone,
+        },
+      ),
+    );
 
-        const childRole = await this.queryBus.ask(
-            new IamFindRoleByIdQuery(
-                payload.childRoleId,
-                {
-                    include: ['permissions'],
-                },
-                {
-                    timezone,
-                },
-            ),
-        );
+    const childRole = await this.queryBus.ask(
+      new IamFindRoleByIdQuery(
+        payload.childRoleId,
+        {
+          include: ['permissions'],
+        },
+        {
+          timezone,
+        },
+      ),
+    );
 
-        const childPermissionIds = childRole.permissions.map(
-            (permission) => permission.id,
-        );
-        const parentPermissionIds = parentRole.permissions
-            .filter((permission) => !childPermissionIds.includes(permission.id))
-            .map((permission) => permission.id);
+    const childPermissionIds = childRole.permissions.map(
+      (permission) => permission.id,
+    );
+    const parentPermissionIds = parentRole.permissions
+      .filter((permission) => !childPermissionIds.includes(permission.id))
+      .map((permission) => permission.id);
 
-        if (parentPermissionIds.length > 0) {
-            await this.commandBus.dispatch(
-                new IamCreatePermissionsRolesCommand(
-                    parentPermissionIds.map((permissionId) => ({
-                        permissionId,
-                        roleId: childRole.id,
-                    })),
-                    {
-                        timezone,
-                        repositoryOptions: {
-                            auditing,
-                        },
-                    },
-                ),
-            );
-        }
-
-        return true;
+    if (parentPermissionIds.length > 0) {
+      await this.commandBus.dispatch(
+        new IamCreatePermissionsRolesCommand(
+          parentPermissionIds.map((permissionId) => ({
+            permissionId,
+            roleId: childRole.id,
+          })),
+          {
+            timezone,
+            repositoryOptions: {
+              auditing,
+            },
+          },
+        ),
+      );
     }
+
+    return true;
+  }
 }

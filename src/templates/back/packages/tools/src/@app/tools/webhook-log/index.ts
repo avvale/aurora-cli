@@ -75,35 +75,35 @@ import { ToolsPaginateWebhookLogsService } from './application/paginate/tools-pa
 import { ToolsUpdateWebhookLogByIdService } from './application/update/tools-update-webhook-log-by-id.service';
 
 export const ToolsWebhookLogHandlers = [
-    // commands
-    ToolsCreateWebhookLogCommandHandler,
-    ToolsCreateWebhookLogsCommandHandler,
-    ToolsUpdateWebhookLogByIdCommandHandler,
-    ToolsDeleteWebhookLogByIdCommandHandler,
-    ToolsDeleteWebhookLogsCommandHandler,
+  // commands
+  ToolsCreateWebhookLogCommandHandler,
+  ToolsCreateWebhookLogsCommandHandler,
+  ToolsUpdateWebhookLogByIdCommandHandler,
+  ToolsDeleteWebhookLogByIdCommandHandler,
+  ToolsDeleteWebhookLogsCommandHandler,
 
-    // queries
-    ToolsPaginateWebhookLogsQueryHandler,
-    ToolsGetWebhookLogsQueryHandler,
-    ToolsFindWebhookLogQueryHandler,
-    ToolsFindWebhookLogByIdQueryHandler,
+  // queries
+  ToolsPaginateWebhookLogsQueryHandler,
+  ToolsGetWebhookLogsQueryHandler,
+  ToolsFindWebhookLogQueryHandler,
+  ToolsFindWebhookLogByIdQueryHandler,
 
-    // events
-    ToolsCreatedWebhookLogEventHandler,
-    ToolsCreatedWebhookLogsEventHandler,
-    ToolsUpdatedWebhookLogEventHandler,
-    ToolsDeletedWebhookLogEventHandler,
-    ToolsDeletedWebhookLogsEventHandler,
+  // events
+  ToolsCreatedWebhookLogEventHandler,
+  ToolsCreatedWebhookLogsEventHandler,
+  ToolsUpdatedWebhookLogEventHandler,
+  ToolsDeletedWebhookLogEventHandler,
+  ToolsDeletedWebhookLogsEventHandler,
 ];
 
 export const ToolsWebhookLogServices = [
-    ToolsCreateWebhookLogService,
-    ToolsCreateWebhookLogsService,
-    ToolsPaginateWebhookLogsService,
-    ToolsGetWebhookLogsService,
-    ToolsFindWebhookLogService,
-    ToolsFindWebhookLogByIdService,
-    ToolsUpdateWebhookLogByIdService,
-    ToolsDeleteWebhookLogByIdService,
-    ToolsDeleteWebhookLogsService,
+  ToolsCreateWebhookLogService,
+  ToolsCreateWebhookLogsService,
+  ToolsPaginateWebhookLogsService,
+  ToolsGetWebhookLogsService,
+  ToolsFindWebhookLogService,
+  ToolsFindWebhookLogByIdService,
+  ToolsUpdateWebhookLogByIdService,
+  ToolsDeleteWebhookLogByIdService,
+  ToolsDeleteWebhookLogsService,
 ];

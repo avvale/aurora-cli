@@ -4,40 +4,40 @@ import { IamCheckUniqueEmailAccountHandler } from '../handlers/iam-check-unique-
 import { IamCheckUniqueEmailAccountResolver } from './iam-check-unique-email-account.resolver';
 
 describe('IamCheckUniqueEmailAccountResolver', () => {
-    let resolver: IamCheckUniqueEmailAccountResolver;
-    let handler: IamCheckUniqueEmailAccountHandler;
+  let resolver: IamCheckUniqueEmailAccountResolver;
+  let handler: IamCheckUniqueEmailAccountHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                IamCheckUniqueEmailAccountResolver,
-                {
-                    provide: IamCheckUniqueEmailAccountHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        IamCheckUniqueEmailAccountResolver,
+        {
+          provide: IamCheckUniqueEmailAccountHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<IamCheckUniqueEmailAccountResolver>(
-            IamCheckUniqueEmailAccountResolver,
-        );
-        handler = module.get<IamCheckUniqueEmailAccountHandler>(
-            IamCheckUniqueEmailAccountHandler,
-        );
-    });
+    resolver = module.get<IamCheckUniqueEmailAccountResolver>(
+      IamCheckUniqueEmailAccountResolver,
+    );
+    handler = module.get<IamCheckUniqueEmailAccountHandler>(
+      IamCheckUniqueEmailAccountHandler,
+    );
+  });
 
+  test('IamCheckUniqueEmailAccountResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('IamCheckUniqueEmailAccountResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
-
-    describe('main', () => {
-        test('IamCheckUniqueEmailAccountResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-    });
+  });
 });

@@ -9,15 +9,15 @@ import { ToolsUpScriptProcedureHandler } from '../handlers/tools-up-script-proce
 @Controller('tools/procedure/up-script')
 @Auth('tools.procedure.execution')
 export class ToolsUpScriptProcedureController {
-    constructor(private readonly handler: ToolsUpScriptProcedureHandler) {}
+  constructor(private readonly handler: ToolsUpScriptProcedureHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: Boolean,
-    })
-    async main(@Body() procedureId: string, @Timezone() timezone?: string) {
-        return await this.handler.main(procedureId, timezone);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: Boolean,
+  })
+  async main(@Body() procedureId: string, @Timezone() timezone?: string) {
+    return await this.handler.main(procedureId, timezone);
+  }
 }

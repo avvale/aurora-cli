@@ -5,24 +5,18 @@ import { IQueryBus, QueryStatement } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class CommonFindLangByIdHandler
-{
-    constructor(
-        private readonly queryBus: IQueryBus,
-    ) {}
+export class CommonFindLangByIdHandler {
+  constructor(private readonly queryBus: IQueryBus) {}
 
-    async main(
-        id: string,
-        constraint?: QueryStatement,
-        timezone?: string,
-    ): Promise<CommonLang | CommonLangDto>
-    {
-        return await this.queryBus.ask(new CommonFindLangByIdQuery(
-            id,
-            constraint,
-            {
-                timezone,
-            },
-        ));
-    }
+  async main(
+    id: string,
+    constraint?: QueryStatement,
+    timezone?: string,
+  ): Promise<CommonLang | CommonLangDto> {
+    return await this.queryBus.ask(
+      new CommonFindLangByIdQuery(id, constraint, {
+        timezone,
+      }),
+    );
+  }
 }

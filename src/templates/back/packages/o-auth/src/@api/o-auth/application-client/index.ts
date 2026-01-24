@@ -74,39 +74,39 @@ import { OAuthUpdateApplicationClientByIdHandler } from './handlers/o-auth-updat
 import { OAuthApplicationClientSeeder } from './seeder/o-auth-application-client.seeder';
 
 export const OAuthApplicationClientApiControllers = [
-    OAuthCreateApplicationClientController,
-    OAuthCreateApplicationsClientsController,
-    OAuthPaginateApplicationsClientsController,
-    OAuthGetApplicationsClientsController,
-    OAuthFindApplicationClientByIdController,
-    OAuthFindApplicationClientController,
-    OAuthUpdateApplicationClientByIdController,
-    OAuthDeleteApplicationClientByIdController,
-    OAuthDeleteApplicationsClientsController,
+  OAuthCreateApplicationClientController,
+  OAuthCreateApplicationsClientsController,
+  OAuthPaginateApplicationsClientsController,
+  OAuthGetApplicationsClientsController,
+  OAuthFindApplicationClientByIdController,
+  OAuthFindApplicationClientController,
+  OAuthUpdateApplicationClientByIdController,
+  OAuthDeleteApplicationClientByIdController,
+  OAuthDeleteApplicationsClientsController,
 ];
 
 export const OAuthApplicationClientApiResolvers = [
-    OAuthCreateApplicationClientResolver,
-    OAuthCreateApplicationsClientsResolver,
-    OAuthPaginateApplicationsClientsResolver,
-    OAuthGetApplicationsClientsResolver,
-    OAuthFindApplicationClientByIdResolver,
-    OAuthFindApplicationClientResolver,
-    OAuthUpdateApplicationClientByIdResolver,
-    OAuthDeleteApplicationClientByIdResolver,
-    OAuthDeleteApplicationsClientsResolver,
+  OAuthCreateApplicationClientResolver,
+  OAuthCreateApplicationsClientsResolver,
+  OAuthPaginateApplicationsClientsResolver,
+  OAuthGetApplicationsClientsResolver,
+  OAuthFindApplicationClientByIdResolver,
+  OAuthFindApplicationClientResolver,
+  OAuthUpdateApplicationClientByIdResolver,
+  OAuthDeleteApplicationClientByIdResolver,
+  OAuthDeleteApplicationsClientsResolver,
 ];
 
 export const OAuthApplicationClientApiHandlers = [
-    OAuthCreateApplicationClientHandler,
-    OAuthCreateApplicationsClientsHandler,
-    OAuthPaginateApplicationsClientsHandler,
-    OAuthGetApplicationsClientsHandler,
-    OAuthFindApplicationClientByIdHandler,
-    OAuthFindApplicationClientHandler,
-    OAuthUpdateApplicationClientByIdHandler,
-    OAuthDeleteApplicationClientByIdHandler,
-    OAuthDeleteApplicationsClientsHandler,
+  OAuthCreateApplicationClientHandler,
+  OAuthCreateApplicationsClientsHandler,
+  OAuthPaginateApplicationsClientsHandler,
+  OAuthGetApplicationsClientsHandler,
+  OAuthFindApplicationClientByIdHandler,
+  OAuthFindApplicationClientHandler,
+  OAuthUpdateApplicationClientByIdHandler,
+  OAuthDeleteApplicationClientByIdHandler,
+  OAuthDeleteApplicationsClientsHandler,
 ];
 
 export const OAuthApplicationClientApiServices = [OAuthApplicationClientSeeder];

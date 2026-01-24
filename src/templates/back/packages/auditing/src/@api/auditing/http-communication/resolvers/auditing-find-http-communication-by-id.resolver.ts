@@ -7,16 +7,16 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('auditing.httpCommunication.get')
 export class AuditingFindHttpCommunicationByIdResolver {
-    constructor(
-        private readonly handler: AuditingFindHttpCommunicationByIdHandler,
-    ) {}
+  constructor(
+    private readonly handler: AuditingFindHttpCommunicationByIdHandler,
+  ) {}
 
-    @Query('auditingFindHttpCommunicationById')
-    async main(
-        @Args('id') id: string,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<AuditingHttpCommunication> {
-        return await this.handler.main(id, constraint, timezone);
-    }
+  @Query('auditingFindHttpCommunicationById')
+  async main(
+    @Args('id') id: string,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<AuditingHttpCommunication> {
+    return await this.handler.main(id, constraint, timezone);
+  }
 }

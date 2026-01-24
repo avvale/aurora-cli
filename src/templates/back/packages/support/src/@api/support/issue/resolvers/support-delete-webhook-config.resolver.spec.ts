@@ -4,40 +4,40 @@ import { SupportDeleteWebhookConfigHandler } from '../handlers/support-delete-we
 import { SupportDeleteWebhookConfigResolver } from './support-delete-webhook-config.resolver';
 
 describe('SupportDeleteWebhookConfigResolver', () => {
-    let resolver: SupportDeleteWebhookConfigResolver;
-    let handler: SupportDeleteWebhookConfigHandler;
+  let resolver: SupportDeleteWebhookConfigResolver;
+  let handler: SupportDeleteWebhookConfigHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                SupportDeleteWebhookConfigResolver,
-                {
-                    provide: SupportDeleteWebhookConfigHandler,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        SupportDeleteWebhookConfigResolver,
+        {
+          provide: SupportDeleteWebhookConfigHandler,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        resolver = module.get<SupportDeleteWebhookConfigResolver>(
-            SupportDeleteWebhookConfigResolver,
-        );
-        handler = module.get<SupportDeleteWebhookConfigHandler>(
-            SupportDeleteWebhookConfigHandler,
-        );
-    });
+    resolver = module.get<SupportDeleteWebhookConfigResolver>(
+      SupportDeleteWebhookConfigResolver,
+    );
+    handler = module.get<SupportDeleteWebhookConfigHandler>(
+      SupportDeleteWebhookConfigHandler,
+    );
+  });
 
+  test('SupportDeleteWebhookConfigResolver should be defined', () => {
+    expect(resolver).toBeDefined();
+  });
+
+  describe('main', () => {
     test('SupportDeleteWebhookConfigResolver should be defined', () => {
-        expect(resolver).toBeDefined();
+      expect(resolver).toBeDefined();
     });
-
-    describe('main', () => {
-        test('SupportDeleteWebhookConfigResolver should be defined', () => {
-            expect(resolver).toBeDefined();
-        });
-    });
+  });
 });

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Test, TestingModule } from '@nestjs/testing';
 import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
+import { Test, TestingModule } from '@nestjs/testing';
 
 // custom items
 import { QueueManagerPaginateJobsHandler } from './queue-manager-paginate-jobs.handler';
@@ -8,53 +8,51 @@ import { QueueManagerPaginateJobsHandler } from './queue-manager-paginate-jobs.h
 // sources
 // import { jobs } from '@app/queue-manager/job/infrastructure/mock/mock-job.data';
 
-describe('QueueManagerPaginateJobsHandler', () =>
-{
-    let handler: QueueManagerPaginateJobsHandler;
-    let queryBus: IQueryBus;
+describe('QueueManagerPaginateJobsHandler', () => {
+  let handler: QueueManagerPaginateJobsHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () =>
-    {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [
-            ],
-            providers: [
-                QueueManagerPaginateJobsHandler,
-                {
-                    provide : IQueryBus,
-                    useValue: {
-                        ask: () => { /**/ },
-                    },
-                },
-                {
-                    provide : ICommandBus,
-                    useValue: {
-                        dispatch: () => { /**/ },
-                    },
-                },
-            ],
-        })
-            .compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        QueueManagerPaginateJobsHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<QueueManagerPaginateJobsHandler>(QueueManagerPaginateJobsHandler);
-        queryBus = module.get<IQueryBus>(IQueryBus);
+    handler = module.get<QueueManagerPaginateJobsHandler>(
+      QueueManagerPaginateJobsHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  test('QueueManagerPaginateJobsHandler should be defined', () => {
+    expect(handler).toBeDefined();
+  });
+
+  describe('main', () => {
+    test('QueueManagerPaginateJobsHandler should be defined', () => {
+      expect(handler).toBeDefined();
     });
 
-    test('QueueManagerPaginateJobsHandler should be defined', () =>
-    {
-        expect(handler).toBeDefined();
-    });
-
-    describe('main', () =>
-    {
-        test('QueueManagerPaginateJobsHandler should be defined', () =>
-        {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return a jobs', async () =>
-        {
-            /* jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
+    test('should return a jobs', async () => {
+      /* jest.spyOn(queryBus, 'ask').mockImplementation(() => new Promise(resolve => resolve({
                 total: jobs.length,
                 count: jobs.length,
                 rows : jobs,
@@ -64,6 +62,6 @@ describe('QueueManagerPaginateJobsHandler', () =>
                 count: jobs.length,
                 rows : jobs,
             }); */
-        });
     });
+  });
 });

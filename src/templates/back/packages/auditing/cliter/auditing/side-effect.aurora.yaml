@@ -11,16 +11,26 @@ front:
   outlineIcon: app_registration
   solidFontSetIcon: material-symbols-outlined
   solidIcon: app_registration
+description: >
+  Module for tracking all side effects (data modifications) in the system.
+  Records every create, update, delete, and restore operation with before/after
+  values for audit trail, compliance, and rollback capabilities.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the side effect record. UUID v4 format, generated
+      automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Sequential numeric identifier for sorting and pagination. Auto-incremented,
+      unique per record.
   - name: tags
     type: array
     arrayOptions:
@@ -28,31 +38,51 @@ aggregateProperties:
     nullable: true
     index: index
     indexUsing: GIN
+    description: >
+      Array of string tags for categorizing side effects. Indexed with GIN for
+      fast search. Example: ['critical', 'user-action'].
   - name: modelPath
     type: varchar
     maxLength: 1022
     nullable: false
+    description: >
+      Full path to the domain aggregate affected. Example:
+      '@app/warehouse/product/domain/product.aggregate'. Max 1022 characters.
   - name: modelName
     type: varchar
     maxLength: 255
     nullable: false
+    description: >
+      Name of the domain model/entity affected. Example: 'Product', 'User'. Max
+      255 characters.
   - name: operationId
     type: id
     nullable: true
     index: index
+    description: >
+      Identifier linking multiple side effects in the same logical operation.
+      NULL for single-entity operations.
   - name: operationSort
     type: smallint
     unsigned: true
     nullable: true
+    description: >
+      Order of this side effect within a multi-step operation. NULL for single
+      operations. Used for rollback ordering.
   - name: accountId
     type: id
     nullable: false
     index: index
+    description: >
+      Identifier of the user account that triggered this side effect. Indexed for
+      user activity tracking.
   - name: email
     type: varchar
     maxLength: 127
     nullable: false
     example: john@gmail.com
+    description: >
+      Email address of the user who performed the action. Max 127 characters.
   - name: event
     type: enum
     enumOptions:
@@ -67,19 +97,34 @@ aggregateProperties:
       - UPSERTED
     nullable: false
     example: AuditingSideEffectEvent.CREATED
+    description: >
+      Type of operation performed. CREATED: new record. UPDATED: modified.
+      DELETED: removed. RESTORED: undeleted. BULK_* for multiple records.
   - name: auditableId
     type: id
     nullable: true
+    description: >
+      Primary key of the affected record in its original table. NULL for bulk
+      operations.
   - name: oldValue
     type: jsonb
     nullable: true
+    description: >
+      Complete state of the record before the operation. NULL for CREATE. Stored
+      as JSONB for rollback.
   - name: newValue
     type: jsonb
     nullable: true
+    description: >
+      Complete state of the record after the operation. NULL for DELETE. Stored
+      as JSONB.
   - name: ip
     type: varchar
     maxLength: 19
     nullable: true
+    description: >
+      IP address from which the request originated. Supports IPv4/IPv6. Max 19
+      characters. NULL for system operations.
   - name: method
     type: enum
     enumOptions:
@@ -89,42 +134,72 @@ aggregateProperties:
       - DELETE
     nullable: true
     example: AuditingSideEffectMethod.POST
+    description: >
+      HTTP method that triggered the side effect. NULL for non-HTTP operations
+      (scheduled tasks, queues).
   - name: baseUrl
     type: varchar
     maxLength: 2046
     nullable: true
+    description: >
+      Base URL of the API endpoint that triggered the side effect. Max 2046
+      characters. NULL for non-HTTP operations.
   - name: params
     type: jsonb
     nullable: true
+    description: >
+      URL path parameters from the HTTP request. Stored as JSONB. NULL if no
+      params.
   - name: query
     type: jsonb
     nullable: true
+    description: >
+      URL query string parameters. Stored as JSONB. NULL if no query params.
   - name: body
     type: jsonb
     nullable: true
+    description: >
+      HTTP request body that triggered the side effect. Stored as JSONB. NULL for
+      GET requests.
   - name: userAgent
     type: varchar
     maxLength: 1022
     nullable: true
+    description: >
+      User agent string from the HTTP request. Max 1022 characters. NULL for
+      non-HTTP operations.
   - name: isRollback
     type: boolean
     nullable: false
     defaultValue: false
     example: true
+    description: >
+      Flag indicating if this is a rollback operation. TRUE: rollback. FALSE:
+      normal. Default: false.
   - name: rollbackSideEffectId
     type: id
     nullable: true
     index: index
+    description: >
+      Reference to the side effect that was rolled back. NULL for non-rollback
+      operations.
   - name: createdAt
     type: timestamp
     nullable: true
     index: index
+    description: >
+      Timestamp when the side effect occurred. Indexed for time-range queries.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last update to this audit record.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active record. Audit records should
+      rarely be deleted.
 additionalApis:
   - path: auditing/side-effect/rollback
     resolverType: mutation

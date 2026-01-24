@@ -7,26 +7,26 @@ import { createKeyValue } from '../shared';
 
 @Injectable()
 export class ToolsCreateKeyValueHandler {
-    constructor(
-        private readonly moduleRef: ModuleRef,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    private readonly moduleRef: ModuleRef,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async main(
-        payload: ToolsCreateKeyValueInput,
-        timezone?: string,
-        auditing?: AuditingMeta,
-    ): Promise<ToolsKeyValue> {
-        await createKeyValue(this.moduleRef, payload, timezone, auditing);
+  async main(
+    payload: ToolsCreateKeyValueInput,
+    timezone?: string,
+    auditing?: AuditingMeta,
+  ): Promise<ToolsKeyValue> {
+    await createKeyValue(this.moduleRef, payload, timezone, auditing);
 
-        return await this.queryBus.ask(
-            new ToolsFindKeyValueByIdQuery(
-                payload.id,
-                {},
-                {
-                    timezone,
-                },
-            ),
-        );
-    }
+    return await this.queryBus.ask(
+      new ToolsFindKeyValueByIdQuery(
+        payload.id,
+        {},
+        {
+          timezone,
+        },
+      ),
+    );
+  }
 }

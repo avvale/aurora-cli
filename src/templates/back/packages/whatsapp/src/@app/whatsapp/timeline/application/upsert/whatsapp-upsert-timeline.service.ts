@@ -1,60 +1,54 @@
-import { WhatsappITimelineRepository, WhatsappTimeline } from '@app/whatsapp/timeline';
 import {
-    WhatsappTimelineAccounts,
-    WhatsappTimelineCreatedAt,
-    WhatsappTimelineDeletedAt,
-    WhatsappTimelineId,
-    WhatsappTimelineUpdatedAt,
-    WhatsappTimelineWabaContactId,
-    WhatsappTimelineWabaPhoneNumberId,
+  WhatsappITimelineRepository,
+  WhatsappTimeline,
+} from '@app/whatsapp/timeline';
+import {
+  WhatsappTimelineAccounts,
+  WhatsappTimelineCreatedAt,
+  WhatsappTimelineId,
+  WhatsappTimelineUpdatedAt,
+  WhatsappTimelineWabaContactId,
+  WhatsappTimelineWabaPhoneNumberId,
 } from '@app/whatsapp/timeline/domain/value-objects';
-import { CQMetadata, Utils } from '@aurorajs.dev/core';
+import { CQMetadata } from '@aurorajs.dev/core';
 import { Injectable } from '@nestjs/common';
 import { EventPublisher } from '@nestjs/cqrs';
 
 @Injectable()
-export class WhatsappUpsertTimelineService
-{
-    constructor(
-        private readonly publisher: EventPublisher,
-        private readonly repository: WhatsappITimelineRepository,
-    ) {}
+export class WhatsappUpsertTimelineService {
+  constructor(
+    private readonly publisher: EventPublisher,
+    private readonly repository: WhatsappITimelineRepository,
+  ) {}
 
-    async main(
-        payload: {
-            id: WhatsappTimelineId;
-            accounts: WhatsappTimelineAccounts;
-            wabaPhoneNumberId: WhatsappTimelineWabaPhoneNumberId;
-            wabaContactId: WhatsappTimelineWabaContactId;
-        },
-        cQMetadata?: CQMetadata,
-    ): Promise<void>
-    {
-        // upsert aggregate with factory pattern
-        const timeline = WhatsappTimeline.register(
-            payload.id,
-            payload.accounts,
-            payload.wabaPhoneNumberId,
-            payload.wabaContactId,
-            new WhatsappTimelineCreatedAt({ currentTimestamp: true }),
-            new WhatsappTimelineUpdatedAt({ currentTimestamp: true }),
-            null, // deletedAt
-        );
+  async main(
+    payload: {
+      id: WhatsappTimelineId;
+      accounts: WhatsappTimelineAccounts;
+      wabaPhoneNumberId: WhatsappTimelineWabaPhoneNumberId;
+      wabaContactId: WhatsappTimelineWabaContactId;
+    },
+    cQMetadata?: CQMetadata,
+  ): Promise<void> {
+    // upsert aggregate with factory pattern
+    const timeline = WhatsappTimeline.register(
+      payload.id,
+      payload.accounts,
+      payload.wabaPhoneNumberId,
+      payload.wabaContactId,
+      new WhatsappTimelineCreatedAt({ currentTimestamp: true }),
+      new WhatsappTimelineUpdatedAt({ currentTimestamp: true }),
+      null, // deletedAt
+    );
 
-        await this.repository
-            .upsert(
-                timeline,
-                {
-                    upsertOptions: cQMetadata?.repositoryOptions,
-                },
-            );
+    await this.repository.upsert(timeline, {
+      upsertOptions: cQMetadata?.repositoryOptions,
+    });
 
-        // merge EventBus methods with object returned by the repository, to be able to apply and commit events
-        const timelineRegister = this.publisher.mergeObjectContext(
-            timeline,
-        );
+    // merge EventBus methods with object returned by the repository, to be able to apply and commit events
+    const timelineRegister = this.publisher.mergeObjectContext(timeline);
 
-        timelineRegister.created(timeline); // apply event to model events
-        timelineRegister.commit(); // commit all events of model
-    }
+    timelineRegister.created(timeline); // apply event to model events
+    timelineRegister.commit(); // commit all events of model
+  }
 }

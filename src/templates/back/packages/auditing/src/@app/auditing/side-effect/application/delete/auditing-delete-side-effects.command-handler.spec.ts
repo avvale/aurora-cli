@@ -4,39 +4,37 @@ import { AuditingDeleteSideEffectsService } from '@app/auditing/side-effect/appl
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('AuditingDeleteSideEffectsCommandHandler', () => {
-    let commandHandler: AuditingDeleteSideEffectsCommandHandler;
+  let commandHandler: AuditingDeleteSideEffectsCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                AuditingDeleteSideEffectsCommandHandler,
-                {
-                    provide: AuditingDeleteSideEffectsService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        AuditingDeleteSideEffectsCommandHandler,
+        {
+          provide: AuditingDeleteSideEffectsService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<AuditingDeleteSideEffectsCommandHandler>(
-            AuditingDeleteSideEffectsCommandHandler,
-        );
+    commandHandler = module.get<AuditingDeleteSideEffectsCommandHandler>(
+      AuditingDeleteSideEffectsCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('AuditingDeleteSideEffectsCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('AuditingDeleteSideEffectsCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(
-                    new AuditingDeleteSideEffectsCommand(),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(new AuditingDeleteSideEffectsCommand()),
+      ).toBe(undefined);
     });
+  });
 });

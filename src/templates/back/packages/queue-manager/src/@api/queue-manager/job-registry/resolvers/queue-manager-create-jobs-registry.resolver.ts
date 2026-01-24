@@ -7,15 +7,15 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('queueManager.jobRegistry.create')
 export class QueueManagerCreateJobsRegistryResolver {
-    constructor(
-        private readonly handler: QueueManagerCreateJobsRegistryHandler,
-    ) {}
+  constructor(
+    private readonly handler: QueueManagerCreateJobsRegistryHandler,
+  ) {}
 
-    @Mutation('queueManagerCreateJobsRegistry')
-    async main(
-        @Args('payload') payload: QueueManagerCreateJobRegistryInput[],
-        @Timezone() timezone?: string,
-    ): Promise<boolean> {
-        return await this.handler.main(payload, timezone);
-    }
+  @Mutation('queueManagerCreateJobsRegistry')
+  async main(
+    @Args('payload') payload: QueueManagerCreateJobRegistryInput[],
+    @Timezone() timezone?: string,
+  ): Promise<boolean> {
+    return await this.handler.main(payload, timezone);
+  }
 }

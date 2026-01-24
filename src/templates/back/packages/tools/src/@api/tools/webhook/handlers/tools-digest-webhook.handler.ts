@@ -9,27 +9,27 @@ import { WEBHOOK_ACTIVATE_LOGGER } from '../shared';
 
 @Injectable()
 export class ToolsDigestWebhookHandler {
-    constructor(
-        private readonly commandBus: ICommandBus,
-        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-    ) {}
+  constructor(
+    private readonly commandBus: ICommandBus,
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+  ) {}
 
-    async main(request: Request, headers: any, payload: any): Promise<boolean> {
-        if (await this.cacheManager.get(WEBHOOK_ACTIVATE_LOGGER)) {
-            await this.commandBus.dispatch(
-                new ToolsCreateWebhookLogCommand({
-                    id: uuid(),
-                    url: `${request.protocol}://${request.host}${request.originalUrl}`,
-                    headerRequest: headers,
-                    bodyRequest: payload,
-                }),
-            );
-        }
-
-        await this.commandBus.dispatch(
-            new ToolsDigestWebhookCommand(headers, payload),
-        );
-
-        return true;
+  async main(request: Request, headers: any, payload: any): Promise<boolean> {
+    if (await this.cacheManager.get(WEBHOOK_ACTIVATE_LOGGER)) {
+      await this.commandBus.dispatch(
+        new ToolsCreateWebhookLogCommand({
+          id: uuid(),
+          url: `${request.protocol}://${request.host}${request.originalUrl}`,
+          headerRequest: headers,
+          bodyRequest: payload,
+        }),
+      );
     }
+
+    await this.commandBus.dispatch(
+      new ToolsDigestWebhookCommand(headers, payload),
+    );
+
+    return true;
+  }
 }

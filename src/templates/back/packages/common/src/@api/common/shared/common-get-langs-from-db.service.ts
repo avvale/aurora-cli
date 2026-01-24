@@ -7,30 +7,30 @@ import { Cache } from 'cache-manager';
 
 @Injectable()
 export class CommonGetLangsFromDbService implements CoreGetLangsService {
-    constructor(
-        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-        private readonly queryBus: IQueryBus,
-    ) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+    private readonly queryBus: IQueryBus,
+  ) {}
 
-    async get<CommonLang>(): Promise<CommonLang[]> {
-        // return cache langs
-        const langs = await this.cacheManager.get<CommonLang[]>('common/langs');
-        if (langs) return langs;
+  async get<CommonLang>(): Promise<CommonLang[]> {
+    // return cache langs
+    const langs = await this.cacheManager.get<CommonLang[]>('common/langs');
+    if (langs) return langs;
 
-        // get langs from db and return cache langs if cache is expired
-        await this.init();
-        return await this.cacheManager.get<CommonLang[]>('common/langs');
-    }
+    // get langs from db and return cache langs if cache is expired
+    await this.init();
+    return await this.cacheManager.get<CommonLang[]>('common/langs');
+  }
 
-    async init(): Promise<void> {
-        await this.cacheManager.set('common/langs', await this.getDbLangs());
-    }
+  async init(): Promise<void> {
+    await this.cacheManager.set('common/langs', await this.getDbLangs());
+  }
 
-    async getDbLangs(): Promise<CommonLang[]> {
-        return await this.queryBus.ask(new CommonGetLangsQuery());
-    }
+  async getDbLangs(): Promise<CommonLang[]> {
+    return await this.queryBus.ask(new CommonGetLangsQuery());
+  }
 
-    onApplicationBootstrap(): void {
-        this.init();
-    }
+  onApplicationBootstrap(): void {
+    this.init();
+  }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import {
-    IamFindTenantAccountByIdHandler,
-    IamTenantAccountDto,
+  IamFindTenantAccountByIdHandler,
+  IamTenantAccountDto,
 } from '@api/iam/tenant-account';
 import { Auth } from '@aurora/decorators';
 import { QueryStatement, Timezone } from '@aurorajs.dev/core';
@@ -12,26 +12,21 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @Controller('iam/tenant-account/find')
 @Auth('iam.tenantAccount.get')
 export class IamFindTenantAccountByIdController {
-    constructor(private readonly handler: IamFindTenantAccountByIdHandler) {}
+  constructor(private readonly handler: IamFindTenantAccountByIdHandler) {}
 
-    @Post(':tenantId/:accountId')
-    @HttpCode(200)
-    @ApiOperation({ summary: 'Find tenant-account by id' })
-    @ApiOkResponse({
-        description: 'The record has been successfully requested.',
-        type: IamTenantAccountDto,
-    })
-    async main(
-        @Param('tenantId') tenantId: string,
-        @Param('accountId') accountId: string,
-        @Body('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ) {
-        return await this.handler.main(
-            tenantId,
-            accountId,
-            constraint,
-            timezone,
-        );
-    }
+  @Post(':tenantId/:accountId')
+  @HttpCode(200)
+  @ApiOperation({ summary: 'Find tenant-account by id' })
+  @ApiOkResponse({
+    description: 'The record has been successfully requested.',
+    type: IamTenantAccountDto,
+  })
+  async main(
+    @Param('tenantId') tenantId: string,
+    @Param('accountId') accountId: string,
+    @Body('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ) {
+    return await this.handler.main(tenantId, accountId, constraint, timezone);
+  }
 }

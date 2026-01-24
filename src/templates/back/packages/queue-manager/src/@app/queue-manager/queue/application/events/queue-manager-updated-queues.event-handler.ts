@@ -3,9 +3,9 @@ import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
 @EventsHandler(QueueManagerUpdatedQueuesEvent)
 export class QueueManagerUpdatedQueuesEventHandler
-    implements IEventHandler<QueueManagerUpdatedQueuesEvent>
+  implements IEventHandler<QueueManagerUpdatedQueuesEvent>
 {
-    handle(event: QueueManagerUpdatedQueuesEvent): void {
-        // console.log('QueueManagerUpdatedQueuesEvent: ', event);
-    }
+  handle(event: QueueManagerUpdatedQueuesEvent): void {
+    // console.log('QueueManagerUpdatedQueuesEvent: ', event);
+  }
 }

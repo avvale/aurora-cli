@@ -1,29 +1,33 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission-role.aurora.yaml
+ */
 import {
-    DataValueObject,
-    UuidValueObject,
-    ValidationRules,
+  DataValueObject,
+  UuidValueObject,
+  ValidationRules,
 } from '@aurorajs.dev/core';
 
 export class IamPermissionRoleRoleId extends UuidValueObject {
-    public readonly type: string = 'IamPermissionRoleRoleId';
+  public readonly type: string = 'IamPermissionRoleRoleId';
 
-    constructor(
-        value: string,
-        validationRules: ValidationRules = {},
-        data: DataValueObject = {},
-    ) {
-        super(
-            value,
-            Object.assign(
-                {
-                    name: 'IamPermissionRoleRoleId',
-                    nullable: false,
-                    undefinable: false,
-                    length: 36,
-                },
-                validationRules,
-            ),
-            data,
-        );
-    }
+  constructor(
+    value: string,
+    validationRules: ValidationRules = {},
+    data: DataValueObject = {},
+  ) {
+    super(
+      value,
+      Object.assign(
+        {
+          name: 'IamPermissionRoleRoleId',
+          nullable: false,
+          undefinable: false,
+          length: 36,
+        },
+        validationRules,
+      ),
+      data,
+    );
+  }
 }

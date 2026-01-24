@@ -9,15 +9,15 @@ import { ClickupFolderDto } from '../dto';
 @Controller('clickup/space/:spaceId/folder')
 @Auth('clickup.folder.get')
 export class ClickupFolderController {
-    constructor(private readonly handler: ClickupFolderHandler) {}
+  constructor(private readonly handler: ClickupFolderHandler) {}
 
-    @Get()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: [ClickupFolderDto],
-    })
-    async main(@Param('spaceId') spaceId?: string) {
-        return await this.handler.main(spaceId);
-    }
+  @Get()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: [ClickupFolderDto],
+  })
+  async main(@Param('spaceId') spaceId?: string) {
+    return await this.handler.main(spaceId);
+  }
 }

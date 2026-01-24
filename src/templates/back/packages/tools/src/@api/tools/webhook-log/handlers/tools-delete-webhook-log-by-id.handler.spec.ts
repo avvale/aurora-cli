@@ -5,58 +5,53 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('ToolsDeleteWebhookLogByIdController', () => {
-    let handler: ToolsDeleteWebhookLogByIdHandler;
-    let queryBus: IQueryBus;
+  let handler: ToolsDeleteWebhookLogByIdHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                ToolsDeleteWebhookLogByIdHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        ToolsDeleteWebhookLogByIdHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<ToolsDeleteWebhookLogByIdHandler>(
-            ToolsDeleteWebhookLogByIdHandler,
+    handler = module.get<ToolsDeleteWebhookLogByIdHandler>(
+      ToolsDeleteWebhookLogByIdHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  describe('main', () => {
+    test('ToolsDeleteWebhookLogByIdHandler should be defined', () => {
+      expect(handler).toBeDefined();
+    });
+
+    test('should return an webhookLog deleted', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () => new Promise((resolve) => resolve(toolsMockWebhookLogData[0])),
         );
-        queryBus = module.get<IQueryBus>(IQueryBus);
+      expect(
+        await handler.main(toolsMockWebhookLogData[0].id, {}, 'Europe/Madrid'),
+      ).toBe(toolsMockWebhookLogData[0]);
     });
-
-    describe('main', () => {
-        test('ToolsDeleteWebhookLogByIdHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an webhookLog deleted', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve(toolsMockWebhookLogData[0]),
-                    ),
-            );
-            expect(
-                await handler.main(
-                    toolsMockWebhookLogData[0].id,
-                    {},
-                    'Europe/Madrid',
-                ),
-            ).toBe(toolsMockWebhookLogData[0]);
-        });
-    });
+  });
 });

@@ -1,28 +1,32 @@
+/**
+ * @aurora-generated
+ * @source cliter/iam/permission.aurora.yaml
+ */
 import {
-    DataValueObject,
-    TimestampValueObject,
-    ValidationRules,
+  DataValueObject,
+  TimestampValueObject,
+  ValidationRules,
 } from '@aurorajs.dev/core';
 
 export class IamPermissionCreatedAt extends TimestampValueObject {
-    public readonly type: string = 'IamPermissionCreatedAt';
+  public readonly type: string = 'IamPermissionCreatedAt';
 
-    constructor(
-        value: string | DataValueObject,
-        validationRules: ValidationRules = {},
-        data: DataValueObject = {},
-    ) {
-        super(
-            value,
-            Object.assign(
-                {
-                    name: 'IamPermissionCreatedAt',
-                    nullable: true,
-                    undefinable: true,
-                },
-                validationRules,
-            ),
-            data,
-        );
-    }
+  constructor(
+    value: string | DataValueObject,
+    validationRules: ValidationRules = {},
+    data: DataValueObject = {},
+  ) {
+    super(
+      value,
+      Object.assign(
+        {
+          name: 'IamPermissionCreatedAt',
+          nullable: true,
+          undefinable: true,
+        },
+        validationRules,
+      ),
+      data,
+    );
+  }
 }

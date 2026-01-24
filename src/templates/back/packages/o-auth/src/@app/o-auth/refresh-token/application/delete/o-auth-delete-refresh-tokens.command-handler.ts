@@ -4,18 +4,18 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 
 @CommandHandler(OAuthDeleteRefreshTokensCommand)
 export class OAuthDeleteRefreshTokensCommandHandler
-    implements ICommandHandler<OAuthDeleteRefreshTokensCommand>
+  implements ICommandHandler<OAuthDeleteRefreshTokensCommand>
 {
-    constructor(
-        private readonly deleteRefreshTokensService: OAuthDeleteRefreshTokensService,
-    ) {}
+  constructor(
+    private readonly deleteRefreshTokensService: OAuthDeleteRefreshTokensService,
+  ) {}
 
-    async execute(command: OAuthDeleteRefreshTokensCommand): Promise<void> {
-        // call to use case and implements ValueObjects
-        await this.deleteRefreshTokensService.main(
-            command.queryStatement,
-            command.constraint,
-            command.cQMetadata,
-        );
-    }
+  async execute(command: OAuthDeleteRefreshTokensCommand): Promise<void> {
+    // call to use case and implements ValueObjects
+    await this.deleteRefreshTokensService.main(
+      command.queryStatement,
+      command.constraint,
+      command.cQMetadata,
+    );
+  }
 }

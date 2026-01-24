@@ -7,14 +7,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('oAuth.scope.create')
 export class OAuthCreateScopeResolver {
-    constructor(private readonly handler: OAuthCreateScopeHandler) {}
+  constructor(private readonly handler: OAuthCreateScopeHandler) {}
 
-    @Mutation('oAuthCreateScope')
-    async main(
-        @Args('payload') payload: OAuthCreateScopeInput,
-        @Timezone() timezone?: string,
-        @Auditing() auditing?: AuditingMeta,
-    ): Promise<OAuthScope> {
-        return await this.handler.main(payload, timezone, auditing);
-    }
+  @Mutation('oAuthCreateScope')
+  async main(
+    @Args('payload') payload: OAuthCreateScopeInput,
+    @Timezone() timezone?: string,
+    @Auditing() auditing?: AuditingMeta,
+  ): Promise<OAuthScope> {
+    return await this.handler.main(payload, timezone, auditing);
+  }
 }

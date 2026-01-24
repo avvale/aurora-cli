@@ -80,38 +80,38 @@ import { ToolsUpdateMigrationByIdService } from './application/update/tools-upda
 import { ToolsUpdateMigrationsService } from './application/update/tools-update-migrations.service';
 
 export const ToolsMigrationHandlers = [
-    // commands
-    ToolsCreateMigrationCommandHandler,
-    ToolsCreateMigrationsCommandHandler,
-    ToolsUpdateMigrationByIdCommandHandler,
-    ToolsUpdateMigrationsCommandHandler,
-    ToolsDeleteMigrationByIdCommandHandler,
-    ToolsDeleteMigrationsCommandHandler,
+  // commands
+  ToolsCreateMigrationCommandHandler,
+  ToolsCreateMigrationsCommandHandler,
+  ToolsUpdateMigrationByIdCommandHandler,
+  ToolsUpdateMigrationsCommandHandler,
+  ToolsDeleteMigrationByIdCommandHandler,
+  ToolsDeleteMigrationsCommandHandler,
 
-    // queries
-    ToolsPaginateMigrationsQueryHandler,
-    ToolsGetMigrationsQueryHandler,
-    ToolsFindMigrationQueryHandler,
-    ToolsFindMigrationByIdQueryHandler,
+  // queries
+  ToolsPaginateMigrationsQueryHandler,
+  ToolsGetMigrationsQueryHandler,
+  ToolsFindMigrationQueryHandler,
+  ToolsFindMigrationByIdQueryHandler,
 
-    // events
-    ToolsCreatedMigrationEventHandler,
-    ToolsCreatedMigrationsEventHandler,
-    ToolsUpdatedMigrationEventHandler,
-    ToolsUpdatedMigrationsEventHandler,
-    ToolsDeletedMigrationEventHandler,
-    ToolsDeletedMigrationsEventHandler,
+  // events
+  ToolsCreatedMigrationEventHandler,
+  ToolsCreatedMigrationsEventHandler,
+  ToolsUpdatedMigrationEventHandler,
+  ToolsUpdatedMigrationsEventHandler,
+  ToolsDeletedMigrationEventHandler,
+  ToolsDeletedMigrationsEventHandler,
 ];
 
 export const ToolsMigrationServices = [
-    ToolsCreateMigrationService,
-    ToolsCreateMigrationsService,
-    ToolsPaginateMigrationsService,
-    ToolsGetMigrationsService,
-    ToolsFindMigrationService,
-    ToolsFindMigrationByIdService,
-    ToolsUpdateMigrationByIdService,
-    ToolsUpdateMigrationsService,
-    ToolsDeleteMigrationByIdService,
-    ToolsDeleteMigrationsService,
+  ToolsCreateMigrationService,
+  ToolsCreateMigrationsService,
+  ToolsPaginateMigrationsService,
+  ToolsGetMigrationsService,
+  ToolsFindMigrationService,
+  ToolsFindMigrationByIdService,
+  ToolsUpdateMigrationByIdService,
+  ToolsUpdateMigrationsService,
+  ToolsDeleteMigrationByIdService,
+  ToolsDeleteMigrationsService,
 ];

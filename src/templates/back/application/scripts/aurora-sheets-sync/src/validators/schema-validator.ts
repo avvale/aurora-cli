@@ -2,6 +2,7 @@ import {
   AuroraProperty,
   AuroraSchema,
   ModuleSheetData,
+  parseBooleanValue,
   SheetPropertyRow,
 } from '../types';
 
@@ -90,16 +91,17 @@ export function validateSchema(schema: AuroraSchema): ValidationResult {
       severity: 'error',
     });
   } else {
-    const propertyNames = new Set<string>();
+    // Map<name, isI18n> to allow duplicate names if isI18n differs
+    const propertyMap = new Map<string, boolean>();
     let hasPrimaryKey = false;
 
     for (const prop of schema.aggregateProperties) {
-      const propErrors = validateProperty(prop, propertyNames);
+      const propErrors = validateProperty(prop, propertyMap);
       errors.push(...propErrors.filter((e) => e.severity === 'error'));
       warnings.push(...propErrors.filter((e) => e.severity === 'warning'));
 
       if (prop.primaryKey) hasPrimaryKey = true;
-      propertyNames.add(prop.name);
+      propertyMap.set(prop.name, prop.isI18n ?? false);
     }
 
     if (!hasPrimaryKey) {
@@ -120,10 +122,11 @@ export function validateSchema(schema: AuroraSchema): ValidationResult {
 
 /**
  * Validates a single property
+ * @param existingProperties Map<name, isI18n> to detect duplicates (allows same name if isI18n differs)
  */
 export function validateProperty(
   prop: AuroraProperty,
-  existingNames?: Set<string>,
+  existingProperties?: Map<string, boolean>,
 ): ValidationError[] {
   const errors: ValidationError[] = [];
 
@@ -143,12 +146,20 @@ export function validateProperty(
       });
     }
 
-    if (existingNames?.has(prop.name)) {
-      errors.push({
-        field: `property.${prop.name}`,
-        message: `Duplicate property name "${prop.name}"`,
-        severity: 'error',
-      });
+    // Duplicate validation: only error if BOTH have same isI18n value
+    if (existingProperties?.has(prop.name)) {
+      const existingIsI18n = existingProperties.get(prop.name);
+      const currentIsI18n = prop.isI18n ?? false;
+
+      // Only error if both have same isI18n value (true duplicate)
+      if (existingIsI18n === currentIsI18n) {
+        errors.push({
+          field: `property.${prop.name}`,
+          message: `Duplicate property name "${prop.name}"`,
+          severity: 'error',
+        });
+      }
+      // If one is i18n and other is not -> allowed (not a duplicate)
     }
   }
 
@@ -280,13 +291,14 @@ export function validateSheetData(data: ModuleSheetData): ValidationResult {
       severity: 'error',
     });
   } else {
-    const names = new Set<string>();
+    // Map<name, isI18n> to allow duplicate names if isI18n differs
+    const propertyMap = new Map<string, boolean>();
 
     for (const row of data.properties) {
-      const rowErrors = validatePropertyRow(row, names);
+      const rowErrors = validatePropertyRow(row, propertyMap);
       errors.push(...rowErrors.filter((e) => e.severity === 'error'));
       warnings.push(...rowErrors.filter((e) => e.severity === 'warning'));
-      if (row.name) names.add(row.name);
+      if (row.name) propertyMap.set(row.name, parseBooleanValue(row.isI18n));
     }
   }
 
@@ -299,10 +311,11 @@ export function validateSheetData(data: ModuleSheetData): ValidationResult {
 
 /**
  * Validates a sheet property row
+ * @param existingProperties Map<name, isI18n> to detect duplicates (allows same name if isI18n differs)
  */
 export function validatePropertyRow(
   row: SheetPropertyRow,
-  existingNames?: Set<string>,
+  existingProperties?: Map<string, boolean>,
 ): ValidationError[] {
   const errors: ValidationError[] = [];
 
@@ -323,12 +336,20 @@ export function validatePropertyRow(
     });
   }
 
-  if (existingNames?.has(row.name)) {
-    errors.push({
-      field: `row.${row.name}`,
-      message: `Duplicate property name "${row.name}"`,
-      severity: 'error',
-    });
+  // Duplicate validation: only error if BOTH have same isI18n value
+  if (existingProperties?.has(row.name)) {
+    const existingIsI18n = existingProperties.get(row.name);
+    const currentIsI18n = parseBooleanValue(row.isI18n);
+
+    // Only error if both have same isI18n value (true duplicate)
+    if (existingIsI18n === currentIsI18n) {
+      errors.push({
+        field: `row.${row.name}`,
+        message: `Duplicate property name "${row.name}"`,
+        severity: 'error',
+      });
+    }
+    // If one is i18n and other is not -> allowed (not a duplicate)
   }
 
   if (!row.type) {

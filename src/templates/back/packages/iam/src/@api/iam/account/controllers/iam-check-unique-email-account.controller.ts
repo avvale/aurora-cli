@@ -9,15 +9,15 @@ import { IamCheckUniqueEmailAccountHandler } from '../handlers/iam-check-unique-
 @Controller('iam/account/check-unique-email')
 @Auth('iam.account.get', 'iam.accountSettings.update')
 export class IamCheckUniqueEmailAccountController {
-    constructor(private readonly handler: IamCheckUniqueEmailAccountHandler) {}
+  constructor(private readonly handler: IamCheckUniqueEmailAccountHandler) {}
 
-    @Post()
-    @ApiOperation({ summary: 'Defines the operation of this controller' })
-    @ApiCreatedResponse({
-        description: 'Defines the action performed',
-        type: [IamAccountDto],
-    })
-    async main(@Body() email: string, @Body() avoidEmails: string[]) {
-        return await this.handler.main(email, avoidEmails);
-    }
+  @Post()
+  @ApiOperation({ summary: 'Defines the operation of this controller' })
+  @ApiCreatedResponse({
+    description: 'Defines the action performed',
+    type: [IamAccountDto],
+  })
+  async main(@Body() email: string, @Body() avoidEmails: string[]) {
+    return await this.handler.main(email, avoidEmails);
+  }
 }

@@ -7,14 +7,14 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 @Resolver()
 @Auth('tools.procedure.delete')
 export class ToolsDeleteProceduresResolver {
-    constructor(private readonly handler: ToolsDeleteProceduresHandler) {}
+  constructor(private readonly handler: ToolsDeleteProceduresHandler) {}
 
-    @Mutation('toolsDeleteProcedures')
-    async main(
-        @Args('query') queryStatement?: QueryStatement,
-        @Args('constraint') constraint?: QueryStatement,
-        @Timezone() timezone?: string,
-    ): Promise<ToolsProcedure[]> {
-        return await this.handler.main(queryStatement, constraint, timezone);
-    }
+  @Mutation('toolsDeleteProcedures')
+  async main(
+    @Args('query') queryStatement?: QueryStatement,
+    @Args('constraint') constraint?: QueryStatement,
+    @Timezone() timezone?: string,
+  ): Promise<ToolsProcedure[]> {
+    return await this.handler.main(queryStatement, constraint, timezone);
+  }
 }

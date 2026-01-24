@@ -10,32 +10,32 @@ export const WEBHOOK_ACTIVATE_LOGGER = 'WEBHOOK_ACTIVATE_LOGGER';
 
 @Injectable()
 export class ToolsWebhookKeyValueService {
-    constructor(
-        private readonly moduleRef: ModuleRef,
-        @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
-    ) {}
+  constructor(
+    private readonly moduleRef: ModuleRef,
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
+  ) {}
 
-    async onApplicationBootstrap(): Promise<void> {
-        const webhookLoggerKeyValue = await getKeyValue(
-            this.moduleRef,
-            WEBHOOK_ACTIVATE_LOGGER,
-        );
+  async onApplicationBootstrap(): Promise<void> {
+    const webhookLoggerKeyValue = await getKeyValue(
+      this.moduleRef,
+      WEBHOOK_ACTIVATE_LOGGER,
+    );
 
-        if (webhookLoggerKeyValue !== null) {
-            await this.cacheManager.set(
-                WEBHOOK_ACTIVATE_LOGGER,
-                webhookLoggerKeyValue,
-            );
-        } else {
-            void createKeyValue(this.moduleRef, {
-                id: uuid(),
-                key: WEBHOOK_ACTIVATE_LOGGER,
-                type: ToolsKeyValueType.BOOLEAN,
-                value: false,
-                isCached: true,
-                isActive: true,
-                description: 'Activate or deactivate webhook logger',
-            });
-        }
+    if (webhookLoggerKeyValue !== null) {
+      await this.cacheManager.set(
+        WEBHOOK_ACTIVATE_LOGGER,
+        webhookLoggerKeyValue,
+      );
+    } else {
+      void createKeyValue(this.moduleRef, {
+        id: uuid(),
+        key: WEBHOOK_ACTIVATE_LOGGER,
+        type: ToolsKeyValueType.BOOLEAN,
+        value: false,
+        isCached: true,
+        isActive: true,
+        description: 'Activate or deactivate webhook logger',
+      });
     }
+  }
 }

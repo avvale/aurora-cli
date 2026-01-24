@@ -4,39 +4,37 @@ import { IamDeleteTenantsAccountsService } from '@app/iam/tenant-account/applica
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('IamDeleteTenantsAccountsCommandHandler', () => {
-    let commandHandler: IamDeleteTenantsAccountsCommandHandler;
+  let commandHandler: IamDeleteTenantsAccountsCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                IamDeleteTenantsAccountsCommandHandler,
-                {
-                    provide: IamDeleteTenantsAccountsService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        IamDeleteTenantsAccountsCommandHandler,
+        {
+          provide: IamDeleteTenantsAccountsService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<IamDeleteTenantsAccountsCommandHandler>(
-            IamDeleteTenantsAccountsCommandHandler,
-        );
+    commandHandler = module.get<IamDeleteTenantsAccountsCommandHandler>(
+      IamDeleteTenantsAccountsCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('IamDeleteTenantsAccountsCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('IamDeleteTenantsAccountsCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(
-                    new IamDeleteTenantsAccountsCommand(),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(new IamDeleteTenantsAccountsCommand()),
+      ).toBe(undefined);
     });
+  });
 });

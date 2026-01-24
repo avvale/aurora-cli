@@ -5,54 +5,53 @@ import { ICommandBus, IQueryBus } from '@aurorajs.dev/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('SupportCreateCommentHandler', () => {
-    let handler: SupportCreateCommentHandler;
-    let queryBus: IQueryBus;
+  let handler: SupportCreateCommentHandler;
+  let queryBus: IQueryBus;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            imports: [],
-            providers: [
-                SupportCreateCommentHandler,
-                {
-                    provide: IQueryBus,
-                    useValue: {
-                        ask: () => {
-                            /**/
-                        },
-                    },
-                },
-                {
-                    provide: ICommandBus,
-                    useValue: {
-                        dispatch: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [],
+      providers: [
+        SupportCreateCommentHandler,
+        {
+          provide: IQueryBus,
+          useValue: {
+            ask: () => {
+              /**/
+            },
+          },
+        },
+        {
+          provide: ICommandBus,
+          useValue: {
+            dispatch: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        handler = module.get<SupportCreateCommentHandler>(
-            SupportCreateCommentHandler,
+    handler = module.get<SupportCreateCommentHandler>(
+      SupportCreateCommentHandler,
+    );
+    queryBus = module.get<IQueryBus>(IQueryBus);
+  });
+
+  describe('main', () => {
+    test('SupportCreateCommentHandler should be defined', () => {
+      expect(handler).toBeDefined();
+    });
+
+    test('should return an comment created', async () => {
+      jest
+        .spyOn(queryBus, 'ask')
+        .mockImplementation(
+          () => new Promise((resolve) => resolve(supportMockCommentData[0])),
         );
-        queryBus = module.get<IQueryBus>(IQueryBus);
+      expect(
+        await handler.main(supportMockCommentData[0], 'Europe/Madrid'),
+      ).toBe(supportMockCommentData[0]);
     });
-
-    describe('main', () => {
-        test('SupportCreateCommentHandler should be defined', () => {
-            expect(handler).toBeDefined();
-        });
-
-        test('should return an comment created', async () => {
-            jest.spyOn(queryBus, 'ask').mockImplementation(
-                () =>
-                    new Promise((resolve) =>
-                        resolve(supportMockCommentData[0]),
-                    ),
-            );
-            expect(
-                await handler.main(supportMockCommentData[0], 'Europe/Madrid'),
-            ).toBe(supportMockCommentData[0]);
-        });
-    });
+  });
 });

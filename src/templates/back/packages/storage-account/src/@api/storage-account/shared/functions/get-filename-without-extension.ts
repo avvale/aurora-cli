@@ -1,9 +1,9 @@
 export const getFilenameWithoutExtension = (filename: string): string => {
-    const lastDotIndex = filename.lastIndexOf('.');
+  const lastDotIndex = filename.lastIndexOf('.');
 
-    if (lastDotIndex === -1) {
-        return filename;
-    }
+  if (lastDotIndex === -1) {
+    return filename;
+  }
 
-    return filename.substring(0, lastDotIndex);
+  return filename.substring(0, lastDotIndex);
 };

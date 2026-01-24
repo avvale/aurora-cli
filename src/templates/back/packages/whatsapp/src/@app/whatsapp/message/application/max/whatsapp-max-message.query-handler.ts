@@ -3,19 +3,17 @@ import { WhatsappMaxMessageService } from '@app/whatsapp/message/application/max
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 @QueryHandler(WhatsappMaxMessageQuery)
-export class WhatsappMaxMessageQueryHandler implements IQueryHandler<WhatsappMaxMessageQuery>
+export class WhatsappMaxMessageQueryHandler
+  implements IQueryHandler<WhatsappMaxMessageQuery>
 {
-    constructor(
-        private readonly maxMessageService: WhatsappMaxMessageService,
-    ) {}
+  constructor(private readonly maxMessageService: WhatsappMaxMessageService) {}
 
-    async execute(query: WhatsappMaxMessageQuery): Promise<number>
-    {
-        return await this.maxMessageService.main(
-            query.column,
-            query.queryStatement,
-            query.constraint,
-            query.cQMetadata,
-        );
-    }
+  async execute(query: WhatsappMaxMessageQuery): Promise<number> {
+    return await this.maxMessageService.main(
+      query.column,
+      query.queryStatement,
+      query.constraint,
+      query.cQMetadata,
+    );
+  }
 }

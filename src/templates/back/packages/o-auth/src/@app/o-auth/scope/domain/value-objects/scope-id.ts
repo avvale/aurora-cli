@@ -1,16 +1,29 @@
-import { DataValueObject, UuidValueObject, ValidationRules } from '@aurorajs.dev/core';
+import {
+  DataValueObject,
+  UuidValueObject,
+  ValidationRules,
+} from '@aurorajs.dev/core';
 
-export class ScopeId extends UuidValueObject
-{
-    public readonly type: string = 'ScopeId';
+export class ScopeId extends UuidValueObject {
+  public readonly type: string = 'ScopeId';
 
-    constructor(value: string, validationRules: ValidationRules = {}, data: DataValueObject = {})
-    {
-        super(value, Object.assign({
-            name       : 'ScopeId',
-            nullable   : false,
-            undefinable: false,
-            length     : 36,
-        }, validationRules), data);
-    }
+  constructor(
+    value: string,
+    validationRules: ValidationRules = {},
+    data: DataValueObject = {},
+  ) {
+    super(
+      value,
+      Object.assign(
+        {
+          name: 'ScopeId',
+          nullable: false,
+          undefinable: false,
+          length: 36,
+        },
+        validationRules,
+      ),
+      data,
+    );
+  }
 }

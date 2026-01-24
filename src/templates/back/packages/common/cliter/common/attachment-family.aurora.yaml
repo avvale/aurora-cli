@@ -9,15 +9,20 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:hide_image
   outlineIcon: mat_outline:hide_image
+description: >
+    Attachment families defining image formats and sizes for resource types. Each family
+    specifies dimensions, quality, and format. Used by attachment module to generate
+    multiple image variations.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
+    description: >
+        Unique identifier for the attachment family. UUID v4 format, generated
+        automatically on creation.
   - name: resourceId
     type: id
-    length: 36
     nullable: false
     relationship:
       type: many-to-one
@@ -29,23 +34,42 @@ aggregateProperties:
     index: index
     webComponent:
       type: select
+    description: >
+        Foreign key to the resource this attachment family belongs to. Links image
+        processing rules to specific resource types. Indexed for efficient lookups.
   - name: code
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: false
     index: unique
+    description: >
+        Unique code identifying the attachment family (e.g., "PRODUCT_THUMBNAIL",
+        "USER_AVATAR_SMALL"). Used programmatically to reference families. Must be
+        unique across all families. Typically uppercase with underscores.
   - name: name
     type: varchar
-    maxLength: 100
+    maxLength: 128
     nullable: false
+    description: >
+        Human-readable name of the attachment family (e.g., "Product Thumbnail",
+        "User Avatar - Small"). Displayed in admin interfaces. Should be descriptive
+        and indicate purpose/dimensions.
   - name: width
     type: int
     unsigned: true
     nullable: true
+    description: >
+        Target width in pixels for images in this family. NULL means no width constraint.
+        Used with fitType to determine image resizing behavior. Unsigned integer,
+        typically ranges from 50 to 4000 pixels.
   - name: height
     type: int
     unsigned: true
     nullable: true
+    description: >
+        Target height in pixels for images in this family. NULL means no height constraint.
+        Used with fitType to determine image resizing behavior. Unsigned integer,
+        typically ranges from 50 to 4000 pixels.
   - name: fitType
     type: enum
     enumOptions:
@@ -56,13 +80,26 @@ aggregateProperties:
       - FIT_HEIGHT_FREE_CROP
     nullable: true
     example: CommonAttachmentFamilyFitType.FIT_CROP
+    description: >
+        Image resizing strategy. FIT_CROP: Exact dimensions, crops overflow. FIT_WIDTH:
+        Scales to width, height proportional. FIT_HEIGHT: Scales to height, width
+        proportional. FIT_WIDTH_FREE_CROP: Width fixed, user crops height. FIT_HEIGHT_FREE_CROP:
+        Height fixed, user crops width. NULL uses default behavior.
   - name: quality
     type: smallint
     unsigned: true
     nullable: true
+    description: >
+        JPEG/PNG compression quality percentage (1-100). Higher values mean better
+        quality but larger file sizes. Typical values: 85 for web, 95 for print.
+        NULL uses system default (usually 85).
   - name: sizes
     type: json
     nullable: true
+    description: >
+        JSON array defining multiple size variations to generate from uploaded image
+        (e.g., [{width: 300, height: 300}, {width: 600, height: 600}]). Each variation
+        inherits family's fitType and quality. Used for responsive images.
   - name: format
     type: enum
     enumOptions:
@@ -73,12 +110,26 @@ aggregateProperties:
       - BMP
     nullable: true
     example: CommonAttachmentFamilyFormat.JPG
+    description: >
+        Output image format for this family. JPG: Lossy compression, best for photos.
+        PNG: Lossless, supports transparency. GIF: Limited colors, animations. TIF:
+        High quality, large files. BMP: Uncompressed. NULL preserves original format.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp when the record was created. Automatically set on insertion.
+        Part of audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+        Timestamp of the last update to the record. Automatically updated on
+        modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+        Soft delete timestamp. NULL indicates active record. When set, family is
+        excluded from normal queries but preserved for data integrity of existing
+        attachments.

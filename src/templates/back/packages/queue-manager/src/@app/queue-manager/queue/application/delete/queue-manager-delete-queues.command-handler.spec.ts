@@ -4,39 +4,37 @@ import { QueueManagerDeleteQueuesService } from '@app/queue-manager/queue/applic
 import { Test, TestingModule } from '@nestjs/testing';
 
 describe('QueueManagerDeleteQueuesCommandHandler', () => {
-    let commandHandler: QueueManagerDeleteQueuesCommandHandler;
+  let commandHandler: QueueManagerDeleteQueuesCommandHandler;
 
-    beforeAll(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            providers: [
-                QueueManagerDeleteQueuesCommandHandler,
-                {
-                    provide: QueueManagerDeleteQueuesService,
-                    useValue: {
-                        main: () => {
-                            /**/
-                        },
-                    },
-                },
-            ],
-        }).compile();
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        QueueManagerDeleteQueuesCommandHandler,
+        {
+          provide: QueueManagerDeleteQueuesService,
+          useValue: {
+            main: () => {
+              /**/
+            },
+          },
+        },
+      ],
+    }).compile();
 
-        commandHandler = module.get<QueueManagerDeleteQueuesCommandHandler>(
-            QueueManagerDeleteQueuesCommandHandler,
-        );
+    commandHandler = module.get<QueueManagerDeleteQueuesCommandHandler>(
+      QueueManagerDeleteQueuesCommandHandler,
+    );
+  });
+
+  describe('main', () => {
+    test('QueueManagerDeleteQueuesCommandHandler should be defined', () => {
+      expect(commandHandler).toBeDefined();
     });
 
-    describe('main', () => {
-        test('QueueManagerDeleteQueuesCommandHandler should be defined', () => {
-            expect(commandHandler).toBeDefined();
-        });
-
-        test('should return void', async () => {
-            expect(
-                await commandHandler.execute(
-                    new QueueManagerDeleteQueuesCommand(),
-                ),
-            ).toBe(undefined);
-        });
+    test('should return void', async () => {
+      expect(
+        await commandHandler.execute(new QueueManagerDeleteQueuesCommand()),
+      ).toBe(undefined);
     });
+  });
 });
