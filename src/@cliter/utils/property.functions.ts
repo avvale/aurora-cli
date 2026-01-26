@@ -55,7 +55,27 @@ export const getDefaultValueProperty = (
     property: Property,
 ): any =>
 {
-    return typeof property.defaultValue === 'boolean' || typeof property.defaultValue === 'number' ? property.defaultValue :  `'${property.defaultValue}'`;
+    if (property.defaultValue === undefined) return undefined;
+
+    // For booleans and numbers, return the value directly
+    if (typeof property.defaultValue === 'boolean' || typeof property.defaultValue === 'number')
+    {
+        return property.defaultValue;
+    }
+
+    // For arrays, return the value as array literal
+    if (property.type === PropertyType.ARRAY)
+    {
+        if (Array.isArray(property.defaultValue))
+        {
+            const items = property.defaultValue.map(item => `'${item}'`).join(', ');
+            return `[${items}]`;
+        }
+        return property.defaultValue;
+    }
+
+    // For strings, return with quotes
+    return `'${property.defaultValue}'`;
 };
 
 // replace by Property hasQuotation
