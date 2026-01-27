@@ -820,7 +820,12 @@ export const getUpsertCommandHandlerProperties = (
 
 // replace by Properties isEnum
 export const getEnumProperties = (properties: Property[]): Property[] => {
-  return properties?.filter((property) => property.type === PropertyType.ENUM);
+  return properties?.filter(
+    (property) =>
+      property.type === PropertyType.ENUM ||
+      (property.type === PropertyType.ARRAY &&
+        property.arrayOptions?.type === PropertyType.ENUM),
+  );
 };
 
 /************
