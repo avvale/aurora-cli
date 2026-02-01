@@ -3,6 +3,7 @@ export * from './arrow-function.driver';
 export * from './call-expression.driver';
 export * from './common.driver';
 export * from './decorator.driver';
+export * from './enum.driver';
 export * from './export.driver';
 export * from './import.driver';
 export * from './interface.driver';
