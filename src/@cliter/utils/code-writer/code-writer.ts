@@ -416,7 +416,7 @@ export class CodeWriter {
       if (enumOptions && enumOptions.length > 0) {
         EnumDriver.addEnum(
           sourceFile,
-          `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}${property.name.toPascalCase()}`,
+          `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}${property.name.toPascalCase()}Enum`,
           enumOptions,
           { overwrite },
         );
