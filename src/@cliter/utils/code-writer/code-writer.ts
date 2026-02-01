@@ -15,7 +15,7 @@ import {
 } from 'ts-morph';
 import { NewLineKind } from 'typescript';
 import { CliterConfig, cliterConfig } from '../../config';
-import { Property, RelationshipType } from '../../types';
+import { Property, PropertyType, RelationshipType } from '../../types';
 import { ObjectTools } from '../object-tools';
 import {
   getEnumProperties,
@@ -438,7 +438,7 @@ export class CodeWriter {
       )) {
       propertiesObjectType.push({
         name: property.name.toCamelCase() + (property.nullable ? '?' : ''),
-        type: getPropertyJavascriptType(property, cliterConfig),
+        type: this.resolvePropertyType(property, getPropertyJavascriptType),
       });
 
       if (property.relationship?.type === RelationshipType.MANY_TO_ONE) {
@@ -468,7 +468,7 @@ export class CodeWriter {
         .filter((property) => !(property.isI18n && property.name === 'id'))
         .map((property) => ({
           name: property.name.toCamelCase() + (property.nullable ? '?' : ''),
-          type: getPropertyJavascriptCreateType(property, cliterConfig),
+          type: this.resolvePropertyType(property, getPropertyJavascriptCreateType),
         })),
       { overwrite },
     );
@@ -483,7 +483,7 @@ export class CodeWriter {
         .map((property) => ({
           name:
             property.name.toCamelCase() + (property.name === 'id' ? '' : '?'),
-          type: getPropertyJavascriptType(property, cliterConfig),
+          type: this.resolvePropertyType(property, getPropertyJavascriptType),
         })),
       { overwrite },
     );
@@ -497,7 +497,7 @@ export class CodeWriter {
         .filter((property) => !(property.isI18n && property.name === 'id'))
         .map((property) => ({
           name: property.name.toCamelCase() + '?',
-          type: getPropertyJavascriptUpdateType(property, cliterConfig),
+          type: this.resolvePropertyType(property, getPropertyJavascriptUpdateType),
         })),
       { overwrite },
     );
@@ -957,6 +957,19 @@ export class CodeWriter {
   }
 
   // private methods
+  private getEnumTypeName(property: Property): string {
+    return `${this.boundedContextName.toPascalCase()}${this.moduleName.toPascalCase()}${property.name.toPascalCase()}Enum`;
+  }
+
+  private resolvePropertyType(property: Property, baseFn: (p: Property, c: CliterConfig) => string): string {
+    if (property.type === PropertyType.ENUM) return this.getEnumTypeName(property);
+    if (property.type === PropertyType.ARRAY && property.arrayOptions?.type === PropertyType.ENUM) {
+      return `${this.getEnumTypeName(property)}[]`;
+    }
+
+    return baseFn(property, cliterConfig);
+  }
+
   private getModelArrayArgument(
     moduleDecoratorArguments: ObjectLiteralExpression,
   ): ArrayLiteralExpression {
