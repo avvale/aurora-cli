@@ -16,9 +16,11 @@ handlebars.registerHelper(
     let response = '';
 
     // Filter index properties based on the isI18n flag
-    indexProperties = indexProperties.filter(
-      (property) => property.isI18n === isI18n,
-    );
+    if (isI18n) {
+      indexProperties = indexProperties.filter(
+        (property) => property.isI18n === isI18n,
+      );
+    }
 
     for (const [i, indexProperty] of indexProperties.entries()) {
       response += '\t\t{\n';

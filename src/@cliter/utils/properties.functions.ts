@@ -1518,6 +1518,7 @@ export const getFormGroupFieldsIsNotI18nProperties = (
   return properties
     ?.filter((property) => !timestampProperties.includes(property.name))
     .filter((property) => !property.isI18n)
+    .filter((property) => property.name !== 'rowId')
     .filter((property) => property.name !== 'availableLangs')
     .filter((property) => property.name !== 'meta');
 };

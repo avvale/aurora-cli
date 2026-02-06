@@ -64,6 +64,9 @@ export class {{ toPascalCase schema.moduleName }}ListComponent extends ViewBaseC
                         id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.edit',
                         translation: 'edit',
                         icon: 'mode_edit',
+                        {{#if (hasI18nProperties schema.aggregateProperties) }}
+                        meta: { lang: this.sessionService.get<CoreLang>('fallbackLang') },
+                        {{/if}}
                     },
                     {
                         id: '{{ toCamelCase schema.boundedContextName }}::{{ toCamelCase schema.moduleName }}.list.delete',

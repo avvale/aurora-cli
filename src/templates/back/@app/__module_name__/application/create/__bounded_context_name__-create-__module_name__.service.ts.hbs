@@ -129,8 +129,8 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
             .update(
                 {{ toCamelCase schema.moduleName }},
                 {
-                    dataFactory   : aggregate => _.pick(aggregate.toDTO(), 'id', 'availableLangs'),
-                    updateOptions : cQMetadata?.repositoryOptions,
+                    dataFactory: aggregate => _.pick(aggregate.toRepository(), 'id', 'availableLangs'),
+                    updateOptions: cQMetadata?.repositoryOptions,
                     queryStatement: {
                         where: {
                             id: {{ toCamelCase schema.moduleName }}.id.value,
@@ -155,7 +155,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         await this.repositoryI18n.create(
             {{ toCamelCase schema.moduleName }},
             {
-                dataFactory         : (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nRepository(),
+                dataFactory: (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nRepository(),
                 finderQueryStatement: (aggregate: {{ schema.aggregateName }} ) => ({
                     where: {
                         {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],
