@@ -98,7 +98,7 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         await this.repositoryI18n.insert(
             {{ toCamelCase schema.moduleNames }},
             {
-                dataFactory  : aggregate => aggregate.toI18nDTO(),
+                dataFactory  : aggregate => aggregate.toI18nRepository(),
                 insertOptions: cQMetadata?.repositoryOptions,
             },
         );

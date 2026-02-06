@@ -122,7 +122,7 @@ export class {{ toPascalCase schema.boundedContextName }}Update{{ toPascalCase s
                 constraint,
                 cQMetadata,
                 updateOptions: cQMetadata?.repositoryOptions,
-                dataFactory  : (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nDTO(),
+                dataFactory  : (aggregate: {{ schema.aggregateName }}) => aggregate.toI18nRepository(),
             },
         );
         {{/if}}

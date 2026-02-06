@@ -560,6 +560,10 @@ export const getCreateControllerProperties = (
     ) // exclude id of i18n table
     .filter(
       (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
+    .filter(
+      (property) =>
         !property.isI18n ||
         (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'),
     ) // exclude relationship id of i18n table
@@ -597,6 +601,10 @@ export const getUpdateControllerProperties = (
       (property) =>
         !property.isI18n || (property.isI18n && property.name !== 'id'),
     ) // exclude id of i18n table
+    .filter(
+      (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
     .filter(
       (property) =>
         !property.isI18n ||
@@ -641,6 +649,10 @@ export const getCreateServiceProperties = (
     ) // exclude id of i18n table
     .filter(
       (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
+    .filter(
+      (property) =>
         !property.isI18n ||
         (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'),
     ) // exclude relationship id of i18n table
@@ -680,6 +692,10 @@ export const getCreateItemsServiceProperties = (
     ) // exclude id of i18n table
     .filter(
       (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
+    .filter(
+      (property) =>
         !property.isI18n ||
         (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'),
     ); // exclude relationship id of i18n table
@@ -712,6 +728,10 @@ export const getUpdateServiceProperties = (
       (property) =>
         !property.isI18n || (property.isI18n && property.name !== 'id'),
     ) // exclude id of i18n table
+    .filter(
+      (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
     .filter(
       (property) =>
         !property.isI18n ||
@@ -751,6 +771,10 @@ export const getUpsertServiceProperties = (
       (property) =>
         !property.isI18n || (property.isI18n && property.name !== 'id'),
     ) // exclude id of i18n table
+    .filter(
+      (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
     .filter(
       (property) =>
         !property.isI18n ||
@@ -1009,6 +1033,10 @@ export const getTestProperties = (
     ) // exclude id of i18n table
     .filter(
       (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
+    .filter(
+      (property) =>
         !property.isI18n ||
         (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'),
     ) // exclude relationship id of i18n table
@@ -1035,6 +1063,10 @@ export const getNotNullableProperties = (
       (property) =>
         !property.isI18n || (property.isI18n && property.name !== 'id'),
     ) // exclude id of i18n table
+    .filter(
+      (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
     .filter(
       (property) =>
         !property.isI18n ||
@@ -1065,6 +1097,10 @@ export const getLengthProperties = (
         (property) =>
           !property.isI18n || (property.isI18n && property.name !== 'id'),
       ) // exclude id of i18n table
+      .filter(
+        (property) =>
+          !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+      ) // exclude rowId of i18n table
       .filter(
         (property) =>
           !property.isI18n ||
@@ -1160,6 +1196,10 @@ export const getPostmanGraphqlCreateMutationProperties = (
     ) // exclude id of i18n table
     .filter(
       (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
+    .filter(
+      (property) =>
         !property.isI18n ||
         (property.isI18n && property.name !== moduleName.toCamelCase() + 'Id'),
     ) // exclude relationship id of i18n table
@@ -1201,6 +1241,10 @@ export const getPostmanGraphqlCreateVariablesProperties = (
       (property) =>
         !property.isI18n || (property.isI18n && property.name !== 'id'),
     ) // exclude id of i18n table
+    .filter(
+      (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
     .filter(
       (property) =>
         !property.isI18n ||
@@ -1348,6 +1392,10 @@ export const getPostmanGraphqlUpdateVariablesProperties = (
       (property) =>
         !property.isI18n || (property.isI18n && property.name !== 'id'),
     ) // exclude id of i18n table
+    .filter(
+      (property) =>
+        !property.isI18n || (property.isI18n && property.name !== 'rowId'),
+    ) // exclude rowId of i18n table
     .filter(
       (property) =>
         !property.isI18n ||

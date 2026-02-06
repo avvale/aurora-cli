@@ -99,67 +99,63 @@ export class {{ toPascalCase schema.boundedContextName }}Create{{ toPascalCase s
         );
 
         {{#if (hasI18nProperties schema.aggregateProperties) }}
-        try
-        {
-            // try get object from database
-            const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById(
-                {{ toCamelCase schema.moduleName }}.id,
-                {{#if (hasI18nProperties schema.aggregateProperties) }}
-                {
-                    constraint: {
-                        include: [
-                            {
-                                association: '{{ toCamelCase schema.moduleName }}I18n',
-                                where      : {
-                                    langId: fallbackLang.id,
-                                },
+        // try get object from database
+        const {{ toCamelCase schema.moduleName }}InDB = await this.repository.findById(
+            {{ toCamelCase schema.moduleName }}.id,
+            {{#if (hasI18nProperties schema.aggregateProperties) }}
+            {
+                constraint: {
+                    include: [
+                        {
+                            association: '{{ toCamelCase schema.moduleName }}I18n',
+                            where      : {
+                                langId: fallbackLang.id,
                             },
-                        ],
+                        },
+                    ],
+                },
+            },
+            {{/if}}
+        );
+
+        if ({{ toCamelCase schema.moduleName }}InDB)
+        {
+          if ({{ toCamelCase schema.moduleName }}InDB.availableLangs.value.includes(contentLanguage.id)) throw new ConflictException(`Error to create {{ schema.aggregateName }}, the id ${contentLanguage.id} already exist in database`);
+
+          // add available lang when create country
+          {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [contentLanguage.id]));
+
+          await this.repository
+            .update(
+                {{ toCamelCase schema.moduleName }},
+                {
+                    dataFactory   : aggregate => _.pick(aggregate.toDTO(), 'id', 'availableLangs'),
+                    updateOptions : cQMetadata?.repositoryOptions,
+                    queryStatement: {
+                        where: {
+                            id: {{ toCamelCase schema.moduleName }}.id.value,
+                        },
                     },
                 },
-                {{/if}}
             );
-
-            // eslint-disable-next-line max-len
-            if ({{ toCamelCase schema.moduleName }}InDB.availableLangs.value.includes(contentLanguage.id)) throw new ConflictException(`Error to create {{ schema.aggregateName }}, the id ${contentLanguage.id} already exist in database`);
-
-            // add available lang when create country
-            {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs(_.union({{ toCamelCase schema.moduleName }}InDB.availableLangs.value, [contentLanguage.id]));
-
-            await this.repository
-                .update(
-                    {{ toCamelCase schema.moduleName }},
-                    {
-                        dataFactory   : aggregate => _.pick(aggregate.toDTO(), 'id', 'availableLangs'),
-                        updateOptions : cQMetadata?.repositoryOptions,
-                        queryStatement: {
-                            where: {
-                                id: {{ toCamelCase schema.moduleName }}.id.value,
-                            },
-                        },
-                    },
-                );
         }
-        catch (error)
+        else
         {
-            if (error instanceof NotFoundException)
-            {
-                {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs([contentLanguage.id]);
-                await this.repository
-                    .create(
-                        {{ toCamelCase schema.moduleName }},
-                        {
-                            createOptions: cQMetadata?.repositoryOptions,
-                        },
-                    );
-            }
+          {{ toCamelCase schema.moduleName }}.availableLangs = new {{ toPascalCase schema.boundedContextName }}{{ toPascalCase schema.moduleName }}AvailableLangs([contentLanguage.id]);
+          await this.repository
+            .create(
+              {{ toCamelCase schema.moduleName }},
+              {
+                  createOptions: cQMetadata?.repositoryOptions,
+              },
+            );
         }
 
         // save new i18n record
         await this.repositoryI18n.create(
             {{ toCamelCase schema.moduleName }},
             {
-                dataFactory         : (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nDTO(),
+                dataFactory         : (aggregate: {{ schema.aggregateName }} ) => aggregate.toI18nRepository(),
                 finderQueryStatement: (aggregate: {{ schema.aggregateName }} ) => ({
                     where: {
                         {{ toCamelCase schema.moduleName }}Id: aggregate['id']['value'],

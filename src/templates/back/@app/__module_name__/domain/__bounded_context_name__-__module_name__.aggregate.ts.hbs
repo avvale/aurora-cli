@@ -11,7 +11,7 @@
 ~}}
 {{#if (hasI18nProperties schema.aggregateProperties) }}
 {{
-    push ../importsArray
+    push importsArray
         (object items=(array 'uuid') path=config.auroraCorePackage)
 ~}}
 {{/if}}
@@ -408,6 +408,49 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/each}}
         };
     }
+
+    // function called to get data for repository side effect methods
+    toRepository(): LiteralObject
+    {
+        return {
+            {{! PROPERTIES }}
+            {{#each (getAggregateProperties schema.aggregateProperties) }}
+            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false allowReadonly=false)) }}
+            {{#if (isBinaryProperty this) }}
+            {{ toCamelCase (getPropertyName this) }}: this.{{ toCamelCase (getPropertyName this) }}{{#if nullable }}?{{/if}}.buffer,
+            {{else}}
+            {{ toCamelCase (getPropertyName this) }}: this.{{ toCamelCase (getPropertyName this) }}{{#if nullable }}?{{/if}}.value,
+            {{/if}}
+            {{/if}}
+            {{/each}}
+            {{! ONE TO ONE Relationship with field }}
+            {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
+            {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toRepository(),
+            {{/each}}
+            {{! ONE TO ONE Relationship without field }}
+            {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}: this.{{ toCamelCase name }}?.toRepository(),
+            {{/each}}
+            {{! MANY TO ONE Relationship }}
+            {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
+            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
+            {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toRepository(),
+            {{/unless}}
+            {{/each}}
+            {{! ONE TO MANY Relationship }}
+            {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toRepository()),
+            {{/each}}
+            {{! MANY TO MANY Relationship }}
+            {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
+            {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toRepository()),
+            {{/each}}
+            {{! PIVOT TABLE Relationship }}
+            {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
+            {{ toCamelCase (getModuleNameFromPropertyRelationship modulePath) }}: this.{{ toCamelCase (getModuleNameFromPropertyRelationship modulePath) }}?.toRepository(),
+            {{/each}}
+        };
+    }
     {{#if (hasI18nProperties schema.aggregateProperties) }}
 
     toI18nDTO(): LiteralObject
@@ -428,48 +471,26 @@ export class {{ schema.aggregateName }} extends AggregateRoot
             {{/each}}
         };
     }
-    {{/if}}
 
-    // function called to get data for repository side effect methods
-    toRepository(): LiteralObject
+    toI18nRepository(): LiteralObject
     {
         return {
-            {{! PROPERTIES }}
             {{#each (getAggregateProperties schema.aggregateProperties) }}
-            {{#if (isAllowProperty ../schema.moduleName this (object allowAutoIncrement=false allowReadonly=false)) }}
-            {{#if (isBinaryProperty this) }}
-            {{ toCamelCase (getPropertyName this) }}: this.{{ toCamelCase (getPropertyName this) }}{{#if nullable }}?{{/if}}.buffer,
+            {{#if isI18n}}
+            {{#unlessEq autoIncrement true}}
+            {{#eq (getPropertyName this) 'id'}}
+            {{ toCamelCase (getPropertyName this) }}: uuid(),
+            {{else}}
+            {{#if (isI18nRelationProperty ../schema.moduleName this)}}
+            {{ toCamelCase (getPropertyName this) }}: this.id.value,
             {{else}}
             {{ toCamelCase (getPropertyName this) }}: this.{{ toCamelCase (getPropertyName this) }}{{#if nullable }}?{{/if}}.value,
             {{/if}}
+            {{/eq}}
+            {{/unlessEq}}
             {{/if}}
-            {{/each}}
-            {{! ONE TO ONE Relationship with field }}
-            {{#each (getWithRelationshipOneToOneWithRelationshipFieldProperties schema.aggregateProperties) }}
-            {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
-            {{/each}}
-            {{! ONE TO ONE Relationship without field }}
-            {{#each (getWithRelationshipOneToOneWithoutRelationshipFieldProperties schema.aggregateProperties) }}
-            {{ toCamelCase name }}: this.{{ toCamelCase name }}?.toDTO(),
-            {{/each}}
-            {{! MANY TO ONE Relationship }}
-            {{#each (getWithRelationshipManyToOneProperties schema.aggregateProperties) }}
-            {{#unless (isI18nRelationProperty ../schema.moduleName this)}}
-            {{ toCamelCase relationship.field }}: this.{{ toCamelCase relationship.field }}?.toDTO(),
-            {{/unless}}
-            {{/each}}
-            {{! ONE TO MANY Relationship }}
-            {{#each (getWithRelationshipOneToManyProperties schema.aggregateProperties) }}
-            {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toDTO()),
-            {{/each}}
-            {{! MANY TO MANY Relationship }}
-            {{#each (getManyToManyRelationshipProperties schema.aggregateProperties) }}
-            {{ toCamelCase name }}: this.{{ toCamelCase name }}?.map(item => item.toDTO()),
-            {{/each}}
-            {{! PIVOT TABLE Relationship }}
-            {{#each (getPrimaryKeyPropertiesFromPivotTable schema.aggregateProperties) }}
-            {{ toCamelCase (getModuleNameFromPropertyRelationship modulePath) }}: this.{{ toCamelCase (getModuleNameFromPropertyRelationship modulePath) }}?.toDTO(),
             {{/each}}
         };
     }
+    {{/if}}
 }
