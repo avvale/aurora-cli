@@ -9,63 +9,95 @@ hasAuditing: true
 front:
   solidIcon: mat_solid:flag
   outlineIcon: mat_outline:flag
+description: |
+  Core module for country management with internationalization support. Stores country data including ISO codes, geographical information, and localized names. Root entity for geographical hierarchy, referenced by administrative-area modules.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
-    length: 36
     nullable: false
+    description: |
+      Unique identifier for the country. UUID v4 format, generated automatically on creation.
+  - name: rowId
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+    description: |
+      Auto-incrementing sequential identifier for the country. Used for internal ordering, human-readable reference numbers, and optimized queries. Not exposed in external APIs. Provides a stable, predictable identifier for database operations.
   - name: iso3166Alpha2
     type: char
     length: 2
     nullable: false
     index: index
+    description: |
+      ISO 3166-1 alpha-2 country code (two-letter code, e.g., "US", "GB", "FR"). Standard international identifier for countries. Indexed for efficient lookups.
   - name: iso3166Alpha3
     type: char
     length: 3
     nullable: false
     index: index
+    description: |
+      ISO 3166-1 alpha-3 country code (three-letter code, e.g., "USA", "GBR", "FRA"). Alternative standard identifier. Indexed for efficient lookups.
   - name: iso3166Numeric
     type: char
     length: 3
     nullable: false
     index: index
+    description: |
+      ISO 3166-1 numeric country code (three-digit code, e.g., "840", "826", "250"). Numeric standard identifier. Stored as char to preserve leading zeros. Indexed for efficient lookups.
   - name: customCode
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: true
     index: index
+    description: |
+      Optional custom code defined by the organization for internal identification. Can be used for legacy system integration or custom business logic. Indexed for efficient lookups.
   - name: prefix
     type: varchar
     maxLength: 5
     nullable: true
+    description: |
+      International dialing prefix for phone numbers (e.g., "+1", "+44", "+33"). Used for phone number validation and formatting. Maximum 5 characters.
   - name: image
     type: varchar
     maxLength: 1022
     nullable: true
+    description: |
+      URL or path to country flag image or icon. Used for visual representation in UI. Maximum 1022 characters for long URLs.
   - name: sort
     type: smallint
     unsigned: true
     nullable: true
+    description: |
+      Display order for country lists. Lower values appear first. NULL values typically sorted last or alphabetically. Used for prioritizing commonly selected countries.
   - name: administrativeAreas
     type: json
     nullable: true
+    description: |
+      JSON structure defining the administrative divisions hierarchy for this country. Specifies how many levels exist and their names (e.g., state/county/city). Used to configure address forms dynamically.
   - name: latitude
     type: decimal
     decimals:
       - 16
       - 14
     nullable: true
+    description: |
+      Geographical latitude coordinate of the country's center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and initial map positioning.
   - name: longitude
     type: decimal
     decimals:
       - 17
       - 14
     nullable: true
+    description: |
+      Geographical longitude coordinate of the country's center point. Precision of 14 decimal places allows sub-meter accuracy. Used for map visualization and initial map positioning.
   - name: zoom
     type: smallint
     unsigned: true
     nullable: true
+    description: |
+      Default zoom level for map display when viewing this country. Typical range: 1 (world view) to 21 (building level). Lower values for larger countries. Determines initial map scale in UI.
   - name: mapType
     type: enum
     enumOptions:
@@ -75,28 +107,46 @@ aggregateProperties:
       - TERRAIN
     nullable: true
     example: CommonCountryMapType.TERRAIN
+    description: |
+      Preferred map visualization type for this country. ROADMAP: Street map view. SATELLITE: Aerial imagery. HYBRID: Satellite with road overlay. TERRAIN: Topographic relief map. NULL uses system default.
   - name: availableLangs
     type: json
     nullable: true
+    description: |
+      Array of language IDs available for this country's i18n content. Determines which translations are required and displayed. Used for filtering and validation of country translations.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: |
+      Timestamp when the record was created. Automatically set on insertion. Part of audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: |
+      Timestamp of the last update to the record. Automatically updated on modification. Part of audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: |
+      Soft delete timestamp. NULL indicates active record. When set, record is excluded from normal queries but preserved for audit and recovery.
   - name: id
     isI18n: true
     type: id
     primaryKey: true
-    length: 36
     nullable: false
+    description: |
+      Unique identifier for the country i18n record. UUID v4 format, generated automatically on creation. Different from country id.
+  - name: rowId
+    isI18n: true
+    type: bigint
+    index: unique
+    autoIncrement: true
+    nullable: false
+    description: |
+      Auto-incrementing sequential identifier for the country. Used for internal ordering, human-readable reference numbers, and optimized queries. Not exposed in external APIs. Provides a stable, predictable identifier for database operations.
   - name: countryId
     isI18n: true
     type: id
-    length: 36
     nullable: false
     relationship:
       type: many-to-one
@@ -105,11 +155,15 @@ aggregateProperties:
       key: id
       field: country
     index: unique
+    indexFields:
+      - countryId
+      - langId
     indexName: uniqueCountryIdLangId
+    description: |
+      Foreign key to the parent country record. Links translation to base country. Combined with langId forms unique constraint (one translation per language).
   - name: langId
     isI18n: true
     type: id
-    length: 36
     nullable: false
     relationship:
       type: many-to-one
@@ -118,48 +172,75 @@ aggregateProperties:
       key: id
       field: lang
       avoidConstraint: true
-    index: unique
-    indexName: uniqueCountryIdLangId
+    description: |
+      Foreign key to the language this translation is for. Combined with countryId forms unique constraint (one translation per language per country).
   - name: name
     isI18n: true
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
     index: index
+    description: |
+      Localized name of the country in the specified language (e.g., "United States" in English, "États-Unis" in French). Indexed for efficient searching and sorting.
   - name: slug
     isI18n: true
     type: varchar
-    maxLength: 127
+    maxLength: 128
     nullable: false
     index: index
+    description: |
+      Localized URL-friendly identifier derived from the translated name. Lowercase, hyphenated format. Used for SEO-friendly multilingual URLs. Indexed for routing.
   - name: administrativeAreaLevel1
     isI18n: true
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: true
+    description: |
+      Localized label for administrative area level 1 in this country and language (e.g., "State" in English, "État" in French, "Bundesland" in German). Used for dynamic form labels.
   - name: administrativeAreaLevel2
     isI18n: true
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: true
+    description: |
+      Localized label for administrative area level 2 in this country and language (e.g., "County" in English, "Comté" in French, "Landkreis" in German). Used for dynamic form labels.
   - name: administrativeAreaLevel3
     isI18n: true
     type: varchar
-    maxLength: 63
+    maxLength: 64
     nullable: true
+    description: |
+      Localized label for administrative area level 3 in this country and language (e.g., "City" in English, "Ville" in French, "Stadt" in German). Used for dynamic form labels.
   - name: createdAt
     isI18n: true
     type: timestamp
     nullable: true
+    description: |
+      Timestamp when the i18n record was created. Automatically set on insertion. Part of audit trail for translations.
   - name: updatedAt
     isI18n: true
     type: timestamp
     nullable: true
+    description: |
+      Timestamp of the last update to the i18n record. Automatically updated on modification. Part of audit trail for translations.
   - name: deletedAt
     isI18n: true
     type: timestamp
     nullable: true
+    description: |
+      Soft delete timestamp for i18n record. NULL indicates active translation. When set, translation is excluded but base country remains active.
 additionalApis:
   - path: common/country/administrative-areas
     resolverType: query
     httpMethod: post
+excludedOperations:
+  - count
+  - delete
+  - getRaw
+  - max
+  - min
+  - rawSql
+  - sum
+  - update
+  - updateAndIncrement
+  - upsert

@@ -1,6 +1,11 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     iso3166Alpha2
     iso3166Alpha3
     iso3166Numeric
@@ -17,6 +22,19 @@ export const fields = `
     createdAt
     updatedAt
     langId
+    lang {
+        id
+        rowId
+        name
+        image
+        iso6392
+        iso6393
+        ietf
+        customCode
+        dir
+        sort
+        isActive
+    }
     name
     slug
     administrativeAreaLevel1
@@ -29,64 +47,49 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query CommonPaginateCountries (
-        $query: QueryStatement
-        $constraint: QueryStatement
+  query CommonPaginateCountries(
+    $query: QueryStatement
+    $constraint: QueryStatement
+  ) {
+    pagination: commonPaginateCountries(
+      query: $query
+      constraint: $constraint
     ) {
-        pagination: commonPaginateCountries (
-            query: $query
-            constraint: $constraint
-        ) {
-            total
-            rows
-            count
-        }
+      total
+      rows
+      count
     }
+  }
 `;
 
 export const getQuery = gql`
-    query CommonGetCountries (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: commonGetCountries (
-            query: $query
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-        }
+  query CommonGetCountries(
+    $query: QueryStatement
+    $constraint: QueryStatement
+  ) {
+    objects: commonGetCountries(query: $query, constraint: $constraint) {
+      id
+      #FIELDS
     }
+  }
 `;
 
 export const findByIdQuery = gql`
-    query CommonFindCountryById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: commonFindCountryById (
-            id: $id
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-        }
+  query CommonFindCountryById($id: ID, $constraint: QueryStatement) {
+    object: commonFindCountryById(id: $id, constraint: $constraint) {
+      id
+      #FIELDS
     }
+  }
 `;
 
 export const findQuery = gql`
-    query CommonFindCountry (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: commonFindCountry (
-            query: $query
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-        }
+  query CommonFindCountry($query: QueryStatement, $constraint: QueryStatement) {
+    object: commonFindCountry(query: $query, constraint: $constraint) {
+      id
+      #FIELDS
     }
+  }
 `;
 
 export const createMutation = gql`
@@ -99,6 +102,12 @@ export const createMutation = gql`
             ${fields}
         }
     }
+`;
+
+export const insertMutation = gql`
+  mutation CommonCreateCountries($payload: [CommonCreateCountryInput]!) {
+    commonCreateCountries(payload: $payload)
+  }
 `;
 
 export const updateByIdMutation = gql`
@@ -168,7 +177,7 @@ export const administrativeAreasCountryQuery = gql`
         commonAdministrativeAreasCountry (
             query: $query
             constraint: $constraint
-        ){
+        ) {
             ${fields}
         }
     }

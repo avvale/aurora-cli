@@ -23,7 +23,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission-list.component.ts",
-            "integrity": "sha1:017c4ce2207544677688e9eb9230f4fb19cf7d26"
+            "integrity": "sha1:01350f36b8aae72ea788c25b16cb6266f60f902d"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission.columns-config.ts",
@@ -35,7 +35,7 @@
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission.resolvers.ts",
-            "integrity": "sha1:25ace22ed51d433a38338625b4cb64916a54998b"
+            "integrity": "sha1:4800674e8f57e662810dcb9788fc39ff30bc5f65"
         },
         {
             "path": "src/app/modules/admin/apps/iam/permission/permission.service.ts",

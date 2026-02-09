@@ -11,36 +11,78 @@ front:
   outlineIcon: library_books
   solidFontSetIcon: material-symbols-outlined
   solidIcon: library_books
+description: >
+  Audit log module for tracking all incoming webhook requests. Records the URL,
+  headers, and body of each webhook invocation for debugging, compliance, and
+  monitoring purposes. Operates as an append-only log (updates disabled) to
+  ensure audit trail integrity. Related to the webhook module which defines
+  webhook configurations, while this module stores the actual invocation
+  history. Logs are independent of webhook configurations to maintain complete
+  history even for deleted or unregistered webhooks.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the webhook log entry. UUID v4 format, automatically
+      generated on creation. Used for references and idempotency checks.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
-  - name: url
+    description: >
+      Sequential auto-incrementing identifier for efficient ordering and
+      pagination of log entries. Provides chronological sorting independent of
+      timestamp precision.
+  - name: webhookUrl
     type: varchar
     maxLength: 2046
     nullable: false
-  - name: headerRequest
+    description: >
+      Full URL of the webhook endpoint that received the request. Includes
+      protocol, domain, path, and query parameters. Maximum length of 2046
+      characters follows RFC 7230 practical URL limits.
+  - name: requestHeaders
     type: jsonb
     nullable: true
-  - name: bodyRequest
+    description: >
+      Complete HTTP headers from the incoming webhook request stored as JSON.
+      Includes authentication tokens, content-type, user-agent, and custom
+      headers. NULL if headers were not captured. Sensitive headers may be
+      redacted based on configuration.
+  - name: requestBody
     type: jsonb
     nullable: true
+    description: >
+      Request payload body stored as JSON. For non-JSON requests, contains the
+      raw body as a string field. NULL for GET requests or when body was not
+      captured. May be truncated if exceeding size limits configured in webhook
+      settings.
   - name: createdAt
     type: timestamp
     nullable: true
     index: index
+    description: >
+      Timestamp when the webhook request was received and logged. Automatically
+      set on record creation. Used for time-based queries and retention
+      policies. Indexed for efficient chronological queries.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of last modification to the log entry. Typically matches
+      createdAt for immutable logs, but may differ if log enrichment or
+      post-processing occurs.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp for log retention compliance. NULL indicates active
+      record. Set when log entry is archived according to retention policy.
+      Enables GDPR-compliant data deletion while maintaining referential
+      integrity.
 excludedOperations:
   - count
   - getRaw

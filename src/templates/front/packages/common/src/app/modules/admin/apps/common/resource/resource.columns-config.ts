@@ -1,28 +1,41 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import { ColumnConfig, ColumnDataType } from '@aurora';
+import { TranslocoService } from '@jsverse/transloco';
 
-export const resourceColumnsConfig: ColumnConfig[] = [
+export const resourceColumnsConfig: (properties?: {
+    translator?: TranslocoService;
+}) => ColumnConfig[] = ({
+    translator = null,
+}: {
+    translator?: TranslocoService;
+} = {}): ColumnConfig[] => [
     {
-        type       : ColumnDataType.STRING,
-        field      : 'code',
-        sort       : 'code',
-        translation: 'common.Code',
+        type: ColumnDataType.STRING,
+        field: 'code',
+        sort: 'code',
+        translation: 'Code',
+        isUnaccent: true,
     },
     {
-        type       : ColumnDataType.STRING,
-        field      : 'name',
-        sort       : 'name',
-        translation: 'common.Name',
+        type: ColumnDataType.STRING,
+        field: 'name',
+        sort: 'name',
+        translation: 'Name',
+        isUnaccent: true,
     },
     {
-        type       : ColumnDataType.BOOLEAN,
-        field      : 'isActive',
-        sort       : 'isActive',
+        type: ColumnDataType.BOOLEAN,
+        field: 'isActive',
+        sort: 'isActive',
         translation: 'common.IsActive',
     },
     {
-        type       : ColumnDataType.BOOLEAN,
-        field      : 'hasAttachments',
-        sort       : 'hasAttachments',
+        type: ColumnDataType.BOOLEAN,
+        field: 'hasAttachments',
+        sort: 'hasAttachments',
         translation: 'common.HasAttachments',
     },
 ];

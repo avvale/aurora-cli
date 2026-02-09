@@ -427,3 +427,36 @@ export interface CommonUpdateAttachmentFamilies {
     sizes?: any;
     format?: string;
 }
+
+export enum CommonLangDirEnum {
+    LTR = 'LTR',
+    RTL = 'RTL'
+}
+
+export enum CommonCountryMapTypeEnum {
+    ROADMAP = 'ROADMAP',
+    SATELLITE = 'SATELLITE',
+    HYBRID = 'HYBRID',
+    TERRAIN = 'TERRAIN'
+}
+
+export enum CommonAdministrativeAreaLevel1MapTypeEnum {
+    ROADMAP = 'ROADMAP',
+    SATELLITE = 'SATELLITE',
+    HYBRID = 'HYBRID',
+    TERRAIN = 'TERRAIN'
+}
+
+export enum CommonAdministrativeAreaLevel2MapTypeEnum {
+    ROADMAP = 'ROADMAP',
+    SATELLITE = 'SATELLITE',
+    HYBRID = 'HYBRID',
+    TERRAIN = 'TERRAIN'
+}
+
+export enum CommonAdministrativeAreaLevel3MapTypeEnum {
+    ROADMAP = 'ROADMAP',
+    SATELLITE = 'SATELLITE',
+    HYBRID = 'HYBRID',
+    TERRAIN = 'TERRAIN'
+}

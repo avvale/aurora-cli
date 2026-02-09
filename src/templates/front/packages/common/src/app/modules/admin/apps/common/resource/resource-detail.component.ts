@@ -1,9 +1,29 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
+import {
+    ChangeDetectionStrategy,
+    Component,
+    signal,
+    ViewEncapsulation,
+    WritableSignal,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CommonResource } from '@apps/common/common.types';
+import { CommonResource } from '@apps/common';
 import { ResourceService } from '@apps/common/resource';
-import { Action, Crumb, defaultDetailImports, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import {
+    Action,
+    ActionScope,
+    Crumb,
+    defaultDetailImports,
+    log,
+    mapActions,
+    SnackBarInvalidFormComponent,
+    uuid,
+    ViewDetailComponent,
+} from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
@@ -11,13 +31,10 @@ import { lastValueFrom, takeUntil } from 'rxjs';
     templateUrl: './resource-detail.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ...defaultDetailImports,
-        MatCheckboxModule,
-    ],
+    imports: [...defaultDetailImports, MatCheckboxModule],
 })
-export class ResourceDetailComponent extends ViewDetailComponent
-{
+@ActionScope('common::resource.detail')
+export class ResourceDetailComponent extends ViewDetailComponent {
     // ---- customizations ----
     // ..
 
@@ -25,100 +42,106 @@ export class ResourceDetailComponent extends ViewDetailComponent
     // it should only be used to obtain uninitialized
     // data in the form, such as relations, etc.
     // It should not be used habitually, since the source of truth is the form.
-    managedObject: CommonResource;
+    managedObject: WritableSignal<CommonResource> = signal(null);
 
     // breadcrumb component definition
     breadcrumb: Crumb[] = [
         { translation: 'App' },
-        { translation: 'common.Resources', routerLink: ['/common/resource']},
+        { translation: 'common.Resources', routerLink: ['/common/resource'] },
         { translation: 'common.Resource' },
     ];
 
-    constructor(
-        private readonly resourceService: ResourceService,
-    )
-    {
+    constructor(private readonly resourceService: ResourceService) {
         super();
     }
 
     // this method will be called after the ngOnInit of
     // the parent class you can use instead of ngOnInit
-    init(): void
-    {
+    init(): void {
         /**/
     }
 
-    onSubmit($event): void
-    {
+    onSubmit($event): void {
         // we have two nested forms, we check that the submit comes from the button
         // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
+        if (
+            $event.submitter.getAttribute('form') !==
+            $event.submitter.form.getAttribute('id')
+        ) {
             $event.preventDefault();
             $event.stopPropagation();
             return;
         }
 
         // manage validations before execute actions
-        if (this.fg.invalid)
-        {
+        if (this.fg.invalid) {
             log('[DEBUG] Error to validate form: ', this.fg);
             this.validationMessagesService.validate();
+
+            this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+                data: {
+                    message: `${this.translocoService.translate('InvalidForm')}`,
+                    textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+                },
+                panelClass: 'error-snackbar',
+                verticalPosition: 'top',
+                duration: 10000,
+            });
             return;
         }
 
         this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'common::resource.detail.new' : 'common::resource.detail.create',
-                    'common::resource.detail.edit': 'common::resource.detail.update',
-                },
-            ),
+            id: mapActions(this.currentViewAction.id, {
+                'common::resource.detail.new': 'common::resource.detail.create',
+                'common::resource.detail.edit':
+                    'common::resource.detail.update',
+            }),
             isViewAction: false,
         });
     }
 
-    createForm(): void
-    {
+    createForm(): void {
+        /* eslint-disable key-spacing */
         this.fg = this.fb.group({
-            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            code: ['', [Validators.required, Validators.maxLength(63)]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
+            id: [
+                '',
+                [
+                    Validators.required,
+                    Validators.minLength(36),
+                    Validators.maxLength(36),
+                ],
+            ],
+            code: ['', [Validators.required, Validators.maxLength(64)]],
+            name: ['', [Validators.required, Validators.maxLength(128)]],
             isActive: [false, [Validators.required]],
             hasAttachments: [false, [Validators.required]],
         });
+        /* eslint-enable key-spacing */
     }
 
-    async handleAction(action: Action): Promise<void>
-    {
+    async handleAction(action: Action): Promise<void> {
         // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
+        switch (action?.id) {
             /* #region common actions */
             case 'common::resource.detail.new':
-                this.fg.get('id').setValue(Utils.uuid());
+                this.fg.get('id').setValue(uuid());
                 break;
 
             case 'common::resource.detail.edit':
-                this.resourceService
-                    .resource$
+                this.resourceService.resource$
                     .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
-                        this.managedObject = item;
+                    .subscribe((item) => {
+                        this.managedObject.set(item);
                         this.fg.patchValue(item);
                     });
                 break;
 
             case 'common::resource.detail.create':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.resourceService
-                            .create<CommonResource>({
-                                object: this.fg.value,
-                            }),
+                        this.resourceService.create<CommonResource>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -126,26 +149,22 @@ export class ResourceDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['common/resource']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
 
             case 'common::resource.detail.update':
-                try
-                {
+                try {
                     await lastValueFrom(
-                        this.resourceService
-                            .updateById<CommonResource>({
-                                object: this.fg.value,
-                            }),
+                        this.resourceService.updateById<CommonResource>({
+                            object: this.fg.value,
+                        }),
                     );
 
                     this.snackBar.open(
@@ -153,18 +172,16 @@ export class ResourceDetailComponent extends ViewDetailComponent
                         undefined,
                         {
                             verticalPosition: 'top',
-                            duration        : 3000,
+                            duration: 3000,
                         },
                     );
 
                     this.router.navigate(['common/resource']);
-                }
-                catch(error)
-                {
+                } catch (error) {
                     log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
                 }
                 break;
-                /* #endregion common actions */
+            /* #endregion common actions */
         }
     }
 }

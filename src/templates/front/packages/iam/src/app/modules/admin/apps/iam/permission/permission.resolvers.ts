@@ -13,8 +13,8 @@ import {
     ActionService,
     GridData,
     GridFiltersStorageService,
+    gridQueryHandler,
     GridStateService,
-    queryStatementHandler,
 } from '@aurora';
 
 export const permissionPaginationResolver: ResolveFn<
@@ -38,16 +38,12 @@ export const permissionPaginationResolver: ResolveFn<
     gridStateService.setExportActionId(gridId, 'iam::permission.list.export');
 
     return permissionService.pagination({
-        query: queryStatementHandler({
+        query: gridQueryHandler({
+            gridFiltersStorageService,
+            gridStateService,
+            gridId,
             columnsConfig: permissionColumnsConfig(),
-        })
-            .setColumFilters(
-                gridFiltersStorageService.getColumnFilterState(gridId),
-            )
-            .setSort(gridStateService.getSort(gridId))
-            .setPage(gridStateService.getPage(gridId))
-            .setSearch(gridStateService.getSearchState(gridId))
-            .getQueryStatement(),
+        }),
     });
 };
 

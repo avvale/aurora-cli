@@ -11,55 +11,109 @@ front:
   outlineIcon: repartition
   solidFontSetIcon: material-symbols-outlined
   solidIcon: repartition
+description: >
+  Module for managing database migration scripts across environments. Tracks
+  execution status, versioning, and script history. Controls which migrations
+  are active and provides rollback capabilities through up/down scripts. Central
+  to the tools bounded context for database evolution management.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the migration record. UUID v4 format, generated
+      automatically on creation. Primary key for the migrations table.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing numeric identifier for ordering and quick lookups.
+      Unique across all migrations. Used for sorting migrations chronologically
+      by creation order.
   - name: name
     type: varchar
     maxLength: 128
     nullable: false
+    description: >
+      Human-readable name of the migration. Typically follows a convention like
+      "create_users_table" or "add_email_to_customers". Maximum 128 characters.
+      Must be descriptive of the migration's purpose.
   - name: version
     type: varchar
     maxLength: 16
     nullable: false
     index: index
+    description: >
+      Semantic version of the migration (e.g., "1.0.0", "2.3.1"). Used for
+      dependency tracking and migration ordering. Indexed for fast version-based
+      queries. Format follows semver convention.
   - name: isActive
     type: boolean
     nullable: false
     defaultValue: false
+    description: >
+      Indicates if this migration is currently active in the system. FALSE by
+      default. When TRUE, the migration is eligible for execution. Use to
+      temporarily disable problematic migrations without deletion.
   - name: isExecuted
     type: boolean
     nullable: false
     defaultValue: false
+    description: >
+      Tracks whether the migration has been successfully executed. FALSE by
+      default. Set to TRUE after successful execution. Used to prevent duplicate
+      migrations and track deployment state.
   - name: upScript
     type: text
     nullable: true
+    description: >
+      SQL or script content for applying the migration (forward). NULL if not
+      yet defined. Contains the commands to upgrade the database schema or data.
+      Unlimited length for complex migrations.
   - name: downScript
     type: text
     nullable: true
-  - name: sort
+    description: >
+      SQL or script content for reverting the migration (rollback). NULL if not
+      yet defined. Contains the commands to rollback changes made by upScript.
+      Essential for safe migration rollbacks.
+  - name: executionOrder
     type: smallint
     unsigned: true
     nullable: true
+    description: >
+      Display and execution order. Lower numbers execute first. NULL allowed for
+      migrations without specific ordering requirements. Unsigned to prevent
+      negative values. Useful for controlling migration sequence beyond version.
   - name: executedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the migration was executed. NULL indicates not yet
+      executed. Automatically set when isExecuted changes to TRUE. Used for
+      audit trail and execution history.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the migration record was created. NULL allowed. Standard
+      audit field for tracking when the migration was registered in the system.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last update to the migration record. NULL allowed.
+      Standard audit field for tracking modifications to migration metadata.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL means active record. When set, migration is
+      excluded from normal queries but preserved for audit trail. Enables safe
+      deletion with recovery capability.
 additionalApis:
   - path: tools/migration/up-script
     resolverType: mutation

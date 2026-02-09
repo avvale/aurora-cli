@@ -1,6 +1,11 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/lang.aurora.yaml
+ */
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     name
     image
     iso6392
@@ -19,64 +24,43 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query CommonPaginateLangs (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        pagination: commonPaginateLangs (
-            query: $query
-            constraint: $constraint
-        ) {
-            total
-            rows
-            count
-        }
+  query CommonPaginateLangs(
+    $query: QueryStatement
+    $constraint: QueryStatement
+  ) {
+    pagination: commonPaginateLangs(query: $query, constraint: $constraint) {
+      total
+      rows
+      count
     }
+  }
 `;
 
 export const getQuery = gql`
-    query CommonGetLangs (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        objects: commonGetLangs (
-            query: $query
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-        }
+  query CommonGetLangs($query: QueryStatement, $constraint: QueryStatement) {
+    objects: commonGetLangs(query: $query, constraint: $constraint) {
+      id
+      #FIELDS
     }
+  }
 `;
 
 export const findByIdQuery = gql`
-    query CommonFindLangById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: commonFindLangById (
-            id: $id
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-        }
+  query CommonFindLangById($id: ID, $constraint: QueryStatement) {
+    object: commonFindLangById(id: $id, constraint: $constraint) {
+      id
+      #FIELDS
     }
+  }
 `;
 
 export const findQuery = gql`
-    query CommonFindLang (
-        $query: QueryStatement
-        $constraint: QueryStatement
-    ) {
-        object: commonFindLang (
-            query: $query
-            constraint: $constraint
-        ) {
-            id
-            #FIELDS
-        }
+  query CommonFindLang($query: QueryStatement, $constraint: QueryStatement) {
+    object: commonFindLang(query: $query, constraint: $constraint) {
+      id
+      #FIELDS
     }
+  }
 `;
 
 export const createMutation = gql`
@@ -89,6 +73,12 @@ export const createMutation = gql`
             ${fields}
         }
     }
+`;
+
+export const insertMutation = gql`
+  mutation CommonCreateLangs($payload: [CommonCreateLangInput]!) {
+    commonCreateLangs(payload: $payload)
+  }
 `;
 
 export const updateByIdMutation = gql`

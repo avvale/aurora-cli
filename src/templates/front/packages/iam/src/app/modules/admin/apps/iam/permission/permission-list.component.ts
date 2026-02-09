@@ -19,10 +19,10 @@ import {
     GridColumnsConfigStorageService,
     GridData,
     GridFiltersStorageService,
+    gridQueryHandler,
     GridState,
     GridStateService,
     log,
-    queryStatementHandler,
     ViewBaseComponent,
 } from '@aurora';
 import { lastValueFrom, Observable, takeUntil } from 'rxjs';
@@ -118,32 +118,14 @@ export class PermissionListComponent extends ViewBaseComponent {
             case 'iam::permission.list.pagination':
                 await lastValueFrom(
                     this.permissionService.pagination({
-                        query: action.meta.query
-                            ? action.meta.query
-                            : queryStatementHandler({
-                                  columnsConfig: permissionColumnsConfig(),
-                              })
-                                  .setColumFilters(
-                                      this.gridFiltersStorageService.getColumnFilterState(
-                                          this.gridId,
-                                      ),
-                                  )
-                                  .setSort(
-                                      this.gridStateService.getSort(
-                                          this.gridId,
-                                      ),
-                                  )
-                                  .setPage(
-                                      this.gridStateService.getPage(
-                                          this.gridId,
-                                      ),
-                                  )
-                                  .setSearch(
-                                      this.gridStateService.getSearchState(
-                                          this.gridId,
-                                      ),
-                                  )
-                                  .getQueryStatement(),
+                        query: gridQueryHandler({
+                            gridFiltersStorageService:
+                                this.gridFiltersStorageService,
+                            gridStateService: this.gridStateService,
+                            gridId: this.gridId,
+                            columnsConfig: permissionColumnsConfig(),
+                            query: action.meta.query,
+                        }),
                     }),
                 );
                 break;

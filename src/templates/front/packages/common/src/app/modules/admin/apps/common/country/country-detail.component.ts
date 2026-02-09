@@ -1,293 +1,334 @@
-import { KeyValuePipe, NgForOf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+/**
+ * @aurora-generated
+ * @source cliter/common/country.aurora.yaml
+ */
+import { KeyValuePipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  ViewEncapsulation,
+  WritableSignal,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonAdministrativeArea, CommonCountry, CommonCountryMapType } from '@apps/common/common.types';
+import {
+  CommonAdministrativeArea,
+  CommonCountry,
+  CommonCountryMapType,
+} from '@apps/common/common.types';
 import { CountryService } from '@apps/common/country';
-import { Action, CoreCurrentLangService, CoreLang, Crumb, defaultDetailImports, FlagLangComponent, log, mapActions, Utils, ViewDetailComponent } from '@aurora';
+import {
+  Action,
+  ActionScope,
+  CoreCurrentLangService,
+  CoreLang,
+  Crumb,
+  defaultDetailImports,
+  FlagLangComponent,
+  log,
+  mapActions,
+  SnackBarInvalidFormComponent,
+  uuid,
+  ViewDetailComponent,
+} from '@aurora';
 import { lastValueFrom, takeUntil } from 'rxjs';
 
 @Component({
-    selector: 'common-country-detail',
-    templateUrl: './country-detail.component.html',
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        ...defaultDetailImports,
-        FlagLangComponent, KeyValuePipe, MatSelectModule, NgForOf,
-    ],
+  selector: 'common-country-detail',
+  templateUrl: './country-detail.component.html',
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    ...defaultDetailImports,
+    FlagLangComponent,
+    KeyValuePipe,
+    MatSelectModule,
+  ],
 })
-export class CountryDetailComponent extends ViewDetailComponent
-{
-    // ---- customizations ----
-    commonCountryMapType = CommonCountryMapType;
-    commonAdministrativeArea = CommonAdministrativeArea;
+@ActionScope('common::country.detail')
+export class CountryDetailComponent extends ViewDetailComponent {
+  // ---- customizations ----
+  commonCountryMapType = CommonCountryMapType;
+  commonAdministrativeArea = CommonAdministrativeArea;
 
-    // Object retrieved from the database request,
-    // it should only be used to obtain uninitialized
-    // data in the form, such as relations, etc.
-    // It should not be used habitually, since the source of truth is the form.
-    managedObject: CommonCountry;
-    currentLang: CoreLang;
-    fallbackLang: CoreLang;
+  // Object retrieved from the database request,
+  // it should only be used to obtain uninitialized
+  // data in the form, such as relations, etc.
+  // It should not be used habitually, since the source of truth is the form.
+  managedObject: WritableSignal<CommonCountry> = signal(null);
+  currentLang: CoreLang;
+  fallbackLang: CoreLang;
 
-    // breadcrumb component definition
-    breadcrumb: Crumb[] = [
-        { translation: 'App' },
-        { translation: 'common.Countries', routerLink: ['/common/country']},
-        { translation: 'common.Country' },
-    ];
+  // breadcrumb component definition
+  breadcrumb: Crumb[] = [
+    { translation: 'App' },
+    { translation: 'common.Countries', routerLink: ['/common/country'] },
+    { translation: 'common.Country' },
+  ];
 
-    constructor(
-        private readonly coreCurrentLangService: CoreCurrentLangService,
-        private readonly countryService: CountryService,
-    )
-    {
-        super();
+  constructor(
+    private readonly coreCurrentLangService: CoreCurrentLangService,
+    private readonly countryService: CountryService,
+  ) {
+    super();
+  }
+
+  // this method will be called after the ngOnInit of
+  // the parent class you can use instead of ngOnInit
+  init(): void {
+    /**/
+  }
+
+  onSubmit($event): void {
+    // we have two nested forms, we check that the submit comes from the button
+    // that corresponds to the main form to the main form
+    if (
+      $event.submitter.getAttribute('form') !==
+      $event.submitter.form.getAttribute('id')
+    ) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      return;
     }
 
-    // this method will be called after the ngOnInit of
-    // the parent class you can use instead of ngOnInit
-    init(): void
-    {
-        /**/
+    // manage validations before execute actions
+    if (this.fg.invalid) {
+      log('[DEBUG] Error to validate form: ', this.fg);
+      this.validationMessagesService.validate();
+
+      this.snackBar.openFromComponent(SnackBarInvalidFormComponent, {
+        data: {
+          message: `${this.translocoService.translate('InvalidForm')}`,
+          textButton: `${this.translocoService.translate('InvalidFormOk')}`,
+        },
+        panelClass: 'error-snackbar',
+        verticalPosition: 'top',
+        duration: 10000,
+      });
+      return;
     }
 
-    onSubmit($event): void
-    {
-        // we have two nested forms, we check that the submit comes from the button
-        // that corresponds to the main form to the main form
-        if ($event.submitter.getAttribute('form') !== $event.submitter.form.getAttribute('id'))
-        {
-            $event.preventDefault();
-            $event.stopPropagation();
-            return;
+    this.actionService.action({
+      id: mapActions(this.currentViewAction.id, {
+        'common::country.detail.new': 'common::country.detail.create',
+        'common::country.detail.edit': 'common::country.detail.update',
+      }),
+      isViewAction: false,
+    });
+  }
+
+  createForm(): void {
+    /* eslint-disable key-spacing */
+    this.fg = this.fb.group({
+      id: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(36),
+          Validators.maxLength(36),
+        ],
+      ],
+      iso3166Alpha2: [
+        '',
+        [Validators.required, Validators.minLength(2), Validators.maxLength(2)],
+      ],
+      iso3166Alpha3: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(3)],
+      ],
+      iso3166Numeric: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(3)],
+      ],
+      customCode: ['', [Validators.maxLength(64)]],
+      prefix: ['', [Validators.maxLength(5)]],
+      image: ['', [Validators.maxLength(1022)]],
+      sort: null,
+      administrativeAreas: [],
+      latitude: null,
+      longitude: null,
+      zoom: [null, [Validators.maxLength(2)]],
+      mapType: null,
+      langId: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(36),
+          Validators.maxLength(36),
+        ],
+      ],
+      name: ['', [Validators.required, Validators.maxLength(128)]],
+      slug: ['', [Validators.required, Validators.maxLength(128)]],
+      administrativeAreaLevel1: ['', [Validators.maxLength(64)]],
+      administrativeAreaLevel2: ['', [Validators.maxLength(64)]],
+      administrativeAreaLevel3: ['', [Validators.maxLength(64)]],
+    });
+    /* eslint-enable key-spacing */
+  }
+
+  // disable fields when manage object
+  // that language is not APP_FALLBACK_LANG
+  disabledNotI18nFields(): void {
+    this.fg.get('id').disable();
+    this.fg.get('iso3166Alpha2').disable();
+    this.fg.get('iso3166Alpha3').disable();
+    this.fg.get('iso3166Numeric').disable();
+    this.fg.get('customCode').disable();
+    this.fg.get('prefix').disable();
+    this.fg.get('image').disable();
+    this.fg.get('sort').disable();
+    this.fg.get('administrativeAreas').disable();
+    this.fg.get('latitude').disable();
+    this.fg.get('longitude').disable();
+    this.fg.get('zoom').disable();
+    this.fg.get('mapType').disable();
+  }
+
+  async handleAction(action: Action): Promise<void> {
+    // add optional chaining (?.) to avoid first call where behaviour subject is undefined
+    switch (action?.id) {
+      /* #region common actions */
+      case 'common::country.detail.new':
+        this.currentLang = this.coreCurrentLangService.currentLang;
+
+        // only when hasta id param, we are creating
+        // a record with an alternative language
+        if (this.activatedRoute.snapshot.paramMap.get('id')) {
+          this.countryService.country$
+            .pipe(takeUntil(this.unsubscribeAll$))
+            .subscribe((item) => {
+              this.managedObject.set(item);
+              this.fg.patchValue(item);
+              this.disabledNotI18nFields();
+            });
+        } else {
+          // only when we create a record
+          // with default language
+          this.fg.get('id').setValue(uuid());
         }
 
-        // manage validations before execute actions
-        if (this.fg.invalid)
-        {
-            log('[DEBUG] Error to validate form: ', this.fg);
-            this.validationMessagesService.validate();
-            return;
-        }
+        this.fg.get('langId').setValue(this.currentLang.id);
+        break;
 
-        this.actionService.action({
-            id: mapActions(
-                this.currentViewAction.id,
-                {
-                    'common::country.detail.new' : 'common::country.detail.create',
-                    'common::country.detail.edit': 'common::country.detail.update',
-                },
-            ),
-            isViewAction: false,
+      case 'common::country.detail.edit':
+        this.currentLang = this.coreCurrentLangService.currentLang;
+        this.fallbackLang = this.sessionService.get('fallbackLang');
+
+        this.countryService.country$
+          .pipe(takeUntil(this.unsubscribeAll$))
+          .subscribe((item) => {
+            this.managedObject.set(item);
+            this.fg.patchValue(item);
+            if (this.fallbackLang.id !== this.currentLang.id)
+              this.disabledNotI18nFields();
+          });
+        break;
+
+      case 'common::country.detail.create':
+        try {
+          await lastValueFrom(
+            this.countryService.create<CommonCountry>({
+              // getRawValue to send disabled values
+              object: this.fg.getRawValue(),
+              headers: {
+                'Content-Language':
+                  this.currentLang[this.sessionService.get('searchKeyLang')],
+              },
+            }),
+          );
+
+          this.snackBar.open(
+            `${this.translocoService.translate('common.Country')} ${this.translocoService.translate('Created.M')}`,
+            undefined,
+            {
+              verticalPosition: 'top',
+              duration: 3000,
+            },
+          );
+
+          this.router.navigate(['common/country']);
+        } catch (error) {
+          log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+        }
+        break;
+
+      case 'common::country.detail.update':
+        try {
+          await lastValueFrom(
+            this.countryService.updateById<CommonCountry>({
+              // getRawValue to send disabled values
+              object: this.fg.getRawValue(),
+              headers: {
+                'Content-Language':
+                  this.currentLang[this.sessionService.get('searchKeyLang')],
+              },
+            }),
+          );
+
+          this.snackBar.open(
+            `${this.translocoService.translate('common.Country')} ${this.translocoService.translate('Saved.M')}`,
+            undefined,
+            {
+              verticalPosition: 'top',
+              duration: 3000,
+            },
+          );
+
+          this.router.navigate(['common/country']);
+        } catch (error) {
+          log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+        }
+        break;
+
+      case 'common::country.detail.delete':
+        const deleteDialogRef = this.confirmationService.open({
+          title: `${this.translocoService.translate('DeleteTranslation')} ${this.translocoService.translate('Of').toLowerCase()} ${this.translocoService.translate('common.Country').toLowerCase()}`,
+          message: this.translocoService.translate('DeletionWarning', {
+            entity: this.translocoService.translate('common.Country'),
+          }),
+          icon: {
+            show: true,
+            name: 'heroicons_outline:exclamation-triangle',
+            color: 'warn',
+          },
+          actions: {
+            confirm: {
+              show: true,
+              label: this.translocoService.translate('Remove'),
+              color: 'warn',
+            },
+            cancel: {
+              show: true,
+              label: this.translocoService.translate('Cancel'),
+            },
+          },
+          dismissible: true,
         });
-    }
 
-    createForm(): void
-    {
-        this.fg = this.fb.group({
-            id: ['', [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            iso3166Alpha2: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
-            iso3166Alpha3: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-            iso3166Numeric: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-            customCode: ['', [Validators.maxLength(63)]],
-            prefix: ['', [Validators.maxLength(5)]],
-            image: ['', [Validators.maxLength(1022)]],
-            sort: null,
-            administrativeAreas: [],
-            latitude: null,
-            longitude: null,
-            zoom: [null, [Validators.maxLength(2)]],
-            mapType: null,
-            langId: [null, [Validators.required, Validators.minLength(36), Validators.maxLength(36)]],
-            name: ['', [Validators.required, Validators.maxLength(127)]],
-            slug: ['', [Validators.required, Validators.maxLength(127)]],
-            administrativeAreaLevel1: ['', [Validators.maxLength(63)]],
-            administrativeAreaLevel2: ['', [Validators.maxLength(63)]],
-            administrativeAreaLevel3: ['', [Validators.maxLength(63)]],
+        deleteDialogRef.afterClosed().subscribe(async (result) => {
+          if (result === 'confirmed') {
+            try {
+              await lastValueFrom(
+                this.countryService.deleteById<CommonCountry>({
+                  id: this.managedObject().id,
+                  headers: {
+                    'Content-Language':
+                      this.currentLang[
+                        this.sessionService.get('searchKeyLang')
+                      ],
+                  },
+                }),
+              );
+
+              this.router.navigate(['common/country']);
+            } catch (error) {
+              log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
+            }
+          }
         });
+        break;
+      /* #endregion common actions */
     }
-
-    // disable fields when manage object
-    // that language is not APP_FALLBACK_LANG
-    disabledNotI18nFields(): void
-    {
-        this.fg.get('id').disable();
-        this.fg.get('iso3166Alpha2').disable();
-        this.fg.get('iso3166Alpha3').disable();
-        this.fg.get('iso3166Numeric').disable();
-        this.fg.get('customCode').disable();
-        this.fg.get('prefix').disable();
-        this.fg.get('image').disable();
-        this.fg.get('sort').disable();
-        this.fg.get('administrativeAreas').disable();
-        this.fg.get('latitude').disable();
-        this.fg.get('longitude').disable();
-        this.fg.get('zoom').disable();
-        this.fg.get('mapType').disable();
-    }
-
-    async handleAction(action: Action): Promise<void>
-    {
-        // add optional chaining (?.) to avoid first call where behaviour subject is undefined
-        switch (action?.id)
-        {
-            /* #region common actions */
-            case 'common::country.detail.new':
-                this.currentLang = this.coreCurrentLangService.currentLang;
-
-                // only when hasta id param, we are creating
-                // a record with an alternative language
-                if (this.activatedRoute.snapshot.paramMap.get('id'))
-                {
-                    this.countryService
-                        .country$
-                        .pipe(takeUntil(this.unsubscribeAll$))
-                        .subscribe(item =>
-                        {
-                            this.managedObject = item;
-                            this.fg.patchValue(item);
-                            this.disabledNotI18nFields();
-                        });
-                }
-                else
-                {
-                    // only when we create a record
-                    // with default language
-                    this.fg.get('id').setValue(Utils.uuid());
-                }
-
-                this.fg.get('langId').setValue(this.currentLang.id);
-                break;
-
-            case 'common::country.detail.edit':
-                this.currentLang = this.coreCurrentLangService.currentLang;
-                this.fallbackLang = this.sessionService.get('fallbackLang');
-
-                this.countryService
-                    .country$
-                    .pipe(takeUntil(this.unsubscribeAll$))
-                    .subscribe(item =>
-                    {
-                        this.managedObject = item;
-                        this.fg.patchValue(item);
-                        if (this.fallbackLang.id !== this.currentLang.id) this.disabledNotI18nFields();
-                    });
-                break;
-
-            case 'common::country.detail.create':
-                try
-                {
-                    await lastValueFrom(
-                        this.countryService
-                            .create<CommonCountry>({
-                                // getRawValue to send disabled values
-                                object : this.fg.getRawValue(),
-                                headers: {
-                                    'Content-Language': this.currentLang[this.sessionService.get('searchKeyLang')],
-                                },
-                            }),
-                    );
-
-                    this.snackBar.open(
-                        `${this.translocoService.translate('common.Country')} ${this.translocoService.translate('Created.M')}`,
-                        undefined,
-                        {
-                            verticalPosition: 'top',
-                            duration        : 3000,
-                        },
-                    );
-
-                    this.router.navigate(['common/country']);
-                }
-                catch(error)
-                {
-                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                }
-                break;
-
-            case 'common::country.detail.update':
-                try
-                {
-                    await lastValueFrom(
-                        this.countryService
-                            .updateById<CommonCountry>({
-                                // getRawValue to send disabled values
-                                object : this.fg.getRawValue(),
-                                headers: {
-                                    'Content-Language': this.currentLang[this.sessionService.get('searchKeyLang')],
-                                },
-                            }),
-                    );
-
-                    this.snackBar.open(
-                        `${this.translocoService.translate('common.Country')} ${this.translocoService.translate('Saved.M')}`,
-                        undefined,
-                        {
-                            verticalPosition: 'top',
-                            duration        : 3000,
-                        },
-                    );
-
-                    this.router.navigate(['common/country']);
-                }
-                catch(error)
-                {
-                    log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                }
-                break;
-
-            case 'common::country.detail.delete':
-                const deleteDialogRef = this.confirmationService.open({
-                    title  : `${this.translocoService.translate('DeleteTranslation')} ${this.translocoService.translate('Of').toLowerCase()} ${this.translocoService.translate('common.Country').toLowerCase()}`,
-                    message: this.translocoService.translate('DeletionWarning', { entity: this.translocoService.translate('common.Country') }),
-                    icon   : {
-                        show : true,
-                        name : 'heroicons_outline:exclamation-triangle',
-                        color: 'warn',
-                    },
-                    actions: {
-                        confirm: {
-                            show : true,
-                            label: this.translocoService.translate('Remove'),
-                            color: 'warn',
-                        },
-                        cancel: {
-                            show : true,
-                            label: this.translocoService.translate('Cancel'),
-                        },
-                    },
-                    dismissible: true,
-                });
-
-                deleteDialogRef.afterClosed()
-                    .subscribe(async result =>
-                    {
-                        if (result === 'confirmed')
-                        {
-                            try
-                            {
-                                await lastValueFrom(
-                                    this.countryService
-                                        .deleteById<CommonCountry>({
-                                            id     : this.managedObject.id,
-                                            headers: {
-                                                'Content-Language': this.currentLang[this.sessionService.get('searchKeyLang')],
-                                            },
-                                        }),
-                                );
-
-                                this.router.navigate(['common/country']);
-                            }
-                            catch(error)
-                            {
-                                log(`[DEBUG] Catch error in ${action.id} action: ${error}`);
-                            }
-                        }
-                    });
-                break;
-                /* #endregion common actions */
-        }
-    }
+  }
 }

@@ -1,6 +1,11 @@
+/**
+ * @aurora-generated
+ * @source cliter/common/resource.aurora.yaml
+ */
 import gql from 'graphql-tag';
 
 export const fields = `
+    rowId
     code
     name
     isActive
@@ -14,11 +19,11 @@ export const relationsFields = `
 
 // default methods
 export const paginationQuery = gql`
-    query CommonPaginateResources (
+    query CommonPaginateResources(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        pagination: commonPaginateResources (
+        pagination: commonPaginateResources(
             query: $query
             constraint: $constraint
         ) {
@@ -30,14 +35,11 @@ export const paginationQuery = gql`
 `;
 
 export const getQuery = gql`
-    query CommonGetResources (
+    query CommonGetResources(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        objects: commonGetResources (
-            query: $query
-            constraint: $constraint
-        ) {
+        objects: commonGetResources(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -45,14 +47,8 @@ export const getQuery = gql`
 `;
 
 export const findByIdQuery = gql`
-    query CommonFindResourceById (
-        $id: ID
-        $constraint: QueryStatement
-    ) {
-        object: commonFindResourceById (
-            id: $id
-            constraint: $constraint
-        ) {
+    query CommonFindResourceById($id: ID, $constraint: QueryStatement) {
+        object: commonFindResourceById(id: $id, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -60,14 +56,11 @@ export const findByIdQuery = gql`
 `;
 
 export const findQuery = gql`
-    query CommonFindResource (
+    query CommonFindResource(
         $query: QueryStatement
         $constraint: QueryStatement
     ) {
-        object: commonFindResource (
-            query: $query
-            constraint: $constraint
-        ) {
+        object: commonFindResource(query: $query, constraint: $constraint) {
             id
             #FIELDS
         }
@@ -83,6 +76,12 @@ export const createMutation = gql`
         ) {
             ${fields}
         }
+    }
+`;
+
+export const insertMutation = gql`
+    mutation CommonCreateResources($payload: [CommonCreateResourceInput]!) {
+        commonCreateResources(payload: $payload)
     }
 `;
 

@@ -11,21 +11,36 @@ front:
   outlineIcon: data_object
   solidFontSetIcon: material-symbols-outlined
   solidIcon: data_object
+description: >
+  Module for storing application-wide key-value configuration pairs. Supports
+  multiple data types (string, number, boolean, date, object, array, secret)
+  with optional caching and activation control. Used as a flexible configuration
+  store across all bounded contexts.
 aggregateProperties:
   - name: id
     type: id
     primaryKey: true
     nullable: false
+    description: >
+      Unique identifier for the key-value record. UUID v4 format, generated
+      automatically on creation.
   - name: rowId
     type: bigint
     index: unique
     autoIncrement: true
     nullable: false
+    description: >
+      Auto-incrementing numeric identifier. Used for efficient sorting and
+      internal ordering. Unique across all records.
   - name: key
     type: varchar
     maxLength: 64
     nullable: false
     index: unique
+    description: >
+      Unique identifier key for the configuration value. Maximum 64 characters.
+      Must be unique across all records. Recommended to use dot notation for
+      namespacing (e.g., 'app.feature.enabled', 'email.smtp.host').
   - name: type
     type: enum
     enumOptions:
@@ -39,29 +54,60 @@ aggregateProperties:
       - TIME
       - TIMESTAMP
     nullable: false
+    description: >
+      Data type of the stored value. Determines parsing and validation rules.
+      ARRAY: JSON array. BOOLEAN: true/false. DATE: Date without time. NUMBER:
+      Numeric value. OBJECT: JSON object. SECRET: Encrypted sensitive data.
+      STRING: Text value. TIME: Time without date. TIMESTAMP: Date and time.
   - name: value
     type: text
     nullable: true
+    description: >
+      Serialized value content. Stored as text regardless of type; parsed based
+      on the type field. NULL indicates no value set. For OBJECT and ARRAY
+      types, stores JSON string. For SECRET type, stores encrypted data.
   - name: isCached
     type: boolean
     nullable: false
     defaultValue: false
+    description: >
+      Indicates if this value should be cached in memory for faster access.
+      Default: false. Set to true for frequently accessed configuration values
+      to improve application performance.
   - name: isActive
     type: boolean
     nullable: false
     defaultValue: true
+    description: >
+      Activation status of the configuration. Default: true. Inactive
+      configurations (false) are ignored by the application but preserved for
+      audit or potential reactivation.
   - name: description
     type: text
     nullable: true
+    description: >
+      Human-readable explanation of the configuration's purpose and usage.
+      Optional but recommended for documentation. Helps developers understand
+      the configuration's role and expected values.
   - name: createdAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp when the record was created. Automatically set by the system.
+      Part of the audit trail.
   - name: updatedAt
     type: timestamp
     nullable: true
+    description: >
+      Timestamp of the last update. Automatically updated by the system on each
+      modification. Part of the audit trail.
   - name: deletedAt
     type: timestamp
     nullable: true
+    description: >
+      Soft delete timestamp. NULL indicates active record. When set, record is
+      excluded from normal queries but preserved for audit trail and potential
+      recovery.
 excludedOperations:
   - count
   - getRaw
