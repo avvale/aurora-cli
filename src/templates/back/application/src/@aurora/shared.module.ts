@@ -6,13 +6,12 @@ import {
   CoreGetFallbackLangService,
   CoreGetLangsService,
   CoreGetSearchKeyLangService,
-  CoreModule,
-} from '@aurorajs.dev/core';
+  CoreModule, AuditingRunnerDisabledImplementationService } from '@aurorajs.dev/core';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
-import { SentryModule } from './modules';
+import { SentryModule, CoreGetFallbackLangFromJsonService, CoreGetLangsFromJsonService } from './modules';
 
 @Module({
   imports: [
