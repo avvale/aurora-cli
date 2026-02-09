@@ -1,0 +1,50 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx ts-node \"$CLAUDE_PROJECT_DIR/.claude/scripts/generate-skills-index.ts\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": ".claude/scripts/status-line.sh"
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true
+  },
+  "permissions": {
+    "allow": [
+      "Bash(aurora load:*)",
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git restore:*)",
+      "Bash(git push:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git status:*)",
+      "Bash(git branch:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git symbolic-ref:*)",
+      "Bash(grep:*)",
+      "Bash(fd:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh pr:*)",
+      "Bash(npm run format:*)",
+      "Bash(npm test:*)",
+      "Bash(npx prettier:*)",
+      "Bash(npx tsc:*)",
+      "Skill(conventional-commits)",
+      "Skill(commit)",
+      "Skill(commit-pr)"
+    ]
+  }
+}
